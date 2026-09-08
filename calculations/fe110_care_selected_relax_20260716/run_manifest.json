@@ -1,0 +1,32 @@
+{
+  "provenance_script": "calculations/fe110_care8_isomers_20260716/provenance/reproduce_revisions_and_selected_inputs.py",
+  "surface": "true Fe(110), Fe45, five layers, bottom 18 Fe fixed",
+  "purpose": "ordinary VASP relaxation of selected CARE isomers before any coadsorption or NEB work",
+  "submission_scope": [
+    4,
+    8
+  ],
+  "deferred": "candidates 1, 5, and 7 are revised locally only; candidates 2, 3, and 6 remain unchanged",
+  "runs": [
+    {
+      "candidate": 4,
+      "name": "04_C2H2O_UBXLAXBU_cfg0",
+      "source": "raw",
+      "local_directory": "calculations\\fe110_care_selected_relax_20260716\\04_C2H2O_UBXLAXBU_cfg0",
+      "remote_directory": "~/sbq/Fe110/adsorption/care_selected_4_8_20260716/04_C2H2O_UBXLAXBU_cfg0",
+      "nsw": 300,
+      "job_id": "9627284",
+      "scheduler_state": "RUN"
+    },
+    {
+      "candidate": 8,
+      "name": "08_C3H2O_XXNRTDXE_cfg0",
+      "source": "revised",
+      "local_directory": "calculations\\fe110_care_selected_relax_20260716\\08_C3H2O_XXNRTDXE_cfg0",
+      "remote_directory": "~/sbq/Fe110/adsorption/care_selected_4_8_20260716/08_C3H2O_XXNRTDXE_cfg0",
+      "nsw": 300,
+      "job_id": "9627285",
+      "scheduler_state": "RUN"
+    }
+  ]
+}

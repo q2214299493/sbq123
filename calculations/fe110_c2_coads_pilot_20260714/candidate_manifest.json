@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "surface": "true Fe(110), Fe45, five layers, bottom 18 Fe fixed",
+  "source_slab": "calculations\\fe110_clean_static_v2_20260704\\POSCAR",
+  "source_slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+  "selection_rule": "motif-first minimal set; no blind four-site sweep",
+  "geometry_parameters_angstrom": {
+    "fe_c_angstrom": 1.9,
+    "fe_o_angstrom": 1.95,
+    "cco_cc_angstrom": 1.318,
+    "cco_co_angstrom": 1.171,
+    "separated_co_min_angstrom": 2.7,
+    "kappa_cco_tilt_from_surface_normal_degrees": 25.0,
+    "eta2_cco_o_lift_from_surface_degrees": 55.0
+  },
+  "candidates": [
+    {
+      "name": "CplusO_C-lb_O-h_adj",
+      "species": "C+O",
+      "site_label": "C*+O*/C@lb+O@h_adj",
+      "relative_rank": "selected minimal candidate set; not a global-minimum claim",
+      "poscar": "CplusO_C-lb_O-h_adj/POSCAR",
+      "support_fe_indices_1based": [
+        44,
+        45
+      ],
+      "bond_distances_angstrom": {
+        "C1-O1_separation": 2.9084593431923196
+      },
+      "nearest_fe_angstrom": {
+        "C1": 1.8999999999999992,
+        "O1": 1.9500000000000006
+      },
+      "oxygen_site": {
+        "class": "hollow",
+        "fractional_xy": [
+          0.2222197548061643,
+          0.5555636211594134
+        ]
+      }
+    },
+    {
+      "name": "C2O_kappa-Calpha_lb_tilted",
+      "species": "C2O",
+      "site_label": "C₂O*/κ-Cα/lb_tilted",
+      "relative_rank": "selected minimal candidate set; not a global-minimum claim",
+      "poscar": "C2O_kappa-Calpha_lb_tilted/POSCAR",
+      "support_fe_indices_1based": [
+        44,
+        45
+      ],
+      "bond_distances_angstrom": {
+        "Calpha-Cbeta": 1.3179999999999994,
+        "Cbeta-O1": 1.1710000000000003
+      },
+      "nearest_fe_angstrom": {
+        "C1": 1.8999999999999992,
+        "C2": 2.6088100178300455,
+        "O1": 3.5439974146873667
+      }
+    },
+    {
+      "name": "C2O_eta2CalphaCbeta_h-lb-h",
+      "species": "C2O",
+      "site_label": "C₂O**/η²(Cα,Cβ)/h-lb-h",
+      "relative_rank": "selected minimal candidate set; not a global-minimum claim",
+      "poscar": "C2O_eta2CalphaCbeta_h-lb-h/POSCAR",
+      "support_fe_indices_1based": [
+        44,
+        45
+      ],
+      "bond_distances_angstrom": {
+        "Calpha-Cbeta": 1.3326860827668061,
+        "Cbeta-O1": 1.1709999999999996
+      },
+      "nearest_fe_angstrom": {
+        "C1": 1.8999999999999997,
+        "C2": 1.9000000000000015,
+        "O1": 2.406045750000569
+      }
+    },
+    {
+      "name": "C2_eta2CC_h-lb-h",
+      "species": "C2",
+      "site_label": "C₂**/η²(C,C)/h-lb-h",
+      "relative_rank": "selected minimal candidate set; not a global-minimum claim",
+      "poscar": "C2_eta2CC_h-lb-h/POSCAR",
+      "support_fe_indices_1based": [
+        44,
+        45
+      ],
+      "bond_distances_angstrom": {
+        "C1-C2": 1.3326860827668061
+      },
+      "nearest_fe_angstrom": {
+        "C1": 1.8999999999999997,
+        "C2": 1.9000000000000015
+      }
+    },
+    {
+      "name": "C2plusO_eta2CC_h-lb-h_O-lb_adj",
+      "species": "C2+O",
+      "site_label": "C₂**/η²(C,C)/h-lb-h+O@lb_adj",
+      "relative_rank": "selected minimal candidate set; not a global-minimum claim",
+      "poscar": "C2plusO_eta2CC_h-lb-h_O-lb_adj/POSCAR",
+      "support_fe_indices_1based": [
+        44,
+        45
+      ],
+      "bond_distances_angstrom": {
+        "C1-C2": 1.3326860827668061,
+        "C1-O1_separation": 2.9044320085683184,
+        "C2-O1_separation": 2.904432298484107
+      },
+      "nearest_fe_angstrom": {
+        "C1": 1.8999999999999997,
+        "C2": 1.9000000000000015,
+        "O1": 1.9499999999999984
+      },
+      "oxygen_site": {
+        "class": "long_bridge",
+        "fractional_xy": [
+          0.1666642802288773,
+          0.6666728158142642
+        ]
+      }
+    }
+  ]
+}

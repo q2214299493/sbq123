@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-vasp-micro-neb-pilot-9733804-pass-20260829",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-29T22:07:43.5940984+08:00",
+  "recorded_at": "2026-08-29T14:07:43.5940984Z",
+  "summary": "VASP micro-NEB pilot job 9733804 is LSF DONE and passed the hash-bound canonical pilot validator; the same-path formal ordinary micro-NEB package is locally prepared and preflight-passed but remains unsubmitted.",
+  "payload": {
+    "objective": "Obtain separate user authorization before submitting the validated same-path formal VASP ordinary micro-NEB.",
+    "phase": "active",
+    "current_evidence": [
+      "LSF job 9733804 is DONE and its raw scheduler evidence is stored with SHA-256 ee12050ecbafc42bb75183f2241960108007eabe9d275766ccb8b0cec56e0959.",
+      "All four internal pilot images completed exactly one ionic step, terminated normally, converged electronically at EDIFF=1e-5 before NELM=200, and contain complete force and magnetization evidence.",
+      "The canonical pilot validator returned PASS and wrote neb_pilot_result.json with SHA-256 2fa78902846cf838cdadf643f4a40d0a7dcc6cff984256bc6b1bc5748a0590f5.",
+      "The same-path four-internal-image ordinary micro-NEB local package uses NSW=300, LCLIMB=false, SIGMA=0.20 eV, ENCUT=400 eV, and 128 ranks.",
+      "The ordinary_neb preflight passed with bundle SHA-256 8996babd2b032e112036165987de0aa2754260775284dfb942bb4995f359e08c.",
+      "The formal micro-NEB has not been uploaded or submitted; no Dimer, TS, frequency, or barrier result is claimed."
+    ],
+    "one_executable_step": "After separate explicit user authorization, generate a current hash-bound execution-gate decision for the formal ordinary micro-NEB and submit it only if SUBMIT_VASP is explicitly allowed.",
+    "submission_boundary": "Do not infer formal submission authority from the completed pilot. Do not automatically retry, alter the path, enable CI-NEB, start Dimer, accept a TS, or report a barrier.",
+    "done_when": [
+      "The user explicitly authorizes or declines the formal ordinary micro-NEB submission.",
+      "If authorized, the current execution gate explicitly allows SUBMIT_VASP and the submission executor records the new LSF job."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_ml12_14_4img_20260829/c2ho_h_micro_neb_ml12_14_4img_formal_20260829/neb_pilot_result.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_ml12_14_4img_20260829/c2ho_h_micro_neb_ml12_14_4img_formal_20260829/submission_preflight.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_ml12_14_4img_20260829/c2ho_h_micro_neb_ml12_14_4img_pilot_20260829/scheduler_evidence.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_ml12_14_4img_20260829/c2ho_h_micro_neb_ml12_14_4img_formal_20260829/neb_pilot_result.json",
+      "sha256": "2fa78902846cf838cdadf643f4a40d0a7dcc6cff984256bc6b1bc5748a0590f5",
+      "authority": "module_validation",
+      "observed_at": "2026-08-29T22:07:43.5940984+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_ml12_14_4img_20260829/c2ho_h_micro_neb_ml12_14_4img_formal_20260829/submission_preflight.json",
+      "sha256": "11ef32672ed12bfb2cd2e76c54b70420b111c61c5736a988a365e5de2c3bbec8",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-29T22:07:43.5940984+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-vasp-micro-neb-pilot-job9733804-running-20260829"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

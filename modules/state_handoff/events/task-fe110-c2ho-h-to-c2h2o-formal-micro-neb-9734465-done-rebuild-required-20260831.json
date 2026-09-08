@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-formal-micro-neb-9734465-done-rebuild-required-20260831",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-31T22:02:24.5093847+08:00",
+  "recorded_at": "2026-08-31T14:02:24.5093847Z",
+  "summary": "Formal ordinary micro-NEB job 9734465 is LSF DONE after reaching NSW=300, but the completed path is not force-converged and folds across the O-H reaction coordinate; the authoritative gate allows only REBUILD_PATH.",
+  "payload": {
+    "objective": "Obtain user direction before rebuilding the failed local O-H micro-NEB path; do not refine or report the current path.",
+    "phase": "active",
+    "current_evidence": [
+      "LSF job 9734465 is DONE and its raw scheduler evidence has SHA-256 fee642ea79579328dee9970864dae4b75b5034f04b123d6b44e6b049b32402d4.",
+      "All four internal images reached NSW=300 with normal electronic behavior, but the run did not satisfy the 0.05 eV/A NEB-force target.",
+      "Final NEB forces are image 01=0.413361, image 02=0.033669, image 03=0.028878, and image 04=1.120239 eV/A; image 01 and 04 are rising.",
+      "The completed O47-H49 minimum-image distance sequence is 1.891, 2.796, 2.504, 1.887, 1.042, and 1.000 A, leaving the intended 1.1-1.8 A transition interval unsampled after optimization.",
+      "The largest adjacent minimum-image displacement is carried by H49 across every internal pair, and its nearest Fe site changes 38 to 37 to 40 to 38 before product formation; this is physical path folding in addition to raw coordinate wrapping.",
+      "C45-C46 remains 1.411-1.436 A and C46-O47 remains 1.263-1.387 A, so C-C cleavage or a gross collision is not the primary failure.",
+      "The completion execution gate returned STOP_DATA_INTEGRITY with only REBUILD_PATH allowed; its SHA-256 is d6f8b6640ed9efb6bf99ee37551a38e6a583477af22d2a5a12e08ba0369cb649.",
+      "No Dimer parent, TS, frequency, or barrier result is accepted from this path."
+    ],
+    "one_executable_step": "After explicit user direction, prepare a corrected local path that preserves a continuous H49 periodic branch and retains reviewed O-H transition-region structures for geometry review before any new submission.",
+    "submission_boundary": "Do not automatically submit a rebuilt NEB, enable CI-NEB, prepare or start Dimer, accept a TS, or report a barrier.",
+    "done_when": [
+      "The user authorizes or declines preparation of a corrected local path.",
+      "If authorized, the corrected path passes geometry, periodic-branch, reaction-coordinate, dist.pl, and nebmovie.pl 0 review before a separate submission decision."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_ml12_14_4img_20260829/c2ho_h_micro_neb_ml12_14_4img_formal_20260829/completion_gate_decision.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_ml12_14_4img_20260829/c2ho_h_micro_neb_ml12_14_4img_formal_20260829/path_geometry_diagnosis.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_ml12_14_4img_20260829/c2ho_h_micro_neb_ml12_14_4img_formal_20260829/neb_analysis.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_ml12_14_4img_20260829/c2ho_h_micro_neb_ml12_14_4img_formal_20260829/path_quality_report.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_ml12_14_4img_20260829/c2ho_h_micro_neb_ml12_14_4img_formal_20260829/completion_gate_decision.json",
+      "sha256": "d6f8b6640ed9efb6bf99ee37551a38e6a583477af22d2a5a12e08ba0369cb649",
+      "authority": "module_validation",
+      "observed_at": "2026-08-31T22:02:24.5093847+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_ml12_14_4img_20260829/c2ho_h_micro_neb_ml12_14_4img_formal_20260829/scheduler_evidence.json",
+      "sha256": "fee642ea79579328dee9970864dae4b75b5034f04b123d6b44e6b049b32402d4",
+      "authority": "scheduler",
+      "observed_at": "2026-08-31T22:02:24.5093847+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-formal-micro-neb-9734465-running-20260829"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "event_id": "state-history-compacted-7ca5604cfc573d419007f891",
+  "event_type": "state_history_compacted",
+  "entity": {
+    "kind": "state",
+    "id": "current-state-history-compaction",
+    "module": "state_handoff"
+  },
+  "occurred_at": "2026-08-03T00:00:00+08:00",
+  "recorded_at": "2026-08-03T04:19:12Z",
+  "summary": "Move historical flow out of ## Active Fe(110) CO Dissociation Test.",
+  "payload": {
+    "source_path": "docs/02_CURRENT_STATE.md",
+    "source_sha256": "f6eee7315643818ddd25c238bc18db07598db7ef48227fda1fdb2f603f8b71ed",
+    "section_heading": "## Active Fe(110) CO Dissociation Test",
+    "history_heading": "### Historical Evidence",
+    "archive_path": "docs/history/active_fe110_co_dissociation_history_through_20260803.md",
+    "replacement": "### Historical Evidence\n\nThe detailed chronology through the current gate was moved intact to `docs/history/active_fe110_co_dissociation_history_through_20260803.md`.\n\nCurrent status and the next executable action are maintained only in the managed Current Gate above."
+  },
+  "evidence": [
+    {
+      "locator": "docs/02_CURRENT_STATE.md",
+      "sha256": "f6eee7315643818ddd25c238bc18db07598db7ef48227fda1fdb2f603f8b71ed",
+      "authority": "repository_document",
+      "observed_at": "2026-08-03T04:19:12Z"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "create_history_archive",
+      "modify_unmanaged_markdown"
+    ],
+    "status": "pending"
+  }
+}

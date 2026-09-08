@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-matris-finetune-job1505-reviewed-not-promoted-20260902",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-02T14:37:34+08:00",
+  "recorded_at": "2026-09-02T06:37:34Z",
+  "summary": "MZ73 MatRIS energy-force fine-tuning job 1505 completed successfully and returned checkpoint candidate 37d1ad07...ad679a. The checkpoint strictly reloads with 4,294,897 finite parameters and improves every frozen TS primary force metric, TS relative-energy RMSE, and adsorption RMSE/p95 metric. It is not promoted because adsorption validation vector max regresses by 0.013814 eV/A (5.398%) and the active no-regression policy provides no tolerance. No path rerun was started.",
+  "payload": {
+    "objective": "Decide whether to retain the strict zero-regression adsorption gate or authorize preparation of a second retention-aware MatRIS fine-tuning candidate with validation-based early stopping; do not promote job-1505 checkpoint or rerun the path meanwhile.",
+    "phase": "active",
+    "current_evidence": [
+      "Slurm job 1505 left the queue and its producer exit record reports success with exit code 0.",
+      "The returned checkpoint hash matches the producer result and differs from the frozen base checkpoint.",
+      "Strict CPU reload passes; all 4,294,897 parameters are finite.",
+      "Frozen six-structure TS held-out vector RMSE improves from 0.113936 to 0.089651 eV/A; p95 and max also improve.",
+      "Frozen TS relative-energy RMSE improves from 0.087341 to 0.084022 eV and remains below the registered 0.10 eV ceiling; lowest-energy identity remains correct.",
+      "Four-structure adsorption retention vector RMSE improves from 0.081014 to 0.074227 eV/A and p95 improves from 0.145147 to 0.124704 eV/A.",
+      "Adsorption retention vector max worsens from 0.255915 to 0.269729 eV/A, an increase of 0.013814 eV/A or 5.398%.",
+      "The active policy requires adsorption retention not to regress and defines no tolerance; therefore the candidate remains non-promoted.",
+      "No automatic retry, checkpoint promotion, complete path rerun, AQCat25 audit, VASP, Dimer, TS acceptance, or barrier action occurred."
+    ],
+    "one_executable_step": "Obtain the user's method decision: keep the strict gate and reject this candidate, or separately authorize preparation of a retention-aware second candidate; no remote action is currently authorized.",
+    "submission_boundary": "Job 1505 authorization is consumed. Its checkpoint candidate is not promoted. Any second fine-tuning run, checkpoint promotion, complete path rerun, AQCat25 audit, VASP micro-NEB, Dimer, TS acceptance, or barrier report requires a new explicit action and applicable review.",
+    "done_when": [
+      "A durable decision records whether the adsorption vector-max increase is an unacceptable regression under the current gate.",
+      "If the strict gate remains, checkpoint 37d1ad07...ad679a is rejected for production use.",
+      "If a second candidate is requested, a new review-only training design introduces retention-aware checkpoint selection without using frozen held-out TS samples for optimization."
+    ],
+    "authoritative_references": [
+      "`outputs/matris_ef_finetune_bundle_20260902/checkpoint_review_job1505.json`",
+      "`outputs/matris_ef_finetune_bundle_20260902/returned_job1505/result.json`",
+      "`outputs/matris_ef_finetune_bundle_20260902/returned_job1505/producer_exit_record.json`",
+      "`outputs/matris_ef_finetune_bundle_20260902/returned_job1505/checkpoint_candidate.pth.tar`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "outputs/matris_ef_finetune_bundle_20260902/checkpoint_review_job1505.json",
+      "sha256": "70905aa7eec0ddcf0a4521c8671d6b6ee549c42ff4ed97a3f2ec43be7018241b",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T14:37:34+08:00"
+    },
+    {
+      "locator": "outputs/matris_ef_finetune_bundle_20260902/returned_job1505/result.json",
+      "sha256": "7e6a8f617e0636e7d9675c9be834117da951eae663d59530ec69f6b50f64eb3f",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T14:37:34+08:00"
+    },
+    {
+      "locator": "outputs/matris_ef_finetune_bundle_20260902/returned_job1505/producer_exit_record.json",
+      "sha256": "f58992d2a01de96052145819d7366183e9bc91b83046959567cb15ca6044263b",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-02T14:37:34+08:00"
+    },
+    {
+      "locator": "outputs/matris_ef_finetune_bundle_20260902/returned_job1505/checkpoint_candidate.pth.tar",
+      "sha256": "37d1ad0700dcf262ef1911b3149ab83863cc47bc666773366baca02787ad679a",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-02T14:37:34+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-matris-energy-force-finetune-job1505-submitted-20260902"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

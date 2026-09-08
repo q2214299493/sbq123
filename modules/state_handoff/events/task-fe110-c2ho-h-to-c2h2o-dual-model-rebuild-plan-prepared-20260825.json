@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-dual-model-rebuild-plan-prepared-20260825",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-25T22:42:44+08:00",
+  "recorded_at": "2026-08-25T14:42:44Z",
+  "summary": "Prepared a hash-bound 13-image C-C-preserving and O-H-densified rebuild seed plus a dual-model routing plan: MatRIS primary and AQCat25 fixed-path secondary for TS paths, with no GPU or VASP submission.",
+  "payload": {
+    "objective": "Implement and review a dual-model GPU path workflow for Fe(110) C2HO* + H* -> C2H2O* + * using MatRIS as the TS-path primary model and AQCat25 as the exact-structure secondary model.",
+    "phase": "active",
+    "current_evidence": [
+      "The supplied Fe-C-O-H MatRIS checkpoint hash exactly matches the checkpoint already loaded successfully by the MZ73 same-structure benchmark job 1311 through the repository MatRIS loader.",
+      "The existing 39-structure same-structure VASP benchmark supports AQCat25 as the adsorption primary model and MatRIS as the TS-path primary model: adsorption force-vector RMSE is 0.06523 versus 0.09618 eV/A, while TS-path force-vector RMSE is 0.10998 versus 0.09291 eV/A for AQCat25 and MatRIS respectively.",
+      "A 13-image segmented-IDPP seed was generated from IS-A to FS-A with five O-H-forming images in the 1.1-1.8 A interval, C1-C2 distances of 1.3994-1.4282 A, maximum adjacent mobile-atom RMSD 0.1764 A, and a passing kinematic geometry review.",
+      "The seed is not a converged MEP or accepted TS path. MatRIS-primary ML-NEB, temporary C-C restraint removal, and AQCat25 fixed-path secondary evaluation are not yet wired into a reviewed production executor.",
+      "No GPU or VASP job was submitted."
+    ],
+    "one_executable_step": "Implement and locally test the MatRIS-primary constrained-precondition/release ML-NEB executor and AQCat25 exact fixed-path secondary evaluator; do not deploy or submit a production path until the implementation and smoke-test evidence are reviewed.",
+    "submission_boundary": "No GPU or VASP job is active or authorized. The MatRIS archive remains local and was not uploaded; the matching checkpoint already present on MZ73 is sufficient for implementation testing.",
+    "done_when": [
+      "The MatRIS-primary executor can precondition the 13-image seed while preserving C-C connectivity and then remove temporary restraints before an ordinary ML-NEB path run.",
+      "AQCat25 evaluates the exact same returned structures without relaxation and produces hash-bound relative-energy and movable-force disagreement records.",
+      "A bounded MZ73 smoke test passes geometry, provenance, and executor checks before any production GPU-path authorization is requested."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_ml_neb_rebuild_plan_20260825/dual_model_rebuild_plan.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_ml_neb_rebuild_plan_20260825/seed_geometry_review.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_ml_neb_rebuild_plan_20260825/matris_archive_review.json`",
+      "`outputs/mlip_same_structure_benchmark_extended_20260825/analysis/assessment_summary.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_ml_neb_rebuild_plan_20260825/dual_model_rebuild_plan.json",
+      "sha256": "ab7393a15b75932052a8a8b3b14bb05e57f7e0dc014a2ea90fcb47e32d7704e9",
+      "authority": "module_validation",
+      "observed_at": "2026-08-25T22:42:44+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_ml_neb_rebuild_plan_20260825/seed_geometry_review.json",
+      "sha256": "3e0a5f93d34415c5e2a782491402d65f82fc57eab31aaa9cb5c5453729c08f0c",
+      "authority": "structure_output",
+      "observed_at": "2026-08-25T22:42:44+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_ml_neb_rebuild_plan_20260825/matris_archive_review.json",
+      "sha256": "6a8fa55d623ff1aa8a376dbf419028ac1a227d51a3edee7fda23b3ff65f83e2f",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-25T22:42:44+08:00"
+    },
+    {
+      "locator": "outputs/mlip_same_structure_benchmark_extended_20260825/analysis/assessment_summary.json",
+      "sha256": "e9f88ebc446febdb3bccef74045bc5f8acab54c28206bd65e8c62fce44a0e49b",
+      "authority": "module_validation",
+      "observed_at": "2026-08-25T22:42:44+08:00"
+    }
+  ],
+  "supersedes": [
+    "reconciled-task-updated-task-fe110-c2ho-h-to-c2h2o-ts-9cde9bbb4300e2f93a97"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-co-dimer-frequency-validation-20260806",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-co-dissociation",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-06T23:33:18+08:00",
+  "recorded_at": "2026-08-06T23:33:18+08:00",
+  "summary": "Remove connectivity from Dimer acceptance and resume at principal imaginary-mode review.",
+  "payload": {
+    "objective": "Complete Dimer validation from technical convergence and vibrational-frequency evidence; connectivity is no longer a Dimer acceptance gate.",
+    "phase": "verification",
+    "current_evidence": [
+      "Dimer job `9656664` is technically converged with negative curvature and a converged VASP maximum atomic force. DIMCAR Force/Torque retain soft warnings.",
+      "VFA job `9694935` completed normally and has one `537.451689 cm^-1` C/O-dominated imaginary mode aligned with the target C-O coordinate.",
+      "Existing positive/negative downhill jobs `9695455` and `9695456` remain preserved as optional diagnostic evidence; their endpoint-equivalence review no longer gates Dimer acceptance.",
+      "The updated read-only pipeline status is `NEEDS_PRINCIPAL_MODE_ASSIGNMENT`, with `connectivity_required=false`.",
+      "The candidate remains `Ungraded`: the existing mode review is diagnostic-only, frequency thresholds are unset, and the Dimer soft review authorizes frequency handoff but not final TS validation."
+    ],
+    "one_executable_step": "Review and explicitly accept or reject the principal imaginary mode against the reaction contract; do not use the optional connectivity result as the decision criterion.",
+    "submission_boundary": "No additional VFA, Dimer, NEB, matched static, connectivity relaxation, or barrier calculation is authorized by this rule change.",
+    "done_when": [
+      "The principal imaginary mode has a hash-bound accepted/rejected assignment against the reaction contract.",
+      "Reviewed numerical meaningful/soft-mode thresholds are configured, or the candidate is explicitly retained as `Ungraded`.",
+      "Any Dimer Force/Torque soft residuals have an `accept_for_ts_validation` decision before Grade A is possible."
+    ],
+    "authoritative_references": [
+      "Scientific and execution gates: `modules/transition_state_search/README.md`.",
+      "Vibrational validation: `modules/ts_vibrational_validation/README.md`.",
+      "Pipeline status: `configs/ts_validation_pipeline.yaml`.",
+      "Execution backends: `configs/execution_backends.yaml`."
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/dimer_handoff_job9640399_image04_20260803/dimer_analysis.json",
+      "sha256": "5744956f8428be0f60fdd5c6a08d671a9b6c5de738252835e7fd09746d1a631e",
+      "authority": "module_validation",
+      "observed_at": "2026-08-06T23:33:18+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/vfa_diagnostic_from_dimer9656664_co_only_20260805/vfa_analysis.json",
+      "sha256": "32bc11370f216542170b84158bf3b3c7a47c5709975b1c76ad54258b6527b730",
+      "authority": "module_validation",
+      "observed_at": "2026-08-06T23:33:18+08:00"
+    },
+    {
+      "locator": "configs/ts_validation_pipeline.yaml",
+      "sha256": "997d983cb94a009578783812ba063bfd8c241130158498cc1553a35823f5abe8",
+      "authority": "repository_document",
+      "observed_at": "2026-08-06T23:33:18+08:00"
+    }
+  ],
+  "supersedes": ["task-fe110-co-connectivity-needs-review-20260806"],
+  "review": {
+    "required": true,
+    "reason_codes": ["scientific_method_change", "cross_module_change"],
+    "status": "pending"
+  }
+}

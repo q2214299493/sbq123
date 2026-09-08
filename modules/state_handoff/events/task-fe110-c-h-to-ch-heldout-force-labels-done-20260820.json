@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-heldout-force-labels-done-20260820",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-transition-state",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-20T12:00:00+08:00",
+  "recorded_at": "2026-08-20T04:00:00Z",
+  "summary": "All six independent held-out VASP force-label jobs reached LSF DONE; collected outputs passed exact frozen-structure, normal-completion, electronic-convergence, and complete 47-atom force-block checks and are ready for a separately authorized exact-checkpoint prediction batch.",
+  "payload": {
+    "objective": "Establish whether the current AQCat25 checkpoint can be calibrated for the Fe(110) hydrogen-transfer TS/path domain before using it to accelerate the remaining C* + H* -> CH* transition-state search.",
+    "phase": "active",
+    "current_evidence": [
+      "LSF jobs 9719408, 9719409, 9719410, 9719411, 9719412, and 9719413 are all DONE.",
+      "R1, R2, S1, S2, F1, and F2 each finished normally and reached EDIFF electronic convergence before NELM=200.",
+      "Every collected OUTCAR contains one complete 47-atom force block and each local POSCAR still matches its frozen candidate SHA-256.",
+      "The static-label maximum movable-atom force norms are 0.2843, 0.6577, 0.8083, 0.6990, 0.6983, and 0.8180 eV/Angstrom for R1, R2, S1, S2, F1, and F2 respectively; these are labels, not ionic relaxations, so no force-convergence claim is made.",
+      "The six DONE status rows, collected OUTCAR/OSZICAR files, and diagnostic results were appended to data/project_registry.sqlite3.",
+      "No AQCat25 prediction has yet been run on R1-F2, so no force-error metric or TS-domain calibration verdict exists."
+    ],
+    "one_executable_step": "Prepare a hash-bound exact-structure AQCat25 prediction batch for R1-F2 for user review; do not submit GPU execution without separate authorization.",
+    "submission_boundary": "Completion and collection do not authorize GPU execution, fine-tuning, ML-NEB reruns, VASP NEB/CI-NEB, DIMER, frequency, connectivity, or barrier reporting.",
+    "done_when": [
+      "At least five disjoint held-out VASP-labeled TS-domain structures pass registered calibration metrics for the exact checkpoint and compatibility branch.",
+      "A hash-bound calibration review decides whether this checkpoint is reusable for the in-scope C*+H*->CH* path neighborhood.",
+      "Only after calibration may the strategy engine choose the least-cost VASP NEB/CI-NEB/DIMER continuation from the complete path evidence."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_to_ch_ts_20260818/heldout_vasp_force_labels_sigma0p20_20260820/batch_completion_summary.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/heldout_vasp_force_labels_sigma0p20_20260820/registry_completion_receipt.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/heldout_vasp_force_labels_sigma0p20_20260820/batch_completion_summary.json",
+      "sha256": "ec123c8441a47bf93d0c0c781d87f4c9d694e6a51724c633b9debf53eec92efd",
+      "authority": "module_validation",
+      "observed_at": "2026-08-20T12:00:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/heldout_vasp_force_labels_sigma0p20_20260820/registry_completion_receipt.json",
+      "sha256": "bd8590b3db9a356489afcccd0a48ad7be888fec82d4976573207eb758eb1f849",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-20T12:00:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-heldout-force-labels-submitted-20260820"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

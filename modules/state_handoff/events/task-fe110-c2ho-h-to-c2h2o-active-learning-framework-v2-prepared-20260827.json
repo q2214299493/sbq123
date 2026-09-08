@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-active-learning-framework-v2-prepared-20260827",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-27T00:30:06+08:00",
+  "recorded_at": "2026-08-26T16:30:06Z",
+  "summary": "The user-approved TS active-learning logic is implemented as a geometry-gated, committee-preferred workflow with failure-boundary pairing, clustered information sampling, VASP magnetic/force quality gates, four-quadrant routing, and automatic local preparation. The current 18-structure fallback batch is deployed but unsubmitted.",
+  "payload": {
+    "objective": "Execute the geometry-qualified MatRIS TS active-learning workflow automatically for the Fe(110) C2HO* + H* -> C2H2O* path, using a real MatRIS committee when available and the explicit MatRIS/AQCat25/VASP-error fallback otherwise.",
+    "phase": "active",
+    "current_evidence": [
+      "Job 1324 supplies one geometry-valid 17-image last-good snapshot and a geometry-valid first failure boundary at image 12; `pre_12` and `fail_12` are preserved as distinct hash-bound samples.",
+      "The scientific trigger excludes runtime failures and geometry-invalid paths. Atom mapping, periodic unwrap, endpoint/cell/fixed-mask compatibility, minimum pair distance, and adjacent continuity must pass before any structure can enter training consideration.",
+      "The preferred uncertainty source is a committee of three to five independently trained, production-accepted checkpoints of one MatRIS architecture. AQCat25 is an optional exact-structure external auditor and never a MatRIS committee member.",
+      "The current inventory has fewer than three accepted MatRIS checkpoints. This round therefore uses MatRIS primary plus AQCat25 audit and later actual VASP error; it cannot report uncertainty or use four-quadrant committee calibration yet.",
+      "Sampling now preserves last-valid/first-failure points and ranks available committee disagreement, external-auditor disagreement, descriptor novelty, TS proximity, failure proximity, and reaction-coordinate backtracking. Raw units are converted to within-batch percentile ranks and at most seven structures are clustered/deduplicated. Peak neighbors are not universally mandatory.",
+      "VASP labels are compatible SIGMA=0.20 eV NSW=0 statics with LORBIT=11. Normal/electronic completion, complete all-atom forces, total magnetization, atom-resolved magnetic moments, and exact structure/compatibility hashes are required before training.",
+      "A real committee enables disagreement-versus-actual-error four-quadrant routing. Without it, the workflow decides from model-specific VASP error and available novelty and makes no uncertainty claim.",
+      "The new 18-structure request SHA-256 is f01b10a39c5af586bb8db7d43643313527039d48afbf0fabe61421a11fe02fdb. It and the updated runtime are deployed and preflighted on MZ73. No GPU, VASP, fine-tuning, rerun, micro-NEB, or Dimer job has been submitted."
+    ],
+    "one_executable_step": "After explicit authorization, submit exactly one bounded MZ73 job for the deployed 18-structure MatRIS/AQCat25 fallback prediction batch. On completion, automatically collect the exact predictions, score/cluster/select at most seven structures including the `pre_12`/`fail_12` boundary pair, and prepare but do not submit the compatible VASP label batch.",
+    "submission_boundary": "Local geometry classification, snapshot preservation, request preparation, scoring, clustering, result assessment, and next-stage package preparation may run automatically. Remote GPU prediction, VASP labels, MatRIS fine-tuning, full-path rerun, VASP micro-NEB, and Dimer submission each require the applicable reviewed hash-bound authority; direct GPU-to-VASP submission remains forbidden.",
+    "done_when": [
+      "Exact MatRIS and AQCat25 predictions exist for all 18 frozen round-0 structures, including the last-valid/first-failure boundary pair.",
+      "At most seven clustered informative structures have accepted VASP energy, complete all-atom forces, and total/atom-resolved magnetic evidence on the active compatibility branch.",
+      "MatRIS-VASP and AQCat25-VASP errors are assessed separately, and committee-error quadrants are added only if a valid three-to-five-member MatRIS committee exists.",
+      "If MatRIS fails, replay-buffer energy/force-aware fine-tuning yields a new versioned checkpoint, the complete path is rerun, and force-tail/relative-energy retention gates pass.",
+      "A disjoint rising/near-saddle/falling VASP held-out set passes before active-learning acceleration is called calibrated, after which the least-cost VASP micro-NEB or Dimer route enters the authoritative TS gates."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/active_learning_state.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/remote_deployment_preflight.MZ73.json`",
+      "`configs/dual_model_ts_active_learning.yaml`",
+      "`configs/execution_backends.yaml`",
+      "`configs/true_fe110_production.yaml`",
+      "`scripts/matris_ts_path_committee.py`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/active_learning_state.json",
+      "sha256": "95c85301e6e656b8711baed39a65e602c2dcaa673c55757bc2de62b6151c4e36",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T00:30:06+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/remote_deployment_preflight.MZ73.json",
+      "sha256": "d88bc4c92e876f8b5d171bacf543cf4ba1081ef47afc1d7dfadf106e9bc0c86a",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T00:30:06+08:00"
+    },
+    {
+      "locator": "configs/dual_model_ts_active_learning.yaml",
+      "sha256": "8cf94e8b9bbc034d44ad94bc8e9718287a8c4165734b80a9e53eddaab73840fb",
+      "authority": "repository_document",
+      "observed_at": "2026-08-27T00:30:06+08:00"
+    },
+    {
+      "locator": "configs/execution_backends.yaml",
+      "sha256": "e7e7c09cfefcae5321a830ea6a35f3db20a101be7bd1f1f179881acfcdd7350d",
+      "authority": "repository_document",
+      "observed_at": "2026-08-27T00:30:06+08:00"
+    },
+    {
+      "locator": "configs/true_fe110_production.yaml",
+      "sha256": "fbad642502134ca1123741f0bdf3194d2914e230981d38aab90debd4b965bcd3",
+      "authority": "repository_document",
+      "observed_at": "2026-08-27T00:30:06+08:00"
+    },
+    {
+      "locator": "scripts/matris_ts_path_committee.py",
+      "sha256": "f5cc56dfad70579a41cd36b46255b8fdc20db625c68844b29820d3348baa0fa9",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T00:30:06+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-active-learning-round0-prepared-20260827"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

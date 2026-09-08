@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-local-vasp-micro-neb-pilot-prepared-20260902",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-02T21:56:24+08:00",
+  "recorded_at": "2026-09-02T13:56:24Z",
+  "summary": "The user selected the local VASP micro-NEB branch. A hash-bound seven-structure local path was prepared from exact job1508 images 04 and 07 with five O-H waypoints, reviewed numerically and visually, and rendered as an unsubmitted NSW=1 ordinary-NEB compatibility pilot. Geometry and submission preflight pass; user visual approval and a separate explicit VASP submission authorization are still required.",
+  "payload": {
+    "objective": "Obtain user visual approval and explicit submission authority for the prepared local VASP micro-NEB compatibility pilot around the job1508 O-H collapse.",
+    "phase": "active",
+    "current_evidence": [
+      "The selected local boundaries are exact job1508 restart images 04 and 07, spanning O-H 2.624500 to 0.985308 A.",
+      "Five internal chemical waypoints at O-H 2.25, 1.95, 1.65, 1.35, and 1.10 A remove the image05-to-image06 collapse without imposing a reusable image-count gate.",
+      "The seven-image local path has maximum internal single-atom step 0.419322 A, maximum mobile RMSD 0.092514 A, maximum VTST dist.pl value 0.523336 A, and no geometry-diagnosis error.",
+      "The external job1508 image03-to-local00 seam remains warning evidence at 0.877542 A on H49; local06-to-image08 is 0.595097 A on H48.",
+      "Agent visual review found a continuous O-H forming branch and preserved C1-C2-O-H48 framework; user visual approval remains pending.",
+      "The prepared input is only an NSW=1 ordinary-NEB compatibility pilot with IMAGES=5, 120 ranks, ENCUT=400 eV, 5x5x1 k mesh, ISMEAR=1, and SIGMA=0.20 eV.",
+      "Canonical neb_pilot preflight passed with bundle SHA256 c5b48ce1cbdd547e938411e3c31ed64c685350f725281dcaf70770b40c20b2bc."
+    ],
+    "one_executable_step": "After the user reviews the top/side montages, obtain an explicit submit instruction; only then create current hash-bound authorization and execution-gate evidence and submit the NSW=1 VASP micro-NEB pilot.",
+    "submission_boundary": "No VASP job has been submitted and no execution gate currently authorizes SUBMIT_DIAGNOSTIC_VASP or SUBMIT_VASP. Do not upload or submit until the user explicitly says to submit after reviewing this prepared path.",
+    "done_when": [
+      "The user has reviewed the local path structures.",
+      "A separate explicit submission instruction is recorded.",
+      "A current hash-bound execution gate explicitly allows the pilot submission action."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_20260902/structure_review.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_20260902/path_geometry_diagnosis.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_20260902/agent_visual_review.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_20260902/submission_preflight.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_20260902/structure_review.json",
+      "sha256": "439e0575db85a3ea969c19bf262284eb708802412d008c30f3c6f9d94ac32e18",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T21:56:24+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_20260902/path_geometry_diagnosis.json",
+      "sha256": "be33e32ee72d478ea1ed0a2febbb584805695902032c07e87dc95ba5a3d298bf",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T21:56:24+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_20260902/agent_visual_review.json",
+      "sha256": "d05f21e54050feb394b1ff58ac64882beec93b1810e249149af24156ea842aac",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T21:56:24+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_20260902/submission_preflight.json",
+      "sha256": "f38e827e2b281c8b78639f9898c677b10727035e7551ef164bda33a620ed1230",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T21:56:24+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-matris-epoch6-job1508-failed-reviewed-20260902"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

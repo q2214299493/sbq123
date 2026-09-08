@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "workflow": "adsorption",
+  "target_calculation_type": "adsorption_relaxation",
+  "target_backend": "sunboquan-codex",
+  "remote_directory": "~/sbq/Fe110/adsorption/ch_h_coadsorption_20260808/CH_long_bridge_H_adjacent_hollow",
+  "reviewed_structure_and_sha256": {
+    "path": "POSCAR",
+    "sha256": "98e2ba508608158ff5d337eba872849cb57b580d2fa1c2da4109e04086b02d0b"
+  },
+  "source_compatibility_sha256": "54bd393e6834e2e013594684e7369bf5d6de79aa540ff6912d17ecdf25d99d16",
+  "structure_gate_verdict": {
+    "status": "PASS",
+    "candidate_manifest_sha256": "dad0b14e693758dd19afe7b9bbfb121bc0fead6f74ad081ab7f036124edbbd74",
+    "composition": "Fe45 C1 H2",
+    "fixed_zero_based": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+    "existing_c_h_angstrom": 1.1071501246789337,
+    "incoming_c_h_angstrom": 1.9448007003845282,
+    "h_h_angstrom": 2.1918089049421807,
+    "incoming_h_nearest_fe_angstrom": 1.786037180183677
+  },
+  "vasp_input_preflight_verdict": {
+    "status": "PASS",
+    "preflight_path": "adsorption_submission_preflight.json",
+    "preflight_sha256": "35131d9089e902bf0c8dec9d3ec801635321ebbc600852d77e903876421f2558"
+  },
+  "explicit_submission_authority": {
+    "source": "user request on 2026-08-08",
+    "scope": "exactly one Fe(110) CH*+H* coadsorption relaxation",
+    "task_brief_sha256": "841072c094fe8415a74c994b9e9f00d035c7a0bc9a48612c2bb97aa5e34babfa"
+  },
+  "source_evidence_gated_plan_sha256": "0b8da83fa862eb12475c30499e75783eeb72c2e6e743e2082b7f70843f19b29e",
+  "source_clean_slab_sha256": "31b28b6c69eaedaa9c100050ee38b20b7037d9fa153de477c46eeeeb49086123",
+  "adsorbate_identity_and_connectivity": {
+    "initial_species": "CH* + H*",
+    "atom_map_zero_based": {
+      "carbon": 45,
+      "preexisting_ch_hydrogen": 46,
+      "incoming_surface_hydrogen": 47
+    },
+    "initial_bonds": [[45, 46]],
+    "monitored_future_bond": [45, 47]
+  },
+  "input_hashes": {
+    "INCAR": "0f9733a079b7b7c8c737985bf0066a70ddbd2253678eb6f8344614a15b7192f3",
+    "KPOINTS": "96e716f7d940b3c4e45534fb8f7b5c09712eef3defc603302142bfebc1ff444e",
+    "POTCAR.spec": "f4501212d82e629d99817a86069ed755748bcfead36cefd1df11780526b6a98e",
+    "script.lsf": "cd33ce86388d6f34a05348efc4e64508b7d0e7d5d24a3ce5226cc4f9a6a1d9a0"
+  },
+  "remote_potcar": {
+    "resolved_source": "/home_gkn/users/nsgkn_chengdj3/sbq/Fe110/potcars/Fe_C_H/POTCAR",
+    "sha256": "bd39c0ebfbbe6207bc8e1b976677b4687ae2d2956f5a74dc1dea3298adef063a",
+    "species_order": ["Fe", "C", "H"]
+  },
+  "method": {
+    "branch": "true_fe110_5layer_5x5x1",
+    "xc": "PBE",
+    "potcar_family": "PAW-PBE",
+    "encut_ev": 400,
+    "kmesh": [5, 5, 1],
+    "ismear": 1,
+    "sigma_ev": 0.2,
+    "ediff": 1e-5,
+    "ediffg_ev_per_angstrom": -0.02,
+    "fixed_bottom_fe_atoms": 18,
+    "cores": 32
+  }
+}

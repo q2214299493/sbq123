@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-active-learning-vasp-labels-9730947-9730953-submitted-20260827",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-27T01:03:00+08:00",
+  "recorded_at": "2026-08-26T17:03:00Z",
+  "summary": "The explicitly authorized seven-structure SIGMA=0.20 eV VASP static force-label batch was submitted on sunboquan-codex as LSF jobs 9730947-9730953 with exact input, execution-gate, POTCAR, and batch-hash provenance.",
+  "payload": {
+    "objective": "Collect and validate the seven exact-structure VASP force labels, then assess MatRIS-VASP and AQCat25-VASP errors separately for active-learning routing.",
+    "phase": "active",
+    "current_evidence": [
+      "The authorized batch request SHA-256 is 21cdabec5515ea913320dffbe5f6af2f472690bbea3f49878fbf4753c183e750 and contains pre_09, pre_04, pre_12, fail_12, pre_06, pre_11, and pre_07.",
+      "Every sample passed a real local-neighborhood geometry diagnosis, canonical diagnostic_static preflight, and a current execution gate allowing only SUBMIT_DIAGNOSTIC_VASP.",
+      "pre_09 is job 9730947, pre_04 is 9730948, pre_12 is 9730949, fail_12 is 9730950, pre_06 is 9730951, pre_11 is 9730952, and pre_07 is 9730953.",
+      "The initial live LSF snapshot showed jobs 9730947-9730950 RUN and jobs 9730951-9730953 PEND in Gkn_normal.",
+      "The approved Fe-C-O-H POTCAR SHA-256 is e3bc41a37d795bfcf1b1dc9a2a9ddfb5ef86aa5dc9aa0ac5a3583471a0982f85.",
+      "These are non-reportable NSW=0 force labels. No GPU rerun, fine-tuning, NEB, Dimer, TS, or barrier action was submitted or established."
+    ],
+    "one_executable_step": "Monitor jobs 9730947-9730953 to terminal LSF states. After all are DONE, collect exact outputs, capture authoritative scheduler evidence, and verify normal VASP completion, electronic convergence, complete 50-atom force blocks, total magnetization, atom-resolved magnetic moments, input hashes, and compatibility before batch ingestion.",
+    "submission_boundary": "Only jobs 9730947-9730953 are authorized. No retry, replacement, additional force label, GPU fine-tuning, path rerun, micro-NEB, or Dimer submission is authorized without new evidence and user direction.",
+    "done_when": [
+      "All seven jobs have stored terminal scheduler evidence.",
+      "Every DONE label passes normal completion, electronic convergence, exact-structure binding, complete all-atom force and magnetic-evidence validation.",
+      "MatRIS-VASP and AQCat25-VASP errors are assessed separately and the next active-learning route is decided without a calibrated-uncertainty claim."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/vasp_force_labels_prepared_job1325_20260827/batch_submission_summary.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/vasp_force_labels_prepared_job1325_20260827/path_label_batch_request.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/vasp_force_labels_prepared_job1325_20260827/user_execution_authorization.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/vasp_force_labels_prepared_job1325_20260827/batch_submission_summary.json",
+      "sha256": "e6483cda5c1f279081d481fc2a07b35020af7b95589b4eac00bf1b9f0998cc75",
+      "authority": "scheduler",
+      "observed_at": "2026-08-27T01:03:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/vasp_force_labels_prepared_job1325_20260827/path_label_batch_request.json",
+      "sha256": "21cdabec5515ea913320dffbe5f6af2f472690bbea3f49878fbf4753c183e750",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T01:03:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/vasp_force_labels_prepared_job1325_20260827/user_execution_authorization.json",
+      "sha256": "85a6dc5a98bd700ef4e3b6c25c3301f2dd2da04174710400a30e55c4b2f6cb81",
+      "authority": "user_authorization",
+      "observed_at": "2026-08-27T01:03:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-active-learning-job1325-payload-accepted-labels-prepared-20260827"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

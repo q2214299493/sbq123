@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-dimer-9720181-submitted-20260820",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-transition-state",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-20T12:49:57+08:00",
+  "recorded_at": "2026-08-20T04:49:57Z",
+  "summary": "The reviewed GPU/VASP image-03/04/05 Dimer bundle passed the current hard gate and LSF job 9720181 was submitted; its initial scheduler state is PEND.",
+  "payload": {
+    "objective": "Run the gated Dimer refinement of image 04 for Fe(110) C* + H* -> CH* + * and validate the resulting saddle before any TS or barrier claim.",
+    "phase": "active",
+    "current_evidence": [
+      "The nine-image AQCat25 ML-NEB/ML-CI-NEB path is formally accepted as a predicted Dimer parent after work-side geometry, periodic-mapping, reaction-coordinate, and elementary-step review.",
+      "Exact-structure SIGMA=0.20 eV VASP static labels on images 03/04/05 preserve image 04 as a strict local energy maximum at -368.069059/-367.634608/-367.825079 eV; these values are force-label evidence only and are not a reportable barrier.",
+      "VTST dist.pl gives adjacent triad distances 0.555200 and 0.473245 A, while nebmovie.pl 0 and the accepted local review preserve a single periodic branch and the target C-H event.",
+      "The normalized image03-to-image05 MODECAR has norm 0.9999999999998894, zero components on fixed atoms 0-17, and 0.976661 of its norm on zero-based reaction atoms C45/H46.",
+      "The current execution gate is READY_FOR_DIMER with START_DIMER as its only allowed action; the exact 32-core input bundle passes every Dimer hard check under the SIGMA=0.20 eV, Gamma 5x5x1, ENCUT 400 eV branch.",
+      "LSF job 9720181 is scheduler PEND in Gkn_normal at ~/sbq/Fe110/ts/c_h_to_ch_20260818/dimer_image04_gpu_vasp_triad_20260820; scheduler status alone does not establish electronic, force, curvature, geometry, frequency, or scientific convergence.",
+      "The submission and 29 provenance rows are registered under calculation fe110_c_h_to_ch_dimer_9720181."
+    ],
+    "one_executable_step": "Monitor Dimer job 9720181; when terminal, collect and hash-bind its outputs and run the canonical Dimer force, curvature, mode, and geometry analysis before any local Hessian handoff or TS claim.",
+    "submission_boundary": "Do not stop, restart, resubmit, launch frequency/connectivity calculations, or claim a TS/barrier without new live evidence, the exact current hash-bound gate action, and any required user authority.",
+    "done_when": [
+      "The Dimer search is technically converged with a valid final structure, acceptable maximum force and negative curvature, and no mechanism or adsorption-site switch.",
+      "The accepted saddle structure passes the required target-mode local Hessian validation before a TS claim.",
+      "Compatible IS/TS/FS final OUTCAR TOTEN values are separately reviewed before any electronic barrier is reported; no free-energy or kinetics claim is made without thermochemical work."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/returned_from_mz73/output/ml_neb_production/gpu_ml_neb_path_manifest.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer_parent_image04_gpu_vasp_triad_20260820/path_review.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/mode_review.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/submission_preflight.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/AUTHORITATIVE_NEB_EXECUTION_GATE.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/submission_record.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/scheduler_evidence_initial.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/returned_from_mz73/output/ml_neb_production/gpu_ml_neb_path_manifest.json",
+      "sha256": "69eebe9cd03a825e97a7fc9ec9ff0148aacff72e681d29f74d1320170a28e226",
+      "authority": "module_validation",
+      "observed_at": "2026-08-20T12:49:57+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/submission_preflight.json",
+      "sha256": "2490755e1e1333474f56b014e3783e0a31e5d1731bb5e3f9b841d83da1b174c1",
+      "authority": "module_validation",
+      "observed_at": "2026-08-20T12:49:57+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/AUTHORITATIVE_NEB_EXECUTION_GATE.json",
+      "sha256": "c58ba7d4f40cc57d4ff2a00c9833d408c16f76d6442f34e6bde0e8db3e7786ed",
+      "authority": "module_validation",
+      "observed_at": "2026-08-20T12:49:57+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/submission_record.json",
+      "sha256": "bc00ab7f067850cfd1ff79887081f1fa5d4603fca379e9186ea07069b61e0a3a",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-20T12:49:57+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/scheduler_evidence_initial.json",
+      "sha256": "175a76e311251eb46b6bbe9249c6001503f25c61fa372bb8c13a13c8cbc69aa7",
+      "authority": "scheduler",
+      "observed_at": "2026-08-20T12:49:45+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/registry_submission_receipt.json",
+      "sha256": "f4acc7efab6885c19077be47b10b92dc605ead54810862fc86404180f49a5056",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-20T12:49:57+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-dimer-strategy-selected-20260820"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

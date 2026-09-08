@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-v10-gpu3-job1347-failed-wrapper-permission-20260829",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-29T01:14:36+08:00",
+  "recorded_at": "2026-08-28T17:14:36Z",
+  "summary": "MZ73 job 1347 successfully bound to physical GPU 3 with 18939 MiB free but exited before model loading because the uploaded runtime wrapper lacked execute permission; the permission and preflight check are repaired, and no resubmission was made.",
+  "payload": {
+    "objective": "Run and review the complete frozen-MatRIS ordinary ML-NEB path for Fe(110) C2HO*+H* -> C2H2O*+*, followed by AQCat25 exact fixed-path audit only after a complete primary path returns.",
+    "phase": "blocked",
+    "current_evidence": [
+      "Slurm job 1347 reached FAILED with ExitCode=126:0 at startup.",
+      "The Slurm allocation contained physical GPU IDs 2 and 3; the selector chose physical GPU 3 with UUID GPU-e72f50ad-d93f-c404-04c4-51dccc85727e and 18939 MiB free.",
+      "The job then failed because runtime/dual_model_ml_neb_job.sh was not executable; MatRIS and AQCat25 were never loaded.",
+      "The remote wrapper executable bit has been set and bash syntax passes; the local remote preflight now enforces the executable bit before future submission.",
+      "No scientific path, force, model-accuracy, or geometry conclusion was produced."
+    ],
+    "one_executable_step": "After a new explicit user authorization, create a retry-specific hash-bound submission record and resubmit the repaired v10 GPU3 package once.",
+    "submission_boundary": "No automatic retry, MatRIS fine-tuning, VASP, micro-NEB, Dimer, TS acceptance, or barrier action is authorized.",
+    "done_when": [
+      "A newly authorized corrected GPU3 job returns a complete MatRIS path and AQCat25 exact-path audit, or a truthful new failure diagnosis is recorded.",
+      "The returned path is reviewed before any VASP or Dimer proposal."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v10_nonabsolute_guards_20260829/failure_diagnosis_job1347.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v10_nonabsolute_guards_20260829/remote_failure_return/production-1347.out`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v10_nonabsolute_guards_20260829/failure_diagnosis_job1347.json",
+      "sha256": "8ef3e785c603fb2b8bd0917db2bc2c7d00a8988a3967cfe6cb122239a3fba34b",
+      "authority": "module_validation",
+      "observed_at": "2026-08-29T01:14:36+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v10_nonabsolute_guards_20260829/remote_failure_return/production-1347.out",
+      "sha256": "0f71f4b863d63a7eab74b227a43a37397fdff8e3bf4017e0169f30d72579c4a3",
+      "authority": "scheduler",
+      "observed_at": "2026-08-29T01:14:36+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-v10-gpu3-job1347-submitted-20260829"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

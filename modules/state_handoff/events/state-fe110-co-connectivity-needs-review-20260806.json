@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "event_id": "state-fe110-co-connectivity-needs-review-20260806",
+  "event_type": "state_observed",
+  "entity": {
+    "kind": "state",
+    "id": "active-fe-110-co-dissociation-test-current-gate",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-06T14:46:12+08:00",
+  "recorded_at": "2026-08-06T14:46:12+08:00",
+  "summary": "Record converged bidirectional relaxations with unresolved contract-bound endpoint classification.",
+  "payload": {
+    "block_id": "active-fe-110-co-dissociation-test-current-gate",
+    "section": "## Active Fe(110) CO Dissociation Test",
+    "title": "Current Gate - 2026-08-06 Connectivity Needs Review",
+    "facts": [
+      "Positive job `9695455` and negative job `9695456` are scheduler `DONE`, normally completed, electronically converged, and ionically converged.",
+      "Remote/local SHA-256 checks pass for each branch's POSCAR, CONTCAR, OUTCAR, OSZICAR, and vasp.out; bottom-18-Fe drift is negligible.",
+      "The positive final structure is C-O-bond-distance-like IS (`1.205 A`), and the negative final structure is C-O-bond-distance-like FS (`3.118 A`).",
+      "Both automatic assignments remain `UNRESOLVED` because reaction-atom RMSD and maximum-displacement checks exceed the accepted endpoint tolerances.",
+      "Pipeline status is `CONNECTIVITY_FAILED_OR_NEEDS_REVIEW`; the result remains `Ungraded` and is not a validated TS."
+    ],
+    "next_action": "Review periodic/site equivalence and Fe-C/O coordination of both converged branch structures against the contract-bound IS and FS; do not submit another calculation during this review."
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/connectivity_from_dimer9656664_mode6_amp0p10_20260805/positive/connectivity_terminal_output_manifest.json",
+      "sha256": "8981dc6150ecec72f80cb8a5013845c07e952d0e50ba7af4ceaee329db7787b1",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-06T14:46:12+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/connectivity_from_dimer9656664_mode6_amp0p10_20260805/negative/connectivity_terminal_output_manifest.json",
+      "sha256": "6380333c625a43ea2199c348926be5d09fe0f9b451826bae43c1954e9b9c3e8c",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-06T14:46:12+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/connectivity_from_dimer9656664_mode6_amp0p10_20260805/bidirectional_connectivity_report.json",
+      "sha256": "cb72a8ae7c51fd43bcdd13b7d7802a15b8eb1608aec886a2acc8b247df1f3f4b",
+      "authority": "module_validation",
+      "observed_at": "2026-08-06T14:46:12+08:00"
+    }
+  ],
+  "supersedes": ["state-fe110-co-connectivity-submitted-20260805"],
+  "review": {"required": false, "reason_codes": [], "status": "not_required"}
+}

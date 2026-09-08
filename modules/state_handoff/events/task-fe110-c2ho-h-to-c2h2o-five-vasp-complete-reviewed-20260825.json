@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-five-vasp-complete-reviewed-20260825",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "adsorption_workflow"
+  },
+  "occurred_at": "2026-08-25T19:31:10+08:00",
+  "recorded_at": "2026-08-25T11:31:10Z",
+  "summary": "All five nonduplicate Fe(110) endpoint VASP relaxations are DONE and passed electronic, ionic, normal-termination, chemistry, geometry, and post-relaxation duplicate review; IS-B and FS-A are the lowest same-composition states in their roles.",
+  "payload": {
+    "objective": "Review the completed five-candidate VASP endpoint set and select the reactive IS, lowest-energy reference IS, and FS for [CH][C][O]* + H* -> [CH][C]OH* + *.",
+    "phase": "verification",
+    "current_evidence": [
+      "Jobs 9725471-9725475 are scheduler DONE and all five canonical VASP relaxation result gates passed.",
+      "All final maximum movable-atom force norms are 0.0150-0.0193 eV/A, below the active 0.02 eV/A target; normal timing footers and electronic convergence are present with no fatal markers.",
+      "All intended C1-C2, C2-O, C1-H and role-specific O-H connectivity is preserved, and all five final structures pass chemistry-aware geometry review.",
+      "No strict post-relaxation duplicate pair was found among the five submitted candidates.",
+      "The compatible same-composition VASP ordering is IS-B < IS-A < IS-C and FS-A < FS-C.",
+      "IS-A has the shortest unformed O-H distance, 3.0797 A, while IS-B is 0.0310 eV lower and is the lowest-energy IS reference; FS-A is 0.1181 eV lower than FS-C.",
+      "Final structures, TOTEN values, force values, scheduler completion, and reviews were registered in data/project_registry.sqlite3."
+    ],
+    "one_executable_step": "Obtain user confirmation to use IS-A as the reactive path IS, retain IS-B as the lowest-energy reference state, and use FS-A as the product FS before constructing any GPU/NEB/TS path.",
+    "submission_boundary": "No GPU path, NEB, DIMER, frequency, barrier, adsorption-energy subtraction, or TS submission is authorized by this completed endpoint review.",
+    "done_when": [
+      "The user accepts or revises the proposed IS-A reactive / IS-B reference / FS-A product endpoint assignment.",
+      "Any subsequent TS path receives its own path construction, continuity review, strategy selection, execution gate, and explicit submission authorization."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/provenance/vasp_nonduplicate_result_review.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/provenance/vasp_nonduplicate_completion_registration_receipt.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/provenance/vasp_nonduplicate_result_review.json",
+      "sha256": "5ca40b88c9d7b031305ad5a752bf6dc30b5e69f7e55e70358317112b7088963a",
+      "authority": "module_validation",
+      "observed_at": "2026-08-25T19:31:10+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/provenance/vasp_done_scheduler_evidence_20260825.txt",
+      "sha256": "38809ea1c4c8a3ae2e9d24d5fa73fda4ae79beacd24f9d83b6cc93fa9a304e75",
+      "authority": "scheduler",
+      "observed_at": "2026-08-25T19:31:10+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/provenance/vasp_nonduplicate_completion_registration_receipt.json",
+      "sha256": "2bbe19d437fa8f44ce489ee8b509078475f248e673204932681e6b3ed7be50df",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-25T19:31:10+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-five-nonduplicate-vasp-started-20260823"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

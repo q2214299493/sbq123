@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-local-oh-gpu-job1421-failed-geometry-20260901",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-01T22:23:08+08:00",
+  "recorded_at": "2026-09-01T14:40:34Z",
+  "summary": "MZ73 GPU job 1421 left the queue with producer exit code 1 at ordinary ML-NEB step 157. The O-H local path collapsed across images 04-06 and exceeded the single-atom-step guard; no complete dual-model path was produced.",
+  "payload": {
+    "objective": "Review the job 1421 O-H reaction-coordinate collapse and select a separately authorized correction; do not retry automatically.",
+    "phase": "active",
+    "current_evidence": [
+      "Job 1421 is absent from the live Slurm queue and its producer exit record reports exit code 1 at 2026-09-01T14:23:08Z; completed-job accounting is unavailable, so this is producer-process rather than scheduler-accounting evidence.",
+      "The ordinary MatRIS ML-NEB reached step 157 but did not converge; its latest reported optimizer force was 0.410777 eV/A after an earlier spike to 3.781726 eV/A.",
+      "The O47-H49 sequence became 2.6900, 3.2128, 2.9858, 2.4685, 2.5354, 0.9988, 0.9913, and 1.1365 A, showing early backtracking and collapse of images 05-06 into an over-short bonded region.",
+      "The maximum single movable-atom step was 1.233302 A across images 04-to-05, above the request limit of 1.2 A; no internal image remained in the 1.1-1.8 A transition interval.",
+      "C1-C2, C2-O, and C1-H48 preservation, adjacent RMSD, minimum-distance, and periodic-branch numeric checks passed. The failure is localized to reaction-coordinate redistribution rather than global fragmentation or PBC discontinuity.",
+      "AQCat25 fixed-path audit did not run because the primary MatRIS path failed before a complete path manifest was created."
+    ],
+    "one_executable_step": "Present the failure diagnosis and await user direction on a local correction or a VASP-local route; do not resubmit job 1421 or alter the method automatically.",
+    "submission_boundary": "The job-1421 authorization is exhausted. GPU retry, VASP, ML-CI, fine-tuning, Dimer, frequency, and barrier actions require new explicit authority and a current hash-bound execution gate.",
+    "done_when": [
+      "The user selects a concrete correction or downstream VASP route.",
+      "Any new execution package passes fresh geometry review and the applicable hash-bound gate."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/local_oh_gpu_run_20260901/gpu_return_job1421/ordinary_ml_neb.geometry_guard_failure.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/local_oh_gpu_run_20260901/gpu_return_job1421/producer_exit_record.failure.1421.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/local_oh_gpu_run_20260901/gpu_return_job1421/ml_neb_state.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/local_oh_gpu_run_20260901/gpu_return_job1421/ordinary_ml_neb.geometry_guard_failure.json",
+      "sha256": "654dc6ad094d2dd888bdb7f611e35b32d666198b6349458c63bcdcae1f948d40",
+      "authority": "module_validation",
+      "observed_at": "2026-09-01T22:40:34+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/local_oh_gpu_run_20260901/gpu_return_job1421/producer_exit_record.failure.1421.json",
+      "sha256": "2e643b317bdc1fdb05394885160441de4155f4e9c2d891aff8248082f4cf6e6a",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-01T22:40:34+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/local_oh_gpu_run_20260901/gpu_return_job1421/ml_neb_state.json",
+      "sha256": "0afc1c50665dda63f0f7daa1a9a95d61409b3e0491ce4d71f62cf207eb20e948",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-01T22:40:34+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-local-oh-gpu-job1421-running-20260901"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-active-learning-job1325-payload-accepted-labels-prepared-20260827",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-27T00:57:00+08:00",
+  "recorded_at": "2026-08-26T16:57:00Z",
+  "summary": "The job-1325 exit-record wrapper was repaired in a versioned script and passed a no-model MZ73 preflight. The independently validated 18-structure payload was accepted for local sampling, and seven reviewed SIGMA=0.20 eV NSW=0 VASP force-label inputs were prepared but not submitted.",
+  "payload": {
+    "objective": "Obtain compatible VASP force labels for the seven reviewed round-0 MatRIS/AQCat25 fallback samples, then measure MatRIS-VASP and AQCat25-VASP errors separately.",
+    "phase": "active",
+    "current_evidence": [
+      "The original job-1325 script remains hash-preserved. The repaired v2 script SHA-256 is 14bc500bcf7dbb92881193ef12184cc8bae77956b5c1e242075baf8eed8c2c35 and explicitly includes the runtime artifact writer before model execution.",
+      "A no-model MZ73 wrapper preflight wrote a success exit record with preflight_only=true; no GPU prediction rerun was performed.",
+      "The job-1325 prediction payload remains classified separately from the failed wrapper. Remote and local SHA-256 both equal 0bfb9c5a38a2eba30b3e2a90a6322b52a250c9f28b4e273db44b5fffaed7c708.",
+      "The accepted payload contains the exact 18 requested 50-atom structures, exact structure and checkpoint hashes, finite model energies, and complete finite all-atom forces.",
+      "Fallback scoring selected pre_09, pre_04, pre_12, fail_12, pre_06, pre_11, and pre_07. The last-valid/first-failure boundary pair, TS-like point, rising and falling coverage, and maximum external-auditor disagreement are retained.",
+      "Seven VASP force-label directories passed structure/input audit under NSW=0, IBRION=-1, ISMEAR=1, SIGMA=0.20 eV, LORBIT=11, ENCUT=400 eV, PBE, ISPIN=2, and Gamma 5x5x1. No VASP job was submitted.",
+      "This fallback has no real MatRIS committee and makes no calibrated uncertainty, DFT accuracy, TS, or barrier claim."
+    ],
+    "one_executable_step": "After separate explicit authorization, submit exactly the reviewed seven-structure VASP static force-label batch on sunboquan-codex, preserving the batch hash and preventing duplicate submission. Do not submit fine-tuning, path rerun, micro-NEB, or Dimer work.",
+    "submission_boundary": "Local review and submission-preflight preparation are allowed. VASP submission requires separate bounded authorization for batch SHA-256 21cdabec5515ea913320dffbe5f6af2f472690bbea3f49878fbf4753c183e750. GPU rerun, MatRIS fine-tuning, complete-path rerun, micro-NEB, and Dimer remain unauthorized.",
+    "done_when": [
+      "All seven exact-structure VASP force labels have authoritative scheduler terminal evidence, normal VASP completion, electronic convergence, complete all-atom forces, and total plus atom-resolved magnetic moments.",
+      "MatRIS-VASP and AQCat25-VASP energy/force errors are assessed separately without treating two-model disagreement as calibrated uncertainty.",
+      "The active-learning controller decides whether MatRIS requires replay-buffer fine-tuning or the path may proceed to the least-cost VASP TS refinement gate."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/selection_and_vasp_label_package_review.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/job1325_prediction_payload_acceptance_review.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/wrapper_exit_record_preflight_v2.MZ73.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/vasp_force_labels_prepared_job1325_20260827/path_label_batch_request.json`",
+      "`scripts/dual_model_ts_force_prediction_batch_job_v2.sh`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/selection_and_vasp_label_package_review.json",
+      "sha256": "387a6e48a56f09b2b1d9b6e21de9748e6939b8e8cc72355343411bbf6d7aa263",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T00:57:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/job1325_prediction_payload_acceptance_review.json",
+      "sha256": "c51a65c5fa754acfaf0abf77d58e99241e470bc0c658e45b7dee9a538ce5db06",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T00:57:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/wrapper_exit_record_preflight_v2.MZ73.json",
+      "sha256": "5a02442b262611020dcb00033bc7d83b36584ffb3ea23099be764575550d7f4a",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T00:57:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/vasp_force_labels_prepared_job1325_20260827/path_label_batch_request.json",
+      "sha256": "21cdabec5515ea913320dffbe5f6af2f472690bbea3f49878fbf4753c183e750",
+      "authority": "repository_document",
+      "observed_at": "2026-08-27T00:57:00+08:00"
+    },
+    {
+      "locator": "scripts/dual_model_ts_force_prediction_batch_job_v2.sh",
+      "sha256": "14bc500bcf7dbb92881193ef12184cc8bae77956b5c1e242075baf8eed8c2c35",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T00:57:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-active-learning-job1325-wrapper-failed-output-valid-20260827"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

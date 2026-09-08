@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-split-gpu-jobs1357-1358-running-20260901",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-01T18:33:34.3087141+08:00",
+  "recorded_at": "2026-09-01T10:33:34.3094094Z",
+  "summary": "The two user-accepted split paths passed hash-bound local and MZ73 no-model preflight and are RUNNING as GPU jobs 1357 and 1358 with frozen MatRIS ordinary ML-NEB plus AQCat25 exact-path audit.",
+  "payload": {
+    "objective": "Run the two user-accepted split paths first on MZ73 with frozen MatRIS ordinary ML-NEB and AQCat25 exact-path audit; return both predicted paths to work for review before any VASP handoff.",
+    "phase": "active",
+    "current_evidence": [
+      "User instruction `先用gpu` authorized one hash-bound MZ73 GPU submission for each accepted segment only.",
+      "Remote no-model preflight passed for both requests and found three GPUs with at least 12000 MiB free.",
+      "Segment 1 job 1357 is RUNNING on physical GPU 0 with 9 images and no O-H forming-bond gate.",
+      "Segment 2 job 1358 is RUNNING on physical GPU 1 with 11 images and the O47-H49 forming coordinate as graded evidence rather than a standalone image-count hard gate.",
+      "Both jobs use frozen MatRIS as ordinary ML-NEB primary and AQCat25 only for exact-path audit; ML-CI, fine-tuning, automatic retry, VASP, and Dimer are disabled.",
+      "No optimized GPU path, VASP evidence, TS, frequency, connectivity, or barrier result exists yet."
+    ],
+    "one_executable_step": "Monitor jobs 1357 and 1358; after producer completion, collect both complete path payloads and run canonical work path review before considering any VASP handoff.",
+    "submission_boundary": "The current authorization is exhausted by jobs 1357 and 1358. VASP, ML-CI, Dimer, frequency, barrier, restart, and resubmission actions remain forbidden without new explicit authority and a current hash-bound execution gate.",
+    "done_when": [
+      "Both GPU jobs reach a terminal scheduler state and their producer payloads are collected.",
+      "Each returned path is independently reviewed for geometry continuity, reaction-coordinate behavior, energy and force trends, and dual-model disagreement."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/preparation_manifest.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/submission_record_job1357.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/submission_record_job1358.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/submission_record_job1357.json",
+      "sha256": "74a688e123e1a08b539969501e259cae99a2792f2c58b770596fd0604788f4a5",
+      "authority": "calculation_registry",
+      "observed_at": "2026-09-01T18:33:34.3087141+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/submission_record_job1358.json",
+      "sha256": "2a483f9ec601bf3dcfb80d4e5c5b94aba9239f0eff7dc2025f465c3f1f75cbcc",
+      "authority": "calculation_registry",
+      "observed_at": "2026-09-01T18:33:34.3087141+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-split-paths-user-accepted-20260901"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-ch-h-to-ch2-dimer-9709074-submitted-20260814",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-ch-h-to-ch2-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-14T12:18:08+08:00",
+  "recorded_at": "2026-08-14T04:18:08Z",
+  "summary": "The reviewed local-periodic image-03 DIMER bundle passed the hard gate and job 9709074 is RUN.",
+  "payload": {
+    "objective": "Run the gated Fe(110) CH* + H* -> CH2* + * transition-state workflow from the accepted A initial state to the compatible optimized CH2* final state.",
+    "phase": "active",
+    "current_evidence": [
+      "The user selected direct DIMER refinement from ordinary-NEB job 9706068 images 02/03/04 after local periodic-coordinate normalization; the unsubmitted eight-image short-NEB candidate is preserved but is not the active execution branch.",
+      "Source images 02/03/04 map to local 00/01/02 and retain C45-H47 distances 1.924/1.514/1.210 A with no periodic branch shift, collision, adsorption-site switch, or fixed-layer motion.",
+      "The MODECAR is normalized Cartesian R04-R02 after fixed atoms 0-17 are zeroed and the movable-atom mean translation is removed; C45/H47 carry 0.939683 of the mode norm and H47 is the dominant atom with amplitude 0.886601.",
+      "The exact 32-core bundle passed DIMER preflight and the authoritative execution gate returned READY_FOR_DIMER with START_DIMER as the only allowed action.",
+      "LSF job 9709074 is scheduler RUN on 32 ranks at gknew052; scheduler status does not establish electronic, DIMER, force, curvature, frequency, or scientific convergence.",
+      "The submission is registered as fe110_ts_ch_h_to_ch2_dimer_9709074."
+    ],
+    "one_executable_step": "Monitor DIMER job 9709074; at terminal state collect and hash-bind its outputs, then run canonical DIMER convergence, force, curvature, mode, and geometry analysis before any frequency handoff or TS claim.",
+    "submission_boundary": "Do not stop, restart, resubmit, launch frequency/connectivity calculations, enable CI-NEB, or claim a TS/barrier without new live evidence and the exact current hash-bound gate action plus any required user authority.",
+    "done_when": [
+      "The DIMER search is technically converged with a valid final structure, negative curvature, accepted final mode review, and geometry sanity.",
+      "The DIMER candidate is validated by the required target-mode frequency workflow before a TS claim.",
+      "IS, TS, and FS results remain compatible and hash-bound; no free-energy or kinetics claim is made without separate thermochemical work."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/contract/reaction.yaml`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/diagnostics/dimer_parent_triad_job9706068_images02_04_localpbc_20260814/path_review.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/mode_review.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/submission_preflight.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/AUTHORITATIVE_NEB_EXECUTION_GATE.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/submission_record.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/scheduler_evidence.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/submission_preflight.json",
+      "sha256": "8a42242077b99abfb7925d68c9cf689ca214fdabfe540d67e0741c2ff126a0fb",
+      "authority": "module_validation",
+      "observed_at": "2026-08-14T12:18:08+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/AUTHORITATIVE_NEB_EXECUTION_GATE.json",
+      "sha256": "e4de139719617155451204f41b148c573326d0d8a1498fec6539d26fdf443e13",
+      "authority": "module_validation",
+      "observed_at": "2026-08-14T12:18:08+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/submission_record.json",
+      "sha256": "4d3f58f2c95b7f425ac39b506b5f8743ffd67b22d3f80d5d51c274cddaf21b06",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-14T12:18:08+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/scheduler_evidence.json",
+      "sha256": "85792f36c5e38cb5b9d33bc4231f772da77ff57ba2f1884c9a2e785bb6b282a0",
+      "authority": "scheduler",
+      "observed_at": "2026-08-14T12:15:53+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/mode_review.json",
+      "sha256": "074e17f46cfaa32d1779e93f66ef6463f9028697da4f1724c617e8f7635b38e0",
+      "authority": "module_validation",
+      "observed_at": "2026-08-14T12:09:57+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-ch-h-to-ch2-dense-rebuild-8img-v7-awaiting-review-20260814"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

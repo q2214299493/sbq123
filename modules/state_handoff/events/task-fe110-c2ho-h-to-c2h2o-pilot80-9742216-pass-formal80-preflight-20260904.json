@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-pilot80-9742216-pass-formal80-preflight-20260904",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-04T10:59:03+08:00",
+  "recorded_at": "2026-09-04T02:59:03Z",
+  "summary": "The 80-core same-path NSW=1 micro-NEB pilot job 9742216 is DONE and passes the canonical pilot validator for all five internal images. A same-path 80-core formal ordinary micro-NEB bundle was prepared and passed formal preflight; it remains unsubmitted pending a new execution authorization and gate.",
+  "payload": {
+    "objective": "Obtain explicit user authorization before submitting the pilot-validated 80-core formal local VASP ordinary micro-NEB.",
+    "phase": "active",
+    "current_evidence": [
+      "LSF job 9742216 is DONE on sunboquan-codex using 80 MPI ranks across three hosts.",
+      "All five internal images completed normally, electronically converged within NELM=200, produced complete POSCAR/CONTCAR/OUTCAR/OSZICAR files, and contain exactly one ionic step.",
+      "The canonical pilot validator passes all five images and magnetic continuity has no warning.",
+      "The pilot energies and large one-step forces are diagnostic only; NSW=1 does not establish ionic convergence, a TS, or a barrier.",
+      "The exact-same-path 80-core formal bundle uses NSW=300, LCLIMB=false, SIGMA=0.20 eV, ENCUT=400 eV, five internal images, and 80 MPI ranks.",
+      "The formal ordinary-NEB preflight passes with bundle sha256 4485d88f4de07d52c9a4e0537f0959d7ebc473735226bbadc5b8a0be6a8b32c0.",
+      "No 80-core formal ordinary micro-NEB has been submitted."
+    ],
+    "one_executable_step": "After a new explicit user instruction to submit, create a bundle-bound authorization and current execution-gate decision for the prepared 80-core formal ordinary micro-NEB, then submit exactly once only if SUBMIT_VASP is explicitly allowed.",
+    "submission_boundary": "Pilot job 9742216 authorization is consumed. Do not submit the 80-core formal ordinary NEB, retry the pilot, start CI-NEB/Dimer, accept a TS, or report a barrier without new user authority and a current hash-bound gate.",
+    "done_when": [
+      "The user explicitly authorizes or declines the prepared 80-core formal ordinary micro-NEB submission.",
+      "A current formal execution gate binds the accepted pilot result and preflight bundle.",
+      "Any authorized formal submission occurs exactly once and is recorded with live scheduler evidence."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_formal80_20260904/neb_pilot_result.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_formal80_20260904/submission_preflight.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_pilot80_20260904/scheduler_evidence.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_pilot80_20260904/submission_record.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_pilot80_20260904/scheduler_evidence.json",
+      "sha256": "8ac5117e5817ff5086f2d8d03d6d06bc26ae60437059d7fffbce8c5b9040c275",
+      "authority": "scheduler",
+      "observed_at": "2026-09-04T10:59:03+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_formal80_20260904/neb_pilot_result.json",
+      "sha256": "936da8280571f2282da030d462547914f0fc9c6b074914bb85fd58ecaa81f29c",
+      "authority": "module_validation",
+      "observed_at": "2026-09-04T10:59:03+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_formal80_20260904/submission_preflight.json",
+      "sha256": "e4de224d1a288f9aec78dd0a9cea0334e5c63f9f1452fa92558b0794376abd42",
+      "authority": "module_validation",
+      "observed_at": "2026-09-04T10:59:03+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_pilot80_20260904/submission_record.json",
+      "sha256": "969c76f033402103513010a49e24f1b50c6f867c9c003e38c5c23e8bd623f72c",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-04T10:59:03+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-formal-9741172-stopped-pilot80-9742216-submitted-20260904"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

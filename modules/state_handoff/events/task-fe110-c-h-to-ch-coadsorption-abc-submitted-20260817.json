@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-coadsorption-abc-submitted-20260817",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-coadsorption",
+    "module": "adsorption_workflow"
+  },
+  "occurred_at": "2026-08-17T23:54:00+08:00",
+  "recorded_at": "2026-08-17T15:54:00Z",
+  "summary": "The user-authorized Fe(110) C*+H* coadsorption candidates A, B, and C passed input and remote-hash preflight and were submitted as LSF jobs 9715450, 9715451, and 9715455; all were scheduler RUN at the submission checkpoint.",
+  "payload": {
+    "objective": "Relax and compare three Fe(110) C*+H* coadsorption candidates for selecting the C* + H* -> CH* + * initial state.",
+    "phase": "active",
+    "current_evidence": [
+      "Candidate A is LSF job 9715450 and was scheduler RUN on 32*gknew054 at the submission checkpoint.",
+      "Candidate B is LSF job 9715451 and was scheduler RUN on 32*gknew022 at the submission checkpoint.",
+      "Candidate C is LSF job 9715455 and was scheduler RUN on 32*gknew043 at the submission checkpoint.",
+      "All three packages use the active true Fe(110) five-layer routine-production branch: PBE/PAW-PBE, ENCUT 400 eV, Gamma 5x5x1, ISMEAR 1, SIGMA 0.20 eV, EDIFFG -0.02 eV/A, 32 cores, Fe45/C1/H1, and bottom 18 Fe fixed.",
+      "Local and remote input SHA-256 values match, and every remote POTCAR resolves to the accepted Fe_C_H PAW-PBE hash.",
+      "Scheduler RUN does not establish electronic convergence, ionic convergence, geometry validity, energy ordering, or scientific acceptance."
+    ],
+    "one_executable_step": "At the next requested checkpoint, inspect jobs 9715450, 9715451, and 9715455; after terminal states, collect final files and separately validate electronic convergence, ionic force convergence, retained C*+H* chemistry, final sites, duplicate structures, and compatible TOTEN values.",
+    "submission_boundary": "Do not stop, restart, resubmit, launch final statics, or begin NEB/DIMER/frequency work without new evidence and explicit user authority.",
+    "done_when": [
+      "All three jobs reach scheduler terminal states and their outputs are collected with hashes.",
+      "Each final structure receives convergence, geometry, chemistry, site, duplicate, and compatibility review.",
+      "A reviewed C*+H* initial state is selected for the later transition-state workflow."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_coadsorption_20260817/provenance/submission_summary.json`",
+      "`calculations/fe110_c_h_coadsorption_20260817/provenance/submission_registration_receipt.json`",
+      "`calculations/fe110_c_h_coadsorption_20260817/provenance/scheduler_evidence.json`",
+      "`calculations/fe110_c_h_coadsorption_20260817/runs/A_adjacent_hollow_reactive/work_to_vasp_handoff.json`",
+      "`calculations/fe110_c_h_coadsorption_20260817/runs/B_second_neighbor_hollow/work_to_vasp_handoff.json`",
+      "`calculations/fe110_c_h_coadsorption_20260817/runs/C_far_hollow_reference/work_to_vasp_handoff.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_coadsorption_20260817/provenance/submission_summary.json",
+      "sha256": "c20b614e326358e779fc7728365c845b550f747e32be3883cd829a4d8730d74a",
+      "authority": "module_validation",
+      "observed_at": "2026-08-17T23:54:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_coadsorption_20260817/provenance/submission_registration_receipt.json",
+      "sha256": "6afa881f5a6ba5242f9670fd4947e0286645e1d3bc0413af4466a115f3bff5a3",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-17T23:54:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_coadsorption_20260817/provenance/scheduler_evidence.json",
+      "sha256": "e4efbf11a9bdd03a88000a33c1fbb832acc1c9c0a8459924d181905487576920",
+      "authority": "scheduler",
+      "observed_at": "2026-08-17T23:54:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_coadsorption_20260817/runs/A_adjacent_hollow_reactive/work_to_vasp_handoff.json",
+      "sha256": "123b8b02ba75ab065604345eaea8b3cc8cfc3747329bc06b8a1f88e4bdeb5aa6",
+      "authority": "module_validation",
+      "observed_at": "2026-08-17T23:54:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_coadsorption_20260817/runs/B_second_neighbor_hollow/work_to_vasp_handoff.json",
+      "sha256": "c201b6d3858a61bb48026e89ff0bc82167e3aee2189ccb5137d8d2ab10e0d608",
+      "authority": "module_validation",
+      "observed_at": "2026-08-17T23:54:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_coadsorption_20260817/runs/C_far_hollow_reference/work_to_vasp_handoff.json",
+      "sha256": "d2ea0be6181da0c260774decc8bf67e11ca118fc729159d03126316c3b5de2df",
+      "authority": "module_validation",
+      "observed_at": "2026-08-17T23:54:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-coadsorption-candidates-awaiting-review-20260817"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

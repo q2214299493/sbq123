@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v8-warning-release-prepared-20260828",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-28T12:10:30.1392128+08:00",
+  "recorded_at": "2026-08-28T04:10:30.1431854Z",
+  "summary": "The accepted v8 release policy downgrades a missed temporary-stage fmax target to a warning when finite-force and geometry guards pass, records physical/restraint/projected NEB forces, and leaves final unrestrained gates unchanged; no job was submitted.",
+  "payload": {
+    "objective": "Await separate explicit authorization before any MZ73 preflight or execution of the reviewed v8 warning-release package.",
+    "phase": "open",
+    "current_evidence": [
+      "The legacy strict release-stage mode remains available, while v8 explicitly selects nonconverged_stage_action=warning_continue.",
+      "Every release stage records recent fmax history and separates MatRIS physical, temporary-restraint, and projected NEB force maxima.",
+      "A missed temporary-stage fmax target cannot by itself stop v8 when forces are finite and all per-step geometry guards pass.",
+      "All temporary restraints must still be removed before ordinary ML-NEB; the final unrestrained geometry and 0.10 eV/A ordinary ML-NEB target remain unchanged.",
+      "The 19 structures are hash-identical to v7, and no remote preflight, upload, GPU execution, VASP/VTST, Dimer, TS, or barrier action occurred."
+    ],
+    "one_executable_step": "Only after explicit authorization, run a hash-bound MZ73 preflight for request SHA-256 52e2e9fffb100452a675fa0f1c42af0aee06c2785269a06b978bf45e701c9fed; do not submit a GPU job in the same step unless separately authorized.",
+    "submission_boundary": "Preparing and testing v8 does not authorize remote preflight, upload, GPU resubmission, fine-tuning, VASP/VTST, Dimer, or TS/barrier claims.",
+    "done_when": [
+      "The user explicitly decides whether to authorize the v8 MZ73 preflight or execution.",
+      "Any later execution remains bound to the reviewed request and executor hashes."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/gate_revision_review.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/work_to_gpu/request.json`",
+      "`scripts/dual_model_ml_neb.py`",
+      "`tests/test_dual_model_ml_neb.py`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/gate_revision_review.work.json",
+      "sha256": "b7a827be8573948fc8a5d9bee37826c6cdeb01f1728ace5123f4adec6a30ff90",
+      "authority": "module_validation",
+      "observed_at": "2026-08-28T12:10:30.1392128+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/work_to_gpu/request.json",
+      "sha256": "52e2e9fffb100452a675fa0f1c42af0aee06c2785269a06b978bf45e701c9fed",
+      "authority": "repository_document",
+      "observed_at": "2026-08-28T12:10:30.1392128+08:00"
+    },
+    {
+      "locator": "scripts/dual_model_ml_neb.py",
+      "sha256": "cee89267a47c2a9bfd9dc706a5ad1fdb0b74cff8e43f86c639b3c155d5e2ea7f",
+      "authority": "repository_document",
+      "observed_at": "2026-08-28T12:10:30.1392128+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v7-job1335-failed-20260828"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

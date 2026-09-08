@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-active-learning-round0-vasp-assessed-20260827",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-27T11:13:00+08:00",
+  "recorded_at": "2026-08-27T03:13:00Z",
+  "summary": "All seven hash-bound SIGMA=0.20 eV VASP static labels completed and passed force, magnetic, electronic, structure, and remote-output checks; MatRIS passed the round-0 screening ceilings while AQCat25 failed only the relative-energy RMSE ceiling.",
+  "payload": {
+    "objective": "Prepare disjoint held-out TS validation for the retained MatRIS checkpoint before calling the GPU active-learning accelerator calibrated or rerunning the full path.",
+    "phase": "active",
+    "current_evidence": [
+      "LSF jobs 9730947-9730953 are all DONE and each has stored hash-bound scheduler evidence.",
+      "All seven exact structures passed normal VASP completion, electronic convergence, complete 50-atom force blocks, total and atom-resolved magnetic evidence, SIGMA=0.20 eV input compatibility, and remote-to-local input/output hash checks.",
+      "MatRIS force component MAE is 0.0438266 eV/A, force-vector RMSE is 0.114419 eV/A, force-vector maximum is 0.344844 eV/A, and relative-energy RMSE is 0.0647095 eV; all current screening ceilings pass.",
+      "AQCat25 force component MAE is 0.0456725 eV/A, force-vector RMSE is 0.131663 eV/A, and force-vector maximum is 0.452796 eV/A; these force ceilings pass, but relative-energy RMSE 0.155247 eV exceeds the 0.1 eV ceiling.",
+      "The routing decision is retain_MatRIS_checkpoint_then_run_disjoint_heldout_TS_validation. No real MatRIS committee calibration or calibrated-uncertainty claim exists yet.",
+      "These seven energies remain force-label-only and are not reportable final energies, a TS, or a barrier."
+    ],
+    "one_executable_step": "Prepare a hash-deduplicated rising, near-saddle, falling, and failure-boundary held-out TS validation structure set that is disjoint from the current training and screening labels; prepare only, with no GPU or VASP submission.",
+    "submission_boundary": "No GPU fine-tuning, full-path rerun, held-out VASP label, micro-NEB, Dimer, TS, or barrier submission is authorized by this event.",
+    "done_when": [
+      "The held-out structures are proven disjoint by exact structure hashes and cover the required TS-domain roles.",
+      "A reviewable prediction and compatible VASP validation batch plan exists without submitting calculations.",
+      "The plan states the pass/fail routing rules and preserves the no-calibrated-uncertainty boundary until independent VASP validation passes."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/vasp_force_labels_prepared_job1325_20260827/vasp_force_label_set.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/vasp_error_assessment_job1325.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/active_learning_state.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/vasp_force_labels_prepared_job1325_20260827/vasp_force_label_set.json",
+      "sha256": "b8ffa5ada021575bca81b3f96b7aac23790db7a47d6e9f50c8528a007ad52739",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T11:13:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/vasp_error_assessment_job1325.json",
+      "sha256": "ae567a1a1f9587ffe5052576d3cbc7d69219c37c9a53adf1fb58373391234557",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T11:13:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/active_learning_state.json",
+      "sha256": "5f4936726833a34d0bbb65bcadbc01b6030ca6e9d4083666e9aa4b72029d2f48",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T11:13:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-active-learning-vasp-labels-9730947-9730953-submitted-20260827"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

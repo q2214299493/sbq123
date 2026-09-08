@@ -1,0 +1,573 @@
+diff --git a/docs/14_CODE_ARCHITECTURE_GUIDE.md b/docs/14_CODE_ARCHITECTURE_GUIDE.md
+index 096b2f1..71cafd8 100644
+--- a/docs/14_CODE_ARCHITECTURE_GUIDE.md
++++ b/docs/14_CODE_ARCHITECTURE_GUIDE.md
+@@ -275,7 +275,7 @@ state_deduplication.deduplicate_records()
+ 4. 外部能量被禁止进入本地吸附能，来源边界正确。
+ 5. 失败记录会被保存，不是只保留成功结果。
+ 6. 数据库把任务状态、文件证据、数值和审核分开保存。
+-7. 本次检查的 40 个 AdsMind/Fe(110)/证据门测试全部通过，Ruff 静态检查通过。
++7. 当前完整仓库回归测试和 Ruff 静态检查通过；测试数量和本次修改见第 11 节。
+
+ ## 7. 需要优先修正的问题
+
+@@ -347,12 +347,14 @@ state_deduplication.deduplicate_records()
+ - 结果推广规则和 SQLite schema；
+ - NEB 与后续动力学的模块接口。
+
+-实际验证：
++2026-07-27 全局审计与低风险重构后的实际验证：
+
+ ```text
+-pytest 完整仓库：81 passed
++pytest 完整仓库：202 passed
+ Ruff 修改范围：All checks passed
+-Python wheel：构建成功
+ ```
+
+-这些验证证明当前自动化契约和包构建没有失败，但不能替代真实 VASP 结果的科学审核。剩余设计问题列在 7.8--7.12。
++这些验证证明当前自动化契约没有失败，但不能替代真实 VASP 结果的科学审核。
++本轮没有重新验证 wheel 构建，因此不沿用历史构建结论。当前全局审计、
++后续计划和剩余风险分别见根目录 `PROJECT_AUDIT.md`、`REFACTOR_PLAN.md`
++和 `REFACTOR_REPORT.md`。
+diff --git a/modules/transition_state_search/README.md b/modules/transition_state_search/README.md
+index 472db33..24b17ed 100644
+--- a/modules/transition_state_search/README.md
++++ b/modules/transition_state_search/README.md
+@@ -20,6 +20,17 @@ this module, not separate scientific modules.
+ Unknown mapping, endpoint chemistry, template transferability, magnetic state,
+ or material compatibility is `Needs confirmation`.
+
++## Stable-Product Endpoint Reuse
++
++Do not reject or accept the lowest-energy product solely because it is the
++global minimum. It may be reused as the NEB endpoint only after atom mapping,
++periodic mapping, local stability, intended reaction-event purity, and path
++connectivity pass. Generate a separate TS endpoint when the stable product
++contains an additional independent event, fails one of those checks, or a more
++path-compatible locally stable endpoint exists. The additive implementation is
++`modules/ts_endpoint_generator.py`; the rule authority is
++`AGENT_RULE_TS_ENDPOINT.md`.
++
+ ## Execution Backends
+
+ `configs/execution_backends.yaml` is the machine-readable backend contract.
+@@ -67,7 +78,32 @@ validated by `configs/aqcat25_ts_active_learning.schema.json` through
+ 8. require a disjoint VASP-labeled TS validation set spanning rising-path,
+    near-saddle, and falling-path structures before reporting TS-domain
+    validation. The production TS gate remains `uncalibrated` until those real
+-   labels establish reviewed thresholds.
++   labels produce bootstrap metrics and an explicit, hash-bound calibration
++   review registers thresholds no looser than the configured safety ceilings.
++
++Independent TS-domain validation is trigger-based, not repeated mechanically
++for every acceptable NEB path. Bootstrap at least five held-out structures when
++the TS domain is uncalibrated. Revalidate after a checkpoint or compatibility
++change, an out-of-scope reaction domain, a failed novelty/uncertainty gate, or
++a scheduled audit. An unchanged checkpoint on an in-domain path may reuse the
++existing calibration. Existing VASP force evidence may also be reused when the
++exact structure hash, DFT compatibility, normal completion, electronic
++convergence, complete force block, and scheduler evidence all match; an
++energy-only value is insufficient. Held-out validation hashes are excluded
++from all TS training rounds and adsorption replay data.
++
++These rules are implemented in `active_learning_domain.py`,
++`active_learning_calibration.py`, the shared JSON Schema, and the unified CLI.
++After local force agreement, a matching calibrated
++checkpoint enters `awaiting_ts_domain_reuse_decision`; a Schema-validated reuse
++context must prove the exact checkpoint/compatibility, in-scope reaction domain,
++passed novelty/uncertainty review, and that no periodic audit is due. Otherwise
++the controller requires a new independent validation set. An uncalibrated
++bootstrap assessment never makes acceleration ready by itself.
++
++Implementation and tests do not constitute production calibration evidence.
++The active Fe45 TS domain remains `uncalibrated` until real, disjoint VASP force
++labels pass the bootstrap review and registration sequence above.
+
+ Local candidate force agreement is not active-learning convergence. VASP label
+ energies are `force_label_only`, and ML energies/forces remain predictions.
+@@ -88,6 +124,8 @@ python -m scripts.ts_strategy_engine.cli active-learning assess --ts-workdir TS_
+ python -m scripts.ts_strategy_engine.cli active-learning prepare-finetune --ts-workdir TS_WORKDIR --destination TRAINING_PACKAGE
+ python -m scripts.ts_strategy_engine.cli active-learning prepare-rerun --ts-workdir TS_WORKDIR --destination RERUN_HANDOFF
+ python -m scripts.ts_strategy_engine.cli active-learning assess-domain --ts-workdir TS_WORKDIR --manifest HELD_OUT_TS_VALIDATION.json
++python -m scripts.ts_strategy_engine.cli active-learning register-domain-calibration --ts-workdir TS_WORKDIR --review CALIBRATION_REVIEW.json
++python -m scripts.ts_strategy_engine.cli active-learning decide-domain-reuse --ts-workdir TS_WORKDIR --context REUSE_CONTEXT.json
+ ```
+
+ `init-from-ts` reads `reaction_contract.normalized.json` and writes
+@@ -97,6 +135,70 @@ wrapper only.
+
+ ## Unified Workflow
+
++### Authoritative NEB Execution Gate
++
++`scripts/ts_strategy_engine/execution_gate.py` is the sole authority for every
++NEB action. Parsers, monitors, path-quality checks, strategy composition, and
++workflow orchestration produce evidence only. The executor rejects an action
++unless the current, hash-bound gate decision lists it in `ALLOWED_ACTIONS`.
++Thresholds are part of the state hash. Before execution, the decision is
++recomputed from its bound evidence; editing an action field or reusing a stale
++decision cannot create authority.
++
++The gate evaluates, in order: data/structure integrity, endpoints, electronic
++convergence, reaction-coordinate continuity, elementary-step purity, ordinary
++NEB convergence, CI readiness, DIMER readiness, frequency/connectivity, and
++resource/submission preflight. A lower-priority pass never overrides an earlier
++failure. Its required output is `DECISION`, `REASON_CODES`, `EVIDENCE`,
++`CRITICAL_IMAGES`, `ALLOWED_ACTIONS`, `FORBIDDEN_ACTIONS`,
++`NEXT_REQUIRED_CHECK`, `SUBMISSION_ALLOWED`, `CI_NEB_ALLOWED`,
++`DIMER_ALLOWED`, and `TS_CLAIM_ALLOWED`.
++
++`configs/neb_path_quality_control_v2.yaml` contains only configurable evidence
++thresholds. `path_quality_control.py` collects and classifies evidence but
++cannot authorize continuation, stopping, rebuilding, submission, CI-NEB,
++DIMER, TS acceptance, or a barrier claim.
++
++The gate counts independent evidence families rather than duplicated flags.
++Transient `NELM` exhaustion, early/nonpersistent high force, and one-frame
++energy minima remain warnings. `STOP_JOB` additionally requires
++blocker-specific parser artifacts, current hashes of their raw source files,
++bound thresholds, and raw LSF query evidence. Underresolution also requires
++the path-quality artifact. Inline JSON cannot authorize a real stop. These
++semantics use gate Schema v2; prior gate decisions are not reusable.
++
++The gate never uses CI-NEB to repair an invalid ordinary path, never starts
++DIMER from an underresolved path, and never treats an intermediate image as an
++endpoint until an independent relaxation proves a local minimum. A high-energy
++image is not a TS before frequency and bidirectional-connectivity validation.
++Geometry heuristics such as one-coordinate backtracking, large endpoint
++motion, and surface penetration/desorption enter review rather than data-
++integrity failure. Connectivity tolerance misses use the configurable
++`configs/ts_connectivity_gate.yaml` policy and remain `NEEDS_REVIEW`.
++
++The enforced action surfaces are:
++
++- path rebuild: `generate_path.py`;
++- ordinary NEB, diagnostic VASP, CI-NEB, DIMER submission and job stopping:
++  `submission.py`;
++- local DIMER handoff preparation: `handoff.py` with
++  `PREPARE_DIMER_HANDOFF`; actual submission separately requires
++  `START_DIMER` after DIMER preflight;
++- Grade-A TS approval and final barrier registration: `evidence.py`.
++
++An explicit job-bound user cancellation may authorize `STOP_JOB` for either
++LSF `PEND` or `RUN` through file-bound scheduler and authorization evidence.
++The executor re-queries the same job and rejects a status race; direct `bkill`
++outside the executor remains forbidden.
++
++Production ordinary NEB additionally requires a one-step, same-path pilot.
++`pilot_validation.py` rebuilds its verdict from live LSF `DONE` evidence and
++the hash-bound POSCAR/CONTCAR/OUTCAR/OSZICAR files for every internal image.
++It records the method-protocol `MAGNETIC_CONTINUITY_RULE` as non-blocking
++`SOFT_WARNING` evidence; the warning is not part of the pilot pass condition.
++The submission executor revalidates that evidence and uploads only files in
++the preflight manifest; unrelated reports or directory contents are excluded.
++
+ 1. Endpoint and atom-mapping guard; never repair mapping by interpolation.
+ 2. Build a deterministic reaction fingerprint.
+ 3. Retrieve successful Grade-A templates in this order: exact fingerprint,
+@@ -109,14 +211,17 @@ wrapper only.
+    interpolation is forbidden for bond breaking/forming.
+ 7. Run endpoint/path geometry checks, `dist.pl`, and `nebmovie.pl 0`; obtain
+    human approval before submission.
+-8. Run ordinary no-climb NEB, analyze energy/force/SCF/geometry evidence, then
+-   select continuation, rebuild, CI-NEB, or DIMER refinement.
++8. Run ordinary no-climb NEB and collect energy/force/SCF/geometry/reaction-
++   coordinate evidence. Only the authoritative gate may select continuation,
++   stopping, rebuilding, CI-NEB, or DIMER refinement.
+    A passed result is `path_stage_valid`; it is never a scientifically
+    validated TS before frequency and bidirectional-connectivity gates.
+ 9. DIMER starts only from a reviewed saddle-like image with both adjacent
+    images or another explicitly accepted mode source. Inspect initial and final
+-   modes against their SHA-256-bound review records; saddle convergence alone
+-   is not TS acceptance.
++   modes against their SHA-256-bound review records. Technical convergence also
++   requires a valid source/final structure pair, `ICHAIN=2`, final electronic
++   convergence, and Schema-validated raw LSF `DONE` evidence stored as
++   `scheduler_evidence.json`; saddle convergence alone is not TS acceptance.
+ 10. Run `nebmovie.pl 1` after a completed or stopped path. Send the final
+     candidate to `modules/ts_vibrational_validation/` and grade it only with
+     `docs/10_TS_VALIDATION_PROTOCOL.md`.
+@@ -146,17 +251,25 @@ python -m scripts.ts_strategy_engine.cli record --help
+ only after real visual/chemical review and reviewer/date entry. Generated-path,
+ `dist.pl`, `nebmovie.pl 0`, contract, atom-map, and compatibility hashes are
+ checked before advancement. No missing or altered evidence is inferred.
++Grade A/B frequency output remains `Ungraded` while the meaningful-imaginary
++and soft-mode thresholds in `configs/true_fe110_production.yaml` are null.
+
+-The CLI never submits, stops, restarts, accepts, or promotes calculations.
+-Specialized numerical helpers remain under `scripts/neb_agent/`; they are an
+-internal backend, not a separate workflow authority.
++The unified workflow CLI never submits or stops jobs. The only submission
++executor is `scripts.neb_agent.submission`; it requires a current gate decision,
++recomputes the bundle hash, verifies MPI-rank divisibility and the remote
++POTCAR hash, and rejects unlisted actions. Specialized numerical helpers remain
++under `scripts/neb_agent/`; they are evidence backends, not workflow authority.
+
+ ## Code Architecture
+
+ - `cli.py`: argument parsing and thin command adapters only.
+ - `workflow.py`: endpoint-to-path planning and NEB analysis orchestration.
+-- `contract.py`, `fingerprint.py`, `strategy.py`: deterministic domain rules;
+-  no database or command-line dependencies.
++- `execution_gate.py`: the only NEB action authority and action validator.
++- `execution_decision.py`: pure decision-document construction and derived
++  fields; it has no evidence priority, external I/O, or action authority.
++- `contract.py`, `fingerprint.py`, `strategy.py`: deterministic evidence and
++  strategy composition; `strategy.py` delegates every execution decision to
++  `execution_gate.py`.
+ - `path_evidence.py`: path/report/review file binding and SHA-256 checks.
+ - `registry.py`: the only SQLite connection, schema, timestamp, and
+   compatibility-hash utility layer.
+@@ -164,6 +277,8 @@ internal backend, not a separate workflow authority.
+ - `templates.py`: template validation, retrieval, and storage only.
+ - `handoff.py`, `dimer_analysis.py`: DIMER/VFA handoff evidence and DIMER
+   convergence analysis.
++- `active_learning_domain.py`, `active_learning_calibration.py`: independent
++  TS-domain metrics versus reviewed calibration/reuse decisions.
+
+ Dependency direction is CLI -> workflow/domain/storage -> registry/backend.
+ Storage and numerical backends never import the CLI or workflow layer.
+diff --git a/scripts/README.md b/scripts/README.md
+index 96df2ae..2bb17d7 100644
+--- a/scripts/README.md
++++ b/scripts/README.md
+@@ -7,7 +7,12 @@ Current executable code lives only under `scripts/` or a repository-backed skill
+   matched-static barriers, and learning records. Its CLI, orchestration,
+   domain rules, path evidence, registry evidence, and template storage are
+   separate layers; see the owning module README.
+-- `neb_agent/`: internal endpoint/path generation, geometry, analysis, restart, split, and crop backend.
++- `ts_strategy_engine/execution_decision.py`: pure Schema-v2 decision-document
++  construction. It has no I/O and cannot authorize an action; the sole
++  authority remains `execution_gate.py`.
++- `neb_agent/`: internal endpoint/path generation, geometry, analysis, and
++  hash-bound submission backend. These tools cannot decide an action;
++  `submission.py` enforces the authoritative gate decision.
+ - `convergence/`: reusable convergence-campaign setup and summary tools.
+ - `adsorption/`: reusable clean-slab site generation and anchor-based adsorbate placement.
+ - `adsmind_lite/`: compact CLIs plus focused site detection, candidate generation,
+diff --git a/scripts/artifact_io.py b/scripts/artifact_io.py
+index 621e48c..1f71f16 100644
+--- a/scripts/artifact_io.py
++++ b/scripts/artifact_io.py
+@@ -2,6 +2,8 @@ from __future__ import annotations
+
+ import hashlib
+ import json
++import os
++import tempfile
+ from pathlib import Path
+ from typing import Any
+
+@@ -33,6 +35,25 @@ def sha256_json(payload: Any) -> str:
+     return sha256_bytes(canonical_json(payload))
+
+
++def source_file_manifest(paths: list[Path]) -> list[dict[str, str]]:
++    """Bind a generated artifact to the current, existing source files."""
++    unique = sorted({path.resolve() for path in paths if path.is_file()}, key=str)
++    return [{"path": str(path), "sha256": sha256_file(path)} for path in unique]
++
++
++def source_file_manifest_valid(payload: dict[str, Any]) -> bool:
++    sources = payload.get("source_files")
++    if not isinstance(sources, list) or not sources:
++        return False
++    for source in sources:
++        if not isinstance(source, dict):
++            return False
++        path = Path(str(source.get("path", "")))
++        if not path.is_file() or source.get("sha256") != sha256_file(path):
++            return False
++    return True
++
++
+ def load_json_object(path: Path) -> dict[str, Any]:
+     payload = json.loads(path.read_text(encoding="utf-8-sig"))
+     if not isinstance(payload, dict):
+@@ -48,10 +69,20 @@ def write_json(path: Path, payload: Any, *, ensure_ascii: bool = False) -> Path:
+
+ def write_json_atomic(path: Path, payload: Any, *, ensure_ascii: bool = False) -> Path:
+     path.parent.mkdir(parents=True, exist_ok=True)
+-    temporary = path.with_suffix(path.suffix + ".tmp")
+-    temporary.write_text(
+-        json.dumps(payload, indent=2, ensure_ascii=ensure_ascii) + "\n",
+-        encoding="utf-8",
++    descriptor, temporary_name = tempfile.mkstemp(
++        dir=path.parent,
++        prefix=f".{path.name}.",
++        suffix=".tmp",
+     )
+-    temporary.replace(path)
++    temporary = Path(temporary_name)
++    try:
++        with os.fdopen(descriptor, "w", encoding="utf-8", newline="\n") as handle:
++            json.dump(payload, handle, indent=2, ensure_ascii=ensure_ascii)
++            handle.write("\n")
++            handle.flush()
++            os.fsync(handle.fileno())
++        os.replace(temporary, path)
++    except BaseException:
++        temporary.unlink(missing_ok=True)
++        raise
+     return path
+diff --git a/scripts/convergence/common.py b/scripts/convergence/common.py
+index 359ee92..376f266 100644
+--- a/scripts/convergence/common.py
++++ b/scripts/convergence/common.py
+@@ -5,6 +5,8 @@ from pathlib import Path
+
+
+ TOTEN_PATTERN = re.compile(r"free\s+energy\s+TOTEN\s+=\s+([-0-9.]+)")
++# Existing submission timeout, shared with the legacy convergence submitter.
++EXTERNAL_COMMAND_TIMEOUT_SECONDS = 300
+
+
+ def last_matching_float(path: Path, pattern: re.Pattern[str]) -> float | None:
+diff --git a/scripts/convergence/setup_alpha_fe_bulk_smearing.py b/scripts/convergence/setup_alpha_fe_bulk_smearing.py
+index e253b95..f1a542d 100644
+--- a/scripts/convergence/setup_alpha_fe_bulk_smearing.py
++++ b/scripts/convergence/setup_alpha_fe_bulk_smearing.py
+@@ -3,17 +3,25 @@ from __future__ import annotations
+
+ import argparse
+ import csv
++import json
++import os
+ import re
+ import shutil
+ import subprocess
++import tempfile
+ from pathlib import Path
+
+-from common import last_matching_float
++from common import (
++    EXTERNAL_COMMAND_TIMEOUT_SECONDS,
++    last_matching_float,
++)
+
+
+ WORKDIR = Path("~/sbq/agent/jobs/convergence/alpha_fe_bulk_smearing_20260623").expanduser()
+ SOURCE = Path("~/sbq/agent/jobs/convergence/fe_bulk_fe110_slab_20260618/alpha_fe_bulk/reference").expanduser()
+ LSF = Path("~/vasp541std.lsf").expanduser()
++SUBMISSION_ATTEMPT_FILE = "submission_attempt.json"
++SUBMISSION_RECORD_FILE = "submitted.jobid"
+ CASES = [
+     ("ISMEAR_m5_TETRA", -5, 0.05),
+     ("ISMEAR_0_SIGMA_0p05", 0, 0.05),
+@@ -112,21 +120,87 @@ def check() -> None:
+
+
+ def submit() -> None:
++    missing = [
++        str(WORKDIR / label / "run.lsf")
++        for label, _, _ in CASES
++        if not (WORKDIR / label / "run.lsf").is_file()
++    ]
++    if missing:
++        raise FileNotFoundError(
++            "Submission refused because required run.lsf files are missing: "
++            + ", ".join(missing)
++        )
++
+     for label, _, _ in CASES:
+         job_dir = WORKDIR / label
+-        marker = job_dir / "submitted.jobid"
++        marker = job_dir / SUBMISSION_RECORD_FILE
++        attempt = job_dir / SUBMISSION_ATTEMPT_FILE
+         if marker.exists():
+             print(f"{label}: already submitted as {marker.read_text().splitlines()[0]}")
+             continue
+-        proc = subprocess.run(["bsub", "run.lsf"], cwd=job_dir, text=True, capture_output=True, check=False)
++        if attempt.exists():
++            raise RuntimeError(
++                "submission retry refused because a previous bsub outcome is "
++                f"unresolved; inspect {attempt} and follow SUBMISSION_RECOVERY.md"
++            )
++        _write_json_atomic(
++            attempt,
++            {
++                "status": "SUBMISSION_OUTCOME_UNRESOLVED",
++                "case": label,
++                "command": ["bsub", "run.lsf"],
++                "working_directory": str(job_dir),
++            },
++        )
++        try:
++            proc = subprocess.run(
++                ["bsub", "run.lsf"],
++                cwd=job_dir,
++                text=True,
++                capture_output=True,
++                check=False,
++                timeout=EXTERNAL_COMMAND_TIMEOUT_SECONDS,
++            )
++        except subprocess.TimeoutExpired as exc:
++            raise RuntimeError(
++                "Submission outcome is unresolved because bsub timed out after "
++                f"{EXTERNAL_COMMAND_TIMEOUT_SECONDS} seconds for {label}; "
++                f"inspect {attempt} and follow SUBMISSION_RECOVERY.md"
++            ) from exc
+         output = (proc.stdout + proc.stderr).strip()
+         match = re.search(r"Job <(\d+)>", output)
+         if proc.returncode != 0 or not match:
+-            raise RuntimeError(f"Submission failed for {label}: {output}")
+-        marker.write_text(match.group(1) + "\n" + output + "\n", encoding="ascii")
++            raise RuntimeError(
++                f"Submission outcome is unresolved for {label}: {output}; "
++                f"inspect {attempt} and follow SUBMISSION_RECOVERY.md"
++            )
++        _write_text_atomic(marker, match.group(1) + "\n" + output + "\n")
++        attempt.unlink()
+         print(f"{label}: {match.group(1)}")
+
+
++def _write_text_atomic(path: Path, content: str) -> None:
++    descriptor, temporary_name = tempfile.mkstemp(
++        dir=path.parent,
++        prefix=f".{path.name}.",
++        suffix=".tmp",
++    )
++    temporary = Path(temporary_name)
++    try:
++        with os.fdopen(descriptor, "w", encoding="ascii", newline="\n") as handle:
++            handle.write(content)
++            handle.flush()
++            os.fsync(handle.fileno())
++        os.replace(temporary, path)
++    except BaseException:
++        temporary.unlink(missing_ok=True)
++        raise
++
++
++def _write_json_atomic(path: Path, payload: dict[str, object]) -> None:
++    _write_text_atomic(path, json.dumps(payload, indent=2, ensure_ascii=True) + "\n")
++
++
+ def summary() -> None:
+     rows: list[dict[str, object]] = []
+     tetra_energy = None
+diff --git a/scripts/neb_agent/remote_monitor.py b/scripts/neb_agent/remote_monitor.py
+index 5fb97be..86e7b69 100644
+--- a/scripts/neb_agent/remote_monitor.py
++++ b/scripts/neb_agent/remote_monitor.py
+@@ -4,12 +4,14 @@ import argparse
+ import re
+ import shlex
+ import subprocess
++import sys
+ from pathlib import Path
+ from typing import Sequence
+
+
+ DEFAULT_SCRIPT = Path(__file__).with_name("check_neb_job.sh")
+ HOST_PATTERN = re.compile(r"[A-Za-z0-9_.@-]+")
++SSH_TIMEOUT_SECONDS = 60
+
+
+ def normalized_script_payload(script: Path = DEFAULT_SCRIPT) -> bytes:
+@@ -45,11 +47,17 @@ def run_remote_monitor(
+     """Run the read-only NEB monitor over SSH and return its real exit code."""
+     if HOST_PATTERN.fullmatch(host) is None:
+         raise ValueError("host contains unsupported characters")
+-    completed = subprocess.run(
+-        ["ssh", host, remote_command(job_dir, detail_lines)],
+-        input=normalized_script_payload(script),
+-        check=False,
+-    )
++    try:
++        completed = subprocess.run(
++            ["ssh", host, remote_command(job_dir, detail_lines)],
++            input=normalized_script_payload(script),
++            check=False,
++            timeout=SSH_TIMEOUT_SECONDS,
++        )
++    except subprocess.TimeoutExpired as exc:
++        raise RuntimeError(
++            f"NEB monitor SSH command timed out after {SSH_TIMEOUT_SECONDS} seconds"
++        ) from exc
+     return completed.returncode
+
+
+@@ -69,6 +77,9 @@ def main(argv: Sequence[str] | None = None) -> int:
+         return run_remote_monitor(args.host, args.job_dir, detail_lines=args.detail)
+     except ValueError as exc:
+         build_parser().error(str(exc))
++    except RuntimeError as exc:
++        print(f"error: {exc}", file=sys.stderr)
++        return 1
+     return 2
+
+
+diff --git a/tests/test_neb_remote_monitor.py b/tests/test_neb_remote_monitor.py
+index c380396..5a61028 100644
+--- a/tests/test_neb_remote_monitor.py
++++ b/tests/test_neb_remote_monitor.py
+@@ -42,7 +42,40 @@ def test_run_remote_monitor_passes_lf_bytes_to_ssh(
+
+     assert run_remote_monitor("sunboquan-codex", "/remote/job", script=script) == 0
+     assert captured["args"] == (["ssh", "sunboquan-codex", "bash -s -- /remote/job"],)
+-    assert captured["kwargs"] == {"input": b"#!/bin/bash\necho ok\n", "check": False}
++    assert captured["kwargs"] == {
++        "input": b"#!/bin/bash\necho ok\n",
++        "check": False,
++        "timeout": 60,
++    }
++
++
++def test_run_remote_monitor_reports_timeout(
++    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
++) -> None:
++    script = tmp_path / "monitor.sh"
++    script.write_bytes(b"#!/bin/bash\n")
++
++    def fake_run(*args: object, **kwargs: object) -> subprocess.CompletedProcess[bytes]:
++        raise subprocess.TimeoutExpired(cmd="ssh", timeout=60)
++
++    monkeypatch.setattr(subprocess, "run", fake_run)
++    with pytest.raises(RuntimeError, match="timed out after 60 seconds"):
++        run_remote_monitor("sunboquan-codex", "/remote/job", script=script)
++
++
++def test_run_remote_monitor_connection_failure_is_not_success(
++    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
++) -> None:
++    script = tmp_path / "monitor.sh"
++    script.write_bytes(b"#!/bin/bash\n")
++
++    def fake_run(*args: object, **kwargs: object) -> subprocess.CompletedProcess[bytes]:
++        return subprocess.CompletedProcess(args=[], returncode=255)
++
++    monkeypatch.setattr(subprocess, "run", fake_run)
++    assert run_remote_monitor(
++        "sunboquan-codex", "/remote/job", script=script
++    ) == 255
+
+
+ def test_run_remote_monitor_rejects_unsafe_host() -> None:
+diff --git a/tests/test_repository_contracts.py b/tests/test_repository_contracts.py
+index 4cfb10d..ec1f743 100644
+--- a/tests/test_repository_contracts.py
++++ b/tests/test_repository_contracts.py
+@@ -167,6 +167,7 @@ def test_root_contains_no_executable_or_download_clutter() -> None:
+         ".pytest_cache",
+         ".ruff_cache",
+         "archive",
++        "artifacts",
+         "calculations",
+         "configs",
+         "data",
+@@ -182,6 +183,13 @@ def test_root_contains_no_executable_or_download_clutter() -> None:
+     }
+     unexpected = sorted(path.name for path in ROOT.iterdir() if path.is_dir() and path.name not in allowed_directories)
+     assert unexpected == []
++    review_artifacts = ROOT / "artifacts" / "refactor_changeset"
++    assert sorted(path.name for path in (ROOT / "artifacts").iterdir()) == ["refactor_changeset"]
++    assert sorted(path.name for path in review_artifacts.iterdir()) == [
++        "changeset_sha256.txt",
++        "tracked_changes.patch",
++        "untracked_source_manifest.txt",
++    ]
+
+
+ def test_retired_literature_interface_does_not_return() -> None:

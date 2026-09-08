@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v5-job1327-failed-20260827",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-27T21:43:32.1016123+08:00",
+  "recorded_at": "2026-08-27T13:43:32.1016123Z",
+  "summary": "MZ73 job 1327 exited with producer code 1 during restrained preconditioning step 9 because the required O-H 1.1-1.8 A coverage fell from five to two internal images; the run produced no complete ML-NEB path and was not retried.",
+  "payload": {
+    "objective": "Review a revised preconditioning or resampling design that preserves at least three O-H interval images before any separately authorized rerun.",
+    "phase": "active",
+    "current_evidence": [
+      "Job 1327 is absent from squeue; MZ73 accounting cannot provide an authoritative terminal scheduler state, while the producer record reports failure with exit code 1 at 2026-08-27T13:40:33Z.",
+      "The failure occurred at restrained preconditioning step 9 before ordinary MatRIS ML-NEB and before the AQCat25 fixed-path audit.",
+      "Only images 10 and 11 remained within the required O-H 1.1-1.8 A interval; at least three were required.",
+      "O-H monotonicity, C1-C2 preservation, adjacent RMSD, maximum movable-atom step, minimum pair distance, and periodic branch checks still passed.",
+      "No complete GPU path, Dimer parent, VASP result, TS, barrier, fine-tuning, automatic retry, or resubmission exists."
+    ],
+    "one_executable_step": "Prepare a review-only revised preconditioning or resampling design that preserves at least three O-H interval images; do not submit it without new explicit user authorization.",
+    "submission_boundary": "Job 1327 authorization was single-use. Automatic retry, fine-tuning, GPU resubmission, VASP/VTST submission, Dimer, and TS/barrier claims remain forbidden.",
+    "done_when": [
+      "A revised path/preconditioning design is hash-bound and passes local geometry, periodic, and interval-coverage review.",
+      "Any rerun occurs only after a new explicit user authorization."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/gpu_return_job1327_failure/failure_assessment.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/gpu_return_job1327_failure/restrained_preconditioning.geometry_guard_failure.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/gpu_return_job1327_failure/producer_exit_record.failure.1327.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/active_learning_state.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/gpu_return_job1327_failure/failure_assessment.work.json",
+      "sha256": "42d0397b0ae49ea36de102696de7acb08ef9b40ab6d0887d5969278093a5e8b6",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T21:43:32.1016123+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/gpu_return_job1327_failure/producer_exit_record.failure.1327.json",
+      "sha256": "8d8c7815eef5e583b8d6664e13f3bb869a65f49fbc2563211384aa498695f927",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-27T21:43:32.1016123+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/gpu_return_job1327_failure/restrained_preconditioning.geometry_guard_failure.json",
+      "sha256": "414779346606ed070fca9edaaae635ba3d87b0cab387c4995ce52a8905060c49",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-27T21:43:32.1016123+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/active_learning_state.json",
+      "sha256": "a748c0e25314958079377d7d44669ffbd0c4d5b50c9fe67bced5c247debf1489",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T21:43:32.1016123+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v5-job1327-submitted-20260827"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

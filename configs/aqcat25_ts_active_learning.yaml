@@ -1,0 +1,102 @@
+version: 1
+workflow_kind: aqcat25_ts_sequential_active_learning
+
+complete_path_acceleration:
+  target_product: complete_hash_bound_gpu_ml_neb_path
+  ordinary_ml_neb_first: true
+  ml_ci_neb: conditional_after_continuous_single_peak_path
+  waypoint_policy: conditional_on_mapping_continuity_and_reaction_coordinate_resolution
+  representative_vasp_labels: adaptive_peak_neighbors_uncertainty_rising_falling_and_anomalies
+  single_checkpoint_model_disagreement_claim: forbidden
+  dimer_parent_method: gpu_ml_neb_vasp_validated_triad
+  dimer_requires_exact_vasp_triad: true
+  implementation_status: local_executor_and_manifest_gate_implemented_requires_reviewed_mz73_deployment_and_smoke
+
+round_control:
+  max_rounds: 5
+  require_new_checkpoint_after_finetune: true
+
+path_label_selection:
+  minimum_labels_per_round: 3
+  maximum_labels_per_round: 7
+  committee_high_disagreement_images: 2
+  require_peak_and_neighbors: true
+  require_rising_and_falling_representatives_when_available: true
+  require_every_selected_image_to_pass_local_force_screen: true
+
+model_committee:
+  status: unavailable_until_three_independently_finetuned_and_validated_checkpoints_exist
+  minimum_unique_checkpoints: 3
+  allowed_member_construction: independent_seed_plus_training_sample_bootstrap
+  snapshot_only_committee: forbidden_as_primary_uncertainty_evidence
+  disagreement_requires_held_out_vasp_error_calibration: true
+  single_checkpoint_output_name: path_novelty_or_vasp_error_not_uncertainty
+
+local_force_screen:
+  purpose: heuristic_finetuning_trigger_only_not_ts_domain_calibration
+  threshold_source: aqcat25_fe45_adsorption_gate_operational_screen_only
+  component_mae_eV_per_A_max: 0.10
+  vector_rmse_eV_per_A_max: 0.20
+  vector_max_eV_per_A_max: 0.60
+
+ts_domain_validation:
+  gate: configs/aqcat25_ts_domain_gate.yaml
+  independent_from_training: true
+  required_before_acceleration_ready: true
+  schedule:
+    every_reviewed_neb_path_requires_new_validation: false
+    bootstrap_when_domain_is_uncalibrated: true
+    revalidate_when:
+      - checkpoint_sha256_changed
+      - compatibility_branch_changed
+      - reaction_domain_outside_calibrated_scope
+      - novelty_or_uncertainty_gate_failed
+      - periodic_audit_due
+    reuse_existing_calibration_only_when:
+      - exact_checkpoint_sha256_matches
+      - compatibility_branch_matches
+      - reaction_domain_is_within_validated_scope
+      - novelty_or_uncertainty_gate_passes
+      - periodic_audit_is_not_due
+  existing_vasp_force_label_reuse:
+    allowed: true
+    requirements:
+      - exact_structure_sha256_match
+      - compatible_dft_fingerprint
+      - normal_vasp_completion
+      - electronically_converged_before_nelm
+      - complete_atom_aligned_force_block
+      - accepted_scheduler_evidence
+    new_static_required_when_any_requirement_fails: true
+
+vasp_force_label:
+  backend: sunboquan-codex
+  scheduler: LSF
+  input_profile: configs/true_fe110_production.yaml
+  input_stage: transition_state.active_learning_force_label
+  accepted_terminal_status: DONE
+  result_class: vasp_completed_electronic_converged_force_label_only
+  reportable_final_energy: false
+
+fine_tuning:
+  backend: aqcat_gpu
+  hostname: MZ73
+  remote_root: /home/sbq/sbq/
+  initial_checkpoint_path: /home/sbq/sbq/aqcat25/demo_single/model.pt
+  epochs: 2
+  result_class: force_only_finetuned_checkpoint_candidate
+  replay:
+    labels: outputs/aqcat25_fe45_calibration_v1/labels.json
+    structures: outputs/aqcat25_fe45_calibration_v1/structures
+    validation_sample_ids: [h2_top, ch3_top, cho_cend_top, cpluso_lb_h]
+    minimum_training_samples: 8
+    minimum_validation_samples: 4
+    validation_thresholds: configs/aqcat25_domain_gate.yaml
+
+data_policy:
+  ml_candidate_class: predicted_transition_state_candidate_only
+  ml_values_reportable: false
+  vasp_force_label_reportable_as_final_energy: false
+  final_result_source: vasp_completed_converged_validated_only
+  final_barrier_gate: Grade-A_TS_plus_matched_static_IS_TS_FS
+  final_registry: data/project_registry.sqlite3

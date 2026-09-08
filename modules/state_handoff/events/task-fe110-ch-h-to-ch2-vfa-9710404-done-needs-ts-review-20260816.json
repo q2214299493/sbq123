@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-ch-h-to-ch2-vfa-9710404-done-needs-ts-review-20260816",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-ch-h-to-ch2-ts",
+    "module": "ts_vibrational_validation"
+  },
+  "occurred_at": "2026-08-16T14:09:00+08:00",
+  "recorded_at": "2026-08-16T06:09:00Z",
+  "summary": "VFA job 9710404 completed normally with one target-like imaginary mode at 809.141 cm^-1; formal TS acceptance remains pending because the bound DIMER residual review authorized frequency handoff only.",
+  "payload": {
+    "objective": "Resolve formal TS acceptance for the Fe(110) CH* + H* -> CH2* + * DIMER candidate after its completed local partial-Hessian diagnostic.",
+    "phase": "active",
+    "current_evidence": [
+      "LSF job 9710404 is scheduler DONE; the collected OUTCAR has a normal VASP end marker.",
+      "The eight-atom local partial Hessian completed 49 force evaluations: one reference plus all 48 finite-difference displacements, with 49 EDIFF-reached electronic cycles.",
+      "The completed Hessian has 24 modes and exactly one raw imaginary mode: mode 24 at 809.141 cm^-1.",
+      "Mode 24 is localized on C45/H47: their relative displacement projects 98.854% onto the C45-H47 bond axis and their squared mode-amplitude fraction is 92.667%.",
+      "The source TS geometry passes the bounded local check: C45-H47 is 1.456758 A, C45-H46 is 1.102394 A, and no abnormal short contact is present.",
+      "The canonical analysis remains NEEDS_REVIEW, grade Ungraded, and kinetic_eligible=false. The bound DIMER residual review decision is allow_frequency_handoff, not accept_for_ts_validation; project frequency thresholds are also unset."
+    ],
+    "one_executable_step": "Obtain an explicit user decision on whether the exact DIMER Force/Torque residuals may be accepted for formal TS validation. If authorized, create a new hash-bound accept_for_ts_validation review and rerun the canonical acceptance/registry gate without launching another VASP job.",
+    "submission_boundary": "Do not submit, stop, restart, or resubmit VASP; do not claim an accepted TS, Grade A, kinetic eligibility, or a barrier until the DIMER residual decision and canonical validation evidence explicitly permit it.",
+    "done_when": [
+      "A user-authorized hash-bound decision either accepts or rejects the exact DIMER Force/Torque residuals for formal TS validation.",
+      "The canonical validation and registry record reflect that decision without changing the completed raw frequency evidence.",
+      "No free-energy or kinetics claim is made without consistent IS/TS/FS thermochemical corrections using the same reviewed local active set."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/scheduler_evidence.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/OUTCAR`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/vfa_review.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/vfa_analysis.json`",
+      "`data/project_registry.sqlite3`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/scheduler_evidence.json",
+      "sha256": "940981666cf0e759d628ae8a419b8c32b1a4dcd0f0184e1057e6aac53cff23fe",
+      "authority": "scheduler",
+      "observed_at": "2026-08-16T14:03:04+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/OUTCAR",
+      "sha256": "4fe2b23a444ae5b6c4e0ed3ccbe6d6e03407a5aadc6d5f15999b2e2d697027ac",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-16T14:09:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/vfa_review.json",
+      "sha256": "1c3977736922c1e4a152879c4b798347979b02cf43bbd643c45f31cfd852ebcd",
+      "authority": "module_validation",
+      "observed_at": "2026-08-16T14:05:30+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/vfa_analysis.json",
+      "sha256": "36675f7fb5897cf54d9043ee2b25e28325017843fec7eb9e82a891fa3cf35c4a",
+      "authority": "module_validation",
+      "observed_at": "2026-08-16T14:09:00+08:00"
+    },
+    {
+      "locator": "data/project_registry.sqlite3",
+      "sha256": "81d9a8bc4034d80b792ed34f9f9ad80881f9d6f12e1281c4e032170066f19f56",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-16T14:09:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-ch-h-to-ch2-vfa-9710404-submitted-20260815"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

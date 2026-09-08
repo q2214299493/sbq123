@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "event_id": "review-7812748135ccb29e83540cd2",
+  "event_type": "review_decision",
+  "entity": {
+    "kind": "proposal",
+    "id": "proposal-1e56468174f549d506a1a5df",
+    "module": "state_handoff"
+  },
+  "occurred_at": "2026-08-03T04:29:52Z",
+  "recorded_at": "2026-08-03T04:29:52Z",
+  "summary": "reject proposal proposal-1e56468174f549d506a1a5df",
+  "payload": {
+    "proposal_id": "proposal-1e56468174f549d506a1a5df",
+    "decision": "reject",
+    "reviewer": "codex",
+    "reason": "User directed reconciliation against the latest task update; this import duplicated the already-approved 9655921 Current Gate event.",
+    "reviewed_event_id": "state-import-33e13f091f305d6548f2c52f",
+    "reviewed_event_sha256": "0f6f8433537069a83f41eebeb78fb2aad014d1dacd624f27220b594ce0223dc9"
+  },
+  "evidence": [],
+  "supersedes": [],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

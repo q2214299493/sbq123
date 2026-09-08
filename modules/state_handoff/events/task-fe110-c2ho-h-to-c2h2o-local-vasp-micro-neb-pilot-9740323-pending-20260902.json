@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-local-vasp-micro-neb-pilot-9740323-pending-20260902",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-02T22:40:25+08:00",
+  "recorded_at": "2026-09-02T14:40:25Z",
+  "summary": "The user accepted the reviewed local path and explicitly authorized submission. The hash-bound NSW=1 local VASP micro-NEB compatibility pilot was submitted to sunboquan-codex as LSF job 9740323 and is currently PEND. No formal micro-NEB, CI-NEB, Dimer, or automatic retry is authorized.",
+  "payload": {
+    "objective": "Monitor and validate the one-step local VASP micro-NEB pilot job 9740323 before requesting any formal micro-NEB submission authority.",
+    "phase": "active",
+    "current_evidence": [
+      "The accepted seven-image local path uses exact job1508 images 04 and 07 as boundaries and five reviewed O-H waypoints.",
+      "Canonical neb_pilot preflight passed with bundle SHA256 1db36f5967532a8606294f6ca20c13be5aa3ce94f3e61285c51667848c3604d8.",
+      "The authoritative gate decision READY_FOR_NEB_PILOT allowed only SUBMIT_DIAGNOSTIC_VASP.",
+      "The submission executor created LSF job 9740323 in ~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260902/vasp_micro_neb_epoch6_img04_07_5internal_20260902.",
+      "A live bjobs -a query observed job 9740323 in PEND state.",
+      "Remote directories 00 through 06 and the INCAR, KPOINTS, and POTCAR files were present after upload."
+    ],
+    "one_executable_step": "When job 9740323 leaves PEND or the user asks for status, query live scheduler and calculation files; after DONE, collect all internal-image outputs and run the canonical pilot validator.",
+    "submission_boundary": "The current authorization is consumed by job 9740323. Do not resubmit, retry, submit the formal micro-NEB, start CI-NEB/Dimer, or report a barrier without new evidence and separate explicit user authority.",
+    "done_when": [
+      "LSF terminal evidence for job 9740323 is stored.",
+      "Every internal image has complete electronic/force output or a diagnosed failure.",
+      "The canonical pilot validator returns a hash-bound PASS or failure verdict."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_20260902/submission_record.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_20260902/scheduler_evidence.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_20260902/execution_gate_decision.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_20260902/submission_record.json",
+      "sha256": "5cb7e027d8dac5024a637c31e1039bf476e1f02d4e774d97deeb45acec62be56",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-02T22:40:25+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_20260902/scheduler_evidence.json",
+      "sha256": "f0d5929bc396b3c10b9a5676a4dcc515d41d21bd0aca98aeb655898e29f38f4e",
+      "authority": "scheduler",
+      "observed_at": "2026-09-02T22:40:25+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_20260902/execution_gate_decision.json",
+      "sha256": "2a2716ad629acc71611229f3b9b870f30c2c3d0ff0c0170b1c3c5cd2fbced99d",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T22:40:25+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-local-vasp-micro-neb-pilot-prepared-20260902"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "event_id": "state-fe110-co-dimer-mode-accepted-merge-20260807",
+  "event_type": "state_observed",
+  "entity": {"kind": "state", "id": "active-fe-110-co-dissociation-test-current-gate", "module": "transition_state_search"},
+  "occurred_at": "2026-08-07T00:20:29+08:00",
+  "recorded_at": "2026-08-07T00:20:29+08:00",
+  "summary": "Merge prior connectivity and Dimer-review gates into the accepted principal-mode gate.",
+  "payload": {
+    "block_id": "active-fe-110-co-dissociation-test-current-gate",
+    "section": "## Active Fe(110) CO Dissociation Test",
+    "title": "Current Gate - 2026-08-07 Dimer Mode Accepted, Grade Blocked",
+    "facts": [
+      "Dimer job `9656664` passes the hard gate and its Force/Torque soft review is accepted.",
+      "VFA job `9694935` has exactly one imaginary mode, mode 6 at `537.451689 cm^-1`, with an accepted target-mode assignment.",
+      "Connectivity is optional diagnostic evidence for Dimer and is not an acceptance gate.",
+      "The result is `VFA_VALIDATED_GRADE_BLOCKED`, `Ungraded`, and not kinetic-eligible because frequency thresholds and partial-Hessian active-set convergence remain unresolved."
+    ],
+    "next_action": "Configure reviewed frequency thresholds and confirm active-set convergence, then rerun final VFA grading."
+  },
+  "evidence": [
+    {"locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806/ts_strategy_step_record.json", "sha256": "64f01d470d809b5aad7700499974eeb590370f91c72c0ff0247f5f7fd21600d0", "authority": "module_validation", "observed_at": "2026-08-07T00:20:29+08:00"},
+    {"locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806/vfa_analysis.json", "sha256": "f096dac60bdd73664ff25797044a7018a03582af6f1ff84b98bd392c442aa824", "authority": "module_validation", "observed_at": "2026-08-07T00:20:29+08:00"}
+  ],
+  "supersedes": [
+    "state-fe110-co-connectivity-needs-review-20260806",
+    "state-fe110-co-dimer-frequency-validation-20260806",
+    "state-fe110-co-dimer-mode-accepted-20260807"
+  ],
+  "review": {"required": true, "reason_codes": ["scientific_method_change", "cross_module_change"], "status": "pending"}
+}

@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-ch-h-coadsorption-candidates-review-20260808",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-ch-h-coadsorption",
+    "module": "adsorption_workflow"
+  },
+  "occurred_at": "2026-08-08T12:45:03+08:00",
+  "recorded_at": "2026-08-08T12:45:03+08:00",
+  "summary": "Two additional literature-supported Fe(110) CH* plus H* coadsorption candidates were constructed for user review and were not submitted.",
+  "payload": {
+    "objective": "Screen three Fe45 CH* plus H* coadsorption candidates for the CH* + H* -> CH2* + * initial state, using compatible local relaxations to select one final IS.",
+    "phase": "active",
+    "current_evidence": [
+      "Candidate A, CH_long_bridge plus H_adjacent_hollow, remains associated with submitted job `9701350`; its last recorded scheduler checkpoint was RUN and no newer scheduler inference is made by this structure-review event.",
+      "Candidate B, CH_top plus H_second_neighbor_hollow, was constructed from verified local CH_top and H_hollow endpoints and passed the construction geometry gate.",
+      "Candidate C, CH_long_bridge plus H_adjacent_top, was constructed from verified local CH_long_bridge and H_top endpoints and passed the construction geometry gate.",
+      "The literature fallback supports the constituent site motifs and Fe(110) CH+H reaction context, but does not prove either new coadsorbed structure is a relaxed minimum.",
+      "Candidates B and C have not been submitted and have no VASP energy, ionic convergence, force, or final-geometry result."
+    ],
+    "one_executable_step": "Obtain the user's structure choice or explicit authorization before preparing or submitting candidates B and C; independently continue the authorized monitoring of job 9701350 when requested by the active workflow.",
+    "submission_boundary": "Do not submit candidates B or C until the user gives a new explicit instruction after reviewing their structures. No NEB, CI-NEB, DIMER, frequency, or TS submission is authorized.",
+    "done_when": [
+      "All user-approved coadsorption candidates have compatible local relaxation results and geometry classifications.",
+      "One retained CH*+H* minimum is selected as IS using compatible local total energies and pathway suitability.",
+      "Non-selected converged candidates are registered with provenance; unrelaxed candidates are not promoted as adsorption results."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_ch_h_coadsorption_20260808/candidate_review/candidate_review_20260808.json`",
+      "`calculations/fe110_ch_h_coadsorption_20260808/retrieval/literature_fallback_20260808.json`",
+      "`calculations/fe110_ch_h_coadsorption_20260808/provenance/runtime_checkpoint_9701350_20260808T122129.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_ch_h_coadsorption_20260808/candidate_review/candidate_review_20260808.json",
+      "sha256": "b3bc5d1a7a44a96ac7b4902da746a2e494024a796ad7d09b8e8c6c223a91b520",
+      "authority": "module_validation",
+      "observed_at": "2026-08-08T12:45:03+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_coadsorption_20260808/retrieval/literature_fallback_20260808.json",
+      "sha256": "0688c45b99a5c03261bfe4eb86b01b9eb01d41895d7bafa3629cc28ae9aee1b4",
+      "authority": "repository_document",
+      "observed_at": "2026-08-08T12:45:03+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-ch-h-coadsorption-running-9701350-20260808"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

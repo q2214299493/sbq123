@@ -1,0 +1,50 @@
+version: 1
+# Search choices, never TS-acceptance criteria or calculation authorization.
+settings_schema:
+  type: object
+  additionalProperties: false
+  required: [candidate_method, initial_images, interpolation_strategy]
+  properties:
+    candidate_method:
+      enum: [ordinary_neb, ci_neb, gpu_ml_neb_vasp_validated_triad, aqcat25_ba_sella, matris_ml_neb_sella]
+    initial_images:
+      type: integer
+      minimum: 1
+    interpolation_strategy:
+      enum: [idpp, segmented_idpp, constrained_idpp]
+max_changed_fields_per_proposal: 1
+max_candidates_per_parent: 2
+failure_routes:
+  runtime: repair_runtime_without_training
+  input: repair_inputs_without_training
+  geometry: review_path_repair_without_assuming_model_error
+  scf: incar_custodian_diagnosis
+  optimizer: diagnose_optimizer_and_path
+  model_error: existing_active_learning_entry_and_vasp_error_gates
+  validation: owning_ts_validation_review
+  unknown: collect_missing_evidence
+reference_methods:
+  matris_ml_neb_sella:
+    role: optional_local_saddle_refinement_after_complete_ml_neb
+    implementation: scripts.ml_sella_candidate.refine_peak
+    integration: scripts.prepare_ml_candidate_active_learning.prepare_candidate_round
+    rerun: scripts.prepare_ml_candidate_rerun.prepare_rerun
+    prerequisites: [converged_geometry_valid_single_peak_path, sella_dependency, work_review_before_force_diagnosis]
+    model: current_matris_checkpoint
+    method: standard_sella_not_bond_aware_sella
+    result_class: predicted_transition_state_candidate_only
+    automatic_submission: false
+    establishes_ts: false
+  aqcat25_ba_sella:
+    role: predicted_candidate_generator
+    backend_capability: ba_sella_candidate_search
+    implementation: arkimede.workflow.calculations.run_sella_calculation
+    integration: scripts.ts_strategy_engine.active_learning_handoff.prepare_ba_sella_rerun
+    prerequisites: [reviewed_endpoints_and_mapping, reviewed_gpu_handoff, compatible_model_and_environment]
+    result_class: predicted_transition_state_candidate_only
+    automatic_submission: false
+    establishes_ts: false
+    historical_reference:
+      path: calculations/fe110_co_dissociation_neb_20260718/output/job_737/pilot_report.json
+      sha256: d7d763c0beddbbb47ae8fc1fbeaacb20cd272aeda0c029635ca5c8e191906cf9
+      interpretation: historical_predicted_candidate_not_a_validated_TS

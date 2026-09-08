@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-job1458-force-labels-9738672-9738677-submitted-20260901",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-01T23:37:30+08:00",
+  "recorded_at": "2026-09-01T15:37:30Z",
+  "summary": "Six exact-structure SIGMA=0.20 eV VASP static force-label jobs were submitted as LSF jobs 9738672-9738677 after returned dual-model review, fresh diagnostic-static preflights, geometry checks, POTCAR verification, and hash-bound SUBMIT_DIAGNOSTIC_VASP execution gates. Four were RUN and two PEND at the submission checkpoint.",
+  "payload": {
+    "objective": "Wait for VASP jobs 9738672-9738677 to finish, then collect scheduler evidence, verify normal/electronic completion and complete energy, force, and magnetic outputs, and compare exact-structure MatRIS-VASP and AQCat25-VASP errors before any fine-tuning decision.",
+    "phase": "active",
+    "current_evidence": [
+      "The separate user authorization covers only the six exact-structure diagnostic-static VASP force labels pre_04, fail_04, pre_05, fail_05, pre_06, and fail_06.",
+      "All six inputs use GGA=PE, ENCUT=400 eV, ISPIN=2, ISMEAR=1, SIGMA=0.20 eV, Gamma 5x5x1, NSW=0, IBRION=-1, ISYM=0, LDIPOL=false, LORBIT=11, NPAR=4, fixed bottom-18 atoms, and 32 ranks.",
+      "The remote Fe/C/O/H POTCAR SHA-256 matched e3bc41a37d795bfcf1b1dc9a2a9ddfb5ef86aa5dc9aa0ac5a3583471a0982f85 before submission.",
+      "Each directory passed a fresh diagnostic_static preflight and a hash-bound execution gate allowing only SUBMIT_DIAGNOSTIC_VASP.",
+      "LSF mappings are pre_04=9738672, fail_04=9738673, pre_05=9738674, fail_05=9738675, pre_06=9738676, and fail_06=9738677.",
+      "At the checkpoint, 9738672-9738675 were RUN with OUTCAR files created but no TOTEN yet; 9738676-9738677 were PEND.",
+      "No model fine-tuning, checkpoint promotion, ML-NEB rerun, micro-NEB, Dimer, automatic retry, or final-energy promotion was submitted or authorized."
+    ],
+    "one_executable_step": "Monitor jobs 9738672-9738677; after all are terminal, collect exact outputs and run the VASP-label quality and dual-model error assessment without automatically training a model.",
+    "submission_boundary": "The six VASP labels are force-label-only and cannot enter the final barrier energy chain. Any failed job retry and any MatRIS fine-tuning or path rerun require a new reviewed action and separate authorization.",
+    "done_when": [
+      "All six LSF jobs have terminal scheduler evidence and their OUTCAR/OSZICAR outputs are collected.",
+      "Every accepted label passes normal termination, electronic convergence, exact structure/order, complete 50-atom forces, total and atom-resolved magnetic evidence, and the active DFT fingerprint.",
+      "MatRIS-VASP and AQCat25-VASP errors are assessed on the same six structures and the MatRIS trigger verdict is recorded."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/vasp_batch_submission_summary.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/vasp_force_label_submission_ready_review.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/user_vasp_force_label_authorization.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/vasp_batch_submission_summary.json",
+      "sha256": "e8db70ebde29a266a19fb3713926a08339e4447917a7fa11068a78c211e7321f",
+      "authority": "scheduler",
+      "observed_at": "2026-09-01T23:37:30+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/vasp_force_label_submission_ready_review.json",
+      "sha256": "12d3cd742f613537094e82838924a9dfc4a464b12dcdea66099d8a1b51915a5e",
+      "authority": "module_validation",
+      "observed_at": "2026-09-01T23:35:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/user_vasp_force_label_authorization.json",
+      "sha256": "d4c0f9473bd66b357ef1058b4a4f552170361d4747accecbd4f907621f10d99d",
+      "authority": "user_authorization",
+      "observed_at": "2026-09-01T23:31:53+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-job1458-dual-model-predictions-reviewed-20260901"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

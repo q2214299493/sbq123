@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-force-label-sigma0p20-rebuilt-20260819",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-transition-state",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-19T15:53:09+08:00",
+  "recorded_at": "2026-08-19T07:53:09Z",
+  "summary": "The active-learning force-label generator now takes ISMEAR/SIGMA from the authoritative final-energy policy, and images 02-06 were rebuilt and preflighted on the Fe(110) SIGMA=0.20 branch without submission.",
+  "payload": {
+    "objective": "Validate the returned nine-image AQCat25 path for Fe(110) C* + H* -> CH* + * and prepare compatibility-matched VASP force labels for active-learning calibration.",
+    "phase": "active",
+    "current_evidence": [
+      "The root cause was a builder inheritance defect: active-learning labels reused the legacy final_static SIGMA=0.10 value instead of the current production occupation branch.",
+      "The builder now applies final_energy_policy.required_surface_incar after the legacy static base and records that source plus fe110_converged_toten_sigma0p20_v1 in every label request.",
+      "Images 02-06 were rebuilt from the same reviewed structure hashes with ISMEAR=1 and SIGMA=0.20 eV.",
+      "All five diagnostic-static preflights pass; each label remains a non-reportable static energy/force label.",
+      "The prior SIGMA=0.10 batch is preserved with an explicit DO_NOT_SUBMIT supersession marker.",
+      "No POTCAR was copied and no VASP execution gate or submission authorization exists."
+    ],
+    "one_executable_step": "After explicit user authorization for this exact hash-bound five-image batch, supply the approved POTCAR on sunboquan-codex, re-run final bound preflights and submit images 02-06 as one bounded VASP force-label batch.",
+    "submission_boundary": "The user authorized repairing the generator and rebuilding plus pre-submission review of image 02-06 only. No VASP upload, POTCAR copy, force-label submission, DIMER, frequency, restart, resubmission, or additional GPU job is authorized.",
+    "done_when": [
+      "The active-learning builder obtains the occupation convention from the authoritative production parameter table.",
+      "The exact reviewed image 02-06 structures are rebuilt with ISMEAR=1 and SIGMA=0.20 eV and pass static preflight.",
+      "The incompatible SIGMA=0.10 batch is clearly marked as superseded and cannot be confused with the submission candidate."
+    ],
+    "authoritative_references": [
+      "`configs/true_fe110_production.yaml`",
+      "`scripts/vasp_inputs.py`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/vasp_force_labels_round_000_sigma0p20/path_label_batch_request.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/vasp_force_labels_round_000_sigma0p20/batch_review_summary.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "configs/true_fe110_production.yaml",
+      "sha256": "54bd393e6834e2e013594684e7369bf5d6de79aa540ff6912d17ecdf25d99d16",
+      "authority": "repository_document",
+      "observed_at": "2026-08-19T15:53:09+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/vasp_force_labels_round_000_sigma0p20/batch_review_summary.json",
+      "sha256": "7c2a46bbf4d7cc56c9ebefd81da50fdb14823ca873af502b8e82f6681bf5a81c",
+      "authority": "module_validation",
+      "observed_at": "2026-08-19T15:53:09+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/vasp_force_labels_round_000/DO_NOT_SUBMIT_superseded_sigma0p10.json",
+      "sha256": "8d6c1dbd1b27cb3317d23ee0c3ef492e63b499607654dbcbb3fb20f2ab75c5ec",
+      "authority": "module_validation",
+      "observed_at": "2026-08-19T15:53:09+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-ml-neb-1191-reviewed-label-batch-prepared-20260819"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

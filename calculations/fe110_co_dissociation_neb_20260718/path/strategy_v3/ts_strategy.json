@@ -1,0 +1,32 @@
+{
+  "version": 3,
+  "status": "NEEDS_EXECUTABLE_WAYPOINT_REVIEW",
+  "strategy_source": "rule_based",
+  "reaction_family": "co_dissociation",
+  "fingerprint_id": "2b0ed53c44421589882f62c2d0affa7386b82c390e9f70bf545a226059968095",
+  "template_match": null,
+  "failure_constraints": [],
+  "waypoint_strategy": [
+    "molecular_CO",
+    "tilted_or_lying_CO",
+    "elongated_CO",
+    "coadsorbed_C_plus_O"
+  ],
+  "interpolation_strategy": "segmented_idpp",
+  "neb_settings": {
+    "sequence": [
+      "ordinary_neb",
+      "ci_neb"
+    ],
+    "initial_images": 3,
+    "image_policy": "start_minimal_then_add_only_at_large_displacement_or_high_curvature"
+  },
+  "dimer_usage": {
+    "policy": "refine_only_after_reviewed_neb_or_cineb_candidate"
+  },
+  "path_initialization": "requires reviewed executable waypoint before segmented IDPP",
+  "validation": "docs/10_TS_VALIDATION_PROTOCOL.md",
+  "database_storage": "successful Grade-A or explicit failed-experience record only",
+  "requires_user_confirmation": true,
+  "automatic_submission": false
+}

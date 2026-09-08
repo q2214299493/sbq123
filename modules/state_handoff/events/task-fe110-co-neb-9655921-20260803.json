@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-co-neb-9655921-20260803",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-co-dissociation",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-03T12:17:34+08:00",
+  "recorded_at": "2026-08-03T12:17:34+08:00",
+  "summary": "Track the exact-same-path nine-image 108-rank NEB pilot after fixing MPI preflight.",
+  "payload": {
+    "objective": "Validate the newly submitted nine-interior-image segmented-IDPP ordinary no-climb NSW=1 pilot for Fe(110) CO dissociation before allowing any coarse production NEB.",
+    "phase": "active",
+    "current_evidence": [
+      "Compatibility branch: `true_fe110_5layer_5x5x1`; endpoints and reaction contract remain unchanged.",
+      "The reviewed segmented-IDPP path has nine internal images, monotonic C-O `1.175632 -> 3.113136 A`, maximum adjacent displacement `0.320858 A`, and exact bottom 18 Fe.",
+      "Launch-failed job `9655434` completed zero ionic steps because 14 ranks/image could not be divided by `NPAR=4`; it produced no scientific result.",
+      "Preflight now rejects per-image ranks not divisible by explicit NPAR; all 13 targeted tests pass.",
+      "Replacement job `9655921` uses `MAGMOM=45*2.2 1*0.0 1*0.0`, `IMAGES=9`, `NSW=1`, `LCLIMB=.FALSE.`, `SPRING=-5`, `NPAR=4`, and 108 ranks (`9x12`, `12/4=3`).",
+      "Job `9655921` was scheduler `PEND` at 2026-08-03 12:17 CST; local/remote inputs, approved POTCAR, and all 11 POSCAR hashes match."
+    ],
+    "one_executable_step": "Monitor job `9655921` compactly. While it is PEND or RUN, do not submit another VASP job. At DONE, pull and hash-bind all nine internal-image outputs and validate electronic convergence, magnetization, forces, fixed Fe, C-O ordering, periodic mapping, and site-event continuity before any coarse NEB.",
+    "submission_boundary": "The current authorization covers only the nine-image NSW=1 pilot. A coarse ordinary NEB requires this exact-path pilot to pass and a new current gate that explicitly allows SUBMIT_VASP. Do not submit CI-NEB, DIMER, frequency, or report a barrier.",
+    "done_when": [
+      "Replacement pilot `9655921` reaches a scheduler terminal state with complete outputs.",
+      "All nine internal images pass electronic/output and immediate-geometry validation.",
+      "The next current execution gate either allows the same-path coarse ordinary NEB or records the evidence-backed blocker."
+    ],
+    "authoritative_references": [
+      "Scientific and execution gates: `modules/transition_state_search/README.md`.",
+      "Numerical branch: `configs/true_fe110_production.yaml`.",
+      "Backend roles: `configs/execution_backends.yaml`.",
+      "Sole execution authority: `scripts/ts_strategy_engine/execution_gate.py`."
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "tasks/current_task.md",
+      "sha256": "12ff424e9eaf41bef6291410cc2460206396599788e54771b83a2a0d77004c74",
+      "authority": "repository_document",
+      "observed_at": "2026-08-03T12:17:34+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/runs/ordinary_neb_9img_fresh_local_endpoint_idpp_waypoint_pilot_np108_20260803/scheduler_evidence.json",
+      "sha256": "003f2bb5e285d7774953616702119ca45f370a91b3fa56139a5bb929083f40fd",
+      "authority": "scheduler",
+      "observed_at": "2026-08-03T12:17:34+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/runs/ordinary_neb_9img_fresh_local_endpoint_idpp_waypoint_pilot_np108_20260803/submission_record.json",
+      "sha256": "dc6aaa2970f775ce9de30ec13aa7960a962e862069a61f4f52e88efe9c6b4d92",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-03T12:17:34+08:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "live_scheduler_state",
+      "user_approved_state_sync"
+    ],
+    "status": "pending"
+  }
+}

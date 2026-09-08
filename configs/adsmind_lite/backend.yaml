@@ -1,0 +1,19 @@
+version: 1
+
+default: no_relax
+
+modes:
+  no_relax:
+    status: enabled
+    action: generate_and_validate_only
+
+  ase_mlff_relax:
+    status: optional
+    supported_backends: [MACE, CHGNet, SevenNet]
+    missing_backend_policy: skip_with_compact_warning
+    auto_install: false
+
+  vasp_low_cost_relax:
+    status: prepare_only
+    submit: false
+    action: export_reviewable_folders_only

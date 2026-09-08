@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-ch-h-to-ch2-dense-production-neb-9706068-done-rebuild-required-20260813",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-ch-h-to-ch2-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-13T12:05:01+08:00",
+  "recorded_at": "2026-08-13T04:05:01Z",
+  "summary": "Production ordinary-NEB job 9706068 is DONE and technically converged, but the completed-path gate permits only a path rebuild because the optimized reaction coordinate is underresolved and raw periodic branches are discontinuous.",
+  "payload": {
+    "objective": "Run the gated Fe(110) CH* + H* -> CH2* + * transition-state workflow from the accepted A initial state to the compatible optimized CH2* final state.",
+    "phase": "active",
+    "current_evidence": [
+      "Production ordinary-NEB job `9706068` is scheduler DONE; all seven internal images completed 106 ionic steps, ended normally, and were electronically converged.",
+      "VASP reached its configured atomic-force criterion; the largest final atomic force is `0.048640 eV/A` on image 05, while the largest reported final NEB projected force is `0.056968 eV/A` on image 05.",
+      "The forming C45-H47 distance is chemically continuous and decreases `2.429/2.274/1.924/1.514/1.210/1.166/1.128/1.109/1.104 A` from 00 through 08; no collision or fixed-layer drift was detected.",
+      "The final path-quality evaluator classified the path as `UNDERRESOLVED_REACTION_COORDINATE`: the persistent `0.409525 A` C-H gap between images 02 and 03 is the critical deficiency after relaxation.",
+      "Several Fe atoms also change raw periodic coordinate branch between adjacent images even though their minimum-image displacements are small; the geometry gate therefore remains `STOP_DATA_INTEGRITY` until the periodic representation is normalized and revalidated.",
+      "Image 03 is the highest internal-energy image and has C45-H47 = `1.514 A`; its raw NEB energy is about `0.568 eV` above the accepted IS energy, but this is interim path evidence and not a reportable barrier or validated TS.",
+      "The current hash-bound execution gate allows only `REBUILD_PATH`; CI-NEB, DIMER, TS approval, and barrier reporting are forbidden."
+    ],
+    "one_executable_step": "After user approval, normalize the periodic coordinate branches and rebuild/densify the critical 02-03 C-H forming interval, then repeat path review and the gated ordinary-NEB workflow.",
+    "submission_boundary": "Do not submit a rebuilt path or start CI-NEB/DIMER without explicit user authority and a refreshed hash-bound execution gate. Do not report the interim NEB maximum as a final barrier.",
+    "done_when": [
+      "A rebuilt ordinary NEB produces a technically usable and adequately resolved reaction path or another gate-supported method handoff.",
+      "Any highest-image TS candidate is refined and validated through the owning module before a barrier claim.",
+      "IS, TS, and FS results remain compatible and hash-bound; no free-energy or kinetics claim is made without separate thermochemical work."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_7img_v6_84r_no0336/scheduler_evidence.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_7img_v6_84r_no0336/neb_analysis.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_7img_v6_84r_no0336/path_geometry_diagnosis.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_7img_v6_84r_no0336/neb_path_quality.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_7img_v6_84r_no0336/ts_search_decision.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_7img_v6_84r_no0336/scheduler_evidence.json",
+      "sha256": "c26db98854c392d62f623518298d13424286857643a3d62802097083da0d84e7",
+      "authority": "scheduler",
+      "observed_at": "2026-08-13T12:05:01+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_7img_v6_84r_no0336/neb_analysis.json",
+      "sha256": "dc6205f356f188a071cc72a1b9d814849f9cddfe1cfb7fa5ecb6169cf035602f",
+      "authority": "module_validation",
+      "observed_at": "2026-08-13T12:05:01+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_7img_v6_84r_no0336/neb_path_quality.json",
+      "sha256": "ef9d8e77f092f400989c0521d59b78a002ea37e4082b795856bfe1ff9e174d78",
+      "authority": "module_validation",
+      "observed_at": "2026-08-13T12:05:01+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_7img_v6_84r_no0336/ts_search_decision.json",
+      "sha256": "e7e36cd30ec49bb031b86cebac9e1acd2d2ad4fb9fd62b199df530d0c203536d",
+      "authority": "module_validation",
+      "observed_at": "2026-08-13T12:05:01+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-ch-h-to-ch2-dense-production-neb-9706068-20260812"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

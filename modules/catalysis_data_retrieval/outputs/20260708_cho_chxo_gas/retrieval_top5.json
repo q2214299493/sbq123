@@ -1,0 +1,19 @@
+{
+  "target": {
+    "stage": "isolated gas-phase geometry optimization before Fe(110) adsorption",
+    "species": ["CHO", "CH2O", "CH3O", "CH4O"],
+    "method": "VASP/PBE"
+  },
+  "retrieved_at": "2026-07-08T23:00:00+08:00",
+  "whitelist_sources_queried": ["NOMAD"],
+  "status": "PARTIAL_WHITELIST_MATCH_NOT_UNIFORMLY_ACCEPTED",
+  "notes": [
+    "NOMAD contains VASP molecule/cluster records for CHO, CH2O, and CH4O.",
+    "No equivalent isolated VASP molecule/cluster record was found for CH3O in the bounded check.",
+    "For internal consistency, all four species were started from reviewable standard molecular geometries and submitted to the same local VASP/PBE gas optimization branch before slab placement."
+  ],
+  "handoff": {
+    "decision": "Use optimized local gas CONTCARs as adsorption-building bases after convergence and geometry validation.",
+    "external_structure_accepted": false
+  }
+}

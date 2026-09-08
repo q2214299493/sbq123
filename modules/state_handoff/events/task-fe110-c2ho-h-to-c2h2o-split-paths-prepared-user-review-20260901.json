@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-split-paths-prepared-user-review-20260901",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-01T17:18:48.5664599+08:00",
+  "recorded_at": "2026-09-01T09:18:48.5664599Z",
+  "summary": "Review-only IS-A-to-intermediate and intermediate-to-FS-A paths were constructed and passed numeric, VTST, periodic-branch, and visual structure checks; both remain unsubmitted and their checksum-bound path reviews await user acceptance.",
+  "payload": {
+    "objective": "Obtain user acceptance or rejection of two concrete split paths before any GPU or VASP calculation is prepared or submitted.",
+    "phase": "active",
+    "current_evidence": [
+      "Segment 1 uses 7 internal images (9 structures total) for H49 surface-site rearrangement from IS-A to the independently converged intermediate; O-H remains nonbonded and the largest adjacent atom step is 0.613632 A.",
+      "Segment 2 uses 9 internal images (11 structures total) through reviewed O-H targets 2.20, 1.70, 1.30, and 1.10 A; O-H decreases monotonically from 2.669336 to 0.981210 A.",
+      "Both segments preserve atom order, the common cell, bottom Fe indices 0-17, and a sequential minimum-image periodic branch; no collision or chemistry-window failure was found.",
+      "VTST dist.pl and nebmovie.pl 0 completed for both candidates. Maximum adjacent dist.pl values are 0.635859 A for segment 1 and 0.527847 A for segment 2.",
+      "Top- and side-view montages were visually inspected. Segment 1 shows a continuous surface H migration and segment 2 shows continuous H lift/O-H formation with smooth adsorbate reorientation.",
+      "The rejected v1/v2 waypoint constructions were not used because independent endpoint-vector interpolation compressed C1-C2 to 1.17-1.22 A; v3 preserves the adsorbate bond-tree lengths.",
+      "These are kinematic path candidates only. No ML/VASP forces, path energies, TS, or barrier are established."
+    ],
+    "one_executable_step": "Present both concrete path montages and geometry tables for user approval or rejection; do not prepare or submit GPU, VASP NEB, Dimer, frequency, or barrier work in the same step.",
+    "submission_boundary": "No calculation submission is authorized. Both path_review_draft.json files remain status needs_review with no reviewer or acceptance timestamp.",
+    "done_when": [
+      "The user accepts or rejects each split path.",
+      "Only after separate calculation authorization may an accepted checksum-bound path enter the applicable execution gate."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/split_path_review_v3_20260901/split_path_review_summary.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/split_path_review_v3_20260901/segment_01_IS_A_to_MID/structure_review.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/split_path_review_v3_20260901/segment_02_MID_to_FS_A/structure_review.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/split_path_review_v3_20260901/split_path_review_summary.json",
+      "sha256": "13fdb7d2eb8dbf63f49299ea177eebc7c29d1113aac6fdf84d142310868a0293",
+      "authority": "module_validation",
+      "observed_at": "2026-09-01T17:18:48.5664599+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/split_path_review_v3_20260901/segment_01_IS_A_to_MID/structure_review.json",
+      "sha256": "25b6ffe14e13db46145c90f622f99418bf2eeae31efa215a9c7bcac2c9faf323",
+      "authority": "module_validation",
+      "observed_at": "2026-09-01T17:18:48.5664599+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/split_path_review_v3_20260901/segment_02_MID_to_FS_A/structure_review.json",
+      "sha256": "018256eebf2bc3d393bdb861fc77147ca1687d22882a13f770a4f14fb06bc5c9",
+      "authority": "module_validation",
+      "observed_at": "2026-09-01T17:18:48.5664599+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-image02-relax-9737143-done-distinct-minimum-20260901"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

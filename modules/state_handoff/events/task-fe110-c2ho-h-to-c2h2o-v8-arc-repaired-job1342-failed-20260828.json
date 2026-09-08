@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-v8-arc-repaired-job1342-failed-20260828",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-28T17:59:38+08:00",
+  "recorded_at": "2026-08-28T10:00:30.1700905Z",
+  "summary": "MZ73 job 1342 failed after 23 direct unrestrained MatRIS ordinary ML-NEB steps when the H50 displacement between images 01 and 02 reached 1.006840 A; the path simultaneously lost O-H transition-region resolution, and AQCat25 audit did not start.",
+  "payload": {
+    "objective": "Await explicit direction before preparing a review-only failure-boundary VASP force-label proposal; do not retry the GPU path automatically.",
+    "phase": "active",
+    "current_evidence": [
+      "Scheduler state is FAILED with NonZeroExitCode and producer exit code 1; runtime was 151 seconds.",
+      "The hard stop was maximum single movable-atom step 1.006840 A versus the 1.0 A limit for one-based H50 between images 01 and 02.",
+      "The forming O-H strict transition-region coverage fell from seed images 10-14 to images 11-12, and maximum O-H backtracking reached 0.163053 A.",
+      "C1-C2 remained 1.403334-1.437868 A, maximum adjacent RMSD was 0.203613 A, minimum pair distance was 0.979997 A, and periodic branches remained numerically continuous.",
+      "Because the borderline atom-step excess accompanies reaction-coordinate collapse, raising only the 1.0 A threshold is not sufficient evidence for a valid path.",
+      "AQCat25 exact-path audit, VASP, fine-tuning, Dimer, TS, and barrier stages did not start."
+    ],
+    "one_executable_step": "If explicitly requested, preserve the last geometry-valid and first failing path states as a hash-bound pair and prepare, but do not submit, exact-structure VASP force-label inputs for review.",
+    "submission_boundary": "The authorization consumed by job 1342 permits no retry, VASP/VTST submission, fine-tuning, Dimer handoff, or TS/barrier claim.",
+    "done_when": [
+      "The failure-boundary pair is hash-bound and structurally reviewed.",
+      "A separate user decision selects VASP labeling, a revised path design, or stopping this branch."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/product_side_arc_length_repair_20260828/gpu_return_job1342_failure/failure_assessment.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/product_side_arc_length_repair_20260828/gpu_return_job1342_failure/producer_exit_record.failure.1342.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/product_side_arc_length_repair_20260828/gpu_return_job1342_failure/failure_assessment.work.json",
+      "sha256": "c8fa54f9e88c89bb54b2b99006c0194e4f6655474e5a4b812bd9d559ea61a322",
+      "authority": "module_validation",
+      "observed_at": "2026-08-28T18:00:30.1700905+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/product_side_arc_length_repair_20260828/gpu_return_job1342_failure/producer_exit_record.failure.1342.json",
+      "sha256": "d7cd1b64b1d6569b47b6dd8d866524c9dbd28cebc2f54bcdfd1647978c6df44f",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-28T17:59:38+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-v8-arc-repaired-job1342-submitted-20260828"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

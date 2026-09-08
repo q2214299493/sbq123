@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-active-learning-heldout-validated-20260827",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-27T20:01:50.7945179+08:00",
+  "recorded_at": "2026-08-27T12:01:50.7949366Z",
+  "summary": "All seven disjoint held-out VASP static labels completed and passed evidence gates; frozen MatRIS passed the six-structure primary held-out thresholds while AQCat25 failed the relative-energy threshold.",
+  "payload": {
+    "objective": "Review the completed held-out validation and prepare the next complete-path TS acceleration plan without submitting a new calculation.",
+    "phase": "active",
+    "current_evidence": [
+      "LSF jobs 9731537-9731543 are DONE; all seven OUTCAR/OSZICAR sets passed normal-completion, electronic-convergence, exact-structure, complete-force, magnetic-evidence, SIGMA=0.20 eV, and remote/local hash gates.",
+      "On six primary disjoint structures MatRIS has force-vector RMSE 0.113936 eV/A, maximum force-vector error 0.388424 eV/A, and relative-energy RMSE 0.087345 eV; all current safety ceilings pass.",
+      "AQCat25 has force-vector RMSE 0.125709 eV/A and relative-energy RMSE 0.133379 eV; the relative-energy ceiling fails, so it remains a force/geometry auditor rather than the TS path energy-ranking authority.",
+      "The held_boundary_12 diagnostic is excluded from the primary aggregate because it is interpolated from two previously labeled parents.",
+      "No MatRIS fine-tuning is required by the current held-out gate. Quantitative uncertainty remains uncalibrated because no real MatRIS committee exists.",
+      "No complete-path rerun, micro-NEB, Dimer, frequency, TS, or barrier job is authorized or submitted."
+    ],
+    "one_executable_step": "Prepare for review a complete-path follow-up using the held-out-validated frozen MatRIS checkpoint as primary and AQCat25 only as a same-structure force/geometry audit; do not submit without explicit authorization.",
+    "submission_boundary": "Preparation and review only; all new GPU/VASP/VTST submissions remain unauthorized.",
+    "done_when": [
+      "The complete-path follow-up inputs, path-quality gates, frozen checkpoint hashes, and fallback routing are prepared for review.",
+      "No quantitative-uncertainty, TS, or barrier claim exceeds the current held-out evidence."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/heldout_validation_execution_20260827/vasp_static_labels/heldout_vasp_force_label_set.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/heldout_validation_execution_20260827/heldout_error_assessment.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/active_learning_state.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/heldout_validation_execution_20260827/vasp_static_labels/heldout_vasp_force_label_set.json",
+      "sha256": "c071ac6f6404b1d8117a849a087110d597c1843d05d3de8ea07e262ad0e08030",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-27T20:01:50.7945179+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/heldout_validation_execution_20260827/heldout_error_assessment.json",
+      "sha256": "a86e2d2748913f232731b98d1f6d0c2800a1b737c62aa96e0ac07b11b5daf949",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T20:01:50.7945179+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/active_learning_state.json",
+      "sha256": "6fd3ab9c874b8111167b27e36dc256e80bbcd6473d60aff29459e07a2e4e3626",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T20:01:50.7945179+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-active-learning-heldout-gpu-complete-20260827"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

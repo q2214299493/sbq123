@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v6-job1328-failed-20260827",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-27T23:38:37.0510620+08:00",
+  "recorded_at": "2026-08-27T15:38:37.0510620Z",
+  "summary": "MZ73 job 1328 passed restrained preconditioning and three release stages, then exited at release strength 2 because the 00-to-01 O-H backtrack exceeded the 0.05 A transient limit by 0.00133 A; no complete ML-NEB path was produced.",
+  "payload": {
+    "objective": "Review a revised restraint-release or reaction-coordinate redistribution design that preserves O-H transition-region resolution before any separately authorized rerun.",
+    "phase": "active",
+    "current_evidence": [
+      "Job 1328 is absent from the active Slurm queue; MZ73 accounting cannot provide an authoritative terminal scheduler state, while the producer record reports failure with exit code 1 at 2026-08-27T14:48:08Z.",
+      "The run completed restrained preconditioning and release strengths 8, 6, and 4, but stopped at release strength 2 step 11 before ordinary MatRIS ML-NEB and before AQCat25 fixed-path audit.",
+      "The 00-to-01 O-H distance increased from 3.079728 to 3.131058 A, a 0.051330 A backtrack against the 0.05 A transient limit.",
+      "Transient interval coverage was not an abort condition, but the same geometry contained no strict 1.1-1.8 A internal image and only image 10 as borderline at 1.095391 A.",
+      "C1-C2 preservation, adjacent RMSD, maximum movable-atom step, minimum pair distance, and periodic branch checks passed.",
+      "No complete GPU path, AQCat25 audit, Dimer parent, VASP result, TS, barrier, fine-tuning, automatic retry, or resubmission exists."
+    ],
+    "one_executable_step": "Prepare a review-only revised release or reaction-coordinate redistribution design; do not submit it without new explicit user authorization.",
+    "submission_boundary": "Job 1328 authorization was single-use. Automatic retry, fine-tuning, GPU resubmission, VASP/VTST submission, Dimer, and TS/barrier claims remain forbidden.",
+    "done_when": [
+      "A revised path-release design is hash-bound and passes local geometry, periodic, monotonicity, and O-H transition-region review.",
+      "Any rerun occurs only after a new explicit user authorization."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v6_soft_interval_20260827/gpu_return_job1328_failure/failure_assessment.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v6_soft_interval_20260827/gpu_return_job1328_failure/restraint_release_04_strength_2.geometry_guard_failure.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v6_soft_interval_20260827/gpu_return_job1328_failure/producer_exit_record.failure.1328.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/active_learning_state.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v6_soft_interval_20260827/gpu_return_job1328_failure/failure_assessment.work.json",
+      "sha256": "519a902a2847e9cdf0c7ed0f33b7a27a21b0d31879943cf821578a5206fb14c2",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T23:38:37.0510620+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v6_soft_interval_20260827/gpu_return_job1328_failure/producer_exit_record.failure.1328.json",
+      "sha256": "9cf064f81ccb8f6374f4319b68544571a198dc99fa160898037cc393b4da97ad",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-27T23:38:37.0510620+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v6_soft_interval_20260827/gpu_return_job1328_failure/restraint_release_04_strength_2.geometry_guard_failure.json",
+      "sha256": "740f089d596cdf9bf0b7cf7fe107205860c6c2fed19c4d1f2de8d1ebbdca236e",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-27T23:38:37.0510620+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/active_learning_state.json",
+      "sha256": "2475e19b7ac907ac5424c4b109eff78a9ecf174ba32a7234816384c572a86325",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T23:38:37.0510620+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v6-job1328-submitted-20260827"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-v10-gpu3-job1347-submitted-20260829",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-29T01:14:00+08:00",
+  "recorded_at": "2026-08-28T17:14:00Z",
+  "summary": "User-authorized MZ73 job 1347 was submitted for the hash-bound v10 frozen-MatRIS path, with a two-GRES Slurm allocation and a startup guard that permits model execution only on physical GPU 3 with at least 12000 MiB free.",
+  "payload": {
+    "objective": "Run and review the complete frozen-MatRIS ordinary ML-NEB path for Fe(110) C2HO*+H* -> C2H2O*+*, followed by AQCat25 exact fixed-path audit only after a complete primary path returns.",
+    "phase": "active",
+    "current_evidence": [
+      "The hash-bound MZ73 remote no-model preflight passed with physical GPU 3 free memory 18939 MiB.",
+      "The v10 request retains the exact v9 structure hashes, frozen checkpoints, no restraints, review-only O-H interval count, and graded C-C preservation policy.",
+      "Slurm job 1347 requests two GPU GRES because this Slurm configuration cannot directly request one physical GPU index; the selector allows model execution only on physical GPU 3.",
+      "The selector requires GPU 3 in the Slurm allocation and at least 12000 MiB free at job start; otherwise it exits before loading either model.",
+      "Job 1347 is initially PENDING with reason Priority."
+    ],
+    "one_executable_step": "Monitor job 1347 to start, confirm its log records physical GPU 3 and the expected UUID, then collect and review the complete MatRIS path and AQCat25 exact-path audit at queue exit.",
+    "submission_boundary": "No automatic retry, MatRIS fine-tuning, VASP peak-triad submission, VASP micro-NEB, Dimer, TS acceptance, or barrier action is authorized.",
+    "done_when": [
+      "Job 1347 exits and its scheduler, GPU-binding, producer, and path artifacts are collected.",
+      "A complete returned path is reviewed for convergence, geometry, reaction-coordinate continuity, peak structure, and AQCat25 exact fixed-path comparison, or a truthful failure diagnosis is recorded."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v10_nonabsolute_guards_20260829/submission_record_job1347.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v10_nonabsolute_guards_20260829/execution_review.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v10_nonabsolute_guards_20260829/remote_preflight_return/remote_preflight.MZ73.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v10_nonabsolute_guards_20260829/submission_record_job1347.json",
+      "sha256": "4de1c250656b6c0b9608c027f58054b6f5d8e004ec8015c449e05255145c577b",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-29T01:14:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v10_nonabsolute_guards_20260829/remote_preflight_return/remote_preflight.MZ73.json",
+      "sha256": "12769c624722176e07f8692a79b152524f3b99134331da4af794d4cb97577f82",
+      "authority": "module_validation",
+      "observed_at": "2026-08-29T01:14:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-v10-nonabsolute-guards-prepared-20260829"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

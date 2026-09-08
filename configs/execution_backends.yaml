@@ -1,0 +1,289 @@
+version: 3
+
+authority:
+  owner: project_orchestration
+  consumers:
+    - adsorption_workflow
+    - transition_state_search
+  orchestration_repository: work
+  direct_gpu_to_vasp_handoff: forbidden
+  automatic_remote_submission: forbidden
+
+backends:
+  work:
+    role: orchestration_and_scientific_gates
+    repository_root: C:/Users/86177/Desktop/work
+    allowed:
+      - evidence_retrieval_and_review
+      - reaction_contract_and_hash_generation
+      - endpoint_path_and_structure_validation
+      - backend_handoff_validation
+      - calculation_registry_updates
+      - scientific_result_acceptance_through_owning_module
+    forbidden:
+      - pretending_predicted_values_are_dft_results
+
+  aqcat_gpu:
+    role: candidate_acceleration_only
+    display_name: BUCT(sbq)
+    observed_hostname: MZ73
+    # Local checkout used only to prepare and audit MZ73 payloads.  Keep the
+    # parent directory explicit so path checks do not depend on mojibake or a
+    # second hard-coded machine-learning path.
+    local_ml_root: C:/Users/86177/Desktop/机器学习
+    ssh:
+      host: 10sx4jr711576.vicp.fun
+      port: 36039
+      user: sbq
+      identity_file: C:/Users/86177/.ssh/id_ed25519_fe_agent
+      identities_only: true
+    source_repository: C:/Users/86177/Desktop/机器学习/aqcat25_ts_pilot
+    remote_root: /home/sbq/sbq/aqcat25_ts_pilot
+    remote_write_boundary: /home/sbq/sbq
+    scheduler:
+      type: Slurm
+      accounting_storage_type: accounting_storage/none
+      job_acct_gather_type: jobacct_gather/none
+      scheduler_terminal_state_after_queue_exit: unavailable_without_admin_change
+      required_workflow_evidence: producer_exit_record
+      producer_exit_record_is_scheduler_authority: false
+      admin_resolution: enable Slurm accounting storage and job accounting on MZ73
+    allowed:
+      - aqcat_energy_force_inference
+      - matris_energy_force_inference
+      - adsorption_candidate_ml_relaxation_and_ranking
+      - endpoint_ml_relaxation
+      - idpp_path_initialization
+      - ase_ml_neb_and_ml_ci_neb_path_optimization
+      - ba_sella_candidate_search
+      - force_only_fine_tuning
+      - energy_force_aware_fine_tuning
+      - uncertainty_and_domain_review
+      - fixed_path_multi_checkpoint_committee_inference
+      - dual_model_ts_path_optimization_and_fixed_path_comparison
+    forbidden:
+      - vasp_execution
+      - vasp_submission
+      - authoritative_dft_energy_or_force_claim
+      - transition_state_acceptance
+      - registry_energy_promotion
+      - external_evidence_gate_bypass
+
+  vasp:
+    role: authoritative_first_principles_calculation
+    ssh_alias: sunboquan-codex
+    scheduler: LSF
+    allowed:
+      - vasp_static_energy_and_force
+      - vasp_adsorption_relaxation_and_final_static
+      - vasp_endpoint_relaxation
+      - vtst_neb_and_ci_neb
+      - vtst_dimer
+      - frequency_and_displacement_calculation
+    forbidden:
+      - aqcat_training
+      - aqcat_candidate_ranking
+      - unreviewed_gpu_candidate_submission
+      - acceptance_without_owning_module_validation
+
+aqcat25_contract:
+  schema_version: 2
+  schema: configs/aqcat25_handoff.schema.json
+  validator: scripts/aqcat25_handoff.py
+  domain_gate: configs/aqcat25_domain_gate.yaml
+  gpu_runner_relative_to_source_repository: relax_endpoint_candidates.py
+  gpu_job_wrapper: scripts/aqcat25_gpu_job.sh
+  shared_mz73_environment: scripts/aqcat25_mz73_env.sh
+  required_validation_points:
+    - work_before_transfer
+    - gpu_before_execution
+    - gpu_before_return
+    - work_after_return
+  adsorption_species_definition: manifest_adsorbate_atoms_anchors_connectivity_constraints_and_monitored_pairs
+  species_specific_hard_code: forbidden
+
+dual_model_ts_path_acceleration:
+  primary_model: matris
+  primary_role: ordinary_ml_neb_and_conditional_ml_ci_neb
+  secondary_model: aqcat25
+  secondary_role: exact_fixed_primary_path_energy_force_inference_only
+  executor: scripts/dual_model_ml_neb.py
+  gpu_job_wrapper: scripts/dual_model_ml_neb_job.sh
+  preconditioning:
+    temporary_bilateral_harmonic_bond_restraints: allowed
+    restraints_must_be_removed_before_ordinary_ml_neb: true
+    constrained_output_is_mep: false
+  model_comparison:
+    identical_structure_hashes_required: true
+    raw_cross_model_absolute_energy_comparison: forbidden
+    disagreement_status: sampling_score_not_calibrated_uncertainty
+  active_learning:
+    policy: configs/dual_model_ts_active_learning.yaml
+    exact_dual_model_prediction_runner: scripts/dual_model_ts_force_prediction_batch.py
+    matris_committee_runner: scripts/matris_ts_path_committee.py
+    vasp_label_selector: scripts/select_dual_model_ts_vasp_labels.py
+    vasp_error_assessor: scripts/assess_dual_model_ts_vasp_errors.py
+    committee_minimum_members: 3
+    committee_maximum_members: 5
+    committee_fallback: matris_primary_plus_optional_aqcat25_audit_plus_vasp_error
+    failure_boundary_pair_required_when_available: true
+    vasp_labels_require_energy_forces_and_magnetic_moments: true
+    automatic_local_preparation: true
+    automatic_remote_submission: false
+  smoke_test:
+    accepted_job_id: "1317"
+    review: calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_smoke_v3_20260825/smoke_review.work.json
+  automatic_submission: forbidden
+  production_gpu_request_requires_separate_user_authorization: true
+
+aqcat25_ts_active_learning:
+  policy: configs/aqcat25_ts_active_learning.yaml
+  controller: scripts/ts_strategy_engine/cli.py
+  entrypoint: python -m scripts.ts_strategy_engine.cli active-learning
+  # The standalone module is a compatibility wrapper; all new invocations use
+  # ``python -m scripts.ts_strategy_engine.cli active-learning``.
+  legacy_wrapper: scripts/aqcat25_ts_active_learning.py
+  internal_document_schema: configs/aqcat25_ts_active_learning.schema.json
+  internal_document_validator: scripts/aqcat25_ts_schema.py
+  force_prediction_runner: scripts/aqcat25_ts_force_prediction.py
+  training_data_builder: scripts/aqcat25_ts_training_data.py
+  checkpoint_validator: scripts/aqcat25_ts_checkpoint_validation.py
+  complete_path_runner: scripts/aqcat25_ml_neb.py
+  complete_path_gpu_job: scripts/aqcat25_ml_neb_job.sh
+  complete_path_manifest_validator: scripts/ts_strategy_engine/ml_neb_path.py
+  complete_path_committee_runner: scripts/aqcat25_ml_path_committee.py
+  complete_path_active_learning_controller: scripts/ts_strategy_engine/active_learning_path.py
+  gpu_finetune_job: scripts/aqcat25_ts_finetune_job.sh
+  ts_domain_gate: configs/aqcat25_ts_domain_gate.yaml
+  sequence:
+    - predicted_ba_sella_candidate
+    - work_structure_and_provenance_review
+    - sunboquan_codex_static_force_label
+    - work_completion_and_electronic_convergence_gate
+    - mz73_exact_structure_force_prediction
+    - work_force_error_assessment
+    - adsorption_replay_plus_held_out_regression
+    - mz73_force_only_finetuning_when_required
+    - checkpoint_load_and_regression_validation
+    - mz73_ba_sella_rerun_with_new_checkpoint
+    - independent_vasp_labeled_ts_domain_validation
+    - repeat_or_handoff_to_vasp_refinement
+  complete_path_sequence:
+    - hash_bound_gpu_ml_neb_path
+    - work_path_review_and_batch_image_selection
+    - optional_three_or_more_checkpoint_path_committee_disagreement
+    - reviewed_hash_bound_vasp_force_label_batch_preparation
+    - one_bounded_user_authorization_before_vasp_submission
+    - batch_done_evidence_and_exact_structure_force_ingestion
+    - aggregate_aqcat25_vs_vasp_force_assessment
+    - force_only_finetuning_and_complete_path_rerun_when_required
+    - disjoint_independent_vasp_labeled_ts_domain_validation
+  local_force_agreement_claim: heuristic_finetuning_trigger_only
+  active_learning_convergence_claim: independent_ts_domain_validation_required_not_transition_state_acceptance
+  automatic_submission: forbidden
+  vasp_scheduler_evidence: captured_raw_bjobs_output_hash_plus_live_same_job_recheck
+
+handoffs:
+  work_to_gpu:
+    schema_direction: work_to_gpu
+    required_common:
+      - workflow_kind
+      - compatibility_sha256
+      - selective_dynamics
+    workflows:
+      adsorption:
+        required:
+          - evidence_gated_plan_sha256
+          - clean_slab_sha256
+          - adsorbate_identity_and_connectivity
+          - candidate_structure_and_sha256
+          - intended_motif
+        gate: evidence_and_structure_gate_pass
+      transition_state:
+        required:
+          - normalized_reaction_contract
+          - contract_sha256
+          - atom_map_sha256
+          - initial_structure_and_sha256
+          - final_structure_and_sha256
+          - indexed_bond_changes
+        gate: endpoint_mapping_and_compatibility_pass
+
+  gpu_to_work:
+    schema_direction: gpu_to_work
+    required:
+      - producer_backend
+      - gpu_job_id
+      - model_identifier
+      - checkpoint_sha256
+      - candidate_structure_and_sha256
+      - optimizer_status
+      - predicted_energy_and_force_units
+      - domain_or_uncertainty_status
+      - source_workflow_hash
+      - producer_exit_record
+    workflows:
+      adsorption:
+        result_class: predicted_adsorption_candidate_only
+        gate: work_adsorption_geometry_chemistry_and_provenance_review
+      transition_state:
+        result_class: predicted_transition_state_candidate_only
+        gate: work_path_geometry_and_provenance_review
+
+  work_to_vasp:
+    required_common:
+      - reviewed_structure_and_sha256
+      - source_compatibility_sha256
+      - structure_gate_verdict
+      - vasp_input_preflight_verdict
+      - target_calculation_type
+      - explicit_submission_authority
+    workflows:
+      adsorption:
+        required:
+          - source_evidence_gated_plan_sha256
+          - source_clean_slab_sha256
+          - adsorbate_identity_and_connectivity
+        allowed_calculation_types:
+          - adsorption_relaxation
+          - adsorption_final_static
+      transition_state:
+        required:
+          - source_contract_sha256
+          - source_atom_map_sha256
+        allowed_calculation_types:
+          - active_learning_static_force_label
+          - neb_or_ci_neb
+          - dimer
+          - frequency_or_displacement
+    gate: reviewed_candidate_and_vasp_preflight_pass
+
+  vasp_to_work:
+    required:
+      - scheduler_record
+      - input_and_output_file_hashes
+      - electronic_status
+      - ionic_or_force_status
+      - final_structure
+      - parsed_energy_and_force_provenance
+    result_class: calculation_evidence_pending_scientific_validation
+    gate: owning_module_result_validation
+
+scientific_rules:
+  aqcat_values_may_rank_candidates: true
+  aqcat_ranking_requires_in_domain_calibration_status: true
+  aqcat_may_prioritize_evidence_accepted_adsorption_candidates: true
+  aqcat_alone_may_remove_an_evidence_required_adsorption_motif: false
+  aqcat_may_prove_final_adsorption_site_or_global_minimum: false
+  aqcat_values_may_enter_reportable_dft_tables: false
+  aqcat_may_replace_whitelist_or_literature_evidence_gate: false
+  gpu_candidate_may_be_called_transition_state: false
+  vasp_completion_implies_scientific_acceptance: false
+  grade_a_requires_validated_vibrational_mode: true
+  dimer_grade_a_requires_bidirectional_connectivity: false
+  dimer_bidirectional_connectivity_role: optional_diagnostic_not_ts_acceptance_gate
+  neb_ci_neb_bidirectional_connectivity_policy: required_unchanged
+  active_learning_force_label_energy_may_enter_final_energy_tables: false
+  active_learning_convergence_implies_valid_transition_state: false
+  final_ts_result_requires_completed_converged_vasp_refinement: true
+  final_barrier_requires_grade_a_and_compatible_final_energy_is_ts_fs: true

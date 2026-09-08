@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-monotonic-dual-model-1320-submitted-20260826",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-26T01:11:13+08:00",
+  "recorded_at": "2026-08-25T17:11:13Z",
+  "summary": "After explicit user authorization and passing hash-bound local, VTST, and MZ73 remote preflights, submitted the exact 17-image monotonic MatRIS-primary/AQCat25-secondary GPU path request as Slurm job 1320; initial scheduler state PENDING.",
+  "payload": {
+    "objective": "Run and review MZ73 job 1320 for the Fe(110) C2HO* + H* -> C2H2O* + * monotonic dual-model predicted path candidate.",
+    "phase": "active",
+    "current_evidence": [
+      "The user explicitly authorized submission of request SHA-256 8bb16864c2cb53015b0b6e15bb207c0cc7e7ec080527861756392e394d25cfb1.",
+      "VTST dist.pl and nebmovie.pl 0 path-export preflights completed for the reviewed 17-image seed; the generated movie was returned to work and hash recorded.",
+      "MZ73 remote preflight passed all 17 image hashes, four request-bound runtime hashes, both checkpoint hashes, shell syntax, Python compilation, duplicate-live-job, and empty-output checks.",
+      "Slurm job 1320 was submitted exactly once with one GPU, four CPUs, 40 GB memory, and a four-hour walltime.",
+      "The initial live scheduler query reports PENDING for Priority. Scheduler state does not establish producer progress or scientific validity.",
+      "The job remains a predicted path candidate only; no VASP job, DIMER parent, TS, or barrier is authorized or established."
+    ],
+    "one_executable_step": "At the next requested checkpoint, query live Slurm state and inspect the hash-bound producer state/log; after termination, return all artifacts to work and validate O-H monotonicity and 1.1-1.8 A coverage, C-C preservation, periodic continuity, elementary-step topology, and MatRIS/AQCat25 exact-structure comparison before any VASP recommendation.",
+    "submission_boundary": "Job 1320 is the single authorized GPU submission for this exact request. Do not resubmit, change the method, submit VASP, or prepare a DIMER handoff without new reviewed evidence and authorization.",
+    "done_when": [
+      "Job 1320 has a terminal producer record and is absent from the live queue.",
+      "All returned image and runtime hashes validate and the complete path passes work-side geometry, monotonic O-H, O-H interval coverage, C-C preservation, periodic branch, and elementary-step review.",
+      "The dual-model comparison is reviewed and a least-cost VASP validation/refinement recommendation is ready for separate authorization."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_monotonic_rebuild_20260826/submission_record_job1320.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_monotonic_rebuild_20260826/remote_submission_preflight.MZ73.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_monotonic_rebuild_20260826/work_to_gpu/request.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_monotonic_rebuild_20260826/submission_record_job1320.json",
+      "sha256": "ef654369f4955ca9274193d9fe7c1a163643e3957128b4096e205822b827b429",
+      "authority": "scheduler",
+      "observed_at": "2026-08-26T01:11:13+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_monotonic_rebuild_20260826/remote_submission_preflight.MZ73.json",
+      "sha256": "2e9168f8c3a32f8895952b244bc7391f86c226abb31985171392d5205eb73afe",
+      "authority": "module_validation",
+      "observed_at": "2026-08-26T01:11:13+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_monotonic_rebuild_20260826/work_to_gpu/request.json",
+      "sha256": "8bb16864c2cb53015b0b6e15bb207c0cc7e7ec080527861756392e394d25cfb1",
+      "authority": "structure_output",
+      "observed_at": "2026-08-26T01:11:13+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-monotonic-17img-dual-model-rebuild-ready-20260826"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

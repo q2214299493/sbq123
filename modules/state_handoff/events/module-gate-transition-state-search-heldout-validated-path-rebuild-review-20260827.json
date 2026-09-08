@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "event_id": "module-gate-transition-state-search-heldout-validated-path-rebuild-review-20260827",
+  "event_type": "module_gate_changed",
+  "entity": {
+    "kind": "module",
+    "id": "transition_state_search",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-27T20:59:27.2162052+08:00",
+  "recorded_at": "2026-08-27T12:59:27.2162052Z",
+  "summary": "Replace the stale 2026-08-07 transition-state module gate with the completed seven-job held-out validation and the pending review-only path rebuild gate.",
+  "payload": {
+    "module": "transition_state_search",
+    "status": "Active",
+    "depends_on": "user review of the 19-image seed, hash-bound MZ73 preflight, and separate authorization before any additional submission",
+    "current_gate": "Held-out VASP jobs `9731537`-`9731543` are `DONE` and quality-passed; frozen MatRIS passed the six-structure primary held-out gate, while AQCat25 remains a force/geometry auditor after failing the relative-energy ceiling. A local 19-image complete-path rebuild is prepared for review. The completed seven-job batch is recorded; no additional GPU/VASP/VTST submission is authorized"
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/heldout_validation_execution_20260827/heldout_error_assessment.json",
+      "sha256": "a86e2d2748913f232731b98d1f6d0c2800a1b737c62aa96e0ac07b11b5daf949",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T20:59:27.2162052+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/complete_path_rebuild_plan.json",
+      "sha256": "f1800024c7291b4c60f5bbc361b1e31c602e0f8761e809a1ffe453d23593acbd",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T20:59:27.2162052+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/seed_geometry_review.json",
+      "sha256": "3e3cfa9208e3f8df86ace60dfb3e6df3b7fa2fa6fa74608053631bb61b1f88f1",
+      "authority": "structure_output",
+      "observed_at": "2026-08-27T20:59:27.2162052+08:00"
+    }
+  ],
+  "supersedes": [
+    "module-gate-fe110-co-formal-barrier-registered-20260807"
+  ],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "state_projection_drift_correction",
+      "cross_module_change"
+    ],
+    "status": "pending"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "event_id": "state-fe110-co-gate-9655921-20260803",
+  "event_type": "state_observed",
+  "entity": {
+    "kind": "state",
+    "id": "active-fe-110-co-dissociation-test-current-gate",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-03T12:17:34+08:00",
+  "recorded_at": "2026-08-03T12:17:34+08:00",
+  "summary": "Record the current nine-image replacement-pilot gate.",
+  "payload": {
+    "block_id": "active-fe-110-co-dissociation-test-current-gate",
+    "section": "## Active Fe(110) CO Dissociation Test",
+    "title": "Current Gate — 2026-08-03 Evidence Snapshot",
+    "facts": [
+      "The user selected the reviewed nine-interior-image segmented-IDPP path and default `MAGMOM=2.2 mu_B/Fe`; the path has monotonic C-O, no periodic jump or independent site event, and exact bottom 18 Fe.",
+      "Job `9655434` is scheduler `EXIT` with zero ionic steps because 14 ranks/image could not be divided by `NPAR=4`; it produced no scientific result.",
+      "Preflight now enforces both total-rank/IMAGES and per-image-rank/NPAR divisibility; all 13 targeted tests pass.",
+      "Exact-same-path replacement pilot `9655921` uses 108 ranks (`9x12`, `12/NPAR4=3`) and was scheduler `PEND` at 2026-08-03 12:17 CST. Remote inputs, approved POTCAR, and 00--10 POSCAR hashes match; no coarse NEB or downstream TS job is submitted."
+    ],
+    "next_action": "Monitor job `9655921` to terminal state and validate all nine internal images before any coarse NEB."
+  },
+  "evidence": [
+    {
+      "locator": "docs/02_CURRENT_STATE.md",
+      "sha256": "e14defdd48946a05c0e7702a24cf6181b71bf407836ab47e918c434ca3663073",
+      "authority": "repository_document",
+      "observed_at": "2026-08-03T12:17:34+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/runs/ordinary_neb_9img_fresh_local_endpoint_idpp_waypoint_pilot_np108_20260803/scheduler_evidence.json",
+      "sha256": "003f2bb5e285d7774953616702119ca45f370a91b3fa56139a5bb929083f40fd",
+      "authority": "scheduler",
+      "observed_at": "2026-08-03T12:17:34+08:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "live_scheduler_state",
+      "user_approved_state_sync"
+    ],
+    "status": "pending"
+  }
+}

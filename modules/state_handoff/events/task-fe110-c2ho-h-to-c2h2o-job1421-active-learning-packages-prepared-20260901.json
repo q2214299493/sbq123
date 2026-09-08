@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-job1421-active-learning-packages-prepared-20260901",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-01T23:12:00+08:00",
+  "recorded_at": "2026-09-01T15:12:00Z",
+  "summary": "Job 1421 passed the active-learning entry review. Six exact pre/fail structures from images 04-06 now have a hash-bound MatRIS/AQCat25 prediction request and compatible SIGMA=0.20 eV VASP NSW=0 static-label inputs; all local diagnostic-static preflights pass and no job was submitted.",
+  "payload": {
+    "objective": "Obtain user review and separate authorization for the six-structure MZ73 dual-model prediction batch. Review returned predictions before any VASP label submission.",
+    "phase": "active",
+    "current_evidence": [
+      "The hash-bound step-0 seed snapshot is converged and geometry-valid, retains O-H transition-region images 04, 05, and 06, and is the last persisted valid full-path reference; the immediate pre-failure step was not separately retained.",
+      "The step-157 restart preserves all eight failed structures. Exact pre/fail pairs were prepared for images 04, 05, and 06 without structure or rounded-geometry duplicates.",
+      "The six structures do not overlap the frozen seven-structure held-out TS validation set by exact structure hash or translation-invariant geometry hash.",
+      "A six-structure frozen-checkpoint MatRIS/AQCat25 exact-structure prediction request validates locally and remains prepared but unsubmitted.",
+      "Six exact-structure VASP static force-label directories use GGA=PE, ENCUT=400 eV, ISPIN=2, ISMEAR=1, SIGMA=0.20 eV, Gamma 5x5x1, NSW=0, IBRION=-1, ISYM=0, LDIPOL=false, the fixed bottom-18 mask, and 32 ranks.",
+      "All six repository diagnostic_static preflights pass. The VASP batch is prepared but cannot be submitted before the exact dual-model prediction set returns and is reviewed.",
+      "No GPU, VASP, fine-tuning, path-rerun, micro-NEB, or Dimer job was submitted.",
+      "Durable preference UP-039 now requires both active-learning and direct-VASP choices after GPU TS failures and makes active-learning diagnosis the preferred first route when its entry gate passes."
+    ],
+    "one_executable_step": "Present the six-structure package for review; after separate explicit authorization, submit only the bound MatRIS/AQCat25 prediction batch to MZ73.",
+    "submission_boundary": "Preparation is not submission authority. VASP labels require returned/reviewed exact predictions and separate bounded authorization; fine-tuning, checkpoint promotion, path rerun, micro-NEB, and Dimer remain separately unauthorized.",
+    "done_when": [
+      "The user accepts or requests changes to the six pre/fail structures.",
+      "Any authorized MZ73 prediction execution is bound to the prepared request hash and passes its remote no-model preflight."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/comparison_plan.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/dual_model_prediction_batch_request.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/vasp_force_label_batch_request.json`",
+      "`docs/09_USER_PREFERENCES.md`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/comparison_plan.work.json",
+      "sha256": "9dd359cdd3a4bfea5bfa14dc49c20e5aad992bd09d67743ef1b5a60575f13a41",
+      "authority": "module_validation",
+      "observed_at": "2026-09-01T23:12:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/dual_model_prediction_batch_request.json",
+      "sha256": "34e1a4dd41084fdf8df45bec6ba137bb3ecebeb8e928cba5285f1bf299251483",
+      "authority": "repository_document",
+      "observed_at": "2026-09-01T23:12:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/vasp_force_label_batch_request.json",
+      "sha256": "15a0c1a36e7f77c53d1cf6f9ef801d4ddde56f70e3b5c70f53d3bf4d13b11094",
+      "authority": "repository_document",
+      "observed_at": "2026-09-01T23:12:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-local-oh-gpu-job1421-failed-geometry-20260901"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

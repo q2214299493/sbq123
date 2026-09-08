@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-vasp-micro-neb-pilot-job9733804-running-20260829",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-29T12:03:14.2960593+08:00",
+  "recorded_at": "2026-08-29T04:03:14.2966753Z",
+  "summary": "The user-approved six-structure local path passed preflight and execution gate; its required four-internal-image NSW=1 VASP pilot was submitted as LSF job 9733804 and is RUNNING.",
+  "payload": {
+    "objective": "Monitor and validate the same-path NSW=1 local VASP micro-NEB pilot before any formal micro-NEB submission.",
+    "phase": "active",
+    "current_evidence": [
+      "The checksum-bound path review was accepted by the user at 2026-08-29T12:01:27+08:00.",
+      "The neb_pilot preflight passed with bundle SHA-256 69ee4c0fc26bbb5b71848b1b1e66ca9276855a74b799ca3c3e81c6c311cbc6ba.",
+      "The authoritative execution gate returned READY_FOR_NEB_PILOT and allowed only SUBMIT_DIAGNOSTIC_VASP.",
+      "LSF job 9733804 is RUNNING on four 32-rank hosts in queue Gkn_normal.",
+      "The remote input is the approved four-internal-image no-climb path with NSW=1, ISMEAR=1, SIGMA=0.20 eV, ENCUT=400 eV, and IMAGES=4.",
+      "No formal micro-NEB, Dimer, TS, or barrier result has been submitted or accepted."
+    ],
+    "one_executable_step": "Wait for job 9733804 to reach a terminal LSF state, collect all four internal-image outputs plus raw DONE evidence, and run the canonical pilot validator.",
+    "submission_boundary": "Submit the formal micro-NEB only if job 9733804 is LSF DONE and the hash-bound canonical pilot validator passes. Do not automatically retry, alter the path, start CI-NEB/Dimer, accept a TS, or report a barrier.",
+    "done_when": [
+      "Job 9733804 has terminal scheduler evidence and complete collected image outputs.",
+      "The canonical pilot validator records PASS or a truthful failure diagnosis."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_ml12_14_4img_20260829/c2ho_h_micro_neb_ml12_14_4img_pilot_20260829/submission_record.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_ml12_14_4img_20260829/c2ho_h_micro_neb_ml12_14_4img_pilot_20260829/execution_gate_decision.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_ml12_14_4img_20260829/c2ho_h_micro_neb_ml12_14_4img_pilot_20260829/submission_record.json",
+      "sha256": "32b8c44a7bc46e79fe8f81d2b99a9d21005bda97fbbd8ee3aa71acaa9eac8f44",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-29T12:03:14.2960593+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-vasp-micro-neb-ml12-14-path-prepared-20260829"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

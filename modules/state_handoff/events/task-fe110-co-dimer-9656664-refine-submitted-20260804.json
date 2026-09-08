@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-co-dimer-9656664-refine-submitted-20260804",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-co-dissociation",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-04T23:40:36+08:00",
+  "recorded_at": "2026-08-04T23:40:36+08:00",
+  "summary": "Continue job 9656664 Dimer from its hash-bound final structure and mode in a separate directory with only EDIFFG tightened to -0.005 eV/A.",
+  "payload": {
+    "objective": "Run one bounded VASP/VTST Dimer continuation from job 9656664 CONTCAR and NEWMODECAR without altering the original calculation directory.",
+    "phase": "active",
+    "current_evidence": [
+      "Source job 9656664 is scheduler DONE and its original remote and local directories are preserved.",
+      "Restart POSCAR is the source CONTCAR and restart MODECAR is the source NEWMODECAR; hashes match the reviewed terminal artifacts.",
+      "The restart mode has norm 1.0, zero fixed-bottom-18-Fe components, and 0.95685 of its norm on C/O.",
+      "The continuation INCAR differs from source job 9656664 only in EDIFFG: -0.02 to -0.005 eV/A; all DFT, magnetic, optimizer, Dimer, and resource settings remain unchanged.",
+      "The exact 32-core bundle passed Dimer preflight; the authoritative gate allowed START_DIMER; LSF job 9694894 is PEND."
+    ],
+    "one_executable_step": "Monitor LSF job 9694894. At RUN inspect bounded SCF, DIMCAR force, torque, curvature, and geometry; at terminal hash-bind outputs and run Dimer analysis before any frequency or TS claim.",
+    "submission_boundary": "Only job 9694894 is authorized. Do not submit CI-NEB, frequency, connectivity, matched static, or report a barrier.",
+    "done_when": [
+      "Job 9694894 reaches DONE or EXIT with scheduler evidence.",
+      "Dimer output, final structure, force, curvature, torque, and final mode are hash-bound and analyzed.",
+      "Any later frequency handoff receives separate review, preflight, user authority, and execution gate."
+    ],
+    "authoritative_references": [
+      "Scientific and Dimer gates: modules/transition_state_search/README.md.",
+      "Numerical branch: configs/true_fe110_production.yaml.",
+      "Execution gate: scripts/ts_strategy_engine/execution_gate.py.",
+      "Sole executor: scripts/neb_agent/submission.py."
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/dimer_refine_job9656664_ediffg005_20260804/submission_record.json",
+      "sha256": "c85a23d0ea62f6bf4b80a41e79a8fe184d0d122faab68e8bbc9edd7334897a64",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-04T23:40:36+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/dimer_refine_job9656664_ediffg005_20260804/AUTHORITATIVE_NEB_EXECUTION_GATE.json",
+      "sha256": "8a6bbeb76d07a611a31f084fd07df77b97ca9cfb50ac1b260c9a7e965e8754a7",
+      "authority": "module_validation",
+      "observed_at": "2026-08-04T23:40:36+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/dimer_refine_job9656664_ediffg005_20260804/scheduler_evidence_pend_20260804.json",
+      "sha256": "4110f25e5b3e344b09fdbc9d5f1c5a2f07111a854f9fc64cb720468e31f6fe73",
+      "authority": "scheduler",
+      "observed_at": "2026-08-04T23:40:36+08:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "live_scheduler_state",
+      "scientific_method_transition"
+    ],
+    "status": "pending"
+  }
+}

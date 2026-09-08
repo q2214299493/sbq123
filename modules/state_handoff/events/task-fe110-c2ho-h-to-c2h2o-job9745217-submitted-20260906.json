@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-job9745217-submitted-20260906",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-06T20:13:25+08:00",
+  "recorded_at": "2026-09-06T12:13:25Z",
+  "summary": "The explicitly authorized, hash-bound 80-core ordinary no-climb local O-H densified micro-NEB was submitted once to sunboquan-codex as LSF job 9745217. Immediate scheduler evidence reports RUN. The new VASP attempt is registered in the strategy-learning store; no pilot, CI-NEB, Dimer, frequency, or resubmission was launched.",
+  "payload": {
+    "objective": "Monitor LSF job 9745217 to a terminal scheduler state, then collect and classify its electronic, ionic-force, geometry, and path-quality evidence before any next TS action.",
+    "phase": "active",
+    "current_evidence": [
+      "The submitted bundle is the reviewed five-internal-image local O-H path with O-H distances 2.0320, 1.7800, 1.5500, 1.3200, 1.1143, 1.0500, and 0.9989 Angstrom.",
+      "Repository preflight passed for ordinary_neb with 80 MPI ranks and five internal images; exact-input failure history returned NO_KNOWN_FAILURE.",
+      "The final execution gate bound the current bundle and explicit user authorization and allowed only SUBMIT_VASP.",
+      "Submission created LSF job 9745217 in ~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/vasp_micro_neb_job9742743_local_oh_densified_5internal_20260906.",
+      "Immediate live scheduler evidence reports RUN.",
+      "Strategy attempt vasp_neb_9745217_submitted_20260906 is registered against the ordinary-neb baseline variant."
+    ],
+    "one_executable_step": "Monitor job 9745217 and, once terminal, collect final 01-05 calculation files plus scheduler evidence and run the canonical ordinary-NEB analysis, geometry, path-quality, and strategy-outcome closeout.",
+    "submission_boundary": "Do not resubmit, stop, change inputs, enable CI-NEB, prepare or submit Dimer/frequency work, accept a TS, or report a barrier without new evidence and the applicable current gate. The current authorization has been consumed.",
+    "done_when": [
+      "Job 9745217 reaches DONE or EXIT and its scheduler, electronic, ionic-force, geometry, and scientific path statuses are separately recorded.",
+      "The registered strategy attempt receives a hash-bound success or failure outcome."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_job9742743_local_oh_densified_5internal_20260906/submission_record.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_job9742743_local_oh_densified_5internal_20260906/scheduler_evidence_submitted.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_job9742743_local_oh_densified_5internal_20260906/strategy_learning_attempt_receipt.json`",
+      "`modules/transition_state_search/README.md`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_job9742743_local_oh_densified_5internal_20260906/submission_record.json",
+      "sha256": "96d6f3d3c460d13c2d95c5029c2a51811f76700c2f0515cb4d5188f6dbe9e0de",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-06T20:13:25+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_job9742743_local_oh_densified_5internal_20260906/scheduler_evidence_submitted.json",
+      "sha256": "541ff2382d34bd77362253216d630342092551451701e8762ad1bd8b8917feb7",
+      "authority": "scheduler",
+      "observed_at": "2026-09-06T20:13:25+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_job9742743_local_oh_densified_5internal_20260906/user_execution_authorization.json",
+      "sha256": "a60bb42cd2f56a907ac49e5eaa8b01e22933a4a4c47a07e78d6c63cd3ddc8481",
+      "authority": "user_authorization",
+      "observed_at": "2026-09-06T20:13:25+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_job9742743_local_oh_densified_5internal_20260906/strategy_learning_attempt_receipt.json",
+      "sha256": "8b608defec50f48befd3b54d6a6300a44954665c338394b7a9e41c8dd7d5074f",
+      "authority": "calculation_registry",
+      "observed_at": "2026-09-06T20:13:25+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-job9742743-local-oh-ready-20260906"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

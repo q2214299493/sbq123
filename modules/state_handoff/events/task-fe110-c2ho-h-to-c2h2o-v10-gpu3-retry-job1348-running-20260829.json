@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-v10-gpu3-retry-job1348-running-20260829",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-29T01:20:45+08:00",
+  "recorded_at": "2026-08-28T17:20:45Z",
+  "summary": "Corrected MZ73 retry job 1348 is RUNNING; Slurm allocated physical GPUs 2 and 3, the selector bound the v10 dual-model process to physical GPU 3 with 18939 MiB free at startup, and the live process uses the expected request and retry output root.",
+  "payload": {
+    "objective": "Run and review the complete frozen-MatRIS ordinary ML-NEB path for Fe(110) C2HO*+H* -> C2H2O*+*, followed by AQCat25 exact fixed-path audit only after a complete primary path returns.",
+    "phase": "active",
+    "current_evidence": [
+      "Slurm job 1348 is RUNNING on MZ73 with a six-hour limit.",
+      "Slurm allocated physical GPU IDs 2 and 3; the selector bound the model process to physical GPU 3 and recorded the expected UUID.",
+      "Physical GPU 3 had 18939 MiB free at startup; the live sbq dual_model_ml_neb.py process is using approximately 2458 MiB.",
+      "The live command references the hash-bound v10 request and output/production_retry1.",
+      "No VASP, Dimer, fine-tuning, or additional retry is authorized."
+    ],
+    "one_executable_step": "Monitor job 1348 to queue exit, collect the complete producer/path artifacts, and review MatRIS convergence, geometry/reaction-coordinate continuity, peak structure, and AQCat25 exact-path comparison.",
+    "submission_boundary": "No further automatic retry, MatRIS fine-tuning, VASP, micro-NEB, Dimer, TS acceptance, or barrier action is authorized.",
+    "done_when": [
+      "Job 1348 exits and all available scheduler, producer, and path artifacts are collected.",
+      "The returned complete path is reviewed or a truthful failure diagnosis is recorded before any downstream proposal."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v10_nonabsolute_guards_20260829/submission_record_job1348.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v10_nonabsolute_guards_20260829/retry1_execution_review.work.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v10_nonabsolute_guards_20260829/submission_record_job1348.json",
+      "sha256": "bcebd69b16befd2326ac7019b95001928ea19106f0a82ccf6e54b3b0d0b1265d",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-29T01:20:45+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-v10-gpu3-job1347-failed-wrapper-permission-20260829"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

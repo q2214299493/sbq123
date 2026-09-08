@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sbq.local/schemas/state-handoff-event-v1.json",
+  "title": "Repository state handoff event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "event_id",
+    "event_type",
+    "entity",
+    "occurred_at",
+    "recorded_at",
+    "summary",
+    "payload",
+    "evidence",
+    "supersedes",
+    "review"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "event_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{7,127}$"},
+    "event_type": {
+      "enum": [
+        "task_opened", "task_updated", "task_acceptance_recorded", "task_completed", "state_observed",
+        "module_gate_changed", "backlog_item_added", "backlog_item_closed",
+        "error_opened", "error_resolved", "decision_recorded", "history_recorded",
+        "repository_item_classified", "repository_item_archived",
+        "repository_item_deleted", "baseline_adopted", "lifecycle_views_adopted",
+        "state_history_compacted", "review_decision"
+      ]
+    },
+    "entity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id"],
+      "properties": {
+        "kind": {
+          "enum": ["task", "task_acceptance", "state", "module", "backlog", "error", "decision", "history", "repository_item", "proposal"]
+        },
+        "id": {"type": "string", "minLength": 1, "maxLength": 200},
+        "module": {"type": ["string", "null"], "maxLength": 100}
+      }
+    },
+    "occurred_at": {"type": "string", "format": "date-time"},
+    "recorded_at": {"type": "string", "format": "date-time"},
+    "summary": {"type": "string", "minLength": 1, "maxLength": 1000},
+    "payload": {"type": "object"},
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["locator", "sha256", "authority", "observed_at"],
+        "properties": {
+          "locator": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "authority": {
+            "enum": [
+              "scheduler", "calculation_file", "structure_output",
+              "module_validation", "calculation_registry",
+              "repository_document", "git", "user_authorization"
+            ]
+          },
+          "observed_at": {"type": "string", "format": "date-time"}
+        }
+      }
+    },
+    "supersedes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{7,127}$"}
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "reason_codes", "status"],
+      "properties": {
+        "required": {"type": "boolean"},
+        "reason_codes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "status": {"enum": ["not_required", "pending"]}
+      }
+    }
+  }
+}

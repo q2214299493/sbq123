@@ -1,0 +1,33 @@
+version: 1
+template_only: true
+surface_name: Fe3O4_001
+surface_family: iron_oxide
+default_confidence: low
+surface_tags: [iron_oxide, explicit_roles_required]
+
+# Fill with 1-based indices from the exact clean slab before use.
+atom_labels: {}
+
+enabled_site_classes:
+  - top_Fe
+  - top_Fe_oct
+  - top_Fe_tet
+  - bridge_FeFe
+  - bridge_FeO_lattice
+  - oxygen_vacancy
+  - hollow_FeFeO_lattice
+
+explicit_sites: []
+
+# An oxygen-vacancy entry additionally requires site_role: vacancy_O.
+# Label every slab O as O_lattice or O_ads before generating O-bearing candidates.
+
+high_risk_sites:
+  oxygen_vacancy:
+    explicitly_tagged: false
+    explicitly_validated: false
+  hydroxylated_surface:
+    present: false
+    explicitly_validated: false
+
+first_test_adsorbates: [CO, H2O, OH, O, H]

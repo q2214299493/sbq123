@@ -1,0 +1,311 @@
+{
+  "provenance_script": "calculations/fe110_care8_isomers_20260716/provenance/reproduce_revisions_and_selected_inputs.py",
+  "surface": "true Fe(110), Fe45, five layers, bottom 18 Fe fixed",
+  "raw_candidates_preserved": true,
+  "revision_scope": [
+    1,
+    5,
+    7,
+    8
+  ],
+  "submission_scope": [
+    4,
+    8
+  ],
+  "records": [
+    {
+      "candidate": 1,
+      "name": "01_C2H2O_CCGKOQOJ_cfg0",
+      "recipe": "rotate both H atoms +60 deg about C1-C2; lower adsorbate 0.14 A",
+      "source_poscar": "calculations\\fe110_care8_isomers_20260716\\01_C2H2O_CCGKOQOJ_cfg0\\POSCAR",
+      "revised_poscar": "calculations\\fe110_care8_isomers_20260716\\revised\\01_C2H2O_CCGKOQOJ_cfg0\\POSCAR",
+      "geometry_review": {
+        "verdict": "pass",
+        "site_label": "η³(C,C,O)/h-t-h",
+        "atom_site_details": [
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 2.629115659451643,
+            "site": "hollow",
+            "lateral_offset_angstrom": 0.258673865646236
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.059561631061148,
+            "site": "top",
+            "lateral_offset_angstrom": 0.003670770212620886
+          },
+          {
+            "atom": "O1",
+            "nearest_fe_angstrom": 2.3495332427329827,
+            "site": "hollow",
+            "lateral_offset_angstrom": 0.26085693862610987
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 2.059561631061148,
+        "nearest_h_fe_angstrom": 2.3813784806427836,
+        "minimum_adsorbate_height_angstrom": 1.892555457129733,
+        "maximum_bond_length_change_angstrom": 8.881784197001252e-16,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": true,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [],
+        "needs_early_relaxation_review": false
+      },
+      "submitted": false
+    },
+    {
+      "candidate": 5,
+      "name": "05_C3H2O_FLJNAOYG_cfg2",
+      "recipe": "rigid rotation -12 deg about C2 and in-plane axis phi=80 deg; lower 0.06 A",
+      "source_poscar": "calculations\\fe110_care8_isomers_20260716\\05_C3H2O_FLJNAOYG_cfg2\\POSCAR",
+      "revised_poscar": "calculations\\fe110_care8_isomers_20260716\\revised\\05_C3H2O_FLJNAOYG_cfg2\\POSCAR",
+      "geometry_review": {
+        "verdict": "pass",
+        "site_label": "η⁴(C,C,C,O)/sb-lb-t-lb",
+        "atom_site_details": [
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 2.556908344238879,
+            "site": "short_bridge",
+            "lateral_offset_angstrom": 0.2093065115525324
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.214510511799301,
+            "site": "long_bridge",
+            "lateral_offset_angstrom": 0.11630044000694095
+          },
+          {
+            "atom": "C3",
+            "nearest_fe_angstrom": 2.1932560277374664,
+            "site": "top",
+            "lateral_offset_angstrom": 0.5186495742298799
+          },
+          {
+            "atom": "O1",
+            "nearest_fe_angstrom": 2.3915145297527896,
+            "site": "long_bridge",
+            "lateral_offset_angstrom": 0.3239334604774484
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 2.1932560277374664,
+        "nearest_h_fe_angstrom": 2.091954498943277,
+        "minimum_adsorbate_height_angstrom": 1.7282910666168565,
+        "maximum_bond_length_change_angstrom": 2.220446049250313e-15,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": true,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [],
+        "needs_early_relaxation_review": false
+      },
+      "submitted": false
+    },
+    {
+      "candidate": 7,
+      "name": "07_C3H2O_POVFFVOJ_cfg2",
+      "recipe": "turn surface-facing H away; rigid rotation -1 deg about C3 and phi=90 deg; lower 0.14 A",
+      "source_poscar": "calculations\\fe110_care8_isomers_20260716\\07_C3H2O_POVFFVOJ_cfg2\\POSCAR",
+      "revised_poscar": "calculations\\fe110_care8_isomers_20260716\\revised\\07_C3H2O_POVFFVOJ_cfg2\\POSCAR",
+      "geometry_review": {
+        "verdict": "pass",
+        "site_label": "η⁴(C,C,C,O)/lb-t-sb-sb",
+        "atom_site_details": [
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 2.411584382035664,
+            "site": "long_bridge",
+            "lateral_offset_angstrom": 0.19108344368655675
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.4909981136639514,
+            "site": "top",
+            "lateral_offset_angstrom": 0.0116531002778791
+          },
+          {
+            "atom": "C3",
+            "nearest_fe_angstrom": 2.1057026826006506,
+            "site": "short_bridge",
+            "lateral_offset_angstrom": 0.24093761996018395
+          },
+          {
+            "atom": "O1",
+            "nearest_fe_angstrom": 2.4210523266918873,
+            "site": "short_bridge",
+            "lateral_offset_angstrom": 0.05967458464952478
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 2.1057026826006506,
+        "nearest_h_fe_angstrom": 2.7940159127000266,
+        "minimum_adsorbate_height_angstrom": 1.817509173826009,
+        "maximum_bond_length_change_angstrom": 1.7763568394002505e-15,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            5
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": true,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [],
+        "needs_early_relaxation_review": false
+      },
+      "submitted": false
+    },
+    {
+      "candidate": 8,
+      "name": "08_C3H2O_XXNRTDXE_cfg0",
+      "recipe": "rigid rotation -12 deg about C2 and in-plane axis phi=160 deg; lower 0.08 A",
+      "source_poscar": "calculations\\fe110_care8_isomers_20260716\\08_C3H2O_XXNRTDXE_cfg0\\POSCAR",
+      "revised_poscar": "calculations\\fe110_care8_isomers_20260716\\revised\\08_C3H2O_XXNRTDXE_cfg0\\POSCAR",
+      "geometry_review": {
+        "verdict": "pass",
+        "site_label": "η⁴(C,C,C,O)/h-t-h-sb",
+        "atom_site_details": [
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 2.6179820828089158,
+            "site": "hollow",
+            "lateral_offset_angstrom": 0.3136901114411219
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.113199551191356,
+            "site": "top",
+            "lateral_offset_angstrom": 0.38734046060567795
+          },
+          {
+            "atom": "C3",
+            "nearest_fe_angstrom": 2.2507258320062715,
+            "site": "hollow",
+            "lateral_offset_angstrom": 0.3940725065904902
+          },
+          {
+            "atom": "O1",
+            "nearest_fe_angstrom": 2.284136596302007,
+            "site": "short_bridge",
+            "lateral_offset_angstrom": 0.31473049758128535
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 2.113199551191356,
+        "nearest_h_fe_angstrom": 2.3164221908970664,
+        "minimum_adsorbate_height_angstrom": 1.8537454838807417,
+        "maximum_bond_length_change_angstrom": 1.3322676295501878e-15,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": true,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [],
+        "needs_early_relaxation_review": false
+      },
+      "submitted": true
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-active-learning-fallback-job1325-submitted-20260827",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-27T00:40:49+08:00",
+  "recorded_at": "2026-08-26T16:40:49Z",
+  "summary": "Exactly one bounded MZ73 fallback prediction job, Slurm 1325, was submitted for the frozen 18-structure request. It uses MatRIS as primary and AQCat25 as an exact-structure external auditor; no VASP or training job was submitted.",
+  "payload": {
+    "objective": "Complete and assess the geometry-qualified MatRIS/AQCat25 fallback prediction round for the Fe(110) C2HO* + H* -> C2H2O* path before preparing any VASP labels.",
+    "phase": "active",
+    "current_evidence": [
+      "MZ73 Slurm job 1325 was submitted once for request SHA-256 f01b10a39c5af586bb8db7d43643313527039d48afbf0fabe61421a11fe02fdb and was observed RUNNING on MZ73 four seconds after submission.",
+      "The request contains 18 frozen, geometry-qualified structures, including the distinct pre_12 last-valid and fail_12 first-failure boundary structures.",
+      "The bound MatRIS checkpoint SHA-256 is 1e6a85b33db075ad1637eca7537084024a694b1340358911212d8a5c518c6601 and the AQCat25 audit checkpoint SHA-256 is e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50.",
+      "This is prediction-only fallback execution. A single MatRIS checkpoint plus AQCat25 audit does not constitute a MatRIS committee and cannot support a quantitative uncertainty claim.",
+      "No VASP label, MatRIS fine-tuning, full-path rerun, micro-NEB, or Dimer job was submitted."
+    ],
+    "one_executable_step": "Monitor job 1325 to a terminal state. If it completes normally, collect and hash the exact 18-structure predictions and producer exit record, validate completeness, then automatically score, cluster, and select at most seven structures including the pre_12/fail_12 boundary pair and prepare but do not submit the compatible VASP label batch.",
+    "submission_boundary": "The exact one-job GPU authorization has been consumed. Do not duplicate or retry job 1325 automatically. Collection, validation, scoring, clustering, and local VASP-package preparation are allowed; VASP labels, fine-tuning, path rerun, micro-NEB, and Dimer still require separate hash-bound authorization.",
+    "done_when": [
+      "Exact MatRIS and AQCat25 predictions are collected and validated for all 18 frozen structures.",
+      "At most seven informative structures are clustered and selected with the pre_12/fail_12 boundary pair preserved.",
+      "A compatible SIGMA=0.20 eV NSW=0 VASP force-label batch is prepared for review but remains unsubmitted."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/submission_record_job1325.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/dual_model_prediction_batch_request.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/remote_deployment_preflight.MZ73.json`",
+      "`configs/dual_model_ts_active_learning.yaml`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/submission_record_job1325.json",
+      "sha256": "718149d6683adf117c44c54875fafa832aedbfd674b153e7352812a681ecac21",
+      "authority": "scheduler",
+      "observed_at": "2026-08-27T00:40:53+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/dual_model_prediction_batch_request.json",
+      "sha256": "f01b10a39c5af586bb8db7d43643313527039d48afbf0fabe61421a11fe02fdb",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T00:40:49+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/remote_deployment_preflight.MZ73.json",
+      "sha256": "d88bc4c92e876f8b5d171bacf543cf4ba1081ef47afc1d7dfadf106e9bc0c86a",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T00:40:49+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-active-learning-framework-v2-prepared-20260827"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

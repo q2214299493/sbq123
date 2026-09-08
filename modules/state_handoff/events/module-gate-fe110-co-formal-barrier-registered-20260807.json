@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "event_id": "module-gate-fe110-co-formal-barrier-registered-20260807",
+  "event_type": "module_gate_changed",
+  "entity": {
+    "kind": "module",
+    "id": "transition_state_search",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-07T12:00:00+08:00",
+  "recorded_at": "2026-08-07T12:00:00+08:00",
+  "summary": "Advance the Fe(110) CO-dissociation result to registered TS and formal electronic-barrier status.",
+  "payload": {
+    "module": "transition_state_search",
+    "status": "Active",
+    "depends_on": "separate thermochemical corrections only if a free-energy barrier or kinetics input is requested",
+    "current_gate": "Dimer job `9656664` and its accepted single `537.451689 cm^-1` target mode are registered with a compatible SIGMA=0.20 final-TOTEN IS/TS/FS chain. The forward electronic barrier is `1.350209 eV`, reverse barrier `2.056573 eV`, and reaction energy `-0.706364 eV`; no new VASP action is authorized"
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/registration_summary.json",
+      "sha256": "8eda76a85a1acddd464d1dab5c88f69437e23f84a6b89dd5c456db31533fd0f2",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-07T12:00:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/formal_barrier_manifest.json",
+      "sha256": "9fa49b0b3dffc481154b13d835502e77a3f27e64a4d7d43f9ca3ee0e530753c2",
+      "authority": "module_validation",
+      "observed_at": "2026-08-07T12:00:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "reconciled-module-gate-changed-module-transition-state-search-20a3976c7c7265287151",
+    "module-gate-fe110-co-dimer-mode-accepted-merge-20260807",
+    "module-gate-fe110-co-ts-accepted-frequency-validated-20260807"
+  ],
+  "review": {
+    "required": true,
+    "reason_codes": ["scientific_result_registration", "cross_module_change"],
+    "status": "pending"
+  }
+}

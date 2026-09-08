@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-active-learning-heldout-candidates-prepared-20260827",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-27T12:02:00+08:00",
+  "recorded_at": "2026-08-27T04:02:00Z",
+  "summary": "Seven round-0-label-disjoint held-out TS validation structures were prepared and passed geometry review: six primary rising/near-saddle/falling structures plus one diagnostic failure-boundary interpolation; no calculation was submitted.",
+  "payload": {
+    "objective": "Review the seven prepared held-out geometries, then prepare their hash-bound dual-model/VASP validation package only after acceptance.",
+    "phase": "active",
+    "current_evidence": [
+      "Seven held-out candidates have unique exact and rounded-geometry hashes with zero overlap against the seven completed round-0 VASP screening labels.",
+      "The six primary held-out structures comprise two rising, two near-saddle, and two falling structures with O-H distances 2.829, 2.456, 2.070, 1.683, 1.093, and 1.008 A.",
+      "A seventh O-H 1.126 A pre_12/fail_12 midpoint is retained only as a failure-boundary diagnostic and is excluded from primary aggregate validation metrics because its two parents were already labeled.",
+      "All candidates preserve 50 atoms, Fe45-C2-O-H2 ordering, the 18-atom fixed layer, cell and Selective Dynamics flags, C-C/C-O/spectator C-H connectivity, and minimum nonbonded-contact gates.",
+      "The independent structure-sanity audit returned pass for all seven candidates. No GPU, VASP, fine-tuning, path-rerun, micro-NEB, or Dimer job was submitted.",
+      "MatRIS remains retained but not held-out validated; without a real calibrated MatRIS committee, no quantitative uncertainty claim is allowed."
+    ],
+    "one_executable_step": "Obtain user geometry acceptance. If accepted, prepare exact frozen-checkpoint prediction for the new boundary interpolation and a compatible SIGMA=0.20 eV NSW=0 seven-structure VASP validation package; do not submit either package without separate authorization.",
+    "submission_boundary": "Preparation and review only. GPU prediction, VASP labels, MatRIS fine-tuning, complete-path rerun, micro-NEB, Dimer, TS, and barrier submissions remain unauthorized.",
+    "done_when": [
+      "The user accepts or revises the seven held-out structures.",
+      "For accepted structures, all required frozen-checkpoint predictions are hash-bound and the compatible VASP validation batch is prepared for review.",
+      "No calibrated-uncertainty or accepted-TS claim is made before independent VASP validation and downstream TS gates pass."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/heldout_validation_prepared_v2_20260827/heldout_validation_candidate_plan.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/heldout_validation_prepared_v2_20260827/geometry_review.csv`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/heldout_validation_prepared_v2_20260827/heldout_candidate_montage.png`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/active_learning_state.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/heldout_validation_prepared_v2_20260827/heldout_validation_candidate_plan.json",
+      "sha256": "c92d3da03209046962f12e59ceec4614564d108a0e6b67ca5d104996fa08668e",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T12:02:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/heldout_validation_prepared_v2_20260827/preparation_summary.json",
+      "sha256": "cf50ddcfe04f42e52262f67a2423f566a05ecf91287e221a677f7f2dc77b9353",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T12:02:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/heldout_validation_prepared_v2_20260827/heldout_candidate_montage.png",
+      "sha256": "c43011f871cbd98423f2bc1efe56272f554e06b55ba8f4dced1ea186a5c2deaa",
+      "authority": "structure_output",
+      "observed_at": "2026-08-27T12:02:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/active_learning_state.json",
+      "sha256": "1bae4afe7a647c112f09003459a7dea50bdc969d1425e85ea2a6741ca94f19c5",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T12:02:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-active-learning-round0-vasp-assessed-20260827"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

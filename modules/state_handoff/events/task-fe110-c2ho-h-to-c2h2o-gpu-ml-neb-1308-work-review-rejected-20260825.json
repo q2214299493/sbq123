@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-gpu-ml-neb-1308-work-review-rejected-20260825",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-25T21:56:15+08:00",
+  "recorded_at": "2026-08-25T13:56:15Z",
+  "summary": "Work-side chemical review completed after AQCat25 job 1308 returned: the hash-valid, ordinarily converged 13-image path is rejected and requires rebuilding because it has two predicted peaks, skips the required O-H forming interval, and temporarily breaks and reforms the C-C bond.",
+  "payload": {
+    "objective": "Rebuild and review a chemically continuous AQCat25 GPU path candidate for Fe(110) C2HO* + H* -> C2H2O* + * using reactive IS-A and FS-A.",
+    "phase": "active",
+    "current_evidence": [
+      "The producer record for MZ73 job 1308 reports success with exit code 0; the job is absent from the live queue, while durable terminal Slurm accounting is unavailable.",
+      "All 13 returned structures are hash-valid and preserve composition, atom order, cell, and the bottom-18 fixed mask; numeric periodic mapping and minimum-distance screens pass.",
+      "Ordinary ML-NEB converged at step 148 to projected fmax 0.089 eV/A, but ML-CI was skipped because images 03 and 07 are two strict internal predicted-energy peaks.",
+      "The forming O-H distance jumps from 2.5822 A at image 06 to 1.0877 A at image 07, leaving no image in the required 1.1-1.8 A forming interval.",
+      "The C1-C2 distance expands from 1.4653 A at image 03 to 2.5854 and 2.8223 A at images 04-05, then returns to 1.4241 A at image 06; this unintended bond breaking and reformation fails elementary-step review.",
+      "The path is rejected for VASP force-label preparation, VASP NEB/CI-NEB, DIMER, and barrier use."
+    ],
+    "one_executable_step": "Prepare a reviewable GPU rebuild plan that resolves the O-H forming coordinate and preserves the C1-C2 bond; do not submit the rebuild until the user separately authorizes a new GPU job.",
+    "submission_boundary": "No GPU or VASP job is active. No new GPU submission, VASP force-label preparation/submission, NEB, CI-NEB, DIMER, frequency, or barrier action is authorized.",
+    "done_when": [
+      "A rebuilt hash-bound GPU path contains adequate images in the O-H forming interval.",
+      "The rebuilt path preserves C-C connectivity and passes work-side geometry and elementary-step review.",
+      "A VASP validation/refinement recommendation is ready for separate user authorization."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_ml_neb_production_20260825/completion_checkpoint_job1308_20260825.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_ml_neb_production_20260825/returned_from_mz73/job_1308/gpu_ml_neb_path_manifest.candidate.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_ml_neb_production_20260825/returned_from_mz73/job_1308/gpu_ml_neb_path_review.work.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_ml_neb_production_20260825/completion_checkpoint_job1308_20260825.json",
+      "sha256": "a1a04014bcdbb1229afb626c658e1bf132719a1703399baed355e1729076db2c",
+      "authority": "module_validation",
+      "observed_at": "2026-08-25T21:56:15+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_ml_neb_production_20260825/returned_from_mz73/job_1308/gpu_ml_neb_path_manifest.candidate.json",
+      "sha256": "804aff5d6f37febc86f840b272ef2a3f3c762d00a9b08e40710f1f97a9d135f4",
+      "authority": "structure_output",
+      "observed_at": "2026-08-25T21:56:15+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_ml_neb_production_20260825/returned_from_mz73/job_1308/gpu_ml_neb_path_review.work.json",
+      "sha256": "706c151f51bc301991e9dee9e9559ed6fca9f15ba06afeb529126a2a754cb71e",
+      "authority": "module_validation",
+      "observed_at": "2026-08-25T21:56:15+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-gpu-ml-neb-1308-complete-needs-review-20260825",
+    "task-fe110-c2ho-h-to-c2h2o-gpu-ml-neb-1308-rejected-rebuild-required-20260825"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

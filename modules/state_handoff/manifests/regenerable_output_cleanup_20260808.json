@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "document_kind": "repository_cleanup_manifest",
+  "bundle_id": "regenerable-output-cleanup-20260808",
+  "reason": "Remove only the 26 previously classified regenerable presentation renders, dry-run registry copies, and workbook inspection cache without touching active CH+H scientific work or authoritative evidence.",
+  "selectors": [
+    {
+      "root": "outputs/calculation_agent_one_slide_20260723/rendered",
+      "git_status": "untracked",
+      "expected_count": 1,
+      "disposition": "delete",
+      "content_class": "regenerable",
+      "reason": "Remove a rendered slide preview reproducible from the retained presentation source."
+    },
+    {
+      "root": "outputs/calculation_agent_one_slide_refined_20260723/rendered",
+      "git_status": "untracked",
+      "expected_count": 1,
+      "disposition": "delete",
+      "content_class": "regenerable",
+      "reason": "Remove a rendered slide preview reproducible from the retained presentation source."
+    },
+    {
+      "root": "outputs/calculation_agent_one_slide_refined_20260723/rendered_general",
+      "git_status": "untracked",
+      "expected_count": 1,
+      "disposition": "delete",
+      "content_class": "regenerable",
+      "reason": "Remove a rendered slide preview reproducible from the retained presentation source."
+    },
+    {
+      "root": "outputs/calculation_agent_one_slide_refined_20260723/rendered_multiagent",
+      "git_status": "untracked",
+      "expected_count": 1,
+      "disposition": "delete",
+      "content_class": "regenerable",
+      "reason": "Remove a rendered slide preview reproducible from the retained presentation source."
+    },
+    {
+      "root": "outputs/calculation_agent_one_slide_refined_20260723/rendered_two_slide",
+      "git_status": "untracked",
+      "expected_count": 2,
+      "disposition": "delete",
+      "content_class": "regenerable",
+      "reason": "Remove rendered slide previews reproducible from the retained presentation source."
+    },
+    {
+      "root": "outputs/calculation_agent_ppt_20260722/rendered",
+      "git_status": "untracked",
+      "expected_count": 16,
+      "disposition": "delete",
+      "content_class": "regenerable",
+      "reason": "Remove rendered slide previews reproducible from the retained presentation source."
+    }
+  ],
+  "items": [
+    {
+      "path": "outputs/calculation_agent_ppt_20260722/contact_sheet.png",
+      "disposition": "delete",
+      "content_class": "regenerable",
+      "reason": "Remove a presentation contact sheet reproducible from the retained presentation source."
+    },
+    {
+      "path": "outputs/ts_endpoint_migration_dry_run_20260727_134145/project_registry.backup.sqlite3",
+      "disposition": "delete",
+      "content_class": "regenerable",
+      "reason": "Remove a dry-run registry backup after the retained JSON evidence records the migration and rollback checks."
+    },
+    {
+      "path": "outputs/ts_endpoint_migration_dry_run_20260727_134145/project_registry.site_coordination_roundtrip.sqlite3",
+      "disposition": "delete",
+      "content_class": "regenerable",
+      "reason": "Remove a dry-run roundtrip registry copy after the retained JSON evidence records the database validation."
+    },
+    {
+      "path": "outputs/ts_topic1_20260806/课题一TS.xlsx.inspect.ndjson",
+      "disposition": "delete",
+      "content_class": "regenerable",
+      "reason": "Remove a workbook inspection cache; the authoritative workbook and reviewed promotion receipt remain unchanged."
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v8-job1339-submitted-20260828",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-28T12:21:53.2163195+08:00",
+  "recorded_at": "2026-08-28T04:21:53.2165845Z",
+  "summary": "One explicitly authorized v8 MatRIS-primary warning-release GPU path execution was submitted to MZ73 as Slurm job 1339; its initial state is PENDING for Priority.",
+  "payload": {
+    "objective": "Monitor MZ73 job 1339 and collect its candidate path only after producer terminal evidence exists.",
+    "phase": "active",
+    "current_evidence": [
+      "The exact v8 request SHA-256 is 52e2e9fffb100452a675fa0f1c42af0aee06c2785269a06b978bf45e701c9fed and the no-model MZ73 preflight passed.",
+      "The user message '执行' authorized one bounded GPU execution; duplicate live jobs and prior submission/output markers were absent before sbatch.",
+      "MZ73 assigned Slurm job 1339 with job name c2ho-v8-warn; initial scheduler state is PENDING with reason Priority.",
+      "Intermediate release fmax misses are warning-only when finite-force and geometry guards pass; final unrestrained geometry and ML-NEB convergence gates remain hard.",
+      "No VASP/VTST submission, Dimer parent, TS, barrier, fine-tuning, automatic retry, or scientific acceptance exists."
+    ],
+    "one_executable_step": "Check job 1339 scheduler and producer evidence; collect and review the returned path only after a terminal producer record exists.",
+    "submission_boundary": "The one-job authorization is consumed by job 1339. Do not retry, fine-tune, submit VASP/VTST, prepare Dimer, or claim a TS/barrier without new explicit authority and the applicable gates.",
+    "done_when": [
+      "A producer terminal record for job 1339 exists and scheduler state is separately reported.",
+      "A successful returned path is collected for work review; a failed run records only failure evidence."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/submission_record_job1339.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/user_gpu_execution_authorization.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/remote_preflight.MZ73.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/submission_record_job1339.json",
+      "sha256": "5724dcaa7e9cc56b2a04e464a4b36837b45e453f3bcbe952e787def98f898a4c",
+      "authority": "scheduler",
+      "observed_at": "2026-08-28T12:21:53.2163195+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/user_gpu_execution_authorization.json",
+      "sha256": "5b393228a8873b9153524f4b48949367aa303bf75e85938503dbe96d9ebe0e24",
+      "authority": "user_authorization",
+      "observed_at": "2026-08-28T12:21:53.2163195+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/remote_preflight.MZ73.json",
+      "sha256": "08d01ff5539f2ee76b9e6b28dea266a93ecadd7c3f99ab7266d482b7656da226",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-28T12:21:53.2163195+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v8-remote-preflight-passed-20260828"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

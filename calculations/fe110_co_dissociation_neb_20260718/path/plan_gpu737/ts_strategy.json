@@ -1,0 +1,253 @@
+{
+  "version": 3,
+  "status": "STOP_PATH_GEOMETRY",
+  "strategy_source": "rule_based",
+  "reaction_family": "co_dissociation",
+  "fingerprint_id": "2b0ed53c44421589882f62c2d0affa7386b82c390e9f70bf545a226059968095",
+  "template_match": null,
+  "failure_constraints": [],
+  "waypoint_strategy": [
+    "molecular_CO",
+    "tilted_or_lying_CO",
+    "elongated_CO",
+    "coadsorbed_C_plus_O"
+  ],
+  "interpolation_strategy": "segmented_idpp",
+  "neb_settings": {
+    "sequence": [
+      "ordinary_neb",
+      "ci_neb"
+    ],
+    "initial_images": 3,
+    "image_policy": "start_minimal_then_add_only_at_large_displacement_or_high_curvature"
+  },
+  "dimer_usage": {
+    "policy": "refine_only_after_reviewed_neb_or_cineb_candidate"
+  },
+  "path_initialization": "requires reviewed executable waypoint before segmented IDPP",
+  "validation": "docs/10_TS_VALIDATION_PROTOCOL.md",
+  "database_storage": "successful Grade-A or explicit failed-experience record only",
+  "requires_user_confirmation": true,
+  "automatic_submission": false,
+  "path_generation": {
+    "status": "READY_FOR_GEOMETRY_REVIEW",
+    "method_requested": "segmented_idpp",
+    "method_used": "segmented_idpp",
+    "interior_images": 3,
+    "image_directories": [
+      "00",
+      "01",
+      "02",
+      "03",
+      "04"
+    ],
+    "constraints_source": null,
+    "waypoint_sources": [
+      "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_co_dissociation_neb_20260718\\gpu_handoff\\waypoints\\WP_01\\POSCAR",
+      "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_co_dissociation_neb_20260718\\output\\job_737\\TS_CANDIDATE.vasp",
+      "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_co_dissociation_neb_20260718\\gpu_handoff\\waypoints\\WP_03\\POSCAR"
+    ],
+    "segment_additional_images": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "warnings": [],
+    "requires_human_review": true,
+    "contract_sha256": "f05f901204621dd787e901a4dbfd74535e513616176b9fc65834697851bf39b0",
+    "atom_map_sha256": "c106ae99bf673f9aaf51a0ae6515a4af625bee66960393e3700e78ddc247f248",
+    "compatibility_sha256": "ba6c374ee097a51481eaa1dc468c582ac65af7290dc0cfb5f3d20a0658f59b95",
+    "fingerprint_id": "2b0ed53c44421589882f62c2d0affa7386b82c390e9f70bf545a226059968095",
+    "strategy_source": "rule_based",
+    "template_id": null,
+    "waypoint_strategy": [
+      "molecular_CO",
+      "tilted_or_lying_CO",
+      "elongated_CO",
+      "coadsorbed_C_plus_O"
+    ],
+    "interpolation_strategy": "segmented_idpp"
+  },
+  "path_geometry": {
+    "status": "STOP",
+    "errors": [
+      "image_02:path_jump_1.753_A",
+      "image_03:path_jump_1.599_A"
+    ],
+    "warnings": [
+      "nebmovie.pl visual review remains required"
+    ],
+    "thresholds": {
+      "min_distance_factor": 0.55,
+      "absolute_min_distance_A": 1.0,
+      "image_jump_threshold_A": 1.0,
+      "fixed_position_tolerance_A": 0.0001,
+      "intermediate_energy_tolerance_eV": 0.2,
+      "barrierless_force_threshold_eVA": 0.2,
+      "exploding_force_threshold_eVA": 1.5,
+      "min_ionic_steps_for_force_decision": 3,
+      "surface_penetration_buffer_A": 0.2,
+      "desorption_height_change_threshold_A": 2.0,
+      "magnetization_jump_threshold_muB": 2.0
+    },
+    "reaction_atom_indices_zero_based": [
+      45,
+      46
+    ],
+    "reaction_pairs_zero_based": [
+      [
+        45,
+        46
+      ]
+    ],
+    "fixed_atom_indices_zero_based": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "images": [
+      {
+        "image": "00",
+        "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_co_dissociation_neb_20260718\\path\\ordinary_neb_initial\\00\\POSCAR",
+        "minimum_pair_distance_A": 1.175632344969415,
+        "minimum_pair_zero_based": [
+          45,
+          46
+        ],
+        "collision_threshold_A": 0.781,
+        "max_step_from_previous_A": 0.0,
+        "max_fixed_displacement_from_initial_A": 0.0,
+        "reaction_distances": [
+          {
+            "atoms_zero_based": [
+              45,
+              46
+            ],
+            "labels": [
+              "C",
+              "O"
+            ],
+            "distance_A": 1.175632344969415
+          }
+        ]
+      },
+      {
+        "image": "01",
+        "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_co_dissociation_neb_20260718\\path\\ordinary_neb_initial\\01\\POSCAR",
+        "minimum_pair_distance_A": 1.2558538164593238,
+        "minimum_pair_zero_based": [
+          45,
+          46
+        ],
+        "collision_threshold_A": 0.781,
+        "max_step_from_previous_A": 0.37062920999294074,
+        "max_fixed_displacement_from_initial_A": 0.0,
+        "reaction_distances": [
+          {
+            "atoms_zero_based": [
+              45,
+              46
+            ],
+            "labels": [
+              "C",
+              "O"
+            ],
+            "distance_A": 1.2558538164593238
+          }
+        ]
+      },
+      {
+        "image": "02",
+        "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_co_dissociation_neb_20260718\\path\\ordinary_neb_initial\\02\\POSCAR",
+        "minimum_pair_distance_A": 1.7503135442944204,
+        "minimum_pair_zero_based": [
+          41,
+          45
+        ],
+        "collision_threshold_A": 1.0,
+        "max_step_from_previous_A": 1.7531632283901848,
+        "max_fixed_displacement_from_initial_A": 0.0,
+        "reaction_distances": [
+          {
+            "atoms_zero_based": [
+              45,
+              46
+            ],
+            "labels": [
+              "C",
+              "O"
+            ],
+            "distance_A": 1.7503135442944204
+          }
+        ]
+      },
+      {
+        "image": "03",
+        "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_co_dissociation_neb_20260718\\path\\ordinary_neb_initial\\03\\POSCAR",
+        "minimum_pair_distance_A": 1.6612660547438969,
+        "minimum_pair_zero_based": [
+          41,
+          45
+        ],
+        "collision_threshold_A": 1.0,
+        "max_step_from_previous_A": 1.5986292759049552,
+        "max_fixed_displacement_from_initial_A": 0.0,
+        "reaction_distances": [
+          {
+            "atoms_zero_based": [
+              45,
+              46
+            ],
+            "labels": [
+              "C",
+              "O"
+            ],
+            "distance_A": 2.6230244366116864
+          }
+        ]
+      },
+      {
+        "image": "04",
+        "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_co_dissociation_neb_20260718\\path\\ordinary_neb_initial\\04\\POSCAR",
+        "minimum_pair_distance_A": 1.776901541733462,
+        "minimum_pair_zero_based": [
+          41,
+          45
+        ],
+        "collision_threshold_A": 1.0,
+        "max_step_from_previous_A": 0.6575331393396671,
+        "max_fixed_displacement_from_initial_A": 0.0,
+        "reaction_distances": [
+          {
+            "atoms_zero_based": [
+              45,
+              46
+            ],
+            "labels": [
+              "C",
+              "O"
+            ],
+            "distance_A": 3.236964080283502
+          }
+        ]
+      }
+    ],
+    "requires_visual_review": true
+  }
+}

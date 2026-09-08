@@ -1,0 +1,175 @@
+{
+  "calibration_id": "aqcat25_fe45_v1",
+  "checkpoint_sha256": "e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50",
+  "status": "in_domain",
+  "uncertainty_method": "empirical force error on compatible VASP final-force labels; no per-candidate uncertainty from one checkpoint",
+  "reference_scope": {
+    "validated_workflow_kinds": [
+      "adsorption"
+    ],
+    "transition_state_scope": "uncalibrated_no_compatible_off_equilibrium_or_saddle_force_labels",
+    "compatibility_branch": "true_fe110_5layer_5x5x1",
+    "slab_model": "true_fe110_fe45_5layer",
+    "surface_elements": [
+      "Fe"
+    ],
+    "allowed_elements": [
+      "Fe",
+      "H",
+      "C",
+      "O"
+    ],
+    "required_fe_count": 45,
+    "adsorbate_atom_count_range": [
+      2,
+      6
+    ],
+    "required_families": [
+      "h2_derived",
+      "chx",
+      "oxygenate",
+      "c_c2_o"
+    ],
+    "minimum_total_samples": 10
+  },
+  "scope_failures": [],
+  "metrics": {
+    "sample_count": 13,
+    "force_component_count": 1185,
+    "component_mae_eV_per_A": 0.016065460743000935,
+    "vector_rmse_eV_per_A": 0.06522872980105739,
+    "vector_p95_eV_per_A": 0.12809930162464805,
+    "vector_max_eV_per_A": 0.40256640811604727
+  },
+  "thresholds": {
+    "component_mae_eV_per_A_max": 0.1,
+    "vector_rmse_eV_per_A_max": 0.2,
+    "vector_p95_eV_per_A_max": 0.4,
+    "vector_max_eV_per_A_max": 0.6
+  },
+  "threshold_checks": {
+    "component_mae": true,
+    "vector_rmse": true,
+    "vector_p95": true,
+    "vector_max": true
+  },
+  "samples": [
+    {
+      "sample_id": "h2_top",
+      "family": "h2_derived",
+      "structure_sha256": "8cd15cc0fc5f577776d0abdbb786c0e94fc9ad9f3c050f6cc6f14dc865c62d63",
+      "component_mae_eV_per_A": 0.012838369960494301,
+      "vector_rmse_eV_per_A": 0.03626863255212524,
+      "vector_max_eV_per_A": 0.07281573839992045,
+      "aqcat_predicted_energy_eV_non_dft": -1.0497667789459229
+    },
+    {
+      "sample_id": "ch_top",
+      "family": "chx",
+      "structure_sha256": "88a6038ae20e8eccd1463ab3776b3412134b49a1bf7bbac8f824460dd92ba78d",
+      "component_mae_eV_per_A": 0.007447086429224358,
+      "vector_rmse_eV_per_A": 0.024569061937007468,
+      "vector_max_eV_per_A": 0.09332251048976473,
+      "aqcat_predicted_energy_eV_non_dft": -0.3354465067386627
+    },
+    {
+      "sample_id": "ch2_top",
+      "family": "chx",
+      "structure_sha256": "14b356e8e936cda52f9432713bd568cdfcacf1e325f29e9a68ace25cb2f1e905",
+      "component_mae_eV_per_A": 0.010247740535087722,
+      "vector_rmse_eV_per_A": 0.04303470903029433,
+      "vector_max_eV_per_A": 0.2078714789182887,
+      "aqcat_predicted_energy_eV_non_dft": -0.80531907081604
+    },
+    {
+      "sample_id": "ch3_top",
+      "family": "chx",
+      "structure_sha256": "3f9c7269d6624fbe05f8712fc9a3f9bc5114766e20714493c0fb46a9e3e90fae",
+      "component_mae_eV_per_A": 0.0184739255795157,
+      "vector_rmse_eV_per_A": 0.05722469866384544,
+      "vector_max_eV_per_A": 0.23820519147541747,
+      "aqcat_predicted_energy_eV_non_dft": -2.233266830444336
+    },
+    {
+      "sample_id": "ch4_top",
+      "family": "chx",
+      "structure_sha256": "60135bd59a93ecdd3effad900b337623557834156e5639ae8a3a4e762b3db25c",
+      "component_mae_eV_per_A": 0.004214345825443136,
+      "vector_rmse_eV_per_A": 0.015962443416854263,
+      "vector_max_eV_per_A": 0.06642846146934105,
+      "aqcat_predicted_energy_eV_non_dft": -2.8044235706329346
+    },
+    {
+      "sample_id": "cho_cend_top",
+      "family": "oxygenate",
+      "structure_sha256": "f42638ddcdc12d99a6ee801a5106285f0dc62952cbb114140364b640a715d5b9",
+      "component_mae_eV_per_A": 0.023778829107458495,
+      "vector_rmse_eV_per_A": 0.0848051901360279,
+      "vector_max_eV_per_A": 0.30654241537433546,
+      "aqcat_predicted_energy_eV_non_dft": -0.9822587966918945
+    },
+    {
+      "sample_id": "ch2o_oend_top",
+      "family": "oxygenate",
+      "structure_sha256": "b25d5c6d7c3fb3d5f7edda5d595521a32b1ae66d813049e27c78558127b98f89",
+      "component_mae_eV_per_A": 0.007212837019282764,
+      "vector_rmse_eV_per_A": 0.029806836158240528,
+      "vector_max_eV_per_A": 0.1346297243721301,
+      "aqcat_predicted_energy_eV_non_dft": -0.5452759861946106
+    },
+    {
+      "sample_id": "ch3o_oend_top",
+      "family": "oxygenate",
+      "structure_sha256": "7e79b26ce972bd7abc3495d27cc337e5f7d26218a79a969acee26085984bea31",
+      "component_mae_eV_per_A": 0.008637740151983252,
+      "vector_rmse_eV_per_A": 0.03412930182280291,
+      "vector_max_eV_per_A": 0.116231910626214,
+      "aqcat_predicted_energy_eV_non_dft": -1.5437853336334229
+    },
+    {
+      "sample_id": "ch4o_oend_top",
+      "family": "oxygenate",
+      "structure_sha256": "b9707fb734f19cf64da03782d4aa52b0e97f4fb57713894d3b6359df8d1e5729",
+      "component_mae_eV_per_A": 0.010890206090917936,
+      "vector_rmse_eV_per_A": 0.04794210361698232,
+      "vector_max_eV_per_A": 0.19381658747746153,
+      "aqcat_predicted_energy_eV_non_dft": -1.607681155204773
+    },
+    {
+      "sample_id": "cpluso_lb_h",
+      "family": "c_c2_o",
+      "structure_sha256": "08ab46f9210e7f2e810eacaa0481c8e1ad3bbf64fc729f21fd66f5ef6ef88d6a",
+      "component_mae_eV_per_A": 0.02160729300728913,
+      "vector_rmse_eV_per_A": 0.07498384732649277,
+      "vector_max_eV_per_A": 0.30585657015692636,
+      "aqcat_predicted_energy_eV_non_dft": -2.1356446743011475
+    },
+    {
+      "sample_id": "c2_hlbh",
+      "family": "c_c2_o",
+      "structure_sha256": "79e666b42f14e9091c5f8f0f252adf7077279ebd3a32b8deccd2ec6599401101",
+      "component_mae_eV_per_A": 0.025211010512545425,
+      "vector_rmse_eV_per_A": 0.09056042956029114,
+      "vector_max_eV_per_A": 0.2733642761402793,
+      "aqcat_predicted_energy_eV_non_dft": -2.181319236755371
+    },
+    {
+      "sample_id": "c2o_hlbh",
+      "family": "c_c2_o",
+      "structure_sha256": "030ca8fc43210caba2d13c2cf1deaed49da11a81ade0374e30980a8db6f7f747",
+      "component_mae_eV_per_A": 0.02866875409427834,
+      "vector_rmse_eV_per_A": 0.11105666138586232,
+      "vector_max_eV_per_A": 0.40256640811604727,
+      "aqcat_predicted_energy_eV_non_dft": -1.8546817302703857
+    },
+    {
+      "sample_id": "c2pluso_hlbh_lb",
+      "family": "c_c2_o",
+      "structure_sha256": "39012e72032cd82a099513fc598947c4a5605fa962bb440373fefb3c93f20f6c",
+      "component_mae_eV_per_A": 0.0317351683720967,
+      "vector_rmse_eV_per_A": 0.10526819222903683,
+      "vector_max_eV_per_A": 0.2838376538548385,
+      "aqcat_predicted_energy_eV_non_dft": -2.410299301147461
+    }
+  ]
+}

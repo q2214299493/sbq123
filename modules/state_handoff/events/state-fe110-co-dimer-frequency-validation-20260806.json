@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "event_id": "state-fe110-co-dimer-frequency-validation-20260806",
+  "event_type": "state_observed",
+  "entity": {
+    "kind": "state",
+    "id": "active-fe-110-co-dissociation-test-current-gate",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-06T23:33:18+08:00",
+  "recorded_at": "2026-08-06T23:33:18+08:00",
+  "summary": "Replace the connectivity gate with Dimer vibrational-frequency validation.",
+  "payload": {
+    "block_id": "active-fe-110-co-dissociation-test-current-gate",
+    "section": "## Active Fe(110) CO Dissociation Test",
+    "title": "Current Gate - 2026-08-06 Dimer Frequency Validation Review",
+    "facts": [
+      "Dimer job `9656664` is technically converged with negative curvature and converged VASP maximum atomic force; DIMCAR Force/Torque remain soft warnings.",
+      "VFA job `9694935` completed normally and contains one `537.451689 cm^-1` C/O-dominated imaginary mode aligned with the target C-O coordinate.",
+      "Dimer acceptance now uses technical convergence plus vibrational-frequency validation. Bidirectional downhill connectivity is optional diagnostic evidence and is not a Dimer gate.",
+      "The read-only pipeline status is `NEEDS_PRINCIPAL_MODE_ASSIGNMENT`; `connectivity_required=false` and the old connectivity report does not affect this result.",
+      "The result remains `Ungraded` because the existing mode assignment is diagnostic-only, frequency thresholds are unset, and the current Dimer soft review does not grant final TS-validation acceptance."
+    ],
+    "next_action": "Review the principal imaginary mode against the reaction contract and record an explicit accepted/rejected mode assignment; do not submit another calculation for this review."
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/dimer_handoff_job9640399_image04_20260803/dimer_analysis.json",
+      "sha256": "5744956f8428be0f60fdd5c6a08d671a9b6c5de738252835e7fd09746d1a631e",
+      "authority": "module_validation",
+      "observed_at": "2026-08-06T23:33:18+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/vfa_diagnostic_from_dimer9656664_co_only_20260805/vfa_analysis.json",
+      "sha256": "32bc11370f216542170b84158bf3b3c7a47c5709975b1c76ad54258b6527b730",
+      "authority": "module_validation",
+      "observed_at": "2026-08-06T23:33:18+08:00"
+    },
+    {
+      "locator": "docs/10_TS_VALIDATION_PROTOCOL.md",
+      "sha256": "cc3f11a7d2e0644526cd406ed7e48efc823672b2179da156b22abfd5aec17d24",
+      "authority": "repository_document",
+      "observed_at": "2026-08-06T23:33:18+08:00"
+    }
+  ],
+  "supersedes": ["state-fe110-co-connectivity-needs-review-20260806"],
+  "review": {
+    "required": true,
+    "reason_codes": ["scientific_method_change", "cross_module_change"],
+    "status": "pending"
+  }
+}

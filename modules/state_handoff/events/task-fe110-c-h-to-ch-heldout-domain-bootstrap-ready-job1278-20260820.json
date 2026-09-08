@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-heldout-domain-bootstrap-ready-job1278-20260820",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-transition-state",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-20T12:22:35+08:00",
+  "recorded_at": "2026-08-20T04:22:35Z",
+  "summary": "Authorized MZ73 job 1278 completed six exact-structure held-out AQCat25 force predictions; all returned artifacts passed hash/schema checks and the canonical independent TS-domain assessment produced bootstrap metrics, with calibration and TS validity still pending.",
+  "payload": {
+    "objective": "Establish whether the current AQCat25 checkpoint can be calibrated for the Fe(110) C*+H*->CH* path neighborhood before using it for VASP TS refinement selection.",
+    "phase": "active",
+    "current_evidence": [
+      "MZ73 Slurm job 1278 completed with ExitCode=0:0 in 38 seconds and a producer success record bound to the authorized R1-F2 batch.",
+      "All six returned prediction schemas passed and every remote-to-local SHA-256 hash matched.",
+      "The six exact structures are disjoint from 18 training/replay structures and cover rising-path, near-saddle, and falling-path roles without duplicate geometry.",
+      "Canonical held-out force metrics are component MAE 0.043044 eV/A, vector RMSE 0.120057 eV/A, vector P95 0.271936 eV/A, and vector maximum 0.423748 eV/A.",
+      "The assessment status is bootstrap_passed because no accepted force thresholds are registered; ts_domain_validated=false and active_learning_converged=false.",
+      "No fine-tuning, ML-NEB rerun, VASP TS refinement, frequency, connectivity, or barrier calculation was submitted.",
+      "GPU completion evidence and the diagnostic bootstrap metrics were appended to data/project_registry.sqlite3."
+    ],
+    "one_executable_step": "Review and register a hash-bound bootstrap TS-domain calibration for the exact checkpoint and compatibility branch before allowing strategy selection for VASP TS refinement.",
+    "submission_boundary": "Job 1278 completion does not authorize checkpoint fine-tuning, ML-NEB reruns, VASP NEB/CI-NEB/DIMER, frequency, connectivity, or barrier reporting.",
+    "done_when": [
+      "A hash-bound calibration review sets accepted force thresholds for checkpoint e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50 and compatibility f4132ca1e3309f73b2327cc548be032b8f8f9e3439a33c17fcdf7d3c7873aed6.",
+      "The canonical domain assessment passes those registered thresholds and marks ts_domain_validated=true.",
+      "The strategy engine then selects the least-cost evidence-compatible VASP NEB/CI-NEB/DIMER continuation for C*+H*->CH*."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_to_ch_ts_20260818/heldout_aqcat_force_predictions_20260820/gpu_completion_record.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/heldout_aqcat_force_predictions_20260820/independent_domain_validation_manifest.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/active_learning_sigma0p20/ts_domain_assessment.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/heldout_aqcat_force_predictions_20260820/registry_gpu_completion_receipt.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/heldout_aqcat_force_predictions_20260820/gpu_completion_record.json",
+      "sha256": "df6269421282b5185de429ad1e04d9bce831b91e6bd4f4754d85fc63abb2d129",
+      "authority": "scheduler",
+      "observed_at": "2026-08-20T12:22:35+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/active_learning_sigma0p20/ts_domain_assessment.json",
+      "sha256": "a133edfc3df9504a8faed5e5bd5d30224f42b84e99d8e5dc92a687d3f89fd13c",
+      "authority": "module_validation",
+      "observed_at": "2026-08-20T12:22:35+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/heldout_aqcat_force_predictions_20260820/registry_gpu_completion_receipt.json",
+      "sha256": "b2d3b29604abbd71bc3846a1041bd7c11fc97f59fc1937071976697067722fea",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-20T12:22:35+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-heldout-aqcat-prediction-batch-prepared-20260820"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

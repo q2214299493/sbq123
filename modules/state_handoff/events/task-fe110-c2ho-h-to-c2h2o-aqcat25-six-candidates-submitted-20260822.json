@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-aqcat25-six-candidates-submitted-20260822",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "adsorption_workflow"
+  },
+  "occurred_at": "2026-08-22T23:48:05+08:00",
+  "recorded_at": "2026-08-22T15:48:05Z",
+  "summary": "Three [CH][C][O]*+H* IS candidates and three intact [CH][C]OH* FS candidates passed local and remote handoff checks and were submitted as six AQCat25 adsorption pre-relaxations on MZ73; no VASP job was submitted.",
+  "payload": {
+    "objective": "Use AQCat25 GPU pre-relaxation to screen six Fe(110) endpoint candidates for [CH][C][O]* + H* -> [CH][C]OH* + * before any VASP adsorption relaxation or TS path work.",
+    "phase": "active",
+    "current_evidence": [
+      "The candidate set contains three IS motifs and three FS motifs: eta3(C1,C2,O), eta2(C1,C2) with OH lifted, and kappa-C1 tilted.",
+      "All candidates retain Fe45, bottom 18 fixed atoms, 50-atom order Fe45-C2-O-H2, and the intended C1-C2/C2-O/C1-H connectivity; every FS retains O-H=0.971434 A.",
+      "All six work-to-GPU handoffs passed the active JSON Schema and bound-file validation locally and again on MZ73.",
+      "MZ73 jobs 1283-1288 were submitted with checkpoint SHA-256 e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50.",
+      "Initial scheduler evidence showed jobs 1283-1284 RUNNING and 1285-1288 PENDING."
+    ],
+    "one_executable_step": "Wait for MZ73 jobs 1283-1288 to finish, return every GPU artifact to work, then review convergence, connectivity, geometry, domain status, and duplicate classes before selecting any VASP candidates.",
+    "submission_boundary": "Only six MZ73 AQCat25 predicted-candidate pre-relaxations are authorized and submitted. No VASP adsorption, NEB, DIMER, frequency, or energy-registration action is authorized.",
+    "done_when": [
+      "All six GPU jobs have terminal process and scheduler evidence.",
+      "Every returned structure and manifest passes work-side hash, geometry, chemistry, domain, and duplicate review.",
+      "A reviewable recommendation identifies which candidates, if any, should proceed to user-authorized VASP relaxation."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/candidate_review/endpoint_candidate_manifest.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_pre_relaxation/gpu_batch_manifest.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_pre_relaxation/submission_receipt_20260822.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/candidate_review/endpoint_candidate_manifest.json",
+      "sha256": "cf6976f0f4c65ff616ba9f62e6b99f596507ae76ad0f9bcae1ec163ec4d5bc00",
+      "authority": "module_validation",
+      "observed_at": "2026-08-22T23:48:05+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_pre_relaxation/gpu_batch_manifest.json",
+      "sha256": "dc55eb6c4a7bcffe3e761268682ec4a121e3735e17a144e4dc8106476006f089",
+      "authority": "module_validation",
+      "observed_at": "2026-08-22T23:48:05+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_pre_relaxation/submission_receipt_20260822.json",
+      "sha256": "b60c8c8ddc0f7070a374a03b17baa591b73786762b0ddfda964fc1e5e98bfaa6",
+      "authority": "scheduler",
+      "observed_at": "2026-08-22T23:48:05+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-endpoint-candidates-awaiting-review-20260822"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

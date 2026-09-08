@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-formal-9741172-stopped-pilot80-9742216-submitted-20260904",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-04T00:40:01+08:00",
+  "recorded_at": "2026-09-03T16:40:01Z",
+  "summary": "At the user's request, pending 120-core formal ordinary micro-NEB job 9741172 was stopped before any ionic step. An exact-same-path 80-core NSW=1 compatibility pilot passed preflight and its execution gate, then was submitted once as LSF job 9742216; its current live status is PEND.",
+  "payload": {
+    "objective": "Monitor and canonically validate 80-core same-path micro-NEB pilot job 9742216 before any 80-core formal ordinary micro-NEB submission.",
+    "phase": "active",
+    "current_evidence": [
+      "LSF job 9741172 was stopped from PEND by a hash-bound STOP_JOB decision and is now EXIT; it completed zero ionic steps.",
+      "The 80-core pilot retains the exact reviewed seven-image 00-06 path and five internal images.",
+      "The pilot uses 80 MPI ranks, 16 ranks per internal image, NPAR=4, NSW=1, LCLIMB=false, ENCUT=400 eV, and SIGMA=0.20 eV.",
+      "The neb_pilot preflight passed with bundle sha256 231dfb4399cdef812516c26724b8362a894e85ab7b8454bf6701b81c6893bbdf.",
+      "The execution gate decision is READY_FOR_NEB_PILOT and explicitly allowed SUBMIT_DIAGNOSTIC_VASP.",
+      "LSF job 9742216 was submitted once to Gkn_normal and is currently PEND.",
+      "Remote numbered POSCAR inputs 00-06 and POTCAR were verified present."
+    ],
+    "one_executable_step": "Monitor job 9742216; when it reaches DONE or EXIT, collect all internal-image outputs and run the canonical pilot validator against a separately prepared 80-core formal bundle.",
+    "submission_boundary": "The authorization for stopping 9741172 and submitting pilot 9742216 is consumed. Do not retry the pilot, submit the 80-core formal ordinary NEB, start CI-NEB/Dimer, accept a TS, or report a barrier without a new current gate and applicable user authority.",
+    "done_when": [
+      "Job 9742216 reaches DONE or EXIT and its live scheduler evidence is stored.",
+      "Every internal image is checked for normal completion, electronic convergence, exactly one ionic step, complete outputs, and magnetic continuity.",
+      "A same-path 80-core formal bundle passes canonical pilot binding before any formal submission proposal."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_formal_20260903/stop_record_9741172.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_pilot80_20260904/submission_record.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_pilot80_20260904/execution_gate_decision.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_pilot80_20260904/scheduler_evidence.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_formal_20260903/stop_record_9741172.json",
+      "sha256": "d60cb9a1c62e20f21687fe569fe22695c669e2b64b90d480875116a7ae41f9ff",
+      "authority": "scheduler",
+      "observed_at": "2026-09-04T00:40:01+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_pilot80_20260904/submission_record.json",
+      "sha256": "969c76f033402103513010a49e24f1b50c6f867c9c003e38c5c23e8bd623f72c",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-04T00:40:01+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_pilot80_20260904/submission_preflight.json",
+      "sha256": "ba24dd74e693f326b489e6ba156b49850a2977604c92d9158a3bda3ecbc9cb19",
+      "authority": "module_validation",
+      "observed_at": "2026-09-04T00:40:01+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_pilot80_20260904/execution_gate_decision.json",
+      "sha256": "20479800120d4d91e50154ed1ce3b0c8f4bdcda880c8596448ce0334ff631511",
+      "authority": "module_validation",
+      "observed_at": "2026-09-04T00:40:01+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_pilot80_20260904/scheduler_evidence.json",
+      "sha256": "02d3ad6acf507895d879c75951ed7d2165367792510bbb23fb8bf498f16a8098",
+      "authority": "scheduler",
+      "observed_at": "2026-09-04T00:40:01+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-formal-micro-neb-9741172-submitted-20260903"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

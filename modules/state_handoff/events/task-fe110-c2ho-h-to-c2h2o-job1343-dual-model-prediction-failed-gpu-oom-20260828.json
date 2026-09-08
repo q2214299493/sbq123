@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-job1343-dual-model-prediction-failed-gpu-oom-20260828",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-28T19:18:41+08:00",
+  "recorded_at": "2026-08-28T11:18:41Z",
+  "summary": "The explicitly authorized eight-structure MatRIS/AQCat25 fixed prediction job 1343 was submitted on MZ73 and failed after three seconds because the shared GPU had no usable free memory; no prediction set was produced and AQCat25 was not reached.",
+  "payload": {
+    "objective": "Obtain the exact eight-structure MatRIS/AQCat25 fixed prediction set before deciding separately whether to submit the matching VASP static-force labels.",
+    "phase": "active",
+    "current_evidence": [
+      "The user explicitly authorized one MZ73 fixed-structure prediction batch with the message `提交`; VASP labels, fine-tuning, ML-NEB rerun, and Dimer remained outside that authorization.",
+      "The uploaded request, authorization, preparation review, runtime scripts, eight structure files, and both checkpoint hashes passed the no-model remote preflight on MZ73.",
+      "Slurm job 1343 ran on MZ73 from 19:18:38 to 19:18:41 local time and terminated FAILED with NonZeroExitCode 1:0.",
+      "MatRIS initialized successfully, then CUDA reported only 64 KiB free on a 23.52 GiB GPU while other processes occupied memory; a further 20 MiB allocation failed.",
+      "The failure occurred during the first MatRIS prediction. AQCat25 was not executed and `predictions.json` was not created.",
+      "This is an execution-resource failure and is not evidence that either model can or cannot describe the selected structures."
+    ],
+    "one_executable_step": "After new explicit authorization, resubmit the unchanged hash-bound eight-structure GPU prediction request only when a runtime GPU-availability check shows the assigned GPU is not already occupied; do not submit VASP in the same action.",
+    "submission_boundary": "Job 1343 exhausted the one-job authorization. No automatic retry, VASP submission, model fine-tuning, path rerun, Dimer, TS, or barrier action is authorized.",
+    "done_when": [
+      "The exact dual-model prediction set returns with matching structure and checkpoint hashes.",
+      "The returned predictions are reviewed and the same eight VASP inputs receive a separate bounded execution decision."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/job1343.scheduler_terminal.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/job1343.producer_exit_record.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/job1343.prediction.log`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/job1343.scheduler_terminal.json",
+      "sha256": "b2ab0ae51fdc10aabd5158dae78b26840b78676e9ac42204b5f2052595e9f093",
+      "authority": "scheduler",
+      "observed_at": "2026-08-28T19:18:41+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/job1343.producer_exit_record.json",
+      "sha256": "191406afa5a4a916e5d92a878be04277f7dbeda8eeff4d1d2aef1610f239c141",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-28T19:18:41+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/job1343.prediction.log",
+      "sha256": "1eaf99488114469278e40ab32c1b3f466010cfffc6ca4ee2f913e6594ccd6107",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-28T19:18:41+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-job1342-failure-boundary-triple-force-prepared-20260828"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "surface": "true Fe(110), Fe45, five layers, bottom 18 Fe fixed",
+  "candidate": "CH_long_bridge_plus_H_adjacent_top",
+  "selection_basis": "Xu et al. report CH long-bridge as the preferred CH site and H top as a weaker metastable H site; local converged CH_long_bridge and H_top endpoints seed this distinct coadsorbed candidate.",
+  "source_files": {
+    "ch_contcar": "calculations\\fe110_ch_h_coadsorption_20260808\\source_endpoints\\CH_long_bridge\\CONTCAR",
+    "ch_sha256": "fc986c14e0f0049b1a9c8ae4d6dd21914315aa2c3e049375c3e33b6ee4bd4b63",
+    "h_contcar": "calculations\\fe110_ch_h_coadsorption_20260808\\source_endpoints\\H_top\\CONTCAR",
+    "h_sha256": "e6d7613dceeb124716280ec87276d0f80ecb1de1287ec342e1888eacf5948a06",
+    "clean_contcar": "calculations\\fe110_ch_h_coadsorption_20260808\\source_endpoints\\clean_Fe45\\CONTCAR",
+    "clean_sha256": "31b28b6c69eaedaa9c100050ee38b20b7037d9fa153de477c46eeeeb49086123"
+  },
+  "atom_map_zero_based": {
+    "carbon": 45,
+    "preexisting_ch_hydrogen": 46,
+    "incoming_surface_hydrogen": 47
+  },
+  "initial_connectivity": [
+    [
+      45,
+      46
+    ]
+  ],
+  "target_formed_bond": [
+    45,
+    47
+  ],
+  "site_labels": {
+    "carbon": "long_bridge",
+    "incoming_hydrogen": "adjacent_top"
+  },
+  "geometry_angstrom": {
+    "existing_c_h": 1.1071501246789337,
+    "incoming_c_h": 2.069517544605322,
+    "h_h": 2.0791539560197063,
+    "incoming_h_nearest_fe": 1.5573335132366253
+  },
+  "selected_h_site_fractional": [
+    0.666670442871137,
+    0.3333207474121522,
+    0.6746443189824234
+  ],
+  "poscar": "POSCAR",
+  "poscar_sha256": "c0f089d36812fb910387fc3027ee2f5497985f63dadc722d5b4c2beef034f947",
+  "local_relaxation_required": true
+}

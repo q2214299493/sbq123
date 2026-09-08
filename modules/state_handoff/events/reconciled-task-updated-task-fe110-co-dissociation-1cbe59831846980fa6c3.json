@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "event_id": "reconciled-task-updated-task-fe110-co-dissociation-1cbe59831846980fa6c3",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-co-dissociation",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-07T00:00:08+08:00",
+  "recorded_at": "2026-08-07T00:00:08+08:00",
+  "summary": "Reconcile task:fe110-co-dissociation; preserve task-fe110-co-dimer-mode-accepted-20260807 as the single effective event and supersede conflicting peers. Refresh the hash-bound local evidence after user approval.",
+  "payload": {
+    "objective": "Complete Dimer validation from technical convergence and vibrational evidence without requiring connectivity.",
+    "phase": "verification",
+    "current_evidence": [
+      "Dimer job `9656664` passes the hard gate, including negative curvature and VASP maximum atomic-force convergence.",
+      "DIMCAR Force/Torque residuals are accepted for TS validation by a hash-bound `accept_for_ts_validation` review.",
+      "VFA job `9694935` has exactly one imaginary mode, mode 6 at `537.451689 cm^-1`; its C/O relative motion projects `98.374%` onto the C-O coordinate and the mode assignment is accepted.",
+      "The pipeline status is `VFA_VALIDATED_GRADE_BLOCKED`, grade `Ungraded`, and kinetic eligibility is false because numerical frequency thresholds and the partial-Hessian active-set convergence remain unresolved.",
+      "The Dimer post-processing acceptance sequence is recorded as a fixed TS-workflow step and in the Topic-1 TS workbook."
+    ],
+    "one_executable_step": "Configure reviewed meaningful/soft imaginary-frequency thresholds and confirm the C/O-only partial-Hessian active-set convergence before final grading.",
+    "submission_boundary": "No additional VFA, Dimer, NEB, connectivity, matched-static, or barrier calculation is authorized by this acceptance record.",
+    "done_when": [
+      "Reviewed numerical frequency thresholds are configured.",
+      "The partial-Hessian active set is confirmed converged or replaced by a reviewed expanded active set.",
+      "Final VFA grading is rerun from the same hash-bound evidence."
+    ],
+    "authoritative_references": [
+      "Dimer and TS workflow: `modules/transition_state_search/README.md`.",
+      "Vibrational validation: `modules/ts_vibrational_validation/README.md`.",
+      "Pipeline policy: `configs/ts_validation_pipeline.yaml`."
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806/ts_strategy_step_record.json",
+      "sha256": "7742161b24ac5df7ce5f29f8ff6261007cdc57d763ed63d1b9fa54e0b0d8816a",
+      "authority": "module_validation",
+      "observed_at": "2026-08-06T16:26:23.483546Z"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806/validation_pipeline_status.json",
+      "sha256": "65521a91a9313b1722a3bdc45a56fbc866dbf1955f97285b3682eb415a03fe34",
+      "authority": "module_validation",
+      "observed_at": "2026-08-06T16:26:08.992234Z"
+    },
+    {
+      "locator": "configs/ts_validation_pipeline.yaml",
+      "sha256": "9625e892bc7d9a791e278a68e012751415fb314cfb7f10a0ae23eb5d921bb8fb",
+      "authority": "repository_document",
+      "observed_at": "2026-08-06T16:25:36.021111Z"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-co-connectivity-needs-review-20260806",
+    "task-fe110-co-dimer-mode-accepted-20260807"
+  ],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "cross_module_change",
+      "event_chain_reconciliation",
+      "scientific_method_change"
+    ],
+    "status": "pending"
+  }
+}

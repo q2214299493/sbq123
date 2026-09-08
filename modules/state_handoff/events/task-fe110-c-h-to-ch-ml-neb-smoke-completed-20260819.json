@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-ml-neb-smoke-completed-20260819",
+  "event_type": "task_opened",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-transition-state",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-19T12:47:54+08:00",
+  "recorded_at": "2026-08-19T04:47:54Z",
+  "summary": "The versioned complete-path AQCat25 ASE ML-NEB executor was deployed to MZ73 and a user-authorized bounded three-image, one-step GPU smoke job completed successfully; the returned path is an uncalibrated predicted candidate awaiting work-side review.",
+  "payload": {
+    "objective": "Verify the MZ73 runtime and artifact chain for the complete-path AQCat25 ASE ML-NEB executor on the Fe(110) C* + H* -> CH* + * endpoints before any production-scale GPU or VASP transition-state work.",
+    "phase": "verification",
+    "current_evidence": [
+      "The executor was deployed to the new versioned directory /home/sbq/sbq/aqcat25_ts_pilot/deployments/ml_neb_v1_20260819; every deployed file matches its local SHA256, and remote schema validation plus Python import passed.",
+      "MZ73 Slurm job 1190 completed with scheduler JobState=COMPLETED, ExitCode=0:0, runtime 00:00:29, one GPU, and a 00:15:00 walltime limit.",
+      "The smoke used exactly three images, ordinary ML-NEB for one step, and ML-CI disabled. The returned producer exit record is success/0 and the work-side canonical candidate-manifest validator passes all referenced hashes.",
+      "The candidate path has C-H distances 2.9728, 1.9056, and 1.1063 A; adjacent RMSD values 0.3021 and 0.3022 A; and numeric screens pass for adjacency, periodic branch, minimum pair distance, and one strict internal predicted-energy peak at image 01.",
+      "The one-step path is not converged, the TS/path domain remains uncalibrated, model disagreement is unavailable for a single checkpoint, and the manifest status remains needs_work_review. It is not an accepted Dimer parent, VASP result, TS, or barrier."
+    ],
+    "one_executable_step": "Review the returned 00-02 structures and path metrics in work; do not scale the GPU run, finalize a Dimer-parent manifest, or prepare/submit VASP until a separate user decision authorizes the next path strategy.",
+    "submission_boundary": "The completed authorization covered only deployment and one bounded GPU smoke. No additional GPU run, VASP NEB, CI-NEB, DIMER, frequency, force-label, or other calculation is authorized.",
+    "done_when": [
+      "The returned three-image path and its numeric/visual geometry evidence have been reviewed.",
+      "A separate decision either rejects the smoke path for scientific use or authorizes a properly resolved production ML path and its work-side review gates."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_smoke_20260819/submission_evidence.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_smoke_20260819/work_to_gpu/handoff.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_smoke_20260819/returned_from_mz73/ml_neb_smoke/gpu_ml_neb_path_manifest.candidate.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_smoke_20260819/returned_from_mz73/ml_neb_smoke/producer_exit_record.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_smoke_20260819/submission_evidence.json",
+      "sha256": "39c7c6ee8a7b97925145391f1ffcd1d693eb35405838a8490eed927aecd6e55e",
+      "authority": "scheduler",
+      "observed_at": "2026-08-19T12:47:54+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_smoke_20260819/work_to_gpu/handoff.json",
+      "sha256": "8f901af97179456ce32a5c5b255a2cdd0226fd4fc9d833f4e4d0eb679087ee41",
+      "authority": "repository_document",
+      "observed_at": "2026-08-19T12:47:54+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_smoke_20260819/returned_from_mz73/ml_neb_smoke/gpu_ml_neb_path_manifest.candidate.json",
+      "sha256": "c4f5b601d04838981cc231773a0861c5f08adab6758d904406b3689711ab4316",
+      "authority": "module_validation",
+      "observed_at": "2026-08-19T12:47:54+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_smoke_20260819/returned_from_mz73/ml_neb_smoke/producer_exit_record.json",
+      "sha256": "5826d66034eb4e8a0f8db5c4f230e5521722441e67d74d06720ffe4f501db268",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-19T12:47:54+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-coadsorption-a-selected-b-terminated-20260818"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

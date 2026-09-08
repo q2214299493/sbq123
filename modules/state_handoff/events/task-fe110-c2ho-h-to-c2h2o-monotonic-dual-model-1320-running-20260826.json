@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-monotonic-dual-model-1320-running-20260826",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-26T01:13:20+08:00",
+  "recorded_at": "2026-08-25T17:13:20Z",
+  "summary": "MZ73 Slurm job 1320 entered RUNNING and its hash-bound producer state reports restrained preconditioning at step 24 for all 17 images.",
+  "payload": {
+    "objective": "Run and review MZ73 job 1320 for the Fe(110) C2HO* + H* -> C2H2O* + * monotonic dual-model predicted path candidate.",
+    "phase": "active",
+    "current_evidence": [
+      "The exact authorized request SHA-256 is 8bb16864c2cb53015b0b6e15bb207c0cc7e7ec080527861756392e394d25cfb1.",
+      "All local, VTST path-export, remote runtime, checkpoint, structure, and duplicate-job preflights passed before the single submission.",
+      "The live MZ73 Slurm queue reports job 1320 RUNNING on MZ73.",
+      "The hash-bound producer state reports stage restrained_preconditioning_running, 17 images, and stage step 24.",
+      "Runtime progress is not scientific acceptance; the result remains a predicted path candidate only and no VASP, DIMER, TS, or barrier action is authorized."
+    ],
+    "one_executable_step": "At the next requested checkpoint, query live Slurm and the producer state; after termination, collect the complete output and validate hashes, O-H monotonicity and 1.1-1.8 A coverage, C-C preservation, periodic continuity, elementary-step topology, and the MatRIS/AQCat25 exact-structure comparison.",
+    "submission_boundary": "Do not resubmit job 1320, change the method, submit VASP, or prepare a DIMER handoff without new reviewed evidence and authorization.",
+    "done_when": [
+      "Job 1320 has a terminal producer record and is absent from the live queue.",
+      "The returned path passes complete work-side hash, geometry, reaction-coordinate, periodic, and elementary-step review.",
+      "A least-cost VASP validation/refinement recommendation is ready for separate authorization."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_monotonic_rebuild_20260826/scheduler_snapshot_job1320_running.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_monotonic_rebuild_20260826/submission_record_job1320.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_monotonic_rebuild_20260826/work_to_gpu/request.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_monotonic_rebuild_20260826/scheduler_snapshot_job1320_running.json",
+      "sha256": "cb66a7a4da83dd1d0a6d4543b2ebbb2d007b7cf9e1ad07a540002665e266eb4e",
+      "authority": "scheduler",
+      "observed_at": "2026-08-26T01:13:20+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_monotonic_rebuild_20260826/work_to_gpu/request.json",
+      "sha256": "8bb16864c2cb53015b0b6e15bb207c0cc7e7ec080527861756392e394d25cfb1",
+      "authority": "structure_output",
+      "observed_at": "2026-08-26T01:13:20+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-monotonic-dual-model-1320-submitted-20260826"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

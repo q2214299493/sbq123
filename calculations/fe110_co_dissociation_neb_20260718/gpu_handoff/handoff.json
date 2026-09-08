@@ -1,0 +1,105 @@
+{
+  "schema_version": 2,
+  "direction": "work_to_gpu",
+  "handoff_id": "fe110_co_dissociation_topic1_aqcat25_20260719",
+  "workflow_kind": "transition_state",
+  "source_workflow_sha256": "42f2a2e714727e1e3315e325abcddab87c2c656a2f34b151263d31349db156a4",
+  "candidate_structure": {
+    "path": "gpu_handoff/waypoints/WP_02/POSCAR",
+    "sha256": "72ce7307a6648e5e28a2a3d8b186989c2a8e30adcd1479fb6b286b434bd19a36",
+    "format": "vasp_poscar",
+    "atom_count": 47,
+    "atom_order_sha256": "d4e740b5d5ba78ecd1c56a3887863880e0f4ee2ce037fd77d05378f1af46a402"
+  },
+  "compatibility": {
+    "branch": "true_fe110_5layer_5x5x1",
+    "sha256": "ba6c374ee097a51481eaa1dc468c582ac65af7290dc0cfb5f3d20a0658f59b95",
+    "slab_model": "Fe45_bottom18_fixed",
+    "facet": "Fe(110)"
+  },
+  "model": {
+    "identifier": "AQCat25 demo_single model.pt",
+    "checkpoint_sha256": "e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50",
+    "fmax_eV_per_A": 0.05,
+    "max_steps": 300
+  },
+  "selective_dynamics": {
+    "fixed_atom_indices_1based": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18
+    ],
+    "free_atom_count": 29
+  },
+  "transition_state": {
+    "normalized_reaction_contract_sha256": "f05f901204621dd787e901a4dbfd74535e513616176b9fc65834697851bf39b0",
+    "atom_map_sha256": "c106ae99bf673f9aaf51a0ae6515a4af625bee66960393e3700e78ddc247f248",
+    "initial_structure": {
+      "path": "matched_statics/IS/POSCAR",
+      "sha256": "6ed0dcc7bc57e30bce0eca23a94e6b8823dfc543a6bc943dccffcda531daadbf",
+      "format": "vasp_poscar",
+      "atom_count": 47,
+      "atom_order_sha256": "d4e740b5d5ba78ecd1c56a3887863880e0f4ee2ce037fd77d05378f1af46a402"
+    },
+    "waypoint_structures": [
+      {
+        "path": "gpu_handoff/waypoints/WP_01/POSCAR",
+        "sha256": "7320a01cbbd5284e388a4bc2c18eebc27ef60f9ec8b734f47c2ff17bc25b50f5",
+        "format": "vasp_poscar",
+        "atom_count": 47,
+        "atom_order_sha256": "d4e740b5d5ba78ecd1c56a3887863880e0f4ee2ce037fd77d05378f1af46a402"
+      },
+      {
+        "path": "gpu_handoff/waypoints/WP_02/POSCAR",
+        "sha256": "72ce7307a6648e5e28a2a3d8b186989c2a8e30adcd1479fb6b286b434bd19a36",
+        "format": "vasp_poscar",
+        "atom_count": 47,
+        "atom_order_sha256": "d4e740b5d5ba78ecd1c56a3887863880e0f4ee2ce037fd77d05378f1af46a402"
+      },
+      {
+        "path": "gpu_handoff/waypoints/WP_03/POSCAR",
+        "sha256": "d143d0c981e42474f018a6e067f93d74aacedf15f5f6924e05fcdc18762811b3",
+        "format": "vasp_poscar",
+        "atom_count": 47,
+        "atom_order_sha256": "d4e740b5d5ba78ecd1c56a3887863880e0f4ee2ce037fd77d05378f1af46a402"
+      }
+    ],
+    "final_structure": {
+      "path": "matched_statics/FS/POSCAR",
+      "sha256": "0fe755b8954c58c991009093c96065787e522805bd359eb10a114287281c9de1",
+      "format": "vasp_poscar",
+      "atom_count": 47,
+      "atom_order_sha256": "d4e740b5d5ba78ecd1c56a3887863880e0f4ee2ce037fd77d05378f1af46a402"
+    },
+    "indexed_bond_changes": [
+      {
+        "atoms_1based": [
+          46,
+          47
+        ],
+        "change": "break"
+      }
+    ]
+  },
+  "restrictions": {
+    "predicted_candidate_only": true,
+    "submit_vasp": false,
+    "scientific_acceptance": false,
+    "direct_gpu_to_vasp_handoff": false
+  }
+}

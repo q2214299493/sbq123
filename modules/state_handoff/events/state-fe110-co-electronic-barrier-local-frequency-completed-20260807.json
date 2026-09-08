@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "event_id": "state-fe110-co-electronic-barrier-local-frequency-completed-20260807",
+  "event_type": "state_observed",
+  "entity": {
+    "kind": "state",
+    "id": "active-fe-110-co-dissociation-test-current-gate",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-07T12:05:16+08:00",
+  "recorded_at": "2026-08-07T12:05:16+08:00",
+  "summary": "Close the Fe(110) CO-dissociation electronic-barrier and local-frequency scope without authorizing further calculations.",
+  "payload": {
+    "block_id": "active-fe-110-co-dissociation-test-current-gate",
+    "section": "## Active Fe(110) CO Dissociation Test",
+    "title": "Completed Scope - 2026-08-07 Electronic Barrier and Local Frequency Validation",
+    "facts": [
+      "Dimer job `9656664` is accepted from force convergence, negative curvature, reviewed Force/Torque residuals, and the accepted target mode.",
+      "Local partial-Hessian job `9694935` has exactly one accepted C/O-dominated imaginary mode at `537.451689 cm^-1`.",
+      "The compatible `SIGMA=0.20 eV` IS/TS/FS final-TOTEN chain is registered: forward barrier `1.350209 eV`, reverse barrier `2.056573 eV`, and reaction energy `-0.706364 eV`.",
+      "Connectivity and optional VFA classification are not Dimer acceptance requirements; no free-energy or kinetic eligibility claim is made.",
+      "No further VASP/VTST job is required for the completed electronic-barrier scope."
+    ],
+    "next_action": "No calculation action. Reuse the registered strategy for compatible future tasks; perform separate consistent partial-Hessian thermochemical corrections only if a free-energy barrier or kinetics input is requested.",
+    "project_state_header": true
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/registration_summary.json",
+      "sha256": "8eda76a85a1acddd464d1dab5c88f69437e23f84a6b89dd5c456db31533fd0f2",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-07T12:05:16+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/formal_barrier_manifest.json",
+      "sha256": "9fa49b0b3dffc481154b13d835502e77a3f27e64a4d7d43f9ca3ee0e530753c2",
+      "authority": "module_validation",
+      "observed_at": "2026-08-07T12:05:16+08:00"
+    },
+    {
+      "locator": "docs/FE110_CO_DISSOCIATION_HANDOFF_20260807.md",
+      "sha256": "42ada3bd74bff75e9b98934f7ee30303a854ea2bad4992dbc4db5ad15ecdfec9",
+      "authority": "repository_document",
+      "observed_at": "2026-08-07T12:05:16+08:00"
+    }
+  ],
+  "supersedes": [
+    "reconciled-state-observed-state-active-fe-110-co-dissociation-test-current-gate-b994911854d16f2f7348"
+  ],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "scientific_scope_completion",
+      "state_conflict_resolution"
+    ],
+    "status": "pending"
+  }
+}

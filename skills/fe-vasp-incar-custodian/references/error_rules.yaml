@@ -1,0 +1,28 @@
+blocking_failure_types:
+  - endpoint
+  - geometry
+  - path_collision
+  - surface_penetration
+  - image_jump
+  - adsorbate_desorption
+  - atom_mapping_error
+  - intermediate_candidate
+blocking_error_tokens:
+  - endpoint_invalid
+  - atom_count_mismatch
+  - species_or_order_mismatch
+  - cell_mismatch
+  - selective_dynamics_mismatch
+  - collision
+  - penetration
+  - path_jump
+  - desorption
+  - reaction_coordinate_backtrack
+vasp_patterns:
+  brmix: BRMIX
+  zheev: ZHEEV
+  subspace: Sub-Space-Matrix is not hermitian
+  too_few_bands: TOO FEW BANDS|NBANDS insufficient
+  edddav: EDDDAV
+  zbrent: ZBRENT
+  fatal: VERY BAD NEWS|internal error|segmentation|forrtl

@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-job9742743-local-oh-ready-20260906",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-06T20:02:32+08:00",
+  "recorded_at": "2026-09-06T12:02:32Z",
+  "summary": "Job 9742743 received the new mandatory local failure closeout. MatRIS epoch 6 and AQCat25 were screened against exact final VASP force geometries; MatRIS passed, so no fine-tuning was triggered. A periodic-branch-normalized, five-internal-image local O-H path was built, accepted after geometry, dist.pl, and nebmovie.pl 0 review, and packaged as an 80-core ordinary micro-NEB. Preflight passes and the current gate allows SUBMIT_VASP, but the package remains unsubmitted pending explicit remote-execution authorization.",
+  "payload": {
+    "objective": "Submit the reviewed job-9742743 local O-H densified ordinary micro-NEB only after explicit user authorization of the current hash-bound bundle.",
+    "phase": "active",
+    "current_evidence": [
+      "LSF job 9742743 is DONE but not force-converged: all five internal images reached 300 ionic steps and the maximum final NEB force is 0.194127 eV/Angstrom at image 02.",
+      "The failed attempt and confirmed optimizer/path outcome are registered in the strategy-learning store; exact-input retry is blocked.",
+      "MZ73 job 1510 compared MatRIS epoch 6 and AQCat25 with exact final job-9742743 image 01-03 VASP force blocks. MatRIS passed the registered screen with force-vector RMSE 0.080373 eV/Angstrom and maximum vector error 0.233732 eV/Angstrom. AQCat25 passed the force/error ceilings but did not reproduce the three-structure lowest-energy ordering. No MatRIS fine-tuning is triggered.",
+      "The replacement local path uses normalized periodic branches and five internal images. O-H distances are 2.0320, 1.7800, 1.5500, 1.3200, 1.1143, 1.0500, and 0.9989 Angstrom.",
+      "Geometry diagnosis passes, dist.pl gives a maximum adjacent displacement of 0.399207 Angstrom, and nebmovie.pl 0 visual review accepts one continuous O-H bond-forming event.",
+      "The 80-core ordinary micro-NEB package passes repository preflight. Its gate decision is READY_FOR_ORDINARY_NEB_SUBMISSION with only SUBMIT_VASP allowed."
+    ],
+    "one_executable_step": "After explicit user authorization, submit the current hash-bound 80-core ordinary no-climb local micro-NEB package on sunboquan-codex; do not insert a pilot or alter the reviewed path.",
+    "submission_boundary": "Job 9742743 is finished and its prior authorization is consumed. Local failure closeout and preparation are complete, but remote VASP submission still requires explicit authority. Do not start CI-NEB or Dimer, accept a TS, or report a barrier from this prepared path.",
+    "done_when": [
+      "The reviewed bundle is submitted exactly once and the LSF job ID plus remote path are recorded."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job9742743_final_triad_reuse_v4_20260906/dual_model_existing_neb_force_screen.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/local_oh_densification_job9742743_v1_20260906/path_candidate/path_review.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_job9742743_local_oh_densified_5internal_20260906/submission_preflight.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_job9742743_local_oh_densified_5internal_20260906/ts_search_decision.json`",
+      "`modules/transition_state_search/README.md`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job9742743_final_triad_reuse_v4_20260906/dual_model_existing_neb_force_screen.json",
+      "sha256": "d04b3809230ac2601c5d3965e3adb4532798db93d4ed8c1e0379b5cd28b1c25a",
+      "authority": "module_validation",
+      "observed_at": "2026-09-06T20:02:32+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/local_oh_densification_job9742743_v1_20260906/path_candidate/path_review.json",
+      "sha256": "698da022df992c6994fe1813fe58813fa5a32049620091db429d8c3f3e40a47b",
+      "authority": "module_validation",
+      "observed_at": "2026-09-06T20:02:32+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_job9742743_local_oh_densified_5internal_20260906/submission_preflight.json",
+      "sha256": "52f969d190800d54ffa7d6d34df57a591f5cbdc335352661662dde36da2bcd11",
+      "authority": "module_validation",
+      "observed_at": "2026-09-06T20:02:32+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_job9742743_local_oh_densified_5internal_20260906/ts_search_decision.json",
+      "sha256": "f4bf3042cb6df1d7c847f91be21acc95665bc1ba972257b203c104c659e9ec4b",
+      "authority": "module_validation",
+      "observed_at": "2026-09-06T20:02:32+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-neb9742743-done-unconverged-20260906"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

@@ -1,0 +1,8 @@
+# Production sources accepted by the independent Phase 2B verification.
+# Generated, runtime, calculation, scheduler, database, and migration files are excluded.
+path	git_status	bytes	sha256	verification_meaning
+scripts/neb_agent/path_quality_control.py	??	14384	12b277f51a1a9add4c82422ff7024c031dde1ceeca2b6330d80cb06d99d4b523	unchanged sole scientific evaluator
+scripts/neb_agent/path_quality_service.py	??	4837	0f306f106615ff0524aee590c9dc9b467700ac6e1d19d83ba7db663840feaf20	shared application orchestration
+scripts/neb_agent/path_quality_cli.py	??	2386	9177d24b018549028c075a641f3ab4c5176b9bfab2cea43f780665b56b2c15e9	compatible thin standalone CLI
+scripts/neb_agent/pilot_validation.py	??	9101	8c280cb54e405bf215d10705213a25f25193bdf3e79730a9921838c53aef969d	authorized Phase 2B adapter change
+scripts/ts_strategy_engine/workflow.py	M	11777	014397403cf9a05c7b44d3aad6d9e11da99bd789c19bc674da60d7872fef1a51	compatible unified workflow adapter

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "event_id": "state-fe110-co-ts-accepted-frequency-validated-20260807",
+  "event_type": "state_observed",
+  "entity": {"kind": "state", "id": "active-fe-110-co-dissociation-test-current-gate", "module": "transition_state_search"},
+  "occurred_at": "2026-08-07T00:28:08+08:00",
+  "recorded_at": "2026-08-07T00:28:08+08:00",
+  "summary": "Record the Dimer TS as accepted after convergence and target-frequency validation.",
+  "payload": {
+    "block_id": "active-fe-110-co-dissociation-test-current-gate",
+    "section": "## Active Fe(110) CO Dissociation Test",
+    "title": "Current Gate - 2026-08-07 Dimer TS Accepted",
+    "facts": [
+      "Dimer job `9656664` is converged and has accepted conditional Force/Torque soft-review evidence.",
+      "VFA job `9694935` has exactly one accepted target imaginary mode at `537.451689 cm^-1`.",
+      "The TS acceptance status is `TS_ACCEPTED`; connectivity and optional VFA grading do not gate Dimer acceptance.",
+      "No barrier or kinetic result is established because a compatible matched-static energy chain has not been recorded."
+    ],
+    "next_action": "Preserve the accepted TS record; prepare compatible IS/TS/FS energies only under separate authorization."
+  },
+  "evidence": [
+    {"locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806/ts_strategy_step_record.json", "sha256": "7742161b24ac5df7ce5f29f8ff6261007cdc57d763ed63d1b9fa54e0b0d8816a", "authority": "module_validation", "observed_at": "2026-08-07T00:28:08+08:00"},
+    {"locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806/validation_pipeline_status.json", "sha256": "65521a91a9313b1722a3bdc45a56fbc866dbf1955f97285b3682eb415a03fe34", "authority": "module_validation", "observed_at": "2026-08-07T00:28:08+08:00"}
+  ],
+  "supersedes": [
+    "state-fe110-co-connectivity-needs-review-20260806",
+    "state-fe110-co-dimer-frequency-validation-20260806",
+    "state-fe110-co-dimer-mode-accepted-20260807",
+    "state-fe110-co-dimer-mode-accepted-merge-20260807"
+  ],
+  "review": {"required": true, "reason_codes": ["scientific_method_change", "cross_module_change"], "status": "pending"}
+}

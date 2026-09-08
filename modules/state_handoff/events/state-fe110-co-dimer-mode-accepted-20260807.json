@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "event_id": "state-fe110-co-dimer-mode-accepted-20260807",
+  "event_type": "state_observed",
+  "entity": {
+    "kind": "state",
+    "id": "active-fe-110-co-dissociation-test-current-gate",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-07T00:00:08+08:00",
+  "recorded_at": "2026-08-07T00:00:08+08:00",
+  "summary": "Record the accepted Dimer principal mode and the remaining VFA grade blockers.",
+  "payload": {
+    "block_id": "active-fe-110-co-dissociation-test-current-gate",
+    "section": "## Active Fe(110) CO Dissociation Test",
+    "title": "Current Gate - 2026-08-07 Dimer Mode Accepted, Grade Blocked",
+    "facts": [
+      "Dimer job `9656664` passes the hard convergence gate; its Force/Torque soft residuals have a hash-bound `accept_for_ts_validation` decision.",
+      "VFA job `9694935` has exactly one imaginary mode, mode 6 at `537.451689 cm^-1`, and its C/O-dominated target-mode assignment is formally accepted.",
+      "Dimer validation does not require bidirectional connectivity; preserved downhill calculations remain optional diagnostic evidence.",
+      "The pipeline status is `VFA_VALIDATED_GRADE_BLOCKED`, grade `Ungraded`, and kinetic eligibility is false.",
+      "The remaining blockers are unconfigured meaningful/soft frequency thresholds and unconfirmed convergence of the C/O-only partial-Hessian active set."
+    ],
+    "next_action": "Configure reviewed frequency thresholds and confirm active-set convergence, then rerun final VFA grading without submitting an unrelated calculation."
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806/ts_strategy_step_record.json",
+      "sha256": "64f01d470d809b5aad7700499974eeb590370f91c72c0ff0247f5f7fd21600d0",
+      "authority": "module_validation",
+      "observed_at": "2026-08-07T00:00:08+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806/vfa_analysis.json",
+      "sha256": "f096dac60bdd73664ff25797044a7018a03582af6f1ff84b98bd392c442aa824",
+      "authority": "module_validation",
+      "observed_at": "2026-08-07T00:00:08+08:00"
+    }
+  ],
+  "supersedes": ["state-fe110-co-dimer-frequency-validation-20260806"],
+  "review": {
+    "required": true,
+    "reason_codes": ["scientific_method_change", "cross_module_change"],
+    "status": "pending"
+  }
+}

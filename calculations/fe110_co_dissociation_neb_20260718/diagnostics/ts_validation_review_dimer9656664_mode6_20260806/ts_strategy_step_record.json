@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "document_kind": "ts_strategy_workflow_step_record",
+  "reaction_id": "fe110_co_dissociation_topic1_9558184_to_9622455",
+  "workflow_step": "DIMER_CONVERGENCE_AND_FREQUENCY_VALIDATION",
+  "step_order": [
+    "DIMER_CONVERGENCE",
+    "FREQUENCY_VALIDATION",
+    "RESULT_RECORD"
+  ],
+  "dimer_job_id": "9656664",
+  "vfa_job_id": "9694935",
+  "dimer_hard_gate": "PASS",
+  "dimer_soft_review_decision": "accept_for_ts_validation",
+  "imaginary_frequency_count": 1,
+  "principal_mode_index": 6,
+  "principal_imaginary_frequency_cm1": 537.451689,
+  "principal_mode_assignment": "accepted",
+  "principal_mode_target": "Fe(110) CO dissociation",
+  "reaction_atom_indices_zero_based": [45, 46],
+  "co_relative_mode_projection_on_bond": 0.983741692494712,
+  "geometry_status": "pass",
+  "connectivity_required": false,
+  "ts_acceptance_status": "ACCEPTED",
+  "frequency_validation_status": "PASS",
+  "optional_vfa_grade": "NOT_EVALUATED",
+  "kinetic_eligible": false,
+  "open_requirements": [
+    "CONFIRM_PARTIAL_HESSIAN_ACTIVE_SET_CONVERGENCE_BEFORE_PUBLICATION_USE"
+  ],
+  "reviewer": "User-authorized Codex scientific review",
+  "reviewed_at": "2026-08-06T23:49:08+08:00",
+  "evidence": {
+    "dimer_analysis": {
+      "path": "../dimer_handoff_job9640399_image04_20260803/dimer_analysis.json",
+      "sha256": "5744956f8428be0f60fdd5c6a08d671a9b6c5de738252835e7fd09746d1a631e"
+    },
+    "dimer_soft_review": {
+      "path": "../dimer_handoff_job9640399_image04_20260803/dimer_soft_gate_review_ts_acceptance_20260806.json",
+      "sha256": "27876525f17d69acae80078225e82deb4639a8b79f71acf9213abf471bbcbbcc"
+    },
+    "vfa_review": {
+      "path": "vfa_review.json",
+      "sha256": "8a010d7d368762575105b9c580d5acb7f9bdd98dfb72b7e12ecaa408c6057be3"
+    },
+    "vfa_analysis": {
+      "path": "vfa_analysis.json",
+      "sha256": "f096dac60bdd73664ff25797044a7018a03582af6f1ff84b98bd392c442aa824"
+    },
+    "pipeline_status": {
+      "path": "validation_pipeline_status.json",
+      "sha256": "65521a91a9313b1722a3bdc45a56fbc866dbf1955f97285b3682eb415a03fe34"
+    }
+  }
+}

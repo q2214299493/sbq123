@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-local-vasp-micro-neb-pilot-9740323-pass-20260903",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-03T12:54:47+08:00",
+  "recorded_at": "2026-09-03T04:54:47Z",
+  "summary": "LSF job 9740323 is DONE and the canonical five-internal-image NSW=1 local VASP micro-NEB pilot validator passes. All internal images completed normally and electronically converged, magnetic continuity has no warning, and the PBC-unwrapped final geometry preserves a continuous O-H forming path. The pilot forces are intentionally unconverged; no formal local ordinary NEB is yet authorized or submitted.",
+  "payload": {
+    "objective": "Obtain separate user authorization before preparing and submitting the formal local VASP ordinary micro-NEB on the pilot-validated seven-image path.",
+    "phase": "active",
+    "current_evidence": [
+      "LSF job 9740323 is DONE on sunboquan-codex.",
+      "The canonical pilot validator passes all five internal images: normal completion, electronic convergence, exactly one ionic step, complete required outputs, and current live DONE evidence.",
+      "No magnetic-continuity warning is present; total magnetization decreases smoothly from 106.288182 to 105.795278 muB across images 01-05.",
+      "The one-step energy maximum is image 03 while the maximum NEB force is image 04 at 4.428662 eV/A; this mismatch and the large forces are expected to require formal optimization.",
+      "Raw VASP CONTCAR files wrap several movable Fe atoms across the fractional 0/1 boundary; minimum-image review copies pass geometry with maximum adjacent atom step 0.417256 A.",
+      "O47-H49 remains monotonic after one step: 2.624500, 2.250913, 1.948899, 1.645094, 1.338069, 1.091115, and 0.985308 A.",
+      "nebmovie.pl 1 and top/side visual review show continuous O-H formation and a preserved C1-C2-O-H48 framework.",
+      "The NSW=1 energies and forces are diagnostic only and cannot be reported as a barrier or used as a Dimer parent."
+    ],
+    "one_executable_step": "After a new explicit user instruction to submit, prepare a same-path formal ordinary micro-NEB package, bind the canonical pilot result, run formal preflight and the current execution gate, and submit exactly once.",
+    "submission_boundary": "Job-9740323 authorization is consumed. Do not submit the formal ordinary micro-NEB, retry the pilot, start CI-NEB/Dimer, accept a TS, or report a barrier without separate explicit user authority and a new hash-bound gate.",
+    "done_when": [
+      "The user explicitly selects formal local ordinary micro-NEB submission.",
+      "The formal same-path input bundle validates against the completed pilot result.",
+      "A current execution gate explicitly allows SUBMIT_VASP."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_20260902/neb_pilot_result.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_20260902/pilot_completion_review.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/pilot_final_geometry_job9740323/unwrapped_review/path_geometry_diagnosis.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_20260902/neb_pilot_result.json",
+      "sha256": "b6964f26b9e8ea60f7747c6c1f85b777272016b202a4681b14de4b8131e97d2b",
+      "authority": "module_validation",
+      "observed_at": "2026-09-03T12:54:47+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_20260902/scheduler_evidence.json",
+      "sha256": "11354305609523ed7f48b65431daece162d143ed4e1be8fad02f1ee9bfbc389b",
+      "authority": "scheduler",
+      "observed_at": "2026-09-03T12:54:47+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_20260902/pilot_completion_review.work.json",
+      "sha256": "d81acff1f30bfa669a80b5a0189713c19d9568f3459165540394d571ff815dd9",
+      "authority": "module_validation",
+      "observed_at": "2026-09-03T12:54:47+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/pilot_final_geometry_job9740323/unwrapped_review/path_geometry_diagnosis.json",
+      "sha256": "cafc7caf36b8a20af44883e0033b62c16a98c560b62ab703ca19630dfe622f81",
+      "authority": "module_validation",
+      "observed_at": "2026-09-03T12:54:47+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-local-vasp-micro-neb-pilot-9740323-pending-20260902"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

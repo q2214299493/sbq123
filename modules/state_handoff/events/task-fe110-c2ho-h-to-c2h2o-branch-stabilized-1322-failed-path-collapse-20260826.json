@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-branch-stabilized-1322-failed-path-collapse-20260826",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-26T22:35:37+08:00",
+  "recorded_at": "2026-08-26T14:35:37Z",
+  "summary": "MZ73 job 1322 completed restrained preconditioning but failed during ordinary ML-NEB at step 19. The last restart has a real H50 jump from image 09 to 10 and no internal image in the required 1.1-1.8 A O-H transition interval, so the GPU path is rejected and unchanged resubmission is forbidden.",
+  "payload": {
+    "objective": "Choose and review a correction that preserves the resolved O-H transition region after restraint release before any new GPU or VASP submission.",
+    "phase": "active",
+    "current_evidence": [
+      "Slurm job 1322 is absent from the live queue; MZ73 accounting is disabled, while the hash-bound producer failure record reports exit code 1 at 2026-08-26T04:05:36Z.",
+      "Restrained preconditioning reached its 0.2 eV/A target after 33 steps with final fmax 0.189792 eV/A.",
+      "Ordinary ML-NEB stopped at step 19 on a maximum single movable-atom step of 1.034966 A between images 09 and 10 for H50, above the 1.0 A hard limit.",
+      "The last restart preserves C1-C2, adjacent RMSD, minimum pair distance, and periodic continuity, but contains no internal O-H distance in 1.1-1.8 A and has a 0.116936 A maximum O-H backtrack.",
+      "This is real path collapse after restraint release, not a PBC artifact or a harmless threshold-only miss.",
+      "The returned GPU path is rejected for VASP and DIMER handoff; no automatic resubmission is authorized."
+    ],
+    "one_executable_step": "After user direction, prepare for review either a staged restraint-release GPU correction that separately persists the converged preconditioned path or a bounded VASP micro-NEB correction retaining multiple images in the 1.1-1.8 A O-H interval; do not submit automatically.",
+    "submission_boundary": "The job-1322 authorization is consumed. Do not raise the 1.0 A atom-step threshold, resubmit unchanged, submit VASP, or prepare a DIMER handoff without a new current hash-bound review and explicit authority.",
+    "done_when": [
+      "A corrected path retains multiple internal images in the 1.1-1.8 A O-H interval after all temporary restraints are released.",
+      "The complete returned path passes H50 single-step continuity, O-H final monotonicity and coverage, C-C preservation, periodic continuity, and dual-model review.",
+      "A least-cost VASP validation or refinement recommendation is ready for separate authorization."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_branch_stabilized_v3_20260826/gpu_return_job1322/work_failure_review_job1322.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_branch_stabilized_v3_20260826/gpu_return_job1322/production/restart/`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_branch_stabilized_v3_20260826/work_to_gpu/request.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_branch_stabilized_v3_20260826/gpu_return_job1322/work_failure_review_job1322.json",
+      "sha256": "d704e9325f7073f204f0063ceb0b6b39088a78423dae62a8955a44ba2031139a",
+      "authority": "module_validation",
+      "observed_at": "2026-08-26T22:35:37+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_branch_stabilized_v3_20260826/gpu_return_job1322/production/producer_exit_record.failure.1322.json",
+      "sha256": "47cd2689f00429bcdb521ff9824c07828a072194c62fe3992db9cf1940348224",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-26T22:35:37+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_branch_stabilized_v3_20260826/work_to_gpu/request.json",
+      "sha256": "8f0777a1c69c74fb8301bb229c07b60d0254fcf18ccacf2d71121f77de7ab0d4",
+      "authority": "structure_output",
+      "observed_at": "2026-08-26T22:35:37+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-branch-stabilized-1322-running-20260826"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

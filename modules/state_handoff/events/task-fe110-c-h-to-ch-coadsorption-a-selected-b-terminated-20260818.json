@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-coadsorption-a-selected-b-terminated-20260818",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-coadsorption",
+    "module": "adsorption_workflow"
+  },
+  "occurred_at": "2026-08-18T23:10:00+08:00",
+  "recorded_at": "2026-08-18T15:10:00Z",
+  "summary": "User-authorized termination placed stalled B/job 9715451 in EXIT; converged A/job 9715450 is accepted as the primary reactive C*+H* initial state and converged C/job 9715455 is retained as a far-separation reference.",
+  "payload": {
+    "objective": "Relax and compare three Fe(110) C*+H* coadsorption candidates for selecting the C* + H* -> CH* + * initial state.",
+    "phase": "verification",
+    "current_evidence": [
+      "B/job 9715451 was terminated under explicit user authority and LSF now reports EXIT. Its stopped non-converged outputs are preserved; no restart or resubmission occurred.",
+      "A/job 9715450 is a converged C-long-bridge + H-hollow coadsorption state with C-H 2.9728 A. C and H share local Fe38 coordination, the geometry audit passes, and its compatible TOTEN is -368.60093793 eV.",
+      "C/job 9715455 is a converged C-long-bridge + H-hollow far-separation state with C-H 4.5191 A, no shared local Fe coordination, a passing geometry audit, and compatible TOTEN -368.59979451 eV.",
+      "A is only 0.00114342 eV below C; they are near-degenerate but geometrically distinct relative-separation motifs.",
+      "A is selected as the primary reactive IS because it is the shorter, locally adjacent stable C*+H* state. C is retained as a far-separation reference because a direct C-to-CH path from C would mix long-range H surface migration into hydrogenation.",
+      "The accepted CH long-bridge product has the same cell, Fe45,C,H order, bottom-18 fixed mask, and C-H 1.1063 A, so A is structurally compatible for reviewed path construction."
+    ],
+    "one_executable_step": "No adsorption task remains. If the user authorizes transition-state work, start a new transition-state-search task that uses A/job9715450 as IS, the accepted CH long-bridge structure as FS, and a chemically guided C-H-forming path with periodic-branch and geometry review before any NEB submission.",
+    "submission_boundary": "This completion authorizes no NEB, CI-NEB, DIMER, frequency, restart, or resubmission.",
+    "done_when": [
+      "B is terminal and its stopped evidence is preserved.",
+      "A and C have compatible final energies and final geometry/site reviews.",
+      "A is selected as the primary reactive IS and C is retained as the reference state."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_coadsorption_20260817/provenance/termination_and_endpoint_review_20260818.json`",
+      "`calculations/fe110_c_h_coadsorption_20260817/provenance/termination_and_endpoint_review_registration_receipt_20260818.json`",
+      "`calculations/fe110_c_h_coadsorption_20260817/results/A_adjacent_hollow_reactive/CONTCAR`",
+      "`calculations/fe110_c_h_coadsorption_20260817/results/C_far_hollow_reference/CONTCAR`",
+      "`calculations/fe110_c_h_coadsorption_20260817/results/B_second_neighbor_hollow_stopped_job9715451_20260818/OUTCAR`",
+      "`calculations/fe110_c_h_coadsorption_20260817/sources/CH_long_bridge_representative_job9573951_CONTCAR`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_coadsorption_20260817/provenance/termination_and_endpoint_review_20260818.json",
+      "sha256": "d79bc4cf6190307c726bb6c961a49ec622ec1963e8b65ef823e368ac19c81261",
+      "authority": "module_validation",
+      "observed_at": "2026-08-18T23:10:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_coadsorption_20260817/provenance/termination_and_endpoint_review_registration_receipt_20260818.json",
+      "sha256": "898bc1389311bf82b5874ec0e982ab199a24491992daa11225d2a0c8901398b8",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-18T23:10:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_coadsorption_20260817/results/A_adjacent_hollow_reactive/CONTCAR",
+      "sha256": "121ace35043c79f968ecd14ef2a100b2531c4904b8671e71bf506751f06c5396",
+      "authority": "structure_output",
+      "observed_at": "2026-08-18T23:10:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_coadsorption_20260817/results/C_far_hollow_reference/CONTCAR",
+      "sha256": "7823a8815130988c4095ae822ee593b668b944e7bcd82402e4043fc1e2dada53",
+      "authority": "structure_output",
+      "observed_at": "2026-08-18T23:10:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_coadsorption_20260817/results/B_second_neighbor_hollow_stopped_job9715451_20260818/OUTCAR",
+      "sha256": "44d2edc59aad84ac9944d5ef374f3e445ea2a0718e5b1df112073b791cacb6cf",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-18T23:10:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_coadsorption_20260817/sources/CH_long_bridge_representative_job9573951_CONTCAR",
+      "sha256": "ffeccf7353ea82d8b5c5d3e13762a3e34fcae41ec7b1f0ff7adbae5b2bf9e4a5",
+      "authority": "structure_output",
+      "observed_at": "2026-08-18T23:10:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-coadsorption-ac-done-b-stalled-20260818"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-matris-replay-finetune-request-prepared-20260902",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-02T11:34:57+08:00",
+  "recorded_at": "2026-09-02T03:34:57Z",
+  "summary": "A review-only, hash-bound MatRIS energy-force replay fine-tuning request was prepared. It binds the six current TS labels, fifteen compatible prior TS replay labels, nine adsorption replay-training labels, four adsorption-retention validation labels, and seven immutable held-out TS exclusions. Exact-structure and rounded translation-invariant geometry overlap are both zero. No GPU fine-tuning or path rerun was submitted.",
+  "payload": {
+    "objective": "Implement and locally validate a production MatRIS energy-and-force training executor against the reviewed replay request, then obtain separate user authorization before any MZ73 fine-tuning execution.",
+    "phase": "active",
+    "current_evidence": [
+      "The canonical MatRIS fine-tune preflight passes with no blockers and binds active state, trigger assessment, current labels, policy, base checkpoint, and held-out exclusions.",
+      "The optimizer pool contains 6 current TS labels, 15 prior TS replay labels, and 9 adsorption replay labels; 4 additional adsorption structures are validation-only.",
+      "All 21 TS samples contain 50 atoms with identical atom order, cell, and fixed layer under the SIGMA=0.20 eV compatibility branch.",
+      "All 30 optimizer/replay structures were checked against 7 frozen held-out structures; exact hash overlap and rounded translation-invariant geometry overlap are both zero.",
+      "The existing local MatRIS benchmark trainer is force-only, so it cannot satisfy the triggered energy-and-force-aware production request without a separately reviewed executor change.",
+      "No MZ73 job, new checkpoint, complete-path rerun, VASP job, micro-NEB, Dimer, TS acceptance, or barrier action was executed."
+    ],
+    "one_executable_step": "Implement and locally test the energy-and-force-aware MatRIS production trainer using the prepared manifest; do not upload or submit it without separate user authorization.",
+    "submission_boundary": "The review request is preparation evidence only. MZ73 fine-tuning, checkpoint promotion, complete ML-path rerun, AQCat25 returned-path audit, VASP micro-NEB, Dimer, TS acceptance, and barrier actions remain unauthorized.",
+    "done_when": [
+      "The production trainer consumes the hash-bound replay manifest, enforces held-out exclusions before optimizer construction, and trains movable-atom forces plus within-system relative energies.",
+      "A bounded local or non-production smoke test validates loss construction, checkpoint output hashing, force-tail checks, and adsorption-retention checks.",
+      "The user separately authorizes or declines the reviewed MZ73 fine-tuning execution."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/matris_finetune_request_20260902/matris_replay_finetune_review_request.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/matris_finetune_request_20260902/matris_replay_training_manifest.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/matris_finetune_request_20260902/heldout_training_exclusions.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/matris_finetune_request_20260902/canonical_matris_finetune_preflight.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/matris_finetune_request_20260902/matris_replay_finetune_review_request.json",
+      "sha256": "67e9917dd74360cc084cea962ded8d4f66d16f0e996ec77e612744a28852a93a",
+      "authority": "repository_document",
+      "observed_at": "2026-09-02T11:34:57+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/matris_finetune_request_20260902/matris_replay_training_manifest.json",
+      "sha256": "c94ed2088e19994d37971a0fd3f6d855cd0ef36d02e095c3fdaf3fb3ca107f7a",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T11:34:57+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/matris_finetune_request_20260902/heldout_training_exclusions.json",
+      "sha256": "d3448c59db23eaf61952f9d360ee535b51a5ba17db9a4a207ad0837578eb0887",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T11:34:57+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/matris_finetune_request_20260902/canonical_matris_finetune_preflight.json",
+      "sha256": "03e7918e3aa72623fc0692a29e8fbb8eb12f200b854ae330f4a09d54bdc7af9d",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T11:34:57+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-job1458-force-labels-assessed-matris-finetune-triggered-20260902"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-ch-h-coadsorption-running-9701350-20260808",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-ch-h-coadsorption",
+    "module": "adsorption_workflow"
+  },
+  "occurred_at": "2026-08-08T12:21:29+08:00",
+  "recorded_at": "2026-08-08T12:21:29+08:00",
+  "summary": "Fe(110) CH* plus H* coadsorption relaxation job 9701350 is scheduler RUN on 32 ranks.",
+  "payload": {
+    "objective": "Obtain one converged, geometry-valid Fe45 CH* plus H* coadsorption initial endpoint for the CH* + H* -> CH2* + * transition-state workflow.",
+    "phase": "active",
+    "current_evidence": [
+      "LSF reports job `9701350` as `RUN` in queue `Gkn_normal` on execution allocation `32*gknew071`.",
+      "The RUN state establishes only scheduler execution; electronic convergence, ionic convergence, forces, and final chemistry remain unassessed.",
+      "The calculation registry contains the PEND-to-RUN status history and the hash-bound input package."
+    ],
+    "one_executable_step": "Monitor job 9701350 to scheduler exit, then parse OUTCAR/OSZICAR/CONTCAR for electronic convergence, ionic convergence, maximum movable force, final CH*+H* connectivity, final sites, and unintended CH2 formation.",
+    "submission_boundary": "No additional coadsorption candidate, resubmission, NEB, CI-NEB, DIMER, frequency, or TS action is authorized.",
+    "done_when": [
+      "Job 9701350 reaches an authoritative scheduler terminal state.",
+      "The VASP outputs establish electronic and ionic status without conflating them with queue status.",
+      "The final structure is classified as retained CH*+H*, reacted CH2*, or another explicit chemistry outcome and recorded with provenance."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_ch_h_coadsorption_20260808/provenance/runtime_checkpoint_9701350_20260808T122129.json`",
+      "`calculations/fe110_ch_h_coadsorption_20260808/provenance/submission_registration_receipt.json`",
+      "`calculations/fe110_ch_h_coadsorption_20260808/candidate/CH_long_bridge_H_adjacent_hollow/adsorption_submission_preflight.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_ch_h_coadsorption_20260808/provenance/runtime_checkpoint_9701350_20260808T122129.json",
+      "sha256": "7697dd4e094d9dca89a95a81110faa505d03c9db2fbd15d296b9968220da2f53",
+      "authority": "scheduler",
+      "observed_at": "2026-08-08T12:21:29+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-ch-h-coadsorption-submitted-9701350-20260808"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

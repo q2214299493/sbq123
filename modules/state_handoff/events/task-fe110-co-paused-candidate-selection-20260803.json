@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-co-paused-candidate-selection-20260803",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-co-dissociation",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-03T17:18:49+08:00",
+  "recorded_at": "2026-08-03T17:18:49+08:00",
+  "summary": "Pause the failed nine-image pilot and review prior one-step NEB candidates.",
+  "payload": {
+    "objective": "Select a scientifically defensible reusable seed from prior one-step Fe(110) CO-dissociation NEB paths before constructing another current-endpoint path.",
+    "phase": "verification",
+    "current_evidence": [
+      "Job `9655921` is scheduler `EXIT` after the user-requested, gate-authorized stop and completed zero ionic steps.",
+      "The current nine-image path has no post-run geometry result because all CONTCAR files are empty; image09 electronically diverged and exhausted `NELM=200`.",
+      "Job `9640399` is the best electronically and magnetically stable eight-image one-step pilot, but its later production continuation exposed an underresolved central segment and it uses the older full-product endpoint.",
+      "Job `9647154` is the smoothest prior one-step geometry with stable total moments, but it has ten internal images, high startup forces, and the older full-product endpoint.",
+      "Jobs `9650404` and `9654860` contain the requested `NELM=200` one-step behavior but fail magnetic continuity and are not preferred reusable seeds."
+    ],
+    "one_executable_step": "Keep calculations paused. After the user selects a candidate basis, build only a local reviewable current-endpoint path and run geometry, mapping, magnetic-branch, dist.pl, and nebmovie.pl 0 checks before any submission request.",
+    "submission_boundary": "No ordinary NEB, CI-NEB, DIMER, frequency, or other VASP job is authorized while candidate selection is under review.",
+    "done_when": [
+      "The user selects the prior path evidence to reuse or explicitly requests a fresh rebuild.",
+      "A local candidate using the current accepted endpoints passes mapping, geometry, reaction-coordinate, fixed-Fe, and visual path review.",
+      "A new hash-bound execution gate records the next allowed action."
+    ],
+    "authoritative_references": [
+      "Scientific and execution gates: `modules/transition_state_search/README.md`.",
+      "Numerical branch: `configs/true_fe110_production.yaml`.",
+      "Backend roles: `configs/execution_backends.yaml`.",
+      "Sole execution authority: `scripts/ts_strategy_engine/execution_gate.py`."
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "tasks/current_task.md",
+      "sha256": "a37a2e4586b3dfe7457dc3990717137ac2c2358a36cda6d657786ff541e68537",
+      "authority": "repository_document",
+      "observed_at": "2026-08-03T17:18:49+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/runs/ordinary_neb_9img_fresh_local_endpoint_idpp_waypoint_pilot_np108_20260803/authoritative_gate_stop_20260803.json",
+      "sha256": "93842225312a33bfd485d68add6262576a5c96782e6851f2385b6ff615afdc9f",
+      "authority": "module_validation",
+      "observed_at": "2026-08-03T17:18:49+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/runs/ordinary_neb_9img_fresh_local_endpoint_idpp_waypoint_pilot_np108_20260803/scheduler_evidence_exit_20260803.json",
+      "sha256": "2b34a358e2f13bc657f24551ca3fd8fb9b4bcceed89c66da746e327dd6b96ad0",
+      "authority": "scheduler",
+      "observed_at": "2026-08-03T17:18:49+08:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "live_scheduler_state",
+      "scientific_candidate_selection"
+    ],
+    "status": "pending"
+  }
+}

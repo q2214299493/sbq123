@@ -1,0 +1,98 @@
+version: 1
+
+# This file selects chemical adsorption motifs.  It does not redefine the
+# geometric Fe(110) top/bridge/hollow site dictionary.
+policy:
+  candidate_count_rule: all_unique_stable_motifs_supported_by_accepted_evidence
+  fixed_site_sweep: forbidden
+  evidence_priority:
+    - reviewed_local_relaxation
+    - reviewed_local_static
+    - whitelist_candidate
+    - authoritative_literature_candidate_after_no_whitelist_match
+  unknown_species_action: needs_whitelist
+  insufficient_confidence_action: whitelist_retrieval
+  no_whitelist_match_action: authoritative_literature_retrieval
+  no_authoritative_literature_match_action: needs_review
+  global_minimum_claim_without_relaxed_energy_comparison: false
+
+required_decision_fields:
+  - exact_species_and_isomer
+  - likely_binding_atoms
+  - denticity
+  - intact_or_dissociative_state
+  - orientation_family
+  - predicted_rank_and_evidence
+  - symmetry_or_duplicate_group
+  - excluded_motifs_and_reason
+  - selected_candidate_count
+  - confidence_and_review_need
+
+staged_relaxation:
+  screening_nsw: 80
+  review_steps: [20, 40, 80]
+  continue_only_if:
+    - intended_or_reclassifiable_species
+    - no_severe_overlap_or_desorption
+    - force_or_energy_progress_is_not_stagnant
+    - not_duplicate_of_a_better_candidate
+  full_relaxation_requires_review: true
+  automatic_job_stop: false
+
+species:
+  H2O:
+    surface: Fe110
+    confidence: high
+    evidence:
+      type: reviewed_local_relaxation
+      note: All four Step 12A starts ended in one top-like site class; two small orientation/energy subgroups remain.
+    candidates:
+      - motif_id: H2O_O_top_orientation_a
+        configuration_id: H2O_O_top_orientation_a
+        binding_mode: monodentate
+        binding_atoms: [O]
+        site_pattern: top
+        orientation: O-down, molecular geometry preserved, first in-plane orientation
+        orientation_degrees: 0.0
+        priority: 1
+      - motif_id: H2O_O_top_orientation_b
+        configuration_id: H2O_O_top_orientation_b
+        binding_mode: monodentate
+        binding_atoms: [O]
+        site_pattern: top
+        orientation: O-down, molecular geometry preserved, symmetry-inequivalent in-plane orientation
+        orientation_degrees: 90.0
+        priority: 2
+    suppress:
+      - site_patterns: [short_bridge, long_bridge, hollow]
+        reason_code: reviewed_duplicate_final_top_state
+
+  CHO_formyl:
+    surface: Fe110
+    confidence: medium
+    evidence:
+      type: user_reviewed_observation
+      note: User reports side-on C/O dual-center h-lb-h as the most stable CHO motif; exact atom-to-site template and energy provenance still require registration.
+    candidates:
+      - motif_id: CHO_eta2_CO_h_lb_h
+        binding_mode: bidentate
+        binding_atoms: [C, O]
+        site_pattern: h-lb-h
+        orientation: side-on C/O dual-center
+        build_mode: reviewed_structure_template
+        template_required: true
+        priority: 1
+      - motif_id: CHO_eta2_CO_h_lb_h_symmetry_partner
+        binding_mode: bidentate
+        binding_atoms: [C, O]
+        site_pattern: h-lb-h
+        orientation: symmetry-inequivalent side-on partner, only if the clean Fe110 cell makes it distinct
+        build_mode: reviewed_structure_template
+        template_required: true
+        priority: 2
+    suppress:
+      - site_patterns: [Oend_top]
+        reason_code: observed_h_transfer_and_nsw_exhaustion
+        evidence_job: 9606916
+      - site_patterns: [fixed_four_site_atom_anchor_sweep]
+        reason_code: misses_bidentate_ground_state_hypothesis

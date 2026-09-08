@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-force-label-batch-ingested-20260819",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-transition-state",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-19T23:15:00+08:00",
+  "recorded_at": "2026-08-19T15:15:00Z",
+  "summary": "VASP force-label jobs 9718468-9718472 all reached LSF DONE; images 02-06 passed exact-structure, normal-completion, electronic-convergence, and complete-force-block validation and were ingested as one non-reportable active-learning batch.",
+  "payload": {
+    "objective": "Compare AQCat25 and compatibility-matched VASP forces on the reviewed Fe(110) C* + H* -> CH* + * GPU-path images and use the evidence to decide whether force-only fine-tuning is required.",
+    "phase": "active",
+    "current_evidence": [
+      "LSF jobs 9718468-9718472 are all DONE with stored hash-bound scheduler evidence and live same-job rechecks.",
+      "Every image 02-06 completed VASP normally and reached EDIFF=1e-6 electronic convergence before NELM=200.",
+      "Every collected POSCAR matches its reviewed GPU-path structure hash, and every OUTCAR contains one complete 47-atom final force block.",
+      "The complete batch was accepted by canonical ingest-path-labels and the active-learning state is awaiting exact-structure AQCat25 prediction preparation.",
+      "The five TOTEN values and force vectors are diagnostic force-label data only; they are not final TS or barrier evidence.",
+      "DONE statuses, key collected outputs, diagnostic results, and validation reviews were appended to data/project_registry.sqlite3."
+    ],
+    "one_executable_step": "Prepare the hash-bound exact-structure MZ73 prediction batch for images 02-06, without submitting a GPU job, then present the request for review.",
+    "submission_boundary": "No additional VASP job, retry, GPU inference or fine-tuning job, NEB, DIMER, frequency, connectivity, or barrier action is authorized by this completed force-label ingestion step.",
+    "done_when": [
+      "The exact same five VASP-labeled structures are evaluated by the bound AQCat25 checkpoint.",
+      "Aggregate AQCat25-versus-VASP force errors are assessed across all five images.",
+      "The controller produces an evidence-based fine-tuning or validation decision without treating force-label energies as reportable final energies."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/vasp_force_labels_round_000_sigma0p20/batch_completion_summary.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/active_learning_sigma0p20/active_learning_state.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/vasp_force_labels_round_000_sigma0p20/registry_completion_receipt.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/vasp_force_labels_round_000_sigma0p20/batch_completion_summary.json",
+      "sha256": "212ed75b0f70708ffc8d97466882a3ce0aab2dbc17c33147eecde901e11052b9",
+      "authority": "module_validation",
+      "observed_at": "2026-08-19T23:15:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/active_learning_sigma0p20/active_learning_state.json",
+      "sha256": "b0088f2728432de09df5b7c53ad7237dcc2a4e5a78fff338f92f2b6d56cb81c3",
+      "authority": "module_validation",
+      "observed_at": "2026-08-19T23:15:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/vasp_force_labels_round_000_sigma0p20/registry_completion_receipt.json",
+      "sha256": "64f69fdf9e207d38c788f1ca4e5359e853c5782f769088aa79a8b34a479afc09",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-19T23:15:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-force-label-batch-9718468-9718472-submitted-20260819"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

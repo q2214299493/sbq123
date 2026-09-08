@@ -1,0 +1,185 @@
+version: 1
+workflow_kind: matris_primary_aqcat25_secondary_ts_active_learning
+
+trigger:
+  eligible_sources:
+    - complete_geometry_valid_ml_path
+    - last_geometry_valid_snapshot_before_path_failure
+    - first_geometry_valid_failure_boundary
+  require_geometry_gate_pass: true
+  geometry_gate:
+    - atom_mapping
+    - periodic_unwrap
+    - endpoint_compatibility
+    - minimum_pair_distance
+    - fixed_atom_mask
+    - cell_identity
+    - adjacent_path_continuity
+  geometry_failure_action: repair_path_without_training
+  optimizer_or_runtime_failure_action: diagnose_outside_active_learning
+  model_error_not_assumed_from_path_failure: true
+
+completed_vasp_path_failure_closeout:
+  enabled: true
+  automatic_local_actions:
+    - collect_scheduler_electronic_ionic_force_and_geometry_evidence
+    - register_hash_bound_failed_strategy_attempt_and_outcome
+    - block_exact_input_retry
+    - reuse_exact_structure_vasp_forces_for_screening_only_when_label_identity_and_quality_pass
+    - compare_matris_and_optional_aqcat25_against_vasp_on_identical_structures
+    - route_matris_failure_to_training_eligible_static_label_preparation
+    - route_matris_pass_to_path_repair_or_local_vasp_refinement_preparation
+    - prepare_a_new_hash_bound_execution_gate
+  never_infer_model_error_from_neb_nonconvergence_alone: true
+  incomplete_magnetic_labels_are_training_ineligible: true
+  automatic_remote_submission: false
+
+model_roles:
+  path_primary: matris
+  external_auditor: aqcat25
+  external_auditor_optional: true
+  matris_committee:
+    preferred: true
+    minimum_members: 3
+    maximum_members: 5
+    same_architecture_required: true
+    unique_checkpoint_sha256_required: true
+    independently_trained_or_bootstrapped_members_required: true
+    production_checkpoint_acceptance_required: true
+  committee_fallback_when_unavailable: matris_primary_plus_optional_aqcat25_audit_plus_vasp_error
+  disagreement_interpretation_before_heldout_calibration: sampling_rank_not_quantitative_uncertainty
+  require_exact_same_structure_hashes: true
+
+round_control:
+  maximum_rounds: 5
+  require_new_matris_checkpoint_after_failed_vasp_gate: true
+  require_complete_path_rerun_after_checkpoint_change: true
+  automatic_vasp_submission: false
+  automatic_checkpoint_promotion: false
+
+sampling:
+  minimum_vasp_labels_per_round: 5
+  maximum_vasp_labels_per_round: 7
+  candidate_signals:
+    - committee_force_disagreement
+    - committee_relative_energy_disagreement
+    - descriptor_novelty
+    - ts_proximity
+    - failure_boundary_proximity
+    - reaction_coordinate_backtrack
+    - optional_external_auditor_disagreement
+  mandatory_roles_when_available:
+    - last_geometry_valid_point
+    - first_geometry_valid_failure_point
+    - maximum_committee_disagreement
+    - maximum_reaction_coordinate_backtrack
+    - ts_like
+    - rising_path
+    - falling_path
+  peak_neighbors_are_not_universal_active_learning_labels: true
+  peak_triad_reserved_for_vasp_refinement_or_dimer_gate: true
+  scoring_method: available_signal_percentile_rank_mean
+  raw_units_must_not_be_directly_summed: true
+  clustering:
+    exact_structure_hash_deduplication: true
+    descriptor_clustering_when_embeddings_available: true
+    reaction_coordinate_fallback_bin_A: 0.10
+    preserve_distinct_failure_boundary_pair: true
+
+vasp_label_quality:
+  calculation: exact_structure_static_single_point
+  NSW: 0
+  require_active_compatibility_branch: true
+  require_normal_completion: true
+  require_electronic_convergence: true
+  require_complete_all_atom_force_block: true
+  require_total_magnetic_moment: true
+  require_atom_resolved_magnetic_moments: true
+  invalid_label_action: repair_vasp_without_training
+
+uncertainty_error_quadrants:
+  enabled_only_for_real_matris_committee: true
+  high_disagreement_high_error: train_high_priority
+  high_disagreement_low_error: retain_for_uncertainty_calibration_not_training_priority
+  low_disagreement_high_error: blind_spot_train_high_priority_and_expand_novelty_sampling
+  low_disagreement_low_error: covered_candidate_or_heldout
+  no_committee_fallback: decide_from_vasp_error_and_novelty_without_uncertainty_claim
+
+screening_safety_ceilings:
+  force_component_mae_eV_per_A_max: 0.10
+  force_vector_rmse_eV_per_A_max: 0.20
+  force_vector_max_eV_per_A_max: 0.60
+  relative_energy_rmse_eV_max: 0.10
+  purpose: round_trigger_and_checkpoint_rejection_not_final_uncertainty_calibration
+
+matris_fine_tuning:
+  backend: MZ73
+  training_targets:
+    - movable_atom_vasp_forces
+    - within_reaction_relative_vasp_energies
+  replay_required:
+    - prior_ts_force_labels
+    - adsorption_retention_labels
+  acceptance_requires:
+    - independent_ts_force_metrics_pass
+    - independent_ts_relative_energy_metrics_pass
+    - force_tail_does_not_regress
+    - adsorption_retention_does_not_regress
+    - checkpoint_sha256_changed
+  force_only_checkpoint_production_promotion: forbidden
+  versioned_checkpoint_manifest_required: true
+  adsorption_retention_gate:
+    policy: aggregate_hard_guard_plus_vector_max_soft_warning
+    hard_non_regression_metrics:
+      - component_rmse_eV_per_A
+      - vector_rmse_eV_per_A
+      - vector_p95_eV_per_A
+    hard_metric_absolute_tolerance_eV_per_A: 0.0
+    vector_max_pass_absolute_tolerance_eV_per_A: 0.0
+    vector_max_soft_warning:
+      maximum_absolute_regression_eV_per_A: 0.005
+      maximum_relative_regression_fraction: 0.02
+      both_limits_must_pass: true
+      candidate_selection_eligible: true
+      work_review_required: true
+    vector_max_failure: exceeds_either_soft_warning_limit
+    soft_warning_never_authorizes_checkpoint_promotion_or_path_rerun: true
+
+held_out_validation:
+  minimum_samples: 5
+  required_roles:
+    - rising_path
+    - near_saddle
+    - falling_path
+  exact_structure_vasp_labels: true
+  training_overlap_allowed: false
+  exclusion_manifest_required_for_all_matris_training: true
+  exclusion_manifest_builder_and_guard: scripts/matris_training_exclusions.py
+  excluded_hash_kinds: [structure_sha256, geometry_sha256]
+  required_after_every_matris_checkpoint_change: true
+
+scientific_boundaries:
+  gpu_path_is_candidate_only: true
+  vasp_force_labels_are_not_final_barriers: true
+  calibrated_acceleration_requires_independent_heldout_pass: true
+  dimer_and_final_ts_still_require_transition_state_search_gates: true
+
+automatic_actions_after_active_learning_trigger:
+  - preserve_last_valid_snapshot_and_first_valid_failure_boundary
+  - prepare_hash_bound_committee_or_fallback_prediction_batch
+  - score_cluster_and_select_candidates
+  - prepare_compatible_vasp_label_batch
+  - ingest_only_quality_passed_vasp_labels
+  - compute_model_specific_vasp_errors_and_quadrants
+  - prepare_replay_finetune_package_when_matris_fails
+  - prepare_new_checkpoint_complete_path_rerun
+  - prepare_disjoint_heldout_validation
+  - record_all_states_and_failures
+  - complete_local_vasp_path_failure_closeout_when_applicable
+automatic_submission_forbidden:
+  - gpu_prediction
+  - vasp_labels
+  - matris_fine_tuning
+  - complete_path_rerun
+  - vasp_micro_neb
+  - dimer

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-co-dimer-mode-accepted-merge-20260807",
+  "event_type": "task_updated",
+  "entity": {"kind": "task", "id": "fe110-co-dissociation", "module": "transition_state_search"},
+  "occurred_at": "2026-08-07T00:20:29+08:00",
+  "recorded_at": "2026-08-07T00:20:29+08:00",
+  "summary": "Merge prior connectivity and Dimer-review states into the accepted principal-mode state.",
+  "payload": {
+    "objective": "Complete Dimer validation from technical convergence and vibrational evidence without requiring connectivity.",
+    "phase": "verification",
+    "current_evidence": [
+      "Dimer job `9656664` passes the hard gate and its Force/Torque residuals have a hash-bound `accept_for_ts_validation` review.",
+      "VFA job `9694935` has exactly one imaginary mode, mode 6 at `537.451689 cm^-1`; its target-mode assignment is accepted.",
+      "The current status is `VFA_VALIDATED_GRADE_BLOCKED`, grade `Ungraded`, and kinetic eligibility is false because frequency thresholds and partial-Hessian active-set convergence remain unresolved.",
+      "Connectivity is optional Dimer diagnostic evidence and is not an acceptance gate."
+    ],
+    "one_executable_step": "Configure reviewed frequency thresholds and confirm the C/O-only partial-Hessian active-set convergence before final grading.",
+    "submission_boundary": "This state merge authorizes no VASP or scheduler action.",
+    "done_when": ["Frequency thresholds and active-set convergence are reviewed, then final VFA grading is rerun."],
+    "authoritative_references": ["`modules/transition_state_search/README.md`", "`configs/ts_validation_pipeline.yaml`"]
+  },
+  "evidence": [
+    {"locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806/ts_strategy_step_record.json", "sha256": "64f01d470d809b5aad7700499974eeb590370f91c72c0ff0247f5f7fd21600d0", "authority": "module_validation", "observed_at": "2026-08-07T00:20:29+08:00"},
+    {"locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806/validation_pipeline_status.json", "sha256": "d083564a56629d77492ddc213dcc3ebae373bf885b25c79c74ced2a68a476fc7", "authority": "module_validation", "observed_at": "2026-08-07T00:20:29+08:00"}
+  ],
+  "supersedes": [
+    "task-fe110-co-connectivity-needs-review-20260806",
+    "task-fe110-co-dimer-frequency-validation-20260806",
+    "task-fe110-co-dimer-mode-accepted-20260807"
+  ],
+  "review": {"required": true, "reason_codes": ["scientific_method_change", "cross_module_change"], "status": "pending"}
+}

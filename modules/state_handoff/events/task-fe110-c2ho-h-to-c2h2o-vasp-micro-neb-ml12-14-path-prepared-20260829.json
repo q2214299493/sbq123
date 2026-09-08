@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-vasp-micro-neb-ml12-14-path-prepared-20260829",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-29T11:55:07.0326984+08:00",
+  "recorded_at": "2026-08-29T03:55:07.0329390Z",
+  "summary": "A six-structure local VASP micro-NEB path replacing the under-resolved ML image 12-to-14 segment has been built and passed numeric geometry plus VTST POSCAR-path checks; the required one-step pilot package remains unsubmitted pending user approval of the actual path.",
+  "payload": {
+    "objective": "Obtain user approval of the concrete image 12-to-14 local micro-NEB path before submitting its required one-step VASP pilot.",
+    "phase": "active",
+    "current_evidence": [
+      "Local image 00 and 05 are exact hash-bound copies of ML images 12 and 14.",
+      "Four internal chemical waypoints resolve O-H at 1.70, 1.50, 1.30, and 1.15 A; the full local O-H sequence is 1.891, 1.700, 1.500, 1.300, 1.150, and 1.000 A.",
+      "The local path geometry diagnosis passed: maximum adjacent atom step 0.248172 A, no periodic-branch shift, fixed bottom 18 Fe exactly preserved, and C1-C2 retained at 1.416721-1.425623 A across the waypoints.",
+      "VTST dist.pl values for the five adjacent pairs are 0.237455, 0.251884, 0.256682, 0.196862, and 0.202013; nebmovie.pl 0 completed and the path montage was generated.",
+      "A four-internal-image, 128-rank, NSW=1, no-climb pilot input package using the active SIGMA=0.20 eV Fe(110) branch is prepared but not submitted.",
+      "No VASP pilot, formal micro-NEB, Dimer, TS, or barrier result exists from this local path yet."
+    ],
+    "one_executable_step": "After explicit approval of the displayed concrete path, accept the checksum-bound path review, run the neb_pilot preflight and execution gate, and submit only the one-step pilot.",
+    "submission_boundary": "Do not submit the pilot before concrete path approval. Do not automatically submit the formal micro-NEB unless the same-path pilot is LSF DONE and passes the canonical pilot validator. No automatic retry, CI-NEB, Dimer, TS acceptance, or barrier action is authorized.",
+    "done_when": [
+      "The user accepts or rejects the displayed six-structure local path.",
+      "If accepted, the one-step pilot is submitted through a current hash-bound gate."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_ml12_14_4img_20260829/c2ho_h_micro_neb_ml12_14_4img_pilot_20260829/path_pre_submission_review.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_ml12_14_4img_20260829/c2ho_h_micro_neb_ml12_14_4img_pilot_20260829/path_montage.png`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_ml12_14_4img_20260829/c2ho_h_micro_neb_ml12_14_4img_pilot_20260829/path_review.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_ml12_14_4img_20260829/c2ho_h_micro_neb_ml12_14_4img_pilot_20260829/path_pre_submission_review.work.json",
+      "sha256": "3ab86e1db162afd069d04109e5f29c5d4955d7349f29a46159a6035fe0401a77",
+      "authority": "module_validation",
+      "observed_at": "2026-08-29T11:55:07.0326984+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_ml12_14_4img_20260829/c2ho_h_micro_neb_ml12_14_4img_pilot_20260829/path_review.json",
+      "sha256": "b69098103fbe1f3db7468e07900e6446f3aa1abf4740f3c816752ddda693bb46",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-29T11:55:07.0326984+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-v10-gpu3-retry-job1348-reviewed-20260829"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

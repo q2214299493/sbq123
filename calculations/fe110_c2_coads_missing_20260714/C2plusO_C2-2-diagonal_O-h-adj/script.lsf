@@ -1,0 +1,16 @@
+#!/bin/sh
+APP_NAME=Gkn_normal
+NP=32
+NP_PER_NODE=32
+RUN="RAW"
+CURDIR=$PWD
+export OMP_NUM_THREADS=1
+source /home_gkx/env/intel/intel2016.sh
+VASP=$HOME/soft/vasp.5.4.1/bin/vasp_std
+cd "$CURDIR" || exit 10
+TARGET=$(readlink -f POTCAR.link)
+test -s "$TARGET" || exit 11
+ln -sfn "$TARGET" POTCAR
+rm -f nodelist
+for host in $LSB_HOSTS; do echo "$host" >> nodelist; done
+mpirun -np $NP -machinefile nodelist $VASP > vasp.out 2>&1

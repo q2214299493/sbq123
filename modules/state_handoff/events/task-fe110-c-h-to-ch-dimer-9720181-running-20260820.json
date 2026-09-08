@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-dimer-9720181-running-20260820",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-transition-state",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-20T22:36:35+08:00",
+  "recorded_at": "2026-08-20T14:36:35Z",
+  "summary": "Dimer job 9720181 is RUN on gknew032; six complete DIMCAR steps show negative curvature and decreasing force/torque, but the latest complete maximum atomic force remains above the 0.02 eV/A target.",
+  "payload": {
+    "objective": "Run the gated Dimer refinement of image 04 for Fe(110) C* + H* -> CH* + * and validate the resulting saddle before any TS or barrier claim.",
+    "phase": "active",
+    "current_evidence": [
+      "LSF job 9720181 is scheduler RUN on 32 ranks at gknew032; the live checkpoint was recorded at 2026-08-20T14:36:35Z.",
+      "OSZICAR has 24 complete ionic entries and the 25th electronic calculation is in progress; the latest complete ionic energy is F=-367.70690 eV and its SCF reached the 1e-7 eV criterion.",
+      "The latest complete OUTCAR FORCES record is max atom 0.103470 eV/A and RMS 0.036648 eV/A, so the Dimer has not met the 0.02 eV/A force target.",
+      "DIMCAR has six complete Dimer steps. Force changes 0.61741 to 0.27672, torque 2.42151 to 0.54721, and curvature remains negative at -4.27082, which is favorable saddle-search progress but not convergence.",
+      "No normal-completion marker or fatal VASP keyword is present in the bounded live inspection; the job is still actively writing OUTCAR/OSZICAR.",
+      "The RUN checkpoint and registry receipt were appended without changing the existing submission or making a TS claim."
+    ],
+    "one_executable_step": "Continue monitoring Dimer job 9720181; when terminal, collect and hash-bind its outputs and run the canonical Dimer force, curvature, mode, and geometry analysis before any local Hessian handoff or TS claim.",
+    "submission_boundary": "Do not stop, restart, resubmit, launch frequency/connectivity calculations, or claim a TS/barrier without terminal output evidence, the exact current hash-bound gate action, and any required user authority.",
+    "done_when": [
+      "The Dimer search is technically converged with normal/electronic completion, maximum atomic force at or below 0.02 eV/A, negative curvature, and valid final structure/mode evidence.",
+      "The accepted saddle structure passes the required target-mode local Hessian validation before a TS claim.",
+      "Compatible IS/TS/FS final OUTCAR TOTEN values are separately reviewed before any electronic barrier is reported."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/scheduler_evidence_running.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/registry_running_receipt.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/submission_record.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/scheduler_evidence_running.json",
+      "sha256": "c45642dc4d6753e58a7f20239c6889026c04f0bc88817301eca91c9c331556be",
+      "authority": "scheduler",
+      "observed_at": "2026-08-20T22:36:35+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/registry_running_receipt.json",
+      "sha256": "4ac6983c5bf44364987e7f71900721319212765f2d5aa11dfbb832c05806ac6d",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-20T22:36:35+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-dimer-9720181-submitted-20260820"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

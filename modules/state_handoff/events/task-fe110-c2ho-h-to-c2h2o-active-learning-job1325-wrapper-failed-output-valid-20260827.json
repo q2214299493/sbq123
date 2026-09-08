@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-active-learning-job1325-wrapper-failed-output-valid-20260827",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-27T00:45:00+08:00",
+  "recorded_at": "2026-08-26T16:45:00Z",
+  "summary": "MZ73 job 1325 produced a complete hash-bound 18-structure MatRIS/AQCat25 prediction payload, then its wrapper failed while writing the producer exit record because artifact_io was not importable. The payload validates locally, but the job is not recorded as formally successful and was not retried.",
+  "payload": {
+    "objective": "Resolve the job-1325 wrapper provenance failure without discarding or overstating the complete validated prediction payload, then resume the bounded active-learning sampling workflow.",
+    "phase": "active",
+    "current_evidence": [
+      "Job 1325 is no longer present in the live Slurm queue; MZ73 provides no scheduler accounting source for a terminal DONE/EXIT classification.",
+      "The remote log records predictor status complete and sample_count 18 before a ModuleNotFoundError for artifact_io occurred in write_exit_record.",
+      "The collected prediction file SHA-256 is 0bfb9c5a38a2eba30b3e2a90a6322b52a250c9f28b4e273db44b5fffaed7c708 and is bound to request f01b10a39c5af586bb8db7d43643313527039d48afbf0fabe61421a11fe02fdb.",
+      "Local validation confirms the exact 18-sample set, exact structure hashes, both model energies, and complete finite all-atom force arrays.",
+      "No producer exit record exists, so the job cannot be called formally successful even though the scientific prediction payload is complete.",
+      "No duplicate GPU job, VASP label, fine-tuning, path rerun, micro-NEB, or Dimer job was submitted."
+    ],
+    "one_executable_step": "Repair and preflight the wrapper-only artifact_io import path without rerunning either model. Preserve job 1325 as a wrapper failure and prepare a reviewable decision on accepting its independently hash-validated prediction payload for local scoring and VASP-label package preparation; do not submit any job.",
+    "submission_boundary": "The exact one-job GPU authorization was consumed by job 1325. No automatic retry is allowed. Local wrapper repair, non-model preflight, evidence validation, and preparation are allowed; any GPU rerun or VASP submission requires new explicit hash-bound authorization.",
+    "done_when": [
+      "The wrapper completion-record path passes an isolated non-model preflight.",
+      "Job 1325 remains truthfully classified as wrapper-failed with a separately validated complete payload.",
+      "A reviewable accept/reject decision exists for using that payload in local selection without rerunning predictions."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/job1325_output_validation.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/predictions_job1325.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/dual-ts-force-batch-1325.out`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/submission_record_job1325.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/job1325_output_validation.json",
+      "sha256": "d230aa611a8e4071f42c937f388a546068d76acb5c648add659f01e7d6af092a",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T00:45:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/predictions_job1325.json",
+      "sha256": "0bfb9c5a38a2eba30b3e2a90a6322b52a250c9f28b4e273db44b5fffaed7c708",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-27T00:45:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/dual-ts-force-batch-1325.out",
+      "sha256": "e884323ec9e820edba5cfdc72ceb4f96cef1194effc6a844a8981d38be60d1cb",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-27T00:45:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-active-learning-fallback-job1325-submitted-20260827"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

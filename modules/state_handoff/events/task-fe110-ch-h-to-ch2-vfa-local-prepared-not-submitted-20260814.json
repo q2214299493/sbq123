@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-ch-h-to-ch2-vfa-local-prepared-not-submitted-20260814",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-ch-h-to-ch2-ts",
+    "module": "ts_vibrational_validation"
+  },
+  "occurred_at": "2026-08-14T23:54:04+08:00",
+  "recorded_at": "2026-08-14T15:54:04Z",
+  "summary": "The DIMER soft residuals are accepted only for frequency handoff and an eight-atom local partial-Hessian VFA bundle is prepared and preflight-passed but not submitted.",
+  "payload": {
+    "objective": "Validate the Fe(110) CH* + H* -> CH2* + * DIMER candidate with a contract-bound local partial Hessian before any TS claim.",
+    "phase": "active",
+    "current_evidence": [
+      "The user explicitly accepted DIMER Force/Torque residuals only for local partial-Hessian frequency validation; dimer_soft_gate_review.json records allow_frequency_handoff and does not accept the residuals for final TS validation.",
+      "The active set is zero-based indices 37,40,41,43,44,45,46,47: five directly coordinated movable Fe atoms, C45, bonded H46, and reaction H47.",
+      "The active-set rule includes all movable Fe within 2.50 A of C45 or H47 plus bonded H46 and both reaction atoms; it contains 8 atoms and 24 finite-difference degrees of freedom.",
+      "The VFA POSCAR preserves the DIMER CONTCAR coordinates, cell, species order, and counts; exactly the eight reviewed atoms are T/T/T and the remaining forty atoms are F/F/F.",
+      "Repository-owned VFA inputs use IBRION=5, NFREE=2, POTIM=0.015 A, EDIFF=1E-7 eV, a 5x5x1 Gamma mesh, and 32 cores.",
+      "The canonical VFA preflight and every hard check pass. No submission_record.json exists and no frequency job has been submitted."
+    ],
+    "one_executable_step": "After explicit user submission authority, generate a fresh hash-bound START_VFA execution decision for this exact bundle and submit it through scripts.neb_agent.submission; otherwise preserve the prepared inputs unchanged.",
+    "submission_boundary": "Do not submit or modify the VFA bundle, restart DIMER, launch connectivity, accept a TS, or claim a barrier without the exact current execution-gate action and explicit user authority.",
+    "done_when": [
+      "A complete local partial-Hessian frequency output is collected and hash-bound.",
+      "Exactly one raw imaginary mode is reviewed and accepted as the intended C45-H47 reaction coordinate before TS acceptance.",
+      "No free-energy or kinetics claim is made without consistent IS/TS/FS thermochemical corrections using this same active-set definition."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/dimer_soft_gate_review.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/vfa_handoff.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/vfa_scope_review.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/active_set_selection.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/submission_preflight.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/POSCAR`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/INCAR`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/dimer_soft_gate_review.json",
+      "sha256": "222140698f84457fd1e8823beee6457ac2bf0fe85f71fb3c275c53d8baa8bb69",
+      "authority": "user_authorization",
+      "observed_at": "2026-08-14T23:50:40+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/vfa_handoff.json",
+      "sha256": "a413130e6c8df59cfdea722b9e1b0f3f5dbac536c8fd8cd10572874e04f3c36f",
+      "authority": "module_validation",
+      "observed_at": "2026-08-14T23:54:04+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/vfa_scope_review.json",
+      "sha256": "e16ef473cb1046291bf1a6d48fcbfd92a4c434d20b11280e30ca6d92f8ebc438",
+      "authority": "module_validation",
+      "observed_at": "2026-08-14T23:54:04+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/active_set_selection.json",
+      "sha256": "08ea1cf19dcc375c12be85e94a6d5f0f40d96c573d70c881b30c797f2e75d3e3",
+      "authority": "module_validation",
+      "observed_at": "2026-08-14T23:54:04+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/submission_preflight.json",
+      "sha256": "5bb87465407276cdf5d7883359073013e580bd5d76e219dd30dcdd63b0d0ab37",
+      "authority": "module_validation",
+      "observed_at": "2026-08-14T23:54:04+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/POSCAR",
+      "sha256": "986b3e7de16dd97de33ec6d2c04bc04f15fefa3b90b82994f6a6f69a7e97d426",
+      "authority": "structure_output",
+      "observed_at": "2026-08-14T23:54:04+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/INCAR",
+      "sha256": "42acfba3d5a0bdebe39aa4d4d8bf98e78bc76be8c4eab03670b25a5180d4314e",
+      "authority": "repository_document",
+      "observed_at": "2026-08-14T23:54:04+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-ch-h-to-ch2-dimer-9709074-done-soft-review-required-20260814"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

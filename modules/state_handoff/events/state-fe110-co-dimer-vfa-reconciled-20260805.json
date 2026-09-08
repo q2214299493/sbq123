@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "event_id": "state-fe110-co-dimer-vfa-reconciled-20260805",
+  "event_type": "state_observed",
+  "entity": {
+    "kind": "state",
+    "id": "active-fe-110-co-dissociation-test-current-gate",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-05T10:38:46+08:00",
+  "recorded_at": "2026-08-05T10:38:46+08:00",
+  "summary": "Reconcile the Fe(110) CO-dissociation Current Gate after the stopped Dimer continuation and completed diagnostic VFA.",
+  "payload": {
+    "block_id": "active-fe-110-co-dissociation-test-current-gate",
+    "section": "## Active Fe(110) CO Dissociation Test",
+    "title": "Current Gate - 2026-08-05 Dimer/VFA Reconciliation",
+    "facts": [
+      "Completed Dimer job `9656664` passes the hard VASP maximum-force (`0.016036 < 0.02 eV/A`) and negative-curvature (`-17.98604 eV/A2`) gates; final DIMCAR Force `0.05994 eV/A` and Torque `0.14817 eV/A` remain soft warnings.",
+      "Dimer continuation job `9694894` was stopped through the authorized executor at the user's request and live LSF evidence confirms scheduler `EXIT`; its files remain preserved.",
+      "Diagnostic C/O-only partial-Hessian VFA job `9694935` is scheduler `DONE`, normally and electronically converged in 26 steps at `EDIFF=1E-7`, with hash-bound local outputs.",
+      "The diagnostic VFA contains five real modes and one imaginary mode at `537.451689 cm^-1`; C/O dominate and `98.37%` of their relative displacement projects onto the C-O bond direction.",
+      "The result remains `Ungraded`: the C/O-only active set, unset project frequency thresholds, and missing bidirectional connectivity prevent Grade A or a validated TS claim."
+    ],
+    "next_action": "Preserve the stopped Dimer and completed diagnostic VFA evidence. Require a new explicit authorization and current execution gate before expanded active-set VFA, connectivity displacements, matched statics, another Dimer, CI-NEB, or barrier reporting."
+  },
+  "evidence": [
+    {
+      "locator": "docs/02_CURRENT_STATE.md",
+      "sha256": "0081982088891eb42c98696b920d4125f9f79a17c8c1abc953f6ab0f05d4e3bd",
+      "authority": "repository_document",
+      "observed_at": "2026-08-05T10:38:46+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/dimer_refine_job9656664_ediffg005_20260804/scheduler_evidence_exit_20260805.json",
+      "sha256": "5f6ef5b5544d33fc0718e1795011a0ca6a8f4eb5e07d5da7a8b287b1fecb69b5",
+      "authority": "scheduler",
+      "observed_at": "2026-08-05T02:38:29Z"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/vfa_diagnostic_from_dimer9656664_co_only_20260805/scheduler_done_evidence.json",
+      "sha256": "71c30d09549f2baf8e63f815a58a781c15ac01c47d44581cec9183b4413a7c82",
+      "authority": "scheduler",
+      "observed_at": "2026-08-05T02:24:48Z"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/vfa_diagnostic_from_dimer9656664_co_only_20260805/vfa_analysis.json",
+      "sha256": "32bc11370f216542170b84158bf3b3c7a47c5709975b1c76ad54258b6527b730",
+      "authority": "module_validation",
+      "observed_at": "2026-08-05T10:38:46+08:00"
+    }
+  ],
+  "supersedes": [
+    "state-fe110-co-gate-9655921-20260803",
+    "state-fe110-co-stopped-candidate-audit-20260803"
+  ],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "live_scheduler_state",
+      "scientific_method_transition",
+      "user_approved_state_sync"
+    ],
+    "status": "pending"
+  }
+}

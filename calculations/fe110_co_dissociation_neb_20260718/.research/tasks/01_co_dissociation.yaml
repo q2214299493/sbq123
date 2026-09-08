@@ -1,0 +1,28 @@
+task_id: fe110_co_dissociation_full_test
+status: local_ts_endpoint_candidate_validated_awaiting_path_connectivity
+current_step: await_authority_to_build_and_review_shortened_is_to_local_endpoint_path
+authorized_scope:
+  - whitelist_retrieval
+  - AQCat25_candidate_generation_on_MZ73
+  - VASP_NEB_CI-NEB_or_DIMER_on_sunboquan-codex
+  - frequency_connectivity_and_matched_static_validation
+forbidden:
+  - direct_GPU_to_VASP_transfer
+  - treating_ML_values_as_DFT_results
+  - new_VASP_submission_without_explicit_user_authority
+jobs:
+  matched_static_is: 9631646
+  matched_static_fs: 9631647
+  aqcat25_ts_candidate: 737
+  failed_ordinary_neb: 9631737
+  stopped_replacement_ordinary_neb: 9640936
+  cancelled_continuous_12img_pilot: 9645737
+  stopped_cost_reduced_9img_pilot: 9646067
+  repaired_image07_static_seed: 9646608
+  repaired_image08_static_restart: 9646670
+  repaired_10img_full_path_pilot: 9647154
+  local_ts_endpoint_image07_relaxation: 9647798
+local_path_candidate: path/plan_continuous_idpp_10img_cost_reduced_20260727/path_candidate
+local_pilot_run: runs/ordinary_neb_10img_repaired_branch_pilot_np80_20260728
+local_static_preflight: diagnostics/repaired_10img_image07_08_scf_branch_20260728
+local_endpoint_relaxation: runs/ts_endpoint_local_product_img07_relax_20260728

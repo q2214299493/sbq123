@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-ch-h-to-ch2-dense-rebuild-8img-v7-awaiting-review-20260814",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-ch-h-to-ch2-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-14T11:54:03+08:00",
+  "recorded_at": "2026-08-14T03:54:03Z",
+  "summary": "A periodic-branch-normalized 00-09 path with a new C-H=1.700 A image between the old 02 and 03 passed numerical geometry checks and awaits human nebmovie review before short-NEB submission.",
+  "payload": {
+    "objective": "Run the gated Fe(110) CH* + H* -> CH2* + * transition-state workflow from the accepted A initial state to the compatible optimized CH2* final state.",
+    "phase": "active",
+    "current_evidence": [
+      "The user authorized periodic-branch normalization, insertion of a C45-H47 approximately 1.70 A image between old images 02 and 03, and a subsequent short NEB subject to the required gates.",
+      "The new path `ordinary_neb_rebuild_8img_v7_local170_pbc` contains 8 internal images (00-09); the new image 03 has C45-H47 = `1.700000 A` and the old peak image 03 is now image 04.",
+      "The C45-H47 sequence is `2.429/2.274/1.924/1.700/1.514/1.210/1.166/1.128/1.109/1.104 A`; the former 02-03 gap is split into `0.224` and `0.186 A` intervals.",
+      "Sequential minimum-image unwrapping removed all raw periodic-branch discontinuities; the largest raw fractional step is `0.038845` and no branch-shift atoms are reported.",
+      "`dist.pl` returned `2.32973870897393`; `nebmovie.pl 0` generated a nonempty 31946-byte movie; the canonical geometry diagnosis is PASS with no errors or collisions and exact preservation of fixed atoms 0-17.",
+      "The path-review record remains `needs_review`; no short NEB has been submitted."
+    ],
+    "one_executable_step": "Obtain the user's visual/chemical acceptance of the new 00-09 nebmovie path, then prepare the same-path pilot and short ordinary NEB and submit only if the refreshed preflight and execution gate explicitly allow SUBMIT_VASP.",
+    "submission_boundary": "Do not mark the generated path accepted or submit its pilot/short NEB before explicit user review of the new path; all later submissions still require the current hash-bound execution gate.",
+    "done_when": [
+      "A rebuilt ordinary NEB produces a technically usable and adequately resolved reaction path or another gate-supported method handoff.",
+      "Any highest-image TS candidate is refined and validated through the owning module before a barrier claim.",
+      "IS, TS, and FS results remain compatible and hash-bound; no free-energy or kinetics claim is made without separate thermochemical work."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/path/ordinary_neb_rebuild_8img_v7_local170_pbc/path_generation_report.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/path/ordinary_neb_rebuild_8img_v7_local170_pbc/path_geometry_diagnosis.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/path/ordinary_neb_rebuild_8img_v7_local170_pbc/dist.dat`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/path/ordinary_neb_rebuild_8img_v7_local170_pbc/movie.xyz`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/path/ordinary_neb_rebuild_8img_v7_local170_pbc/path_review.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/path/ordinary_neb_rebuild_8img_v7_local170_pbc/path_generation_report.json",
+      "sha256": "e02c7791988d804531b4d09f0e68a34039388ae2b74ed371198f50cdc0431175",
+      "authority": "module_validation",
+      "observed_at": "2026-08-14T11:54:03+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/path/ordinary_neb_rebuild_8img_v7_local170_pbc/path_geometry_diagnosis.json",
+      "sha256": "fbf09c1c25eb93b5033d077d4ccc26f09f648762299af89736f4a81a881af5b2",
+      "authority": "module_validation",
+      "observed_at": "2026-08-14T11:54:03+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/path/ordinary_neb_rebuild_8img_v7_local170_pbc/movie.xyz",
+      "sha256": "5391baba3c17aa85dda255f1ecdc2ba200b4eea629afef4e002f42e0e3d601be",
+      "authority": "structure_output",
+      "observed_at": "2026-08-14T11:54:03+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-ch-h-to-ch2-dense-production-neb-9706068-done-rebuild-required-20260813"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "event_id": "state-import-33e13f091f305d6548f2c52f",
+  "event_type": "state_observed",
+  "entity": {
+    "kind": "state",
+    "id": "active-fe-110-co-dissociation-test-current-gate",
+    "module": "state_handoff"
+  },
+  "occurred_at": "2026-08-03T04:19:12Z",
+  "recorded_at": "2026-08-03T04:19:12Z",
+  "summary": "Import the existing reviewed Current Gate projection into the event ledger.",
+  "payload": {
+    "block_id": "active-fe-110-co-dissociation-test-current-gate",
+    "section": "## Active Fe(110) CO Dissociation Test",
+    "source_heading": "### Current Gate — 2026-08-03 Evidence Snapshot",
+    "title": "Current Gate — 2026-08-03 Evidence Snapshot",
+    "facts": [
+      "The user selected the reviewed nine-interior-image segmented-IDPP path and default `MAGMOM=2.2 mu_B/Fe`; the path has monotonic C-O, no periodic jump or independent site event, and exact bottom 18 Fe.",
+      "Job `9655434` is scheduler `EXIT` with zero ionic steps because 14 ranks/image could not be divided by `NPAR=4`; it produced no scientific result.",
+      "Preflight now enforces both total-rank/IMAGES and per-image-rank/NPAR divisibility; all 13 targeted tests pass.",
+      "Exact-same-path replacement pilot `9655921` uses 108 ranks (`9x12`, `12/NPAR4=3`) and was scheduler `PEND` at 2026-08-03 12:17 CST. Remote inputs, approved POTCAR, and 00--10 POSCAR hashes match; no coarse NEB or downstream TS job is submitted."
+    ],
+    "next_action": "Monitor job `9655921` to terminal state and validate all nine internal images before any coarse NEB.",
+    "adopt_current_projection": true
+  },
+  "evidence": [
+    {
+      "locator": "docs/02_CURRENT_STATE.md",
+      "sha256": "f6eee7315643818ddd25c238bc18db07598db7ef48227fda1fdb2f603f8b71ed",
+      "authority": "repository_document",
+      "observed_at": "2026-08-03T04:19:12Z"
+    }
+  ],
+  "supersedes": [
+    "state-fe110-co-gate-9655921-20260803"
+  ],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "manual_projection_import"
+    ],
+    "status": "pending"
+  }
+}

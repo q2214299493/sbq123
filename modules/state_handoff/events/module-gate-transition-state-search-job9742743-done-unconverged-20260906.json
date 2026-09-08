@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "event_id": "module-gate-transition-state-search-job9742743-done-unconverged-20260906",
+  "event_type": "module_gate_changed",
+  "entity": {
+    "kind": "module",
+    "id": "transition_state_search",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-06T19:07:05+08:00",
+  "recorded_at": "2026-09-06T11:07:05Z",
+  "summary": "Close monitoring of job 9742743 as scheduler DONE but scientifically unconverged, and bind the transition-state gate to periodic-branch normalization plus local O-H path densification before any TS refinement.",
+  "payload": {
+    "module": "transition_state_search",
+    "status": "Active",
+    "depends_on": "completed-path periodic normalization, local O-H bond-formation sampling, and a current hash-bound execution gate",
+    "current_gate": "Job 9742743 is scheduler DONE and electronically normal, but all internal images exhausted NSW=300 and the maximum final NEB force is 0.194127 eV/Angstrom. The O-H coordinate is monotonic but under-resolved from image 01 to 02; raw non-reaction periodic-coordinate branches also fail the canonical geometry gate. No CI-NEB, Dimer, TS acceptance, or barrier action is currently allowed. First normalize branches and prepare a reviewed local image-01-to-image-03 densification, then obtain a new hash-bound execution decision."
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_formal80_20260904/scheduler_evidence_done_20260906.json",
+      "sha256": "99603453e642b0c124756f992e08bb1de3ff5b22c273bfc5236397a7931ccfda",
+      "authority": "scheduler",
+      "observed_at": "2026-09-06T19:07:05+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/completed_review_job9742743_20260906/neb_analysis.json",
+      "sha256": "39812a723f299476e430f126583473bd2ceaed9fc1020cd403edc8cf2430c49c",
+      "authority": "module_validation",
+      "observed_at": "2026-09-06T19:07:05+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/completed_review_job9742743_20260906/path_geometry_diagnosis.json",
+      "sha256": "7731fa6d4342703d43c826b596fef3d120ae99ecbe1e3e3abbf740b7f756988d",
+      "authority": "module_validation",
+      "observed_at": "2026-09-06T19:07:05+08:00"
+    }
+  ],
+  "supersedes": [
+    "module-gate-transition-state-search-job9742743-pilot-optional-20260904"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

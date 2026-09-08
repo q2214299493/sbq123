@@ -1,0 +1,40 @@
+version: 1
+
+policy:
+  external_order: [whitelist, authoritative_literature]
+  stop_after_usable_whitelist_match: true
+  literature_requires_no_whitelist_match: true
+  candidate_count_rule: all_unique_stable_motifs_supported_by_the_selected_evidence
+  fixed_site_sweep: forbidden
+  exact_surface_and_adsorbate_required_for_ready: true
+  external_evidence_use: structure_selection_stability_order_and_initial_geometry_only
+  allowed_geometry_references: [site, binding_atoms, bond_lengths, bond_angles, surface_heights, orientation]
+  external_energy_use: relative_order_reference_only
+  external_energy_import_to_local_results: forbidden
+
+literature:
+  article_type: primary_research
+  journal_selection: authoritative_peer_reviewed_chemistry_materials_or_catalysis
+  priority_examples:
+    - Nature and Nature portfolio chemistry/catalysis journals
+    - Science and AAAS chemistry/materials journals
+    - Journal of the American Chemical Society
+    - ACS Catalysis and other directly relevant ACS journals
+    - Angewandte Chemie International Edition
+    - Chemical Science
+    - Journal of Catalysis
+  examples_are_not_an_exhaustive_allowlist: true
+  required_source_fields: [journal, doi, publisher_url, journal_authority_review, doi_verified]
+  accepted_stability_evidence:
+    - compared_relaxed_adsorption_energies
+    - reported_adsorption_energy_order
+    - experimentally_assigned_adsorption_structure
+
+required_motif_fields:
+  - motif_id
+  - site_pattern
+  - binding_mode
+  - binding_atoms
+  - geometry_summary
+  - stability_evidence
+  - stability_rank

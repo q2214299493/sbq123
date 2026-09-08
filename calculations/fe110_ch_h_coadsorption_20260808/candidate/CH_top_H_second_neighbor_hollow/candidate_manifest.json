@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "surface": "true Fe(110), Fe45, five layers, bottom 18 Fe fixed",
+  "candidate": "CH_top_plus_H_second_neighbor_hollow",
+  "selection_basis": "Xu et al. report CH top as a metastable Fe(110) binding structure and H hollow as the preferred H site; a second-neighbor hollow is used to retain separated CH+H connectivity, and the local CH2_top endpoint keeps this candidate path-compatible.",
+  "source_files": {
+    "ch_contcar": "calculations\\fe110_ch_h_coadsorption_20260808\\source_endpoints\\CH_top\\CONTCAR",
+    "ch_sha256": "88a6038ae20e8eccd1463ab3776b3412134b49a1bf7bbac8f824460dd92ba78d",
+    "h_contcar": "calculations\\fe110_ch_h_coadsorption_20260808\\source_endpoints\\H_hollow\\CONTCAR",
+    "h_sha256": "180bdbf1753bfe1979beafda85e26c97389479d560ed25913703041e7ebdeba4",
+    "clean_contcar": "calculations\\fe110_ch_h_coadsorption_20260808\\source_endpoints\\clean_Fe45\\CONTCAR",
+    "clean_sha256": "31b28b6c69eaedaa9c100050ee38b20b7037d9fa153de477c46eeeeb49086123"
+  },
+  "atom_map_zero_based": {
+    "carbon": 45,
+    "preexisting_ch_hydrogen": 46,
+    "incoming_surface_hydrogen": 47
+  },
+  "initial_connectivity": [
+    [
+      45,
+      46
+    ]
+  ],
+  "target_formed_bond": [
+    45,
+    47
+  ],
+  "site_labels": {
+    "carbon": "top",
+    "incoming_hydrogen": "second_neighbor_hollow"
+  },
+  "geometry_angstrom": {
+    "existing_c_h": 1.0981359514664089,
+    "incoming_c_h": 2.6953794156208963,
+    "h_h": 3.0576627557135385,
+    "incoming_h_nearest_fe": 1.7860371801836785
+  },
+  "selected_h_site_fractional": [
+    0.44444326647948174,
+    0.7777818499337978,
+    0.6746432622339782
+  ],
+  "poscar": "POSCAR",
+  "poscar_sha256": "8fee691f991f4fe33e52c8edef1666118151b965e1e52104a67abf8022229702",
+  "local_relaxation_required": true
+}

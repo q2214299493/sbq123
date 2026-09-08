@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "event_id": "state-fe110-co-connectivity-submitted-20260805",
+  "event_type": "state_observed",
+  "entity": {
+    "kind": "state",
+    "id": "active-fe-110-co-dissociation-test-current-gate",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-05T11:13:39+08:00",
+  "recorded_at": "2026-08-05T11:13:39+08:00",
+  "summary": "Record the submitted positive and negative Dimer-mode connectivity relaxations.",
+  "payload": {
+    "block_id": "active-fe-110-co-dissociation-test-current-gate",
+    "section": "## Active Fe(110) CO Dissociation Test",
+    "title": "Current Gate - 2026-08-05 Bidirectional Connectivity Running",
+    "facts": [
+      "Dimer job `9656664` and diagnostic VFA job `9694935` remain the bound TS and imaginary-mode sources.",
+      "The accepted mode-6 pair uses `+/-0.10 A` normalized displacement from the Dimer CONTCAR, preserves atom order and Selective Dynamics, and keeps bottom 18 Fe fixed.",
+      "Positive branch job `9695455` and negative branch job `9695456` were submitted through the unique executor at 32 cores per branch and were scheduler `PEND` at the checkpoint.",
+      "All local/remote structural and numerical input hashes, including locked POTCAR hash `d31ba5b0...44e`, match.",
+      "No connectivity conclusion, TS grade, or barrier may be reported before both jobs finish and the bidirectional analyzer passes."
+    ],
+    "next_action": "Monitor jobs 9695455 and 9695456; after terminal DONE and complete VASP convergence, analyze both relaxed structures against the contract-bound IS and FS."
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/connectivity_from_dimer9656664_mode6_amp0p10_20260805/positive/submission_record.json",
+      "sha256": "94d79d0c5dfa14442f655aee41cb62e85e297e5006ea5505195f0e48027692c8",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-05T11:13:39+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/connectivity_from_dimer9656664_mode6_amp0p10_20260805/negative/submission_record.json",
+      "sha256": "470f89cf4e195b337177cbb35b764927276ee28570f90ebcd5c7009889bee70e",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-05T11:13:39+08:00"
+    }
+  ],
+  "supersedes": ["state-fe110-co-dimer-vfa-reconciled-20260805"],
+  "review": {"required": false, "reason_codes": [], "status": "not_required"}
+}

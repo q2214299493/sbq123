@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-matris-retention-job1506-complete-no-candidate-20260902",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-02T16:12:10+08:00",
+  "recorded_at": "2026-09-02T08:12:10Z",
+  "summary": "Authorized MZ73 job 1506 completed with producer exit code 0. All twelve epochs improved adsorption component RMSE, vector RMSE, and p95, but every epoch increased the single maximum vector error. No epoch passed the strict zero-regression selection gate, so no checkpoint candidate was produced and frozen TS held-out evaluation was correctly skipped.",
+  "payload": {
+    "objective": "Decide whether to retain the strict zero-tolerance adsorption maximum-force gate or separately authorize a tail-error diagnostic and revised candidate design; no checkpoint promotion or path rerun is allowed meanwhile.",
+    "phase": "active",
+    "current_evidence": [
+      "Slurm job 1506 left squeue; MZ73 producer evidence reports success with exit code 0 from 2026-09-02T08:09:03Z to 08:10:39Z.",
+      "The job used the hash-bound candidate-2 review, one-run authorization, and frozen base checkpoint 1e6a85b...c6601.",
+      "Twelve of twelve requested epochs completed; no early stop occurred because no retention-eligible epoch was established.",
+      "Every epoch improved adsorption component RMSE, vector RMSE, and vector p95 relative to the frozen base.",
+      "Every epoch failed only vector_max_eV_per_A under the strict zero-tolerance non-regression gate.",
+      "Epoch 3 was closest: maximum vector error 0.256583 versus baseline 0.255916 eV/A, a +0.000666 eV/A or +0.260381% regression.",
+      "No checkpoint candidate was produced, frozen TS held-out structures were not evaluated, and no checkpoint promotion or path rerun occurred.",
+      "The earlier pre-submit duplicate-check command failed before sbatch; job 1506 was the sole actual submission."
+    ],
+    "one_executable_step": "Obtain the user's method decision: retain the strict zero-tolerance gate and stop fine-tuning, or authorize preparation of a bounded tail-error diagnostic/revised candidate that identifies and targets the offending adsorption structure and atom without using frozen TS held-out data.",
+    "submission_boundary": "Job-1506 authorization is consumed. No automatic retry, new fine-tuning run, checkpoint promotion, complete-path rerun, AQCat25 audit, VASP, Dimer, TS acceptance, or barrier action is authorized.",
+    "done_when": [
+      "A durable decision records whether the +0.000666 eV/A epoch-3 maximum-force increase remains unacceptable.",
+      "If strict zero tolerance remains, the active base checkpoint is retained and candidate-2 fine-tuning is closed without promotion.",
+      "If a revised candidate is requested, a new review-only design targets adsorption tail error while keeping frozen TS held-out structures final-evaluation only."
+    ],
+    "authoritative_references": [
+      "`outputs/matris_ef_finetune_retention_candidate2_bundle_20260902/submission_record_job1506.json`",
+      "`outputs/matris_ef_finetune_retention_candidate2_bundle_20260902/returned_job1506/producer_exit_record.json`",
+      "`outputs/matris_ef_finetune_retention_candidate2_bundle_20260902/returned_job1506/result.json`",
+      "`outputs/matris_ef_finetune_retention_candidate2_bundle_20260902/checkpoint_review_job1506.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "outputs/matris_ef_finetune_retention_candidate2_bundle_20260902/submission_record_job1506.json",
+      "sha256": "d7de50171b0f7290bd340473814a892a7ebb38b95acbf03fdecb7b6280fbdbad",
+      "authority": "scheduler",
+      "observed_at": "2026-09-02T16:12:10+08:00"
+    },
+    {
+      "locator": "outputs/matris_ef_finetune_retention_candidate2_bundle_20260902/returned_job1506/producer_exit_record.json",
+      "sha256": "30792b4a7a193b4d8560849aad9260392277546ae335181c2e419ddf279bcd51",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-02T16:12:10+08:00"
+    },
+    {
+      "locator": "outputs/matris_ef_finetune_retention_candidate2_bundle_20260902/returned_job1506/result.json",
+      "sha256": "ec29370516777ac0ad2bd3cddebe3f51690d994dd284c927e92c7024ee1c4c9f",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T16:12:10+08:00"
+    },
+    {
+      "locator": "outputs/matris_ef_finetune_retention_candidate2_bundle_20260902/checkpoint_review_job1506.json",
+      "sha256": "af29b566bce888b65a9d1898c2a060f583d8fb7e4d0879eb57c16c86224afe79",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T16:12:10+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-matris-retention-early-stop-candidate2-preflight-bound-20260902"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

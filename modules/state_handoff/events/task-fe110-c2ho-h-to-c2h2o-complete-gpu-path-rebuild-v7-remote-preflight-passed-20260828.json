@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v7-remote-preflight-passed-20260828",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-28T00:16:39.9158151+08:00",
+  "recorded_at": "2026-08-27T16:16:39.9166287Z",
+  "summary": "The exact v7 request passed a no-model, no-scheduler MZ73 remote preflight with all request, image, checkpoint, runtime, graded-gate, release-schedule, redistribution, and final-gate checks intact; GPU execution remains unauthorized.",
+  "payload": {
+    "objective": "Decide whether to authorize one bounded MZ73 GPU execution of v7 request SHA-256 949f9888b1313cf9eec0192683e239d08cab98bfb88e6a3e11aeee74a6735210.",
+    "phase": "active",
+    "current_evidence": [
+      "The user authorized only continuation to the previously stated MZ73 remote-preflight step; no GPU or scheduler execution authority was inferred.",
+      "MZ73 loaded the exact request and all 19 structures with zero periodic normalizations and passing seed geometry.",
+      "MatRIS and AQCat25 checkpoint hashes plus all executor/runtime hashes passed.",
+      "The immutable initial restraint targets, graded transient rollback policy, 8-6-4-3-2-1 release schedule, and final hard gate all passed remote validation.",
+      "The remote no-model redistribution replay retained strict interval images 10-14 with maximum adjacent RMSD 0.133240 A and maximum movable-atom step 0.696567 A.",
+      "The preflight explicitly reports model_execution_performed=false, scheduler_submission_performed=false, and vasp_submission_performed=false.",
+      "No GPU calculation, VASP/VTST calculation, Dimer, TS, barrier, fine-tuning, or automatic retry exists from this step."
+    ],
+    "one_executable_step": "Obtain a separate explicit user authorization before submitting one bounded MZ73 GPU execution of the exact preflight-passed request hash.",
+    "submission_boundary": "Do not submit the GPU job, change the request, fine-tune, submit VASP/VTST, prepare Dimer, or claim a TS/barrier without new explicit authority and subsequent result gates.",
+    "done_when": [
+      "The user explicitly authorizes or declines one bounded GPU execution of the exact request hash.",
+      "If authorized, one job is submitted and its job ID plus hash-bound submission record are captured."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v7_reparameterized_20260827/remote_preflight.MZ73.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v7_reparameterized_20260827/remote_preflight_review.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v7_reparameterized_20260827/work_to_gpu/request.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v7_reparameterized_20260827/remote_preflight.MZ73.json",
+      "sha256": "33e7edbfe0c7a877a74b8b42bc20a5ea2e8a2fe81591db0432f19f174553924b",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-28T00:16:39.9158151+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v7_reparameterized_20260827/remote_preflight_review.work.json",
+      "sha256": "b2012c0a55fd2aa1fab2366f9f476e31a7a4f9137d56cd76c8d3605046de2c84",
+      "authority": "module_validation",
+      "observed_at": "2026-08-28T00:16:39.9158151+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v7_reparameterized_20260827/user_remote_preflight_authorization.json",
+      "sha256": "b2d567c1f1260e3e1f77d0cab2f3aed88aad151ab6a0e8273666a70922ebfc39",
+      "authority": "user_authorization",
+      "observed_at": "2026-08-28T00:16:39.9158151+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v7-reparameterized-prepared-20260828"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

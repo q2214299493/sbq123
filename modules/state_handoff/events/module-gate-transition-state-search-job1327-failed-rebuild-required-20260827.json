@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "event_id": "module-gate-transition-state-search-job1327-failed-rebuild-required-20260827",
+  "event_type": "module_gate_changed",
+  "entity": {
+    "kind": "module",
+    "id": "transition_state_search",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-27T22:01:28.3012410+08:00",
+  "recorded_at": "2026-08-27T14:01:28.3012410Z",
+  "summary": "Replace the stale transition-state module row with the held-out-validated batch and failed GPU job 1327 path-rebuild gate.",
+  "payload": {
+    "module": "transition_state_search",
+    "status": "Active",
+    "depends_on": "a reviewed revised preconditioning or resampling design and new explicit authorization before any rerun",
+    "current_gate": "Held-out VASP jobs `9731537`-`9731543` are `DONE` and quality-passed; frozen MatRIS passed the six-structure primary held-out gate, while AQCat25 remains a force/geometry auditor. MZ73 job `1327` failed during restrained preconditioning step `9` when the required O-H `1.1-1.8 A` coverage fell to two internal images. No complete path, automatic retry, VASP/VTST result, Dimer parent, TS, or barrier exists; a revised path design and new rerun authorization are required"
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/gpu_return_job1327_failure/failure_assessment.work.json",
+      "sha256": "42d0397b0ae49ea36de102696de7acb08ef9b40ab6d0887d5969278093a5e8b6",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T22:01:28.3012410+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/gpu_return_job1327_failure/producer_exit_record.failure.1327.json",
+      "sha256": "8d8c7815eef5e583b8d6664e13f3bb869a65f49fbc2563211384aa498695f927",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-27T22:01:28.3012410+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/gpu_return_job1327_failure/restrained_preconditioning.geometry_guard_failure.json",
+      "sha256": "414779346606ed070fca9edaaae635ba3d87b0cab387c4995ce52a8905060c49",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-27T22:01:28.3012410+08:00"
+    }
+  ],
+  "supersedes": [
+    "module-gate-transition-state-search-mz73-preflight-passed-submission-decision-20260827"
+  ],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "state_projection_drift_correction",
+      "cross_module_change"
+    ],
+    "status": "pending"
+  }
+}

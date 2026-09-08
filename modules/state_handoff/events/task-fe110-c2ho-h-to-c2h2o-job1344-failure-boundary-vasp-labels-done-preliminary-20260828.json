@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-job1344-failure-boundary-vasp-labels-done-preliminary-20260828",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-28T23:47:07+08:00",
+  "recorded_at": "2026-08-28T15:47:07Z",
+  "summary": "All eight exact-structure VASP force-label jobs are LSF DONE; bounded remote checks found normal completion, EDIFF convergence, one force block, magnetic evidence, and matching POSCAR hashes for every sample, pending formal output collection and model-error assessment.",
+  "payload": {
+    "objective": "Collect the eight completed VASP outputs, run the canonical force-label validator, and compare MatRIS-VASP and AQCat25-VASP errors on identical structures.",
+    "phase": "active",
+    "current_evidence": [
+      "LSF jobs 9733336, 9733337, 9733338, 9733340, 9733341, 9733342, 9733343, and 9733344 are all DONE with canonical scheduler evidence stored locally.",
+      "Every remote OUTCAR has one normal-completion marker, one EDIFF-reached marker, one TOTAL-FORCE block, and two magnetization (x) blocks.",
+      "Every remote POSCAR SHA-256 matches its requested exact structure.",
+      "The observed TOTEN values remain force-label-only and are not reportable final energies or barriers.",
+      "Formal remote/local output hash validation, complete 50-atom force parsing, magnetic parsing, and MatRIS/AQCat25 error assessment have not yet run."
+    ],
+    "one_executable_step": "Collect POSCAR, INCAR, KPOINTS, POTCAR hash, OUTCAR, OSZICAR, CONTCAR, and vasp.out for all eight DONE jobs; run the canonical acceptance checks and exact-structure MatRIS/AQCat25 versus VASP error assessment.",
+    "submission_boundary": "No retry, model fine-tuning, path rerun, micro-NEB, Dimer, TS acceptance, or barrier action is authorized.",
+    "done_when": [
+      "All eight labels pass formal scheduler, normal-completion, electronic-convergence, complete-force, magnetic, structure-hash, DFT-fingerprint, and remote/local hash checks.",
+      "MatRIS-VASP and AQCat25-VASP errors are reviewed and a separate fine-tuning or path-method decision is recorded."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/vasp_batch_done_preliminary_checkpoint.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/scheduler_evidence/`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/vasp_batch_done_preliminary_checkpoint.json",
+      "sha256": "40dd7813b1ba5000c9867ec59351ce61f2489d185f33725fa8647a53f68b2ca3",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-28T23:47:07+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-job1344-failure-boundary-vasp-labels-submitted-20260828"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

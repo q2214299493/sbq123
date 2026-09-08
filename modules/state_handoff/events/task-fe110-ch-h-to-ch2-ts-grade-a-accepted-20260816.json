@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-ch-h-to-ch2-ts-grade-a-accepted-20260816",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-ch-h-to-ch2-ts",
+    "module": "ts_vibrational_validation"
+  },
+  "occurred_at": "2026-08-16T22:11:44+08:00",
+  "recorded_at": "2026-08-16T14:11:44Z",
+  "summary": "The Fe(110) CH* + H* -> CH2* + * DIMER candidate is formally accepted as a Grade-A TS from user-accepted residuals and one reviewed 809.141 cm^-1 target imaginary mode.",
+  "payload": {
+    "objective": "Record the formally accepted Fe(110) CH* + H* -> CH2* + * DIMER transition state without making an unsupported barrier or thermochemistry claim.",
+    "phase": "verification",
+    "current_evidence": [
+      "The user explicitly accepted the exact DIMER Force/Torque residuals for formal TS validation; the new hash-bound decision is accept_for_ts_validation.",
+      "DIMER job 9709074 passes the hard convergence gate: normal completion, VASP maximum atomic force 0.01688 eV/A <= 0.02 eV/A, and negative curvature -4.08234 eV/A^2.",
+      "VFA job 9710404 completed normally with one reference plus all 48 finite-difference displacements and exactly one raw imaginary mode: mode 24 at 809.141 cm^-1.",
+      "Mode 24 is accepted as the C45-H47 bond-forming coordinate: the relative C45/H47 motion projects 98.854% onto the bond axis and their squared mode-amplitude fraction is 92.667%.",
+      "The canonical validation pipeline status is TS_ACCEPTED and the authoritative execution gate exclusively allows APPROVE_TS_CANDIDATE.",
+      "Database validation fe110_ch_h_to_ch2_dimer9709074_mode24_grade_a_20260816 is Grade A and registered. No electronic barrier, free-energy barrier, or thermochemical correction is registered."
+    ],
+    "one_executable_step": "No further calculation or barrier action is authorized. If an electronic barrier is requested later, first verify compatible registered IS/TS/FS final OUTCAR TOTEN values and obtain a new hash-bound REPORT_FINAL_BARRIER decision.",
+    "submission_boundary": "Do not submit, stop, restart, or resubmit VASP. Do not report an electronic or free-energy barrier and do not use the result for kinetics until the separate compatible energy and thermochemistry requirements are satisfied.",
+    "done_when": [
+      "The Grade-A TS validation and formal acceptance artifacts are hash-bound and registered.",
+      "The result remains explicitly separated from any uncomputed electronic barrier, free-energy barrier, or kinetic quantity."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/diagnostics/ts_validation_review_dimer9709074_mode24_20260816/formal_ts_acceptance_review.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/diagnostics/ts_validation_review_dimer9709074_mode24_20260816/AUTHORITATIVE_TS_ACCEPTANCE_GATE.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/diagnostics/ts_validation_review_dimer9709074_mode24_20260816/validation_pipeline_status.json`",
+      "`data/project_registry.sqlite3`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/diagnostics/ts_validation_review_dimer9709074_mode24_20260816/formal_ts_acceptance_review.json",
+      "sha256": "f9b5fe26fe46bd9ca27652f4e5ffae25fcc35389a69d3d5b9ca6ecb37d2af703",
+      "authority": "module_validation",
+      "observed_at": "2026-08-16T22:11:44+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/diagnostics/ts_validation_review_dimer9709074_mode24_20260816/AUTHORITATIVE_TS_ACCEPTANCE_GATE.json",
+      "sha256": "551fbfa4133a736aba004e52063c6be0eb6edc5327841c11f2467f2bf479435b",
+      "authority": "module_validation",
+      "observed_at": "2026-08-16T22:11:44+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/diagnostics/ts_validation_review_dimer9709074_mode24_20260816/validation_pipeline_status.json",
+      "sha256": "02239a210df3453ecac08cbf19a97bff5316153973fe6b7cc1563e668019516d",
+      "authority": "module_validation",
+      "observed_at": "2026-08-16T22:11:44+08:00"
+    },
+    {
+      "locator": "data/project_registry.sqlite3",
+      "sha256": "091b6408d7c9e072d1bc043c0d1ba012bc1e8df9035cf395cf54cfee0e6bd817",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-16T22:11:44+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-ch-h-to-ch2-vfa-9710404-done-needs-ts-review-20260816"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "status": "READY_FOR_GEOMETRY_REVIEW",
+  "method_requested": "segmented_idpp",
+  "method_used": "segmented_idpp",
+  "interior_images": 5,
+  "image_directories": [
+    "00",
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06"
+  ],
+  "constraints_source": null,
+  "waypoint_sources": [
+    "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_co_dissociation_neb_20260718\\gpu_handoff\\waypoints\\WP_01\\POSCAR",
+    "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_co_dissociation_neb_20260718\\output\\job_737\\TS_CANDIDATE.vasp",
+    "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_co_dissociation_neb_20260718\\gpu_handoff\\waypoints\\WP_03\\POSCAR"
+  ],
+  "segment_additional_images": [
+    0,
+    1,
+    1,
+    0
+  ],
+  "warnings": [],
+  "requires_human_review": true,
+  "contract_sha256": "f05f901204621dd787e901a4dbfd74535e513616176b9fc65834697851bf39b0",
+  "atom_map_sha256": "c106ae99bf673f9aaf51a0ae6515a4af625bee66960393e3700e78ddc247f248",
+  "compatibility_sha256": "ba6c374ee097a51481eaa1dc468c582ac65af7290dc0cfb5f3d20a0658f59b95",
+  "fingerprint_id": "2b0ed53c44421589882f62c2d0affa7386b82c390e9f70bf545a226059968095",
+  "strategy_source": "rule_based",
+  "template_id": null,
+  "waypoint_strategy": [
+    "molecular_CO",
+    "tilted_or_lying_CO",
+    "elongated_CO",
+    "coadsorbed_C_plus_O"
+  ],
+  "interpolation_strategy": "segmented_idpp"
+}

@@ -1,0 +1,68 @@
+version: 1
+
+surface_families:
+  metallic_fe:
+    status: enabled
+    confidence_default: high
+    examples: [Fe110, Fe100, Fe111]
+    site_classes:
+      - top_Fe
+      - bridge_FeFe_short
+      - bridge_FeFe_long
+      - hollow_FeFeFe
+      - hollow_FeFeFeFe
+    detectors:
+      Fe110: fe110_top_layer_distance_classes
+      Fe100: fe100_exposed_layer_graph
+      Fe111: fe111_exposed_layer_graph
+
+  iron_carbide:
+    status: enabled_with_caution
+    confidence_default: medium
+    examples: [Fe5C2, Fe2C, Fe3C, carburized_Fe]
+    site_classes:
+      - top_Fe
+      - bridge_FeFe
+      - bridge_FeC_lattice
+      - hollow_FeFeFe
+      - hollow_FeFeC_lattice
+    explicit_roles: [C_lattice, C_ads]
+    notes:
+      - Mixed Fe-C sites are lower priority unless requested.
+      - Ambiguous lattice/adsorbate carbon identity requires needs_review.
+
+  iron_oxide:
+    status: needs_explicit_site_labels
+    confidence_default: low
+    examples: [Fe3O4, FeO, Fe2O3, FeOx]
+    site_classes:
+      - top_Fe
+      - top_Fe_oct
+      - top_Fe_tet
+      - bridge_FeFe
+      - bridge_FeO_lattice
+      - oxygen_vacancy
+      - hollow_FeFeO_lattice
+    explicit_roles: [O_lattice, O_ads, Fe_oct, Fe_tet, vacancy_O]
+    notes:
+      - Oxygen vacancies are never guessed.
+      - Hydroxylated or reconstructed surfaces require review when uncertain.
+
+high_risk_features:
+  oxygen_vacancy:
+    status: explicit_tag_required
+    confidence_default: low
+  hydroxylated_surface:
+    status: needs_review
+    confidence_default: low
+  Fe_oct_Fe_tet:
+    status: explicit_tag_preferred
+    confidence_explicit: medium
+    confidence_inferred: low
+  C_lattice_C_ads:
+    status: explicit_distinction_required
+  O_lattice_O_ads:
+    status: explicit_distinction_required
+  C2plus_multidentate:
+    status: needs_review
+    confidence_default: low

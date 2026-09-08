@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "event_id": "state-fe110-c2ho-h-to-c2h2o-mz73-preflight-passed-submission-decision-20260827",
+  "event_type": "state_observed",
+  "entity": {
+    "kind": "state",
+    "id": "active-fe-110-co-dissociation-test-current-gate",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-27T21:41:22.5439423+08:00",
+  "recorded_at": "2026-08-27T13:41:22.5439423Z",
+  "summary": "Refresh the current transition-state gate after the accepted 19-image package passed its hash-bound MZ73 preflight without production execution.",
+  "payload": {
+    "block_id": "active-fe-110-co-dissociation-test-current-gate",
+    "section": "## Active Transition-State Gate",
+    "title": "Active Gate - 2026-08-27 MZ73 Preflight Passed; Production Submission Decision Required",
+    "facts": [
+      "Held-out VASP jobs `9731537`-`9731543` are `DONE` and quality-passed; frozen MatRIS passed the six-structure primary held-out gate, while AQCat25 remains a force/geometry auditor after failing the relative-energy ceiling.",
+      "The exact 19-image request and all structure hashes passed on MZ73, together with the frozen MatRIS and AQCat25 checkpoint hashes.",
+      "The MZ73 Python/runtime, source, wrapper syntax, request loading, topology, periodic-branch, geometry, and forming O-H interval checks passed without model execution.",
+      "The package is uploaded under `/home/sbq/sbq/aqcat25_ts_pilot/handoffs/c2ho_h_complete_path_rebuild_v5_19img_20260827`.",
+      "The completed seven-job VASP batch and completed MZ73 preflight are recorded evidence; neither constitutes authorization for a new production calculation.",
+      "No `sbatch`, GPU model execution, VASP/VTST submission, Dimer, TS, or barrier action occurred in this preflight."
+    ],
+    "next_action": "Obtain a separate explicit user decision on production execution of the exact preflighted package; if approved, recheck the hash-bound execution gate before submitting only that package.",
+    "project_state_header": true
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/remote_preflight.MZ73.json",
+      "sha256": "376d86df0819158c1217563c425424e78df76b4a879dd894d910da45ae9f5603",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T21:41:22.5439423+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/work_to_gpu/request.json",
+      "sha256": "0d36944856bdc4799f6c6c441da04a0271b10f9d8acfd905eed0c679d38d01d6",
+      "authority": "repository_document",
+      "observed_at": "2026-08-27T21:41:22.5439423+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/heldout_validation_execution_20260827/heldout_error_assessment.json",
+      "sha256": "a86e2d2748913f232731b98d1f6d0c2800a1b737c62aa96e0ac07b11b5daf949",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T21:41:22.5439423+08:00"
+    }
+  ],
+  "supersedes": [
+    "state-fe110-c2ho-h-to-c2h2o-heldout-validated-path-rebuild-review-20260827"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

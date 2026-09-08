@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-matris-retention-early-stop-candidate2-prepared-20260902",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-02T15:49:19+08:00",
+  "recorded_at": "2026-09-02T07:49:19Z",
+  "summary": "A review-only second MatRIS candidate design is prepared from the frozen base checkpoint. It saves every epoch and selects only epochs whose adsorption component RMSE, vector RMSE, p95, and maximum force error all do not exceed the base values. Frozen TS held-out structures are excluded from epoch selection and remain final-evaluation only. No GPU run, checkpoint promotion, or path rerun was authorized or performed.",
+  "payload": {
+    "objective": "Obtain a new explicit authorization to submit one hash-bound retention-aware MatRIS fine-tuning run; do not promote job-1505 or rerun the path meanwhile.",
+    "phase": "active",
+    "current_evidence": [
+      "The strict zero-regression adsorption gate is retained; job-1505 checkpoint 37d1ad07...ad679a remains not promoted.",
+      "Candidate 2 starts from frozen base checkpoint 1e6a85b...c6601, not from the rejected job-1505 candidate.",
+      "Four adsorption-retention structures are used for epoch selection; their component RMSE, vector RMSE, p95, and vector maximum must all be no worse than the frozen-base metrics with zero tolerance.",
+      "Every completed epoch is versioned. Among retention-eligible epochs, the lowest optimizer mean-total-loss epoch is selected; three subsequent non-improving epochs trigger early stopping after an eligible epoch exists.",
+      "The seven frozen TS held-out structures are never optimizer or epoch-selection inputs and are evaluated only after candidate selection.",
+      "Package preflight reports 30 optimizer samples, four adsorption selection structures, seven frozen TS held-out structures, and zero exact or geometry overlap.",
+      "Python compilation, targeted Ruff, 15 targeted tests, package preflight, and the no-MatRIS toy self-test passed.",
+      "No remote execution bundle or execution authorization was generated, and no GPU job was submitted."
+    ],
+    "one_executable_step": "After a new explicit user submission instruction, build a fresh MZ73 bundle bound to review SHA-256 c61983a1...b9dea0, run the bounded remote preflight, and submit one retention-aware fine-tuning job.",
+    "submission_boundary": "Preparation only is complete. Any MZ73 fine-tuning submission, checkpoint promotion, complete-path rerun, AQCat25 audit, VASP, Dimer, TS acceptance, or barrier action requires separate explicit authorization and applicable review.",
+    "done_when": [
+      "A separately authorized MZ73 run returns a producer-success record and one retention-eligible checkpoint candidate, or records that no epoch passed the strict retention gate.",
+      "The selected candidate is reviewed against the frozen TS held-out set without using those structures for epoch selection.",
+      "No checkpoint is promoted or path rerun starts before a new work-side decision."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/matris_finetune_retention_early_stop_candidate2_20260902/matris_replay_finetune_review_request.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/matris_finetune_retention_early_stop_candidate2_20260902/preflight`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/matris_finetune_retention_early_stop_candidate2_20260902/self_test/self_test_result.json`",
+      "`outputs/matris_ef_finetune_bundle_20260902/checkpoint_review_job1505.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/matris_finetune_retention_early_stop_candidate2_20260902/matris_replay_finetune_review_request.json",
+      "sha256": "c61983a118444263e60d83cbcd10607cf949bd77c747c7de6341babdcab9dea0",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T15:49:19+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/matris_finetune_retention_early_stop_candidate2_20260902/preflight",
+      "sha256": "312052fac70d7961c2f47ef0fb21192d59c6eb3fe940ca40f2e8be256364a1c7",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T15:49:19+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/matris_finetune_retention_early_stop_candidate2_20260902/self_test/self_test_result.json",
+      "sha256": "5ae19cdbf7da66cae144ccda4f9f2ba81e7ac9396c31b20eb172a9f06b120ffc",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T15:49:19+08:00"
+    },
+    {
+      "locator": "outputs/matris_ef_finetune_bundle_20260902/checkpoint_review_job1505.json",
+      "sha256": "70905aa7eec0ddcf0a4521c8671d6b6ee549c42ff4ed97a3f2ec43be7018241b",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T15:49:19+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-matris-finetune-job1505-reviewed-not-promoted-20260902"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

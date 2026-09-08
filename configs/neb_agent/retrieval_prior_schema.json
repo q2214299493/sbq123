@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "available",
+    "whitelist_valid",
+    "production_ready",
+    "best_source_access_verified",
+    "overall_confidence",
+    "matched_records"
+  ],
+  "properties": {
+    "available": {"type": "boolean"},
+    "whitelist_valid": {"type": "boolean"},
+    "production_ready": {"type": "boolean"},
+    "best_source_access_verified": {"type": "boolean"},
+    "overall_confidence": {"enum": ["high", "medium", "low", "none"]},
+    "matched_records": {"type": "array", "maxItems": 5},
+    "warnings": {"type": "array", "items": {"type": "string"}}
+  }
+}

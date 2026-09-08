@@ -1,0 +1,36 @@
+* text=auto
+
+.gitattributes text eol=lf
+.gitignore text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.csv text eol=lf
+*.json text eol=lf
+*.sql text eol=lf
+*.py text eol=lf
+*.ps1 text eol=lf
+*.sh text eol=lf
+*.lsf text eol=lf
+*.vasp text eol=lf
+INCAR text eol=lf
+KPOINTS text eol=lf
+POSCAR text eol=lf
+POSCARis text eol=lf
+POSCARfs text eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.pdf binary
+*.gz binary
+*.zip binary
+
+# Approved state-handoff archives must retain their exact reviewed bytes.
+modules/state_handoff/archive/** -text
+
+# Hash-bound registry evidence must retain the exact bytes recorded in SQLite.
+calculations/fe110_co_dissociation_neb_20260718/matched_statics/local_endpoint_matched_static_9647798_20260729/INCAR binary
+calculations/fe110_co_dissociation_neb_20260718/matched_statics/local_endpoint_matched_static_9647798_20260729/KPOINTS binary
+calculations/fe110_co_dissociation_neb_20260718/matched_statics/local_endpoint_matched_static_9647798_20260729/POSCAR binary
+calculations/fe110_ch_h_coadsorption_20260808/candidate/*/incar_validation.json binary

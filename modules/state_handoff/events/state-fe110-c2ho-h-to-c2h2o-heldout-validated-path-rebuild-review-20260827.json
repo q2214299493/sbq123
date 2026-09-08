@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "event_id": "state-fe110-c2ho-h-to-c2h2o-heldout-validated-path-rebuild-review-20260827",
+  "event_type": "state_observed",
+  "entity": {
+    "kind": "state",
+    "id": "active-fe-110-co-dissociation-test-current-gate",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-27T20:59:27.2162052+08:00",
+  "recorded_at": "2026-08-27T12:59:27.2162052Z",
+  "summary": "Refresh the current transition-state gate after the seven-job held-out VASP batch completed and the review-only 19-image path rebuild was prepared.",
+  "payload": {
+    "block_id": "active-fe-110-co-dissociation-test-current-gate",
+    "section": "## Active Transition-State Gate",
+    "title": "Active Gate - 2026-08-27 Held-Out Validation Complete and Path Rebuild Awaiting Review",
+    "facts": [
+      "Held-out VASP jobs `9731537`-`9731543` are `DONE`; all seven passed normal-completion, electronic-convergence, exact-structure, complete-force, magnetic-evidence, `SIGMA=0.20 eV`, and remote/local hash gates.",
+      "On six primary disjoint structures, frozen MatRIS passed the current ceilings with force-vector RMSE `0.113936 eV/A`, maximum force-vector error `0.388424 eV/A`, and relative-energy RMSE `0.087345 eV`.",
+      "AQCat25 reached force-vector RMSE `0.125709 eV/A` but failed the relative-energy ceiling at `0.133379 eV`; it remains an exact-path force/geometry auditor, not the TS-path energy-ranking authority.",
+      "No MatRIS fine-tuning is required by this held-out gate, and quantitative uncertainty remains uncalibrated because no real MatRIS committee exists.",
+      "A local review-only 19-image complete-path rebuild passed the recorded seed geometry checks; no remote preflight, upload, GPU/VASP/VTST submission, Dimer, TS, or barrier action has occurred for this package.",
+      "The seven completed VASP jobs are recorded evidence from the finished held-out batch; the current authorization boundary applies only to additional submissions."
+    ],
+    "next_action": "Review the exact 19-image seed and request; if accepted, run only the hash-bound MZ73 environment/checkpoint/runtime preflight, then request separate authorization before any submission.",
+    "project_state_header": true
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/heldout_validation_execution_20260827/vasp_static_labels/heldout_vasp_force_label_set.json",
+      "sha256": "c071ac6f6404b1d8117a849a087110d597c1843d05d3de8ea07e262ad0e08030",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-27T20:59:27.2162052+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/heldout_validation_execution_20260827/heldout_error_assessment.json",
+      "sha256": "a86e2d2748913f232731b98d1f6d0c2800a1b737c62aa96e0ac07b11b5daf949",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T20:59:27.2162052+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/complete_path_rebuild_plan.json",
+      "sha256": "f1800024c7291b4c60f5bbc361b1e31c602e0f8761e809a1ffe453d23593acbd",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T20:59:27.2162052+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/seed_geometry_review.json",
+      "sha256": "3e3cfa9208e3f8df86ace60dfb3e6df3b7fa2fa6fa74608053631bb61b1f88f1",
+      "authority": "structure_output",
+      "observed_at": "2026-08-27T20:59:27.2162052+08:00"
+    }
+  ],
+  "supersedes": [
+    "state-fe110-co-electronic-barrier-local-frequency-completed-20260807"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

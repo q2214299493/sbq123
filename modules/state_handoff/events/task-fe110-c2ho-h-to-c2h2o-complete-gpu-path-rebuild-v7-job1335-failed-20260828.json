@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v7-job1335-failed-20260828",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-28T11:55:55.9619428+08:00",
+  "recorded_at": "2026-08-28T03:55:55.9641254Z",
+  "summary": "MZ73 job 1335 preserved the redistributed O-H path geometry but exited after the first strength-8 release stage exhausted 80 steps above its force target; no complete ML-NEB path was produced.",
+  "payload": {
+    "objective": "Await explicit user authorization before preparing or running any bounded optimizer or stage-schedule correction for the v7 path.",
+    "phase": "open",
+    "current_evidence": [
+      "Job 1335 is absent from the active Slurm queue; MZ73 accounting cannot provide an authoritative terminal scheduler state, while the producer record reports failure with exit code 1 at 2026-08-27T16:40:03Z.",
+      "Restrained preconditioning passed, but restraint release strength 8 exhausted 80 FIRE steps at fmax 0.301421 eV/A against the 0.18 eV/A target.",
+      "The redistributed last snapshot retained five strict O-H transition-region images 10-14, zero O-H backtrack, preserved C1-C2, and passed periodic and adjacent-continuity guards.",
+      "Ordinary MatRIS ML-NEB and AQCat25 fixed-path audit never started; no complete GPU path, Dimer parent, VASP result, TS, barrier, fine-tuning, automatic retry, or resubmission exists."
+    ],
+    "one_executable_step": "None until the user explicitly authorizes preparation or execution of a correction.",
+    "submission_boundary": "Job 1335 authorization was single-use. Automatic retry, fine-tuning, GPU resubmission, VASP/VTST submission, Dimer, and TS/barrier claims remain forbidden.",
+    "done_when": [
+      "The job 1335 failure evidence is hash-bound and reported separately from scheduler authority.",
+      "Any correction or rerun occurs only after new explicit user authorization."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v7_reparameterized_20260827/gpu_return_job1335_failure/failure_assessment.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v7_reparameterized_20260827/gpu_return_job1335_failure/producer_exit_record.failure.1335.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v7_reparameterized_20260827/gpu_return_job1335_failure/restraint_release_01_strength_8_reaction_coordinate_redistributed.snapshot_manifest.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v7_reparameterized_20260827/gpu_return_job1335_failure/failure_assessment.work.json",
+      "sha256": "6be8d1a7d533fa92c7c8faeb7435fa6e9d4aaefc57f420414f57174ed6c8ad3c",
+      "authority": "module_validation",
+      "observed_at": "2026-08-28T11:55:55.9619428+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v7_reparameterized_20260827/gpu_return_job1335_failure/producer_exit_record.failure.1335.json",
+      "sha256": "2d8dafef80c0b7821e7c12180151396b16ee74f1d03d8887cb828c72446e985b",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-28T11:55:55.9619428+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v7_reparameterized_20260827/gpu_return_job1335_failure/restraint_release_01_strength_8_reaction_coordinate_redistributed.snapshot_manifest.json",
+      "sha256": "485ab22c1b9b285db30eaa600774691569555d2c0a2dd176d414c4531f8be408",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-28T11:55:55.9619428+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v7-job1335-submitted-20260828"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

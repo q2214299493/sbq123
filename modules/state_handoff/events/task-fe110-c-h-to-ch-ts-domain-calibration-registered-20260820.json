@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-ts-domain-calibration-registered-20260820",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-transition-state",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-20T12:27:53+08:00",
+  "recorded_at": "2026-08-20T04:27:53Z",
+  "summary": "The six-sample independent AQCat25 TS-domain bootstrap was explicitly reviewed and registered for the exact checkpoint, SIGMA=0.20 eV compatibility hash, and Fe(110) C*+H*->CH* path neighborhood; the controller is now ready for work-side VASP refinement strategy selection.",
+  "payload": {
+    "objective": "Use the calibrated complete GPU path evidence to select the least-cost reliable VASP refinement route for Fe(110) C*+H*->CH*.",
+    "phase": "active",
+    "current_evidence": [
+      "The registered checkpoint SHA-256 is e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50.",
+      "The registered SIGMA=0.20 eV compatibility SHA-256 is f4132ca1e3309f73b2327cc548be032b8f8f9e3439a33c17fcdf7d3c7873aed6.",
+      "The accepted force limits are component MAE 0.05, vector RMSE 0.15, vector P95 0.30, and vector maximum 0.45 eV/A.",
+      "All limits cover the six-sample measured errors and remain within the configured safety ceilings 0.10, 0.20, 0.60, and 0.60 eV/A.",
+      "Calibration scope is restricted to the Fe(110) C*+H*->CH* bond-forming path neighborhood on true_fe110_5layer_5x5x1; it does not automatically transfer to other hydrogenation reactions or compatibility branches.",
+      "The active-learning state is ml_acceleration_ready_for_vasp_refinement with the calibration and review hashes embedded.",
+      "The accepted thresholds, review, calibrated state, and registry review were appended to data/project_registry.sqlite3.",
+      "No GPU fine-tuning, ML-NEB rerun, VASP NEB/CI-NEB/DIMER, frequency, connectivity, or barrier calculation was submitted."
+    ],
+    "one_executable_step": "Run the unified work-side strategy review over the calibrated GPU path, continuity evidence, peak neighborhood, and exact VASP force labels to choose ordinary/micro-NEB, CI-NEB, or DIMER; prepare the chosen route for review without submitting it.",
+    "submission_boundary": "Calibration registration authorizes strategy selection only; any new GPU or VASP calculation still requires its normal review, execution gate, and explicit submission authorization.",
+    "done_when": [
+      "The calibrated GPU path and exact VASP label evidence produce one hash-bound refinement recommendation through the unified TS strategy rules.",
+      "The recommended VASP route passes structure, path-continuity, compatibility, and execution-gate preflight.",
+      "The user reviews the prepared VASP refinement inputs before submission."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/active_learning_sigma0p20/ts_domain_calibration_threshold_basis.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/active_learning_sigma0p20/ts_domain_calibration_review.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/active_learning_sigma0p20/active_learning_state.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/active_learning_sigma0p20/registry_ts_domain_calibration_receipt.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/active_learning_sigma0p20/ts_domain_calibration_threshold_basis.json",
+      "sha256": "0ed7cca54fbc4382d3f025da47d5c6ecb53d65396fb758e36cac9e207ca3dd34",
+      "authority": "module_validation",
+      "observed_at": "2026-08-20T12:27:53+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/active_learning_sigma0p20/ts_domain_calibration_review.json",
+      "sha256": "9369f91909668d70c18636e3e64e401a51525046a30e46972f2dc0c923bb741e",
+      "authority": "module_validation",
+      "observed_at": "2026-08-20T12:27:53+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/active_learning_sigma0p20/active_learning_state.json",
+      "sha256": "6188dad830c0c03896e05234901b301371394994d3d5fe3b412d442cc84e7565",
+      "authority": "module_validation",
+      "observed_at": "2026-08-20T12:27:53+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/active_learning_sigma0p20/registry_ts_domain_calibration_receipt.json",
+      "sha256": "2191f1b7006d46b4020ae76e4c366d5cfe33263f988d9c0c48e512627fabebc4",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-20T12:27:53+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-heldout-domain-bootstrap-ready-job1278-20260820"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

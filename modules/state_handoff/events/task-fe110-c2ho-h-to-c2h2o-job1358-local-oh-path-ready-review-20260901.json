@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-job1358-local-oh-path-ready-review-20260901",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-01T21:48:45.0709108+08:00",
+  "recorded_at": "2026-09-01T13:48:45.0713676Z",
+  "summary": "Job 1358 restart images 04-06 were audited and rebuilt as an unsubmitted eight-image local O-H path. Original image 05 was replaced by six exact O-H waypoints; numeric, VTST, and visual continuity checks pass and the package awaits user review.",
+  "payload": {
+    "objective": "Obtain user structure review of the rebuilt local O-H bond-formation path between job 1358 restart images 04 and 06; do not submit a calculation yet.",
+    "phase": "active",
+    "current_evidence": [
+      "Job 1358 restart images 04, 05, and 06 are individually collision-free and preserve C1-C2, C2-O, and C1-H48; the prior failure came from uneven adjacent motion rather than one invalid isolated structure.",
+      "Original image 05 was not retained. Images 04 and 06 bound a new local path with six exact O47-H49 waypoints at 2.45, 2.20, 1.95, 1.70, 1.45, and 1.25 A.",
+      "The rebuilt eight-image O-H sequence decreases strictly from 2.690028 to 1.136496 A and contains four local images in the 1.1-1.8 A review interval.",
+      "Maximum adjacent movable-atom RMSD is 0.049684 A, maximum single-atom step is 0.260817 A, maximum dist.pl value is 0.281056 A, and the minimum nonbonded separation is 1.45 A.",
+      "Atom order, cell, Fe 0-17 fixed mask, fixed coordinates, preserved adsorbate bonds, and sequential periodic branch pass.",
+      "Top and side visual review shows smooth O-H closure without framework inversion, fragmentation, surface penetration, or desorption; apparent top-view H wrapping is a periodic-display artifact.",
+      "The local boundaries are ML restart structures, not independently relaxed minima. The package is a kinematic predicted-path seed only and has no ML/VASP energy or force evidence."
+    ],
+    "one_executable_step": "Present the rebuilt local 04-to-06 path and its structure table to the user for acceptance or requested edits; do not upload or submit it.",
+    "submission_boundary": "No GPU, VASP, ML-CI, Dimer, frequency, retry, or barrier action is authorized by this construction review.",
+    "done_when": [
+      "The user accepts the rebuilt local path or requests a concrete geometry change.",
+      "Any later execution receives separate explicit authority and a current hash-bound execution gate."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/local_oh_rebuild_images04_06_20260901/structure_review.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/local_oh_rebuild_images04_06_20260901/visual_review.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/local_oh_rebuild_images04_06_20260901/path_review_draft.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/local_oh_rebuild_images04_06_20260901/structure_review.json",
+      "sha256": "ec16ab62f7a79dcfb8e0c3d21ba39ff44ffd2f3d19d2f61178942699d7aa41c3",
+      "authority": "module_validation",
+      "observed_at": "2026-09-01T21:48:45.0709108+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/local_oh_rebuild_images04_06_20260901/visual_review.work.json",
+      "sha256": "ca69eb793c0df85d1b22eee2e123f5b6917f856453d1dba69c220b60aec51fe0",
+      "authority": "module_validation",
+      "observed_at": "2026-09-01T21:48:45.0709108+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/local_oh_rebuild_images04_06_20260901/path_review_draft.json",
+      "sha256": "956e522db206bbdcf1026491b9666a08a94f2392a662199c36bdd34ae15f0573",
+      "authority": "repository_document",
+      "observed_at": "2026-09-01T21:48:45.0709108+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-split-gpu-1357-complete-1358-failed-20260901"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

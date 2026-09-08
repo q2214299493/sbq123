@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "event_id": "module-gate-fe110-co-connectivity-needs-review-20260806",
+  "event_type": "module_gate_changed",
+  "entity": {
+    "kind": "module",
+    "id": "transition_state_search",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-06T14:46:12+08:00",
+  "recorded_at": "2026-08-06T14:46:12+08:00",
+  "summary": "Block TS promotion pending review of endpoint-site equivalence in the completed connectivity branches.",
+  "payload": {
+    "module": "transition_state_search",
+    "status": "Blocked",
+    "depends_on": "reviewed endpoint-site equivalence for the converged positive and negative connectivity branches",
+    "current_gate": "Jobs `9695455` and `9695456` are complete and converged, but automatic contract-bound classification is `NEEDS_REVIEW` because both final structures exceed reaction-atom endpoint-coordinate tolerances. Connectivity, TS validation, Grade A, and barrier reporting remain blocked"
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/connectivity_from_dimer9656664_mode6_amp0p10_20260805/bidirectional_connectivity_report.json",
+      "sha256": "cb72a8ae7c51fd43bcdd13b7d7802a15b8eb1608aec886a2acc8b247df1f3f4b",
+      "authority": "module_validation",
+      "observed_at": "2026-08-06T14:46:12+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/connectivity_from_dimer9656664_mode6_amp0p10_20260805/validation_pipeline_status.json",
+      "sha256": "286f0609546aea1885e4500ecdcb66459bdf06a805d7ddbd0a12f454427f36f2",
+      "authority": "module_validation",
+      "observed_at": "2026-08-06T14:46:12+08:00"
+    }
+  ],
+  "supersedes": ["module-gate-fe110-co-connectivity-20260805"],
+  "review": {"required": false, "reason_codes": [], "status": "not_required"}
+}

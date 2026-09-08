@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-active-learning-heldout-gpu-complete-20260827",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-27T12:23:34.0453900+08:00",
+  "recorded_at": "2026-08-27T04:23:34.0460312Z",
+  "summary": "Held-out frozen MatRIS/AQCat25 prediction job 1326 completed successfully on MZ73 and its seven exact-structure predictions were collected; the seven compatible VASP labels remain in progress or queue.",
+  "payload": {
+    "objective": "Complete the seven-structure held-out MatRIS/AQCat25 versus VASP validation without training leakage.",
+    "phase": "active",
+    "current_evidence": [
+      "MZ73 producer record for Slurm job 1326 reports status success and exit code 0.",
+      "Collected predictions_1326.json binds the approved request hash and contains exactly the seven accepted sample IDs with primary MatRIS and secondary AQCat25 predictions.",
+      "At the latest scheduler checkpoint, VASP jobs 9731537-9731540 were RUN and 9731541-9731543 were PEND.",
+      "held_boundary_12 remains diagnostic-only and is excluded from the primary six-structure aggregate.",
+      "No fine-tuning or TS-production action is authorized."
+    ],
+    "one_executable_step": "Wait for VASP jobs 9731537-9731543 to finish, collect and quality-check their exact-structure static outputs, then compute frozen MatRIS-VASP and AQCat25-VASP held-out errors.",
+    "submission_boundary": "No new submission is authorized. MatRIS fine-tuning, checkpoint promotion, complete-path rerun, micro-NEB, Dimer, TS, frequency, and barrier actions remain unauthorized.",
+    "done_when": [
+      "All seven VASP jobs finish with complete quality-passed energy, force, and magnetization outputs.",
+      "Held-out errors are computed on the six primary disjoint structures and the boundary diagnostic is reported separately.",
+      "The result is classified without exceeding the evidence."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/heldout_validation_execution_20260827/gpu_prediction/output/predictions_1326.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/heldout_validation_execution_20260827/gpu_prediction/output/predictions_1326.producer_exit_record.1326.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/heldout_validation_execution_20260827/vasp_static_labels/batch_submission_record.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/active_learning_state.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/heldout_validation_execution_20260827/gpu_prediction/output/predictions_1326.json",
+      "sha256": "c895675becc96c36767f382b156b2dd6fff32cd44a6d88bb0397570b3051df2e",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-27T12:23:34.0453900+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/heldout_validation_execution_20260827/gpu_prediction/output/predictions_1326.producer_exit_record.1326.json",
+      "sha256": "bf16a973525b71ed4a6058e6d0a6a0e73d9af6032b295b7af93cd9069ea9a31f",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-27T12:23:34.0453900+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/active_learning_state.json",
+      "sha256": "be215bef264ba5ad0b77e74a46a68a4734b526c5bc30b565bb39f764c5b409a0",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T12:23:34.0453900+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-active-learning-heldout-validation-submitted-20260827"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-aqcat25-final-two-running-20260823",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "adsorption_workflow"
+  },
+  "occurred_at": "2026-08-23T11:19:51+08:00",
+  "recorded_at": "2026-08-23T03:19:51Z",
+  "summary": "The final two one-hour AQCat25 replacement jobs 1292-1293 were already submitted and are now running on MZ73; four of six candidate returns remain completed and validated.",
+  "payload": {
+    "objective": "Complete and review six MZ73 AQCat25 endpoint pre-relaxations for [CH][C][O]* + H* -> [CH][C]OH* + * before any VASP action.",
+    "phase": "active",
+    "current_evidence": [
+      "Jobs 1292 and 1293 were submitted at 11:16:36 CST and both started at 11:16:57 CST, only 21 seconds later.",
+      "Both jobs are RUNNING with one-hour limits and have loaded the AQCat25 HydraModel; neither has reported an LBFGS step yet.",
+      "Four other candidates are already converged and work-side return-validated."
+    ],
+    "one_executable_step": "Wait for jobs 1292 and 1293 to finish, return and validate both artifacts, then complete six-structure geometry, chemistry, site, and duplicate review.",
+    "submission_boundary": "No additional GPU submission or any VASP/TS action is authorized.",
+    "done_when": [
+      "Jobs 1292 and 1293 have terminal evidence and validated returns.",
+      "All six candidates have a complete comparative review before VASP selection."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_pre_relaxation/runtime_checkpoint_20260823T111951.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_pre_relaxation/runtime_checkpoint_20260823T111951.json",
+      "sha256": "8b411a2f97be7087477c9fc52894932b2165da33e1667d4426cd43b262e82f75",
+      "authority": "scheduler",
+      "observed_at": "2026-08-23T11:19:51+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-aqcat25-four-complete-two-retried-20260823"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

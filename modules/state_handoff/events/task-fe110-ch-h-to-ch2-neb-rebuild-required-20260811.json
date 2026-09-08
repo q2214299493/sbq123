@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-ch-h-to-ch2-neb-rebuild-required-20260811",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-ch-h-to-ch2-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-11T11:43:10+08:00",
+  "recorded_at": "2026-08-11T03:43:10Z",
+  "summary": "Ordinary-NEB job 9704689 is DONE, but the three-image path is underresolved and the execution gate allows only REBUILD_PATH.",
+  "payload": {
+    "objective": "Run the gated Fe(110) CH* + H* -> CH2* + * transition-state workflow from the accepted A initial state to the compatible optimized CH2* final state.",
+    "phase": "active",
+    "current_evidence": [
+      "Production ordinary-NEB job `9704689` is scheduler DONE; all three internal images ended normally and were electronically converged after 49 ionic steps.",
+      "Final atomic forces are `0.047513`, `0.048004`, and `0.045990 eV/A`; final NEB forces are `0.078490`, `0.079282`, and `0.057911 eV/A`, so the maximum NEB force remains above the configured `0.05 eV/A` target.",
+      "The geometry gate reports raw periodic-branch discontinuities for Fe atoms 19-21. Minimum-image review shows these are coordinate wrapping with physical displacements below `0.009 A`, not actual Fe jumps.",
+      "The independent path-quality evaluator reports `UNDERRESOLVED_REACTION_COORDINATE`: the C45-H47 coordinate changes by `0.712926 A` between images 01 and 02, and that important interval is unsampled.",
+      "The current hash-bound execution decision is `STOP_DATA_INTEGRITY`; its only allowed action is `REBUILD_PATH`. CI-NEB, DIMER, TS acceptance, and barrier reporting are forbidden."
+    ],
+    "one_executable_step": "Rebuild a denser full IS-to-FS path with extra sampling across the image-01/image-02 C-H interval and a consistent raw periodic branch, then repeat dist.pl, nebmovie.pl 0, geometry/path review, and the same-path pilot gate before any new VASP submission.",
+    "submission_boundary": "Do not continue the completed job or submit CI-NEB, DIMER, frequency, connectivity, or a new NEB until a rebuilt path passes review and the refreshed execution gate explicitly allows the exact action.",
+    "done_when": [
+      "The ordinary NEB produces a technically usable reaction path or a gate-supported method handoff.",
+      "Any highest-image TS candidate is refined and validated through the owning module before a barrier claim.",
+      "IS, TS, and FS results remain compatible and hash-bound; no free-energy or kinetics claim is made without separate thermochemical work."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_3img_v2/scheduler_evidence.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_3img_v2/neb_analysis.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_3img_v2/path_geometry_diagnosis.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_3img_v2/neb_path_quality.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_3img_v2/ts_search_decision.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_3img_v2/scheduler_evidence.json",
+      "sha256": "ff9c184ef5f7ee0c53d3c1e43c7884de514e8e66bf939ed186b140735a3de8a0",
+      "authority": "scheduler",
+      "observed_at": "2026-08-11T11:43:10+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_3img_v2/neb_analysis.json",
+      "sha256": "142923e4ace0677f1403f44d43a97d7eedfd4faf5f7938585c7396fbc235eb04",
+      "authority": "module_validation",
+      "observed_at": "2026-08-11T11:43:10+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_3img_v2/path_geometry_diagnosis.json",
+      "sha256": "9c1f9784a4a1e339c9f50403e8b671c8521a137ca77562cfceb79040617c9847",
+      "authority": "module_validation",
+      "observed_at": "2026-08-11T11:43:10+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_3img_v2/neb_path_quality.json",
+      "sha256": "af5cf0623aaf06dcd8a704c6951b98dc4b01afea8892c938a9230dcf0e71bc76",
+      "authority": "module_validation",
+      "observed_at": "2026-08-11T11:43:10+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_3img_v2/ts_search_decision.json",
+      "sha256": "bbabc692ae0ed2910979003ea781fcec5947abbacff1ffabc05f94eebfefc373",
+      "authority": "module_validation",
+      "observed_at": "2026-08-11T11:43:10+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-ch-h-to-ch2-ordinary-neb-9704689-20260810"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

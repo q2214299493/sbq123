@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-dimer-9720181-done-soft-review-20260821",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-transition-state",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-21T11:11:10+08:00",
+  "recorded_at": "2026-08-21T03:11:10Z",
+  "summary": "Dimer job 9720181 is DONE and passes normal/electronic completion, VASP maximum-force convergence, negative curvature, geometry, provenance, and final-mode review; frequency handoff remains blocked only by the explicit DIMCAR Force/Torque soft-residual review.",
+  "payload": {
+    "objective": "Resolve the hash-bound Dimer soft-residual review for Fe(110) C* + H* -> CH* + * before preparing the target-mode local Hessian validation.",
+    "phase": "active",
+    "current_evidence": [
+      "LSF job 9720181 is DONE with a Schema-validated scheduler record; OUTCAR has normal completion, no fatal keywords, and final electronic convergence at EDIFF=1e-7 eV.",
+      "The last complete OUTCAR FORCES record is max atom 0.017918 eV/A and RMS 0.006706 eV/A, so the hard VASP force gate passes the 0.02 eV/A target.",
+      "The final complete DIMCAR curvature is -4.07544 eV/A^2 and the accepted NEWMODECAR remains the intended C45-H46 bond-forming mode; the canonical Dimer analysis is TECHNICALLY_CONVERGED_SOFT_REVIEW_REQUIRED.",
+      "Final geometry review passes: C-H is 1.45046 A, nearest C-Fe is 1.80694 A, nearest H-Fe is 1.69023 A, bottom 18 Fe remain fixed, and no contact below 1.0 A or independent site/mechanism switch is present.",
+      "The final mode is normalized, fixed components are zero, C45/H46 carry 0.954506 of its norm, and its absolute cosine with the initial accepted MODECAR is 0.940425.",
+      "DIMCAR Force 0.07983 eV/A and Torque 0.13710 eV/A exceed their soft targets 0.02 and 0.01 eV/A despite decreasing trends; an explicit hash-bound accept/reject decision is required before frequency handoff.",
+      "The provisional final OUTCAR TOTEN is -367.71324606 eV under the compatible SIGMA=0.20 eV convention; it is registered but is not yet an accepted TS energy or barrier."
+    ],
+    "one_executable_step": "Obtain an explicit hash-bound decision on accepting or rejecting the residual DIMCAR Force/Torque for frequency handoff; do not submit a local Hessian job until that decision exists.",
+    "submission_boundary": "No new VASP job is authorized. Do not launch frequency/connectivity calculations, restart Dimer, claim a TS, or report a barrier before the soft-residual decision and the corresponding current execution gate.",
+    "done_when": [
+      "The Dimer soft residuals are explicitly accepted or rejected with current hashes and scientific reasoning.",
+      "If accepted, the saddle passes a contract-defined local Hessian calculation with exactly one accepted target imaginary mode before a TS claim.",
+      "Compatible IS/TS/FS final OUTCAR TOTEN values are separately reviewed before any electronic barrier is reported."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/scheduler_evidence.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/dimer_analysis.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/final_mode_review.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/CONTCAR`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/NEWMODECAR`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/scheduler_evidence.json",
+      "sha256": "310b911d34d9c28477df3932083e26e94d05d532b5bd1f32398387e1c766a491",
+      "authority": "scheduler",
+      "observed_at": "2026-08-21T11:09:59+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/dimer_analysis.json",
+      "sha256": "264dde717ee0437b1d950046ee8f3ef5d3585e513fb9a58b6ab632a8daec96e7",
+      "authority": "module_validation",
+      "observed_at": "2026-08-21T11:11:10+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/final_mode_review.json",
+      "sha256": "c42aa2905b9d073ade62290869c2143fe3970305eeb039bc79e68f6edf65e3d5",
+      "authority": "module_validation",
+      "observed_at": "2026-08-21T11:11:10+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/registry_completion_receipt.json",
+      "sha256": "a0c796de8a2b94ba45a7ca260902dfe5ff320d34bfcb69bd3f837074b9cacd61",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-21T11:11:10+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-dimer-9720181-running-20260820"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "event_id": "module-gate-transition-state-search-job9742743-pilot-optional-20260904",
+  "event_type": "module_gate_changed",
+  "entity": {
+    "kind": "module",
+    "id": "transition_state_search",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-04T11:34:14+08:00",
+  "recorded_at": "2026-09-04T03:34:14Z",
+  "summary": "Bind transition_state_search to formal ordinary micro-NEB job 9742743 and the user-approved optional-pilot policy.",
+  "payload": {
+    "module": "transition_state_search",
+    "status": "Active",
+    "depends_on": "reviewed endpoints and path, VASP ordinary micro-NEB, completed-path validation",
+    "current_gate": "Formal 80-core local VASP ordinary micro-NEB job `9742743` is submitted on `sunboquan-codex` for the reviewed seven-image O-H local path with five internal images, `NSW=300`, and `LCLIMB=false`. Monitor it to `DONE` or `EXIT`, then run completed-path electronic, force, geometry, and scientific review before any CI-NEB or Dimer decision. By explicit user decision, ordinary-NEB pilots are optional diagnostics and are not a universal submission prerequisite; any supplied pilot evidence remains strictly validated"
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_formal80_20260904/submission_record.json",
+      "sha256": "f1578dfbd806542ba1f00d03d03c2e8076fe87b39e1a1df4070d4b5e23578a96",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-04T11:34:14+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_formal80_20260904/scheduler_evidence.json",
+      "sha256": "6c4788ca3c122e64e4a8acb7916c280b36399640f1bf2435a8601d1407bb243a",
+      "authority": "scheduler",
+      "observed_at": "2026-09-04T11:34:14+08:00"
+    },
+    {
+      "locator": "modules/transition_state_search/README.md",
+      "sha256": "d21511c838806b1f3356cf76f40ad6668e49e70a9d2e1f4827886ec549218e0d",
+      "authority": "repository_document",
+      "observed_at": "2026-09-04T11:34:14+08:00"
+    }
+  ],
+  "supersedes": [
+    "module-gate-transition-state-search-job1327-failed-rebuild-required-20260827"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

@@ -1,0 +1,45 @@
+version: 5
+strategy_transfer_threshold: 0.60
+# Backward-compatible key for callers that have not yet adopted the split
+# strategy/result transfer fields.
+template_transfer_threshold: 0.60
+priority_families:
+  co_dissociation:
+    aliases: [CO_dissociation]
+    broken_bonds: [C-O]
+    waypoint_strategy: [molecular_CO, tilted_or_lying_CO, elongated_CO, coadsorbed_C_plus_O]
+    interpolation_strategy: segmented_idpp
+    initial_images: 3
+    vasp_candidate_methods: [ordinary_neb, ci_neb, gpu_ml_neb_vasp_validated_triad]
+    dimer_usage: refine_only_after_reviewed_vasp_neb_or_vasp_validated_gpu_path_candidate
+  c_o_cleavage:
+    aliases: [CHO_cleavage, C2O_cleavage]
+    broken_bonds: [C-O]
+    waypoint_strategy: [adsorbed_reactant, bent_or_elongated_CO, separated_fragments]
+    interpolation_strategy: segmented_idpp
+    initial_images: 3
+    vasp_candidate_methods: [ordinary_neb, ci_neb, gpu_ml_neb_vasp_validated_triad]
+    dimer_usage: conditional_refinement
+  hydrogen_transfer:
+    aliases: [CHx_dehydrogenation, OH_dissociation]
+    waypoint_strategy: [donor_bound_H, shared_H, acceptor_bound_H]
+    interpolation_strategy: segmented_idpp
+    initial_images: 3
+    vasp_candidate_methods: [ordinary_neb, ci_neb, gpu_ml_neb_vasp_validated_triad]
+    dimer_usage: conditional_refinement
+  c_c_coupling:
+    aliases: [CHx_CHy_coupling]
+    formed_bonds: [C-C]
+    waypoint_strategy: [separate_fragments, aligned_carbons, coupled_product]
+    interpolation_strategy: segmented_idpp
+    initial_images: 3
+    vasp_candidate_methods: [ordinary_neb, ci_neb, gpu_ml_neb_vasp_validated_triad]
+    dimer_usage: conditional_refinement
+  co_insertion:
+    aliases: [oxygenate_formation]
+    formed_bonds: [C-C]
+    waypoint_strategy: [coadsorbed_reactants, insertion_alignment, oxygenate_product]
+    interpolation_strategy: segmented_idpp
+    initial_images: 3
+    vasp_candidate_methods: [ordinary_neb, ci_neb, gpu_ml_neb_vasp_validated_triad]
+    dimer_usage: conditional_refinement

@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-neb9742743-done-unconverged-20260906",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-06T19:07:05+08:00",
+  "recorded_at": "2026-09-06T11:07:05Z",
+  "summary": "Formal ordinary micro-NEB job 9742743 reached scheduler DONE with normal electronic termination, but all five internal images exhausted NSW=300 and the maximum final NEB force remained 0.194127 eV/Angstrom. The completed path is not force-converged or TS-ready; its O-H reaction coordinate is monotonic but under-resolved between images 01 and 02, and non-reaction atoms still require periodic-branch normalization before formal geometry acceptance.",
+  "payload": {
+    "objective": "Repair and locally refine the completed job-9742743 O-H path before any CI-NEB, Dimer, TS, or barrier action.",
+    "phase": "active",
+    "current_evidence": [
+      "LSF job 9742743 is DONE; images 01-05 contain complete CONTCAR, OUTCAR, and OSZICAR files with normal termination and no detected fatal VASP keyword.",
+      "All five internal images reached 300 ionic steps. The maximum final NEB force is 0.194127 eV/Angstrom at image 02, above the 0.05 eV/Angstrom target; the path is therefore not force-converged.",
+      "Final O-H distances across images 00-06 are 2.6245, 2.0323, 1.1133, 0.9988, 0.9816, 0.9845, and 0.9853 Angstrom. Bond formation is monotonic overall, but the 01-to-02 change is about 0.919 Angstrom and is under-resolved around the highest internal-energy region.",
+      "The completed geometry diagnosis reports no collision and no reaction-atom periodic shift, but stops on raw fractional-coordinate branch discontinuities for several non-reaction atoms; fixed atoms 0-17 remain preserved.",
+      "nebmovie.pl 1 completed successfully from final CONTCAR files and the resulting movie was collected for review.",
+      "The energy profile remains interim and cannot be reported as a barrier because endpoint OUTCAR energies are not part of this completed NEB bundle and no TS has been validated."
+    ],
+    "one_executable_step": "Normalize the non-reaction periodic-coordinate branches and prepare a reviewed local image-01-to-image-03 densification around O-H bond formation, then compute a new hash-bound execution gate; do not submit it without explicit user authority.",
+    "submission_boundary": "Job 9742743 is finished and its prior authorization is consumed. Do not retry, rebuild, start CI-NEB or Dimer, accept a TS, or report a barrier without new user authority and a current hash-bound gate.",
+    "done_when": [
+      "The periodic-coordinate branches are normalized without changing the physical minimum-image geometry.",
+      "The image-01-to-image-03 O-H bond-formation region has reviewed continuous local sampling.",
+      "A current execution gate selects an allowed next refinement action."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_formal80_20260904/scheduler_evidence_done_20260906.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/completed_review_job9742743_20260906/neb_analysis.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/completed_review_job9742743_20260906/path_geometry_diagnosis.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/completed_review_job9742743_20260906/nebmovie_contcar_movie.vasp`",
+      "`modules/transition_state_search/README.md`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_formal80_20260904/scheduler_evidence_done_20260906.json",
+      "sha256": "99603453e642b0c124756f992e08bb1de3ff5b22c273bfc5236397a7931ccfda",
+      "authority": "scheduler",
+      "observed_at": "2026-09-06T19:07:05+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/completed_review_job9742743_20260906/neb_analysis.json",
+      "sha256": "39812a723f299476e430f126583473bd2ceaed9fc1020cd403edc8cf2430c49c",
+      "authority": "module_validation",
+      "observed_at": "2026-09-06T19:07:05+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/completed_review_job9742743_20260906/path_geometry_diagnosis.json",
+      "sha256": "7731fa6d4342703d43c826b596fef3d120ae99ecbe1e3e3abbf740b7f756988d",
+      "authority": "module_validation",
+      "observed_at": "2026-09-06T19:07:05+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/completed_review_job9742743_20260906/nebmovie_contcar_movie.vasp",
+      "sha256": "ccdc2c2647f32d230901fba6baf8555096fae96c3d10839a85b66619ebabe0b0",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-06T19:07:05+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-learning-extension-code-binding-20260905",
+    "task-fe110-c2ho-h-to-c2h2o-public-source-release-20260906"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

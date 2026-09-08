@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v7-reparameterized-prepared-20260828",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-28T00:03:56.4153555+08:00",
+  "recorded_at": "2026-08-27T16:03:56.4161385Z",
+  "summary": "A review-only v7 MatRIS path package now uses immutable initial restraint targets, graded transient O-H rollback evidence, explicit O-H reaction-coordinate redistribution after every restrained stage, and a stronger unrestrained ordinary-NEB spacing spring; strength-4 replay passes all local geometry gates and no job was submitted.",
+  "payload": {
+    "objective": "Review the exact v7 request and decide whether to authorize a separate MZ73 preflight and one bounded GPU execution.",
+    "phase": "active",
+    "current_evidence": [
+      "The v6 root cause was cumulative retargeting: each release stage adopted the already drifted current path as its next restraint target.",
+      "The v7 executor can bind every release stage to immutable initial-request targets and redistributes the full minimum-image path after each restrained stage using O-H boundary anchors at images 09 and 15 plus five strict interval anchors at images 10-14.",
+      "Transient O-H rollback is graded as pass <=0.05 A, borderline warning from 0.05-0.07 A, and strong-warning/stop-candidate above 0.07 A; one rollback scalar alone no longer produces automatic scientific failure.",
+      "The final unrestrained path still has a hard whole-path 0.01 A monotonicity limit and strict-pass/borderline-review interval coverage, so the softer transient classification does not weaken final path acceptance.",
+      "Replay on job 1328's completed strength-4 snapshot restores strict O-H interval images 10-14; maximum adjacent RMSD is 0.195354 A, maximum movable-atom step is 0.862488 A, minimum pair distance is 0.977781 A, C1-C2 and PBC pass, and the largest exact O-H correction is 0.006133 A.",
+      "All temporary restraints are configured for removal before ordinary MatRIS ML-NEB; the ordinary image-spacing spring is 0.50 eV/A2 and the redistributed restrained stages remain path-preparation artifacts rather than MEPs.",
+      "No remote preflight, upload, GPU execution, VASP/VTST submission, Dimer, TS, barrier, fine-tuning, or automatic retry was performed."
+    ],
+    "one_executable_step": "Review request SHA-256 949f9888b1313cf9eec0192683e239d08cab98bfb88e6a3e11aeee74a6735210; any remote preflight or GPU execution requires a new explicit user authorization.",
+    "submission_boundary": "The v7 package is review-only. Do not upload, run a remote preflight, submit GPU/VASP/VTST work, fine-tune, prepare Dimer, or claim a TS/barrier without the corresponding explicit authorization and current gates.",
+    "done_when": [
+      "The user accepts or rejects the exact hash-bound v7 design.",
+      "If accepted, a separately authorized MZ73 preflight validates runtime, checkpoint, image, and executor hashes before any execution decision."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v7_reparameterized_20260827/release_redistribution_review.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v7_reparameterized_20260827/work_to_gpu/request.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v7_reparameterized_20260827/strength4_redistribution_replay/redistribution_evidence.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v7_reparameterized_20260827/release_redistribution_review.work.json",
+      "sha256": "db01ebc48d3408e02ef7d2a2059a90f75a5fe7b741c4dd1a9fca173bfb32f5c5",
+      "authority": "module_validation",
+      "observed_at": "2026-08-28T00:03:56.4153555+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v7_reparameterized_20260827/work_to_gpu/request.json",
+      "sha256": "949f9888b1313cf9eec0192683e239d08cab98bfb88e6a3e11aeee74a6735210",
+      "authority": "repository_document",
+      "observed_at": "2026-08-28T00:03:56.4153555+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v7_reparameterized_20260827/strength4_redistribution_replay/redistribution_evidence.json",
+      "sha256": "bf31bc44ba0b7de6f8fc31bc995b6c43d4c35d5a3f59b72738d573da645d0a96",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-28T00:03:56.4153555+08:00"
+    },
+    {
+      "locator": "scripts/dual_model_ml_neb.py",
+      "sha256": "b2e2796a6cc9d036ab7a5e9e0be6c67f6dbd9eb5ba7f31304bdaf16cdd021096",
+      "authority": "repository_document",
+      "observed_at": "2026-08-28T00:03:56.4153555+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v6-job1328-failed-20260827"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

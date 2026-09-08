@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-aqcat25-partial-timeout-20260823",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "adsorption_workflow"
+  },
+  "occurred_at": "2026-08-23T00:29:16+08:00",
+  "recorded_at": "2026-08-22T16:29:16Z",
+  "summary": "The six-job AQCat25 adsorption batch is not complete: FS-B job 1284 converged and passed return validation, jobs 1283/1285/1286 hit the 20-minute limit without result manifests, and jobs 1287/1288 remain running.",
+  "payload": {
+    "objective": "Complete and review six MZ73 AQCat25 endpoint pre-relaxations for [CH][C][O]* + H* -> [CH][C]OH* + * before any VASP action.",
+    "phase": "active",
+    "current_evidence": [
+      "FS-B job 1284 converged in 43 LBFGS steps with predicted fmax 0.036746 eV/A, connectivity pass, in-domain status, and a work-side validated GPU result manifest.",
+      "FS-B retained C1-C2=1.431188 A, C2-O=1.397291 A, C1-H=1.103752 A, and O-H=0.980217 A; C1-Fe and C2-Fe nearest distances are 2.020404 and 2.077710 A.",
+      "Jobs 1283, 1285, and 1286 were cancelled by the Slurm 20-minute time limit before a producer exit record or result manifest was written.",
+      "Jobs 1287 and 1288 are RUNNING; no terminal result exists for them yet."
+    ],
+    "one_executable_step": "Wait for jobs 1287 and 1288 to reach terminal state, collect and review any returned artifacts, then report the complete failure/success map; do not restart timed-out jobs without explicit user authorization.",
+    "submission_boundary": "No restart, replacement GPU job, VASP adsorption job, NEB, DIMER, frequency, or energy registration is authorized.",
+    "done_when": [
+      "Jobs 1287 and 1288 have terminal evidence.",
+      "Every available GPU return is hash-, geometry-, chemistry-, domain-, and duplicate-reviewed.",
+      "The user receives a complete recommendation for any restart and subsequent VASP candidate selection."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_pre_relaxation/runtime_checkpoint_20260823T002916.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_pre_relaxation/returned_from_mz73/FS_B_C2H2O_eta2_C1_C2_OH_up/output/job_1284/gpu_result_manifest.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_pre_relaxation/runtime_checkpoint_20260823T002916.json",
+      "sha256": "1e45ec19a29a40068750a8d625653d00999df0fc3bef3f09c8a04590e2cf946e",
+      "authority": "scheduler",
+      "observed_at": "2026-08-23T00:29:16+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_pre_relaxation/returned_from_mz73/FS_B_C2H2O_eta2_C1_C2_OH_up/output/job_1284/gpu_result_manifest.json",
+      "sha256": "7801fdb0192cfdf44393dbf31a84358758ddb302f47aa84fe15c445500a9277f",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-23T00:29:16+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-aqcat25-six-candidates-submitted-20260822"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

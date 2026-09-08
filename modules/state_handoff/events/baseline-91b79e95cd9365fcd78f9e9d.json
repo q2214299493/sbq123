@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "event_id": "baseline-91b79e95cd9365fcd78f9e9d",
+  "event_type": "baseline_adopted",
+  "entity": {
+    "kind": "state",
+    "id": "initial-managed-baseline",
+    "module": "state_handoff"
+  },
+  "occurred_at": "2026-08-02T00:00:00+08:00",
+  "recorded_at": "2026-08-02T07:40:55Z",
+  "summary": "Adopt the current task and current-gate block as the initial managed baseline.",
+  "payload": {
+    "task": {
+      "objective": "Build a completely new seven-interior-image segmented-IDPP path for Fe(110)\nCO dissociation from the accepted CO/top initial state to the independently\nconverged local C@long_bridge + O@hollow endpoint, then submit an ordinary\nno-climb coarse NEB only after all path and execution gates pass.",
+      "one_executable_step": "Monitor job `9654860` to terminal state. If it is `DONE`, pull and hash-bind all\nimage outputs, run pilot validation plus electronic/magnetic/geometry review,\nand submit the same-path coarse ordinary no-climb NEB only if every gate passes.\nIf it is `PEND/RUN`, do not submit another VASP job; if it is `EXIT`, preserve\nthe evidence and stop without automatic retry.",
+      "done_when": [
+        "The new path passes mapping, periodic, collision, C-O ordering, site-event, and fixed-Fe checks.",
+        "The same-path pilot passes electronic/output/immediate-geometry validation.",
+        "The ordinary no-climb coarse NEB is submitted through the sole executor and its job ID, scheduler state, remote path, and input hashes are verified."
+      ],
+      "submission_boundary": "The user authorized a first ordinary coarse NEB with `IMAGES=7`,\n`LCLIMB=.FALSE.`, and `SPRING=-5`. Submission still requires a same-path\none-step pilot, successful repository preflights, and a current hash-bound gate\ndecision that explicitly allows the action. Do not submit CI-NEB, DIMER,\nfrequency, or report a barrier.",
+      "current_evidence": [
+        "Compatibility branch: `true_fe110_5layer_5x5x1`.",
+        "Initial endpoint: matched-static CO/top `POSCAR`, calculation branch `fe110_co_dissociation_is_static_9631646`.",
+        "Final endpoint: job `9647798` converged in 61 ionic steps to `0.016035 eV/A`; its relaxed `CONTCAR` is byte-identical to the matched-static local-endpoint `POSCAR` with SHA-256 `22afe1e96a5729f403e28bb7a37295ab3cedbb6c5aad7069e76df6622e8a7642`.",
+        "The local endpoint is C@long_bridge + O@hollow with C-O `3.113135 A`. It is independently locally stable and has no unexpected bond/site event, but production endpoint use still requires the new IS-to-FS path-connectivity review.",
+        "Reaction contract: `calculations/fe110_co_dissociation_neb_20260718/contract/reaction_local_endpoint_9649924.yaml`.",
+        "The former image06/image07 recovery and all old NEB paths are superseded for path construction. Their structures and CONTCAR files must not seed or patch the new path.",
+        "Fresh segmented-IDPP path `path/plan_fresh_local_endpoint_segmented_idpp_7img_20260802/path_candidate` passed geometry and visual review. C-O is monotonic from `1.175632` to `3.113136 A`; maximum adjacent atomic displacement is `0.407280 A`, mobile Fe steps are below `0.045 A`, and all 18 fixed Fe remain exact.",
+        "The same-path `NSW=1`, 112-core pilot was submitted through the sole executor as LSF job `9654860` under `~/sbq/Fe110/ts/co_dissociation_topic1_20260718/ordinary_neb_7img_fresh_local_endpoint_idpp_pilot_np112_20260802`. It was scheduler `RUN` at the first post-submission check; no ionic result was yet available. Local/remote key-input and POTCAR hashes match."
+      ],
+      "authoritative_references": [
+        "Scientific and execution gates: `modules/transition_state_search/README.md`.",
+        "Numerical branch: `configs/true_fe110_production.yaml`.",
+        "Backend roles: `configs/execution_backends.yaml`.",
+        "Sole execution authority: `scripts/ts_strategy_engine/execution_gate.py`."
+      ]
+    },
+    "state_blocks": [
+      {
+        "block_id": "active-fe-110-co-dissociation-test-current-gate",
+        "section": "## Active Fe(110) CO Dissociation Test",
+        "source_heading": "### Current Gate — 2026-08-02 Evidence Snapshot",
+        "title": "Current Gate — 2026-08-02 Evidence Snapshot",
+        "facts": [
+          "Current workflow focus: image06 recovery job `9654834` is scheduler `DONE` but scientifically failed. VASP read the supplied WAVECAR; after DAV 29 the electronic charge residual `rms(c)` jumped from about `0.0359` to `15.3` at DAV 30, followed by `BRMIX`, subspace-matrix, and fatal `EDDDAV/ZHEGV`. CONTCAR is empty and there is no `TOTAL-FORCE` block. This is not an atomic force jump.",
+          "Job `9654240` is scheduler `EXIT`; it completed no ionic step after image06 failed with `BRMIX` plus fatal `EDDDAV/ZHEGV` and image07 exhausted `NELM=200`.",
+          "Image07 recovery remains blocked because image06 failed all terminal output and electronic gates. The hourly automation is paused. The 112-core pilot retry, `NSW=50` coarse NEB, and downstream TS actions remain blocked.",
+          "A conservative remote cleanup on 2026-08-02 removed 12 no-result top-level directories and hash-confirmed duplicate restart files, releasing about `10.52 GB`. Unique VASP outputs, accepted structures, representative failure evidence, and the canonical image05 high-spin restart pair were retained. The cleanup manifest and recoverable small-directory backup are under `archive/remote_ts_cleanup_20260802/`.",
+          "The user superseded all old image06/image07 path repair on 2026-08-02 and selected the independently converged local C@long_bridge+O@hollow product as the final endpoint for a completely new seven-interior-image path. Fresh constrained segmented IDPP produced a reviewed monotonic C-O sequence `1.176, 1.277, 1.440, 1.686, 2.000, 2.252, 2.525, 2.813, 3.113 A` with maximum adjacent displacement `0.407 A`, continuous Fe coordination, no periodic jump, and exact fixed bottom 18 Fe. Same-path `NSW=1`, 112-core ordinary no-climb pilot job `9654860` is scheduler `RUN` under `~/sbq/Fe110/ts/co_dissociation_topic1_20260718/ordinary_neb_7img_fresh_local_endpoint_idpp_pilot_np112_20260802`. Coarse NEB submission remains conditional on the completed pilot gate."
+        ]
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "tasks/current_task.md",
+      "sha256": "d7223998fb4fd1d2db8311794c18865443018f07b1d4af84ec0fe15b18679684",
+      "authority": "repository_document",
+      "observed_at": "2026-08-02T07:40:55Z"
+    },
+    {
+      "locator": "docs/02_CURRENT_STATE.md",
+      "sha256": "384b9f625a40ece8dd7fe002ca43ab6c21ea88a21cd9cc6d26d2b95c24142373",
+      "authority": "repository_document",
+      "observed_at": "2026-08-02T07:40:55Z"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "initial_managed_view_adoption"
+    ],
+    "status": "pending"
+  }
+}

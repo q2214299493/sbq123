@@ -1,0 +1,25 @@
+name: Repository validation
+
+on:
+  pull_request:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      JAX_PLATFORMS: cpu
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: python -m pip install -e ".[dev,neb,sella]"
+      - run: python -c "import sella; from pymatgen.io.vasp.inputs import Incar"
+      - run: python -m ruff check scripts modules tests
+      - run: python -m pytest -o addopts= -q

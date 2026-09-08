@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-job1344-dual-model-prediction-completed-reviewed-20260828",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-28T20:25:22+08:00",
+  "recorded_at": "2026-08-28T12:25:22Z",
+  "summary": "MZ73 retry job 1344 completed the exact eight-structure MatRIS/AQCat25 fixed prediction batch after passing a physical-GPU free-memory gate; work-side review verified all structure/checkpoint hashes and complete finite 50x3 force arrays.",
+  "payload": {
+    "objective": "Obtain VASP force labels on the same eight reviewed seed/fail structures so MatRIS-VASP and AQCat25-VASP errors can distinguish model error from path/geometry failure.",
+    "phase": "active",
+    "current_evidence": [
+      "The user separately authorized one retry of the unchanged eight-structure GPU prediction request.",
+      "The retry bound physical GPU UUID GPU-483c224e-cc19-13e2-24ad-c83efd14fa75 and required at least 14000 MiB free at runtime; the preflight observed 15987 MiB free.",
+      "Slurm job 1344 completed on MZ73 with ExitCode 0:0 in 14 seconds, and the producer exit record reports success.",
+      "The returned set contains exactly eight unique requested structure hashes and the frozen MatRIS and AQCat25 checkpoint hashes.",
+      "Both models returned finite energies and complete 50x3 all-atom force arrays for every structure.",
+      "The largest movable-force model-model disagreement is seed_13 with vector RMSE 0.19768059002625307 eV/A and vector maximum 0.7031833832264708 eV/A.",
+      "Model-model disagreement is a VASP-label sampling score only; it is not calibrated uncertainty, a DFT result, or a TS/path validity decision.",
+      "No VASP label, model fine-tuning, ML-NEB rerun, Dimer, TS, or barrier action was submitted."
+    ],
+    "one_executable_step": "After separate explicit user authorization, submit the already prepared hash-bound eight-structure SIGMA=0.20 eV VASP NSW=0 static-force label batch; do not fine-tune or rerun the path in the same action.",
+    "submission_boundary": "GPU job 1344 is complete. VASP labels, model fine-tuning, path rerun, micro-NEB, Dimer, TS, and barrier actions remain unauthorized.",
+    "done_when": [
+      "All eight matching VASP static-force labels finish with scheduler, normal-termination, electronic-convergence, complete-force, magnetic, structure-hash, and DFT-fingerprint evidence.",
+      "MatRIS-VASP and AQCat25-VASP errors are reviewed and a separate fine-tuning or path-method decision is recorded."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/predictions.retry2.job1344.review.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/predictions.retry2.job1344.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/job1344.scheduler_terminal.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/vasp_force_label_batch_request.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/job1344.scheduler_terminal.json",
+      "sha256": "2ca30030ef167d7336b3b584fa69d720a0216378e47f90a15f4867765a005d4a",
+      "authority": "scheduler",
+      "observed_at": "2026-08-28T20:25:22+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/predictions.retry2.job1344.json",
+      "sha256": "0a009b39e7fc152099f17817512c069bc3cc5d105fb0799a6ed7809fef8e6053",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-28T20:25:22+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/predictions.retry2.job1344.review.work.json",
+      "sha256": "ae66725f342dfe4cf5746e40c3159c0089bdec644d738f5b58a1f801f54ec7f8",
+      "authority": "module_validation",
+      "observed_at": "2026-08-28T20:25:22+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-job1343-dual-model-prediction-failed-gpu-oom-20260828"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

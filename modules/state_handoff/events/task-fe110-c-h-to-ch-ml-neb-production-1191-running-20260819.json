@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-ml-neb-production-1191-running-20260819",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-transition-state",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-19T13:04:40+08:00",
+  "recorded_at": "2026-08-19T05:04:40Z",
+  "summary": "User-authorized MZ73 AQCat25 production ML-NEB job 1191 is running with the reviewed C-H=1.70 A waypoint, nine images, ordinary ML-NEB followed only conditionally by ML-CI, and no VASP authority.",
+  "payload": {
+    "objective": "Run a resolved nine-image AQCat25 GPU ML-NEB candidate path for Fe(110) C* + H* -> CH* + * using the reviewed C-H=1.70 A waypoint, then return the complete path to work for review.",
+    "phase": "active",
+    "current_evidence": [
+      "The work-to-GPU handoff contains IS, the reviewed C-H=1.7000 A waypoint, and FS with C-H 2.9728, 1.7000, and 1.1063 A; five images per segment produce nine total images.",
+      "All structures preserve Fe45,C,H order, the exact cell and PBC, and the bottom-18 fixed mask. Local and remote handoff hashes match and remote schema validation passes.",
+      "MZ73 Slurm job 1191 started on MZ73 in RUNNING state with one GPU, four CPUs, 40G memory, and a two-hour limit.",
+      "The AQCat25 model loaded successfully. Ordinary ML-NEB reached startup step 2 with fmax decreasing from 3.9005 to 1.8892 eV/A; this is startup evidence only and not convergence or path acceptance.",
+      "ML-CI mode is auto and may run only after ordinary convergence plus the configured single-peak and continuity screens. The TS/path domain remains uncalibrated."
+    ],
+    "one_executable_step": "Monitor job 1191 to a terminal scheduler state, return its complete output through work, and run the canonical manifest plus structure/path review; do not finalize a Dimer parent or prepare/submit VASP automatically.",
+    "submission_boundary": "The user authorized only this MZ73 GPU ML-NEB job. No VASP NEB, CI-NEB, DIMER, frequency, force-label, restart, resubmission, or additional GPU job is authorized.",
+    "done_when": [
+      "Job 1191 reaches a terminal scheduler state and its producer record and complete output are collected.",
+      "If successful, the returned nine-image manifest and structures pass work-side hash, periodic mapping, local reaction-coordinate resolution, geometry, domain, and elementary-step review."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/submission_evidence.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/work_to_gpu/handoff.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/waypoints/CH_forming_1p70A/POSCAR`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/submission_evidence.json",
+      "sha256": "55c19c3d404dc3d4a9dcb3980720735b5738098a5b4a5abdb9a29b20a077497c",
+      "authority": "scheduler",
+      "observed_at": "2026-08-19T13:04:40+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/work_to_gpu/handoff.json",
+      "sha256": "325d3fb149ad38126ee7e74ae4b40532d27d044742bbf22cbee18b5aacba9d43",
+      "authority": "repository_document",
+      "observed_at": "2026-08-19T13:04:40+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-ml-neb-smoke-path-reviewed-20260819"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

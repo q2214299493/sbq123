@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "event_id": "task-acceptance-fe110-co-electronic-barrier-local-frequency-20260807",
+  "event_type": "task_acceptance_recorded",
+  "entity": {
+    "kind": "task_acceptance",
+    "id": "fe110-co-dissociation-acceptance-20260807",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-07T12:15:29+08:00",
+  "recorded_at": "2026-08-07T12:15:29+08:00",
+  "summary": "Accept and close the Fe(110) CO-dissociation electronic-barrier and local-frequency task scope.",
+  "payload": {
+    "task_entity_id": "fe110-co-dissociation",
+    "task_event_id": "task-fe110-co-formal-barrier-registered-20260807",
+    "task_event_sha256": "dd2f72fe1f6ca79581988c549726981c1332b216a427ef1db344fa05e51ec21a",
+    "completion_summary": "Fe(110) CO dissociation is complete for the accepted Dimer TS, C/O local partial-Hessian target mode, compatible SIGMA=0.20 electronic barrier, Topic-1 workbook registration, and reusable strategy record.",
+    "done_when_results": [
+      {
+        "criterion": "The compatible SIGMA=0.20 IS/TS/FS chain is hash-bound and registered.",
+        "status": "passed",
+        "evidence_sha256": [
+          "9fa49b0b3dffc481154b13d835502e77a3f27e64a4d7d43f9ca3ee0e530753c2"
+        ]
+      },
+      {
+        "criterion": "The formal electronic barrier is stored in the canonical registry and Topic-1 workbook.",
+        "status": "passed",
+        "evidence_sha256": [
+          "8eda76a85a1acddd464d1dab5c88f69437e23f84a6b89dd5c456db31533fd0f2",
+          "dc36b3f042d9e6ff46168df5f85ca7dc569783ab605169d8de4fce58f09d20a7"
+        ]
+      },
+      {
+        "criterion": "The accepted calculation strategy is retrievable from the reusable strategy library.",
+        "status": "passed",
+        "evidence_sha256": [
+          "8eda76a85a1acddd464d1dab5c88f69437e23f84a6b89dd5c456db31533fd0f2",
+          "f36ff12e6d59da73509ed7d1f6447c854ec34129c1d34aace4948e3f3db8cd3c"
+        ]
+      }
+    ],
+    "validation_results": [
+      {
+        "kind": "inspection",
+        "name": "registered barrier, validation, template, workbook, and handoff inspection",
+        "command": "python - (inline registry and artifact assertions)",
+        "exit_code": 0,
+        "status": "passed",
+        "evidence_sha256": [
+          "f36ff12e6d59da73509ed7d1f6447c854ec34129c1d34aace4948e3f3db8cd3c"
+        ]
+      }
+    ],
+    "artifact_policy": "required",
+    "artifacts": [
+      {
+        "path": "docs/FE110_CO_DISSOCIATION_HANDOFF_20260807.md",
+        "sha256": "42ada3bd74bff75e9b98934f7ee30303a854ea2bad4992dbc4db5ad15ecdfec9",
+        "status": "present",
+        "evidence_sha256": [
+          "42ada3bd74bff75e9b98934f7ee30303a854ea2bad4992dbc4db5ad15ecdfec9"
+        ]
+      },
+      {
+        "path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/registration_summary.json",
+        "sha256": "8eda76a85a1acddd464d1dab5c88f69437e23f84a6b89dd5c456db31533fd0f2",
+        "status": "present",
+        "evidence_sha256": [
+          "8eda76a85a1acddd464d1dab5c88f69437e23f84a6b89dd5c456db31533fd0f2"
+        ]
+      }
+    ],
+    "risk_assessment": {
+      "status": "no_open_risks",
+      "summary": "No open risk remains within the completed electronic-barrier and local-frequency scope. Thermochemical and kinetic quantities are explicitly outside this task and are not claimed.",
+      "evidence_sha256": [
+        "9fa49b0b3dffc481154b13d835502e77a3f27e64a4d7d43f9ca3ee0e530753c2",
+        "42ada3bd74bff75e9b98934f7ee30303a854ea2bad4992dbc4db5ad15ecdfec9"
+      ]
+    },
+    "handoff": {
+      "history": {
+        "title": "Fe(110) CO dissociation electronic barrier completed",
+        "summary": "Accepted Dimer job 9656664 and local-frequency job 9694935 were registered with the compatible SIGMA=0.20 IS/TS/FS energy chain.",
+        "outcome": "The forward electronic barrier is 1.350209 eV; the result, Topic-1 workbook row, reusable strategy, and completion handoff are preserved without submitting another VASP job.",
+        "evidence_sha256": [
+          "8eda76a85a1acddd464d1dab5c88f69437e23f84a6b89dd5c456db31533fd0f2",
+          "42ada3bd74bff75e9b98934f7ee30303a854ea2bad4992dbc4db5ad15ecdfec9"
+        ]
+      },
+      "backlog_items": [],
+      "errors": [],
+      "decisions": []
+    },
+    "requires_user_review": false,
+    "review_reason_codes": [],
+    "verdict": "accepted"
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/registration_summary.json",
+      "sha256": "8eda76a85a1acddd464d1dab5c88f69437e23f84a6b89dd5c456db31533fd0f2",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-07T12:15:29+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/formal_barrier_manifest.json",
+      "sha256": "9fa49b0b3dffc481154b13d835502e77a3f27e64a4d7d43f9ca3ee0e530753c2",
+      "authority": "module_validation",
+      "observed_at": "2026-08-07T12:15:29+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/excel_promotion_receipt.json",
+      "sha256": "dc36b3f042d9e6ff46168df5f85ca7dc569783ab605169d8de4fce58f09d20a7",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-07T12:15:29+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/completion_verification.json",
+      "sha256": "f36ff12e6d59da73509ed7d1f6447c854ec34129c1d34aace4948e3f3db8cd3c",
+      "authority": "module_validation",
+      "observed_at": "2026-08-07T12:15:29+08:00"
+    },
+    {
+      "locator": "docs/FE110_CO_DISSOCIATION_HANDOFF_20260807.md",
+      "sha256": "42ada3bd74bff75e9b98934f7ee30303a854ea2bad4992dbc4db5ad15ecdfec9",
+      "authority": "repository_document",
+      "observed_at": "2026-08-07T12:15:29+08:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

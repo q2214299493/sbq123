@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-local-sella-entry-20260905",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-05T14:46:53.564400+00:00",
+  "recorded_at": "2026-09-05T14:46:53.564400+00:00",
+  "summary": "User-requested rough-path local Sella entry implemented and locally validated; preserve active VASP review task and consumed execution boundary. No remote execution or Git publication.",
+  "payload": {
+    "objective": "Monitor formal 80-core local VASP ordinary micro-NEB job 9742743 and validate its completed path before selecting any TS refinement method.",
+    "phase": "active",
+    "current_evidence": [
+      "At the 2026-09-05 checkpoint, live bjobs -w 9742743 reported RUN in Gkn_normal. The compact NEB monitor at 15:53 CST reported 133 completed steps for each of five internal images, normal electronic iterations, and maximum NEB force 0.161991 eV/A; none of the images was force-converged. Geometry and scientific validity were not reassessed at this checkpoint.",
+      "The formal bundle contains seven images with five internal images and uses 80 MPI ranks, NSW=300, LCLIMB=false, ENCUT=400 eV, and SIGMA=0.20 eV.",
+      "The submission preflight passed with bundle sha256 4485d88f4de07d52c9a4e0537f0959d7ebc473735226bbadc5b8a0be6a8b32c0.",
+      "The execution gate decision was READY_FOR_ORDINARY_NEB_SUBMISSION and explicitly allowed SUBMIT_VASP.",
+      "Remote numbered POSCAR inputs 00-06 and POTCAR were verified present after submission.",
+      "By explicit user decision, missing neb_pilot_result.json no longer blocks future ordinary-NEB preflight; a supplied pilot result remains subject to full canonical validation.",
+      "Local smoke runner syntax and scoped Ruff passed; 7 budget/authorization tests passed. On MZ73, Sella 2.5.0 with the exact current MatRIS epoch-6 checkpoint ran 3 steps and 12 evaluations in 2.646 seconds on one existing 50-atom structure.",
+      "The earlier optional MatRIS NEB/Sella proposal remains in outputs/ts_sella_integration_20260905/strategy_proposal.json and was not executed. Revalidate its source and policy hashes before any future use; historical variants and failures remain immutable.",
+      "Job 1509 producer exit code was 0 and all four returned structures passed work-side hash, fixed-atom, cell and geometry checks. Predicted fmax decreased from 1.508 to 1.285 eV/A but optimization did not converge within the 3-step budget. The scheduler queue was empty after return; terminal accounting is unavailable, so no scheduler DONE claim is made.",
+      "Hourly thread follow-up vasp-sella is active. It remains quiet during normal unchanged progress, reviews the completed/stopped path, and proposes formal Sella initial geometry and bounded budget only after the path passes. No new search or training is authorized by this follow-up.",
+      "Architecture commit 9716f433aa926eeab1b7e77f2704596584887e4b is pushed. GitHub Actions run 33968762796 passed Ruff and 528 tests with Sella installed, with no skips. Local current-input capture verified five internal images and the existing epoch-6 checkpoint in an isolated database; original input hashes were unchanged. No new scientific workflow was started; complete-loop performance remains unvalidated.",
+      "Optional reviewed rough-path local Sella entry is implemented locally. It reuses a saved complete path without rerunning NEB, allows an unconverged globally multi-peak parent, and binds one reviewed local peak plus step/evaluation/time/displacement budgets. Ruff and 542 tests passed in a clean source snapshot; 46 final scoped tests passed. The working-tree full run had 541 passes and only the known root-layout failure. This new entry has no real Fe/GPU performance validation and is not committed or pushed; no running VASP input or remote job was changed."
+    ],
+    "one_executable_step": "Follow job 9742743 hourly; after completion or stopping, collect outputs, run canonical completed-path review, and only after a passed review propose a concrete Sella seed and budget without submitting.",
+    "submission_boundary": "The authorization for job 9742743 is consumed. Do not retry, rebuild, start CI-NEB/Dimer, accept a TS, or report a barrier without new user authority and a current hash-bound gate.",
+    "done_when": [
+      "Job 9742743 reaches DONE or EXIT and final outputs are collected.",
+      "Electronic, ionic-force, geometry-continuity, and scientific path-validity checks are reported separately.",
+      "A next TS-refinement action is selected only after completed-path evidence is available."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_formal80_20260904/submission_record.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_formal80_20260904/execution_gate_decision.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_formal80_20260904/scheduler_evidence.json`",
+      "`scripts/neb_agent/submission.py`",
+      "`modules/transition_state_search/README.md`",
+      "`docs/03_DECISIONS_LOG.md`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_formal80_20260904/submission_record.json",
+      "sha256": "f1578dfbd806542ba1f00d03d03c2e8076fe87b39e1a1df4070d4b5e23578a96",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-04T11:34:13+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_formal80_20260904/execution_gate_decision.json",
+      "sha256": "3aacc3377f13a5dbe62e7e88dfc42d65f2db2c90eb92b607a7f89cc3157b721e",
+      "authority": "module_validation",
+      "observed_at": "2026-09-04T11:34:13+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_formal80_20260904/scheduler_evidence.json",
+      "sha256": "6c4788ca3c122e64e4a8acb7916c280b36399640f1bf2435a8601d1407bb243a",
+      "authority": "scheduler",
+      "observed_at": "2026-09-04T11:34:13+08:00"
+    },
+    {
+      "locator": "scripts/neb_agent/submission.py",
+      "sha256": "3159ef3104d8fbf444eafab4b698f1ef6475131997c66be59eca946a4567524f",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T07:30:10.227935+00:00"
+    },
+    {
+      "locator": "modules/transition_state_search/README.md",
+      "sha256": "06682bc1aa538784f958556ef6cd124eb6a34291781b651f4c191ac5cb1593e6",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T14:46:53.564400+00:00"
+    },
+    {
+      "locator": "outputs/ts_strategy_learning_20260905/baseline.json",
+      "sha256": "1589e6df3d35e4a58b768b78f70ee018c2ebcae87236a857fa327b1edd66dc71",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T07:30:10.227935+00:00"
+    },
+    {
+      "locator": "outputs/ts_strategy_learning_20260905/ba_sella_variant.json",
+      "sha256": "a20f63b0c0e91ad79e9b63109456f8412b7bc5cb06be1c253d3f0cd96d5a19a6",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T07:30:10.227935+00:00"
+    },
+    {
+      "locator": "modules/transition_state_search/LEARNING.md",
+      "sha256": "e251c312d79d346db9ad9e60c7c4c41c4ac782c1ce9f7aca7d22c0cb3a02133a",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T13:25:58.713166+00:00"
+    },
+    {
+      "locator": "modules/transition_state_search/SELLA_BRANCH.md",
+      "sha256": "f5a96cd9d291551703ceb4c1d6b4098eb5f32c78c9e18200f71b654d2a8e3e04",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T14:46:53.564400+00:00"
+    },
+    {
+      "locator": "outputs/ts_sella_integration_20260905/strategy_proposal.json",
+      "sha256": "29ea72dbb21d1e2425a850293f049f6e4ec435ac826090c01cfebd83bc8c6406",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T07:30:10.227935+00:00"
+    },
+    {
+      "locator": "outputs/ts_sella_integration_20260905/validation.json",
+      "sha256": "0a273379871d3e24a820fd3a3bd1f1ef65c7a136e942f51bf26348db98ce6fbc",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T07:30:10.227935+00:00"
+    },
+    {
+      "locator": "scripts/ml_sella_candidate.py",
+      "sha256": "3f2e025a41f0cd910164bc9d4816ab1c5333a9fd38707d00a9c5dd5ef53378d9",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T14:46:53.564400+00:00"
+    },
+    {
+      "locator": "scripts/prepare_ml_candidate_active_learning.py",
+      "sha256": "49b61226446b4ac33f217f079713137b06ff4d48bbd8d4abf3b515cad58fcb54",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T14:46:53.564400+00:00"
+    },
+    {
+      "locator": "scripts/prepare_ml_candidate_rerun.py",
+      "sha256": "cae9823f7fed62c092769c4f47c3de352404792fc01ba3218c02e021e0b84117",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T14:46:53.564400+00:00"
+    },
+    {
+      "locator": "outputs/matris_sella_smoke_20260905/request.json",
+      "sha256": "d1ce458820cfb689d723621226c1c656555e1f666b12b7c19ab3898da1151bcc",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T07:30:10.227935+00:00"
+    },
+    {
+      "locator": "outputs/matris_sella_smoke_20260905/returned/submission_record.json",
+      "sha256": "49b9189db8b737002bbcdf2fea5d42a0acbe6cefe970a2e28b4ebe87da0b6e11",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T07:30:10.227935+00:00"
+    },
+    {
+      "locator": "outputs/matris_sella_smoke_20260905/returned/results/job_1509/smoke_result.json",
+      "sha256": "6e3772568aafe15278ae7da606e2e6dffc232f41185a9131be10dc78ab52227e",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-05T07:30:10.227935+00:00"
+    },
+    {
+      "locator": "outputs/matris_sella_smoke_20260905/returned/results/job_1509/producer_exit_record.json",
+      "sha256": "3a81aa331f0cc376905387f87de96d98a3738dd20108a6f6b4e1afdc593b0b34",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-05T07:30:10.227935+00:00"
+    },
+    {
+      "locator": "outputs/matris_sella_smoke_20260905/work_review.json",
+      "sha256": "f4523a8bbaab002341f335cd864e1bc0a24cae05f1ffdcd5d80bcdd2f4f56d85",
+      "authority": "module_validation",
+      "observed_at": "2026-09-05T07:30:10.227935+00:00"
+    },
+    {
+      "locator": "scripts/matris_sella_smoke.py",
+      "sha256": "cfa9539e9b8368e9a6b047c0f3ca31fb0fb41405744f19897b30e0a988a663f0",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T14:46:53.564400+00:00"
+    },
+    {
+      "locator": "data/state_handoff/evidence/neb-9742743-running-20260905-1553.json",
+      "sha256": "30dcdd47dbde37a6825305c7033121c2410c88a2915268821cea5a0998e60f1f",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-05T07:58:54.099969+00:00"
+    },
+    {
+      "locator": "outputs/architecture_release_20260905/github_ci_result.json",
+      "sha256": "79a997e962aa87b0bd8dcabae198f8c1191633217890ee84cd40833dc596a5f1",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T13:25:58.713166+00:00"
+    },
+    {
+      "locator": "outputs/architecture_release_20260905/validation.json",
+      "sha256": "d4d0b11e5c5a9ceba704b8e73e4030588aa23746c90cde0213463ef4b9823e82",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T13:25:58.713166+00:00"
+    },
+    {
+      "locator": "outputs/architecture_release_20260905/warm_start_check.json",
+      "sha256": "2d1bf74152a250a01141c5b5c7bbe74f404fdd8c05917063dd1cd5677f1003f9",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T13:25:58.713166+00:00"
+    },
+    {
+      "locator": "outputs/sella_local_peak_20260905/validation.json",
+      "sha256": "348fffa3481cae00e7872479de15022ba0da77bbccd806cafc9c6873f6a29cdf",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T14:46:53.564400+00:00"
+    },
+    {
+      "locator": "modules/transition_state_search/SELLA_LOCAL_PEAK.md",
+      "sha256": "efd31b92a811cd3ec2ee97176c5f707c5fb217ff1aa8a4c472a68654b0978bbc",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T14:46:53.564400+00:00"
+    },
+    {
+      "locator": "scripts/matris_sella_local_peak.py",
+      "sha256": "de0ce27cfc82f8e7338a704d4b01630dab6ca02312ea4941411eff0e9e330c7a",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T14:46:53.564400+00:00"
+    },
+    {
+      "locator": "scripts/ml_candidate_source.py",
+      "sha256": "2ff11e01af82af60a9940a30e3e091c9afaf90096cf69b5c691e35f238247bca",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T14:46:53.564400+00:00"
+    },
+    {
+      "locator": "tests/test_matris_sella_local_peak.py",
+      "sha256": "7ee48c74195fa2a5f20d18f0777420e6c8c704c4e484967fdec1773636ab99e5",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T14:46:53.564400+00:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-architecture-ci-9716f43-20260905"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

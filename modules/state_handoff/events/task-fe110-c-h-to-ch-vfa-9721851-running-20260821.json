@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-vfa-9721851-running-20260821",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-transition-state",
+    "module": "ts_vibrational_validation"
+  },
+  "occurred_at": "2026-08-21T22:48:55+08:00",
+  "recorded_at": "2026-08-21T14:48:55Z",
+  "summary": "Local partial-Hessian job 9721851 is RUN on 32 ranks; 27 of 43 expected force blocks are complete, output is actively updating, and no fatal keyword or frequency table is present yet.",
+  "payload": {
+    "objective": "Validate the Fe(110) C* + H* -> CH* + * Dimer candidate with a contract-bound diagnostic local partial Hessian before any TS claim.",
+    "phase": "active",
+    "current_evidence": [
+      "LSF job 9721851 is RUN on 32 ranks in Gkn_normal.",
+      "The seven-atom NFREE=2 finite-difference calculation expects 43 force blocks: one reference plus 42 central-difference displacements.",
+      "Twenty-seven force blocks are complete (62.79 percent), and displacement 28 has begun.",
+      "Recent completed displacements require 15 to 31 electronic iterations and retain stable total magnetization near 106.36; the latest completed displacement converged in 16 iterations.",
+      "OUTCAR, OSZICAR, and vasprun.xml were updated within minutes of inspection; no fatal keyword was found.",
+      "The final frequency table and normal-completion marker are absent, so imaginary-mode count and TS validity remain unknown."
+    ],
+    "one_executable_step": "Continue monitoring VFA job 9721851. At terminal state collect and hash-bind outputs, run canonical VFA analysis, and review whether exactly one imaginary mode represents C45-H46 bond formation.",
+    "submission_boundary": "Do not stop, restart, resubmit, launch connectivity or another frequency calculation, accept a TS, assign Grade A, or report a barrier without new live evidence and the required execution-gate action and user decision.",
+    "done_when": [
+      "The diagnostic local partial-Hessian calculation completes normally with complete bound frequency/eigenvector evidence.",
+      "Exactly one raw imaginary mode is explicitly reviewed and accepted as the intended C45-H46 reaction coordinate before any TS acceptance.",
+      "Compatible IS/TS/FS final OUTCAR TOTEN values are separately reviewed before an electronic barrier is reported."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/scheduler_evidence_running.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/submission_record.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/submission_preflight.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/scheduler_evidence_running.json",
+      "sha256": "a6f4e0a718c4caa271d7baeaefcf2363bc05a33f00611c37a9a893c3ea505db2",
+      "authority": "scheduler",
+      "observed_at": "2026-08-21T22:48:55+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/registry_running_receipt.json",
+      "sha256": "a3bde277533f5673ce1cf68ae93b0773ac0c16d616de8061ab5d9ccc34e59044",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-21T22:48:55+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-vfa-9721851-submitted-20260821"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

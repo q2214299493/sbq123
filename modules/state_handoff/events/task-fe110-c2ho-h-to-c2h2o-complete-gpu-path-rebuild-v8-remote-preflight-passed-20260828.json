@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v8-remote-preflight-passed-20260828",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-28T12:16:29.7976252+08:00",
+  "recorded_at": "2026-08-28T04:16:29.7997629Z",
+  "summary": "The exact v8 warning-release package passed a no-model, no-scheduler MZ73 remote preflight; no GPU or VASP job was submitted.",
+  "payload": {
+    "objective": "Await a separate explicit decision on one hash-bound v8 MZ73 GPU execution.",
+    "phase": "open",
+    "current_evidence": [
+      "MZ73 loaded request SHA-256 52e2e9fffb100452a675fa0f1c42af0aee06c2785269a06b978bf45e701c9fed and verified both checkpoint and all runtime hashes.",
+      "All 19 image hashes, topology, periodic mapping, seed geometry, immutable restraint targets, release schedule, warning-continue mode, force-decomposition capability, and final hard gate passed.",
+      "Remote redistribution replay retained strict O-H interval images 10-14, maximum adjacent RMSD 0.133240 A, and maximum movable-atom step 0.696567 A.",
+      "The preflight did not execute either model, call Slurm, create submission markers, submit VASP/VTST, or authorize a production run."
+    ],
+    "one_executable_step": "Only after separate explicit authorization, prepare a single-use execution review bound to the current request, executor, preflight, authorization, and path-review hashes before any sbatch call.",
+    "submission_boundary": "This authorization covered remote preflight only. GPU execution, automatic retry, fine-tuning, VASP/VTST, Dimer, and TS/barrier claims remain unauthorized.",
+    "done_when": [
+      "The user explicitly authorizes or declines one v8 GPU execution.",
+      "Any authorized execution is separately hash-bound and duplicate-checked before submission."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/remote_preflight.MZ73.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/remote_preflight_review.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/user_remote_preflight_authorization.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/remote_preflight.MZ73.json",
+      "sha256": "08d01ff5539f2ee76b9e6b28dea266a93ecadd7c3f99ab7266d482b7656da226",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-28T12:16:29.7976252+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/remote_preflight_review.work.json",
+      "sha256": "78e8fa00c37c905f4b9c31631ebed1f1bd9d1a7e831f650c1d8405ffb355b4c4",
+      "authority": "module_validation",
+      "observed_at": "2026-08-28T12:16:29.7976252+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/user_remote_preflight_authorization.json",
+      "sha256": "966f78c217d25ffbf30f5c5a12463482e3847ac8d3b9d523bcaf343bb4b2e40d",
+      "authority": "user_authorization",
+      "observed_at": "2026-08-28T12:16:29.7976252+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v8-warning-release-prepared-20260828"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

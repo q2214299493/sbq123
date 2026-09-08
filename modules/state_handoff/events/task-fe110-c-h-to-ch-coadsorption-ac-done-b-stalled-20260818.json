@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-coadsorption-ac-done-b-stalled-20260818",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-coadsorption",
+    "module": "adsorption_workflow"
+  },
+  "occurred_at": "2026-08-18T22:42:28+08:00",
+  "recorded_at": "2026-08-18T14:42:28Z",
+  "summary": "Candidates A and C are scheduler DONE and technically converged with separate C*+H* geometries; candidate B remains scheduler RUN but has made no file progress for about 19 hours and is stalled in electronic diagonalization.",
+  "payload": {
+    "objective": "Relax and compare three Fe(110) C*+H* coadsorption candidates for selecting the C* + H* -> CH* + * initial state.",
+    "phase": "active",
+    "current_evidence": [
+      "A/job 9715450 is DONE after 82 ionic steps, electronically converged, normally completed, and reached 0.017683 eV/A maximum atomic force. Its final C-H distance is 2.9728 A with C at long bridge and H at hollow; separate C*+H* chemistry is retained. Final compatible TOTEN is -368.60093793 eV.",
+      "C/job 9715455 is DONE after 20 ionic steps, electronically converged, normally completed, and reached 0.015276 eV/A maximum atomic force. Its final C-H distance is 4.5191 A with C at long bridge and H at hollow; separate C*+H* chemistry is retained. Final compatible TOTEN is -368.59979451 eV.",
+      "A is 0.00114342 eV below C, so the two completed candidates are effectively near-degenerate pending symmetry/duplicate review.",
+      "B/job 9715451 remains scheduler RUN at ionic step 7 with latest available force 0.212858 eV/A and C-H 3.0305 A. OUTCAR, OSZICAR, and vasp.out stopped updating around 03:35 on 2026-08-18, about 19.1 hours before this checkpoint.",
+      "B vasp.out contains 95104 Sub-Space-Matrix-is-not-hermitian warnings plus ZBRENT fallback/extrapolation markers; it is classified RUNNING_BUT_STALLED_IN_ELECTRONIC_DIAGONALIZATION.",
+      "No job was stopped, restarted, resubmitted, or modified."
+    ],
+    "one_executable_step": "Obtain explicit user authorization before terminating stalled B/job 9715451; after stopping, preserve its outputs and diagnose a reviewable continuation or fresh-restart plan before any resubmission.",
+    "submission_boundary": "Do not stop B, restart or resubmit it, launch final statics, select the final IS, or begin NEB/DIMER/frequency work without explicit user authority and the remaining scientific review.",
+    "done_when": [
+      "B reaches a terminal scheduler state and its final or stopped outputs are collected and reviewed.",
+      "A/B/C receive final duplicate, energy, site, and geometry comparison.",
+      "A reviewed C*+H* initial state is selected for the transition-state workflow."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_coadsorption_20260817/provenance/status_checkpoint_20260818.json`",
+      "`calculations/fe110_c_h_coadsorption_20260817/provenance/status_checkpoint_registration_receipt_20260818.json`",
+      "`calculations/fe110_c_h_coadsorption_20260817/results/A_adjacent_hollow_reactive/CONTCAR`",
+      "`calculations/fe110_c_h_coadsorption_20260817/results/A_adjacent_hollow_reactive/OUTCAR`",
+      "`calculations/fe110_c_h_coadsorption_20260817/results/C_far_hollow_reference/CONTCAR`",
+      "`calculations/fe110_c_h_coadsorption_20260817/results/C_far_hollow_reference/OUTCAR`",
+      "`calculations/fe110_c_h_coadsorption_20260817/results/B_second_neighbor_hollow_checkpoint_20260818/CONTCAR`",
+      "`calculations/fe110_c_h_coadsorption_20260817/results/B_second_neighbor_hollow_checkpoint_20260818/OUTCAR`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_coadsorption_20260817/provenance/status_checkpoint_20260818.json",
+      "sha256": "79b0871f2f5598be58188904893213b95811b437da70b4c578c94dc4df129808",
+      "authority": "module_validation",
+      "observed_at": "2026-08-18T22:42:28+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_coadsorption_20260817/provenance/status_checkpoint_registration_receipt_20260818.json",
+      "sha256": "20d193732330ba74ff582495cbf7e142a6d9c7d85c6ec5071b99ed85f7923341",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-18T22:42:28+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_coadsorption_20260817/results/A_adjacent_hollow_reactive/OUTCAR",
+      "sha256": "042b18bcbdf242dd4fa8f98d23cd81f656f557e369182ca7593743565d1aa0cf",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-18T22:42:28+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_coadsorption_20260817/results/C_far_hollow_reference/OUTCAR",
+      "sha256": "3c135b6928997df869d0721daf45bdd6f6dd0ee97647dc5dc517c0d90198f58d",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-18T22:42:28+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_coadsorption_20260817/results/B_second_neighbor_hollow_checkpoint_20260818/OUTCAR",
+      "sha256": "44d2edc59aad84ac9944d5ef374f3e445ea2a0718e5b1df112073b791cacb6cf",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-18T22:42:28+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-coadsorption-abc-submitted-20260817"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

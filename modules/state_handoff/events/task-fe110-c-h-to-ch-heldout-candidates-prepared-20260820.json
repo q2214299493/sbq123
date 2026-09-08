@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-heldout-candidates-prepared-20260820",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-transition-state",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-20T00:33:26+08:00",
+  "recorded_at": "2026-08-19T16:33:26Z",
+  "summary": "Prepared six hash-disjoint geometry-only held-out TS validation candidates spanning rising, near-saddle, and falling regions; no VASP or GPU job was submitted.",
+  "payload": {
+    "objective": "Establish whether the current AQCat25 checkpoint can be calibrated for the Fe(110) hydrogen-transfer TS/path domain before using it to accelerate the remaining C* + H* -> CH* transition-state search.",
+    "phase": "active",
+    "current_evidence": [
+      "Six geometry-only held-out candidates were prepared: two rising-path, two near-saddle, and two falling-path structures.",
+      "All six retain 47 atoms, the endpoint cell and atom order, PBC, Selective Dynamics, and the bottom 18 Fe atoms exactly fixed.",
+      "All six exact file hashes and validator-rounded geometry fingerprints are disjoint from the 18 active-training and adsorption-replay structures and from current source path images 00-08.",
+      "C-H coverage is 2.538, 2.194, 1.723, 1.293, 1.123, and 1.092 A; minimum pair distance across the set is 1.092 A.",
+      "A separate dense segmented-IDPP attempt was rejected because its C-H coordinate backtracked 1.70 -> 3.58 -> 1.11 A.",
+      "These are unevaluated candidate geometries only. No VASP label, AQCat25 prediction, TS-domain calibration, scientific TS validation, or reportable energy exists for them."
+    ],
+    "one_executable_step": "Obtain user geometry approval for at least five of the six frozen candidates; do not prepare or submit VASP/GPU validation jobs without explicit authorization.",
+    "submission_boundary": "No VASP force-label submission, GPU prediction, fine-tuning, ML-NEB rerun, NEB, DIMER, frequency, connectivity, or barrier action is authorized by candidate preparation.",
+    "done_when": [
+      "At least five disjoint held-out VASP-labeled TS-domain structures pass registered bootstrap calibration metrics for the exact checkpoint and compatibility branch.",
+      "A hash-bound calibration review decides whether this checkpoint is reusable for the in-scope hydrogen-transfer path domain.",
+      "Only after calibration may the strategy engine choose the least-cost VASP NEB/CI-NEB/DIMER continuation from the complete path evidence."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_to_ch_ts_20260818/heldout_ts_validation_plan_20260820/candidate_set_v3/heldout_validation_candidate_plan.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/heldout_ts_validation_plan_20260820/candidate_set_v3/geometry_review.csv`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/heldout_ts_validation_plan_20260820/candidate_set_v3/heldout_candidate_montage.png`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/heldout_ts_validation_plan_20260820/candidate_set_v3/excluded_training_and_replay_hashes.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/heldout_ts_validation_plan_20260820/candidate_set_v3/heldout_validation_candidate_plan.json",
+      "sha256": "91569559eb5b3678b79862e099ea75b3c7edcc606c96b6ea95e0ba4498349c9a",
+      "authority": "module_validation",
+      "observed_at": "2026-08-20T00:33:26+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/heldout_ts_validation_plan_20260820/candidate_set_v3/geometry_review.csv",
+      "sha256": "f310369d787ebd27017647fec1a6600b5a85465e162ba40be93c647c4f16fd1e",
+      "authority": "module_validation",
+      "observed_at": "2026-08-20T00:33:26+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/heldout_ts_validation_plan_20260820/candidate_set_v3/excluded_training_and_replay_hashes.json",
+      "sha256": "cbea8f331d8d149db6d8f8f206d0e5c77bc1da94a6db5dee33cd53541009b8a5",
+      "authority": "module_validation",
+      "observed_at": "2026-08-20T00:33:26+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-aqcat-force-screen-passed-job1274-20260820"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

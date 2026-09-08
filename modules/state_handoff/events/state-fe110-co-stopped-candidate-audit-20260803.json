@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "event_id": "state-fe110-co-stopped-candidate-audit-20260803",
+  "event_type": "state_observed",
+  "entity": {
+    "kind": "state",
+    "id": "active-fe-110-co-dissociation-test-current-gate",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-03T17:18:49+08:00",
+  "recorded_at": "2026-08-03T17:18:49+08:00",
+  "summary": "Record the user-requested stop and prior one-step NEB candidate audit.",
+  "payload": {
+    "block_id": "active-fe-110-co-dissociation-test-current-gate",
+    "section": "## Active Fe(110) CO Dissociation Test",
+    "title": "Current Gate - 2026-08-03 Stopped Pilot and Candidate Audit",
+    "facts": [
+      "The user explicitly paused pilot `9655921`; the hash-bound `STOP_USER_REQUESTED` gate allowed only `STOP_JOB`, the sole executor issued the stop, and current LSF evidence is `EXIT`.",
+      "Pilot `9655921` completed zero ionic steps. Image09 exhausted `NELM=200` with repeated BRMIX and runaway electronic energies; empty CONTCAR files prevent post-run force or geometry interpretation, and `nebmovie.pl 1` therefore failed.",
+      "Prior one-step pilot `9640399` completed all eight images electronically at 52--58/200 steps with final total moments `105.0202--107.0277 muB`; its C-O coordinate is monotonic, but the later 203-step production path proved underresolved between images05/06.",
+      "Prior one-step pilot `9647154` completed all ten images electronically with moments `105.2394--107.2532 muB` and monotonic C-O; it is geometrically smoother but has high first-step forces and uses the older full-product endpoint.",
+      "The current-local-endpoint pilot `9650404` is the exact one-step case with image05 at `NELM=200`, but its magnetization falls from about `106.53` to `93.08`, `95.94`, then `81.85 muB`; it is not a magnetically continuous reusable path.",
+      "Pilot `9654860` also completed one step with four images at `NELM=200`, but its total moments span `56.71--106.32 muB`; it is rejected as the requested stable magnetic branch."
+    ],
+    "next_action": "Keep all VASP work paused and obtain the user's choice between adapting the smoother old ten-image geometry as a seed or rebuilding a current-endpoint path from the magnetically stable eight-image branch; neither old path is directly production-ready."
+  },
+  "evidence": [
+    {
+      "locator": "docs/02_CURRENT_STATE.md",
+      "sha256": "e09eae27f75b76e3b347c2e38e57d74646431ce975e760a4644110120dbe4bfd",
+      "authority": "repository_document",
+      "observed_at": "2026-08-03T17:18:49+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/runs/ordinary_neb_9img_fresh_local_endpoint_idpp_waypoint_pilot_np108_20260803/scheduler_evidence_exit_20260803.json",
+      "sha256": "2b34a358e2f13bc657f24551ca3fd8fb9b4bcceed89c66da746e327dd6b96ad0",
+      "authority": "scheduler",
+      "observed_at": "2026-08-03T17:18:49+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/runs/ordinary_neb_8img_densified_v2_pilot_mag24_20260724/scheduler_evidence.json",
+      "sha256": "813dc33af8f1e4388e7fb075b03ee8e22fe7f9d040196bcc33e2bef51dc7c0b0",
+      "authority": "scheduler",
+      "observed_at": "2026-08-03T17:18:49+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/runs/ordinary_neb_10img_repaired_branch_pilot_np80_20260728/scheduler_evidence.json",
+      "sha256": "3a977b152d489cc1d094ffc2140079bbd4fee401e683c83ff353af8a295d7b86",
+      "authority": "scheduler",
+      "observed_at": "2026-08-03T17:18:49+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/runs/ordinary_neb_7img_local_endpoint_pilot_np56_20260730/05/OUTCAR",
+      "sha256": "6729fff8c81ea0660383b551025bf5585678d9b44f125ce9e54a462a802f315f",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-03T17:18:49+08:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "live_scheduler_state",
+      "scientific_candidate_selection"
+    ],
+    "status": "pending"
+  }
+}

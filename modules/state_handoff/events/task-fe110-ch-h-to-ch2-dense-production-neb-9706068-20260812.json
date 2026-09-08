@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-ch-h-to-ch2-dense-production-neb-9706068-20260812",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-ch-h-to-ch2-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-12T11:21:15+08:00",
+  "recorded_at": "2026-08-12T03:21:15Z",
+  "summary": "The seven-image CH* + H* -> CH2* pilot passed canonical validation and production ordinary-NEB job 9706068 is RUN.",
+  "payload": {
+    "objective": "Run the gated Fe(110) CH* + H* -> CH2* + * transition-state workflow from the accepted A initial state to the compatible optimized CH2* final state.",
+    "phase": "active",
+    "current_evidence": [
+      "Replacement pilot job `9705564` is scheduler DONE and passed the canonical pilot validator for all seven internal images.",
+      "Every pilot image completed normally, was electronically converged, and contained exactly one ionic step; the magnetic-continuity check produced no warning.",
+      "The refreshed production preflight and execution gate passed with `READY_FOR_ORDINARY_NEB_SUBMISSION` and explicitly allowed `SUBMIT_VASP`.",
+      "Production ordinary-NEB job `9706068` is scheduler RUN on 84 ranks across `gknew0627`, `gknew0430`, and `gknew0431`; no completed ionic step was available at the first post-submission checkpoint.",
+      "The pilot acceptance and production submission were registered as `fe110_ts_ch_h_to_ch2_neb_pilot_9705564` and `fe110_ts_ch_h_to_ch2_ordinary_neb_9706068`."
+    ],
+    "one_executable_step": "Monitor ordinary-NEB job 9706068 hourly with the canonical compact monitor; assess electronic status, per-image force trends, geometry, and path quality, and obey only the next current hash-bound execution-gate action.",
+    "submission_boundary": "Do not stop, restart, rebuild the path, enable CI-NEB, start DIMER, or claim a TS/barrier without the exact current hash-bound execution-gate action and any required user authority.",
+    "done_when": [
+      "The ordinary NEB produces a technically usable reaction path or a gate-supported method handoff.",
+      "Any highest-image TS candidate is refined and validated through the owning module before a barrier claim.",
+      "IS, TS, and FS results remain compatible and hash-bound; no free-energy or kinetics claim is made without separate thermochemical work."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/contract/reaction.yaml`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_7img_v6_84r_no0336/neb_pilot_result.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_7img_v6_84r_no0336/ts_search_decision.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_7img_v6_84r_no0336/submission_record.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_7img_v6_84r_no0336/scheduler_evidence.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_7img_v6_84r_no0336/neb_pilot_result.json",
+      "sha256": "72f0cb3b3afba011570afeb76f37c606a8f259c65d061c038f3c416e5b6504a6",
+      "authority": "module_validation",
+      "observed_at": "2026-08-12T11:21:15+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_7img_v6_84r_no0336/submission_record.json",
+      "sha256": "9929f6de30354ba81a68d3aba1e3175bac8f9599a373e684cfe5fce61810f482",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-12T11:21:15+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_7img_v6_84r_no0336/scheduler_evidence.json",
+      "sha256": "472b461f91e42269d1e622a8509da5a99174df4c74fab6bb76032b5872ab3d9c",
+      "authority": "scheduler",
+      "observed_at": "2026-08-12T11:21:15+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-ch-h-to-ch2-dense-pilot-9705564-running-20260811"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

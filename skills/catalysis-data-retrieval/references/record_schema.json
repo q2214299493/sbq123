@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["id", "source_id", "source_url", "source_access_verified", "title", "summary", "retrieved_at", "data_types"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "source_id": {"type": "string", "minLength": 1},
+    "source_url": {"type": "string", "format": "uri"},
+    "source_access_verified": {"type": "boolean"},
+    "artifact_urls": {"type": "array", "items": {"type": "string", "format": "uri"}},
+    "title": {"type": "string", "minLength": 1},
+    "summary": {"type": "string"},
+    "retrieved_at": {"type": "string"},
+    "data_types": {"type": "array", "items": {"type": "string"}},
+    "material": {"type": "string"},
+    "surface": {"type": "string"},
+    "adsorbates": {"type": "array", "items": {"type": "string"}},
+    "reaction": {"type": "string"},
+    "keywords": {"type": "array", "items": {"type": "string"}},
+    "license": {"type": ["string", "null"]},
+    "access_notes": {"type": "string"},
+    "match_confidence": {"enum": ["high", "medium", "low", "none", "Needs confirmation"]},
+    "reaction_coordinate": {"type": "object"},
+    "suggested_midpoints": {"type": "array"},
+    "embedding": {"type": "array", "items": {"type": "number"}}
+  },
+  "additionalProperties": true
+}

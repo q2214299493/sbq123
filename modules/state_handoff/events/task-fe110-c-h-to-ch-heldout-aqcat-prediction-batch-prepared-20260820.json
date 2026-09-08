@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-heldout-aqcat-prediction-batch-prepared-20260820",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-transition-state",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-20T12:15:00+08:00",
+  "recorded_at": "2026-08-20T04:15:00Z",
+  "summary": "A six-sample exact-structure AQCat25 prediction batch for held-out R1-F2 was prepared and hash-validated locally against the completed VASP labels and the unchanged MZ73 checkpoint; no files were transferred and no GPU job was submitted.",
+  "payload": {
+    "objective": "Establish whether the current AQCat25 checkpoint can be calibrated for the Fe(110) C*+H*->CH* path neighborhood before using it for VASP TS refinement selection.",
+    "phase": "active",
+    "current_evidence": [
+      "Six unique exact-structure prediction requests were prepared for R1, R2, S1, S2, F1, and F2.",
+      "Every request POSCAR matches the frozen VASP-label structure hash and shares the expected Fe45-C-H atom order.",
+      "All request schemas, portable relative paths, request hashes, and the unified batch manifest passed the canonical batch validator.",
+      "A read-only MZ73 check confirmed that /home/sbq/sbq/aqcat25/demo_single/model.pt still has SHA-256 e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50.",
+      "The batch remains local: remote_transfer_performed=false and gpu_jobs_submitted=0.",
+      "No AQCat25 force errors, calibration verdict, TS validity, or barrier result exists yet."
+    ],
+    "one_executable_step": "Review the prepared R1-F2 exact-structure prediction batch; upload and MZ73 execution require separate explicit user authorization.",
+    "submission_boundary": "Preparation does not authorize remote transfer, GPU execution, fine-tuning, ML-NEB reruns, VASP NEB/CI-NEB, DIMER, frequency, connectivity, or barrier reporting.",
+    "done_when": [
+      "At least five disjoint held-out VASP-labeled structures pass exact-checkpoint force metrics for the current compatibility branch.",
+      "A hash-bound calibration review decides whether this checkpoint is reusable for the in-scope C*+H*->CH* path neighborhood.",
+      "Only after calibration may the strategy engine select the least-cost VASP NEB/CI-NEB/DIMER continuation."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_to_ch_ts_20260818/heldout_aqcat_force_predictions_20260820/heldout_prediction_batch_request.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/heldout_aqcat_force_predictions_20260820/heldout_prediction_batch_review.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/heldout_aqcat_force_predictions_20260820/PREPARED_NOT_SUBMITTED.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/heldout_aqcat_force_predictions_20260820/heldout_prediction_batch_request.json",
+      "sha256": "c9c4267b697826e04b5b23748cb3efa4d4e9fc17b65d63cbf3f60d7703b9dff1",
+      "authority": "module_validation",
+      "observed_at": "2026-08-20T12:15:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/heldout_aqcat_force_predictions_20260820/heldout_prediction_batch_review.json",
+      "sha256": "db2ebb1417e9c91b3d77d1482580ea39dab4197de16deb99db0907ef8751c42d",
+      "authority": "module_validation",
+      "observed_at": "2026-08-20T12:15:00+08:00"
+    },
+    {
+      "locator": "scripts/prepare_ts_heldout_aqcat_prediction_batch.py",
+      "sha256": "b1e9f4ae74f3e79bf40919aafb09ea22aa5b81aa364d1aa90d5b17abdbc6b0b6",
+      "authority": "repository_document",
+      "observed_at": "2026-08-20T12:15:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-heldout-force-labels-done-20260820"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

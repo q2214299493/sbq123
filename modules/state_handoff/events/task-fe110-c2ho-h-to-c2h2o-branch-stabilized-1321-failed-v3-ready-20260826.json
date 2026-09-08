@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-branch-stabilized-1321-failed-v3-ready-20260826",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-26T11:48:44+08:00",
+  "recorded_at": "2026-08-26T03:48:44Z",
+  "summary": "Fractional-coordinate review proved job 1320 contained real H50 site hops and a separate early O-H backtrack. Corrected GPU job 1321 removed those failures but stopped at step 3 on an over-strict 0.01 A transient O-H gate; a locally reviewed v3 request with a 0.05 A preconditioning-only limit is ready but not submitted.",
+  "payload": {
+    "objective": "Obtain explicit authorization before remotely preflighting and submitting the exact v3 branch-stabilized dual-model GPU request.",
+    "phase": "active",
+    "current_evidence": [
+      "The image-09-to-12 fractional-coordinate audit shows H50 MIC steps of 2.949, 3.198, and 2.269 A with zero lattice shift, proving real local-site hopping rather than a PBC wrapping artifact.",
+      "The 0.626899 A O-H backtrack in job 1320 occurs at images 00-01, not 09-12, and is a true MIC-distance increase.",
+      "After local review, exact request 64a30549c9100d4d0a048b338618aeb4f32b25aadac76e95fa21dece59af441a was submitted once as MZ73 job 1321.",
+      "Job 1321 is absent from the live queue and its producer failure record reports exit code 1 after three restrained-preconditioning steps.",
+      "Job 1321 passed periodic branch, H50 single-step, average RMSD, C1-C2, minimum-contact, and O-H coverage checks; the H50 site hops did not recur.",
+      "Its only failed guard was a 0.015624 A transient O-H overshoot at images 15-16 against the 0.01 A final-path threshold.",
+      "The v3 executor separates a 0.05 A preconditioning-only transient line from the unchanged 0.01 A final returned-path gate. Fourteen focused tests pass.",
+      "The locally reviewed v3 request SHA-256 is 8f0777a1c69c74fb8301bb229c07b60d0254fcf18ccacf2d71121f77de7ab0d4. It has not been uploaded or submitted."
+    ],
+    "one_executable_step": "After explicit user authorization, run exact v3 VTST/runtime/checkpoint/duplicate-job preflights, upload request SHA-256 8f0777a1c69c74fb8301bb229c07b60d0254fcf18ccacf2d71121f77de7ab0d4 to a fresh MZ73 directory, and submit at most once only if all checks pass.",
+    "submission_boundary": "The authorization used for job 1321 has been consumed. No v3 upload/submission, VASP job, DIMER handoff, tolerance change beyond the reviewed v3 request, or automatic resubmission is authorized.",
+    "done_when": [
+      "The exact v3 request passes local and remote preflights and an explicitly authorized MZ73 producer reaches a terminal state.",
+      "The returned complete path passes O-H final monotonicity/coverage, H50 single-step, C-C preservation, periodic continuity, and dual-model review.",
+      "A least-cost VASP validation/refinement recommendation is ready for separate authorization."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_monotonic_rebuild_20260826/gpu_return_job1320/fractional_coordinate_diagnosis_job1320.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_branch_stabilized_v2_20260826/gpu_return_job1321/work_failure_review_job1321.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_branch_stabilized_v3_20260826/local_correction_review.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_branch_stabilized_v3_20260826/work_to_gpu/request.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_monotonic_rebuild_20260826/gpu_return_job1320/fractional_coordinate_diagnosis_job1320.json",
+      "sha256": "1f4b89191face5261adaa78462bc50cb427ef10fe88a066ad297f8768cfc7cb2",
+      "authority": "module_validation",
+      "observed_at": "2026-08-26T11:48:44+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_branch_stabilized_v2_20260826/gpu_return_job1321/work_failure_review_job1321.json",
+      "sha256": "afc8708243b29520d7fc01a6c4a0138d2a66a565e40ab3270a80ee236e654c4c",
+      "authority": "module_validation",
+      "observed_at": "2026-08-26T11:48:44+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_branch_stabilized_v3_20260826/local_correction_review.work.json",
+      "sha256": "fcf25562447dd1bdc10c1d36b5fa883049afacd223acd71472f83716fee7f88b",
+      "authority": "module_validation",
+      "observed_at": "2026-08-26T11:48:44+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_branch_stabilized_v3_20260826/work_to_gpu/request.json",
+      "sha256": "8f0777a1c69c74fb8301bb229c07b60d0254fcf18ccacf2d71121f77de7ab0d4",
+      "authority": "structure_output",
+      "observed_at": "2026-08-26T11:48:44+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-monotonic-dual-model-1320-failed-geometry-guard-20260826"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

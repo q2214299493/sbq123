@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-gpu-ml-neb-1308-complete-needs-review-20260825",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-25T21:54:26+08:00",
+  "recorded_at": "2026-08-25T13:54:26Z",
+  "summary": "AQCat25 job 1308 exited successfully and returned a hash-valid, ordinarily converged 13-image ML-NEB candidate; ML-CI was skipped because the predicted path has two strict internal peaks, and chemical path review remains required.",
+  "payload": {
+    "objective": "Review the returned complete AQCat25 path candidate for Fe(110) C2HO* + H* -> C2H2O* + * before choosing any VASP validation or refinement method.",
+    "phase": "verification",
+    "current_evidence": [
+      "The producer exit record reports success with exit code 0 at 2026-08-25T13:45:01Z; MZ73 no longer exposes job 1308 through live Slurm queries and has no durable terminal accounting record.",
+      "The work-side manifest validator accepts all 13 returned image hashes and classifies the result as needs_work_review.",
+      "Ordinary ML-NEB converged at step 148 with projected NEB fmax 0.089 eV/A against the 0.10 eV/A target.",
+      "ML-CI auto did not run because images 03 and 07 are two strict internal predicted-energy peaks.",
+      "Numeric continuity passes: maximum adjacent RMSD is 0.3302 A, minimum pair distance is 0.9792 A, and the periodic-branch screen passes.",
+      "The forming O-H distance initially backtracks from 3.0797 A to 3.8288 A before decreasing to 1.0877 A at image 07 and 0.9812 A at FS, so elementary-step assignment is not yet accepted."
+    ],
+    "one_executable_step": "Review the 00-12 structures visually and chemically, especially the image-03 and image-07 peaks and the initial O-H backtrack, then classify the path as acceptable, rebuild-required, or multi-event before preparing any VASP labels or refinement.",
+    "submission_boundary": "No VASP force labels, ordinary NEB, CI-NEB, DIMER, frequency, or barrier action is authorized. The GPU path remains an uncalibrated predicted candidate only.",
+    "done_when": [
+      "All 13 final structures have a hash-bound visual and chemical continuity review.",
+      "The two-peak path and O-H backtrack are classified without relying on predicted energy alone.",
+      "A case-specific VASP validation/refinement recommendation is ready for separate user authorization."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_ml_neb_production_20260825/completion_checkpoint_job1308_20260825.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_ml_neb_production_20260825/returned_from_mz73/job_1308/gpu_ml_neb_path_manifest.candidate.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_ml_neb_production_20260825/returned_from_mz73/job_1308/gpu_ml_neb_path_review.draft.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_ml_neb_production_20260825/completion_checkpoint_job1308_20260825.json",
+      "sha256": "a1a04014bcdbb1229afb626c658e1bf132719a1703399baed355e1729076db2c",
+      "authority": "module_validation",
+      "observed_at": "2026-08-25T21:54:26+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_ml_neb_production_20260825/returned_from_mz73/job_1308/gpu_ml_neb_path_manifest.candidate.json",
+      "sha256": "804aff5d6f37febc86f840b272ef2a3f3c762d00a9b08e40710f1f97a9d135f4",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-25T21:54:26+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_ml_neb_production_20260825/returned_from_mz73/job_1308/producer_exit_record.json",
+      "sha256": "8715b4609ec7a137931abe6ffa6da4779b9fe9b7959a552d3d6d70bba9ce525e",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-25T21:54:26+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-gpu-ml-neb-1308-running-20260825"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

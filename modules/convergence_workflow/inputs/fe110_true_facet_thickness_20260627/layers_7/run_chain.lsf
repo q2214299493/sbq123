@@ -1,0 +1,32 @@
+#!/bin/sh
+APP_NAME=Gkn_normal
+NP=32
+NP_PER_NODE=32
+RUN="RAW"
+ROOT=$PWD
+
+export OMP_NUM_THREADS=1
+source /home_gkx/env/intel/intel2016.sh
+VASP=$HOME/soft/vasp.5.4.1/bin/vasp_std
+
+rm -f "$ROOT/nodelist"
+for host in $LSB_HOSTS
+do
+    echo "$host" >> "$ROOT/nodelist"
+done
+
+cd "$ROOT/relax" || exit 10
+mpirun -np $NP -machinefile "$ROOT/nodelist" $VASP > vasp.out 2>&1
+if ! grep -q "reached required accuracy" OUTCAR
+then
+    echo "Relaxation did not reach required accuracy; static stage skipped." >> vasp.out
+    exit 20
+fi
+
+cp CONTCAR "$ROOT/static/POSCAR"
+cd "$ROOT/static" || exit 30
+mpirun -np $NP -machinefile "$ROOT/nodelist" $VASP > vasp.out 2>&1
+if ! grep -q "General timing and accounting informations for this job" OUTCAR
+then
+    exit 40
+fi

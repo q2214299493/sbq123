@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-monotonic-17img-dual-model-rebuild-ready-20260826",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-26T01:00:54+08:00",
+  "recorded_at": "2026-08-25T17:00:54Z",
+  "summary": "Rebuilt and locally preflighted a 17-image MatRIS-primary/AQCat25-secondary GPU seed with strictly decreasing O-H distance and six internal images in 1.1-1.8 A; no upload or submission was performed.",
+  "payload": {
+    "objective": "Obtain explicit authorization before uploading and submitting the exact hash-bound 17-image monotonic dual-model GPU path request for Fe(110) C2HO* + H* -> C2H2O* + *.",
+    "phase": "active",
+    "current_evidence": [
+      "The user authorized rebuilding the path, not submitting a new GPU or VASP job.",
+      "The rebuilt path contains 17 images. O-H decreases strictly from 3.0797 to 0.9812 A, with images 10-15 covering the 1.1-1.8 A forming-bond interval.",
+      "Independent review passes atom identity/order, cell, PBC, fixed indices 0-17, sequential periodic mapping, minimum contacts, and endpoint periodic equivalence.",
+      "C1-C2 remains between 1.4161 and 1.4282 A. Maximum adjacent movable-atom RMSD is 0.1219 A and maximum single movable-atom step is 0.6543 A.",
+      "The dual-model executor now records and gates a configured monotonic monitored-bond requirement; focused dual-model, ML-NEB, and backend tests pass.",
+      "Local request preflight passes. Remote checkpoint/runtime/duplicate-job checks plus VTST dist.pl and nebmovie.pl 0 remain required after separate submission authorization.",
+      "The seed remains kinematic and prediction-only; no GPU-optimized path, VASP result, DIMER parent, TS, or barrier is established."
+    ],
+    "one_executable_step": "After explicit user authorization, upload the exact request SHA-256 8bb16864c2cb53015b0b6e15bb207c0cc7e7ec080527861756392e394d25cfb1 to MZ73, run remote checkpoint/runtime/duplicate-job and VTST path-export preflights, and submit at most once only if every check passes.",
+    "submission_boundary": "No GPU upload/submission, VASP job, method change, or DIMER handoff is authorized by the rebuild instruction alone.",
+    "done_when": [
+      "The exact 17-image request passes remote preflight and an explicitly authorized MZ73 job reaches a terminal producer state.",
+      "The returned complete path passes work-side O-H monotonicity/coverage, C-C preservation, periodic continuity, elementary-step, and dual-model comparison review.",
+      "A least-cost VASP validation/refinement recommendation is ready for separate authorization."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_monotonic_rebuild_20260826/seed_geometry_review.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_monotonic_rebuild_20260826/work_to_gpu/request.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_monotonic_rebuild_20260826/local_submission_preflight.work.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_monotonic_rebuild_20260826/seed_geometry_review.json",
+      "sha256": "c35cec14f2df8a324f476b1439755fc7519f610ec502039d5a318a098977c576",
+      "authority": "module_validation",
+      "observed_at": "2026-08-26T01:00:54+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_monotonic_rebuild_20260826/work_to_gpu/request.json",
+      "sha256": "8bb16864c2cb53015b0b6e15bb207c0cc7e7ec080527861756392e394d25cfb1",
+      "authority": "structure_output",
+      "observed_at": "2026-08-26T01:00:54+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_monotonic_rebuild_20260826/local_submission_preflight.work.json",
+      "sha256": "ee94ea74d20d3c8c6cb44b2510af5dd5855e69963dc1525c168e83d5820a5aeb",
+      "authority": "module_validation",
+      "observed_at": "2026-08-26T01:00:54+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-dual-model-production-1318-reviewed-rebuild-required-20260826"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

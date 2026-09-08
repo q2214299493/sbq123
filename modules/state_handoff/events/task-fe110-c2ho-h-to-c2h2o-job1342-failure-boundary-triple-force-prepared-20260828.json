@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-job1342-failure-boundary-triple-force-prepared-20260828",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-28T18:19:00.3514891+08:00",
+  "recorded_at": "2026-08-28T10:19:00.3514891Z",
+  "summary": "An eight-structure seed/fail batch for images 01, 02, 10, and 13 was hash-bound for exact MatRIS, AQCat25, and VASP force comparison; the dual-model request and all VASP diagnostic-static preflights passed without submission.",
+  "payload": {
+    "objective": "Obtain separate authorization for the eight-structure MZ73 MatRIS/AQCat25 fixed prediction batch, review its returned hashes, then request a separate bounded VASP label decision.",
+    "phase": "active",
+    "current_evidence": [
+      "The selected batch contains seed/fail pairs for images 01, 02, 10, and 13, covering the H50 inter-image blocker and both sides of the O-H transition-region collapse.",
+      "The step-22 immediate last-valid state was overwritten; the hash-bound step-0 seed is explicitly retained only as the last persisted proven-valid reference, not mislabeled as the immediate last-valid point.",
+      "The eight structures are unique within the batch and have zero exact or rounded-geometry overlap with the frozen held-out set.",
+      "The MatRIS/AQCat25 exact prediction request passed its validator and binds the frozen checkpoint hashes.",
+      "All eight VASP static-force inputs passed diagnostic_static preflight with NSW=0, SIGMA=0.20 eV, 5x5x1 k mesh, and 32 ranks.",
+      "No GPU or VASP job was submitted and no model error or fine-tuning trigger is established yet."
+    ],
+    "one_executable_step": "After separate explicit authorization, run exactly one hash-bound eight-structure MatRIS/AQCat25 fixed prediction batch on MZ73; do not submit VASP until the prediction set returns to work and is reviewed.",
+    "submission_boundary": "No GPU, VASP, fine-tuning, path rerun, Dimer, TS, or barrier submission is authorized by preparation alone.",
+    "done_when": [
+      "The exact dual-model prediction set returns with matching structure and checkpoint hashes.",
+      "The returned predictions are reviewed and the same eight VASP inputs receive a separate bounded execution decision."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/preparation_review.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/dual_model_prediction_batch_request.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/vasp_force_label_batch_request.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/preparation_review.work.json",
+      "sha256": "ac11080377f28d15a113a7b78016c124ffde80ef3c8152d7800e6ff0848729a8",
+      "authority": "module_validation",
+      "observed_at": "2026-08-28T18:19:00.3514891+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/dual_model_prediction_batch_request.json",
+      "sha256": "ce0ed5c91be8303b5436b7886cd94515a6d8eff0ab541ae55bc131786ecf8dd4",
+      "authority": "repository_document",
+      "observed_at": "2026-08-28T18:19:00.3514891+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-v8-arc-repaired-job1342-failed-20260828"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

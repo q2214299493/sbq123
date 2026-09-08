@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-learning-extension-code-binding-20260905",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-05T06:37:47.178552+00:00",
+  "recorded_at": "2026-09-05T06:37:47.178552+00:00",
+  "summary": "Preserve the existing job-9742743 monitoring task after the user-authorized strategy-learning software extension. Refresh repository-code evidence only; scheduler and submitted-calculation evidence remain the historical observations. No job action or scientific acceptance is added.",
+  "payload": {
+    "objective": "Monitor formal 80-core local VASP ordinary micro-NEB job 9742743 and validate its completed path before selecting any TS refinement method.",
+    "phase": "active",
+    "current_evidence": [
+      "LSF job 9742743 was submitted once to Gkn_normal on sunboquan-codex. Its last recorded scheduler observation on 2026-09-04 was PEND; no fresh queue query was made during the software upgrade.",
+      "The formal bundle contains seven images with five internal images and uses 80 MPI ranks, NSW=300, LCLIMB=false, ENCUT=400 eV, and SIGMA=0.20 eV.",
+      "The submission preflight passed with bundle sha256 4485d88f4de07d52c9a4e0537f0959d7ebc473735226bbadc5b8a0be6a8b32c0.",
+      "The execution gate decision was READY_FOR_ORDINARY_NEB_SUBMISSION and explicitly allowed SUBMIT_VASP.",
+      "Remote numbered POSCAR inputs 00-06 and POTCAR were verified present after submission.",
+      "By explicit user decision, missing neb_pilot_result.json no longer blocks future ordinary-NEB preflight; a supplied pilot result remains subject to full canonical validation.",
+      "The optional-pilot behavior remains covered by tests. Strategy-learning and related regression checks returned 170 passed and one pre-existing repository-root layout failure; syntax and scoped Ruff checks passed.",
+      "The current epoch-6 checkpoint and five-internal-image inputs are captured as a learning baseline. A BA-Sella reference proposal and two advisory historical failures are recorded; none was executed by this extension."
+    ],
+    "one_executable_step": "Monitor job 9742743 using scheduler and compact NEB output evidence; after DONE or EXIT, collect outputs and run the canonical completed-path review.",
+    "submission_boundary": "The authorization for job 9742743 is consumed. Do not retry, rebuild, start CI-NEB/Dimer, accept a TS, or report a barrier without new user authority and a current hash-bound gate.",
+    "done_when": [
+      "Job 9742743 reaches DONE or EXIT and final outputs are collected.",
+      "Electronic, ionic-force, geometry-continuity, and scientific path-validity checks are reported separately.",
+      "A next TS-refinement action is selected only after completed-path evidence is available."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_formal80_20260904/submission_record.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_formal80_20260904/execution_gate_decision.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_formal80_20260904/scheduler_evidence.json`",
+      "`scripts/neb_agent/submission.py`",
+      "`modules/transition_state_search/README.md`",
+      "`docs/03_DECISIONS_LOG.md`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_formal80_20260904/submission_record.json",
+      "sha256": "f1578dfbd806542ba1f00d03d03c2e8076fe87b39e1a1df4070d4b5e23578a96",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-04T11:34:13+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_formal80_20260904/execution_gate_decision.json",
+      "sha256": "3aacc3377f13a5dbe62e7e88dfc42d65f2db2c90eb92b607a7f89cc3157b721e",
+      "authority": "module_validation",
+      "observed_at": "2026-09-04T11:34:13+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_epoch6_img04_07_5internal_formal80_20260904/scheduler_evidence.json",
+      "sha256": "6c4788ca3c122e64e4a8acb7916c280b36399640f1bf2435a8601d1407bb243a",
+      "authority": "scheduler",
+      "observed_at": "2026-09-04T11:34:13+08:00"
+    },
+    {
+      "locator": "scripts/neb_agent/submission.py",
+      "sha256": "3159ef3104d8fbf444eafab4b698f1ef6475131997c66be59eca946a4567524f",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T06:37:47.178552+00:00"
+    },
+    {
+      "locator": "modules/transition_state_search/README.md",
+      "sha256": "044c137ab6a186e58681ca8c3dcaaf41c210125a1c1aae045ef6242deed2dc57",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T06:37:47.178552+00:00"
+    },
+    {
+      "locator": "outputs/ts_strategy_learning_20260905/baseline.json",
+      "sha256": "1589e6df3d35e4a58b768b78f70ee018c2ebcae87236a857fa327b1edd66dc71",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T06:37:47.178552+00:00"
+    },
+    {
+      "locator": "outputs/ts_strategy_learning_20260905/ba_sella_variant.json",
+      "sha256": "a20f63b0c0e91ad79e9b63109456f8412b7bc5cb06be1c253d3f0cd96d5a19a6",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T06:37:47.178552+00:00"
+    },
+    {
+      "locator": "modules/transition_state_search/LEARNING.md",
+      "sha256": "ee2d06fa8787c775166a004d9c234427aadab85c05f51c85afe48de28b62b3bf",
+      "authority": "repository_document",
+      "observed_at": "2026-09-05T06:37:47.178552+00:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-formal80-9742743-submitted-pilot-optional-20260904"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

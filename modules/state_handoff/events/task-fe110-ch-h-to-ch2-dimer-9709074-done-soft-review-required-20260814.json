@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-ch-h-to-ch2-dimer-9709074-done-soft-review-required-20260814",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-ch-h-to-ch2-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-14T23:47:47+08:00",
+  "recorded_at": "2026-08-14T15:47:47Z",
+  "summary": "DIMER job 9709074 is DONE and technically converged; DIMCAR Force/Torque soft residuals require a separate review before frequency handoff.",
+  "payload": {
+    "objective": "Run the gated Fe(110) CH* + H* -> CH2* + * transition-state workflow from the accepted A initial state to the compatible optimized CH2* final state.",
+    "phase": "active",
+    "current_evidence": [
+      "LSF job 9709074 is scheduler DONE with normal VASP completion and no fatal keyword.",
+      "The final electronic step satisfies EDIFF=1E-7 eV; the final complete OUTCAR maximum atomic force is 0.016880 eV/A with RMS 0.005662 eV/A, passing abs(EDIFFG)=0.020 eV/A.",
+      "The last complete DIMER curvature is negative at -4.08234 eV/A^2. DIMCAR Force is 0.05672 eV/A and Torque is 0.67893 eV/A, above their soft targets 0.020 and 0.010 eV/A.",
+      "The final structure passes geometry sanity: C45-H47 is 1.456758 A, C45-H46 is 1.102394 A, fixed-layer displacement is numerical zero, and no collision or adsorption-site switch is detected.",
+      "The reviewed NEWMODECAR remains the intended C45-H47 forming mode: C45/H47 carry 0.961033 of the norm and its absolute overlap with the initial MODECAR is 0.940906.",
+      "Canonical status is TECHNICALLY_CONVERGED_SOFT_REVIEW_REQUIRED. The calculation is not yet a validated TS and no frequency or barrier action is authorized by this status alone.",
+      "Registry calculation fe110_ts_ch_h_to_ch2_dimer_9709074 has been updated to the terminal soft-review gate."
+    ],
+    "one_executable_step": "Make a hash-bound scientific decision on the residual DIMCAR Force/Torque: either accept them only for local partial-Hessian frequency handoff or prepare a separately gated DIMER continuation. Do not launch either calculation before the corresponding current execution gate and user authority.",
+    "submission_boundary": "Do not restart/resubmit DIMER, launch frequency/connectivity calculations, enable CI-NEB, accept a TS, or claim a barrier without the exact current hash-bound gate action and any required user authority.",
+    "done_when": [
+      "The DIMER residuals receive a hash-bound review decision and any accepted candidate passes the required target-mode frequency validation.",
+      "The final TS is accepted only after DIMER and frequency evidence satisfy the owning module protocol.",
+      "IS, TS, and FS results remain compatible and hash-bound; no free-energy or kinetics claim is made without separate thermochemical work."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/scheduler_evidence.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/dimer_analysis.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/final_mode_review.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/CONTCAR`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/OUTCAR`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/DIMCAR`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/NEWMODECAR`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/scheduler_evidence.json",
+      "sha256": "73ca75182bf5512085af1501d1dd528e615a6204e1ca0ba8a3eca8e39ff6487b",
+      "authority": "scheduler",
+      "observed_at": "2026-08-14T23:41:44+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/dimer_analysis.json",
+      "sha256": "24431d3a599e51a136e46792efb62e93ddbc3d62a4f9ad7ebf88f1e0b7e224cf",
+      "authority": "module_validation",
+      "observed_at": "2026-08-14T23:47:47+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/final_mode_review.json",
+      "sha256": "06fc137db22d62b532b203ae25be03245a961362d8ab260f4574b6d1c38220a8",
+      "authority": "module_validation",
+      "observed_at": "2026-08-14T23:45:55+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/CONTCAR",
+      "sha256": "eeb11e5e0596ac6e6dc73343b3ca6603adced8e71f1e197e0b398d5dade618a7",
+      "authority": "structure_output",
+      "observed_at": "2026-08-14T23:47:47+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/OUTCAR",
+      "sha256": "871dc229aea084733ec251299fa1a43fa9a0d44fbb8b088b112c000cc6eab423",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-14T23:47:47+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/DIMCAR",
+      "sha256": "8d297c0eac849635b1181763e676729d7ee9d6e038b54c6f4e9278c104c673cf",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-14T23:47:47+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/dimer/dimer_image03_localpbc_job9706068_20260814/NEWMODECAR",
+      "sha256": "bc355051b0c0a04fe7a8d34cdf6f8ef2ee78d7632527bcd063c7abf6d1c721cb",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-14T23:47:47+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-ch-h-to-ch2-dimer-9709074-submitted-20260814"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

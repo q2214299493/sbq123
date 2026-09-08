@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "event_id": "module-gate-fe110-co-dimer-frequency-validation-20260806",
+  "event_type": "module_gate_changed",
+  "entity": {
+    "kind": "module",
+    "id": "transition_state_search",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-06T23:33:18+08:00",
+  "recorded_at": "2026-08-06T23:33:18+08:00",
+  "summary": "Block final Dimer promotion on frequency-mode acceptance rather than connectivity.",
+  "payload": {
+    "module": "transition_state_search",
+    "status": "Blocked",
+    "depends_on": "accepted principal imaginary-mode assignment, configured frequency thresholds, and final Dimer soft-review acceptance",
+    "current_gate": "Dimer job `9656664` and VFA job `9694935` provide technical and one-mode evidence, but the mode is diagnostic-only, frequency thresholds are unset, and the soft review is frequency-handoff-only. Connectivity is optional for Dimer and no longer blocks validation"
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/dimer_handoff_job9640399_image04_20260803/dimer_analysis.json",
+      "sha256": "5744956f8428be0f60fdd5c6a08d671a9b6c5de738252835e7fd09746d1a631e",
+      "authority": "module_validation",
+      "observed_at": "2026-08-06T23:33:18+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/vfa_diagnostic_from_dimer9656664_co_only_20260805/vfa_analysis.json",
+      "sha256": "32bc11370f216542170b84158bf3b3c7a47c5709975b1c76ad54258b6527b730",
+      "authority": "module_validation",
+      "observed_at": "2026-08-06T23:33:18+08:00"
+    },
+    {
+      "locator": "configs/ts_validation_pipeline.yaml",
+      "sha256": "997d983cb94a009578783812ba063bfd8c241130158498cc1553a35823f5abe8",
+      "authority": "repository_document",
+      "observed_at": "2026-08-06T23:33:18+08:00"
+    }
+  ],
+  "supersedes": ["module-gate-fe110-co-connectivity-needs-review-20260806"],
+  "review": {
+    "required": true,
+    "reason_codes": ["scientific_method_change", "cross_module_change"],
+    "status": "pending"
+  }
+}

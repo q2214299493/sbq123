@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0.0",
+  "handoff_id": "DRAFT_NOT_FOR_SIMULATION",
+  "status": "DRAFT",
+  "created_at": "2026-07-31T00:00:00Z",
+  "dataset_binding": {
+    "path": null,
+    "sha256": null,
+    "schema_version": null,
+    "reaction_id": "REPLACE_WITH_REACTION_ID",
+    "reaction_record_sha256": null
+  },
+  "energetics": {
+    "basis": "ELECTRONIC_ENERGY",
+    "unit": "eV",
+    "temperature_K": null,
+    "pressure_bar": null,
+    "reference_convention_id": null,
+    "consistency_tolerance_eV": 1e-06,
+    "values": {
+      "initial": {"value": null, "source_ids": [], "extraction_method": null},
+      "final": {"value": null, "source_ids": [], "extraction_method": null},
+      "transition_state": {"value": null, "source_ids": [], "extraction_method": null},
+      "reaction": {"value": null, "source_ids": [], "extraction_method": null},
+      "activation_forward": {"value": null, "source_ids": [], "extraction_method": null},
+      "activation_reverse": {"value": null, "source_ids": [], "extraction_method": null}
+    }
+  },
+  "method": {
+    "code": "VASP",
+    "code_version": null,
+    "xc_functional": null,
+    "pseudopotential_family": null,
+    "pseudopotential_spec_sha256": null,
+    "encut_eV": null,
+    "kpoints": null,
+    "spin_policy": null,
+    "ismear": null,
+    "sigma_eV": null,
+    "ediff_eV": null,
+    "slab_model_id": null,
+    "fixed_atom_indices_sha256": null,
+    "dipole_policy": null,
+    "vacuum_angstrom": null,
+    "energy_convention_id": null,
+    "compatibility_fingerprint_sha256": null
+  },
+  "sources": [],
+  "validation": {
+    "automated_status": "NOT_AVAILABLE",
+    "dataset_validation": "NOT_AVAILABLE",
+    "method_compatibility": "NOT_AVAILABLE",
+    "initial_state": {
+      "electronic_convergence": "NOT_AVAILABLE",
+      "ionic_convergence": "NOT_AVAILABLE",
+      "geometry_validation": "NOT_AVAILABLE",
+      "scientific_status": "NOT_REVIEWED"
+    },
+    "final_state": {
+      "electronic_convergence": "NOT_AVAILABLE",
+      "ionic_convergence": "NOT_AVAILABLE",
+      "geometry_validation": "NOT_AVAILABLE",
+      "scientific_status": "NOT_REVIEWED"
+    },
+    "transition_state": {
+      "electronic_convergence": "NOT_AVAILABLE",
+      "ionic_convergence": "NOT_AVAILABLE",
+      "geometry_validation": "NOT_AVAILABLE",
+      "scientific_status": "NOT_REVIEWED"
+    },
+    "ts_grade": "NOT_AVAILABLE",
+    "frequency_validation": "NOT_AVAILABLE",
+    "connectivity_validation": "NOT_AVAILABLE",
+    "validation_report_source_id": null
+  },
+  "review": {
+    "decision": "PENDING",
+    "reviewer_id": null,
+    "reviewed_at": null,
+    "rationale": null,
+    "evidence_source_id": null
+  },
+  "downstream": {
+    "eligibility": "BLOCKED",
+    "software": []
+  }
+}

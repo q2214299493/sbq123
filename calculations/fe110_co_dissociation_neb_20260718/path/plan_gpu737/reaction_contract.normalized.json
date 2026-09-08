@@ -1,0 +1,251 @@
+{
+  "version": 1,
+  "reaction_id": "fe110_co_dissociation_topic1_9558184_to_9622455",
+  "reaction_family": "co_dissociation",
+  "reactant_id": "co_top_star_fe45_job_9558184",
+  "product_id": "c_lb_plus_o_h_star_fe45_job_9622455",
+  "index_base": 0,
+  "atom_map": [
+    {
+      "is": 0,
+      "fs": 0
+    },
+    {
+      "is": 1,
+      "fs": 1
+    },
+    {
+      "is": 2,
+      "fs": 2
+    },
+    {
+      "is": 3,
+      "fs": 3
+    },
+    {
+      "is": 4,
+      "fs": 4
+    },
+    {
+      "is": 5,
+      "fs": 5
+    },
+    {
+      "is": 6,
+      "fs": 6
+    },
+    {
+      "is": 7,
+      "fs": 7
+    },
+    {
+      "is": 8,
+      "fs": 8
+    },
+    {
+      "is": 9,
+      "fs": 9
+    },
+    {
+      "is": 10,
+      "fs": 10
+    },
+    {
+      "is": 11,
+      "fs": 11
+    },
+    {
+      "is": 12,
+      "fs": 12
+    },
+    {
+      "is": 13,
+      "fs": 13
+    },
+    {
+      "is": 14,
+      "fs": 14
+    },
+    {
+      "is": 15,
+      "fs": 15
+    },
+    {
+      "is": 16,
+      "fs": 16
+    },
+    {
+      "is": 17,
+      "fs": 17
+    },
+    {
+      "is": 18,
+      "fs": 18
+    },
+    {
+      "is": 19,
+      "fs": 19
+    },
+    {
+      "is": 20,
+      "fs": 20
+    },
+    {
+      "is": 21,
+      "fs": 21
+    },
+    {
+      "is": 22,
+      "fs": 22
+    },
+    {
+      "is": 23,
+      "fs": 23
+    },
+    {
+      "is": 24,
+      "fs": 24
+    },
+    {
+      "is": 25,
+      "fs": 25
+    },
+    {
+      "is": 26,
+      "fs": 26
+    },
+    {
+      "is": 27,
+      "fs": 27
+    },
+    {
+      "is": 28,
+      "fs": 28
+    },
+    {
+      "is": 29,
+      "fs": 29
+    },
+    {
+      "is": 30,
+      "fs": 30
+    },
+    {
+      "is": 31,
+      "fs": 31
+    },
+    {
+      "is": 32,
+      "fs": 32
+    },
+    {
+      "is": 33,
+      "fs": 33
+    },
+    {
+      "is": 34,
+      "fs": 34
+    },
+    {
+      "is": 35,
+      "fs": 35
+    },
+    {
+      "is": 36,
+      "fs": 36
+    },
+    {
+      "is": 37,
+      "fs": 37
+    },
+    {
+      "is": 38,
+      "fs": 38
+    },
+    {
+      "is": 39,
+      "fs": 39
+    },
+    {
+      "is": 40,
+      "fs": 40
+    },
+    {
+      "is": 41,
+      "fs": 41
+    },
+    {
+      "is": 42,
+      "fs": 42
+    },
+    {
+      "is": 43,
+      "fs": 43
+    },
+    {
+      "is": 44,
+      "fs": 44
+    },
+    {
+      "is": 45,
+      "fs": 45
+    },
+    {
+      "is": 46,
+      "fs": 46
+    }
+  ],
+  "reaction_atoms": [
+    45,
+    46
+  ],
+  "broken_bonds": [
+    [
+      45,
+      46
+    ]
+  ],
+  "formed_bonds": [],
+  "site_changes": [
+    "c:top->long_bridge",
+    "o:molecular->hollow"
+  ],
+  "compatibility": {
+    "material": "fe",
+    "surface": "fe110",
+    "branch": "true_fe110_5layer_5x5x1",
+    "slab_model": "fe45_bottom18_fixed",
+    "xc": "pbe",
+    "potcar_family": "paw_pbe",
+    "encut_ev": 400.0,
+    "kmesh": [
+      5,
+      5,
+      1
+    ],
+    "magnetic_state": "ispin2_ferromagnetic_fe",
+    "coverage": "3x3_single_co_reaction_complex"
+  },
+  "endpoints": {
+    "initial": {
+      "calculation_id": "fe110_co_dissociation_is_static_9631646",
+      "structure_file_id": "fe110_co_dissociation_is_static_9631646_poscar",
+      "static_result_id": "fe110_co_dissociation_is_static_9631646_total_energy_eV"
+    },
+    "final": {
+      "calculation_id": "fe110_co_dissociation_fs_static_9631647",
+      "structure_file_id": "fe110_co_dissociation_fs_static_9631647_poscar",
+      "static_result_id": "fe110_co_dissociation_fs_static_9631647_total_energy_eV"
+    }
+  },
+  "waypoint_files": [],
+  "retrieval_constraints": {
+    "decision": "NO_TRANSFERABLE_FE110_PATH",
+    "accepted_local_inputs_only": true,
+    "rejected_external_record": "catalysis-hub-fe211-co-dissociation-1284",
+    "reason": "Fe211 facet and unspecified model are incompatible; no coordinates or energies transferred."
+  },
+  "atom_map_sha256": "c106ae99bf673f9aaf51a0ae6515a4af625bee66960393e3700e78ddc247f248",
+  "compatibility_sha256": "ba6c374ee097a51481eaa1dc468c582ac65af7290dc0cfb5f3d20a0658f59b95",
+  "contract_sha256": "f05f901204621dd787e901a4dbfd74535e513616176b9fc65834697851bf39b0"
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-dual-model-production-1318-submitted-20260826",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-26T00:13:16+08:00",
+  "recorded_at": "2026-08-25T16:13:16Z",
+  "summary": "After explicit user authorization, submitted exact request SHA-256 ac7d8c0c2b67d170ed9f0b5993aca6374e689a9103d01c05a5bbf4374f1b4604 as MZ73 dual-model production GPU job 1318; the initial live scheduler state is RUNNING.",
+  "payload": {
+    "objective": "Run and review MZ73 job 1318 for the Fe(110) C2HO* + H* -> C2H2O* + * dual-model predicted path candidate.",
+    "phase": "active",
+    "current_evidence": [
+      "The user explicitly authorized submission of the previously reviewed exact request.",
+      "Remote preflight passed the request, all 13 structures, initial geometry, four runtime files, both checkpoint hashes, shell syntax, Python compilation, and duplicate-live-job checks.",
+      "Slurm job 1318 was submitted once on MZ73 with one GPU, four CPUs, 40 GB memory, and a four-hour walltime.",
+      "The initial live scheduler query reports 1318 RUNNING on MZ73. Scheduler state does not establish optimizer progress or scientific validity.",
+      "The job remains a predicted path candidate only; no VASP job, TS, DIMER parent, or barrier is authorized or established."
+    ],
+    "one_executable_step": "At the next requested checkpoint, query live Slurm state and inspect the hash-bound runtime state/producer record; after termination, return all artifacts to work for provenance, geometry, reaction-coordinate, and elementary-step review before any VASP recommendation.",
+    "submission_boundary": "Job 1318 is the single authorized production GPU submission. Do not resubmit, change the method, submit VASP, or prepare a DIMER handoff without new reviewed evidence and authorization.",
+    "done_when": [
+      "Job 1318 has a terminal producer record and is absent from the live queue.",
+      "All returned image and runtime hashes validate and the complete path passes work-side geometry, periodic branch, O-H resolution, C-C preservation, and elementary-step review.",
+      "The MatRIS/AQCat25 exact-structure comparison is reviewed and a least-cost VASP validation/refinement recommendation is ready for separate authorization."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_production_request_20260825/submission_record_job1318.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_production_request_20260825/work_to_gpu/request.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_production_request_20260825/submission_preflight.work.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_production_request_20260825/submission_record_job1318.json",
+      "sha256": "c747b7ab0d4336e0d8f687072a81b8b4307de1ba1204383fe018a06e6fe34250",
+      "authority": "scheduler",
+      "observed_at": "2026-08-26T00:13:16+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_production_request_20260825/work_to_gpu/request.json",
+      "sha256": "ac7d8c0c2b67d170ed9f0b5993aca6374e689a9103d01c05a5bbf4374f1b4604",
+      "authority": "structure_output",
+      "observed_at": "2026-08-26T00:13:16+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_production_request_20260825/submission_preflight.work.json",
+      "sha256": "78f47ee7adb5d62d1a6d6094a1d1958b5b1b716adcc55b4c97d5bf2af813519f",
+      "authority": "module_validation",
+      "observed_at": "2026-08-26T00:13:16+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-dual-model-production-request-awaiting-authorization-20260825"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

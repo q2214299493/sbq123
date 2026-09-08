@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-dual-model-production-request-awaiting-authorization-20260825",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-25T23:36:14+08:00",
+  "recorded_at": "2026-08-25T15:36:14Z",
+  "summary": "Prepared and reviewed the exact full 13-image MatRIS-primary/AQCat25-secondary production GPU request after smoke job 1317 passed; the request is awaiting explicit user submission authorization.",
+  "payload": {
+    "objective": "Obtain explicit user authorization to submit the exact hash-bound 13-image dual-model production GPU request for Fe(110) C2HO* + H* -> C2H2O* + *.",
+    "phase": "active",
+    "current_evidence": [
+      "Bounded MZ73 smoke job 1317 passed the executor, temporary-restraint release, exact-structure dual-model comparison, provenance, and geometry checks.",
+      "The formal request contains all 13 reviewed seed images; its initial geometry has five internal images in the O-H 1.1-1.8 A interval, C1-C2 distances of 1.3994-1.4282 A, and maximum adjacent mobile-atom RMSD 0.1764 A.",
+      "Production settings are 50 restrained MatRIS preconditioning steps at fmax 0.20 eV/A, mandatory restraint release, up to 300 ordinary MatRIS ML-NEB steps at fmax 0.10 eV/A, and conditional ML-CI only after a converged continuous single-peak ordinary path.",
+      "AQCat25 will evaluate only the exact final MatRIS path structures without relaxation. Both model outputs remain predictions and every returned artifact must pass work-side review.",
+      "The exact production request SHA-256 is ac7d8c0c2b67d170ed9f0b5993aca6374e689a9103d01c05a5bbf4374f1b4604. It has not been uploaded or submitted."
+    ],
+    "one_executable_step": "Wait for explicit user authorization; if granted, upload and submit exactly request SHA-256 ac7d8c0c2b67d170ed9f0b5993aca6374e689a9103d01c05a5bbf4374f1b4604 once on MZ73 and record the Slurm job ID.",
+    "submission_boundary": "No production GPU submission or VASP action is authorized. The accepted smoke authorization does not extend to the formal production request.",
+    "done_when": [
+      "The user explicitly authorizes the exact request hash.",
+      "The request and runtime/checkpoint hashes pass remote preflight and exactly one MZ73 production job is submitted.",
+      "The returned production path passes work-side provenance, geometry, reaction-coordinate, and elementary-step review before any VASP recommendation."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_production_request_20260825/submission_preflight.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_production_request_20260825/work_to_gpu/request.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_smoke_v3_20260825/smoke_review.work.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_production_request_20260825/submission_preflight.work.json",
+      "sha256": "78f47ee7adb5d62d1a6d6094a1d1958b5b1b716adcc55b4c97d5bf2af813519f",
+      "authority": "module_validation",
+      "observed_at": "2026-08-25T23:36:14+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_production_request_20260825/work_to_gpu/request.json",
+      "sha256": "ac7d8c0c2b67d170ed9f0b5993aca6374e689a9103d01c05a5bbf4374f1b4604",
+      "authority": "structure_output",
+      "observed_at": "2026-08-25T23:36:14+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_smoke_v3_20260825/smoke_review.work.json",
+      "sha256": "0eb7a5b581b6fbb86f481c6c1a6f081c58b8a267b9dafe8aa1759865f0302f51",
+      "authority": "module_validation",
+      "observed_at": "2026-08-25T23:36:14+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-dual-model-smoke-1317-passed-20260825"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

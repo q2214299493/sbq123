@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-aqcat-force-screen-passed-job1274-20260820",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-transition-state",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-20T00:10:00+08:00",
+  "recorded_at": "2026-08-19T16:10:00Z",
+  "summary": "Authorized MZ73 job 1274 completed the five-image exact-structure AQCat25 force-prediction batch; all outputs passed validation and the aggregate local VASP force screen passed without triggering fine-tuning.",
+  "payload": {
+    "objective": "Establish whether the current AQCat25 checkpoint can be calibrated for the Fe(110) hydrogen-transfer TS/path domain before using it to accelerate the remaining C* + H* -> CH* transition-state search.",
+    "phase": "active",
+    "current_evidence": [
+      "MZ73 Slurm job 1274 completed with ExitCode=0:0 and a producer success record bound to batch SHA-256 da16e5d2a856c5384f99b9411550e83971d02284d2e052cf70e8fc197c63c1dc.",
+      "All five returned prediction files pass the AQCat25 force-prediction Schema and their remote-to-local SHA-256 hashes match.",
+      "The exact-structure aggregate AQCat25-versus-VASP force metrics are component MAE 0.043657 eV/A, vector RMSE 0.119625 eV/A, and vector maximum 0.400570 eV/A.",
+      "Every selected image and all three aggregate operational checks passed; force-only fine-tuning is not triggered for this checkpoint.",
+      "This is a local heuristic force screen only. active_learning_converged=false, ts_domain_validated=false, and scientifically_validated_ts=false.",
+      "The GPU calculation, job evidence, returned outputs, diagnostic metrics, and review were appended to data/project_registry.sqlite3."
+    ],
+    "one_executable_step": "Prepare a reviewable, disjoint held-out TS-domain validation-set plan spanning rising-path, near-saddle, and falling-path structures; do not submit additional VASP or GPU jobs without explicit authorization.",
+    "submission_boundary": "No fine-tuning, additional VASP labels, GPU validation execution, ML-NEB rerun, NEB, DIMER, frequency, connectivity, or barrier action is authorized by job 1274 completion.",
+    "done_when": [
+      "At least five disjoint held-out VASP-labeled TS-domain structures pass registered bootstrap calibration metrics for the exact checkpoint and compatibility branch.",
+      "A hash-bound calibration review decides whether this checkpoint is reusable for the in-scope hydrogen-transfer path domain.",
+      "Only after calibration may the strategy engine choose the least-cost VASP NEB/CI-NEB/DIMER continuation from the complete path evidence."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/aqcat_force_predictions_round_000_sigma0p20_v2/force_assessment_summary.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/active_learning_sigma0p20/path_force_agreement.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/aqcat_force_predictions_round_000_sigma0p20_v2/gpu_completion_record.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/aqcat_force_predictions_round_000_sigma0p20_v2/registry_gpu_completion_receipt.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/aqcat_force_predictions_round_000_sigma0p20_v2/force_assessment_summary.json",
+      "sha256": "6302c20b4d672de62a4c45ec3c9497b68c2130c496cc3ae762cd51cd683bfef7",
+      "authority": "module_validation",
+      "observed_at": "2026-08-20T00:10:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/active_learning_sigma0p20/active_learning_state.json",
+      "sha256": "d5f1103b7f7cb78fbdaa12595a7cf5d4cbbfff9745b69e6a6880553606f3d901",
+      "authority": "module_validation",
+      "observed_at": "2026-08-20T00:10:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/aqcat_force_predictions_round_000_sigma0p20_v2/gpu_completion_record.json",
+      "sha256": "2ec9a2be1205a0ea21b67eae0c239636a59e3ae17f0d6bacf03e374c5ecc2561",
+      "authority": "scheduler",
+      "observed_at": "2026-08-20T00:10:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/aqcat_force_predictions_round_000_sigma0p20_v2/registry_gpu_completion_receipt.json",
+      "sha256": "258b57406bdd84eda11d1ea5d8137252f8e972583c3251ed26391405a7922c21",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-20T00:10:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-aqcat-prediction-batch-prepared-20260819"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

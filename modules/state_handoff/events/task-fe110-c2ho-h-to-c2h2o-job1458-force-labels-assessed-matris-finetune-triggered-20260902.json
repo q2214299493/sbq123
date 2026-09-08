@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-job1458-force-labels-assessed-matris-finetune-triggered-20260902",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-02T10:02:29+08:00",
+  "recorded_at": "2026-09-02T02:02:29Z",
+  "summary": "VASP jobs 9738672-9738677 are DONE and all six exact-structure force labels passed scheduler, normal-completion, electronic, force, magnetic, structure, remote-hash, and SIGMA=0.20 compatibility gates. MatRIS passed every force ceiling but failed the relative-energy RMSE ceiling at 0.144987 eV; AQCat25 passed all screening ceilings. The policy therefore triggers an energy-force-aware MatRIS fine-tuning candidate, but no fine-tuning or path rerun was submitted.",
+  "payload": {
+    "objective": "Prepare a held-out-exclusion-bound energy-force-aware MatRIS replay fine-tuning request for review; obtain separate user authorization before any MZ73 fine-tuning execution or new-checkpoint complete-path rerun.",
+    "phase": "active",
+    "current_evidence": [
+      "LSF jobs pre_04=9738672, fail_04=9738673, pre_05=9738674, fail_05=9738675, pre_06=9738676, and fail_06=9738677 are all DONE.",
+      "All six labels pass normal VASP completion, electronic convergence, exact 50-atom structure/order, complete all-atom forces, total and atom-resolved magnetic evidence, remote/local output hashes, and the active SIGMA=0.20 fingerprint.",
+      "MatRIS movable-atom metrics are component MAE 0.042561 eV/A, vector RMSE 0.107984 eV/A, vector max 0.333501 eV/A, and relative-energy RMSE 0.144987 eV.",
+      "MatRIS passes the three force ceilings but fails only the 0.10 eV relative-energy RMSE ceiling; its lowest-energy structure matches VASP.",
+      "AQCat25 movable-atom metrics are component MAE 0.042642 eV/A, vector RMSE 0.120423 eV/A, vector max 0.460680 eV/A, and relative-energy RMSE 0.060631 eV; all screening ceilings pass and its lowest-energy structure matches VASP.",
+      "The six VASP energies remain force-label-only and are not reportable final barrier energies.",
+      "No real three-member MatRIS committee exists, so no quantitative uncertainty or uncertainty-error quadrant claim is made.",
+      "The active-learning acceleration remains uncalibrated until a new checkpoint, complete-path rerun, and disjoint held-out TS validation pass."
+    ],
+    "one_executable_step": "Prepare the hash-bound MatRIS energy-force-aware replay fine-tuning request with frozen held-out exclusions; do not submit it without separate user authorization.",
+    "submission_boundary": "Fine-tuning, checkpoint promotion, complete ML-path rerun, VASP micro-NEB, Dimer, and final barrier actions remain unauthorized. The completed static labels cannot enter the final-energy chain.",
+    "done_when": [
+      "A fine-tuning request verifies the MatRIS trigger assessment, all six quality-passed labels, the frozen held-out exclusions, adsorption replay, active policy, and base checkpoint.",
+      "The user separately authorizes or declines the reviewed MZ73 fine-tuning execution."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/canonical_vasp_force_label_set.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/canonical_dual_model_vasp_error_assessment.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/canonical_dual_model_active_learning_state.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/canonical_vasp_force_label_set.json",
+      "sha256": "150100137d80e24e8d6d59074419c092769284f371c7cd6ed19f1389f263b963",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T10:01:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/canonical_dual_model_vasp_error_assessment.json",
+      "sha256": "4c4525a788d229df507865ff15120997bbd446781d0f1a72d0daa0776b037334",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T10:02:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/canonical_dual_model_active_learning_state.json",
+      "sha256": "48062526df3d01a1e6d42066cfbb5f7f231a44c2b8cdfa04211fcd0336441a66",
+      "authority": "repository_document",
+      "observed_at": "2026-09-02T10:02:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-job1458-force-labels-9738672-9738677-submitted-20260901"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

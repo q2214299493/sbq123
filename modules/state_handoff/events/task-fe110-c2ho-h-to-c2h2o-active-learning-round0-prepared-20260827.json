@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-active-learning-round0-prepared-20260827",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-27T00:00:42+08:00",
+  "recorded_at": "2026-08-26T16:00:42Z",
+  "summary": "Job 1324 stopped at the first restraint-release O-H coverage gate after preserving a converged 17-image restrained snapshot. That snapshot is now the hash-bound round-0 source for a deployed but unsubmitted MatRIS-primary/AQCat25-secondary exact-prediction and VASP-calibration workflow.",
+  "payload": {
+    "objective": "Run a real MatRIS-primary/AQCat25-secondary active-learning round for the Fe(110) C2HO* + H* -> C2H2O* TS path, beginning from the immutable job-1324 preconditioning snapshot and its first restraint-release failure boundary.",
+    "phase": "active",
+    "current_evidence": [
+      "MZ73 job 1324 ended with producer exit code 1 at 2026-08-26T14:55:25Z; no fully released ML-NEB path was produced.",
+      "The restrained preconditioning stage converged and preserved an immutable 17-image snapshot whose geometry gates all passed. It is a restrained diagnostic path, not an MEP and not a Dimer parent.",
+      "The first half-strength release failed because required O-H 1.1-1.8 A coverage fell from images 10/11/12 to only 10/11. C-C preservation, O-H monotonicity, periodic continuity, adjacent RMSD, and the 1.0 A maximum single-movable-atom-step gate still passed.",
+      "The coverage-loss boundary is accepted only as a round-0 active-learning sampling trigger; threshold relaxation or another unconstrained path resubmission is not authorized.",
+      "A hash-bound 17-structure exact prediction batch is deployed to MZ73 with MatRIS checkpoint 1e6a85b33db075ad1637eca7537084024a694b1340358911212d8a5c518c6601 and AQCat25 checkpoint e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50.",
+      "Remote request, all structure hashes, runtime hashes, checkpoint hashes, Python compilation, and shell syntax passed. No GPU prediction job and no VASP job has been submitted.",
+      "The work-side chain now supports exact full-force predictions from both models, peak/neighbor/rising/falling/disagreement/anomaly selection, compatible SIGMA=0.20 eV VASP label preparation, and separate MatRIS-VASP/AQCat25-VASP force plus relative-energy assessment. Calibration has not yet occurred."
+    ],
+    "one_executable_step": "After explicit authorization, submit exactly one bounded MZ73 job for the deployed 17-structure exact MatRIS/AQCat25 prediction batch. On completion, collect the hash-bound prediction set, select at most seven informative structures, and prepare but do not submit the compatible VASP force-label batch.",
+    "submission_boundary": "The job-1324 authorization is consumed. Do not submit the prepared MZ73 exact-prediction batch, VASP labels, fine-tuning, a new ML path, CI-NEB, or Dimer without the applicable reviewed evidence and explicit authority. Model-model disagreement is sampling rank only until independent VASP held-out calibration passes.",
+    "done_when": [
+      "Exact MatRIS and AQCat25 predictions exist for every frozen round-0 structure.",
+      "Selected identical structures have accepted VASP single-point energy and complete per-atom force labels on the active SIGMA=0.20 eV branch.",
+      "MatRIS-VASP and AQCat25-VASP errors are assessed separately.",
+      "If MatRIS fails, an energy-and-force-aware checkpoint is trained with replay, the complete path is rerun, and a disjoint held-out VASP TS set passes before calibration is claimed.",
+      "A scientifically reviewed VASP refinement path can then enter the transition-state-search execution gates."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_staged_release_v4_20260826/gpu_return_job1324/production/producer_exit_record.failure.1324.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_staged_release_v4_20260826/gpu_return_job1324/production/stage_snapshots/restrained_preconditioning_complete/snapshot_manifest.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_staged_release_v4_20260826/gpu_return_job1324/production/restraint_release_01_half_strength.geometry_guard_failure.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_release_failure_20260826/active_learning_state.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_release_failure_20260826/remote_deployment_preflight.MZ73.json`",
+      "`configs/dual_model_ts_active_learning.yaml`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_staged_release_v4_20260826/gpu_return_job1324/production/producer_exit_record.failure.1324.json",
+      "sha256": "86f01067384a4370b2c187311cbce8b88ad7246f8a94153a787a7495f512358e",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-27T00:00:42+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_staged_release_v4_20260826/gpu_return_job1324/production/stage_snapshots/restrained_preconditioning_complete/snapshot_manifest.json",
+      "sha256": "cfbf88f40ddb1f8e1b2327492f6ab7a15bae4b338adca7222e9d12915bfe644c",
+      "authority": "structure_output",
+      "observed_at": "2026-08-27T00:00:42+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_staged_release_v4_20260826/gpu_return_job1324/production/restraint_release_01_half_strength.geometry_guard_failure.json",
+      "sha256": "bf072e8b3771e3303ae890cd56cc7e859f6ff8aa23ca269292f0d7fb05e2bcf0",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T00:00:42+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_release_failure_20260826/active_learning_state.json",
+      "sha256": "bd462a872cf2ffcb9e0b304761d82f370db55b6724330634d28dbd239ee8655f",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T00:00:42+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_release_failure_20260826/remote_deployment_preflight.MZ73.json",
+      "sha256": "eae6c91148e6788fcde85916578f4ba3dbd7dc3e5ae8743bebf12bc3bb8f65c7",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T00:00:42+08:00"
+    },
+    {
+      "locator": "configs/dual_model_ts_active_learning.yaml",
+      "sha256": "f0a313e38bf7302525155e2ff4d6a5bc38f222fdd127c1ca71dacd04f0c53bb4",
+      "authority": "repository_document",
+      "observed_at": "2026-08-27T00:00:42+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-staged-release-v4-job1324-running-20260826"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-v10-nonabsolute-guards-prepared-20260829",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-29T01:02:00+08:00",
+  "recorded_at": "2026-08-28T17:02:00Z",
+  "summary": "A 21-image v10 package was prepared without changing the v9 structures or frozen checkpoints; O-H interval count is review-only, moderate C-C excursions are warnings, and only severe C-C compression or extension remains a hard stop.",
+  "payload": {
+    "objective": "Run and review the complete frozen-MatRIS ordinary ML-NEB path for Fe(110) C2HO*+H* -> C2H2O*+*, followed by AQCat25 exact fixed-path audit only after a complete primary path returns.",
+    "phase": "blocked",
+    "current_evidence": [
+      "The v10 package contains the exact same 21 structure hashes as v9 and retains the frozen MatRIS and AQCat25 checkpoints.",
+      "O-H interval image count is review evidence and is not a transient or final hard gate; O-H backtracking remains graded-warning evidence.",
+      "The C1-C2 normal review window is 1.25-1.60 A; excursions within the reaction-specific 1.10-1.90 A hard window are warnings, while more severe compression or extension stops the path.",
+      "Collision, non-finite model output, periodic-branch failure, adjacent RMSD above 0.75 A, and a single movable-atom step above 1.20 A remain hard safety failures.",
+      "Local no-model geometry preflight, Python compilation, the complete dual-model executor test file, and Ruff checks passed.",
+      "At 2026-08-29T01:01:22+08:00 all four MZ73 RTX 4090 GPUs had active processes; free memory was approximately 15.99, 8.93, 2.52, and 18.94 GiB on GPUs 0-3 respectively."
+    ],
+    "one_executable_step": "After explicit user authorization, run a hash-bound MZ73 remote no-model preflight, recheck live GPU memory, and submit the v10 package once without changing its scientific settings.",
+    "submission_boundary": "The v10 package is prepared locally only. No upload, GPU resubmission, MatRIS fine-tuning, VASP, micro-NEB, Dimer, TS acceptance, or barrier action is authorized by this preparation event.",
+    "done_when": [
+      "A separately authorized v10 run returns a complete MatRIS path and AQCat25 exact fixed-path audit, or a truthful execution failure is recorded.",
+      "The returned path is reviewed for convergence, chemistry, periodic continuity, reaction-coordinate coverage, peak structure, and dual-model comparison before any VASP proposal."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v10_nonabsolute_guards_20260829/preparation_manifest.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v10_nonabsolute_guards_20260829/work_to_gpu/request.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/provenance/build_v10_nonabsolute_guards_20260829.py`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v10_nonabsolute_guards_20260829/preparation_manifest.json",
+      "sha256": "523f97c4b450add99cfb7c756f00dcb4529d027a9127982089f6fac224b9cc74",
+      "authority": "module_validation",
+      "observed_at": "2026-08-29T01:02:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v10_nonabsolute_guards_20260829/work_to_gpu/request.json",
+      "sha256": "ee9aeebad70e1f0959ffc90edbe552c1f3aed31de8e93f95ed338a266f528098",
+      "authority": "module_validation",
+      "observed_at": "2026-08-29T01:02:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-v9-piecewise-arc-job1346-failed-20260829"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

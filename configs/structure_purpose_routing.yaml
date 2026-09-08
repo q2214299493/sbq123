@@ -1,0 +1,19 @@
+schema_version: 1
+enabled: true
+
+endpoint_validation:
+  threshold_version: ts_endpoint_thresholds_v2
+  defaults:
+    reactive_atom_displacement_warning_A: 2.0
+    non_reactive_adsorbate_displacement_warning_A: 0.8
+    adsorbate_com_displacement_warning_A: 1.5
+    surface_atom_displacement_warning_A: 0.5
+    covalent_radius_scale: 1.25
+    minimum_bond_distance_A: 0.4
+    collision_radius_scale: 0.55
+    absolute_minimum_distance_A: 1.0
+    desorption_height_change_warning_A: 2.0
+  overrides:
+    surfaces: {}
+    reaction_types: {}
+    templates: {}

@@ -1,0 +1,48 @@
+schema_version: 1
+stage_order:
+  - path_topology
+  - dimer_convergence
+  - vibrational_frequency
+  - unique_imaginary_mode
+  - ts_validation
+dimer_hard_requirements:
+  - technically_converged
+  - normal_completion
+  - vasp_force_converged
+  - negative_curvature
+dimer_soft_review_decisions:
+  - allow_frequency_handoff
+  - accept_for_ts_validation
+dimer_acceptance_stage_order:
+  - dimer_hard_convergence
+  - frequency_validation
+  - result_record
+dimer_force_torque_review:
+  conditional_on_soft_target_miss: true
+dimer_connectivity:
+  required: false
+  optional_diagnostic: true
+multi_transition_state:
+  topology_review_status: accepted
+  branch_plan_status: accepted
+  require_converged_intermediate_between_adjacent_ts: true
+  require_segment_local_contract: true
+  forbid_global_is_fs_for_internal_segments: true
+vfa:
+  method: finite_difference_partial_hessian
+  active_set_policy: contract_defined_local
+  require_all_reaction_atoms: true
+  require_full_hessian: false
+  require_bound_scope_review: true
+  expand_local_active_set_for_mode_assignments:
+    - ambiguous
+    - rejected_surface_mode_coupling
+    - unresolved_local_surface_coupling
+  required_raw_imaginary_count: 1
+  accepted_mode_assignments:
+    - accepted
+  multiple_raw_imaginary_modes_action: classify_higher_order_saddle_or_soft_mode
+execution:
+  submission_executor: scripts.neb_agent.submission
+  execution_gate: scripts.ts_strategy_engine.execution_gate
+  direct_bsub_forbidden: true

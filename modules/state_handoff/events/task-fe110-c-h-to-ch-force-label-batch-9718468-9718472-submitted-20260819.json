@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-force-label-batch-9718468-9718472-submitted-20260819",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-transition-state",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-19T16:23:06+08:00",
+  "recorded_at": "2026-08-19T08:23:06Z",
+  "summary": "The explicitly authorized SIGMA=0.20 image 02-06 VASP static force-label batch was submitted on sunboquan-codex as LSF jobs 9718468-9718472 and registered with exact input and scheduler provenance.",
+  "payload": {
+    "objective": "Run compatibility-matched VASP static force labels for the reviewed Fe(110) C* + H* -> CH* + * GPU-path images 02-06 and return exact DFT forces for active-learning assessment.",
+    "phase": "active",
+    "current_evidence": [
+      "The user authorized one bounded five-job VASP force-label batch for images 02-06 under ISMEAR=1 and SIGMA=0.20 eV.",
+      "All five hash-bound execution gates allowed only SUBMIT_DIAGNOSTIC_VASP and the approved Fe/C/H POTCAR hash was verified before upload.",
+      "Image 02 is LSF job 9718468, image 03 is 9718469, image 04 is 9718470, image 05 is 9718471, and image 06 is 9718472.",
+      "The latest live scheduler snapshot showed job 9718468 RUN and jobs 9718469-9718472 PEND in Gkn_normal.",
+      "All five calculations, jobs, status records, input files, and compatibility fingerprints were inserted into data/project_registry.sqlite3.",
+      "These jobs are non-reportable static energy/force labels; no NEB, DIMER, frequency, final TS, or barrier claim has been made."
+    ],
+    "one_executable_step": "Monitor jobs 9718468-9718472 to terminal LSF states; after all are DONE, collect exact outputs, verify normal completion/electronic convergence/full force blocks, and ingest the complete five-image force-label batch.",
+    "submission_boundary": "Only jobs 9718468-9718472 are authorized. No retry, replacement, additional force label, NEB, DIMER, frequency, connectivity, or GPU fine-tuning job is authorized without new evidence and user direction.",
+    "done_when": [
+      "All five LSF jobs reach terminal states with stored scheduler evidence.",
+      "Every DONE label passes normal VASP completion, electronic convergence, exact-structure hash, and complete force-block validation.",
+      "The complete five-image VASP force-label batch is ingested into the active-learning state for AQCat25/VASP force assessment."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/vasp_force_labels_round_000_sigma0p20/batch_submission_summary.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/active_learning_sigma0p20/active_learning_state.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/vasp_force_labels_round_000_sigma0p20/registry_submission_receipt.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/vasp_force_labels_round_000_sigma0p20/batch_submission_summary.json",
+      "sha256": "c1066573ccff8f8b471f41282e7a92d98b951a968ad2ec03b62cfc361a0817e3",
+      "authority": "module_validation",
+      "observed_at": "2026-08-19T16:23:06+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/vasp_force_labels_round_000_sigma0p20/registry_submission_receipt.json",
+      "sha256": "36be1c75d905c5755f54208b03c71d48cac74385a55beb86df38146d61c02f75",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-19T16:23:06+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/vasp_force_labels_round_000_sigma0p20/user_execution_authorization.json",
+      "sha256": "1091ca4b5b8113c4fc2c2929aa337f603a9f0f1d53b2c96af01856dd4042d2a2",
+      "authority": "repository_document",
+      "observed_at": "2026-08-19T16:23:06+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-force-label-sigma0p20-rebuilt-20260819"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

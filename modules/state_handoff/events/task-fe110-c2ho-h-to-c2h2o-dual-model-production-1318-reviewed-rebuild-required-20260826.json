@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-dual-model-production-1318-reviewed-rebuild-required-20260826",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-26T00:39:05+08:00",
+  "recorded_at": "2026-08-25T16:39:05Z",
+  "summary": "MZ73 job 1318 exited successfully at the producer level and all returned files hash-match, but the reviewed 13-image predicted path fails O-H forming-region resolution and single-peak continuity; it is rejected for VASP or DIMER parent use.",
+  "payload": {
+    "objective": "Rebuild and review a continuous, O-H-resolved dual-model GPU path for Fe(110) C2HO* + H* -> C2H2O* + * before any VASP recommendation.",
+    "phase": "active",
+    "current_evidence": [
+      "Job 1318 is absent from the live Slurm queue; MZ73 accounting is disabled, so the successful producer exit record is process evidence rather than independent scheduler DONE evidence.",
+      "All 44 production artifacts and slurm-1318.out were returned to work with exact remote/local SHA-256 matches; all 13 manifest structure hashes validate.",
+      "Temporary C-C/O-H preconditioning restraints were removed before ordinary ML-NEB. Ordinary MatRIS ML-NEB reported convergence after 119 steps, but ML-CI did not run because the path contains three strict internal peaks.",
+      "Atom order, cell, PBC, fixed indices 0-17, periodic branch, adjacent RMSD, minimum contact, and C-C preservation pass independently.",
+      "The O-H forming coordinate is under-resolved: image 06 is 2.1620 A and image 07 is 1.0139 A, with zero internal images in the required 1.1-1.8 A interval. The reaction coordinate also backtracks and the strict peaks are images 03, 07, and 09.",
+      "The current path remains prediction-only and is rejected for VASP validation, DIMER parent preparation, TS, or barrier claims."
+    ],
+    "one_executable_step": "After separate user authorization, prepare a revised MatRIS-primary GPU seed with monotonic O-H progress and at least three internal images in the 1.1-1.8 A interval, then run submission preflight; do not submit VASP or prepare DIMER from job 1318.",
+    "submission_boundary": "No further GPU or VASP job, path-method change, or DIMER handoff is authorized by the job-1318 completion review.",
+    "done_when": [
+      "A revised path preserves atom order, cell, PBC, fixed layers, periodic branch, and C-C bonding.",
+      "The revised path has monotonic O-H progress, at least three internal images between 1.1 and 1.8 A, and a chemically reviewed elementary-step profile.",
+      "A least-cost VASP validation or refinement recommendation is ready for separate authorization."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_production_request_20260825/gpu_return_job1318/work_path_review_job1318.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_production_request_20260825/gpu_return_job1318/production/dual_model_gpu_ml_neb_path_manifest.candidate.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_production_request_20260825/gpu_return_job1318/production/producer_exit_record.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_production_request_20260825/gpu_return_job1318/scheduler_terminal_query_job1318_20260826.txt`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_production_request_20260825/gpu_return_job1318/work_path_review_job1318.json",
+      "sha256": "ececf4eb52cff584a5bf16c63fed5abd3d237cb8ffcc8fa0d481248726303fbe",
+      "authority": "module_validation",
+      "observed_at": "2026-08-26T00:39:05+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_production_request_20260825/gpu_return_job1318/production/dual_model_gpu_ml_neb_path_manifest.candidate.json",
+      "sha256": "becf5f03c286e59fb8696e06ea29797fcc26d187db0e7eb2c373e18c30429463",
+      "authority": "structure_output",
+      "observed_at": "2026-08-26T00:39:05+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_production_request_20260825/gpu_return_job1318/production/producer_exit_record.json",
+      "sha256": "188c9ef26260ccdad13ad2004483296dc9e0820fa91dd6935c3754c2f84b8cfc",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-26T00:39:05+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_production_request_20260825/gpu_return_job1318/scheduler_terminal_query_job1318_20260826.txt",
+      "sha256": "3f415aee47e120c10b6525693f20c84f5690eedd736ed0635ca035543a4d10b3",
+      "authority": "scheduler",
+      "observed_at": "2026-08-26T00:39:05+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-dual-model-production-1318-submitted-20260826"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

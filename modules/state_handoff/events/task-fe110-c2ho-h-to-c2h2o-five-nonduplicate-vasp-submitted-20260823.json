@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-five-nonduplicate-vasp-submitted-20260823",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "adsorption_workflow"
+  },
+  "occurred_at": "2026-08-23T12:09:54+08:00",
+  "recorded_at": "2026-08-23T04:09:54Z",
+  "summary": "Five nonduplicate Fe(110) endpoint candidates were hash-verified, submitted as production-branch VASP relaxations, and registered; FS-B was excluded as a duplicate of the selected FS-C representative.",
+  "payload": {
+    "objective": "Complete and review the five nonduplicate VASP endpoint relaxations for Fe(110) [CH][C][O]* + H* -> [CH][C]OH* + *.",
+    "phase": "active",
+    "current_evidence": [
+      "Jobs 9725471-9725475 were accepted by LSF queue Gkn_normal and were PEND at the first live check.",
+      "The submitted set is IS-A, IS-B, IS-C, FS-A, and FS-C; FS-B was not submitted because it shares the strict reviewed duplicate cluster with FS-C.",
+      "All local and remote POSCAR, INCAR, KPOINTS, POTCAR.spec, and script.lsf hashes match, and the remote Fe_C_O_H POTCAR hash is e3bc41a37d795bfcf1b1dc9a2a9ddfb5ef86aa5dc9aa0ac5a3583471a0982f85.",
+      "All five use the active production endpoint-relaxation branch: PBE/PAW-PBE, ENCUT 400 eV, Gamma 5x5x1, ISMEAR 1, SIGMA 0.20 eV, EDIFF 1E-5, EDIFFG -0.02 eV/A, NSW 300, bottom 18 Fe fixed.",
+      "The five calculations and scheduler jobs are registered as submitted_pending in data/project_registry.sqlite3."
+    ],
+    "one_executable_step": "Monitor jobs 9725471-9725475 and, after scheduler termination, separately validate electronic convergence, ionic convergence, final geometry/site identity, and nonduplicate endpoint suitability.",
+    "submission_boundary": "No automatic restart, additional adsorption candidate, NEB, DIMER, frequency, final barrier, or energy-table promotion is authorized by this submission.",
+    "done_when": [
+      "All five jobs have authoritative terminal scheduler evidence and complete calculation files.",
+      "Electronic and ionic convergence are assessed separately for each candidate.",
+      "Final structures are chemistry- and site-reviewed, and any post-relaxation duplicates are identified before IS/FS selection."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/provenance/vasp_nonduplicate_submission_summary.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/provenance/vasp_nonduplicate_submission_registration_receipt.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/provenance/vasp_nonduplicate_submission_summary.json",
+      "sha256": "824b284a52acc746cee444076d9e0fd181150b91b82dc3677b5bc0f700b02073",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-23T12:09:54+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/provenance/vasp_submission_scheduler_evidence_20260823.txt",
+      "sha256": "b1c1a09b699f2dee11d609a7e7c69b529ad349e3f0c0b255ae034195cfd5e118",
+      "authority": "scheduler",
+      "observed_at": "2026-08-23T12:09:54+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/provenance/vasp_nonduplicate_submission_registration_receipt.json",
+      "sha256": "4d8d5e8edda4a7cb7b1e64f82629d9e196e6e14bcb7cc233a7f88f4cf5c43728",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-23T12:09:54+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-aqcat25-six-complete-reviewed-20260823"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

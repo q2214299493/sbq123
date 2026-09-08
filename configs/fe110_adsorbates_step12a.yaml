@@ -1,0 +1,77 @@
+version: 1
+adsorbates:
+  CO:
+    atom_symbols: [C, O]
+    species_order: [C, O]
+    anchor_atom: C
+    anchor_index: 0
+    internal_geometry: C-O 1.15 A
+    orientation_rule: non_anchor_atoms_above
+    recommended_fe_anchor_distance_angstrom: 1.95
+    allowed_fe_anchor_distance_angstrom: [1.8, 2.1]
+    relative_cartesian_angstrom:
+      - [0.0, 0.0, 0.0]
+      - [0.0, 0.0, 1.15]
+
+  H:
+    atom_symbols: [H]
+    species_order: [H]
+    anchor_atom: H
+    anchor_index: 0
+    internal_geometry: atomic
+    orientation_rule: anchor_only
+    recommended_fe_anchor_distance_angstrom: 1.675
+    allowed_fe_anchor_distance_angstrom: [1.55, 1.8]
+    relative_cartesian_angstrom:
+      - [0.0, 0.0, 0.0]
+
+  O:
+    atom_symbols: [O]
+    species_order: [O]
+    anchor_atom: O
+    anchor_index: 0
+    internal_geometry: atomic
+    orientation_rule: anchor_only
+    recommended_fe_anchor_distance_angstrom: 1.95
+    allowed_fe_anchor_distance_angstrom: [1.8, 2.1]
+    relative_cartesian_angstrom:
+      - [0.0, 0.0, 0.0]
+
+  OH:
+    atom_symbols: [O, H]
+    species_order: [O, H]
+    anchor_atom: O
+    anchor_index: 0
+    internal_geometry: O-H 0.97 A
+    orientation_rule: non_anchor_atoms_above
+    recommended_fe_anchor_distance_angstrom: 2.05
+    allowed_fe_anchor_distance_angstrom: [1.9, 2.2]
+    relative_cartesian_angstrom:
+      - [0.0, 0.0, 0.0]
+      - [0.0, 0.0, 0.97]
+
+  H2O:
+    atom_symbols: [O, H, H]
+    species_order: [O, H]
+    anchor_atom: O
+    anchor_index: 0
+    internal_geometry: optimized gas H2O from job 9558015; O-H 0.97255 A; H-O-H 104.52 degrees
+    orientation_rule: non_anchor_atoms_above
+    recommended_fe_anchor_distance_angstrom: 2.3
+    allowed_fe_anchor_distance_angstrom: [2.1, 2.5]
+    relative_cartesian_angstrom:
+      - [0.0, 0.0, 0.0]
+      - [-0.519109600879, -0.769088095361, 0.291356165248]
+      - [-0.519098307404, 0.769081961693, 0.291349824913]
+
+  C:
+    atom_symbols: [C]
+    species_order: [C]
+    anchor_atom: C
+    anchor_index: 0
+    internal_geometry: atomic
+    orientation_rule: anchor_only
+    recommended_fe_anchor_distance_angstrom: 1.9
+    allowed_fe_anchor_distance_angstrom: [1.75, 2.05]
+    relative_cartesian_angstrom:
+      - [0.0, 0.0, 0.0]

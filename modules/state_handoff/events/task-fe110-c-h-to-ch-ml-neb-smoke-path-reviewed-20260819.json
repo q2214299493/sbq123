@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-ml-neb-smoke-path-reviewed-20260819",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-transition-state",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-19T12:55:46+08:00",
+  "recorded_at": "2026-08-19T04:55:46Z",
+  "summary": "Work-side review accepts the MZ73 executor and artifact chain for smoke scope but rejects the three-image one-step path for scientific use because reaction-local H displacements are too large and the important C-H interval is not resolved.",
+  "payload": {
+    "objective": "Review the returned 00-02 MZ73 AQCat25 ML-NEB smoke structures and determine whether the execution chain and path are suitable for a resolved production calculation.",
+    "phase": "verification",
+    "current_evidence": [
+      "Images 00-02 preserve Fe45,C,H order, the exact cell and PBC, and the bottom-18 fixed mask; image 00 and 02 reproduce the handoff IS and FS within 2e-15 A maximum minimum-image displacement.",
+      "No periodic branch jump or contact below 1.0 A is present. Movable Fe maximum adjacent displacements are 0.107 and 0.136 A, so there is no abnormal slab reconstruction.",
+      "The C-H distance decreases monotonically 2.9728 -> 1.9056 -> 1.1063 A. H changes from threefold hollow coordination through a C-approach geometry to the CH product while C remains Fe-bound, consistent with the intended elementary event.",
+      "The local path is underresolved: H moves 1.5868 and 1.5696 A across the two links, and the only internal image has C-H 1.9056 A, outside the contract's important 1.3-1.8 A interval. The global RMSD near 0.302 A masks this reaction-atom gap.",
+      "Image 01 is chemically plausible but unconverged, with predicted physical and projected NEB force maxima of 1.7793 and 1.7742 eV/A. The uncalibrated smoke path is not accepted or finalized as a Dimer parent."
+    ],
+    "one_executable_step": "Wait for separate user authorization before building and running a more resolved GPU ML-NEB path that includes the reviewed C-H=1.70 A waypoint; do not submit any GPU or VASP calculation meanwhile.",
+    "submission_boundary": "No additional GPU run, VASP NEB, CI-NEB, DIMER, frequency, force-label, or other calculation is authorized by this review.",
+    "done_when": [
+      "The user explicitly authorizes or declines the resolved production GPU path.",
+      "If authorized later, the new path independently passes work-side periodic mapping, local reaction-coordinate resolution, structure, provenance, and domain review before any VASP handoff."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_smoke_20260819/smoke_path_structure_review.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_smoke_20260819/returned_from_mz73/ml_neb_smoke/gpu_ml_neb_path_manifest.candidate.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_smoke_20260819/returned_from_mz73/ml_neb_smoke/images/00/POSCAR`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_smoke_20260819/returned_from_mz73/ml_neb_smoke/images/01/POSCAR`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_smoke_20260819/returned_from_mz73/ml_neb_smoke/images/02/POSCAR`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_smoke_20260819/smoke_path_structure_review.json",
+      "sha256": "33efe96b6c8f17455e071ed6b9b2f8117f902419cfc39ff7bb3f876c0d373aa2",
+      "authority": "module_validation",
+      "observed_at": "2026-08-19T12:55:46+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_smoke_20260819/returned_from_mz73/ml_neb_smoke/gpu_ml_neb_path_manifest.candidate.json",
+      "sha256": "c4f5b601d04838981cc231773a0861c5f08adab6758d904406b3689711ab4316",
+      "authority": "module_validation",
+      "observed_at": "2026-08-19T12:55:46+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-ml-neb-smoke-completed-20260819"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

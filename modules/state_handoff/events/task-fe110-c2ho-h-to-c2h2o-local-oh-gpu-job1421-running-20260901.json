@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-local-oh-gpu-job1421-running-20260901",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-01T22:09:06+08:00",
+  "recorded_at": "2026-09-01T14:10:00Z",
+  "summary": "The user-accepted eight-image local O-H path was hash-bound, passed a no-model MZ73 preflight, and was submitted once as Slurm job 1421. The job is running a MatRIS ordinary ML-NEB followed by an AQCat25 exact fixed-path audit; ML-CI, VASP, fine-tuning, Dimer, and automatic retry remain outside scope.",
+  "payload": {
+    "objective": "Monitor MZ73 Slurm job 1421 to terminal state, then collect and review the complete local O-H path before any VASP or Dimer decision.",
+    "phase": "active",
+    "current_evidence": [
+      "The accepted seed contains eight images with strictly decreasing O47-H49 distances from 2.690028 to 1.136496 A.",
+      "The remote no-model preflight passed request, gate, checkpoint, runtime, geometry, and GPU-memory checks and performed no scheduler or VASP submission.",
+      "Slurm job 1421 started on MZ73 at 2026-09-01 22:09:06 +08:00 with one GPU, four CPUs, 40 GiB memory, and a six-hour walltime.",
+      "The allocated GPU was index 0, UUID GPU-483c224e-cc19-13e2-24ad-c83efd14fa75, with 22501 MiB free at startup.",
+      "The one-submission user authorization is consumed by job 1421."
+    ],
+    "one_executable_step": "Check job 1421 scheduler and compact runtime status; on terminal state, retrieve the result bundle and run the complete-path scientific review.",
+    "submission_boundary": "No duplicate GPU run, automatic retry, VASP, ML-CI, fine-tuning, Dimer, frequency, or barrier action is authorized.",
+    "done_when": [
+      "Job 1421 reaches a terminal scheduler state and its complete output is collected.",
+      "The local O-H path is reviewed for convergence, geometry continuity, O-H evolution, energy profile, and MatRIS-AQCat25 disagreement."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/local_oh_gpu_run_20260901/submission_record_job1421.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/local_oh_gpu_run_20260901/remote_preflight.MZ73.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/local_oh_gpu_run_20260901/work_to_gpu/request.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/local_oh_gpu_run_20260901/submission_record_job1421.json",
+      "sha256": "62f14c99c4ef037d8274df9f6eb1d10f9d0f47b85943d4f3cbc568fd9784444c",
+      "authority": "repository_document",
+      "observed_at": "2026-09-01T22:09:06+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/local_oh_gpu_run_20260901/remote_preflight.MZ73.json",
+      "sha256": "142674764c2d6534c9162769db2bbfea6defe8bca5db4626ce103253b9b5d110",
+      "authority": "module_validation",
+      "observed_at": "2026-09-01T22:08:54+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-job1358-local-oh-path-ready-review-20260901"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

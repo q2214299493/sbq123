@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-ch-h-to-ch2-formal-barrier-registered-20260816",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-ch-h-to-ch2-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-16T22:58:07+08:00",
+  "recorded_at": "2026-08-16T14:58:07Z",
+  "summary": "The compatible Fe(110) CH* + H* -> CH2* + * electronic barrier is formally registered and the Grade-A transition state is recorded in the Topic-1 workbook.",
+  "payload": {
+    "objective": "Register the compatible electronic barrier for the accepted Fe(110) CH* + H* -> CH2* + * DIMER transition state and record it in the Topic-1 TS workbook.",
+    "phase": "verification",
+    "current_evidence": [
+      "The accepted IS, DIMER TS, and FS final OUTCAR TOTEN values are -372.33497184, -371.78042471, and -371.85016675 eV under fe110_converged_toten_sigma0p20_v1.",
+      "All three calculations have the same compatibility fingerprint af46be282c446bc897e5bf8dcef116ae1bf6121446d6f190ef60a768176f9c35.",
+      "The hash-bound authoritative gate is VALIDATED_TS and explicitly allows REPORT_FINAL_BARRIER.",
+      "Registry barrier fe110_ch_h_to_ch2_9701350_9709074_9622444_sigma0p20 is accepted: forward 0.55454713 eV, reverse 0.06974204 eV, reaction energy +0.48480509 eV.",
+      "The Topic-1 workbook contains the CH* + H* -> CH2* row, formula-derived barriers, and appended DIMER/frequency evidence; the formula-error scan returned zero and all sheets passed visual review."
+    ],
+    "one_executable_step": "No further action is required for the electronic-barrier task. Thermochemical corrections require a separate explicit request and consistent IS/TS/FS active-set treatment.",
+    "submission_boundary": "Do not submit, stop, restart, or resubmit VASP. This record is an electronic barrier only and must not be described as a free-energy barrier or kinetics-ready dataset.",
+    "done_when": [
+      "The compatible final IS/TS/FS energy chain and accepted barrier exist in the project registry.",
+      "The Topic-1 TS workbook contains the verified transition-state and barrier record.",
+      "The scope remains explicitly limited to electronic energies without ZPE, entropy, or free-energy corrections."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/diagnostics/formal_barrier_sigma0p20_20260816/registration_summary.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/diagnostics/formal_barrier_sigma0p20_20260816/formal_barrier_manifest.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/diagnostics/formal_barrier_sigma0p20_20260816/AUTHORITATIVE_FINAL_BARRIER_GATE.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/diagnostics/formal_barrier_sigma0p20_20260816/excel_promotion_receipt.json`",
+      "`outputs/ch_h_ts_barrier_20260816/课题一TS.xlsx`",
+      "`data/project_registry.sqlite3`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/diagnostics/formal_barrier_sigma0p20_20260816/registration_summary.json",
+      "sha256": "4eaa54ea7614d1d55b034d0288c4143a04ce0f0538b2f79b649003dca7d165fa",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-16T22:58:07+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/diagnostics/formal_barrier_sigma0p20_20260816/formal_barrier_manifest.json",
+      "sha256": "393456deb92fafdd83903253ee8899059769d12df2a6407274c2fbd8047c22fb",
+      "authority": "module_validation",
+      "observed_at": "2026-08-16T22:58:07+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/diagnostics/formal_barrier_sigma0p20_20260816/AUTHORITATIVE_FINAL_BARRIER_GATE.json",
+      "sha256": "4d74e0fef72d8f5860969c717198ae7deacb30e6bb08406a3773401fab189900",
+      "authority": "module_validation",
+      "observed_at": "2026-08-16T22:58:07+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/diagnostics/formal_barrier_sigma0p20_20260816/excel_promotion_receipt.json",
+      "sha256": "15a4386f5729c3df0e9d1f8100496bb6fdc8b944bfbd73ec78a8bfb8e2d06e51",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-16T22:58:07+08:00"
+    },
+    {
+      "locator": "outputs/ch_h_ts_barrier_20260816/课题一TS.xlsx",
+      "sha256": "ae5e76c1990c245397372479a146c57625bf874f3160a712c4861ecad228fa8a",
+      "authority": "repository_document",
+      "observed_at": "2026-08-16T22:58:07+08:00"
+    },
+    {
+      "locator": "data/project_registry.sqlite3",
+      "sha256": "62ab9ba5397e88810b4e201b2dc333152d6bced9461bbb36156914f065841ebd",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-16T22:58:07+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-ch-h-to-ch2-ts-grade-a-accepted-20260816"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

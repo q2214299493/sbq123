@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-job9745217-closeout-20260907",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-07T18:54:00+08:00",
+  "recorded_at": "2026-09-07T10:54:00Z",
+  "summary": "LSF job 9745217 is DONE. All five internal images completed 53 ionic steps with normal electronic completion. The ordinary NEB did not reach the 0.05 eV/A NEB-force target because image 03 ended at 0.053161 eV/A with an oscillating trend. Final CONTCAR review found raw fractional branch shifts in several slab atoms; nebmovie.pl 1 completed, so periodic-unwrapped geometry review remains required. The strategy attempt was closed as a confirmed optimizer/path nonconvergence outcome without authorizing a retry, TS, Dimer, or barrier.",
+  "payload": {
+    "objective": "Close out LSF job 9745217 with separate scheduler, electronic, ionic-force, geometry, path-quality, and strategy-outcome evidence.",
+    "phase": "active",
+    "current_evidence": [
+      "Scheduler status DONE.",
+      "Images 01-05: 53 ionic steps each; electronic status normal; complete OUTCAR/OSZICAR/CONTCAR collected.",
+      "Maximum final NEB force 0.053161 eV/A at image 03 versus target 0.05 eV/A; image 03 trend oscillating.",
+      "nebmovie.pl 1 completed using final CONTCAR files.",
+      "Raw fractional branch-shift flags occur in final CONTCAR parsing for slab atoms; this is not yet distinguished from PBC wrapping.",
+      "No TS, Dimer parent, barrier, or compatible final-energy chain is established."
+    ],
+    "one_executable_step": "Review the periodic-unwrapped final path and, only after a new hash-bound decision, choose path repair or an authorized VASP refinement route.",
+    "done_when": [
+      "Job 9745217 is terminal and scheduler, electronic, ionic-force, geometry, and path-quality evidence are stored.",
+      "The registered strategy attempt has a hash-bound outcome.",
+      "No TS, Dimer, frequency, or barrier claim is made without later validation evidence."
+    ],
+    "next_required_check": "Review periodic-unwrapped final path and select optimizer/path repair or another authorized VASP refinement route.",
+    "submission_boundary": "No automatic resubmission, CI-NEB, Dimer, frequency, or barrier action is authorized by this closeout."
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_job9742743_local_oh_densified_5internal_20260906/final_evidence/scheduler_evidence.json",
+      "sha256": "674185f329bceee5dabeea440e4dea519756e6f76562086640d54f89f93fddf4",
+      "authority": "scheduler",
+      "observed_at": "2026-09-07T18:53:36+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_job9742743_local_oh_densified_5internal_20260906/final_evidence/neb_analysis.json",
+      "sha256": "8f317038a5afe3455217fdbad1c4c196adb2cf1f4a1e970d53ae552787eca026",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-07T18:53:40+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_job9742743_local_oh_densified_5internal_20260906/final_evidence/path_geometry_diagnosis.json",
+      "sha256": "15a68e016eadba3fafc6dbe3b045cd27432944f56bb0363553a1d2e411ff123a",
+      "authority": "module_validation",
+      "observed_at": "2026-09-07T18:53:50+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_job9742743_local_oh_densified_5internal_20260906/final_evidence/strategy_outcome_request.json",
+      "sha256": "86b7c07bacf02ee5d1a2c462bdb2c8cd4e9fd4a23d2ea85fea7ad201c5c72556",
+      "authority": "calculation_registry",
+      "observed_at": "2026-09-07T18:54:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-job9745217-submitted-20260906"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

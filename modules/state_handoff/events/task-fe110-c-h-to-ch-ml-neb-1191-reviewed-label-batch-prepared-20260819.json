@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-ml-neb-1191-reviewed-label-batch-prepared-20260819",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-transition-state",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-19T15:35:08+08:00",
+  "recorded_at": "2026-08-19T07:35:08Z",
+  "summary": "MZ73 job 1191 completed successfully; its nine-image GPU ML-CI-NEB path was returned and accepted only for VASP label selection, and hash-bound image 02-06 static force-label inputs were prepared but not submitted.",
+  "payload": {
+    "objective": "Validate the returned nine-image AQCat25 path for Fe(110) C* + H* -> CH* + * and use it to prepare a reviewable VASP force-label batch for active-learning calibration.",
+    "phase": "active",
+    "current_evidence": [
+      "MZ73 producer job 1191 exited successfully after converged ordinary ML-NEB and ML-CI-NEB stages; the returned candidate manifest contains nine hash-bound images.",
+      "Canonical manifest validation passed and the local geometry diagnosis passed for atom order, cell, bottom-18 fixed mask, periodic branch, contacts, and path continuity.",
+      "C-H decreases monotonically from 2.9728 A to 1.1063 A and the single predicted internal energy maximum is image 04 at C-H=1.4364 A.",
+      "The path is accepted only as the source for VASP force-label selection; it is not a DFT barrier and no Dimer-parent manifest has been finalized.",
+      "Image 02-06 exact-structure static force-label bundles were generated with individual hashes and all five diagnostic-static preflights passed.",
+      "The generated label INCAR uses SIGMA=0.10 eV from the approved active-learning builder, while the reaction compatibility and final-energy branch use SIGMA=0.20 eV; this requires an explicit method decision before VASP execution.",
+      "No POTCAR was copied and no VASP execution gate or submission authorization exists."
+    ],
+    "one_executable_step": "Review the prepared image 02-06 batch and resolve whether active-learning force labels remain on the configured non-reportable SIGMA=0.10 static branch or must be rebuilt on the reaction-compatible SIGMA=0.20 branch before any VASP authorization.",
+    "submission_boundary": "The user authorized return, formal path review, and local preparation of image 02-06 VASP force-label inputs only. No VASP upload, POTCAR copy, force-label submission, DIMER, frequency, restart, resubmission, or additional GPU job is authorized.",
+    "done_when": [
+      "The returned job-1191 manifest and all nine structures are locally collected and hash validated.",
+      "The nine-image path passes work-side structural and elementary-step review for VASP label selection.",
+      "A hash-bound image 02-06 force-label batch is prepared for user review without POTCAR or submission."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/returned_from_mz73/output/ml_neb_production/gpu_ml_neb_path_manifest.candidate.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/returned_from_mz73/output/ml_neb_production/gpu_ml_neb_path_review.work.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/vasp_force_labels_round_000/path_label_batch_request.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/vasp_force_labels_round_000/batch_review_summary.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/returned_from_mz73/output/ml_neb_production/producer_exit_record.json",
+      "sha256": "5ef323615de7b0d276c4f903ad08c224cd91868f2976baa1a04689b2aedb1d6e",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-19T15:35:08+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/returned_from_mz73/output/ml_neb_production/gpu_ml_neb_path_manifest.candidate.json",
+      "sha256": "dda91950a012738d751d8ca4673a433378c1e3edf4a3c3b8a15e6bd0e89a20cf",
+      "authority": "structure_output",
+      "observed_at": "2026-08-19T15:35:08+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/returned_from_mz73/output/ml_neb_production/gpu_ml_neb_path_review.work.json",
+      "sha256": "26c299b3ae8a3d43f68f0609f869cae1d6e7c474ab0204b8c8dd93753f1af17f",
+      "authority": "module_validation",
+      "observed_at": "2026-08-19T15:35:08+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/vasp_force_labels_round_000/batch_review_summary.json",
+      "sha256": "21c1507ecc96b98469066b304c74c5b8c48f444912eaa2f5e56870378138ee33",
+      "authority": "module_validation",
+      "observed_at": "2026-08-19T15:35:08+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-ml-neb-production-1191-running-20260819"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

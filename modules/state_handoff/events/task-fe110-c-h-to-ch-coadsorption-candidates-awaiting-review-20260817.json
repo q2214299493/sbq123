@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-coadsorption-candidates-awaiting-review-20260817",
+  "event_type": "task_opened",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-coadsorption",
+    "module": "adsorption_workflow"
+  },
+  "occurred_at": "2026-08-17T23:13:59+08:00",
+  "recorded_at": "2026-08-17T15:13:59Z",
+  "summary": "Three unrelaxed Fe(110) C*+H* coadsorption candidates were constructed from hash-verified local structures and pass geometry checks; they await user review and no VASP submission is authorized.",
+  "payload": {
+    "objective": "Construct and review three Fe(110) C*+H* coadsorption candidates for the C* + H* -> CH* + * initial state without submitting calculations.",
+    "phase": "active",
+    "current_evidence": [
+      "The whitelist-first retrieval gate returned NO_WHITELIST_MATCH; no external coordinate or energy was transferred.",
+      "All candidates preserve the accepted Fe45 cell, atom order Fe45,C,H, and the bottom-18-Fe fixed mask.",
+      "Candidate A uses C/long-bridge + H/adjacent hollow with C-H 2.0609 A; candidate B uses a second-neighbor hollow with C-H 3.0097 A; candidate C uses a far hollow reference with C-H 4.5083 A.",
+      "All three structures are classified C/long-bridge + H/hollow, contain no contact below 1.0 A, and pass the dependency-free POSCAR geometry audit.",
+      "The structures remain unrelaxed review candidates and have no calculated stability or energy ordering."
+    ],
+    "one_executable_step": "Obtain the user's A/B/C structure decision; do not prepare or submit VASP until the selected scope is explicitly authorized.",
+    "submission_boundary": "No adsorption relaxation, final static, NEB, DIMER, frequency, or other VASP job is authorized. Candidate construction and local review do not imply submission authority.",
+    "done_when": [
+      "The user reviews the three structures and selects which candidates, if any, should proceed to adsorption relaxation.",
+      "Any later optimized IS preserves separate C* and H* and passes convergence, geometry, compatibility, and endpoint review before TS use."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_coadsorption_20260817/retrieval/retrieval_top5.json`",
+      "`calculations/fe110_c_h_coadsorption_20260817/review/candidate_manifest.json`",
+      "`calculations/fe110_c_h_coadsorption_20260817/review/candidate_review.md`",
+      "`calculations/fe110_c_h_coadsorption_20260817/review/candidate_comparison.png`",
+      "`calculations/fe110_c_h_coadsorption_20260817/candidates/A_adjacent_hollow_reactive/POSCAR`",
+      "`calculations/fe110_c_h_coadsorption_20260817/candidates/B_second_neighbor_hollow/POSCAR`",
+      "`calculations/fe110_c_h_coadsorption_20260817/candidates/C_far_hollow_reference/POSCAR`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_coadsorption_20260817/retrieval/retrieval_top5.json",
+      "sha256": "03e279e772b7f3a2d1badb64ddf78d0e6f7d25a1631d730f5dd0743447cb90d2",
+      "authority": "module_validation",
+      "observed_at": "2026-08-17T23:13:59+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_coadsorption_20260817/review/candidate_manifest.json",
+      "sha256": "5b4abc0e6bc73ce97b0a6323ca0d7655cdb6e2b67f6991f342bbd9522248611d",
+      "authority": "module_validation",
+      "observed_at": "2026-08-17T23:13:59+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_coadsorption_20260817/review/candidate_review.md",
+      "sha256": "961e3dcbd85b39368ed0e92c52b1abe5f5ceb9b651506cd3d82a3b00be1a5a1a",
+      "authority": "repository_document",
+      "observed_at": "2026-08-17T23:13:59+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_coadsorption_20260817/review/candidate_comparison.png",
+      "sha256": "721c5f378135213b6d90a9a53f6c65894be7f84b7402cb1293d46f3da3a7abf9",
+      "authority": "structure_output",
+      "observed_at": "2026-08-17T23:13:59+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_coadsorption_20260817/candidates/A_adjacent_hollow_reactive/POSCAR",
+      "sha256": "e3921fc8abdafd91147881042d2e6856067f4bbee98626e7a12ac52f6d4a36c7",
+      "authority": "structure_output",
+      "observed_at": "2026-08-17T23:13:59+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_coadsorption_20260817/candidates/B_second_neighbor_hollow/POSCAR",
+      "sha256": "70a66cc442f716efc9167246dfcb0915aa6c01082f16de4a9efc1a449112bce6",
+      "authority": "structure_output",
+      "observed_at": "2026-08-17T23:13:59+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_coadsorption_20260817/candidates/C_far_hollow_reference/POSCAR",
+      "sha256": "77c260458fcb600742889fb38085ca4789452c6ae9e469b5f5e2b4a7ffb64100",
+      "authority": "structure_output",
+      "observed_at": "2026-08-17T23:13:59+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-ch-h-to-ch2-hydrogen-transfer-template-auto-registration-20260817"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

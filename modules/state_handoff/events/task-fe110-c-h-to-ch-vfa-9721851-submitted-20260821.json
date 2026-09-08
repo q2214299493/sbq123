@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-vfa-9721851-submitted-20260821",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-transition-state",
+    "module": "ts_vibrational_validation"
+  },
+  "occurred_at": "2026-08-21T11:38:00+08:00",
+  "recorded_at": "2026-08-21T03:38:00Z",
+  "summary": "The reviewed seven-atom local partial-Hessian VFA bundle passed the current START_VFA gate and LSF job 9721851 was submitted; its current scheduler state is PEND.",
+  "payload": {
+    "objective": "Validate the Fe(110) C* + H* -> CH* + * Dimer candidate with a contract-bound diagnostic local partial Hessian before any TS claim.",
+    "phase": "active",
+    "current_evidence": [
+      "The user explicitly authorized submission of this prepared local partial-Hessian frequency calculation.",
+      "Repository-owned inputs use 32 ranks, IBRION=5, NFREE=2, POTIM=0.015 A, EDIFF=1e-7 eV, and a 5x5x1 Gamma mesh; the INCAR review found no blocker or override.",
+      "The VFA hard preflight passed every structure, active-set, Dimer-source, scope-review, and hash-binding check.",
+      "The authoritative execution decision is READY_FOR_DIAGNOSTIC_VFA and START_VFA is its only allowed action.",
+      "LSF job 9721851 was accepted into Gkn_normal and is currently scheduler PEND at ~/sbq/Fe110/ts/c_h_to_ch_20260818/vfa_local_ch_fe5_from_dimer9720181_20260821.",
+      "The submission is registered as fe110_c_h_to_ch_vfa_9721851. Scheduler PEND does not establish electronic completion, frequency validity, imaginary-mode count, TS acceptance, grade, or barrier validity."
+    ],
+    "one_executable_step": "Monitor VFA job 9721851. At terminal state collect and hash-bind OUTCAR and related outputs, run canonical VFA analysis, record every imaginary frequency, and review whether the principal eigenvector is the intended C45-H46 forming mode.",
+    "submission_boundary": "Do not stop, restart, resubmit, launch connectivity or another frequency calculation, accept a TS, assign Grade A, or report a barrier without new live evidence and the required execution-gate action and user decision.",
+    "done_when": [
+      "The diagnostic local partial-Hessian calculation completes normally with complete bound frequency/eigenvector evidence.",
+      "Exactly one raw imaginary mode is explicitly reviewed and accepted as the intended C45-H46 reaction coordinate before any TS acceptance.",
+      "Compatible IS/TS/FS final OUTCAR TOTEN values are separately reviewed before an electronic barrier is reported."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/submission_preflight.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/AUTHORITATIVE_NEB_EXECUTION_GATE.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/user_authorization_start_vfa.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/submission_record.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/scheduler_evidence_initial.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/submission_preflight.json",
+      "sha256": "d72f7e6d09030270ef99508a0dc6a71aaf7a4f3a11eb547ce6d3eb419966fd32",
+      "authority": "module_validation",
+      "observed_at": "2026-08-21T11:35:05+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/AUTHORITATIVE_NEB_EXECUTION_GATE.json",
+      "sha256": "8d37fd180d46cc577c5bd3ce5b6d6eef9aaad2c38d573a4ffb43993b67da01a4",
+      "authority": "module_validation",
+      "observed_at": "2026-08-21T11:35:05+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/user_authorization_start_vfa.json",
+      "sha256": "fff72f2cb59e7093a9f9e0b0b05a5c5eb6db91e4f8a39c32703829551623d4fc",
+      "authority": "user_authorization",
+      "observed_at": "2026-08-21T11:35:05+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/submission_record.json",
+      "sha256": "3932afec04ea8ddbe54e350e9cee7aed7733ba58963560528a2e7719df8c4f43",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-21T11:38:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/scheduler_evidence_initial.json",
+      "sha256": "6c6cbd37f8ce5f9a57b5522c94918f79bfb8fde2fb7cc379f4c5eb36e82e270a",
+      "authority": "scheduler",
+      "observed_at": "2026-08-21T11:37:08+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/registry_submission_receipt.json",
+      "sha256": "d1f610d3ea0841750188b262f3544661c670eeb539b4e9ac8c6058c32071a13e",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-21T11:38:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-dimer-frequency-handoff-prepared-20260821"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

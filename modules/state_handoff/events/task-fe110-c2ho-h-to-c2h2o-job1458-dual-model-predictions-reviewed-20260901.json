@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-job1458-dual-model-predictions-reviewed-20260901",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-01T23:29:00+08:00",
+  "recorded_at": "2026-09-01T15:29:00Z",
+  "summary": "MZ73 job 1458 returned and work-side review accepted the six exact pre/fail MatRIS/AQCat25 prediction pairs. The largest cross-model movable-force disagreement is pre_06; the disagreement is a VASP-label sampling score only. No VASP, fine-tuning, path-rerun, micro-NEB, or Dimer job was submitted.",
+  "payload": {
+    "objective": "Obtain separate user authorization for the prepared six-structure SIGMA=0.20 eV VASP static force-label batch, then compare exact-structure MatRIS-VASP and AQCat25-VASP errors before deciding whether MatRIS fine-tuning is triggered.",
+    "phase": "active",
+    "current_evidence": [
+      "User authorization was bound to request SHA-256 34e1a4dd41084fdf8df45bec6ba137bb3ecebeb8e928cba5285f1bf299251483 and limited to one MZ73 fixed-structure dual-model prediction batch.",
+      "Remote no-model preflight passed uploaded hashes, both frozen checkpoint hashes, shell syntax, Python compilation, request validation, and the six-file structure count.",
+      "Slurm job 1458 left the queue; MZ73 accounting cannot provide a terminal scheduler state, while the hash-bound producer exit record reports exit code 0 and success.",
+      "The returned prediction set contains six unique requested structures, matching structure and checkpoint hashes, finite model energies, and complete 50-by-3 force arrays for both models.",
+      "The largest MatRIS-AQCat25 movable-force disagreement is pre_06 at O-H 1.25 A: vector RMSE 0.183675 eV/A and vector max 0.624076 eV/A.",
+      "Cross-model disagreement is not calibrated uncertainty and does not establish either model's VASP error. Exact-structure VASP forces are required for the active-learning trigger assessment.",
+      "The six compatible VASP static force-label inputs remain prepared but unsubmitted."
+    ],
+    "one_executable_step": "Present the returned dual-model review; after separate explicit authorization, submit only the prepared six exact-structure SIGMA=0.20 eV VASP static force-label jobs to sunboquan-codex.",
+    "submission_boundary": "No VASP label, model fine-tuning, checkpoint promotion, complete-path rerun, micro-NEB, Dimer, or barrier action is authorized by the GPU submission message.",
+    "done_when": [
+      "The user accepts the returned dual-model prediction review and separately authorizes or declines the prepared six-structure VASP static force-label batch.",
+      "If authorized, all six VASP jobs are submitted through their existing diagnostic_static preflights and recorded without any automatic training action."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/gpu_prediction_execution_20260901/predictions.job1458.review.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/gpu_prediction_execution_20260901/producer_exit_record.job1458.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/vasp_force_label_batch_request.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/gpu_prediction_execution_20260901/SUBMITTED.MZ73.json",
+      "sha256": "e80414ec8da10b1cd11a462f87c051de440182d072d694adfb981e1d18c871c9",
+      "authority": "scheduler",
+      "observed_at": "2026-09-01T23:27:55+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/gpu_prediction_execution_20260901/producer_exit_record.job1458.json",
+      "sha256": "42a6d16b414750dd560976bcf31a3cae2b7040d53d024f6341a87f3d9e4bc490",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-01T23:28:14+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/gpu_prediction_execution_20260901/predictions.job1458.json",
+      "sha256": "bbe4e2179ae234c5970c1b5903de37fc90fd9cf85d5bb06a7a83fa6938ff44c3",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-01T23:28:14+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/gpu_prediction_execution_20260901/predictions.job1458.review.work.json",
+      "sha256": "1a2af1dbd47d1340ba43ddff03ab3289f03e456f27342258d493b6e6e56e4c10",
+      "authority": "module_validation",
+      "observed_at": "2026-09-01T23:29:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-job1421-active-learning-packages-prepared-20260901"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

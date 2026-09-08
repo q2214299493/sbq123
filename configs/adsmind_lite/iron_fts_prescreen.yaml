@@ -1,0 +1,415 @@
+version: 1
+surface_family: metallic_fe
+benchmark_surface: Fe110
+scope:
+  allowed_surface_names: [Fe110]
+  allowed_dataset_branch: true_fe110_5layer_5x5x1
+  reject_other_surfaces: true
+  reason_code: fe110_only_rule_not_transferable
+  explicitly_excluded: [Fe100, Fe111, iron_carbide, iron_oxide]
+
+required_species_metadata:
+  - exact_isomer_and_connectivity
+  - bond_orders_or_resonance_description
+  - radical_centers_and_spin_branch
+  - hydrogen_count_on_each_carbon
+  - oxygen_roles
+  - conformer_or_orientation_family
+  - intact_and_dissociative_state_labels
+
+method:
+  carbon_coordination_demand:
+    4:
+      description: bare carbon with maximum coordination demand
+      ranked_sites: [hollow, long_bridge, short_bridge]
+    3:
+      description: highly unsaturated or carbyne-like carbon center
+      ranked_sites: [long_bridge, short_bridge, hollow]
+    2:
+      description: carbene-like carbon center with two existing sigma bonds
+      ranked_sites: [long_bridge, short_bridge, top]
+    1:
+      description: carbon radical with three existing sigma bonds
+      ranked_sites: [top, long_bridge, short_bridge]
+    0:
+      description: valence-saturated carbon
+      ranked_sites: [top, gas_like]
+  oxygen_role:
+    atomic_or_oxyl:
+      participation: primary_high_coordination
+      ranked_sites: [hollow, long_bridge, short_bridge]
+    alkoxy_radical:
+      participation: primary_O_anchor
+      ranked_sites: [long_bridge, short_bridge, top]
+    carbonyl:
+      participation: eta2_secondary_or_tilted_O_top
+      ranked_sites: [eta2_side_on, top]
+    hydroxyl:
+      participation: secondary_only_unless_explicit_evidence
+      ranked_sites: []
+    water_or_alcohol_donor:
+      participation: low_coordination_O_top
+      ranked_sites: [top]
+  functional_overrides:
+    carbonyl_pi_activation:
+      action: rank_eta2_CO_before_end_on_when_geometry_allows
+    hydroxylated_carbon:
+      action: rank_C_site_from_coordination_demand_then_consider_eta2_CO
+    saturated_closed_shell:
+      action: flag_weak_binding_or_desorption_risk
+    c2plus:
+      action: score_each_carbon_then_test_chain_orientation_and_multidentate_modes
+  c_c_modes:
+    alkyne:
+      ranked_motifs: [di_sigma_long, di_sigma_short]
+    vinyl_radical:
+      ranked_motifs: [radical_C_top, eta2_CC_side_on, radical_C_long_bridge]
+    alkene:
+      ranked_motifs: [di_sigma_long, di_sigma_short, pi_top]
+    alkyl_radical:
+      ranked_motifs: [radical_C_top, radical_C_bridge]
+  steric_rules:
+    - penalize_hollow_for_substituted_carbon_unless_reviewed_evidence_supports_it
+    - keep_H_and_OH_away_from_Fe_for_intact_candidates
+    - reject_high_coordination_if_substituents_overlap_surface
+  orientation_rules:
+    - compare_only_symmetry_inequivalent_directions_along_and_across_Fe_rows
+    - use_orientation_variants_before_adding_redundant_site_classes
+    - preserve_internal_geometry_until_a_dissociative_state_is_explicitly_requested
+calibration_profiles:
+  CplusO_coadsorbed:
+    aliases: [C+O, Cstar+Ostar]
+    evidence: whitelist_fe211_co_dissociation_plus_local_fe110_C_O_relaxations_plus_user_reviewed_20260714_pair
+    confidence: medium
+    candidates:
+      - motif_id: CplusO_C_long_bridge_O_long_bridge_adjacent
+        binding_mode: coadsorbed
+        binding_atoms: [C, O]
+        site_pattern: C_long_bridge_O_long_bridge_adjacent
+        orientation: C and O occupy distinct neighboring long bridges without sharing a bridge
+        template_required: true
+        priority: 1
+      - motif_id: CplusO_C_long_bridge_O_hollow_adjacent
+        binding_mode: coadsorbed
+        binding_atoms: [C, O]
+        site_pattern: C_long_bridge_O_hollow_adjacent
+        orientation: C and O occupy distinct high-coordination sites with C-O kept dissociated
+        template_required: true
+        priority: 2
+    suppress: [blind_four_site_scan, stretched_CO_as_dissociated_state]
+
+  C2_dicarbon:
+    aliases: [C2]
+    evidence: user_reviewed_h_lb_h_template_plus_iron_fts_cc_rule
+    confidence: medium
+    candidates:
+      - motif_id: C2_eta2CC_h_lb_h
+        binding_mode: di_sigma
+        binding_atoms: [C1, C2]
+        site_pattern: h-lb-h
+        orientation: C-C axis nearly parallel to the surface; the two C atoms occupy hollow-like positions straddling a long bridge
+        template_required: true
+        priority: 1
+      - motif_id: C2_eta2CC_C2_2_diagonal
+        binding_mode: di_sigma
+        binding_atoms: [C1, C2]
+        site_pattern: diagonal_near_threefold
+        orientation: C-C axis diagonal to the main surface direction; both C atoms remain near threefold coordination
+        template_required: true
+        priority: 2
+    suppress: [blind_four_site_scan, dissociated_2C_state]
+
+  C2O_ketenylidene:
+    aliases: [C2O, CCO]
+    evidence: user_reviewed_two_C2O_modes_plus_catalysis_hub_CCO_connectivity
+    confidence: medium
+    candidates:
+      - motif_id: C2O_kappaCalpha_long_bridge_tilted
+        binding_mode: terminal_C_centered
+        binding_atoms: [C_terminal]
+        site_pattern: long_bridge
+        orientation: tilted C-C-O chain with terminal Calpha bound at long bridge and O pointing outward
+        template_required: true
+        priority: 1
+      - motif_id: C2O_eta2CalphaCbeta_h_lb_h
+        binding_mode: bidentate
+        binding_atoms: [Calpha, Cbeta]
+        site_pattern: h-lb-h
+        orientation: both C atoms side-on across a long bridge with O lifted away from the surface
+        template_required: true
+        priority: 2
+      - motif_id: C2O_eta2CalphaCbeta_C2_2_derived
+        binding_mode: bidentate
+        binding_atoms: [Calpha, Cbeta]
+        site_pattern: C2_2_diagonal_derived
+        orientation: both C atoms retain the diagonal C2-2 scaffold with O bonded to Cbeta and lifted outward
+        template_required: true
+        priority: 3
+    suppress: [blind_four_site_scan, O_end_only]
+
+  C2plusO_coadsorbed:
+    aliases: [C2+O, C2star+Ostar]
+    evidence: user_reviewed_h_lb_h_C2_plus_adjacent_long_bridge_O
+    confidence: medium
+    candidates:
+      - motif_id: C2plusO_eta2CC_h_lb_h_O_long_bridge_adjacent
+        binding_mode: coadsorbed
+        binding_atoms: [C1, C2, O]
+        site_pattern: C2_h_lb_h_O_long_bridge_adjacent
+        orientation: intact h-lb-h side-on C2 plus O at the nearest unoccupied long bridge
+        template_required: true
+        priority: 1
+      - motif_id: C2plusO_eta2CC_h_lb_h_O_hollow_adjacent
+        binding_mode: coadsorbed
+        binding_atoms: [C1, C2, O]
+        site_pattern: C2_h_lb_h_O_hollow_adjacent
+        orientation: intact C2-1 side-on scaffold plus O at an adjacent hollow with nearest initial C-O distance 2.3-2.8 angstrom
+        template_required: true
+        priority: 2
+      - motif_id: C2plusO_C2_2_diagonal_O_long_bridge_adjacent
+        binding_mode: coadsorbed
+        binding_atoms: [C1, C2, O]
+        site_pattern: C2_2_diagonal_O_long_bridge_adjacent
+        orientation: intact diagonal C2-2 scaffold plus O at the nearest available long bridge
+        template_required: true
+        priority: 3
+      - motif_id: C2plusO_C2_2_diagonal_O_hollow_adjacent
+        binding_mode: coadsorbed
+        binding_atoms: [C1, C2, O]
+        site_pattern: C2_2_diagonal_O_hollow_adjacent
+        orientation: intact diagonal C2-2 scaffold plus O at an adjacent hollow
+        template_required: true
+        priority: 4
+    suppress: [blind_four_site_scan, C2O_recombined_start]
+
+  CH2O_formaldehyde:
+    aliases: [CH2O]
+    evidence: user_reviewed_fts_calibration
+    confidence: medium
+    candidates:
+      - motif_id: CH2O_eta2_CO_side_on
+        binding_mode: bidentate
+        binding_atoms: [C, O]
+        site_pattern: eta2_side_on
+        orientation: carbonyl axis near-parallel to Fe110; H atoms away from Fe
+        template_required: true
+        priority: 1
+      - motif_id: CH2O_O_top_tilted
+        binding_mode: monodentate
+        binding_atoms: [O]
+        site_pattern: top
+        orientation: tilted carbonyl; H atoms away from Fe
+        priority: 2
+
+  COH_hydroxymethylidyne:
+    aliases: [COH]
+    evidence: user_reviewed_fts_calibration
+    confidence: medium
+    candidates:
+      - motif_id: COH_C_long_bridge
+        binding_mode: C_centered
+        binding_atoms: [C]
+        site_pattern: long_bridge
+        orientation: O-H away from Fe
+        priority: 1
+      - motif_id: COH_C_short_bridge
+        binding_mode: C_centered
+        binding_atoms: [C]
+        site_pattern: short_bridge
+        orientation: O-H away from Fe
+        priority: 2
+    suppress: [C_hollow_as_first_choice, O_only]
+
+  CHOH_hydroxymethylene:
+    aliases: [CHOH, HCOH]
+    evidence: user_reviewed_fts_calibration
+    confidence: medium
+    candidates:
+      - motif_id: CHOH_C_long_bridge_orientation_a
+        binding_mode: C_centered
+        binding_atoms: [C]
+        site_pattern: long_bridge
+        orientation: first intact H/OH direction away from Fe
+        priority: 1
+      - motif_id: CHOH_eta2_CO
+        binding_mode: bidentate
+        binding_atoms: [C, O]
+        site_pattern: eta2_side_on
+        orientation: C primary and hydroxyl O secondary; O-H remains intact
+        template_required: true
+        priority: 2
+      - motif_id: CHOH_C_long_bridge_orientation_b
+        binding_mode: C_centered
+        binding_atoms: [C]
+        site_pattern: long_bridge
+        orientation: symmetry-inequivalent H/OH direction
+        priority: 3
+    suppress: [blind_four_site_scan, O_only]
+
+  CH2OH_hydroxymethyl:
+    aliases: [CH2OH]
+    evidence: user_reviewed_fts_calibration
+    confidence: medium
+    candidates:
+      - motif_id: CH2OH_C_top
+        binding_mode: C_centered
+        binding_atoms: [C]
+        site_pattern: top
+        orientation: OH and both C-H bonds away from Fe
+        priority: 1
+      - motif_id: CH2OH_C_bridge
+        binding_mode: C_centered
+        binding_atoms: [C]
+        site_pattern: bridge_selected_by_steric_fit
+        orientation: test long bridge first; use short bridge only if geometry review favors it
+        priority: 2
+      - motif_id: CH2OH_eta2_CO
+        binding_mode: bidentate
+        binding_atoms: [C, O]
+        site_pattern: eta2_side_on
+        orientation: C primary and hydroxyl O secondary; O-H remains intact
+        template_required: true
+        priority: 3
+    suppress: [O_only, blind_four_site_scan]
+
+  C2H2_acetylene:
+    aliases: [C2H2]
+    evidence: chemistry_ranked_fts_calibration
+    confidence: medium
+    candidates:
+      - motif_id: C2H2_di_sigma_long
+        binding_mode: di_sigma
+        binding_atoms: [C1, C2]
+        site_pattern: long_direction
+        orientation: C-C near-parallel to Fe110; each C contacts a different Fe; H atoms away from Fe
+        template_required: true
+        priority: 1
+      - motif_id: C2H2_di_sigma_short
+        binding_mode: di_sigma
+        binding_atoms: [C1, C2]
+        site_pattern: short_direction
+        orientation: symmetry-inequivalent C-C direction; each C contacts a different Fe
+        template_required: true
+        priority: 2
+
+  C2H3_vinyl:
+    aliases: [C2H3, CH2CH]
+    evidence: chemistry_ranked_fts_calibration
+    confidence: medium
+    candidates:
+      - motif_id: C2H3_radical_C_top
+        binding_mode: C_centered
+        binding_atoms: [C_radical]
+        site_pattern: top
+        orientation: CH2 end away from Fe
+        priority: 1
+      - motif_id: C2H3_eta2_CC
+        binding_mode: bidentate
+        binding_atoms: [C_radical, C_CH2]
+        site_pattern: eta2_side_on
+        orientation: C-C near-parallel to Fe110
+        template_required: true
+        priority: 2
+      - motif_id: C2H3_radical_C_long_bridge
+        binding_mode: C_centered
+        binding_atoms: [C_radical]
+        site_pattern: long_bridge
+        orientation: CH2 end away from Fe
+        priority: 3
+
+  C2H4_ethylene:
+    aliases: [C2H4]
+    evidence: chemistry_ranked_fts_calibration
+    confidence: medium
+    candidates:
+      - motif_id: C2H4_di_sigma_long
+        binding_mode: di_sigma
+        binding_atoms: [C1, C2]
+        site_pattern: long_direction
+        orientation: C-C near-parallel to Fe110; H atoms away from Fe
+        template_required: true
+        priority: 1
+      - motif_id: C2H4_di_sigma_short
+        binding_mode: di_sigma
+        binding_atoms: [C1, C2]
+        site_pattern: short_direction
+        orientation: symmetry-inequivalent C-C direction; H atoms away from Fe
+        template_required: true
+        priority: 2
+      - motif_id: C2H4_pi_top
+        binding_mode: pi_complex
+        binding_atoms: [C1, C2]
+        site_pattern: top_center
+        orientation: C-C midpoint above top Fe
+        template_required: true
+        priority: 3
+
+  CH3CO_acetyl:
+    aliases: [CH3CO]
+    evidence: chemistry_ranked_fts_calibration
+    confidence: medium
+    candidates:
+      - motif_id: CH3CO_acyl_C_top
+        binding_mode: C_centered
+        binding_atoms: [C_acyl]
+        site_pattern: top
+        orientation: carbonyl and methyl groups tilted away from Fe
+        priority: 1
+      - motif_id: CH3CO_eta2_CO
+        binding_mode: bidentate
+        binding_atoms: [C_acyl, O]
+        site_pattern: eta2_side_on
+        orientation: methyl group away from Fe
+        template_required: true
+        priority: 2
+      - motif_id: CH3CO_acyl_C_long_bridge
+        binding_mode: C_centered
+        binding_atoms: [C_acyl]
+        site_pattern: long_bridge
+        orientation: methyl group away from Fe
+        priority: 3
+
+  CH3CHO_acetaldehyde:
+    aliases: [CH3CHO, C2H4O_acetaldehyde]
+    evidence: chemistry_ranked_fts_calibration
+    confidence: medium
+    candidates:
+      - motif_id: CH3CHO_eta2_CO_side_on
+        binding_mode: bidentate
+        binding_atoms: [C_carbonyl, O]
+        site_pattern: eta2_side_on
+        orientation: methyl group along low-steric Fe row direction
+        template_required: true
+        priority: 1
+      - motif_id: CH3CHO_O_top_tilted
+        binding_mode: monodentate
+        binding_atoms: [O]
+        site_pattern: top
+        orientation: tilted carbonyl with methyl group away from Fe
+        priority: 2
+      - motif_id: CH3CHO_eta2_CO_rotated
+        binding_mode: bidentate
+        binding_atoms: [C_carbonyl, O]
+        site_pattern: eta2_side_on
+        orientation: symmetry-inequivalent in-plane carbonyl direction
+        template_required: true
+        priority: 3
+
+  C2H5OH_ethanol:
+    aliases: [C2H5OH, CH3CH2OH]
+    evidence: chemistry_ranked_fts_calibration
+    confidence: medium
+    candidates:
+      - motif_id: C2H5OH_O_top_chain_along_row
+        binding_mode: O_centered
+        binding_atoms: [O]
+        site_pattern: top
+        orientation: intact O-H up; C-C chain along Fe row
+        priority: 1
+      - motif_id: C2H5OH_O_top_chain_across_row
+        binding_mode: O_centered
+        binding_atoms: [O]
+        site_pattern: top
+        orientation: intact O-H up; C-C chain across Fe row
+        priority: 2
+    suppress: [carbon_anchor, blind_four_site_scan, implicit_OH_dissociation]

@@ -1,0 +1,188 @@
+{
+  "status": "PASS",
+  "query": "bcc Fe(110) CO* dissociation to C* plus O* transition path NEB transition state structure",
+  "retrieved_at": "2026-07-18T14:54:10.023317+00:00",
+  "semantic_backend": "sentence-transformers:sentence-transformers/all-MiniLM-L6-v2",
+  "weights": {
+    "bm25": 0.45,
+    "semantic": 0.55
+  },
+  "whitelist_valid": true,
+  "production_ready": true,
+  "result_count": 4,
+  "results": [
+    {
+      "rank": 1,
+      "hybrid_score": 0.01639344262295082,
+      "bm25_score": 9.141275408338828,
+      "semantic_score": 0.6270469427108765,
+      "record": {
+        "id": "catalysis-hub-fe211-co-dissociation-1284",
+        "source_id": "catalysis-hub",
+        "source_url": "https://api.catalysis-hub.org/graphql",
+        "source_access_verified": true,
+        "artifact_urls": [],
+        "title": "CO* dissociation to C* + O* on elemental Fe(211)",
+        "summary": "Catalysis-Hub reaction 1284 reports CO* -> C* + O* on elemental Fe(211). The record confirms a dissociated coadsorbed product class but exposes no usable site-labelled Fe(110) endpoint.",
+        "retrieved_at": "2026-07-14T00:43:26+08:00",
+        "data_types": [
+          "reaction_record",
+          "coadsorbed_product_class"
+        ],
+        "material": "elemental Fe",
+        "surface": "Fe(211)",
+        "adsorbates": [
+          "CO",
+          "C",
+          "O"
+        ],
+        "reaction": "CO* -> C* + O*",
+        "keywords": [
+          "iron",
+          "CO dissociation",
+          "C O coadsorption",
+          "dissociated endpoint"
+        ],
+        "license": null,
+        "access_notes": "Public GraphQL record id 1284; reaction energy is -0.83 eV in the source convention. Facet and unspecified model are incompatible with the current Fe45 Fe(110) branch; no energy or coordinates are transferred.",
+        "match_confidence": "low",
+        "reaction_id": 1284,
+        "reaction_energy_eV": -0.83,
+        "publication_doi": "10.1007/s10562-010-0477-y",
+        "transferability": "product chemistry only; not a structure or energy template"
+      }
+    },
+    {
+      "rank": 2,
+      "hybrid_score": 0.015988223246287764,
+      "bm25_score": 0.6647343786896559,
+      "semantic_score": 0.3226050138473511,
+      "record": {
+        "id": "catalysis-hub-cu100-cco-bridge-452826",
+        "source_id": "catalysis-hub",
+        "source_url": "https://api.catalysis-hub.org/graphql",
+        "source_access_verified": true,
+        "artifact_urls": [],
+        "title": "Relaxed upright CCO* at bridge on Cu(100)",
+        "summary": "Catalysis-Hub reaction 452826 contains a relaxed Cu36C2O bridge structure. The CCO fragment remains upright and terminal-C-bound, with C-C 1.30321 A and C-O 1.17683 A.",
+        "retrieved_at": "2026-07-14T00:43:26+08:00",
+        "data_types": [
+          "reaction_record",
+          "relaxed_adsorption_structure"
+        ],
+        "material": "Cu36",
+        "surface": "Cu(100)",
+        "adsorbates": [
+          "CCO"
+        ],
+        "reaction": "CCO* formation",
+        "keywords": [
+          "CCO",
+          "C2O",
+          "ketenylidene",
+          "upright",
+          "terminal carbon",
+          "bridge"
+        ],
+        "license": null,
+        "access_notes": "Public GraphQL reaction id 452826 and system uniqueId 7e08464725a773513f6db643a39ce9dd. Cu(100) is not energy- or site-equivalent to Fe(110); only the repeated upright connectivity is considered.",
+        "match_confidence": "low",
+        "reaction_id": 452826,
+        "system_unique_id": "7e08464725a773513f6db643a39ce9dd",
+        "publication_doi": "10.1021/acs.jpcc.3c02953",
+        "site_label": "bridge",
+        "cc_distance_A": 1.3032063473,
+        "co_distance_A": 1.1768266609,
+        "transferability": "connectivity and orientation only"
+      }
+    },
+    {
+      "rank": 3,
+      "hybrid_score": 0.015902217741935485,
+      "bm25_score": 0.6463223940504724,
+      "semantic_score": 0.3289420008659363,
+      "record": {
+        "id": "catalysis-hub-cu100-cco-hollow-452823",
+        "source_id": "catalysis-hub",
+        "source_url": "https://api.catalysis-hub.org/graphql",
+        "source_access_verified": true,
+        "artifact_urls": [],
+        "title": "Relaxed upright CCO* at fourfold hollow on Cu(100)",
+        "summary": "Catalysis-Hub reaction 452823 contains a relaxed Cu36C2O structure labelled fourfold hollow. The adsorbate is an upright terminal-C-bound C-C-O chain with C-C 1.31825 A and C-O 1.17053 A.",
+        "retrieved_at": "2026-07-14T00:43:26+08:00",
+        "data_types": [
+          "reaction_record",
+          "relaxed_adsorption_structure"
+        ],
+        "material": "Cu36",
+        "surface": "Cu(100)",
+        "adsorbates": [
+          "CCO"
+        ],
+        "reaction": "CCO* formation",
+        "keywords": [
+          "CCO",
+          "C2O",
+          "ketenylidene",
+          "upright",
+          "terminal carbon",
+          "hollow"
+        ],
+        "license": null,
+        "access_notes": "Public GraphQL reaction id 452823 and system uniqueId 26be7607eb9d523f033d61a7a9a753d4. Cu(100) is not energy- or site-equivalent to Fe(110); only the intact upright connectivity and bond-length scale are used.",
+        "match_confidence": "medium",
+        "reaction_id": 452823,
+        "system_unique_id": "26be7607eb9d523f033d61a7a9a753d4",
+        "publication_doi": "10.1021/acs.jpcc.3c02953",
+        "site_label": "4foldhollow",
+        "cc_distance_A": 1.3182481175,
+        "co_distance_A": 1.1705278265,
+        "transferability": "connectivity and orientation only"
+      }
+    },
+    {
+      "rank": 4,
+      "hybrid_score": 0.015736607142857142,
+      "bm25_score": 0.6647343786896559,
+      "semantic_score": 0.2960640490055084,
+      "record": {
+        "id": "catalysis-hub-cu100-cco-atop-452825",
+        "source_id": "catalysis-hub",
+        "source_url": "https://api.catalysis-hub.org/graphql",
+        "source_access_verified": true,
+        "artifact_urls": [],
+        "title": "Relaxed upright CCO* at atop on Cu(100)",
+        "summary": "Catalysis-Hub reaction 452825 contains a relaxed Cu36C2O atop structure. The CCO fragment remains upright and terminal-C-bound, with C-C 1.29317 A and C-O 1.18434 A.",
+        "retrieved_at": "2026-07-14T00:43:26+08:00",
+        "data_types": [
+          "reaction_record",
+          "relaxed_adsorption_structure"
+        ],
+        "material": "Cu36",
+        "surface": "Cu(100)",
+        "adsorbates": [
+          "CCO"
+        ],
+        "reaction": "CCO* formation",
+        "keywords": [
+          "CCO",
+          "C2O",
+          "ketenylidene",
+          "upright",
+          "terminal carbon",
+          "atop"
+        ],
+        "license": null,
+        "access_notes": "Public GraphQL reaction id 452825 and system uniqueId d31190945231c0ed860fb00eb1782769. Cu(100) is not energy- or site-equivalent to Fe(110); only the repeated upright connectivity is considered.",
+        "match_confidence": "low",
+        "reaction_id": 452825,
+        "system_unique_id": "d31190945231c0ed860fb00eb1782769",
+        "publication_doi": "10.1021/acs.jpcc.3c02953",
+        "site_label": "atop",
+        "cc_distance_A": 1.293166973,
+        "co_distance_A": 1.1843393704,
+        "transferability": "connectivity and orientation only"
+      }
+    }
+  ]
+}

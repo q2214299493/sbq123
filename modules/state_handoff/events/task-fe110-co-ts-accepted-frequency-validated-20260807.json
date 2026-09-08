@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-co-ts-accepted-frequency-validated-20260807",
+  "event_type": "task_updated",
+  "entity": {"kind": "task", "id": "fe110-co-dissociation", "module": "transition_state_search"},
+  "occurred_at": "2026-08-07T00:28:08+08:00",
+  "recorded_at": "2026-08-07T00:28:08+08:00",
+  "summary": "Accept the Dimer TS from convergence and target-frequency validation; optional grading is not a gate.",
+  "payload": {
+    "objective": "Record the accepted Fe(110) CO-dissociation Dimer TS result.",
+    "phase": "verification",
+    "current_evidence": [
+      "Dimer job `9656664` is converged with negative curvature and converged VASP maximum atomic force.",
+      "VFA job `9694935` completed with exactly one imaginary mode at `537.451689 cm^-1`; its target C/O mode assignment is accepted.",
+      "The canonical pipeline status is `TS_ACCEPTED`; connectivity and optional VFA grading do not gate Dimer acceptance.",
+      "Force/Torque review was conditionally required for this result because its soft targets were missed; the residuals have an accepted bound review."
+    ],
+    "one_executable_step": "Record the accepted TS result and prepare a compatible energy chain only when separately authorized.",
+    "submission_boundary": "This state update authorizes no VASP or scheduler action.",
+    "done_when": ["The accepted TS evidence and Topic-1 TS workbook row are hash-bound and recorded."],
+    "authoritative_references": ["`modules/transition_state_search/README.md`", "`configs/ts_validation_pipeline.yaml`"]
+  },
+  "evidence": [
+    {"locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806/ts_strategy_step_record.json", "sha256": "7742161b24ac5df7ce5f29f8ff6261007cdc57d763ed63d1b9fa54e0b0d8816a", "authority": "module_validation", "observed_at": "2026-08-07T00:28:08+08:00"},
+    {"locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806/validation_pipeline_status.json", "sha256": "65521a91a9313b1722a3bdc45a56fbc866dbf1955f97285b3682eb415a03fe34", "authority": "module_validation", "observed_at": "2026-08-07T00:28:08+08:00"}
+  ],
+  "supersedes": [
+    "task-fe110-co-connectivity-needs-review-20260806",
+    "task-fe110-co-dimer-frequency-validation-20260806",
+    "task-fe110-co-dimer-mode-accepted-20260807",
+    "task-fe110-co-dimer-mode-accepted-merge-20260807"
+  ],
+  "review": {"required": true, "reason_codes": ["scientific_method_change", "cross_module_change"], "status": "pending"}
+}

@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "event_id": "module-gate-transition-state-search-dimer9746548-submitted-20260907",
+  "event_type": "module_gate_changed",
+  "entity": {
+    "kind": "module",
+    "id": "transition_state_search",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-07T12:30:21Z",
+  "recorded_at": "2026-09-07T12:30:21Z",
+  "summary": "Replace the obsolete ordinary-NEB monitoring proposal with the evidence-bound submitted Dimer refinement state; preserve the active task and all scientific calculation inputs.",
+  "payload": {
+    "module": "transition_state_search",
+    "status": "Active",
+    "depends_on": "Dimer 9746548 output review followed by the applicable local-frequency execution gate",
+    "current_gate": "Ordinary NEB 9745217 is DONE and user-accepted for refinement; the strict 0.053161 eV/Angstrom diagnostic remains recorded, not erased. Periodic normalization and local image 01-02-03 review passed. Image-02 Dimer 9746548 was submitted once under the hash-bound START_DIMER gate, with 80 cores and SIGMA=0.20 eV; its last recorded scheduler state was PEND at 2026-09-07T11:15:50Z, not a new live check. Monitor Dimer electronic/force convergence, curvature and mode before preparing local-frequency validation. No final TS, barrier or success-template acceptance is implied. Do not duplicate submission."
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/dimer_job9745217_image02_20260907/submission_record.json",
+      "sha256": "ee6a6511b2d3c035722b0b3e316423a504ff6fb39969f0577f7f77eaa0fa26ab",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-07T11:17:05Z"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/dimer_job9745217_image02_20260907/scheduler_evidence_submitted.json",
+      "sha256": "825fb2f841e30810efbb8716e1a6db739b798eb1fced7d2535f511132dccc400",
+      "authority": "scheduler",
+      "observed_at": "2026-09-07T11:17:05Z"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/dimer_job9745217_image02_20260907/submission_preflight.json",
+      "sha256": "1fd29f4d36bd373e770546055409d9a401def8968c32019fa5400c6af06e4f25",
+      "authority": "module_validation",
+      "observed_at": "2026-09-07T11:17:05Z"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/job9745217_accepted_parent_20260907/user_stage_acceptance.json",
+      "sha256": "277016afef6dfb0f5f59e83c7cff4629325cb8e46a7e9c4be1c8b477c63ecb7d",
+      "authority": "user_authorization",
+      "observed_at": "2026-09-07T11:17:05Z"
+    }
+  ],
+  "supersedes": [
+    "module-gate-transition-state-search-job9742743-done-unconverged-20260906",
+    "module-gate-transition-state-search-job9745217-running-20260906"
+  ],
+  "review": {
+    "required": true,
+    "reason_codes": ["cross_module_change"],
+    "status": "pending"
+  }
+}

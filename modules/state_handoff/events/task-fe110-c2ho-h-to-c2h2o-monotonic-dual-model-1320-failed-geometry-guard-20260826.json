@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-monotonic-dual-model-1320-failed-geometry-guard-20260826",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-26T11:24:21+08:00",
+  "recorded_at": "2026-08-26T03:24:21Z",
+  "summary": "GPU job 1320 failed after 125 restrained-preconditioning steps when H50 crossed the raw periodic-branch threshold between images 10 and 11; ordinary ML-NEB and AQCat25 fixed-path evaluation never started.",
+  "payload": {
+    "objective": "Review the job 1320 preconditioning failure and select a corrected periodic-branch and O-H restraint strategy before any new GPU request is prepared.",
+    "phase": "active",
+    "current_evidence": [
+      "Job 1320 is absent from the live MZ73 queue; Slurm terminal accounting is unavailable, so no scheduler DONE or EXIT claim is made.",
+      "The hash-bound producer failure record reports exit code 1 at 2026-08-25T17:24:05Z.",
+      "The run stopped in restrained_preconditioning_running after 125 recorded steps with RuntimeError: restrained_preconditioning geometry guard failed.",
+      "The hard failure is periodic_branch_numeric_passed=false for H atom 50 between images 10 and 11: raw fractional y displacement -0.507521 exceeds the absolute 0.50000001 threshold.",
+      "C1-C2 preservation, minimum pair distance, and average adjacent movable-atom RMSD pass their configured guards, but the restart O-H series is not monotonic; its maximum backtrack is 0.626899 A versus the allowed 0.01 A.",
+      "No ordinary ML-NEB, ML-CI-NEB, AQCat25 exact-path evaluation, complete GPU manifest, VASP parent, DIMER parent, TS, or barrier was produced."
+    ],
+    "one_executable_step": "Review the H50 image-10-to-11 periodic displacement together with the early O-H backtracking and prepare a corrected branch-consistent preconditioning proposal for user approval; do not resubmit automatically.",
+    "submission_boundary": "Job 1320 is terminal at producer level. No resubmission, periodic-tolerance change, restraint change, VASP job, or DIMER handoff is authorized.",
+    "done_when": [
+      "A corrected seed/preconditioning proposal resolves both the H50 periodic branch and O-H monotonicity without weakening geometry safety checks.",
+      "The corrected exact request passes local geometry, VTST path-export, runtime, checkpoint, and duplicate-job preflights.",
+      "A separate explicit user authorization is obtained before any new GPU submission."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_monotonic_rebuild_20260826/gpu_return_job1320/work_failure_review_job1320.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_monotonic_rebuild_20260826/gpu_return_job1320/production/producer_exit_record.failure.1320.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_monotonic_rebuild_20260826/work_to_gpu/request.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_monotonic_rebuild_20260826/gpu_return_job1320/work_failure_review_job1320.json",
+      "sha256": "2e67f41ceef4634779edc424e8b7d67ece99d046e16a6d6abb6114a8d8cf946f",
+      "authority": "module_validation",
+      "observed_at": "2026-08-26T11:24:21+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_monotonic_rebuild_20260826/gpu_return_job1320/production/producer_exit_record.failure.1320.json",
+      "sha256": "5dc00c2628ebb7e293772c12ee66233a93a94fb7e97ff791a2ac6b4eef662cfc",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-26T11:24:21+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_monotonic_rebuild_20260826/work_to_gpu/request.json",
+      "sha256": "8bb16864c2cb53015b0b6e15bb207c0cc7e7ec080527861756392e394d25cfb1",
+      "authority": "structure_output",
+      "observed_at": "2026-08-26T11:24:21+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-monotonic-dual-model-1320-running-20260826"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

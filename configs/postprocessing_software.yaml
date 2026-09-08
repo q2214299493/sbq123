@@ -1,0 +1,56 @@
+postprocessing_software:
+  catkinas:
+    role: "mean-field microkinetic modeling and descriptor/condition scans"
+    local_path: "C:/Users/86177/Desktop/app/CATKINAS"
+    entry_point: "CATKINAS.p"
+    run_environment: "MATLAB"
+    quickstart_path: "C:/Users/86177/Desktop/app/CATKINAS/quickstart"
+    verified_files:
+      - "C:/Users/86177/Desktop/app/CATKINAS/README_DEPLOYMENT.md"
+      - "C:/Users/86177/Desktop/app/CATKINAS/ReadMe.m"
+    current_status: "quickstart result_single ran under MATLAB 25.2.0.2998904 (R2025b); project-specific MKM input not yet generated"
+    workflow_owner_modules:
+      - "baseline_mkm"
+      - "coverage_mkm"
+    required_inputs:
+      - "validated kinetic data"
+      - "balanced reaction network"
+      - "free-energy barriers and prefactors"
+      - "temperature, pressure/feed, site density, and rate-law conventions"
+    key_outputs:
+      - "rates"
+      - "coverages"
+      - "selectivity"
+      - "degree of rate control"
+      - "energy profile and flow diagrams"
+
+  zacros_4_0:
+    role: "surface-reaction kinetic Monte Carlo"
+    local_path: "D:/Zacros4.0"
+    shell_entry: "D:/Zacros4.0/Zacros_Shell.cmd"
+    executable: "D:/Zacros4.0/bin/Zacros.exe"
+    manual: "D:/Zacros4.0/manual/ZacrosManual.pdf"
+    work_path: "D:/Zacros4.0/work"
+    example_path: "D:/Zacros4.0/work/example_100"
+    current_status: "example_100 reached Normal termination; project-specific Fe/CO KMC model inputs not yet created"
+    workflow_owner_modules:
+      - "surface_kmc"
+    required_inputs:
+      - "lattice and site model"
+      - "event catalog"
+      - "validated rate constants and barriers"
+      - "diffusion and neighbor rules"
+      - "detailed-balance and boundary-condition definitions"
+    standard_input_files:
+      - "simulation_input.dat"
+      - "lattice_input.dat"
+      - "energetics_input.dat"
+      - "mechanism_input.dat"
+      - "state_input.dat"
+    standard_output_files:
+      - "general_output.txt"
+      - "specnum_output.txt"
+      - "procstat_output.txt"
+      - "history_output.txt"
+      - "lattice_output.txt"
+      - "restart.inf"

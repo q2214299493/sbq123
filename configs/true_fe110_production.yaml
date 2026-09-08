@@ -1,0 +1,307 @@
+schema_version: 1
+system: true_bcc_alpha_Fe_110_3x3
+dataset_consistency:
+  status: selected_5_layer_user_directed
+  rule: "All reportable clean-slab, adsorption, endpoint, reaction, and NEB data must use one selected slab thickness."
+  selected_layers: 5
+  convergence_reference_layers: 7
+  note: "The active production dataset uses five layers by explicit user decision. Seven-layer calculations may exist only as validation and their energies must not be mixed into production."
+scope:
+  functional: PBE
+  incar_gga: PE
+  spin_polarized: true
+  bulk_source_job: 9556519
+  bulk_lattice_A: 2.8269483674
+  potcar_order:
+    - Fe
+    - C
+    - O
+  encut_eV: 400
+  vacuum_A: 15.0
+  fixed_bottom_layers: 2
+
+fast_screening:
+  purpose:
+    - adsorption_site_screening
+    - initial_geometry_relaxation
+    - reaction_path_exploration
+  layers: 5
+  clean_slab_atoms: 45
+  gamma_mesh: [5, 5, 1]
+  incar: &screening_incar
+    PREC: Accurate
+    EDIFF: 1.0e-5
+    EDIFFG: -0.05
+    ISPIN: 2
+    ISMEAR: 1
+    SIGMA: 0.20
+    ALGO: Fast
+    LREAL: false
+    LASPH: true
+    NELM: 200
+    NELMIN: 5
+    IBRION: 2
+    POTIM: 0.20
+    ISIF: 2
+    NSW: 200
+    ISYM: 0
+    LDIPOL: false
+    LCHARG: false
+    LWAVE: false
+  acceptance: "The five-layer production model is selected by explicit user decision; screening results remain interim until reviewed and recomputed with the compatible five-layer final-static protocol."
+
+routine_production:
+  purpose:
+    - adsorption_geometry
+    - endpoint_relaxation
+  layers: 5
+  clean_slab_atoms: 45
+  gamma_mesh: [5, 5, 1]
+  incar: &routine_incar
+    PREC: Accurate
+    EDIFF: 1.0e-5
+    EDIFFG: -0.02
+    ISPIN: 2
+    ISMEAR: 1
+    SIGMA: 0.20
+    ALGO: Fast
+    LREAL: false
+    LASPH: true
+    NELM: 200
+    NELMIN: 5
+    IBRION: 2
+    POTIM: 0.20
+    ISIF: 2
+    NSW: 300
+    ISYM: 0
+    LDIPOL: false
+    LCHARG: false
+    LWAVE: false
+  magmom_rule: "Fe=2.2 mu_B; C=0.0; O=0.0; preserve POSCAR species groups"
+
+ordinary_neb:
+  layers: 5
+  gamma_mesh: [5, 5, 1]
+  cores: 128
+  performance_incar:
+    NPAR: 4
+  incar:
+    <<: *routine_incar
+    EDIFFG: -0.05
+    IBRION: 3
+    POTIM: 0
+    NSW: 300
+    ICHAIN: 0
+    IOPT: 3
+    TIMESTEP: 0.05
+    MAXMOVE: 0.10
+    SPRING: -5
+    LCLIMB: false
+  note: "Start with the minimum reviewed image count; add images only around excessive displacement or high curvature."
+
+final_static:
+  purpose:
+    - optional_convergence_check
+    - legacy_matched_static_compatibility
+  layers: 5
+  gamma_mesh: [5, 5, 1]
+  incar: &final_static_incar
+    PREC: Accurate
+    EDIFF: 1.0e-6
+    ISPIN: 2
+    ISMEAR: 1
+    SIGMA: 0.10
+    ALGO: Fast
+    LREAL: false
+    LASPH: true
+    NELM: 200
+    NELMIN: 5
+    NSW: 0
+    IBRION: -1
+    ISYM: 0
+    LDIPOL: false
+    LCHARG: false
+    LWAVE: false
+
+final_energy_policy:
+  active_convention: fe110_converged_toten_sigma0p20_v1
+  single_point_required: false
+  source_energy: final_OUTCAR_TOTEN
+  accepted_surface_sources:
+    - ionically_converged_routine_production_relaxation
+    - technically_accepted_dimer
+  required_surface_incar:
+    ISMEAR: 1
+    SIGMA: 0.20
+  required_review:
+    - scheduler_done
+    - electronic_convergence
+    - ionic_or_dimer_technical_convergence
+    - geometry_valid
+    - source_outcar_hash_bound
+    - compatible_energy_fingerprint
+  compatibility_rule: "Every energy difference must use the same active convention and identical XC, POTCAR, ENCUT, slab, k-mesh, magnetic, ISMEAR, SIGMA, fixed-atom, dipole, vacuum, and coverage branch. E0 may be stored as supplemental evidence but is not the active energy difference."
+  legacy_final_static_use: "Existing SIGMA=0.10 matched statics remain provenance or optional convergence checks and must not be mixed with the active SIGMA=0.20 TOTEN convention."
+
+transition_state:
+  active_learning_force_label:
+    purpose: exact_structure_static_force_label_only
+    base_profile: final_static
+    cores: 32
+    performance_incar:
+      NPAR: 4
+      LORBIT: 11
+  parameter_policy:
+    policy_version: 1
+    fixed_dft_basis:
+      production_branch: true_Fe110_five_layer
+      slab_layers: 5
+      clean_slab_atoms: 45
+      fixed_bottom_layers: 2
+      lateral_cell_coverage_and_vacuum: "inherit from the accepted endpoint reaction contract; identical for IS, path images, TS, and FS"
+      functional: PBE
+      incar_gga: PE
+      potcar_family: PAW_PBE
+      potcar_order: [Fe, C, O]
+      encut_eV: 400
+      gamma_mesh: [5, 5, 1]
+      spin_polarized: true
+      magmom_rule: "Fe=2.2 mu_B; C=0.0; O=0.0; preserve POSCAR species groups"
+      symmetry: "ISYM=0"
+      dipole_policy: "LDIPOL=false"
+      atom_order_and_selective_dynamics: locked
+      compatibility_fingerprint_required: true
+    allowed_to_vary_by_approved_stage:
+      ordinary_neb: [EDIFF, EDIFFG, ISMEAR, SIGMA, ALGO, AMIX, BMIX, AMIX_MAG, BMIX_MAG, ISTART, ICHARG, IBRION, IOPT, IMAGES, SPRING, LCLIMB, NSW, NELM, NPAR, core_count]
+      refine_neb: [EDIFF, EDIFFG, ISMEAR, SIGMA, IOPT, IMAGES, SPRING, LCLIMB, NSW, NELM, core_count]
+      ci_neb: [EDIFF, EDIFFG, ISMEAR, SIGMA, IOPT, IMAGES, SPRING, LCLIMB, NSW, NELM, core_count]
+      dimer: [EDIFF, EDIFFG, ISMEAR, SIGMA, IOPT, DdR, DRotMax, DFNMin, DFNMax, NSW, NELM, core_count]
+      vfa: [EDIFF, IBRION, NFREE, POTIM, active_atom_set, core_count]
+      connectivity_relax: [EDIFF, EDIFFG, IBRION, POTIM, NSW, NELM, core_count]
+      matched_static: [EDIFF, ISMEAR, SIGMA, NSW, IBRION, core_count]
+    approved_magnetic_initialization_branches:
+      fe110_co_dissociation_highspin_seed_v1:
+        stages: [ordinary_neb]
+        moments_muB: {Fe: 2.4, C: 0.0, O: 0.0}
+        evidence_job_id: "9639279"
+        evidence_rule: "Exact image-06 geometry converged to the adjacent-image high-spin branch and was 2.29958246 eV below the failed 2.2 mu_B/Fe cold-start branch."
+    variation_rule: "Only the owning stage template may change the listed parameters; every other DFT basis and compatibility field remains fixed. Any exception requires an explicit protocol decision and a new compatibility branch."
+    result_promotion:
+      aqcat25_energy: predicted_candidate_only
+      neb_profile_energy: diagnostic_only
+      reportable_barrier_requires:
+        - accepted_grade_a_ts
+        - validated_vibrational_mode
+        - source_method_validation_complete
+        - compatible_converged_SIGMA_0p20_IS_TS_FS_TOTEN
+        - identical_compatibility_fingerprint
+      source_method_validation:
+        dimer: [dimer_technical_acceptance, validated_vibrational_mode]
+        neb: [validated_bidirectional_connectivity]
+        ci_neb: [validated_bidirectional_connectivity]
+      final_energy_profile: final_energy_policy
+      final_energy_convention: fe110_converged_toten_sigma0p20_v1
+      final_energy_source: final_OUTCAR_TOTEN
+      matched_static_required: false
+      registry_database: data/project_registry.sqlite3
+      rule: "Register the accepted IS/TS/FS structures, energies, hashes, compatibility fingerprint, validation status, and provenance before promoting a barrier to the project dataset."
+  refine_neb:
+    incar:
+      <<: *routine_incar
+      EDIFFG: -0.02
+      IBRION: 3
+      POTIM: 0
+      NSW: 300
+      ICHAIN: 0
+      IOPT: 3
+      TIMESTEP: 0.05
+      MAXMOVE: 0.10
+      SPRING: -5
+      LCLIMB: false
+  ci_neb:
+    incar:
+      <<: *routine_incar
+      EDIFFG: -0.02
+      IBRION: 3
+      POTIM: 0
+      NSW: 300
+      ICHAIN: 0
+      IOPT: 1
+      SPRING: -5
+      LCLIMB: true
+  dimer:
+    source: "Henkelman VTST dimer method; mode and settings require workflow review before submission"
+    incar:
+      <<: *routine_incar
+      EDIFF: 1.0e-7
+      EDIFFG: -0.02
+      IBRION: 3
+      POTIM: 0
+      NSW: 300
+      ICHAIN: 2
+      IOPT: 2
+      DdR: 0.005
+      DRotMax: 1
+      DFNMin: 0.01
+      DFNMax: 1.0
+  vfa:
+    method: finite_difference_partial_hessian
+    scope: "contract-defined local partial Hessian; full movable-slab Hessian is not required by default"
+    active_set_policy:
+      required_atoms: reaction_contract_reaction_atoms
+      optional_local_environment: directly_coordinated_surface_atoms
+      fixed_slab_atoms_forbidden: true
+      full_hessian_required: false
+      expand_only_when:
+        - principal_mode_assignment_is_ambiguous
+        - local_surface_mode_coupling_is_unresolved
+        - explicitly_requested
+      thermochemistry_rule: "Use the same reviewed local active-set definition for IS, TS, and FS."
+      reporting_rule: "Label frequencies and thermal corrections as partial-Hessian results."
+    validation:
+      status: needs_confirmation
+      meaningful_imaginary_frequency_min_cm1: null
+      additional_soft_mode_abs_max_cm1: null
+      rule: "Grade A/B remains blocked until both project thresholds are explicitly reviewed and configured."
+    incar:
+      <<: *final_static_incar
+      EDIFF: 1.0e-7
+      IBRION: 5
+      NFREE: 2
+      POTIM: 0.015
+      NSW: 1
+  connectivity_relax:
+    purpose: "downhill relaxation from positive or negative imaginary-mode displacement"
+    cores: 32
+    incar:
+      <<: *routine_incar
+      EDIFF: 1.0e-5
+      EDIFFG: -0.02
+      IBRION: 2
+      POTIM: 0.20
+      NSW: 300
+
+publication_validation:
+  status: separate_validation_only_not_active_production
+  layers: 8
+  clean_slab_atoms: 72
+  gamma_mesh_relax: [5, 5, 1]
+  gamma_mesh_static: [5, 5, 1]
+  required_states:
+    - clean_slab
+    - molecular_CO_initial_state
+    - dissociated_C_O_final_state
+    - transition_state_candidate
+  acceptance:
+    adsorption_or_reaction_energy_change_eV: 0.03
+    barrier_change_eV: 0.05
+
+compatibility_rules:
+  - "The active production dataset is the user-selected five-layer branch; later layer-count comparisons are validation only and do not change production automatically."
+  - "Every reportable production slab, adsorption, endpoint, and NEB calculation uses five layers unless a later explicit user decision supersedes this branch."
+  - "Lock GGA=PE, the approved PAW-PBE POTCAR family, and ENCUT=400 eV across every adsorption-energy component; use ISPIN=2 for Fe-containing magnetic systems."
+  - "Use identical lateral cell, layer count, vacuum, fixed-layer rule, slab mesh, smearing branch, and dipole policy for all periodic slab terms in one energy difference."
+  - "Metals and oxides may use separately converged smearing, magnetic, and DFT+U groups; never mix groups inside one reported energy difference."
+  - "Never mix seven-layer and eight-layer total energies in one adsorption energy, reaction energy, or barrier."
+  - "Do not transfer old non-current adsorption/NEB settings or energies into the true Fe(110) 5x5x1 branch."
+  - "Gas CO is closed-shell and non-spin-polarized: use GGA=PE, the same PAW-PBE POTCAR family, ENCUT=400 eV, Gamma-only sampling, ISPIN=1, no MAGMOM, and one consistently reused sufficiently large cubic box."

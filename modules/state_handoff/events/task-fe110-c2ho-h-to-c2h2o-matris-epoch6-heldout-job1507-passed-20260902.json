@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-matris-epoch6-heldout-job1507-passed-20260902",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-02T17:17:30+08:00",
+  "recorded_at": "2026-09-02T09:17:30Z",
+  "summary": "Authorized MZ73 job 1507 completed exact epoch-6 inference on seven frozen TS held-out structures without training or checkpoint modification. All six primary force metrics improve, relative-energy RMSE improves and remains below 0.10 eV, and the lowest-energy identity is preserved. The warning candidate passes held-out validation but is not promoted and no path rerun was started.",
+  "payload": {
+    "objective": "Obtain a separate user decision on promoting epoch-6 checkpoint 8e53cfb0...eb49 and preparing a complete MatRIS path rerun; do not promote or rerun automatically.",
+    "phase": "active",
+    "current_evidence": [
+      "Slurm job 1507 left squeue; MZ73 producer evidence reports success with exit code 0 from 2026-09-02T09:16:37Z to 09:16:42Z.",
+      "The run evaluated six primary and one diagnostic frozen TS held-out structures with zero training/selection overlap.",
+      "No training occurred, and epoch-6 checkpoint 8e53cfb0...eb49 was not modified.",
+      "Primary held-out component and vector RMSE improve by 16.537467%.",
+      "Primary held-out vector p95 improves by 6.484424% and vector maximum improves by 14.721429%.",
+      "Relative-energy RMSE improves from 0.087341 to 0.086352 eV and remains below the 0.10 eV ceiling; lowest-energy identity remains correct.",
+      "Relative-energy MAE increases by 12.714192%, but MAE is not a registered hard gate.",
+      "The one diagnostic held-out force vector RMSE and maximum also improve.",
+      "Epoch 6 therefore passes frozen TS held-out validation while retaining its adsorption vector-maximum SOFT_WARNING classification.",
+      "No checkpoint promotion, complete-path rerun, AQCat25 audit, VASP, Dimer, TS acceptance, or barrier action occurred."
+    ],
+    "one_executable_step": "Obtain explicit user authorization either to promote epoch-6 as the active MatRIS candidate and prepare its complete O-H path rerun, or to retain the frozen base checkpoint.",
+    "submission_boundary": "Job-1507 authorization is consumed. Checkpoint promotion and any complete-path GPU rerun require a new explicit action; VASP, Dimer, TS acceptance, and barrier actions remain separately gated.",
+    "done_when": [
+      "A durable decision records whether epoch-6 is promoted for the current MatRIS O-H path domain.",
+      "If promoted, its exact checkpoint hash is bound to a separately reviewed complete-path request.",
+      "No path result is interpreted before returning through work-side geometry and provenance review."
+    ],
+    "authoritative_references": [
+      "`outputs/matris_epoch6_frozen_heldout_validation_bundle_20260902/submission_record_job1507.json`",
+      "`outputs/matris_epoch6_frozen_heldout_validation_bundle_20260902/returned_job1507/result.json`",
+      "`outputs/matris_epoch6_frozen_heldout_validation_bundle_20260902/returned_job1507/producer_exit_record.json`",
+      "`outputs/matris_epoch6_frozen_heldout_validation_bundle_20260902/heldout_validation_review_job1507.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "outputs/matris_epoch6_frozen_heldout_validation_bundle_20260902/submission_record_job1507.json",
+      "sha256": "88eccfa79621042eddf540967e8368ee45eee36bc4d63292fdc5608f68c77cb3",
+      "authority": "scheduler",
+      "observed_at": "2026-09-02T17:17:30+08:00"
+    },
+    {
+      "locator": "outputs/matris_epoch6_frozen_heldout_validation_bundle_20260902/returned_job1507/result.json",
+      "sha256": "326b4f4da3347413bac0c67ea3372a0e974c89c4b58539a531bef6d3863ec2fd",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T17:17:30+08:00"
+    },
+    {
+      "locator": "outputs/matris_epoch6_frozen_heldout_validation_bundle_20260902/returned_job1507/producer_exit_record.json",
+      "sha256": "e18026758fdb7ca7e84eb34359bae81fa2c035e1909112edb778af1434dee795",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-02T17:17:30+08:00"
+    },
+    {
+      "locator": "outputs/matris_epoch6_frozen_heldout_validation_bundle_20260902/heldout_validation_review_job1507.json",
+      "sha256": "0b2537af02dd32f779d439ee01aab8a72308c992a8e9a502173191f65dac511e",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T17:17:30+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-matris-retention-tiered-gate-epoch6-warning-candidate-20260902"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

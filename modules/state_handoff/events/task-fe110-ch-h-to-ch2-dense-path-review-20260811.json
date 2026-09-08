@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-ch-h-to-ch2-dense-path-review-20260811",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-ch-h-to-ch2-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-11T12:16:25+08:00",
+  "recorded_at": "2026-08-11T04:16:25Z",
+  "summary": "A seven-internal-image Fe(110) CH* + H* -> CH2* path now resolves the C-H forming interval and is ready for user structure review; no pilot or VASP submission is authorized.",
+  "payload": {
+    "objective": "Run the gated Fe(110) CH* + H* -> CH2* + * transition-state workflow from the accepted A initial state to the compatible optimized CH2* final state.",
+    "phase": "active",
+    "current_evidence": [
+      "The selected local candidate uses seven internal images, numbered `00` through `08`, with segmented IDPP between the optimized endpoints and three ordered local waypoints.",
+      "The forming C45-H47 distance is monotonic at `2.429/2.170/1.917/1.696/1.500/1.351/1.204/1.112/1.104 A`.",
+      "Images 03, 04, and 05 sample the contract-defined `1.3-1.8 A` important interval; the maximum adjacent C45-H47 gap is reduced from `0.712926 A` to `0.259224 A`.",
+      "The geometry gate is PASS, the sequential periodic branch has no shifted atoms, and the bottom 18 Fe atoms are exactly preserved in every image.",
+      "VTST `dist.pl` and `nebmovie.pl 0` completed; numeric and top/side visual review recommend the seven-image candidate, while `path_review.json` remains `needs_review` pending the user's decision."
+    ],
+    "one_executable_step": "Obtain the user's structure decision on `ordinary_neb_rebuild_7img_v3`; if accepted, prepare the same-path one-step pilot evidence and refresh the execution gate without submitting any VASP job unless separately authorized.",
+    "submission_boundary": "No pilot, production NEB, CI-NEB, DIMER, frequency, connectivity, or other VASP job is authorized by this path-construction review.",
+    "done_when": [
+      "The ordinary NEB produces a technically usable reaction path or a gate-supported method handoff.",
+      "Any highest-image TS candidate is refined and validated through the owning module before a barrier claim.",
+      "IS, TS, and FS results remain compatible and hash-bound; no free-energy or kinetics claim is made without separate thermochemical work."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/path/ordinary_neb_rebuild_7img_v3/path_generation_report.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/path/ordinary_neb_rebuild_7img_v3/path_geometry_diagnosis.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/path/ordinary_neb_rebuild_7img_v3/dist.dat`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/path/ordinary_neb_rebuild_7img_v3/movie.xyz`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/path/ordinary_neb_rebuild_7img_v3/structure_review.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/path/ordinary_neb_rebuild_7img_v3/path_review.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/path/ordinary_neb_rebuild_7img_v3/path_generation_report.json",
+      "sha256": "6b12a42b5b6f61de9a7267e574d3d53b312d84d23ab4633587632d437963e6f7",
+      "authority": "module_validation",
+      "observed_at": "2026-08-11T12:16:25+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/path/ordinary_neb_rebuild_7img_v3/path_geometry_diagnosis.json",
+      "sha256": "cde44ce5c583a29a41fb3f580610c255d6a0a08222096bbf3854a9b861441270",
+      "authority": "module_validation",
+      "observed_at": "2026-08-11T12:16:25+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/path/ordinary_neb_rebuild_7img_v3/dist.dat",
+      "sha256": "fbfc0c17679fa62942827dd5782577a4d00b31b16a2aac0b03a7872848ab4b1f",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-11T12:16:25+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/path/ordinary_neb_rebuild_7img_v3/movie.xyz",
+      "sha256": "4b00c7d8f93bc4e6533d59c3941763e253ef9f55513ba44011c82e93ba2f0b06",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-11T12:16:25+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/path/ordinary_neb_rebuild_7img_v3/structure_review.json",
+      "sha256": "44fbb0d48a2235a686dac675051e7202d99703ae5d5d8cf49d09485925a50624",
+      "authority": "structure_output",
+      "observed_at": "2026-08-11T12:16:25+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/path/ordinary_neb_rebuild_7img_v3/path_review.json",
+      "sha256": "fb24e03f76753882deaa870bdd65df3b799c01e1b9b501bd46238112d570cfdd",
+      "authority": "repository_document",
+      "observed_at": "2026-08-11T12:16:25+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/path/ordinary_neb_rebuild_7img_v3/path_top_side.png",
+      "sha256": "2334e5355838c66822263c5760a672544bd950e4638a3fba903b03974ee6c244",
+      "authority": "structure_output",
+      "observed_at": "2026-08-11T12:16:25+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-ch-h-to-ch2-neb-rebuild-required-20260811"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-v8-product-side-arc-repair-prepared-20260828",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-28T16:57:52.6335778+08:00",
+  "recorded_at": "2026-08-28T08:57:52.6335778Z",
+  "summary": "The v8 product-side images 15-18 were reparameterized by movable-atom configuration arc length; the no-model geometry preflight passed and a direct unrestrained MatRIS ordinary ML-NEB request was prepared locally without submission.",
+  "payload": {
+    "objective": "Complete VTST path review and an MZ73 no-model/runtime preflight before requesting separate authorization for one direct unrestrained MatRIS ordinary ML-NEB execution.",
+    "phase": "active",
+    "current_evidence": [
+      "The failed linear redistribution moved zero-based H atom 48 by 1.076944 A between images 17 and 18 against a 1.0 A limit.",
+      "Reaction-specific configuration-arc-length reparameterization changed only product-side images 15-17 and kept endpoint image 18 fixed.",
+      "The repaired 15-16, 16-17, and 17-18 maximum movable-atom steps are 0.655486, 0.625636, and 0.860345 A; the global maximum is 0.861616 A between images 01 and 02.",
+      "The repaired path retains five strict forming-O-H images 10-14, continuous periodic branches, C1-C2 distances 1.398102-1.431307 A, maximum adjacent RMSD 0.211176 A, and minimum pair distance 0.981210 A.",
+      "The new request disables preconditioning and all restraint-release stages and omits runtime redistribution; its next model stage is unrestrained MatRIS ordinary ML-NEB.",
+      "All 19 request structure hashes, the request hash, repair-evidence hash, and executor hash were verified. Nothing was uploaded or submitted."
+    ],
+    "one_executable_step": "Run dist.pl and nebmovie.pl 0 plus the hash-bound MZ73 runtime/checkpoint preflight; do not start a GPU model job without separate explicit authorization.",
+    "submission_boundary": "No GPU, VASP, VTST, fine-tuning, Dimer, frequency, TS, or barrier submission is authorized by this preparation event.",
+    "done_when": [
+      "The repaired 19-image path passes VTST and visual continuity review.",
+      "The exact request and executor pass MZ73 runtime/checkpoint preflight.",
+      "A separate explicit decision is recorded before one GPU execution."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/product_side_arc_length_repair_20260828/local_preflight_review.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/product_side_arc_length_repair_20260828/preparation_manifest.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/product_side_arc_length_repair_20260828/work_to_gpu/request.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/product_side_arc_length_repair_20260828/repair_evidence.json",
+      "sha256": "27ec8d7e81ef1a1b00af29f323762c0c5536023932e2adf4e5df5ec494c78df7",
+      "authority": "module_validation",
+      "observed_at": "2026-08-28T16:57:52.6335778+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/product_side_arc_length_repair_20260828/preparation_manifest.json",
+      "sha256": "55c5b398eb91a222e6c7e2663c554306be3c373c283ab4765076ce86d24102c3",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-28T16:57:52.6335778+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/product_side_arc_length_repair_20260828/work_to_gpu/request.json",
+      "sha256": "ba2a8066e98d6f1d35c98c4cbf98797afbc7d21b6785b8b7051acc158c05af4d",
+      "authority": "repository_document",
+      "observed_at": "2026-08-28T16:57:52.6335778+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v8-job1339-failed-20260828"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

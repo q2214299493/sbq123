@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-ch-h-coadsorption-opened-20260808",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-ch-h-coadsorption",
+    "module": "adsorption_workflow"
+  },
+  "occurred_at": "2026-08-08T11:39:29+08:00",
+  "recorded_at": "2026-08-08T11:39:29+08:00",
+  "summary": "Prepare and run one Fe(110) CH* plus H* coadsorption relaxation as a candidate initial endpoint for CH hydrogenation.",
+  "payload": {
+    "objective": "Build, validate, submit, and record one path-compatible Fe45 CH* plus H* coadsorption relaxation on the active production branch.",
+    "phase": "active",
+    "current_evidence": [
+      "The user explicitly authorized one Fe(110) CH* plus H* coadsorption run on 2026-08-08.",
+      "Local VASP relaxations exist for separate CH*, H*, and CH2* states, but no registered CH* plus H* coadsorbed endpoint exists.",
+      "No exact transferable Fe(110) CH* plus H* whitelist structure was identified; local verified structures control construction."
+    ],
+    "one_executable_step": "Select one path-compatible local CH*/H*/CH2* motif, build and audit the coadsorbed POSCAR, prepare production inputs, pass submission gates, and submit one relaxation to sunboquan-codex.",
+    "submission_boundary": "Authorization covers one Fe(110) CH* plus H* coadsorption relaxation only; it does not authorize NEB, CI-NEB, DIMER, frequencies, endpoint expansion, or resubmission.",
+    "done_when": [
+      "One coadsorbed Fe45 CH* plus H* POSCAR passes composition, constraints, contact, and intended-connectivity checks.",
+      "The production input package passes the repository-owned adsorption preflight and backend contract.",
+      "Exactly one VASP relaxation is submitted to sunboquan-codex and its scheduler ID, remote path, and provenance are recorded."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_ch_h_coadsorption_20260808/README.md`",
+      "`configs/true_fe110_production.yaml`",
+      "`modules/adsorption_workflow/README.md`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_ch_h_coadsorption_20260808/README.md",
+      "sha256": "841072c094fe8415a74c994b9e9f00d035c7a0bc9a48612c2bb97aa5e34babfa",
+      "authority": "repository_document",
+      "observed_at": "2026-08-08T11:39:29+08:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

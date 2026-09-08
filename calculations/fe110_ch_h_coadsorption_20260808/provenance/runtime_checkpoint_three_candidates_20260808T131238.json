@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-08-08T13:12:38+08:00",
+  "source_command": "ssh sunboquan-codex 'bjobs -a 9701350 9701505 9701506'",
+  "source_text": "JOBID USER STAT QUEUE FROM_HOST EXEC_HOST JOB_NAME SUBMIT_TIME\n9701350 nsgkn_c RUN Gkn_normal ycn02 32*gknew071 script.lsf Aug 8 12:19\n9701505 nsgkn_c PEND Gkn_normal ycn02 script.lsf Aug 8 13:12\n9701506 nsgkn_c PEND Gkn_normal ycn02 script.lsf Aug 8 13:12",
+  "jobs": [
+    {
+      "candidate_id": "A",
+      "scheduler_job_id": "9701350",
+      "scheduler_status": "RUN",
+      "scientific_status": "Unassessed in this checkpoint"
+    },
+    {
+      "candidate_id": "B",
+      "scheduler_job_id": "9701505",
+      "scheduler_status": "PEND",
+      "scientific_status": "Not started"
+    },
+    {
+      "candidate_id": "C",
+      "scheduler_job_id": "9701506",
+      "scheduler_status": "PEND",
+      "scientific_status": "Not started"
+    }
+  ],
+  "interpretation": "Scheduler evidence only. RUN/PEND does not establish electronic convergence, ionic convergence, force convergence, retained CH+H chemistry, or adsorption stability."
+}

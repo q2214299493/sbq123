@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-endpoint-candidates-awaiting-review-20260822",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "adsorption_workflow"
+  },
+  "occurred_at": "2026-08-22T23:26:30+08:00",
+  "recorded_at": "2026-08-22T15:26:30Z",
+  "summary": "Three unrelaxed [CH][C][O]*+H* IS candidates and the exact [CH][C]OH* FS seed were constructed for user review; no VASP job was submitted.",
+  "payload": {
+    "objective": "Prepare reviewable Fe(110) endpoints for [CH][C][O]* + H* -> [CH][C]OH* + * before adsorption relaxation and TS work.",
+    "phase": "active",
+    "current_evidence": [
+      "The exact product graph is local CARE candidate 03 [CH][C]OH*, not the previously optimized [CH][CH][O]* isomer.",
+      "IS A places transferred H49 at an adjacent long bridge with O-H=2.065585 A and H-Fe=1.700000 A.",
+      "IS B places H49 at an adjacent hollow with O-H=2.199383 A and H-Fe=1.700000 A.",
+      "IS C is a far long-bridge reference with O-H=5.231999 A and H-Fe=1.700000 A.",
+      "The FS seed retains C1-C2=1.535847 A, C2-O=1.325685 A, C1-H=1.064208 A, and O-H=0.971434 A.",
+      "All four candidates preserve Fe45, bottom 18 fixed atoms, the same cell and atom order; the three IS POSCAR audits and the chemistry-aware endpoint reviews pass."
+    ],
+    "one_executable_step": "Obtain user review of IS A/B/C and the FS seed before preparing any GPU pre-relaxation or VASP submission package.",
+    "submission_boundary": "No GPU or VASP job is authorized. The structures are unrelaxed candidates and no adsorption energy or endpoint acceptance is claimed.",
+    "done_when": [
+      "The user selects or rejects the endpoint candidates.",
+      "Selected endpoints are relaxed and scientifically reviewed before TS path construction.",
+      "Any adsorption-energy claim uses accepted compatible surface and exact-isomer gas references."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/candidate_review/endpoint_candidate_manifest.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/candidate_review/local_evidence_gate.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/provenance/build_endpoint_candidates.py`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/candidate_review/endpoint_candidate_manifest.json",
+      "sha256": "91e3cfa89903dd2686ee94a5bc58188bf5b621e03159d642abc06fe0e9478bb3",
+      "authority": "module_validation",
+      "observed_at": "2026-08-22T23:26:30+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/candidate_review/local_evidence_gate.json",
+      "sha256": "40f3fd4e1ea72f5ce5ce36199bd4d26ccf0432697e42fb44d884820c03ea0d4f",
+      "authority": "module_validation",
+      "observed_at": "2026-08-22T23:26:30+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/provenance/build_endpoint_candidates.py",
+      "sha256": "a3a8ca88ebc5254a5fe2ce12af6edf68783741891c162800994ea68790898369",
+      "authority": "repository_document",
+      "observed_at": "2026-08-22T23:26:30+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-formal-barrier-template-excel-registered-20260822"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

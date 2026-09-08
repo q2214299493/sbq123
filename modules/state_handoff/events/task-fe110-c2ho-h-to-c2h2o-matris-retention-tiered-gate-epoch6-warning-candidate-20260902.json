@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-matris-retention-tiered-gate-epoch6-warning-candidate-20260902",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-02T16:48:52+08:00",
+  "recorded_at": "2026-09-02T08:48:52Z",
+  "summary": "The user replaced the adsorption maximum-force zero-tolerance rule with a tiered gate. Aggregate RMSE and p95 remain hard non-regression guards; a vector-maximum increase within both 0.005 eV/A and 2% is a soft warning eligible for candidate evaluation. Job-1506 epoch 6 is now a warning-eligible candidate, not a promoted checkpoint.",
+  "payload": {
+    "objective": "Obtain separate authorization to evaluate the reclassified epoch-6 MatRIS warning candidate on the frozen TS held-out set; do not promote it or rerun the path meanwhile.",
+    "phase": "active",
+    "current_evidence": [
+      "The active adsorption-retention gate now has PASS, SOFT_WARNING, and FAIL outcomes rather than zero-tolerance rejection of every vector-maximum increase.",
+      "Component RMSE, vector RMSE, and vector p95 remain hard non-regression metrics.",
+      "A vector-maximum increase is SOFT_WARNING only when it is no greater than both 0.005 eV/A and 2%; exceeding either limit is FAIL.",
+      "SOFT_WARNING may enter checkpoint-candidate evaluation but never authorizes checkpoint promotion or complete-path rerun.",
+      "Under the revised gate, job-1506 epochs 2-6 are warning-eligible and epochs 1 and 7-12 fail.",
+      "The retained selection rule chooses epoch 6 because it has the lowest optimizer mean-total-loss among warning-eligible epochs.",
+      "Epoch 6 improves adsorption component RMSE, vector RMSE, and p95; its vector maximum increases by 0.003355 eV/A or 1.310976%, within the warning band.",
+      "Epoch-6 checkpoint 8e53cfb0...eb49 strictly reloads with 4,294,897 finite parameters.",
+      "Frozen TS held-out inference has not been run for epoch 6, and no new GPU job, checkpoint promotion, or path rerun occurred."
+    ],
+    "one_executable_step": "After separate explicit user authorization, run exact epoch-6 inference on the frozen seven-structure TS held-out set and review its six-structure primary force and relative-energy metrics before any promotion decision.",
+    "submission_boundary": "The gate change and reclassification authorize no GPU inference, checkpoint promotion, complete-path rerun, AQCat25 audit, VASP, Dimer, TS acceptance, or barrier action.",
+    "done_when": [
+      "Epoch-6 predictions are compared with the frozen TS VASP labels without training or selection leakage.",
+      "A work-side review decides whether the warning candidate passes TS force and relative-energy limits.",
+      "Checkpoint promotion and complete-path rerun remain separate decisions."
+    ],
+    "authoritative_references": [
+      "`configs/dual_model_ts_active_learning.yaml`",
+      "`outputs/matris_ef_finetune_retention_candidate2_bundle_20260902/tiered_gate_reclassification_job1506.json`",
+      "`outputs/matris_ef_finetune_retention_candidate2_bundle_20260902/returned_job1506/epoch_006_warning_candidate.pth.tar`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "configs/dual_model_ts_active_learning.yaml",
+      "sha256": "617690d3f7a509f74c131ca086858f69a8efddeed222ab0c376818747483cc27",
+      "authority": "repository_document",
+      "observed_at": "2026-09-02T16:48:52+08:00"
+    },
+    {
+      "locator": "outputs/matris_ef_finetune_retention_candidate2_bundle_20260902/tiered_gate_reclassification_job1506.json",
+      "sha256": "4c9b80faaab2b5f5c2f60dd126fa17733b1167a2e486fc2c11a21457feb7036c",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T16:48:52+08:00"
+    },
+    {
+      "locator": "outputs/matris_ef_finetune_retention_candidate2_bundle_20260902/returned_job1506/epoch_006_warning_candidate.pth.tar",
+      "sha256": "8e53cfb0e54aec7aa918cefae3ce7b4a9488d87231626f7ae4bc98fdebdbeb49",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-02T16:48:52+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-matris-retention-job1506-complete-no-candidate-20260902"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

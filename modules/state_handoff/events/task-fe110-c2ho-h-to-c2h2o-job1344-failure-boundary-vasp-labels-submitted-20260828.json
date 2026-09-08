@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-job1344-failure-boundary-vasp-labels-submitted-20260828",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-28T21:31:34+08:00",
+  "recorded_at": "2026-08-28T13:31:34Z",
+  "summary": "Eight exact-structure SIGMA=0.20 eV VASP NSW=0 static force-label jobs were submitted through hash-bound diagnostic execution gates on sunboquan-codex; two were RUN and six PEND at the latest checkpoint.",
+  "payload": {
+    "objective": "Collect and validate the eight VASP force labels, then compare MatRIS-VASP and AQCat25-VASP errors on identical structures.",
+    "phase": "active",
+    "current_evidence": [
+      "All eight inputs passed the current diagnostic_static preflight with NSW=0, IBRION=-1, ISMEAR=1, SIGMA=0.20 eV, 5x5x1 k mesh, 32 ranks, exact POSCAR hashes, bottom-18 fixed atoms, and minimum pair distances at least 1.0 A.",
+      "Each sample has a current hash-bound execution decision whose only allowed action is SUBMIT_DIAGNOSTIC_VASP.",
+      "The live Fe-C-O-H POTCAR hash matched e3bc41a37d795bfcf1b1dc9a2a9ddfb5ef86aa5dc9aa0ac5a3583471a0982f85 before submission.",
+      "Jobs seed_01=9733336, fail_01=9733337, seed_02=9733338, fail_02=9733340, seed_10=9733341, fail_10=9733342, seed_13=9733343, and fail_13=9733344 were submitted to Gkn_normal.",
+      "At the latest scheduler checkpoint jobs 9733336 and 9733337 were RUN; the remaining six were PEND.",
+      "No GPU job, model fine-tuning, ML-NEB rerun, micro-NEB, Dimer, TS acceptance, or barrier action was submitted."
+    ],
+    "one_executable_step": "Wait for VASP jobs 9733336, 9733337, 9733338, 9733340, 9733341, 9733342, 9733343, and 9733344 to reach terminal states, then collect exact outputs and validate scheduler DONE, normal termination, electronic convergence, complete all-atom forces, magnetic evidence, structure hashes, and the active DFT fingerprint before error assessment.",
+    "submission_boundary": "The eight-job VASP batch is authorized and submitted. No automatic retry, model fine-tuning, path rerun, micro-NEB, Dimer, TS, or barrier action is authorized.",
+    "done_when": [
+      "All eight matching VASP static-force labels pass scheduler, normal-termination, electronic-convergence, complete-force, magnetic, structure-hash, and DFT-fingerprint checks.",
+      "MatRIS-VASP and AQCat25-VASP errors are reviewed and a separate fine-tuning or path-method decision is recorded."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/vasp_batch_submission_summary.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/vasp_force_label_submission_ready_review.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/user_vasp_force_label_authorization.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/vasp_batch_submission_summary.json",
+      "sha256": "d206b3ad8ae84ffaf1ccb2bb77a1e6cc56ad6463656aeec939659a4f12019060",
+      "authority": "repository_document",
+      "observed_at": "2026-08-28T21:31:34+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/vasp_force_label_submission_ready_review.json",
+      "sha256": "32038a58fe5e5e4251dba7f79a110e86987d5eaef8cc4afe0f636f3175cb9a74",
+      "authority": "module_validation",
+      "observed_at": "2026-08-28T21:31:34+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/user_vasp_force_label_authorization.json",
+      "sha256": "ef382880291a14fafa02bbe2bd9dbd5baf543629290971222c22cd7bcf8845ee",
+      "authority": "user_authorization",
+      "observed_at": "2026-08-28T21:31:34+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-job1344-dual-model-prediction-completed-reviewed-20260828"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

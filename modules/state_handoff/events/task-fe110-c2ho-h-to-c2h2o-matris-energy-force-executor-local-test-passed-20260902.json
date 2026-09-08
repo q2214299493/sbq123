@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-matris-energy-force-executor-local-test-passed-20260902",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-02T13:53:42+08:00",
+  "recorded_at": "2026-09-02T05:53:42Z",
+  "summary": "The MatRIS energy-and-force replay executor was implemented and passed its local package preflight and isolated Torch loss/checkpoint smoke test. The reviewed package now also binds seven completed frozen-held-out VASP labels, with six primary-metric structures and one diagnostic-only boundary structure. No MatRIS package or checkpoint is installed locally, so real MatRIS runtime integration remains untested and no MZ73 job or fine-tuning was submitted.",
+  "payload": {
+    "objective": "Obtain separate user authorization for a bounded MZ73 MatRIS runtime-integration smoke test before any full replay fine-tuning execution.",
+    "phase": "active",
+    "current_evidence": [
+      "The execution-package preflight passes for 30 optimizer samples: 21 TS energy-force samples and 9 adsorption force-replay samples.",
+      "Four adsorption structures are validation-only; seven frozen TS structures have VASP labels and remain excluded from optimizer/replay use.",
+      "The held-out primary metric contains six structures; held_boundary_12 remains diagnostic-only.",
+      "Exact-structure and rounded translation-invariant geometry overlap between optimizer/replay and held-out structures are both zero.",
+      "The isolated Torch smoke test produced finite energy and force gradients, reduced combined loss from 0.333100 to 0.030289, computed force-tail and relative-energy metrics, and wrote a hashable toy checkpoint.",
+      "Ten related unit tests pass; Ruff and Python compilation pass for the changed executor and package builder.",
+      "The local environment lacks the MatRIS package and the real base checkpoint, so this test does not prove MatRIS graph/model/runtime compatibility.",
+      "No MZ73 submission, real checkpoint update, complete-path rerun, VASP job, Dimer, TS acceptance, or barrier action occurred."
+    ],
+    "one_executable_step": "Prepare and, only after separate user authorization, run one bounded MZ73 no-promotion runtime smoke using the frozen base checkpoint and a minimal reviewed subset; do not start full fine-tuning automatically.",
+    "submission_boundary": "The local test authorizes no remote action. MZ73 runtime smoke, full MatRIS fine-tuning, checkpoint promotion, complete path rerun, AQCat25 returned-path audit, VASP micro-NEB, Dimer, TS acceptance, and barrier reporting remain unauthorized.",
+    "done_when": [
+      "The MZ73 environment imports the exact MatRIS runtime and loads the frozen base checkpoint hash.",
+      "One bounded energy-plus-force backward/optimizer smoke step on a reviewed training subset completes with finite loss and gradients while held-out exclusions remain enforced.",
+      "The smoke result and any temporary checkpoint are returned for work-side review and are explicitly marked non-promoted.",
+      "The user separately authorizes or declines the full replay fine-tuning execution."
+    ],
+    "authoritative_references": [
+      "`scripts/matris_energy_force_finetune.py`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/matris_finetune_request_20260902/matris_replay_finetune_review_request.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/matris_finetune_request_20260902/local_executor_test_20260902/executor_preflight.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/matris_finetune_request_20260902/local_executor_test_20260902/self_test/self_test_result.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "scripts/matris_energy_force_finetune.py",
+      "sha256": "e11a891f1f28d17425cd7ed2809daf9cd006b6f2cc7a28f388958e8f673306fb",
+      "authority": "repository_document",
+      "observed_at": "2026-09-02T13:53:42+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/matris_finetune_request_20260902/matris_replay_finetune_review_request.json",
+      "sha256": "9f53c5bff6448d53f14d375611a7c18e509f8974642c67367cb09070c270e56d",
+      "authority": "repository_document",
+      "observed_at": "2026-09-02T13:53:42+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/matris_finetune_request_20260902/local_executor_test_20260902/executor_preflight.json",
+      "sha256": "739452713f8a963940e0634149b3fdbf75ef7faf30d529de7cbb1acf0bcfc238",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T13:53:42+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1421_oh_failure_boundary_20260901/matris_finetune_request_20260902/local_executor_test_20260902/self_test/self_test_result.json",
+      "sha256": "025ccecaa8970036bd7593ace5ce5848fb579ba75253157f2a1be97b3f201a48",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T13:53:42+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-matris-replay-finetune-request-prepared-20260902"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

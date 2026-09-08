@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-co-connectivity-submitted-20260805",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-co-dissociation",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-05T11:13:39+08:00",
+  "recorded_at": "2026-08-05T11:13:39+08:00",
+  "summary": "Submit the positive and negative imaginary-mode downhill relaxations for Fe(110) CO-dissociation TS connectivity.",
+  "payload": {
+    "objective": "Determine whether the Dimer candidate connects downhill to the contract-bound IS and FS without promoting an unvalidated transition state.",
+    "phase": "active",
+    "current_evidence": [
+      "Compatibility branch `true_fe110_5layer_5x5x1`, reaction contract, DFT basis, atom order, and bottom-18-Fe constraints remain unchanged.",
+      "Dimer job `9656664` passed the technical force and negative-curvature gates; C/O-only VFA job `9694935` found one imaginary mode at `537.451689 cm^-1` with `98.37%` C-O bond projection.",
+      "Mode-6 displacements use normalized total amplitude `0.10 A`; C-O changes from `1.727 A` to `1.606 A` (positive) and `1.848 A` (negative), with maximum single-atom displacement `0.081 A`.",
+      "Positive connectivity job `9695455` and negative connectivity job `9695456` were submitted through current hash-bound `SUBMIT_VASP` gates with 32 cores per branch; both were scheduler `PEND` at the submission checkpoint.",
+      "Remote POSCAR, INCAR, KPOINTS, and POTCAR hashes match the local locked inputs."
+    ],
+    "one_executable_step": "Monitor jobs 9695455 and 9695456 to terminal state, then run the contract-bound bidirectional connectivity analyzer against the accepted IS and FS.",
+    "submission_boundary": "No additional VFA, Dimer, NEB, matched static, or barrier task is authorized. Connectivity submission does not establish Grade A or a validated TS.",
+    "done_when": [
+      "Both downhill relaxations have terminal scheduler evidence and complete, electronically and ionically converged VASP outputs.",
+      "The bidirectional connectivity analyzer classifies the two branches as opposite contract-bound IS/FS basins or records an unresolved/failed result."
+    ],
+    "authoritative_references": [
+      "Scientific and execution gates: `modules/transition_state_search/README.md`.",
+      "Vibrational validation: `modules/ts_vibrational_validation/README.md`.",
+      "Connectivity thresholds: `configs/ts_connectivity_gate.yaml`.",
+      "Sole execution authority: `scripts/ts_strategy_engine/execution_gate.py`."
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/connectivity_from_dimer9656664_mode6_amp0p10_20260805/positive/submission_record.json",
+      "sha256": "94d79d0c5dfa14442f655aee41cb62e85e297e5006ea5505195f0e48027692c8",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-05T11:13:39+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/connectivity_from_dimer9656664_mode6_amp0p10_20260805/negative/submission_record.json",
+      "sha256": "470f89cf4e195b337177cbb35b764927276ee28570f90ebcd5c7009889bee70e",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-05T11:13:39+08:00"
+    }
+  ],
+  "supersedes": ["task-fe110-co-dimer-vfa-reconciled-20260805"],
+  "review": {"required": false, "reason_codes": [], "status": "not_required"}
+}

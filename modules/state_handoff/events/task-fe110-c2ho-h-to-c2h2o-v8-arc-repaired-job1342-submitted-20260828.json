@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-v8-arc-repaired-job1342-submitted-20260828",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-28T17:57:06+08:00",
+  "recorded_at": "2026-08-28T09:55:53.0801751Z",
+  "summary": "The explicitly authorized hash-bound direct unrestrained MatRIS ordinary ML-NEB was submitted to MZ73 as Slurm job 1342 and was observed RUNNING; AQCat25 remains the exact fixed-path audit stage.",
+  "payload": {
+    "objective": "Monitor MZ73 job 1342 and collect its complete producer payload only after terminal evidence exists.",
+    "phase": "active",
+    "current_evidence": [
+      "Request SHA-256 ba2a8066e98d6f1d35c98c4cbf98797afbc7d21b6785b8b7051acc158c05af4d passed the MZ73 preflight and submission-time hash checks.",
+      "The user authorized one bounded direct unrestrained MatRIS ordinary ML-NEB execution followed by AQCat25 exact fixed-path audit.",
+      "MZ73 assigned Slurm job 1342 with job name c2ho-v8-arc; it moved from PENDING (Priority) to RUNNING on MZ73.",
+      "No VASP/VTST job, fine-tuning, Dimer handoff, TS claim, barrier claim, retry, or additional GPU submission is authorized."
+    ],
+    "one_executable_step": "Check job 1342 scheduler and producer evidence; collect and review the returned complete path only after a terminal producer record exists.",
+    "submission_boundary": "The one-job GPU authorization is consumed by job 1342. Do not retry, fine-tune, submit VASP/VTST, prepare Dimer, or claim a TS/barrier without new evidence and explicit authority.",
+    "done_when": [
+      "A producer terminal record for job 1342 exists and scheduler state is separately reported.",
+      "A successful complete MatRIS path and AQCat25 exact-path audit are collected for work review; a failed run records only failure evidence."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/product_side_arc_length_repair_20260828/submission_record_job1342.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/product_side_arc_length_repair_20260828/user_gpu_execution_authorization.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/product_side_arc_length_repair_20260828/submission_record_job1342.json",
+      "sha256": "033fc08f578469710a82dbe674c9a7c43f5b810ebc8569765313d0b3a067d14f",
+      "authority": "scheduler",
+      "observed_at": "2026-08-28T17:57:07+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-v8-product-side-arc-repair-prepared-20260828"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

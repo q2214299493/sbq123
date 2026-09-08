@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "event_id": "lifecycle-views-adopted-a82839d3b509076163c7412a",
+  "event_type": "lifecycle_views_adopted",
+  "entity": {
+    "kind": "state",
+    "id": "managed-lifecycle-views",
+    "module": "state_handoff"
+  },
+  "occurred_at": "2026-08-03T04:16:00Z",
+  "recorded_at": "2026-08-03T04:16:00Z",
+  "summary": "Adopt the four task lifecycle views without changing legacy content.",
+  "payload": {
+    "views": [
+      "backlog",
+      "error_log",
+      "decisions_log",
+      "historical_results"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "tasks/backlog.md",
+      "sha256": "42bdd77fb8206c3f03a1684eb0efcc0fac0eb8f6f5b751efb0b8791548f34dc4",
+      "authority": "repository_document",
+      "observed_at": "2026-08-03T04:16:00Z"
+    },
+    {
+      "locator": "docs/04_ERROR_LOG.md",
+      "sha256": "5aa3cc387dd6d0747e930c78a32814e27f68b57fe530ecd63ca2def6a26b8aff",
+      "authority": "repository_document",
+      "observed_at": "2026-08-03T04:16:00Z"
+    },
+    {
+      "locator": "docs/03_DECISIONS_LOG.md",
+      "sha256": "802d8ed074cf329cfe4a60660a66e0486c9764775fbd40b09db07c80d31e1b00",
+      "authority": "repository_document",
+      "observed_at": "2026-08-03T04:16:00Z"
+    },
+    {
+      "locator": "docs/08_HISTORICAL_RESULTS.md",
+      "sha256": "363e8580a9bd09cdec42f995ff492f06fae44e37f3d23bbcce4f8a9c10f2aab5",
+      "authority": "repository_document",
+      "observed_at": "2026-08-03T04:16:00Z"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "initial_managed_view_adoption"
+    ],
+    "status": "pending"
+  }
+}

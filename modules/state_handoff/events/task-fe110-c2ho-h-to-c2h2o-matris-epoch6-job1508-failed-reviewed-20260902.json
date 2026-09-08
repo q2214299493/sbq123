@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-matris-epoch6-job1508-failed-reviewed-20260902",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-02T20:51:56+08:00",
+  "recorded_at": "2026-09-02T12:51:56Z",
+  "summary": "MZ73 job 1508 left the queue and the producer exited with code 1 after 268 ordinary MatRIS ML-NEB steps. Epoch 6 improved optimizer persistence and the minimum/final force relative to frozen-base job 1358, but the complete O-H path still folded and collapsed between images 05 and 06. The immediate hard stop was H50 moving 1.208728 A between images 04 and 05, just above the 1.2 A guard; the O-H backtrack was a strong warning but was not itself an automatic failure. No AQCat25 audit or downstream VASP/Dimer action occurred.",
+  "payload": {
+    "objective": "Obtain a separate user decision between exact-structure active-learning diagnosis of the new images 04-06 and a reviewed local VASP path-refinement route.",
+    "phase": "active",
+    "current_evidence": [
+      "Job 1508 is no longer listed by squeue; final scheduler accounting is unavailable on MZ73, while the producer exit record reports code 1 at 2026-09-02T10:19:58Z.",
+      "The epoch-6 request/checkpoint binding remained exact through the failure record.",
+      "Ordinary ML-NEB reached step 268 without the 0.10 eV/A target; force maximum fell from 4.564192 to a minimum 0.166444 eV/A at step 228, then rose to 0.481108 eV/A.",
+      "The hard trigger was H50 moving 1.208728 A from image 04 to 05, exceeding the 1.2 A limit by 0.008728 A; image 05 to 06 was also 1.206354 A.",
+      "O-H distances fold in images 00-03 and jump from 2.062328 A at image 05 to 0.981520 A at image 06, leaving no internal image in the effective 1.08-1.82 A forming interval.",
+      "C1-C2, C2-O, C1-H48, adjacent RMSD, minimum pair distance, periodic branch, and both endpoint geometries pass their checks.",
+      "Compared with frozen-base job 1358, epoch 6 ran 268 versus 143 steps and improved minimum force from 0.220954 to 0.166444 eV/A, but did not remove the O-H path collapse.",
+      "AQCat25 fixed-path audit did not start because the primary MatRIS path never completed.",
+      "The failure does not by itself prove epoch-6 force error; exact-structure VASP comparison on the new failure structures is still absent."
+    ],
+    "one_executable_step": "Choose either to prepare exact MatRIS/AQCat25/VASP comparisons for returned images 04-06, or to prepare a reviewed VASP local micro-NEB reconstruction around images 05-06; no job is currently authorized.",
+    "submission_boundary": "Job-1508 authorization is consumed. Do not automatically retry, fine-tune, submit VASP, start Dimer, accept a TS, or report a barrier.",
+    "done_when": [
+      "A downstream branch is explicitly selected.",
+      "Any selected structures and request hashes are reviewed before a new submission.",
+      "No failed GPU path is used as a Dimer parent or energy source."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_oh_complete_path_epoch6_20260902/returned_job1508/producer_exit_record.failure.1508.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_oh_complete_path_epoch6_20260902/returned_job1508/ordinary_ml_neb.geometry_guard_failure.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_oh_complete_path_epoch6_20260902/failure_review_job1508.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_oh_complete_path_epoch6_20260902/returned_job1508/producer_exit_record.failure.1508.json",
+      "sha256": "8413c9dab7acb1a8160f6b0e54568b92685768e92affa9d502953b3b5f8ac4ba",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-02T20:51:56+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_oh_complete_path_epoch6_20260902/returned_job1508/ordinary_ml_neb.geometry_guard_failure.json",
+      "sha256": "01ce50821e81dfd310550bca8dace823b1b8d0c0e10a101b81bef1f7731569c4",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-02T20:51:56+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_oh_complete_path_epoch6_20260902/failure_review_job1508.json",
+      "sha256": "cab5f8008d6612adc51228eec7b80a9dd913d0cdd3300296412062c7609fdbd1",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T20:51:56+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-matris-epoch6-job1508-backtrack-warning-running-20260902"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

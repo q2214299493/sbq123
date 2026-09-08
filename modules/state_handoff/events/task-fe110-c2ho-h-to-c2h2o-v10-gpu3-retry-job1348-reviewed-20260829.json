@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-v10-gpu3-retry-job1348-reviewed-20260829",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-29T11:31:44.9631013+08:00",
+  "recorded_at": "2026-08-29T03:31:44.9670814Z",
+  "summary": "MZ73 producer job 1348 ended successfully and returned a complete 21-image frozen-MatRIS ordinary ML-NEB path plus AQCat25 exact-path audit; the optimizer converged, but the path is not accepted because the O-H coordinate remains under-resolved and nonmonotonic and the energy profile has six strict internal peaks.",
+  "payload": {
+    "objective": "Await explicit direction after review of the completed v10 predicted path; no Dimer parent or VASP result has been accepted.",
+    "phase": "active",
+    "current_evidence": [
+      "Job 1348 is absent from the active Slurm queue and scontrol no longer recognizes the job ID, so scheduler DONE or EXIT is unavailable; the producer record reports success with exit code 0 at 2026-08-28T17:30:44Z.",
+      "The unrestrained 21-image MatRIS ordinary ML-NEB converged in 76 steps to a maximum projected NEB force of 0.097112 eV/A; no ML-CI-NEB ran.",
+      "Adjacent RMSD, periodic mapping, minimum pair distance, maximum movable-atom step, and C1-C2 preservation passed; C1-C2 remains 1.399658-1.439857 A.",
+      "The forming O-H distance changes from 1.891067 A at image 12 to 1.083951 A at image 13, while the full path has a maximum O-H backtrack of 0.587419 A; the reaction-coordinate transition region is therefore under-resolved and nonmonotonic.",
+      "The MatRIS profile contains six strict internal peaks at images 02, 04, 07, 10, 13, and 17, so it is not eligible for automatic ML-CI-NEB or Dimer-parent acceptance.",
+      "MatRIS and AQCat25 both rank image 13 as the global internal peak; their mean movable-force vector RMSE is 0.078245 eV/A and maximum atom force-difference norm is 0.513076 eV/A at image 13. This is model-model comparison, not VASP validation or calibrated uncertainty.",
+      "All 21 final structure hashes and the producer exit-record hash were verified. The runtime state retains the pre-seal candidate-manifest hash, while the final sealed manifest hash is 443a9feb208319772ca691aa8c6204e937ed08683bdad6df85e0e5c9a6ab8709."
+    ],
+    "one_executable_step": "If explicitly authorized, prepare exact-structure VASP static force checks for images 12-13-14 and use them to decide whether to run a local VASP micro-NEB instead of another full GPU rerun.",
+    "submission_boundary": "Do not automatically retry GPU, fine-tune MatRIS, submit VASP or micro-NEB, prepare Dimer, accept a TS, or report a barrier without new explicit authority and a current hash-bound execution gate.",
+    "done_when": [
+      "The exact image 12-13-14 VASP force agreement is reviewed if that batch is authorized.",
+      "A downstream method is chosen from evidence rather than from the predicted path alone."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v10_nonabsolute_guards_20260829/gpu_return_job1348/production_retry1/path_review_job1348.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v10_nonabsolute_guards_20260829/gpu_return_job1348/production_retry1/dual_model_gpu_ml_neb_path_manifest.candidate.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v10_nonabsolute_guards_20260829/gpu_return_job1348/production_retry1/producer_exit_record.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v10_nonabsolute_guards_20260829/gpu_return_job1348/production_retry1/path_review_job1348.work.json",
+      "sha256": "ba78944b31c58e1482307037edc8fdc05dfb7a948842b0423765aaecddeeccb5",
+      "authority": "module_validation",
+      "observed_at": "2026-08-29T11:31:44.9631013+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v10_nonabsolute_guards_20260829/gpu_return_job1348/production_retry1/dual_model_gpu_ml_neb_path_manifest.candidate.json",
+      "sha256": "443a9feb208319772ca691aa8c6204e937ed08683bdad6df85e0e5c9a6ab8709",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-29T11:31:44.9631013+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v10_nonabsolute_guards_20260829/gpu_return_job1348/production_retry1/producer_exit_record.json",
+      "sha256": "79223ce243514367e7812899351334cbf5a3e07d6890388b64fed1c34055a533",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-29T11:31:44.9631013+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-v10-gpu3-retry-job1348-running-20260829"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

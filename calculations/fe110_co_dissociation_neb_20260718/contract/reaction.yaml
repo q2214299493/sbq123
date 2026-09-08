@@ -1,0 +1,44 @@
+reaction_id: fe110_co_dissociation_topic1_9558184_to_9622455
+reaction_family: co_dissociation
+reactant_id: co_top_star_fe45_job_9558184
+product_id: c_lb_plus_o_h_star_fe45_job_9622455
+index_base: 0
+atom_map: [[0,0],[1,1],[2,2],[3,3],[4,4],[5,5],[6,6],[7,7],[8,8],[9,9],[10,10],[11,11],[12,12],[13,13],[14,14],[15,15],[16,16],[17,17],[18,18],[19,19],[20,20],[21,21],[22,22],[23,23],[24,24],[25,25],[26,26],[27,27],[28,28],[29,29],[30,30],[31,31],[32,32],[33,33],[34,34],[35,35],[36,36],[37,37],[38,38],[39,39],[40,40],[41,41],[42,42],[43,43],[44,44],[45,45],[46,46]]
+reaction_atoms: [45,46]
+broken_bonds: [[45,46]]
+formed_bonds: []
+reaction_coordinates:
+  - name: C-O distance
+    kind: distance
+    atoms: [45,46]
+    important_interval_A: [1.50,2.10]
+    role: primary
+site_changes:
+  - C:top->long_bridge
+  - O:molecular->hollow
+compatibility:
+  material: Fe
+  surface: Fe110
+  branch: true_fe110_5layer_5x5x1
+  slab_model: Fe45_bottom18_fixed
+  xc: PBE
+  potcar_family: PAW_PBE
+  encut_ev: 400
+  kmesh: [5,5,1]
+  magnetic_state: ISPIN2_ferromagnetic_Fe
+  coverage: 3x3_single_CO_reaction_complex
+endpoints:
+  initial:
+    calculation_id: fe110_co_dissociation_is_static_9631646
+    structure_file_id: fe110_co_dissociation_is_static_9631646_poscar
+    static_result_id: fe110_co_dissociation_is_static_9631646_total_energy_eV
+  final:
+    calculation_id: fe110_co_dissociation_fs_static_9631647
+    structure_file_id: fe110_co_dissociation_fs_static_9631647_poscar
+    static_result_id: fe110_co_dissociation_fs_static_9631647_total_energy_eV
+waypoint_files: []
+retrieval_constraints:
+  decision: NO_TRANSFERABLE_FE110_PATH
+  accepted_local_inputs_only: true
+  rejected_external_record: catalysis-hub-fe211-co-dissociation-1284
+  reason: Fe211 facet and unspecified model are incompatible; no coordinates or energies transferred.

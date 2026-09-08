@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v5-job1327-submitted-20260827",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-27T21:38:57.4274559+08:00",
+  "recorded_at": "2026-08-27T13:38:57.4274559Z",
+  "summary": "The exact preflighted 19-image MatRIS-primary/AQCat25-audit GPU complete-path request was explicitly authorized and submitted once to MZ73 as Slurm job 1327; its initial scheduler state was PENDING for priority, and no VASP or VTST calculation was submitted.",
+  "payload": {
+    "objective": "Monitor MZ73 job 1327 and collect its complete candidate path only after producer terminal evidence exists.",
+    "phase": "active",
+    "current_evidence": [
+      "The request, remote preflight, user authorization, execution review, dist.pl output, nebmovie.pl 0 output, and movie hashes all passed immediately before submission.",
+      "MZ73 accepted exactly one Slurm job with ID 1327 and job name c2ho-v5-19.",
+      "The scheduler reported job 1327 as PENDING with reason Priority and elapsed time 0:00 at the submission checkpoint.",
+      "The job uses frozen MatRIS as the path-optimization primary and AQCat25 only as an exact same-structure fixed-path auditor.",
+      "The result remains a predicted path candidate only; no VASP, Dimer, frequency, TS, barrier, fine-tuning, or automatic retry action is authorized."
+    ],
+    "one_executable_step": "Check job 1327 scheduler state and producer evidence; collect and review the complete returned path only after a terminal producer record exists.",
+    "submission_boundary": "This authorization covered one GPU job only. Do not automatically retry, fine-tune, submit VASP/VTST, prepare Dimer, or claim a TS/barrier from its output.",
+    "done_when": [
+      "A producer terminal record for job 1327 exists and the scheduler state is separately reported.",
+      "On success, the complete returned path is collected into work and enters geometry, periodic, energy, force, and chemistry review; on failure, only the failure evidence is recorded."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/submission_record_job1327.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/user_gpu_execution_authorization.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/execution_review.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/work_to_gpu/request.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/active_learning_state.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/submission_record_job1327.json",
+      "sha256": "822120f0340551517b9257accaec731026dbe5535a6fceacefb2f3da461d4114",
+      "authority": "scheduler",
+      "observed_at": "2026-08-27T21:38:57.4274559+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/request_receipt.json",
+      "sha256": "25ac15d878dc2f45fc923aa05fd3653172b5875a95e0eaa8dd0f8fa30cd57d64",
+      "authority": "repository_document",
+      "observed_at": "2026-08-27T21:38:57.4274559+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/work_to_gpu/request.json",
+      "sha256": "0d36944856bdc4799f6c6c441da04a0271b10f9d8acfd905eed0c679d38d01d6",
+      "authority": "repository_document",
+      "observed_at": "2026-08-27T21:38:57.4274559+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/active_learning_state.json",
+      "sha256": "3915acc5bd878ce7dfca77cb0636f992b3bdb7b67165d3e3bded5235b551f03a",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T21:38:57.4274559+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v5-mz73-preflight-passed-20260827"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

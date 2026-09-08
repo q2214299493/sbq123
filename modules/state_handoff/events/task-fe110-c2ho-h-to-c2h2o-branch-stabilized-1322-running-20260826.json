@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-branch-stabilized-1322-running-20260826",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-26T12:01:35+08:00",
+  "recorded_at": "2026-08-26T04:01:35Z",
+  "summary": "The exact reviewed v3 dual-model GPU request passed VTST, runtime, checkpoint, duplicate-job, and output-absence preflights and was submitted once as MZ73 Slurm job 1322. It is running restrained preconditioning and remains a prediction-only path candidate.",
+  "payload": {
+    "objective": "Monitor authorized MZ73 job 1322 to a terminal state, then review the returned complete path before any VASP or DIMER handoff.",
+    "phase": "active",
+    "current_evidence": [
+      "The explicitly authorized request SHA-256 is 8f0777a1c69c74fb8301bb229c07b60d0254fcf18ccacf2d71121f77de7ab0d4 and contains 17 reviewed images.",
+      "Exact VTST preflight passed with dist.pl output SHA-256 1eab67207d7ab5862846ae634d060a3787396f916fc78d463a8bd77ab4011436 and nebmovie.pl 0 movie SHA-256 c27fdb4e7d0878f3ff246bb37550b99ade96ff8352570539c585f5b53a2ea0c6.",
+      "The MZ73 remote preflight passed all 17 structure hashes, runtime hashes, MatRIS/AQCat25 checkpoint hashes, shell and Python checks, duplicate-live-job rejection, and output-absence checks.",
+      "The request was submitted exactly once as Slurm job 1322 at 2026-08-26T12:00:53+08:00.",
+      "The latest live scheduler observation is RUNNING on MZ73; the producer state is restrained_preconditioning_running at step 5.",
+      "No VASP job, DIMER handoff, or automatic resubmission was authorized or triggered."
+    ],
+    "one_executable_step": "After job 1322 reaches a terminal scheduler state, collect its output and producer records, then run the owning transition-state path review for O-H final monotonicity and coverage, H50 single-step continuity, C-C preservation, periodic continuity, and dual-model disagreement.",
+    "submission_boundary": "Authorization was consumed by the one exact v3 GPU submission. Do not resubmit on failure and do not submit VASP, CI-NEB, or DIMER without a new current hash-bound review and explicit authority.",
+    "done_when": [
+      "Job 1322 reaches a terminal scheduler state and its complete producer output or failure record is collected.",
+      "The returned complete path is reviewed for O-H final monotonicity and coverage, H50 single-step continuity, C-C preservation, periodic continuity, and dual-model disagreement.",
+      "A least-cost VASP validation or refinement recommendation is ready for separate authorization."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_branch_stabilized_v3_20260826/submission_record_job1322.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_branch_stabilized_v3_20260826/remote_submission_preflight.MZ73.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_branch_stabilized_v3_20260826/work_to_gpu/request.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_branch_stabilized_v3_20260826/submission_record_job1322.json",
+      "sha256": "cc0cdf7ada8544551e05dc7cb5406cb747aabdbf9d5f2832e8d94e2c9617122f",
+      "authority": "scheduler",
+      "observed_at": "2026-08-26T12:01:35+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_branch_stabilized_v3_20260826/remote_submission_preflight.MZ73.json",
+      "sha256": "48f2e330251f0b3e98111daca7dac9772e164e3bba0fe33861e836eba9ac12e8",
+      "authority": "module_validation",
+      "observed_at": "2026-08-26T12:00:05+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_branch_stabilized_v3_20260826/work_to_gpu/request.json",
+      "sha256": "8f0777a1c69c74fb8301bb229c07b60d0254fcf18ccacf2d71121f77de7ab0d4",
+      "authority": "structure_output",
+      "observed_at": "2026-08-26T12:00:05+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-branch-stabilized-1321-failed-v3-ready-20260826"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

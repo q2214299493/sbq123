@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "event_id": "review-df2285f1318eedb99d82b9cf",
+  "event_type": "review_decision",
+  "entity": {
+    "kind": "proposal",
+    "id": "proposal-b9b84aaf41a653d5b5228650",
+    "module": "state_handoff"
+  },
+  "occurred_at": "2026-08-03T04:29:52Z",
+  "recorded_at": "2026-08-03T04:29:52Z",
+  "summary": "reject proposal proposal-b9b84aaf41a653d5b5228650",
+  "payload": {
+    "proposal_id": "proposal-b9b84aaf41a653d5b5228650",
+    "decision": "reject",
+    "reviewer": "codex",
+    "reason": "User directed reconciliation against the latest task update; this import duplicated the already-approved 9655921 task event.",
+    "reviewed_event_id": "task-import-fae4b84409d0c08307e305fb",
+    "reviewed_event_sha256": "c6466cb6a0568bcf0d9b947a9751d6330fcb3de36496916af0d314595ec1d9a7"
+  },
+  "evidence": [],
+  "supersedes": [],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

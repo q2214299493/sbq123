@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "event_id": "module-gate-fe110-co-connectivity-20260805",
+  "event_type": "module_gate_changed",
+  "entity": {
+    "kind": "module",
+    "id": "transition_state_search",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-05T11:13:39+08:00",
+  "recorded_at": "2026-08-05T11:13:39+08:00",
+  "summary": "Bind the transition-state module gate to the submitted bidirectional connectivity jobs.",
+  "payload": {
+    "module": "transition_state_search",
+    "status": "Active",
+    "depends_on": "endpoints, Dimer candidate, VFA mode, VASP, registry",
+    "current_gate": "Positive/negative mode-6 connectivity relaxations `9695455` and `9695456` are submitted at 32 cores per branch from the hash-bound Dimer/VFA candidate. Monitor both to terminal convergence, then classify opposite IS/FS basins; TS validation and barrier reporting remain blocked"
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/connectivity_from_dimer9656664_mode6_amp0p10_20260805/positive/submission_record.json",
+      "sha256": "94d79d0c5dfa14442f655aee41cb62e85e297e5006ea5505195f0e48027692c8",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-05T11:13:39+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/connectivity_from_dimer9656664_mode6_amp0p10_20260805/negative/submission_record.json",
+      "sha256": "470f89cf4e195b337177cbb35b764927276ee28570f90ebcd5c7009889bee70e",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-05T11:13:39+08:00"
+    }
+  ],
+  "supersedes": ["module-gate-fe110-co-9655921-projection-20260803"],
+  "review": {"required": false, "reason_codes": [], "status": "not_required"}
+}

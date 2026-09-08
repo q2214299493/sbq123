@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "surface": "true Fe(110), Fe45, five layers, bottom 18 Fe fixed",
+  "source_slab": "calculations\\fe110_clean_static_v2_20260704\\POSCAR",
+  "source_slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+  "selection_rule": "user-specified missing-only set after registry and scheduler deduplication",
+  "geometry_parameters_angstrom": {
+    "fe_c_angstrom": 1.9,
+    "fe_o_angstrom": 1.95,
+    "cco_cc_angstrom": 1.318,
+    "cco_co_angstrom": 1.171,
+    "separated_co_min_angstrom": 2.7,
+    "kappa_cco_tilt_from_surface_normal_degrees": 25.0,
+    "eta2_cco_o_lift_from_surface_degrees": 55.0,
+    "c2_diagonal_cc_angstrom": 1.38
+  },
+  "candidates": [
+    {
+      "name": "CplusO_C-lb_O-lb-adj",
+      "species": "C+O",
+      "site_label": "C*+O*/C@lb+O@lb/adj",
+      "relative_rank": "selected minimal candidate set; not a global-minimum claim",
+      "poscar": "CplusO_C-lb_O-lb-adj/POSCAR",
+      "support_fe_indices_1based": [
+        44,
+        45
+      ],
+      "bond_distances_angstrom": {
+        "C1-O1_separation": 2.8279002517222973
+      },
+      "nearest_fe_angstrom": {
+        "C1": 1.8999999999999992,
+        "O1": 1.9499999999999984
+      },
+      "oxygen_site": {
+        "class": "long_bridge",
+        "fractional_xy": [
+          0.1666642802288773,
+          0.6666728158142642
+        ]
+      }
+    },
+    {
+      "name": "C2O_eta2CalphaCbeta_C2-2-derived",
+      "species": "C2O",
+      "site_label": "C₂O**/η²-CαCβ/C₂-2-derived",
+      "relative_rank": "selected minimal candidate set; not a global-minimum claim",
+      "poscar": "C2O_eta2CalphaCbeta_C2-2-derived/POSCAR",
+      "support_fe_indices_1based": [
+        42,
+        44
+      ],
+      "bond_distances_angstrom": {
+        "Calpha-Cbeta": 1.3800000002837967,
+        "Cbeta-O1": 1.1709999999999992
+      },
+      "nearest_fe_angstrom": {
+        "C1": 1.8999999999999995,
+        "C2": 1.8999999999999986,
+        "O1": 2.545459129509507
+      }
+    },
+    {
+      "name": "C2_eta2CC_C2-2-diagonal",
+      "species": "C2",
+      "site_label": "C₂**/η²-CC/C₂-2-diagonal",
+      "relative_rank": "selected minimal candidate set; not a global-minimum claim",
+      "poscar": "C2_eta2CC_C2-2-diagonal/POSCAR",
+      "support_fe_indices_1based": [
+        42,
+        44
+      ],
+      "bond_distances_angstrom": {
+        "C1-C2": 1.3800000002837967
+      },
+      "nearest_fe_angstrom": {
+        "C1": 1.8999999999999995,
+        "C2": 1.8999999999999986
+      }
+    },
+    {
+      "name": "C2plusO_C2-1_O-h-adj",
+      "species": "C2+O",
+      "site_label": "C₂**/C₂-1+O@h/adj",
+      "relative_rank": "selected minimal candidate set; not a global-minimum claim",
+      "poscar": "C2plusO_C2-1_O-h-adj/POSCAR",
+      "support_fe_indices_1based": [
+        44,
+        45
+      ],
+      "bond_distances_angstrom": {
+        "C1-C2": 1.3326860827668061,
+        "C1-O1_separation": 3.885840593899493,
+        "C2-O1_separation": 2.4491887798702052
+      },
+      "nearest_fe_angstrom": {
+        "C1": 1.8999999999999997,
+        "C2": 1.9000000000000015,
+        "O1": 1.9500000000000022
+      },
+      "oxygen_site": {
+        "class": "hollow",
+        "fractional_xy": [
+          0.5555568896814278,
+          0.2222177594240582
+        ]
+      }
+    },
+    {
+      "name": "C2plusO_C2-2-diagonal_O-lb-adj",
+      "species": "C2+O",
+      "site_label": "C₂**/C₂-2-diagonal+O@lb/adj",
+      "relative_rank": "selected minimal candidate set; not a global-minimum claim",
+      "poscar": "C2plusO_C2-2-diagonal_O-lb-adj/POSCAR",
+      "support_fe_indices_1based": [
+        42,
+        44
+      ],
+      "bond_distances_angstrom": {
+        "C1-C2": 1.3800000002837967,
+        "C1-O1_separation": 2.994133719317823,
+        "C2-O1_separation": 4.35464648691819
+      },
+      "nearest_fe_angstrom": {
+        "C1": 1.8999999999999995,
+        "C2": 1.8999999999999986,
+        "O1": 1.9499999999999984
+      },
+      "oxygen_site": {
+        "class": "long_bridge",
+        "fractional_xy": [
+          0.16666481086140153,
+          0.3333395937351244
+        ]
+      }
+    },
+    {
+      "name": "C2plusO_C2-2-diagonal_O-h-adj",
+      "species": "C2+O",
+      "site_label": "C₂**/C₂-2-diagonal+O@h/adj",
+      "relative_rank": "selected minimal candidate set; not a global-minimum claim",
+      "poscar": "C2plusO_C2-2-diagonal_O-h-adj/POSCAR",
+      "support_fe_indices_1based": [
+        42,
+        44
+      ],
+      "bond_distances_angstrom": {
+        "C1-C2": 1.3800000002837967,
+        "C1-O1_separation": 2.4342688605105223,
+        "C2-O1_separation": 2.6278896342670195
+      },
+      "nearest_fe_angstrom": {
+        "C1": 1.8999999999999995,
+        "C2": 1.8999999999999986,
+        "O1": 1.9499999999999975
+      },
+      "oxygen_site": {
+        "class": "hollow",
+        "fractional_xy": [
+          0.7777799032545895,
+          0.1111027788968287
+        ]
+      }
+    }
+  ]
+}

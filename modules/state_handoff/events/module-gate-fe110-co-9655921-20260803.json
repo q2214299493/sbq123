@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "event_id": "module-gate-fe110-co-9655921-20260803",
+  "event_type": "module_gate_changed",
+  "entity": {
+    "kind": "module",
+    "id": "transition_state_search",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-03T12:17:34+08:00",
+  "recorded_at": "2026-08-03T12:17:34+08:00",
+  "summary": "Synchronize transition_state_search to replacement pilot 9655921.",
+  "payload": {
+    "module": "transition_state_search",
+    "status": "Active",
+    "depends_on": "endpoints, retrieval, AQCat25 GPU, VASP, registry",
+    "current_gate": "Exact-same-path nine-interior-image replacement pilot `9655921` is scheduler `PEND` at 108 ranks (`9x12`, `12/NPAR4=3`). Preflight regression tests passed and remote input hashes match. Monitor to terminal validation; coarse NEB and downstream TS actions remain blocked"
+  },
+  "evidence": [
+    {
+      "locator": "docs/06_MODULE_MAP.md",
+      "sha256": "7452b5a8b1a5de625e34ff5331c70c7c4cd5c861a265bfa9293b9d6a589abbec",
+      "authority": "repository_document",
+      "observed_at": "2026-08-03T12:17:34+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/runs/ordinary_neb_9img_fresh_local_endpoint_idpp_waypoint_pilot_np108_20260803/scheduler_evidence.json",
+      "sha256": "003f2bb5e285d7774953616702119ca45f370a91b3fa56139a5bb929083f40fd",
+      "authority": "scheduler",
+      "observed_at": "2026-08-03T12:17:34+08:00"
+    }
+  ],
+  "supersedes": [
+    "module-gate-4833ee6f77371f15a9a04ff2"
+  ],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "cross_module_change",
+      "live_scheduler_state",
+      "user_approved_state_sync"
+    ],
+    "status": "pending"
+  }
+}

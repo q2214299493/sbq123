@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-ch-h-to-ch2-ts-pilot-9704031-20260810",
+  "event_type": "task_opened",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-ch-h-to-ch2-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-10T12:25:05+08:00",
+  "recorded_at": "2026-08-10T04:25:05Z",
+  "summary": "The Fe(110) CH* + H* -> CH2* + * TS workflow uses A as IS and B as the lowest-energy reference; gate-authorized NEB pilot job 9704031 is PEND.",
+  "payload": {
+    "objective": "Run the gated Fe(110) CH* + H* -> CH2* + * transition-state workflow from the accepted A initial state to the compatible optimized CH2* final state.",
+    "phase": "active",
+    "current_evidence": [
+      "Coadsorption jobs A `9701350`, B `9701505`, and C `9701506` are DONE, compatible, converged, geometry-reviewed, and registered with electronic adsorption energies.",
+      "A/job `9701350` is the user-selected reaction IS; B/job `9701505` is the lowest-energy coadsorption reference; C/job `9701506` is retained as a near-degenerate alternative.",
+      "Compatible optimized CH2* job `9622444` is the FS; the A-to-FS electronic reaction energy is `+0.48480509 eV`.",
+      "The identity atom map uses C `45`, pre-existing CH hydrogen `46`, and incoming H `47` (zero-based indices).",
+      "The reviewed three-image segmented-IDPP path passed endpoint, fixed-layer, collision, `dist.pl`, `nebmovie.pl 0`, and visual checks.",
+      "The hash-bound execution gate authorized only the same-path one-step ordinary-NEB pilot; job `9704031` is scheduler PEND."
+    ],
+    "one_executable_step": "Monitor pilot job 9704031 to scheduler exit; if DONE, collect its three internal-image outputs, run the canonical pilot validator, refresh the execution gate, and submit the prepared 300-step ordinary NEB only if SUBMIT_VASP is explicitly allowed.",
+    "submission_boundary": "The user authorized the TS workflow. No production NEB, CI-NEB, DIMER, frequency, connectivity, stop, restart, or resubmission action may bypass the current hash-bound execution-gate decision.",
+    "done_when": [
+      "The ordinary NEB produces a technically usable reaction path or a gate-supported method handoff.",
+      "Any highest-image TS candidate is refined and validated through the owning module before a barrier claim.",
+      "IS, TS, and FS results remain compatible and hash-bound; no free-energy or kinetics claim is made without separate thermochemical work."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_ch_h_coadsorption_20260808/provenance/completed_screen_registration_summary.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/contract/reaction.yaml`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/endpoints/endpoint_validation.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_3img_v2/path_review.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_3img_v2/ts_search_decision.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_3img_v2/submission_record.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_ch_h_coadsorption_20260808/provenance/completed_screen_registration_summary.json",
+      "sha256": "c0b186a0631536476274f23b357aba1a1658d2c1945933c4dbb7186b2b08d2f5",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-10T12:25:05+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/endpoints/endpoint_validation.json",
+      "sha256": "4cf24e03ee397d6451b3146b37f78b4d77dc12abc75b40b79b84ff413e0a6e07",
+      "authority": "module_validation",
+      "observed_at": "2026-08-10T12:25:05+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_3img_v2/path_review.json",
+      "sha256": "dc332e6797f392afe9ea935ac4644dfd5c6d54aa1806f5276be05f7667e88710",
+      "authority": "module_validation",
+      "observed_at": "2026-08-10T12:25:05+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_3img_v2/submission_record.json",
+      "sha256": "b8e32bfa7c785d064b2f7e1b763b3e8b3d3f143df354998de3682c733644504d",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-10T12:25:05+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-ch-h-coadsorption-bc-submitted-20260808"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

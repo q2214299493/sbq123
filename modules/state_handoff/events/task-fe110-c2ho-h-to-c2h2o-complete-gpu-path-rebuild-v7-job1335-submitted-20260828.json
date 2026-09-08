@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v7-job1335-submitted-20260828",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-28T00:26:16.4433446+08:00",
+  "recorded_at": "2026-08-27T16:26:16.4474455Z",
+  "summary": "The user explicitly authorized and MZ73 accepted one hash-bound v7 MatRIS-primary/AQCat25-audit complete-path GPU job as Slurm job 1335; its initial scheduler state is PENDING for Priority and no downstream action is authorized.",
+  "payload": {
+    "objective": "Monitor MZ73 job 1335 and collect its candidate path only after producer terminal evidence exists.",
+    "phase": "active",
+    "current_evidence": [
+      "The exact v7 request SHA-256 is 949f9888b1313cf9eec0192683e239d08cab98bfb88e6a3e11aeee74a6735210 and the remote preflight passed.",
+      "The user message '提交' explicitly authorized one bounded MZ73 GPU execution and no retry or VASP/VTST action.",
+      "The submission script reverified request, preflight, authorization, execution review, dist.pl, nebmovie.pl 0, and movie hashes before calling sbatch.",
+      "MZ73 assigned Slurm job 1335 with job name c2ho-v7-repar; the initial live queue state is PENDING with reason Priority.",
+      "No output or producer terminal record existed at the immediate post-submission check.",
+      "This remains a predicted-path candidate only; no VASP result, Dimer parent, TS, barrier, fine-tuning, or automatic rerun exists."
+    ],
+    "one_executable_step": "Check job 1335 scheduler and producer evidence; collect and review the returned path only after a terminal producer record exists.",
+    "submission_boundary": "This authorization is consumed by job 1335. Do not retry, fine-tune, submit VASP/VTST, prepare Dimer, or claim a TS/barrier without new explicit authority and subsequent gates.",
+    "done_when": [
+      "A producer terminal record for job 1335 exists and scheduler state is separately reported.",
+      "A successful returned path is collected into work for geometry, periodic, energy, force, and chemistry review; a failed run records only failure evidence."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v7_reparameterized_20260827/submission_record_job1335.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v7_reparameterized_20260827/user_gpu_execution_authorization.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v7_reparameterized_20260827/remote_preflight.MZ73.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v7_reparameterized_20260827/submission_record_job1335.json",
+      "sha256": "3d9e8090f9d5b6d720fe2ec1a51385be8e57c1e95706c70d7379331eec850caa",
+      "authority": "scheduler",
+      "observed_at": "2026-08-28T00:26:16.4433446+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v7_reparameterized_20260827/user_gpu_execution_authorization.json",
+      "sha256": "d6be92a19a04fac3c63e94c713b2389f5e6b907cfc28a698b47d1175350325cc",
+      "authority": "user_authorization",
+      "observed_at": "2026-08-28T00:26:16.4433446+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v7_reparameterized_20260827/remote_preflight.MZ73.json",
+      "sha256": "33e7edbfe0c7a877a74b8b42bc20a5ea2e8a2fe81591db0432f19f174553924b",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-28T00:26:16.4433446+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v7-remote-preflight-passed-20260828"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

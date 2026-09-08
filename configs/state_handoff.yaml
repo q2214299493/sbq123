@@ -1,0 +1,97 @@
+schema_version: 1
+enabled: true
+
+paths:
+  events: modules/state_handoff/events
+  archive: modules/state_handoff/archive
+  proposal_cache: data/cache/state_handoff/proposals
+  projection_manifest: data/state_handoff/projection_manifest.json
+
+budgets:
+  current_task_max_lines: 100
+  current_gate_max_lines: 20
+  current_state_warning_lines: 500
+  historical_section_warning_lines: 200
+  archive_max_file_mb: 10
+
+managed_views:
+  current_task: tasks/current_task.md
+  current_state: docs/02_CURRENT_STATE.md
+  module_map: docs/06_MODULE_MAP.md
+  backlog: tasks/backlog.md
+  error_log: docs/04_ERROR_LOG.md
+  decisions_log: docs/03_DECISIONS_LOG.md
+  historical_results: docs/08_HISTORICAL_RESULTS.md
+
+safe_projection_event_types:
+  - task_opened
+  - task_updated
+  - task_completed
+  - state_observed
+  - module_gate_changed
+
+always_review_event_types:
+  - decision_recorded
+  - error_opened
+  - error_resolved
+  - backlog_item_added
+  - backlog_item_closed
+  - history_recorded
+  - repository_item_classified
+  - repository_item_archived
+  - repository_item_deleted
+
+registry_excel_review_reuse:
+  enabled: true
+  database: data/project_registry.sqlite3
+  trusted_reviewers:
+    - user
+    - User-authorized Codex scientific review
+  allowed_event_types:
+    - task_updated
+    - module_gate_changed
+  allowed_targets:
+    - tasks/current_task.md
+    - docs/06_MODULE_MAP.md
+
+repository_item_policy:
+  allowed_root_directories:
+    - .git
+    - .github
+    - .pytest_cache
+    - .ruff_cache
+    - archive
+    - artifacts
+    - calculations
+    - configs
+    - data
+    - docs
+    - logs
+    - modules
+    - outputs
+    - reports
+    - scripts
+    - skills
+    - tasks
+    - tests
+    - VASP2Kinetics
+  excluded_roots:
+    - calculations
+  external_roots_audit_only: true
+  forbidden_names:
+    - POTCAR
+    - WAVECAR
+    - CHGCAR
+    - OUTCAR
+    - OSZICAR
+    - vasprun.xml
+  forbidden_suffixes:
+    - .pem
+    - .key
+    - .ppk
+  candidate_patterns:
+    - .codex_tmp
+    - old_jobs
+    - backup
+    - scratch
+    - tmp

@@ -1,0 +1,14 @@
+version: 1
+project_id: fe110_co_dissociation_neb_20260718
+objective: Complete Fe(110) CO* dissociation workflow from reviewed Topic-1 endpoints through AQCat25 path acceleration and VASP/VTST validation.
+system: true_fe110_fe45_5layer_co_dissociation
+compatibility_branch: true_fe110_5layer_5x5x1
+reaction: CO*/Fe(110) -> C*+O*/Fe(110)
+method_family: chemically_guided_segmented_IDPP_then_AQCat25_BA-Sella_then_VASP_NEB_CI-NEB_or_DIMER
+success_criteria:
+  - endpoint mapping and geometry gates pass
+  - reviewed AQCat25 candidate returns through work
+  - ordinary NEB path is continuous and technically converged
+  - refined saddle has one relevant imaginary mode and bidirectional connectivity
+  - matched-static IS/TS/FS energies yield forward, reverse, and reaction energies
+

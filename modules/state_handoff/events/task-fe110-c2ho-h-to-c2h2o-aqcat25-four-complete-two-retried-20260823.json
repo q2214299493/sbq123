@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-aqcat25-four-complete-two-retried-20260823",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "adsorption_workflow"
+  },
+  "occurred_at": "2026-08-23T11:16:27+08:00",
+  "recorded_at": "2026-08-23T03:16:27Z",
+  "summary": "Four of six AQCat25 endpoint candidates are converged and work-side validated; original IS-B/IS-C jobs timed out and were replaced by user-authorized one-hour jobs 1292-1293, currently pending.",
+  "payload": {
+    "objective": "Complete and review six MZ73 AQCat25 endpoint pre-relaxations for [CH][C][O]* + H* -> [CH][C]OH* + * before any VASP action.",
+    "phase": "active",
+    "current_evidence": [
+      "FS-A 1289, FS-B 1284, FS-C 1290, and IS-A 1291 converged, passed connectivity, are in the calibrated adsorption domain, and their returned manifests passed work-side hash/schema validation.",
+      "Their predicted fmax values are 0.029188, 0.036746, 0.034629, and 0.046900 eV/A, respectively.",
+      "Original IS-B 1287 and IS-C 1288 hit the 20-minute limit without result manifests.",
+      "Replacement IS-B 1292 and IS-C 1293 were submitted with one-hour limits and are PENDING."
+    ],
+    "one_executable_step": "Wait for jobs 1292 and 1293 to finish, return and validate both GPU artifacts, then run six-structure geometry, chemistry, site, and duplicate review before recommending VASP candidates.",
+    "submission_boundary": "Only the two one-hour AQCat25 replacements are active. No VASP adsorption, NEB, DIMER, frequency, or energy-registration action is authorized.",
+    "done_when": [
+      "Jobs 1292 and 1293 have terminal producer and scheduler evidence.",
+      "All six successful returns pass work-side review.",
+      "A complete candidate comparison is ready for user review before any VASP submission."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_pre_relaxation/runtime_checkpoint_20260823T111627.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_pre_relaxation/runtime_checkpoint_20260823T111627.json",
+      "sha256": "2547a01838243b51971e2a1909184bda1cc267e2b10558f1f76a30cc545050e6",
+      "authority": "module_validation",
+      "observed_at": "2026-08-23T11:16:27+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_pre_relaxation/returned_from_mz73/FS_A_C2H2O_eta3_C1_C2_O_CARE03/output/job_1289/gpu_result_manifest.json",
+      "sha256": "1582b7f149d12b76836e6682a39f05ffe22d1ea78e9afb832b4af80db5dcabaa",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-23T11:16:27+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_pre_relaxation/returned_from_mz73/FS_C_C2H2O_kappa_C1_tilted/output/job_1290/gpu_result_manifest.json",
+      "sha256": "d1956ca37d92945d7bcb5e7b855e8c8872468352c3b4f85a3d811d2ea68518f6",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-23T11:16:27+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_pre_relaxation/returned_from_mz73/IS_A_C2HO_H_adjacent_long_bridge/output/job_1291/gpu_result_manifest.json",
+      "sha256": "2738b5c4270775607dfbd98f05dc5e695fec3a06acafa218d1adc6ca8e2fb34f",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-23T11:16:27+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-aqcat25-one-hour-retries-submitted-20260823"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

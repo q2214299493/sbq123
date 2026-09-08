@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "document_kind": "registry_excel_promotion_hash_rebind_receipt",
+  "rebind_id": "excel_fe110_co_dissociation_barrier_sigma0p20_20260807_rebind_20260807",
+  "promotion_id": "excel_fe110_co_dissociation_barrier_sigma0p20_20260807",
+  "promotion_kind": "barrier",
+  "registry_id": "fe110_co_dissociation_9558184_9656664_9622455_sigma0p20",
+  "calculation_id": "fe110_co_dissociation_dimer_job9656664",
+  "workbook_path": "C:\\Users\\86177\\Desktop\\work\\outputs\\ts_topic1_20260806\\课题一TS.xlsx",
+  "worksheet_name": "TS记录",
+  "excel_row_number": 3,
+  "workbook_sha256_before": "0d0f19dd254b6bc72a6be05c1adcadecf4c218248faa3ace1678fbac30154d4f",
+  "workbook_sha256_after": "033f66c0965fe799a9f58097c4c1d921dbb1c6ce26989458af08a829cd067e76",
+  "written_values_sha256": "0888d302716aaecb1eb95d7d761d3fdb8ca7bd2a3f919d60f3eaa4d9b6f2e8c3",
+  "reviewer": "User-authorized Codex scientific review",
+  "reviewed_at": "2026-08-07T00:00:00+08:00",
+  "original_receipt_path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/excel_promotion_receipt.json",
+  "original_receipt_sha256": "dc36b3f042d9e6ff46168df5f85ca7dc569783ab605169d8de4fce58f09d20a7",
+  "source_manifest": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/formal_barrier_manifest.json",
+  "source_manifest_sha256": "9fa49b0b3dffc481154b13d835502e77a3f27e64a4d7d43f9ca3ee0e530753c2",
+  "verification": {
+    "tool": "@oai/artifact-tool",
+    "inspected_range": "TS记录!A2:AC3",
+    "formula_error_count": 0,
+    "result": "MATCH",
+    "verified_values": {
+      "energy_convention": "fe110_converged_toten_sigma0p20_v1",
+      "is_job_id": "9558184",
+      "is_toten_eV": -372.01291708,
+      "ts_job_id": "9656664",
+      "ts_toten_eV": -370.66270803,
+      "fs_job_id": "9622455",
+      "fs_toten_eV": -372.71928137,
+      "forward_barrier_ev": 1.35020905000005,
+      "reverse_barrier_ev": 2.05657334,
+      "reaction_energy_ev": -0.706364289999954,
+      "barrier_set_id": "fe110_co_dissociation_9558184_9656664_9622455_sigma0p20"
+    }
+  },
+  "rebind_authorization": {
+    "reviewer": "user",
+    "authorized_at": "2026-08-07T04:28:19Z",
+    "reason": "User authorized rebinding the current workbook hash after verifying that the accepted registry values in the promoted row are unchanged."
+  },
+  "created_at": "2026-08-07T04:28:19Z",
+  "notes": "This supplement preserves the original immutable receipt and rebinds only the current workbook hash. It does not change scientific values, registry acceptance, or workbook content."
+}

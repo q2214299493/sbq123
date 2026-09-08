@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-ch-h-coadsorption-bc-submitted-20260808",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-ch-h-coadsorption",
+    "module": "adsorption_workflow"
+  },
+  "occurred_at": "2026-08-08T13:12:38+08:00",
+  "recorded_at": "2026-08-08T13:12:38+08:00",
+  "summary": "User-approved Fe(110) CH* plus H* candidates B and C were submitted as LSF jobs 9701505 and 9701506 and registered.",
+  "payload": {
+    "objective": "Screen three Fe45 CH* plus H* coadsorption relaxations for the CH* + H* -> CH2* + * initial state and select one compatible, retained CH*+H* minimum as the final IS.",
+    "phase": "active",
+    "current_evidence": [
+      "Candidate A job `9701350` is scheduler RUN in `Gkn_normal` on `32*gknew071`.",
+      "Candidate B, CH_top plus H_second_neighbor_hollow, was accepted by LSF as job `9701505` and is scheduler PEND.",
+      "Candidate C, CH_long_bridge plus H_adjacent_top, was accepted by LSF as job `9701506` and is scheduler PEND.",
+      "Both new jobs passed local structure, INCAR, production-input, remote POTCAR, duplicate-directory, and remote input-hash checks before submission.",
+      "The calculation registry records jobs 9701505 and 9701506 with scientific status Not started."
+    ],
+    "one_executable_step": "Monitor jobs 9701350, 9701505, and 9701506 to scheduler exit, then parse each OUTCAR/OSZICAR/CONTCAR for electronic convergence, ionic convergence, maximum movable force, final CH+H connectivity, final sites, unintended CH2 formation, and compatible final TOTEN.",
+    "submission_boundary": "No additional adsorption candidate, resubmission, NEB, CI-NEB, DIMER, frequency, or TS action is authorized.",
+    "done_when": [
+      "All three scheduler jobs reach terminal states and their calculation outputs are separately classified.",
+      "Every completed candidate has electronic, ionic/force, and geometry status recorded without conflating scheduler completion with scientific acceptance.",
+      "One retained CH*+H* minimum is selected as IS using compatible local energies and pathway suitability; non-selected converged candidates are retained in the registry."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_ch_h_coadsorption_20260808/provenance/submission_batch_9701505_9701506.json`",
+      "`calculations/fe110_ch_h_coadsorption_20260808/provenance/submission_batch_registration_receipt.json`",
+      "`calculations/fe110_ch_h_coadsorption_20260808/provenance/runtime_checkpoint_three_candidates_20260808T131238.json`",
+      "`calculations/fe110_ch_h_coadsorption_20260808/candidate_review/candidate_submission_update_20260808.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_ch_h_coadsorption_20260808/provenance/submission_batch_9701505_9701506.json",
+      "sha256": "f0cb377b7359a687c040233e69e8a1403c5fb6f58f7fd0be8241778e1eb0ed54",
+      "authority": "scheduler",
+      "observed_at": "2026-08-08T13:10:35+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_coadsorption_20260808/provenance/submission_batch_registration_receipt.json",
+      "sha256": "0a93781409ff1e17424db859a18293f3d354b6a36504b02bf789175a41f690b3",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-08T13:12:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_coadsorption_20260808/provenance/runtime_checkpoint_three_candidates_20260808T131238.json",
+      "sha256": "effa14cfcad47da4f275f367436cbe23b051a049a9f70d79701832b1a1f73d5f",
+      "authority": "scheduler",
+      "observed_at": "2026-08-08T13:12:38+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_coadsorption_20260808/candidate_review/candidate_submission_update_20260808.json",
+      "sha256": "eb3a6939fa9f78b88afc6d1872ee84804b82513b6558634af8872a63202aa051",
+      "authority": "module_validation",
+      "observed_at": "2026-08-08T13:12:38+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-ch-h-coadsorption-candidates-review-20260808"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

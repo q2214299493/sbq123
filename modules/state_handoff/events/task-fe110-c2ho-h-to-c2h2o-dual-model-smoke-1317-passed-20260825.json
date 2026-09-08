@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-dual-model-smoke-1317-passed-20260825",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-25T23:32:52+08:00",
+  "recorded_at": "2026-08-25T15:32:52Z",
+  "summary": "Implemented and passed a bounded MZ73 smoke test of the MatRIS-primary restrained-precondition/release ML-NEB executor with AQCat25 exact fixed-path secondary evaluation; no production GPU or VASP job was submitted.",
+  "payload": {
+    "objective": "Prepare the hash-bound production dual-model GPU path request for Fe(110) C2HO* + H* -> C2H2O* + * and obtain explicit user authorization before submission.",
+    "phase": "active",
+    "current_evidence": [
+      "The dual-model executor and wrapper are implemented. Local Ruff, Python compilation, shell syntax, focused ML-NEB tests, and execution-backend tests pass.",
+      "MZ73 smoke job 1317 has a successful producer exit record and is absent from the live queue; MZ73 still lacks durable terminal Slurm accounting.",
+      "The nine-image smoke ran two restrained MatRIS preconditioning steps, removed every temporary internal-coordinate restraint, ran two unrestrained ordinary MatRIS ML-NEB steps, and evaluated AQCat25 on the exact returned structure hashes without relaxation.",
+      "The returned smoke path preserves the fixed mask and periodic branch, has C1-C2 distances of 1.4161-1.4547 A, retains images 04-06 in the forming O-H 1.1-1.8 A interval, and has maximum adjacent mobile-atom RMSD 0.3505 A.",
+      "The smoke is intentionally unconverged after two steps per stage. It validates the executor chain only and is not a production path, DIMER parent, VASP result, TS, or barrier.",
+      "No production GPU path or VASP job was submitted."
+    ],
+    "one_executable_step": "Prepare and review a separate full 13-image production dual-model GPU request; do not submit it until the user explicitly authorizes that exact request.",
+    "submission_boundary": "The bounded smoke authorization is complete. A formal GPU path submission and every VASP action remain unauthorized.",
+    "done_when": [
+      "A full production request is bound to the reviewed 13-image seed, both checkpoint hashes, MatRIS source/runtime hashes, temporary-restraint release policy, geometry guards, and output-review contract.",
+      "The user explicitly authorizes submission of that exact production request.",
+      "The returned production path passes work-side provenance, geometry, reaction-coordinate, and elementary-step review before any VASP recommendation."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_smoke_v3_20260825/smoke_review.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_smoke_v3_20260825/returned_from_mz73/job_1317/dual_model_gpu_ml_neb_path_manifest.candidate.json`",
+      "`scripts/dual_model_ml_neb.py`",
+      "`configs/execution_backends.yaml`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_smoke_v3_20260825/smoke_review.work.json",
+      "sha256": "0eb7a5b581b6fbb86f481c6c1a6f081c58b8a267b9dafe8aa1759865f0302f51",
+      "authority": "module_validation",
+      "observed_at": "2026-08-25T23:32:52+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_smoke_v3_20260825/returned_from_mz73/job_1317/dual_model_gpu_ml_neb_path_manifest.candidate.json",
+      "sha256": "bb8292a142524426ae31a5a5939c82a5833b12347cfd997f5ff6f452721af3e8",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-25T23:32:52+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_smoke_v3_20260825/work_to_gpu/request.json",
+      "sha256": "02a000621e2b7459f649a75515300c66b6dd6acd344168baa875117f2c917427",
+      "authority": "structure_output",
+      "observed_at": "2026-08-25T23:32:52+08:00"
+    },
+    {
+      "locator": "scripts/dual_model_ml_neb.py",
+      "sha256": "42adf85092c533d3c6917262c2badd97909e55d5f71135c4bf215e9d4975b41e",
+      "authority": "module_validation",
+      "observed_at": "2026-08-25T23:32:52+08:00"
+    }
+  ],
+  "supersedes": [
+    "reconciled-task-updated-task-fe110-c2ho-h-to-c2h2o-ts-967aa2e0687f540aff7e"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

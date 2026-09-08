@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v5-mz73-preflight-passed-20260827",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-27T21:02:34.7142413+08:00",
+  "recorded_at": "2026-08-27T13:02:34.7142413Z",
+  "summary": "The accepted 19-image complete-path package was uploaded to MZ73 and passed a hash-bound environment, checkpoint, runtime, topology, periodic-branch, and geometry preflight; no model, scheduler, GPU path, VASP, or VTST job was run or submitted.",
+  "payload": {
+    "objective": "Review the successful MZ73 preflight and obtain a separate decision before any production GPU path submission.",
+    "phase": "active",
+    "current_evidence": [
+      "The exact request SHA-256 0d36944856bdc4799f6c6c441da04a0271b10f9d8acfd905eed0c679d38d01d6 and all 19 structure hashes passed on MZ73.",
+      "Frozen MatRIS and AQCat25 checkpoint hashes passed on MZ73, and the MatRIS source and Python runtime were present.",
+      "The runtime Python files compiled, the job wrapper passed bash syntax validation, and request loading plus structure topology checks passed without model execution.",
+      "No periodic-branch normalization was required; the complete geometry guard passed and images 10-14 cover the forming O-H 1.1-1.8 A interval.",
+      "The package is uploaded under /home/sbq/sbq/aqcat25_ts_pilot/handoffs/c2ho_h_complete_path_rebuild_v5_19img_20260827.",
+      "Production submission remains unauthorized; no sbatch, GPU model execution, VASP submission, Dimer, TS, or barrier action occurred."
+    ],
+    "one_executable_step": "Obtain separate explicit user authorization before any hash-bound production GPU path submission.",
+    "submission_boundary": "The completed remote preflight is not a production execution authorization. GPU/VASP/VTST submission remains forbidden until separately authorized and all owning-module submission gates pass.",
+    "done_when": [
+      "The user accepts or rejects production execution of the exact preflighted package.",
+      "If accepted, the hash-bound production GPU submission is separately recorded; if rejected, the uploaded package remains unexecuted."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/remote_preflight.MZ73.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/request_receipt.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/work_to_gpu/request.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/active_learning_state.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/remote_preflight.MZ73.json",
+      "sha256": "376d86df0819158c1217563c425424e78df76b4a879dd894d910da45ae9f5603",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T21:02:34.7142413+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/request_receipt.json",
+      "sha256": "9c87a8927a3616f11ab9e17de0ce9a52d142840b90afce83af2de0c4873b52fd",
+      "authority": "repository_document",
+      "observed_at": "2026-08-27T21:02:34.7142413+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/work_to_gpu/request.json",
+      "sha256": "0d36944856bdc4799f6c6c441da04a0271b10f9d8acfd905eed0c679d38d01d6",
+      "authority": "repository_document",
+      "observed_at": "2026-08-27T21:02:34.7142413+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/active_learning_state.json",
+      "sha256": "2bde66334ffc51a09754e35a6fc8be3d4371d41b10c0c340ff4ac0b8885708d4",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T21:02:34.7142413+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v5-prepared-20260827"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

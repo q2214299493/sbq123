@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "document_kind": "ts_validation_pipeline_status",
+  "status": "TS_ACCEPTED",
+  "reason_codes": [
+    "DIMER_SOFT_WARNING_ACCEPTED_FOR_TS_VALIDATION",
+    "FREQUENCY_THRESHOLDS_UNSET_OPTIONAL_CLASSIFICATION_NOT_RUN"
+  ],
+  "next_action": "RECORD_TS_RESULT",
+  "source_files": [
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_co_dissociation_neb_20260718\\diagnostics\\dimer_handoff_job9640399_image04_20260803\\dimer_analysis.json",
+      "sha256": "5744956f8428be0f60fdd5c6a08d671a9b6c5de738252835e7fd09746d1a631e"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_co_dissociation_neb_20260718\\diagnostics\\dimer_handoff_job9640399_image04_20260803\\dimer_soft_gate_review_ts_acceptance_20260806.json",
+      "sha256": "27876525f17d69acae80078225e82deb4639a8b79f71acf9213abf471bbcbbcc"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_co_dissociation_neb_20260718\\diagnostics\\ts_validation_review_dimer9656664_mode6_20260806\\vfa_analysis.json",
+      "sha256": "f096dac60bdd73664ff25797044a7018a03582af6f1ff84b98bd392c442aa824"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\configs\\ts_validation_pipeline.yaml",
+      "sha256": "9625e892bc7d9a791e278a68e012751415fb314cfb7f10a0ae23eb5d921bb8fb"
+    }
+  ],
+  "connectivity_required": false,
+  "connectivity_validated": false,
+  "validation_basis": "DIMER_CONVERGENCE_AND_VIBRATIONAL_FREQUENCY",
+  "scientifically_validated_ts": true,
+  "frequency_validation_passed": true,
+  "final_grade_requires_vfa_analyzer": false,
+  "optional_vfa_grade": "NOT_EVALUATED",
+  "submission_executor": "scripts.neb_agent.submission"
+}

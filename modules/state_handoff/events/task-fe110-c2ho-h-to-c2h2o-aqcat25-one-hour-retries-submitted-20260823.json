@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-aqcat25-one-hour-retries-submitted-20260823",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "adsorption_workflow"
+  },
+  "occurred_at": "2026-08-23T00:32:51+08:00",
+  "recorded_at": "2026-08-22T16:32:51Z",
+  "summary": "User-authorized one-hour AQCat25 retries were submitted for the three timed-out endpoint candidates as jobs 1289-1291; active original jobs 1287-1288 continue without duplication, and converged FS-B job 1284 was not retried.",
+  "payload": {
+    "objective": "Complete and review six MZ73 AQCat25 endpoint pre-relaxations for [CH][C][O]* + H* -> [CH][C]OH* + * before any VASP action.",
+    "phase": "active",
+    "current_evidence": [
+      "FS-A retry job 1289, FS-C retry job 1290, and IS-A retry job 1291 were submitted with TimeLimit=01:00:00 and the unchanged validated handoff hashes.",
+      "The three retries were initially PENDING due to priority.",
+      "Original IS-B job 1287 and IS-C job 1288 remain RUNNING with their original 20-minute limits; MZ73 denied an in-place TimeLimit increase for running jobs.",
+      "FS-B job 1284 remains the only completed and validated GPU result and was not resubmitted."
+    ],
+    "one_executable_step": "Wait for jobs 1287-1291 to reach terminal states, retry 1287/1288 with one-hour limits only if they time out, then return and review all available GPU artifacts in work.",
+    "submission_boundary": "The user authorized increased-time AQCat25 continuation only. No VASP adsorption, NEB, DIMER, frequency, or energy-registration action is authorized.",
+    "done_when": [
+      "Five active or replacement jobs reach terminal state.",
+      "Every successful GPU return passes work-side hash, geometry, chemistry, domain, and duplicate review.",
+      "A complete endpoint recommendation is ready for user review before any VASP submission."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_pre_relaxation/retry_submission_receipt_20260823.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_pre_relaxation/returned_from_mz73/FS_B_C2H2O_eta2_C1_C2_OH_up/output/job_1284/gpu_result_manifest.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_pre_relaxation/retry_submission_receipt_20260823.json",
+      "sha256": "863b8744d3fba016bc03f3a325f31013ccd0c71c8071ec0f0530caa5b23a89d4",
+      "authority": "scheduler",
+      "observed_at": "2026-08-23T00:32:51+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-aqcat25-partial-timeout-20260823"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

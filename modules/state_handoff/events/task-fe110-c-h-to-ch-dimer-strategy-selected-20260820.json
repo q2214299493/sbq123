@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-dimer-strategy-selected-20260820",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-transition-state",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-20T12:36:52+08:00",
+  "recorded_at": "2026-08-20T04:36:52Z",
+  "summary": "DIMER from GPU/VASP peak image 04 with adjacent images 03 and 05 was selected as the primary VASP refinement strategy; the active-learning non-finetuning branch is production-exercised through calibrated strategy selection, while DIMER preparation and the model-update branch remain incomplete.",
+  "payload": {
+    "objective": "Prepare a hash-bound, reviewable DIMER refinement from image 04 for Fe(110) C*+H*->CH* without submitting it.",
+    "phase": "active",
+    "current_evidence": [
+      "The calibrated GPU ML-NEB/ML-CI-NEB path has one strict internal peak at image 04 and passed geometry, periodic-mapping, and elementary-step review.",
+      "Exact SIGMA=0.20 eV VASP single-point energies on 03-04-05 preserve a strict local maximum at image 04.",
+      "The normalized 03-to-05 adjacent-image mode places 97.666 percent of its norm on zero-based C/H indices 45 and 46, dominated by H motion.",
+      "DIMER is selected first; a local ordinary micro-NEB is the fallback if DIMER fails, switches mechanism, or produces the wrong mode.",
+      "The active-learning non-finetuning pass branch has been exercised from complete GPU path generation through VASP labeling, exact force comparison, held-out calibration, and strategy selection.",
+      "The error-triggered fine-tuning/new-checkpoint/rerun branch is implemented but has not been production-exercised because the current checkpoint passed the force gates.",
+      "Only one checkpoint exists, so a three-member committee and calibrated model disagreement remain unavailable.",
+      "The current candidate path manifest is not yet finalized as an accepted DIMER parent; no current execution gate allows DIMER preparation or submission."
+    ],
+    "one_executable_step": "Finalize the checksum-bound GPU path as the accepted VASP-validated DIMER parent, assemble the exact 03-04-05 triad analysis, and generate the current PREPARE_DIMER_HANDOFF gate decision; prepare inputs for review without submission.",
+    "submission_boundary": "The strategy decision does not authorize DIMER submission. START_DIMER requires a separate current gate, reviewed MODECAR/input bundle, and explicit user authorization.",
+    "done_when": [
+      "The accepted GPU path manifest binds the reviewed image tree and peak image 04.",
+      "The exact VASP 03-04-05 triad and calibrated-domain evidence pass the DIMER candidate hard gate.",
+      "A current execution decision allows PREPARE_DIMER_HANDOFF and the generated MODECAR/input bundle is ready for user review."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer_strategy_selection_review.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/returned_from_mz73/output/ml_neb_production/gpu_ml_neb_path_manifest.candidate.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/vasp_force_labels_round_000_sigma0p20/batch_completion_summary.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/active_learning_sigma0p20/active_learning_state.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer_strategy_selection_review.json",
+      "sha256": "c25ec30dfe05ce091f89ddb9acd290c1f8af6db90d971ba137f3abe067937622",
+      "authority": "module_validation",
+      "observed_at": "2026-08-20T12:36:52+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/returned_from_mz73/output/ml_neb_production/gpu_ml_neb_path_manifest.candidate.json",
+      "sha256": "dda91950a012738d751d8ca4673a433378c1e3edf4a3c3b8a15e6bd0e89a20cf",
+      "authority": "module_validation",
+      "observed_at": "2026-08-20T12:36:52+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/vasp_force_labels_round_000_sigma0p20/batch_completion_summary.json",
+      "sha256": "212ed75b0f70708ffc8d97466882a3ce0aab2dbc17c33147eecde901e11052b9",
+      "authority": "module_validation",
+      "observed_at": "2026-08-20T12:36:52+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-ts-domain-calibration-registered-20260820"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

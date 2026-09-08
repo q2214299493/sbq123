@@ -1,0 +1,137 @@
+# VASP pseudopotentials and licensed data
+POTCAR
+POTCAR.*
+
+# Large or regenerable VASP runtime output
+WAVECAR
+WAVEDER
+CHG
+CHGCAR
+CHGCAR_sum
+vasprun.xml
+OUTCAR
+OSZICAR
+XDATCAR*
+CONTCAR
+DOSCAR
+EIGENVAL
+PROCAR
+LOCPOT
+ELFCAR
+AECCAR0
+AECCAR1
+AECCAR2
+IBZKPT
+PCDAT
+REPORT
+vasp.out
+*.out
+*.err
+
+# Derived NEB/runtime data; preserve reviewed summaries under reports/
+neb.dat
+spline.dat
+force.dat
+
+# Temporary diagnostics and downloaded runtime snapshots
+/_tmp_*/
+/outputs/_tmp_*/
+# Regenerable output render and workbook-inspection caches
+/outputs/**/rendered*/
+/outputs/**/*.inspect.ndjson
+/_diag_*/
+/_pre*/
+/archive/local_runtime_snapshots/
+/calculations/**/structure_preview*.png
+
+# Archives and local transfer bundles
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+
+# Python, editor, and operating-system noise
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+/.codex_tmp/
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store
+*.swp
+*.tmp
+*.bak
+*.bak.*
+*.log
+~$*.docx
+/tmp_nomad.json
+
+# Local ML/RAG models and large source indexes
+/models/
+/.cache/
+/data/raw/
+/data/cache/
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.lmdb
+
+# Local generated registry; version schema and reviewed exports instead
+data/*.sqlite3
+data/*.sqlite3-shm
+data/*.sqlite3-wal
+/data/backups/
+/data/registry_backups/
+
+# Generated spreadsheet deliverables remain local unless explicitly approved
+# for publication or transfer.
+/outputs/**/*.xlsx
+
+# Credentials and private keys
+*.pem
+*.key
+*.ppk
+.env
+.env.*
+!.env.example
+
+# Large VASP / workflow files ignored for Codex context protection
+*.jsonl
+!modules/adsmind_lite/memory/failed_patterns.jsonl
+!modules/adsmind_lite/memory/best_adsorption_states.jsonl
+*.sqlite
+*.db
+!data/project_registry.sqlite3
+archive/
+!modules/memory_migration/archive/
+!modules/memory_migration/archive/PROJECT_CONTEXT_MEMORY.md
+!modules/state_handoff/archive/
+!modules/state_handoff/archive/**
+old_jobs/
+backup/
+tmp/
+scratch/
+# Microsoft Office temporary lock files
+~$*.docx
+
+# Explicit public packaging exceptions for reviewed fixtures only.
+!/archive/
+/archive/*
+!/archive/README.md
+!/archive/web_sources/
+/archive/web_sources/*
+!/archive/web_sources/README.md
+!modules/catalysis_data_retrieval/outputs/20260628_fe110_database_layers/records.jsonl
+!modules/convergence_workflow/inputs/fe110_true_facet_thickness_20260627/retrieval_records.jsonl
+/data/project_registry.sqlite3
+/scientific-problem-compiler/

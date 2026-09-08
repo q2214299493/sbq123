@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-ch-h-to-ch2-hydrogen-transfer-template-auto-registration-20260817",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-ch-h-to-ch2-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-17T22:50:58+08:00",
+  "recorded_at": "2026-08-17T14:50:58Z",
+  "summary": "The accepted CH* + H* -> CH2* workflow is registered as a hydrogen_transfer Grade-A method template, and future successful TS barrier registration now atomically stores its strategy-only learning record.",
+  "payload": {
+    "objective": "Register the accepted Fe(110) CH* + H* -> CH2* + * workflow as a hydrogen_transfer Grade-A method template and make successful TS strategy registration automatic.",
+    "phase": "verification",
+    "current_evidence": [
+      "Template fe110_ch_h_to_ch2_dimer9709074_sigma0p20_grade_a is stored in ts_strategy_templates with reaction_family hydrogen_transfer, validation_grade A, and evidence_valid true.",
+      "The reusable method sequence is periodic-branch normalization, adaptive reacting-interval densification, bounded ordinary NEB, reviewed local three-structure Dimer refinement, and a newly derived local partial Hessian.",
+      "The canonical record-barrier entry point now requires a Grade-A learning record and writes the accepted barrier and strategy template in one transaction.",
+      "A similar hydrogen-transfer fingerprint was verified to allow strategy transfer while result transfer remained forbidden.",
+      "The strategy record does not expose system-specific atom indices, coordinates, MODECAR/restart content, image numbers, job IDs, energies, or barrier values as transferable method fields."
+    ],
+    "one_executable_step": "No further action is required. Every future compatible Grade-A TS final-barrier registration must include and automatically store its strategy-only learning record.",
+    "submission_boundary": "Do not submit, stop, restart, or resubmit VASP. Automatic registration is a database bookkeeping action after scientific Grade-A and compatible-barrier acceptance; it does not authorize new calculations.",
+    "done_when": [
+      "The hydrogen_transfer Grade-A template exists and passes evidence validation.",
+      "The successful TS barrier workflow atomically requires and stores a strategy-only learning record.",
+      "New-system reuse excludes atom indices, coordinates, MODECAR/restart files, image numbers, energies, and barrier values."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/diagnostics/formal_barrier_sigma0p20_20260816/strategy_learning_record.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/diagnostics/formal_barrier_sigma0p20_20260816/strategy_registration_receipt.json`",
+      "`modules/transition_state_search/README.md`",
+      "`data/project_registry.sqlite3`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/diagnostics/formal_barrier_sigma0p20_20260816/strategy_learning_record.json",
+      "sha256": "af672890c78655cff17703e727ce9f7e493160871145eceddb17587fdd7f95e0",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-17T22:50:58+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/diagnostics/formal_barrier_sigma0p20_20260816/strategy_registration_receipt.json",
+      "sha256": "a4aa2ed71f3692535b96a8f91d8c31874ef2f095c8bd658cec662efa6c81e688",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-17T22:50:58+08:00"
+    },
+    {
+      "locator": "modules/transition_state_search/README.md",
+      "sha256": "ab12f2111343815686a5df24fbcda48cf29673509a071c7ffab16491d7c07f49",
+      "authority": "module_validation",
+      "observed_at": "2026-08-17T22:50:58+08:00"
+    },
+    {
+      "locator": "data/project_registry.sqlite3",
+      "sha256": "0dc39a8b146a69a77988b04fcd52bdc4e32f9ae7a8fc7dcb788083b87c901162",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-17T22:50:58+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-ch-h-to-ch2-formal-barrier-registered-20260816"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

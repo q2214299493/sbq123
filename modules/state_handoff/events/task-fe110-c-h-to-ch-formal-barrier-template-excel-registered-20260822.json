@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-formal-barrier-template-excel-registered-20260822",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-22T14:14:07+08:00",
+  "recorded_at": "2026-08-22T06:14:07Z",
+  "summary": "The Fe(110) C* + H* -> CH* + * Grade-A Dimer TS, compatible electronic barrier, hydrogen-transfer strategy template, and Topic-1 Excel record are formally registered.",
+  "payload": {
+    "objective": "Complete the accepted TS record, compatible electronic barrier, reusable method-only strategy template, and Topic-1 workbook promotion for Fe(110) C* + H* -> CH* + *.",
+    "phase": "verification",
+    "current_evidence": [
+      "Dimer job 9720181 and VFA job 9721851 support a Grade-A accepted TS with one target imaginary mode at 842.194583 cm^-1.",
+      "Compatible IS, TS, and FS final OUTCAR TOTEN values are -368.60093793, -367.71324606, and -368.45471297 eV under fe110_converged_toten_sigma0p20_v1.",
+      "Registry barrier fe110_c_h_to_ch_9715450_9720181_9573951_sigma0p20 is accepted: forward 0.88769187 eV, reverse 0.74146691 eV, and reaction energy +0.14622496 eV.",
+      "Strategy template fe110_c_h_to_ch_dimer9720181_sigma0p20_grade_a is registered as method-only hydrogen-transfer reuse evidence.",
+      "The Topic-1 workbook contains the C* + H* -> CH* record in TS记录 row 5; barrier formulas and the full-workbook visual review passed."
+    ],
+    "one_executable_step": "No further action is required for the electronic-barrier task. Thermochemical corrections require a separate explicit request and a consistent IS/TS/FS active set.",
+    "submission_boundary": "Do not submit, stop, restart, or resubmit VASP. This record is an electronic barrier only and must not be described as a free-energy barrier or kinetics-ready dataset.",
+    "done_when": [
+      "The Grade-A TS, compatible barrier, and method-only strategy template exist in the project registry.",
+      "The Topic-1 TS workbook contains the verified transition-state and barrier record.",
+      "The scope remains explicitly limited to electronic energies without ZPE, entropy, or free-energy corrections."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/diagnostics/formal_barrier_sigma0p20_20260822/registration_summary.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/diagnostics/formal_barrier_sigma0p20_20260822/formal_barrier_manifest.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/diagnostics/formal_barrier_sigma0p20_20260822/AUTHORITATIVE_FINAL_BARRIER_GATE.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/diagnostics/formal_barrier_sigma0p20_20260822/strategy_learning_record.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/diagnostics/formal_barrier_sigma0p20_20260822/excel_promotion_correction_receipt.json`",
+      "`outputs/c_h_ts_barrier_20260822/课题一TS.xlsx`",
+      "`data/project_registry.sqlite3`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/diagnostics/formal_barrier_sigma0p20_20260822/registration_summary.json",
+      "sha256": "c5ab97a3f8f9e87b98e88c8425d2440052d3bc117d4090fe4eac382d8090b4ca",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-22T14:14:07+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/diagnostics/formal_barrier_sigma0p20_20260822/formal_barrier_manifest.json",
+      "sha256": "15d3822f1e75fb8657addb95a72095d1765c71b970975267eba76c1dd896bb6e",
+      "authority": "module_validation",
+      "observed_at": "2026-08-22T14:14:07+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/diagnostics/formal_barrier_sigma0p20_20260822/AUTHORITATIVE_FINAL_BARRIER_GATE.json",
+      "sha256": "cd221088cc893eabc359036a75aaa89af7f2101739601d4c3375daeafd6f38dd",
+      "authority": "module_validation",
+      "observed_at": "2026-08-22T14:14:07+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/diagnostics/formal_barrier_sigma0p20_20260822/strategy_learning_record.json",
+      "sha256": "1dfa7c7b1bf22c177fcbd0e088309512e9a2d1fb7fc8bd3675221a9ea0f1e3cb",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-22T14:14:07+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/diagnostics/formal_barrier_sigma0p20_20260822/excel_promotion_correction_receipt.json",
+      "sha256": "9a12a0264e8367014560888829e6828ba3e36571987f8cd70968faa36acbf92e",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-22T14:14:07+08:00"
+    },
+    {
+      "locator": "outputs/c_h_ts_barrier_20260822/课题一TS.xlsx",
+      "sha256": "ba168410314e6edab823aaea360246982099c19f940bc4e37ce6ae6470c4cef8",
+      "authority": "repository_document",
+      "observed_at": "2026-08-22T14:14:07+08:00"
+    },
+    {
+      "locator": "data/project_registry.sqlite3",
+      "sha256": "963a9c8d25d66d569883e10916987654c5530625b906a089b61560f1030594e8",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-22T14:14:07+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-vfa-9721851-done-diagnostic-mode-20260822",
+    "task-fe110-c-h-to-ch-dimer-9720181-done-soft-review-20260821"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

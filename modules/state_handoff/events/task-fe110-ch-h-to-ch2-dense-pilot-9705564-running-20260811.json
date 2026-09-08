@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-ch-h-to-ch2-dense-pilot-9705564-running-20260811",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-ch-h-to-ch2-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-11T21:29:13+08:00",
+  "recorded_at": "2026-08-11T13:29:13Z",
+  "summary": "User-authorized stop of pilot 9705560 completed; replacement pilot 9705564 excludes gknew0336 and is RUN with active SCF output, while production NEB remains pending pilot validation.",
+  "payload": {
+    "objective": "Run the gated Fe(110) CH* + H* -> CH2* + * transition-state workflow from the accepted A initial state to the compatible optimized CH2* final state.",
+    "phase": "active",
+    "current_evidence": [
+      "Pilot job `9705560` was stopped through explicit job-bound user authorization and the hash-bound STOP_JOB execution gate; LSF reported `EXIT`.",
+      "The replacement same-path pilot retains seven internal images, 84 total ranks, 12 ranks per image, and unchanged VASP/NEB scientific settings, while its LSF resource request excludes `gknew0336`.",
+      "Replacement pilot job `9705564` is scheduler RUN on `gknew0224`, `gknew0637`, and `gknew0720`; the allocation does not include `gknew0336`.",
+      "The replacement pilot has entered SCF and its OUTCAR files have grown during monitoring, but it has not completed the required one ionic step and has not passed canonical pilot validation.",
+      "The user requested hourly rather than minute-level monitoring. Production ordinary NEB remains unsubmitted until the pilot is scheduler DONE, canonical pilot validation passes, and the refreshed gate explicitly allows SUBMIT_VASP."
+    ],
+    "one_executable_step": "At the next hourly checkpoint, query pilot job 9705564. If DONE, collect all seven internal-image outputs, run canonical pilot validation, refresh the production preflight and execution gate, and submit production ordinary NEB only when SUBMIT_VASP is explicitly allowed.",
+    "submission_boundary": "Do not stop or resubmit pilot 9705564 without new job-bound user authority. Do not submit production NEB unless the completed pilot passes validation and the current hash-bound execution gate explicitly allows SUBMIT_VASP.",
+    "done_when": [
+      "The ordinary NEB produces a technically usable reaction path or a gate-supported method handoff.",
+      "Any highest-image TS candidate is refined and validated through the owning module before a barrier claim.",
+      "IS, TS, and FS results remain compatible and hash-bound; no free-energy or kinetics claim is made without separate thermochemical work."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_7img_v5_84r/stop_record_9705560.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_7img_v6_84r_no0336/submission_preflight.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_7img_v6_84r_no0336/ts_search_decision.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_7img_v6_84r_no0336/submission_record.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_7img_v6_84r_no0336/scheduler_evidence.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_7img_v5_84r/stop_record_9705560.json",
+      "sha256": "41e554f86be4fe056e29f063e59cd59591c27c44239096e929a03eefa8d2941a",
+      "authority": "scheduler",
+      "observed_at": "2026-08-11T21:29:13+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_7img_v6_84r_no0336/submission_preflight.json",
+      "sha256": "4a69df384362c2c6964efe5bf6f804f1893b46f098fad85fb2795d7a360150d1",
+      "authority": "module_validation",
+      "observed_at": "2026-08-11T21:29:13+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_7img_v6_84r_no0336/ts_search_decision.json",
+      "sha256": "441942ce4f8fc856e59b0b73e20e6c0c4d8de7349e1af6dff0a71120dd2a7eaf",
+      "authority": "module_validation",
+      "observed_at": "2026-08-11T21:29:13+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_7img_v6_84r_no0336/submission_record.json",
+      "sha256": "4f594b26ae915641270b6969434c5a12fae3c0b15c8d8f646bb4f22bea024c25",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-11T21:29:13+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_7img_v6_84r_no0336/scheduler_evidence.json",
+      "sha256": "36dfcdd7fa1d7020cd2de28006c012a48635f7846e9168189c22082ba0c0815c",
+      "authority": "scheduler",
+      "observed_at": "2026-08-11T21:29:13+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-ch-h-to-ch2-dense-pilot-9705560-scf-stalled-20260811"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

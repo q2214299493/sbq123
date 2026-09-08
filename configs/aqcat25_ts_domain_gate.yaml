@@ -1,0 +1,47 @@
+version: 1
+calibration_id: aqcat25_fe45_ts_domain_pending_v1
+status: uncalibrated
+compatibility_branch: true_fe110_5layer_5x5x1
+checkpoint_scope: exact_checkpoint_sha256_required
+
+independent_validation:
+  minimum_samples: 5
+  required_roles:
+    - rising_path
+    - near_saddle
+    - falling_path
+  training_structure_overlap_allowed: false
+  require_vasp_completed_electronic_converged_force_labels: true
+  require_exact_structure_predictions: true
+  require_unique_structure_sha256: true
+  exclude_all_ts_training_and_adsorption_replay_hashes: true
+
+validation_schedule:
+  every_reviewed_neb_path_requires_new_validation: false
+  initial_bootstrap_required_while_status_is_uncalibrated: true
+  revalidation_triggers:
+    - checkpoint_sha256_changed
+    - compatibility_branch_changed
+    - reaction_domain_outside_calibrated_scope
+    - novelty_or_uncertainty_gate_failed
+    - periodic_audit_due
+  unchanged_in_domain_path_may_reuse_calibration: true
+
+existing_vasp_force_label_reuse:
+  allowed: true
+  must_match_exact_structure_and_compatibility: true
+  must_have_completed_electronic_converged_force_evidence: true
+  energy_only_label_is_insufficient: true
+
+force_acceptance: null
+
+decision_rules:
+  local_candidate_force_agreement_establishes_ts_domain: false
+  adsorption_calibration_thresholds_establish_ts_domain: false
+  uncalibrated_gate_may_report_acceleration_ready: false
+  calibration_requires_reviewed_independent_ts_validation_set: true
+  held_out_validation_samples_may_enter_same_round_training: false
+  bootstrap_metrics_require_explicit_calibration_review: true
+  bootstrap_review_thresholds_may_not_exceed_local_force_screen_safety_ceilings: true
+  reuse_requires_executable_scope_novelty_and_periodic_audit_review: true
+  aqcat_values_reportable_as_dft: false

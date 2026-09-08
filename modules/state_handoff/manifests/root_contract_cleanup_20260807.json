@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "document_kind": "repository_cleanup_manifest",
+  "bundle_id": "root-contract-cleanup-20260807",
+  "reason": "Keep the legitimate GitHub Actions directory, remove regenerable package metadata, and separately remove only the local node_modules junction without touching its external target.",
+  "selectors": [
+    {
+      "root": "sbq_catalyst_agent_workflow.egg-info",
+      "git_status": "ignored",
+      "expected_count": 6,
+      "disposition": "delete",
+      "content_class": "regenerable",
+      "reason": "Remove setuptools-generated package metadata; pyproject.toml remains authoritative and .gitignore already excludes regenerated egg-info directories."
+    }
+  ],
+  "items": []
+}

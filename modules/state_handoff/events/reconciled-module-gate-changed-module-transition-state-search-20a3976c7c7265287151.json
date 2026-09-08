@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "event_id": "reconciled-module-gate-changed-module-transition-state-search-20a3976c7c7265287151",
+  "event_type": "module_gate_changed",
+  "entity": {
+    "kind": "module",
+    "id": "transition_state_search",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-07T00:00:08+08:00",
+  "recorded_at": "2026-08-07T00:00:08+08:00",
+  "summary": "Reconcile module:transition_state_search; preserve module-gate-fe110-co-dimer-mode-accepted-20260807 as the single effective event and supersede conflicting peers. Refresh the hash-bound local evidence after user approval.",
+  "payload": {
+    "module": "transition_state_search",
+    "status": "Blocked",
+    "depends_on": "reviewed numerical frequency thresholds and confirmed partial-Hessian active-set convergence",
+    "current_gate": "Dimer job `9656664` passes the hard gate, its Force/Torque soft review is accepted, and VFA mode 6 at `537.451689 cm^-1` is accepted as the target mode. The candidate remains `VFA_VALIDATED_GRADE_BLOCKED`, `Ungraded`, and not kinetic-eligible; connectivity is optional for Dimer"
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806/validation_pipeline_status.json",
+      "sha256": "65521a91a9313b1722a3bdc45a56fbc866dbf1955f97285b3682eb415a03fe34",
+      "authority": "module_validation",
+      "observed_at": "2026-08-06T16:26:08.992234Z"
+    },
+    {
+      "locator": "configs/ts_validation_pipeline.yaml",
+      "sha256": "9625e892bc7d9a791e278a68e012751415fb314cfb7f10a0ae23eb5d921bb8fb",
+      "authority": "repository_document",
+      "observed_at": "2026-08-06T16:25:36.021111Z"
+    }
+  ],
+  "supersedes": [
+    "module-gate-fe110-co-connectivity-needs-review-20260806",
+    "module-gate-fe110-co-dimer-mode-accepted-20260807"
+  ],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "cross_module_change",
+      "event_chain_reconciliation",
+      "scientific_method_change"
+    ],
+    "status": "pending"
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-neb9745217-accepted-dimer9746548-submitted-20260907",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-07T11:17:05Z",
+  "recorded_at": "2026-09-07T11:17:05Z",
+  "summary": "User accepted the completed ordinary NEB for refinement. Corrected the earlier optimizer-failure interpretation via append-only strategy outcome revision to stage_pass. Final periodic equivalence and local 01-02-03 triad reviewed; image 02 Dimer submitted once as LSF 9746548, currently PEND.",
+  "payload": {
+    "objective": "Monitor Dimer job 9746548, refining the O-H local maximum from user-accepted NEB job 9745217.",
+    "phase": "active",
+    "current_evidence": [
+      "Job 9745217 is DONE, 53 ionic steps, all five normal/electronic and required-accuracy markers present. User explicitly accepts the ordinary NEB stage; strict parser's 0.053161 eV/A diagnostic retained without calling it a verified optimizer failure.",
+      "Integer-lattice unwrapping preserves every source structure. Geometry PASS, OH monotonically 2.0320 -> 1.8038 -> 1.5163 -> 1.2252 -> 1.0469 -> 1.0097 -> 0.9989 A; CC/CO/CH backbone retained.",
+      "Local TOTEN maximum is image 02, 0.003372 eV above image 03. Reviewed triad 01-02-03 passes Dimer hard checks.",
+      "MODECAR is normalized with zero fixed components and O48/H50 reaction-center norm fraction 0.960978; plus/minus displacement respectively forms/breaks OH.",
+      "80-core Dimer uses repository stage profile: ENCUT400, 5x5x1, SIGMA0.20, EDIFF1e-7, EDIFFG-0.02. Current gate allowed START_DIMER.",
+      "LSF job 9746548 submitted once; scheduler PEND at 2026-09-07T11:15:50Z. No new ordinary NEB was launched.",
+      "The strategy store's effective outcome for vasp_neb_9745217_submitted_20260906 is stage_pass; original immutable failure row preserved with a verified correction chain. No successful TS template or barrier exists yet."
+    ],
+    "one_executable_step": "Query job 9746548 and its DIMCAR/OUTCAR compact progress. At terminal state, collect and validate source/final geometry, VASP maximum atomic force, electronic completion, curvature and mode. Then prepare the applicable local frequency gate.",
+    "submission_boundary": "The one Dimer refinement was submitted under the user's instruction to execute the next step. Do not duplicate it or submit a different computation without applicable evidence and authorization. NEB stage acceptance is not final TS or barrier acceptance.",
+    "done_when": [
+      "Job 9746548 reaches a terminal state with scheduler and Dimer output evidence collected.",
+      "Dimer convergence and mode are reviewed through the owning module; record next validation stage without premature TS/barrier acceptance."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/dimer_job9745217_image02_20260907/submission_record.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/dimer_job9745217_image02_20260907/scheduler_evidence_submitted.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/dimer_job9745217_image02_20260907/submission_preflight.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/job9745217_accepted_parent_20260907/user_stage_acceptance.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/job9745217_accepted_parent_20260907/strategy_correction_receipt.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/job9745217_accepted_parent_20260907/normalization_evidence.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/dimer_job9745217_image02_20260907/submission_record.json",
+      "sha256": "ee6a6511b2d3c035722b0b3e316423a504ff6fb39969f0577f7f77eaa0fa26ab",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-07T11:17:05Z"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/dimer_job9745217_image02_20260907/scheduler_evidence_submitted.json",
+      "sha256": "825fb2f841e30810efbb8716e1a6db739b798eb1fced7d2535f511132dccc400",
+      "authority": "scheduler",
+      "observed_at": "2026-09-07T11:17:05Z"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/dimer_job9745217_image02_20260907/submission_preflight.json",
+      "sha256": "1fd29f4d36bd373e770546055409d9a401def8968c32019fa5400c6af06e4f25",
+      "authority": "module_validation",
+      "observed_at": "2026-09-07T11:17:05Z"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/job9745217_accepted_parent_20260907/user_stage_acceptance.json",
+      "sha256": "277016afef6dfb0f5f59e83c7cff4629325cb8e46a7e9c4be1c8b477c63ecb7d",
+      "authority": "user_authorization",
+      "observed_at": "2026-09-07T11:17:05Z"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/job9745217_accepted_parent_20260907/strategy_correction_receipt.json",
+      "sha256": "b9d81c26e77a08b8ecfd2ae4fe89c2ff5d8572d8ea041a95dba544715f1e64a4",
+      "authority": "calculation_registry",
+      "observed_at": "2026-09-07T11:17:05Z"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/job9745217_accepted_parent_20260907/normalization_evidence.json",
+      "sha256": "766145178bffc65a3831e78667bcf36ef1129c902e438916e462d45ced288524",
+      "authority": "structure_output",
+      "observed_at": "2026-09-07T11:17:05Z"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-job9745217-closeout-20260907"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

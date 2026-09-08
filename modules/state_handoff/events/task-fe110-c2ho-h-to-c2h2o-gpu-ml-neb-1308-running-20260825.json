@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-gpu-ml-neb-1308-running-20260825",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-25T20:15:06+08:00",
+  "recorded_at": "2026-08-25T12:15:06Z",
+  "summary": "MZ73 AQCat25 path job 1308 is RUNNING with all 13 images initialized; ordinary ML-NEB reached step 5, but the path is not converged or scientifically reviewed yet.",
+  "payload": {
+    "objective": "Generate and review a complete AQCat25 GPU path candidate for Fe(110) C2HO* + H* -> C2H2O* + * using reactive IS-A and FS-A.",
+    "phase": "active",
+    "current_evidence": [
+      "Slurm job 1308 is RUNNING on MZ73.",
+      "The hash-bound producer state reports 13 images and stage ordinary_ml_neb_running at step 5.",
+      "The recorded fmax changed from 15.4455 to 2.8912 eV/A over steps 0-5; this is early optimizer progress, not convergence.",
+      "IS-B remains a lowest-energy reference only and is not an endpoint in this path."
+    ],
+    "one_executable_step": "Wait for job 1308 to reach terminal state, return all GPU artifacts to work, then validate hashes, convergence, path continuity, O-H progression, forces, energies, and domain limitations.",
+    "submission_boundary": "Only GPU job 1308 is active. No VASP NEB, CI-NEB, DIMER, frequency, force-label, or barrier action is authorized.",
+    "done_when": [
+      "Job 1308 has terminal producer and scheduler evidence.",
+      "The returned 13-image path passes work-side manifest and geometry review.",
+      "A VASP validation/refinement recommendation is ready for separate user authorization."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_ml_neb_production_20260825/runtime_checkpoint_job1308_20260825T2015.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_ml_neb_production_20260825/submission_evidence_20260825.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_ml_neb_production_20260825/runtime_checkpoint_job1308_20260825T2015.json",
+      "sha256": "22bf0612e1a40f4002185432f0a8b407aaf549379847ca89981ef420917c17ad",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-25T20:15:06+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-gpu-ml-neb-1308-submitted-20260825"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

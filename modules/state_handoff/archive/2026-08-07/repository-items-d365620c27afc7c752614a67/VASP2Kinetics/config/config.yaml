@@ -1,0 +1,53 @@
+project:
+  name: VASP2Kinetics
+  version: 0.1.0
+
+paths:
+  data_path: data
+  output_path: output
+  raw_vasp_cases: data/raw/vasp_cases
+  processed_data: data/processed
+
+logging:
+  level: INFO
+  console: true
+  file: logs/kinetic_builder.log
+  phase_files:
+    parser: logs/parser.log
+    simulation: logs/simulation.log
+    workflow: logs/workflow.log
+
+validator:
+  energy_tolerance: 0.05
+  allowed_elements:
+    - C
+    - H
+    - O
+    - Fe
+
+catkinas:
+  input_path: data/processed/kinetic_dataset.json
+  output_path: output/catkinas_project
+  allow_warning: true
+
+zacros:
+  surface_config: surface_config.yaml
+  output_path: output/zacros_project
+  allow_warning: true
+
+simulation:
+  catkinas_command: path/to/catkinas
+  zacros_command: path/to/zacros
+  timeout: 3600
+
+analysis:
+  result_path: output
+  output_path: output/results
+
+report:
+  output_path: output/report
+  template_path: src/analysis/templates/report.md
+
+workflow:
+  software: CATKINAS
+  output_root: output

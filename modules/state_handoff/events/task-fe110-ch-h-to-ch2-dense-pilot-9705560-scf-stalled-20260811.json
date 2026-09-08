@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-ch-h-to-ch2-dense-pilot-9705560-scf-stalled-20260811",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-ch-h-to-ch2-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-11T20:32:43+08:00",
+  "recorded_at": "2026-08-11T12:32:43Z",
+  "summary": "Startup-stalled pilot 9705208 was stopped with user and gate authority; reduced-rank pilot 9705560 entered SCF but then stalled, and a host-excluding replacement is prepared but not submitted.",
+  "payload": {
+    "objective": "Run the gated Fe(110) CH* + H* -> CH2* + * transition-state workflow from the accepted A initial state to the compatible optimized CH2* final state.",
+    "phase": "active",
+    "current_evidence": [
+      "User-authorized STOP_JOB for startup-stalled pilot `9705208` passed the hash-bound execution gate; the controlled stop command was issued and LSF reported the job as `EXIT`.",
+      "A resource-adjusted same-path pilot using seven internal images, 84 total ranks, 12 ranks per image, and unchanged VASP/NEB scientific settings passed preflight and was submitted as job `9705560`.",
+      "Job `9705560` entered VASP and created all seven OUTCAR/OSZICAR pairs, but repeated bounded checks found unchanged DAV counts `3/2/1/1/1/1/2` and zero completed ionic steps.",
+      "Both stalled allocations included execution host `gknew0336`; LSF confirms `hname` is a selectable resource, so a new 84-rank pilot excluding `gknew0336` has been prepared and passed preflight plus `READY_FOR_NEB_PILOT` gate review.",
+      "Job `9705560` remains scheduler RUN and has no job-bound stop authorization. The replacement pilot and production ordinary NEB are not submitted."
+    ],
+    "one_executable_step": "Obtain explicit job-bound authority to stop pilot 9705560, then submit the prepared same-path 84-rank pilot that excludes gknew0336; validate it before any production SUBMIT_VASP action.",
+    "submission_boundary": "Do not terminate job 9705560 without explicit user authority. Do not submit production NEB, CI-NEB, DIMER, frequency, connectivity, or report a barrier until the current hash-bound execution gate explicitly allows the exact action.",
+    "done_when": [
+      "The ordinary NEB produces a technically usable reaction path or a gate-supported method handoff.",
+      "Any highest-image TS candidate is refined and validated through the owning module before a barrier claim.",
+      "IS, TS, and FS results remain compatible and hash-bound; no free-energy or kinetics claim is made without separate thermochemical work."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_7img_v4_112r/stop_record_9705208.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_7img_v5_84r/submission_record.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_7img_v5_84r/scheduler_evidence.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_7img_v5_84r/scf_startup_diagnosis.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_7img_v6_84r_no0336/submission_preflight.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_7img_v6_84r_no0336/ts_search_decision.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_7img_v4_112r/stop_record_9705208.json",
+      "sha256": "4b2a7db5b21cad83fce7461b5632c5aeb22c79b033d7e9d2de244875197dd1ea",
+      "authority": "scheduler",
+      "observed_at": "2026-08-11T20:32:43+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_7img_v5_84r/submission_record.json",
+      "sha256": "7c7d828cc35ba4ac5408530a650ae528f6247ea225432695b3c754e1f27fe0da",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-11T20:32:43+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_7img_v5_84r/scheduler_evidence.json",
+      "sha256": "a11b354f0392c36e5a16c39741e96d9c3c16997a3eec1768497d2cb24d58a50b",
+      "authority": "scheduler",
+      "observed_at": "2026-08-11T20:32:43+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_7img_v5_84r/scf_startup_diagnosis.json",
+      "sha256": "cf8426df645b1183438045dfcec1b9e2b752da51f22b7b9f5d4db98bb3941a2d",
+      "authority": "module_validation",
+      "observed_at": "2026-08-11T20:32:43+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_7img_v6_84r_no0336/submission_preflight.json",
+      "sha256": "4a69df384362c2c6964efe5bf6f804f1893b46f098fad85fb2795d7a360150d1",
+      "authority": "module_validation",
+      "observed_at": "2026-08-11T20:32:43+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/runs/ordinary_neb_pilot_7img_v6_84r_no0336/ts_search_decision.json",
+      "sha256": "a130c967a8e674ca5f501ae38ae25630b74a8a4a7f6b6a283e274d39c1ccac47",
+      "authority": "module_validation",
+      "observed_at": "2026-08-11T20:32:43+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-ch-h-to-ch2-dense-pilot-9705208-startup-blocked-20260811"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

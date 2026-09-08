@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-ch-h-to-ch2-vfa-9710404-submitted-20260815",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-ch-h-to-ch2-ts",
+    "module": "ts_vibrational_validation"
+  },
+  "occurred_at": "2026-08-15T17:26:09+08:00",
+  "recorded_at": "2026-08-15T09:26:09Z",
+  "summary": "The reviewed eight-atom local partial-Hessian VFA bundle passed the current START_VFA gate and job 9710404 is RUN.",
+  "payload": {
+    "objective": "Validate the Fe(110) CH* + H* -> CH2* + * DIMER candidate with a contract-bound local partial Hessian before any TS claim.",
+    "phase": "active",
+    "current_evidence": [
+      "The user explicitly authorized submission of the prepared local partial-Hessian frequency calculation.",
+      "The INCAR custodian read-only validation found no blocker and recommended no parameter change; the owning VFA hard gate remained PASS.",
+      "The refreshed authoritative execution decision is READY_FOR_DIAGNOSTIC_VFA and lists START_VFA as the only allowed action.",
+      "The exact bundle hash is 8ba050fb1f1aff8fbe5a70071bf944cabe34b332b182fdc2a24eea95819002d0 and remote POSCAR, INCAR, KPOINTS, POTCAR, script, handoff, and scope-review hashes match local evidence.",
+      "LSF job 9710404 is scheduler RUN on 32 ranks at gknew054 in ~/sbq/Fe110/ts/ch_h_to_ch2_20260810/vfa_local_ch_fe5_from_dimer9709074_20260814.",
+      "The submission is registered as fe110_ts_ch_h_to_ch2_vfa_9710404. Scheduler RUN does not establish frequency completion, imaginary-mode count, TS acceptance, grade, or barrier validity."
+    ],
+    "one_executable_step": "Monitor VFA job 9710404. At terminal state collect and hash-bind OUTCAR and related outputs, run canonical VFA analysis, record every imaginary frequency, and review whether the principal eigenvector is the intended C45-H47 forming mode.",
+    "submission_boundary": "Do not stop, restart, resubmit, launch connectivity or another frequency calculation, accept a TS, or claim a barrier without new live evidence and the exact current execution-gate action plus any required user authority.",
+    "done_when": [
+      "The local partial-Hessian calculation completes normally with complete bound frequency/eigenvector evidence.",
+      "Exactly one raw imaginary mode is reviewed and accepted as the intended C45-H47 reaction coordinate before TS acceptance.",
+      "No free-energy or kinetics claim is made without consistent IS/TS/FS thermochemical corrections using this same active-set definition."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/submission_preflight.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/AUTHORITATIVE_NEB_EXECUTION_GATE.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/vfa_start_authorization_20260815.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/submission_record.json`",
+      "`calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/scheduler_evidence.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/submission_preflight.json",
+      "sha256": "5bb87465407276cdf5d7883359073013e580bd5d76e219dd30dcdd63b0d0ab37",
+      "authority": "module_validation",
+      "observed_at": "2026-08-15T17:26:09+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/AUTHORITATIVE_NEB_EXECUTION_GATE.json",
+      "sha256": "fa1b223865473c18f9415151c92690ebbf44ed7d7f13ae2cc0a7462255e23656",
+      "authority": "module_validation",
+      "observed_at": "2026-08-15T17:26:09+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/vfa_start_authorization_20260815.json",
+      "sha256": "bb895e591186e31ae51b646f784db41edb10f838b739b29dd25c708e39ffdff0",
+      "authority": "user_authorization",
+      "observed_at": "2026-08-15T17:22:59+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/submission_record.json",
+      "sha256": "abdea456afd6fed9f671497889edb7324d324bd6402928df8f53c19a5e4491a1",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-15T17:26:09+08:00"
+    },
+    {
+      "locator": "calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/scheduler_evidence.json",
+      "sha256": "d412e69360944c9789b516e55b5568086caffa344a8ed5d82b47afb9e714b6b0",
+      "authority": "scheduler",
+      "observed_at": "2026-08-15T17:24:34+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-ch-h-to-ch2-vfa-local-prepared-not-submitted-20260814"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-image02-relax-9737143-done-distinct-minimum-20260901",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-01T15:55:59.9795728+08:00",
+  "recorded_at": "2026-09-01T07:55:59.9819352Z",
+  "summary": "Independent image 02 relaxation job 9737143 is DONE and converged to a distinct C2HO*+H* coadsorption local minimum about 0.0507 eV above IS-A; it is registered as an endpoint candidate but does not prove either split reaction segment or a TS.",
+  "payload": {
+    "objective": "Obtain user direction on whether to rebuild the failed O-H path as two reviewed segments using the independently converged image 02 coadsorption minimum candidate.",
+    "phase": "active",
+    "current_evidence": [
+      "LSF job 9737143 is DONE successfully; exact scheduler evidence is stored locally.",
+      "VASP completed normally after 82 ionic steps, every ionic step remained below NELM=200, and the final electronic step used 7 iterations.",
+      "The reached-required-accuracy marker is present and the final maximum movable-atom force is 0.0192886 eV/A on zero-based O47, below the 0.02 eV/A target.",
+      "Final connectivity remains C2HO*+H*: C45-C46=1.4152 A, C46-O47=1.2842 A, retained C45-H48=1.1004 A, while O47-H49=2.6693 A and no new C-H bond forms.",
+      "H49 is independently surface-bound nearest zero-based Fe37 at 1.7157 A; the structure is distinct from IS-A and FS-A and lies 0.050664 eV above compatible IS-A TOTEN.",
+      "The final geometry passed collision, atom-order, cell, fixed-layer, and chemistry-aware checks.",
+      "The accepted coadsorption result and compatible final TOTEN were automatically registered as calculation fe110_ads_c2ho_h_c2h2o_9737143 through the append-only registry batch.",
+      "This establishes a local-minimum endpoint candidate only; it does not accept a TS, barrier, or connectivity of either proposed segment."
+    ],
+    "one_executable_step": "After user direction, either prepare review-only segmented paths IS-A -> image02 minimum and image02 minimum -> FS-A, or retain the result as a database reference and choose a different path reconstruction; do not submit calculations in the same step.",
+    "submission_boundary": "No active VASP job remains. Do not automatically submit segmented NEB, GPU paths, Dimer, frequency, TS, barrier, restart, or resubmission work.",
+    "done_when": [
+      "The user authorizes or declines use of the converged image 02 structure as a path-splitting endpoint candidate.",
+      "If authorized, both proposed segments are constructed and pass atom mapping, periodic branch, endpoint, geometry, reaction-coordinate, dist.pl, and nebmovie.pl 0 review before any separate submission decision."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/intermediate_image02_relax_20260901/completion_review.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/intermediate_image02_relax_20260901/scheduler_done_evidence.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/intermediate_image02_relax_20260901/registry_completion_receipt.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/intermediate_image02_relax_20260901/completion_review.json",
+      "sha256": "11d907fd759eaba653306bedff10dbba4b5967459edb6d4f46891fe950562bfa",
+      "authority": "module_validation",
+      "observed_at": "2026-09-01T15:55:59.9795728+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/intermediate_image02_relax_20260901/scheduler_done_evidence.json",
+      "sha256": "61d272005c26564f642f0eb80edfef9b30e10b3f25cbb11071d1b6726681c1f8",
+      "authority": "scheduler",
+      "observed_at": "2026-09-01T15:55:59.9795728+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/intermediate_image02_relax_20260901/registry_completion_receipt.json",
+      "sha256": "061dd148f1c31994a9eb6b280c938a2bbcf3880d43250da042c5f0bd04f18360",
+      "authority": "repository_document",
+      "observed_at": "2026-09-01T15:55:59.9795728+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-image02-intermediate-relax-9737143-submitted-20260901"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

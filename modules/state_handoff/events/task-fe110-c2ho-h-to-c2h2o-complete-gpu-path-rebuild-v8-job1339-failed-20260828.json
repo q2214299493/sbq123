@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v8-job1339-failed-20260828",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-28T15:50:18.6348764+08:00",
+  "recorded_at": "2026-08-28T07:50:18.6348764Z",
+  "summary": "MZ73 GPU job 1339 ended with producer exit code 1 after completing the 8-to-6-to-4-to-3 restraint-release stages; the post-strength-3 redistribution failed the maximum single movable atom-step geometry guard.",
+  "payload": {
+    "objective": "Await explicit direction before preparing a review-only correction to the product-side reaction-coordinate redistribution.",
+    "phase": "active",
+    "current_evidence": [
+      "Job 1339 is absent from the active Slurm queue; MZ73 provides no terminal accounting, while the producer record is authoritative for process status and reports failed with exit code 1 at 2026-08-28T04:52:07Z.",
+      "The strength-8 stage reached its 80-step cap at projected fmax 0.299 eV/A and correctly continued under the approved warning policy; strength 6, 4, and 3 then converged to projected fmax 0.095, 0.092, and 0.127 eV/A.",
+      "The hash-verified strength-3 snapshot passed the hard per-step geometry checks before redistribution, with maximum single movable atom step 0.792514 A.",
+      "A read-only exact replay shows redistribution restored five strict O-H transition-region images 10-14, but created a 1.076944 A move of zero-based H atom 48 between images 17 and 18, exceeding the 1.0 A hard limit.",
+      "All other replayed geometry checks passed: maximum adjacent RMSD 0.273924 A, C-C 1.399116-1.431307 A, minimum pair distance 0.981210 A, and continuous periodic branches.",
+      "Ordinary MatRIS ML-NEB and the AQCat25 fixed-path audit did not start. No complete GPU path, VASP/VTST job, Dimer parent, TS, or barrier exists from job 1339."
+    ],
+    "one_executable_step": "If explicitly requested, revise only the product-side redistribution mapping to preserve full-coordinate arc length or add a product-side geometry anchor, and validate it with a no-model replay before any new GPU submission.",
+    "submission_boundary": "The authorization consumed by job 1339 does not permit an automatic retry. Do not relax the 1.0 A atom-step guard, submit GPU/VASP/VTST, fine-tune, prepare Dimer, or claim a TS/barrier without new evidence and explicit authority.",
+    "done_when": [
+      "The exact product-side redistribution defect is corrected without violating any hard geometry guard in a no-model replay.",
+      "Any subsequent GPU execution is separately authorized and produces terminal evidence."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/gpu_return_job1339_failure/failure_assessment.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/gpu_return_job1339_failure/producer_exit_record.failure.1339.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/gpu_return_job1339_failure/restraint_release_04_strength_3_complete/snapshot_manifest.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/gpu_return_job1339_failure/failure_assessment.work.json",
+      "sha256": "b9c70091ab874d26d8e458dc3b72f8c86dc80c9e7db625336282c2c8f2dbad4a",
+      "authority": "module_validation",
+      "observed_at": "2026-08-28T15:50:18.6348764+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/gpu_return_job1339_failure/producer_exit_record.failure.1339.json",
+      "sha256": "bf565de2e672efbf013b41e2794d63e37a2161d16b281fb27730c79bfdf6f10d",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-28T15:50:18.6348764+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v8_warning_release_20260828/gpu_return_job1339_failure/restraint_release_04_strength_3_complete/snapshot_manifest.json",
+      "sha256": "9913ab52fcb086d53b2dbd76023ba0da0015e5e2dafc294ec70201351c8e8109",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-28T15:50:18.6348764+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v8-job1339-submitted-20260828"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

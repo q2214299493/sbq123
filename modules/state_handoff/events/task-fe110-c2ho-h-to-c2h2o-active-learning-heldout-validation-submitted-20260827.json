@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-active-learning-heldout-validation-submitted-20260827",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-27T12:21:15.7814818+08:00",
+  "recorded_at": "2026-08-27T04:21:15.7838598Z",
+  "summary": "The seven accepted held-out TS-domain structures were submitted for frozen MatRIS/AQCat25 exact-structure prediction on MZ73 and compatible SIGMA=0.20 eV VASP static energy-force labels on sunboquan-codex.",
+  "payload": {
+    "objective": "Collect the accepted seven-structure held-out frozen-model predictions and compatible VASP static labels, then compare MatRIS/AQCat25 errors without training leakage.",
+    "phase": "active",
+    "current_evidence": [
+      "MZ73 Slurm job 1326 binds seven exact structures to frozen MatRIS and AQCat25 checkpoint hashes; no training is enabled.",
+      "LSF jobs 9731537 through 9731543 bind the same seven structures to NSW=0, ISMEAR=1, SIGMA=0.20 eV VASP static labels.",
+      "All seven diagnostic-static execution gates explicitly allowed SUBMIT_DIAGNOSTIC_VASP before submission.",
+      "held_boundary_12 remains diagnostic-only and is excluded from the six-structure primary aggregate.",
+      "No fine-tuning, checkpoint promotion, path rerun, micro-NEB, Dimer, frequency, TS acceptance, or barrier action is authorized."
+    ],
+    "one_executable_step": "Wait for GPU job 1326 and VASP jobs 9731537-9731543 to finish, collect and quality-check exact-structure outputs, then compare frozen MatRIS-VASP and AQCat25-VASP errors on the six disjoint primary structures with held_boundary_12 reported separately.",
+    "submission_boundary": "Only the recorded frozen predictions and VASP diagnostic static labels are submitted; all model-training and TS-production actions remain unauthorized.",
+    "done_when": [
+      "All eight jobs finish with complete quality-passed outputs.",
+      "Held-out force and relative-energy errors are reported for both frozen models on the six primary structures.",
+      "The diagnostic failure-boundary structure is reported separately and no calibrated-uncertainty or accepted-TS claim exceeds the evidence."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/heldout_validation_execution_20260827/gpu_prediction/submission_record.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/heldout_validation_execution_20260827/vasp_static_labels/batch_submission_record.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/active_learning_state.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/heldout_validation_execution_20260827/gpu_prediction/submission_record.json",
+      "sha256": "3d99aa5bfb9b4f322a917db3030ce187b0dcaac52852e2615ce60191bdfca59e",
+      "authority": "scheduler",
+      "observed_at": "2026-08-27T12:21:15.7814818+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/heldout_validation_execution_20260827/vasp_static_labels/batch_submission_record.json",
+      "sha256": "adcadb222964db741eade427bb2075b61fefed7fb15bb2afe5b477181ef03b87",
+      "authority": "scheduler",
+      "observed_at": "2026-08-27T12:21:15.7814818+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/active_learning_state.json",
+      "sha256": "459f251b2fca86536024acee68b502d83d0ea6087363ab512600a21e1a7b048f",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T12:21:15.7814818+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-active-learning-heldout-candidates-prepared-20260827"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-aqcat-prediction-batch-prepared-20260819",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-transition-state",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-19T23:35:00+08:00",
+  "recorded_at": "2026-08-19T15:35:00Z",
+  "summary": "A hash-bound five-image exact-structure AQCat25 force-prediction batch was prepared locally for MZ73 review; all structures and requests passed review, and no GPU upload or job submission occurred.",
+  "payload": {
+    "objective": "Run the reviewed exact-structure AQCat25 prediction batch for Fe(110) C* + H* -> CH* + * images 02-06 and compare the returned forces against the accepted VASP labels.",
+    "phase": "active",
+    "current_evidence": [
+      "The canonical controller prepared image 02-06 AQCat25 prediction requests in aqcat_force_predictions_round_000_sigma0p20_v2.",
+      "Each copied POSCAR is byte-identical to its accepted VASP force-label structure, and all five request hashes match the batch manifest.",
+      "All five aqcat25_ts_force_prediction_request documents pass the active-learning JSON Schema.",
+      "The MZ73 checkpoint path exists and its read-only observed SHA-256 matches the bound checkpoint hash e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50.",
+      "The batch uses portable POSIX relative request paths and automatic_submission=false.",
+      "No files were uploaded to MZ73 and no GPU job was submitted."
+    ],
+    "one_executable_step": "Await user review and explicit authorization before uploading and running the exact hash-bound five-image AQCat25 prediction batch on MZ73.",
+    "submission_boundary": "The current authorization covers local preparation and review only. No MZ73 upload, GPU execution, fine-tuning, additional VASP job, NEB, DIMER, frequency, connectivity, or barrier action is authorized.",
+    "done_when": [
+      "The exact five requests run against the bound checkpoint on MZ73 with producer exit evidence.",
+      "Returned predictions pass request, structure, checkpoint, finite-energy, and complete-force-array checks.",
+      "The aggregate AQCat25-versus-VASP force assessment is generated locally without promoting predicted or force-label energies to final results."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/aqcat_force_predictions_round_000_sigma0p20_v2/path_prediction_batch_request.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/aqcat_force_predictions_round_000_sigma0p20_v2/prediction_batch_review.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/active_learning_sigma0p20/active_learning_state.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/aqcat_force_predictions_round_000_sigma0p20_v2/path_prediction_batch_request.json",
+      "sha256": "da16e5d2a856c5384f99b9411550e83971d02284d2e052cf70e8fc197c63c1dc",
+      "authority": "module_validation",
+      "observed_at": "2026-08-19T23:35:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/aqcat_force_predictions_round_000_sigma0p20_v2/prediction_batch_review.json",
+      "sha256": "06abb6e9e5351a68c30489d3a52eca0a58e5e4e1413577af890bcda2b7c79f26",
+      "authority": "module_validation",
+      "observed_at": "2026-08-19T23:35:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/active_learning_sigma0p20/active_learning_state.json",
+      "sha256": "08dc0939bc298b72316987da5ca869285bc0e581c12116226f403058fecd27cf",
+      "authority": "module_validation",
+      "observed_at": "2026-08-19T23:35:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-force-label-batch-ingested-20260819"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-co-dimer-vfa-reconciled-20260805",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-co-dissociation",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-05T10:38:46+08:00",
+  "recorded_at": "2026-08-05T10:38:46+08:00",
+  "summary": "Reconcile the Fe(110) CO-dissociation task after stopping Dimer continuation 9694894 and completing diagnostic VFA 9694935.",
+  "payload": {
+    "objective": "Preserve and assess the Fe(110) CO-dissociation Dimer and diagnostic C/O-only partial-Hessian frequency evidence without promoting an unvalidated transition state.",
+    "phase": "active",
+    "current_evidence": [
+      "Compatibility branch: `true_fe110_5layer_5x5x1`; reaction contract and DFT basis remain unchanged.",
+      "Completed Dimer job `9656664` has normal/electronic completion, VASP maximum atomic force `0.016036 eV/A < 0.02 eV/A`, and negative curvature `-17.98604 eV/A2`.",
+      "Its final complete DIMCAR step has Force `0.05994 eV/A` and Torque `0.14817 eV/A`; both remain soft warnings and the bound human decision permits diagnostic frequency handoff only.",
+      "Dimer continuation job `9694894` was stopped through the hash-bound execution gate at the user's request; live LSF evidence confirms scheduler `EXIT`.",
+      "C/O-only partial-Hessian VFA job `9694935` is scheduler `DONE`, normally completed without fatal errors, and electronically converged in 26 steps at `EDIFF=1E-7`.",
+      "The diagnostic spectrum has five real modes and one imaginary mode at `537.451689 cm^-1`; C/O dominate and `98.37%` of their relative displacement projects onto the C-O bond direction.",
+      "The result remains `Ungraded` because it is a C/O-only diagnostic and project frequency thresholds and bidirectional-connectivity evidence are incomplete."
+    ],
+    "one_executable_step": "Preserve the stopped Dimer continuation and completed diagnostic VFA evidence. Do not launch another calculation without a new explicit authorization and current hash-bound gate.",
+    "submission_boundary": "No expanded active-set VFA, mode-displacement connectivity run, matched static, CI-NEB, another Dimer, or barrier report is authorized. The diagnostic VFA does not establish Grade A or a validated TS.",
+    "done_when": [
+      "Stopped job `9694894` and completed job `9694935` remain preserved with hash-bound evidence.",
+      "Any subsequent active-set convergence, connectivity, Grade-A, or barrier action receives a new explicit authorization and execution gate."
+    ],
+    "authoritative_references": [
+      "Scientific and execution gates: `modules/transition_state_search/README.md`.",
+      "Numerical branch: `configs/true_fe110_production.yaml`.",
+      "Backend roles: `configs/execution_backends.yaml`.",
+      "Sole execution authority: `scripts/ts_strategy_engine/execution_gate.py`."
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "tasks/current_task.md",
+      "sha256": "b636c6aa09a87d16a9416f17b88c88dcf25c031981e44be513a04eed584d8901",
+      "authority": "repository_document",
+      "observed_at": "2026-08-05T10:38:46+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/dimer_refine_job9656664_ediffg005_20260804/scheduler_evidence_exit_20260805.json",
+      "sha256": "5f6ef5b5544d33fc0718e1795011a0ca6a8f4eb5e07d5da7a8b287b1fecb69b5",
+      "authority": "scheduler",
+      "observed_at": "2026-08-05T02:38:29Z"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/vfa_diagnostic_from_dimer9656664_co_only_20260805/scheduler_done_evidence.json",
+      "sha256": "71c30d09549f2baf8e63f815a58a781c15ac01c47d44581cec9183b4413a7c82",
+      "authority": "scheduler",
+      "observed_at": "2026-08-05T02:24:48Z"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/vfa_diagnostic_from_dimer9656664_co_only_20260805/vfa_analysis.json",
+      "sha256": "32bc11370f216542170b84158bf3b3c7a47c5709975b1c76ad54258b6527b730",
+      "authority": "module_validation",
+      "observed_at": "2026-08-05T10:38:46+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-co-neb-9655921-20260803",
+    "task-fe110-co-paused-candidate-selection-20260803",
+    "task-fe110-co-dimer-9656664-refine-submitted-20260804"
+  ],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "live_scheduler_state",
+      "scientific_method_transition",
+      "user_approved_state_sync"
+    ],
+    "status": "pending"
+  }
+}

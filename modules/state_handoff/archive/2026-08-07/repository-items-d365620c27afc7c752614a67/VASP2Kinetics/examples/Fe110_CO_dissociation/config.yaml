@@ -1,0 +1,40 @@
+project:
+  name: VASP2Kinetics
+  version: 0.1.0
+paths:
+  data_path: data
+  output_path: ../../output
+  raw_vasp_cases: vasp
+  processed_data: data/processed
+logging:
+  level: INFO
+  console: true
+  file: logs/application.log
+  phase_files:
+    parser: logs/parser.log
+    simulation: logs/simulation.log
+    workflow: logs/workflow.log
+validator:
+  energy_tolerance: 0.05
+  allowed_elements: [C, H, O, Fe]
+catkinas:
+  input_path: data/processed/kinetic_dataset.json
+  output_path: ../../output/Fe110_CO_dissociation/catkinas_project
+  allow_warning: true
+zacros:
+  surface_config: surface.yaml
+  output_path: ../../output/Fe110_CO_dissociation/zacros_project
+  allow_warning: true
+simulation:
+  catkinas_command: path/to/catkinas
+  zacros_command: path/to/zacros
+  timeout: 3600
+analysis:
+  result_path: ../../output/Fe110_CO_dissociation
+  output_path: ../../output/Fe110_CO_dissociation
+report:
+  output_path: ../../output/Fe110_CO_dissociation
+  template_path: ../../src/analysis/templates/report.md
+workflow:
+  software: CATKINAS
+  output_root: ../../output

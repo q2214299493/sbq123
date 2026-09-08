@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "event_id": "module-gate-ts-vibrational-validation-dimer-local-frequency-completed-20260807",
+  "event_type": "module_gate_changed",
+  "entity": {
+    "kind": "module",
+    "id": "ts_vibrational_validation",
+    "module": "ts_vibrational_validation"
+  },
+  "occurred_at": "2026-08-07T12:05:16+08:00",
+  "recorded_at": "2026-08-07T12:05:16+08:00",
+  "summary": "Remove stale connectivity and optional-grade blockers from the accepted Fe(110) Dimer local-frequency scope.",
+  "payload": {
+    "module": "ts_vibrational_validation",
+    "status": "Active",
+    "depends_on": "separate consistent partial-Hessian IS/TS/FS corrections only for future thermochemistry or kinetics",
+    "current_gate": "For Fe(110) CO dissociation, Dimer job `9656664` and local partial-Hessian job `9694935` satisfy the accepted Dimer-plus-target-mode scope with one `537.451689 cm^-1` C/O-dominated imaginary mode. Connectivity and optional VFA classification are not blockers; no kinetic-eligibility claim is made"
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806/ts_strategy_step_record.json",
+      "sha256": "7742161b24ac5df7ce5f29f8ff6261007cdc57d763ed63d1b9fa54e0b0d8816a",
+      "authority": "module_validation",
+      "observed_at": "2026-08-07T12:05:16+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806/validation_pipeline_status.json",
+      "sha256": "65521a91a9313b1722a3bdc45a56fbc866dbf1955f97285b3682eb415a03fe34",
+      "authority": "module_validation",
+      "observed_at": "2026-08-07T12:05:16+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/registration_summary.json",
+      "sha256": "8eda76a85a1acddd464d1dab5c88f69437e23f84a6b89dd5c456db31533fd0f2",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-07T12:05:16+08:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "scientific_scope_completion",
+      "remove_stale_connectivity_blocker"
+    ],
+    "status": "pending"
+  }
+}

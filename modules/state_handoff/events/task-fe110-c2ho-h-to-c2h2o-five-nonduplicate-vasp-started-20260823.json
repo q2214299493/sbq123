@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-five-nonduplicate-vasp-started-20260823",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "adsorption_workflow"
+  },
+  "occurred_at": "2026-08-23T12:10:00+08:00",
+  "recorded_at": "2026-08-23T04:10:00Z",
+  "summary": "The five nonduplicate VASP endpoint relaxations remain active: FS-A job 9725471 has started normally on gknew023, while jobs 9725472-9725475 remain pending.",
+  "payload": {
+    "objective": "Complete and review the five nonduplicate VASP endpoint relaxations for Fe(110) [CH][C][O]* + H* -> [CH][C]OH* + *.",
+    "phase": "active",
+    "current_evidence": [
+      "FS-A job 9725471 is RUN on 32*gknew023; its OUTCAR and OSZICAR exist, VASP recognized Fe/C/O/H with 50 ions, and entered the electronic loop.",
+      "FS-C job 9725472 and IS-A/B/C jobs 9725473-9725475 remain scheduler PEND.",
+      "The submitted set is IS-A, IS-B, IS-C, FS-A, and FS-C; FS-B remains excluded as a duplicate of FS-C.",
+      "All five are registered under one identical active production compatibility fingerprint."
+    ],
+    "one_executable_step": "Monitor jobs 9725471-9725475 and, after scheduler termination, separately validate electronic convergence, ionic convergence, final geometry/site identity, and nonduplicate endpoint suitability.",
+    "submission_boundary": "No automatic restart, additional adsorption candidate, NEB, DIMER, frequency, final barrier, or energy-table promotion is authorized by this submission.",
+    "done_when": [
+      "All five jobs have authoritative terminal scheduler evidence and complete calculation files.",
+      "Electronic and ionic convergence are assessed separately for each candidate.",
+      "Final structures are chemistry- and site-reviewed, and any post-relaxation duplicates are identified before IS/FS selection."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/provenance/vasp_nonduplicate_submission_summary.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/provenance/vasp_runtime_checkpoint_20260823T1210.txt`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/provenance/vasp_runtime_checkpoint_20260823T1210.txt",
+      "sha256": "ded44e6fe2d68c76d50241e4cb8d05327a2609fe093cb4e32131b27cb3ac89b2",
+      "authority": "scheduler",
+      "observed_at": "2026-08-23T12:10:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/provenance/vasp_nonduplicate_submission_registration_receipt.json",
+      "sha256": "4d8d5e8edda4a7cb7b1e64f82629d9e196e6e14bcb7cc233a7f88f4cf5c43728",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-23T12:10:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-five-nonduplicate-vasp-submitted-20260823"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

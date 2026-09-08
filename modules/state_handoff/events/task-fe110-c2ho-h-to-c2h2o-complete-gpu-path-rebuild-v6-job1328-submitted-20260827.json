@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v6-job1328-submitted-20260827",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-27T22:34:50.7807020+08:00",
+  "recorded_at": "2026-08-27T14:34:50.7807020Z",
+  "summary": "The O-H interval gate was revised to soft transient monitoring plus final strict-pass/borderline-review/hard-fail classification, locally and remotely validated, and explicitly resubmitted once to MZ73 as Slurm job 1328.",
+  "payload": {
+    "objective": "Monitor MZ73 job 1328 and collect its candidate path only after producer terminal evidence exists.",
+    "phase": "active",
+    "current_evidence": [
+      "Transient O-H interval coverage no longer aborts preconditioning or restraint-release optimizer steps.",
+      "The final unrestrained path retains a three-state interval decision: strict pass, borderline review, or hard fail; a borderline image is not counted as a strict pass.",
+      "The 0.02 A tolerance classifies numerical boundary cases only and does not make a physical conclusion without adjacent continuity, monotonicity, and other geometry evidence.",
+      "The revised request, runtime, checkpoints, 19 structures, PBC branch, VTST exports, review, and user authorization passed the MZ73 preflight.",
+      "MZ73 accepted job 1328 with initial state PENDING for Priority; no VASP/VTST calculation, Dimer, TS, barrier, fine-tuning, or automatic retry was authorized."
+    ],
+    "one_executable_step": "Check job 1328 scheduler and producer evidence; collect the returned candidate path only after a terminal producer record exists.",
+    "submission_boundary": "This was one user-authorized GPU rerun. Do not automatically retry, fine-tune, submit VASP/VTST, prepare Dimer, or claim a TS/barrier.",
+    "done_when": [
+      "A producer terminal record for job 1328 exists and scheduler state is separately reported.",
+      "A successful returned path is collected into work for combined geometry, chemistry, energy, force, and borderline review; a failed run records only failure evidence."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v6_soft_interval_20260827/submission_record_job1328.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v6_soft_interval_20260827/gate_revision_review.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v6_soft_interval_20260827/work_to_gpu/request.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/active_learning_state.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v6_soft_interval_20260827/submission_record_job1328.json",
+      "sha256": "35ad085ae808ba9644d80fcc3e2d08e31ede6e85c6c995ea1dff496242d6ffa3",
+      "authority": "scheduler",
+      "observed_at": "2026-08-27T22:34:50.7807020+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v6_soft_interval_20260827/gate_revision_review.work.json",
+      "sha256": "a2af5f983f71e0f8d7ff1d636e979d5db318f9dd0f68ac6c922114106a67a5dc",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T22:34:50.7807020+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v6_soft_interval_20260827/work_to_gpu/request.json",
+      "sha256": "9a16f2ffc341b4b0ce863f10bc3862df3e5e5f0baaaa46fe4755ffb595e077cd",
+      "authority": "repository_document",
+      "observed_at": "2026-08-27T22:34:50.7807020+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/active_learning_state.json",
+      "sha256": "2475e19b7ac907ac5424c4b109eff78a9ecf174ba32a7234816384c572a86325",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T22:34:50.7807020+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v5-job1327-failed-20260827"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

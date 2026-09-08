@@ -1,0 +1,91 @@
+version: 1
+
+authority_contract:
+  canonical_routing_and_ownership_file: configs/skill_routing.yaml
+  precedence:
+    - machine_enforced_config
+    - owning_module_readme
+    - routing_skill
+    - explanatory_documentation
+  rule_sources:
+    routing_and_ownership: configs/skill_routing.yaml
+    execution_backends: configs/execution_backends.yaml
+    adsorption_candidate_policy: configs/adsmind_lite/prescreen_rules.yaml
+    adsorption_external_evidence_gate: configs/adsmind_lite/evidence_gate.yaml
+    adsorption_geometry_analysis: configs/adsmind_lite/analysis_rules.yaml
+    iron_fts_prescreen: configs/adsmind_lite/iron_fts_prescreen.yaml
+    transition_state_strategy: configs/ts_strategy_engine/families.yaml
+  documentation_must_link_rule_source: true
+  documentation_must_not_override_config: true
+
+owners:
+  external_structure_and_path_retrieval: catalysis-data-retrieval
+  adsorption_motif_planning: adsmind_lite
+  adsorption_structure_generation: surface-adsorption-builder
+  adsorption_result_validation: adsorption_workflow
+  transition_state_search: transition_state_search
+  calculation_registry: calculation_registry
+
+execution_backend_contract:
+  owner: project_orchestration
+  consumers:
+    - adsorption_workflow
+    - transition_state_search
+  rules: configs/execution_backends.yaml
+  required_for_external_acceleration: true
+  direct_gpu_to_vasp_handoff: forbidden
+
+pre_calculation_external_data:
+  owner: catalysis-data-retrieval
+  output: retrieval_top5.json
+  max_results: 5
+  general_literature_fallback: false
+
+calculation_consumers:
+  - vasp-catalysis-workflow
+  - surface-adsorption-builder
+  - fe110-adsorbate-pilot-builder
+  - neb-path-builder
+  - fe-vasp-incar-custodian
+
+pre_calculation_adsorption_motif_gate:
+  owner: adsmind_lite
+  external_evidence_owner: catalysis-data-retrieval
+  structure_generation_owner: surface-adsorption-builder
+  planner: scripts.adsmind_lite.plan_adsorption_candidates
+  rules: configs/adsmind_lite/prescreen_rules.yaml
+  iron_fts_rules: configs/adsmind_lite/iron_fts_prescreen.yaml
+  fallback_owner: catalysis-data-retrieval
+  no_whitelist_match_fallback: authoritative_journals_only_after_NO_WHITELIST_MATCH
+  evidence_rules: configs/adsmind_lite/evidence_gate.yaml
+  required_before_structure_generation: true
+  candidate_count_rule: accepted_unique_stable_motifs
+  fixed_site_sweep: forbidden
+  external_evidence_use: structure_selection_stability_order_and_initial_geometry_only
+  external_energy_import: forbidden
+  allowed_surface_name: Fe110
+  reject_other_surfaces: true
+
+result_governance:
+  chemical_plausibility_owner: chemical-plausibility-gate
+  compatibility_gate_owner: dataset-compatibility-gate
+  registry_owner: calculation_registry
+  registry_write_entrypoint: scripts/registry_write.py
+  registry_legacy_writer_policy: configs/registry_legacy_writers.yaml
+  excel_promotion_requires_gate: true
+  default_promote_low_confidence: false
+
+explicit_only_scholarly_skills:
+  - academic-research-suite
+  - literature-reviewer-skill
+  - nature-academic-search
+  - nature-reader
+
+enforced_rule_sources:
+  execution_backends: configs/execution_backends.yaml
+  whitelist_and_literature_order: configs/adsmind_lite/evidence_gate.yaml
+  candidate_count_and_local_priority: configs/adsmind_lite/prescreen_rules.yaml
+  geometry_and_contact_thresholds: configs/adsmind_lite/analysis_rules.yaml
+  iron_fts_connectivity_ranking: configs/adsmind_lite/iron_fts_prescreen.yaml
+  transition_state_strategy: configs/ts_strategy_engine/families.yaml
+  result_compatibility: configs/adsorption_result_promotion.yaml

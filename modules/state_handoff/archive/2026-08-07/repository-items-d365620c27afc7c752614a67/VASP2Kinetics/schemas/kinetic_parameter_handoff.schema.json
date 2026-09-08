@@ -1,0 +1,479 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vasp2kinetics.local/schemas/kinetic_parameter_handoff.schema.json",
+  "title": "VASP2Kinetics reviewed kinetic parameter handoff",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "handoff_id",
+    "status",
+    "created_at",
+    "dataset_binding",
+    "energetics",
+    "method",
+    "sources",
+    "validation",
+    "review",
+    "downstream"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "handoff_id": {"type": "string", "minLength": 1},
+    "status": {
+      "enum": ["DRAFT", "REVIEW_PENDING", "APPROVED", "REJECTED", "SUPERSEDED"]
+    },
+    "created_at": {"type": "string", "format": "date-time"},
+    "dataset_binding": {"$ref": "#/$defs/datasetBinding"},
+    "energetics": {"$ref": "#/$defs/energetics"},
+    "method": {"$ref": "#/$defs/method"},
+    "sources": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/source"}
+    },
+    "validation": {"$ref": "#/$defs/validation"},
+    "review": {"$ref": "#/$defs/review"},
+    "downstream": {"$ref": "#/$defs/downstream"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"const": "APPROVED"}}},
+      "then": {
+        "properties": {
+          "dataset_binding": {"$ref": "#/$defs/approvedDatasetBinding"},
+          "energetics": {"$ref": "#/$defs/approvedEnergetics"},
+          "method": {"$ref": "#/$defs/approvedMethod"},
+          "sources": {
+            "type": "array",
+            "minItems": 7,
+            "items": {"$ref": "#/$defs/approvedSource"}
+          },
+          "validation": {"$ref": "#/$defs/approvedValidation"},
+          "review": {"$ref": "#/$defs/approvedReview"},
+          "downstream": {"$ref": "#/$defs/approvedDownstream"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"status": {"enum": ["REJECTED", "SUPERSEDED"]}}},
+      "then": {
+        "properties": {
+          "downstream": {
+            "properties": {"eligibility": {"const": "BLOCKED"}}
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "nullableString": {"type": ["string", "null"]},
+    "nullableNumber": {"type": ["number", "null"]},
+    "nullableInteger": {"type": ["integer", "null"]},
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "nullableHash": {
+      "oneOf": [{"$ref": "#/$defs/hash"}, {"type": "null"}]
+    },
+    "datasetBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "schema_version", "reaction_id", "reaction_record_sha256"],
+      "properties": {
+        "path": {"$ref": "#/$defs/nullableString"},
+        "sha256": {"$ref": "#/$defs/nullableHash"},
+        "schema_version": {"$ref": "#/$defs/nullableString"},
+        "reaction_id": {"type": "string", "minLength": 1},
+        "reaction_record_sha256": {"$ref": "#/$defs/nullableHash"}
+      }
+    },
+    "approvedDatasetBinding": {
+      "allOf": [
+        {"$ref": "#/$defs/datasetBinding"},
+        {
+          "properties": {
+            "path": {"type": "string", "minLength": 1},
+            "sha256": {"$ref": "#/$defs/hash"},
+            "schema_version": {"type": "string", "minLength": 1},
+            "reaction_record_sha256": {"$ref": "#/$defs/hash"}
+          }
+        }
+      ]
+    },
+    "energyValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "source_ids", "extraction_method"],
+      "properties": {
+        "value": {"$ref": "#/$defs/nullableNumber"},
+        "source_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "extraction_method": {"$ref": "#/$defs/nullableString"}
+      }
+    },
+    "approvedEnergyValue": {
+      "allOf": [
+        {"$ref": "#/$defs/energyValue"},
+        {
+          "properties": {
+            "value": {"type": "number"},
+            "source_ids": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {"type": "string", "minLength": 1}
+            },
+            "extraction_method": {"type": "string", "minLength": 1}
+          }
+        }
+      ]
+    },
+    "energyValues": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "initial",
+        "final",
+        "transition_state",
+        "reaction",
+        "activation_forward",
+        "activation_reverse"
+      ],
+      "properties": {
+        "initial": {"$ref": "#/$defs/energyValue"},
+        "final": {"$ref": "#/$defs/energyValue"},
+        "transition_state": {"$ref": "#/$defs/energyValue"},
+        "reaction": {"$ref": "#/$defs/energyValue"},
+        "activation_forward": {"$ref": "#/$defs/energyValue"},
+        "activation_reverse": {"$ref": "#/$defs/energyValue"}
+      }
+    },
+    "approvedEnergyValues": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "initial",
+        "final",
+        "transition_state",
+        "reaction",
+        "activation_forward",
+        "activation_reverse"
+      ],
+      "properties": {
+        "initial": {"$ref": "#/$defs/approvedEnergyValue"},
+        "final": {"$ref": "#/$defs/approvedEnergyValue"},
+        "transition_state": {"$ref": "#/$defs/approvedEnergyValue"},
+        "reaction": {"$ref": "#/$defs/approvedEnergyValue"},
+        "activation_forward": {"$ref": "#/$defs/approvedEnergyValue"},
+        "activation_reverse": {"$ref": "#/$defs/approvedEnergyValue"}
+      }
+    },
+    "energetics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "basis",
+        "unit",
+        "temperature_K",
+        "pressure_bar",
+        "reference_convention_id",
+        "consistency_tolerance_eV",
+        "values"
+      ],
+      "properties": {
+        "basis": {"enum": ["ELECTRONIC_ENERGY", "GIBBS_FREE_ENERGY"]},
+        "unit": {"const": "eV"},
+        "temperature_K": {"$ref": "#/$defs/nullableNumber"},
+        "pressure_bar": {"$ref": "#/$defs/nullableNumber"},
+        "reference_convention_id": {"$ref": "#/$defs/nullableString"},
+        "consistency_tolerance_eV": {"type": "number", "exclusiveMinimum": 0},
+        "values": {"$ref": "#/$defs/energyValues"}
+      }
+    },
+    "approvedEnergetics": {
+      "allOf": [
+        {"$ref": "#/$defs/energetics"},
+        {
+          "properties": {
+            "reference_convention_id": {"type": "string", "minLength": 1},
+            "values": {"$ref": "#/$defs/approvedEnergyValues"}
+          }
+        },
+        {
+          "if": {"properties": {"basis": {"const": "GIBBS_FREE_ENERGY"}}},
+          "then": {
+            "properties": {
+              "temperature_K": {"type": "number", "exclusiveMinimum": 0},
+              "pressure_bar": {"type": "number", "exclusiveMinimum": 0}
+            }
+          },
+          "else": {
+            "properties": {
+              "temperature_K": {"type": "null"},
+              "pressure_bar": {"type": "null"}
+            }
+          }
+        }
+      ]
+    },
+    "method": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "code_version",
+        "xc_functional",
+        "pseudopotential_family",
+        "pseudopotential_spec_sha256",
+        "encut_eV",
+        "kpoints",
+        "spin_policy",
+        "ismear",
+        "sigma_eV",
+        "ediff_eV",
+        "slab_model_id",
+        "fixed_atom_indices_sha256",
+        "dipole_policy",
+        "vacuum_angstrom",
+        "energy_convention_id",
+        "compatibility_fingerprint_sha256"
+      ],
+      "properties": {
+        "code": {"const": "VASP"},
+        "code_version": {"$ref": "#/$defs/nullableString"},
+        "xc_functional": {"$ref": "#/$defs/nullableString"},
+        "pseudopotential_family": {"$ref": "#/$defs/nullableString"},
+        "pseudopotential_spec_sha256": {"$ref": "#/$defs/nullableHash"},
+        "encut_eV": {"$ref": "#/$defs/nullableNumber"},
+        "kpoints": {"$ref": "#/$defs/nullableString"},
+        "spin_policy": {"$ref": "#/$defs/nullableString"},
+        "ismear": {"$ref": "#/$defs/nullableInteger"},
+        "sigma_eV": {"$ref": "#/$defs/nullableNumber"},
+        "ediff_eV": {"$ref": "#/$defs/nullableNumber"},
+        "slab_model_id": {"$ref": "#/$defs/nullableString"},
+        "fixed_atom_indices_sha256": {"$ref": "#/$defs/nullableHash"},
+        "dipole_policy": {"$ref": "#/$defs/nullableString"},
+        "vacuum_angstrom": {"$ref": "#/$defs/nullableNumber"},
+        "energy_convention_id": {"$ref": "#/$defs/nullableString"},
+        "compatibility_fingerprint_sha256": {"$ref": "#/$defs/nullableHash"}
+      }
+    },
+    "approvedMethod": {
+      "allOf": [
+        {"$ref": "#/$defs/method"},
+        {
+          "properties": {
+            "code_version": {"type": "string", "minLength": 1},
+            "xc_functional": {"type": "string", "minLength": 1},
+            "pseudopotential_family": {"type": "string", "minLength": 1},
+            "pseudopotential_spec_sha256": {"$ref": "#/$defs/hash"},
+            "encut_eV": {"type": "number", "exclusiveMinimum": 0},
+            "kpoints": {"type": "string", "minLength": 1},
+            "spin_policy": {"type": "string", "minLength": 1},
+            "ismear": {"type": "integer"},
+            "sigma_eV": {"type": "number", "minimum": 0},
+            "ediff_eV": {"type": "number", "exclusiveMinimum": 0},
+            "slab_model_id": {"type": "string", "minLength": 1},
+            "fixed_atom_indices_sha256": {"$ref": "#/$defs/hash"},
+            "dipole_policy": {"type": "string", "minLength": 1},
+            "vacuum_angstrom": {"type": "number", "exclusiveMinimum": 0},
+            "energy_convention_id": {"type": "string", "minLength": 1},
+            "compatibility_fingerprint_sha256": {"$ref": "#/$defs/hash"}
+          }
+        }
+      ]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_id",
+        "role",
+        "path",
+        "storage",
+        "sha256",
+        "size_bytes",
+        "calculation_id",
+        "job_id",
+        "extraction_location",
+        "verification_status"
+      ],
+      "properties": {
+        "source_id": {"type": "string", "minLength": 1},
+        "role": {
+          "enum": [
+            "INITIAL_ENERGY",
+            "FINAL_ENERGY",
+            "TRANSITION_STATE_ENERGY",
+            "FREQUENCY_EVIDENCE",
+            "CONNECTIVITY_EVIDENCE",
+            "VALIDATION_REPORT",
+            "REVIEW_EVIDENCE",
+            "METHOD_EVIDENCE",
+            "OTHER"
+          ]
+        },
+        "path": {"type": "string", "minLength": 1},
+        "storage": {"enum": ["LOCAL", "REMOTE", "ARCHIVE"]},
+        "sha256": {"$ref": "#/$defs/nullableHash"},
+        "size_bytes": {"type": ["integer", "null"], "minimum": 0},
+        "calculation_id": {"$ref": "#/$defs/nullableString"},
+        "job_id": {"$ref": "#/$defs/nullableString"},
+        "extraction_location": {"$ref": "#/$defs/nullableString"},
+        "verification_status": {"enum": ["UNVERIFIED", "VERIFIED", "MISSING"]}
+      }
+    },
+    "approvedSource": {
+      "allOf": [
+        {"$ref": "#/$defs/source"},
+        {
+          "properties": {
+            "sha256": {"$ref": "#/$defs/hash"},
+            "size_bytes": {"type": "integer", "minimum": 0},
+            "calculation_id": {"type": "string", "minLength": 1},
+            "job_id": {"type": "string", "minLength": 1},
+            "extraction_location": {"type": "string", "minLength": 1},
+            "verification_status": {"const": "VERIFIED"}
+          }
+        }
+      ]
+    },
+    "stateValidation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "electronic_convergence",
+        "ionic_convergence",
+        "geometry_validation",
+        "scientific_status"
+      ],
+      "properties": {
+        "electronic_convergence": {"enum": ["PASS", "FAILED", "NOT_AVAILABLE"]},
+        "ionic_convergence": {"enum": ["PASS", "FAILED", "NOT_APPLICABLE", "NOT_AVAILABLE"]},
+        "geometry_validation": {"enum": ["PASS", "FAILED", "NOT_AVAILABLE"]},
+        "scientific_status": {"enum": ["ACCEPTED", "REJECTED", "NOT_REVIEWED"]}
+      }
+    },
+    "approvedStateValidation": {
+      "allOf": [
+        {"$ref": "#/$defs/stateValidation"},
+        {
+          "properties": {
+            "electronic_convergence": {"const": "PASS"},
+            "ionic_convergence": {"enum": ["PASS", "NOT_APPLICABLE"]},
+            "geometry_validation": {"const": "PASS"},
+            "scientific_status": {"const": "ACCEPTED"}
+          }
+        }
+      ]
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "automated_status",
+        "dataset_validation",
+        "method_compatibility",
+        "initial_state",
+        "final_state",
+        "transition_state",
+        "ts_grade",
+        "frequency_validation",
+        "connectivity_validation",
+        "validation_report_source_id"
+      ],
+      "properties": {
+        "automated_status": {"enum": ["PASS", "WARNING", "FAILED", "NOT_AVAILABLE"]},
+        "dataset_validation": {"enum": ["PASS", "FAILED", "NOT_AVAILABLE"]},
+        "method_compatibility": {"enum": ["PASS", "FAILED", "NOT_AVAILABLE"]},
+        "initial_state": {"$ref": "#/$defs/stateValidation"},
+        "final_state": {"$ref": "#/$defs/stateValidation"},
+        "transition_state": {"$ref": "#/$defs/stateValidation"},
+        "ts_grade": {"enum": ["A", "B", "C", "NOT_AVAILABLE"]},
+        "frequency_validation": {"enum": ["PASS", "FAILED", "NOT_AVAILABLE"]},
+        "connectivity_validation": {"enum": ["PASS", "FAILED", "NOT_AVAILABLE"]},
+        "validation_report_source_id": {"$ref": "#/$defs/nullableString"}
+      }
+    },
+    "approvedValidation": {
+      "allOf": [
+        {"$ref": "#/$defs/validation"},
+        {
+          "properties": {
+            "automated_status": {"const": "PASS"},
+            "dataset_validation": {"const": "PASS"},
+            "method_compatibility": {"const": "PASS"},
+            "initial_state": {"$ref": "#/$defs/approvedStateValidation"},
+            "final_state": {"$ref": "#/$defs/approvedStateValidation"},
+            "transition_state": {"$ref": "#/$defs/approvedStateValidation"},
+            "ts_grade": {"const": "A"},
+            "frequency_validation": {"const": "PASS"},
+            "connectivity_validation": {"const": "PASS"},
+            "validation_report_source_id": {"type": "string", "minLength": 1}
+          }
+        }
+      ]
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision", "reviewer_id", "reviewed_at", "rationale", "evidence_source_id"],
+      "properties": {
+        "decision": {"enum": ["PENDING", "APPROVED", "REJECTED"]},
+        "reviewer_id": {"$ref": "#/$defs/nullableString"},
+        "reviewed_at": {
+          "oneOf": [
+            {"type": "string", "format": "date-time"},
+            {"type": "null"}
+          ]
+        },
+        "rationale": {"$ref": "#/$defs/nullableString"},
+        "evidence_source_id": {"$ref": "#/$defs/nullableString"}
+      }
+    },
+    "approvedReview": {
+      "allOf": [
+        {"$ref": "#/$defs/review"},
+        {
+          "properties": {
+            "decision": {"const": "APPROVED"},
+            "reviewer_id": {"type": "string", "minLength": 1},
+            "reviewed_at": {"type": "string", "format": "date-time"},
+            "rationale": {"type": "string", "minLength": 1},
+            "evidence_source_id": {"type": "string", "minLength": 1}
+          }
+        }
+      ]
+    },
+    "downstream": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["eligibility", "software"],
+      "properties": {
+        "eligibility": {"enum": ["BLOCKED", "ELIGIBLE"]},
+        "software": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"enum": ["CATKINAS", "ZACROS"]}
+        }
+      }
+    },
+    "approvedDownstream": {
+      "allOf": [
+        {"$ref": "#/$defs/downstream"},
+        {
+          "properties": {
+            "eligibility": {"const": "ELIGIBLE"},
+            "software": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {"enum": ["CATKINAS", "ZACROS"]}
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "schema_version": 2,
+  "direction": "gpu_to_work",
+  "handoff_id": "fe110_co_dissociation_topic1_aqcat25_20260719",
+  "workflow_kind": "transition_state",
+  "source_workflow_sha256": "42f2a2e714727e1e3315e325abcddab87c2c656a2f34b151263d31349db156a4",
+  "source_handoff": {
+    "path": "gpu_handoff/handoff.json",
+    "sha256": "7c1b3d4504c177fc2e792f173ea152102ac38e01d4d421f529d3148bb0e187f5"
+  },
+  "candidate_structure": {
+    "path": "output/job_737/TS_CANDIDATE.vasp",
+    "sha256": "6fcc514c41d86703e3796a26227f55018cef7e3b96e185b95e9c64664941b7a7",
+    "format": "vasp_poscar",
+    "atom_count": 47,
+    "atom_order_sha256": "d4e740b5d5ba78ecd1c56a3887863880e0f4ee2ce037fd77d05378f1af46a402"
+  },
+  "transition_state": {
+    "normalized_reaction_contract_sha256": "f05f901204621dd787e901a4dbfd74535e513616176b9fc65834697851bf39b0",
+    "atom_map_sha256": "c106ae99bf673f9aaf51a0ae6515a4af625bee66960393e3700e78ddc247f248",
+    "initial_structure": {
+      "path": "matched_statics/IS/POSCAR",
+      "sha256": "6ed0dcc7bc57e30bce0eca23a94e6b8823dfc543a6bc943dccffcda531daadbf",
+      "format": "vasp_poscar",
+      "atom_count": 47,
+      "atom_order_sha256": "d4e740b5d5ba78ecd1c56a3887863880e0f4ee2ce037fd77d05378f1af46a402"
+    },
+    "waypoint_structures": [
+      {
+        "path": "gpu_handoff/waypoints/WP_01/POSCAR",
+        "sha256": "7320a01cbbd5284e388a4bc2c18eebc27ef60f9ec8b734f47c2ff17bc25b50f5",
+        "format": "vasp_poscar",
+        "atom_count": 47,
+        "atom_order_sha256": "d4e740b5d5ba78ecd1c56a3887863880e0f4ee2ce037fd77d05378f1af46a402"
+      },
+      {
+        "path": "gpu_handoff/waypoints/WP_02/POSCAR",
+        "sha256": "72ce7307a6648e5e28a2a3d8b186989c2a8e30adcd1479fb6b286b434bd19a36",
+        "format": "vasp_poscar",
+        "atom_count": 47,
+        "atom_order_sha256": "d4e740b5d5ba78ecd1c56a3887863880e0f4ee2ce037fd77d05378f1af46a402"
+      },
+      {
+        "path": "gpu_handoff/waypoints/WP_03/POSCAR",
+        "sha256": "d143d0c981e42474f018a6e067f93d74aacedf15f5f6924e05fcdc18762811b3",
+        "format": "vasp_poscar",
+        "atom_count": 47,
+        "atom_order_sha256": "d4e740b5d5ba78ecd1c56a3887863880e0f4ee2ce037fd77d05378f1af46a402"
+      }
+    ],
+    "final_structure": {
+      "path": "matched_statics/FS/POSCAR",
+      "sha256": "0fe755b8954c58c991009093c96065787e522805bd359eb10a114287281c9de1",
+      "format": "vasp_poscar",
+      "atom_count": 47,
+      "atom_order_sha256": "d4e740b5d5ba78ecd1c56a3887863880e0f4ee2ce037fd77d05378f1af46a402"
+    },
+    "indexed_bond_changes": [
+      {
+        "atoms_1based": [
+          46,
+          47
+        ],
+        "change": "break"
+      }
+    ]
+  },
+  "producer": {
+    "backend": "aqcat_gpu",
+    "hostname": "MZ73",
+    "gpu_job_id": "737",
+    "model_identifier": "AQCat25 demo_single model.pt",
+    "checkpoint_sha256": "e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50"
+  },
+  "result": {
+    "result_class": "predicted_transition_state_candidate_only",
+    "optimizer_status": "converged",
+    "optimizer_steps": 48,
+    "predicted_energy": {
+      "value": 0.07841324806213379,
+      "unit": "eV",
+      "reportable_dft": false
+    },
+    "predicted_force": {
+      "fmax": 0.026793797298368036,
+      "unit": "eV/A",
+      "reportable_dft": false
+    },
+    "geometry_before": {
+      "co_distance_A": 2.0241693815265562,
+      "c_fe_distance_A": 1.6596776196138543,
+      "o_fe_distance_A": 2.33090937929214,
+      "minimum_unintended_contact_A": 1.6596776196138556
+    },
+    "geometry_after": {
+      "co_distance_A": 1.7503135442968059,
+      "c_fe_distance_A": 1.8316449178702336,
+      "o_fe_distance_A": 1.9375121350747129,
+      "minimum_unintended_contact_A": 1.8316449178702345
+    },
+    "connectivity_status": "not_applicable",
+    "structure_invariants": {
+      "atom_order_preserved": true,
+      "cell_preserved": true,
+      "fixed_atoms_preserved": true
+    }
+  },
+  "domain_assessment": {
+    "calibration_id": null,
+    "status": "uncalibrated",
+    "method": "no compatible off-equilibrium or saddle force-label calibration",
+    "reasons": [
+      "AQCat25 Fe45 calibration covers near-relaxed adsorption structures only"
+    ]
+  },
+  "producer_exit_record": {
+    "path": "output/job_737/producer_exit_record.json",
+    "sha256": "9c59b600c02498db79968805f83619b495c2e1b0b3d6a6c52f766721bb456a70",
+    "status": "success",
+    "exit_code": 0,
+    "evidence_class": "producer_process_only_not_scheduler_accounting"
+  },
+  "restrictions": {
+    "predicted_candidate_only": true,
+    "submit_vasp": false,
+    "scientific_acceptance": false,
+    "direct_gpu_to_vasp_handoff": false
+  }
+}

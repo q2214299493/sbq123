@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-gpu-ml-neb-1308-submitted-20260825",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-25T20:12:57+08:00",
+  "recorded_at": "2026-08-25T12:12:57Z",
+  "summary": "The user selected IS-A -> FS-A for the reactive path while retaining IS-B as the lowest-energy reference; a hash-bound 13-image AQCat25 ML-NEB/optional ML-CI path job was submitted on MZ73 as Slurm job 1308.",
+  "payload": {
+    "objective": "Generate and review a complete AQCat25 GPU path candidate for Fe(110) C2HO* + H* -> C2H2O* + * using reactive IS-A and FS-A without treating the GPU prediction as a VASP result.",
+    "phase": "active",
+    "current_evidence": [
+      "The user confirmed IS-A job 9725473 as the reactive IS, FS-A job 9725471 as the product FS, and IS-B job 9725474 as the lowest-energy reference only.",
+      "Endpoint atom order, cell, periodicity, bottom-18 fixed mask, chemical mapping, and the full SIGMA=0.20 eV compatibility branch pass after correcting under-specified registry compatibility metadata; endpoint structures and energies were unchanged.",
+      "The rejected one-waypoint initialization showed O-H backtracking and was not submitted.",
+      "Three replacement kinematic waypoints pass geometry review and decrease O47-H49 monotonically from 3.0797 to 2.9385, 2.0098, 1.1428, and 0.9812 A at FS.",
+      "The work-to-GPU handoff and MZ73 copy passed schema, bound-file, checkpoint-hash, deployment-hash, Python syntax, and shell syntax checks.",
+      "MZ73 Slurm job 1308 was submitted with 13 expected path images, ordinary ML-NEB fmax 0.10 eV/A, optional ML-CI fmax 0.05 eV/A, one GPU, and a two-hour limit; its initial scheduler state was PENDING for Priority."
+    ],
+    "one_executable_step": "Wait for job 1308 to reach a terminal state, return all output artifacts to work, and review manifest hashes, convergence, path continuity, O-H progression, forces, energies, and model-domain limitations before selecting any VASP refinement method.",
+    "submission_boundary": "Only MZ73 AQCat25 job 1308 is authorized and submitted. No VASP ordinary NEB, CI-NEB, DIMER, frequency, force-label, or barrier action is authorized; there is no direct GPU-to-VASP handoff.",
+    "done_when": [
+      "Job 1308 has terminal producer and scheduler evidence.",
+      "The returned complete path manifest and every structure pass work-side hash, geometry, continuity, and reaction-coordinate review.",
+      "The predicted path is used only to recommend a case-specific VASP validation/refinement choice for separate user authorization."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/provenance/vasp_nonduplicate_result_review.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/waypoints/OH_progressive_20260825/waypoint_review.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_ml_neb_production_20260825/work_to_gpu/handoff.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_ml_neb_production_20260825/submission_evidence_20260825.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/provenance/vasp_nonduplicate_result_review.json",
+      "sha256": "5ca40b88c9d7b031305ad5a752bf6dc30b5e69f7e55e70358317112b7088963a",
+      "authority": "module_validation",
+      "observed_at": "2026-08-25T20:12:57+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/waypoints/OH_progressive_20260825/waypoint_review.json",
+      "sha256": "91f479823134b46a48260c6d342fc73ea0e7430752b40ef9b3c003d4639af741",
+      "authority": "module_validation",
+      "observed_at": "2026-08-25T20:12:57+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_ml_neb_production_20260825/work_to_gpu/handoff.json",
+      "sha256": "5b33c52184252668b8c4e18e2475a1e4b8ed7d6dca02557946d15a78fcd916b1",
+      "authority": "module_validation",
+      "observed_at": "2026-08-25T20:12:57+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_ml_neb_production_20260825/submission_evidence_20260825.json",
+      "sha256": "f8503833d9887733142204a24c65120f69023b17a778fb991e3c1ad5dbe4d2b2",
+      "authority": "scheduler",
+      "observed_at": "2026-08-25T20:12:57+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-five-vasp-complete-reviewed-20260825"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-v9-piecewise-arc-job1346-failed-20260829",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v9",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-29T00:53:15+08:00",
+  "recorded_at": "2026-08-28T16:53:15Z",
+  "summary": "MZ73 job 1346 failed during the first MatRIS ordinary-ML-NEB force evaluation because GPU 0 had only 20.06 MiB free when another 38 MiB allocation was requested; no complete path or AQCat25 audit was produced.",
+  "payload": {
+    "objective": "Run and review the complete frozen-MatRIS ordinary ML-NEB path for Fe(110) C2HO*+H* -> C2H2O*+*, followed by AQCat25 exact fixed-path audit only after a complete primary path returns.",
+    "phase": "blocked",
+    "current_evidence": [
+      "Slurm job 1346 reached FAILED with Reason=NonZeroExitCode and ExitCode=1:0 after 00:02:09.",
+      "The MatRIS checkpoint initialized, but the first ordinary-ML-NEB force evaluation raised torch.OutOfMemoryError.",
+      "The traceback reports GPU 0 total memory 23.52 GiB, only 20.06 MiB free, and a failed additional allocation of 38 MiB.",
+      "No complete MatRIS path was produced and the AQCat25 exact fixed-path audit did not start.",
+      "This is an execution-resource failure, not evidence of a discontinuous path or inaccurate MatRIS forces."
+    ],
+    "one_executable_step": "After explicit user authorization, confirm sufficient free GPU memory and resubmit the unchanged hash-bound v9 package; do not change the checkpoint, path, or scientific settings in response to this resource-only failure.",
+    "submission_boundary": "No automatic retry, MatRIS fine-tuning, VASP peak-triad submission, VASP micro-NEB, Dimer, TS acceptance, or barrier action is authorized.",
+    "done_when": [
+      "A newly authorized unchanged v9 run exits with a complete MatRIS path and AQCat25 exact-path audit, or a new truthful failure diagnosis is recorded.",
+      "The returned complete path is reviewed for ordinary-ML-NEB convergence, O-H/C-C/PBC continuity, peak structure, and dual-model comparison before any VASP proposal."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v9_piecewise_arc_21img_20260829/failure_diagnosis_job1346.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v9_piecewise_arc_21img_20260829/remote_failure_return/production-1346.out`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v9_piecewise_arc_21img_20260829/execution_gate_decision.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v9_piecewise_arc_21img_20260829/failure_diagnosis_job1346.json",
+      "sha256": "bb494983835d45a1bc096c54a1461271081081c216b2c07da00cada6bc0d3002",
+      "authority": "module_validation",
+      "observed_at": "2026-08-29T00:53:15+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v9_piecewise_arc_21img_20260829/remote_failure_return/production-1346.out",
+      "sha256": "1533e8a30aac13eb7a268db862bd25cf43ed17384ac10b09e3cbd3a62c39f2c9",
+      "authority": "scheduler",
+      "observed_at": "2026-08-29T00:53:15+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-v9-piecewise-arc-job1346-submitted-20260829"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

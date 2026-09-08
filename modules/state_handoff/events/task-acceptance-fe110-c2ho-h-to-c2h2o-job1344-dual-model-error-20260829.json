@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "event_id": "task-acceptance-fe110-c2ho-h-to-c2h2o-job1344-dual-model-error-20260829",
+  "event_type": "task_acceptance_recorded",
+  "entity": {
+    "kind": "task_acceptance",
+    "id": "fe110-c2ho-h-to-c2h2o-job1344-dual-model-error-acceptance",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-29T00:31:19+08:00",
+  "recorded_at": "2026-08-29T00:31:19+08:00",
+  "summary": "Accept and close the eight-structure failure-boundary VASP label validation and dual-model error-assessment scope.",
+  "payload": {
+    "task_entity_id": "task-current",
+    "task_event_id": "task-transition-57e5d45e0a0ad3f0ba35791b",
+    "task_event_sha256": "8540e2819e50ee1b87e58c602c6b5506d37f355b0c1f2e9cf4de1424d0aadb71",
+    "completion_summary": "All eight exact-structure VASP static force labels passed canonical completion, electronic, force, magnetic, structure-hash, compatibility, and remote/local hash validation. MatRIS and AQCat25 were compared against the same VASP structures and both passed the current screening ceilings; no fine-tuning was triggered.",
+    "done_when_results": [
+      {
+        "criterion": "All eight labels pass formal scheduler, normal-completion, electronic-convergence, complete-force, magnetic, structure-hash, DFT-fingerprint, and remote/local hash checks.",
+        "status": "passed",
+        "evidence_sha256": [
+          "4d023b6f83abe254ab034e2049dc053cf5bf2a101ef730d0c9a7c2f530b63e9b"
+        ]
+      },
+      {
+        "criterion": "MatRIS-VASP and AQCat25-VASP errors are reviewed and a separate fine-tuning or path-method decision is recorded.",
+        "status": "passed",
+        "evidence_sha256": [
+          "63cb30b9ef9f3a986c25b9b57df4c9edeb216668ec2c83c4551a81d8e729ff2a",
+          "a9b4b56c5418e767efa48eb7d24fc5915d9300591db052b388520a8f138219fe"
+        ]
+      }
+    ],
+    "validation_results": [
+      {
+        "kind": "inspection",
+        "name": "canonical eight-label VASP collection gate",
+        "command": "python scripts/collect_dual_model_ts_vasp_labels.py --state canonical_dual_model_active_learning_state.json --batch canonical_vasp_force_label_batch_request.json --submission canonical_vasp_batch_submission_summary.json --root vasp_inputs_prepared_not_submitted --evidence-dir canonical_collection_scheduler_evidence --output canonical_vasp_force_label_set.json",
+        "exit_code": 0,
+        "status": "passed",
+        "evidence_sha256": [
+          "4d023b6f83abe254ab034e2049dc053cf5bf2a101ef730d0c9a7c2f530b63e9b"
+        ]
+      },
+      {
+        "kind": "inspection",
+        "name": "MatRIS and AQCat25 exact-structure VASP error assessment",
+        "command": "python scripts/assess_dual_model_ts_vasp_errors.py --state canonical_dual_model_active_learning_state.json --labels canonical_vasp_force_label_set.json --output canonical_dual_model_vasp_error_assessment.json",
+        "exit_code": 0,
+        "status": "passed",
+        "evidence_sha256": [
+          "63cb30b9ef9f3a986c25b9b57df4c9edeb216668ec2c83c4551a81d8e729ff2a"
+        ]
+      }
+    ],
+    "artifact_policy": "required",
+    "artifacts": [
+      {
+        "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/canonical_vasp_force_label_set.json",
+        "sha256": "4d023b6f83abe254ab034e2049dc053cf5bf2a101ef730d0c9a7c2f530b63e9b",
+        "status": "present",
+        "evidence_sha256": [
+          "4d023b6f83abe254ab034e2049dc053cf5bf2a101ef730d0c9a7c2f530b63e9b"
+        ]
+      },
+      {
+        "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/canonical_dual_model_vasp_error_assessment.json",
+        "sha256": "63cb30b9ef9f3a986c25b9b57df4c9edeb216668ec2c83c4551a81d8e729ff2a",
+        "status": "present",
+        "evidence_sha256": [
+          "63cb30b9ef9f3a986c25b9b57df4c9edeb216668ec2c83c4551a81d8e729ff2a"
+        ]
+      },
+      {
+        "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/canonical_dual_model_error_review.work.json",
+        "sha256": "a9b4b56c5418e767efa48eb7d24fc5915d9300591db052b388520a8f138219fe",
+        "status": "present",
+        "evidence_sha256": [
+          "a9b4b56c5418e767efa48eb7d24fc5915d9300591db052b388520a8f138219fe"
+        ]
+      }
+    ],
+    "risk_assessment": {
+      "status": "no_open_risks",
+      "summary": "No open risk remains within this force-label validation and screening-error assessment scope. Independent disjoint held-out TS validation is a separate required calibration step and no final TS, barrier, or calibrated-acceleration claim is made here.",
+      "evidence_sha256": [
+        "63cb30b9ef9f3a986c25b9b57df4c9edeb216668ec2c83c4551a81d8e729ff2a",
+        "a9b4b56c5418e767efa48eb7d24fc5915d9300591db052b388520a8f138219fe"
+      ]
+    },
+    "handoff": {
+      "history": {
+        "title": "Failure-boundary dual-model VASP screening completed",
+        "summary": "Eight seed/fail structures were validated as exact SIGMA=0.20 VASP force labels and compared with frozen MatRIS and AQCat25 predictions.",
+        "outcome": "Both models passed the current screening ceilings. Retain the MatRIS checkpoint; the next distinct scientific step is disjoint held-out TS validation, not automatic fine-tuning.",
+        "evidence_sha256": [
+          "4d023b6f83abe254ab034e2049dc053cf5bf2a101ef730d0c9a7c2f530b63e9b",
+          "63cb30b9ef9f3a986c25b9b57df4c9edeb216668ec2c83c4551a81d8e729ff2a"
+        ]
+      },
+      "backlog_items": [],
+      "errors": [],
+      "decisions": []
+    },
+    "requires_user_review": false,
+    "review_reason_codes": [],
+    "verdict": "accepted"
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/canonical_vasp_force_label_set.json",
+      "sha256": "4d023b6f83abe254ab034e2049dc053cf5bf2a101ef730d0c9a7c2f530b63e9b",
+      "authority": "module_validation",
+      "observed_at": "2026-08-29T00:31:19+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/canonical_dual_model_vasp_error_assessment.json",
+      "sha256": "63cb30b9ef9f3a986c25b9b57df4c9edeb216668ec2c83c4551a81d8e729ff2a",
+      "authority": "module_validation",
+      "observed_at": "2026-08-29T00:31:19+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/job1342_failure_boundary_triple_force_20260828/canonical_dual_model_error_review.work.json",
+      "sha256": "a9b4b56c5418e767efa48eb7d24fc5915d9300591db052b388520a8f138219fe",
+      "authority": "repository_document",
+      "observed_at": "2026-08-29T00:31:19+08:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

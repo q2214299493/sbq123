@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "module_id": "fe-convergence-baseline",
+  "created_on": "2026-06-23",
+  "energy_convergence_target_meV_per_atom": 1.0,
+  "code": {
+    "name": "VASP",
+    "version": null,
+    "version_status": "Needs confirmation"
+  },
+  "pseudopotential": {
+    "repository_storage": "excluded",
+    "titel": "PAW_PBE Fe 06Sep2000",
+    "size_bytes": 238259,
+    "sha256": "cd5a22d9368cc8b5cc476bea79732366149640da08ac9009b0e1b7fc627eea28",
+    "source_paths": [
+      "~/sbq/agent/jobs/convergence/fe_bulk_fe110_slab_20260618/alpha_fe_bulk/reference/POTCAR"
+    ]
+  },
+  "systems": {
+    "alpha_fe_bulk": {
+      "composition": "Fe2",
+      "atom_count": 2,
+      "model": "conventional bcc cell",
+      "lattice_parameter_A": 2.8665,
+      "poscar": "systems/alpha_fe_bulk/POSCAR",
+      "poscar_sha256": "b22ff5ab2432b583d9197ce776b4264a20b96a2e8e29713fa3eb93f507fbff7d",
+      "source_poscar": "~/sbq/agent/jobs/convergence/fe_bulk_fe110_slab_20260618/alpha_fe_bulk/reference/POSCAR",
+      "convergence_sweep": {
+        "encut_eV": 400,
+        "encut_sweep_fixed_gamma_mesh": [21, 21, 21],
+        "accepted_production_gamma_mesh": [15, 15, 15],
+        "ismear": 1,
+        "sigma_eV": 0.20,
+        "ediff_eV": 1e-6
+      },
+      "production_relaxation": {
+        "encut_eV": 400,
+        "gamma_mesh": [15, 15, 15],
+        "ismear": 1,
+        "sigma_eV": 0.10,
+        "incar": "systems/alpha_fe_bulk/INCAR.relax"
+      },
+      "final_static": {
+        "encut_eV": 400,
+        "gamma_mesh": [15, 15, 15],
+        "ismear": -5,
+        "incar": "systems/alpha_fe_bulk/INCAR.static"
+      }
+    }
+  }
+}

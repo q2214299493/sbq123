@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "event_id": "module-gate-transition-state-search-job9745217-running-20260906",
+  "event_type": "module_gate_changed",
+  "entity": {
+    "kind": "module",
+    "id": "transition_state_search",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-06T20:13:25+08:00",
+  "recorded_at": "2026-09-06T12:13:25Z",
+  "summary": "Bind the transition-state module gate to monitoring the newly submitted local O-H densified ordinary micro-NEB job 9745217 before any downstream TS action.",
+  "payload": {
+    "module": "transition_state_search",
+    "status": "Active",
+    "depends_on": "monitor and classify the submitted local O-H densified ordinary micro-NEB",
+    "current_gate": "LSF job 9745217 is RUN on sunboquan-codex. It uses the reviewed periodic-branch-normalized five-internal-image O-H path and the locked 80-core ordinary no-climb VASP inputs. The submission authorization is consumed. Monitor to terminal state, then separately assess scheduler, electronic, ionic-force, geometry, path-quality, and strategy-outcome evidence before any CI-NEB, Dimer, TS, frequency, or barrier action."
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_job9742743_local_oh_densified_5internal_20260906/submission_record.json",
+      "sha256": "96d6f3d3c460d13c2d95c5029c2a51811f76700c2f0515cb4d5188f6dbe9e0de",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-06T20:13:25+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_job9742743_local_oh_densified_5internal_20260906/scheduler_evidence_submitted.json",
+      "sha256": "541ff2382d34bd77362253216d630342092551451701e8762ad1bd8b8917feb7",
+      "authority": "scheduler",
+      "observed_at": "2026-09-06T20:13:25+08:00"
+    }
+  ],
+  "supersedes": [
+    "module-gate-transition-state-search-job9742743-done-unconverged-20260906"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

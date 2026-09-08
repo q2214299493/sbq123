@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-staged-release-v4-ready-review-20260826",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-26T22:45:28+08:00",
+  "recorded_at": "2026-08-26T14:45:28Z",
+  "summary": "A local-only v4 dual-model request now persists immutable stage snapshots and releases the O-H/H50 restraints through 10, 5, 2, and 0 eV/A2 while retaining the original 1.0 A atom-step gate and explicit O-H interval-coverage guards. The 17-image seed passes local review; nothing was uploaded or submitted.",
+  "payload": {
+    "objective": "Obtain user review and separate authorization before remotely preflighting or submitting the exact staged-release v4 GPU request.",
+    "phase": "active",
+    "current_evidence": [
+      "The exact job-1322 preconditioning-complete structures cannot be recovered because the shared restart directory was overwritten during ordinary ML-NEB; only the convergence log remains.",
+      "The executor now writes immutable, hash-bound snapshots for restrained_preconditioning_complete and each restraint-release completion stage.",
+      "The reviewed restraint schedule is 10 to 5 to 2 to 0 eV/A2; every finite-restraint stage must converge before the next decrease, and all temporary restraints are removed before ordinary ML-NEB.",
+      "Release and ordinary stages require at least three internal images in the 1.1-1.8 A O-H interval and permit at most 0.05 A transient backtracking; the final returned-path gate remains 0.01 A.",
+      "The maximum single movable-atom step limit remains unchanged at 1.0 A, and a geometry-guard failure now writes a detailed machine-readable artifact before exit.",
+      "The unchanged 17-image seed passes periodic continuity, C-C preservation, minimum distance, adjacent RMSD, single-atom-step, O-H monotonicity, and O-H coverage checks; images 10-15 occupy the 1.1-1.8 A interval.",
+      "Fourteen focused tests pass and Ruff plus Python compilation pass.",
+      "The exact unsubmitted v4 request SHA-256 is fb4531a88db09b80bc9067c96e8af4302070b6d4190168bc660cfad1446bf192."
+    ],
+    "one_executable_step": "After explicit user authorization, run exact v4 VTST/runtime/checkpoint/duplicate-job preflights, upload request SHA-256 fb4531a88db09b80bc9067c96e8af4302070b6d4190168bc660cfad1446bf192 to a fresh MZ73 directory, and submit at most once only if all checks pass.",
+    "submission_boundary": "No v4 upload or submission, VASP job, DIMER handoff, threshold relaxation, or automatic resubmission is authorized. The current package is local-only and prediction-only.",
+    "done_when": [
+      "An explicitly authorized v4 producer reaches a terminal state and every immutable stage snapshot is collected.",
+      "The fully released returned path passes H50 single-step continuity, O-H final monotonicity and coverage, C-C preservation, periodic continuity, and dual-model review.",
+      "A least-cost VASP validation or refinement recommendation is ready for separate authorization."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_staged_release_v4_20260826/local_staged_release_review.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_staged_release_v4_20260826/work_to_gpu/request.json`",
+      "`scripts/dual_model_ml_neb.py`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_staged_release_v4_20260826/local_staged_release_review.work.json",
+      "sha256": "3bb497133ef2db619321b06765d92faca5a66b62b925b7474214af4a8d1aefb6",
+      "authority": "module_validation",
+      "observed_at": "2026-08-26T22:45:28+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_staged_release_v4_20260826/work_to_gpu/request.json",
+      "sha256": "fb4531a88db09b80bc9067c96e8af4302070b6d4190168bc660cfad1446bf192",
+      "authority": "structure_output",
+      "observed_at": "2026-08-26T22:45:28+08:00"
+    },
+    {
+      "locator": "scripts/dual_model_ml_neb.py",
+      "sha256": "75441383ff5fd361422af09864d02794e17e502e851efa2e849cee8c46f477af",
+      "authority": "repository_document",
+      "observed_at": "2026-08-26T22:45:28+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-branch-stabilized-1322-failed-path-collapse-20260826"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

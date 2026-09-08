@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-v9-piecewise-arc-job1346-submitted-20260829",
+  "event_type": "task_opened",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v9",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-29T00:48:50+08:00",
+  "recorded_at": "2026-08-28T16:48:50Z",
+  "summary": "User-authorized MZ73 job 1346 was submitted for the frozen-MatRIS, 21-image piecewise-redistributed unrestrained ordinary ML-NEB path; it is initially PENDING and no VASP or Dimer work is authorized.",
+  "payload": {
+    "objective": "Run and review the complete frozen-MatRIS ordinary ML-NEB path for Fe(110) C2HO*+H* -> C2H2O*+*, followed by AQCat25 exact fixed-path audit only after a complete primary path returns.",
+    "phase": "active",
+    "current_evidence": [
+      "The current MatRIS checkpoint passed the prior six-structure held-out gate and the new eight-structure failure-boundary VASP screening; no fine-tuning was triggered.",
+      "The v9 seed has 21 images and was redistributed by reactant/product movable-atom configuration arc length plus a monotonic O-H transition grid.",
+      "Local and MZ73 no-model preflights passed: five strict O-H interval images, maximum adjacent RMSD 0.153798 A, maximum movable-atom step 0.626582 A, minimum pair distance 0.978328 A, C1-C2 preservation, numeric PBC continuity, and zero temporary restraints.",
+      "The authoritative execution gate allows REBUILD_PATH only; VASP, CI-NEB, Dimer, TS, VFA, and barrier actions remain forbidden.",
+      "MZ73 Slurm job 1346 is initially PENDING for priority with a six-hour limit."
+    ],
+    "one_executable_step": "Monitor MZ73 job 1346 to queue exit, collect the producer record and complete returned path, then review ordinary-ML-NEB convergence, O-H/C-C/PBC continuity, peak structure, and AQCat25 exact-path comparison before any VASP proposal.",
+    "submission_boundary": "No automatic retry, MatRIS fine-tuning, VASP peak-triad submission, VASP micro-NEB, Dimer, TS acceptance, or barrier action is authorized by this GPU submission.",
+    "done_when": [
+      "Job 1346 reaches queue exit and its producer/status evidence plus all available path artifacts are collected.",
+      "A complete returned path is reviewed for ordinary-ML-NEB convergence, chemistry/geometry continuity, and AQCat25 exact fixed-path audit, or a truthful failure diagnosis is recorded.",
+      "The next method decision is gate-bound and does not promote predicted energies, a Dimer parent, TS, or barrier without the required VASP evidence."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v9_piecewise_arc_21img_20260829/preparation_manifest.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v9_piecewise_arc_21img_20260829/execution_gate_decision.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v9_piecewise_arc_21img_20260829/execution_review.work.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v9_piecewise_arc_21img_20260829/submission_record_job1346.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v9_piecewise_arc_21img_20260829/preparation_manifest.json",
+      "sha256": "cfad7fa7872d182d56a2edf6f7fde239ec5046f30d8c0fd524fdcb7bfe0f585d",
+      "authority": "module_validation",
+      "observed_at": "2026-08-29T00:48:50+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v9_piecewise_arc_21img_20260829/execution_gate_decision.json",
+      "sha256": "5e3e40d0da7464b352464a3ec15f0f18984755c5b22af153bee154384de0773c",
+      "authority": "module_validation",
+      "observed_at": "2026-08-29T00:48:50+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v9_piecewise_arc_21img_20260829/execution_review.work.json",
+      "sha256": "57c45a696b10bbe94330a3cfc52d813fe327f897867f9f93ee3eee8d8044db04",
+      "authority": "module_validation",
+      "observed_at": "2026-08-29T00:48:50+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v9_piecewise_arc_21img_20260829/submission_record_job1346.json",
+      "sha256": "f211ec95faab5920bbcb113c74a56332a824daf8a2615299ffb7260bb366aabf",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-29T00:48:50+08:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

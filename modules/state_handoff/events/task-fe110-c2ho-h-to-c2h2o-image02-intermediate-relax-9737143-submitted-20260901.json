@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-image02-intermediate-relax-9737143-submitted-20260901",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-01T00:53:51.2677358+08:00",
+  "recorded_at": "2026-08-31T16:53:51.2699631Z",
+  "summary": "One independent ordinary VASP relaxation of completed formal micro-NEB image 02 was submitted as LSF job 9737143 to test whether the low-force structure is a genuine intermediate; the job is RUNNING and no follow-on calculation is authorized.",
+  "payload": {
+    "objective": "Complete and review the single image 02 candidate-intermediate relaxation before deciding whether the failed O-H path should be split around a genuine local minimum.",
+    "phase": "active",
+    "current_evidence": [
+      "The source POSCAR is an exact copy of job 9734465 image 02 final CONTCAR with SHA-256 8d319975a7861a69acf23ef85543d9915223383ee517556d5214418ac71e0595.",
+      "Geometry preflight passed for Fe45 C2 O1 H2 with 50 atoms, bottom 18 Fe fixed, no collision findings, O47-H49=2.5043 A, C45-C46=1.4244 A, and C46-O47=1.2671 A.",
+      "The ordinary relaxation input passed the canonical adsorption preflight with PBE/PAW-PBE, ENCUT=400 eV, 5x5x1 Gamma mesh, ISMEAR=1, SIGMA=0.20 eV, EDIFF=1e-5 eV, EDIFFG=-0.02 eV/A, IBRION=2, POTIM=0.20, NSW=300, and 32 ranks.",
+      "The remote Fe-C-O-H POTCAR SHA-256 matched e3bc41a37d795bfcf1b1dc9a2a9ddfb5ef86aa5dc9aa0ac5a3583471a0982f85 before submission.",
+      "LSF job 9737143 is RUNNING on gknew041 in Gkn_normal.",
+      "This calculation is a local-minimum test only; it is not a NEB, Dimer, TS, connectivity, or barrier result."
+    ],
+    "one_executable_step": "Monitor only LSF job 9737143; after terminal state, collect its final outputs and check normal termination, electronic and ionic convergence, final geometry, O-H/C-C/C-O connectivity, adsorption-site changes, and whether it reaches a distinct local minimum.",
+    "submission_boundary": "Only job 9737143 is authorized and active. Do not automatically restart it or submit a second candidate, rebuilt NEB, Dimer, frequency, TS, or barrier calculation.",
+    "done_when": [
+      "Job 9737143 reaches a terminal scheduler state and its final outputs are collected with hashes.",
+      "Electronic/ionic convergence and final geometry are reviewed sufficiently to classify image 02 as a genuine local minimum, a return to a known endpoint, a different adsorbate state, or an unresolved relaxation."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/intermediate_image02_relax_20260901/submission_record.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/intermediate_image02_relax_20260901/scheduler_submission_evidence.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/intermediate_image02_relax_20260901/adsorption_submission_preflight.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/intermediate_image02_relax_20260901/work_to_vasp_handoff.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/intermediate_image02_relax_20260901/submission_record.json",
+      "sha256": "6ea7ed16bbe03f12a96ce822e2cb8073ca6fb4f72e21fa905bb3a48ef20a7706",
+      "authority": "repository_document",
+      "observed_at": "2026-09-01T00:53:51.2677358+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/intermediate_image02_relax_20260901/scheduler_submission_evidence.json",
+      "sha256": "cefd2cc90f3f5fc01ba9ed0342d1b59bb40bdf3f338b21e7b5655260a9e20ca4",
+      "authority": "scheduler",
+      "observed_at": "2026-09-01T00:53:51.2677358+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/intermediate_image02_relax_20260901/adsorption_submission_preflight.json",
+      "sha256": "85c5101ecb90fc3480011ca53aa4bffc000960fbdddc0e93e8b1ec15d923652d",
+      "authority": "module_validation",
+      "observed_at": "2026-09-01T00:53:51.2677358+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-formal-micro-neb-9734465-done-rebuild-required-20260831"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-co-connectivity-needs-review-20260806",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-co-dissociation",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-06T14:46:12+08:00",
+  "recorded_at": "2026-08-06T14:46:12+08:00",
+  "summary": "Complete both Dimer-mode downhill relaxations and record an unresolved automatic endpoint classification.",
+  "payload": {
+    "objective": "Review whether the two converged Dimer-mode downhill branches establish contract-bound Fe(110) CO-dissociation connectivity without promoting an unvalidated transition state.",
+    "phase": "verification",
+    "current_evidence": [
+      "Positive job `9695455` and negative job `9695456` are scheduler `DONE`; pulled POSCAR, CONTCAR, OUTCAR, OSZICAR, and vasp.out hashes match the remote files.",
+      "Both branches completed normally without fatal output, reached ionic convergence, and satisfied `EDIFF=1E-5` before `NELM=200`.",
+      "The positive branch has C-O `1.205 A` and is bond-distance-like IS; the negative branch has C-O `3.118 A` and is bond-distance-like FS.",
+      "The automatic contract-bound analyzer returned `NEEDS_REVIEW`: both branches failed reaction-atom RMSD and maximum-displacement tolerances relative to the accepted endpoint coordinates, despite opposite C-O bond-state scores and negligible fixed-Fe drift.",
+      "The validation pipeline status is `CONNECTIVITY_FAILED_OR_NEEDS_REVIEW`; connectivity is not proven, the candidate remains `Ungraded`, and no validated TS or barrier may be claimed."
+    ],
+    "one_executable_step": "Review the converged positive and negative final structures against periodic/site-equivalent IS and FS motifs and decide whether the endpoint-coordinate tolerances reveal a real site mismatch or an overly strict basin representation.",
+    "submission_boundary": "No additional VFA, Dimer, NEB, matched static, connectivity relaxation, or barrier calculation is authorized while the connectivity classification remains unresolved.",
+    "done_when": [
+      "The two branch structures receive a reviewed site, coordination, periodic mapping, and reaction-event classification against the contract-bound endpoints.",
+      "The reviewed outcome either accepts a reproducible endpoint-equivalence rule or records that this Dimer candidate does not prove the intended IS/FS connectivity."
+    ],
+    "authoritative_references": [
+      "Scientific and execution gates: `modules/transition_state_search/README.md`.",
+      "Vibrational validation: `modules/ts_vibrational_validation/README.md`.",
+      "Connectivity thresholds: `configs/ts_connectivity_gate.yaml`.",
+      "Pipeline status: `configs/ts_validation_pipeline.yaml`."
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/connectivity_from_dimer9656664_mode6_amp0p10_20260805/positive/scheduler_evidence.json",
+      "sha256": "76a8e8dbb55ef260dc8512c2994d7f0747d1f14ddd248751bc8e4db5ed3ef9f7",
+      "authority": "scheduler",
+      "observed_at": "2026-08-06T06:43:30Z"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/connectivity_from_dimer9656664_mode6_amp0p10_20260805/negative/scheduler_evidence.json",
+      "sha256": "d1eae73e606ea83dc37271e4b663555735d1f102ee2ed42af820400c86293883",
+      "authority": "scheduler",
+      "observed_at": "2026-08-06T06:43:31Z"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/connectivity_from_dimer9656664_mode6_amp0p10_20260805/bidirectional_connectivity_report.json",
+      "sha256": "cb72a8ae7c51fd43bcdd13b7d7802a15b8eb1608aec886a2acc8b247df1f3f4b",
+      "authority": "module_validation",
+      "observed_at": "2026-08-06T14:46:12+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/connectivity_from_dimer9656664_mode6_amp0p10_20260805/validation_pipeline_status.json",
+      "sha256": "286f0609546aea1885e4500ecdcb66459bdf06a805d7ddbd0a12f454427f36f2",
+      "authority": "module_validation",
+      "observed_at": "2026-08-06T14:46:12+08:00"
+    }
+  ],
+  "supersedes": ["task-fe110-co-connectivity-submitted-20260805"],
+  "review": {"required": false, "reason_codes": [], "status": "not_required"}
+}

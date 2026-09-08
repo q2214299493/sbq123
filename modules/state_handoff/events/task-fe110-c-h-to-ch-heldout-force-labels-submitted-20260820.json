@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-heldout-force-labels-submitted-20260820",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-transition-state",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-20T00:54:00+08:00",
+  "recorded_at": "2026-08-19T16:54:00Z",
+  "summary": "The explicitly authorized six-structure held-out VASP TS-domain force-label batch was geometry-gated, submitted as LSF jobs 9719408-9719413, and registered; all six initial scheduler states were PEND and no scientific result is yet established.",
+  "payload": {
+    "objective": "Establish whether the current AQCat25 checkpoint can be calibrated for the Fe(110) hydrogen-transfer TS/path domain before using it to accelerate the remaining C* + H* -> CH* transition-state search.",
+    "phase": "active",
+    "current_evidence": [
+      "The frozen six-structure local geometry gate passed for R1, R2, S1, S2, F1, and F2 without atom-order, fixed-layer, cell, PBC, or continuity errors.",
+      "The user explicitly authorized this bounded six-job VASP force-label batch.",
+      "R1/R2/S1/S2/F1/F2 were submitted to sunboquan-codex as LSF jobs 9719408/9719409/9719410/9719411/9719412/9719413.",
+      "Every submitted job is an exact-structure static label using NSW=0, IBRION=-1, ENCUT=400 eV, ISMEAR=1, SIGMA=0.20 eV, EDIFF=1e-6 eV, ISPIN=2, and a 5x5x1 Gamma mesh.",
+      "Initial live scheduler evidence recorded all six jobs as PEND; scheduler status alone does not establish electronic convergence, complete forces, or scientific validity.",
+      "All six calculations, jobs, initial status rows, provenance files, and compatibility records were appended to data/project_registry.sqlite3 by registry batch fe110-c-h-to-ch-heldout-labels-9719408-9719413-20260820.",
+      "These six structures remain independent held-out validation labels and are excluded from training/replay for the checkpoint under evaluation."
+    ],
+    "one_executable_step": "Wait for all six jobs to reach a terminal scheduler state, collect OUTCAR and OSZICAR, and verify normal termination, electronic convergence, and complete 47-atom force data before any exact AQCat25 comparison.",
+    "submission_boundary": "This submission does not authorize automatic reruns, parameter changes, GPU prediction, fine-tuning, ML-NEB reruns, VASP NEB/CI-NEB, DIMER, frequency, connectivity, or barrier reporting.",
+    "done_when": [
+      "At least five disjoint held-out VASP-labeled TS-domain structures pass registered calibration metrics for the exact checkpoint and compatibility branch.",
+      "A hash-bound calibration review decides whether this checkpoint is reusable for the in-scope hydrogen-transfer path domain.",
+      "Only after calibration may the strategy engine choose the least-cost VASP NEB/CI-NEB/DIMER continuation from the complete path evidence."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_to_ch_ts_20260818/heldout_vasp_force_labels_sigma0p20_20260820/batch_submission_summary.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/heldout_vasp_force_labels_sigma0p20_20260820/geometry_gate_path/path_geometry_diagnosis.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/heldout_vasp_force_labels_sigma0p20_20260820/registry_submission_receipt.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/heldout_vasp_force_labels_sigma0p20_20260820/batch_submission_summary.json",
+      "sha256": "47e5bddae6c572a8552d922dbc46e7b14db8750ea84d693a70ab464ea82a4617",
+      "authority": "scheduler",
+      "observed_at": "2026-08-20T00:54:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/heldout_vasp_force_labels_sigma0p20_20260820/geometry_gate_path/path_geometry_diagnosis.json",
+      "sha256": "ab243836c94fed20b6352a2249f89bab789ad21c6fb15ac8daee9b6977684892",
+      "authority": "module_validation",
+      "observed_at": "2026-08-20T00:54:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/heldout_vasp_force_labels_sigma0p20_20260820/registry_submission_receipt.json",
+      "sha256": "678e2bf1ae8968f6e8c1ad8c37fd4d27f46ff12b3b4897f36292794c59bd7241",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-20T00:54:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-heldout-vasp-label-batch-prepared-20260820"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

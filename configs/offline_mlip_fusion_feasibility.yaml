@@ -1,0 +1,67 @@
+version: 1
+workflow_kind: offline_matris_aqcat25_fusion_feasibility
+
+sources:
+  benchmark_manifest: outputs/mlip_same_structure_benchmark_extended_20260825/benchmark_manifest.json
+  matris_results: outputs/mlip_same_structure_benchmark_extended_20260825/raw_results/matris/job_1311/results.json
+  aqcat25_results: outputs/mlip_same_structure_benchmark_extended_20260825/raw_results/aqcat25/job_1312/results.json
+
+data_contract:
+  split_unit: reaction_id
+  outer_validation: leave_one_reaction_out
+  meta_hyperparameter_selection: nested_leave_one_reaction_out
+  force_scope: declared_movable_atoms_only
+  force_unit: eV_per_A
+  energy_scope: within_energy_group_identical_composition_only
+  energy_unit: eV
+  minimum_energy_group_size: 2
+  require_normal_vasp_completion: true
+  require_electronic_convergence: true
+  require_exact_structure_hash_match: true
+  preserve_raw_inputs: true
+
+models:
+  baselines:
+    - matris
+    - aqcat25
+    - convex_linear_fusion
+  conservative_meta:
+    kind: matris_anchored_pair_rbf_energy_correction
+    description: >-
+      E_meta = E_MatRIS + w(E_AQCat25-E_MatRIS) + sum_k c_k Phi_k(R),
+      with forces derived from the same energy expression.
+    aqcat25_weight_bounds: [0.0, 1.0]
+    exclude_fixed_fixed_pairs: true
+    cutoff_A_grid: [4.0, 5.0, 6.0]
+    radial_basis_count_grid: [6, 10]
+    ridge_alpha_grid: [0.0001, 0.01, 1.0, 100.0]
+    radial_center_min_A: 0.8
+
+fit_objective:
+  force_scale_eV_per_A: 0.20
+  relative_energy_scale_eV: 0.10
+  force_block_weight: 0.5
+  relative_energy_block_weight: 0.5
+
+promotion_gate:
+  unit_of_inference: reaction
+  primary_force_metric: force_vector_rmse_eV_per_A
+  primary_energy_metric: relative_energy_rmse_eV
+  minimum_macro_relative_improvement: 0.10
+  one_sided_exact_sign_flip_alpha: 0.05
+  require_force_win_on_every_reaction: true
+  require_energy_win_on_every_eligible_reaction: true
+  maximum_allowed_force_vector_max_regression_fraction: 0.10
+  bootstrap_resamples: 20000
+  random_seed: 20260831
+  pass_action: eligible_for_separate_active_learning_and_distillation_review
+  fail_action: retain_matris_primary_aqcat25_auditor_without_fusion_promotion
+
+scientific_boundaries:
+  offline_only: true
+  automatic_gpu_submission: false
+  automatic_vasp_submission: false
+  automatic_training_submission: false
+  automatic_checkpoint_promotion: false
+  ml_predictions_are_not_dft: true
+  fusion_result_is_not_a_ts_or_barrier: true

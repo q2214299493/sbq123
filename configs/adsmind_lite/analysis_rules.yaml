@@ -1,0 +1,48 @@
+version: 1
+
+connectivity:
+  covalent_radius_scale: 1.25
+  minimum_bond_distance_angstrom: 0.35
+
+contact_validation:
+  # Emergency atom-overlap cutoff, not a chemically reasonable Fe-X bond length.
+  hard_contact_distance_angstrom: 0.80
+
+site_classification:
+  top_lateral_tolerance_angstrom: 0.45
+  explicit_site_lateral_tolerance_angstrom: 0.80
+  unknown_if_no_match: true
+
+duplicate_detection:
+  geometry_rmsd_tolerance_angstrom: 0.20
+  energy_tolerance_ev: 0.05
+
+surface_reconstruction:
+  maximum_slab_displacement_angstrom: 0.50
+
+recommendation:
+  allow_confidence: [high]
+  allow_medium_only_if_selected: true
+  reject_needs_review: true
+  reject_duplicate: true
+  reject_unintended_dissociation: true
+  reject_unknown_site: true
+
+reason_codes:
+  - invalid_binding_atom
+  - site_type_not_allowed
+  - too_close_to_surface
+  - adsorbate_fragmented
+  - duplicate_candidate
+  - lattice_adsorbate_atom_confusion
+  - unsupported_surface_family
+  - explicit_site_label_required
+  - oxygen_vacancy_not_tagged
+  - needs_review_high_risk_site
+  - unknown_surface_site
+  - needs_review_complex_adsorbate
+  - slipped_to_new_site
+  - connectivity_changed
+  - dissociated_unintentionally
+  - surface_reconstructed
+  - accepted

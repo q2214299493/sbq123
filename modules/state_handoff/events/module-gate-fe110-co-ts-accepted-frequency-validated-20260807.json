@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "event_id": "module-gate-fe110-co-ts-accepted-frequency-validated-20260807",
+  "event_type": "module_gate_changed",
+  "entity": {"kind": "module", "id": "transition_state_search", "module": "transition_state_search"},
+  "occurred_at": "2026-08-07T00:28:08+08:00",
+  "recorded_at": "2026-08-07T00:28:08+08:00",
+  "summary": "Advance the Fe(110) CO-dissociation Dimer candidate to accepted TS status.",
+  "payload": {
+    "module": "transition_state_search",
+    "status": "Active",
+    "depends_on": "compatible matched-static IS/TS/FS energies for any barrier or kinetic use",
+    "current_gate": "Dimer job `9656664` is converged and its single `537.451689 cm^-1` target imaginary mode is accepted; TS status is `TS_ACCEPTED`. Connectivity and optional VFA grading are not Dimer acceptance gates"
+  },
+  "evidence": [
+    {"locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806/validation_pipeline_status.json", "sha256": "65521a91a9313b1722a3bdc45a56fbc866dbf1955f97285b3682eb415a03fe34", "authority": "module_validation", "observed_at": "2026-08-07T00:28:08+08:00"},
+    {"locator": "configs/ts_validation_pipeline.yaml", "sha256": "9625e892bc7d9a791e278a68e012751415fb314cfb7f10a0ae23eb5d921bb8fb", "authority": "repository_document", "observed_at": "2026-08-07T00:28:08+08:00"}
+  ],
+  "supersedes": [
+    "module-gate-fe110-co-connectivity-needs-review-20260806",
+    "module-gate-fe110-co-dimer-frequency-validation-20260806",
+    "module-gate-fe110-co-dimer-mode-accepted-20260807",
+    "module-gate-fe110-co-dimer-mode-accepted-merge-20260807"
+  ],
+  "review": {"required": true, "reason_codes": ["scientific_method_change", "cross_module_change"], "status": "pending"}
+}

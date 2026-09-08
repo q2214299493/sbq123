@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-split-paths-user-accepted-20260901",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-01T17:55:16.3405775+08:00",
+  "recorded_at": "2026-09-01T09:56:03.2479745Z",
+  "summary": "The user accepted both checksum-bound split-path structures. Both reviews pass hash validation, but this acceptance covers geometry only and does not authorize any GPU or VASP calculation.",
+  "payload": {
+    "objective": "Obtain separate user direction on whether and how to execute the two accepted split paths; no calculation submission is currently authorized.",
+    "phase": "active",
+    "current_evidence": [
+      "The user accepted both concrete path structures in the current task.",
+      "Segment 1 IS-A-to-intermediate path review is status accepted and remains bound to its dist.pl, nebmovie.pl 0, and path-generation hashes.",
+      "Segment 2 intermediate-to-FS-A path review is status accepted and remains bound to its dist.pl, nebmovie.pl 0, and path-generation hashes.",
+      "Canonical path-review validation returned accepted=True for both segments after the edits.",
+      "No INCAR, POTCAR, KPOINTS, LSF script, submission record, or user submission authorization exists in the split-path package.",
+      "The accepted structures remain kinematic path candidates; no ML/VASP energy, force, optimized NEB path, TS, frequency, connectivity, or barrier result exists."
+    ],
+    "one_executable_step": "Await a separate user request selecting the next execution step; do not infer authorization to upload, run, or submit either path.",
+    "submission_boundary": "The current acceptance is geometry-only. GPU, VASP NEB, Dimer, frequency, barrier, restart, and resubmission actions remain forbidden without new explicit authority and a current hash-bound execution gate.",
+    "done_when": [
+      "The user selects the next calculation step or asks to retain the accepted paths without execution.",
+      "Any requested execution passes the applicable current hash-bound gate before submission."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/split_path_review_v3_20260901/split_path_acceptance.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/split_path_review_v3_20260901/segment_01_IS_A_to_MID/path_review_draft.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/split_path_review_v3_20260901/segment_02_MID_to_FS_A/path_review_draft.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/split_path_review_v3_20260901/split_path_acceptance.json",
+      "sha256": "8432218f38b2789a84de8b50767ae315590a226bd29d08b7ea83e6ef7855f249",
+      "authority": "user_authorization",
+      "observed_at": "2026-09-01T17:55:16.3405775+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/split_path_review_v3_20260901/segment_01_IS_A_to_MID/path_review_draft.json",
+      "sha256": "b813eafc6b12dc40ae9921a1a1a500b32be59415955176a51a56c9687fa09193",
+      "authority": "module_validation",
+      "observed_at": "2026-09-01T17:55:16.3405775+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/split_path_review_v3_20260901/segment_02_MID_to_FS_A/path_review_draft.json",
+      "sha256": "9dbc37baea1de29b463f2c061ede0c0ed3b043837a2b2bea206844e411f7c0fb",
+      "authority": "module_validation",
+      "observed_at": "2026-09-01T17:55:16.3405775+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-split-paths-prepared-user-review-20260901"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

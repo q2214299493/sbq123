@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-vfa-9721851-done-diagnostic-mode-20260822",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-transition-state",
+    "module": "ts_vibrational_validation"
+  },
+  "occurred_at": "2026-08-22T12:25:00+08:00",
+  "recorded_at": "2026-08-22T04:25:00Z",
+  "summary": "Local partial-Hessian job 9721851 is DONE and has exactly one C45-H46-dominated imaginary mode at 842.194583 cm^-1; the result remains Ungraded because the current Dimer soft review allows frequency handoff only, not formal TS validation.",
+  "payload": {
+    "objective": "Resolve the formal TS-acceptance review for the Fe(110) C* + H* -> CH* + * Dimer candidate using the completed diagnostic local partial Hessian.",
+    "phase": "active",
+    "current_evidence": [
+      "LSF job 9721851 is DONE; OUTCAR has normal completion and no fatal keyword.",
+      "All 43 expected force blocks completed, none reached NELM=200, and every final electronic dE and d epsilon meets EDIFF=1e-7 eV.",
+      "The completed seven-atom partial Hessian contains 21 modes and exactly one raw imaginary mode: mode 21 at 842.194583 cm^-1.",
+      "C45 and H46 contain 98.840907 percent of the mode's squared amplitude, and their relative displacement projects 90.069064 percent onto the forming C-H bond axis.",
+      "The C45-H46 distance is 1.450463 A and the reviewed TS geometry remains valid.",
+      "Canonical VFA analysis is NEEDS_REVIEW, Grade=Ungraded, kinetic_eligible=false because dimer_soft_gate_review_decision=allow_frequency_handoff and dimer_technical_acceptance=false."
+    ],
+    "one_executable_step": "Obtain an explicit hash-bound decision to accept or reject the already documented Dimer Force/Torque residuals for formal TS validation; no additional VASP job is required for that decision.",
+    "submission_boundary": "No new VASP job is authorized or scientifically required at this stage. Do not accept the TS, assign Grade A, report a barrier, or launch connectivity without the formal Dimer residual decision and the resulting current validation gate.",
+    "done_when": [
+      "The Dimer residuals are explicitly accepted for formal TS validation or rejected with the current Dimer and VFA hashes.",
+      "If accepted, the completed single target-mode frequency evidence is recorded through the formal TS validation gate.",
+      "Compatible IS/TS/FS final OUTCAR TOTEN values are separately reviewed before an electronic barrier is reported."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/scheduler_evidence.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/vfa_review.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/vfa_analysis.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/dimer_soft_gate_review.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/scheduler_evidence.json",
+      "sha256": "988df8f04c0708d24bf9ecc81b3cab983f6a579be90b0ecceea029d2b0c9eb96",
+      "authority": "scheduler",
+      "observed_at": "2026-08-22T12:25:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/vfa_review.json",
+      "sha256": "edd2f455bf3b2c8b60886ade22fe39566931e31934eca0879523fe6ba89b5cb4",
+      "authority": "module_validation",
+      "observed_at": "2026-08-22T12:25:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/vfa_analysis.json",
+      "sha256": "ca6dc4e40a934132c7650f8a6d84b95d7df1b52423f0318ab22e24ad9a1ee6e8",
+      "authority": "module_validation",
+      "observed_at": "2026-08-22T12:25:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/registry_completion_receipt.json",
+      "sha256": "d52ecd1cb4e1cbc171fe019cdb8eaaad1d548bb8f57254860f1586079eff9f3a",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-22T12:25:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-vfa-9721851-running-20260821"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

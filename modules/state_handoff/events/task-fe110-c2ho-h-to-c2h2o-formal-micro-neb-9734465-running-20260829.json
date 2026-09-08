@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-formal-micro-neb-9734465-running-20260829",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-29T22:15:57.6172557+08:00",
+  "recorded_at": "2026-08-29T14:15:57.6172557Z",
+  "summary": "The separately authorized four-internal-image formal VASP ordinary micro-NEB was submitted through the hash-bound execution gate as LSF job 9734465 and is RUNNING.",
+  "payload": {
+    "objective": "Monitor formal ordinary micro-NEB job 9734465 and evaluate its completed path before selecting any refinement method.",
+    "phase": "active",
+    "current_evidence": [
+      "The user separately authorized this exact formal four-internal-image ordinary micro-NEB submission.",
+      "The refreshed ordinary_neb preflight passed with bundle SHA-256 8996babd2b032e112036165987de0aa2754260775284dfb942bb4995f359e08c.",
+      "The authoritative execution gate returned READY_FOR_ORDINARY_NEB_SUBMISSION and allowed only SUBMIT_VASP; its decision SHA-256 is fa6eb28e8af0cd093b6ca276f5a29f7493dd39bca0a5a88cdf5104fe836a4996.",
+      "LSF job 9734465 is RUNNING in Gkn_normal on four 32-rank hosts.",
+      "The submitted run uses four internal images, NSW=300, LCLIMB=false, ISMEAR=1, SIGMA=0.20 eV, ENCUT=400 eV, and 128 ranks.",
+      "No electronic, ionic, path-convergence, Dimer, TS, frequency, or barrier result is yet accepted from this formal run."
+    ],
+    "one_executable_step": "Monitor job 9734465 with the canonical compact NEB monitor and collect completed outputs plus raw scheduler evidence when it reaches a terminal state.",
+    "submission_boundary": "Do not automatically retry, stop, rebuild, enable CI-NEB, prepare or start Dimer, accept a TS, or report a barrier from this submission alone.",
+    "done_when": [
+      "Job 9734465 reaches a terminal LSF state and its complete outputs are collected.",
+      "The completed path is evaluated for electronic, force, geometry, periodic, reaction-coordinate, and path-quality validity."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_ml12_14_4img_20260829/c2ho_h_micro_neb_ml12_14_4img_formal_20260829/submission_record.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_ml12_14_4img_20260829/c2ho_h_micro_neb_ml12_14_4img_formal_20260829/execution_gate_decision.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_ml12_14_4img_20260829/c2ho_h_micro_neb_ml12_14_4img_formal_20260829/submission_record.json",
+      "sha256": "24efd4c71311427f815a3a92b540e430796532c92370bca5fd26aba66e181a1a",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-29T22:15:57.6172557+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-vasp-micro-neb-pilot-9733804-pass-20260829"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

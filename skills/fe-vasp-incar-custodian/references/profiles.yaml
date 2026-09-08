@@ -1,0 +1,62 @@
+global_defaults:
+  PREC: Accurate
+  ENCUT: 400
+  GGA: PE
+  ISPIN: 2
+  EDIFF: 1.0e-5
+  NELM: 200
+  ISYM: 0
+  ISIF: 2
+calculation_types:
+  adsorption_GO:
+    IBRION: 2
+    NSW: 200
+    EDIFFG: -0.03
+    LREAL: Auto
+  adsorption_static:
+    IBRION: -1
+    NSW: 0
+    LREAL: Auto
+  endpoint_GO:
+    IBRION: 2
+    NSW: 200
+    EDIFFG: -0.03
+  pre_NEB:
+    IBRION: 3
+    POTIM: 0
+    NSW: 150
+    EDIFFG: -0.10
+    SPRING: -5
+    LCLIMB: false
+  refine_NEB:
+    IBRION: 3
+    POTIM: 0
+    NSW: 300
+    EDIFFG: -0.05
+    SPRING: -5
+    LCLIMB: false
+  CI_NEB:
+    IBRION: 3
+    POTIM: 0
+    NSW: 300
+    EDIFFG: -0.03
+    SPRING: -5
+    LCLIMB: true
+  local_NEB:
+    IBRION: 3
+    POTIM: 0
+    NSW: 300
+    EDIFFG: -0.03
+    SPRING: -5
+  DIMER:
+    requires_module_review: true
+  VFA:
+    IBRION: 5
+    POTIM: 0.01
+    NSW: 1
+    EDIFF: 1.0e-6
+    LREAL: false
+    ISYM: 0
+    LWAVE: false
+    LCHARG: false
+    requires_module_review: true

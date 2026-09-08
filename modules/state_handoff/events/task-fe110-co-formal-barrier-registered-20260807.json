@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-co-formal-barrier-registered-20260807",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-co-dissociation",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-07T12:00:00+08:00",
+  "recorded_at": "2026-08-07T12:00:00+08:00",
+  "summary": "Register the accepted Fe(110) CO-dissociation Dimer TS, compatible SIGMA=0.20 electronic barrier, Topic-1 workbook row, and reusable strategy template.",
+  "payload": {
+    "objective": "Preserve the accepted Fe(110) CO-dissociation Dimer TS and its compatible formal electronic barrier for reporting and strategy reuse.",
+    "phase": "verification",
+    "current_evidence": [
+      "Dimer job `9656664` is accepted from hard force convergence, negative curvature, reviewed Force/Torque residuals, and one accepted target imaginary mode at `537.451689 cm^-1`.",
+      "The hash-bound IS, TS, and FS outputs use the same PBE/PAW-PBE, ENCUT, k-point, magnetic, smearing, SIGMA=0.20, slab, atom-order, and constraint conventions.",
+      "Using final OUTCAR TOTEN under `fe110_converged_toten_sigma0p20_v1`, the forward electronic barrier is `1.350209 eV`, the reverse barrier is `2.056573 eV`, and the reaction energy is `-0.706364 eV`.",
+      "The TS validation, barrier set, Topic-1 Excel row, and reusable strategy template are registered; no new VASP job was submitted."
+    ],
+    "one_executable_step": "Use the registered barrier and exact-fingerprint strategy template when a compatible future Fe(110) CO-dissociation task requests retrieval; calculate thermochemical corrections separately if a free-energy barrier is needed.",
+    "submission_boundary": "This registration authorizes no new VASP, NEB, Dimer, frequency, connectivity, or scheduler action.",
+    "done_when": [
+      "The compatible SIGMA=0.20 IS/TS/FS chain is hash-bound and registered.",
+      "The formal electronic barrier is stored in the canonical registry and Topic-1 workbook.",
+      "The accepted calculation strategy is retrievable from the reusable strategy library."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/registration_summary.json`",
+      "`calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/formal_barrier_manifest.json`",
+      "`modules/transition_state_search/README.md`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/registration_summary.json",
+      "sha256": "8eda76a85a1acddd464d1dab5c88f69437e23f84a6b89dd5c456db31533fd0f2",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-07T12:00:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/formal_barrier_manifest.json",
+      "sha256": "9fa49b0b3dffc481154b13d835502e77a3f27e64a4d7d43f9ca3ee0e530753c2",
+      "authority": "module_validation",
+      "observed_at": "2026-08-07T12:00:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/excel_promotion_receipt.json",
+      "sha256": "dc36b3f042d9e6ff46168df5f85ca7dc569783ab605169d8de4fce58f09d20a7",
+      "authority": "calculation_registry",
+      "observed_at": "2026-08-07T12:00:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "reconciled-task-updated-task-fe110-co-dissociation-1cbe59831846980fa6c3",
+    "task-fe110-co-dimer-mode-accepted-merge-20260807",
+    "task-fe110-co-ts-accepted-frequency-validated-20260807"
+  ],
+  "review": {
+    "required": true,
+    "reason_codes": ["scientific_result_registration", "cross_module_change"],
+    "status": "pending"
+  }
+}

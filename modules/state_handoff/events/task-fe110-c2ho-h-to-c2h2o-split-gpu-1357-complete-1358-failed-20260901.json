@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-split-gpu-1357-complete-1358-failed-20260901",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-01T21:40:28.0007506+08:00",
+  "recorded_at": "2026-09-01T13:40:28.0012305Z",
+  "summary": "Both split GPU jobs left the live queue. Producer 1357 completed a hash-valid converged nine-image MatRIS path with two internal peaks; producer 1358 exited at step 143 after the O-H segment exceeded the single-atom-step geometry guard and showed large reaction-coordinate backtracking.",
+  "payload": {
+    "objective": "Review the returned IS-A-to-intermediate GPU path and diagnose the intermediate-to-FS-A GPU failure before selecting any separately authorized correction or VASP route.",
+    "phase": "active",
+    "current_evidence": [
+      "Jobs 1357 and 1358 are absent from the live Slurm queue; completed-job accounting is disabled, so scheduler DONE or EXIT is not independently established.",
+      "Producer 1357 recorded exit code 0 and completed after 76 ordinary ML-NEB steps.",
+      "The 1357 manifest and all nine returned image hashes validate; its geometry guard passed and the maximum internal projected NEB force is 0.080106 eV/A.",
+      "The 1357 MatRIS profile has two strict internal peaks at images 03 and 07, consistent with more than one H surface-site migration event; it is not yet an accepted single Dimer parent.",
+      "Producer 1358 recorded exit code 1 and stopped at ordinary ML-NEB step 143.",
+      "The 1358 hard failure is a maximum single movable-atom step of 1.216849 A, slightly above the request limit of 1.2 A; the offending pair is image 04-to-05 and the displaced atom is H49.",
+      "The 1358 O47-H49 coordinate also backtracked by 0.708774 A and collapsed to one internal image in the 1.1-1.8 A review interval; preserved C1-C2, C2-O, and C1-H48 bonds, adjacent RMSD, minimum distance, and periodic numeric branch all passed.",
+      "Neither result is VASP evidence, a validated TS, or a barrier. No retry, VASP, ML-CI, Dimer, or fine-tuning action is currently authorized."
+    ],
+    "one_executable_step": "Await user direction on whether to retain and further split the two-peak surface-preorganization path and how to rebuild the failed O-H segment; do not submit or retry either path automatically.",
+    "submission_boundary": "The prior GPU authorization is exhausted. GPU retry, VASP, ML-CI, Dimer, frequency, and barrier actions require new explicit authority and a current hash-bound execution gate.",
+    "done_when": [
+      "The user selects the next reviewed correction or downstream validation step.",
+      "Any requested execution is bound to the selected structures and passes the applicable current gate before submission."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/gpu_return_job1357/dual_model_gpu_ml_neb_path_manifest.candidate.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/gpu_return_job1357/producer_exit_record.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/gpu_return_job1358/ordinary_ml_neb.geometry_guard_failure.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/gpu_return_job1358/producer_exit_record.failure.1358.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/gpu_return_job1357/dual_model_gpu_ml_neb_path_manifest.candidate.json",
+      "sha256": "ac49dfa1673bdfe26a762686ddb7f6681086a81b06c24314f49537c04921507e",
+      "authority": "module_validation",
+      "observed_at": "2026-09-01T21:40:28.0007506+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/gpu_return_job1357/producer_exit_record.json",
+      "sha256": "6be22326127ad8e6f25d9462344caeaa793fce386f976f700b33c499c3f29a1c",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-01T21:40:28.0007506+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/gpu_return_job1358/ordinary_ml_neb.geometry_guard_failure.json",
+      "sha256": "4cd96bfac7f5c4d871bfff66cdc0e8077219cab8704a101d0baa5c28823a9376",
+      "authority": "module_validation",
+      "observed_at": "2026-09-01T21:40:28.0007506+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_split_paths_dual_model_20260901/gpu_return_job1358/producer_exit_record.failure.1358.json",
+      "sha256": "0d75474560393bc54d8cdb0929376681691d5b58e877f51ac2a6a937f80b5703",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-01T21:40:28.0007506+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-split-gpu-jobs1357-1358-running-20260901"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

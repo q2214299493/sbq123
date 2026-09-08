@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-complete-gpu-path-rebuild-v5-prepared-20260827",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-27T20:22:10.9048336+08:00",
+  "recorded_at": "2026-08-27T12:22:10.9055803Z",
+  "summary": "A review-only 19-image complete GPU TS-path rebuild was prepared from the last valid job-1324 snapshot using frozen held-out-validated MatRIS as primary and AQCat25 as exact fixed-path force/geometry auditor; nothing was uploaded or submitted.",
+  "payload": {
+    "objective": "Review the prepared complete GPU path rebuild before any remote preflight or submission.",
+    "phase": "active",
+    "current_evidence": [
+      "The seed reuses all 17 exact structures from the converged geometry-valid job-1324 restrained snapshot and adds two adjacent minimum-image interpolations in the O-H formation region.",
+      "The 19-image seed is monotonic from O-H 3.079728 to 0.981210 A and contains five internal images at 1.683403, 1.493453, 1.325027, 1.234969, and 1.163493 A within the 1.1-1.8 A interval.",
+      "Local checks pass atom order, cell, fixed mask, periodic branch, C1-C2 preservation, minimum distance, adjacent RMSD, maximum movable-atom step, O-H monotonicity, and interval coverage.",
+      "Maximum adjacent RMSD is 0.128598 A, maximum movable-atom step is 0.672246 A, and minimum pair distance is 0.981210 A.",
+      "Temporary restraints release through 10 to 8, 6, 4, 2, 1, then 0 eV/A2; the ordinary MatRIS ML-NEB cannot start until zero internal-coordinate restraints are proven.",
+      "ML-CI remains auto-conditional on a converged, continuous, strict single-peak ordinary path. AQCat25 cannot relax the path or rank it by relative energy.",
+      "No remote preflight, upload, GPU/VASP submission, Dimer, TS, or barrier action has occurred."
+    ],
+    "one_executable_step": "Obtain user review of the exact request and seed; if accepted, run a hash-bound MZ73 environment/checkpoint/runtime preflight without submitting a job.",
+    "submission_boundary": "The package is local and review-only. Remote upload and every GPU/VASP/VTST submission require separate explicit authorization.",
+    "done_when": [
+      "The user accepts or revises the 19-image seed, staged release, model roles, hard path gates, and fallback routing.",
+      "An accepted package passes MZ73 preflight before a separate submission decision."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/complete_path_rebuild_plan.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/work_to_gpu/request.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/seed_geometry_review.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/seed_geometry_table.csv`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/active_learning_state.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/complete_path_rebuild_plan.json",
+      "sha256": "f1800024c7291b4c60f5bbc361b1e31c602e0f8761e809a1ffe453d23593acbd",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T20:22:10.9048336+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/work_to_gpu/request.json",
+      "sha256": "0d36944856bdc4799f6c6c441da04a0271b10f9d8acfd905eed0c679d38d01d6",
+      "authority": "repository_document",
+      "observed_at": "2026-08-27T20:22:10.9048336+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v5_20260827/seed_geometry_review.json",
+      "sha256": "3e3cfa9208e3f8df86ace60dfb3e6df3b7fa2fa6fa74608053631bb61b1f88f1",
+      "authority": "structure_output",
+      "observed_at": "2026-08-27T20:22:10.9048336+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/active_learning/round_0_job1324_boundary_pair_v2_20260827/active_learning_state.json",
+      "sha256": "daa65f9ceb78a992c7d866a91c200331618c9e70049cae94402eae799d6f8536",
+      "authority": "module_validation",
+      "observed_at": "2026-08-27T20:22:10.9048336+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-active-learning-heldout-validated-20260827"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

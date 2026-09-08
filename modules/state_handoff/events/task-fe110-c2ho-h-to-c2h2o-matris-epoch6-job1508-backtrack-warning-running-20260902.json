@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-matris-epoch6-job1508-backtrack-warning-running-20260902",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-02T18:10:04+08:00",
+  "recorded_at": "2026-09-02T10:10:04Z",
+  "summary": "MZ73 job 1508 remains RUNNING in the unrestrained ordinary MatRIS ML-NEB stage. The force maximum fell from 4.564 eV/A initially to about 0.24 eV/A, while the monitored O-H coordinate developed a 0.236890 A backtrack classified as a strong warning/stop candidate. The registered nonabsolute policy explicitly prevents this single metric from automatically failing or stopping the path, so no intervention or retry occurred.",
+  "payload": {
+    "objective": "Monitor MZ73 job 1508 to completion, then review the full returned path using combined force, geometry, reaction-coordinate, and provenance evidence.",
+    "phase": "active",
+    "current_evidence": [
+      "Epoch-6 checkpoint 8e53cfb0...eb49 remains bound to the complete 11-image MID-to-FS-A O-H path request.",
+      "Slurm job 1508 is RUNNING on MZ73 in ordinary_ml_neb_running.",
+      "The runtime snapshot records 72 ordinary ML-NEB steps.",
+      "The ordinary ML-NEB force maximum fell from 4.564192 eV/A at step 0 to approximately 0.24 eV/A near steps 65-72, but has not reached the requested 0.10 eV/A convergence threshold.",
+      "Maximum monitored O-H backtrack is 0.236890 A, classified strong_warning_stop_candidate.",
+      "automatic_failure_from_backtrack_only is false, so this warning cannot alone stop or fail the run.",
+      "No AQCat25 fixed-path audit, VASP, Dimer, TS acceptance, barrier action, automatic retry, or resubmission has occurred."
+    ],
+    "one_executable_step": "Wait for job 1508 to leave the queue, then collect and review all path outputs; do not act on the backtrack warning alone.",
+    "submission_boundary": "The authorized GPU submission is consumed by job 1508. Do not stop or retry automatically. VASP, micro-NEB, Dimer, TS acceptance, and barrier actions remain unauthorized.",
+    "done_when": [
+      "Scheduler and producer completion evidence are collected.",
+      "The full 11-image path receives combined convergence and geometry review.",
+      "The warning is resolved as transient, persistent path folding, or another diagnosed outcome."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_oh_complete_path_epoch6_20260902/submission_record_job1508.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_oh_complete_path_epoch6_20260902/runtime_state_job1508_step72.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_oh_complete_path_epoch6_20260902/submission_record_job1508.json",
+      "sha256": "f7339131c48b2f7ccc6211ae4130156a807b03b375f277cc621432036fd2c90d",
+      "authority": "scheduler",
+      "observed_at": "2026-09-02T18:10:04+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_oh_complete_path_epoch6_20260902/runtime_state_job1508_step72.json",
+      "sha256": "c5e91686f61bf4f816d2de0384e7f85f34851ffc114758e34cf44f0846ad6b42",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-02T18:10:04+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-matris-epoch6-complete-oh-job1508-running-20260902"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

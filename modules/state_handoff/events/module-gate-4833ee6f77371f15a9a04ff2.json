@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "event_id": "module-gate-4833ee6f77371f15a9a04ff2",
+  "event_type": "module_gate_changed",
+  "entity": {
+    "kind": "module",
+    "id": "transition_state_search",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-02T16:26:11+08:00",
+  "recorded_at": "2026-08-02T16:26:11+08:00",
+  "summary": "Synchronize transition_state_search to the live 9654860 pilot gate.",
+  "payload": {
+    "module": "transition_state_search",
+    "status": "Active",
+    "depends_on": "endpoints, retrieval, AQCat25 GPU, VASP, registry",
+    "current_gate": "Fresh seven-interior-image same-path `NSW=1` ordinary no-climb pilot `9654860` is scheduler `RUN` (LSF observed 2026-08-02 16:26 CST); the compact monitor reports zero completed ionic steps and no image energies or forces yet. Monitor to terminal state; production coarse NEB and downstream TS actions remain blocked pending pilot validation",
+    "scheduler_observation": {
+      "job_id": "9654860",
+      "status": "RUN",
+      "queue": "Gkn_normal",
+      "submit_time": "2026-08-02 15:42 CST"
+    },
+    "calculation_observation": {
+      "images": 7,
+      "completed_ionic_steps": 0,
+      "image_energies_available": false,
+      "image_forces_available": false
+    }
+  },
+  "evidence": [
+    {
+      "locator": "lsf://sunboquan-codex/jobs/9654860?query=bjobs-a",
+      "sha256": "9e7ae11deeeab2737919d4020a004df9e1f9160f8649daa9c7f8fe9967cf0350",
+      "authority": "scheduler",
+      "observed_at": "2026-08-02T16:26:11+08:00"
+    },
+    {
+      "locator": "ssh://sunboquan-codex/home_gkn/users/nsgkn_chengdj3/sbq/Fe110/ts/co_dissociation_topic1_20260718/ordinary_neb_7img_fresh_local_endpoint_idpp_pilot_np112_20260802?view=compact-monitor",
+      "sha256": "f68c91dd16548e0476da6f349923966c682276c1dbb3e25243ba0bd10ac61393",
+      "authority": "calculation_file",
+      "observed_at": "2026-08-02T16:26:11+08:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "cross_module_change",
+      "live_scheduler_state"
+    ],
+    "status": "pending"
+  }
+}

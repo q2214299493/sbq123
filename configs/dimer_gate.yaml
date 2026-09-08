@@ -1,0 +1,40 @@
+schema_version: 2
+document_kind: dimer_gate_policy
+eligibility:
+  parent_methods:
+    - ordinary_neb
+    - ci_neb
+    - gpu_ml_neb_vasp_validated_triad
+  lclimb_required: false
+  allowed_refinement_intents:
+    - refine_single_peak_from_expensive_parent_path
+    - refine_slow_ci_neb_peak
+    - refine_with_reviewed_compatible_denser_kmesh_or_higher_encut
+coarse_neb_peak_stall:
+  minimum_peak_ionic_steps: 20
+  other_internal_image_force_max_eVA: 0.5
+  stalled_peak_force_min_eVA: 0.5
+  stalled_force_trends: [plateau, oscillating]
+hard_gate:
+  cell_tolerance_A: 1.0e-6
+  reaction_atom_neighbor_step_max_A: 1.0
+  periodic_branch_tolerance: 1.0e-8
+  fixed_mode_component_tolerance: 1.0e-10
+  mode_norm_min: 1.0e-12
+  mode_normalization_tolerance: 1.0e-6
+  reaction_atom_mode_fraction_min: 0.5
+gpu_ml_neb_parent:
+  manifest_document_kind: gpu_ml_neb_path_manifest
+  accepted_status: accepted_for_vasp_validated_dimer_parent
+  accepted_path_review_status: accepted
+  accepted_reliability_routes:
+    - calibrated_ts_domain
+    - exact_vasp_triad_force_agreement
+  vasp_force_source: vasp_exact_structure_static
+  local_force_agreement:
+    component_mae_eV_per_A_max: 0.10
+    vector_rmse_eV_per_A_max: 0.20
+    vector_max_eV_per_A_max: 0.60
+    role: local_dimer_parent_validation_only_not_ts_domain_calibration
+recommended_gate:
+  force_reduction_fraction_max: 0.5

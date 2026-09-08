@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c-h-to-ch-heldout-vasp-label-batch-prepared-20260820",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c-h-to-ch-transition-state",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-08-20T00:48:00+08:00",
+  "recorded_at": "2026-08-19T16:48:00Z",
+  "summary": "The user accepted and froze all six held-out geometries; a compatible SIGMA=0.20 eV six-sample VASP static-force-label batch was prepared locally and all diagnostic-static preflights passed, with no remote transfer or submission.",
+  "payload": {
+    "objective": "Establish whether the current AQCat25 checkpoint can be calibrated for the Fe(110) hydrogen-transfer TS/path domain before using it to accelerate the remaining C* + H* -> CH* transition-state search.",
+    "phase": "active",
+    "current_evidence": [
+      "The user accepted all six rising/near-saddle/falling held-out structures and their exact structure and geometry hashes were frozen.",
+      "Six local VASP static-force-label input folders were prepared from configs/true_fe110_production.yaml stage transition_state.active_learning_force_label.",
+      "Every folder uses NSW=0, IBRION=-1, ISMEAR=1, SIGMA=0.20 eV, ENCUT=400 eV, EDIFF=1e-6 eV, ISPIN=2, a 5x5x1 Gamma mesh, 32 cores, and the locked 45*2.2 1*0.0 1*0.0 MAGMOM pattern.",
+      "Repository diagnostic_static preflight passed for R1, R2, S1, S2, F1, and F2; every copied POSCAR still matches its frozen hash.",
+      "No remote transfer occurred and zero VASP/GPU jobs were submitted. POTCAR materialization and remote input checks remain execution-time work.",
+      "The batch remains force-label-only: reportable_final_energy=false and ts_domain_validated=false."
+    ],
+    "one_executable_step": "Review the prepared six-sample batch; only after explicit user batch-submission authorization may it be transferred to sunboquan-codex, bound to approved POTCAR and current diagnostic-static execution gates, and submitted.",
+    "submission_boundary": "Preparation does not authorize remote transfer, VASP submission, GPU prediction, fine-tuning, ML-NEB rerun, NEB, DIMER, frequency, connectivity, or barrier action.",
+    "done_when": [
+      "At least five disjoint held-out VASP-labeled TS-domain structures pass registered bootstrap calibration metrics for the exact checkpoint and compatibility branch.",
+      "A hash-bound calibration review decides whether this checkpoint is reusable for the in-scope hydrogen-transfer path domain.",
+      "Only after calibration may the strategy engine choose the least-cost VASP NEB/CI-NEB/DIMER continuation from the complete path evidence."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c_h_to_ch_ts_20260818/heldout_ts_validation_plan_20260820/candidate_set_v3/user_geometry_acceptance.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/heldout_vasp_force_labels_sigma0p20_20260820/heldout_vasp_label_batch_request.json`",
+      "`calculations/fe110_c_h_to_ch_ts_20260818/heldout_vasp_force_labels_sigma0p20_20260820/PREPARED_NOT_SUBMITTED.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/heldout_ts_validation_plan_20260820/candidate_set_v3/user_geometry_acceptance.json",
+      "sha256": "4d8b2cfa720b8ff5af8f7a109168435b143cc77fa579b632b9f01127d2fe3f22",
+      "authority": "repository_document",
+      "observed_at": "2026-08-20T00:48:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/heldout_vasp_force_labels_sigma0p20_20260820/heldout_vasp_label_batch_request.json",
+      "sha256": "6c82a1712fce5f530cb1ed744a056b36ce6918154787e9a399781883c267cce6",
+      "authority": "module_validation",
+      "observed_at": "2026-08-20T00:48:00+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c_h_to_ch_ts_20260818/heldout_vasp_force_labels_sigma0p20_20260820/PREPARED_NOT_SUBMITTED.json",
+      "sha256": "ca7b80fa93cfb46d11813a94c2931ccc62d75734b7cedd5b7857ae0db1930739",
+      "authority": "module_validation",
+      "observed_at": "2026-08-20T00:48:00+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c-h-to-ch-heldout-candidates-prepared-20260820"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

@@ -1,0 +1,189 @@
+{
+  "version": 1,
+  "surface_name": "Fe110",
+  "policy": {
+    "default_max_candidates": 2,
+    "max_candidates_without_reviewed_evidence": 2,
+    "complexity_caps": {
+      "atomic": 2,
+      "single_donor_molecule": 2,
+      "multi_donor_or_multidentate": 3,
+      "C2plus_flexible": 4
+    },
+    "require_explicit_override_for_four_site_sweep": true,
+    "evidence_priority": [
+      "reviewed_local_relaxation",
+      "reviewed_local_static",
+      "whitelist_candidate",
+      "chemical_heuristic"
+    ],
+    "unknown_species_action": "needs_review",
+    "insufficient_confidence_action": "whitelist_retrieval",
+    "no_whitelist_match_action": "needs_review",
+    "global_minimum_claim_without_relaxed_energy_comparison": false
+  },
+  "staged_relaxation": {
+    "screening_nsw": 80,
+    "review_steps": [
+      20,
+      40,
+      80
+    ],
+    "continue_only_if": [
+      "intended_or_reclassifiable_species",
+      "no_severe_overlap_or_desorption",
+      "force_or_energy_progress_is_not_stagnant",
+      "not_duplicate_of_a_better_candidate"
+    ],
+    "full_relaxation_requires_review": true,
+    "automatic_job_stop": false
+  },
+  "species_plans": [
+    {
+      "species": "C+O",
+      "matched_profile": "CplusO_coadsorbed",
+      "decision": "READY",
+      "confidence": "medium",
+      "evidence": {
+        "type": "whitelist_fe211_co_dissociation_plus_local_fe110_C_O_relaxations",
+        "global_minimum_claim": false
+      },
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "motif_id": "CplusO_C_long_bridge_O_hollow_adjacent",
+          "binding_mode": "coadsorbed",
+          "binding_atoms": [
+            "C",
+            "O"
+          ],
+          "site_pattern": "C_long_bridge_O_hollow_adjacent",
+          "orientation": "C and O occupy distinct high-coordination sites with C-O kept dissociated",
+          "template_required": true,
+          "priority": 1,
+          "build_ready": true,
+          "reason_code": "selected_by_reviewed_fts_rule"
+        }
+      ],
+      "suppressed": [
+        "blind_four_site_scan",
+        "stretched_CO_as_dissociated_state"
+      ]
+    },
+    {
+      "species": "C2",
+      "matched_profile": "C2_dicarbon",
+      "decision": "READY",
+      "confidence": "medium",
+      "evidence": {
+        "type": "user_reviewed_h_lb_h_template_plus_iron_fts_cc_rule",
+        "global_minimum_claim": false
+      },
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "motif_id": "C2_eta2CC_h_lb_h",
+          "binding_mode": "di_sigma",
+          "binding_atoms": [
+            "C1",
+            "C2"
+          ],
+          "site_pattern": "h-lb-h",
+          "orientation": "C-C axis nearly parallel to the surface; the two C atoms occupy hollow-like positions straddling a long bridge",
+          "template_required": true,
+          "priority": 1,
+          "build_ready": true,
+          "reason_code": "selected_by_reviewed_fts_rule"
+        }
+      ],
+      "suppressed": [
+        "blind_four_site_scan",
+        "dissociated_2C_state"
+      ]
+    },
+    {
+      "species": "C2O",
+      "matched_profile": "C2O_ketenylidene",
+      "decision": "READY",
+      "confidence": "medium",
+      "evidence": {
+        "type": "user_reviewed_two_C2O_modes_plus_catalysis_hub_CCO_connectivity",
+        "global_minimum_claim": false
+      },
+      "candidate_count": 2,
+      "candidates": [
+        {
+          "motif_id": "C2O_kappaCalpha_long_bridge_tilted",
+          "binding_mode": "terminal_C_centered",
+          "binding_atoms": [
+            "C_terminal"
+          ],
+          "site_pattern": "long_bridge",
+          "orientation": "tilted C-C-O chain with terminal Calpha bound at long bridge and O pointing outward",
+          "template_required": true,
+          "priority": 1,
+          "build_ready": true,
+          "reason_code": "selected_by_reviewed_fts_rule"
+        },
+        {
+          "motif_id": "C2O_eta2CalphaCbeta_h_lb_h",
+          "binding_mode": "bidentate",
+          "binding_atoms": [
+            "Calpha",
+            "Cbeta"
+          ],
+          "site_pattern": "h-lb-h",
+          "orientation": "both C atoms side-on across a long bridge with O lifted away from the surface",
+          "template_required": true,
+          "priority": 2,
+          "build_ready": true,
+          "reason_code": "selected_by_reviewed_fts_rule"
+        }
+      ],
+      "suppressed": [
+        "blind_four_site_scan",
+        "O_end_only"
+      ]
+    },
+    {
+      "species": "C2+O",
+      "matched_profile": "C2plusO_coadsorbed",
+      "decision": "READY",
+      "confidence": "medium",
+      "evidence": {
+        "type": "user_reviewed_h_lb_h_C2_plus_adjacent_long_bridge_O",
+        "global_minimum_claim": false
+      },
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "motif_id": "C2plusO_eta2CC_h_lb_h_O_long_bridge_adjacent",
+          "binding_mode": "coadsorbed",
+          "binding_atoms": [
+            "C1",
+            "C2",
+            "O"
+          ],
+          "site_pattern": "C2_h_lb_h_O_long_bridge_adjacent",
+          "orientation": "intact h-lb-h side-on C2 plus O at the nearest unoccupied long bridge",
+          "template_required": true,
+          "priority": 1,
+          "build_ready": true,
+          "reason_code": "selected_by_reviewed_fts_rule"
+        }
+      ],
+      "suppressed": [
+        "blind_four_site_scan",
+        "C2O_recombined_start"
+      ]
+    }
+  ],
+  "summary": {
+    "species": 4,
+    "candidate_count": 5,
+    "ready_species": 4,
+    "blocked_species": 0,
+    "needs_review_species": 0,
+    "needs_retrieval_species": 0
+  }
+}

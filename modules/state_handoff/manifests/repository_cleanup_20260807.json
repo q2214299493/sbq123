@@ -1,0 +1,274 @@
+{
+  "schema_version": 1,
+  "document_kind": "repository_cleanup_manifest",
+  "bundle_id": "repository-cleanup-20260807",
+  "reason": "Preserve reusable retired source, schemas, tests, and final engineering evidence; delete superseded phase reports and regenerable runtime files; and move unique scientific snapshots recovered from .codex_tmp into calculation provenance.",
+  "selectors": [
+    {
+      "root": "VASP2Kinetics",
+      "git_status": "untracked",
+      "expected_count": 98,
+      "exclude_paths": [
+        "VASP2Kinetics/CODE_QUALITY_AUDIT.md",
+        "VASP2Kinetics/PHASE10_AUDIT.md",
+        "VASP2Kinetics/PHASE11_AUDIT.md",
+        "VASP2Kinetics/PHASE1_11_COMPLIANCE_REPORT.md",
+        "VASP2Kinetics/PHASE2_AUDIT.md",
+        "VASP2Kinetics/PHASE3_AUDIT.md",
+        "VASP2Kinetics/PHASE4_AUDIT.md",
+        "VASP2Kinetics/PHASE5_AUDIT.md",
+        "VASP2Kinetics/PHASE6_AUDIT.md",
+        "VASP2Kinetics/PHASE7_AUDIT.md",
+        "VASP2Kinetics/PHASE8_AUDIT.md",
+        "VASP2Kinetics/PHASE9_AUDIT.md",
+        "VASP2Kinetics/PROJECT_STRUCTURE_AUDIT.md",
+        "VASP2Kinetics/SCIENTIFIC_WORKFLOW_AUDIT.md",
+        "VASP2Kinetics/TEST_REPORT.md",
+        "VASP2Kinetics/TEST_REPORT_PHASE10.md",
+        "VASP2Kinetics/TEST_REPORT_PHASE2.md",
+        "VASP2Kinetics/TEST_REPORT_PHASE3.md",
+        "VASP2Kinetics/TEST_REPORT_PHASE4.md",
+        "VASP2Kinetics/TEST_REPORT_PHASE5.md",
+        "VASP2Kinetics/TEST_REPORT_PHASE6.md",
+        "VASP2Kinetics/TEST_REPORT_PHASE7.md",
+        "VASP2Kinetics/TEST_REPORT_PHASE8.md",
+        "VASP2Kinetics/TEST_REPORT_PHASE9.md"
+      ],
+      "disposition": "archive",
+      "content_class": "unique",
+      "reason": "Preserve the retired standalone VASP2Kinetics source, schemas, tests, interfaces, examples, and final engineering evidence as reusable untracked history."
+    },
+    {
+      "root": "VASP2Kinetics",
+      "git_status": "ignored",
+      "expected_count": 73,
+      "disposition": "delete",
+      "content_class": "regenerable",
+      "reason": "Remove Python caches, logs, and failed demonstration runtime output that can be regenerated from the archived source."
+    },
+    {
+      "root": ".codex_tmp/dft_agent_plan",
+      "git_status": "ignored",
+      "expected_count": 42,
+      "exclude_paths": [
+        ".codex_tmp/dft_agent_plan/build_plan_docx.py"
+      ],
+      "disposition": "delete",
+      "content_class": "regenerable",
+      "reason": "Remove superseded QA PDFs, renders, and bytecode after preserving the final DOCX and the unique one-off builder."
+    }
+  ],
+  "items": [
+    {
+      "path": ".codex_tmp/dft_agent_plan/build_plan_docx.py",
+      "disposition": "delete",
+      "content_class": "regenerable",
+      "reason": "Remove the low-reuse one-off builder after retaining the final DFT agent plan deliverable."
+    },
+    {
+      "path": "VASP2Kinetics/CODE_QUALITY_AUDIT.md",
+      "disposition": "delete",
+      "content_class": "duplicate",
+      "reason": "Remove a superseded intermediate audit whose durable conclusions remain in CODE_REVIEW.md and FINAL_TEST_REPORT.md."
+    },
+    {
+      "path": "VASP2Kinetics/PHASE10_AUDIT.md",
+      "disposition": "delete",
+      "content_class": "duplicate",
+      "reason": "Remove a superseded phase audit retained in final engineering summaries."
+    },
+    {
+      "path": "VASP2Kinetics/PHASE11_AUDIT.md",
+      "disposition": "delete",
+      "content_class": "duplicate",
+      "reason": "Remove a superseded phase audit retained in final engineering summaries."
+    },
+    {
+      "path": "VASP2Kinetics/PHASE1_11_COMPLIANCE_REPORT.md",
+      "disposition": "delete",
+      "content_class": "duplicate",
+      "reason": "Remove an intermediate compliance report superseded by the final review and release reports."
+    },
+    {
+      "path": "VASP2Kinetics/PHASE2_AUDIT.md",
+      "disposition": "delete",
+      "content_class": "duplicate",
+      "reason": "Remove a superseded phase audit retained in final engineering summaries."
+    },
+    {
+      "path": "VASP2Kinetics/PHASE3_AUDIT.md",
+      "disposition": "delete",
+      "content_class": "duplicate",
+      "reason": "Remove a superseded phase audit retained in final engineering summaries."
+    },
+    {
+      "path": "VASP2Kinetics/PHASE4_AUDIT.md",
+      "disposition": "delete",
+      "content_class": "duplicate",
+      "reason": "Remove a superseded phase audit retained in final engineering summaries."
+    },
+    {
+      "path": "VASP2Kinetics/PHASE5_AUDIT.md",
+      "disposition": "delete",
+      "content_class": "duplicate",
+      "reason": "Remove a superseded phase audit retained in final engineering summaries."
+    },
+    {
+      "path": "VASP2Kinetics/PHASE6_AUDIT.md",
+      "disposition": "delete",
+      "content_class": "duplicate",
+      "reason": "Remove a superseded phase audit retained in final engineering summaries."
+    },
+    {
+      "path": "VASP2Kinetics/PHASE7_AUDIT.md",
+      "disposition": "delete",
+      "content_class": "duplicate",
+      "reason": "Remove a superseded phase audit retained in final engineering summaries."
+    },
+    {
+      "path": "VASP2Kinetics/PHASE8_AUDIT.md",
+      "disposition": "delete",
+      "content_class": "duplicate",
+      "reason": "Remove a superseded phase audit retained in final engineering summaries."
+    },
+    {
+      "path": "VASP2Kinetics/PHASE9_AUDIT.md",
+      "disposition": "delete",
+      "content_class": "duplicate",
+      "reason": "Remove a superseded phase audit retained in final engineering summaries."
+    },
+    {
+      "path": "VASP2Kinetics/PROJECT_STRUCTURE_AUDIT.md",
+      "disposition": "delete",
+      "content_class": "duplicate",
+      "reason": "Remove an intermediate structure audit superseded by PROJECT_STRUCTURE.md and final reports."
+    },
+    {
+      "path": "VASP2Kinetics/SCIENTIFIC_WORKFLOW_AUDIT.md",
+      "disposition": "delete",
+      "content_class": "duplicate",
+      "reason": "Remove an intermediate audit whose remaining scientific limitations are retained in CODE_REVIEW.md and IMPLEMENTATION_STATUS.md."
+    },
+    {
+      "path": "VASP2Kinetics/TEST_REPORT.md",
+      "disposition": "delete",
+      "content_class": "duplicate",
+      "reason": "Remove a superseded phase test report retained in FINAL_TEST_REPORT.md."
+    },
+    {
+      "path": "VASP2Kinetics/TEST_REPORT_PHASE10.md",
+      "disposition": "delete",
+      "content_class": "duplicate",
+      "reason": "Remove a superseded phase test report retained in FINAL_TEST_REPORT.md."
+    },
+    {
+      "path": "VASP2Kinetics/TEST_REPORT_PHASE2.md",
+      "disposition": "delete",
+      "content_class": "duplicate",
+      "reason": "Remove a superseded phase test report retained in FINAL_TEST_REPORT.md."
+    },
+    {
+      "path": "VASP2Kinetics/TEST_REPORT_PHASE3.md",
+      "disposition": "delete",
+      "content_class": "duplicate",
+      "reason": "Remove a superseded phase test report retained in FINAL_TEST_REPORT.md."
+    },
+    {
+      "path": "VASP2Kinetics/TEST_REPORT_PHASE4.md",
+      "disposition": "delete",
+      "content_class": "duplicate",
+      "reason": "Remove a superseded phase test report retained in FINAL_TEST_REPORT.md."
+    },
+    {
+      "path": "VASP2Kinetics/TEST_REPORT_PHASE5.md",
+      "disposition": "delete",
+      "content_class": "duplicate",
+      "reason": "Remove a superseded phase test report retained in FINAL_TEST_REPORT.md."
+    },
+    {
+      "path": "VASP2Kinetics/TEST_REPORT_PHASE6.md",
+      "disposition": "delete",
+      "content_class": "duplicate",
+      "reason": "Remove a superseded phase test report retained in FINAL_TEST_REPORT.md."
+    },
+    {
+      "path": "VASP2Kinetics/TEST_REPORT_PHASE7.md",
+      "disposition": "delete",
+      "content_class": "duplicate",
+      "reason": "Remove a superseded phase test report retained in FINAL_TEST_REPORT.md."
+    },
+    {
+      "path": "VASP2Kinetics/TEST_REPORT_PHASE8.md",
+      "disposition": "delete",
+      "content_class": "duplicate",
+      "reason": "Remove a superseded phase test report retained in FINAL_TEST_REPORT.md."
+    },
+    {
+      "path": "VASP2Kinetics/TEST_REPORT_PHASE9.md",
+      "disposition": "delete",
+      "content_class": "duplicate",
+      "reason": "Remove a superseded phase test report retained in FINAL_TEST_REPORT.md."
+    },
+    {
+      "path": ".codex_tmp/job9647798_progress_20260728/CONTCAR",
+      "target_path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/recovered_job9647798_progress_20260728/CONTCAR",
+      "disposition": "move",
+      "content_class": "unique",
+      "reason": "Move a unique scientific structure snapshot out of the temporary directory into calculation provenance."
+    },
+    {
+      "path": ".codex_tmp/job9647798_progress_20260728/OSZICAR",
+      "target_path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/recovered_job9647798_progress_20260728/OSZICAR",
+      "disposition": "move",
+      "content_class": "unique",
+      "reason": "Move a unique scientific progress snapshot out of the temporary directory into calculation provenance."
+    },
+    {
+      "path": ".codex_tmp/job9647798_progress_20260729/CONTCAR",
+      "target_path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/recovered_job9647798_progress_20260729/CONTCAR",
+      "disposition": "move",
+      "content_class": "unique",
+      "reason": "Move a later unique scientific structure snapshot into calculation provenance."
+    },
+    {
+      "path": ".codex_tmp/job9647798_progress_20260729/OSZICAR",
+      "target_path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/recovered_job9647798_progress_20260729/OSZICAR",
+      "disposition": "move",
+      "content_class": "unique",
+      "reason": "Move a later unique scientific progress snapshot into calculation provenance."
+    },
+    {
+      "path": ".codex_tmp/shortened_local_endpoint_7img_side.png",
+      "target_path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/recovered_shortened_local_endpoint_visuals_20260807/shortened_local_endpoint_7img_side.png",
+      "disposition": "move",
+      "content_class": "unique",
+      "reason": "Preserve an unmatched pathway review image as calculation provenance."
+    },
+    {
+      "path": ".codex_tmp/shortened_local_endpoint_7img_side_zoom.png",
+      "target_path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/recovered_shortened_local_endpoint_visuals_20260807/shortened_local_endpoint_7img_side_zoom.png",
+      "disposition": "move",
+      "content_class": "unique",
+      "reason": "Preserve an unmatched pathway detail image as calculation provenance."
+    },
+    {
+      "path": ".codex_tmp/shortened_local_endpoint_7img_top.png",
+      "target_path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/recovered_shortened_local_endpoint_visuals_20260807/shortened_local_endpoint_7img_top.png",
+      "disposition": "move",
+      "content_class": "unique",
+      "reason": "Preserve an unmatched top-view pathway image as calculation provenance."
+    },
+    {
+      "path": ".codex_tmp/ts_excel_20260807/update_ts_workbook.mjs",
+      "disposition": "delete",
+      "content_class": "duplicate",
+      "reason": "Remove the superseded one-off writer after the controlled registry promotion and rebound receipt became authoritative."
+    },
+    {
+      "path": ".codex_tmp/ts_excel_20260807/课题一TS.updated.xlsx.inspect.ndjson",
+      "disposition": "delete",
+      "content_class": "regenerable",
+      "reason": "Remove a regenerable temporary workbook inspection after the current workbook row and rebound receipt were verified."
+    }
+  ]
+}

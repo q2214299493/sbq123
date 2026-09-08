@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2ho-h-to-c2h2o-matris-epoch6-complete-oh-job1508-running-20260902",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "fe110-c2ho-h-to-c2h2o-ts-v10",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-02T18:06:24+08:00",
+  "recorded_at": "2026-09-02T10:06:24Z",
+  "summary": "Epoch-6 checkpoint 8e53cfb0...eb49 was version-promoted for the current complete O-H TS-path candidate domain without overwriting the base checkpoint. A fresh 11-image MID-to-FS-A request passed local and MZ73 no-model preflights, the authoritative gate allowed REBUILD_PATH, and Slurm job 1508 started the authorized complete MatRIS ordinary ML-NEB rerun with an exact fixed-path AQCat25 audit only after primary completion.",
+  "payload": {
+    "objective": "Monitor MZ73 job 1508 to completion, collect the complete epoch-6 O-H path, and perform work-side geometry and provenance review before any downstream decision.",
+    "phase": "active",
+    "current_evidence": [
+      "Epoch-6 checkpoint 8e53cfb0...eb49 is promoted only for current Fe(110) C2HO+H to C2H2O complete O-H path candidate acceleration; the original base checkpoint was not overwritten.",
+      "The fresh request contains the user-accepted complete MID-to-FS-A 11-image O-H path, not the local 04-06 failure-boundary window.",
+      "Local geometry review passed: maximum adjacent RMSD 0.093311 A, maximum single movable-atom step 0.283060 A, and minimum pair distance 0.981210 A.",
+      "MZ73 remote no-model preflight passed with three GPUs above the 12000 MiB free-memory requirement.",
+      "The authoritative execution gate lists REBUILD_PATH as the only allowed action and forbids VASP, Dimer, TS acceptance, and final-barrier reporting.",
+      "The first submission command stopped before sbatch because of a wrapper Python-path error; no job was created. The path was corrected and revalidated.",
+      "Slurm job 1508 is RUNNING on MZ73 under job name c2ho-oh-e6.",
+      "At ordinary ML-NEB step 11, monitored O-H backtrack is 0.017619 A and passes the graded 0.05 A level; this is runtime progress only, not convergence or scientific acceptance."
+    ],
+    "one_executable_step": "Wait for job 1508 to leave the queue, then collect its complete output and run work-side path geometry, convergence, checkpoint, and provenance review.",
+    "submission_boundary": "The one authorized complete-path GPU submission is consumed by job 1508. Do not retry automatically. AQCat25 is limited to exact fixed-path audit after MatRIS completion; VASP, micro-NEB, Dimer, TS acceptance, and barrier actions remain unauthorized.",
+    "done_when": [
+      "Scheduler and producer completion evidence for job 1508 are collected.",
+      "Every returned image and the exact epoch-6 checkpoint/request binding pass work-side review.",
+      "The result is classified as continuous/converged, incomplete, or failed without making a TS or barrier claim."
+    ],
+    "authoritative_references": [
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_oh_complete_path_epoch6_20260902/checkpoint_promotion.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_oh_complete_path_epoch6_20260902/work_to_gpu/request.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_oh_complete_path_epoch6_20260902/remote_preflight.MZ73.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_oh_complete_path_epoch6_20260902/execution_gate_decision.json`",
+      "`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_oh_complete_path_epoch6_20260902/submission_record_job1508.json`"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_oh_complete_path_epoch6_20260902/checkpoint_promotion.json",
+      "sha256": "8f46de357eb7accb8d5bbe8f87d994390bb571774050f4081cbbce93be20ec06",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T18:06:24+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_oh_complete_path_epoch6_20260902/work_to_gpu/request.json",
+      "sha256": "31c56e6b11335793a0b4e807523e0b0bd223261d0a1f46e444bdc271a508dc49",
+      "authority": "repository_document",
+      "observed_at": "2026-09-02T18:06:24+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_oh_complete_path_epoch6_20260902/remote_preflight.MZ73.json",
+      "sha256": "a249586a3153d4f424e5e76c837c2461868d015c688a2ba772b1949d05a0eff7",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-02T18:06:24+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_oh_complete_path_epoch6_20260902/execution_gate_decision.json",
+      "sha256": "1028bb295859fcf1db30c238b5d0dc1e13975d52de48743e35c6777951f8b3f0",
+      "authority": "module_validation",
+      "observed_at": "2026-09-02T18:06:24+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_oh_complete_path_epoch6_20260902/submission_record_job1508.json",
+      "sha256": "f7339131c48b2f7ccc6211ae4130156a807b03b375f277cc621432036fd2c90d",
+      "authority": "scheduler",
+      "observed_at": "2026-09-02T18:06:24+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-c2ho-h-to-c2h2o-matris-epoch6-heldout-job1507-passed-20260902"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

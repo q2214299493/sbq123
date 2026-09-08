@@ -1,0 +1,20 @@
+version: 2
+
+persistence:
+  monitoring_cycles_min: 5
+  underresolved_independent_family_count_min: 2
+
+geometry:
+  abnormal_gap_ratio_to_median_min: 2.0
+  gap_non_decrease_fraction: 0.98
+  reactant_basin_span_max_A: 0.05
+
+energy:
+  sharp_corner_threshold_eV: 0.20
+
+readiness:
+  pre_ci_projected_force_eV_per_A_max: 0.10
+  recent_coordinate_drift_A_max: 0.05
+  require_stable_highest_image: true
+  require_electronic_convergence: true
+  require_reaction_coordinate_coverage: true

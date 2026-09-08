@@ -1,0 +1,16 @@
+#!/bin/sh
+# Shared Sunboquan LSF launcher for VASP/VTST jobs.
+# The input folder must provide POSCAR, INCAR, KPOINTS and POTCAR.
+APP_NAME=Gkn_normal
+NP=__CORES__
+NP_PER_NODE=32
+RUN=RAW
+CURDIR=$PWD
+export OMP_NUM_THREADS=1
+source /home_gkx/env/intel/intel2016.sh
+VASP=$HOME/soft/vasp541vtst/bin/vasp_std
+cd "$CURDIR" || exit 10
+test -s POTCAR || exit 11
+rm -f nodelist
+for host in $LSB_HOSTS; do echo "$host" >> nodelist; done
+mpirun -np $NP -machinefile nodelist $VASP > vasp.out 2>&1
