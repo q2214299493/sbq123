@@ -9,24 +9,48 @@
 #SBATCH --time=00:20:00
 #SBATCH --output=/home/sbq/sbq/aqcat25_ts_pilot/logs/aqcat25-%j.out
 
-set -uo pipefail
+set -euo pipefail
+
+# BEGIN GPU BOOTSTRAP GUARD (mirrored from aqcat25_mz73_env.sh)
+# This dependency-free guard must exist even when the shared helper is missing.
+gpu_bootstrap_failure() {
+  local code=$? directory record
+  [ "$code" -ne 0 ] || return 0
+  record=$(printf '{"document_kind":"gpu_wrapper_execution_failure","status":"failed","phase":"bootstrap","exit_code":%d,"evidence_class":"producer_process_only_not_scheduler_accounting"}' "$code")
+  printf '%s\n' "$record" >&2
+  directory=$(pwd -P)
+  case "$directory" in
+    /home/sbq/sbq|/home/sbq/sbq/*)
+      (umask 077; set -C; printf '%s\n' "$record" > "$directory/producer_exit_record.failure.bootstrap.$$.json") || : ;;
+  esac
+}
+aqcat25_install_bootstrap_guard() {
+  trap gpu_bootstrap_failure EXIT
+  trap 'exit 130' INT
+  trap 'exit 143' TERM
+  trap 'exit 129' HUP
+}
+# END GPU BOOTSTRAP GUARD
+aqcat25_install_bootstrap_guard
 
 PILOT_ROOT=${AQCAT_PILOT_ROOT:-/home/sbq/sbq/aqcat25_ts_pilot}
+GPU_ENV_SOURCE=$(realpath -e -- "$PILOT_ROOT/aqcat25_mz73_env.sh") || exit 2
+case "$GPU_ENV_SOURCE" in /home/sbq/sbq/*) ;; *) exit 2 ;; esac
+. "$GPU_ENV_SOURCE" || exit 2
+aqcat25_begin_execution || exit 2
+
 export AQCAT_PILOT_ROOT="$PILOT_ROOT"
 HANDOFF_ROOT=${HANDOFF_ROOT:?HANDOFF_ROOT is required}
 SOURCE_HANDOFF_SHA256=${SOURCE_HANDOFF_SHA256:?SOURCE_HANDOFF_SHA256 is required}
+aqcat25_require_sha256 "$SOURCE_HANDOFF_SHA256" || exit 2
 DOMAIN_CALIBRATION=${DOMAIN_CALIBRATION:-$PILOT_ROOT/aqcat25_domain_calibration.json}
 STARTED_UTC=$(date -u +%Y-%m-%dT%H:%M:%SZ)
 
-case "$HANDOFF_ROOT" in
-  /home/sbq/sbq/*) ;;
-  *) echo "HANDOFF_ROOT is outside /home/sbq/sbq" >&2; exit 2 ;;
-esac
+aqcat25_require_remote_path "$HANDOFF_ROOT" "$DOMAIN_CALIBRATION" || exit 2
 
 OUTPUT_ROOT="$HANDOFF_ROOT/output/job_$SLURM_JOB_ID"
 EXIT_RECORD="$OUTPUT_ROOT/producer_exit_record.json"
-. "$PILOT_ROOT/aqcat25_mz73_env.sh" || exit 2
-aqcat25_setup_mz73_environment "$OUTPUT_ROOT"
+aqcat25_setup_mz73_environment "$OUTPUT_ROOT" || exit 2
 CHECKPOINT="$AQCAT_ROOT/demo_single/model.pt"
 
 write_exit_record() {

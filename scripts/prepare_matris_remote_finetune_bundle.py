@@ -7,10 +7,11 @@ import argparse
 import json
 import re
 import shutil
+import shlex
 from pathlib import Path
 from typing import Any
 
-from scripts.artifact_io import load_json_object, sha256_file, write_json_atomic
+from scripts.artifact_io import load_json_object, require_sha256, sha256_file, write_json_atomic
 from scripts.matris_energy_force_finetune import validate_review_package
 
 
@@ -25,6 +26,122 @@ def _safe_name(sample_id: str) -> str:
     return re.sub(r"[^A-Za-z0-9_.-]+", "__", sample_id).strip("_")
 
 
+def _remote_path(value: str) -> str:
+    if (
+        not re.fullmatch(r"/home/sbq/sbq/[A-Za-z0-9_./-]+", value)
+        or any(part in {".", "..", ""} for part in value.split("/")[1:])
+    ):
+        raise ValueError("remote path is outside the canonical execution boundary")
+    return value
+
+
+def _job_script(
+    args: argparse.Namespace, remote_root: str, remote_review_target: Path,
+    authorization_target: Path, checkpoint_sha256: str,
+) -> str:
+    _remote_path(remote_root)
+    _remote_path(args.base_checkpoint)
+    require_sha256(checkpoint_sha256, label="base checkpoint")
+    helper = Path("scripts/aqcat25_mz73_env.sh").read_text(encoding="utf-8")
+    bootstrap = helper[helper.index("# BEGIN GPU BOOTSTRAP"):helper.index("# END GPU BOOTSTRAP GUARD")]
+    bootstrap += "# END GPU BOOTSTRAP GUARD"
+    return f"""#!/bin/bash
+#SBATCH --job-name=matris-ef-ft
+#SBATCH --partition=normal
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --gres=gpu:1
+#SBATCH --mem=40G
+#SBATCH --time=01:30:00
+
+set -euo pipefail
+
+{bootstrap}
+aqcat25_install_bootstrap_guard
+ROOT={shlex.quote(remote_root)}
+GPU_ENV_SOURCE=$(realpath -e -- "$ROOT/code/scripts/aqcat25_mz73_env.sh") || exit 2
+case "$GPU_ENV_SOURCE" in /home/sbq/sbq/*) ;; *) exit 2 ;; esac
+. "$GPU_ENV_SOURCE" || exit 2
+aqcat25_begin_execution || exit 2
+PYTHON_BIN=/home/sbq/sbq/ml_ts_acceleration/venv/bin/python
+MATRIS_SOURCE=/home/sbq/sbq/mlip_same_structure_benchmark_20260825/vendor/MatRIS
+CHECKPOINT={shlex.quote(args.base_checkpoint)}
+REVIEW=$ROOT/{remote_review_target.name}
+AUTH=$ROOT/{authorization_target.name}
+RUNNER=$ROOT/code/scripts/matris_energy_force_finetune.py
+OUTPUT=$ROOT/results/job_$SLURM_JOB_ID
+EXIT_RECORD=$OUTPUT/producer_exit_record.json
+
+for path in "$ROOT" "$OUTPUT" "$PYTHON_BIN" "$MATRIS_SOURCE" "$CHECKPOINT" "$REVIEW" "$AUTH" "$RUNNER"; do
+  aqcat25_require_remote_path "$path" || exit 2
+done
+
+test -x "$PYTHON_BIN" || exit 2
+test -d "$MATRIS_SOURCE/matris" || exit 2
+mkdir -p "$OUTPUT"
+export PYTHONPATH="$ROOT/code:$MATRIS_SOURCE:/home/sbq/sbq/aqcat25/python_pkgs:/home/sbq/sbq/aqcat25/vendor${{PYTHONPATH:+:$PYTHONPATH}}"
+export XDG_CACHE_HOME=/home/sbq/sbq/aqcat25/cache/xdg
+export TORCH_HOME=/home/sbq/sbq/aqcat25/cache/torch
+export HF_HOME=/home/sbq/sbq/aqcat25/cache/huggingface
+export TMPDIR=/home/sbq/sbq/aqcat25/tmp
+export WITH_PYG_LIB=0
+export TORCH_SPARSE_USE_PYG_LIB=0
+export TORCH_SCATTER_USE_PYG_LIB=0
+export WANDB_MODE=disabled
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+aqcat25_require_remote_path "$XDG_CACHE_HOME" "$TORCH_HOME" "$HF_HOME" "$TMPDIR" || exit 2
+
+started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+exit_code=0
+echo "{sha256_file(remote_review_target)}  $REVIEW" | sha256sum -c - || exit_code=$?
+echo "{sha256_file(authorization_target)}  $AUTH" | sha256sum -c - || exit_code=$?
+echo "{checkpoint_sha256}  $CHECKPOINT" | sha256sum -c - || exit_code=$?
+if [ "$exit_code" -eq 0 ]; then
+  "$PYTHON_BIN" "$RUNNER" train \
+    --review-request "$REVIEW" \
+    --authorization "$AUTH" \
+    --checkpoint "$CHECKPOINT" \
+    --output "$OUTPUT" \
+    --device cuda \
+    --epochs {args.epochs} \
+    --force-weight {args.force_weight} \
+    --energy-weight {args.energy_weight} \
+    --learning-rate {args.learning_rate} \
+    --weight-decay {args.weight_decay} \
+    --gradient-clip-norm {args.gradient_clip_norm} \
+    --trainable-scope {args.trainable_scope} \
+    --seed {args.seed} || exit_code=$?
+fi
+
+STARTED_UTC="$started_utc" EXIT_CODE="$exit_code" OUTPUT="$OUTPUT" \
+AUTH_SHA="{sha256_file(authorization_target)}" "$PYTHON_BIN" - <<'PY'
+import json
+import os
+import socket
+from datetime import datetime, timezone
+from pathlib import Path
+
+path = Path(os.environ["OUTPUT"]) / "producer_exit_record.json"
+payload = {{
+    "gpu_job_id": os.environ.get("SLURM_JOB_ID"),
+    "hostname": socket.gethostname(),
+    "started_utc": os.environ["STARTED_UTC"],
+    "finished_utc": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
+    "exit_code": int(os.environ["EXIT_CODE"]),
+    "status": "success" if int(os.environ["EXIT_CODE"]) == 0 else "failed",
+    "authorization_sha256": os.environ["AUTH_SHA"],
+    "checkpoint_promotion": False,
+    "complete_path_rerun": False,
+    "evidence_class": "producer_process_only_not_scheduler_accounting",
+}}
+path.write_text(json.dumps(payload, indent=2) + "\\n", encoding="utf-8")
+PY
+
+exit "$exit_code"
+"""
+
+
 def prepare(args: argparse.Namespace) -> dict[str, Any]:
     local_review_path = args.review_request.resolve()
     context = validate_review_package(local_review_path)
@@ -32,13 +149,13 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
     if output.exists() and any(output.iterdir()):
         raise FileExistsError(f"remote bundle output is not empty: {output}")
     output.mkdir(parents=True, exist_ok=True)
-    remote_root = args.remote_root.rstrip("/")
-    if not remote_root.startswith("/home/sbq/sbq/"):
-        raise ValueError("remote root is outside /home/sbq/sbq")
+    remote_root = _remote_path(args.remote_root.rstrip("/"))
+    _remote_path(args.base_checkpoint)
 
     code_sources = [
         Path("scripts/__init__.py"),
         Path("scripts/artifact_io.py"),
+        Path("scripts/aqcat25_mz73_env.sh"),
         Path("scripts/workflow_geometry.py"),
         Path("scripts/matris_energy_force_finetune.py"),
         Path("scripts/matris_finetune_speed_benchmark.py"),
@@ -181,91 +298,10 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
     write_json_atomic(authorization_target, authorization, ensure_ascii=True)
 
     job_target = output / "run_finetune.slurm"
-    job = f"""#!/bin/bash
-#SBATCH --job-name=matris-ef-ft
-#SBATCH --partition=normal
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=4
-#SBATCH --gres=gpu:1
-#SBATCH --mem=40G
-#SBATCH --time=01:30:00
-
-set -uo pipefail
-
-ROOT={remote_root}
-PYTHON_BIN=/home/sbq/sbq/ml_ts_acceleration/venv/bin/python
-MATRIS_SOURCE=/home/sbq/sbq/mlip_same_structure_benchmark_20260825/vendor/MatRIS
-CHECKPOINT={args.base_checkpoint}
-REVIEW=$ROOT/{remote_review_target.name}
-AUTH=$ROOT/{authorization_target.name}
-RUNNER=$ROOT/code/scripts/matris_energy_force_finetune.py
-OUTPUT=$ROOT/results/job_$SLURM_JOB_ID
-
-for path in "$ROOT" "$OUTPUT" "$PYTHON_BIN" "$MATRIS_SOURCE" "$CHECKPOINT" "$REVIEW" "$AUTH" "$RUNNER"; do
-  case "$path" in /home/sbq/sbq/*) ;; *) echo "path outside boundary: $path" >&2; exit 2 ;; esac
-done
-
-mkdir -p "$OUTPUT"
-export PYTHONPATH="$ROOT/code:$MATRIS_SOURCE:/home/sbq/sbq/aqcat25/python_pkgs:/home/sbq/sbq/aqcat25/vendor${{PYTHONPATH:+:$PYTHONPATH}}"
-export XDG_CACHE_HOME=/home/sbq/sbq/aqcat25/cache/xdg
-export TORCH_HOME=/home/sbq/sbq/aqcat25/cache/torch
-export HF_HOME=/home/sbq/sbq/aqcat25/cache/huggingface
-export TMPDIR=/home/sbq/sbq/aqcat25/tmp
-export WITH_PYG_LIB=0
-export TORCH_SPARSE_USE_PYG_LIB=0
-export TORCH_SCATTER_USE_PYG_LIB=0
-export WANDB_MODE=disabled
-export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
-
-started_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)
-exit_code=0
-echo "{sha256_file(remote_review_target)}  $REVIEW" | sha256sum -c - || exit_code=$?
-echo "{sha256_file(authorization_target)}  $AUTH" | sha256sum -c - || exit_code=$?
-echo "{local_review['base_checkpoint_sha256']}  $CHECKPOINT" | sha256sum -c - || exit_code=$?
-if [ "$exit_code" -eq 0 ]; then
-  "$PYTHON_BIN" "$RUNNER" train \
-    --review-request "$REVIEW" \
-    --authorization "$AUTH" \
-    --checkpoint "$CHECKPOINT" \
-    --output "$OUTPUT" \
-    --device cuda \
-    --epochs {args.epochs} \
-    --force-weight {args.force_weight} \
-    --energy-weight {args.energy_weight} \
-    --learning-rate {args.learning_rate} \
-    --weight-decay {args.weight_decay} \
-    --gradient-clip-norm {args.gradient_clip_norm} \
-    --trainable-scope {args.trainable_scope} \
-    --seed {args.seed} || exit_code=$?
-fi
-
-STARTED_UTC="$started_utc" EXIT_CODE="$exit_code" OUTPUT="$OUTPUT" \
-AUTH_SHA="{sha256_file(authorization_target)}" "$PYTHON_BIN" - <<'PY'
-import json
-import os
-import socket
-from datetime import datetime, timezone
-from pathlib import Path
-
-path = Path(os.environ["OUTPUT"]) / "producer_exit_record.json"
-payload = {{
-    "gpu_job_id": os.environ.get("SLURM_JOB_ID"),
-    "hostname": socket.gethostname(),
-    "started_utc": os.environ["STARTED_UTC"],
-    "finished_utc": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
-    "exit_code": int(os.environ["EXIT_CODE"]),
-    "status": "success" if int(os.environ["EXIT_CODE"]) == 0 else "failed",
-    "authorization_sha256": os.environ["AUTH_SHA"],
-    "checkpoint_promotion": False,
-    "complete_path_rerun": False,
-    "evidence_class": "producer_process_only_not_scheduler_accounting",
-}}
-path.write_text(json.dumps(payload, indent=2) + "\\n", encoding="utf-8")
-PY
-
-exit "$exit_code"
-"""
+    job = _job_script(
+        args, remote_root, remote_review_target, authorization_target,
+        local_review["base_checkpoint_sha256"],
+    )
     job_target.write_text(job, encoding="utf-8", newline="\n")
 
     files = [path for path in output.rglob("*") if path.is_file()]

@@ -9,25 +9,49 @@
 #SBATCH --time=00:20:00
 #SBATCH --output=/home/sbq/sbq/aqcat25_ts_pilot/logs/dual-ml-neb-smoke-%j.out
 
-set -uo pipefail
+set -euo pipefail
+
+# BEGIN GPU BOOTSTRAP GUARD (mirrored from aqcat25_mz73_env.sh)
+# This dependency-free guard must exist even when the shared helper is missing.
+gpu_bootstrap_failure() {
+  local code=$? directory record
+  [ "$code" -ne 0 ] || return 0
+  record=$(printf '{"document_kind":"gpu_wrapper_execution_failure","status":"failed","phase":"bootstrap","exit_code":%d,"evidence_class":"producer_process_only_not_scheduler_accounting"}' "$code")
+  printf '%s\n' "$record" >&2
+  directory=$(pwd -P)
+  case "$directory" in
+    /home/sbq/sbq|/home/sbq/sbq/*)
+      (umask 077; set -C; printf '%s\n' "$record" > "$directory/producer_exit_record.failure.bootstrap.$$.json") || : ;;
+  esac
+}
+aqcat25_install_bootstrap_guard() {
+  trap gpu_bootstrap_failure EXIT
+  trap 'exit 130' INT
+  trap 'exit 143' TERM
+  trap 'exit 129' HUP
+}
+# END GPU BOOTSTRAP GUARD
+aqcat25_install_bootstrap_guard
 
 PILOT_ROOT=${AQCAT_PILOT_ROOT:-/home/sbq/sbq/aqcat25_ts_pilot}
+GPU_ENV_SOURCE=$(realpath -e -- "$PILOT_ROOT/aqcat25_mz73_env.sh") || exit 2
+case "$GPU_ENV_SOURCE" in /home/sbq/sbq/*) ;; *) exit 2 ;; esac
+. "$GPU_ENV_SOURCE" || exit 2
+aqcat25_begin_execution || exit 2
+
 REQUEST_ROOT=${REQUEST_ROOT:?REQUEST_ROOT is required}
 SOURCE_REQUEST_SHA256=${SOURCE_REQUEST_SHA256:?SOURCE_REQUEST_SHA256 is required}
+aqcat25_require_sha256 "$SOURCE_REQUEST_SHA256" || exit 2
 OUTPUT_ROOT=${OUTPUT_ROOT:-$REQUEST_ROOT/output/dual_model_smoke_$SLURM_JOB_ID}
 PRIMARY_CHECKPOINT=${PRIMARY_CHECKPOINT:?PRIMARY_CHECKPOINT is required}
 SECONDARY_CHECKPOINT=${SECONDARY_CHECKPOINT:-/home/sbq/sbq/aqcat25/demo_single/model.pt}
 MATRIS_SOURCE=${MATRIS_SOURCE:-/home/sbq/sbq/mlip_same_structure_benchmark_20260825/vendor/MatRIS}
 
 for path in "$REQUEST_ROOT" "$OUTPUT_ROOT" "$PRIMARY_CHECKPOINT" "$SECONDARY_CHECKPOINT" "$MATRIS_SOURCE"; do
-  case "$path" in
-    /home/sbq/sbq/*) ;;
-    *) echo "path is outside /home/sbq/sbq: $path" >&2; exit 2 ;;
-  esac
+  aqcat25_require_remote_path "$path" || exit 2
 done
 
-. "$PILOT_ROOT/aqcat25_mz73_env.sh" || exit 2
-aqcat25_setup_mz73_environment "$OUTPUT_ROOT"
+aqcat25_setup_mz73_environment "$OUTPUT_ROOT" || exit 2
 test -d "$MATRIS_SOURCE/matris" || {
   echo "MatRIS source is missing: $MATRIS_SOURCE" >&2
   exit 2

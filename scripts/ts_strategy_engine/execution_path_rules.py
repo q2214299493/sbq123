@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
 from .dimer_gate import coarse_neb_peak_stall_evidence
 from .execution_decision import (
+    ScientificReadiness as ScientificReadiness,
     decision_from_quality as _decision_from_quality,
     make_decision as _make_decision,
 )
@@ -16,13 +16,6 @@ from .execution_evidence import (
     validated_ts,
     warning_reason_codes,
 )
-
-
-@dataclass(frozen=True)
-class ScientificReadiness:
-    decision: str
-    reason_codes: tuple[str, ...]
-    eligible_actions: tuple[str, ...]
 
 
 def require_relative_input_path(value: str) -> str:

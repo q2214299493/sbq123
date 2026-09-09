@@ -1,6 +1,7 @@
 # Phase B0 — Full Repository Coverage Audit
 
 - **Repository:** C:\Users\86177\Desktop\work
+- **Relocation:** B1.1 moved this report to reports/refactor_audit/; historical findings remain the B0 snapshot. Current B1 closure is documented in [B1_completion_report.md](B1_completion_report.md).
 - **Audit date:** 2026-09-09, Asia/Shanghai.
 - **Branch / HEAD:** refactor/v2-architecture-repair / 3a4c23f3bae8da264323fea75d6fe593ca562845.
 - **Baseline:** actual dirty working tree, not HEAD, the GitHub release, or historical refactor reports. Initial Git status contained 66 modified and 286 untracked entries; an untracked directory entry can represent many files.
@@ -11,7 +12,7 @@
 
 ### Scope and method
 
-Read AGENTS.md, tasks/current_task.md, docs/02_CURRENT_STATE.md, docs/06_MODULE_MAP.md, modules/README.md, module ownership/gate documentation, and the existing refactor_audit material. Used the VASP workflow router to identify scientific owners without executing their workflows.
+Read AGENTS.md, tasks/current_task.md, docs/02_CURRENT_STATE.md, docs/06_MODULE_MAP.md, modules/README.md, module ownership/gate documentation, and the existing audit material (now under reports/refactor_audit/). Used the VASP workflow router to identify scientific owners without executing their workflows.
 
 Inspection combined whole-repository metadata classification, AST parsing, a static import graph, entrypoint/duplicate extraction, targeted implementation and test review, configuration/schema validation, shell/PowerShell/JavaScript inspection, and synthetic in-memory negative probes. The appendix lists every active Python file in the static scan.
 
@@ -758,4 +759,4 @@ The ignore-aware six-core-root inventory was rehashed before writing this report
 
 18794d8fab4561028c0d44d134577a494e6ae7cf482f709ad31a6301fd73e78a
 
-This guard covers code/config/tests/skills and module/CI material in that inventory; it is not a hash of all runtime data or the entire dirty working tree. No source changes were made by this audit. No production database, scientific workflow, scheduler, workbook or Git mutation was invoked. The only authored output is refactor_audit/full_coverage_report.md.
+This guard covers code/config/tests/skills and module/CI material in that inventory; it is not a hash of all runtime data or the entire dirty working tree. No source changes were made by this audit. No production database, scientific workflow, scheduler, workbook or Git mutation was invoked. The only authored output is reports/refactor_audit/full_coverage_report.md.
