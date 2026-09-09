@@ -21,7 +21,7 @@ Every input and output receives a record. Large runtime files and licensed POTCA
 - `schema.sql`: SQLite schema for calculations, jobs, status history, files,
   results, reviews, contract-bound TS validation, matched-static barrier sets,
   reviewed TS strategy templates, and Excel-promotion receipts.
-- `scripts/init_registry.py`: creates or transactionally migrates the local registry.
+- `scripts/init_registry.py`: explicitly creates or transactionally migrates a named registry. Opening a registry never migrates it.
 - `registry-write plan` validates an append-only JSON batch against the current
   schema without changing the database. It may also plan an explicit
   `workflow_status_changes` list that names the expected old status and writes
@@ -139,3 +139,69 @@ sheets, changed headers or preserved cells, repeated registry IDs, changed
 workbook bytes, unreviewed requests, unaccepted results, or an unaccepted TS.
 It never creates a new workbook table or infers scientific values from a
 calculation folder.
+
+## B4 persistence contract (schema 9)
+
+`registry_write.py` remains the public API/CLI facade. `registry_mutations.py`
+owns batch validation and the single SQL apply path; `registry_transactions.py`
+owns database fingerprints, exact-plan approval and immutable apply receipts.
+`registry_acceptance.py` only adapts B3 evidence and existing scientific owners.
+It does not introduce scientific thresholds or replace TS acceptance.
+
+Planning executes the complete batch against an in-memory database snapshot,
+including foreign keys, constraints, transitions and scientific/evidence gates.
+The plan includes `plan_sha256`, database identity/fingerprint, reviewer identity,
+mutation scope and actions. Save this document and an explicit approval containing
+`plan_sha256`, `database_fingerprint`, `reviewer`, `reviewed_at`, `decision=approve`
+and the exact `scope`. `registry_transactions.approve_plan` constructs the
+approval data; it does not authenticate the human or grant authority by itself.
+
+Apply requires `--plan PLAN.json --approval APPROVAL.json --confirm-sha256 PLAN_HASH`
+in addition to `--manifest` and `--db`. A former batch-only hash is insufficient.
+The Python API preserves its name and adds required `plan` and `approval` arguments.
+There is no silent planning at apply. Under `BEGIN IMMEDIATE`, apply checks the
+snapshot, verifies all actions, inserts rows/events/receipt and commits together.
+Failure rolls back and records `batch_failed` separately. Only these failed
+attempt events are excluded from the logical database fingerprint to permit a
+reviewed retry after rollback. Exact successful retries return the original receipt;
+an altered plan cannot reuse a batch ID. Pending WAL content is included through
+the active SQLite snapshot, not a hash of the main database file alone.
+
+`compatibility_revisions` stores immutable content-addressed versions with an
+optional superseded revision. `calculation_compatibility_revisions` permanently
+binds each calculation to its original version; the existing compatibility table
+is retained for reader compatibility. New compatibility is a new revision/new
+calculation, never an update of historical evidence. Scientific records, reviews,
+status histories, events and receipts reject UPDATE, DELETE and conflicting REPLACE.
+
+`state_manager/job_lifecycle.py` owns recorded job/workflow transitions. Scheduler
+aliases remain distinct from scientific validation. DONE cannot restart; FAILED
+can reach DONE only with an explicit persisted `job_recovery_events` record.
+`job_current_state` is a view over immutable observations. Observation records have
+stable IDs/times and the enclosing batch event supplies actor/source and reason.
+
+Predictions stay outside accepted result tables. New candidates require evidence;
+accepted results require B3 transferable calculated-result evidence bound to the
+exact result, compatibility and current scientific sources. The generic accepted
+result adapter supports reviewed VASP relaxation `final_toten` in eV via existing
+owners. Other scientific result kinds use their existing owning workflow; a bare
+accepted status is not authority. Full provenance is preserved in `batch_applied`.
+Published results retain the separate Excel promotion gate. Excel apply rechecks
+the database under lock, records a publication event and restores workbook/receipt
+on ordinary transaction failure. An interrupted attempt remains explicitly pending
+reconciliation; files and SQLite cannot share a hardware-atomic commit.
+
+### Explicit migration / rollback
+
+`009_registry_governance.sql` adds schema 9 without changing existing scientific
+rows. Initialization and upgrades use a single transaction through all versions,
+with schema, integrity and foreign-key validation before commit. Unknown/newer or
+incomplete schemas fail closed. No production migration is run during B4.
+
+Before an operational upgrade, retain a reviewed off-line backup. Immediate
+additive downgrade is available as `registry_schema.rollback_registry_v9(Path)`
+and uses `009_registry_governance_rollback.sql`. It refuses to discard new events,
+receipts, recovery records or new compatibility revisions. After operational use,
+rollback requires a reviewed backup/recovery plan rather than deleting new history.
+Opening a version-8 registry (even with legacy `migrate=True`) now requests explicit
+migration; production rollout is a separate authorized operation.

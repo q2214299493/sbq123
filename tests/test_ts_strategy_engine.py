@@ -4,6 +4,7 @@ import copy
 import hashlib
 import json
 import sqlite3
+from tests.registry_fixture_mutation import fixture_connection
 from pathlib import Path
 
 import numpy as np
@@ -37,7 +38,7 @@ def test_source_saddle_done_history_does_not_require_redundant_finished_at(
     tmp_path: Path,
 ) -> None:
     db = tmp_path / "registry.sqlite3"
-    with sqlite3.connect(db) as connection:
+    with fixture_connection(db) as connection:
         connection.executescript(
             (ROOT / "modules" / "calculation_registry" / "schema.sql").read_text(
                 encoding="utf-8"
@@ -178,7 +179,7 @@ def _insert_file(connection: sqlite3.Connection, file_id: str, calculation_id: s
     )
 
 
-def database(path: Path) -> Path:
+def database(path: Path, *, compatibility=None, missing_job_history=None) -> Path:
     active_contract = contract()
     saddle_path = path.parent / "saddle.vasp"
     frequency_poscar = path.parent / "frequency.POSCAR"
@@ -233,6 +234,7 @@ def database(path: Path) -> Path:
     connectivity_sha = hashlib.sha256(connectivity_path.read_bytes()).hexdigest()
     with sqlite3.connect(path) as connection:
         connection.executescript((ROOT / "modules" / "calculation_registry" / "schema.sql").read_text(encoding="utf-8"))
+    with fixture_connection(path) as connection:
         for calculation_id in (
             "calc_ts",
             "calc_vfa",
@@ -346,9 +348,11 @@ def database(path: Path) -> Path:
                 "UPDATE files SET job_record_id=? WHERE file_id=?",
                 (f"job_{calculation_id}", source_file),
             )
-    chemistry = contract()["compatibility"]
+    chemistry = compatibility or contract()["compatibility"]
     for calculation_id in ("calc_is", "calc_ts_static", "calc_fs"):
         register_calculation_compatibility(path, calculation_id, chemistry, "reviewer", "2026-01-01")
+    if compatibility is not None:
+        return path
     validation_payload = {
         "validation_calculation_id": "calc_vfa",
         "source_saddle_calculation_id": "calc_ts",
@@ -415,6 +419,9 @@ def database(path: Path) -> Path:
         final_result_id="fs_energy",
         learning_record=successful_record(),
     )
+    if missing_job_history:
+        with fixture_connection(path) as connection:
+            connection.execute("DELETE FROM job_status_history WHERE job_record_id=?", (missing_job_history,))
     return path
 
 
@@ -445,7 +452,7 @@ def successful_record(**updates: object) -> dict:
 
 
 def test_matched_static_barrier_rejects_missing_completed_vasp_job_evidence(tmp_path: Path) -> None:
-    path = database(tmp_path / "registry.sqlite3")
+    path = database(tmp_path / "registry.sqlite3", missing_job_history="job_calc_ts_static")
     gate_path, gate_state = authoritative_gate(
         path,
         barrier_validation(
@@ -453,7 +460,7 @@ def test_matched_static_barrier_rejects_missing_completed_vasp_job_evidence(tmp_
             reaction_id="co_split_without_evidence",
         ),
     )
-    with sqlite3.connect(path) as connection:
+    with fixture_connection(path) as connection:
         connection.execute("DELETE FROM job_status_history WHERE job_record_id='job_calc_ts_static'")
     with pytest.raises(ValueError, match="latest status event"):
         record_matched_static_barrier(
@@ -507,7 +514,7 @@ def test_barrier_and_learning_record_roll_back_together(tmp_path: Path) -> None:
             final_result_id="fs_energy",
             learning_record=record,
         )
-    with sqlite3.connect(db) as connection:
+    with fixture_connection(db) as connection:
         assert connection.execute(
             "SELECT 1 FROM ts_barriers WHERE barrier_set_id=?", (barrier_id,)
         ).fetchone() is None
@@ -532,7 +539,7 @@ def test_grade_a_template_is_evidence_bound_and_transferred(tmp_path: Path) -> N
     assert strategy["reuse_scope"] == "method_strategy_only"
     assert strategy["result_reuse_policy"] == "reference_existing_registered_result_only"
     assert strategy["automatic_submission"] is False
-    with sqlite3.connect(db) as connection:
+    with fixture_connection(db) as connection:
         connection.execute("UPDATE files SET sha256=NULL WHERE file_id='mode_plus'")
     assert load_templates(db)[0]["evidence_valid"] is False
 
@@ -541,7 +548,7 @@ def test_grade_a_dimer_template_does_not_require_optional_connectivity_files(
     tmp_path: Path,
 ) -> None:
     db = database(tmp_path / "registry.sqlite3")
-    with sqlite3.connect(db) as connection:
+    with fixture_connection(db) as connection:
         connection.execute(
             "UPDATE ts_validations SET source_method='dimer', "
             "positive_displacement_file_id=NULL, negative_displacement_file_id=NULL, "
@@ -560,7 +567,7 @@ def test_barrier_gate_rejects_a_revoked_latest_matched_static_status(tmp_path: P
         db,
         barrier_validation(barrier_set_id="barrier_after_revocation"),
     )
-    with sqlite3.connect(db) as connection:
+    with fixture_connection(db) as connection:
         connection.execute(
             """
             INSERT INTO job_status_history
@@ -588,15 +595,11 @@ def test_barrier_gate_rejects_a_revoked_latest_matched_static_status(tmp_path: P
 
 
 def test_compatible_converged_sigma0p20_toten_chain_is_accepted(tmp_path: Path) -> None:
-    db = database(tmp_path / "registry.sqlite3")
     compatibility = dict(contract()["compatibility"])
     compatibility["sigma_ev"] = 0.2
     compatibility["final_energy_convention"] = "fe110_converged_toten_sigma0p20_v1"
-    for calculation_id in ("calc_is", "calc_ts_static", "calc_fs"):
-        register_calculation_compatibility(
-            db, calculation_id, compatibility, "reviewer", "2026-02-01"
-        )
-    with sqlite3.connect(db) as connection:
+    db = database(tmp_path / "registry.sqlite3", compatibility=compatibility)
+    with fixture_connection(db) as connection:
         connection.row_factory = sqlite3.Row
         connection.execute(
             "UPDATE calculations SET workflow_status='energy_accepted' "
@@ -625,15 +628,11 @@ def test_compatible_converged_sigma0p20_toten_chain_is_accepted(tmp_path: Path) 
 def test_final_energy_chain_accepts_reviewed_expired_scheduler_record(
     tmp_path: Path,
 ) -> None:
-    db = database(tmp_path / "registry.sqlite3")
     compatibility = dict(contract()["compatibility"])
     compatibility["sigma_ev"] = 0.2
     compatibility["final_energy_convention"] = "fe110_converged_toten_sigma0p20_v1"
-    for calculation_id in ("calc_is", "calc_ts_static", "calc_fs"):
-        register_calculation_compatibility(
-            db, calculation_id, compatibility, "reviewer", "2026-02-01"
-        )
-    with sqlite3.connect(db) as connection:
+    db = database(tmp_path / "registry.sqlite3", compatibility=compatibility)
+    with fixture_connection(db) as connection:
         connection.execute(
             "UPDATE calculations SET workflow_status='energy_accepted' "
             "WHERE calculation_id IN ('calc_is', 'calc_ts_static', 'calc_fs')"
@@ -678,7 +677,7 @@ def test_final_energy_chain_uses_append_only_done_review_not_stale_summary_field
     tmp_path: Path,
 ) -> None:
     db = database(tmp_path / "registry.sqlite3")
-    with sqlite3.connect(db) as connection:
+    with fixture_connection(db) as connection:
         connection.execute(
             "UPDATE calculations SET workflow_status='submitted' "
             "WHERE calculation_id IN ('calc_is', 'calc_ts_static', 'calc_fs')"
@@ -699,7 +698,7 @@ def test_final_energy_chain_rejects_mixed_static_and_relaxation_statuses(
     tmp_path: Path,
 ) -> None:
     db = database(tmp_path / "registry.sqlite3")
-    with sqlite3.connect(db) as connection:
+    with fixture_connection(db) as connection:
         connection.row_factory = sqlite3.Row
         connection.execute(
             "UPDATE results SET validation_status='accepted_compatible_final_energy' "

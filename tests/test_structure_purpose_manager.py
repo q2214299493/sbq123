@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import sqlite3
+from scripts.registry_schema import migrate_registry
 from pathlib import Path
 
 import numpy as np
@@ -78,15 +79,10 @@ def structure(
 
 def endpoint_database(tmp_path: Path) -> TSEndpointDatabase:
     database = tmp_path / "registry.sqlite3"
+    migrate_registry(database)
     with sqlite3.connect(database) as connection:
         connection.executescript(
             """
-            CREATE TABLE schema_metadata (
-                key TEXT PRIMARY KEY,
-                value TEXT NOT NULL
-            );
-            INSERT INTO schema_metadata (key, value)
-            VALUES ('schema_version', '8');
 
             CREATE TABLE ts_endpoint_records (
                 endpoint_record_id TEXT PRIMARY KEY,
@@ -663,15 +659,10 @@ def test_endpoint_database_does_not_implicitly_execute_blocked_migration(
     tmp_path: Path,
 ) -> None:
     database = tmp_path / "registry.sqlite3"
+    migrate_registry(database)
     with sqlite3.connect(database) as connection:
         connection.executescript(
             """
-            CREATE TABLE schema_metadata (
-                key TEXT PRIMARY KEY,
-                value TEXT NOT NULL
-            );
-            INSERT INTO schema_metadata (key, value)
-            VALUES ('schema_version', '8');
             """
         )
 

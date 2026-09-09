@@ -6,7 +6,6 @@ from typing import Any
 
 from .registry import (
     ACCEPTED_FINAL_ENERGY_STATUSES,
-    compatibility_fingerprint,
     open_registry,
     utc_now,
 )
@@ -29,22 +28,9 @@ def register_calculation_compatibility(
     reviewer: str,
     reviewed_at: str,
 ) -> str:
-    fingerprint = compatibility_fingerprint(compatibility)
-    with open_registry(database, migrate=True) as connection:
-        connection.execute(
-            """
-            INSERT INTO calculation_compatibility
-            (calculation_id, compatibility_fingerprint, compatibility_json, reviewer, reviewed_at)
-            VALUES (?, ?, ?, ?, ?)
-            ON CONFLICT(calculation_id) DO UPDATE SET
-                compatibility_fingerprint=excluded.compatibility_fingerprint,
-                compatibility_json=excluded.compatibility_json,
-                reviewer=excluded.reviewer,
-                reviewed_at=excluded.reviewed_at
-            """,
-            (calculation_id, fingerprint, json.dumps(compatibility, sort_keys=True), reviewer, reviewed_at),
-        )
-    return fingerprint
+    from scripts.registry_compatibility import register_calculation_compatibility as register
+
+    return register(database, calculation_id, compatibility, reviewer, reviewed_at)
 
 
 def _endpoint_errors(

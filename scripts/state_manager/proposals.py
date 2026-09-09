@@ -20,7 +20,7 @@ from .projections import (
     load_policy,
     module_row_text,
 )
-from .store import EventStore
+from .store import EventStore, _write_immutable_json
 
 
 class ReviewRequired(RuntimeError):
@@ -43,7 +43,15 @@ class ProposalStore:
 
     def save(self, proposal: dict[str, Any]) -> Path:
         self.cache_dir.mkdir(parents=True, exist_ok=True)
-        return write_json_atomic(self.path(str(proposal["proposal_id"])), proposal)
+        target = self.path(str(proposal["proposal_id"]))
+        _validate_proposal_id(proposal)
+        if target.exists():
+            existing = self.load(str(proposal["proposal_id"]))
+            if existing["actions"] != proposal["actions"]:
+                raise ValueError("immutable proposal differs")
+            return target
+        _write_immutable_json(target, proposal)
+        return target
 
     def load(self, proposal_id: str) -> dict[str, Any]:
         path = self.path(proposal_id)
@@ -77,6 +85,12 @@ def _validate_proposal_id(proposal: dict[str, Any]) -> None:
         "actions": proposal.get("actions"),
     }
     expected = _proposal_id(core)
+    if proposal.get("plan_sha256") != sha256_bytes(canonical_json(core)):
+        raise ValueError("proposal plan hash mismatch")
+    if proposal.get("review_required") != any(action.get("requires_review") for action in proposal.get("actions", [])):
+        # Event-level review is checked again from authoritative event at apply.
+        if not proposal.get("review_required"):
+            raise ValueError("proposal review requirement was changed")
     if proposal.get("proposal_id") != expected:
         raise ValueError("proposal ID does not match its hash-bound content")
 
@@ -201,6 +215,7 @@ def build_proposal(
     proposal = {
         **core,
         "proposal_id": _proposal_id(core),
+        "plan_sha256": sha256_bytes(canonical_json(core)),
         "created_at": utc_now(),
         "review_required": event.review_required or any(action["requires_review"] for action in actions),
         "review_questions": _review_questions(reasons) if reasons else [],
@@ -278,6 +293,8 @@ def _require_review_decision(
     safe_only: bool,
 ) -> str | None:
     decision = event_store.proposal_decision(str(proposal["proposal_id"]))
+    if decision == "reject":
+        raise ReviewRequired("proposal is rejected")
     if not proposal["review_required"]:
         return decision
     if safe_only:
@@ -357,9 +374,13 @@ def _execute_archive(
     decision: str | None,
     archived: list[tuple[Path, Path]],
     changed: list[str],
+    backups: dict[Path, bytes | None],
 ) -> None:
     source = _resolved(root, action["source_path"])
     target.parent.mkdir(parents=True, exist_ok=True)
+    archived.append((source, target))
+    manifest_path = target.parent / "archive_manifest.json"
+    backups[manifest_path] = manifest_path.read_bytes() if manifest_path.is_file() else None
     shutil.copy2(source, target)
     if sha256_file(source) != sha256_file(target):
         raise OSError(f"archive copy hash mismatch: {source}")
@@ -375,7 +396,6 @@ def _execute_archive(
         }
         write_json_atomic(target.parent / "archive_manifest.json", manifest)
     source.unlink()
-    archived.append((source, target))
     changed.extend([action["source_path"], action["target_path"]])
 
 
@@ -412,16 +432,17 @@ def _execute_action(
             decision=decision,
             archived=archived,
             changed=changed,
+            backups=backups,
         )
         return
     if action_type == "move_file":
         source = _resolved(root, action["source_path"])
         target.parent.mkdir(parents=True, exist_ok=True)
+        archived.append((source, target))
         shutil.copy2(source, target)
         if sha256_file(source) != sha256_file(target):
             raise OSError(f"move copy hash mismatch: {source}")
         source.unlink()
-        archived.append((source, target))
         changed.extend([action["source_path"], action["target_path"]])
         return
     raise ValueError(f"unsupported proposal action: {action_type}")
@@ -437,7 +458,6 @@ def _rollback(
             source.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(target, source)
         target.unlink(missing_ok=True)
-        (target.parent / "archive_manifest.json").unlink(missing_ok=True)
     for path, content in reversed(list(backups.items())):
         if content is None:
             path.unlink(missing_ok=True)
@@ -446,19 +466,24 @@ def _rollback(
             path.write_bytes(content)
 
 
-def apply_proposal(
+def _apply_proposal(
     proposal: dict[str, Any],
     *,
     event_store: EventStore,
     project_root: Path = ROOT,
     policy_path: Path = DEFAULT_POLICY,
     safe_only: bool = False,
+    _on_applied=None,
 ) -> list[str]:
     _validate_proposal_id(proposal)
     event = event_store.get(str(proposal["event_id"]))
     if event.digest != proposal["event_sha256"]:
         raise StaleProposal("event content no longer matches proposal")
     event_store.verify_evidence(event)
+    _validate_actions(proposal["actions"], root=project_root.resolve(), policy=load_policy(policy_path))
+    expected = build_proposal(event, project_root=project_root, policy_path=policy_path)
+    if expected["actions"] != proposal["actions"] or expected["review_required"] != proposal["review_required"]:
+        raise StaleProposal("proposal no longer matches authoritative event, policy and current targets")
     decision = _require_review_decision(proposal, event_store=event_store, safe_only=safe_only)
     root = project_root.resolve()
     policy = load_policy(policy_path)
@@ -479,7 +504,27 @@ def apply_proposal(
                 archived=archived,
                 changed=changed,
             )
+        if _on_applied is not None:
+            _on_applied()
     except BaseException:
-        _rollback(backups=backups, archived=archived)
+        try:
+            _rollback(backups=backups, archived=archived)
+        except BaseException as rollback_error:
+            from .application_log import ReconciliationRequired
+
+            raise ReconciliationRequired("state rollback failed; UNKNOWN_NEEDS_RECONCILIATION") from rollback_error
         raise
     return changed
+
+
+def apply_proposal(proposal, *, event_store, project_root=ROOT, policy_path=DEFAULT_POLICY, safe_only=False):
+    from .application_log import reserved_application
+
+    proposal = json.loads(json.dumps(proposal))
+    _validate_proposal_id(proposal)
+    cache = ProposalStore(project_root=project_root, policy_path=policy_path).cache_dir
+    with reserved_application(cache, proposal) as receipt:
+        if receipt["receipt"] is not None:
+            return []
+        return _apply_proposal(proposal, event_store=event_store, project_root=project_root,
+                               policy_path=policy_path, safe_only=safe_only, _on_applied=receipt["finish"])

@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from scripts.artifact_io import sha256_file
+from scripts.provenance_fields import required_text
 
 from .models import ROOT, StateEvent, utc_now
 
@@ -365,6 +366,7 @@ class EventStore:
         reviewed_event_id: str | None = None,
         reviewed_event_sha256: str | None = None,
     ) -> Path:
+        required_text(reviewer, "reviewer identity")
         if (reviewed_event_id is None) != (reviewed_event_sha256 is None):
             raise ValueError(
                 "reviewed_event_id and reviewed_event_sha256 must be provided together"

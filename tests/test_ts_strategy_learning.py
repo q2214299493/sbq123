@@ -250,7 +250,9 @@ def test_history_corruption_and_concurrent_update_are_rejected(db, tmp_path):
     save_event(db, "attempt", "synthetic", {"test": True})
     with pytest.raises(ValueError, match="concurrently"):
         save_event(db, "attempt", "stale", {"test": True}, expected_history=token)
-    with sqlite3.connect(db) as connection:
+    from tests.registry_fixture_mutation import fixture_connection
+
+    with fixture_connection(db) as connection:
         connection.execute("UPDATE ts_strategy_events SET payload_json='{}' WHERE entity_id=?", (root,))
     with pytest.raises(ValueError, match="hash mismatch"):
         read_events(db, "variant")

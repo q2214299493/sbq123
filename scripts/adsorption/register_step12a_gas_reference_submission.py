@@ -187,6 +187,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Plan or apply the Step 12A gas-reference submission batch.")
     parser.add_argument("command", choices=("plan", "apply"))
     parser.add_argument("--confirm-sha256")
+    parser.add_argument("--plan", type=Path)
+    parser.add_argument("--approval", type=Path)
     args = parser.parse_args()
     batch = build_batch()
     batch_path = PROVENANCE / "registry_submission_batch.json"
@@ -195,9 +197,13 @@ def main() -> None:
         result = plan_registry_batch(DATABASE, batch)
         output = PROVENANCE / "registry_submission_plan.json"
     else:
-        if not args.confirm_sha256:
-            raise ValueError("apply requires --confirm-sha256")
-        result = apply_registry_batch(DATABASE, batch, confirmed_sha256=args.confirm_sha256)
+        if not args.confirm_sha256 or not args.plan or not args.approval:
+            raise ValueError("apply requires --plan, --approval and --confirm-sha256")
+        result = apply_registry_batch(
+            DATABASE, batch, confirmed_sha256=args.confirm_sha256,
+            plan=json.loads(args.plan.read_text(encoding="utf-8")),
+            approval=json.loads(args.approval.read_text(encoding="utf-8")),
+        )
         output = PROVENANCE / "registry_submission_receipt.json"
     output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(json.dumps({**result, "manifest_sha256": sha256_json(batch)}, indent=2))

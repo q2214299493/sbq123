@@ -4,6 +4,7 @@ import ast
 import importlib
 import inspect
 import sqlite3
+from scripts.registry_schema import migrate_registry
 from dataclasses import fields
 from pathlib import Path
 from typing import Any
@@ -116,15 +117,10 @@ def _candidate(endpoint: Path, identifier: str = "endpoint-a") -> EndpointCandid
 def _create_test_endpoint_schema(database: Path) -> None:
     """Create a test-only adapter fixture without reading blocked migrations."""
 
+    migrate_registry(database)
     with sqlite3.connect(database) as connection:
         connection.executescript(
             """
-            CREATE TABLE schema_metadata (
-                key TEXT PRIMARY KEY,
-                value TEXT NOT NULL
-            );
-            INSERT INTO schema_metadata (key, value)
-            VALUES ('schema_version', '8');
 
             CREATE TABLE ts_endpoint_records (
                 endpoint_record_id TEXT PRIMARY KEY,
@@ -153,17 +149,10 @@ def _create_test_endpoint_schema(database: Path) -> None:
 
 
 def _create_test_registry_base(database: Path) -> None:
+    migrate_registry(database)
     with sqlite3.connect(database) as connection:
         connection.executescript(
             """
-            CREATE TABLE schema_metadata (
-                key TEXT PRIMARY KEY,
-                value TEXT NOT NULL
-            );
-            INSERT INTO schema_metadata (key, value)
-            VALUES ('schema_version', '8');
-            CREATE TABLE calculations (calculation_id TEXT PRIMARY KEY);
-            CREATE TABLE files (file_id TEXT PRIMARY KEY);
             """
         )
 
@@ -990,15 +979,10 @@ def test_database_adapter_crud_duplicate_and_order_without_migration(
     assert not hasattr(database, "update")
 
     missing_table_path = tmp_path / "missing-table.sqlite3"
+    migrate_registry(missing_table_path)
     with sqlite3.connect(missing_table_path) as connection:
         connection.executescript(
             """
-            CREATE TABLE schema_metadata (
-                key TEXT PRIMARY KEY,
-                value TEXT NOT NULL
-            );
-            INSERT INTO schema_metadata (key, value)
-            VALUES ('schema_version', '8');
             """
         )
     with pytest.raises(ValueError, match="TS endpoint table is missing"):
@@ -1172,15 +1156,10 @@ def test_adapter_does_not_run_migration_or_replace_incompatible_table(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     database_path = tmp_path / "incompatible-endpoint.sqlite3"
+    migrate_registry(database_path)
     with sqlite3.connect(database_path) as connection:
         connection.executescript(
             """
-            CREATE TABLE schema_metadata (
-                key TEXT PRIMARY KEY,
-                value TEXT NOT NULL
-            );
-            INSERT INTO schema_metadata (key, value)
-            VALUES ('schema_version', '8');
             CREATE TABLE ts_endpoint_records (sentinel_only TEXT);
             """
         )

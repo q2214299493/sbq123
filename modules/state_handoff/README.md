@@ -166,3 +166,20 @@ The event schema, read-only audit, proposal/review/apply workflow, safe
 projections, lifecycle safeguards, and targeted tests pass. Current-task,
 current-gate, module-row, and four lifecycle-view adoptions are recorded by
 reviewed immutable events; no existing view is silently taken over.
+
+## B4 exact application boundary
+
+New proposals retain a full `plan_sha256` in addition to their stable display ID.
+Cached proposals are immutable. Apply verifies the event, exact actions, current
+policy/targets and derived review requirement; toggling `review_required` or
+rehashing arbitrary actions cannot bypass the owning projection builder. Rebuilding
+for comparison never replaces the approved actions that are executed.
+
+`application_log.py` persists started/applied/failed attempts in the existing
+proposal cache and serializes apply with an exclusive file reservation. Ordinary
+failures restore target bytes, including failures to persist the success receipt.
+A process interruption leaves `UNKNOWN_NEEDS_RECONCILIATION`; no lock is cleared
+automatically and no unknown attempt is retried. Filesystem projections are not
+crash-atomic across multiple files; manual reconciliation is required after a
+process/host interruption. Existing immutable source/review events remain intact.
+Legacy cached proposals lacking a full hash require a fresh plan and review.

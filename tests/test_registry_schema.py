@@ -20,6 +20,8 @@ def test_registry_migrates_v2_to_evidence_bound_schema(tmp_path: Path) -> None:
             CREATE TABLE calculations (calculation_id TEXT PRIMARY KEY);
             CREATE TABLE files (file_id TEXT PRIMARY KEY);
             CREATE TABLE results (result_id TEXT PRIMARY KEY);
+            CREATE TABLE reviews (review_id TEXT PRIMARY KEY);
+            CREATE TABLE job_status_history (status_event_id INTEGER PRIMARY KEY);
             CREATE TABLE ts_validations (ts_validation_id TEXT PRIMARY KEY);
             CREATE TABLE ts_strategy_templates (
                 template_id TEXT PRIMARY KEY,

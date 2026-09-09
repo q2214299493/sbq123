@@ -541,6 +541,8 @@ def main() -> None:
     parser.add_argument("command", choices=("plan", "apply"))
     parser.add_argument("--checked-at", required=True)
     parser.add_argument("--confirm-sha256")
+    parser.add_argument("--plan", type=Path)
+    parser.add_argument("--approval", type=Path)
     args = parser.parse_args()
     batch, summary = build_batch(args.checked_at)
     (PROVENANCE / "completion_review.json").write_text(
@@ -553,9 +555,13 @@ def main() -> None:
         result = plan_registry_batch(DATABASE, batch)
         output = PROVENANCE / "registry_completion_plan.json"
     else:
-        if not args.confirm_sha256:
-            raise ValueError("apply requires --confirm-sha256")
-        result = apply_registry_batch(DATABASE, batch, confirmed_sha256=args.confirm_sha256)
+        if not args.confirm_sha256 or not args.plan or not args.approval:
+            raise ValueError("apply requires --plan, --approval and --confirm-sha256")
+        result = apply_registry_batch(
+            DATABASE, batch, confirmed_sha256=args.confirm_sha256,
+            plan=json.loads(args.plan.read_text(encoding="utf-8")),
+            approval=json.loads(args.approval.read_text(encoding="utf-8")),
+        )
         output = PROVENANCE / "registry_completion_receipt.json"
     output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(json.dumps({**result, "manifest_sha256": sha256_json(batch)}, indent=2))

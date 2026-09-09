@@ -144,3 +144,19 @@ Current executable code lives only under `scripts/` or a repository-backed skill
 - `jsonl_io.py`: dependency-free JSONL object loading shared across scientific modules and repository-backed skills.
 
 Commands and scientific gates remain owned by the relevant module README. One-off or superseded scripts belong under `archive/`, not at repository root.
+
+### B4 registry/state ownership
+
+- `registry_write.py`: public batch API/CLI facade; no embedded SQL.
+- `registry_mutations.py`: complete batch planning, one SQL mutation path and atomic apply.
+- `registry_transactions.py`: snapshot/approval bindings and durable transaction receipts.
+- `registry_compatibility.py`: immutable compatibility revisions and original calculation bindings.
+- `registry_acceptance.py`: persistence adapter consuming B3 evidence and existing VASP/scientific owners.
+- `registry_schema.py`: explicit versioned migrations, validation and guarded rollback.
+- `state_manager/job_lifecycle.py`: recorded job/workflow transition rules (not execution authority).
+- `state_manager/application_log.py`: durable attempts/reservation for the existing state projection executor.
+
+The existing `ts_strategy_engine.evidence.register_calculation_compatibility` API
+is a thin compatibility facade. Scientific validation and execution remain in
+their original owners. Schema initialization, batch application and Excel promotion
+are explicit operations; merely opening a registry performs no migration.

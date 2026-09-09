@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-import sqlite3
+from tests.registry_fixture_mutation import fixture_connection
 import subprocess
 from pathlib import Path
 
@@ -17,7 +17,7 @@ from scripts.registry_schema import migrate_registry
 
 
 def _seed_accepted_adsorption(database: Path) -> None:
-    with sqlite3.connect(database) as connection:
+    with fixture_connection(database) as connection:
         connection.execute(
             "INSERT INTO calculations VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
             ("ads_static", "adsorption_workflow", "final static", "Fe(110)+CO", None, "static_accepted", "2026-08-07T00:00:00Z", None, None),
@@ -78,7 +78,7 @@ def _request(workbook: Path, receipt: Path) -> dict[str, object]:
 
 
 def _seed_accepted_barrier(database: Path) -> None:
-    with sqlite3.connect(database) as connection:
+    with fixture_connection(database) as connection:
         for calculation_id, purpose in (
             ("is_calc", "initial state"),
             ("ts_calc", "transition state"),
@@ -338,7 +338,7 @@ def test_plan_rejects_transition_state_endpoint_static(tmp_path: Path, monkeypat
     database = tmp_path / "registry.sqlite3"
     migrate_registry(database)
     _seed_accepted_adsorption(database)
-    with sqlite3.connect(database) as connection:
+    with fixture_connection(database) as connection:
         connection.execute("UPDATE calculations SET module='transition_state_search' WHERE calculation_id='ads_static'")
     workbook = tmp_path / "adsorption.xlsx"
     workbook.write_bytes(b"not parsed during planning")
@@ -359,7 +359,7 @@ def test_build_plan_accepts_reviewed_compatible_relaxation_energy(
     database = tmp_path / "registry.sqlite3"
     migrate_registry(database)
     _seed_accepted_adsorption(database)
-    with sqlite3.connect(database) as connection:
+    with fixture_connection(database) as connection:
         connection.execute(
             "UPDATE calculations SET workflow_status='energy_accepted' WHERE calculation_id='ads_static'"
         )
@@ -388,7 +388,7 @@ def test_build_plan_accepts_compatible_adsorption_energy_for_existing_row(
     database = tmp_path / "registry.sqlite3"
     migrate_registry(database)
     _seed_accepted_adsorption(database)
-    with sqlite3.connect(database) as connection:
+    with fixture_connection(database) as connection:
         connection.execute(
             "UPDATE calculations SET workflow_status='energy_accepted' "
             "WHERE calculation_id='ads_static'"
@@ -428,7 +428,7 @@ def test_build_plan_accepts_recorded_unknown_historical_scheduler_status(
     database = tmp_path / "registry.sqlite3"
     migrate_registry(database)
     _seed_accepted_adsorption(database)
-    with sqlite3.connect(database) as connection:
+    with fixture_connection(database) as connection:
         connection.execute(
             "UPDATE job_status_history SET scheduler_status='UNKNOWN' "
             "WHERE job_record_id='job_ads'"

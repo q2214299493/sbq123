@@ -21,6 +21,8 @@ from typing import Any
 
 from scripts.artifact_io import canonical_json, sha256_file, sha256_json, write_json_atomic
 from scripts.ts_strategy_engine.registry import open_registry
+from scripts.registry_transactions import database_fingerprint, record_event
+from scripts.state_manager.store import _write_immutable_json
 from scripts.scientific_validation import finite_number
 from scripts.ts_strategy_engine.matched_static_evidence import validate_barrier_values
 
@@ -372,12 +374,16 @@ def build_plan(request_path: Path, database: Path = DEFAULT_DATABASE) -> dict[st
     if receipt_path.exists():
         raise ValueError(f"receipt already exists: {receipt_path}")
     with open_registry(database) as connection:
+        connection.execute("BEGIN")
         _validate_unpromoted(connection, request)
         values, provenance, calculation_id = _resolve_columns(connection, request)
+        fingerprint = database_fingerprint(connection)
     request_sha256 = sha256_json(request)
     return {
         "schema_version": 1,
         "document_kind": "registry_excel_promotion_plan",
+        "database_fingerprint": fingerprint,
+        "database_identity": str(database.resolve()),
         "promotion_id": request["promotion_id"],
         "promotion_kind": request["promotion_kind"],
         "registry_id": request["registry_id"],
@@ -454,6 +460,12 @@ def apply_plan(plan_path: Path, *, database: Path, node: Path, node_modules: Pat
     os.close(descriptor)
     temporary = Path(temporary_name)
     inspect_sidecar = Path(f"{temporary}.inspect.ndjson")
+    workbook_before = workbook.read_bytes()
+    replaced = False
+    receipt_written = False
+    attempt_path = receipt_path.with_suffix(".attempt.json")
+    if attempt_path.exists():
+        raise ValueError("promotion UNKNOWN_NEEDS_RECONCILIATION; existing attempt must be reconciled")
     try:
         writer_result = _run_writer(plan_path, temporary, node=node, node_modules=node_modules, writer=writer)
         if not temporary.is_file() or sha256_file(workbook) != plan["workbook_sha256_before"]:
@@ -484,7 +496,14 @@ def apply_plan(plan_path: Path, *, database: Path, node: Path, node_modules: Pat
         }
         receipt["receipt_sha256"] = sha256_json(receipt)
         with open_registry(database) as connection:
+            connection.execute("BEGIN IMMEDIATE")
+            if database_fingerprint(connection) != plan["database_fingerprint"] or str(database.resolve()) != plan["database_identity"]:
+                raise ValueError("promotion database changed after approval")
+            if sha256_file(workbook) != plan["workbook_sha256_before"] or receipt_path.exists():
+                raise ValueError("promotion targets changed after approval")
             _validate_unpromoted(connection, request)
+            _write_immutable_json(attempt_path, {"status": "UNKNOWN_NEEDS_RECONCILIATION",
+                                               "plan_sha256": sha256_json(plan), "receipt": receipt})
             connection.execute(
                 """
                 INSERT INTO excel_promotions
@@ -501,11 +520,27 @@ def apply_plan(plan_path: Path, *, database: Path, node: Path, node_modules: Pat
                     receipt["created_at"], receipt["notes"],
                 ),
             )
+            record_event(connection, "result_published", receipt["registry_id"], receipt,
+                         actor=receipt["reviewer"], reason="reviewed Excel promotion")
             write_json_atomic(receipt_path, receipt)
+            receipt_written = True
             os.replace(temporary, workbook)
+            replaced = True
         return receipt
-    except BaseException:
+    except BaseException as error:
+        if replaced:
+            if sha256_file(workbook) != workbook_after:
+                raise RuntimeError("promotion rollback blocked by concurrent workbook change; reconciliation required") from error
+            temporary.write_bytes(workbook_before)
+            os.replace(temporary, workbook)
+        if receipt_written:
+            if json.loads(receipt_path.read_text(encoding="utf-8")) != receipt:
+                raise RuntimeError("promotion receipt changed; reconciliation required") from error
+            receipt_path.unlink()
         temporary.unlink(missing_ok=True)
+        with open_registry(database) as connection:
+            record_event(connection, "batch_failed", plan["promotion_id"], {"error": str(error), "plan_sha256": sha256_json(plan)},
+                         actor=plan["reviewer"], reason="promotion rolled back or requires reconciliation")
         raise
     finally:
         inspect_sidecar.unlink(missing_ok=True)

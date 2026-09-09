@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterator
 
-from scripts.registry_schema import CURRENT_VERSION, migrate_registry
+from scripts.registry_schema import CURRENT_VERSION, validate_schema
 from scripts.artifact_io import sha256_json
 
 
@@ -41,8 +41,7 @@ def require_current_schema(connection: sqlite3.Connection) -> None:
 
 @contextmanager
 def open_registry(database: Path, *, migrate: bool = False) -> Iterator[sqlite3.Connection]:
-    if migrate:
-        migrate_registry(database)
+    # The legacy migrate keyword never grants startup migration authority.
     if not database.is_file():
         raise ValueError(f"registry database not found: {database}")
     connection = sqlite3.connect(database)
@@ -50,6 +49,7 @@ def open_registry(database: Path, *, migrate: bool = False) -> Iterator[sqlite3.
     connection.execute("PRAGMA foreign_keys = ON")
     try:
         require_current_schema(connection)
+        validate_schema(connection)
         yield connection
         connection.commit()
     except Exception:

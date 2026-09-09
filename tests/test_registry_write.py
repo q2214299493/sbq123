@@ -7,8 +7,10 @@ from pathlib import Path
 import pytest
 import yaml
 
+from scripts.registry_transactions import approve_plan
 from scripts.artifact_io import sha256_json
 from scripts.registry_schema import migrate_registry
+from tests.evidence_fixtures import bound_evidence
 from scripts.registry_write import (
     apply_registry_batch,
     plan_registry_batch,
@@ -27,6 +29,8 @@ def _batch() -> dict:
         "created_at": "2026-08-18T00:00:00Z",
         "reviewer": "test-reviewer",
         "reason": "transactional registry gateway test",
+        "result_provenance": {"fixture-energy": {"type": "calculated_result", "registry_stage": "candidate",
+                                                   "evidence": bound_evidence(kind="calculated_result")}},
         "rows": {
             "calculations": [
                 {
@@ -93,7 +97,7 @@ def _batch() -> dict:
             "calculation_compatibility": [
                 {
                     "calculation_id": "fixture-calc",
-                    "compatibility_fingerprint": "b" * 64,
+                    "compatibility_fingerprint": sha256_json({"branch": "fixture"}),
                     "compatibility_json": json.dumps({"branch": "fixture"}),
                     "reviewer": "test-reviewer",
                     "reviewed_at": "2026-08-18T00:03:00Z",
@@ -109,6 +113,12 @@ def _database(tmp_path: Path) -> Path:
     return database
 
 
+def _apply(database, batch, plan=None):
+    plan = plan or plan_registry_batch(database, batch)
+    return apply_registry_batch(database, batch, plan=plan, confirmed_sha256=plan["plan_sha256"],
+                                approval=approve_plan(plan, reviewer="test-reviewer", reviewed_at="2026-09-09T00:00:00Z"))
+
+
 def test_registry_batch_plan_apply_and_repeat_are_deterministic(tmp_path: Path) -> None:
     database = _database(tmp_path)
     batch = _batch()
@@ -117,11 +127,7 @@ def test_registry_batch_plan_apply_and_repeat_are_deterministic(tmp_path: Path) 
     assert plan["update_count"] == 0
     assert plan["unchanged_count"] == 0
 
-    result = apply_registry_batch(
-        database,
-        batch,
-        confirmed_sha256=plan["batch_sha256"],
-    )
+    result = _apply(database, batch, plan)
     assert result["inserted"] == 7
     assert result["updated"] == 0
     assert result["unchanged"] == 0
@@ -134,7 +140,7 @@ def test_registry_batch_plan_apply_and_repeat_are_deterministic(tmp_path: Path) 
 def test_registry_batch_applies_hash_bound_workflow_status_change(tmp_path: Path) -> None:
     database = _database(tmp_path)
     batch = _batch()
-    apply_registry_batch(database, batch, confirmed_sha256=sha256_json(batch))
+    _apply(database, batch)
     status_batch = {
         "schema_version": 1,
         "document_kind": "calculation_registry_batch",
@@ -158,11 +164,7 @@ def test_registry_batch_applies_hash_bound_workflow_status_change(tmp_path: Path
     plan = plan_registry_batch(database, status_batch)
     assert plan["insert_count"] == 0
     assert plan["update_count"] == 1
-    result = apply_registry_batch(
-        database,
-        status_batch,
-        confirmed_sha256=plan["batch_sha256"],
-    )
+    result = _apply(database, status_batch, plan)
     assert result["updated"] == 1
     repeated = plan_registry_batch(database, status_batch)
     assert repeated["update_count"] == 0
@@ -180,7 +182,7 @@ def test_registry_batch_applies_hash_bound_workflow_status_change(tmp_path: Path
 def test_registry_batch_rejects_stale_workflow_status_expectation(tmp_path: Path) -> None:
     database = _database(tmp_path)
     batch = _batch()
-    apply_registry_batch(database, batch, confirmed_sha256=sha256_json(batch))
+    _apply(database, batch)
     status_batch = {
         "schema_version": 1,
         "document_kind": "calculation_registry_batch",
@@ -219,11 +221,7 @@ def test_registry_batch_rolls_back_on_foreign_key_failure(tmp_path: Path) -> Non
     batch = _batch()
     batch["rows"]["jobs"][0]["calculation_id"] = "missing-calculation"
     with pytest.raises(sqlite3.IntegrityError):
-        apply_registry_batch(
-            database,
-            batch,
-            confirmed_sha256=sha256_json(batch),
-        )
+        plan_registry_batch(database, batch)
     with sqlite3.connect(database) as connection:
         assert connection.execute("SELECT COUNT(*) FROM calculations").fetchone()[0] == 0
         assert connection.execute("SELECT COUNT(*) FROM jobs").fetchone()[0] == 0
@@ -239,7 +237,7 @@ def test_registry_batch_rejects_unknown_tables_and_conflicting_primary_keys(
 
     database = _database(tmp_path)
     batch = _batch()
-    apply_registry_batch(database, batch, confirmed_sha256=sha256_json(batch))
+    _apply(database, batch)
     changed = _batch()
     changed["rows"]["calculations"][0]["module"] = "different_module"
     with pytest.raises(ValueError, match="conflicts with existing"):

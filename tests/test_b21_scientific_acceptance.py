@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import math
 import sqlite3
+from tests.registry_fixture_mutation import fixture_connection
 from pathlib import Path
 
 import pytest
@@ -152,7 +153,7 @@ def test_pipeline_rejects_other_segment_contract(tmp_path):
 @pytest.mark.parametrize("value", [float("nan"), float("inf"), float("-inf"), None, True, False])
 def test_final_energy_and_barrier_reject_invalid_scalars(tmp_path, value):
     db = database(tmp_path / "test.sqlite3")
-    with sqlite3.connect(db) as connection:
+    with fixture_connection(db) as connection:
         connection.row_factory = sqlite3.Row
         rows = [dict(row) for row in matched_static_rows(connection, ("is_energy", "ts_energy", "fs_energy"))]
     rows[1]["numeric_value"] = value
@@ -178,7 +179,7 @@ def test_negative_total_energies_and_original_negative_barrier_rule():
 def test_formal_barrier_registration_cannot_accept_invalid_energy(tmp_path, energies):
     db = database(tmp_path / "test.sqlite3")
     barrier_id = "invalid_barrier"
-    with sqlite3.connect(db) as connection:
+    with fixture_connection(db) as connection:
         for result_id, energy in zip(("is_energy", "ts_energy", "fs_energy"), energies, strict=True):
             connection.execute("UPDATE results SET numeric_value=? WHERE result_id=?", ("NaN" if math.isnan(energy) else energy, result_id))
     gate, state = authoritative_gate(db, barrier_validation(barrier_set_id=barrier_id, reaction_id="invalid_reaction"))
@@ -187,7 +188,7 @@ def test_formal_barrier_registration_cannot_accept_invalid_energy(tmp_path, ener
             reaction_id="invalid_reaction", source_calculation_id="calc_ts", ts_validation_id="validation_a",
             initial_result_id="is_energy", ts_result_id="ts_energy", final_result_id="fs_energy",
             learning_record=successful_record(template_id="invalid_template", barrier_set_id=barrier_id))
-    with sqlite3.connect(db) as connection:
+    with fixture_connection(db) as connection:
         assert connection.execute("SELECT COUNT(*) FROM ts_barriers WHERE barrier_set_id=?", (barrier_id,)).fetchone()[0] == 0
         assert connection.execute("SELECT COUNT(*) FROM ts_strategy_templates WHERE template_id='invalid_template'").fetchone()[0] == 0
 
@@ -226,7 +227,7 @@ def test_export_and_template_consumers_reject_nonfinite_stored_barriers(tmp_path
     from scripts.ts_strategy_engine.templates import load_templates
 
     db = database(tmp_path / "test.sqlite3")
-    with sqlite3.connect(db) as connection:
+    with fixture_connection(db) as connection:
         connection.row_factory = sqlite3.Row
         connection.execute(f"UPDATE ts_barriers SET {field}=? WHERE barrier_set_id='barrier_a'", (float("inf"),))
         with pytest.raises(ValueError, match="finite"):

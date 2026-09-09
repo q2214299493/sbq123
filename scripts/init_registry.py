@@ -1,13 +1,12 @@
 from __future__ import annotations
 
 import argparse
-import sqlite3
 from pathlib import Path
 
 try:
-    from scripts.registry_schema import migrate_registry
+    from scripts.registry_schema import migrate_registry, registry_tables
 except ModuleNotFoundError:
-    from registry_schema import migrate_registry
+    from registry_schema import migrate_registry, registry_tables
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -31,12 +30,11 @@ def main() -> None:
         raise FileNotFoundError(f"Schema not found: {schema_path}")
 
     version = migrate_registry(database_path, schema_path)
-    with sqlite3.connect(database_path) as connection:
-        tables = connection.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name").fetchall()
+    tables = registry_tables(database_path)
 
     print(f"database={database_path}")
     print(f"schema_version={version}")
-    print("tables=" + ",".join(name for (name,) in tables))
+    print("tables=" + ",".join(tables))
     print("scientific_records_inserted=0")
 
 
