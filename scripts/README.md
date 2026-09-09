@@ -160,3 +160,48 @@ The existing `ts_strategy_engine.evidence.register_calculation_compatibility` AP
 is a thin compatibility facade. Scientific validation and execution remain in
 their original owners. Schema initialization, batch application and Excel promotion
 are explicit operations; merely opening a registry performs no migration.
+
+## Current B5 ownership boundaries
+
+`registry_connection.py` is the sole generic SQLite connection owner: current-schema
+checks, foreign keys, commit/rollback/close and UTC timestamps. It depends only on
+schema/infrastructure. New generic callers import it directly. The historical
+`ts_strategy_engine.registry` names remain identity-preserving re-exports; its
+final-energy constants belong to `ts_validation/barrier_values.py`, and its
+compatibility hash helper belongs to `registry_compatibility.py`.
+
+`registry_mutations.py` is application orchestration with one mutation path;
+`registry_acceptance.py` and `registry_excel_promotion.py` are scientific/persistence
+application adapters, not shared infrastructure. They may consume domain validation;
+the connection/schema/transaction owners may not. Excel promotion consumes the pure
+barrier-value validator in `ts_validation/barrier_values.py`, shared with matched
+final-energy evidence. `registry_write.py` remains argument/loading/rendering only.
+
+`catalysis_retrieval/records.py` owns whitelist record and embedding validation;
+`ranking.py` owns BM25/semantic ranking; `workflow.py` owns request orchestration.
+The original skill scripts retain CLI arguments, output/exit behavior and direct
+re-exports. AdsMind imports the record owner normally, never a skill CLI at runtime.
+Use an installed/editable repository when invoking a skill file from another cwd.
+Retrieval PASS only describes ranking; transferable evidence and scientific
+acceptance remain separate gates. No new scientific capability is implied.
+
+DIMER CLI review binding is applied by
+`ts_strategy_engine.handoff.prepare_reviewed_dimer_handoff`. Learning-attempt
+preflight is orchestrated by `ts_strategy_engine.workflow.start_vasp_attempt`;
+it records an attempt and never submits a job. TS-workdir candidate discovery and
+initialization belong to `active_learning_state.py`. The existing CLI functions
+only translate arguments and render these results.
+
+State task phases, transitions and payload interpretation belong to
+`state_manager/models.py`; the event store and lifecycle application consume them
+without importing each other. State timestamps retain their distinct serialized
+format; they are not replaced by registry timestamps.
+
+System support is explicit: `vasp_inputs.build_fe110_*` uses the reviewed
+`true_fe110_production.yaml` profile; site detection uses
+`configs/adsmind_lite/surfaces.yaml` and `site_rules.yaml`. Unknown families raise
+an error; unrecognized metallic surfaces without explicit site labels return
+`NEEDS_REVIEW` and no sites. General TS contract parsing does not imply support for
+arbitrary catalysts. Backend restrictions remain in `execution_backends.yaml`.
+See `reports/refactor_audit/B5_completion_report.md` for capability contracts and
+`B5_dependency_inventory.md` for the maintained source classification.

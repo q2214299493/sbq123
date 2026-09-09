@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from scripts.artifact_io import load_json_object, sha256_json
-from scripts.ts_strategy_engine.registry import open_registry
+from scripts.registry_connection import open_registry
 from scripts.provenance_fields import required_text, timestamp
 from scripts.scientific_validation import validate_finite_tree
 

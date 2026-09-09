@@ -128,3 +128,16 @@ retrieval validator, and retains the source payload in its output. Consumers
 reapply the same gate before using cached external plans. Legacy booleans or
 unbound READY documents require explicit evidence refresh; no historical source
 record is rewritten automatically.
+
+## B5 implementation ownership
+
+The authoritative implementation is `scripts/catalysis_retrieval/`: `records.py`
+validates whitelist records and bound embeddings, `ranking.py` ranks candidates,
+and `workflow.py` orchestrates input validation and ranking. Existing
+`skills/catalysis-data-retrieval/scripts/validate_records.py` and `hybrid_search.py`
+retain their CLI and public imports as thin adapters. Normal package imports
+replace skill-directory `sys.path` mutation and AdsMind's dynamic skill import.
+Use the repository's installed/editable environment for these standalone commands;
+whitelist resources remain at the unchanged repository skill path. Wheel resource
+packaging is a B7 concern. A ranking PASS cannot accept or promote a scientific
+result; failed record validation remains STOP, and lexical-only remains diagnostic.

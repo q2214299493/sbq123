@@ -29,14 +29,12 @@ from .evidence import (
     register_calculation_compatibility,
 )
 
-from .handoff import prepare_dimer_handoff
+from .handoff import prepare_reviewed_dimer_handoff
 
 from .ml_neb_path import finalize_gpu_ml_neb_path_manifest, validate_gpu_ml_neb_path_manifest
 
 from .path_evidence import (
     load_json_object,
-    validate_path_binding,
-    validate_path_review,
     write_path_review_draft,
 )
 
@@ -97,22 +95,10 @@ def _analyze_command(args: argparse.Namespace) -> None:
     analyze_search(request)
 
 def _dimer_command(args: argparse.Namespace) -> None:
-    contract = load_contract(args.contract)
-    binding = validate_path_binding(args.analysis.parent, contract)
-    reviewed, _ = validate_path_review(args.path_review, args.analysis.parent / "path_generation_report.json")
-    if not binding["valid"] or not reviewed:
-        raise SystemExit("DIMER requires contract-bound path generation and checksum-bound path review")
-    prepare_dimer_handoff(
-        args.source_image,
-        args.previous_image,
-        args.next_image,
-        args.destination,
-        args.dry_run,
-        analysis_path=args.analysis,
-        path_review_path=args.path_review,
-        reaction_indices=contract["reaction_atoms"],
-        contract_binding=binding,
-        gate_decision=args.gate_decision,
+    prepare_reviewed_dimer_handoff(
+        contract_path=args.contract, analysis=args.analysis, path_review=args.path_review,
+        source_image=args.source_image, previous_image=args.previous_image, next_image=args.next_image,
+        destination=args.destination, dry_run=args.dry_run, gate_decision=args.gate_decision,
         gate_state_sha256=args.gate_state_sha256,
     )
     print("DRY_RUN" if args.dry_run else args.destination)

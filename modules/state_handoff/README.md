@@ -183,3 +183,11 @@ automatically and no unknown attempt is retried. Filesystem projections are not
 crash-atomic across multiple files; manual reconciliation is required after a
 process/host interruption. Existing immutable source/review events remain intact.
 Legacy cached proposals lacking a full hash require a fresh plan and review.
+
+## B5 model boundary
+
+Task-phase constants, allowed transitions, `task_payload` and `effective_phase`
+are owned by `scripts/state_manager/models.py`. Lifecycle orchestration retains
+compatibility imports; the event store imports the data/rules owner directly.
+This removes the store/lifecycle import cycle without changing B4 transition,
+approval, persistence, projection or recovery semantics.

@@ -120,7 +120,7 @@ class EventStore:
         return target
 
     def _validate_task_transition(self, event: StateEvent) -> None:
-        from .lifecycle import ALLOWED_TRANSITIONS, effective_phase
+        from .models import ALLOWED_TRANSITIONS, effective_phase
 
         transition = event.payload["payload"]["lifecycle_transition"]
         source = self.get(str(transition["source_event_id"]))

@@ -7,7 +7,8 @@ from scripts.execution_backends import load_execution_backends
 from scripts.scientific_validation import finite_number
 
 from .contract import has_final_energy_compatibility
-from .registry import (
+from scripts.ts_validation.barrier_values import (
+    validate_barrier_values,
     ACCEPTED_COMPATIBLE_FINAL_ENERGY_STATUS,
     ACCEPTED_FINAL_ENERGY_STATUSES,
     ACCEPTED_STATIC_STATUS,
@@ -149,13 +150,3 @@ def barrier_values(rows: list[sqlite3.Row]) -> dict[str, float]:
         "reaction_energy_ev": final - initial,
     }
     return validate_barrier_values(values)
-
-
-def validate_barrier_values(values: dict) -> dict[str, float]:
-    """Validate calculated or stored barriers before scientific reuse/export."""
-    values = {key: finite_number(values[key], key) for key in (
-        "forward_barrier_ev", "reverse_barrier_ev", "reaction_energy_ev",
-    )}
-    if values["forward_barrier_ev"] < 0 or values["reverse_barrier_ev"] < 0:
-        raise ValueError("TS final energy lies below an endpoint")
-    return values

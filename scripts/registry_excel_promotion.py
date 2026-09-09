@@ -20,11 +20,11 @@ from pathlib import Path
 from typing import Any
 
 from scripts.artifact_io import canonical_json, sha256_file, sha256_json, write_json_atomic
-from scripts.ts_strategy_engine.registry import open_registry
+from scripts.registry_connection import open_registry
 from scripts.registry_transactions import database_fingerprint, record_event
 from scripts.state_manager.store import _write_immutable_json
 from scripts.scientific_validation import finite_number
-from scripts.ts_strategy_engine.matched_static_evidence import validate_barrier_values
+from scripts.ts_validation.barrier_values import validate_barrier_values
 
 
 ROOT = Path(__file__).resolve().parents[1]

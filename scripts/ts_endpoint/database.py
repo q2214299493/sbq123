@@ -6,7 +6,7 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any
 
-from scripts.ts_strategy_engine.registry import open_registry, table_exists, utc_now
+from scripts.registry_connection import open_registry, table_exists, utc_now
 
 
 ROOT = Path(__file__).resolve().parents[2]

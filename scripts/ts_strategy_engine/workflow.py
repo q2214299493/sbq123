@@ -26,7 +26,8 @@ from .path_evidence import load_json_object, require_file, validate_path_binding
 from .strategy import compose_strategy, decide_search
 from .templates import load_templates
 from .learning_store import get_event
-from .strategy_learning import apply_variant, task_lessons
+from .strategy_learning import apply_variant, task_lessons, start_attempt
+from .learning_evidence import vasp_input_hashes
 
 @dataclass(frozen=True)
 class PlanRequest:
@@ -317,3 +318,16 @@ def _incar_has_climb(workdir: Path) -> bool:
 
 def _write_search_decision(workdir: Path, decision: dict[str, Any]) -> None:
     write_json(workdir / "ts_search_decision.json", decision)
+
+
+def start_vasp_attempt(database: Path, workdir: Path, kind: str, attempt_id: str,
+                       variant_id: str, task_id: str, source_calculation_id: str) -> str:
+    from scripts.neb_agent.submission import preflight
+    report = preflight(workdir, kind, learning_database=database)
+    if not report["passed"]:
+        raise ValueError("VASP preflight failed; inspect submission_preflight.json")
+    spec = {"attempt_id": attempt_id, "variant_id": variant_id, "task_id": task_id,
+            "kind": kind, "parent_attempt_id": None,
+            "source_calculation_id": source_calculation_id,
+            "inputs": {name: str(workdir / name) for name in vasp_input_hashes(report["files"])}}
+    return start_attempt(database, spec)

@@ -15,8 +15,8 @@ from typing import Any
 
 from scripts.adsorption.build_gas_step12a_references import SPECIES as NEW_SPECIES
 from scripts.artifact_io import sha256_json
-from scripts.registry_write import apply_registry_batch, plan_registry_batch
-from scripts.ts_strategy_engine.registry import open_registry
+from scripts.registry_mutations import apply_registry_batch, plan_registry_batch
+from scripts.registry_connection import open_registry
 from scripts.artifact_io import sha256_file as sha256
 
 

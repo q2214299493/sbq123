@@ -31,6 +31,7 @@ from .active_learning import (
     resume_retryable_failure,
 )
 from .active_learning_common import STATE_NAME, write_json
+from .active_learning_state import initialize_from_ts_workdir, _discover_candidate_manifest as _discover_candidate_manifest
 from scripts.scheduler_evidence import query_lsf_job
 
 
@@ -50,54 +51,11 @@ def _state_path(args: argparse.Namespace) -> Path:
     return args.ts_workdir / "active_learning" / STATE_NAME
 
 
-def _discover_candidate_manifest(ts_workdir: Path) -> Path:
-    """Find the single returned GPU candidate owned by a TS work directory.
-
-    The TS workflow writes returned candidates below ``output/job_*``.  Keeping
-    discovery here means callers do not have to manually copy a path between
-    the TS and active-learning command surfaces.  Ambiguous directories are
-    rejected instead of silently selecting stale evidence.
-    """
-    candidates = sorted(ts_workdir.glob("output/job_*/gpu_result_manifest.json"))
-    if len(candidates) != 1:
-        if not candidates:
-            raise FileNotFoundError(
-                f"no GPU candidate manifest found below {ts_workdir / 'output'}"
-            )
-        raise ValueError(
-            "TS work directory contains multiple GPU candidate manifests; "
-            "pass --candidate-manifest explicitly: "
-            + ", ".join(str(path) for path in candidates)
-        )
-    return candidates[0]
 
 
 def _init_from_ts_args(args: argparse.Namespace) -> dict:
-    ts_workdir = args.ts_workdir.resolve()
-    candidate_manifest = (
-        args.candidate_manifest.resolve()
-        if args.candidate_manifest
-        else _discover_candidate_manifest(ts_workdir)
-    )
-    handoff_root = (args.handoff_root or ts_workdir).resolve()
-    # Existing TS workdirs may only retain the source YAML. ``load_contract``
-    # normalizes and hash-binds it in memory, so no auxiliary normalized file
-    # is needed just to cross the CLI boundary.
-    contract = ts_workdir / "reaction_contract.normalized.json"
-    if not contract.is_file():
-        contract = ts_workdir / "contract" / "reaction.yaml"
-    if not contract.is_file():
-        raise FileNotFoundError(
-            f"TS reaction contract not found: {ts_workdir / 'contract'}"
-        )
-    return initialize_workflow(
-        candidate_manifest,
-        handoff_root,
-        contract,
-        args.policy,
-        ts_workdir / "active_learning",
-        dry_run=args.dry_run,
-    )
+    return initialize_from_ts_workdir(args.ts_workdir, args.policy, candidate_manifest=args.candidate_manifest,
+                                     handoff_root=args.handoff_root, dry_run=args.dry_run)
 
 
 def parser() -> argparse.ArgumentParser:

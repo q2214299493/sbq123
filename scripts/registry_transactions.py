@@ -7,7 +7,7 @@ from uuid import uuid4
 
 from scripts.artifact_io import sha256_json, require_sha256
 from scripts.provenance_fields import required_text, timestamp
-from scripts.ts_strategy_engine.registry import utc_now
+from scripts.registry_connection import utc_now
 
 
 def database_fingerprint(connection: sqlite3.Connection) -> str:

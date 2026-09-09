@@ -9,6 +9,8 @@ import numpy as np
 from scripts.neb_agent.utils_report import write_json
 from scripts.neb_agent.utils_structure import compatible, minimum_image_delta, preferred_image_structure, read_poscar
 from scripts.artifact_io import load_json_object, sha256_file
+from .contract import load_contract
+from .path_evidence import validate_path_binding, validate_path_review
 from scripts.ts_strategy_engine.dimer_gate import evaluate_candidate_triad
 from scripts.ts_strategy_engine.execution_gate import require_action
 
@@ -204,3 +206,27 @@ def _accepted_json(path: Path, label: str) -> dict[str, Any]:
     if not isinstance(payload, dict):
         raise SystemExit(f"invalid {label}: expected JSON object")
     return payload
+
+
+def prepare_reviewed_dimer_handoff(*, contract_path: Path, analysis: Path, path_review: Path,
+                                   source_image: Path, previous_image: Path, next_image: Path,
+                                   destination: Path, dry_run: bool, gate_decision: Path | None = None,
+                                   gate_state_sha256: str | None = None) -> Path:
+    contract = load_contract(contract_path)
+    binding = validate_path_binding(analysis.parent, contract)
+    reviewed, _ = validate_path_review(path_review, analysis.parent / "path_generation_report.json")
+    if not binding["valid"] or not reviewed:
+        raise SystemExit("DIMER requires contract-bound path generation and checksum-bound path review")
+    return prepare_dimer_handoff(
+        source_image,
+        previous_image,
+        next_image,
+        destination,
+        dry_run,
+        analysis_path=analysis,
+        path_review_path=path_review,
+        reaction_indices=contract["reaction_atoms"],
+        contract_binding=binding,
+        gate_decision=gate_decision,
+        gate_state_sha256=gate_state_sha256,
+    )

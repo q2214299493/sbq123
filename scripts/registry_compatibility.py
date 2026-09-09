@@ -2,11 +2,12 @@
 from __future__ import annotations
 
 import json
+from typing import Any
 from scripts.artifact_io import sha256_json
 from scripts.provenance_fields import required_text, timestamp
 from scripts.scientific_validation import validate_finite_tree
 from scripts.registry_transactions import record_event
-from scripts.ts_strategy_engine.registry import open_registry
+from scripts.registry_connection import open_registry
 
 
 def _revision_identity(compatibility):
@@ -55,3 +56,7 @@ def register_calculation_compatibility(database, calculation_id, compatibility, 
         record_event(connection, "compatibility_created", calculation_id, {"revision_id": revision},
                      actor=reviewer, reason="original calculation compatibility binding")
     return revision
+
+
+def compatibility_fingerprint(compatibility: dict[str, Any]) -> str:
+    return sha256_json(compatibility)

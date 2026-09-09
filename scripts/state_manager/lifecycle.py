@@ -6,28 +6,9 @@ import re
 
 from scripts.artifact_io import canonical_json, sha256_bytes, sha256_file, sha256_text
 
-from .models import StateEvent, utc_now
+from .models import StateEvent, utc_now, TASK_PHASES, ALLOWED_TRANSITIONS, task_payload, effective_phase
 from .projections import END_MARKER, START_MARKER, load_policy
 from .store import EventStore
-
-
-TASK_PHASES = {"open", "active", "blocked", "verification"}
-ALLOWED_TRANSITIONS = {
-    "open": {"active", "blocked"},
-    "active": {"blocked", "verification"},
-    "blocked": {"active", "verification"},
-    "verification": {"active", "blocked"},
-}
-
-
-def task_payload(event: StateEvent) -> dict[str, object]:
-    if event.event_type == "baseline_adopted":
-        return dict(event.payload["payload"]["task"])
-    return dict(event.payload["payload"])
-
-
-def effective_phase(event: StateEvent) -> str:
-    return str(task_payload(event).get("phase", "active"))
 
 
 def build_task_transition_event(

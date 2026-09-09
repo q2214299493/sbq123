@@ -183,7 +183,7 @@ def test_ranking_and_prediction_have_no_acceptance_side_effects():
             if isinstance(node, ast.FunctionDef) and node.name in owners:
                 owners[node.name].append(path.relative_to(root).as_posix())
     assert owners == {name: [path] for name, path in expected.items()}
-    for relative in ("skills/catalysis-data-retrieval/scripts/hybrid_search.py", "scripts/prediction_provenance.py"):
+    for relative in ("skills/catalysis-data-retrieval/scripts/hybrid_search.py", "scripts/catalysis_retrieval/ranking.py", "scripts/catalysis_retrieval/workflow.py", "scripts/prediction_provenance.py"):
         tree = ast.parse((root / relative).read_text(encoding="utf-8"))
         calls = {node.func.id for node in ast.walk(tree) if isinstance(node, ast.Call) and isinstance(node.func, ast.Name)}
         assert not calls & {"require_transferable", "apply_registry_batch", "record_ts_validation", "submit"}

@@ -10,7 +10,7 @@ from scripts.vasp_result_gate import read_incar_values
 from typing import Any
 
 from scripts.artifact_io import sha256_json
-from scripts.registry_write import apply_registry_batch, plan_registry_batch
+from scripts.registry_mutations import apply_registry_batch, plan_registry_batch
 from scripts.artifact_io import sha256_file as sha256
 
 

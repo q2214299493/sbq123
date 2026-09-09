@@ -7,8 +7,9 @@ from pathlib import Path
 
 from scripts.artifact_io import load_json_object, write_json
 
-from .learning_evidence import attempt_input_hashes, bind_files, vasp_input_hashes
+from .learning_evidence import attempt_input_hashes, bind_files
 from .learning_store import DEFAULT_DATABASE, read_events
+from .workflow import start_vasp_attempt
 from .strategy_learning import (
     capture_baseline, capture_workdir, compare_variants, propose_variant,
     import_failure, record_outcome, reference_methods, retry_assessment, start_attempt, revise_outcome,
@@ -74,15 +75,8 @@ def _dispatch(args: argparse.Namespace):
     if args.command == "compare":
         return compare_variants(database, args.baseline_id, args.candidate_id)
     if args.command == "start-vasp":
-        from scripts.neb_agent.submission import preflight
-        report = preflight(args.workdir, args.kind, learning_database=database)
-        if not report["passed"]:
-            raise ValueError("VASP preflight failed; inspect submission_preflight.json")
-        spec = {"attempt_id": args.attempt_id, "variant_id": args.variant_id, "task_id": args.task_id,
-                "kind": args.kind, "parent_attempt_id": None,
-                "source_calculation_id": args.source_calculation_id,
-                "inputs": {name: str(args.workdir / name) for name in vasp_input_hashes(report["files"])}}
-        return {"attempt_id": start_attempt(database, spec)}
+        return {"attempt_id": start_vasp_attempt(database, args.workdir, args.kind, args.attempt_id,
+                                                 args.variant_id, args.task_id, args.source_calculation_id)}
     request = load_json_object(args.request)
     if args.command == "baseline":
         return {"variant_id": capture_baseline(database, request)}

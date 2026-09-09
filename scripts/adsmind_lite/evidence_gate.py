@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from typing import Any
-from importlib import import_module
+from scripts.catalysis_retrieval import records as validator
 
 from scripts.artifact_io import sha256_file
 from pathlib import Path
@@ -12,7 +12,6 @@ from .evidence_lifecycle import record_subject, require_transferable
 def _reviewed_record(record: dict, species: str, surface: str, *, whitelist: bool) -> bool:
     try:
         if whitelist:
-            validator = import_module("skills.catalysis-data-retrieval.scripts.validate_records")
             sources = validator.source_map(validator.load_source_config(validator.DEFAULT_SOURCES))
             if validator.validate_record(record, sources):
                 return False

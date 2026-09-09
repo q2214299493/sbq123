@@ -668,3 +668,22 @@ class StateEvent:
     @property
     def review_required(self) -> bool:
         return bool(self.payload["review"]["required"])
+
+
+TASK_PHASES = {"open", "active", "blocked", "verification"}
+ALLOWED_TRANSITIONS = {
+    "open": {"active", "blocked"},
+    "active": {"blocked", "verification"},
+    "blocked": {"active", "verification"},
+    "verification": {"active", "blocked"},
+}
+
+
+def task_payload(event: StateEvent) -> dict[str, object]:
+    if event.event_type == "baseline_adopted":
+        return dict(event.payload["payload"]["task"])
+    return dict(event.payload["payload"])
+
+
+def effective_phase(event: StateEvent) -> str:
+    return str(task_payload(event).get("phase", "active"))

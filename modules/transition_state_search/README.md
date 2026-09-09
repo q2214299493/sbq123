@@ -678,3 +678,17 @@ reviewed, TS validation is graded, provenance is complete, and the Grade-A
 learning record has been atomically stored with the compatible final barrier.
 No separate user request is needed for this automatic successful-TS strategy
 registration. Failed or ungraded candidates are never reusable TS templates.
+
+## B5 application ownership clarification
+
+The sole execution authority remains `scripts/ts_strategy_engine/execution_gate.py`;
+NEB submission remains `scripts/neb_agent/submission.py`. No acceptance rule changed.
+`handoff.prepare_reviewed_dimer_handoff` applies current contract/path-review binding
+before the existing DIMER handoff; CLI handlers only pass arguments.
+`workflow.start_vasp_attempt` applies the existing preflight and records a learning
+attempt without submitting. `active_learning_state.initialize_from_ts_workdir`
+owns candidate discovery and contract-file fallback, rejecting ambiguous candidates.
+Generic database connections now belong to `scripts/registry_connection.py`; the
+TS registry module is a compatibility facade. Matched final-energy barriers share
+`scripts/ts_validation/barrier_values.py` with Excel promotion. DIMER/VFA grading,
+source binding, finite-number requirements and nonnegative barriers are unchanged.

@@ -205,3 +205,14 @@ receipts, recovery records or new compatibility revisions. After operational use
 rollback requires a reviewed backup/recovery plan rather than deleting new history.
 Opening a version-8 registry (even with legacy `migrate=True`) now requests explicit
 migration; production rollout is a separate authorized operation.
+
+## B5 connection ownership
+
+Import `scripts.registry_connection.open_registry` for generic current-schema
+SQLite access. It is the only connection lifecycle implementation; opening never
+migrates. `scripts.ts_strategy_engine.registry` remains a thin import facade for
+maintained callers. Schema/migration, approvals, batch transactions and receipts
+retain their B4 owners and behavior. Scientific result acceptance and Excel
+promotion are application adapters above persistence, not generic connections.
+Compatible barrier scalar checks are owned by
+`scripts.ts_validation.barrier_values`, with the previous TS import re-exported.
