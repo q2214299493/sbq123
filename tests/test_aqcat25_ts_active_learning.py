@@ -705,6 +705,33 @@ def test_failed_force_agreement_builds_force_only_ase_database(tmp_path: Path) -
     assessment = assess_force_prediction(state_path, prediction_path)
     assert assessment["active_learning_converged"] is False
 
+    # Make the replay evidence self-contained; legacy label caches lack current
+    # source-file bindings and must not imply training eligibility under B3.
+    import yaml
+
+    state = load_state(state_path)
+    policy = yaml.safe_load(Path(state["policy_path"]).read_text(encoding="utf-8"))
+    replay = policy["fine_tuning"]["replay"]
+    source_path = ROOT / replay["labels"]
+    labels = json.loads(source_path.read_text())
+    replay_root = tmp_path / "reviewed_replay"
+    replay_root.mkdir()
+    for row in labels["samples"]:
+        evidence_path = replay_root / f"{row['sample_id']}.json"
+        _write_json(evidence_path, row)
+        row["calculation_id"] = row["source_directory"]
+        row["source_files"] = [{"path": str(evidence_path), "sha256": sha256_file(evidence_path)}]
+    labels_path = replay_root / "labels.json"
+    _write_json(labels_path, labels)
+    replay["labels"] = str(labels_path)
+    replay["structures"] = str(ROOT / replay["structures"])
+    replay["validation_thresholds"] = str(ROOT / replay["validation_thresholds"])
+    policy_path = tmp_path / "reviewed_replay_policy.yaml"
+    policy_path.write_text(yaml.safe_dump(policy))
+    state["policy_path"] = str(policy_path)
+    state["policy_sha256"] = sha256_file(policy_path)
+    _write_json(state_path, state)
+
     package = tmp_path / "finetune"
     manifest = prepare_finetuning_package(state_path, package)
     assert manifest["training_target"] == "forces_only"

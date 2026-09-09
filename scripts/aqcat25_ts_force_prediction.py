@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
+from datetime import datetime, timezone
 
 import numpy as np
 from ase.io import read
@@ -83,6 +84,13 @@ def main() -> None:
         "request_sha256": request_sha256,
         "structure_sha256": sha256_file(structure),
         "checkpoint_sha256": sha256_file(checkpoint),
+        "prediction_provenance": {
+            "type": "model_prediction", "model_name": "AQCat25", "model_version": sha256_file(checkpoint),
+            "input_fingerprint": sha256_file(structure), "source_reference": str(structure.resolve()),
+            "generated_at": datetime.now(timezone.utc).isoformat(), "training_split": None,
+            "uncertainty": {"status": "unavailable", "reason": "single model has no uncertainty estimator"},
+            "status": "predicted_candidate", "evidence_relationship": "prediction_from_model", "scientific_acceptance": False,
+        },
         "predicted_energy_eV": energy,
         "forces_eV_per_A": forces.tolist(),
         "result_class": "predicted_transition_state_candidate_only",

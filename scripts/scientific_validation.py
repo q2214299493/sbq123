@@ -43,3 +43,23 @@ def validate_finite_tree(value: Any, label: str = "scientific input") -> None:
         finite_number(number, label)
     elif isinstance(value, Real) and not isinstance(value, bool):
         finite_number(value, label)
+
+
+def finite_array(value: Any, label: str, *, shape: tuple[int | None, ...]) -> list:
+    """Validate rectangular numeric arrays without NumPy coercion or field loss."""
+    if not shape or not isinstance(value, (list, tuple)) or not value:
+        raise ValueError(f"{label} must be a non-empty array")
+    if shape[0] is not None and len(value) != shape[0]:
+        raise ValueError(f"{label} dimension mismatch")
+    if len(shape) == 1:
+        return [finite_number(item, f"{label}[{index}]") for index, item in enumerate(value)]
+    rows = [finite_array(item, f"{label}[{index}]", shape=shape[1:]) for index, item in enumerate(value)]
+    def dimensions(row):
+        result = []
+        while isinstance(row, list):
+            result.append(len(row))
+            row = row[0]
+        return result
+    if any(dimensions(row) != dimensions(rows[0]) for row in rows):
+        raise ValueError(f"{label} must be rectangular")
+    return rows

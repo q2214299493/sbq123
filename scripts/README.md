@@ -84,6 +84,29 @@ Current executable code lives only under `scripts/` or a repository-backed skill
 - `matris_training_exclusions.py`: build a hash-bound held-out exclusion
   manifest and reject exact-structure or rounded-geometry overlap before any
   MatRIS optimizer is constructed.
+  It also owns shared dataset split isolation by calculation, source row,
+  declared reaction, and permutation/translation/rotation-invariant periodic
+  structure descriptors. The legacy geometry hash remains the exact artifact
+  binding; the added descriptor is conservative exclusion evidence, never a
+  scientific-result reuse key. Five-decimal precision is unchanged. Homometric
+  descriptor collisions block splits and require review.
+- `matris_training_data.py`: shared MatRIS/AQCat25 label-source validation and
+  hydration. It reuses existing VASP acceptance owners, verifies current source
+  files and row identities, and derives `PARSED`/`VALIDATED` state. Package and
+  database builders apply the shared split check before `TRAINING_ELIGIBLE`;
+  completed MatRIS receipts bind `USED_IN_MODEL` items to the output checkpoint.
+  Caller-supplied eligibility flags never bypass validation. Old label caches
+  without source files or calculation identity require reviewed refresh.
+- `prediction_provenance.py`: typed ML prediction metadata and validation for
+  CARE/GAME-Net imports and MatRIS outputs. Predictions require model/version,
+  input fingerprint, source reference, timestamp, uncertainty and explicit
+  training-split metadata (null when unavailable). Unknown uncertainty needs a
+  reason and remains uncalibrated; it is never converted to zero uncertainty.
+  CARE CSV imports carry the JSON `prediction_provenance` column. AQCat25 and
+  dual-model producers emit the same candidate metadata without changing their
+  standalone inference dependencies or wrapper lifecycle. Shared training-data
+  preflight runs with the repository package and accessible bound source files;
+  a relocated deployment must stage those dependencies and source bindings.
 - `prepare_matris_finetune_request.py`: verify the active-learning decision,
   VASP label/assessment bindings, policy, base checkpoint, and held-out
   exclusion hash; write a non-executable request only after local preflight

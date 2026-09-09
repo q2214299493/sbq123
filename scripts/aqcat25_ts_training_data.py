@@ -10,6 +10,9 @@ import yaml
 from ase.calculators.singlepoint import SinglePointCalculator
 from ase.db import connect
 from ase.io import read
+from scripts.matris_training_data import _hydrate_samples
+from scripts.matris_training_exclusions import assert_dataset_splits_disjoint
+from scripts.scientific_validation import finite_array, finite_number
 
 try:
     from scripts.artifact_io import load_json_object, sha256_file
@@ -30,24 +33,39 @@ def _manifest(path: Path) -> dict[str, Any]:
 
 def build_database(manifest_path: Path, output: Path, split: str = "train") -> int:
     payload = _manifest(manifest_path)
+    if split not in {"train", "validation"}:
+        raise ValueError("unknown training split")
+    splits = {}
+    label_cache = {}
+    for name, key in (("train", "training_samples"), ("validation", "validation_samples")):
+        normalized = []
+        for row in payload.get(key, []):
+            if row.get("source_result_class") not in {
+                "vasp_completed_electronic_converged_force_label_only", "vasp_completed_adsorption_calibration_force_label",
+            }:
+                raise ValueError("training source must be a validated VASP label")
+            structure = (manifest_path.parent / row["structure_path"]).resolve()
+            atoms = read(structure, format="vasp")
+            normalized.append({**row, "structure": {"path": str(structure), "sha256": row["structure_sha256"],
+                               "geometry_sha256": row.get("geometry_sha256"), "atom_count": len(atoms)},
+                               "vasp_label": {"energy_eV": row["energy_eV_force_label_only"]}})
+        if not normalized:
+            raise ValueError(f"training manifest has no {key}")
+        splits[name] = _hydrate_samples(normalized, label_cache=label_cache)
+    assert_dataset_splits_disjoint(splits, structures_root=manifest_path.parent)
     if output.exists():
         raise FileExistsError(f"training database already exists: {output}")
     output.parent.mkdir(parents=True, exist_ok=True)
     database = connect(output)
     count = 0
-    key = "training_samples" if split == "train" else "validation_samples"
-    samples = payload.get(key)
-    if not isinstance(samples, list):
-        raise ValueError(f"training manifest has no {key}")
+    samples = splits[split]
     for label in samples:
         structure = manifest_path.parent / label["structure_path"]
         if sha256_file(structure) != label["structure_sha256"]:
             raise ValueError(f"training structure hash mismatch: {structure}")
         atoms = read(structure, format="vasp")
-        forces = np.asarray(label["forces_eV_per_A"], dtype=float)
-        if forces.shape != (len(atoms), 3) or not np.isfinite(forces).all():
-            raise ValueError(f"invalid VASP force-label shape: {forces.shape}")
-        energy = float(label["energy_eV_force_label_only"])
+        forces = np.asarray(finite_array(label["reference_forces_eV_per_A"], "training forces", shape=(len(atoms), 3)))
+        energy = finite_number(label["reference_energy_eV"], "training energy")
         atoms.calc = SinglePointCalculator(atoms, energy=energy, forces=forces)
         database.write(
             atoms,
@@ -61,6 +79,8 @@ def build_database(manifest_path: Path, output: Path, split: str = "train") -> i
                 "source_outcar_sha256": label.get("source_outcar_sha256", label.get("source_labels_sha256")),
                 "sample_role": label["sample_role"],
                 "reportable_final_energy": False,
+                "data_state": "TRAINING_ELIGIBLE" if split == "train" else "VALIDATED",
+                "calculation_id": label["calculation_id"], "validation_evidence": label["validation_evidence"],
             },
         )
         count += 1

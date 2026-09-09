@@ -4,6 +4,7 @@ from typing import Any
 
 from .adsmind_common import load_yaml_schema
 from .fts_prescreen import assert_fts_surface, plan_calibrated_fts_species, plan_feature_based_fts_species
+from .evidence_gate import validate_external_plan
 
 
 def load_prescreen_rules(path: str) -> dict[str, Any]:
@@ -39,7 +40,8 @@ def plan_species(
             if fts_plan is not None:
                 return {**fts_plan, "plan_source": "reviewed_local_fts_rule", "evidence_priority_rank": 2}
         if external_plans and species_name in external_plans:
-            return {**external_plans[species_name], "plan_source": "external_evidence_gate", "evidence_priority_rank": 3}
+            external = validate_external_plan(external_plans[species_name], species=species_name, surface=surface_name)
+            return {**external, "plan_source": "external_evidence_gate", "evidence_priority_rank": 3}
         if fts_rules is not None and species_features and species_name in species_features:
             hypothesis_plan = plan_feature_based_fts_species(
                 species_name,

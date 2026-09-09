@@ -7,6 +7,7 @@ import argparse
 import gc
 import json
 import math
+from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
 from typing import Any, Callable
 
@@ -239,6 +240,17 @@ def run_batch(
                 "source_stage": row["source_stage"],
                 "selection_role": row["selection_role"],
                 "structure_sha256": row["sha256"],
+                "prediction_provenance": {
+                    role: {
+                        "type": "model_prediction", "model_name": models[role]["backend"],
+                        "model_version": models[role]["checkpoint_sha256"], "input_fingerprint": row["sha256"],
+                        "source_reference": str(request_path.resolve()), "generated_at": datetime.now(timezone.utc).isoformat(),
+                        "training_split": None, "uncertainty": {"status": "unavailable",
+                            "reason": "model-model disagreement is not calibrated uncertainty"},
+                        "status": "predicted_candidate", "evidence_relationship": "prediction_from_model",
+                        "scientific_acceptance": False,
+                    } for role in ("primary", "secondary")
+                },
                 **geometry,
                 "primary_energy_eV": primary_energy,
                 "secondary_energy_eV": secondary_energy,

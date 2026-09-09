@@ -2,12 +2,15 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 from collections import Counter
 from pathlib import Path
 
 import numpy as np
 
 from scripts.artifact_io import sha256_file, write_json
+from scripts.prediction_provenance import validate_prediction
+from scripts.scientific_validation import finite_number
 
 from scripts.workflow_geometry import minimum_image_delta_xy, pbc_xy_distance
 
@@ -40,6 +43,11 @@ def selected_rows(care_root: Path) -> list[dict[str, str]]:
         raise ValueError("CARE RELAX_FIRST rows must represent eight unique molecular graphs")
     if any(row["geometry_gate"] != "PASS_EXPORT_CANDIDATE" for row in rows):
         raise ValueError("every selected CARE structure must pass its source export geometry gate")
+    for row in rows:
+        provenance = validate_prediction(json.loads(row.get("prediction_provenance") or "{}"))
+        if provenance["input_fingerprint"] != sha256_file(Path(row["poscar_path"])):
+            raise ValueError("CARE prediction input binding mismatch")
+        finite_number(row["care_mu"], "CARE predicted energy")
     return rows
 
 
@@ -240,7 +248,8 @@ def build(slab_path: Path, care_root: Path, output: Path) -> dict[str, object]:
                 "care_level": int(row["care_level_loaded"]),
                 "care_config_id": int(row["care_config_id"]),
                 "source_selection": "RELAX_FIRST",
-                "care_mu_relative_order_only_ev": float(row["care_mu"]),
+                "care_mu_relative_order_only_ev": finite_number(row["care_mu"], "CARE predicted energy"),
+                "prediction_provenance": json.loads(row["prediction_provenance"]),
                 "care_energy_imported_as_local_result": False,
                 "source_poscar": str(source_path),
                 "source_poscar_sha256": sha256_file(source_path),

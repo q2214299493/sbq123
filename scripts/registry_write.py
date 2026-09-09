@@ -65,6 +65,29 @@ def load_registry_batch(path: Path) -> dict[str, Any]:
     return validate_registry_batch(load_json_object(path))
 
 
+def _reject_external_result(row: dict[str, Any], provenance: dict[str, Any]) -> None:
+    declared_type = provenance.get("type", row.get("type"))
+    method = str(row.get("extraction_method", "")).lower()
+    if declared_type is not None and declared_type != "calculated_result" or any(
+        marker in method for marker in ("prediction", "game-net", "game_net", "gamenet")
+    ):
+        raise ValueError("external claims and predictions cannot be stored as local calculated results")
+
+
+def _validate_result_provenance(batch: dict[str, Any]) -> None:
+    declarations = batch.get("result_provenance", {})
+    if not isinstance(declarations, dict):
+        raise ValueError("result provenance must be a mapping")
+    results = batch["rows"].get("results", [])
+    if set(declarations) - {row.get("result_id") for row in results}:
+        raise ValueError("result provenance references an unknown result")
+    for row in results:
+        provenance = declarations.get(row.get("result_id"), {})
+        if not isinstance(provenance, dict):
+            raise ValueError("result provenance must be an object")
+        _reject_external_result(row, provenance)
+
+
 def validate_registry_batch(batch: dict[str, Any]) -> dict[str, Any]:
     if batch.get("schema_version") != 1 or batch.get("document_kind") != DOCUMENT_KIND:
         raise ValueError("registry batch must use calculation_registry_batch schema version 1")
@@ -101,6 +124,7 @@ def validate_registry_batch(batch: dict[str, Any]) -> dict[str, Any]:
     if row_count == 0 and not status_changes:
         raise ValueError("registry batch must contain at least one change")
     _validate_status_changes(status_changes)
+    _validate_result_provenance(batch)
     return batch
 
 

@@ -22,7 +22,10 @@
     "match_confidence": {"enum": ["high", "medium", "low", "none", "Needs confirmation"]},
     "reaction_coordinate": {"type": "object"},
     "suggested_midpoints": {"type": "array"},
-    "embedding": {"type": "array", "items": {"type": "number"}}
+    "embedding": {"type": "array", "items": {"type": "number"}},
+    "evidence": {"type": "object", "description": "Claim/source/content/review/transfer envelope; semantic authority is evidence_lifecycle.py"},
+    "embedding_provenance": {"type": "object", "required": ["model", "generated_at", "dimension", "record_sha256", "content_sha256"], "properties": {"model": {"type": "string", "minLength": 1}, "generated_at": {"type": "string", "format": "date-time"}, "dimension": {"type": "integer", "minimum": 1}, "record_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "content_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}, "additionalProperties": false}
   },
+  "allOf": [{"if": {"required": ["embedding"]}, "then": {"required": ["embedding_provenance", "evidence"]}}],
   "additionalProperties": true
 }

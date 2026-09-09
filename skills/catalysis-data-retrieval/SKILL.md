@@ -16,7 +16,7 @@ this skill implements that route and does not override its owning configs.
 3. For an input image, inspect it with the available image viewer. Separate directly visible features from interpretations, never infer elements from color alone, and create JSON matching `references/image_query_schema.json`. Ask for confirmation only when uncertainty changes the search materially.
 4. Normalize source records to `references/record_schema.json`. Preserve the original record ID, source URL, artifact URL, retrieval timestamp, units, license/access note, and any missing fields.
 5. Run `scripts/validate_records.py` before ranking.
-6. Run `scripts/hybrid_search.py` with a real sentence-embedding backend or reviewed precomputed embeddings. Production retrieval must combine BM25 and semantic ranks; never label TF-IDF or lexical-only output as semantic.
+6. Run `scripts/hybrid_search.py` with a real sentence-embedding backend or source-bound precomputed embeddings. Production retrieval must combine BM25 and semantic ranks; never label TF-IDF or lexical-only output as semantic.
 7. Return no more than five results. Include source, URL, matched system/reaction, available structure/path data, BM25 score, semantic score, hybrid score, and transferability cautions.
 8. If a usable whitelist motif exists, stop; do not run literature retrieval.
 9. For adsorption-site tasks only, if and only if the result is
@@ -60,4 +60,4 @@ python scripts/validate_records.py records.jsonl
 python scripts/hybrid_search.py records.jsonl --query "Fe(110) CO dissociation transition path" --output retrieval_top5.json
 ```
 
-Use `--query-vector` only for reviewed precomputed semantic vectors. `--lexical-only` is diagnostic and cannot satisfy the project production gate.
+Use `--query-vector` only for provenance-bound precomputed semantic vectors. The record and query need matching model identities, generation timestamps, dimensions and content hashes; see the owning module README. Vector availability or similarity never establishes review or scientific acceptance. `--lexical-only` is diagnostic and cannot satisfy the project production gate.

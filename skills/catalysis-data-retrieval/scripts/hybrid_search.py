@@ -13,7 +13,9 @@ from pathlib import Path
 
 import numpy as np
 
-from validate_records import DEFAULT_SOURCES, load_jsonl, load_source_config, validate_records
+from validate_records import DEFAULT_SOURCES, load_jsonl, load_source_config, validate_embedding, validate_records
+from scripts.adsmind_lite.evidence_lifecycle import assess_evidence, required_text, text_digest, timestamp
+from scripts.scientific_validation import finite_array, finite_number, integer_number
 
 
 TOKEN_PATTERN = re.compile(r"[A-Za-z]+(?:[-_/][A-Za-z0-9]+)*|\d+(?:\.\d+)?|[\u4e00-\u9fff]")
@@ -61,6 +63,15 @@ def bm25_scores(query: str, documents: list[str], k1: float = 1.5, b: float = 0.
 
 
 def cosine_scores(query_vector: np.ndarray, vectors: np.ndarray) -> np.ndarray:
+    query_vector = np.asarray(finite_array(np.asarray(query_vector).tolist(), "query vector", shape=(None,)))
+    vectors = np.asarray(finite_array(np.asarray(vectors).tolist(), "vectors", shape=(None, len(query_vector))))
+    # Scale first so finite large components cannot overflow a norm or dot product.
+    query_scale = np.max(np.abs(query_vector))
+    vector_scales = np.max(np.abs(vectors), axis=1)
+    if query_scale == 0 or np.any(vector_scales == 0):
+        raise ValueError("semantic vectors must have non-zero norm")
+    query_vector = query_vector / query_scale
+    vectors = vectors / vector_scales[:, None]
     query_norm = np.linalg.norm(query_vector)
     vector_norms = np.linalg.norm(vectors, axis=1)
     if query_norm == 0 or np.any(vector_norms == 0):
@@ -68,26 +79,35 @@ def cosine_scores(query_vector: np.ndarray, vectors: np.ndarray) -> np.ndarray:
     return vectors @ query_vector / (vector_norms * query_norm)
 
 
-def load_query_vector(path: Path) -> np.ndarray:
+def load_query_vector(path: Path, *, query: str | None = None, model_name: str | None = None) -> np.ndarray:
     payload = json.loads(path.read_text(encoding="utf-8"))
-    if isinstance(payload, dict):
-        payload = payload.get("embedding")
-    if not isinstance(payload, list) or not payload:
-        raise ValueError("query vector must be a non-empty JSON array or an object with embedding")
-    return np.asarray(payload, dtype=float)
+    if not isinstance(payload, dict):
+        raise ValueError("query vector requires provenance metadata")
+    metadata = payload.get("embedding_provenance", {})
+    required_text(metadata.get("model"), "query model")
+    timestamp(metadata.get("generated_at"), "query generated_at")
+    text = required_text(payload.get("query"), "bound query text")
+    if metadata.get("query_sha256") != text_digest(text):
+        raise ValueError("query source binding mismatch")
+    if query is not None and query != text or model_name is not None and model_name != metadata["model"]:
+        raise ValueError("query/model identity mismatch")
+    dimension = integer_number(metadata.get("dimension"), "query dimension", positive=True)
+    return np.asarray(finite_array(payload.get("embedding"), "query vector", shape=(dimension,)))
 
 
 def semantic_scores(
     records: list[dict], documents: list[str], query: str, model_name: str, query_vector_path: Path | None
 ) -> tuple[np.ndarray, str]:
     if query_vector_path:
-        query_vector = load_query_vector(query_vector_path)
+        query_vector = load_query_vector(query_vector_path, query=query, model_name=model_name)
         if any("embedding" not in record for record in records):
             raise ValueError("every record needs an embedding when --query-vector is used")
-        vectors = np.asarray([record["embedding"] for record in records], dtype=float)
+        vectors = np.asarray([validate_embedding(record) for record in records], dtype=float)
+        if any(record["embedding_provenance"]["model"] != model_name for record in records):
+            raise ValueError("record embedding model mismatch")
         if vectors.ndim != 2 or vectors.shape[1] != query_vector.shape[0]:
             raise ValueError("record and query embedding dimensions do not match")
-        return cosine_scores(query_vector, vectors), "precomputed-reviewed"
+        return cosine_scores(query_vector, vectors), "precomputed-source-bound"
     try:
         from sentence_transformers import SentenceTransformer
     except ImportError as exc:
@@ -96,7 +116,7 @@ def semantic_scores(
         ) from exc
     model = SentenceTransformer(model_name)
     encoded = model.encode([query, *documents], normalize_embeddings=True, show_progress_bar=False)
-    return np.asarray(encoded[1:]) @ np.asarray(encoded[0]), f"sentence-transformers:{model_name}"
+    return cosine_scores(np.asarray(encoded[0]), np.asarray(encoded[1:])), f"sentence-transformers:{model_name}"
 
 
 def ranks_descending(scores: np.ndarray) -> np.ndarray:
@@ -114,6 +134,15 @@ def rank_records(
     semantic_weight: float,
     top_k: int,
 ) -> list[dict]:
+    bm25_weight = finite_number(bm25_weight, "bm25 weight", nonnegative=True)
+    semantic_weight = finite_number(semantic_weight, "semantic weight", nonnegative=True)
+    if finite_number(bm25_weight + semantic_weight, "ranking weight sum") <= 0:
+        raise ValueError("ranking weights need a positive sum")
+    top_k = integer_number(top_k, "top_k", positive=True)
+    if top_k > 5:
+        raise ValueError("top_k exceeds five")
+    if semantic is not None:
+        semantic = np.asarray(finite_array(np.asarray(semantic).tolist(), "semantic scores", shape=(len(records),)))
     documents = [record_text(record) for record in records]
     lexical = bm25_scores(query, documents)
     lexical_ranks = ranks_descending(lexical)
@@ -133,6 +162,8 @@ def rank_records(
                 "hybrid_score": float(hybrid[index]),
                 "bm25_score": float(lexical[index]),
                 "semantic_score": None if semantic is None else float(semantic[index]),
+                "evidence_state": assess_evidence(record.get("evidence", {}))["state"],
+                "scientific_acceptance": False,
                 "record": {key: value for key, value in record.items() if key != "embedding"},
             }
         )
@@ -153,6 +184,9 @@ def main() -> None:
     parser.add_argument("--lexical-only", action="store_true", help="Diagnostic only; does not pass the production gate.")
     args = parser.parse_args()
 
+    args.bm25_weight = finite_number(args.bm25_weight, "bm25 weight", nonnegative=True)
+    args.semantic_weight = finite_number(args.semantic_weight, "semantic weight", nonnegative=True)
+    finite_number(args.bm25_weight + args.semantic_weight, "ranking weight sum", positive=True)
     if not 1 <= args.top_k <= 5:
         raise SystemExit("--top-k must be between 1 and 5")
     if args.bm25_weight < 0 or args.semantic_weight < 0 or args.bm25_weight + args.semantic_weight <= 0:
@@ -183,6 +217,8 @@ def main() -> None:
         "weights": {"bm25": args.bm25_weight, "semantic": args.semantic_weight},
         "whitelist_valid": True,
         "production_ready": production_ready,
+        "status_scope": "retrieval_ranking_only",
+        "scientific_acceptance": False,
         "result_count": len(results),
         "results": results,
     }

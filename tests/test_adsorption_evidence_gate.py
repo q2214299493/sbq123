@@ -6,10 +6,20 @@ import pytest
 import yaml
 
 from scripts.adsmind_lite.evidence_gate import resolve_external_evidence
+from scripts.artifact_io import sha256_file
+from tests.evidence_fixtures import bound_evidence
 
 
 ROOT = Path(__file__).resolve().parents[1]
 RULES = yaml.safe_load((ROOT / "configs" / "adsmind_lite" / "evidence_gate.yaml").read_text(encoding="utf-8"))
+TEMPLATE_PATH = None
+
+
+@pytest.fixture(autouse=True)
+def reviewed_template(tmp_path, monkeypatch):
+    path = tmp_path / "template.vasp"
+    path.write_text("synthetic C motif\n1\n5 0 0\n0 5 0\n0 0 5\nC\n1\nDirect\n0 0 0\n")
+    monkeypatch.setitem(globals(), "TEMPLATE_PATH", path)
 
 
 def motif(motif_id: str, site: str, stability_rank: int = 1) -> dict:
@@ -21,12 +31,12 @@ def motif(motif_id: str, site: str, stability_rank: int = 1) -> dict:
         "geometry_summary": f"C bound at {site}",
         "stability_evidence": "compared_relaxed_adsorption_energies",
         "stability_rank": stability_rank,
-        "reviewed_structure_template": True,
+        "reviewed_structure_template": {"path": str(TEMPLATE_PATH), "sha256": sha256_file(TEMPLATE_PATH)},
     }
 
 
 def literature_record(record_id: str, motifs: list[dict]) -> dict:
-    return {
+    record = {
         "record_id": record_id,
         "journal": "Journal of the American Chemical Society",
         "doi": f"10.0000/{record_id}",
@@ -38,15 +48,22 @@ def literature_record(record_id: str, motifs: list[dict]) -> dict:
         "exact_adsorbate_match": True,
         "stable_motifs": motifs,
     }
+    record["evidence"] = bound_evidence(record, compatibility={"species": motifs[0]["motif_id"].split("_")[0], "surface": "Fe110"})
+    return record
 
 
 def whitelist_record(record_id: str, motifs: list[dict], *, exact: bool = True) -> dict:
-    return {
+    record = {
+        "id": record_id, "source_id": "catalysis-hub", "source_url": "https://api.catalysis-hub.org/graphql",
+        "source_access_verified": True, "retrieved_at": "2026-09-09T00:00:00Z",
+        "title": "Synthetic carbon motif", "summary": "Synthetic bound source", "data_types": ["structure"],
         "record_id": record_id,
         "exact_surface_match": exact,
         "exact_adsorbate_match": exact,
         "stable_motifs": motifs,
     }
+    record["evidence"] = bound_evidence(record)
+    return record
 
 
 def test_whitelist_match_stops_literature_fallback() -> None:
@@ -151,3 +168,30 @@ def test_candidates_are_ranked_for_geometry_selection_and_external_energy_is_not
     assert plan["evidence"]["usage_scope"] == "structure_selection_stability_order_and_initial_geometry_only"
     assert plan["evidence"]["external_energy_use"] == "relative_order_reference_only"
     assert plan["evidence"]["energy_import_allowed"] is False
+
+
+@pytest.mark.parametrize("damage", ["missing_content", "review_flag_only", "wrong_target", "outside_whitelist"])
+def test_claimed_match_cannot_replace_bound_source_and_review(damage):
+    record = whitelist_record("db-1", [motif("C_top", "top")])
+    if damage == "missing_content":
+        del record["evidence"]["content"]
+    elif damage == "review_flag_only":
+        record["evidence"]["review"] = {"reviewed": True}
+    elif damage == "wrong_target":
+        record["evidence"] = bound_evidence(record, compatibility={"species": "C", "surface": "Pt111"})
+    else:
+        record["source_url"] = "https://example.org/not-whitelisted"
+        record["evidence"] = bound_evidence(record)
+    with pytest.raises(ValueError, match="usable_stable_motif"):
+        resolve_external_evidence({"species": "C", "surface": "Fe110", "whitelist": {"status": "MATCH", "records": [record]}}, RULES)
+
+
+def test_changed_template_invalidates_previously_ready_plan():
+    from scripts.adsmind_lite.evidence_gate import validate_external_plan
+
+    record = whitelist_record("db-1", [motif("C_top", "top")])
+    plan = resolve_external_evidence({"species": "C", "surface": "Fe110", "whitelist": {"status": "MATCH", "records": [record]}}, RULES)
+    assert plan["decision"] == "READY"
+    TEMPLATE_PATH.write_text("changed template")
+    with pytest.raises(ValueError, match="stale"):
+        validate_external_plan(plan, species="C", surface="Fe110")

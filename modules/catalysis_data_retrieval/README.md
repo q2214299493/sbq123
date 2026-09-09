@@ -82,3 +82,49 @@ acceptance gates.
 - production output uses both BM25 and semantic ranking and contains at most five items
 - image-derived claims are separated into visible facts and uncertain interpretations
 - no scientific module contains a duplicate web/literature search implementation
+
+## Evidence lifecycle and vector provenance (B3)
+
+`scripts/adsmind_lite/evidence_lifecycle.py` owns the stages `IMPORTED`,
+`SCHEMA_VALID`, `SOURCE_VERIFIED`, `CONTENT_BOUND`, `REVIEWED`, and
+`TRANSFERABLE`. These are derived from supplied evidence, not trusted from
+stored state flags. Source verification requires identity, a timezone-aware
+retrieval timestamp, and an immutable reference to a SHA-256-bound snapshot.
+Content must match a character span of that snapshot. An explicit reviewer,
+timestamp, decision and scope bind the complete claim/source/content subject.
+Transfer also requires the reviewed compatibility conditions and target domain.
+Rejected reviews remain reviewed but cannot transfer. Source snapshots and
+reviewer declarations are auditable records, not independent authentication of
+the publisher or reviewer.
+
+Claims retain their type: literature claim, expert opinion, model prediction,
+calculated result, or reported experimental value. Opinions and predictions can
+only transfer as candidate guidance; they never change into calculated results.
+External energies remain excluded from local results and Excel.
+
+The `evidence` envelope uses `claim`, `source`, `content`, `review`, and `transfer`
+objects. `claim.record_sha256` binds the retrieved record (including motifs and
+template references), excluding derived embedding and evidence fields. `source`
+contains `identity`, `reference`, `retrieved_at`, `immutable_reference` and
+`snapshot: {text, sha256}`. `content` contains `text`, `sha256`, `start`, and
+`end` (zero-based, end-exclusive Unicode character offsets). `review` contains
+`reviewer`, `reviewed_at`, `decision`, `scope`, and `subject_sha256`. `transfer`
+binds that review by hash and declares `domain` and `compatibility`; these must
+match the reviewed claim and actual requested target. Complete synthetic
+examples are in `tests/evidence_fixtures.py`.
+
+Precomputed vectors require `embedding_provenance` with `model`, `generated_at`,
+`dimension`, `record_sha256`, and `content_sha256`, plus a content-bound source.
+The query vector is an object with `query`, `embedding` and provenance binding
+`query_sha256`, model, timestamp and dimension. Raw vector arrays are no longer
+accepted. Finite numbers, nonzero norms, dimensions, model identity and current
+content binding are checked before ranking. Similarity does not review evidence.
+`production_ready`/`PASS` on retrieval output means ranking readiness only;
+`status_scope` and `scientific_acceptance=false` make that distinction explicit.
+
+The adsorption evidence gate requires the above review and real template
+`{path, sha256}` bindings, validates whitelist URLs through the existing
+retrieval validator, and retains the source payload in its output. Consumers
+reapply the same gate before using cached external plans. Legacy booleans or
+unbound READY documents require explicit evidence refresh; no historical source
+record is rewritten automatically.

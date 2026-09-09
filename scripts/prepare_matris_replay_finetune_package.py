@@ -10,18 +10,22 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
 
 import numpy as np
 import yaml
 
 from scripts.artifact_io import load_json_object, sha256_file, write_json_atomic
 from scripts.matris_training_exclusions import (
+    assert_dataset_splits_disjoint,
+    assert_training_samples_disjoint,
     geometry_fingerprint,
     write_heldout_exclusion_manifest,
 )
 from scripts.neb_agent.utils_structure import read_poscar
 from scripts.prepare_matris_finetune_request import preflight_and_prepare
+from scripts.matris_training_data import _validate_label_set, _hydrate_samples, calculation_identity
+from scripts.scientific_validation import finite_array, finite_number
 
 
 LABEL_KIND = "dual_model_ts_vasp_force_label_set"
@@ -44,40 +48,6 @@ def _fixed_indices(path: Path) -> list[int]:
     ]
 
 
-def _validate_label_set(path: Path) -> tuple[dict[str, Any], dict[str, Any]]:
-    path = path.resolve()
-    payload = load_json_object(path)
-    if payload.get("document_kind") != LABEL_KIND:
-        raise ValueError(f"invalid TS label set: {path}")
-    if payload.get("scientific_status") != "accepted_force_labels_only":
-        raise ValueError(f"TS label set is not accepted: {path}")
-    checks = payload.get("checks", {})
-    required_checks = (
-        "all_scheduler_DONE",
-        "all_normal_vasp_completion",
-        "all_electronically_converged",
-        "all_exact_structure_hashes_match",
-        "all_complete_force_blocks",
-    )
-    if not all(checks.get(field) is True for field in required_checks):
-        raise ValueError(f"TS label set quality checks failed: {path}")
-    compatibility = payload.get("compatibility", {})
-    if (
-        compatibility.get("final_energy_convention") != EXPECTED_CONVENTION
-        or compatibility.get("ISMEAR") != 1
-        or float(compatibility.get("SIGMA_eV", -1.0)) != 0.2
-    ):
-        raise ValueError(f"incompatible TS label set: {path}")
-    batch_path = Path(str(payload.get("source_batch_path", ""))).resolve()
-    if (
-        not batch_path.is_file()
-        or sha256_file(batch_path) != payload.get("source_batch_sha256")
-    ):
-        raise ValueError(f"TS source batch binding failed: {path}")
-    batch = load_json_object(batch_path)
-    return payload, batch
-
-
 def _ts_samples(label_set_path: Path, dataset_id: str) -> list[dict[str, Any]]:
     label_set, batch = _validate_label_set(label_set_path)
     batch_rows = {str(row["sample_id"]): row for row in batch.get("labels", [])}
@@ -92,16 +62,14 @@ def _ts_samples(label_set_path: Path, dataset_id: str) -> list[dict[str, Any]]:
         if not structure_path.is_file() or sha256_file(structure_path) != expected_hash:
             raise ValueError(f"TS structure binding failed: {dataset_id}/{source_id}")
         structure = read_poscar(structure_path)
-        forces = np.asarray(label.get("vasp_forces_eV_per_A"), dtype=float)
-        if forces.shape != (len(structure.labels), 3) or not np.isfinite(forces).all():
-            raise ValueError(f"invalid TS force label: {dataset_id}/{source_id}")
-        energy = float(label.get("vasp_energy_eV"))
-        if not np.isfinite(energy):
-            raise ValueError(f"invalid TS energy label: {dataset_id}/{source_id}")
+        forces = np.asarray(finite_array(label.get("vasp_forces_eV_per_A"), "TS forces", shape=(len(structure.labels), 3)))
+        energy = finite_number(label.get("vasp_energy_eV"), "TS energy")
         samples.append(
             {
                 "sample_id": f"{dataset_id}::{source_id}",
+                "data_state": "RAW",
                 "source_sample_id": source_id,
+                "calculation_id": calculation_identity(label),
                 "dataset_role": "current_trigger_ts_labels"
                 if dataset_id == "current_round"
                 else "prior_ts_replay",
@@ -151,15 +119,13 @@ def _adsorption_samples(
         if label.get("normal_completion") is not True or label.get("ionic_converged") is not True:
             raise ValueError(f"adsorption label is not converged: {source_id}")
         structure = read_poscar(structure_path)
-        forces = np.asarray(label.get("forces_eV_per_A"), dtype=float)
-        if forces.shape != (len(structure.labels), 3) or not np.isfinite(forces).all():
-            raise ValueError(f"invalid adsorption force label: {source_id}")
-        energy = float(label.get("final_toten_eV"))
-        if not np.isfinite(energy):
-            raise ValueError(f"invalid adsorption energy label: {source_id}")
+        forces = np.asarray(finite_array(label.get("forces_eV_per_A"), "adsorption forces", shape=(len(structure.labels), 3)))
+        energy = finite_number(label.get("final_toten_eV"), "adsorption energy")
         row = {
             "sample_id": f"adsorption::{source_id}",
+            "data_state": "RAW",
             "source_sample_id": source_id,
+            "calculation_id": calculation_identity(label),
             "dataset_role": "adsorption_retention_validation"
             if source_id in validation_ids
             else "adsorption_replay_training",
@@ -255,39 +221,6 @@ def _rebind_heldout_plan(
     return output
 
 
-def _assert_disjoint(
-    samples: Iterable[dict[str, Any]], exclusion_manifest: dict[str, Any]
-) -> dict[str, int]:
-    excluded_exact = {
-        str(row["structure_sha256"])
-        for row in exclusion_manifest["excluded_structures"]
-    }
-    excluded_geometry = {
-        str(row["geometry_sha256"])
-        for row in exclusion_manifest["excluded_structures"]
-    }
-    seen_exact: set[str] = set()
-    seen_geometry: set[str] = set()
-    count = 0
-    for sample in samples:
-        exact = str(sample["structure"]["sha256"])
-        geometry = str(sample["structure"]["geometry_sha256"])
-        sample_id = str(sample["sample_id"])
-        if exact in excluded_exact or geometry in excluded_geometry:
-            raise ValueError(f"training/replay sample overlaps frozen held-out: {sample_id}")
-        if exact in seen_exact or geometry in seen_geometry:
-            raise ValueError(f"duplicate training/replay structure: {sample_id}")
-        seen_exact.add(exact)
-        seen_geometry.add(geometry)
-        count += 1
-    return {
-        "training_and_replay_sample_count_checked": count,
-        "frozen_heldout_structure_count": len(excluded_exact),
-        "exact_overlap_count": 0,
-        "rounded_geometry_overlap_count": 0,
-    }
-
-
 def _validate_frozen_heldout_labels(
     samples: list[dict[str, Any]], exclusion_manifest: dict[str, Any]
 ) -> dict[str, int]:
@@ -377,7 +310,20 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
         heldout_ts_samples, exclusions
     )
     training_samples = ts_samples + adsorption_training
-    disjointness = _assert_disjoint(training_samples, exclusions)
+    check = assert_training_samples_disjoint(training_samples, structures_root=output_dir, exclusion_manifest=exclusions)
+    disjointness = {"training_and_replay_sample_count_checked": check["training_sample_count_checked"],
+                   "frozen_heldout_structure_count": check["heldout_structure_count"],
+                   "exact_overlap_count": 0, "rounded_geometry_overlap_count": 0}
+    label_cache = {}
+    training_samples = _hydrate_samples(training_samples, label_cache=label_cache)
+    adsorption_validation = _hydrate_samples(adsorption_validation, label_cache=label_cache)
+    heldout_ts_samples = _hydrate_samples(heldout_ts_samples, label_cache=label_cache)
+    assert_dataset_splits_disjoint(
+        {"training": training_samples, "validation": adsorption_validation, "test": heldout_ts_samples},
+        structures_root=output_dir,
+    )
+    for sample in training_samples:
+        sample["data_state"] = "TRAINING_ELIGIBLE"
 
     replay_manifest_path = output_dir / "matris_replay_training_manifest.json"
     replay_manifest = {

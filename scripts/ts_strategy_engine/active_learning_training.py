@@ -7,6 +7,9 @@ from typing import Any
 from scripts.artifact_io import sha256_file
 from scripts.aqcat25_ts_schema import load_document
 from scripts.execution_backends import load_execution_backends, require_gpu_write_path
+from scripts.matris_training_data import calculation_identity
+from scripts.matris_training_exclusions import geometry_fingerprint
+from scripts.neb_agent.utils_structure import read_poscar
 
 from .active_learning_common import (
     VASP_LABEL_CLASS,
@@ -53,6 +56,9 @@ def _replay_samples(
         seen.add(sample["structure_sha256"])
         record = {
             "sample_id": sample_id,
+            "calculation_id": calculation_identity(sample), "reaction_id": sample.get("reaction_id"),
+            "source_sample_id": sample_id, "label_source": {"path": str(labels_path.resolve()), "sha256": sha256_file(labels_path)},
+            "geometry_sha256": geometry_fingerprint(read_poscar(target)), "data_state": "PARSED",
             "sample_role": "adsorption_regression_replay",
             "family": sample["family"],
             "structure_path": target.relative_to(destination).as_posix(),
@@ -127,6 +133,11 @@ def prepare_finetuning_package(state_path: Path, destination: Path) -> dict[str,
                     "energy_eV_force_label_only": report["dft_toten_eV_force_label_only"],
                     "source_outcar_sha256": report["outcar"]["sha256"],
                     "source_result_class": VASP_LABEL_CLASS,
+                    "reaction_id": report["reaction_id"], "source_sample_id": "label",
+                    "label_source": {"path": str(Path(label_ref["report_path"]).resolve()), "sha256": label_ref["report_sha256"]},
+                    "calculation_id": calculation_identity({"scheduler_evidence": report["scheduler_evidence"],
+                        "job_id": read_json(Path(report["scheduler_evidence"]["path"]))["job_id"]}),
+                    "geometry_sha256": geometry_fingerprint(read_poscar(structure_target)), "data_state": "PARSED",
                 }
             )
     if not labels:
@@ -232,12 +243,19 @@ def register_finetuning_result(state_path: Path, result_path: Path) -> dict[str,
         or validation_ref.get("checkpoint_sha256") != checkpoint["sha256"]
     ):
         raise ValueError("fine-tuned checkpoint failed load/regression validation")
+    training_manifest_path = Path(current["fine_tuning"]["manifest_path"])
+    if sha256_file(training_manifest_path) != expected_manifest:
+        raise ValueError("training manifest changed before model-usage recording")
+    training_manifest = read_json(training_manifest_path)
     current["fine_tuning"].update(
         {
             "status": "completed_candidate_checkpoint",
             "result_path": str(result_path.resolve()),
             "result_sha256": sha256_file(result_path),
             "checkpoint": checkpoint,
+            "dataset_usage": [{"sample_id": sample["sample_id"], "data_state": "USED_IN_MODEL",
+                               "model_sha256": checkpoint["sha256"], "manifest_sha256": expected_manifest}
+                              for sample in training_manifest["training_samples"]],
         }
     )
     state["latest_finetuned_checkpoint"] = checkpoint

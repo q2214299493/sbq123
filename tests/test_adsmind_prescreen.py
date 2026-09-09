@@ -83,14 +83,27 @@ def test_reviewed_local_plan_has_priority_over_external_plan() -> None:
     ]
 
 
-def test_external_plan_is_used_only_after_local_rules_miss() -> None:
+def test_external_plan_is_used_only_after_local_rules_miss(tmp_path) -> None:
+    import yaml
+    from scripts.adsmind_lite.evidence_gate import resolve_external_evidence
+    from scripts.artifact_io import sha256_file
+    from tests.evidence_fixtures import bound_evidence
+
     rules = load_prescreen_rules(str(RULES))
-    external_plan = {
-        "species": "unknown_C1",
-        "decision": "READY",
-        "candidate_count": 1,
-        "candidates": [{"motif_id": "external_top", "site_pattern": "top", "build_ready": True}],
-    }
+    template = tmp_path / "POSCAR"
+    template.write_text("synthetic\n1\n5 0 0\n0 5 0\n0 0 5\nC\n1\nDirect\n0 0 0\n")
+    record = {"id": "synthetic", "record_id": "synthetic", "source_id": "catalysis-hub",
+              "source_url": "https://api.catalysis-hub.org/graphql", "source_access_verified": True,
+              "title": "synthetic motif", "summary": "synthetic source", "retrieved_at": "2026-09-09T00:00:00Z",
+              "data_types": ["structure"], "exact_surface_match": True, "exact_adsorbate_match": True,
+              "stable_motifs": [{"motif_id": "external_top", "site_pattern": "top", "binding_mode": "monodentate",
+                                  "binding_atoms": ["C"], "geometry_summary": "C at top", "stability_rank": 1,
+                                  "stability_evidence": "compared_relaxed_adsorption_energies",
+                                  "reviewed_structure_template": {"path": str(template), "sha256": sha256_file(template)}}]}
+    record["evidence"] = bound_evidence(record, compatibility={"species": "unknown_C1", "surface": "Fe110"})
+    evidence_rules = yaml.safe_load((ROOT / "configs/adsmind_lite/evidence_gate.yaml").read_text())
+    external_plan = resolve_external_evidence({"species": "unknown_C1", "surface": "Fe110",
+                                              "whitelist": {"status": "MATCH", "records": [record]}}, evidence_rules)
 
     plan = plan_species("unknown_C1", rules, external_plans={"unknown_C1": external_plan})
 

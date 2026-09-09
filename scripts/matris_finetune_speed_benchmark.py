@@ -16,10 +16,13 @@ from typing import Any
 import numpy as np
 
 from scripts.matris_training_exclusions import (
+    assert_dataset_splits_disjoint,
     assert_training_samples_disjoint,
     load_heldout_exclusions,
 )
 from scripts.artifact_io import sha256_file as sha256_file
+from scripts.prediction_provenance import model_state_identity, prediction_metadata
+from scripts.scientific_validation import finite_array, finite_number
 
 
 
@@ -104,6 +107,13 @@ def verify_inputs(experiment_path: Path, experiment: dict[str, Any]) -> tuple[Pa
         structures_root=structures_root,
         exclusion_manifest=exclusions,
     )
+    by_id = {sample["sample_id"]: sample for sample in manifest["samples"]}
+    for fold in experiment["fine_tuning"]["folds"]:
+        assert_dataset_splits_disjoint(
+            {"training": [by_id[key] for key in fold["training_sample_ids"]],
+             "test": [by_id[key] for key in fold["held_out_sample_ids"]]},
+            structures_root=structures_root,
+        )
     return manifest_path, checkpoint_path, manifest
 
 
@@ -155,6 +165,8 @@ def predict_one(model, atoms, device: str, *, training: bool):
 def prediction_record(model, manifest_path: Path, sample: dict[str, Any], device: str) -> dict[str, Any]:
     import torch
 
+    if sha256_file(manifest_path.parent / sample["structure"]["path"]) != sample["structure"]["sha256"]:
+        raise ValueError("prediction input binding changed")
     atoms = load_atoms(manifest_path, sample)
     model.eval()
     with torch.enable_grad():
@@ -164,11 +176,17 @@ def prediction_record(model, manifest_path: Path, sample: dict[str, Any], device
         raise RuntimeError(f"non-finite prediction: {sample['sample_id']}")
     return {
         "sample_id": sample["sample_id"],
+        "prediction_provenance": prediction_metadata(
+            model_name="MatRIS", model_version=model_state_identity(model),
+            input_fingerprint=sample["structure"]["sha256"], source_reference=str(manifest_path),
+            generated_at=utc_now(), uncertainty={"status": "unavailable", "reason": "single model has no uncertainty estimator"},
+            training_split=sample.get("dataset_role", sample.get("subset")),
+        ),
         "reaction_id": sample["reaction_id"],
         "subset": sample["subset"],
         "energy_group_id": sample["energy_group_id"],
-        "predicted_energy_eV": float(energy.detach().cpu()),
-        "predicted_forces_eV_per_A": predicted_forces.tolist(),
+        "predicted_energy_eV": finite_number(float(energy.detach().cpu()), "predicted energy"),
+        "predicted_forces_eV_per_A": finite_array(predicted_forces.tolist(), "predicted forces", shape=(len(atoms), 3)),
         "vasp_energy_eV": float(sample["vasp_label"]["energy_eV"]),
         "vasp_forces_eV_per_A": sample["vasp_label"]["forces_eV_per_A"],
         "fixed_atom_indices_zero_based": sample["fixed_atom_indices_zero_based"],

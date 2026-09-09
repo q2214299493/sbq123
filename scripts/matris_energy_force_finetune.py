@@ -13,6 +13,7 @@ import json
 import math
 import random
 import shutil
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -26,10 +27,13 @@ from scripts.matris_finetune_speed_benchmark import (
     save_checkpoint,
 )
 from scripts.matris_training_exclusions import (
-    geometry_fingerprint,
+    assert_dataset_splits_disjoint,
+    assert_training_samples_disjoint,
     load_heldout_exclusions,
 )
-from scripts.neb_agent.utils_structure import read_poscar
+from scripts.matris_training_data import _load_bound, _hydrate_samples
+from scripts.prediction_provenance import model_state_identity, prediction_metadata
+from scripts.scientific_validation import finite_array, finite_number
 
 
 REVIEW_KIND = "matris_energy_force_replay_finetune_review_request"
@@ -42,83 +46,6 @@ RETENTION_METRIC_KEYS = (
     "vector_max_eV_per_A",
 )
 CORE_RETENTION_METRIC_KEYS = RETENTION_METRIC_KEYS[:-1]
-
-
-def _load_bound(reference: dict[str, Any], *, name: str) -> tuple[Path, dict[str, Any]]:
-    path = Path(str(reference.get("path", ""))).resolve()
-    expected = str(reference.get("sha256", ""))
-    if not path.is_file() or sha256_file(path) != expected:
-        raise ValueError(f"{name} binding failed")
-    return path, load_json_object(path)
-
-
-def _source_labels(reference: dict[str, Any]) -> dict[str, dict[str, Any]]:
-    _, payload = _load_bound(reference, name="VASP label source")
-    if payload.get("document_kind") == "dual_model_ts_vasp_force_label_set":
-        return {
-            str(row["sample_id"]): {
-                "energy_eV": float(row["vasp_energy_eV"]),
-                "forces_eV_per_A": row["vasp_forces_eV_per_A"],
-            }
-            for row in payload.get("labels", [])
-        }
-    if payload.get("calibration_id") and isinstance(payload.get("samples"), list):
-        return {
-            str(row["sample_id"]): {
-                "energy_eV": float(row["final_toten_eV"]),
-                "forces_eV_per_A": row["forces_eV_per_A"],
-            }
-            for row in payload["samples"]
-        }
-    raise ValueError("unsupported VASP label source")
-
-
-def _hydrate_samples(
-    samples: Iterable[dict[str, Any]],
-    *,
-    label_cache: dict[str, dict[str, dict[str, Any]]],
-) -> list[dict[str, Any]]:
-    hydrated: list[dict[str, Any]] = []
-    for source in samples:
-        sample = dict(source)
-        structure_ref = dict(sample.get("structure", {}))
-        structure_path = Path(str(structure_ref.get("path", ""))).resolve()
-        if (
-            not structure_path.is_file()
-            or sha256_file(structure_path) != structure_ref.get("sha256")
-        ):
-            raise ValueError(f"training structure binding failed: {sample.get('sample_id')}")
-        structure = read_poscar(structure_path)
-        if geometry_fingerprint(structure) != structure_ref.get("geometry_sha256"):
-            raise ValueError(f"training geometry binding failed: {sample.get('sample_id')}")
-        if len(structure.labels) != int(structure_ref.get("atom_count", -1)):
-            raise ValueError(f"training atom count failed: {sample.get('sample_id')}")
-
-        label_ref = sample.get("label_source")
-        if not isinstance(label_ref, dict):
-            raise ValueError("sample lacks a label-source binding")
-        source_key = f"{label_ref.get('path')}::{label_ref.get('sha256')}"
-        if source_key not in label_cache:
-            label_cache[source_key] = _source_labels(label_ref)
-        label = label_cache[source_key].get(str(sample.get("source_sample_id", "")))
-        if not isinstance(label, dict):
-            raise ValueError(f"VASP label row missing: {sample.get('sample_id')}")
-        forces = np.asarray(label["forces_eV_per_A"], dtype=float)
-        if forces.shape != (len(structure.labels), 3) or not np.isfinite(forces).all():
-            raise ValueError(f"invalid VASP forces: {sample.get('sample_id')}")
-        energy = float(label["energy_eV"])
-        if not np.isfinite(energy) or not math.isclose(
-            energy,
-            float(sample["vasp_label"]["energy_eV"]),
-            abs_tol=1.0e-8,
-            rel_tol=0.0,
-        ):
-            raise ValueError(f"VASP energy binding failed: {sample.get('sample_id')}")
-        sample["structure_path"] = str(structure_path)
-        sample["reference_energy_eV"] = energy
-        sample["reference_forces_eV_per_A"] = forces.tolist()
-        hydrated.append(sample)
-    return hydrated
 
 
 def validate_review_package(review_path: Path) -> dict[str, Any]:
@@ -157,22 +84,18 @@ def validate_review_package(review_path: Path) -> dict[str, Any]:
         manifest.get("frozen_ts_heldout_validation_samples", []),
         label_cache=label_cache,
     )
+    assert_dataset_splits_disjoint(
+        {"training": training, "validation": adsorption_validation, "test": heldout_validation},
+        structures_root=manifest_path.parent,
+    )
+    for sample in training:
+        sample["data_state"] = "TRAINING_ELIGIBLE"
 
     excluded_exact = {
         str(row["structure_sha256"]): str(row["geometry_sha256"])
         for row in exclusions["excluded_structures"]
     }
-    training_exact: set[str] = set()
-    training_geometry: set[str] = set()
-    for sample in training:
-        exact = str(sample["structure"]["sha256"])
-        geometry = str(sample["structure"]["geometry_sha256"])
-        if exact in excluded_exact or geometry in excluded_exact.values():
-            raise ValueError(f"training sample leaks held-out data: {sample['sample_id']}")
-        if exact in training_exact or geometry in training_geometry:
-            raise ValueError(f"duplicate optimizer structure: {sample['sample_id']}")
-        training_exact.add(exact)
-        training_geometry.add(geometry)
+    assert_training_samples_disjoint(training, structures_root=manifest_path.parent, exclusion_manifest=exclusions)
     heldout_pairs = {
         (str(sample["structure"]["sha256"]), str(sample["structure"]["geometry_sha256"]))
         for sample in heldout_validation
@@ -594,15 +517,24 @@ def _prediction_record(model, sample: dict[str, Any], device: str) -> dict[str, 
     import torch
     from ase.io import read
 
+    if sha256_file(Path(sample["structure_path"])) != sample["structure"]["sha256"]:
+        raise ValueError("prediction input binding changed")
     atoms = read(sample["structure_path"])
     model.eval()
     with torch.enable_grad():
         energy, forces = predict_one(model, atoms, device, training=False)
     return {
         "sample_id": sample["sample_id"],
-        "predicted_energy_eV": float(energy.detach().cpu()),
+        "prediction_provenance": prediction_metadata(
+            model_name="MatRIS", model_version=model_state_identity(model),
+            input_fingerprint=sample["structure"]["sha256"], source_reference=sample["structure_path"],
+            generated_at=datetime.now(timezone.utc).isoformat(),
+            uncertainty={"status": "unavailable", "reason": "single model has no uncertainty estimator"},
+            training_split=sample.get("dataset_role"),
+        ),
+        "predicted_energy_eV": finite_number(float(energy.detach().cpu()), "predicted energy"),
         "reference_energy_eV": float(sample["reference_energy_eV"]),
-        "predicted_forces_eV_per_A": forces.detach().cpu().numpy().tolist(),
+        "predicted_forces_eV_per_A": finite_array(forces.detach().cpu().numpy().tolist(), "predicted forces", shape=(len(atoms), 3)),
         "reference_forces_eV_per_A": sample["reference_forces_eV_per_A"],
         "fixed_atom_indices_zero_based": sample["fixed_atom_indices_zero_based"],
     }
@@ -887,6 +819,9 @@ def _train(args: argparse.Namespace, context: dict[str, Any]) -> dict[str, Any]:
         },
         "checkpoint_selection_policy": selection_policy,
         "training": {
+            "dataset_usage": [{"sample_id": sample["sample_id"], "data_state": "USED_IN_MODEL",
+                               "model_sha256": candidate_sha, "validation_evidence": sample["validation_evidence"]}
+                              for sample in training],
             "requested_epochs": args.epochs,
             "completed_epochs": len(history),
             "stopped_early": stopped_early,

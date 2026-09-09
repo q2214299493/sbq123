@@ -172,6 +172,7 @@
         "request_sha256": { "$ref": "#/$defs/sha256" },
         "structure_sha256": { "$ref": "#/$defs/sha256" },
         "checkpoint_sha256": { "$ref": "#/$defs/sha256" },
+        "prediction_provenance": { "type": "object", "required": ["type", "model_name", "model_version", "input_fingerprint", "source_reference", "generated_at", "training_split", "uncertainty", "status", "evidence_relationship", "scientific_acceptance"], "properties": { "type": { "const": "model_prediction" }, "status": { "const": "predicted_candidate" }, "scientific_acceptance": { "const": false } } },
         "predicted_energy_eV": { "type": "number" },
         "forces_eV_per_A": { "$ref": "#/$defs/forceMatrix" },
         "result_class": { "const": "predicted_transition_state_candidate_only" },

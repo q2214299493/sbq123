@@ -14,8 +14,14 @@ import yaml
 REPOSITORY_SCRIPTS = Path(__file__).resolve().parents[3] / "scripts"
 if str(REPOSITORY_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(REPOSITORY_SCRIPTS))
+if str(REPOSITORY_SCRIPTS.parent) not in sys.path:
+    sys.path.insert(0, str(REPOSITORY_SCRIPTS.parent))
 
 from jsonl_io import read_jsonl_objects  # noqa: E402
+from scripts.adsmind_lite.evidence_lifecycle import (  # noqa: E402
+    STATES, assess_evidence, record_subject, required_text, timestamp,
+)
+from scripts.scientific_validation import finite_array, integer_number  # noqa: E402
 
 
 SKILL_ROOT = Path(__file__).resolve().parents[1]
@@ -54,12 +60,41 @@ def _embedding_errors(record: dict) -> list[str]:
     embedding = record.get("embedding")
     if embedding is None:
         return []
-    valid = isinstance(embedding, list) and bool(embedding) and all(isinstance(value, (int, float)) for value in embedding)
-    return [] if valid else ["embedding_invalid"]
+    try:
+        validate_embedding(record)
+    except (KeyError, TypeError, ValueError) as exc:
+        return [f"embedding_invalid:{exc}"]
+    return []
+
+
+def validate_embedding(record: dict) -> list[float]:
+    metadata = record["embedding_provenance"]
+    required_text(metadata["model"], "embedding.model")
+    timestamp(metadata["generated_at"], "embedding.generated_at")
+    dimension = integer_number(metadata["dimension"], "embedding.dimension", positive=True)
+    vector = finite_array(record["embedding"], "embedding", shape=(dimension,))
+    if not any(vector):
+        raise ValueError("embedding has zero norm")
+    if metadata["record_sha256"] != record_subject(record):
+        raise ValueError("embedding record binding mismatch")
+    evidence = record["evidence"]
+    if STATES.index(assess_evidence(evidence)["state"]) < STATES.index("CONTENT_BOUND"):
+        raise ValueError("embedding lacks available content-bound source")
+    if evidence["claim"].get("record_sha256") != record_subject(record):
+        raise ValueError("source does not bind this record")
+    if metadata["content_sha256"] != evidence["content"]["sha256"]:
+        raise ValueError("embedding source content mismatch")
+    return vector
 
 
 def validate_record(record: dict, sources: dict[str, dict]) -> list[str]:
     errors = [f"missing:{field}" for field in REQUIRED_FIELDS if field not in record]
+    try:
+        for field in ("id", "source_id", "source_url", "title", "summary"):
+            required_text(record.get(field), field)
+        timestamp(record.get("retrieved_at"), "retrieved_at")
+    except ValueError as exc:
+        errors.append(str(exc))
     source_id = str(record.get("source_id", ""))
     source = sources.get(source_id)
     if source is None:
