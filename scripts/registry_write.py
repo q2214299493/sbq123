@@ -48,16 +48,18 @@ def main() -> None:
                     "output": str(args.output),
                     "batch_id": result["batch_id"],
                     "batch_sha256": result["batch_sha256"],
+                    "plan_sha256": result.get("plan_sha256"),
                     "insert_count": result.get("insert_count", result.get("inserted", 0)),
                     "update_count": result.get("update_count", result.get("updated", 0)),
                     "unchanged_count": result.get("unchanged_count", result.get("unchanged", 0)),
                 },
                 indent=2,
-                ensure_ascii=False,
+                ensure_ascii=True,
             )
         )
     else:
-        print(rendered, end="")
+        # stdout may be a legacy Windows code page; saved artifacts stay UTF-8.
+        print(json.dumps(result, indent=2, ensure_ascii=True))
 
 
 if __name__ == "__main__":

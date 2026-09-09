@@ -191,6 +191,28 @@ the database under lock, records a publication event and restores workbook/recei
 on ordinary transaction failure. An interrupted attempt remains explicitly pending
 reconciliation; files and SQLite cannot share a hardware-atomic commit.
 
+### Registration preflight (avoid repeated trial writes)
+
+1. Inspect the existing schema and `scripts/state_manager/job_lifecycle.py` for
+   the exact fields/transitions. `workflow_status`, `scientific_status` and result
+   validation status are different fields; do not substitute `energy_accepted`
+   or `ts_validated` for a workflow state. `accepted` still requires owner evidence.
+2. Preserve hash-bound source files. Use the owning Python serializers/hash
+   functions; do not reconstruct JSON from terminal output or convert it through
+   JavaScript/PowerShell. For NEB execution use the existing
+   `python -m scripts.ts_strategy_engine.execution_gate_cli --request FILE --output FILE`
+   module entrypoint, never substring extraction of printed JSON.
+3. Group eligible records in one manifest and run `registry-write plan --db DB
+   --manifest BATCH --output PLAN`. This checks the whole batch on an in-memory
+   snapshot; do not try an apply to discover schema/transition errors.
+4. Review the saved plan under actual user authority. Use `approve_plan` to bind
+   that review, and use **plan_sha256**, not batch_sha256, for `--confirm-sha256`.
+   The CLI summary exposes both hashes; the saved plan remains authoritative.
+5. Apply only the exact approved plan. If reporting fails, inspect the saved
+   receipt and database before any retry; do not assume the transaction failed.
+   Keep TS, barrier and Excel dependencies/gates intact. A changed source or
+   database fingerprint requires re-planning/review, not manual hash replacement.
+
 ### Explicit migration / rollback
 
 `009_registry_governance.sql` adds schema 9 without changing existing scientific

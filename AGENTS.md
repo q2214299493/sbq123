@@ -27,6 +27,28 @@ from chat history or ordinary `.codex` memory.
 - Never run, submit, stop, delete, rename, overwrite, restart, or resubmit a
   useful calculation without explicit user authority.
 
+## Avoidable Rework (user instruction, 2026-09-10)
+
+- Reuse already-read unchanged instructions and parsed evidence within a turn.
+  Read required instruction files completely once; if output is truncated, read
+  only the missing bounded sections, not the entire file again.
+- Discover exact paths with `rg --files DIR -g PATTERN`; inspect the existing
+  CLI help/schema before using an unfamiliar command, field, or status. Do not
+  guess paths, database columns, or scientific-to-workflow status mappings.
+- Use canonical file outputs, not JSON cut out of console text. Never round-trip
+  hash-bound evidence through JavaScript/PowerShell serialization: `400.0` and
+  `400` may hash differently. Preserve source bytes and use the owning Python
+  hash/approval implementation. Changed evidence needs a fresh reviewed binding.
+- For registration follow the preflight in `modules/calculation_registry/README.md`.
+  Batch mutually compatible records once; keep dependent scientific/Excel gates
+  separate. Never replace required review with automatic approval.
+- After a command fails, identify the specific cause before retrying. If a write
+  may have succeeded before reporting failed, inspect its receipt/state first.
+  Do not repeat unchanged writes or run broader tests to diagnose a typo.
+- Status/explanation requests remain read-only. Do not turn them into historical
+  backfills, unrelated repairs, or repeated full validation. Preserve scientific
+  checks and authorization boundaries when reducing orchestration overhead.
+
 ## Evidence and Authority
 
 Use each source only for the state it can establish:

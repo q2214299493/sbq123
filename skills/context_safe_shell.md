@@ -25,6 +25,15 @@ file FILE
 On PowerShell, use `Get-Item` for size and a targeted reader with a bounded
 output budget.
 
+For a dirty repository, do not dump every untracked calculation artifact.
+Capture `git status --short` once, report its count and a bounded preview, then
+use `git status --short -- EXACT_TASK_PATHS` before editing/staging. Keep exit
+status checks separate from the preview. A compact preview is not a full audit.
+
+On Windows use `rg -n -g '*.py' PATTERN scripts/OWNER` rather than passing
+`scripts/OWNER/*.py` as a literal path. Discover filenames first with
+`rg --files scripts/OWNER -g '*NAME*'`. Reuse successful discovery in the turn.
+
 ## Never dump directly
 
 Do not print full `OUTCAR`, `vasprun.xml`, `WAVECAR`, `CHGCAR`, `CHG`, `DOSCAR`,
@@ -80,4 +89,3 @@ git diff --stat 2>&1 | head -c 4000
 ```
 
 Raw diffs are for local verification. Show them to the user only when requested.
-
