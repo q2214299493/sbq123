@@ -184,7 +184,8 @@ final-energy evidence. `registry_write.py` remains argument/loading/rendering on
 `ranking.py` owns BM25/semantic ranking; `workflow.py` owns request orchestration.
 The original skill scripts retain CLI arguments, output/exit behavior and direct
 re-exports. AdsMind imports the record owner normally, never a skill CLI at runtime.
-Use an installed/editable repository when invoking a skill file from another cwd.
+Use the installed `catalysis-search` / `catalysis-validate` commands outside a checkout;
+legacy skill paths remain repository facades with the same arguments.
 Retrieval PASS only describes ranking; transferable evidence and scientific
 acceptance remain separate gates. No new scientific capability is implied.
 
@@ -208,3 +209,14 @@ an error; unrecognized metallic surfaces without explicit site labels return
 arbitrary catalysts. Backend restrictions remain in `execution_backends.yaml`.
 See `reports/refactor_audit/B5_completion_report.md` for capability contracts and
 `B5_dependency_inventory.md` for the maintained source classification.
+
+## Release resource boundary
+
+`runtime_resources.py` distinguishes reviewed installed resources from explicit
+repository context. `release_build.py` copies only the enumerated originals in
+`configs/release_resources.json` into build output. No scientific rules live in
+these packaging modules. `release_smoke.py` exercises only synthetic local fixtures;
+`release_environment.py` records installed dependencies/interfaces, and
+`validate_release.py` builds and checks actual clean wheel/editable installations.
+See [installation contract](../docs/INSTALLATION.md). Standalone remote facades
+retain their existing resource inputs; this refactor does not deploy them.

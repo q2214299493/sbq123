@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 from pathlib import Path
 from typing import Any
 
@@ -11,7 +13,7 @@ from scripts.vasp_lsf import render_sunboquan_lsf
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_PROFILE = ROOT / "configs" / "true_fe110_production.yaml"
+DEFAULT_PROFILE = resource_path('configs/true_fe110_production.yaml')
 MOMENTS = {"Fe": 2.2, "C": 0.0, "O": 0.0, "H": 0.0}
 
 

@@ -8,6 +8,9 @@ from typing import Any
 from scripts.artifact_io import canonical_json, sha256_bytes, sha256_file
 
 from .models import StateEvent, utc_now
+from scripts.document_governance import classify_data
+from scripts.runtime_resources import resource_path
+import yaml
 
 
 def _tracking_status(path: Path, *, root: Path) -> str:
@@ -21,6 +24,12 @@ def _tracking_status(path: Path, *, root: Path) -> str:
         errors="replace",
     )
     return "tracked" if completed.returncode == 0 else "untracked"
+
+
+def _require_managed_item(relative: Path) -> None:
+    policy = yaml.safe_load(resource_path("configs/data_governance.yaml").read_text(encoding="utf-8"))
+    if classify_data(relative.as_posix(), policy) == "GENERATED_BUILD_METADATA":
+        raise ValueError("GENERATED_BUILD_METADATA: packaging/cache artifacts are not managed project state")
 
 
 def build_stale_item_event(
@@ -46,6 +55,7 @@ def build_stale_item_event(
         raise ValueError(f"invalid stale-item content class: {content_class}")
     if not reason.strip():
         raise ValueError("stale-item classification requires a reason")
+    _require_managed_item(relative)
     tracking_status = _tracking_status(target, root=root)
     if disposition == "archive" and (tracking_status != "untracked" or content_class != "unique"):
         raise ValueError("archive requires unique untracked content")
@@ -122,6 +132,7 @@ def _batch_item(
         raise ValueError(f"invalid batch repository item content class: {content_class}")
     if not isinstance(reason, str) or not reason.strip():
         raise ValueError("batch repository item requires a reason")
+    _require_managed_item(relative)
     tracking_status = _tracking_status(target, root=root)
     if disposition == "archive" and (tracking_status != "untracked" or content_class != "unique"):
         raise ValueError("batch archive requires unique untracked content")

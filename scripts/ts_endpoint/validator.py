@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 from dataclasses import asdict, dataclass
 from enum import Enum
 from pathlib import Path
 from typing import Any
 
-from ase.data import atomic_numbers, covalent_radii
+from scripts.optional_dependencies import require_optional
 
 from .evidence import (
     EndpointGeometryEvidence,
@@ -15,9 +17,12 @@ from .evidence import (
 from scripts.adsmind_lite.adsmind_common import load_yaml
 from scripts.neb_agent.utils_structure import compatible
 
+_ase_data = require_optional("ase.data", "TS endpoint geometry")
+atomic_numbers, covalent_radii = _ase_data.atomic_numbers, _ase_data.covalent_radii
+
 
 ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_CONFIG = ROOT / "configs" / "structure_purpose_routing.yaml"
+DEFAULT_CONFIG = resource_path('configs/structure_purpose_routing.yaml')
 MULTI_EVENT_REACTION = "MULTI_EVENT_REACTION"
 REQUIRED_THRESHOLD_KEYS = {
     "reactive_atom_displacement_warning_A",

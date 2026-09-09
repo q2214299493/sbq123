@@ -17,8 +17,16 @@ dependencies = [
 repo-state = "scripts.state_manager.cli:main"
 registry-promote = "scripts.registry_excel_promotion:main"
 registry-write = "scripts.registry_write:main"
+registry-init = "scripts.init_registry:main"
+ts-strategy = "scripts.ts_strategy_engine.cli:main"
+document-governance = "scripts.document_governance:main"
+capability-readiness = "scripts.generate_capability_readiness:main"
+catalysis-search = "scripts.catalysis_retrieval.cli:main"
+catalysis-validate = "scripts.catalysis_retrieval.validate_cli:main"
 
 [project.optional-dependencies]
+vasp = ["pymatgen>=2024.5,<2027"]
+release = ["build>=1.2,<2", "wheel>=0.45,<1"]
 adsmind = [
   "ase>=3.23,<4",
 ]
@@ -39,6 +47,12 @@ dev = [
   "pytest>=8,<9",
   "ruff>=0.12,<1",
 ]
+
+[tool.setuptools]
+include-package-data = false
+
+[tool.setuptools.cmdclass]
+build_py = "scripts.release_build.BuildPy"
 
 [tool.setuptools.packages.find]
 include = ["scripts", "scripts.*"]

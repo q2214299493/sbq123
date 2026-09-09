@@ -11,12 +11,14 @@ from typing import Any
 from jsonschema import Draft202012Validator
 
 try:
+    from scripts.runtime_resources import resource_path
     from scripts.artifact_io import load_json_object, sha256_file, sha256_text
 except ModuleNotFoundError:  # Standalone deployment on MZ73.
     from artifact_io import load_json_object, sha256_file, sha256_text
+    resource_path = None  # Existing standalone deployment uses explicit/sibling schema.
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SCHEMA = ROOT / "configs" / "aqcat25_handoff.schema.json"
+DEFAULT_SCHEMA = resource_path('configs/aqcat25_handoff.schema.json') if resource_path else ROOT / 'configs/aqcat25_handoff.schema.json'
 
 
 class HandoffValidationError(ValueError):

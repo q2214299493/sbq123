@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 import argparse
 import json
 from pathlib import Path
@@ -36,7 +38,7 @@ from scripts.scheduler_evidence import query_lsf_job
 
 
 ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_POLICY = ROOT / "configs" / "aqcat25_ts_active_learning.yaml"
+DEFAULT_POLICY = resource_path('configs/aqcat25_ts_active_learning.yaml')
 
 
 def _add_state_target(command: argparse.ArgumentParser) -> None:

@@ -1,11 +1,11 @@
 ---
 document_class: CURRENT_REFERENCE
-as_of: '2026-09-09T00:00:00+08:00'
-as_of_scope: B6 document review, not a live scientific observation
-source_scope: publication document at B5 baseline; observations retain original dates
-source_version: 3a1bb3f461147a7dc9b5df5efca89de621d27f38
-source_version_role: B6 base commit
-source_branch: codex/b6-documentation-data-governance
+as_of: '2026-09-10T00:00:00+08:00'
+as_of_scope: B7 distribution review, not a live scientific observation
+source_scope: publication document at B6 baseline; observations retain original dates
+source_version: 93c09db8a6008a873ef7cc8bc7b4cc1e2a8cc22a
+source_version_role: B7 base commit
+source_branch: codex/b7-release-environment
 evidence_kind: CURRENT_CODE_STATE
 production_schema_version: NOT_VERIFIED_IN_B6
 governance: docs/DOCUMENT_GOVERNANCE.md
@@ -57,35 +57,23 @@ history are LAST_RECORDED_OBSERVATION, never newly observed by this README.
 
 ## 安装
 
-要求 Python 3.11 或更高版本。
+普通 wheel 安装与 editable 开发安装均有独立验证。Python 3.11 是
+Windows/Linux CI 基准；开发源码仍位于 `C:/Users/86177/Desktop/work`。
+配置、SQL、检索 schema 和模板由明确的资源清单打包；仓库状态和科学数据不随 wheel 分发。
 
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -e ".[dev,adsmind,neb,visualization]"
+```text
+python -m pip install /path/to/sbq_catalyst_agent_workflow-0.1.0-py3-none-any.whl
+registry-init --help
+ts-strategy --help
+catalysis-search --help
+python -m scripts.release_smoke
 ```
 
-基础依赖只有 `jsonschema`、`numpy` 和 `PyYAML`。`ase`、`matplotlib`、
-检索模型和 AQCat25/FairChem 环境按工作流分别安装，不应混入基础环境。
-`neb` 只安装 NEB 路径生成所需的 `ase`；吸附构型渲染脚本单独使用
-`visualization` extra 中的 `matplotlib`。
-
-使用可选 Sella 分支或执行其真实解析势测试时，安装
-`python -m pip install -e ".[dev,neb,sella]"`。该环境不包含生产模型权重，
-不会自动连接 GPU 或提交 VASP。
-
-## 最小运行方式
-
-先读取当前任务，再查看统一命令入口：
-
-```powershell
-Get-Content tasks\current_task.md
-python -m scripts.ts_strategy_engine.cli --help
-python -m scripts.adsmind_lite.plan_adsorption_candidates --help
-```
-
-命令应从仓库根目录以 `python -m scripts...` 方式运行。不要依赖临时
-`sys.path` 修改或未记录的当前工作目录。
+开发安装使用 `python -m pip install -e ".[dev,neb,release]"`。
+完整的 extras、平台支持、仓库上下文要求及外部 HPC/GPU 边界见
+[安装与发布合同](docs/INSTALLATION.md)。已安装的软件入口可从仓库外运行；
+状态管理和文档投影需要显式 `--root`，缺少上下文时返回 `REPOSITORY_CONTEXT_REQUIRED`。
+安装不会提供 VASP、POTCAR、生产数据库、凭据或模型权重。
 
 ## 配置
 
@@ -129,8 +117,8 @@ python -m ruff check scripts modules tests
 
 小改动先运行相关测试；只有跨模块行为变化才需要完整回归。测试通过不能
 替代真实 VASP、频率、连接性或科学有效性审核。
-GitHub Actions 对每次 push 和 PR 执行 Ruff 与完整 pytest，并安装 Sella，
-实际运行 CPU 解析势鞍点和失败恢复测试。
+GitHub Actions 保留 Linux 完整 pytest（包括 Sella CPU 解析势测试），并在
+Ubuntu/Windows Python 3.11 上执行工程回归和真实 wheel 安装验证。
 
 ## Dry-run 与预检
 

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -23,8 +25,8 @@ from scripts.vasp_result_gate import validate_lsf_done_evidence, validate_vasp_r
 
 
 ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_THRESHOLDS = ROOT / "configs" / "ts_connectivity_gate.yaml"
-STRUCTURE_PURPOSE_CONFIG = ROOT / "configs" / "structure_purpose_routing.yaml"
+DEFAULT_THRESHOLDS = resource_path('configs/ts_connectivity_gate.yaml')
+STRUCTURE_PURPOSE_CONFIG = resource_path('configs/structure_purpose_routing.yaml')
 
 
 def _load_thresholds(path: Path | None = None) -> dict[str, Any]:

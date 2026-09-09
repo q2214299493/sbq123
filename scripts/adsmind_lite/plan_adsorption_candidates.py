@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 import argparse
 from pathlib import Path
 
@@ -22,13 +24,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--rules",
         type=Path,
-        default=ROOT / "configs" / "adsmind_lite" / "prescreen_rules.yaml",
+        default=resource_path('configs/adsmind_lite/prescreen_rules.yaml'),
     )
     parser.add_argument("--available-template", action="append", default=[], help="Motif ID with a reviewed structure template.")
     parser.add_argument(
         "--fts-rules",
         type=Path,
-        default=ROOT / "configs" / "adsmind_lite" / "iron_fts_prescreen.yaml",
+        default=resource_path('configs/adsmind_lite/iron_fts_prescreen.yaml'),
     )
     parser.add_argument(
         "--external-evidence",
@@ -40,12 +42,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--evidence-rules",
         type=Path,
-        default=ROOT / "configs" / "adsmind_lite" / "evidence_gate.yaml",
+        default=resource_path('configs/adsmind_lite/evidence_gate.yaml'),
     )
     parser.add_argument(
         "--adsorbate-rules",
         type=Path,
-        default=ROOT / "configs" / "adsmind_lite" / "adsorbate_rules.yaml",
+        default=resource_path('configs/adsmind_lite/adsorbate_rules.yaml'),
         help="Adsorbate metadata catalog used to formulate retrieval targets.",
     )
     parser.add_argument(

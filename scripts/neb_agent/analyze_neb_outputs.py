@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 import argparse
 from pathlib import Path
 
@@ -284,7 +286,7 @@ def analyze(workdir: Path, thresholds_path: Path, reaction_indices: list[int] | 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Analyze NEB energies, forces, SCF behavior, and image-level convergence.")
     add_common_arguments(parser)
-    parser.add_argument("--thresholds", type=Path, default=ROOT / "configs" / "neb_agent" / "default_thresholds.yaml")
+    parser.add_argument("--thresholds", type=Path, default=resource_path('configs/neb_agent/default_thresholds.yaml'))
     args = parser.parse_args()
     payload = analyze(args.workdir, args.thresholds)
     print(payload["status"])

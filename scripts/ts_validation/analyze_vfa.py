@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 import argparse
 import math
 import re
@@ -17,7 +19,7 @@ from scripts.ts_validation.dimer_frequency_gate import evaluate_dimer_frequency_
 
 
 FREQUENCY_PATTERN = re.compile(r"^\s*(\d+)\s+f(/i)?\s*=.*?([-+0-9.]+)\s+cm-1", re.I)
-DEFAULT_PROFILE = Path(__file__).resolve().parents[2] / "configs" / "true_fe110_production.yaml"
+DEFAULT_PROFILE = resource_path('configs/true_fe110_production.yaml')
 
 
 def _frequency_policy(override: dict[str, Any] | None) -> dict[str, Any]:

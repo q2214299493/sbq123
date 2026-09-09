@@ -1,6 +1,8 @@
 """Bounded strategy variants and evidence-backed attempts; no job or model execution."""
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 import copy
 from pathlib import Path
 from typing import Any
@@ -16,7 +18,7 @@ from .learning_store import append_event, get_event, history_token, read_events,
 from .registry import open_registry
 from .templates import load_templates
 
-POLICY = Path(__file__).resolve().parents[2] / "configs/ts_strategy_engine/learning.yaml"
+POLICY = resource_path('configs/ts_strategy_engine/learning.yaml')
 
 
 def policy() -> dict[str, Any]:
@@ -55,12 +57,11 @@ def capture_workdir(database: Path, workdir: Path, task_id: str, sources: dict[s
     if count != report["interior_images"]:
         raise ValueError("INCAR and path report disagree on image count")
     source_paths = dict(sources)
-    root = POLICY.parents[2]
     for relative in ("configs/execution_backends.yaml", "configs/true_fe110_production.yaml",
                      "configs/ts_strategy_engine/families.yaml", "configs/ts_strategy_engine/learning.yaml",
                      "scripts/ts_strategy_engine/strategy.py", "scripts/ts_strategy_engine/workflow.py",
                      "scripts/ts_strategy_engine/execution_gate.py", "scripts/neb_agent/submission.py"):
-        source_paths[f"workflow:{relative}"] = str(root / relative)
+        source_paths[f"workflow:{relative}"] = str(resource_path(relative))
     for name in ("INCAR", "KPOINTS", "POTCAR.spec", "script.lsf", "path_generation_report.json"):
         source_paths[f"input:{name}"] = str(workdir / name)
     for index in range(count + 2):

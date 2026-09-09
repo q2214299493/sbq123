@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 import json
 import re
 from dataclasses import asdict, dataclass, field
@@ -11,11 +13,7 @@ from scripts.registry_connection import open_registry, table_exists, utc_now
 
 ROOT = Path(__file__).resolve().parents[2]
 MIGRATION = (
-    ROOT
-    / "modules"
-    / "calculation_registry"
-    / "migrations"
-    / "001_ts_endpoint_records.sql"
+    resource_path('modules/calculation_registry/migrations/001_ts_endpoint_records.sql')
 )
 ROLLBACK = MIGRATION.with_name("001_ts_endpoint_records_rollback.sql")
 _SAFE_ID = re.compile(r"^[A-Za-z0-9_.-]+$")

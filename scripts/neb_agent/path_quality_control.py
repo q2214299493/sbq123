@@ -8,7 +8,7 @@ from scripts.scientific_validation import validate_finite_tree
 from typing import Any
 
 import numpy as np
-from ase.io import read as ase_read
+from scripts.optional_dependencies import require_optional
 
 from scripts.neb_agent.utils_structure import (
     compatible,
@@ -23,6 +23,8 @@ from scripts.neb_agent.utils_vasp import (
     parse_outcar,
     trailing_threshold_count,
 )
+
+ase_read = require_optional("ase.io", "NEB path geometry").read
 
 
 def quality_source_paths(workdir: Path, extras: list[Path]) -> list[Path]:

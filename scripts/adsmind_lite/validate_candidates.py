@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 import argparse
 from pathlib import Path
 
@@ -15,9 +17,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--candidate-root", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--invalid-output", type=Path)
-    parser.add_argument("--surfaces-config", type=Path, default=ROOT / "configs" / "adsmind_lite" / "surfaces.yaml")
-    parser.add_argument("--adsorbate-rules", type=Path, default=ROOT / "configs" / "adsmind_lite" / "adsorbate_rules.yaml")
-    parser.add_argument("--analysis-rules", type=Path, default=ROOT / "configs" / "adsmind_lite" / "analysis_rules.yaml")
+    parser.add_argument("--surfaces-config", type=Path, default=resource_path('configs/adsmind_lite/surfaces.yaml'))
+    parser.add_argument("--adsorbate-rules", type=Path, default=resource_path('configs/adsmind_lite/adsorbate_rules.yaml'))
+    parser.add_argument("--analysis-rules", type=Path, default=resource_path('configs/adsmind_lite/analysis_rules.yaml'))
     return parser.parse_args()
 
 

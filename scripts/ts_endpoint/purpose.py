@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 from dataclasses import dataclass, replace
 from enum import Enum
 from pathlib import Path
@@ -17,7 +19,7 @@ from scripts.artifact_io import sha256_file
 
 
 ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_CONFIG = ROOT / "configs" / "structure_purpose_routing.yaml"
+DEFAULT_CONFIG = resource_path('configs/structure_purpose_routing.yaml')
 PURPOSE_CONFIRMATION_PROMPT = (
     "Please confirm structure purpose: "
     "[1] stable adsorption structure; "

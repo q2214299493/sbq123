@@ -1,6 +1,8 @@
 """Bind a reviewed completed path and prepare its local Dimer; no submission."""
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 import argparse
 import subprocess
 from datetime import datetime, timezone
@@ -83,7 +85,7 @@ def main() -> None:
     scheduler = query_lsf_job(args.job_id, stage="ordinary_neb")
     assert scheduler["status"] == "DONE"
     write_json(parent / "scheduler_evidence.json", scheduler)
-    thresholds = yaml.safe_load(Path("configs/neb_agent/default_thresholds.yaml").read_text())
+    thresholds = yaml.safe_load(resource_path("configs/neb_agent/default_thresholds.yaml").read_text())
     quality = load_json_object(parent / "neb_path_quality.json")
     gate = decide_execution(geometry, analysis, thresholds, climb=False, path_reviewed=True,
                             path_quality=quality, scheduler=scheduler,

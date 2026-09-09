@@ -1,6 +1,8 @@
 """Read-only document classification, freshness and link checks; no scientific authority."""
 from __future__ import annotations
 
+from scripts.runtime_resources import require_repository_context
+
 import argparse
 import json
 import re
@@ -128,6 +130,7 @@ def main() -> None:
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--links", action="store_true")
     args = parser.parse_args()
+    args.root = require_repository_context(args.root)
     findings = {}
     for relative in args.documents:
         metadata, body = read_document(args.root / relative)

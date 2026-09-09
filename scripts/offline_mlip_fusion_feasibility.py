@@ -12,6 +12,8 @@ energy expression.
 
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 import argparse
 import csv
 import itertools
@@ -1333,7 +1335,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--config",
         type=Path,
-        default=Path("configs/offline_mlip_fusion_feasibility.yaml"),
+        default=resource_path("configs/offline_mlip_fusion_feasibility.yaml"),
     )
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument(

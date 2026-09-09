@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 import json
 import re
 from dataclasses import dataclass
@@ -13,7 +15,7 @@ from scripts.artifact_io import canonical_json, sha256_bytes
 
 
 ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_SCHEMA = ROOT / "configs" / "state_handoff_event.schema.json"
+DEFAULT_SCHEMA = resource_path('configs/state_handoff_event.schema.json')
 
 EVENT_ENTITY_KINDS = {
     "task_opened": "task",

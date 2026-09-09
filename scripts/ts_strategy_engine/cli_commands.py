@@ -5,50 +5,8 @@ import argparse
 import json
 
 
-from scripts.neb_agent.cli_common import comma_tokens
-
-from scripts.ts_validation.analyze_vfa import analyze_vfa
-
-from scripts.ts_validation.connectivity import analyze_bidirectional_connectivity
-
-from scripts.ts_validation.prepare_connectivity import prepare_connectivity_displacements
-
-from scripts.ts_validation.prepare_vfa_from_ts_image import prepare_vfa_handoff
-
-from scripts.ts_validation.validation_pipeline import evaluate_validation_pipeline
-
-from .contract import load_contract
-
-from .active_learning_cli import main as active_learning_main
-
-from .dimer_analysis import analyze_dimer
-
-from .evidence import (
-    record_matched_static_barrier,
-    record_ts_validation,
-    register_calculation_compatibility,
-)
-
-from .handoff import prepare_reviewed_dimer_handoff
-
-from .ml_neb_path import finalize_gpu_ml_neb_path_manifest, validate_gpu_ml_neb_path_manifest
-
-from .path_evidence import (
-    load_json_object,
-    write_path_review_draft,
-)
-
-from .templates import record_template
-
-from .learning_cli import main as learning_main
-
-from .workflow import AnalyzeRequest, PlanRequest, analyze_search, plan
-
-
-
-
-
 def _plan_command(args: argparse.Namespace) -> None:
+    from .workflow import PlanRequest, plan
     plan(
         PlanRequest(
             initial=args.initial,
@@ -71,17 +29,23 @@ def _plan_command(args: argparse.Namespace) -> None:
     )
 
 def _path_review_command(args: argparse.Namespace) -> None:
+    from .path_evidence import (
+        write_path_review_draft,
+    )
     print(write_path_review_draft(args.workdir, args.dist, args.nebmovie, args.output))
 
 def _ml_neb_validate_command(args: argparse.Namespace) -> None:
+    from .ml_neb_path import validate_gpu_ml_neb_path_manifest
     payload = validate_gpu_ml_neb_path_manifest(args.manifest, require_accepted=args.accepted)
     print(json.dumps({"status": payload["status"], "images": len(payload["images"])}, ensure_ascii=True))
 
 def _ml_neb_finalize_command(args: argparse.Namespace) -> None:
+    from .ml_neb_path import finalize_gpu_ml_neb_path_manifest
     payload = finalize_gpu_ml_neb_path_manifest(args.candidate, args.review, args.output)
     print(json.dumps({"status": payload["status"], "manifest": str(args.output)}, ensure_ascii=True))
 
 def _analyze_command(args: argparse.Namespace) -> None:
+    from .workflow import AnalyzeRequest, analyze_search
     request = AnalyzeRequest(
         workdir=args.workdir,
         contract=args.contract,
@@ -95,6 +59,7 @@ def _analyze_command(args: argparse.Namespace) -> None:
     analyze_search(request)
 
 def _dimer_command(args: argparse.Namespace) -> None:
+    from .handoff import prepare_reviewed_dimer_handoff
     prepare_reviewed_dimer_handoff(
         contract_path=args.contract, analysis=args.analysis, path_review=args.path_review,
         source_image=args.source_image, previous_image=args.previous_image, next_image=args.next_image,
@@ -104,11 +69,15 @@ def _dimer_command(args: argparse.Namespace) -> None:
     print("DRY_RUN" if args.dry_run else args.destination)
 
 def _dimer_analyze_command(args: argparse.Namespace) -> None:
+    from .dimer_analysis import analyze_dimer
     if not args.workdir.is_dir():
         raise SystemExit(f"workdir not found: {args.workdir}")
     print(analyze_dimer(args.workdir)["status"])
 
 def _vfa_prepare_command(args: argparse.Namespace) -> None:
+    from scripts.neb_agent.cli_common import comma_tokens
+    from scripts.ts_validation.prepare_vfa_from_ts_image import prepare_vfa_handoff
+    from .contract import load_contract
     contract = load_contract(args.contract)
     prepare_vfa_handoff(
         args.source_image,
@@ -122,6 +91,7 @@ def _vfa_prepare_command(args: argparse.Namespace) -> None:
     print("DRY_RUN" if args.dry_run else args.destination)
 
 def _validation_pipeline_command(args: argparse.Namespace) -> None:
+    from scripts.ts_validation.validation_pipeline import evaluate_validation_pipeline
     payload = evaluate_validation_pipeline(
         dimer_analysis_path=args.dimer_analysis,
         path_topology_path=args.path_topology,
@@ -139,6 +109,7 @@ def _validation_pipeline_command(args: argparse.Namespace) -> None:
     print(payload["status"])
 
 def _connectivity_prepare_command(args: argparse.Namespace) -> None:
+    from scripts.ts_validation.prepare_connectivity import prepare_connectivity_displacements
     payload = prepare_connectivity_displacements(
         args.source_saddle,
         args.vfa_analysis,
@@ -150,10 +121,13 @@ def _connectivity_prepare_command(args: argparse.Namespace) -> None:
     print(payload["document_kind"])
 
 def _vfa_analyze_command(args: argparse.Namespace) -> None:
+    from scripts.ts_validation.analyze_vfa import analyze_vfa
+    from .contract import load_contract
     contract = load_contract(args.contract)
     print(analyze_vfa(args.workdir, contract, args.review)["status"])
 
 def _connectivity_command(args: argparse.Namespace) -> None:
+    from scripts.ts_validation.connectivity import analyze_bidirectional_connectivity
     payload = analyze_bidirectional_connectivity(
         contract_path=args.contract,
         initial_path=args.initial,
@@ -171,6 +145,12 @@ def _connectivity_command(args: argparse.Namespace) -> None:
     print(payload["status"])
 
 def _record_validation_command(args: argparse.Namespace) -> None:
+    from .evidence import (
+        record_ts_validation,
+    )
+    from .path_evidence import (
+        load_json_object,
+    )
     analysis = load_json_object(args.analysis, "VFA analysis")
     print(
         record_ts_validation(
@@ -183,6 +163,12 @@ def _record_validation_command(args: argparse.Namespace) -> None:
     )
 
 def _record_barrier_command(args: argparse.Namespace) -> None:
+    from .evidence import (
+        record_matched_static_barrier,
+    )
+    from .path_evidence import (
+        load_json_object,
+    )
     learning_record = load_json_object(args.learning_record, "learning record")
     payload = record_matched_static_barrier(
         args.database,
@@ -201,6 +187,10 @@ def _record_barrier_command(args: argparse.Namespace) -> None:
     print(json.dumps(payload, ensure_ascii=False))
 
 def _register_compatibility_command(args: argparse.Namespace) -> None:
+    from .contract import load_contract
+    from .evidence import (
+        register_calculation_compatibility,
+    )
     contract = load_contract(args.contract)
     print(
         register_calculation_compatibility(
@@ -213,12 +203,18 @@ def _register_compatibility_command(args: argparse.Namespace) -> None:
     )
 
 def _record_template_command(args: argparse.Namespace) -> None:
+    from .path_evidence import (
+        load_json_object,
+    )
+    from .templates import record_template
     print(record_template(args.database, load_json_object(args.record, "learning record")))
 
 def _active_learning_command(args: argparse.Namespace) -> None:
+    from .active_learning_cli import main as active_learning_main
     active_learning_main(["--help"] if args.active_learning_help else args.active_learning_args)
 
 def _learning_command(args: argparse.Namespace) -> None:
+    from .learning_cli import main as learning_main
     options = []
     for flag, value in (("--database", args.learning_database), ("--output", args.learning_output)):
         if value is not None:

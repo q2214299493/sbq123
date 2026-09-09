@@ -1,11 +1,11 @@
 ---
 document_class: CURRENT_REFERENCE
-as_of: '2026-09-09T00:00:00+08:00'
-as_of_scope: B6 document review, not a live scientific observation
-source_scope: publication document at B5 baseline; observations retain original dates
-source_version: 3a1bb3f461147a7dc9b5df5efca89de621d27f38
-source_version_role: B6 base commit
-source_branch: codex/b6-documentation-data-governance
+as_of: '2026-09-10T00:00:00+08:00'
+as_of_scope: B7 distribution review, not a live scientific observation
+source_scope: publication document at B6 baseline; observations retain original dates
+source_version: 93c09db8a6008a873ef7cc8bc7b4cc1e2a8cc22a
+source_version_role: B7 base commit
+source_branch: codex/b7-release-environment
 evidence_kind: CURRENT_CODE_STATE_AND_LAST_RECORDED_OBSERVATION
 production_schema_version: NOT_VERIFIED_IN_B6
 governance: docs/DOCUMENT_GOVERNANCE.md
@@ -13,15 +13,15 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Publication scope
 
-CURRENT_CODE_STATE: this B6 branch is based on B5 commit
-`3a1bb3f461147a7dc9b5df5efca89de621d27f38`. Development source remains
+CURRENT_CODE_STATE: this B7 branch is based on B6 commit
+`93c09db8a6008a873ef7cc8bc7b4cc1e2a8cc22a`. Development source remains
 `C:/Users/86177/Desktop/work`; isolated Git worktrees carry reviewed task-owned
 changes on the independent `sbq123` history. They do not imply all development
 changes or private runtime evidence were synchronized.
 
 `configs/public_source_snapshot.json` is the immutable 2026-09-08 initial export
 manifest (source HEAD `3a4c23f3bae8da264323fea75d6fe593ca562845` plus selected dirty
-files). It is HISTORICAL, not a manifest of later B1-B6 commits. Git commits and
+files). It is HISTORICAL, not a manifest of later B1-B7 commits. Git commits and
 scoped completion reports identify subsequent software changes. The manifest is
 not regenerated against missing private data.
 
@@ -29,6 +29,9 @@ No production SQLite database, credentials, POTCAR, full model weights or every
 runtime output is promised. production_schema_version: NOT_VERIFIED_IN_B6.
 See [document governance](DOCUMENT_GOVERNANCE.md) and
 [data policy](../configs/data_governance.yaml).
+
+Wheel contents and repository-only boundaries follow the [installation contract](INSTALLATION.md)
+and [explicit resource inventory](../configs/release_resources.json). A wheel is not a full source/runtime backup.
 
 ## Historical initial release record — 2026-09-08
 

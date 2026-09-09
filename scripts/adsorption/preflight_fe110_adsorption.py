@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 import argparse
 import json
 import re
@@ -9,15 +11,18 @@ from scripts.vasp_result_gate import read_incar_values
 from typing import Any
 
 import yaml
-from pymatgen.io.vasp.inputs import Incar, Kpoints
+from scripts.optional_dependencies import require_optional
 
 from scripts.adsorption.build_fe110_adsorption import read_poscar
 from scripts.artifact_io import sha256_file
 from scripts.vasp_lsf import render_sunboquan_lsf
 
+_vasp_inputs = require_optional("pymatgen.io.vasp.inputs", "adsorption VASP preflight")
+Incar, Kpoints = _vasp_inputs.Incar, _vasp_inputs.Kpoints
+
 
 ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_PROFILE = ROOT / "configs" / "true_fe110_production.yaml"
+DEFAULT_PROFILE = resource_path('configs/true_fe110_production.yaml')
 
 
 def _equal(actual: Any, expected: Any) -> bool:

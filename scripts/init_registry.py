@@ -1,5 +1,9 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import explicit_database
+
+from scripts.runtime_resources import resource_path
+
 import argparse
 from pathlib import Path
 
@@ -11,7 +15,7 @@ except ModuleNotFoundError:
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DB = ROOT / "data" / "project_registry.sqlite3"
-DEFAULT_SCHEMA = ROOT / "modules" / "calculation_registry" / "schema.sql"
+DEFAULT_SCHEMA = resource_path('modules/calculation_registry/schema.sql')
 
 
 def parse_args() -> argparse.Namespace:
@@ -23,6 +27,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
+    args.db = explicit_database(args.db, DEFAULT_DB)
     schema_path = args.schema.resolve()
     database_path = args.db.resolve()
 

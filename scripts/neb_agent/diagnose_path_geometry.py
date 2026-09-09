@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 import argparse
 import json
 from pathlib import Path
@@ -348,7 +350,7 @@ def main() -> None:
     parser.add_argument("--reaction-pair", action="append", default=[])
     parser.add_argument("--fixed-indices", default="")
     parser.add_argument("--expected-interior", type=int)
-    parser.add_argument("--thresholds", type=Path, default=ROOT / "configs" / "neb_agent" / "default_thresholds.yaml")
+    parser.add_argument("--thresholds", type=Path, default=resource_path('configs/neb_agent/default_thresholds.yaml'))
     args = parser.parse_args()
     pairs = [[int(value) for value in token.split(":", 1)] for token in args.reaction_pair]
     payload = diagnose(

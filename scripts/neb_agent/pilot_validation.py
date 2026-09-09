@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 import argparse
 import os
 from pathlib import Path
@@ -21,7 +23,7 @@ from scripts.scheduler_evidence import (
 )
 from scripts.vasp_result_gate import final_scf_status, incar_value, read_incar_values
 
-THRESHOLDS = Path(__file__).parents[2] / "configs" / "neb_agent" / "default_thresholds.yaml"
+THRESHOLDS = resource_path('configs/neb_agent/default_thresholds.yaml')
 SHARED_INPUTS = ("KPOINTS", "POTCAR.spec", "script.lsf")
 
 

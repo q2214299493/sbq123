@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 import argparse
 import json
 import math
@@ -453,7 +455,7 @@ def main() -> None:
     parser.add_argument("--committee-assessment", type=Path)
     parser.add_argument("--descriptor-novelty", type=Path)
     parser.add_argument(
-        "--profile", type=Path, default=ROOT / "configs" / "true_fe110_production.yaml"
+        "--profile", type=Path, default=resource_path('configs/true_fe110_production.yaml')
     )
     args = parser.parse_args()
     batch = prepare_vasp_labels(

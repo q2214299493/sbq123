@@ -1,12 +1,14 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 import sqlite3
 import json
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SCHEMA = ROOT / "modules" / "calculation_registry" / "schema.sql"
+SCHEMA = resource_path('modules/calculation_registry/schema.sql')
 CURRENT_VERSION = 9
 REQUIRED_COLUMNS = {
     "job_recovery_events": {"event_id", "status_event_id", "timestamp", "actor", "reason"},
@@ -316,7 +318,7 @@ def migrate_registry(database: Path, schema: Path = SCHEMA) -> int:
             connection.execute("UPDATE schema_metadata SET value='8' WHERE key='schema_version'")
             version = 8
         if version == 8:
-            _execute_script(connection, (ROOT / "modules/calculation_registry/migrations/009_registry_governance.sql").read_text(encoding="utf-8"))
+            _execute_script(connection, (resource_path('modules/calculation_registry/migrations/009_registry_governance.sql')).read_text(encoding="utf-8"))
         validate_schema(connection)
     return CURRENT_VERSION
 
@@ -333,7 +335,7 @@ def rollback_registry_v9(database: Path) -> int:
         if connection.execute("SELECT 1 FROM compatibility_revisions WHERE revision_id NOT IN "
                               "(SELECT compatibility_fingerprint FROM calculation_compatibility)").fetchone():
             raise ValueError("rollback would discard compatibility revisions")
-        _execute_script(connection, (ROOT / "modules/calculation_registry/migrations/009_registry_governance_rollback.sql").read_text(encoding="utf-8"))
+        _execute_script(connection, (resource_path('modules/calculation_registry/migrations/009_registry_governance_rollback.sql')).read_text(encoding="utf-8"))
         if _schema_version(connection) != 8 or connection.execute("PRAGMA foreign_key_check").fetchall():
             raise ValueError("rollback validation failed")
     return 8

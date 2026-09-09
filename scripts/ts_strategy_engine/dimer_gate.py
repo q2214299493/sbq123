@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 from pathlib import Path
 
 from typing import Any
@@ -23,7 +25,7 @@ from .dimer_gate_common import load_policy as load_policy
 
 ROOT = Path(__file__).resolve().parents[2]
 
-DEFAULT_POLICY = ROOT / "configs" / "dimer_gate.yaml"
+DEFAULT_POLICY = resource_path('configs/dimer_gate.yaml')
 
 def evaluate_candidate_triad(
     previous_path: Path,

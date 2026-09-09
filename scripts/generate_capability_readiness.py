@@ -1,6 +1,8 @@
 """Deterministic derived capability view; never opens a registry or probes deployment."""
 from __future__ import annotations
 
+from scripts.runtime_resources import require_repository_context
+
 import argparse
 import json
 import re
@@ -98,6 +100,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=ROOT)
     args = parser.parse_args()
+    args.root = require_repository_context(args.root)
     for path in generate(args.root.resolve()):
         print(path)
 

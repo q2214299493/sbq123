@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 import itertools
 from dataclasses import dataclass
 from pathlib import Path
@@ -13,8 +15,8 @@ from scripts.workflow_geometry import expand_symbols, minimum_image_delta_xy, pb
 
 SITE_NAMES = ("top", "short_bridge", "long_bridge", "hollow")
 REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_SITE_RULES = REPOSITORY_ROOT / "configs" / "adsmind_lite" / "site_rules.yaml"
-DEFAULT_ANALYSIS_RULES = REPOSITORY_ROOT / "configs" / "adsmind_lite" / "analysis_rules.yaml"
+DEFAULT_SITE_RULES = resource_path('configs/adsmind_lite/site_rules.yaml')
+DEFAULT_ANALYSIS_RULES = resource_path('configs/adsmind_lite/analysis_rules.yaml')
 
 
 @dataclass(frozen=True)

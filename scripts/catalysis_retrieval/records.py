@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -16,7 +18,7 @@ from scripts.scientific_validation import finite_array, integer_number
 
 
 SKILL_ROOT = Path(__file__).resolve().parents[2] / "skills/catalysis-data-retrieval"
-DEFAULT_SOURCES = SKILL_ROOT / "references" / "sources.yaml"
+DEFAULT_SOURCES = resource_path("skills/catalysis-data-retrieval/references/sources.yaml")
 REQUIRED_FIELDS = ("id", "source_id", "source_url", "source_access_verified", "title", "summary", "retrieved_at", "data_types")
 
 

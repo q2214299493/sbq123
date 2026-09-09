@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 from scripts.scientific_validation import finite_number, validate_finite_tree
 
 from pathlib import Path
@@ -10,7 +12,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 
-DEFAULT_POLICY = ROOT / "configs" / "dimer_gate.yaml"
+DEFAULT_POLICY = resource_path('configs/dimer_gate.yaml')
 
 def _finite(value: Any) -> bool:
     if not isinstance(value, (int, float)) or isinstance(value, bool):

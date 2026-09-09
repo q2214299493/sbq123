@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 import argparse
 import json
 import shutil
@@ -13,7 +15,7 @@ from scripts.artifact_io import load_json_object as _load
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PROFILE = ROOT / "configs" / "true_fe110_production.yaml"
+PROFILE = resource_path('configs/true_fe110_production.yaml')
 
 
 

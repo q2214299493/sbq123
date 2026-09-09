@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 from typing import Any
 from scripts.catalysis_retrieval import records as validator
 
@@ -44,7 +46,7 @@ def validate_external_plan(plan: dict, *, species: str, surface: str) -> dict:
     payload = plan.get("source_evidence_payload")
     if not isinstance(payload, dict) or payload.get("species") != species or payload.get("surface") != surface:
         raise ValueError("external plan lacks matching source evidence")
-    path = Path(__file__).resolve().parents[2] / "configs/adsmind_lite/evidence_gate.yaml"
+    path = resource_path('configs/adsmind_lite/evidence_gate.yaml')
     expected = resolve_external_evidence(payload, yaml.safe_load(path.read_text(encoding="utf-8")))
     if expected != plan:
         raise ValueError("external plan is stale or differs from its source evidence")

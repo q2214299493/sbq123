@@ -109,6 +109,7 @@ classes:
   GENERATED_BUILD_METADATA:
     allowed_locations:
     - '*.egg-info/'
+    - '*.dist-info/'
     - __pycache__/
     - .pytest_cache/
     - .ruff_cache/
@@ -151,6 +152,9 @@ rules:
 - patterns:
   - '*.egg-info/*'
   - '**/*.egg-info/*'
+  - '*.dist-info/*'
+  - '**/*.dist-info/*'
+  - '__pycache__/*'
   - '**/__pycache__/*'
   - .pytest_cache/*
   - .ruff_cache/*

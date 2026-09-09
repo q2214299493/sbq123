@@ -9,6 +9,10 @@ receipt in both SQLite and JSON.
 
 from __future__ import annotations
 
+from scripts.runtime_resources import explicit_database, require_repository_context
+
+from scripts.runtime_resources import resource_path
+
 import argparse
 import json
 import os
@@ -29,7 +33,7 @@ from scripts.ts_validation.barrier_values import validate_barrier_values
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DATABASE = ROOT / "data" / "project_registry.sqlite3"
-DEFAULT_WRITER = ROOT / "scripts" / "registry_excel_writer.mjs"
+DEFAULT_WRITER = resource_path('scripts/registry_excel_writer.mjs')
 WRITER_TIMEOUT_SECONDS = 300
 DEFAULT_RECEIPTS = ROOT / "data" / "registry_promotion_receipts"
 PROMOTION_KINDS = {"adsorption", "barrier"}
@@ -564,6 +568,8 @@ def _arguments() -> argparse.ArgumentParser:
 
 def main() -> None:
     args = _arguments().parse_args()
+    require_repository_context(ROOT)
+    args.database = explicit_database(args.database, DEFAULT_DATABASE)
     if args.command == "plan":
         result = build_plan(_request_path(args.request), args.database.resolve())
         write_json_atomic(args.output.resolve(), result)

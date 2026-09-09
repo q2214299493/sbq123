@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path, explicit_database
+from scripts.optional_dependencies import EXTRAS, require_optional
+
 import argparse
 
 from pathlib import Path
@@ -10,9 +13,9 @@ ROOT = Path(__file__).resolve().parents[2]
 
 DEFAULT_DATABASE = ROOT / "data" / "project_registry.sqlite3"
 
-DEFAULT_FAMILIES = ROOT / "configs" / "ts_strategy_engine" / "families.yaml"
+DEFAULT_FAMILIES = resource_path('configs/ts_strategy_engine/families.yaml')
 
-DEFAULT_THRESHOLDS = ROOT / "configs" / "neb_agent" / "default_thresholds.yaml"
+DEFAULT_THRESHOLDS = resource_path('configs/neb_agent/default_thresholds.yaml')
 
 def parser() -> argparse.ArgumentParser:
     root = argparse.ArgumentParser(description="Unified V3 transition-state workflow; never submits calculations.")
@@ -88,7 +91,7 @@ def _add_path_parsers(commands: argparse._SubParsersAction) -> None:
     analysis.add_argument(
         "--quality-thresholds",
         type=Path,
-        default=ROOT / "configs" / "neb_path_quality_control_v2.yaml",
+        default=resource_path('configs/neb_path_quality_control_v2.yaml'),
     )
     analysis.add_argument("--preflight", type=Path)
     analysis.add_argument("--validation", type=Path)
@@ -223,7 +226,16 @@ def _add_registry_parsers(commands: argparse._SubParsersAction) -> None:
 
 def main() -> None:
     args = parser().parse_args()
-    args.handler(args)
+    if hasattr(args, "database"):
+        args.database = explicit_database(args.database, DEFAULT_DATABASE)
+    try:
+        args.handler(args)
+    except ModuleNotFoundError as error:
+        module = (error.name or "").split(".")[0]
+        if module not in EXTRAS:
+            raise
+        require_optional(module, "TS " + args.command)
+        raise
 
 if __name__ == "__main__":
     main()

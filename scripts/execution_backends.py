@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from typing import Any
@@ -8,7 +10,7 @@ import yaml
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_CONFIG = ROOT / "configs" / "execution_backends.yaml"
+DEFAULT_CONFIG = resource_path('configs/execution_backends.yaml')
 
 
 @dataclass(frozen=True)

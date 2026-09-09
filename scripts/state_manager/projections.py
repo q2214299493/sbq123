@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 import json
 import re
 from pathlib import Path
@@ -12,7 +14,7 @@ from scripts.artifact_io import sha256_file
 from .models import ROOT, StateEvent
 
 
-DEFAULT_POLICY = ROOT / "configs" / "state_handoff.yaml"
+DEFAULT_POLICY = resource_path('configs/state_handoff.yaml')
 START_MARKER = "<!-- state-handoff:start {block_id} -->"
 END_MARKER = "<!-- state-handoff:end {block_id} -->"
 EXECUTION_BACKEND_CONSTRAINT = (

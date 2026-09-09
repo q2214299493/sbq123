@@ -1,6 +1,8 @@
 """Review the Fe45-C2-O-H2 O-H NEB with its verified 50-atom mapping; no jobs."""
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 import argparse
 import shutil
 from pathlib import Path
@@ -106,7 +108,7 @@ def main() -> None:
                      "toten_eV": parsed["final_toten_eV"], "distances_A": distances,
                      "max_neighbor_step_A": float(np.linalg.norm((normed.frac-structures[-1].frac) @ raw.cell, axis=1).max()) if structures else 0.0})
         structures.append(normed)
-    thresholds = Path("configs/neb_agent/default_thresholds.yaml")
+    thresholds = resource_path("configs/neb_agent/default_thresholds.yaml")
     analysis = analyze(dest, thresholds, contract["reaction_atoms"])
     for row, evidence in zip(analysis["images"], rows, strict=True):
         row["diagnostic_sigma0_energy_eV"] = row["final_energy_eV"]

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -296,7 +298,7 @@ def _path_quality(
         }
     quality_path = request.quality_thresholds
     if not quality_path.is_absolute():
-        quality_path = Path(__file__).resolve().parents[2] / quality_path
+        quality_path = resource_path(quality_path)
     report = build_path_quality_report(
         PathQualityRequest(
             workdir=request.workdir,

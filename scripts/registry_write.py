@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import explicit_database
+
 import argparse
 import json
 from pathlib import Path
@@ -25,6 +27,7 @@ def main() -> None:
     parser.add_argument("--approval", type=Path)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
+    args.db = explicit_database(args.db, DEFAULT_DATABASE)
     batch = load_registry_batch(args.manifest)
     if args.command == "plan":
         result = plan_registry_batch(args.db, batch)

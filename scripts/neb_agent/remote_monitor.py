@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 import argparse
 import re
 import shlex
@@ -9,7 +11,7 @@ from pathlib import Path
 from typing import Sequence
 
 
-DEFAULT_SCRIPT = Path(__file__).with_name("check_neb_job.sh")
+DEFAULT_SCRIPT = resource_path("scripts/neb_agent/check_neb_job.sh")
 HOST_PATTERN = re.compile(r"[A-Za-z0-9_.@-]+")
 SSH_TIMEOUT_SECONDS = 60
 

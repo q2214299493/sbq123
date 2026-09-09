@@ -1,7 +1,4 @@
 """Legacy skill CLI/import facade for scripts.catalysis_retrieval.records."""
-import argparse
-import json
-from pathlib import Path
 from scripts.catalysis_retrieval.records import (
     load_source_config as load_source_config,
     source_map as source_map,
@@ -18,16 +15,11 @@ from scripts.catalysis_retrieval.records import (
 )
 
 
+from scripts.catalysis_retrieval.validate_cli import main as installed_main
+
+
 def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("records", type=Path)
-    parser.add_argument("--sources", type=Path, default=DEFAULT_SOURCES)
-    args = parser.parse_args()
-    records = load_jsonl(args.records)
-    failures = validate_records(records, load_source_config(args.sources))
-    print(json.dumps({"records": len(records), "valid": not failures, "failures": failures}, ensure_ascii=False, indent=2))
-    if failures:
-        raise SystemExit(2)
+    installed_main()
 
 
 if __name__ == "__main__":

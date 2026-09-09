@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 import argparse
 from pathlib import Path
 
@@ -14,7 +16,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Mark duplicate relaxed adsorption states using compact fingerprints and RMSD.")
     parser.add_argument("--input", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--analysis-rules", type=Path, default=ROOT / "configs" / "adsmind_lite" / "analysis_rules.yaml")
+    parser.add_argument("--analysis-rules", type=Path, default=resource_path('configs/adsmind_lite/analysis_rules.yaml'))
     return parser.parse_args()
 
 

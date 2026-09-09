@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 import shutil
 
 from collections.abc import Callable
@@ -55,7 +57,7 @@ def _prepare_label_request(
     label_policy = policy["vasp_force_label"]
     profile_path = Path(label_policy["input_profile"])
     if not profile_path.is_absolute():
-        profile_path = ROOT / profile_path
+        profile_path = resource_path(profile_path)
     inputs = build_fe110_active_learning_force_label(destination, profile_path=profile_path)
     if inputs["stage"] != label_policy["input_stage"]:
         raise ValueError("active-learning VASP input stage does not match the production profile")

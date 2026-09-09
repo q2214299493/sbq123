@@ -7,10 +7,12 @@ submits or executes a job.
 
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 from pathlib import Path
 
 
-TEMPLATE = Path(__file__).with_name("templates") / "sunboquan_vasp.lsf"
+TEMPLATE = resource_path("scripts/templates/sunboquan_vasp.lsf")
 
 
 def render_sunboquan_lsf(cores: int, *, template: Path = TEMPLATE) -> str:

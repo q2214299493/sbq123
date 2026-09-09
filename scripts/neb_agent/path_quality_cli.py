@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 import argparse
 import sys
 from pathlib import Path
@@ -35,11 +37,11 @@ def main() -> int:
     parser.add_argument("--reaction-pair", type=_pair, required=True)
     parser.add_argument("--important-interval", type=_interval, required=True)
     parser.add_argument("--monitor-evidence", type=Path)
-    parser.add_argument("--thresholds", type=Path, default=ROOT / "configs" / "neb_path_quality_control_v2.yaml")
+    parser.add_argument("--thresholds", type=Path, default=resource_path('configs/neb_path_quality_control_v2.yaml'))
     parser.add_argument(
         "--geometry-thresholds",
         type=Path,
-        default=ROOT / "configs" / "neb_agent" / "default_thresholds.yaml",
+        default=resource_path('configs/neb_agent/default_thresholds.yaml'),
     )
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()

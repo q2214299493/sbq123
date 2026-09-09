@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 import argparse
 import shutil
 from pathlib import Path
@@ -163,7 +165,7 @@ def make_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--schema",
         type=Path,
-        default=Path(__file__).resolve().parents[1] / "configs" / "aqcat25_handoff.schema.json",
+        default=resource_path('configs/aqcat25_handoff.schema.json'),
     )
     return parser
 

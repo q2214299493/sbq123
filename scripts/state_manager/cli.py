@@ -34,6 +34,8 @@ def _paths(args: argparse.Namespace) -> tuple[Path, Path, Path, Path]:
     schema = Path(args.schema).resolve() if args.schema else root / "configs" / "state_handoff_event.schema.json"
     import yaml
 
+    if not policy.is_file():
+        raise ValueError("REPOSITORY_CONTEXT_REQUIRED: --root must supply the state policy and managed workspace")
     config = yaml.safe_load(policy.read_text(encoding="utf-8"))
     events = root / config["paths"]["events"]
     return root, policy, schema, events

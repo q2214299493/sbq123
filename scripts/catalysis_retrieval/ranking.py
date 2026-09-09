@@ -106,12 +106,8 @@ def semantic_scores(
         if vectors.ndim != 2 or vectors.shape[1] != query_vector.shape[0]:
             raise ValueError("record and query embedding dimensions do not match")
         return cosine_scores(query_vector, vectors), "precomputed-source-bound"
-    try:
-        from sentence_transformers import SentenceTransformer
-    except ImportError as exc:
-        raise RuntimeError(
-            "sentence-transformers is required for production hybrid search; install it or provide reviewed precomputed embeddings"
-        ) from exc
+    from scripts.optional_dependencies import require_optional
+    SentenceTransformer = require_optional("sentence_transformers", "semantic retrieval").SentenceTransformer
     model = SentenceTransformer(model_name)
     encoded = model.encode([query, *documents], normalize_embeddings=True, show_progress_bar=False)
     return cosine_scores(np.asarray(encoded[0]), np.asarray(encoded[1:])), f"sentence-transformers:{model_name}"

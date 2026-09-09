@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from scripts.runtime_resources import resource_path
+
 from pathlib import Path
 from typing import Any
 
@@ -14,7 +16,7 @@ from scripts.artifact_io import (
 
 
 ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_POLICY = ROOT / "configs" / "ts_validation_pipeline.yaml"
+DEFAULT_POLICY = resource_path('configs/ts_validation_pipeline.yaml')
 
 
 def evaluate_validation_pipeline(

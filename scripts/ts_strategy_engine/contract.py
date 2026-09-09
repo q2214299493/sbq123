@@ -274,7 +274,8 @@ def _normalize_contract_payload(payload: dict[str, Any]) -> dict[str, Any]:
     }
     _validate_atom_coverage(normalized)
     if "atom_symbols" in payload:
-        from pymatgen.core import Element
+        from scripts.optional_dependencies import require_optional
+        Element = require_optional("pymatgen.core", "contract element validation").Element
 
         symbols = payload["atom_symbols"]
         if not isinstance(symbols, list) or len(symbols) != len(normalized["atom_map"]):
