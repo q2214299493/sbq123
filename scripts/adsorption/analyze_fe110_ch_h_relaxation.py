@@ -5,6 +5,10 @@ import json
 import re
 from pathlib import Path
 
+from scripts.vasp_result_gate import final_scf_status
+
+from scripts.neb_agent.utils_vasp import parse_outcar as parse_outcar_state
+
 import numpy as np
 
 from scripts.adsorption.build_fe110_adsorption import (
@@ -45,10 +49,14 @@ def parse_oszicar(path: Path, nelm: int) -> dict[str, object]:
                     }
                 )
                 current_electronic_iterations = 0
+    try:
+        scf = final_scf_status(path, path.parent / "INCAR", path.parent / "OUTCAR")
+    except (OSError, ValueError):
+        scf = {"electronically_converged": False}
     return {
         "ionic_steps": len(ionic_steps),
         "last_ionic": ionic_steps[-1] if ionic_steps else None,
-        "final_electronic_converged": bool(electronic_iterations and electronic_iterations[-1] < nelm),
+        "final_electronic_converged": scf["electronically_converged"],
         "nelm_exhausted_ionic_steps": [
             index + 1 for index, count in enumerate(electronic_iterations) if count >= nelm
         ],
@@ -56,6 +64,7 @@ def parse_oszicar(path: Path, nelm: int) -> dict[str, object]:
 
 
 def parse_outcar(path: Path, movable_indices: list[int]) -> dict[str, object]:
+    state = parse_outcar_state(path)
     last_toten = None
     last_forces: list[list[float]] = []
     collecting_forces = False
@@ -70,9 +79,9 @@ def parse_outcar(path: Path, movable_indices: list[int]) -> dict[str, object]:
             if match:
                 last_toten = float(match.group(1))
             if "reached required accuracy - stopping structural energy minimisation" in line:
-                reached_accuracy = True
+                reached_accuracy = state.get("reached_required_accuracy", False)
             if "General timing and accounting informations for this job" in line:
-                normal_footer = True
+                normal_footer = state.get("normal_completion", False)
             for marker in markers:
                 if marker in line and marker not in fatal_markers:
                     fatal_markers.append(marker)

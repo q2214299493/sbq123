@@ -5,6 +5,8 @@ import hashlib
 import json
 from datetime import datetime, timezone
 from pathlib import Path
+
+from scripts.vasp_result_gate import read_incar_values
 from typing import Any
 
 from scripts.artifact_io import sha256_json
@@ -124,11 +126,7 @@ def build_batch() -> dict[str, Any]:
                 "license_or_sensitivity": "licensed_vasp_potential_no_local_copy",
             }
         )
-        incar = {
-            line.split("=", 1)[0].strip(): line.split("=", 1)[1].strip()
-            for line in (local / "INCAR").read_text(encoding="ascii").splitlines()
-            if "=" in line
-        }
+        incar = read_incar_values(local / "INCAR")
         compatibility = {
             "code": "VASP 5.4.1",
             "xc": incar["GGA"],

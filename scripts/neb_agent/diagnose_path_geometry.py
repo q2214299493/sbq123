@@ -3,6 +3,9 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+
+from scripts.vasp_result_gate import read_incar_values
+from scripts.scientific_validation import integer_number
 from typing import Any
 
 import numpy as np
@@ -52,19 +55,8 @@ def _reaction_indices(labels: list[str], tokens: list[str]) -> tuple[list[int], 
 
 
 def _incar_images(path: Path) -> int | None:
-    if not path.is_file():
-        return None
-    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
-        clean = line.split("#", 1)[0]
-        if "=" not in clean:
-            continue
-        key, value = (part.strip() for part in clean.split("=", 1))
-        if key.upper() == "IMAGES":
-            try:
-                return int(value.split()[0])
-            except ValueError:
-                return None
-    return None
+    values = read_incar_values(path) if path.is_file() else {}
+    return integer_number(values["IMAGES"], "IMAGES", nonnegative=True) if "IMAGES" in values else None
 
 
 def _expected_interior(workdir: Path, explicit: int | None) -> int | None:

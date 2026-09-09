@@ -6,6 +6,7 @@ from typing import Any
 import yaml
 
 from scripts.artifact_io import sha256_json
+from scripts.scientific_validation import finite_number, integer_number, validate_finite_tree
 
 
 COMPATIBILITY_FIELDS = (
@@ -50,16 +51,15 @@ def load_contract(path: Path) -> dict[str, Any]:
     payload = yaml.safe_load(path.read_text(encoding="utf-8"))
     if not isinstance(payload, dict):
         raise ValueError("reaction contract must be a JSON/YAML object")
-    normalized = _verified_normalized_contract(payload)
-    if normalized is not None:
-        return normalized
     return normalize_contract(payload)
 
 
 def _verified_normalized_contract(payload: dict[str, Any]) -> dict[str, Any] | None:
     hashes = ("atom_map_sha256", "compatibility_sha256", "contract_sha256")
-    if payload.get("version") != 1 or not all(payload.get(field) for field in hashes):
+    if not any(field in payload for field in hashes):
         return None
+    if payload.get("version") != 1 or not all(payload.get(field) for field in hashes):
+        raise ValueError("normalized contract requires version 1 and all identity hashes")
     missing = [field for field in REQUIRED_FIELDS if field not in payload]
     if missing:
         raise ValueError("normalized reaction contract missing: " + ", ".join(missing))
@@ -71,19 +71,14 @@ def _verified_normalized_contract(payload: dict[str, Any]) -> dict[str, Any] | N
         raise ValueError("normalized reaction contract atom-map hash mismatch")
     if payload["compatibility_sha256"] != sha256_json(payload["compatibility"]):
         raise ValueError("normalized reaction contract compatibility hash mismatch")
+    canonical = _normalize_contract_payload(payload)
+    if any(payload.get(key) != value for key, value in canonical.items()):
+        raise ValueError("normalized reaction contract is not semantically canonical")
     return payload
 
 
 def _integer(value: Any, label: str) -> int:
-    if isinstance(value, bool):
-        raise ValueError(f"{label} must be an integer")
-    try:
-        integer = int(value)
-    except (TypeError, ValueError) as exc:
-        raise ValueError(f"{label} must be an integer") from exc
-    if str(value).strip() not in {str(integer), f"{integer}.0"}:
-        raise ValueError(f"{label} must be an integer")
-    return integer
+    return integer_number(value, label)
 
 
 def _index(value: Any, index_base: int, label: str) -> int:
@@ -129,8 +124,10 @@ def _atom_map(values: Any, index_base: int) -> list[dict[str, int]]:
 
 
 def _nonempty_text(value: Any, label: str) -> str:
-    text = str(value).strip()
-    if not text:
+    if not isinstance(value, str):
+        raise ValueError(f"{label} must be text")
+    text = value.strip()
+    if not text or text.lower() in {"none", "nan", "inf", "+inf", "-inf"}:
         raise ValueError(f"{label} must be non-empty")
     return text
 
@@ -151,7 +148,7 @@ def _reaction_coordinates(values: Any, index_base: int) -> list[dict[str, Any]]:
         interval = value.get("important_interval_A")
         if not isinstance(interval, (list, tuple)) or len(interval) != 2:
             raise ValueError(f"reaction_coordinates[{position}].important_interval_A must contain two values")
-        low, high = (float(interval[0]), float(interval[1]))
+        low, high = (finite_number(item, "reaction coordinate interval", positive=True) for item in interval)
         if low <= 0 or low >= high:
             raise ValueError(f"reaction_coordinates[{position}].important_interval_A is invalid")
         normalized.append(
@@ -182,10 +179,12 @@ def _normalize_compatibility(value: Any) -> dict[str, Any]:
     if missing_compatibility:
         raise ValueError("missing compatibility fields: " + ", ".join(missing_compatibility))
     normalized = {field: value[field] for field in COMPATIBILITY_FIELDS}
-    normalized["kmesh"] = [_integer(item, "compatibility.kmesh") for item in value["kmesh"]]
+    if not isinstance(value["kmesh"], (list, tuple)):
+        raise ValueError("compatibility.kmesh must be a three-integer sequence")
+    normalized["kmesh"] = [integer_number(item, "compatibility.kmesh", positive=True) for item in value["kmesh"]]
     if len(normalized["kmesh"]) != 3:
         raise ValueError("compatibility.kmesh must contain three integers")
-    normalized["encut_ev"] = float(value["encut_ev"])
+    normalized["encut_ev"] = finite_number(value["encut_ev"], "compatibility.encut_ev", positive=True)
     for field in set(COMPATIBILITY_FIELDS) - {"encut_ev", "kmesh"}:
         normalized[field] = _nonempty_text(normalized[field], f"compatibility.{field}").lower()
     present = set(FINAL_ENERGY_COMPATIBILITY_FIELDS) & set(value)
@@ -195,8 +194,8 @@ def _normalize_compatibility(value: Any) -> dict[str, Any]:
     if not present:
         return normalized
     normalized["ismear"] = _integer(value["ismear"], "compatibility.ismear")
-    normalized["sigma_ev"] = float(value["sigma_ev"])
-    normalized["vacuum_thickness_angstrom"] = float(value["vacuum_thickness_angstrom"])
+    normalized["sigma_ev"] = finite_number(value["sigma_ev"], "compatibility.sigma_ev", nonnegative=True)
+    normalized["vacuum_thickness_angstrom"] = finite_number(value["vacuum_thickness_angstrom"], "compatibility.vacuum_thickness_angstrom", positive=True)
     if normalized["sigma_ev"] < 0:
         raise ValueError("compatibility.sigma_ev must be non-negative")
     if normalized["vacuum_thickness_angstrom"] <= 0:
@@ -219,6 +218,16 @@ def _normalize_compatibility(value: Any) -> dict[str, Any]:
 
 
 def normalize_contract(payload: dict[str, Any]) -> dict[str, Any]:
+    if not isinstance(payload, dict):
+        raise ValueError("reaction contract must be an object")
+    if "version" in payload and payload["version"] != 1:
+        raise ValueError("reaction contract version must be 1")
+    validate_finite_tree(payload, "contract")
+    normalized = _verified_normalized_contract(payload)
+    return normalized if normalized is not None else _normalize_contract_payload(payload)
+
+
+def _normalize_contract_payload(payload: dict[str, Any]) -> dict[str, Any]:
     missing = [field for field in REQUIRED_FIELDS if field not in payload]
     if missing:
         raise ValueError("missing reaction contract fields: " + ", ".join(missing))
@@ -226,6 +235,9 @@ def normalize_contract(payload: dict[str, Any]) -> dict[str, Any]:
     if index_base not in {0, 1}:
         raise ValueError("index_base must be 0 or 1")
 
+    for key in ("reaction_atoms", "site_changes", "waypoint_files"):
+        if not isinstance(payload.get(key, []), list):
+            raise ValueError(f"{key} must be a list")
     normalized_compatibility = _normalize_compatibility(payload["compatibility"])
 
     endpoints = payload["endpoints"]
@@ -257,12 +269,37 @@ def normalize_contract(payload: dict[str, Any]) -> dict[str, Any]:
         "site_changes": sorted({_nonempty_text(value, "site_changes").lower() for value in payload["site_changes"]}),
         "compatibility": normalized_compatibility,
         "endpoints": normalized_endpoints,
-        "waypoint_files": [str(Path(value)) for value in payload.get("waypoint_files", [])],
+        "waypoint_files": [str(Path(_nonempty_text(value, "waypoint_files"))) for value in payload.get("waypoint_files", [])],
         "retrieval_constraints": payload.get("retrieval_constraints"),
     }
+    _validate_atom_coverage(normalized)
+    if "atom_symbols" in payload:
+        from pymatgen.core import Element
+
+        symbols = payload["atom_symbols"]
+        if not isinstance(symbols, list) or len(symbols) != len(normalized["atom_map"]):
+            raise ValueError("atom_symbols must label every mapped atom")
+        normalized["atom_symbols"] = [Element(_nonempty_text(item, "atom_symbols")).symbol for item in symbols]
+    normalized["atom_map_sha256"] = sha256_json(normalized["atom_map"])
+    normalized["compatibility_sha256"] = sha256_json(normalized["compatibility"])
+    normalized["contract_sha256"] = sha256_json(normalized)
+    return normalized
+
+
+def _validate_atom_coverage(normalized: dict[str, Any]) -> None:
     if not normalized["reaction_atoms"]:
         raise ValueError("reaction_atoms must contain explicit numeric atom indices")
     mapped = {item["is"] for item in normalized["atom_map"]}
+    expected = list(range(len(normalized["atom_map"])))
+    if any(sorted(item[side] for item in normalized["atom_map"]) != expected for side in ("is", "fs")):
+        raise ValueError("atom_map must cover each endpoint atom exactly once")
+    fixed = normalized["compatibility"].get("fixed_atom_indices_zero_based", [])
+    if not set(fixed) <= mapped:
+        raise ValueError("fixed atom indices must exist in atom_map")
+    if any(len(set(item["atoms"])) != 2 for item in normalized["reaction_coordinates"]):
+        raise ValueError("reaction coordinate must reference two distinct atoms")
+    if set(map(tuple, normalized["broken_bonds"])) & set(map(tuple, normalized["formed_bonds"])):
+        raise ValueError("one bond cannot be both broken and formed")
     if not set(normalized["reaction_atoms"]) <= mapped:
         raise ValueError("every reaction atom must exist in atom_map")
     for label in ("broken_bonds", "formed_bonds"):
@@ -270,7 +307,3 @@ def normalize_contract(payload: dict[str, Any]) -> dict[str, Any]:
             raise ValueError(f"every {label} atom must exist in atom_map")
     if any(not set(item["atoms"]) <= mapped for item in normalized["reaction_coordinates"]):
         raise ValueError("every reaction-coordinate atom must exist in atom_map")
-    normalized["atom_map_sha256"] = sha256_json(normalized["atom_map"])
-    normalized["compatibility_sha256"] = sha256_json(normalized["compatibility"])
-    normalized["contract_sha256"] = sha256_json(normalized)
-    return normalized

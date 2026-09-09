@@ -3,6 +3,8 @@ from __future__ import annotations
 from typing import Any
 
 from .execution_gate import decide_execution
+from .fingerprint import family_event_matches
+from scripts.scientific_validation import finite_number, integer_number, validate_finite_tree
 from .strategy_learning import reference_methods
 
 def _family_rule(family: str, config: dict[str, Any]) -> tuple[str, dict[str, Any] | None]:
@@ -19,15 +21,17 @@ def compose_strategy(
     ranked: list[dict[str, Any]],
     config: dict[str, Any],
 ) -> dict[str, Any]:
-    family_contract_valid = True
-    threshold = float(
-        config.get("strategy_transfer_threshold", config["template_transfer_threshold"])
+    validate_finite_tree(config, "strategy configuration")
+    family, family_rule = _family_rule(fingerprint["reaction_family"], config)
+    family_contract_valid = family_event_matches(fingerprint, family_rule or {})
+    threshold = finite_number(
+        config.get("strategy_transfer_threshold", config["template_transfer_threshold"]), "strategy transfer threshold", nonnegative=True
     )
     accepted = next(
         (
             item
             for item in ranked
-            if item.get("strategy_transferable") and item["score"] >= threshold
+            if family_contract_valid and item.get("strategy_transferable") and item["score"] >= threshold
         ),
         None,
     )
@@ -67,22 +71,17 @@ def compose_strategy(
                 "vasp_candidate_methods",
                 ["ordinary_neb", "ci_neb", "gpu_ml_neb_vasp_validated_triad"],
             ),
-            "initial_images": int(rule.get("initial_images", 3)),
+            "initial_images": integer_number(rule.get("initial_images", 3), "initial_images", positive=True),
             "image_policy": "start_minimal_then_add_only_at_large_displacement_or_high_curvature",
             "selection_policy": "choose_from_reviewed_path_evidence_not_a_fixed_sequence",
         }
         dimer = {"policy": rule.get("dimer_usage", "conditional_refinement")}
         template_match = None
-        required_broken = {str(value).lower() for value in rule.get("broken_bonds", [])}
-        required_formed = {str(value).lower() for value in rule.get("formed_bonds", [])}
-        declared_broken = bool(fingerprint["broken_bonds"])
-        declared_formed = bool(fingerprint["formed_bonds"])
-        family_contract_valid = (not required_broken or declared_broken) and (not required_formed or declared_formed)
     return {
         "version": 5,
         "status": (
             "STOP_FAMILY_CONTRACT_MISMATCH"
-            if not accepted and not family_contract_valid
+            if not family_contract_valid
             else "NEEDS_GPU_PATH_OR_VASP_PATH_REVIEW"
         ),
         "strategy_source": source,

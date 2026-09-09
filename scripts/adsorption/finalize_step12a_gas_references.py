@@ -7,6 +7,10 @@ import math
 import re
 from datetime import datetime, timezone
 from pathlib import Path
+
+from scripts.neb_agent.utils_vasp import parse_outcar as parse_outcar_state
+
+from scripts.vasp_result_gate import read_incar_values as incar_values
 from typing import Any
 
 from scripts.adsorption.build_gas_step12a_references import SPECIES as NEW_SPECIES
@@ -57,14 +61,7 @@ ADSORPTION_CALCULATIONS = {
 
 
 
-def incar_values(path: Path) -> dict[str, str]:
-    values: dict[str, str] = {}
-    for raw in path.read_text(encoding="utf-8", errors="replace").splitlines():
-        line = raw.split("!", 1)[0].split("#", 1)[0]
-        if "=" in line:
-            key, value = line.split("=", 1)
-            values[key.strip().upper()] = value.strip()
-    return values
+
 
 
 def parse_poscar(path: Path) -> tuple[list[str], list[list[float]]]:
@@ -96,10 +93,11 @@ def distance(a: list[float], b: list[float]) -> float:
 
 
 def parse_outcar(path: Path) -> dict[str, Any]:
+    state = parse_outcar_state(path)
     last_toten: float | None = None
-    normal = False
-    reached = False
-    ediff = False
+    normal = state.get("normal_completion", False)
+    reached = state.get("reached_required_accuracy", False)
+    ediff = state.get("electronic_convergence_reached", False)
     fatal: list[str] = []
     collecting = False
     current: list[tuple[float, float, float]] = []
@@ -109,9 +107,6 @@ def parse_outcar(path: Path) -> dict[str, Any]:
             match = TOTEN_RE.search(raw)
             if match:
                 last_toten = float(match.group(1))
-            normal |= "General timing and accounting informations for this job" in raw
-            reached |= "reached required accuracy - stopping structural energy minimisation" in raw
-            ediff |= "aborting loop because EDIFF is reached" in raw
             for marker in FATAL_MARKERS:
                 if marker in raw and marker not in fatal:
                     fatal.append(marker)

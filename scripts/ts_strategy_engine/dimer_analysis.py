@@ -1,6 +1,9 @@
 from __future__ import annotations
 
 from pathlib import Path
+
+from scripts.vasp_result_gate import read_incar_values
+from scripts.scientific_validation import finite_number
 from typing import Any
 
 from scripts.aqcat25_ts_schema import load_document
@@ -14,22 +17,13 @@ from scripts.vasp_result_gate import final_scf_status, incar_value, validate_lsf
 def _ediffg(path: Path) -> float | None:
     if not path.is_file():
         return None
-    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
-        clean = line.split("#", 1)[0]
-        if "=" not in clean:
-            continue
-        key, value = (part.strip() for part in clean.split("=", 1))
-        if key.upper() == "EDIFFG":
-            try:
-                return float(value.split()[0])
-            except ValueError:
-                return None
-    return None
+    values = read_incar_values(path)
+    return finite_number(values["EDIFFG"], "EDIFFG") if "EDIFFG" in values else None
 
 
 def _positive_incar_float(path: Path, key: str) -> float | None:
     try:
-        value = float(incar_value(path, key))
+        value = finite_number(incar_value(path, key), key, positive=True)
     except (OSError, TypeError, ValueError):
         return None
     return value if value > 0 else None
@@ -46,7 +40,7 @@ def parse_dimcar(path: Path) -> list[dict[str, float | int | None]]:
         values: list[float | None] = []
         for value in fields[1:6]:
             try:
-                values.append(float(value))
+                values.append(finite_number(value, "DIMCAR"))
             except ValueError:
                 values.append(None)
         rows.append(

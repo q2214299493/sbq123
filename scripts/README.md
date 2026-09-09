@@ -24,6 +24,26 @@ Current executable code lives only under `scripts/` or a repository-backed skill
   executor. It records recoverable submission attempts, treats timeout and
   unknown scheduler state as non-success, and follows `SUBMISSION_RECOVERY.md`
   before any retry.
+- `neb_agent/utils_vasp.py`: authoritative streaming OUTCAR/OSZICAR electronic
+  cycle parsing. Latest started and completed cycles are distinct; a newer
+  incomplete cycle cannot inherit an older cycle's convergence.
+- `vasp_result_gate.py`: authoritative string-valued INCAR reader and final
+  electronic-state interpretation. INCAR accepts semicolons, comments, case
+  variants and repeated identical tags; conflicting duplicate assignments fail.
+  `final_scf_status` preserves its six-field public summary; `include_cycles=True`
+  exposes explicit completeness and final-cycle evidence. Consumers with parsed
+  output use `final_scf_state` instead of parsing twice. Legacy remote backfill
+  sends this same parser source in memory, without a maintained remote copy.
+- `scientific_validation.py`: shared finite scalar and physical-range validation;
+  it defines no scientific thresholds or acceptance policies.
+- `ts_strategy_engine/contract.py`: one semantic validator for raw and normalized
+  contracts. Hash verification proves identity and never skips semantic checks.
+- `ts_strategy_engine/fingerprint.py`: separate element-labelled chemical events,
+  structural similarity and exact reusable-result identity. Planning obtains
+  species from validated endpoint structures; optional contract `atom_symbols`
+  must agree with them. The legacy `fingerprint_id` remains a path-binding key,
+  not sufficient evidence for scientific result reuse. `strategy.py` consumes
+  these events and the existing family definitions.
 - `convergence/`: reusable convergence-campaign setup and summary tools.
 - `adsorption/`: reusable clean-slab site generation and anchor-based adsorbate placement.
 - `adsmind_lite/`: compact CLIs plus focused site detection, candidate generation,

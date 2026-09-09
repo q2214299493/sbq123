@@ -4,6 +4,8 @@ import argparse
 import math
 import re
 from pathlib import Path
+
+from scripts.scientific_validation import finite_number, validate_finite_tree
 from typing import Any
 
 import yaml
@@ -20,15 +22,20 @@ DEFAULT_PROFILE = Path(__file__).resolve().parents[2] / "configs" / "true_fe110_
 
 def _frequency_policy(override: dict[str, Any] | None) -> dict[str, Any]:
     if override is not None:
+        validate_finite_tree(override, "frequency policy")
         return override
     profile = yaml.safe_load(DEFAULT_PROFILE.read_text(encoding="utf-8"))
-    return profile["transition_state"]["vfa"]["validation"]
+    policy = profile["transition_state"]["vfa"]["validation"]
+    validate_finite_tree(policy, "frequency policy")
+    return policy
 
 
 def _frequency_modes(text: str) -> list[dict[str, Any]]:
     lines = text.splitlines()
     modes: list[dict[str, Any]] = []
     for position, line in enumerate(lines):
+        if "cm-1" in line:
+            validate_finite_tree(line.split(), "frequency row")
         match = FREQUENCY_PATTERN.search(line)
         if not match:
             continue
@@ -48,8 +55,9 @@ def _frequency_modes(text: str) -> list[dict[str, Any]]:
                 atom_index = len(vectors)
                 vector_fields = fields[-3:]
             if atom_index is not None:
+                validate_finite_tree(vector_fields, "frequency eigenvector")
                 try:
-                    dx, dy, dz = (float(value) for value in vector_fields)
+                    dx, dy, dz = (finite_number(value, "frequency eigenvector") for value in vector_fields)
                 except ValueError:
                     continue
                 vectors.append(
@@ -68,7 +76,7 @@ def _frequency_modes(text: str) -> list[dict[str, Any]]:
             {
                 "mode_index": int(match.group(1)),
                 "imaginary": bool(match.group(2)),
-                "frequency_cm1": float(match.group(3)),
+                "frequency_cm1": finite_number(match.group(3), "frequency cm-1"),
                 "dominant_atoms": sorted(vectors, key=lambda item: float(item["amplitude"]), reverse=True)[:10],
             }
         )

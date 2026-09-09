@@ -3,6 +3,9 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+from scripts.vasp_result_gate import final_scf_state, read_incar_values
+from scripts.scientific_validation import finite_number, integer_number, validate_finite_tree
+
 import yaml
 
 from scripts.artifact_io import source_file_manifest
@@ -22,53 +25,20 @@ from .utils_vasp import (
 ROOT = Path(__file__).resolve().parents[2]
 
 
-def _incar_integer(path: Path, key: str) -> int | None:
-    if not path.is_file():
-        return None
-    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
-        clean = line.split("#", 1)[0].strip()
-        if "=" not in clean:
-            continue
-        name, value = (part.strip() for part in clean.split("=", 1))
-        if name.upper() == key.upper():
-            try:
-                return int(float(value.split()[0]))
-            except ValueError:
-                return None
-    return None
+def _incar_integer(path: Path, key: str):
+    values = read_incar_values(path) if path.is_file() else {}
+    return integer_number(values[key], key) if key in values else None
 
 
-def _incar_float(path: Path, key: str) -> float | None:
-    if not path.is_file():
-        return None
-    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
-        clean = line.split("#", 1)[0].strip()
-        if "=" not in clean:
-            continue
-        name, value = (part.strip() for part in clean.split("=", 1))
-        if name.upper() == key.upper():
-            try:
-                return float(value.split()[0])
-            except ValueError:
-                return None
-    return None
+def _incar_float(path: Path, key: str):
+    values = read_incar_values(path) if path.is_file() else {}
+    return finite_number(values[key], key) if key in values else None
 
 
 def _incar_logical(path: Path, key: str) -> bool | None:
-    if not path.is_file():
-        return None
-    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
-        clean = line.split("#", 1)[0].strip()
-        if "=" not in clean:
-            continue
-        name, value = (part.strip() for part in clean.split("=", 1))
-        if name.upper() == key.upper():
-            token = value.split()[0].strip(".").upper()
-            if token in {"TRUE", "T"}:
-                return True
-            if token in {"FALSE", "F"}:
-                return False
-    return None
+    values = read_incar_values(path) if path.is_file() else {}
+    token = values.get(key, "").strip(".").upper()
+    return {"T": True, "TRUE": True, "F": False, "FALSE": False}.get(token)
 
 
 def classify_high_force_observations(
@@ -119,16 +89,22 @@ def classify_high_force_observations(
 
 def analyze(workdir: Path, thresholds_path: Path, reaction_indices: list[int] | None = None) -> dict:
     thresholds = yaml.safe_load(thresholds_path.read_text(encoding="utf-8"))
+    validate_finite_tree(thresholds, "NEB thresholds")
     nelm = _incar_integer(workdir / "INCAR", "NELM")
     nsw = _incar_integer(workdir / "INCAR", "NSW")
     images = _incar_integer(workdir / "INCAR", "IMAGES")
     ediffg = _incar_float(workdir / "INCAR", "EDIFFG")
     climb = _incar_logical(workdir / "INCAR", "LCLIMB")
+    incar = read_incar_values(workdir / "INCAR") if (workdir / "INCAR").is_file() else {}
     dirs = numbered_image_dirs(workdir)
     rows: list[dict] = []
     for directory in dirs:
         oszicar = parse_oszicar(directory / "OSZICAR")
         outcar = parse_outcar(directory / "OUTCAR")
+        try:
+            scf = final_scf_state(oszicar, incar, outcar)
+        except ValueError:
+            scf = {"electronically_converged": False, "status": "UNKNOWN"}
         energies = outcar.get("sigma0_energies") or oszicar.get("energies") or []
         neb_forces = outcar.get("neb_force_history") or []
         atomic_forces = outcar.get("atomic_force_history") or []
@@ -149,7 +125,8 @@ def analyze(workdir: Path, thresholds_path: Path, reaction_indices: list[int] | 
                 "scf_iterations_last_ionic_step": (oszicar.get("scf_iterations") or [None])[-1],
                 "scf_iterations_last10": (oszicar.get("scf_iterations") or [])[-10:],
                 "reached_required_accuracy": outcar.get("reached_required_accuracy", False),
-                "electronically_converged": outcar.get("electronic_convergence_reached", False),
+                "electronically_converged": scf["electronically_converged"],
+                "electronic_final_state": scf,
                 "normal_completion": outcar.get("normal_completion", False),
                 "final_total_magnetization_muB": total_magnetization[-1] if total_magnetization else None,
                 "reaction_atom_local_magnetization_muB": {

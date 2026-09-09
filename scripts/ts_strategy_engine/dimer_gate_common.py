@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import math
+from scripts.scientific_validation import finite_number, validate_finite_tree
 
 from pathlib import Path
 
@@ -13,7 +13,13 @@ ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_POLICY = ROOT / "configs" / "dimer_gate.yaml"
 
 def _finite(value: Any) -> bool:
-    return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(float(value))
+    if not isinstance(value, (int, float)) or isinstance(value, bool):
+        return False
+    try:
+        finite_number(value, "DIMER value")
+    except ValueError:
+        return False
+    return True
 
 def _sha256(value: Any) -> bool:
     return bool(
@@ -39,4 +45,5 @@ def load_policy(path: Path = DEFAULT_POLICY) -> dict[str, Any]:
     payload = yaml.safe_load(path.read_text(encoding="utf-8"))
     if not isinstance(payload, dict) or payload.get("document_kind") != "dimer_gate_policy":
         raise ValueError(f"invalid DIMER gate policy: {path}")
+    validate_finite_tree(payload, "DIMER policy")
     return payload

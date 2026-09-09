@@ -3,6 +3,8 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+
+from scripts.vasp_result_gate import read_incar_values as _incar_values
 from typing import Any
 
 from scripts.adsorption.build_gas_step12a_references import SPECIES
@@ -28,14 +30,7 @@ COMMON_INCAR = {
 }
 
 
-def _incar_values(path: Path) -> dict[str, str]:
-    values: dict[str, str] = {}
-    for raw in path.read_text(encoding="ascii").splitlines():
-        line = raw.split("!", 1)[0].split("#", 1)[0]
-        if "=" in line:
-            key, value = line.split("=", 1)
-            values[key.strip().upper()] = value.strip()
-    return values
+
 
 
 def _poscar_contract(path: Path) -> tuple[list[str], list[int], list[list[float]]]:

@@ -6,7 +6,14 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
+import sys
 from pathlib import Path
+
+# Preserve the documented direct-file, standard-library-only entry point.
+if __package__ in (None, ""):
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
+from scripts.vasp_result_gate import read_incar_values as read_incar
 
 
 ROOT = Path(__file__).resolve().parent
@@ -46,15 +53,7 @@ def read_poscar(path: Path) -> dict:
     }
 
 
-def read_incar(path: Path) -> dict[str, str]:
-    values = {}
-    for raw_line in path.read_text(encoding="ascii").splitlines():
-        line = raw_line.split("#", 1)[0].split("!", 1)[0].strip()
-        if not line or "=" not in line:
-            continue
-        key, value = line.split("=", 1)
-        values[key.strip().upper()] = value.strip()
-    return values
+
 
 
 def read_mesh(path: Path) -> tuple[int, int, int]:

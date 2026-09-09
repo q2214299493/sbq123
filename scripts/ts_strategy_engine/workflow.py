@@ -2,12 +2,15 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from pathlib import Path
+
+from scripts.vasp_result_gate import read_incar_values
 from typing import Any
 
 import yaml
 
 from scripts.artifact_io import write_json
 from scripts.neb_agent.analyze_neb_outputs import analyze
+from scripts.neb_agent.utils_structure import read_poscar
 from scripts.neb_agent.check_endpoints import check_endpoints, write_report as write_endpoint_report
 from scripts.neb_agent.diagnose_path_geometry import diagnose
 from scripts.neb_agent.generate_path import generate_path
@@ -69,7 +72,7 @@ def plan(request: PlanRequest) -> dict[str, Any]:
     request.workdir.mkdir(parents=True, exist_ok=True)
     _validate_endpoints(request, contract)
 
-    fingerprint = build_fingerprint(contract)
+    fingerprint = build_fingerprint(contract, atom_symbols=read_poscar(request.initial).labels)
     templates = load_templates(request.database)
     ranked = rank_templates(fingerprint, templates)
     rules = yaml.safe_load(request.families.read_text(encoding="utf-8"))
@@ -308,13 +311,8 @@ def _path_quality(
     return report
 def _incar_has_climb(workdir: Path) -> bool:
     path = workdir / "INCAR"
-    if not path.is_file():
-        return False
-    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
-        clean = line.split("#", 1)[0].replace(" ", "").upper()
-        if clean.startswith("LCLIMB="):
-            return clean.split("=", 1)[1] in {".TRUE.", "TRUE", "T"}
-    return False
+    values = read_incar_values(path) if path.is_file() else {}
+    return values.get("LCLIMB", "").strip(".").upper() in {"TRUE", "T"}
 
 
 def _write_search_decision(workdir: Path, decision: dict[str, Any]) -> None:

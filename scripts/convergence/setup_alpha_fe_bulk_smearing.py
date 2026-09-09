@@ -11,6 +11,8 @@ import subprocess
 import tempfile
 from pathlib import Path
 
+from scripts.vasp_result_gate import read_incar_values
+
 from common import (
     EXTERNAL_COMMAND_TIMEOUT_SECONDS,
     last_matching_float,
@@ -103,10 +105,10 @@ def check() -> None:
                 errors.append(f"{label}: missing {name}")
         if not (job_dir / "INCAR").exists():
             continue
-        incar = (job_dir / "INCAR").read_text(errors="ignore")
-        if f"ISMEAR = {expected_ismear}" not in incar:
+        incar = read_incar_values(job_dir / "INCAR")
+        if incar.get("ISMEAR") != str(expected_ismear):
             errors.append(f"{label}: incorrect ISMEAR")
-        if f"SIGMA = {expected_sigma:.2f}" not in incar:
+        if float(incar.get("SIGMA", "nan")) != expected_sigma:
             errors.append(f"{label}: incorrect SIGMA")
         kpoints = (job_dir / "KPOINTS").read_text(errors="ignore")
         if "15 15 15" not in kpoints:

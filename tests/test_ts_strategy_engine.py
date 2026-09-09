@@ -117,6 +117,7 @@ def contract(**overrides: object) -> dict:
         "index_base": 0,
         "atom_map": [[0, 0], [1, 1], [2, 2]],
         "reaction_atoms": [1, 2],
+        "atom_symbols": ["Fe", "C", "O"],
         "broken_bonds": [[1, 2]],
         "formed_bonds": [],
         "site_changes": ["O:molecular->hollow"],
@@ -145,6 +146,10 @@ def contract(**overrides: object) -> dict:
     }
     payload.update(overrides)
     return normalize_contract(payload)
+
+
+def raw_contract() -> dict:
+    return {key: value for key, value in contract().items() if not key.endswith("_sha256")}
 
 
 def fingerprint() -> dict:
@@ -740,12 +745,11 @@ def test_strategy_fields_reject_system_specific_transfer_artifacts() -> None:
 def test_similar_reaction_on_incompatible_surface_transfers_strategy_not_result() -> None:
     template = successful_record()
     template["evidence_valid"] = True
-    different = copy.deepcopy(contract())
+    different = copy.deepcopy(raw_contract())
     different["reactant_id"] = "co*/pt36"
     different["product_id"] = "c*+o*/pt36"
     different["compatibility"]["material"] = "pt"
     different["compatibility"]["surface"] = "pt111"
-    different["compatibility_sha256"] = "different"
     match = rank_templates(build_fingerprint(different), [template])[0]
     assert match["score"] >= 0.60
     assert match["strategy_transferable"] is True
@@ -758,7 +762,7 @@ def test_similar_reaction_on_incompatible_surface_transfers_strategy_not_result(
 def test_reactant_product_identity_prevents_isomer_collision() -> None:
     cho = successful_record()
     cho["evidence_valid"] = True
-    different = copy.deepcopy(contract())
+    different = copy.deepcopy(raw_contract())
     different["reactant_id"] = "c2o*/fe45"
     match = rank_templates(build_fingerprint(different), [cho])[0]
     assert match["chemical_match"] is False
@@ -770,7 +774,7 @@ def test_reactant_product_identity_prevents_isomer_collision() -> None:
 def test_similar_reaction_uses_template_strategy_without_reusing_result() -> None:
     template = successful_record()
     template["evidence_valid"] = True
-    different = copy.deepcopy(contract())
+    different = copy.deepcopy(raw_contract())
     different["reactant_id"] = "co*/fe54"
     different["product_id"] = "c*+o*/fe54"
     query = build_fingerprint(different)
@@ -792,7 +796,7 @@ def test_similar_reaction_uses_template_strategy_without_reusing_result() -> Non
 def test_family_name_without_reaction_event_does_not_transfer_template() -> None:
     template = successful_record()
     template["evidence_valid"] = True
-    different = copy.deepcopy(contract())
+    different = copy.deepcopy(raw_contract())
     different["reactant_id"] = "unrelated_reactant"
     different["product_id"] = "unrelated_product"
     different["broken_bonds"] = [[0, 2]]
@@ -815,7 +819,7 @@ def test_no_template_uses_family_rule() -> None:
 
 
 def test_reaction_identifier_does_not_change_chemical_fingerprint() -> None:
-    same_chemistry = copy.deepcopy(contract())
+    same_chemistry = copy.deepcopy(raw_contract())
     same_chemistry["reaction_id"] = "another_local_label"
     assert build_fingerprint(same_chemistry)["fingerprint_id"] == fingerprint()["fingerprint_id"]
 

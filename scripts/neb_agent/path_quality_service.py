@@ -3,6 +3,9 @@ from __future__ import annotations
 import copy
 from dataclasses import dataclass
 from pathlib import Path
+
+from scripts.vasp_result_gate import read_incar_values
+from scripts.scientific_validation import integer_number, validate_finite_tree
 from typing import Any
 
 import yaml
@@ -120,16 +123,14 @@ def build_path_quality_report(request: PathQualityRequest) -> dict[str, Any]:
 
 
 def read_configured_nelm(path: Path) -> int:
-    for line in path.read_text(encoding="utf-8").splitlines():
-        if line.split("=", 1)[0].strip().upper() == "NELM":
-            return int(float(line.split("=", 1)[1].split()[0]))
-    return 60
+    return integer_number(read_incar_values(path).get("NELM", "60"), "NELM", positive=True)
 
 
 def _load_yaml_mapping(path: Path, label: str) -> dict[str, Any]:
     payload = yaml.safe_load(path.read_text(encoding="utf-8"))
     if not isinstance(payload, dict):
         raise ValueError(f"{label} must be a YAML mapping: {path}")
+    validate_finite_tree(payload, label)
     return payload
 
 

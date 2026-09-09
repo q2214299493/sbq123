@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import inspect
 import json
 import subprocess
 from datetime import datetime, timezone
@@ -9,6 +10,8 @@ from typing import Any
 
 from scripts.adsmind_lite.audit_remote_fe110_batch import audit_structure, fetch_structures
 from scripts.artifact_io import sha256_json
+from scripts import scientific_validation, vasp_result_gate
+from scripts.neb_agent import utils_vasp
 from scripts.execution_backends import load_execution_backends
 
 
@@ -70,14 +73,7 @@ def metadata(path):
         "resolved_path": str(path.resolve()) if path.is_symlink() else None,
     }
 
-def incar_values(path):
-    values = {}
-    for raw in path.read_text(encoding="utf-8", errors="replace").splitlines():
-        line = raw.split("!", 1)[0].split("#", 1)[0]
-        if "=" in line:
-            key, value = line.split("=", 1)
-            values[key.strip().upper()] = value.strip()
-    return values
+incar_values = _vasp_parser["read_incar_values"]
 
 def movable_indices(path):
     lines = [line.strip() for line in path.read_text(encoding="utf-8", errors="replace").splitlines()]
@@ -96,34 +92,16 @@ def movable_indices(path):
     return result
 
 def parse_oszicar(path, nelm):
-    ionic_steps = 0
-    current_iteration = None
-    current_delta_e = None
-    final_iteration = None
-    final_delta_e = None
-    with path.open(encoding="utf-8", errors="replace") as handle:
-        for raw in handle:
-            fields = raw.split()
-            if fields and fields[0] in {"DAV:", "RMM:", "CGA:"} and len(fields) >= 4:
-                try:
-                    current_iteration = int(fields[1])
-                    current_delta_e = float(fields[3])
-                except ValueError:
-                    continue
-            elif " F=" in raw and current_iteration is not None:
-                ionic_steps += 1
-                final_iteration = current_iteration
-                final_delta_e = current_delta_e
-                current_iteration = None
-                current_delta_e = None
-    return {
-        "ionic_steps": ionic_steps,
-        "last_electronic_iteration": final_iteration,
-        "last_electronic_delta_e_eV": final_delta_e,
-        "electronic_iterations_below_nelm": final_iteration is not None and final_iteration < nelm,
-    }
+    parsed = _vasp_parser["parse_oszicar"](path)
+    final = parsed.get("latest_started_electronic_cycle") or {}
+    iteration = final.get("iteration")
+    return {"ionic_steps": parsed["ionic_steps"], "last_electronic_iteration": iteration,
+            "last_electronic_delta_e_eV": final.get("delta_e_eV"),
+            "electronic_iterations_below_nelm": bool(parsed.get("final_target_complete") and iteration and iteration < nelm)}
+
 
 def parse_outcar(path, movable):
+    state = _vasp_parser["parse_outcar"](path)
     last_toten = None
     reached_accuracy = False
     normal_completion = False
@@ -138,11 +116,11 @@ def parse_outcar(path, movable):
             if match:
                 last_toten = float(match.group(1))
             if "reached required accuracy - stopping structural energy minimisation" in raw:
-                reached_accuracy = True
+                reached_accuracy = state.get("reached_required_accuracy", False)
             if "General timing and accounting informations for this job" in raw:
-                normal_completion = True
+                normal_completion = state.get("normal_completion", False)
             if "aborting loop because EDIFF is reached" in raw:
-                ediff_reached = True
+                ediff_reached = state.get("electronic_convergence_reached", False)
             for marker in fatal_markers:
                 if marker in raw and marker not in fatal:
                     fatal.append(marker)
@@ -198,7 +176,7 @@ for adsorbate in adsorbates:
         outcar = parse_outcar(directory / "OUTCAR", movable)
         k_lines = [line.split("!", 1)[0].strip() for line in (directory / "KPOINTS").read_text().splitlines()]
         kmesh = [int(value) for value in k_lines[3].split()[:3]]
-        electronic = bool(outcar["outcar_ediff_reached"] or oszicar["electronic_iterations_below_nelm"])
+        electronic = _vasp_parser["final_scf_status"](directory / "OSZICAR", directory / "INCAR", directory / "OUTCAR")["electronically_converged"]
         force_pass = outcar["final_max_movable_force_eV_A"] is not None and outcar["final_max_movable_force_eV_A"] <= abs(ediffg) + 1e-8
         technical = bool(
             electronic
@@ -237,10 +215,25 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def remote_parser_preamble() -> str:
+    """Ship the existing parser source in memory to the read-only remote audit.
+
+    No remote package installation or second maintained parser implementation.
+    The isolated namespace keeps specialized force summaries from shadowing it.
+    """
+    sources = [inspect.getsource(scientific_validation), inspect.getsource(utils_vasp)]
+    source = "\n".join(sources).replace("from __future__ import annotations", "")
+    source = source.replace("from scripts.scientific_validation import finite_number, integer_number", "")
+    source += "\n" + "\n".join(inspect.getsource(function) for function in (
+        vasp_result_gate.read_incar_values, vasp_result_gate.final_scf_status, vasp_result_gate.final_scf_state,
+    ))
+    return "_vasp_parser = {}\nexec(" + repr(source) + ", _vasp_parser)\n"
+
+
 def remote_evidence(host: str, remote_root: str) -> list[dict[str, Any]]:
     completed = subprocess.run(
         ["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=15", host, "python3", "-", remote_root],
-        input=REMOTE_AUDIT_SCRIPT,
+        input=remote_parser_preamble() + REMOTE_AUDIT_SCRIPT,
         check=True,
         capture_output=True,
         text=True,

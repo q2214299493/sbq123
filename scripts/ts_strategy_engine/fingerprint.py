@@ -5,8 +5,38 @@ from typing import Any
 
 from scripts.artifact_io import sha256_json
 
+from .contract import normalize_contract
 
-def build_fingerprint(contract: dict[str, Any]) -> dict[str, Any]:
+
+def chemical_events(contract: dict[str, Any], atom_symbols: list[str] | None) -> dict[str, list[str]] | None:
+    """Element-labelled events compare chemistry independently of atom numbering."""
+    if atom_symbols is None:
+        return None
+    from pymatgen.core import Element
+
+    if len(atom_symbols) != len(contract["atom_map"]):
+        raise ValueError("fingerprint symbols must label every mapped atom")
+    symbols = [Element(value).symbol for value in atom_symbols]
+    if contract.get("atom_symbols", symbols) != symbols:
+        raise ValueError("contract atom symbols disagree with endpoint structure")
+    return {key: sorted("-".join(sorted(symbols[index] for index in bond)) for bond in contract[key])
+            for key in ("broken_bonds", "formed_bonds")}
+
+
+def family_event_matches(fingerprint: dict[str, Any], rule: dict[str, Any]) -> bool:
+    from collections import Counter
+
+    events = fingerprint.get("chemical_events")
+    for key in ("broken_bonds", "formed_bonds"):
+        required = Counter("-".join(sorted(value.strip().title().split("-"))) for value in rule.get(key, []))
+        if required and (events is None or required - Counter(events.get(key, []))):
+            return False
+    return True
+
+
+def build_fingerprint(contract: dict[str, Any], *, atom_symbols: list[str] | None = None) -> dict[str, Any]:
+    contract = normalize_contract(contract)
+    events = chemical_events(contract, atom_symbols if atom_symbols is not None else contract.get("atom_symbols"))
     payload = {
         "reaction_id": contract["reaction_id"],
         "reaction_family": contract["reaction_family"],
@@ -17,8 +47,17 @@ def build_fingerprint(contract: dict[str, Any]) -> dict[str, Any]:
         "adsorption_site_changes": contract["site_changes"],
         "atom_map_sha256": contract["atom_map_sha256"],
         "compatibility": contract["compatibility"],
+        "chemical_events": events,
+        "chemical_event_sha256": sha256_json(events) if events is not None else None,
+        "result_identity_sha256": sha256_json({
+            "endpoints": contract["endpoints"], "atom_map": contract["atom_map"],
+            "compatibility": contract["compatibility"], "chemical_events": events,
+        }),
     }
-    identity = {key: value for key, value in payload.items() if key != "reaction_id"}
+    # Preserve the legacy path-binding key. Chemistry and scientific-result
+    # identities are separate requirements and cannot be inferred from this key.
+    identity = {key: value for key, value in payload.items()
+                if key not in {"reaction_id", "result_identity_sha256", "chemical_events", "chemical_event_sha256"}}
     payload["fingerprint_id"] = sha256_json(identity)
     return payload
 
@@ -34,12 +73,11 @@ def _jaccard(left: list[Any], right: list[Any]) -> float:
 def _reaction_event_similarity(
     fingerprint: dict[str, Any], prior: dict[str, Any]
 ) -> float:
-    components = []
-    for key in ("broken_bonds", "formed_bonds", "adsorption_site_changes"):
-        left = fingerprint.get(key, [])
-        right = prior.get(key, [])
-        if left or right:
-            components.append(_jaccard(left, right))
+    left, right = fingerprint.get("chemical_events"), prior.get("chemical_events")
+    if left is None or right is None:
+        return 0.0
+    components = [_jaccard(left[key], right.get(key, [])) for key in ("broken_bonds", "formed_bonds")
+                  if left[key] or right.get(key)]
     return sum(components) / len(components) if components else 0.0
 
 
@@ -52,7 +90,12 @@ def rank_templates(fingerprint: dict[str, Any], templates: list[dict[str, Any]])
             fingerprint["reactant_id"] == prior.get("reactant_id")
             and fingerprint["product_id"] == prior.get("product_id")
         )
-        exact = compatible and fingerprint["fingerprint_id"] == prior.get("fingerprint_id")
+        event_equivalent = (fingerprint.get("chemical_events") is not None
+                            and fingerprint["chemical_events"] == prior.get("chemical_events"))
+        exact = bool(compatible and event_equivalent
+                     and fingerprint["fingerprint_id"] == prior.get("fingerprint_id")
+                     and fingerprint.get("result_identity_sha256")
+                     and fingerprint["result_identity_sha256"] == prior.get("result_identity_sha256"))
         family = fingerprint["reaction_family"] == prior.get("reaction_family")
         broken = _jaccard(fingerprint["broken_bonds"], prior.get("broken_bonds", []))
         formed = _jaccard(fingerprint["formed_bonds"], prior.get("formed_bonds", []))
@@ -90,7 +133,7 @@ def rank_templates(fingerprint: dict[str, Any], templates: list[dict[str, Any]])
         strategy_transferable = bool(
             accepted_success
             and family
-            and (chemical_match or event_similarity > 0.0)
+            and event_equivalent
         )
         result_transferable = bool(accepted_success and exact and compatible)
         strategy_match_level = (
@@ -113,6 +156,8 @@ def rank_templates(fingerprint: dict[str, Any], templates: list[dict[str, Any]])
                 "compatible": compatible,
                 "chemical_match": chemical_match,
                 "reaction_event_similarity": round(event_similarity, 6),
+                "chemical_event_equivalent": event_equivalent,
+                "structural_similarity": round((broken + formed + sites) / 3, 6),
                 "evidence_valid": evidence_valid,
                 "strategy_transferable": strategy_transferable,
                 "result_transferable": result_transferable,

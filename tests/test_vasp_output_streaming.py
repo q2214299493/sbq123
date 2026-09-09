@@ -27,7 +27,11 @@ def test_oszicar_is_parsed_in_one_stream_without_read_text(
         ),
     )
 
-    assert parse_oszicar(oszicar) == {
+    parsed = parse_oszicar(oszicar)
+    assert parsed["incomplete"] is True
+    assert parsed["latest_started_electronic_cycle"]["cycle"] == 3
+    assert parsed["latest_completed_electronic_cycle"]["cycle"] == 2
+    expected = {
         "exists": True,
         "ionic_steps": 2,
         "energies": [-10.0, -11.0],
@@ -35,6 +39,7 @@ def test_oszicar_is_parsed_in_one_stream_without_read_text(
         "current_scf_iterations": 1,
         "magnetization_history_muB": [2.5, 2.25],
     }
+    assert {key: parsed[key] for key in expected} == expected
 
 
 def test_outcar_is_parsed_in_one_stream_and_keeps_last_local_magnetization(
@@ -74,7 +79,10 @@ def test_outcar_is_parsed_in_one_stream_and_keeps_last_local_magnetization(
         ),
     )
 
-    assert parse_outcar(outcar) == {
+    parsed = parse_outcar(outcar)
+    assert parsed["final_target_complete"] is True
+    assert parsed["final_target_explicit_convergence"] is True
+    expected = {
         "exists": True,
         "atomic_force_history": [0.8, 0.2],
         "atomic_force_rms_history": [0.3, 0.05],
@@ -87,6 +95,7 @@ def test_outcar_is_parsed_in_one_stream_and_keeps_last_local_magnetization(
         "local_magnetization_last_muB": [0.9, 0.4],
         "fatal_keywords": ["BRMIX"],
     }
+    assert {key: parsed[key] for key in expected} == expected
 
 
 def test_missing_vasp_outputs_keep_existing_empty_contract(tmp_path: Path) -> None:

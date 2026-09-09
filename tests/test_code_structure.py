@@ -197,3 +197,49 @@ def test_neb_authorization_application_and_submission_have_single_owners() -> No
     from scripts.ts_strategy_engine import execution_evidence, execution_gate
 
     assert execution_gate._bind_execution is execution_evidence.bind_execution
+
+
+def test_scientific_parsing_and_contract_validation_have_single_owners() -> None:
+    expected = {
+        "read_incar_values": "scripts/vasp_result_gate.py",
+        "parse_oszicar": "scripts/neb_agent/utils_vasp.py",
+        "parse_outcar": "scripts/neb_agent/utils_vasp.py",
+        "final_scf_state": "scripts/vasp_result_gate.py",
+        "normalize_contract": "scripts/ts_strategy_engine/contract.py",
+        "_normalize_contract_payload": "scripts/ts_strategy_engine/contract.py",
+    }
+    owners = defaultdict(list)
+    for path in current_python_files():
+        tree = ast.parse(path.read_text(encoding="utf-8"))
+        for node in ast.walk(tree):
+            if isinstance(node, ast.FunctionDef) and node.name in expected:
+                owners[node.name].append(path.relative_to(ROOT).as_posix())
+    expected_owners = {name: [owner] for name, owner in expected.items()}
+    # Preserve older report APIs that extract force arrays and ionic tables.
+    # Their convergence facts must delegate to the authoritative owners.
+    adapters = {
+        "scripts/adsorption/analyze_fe110_ch_h_relaxation.py": {
+            "parse_oszicar": "final_scf_status", "parse_outcar": "parse_outcar_state",
+        },
+        "scripts/adsorption/finalize_step12a_gas_references.py": {"parse_outcar": "parse_outcar_state"},
+    }
+    for relative, functions in adapters.items():
+        tree = ast.parse((ROOT / relative).read_text(encoding="utf-8"))
+        nodes = {node.name: node for node in tree.body if isinstance(node, ast.FunctionDef)}
+        for name, delegate in functions.items():
+            expected_owners[name].append(relative)
+            calls = {node.func.id for node in ast.walk(nodes[name])
+                     if isinstance(node, ast.Call) and isinstance(node.func, ast.Name)}
+            assert delegate in calls
+    assert {name: sorted(paths) for name, paths in owners.items()} == {
+        name: sorted(paths) for name, paths in expected_owners.items()
+    }
+
+
+def test_legacy_incar_readers_are_direct_aliases() -> None:
+    from modules.fe_convergence_baseline.validate_baseline import read_incar
+    from scripts.adsorption.finalize_step12a_gas_references import incar_values
+    from scripts.adsorption.preflight_gas_references import _incar_values
+    from scripts.vasp_result_gate import read_incar_values
+
+    assert read_incar is incar_values is _incar_values is read_incar_values

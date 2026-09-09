@@ -4,6 +4,8 @@ import argparse
 import json
 import re
 from pathlib import Path
+
+from scripts.vasp_result_gate import read_incar_values
 from typing import Any
 
 import yaml
@@ -56,7 +58,7 @@ def preflight(workdir: Path, *, profile_path: Path = DEFAULT_PROFILE, cores: int
     if any(flag != ("T", "T", "T") for flag in structure.flags[18:]):
         errors.append("UNEXPECTED_CONSTRAINT_ABOVE_BOTTOM_18_FE")
 
-    incar = Incar.from_file(workdir / "INCAR")
+    incar = Incar(read_incar_values(workdir / "INCAR"))
     expected_incar = {
         **stage["incar"],
         "GGA": profile["scope"]["incar_gga"],

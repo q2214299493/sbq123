@@ -3,6 +3,8 @@ from __future__ import annotations
 import math
 import statistics
 from pathlib import Path
+
+from scripts.scientific_validation import validate_finite_tree
 from typing import Any
 
 import numpy as np
@@ -149,6 +151,8 @@ def collect_evidence(
 
 
 def evaluate_quality(evidence: dict[str, Any], thresholds: dict[str, Any]) -> dict[str, Any]:
+    validate_finite_tree(thresholds, "path quality thresholds")
+    validate_finite_tree(evidence, "path quality evidence")
     names = evidence["image_names"]
     history = evidence["coordinate_history_A"]
     current = history[-1]
