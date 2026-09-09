@@ -187,9 +187,15 @@ text change.
 
 Standing user authorization (2026-09-09): after completing each repository
 task and its required validation, automatically commit all task-owned source,
-tests, and documentation, then push the task branch to the configured GitHub
-remote. No additional confirmation is needed. An explicit instruction for a
+tests, and documentation, then publish the task branch to the `sbq123` remote:
+`https://github.com/q2214299493/sbq123.git`. No additional confirmation is
+needed. An explicit instruction for a
 particular task not to commit or push overrides this default.
+
+`sbq123` has an independent source-release history. Publish task-owned commits
+on a branch based on that repository's existing history, using an isolated
+worktree when needed. The local `origin` points to `sbq`; it is not the default
+publication target. Do not push to `sbq` unless the user specifically asks.
 
 When a commit is authorized:
 
