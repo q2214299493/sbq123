@@ -25,22 +25,22 @@ No automatic merge, new scientific feature, or further overhaul phase is include
 |---|---|---|
 | B7-01 | PASS | Pre-change real wheel and clean core install characterized; source/resource/CLI reference searches cover configs, schemas, templates, metadata, skill references, runtime documents and SQL. Baseline failures below. |
 | B7-02 | PASS | One explicit package-vs-repository contract; package defaults use the shared resolver, repository-only CLIs fail with REPOSITORY_CONTEXT_REQUIRED. |
-| B7-03 | PASS locally | Real wheel built and installed without editable mode in a new venv, then invoked outside the source tree. Nine declared console scripts pass --help. |
+| B7-03 | PASS | Real wheel built and installed without editable mode in a new venv, then invoked outside the source tree. Nine declared console scripts pass --help. |
 | B7-04 | PASS | 60 enumerated runtime resources, copied only at build time from canonical source owners; importlib.resources resolves installed data. |
-| B7-05 | PASS locally | Artifact gate audits all 285 wheel members, reads all 60 resources, checks installed code location and explicit repository errors, and runs fixture operations. |
-| B7-06 | PASS locally | Fresh editable and normal installations match all nine CLI help interfaces, all resource hashes and deterministic integration-smoke output. |
-| B7-07 | LOCAL PASS; CI_PENDING | Windows 11/Python 3.13.9 exercised locally; required Ubuntu/Windows Python 3.11 matrix awaits the branch CI result. |
-| B7-08 | PASS locally | Atomic publication/exclusive reservation/state/SQLite tests retained; repeated writes and injected sharing errors preserve complete prior state/reservation markers. No retry/sleep workaround or B1 executor change. |
+| B7-05 | PASS | Artifact gate audits all 285 wheel members, reads all 60 resources, checks installed code location and explicit repository errors, and runs fixture operations. |
+| B7-06 | PASS | Fresh editable and normal installations match all nine CLI help interfaces, all resource hashes and deterministic integration-smoke output. |
+| B7-07 | PASS | Windows 11/Python 3.13.9 exercised locally; required Ubuntu/Windows Python 3.11 matrix passed on GitHub. |
+| B7-08 | PASS | Atomic publication/exclusive reservation/state/SQLite tests retained; repeated writes and injected sharing errors preserve complete prior state/reservation markers. No retry/sleep workaround or B1 executor change. |
 | B7-09 | PASS | Core install avoids ASE/Sella/pymatgen/ML imports for unrelated entrypoint help; explicit optional errors identify capability and extra. Existing reviewed semantic/precomputed modes and Sella failure policy remain. |
 | B7-10 | PASS | Generated SOFTWARE_ENVIRONMENT manifest records Python/OS, direct/key optional resolved versions, package/WHEEL metadata, content inventory and smoke results. |
 | B7-11 | PASS for new classifications | Generated egg-info/dist-info/cache entries are ignored/excluded from new managed-state proposals. Prior immutable events remain intact; no physical metadata deletion. |
 | B7-12 | STATE_RECONCILIATION_REQUIRED | Existing competing current-task events remain unresolved; safe sync fails explicitly, without applying or rewriting state. |
-| B7-13 | IMPLEMENTED; CI_PENDING | Full Linux suite retained; engineering and actual-wheel matrices added for Windows/Ubuntu Python 3.11. Environment reports/logs are CI artifacts. |
-| B7-14 | PASS locally | Fresh export uses only Git index content, including tests proving untracked/runtime and unstaged changes are not copied. Wheel and document/resource checks run against that export. |
+| B7-13 | PASS | Full Linux suite retained; engineering and actual-wheel matrices added for Windows/Ubuntu Python 3.11. Environment reports/logs are CI artifacts. |
+| B7-14 | PASS | Fresh export uses only Git index content, including tests proving untracked/runtime and unstaged changes are not copied. Wheel and document/resource checks run against that export. |
 | B7-15 | PASS | Public indexed paths and every built wheel member audited; no excluded credential, private key, POTCAR, production DB or model-weight artifact detected. Historical path text retained. |
 | B7-16 | PASS | [Installation contract](../../docs/INSTALLATION.md), README and current publication scope distinguish editable/wheel/repository-only/external deployment and extras. |
 | B7-17 | PASS | Synthetic contract -> bound local file -> temporary registry plan -> explicit test approval -> transaction -> persisted read/idempotency. Two rows inserted, zero scientific result rows, zero external actions. |
-| B7-18 | PASS locally; CI_PENDING | Focused B7 and B1-B7 regressions plus real installed-artifact checks; exact local results below. |
+| B7-18 | PASS | Focused B7 and B1-B7 regressions plus real installed-artifact checks; exact local results below. |
 
 ## Pre-change compatibility baseline
 
@@ -168,8 +168,25 @@ limits or existing test assertions were weakened.
 
 ## Linux/Windows CI
 
-Linux/Windows CI is required before final acceptance and is pending this branch push.
-The final closure update will record the actual run/result; no CI success is claimed here.
+GitHub run [34374504630](https://github.com/q2214299493/sbq123/actions/runs/34374504630)
+completed **success** for implementation commit
+`03739665465d8548e22d154aa2a8d4209f04983c` on 2026-09-10 (local review date).
+All five jobs completed successfully:
+
+| Job | Platform / Python | Result |
+|---|---|---|
+| validate | Ubuntu / 3.11, full scientific/mock suite and Ruff | success |
+| engineering (ubuntu-latest) | Ubuntu / 3.11, critical filesystem/transaction/governance subset | success |
+| engineering (windows-latest) | Windows / 3.11, same critical subset | success |
+| wheel (ubuntu-latest) | Ubuntu / 3.11, clean wheel and editable parity | success |
+| wheel (windows-latest) | Windows / 3.11, clean wheel and editable parity | success |
+
+The run contains `release-environment-ubuntu-latest-py311` and
+`release-environment-windows-latest-py311` software environment artifacts. They
+record each CI environment's actual dependency resolutions and build metadata;
+the committed JSON records the local Windows 3.13.9 run separately. This closure
+update changes only the report; the implementation and its software-tested artifact
+inputs remain those of the implementation commit above.
 
 The workflow retains full Linux tests and adds Ubuntu/Windows Python 3.11
 engineering and wheel jobs. Each wheel job exports a clean indexed source, builds
