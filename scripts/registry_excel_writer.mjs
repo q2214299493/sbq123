@@ -134,6 +134,7 @@ if (trailingNote) {
   sheet.getRange(`X${rowNumber}`).format.numberFormat = "0.00000000";
   sheet.getRange(`Y${rowNumber}:AA${rowNumber}`).format.numberFormat = "0.000000";
 }
+workbook.recalculate();
 const exported = await SpreadsheetFile.exportXlsx(workbook);
 await exported.save(outputPath);
 process.stdout.write(JSON.stringify({ row_number: rowNumber, worksheet_name: plan.worksheet_name }));
