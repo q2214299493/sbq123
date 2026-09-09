@@ -6,8 +6,6 @@ from typing import Any
 
 from scripts.artifact_io import sha256_json
 
-from .execution_evidence import EXECUTION_ACTIONS, require_execution_authorization
-
 
 ACTIONS = (
     "CONTINUE_JOB",
@@ -99,37 +97,3 @@ def make_decision(
         "TS_CLAIM_ALLOWED": "APPROVE_TS_CANDIDATE" in allowed_set,
         "COMPUTE_COST_ASSESSMENT": cost,
     }
-
-
-def bind_execution(decision: dict[str, Any]) -> dict[str, Any]:
-    readiness = ScientificReadiness(
-        decision["DECISION"], tuple(decision["REASON_CODES"]),
-        tuple(decision["ALLOWED_ACTIONS"]),
-    )
-    decision["scientific_readiness"] = {
-        "decision": readiness.decision,
-        "reason_codes": list(readiness.reason_codes),
-        "eligible_actions": list(readiness.eligible_actions),
-    }
-    authorization = None
-    try:
-        authorization = require_execution_authorization(decision["EVIDENCE"])
-    except (KeyError, TypeError, AttributeError, OSError, ValueError) as exc:
-        decision["execution_authorization_error"] = str(exc)
-    else:
-        decision["execution_authorization_error"] = None
-    decision["execution_authorization"] = authorization.as_dict() if authorization else None
-    decision["evidence_binding"] = (
-        decision["execution_authorization"]["binding"] if authorization else None
-    )
-    allowed = [
-        action for action in readiness.eligible_actions
-        if action not in EXECUTION_ACTIONS or (authorization and authorization.action == action)
-    ]
-    decision["ALLOWED_ACTIONS"] = allowed
-    decision["FORBIDDEN_ACTIONS"] = [action for action in ACTIONS if action not in allowed]
-    decision["SUBMISSION_ALLOWED"] = bool(set(allowed) & (EXECUTION_ACTIONS - {"STOP_JOB", "CONTINUE_JOB"}))
-    decision["CI_NEB_ALLOWED"] = "ENABLE_CI_NEB" in allowed
-    decision["DIMER_ALLOWED"] = "START_DIMER" in allowed
-    decision["VFA_ALLOWED"] = "START_VFA" in allowed
-    return decision

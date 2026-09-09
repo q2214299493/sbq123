@@ -10,6 +10,9 @@ Current executable code lives only under `scripts/` or a repository-backed skill
 - `ts_strategy_engine/execution_decision.py`: pure Schema-v2 decision-document
   construction. It has no I/O and cannot authorize an action; the sole
   authority remains `execution_gate.py`.
+- `ts_strategy_engine/execution_evidence.py`: current evidence and authorization
+  validation, including applying the validated scope to a decision through
+  `bind_execution`. The gate orchestrates this boundary; it is not an executor.
 - `neb_agent/`: internal endpoint/path generation, geometry, analysis, and
   hash-bound submission backend. These tools cannot decide an action;
   `submission.py` enforces the authoritative gate decision.

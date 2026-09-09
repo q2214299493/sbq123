@@ -1,8 +1,9 @@
-# B1 Completion Report — B1.1 CI and GPU lifecycle closure
+# B1 Completion Report — B1.2 architecture ownership closure
 
 Repository: C:/Users/86177/Desktop/work (Git worktree used for clean release validation).
 GitHub: https://github.com/q2214299493/sbq123
 Branch: codex/b1-execution-lifecycle
+B1.2 baseline: b90ef54a0d1a6a094c0a0a616966038be744b277
 B1.1 baseline: 1ec8f3e787fd52353fa70419a206d764c07ae13a
 Date: 2026-09-09, Asia/Shanghai.
 
@@ -20,7 +21,26 @@ The baseline GitHub run failed with 608 passed and two failures: the 160-line ga
 | B1-04 — Upload integrity | Closed. The same complete remote manifest verification immediately precedes bsub for new and reused uploads. No change to this executor in B1.1. |
 | B1-05 — GPU wrapper preamble failures | Closed. Explicit fail-closed bootstrap and wrapper records now cover early setup and later execution/receipt failures across the nine static wrappers and generated MatRIS wrapper. |
 
-## Exact B1.1 task-owned files
+## B1.2 ownership correction
+
+B1.1 placed bind_execution in the pure decision module even though it invokes current file/hash authorization validation. B1.2 moves that function unchanged into the existing execution_evidence.py owner. execution_decision.py now contains only ACTIONS, GATE_NAME, ScientificReadiness and the original document builders; it imports no authorization or filesystem operations. No additional application module or executor was introduced.
+
+execution_gate.py imports the same binding function from its corrected owner and remains the public authority. It is 150 lines, below the unchanged <=160 contract. execution_decision.py is 99 lines and execution_evidence.py is 311 lines, within the existing <=400 module limit.
+
+Exact B1.2 task-owned files:
+
+- scripts/ts_strategy_engine/execution_decision.py: remove authorization imports and bind_execution.
+- scripts/ts_strategy_engine/execution_evidence.py: import pure decision data and own the unchanged bind_execution implementation alongside its single authorization validator.
+- scripts/ts_strategy_engine/execution_gate.py: change only the binding import.
+- scripts/README.md: document evidence/authorization application ownership while retaining the pure-decision contract.
+- tests/test_code_structure.py: add three architecture regressions for pure imports, filesystem-free construction and unique authorization/application/submission owners. The existing gate line limit is unchanged.
+- reports/refactor_audit/B1_completion_report.md: record this correction and final validation.
+
+AST comparisons against b90ef54 confirmed every pre-existing function and class in the three changed source modules is unchanged, including the moved binder. ScientificReadiness, ExecutionAuthorization and EvidenceBinding retain their types and behavior. InputBundle, SubmissionReservation and SubmissionResult and their submission owner were not modified. All existing B1 behavioral tests, scientific rules, action names, decision schema, GPU wrappers, registry, production data, VASP parameters and scientific thresholds are unchanged. No B2 work was started.
+
+Syntax/import checks passed. The initial bounded architecture/authorization/submission run passed 97 tests in 25.68s. Final full and focused results are below.
+
+## Historical B1.1 task-owned files
 
 | File | Change |
 | --- | --- |
@@ -46,11 +66,11 @@ No AGENTS.md, architecture-test limit, root allowlist, scientific threshold, VAS
 
 ## Thin gate and compatibility
 
-ScientificReadiness is now a decision data object owned by execution_decision.py and re-exported through execution_path_rules.py. ExecutionAuthorization and EvidenceBinding retain their existing owner and implementation in execution_evidence.py. The gate delegates only output projection to the decision owner; it still selects the priority-ordered result, recomputes decisions and enforces actions.
+ScientificReadiness is now a decision data object owned by execution_decision.py and re-exported through execution_path_rules.py. ExecutionAuthorization and EvidenceBinding retain their existing owner and implementation in execution_evidence.py. The gate delegates authorization application to the evidence owner; it still selects the priority-ordered result, recomputes decisions and enforces actions. The earlier B1.1 placement in the decision owner is superseded by B1.2.
 
 AST comparisons against the B1 baseline confirmed unchanged implementations of decide_execution, require_action, validate_decision, blocking_decision, progress_decision, require_execution_authorization and validated_ts. The moved projection has the same AST body, with only its function name changed from _bind_execution to bind_execution. The original public gate signatures, action names, scientific eligibility and source-binding behavior remain intact. There is one authorization validator and one VASP submission executor.
 
-The existing test_ts_engine_layers_do_not_recombine contract remains <=160 lines; the gate is 149 lines. No line-limit increase, mechanical compression or validation removal was used. The existing test_root_contains_no_executable_or_download_clutter contract remains unchanged. Both B0/B1 reports now reside under the already-approved reports/ area.
+The existing test_ts_engine_layers_do_not_recombine contract remains <=160 lines; the gate is now 150 lines. No line-limit increase, mechanical compression or validation removal was used. The existing test_root_contains_no_executable_or_download_clutter contract remains unchanged. Both B0/B1 reports now reside under the already-approved reports/ area.
 
 ## GPU execution failure contract
 
@@ -74,7 +94,7 @@ The generated MatRIS bundle includes the shared helper in its bound code manifes
 
 ## Validation
 
-Validation was performed on the clean Git worktree for the specified GitHub branch, based on 1ec8f3e, not against unrelated unpublished modifications in the desktop checkout. Local runtime: Windows, Python 3.13.9 and Git Bash. GitHub's workflow uses Ubuntu and Python 3.11. Both use the repository's unmodified validation commands.
+Validation was performed on the clean Git worktree for the specified GitHub branch, based on b90ef54, not against unrelated unpublished modifications in the desktop checkout. Local runtime: Windows, Python 3.13.9 and Git Bash. GitHub's workflow uses Ubuntu and Python 3.11. Both use the repository's unmodified validation commands.
 
 ### Complete repository validation — exact CI commands
 
@@ -82,21 +102,21 @@ Validation was performed on the clean Git worktree for the specified GitHub bran
     python -m pytest -o addopts= -q
 
 Final Ruff result: All checks passed, exit 0.
-Final complete pytest result: 747 passed in 221.70s (0:03:41), exit 0.
+Final B1.2 complete pytest result: 750 passed in 217.96s (0:03:37), exit 0.
 
-Intermediate results were superseded by the final runs above and below, after adding standalone-helper compatibility and generated-MatRIS cache-containment coverage.
+Historical B1.1 results: 747 passed in 221.70s for the full suite and 353 passed in 141.61s for the focused suite. B1.2 adds three architecture tests without altering those behavioral tests.
 
 ### Focused B1 regression
 
     python -m pytest -o addopts= -q tests/test_artifact_io.py tests/test_execution_lifecycle.py tests/test_gpu_execution_lifecycle.py tests/test_neb_submission.py tests/test_neb_execution_gate.py tests/test_execution_gate_compatibility.py tests/test_execution_backends.py tests/test_neb_path_quality_control.py tests/test_ts_handoff.py tests/test_ts_strategy_engine.py tests/test_ts_strategy_learning.py tests/test_code_structure.py tests/test_repository_contracts.py
 
-Final focused result: 353 passed in 141.61s (0:02:21), exit 0.
+Final B1.2 focused result: 356 passed in 138.34s (0:02:18), exit 0.
 
 The focused run covers original B1 reservations, concurrent submitters, hard process death, stale evidence, tampered inputs, new/reused upload verification, POTCAR identity and scoped stop authorization, plus the architecture/root-contract regressions and GPU failure matrix.
 
 New shell evidence covers missing job/input/helper/Python/vendor, output creation failures, malformed digests, traversal and symlink escape, cache escape, missing canonicalizer, payload failure, TERM interruption, receipt-writer failure, preservation of existing records, normal fake-payload paths and side-effect-free standalone helper sourcing. The wrappers themselves and the generated MatRIS shell were parsed with Bash. Fake Python, hostname and GPU-query commands and temporary boundary copies were used; no GPU job, remote submission or scientific computation was launched.
 
-Scoped git diff --check passed. Configurations, data and calculation directories have no B1.1 diff. Reports were inspected for current paths and validation results. State projections were not synchronized because the active scientific task/state is unrelated to this source-only closure.
+Scoped git diff --check passed. Configurations, data and calculation directories have no B1.2 diff. Reports were inspected for current paths and validation results. The start audit exited 0 with only the known external desktop-worktree ownership warning. Read-only sync preflight found unrelated task/projection writes (proposal-fee2a84125c5942786d73c1d) and a historical projection error: "version 1 archive/delete applies to files only". Those unrelated projections were not applied; no state-manager repair or production-state update is part of B1.2.
 
 ## Remaining production-only uncertainties
 

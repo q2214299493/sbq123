@@ -5,7 +5,8 @@ from typing import Any
 
 from scripts.artifact_io import load_json_object, require_sha256, sha256_json
 
-from .execution_decision import ACTIONS, GATE_NAME, bind_execution as _bind_execution
+from .execution_decision import ACTIONS, GATE_NAME
+from .execution_evidence import bind_execution as _bind_execution
 from .execution_path_rules import (
     INITIAL_SUBMISSIONS, blocking_decision, progress_decision,
 )
