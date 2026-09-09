@@ -98,3 +98,49 @@ def test_concurrent_atomic_json_writes_produce_one_complete_document(
     assert writer in range(4)
     assert payload["payload"] == str(writer) * 100_000
     assert list(tmp_path.glob(".shared.json.*.tmp")) == []
+
+
+
+def _exclusive_writer(target: str, writer: int, start, result) -> None:
+    start.wait(timeout=10)
+    try:
+        artifact_io.write_json_exclusive(Path(target), {"writer": writer})
+    except FileExistsError:
+        result.put("blocked")
+    else:
+        result.put("reserved")
+
+
+def test_exclusive_reservation_across_processes(tmp_path: Path) -> None:
+    context = multiprocessing.get_context("spawn")
+    start = context.Event()
+    results = context.Queue()
+    path = tmp_path / "reservation.json"
+    workers = [context.Process(target=_exclusive_writer, args=(str(path), i, start, results)) for i in range(4)]
+    for worker in workers:
+        worker.start()
+    start.set()
+    statuses = [results.get(timeout=20) for _ in workers]
+    for worker in workers:
+        worker.join(timeout=20)
+        assert worker.exitcode == 0
+    assert statuses.count("reserved") == 1
+    assert statuses.count("blocked") == 3
+    original = path.read_bytes()
+    with pytest.raises(FileExistsError):
+        artifact_io.write_json_exclusive(path, {"replacement": True})
+    assert path.read_bytes() == original
+
+
+def test_exclusive_writer_keeps_interrupted_marker(tmp_path: Path, monkeypatch) -> None:
+    path = tmp_path / "reservation.json"
+
+    def fail_sync(descriptor):
+        raise OSError("simulated crash during fsync")
+
+    monkeypatch.setattr(artifact_io.os, "fsync", fail_sync)
+    with pytest.raises(OSError, match="fsync"):
+        artifact_io.write_json_exclusive(path, {"reserved": True})
+    assert path.exists()
+    with pytest.raises(FileExistsError):
+        artifact_io.write_json_exclusive(path, {"retry": True})

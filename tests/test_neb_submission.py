@@ -7,6 +7,7 @@ import numpy as np
 import pytest
 
 from scripts.artifact_io import sha256_file
+from tests.test_execution_lifecycle import prepare_submission
 from scripts.neb_agent import submission
 from scripts.registry_schema import migrate_registry
 from scripts.neb_agent.utils_structure import Poscar, write_poscar
@@ -308,14 +309,16 @@ def test_upload_stages_only_manifest_files(tmp_path: Path, monkeypatch) -> None:
         )
 
     monkeypatch.setattr(submission, "_run", inspect_upload)
-    submission._upload_manifest_files("host", "~/sbq", workdir, {"INCAR": "hash"})
+    submission._upload_manifest_files("host", "~/sbq", workdir, {"INCAR": sha256_file(workdir / "INCAR")})
     assert uploaded == ["INCAR"]
 
 
 def test_stop_job_accepts_gate_bound_pending_job(tmp_path: Path, monkeypatch) -> None:
     decision = {
         "state_sha256": "state",
-        "EVIDENCE": {"scheduler": {"job_id": "123", "status": "PEND"}},
+        "EVIDENCE": {"scheduler": {"job_id": "123", "status": "PEND"},
+                     "authorization": {"target": {"server_alias": "sunboquan-codex",
+                                                   "remote_dir": "~/sbq/job", "job_id": "123"}}},
     }
     decision_path = tmp_path / "decision.json"
     decision_path.write_text("{}", encoding="utf-8")
@@ -325,6 +328,7 @@ def test_stop_job_accepts_gate_bound_pending_job(tmp_path: Path, monkeypatch) ->
         assert path == decision_path
         assert action == "STOP_JOB"
         assert state == "state"
+        return decision
 
     def fake_load(path: Path):
         assert path == decision_path
@@ -359,29 +363,9 @@ def _mock_submit_dependencies(
     tmp_path: Path,
     monkeypatch,
 ) -> tuple[Path, Path, dict[str, object]]:
-    workdir = tmp_path / "job"
-    workdir.mkdir()
-    decision_path = tmp_path / "decision.json"
-    decision_path.write_text("{}", encoding="utf-8")
-    report: dict[str, object] = {
-        "kind": "diagnostic_static",
-        "passed": True,
-        "bundle_sha256": "bundle",
-        "files": {},
-    }
-    decision = {
-        "state_sha256": "state",
-        "EVIDENCE": {"preflight": {"bundle_sha256": "bundle"}},
-    }
-
-    def fake_load(path: Path):
-        return report if path.name == "submission_preflight.json" else decision
-
-    monkeypatch.setattr(submission, "load_json_object", fake_load)
-    monkeypatch.setattr(submission, "preflight", lambda *args: report)
-    monkeypatch.setattr(submission, "require_action", lambda *args: decision)
+    result = prepare_submission(tmp_path, monkeypatch)
     monkeypatch.setattr(submission, "_upload_manifest_files", lambda *args: None)
-    return workdir, decision_path, report
+    return result
 
 
 def test_submit_failure_leaves_unresolved_marker_and_no_success_record(
@@ -410,7 +394,7 @@ def test_submit_failure_leaves_unresolved_marker_and_no_success_record(
         )
 
     assert (workdir / submission.SUBMISSION_ATTEMPT_FILE).is_file()
-    assert not (workdir / submission.SUBMISSION_RECORD_FILE).exists()
+    assert submission.submission_status(workdir)["status"] == submission.UNKNOWN
 
 
 def test_unresolved_or_completed_submission_cannot_be_repeated(
@@ -450,7 +434,7 @@ def test_unresolved_or_completed_submission_cannot_be_repeated(
     assert calls == []
 
 
-def test_successful_submit_replaces_attempt_with_success_record(
+def test_successful_submit_preserves_reservation_with_success_record(
     tmp_path: Path, monkeypatch
 ) -> None:
     workdir, decision_path, _ = _mock_submit_dependencies(tmp_path, monkeypatch)
@@ -474,5 +458,5 @@ def test_successful_submit_replaces_attempt_with_success_record(
     )
 
     assert result["job_id"] == "123"
-    assert not (workdir / submission.SUBMISSION_ATTEMPT_FILE).exists()
+    assert (workdir / submission.SUBMISSION_ATTEMPT_FILE).is_file()
     assert (workdir / submission.SUBMISSION_RECORD_FILE).is_file()

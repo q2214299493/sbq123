@@ -3,10 +3,13 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from scripts.artifact_io import load_json_object, sha256_json
+from scripts.artifact_io import load_json_object, require_sha256, sha256_json
 
 from .execution_decision import ACTIONS, GATE_NAME
-from .execution_path_rules import INITIAL_SUBMISSIONS, blocking_decision, progress_decision
+from .execution_evidence import EXECUTION_ACTIONS, require_execution_authorization
+from .execution_path_rules import (
+    INITIAL_SUBMISSIONS, ScientificReadiness, blocking_decision, progress_decision,
+)
 from .execution_submission_rules import (
     connectivity_submission_decision,
     user_requested_stop,
@@ -55,17 +58,17 @@ def decide_execution(
     }
     requested_stop = user_requested_stop(evidence)
     if requested_stop:
-        return requested_stop
+        return _bind_execution(requested_stop)
     vfa = vfa_submission_decision(evidence)
     if vfa:
-        return vfa
+        return _bind_execution(vfa)
     connectivity = connectivity_submission_decision(evidence)
     if connectivity:
-        return connectivity
+        return _bind_execution(connectivity)
     blocked = blocking_decision(geometry, analysis, quality, evidence)
     if blocked:
-        return blocked
-    return progress_decision(
+        return _bind_execution(blocked)
+    return _bind_execution(progress_decision(
         analysis,
         quality,
         preflight,
@@ -73,7 +76,41 @@ def decide_execution(
         evidence,
         climb,
         path_reviewed,
+    ))
+
+
+def _bind_execution(decision: dict[str, Any]) -> dict[str, Any]:
+    readiness = ScientificReadiness(
+        decision["DECISION"], tuple(decision["REASON_CODES"]),
+        tuple(decision["ALLOWED_ACTIONS"]),
     )
+    decision["scientific_readiness"] = {
+        "decision": readiness.decision,
+        "reason_codes": list(readiness.reason_codes),
+        "eligible_actions": list(readiness.eligible_actions),
+    }
+    authorization = None
+    try:
+        authorization = require_execution_authorization(decision["EVIDENCE"])
+    except (KeyError, TypeError, AttributeError, OSError, ValueError) as exc:
+        decision["execution_authorization_error"] = str(exc)
+    else:
+        decision["execution_authorization_error"] = None
+    decision["execution_authorization"] = authorization.as_dict() if authorization else None
+    decision["evidence_binding"] = (
+        decision["execution_authorization"]["binding"] if authorization else None
+    )
+    allowed = [
+        action for action in readiness.eligible_actions
+        if action not in EXECUTION_ACTIONS or (authorization and authorization.action == action)
+    ]
+    decision["ALLOWED_ACTIONS"] = allowed
+    decision["FORBIDDEN_ACTIONS"] = [action for action in ACTIONS if action not in allowed]
+    decision["SUBMISSION_ALLOWED"] = bool(set(allowed) & (EXECUTION_ACTIONS - {"STOP_JOB", "CONTINUE_JOB"}))
+    decision["CI_NEB_ALLOWED"] = "ENABLE_CI_NEB" in allowed
+    decision["DIMER_ALLOWED"] = "START_DIMER" in allowed
+    decision["VFA_ALLOWED"] = "START_VFA" in allowed
+    return decision
 
 
 def require_action(
@@ -81,6 +118,7 @@ def require_action(
     action: str,
     current_state_sha256: str,
 ) -> dict[str, Any]:
+    require_sha256(current_state_sha256, label="current execution state")
     decision = load_json_object(decision_path)
     validate_decision(decision)
     if decision.get("state_sha256") != current_state_sha256:
@@ -106,6 +144,9 @@ def validate_decision(decision: dict[str, Any]) -> None:
         "DIMER_ALLOWED",
         "VFA_ALLOWED",
         "TS_CLAIM_ALLOWED",
+        "scientific_readiness",
+        "execution_authorization",
+        "evidence_binding",
     }
     if (
         decision.get("schema_version") != 2

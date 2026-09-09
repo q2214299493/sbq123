@@ -93,3 +93,25 @@ def require_sha256(value: Any, *, label: str) -> str:
     if len(normalized) != 64 or any(character not in "0123456789abcdef" for character in normalized):
         raise ValueError(f"{label} is not a SHA-256 digest")
     return normalized
+
+
+def write_json_exclusive(path: Path, payload: Any) -> Path:
+    """Publish a write-once record. An interrupted write remains a blocking marker.
+
+    O_EXCL is the reservation operation, not an earlier existence check. Never
+    unlink a partially written record: losing that marker could permit a retry.
+    """
+    data = (json.dumps(payload, indent=2, ensure_ascii=False) + "\n").encode("utf-8")
+    descriptor = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    with os.fdopen(descriptor, "wb") as handle:
+        handle.write(data)
+        handle.flush()
+        os.fsync(handle.fileno())
+    # Persist the directory entry where directory fsync is supported (POSIX).
+    if os.name == "posix":
+        directory = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY)
+        try:
+            os.fsync(directory)
+        finally:
+            os.close(directory)
+    return path

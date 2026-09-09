@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import json
+import os
+from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
@@ -7,7 +10,9 @@ import yaml
 
 from scripts.artifact_io import (
     load_json_object,
+    require_sha256,
     sha256_file,
+    sha256_json,
     source_file_manifest_valid,
 )
 from scripts.scheduler_evidence import validate_stored_lsf_evidence
@@ -18,6 +23,109 @@ TRUSTED_ARTIFACTS = {
     "analysis": ("neb_output_analysis", "scripts.neb_agent.analyze_neb_outputs"),
     "path_quality": ("neb_path_quality_evidence", "scripts.neb_agent.path_quality_control"),
 }
+
+EXECUTION_ACTIONS = frozenset({
+    "CONTINUE_JOB", "STOP_JOB", "SUBMIT_DIAGNOSTIC_VASP", "SUBMIT_VASP",
+    "ENABLE_CI_NEB", "START_DIMER", "START_VFA",
+})
+
+
+def workdir_identity(workdir: Path) -> str:
+    """Canonical directory identity; independent of relative paths and aliases."""
+    resolved = workdir.resolve(strict=True)
+    if not resolved.is_dir():
+        raise ValueError("execution workdir must be a directory")
+    return os.path.normcase(str(resolved))
+
+
+def execution_evidence_sha256(evidence: dict[str, Any]) -> str:
+    """Bind scientific inputs without a circular hash through authorization."""
+    payload = {key: value for key, value in evidence.items() if key != "authorization"}
+    payload["source_bindings"] = {
+        key: value for key, value in evidence.get("source_bindings", {}).items()
+        if key != "authorization"
+    }
+    return sha256_json(payload)
+
+
+@dataclass(frozen=True)
+class EvidenceBinding:
+    workdir_identity: str
+    bundle_sha256: str
+    evidence_sha256: str
+
+
+@dataclass(frozen=True)
+class ExecutionAuthorization:
+    action: str
+    target_json: str
+    binding: EvidenceBinding
+    source_path: str
+    source_sha256: str
+    potcar_json: str
+
+    def as_dict(self) -> dict[str, Any]:
+        return {
+            "action": self.action,
+            "target": json.loads(self.target_json),
+            "binding": asdict(self.binding),
+            "source": {"path": self.source_path, "sha256": self.source_sha256},
+            "potcar": json.loads(self.potcar_json),
+        }
+
+
+def require_execution_authorization(evidence: dict[str, Any]) -> ExecutionAuthorization:
+    """Validate an explicit, file-bound scope; a scientific PASS grants no authority."""
+    auth = evidence.get("authorization", {})
+    if (
+        auth.get("schema_version") != 1
+        or auth.get("document_kind") != "user_execution_authorization"
+        or auth.get("action") not in EXECUTION_ACTIONS
+        or not auth.get("authorized_at")
+    ):
+        raise ValueError("explicit execution authorization is missing or invalid")
+    binding = EvidenceBinding(
+        workdir_identity(Path(auth["workdir_identity"])),
+        require_sha256(auth["bundle_sha256"], label="authorized bundle"),
+        require_sha256(auth["evidence_sha256"], label="authorized evidence"),
+    )
+    if binding.workdir_identity != auth["workdir_identity"]:
+        raise ValueError("authorization workdir identity is not canonical")
+    if binding.evidence_sha256 != execution_evidence_sha256(evidence):
+        raise ValueError("execution authorization evidence is stale")
+    preflight = evidence.get("preflight", {})
+    if preflight and binding.bundle_sha256 != preflight.get("bundle_sha256"):
+        raise ValueError("execution authorization bundle mismatch")
+    required = tuple(
+        name for name in ("geometry", "analysis", "thresholds", "path_quality",
+                          "preflight", "validation", "scheduler", "authorization")
+        if evidence.get(name) or name in {"thresholds", "authorization"}
+    )
+    if not source_bindings_valid(evidence, required):
+        raise ValueError("execution evidence binding is missing or stale")
+    target = auth["target"]
+    if not isinstance(target, dict) or not target.get("server_alias") or not target.get("remote_dir"):
+        raise ValueError("execution authorization target is incomplete")
+    source = auth["source"]
+    source_path = Path(source["path"])
+    source_digest = require_sha256(source["sha256"], label="authorization source")
+    if not source_path.is_absolute() or sha256_file(source_path) != source_digest:
+        raise ValueError("authorization source is missing or changed")
+    potcar = auth.get("potcar", {})
+    if auth["action"] not in {"STOP_JOB", "CONTINUE_JOB"}:
+        if not preflight or not potcar.get("source"):
+            raise ValueError("submission authorization needs a preflight and POTCAR identity")
+        require_sha256(potcar["sha256"], label="authorized POTCAR")
+        require_sha256(potcar["spec_sha256"], label="authorized POTCAR.spec")
+        if potcar["spec_sha256"] != preflight.get("files", {}).get("POTCAR.spec"):
+            raise ValueError("POTCAR identity does not bind the bundle specification")
+    else:
+        if str(target.get("job_id")) != str(evidence.get("scheduler", {}).get("job_id")):
+            raise ValueError("authorization target does not bind the scheduler job")
+    return ExecutionAuthorization(
+        auth["action"], json.dumps(target, sort_keys=True), binding,
+        str(source_path), source_digest, json.dumps(potcar, sort_keys=True),
+    )
 
 
 def load_bound_evidence(

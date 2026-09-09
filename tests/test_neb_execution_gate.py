@@ -70,8 +70,9 @@ def test_electronic_failure_can_only_submit_a_preflighted_diagnostic() -> None:
         path_reviewed=True,
         preflight={"kind": "diagnostic_static", "passed": True, "bundle_sha256": "a" * 64},
     )
-    assert decision["ALLOWED_ACTIONS"] == ["SUBMIT_DIAGNOSTIC_VASP"]
-    assert decision["SUBMISSION_ALLOWED"] is True
+    assert decision["scientific_readiness"]["eligible_actions"] == ["SUBMIT_DIAGNOSTIC_VASP"]
+    assert decision["ALLOWED_ACTIONS"] == []
+    assert decision["SUBMISSION_ALLOWED"] is False
 
 
 def test_magnetic_continuity_warning_does_not_block_ordinary_neb_submission() -> None:
@@ -97,8 +98,9 @@ def test_magnetic_continuity_warning_does_not_block_ordinary_neb_submission() ->
     )
     assert decision["DECISION"] == "READY_FOR_ORDINARY_NEB_SUBMISSION"
     assert decision["REASON_CODES"] == []
-    assert decision["ALLOWED_ACTIONS"] == ["SUBMIT_VASP"]
-    assert decision["SUBMISSION_ALLOWED"] is True
+    assert decision["scientific_readiness"]["eligible_actions"] == ["SUBMIT_VASP"]
+    assert decision["ALLOWED_ACTIONS"] == []
+    assert decision["SUBMISSION_ALLOWED"] is False
 
 
 def test_passed_electronic_remediation_exposes_next_path_failure() -> None:
@@ -144,10 +146,11 @@ def test_unverified_quality_electronic_flag_cannot_trigger_hard_stop() -> None:
         scheduler={"scheduler": "LSF", "job_id": "123", "status": "RUN"},
     )
     assert decision["DECISION"] == "CONTINUE_NO_CLIMB_NEB"
-    assert decision["ALLOWED_ACTIONS"] == ["CONTINUE_JOB"]
+    assert decision["scientific_readiness"]["eligible_actions"] == ["CONTINUE_JOB"]
+    assert decision["ALLOWED_ACTIONS"] == []
 
 
-def test_file_bound_hard_failure_can_authorize_exact_running_job(tmp_path: Path) -> None:
+def test_file_bound_hard_failure_needs_separate_execution_authorization(tmp_path: Path) -> None:
     geometry = tmp_path / "geometry.json"
     analysis_path = tmp_path / "analysis.json"
     thresholds = tmp_path / "thresholds.yaml"
@@ -218,14 +221,16 @@ def test_file_bound_hard_failure_can_authorize_exact_running_job(tmp_path: Path)
         encoding="utf-8",
     )
     decision = build_decision(request, output)
-    assert decision["ALLOWED_ACTIONS"] == ["STOP_JOB"]
-    require_action(output, "STOP_JOB", decision["state_sha256"])
+    assert decision["scientific_readiness"]["eligible_actions"] == ["STOP_JOB"]
+    assert decision["ALLOWED_ACTIONS"] == []
+    with pytest.raises(PermissionError):
+        require_action(output, "STOP_JOB", decision["state_sha256"])
     analysis_path.write_text(json.dumps(analysis()), encoding="utf-8")
     with pytest.raises(ValueError, match="authority fields"):
         require_action(output, "STOP_JOB", decision["state_sha256"])
 
 
-def test_file_bound_user_request_can_cancel_exact_pending_job(tmp_path: Path) -> None:
+def test_unscoped_user_request_cannot_cancel_pending_job(tmp_path: Path) -> None:
     geometry = tmp_path / "geometry.json"
     analysis_path = tmp_path / "analysis.json"
     thresholds = tmp_path / "thresholds.yaml"
@@ -297,8 +302,10 @@ def test_file_bound_user_request_can_cancel_exact_pending_job(tmp_path: Path) ->
     )
     decision = build_decision(request, output)
     assert decision["DECISION"] == "STOP_USER_REQUESTED"
-    assert decision["ALLOWED_ACTIONS"] == ["STOP_JOB"]
-    require_action(output, "STOP_JOB", decision["state_sha256"])
+    assert decision["scientific_readiness"]["eligible_actions"] == ["STOP_JOB"]
+    assert decision["ALLOWED_ACTIONS"] == []
+    with pytest.raises(PermissionError):
+        require_action(output, "STOP_JOB", decision["state_sha256"])
 
 
 def test_transient_nelm_high_force_and_energy_dip_are_warnings_only() -> None:
@@ -315,7 +322,8 @@ def test_transient_nelm_high_force_and_energy_dip_are_warnings_only() -> None:
         scheduler={"scheduler": "LSF", "job_id": "123", "status": "RUN"},
     )
     assert decision["DECISION"] == "CONTINUE_NO_CLIMB_NEB"
-    assert decision["ALLOWED_ACTIONS"] == ["CONTINUE_JOB"]
+    assert decision["scientific_readiness"]["eligible_actions"] == ["CONTINUE_JOB"]
+    assert decision["ALLOWED_ACTIONS"] == []
     assert {
         "TRANSIENT_SCF_EXHAUSTION_WARNING",
         "EARLY_OR_NONPERSISTENT_HIGH_FORCE_WARNING",
@@ -394,7 +402,8 @@ def test_submission_requires_current_gate_decision(tmp_path: Path) -> None:
     )
     path = tmp_path / "decision.json"
     path.write_text(json.dumps(decision), encoding="utf-8")
-    require_action(path, "SUBMIT_VASP", decision["state_sha256"])
+    with pytest.raises(PermissionError):
+        require_action(path, "SUBMIT_VASP", decision["state_sha256"])
     with pytest.raises(ValueError, match="stale"):
         require_action(path, "SUBMIT_VASP", "b" * 64)
     with pytest.raises(PermissionError):
@@ -414,7 +423,8 @@ def test_short_neb_pilot_is_diagnostic_only() -> None:
         path_reviewed=True,
         preflight={"kind": "neb_pilot", "passed": True, "bundle_sha256": "a" * 64},
     )
-    assert decision["ALLOWED_ACTIONS"] == ["SUBMIT_DIAGNOSTIC_VASP"]
+    assert decision["scientific_readiness"]["eligible_actions"] == ["SUBMIT_DIAGNOSTIC_VASP"]
+    assert decision["ALLOWED_ACTIONS"] == []
 
 
 def test_ordinary_neb_can_select_ci_neb_or_dimer() -> None:
@@ -430,8 +440,9 @@ def test_ordinary_neb_can_select_ci_neb_or_dimer() -> None:
         path_reviewed=True, path_quality=quality,
         preflight={"kind": "ci_neb", "passed": True},
     )
-    assert ready["ALLOWED_ACTIONS"] == ["ENABLE_CI_NEB", "PREPARE_DIMER_HANDOFF"]
-    assert ready["SUBMISSION_ALLOWED"] is True
+    assert ready["scientific_readiness"]["eligible_actions"] == ["ENABLE_CI_NEB", "PREPARE_DIMER_HANDOFF"]
+    assert ready["ALLOWED_ACTIONS"] == ["PREPARE_DIMER_HANDOFF"]
+    assert ready["SUBMISSION_ALLOWED"] is False
 
 
 def test_no_climb_parent_can_prepare_dimer_without_full_neb_convergence() -> None:
@@ -499,8 +510,9 @@ def test_dimer_requires_its_own_preflight() -> None:
         climb=True, path_reviewed=True, path_quality=quality,
         preflight={"kind": "dimer", "passed": True, "dimer_hard_gate_passed": True},
     )
-    assert ready["ALLOWED_ACTIONS"] == ["START_DIMER"]
-    assert ready["SUBMISSION_ALLOWED"] is True
+    assert ready["scientific_readiness"]["eligible_actions"] == ["START_DIMER"]
+    assert ready["ALLOWED_ACTIONS"] == []
+    assert ready["SUBMISSION_ALLOWED"] is False
 
     blocked = decide_execution(
         {"status": "PASS"}, analysis(technically_converged=True), THRESHOLDS,
@@ -521,8 +533,9 @@ def test_vfa_requires_its_own_passed_hard_gate() -> None:
         preflight={"kind": "vfa", "passed": True, "vfa_hard_gate_passed": True},
     )
     assert ready["DECISION"] == "READY_FOR_DIAGNOSTIC_VFA"
-    assert ready["ALLOWED_ACTIONS"] == ["START_VFA"]
-    assert ready["VFA_ALLOWED"] is True
+    assert ready["scientific_readiness"]["eligible_actions"] == ["START_VFA"]
+    assert ready["ALLOWED_ACTIONS"] == []
+    assert ready["VFA_ALLOWED"] is False
     assert ready["TS_CLAIM_ALLOWED"] is False
 
     blocked = decide_execution(

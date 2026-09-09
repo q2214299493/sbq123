@@ -859,7 +859,8 @@ def test_healthy_decreasing_neb_continues_without_replanning() -> None:
         scheduler={"job_id": "123", "status": "RUN"},
     )
     assert decision["DECISION"] == "CONTINUE_NO_CLIMB_NEB"
-    assert decision["ALLOWED_ACTIONS"] == ["CONTINUE_JOB"]
+    assert decision["scientific_readiness"]["eligible_actions"] == ["CONTINUE_JOB"]
+    assert decision["ALLOWED_ACTIONS"] == []
 
 
 def test_unbound_path_is_never_advanced() -> None:

@@ -185,8 +185,11 @@ text change.
 
 ## Version Control
 
-Do not commit or push unless the user explicitly requests it or
-`tasks/current_task.md` explicitly authorizes it.
+Standing user authorization (2026-09-09): after completing each repository
+task and its required validation, automatically commit all task-owned source,
+tests, and documentation, then push the task branch to the configured GitHub
+remote. No additional confirmation is needed. An explicit instruction for a
+particular task not to commit or push overrides this default.
 
 When a commit is authorized:
 
@@ -195,8 +198,9 @@ When a commit is authorized:
 - never force-add ignored VASP outputs, `POTCAR`, credentials, or large runtime
   files.
 
-Never push without explicit authorization. A local commit is not an off-machine
-backup.
+Do not force-push. If validation, commit, or push fails, report the actual
+failure and do not claim that GitHub is synchronized. A local commit alone is
+not an off-machine backup.
 
 ## Communication
 

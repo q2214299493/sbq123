@@ -2,19 +2,30 @@ from __future__ import annotations
 
 import argparse
 import re
+import shlex
 import shutil
 import subprocess
 import tempfile
+from dataclasses import asdict, dataclass
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from uuid import uuid4
 
-from scripts.artifact_io import load_json_object, sha256_file, sha256_json, write_json
+from scripts.artifact_io import (
+    load_json_object, require_sha256, sha256_file, sha256_json, write_json,
+    write_json_exclusive,
+)
 from scripts.convergence.common import EXTERNAL_COMMAND_TIMEOUT_SECONDS
 from scripts.execution_backends import load_execution_backends, require_vasp_backend
 from scripts.neb_agent.pilot_validation import validate_pilot_result
 from scripts.neb_agent.utils_structure import numbered_image_dirs, read_poscar
 from scripts.ts_strategy_engine.dimer_gate import validate_modecar_bundle
 from scripts.ts_strategy_engine.execution_gate import require_action
+from scripts.ts_strategy_engine.execution_evidence import workdir_identity
+from scripts.ts_strategy_engine.execution_path_rules import (
+    require_job_id, require_local_input, require_relative_input_path, require_remote_path,
+)
 from scripts.ts_strategy_engine.learning_evidence import vasp_input_hashes
 from scripts.ts_strategy_engine.learning_store import DEFAULT_DATABASE as LEARNING_DATABASE
 from scripts.ts_strategy_engine.strategy_learning import retry_assessment
@@ -22,7 +33,6 @@ from scripts.ts_validation.dimer_frequency_gate import evaluate_dimer_frequency_
 from scripts.vasp_result_gate import read_incar_values
 
 
-REMOTE_PATH = re.compile(r"^~/sbq/[A-Za-z0-9_./-]+$")
 JOB_ID = re.compile(r"Job <(\d+)>")
 SUBMISSION_ATTEMPT_FILE = "submission_attempt.json"
 SUBMISSION_RECORD_FILE = "submission_record.json"
@@ -36,9 +46,85 @@ EXPECTED_ACTION = {
     "connectivity_relax": "SUBMIT_VASP",
 }
 NEB_KINDS = {"neb_pilot", "ordinary_neb", "ci_neb"}
+UNKNOWN = "UNKNOWN_NEEDS_RECONCILIATION"
 
 
-def preflight(workdir: Path, kind: str, *, learning_database: Path = LEARNING_DATABASE) -> dict[str, Any]:
+@dataclass(frozen=True)
+class InputBundle:
+    kind: str
+    files: tuple[tuple[str, str], ...]
+    bundle_sha256: str
+
+    @classmethod
+    def from_preflight(cls, report: dict[str, Any]) -> InputBundle:
+        kind = report["kind"]
+        if kind not in EXPECTED_ACTION or not report.get("passed"):
+            raise ValueError("submission bundle changed or preflight did not pass")
+        files = report["files"]
+        if not isinstance(files, dict) or not set(_required_files(kind)) <= set(files):
+            raise ValueError("input bundle manifest is incomplete")
+        validated = tuple(sorted(
+            (require_relative_input_path(name), require_sha256(digest, label=name))
+            for name, digest in files.items()
+        ))
+        digest = require_sha256(report["bundle_sha256"], label="input bundle")
+        if digest != sha256_json({"kind": kind, "files": dict(validated)}):
+            raise ValueError("input bundle manifest hash mismatch")
+        return cls(kind, validated, digest)
+
+    def verify(self, workdir: Path) -> None:
+        for name, digest in self.files:
+            if sha256_file(require_local_input(workdir, name)) != digest:
+                raise ValueError(f"submission bundle changed: {name}")
+
+
+@dataclass(frozen=True)
+class SubmissionReservation:
+    reservation_id: str
+    created_at_utc: str
+    workdir_identity: str
+    server_alias: str
+    remote_dir: str
+    action: str
+    bundle_sha256: str
+    evidence_sha256: str
+    gate_decision_sha256: str
+    authorization: dict[str, Any]
+    status: str = UNKNOWN
+
+
+@dataclass(frozen=True)
+class SubmissionResult:
+    reservation_id: str
+    status: str
+    job_id: str | None
+    submit_stdout: str
+
+
+def submission_status(workdir: Path) -> dict[str, Any]:
+    """Read-only recovery: missing/corrupt receipts never authorize another bsub."""
+    reservation = workdir / SUBMISSION_ATTEMPT_FILE
+    receipt = workdir / SUBMISSION_RECORD_FILE
+    if receipt.exists():
+        try:
+            result = load_json_object(receipt)
+            if result.get("status") == "SUBMITTED":
+                require_job_id(result["job_id"])
+                saved = load_json_object(reservation)
+                if result.get("reservation_id") == saved["reservation_id"]:
+                    return result
+        except (OSError, KeyError, TypeError, ValueError):
+            pass
+        return {"status": UNKNOWN}
+    if reservation.exists() or reservation.is_symlink():
+        return {"status": UNKNOWN}
+    return {"status": "NOT_RESERVED"}
+
+
+def preflight(
+    workdir: Path, kind: str, *, learning_database: Path = LEARNING_DATABASE,
+    write_report: bool = True,
+) -> dict[str, Any]:
     required = _required_files(kind)
     missing = [name for name in required if not (workdir / name).is_file()]
     core_ready = all((workdir / name).is_file() for name in ("INCAR", "KPOINTS", "POTCAR.spec", "script.lsf"))
@@ -91,7 +177,8 @@ def preflight(workdir: Path, kind: str, *, learning_database: Path = LEARNING_DA
     if kind == "connectivity_relax":
         payload["connectivity_hard_gate_passed"] = not connectivity_gate.get("errors")
         payload["connectivity_hard_gate"] = connectivity_gate
-    write_json(workdir / "submission_preflight.json", payload)
+    if write_report:
+        write_json(workdir / "submission_preflight.json", payload)
     return payload
 
 
@@ -116,7 +203,6 @@ def _required_files(kind: str) -> list[str]:
                 (
                     "connectivity_handoff.json",
                     "connectivity_displacement_review.json",
-                    "user_execution_authorization.json",
                 )
             )
     elif kind in NEB_KINDS:
@@ -333,84 +419,146 @@ def submit(
 ) -> dict[str, Any]:
     configured = load_execution_backends().vasp
     backend = require_vasp_backend(host, configured.name)
+    workdir = workdir.resolve(strict=True)
     attempt_path = workdir / SUBMISSION_ATTEMPT_FILE
     record_path = workdir / SUBMISSION_RECORD_FILE
-    if record_path.exists():
-        raise FileExistsError(
-            f"calculation already has a submission record: {record_path}"
-        )
-    if attempt_path.exists():
+    if record_path.exists() or record_path.is_symlink():
+        raise FileExistsError(f"calculation already has a submission record: {record_path}")
+    if attempt_path.exists() or attempt_path.is_symlink():
         raise RuntimeError(
-            "submission retry refused because a previous remote bsub outcome "
-            f"is unresolved; inspect {attempt_path} and follow "
+            f"submission retry refused: {UNKNOWN}; inspect {attempt_path} and follow "
             "SUBMISSION_RECOVERY.md"
         )
-    if not REMOTE_PATH.fullmatch(remote_dir) or not REMOTE_PATH.fullmatch(potcar_source):
-        raise ValueError("remote paths must remain under ~/sbq and contain no shell metacharacters")
-    report = load_json_object(workdir / "submission_preflight.json")
-    current = preflight(workdir, report["kind"])
-    if not current["passed"] or current["bundle_sha256"] != report["bundle_sha256"]:
-        raise ValueError("submission bundle changed after preflight")
-    if EXPECTED_ACTION.get(current["kind"]) != action:
-        raise ValueError(f"{current['kind']} submission requires action {EXPECTED_ACTION.get(current['kind'])}")
-    decision = load_json_object(decision_path)
-    embedded = decision.get("EVIDENCE", {}).get("preflight", {})
-    if embedded.get("bundle_sha256") != current["bundle_sha256"]:
-        raise ValueError("gate decision is not bound to the current submission bundle")
-    if embedded.get("strategy_retry_check", {}) != current.get("strategy_retry_check", {}):
-        raise ValueError("strategy retry evidence changed; regenerate the execution gate decision")
-    require_action(decision_path, action, decision["state_sha256"])
+    require_remote_path(remote_dir)
+    require_remote_path(potcar_source)
+    potcar_sha256 = require_sha256(potcar_sha256, label="POTCAR")
     parent, name = remote_dir.rsplit("/", 1)
     if workdir.name != name:
         raise ValueError("local and remote calculation directory names must match")
-    if reuse_uploaded:
-        _verify_remote_bundle(host, remote_dir, current["files"])
-    else:
-        _run(["ssh", host, f"test ! -e {remote_dir} && mkdir -p {parent}"])
-        _upload_manifest_files(host, parent, workdir, current["files"])
-    remote_check = (
-        f"cp {potcar_source} {remote_dir}/POTCAR && "
-        f"test \"$(sha256sum {remote_dir}/POTCAR | awk '{{print $1}}')\" = {potcar_sha256} && "
-        f"cd {remote_dir} && test -s INCAR && test -s KPOINTS && test -s POTCAR && "
-        "bsub script.lsf"
+    report = load_json_object(workdir / "submission_preflight.json")
+    bundle = InputBundle.from_preflight(report)
+    bundle.verify(workdir)
+    if EXPECTED_ACTION[bundle.kind] != action:
+        raise ValueError(f"{bundle.kind} submission requires action {EXPECTED_ACTION[bundle.kind]}")
+    decision = load_json_object(decision_path)
+    decision_digest = sha256_file(decision_path)
+    _verify_submission_binding(
+        workdir, decision_path, decision_digest, decision, report, bundle,
+        host, remote_dir, action, potcar_source, potcar_sha256,
     )
-    write_json(
-        attempt_path,
-        {
-            "status": "SUBMISSION_OUTCOME_UNRESOLVED",
-            "server_alias": host,
-            "remote_dir": remote_dir,
-            "action": action,
-            "bundle_sha256": current["bundle_sha256"],
-            "gate_decision_sha256": sha256_file(decision_path),
-        },
+    reservation = SubmissionReservation(
+        uuid4().hex, datetime.now(timezone.utc).isoformat(), workdir_identity(workdir),
+        host, remote_dir, action, bundle.bundle_sha256,
+        decision["evidence_binding"]["evidence_sha256"], decision_digest,
+        decision["execution_authorization"],
     )
-    completed = _run(["ssh", host, remote_check])
-    match = JOB_ID.search(completed.stdout)
-    if not match:
-        raise RuntimeError(f"could not parse LSF job ID: {completed.stdout.strip()}")
-    payload = {
-        "server_alias": host,
-        "scheduler": backend.name,
-        "job_id": match.group(1),
-        "remote_dir": remote_dir,
-        "action": action,
-        "gate_decision_sha256": sha256_file(decision_path),
-        "bundle_sha256": current["bundle_sha256"],
-        "potcar_source": potcar_source,
-        "potcar_sha256": potcar_sha256,
-        "submit_stdout": completed.stdout.strip(),
-    }
-    write_json(record_path, payload)
-    attempt_path.unlink()
-    return payload
+    # This exclusive creation is the linearization point. The reservation is
+    # retained on every exit, including success; no code path releases it.
+    try:
+        write_json_exclusive(attempt_path, asdict(reservation))
+    except FileExistsError as exc:
+        raise RuntimeError(f"submission retry refused: {UNKNOWN}; reservation already exists") from exc
+    try:
+        _verify_submission_binding(
+            workdir, decision_path, decision_digest, decision, report, bundle,
+            host, remote_dir, action, potcar_source, potcar_sha256,
+        )
+        # Also reserve the remote target, so different local checkouts cannot
+        # submit the same uploaded directory. Remote reservations are never removed.
+        remote_lock = remote_dir + ".submission-reservation"
+        setup = [
+            *_remote_path_checks(parent, allow_root=True),
+            f"mkdir -p {parent}",
+            *_remote_path_checks(remote_dir),
+            f"mkdir {remote_lock}",
+            f"printf '%s\n' {reservation.reservation_id} > {remote_lock}/reservation_id",
+        ]
+        if not reuse_uploaded:
+            setup.append(f"test ! -e {remote_dir}")
+        _run(["ssh", host, _remote_shell(setup)])
+        if not reuse_uploaded:
+            _upload_manifest_files(host, parent, workdir, dict(bundle.files))
+        _verify_submission_binding(
+            workdir, decision_path, decision_digest, decision, report, bundle,
+            host, remote_dir, action, potcar_source, potcar_sha256,
+        )
+        # Full verification and bsub share one command for BOTH upload modes.
+        # POTCAR is copied first, then included in the complete final manifest.
+        remote_check = _remote_shell([
+            *_remote_path_checks(remote_lock + "/reservation_id"),
+            f'test "$(cat {remote_lock}/reservation_id)" = {reservation.reservation_id}',
+            *_remote_path_checks(potcar_source),
+            *_remote_path_checks(remote_dir + "/POTCAR"),
+            f"test -f {potcar_source}",
+            f"test \"$(sha256sum {potcar_source} | awk '{{print $1}}')\" = {potcar_sha256}",
+            f"if test ! -e {remote_dir}/POTCAR; then cp {potcar_source} {remote_dir}/POTCAR; fi",
+            *_remote_bundle_checks(remote_dir, {**dict(bundle.files), "POTCAR": potcar_sha256}),
+            f"cd {remote_dir}",
+            "bsub script.lsf",
+        ])
+        completed = _run(["ssh", host, remote_check])
+        matches = JOB_ID.findall(completed.stdout)
+        if len(matches) != 1:
+            raise RuntimeError(f"could not parse one LSF job ID: {completed.stdout.strip()}")
+        result = SubmissionResult(
+            reservation.reservation_id, "SUBMITTED", require_job_id(matches[0]),
+            completed.stdout.strip(),
+        )
+        payload = {
+            **asdict(result), "server_alias": host, "scheduler": backend.name,
+            "remote_dir": remote_dir, "action": action,
+            "gate_decision_sha256": decision_digest, "bundle_sha256": bundle.bundle_sha256,
+            "potcar_source": potcar_source, "potcar_sha256": potcar_sha256,
+        }
+        write_json_exclusive(record_path, payload)
+        return payload
+    except BaseException:
+        # A killed process may never reach here. submission_status derives the
+        # same UNKNOWN state from a reservation without a valid success receipt.
+        try:
+            write_json_exclusive(record_path, asdict(SubmissionResult(
+                reservation.reservation_id, UNKNOWN, None, "",
+            )))
+        except (OSError, ValueError):
+            pass
+        raise
+
+
+def _verify_submission_binding(
+    workdir: Path, decision_path: Path, decision_digest: str, decision: dict[str, Any],
+    report: dict[str, Any], bundle: InputBundle, host: str, remote_dir: str,
+    action: str, potcar_source: str, potcar_sha256: str,
+) -> None:
+    if sha256_file(decision_path) != decision_digest:
+        raise ValueError("gate decision changed after validation")
+    validated = require_action(decision_path, action, decision["state_sha256"])
+    auth = validated["EVIDENCE"]["authorization"]
+    if (
+        auth["action"] != action
+        or auth["target"] != {"server_alias": host, "remote_dir": remote_dir}
+        or auth["workdir_identity"] != workdir_identity(workdir)
+        or auth["bundle_sha256"] != bundle.bundle_sha256
+        or auth["potcar"] != {"source": potcar_source, "sha256": potcar_sha256,
+                              "spec_sha256": dict(bundle.files)["POTCAR.spec"]}
+    ):
+        raise ValueError("execution authorization does not bind this target, workdir, bundle or POTCAR")
+    bundle.verify(workdir)
+    current = preflight(workdir, bundle.kind, write_report=False)
+    if current != report or validated["EVIDENCE"].get("preflight") != report:
+        raise ValueError("preflight or strategy retry evidence changed; regenerate the execution gate decision")
 
 
 def stop_job(decision_path: Path, host: str, job_id: str, output: Path) -> dict[str, Any]:
     configured = load_execution_backends().vasp
     backend = require_vasp_backend(host, configured.name)
+    job_id = require_job_id(job_id)
     decision = load_json_object(decision_path)
-    require_action(decision_path, "STOP_JOB", decision["state_sha256"])
+    decision_digest = sha256_file(decision_path)
+    validated = require_action(decision_path, "STOP_JOB", decision["state_sha256"])
+    target = validated["EVIDENCE"]["authorization"]["target"]
+    require_remote_path(target["remote_dir"])
+    if target["server_alias"] != host or target["job_id"] != job_id:
+        raise ValueError("STOP_JOB authorization target mismatch")
     scheduler = decision.get("EVIDENCE", {}).get("scheduler", {})
     expected_status = scheduler.get("status")
     if (
@@ -425,6 +573,9 @@ def stop_job(decision_path: Path, host: str, job_id: str, output: Path) -> dict[
             f"job {job_id} changed from {expected_status} to {live_status}; "
             "refresh scheduler evidence and the gate decision"
         )
+    if sha256_file(decision_path) != decision_digest:
+        raise ValueError("STOP_JOB decision changed during live scheduler verification")
+    require_action(decision_path, "STOP_JOB", decision["state_sha256"])
     completed = _run(["ssh", host, "bkill", str(job_id)])
     payload = {
         "server_alias": host,
@@ -460,6 +611,8 @@ def _run(argv: list[str]) -> subprocess.CompletedProcess[str]:
         completed = subprocess.run(
             argv,
             text=True,
+            encoding="utf-8",
+            errors="replace",
             capture_output=True,
             check=False,
             timeout=EXTERNAL_COMMAND_TIMEOUT_SECONDS,
@@ -475,24 +628,64 @@ def _run(argv: list[str]) -> subprocess.CompletedProcess[str]:
 
 
 def _verify_remote_bundle(host: str, remote_dir: str, files: dict[str, str]) -> None:
-    checks = [
-        f"test \"$(sha256sum {remote_dir}/{name} | awk '{{print $1}}')\" = {digest}"
+    _run(["ssh", host, _remote_shell(_remote_bundle_checks(remote_dir, files))])
+
+
+def _remote_shell(checks: list[str]) -> str:
+    return "bash -c " + shlex.quote("set -euo pipefail; " + " && ".join(checks))
+
+
+def _remote_path_checks(path: str, *, allow_root: bool = False) -> list[str]:
+    require_remote_path(path, allow_root=allow_root)
+    parts = path.split("/")
+    return [
+        'test "$(realpath -e ~/sbq)" = "$HOME/sbq"',
+        *(f"test ! -L {'/'.join(parts[:index])}" for index in range(2, len(parts) + 1)),
+    ]
+
+
+def _remote_bundle_checks(remote_dir: str, files: dict[str, str]) -> list[str]:
+    require_remote_path(remote_dir)
+    if not files:
+        raise ValueError("remote manifest must not be empty")
+    validated = [
+        (require_relative_input_path(name), require_sha256(digest, label=name))
         for name, digest in files.items()
     ]
-    _run(["ssh", host, " && ".join([f"test -d {remote_dir}", *checks])])
+    checks = [*_remote_path_checks(remote_dir), f"test -d {remote_dir}"]
+    for name, digest in validated:
+        path = f"{remote_dir}/{name}"
+        checks.extend([
+            *_remote_path_checks(path), f"test -f {path}",
+            f"test \"$(sha256sum {path} | awk '{{print $1}}')\" = {digest}",
+        ])
+    # Reused directories must not carry unbound restart files or symlinks.
+    checks.extend([
+        f"test \"$(find {remote_dir} -type l -print | wc -l)\" -eq 0",
+        f"test \"$(find {remote_dir} -type f -print | wc -l)\" -eq {len(files)}",
+    ])
+    return checks
 
 
 def _upload_manifest_files(
     host: str, remote_parent: str, workdir: Path, files: dict[str, str]
 ) -> None:
     """Upload only hash-bound preflight files, preserving their relative paths."""
+    require_remote_path(remote_parent, allow_root=True)
+    require_relative_input_path(workdir.name)
+    validated = {
+        require_relative_input_path(name): require_sha256(digest, label=name)
+        for name, digest in files.items()
+    }
     with tempfile.TemporaryDirectory(prefix="vasp-submit-") as temporary:
         staged = Path(temporary) / workdir.name
-        for relative in files:
-            source = workdir / relative
+        for relative, digest in validated.items():
+            source = require_local_input(workdir, relative)
             target = staged / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(source, target)
+            if sha256_file(target) != digest:
+                raise ValueError(f"staged submission bundle changed: {relative}")
         _run(["scp", "-r", str(staged), f"{host}:{remote_parent}/"])
 
 
@@ -517,6 +710,8 @@ def main() -> None:
     stop.add_argument("--host", default=vasp_backend.server_alias)
     stop.add_argument("--job-id", required=True)
     stop.add_argument("--output", type=Path, required=True)
+    status = commands.add_parser("status", help="Read submission/reconciliation state without retrying.")
+    status.add_argument("--workdir", type=Path, required=True)
     args = parser.parse_args()
     if args.command == "preflight":
         result = preflight(args.workdir, args.kind)
@@ -531,9 +726,11 @@ def main() -> None:
             args.action,
             args.reuse_uploaded,
         )
-    else:
+    elif args.command == "stop":
         result = stop_job(args.decision, args.host, args.job_id, args.output)
-    print(result["job_id"] if "job_id" in result else ("PASS" if result["passed"] else "STOP"))
+    else:
+        result = submission_status(args.workdir)
+    print(result.get("job_id") or result.get("status") or ("PASS" if result["passed"] else "STOP"))
 
 
 if __name__ == "__main__":
