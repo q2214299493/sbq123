@@ -350,7 +350,7 @@ def database(path: Path, *, compatibility=None, missing_job_history=None) -> Pat
             )
     chemistry = compatibility or contract()["compatibility"]
     for calculation_id in ("calc_is", "calc_ts_static", "calc_fs"):
-        register_calculation_compatibility(path, calculation_id, chemistry, "reviewer", "2026-01-01")
+        register_calculation_compatibility(path, calculation_id, chemistry, "reviewer", "2026-01-01T00:00:00Z")
     if compatibility is not None:
         return path
     validation_payload = {

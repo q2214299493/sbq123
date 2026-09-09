@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import json
 from scripts.artifact_io import sha256_json
-from scripts.provenance_fields import required_text
+from scripts.provenance_fields import required_text, timestamp
 from scripts.scientific_validation import validate_finite_tree
 from scripts.registry_transactions import record_event
 from scripts.ts_strategy_engine.registry import open_registry
@@ -18,7 +18,7 @@ def _revision_identity(compatibility):
 
 def create_compatibility_revision(database, compatibility, reviewer, reviewed_at, *, supersedes=None):
     required_text(reviewer, "compatibility reviewer")
-    required_text(reviewed_at, "compatibility review time")
+    timestamp(reviewed_at, "compatibility review time")
     revision = _revision_identity(compatibility)
     if supersedes == revision:
         raise ValueError("compatibility revision cannot supersede itself")
@@ -42,7 +42,7 @@ def create_compatibility_revision(database, compatibility, reviewer, reviewed_at
 def register_calculation_compatibility(database, calculation_id, compatibility, reviewer, reviewed_at):
     revision = _revision_identity(compatibility)
     required_text(reviewer, "compatibility reviewer")
-    required_text(reviewed_at, "compatibility review time")
+    timestamp(reviewed_at, "compatibility review time")
     with open_registry(database) as connection:
         connection.execute("BEGIN IMMEDIATE")
         existing = connection.execute("SELECT * FROM calculation_compatibility WHERE calculation_id=?", (calculation_id,)).fetchone()

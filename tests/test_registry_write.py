@@ -137,7 +137,8 @@ def test_registry_batch_plan_apply_and_repeat_are_deterministic(tmp_path: Path) 
     assert repeated["unchanged_count"] == 7
 
 
-def test_registry_batch_applies_hash_bound_workflow_status_change(tmp_path: Path) -> None:
+@pytest.mark.parametrize("omit_rows", [False, True])
+def test_registry_batch_applies_hash_bound_workflow_status_change(tmp_path: Path, omit_rows: bool) -> None:
     database = _database(tmp_path)
     batch = _batch()
     _apply(database, batch)
@@ -161,11 +162,19 @@ def test_registry_batch_applies_hash_bound_workflow_status_change(tmp_path: Path
             }
         ],
     }
+    explicit_rows = {**status_batch, "rows": {}}
+    if omit_rows:
+        del status_batch["rows"]
+    assert validate_registry_batch(status_batch) == explicit_rows
+    assert ("rows" not in status_batch) == omit_rows
     plan = plan_registry_batch(database, status_batch)
+    assert plan == plan_registry_batch(database, explicit_rows)
     assert plan["insert_count"] == 0
     assert plan["update_count"] == 1
     result = _apply(database, status_batch, plan)
     assert result["updated"] == 1
+    assert _apply(database, status_batch, plan)["already_applied"]
+    assert _apply(database, explicit_rows, plan)["already_applied"]
     repeated = plan_registry_batch(database, status_batch)
     assert repeated["update_count"] == 0
     assert repeated["unchanged_count"] == 1
@@ -177,9 +186,11 @@ def test_registry_batch_applies_hash_bound_workflow_status_change(tmp_path: Path
             "SELECT previous_workflow_status, new_workflow_status "
             "FROM calculation_workflow_status_history"
         ).fetchone() == ("registered", "accepted")
+        assert connection.execute("SELECT COUNT(*) FROM calculation_workflow_status_history").fetchone()[0] == 1
 
 
-def test_registry_batch_rejects_stale_workflow_status_expectation(tmp_path: Path) -> None:
+@pytest.mark.parametrize("omit_rows", [False, True])
+def test_registry_batch_rejects_stale_workflow_status_expectation(tmp_path: Path, omit_rows: bool) -> None:
     database = _database(tmp_path)
     batch = _batch()
     _apply(database, batch)
@@ -203,8 +214,27 @@ def test_registry_batch_rejects_stale_workflow_status_expectation(tmp_path: Path
             }
         ],
     }
+    if omit_rows:
+        del status_batch["rows"]
+    assert validate_registry_batch(status_batch)["rows"] == {}
+    before = database.read_bytes()
     with pytest.raises(ValueError, match="expected 'submitted'"):
         plan_registry_batch(database, status_batch)
+    assert database.read_bytes() == before
+
+
+@pytest.mark.parametrize("rows", [None, [], "invalid", 1])
+def test_registry_batch_rejects_invalid_rows_with_domain_error(rows) -> None:
+    batch = _batch()
+    batch["rows"] = rows
+    with pytest.raises(ValueError, match="rows must be a mapping"):
+        validate_registry_batch(batch)
+
+
+@pytest.mark.parametrize("batch", [None, [], "invalid", 1])
+def test_registry_batch_rejects_non_object_with_domain_error(batch) -> None:
+    with pytest.raises(ValueError, match="batch must be an object"):
+        validate_registry_batch(batch)
 
 
 def test_registry_batch_requires_exact_reviewed_hash(tmp_path: Path) -> None:

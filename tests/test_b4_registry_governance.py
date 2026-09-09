@@ -8,6 +8,7 @@ from concurrent.futures import ThreadPoolExecutor
 import pytest
 
 from scripts.registry_write import plan_registry_batch, apply_registry_batch
+from scripts.artifact_io import sha256_json
 from scripts.registry_transactions import approve_plan
 from scripts.registry_compatibility import create_compatibility_revision, register_calculation_compatibility
 from scripts.registry_schema import migrate_registry, rollback_registry_v9
@@ -101,11 +102,11 @@ def test_compatibility_revisions_do_not_rebind_old_calculations(tmp_path):
     db, batch = _database(tmp_path), _batch()
     del batch["rows"]["calculation_compatibility"]
     apply_registry_batch(db, batch, **reviewed(db, batch))
-    old = register_calculation_compatibility(db, "fixture-calc", {"branch": "old"}, "reviewer", "2026-09-09")
-    new = create_compatibility_revision(db, {"branch": "new"}, "reviewer", "2026-09-09", supersedes=old)
+    old = register_calculation_compatibility(db, "fixture-calc", {"branch": "old"}, "reviewer", "2026-09-09T00:00:00Z")
+    new = create_compatibility_revision(db, {"branch": "new"}, "reviewer", "2026-09-09T00:00:00Z", supersedes=old)
     assert old != new
     with pytest.raises(ValueError, match="immutable"):
-        register_calculation_compatibility(db, "fixture-calc", {"branch": "new"}, "reviewer", "2026-09-09")
+        register_calculation_compatibility(db, "fixture-calc", {"branch": "new"}, "reviewer", "2026-09-09T00:00:00Z")
     with sqlite3.connect(db) as c:
         assert c.execute("SELECT revision_id FROM calculation_compatibility_revisions").fetchone()[0] == old
         assert c.execute("SELECT count(*) FROM compatibility_revisions").fetchone()[0] == 2
@@ -113,6 +114,40 @@ def test_compatibility_revisions_do_not_rebind_old_calculations(tmp_path):
             c.execute("UPDATE compatibility_revisions SET compatibility_json='{}'")
         with pytest.raises(sqlite3.IntegrityError, match="immutable"):
             c.execute("DELETE FROM registry_events")
+
+
+@pytest.mark.parametrize("reviewed_at", [None, "", "not-a-time", "2026-09-09", "2026-09-09T12:00:00", "2026-99-09T00:00:00Z"])
+@pytest.mark.parametrize("operation", ["create", "register"])
+def test_compatibility_review_requires_timezone_timestamp_without_writes(tmp_path, reviewed_at, operation):
+    db, batch = _database(tmp_path), _batch()
+    del batch["rows"]["calculation_compatibility"]
+    apply_registry_batch(db, batch, **reviewed(db, batch))
+    before = db.read_bytes()
+    with pytest.raises(ValueError, match="compatibility review time"):
+        if operation == "create":
+            create_compatibility_revision(db, {"branch": "fixture"}, "reviewer", reviewed_at)
+        else:
+            register_calculation_compatibility(db, "fixture-calc", {"branch": "fixture"}, "reviewer", reviewed_at)
+    assert db.read_bytes() == before
+
+
+@pytest.mark.parametrize("reviewed_at", ["2026-09-09T00:00:00Z", "2026-09-09T08:00:00+08:00"])
+def test_compatibility_timestamp_preserves_identity_and_historical_review(tmp_path, reviewed_at):
+    db, batch = _database(tmp_path), _batch()
+    del batch["rows"]["calculation_compatibility"]
+    apply_registry_batch(db, batch, **reviewed(db, batch))
+    compatibility = {"branch": "fixture"}
+    expected = sha256_json(compatibility)
+    assert create_compatibility_revision(db, compatibility, "reviewer", reviewed_at) == expected
+    assert register_calculation_compatibility(db, "fixture-calc", compatibility, "reviewer", reviewed_at) == expected
+    before = db.read_bytes()
+    later = "2026-09-10T00:00:00Z"
+    assert create_compatibility_revision(db, compatibility, "reviewer", later) == expected
+    assert register_calculation_compatibility(db, "fixture-calc", compatibility, "reviewer", later) == expected
+    assert db.read_bytes() == before
+    with sqlite3.connect(db) as c:
+        assert c.execute("SELECT reviewed_at FROM compatibility_revisions").fetchone()[0] == reviewed_at
+        assert c.execute("SELECT reviewed_at FROM calculation_compatibility").fetchone()[0] == reviewed_at
 
 
 @pytest.mark.parametrize("previous,new", [("DONE", "RUNNING"), ("FAILED", "DONE"), ("CREATED", "bogus"), ("FAILED", "UNKNOWN")])
@@ -366,6 +401,6 @@ def test_null_primary_identity_rejected_before_mutation(tmp_path):
 def test_invalid_compatibility_cannot_create_revision(tmp_path, compatibility):
     db = _database(tmp_path)
     with pytest.raises(ValueError):
-        create_compatibility_revision(db, compatibility, "reviewer", "2026-09-09")
+        create_compatibility_revision(db, compatibility, "reviewer", "2026-09-09T00:00:00Z")
     with pytest.raises(ValueError):
-        register_calculation_compatibility(db, "missing", compatibility, "reviewer", "2026-09-09")
+        register_calculation_compatibility(db, "missing", compatibility, "reviewer", "2026-09-09T00:00:00Z")

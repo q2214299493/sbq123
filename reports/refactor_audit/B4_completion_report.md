@@ -186,3 +186,74 @@ cryptographic authentication. Host/storage failure cannot make SQLite and multip
 filesystem files one hardware-atomic resource; unknown state/promotion attempts require
 manual reconciliation. Privileged actors capable of dropping SQLite guards or rewriting
 local files are outside the in-process authorization boundary. No B5 work or merge.
+
+## B4.1 final registry contract closure (2026-09-09)
+
+Scope: the two remaining public input contracts only, based on published B4
+`e4465aa9e1521a3b9ec3dabba40badb5f17d772a`, on
+`q2214299493/sbq123`, branch `codex/b4-registry-state-management`.
+
+Both closure items PASS:
+
+- `validate_registry_batch` normalizes an omitted `rows` field to `{}` in a
+  returned copy, without modifying the caller's document. Explicit and omitted
+  empty rows therefore have identical validated content, batch/plan hashes and
+  approval semantics. Existing provenance validation and the single planner/apply
+  path consume this canonical document. Non-object batches and malformed rows
+  raise intentional `ValueError` errors; rows remain optional.
+- Both compatibility registration entry points reuse
+  `scripts.provenance_fields.timestamp` for `reviewed_at`. Missing, malformed,
+  date-only and timezone-naive review times fail before database writes. UTC and
+  explicit-offset timestamps pass. Compatibility identity still hashes only the
+  compatibility content; repeated registration preserves original review records.
+
+Exact B4.1 changed files:
+
+- `scripts/registry_mutations.py`
+- `scripts/registry_compatibility.py`
+- `tests/test_registry_write.py`
+- `tests/test_b4_registry_governance.py`
+- `tests/test_ts_strategy_engine.py`
+- `reports/refactor_audit/B4_completion_report.md`
+
+Existing scientific test assertions were retained. The TS strategy fixture only
+replaces its date-only compatibility review time with a timezone-aware timestamp.
+There is no new parser, timestamp validator, planner, executor or migration.
+Schema version 9, transaction/approval/replay rules, compatibility revision
+identity, B1 execution, B2 science and B3 evidence behavior are unchanged. No
+scientific thresholds, VASP/NEB/DIMER/TS logic, production database, historical
+scientific data, calculation output, POTCAR or model weights were modified.
+
+Validation on the isolated publication worktree (Windows / Python 3.13.9):
+
+```text
+python -m ruff check scripts modules tests
+All checks passed! (exit 0)
+
+python -m pytest -o addopts= -q
+1032 passed in 262.40s (0:04:22) (exit 0)
+
+python -m pytest -o addopts= -q tests/test_registry_write.py tests/test_b4_registry_governance.py tests/test_registry_schema.py
+72 passed in 2.94s (exit 0)
+```
+
+The initial source-worktree focused run also passed: 72 passed in 4.64s, exit 0.
+Regressions cover omitted/explicit rows, unchanged caller input, identical plans,
+approved apply, idempotent replay across both shapes, stale expected status with
+no mutation, intentional input errors, invalid timestamp rejection without writes,
+valid timezone timestamps, unchanged compatibility hashes and historical reviews.
+Scoped `git diff --check` passed. The 353 pre-existing source-worktree status
+entries were preserved and excluded from publication.
+
+Repository-state housekeeping: startup audit exited 0 with zero errors and seven
+pre-existing worktree/root-layout warnings. Read-only end-sync preflight found no
+applicable proposals before the existing classification mismatch. The required
+`python -m scripts.state_manager.cli sync --safe-only` exited 1 with
+`repository item changed after classification: sbq_catalyst_agent_workflow.egg-info/PKG-INFO`;
+no managed projection was applied. This pre-existing housekeeping blocker was
+not repaired as part of B4.1.
+
+Production-only uncertainties remain as documented above: validation used
+temporary registries, not production deployment or live scientific jobs. This
+closure does not authenticate reviewer identities or reconcile unknown production
+operations. No merge or B5 work.

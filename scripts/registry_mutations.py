@@ -91,6 +91,8 @@ def _validate_result_provenance(batch: dict[str, Any]) -> None:
 
 
 def validate_registry_batch(batch: dict[str, Any]) -> dict[str, Any]:
+    if not isinstance(batch, dict):
+        raise ValueError("registry batch must be an object")
     if batch.get("schema_version") != 1 or batch.get("document_kind") != DOCUMENT_KIND:
         raise ValueError("registry batch must use calculation_registry_batch schema version 1")
     validate_finite_tree(batch)
@@ -104,6 +106,7 @@ def validate_registry_batch(batch: dict[str, Any]) -> dict[str, Any]:
     status_changes = batch.get(STATUS_CHANGES_FIELD, [])
     if not isinstance(rows, dict):
         raise ValueError("registry batch rows must be a mapping")
+    batch = {**batch, "rows": rows}
     if not isinstance(status_changes, list):
         raise ValueError(f"registry batch {STATUS_CHANGES_FIELD} must be a list")
     if not rows and not status_changes:
