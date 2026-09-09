@@ -1,27 +1,35 @@
-# sbq123 — 当前本地项目的公开源码快照
-
-本次来源是 `C:\Users\86177\Desktop\work` 的实际文件（2026-09-08），
-包括未提交的代码修改；没有以 `sbq-public` 的代码作为基线。
-
-- 唯一日常开发目录：`C:\Users\86177\Desktop\work`。
-- 本目录 `C:\Users\86177\Desktop\sbq123` 仅作发布副本，不在这里另行开发。
-- 本次公开仓库：https://github.com/q2214299493/sbq123 。
-- [当前工作流架构](docs/12_WORKFLOW_ARCHITECTURE.md)；[模块状态](docs/06_MODULE_MAP.md)。
-- [来源、公开范围和验证边界](docs/PUBLIC_RELEASE.md)。
-
-架构覆盖不表示所有科学模块已完成。旧 `sbq-public` 中独有的架构修复
-未合入本地，因此也未包含在本快照中。数据库、模型权重、密钥和完整计算
-输出不公开；历史任务记录不是实时作业状态，也不授予执行权限。
-
+---
+document_class: CURRENT_REFERENCE
+as_of: '2026-09-09T00:00:00+08:00'
+as_of_scope: B6 document review, not a live scientific observation
+source_scope: publication document at B5 baseline; observations retain original dates
+source_version: 3a1bb3f461147a7dc9b5df5efca89de621d27f38
+source_version_role: B6 base commit
+source_branch: codex/b6-documentation-data-governance
+evidence_kind: CURRENT_CODE_STATE
+production_schema_version: NOT_VERIFIED_IN_B6
+governance: docs/DOCUMENT_GOVERNANCE.md
 ---
 
-# Fe(110) 催化计算工作流
+# sbq123 — source publication and recorded evidence boundaries
 
-当前开发来源是 `C:\Users\86177\Desktop\work`；本次公开发布目标为
-[q2214299493/sbq123](https://github.com/q2214299493/sbq123)。
-`C:\Users\86177\Desktop\sbq123` 仅是发布副本，后续功能修改须先在
-`work` 完成并测试，再同步发布。旧 `sbq-public` 和 `archive/` 中的发布
-副本不能作为当前开发基线；真实数据库和完整计算输出继续保留本地。
+Development source: `C:/Users/86177/Desktop/work`. Publication target:
+[q2214299493/sbq123](https://github.com/q2214299493/sbq123). B6 uses an isolated
+Git worktree based on B5; it is not a copy of every current development/runtime file.
+The older `C:/Users/86177/Desktop/sbq123` directory and initial source snapshot are
+historical publication references, not the required location of this checkout.
+
+See [document authority](docs/DOCUMENT_GOVERNANCE.md),
+[current-state scope](docs/02_CURRENT_STATE.md), [module status](docs/06_MODULE_MAP.md),
+[derived readiness](reports/capability_readiness.md), and
+[publication boundaries](docs/PUBLIC_RELEASE.md).
+SUPPORTED_CODE_SCHEMA: 9. production_schema_version: NOT_VERIFIED_IN_B6.
+Production SQLite, credentials, POTCAR, full weights and all runtime outputs are
+not included in the public source snapshot. Passing software tests establishes
+software behavior only. Scheduler/accepted scientific statements in referenced
+history are LAST_RECORDED_OBSERVATION, never newly observed by this README.
+
+# Fe(110) 催化计算工作流
 
 本仓库用于组织 Fe(110) 催化计算的证据检索、吸附构型、VASP/VTST、
 过渡态验证、结果登记以及后续动力学流程。它是带科学审查门的工作流，
@@ -44,8 +52,8 @@
 
 当前流程和使用边界见 [工作流架构](docs/12_WORKFLOW_ARCHITECTURE.md)；
 [ARCHITECTURE.md](ARCHITECTURE.md) 保留历史架构快照。当前模块状态只以
-`docs/06_MODULE_MAP.md` 为准，实时任务只以 `tasks/current_task.md` 和
-`docs/02_CURRENT_STATE.md` 为准。
+`docs/06_MODULE_MAP.md` 为准，记录的任务入口见 `tasks/current_task.md` 和
+`docs/02_CURRENT_STATE.md`；两者都不代表实时调度器证据。
 
 ## 安装
 
@@ -110,7 +118,7 @@ python -m scripts.adsmind_lite.plan_adsorption_candidates --help
 [策略学习接口](modules/transition_state_search/LEARNING.md)；MatRIS 峰值的
 标准 Sella 候选、VASP 标注和模型重跑衔接见
 [Sella 分支](modules/transition_state_search/SELLA_BRANCH.md)。这些功能复用现有
-模型和科学审查门。真实 GPU 组件小样本已执行，当前反应的完整闭环收益仍待验证。
+模型和科学审查门。原报告记录过 GPU 组件小样本（LAST_RECORDED_OBSERVATION）；B6 未复核生产状态或完整闭环收益。
 
 ## 测试和静态检查
 
@@ -147,7 +155,7 @@ GitHub Actions 对每次 push 和 PR 执行 Ruff 与完整 pytest，并安装 Se
 VASP 结果仍需所属模块验证。不得提交 `POTCAR`、私钥、凭据或未审查的大型
 运行产物。任何删除、覆盖、发布或高成本计算必须有明确授权。
 
-## 已验证的安全边界
+## 软件测试覆盖的安全边界（CURRENT_CODE_STATE）
 
 - 运行时后端值只通过 `scripts.execution_backends` 从
   `configs/execution_backends.yaml` 读取；提交、调度证据和结果门控拒绝

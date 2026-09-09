@@ -2,6 +2,9 @@
 
 Current executable code lives only under `scripts/` or a repository-backed skill.
 
+- `document_governance.py`: read-only document classification, wording and local-link checks; the policy owner is [document governance](../docs/DOCUMENT_GOVERNANCE.md). It has no scientific acceptance authority.
+- `generate_capability_readiness.py`: deterministic derived Markdown/JSON views of the module map and its explicit evidence annotations. It never queries production or upgrades scientific maturity from software tests.
+
 - `ts_strategy_engine/`: the single V3 entry for contract/fingerprint gates,
   template retrieval, path review, NEB decisions, DIMER, frequency handoff,
   compatible final-energy barriers, and learning records. Its CLI, orchestration,

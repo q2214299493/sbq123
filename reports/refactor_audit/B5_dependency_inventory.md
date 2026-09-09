@@ -1,3 +1,19 @@
+---
+document_class: HISTORICAL_SNAPSHOT
+as_of: '2026-09-09T00:00:00+08:00'
+as_of_scope: B6 document review, not a live scientific observation
+source_scope: publication document at B5 baseline; observations retain original dates
+source_version: 3a1bb3f461147a7dc9b5df5efca89de621d27f38
+source_version_role: B6 base commit
+source_branch: codex/b6-documentation-data-governance
+evidence_kind: SOFTWARE_TEST_RECORD
+production_schema_version: NOT_VERIFIED_IN_B6
+governance: docs/DOCUMENT_GOVERNANCE.md
+report_source_branch: SEE_ORIGINAL_BODY_OR_NOT_RECORDED
+test_source_version: SEE_ORIGINAL_BODY_OR_NOT_RECORDED
+production_scope: original limitations remain; never a production verification
+---
+
 # B5 Maintained Dependency Inventory
 
 Classification is by primary implementation responsibility, not filename alone. A domain/application file with a convenience `main` has a CLI facet; its callable implementation is not itself a CLI. This inventory covers tracked maintained paths plus B5 additions and excludes historical `archive/` trees. Imports include nested/relative imports; dynamic/standalone imports were reviewed separately. No production output was opened for this audit.

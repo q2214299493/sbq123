@@ -1,3 +1,16 @@
+---
+document_class: CURRENT_AUTHORITY
+as_of: '2026-09-09T00:00:00+08:00'
+as_of_scope: B6 document review, not a live scientific observation
+source_scope: published task projection or backlog; not a live task/queue query
+source_version: 3a1bb3f461147a7dc9b5df5efca89de621d27f38
+source_version_role: B6 base commit
+source_branch: codex/b6-documentation-data-governance
+evidence_kind: LAST_RECORDED_OBSERVATION
+production_schema_version: NOT_VERIFIED_IN_B6
+governance: docs/DOCUMENT_GOVERNANCE.md
+---
+
 # Backlog
 
 Tasks are ordered by priority and should be handled one per Codex thread.
@@ -60,3 +73,9 @@ Tasks are ordered by priority and should be handled one per Codex thread.
 ## Managed Backlog
 
 <!-- state-handoff:end task_backlog_events -->
+
+## B7 governance follow-up (not started in B6)
+
+Classify/characterize editable-build metadata and package resources before any cleanup.
+The existing `sbq_catalyst_agent_workflow.egg-info/PKG-INFO` mismatch remains unresolved;
+no deletion, reclassification event or state-transaction change is authorized by this note.

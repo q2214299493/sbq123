@@ -1,3 +1,16 @@
+---
+document_class: CURRENT_REFERENCE
+as_of: '2026-09-09T00:00:00+08:00'
+as_of_scope: B6 document review, not a live scientific observation
+source_scope: publication document at B5 baseline; observations retain original dates
+source_version: 3a1bb3f461147a7dc9b5df5efca89de621d27f38
+source_version_role: B6 base commit
+source_branch: codex/b6-documentation-data-governance
+evidence_kind: MODULE_CONTRACT_AND_LAST_RECORDED_OBSERVATION
+production_schema_version: NOT_VERIFIED_IN_B6
+governance: docs/DOCUMENT_GOVERNANCE.md
+---
+
 # Calculation Registry
 
 ## Purpose
@@ -48,10 +61,11 @@ incomplete, incompatible, duplicate, or unreviewed calculation may receive
 truthful status/provenance records but never an accepted-result record.
 Adsorption-energy derivation and Excel promotion remain separate gates.
 
-Current active-branch backfill: 24 H2/CHx/CHO adsorption relaxations are stored
+LAST_RECORDED_OBSERVATION (date not supplied in this paragraph; not rechecked in B6):
+Active-branch backfill: 24 H2/CHx/CHO adsorption relaxations are stored
 with job/status provenance, four confirmed remote evidence files per job,
 reviewed chemistry/site/duplicate fields, and dataset-compatibility reviews.
-Current promotion states are 12 `static_needed`, six `duplicate`, and six
+Last recorded promotion states are 12 `static_needed`, six `duplicate`, and six
 `needs_review`. The accepted clean static, six corresponding gas references,
 and three reviewed gas isomers are also registered with complete remote file
 inventories. The Step 12A baseline is also complete in the registry: CO/top
@@ -59,13 +73,13 @@ was already present, 23 historical calculations were backfilled from
 hash-audited remote files, 19 unique final structures have accepted compatible
 surface energies, and five duplicate final sites remain provenance-only.
 Expired LSF history is represented as `UNKNOWN` rather than inferred job IDs.
-Schema version 8 adds `ts_strategy_events` for immutable strategy variants,
+HISTORICAL_SCHEMA: version 8 adds `ts_strategy_events` for immutable strategy variants,
 attempts and reviewed outcomes through the existing registry layer. These
 records cannot promote a TS or barrier; source-matched Grade-A template evidence
 is required before a learning comparison counts a TS success. The additive
 migration preserves all existing scientific rows.
 
-Schema version 8 retains the TS evidence binding introduced in
+HISTORICAL_SCHEMA: version 8 retains the TS evidence binding introduced in
 version 4 and binds TS validation to the source saddle,
 frequency output, reaction contract, atom map, and method branch. DIMER
 validations may omit positive/negative mode displacements and connectivity;

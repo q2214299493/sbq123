@@ -1,3 +1,19 @@
+---
+document_class: HISTORICAL_SNAPSHOT
+as_of: '2026-09-09T00:00:00+08:00'
+as_of_scope: B6 document review, not a live scientific observation
+source_scope: publication document at B5 baseline; observations retain original dates
+source_version: 3a1bb3f461147a7dc9b5df5efca89de621d27f38
+source_version_role: B6 base commit
+source_branch: codex/b6-documentation-data-governance
+evidence_kind: SOFTWARE_TEST_RECORD
+production_schema_version: NOT_VERIFIED_IN_B6
+governance: docs/DOCUMENT_GOVERNANCE.md
+report_source_branch: SEE_ORIGINAL_BODY_OR_NOT_RECORDED
+test_source_version: SEE_ORIGINAL_BODY_OR_NOT_RECORDED
+production_scope: original limitations remain; never a production verification
+---
+
 # Phase B0 — Full Repository Coverage Audit
 
 - **Repository:** C:\Users\86177\Desktop\work

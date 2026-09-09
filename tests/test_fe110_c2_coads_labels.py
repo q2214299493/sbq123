@@ -10,7 +10,7 @@ from scripts.adsorption.c2_coads_catalog import CANDIDATE_SITE_LABELS
 ROOT = Path(__file__).resolve().parents[1]
 BUILDER = ROOT / "scripts" / "adsorption" / "build_fe110_c2_coads.py"
 LABEL_CATALOG = ROOT / "scripts" / "adsorption" / "c2_coads_catalog.py"
-CURRENT_STATE = ROOT / "docs" / "02_CURRENT_STATE.md"
+STATE_LABEL_HISTORY = ROOT / "docs/history/current_state_chronology_before_B6_20260909.md"
 SLAB = ROOT / "calculations" / "true_fe110_clean_20260629" / "POSCAR"
 
 EXPECTED_SITE_LABELS = {
@@ -31,7 +31,7 @@ MOJIBAKE_MARKERS = ("鈷侽", "鈷?", "魏-C伪", "畏虏", "C尾")
 
 
 def test_c2_coads_builder_source_and_labels_are_utf8() -> None:
-    sources = [path.read_bytes().decode("utf-8", errors="strict") for path in (BUILDER, LABEL_CATALOG, CURRENT_STATE)]
+    sources = [path.read_bytes().decode("utf-8", errors="strict") for path in (BUILDER, LABEL_CATALOG, STATE_LABEL_HISTORY)]
 
     assert not any(marker in source for source in sources for marker in MOJIBAKE_MARKERS)
     assert CANDIDATE_SITE_LABELS == EXPECTED_SITE_LABELS

@@ -1,0 +1,238 @@
+schema_version: 1
+authority_document: docs/DOCUMENT_GOVERNANCE.md
+classification_rule: First matching rule; no matching path is UNKNOWN_REVIEW_REQUIRED.
+  Path class never proves scientific acceptance.
+classes:
+  SOURCE_CODE:
+    allowed_locations:
+    - scripts/
+    - modules/
+    - skills/
+    - tests/
+    git_tracking: 'yes'
+    ai_scientific_evidence: false
+    automatic_modification: task_owned_with_tests
+    archive_policy: review_required
+    public_snapshot: 'yes'
+    evidence_condition: Not accepted scientific evidence by directory or filename.
+  CONFIGURATION:
+    allowed_locations:
+    - configs/
+    - pyproject.toml
+    - .github/
+    - docs/
+    - modules/*/README.md
+    - skills/*/SKILL.md
+    git_tracking: 'yes'
+    ai_scientific_evidence: false
+    automatic_modification: non_scientific_task_only
+    archive_policy: review_required
+    public_snapshot: reviewed_only
+    evidence_condition: Not accepted scientific evidence by directory or filename.
+  SCIENTIFIC_INPUT:
+    allowed_locations:
+    - calculations/
+    - modules/
+    git_tracking: reviewed_subset
+    ai_scientific_evidence: false
+    automatic_modification: 'no'
+    archive_policy: explicit_review
+    public_snapshot: reviewed_subset
+    evidence_condition: Input assumptions only; not proof of results.
+  SCIENTIFIC_RAW_EVIDENCE:
+    allowed_locations:
+    - calculations/
+    - outputs/
+    - data/
+    git_tracking: reviewed_small_subset
+    ai_scientific_evidence: true
+    automatic_modification: 'no'
+    archive_policy: explicit_review
+    public_snapshot: reviewed_small_subset
+    evidence_condition: Only the measured/computed quantities it establishes; owning
+      validation is required for acceptance.
+  SCIENTIFIC_ACCEPTED_RECORD:
+    allowed_locations:
+    - data/
+    - calculations/
+    git_tracking: reviewed_subset
+    ai_scientific_evidence: true
+    automatic_modification: 'no'
+    archive_policy: explicit_review
+    public_snapshot: reviewed_deidentified_subset
+    evidence_condition: Requires current bound scientific-owner acceptance; path classification
+      never assigns this class automatically.
+  PREDICTION:
+    allowed_locations:
+    - outputs/
+    - data/
+    - calculations/
+    git_tracking: reviewed_subset
+    ai_scientific_evidence: false
+    automatic_modification: 'no'
+    archive_policy: explicit_review
+    public_snapshot: reviewed_subset
+    evidence_condition: Not accepted scientific evidence by directory or filename.
+  DERIVED_REPORT:
+    allowed_locations:
+    - reports/
+    - outputs/
+    git_tracking: reviewed_subset
+    ai_scientific_evidence: false
+    automatic_modification: reproducible_task_owned_only
+    archive_policy: review_required
+    public_snapshot: reviewed_subset
+    evidence_condition: Not accepted scientific evidence by directory or filename.
+  RUNTIME_STATE:
+    allowed_locations:
+    - data/
+    - tasks/
+    - calculations/
+    git_tracking: selective
+    ai_scientific_evidence: false
+    automatic_modification: existing_state_authority_only
+    archive_policy: explicit_review
+    public_snapshot: source_safe_subset_only
+    evidence_condition: Not accepted scientific evidence by directory or filename.
+  HISTORICAL:
+    allowed_locations:
+    - archive/
+    - docs/history/
+    - reports/
+    - root_classified_reports
+    git_tracking: existing_reviewed_subset
+    ai_scientific_evidence: false
+    automatic_modification: 'no'
+    archive_policy: already_historical_or_review_required
+    public_snapshot: reviewed_subset
+    evidence_condition: Not accepted scientific evidence by directory or filename.
+  GENERATED_BUILD_METADATA:
+    allowed_locations:
+    - '*.egg-info/'
+    - __pycache__/
+    - .pytest_cache/
+    - .ruff_cache/
+    - build/
+    - dist/
+    git_tracking: 'no'
+    ai_scientific_evidence: false
+    automatic_modification: build_tools_only
+    archive_policy: B7_review
+    public_snapshot: 'no'
+    evidence_condition: Not accepted scientific evidence by directory or filename.
+  SENSITIVE_EXCLUDED:
+    allowed_locations:
+    - external_private_storage
+    git_tracking: 'no'
+    ai_scientific_evidence: false
+    automatic_modification: 'no'
+    archive_policy: explicit_owner_review
+    public_snapshot: 'no'
+    evidence_condition: Not accepted scientific evidence by directory or filename.
+  LARGE_EXTERNAL_ARTIFACT:
+    allowed_locations:
+    - external_artifact_storage
+    git_tracking: 'no'
+    ai_scientific_evidence: false
+    automatic_modification: 'no'
+    archive_policy: explicit_owner_review
+    public_snapshot: 'no'
+    evidence_condition: Not accepted scientific evidence by directory or filename.
+rules:
+- patterns:
+  - '**/POTCAR'
+  - POTCAR
+  - '**/id_ed25519*'
+  - '**/*.pem'
+  - '**/.env'
+  - .env
+  - '**/credentials*'
+  class: SENSITIVE_EXCLUDED
+- patterns:
+  - '*.egg-info/*'
+  - '**/*.egg-info/*'
+  - '**/__pycache__/*'
+  - .pytest_cache/*
+  - .ruff_cache/*
+  - build/*
+  - dist/*
+  class: GENERATED_BUILD_METADATA
+- patterns:
+  - '**/*.pt'
+  - '**/*.pth'
+  - '**/*.ckpt'
+  - '**/WAVECAR'
+  - '**/CHGCAR'
+  class: LARGE_EXTERNAL_ARTIFACT
+- patterns:
+  - outputs/*prediction*
+  - outputs/*candidate*
+  - outputs/*gpu_result_manifest*
+  - data/*prediction*
+  - data/*candidate*
+  - data/*gpu_result_manifest*
+  - calculations/*prediction*
+  - calculations/*candidate*
+  - calculations/*gpu_result_manifest*
+  class: PREDICTION
+- patterns:
+  - archive/*
+  - docs/history/*
+  class: HISTORICAL
+- patterns:
+  - '**/OUTCAR'
+  - '**/OSZICAR'
+  - '**/vasprun.xml'
+  - '**/CONTCAR'
+  - '**/XDATCAR'
+  class: SCIENTIFIC_RAW_EVIDENCE
+- patterns:
+  - '**/POSCAR'
+  - '**/INCAR'
+  - '**/KPOINTS'
+  - '**/POTCAR.spec'
+  class: SCIENTIFIC_INPUT
+- patterns:
+  - configs/*
+  - .github/*
+  - pyproject.toml
+  class: CONFIGURATION
+- patterns:
+  - scripts/*
+  - tests/*
+  - skills/*/scripts/*
+  - modules/*.py
+  - modules/*/*.py
+  class: SOURCE_CODE
+- patterns:
+  - reports/*
+  - outputs/*
+  class: DERIVED_REPORT
+- patterns:
+  - data/*
+  - tasks/*
+  - calculations/*
+  class: RUNTIME_STATE
+- patterns:
+  - docs/*
+  - modules/*/README.md
+  - skills/*/SKILL.md
+  class: CONFIGURATION
+public_scope:
+  development_source: C:/Users/86177/Desktop/work
+  publication_repository: q2214299493/sbq123
+  initial_manifest: configs/public_source_snapshot.json
+  initial_manifest_class: HISTORICAL
+  production_schema_version: NOT_VERIFIED_IN_B6
+  excluded:
+  - production SQLite
+  - credentials
+  - POTCAR
+  - full model weights
+  - unreviewed runtime outputs
+known_metadata_issue:
+  path: sbq_catalyst_agent_workflow.egg-info/PKG-INFO
+  class: GENERATED_BUILD_METADATA
+  evidence: 'Header: Metadata-Version 2.4; Name sbq-catalyst-agent-workflow; Version
+    0.1.0. Not tracked in the publication baseline.'
+  action: B7 packaging characterization; no deletion or state-event rewrite in B6
