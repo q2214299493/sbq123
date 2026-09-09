@@ -6,6 +6,23 @@ from .execution_decision import make_decision as _make_decision
 from .execution_evidence import authorized_actions, source_bindings_valid
 
 
+def adsorption_submission_decision(evidence: dict[str, Any]) -> dict[str, Any] | None:
+    """Route the owning adsorption preflight, without importing NEB criteria."""
+    preflight = evidence.get("preflight", {})
+    if preflight.get("kind") != "adsorption_relaxation":
+        return None
+    if preflight.get("passed") and preflight.get("adsorption_hard_gate_passed"):
+        return _make_decision(
+            "READY_FOR_ADSORPTION_RELAXATION", [], evidence,
+            ("SUBMIT_VASP",), "SUBMIT_REVIEWED_ORDINARY_RELAXATION",
+        )
+    return _make_decision(
+        "ADSORPTION_PREFLIGHT_FAILED",
+        preflight.get("errors") or ["ADSORPTION_PREFLIGHT_EVIDENCE_MISSING"],
+        evidence, (), "CORRECT_ADSORPTION_INPUT",
+    )
+
+
 def vfa_submission_decision(evidence: dict[str, Any]) -> dict[str, Any] | None:
     preflight = evidence.get("preflight", {})
     if preflight.get("kind") != "vfa":

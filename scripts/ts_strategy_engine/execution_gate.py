@@ -11,6 +11,7 @@ from .execution_path_rules import (
     INITIAL_SUBMISSIONS, blocking_decision, progress_decision,
 )
 from .execution_submission_rules import (
+    adsorption_submission_decision,
     connectivity_submission_decision,
     user_requested_stop,
     vfa_submission_decision,
@@ -59,6 +60,9 @@ def decide_execution(
     requested_stop = user_requested_stop(evidence)
     if requested_stop:
         return _bind_execution(requested_stop)
+    adsorption = adsorption_submission_decision(evidence)
+    if adsorption:
+        return _bind_execution(adsorption)
     vfa = vfa_submission_decision(evidence)
     if vfa:
         return _bind_execution(vfa)

@@ -31,7 +31,7 @@ def _equal(actual: Any, expected: Any) -> bool:
     return str(actual).lower() == str(expected).lower()
 
 
-def preflight(workdir: Path, *, profile_path: Path = DEFAULT_PROFILE, cores: int = 32) -> dict[str, Any]:
+def preflight(workdir: Path, *, profile_path: Path = DEFAULT_PROFILE, cores: int = 32, write_report: bool = True) -> dict[str, Any]:
     required = ["POSCAR", "INCAR", "KPOINTS", "POTCAR.spec", "script.lsf", "candidate_manifest.json"]
     errors: list[str] = []
     warnings: list[str] = []
@@ -106,11 +106,12 @@ def preflight(workdir: Path, *, profile_path: Path = DEFAULT_PROFILE, cores: int
         "cores": cores,
         "potcar_local_policy": "POTCAR contents remain remote; verify exact species order and SHA-256 before submission",
     }
-    (workdir / "adsorption_submission_preflight.json").write_text(
-        json.dumps(result, indent=2, ensure_ascii=False) + "\n",
-        encoding="utf-8",
-        newline="\n",
-    )
+    if write_report:
+        (workdir / "adsorption_submission_preflight.json").write_text(
+            json.dumps(result, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+            newline="\n",
+        )
     return result
 
 

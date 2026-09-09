@@ -144,6 +144,18 @@ The audit reads only POSCAR/CONTCAR over SSH, checks initial and latest site cla
 
 ## Required Outputs
 
+### Hash-bound submission adapter
+
+Use `python -m scripts.neb_agent.submission preflight --workdir RUN_DIR
+--kind adsorption_relaxation` for the unified submission bundle. It delegates
+scientific input checks to `scripts.adsorption.preflight_fe110_adsorption`;
+it does not apply NEB image or connectivity requirements to an ordinary
+relaxation. A current explicit `SUBMIT_VASP` authorization and canonical
+execution decision are still required. The shared executor retains target,
+POTCAR, input-hash and duplicate-submission protections. A production registry
+schema mismatch blocks retry-history checks; do not silently migrate the
+database or bypass the check.
+
 - reviewed POSCAR/CONTCAR copy, INCAR, KPOINTS, POTCAR metadata, LSF script
 - scheduler and scientific status
 - final species, chemical event, and plausibility status
