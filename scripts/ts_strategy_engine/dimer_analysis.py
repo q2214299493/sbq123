@@ -7,7 +7,7 @@ from scripts.scientific_validation import finite_number
 from typing import Any
 
 from scripts.aqcat25_ts_schema import load_document
-from scripts.artifact_io import load_json_object, sha256_file, sha256_text
+from scripts.artifact_io import load_json_object, sha256_file, sha256_text, source_file_manifest
 from scripts.neb_agent.utils_report import write_json
 from scripts.neb_agent.utils_structure import compatible, read_poscar
 from scripts.neb_agent.utils_vasp import parse_outcar
@@ -118,7 +118,8 @@ def _dimer_evidence(workdir: Path, manifest: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def analyze_dimer(workdir: Path) -> dict[str, Any]:
+def analyze_dimer(workdir: Path, *, write_output: bool = True) -> dict[str, Any]:
+    workdir = workdir.resolve()
     rows = parse_dimcar(workdir / "DIMCAR")
     outcar = parse_outcar(workdir / "OUTCAR")
     target = _ediffg(workdir / "INCAR")
@@ -219,7 +220,7 @@ def analyze_dimer(workdir: Path) -> dict[str, Any]:
         and final_review.get("modecar_sha256") == final_mode_sha256
     )
     technically_converged = bool(search_converged and final_structure and final_mode and final_mode_reviewed)
-    if search_converged and final_mode and not final_review_path.exists():
+    if write_output and search_converged and final_mode and not final_review_path.exists():
         write_json(
             final_review_path,
             {
@@ -281,9 +282,17 @@ def analyze_dimer(workdir: Path) -> dict[str, Any]:
         "fatal_keywords": outcar.get("fatal_keywords", []),
         "technically_converged": technically_converged,
         "final_structure": final_structure,
+        "final_structure_sha256": sha256_file(Path(final_structure)) if final_structure else None,
+        "ts_candidate_id": manifest.get("ts_candidate_id"),
+        "source_files": source_file_manifest([workdir / name for name in (
+            "INCAR", "POSCAR", "CONTCAR", "CENTCAR", "OUTCAR", "OSZICAR", "DIMCAR",
+            "MODECAR", "NEWMODECAR", "mode_review.json", "final_mode_review.json",
+            "dimer_handoff.json", "scheduler_evidence.json",
+        )]),
         "final_mode": final_mode,
         "scientifically_valid": False,
         "requires_frequency_and_connectivity_validation": True,
     }
-    write_json(workdir / "dimer_analysis.json", payload)
+    if write_output:
+        write_json(workdir / "dimer_analysis.json", payload)
     return payload

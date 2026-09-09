@@ -5,6 +5,7 @@ import sqlite3
 from pathlib import Path
 from typing import Any
 
+from .matched_static_evidence import validate_barrier_values
 from .registry import compatibility_fingerprint, open_registry, table_exists, utc_now
 
 
@@ -58,6 +59,8 @@ EVIDENCE_COLUMNS = """
     nf.sha256 AS negative_displacement_sha256,
     b.validation_status AS barrier_status,
     b.forward_barrier_ev AS evidence_barrier_ev,
+    b.reverse_barrier_ev AS evidence_reverse_barrier_ev,
+    b.reaction_energy_ev AS evidence_reaction_energy_ev,
     b.compatibility_fingerprint AS barrier_compatibility,
     b.ts_validation_id AS barrier_validation_id,
     f.calculation_id AS structure_calculation_id,
@@ -82,6 +85,12 @@ def _decode_json_fields(item: dict[str, Any]) -> None:
 
 
 def _evidence_valid(item: dict[str, Any]) -> bool:
+    try:
+        validate_barrier_values({"forward_barrier_ev": item.get("evidence_barrier_ev"),
+                                 "reverse_barrier_ev": item.get("evidence_reverse_barrier_ev"),
+                                 "reaction_energy_ev": item.get("evidence_reaction_energy_ev")})
+    except ValueError:
+        return False
     expected = compatibility_fingerprint(item.get("fingerprint", {}).get("compatibility", {}))
     source_method = str(item.get("validation_source_method", "")).lower()
     method_evidence_valid = (

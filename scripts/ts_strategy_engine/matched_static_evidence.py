@@ -4,6 +4,7 @@ import json
 import sqlite3
 
 from scripts.execution_backends import load_execution_backends
+from scripts.scientific_validation import finite_number
 
 from .contract import has_final_energy_compatibility
 from .registry import (
@@ -106,7 +107,9 @@ def matched_static_convention(rows: list[sqlite3.Row]) -> tuple[str, str]:
             "DONE evidence or an accepted "
             "historical-scheduler-retention exception with latest scheduler UNKNOWN"
         )
-    if any(row["numeric_value"] is None or str(row["unit"]).lower() != "ev" for row in rows):
+    for row in rows:
+        finite_number(row["numeric_value"], "final energy")
+    if any(str(row["unit"]).lower() != "ev" for row in rows):
         raise ValueError("all three final-energy results must be numeric eV values")
     if any(
         row["source_calculation_id"] != row["calculation_id"]
@@ -139,12 +142,20 @@ def matched_static_convention(rows: list[sqlite3.Row]) -> tuple[str, str]:
 
 
 def barrier_values(rows: list[sqlite3.Row]) -> dict[str, float]:
-    initial, saddle, final = (float(row["numeric_value"]) for row in rows)
+    initial, saddle, final = (finite_number(row["numeric_value"], "final energy") for row in rows)
     values = {
         "forward_barrier_ev": saddle - initial,
         "reverse_barrier_ev": saddle - final,
         "reaction_energy_ev": final - initial,
     }
+    return validate_barrier_values(values)
+
+
+def validate_barrier_values(values: dict) -> dict[str, float]:
+    """Validate calculated or stored barriers before scientific reuse/export."""
+    values = {key: finite_number(values[key], key) for key in (
+        "forward_barrier_ev", "reverse_barrier_ev", "reaction_energy_ev",
+    )}
     if values["forward_barrier_ev"] < 0 or values["reverse_barrier_ev"] < 0:
         raise ValueError("TS final energy lies below an endpoint")
     return values

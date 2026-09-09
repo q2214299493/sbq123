@@ -66,7 +66,9 @@ def evaluate_validation_pipeline(
         return _result(status, next_action, gate_reasons, source_paths, output)
     reasons.extend(dimer_warnings)
 
-    if not vfa_analysis_path or not vfa_analysis_path.is_file():
+    if vfa_analysis_path is not None and not vfa_analysis_path.is_file():
+        raise ValueError(f"explicit VFA analysis is missing: {vfa_analysis_path}")
+    if vfa_analysis_path is None:
         submitted = bool(vfa_workdir and (vfa_workdir / "submission_record.json").is_file())
         if submitted:
             source_paths.append(vfa_workdir / "submission_record.json")
@@ -96,6 +98,20 @@ def evaluate_validation_pipeline(
             source_paths,
             output,
         )
+    from scripts.ts_validation.analyze_vfa import validate_dimer_vfa_binding
+
+    try:
+        contract, bound_sources = validate_dimer_vfa_binding(
+            dimer, dimer_analysis_path, vfa, vfa_analysis_path, vfa_workdir, dimer_soft_review_path,
+        )
+        if segment_id and branch_plan_path:
+            segment = next(item for item in load_json_object(branch_plan_path)["segments"] if item["segment_id"] == segment_id)
+            if segment["reaction_contract_sha256"] != contract["contract_sha256"] or segment["ts_candidate_id"] != dimer.get("ts_candidate_id"):
+                raise ValueError("multi-TS segment does not bind this DIMER and local contract")
+        source_paths.extend(bound_sources)
+    except (OSError, ValueError, KeyError) as exc:
+        return _result("BLOCKED_SCIENTIFIC_EVIDENCE_BINDING", "REVIEW_AND_REGENERATE_BOUND_ANALYSES",
+                       [*reasons, str(exc)], source_paths, output)
     # Retain the old arguments without loading them so historical callers do
     # not break and stale connectivity evidence cannot affect Dimer grading.
     _ = (
@@ -116,8 +132,10 @@ def evaluate_validation_pipeline(
 
 
 def _load_optional(path: Path | None, source_paths: list[Path]) -> dict[str, Any]:
-    if not path or not path.is_file():
+    if path is None:
         return {}
+    if not path.is_file():
+        raise ValueError(f"explicit optional evidence is missing: {path}")
     source_paths.append(path)
     return load_json_object(path)
 
@@ -247,10 +265,19 @@ def _multi_ts_branch_gate(
     segment_id: str | None,
     source_paths: list[Path],
 ) -> tuple[str, str, list[str]] | None:
-    if not topology_path or not topology_path.is_file():
+    if topology_path is None:
+        if plan_path is not None or segment_id is not None:
+            raise ValueError("multi-TS branch/segment requires its explicit topology")
         return None
+    if not topology_path.is_file():
+        raise ValueError(f"explicit topology is missing: {topology_path}")
     topology = load_json_object(topology_path)
     source_paths.append(topology_path)
+    plan = _load_optional(plan_path, source_paths)
+    if plan_path is not None and (plan.get("status") != policy["multi_transition_state"]["branch_plan_status"]
+                                  or plan.get("source_path_topology_sha256") != sha256_file(topology_path)):
+        return ("NEEDS_MULTI_TS_BRANCH_PLAN", "CORRECT_AND_BIND_SEGMENT_LOCAL_REACTION_CONTRACTS",
+                ["MULTI_TS_BRANCH_PLAN_INVALID_OR_UNBOUND"])
     peak_count = int(topology.get("independent_ts_candidate_count", 1))
     if peak_count <= 1:
         return None
@@ -280,8 +307,6 @@ def _multi_ts_branch_gate(
             "BUILD_SEGMENT_LOCAL_REACTION_CONTRACTS",
             ["GLOBAL_IS_FS_CONNECTIVITY_FOR_MULTI_TS_FORBIDDEN"],
         )
-    plan = load_json_object(plan_path)
-    source_paths.append(plan_path)
     segments = plan.get("segments", [])
     valid_segments = bool(
         plan.get("status") == rule["branch_plan_status"]

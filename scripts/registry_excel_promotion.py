@@ -21,6 +21,8 @@ from typing import Any
 
 from scripts.artifact_io import canonical_json, sha256_file, sha256_json, write_json_atomic
 from scripts.ts_strategy_engine.registry import open_registry
+from scripts.scientific_validation import finite_number
+from scripts.ts_strategy_engine.matched_static_evidence import validate_barrier_values
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -143,6 +145,8 @@ def _result_value(
         raise ValueError(
             f"result {result_id} has adsorption-energy validation on a non-adsorption result"
         )
+    if str(item["unit"]).lower() == "ev":
+        finite_number(item["numeric_value"], f"accepted energy {result_id}")
     value = item["numeric_value"] if item["numeric_value"] is not None else item["text_value"]
     if value is None:
         raise ValueError(f"result {result_id} has no value")
@@ -204,6 +208,7 @@ def _barrier_context(connection: sqlite3.Connection, barrier_set_id: str) -> dic
     item = dict(row)
     if item["validation_status"] != "accepted" or item["grade"] != "A" or item["kinetic_eligible"] != 1:
         raise ValueError("barrier promotion requires an accepted Grade-A kinetic-eligible TS barrier")
+    validate_barrier_values(item)
     return item
 
 

@@ -10,7 +10,7 @@ from typing import Any
 
 import yaml
 
-from scripts.artifact_io import load_json_object, sha256_file
+from scripts.artifact_io import load_json_object, sha256_file, source_file_manifest, source_file_manifest_valid
 from scripts.neb_agent.utils_report import write_json
 from scripts.neb_agent.utils_vasp import parse_outcar
 from scripts.ts_validation.dimer_frequency_gate import evaluate_dimer_frequency_gate
@@ -135,6 +135,17 @@ def _bound_vfa_handoff(
             or payload.get("source_sha256") != sha256_file(source_structure)
         ):
             return {}
+        from scripts.ts_validation.prepare_vfa_from_ts_image import same_vfa_geometry
+
+        final_structure = _resolve_bound_path(saddle_payload.get("final_structure"), saddle_analysis.parent)
+        if (
+            final_structure is None or final_structure.resolve() != source_structure.resolve()
+            or any(saddle_payload.get(key) != contract[key] for key in (
+                "contract_sha256", "atom_map_sha256", "compatibility_sha256",
+            ))
+            or not same_vfa_geometry(source_structure, frequency_poscar)
+        ):
+            return {}
         embedded_gate = payload.get("dimer_frequency_gate") or {}
         soft_review_path = embedded_gate.get("manual_review_path")
         resolved_review = Path(str(soft_review_path)) if soft_review_path else None
@@ -157,6 +168,13 @@ def _bound_vfa_handoff(
     payload["_dimer_frequency_handoff_acceptance"] = (
         dimer_frequency_acceptance if source_method == "dimer" else None
     )
+    from scripts.ts_validation.prepare_vfa_from_ts_image import vfa_scope_checks
+
+    try:
+        if not all(vfa_scope_checks(workdir, path).values()):
+            return {}
+    except (OSError, ValueError, TypeError):
+        return {}
     payload["_evidence_path"] = str(path.resolve())
     payload["_evidence_sha256"] = sha256_file(path)
     return payload
@@ -225,7 +243,10 @@ def analyze_vfa(
     contract: dict[str, Any],
     review_path: Path | None,
     frequency_policy: dict[str, Any] | None = None,
+    *, write_output: bool = True,
 ) -> dict[str, Any]:
+    workdir = workdir.resolve()
+    review_path = review_path.resolve() if review_path else None
     reaction_indices = contract["reaction_atoms"]
     outcar_path = workdir / "OUTCAR"
     text = outcar_path.read_text(encoding="utf-8", errors="replace") if outcar_path.is_file() else ""
@@ -308,7 +329,7 @@ def analyze_vfa(
         if thresholds_configured
         else []
     )
-    common_evidence = bool(
+    review_evidence = bool(
         normal_completion
         and source_method in {"neb", "ci_neb", "dimer"}
         and review.get("mode_assignment") == "accepted"
@@ -324,13 +345,12 @@ def analyze_vfa(
         and review.get("compatibility_sha256") == contract["compatibility_sha256"]
         and handoff
         and reaction_overlap
-        and thresholds_configured
-        and principal_meaningful
         and (
             source_method != "dimer"
             or handoff.get("_dimer_technical_acceptance") is True
         )
     )
+    common_evidence = bool(review_evidence and thresholds_configured and principal_meaningful)
     connectivity_evidence = bool(
         connectivity.get("status") == "PASS"
         and connectivity.get("grade_a_connectivity_eligible") is True
@@ -381,7 +401,21 @@ def analyze_vfa(
         grade = "B"
     else:
         grade = "Ungraded"
+    evidence_paths = [outcar_path, workdir / "POSCAR", workdir / "vfa_scope_review.json"]
+    evidence_paths.extend(Path(value) for value in (
+        review_path, handoff.get("_evidence_path"),
+        (handoff.get("_dimer_frequency_gate") or {}).get("manual_review_path"),
+    ) if value)
+    if frequency_policy is None:
+        evidence_paths.append(DEFAULT_PROFILE)
     payload = {
+        "scientific_review_bound": bool(review_evidence and review.get("status") == "accepted"),
+        "workdir": str(workdir.resolve()),
+        "review_path": str(review_path.resolve()) if review_path else None,
+        "reaction_contract": contract,
+        "frequency_policy": policy,
+        "frequency_policy_is_default": frequency_policy is None,
+        "source_files": source_file_manifest(evidence_paths),
         "status": "VALIDATED" if grade == "A" else "REJECTED" if grade == "C" else "NEEDS_REVIEW",
         "source_method": review.get("source_method", "Needs confirmation"),
         "validation_basis": (
@@ -451,8 +485,100 @@ def analyze_vfa(
         "reviewed_at": review.get("reviewed_at"),
         "notes": review.get("notes"),
     }
-    write_json(workdir / "vfa_analysis.json", payload)
+    if write_output:
+        write_json(workdir / "vfa_analysis.json", payload)
     return payload
+
+
+def _require_final_dimer_review(dimer: dict, dimer_path: Path, final: Path, handoff: dict, soft_review_path: Path | None) -> None:
+    gate = handoff["_dimer_frequency_gate"]
+    embedded = handoff.get("dimer_frequency_gate") or {}
+    if embedded.get("manual_review_path"):
+        if embedded.get("manual_review_sha256") != gate.get("manual_review_sha256"):
+            raise ValueError("VFA soft-review reference is missing or stale")
+    if soft_review_path is not None:
+        gate = evaluate_dimer_frequency_gate(dimer, dimer_path, final, soft_review_path)
+        if not gate["manual_review_accepted"]:
+            raise ValueError("DIMER soft review is missing, stale or belongs to another object")
+        if embedded.get("manual_review_sha256") != gate["manual_review_sha256"]:
+            raise ValueError("Pipeline and VFA use different DIMER soft reviews")
+    if not gate["ts_validation_eligible"]:
+        raise ValueError("DIMER review permits frequency handoff only")
+
+
+def _require_dimer_identity(dimer: dict, dimer_path: Path, vfa: dict, handoff: dict, handoff_path: Path, contract: dict) -> Path:
+    from scripts.ts_strategy_engine.contract import normalize_contract
+
+    source = _resolve_bound_path(handoff.get("source_ts_candidate"), handoff_path.parent)
+    final = _resolve_bound_path(dimer.get("final_structure"), dimer_path.parent)
+    if source is None or final is None or source.resolve() != final.resolve():
+        raise ValueError("VFA source is not this DIMER final structure")
+    if vfa.get("source_saddle_sha256") != sha256_file(final):
+        raise ValueError("VFA source saddle content is stale")
+    for key in ("contract_sha256", "atom_map_sha256", "compatibility_sha256"):
+        if any(item.get(key) != contract[key] for item in (dimer, vfa, handoff)):
+            raise ValueError(f"DIMER/VFA {key} mismatch")
+    if "reaction_contract" in handoff and normalize_contract(handoff["reaction_contract"]) != contract:
+        raise ValueError("VFA handoff reaction contract differs from the analyzed contract")
+    return final
+
+
+def validate_dimer_vfa_binding(
+    dimer: dict[str, Any], dimer_path: Path, vfa: dict[str, Any],
+    vfa_path: Path, workdir: Path | None, soft_review_path: Path | None,
+) -> tuple[dict[str, Any], list[Path]]:
+    """Verify current evidence and one scientific object before pipeline acceptance.
+
+    Reuse the original parsers/gates in read-only mode; summaries cannot replace
+    their inputs. Optional frequency classification remains independent of TS
+    acceptance and no connectivity requirement is introduced here.
+    """
+    from scripts.ts_strategy_engine.contract import normalize_contract
+    from scripts.ts_strategy_engine.dimer_analysis import analyze_dimer
+    from scripts.ts_validation.prepare_vfa_from_ts_image import vfa_scope_checks
+
+    if not source_file_manifest_valid(dimer) or not source_file_manifest_valid(vfa):
+        raise ValueError("DIMER/VFA source files are missing or stale; regenerate their analyses")
+    contract = normalize_contract(vfa.get("reaction_contract"))
+    root = Path(vfa.get("workdir", "")).resolve()
+    if workdir is not None and root != workdir.resolve():
+        raise ValueError("VFA analysis belongs to a different workdir")
+    if root != vfa_path.parent.resolve():
+        raise ValueError("VFA summary is outside its bound workdir")
+    review_path = _resolve_bound_path(vfa.get("review_path"), root)
+    if review_path is None:
+        raise ValueError("VFA mode/geometry review is missing")
+    handoff = _bound_vfa_handoff(vfa, vfa_path.parent, root, contract)
+    if not handoff or handoff.get("source_method") != "dimer":
+        raise ValueError("VFA handoff is missing, stale or not DIMER-derived")
+    handoff_path = Path(handoff["_evidence_path"])
+    analysis_source = _resolve_bound_path(handoff.get("saddle_analysis_source"), handoff_path.parent)
+    if analysis_source is None or analysis_source.resolve() != dimer_path.resolve():
+        raise ValueError("VFA references a different DIMER analysis")
+    if vfa.get("saddle_analysis_sha256") != sha256_file(dimer_path):
+        raise ValueError("VFA DIMER analysis digest is stale")
+    final = _require_dimer_identity(dimer, dimer_path, vfa, handoff, handoff_path, contract)
+    current_dimer = analyze_dimer(final.parent, write_output=False)
+    if current_dimer != dimer:
+        raise ValueError("DIMER summary differs from its current scientific evidence")
+    scope = vfa_scope_checks(root, handoff_path)
+    if not all(scope.values()):
+        raise ValueError("VFA scope review is missing, stale or invalid: " + ", ".join(key for key, ok in scope.items() if not ok))
+    _require_final_dimer_review(dimer, dimer_path, final, handoff, soft_review_path)
+    if set(handoff.get("reaction_atom_indices_zero_based", [])) != set(contract["reaction_atoms"]):
+        raise ValueError("VFA active scope uses a different reaction atom set")
+    current_vfa = analyze_vfa(root, contract, review_path,
+        None if vfa.get("frequency_policy_is_default") else vfa.get("frequency_policy"), write_output=False)
+    # Classification labels may have legacy spellings when unconfigured.
+    current_vfa["frequency_threshold_status"] = vfa.get("frequency_threshold_status") if (
+        current_vfa["frequency_threshold_status"] != "configured" and vfa.get("frequency_threshold_status") != "configured"
+    ) else current_vfa["frequency_threshold_status"]
+    if not current_vfa["scientific_review_bound"]:
+        raise ValueError("VFA review identity, scientific scope or acceptance is incomplete")
+    if current_vfa != vfa:
+        raise ValueError("VFA summary differs from its current frequency/review evidence")
+    sources = [Path(item["path"]) for payload in (dimer, vfa) for item in payload["source_files"]]
+    return contract, [*sources, handoff_path, dimer_path, final]
 
 
 def main() -> None:

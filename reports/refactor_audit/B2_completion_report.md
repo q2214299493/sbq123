@@ -171,3 +171,145 @@ repair is included.
   re-derivation before chemical-event reuse; no automatic migration was performed.
 - Existing B1 production uncertainties (scheduler response loss, privileged
   concurrent filesystem changes and abrupt process/storage loss) remain unchanged.
+
+
+## B2.1 scientific acceptance boundary closure
+
+Status: PASS on the complete publication snapshot.
+
+This supplement closes two gaps in the original B0/B2 package. The preceding B2
+results describe commit 99b82eab; they did not establish these missing boundaries.
+
+| Original audit mapping | Current B2 mapping | Correction |
+| --- | --- | --- |
+| B0 B2-03: finite final energies | B2-04 | Finite values at final-energy acceptance, arithmetic output, formal registration consumers, template evidence and export. |
+| B0 B2-04: cross-DIMER/VFA identity | B2-06 | Same current DIMER analysis, saddle geometry, contract/map/method and applicable handoff/scope/reviews before TS_ACCEPTED. |
+
+### Source and publication ownership
+
+All B2.1 implementation and fixture changes were made in the real development
+source, C:/Users/86177/Desktop/work. Before edits, the scoped files were clean and
+their normalized source digests matched public base
+99b82eab15aaf22ef7dc880af54e77314eb49b53. Existing unrelated changes were inventoried
+and preserved; no reset, clean, stash or production-data operation was used.
+
+The existing release worktree is only a validation/publication snapshot. Its
+task-owned files were copied byte-for-byte from work; all remaining tracked files
+stay on the existing sbq123 release history. Tests run against this complete
+repository snapshot, not an extracted standalone reproduction. No repair was
+developed in the release worktree. Publication remains
+q2214299493/sbq123, codex/b2-scientific-contract, without a merge or B3 work.
+
+Source/test snapshot (the 11 changed Python files, sorted path-to-file-SHA256
+mapping serialized as compact sorted JSON): 42b3b5cc3f797d3e01bd6100cf0256da35db2b0a372d1d81940d82d2f585c292.
+The full snapshot is public base 99b82eab plus exactly the task-owned changes
+listed below. Interpreter: 3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)].
+
+### Implemented boundary behavior
+
+- Both analyzers support write_output=False. The pipeline reuses their original
+  scientific parsing and acceptance logic without rewriting source records.
+  DIMER summaries bind raw inputs, modes/reviews, scheduler evidence and final
+  structure contents. VFA summaries bind the frequency output, POSCAR, review,
+  applicable scope/soft review and policy, and retain the full supplied contract.
+- validate_dimer_vfa_binding in the existing VFA owner verifies current manifests,
+  actual DIMER analysis identity and contents, actual final-saddle/VFA geometry,
+  and a semantically normalized contract with matching map and compatibility.
+  It reproduces both summaries from current inputs, rather than trusting embedded
+  PASS booleans. Review identity/approval is checked independently of optional
+  frequency classification. Handed-off geometry is compared at the existing
+  POSCAR writer's 12-digit serialization precision; no force, frequency or
+  geometry acceptance threshold was changed.
+- The existing scope checks were moved verbatim from submission preflight to
+  prepare_vfa_from_ts_image.vfa_scope_checks. Both preflight and scientific
+  validation call that owner. B1 reservation, authorization, upload, receipt and
+  GPU wrapper behavior is unchanged; no parallel executor or scope validator was
+  added. Source paths are canonicalized when produced so changing the caller's
+  directory does not invalidate a legitimate source chain.
+- Missing optional topology remains optional. Explicit missing/corrupt/stale
+  topology, branch plan, VFA file or applicable review is an error or blocking
+  result. Multi-TS acceptance binds the selected local contract and the candidate
+  ID in the original DIMER handoff. Frequency-only soft review cannot authorize
+  final acceptance. A matching valid local segment is tested positively.
+- matched_static_convention calls the existing finite_number validator for every
+  accepted total energy. barrier_values validates inputs and all three subtraction
+  outputs through validate_barrier_values, including finite-input overflow.
+  Negative DFT total energies remain valid; the original strict negative-barrier
+  rejection is unchanged. Unit, method, source-file/job and registration transaction
+  checks are retained.
+- Formal barrier registration already consumes these owners; no duplicate checks
+  were added to evidence.py. Accepted template evidence and Excel promotion now
+  reject nonfinite stored barriers; eV result export rejects missing/nonfinite
+  numeric energy. Tests use only temporary SQLite registries and synthetic data.
+
+No downhill-connectivity requirement, full Hessian, new frequency threshold,
+changed VASP parameter, new TS grading policy, registry schema or production
+data change is included. Optional classification and thermochemistry/kinetics
+eligibility retain their existing policy. Original behavioral assertions remain;
+old positive fixtures now contain the actual matching evidence previously absent.
+
+### Exact B2.1 task-owned files
+
+- `scripts/neb_agent/submission.py`
+- `scripts/ts_strategy_engine/dimer_analysis.py`
+- `scripts/ts_strategy_engine/matched_static_evidence.py`
+- `scripts/ts_strategy_engine/templates.py`
+- `scripts/registry_excel_promotion.py`
+- `scripts/ts_validation/analyze_vfa.py`
+- `scripts/ts_validation/prepare_vfa_from_ts_image.py`
+- `scripts/ts_validation/validation_pipeline.py`
+- `tests/test_b21_scientific_acceptance.py`
+- `tests/test_ts_validation.py`
+- `tests/test_ts_validation_pipeline.py`
+- `modules/ts_vibrational_validation/README.md`
+- `reports/refactor_audit/B2_completion_report.md`
+
+### Executed validation
+
+The first new regression run against the unmodified production implementation
+failed as required: 38 failed, 3 passed, 0 skipped in 7.94s, exit 1:
+python -m pytest -o addopts= -q tests/test_b21_scientific_acceptance.py --tb=no
+
+Further adversarial regressions were also run before their fixes: 7 failures for
+self-consistent wrong geometry/unapproved review/export consumption; 3 failures
+for explicitly supplied invalid branch plans; and 1 failure for relative sources
+read from a different caller directory. Their matching-object positive controls
+were retained. The final file contains 53 regressions, including direct calls to
+evaluate_validation_pipeline and the formal barrier registration transaction.
+
+Final expanded B2/TS/barrier/B1 regression command:
+
+    python -m pytest -o addopts= -q tests/test_b21_scientific_acceptance.py tests/test_b2_scientific_contract.py tests/test_ts_validation.py tests/test_ts_validation_pipeline.py tests/test_ts_strategy_engine.py tests/test_registry_excel_promotion.py tests/test_code_structure.py tests/test_execution_lifecycle.py tests/test_gpu_execution_lifecycle.py tests/test_neb_submission.py tests/test_neb_execution_gate.py tests/test_execution_gate_compatibility.py tests/test_artifact_io.py tests/test_execution_backends.py tests/test_vasp_result_gate.py tests/test_vasp_output_streaming.py
+
+Final expanded result: 465 passed, 0 failed, 0 skipped in 149.59s (0:02:29), exit 0.
+
+Required complete repository commands on the same pending-release source snapshot:
+
+    python -m ruff check scripts modules tests
+    python -m pytest -o addopts= -q
+
+Final Ruff result: All checks passed, exit 0. Scoped git diff --check passed.
+Final complete pytest result: 888 passed, 0 failed, 0 skipped in 231.41s (0:03:51), exit 0.
+
+The real work checkout's start audit returned 0 errors and five pre-existing
+warnings (external worktrees and unrelated root items). Managed runtime projections
+are outside this patch and were not used as scientific evidence. Read-only sync
+preflight found the existing error "repository item changed after classification:
+sbq_catalyst_agent_workflow.egg-info/PKG-INFO" and unrelated projection proposals
+proposal-fbdd167f3d1d22bcc040c277, proposal-fc9e18ea99ec76fdad03d6bd and
+proposal-11c7077298b7b7ea07cbf254. No projections or state events were applied.
+
+### Remaining production-only uncertainties
+
+No SSH, cluster/VASP/GPU job, real registry query, model operation or historical
+result rewrite was performed. Tests verify synthetic complete and damaged files,
+source identity, read-only replay, SQL rejection/rollback and existing B1 behavior;
+they do not establish any production TS or barrier.
+
+Historical summaries missing current source bindings require reanalysis and, when
+referenced hashes change, the existing reviewer-controlled handoff/scope/review
+refresh. They are not silently migrated or accepted, and this does not authorize
+rerunning a calculation. Multi-segment handoffs must carry their reviewed candidate
+identity. Real retained output variants and deployed cluster environments remain
+unverified. As before, read/verify checks are not an immutable snapshot against
+concurrent privileged changes to source files.

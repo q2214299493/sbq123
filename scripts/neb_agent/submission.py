@@ -279,45 +279,10 @@ def _check_vfa(workdir: Path, incar: dict[str, str]) -> tuple[list[str], dict[st
     scope_path = workdir / "vfa_scope_review.json"
     if not handoff_path.is_file() or not scope_path.is_file() or not (workdir / "POSCAR").is_file():
         return errors, {"errors": errors}
+    from scripts.ts_validation.prepare_vfa_from_ts_image import vfa_scope_checks
+
     handoff = load_json_object(handoff_path)
-    scope = load_json_object(scope_path)
-    structure = read_poscar(workdir / "POSCAR")
-    active = [
-        index
-        for index, flags in enumerate(structure.flags)
-        if structure.selective and flags and all(value == "T" for value in flags)
-    ]
-    expected_active = [int(value) for value in handoff.get("active_atom_indices_zero_based", [])]
-    reaction = {int(value) for value in handoff.get("reaction_atom_indices_zero_based", [])}
-    active_set_policy = handoff.get("active_set_policy")
-    legacy_scope = active_set_policy is None
-    checks = {
-        "frequency_structure_bound": handoff.get("frequency_poscar_sha256")
-        == sha256_file(workdir / "POSCAR"),
-        "active_set_matches_selective_dynamics": active == expected_active,
-        "reaction_atoms_active": reaction <= set(active),
-        "partial_hessian_policy_bound": legacy_scope
-        or (
-            handoff.get("frequency_method") == "finite_difference_partial_hessian"
-            and active_set_policy == "contract_defined_local"
-            and handoff.get("active_indices_source")
-            == "explicit_reaction_contract_review"
-            and handoff.get("full_hessian_required") is False
-            and scope.get("frequency_method") == handoff.get("frequency_method")
-            and scope.get("active_set_policy") == active_set_policy
-            and scope.get("active_indices_source")
-            == handoff.get("active_indices_source")
-        ),
-        "scope_review_accepted": scope.get("status")
-        in {"accepted_for_partial_hessian", "accepted_for_diagnostic_frequency"},
-        "scope_review_identity": bool(scope.get("reviewer") and scope.get("reviewed_at")),
-        "scope_review_structure_bound": scope.get("frequency_poscar_sha256")
-        == sha256_file(workdir / "POSCAR"),
-        "scope_review_handoff_bound": scope.get("vfa_handoff_sha256")
-        == sha256_file(handoff_path),
-        "scope_review_active_set": scope.get("active_atom_indices_zero_based")
-        == expected_active,
-    }
+    checks = vfa_scope_checks(workdir, handoff_path)
     if str(handoff.get("source_method", "")).lower() == "dimer":
         saddle_path = _manifest_path(workdir, handoff.get("saddle_analysis_source"))
         source_path = _manifest_path(workdir, handoff.get("source_ts_candidate"))

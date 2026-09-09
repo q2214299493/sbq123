@@ -13,31 +13,34 @@ def _write(path: Path, payload: dict) -> Path:
     return path
 
 
+def _case(root: Path, soft_decision: str | None = None) -> dict:
+    from test_b21_scientific_acceptance import bound_case
+
+    directory = root / "bound_case"
+    if not directory.exists():
+        return bound_case(directory, soft_decision=soft_decision)
+    return {"dimer": directory / "dimer", "vfa": directory / "vfa", "soft": directory / "soft_review.json"}
+
+
 def _dimer(path: Path, **updates: object) -> Path:
-    payload = {
-        "technically_converged": True,
-        "normal_completion": True,
-        "vasp_force_converged": True,
-        "negative_curvature": True,
-        "dimer_soft_gate_passed": True,
-    }
+    review_path = path.parent / "review.json"
+    decision = json.loads(review_path.read_text())["decision"] if review_path.is_file() else None
+    case = _case(path.parent, decision)
+    if decision:
+        review_path.write_bytes(case["soft"].read_bytes())
+    analysis_path = case["dimer"] / "dimer_analysis.json"
+    payload = json.loads(analysis_path.read_text())
+    if all(payload.get(key) == value for key, value in updates.items()):
+        return analysis_path
     payload.update(updates)
-    return _write(path, payload)
+    return _write(analysis_path, payload)
 
 
 def _vfa(path: Path, **updates: object) -> Path:
-    payload = {
-        "normal_completion": True,
-        "imaginary_frequency_count": 1,
-        "principal_mode_index": 6,
-        "principal_mode_assignment": "accepted",
-        "principal_mode_reaction_atom_overlap": [45, 46],
-        "frequency_threshold_status": "configured",
-        "principal_mode_is_meaningful": True,
-        "geometry_status": "pass",
-    }
+    analysis_path = _case(path.parent)["vfa"] / "vfa_analysis.json"
+    payload = json.loads(analysis_path.read_text())
     payload.update(updates)
-    return _write(path, payload)
+    return _write(analysis_path, payload)
 
 
 def test_pipeline_blocks_before_frequency_when_dimer_hard_gate_fails(tmp_path: Path) -> None:

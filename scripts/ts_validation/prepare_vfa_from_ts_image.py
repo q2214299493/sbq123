@@ -21,6 +21,9 @@ def prepare_vfa_handoff(
     dry_run: bool,
     dimer_soft_gate_review_path: Path | None = None,
 ) -> None:
+    source_image, destination = source_image.resolve(), destination.resolve()
+    saddle_analysis_path = saddle_analysis_path.resolve()
+    dimer_soft_gate_review_path = dimer_soft_gate_review_path.resolve() if dimer_soft_gate_review_path else None
     reaction_indices = contract["reaction_atoms"]
     if not active_indices:
         raise SystemExit("VFA requires an explicit partial-Hessian active atom set")
@@ -116,6 +119,67 @@ def prepare_vfa_handoff(
             "reviewed_at": None,
         },
     )
+
+
+def same_vfa_geometry(source: Path, frequency: Path) -> bool:
+    """Compare the handoff geometry at the existing POSCAR writer's 12-digit precision.
+
+    Selective Dynamics may change to the reviewed active set; coordinates,
+    cell, species and ordering must remain the saddle's. This is serialization
+    identity, not a new scientific displacement tolerance.
+    """
+    import numpy as np
+
+    left, right = read_poscar(source), read_poscar(frequency)
+    return bool(left.symbols == right.symbols and left.counts == right.counts
+                and np.array_equal(left.cell.round(12), right.cell.round(12))
+                and np.array_equal(left.frac.round(12), right.frac.round(12)))
+
+
+def vfa_scope_checks(workdir: Path, handoff_path: Path | None = None) -> dict[str, bool]:
+    """The shared, existing partial-Hessian scope rules for preflight and acceptance."""
+    handoff_path = handoff_path or workdir / "vfa_handoff.json"
+    scope_path = workdir / "vfa_scope_review.json"
+    handoff = load_json_object(handoff_path)
+    scope = load_json_object(scope_path)
+    structure = read_poscar(workdir / "POSCAR")
+    active = [
+        index
+        for index, flags in enumerate(structure.flags)
+        if structure.selective and flags and all(value == "T" for value in flags)
+    ]
+    expected_active = [int(value) for value in handoff.get("active_atom_indices_zero_based", [])]
+    reaction = {int(value) for value in handoff.get("reaction_atom_indices_zero_based", [])}
+    active_set_policy = handoff.get("active_set_policy")
+    legacy_scope = active_set_policy is None
+    checks = {
+        "frequency_structure_bound": handoff.get("frequency_poscar_sha256")
+        == sha256_file(workdir / "POSCAR"),
+        "active_set_matches_selective_dynamics": active == expected_active,
+        "reaction_atoms_active": reaction <= set(active),
+        "partial_hessian_policy_bound": legacy_scope
+        or (
+            handoff.get("frequency_method") == "finite_difference_partial_hessian"
+            and active_set_policy == "contract_defined_local"
+            and handoff.get("active_indices_source")
+            == "explicit_reaction_contract_review"
+            and handoff.get("full_hessian_required") is False
+            and scope.get("frequency_method") == handoff.get("frequency_method")
+            and scope.get("active_set_policy") == active_set_policy
+            and scope.get("active_indices_source")
+            == handoff.get("active_indices_source")
+        ),
+        "scope_review_accepted": scope.get("status")
+        in {"accepted_for_partial_hessian", "accepted_for_diagnostic_frequency"},
+        "scope_review_identity": bool(scope.get("reviewer") and scope.get("reviewed_at")),
+        "scope_review_structure_bound": scope.get("frequency_poscar_sha256")
+        == sha256_file(workdir / "POSCAR"),
+        "scope_review_handoff_bound": scope.get("vfa_handoff_sha256")
+        == sha256_file(handoff_path),
+        "scope_review_active_set": scope.get("active_atom_indices_zero_based")
+        == expected_active,
+    }
+    return checks
 
 
 def main() -> None:

@@ -562,6 +562,8 @@ def test_dimer_vfa_grade_a_does_not_require_bidirectional_connectivity(tmp_path:
     saddle_analysis.write_text(
         json.dumps(
             {
+                "final_structure": str(saddle),
+                **{key: contract[key] for key in ("contract_sha256", "atom_map_sha256", "compatibility_sha256")},
                 "technically_converged": True,
                 "negative_curvature": True,
                 "vasp_force_converged": True,
@@ -580,6 +582,8 @@ def test_dimer_vfa_grade_a_does_not_require_bidirectional_connectivity(tmp_path:
     vfa_handoff.write_text(
         json.dumps(
             {
+                "active_atom_indices_zero_based": [1, 2],
+                "reaction_atom_indices_zero_based": [1, 2],
                 "source_sha256": sha256_file(saddle),
                 "source_ts_candidate": str(saddle),
                 "frequency_poscar_sha256": sha256_file(tmp_path / "POSCAR"),
@@ -593,6 +597,11 @@ def test_dimer_vfa_grade_a_does_not_require_bidirectional_connectivity(tmp_path:
         ),
         encoding="utf-8",
     )
+    (tmp_path / "vfa_scope_review.json").write_text(json.dumps({
+        "status": "accepted_for_partial_hessian", "reviewer": "reviewer", "reviewed_at": "2026-01-01",
+        "frequency_poscar_sha256": sha256_file(tmp_path / "POSCAR"),
+        "vfa_handoff_sha256": sha256_file(vfa_handoff), "active_atom_indices_zero_based": [1, 2],
+    }), encoding="utf-8")
     review = tmp_path / "review.json"
     review.write_text(
         json.dumps(

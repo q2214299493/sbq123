@@ -62,6 +62,36 @@ The machine-readable stage policy is `configs/ts_validation_pipeline.yaml`.
 The evaluator is resumable and reports one `status` and one `next_action`; file
 existence alone cannot advance a stage.
 
+## Current scientific-object binding
+
+The pipeline accepts a DIMER/VFA pair only after it verifies current source files,
+reinterprets them through `analyze_dimer` and `analyze_vfa` in read-only mode, and
+matches the actual DIMER analysis, final saddle geometry, normalized reaction
+contract, atom map and compatibility. Both analyzers preserve their normal output
+API and support `write_output=False` for this verification. VFA summaries retain
+the full supplied contract, review path and source manifest; DIMER summaries bind
+the raw inputs, final structure and mode reviews. Hash identity alone is not
+scientific validation.
+
+The frequency POSCAR may change only its reviewed Selective Dynamics active set,
+not the saddle geometry. Scope checks have one owner in
+`prepare_vfa_from_ts_image.vfa_scope_checks`, used by submission preflight and
+scientific acceptance. A supplied soft review must still match the current
+analysis, saddle and warning set; frequency-only approval cannot finalize a TS.
+For a multi-TS plan, the selected local contract and candidate ID must agree with
+the DIMER evidence (`ts_candidate_id` from its reviewed handoff).
+
+Omitted topology remains optional. An explicitly supplied missing, malformed or
+stale topology/branch plan, handoff, scope or applicable review blocks acceptance
+(or raises an explanatory file/validation error). Legacy connectivity parameters
+remain non-gating for DIMER.
+
+Older summaries without current source binding need reanalysis and, where hashes
+changed, the existing reviewer-controlled handoff/scope/review refresh. This does
+not authorize rerunning a calculation or silently updating historical evidence.
+Optional frequency classification and thermochemistry eligibility keep their
+existing policy; no Hessian expansion or downhill calculation is added.
+
 ## Handoff
 
 Database and downstream eligibility follow only `docs/10_TS_VALIDATION_PROTOCOL.md`.
