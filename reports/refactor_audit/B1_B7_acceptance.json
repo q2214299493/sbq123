@@ -1,0 +1,1433 @@
+{
+  "audit_kind": "INDEPENDENT_ACCEPTANCE_AUDIT",
+  "audit_status": "STOPPED_ON_BLOCKING_FINDING",
+  "CODE_MERGE_READINESS": "NOT_READY_TO_MERGE",
+  "PRODUCTION_OPERATION_READINESS": "UNVERIFIED",
+  "candidate": {
+    "repository": "https://github.com/q2214299493/sbq123.git",
+    "candidate": "7a0b745df96de2762a6f289e9eeda1a3c298fe9d",
+    "tree": "68688cfdb85854deedd815d85690731a4f629ec7",
+    "datetime": "2026-09-09T16:29:12.025667+00:00",
+    "os": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+    "ancestry": [
+      {
+        "branch": "origin/codex/b1-execution-lifecycle",
+        "sha": "b1c59addbc7d7be64347db66a201dc5841404341",
+        "ancestor": true
+      },
+      {
+        "branch": "origin/codex/b2-scientific-contract",
+        "sha": "3d9e9070e48a6cb65d9b4c0334adb4243f36dd0c",
+        "ancestor": true
+      },
+      {
+        "branch": "origin/codex/b3-evidence-ml-governance",
+        "sha": "9f4332f082d4e286ce43c5a137a62ac1e30fa441",
+        "ancestor": true
+      },
+      {
+        "branch": "origin/codex/b4-registry-state-management",
+        "sha": "fbbb7bb26d28867d9766cc7fca84077fa54cf3d6",
+        "ancestor": true
+      },
+      {
+        "branch": "origin/codex/b5-architecture-boundaries",
+        "sha": "3a1bb3f461147a7dc9b5df5efca89de621d27f38",
+        "ancestor": true
+      },
+      {
+        "branch": "origin/codex/b6-documentation-data-governance",
+        "sha": "93c09db8a6008a873ef7cc8bc7b4cc1e2a8cc22a",
+        "ancestor": true
+      },
+      {
+        "branch": "origin/codex/b7-release-environment",
+        "sha": "7a0b745df96de2762a6f289e9eeda1a3c298fe9d",
+        "ancestor": true
+      }
+    ],
+    "main": "5c5fed9b4a0691a893af3d03eaae10636999aa85",
+    "merge_base": "5c5fed9b4a0691a893af3d03eaae10636999aa85",
+    "changes": {
+      "M": 174,
+      "A": 60
+    },
+    "tracked_files": 1297,
+    "top_level": {
+      ".codexignore": 1,
+      ".gitattributes": 1,
+      ".github": 1,
+      ".gitignore": 1,
+      "AGENTS.md": 1,
+      "AGENT_RULE_TS_ENDPOINT.md": 1,
+      "ARCHITECTURE.md": 1,
+      "BASELINE_INTEGRITY_REPORT.md": 1,
+      "CHANGESET_MANIFEST.md": 1,
+      "CLEAN_CHECKOUT_VERIFICATION.md": 1,
+      "CONDITION_CLOSURE_REPORT.md": 1,
+      "DEPRECATED_CODE.md": 1,
+      "E_SOURCE_ARCHITECTURE.md": 1,
+      "FINAL_API_COMPATIBILITY_REPORT.md": 1,
+      "FINAL_ARCHITECTURE.md": 1,
+      "FINAL_AUDIT_CLOSURE_MATRIX.md": 1,
+      "FINAL_BACKLOG.md": 1,
+      "FINAL_BEHAVIOR_COMPATIBILITY_REPORT.md": 1,
+      "FINAL_CHANGESET_MANIFEST.md": 1,
+      "FINAL_CODE_QUALITY_AUDIT.md": 1,
+      "FINAL_COMMIT_PLAN.md": 1,
+      "FINAL_REFACTOR_REPORT.md": 1,
+      "FINAL_STAGING_PLAN.md": 1,
+      "FINAL_VERIFICATION_REPORT.md": 1,
+      "GOVERNANCE_DOCUMENT_DECISION.md": 1,
+      "MANIFEST.in": 1,
+      "MIGRATION_REVIEW.md": 1,
+      "MIGRATION_REVISION_BACKLOG.md": 1,
+      "NEB_PATH_QUALITY_ARCHITECTURE.md": 1,
+      "PHASE_2A1_CLOSURE_REPORT.md": 1,
+      "PHASE_2A_REPORT.md": 1,
+      "PHASE_2B_BEHAVIOR_BASELINE.md": 1,
+      "PHASE_2B_BEHAVIOR_COMPATIBILITY.md": 1,
+      "PHASE_2B_CHANGESET_MANIFEST.md": 1,
+      "PHASE_2B_DIFF_REVIEW.md": 1,
+      "PHASE_2B_ENTRY_EQUIVALENCE_REPORT.md": 1,
+      "PHASE_2B_IMPLEMENTATION_REPORT.md": 1,
+      "PHASE_2B_PROPOSAL.md": 1,
+      "PHASE_2B_VERIFICATION_REPORT.md": 1,
+      "PHASE_2B_VERIFIED_CHANGESET.md": 1,
+      "PHASE_3A_CHANGESET_MANIFEST.md": 1,
+      "PHASE_3A_REPORT.md": 1,
+      "PHASE_3B_BEHAVIOR_COMPATIBILITY.md": 1,
+      "PHASE_3B_BEHAVIOR_VERIFICATION.md": 1,
+      "PHASE_3B_CHANGESET_MANIFEST.md": 1,
+      "PHASE_3B_DIFF_REVIEW.md": 1,
+      "PHASE_3B_IMPLEMENTATION_PLAN.md": 1,
+      "PHASE_3B_IMPLEMENTATION_REPORT.md": 1,
+      "PHASE_3B_PRECHANGE_SNAPSHOT.md": 1,
+      "PHASE_3B_VERIFICATION_REPORT.md": 1,
+      "PHASE_3B_VERIFIED_CHANGESET.md": 1,
+      "PROJECT_AUDIT.md": 1,
+      "README.md": 1,
+      "REFACTOR_CHANGESET.md": 1,
+      "REFACTOR_PLAN.md": 1,
+      "REFACTOR_REPORT.md": 1,
+      "REVIEW_BASELINE_V2.md": 1,
+      "REVIEW_BASELINE_V3.md": 1,
+      "SOURCE_BASELINE_PLAN.md": 1,
+      "SOURCE_PROVENANCE_REPORT.md": 1,
+      "SUBMISSION_RECOVERY.md": 1,
+      "TS_ENDPOINT_API_CONTRACT.md": 1,
+      "TS_ENDPOINT_BEHAVIOR_BASELINE.md": 1,
+      "TS_ENDPOINT_CURRENT_ARCHITECTURE.md": 1,
+      "TS_ENDPOINT_DUPLICATION_AUDIT.md": 1,
+      "TS_ENDPOINT_FROZEN_ISSUES.md": 1,
+      "TS_ENDPOINT_ISSUE_CLOSURE_REPORT.md": 1,
+      "TS_ENDPOINT_REFACTORED_ARCHITECTURE.md": 1,
+      "UNTRACKED_FILE_INVENTORY.md": 1,
+      "VERIFICATION_REPORT.md": 1,
+      "archive": 2,
+      "artifacts": 28,
+      "calculations": 235,
+      "configs": 40,
+      "data": 2,
+      "docs": 22,
+      "modules": 512,
+      "outputs": 19,
+      "pyproject.toml": 1,
+      "reports": 24,
+      "scripts": 236,
+      "skills": 27,
+      "tasks": 2,
+      "tests": 77
+    },
+    "large_files": [],
+    "suspect_paths": [],
+    "deleted": [],
+    "renamed": [],
+    "cumulative_file_inventory": [
+      {
+        "status": "M",
+        "path": ".gitattributes"
+      },
+      {
+        "status": "M",
+        "path": ".github/workflows/state-manager.yml"
+      },
+      {
+        "status": "M",
+        "path": ".gitignore"
+      },
+      {
+        "status": "M",
+        "path": "AGENTS.md"
+      },
+      {
+        "status": "A",
+        "path": "MANIFEST.in"
+      },
+      {
+        "status": "M",
+        "path": "README.md"
+      },
+      {
+        "status": "M",
+        "path": "configs/aqcat25_ts_active_learning.schema.json"
+      },
+      {
+        "status": "A",
+        "path": "configs/data_governance.yaml"
+      },
+      {
+        "status": "A",
+        "path": "configs/release_resources.json"
+      },
+      {
+        "status": "M",
+        "path": "docs/00_PROJECT_BRIEF.md"
+      },
+      {
+        "status": "M",
+        "path": "docs/01_METHOD_PROTOCOL.md"
+      },
+      {
+        "status": "M",
+        "path": "docs/02_CURRENT_STATE.md"
+      },
+      {
+        "status": "M",
+        "path": "docs/03_DECISIONS_LOG.md"
+      },
+      {
+        "status": "M",
+        "path": "docs/04_ERROR_LOG.md"
+      },
+      {
+        "status": "M",
+        "path": "docs/05_FILE_INDEX.md"
+      },
+      {
+        "status": "M",
+        "path": "docs/06_MODULE_MAP.md"
+      },
+      {
+        "status": "M",
+        "path": "docs/07_MEMORY_INDEX.md"
+      },
+      {
+        "status": "M",
+        "path": "docs/08_HISTORICAL_RESULTS.md"
+      },
+      {
+        "status": "M",
+        "path": "docs/09_USER_PREFERENCES.md"
+      },
+      {
+        "status": "M",
+        "path": "docs/10_TS_VALIDATION_PROTOCOL.md"
+      },
+      {
+        "status": "M",
+        "path": "docs/11_DATA_PROVENANCE_PROTOCOL.md"
+      },
+      {
+        "status": "M",
+        "path": "docs/12_WORKFLOW_ARCHITECTURE.md"
+      },
+      {
+        "status": "M",
+        "path": "docs/13_AGENT_ERROR_REFLECTION.md"
+      },
+      {
+        "status": "M",
+        "path": "docs/13_WORK_HANDOFF.md"
+      },
+      {
+        "status": "M",
+        "path": "docs/14_CODE_ARCHITECTURE_GUIDE.md"
+      },
+      {
+        "status": "A",
+        "path": "docs/DOCUMENT_GOVERNANCE.md"
+      },
+      {
+        "status": "M",
+        "path": "docs/FE110_CO_DISSOCIATION_HANDOFF_20260807.md"
+      },
+      {
+        "status": "A",
+        "path": "docs/INSTALLATION.md"
+      },
+      {
+        "status": "M",
+        "path": "docs/PUBLIC_RELEASE.md"
+      },
+      {
+        "status": "A",
+        "path": "docs/history/current_state_chronology_before_B6_20260909.md"
+      },
+      {
+        "status": "M",
+        "path": "modules/adsmind_lite/README.md"
+      },
+      {
+        "status": "M",
+        "path": "modules/adsorption_workflow/README.md"
+      },
+      {
+        "status": "M",
+        "path": "modules/baseline_mkm/README.md"
+      },
+      {
+        "status": "M",
+        "path": "modules/calculation_registry/README.md"
+      },
+      {
+        "status": "A",
+        "path": "modules/calculation_registry/migrations/009_registry_governance.sql"
+      },
+      {
+        "status": "A",
+        "path": "modules/calculation_registry/migrations/009_registry_governance_rollback.sql"
+      },
+      {
+        "status": "M",
+        "path": "modules/calculation_registry/schema.sql"
+      },
+      {
+        "status": "M",
+        "path": "modules/catalysis_data_retrieval/README.md"
+      },
+      {
+        "status": "M",
+        "path": "modules/convergence_workflow/README.md"
+      },
+      {
+        "status": "M",
+        "path": "modules/coverage_mkm/README.md"
+      },
+      {
+        "status": "M",
+        "path": "modules/fe_convergence_baseline/README.md"
+      },
+      {
+        "status": "M",
+        "path": "modules/fe_convergence_baseline/validate_baseline.py"
+      },
+      {
+        "status": "M",
+        "path": "modules/git_versioning/README.md"
+      },
+      {
+        "status": "M",
+        "path": "modules/incar_custodian/README.md"
+      },
+      {
+        "status": "M",
+        "path": "modules/kinetic_data/README.md"
+      },
+      {
+        "status": "M",
+        "path": "modules/memory_migration/README.md"
+      },
+      {
+        "status": "M",
+        "path": "modules/reaction_network/README.md"
+      },
+      {
+        "status": "M",
+        "path": "modules/reactor_simulation/README.md"
+      },
+      {
+        "status": "M",
+        "path": "modules/sensitivity_uncertainty/README.md"
+      },
+      {
+        "status": "M",
+        "path": "modules/state_handoff/README.md"
+      },
+      {
+        "status": "M",
+        "path": "modules/surface_kmc/README.md"
+      },
+      {
+        "status": "M",
+        "path": "modules/thermochemistry/README.md"
+      },
+      {
+        "status": "M",
+        "path": "modules/transition_state_search/README.md"
+      },
+      {
+        "status": "M",
+        "path": "modules/ts_vibrational_validation/README.md"
+      },
+      {
+        "status": "M",
+        "path": "pyproject.toml"
+      },
+      {
+        "status": "A",
+        "path": "reports/capability_readiness.json"
+      },
+      {
+        "status": "A",
+        "path": "reports/capability_readiness.md"
+      },
+      {
+        "status": "A",
+        "path": "reports/refactor_audit/B1_completion_report.md"
+      },
+      {
+        "status": "A",
+        "path": "reports/refactor_audit/B2_completion_report.md"
+      },
+      {
+        "status": "A",
+        "path": "reports/refactor_audit/B3_completion_report.md"
+      },
+      {
+        "status": "A",
+        "path": "reports/refactor_audit/B4_completion_report.md"
+      },
+      {
+        "status": "A",
+        "path": "reports/refactor_audit/B5_completion_report.md"
+      },
+      {
+        "status": "A",
+        "path": "reports/refactor_audit/B5_dependency_inventory.md"
+      },
+      {
+        "status": "A",
+        "path": "reports/refactor_audit/B6_completion_report.md"
+      },
+      {
+        "status": "A",
+        "path": "reports/refactor_audit/B7_completion_report.md"
+      },
+      {
+        "status": "A",
+        "path": "reports/refactor_audit/full_coverage_report.md"
+      },
+      {
+        "status": "A",
+        "path": "reports/release_environment.json"
+      },
+      {
+        "status": "M",
+        "path": "scripts/README.md"
+      },
+      {
+        "status": "M",
+        "path": "scripts/adsmind_lite/adsmind_common.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/adsmind_lite/analyze_relaxed_adsorption.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/adsmind_lite/deduplicate_adsorption_states.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/adsmind_lite/detect_surface_sites.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/adsmind_lite/evidence_gate.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/adsmind_lite/evidence_lifecycle.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/adsmind_lite/generate_adsorption_candidates.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/adsmind_lite/plan_adsorption_candidates.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/adsmind_lite/prescreen.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/adsmind_lite/validate_candidates.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/adsorption/analyze_fe110_ch_h_relaxation.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/adsorption/backfill_step12a_registry.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/adsorption/build_fe110_adsorption.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/adsorption/build_fe110_care_isomers.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/adsorption/finalize_step12a_gas_references.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/adsorption/preflight_fe110_adsorption.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/adsorption/preflight_gas_references.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/adsorption/register_step12a_gas_reference_submission.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/adsorption/register_step12a_oh_restart.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/aqcat25_gpu_job.sh"
+      },
+      {
+        "status": "M",
+        "path": "scripts/aqcat25_handoff.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/aqcat25_ml_neb_job.sh"
+      },
+      {
+        "status": "M",
+        "path": "scripts/aqcat25_mz73_env.sh"
+      },
+      {
+        "status": "M",
+        "path": "scripts/aqcat25_ts_finetune_job.sh"
+      },
+      {
+        "status": "M",
+        "path": "scripts/aqcat25_ts_force_prediction.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/aqcat25_ts_force_prediction_batch_job.sh"
+      },
+      {
+        "status": "M",
+        "path": "scripts/aqcat25_ts_schema.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/aqcat25_ts_training_data.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/artifact_io.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/catalysis_retrieval/__init__.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/catalysis_retrieval/cli.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/catalysis_retrieval/ranking.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/catalysis_retrieval/records.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/catalysis_retrieval/validate_cli.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/catalysis_retrieval/workflow.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/convergence/setup_alpha_fe_bulk_smearing.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/document_governance.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/dual_model_ml_neb_job.sh"
+      },
+      {
+        "status": "M",
+        "path": "scripts/dual_model_ts_force_prediction_batch.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/dual_model_ts_force_prediction_batch_job.sh"
+      },
+      {
+        "status": "M",
+        "path": "scripts/dual_model_ts_force_prediction_batch_job_v2.sh"
+      },
+      {
+        "status": "M",
+        "path": "scripts/execution_backends.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/generate_capability_readiness.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/init_registry.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/matris_energy_force_finetune.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/matris_finetune_speed_benchmark.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/matris_finetune_speed_benchmark_job.sh"
+      },
+      {
+        "status": "A",
+        "path": "scripts/matris_training_data.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/matris_training_exclusions.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/mlip_same_structure_benchmark_job.sh"
+      },
+      {
+        "status": "M",
+        "path": "scripts/neb_agent/analyze_neb_outputs.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/neb_agent/diagnose_path_geometry.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/neb_agent/path_quality_cli.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/neb_agent/path_quality_control.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/neb_agent/path_quality_service.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/neb_agent/pilot_validation.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/neb_agent/remote_monitor.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/neb_agent/submission.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/neb_agent/utils_vasp.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/offline_mlip_fusion_feasibility.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/optional_dependencies.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/prediction_provenance.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/prepare_aqcat25_ml_neb_handoff.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/prepare_matris_remote_finetune_bundle.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/prepare_matris_replay_finetune_package.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/prepare_reviewed_neb_peak_dimer.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/prepare_ts_heldout_vasp_label_batch.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/provenance_fields.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/registry_acceptance.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/registry_compatibility.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/registry_connection.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/registry_excel_promotion.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/registry_mutations.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/registry_schema.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/registry_transactions.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/registry_write.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/release_build.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/release_environment.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/release_smoke.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/review_completed_neb_parent.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/runtime_resources.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/scientific_validation.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/select_dual_model_ts_vasp_labels.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/state_manager/application_log.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/state_manager/cli.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/state_manager/job_lifecycle.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/state_manager/lifecycle.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/state_manager/models.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/state_manager/projections.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/state_manager/proposals.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/state_manager/stale_items.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/state_manager/store.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_endpoint/database.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_endpoint/purpose.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_endpoint/validator.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_strategy_engine/active_learning_cli.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_strategy_engine/active_learning_path_labels.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_strategy_engine/active_learning_state.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_strategy_engine/active_learning_training.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_strategy_engine/cli.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_strategy_engine/cli_commands.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_strategy_engine/contract.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_strategy_engine/dimer_analysis.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_strategy_engine/dimer_gate.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_strategy_engine/dimer_gate_common.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_strategy_engine/dimer_path_gate.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_strategy_engine/evidence.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_strategy_engine/execution_decision.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_strategy_engine/execution_evidence.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_strategy_engine/execution_gate.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_strategy_engine/execution_path_rules.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_strategy_engine/fingerprint.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_strategy_engine/handoff.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_strategy_engine/learning_cli.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_strategy_engine/matched_static_evidence.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_strategy_engine/registry.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_strategy_engine/strategy.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_strategy_engine/strategy_learning.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_strategy_engine/templates.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_strategy_engine/workflow.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_validation/analyze_vfa.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/ts_validation/barrier_values.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_validation/connectivity.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_validation/prepare_vfa_from_ts_image.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/ts_validation/validation_pipeline.py"
+      },
+      {
+        "status": "A",
+        "path": "scripts/validate_release.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/vasp_inputs.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/vasp_lsf.py"
+      },
+      {
+        "status": "M",
+        "path": "scripts/vasp_result_gate.py"
+      },
+      {
+        "status": "M",
+        "path": "skills/catalysis-data-retrieval/SKILL.md"
+      },
+      {
+        "status": "M",
+        "path": "skills/catalysis-data-retrieval/references/record_schema.json"
+      },
+      {
+        "status": "M",
+        "path": "skills/catalysis-data-retrieval/scripts/hybrid_search.py"
+      },
+      {
+        "status": "M",
+        "path": "skills/catalysis-data-retrieval/scripts/validate_records.py"
+      },
+      {
+        "status": "M",
+        "path": "tasks/backlog.md"
+      },
+      {
+        "status": "M",
+        "path": "tasks/current_task.md"
+      },
+      {
+        "status": "A",
+        "path": "tests/evidence_fixtures.py"
+      },
+      {
+        "status": "A",
+        "path": "tests/registry_fixture_mutation.py"
+      },
+      {
+        "status": "M",
+        "path": "tests/test_adsmind_prescreen.py"
+      },
+      {
+        "status": "M",
+        "path": "tests/test_adsorption_evidence_gate.py"
+      },
+      {
+        "status": "M",
+        "path": "tests/test_aqcat25_ts_active_learning.py"
+      },
+      {
+        "status": "M",
+        "path": "tests/test_artifact_io.py"
+      },
+      {
+        "status": "A",
+        "path": "tests/test_b21_scientific_acceptance.py"
+      },
+      {
+        "status": "A",
+        "path": "tests/test_b2_scientific_contract.py"
+      },
+      {
+        "status": "A",
+        "path": "tests/test_b3_evidence_governance.py"
+      },
+      {
+        "status": "A",
+        "path": "tests/test_b3_ml_governance.py"
+      },
+      {
+        "status": "A",
+        "path": "tests/test_b4_registry_governance.py"
+      },
+      {
+        "status": "A",
+        "path": "tests/test_b4_state_governance.py"
+      },
+      {
+        "status": "A",
+        "path": "tests/test_b5_architecture_boundaries.py"
+      },
+      {
+        "status": "A",
+        "path": "tests/test_b6_governance.py"
+      },
+      {
+        "status": "A",
+        "path": "tests/test_b7_release.py"
+      },
+      {
+        "status": "M",
+        "path": "tests/test_code_structure.py"
+      },
+      {
+        "status": "A",
+        "path": "tests/test_execution_lifecycle.py"
+      },
+      {
+        "status": "M",
+        "path": "tests/test_fe110_c2_coads_labels.py"
+      },
+      {
+        "status": "A",
+        "path": "tests/test_gpu_execution_lifecycle.py"
+      },
+      {
+        "status": "M",
+        "path": "tests/test_neb_execution_gate.py"
+      },
+      {
+        "status": "M",
+        "path": "tests/test_neb_submission.py"
+      },
+      {
+        "status": "M",
+        "path": "tests/test_registry_excel_promotion.py"
+      },
+      {
+        "status": "M",
+        "path": "tests/test_registry_schema.py"
+      },
+      {
+        "status": "M",
+        "path": "tests/test_registry_write.py"
+      },
+      {
+        "status": "M",
+        "path": "tests/test_structure_purpose_manager.py"
+      },
+      {
+        "status": "M",
+        "path": "tests/test_ts_endpoint_contracts.py"
+      },
+      {
+        "status": "M",
+        "path": "tests/test_ts_strategy_engine.py"
+      },
+      {
+        "status": "M",
+        "path": "tests/test_ts_strategy_learning.py"
+      },
+      {
+        "status": "M",
+        "path": "tests/test_ts_validation.py"
+      },
+      {
+        "status": "M",
+        "path": "tests/test_ts_validation_pipeline.py"
+      },
+      {
+        "status": "M",
+        "path": "tests/test_vasp_output_streaming.py"
+      }
+    ],
+    "commit_chain_newest_first": [
+      "7a0b745df96de2762a6f289e9eeda1a3c298fe9d refactor: harden release packaging and cross-platform reproducibility",
+      "03739665465d8548e22d154aa2a8d4209f04983c refactor: harden release packaging and cross-platform reproducibility",
+      "93c09db8a6008a873ef7cc8bc7b4cc1e2a8cc22a refactor: establish documentation and data governance",
+      "3a1bb3f461147a7dc9b5df5efca89de621d27f38 refactor: enforce architecture boundaries and capability ownership",
+      "fbbb7bb26d28867d9766cc7fca84077fa54cf3d6 fix: close registry batch and compatibility review contracts",
+      "e4465aa9e1521a3b9ec3dabba40badb5f17d772a refactor: harden registry transactions and state management",
+      "9f4332f082d4e286ce43c5a137a62ac1e30fa441 refactor: harden evidence lifecycle and ML data governance",
+      "3d9e9070e48a6cb65d9b4c0334adb4243f36dd0c fix: bind DIMER VFA acceptance and reject nonfinite barriers",
+      "99b82eab15aaf22ef7dc880af54e77314eb49b53 refactor: harden scientific contracts and VASP final-state validation",
+      "b1c59addbc7d7be64347db66a201dc5841404341 refactor: restore pure execution decision ownership for B1.2",
+      "b90ef54a0d1a6a094c0a0a616966038be744b277 fix: close B1 execution lifecycle and CI contracts",
+      "1ec8f3e787fd52353fa70419a206d764c07ae13a docs: correct task publication target to sbq123",
+      "4a8c3bbb4c2ac6254c462f39dccaa7ebaf1c773a refactor: reserve and bind execution lifecycle"
+    ]
+  },
+  "audit_branch": "codex/b1-b7-final-acceptance",
+  "isolation": {
+    "candidate_source": "C:\\Users\\86177\\AppData\\Local\\Temp\\sbq123-final-acceptance",
+    "bare_clone": "C:/Users/86177/AppData/Local/Temp/sbq123-final-audit.git",
+    "outputs": "C:\\Users\\86177\\AppData\\Local\\Temp\\sbq123-final-audit-output",
+    "development_checkout_modified": false,
+    "scientific_source_modified": false,
+    "permitted_changes": [
+      "reports/refactor_audit/B1_B7_acceptance_report.md",
+      "reports/refactor_audit/B1_B7_acceptance.json"
+    ]
+  },
+  "package_matrix": {
+    "B1": {
+      "name": "Execution",
+      "verdict": "FAIL",
+      "assessment_status": "INCOMPLETE_STOPPED_ON_BLOCKER",
+      "finding_id": "AC-B2-001",
+      "severity": null,
+      "severity_note": "Not an independently established package defect; acceptance is not granted because the mandated audit stopped.",
+      "location": "Final acceptance request: stop-on-blocking-finding rule",
+      "evidence": "Independent package assessment/focused gate not completed after AC-B2-001",
+      "why_blocks_acceptance": "Required independent acceptance evidence is incomplete; no package PASS inferred from aggregate tests."
+    },
+    "B2": {
+      "name": "Scientific Contract",
+      "verdict": "FAIL",
+      "assessment_status": "BLOCKING_DEFECT_REPRODUCED",
+      "finding_id": "AC-B2-001",
+      "severity": "P1",
+      "severity_note": null,
+      "location": [
+        {
+          "file": "scripts/ts_strategy_engine/execution_evidence.py",
+          "line": 211,
+          "function": "validated_ts"
+        },
+        {
+          "file": "scripts/ts_strategy_engine/execution_evidence.py",
+          "line": 278,
+          "function": "bind_execution"
+        },
+        {
+          "file": "scripts/ts_strategy_engine/execution_path_rules.py",
+          "line": 269,
+          "function": "progress_decision"
+        },
+        {
+          "file": "scripts/ts_strategy_engine/execution_gate.py",
+          "line": 82,
+          "function": "require_action"
+        },
+        {
+          "file": "scripts/ts_strategy_engine/execution_gate_cli.py",
+          "line": 12,
+          "function": "build_decision"
+        }
+      ],
+      "evidence": "Direct API and real CLI stale-source reproductions both authorize scientific claims",
+      "why_blocks_acceptance": "False scientific PASS"
+    },
+    "B3": {
+      "name": "Evidence/ML",
+      "verdict": "FAIL",
+      "assessment_status": "INCOMPLETE_STOPPED_ON_BLOCKER",
+      "finding_id": "AC-B2-001",
+      "severity": null,
+      "severity_note": "Not an independently established package defect; acceptance is not granted because the mandated audit stopped.",
+      "location": "Final acceptance request: stop-on-blocking-finding rule",
+      "evidence": "Independent package assessment/focused gate not completed after AC-B2-001",
+      "why_blocks_acceptance": "Required independent acceptance evidence is incomplete; no package PASS inferred from aggregate tests."
+    },
+    "B4": {
+      "name": "Registry/State",
+      "verdict": "FAIL",
+      "assessment_status": "INCOMPLETE_STOPPED_ON_BLOCKER",
+      "finding_id": "AC-B2-001",
+      "severity": null,
+      "severity_note": "Not an independently established package defect; acceptance is not granted because the mandated audit stopped.",
+      "location": "Final acceptance request: stop-on-blocking-finding rule",
+      "evidence": "Independent package assessment/focused gate not completed after AC-B2-001",
+      "why_blocks_acceptance": "Required independent acceptance evidence is incomplete; no package PASS inferred from aggregate tests."
+    },
+    "B5": {
+      "name": "Architecture",
+      "verdict": "FAIL",
+      "assessment_status": "INCOMPLETE_STOPPED_ON_BLOCKER",
+      "finding_id": "AC-B2-001",
+      "severity": null,
+      "severity_note": "Not an independently established package defect; acceptance is not granted because the mandated audit stopped.",
+      "location": "Final acceptance request: stop-on-blocking-finding rule",
+      "evidence": "Independent package assessment/focused gate not completed after AC-B2-001",
+      "why_blocks_acceptance": "Required independent acceptance evidence is incomplete; no package PASS inferred from aggregate tests."
+    },
+    "B6": {
+      "name": "Documentation/Data",
+      "verdict": "FAIL",
+      "assessment_status": "INCOMPLETE_STOPPED_ON_BLOCKER",
+      "finding_id": "AC-B2-001",
+      "severity": null,
+      "severity_note": "Not an independently established package defect; acceptance is not granted because the mandated audit stopped.",
+      "location": "Final acceptance request: stop-on-blocking-finding rule",
+      "evidence": "Independent package assessment/focused gate not completed after AC-B2-001",
+      "why_blocks_acceptance": "Required independent acceptance evidence is incomplete; no package PASS inferred from aggregate tests."
+    },
+    "B7": {
+      "name": "Release/Environment",
+      "verdict": "FAIL",
+      "assessment_status": "INCOMPLETE_STOPPED_ON_BLOCKER",
+      "finding_id": "AC-B2-001",
+      "severity": null,
+      "severity_note": "Not an independently established package defect; acceptance is not granted because the mandated audit stopped.",
+      "location": "Final acceptance request: stop-on-blocking-finding rule",
+      "evidence": "Independent package assessment/focused gate not completed after AC-B2-001",
+      "why_blocks_acceptance": "Required independent acceptance evidence is incomplete; no package PASS inferred from aggregate tests."
+    }
+  },
+  "findings": [
+    {
+      "finding_id": "AC-B2-001",
+      "severity": "P1",
+      "packages": [
+        "B2",
+        "B3"
+      ],
+      "title": "Authoritative TS/barrier claim gate accepts unverified and stale scientific summaries",
+      "locations": [
+        {
+          "file": "scripts/ts_strategy_engine/execution_evidence.py",
+          "line": 211,
+          "function": "validated_ts"
+        },
+        {
+          "file": "scripts/ts_strategy_engine/execution_evidence.py",
+          "line": 280,
+          "function": "bind_execution"
+        },
+        {
+          "file": "scripts/ts_strategy_engine/execution_path_rules.py",
+          "line": 269,
+          "function": "progress_decision"
+        },
+        {
+          "file": "scripts/ts_strategy_engine/execution_gate.py",
+          "line": 82,
+          "function": "require_action"
+        },
+        {
+          "file": "scripts/ts_strategy_engine/execution_gate_cli.py",
+          "line": 12,
+          "function": "build_decision"
+        }
+      ],
+      "evidence": {
+        "direct_gate": {
+          "DECISION": "VALIDATED_TS",
+          "TS_CLAIM_ALLOWED": true,
+          "ALLOWED_ACTIONS": [
+            "APPROVE_TS_CANDIDATE",
+            "REPORT_FINAL_BARRIER"
+          ],
+          "execution_authorization": null,
+          "execution_authorization_error": "explicit execution authorization is missing or invalid",
+          "source_bindings": {},
+          "evidence_binding": null,
+          "require_action_accepted": [
+            "APPROVE_TS_CANDIDATE",
+            "REPORT_FINAL_BARRIER"
+          ],
+          "scientific_files_created": 0,
+          "external_actions_performed": 0
+        },
+        "cli_stale": {
+          "producer_entry_point": "scripts.ts_strategy_engine.execution_gate_cli.build_decision",
+          "before_invalidating_summary": [
+            "VALIDATED_TS",
+            "VALIDATED_TS"
+          ],
+          "after_invalidating_summary": [
+            "VALIDATED_TS",
+            "VALIDATED_TS"
+          ],
+          "source_binding_names": [
+            "geometry",
+            "analysis",
+            "thresholds",
+            "validation"
+          ],
+          "TS_CLAIM_ALLOWED": true,
+          "scientific_files_created": 0,
+          "external_actions_performed": 0
+        }
+      },
+      "cause": "validated_ts trusts frequency_structure_hash_valid and dimer_technical_acceptance booleans. progress_decision grants TS/barrier actions. bind_execution catches absent authorization and preserves actions outside EXECUTION_ACTIONS, including APPROVE_TS_CANDIDATE and REPORT_FINAL_BARRIER. require_action recomputes that decision but does not require current validation source bindings for these actions.",
+      "why_blocking": "The public authoritative gate asserts VALIDATED_TS and TS_CLAIM_ALLOWED without scientific evidence and continues authorizing the claim after the bound validation summary changes to a failing result. This violates the final audit requirement that invalid/incomplete scientific states fail closed and no false scientific PASS exists.",
+      "scope_limit": "Reproduced at the real CLI/application and authoritative action-validator boundaries. No registry insertion or export bypass was demonstrated. Downstream evidence.py retains additional validation; no scheduler/submission action was authorized or executed.",
+      "baseline": "The boolean-based validated_ts predicate is already present in origin/main. This is a surviving acceptance gap, not a demonstrated new B1 submission regression.",
+      "recommended_repair_package": "Separate B2/B3 scientific-claim authority closure: reuse the owning scientific validators, require current source/structure/contract binding before scientific claim actions, and add production-entry regressions for missing and stale validation evidence. Preserve all scientific thresholds and existing B1 submission behavior.",
+      "repair_performed": false
+    }
+  ],
+  "LOCAL_VALIDATION": {
+    "ruff": {
+      "command": "python -m ruff check scripts modules tests",
+      "exit_code": 0,
+      "result": "All checks passed!"
+    },
+    "pytest": {
+      "command": "python -m pytest -o addopts= -q",
+      "exit_code": 0,
+      "passed": 1097,
+      "seconds": 281.0,
+      "result": "1097 passed in 281.00s (0:04:40)",
+      "test_count_note": "Actual fresh result; no selection filters or test changes. Agrees with prior count but prior report is not validation evidence."
+    },
+    "git_diff_check": {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "scope": "candidate before audit artifacts"
+    },
+    "focused_suites": {
+      "status": "NOT_RUN_STOPPED_ON_BLOCKER",
+      "count": null
+    },
+    "wheel_release": {
+      "status": "NOT_RUN_STOPPED_ON_BLOCKER",
+      "count": null
+    },
+    "environment_controls": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "RUFF_CACHE_DIR": "C:\\Users\\86177\\AppData\\Local\\Temp\\sbq123-final-audit-output\\ruff-cache",
+      "PYTEST_ADDOPTS": "-o cache_dir=C:\\Users\\86177\\AppData\\Local\\Temp\\sbq123-final-audit-output\\pytest-cache"
+    },
+    "reproductions": {
+      "direct_gate_exit_code": 0,
+      "cli_stale_exit_code": 0,
+      "mocked_production_functions": []
+    }
+  },
+  "REMOTE_CI_VALIDATION": {
+    "status": "INDEPENDENTLY_VERIFIED_SUCCESS",
+    "queried_at_utc": "2026-09-09T16:33:06.199176+00:00",
+    "source": "Public GitHub Actions REST API for exact candidate head_sha; checked candidate workflow Python 3.11 configuration",
+    "runs": [
+      {
+        "id": 34374926984,
+        "head_sha": "7a0b745df96de2762a6f289e9eeda1a3c298fe9d",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/q2214299493/sbq123/actions/runs/34374926984",
+        "created_at": "2026-09-09T16:09:23Z",
+        "jobs": [
+          {
+            "name": "engineering (windows-latest)",
+            "status": "completed",
+            "conclusion": "success",
+            "html_url": "https://github.com/q2214299493/sbq123/actions/runs/34374926984/job/102545199105"
+          },
+          {
+            "name": "wheel (windows-latest)",
+            "status": "completed",
+            "conclusion": "success",
+            "html_url": "https://github.com/q2214299493/sbq123/actions/runs/34374926984/job/102545199220"
+          },
+          {
+            "name": "engineering (ubuntu-latest)",
+            "status": "completed",
+            "conclusion": "success",
+            "html_url": "https://github.com/q2214299493/sbq123/actions/runs/34374926984/job/102545199247"
+          },
+          {
+            "name": "wheel (ubuntu-latest)",
+            "status": "completed",
+            "conclusion": "success",
+            "html_url": "https://github.com/q2214299493/sbq123/actions/runs/34374926984/job/102545199318"
+          },
+          {
+            "name": "validate",
+            "status": "completed",
+            "conclusion": "success",
+            "html_url": "https://github.com/q2214299493/sbq123/actions/runs/34374926984/job/102545199409"
+          }
+        ]
+      }
+    ]
+  },
+  "state": {
+    "candidate_start_audit": {
+      "command": "python -m scripts.state_manager.cli --root . audit --phase start",
+      "exit_code": 1,
+      "errors": 1,
+      "warnings": 1,
+      "review_required": 2,
+      "error": "managed_projection_drift: docs/06_MODULE_MAP.md#module_row:transition_state_search",
+      "warning": "external_worktree_review: isolated bare clone ownership"
+    },
+    "operational_only": true,
+    "task_current_conflict": "Not re-queried in dirty development checkout and not resolved",
+    "sync": "NOT_RUN: explicit audit-only two-file restriction supersedes managed-projection writes; no events or proposals were changed."
+  },
+  "scope_review": {
+    "history": "All B1-B6 remote final tips are ancestors; main is merge base; 60 added / 174 modified / 0 deleted / 0 renamed",
+    "sensitive_artifacts": "Preliminary complete tracked-path and >1 MB size inventory found no named sensitive/build/database/model artifacts. Content-level credential/binary/release exclusion audit NOT_COMPLETED after blocker; no complete integrity PASS claimed. Existing publication calculation snapshots were not reclassified as new runtime data.",
+    "scientific_behavior": "NOT_COMPLETED: cumulative scientific parameter/protocol comparison deferred by mandatory stop. Audit changed no scientific/source file.",
+    "architecture": "PARTIAL: inspected gate/decision/evidence/submission owners. Whole import graph, cycles and duplication inventory NOT_COMPLETED.",
+    "test_quality": "B2 test_ts_acceptance_requirements_preserved exercises the boolean helper, and tests/test_ts_strategy_engine.py authoritative_gate/barrier_validation fixtures generate successful gates without current validation sources. B2.1 pipeline tests exercise bound DIMER/VFA chains separately; they do not cover this gate bypass.",
+    "documentation": "NOT_COMPLETED: authority/current-state/modules read; generator-twice determinism and document/link validator not run.",
+    "registry": "PARTIAL_READ_ONLY: record_ts_validation invokes require_action and adds payload, file and saddle/job validations. No full registry acceptance or database mutation claimed."
+  },
+  "production_limitations": [
+    "Production schema deployment not verified",
+    "Live scheduler and HPC credentials/environment not verified",
+    "Real GPU/VASP deployment and scientific performance not verified",
+    "Known live task-current reconciliation not resolved",
+    "Isolated source projection drift remains unchanged"
+  ],
+  "external_actions_performed": 0,
+  "external_actions_scope": "Real external scientific actions; Git/GitHub networking for requested audit and publication is excluded",
+  "source_repairs_performed": 0,
+  "next_step": "A separately authorized B2/B3 scientific-claim authority repair followed by a fresh final acceptance audit; no repair or new phase started here.",
+  "audit_completed_at_utc": "2026-09-09T16:36:14.342623+00:00",
+  "final_git_check": {
+    "expected_task_files": [
+      "reports/refactor_audit/B1_B7_acceptance_report.md",
+      "reports/refactor_audit/B1_B7_acceptance.json"
+    ],
+    "candidate_worktree_before_reports": "clean",
+    "source_tracked_changes": 0,
+    "publication_target": "https://github.com/q2214299493/sbq123.git",
+    "publication_branch": "codex/b1-b7-final-acceptance",
+    "main_update_requested": false
+  }
+}
