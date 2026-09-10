@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-10T07:23:42.784943+00:00",
+  "recorded_at": "2026-09-10T07:23:42.784943+00:00",
+  "evidence": [
+    {
+      "locator": "docs/reviews/valley9748648_accepted_20260910.md",
+      "sha256": "355358f85226bcecda7514d5e4bbac6f9c45acce7c76c295e10af54c43a1f91e",
+      "authority": "module_validation",
+      "observed_at": "2026-09-10T06:44:43.914063+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration1357_valley06_relax_20260909/completed_review_20260910/registry_receipt.json",
+      "sha256": "11c5d91cbb11fb12d92a3b487435ceb3253454ae732fe13cc35fcc1fd5a1024e",
+      "authority": "calculation_registry",
+      "observed_at": "2026-09-10T06:44:43.914063+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration1357_valley06_relax_20260909/completed_review_20260910/parsed_review_evidence.json",
+      "sha256": "adcfdc6e450edca0418580a3f9a4d72b08434c8ef3edfc7b495293b926706a9d",
+      "authority": "module_validation",
+      "observed_at": "2026-09-10T06:44:43.914063+00:00"
+    },
+    {
+      "locator": "docs/reviews/oh_ts_accepted_barrier_20260910.md",
+      "sha256": "3af5f8283f023f88fae40fdf72bb6f4edf91b7b63376a378b66b0d04ab59cd33",
+      "authority": "repository_document",
+      "observed_at": "2026-09-10T06:44:43.914063+00:00"
+    },
+    {
+      "locator": "docs/reviews/int06_mid_path_prepared_20260910.md",
+      "sha256": "be8be3437bd4604edefe1db23407763bb006556ea81b4590f6f43b499023dcda",
+      "authority": "repository_document",
+      "observed_at": "2026-09-10T07:04:53.730145+00:00"
+    },
+    {
+      "locator": "docs/reviews/int06_mid_gpu_prepared_20260910.md",
+      "sha256": "809c6730ec6ee59a07b788851a9b7e68c1095155ed1c0bc288f155633a5ac93f",
+      "authority": "repository_document",
+      "observed_at": "2026-09-10T07:23:42.784943+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_to_mid_gpu_20260910/remote_preflight.json",
+      "sha256": "120ab0d5ddb3137ffbf52915d0672f678b2de19af579903ec4f60fd8cec98e4f",
+      "authority": "repository_document",
+      "observed_at": "2026-09-10T07:23:42.784943+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "event_id": "task-int06-mid-gpu-prepared-20260910",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "User-directed procedural correction: GPU path package staged and preflighted before VASP method selection.",
+  "payload": {
+    "objective": "Complete earlier IS-A to MID H surface migration through validated intermediate and TS evidence.",
+    "phase": "active",
+    "current_evidence": [
+      "9748648: LSF DONE; ordinary valley06 relaxation completed in 79 steps; electronic and force criteria passed (0.0177274761 eV/A < 0.020).",
+      "INT06 accepted as intact C2HO* + H* mapped migration endpoint; final TOTEN -388.50564344 eV under fe110_converged_toten_sigma0p20_v1.",
+      "Schema9 registry completion applied: 12 inserted records and one workflow projection change; receipt in h_migration1357_valley06_relax_20260909/completed_review_20260910/registry_receipt.json.",
+      "IS-A -> INT06 and INT06 -> MID are two path intervals awaiting TS evidence; image02 remains an unresolved first-interval ML minimum.",
+      "The previously accepted MID -> FS O-H TS and 1.28582718 eV forward electronic barrier remain complete; do not repeat.",
+      "No new NEB/Dimer/frequency/static/GPU calculation submitted; no Hessian, exhaustive symmetry equivalence or complete migration-barrier claim.",
+      "INT06 -> MID GPU-first preparation corrected: five-frame MatRIS ML-NEB + exact-fixed-path AQCat25 request staged on MZ73; local and remote no-model preflights passed. One GPU, 4 CPUs, 40 GB, 6-hour limit, at most 400 ordinary ML-NEB steps. No GPU job submitted; previous VASP NEB inputs are fallback only."
+    ],
+    "one_executable_step": "Obtain exact-package GPU execution authority for request d0a3a7d657b362deb077ed6b181f76129ba63d4c64948700cbc1ca9a408eb85e; then bind the reviewed request, recheck applicable execution gate and duplicate-job state, and submit one MZ73 ordinary ML-NEB job. Review the returned complete path before choosing VASP refinement.",
+    "submission_boundary": "Local evidence review/preparation only. New NEB, Dimer, frequencies, static labels and GPU jobs require exact-package user authority.",
+    "done_when": [
+      "Independent valley relaxation and geometry reviewed; then define scientifically supported migration segments."
+    ],
+    "constraints": [
+      "Same H50 moves; preserve SIGMA0.20 and bottom18Fe fixed.",
+      "Do not rerun MID-to-FS O-H work."
+    ],
+    "authoritative_references": [
+      "docs/reviews/valley9748648_accepted_20260910.md",
+      "docs/reviews/int06_mid_path_prepared_20260910.md",
+      "docs/reviews/int06_mid_gpu_prepared_20260910.md"
+    ]
+  },
+  "supersedes": [
+    "task-int06-mid-inputs-prepared-20260910"
+  ]
+}

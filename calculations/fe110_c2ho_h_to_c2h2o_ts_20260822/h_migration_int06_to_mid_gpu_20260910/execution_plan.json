@@ -1,0 +1,39 @@
+{
+  "request_sha256": "d0a3a7d657b362deb077ed6b181f76129ba63d4c64948700cbc1ca9a408eb85e",
+  "remote_root": "/home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_ml_neb_20260910",
+  "scheduler_resources": {
+    "backend": "MZ73_slurm",
+    "nodes": 1,
+    "tasks": 1,
+    "cpus_per_task": 4,
+    "gpus": 1,
+    "memory_GB": 40,
+    "walltime": "06:00:00"
+  },
+  "ordinary_ml_neb": {
+    "spring_constant_eV_per_A2": 1.0,
+    "fmax_eV_per_A": 0.1,
+    "max_steps": 400,
+    "ml_ci": "off",
+    "ci_fmax_eV_per_A": 0.05,
+    "ci_max_steps": 200,
+    "monitored_geometry_guard": {
+      "enforce_monitored_bond_monotonicity": false,
+      "monitored_bond_backtrack_mode": "off",
+      "monitored_bond_monotonicity_scope": "all_path",
+      "maximum_monitored_bond_backtrack_A": 0.05,
+      "borderline_monitored_bond_backtrack_A": 0.07,
+      "require_monitored_bond_interval_coverage": false
+    },
+    "purpose": "bounded unrestrained H50 surface migration; no ML-CI or Sella"
+  },
+  "authorization_status": "pending_exact_package_user_approval",
+  "required_before_production": [
+    "remote_no_model_preflight",
+    "exact_package_user_authority",
+    "current_owning_execution_gate_for_any_required_path_action",
+    "duplicate_submission_reservation_check"
+  ],
+  "vasp_submission_authorized": false,
+  "automatic_retry": false
+}
