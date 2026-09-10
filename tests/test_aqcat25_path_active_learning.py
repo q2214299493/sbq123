@@ -307,7 +307,7 @@ def test_path_controller_prepares_and_ingests_one_hash_bound_vasp_batch(tmp_path
     for row in batch["labels"]:
         label_dir = tmp_path / "labels" / row["directory"]
         _write_completed_label(label_dir)
-        evidence_path = _write_json(tmp_path / f"scheduler_{row['image']}.json", _scheduler(row["image"]))
+        evidence_path = _write_json(tmp_path / f"scheduler_{row['image']}.json", _scheduler(str(1000 + int(row["image"]))))
         evidence_rows.append(
             {
                 "image": row["image"],
@@ -342,7 +342,7 @@ def test_path_force_comparison_aggregates_all_selected_images(tmp_path: Path) ->
     evidence_rows = []
     for row in batch["labels"]:
         _write_completed_label(tmp_path / "labels" / row["directory"])
-        evidence_path = _write_json(tmp_path / f"scheduler_{row['image']}.json", _scheduler(row["image"]))
+        evidence_path = _write_json(tmp_path / f"scheduler_{row['image']}.json", _scheduler(str(1000 + int(row["image"]))))
         evidence_rows.append(
             {
                 "image": row["image"],
@@ -413,7 +413,7 @@ def test_failed_path_round_trains_all_batch_labels_and_routes_to_full_path_rerun
     evidence_rows = []
     for row in batch["labels"]:
         _write_completed_label(tmp_path / "labels" / row["directory"])
-        evidence_path = _write_json(tmp_path / f"scheduler_{row['image']}.json", _scheduler(row["image"]))
+        evidence_path = _write_json(tmp_path / f"scheduler_{row['image']}.json", _scheduler(str(1000 + int(row["image"]))))
         evidence_rows.append(
             {
                 "image": row["image"],

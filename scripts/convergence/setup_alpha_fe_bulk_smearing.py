@@ -12,6 +12,7 @@ from scripts.vasp_result_gate import read_incar_values
 from scripts.artifact_io import load_json_object, sha256_file
 from scripts.convergence.common import last_matching_float
 from scripts.neb_agent import submission
+from scripts.neb_agent.utils_vasp import parse_outcar
 
 
 WORKDIR = Path("~/sbq/agent/jobs/convergence/alpha_fe_bulk_smearing_20260623").expanduser()
@@ -168,28 +169,34 @@ def summary() -> None:
         job_dir = WORKDIR / label
         outcar = job_dir / "OUTCAR"
         oszicar = job_dir / "OSZICAR"
+        # Raw values below remain diagnostic; comparisons require current evidence.
+        current = parse_outcar(outcar)
+        finished = bool(
+            current.get("normal_completion") and current.get("final_target_complete")
+            and current.get("final_target_explicit_convergence") and not current.get("fatal_keywords")
+        )
         row: dict[str, object] = {
             "case": label,
             "ismear": ismear,
             "sigma_eV": sigma,
-            "finished": bool(outcar.exists() and "General timing and accounting" in outcar.read_text(errors="ignore")),
+            "finished": finished,
             "toten_eV": last_matching_float(outcar, patterns["toten"]),
             "sigma0_eV": last_matching_float(outcar, patterns["sigma0"]),
             "entropy_eV": last_matching_float(outcar, patterns["entropy"]),
             "mag_cell_uB": last_matching_float(oszicar, patterns["mag"]),
         }
-        if ismear == -5:
+        if ismear == -5 and finished:
             tetra_energy = row["toten_eV"]
         rows.append(row)
 
     for row in rows:
         energy = row["sigma0_eV"] if row["ismear"] != -5 else row["toten_eV"]
-        if energy is not None and tetra_energy is not None:
+        if row["finished"] and energy is not None and tetra_energy is not None:
             row["delta_vs_tetra_meV_atom"] = abs((float(energy) - float(tetra_energy)) / 2 * 1000)
         else:
             row["delta_vs_tetra_meV_atom"] = None
         entropy = row["entropy_eV"]
-        row["abs_entropy_meV_atom"] = abs(float(entropy)) / 2 * 1000 if entropy is not None else None
+        row["abs_entropy_meV_atom"] = abs(float(entropy)) / 2 * 1000 if row["finished"] and entropy is not None else None
 
     out = WORKDIR / "alpha_fe_bulk_smearing_summary.csv"
     fields = [

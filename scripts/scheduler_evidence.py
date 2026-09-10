@@ -8,6 +8,7 @@ from typing import Any
 from scripts.aqcat25_ts_schema import validate_document
 from scripts.artifact_io import sha256_text
 from scripts.execution_backends import load_execution_backends, require_vasp_backend
+from scripts.ts_strategy_engine.execution_path_rules import require_job_id
 
 
 LSF_QUERY_TIMEOUT_SECONDS = 60
@@ -18,6 +19,7 @@ def _utc_now() -> str:
 
 
 def _parse_lsf_bjobs(stdout: str, expected_job_id: str) -> str:
+    expected_job_id = require_job_id(expected_job_id)
     for line in stdout.splitlines():
         fields = line.split()
         if len(fields) >= 3 and fields[0] == str(expected_job_id):
@@ -29,9 +31,7 @@ def _parse_lsf_bjobs(stdout: str, expected_job_id: str) -> str:
 
 
 def query_lsf_job(job_id: str, *, stage: str = "vasp_force_label") -> dict[str, Any]:
-    job_id = str(job_id).strip()
-    if not job_id:
-        raise ValueError("LSF job_id is required")
+    job_id = require_job_id(str(job_id).strip())
     backend = load_execution_backends().vasp
     argv = ["ssh", backend.server_alias, "bjobs", "-a", job_id]
     try:
@@ -82,8 +82,7 @@ def verify_lsf_evidence_live(
 ) -> dict[str, Any]:
     validate_stored_lsf_evidence(evidence, required_status=required_status)
     live = live_query(str(evidence["job_id"]), stage=str(evidence["stage"]))
-    validate_document(live, expected_kind="scheduler_job_evidence")
-    require_vasp_backend(live.get("server_alias"), live.get("scheduler"))
+    validate_stored_lsf_evidence(live)
     if live["job_id"] != evidence["job_id"] or live["status"] != required_status:
         raise ValueError("live LSF state does not confirm the required terminal status for this job")
     return live
@@ -99,7 +98,7 @@ def validate_stored_lsf_evidence(
     query = evidence["query"]
     if sha256_text(query["stdout"]) != query["stdout_sha256"]:
         raise ValueError("stored LSF stdout hash mismatch")
-    parsed_status = _parse_lsf_bjobs(query["stdout"], str(evidence["job_id"]))
+    parsed_status = _parse_lsf_bjobs(query["stdout"], evidence["job_id"])
     if parsed_status != evidence["status"]:
         raise ValueError("stored LSF status does not match its raw bjobs output")
     if required_status is not None and evidence["status"] != required_status:

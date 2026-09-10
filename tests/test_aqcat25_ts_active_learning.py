@@ -237,7 +237,7 @@ def _write_completed_label(label_dir: Path, *, normal: bool = True) -> None:
 
 
 def _scheduler_payload(
-    job_id: str = "test-label-1", stage: str = "vasp_force_label", status: str = "DONE"
+    job_id: str = "123", stage: str = "vasp_force_label", status: str = "DONE"
 ) -> dict:
     stdout = (
         "JOBID USER STAT QUEUE FROM_HOST EXEC_HOST JOB_NAME SUBMIT_TIME\n"
