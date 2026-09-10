@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "document_kind": "user_gpu_execution_authorization",
+  "authorized": true,
+  "authorized_at": "2026-09-10T07:30:28.574556+00:00",
+  "user_instruction": "提交",
+  "action": "initial_gpu_path_candidate",
+  "request_sha256": "d0a3a7d657b362deb077ed6b181f76129ba63d4c64948700cbc1ca9a408eb85e",
+  "payload_manifest_sha256": "e92ad307269983a34ddecaf2a0f184ac9bf2e0470936d5595bc159fbc3a172fd",
+  "review_sha256": "809c6730ec6ee59a07b788851a9b7e68c1095155ed1c0bc288f155633a5ac93f",
+  "driver_sha256": "c3222d9fca1566e3c1d656aa0632a2da8b65bd757ece157cdd8cbb02bee71455",
+  "guard_sha256": "af1b2e6bc4a7a26195f44123819f7434c8da64217f37d49df9c61afad01f3b9f",
+  "remote_root": "/home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_ml_neb_20260910",
+  "scheduler_resources": {
+    "backend": "MZ73_slurm",
+    "nodes": 1,
+    "tasks": 1,
+    "cpus_per_task": 4,
+    "gpus": 1,
+    "memory_GB": 40,
+    "walltime": "06:00:00"
+  },
+  "automatic_retry": false,
+  "vasp_authorized": false,
+  "scope": "One initial MatRIS ordinary ML-NEB plus fixed-path AQCat25 audit, unchanged reviewed seed and request."
+}

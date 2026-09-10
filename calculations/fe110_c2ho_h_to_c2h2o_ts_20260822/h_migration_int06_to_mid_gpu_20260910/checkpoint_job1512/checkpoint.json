@@ -1,0 +1,18 @@
+{
+  "observed_at": "2026-09-10T07:34:24.349519+00:00",
+  "queries": {
+    "squeue": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "scontrol": {
+      "exit_code": 0,
+      "stdout": "JobId=1512 JobName=int06-mid-mlneb UserId=sbq(1024) GroupId=sbq(1024) MCS_label=N/A Priority=4294901494 Nice=0 Account=(null) QOS=(null) JobState=FAILED Reason=NonZeroExitCode Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=3:0 RunTime=00:00:00 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-09-10T15:33:25 EligibleTime=2026-09-10T15:33:25 AccrueTime=2026-09-10T15:33:25 StartTime=2026-09-10T15:33:26 EndTime=2026-09-10T15:33:26 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-10T15:33:26 Scheduler=Backfill Partition=normal AllocNode:Sid=MZ73:2473003 ReqNodeList=(null) ExcNodeList=(null) NodeList=MZ73 BatchHost=MZ73 NumNodes=1 NumCPUs=4 NumTasks=1 CPUs/Task=4 ReqB:S:C:T=0:0:*:* TRES=cpu=4,node=1,billing=4 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=4 MinMemoryNode=40G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_ml_neb_20260910/execution_20260910/allocated_gpu_guard.sh WorkDir=/home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_ml_neb_20260910 StdErr=/home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_ml_neb_20260910/logs/production-1512.out StdIn=/dev/null StdOut=/home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_ml_neb_20260910/logs/production-1512.out Power= TresPerNode=gres:gpu:1 \n",
+      "stderr": ""
+    }
+  },
+  "tails": {
+    "logs/production-1512.out": "allocated GPU 0 (GPU-483c224e-cc19-13e2-24ad-c83efd14fa75) has only 7465 MiB free; require 12000 MiB\n"
+  }
+}

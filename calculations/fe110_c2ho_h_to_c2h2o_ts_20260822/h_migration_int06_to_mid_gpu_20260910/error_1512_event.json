@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "event_id": "error-gpu1512-startup-memory-20260910",
+  "event_type": "error_opened",
+  "entity": {
+    "kind": "error",
+    "id": "gpu1512-startup-memory",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-10T07:37:06.877530+00:00",
+  "recorded_at": "2026-09-10T07:37:06.877530+00:00",
+  "summary": "Allocated GPU memory below startup threshold; no model execution.",
+  "payload": {
+    "markdown": "### GPU1512 — 分配卡显存不足（2026-09-10）\n\n- Slurm FAILED，ExitCode=3:0；GPU0 空闲 7465 MiB，小于启动门槛 12000 MiB。\n- guard 在加载模型前退出，无 ML-NEB 步骤；不属于模型误差或训练证据。\n- 输入及失败证据已登记；尚未重提。需实际分配卡显存满足门槛，并取得单次重提授权。\n- 证据：docs/reviews/int06_mid_gpu1512_startup_failure_20260910.md。\n"
+  },
+  "evidence": [
+    {
+      "locator": "docs/reviews/int06_mid_gpu1512_startup_failure_20260910.md",
+      "sha256": "7c91aae7ec6e3f1e98d22acb6e94562f73d3f111a07ce81b4b649bf2736cf6be",
+      "authority": "repository_document",
+      "observed_at": "2026-09-10T07:37:06.877530+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_to_mid_gpu_20260910/checkpoint_job1512/checkpoint.json",
+      "sha256": "a99ed0f894ae7ac9a32e942fc6c9539acc9d75b7e92d70c7d01ab03e7dfac47b",
+      "authority": "repository_document",
+      "observed_at": "2026-09-10T07:37:06.877530+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_to_mid_gpu_20260910/registry_1512_receipt.json",
+      "sha256": "5f56e5497dff32c3412c01d4e2adc4115c5ae96bbf154d48b51df09e26de18ab",
+      "authority": "repository_document",
+      "observed_at": "2026-09-10T07:37:06.877530+00:00"
+    }
+  ],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "unresolved_runtime_failure_log_entry"
+    ],
+    "status": "pending"
+  },
+  "supersedes": []
+}

@@ -1,0 +1,563 @@
+{
+  "schema_version": 2,
+  "gate": "AUTHORITATIVE_NEB_EXECUTION_GATE",
+  "generated_at_utc": "2026-09-10T07:30:28.569513+00:00",
+  "state_sha256": "87b06111905e7975b29d052fa4b7142ba3d8aff0107f2e271774fe7f52abd4e8",
+  "DECISION": "READY_FOR_ORDINARY_NEB_SUBMISSION",
+  "REASON_CODES": [],
+  "EVIDENCE": {
+    "geometry": {
+      "schema_version": 1,
+      "document_kind": "neb_path_geometry_diagnosis",
+      "producer": "scripts.neb_agent.diagnose_path_geometry",
+      "source_files": [
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\00\\POSCAR",
+          "sha256": "d4ea48b0bd50eb816341926eae637455f9aa03acc24386a2627d620068bfafba"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\01\\POSCAR",
+          "sha256": "7e57cd23082074125fcf2362d548912ef8ed7d4282d8076dfa100c504dc9928b"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\02\\POSCAR",
+          "sha256": "386e155a1719c47089d36741ed37c3edcd99879dfaecd30cdb3524cbc09fa392"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\03\\POSCAR",
+          "sha256": "974720ac93da7a6788f7aa4767a8cccce77c3d46bd80763f0de8714b7b6624b1"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\04\\POSCAR",
+          "sha256": "fa0de12d866bdbef2e80d318ec6b693aacaa93f34ba51ed3f3b10c7ee05f2291"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\INCAR",
+          "sha256": "0ae0af5e1eaae8ed1e277ae73ce42fbeee8f5c21ca9137434961fb55992a68d2"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\configs\\neb_agent\\default_thresholds.yaml",
+          "sha256": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c"
+        }
+      ],
+      "status": "PASS",
+      "errors": [],
+      "warnings": [
+        "nebmovie.pl visual review remains required"
+      ],
+      "thresholds": {
+        "min_distance_factor": 0.55,
+        "absolute_min_distance_A": 1.0,
+        "image_jump_warning_A": 1.0,
+        "fixed_position_tolerance_A": 0.0001,
+        "internal_minimum_warning_eV": 0.2,
+        "barrierless_force_threshold_eVA": 0.2,
+        "high_force_warning_threshold_eVA": 1.5,
+        "min_ionic_steps_for_force_warning": 5,
+        "persistent_high_force_failure_min_ionic_steps": 10,
+        "scf_consecutive_exhaustion_hard_min": 3,
+        "surface_penetration_warning_A": 0.2,
+        "desorption_height_change_warning_A": 2.0,
+        "reaction_coordinate_backtrack_warning_A": 0.25,
+        "magnetic_continuity_warning_threshold_muB": 2.0
+      },
+      "reaction_atom_indices_zero_based": [
+        49
+      ],
+      "reaction_pairs_zero_based": [],
+      "fixed_atom_indices_zero_based": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "images": [
+        {
+          "image": "00",
+          "source": "calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\00\\POSCAR",
+          "minimum_pair_distance_A": 1.099075606757729,
+          "minimum_pair_zero_based": [
+            46,
+            47
+          ],
+          "collision_threshold_A": 0.781,
+          "max_step_from_previous_A": 0.0,
+          "max_raw_fractional_step_from_previous": 0.0,
+          "periodic_branch_shift_atom_indices_zero_based": [],
+          "max_fixed_displacement_from_initial_A": 0.0,
+          "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+          "reaction_distances": []
+        },
+        {
+          "image": "01",
+          "source": "calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\01\\POSCAR",
+          "minimum_pair_distance_A": 1.0992163129654433,
+          "minimum_pair_zero_based": [
+            46,
+            47
+          ],
+          "collision_threshold_A": 0.781,
+          "max_step_from_previous_A": 0.46584055561694604,
+          "max_raw_fractional_step_from_previous": 0.06695766186099997,
+          "periodic_branch_shift_atom_indices_zero_based": [],
+          "max_fixed_displacement_from_initial_A": 0.0,
+          "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+          "reaction_distances": []
+        },
+        {
+          "image": "02",
+          "source": "calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\02\\POSCAR",
+          "minimum_pair_distance_A": 1.0996681926076988,
+          "minimum_pair_zero_based": [
+            46,
+            47
+          ],
+          "collision_threshold_A": 0.781,
+          "max_step_from_previous_A": 0.46584055560967524,
+          "max_raw_fractional_step_from_previous": 0.06695766186000002,
+          "periodic_branch_shift_atom_indices_zero_based": [],
+          "max_fixed_displacement_from_initial_A": 0.0,
+          "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+          "reaction_distances": []
+        },
+        {
+          "image": "03",
+          "source": "calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\03\\POSCAR",
+          "minimum_pair_distance_A": 1.0999855845895816,
+          "minimum_pair_zero_based": [
+            46,
+            47
+          ],
+          "collision_threshold_A": 0.781,
+          "max_step_from_previous_A": 0.3305804559799346,
+          "max_raw_fractional_step_from_previous": 0.04677245485300002,
+          "periodic_branch_shift_atom_indices_zero_based": [],
+          "max_fixed_displacement_from_initial_A": 0.0,
+          "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+          "reaction_distances": []
+        },
+        {
+          "image": "04",
+          "source": "calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\04\\POSCAR",
+          "minimum_pair_distance_A": 1.1003682685417002,
+          "minimum_pair_zero_based": [
+            46,
+            47
+          ],
+          "collision_threshold_A": 0.781,
+          "max_step_from_previous_A": 0.3305804559826752,
+          "max_raw_fractional_step_from_previous": 0.04677245485299997,
+          "periodic_branch_shift_atom_indices_zero_based": [],
+          "max_fixed_displacement_from_initial_A": 0.0,
+          "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+          "reaction_distances": []
+        }
+      ],
+      "requires_visual_review": true
+    },
+    "analysis": {
+      "schema_version": 1,
+      "document_kind": "neb_output_analysis",
+      "producer": "scripts.neb_agent.analyze_neb_outputs",
+      "source_files": [
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\INCAR",
+          "sha256": "0ae0af5e1eaae8ed1e277ae73ce42fbeee8f5c21ca9137434961fb55992a68d2"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\configs\\neb_agent\\default_thresholds.yaml",
+          "sha256": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c"
+        }
+      ],
+      "status": "NO_OUTPUT",
+      "images": [
+        {
+          "image": "00",
+          "ionic_steps": 0,
+          "final_energy_eV": null,
+          "final_neb_force_eVA": null,
+          "final_atomic_force_eVA": null,
+          "energy_history_last10_eV": [],
+          "neb_force_history_last10_eVA": [],
+          "atomic_force_history_last10_eVA": [],
+          "neb_force_trend": "insufficient_data",
+          "atomic_force_trend": "insufficient_data",
+          "scf_iterations_last_ionic_step": null,
+          "scf_iterations_last10": [],
+          "reached_required_accuracy": false,
+          "electronically_converged": false,
+          "electronic_final_state": {
+            "last_electronic_iteration": null,
+            "last_delta_e_eV": null,
+            "last_delta_eps_eV": null,
+            "ediff_eV": 1e-05,
+            "nelm": 200,
+            "electronically_converged": false,
+            "electronic_convergence_source": "OSZICAR_DELTA_E",
+            "latest_started_electronic_cycle": null,
+            "latest_completed_electronic_cycle": null,
+            "final_target_step": null,
+            "final_target_complete": false,
+            "final_target_explicit_convergence": false,
+            "incomplete": true,
+            "status": "INCOMPLETE"
+          },
+          "normal_completion": false,
+          "final_total_magnetization_muB": null,
+          "reaction_atom_local_magnetization_muB": {},
+          "fatal_keywords": [],
+          "has_output": false,
+          "relative_energy_eV": null
+        },
+        {
+          "image": "01",
+          "ionic_steps": 0,
+          "final_energy_eV": null,
+          "final_neb_force_eVA": null,
+          "final_atomic_force_eVA": null,
+          "energy_history_last10_eV": [],
+          "neb_force_history_last10_eVA": [],
+          "atomic_force_history_last10_eVA": [],
+          "neb_force_trend": "insufficient_data",
+          "atomic_force_trend": "insufficient_data",
+          "scf_iterations_last_ionic_step": null,
+          "scf_iterations_last10": [],
+          "reached_required_accuracy": false,
+          "electronically_converged": false,
+          "electronic_final_state": {
+            "last_electronic_iteration": null,
+            "last_delta_e_eV": null,
+            "last_delta_eps_eV": null,
+            "ediff_eV": 1e-05,
+            "nelm": 200,
+            "electronically_converged": false,
+            "electronic_convergence_source": "OSZICAR_DELTA_E",
+            "latest_started_electronic_cycle": null,
+            "latest_completed_electronic_cycle": null,
+            "final_target_step": null,
+            "final_target_complete": false,
+            "final_target_explicit_convergence": false,
+            "incomplete": true,
+            "status": "INCOMPLETE"
+          },
+          "normal_completion": false,
+          "final_total_magnetization_muB": null,
+          "reaction_atom_local_magnetization_muB": {},
+          "fatal_keywords": [],
+          "has_output": false,
+          "relative_energy_eV": null
+        },
+        {
+          "image": "02",
+          "ionic_steps": 0,
+          "final_energy_eV": null,
+          "final_neb_force_eVA": null,
+          "final_atomic_force_eVA": null,
+          "energy_history_last10_eV": [],
+          "neb_force_history_last10_eVA": [],
+          "atomic_force_history_last10_eVA": [],
+          "neb_force_trend": "insufficient_data",
+          "atomic_force_trend": "insufficient_data",
+          "scf_iterations_last_ionic_step": null,
+          "scf_iterations_last10": [],
+          "reached_required_accuracy": false,
+          "electronically_converged": false,
+          "electronic_final_state": {
+            "last_electronic_iteration": null,
+            "last_delta_e_eV": null,
+            "last_delta_eps_eV": null,
+            "ediff_eV": 1e-05,
+            "nelm": 200,
+            "electronically_converged": false,
+            "electronic_convergence_source": "OSZICAR_DELTA_E",
+            "latest_started_electronic_cycle": null,
+            "latest_completed_electronic_cycle": null,
+            "final_target_step": null,
+            "final_target_complete": false,
+            "final_target_explicit_convergence": false,
+            "incomplete": true,
+            "status": "INCOMPLETE"
+          },
+          "normal_completion": false,
+          "final_total_magnetization_muB": null,
+          "reaction_atom_local_magnetization_muB": {},
+          "fatal_keywords": [],
+          "has_output": false,
+          "relative_energy_eV": null
+        },
+        {
+          "image": "03",
+          "ionic_steps": 0,
+          "final_energy_eV": null,
+          "final_neb_force_eVA": null,
+          "final_atomic_force_eVA": null,
+          "energy_history_last10_eV": [],
+          "neb_force_history_last10_eVA": [],
+          "atomic_force_history_last10_eVA": [],
+          "neb_force_trend": "insufficient_data",
+          "atomic_force_trend": "insufficient_data",
+          "scf_iterations_last_ionic_step": null,
+          "scf_iterations_last10": [],
+          "reached_required_accuracy": false,
+          "electronically_converged": false,
+          "electronic_final_state": {
+            "last_electronic_iteration": null,
+            "last_delta_e_eV": null,
+            "last_delta_eps_eV": null,
+            "ediff_eV": 1e-05,
+            "nelm": 200,
+            "electronically_converged": false,
+            "electronic_convergence_source": "OSZICAR_DELTA_E",
+            "latest_started_electronic_cycle": null,
+            "latest_completed_electronic_cycle": null,
+            "final_target_step": null,
+            "final_target_complete": false,
+            "final_target_explicit_convergence": false,
+            "incomplete": true,
+            "status": "INCOMPLETE"
+          },
+          "normal_completion": false,
+          "final_total_magnetization_muB": null,
+          "reaction_atom_local_magnetization_muB": {},
+          "fatal_keywords": [],
+          "has_output": false,
+          "relative_energy_eV": null
+        },
+        {
+          "image": "04",
+          "ionic_steps": 0,
+          "final_energy_eV": null,
+          "final_neb_force_eVA": null,
+          "final_atomic_force_eVA": null,
+          "energy_history_last10_eV": [],
+          "neb_force_history_last10_eVA": [],
+          "atomic_force_history_last10_eVA": [],
+          "neb_force_trend": "insufficient_data",
+          "atomic_force_trend": "insufficient_data",
+          "scf_iterations_last_ionic_step": null,
+          "scf_iterations_last10": [],
+          "reached_required_accuracy": false,
+          "electronically_converged": false,
+          "electronic_final_state": {
+            "last_electronic_iteration": null,
+            "last_delta_e_eV": null,
+            "last_delta_eps_eV": null,
+            "ediff_eV": 1e-05,
+            "nelm": 200,
+            "electronically_converged": false,
+            "electronic_convergence_source": "OSZICAR_DELTA_E",
+            "latest_started_electronic_cycle": null,
+            "latest_completed_electronic_cycle": null,
+            "final_target_step": null,
+            "final_target_complete": false,
+            "final_target_explicit_convergence": false,
+            "incomplete": true,
+            "status": "INCOMPLETE"
+          },
+          "normal_completion": false,
+          "final_total_magnetization_muB": null,
+          "reaction_atom_local_magnetization_muB": {},
+          "fatal_keywords": [],
+          "has_output": false,
+          "relative_energy_eV": null
+        }
+      ],
+      "complete_energy_profile": false,
+      "maximum_image": null,
+      "internal_maximum": false,
+      "internal_minimum_warning": false,
+      "internal_minimum_images": [],
+      "monotonic_energy_profile": false,
+      "fatal_keywords": [],
+      "configured_nelm": 200,
+      "configured_nsw": 300,
+      "configured_images": 3,
+      "configured_ediffg_eVA": -0.05,
+      "parent_neb_method": "ordinary_neb",
+      "image_sequence_complete": true,
+      "scf_exhausted_images": [],
+      "scf_persistent_failure_images": [],
+      "scf_warning": false,
+      "scf_failure": false,
+      "force_warning_policy": {
+        "threshold_eVA": 1.5,
+        "startup_window_ionic_steps": 5,
+        "persistent_failure_minimum_ionic_steps": 10,
+        "requires_non_decreasing_trend": true,
+        "early_high_force_is_failure": false,
+        "warning_is_hard_failure": false,
+        "high_force_with_independent_geometry_periodic_or_magnetic_anomaly_is_failure": true
+      },
+      "high_force_observations": [],
+      "high_force_warnings": [],
+      "persistent_high_force_failure_images": [],
+      "nsw_stopped_without_convergence_images": [],
+      "technically_converged": false,
+      "geometry_validated": true,
+      "path_reviewed": true,
+      "scientifically_valid": false,
+      "magnetic_continuity": {
+        "rule": "MAGNETIC_CONTINUITY_RULE",
+        "severity": "SOFT_WARNING",
+        "warning_threshold_muB": 2.0,
+        "warnings": [],
+        "action": "CHECK_MAGNETIC_STATE_CONTINUITY",
+        "stops_current_job": false,
+        "blocks_ordinary_no_climb_neb": false,
+        "proves_magnetic_state_switch": false
+      },
+      "barrierless_candidate": false,
+      "energy_profile_status": "interim_neb_only_not_reportable_barrier",
+      "contract_sha256": "eeecfe26404dafb2008fbdc5529081d5584bbc5b4883c00a0096a2f32858454a",
+      "atom_map_sha256": "ef5b3d3d64884fde2a673dd35bef48a2a965c026edb6a8dd1c4eb22b100ae157",
+      "compatibility_sha256": "4ef0c782834fd07afca2621a5235bb67c2ea913bd650b93123c21538c35c165d",
+      "path_binding": {
+        "valid": true,
+        "errors": [],
+        "report": "calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\path_generation_report.json",
+        "report_sha256": "fc08880b1b95b4e83357f24cfc0d18dfc36dcf9a03f3983fdc40ee129fe77524",
+        "contract_sha256": "eeecfe26404dafb2008fbdc5529081d5584bbc5b4883c00a0096a2f32858454a",
+        "atom_map_sha256": "ef5b3d3d64884fde2a673dd35bef48a2a965c026edb6a8dd1c4eb22b100ae157",
+        "compatibility_sha256": "4ef0c782834fd07afca2621a5235bb67c2ea913bd650b93123c21538c35c165d",
+        "fingerprint_id": "c559d07a96c3c20e1f86a407075db30b455bbadf772b6770db6cdb4c74b4e621"
+      },
+      "path_binding_valid": true,
+      "path_stage_valid": false,
+      "transition_state_validated": false,
+      "scientific_validity_scope": "path_stage_only_requires_later_source_method_ts_validation",
+      "path_review": {
+        "status": "accepted",
+        "reviewer": "Codex work-side geometry review",
+        "reviewed_at": "2026-09-10T07:01:50.101637+00:00",
+        "dist_file": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\dist.dat",
+        "dist_sha256": "2ce6bba1466c900197b339a97d8b33566564302bf8a1d2ac6ff736388cf42a51",
+        "nebmovie_file": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\movie.xyz",
+        "nebmovie_sha256": "fc2727005fecc0f83ed0a9c039a2b9ca228e83d95c58bc289ef7c1c21db549d5",
+        "path_generation_sha256": "fc08880b1b95b4e83357f24cfc0d18dfc36dcf9a03f3983fdc40ee129fe77524",
+        "notes": "Top/side path_review.png inspected. H50 follows a continuous surface trajectory; five VTST XYZ frames match POSCARs. Exact MIC checks preserve C2HO connectivity, bottom18 fixed atoms and atom order. No collision or periodic jump; arriving Fe39 contact decreases while leaving Fe40 increases. Local initial path only: no VASP path energies/forces, no TS acceptance and no submission approval.",
+        "visual_review_file": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\path_review.png",
+        "visual_review_sha256": "9e9662a38b9ff9e6e0dab055a8d572512deba1c26b976fffc41a57891490637f",
+        "geometry_evidence_sha256": "e54f1b54a19f0cba6930aacc4a4430d7f03052138925e26f7850b5489bf37f9c"
+      }
+    },
+    "thresholds": {
+      "min_distance_factor": 0.55,
+      "absolute_min_distance_A": 1.0,
+      "image_jump_warning_A": 1.0,
+      "fixed_position_tolerance_A": 0.0001,
+      "internal_minimum_warning_eV": 0.2,
+      "barrierless_force_threshold_eVA": 0.2,
+      "high_force_warning_threshold_eVA": 1.5,
+      "min_ionic_steps_for_force_warning": 5,
+      "persistent_high_force_failure_min_ionic_steps": 10,
+      "scf_consecutive_exhaustion_hard_min": 3,
+      "surface_penetration_warning_A": 0.2,
+      "desorption_height_change_warning_A": 2.0,
+      "reaction_coordinate_backtrack_warning_A": 0.25,
+      "magnetic_continuity_warning_threshold_muB": 2.0
+    },
+    "path_quality": {},
+    "preflight": {
+      "schema_version": 1,
+      "kind": "ordinary_neb",
+      "passed": true,
+      "errors": [],
+      "cores": 96,
+      "images": 3,
+      "files": {
+        "INCAR": "0ae0af5e1eaae8ed1e277ae73ce42fbeee8f5c21ca9137434961fb55992a68d2",
+        "KPOINTS": "0d7e291117433dac5393f29520b635e92f06e6c8e91aa941137c86b1d39162ae",
+        "POTCAR.spec": "9528f5cac58de3cc83a576c828915ce9c2ab72d4ec3be5e409f7476042f7e1bb",
+        "script.lsf": "d5f1692d5e47d46c1091b2b1367c5f878b9081908eb1c53e7b9364f727e3df03",
+        "path_generation_report.json": "fc08880b1b95b4e83357f24cfc0d18dfc36dcf9a03f3983fdc40ee129fe77524",
+        "path_geometry_diagnosis.json": "03ed0e5650c53ad15be8dbb6bd6c25e1b66221c659c964e4bd29e8a79cd4a465",
+        "path_review.json": "70adeeedd1e417e0af2a61a957f443bd8249c6d118fe7efc34f632f7bc37dcbd",
+        "dist.dat": "2ce6bba1466c900197b339a97d8b33566564302bf8a1d2ac6ff736388cf42a51",
+        "movie.xyz": "fc2727005fecc0f83ed0a9c039a2b9ca228e83d95c58bc289ef7c1c21db549d5",
+        "00/POSCAR": "d4ea48b0bd50eb816341926eae637455f9aa03acc24386a2627d620068bfafba",
+        "01/POSCAR": "7e57cd23082074125fcf2362d548912ef8ed7d4282d8076dfa100c504dc9928b",
+        "02/POSCAR": "386e155a1719c47089d36741ed37c3edcd99879dfaecd30cdb3524cbc09fa392",
+        "03/POSCAR": "974720ac93da7a6788f7aa4767a8cccce77c3d46bd80763f0de8714b7b6624b1",
+        "04/POSCAR": "fa0de12d866bdbef2e80d318ec6b693aacaa93f34ba51ed3f3b10c7ee05f2291"
+      },
+      "bundle_sha256": "1e34b1df2a0b4ee304cc2d5040e4fed365e0ead2421e049bba873cb232631735",
+      "strategy_retry_check": {
+        "input_key": "ac591e05ad58fd19163d5543afa360f1a772f0111f0e4e2bb2e34b9927fca01e",
+        "blocked_attempts": [],
+        "review_attempts": [],
+        "status": "NO_KNOWN_FAILURE"
+      }
+    },
+    "validation": {},
+    "scheduler": {},
+    "authorization": {},
+    "source_bindings": {
+      "geometry": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\path_geometry_diagnosis.json",
+        "sha256": "03ed0e5650c53ad15be8dbb6bd6c25e1b66221c659c964e4bd29e8a79cd4a465"
+      },
+      "analysis": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\neb_analysis.json",
+        "sha256": "67fb9540b0723590850ae8e3d817c3094876533e3e4f721b625203d8d41af39a"
+      },
+      "thresholds": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\configs\\neb_agent\\default_thresholds.yaml",
+        "sha256": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c"
+      },
+      "preflight": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\submission_preflight.json",
+        "sha256": "3375b25704dbdf995c249193480b6dd088402e814eaf2977c6b6999d5bb7d0e7"
+      }
+    },
+    "climb": false,
+    "path_reviewed": true
+  },
+  "CRITICAL_IMAGES": [],
+  "CHEMICAL_INTERPRETATION": null,
+  "FILES_SAVED": [],
+  "ALLOWED_ACTIONS": [],
+  "FORBIDDEN_ACTIONS": [
+    "CONTINUE_JOB",
+    "STOP_JOB",
+    "REBUILD_PATH",
+    "SUBMIT_DIAGNOSTIC_VASP",
+    "SUBMIT_VASP",
+    "ENABLE_CI_NEB",
+    "PREPARE_DIMER_HANDOFF",
+    "START_DIMER",
+    "START_VFA",
+    "APPROVE_TS_CANDIDATE",
+    "REPORT_FINAL_BARRIER"
+  ],
+  "NEXT_REQUIRED_CHECK": "SUBMIT_ORDINARY_NO_CLIMB_NEB",
+  "SUBMISSION_ALLOWED": false,
+  "CI_NEB_ALLOWED": false,
+  "DIMER_ALLOWED": false,
+  "VFA_ALLOWED": false,
+  "TS_CLAIM_ALLOWED": false,
+  "COMPUTE_COST_ASSESSMENT": null,
+  "scientific_readiness": {
+    "decision": "READY_FOR_ORDINARY_NEB_SUBMISSION",
+    "reason_codes": [],
+    "eligible_actions": [
+      "SUBMIT_VASP"
+    ]
+  },
+  "execution_authorization_error": "explicit execution authorization is missing or invalid",
+  "execution_authorization": null,
+  "evidence_binding": null
+}

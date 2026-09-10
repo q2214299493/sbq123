@@ -1,0 +1,22 @@
+{
+  "status": "SUBMISSION_ATTEMPT_PENDING_RECONCILIATION",
+  "at": "2026-09-10T07:33:25.430114+00:00",
+  "authorization_sha256": "fef2bd6eeb62297a34ac8e21c52ee868dd5bf3f85728a562d35eae3e7ba5aca6",
+  "request_sha256": "d0a3a7d657b362deb077ed6b181f76129ba63d4c64948700cbc1ca9a408eb85e",
+  "sbatch_argv": [
+    "sbatch",
+    "--parsable",
+    "--job-name=int06-mid-mlneb",
+    "--partition=normal",
+    "--nodes=1",
+    "--ntasks=1",
+    "--cpus-per-task=4",
+    "--gres=gpu:1",
+    "--mem=40G",
+    "--time=06:00:00",
+    "--chdir=/home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_ml_neb_20260910",
+    "--output=/home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_ml_neb_20260910/logs/production-%j.out",
+    "--export=ALL,AQCAT_PILOT_ROOT=/home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_ml_neb_20260910/runtime,REQUEST_ROOT=/home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_ml_neb_20260910,SOURCE_REQUEST_SHA256=d0a3a7d657b362deb077ed6b181f76129ba63d4c64948700cbc1ca9a408eb85e,OUTPUT_ROOT=/home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_ml_neb_20260910/output/production,PRIMARY_CHECKPOINT=/home/sbq/sbq/mlip_same_structure_benchmark_20260825/MatRIS_4M_FeCOH_compliant.pth.tar,SECONDARY_CHECKPOINT=/home/sbq/sbq/aqcat25/demo_single/model.pt,MATRIS_SOURCE=/home/sbq/sbq/mlip_same_structure_benchmark_20260825/vendor/MatRIS,MIN_FREE_GPU_MEMORY_MIB=12000,REAL_JOB_WRAPPER=/home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_ml_neb_20260910/runtime/dual_model_ml_neb_job.sh",
+    "/home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_ml_neb_20260910/execution_20260910/allocated_gpu_guard.sh"
+  ]
+}
