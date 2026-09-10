@@ -1,11 +1,11 @@
 ---
 document_class: CURRENT_REFERENCE
-as_of: '2026-09-09T00:00:00+08:00'
-as_of_scope: B6 document review, not a live scientific observation
-source_scope: publication document at B5 baseline; observations retain original dates
-source_version: 3a1bb3f461147a7dc9b5df5efca89de621d27f38
-source_version_role: B6 base commit
-source_branch: codex/b6-documentation-data-governance
+as_of: '2026-09-10T08:10:49.081307+00:00'
+as_of_scope: thickness payload contract update, not a live scientific observation
+source_scope: current thickness repair usage contract; historical observations retain original dates
+source_version: fae4339f7f91b52c13f4b993c9791e7110f13249
+source_version_role: thickness repair base commit
+source_branch: codex/ac-closeout-thickness-workflow
 evidence_kind: MODULE_CONTRACT_AND_LAST_RECORDED_OBSERVATION
 production_schema_version: NOT_VERIFIED_IN_B6
 governance: docs/DOCUMENT_GOVERNANCE.md
@@ -102,6 +102,73 @@ an unresolved canonical reservation is never automatically retried. The campaign
 adapter creates no authorization, reservation, scheduler command or private receipt.
 
 Old wrong-facet generator scripts have been removed from the repository.
+
+### Thickness payload contract
+
+Generate new inputs with
+`python -m scripts.convergence.setup_true_fe110_thickness_retest --setup --output /absolute/new-campaign`.
+Input generation still needs the `neb` optional dependency (ASE). Scientific
+settings, four-to-eight-layer structures, bulk reference and the TOTEN surface
+excess convention are unchanged. Input-only repeated setup is supported. Setup
+checks every destination before writing and refuses existing calculation outputs,
+payload attempts, scheduler attempt/receipt markers and symlinks. It does not
+overwrite part of a previously run campaign before reporting an error.
+
+New `run_chain.lsf` and standalone bulk `run.lsf` declare **Bash**. They retain
+32 cores, NP_PER_NODE=32, OMP_NUM_THREADS=1, the default initialization script
+`/home_gkx/env/intel/intel2016.sh` and VASP
+`$HOME/soft/vasp.5.4.1/bin/vasp_std`. Before any calculation they require a
+nonempty valid `LSB_HOSTS` list, writable machine file, regular contained stage
+inputs (including a provisioned POTCAR), executable MPI/VASP and a Python with
+the installed core package. No VASP/VTST or scheduler is launched by setup.
+
+Explicit dependency selectors are `THICKNESS_ENV_SCRIPT`, `THICKNESS_VASP`,
+`THICKNESS_MPI` (default `mpirun`) and `THICKNESS_PYTHON` (default `python3`).
+They select a file/executable, never an evaluated shell fragment. A missing
+explicit selection fails rather than falling back to another executable. The
+environment script must return success; no `errexit`/`nounset` assumption is
+imposed on vendor initialization. The stage module
+`python -m scripts.convergence.thickness_stage --help` requires only the normal
+core installation (including NumPy), not ASE, pymatgen, Sella or ML packages.
+Install that package in the selected runtime before deployment. This change
+does not establish that the HPC runtime has been deployed or verified.
+
+Each payload exclusively creates `.thickness-attempt/` with `mkdir`. This is
+local job-payload exclusion, not scheduler authorization/reservation. A second
+instance or any repeat invocation refuses that directory, including after a
+successful run. It never removes B1 reservations or retries a failed job.
+The final `result` records stage, exit code and `scientific_acceptance=false`;
+an attempt without a complete record requires manual reconciliation. Process
+failures preserve their original code; dependency, input, output, handoff,
+machine-file and receipt errors are nonzero. INT/TERM/HUP terminate the chain;
+a hard kill may leave only the blocking attempt directory.
+
+Both relaxation and static directories must be free of earlier calculation
+outputs before the first MPI call. Each stage is checked again before launch.
+An input `static/POSCAR` from setup is allowed. The payload never truncates old
+outputs or requires new output bytes to differ from input. Relaxation must
+produce current normally completed, explicitly electronically converged and
+ionically converged OUTCAR evidence without a recognized fatal error. Static
+uses current normal/electronic completion, with no ionic-relaxation requirement.
+These checks use the existing OUTCAR owner; no NELM default is guessed or added
+to INCAR. Invalid/missing CONTCAR, atom/cell/Selective Dynamics mismatch or an
+atomic handoff failure stops before static. A legitimate unchanged CONTCAR is
+accepted and copied byte-for-byte via a same-directory temporary file.
+
+`--summary` is diagnostic. Shared `extract_toten` supplies the last finite
+complete numeric token; malformed/nonfinite records raise an error rather than
+falling back to an earlier energy. Missing/incomplete bulk output refuses a
+summary; missing slab energy remains null. Slab output validity is explicit in
+`output_status`; incomplete output has null surface excess, even if a diagnostic
+TOTEN was extracted. `scientific_acceptance` is always false. No registry or
+scientific promotion is performed, and the bulk normalization, double-surface
+factor, area and eV/A²-to-J/m² conversion are unchanged.
+
+Do not rerun old campaign directories or historical scripts under
+`inputs/fe110_true_facet_thickness_20260627/`. Those retained historical inputs
+are not updated in place by this repair. Use a new directory and regenerated
+payload, or a separately reviewed manual recovery. Submission still belongs
+to the canonical execution authority; this payload introduces no submission API.
 
 ## Done Criteria
 

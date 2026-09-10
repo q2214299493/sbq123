@@ -4,13 +4,15 @@ from __future__ import annotations
 import argparse
 import json
 import math
-import re
 from pathlib import Path
 
 import numpy as np
 from ase.build import bcc110, bulk
 from ase.constraints import FixAtoms
 from ase.io import read, write
+
+from scripts.convergence.common import extract_toten
+from scripts.convergence.thickness_stage import pristine, result_status
 
 
 LATTICE_A = 2.8665
@@ -100,63 +102,92 @@ def build_slab(nlayers: int):
 
 
 def chain_lsf() -> str:
-    return """#!/bin/sh
-APP_NAME=Gkn_normal
-NP=32
-NP_PER_NODE=32
-RUN="RAW"
-ROOT=$PWD
-
-export OMP_NUM_THREADS=1
-source /home_gkx/env/intel/intel2016.sh
-VASP=$HOME/soft/vasp.5.4.1/bin/vasp_std
-
-rm -f "$ROOT/nodelist"
-for host in $LSB_HOSTS
-do
-    echo "$host" >> "$ROOT/nodelist"
-done
-
-cd "$ROOT/relax" || exit 10
-mpirun -np $NP -machinefile "$ROOT/nodelist" $VASP > vasp.out 2>&1
-if ! grep -q "reached required accuracy" OUTCAR
-then
-    echo "Relaxation did not reach required accuracy; static stage skipped." >> vasp.out
-    exit 20
-fi
-
-cp CONTCAR "$ROOT/static/POSCAR"
-cd "$ROOT/static" || exit 30
-mpirun -np $NP -machinefile "$ROOT/nodelist" $VASP > vasp.out 2>&1
-if ! grep -q "General timing and accounting informations for this job" OUTCAR
-then
-    exit 40
-fi
-"""
+    return _job_lsf("chain")
 
 
 def static_lsf() -> str:
-    return """#!/bin/sh
-APP_NAME=Gkn_normal
+    return _job_lsf("static")
+
+
+def _job_lsf(kind: str) -> str:
+    return "#!/bin/bash\nKIND=" + kind + "\n" + r'''APP_NAME=Gkn_normal
 NP=32
 NP_PER_NODE=32
 RUN="RAW"
-ROOT=$PWD
-
 export OMP_NUM_THREADS=1
-source /home_gkx/env/intel/intel2016.sh
-VASP=$HOME/soft/vasp.5.4.1/bin/vasp_std
-
-rm -f "$ROOT/nodelist"
-for host in $LSB_HOSTS
-do
-    echo "$host" >> "$ROOT/nodelist"
+ROOT=$(pwd -P) || exit 70
+STAGE=attempt
+# Exclusive local payload ownership. Never remove it, including on failure.
+mkdir "$ROOT/.thickness-attempt" || exit 73
+finish() {
+    rc=$?
+    trap - EXIT
+    if [ "$rc" -eq 0 ] && [ "$STAGE" != complete ]; then rc=70; fi
+    if [ "$rc" -eq 0 ]; then state=COMPLETE; else state=FAILED; fi
+    (set -C; printf '%s stage=%s exit_code=%s scientific_acceptance=false\n' "$state" "$STAGE" "$rc" > "$ROOT/.thickness-attempt/result") || {
+        echo "attempt result write failed; recovery requires review" >&2
+        if [ "$rc" -eq 0 ]; then rc=74; fi
+    }
+    exit "$rc"
+}
+trap finish EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
+trap 'exit 129' HUP
+fail() { echo "THICKNESS_FAILED stage=$STAGE exit_code=$1" >&2; exit "$1"; }
+STAGE=environment
+ENV_SCRIPT=${THICKNESS_ENV_SCRIPT:-/home_gkx/env/intel/intel2016.sh}
+VASP=${THICKNESS_VASP:-$HOME/soft/vasp.5.4.1/bin/vasp_std}
+PYTHON=${THICKNESS_PYTHON:-python3}
+MPI=${THICKNESS_MPI:-mpirun}
+[[ -f "$ENV_SCRIPT" && -r "$ENV_SCRIPT" ]] || fail 69
+# Do not impose nounset/errexit on a legacy vendor initialization script.
+if source "$ENV_SCRIPT"; then :; else rc=$?; fail "$rc"; fi
+STAGE=dependencies
+[[ -f "$VASP" && -x "$VASP" ]] || fail 69
+command -v "$MPI" >/dev/null 2>&1 || fail 69
+command -v "$PYTHON" >/dev/null 2>&1 || fail 69
+if "$PYTHON" -m scripts.convergence.thickness_stage --help >/dev/null; then :; else rc=$?; fail "$rc"; fi
+check() {
+    if "$PYTHON" -m scripts.convergence.thickness_stage "$@" --root "$ROOT" --kind "$KIND"; then :; else rc=$?; fail "$rc"; fi
+}
+STAGE=preflight
+check preflight
+STAGE=machinefile
+[[ -n "${LSB_HOSTS:-}" ]] || fail 64
+read -r -a HOSTS <<< "$LSB_HOSTS"
+[[ ${#HOSTS[@]} -gt 0 && "$LSB_HOSTS" != *$'\n'* ]] || fail 64
+for host in "${HOSTS[@]}"; do
+    [[ "$host" =~ ^[[:alnum:]._-]+$ ]] || fail 64
 done
-mpirun -np $NP -machinefile "$ROOT/nodelist" $VASP > vasp.out 2>&1
-"""
+set -C
+if printf '%s\n' "${HOSTS[@]}" > "$ROOT/nodelist"; then :; else rc=$?; fail "$rc"; fi
+run_stage() {
+    STAGE=$1
+    check inputs --stage "$STAGE"
+    if [ "$KIND" = chain ]; then directory="$ROOT/$STAGE"; else directory="$ROOT"; fi
+    cd "$directory" || fail 72
+    if "$MPI" -np "$NP" -machinefile "$ROOT/nodelist" "$VASP" > vasp.out 2>&1; then :; else rc=$?; fail "$rc"; fi
+    check result --stage "$STAGE"
+}
+if [ "$KIND" = chain ]; then
+    run_stage relax
+    STAGE=handoff
+    check handoff
+fi
+run_stage static
+STAGE=complete
+exit 0
+'''
 
 
 def setup(output: Path) -> None:
+    # Inspect every destination before the first write, including input symlinks.
+    destinations = [output, output / "bulk_reference"]
+    for nlayers in LAYERS:
+        job = output / f"layers_{nlayers}"
+        destinations.extend([job, job / "relax", job / "static"])
+    pristine(output, destinations)
     output.mkdir(parents=True, exist_ok=True)
     for nlayers in LAYERS:
         atoms = build_slab(nlayers)
@@ -217,16 +248,15 @@ def validate(output: Path) -> None:
 
 
 def last_toten(path: Path) -> float | None:
-    if not path.exists():
-        return None
-    values = re.findall(r"free\\s+energy\\s+TOTEN\\s+=\\s+([-+0-9.Ee]+)", path.read_text(errors="ignore"))
-    return float(values[-1]) if values else None
+    return extract_toten(path)
 
 
 def summarize(output: Path) -> None:
     bulk_energy = last_toten(output / "bulk_reference" / "OUTCAR")
     if bulk_energy is None:
         raise RuntimeError("bulk_reference/OUTCAR has no TOTEN")
+    if result_status(output / "bulk_reference", "static")["output_status"] != "COMPLETE":
+        raise RuntimeError("bulk_reference current output is incomplete or failed")
     bulk_per_atom = bulk_energy / 2.0
     rows = []
     for nlayers in LAYERS:
@@ -234,8 +264,9 @@ def summarize(output: Path) -> None:
         energy = last_toten(outcar)
         atoms = read(output / f"layers_{nlayers}" / "static" / "POSCAR")
         area = float(np.linalg.norm(np.cross(atoms.cell[0], atoms.cell[1])))
-        gamma = None if energy is None else (energy - len(atoms) * bulk_per_atom) / (2.0 * area) * EV_A2_TO_J_M2
-        rows.append({"layers": nlayers, "natoms": len(atoms), "static_toten_eV": energy, "surface_excess_J_m2": gamma})
+        status = result_status(outcar.parent, "static")
+        gamma = None if energy is None or status["output_status"] != "COMPLETE" else (energy - len(atoms) * bulk_per_atom) / (2.0 * area) * EV_A2_TO_J_M2
+        rows.append({"layers": nlayers, "natoms": len(atoms), "static_toten_eV": energy, "surface_excess_J_m2": gamma, **status})
     (output / "thickness_summary.json").write_text(json.dumps(rows, indent=2) + "\n", encoding="utf-8")
     print(output / "thickness_summary.json")
 
