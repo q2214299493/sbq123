@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "document_kind": "user_gpu_execution_authorization",
+  "authorized": true,
+  "authorized_at": "2026-09-10T08:26:21.134653+00:00",
+  "user_instruction": "提交gpu0",
+  "action": "user_requested_gpu0_attempt",
+  "request_sha256": "ff5e8516df91b2b4a977c06a4f8a49d3ce17664ec49f857f39e6bebfb6ed754c",
+  "payload_manifest_sha256": "27541a60c5c6ddb192eeefbb6f9972173ef643acbf74d025ace2ce4db8457e3d",
+  "review_sha256": "809c6730ec6ee59a07b788851a9b7e68c1095155ed1c0bc288f155633a5ac93f",
+  "driver_sha256": "055cc3c583d162b85c8bab4ffe081b434cf22dd495a69adbbbd865d66c8afecd",
+  "guard_sha256": "b2909a4bb2dbf3db7e52165d4c7408f91a23623173fcac888b953029d3d4d46b",
+  "remote_root": "/home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_ml_neb_20260910_gpu0",
+  "scheduler_resources": {
+    "backend": "MZ73_slurm",
+    "nodes": 1,
+    "tasks": 1,
+    "cpus_per_task": 4,
+    "gpus": 1,
+    "memory_GB": 40,
+    "walltime": "06:00:00"
+  },
+  "automatic_retry": false,
+  "vasp_authorized": false,
+  "scope": "One corrected ML-NEB launch on explicitly requested GPU0, requiring matching scheduler allocation; same 1 GPU, 4 CPUs, 40GB, 6h, 400 steps; no automatic retries or VASP submission.",
+  "target_gpu_uuid": "GPU-483c224e-cc19-13e2-24ad-c83efd14fa75",
+  "target_physical_gpu_index": 0,
+  "prior_failed_job": "1516"
+}

@@ -14,7 +14,8 @@ Complete earlier IS-A to MID H surface migration through validated intermediate 
 - The previously accepted MID -> FS O-H TS and 1.28582718 eV forward electronic barrier remain complete; do not repeat.
 - No Hessian, complete migration barrier or new VASP result established; the GPU1512 attempt produced no model output.
 - GPU1512 submitted under explicit user authority, then Slurm FAILED with ExitCode=3:0 at startup. Allocated GPU0 had 7465 MiB free <12000 MiB; guard exited before model execution. No ML-NEB steps, predictions, automatic retry or VASP submission. Failed job/input/evidence records registered.
-- GPU1 launches 1513/1514 failed before model execution on Python symlink and Slurm TMPDIR=/tmp checks; diagnostic1515 confirmed TMPDIR. Both corrections prepared/tested; latest1516 FAILED before model on GPU1 free-memory guard. At 16:12:54 GPU1 had 10641 MiB free <12000. All attempts preserved and registered; no model steps or active task job.
+- Prior GPU1 jobs1513/1514/1516 failed before model; diagnostic1515 identified inherited TMPDIR. Failures retained; Python symlink and task-local TMPDIR corrections now exercised successfully by GPU1517.
+- User-requested GPU0 job1517 submitted 16:29:07; at16:29:16 Slurm RUNNING, scheduler GPU0 and model GPU UUID agree, PID2591707 verified. ML-NEB FIRE step1 completed, fmax0.296261 eV/A; prediction-only, not converged or validated TS.
 
 ## Lifecycle Status
 
@@ -22,11 +23,11 @@ Complete earlier IS-A to MID H surface migration through validated intermediate 
 
 ## One Executable Step
 
-Recheck physical GPU1 free memory against the current 12000 MiB startup threshold, then verify the corrected full startup under Slurm before progressing the ML path. Preserve all failed attempts; no current model result exists.
+Check GPU1517 on MZ73 at /home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_ml_neb_20260910_gpu0; retrieve and review the complete ML path when it finishes before selecting any VASP route.
 
 ## Submission Boundary
 
-Repeated user instruction to submit GPU1 was acted on; startup attempts failed before model execution. No calculation is running, no model retry or VASP task is active.
+One GPU0 job1517 is running under explicit user authority. No automatic VASP submission or model retry authorized.
 
 ## Authoritative Constraint
 
@@ -48,4 +49,5 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 - docs/reviews/int06_mid_gpu_prepared_20260910.md
 - docs/reviews/int06_mid_gpu1512_startup_failure_20260910.md
 - docs/reviews/int06_mid_gpu1_attempts_20260910.md
+- docs/reviews/int06_mid_gpu1517_started_20260910.md
 <!-- state-handoff:end current_task -->

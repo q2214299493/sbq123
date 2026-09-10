@@ -1,0 +1,24 @@
+{
+  "observed_at": "2026-09-10T08:29:16.018654+00:00",
+  "queries": {
+    "scheduler": {
+      "exit_code": 0,
+      "stdout": "JobId=1517 JobName=int06-mid-gpu0 UserId=sbq(1024) GroupId=sbq(1024) MCS_label=N/A Priority=4294901489 Nice=0 Account=(null) QOS=(null) JobState=RUNNING Reason=None Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0 RunTime=00:00:08 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-09-10T16:29:07 EligibleTime=2026-09-10T16:29:07 AccrueTime=2026-09-10T16:29:07 StartTime=2026-09-10T16:29:07 EndTime=2026-09-10T22:29:07 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-10T16:29:07 Scheduler=Main Partition=normal AllocNode:Sid=MZ73:2591494 ReqNodeList=(null) ExcNodeList=(null) NodeList=MZ73 BatchHost=MZ73 NumNodes=1 NumCPUs=4 NumTasks=1 CPUs/Task=4 ReqB:S:C:T=0:0:*:* TRES=cpu=4,node=1,billing=4 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=4 MinMemoryNode=40G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_ml_neb_20260910_gpu0/execution/allocated_gpu_guard.sh WorkDir=/home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_ml_neb_20260910_gpu0 StdErr=/home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_ml_neb_20260910_gpu0/logs/production-1517.out StdIn=/dev/null StdOut=/home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_ml_neb_20260910_gpu0/logs/production-1517.out Power= TresPerNode=gres:gpu:1 \n",
+      "stderr": ""
+    },
+    "gpu_processes": {
+      "exit_code": 0,
+      "stdout": "862480, GPU-483c224e-cc19-13e2-24ad-c83efd14fa75, 386, /home/public/soft/testing/envs/py3119/bin/python\n862481, GPU-483c224e-cc19-13e2-24ad-c83efd14fa75, 386, /home/public/soft/testing/envs/py3119/bin/python\n1484391, GPU-483c224e-cc19-13e2-24ad-c83efd14fa75, 386, /home/public/soft/testing/envs/py3119/bin/python\n684259, GPU-483c224e-cc19-13e2-24ad-c83efd14fa75, 386, /home/public/soft/testing/envs/py3119/bin/python\n2576913, GPU-483c224e-cc19-13e2-24ad-c83efd14fa75, 10326, .venv/bin/python\n2591707, GPU-483c224e-cc19-13e2-24ad-c83efd14fa75, 2660, /home/sbq/sbq/ml_ts_acceleration/venv/bin/python\n2418061, GPU-450609b3-d1fd-ac33-d03a-79891be402da, 9338, /home/ubuntu/hdd/cyn/CatGPT/.venv/bin/python\n2418062, GPU-7ec6ab8a-91a2-450d-04c1-a0d472452b5b, 9338, /home/ubuntu/hdd/cyn/CatGPT/.venv/bin/python\n2581959, GPU-e72f50ad-d93f-c404-04c4-51dccc85727e, 23346, .venv/bin/python\n",
+      "stderr": ""
+    },
+    "job_pids": {
+      "exit_code": 0,
+      "stdout": "PID      JOBID    STEPID   LOCALID GLOBALID\n2591665  1517     batch    0       0       \n2591707  1517     batch    -       -       \n",
+      "stderr": ""
+    }
+  },
+  "logs": {
+    "logs/production-1517.out": "{\"observed_at\": \"2026-09-10T08:29:08.345713+00:00\", \"job_id\": \"1517\", \"physical_index\": 0, \"target_uuid\": \"GPU-483c224e-cc19-13e2-24ad-c83efd14fa75\", \"free_memory_MiB\": 12169, \"scheduler_job_gpus\": \"0\", \"inherited_cuda_visible_devices\": \"0\", \"binding_method\": \"explicit_user_requested_physical_GPU0_UUID\", \"scheduler_allocation_matches_target\": true}\n/home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_ml_neb_20260910_gpu0/request.json: 成功\n",
+    "output/production/ordinary_ml_neb.log": "      Step     Time          Energy          fmax\nFIRE:    0 16:29:11     -399.667788        0.361267\nFIRE:    1 16:29:13     -399.667740        0.296261\n"
+  }
+}
