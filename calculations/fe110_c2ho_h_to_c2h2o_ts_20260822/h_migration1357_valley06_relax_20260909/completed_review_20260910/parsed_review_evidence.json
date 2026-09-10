@@ -1,0 +1,512 @@
+{
+  "job_id": "9748648",
+  "observed_at": "2026-09-10T06:38:47.044176+00:00",
+  "source_files": {
+    "INCAR": "1bcea31e85158a676f068843db280a382a8a3d500254e2bacf0cf7ef08849005",
+    "POSCAR": "40a64036a5bf13aa5a30729c53902f94126438e19685d1bfe2096d1396826a43",
+    "CONTCAR": "2b53dedc909c678c2e8f7f1e4fc9643c6f87e78e26c8a818b8d9c8dfa7c73029",
+    "OSZICAR": "12542c62df550b25e5e7393d7fb4f5be819e457248d97ec5cec4d80aa772be69",
+    "OUTCAR": "4e4b20745948681bcc9bc1e3057d2b95e64a2bb2fc0d30b65d68d1450853ce2c",
+    "KPOINTS": "0d7e291117433dac5393f29520b635e92f06e6c8e91aa941137c86b1d39162ae",
+    "POTCAR": "e3bc41a37d795bfcf1b1dc9a2a9ddfb5ef86aa5dc9aa0ac5a3583471a0982f85"
+  },
+  "relaxation_gate": {
+    "normal_completion": true,
+    "ionic_converged": true,
+    "last_electronic_iteration": 6,
+    "last_delta_e_eV": 4.5436e-07,
+    "last_delta_eps_eV": -7.2223e-07,
+    "ediff_eV": 1e-05,
+    "nelm": 200,
+    "electronically_converged": true,
+    "electronic_convergence_source": "OUTCAR_EDIFF_TERMINATION",
+    "latest_started_electronic_cycle": {
+      "cycle": 79,
+      "ionic_step": 79,
+      "iteration": 6,
+      "delta_e_eV": 4.5436e-07,
+      "delta_eps_eV": -7.2223e-07,
+      "complete": true,
+      "explicit_convergence": false,
+      "malformed": false
+    },
+    "latest_completed_electronic_cycle": {
+      "cycle": 79,
+      "ionic_step": 79,
+      "iteration": 6,
+      "delta_e_eV": 4.5436e-07,
+      "delta_eps_eV": -7.2223e-07,
+      "complete": true,
+      "explicit_convergence": false,
+      "malformed": false
+    },
+    "final_target_step": {
+      "cycle": 79,
+      "ionic_step": 79,
+      "iteration": 6,
+      "delta_e_eV": 4.5436e-07,
+      "delta_eps_eV": -7.2223e-07,
+      "complete": true,
+      "explicit_convergence": false,
+      "malformed": false
+    },
+    "final_target_complete": true,
+    "final_target_explicit_convergence": true,
+    "incomplete": false,
+    "status": "PASS"
+  },
+  "outcar": {
+    "final_TOTEN_eV": -388.50564344,
+    "reached_required_accuracy": true,
+    "normal_timing_footer": true,
+    "fatal_markers": [],
+    "max_movable_force_eV_per_A": 0.017727476131700195,
+    "max_movable_force_zero_based_index": 46
+  },
+  "oszicar": {
+    "ionic_steps": 79,
+    "last_ionic": {
+      "step": 79,
+      "F_eV": -388.50564,
+      "E0_eV": -388.49239,
+      "dE_eV": -2.31893e-05,
+      "electronic_iterations": 6
+    },
+    "final_electronic_converged": true,
+    "nelm_exhausted_ionic_steps": []
+  },
+  "chemistry": {
+    "connectivity_changed": false,
+    "dissociated": false,
+    "chemical_event": "none",
+    "lost_bonds": [],
+    "formed_bonds": [],
+    "initial_fragment_count": 2,
+    "relaxed_fragment_count": 2
+  },
+  "adsorbate_bonds_local_zero_based": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      3
+    ],
+    [
+      1,
+      2
+    ]
+  ],
+  "geometry": {
+    "minimum_contact_A": 1.099075606744022,
+    "fixed_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "fixed_max_drift_A": 7.714380512385498e-14,
+    "H50_seed_displacement_A": 0.17553483747291004,
+    "surface_max_displacement_A": 0.09591336361373805,
+    "CC_A": 1.410850224834838,
+    "CO_A": 1.2914238434187435,
+    "CH_A": 1.099075606744022,
+    "OH50_A": 3.901044950389049,
+    "H50_nearest_Fe": [
+      [
+        41,
+        1.7569818137642428
+      ],
+      [
+        40,
+        1.7847304768532595
+      ],
+      [
+        38,
+        1.8067732026191474
+      ]
+    ],
+    "C46_nearest_Fe": [
+      [
+        42,
+        2.058997069702259
+      ]
+    ],
+    "C47_nearest_Fe": [
+      [
+        37,
+        2.013715263023871
+      ]
+    ],
+    "O48_nearest_Fe": [
+      [
+        39,
+        2.0392630258648796
+      ]
+    ]
+  },
+  "compatibility_input_checks": {
+    "GGA": "PE",
+    "ENCUT": "400",
+    "ISPIN": "2",
+    "ISMEAR": "1",
+    "SIGMA": "0.2",
+    "LDIPOL": ".FALSE.",
+    "MAGMOM": "45*2.2 2*0.0 1*0.0 2*0.0",
+    "IBRION": "2",
+    "EDIFFG": "-0.02"
+  },
+  "comparisons": [
+    {
+      "calculation_id": "fe110_ads_c2ho_h_c2h2o_9725471",
+      "structure_sha256": "525ebe73dfbbb231b5c1bf37a6bc691a1a0913f403afa3d8ea7c9d0d90296878",
+      "H50_displacement_A": 2.3702150623604417,
+      "adsorbate_rmsd_A": 1.9660919918812223,
+      "movable_rmsd_A": 0.7790792842682897
+    },
+    {
+      "calculation_id": "fe110_ads_c2ho_h_c2h2o_9725472",
+      "structure_sha256": "a1e312c0be5a7bf2a75eff5eca52b16da44e9bb32b6c7522c58a10f8bfdfde5f",
+      "H50_displacement_A": 3.788340028571879,
+      "adsorbate_rmsd_A": 2.378613769224413,
+      "movable_rmsd_A": 0.9417661412470932
+    },
+    {
+      "calculation_id": "fe110_ads_c2ho_h_c2h2o_9725473",
+      "structure_sha256": "6800e98e36e32c09bc7c2514f52998e641416dca4d3b62a4aa0acc95ad50a2ed",
+      "H50_displacement_A": 3.2770971137093787,
+      "adsorbate_rmsd_A": 1.4700713693660772,
+      "movable_rmsd_A": 0.5813579795074328
+    },
+    {
+      "calculation_id": "fe110_ads_c2ho_h_c2h2o_9725474",
+      "structure_sha256": "62f0a8deb118a573b4bcd4bd94475006870a207f1bb7bf96d836c84f80ce9656",
+      "H50_displacement_A": 1.7228401407057443,
+      "adsorbate_rmsd_A": 2.280143451290701,
+      "movable_rmsd_A": 0.9028325232836171
+    },
+    {
+      "calculation_id": "fe110_ads_c2ho_h_c2h2o_9725475",
+      "structure_sha256": "b99de28699b489a778df8fddac3b9a9e8cf0270dc8a07601721cd472a90bd393",
+      "H50_displacement_A": 3.2990061405809272,
+      "adsorbate_rmsd_A": 2.2602552205241917,
+      "movable_rmsd_A": 0.8949700502415572
+    },
+    {
+      "calculation_id": "fe110_ads_c2ho_h_c2h2o_9737143",
+      "structure_sha256": "ab7f0a6221073c140675a57f2e73a776c5da2d8bfe0bfc4a5d5b9756f4e790ce",
+      "H50_displacement_A": 1.5769908804511636,
+      "adsorbate_rmsd_A": 0.7127527258498276,
+      "movable_rmsd_A": 0.28218591040452795
+    }
+  ],
+  "endpoint_validator": {
+    "fe110_ads_c2ho_h_c2h2o_9725473": {
+      "status": "VALID_WITH_WARNING",
+      "threshold_version": "ts_endpoint_thresholds_v2",
+      "applied_threshold_overrides": [],
+      "atom_mapping_method": "preserved_atom_order",
+      "periodic_mapping_method": "fractional_minimum_image_displacement",
+      "expected_bond_changes": [],
+      "observed_bond_changes": [
+        {
+          "kind": "break",
+          "atoms": [
+            36,
+            49
+          ]
+        },
+        {
+          "kind": "break",
+          "atoms": [
+            42,
+            49
+          ]
+        },
+        {
+          "kind": "break",
+          "atoms": [
+            43,
+            49
+          ]
+        },
+        {
+          "kind": "form",
+          "atoms": [
+            37,
+            49
+          ]
+        },
+        {
+          "kind": "form",
+          "atoms": [
+            39,
+            49
+          ]
+        },
+        {
+          "kind": "form",
+          "atoms": [
+            40,
+            49
+          ]
+        }
+      ],
+      "site_coordination_bond_changes": [
+        {
+          "kind": "break",
+          "atoms": [
+            36,
+            49
+          ]
+        },
+        {
+          "kind": "break",
+          "atoms": [
+            42,
+            49
+          ]
+        },
+        {
+          "kind": "break",
+          "atoms": [
+            43,
+            49
+          ]
+        },
+        {
+          "kind": "form",
+          "atoms": [
+            37,
+            49
+          ]
+        },
+        {
+          "kind": "form",
+          "atoms": [
+            39,
+            49
+          ]
+        },
+        {
+          "kind": "form",
+          "atoms": [
+            40,
+            49
+          ]
+        }
+      ],
+      "unexpected_bond_changes": [],
+      "missing_expected_bond_changes": [],
+      "expected_site_changes": [
+        "H50 coordination [37, 43, 44] to [38, 40, 41]"
+      ],
+      "observed_site_changes": [
+        "H50 coordination [37, 43, 44] to [38, 40, 41]"
+      ],
+      "unexpected_site_changes": [],
+      "atomic_displacement_A": {
+        "0": 1.1450422968696346e-12,
+        "1": 3.055366851132744e-12,
+        "2": 3.0549303852416095e-12,
+        "3": 2.7072551434350875e-12,
+        "4": 4.835030494052379e-12,
+        "5": 2.7070088759199056e-12,
+        "6": 2.7068857030560898e-12,
+        "7": 2.707132022711719e-12,
+        "8": 4.834272003467884e-12,
+        "9": 1.2062909027857473e-11,
+        "10": 1.1378465857175774e-11,
+        "11": 1.1378465857175774e-11,
+        "12": 1.1378377962638986e-11,
+        "13": 1.2062936663534606e-11,
+        "14": 1.1378377962638986e-11,
+        "15": 1.146616128047794e-11,
+        "16": 1.1466277575842122e-11,
+        "17": 1.1110867504964658e-11,
+        "18": 0.006194320734303212,
+        "19": 0.005046357264300834,
+        "20": 0.003928756500548755,
+        "21": 0.0027026505311535816,
+        "22": 0.005345434561653402,
+        "23": 0.004661866508507905,
+        "24": 0.004479443471228948,
+        "25": 0.004766013624580409,
+        "26": 0.004137774876251673,
+        "27": 0.018337097763936407,
+        "28": 0.008044842660210008,
+        "29": 0.012721370542147146,
+        "30": 0.005043794262495515,
+        "31": 0.011683460436472488,
+        "32": 0.010596591814862734,
+        "33": 0.013148786643842841,
+        "34": 0.01942060723517477,
+        "35": 0.005950930167694465,
+        "36": 0.05819462967787698,
+        "37": 0.011007139025148487,
+        "38": 0.02600279523858228,
+        "39": 0.025681594802908683,
+        "40": 0.014280805139653636,
+        "41": 0.039400523701267176,
+        "42": 0.030227026800979103,
+        "43": 0.016802788167537074,
+        "44": 0.017405877420044347,
+        "45": 0.10079032388348778,
+        "46": 0.1273089615344094,
+        "47": 0.1591234422795194,
+        "48": 0.12040403443607126,
+        "49": 3.277097113709302
+      },
+      "reactive_displacement_A": {
+        "49": 3.277097113709302
+      },
+      "adsorbate_com_displacement_A": 0.1990269441963249,
+      "max_reactive_displacement_A": 3.277097113709302,
+      "max_non_reactive_adsorbate_displacement_A": 0.1591234422795194,
+      "max_surface_displacement_A": 0.05819462967787698,
+      "migration_flag": null,
+      "validation_score": 0.75,
+      "errors": [],
+      "warnings": [
+        "REACTIVE_ATOM_DISPLACEMENT_WARNING"
+      ],
+      "reasons": [
+        "REACTIVE_ATOM_DISPLACEMENT_WARNING"
+      ]
+    },
+    "fe110_ads_c2ho_h_c2h2o_9737143": {
+      "status": "VALID",
+      "threshold_version": "ts_endpoint_thresholds_v2",
+      "applied_threshold_overrides": [],
+      "atom_mapping_method": "preserved_atom_order",
+      "periodic_mapping_method": "fractional_minimum_image_displacement",
+      "expected_bond_changes": [],
+      "observed_bond_changes": [
+        {
+          "kind": "break",
+          "atoms": [
+            38,
+            49
+          ]
+        },
+        {
+          "kind": "form",
+          "atoms": [
+            39,
+            49
+          ]
+        }
+      ],
+      "site_coordination_bond_changes": [
+        {
+          "kind": "break",
+          "atoms": [
+            38,
+            49
+          ]
+        },
+        {
+          "kind": "form",
+          "atoms": [
+            39,
+            49
+          ]
+        }
+      ],
+      "unexpected_bond_changes": [],
+      "missing_expected_bond_changes": [],
+      "expected_site_changes": [
+        "H50 coordination [38, 39, 41] to [38, 40, 41]"
+      ],
+      "observed_site_changes": [
+        "H50 coordination [38, 39, 41] to [38, 40, 41]"
+      ],
+      "unexpected_site_changes": [],
+      "atomic_displacement_A": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 0.0,
+        "7": 0.0,
+        "8": 0.0,
+        "9": 0.0,
+        "10": 0.0,
+        "11": 0.0,
+        "12": 0.0,
+        "13": 0.0,
+        "14": 0.0,
+        "15": 0.0,
+        "16": 0.0,
+        "17": 0.0,
+        "18": 0.005870484171864277,
+        "19": 0.005003399159455747,
+        "20": 0.0029704958514563374,
+        "21": 0.00395696980446892,
+        "22": 0.002844929622219481,
+        "23": 0.004624611456431988,
+        "24": 0.004852862729931945,
+        "25": 0.004762749519665284,
+        "26": 0.003123368368717192,
+        "27": 0.016901231771197258,
+        "28": 0.01210112149185408,
+        "29": 0.006574584203863409,
+        "30": 0.009206855835585616,
+        "31": 0.01015758661811037,
+        "32": 0.0066360175196262,
+        "33": 0.015307636847435456,
+        "34": 0.011307280571238533,
+        "35": 0.01128807179271731,
+        "36": 0.029386032127479266,
+        "37": 0.031068776349546502,
+        "38": 0.0345504017674185,
+        "39": 0.029514841579318545,
+        "40": 0.03203749972607339,
+        "41": 0.023211705945229436,
+        "42": 0.026621621419722036,
+        "43": 0.016396728249835017,
+        "44": 0.015473314094381175,
+        "45": 0.04273865155734845,
+        "46": 0.10740369820019309,
+        "47": 0.18989380109458864,
+        "48": 0.06132048260974984,
+        "49": 1.5769908804511632
+      },
+      "reactive_displacement_A": {
+        "49": 1.5769908804511632
+      },
+      "adsorbate_com_displacement_A": 0.15232390992294173,
+      "max_reactive_displacement_A": 1.5769908804511632,
+      "max_non_reactive_adsorbate_displacement_A": 0.18989380109458864,
+      "max_surface_displacement_A": 0.0345504017674185,
+      "migration_flag": null,
+      "validation_score": 1.0,
+      "errors": [],
+      "warnings": [],
+      "reasons": []
+    }
+  },
+  "limits": [
+    "No Hessian stability claim.",
+    "Identity-preserving comparison, not exhaustive surface symmetry equivalence.",
+    "No TS, barrier or kinetics acceptance.",
+    "Image02 remains an unvalidated ML minimum."
+  ]
+}

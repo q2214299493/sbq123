@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "event_id": "reconciled-task-updated-task-task-current-eeafbbeb5b875d05af4c",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "occurred_at": "2026-09-09T14:51:30.783751+00:00",
+  "recorded_at": "2026-09-09T14:51:30.783751+00:00",
+  "summary": "Reconcile task:task-current; preserve task-migration9748648-open-20260909-v2 as the single effective event and supersede conflicting peers.",
+  "payload": {
+    "objective": "Complete earlier IS-A to MID H surface migration through validated intermediate and TS evidence.",
+    "phase": "active",
+    "current_evidence": [
+      "Registry schema9 migration passed;13 old tables and3841 rows unchanged.",
+      "9748648 submitted through hash-bound executor; initial scheduler PEND. No convergence claim.",
+      "Input package: calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration1357_valley06_relax_20260909",
+      "Submission registered; no scientific result accepted."
+    ],
+    "one_executable_step": "Check existing job9748648 once on next progress request; after completion validate whether image06 remains a distinct stable intermediate.",
+    "submission_boundary": "Existing job9748648 only. No extra NEB,Dimer,frequency or resubmission authorized.",
+    "done_when": [
+      "Independent valley relaxation and geometry reviewed; then define scientifically supported migration segments."
+    ],
+    "constraints": [
+      "Same H50 moves; preserve SIGMA0.20 and bottom18Fe fixed.",
+      "Do not rerun MID-to-FS O-H work."
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration1357_valley06_relax_20260909/submission_record.json",
+      "sha256": "b09ed67489e226af8a6460d565a9d0cedc7ac94a2cddfe19d8a4b88aa50c8552",
+      "authority": "repository_document",
+      "observed_at": "2026-09-09T14:51:30.783751+00:00"
+    }
+  ],
+  "supersedes": [
+    "task-completed-966f70761e2de2c804e6dced",
+    "task-migration9748648-open-20260909-v2"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}
