@@ -289,6 +289,7 @@ def diagnose(
     *,
     reaction_pairs: list[list[int]] | None = None,
     expected_interior: int | None = None,
+    write_output: bool = True,
 ) -> dict[str, Any]:
     thresholds = yaml.safe_load(thresholds_path.read_text(encoding="utf-8"))
     directories, used_files, structures, errors = _load_images(workdir, _expected_interior(workdir, expected_interior))
@@ -339,7 +340,8 @@ def diagnose(
         "images": rows,
         "requires_visual_review": True,
     }
-    _write_diagnosis(workdir, payload)
+    if write_output:
+        _write_diagnosis(workdir, payload)
     return payload
 
 

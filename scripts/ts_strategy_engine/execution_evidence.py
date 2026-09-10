@@ -209,6 +209,7 @@ def warning_reason_codes(
 
 
 def validated_ts(validation: dict[str, Any]) -> bool:
+    """Legacy summary predicate only; scientific_claims owns claim application."""
     source_method = str(validation.get("source_method", "")).lower()
     frequency_hash_valid = validation.get("frequency_structure_hash_valid") or (
         validation.get("source_saddle_sha256")

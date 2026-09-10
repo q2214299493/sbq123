@@ -88,8 +88,9 @@ scientific validation.
 
 The frequency POSCAR may change only its reviewed Selective Dynamics active set,
 not the saddle geometry. Scope checks have one owner in
-`prepare_vfa_from_ts_image.vfa_scope_checks`, used by submission preflight and
-scientific acceptance. A supplied soft review must still match the current
+`analyze_vfa.vfa_scope_checks`, used by submission preflight and scientific
+acceptance. The preparation module retains its original import as a direct
+re-export. A supplied soft review must still match the current
 analysis, saddle and warning set; frequency-only approval cannot finalize a TS.
 For a multi-TS plan, the selected local contract and candidate ID must agree with
 the DIMER evidence (`ts_candidate_id` from its reviewed handoff).

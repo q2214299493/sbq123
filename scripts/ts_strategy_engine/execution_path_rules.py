@@ -13,9 +13,9 @@ from .execution_decision import (
 from .execution_evidence import (
     authorized_actions,
     diagnostic_actions,
-    validated_ts,
     warning_reason_codes,
 )
+from .scientific_claims import scientific_claim_decision
 
 
 def require_relative_input_path(value: str) -> str:
@@ -266,19 +266,8 @@ def progress_decision(
             "RESTORE_COMPLETE_PATH",
         )
 
-    if validated_ts(validation):
-        allowed = ["APPROVE_TS_CANDIDATE"]
-        if validation.get("compatible_final_energy_barrier_valid") or validation.get(
-            "matched_static_barrier_valid"
-        ):
-            allowed.append("REPORT_FINAL_BARRIER")
-        return _make_decision(
-            "VALIDATED_TS",
-            [],
-            evidence,
-            tuple(allowed),
-            "REGISTER_VALIDATED_TS_EVIDENCE",
-        )
+    if validation:
+        return scientific_claim_decision(evidence)
     dimer = dimer_progress_decision(
         analysis, quality, preflight, evidence, climb, path_reviewed
     )

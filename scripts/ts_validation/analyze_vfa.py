@@ -15,6 +15,7 @@ import yaml
 from scripts.artifact_io import load_json_object, sha256_file, source_file_manifest, source_file_manifest_valid
 from scripts.neb_agent.utils_report import write_json
 from scripts.neb_agent.utils_vasp import parse_outcar
+from scripts.neb_agent.utils_structure import read_poscar
 from scripts.ts_validation.dimer_frequency_gate import evaluate_dimer_frequency_gate
 
 
@@ -137,8 +138,6 @@ def _bound_vfa_handoff(
             or payload.get("source_sha256") != sha256_file(source_structure)
         ):
             return {}
-        from scripts.ts_validation.prepare_vfa_from_ts_image import same_vfa_geometry
-
         final_structure = _resolve_bound_path(saddle_payload.get("final_structure"), saddle_analysis.parent)
         if (
             final_structure is None or final_structure.resolve() != source_structure.resolve()
@@ -170,7 +169,6 @@ def _bound_vfa_handoff(
     payload["_dimer_frequency_handoff_acceptance"] = (
         dimer_frequency_acceptance if source_method == "dimer" else None
     )
-    from scripts.ts_validation.prepare_vfa_from_ts_image import vfa_scope_checks
 
     try:
         if not all(vfa_scope_checks(workdir, path).values()):
@@ -238,6 +236,34 @@ def _connectivity_report(
     payload["_evidence_path"] = str(path.resolve())
     payload["_evidence_sha256"] = actual_sha
     return payload
+
+
+def _underlying_vfa_sources(source_method: str, handoff: dict, review_root: Path, contract: dict, connectivity: dict) -> list[Path]:
+    """Collect transitive claim sources with the existing manifest owner."""
+    evidence_paths: list[Path] = []
+    if source_method == "dimer":
+        evidence_paths.append(resource_path('configs/ts_validation_pipeline.yaml'))
+    if handoff:
+        saddle_path = _resolve_bound_path(handoff.get("saddle_analysis_source"), review_root)
+        if saddle_path and saddle_path.is_file():
+            saddle = load_json_object(saddle_path)
+            evidence_paths.append(saddle_path)
+            evidence_paths.extend(Path(item["path"]) for item in saddle.get("source_files", []))
+            inputs = saddle.get("analysis_inputs", {})
+            if source_method in {"neb", "ci_neb"} and inputs:
+                from scripts.neb_agent.diagnose_path_geometry import diagnose
+
+                neb_root = Path(inputs["workdir"])
+                geometry = diagnose(neb_root, [str(i) for i in contract["reaction_atoms"]], [],
+                                    Path(inputs["thresholds_path"]), reaction_pairs=contract["broken_bonds"] or contract["formed_bonds"],
+                                    write_output=False)
+                evidence_paths.extend(Path(item["path"]) for item in geometry.get("source_files", []))
+                evidence_paths.extend([Path(saddle.get("path_review_source", neb_root / "path_review.json")),
+                                       neb_root / "path_generation_report.json"])
+    if connectivity:
+        evidence_paths.append(Path(connectivity["_evidence_path"]))
+        evidence_paths.extend(Path(item["path"]) for item in connectivity.get("source_files", []))
+    return evidence_paths
 
 
 def analyze_vfa(
@@ -410,6 +436,7 @@ def analyze_vfa(
     ) if value)
     if frequency_policy is None:
         evidence_paths.append(DEFAULT_PROFILE)
+    evidence_paths.extend(_underlying_vfa_sources(source_method, handoff, review_root, contract, connectivity))
     payload = {
         "scientific_review_bound": bool(review_evidence and review.get("status") == "accepted"),
         "workdir": str(workdir.resolve()),
@@ -537,7 +564,6 @@ def validate_dimer_vfa_binding(
     """
     from scripts.ts_strategy_engine.contract import normalize_contract
     from scripts.ts_strategy_engine.dimer_analysis import analyze_dimer
-    from scripts.ts_validation.prepare_vfa_from_ts_image import vfa_scope_checks
 
     if not source_file_manifest_valid(dimer) or not source_file_manifest_valid(vfa):
         raise ValueError("DIMER/VFA source files are missing or stale; regenerate their analyses")
@@ -577,10 +603,135 @@ def validate_dimer_vfa_binding(
     ) else current_vfa["frequency_threshold_status"]
     if not current_vfa["scientific_review_bound"]:
         raise ValueError("VFA review identity, scientific scope or acceptance is incomplete")
-    if current_vfa != vfa:
+    if current_vfa != {key: value for key, value in vfa.items() if key != "barrier_claim"}:
         raise ValueError("VFA summary differs from its current frequency/review evidence")
     sources = [Path(item["path"]) for payload in (dimer, vfa) for item in payload["source_files"]]
     return contract, [*sources, handoff_path, dimer_path, final]
+
+
+def validate_neb_vfa_binding(vfa: dict[str, Any], vfa_path: Path) -> None:
+    """Verify maintained VFA artifacts, including the current underlying science.
+
+    The optional barrier_claim is a hash-bound registration request, never a
+    scientific verdict. Unknown summaries and older unbound artifacts require
+    reanalysis. No file is written and no external action is performed.
+    """
+    from scripts.ts_strategy_engine.contract import normalize_contract
+
+    if not source_file_manifest_valid(vfa):
+        raise ValueError("VFA scientific sources are missing or stale")
+    contract = normalize_contract(vfa["reaction_contract"])
+    workdir = Path(vfa["workdir"]).resolve()
+    if workdir != vfa_path.parent.resolve():
+        raise ValueError("VFA analysis is outside its bound workdir")
+    method = vfa["source_method"]
+    if method not in {"neb", "ci_neb"}:
+        raise ValueError("unrecognized scientific validation document")
+    handoff = _bound_vfa_handoff(vfa, workdir, workdir, contract)
+    if not handoff:
+        raise ValueError("current VFA handoff binding is invalid")
+    saddle_path = _resolve_bound_path(handoff["saddle_analysis_source"], workdir)
+    _validate_current_neb_source(handoff, saddle_path, workdir, contract)
+    from scripts.ts_validation.connectivity import validate_current_connectivity
+
+    connectivity_path = Path(vfa["connectivity_report"])
+    validate_current_connectivity(load_json_object(connectivity_path), connectivity_path)
+    current = analyze_vfa(
+        workdir, contract, Path(vfa["review_path"]),
+        None if vfa["frequency_policy_is_default"] else vfa["frequency_policy"],
+        write_output=False,
+    )
+    if current != {key: value for key, value in vfa.items() if key != "barrier_claim"} or current["grade"] != "A":
+        raise ValueError("current NEB/VFA scientific evidence is not Grade A")
+
+
+def _validate_current_neb_source(handoff: dict, saddle_path: Path, workdir: Path, contract: dict) -> None:
+    from scripts.neb_agent.analyze_neb_outputs import analyze
+    from scripts.neb_agent.diagnose_path_geometry import diagnose
+    from scripts.ts_strategy_engine.path_evidence import validate_path_binding, validate_path_review
+
+    saddle = load_json_object(saddle_path)
+    if not source_file_manifest_valid(saddle):
+        raise ValueError("NEB saddle source files are missing or stale")
+    inputs = saddle["analysis_inputs"]
+    root, thresholds = Path(inputs["workdir"]), Path(inputs["thresholds_path"])
+    source = _resolve_bound_path(handoff["source_ts_candidate"], workdir)
+    if root.resolve() != source.parent.parent.resolve() or not same_vfa_geometry(source, workdir / "POSCAR"):
+        raise ValueError("NEB/VFA saddle structure identity mismatch")
+    current = analyze(root, thresholds, contract["reaction_atoms"], write_output=False)
+    if not current["technically_converged"] or not current["internal_maximum"] or str(current["maximum_image"]) != source.parent.name:
+        raise ValueError("current NEB source is not a converged saddle candidate")
+    # The workflow enriches these two parser fields using their own owners.
+    if any(value != saddle.get(key) for key, value in current.items()
+           if key not in {"geometry_validated", "path_reviewed"}):
+        raise ValueError("NEB analysis differs from current outputs")
+    geometry = diagnose(root, [str(i) for i in contract["reaction_atoms"]], [], thresholds,
+                        reaction_pairs=contract["broken_bonds"] or contract["formed_bonds"], write_output=False)
+    review_path = Path(saddle.get("path_review_source", root / "path_review.json"))
+    reviewed, _ = validate_path_review(review_path, root / "path_generation_report.json")
+    if geometry["status"] != "PASS" or not reviewed or not validate_path_binding(root, contract)["valid"]:
+        raise ValueError("current NEB geometry, contract or path review is invalid")
+
+
+def same_vfa_geometry(source: Path, frequency: Path) -> bool:
+    """Compare the handoff geometry at the existing POSCAR writer's 12-digit precision.
+
+    Selective Dynamics may change to the reviewed active set; coordinates,
+    cell, species and ordering must remain the saddle's. This is serialization
+    identity, not a new scientific displacement tolerance.
+    """
+    import numpy as np
+
+    left, right = read_poscar(source), read_poscar(frequency)
+    return bool(left.symbols == right.symbols and left.counts == right.counts
+                and np.array_equal(left.cell.round(12), right.cell.round(12))
+                and np.array_equal(left.frac.round(12), right.frac.round(12)))
+
+
+def vfa_scope_checks(workdir: Path, handoff_path: Path | None = None) -> dict[str, bool]:
+    """The shared, existing partial-Hessian scope rules for preflight and acceptance."""
+    handoff_path = handoff_path or workdir / "vfa_handoff.json"
+    scope_path = workdir / "vfa_scope_review.json"
+    handoff = load_json_object(handoff_path)
+    scope = load_json_object(scope_path)
+    structure = read_poscar(workdir / "POSCAR")
+    active = [
+        index
+        for index, flags in enumerate(structure.flags)
+        if structure.selective and flags and all(value == "T" for value in flags)
+    ]
+    expected_active = [int(value) for value in handoff.get("active_atom_indices_zero_based", [])]
+    reaction = {int(value) for value in handoff.get("reaction_atom_indices_zero_based", [])}
+    active_set_policy = handoff.get("active_set_policy")
+    legacy_scope = active_set_policy is None
+    checks = {
+        "frequency_structure_bound": handoff.get("frequency_poscar_sha256")
+        == sha256_file(workdir / "POSCAR"),
+        "active_set_matches_selective_dynamics": active == expected_active,
+        "reaction_atoms_active": reaction <= set(active),
+        "partial_hessian_policy_bound": legacy_scope
+        or (
+            handoff.get("frequency_method") == "finite_difference_partial_hessian"
+            and active_set_policy == "contract_defined_local"
+            and handoff.get("active_indices_source")
+            == "explicit_reaction_contract_review"
+            and handoff.get("full_hessian_required") is False
+            and scope.get("frequency_method") == handoff.get("frequency_method")
+            and scope.get("active_set_policy") == active_set_policy
+            and scope.get("active_indices_source")
+            == handoff.get("active_indices_source")
+        ),
+        "scope_review_accepted": scope.get("status")
+        in {"accepted_for_partial_hessian", "accepted_for_diagnostic_frequency"},
+        "scope_review_identity": bool(scope.get("reviewer") and scope.get("reviewed_at")),
+        "scope_review_structure_bound": scope.get("frequency_poscar_sha256")
+        == sha256_file(workdir / "POSCAR"),
+        "scope_review_handoff_bound": scope.get("vfa_handoff_sha256")
+        == sha256_file(handoff_path),
+        "scope_review_active_set": scope.get("active_atom_indices_zero_based")
+        == expected_active,
+    }
+    return checks
 
 
 def main() -> None:

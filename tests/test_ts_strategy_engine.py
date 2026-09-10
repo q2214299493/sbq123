@@ -11,6 +11,7 @@ import numpy as np
 import pytest
 import yaml
 
+from scripts.artifact_io import load_json_object, sha256_file, write_json
 from scripts.neb_agent.utils_structure import Poscar, write_poscar
 from scripts.ts_strategy_engine.contract import normalize_contract
 from scripts.ts_strategy_engine.connectivity_evidence import validate_source_saddle_job
@@ -72,20 +73,20 @@ def test_source_saddle_done_history_does_not_require_redundant_finished_at(
 
 
 def authoritative_gate(database_path: Path, validation: dict) -> tuple[Path, str]:
+    # The request metadata is distinct from science: use a real analyzer output.
+    source = database_path.parent / f"{database_path.stem}_science/vfa/vfa_analysis.json"
+    current = validation if "reaction_contract" in validation else load_json_object(source)
+    if "barrier_claim" in validation:
+        current = {**current, "barrier_claim": validation["barrier_claim"]}
+    write_json(source, current)
     decision = decide_search(
-        {"status": "PASS"},
-        {
-            "path_binding_valid": True,
-            "image_sequence_complete": True,
-            "images": [],
-        },
-        {},
-        True,
-        True,
-        validation=validation,
+        {"status": "PASS"}, {"path_binding_valid": True, "image_sequence_complete": True},
+        {}, True, True, validation=current,
+        source_bindings={"validation": {"path": str(source.resolve()), "sha256": sha256_file(source)}},
     )
+    assert decision["DECISION"] == "VALIDATED_TS", decision
     path = database_path.with_name(f"{database_path.stem}_authoritative_gate.json")
-    path.write_text(json.dumps(decision), encoding="utf-8")
+    write_json(path, decision)
     return path, decision["state_sha256"]
 
 
@@ -100,13 +101,8 @@ def barrier_validation(**updates: str) -> dict:
         "final_result_id": "fs_energy",
     }
     claim.update(updates)
-    return {
-        "frequency_grade": "A",
-        "frequency_structure_hash_valid": True,
-        "bidirectional_connectivity_valid": True,
-        "compatible_final_energy_barrier_valid": True,
-        "barrier_claim": claim,
-    }
+    return {"barrier_claim": claim}
+
 
 
 def contract(**overrides: object) -> dict:
@@ -181,57 +177,11 @@ def _insert_file(connection: sqlite3.Connection, file_id: str, calculation_id: s
 
 def database(path: Path, *, compatibility=None, missing_job_history=None) -> Path:
     active_contract = contract()
-    saddle_path = path.parent / "saddle.vasp"
-    frequency_poscar = path.parent / "frequency.POSCAR"
-    frequency_outcar = path.parent / "frequency.OUTCAR"
-    saddle_path.write_text("saddle\n", encoding="ascii")
-    frequency_poscar.write_text("frequency structure\n", encoding="ascii")
-    frequency_outcar.write_text("frequency output\n", encoding="ascii")
-    vfa_handoff_path = path.parent / "vfa_handoff.json"
-    vfa_handoff_path.write_text(
-        json.dumps(
-            {
-                "source_sha256": hashlib.sha256(saddle_path.read_bytes()).hexdigest(),
-                "frequency_poscar_sha256": hashlib.sha256(
-                    frequency_poscar.read_bytes()
-                ).hexdigest(),
-            }
-        ),
-        encoding="utf-8",
-    )
-    connectivity_path = path.parent / "connectivity_report.json"
-    connectivity_path.write_text(
-        json.dumps(
-            {
-                "document_kind": "vasp_bidirectional_ts_connectivity",
-                "status": "PASS",
-                "grade_a_connectivity_eligible": True,
-                "connects_to_is": True,
-                "connects_to_fs": True,
-                "contract_sha256": active_contract["contract_sha256"],
-                "atom_map_sha256": active_contract["atom_map_sha256"],
-                "compatibility_sha256": active_contract["compatibility_sha256"],
-                "source_saddle": {
-                    "path": str(saddle_path),
-                    "sha256": hashlib.sha256(saddle_path.read_bytes()).hexdigest(),
-                },
-                "frequency_poscar": {
-                    "path": str(frequency_poscar),
-                    "sha256": hashlib.sha256(frequency_poscar.read_bytes()).hexdigest(),
-                },
-                "frequency_outcar": {
-                    "path": str(frequency_outcar),
-                    "sha256": hashlib.sha256(frequency_outcar.read_bytes()).hexdigest(),
-                },
-                "branches": [
-                    {"direction": "positive", "job_id": "scheduler_connectivity_plus"},
-                    {"direction": "negative", "job_id": "scheduler_connectivity_minus"},
-                ],
-            }
-        ),
-        encoding="utf-8",
-    )
-    connectivity_sha = hashlib.sha256(connectivity_path.read_bytes()).hexdigest()
+    from tests.scientific_claim_fixtures import neb_vfa_case
+
+    case = neb_vfa_case(path.parent / f"{path.stem}_science", active_contract)
+    connectivity_path = case["connectivity"]
+    connectivity_sha = sha256_file(connectivity_path)
     with sqlite3.connect(path) as connection:
         connection.executescript((ROOT / "modules" / "calculation_registry" / "schema.sql").read_text(encoding="utf-8"))
     with fixture_connection(path) as connection:
@@ -353,51 +303,7 @@ def database(path: Path, *, compatibility=None, missing_job_history=None) -> Pat
         register_calculation_compatibility(path, calculation_id, chemistry, "reviewer", "2026-01-01T00:00:00Z")
     if compatibility is not None:
         return path
-    validation_payload = {
-        "validation_calculation_id": "calc_vfa",
-        "source_saddle_calculation_id": "calc_ts",
-        "source_job_record_id": "job_ts_source",
-        "source_method": "ci_neb",
-        "frequency_output_file_id": "vfa_outcar",
-        "positive_displacement_file_id": "mode_plus",
-        "negative_displacement_file_id": "mode_minus",
-        "connectivity_report_file_id": "connectivity_report",
-        "positive_connectivity_job_record_id": "job_connectivity_plus",
-        "negative_connectivity_job_record_id": "job_connectivity_minus",
-        "connectivity_report": str(connectivity_path),
-        "connectivity_report_sha256": connectivity_sha,
-        "vfa_handoff": str(vfa_handoff_path),
-        "vfa_handoff_sha256": hashlib.sha256(vfa_handoff_path.read_bytes()).hexdigest(),
-        "source_saddle_sha256": hashlib.sha256(saddle_path.read_bytes()).hexdigest(),
-        "frequency_poscar_sha256": hashlib.sha256(frequency_poscar.read_bytes()).hexdigest(),
-        "connectivity_status": "PASS",
-        "contract_sha256": contract()["contract_sha256"],
-        "atom_map_sha256": contract()["atom_map_sha256"],
-        "compatibility_sha256": contract()["compatibility_sha256"],
-        "imaginary_frequency_count": 1,
-        "imaginary_frequencies_cm1": [-500.0],
-        "principal_mode_assignment": "accepted",
-        "geometry_status": "pass",
-        "connects_to_is": True,
-        "connects_to_fs": True,
-        "grade": "A",
-        "kinetic_eligible": True,
-        "reviewer": "reviewer",
-        "reviewed_at": "2026-01-01",
-        "frequency_grade": "A",
-        "frequency_structure_hash_valid": True,
-        "bidirectional_connectivity_valid": True,
-        "compatible_final_energy_barrier_valid": True,
-        "barrier_claim": {
-            "barrier_set_id": "barrier_a",
-            "reaction_id": "co_split",
-            "source_calculation_id": "calc_ts",
-            "ts_validation_id": "validation_a",
-            "initial_result_id": "is_energy",
-            "ts_result_id": "ts_energy",
-            "final_result_id": "fs_energy",
-        },
-    }
+    validation_payload = {**case["payload"], **barrier_validation()}
     gate_path, gate_state = authoritative_gate(path, validation_payload)
     record_ts_validation(
         path,

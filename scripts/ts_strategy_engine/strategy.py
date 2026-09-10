@@ -138,6 +138,8 @@ def decide_search(
     preflight: dict[str, Any] | None = None,
     validation: dict[str, Any] | None = None,
     scheduler: dict[str, Any] | None = None,
+    *,
+    source_bindings: dict[str, dict[str, str]] | None = None,
 ) -> dict[str, Any]:
     return decide_execution(
         geometry,
@@ -149,4 +151,5 @@ def decide_search(
         preflight=preflight,
         validation=validation,
         scheduler=scheduler,
+        source_bindings=source_bindings,
     )

@@ -89,7 +89,7 @@ def classify_high_force_observations(
     return observations
 
 
-def analyze(workdir: Path, thresholds_path: Path, reaction_indices: list[int] | None = None) -> dict:
+def analyze(workdir: Path, thresholds_path: Path, reaction_indices: list[int] | None = None, *, write_output: bool = True) -> dict:
     thresholds = yaml.safe_load(thresholds_path.read_text(encoding="utf-8"))
     validate_finite_tree(thresholds, "NEB thresholds")
     nelm = _incar_integer(workdir / "INCAR", "NELM")
@@ -222,6 +222,9 @@ def analyze(workdir: Path, thresholds_path: Path, reaction_indices: list[int] | 
         "schema_version": 1,
         "document_kind": "neb_output_analysis",
         "producer": "scripts.neb_agent.analyze_neb_outputs",
+        "analysis_inputs": {"workdir": str(workdir.resolve()),
+                            "thresholds_path": str(thresholds_path.resolve()),
+                            "reaction_indices": reaction_indices},
         "source_files": source_file_manifest(
             [
                 workdir / "INCAR",
@@ -279,7 +282,8 @@ def analyze(workdir: Path, thresholds_path: Path, reaction_indices: list[int] | 
         "barrierless_candidate": barrierless_candidate,
         "energy_profile_status": "interim_neb_only_not_reportable_barrier",
     }
-    write_json(workdir / "neb_analysis.json", payload)
+    if write_output:
+        write_json(workdir / "neb_analysis.json", payload)
     return payload
 
 

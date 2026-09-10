@@ -11,7 +11,7 @@ import yaml
 
 from scripts.adsmind_lite.adsmind_common import load_yaml, require_ase_structure
 from scripts.adsmind_lite.relaxed_analysis import connectivity_edges
-from scripts.artifact_io import sha256_file, write_json
+from scripts.artifact_io import sha256_file, source_file_manifest, source_file_manifest_valid, write_json
 from scripts.neb_agent.utils_structure import (
     Poscar,
     compatible,
@@ -665,6 +665,7 @@ def analyze_bidirectional_connectivity(
     negative_scheduler: Path,
     output: Path,
     thresholds_path: Path | None = None,
+    write_output: bool = True,
 ) -> dict[str, Any]:
     contract = load_contract(contract_path)
     thresholds = _load_thresholds(thresholds_path)
@@ -713,8 +714,22 @@ def analyze_bidirectional_connectivity(
         else "NEEDS_REVIEW"
     )
     grade_a_eligible = bool(overall_status == "VALIDATED")
+    inputs = {name: str(path.resolve()) for name, path in {
+        "contract_path": contract_path, "initial_path": initial_path, "final_path": final_path,
+        "saddle_path": saddle_path, "frequency_outcar": frequency_outcar,
+        "positive_run": positive_run, "positive_displacement": positive_displacement,
+        "positive_scheduler": positive_scheduler, "negative_run": negative_run,
+        "negative_displacement": negative_displacement, "negative_scheduler": negative_scheduler,
+        "thresholds_path": thresholds_path or DEFAULT_THRESHOLDS,
+    }.items()}
+    sources = [Path(value) for value in inputs.values() if Path(value).is_file()]
+    sources.extend([frequency_poscar, STRUCTURE_PURPOSE_CONFIG])
+    sources.extend(run / name for run in (positive_run, negative_run)
+                   for name in ("INCAR", "POSCAR", "CONTCAR", "OUTCAR", "OSZICAR"))
     payload = {
         "schema_version": 2,
+        "analysis_inputs": inputs,
+        "source_files": source_file_manifest(sources),
         "document_kind": "vasp_bidirectional_ts_connectivity",
         "status": legacy_status,
         "reaction_connectivity": reaction_connectivity,
@@ -748,6 +763,19 @@ def analyze_bidirectional_connectivity(
         "grade_a_connectivity_eligible": grade_a_eligible,
         "thresholds": thresholds,
     }
-    output.parent.mkdir(parents=True, exist_ok=True)
-    write_json(output, payload)
+    if write_output:
+        output.parent.mkdir(parents=True, exist_ok=True)
+        write_json(output, payload)
     return payload
+
+
+def validate_current_connectivity(report: dict[str, Any], report_path: Path) -> None:
+    """Replay the maintained connectivity owner without rewriting its evidence."""
+    if not source_file_manifest_valid(report):
+        raise ValueError("connectivity sources are missing or stale; reanalyze connectivity")
+    current = analyze_bidirectional_connectivity(
+        **{key: Path(value) for key, value in report["analysis_inputs"].items()},
+        output=report_path, write_output=False,
+    )
+    if current != report or not current["grade_a_connectivity_eligible"]:
+        raise ValueError("connectivity summary differs from current scientific evidence")

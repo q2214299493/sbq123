@@ -110,7 +110,9 @@ def record_matched_static_barrier(
     learning_record: dict[str, Any],
     notes: str | None = None,
 ) -> dict[str, float | str]:
-    decision = require_action(gate_decision, "REPORT_FINAL_BARRIER", gate_state_sha256)
+    # The gate proves current TS evidence. This owner alone establishes the
+    # final barrier after database/result/job/compatibility/finite-value checks.
+    decision = require_action(gate_decision, "APPROVE_TS_CANDIDATE", gate_state_sha256)
     expected_claim = {
         "barrier_set_id": barrier_set_id,
         "reaction_id": reaction_id,
@@ -148,6 +150,17 @@ def record_matched_static_barrier(
             raise ValueError("final barrier requires a Grade-A kinetic-eligible TS validation")
         if validation["source_saddle_calculation_id"] != source_calculation_id:
             raise ValueError("barrier source calculation does not match the validated saddle calculation")
+        claim_validation = decision["EVIDENCE"]["validation"]
+        if any(claim_validation.get(key) != validation[column] for key, column in (
+            ("validation_calculation_id", "calculation_id"),
+            ("source_saddle_calculation_id", "source_saddle_calculation_id"),
+            ("source_method", "source_method"),
+            ("frequency_output_file_id", "frequency_output_file_id"),
+            ("contract_sha256", "contract_sha256"),
+            ("atom_map_sha256", "atom_map_sha256"),
+            ("compatibility_sha256", "compatibility_fingerprint"),
+        )):
+            raise ValueError("current TS claim evidence does not match the registered TS validation")
         rows = matched_static_rows(connection, result_ids)
         convention, compatibility = matched_static_convention(rows)
         if validation["compatibility_fingerprint"] != compatibility:

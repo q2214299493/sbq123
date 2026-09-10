@@ -10,7 +10,7 @@ from typing import Any
 
 import yaml
 
-from scripts.artifact_io import write_json
+from scripts.artifact_io import sha256_file, write_json
 from scripts.neb_agent.analyze_neb_outputs import analyze
 from scripts.neb_agent.utils_structure import read_poscar
 from scripts.neb_agent.check_endpoints import check_endpoints, write_report as write_endpoint_report
@@ -260,6 +260,7 @@ def analyze_search(request: AnalyzeRequest) -> dict[str, Any]:
         transition_state_validated=False,
         scientific_validity_scope="path_stage_only_requires_later_source_method_ts_validation",
         path_review=review,
+        path_review_source=str((request.path_review or request.workdir / "path_review.json").resolve()),
     )
     write_json(request.workdir / "neb_analysis.json", analysis)
     thresholds = yaml.safe_load(request.thresholds.read_text(encoding="utf-8"))
@@ -277,6 +278,10 @@ def analyze_search(request: AnalyzeRequest) -> dict[str, Any]:
         preflight,
         validation,
         scheduler,
+        source_bindings={"validation": {
+            "path": str(request.validation.resolve()),
+            "sha256": sha256_file(request.validation),
+        }} if request.validation else None,
     )
     _write_search_decision(request.workdir, decision)
     print(decision["DECISION"])
