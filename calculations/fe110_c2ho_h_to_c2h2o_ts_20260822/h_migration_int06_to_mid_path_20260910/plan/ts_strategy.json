@@ -1,0 +1,297 @@
+{
+  "version": 5,
+  "status": "NEEDS_PATH_REVIEW",
+  "strategy_source": "rule_based",
+  "reaction_family": "surface_preorganization",
+  "fingerprint_id": "c559d07a96c3c20e1f86a407075db30b455bbadf772b6770db6cdb4c74b4e621",
+  "template_match": null,
+  "reuse_scope": "family_rule_only",
+  "result_reuse_policy": "forbidden",
+  "nontransferable_artifacts": [
+    "endpoint_coordinates",
+    "atom_indices",
+    "MODECAR",
+    "CHGCAR",
+    "WAVECAR",
+    "image_number",
+    "energies",
+    "barrier"
+  ],
+  "failure_constraints": [],
+  "reference_methods": {
+    "matris_ml_neb_sella": {
+      "role": "optional_local_saddle_refinement_after_complete_ml_neb",
+      "implementation": "scripts.ml_sella_candidate.refine_peak",
+      "integration": "scripts.prepare_ml_candidate_active_learning.prepare_candidate_round",
+      "rerun": "scripts.prepare_ml_candidate_rerun.prepare_rerun",
+      "prerequisites": [
+        "converged_geometry_valid_single_peak_path",
+        "sella_dependency",
+        "work_review_before_force_diagnosis"
+      ],
+      "model": "current_matris_checkpoint",
+      "method": "standard_sella_not_bond_aware_sella",
+      "result_class": "predicted_transition_state_candidate_only",
+      "automatic_submission": false,
+      "establishes_ts": false
+    },
+    "aqcat25_ba_sella": {
+      "role": "predicted_candidate_generator",
+      "backend_capability": "ba_sella_candidate_search",
+      "implementation": "arkimede.workflow.calculations.run_sella_calculation",
+      "integration": "scripts.ts_strategy_engine.active_learning_handoff.prepare_ba_sella_rerun",
+      "prerequisites": [
+        "reviewed_endpoints_and_mapping",
+        "reviewed_gpu_handoff",
+        "compatible_model_and_environment"
+      ],
+      "result_class": "predicted_transition_state_candidate_only",
+      "automatic_submission": false,
+      "establishes_ts": false,
+      "historical_reference": {
+        "path": "calculations/fe110_co_dissociation_neb_20260718/output/job_737/pilot_report.json",
+        "sha256": "d7d763c0beddbbb47ae8fc1fbeaacb20cd272aeda0c029635ca5c8e191906cf9",
+        "interpretation": "historical_predicted_candidate_not_a_validated_TS"
+      }
+    }
+  },
+  "waypoint_strategy": [
+    "reactant",
+    "reviewed_reaction_waypoint",
+    "product"
+  ],
+  "interpolation_strategy": "segmented_idpp",
+  "neb_settings": {
+    "candidate_methods": [
+      "ordinary_neb",
+      "ci_neb",
+      "gpu_ml_neb_vasp_validated_triad"
+    ],
+    "initial_images": 3,
+    "image_policy": "start_minimal_then_add_only_at_large_displacement_or_high_curvature",
+    "selection_policy": "choose_from_reviewed_path_evidence_not_a_fixed_sequence"
+  },
+  "dimer_usage": {
+    "policy": "conditional_refinement"
+  },
+  "gpu_acceleration": {
+    "policy": "active_learning_acceleration_loop",
+    "target_product": "complete_hash_bound_gpu_path",
+    "does_not_establish": [
+      "vasp_energy",
+      "accepted_transition_state",
+      "reportable_barrier"
+    ]
+  },
+  "path_initialization": {
+    "waypoint_policy": "conditional_on_reaction_mapping_and_continuity_risk",
+    "direct_idpp_policy": "allowed_only_when_reviewed_geometry_and_periodic_continuity_pass",
+    "bond_change_policy": "use_reviewed_waypoints_when_direct_path_underresolves_or_misassigns_the_event"
+  },
+  "vasp_method_selection": "choose_case_by_case_from_gpu_path_continuity_peaks_forces_and_local_triad_evidence",
+  "validation": "docs/10_TS_VALIDATION_PROTOCOL.md",
+  "database_storage": "successful Grade-A or explicit failed-experience record only",
+  "requires_user_confirmation": true,
+  "automatic_submission": false,
+  "learning_failure_constraints": [],
+  "path_generation": {
+    "status": "READY_FOR_GEOMETRY_REVIEW",
+    "method_requested": "segmented_idpp",
+    "method_used": "segmented_idpp",
+    "interior_images": 3,
+    "image_directories": [
+      "00",
+      "01",
+      "02",
+      "03",
+      "04"
+    ],
+    "constraints_source": null,
+    "waypoint_sources": [
+      "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\waypoint07.vasp"
+    ],
+    "segment_additional_images": [
+      1,
+      1
+    ],
+    "periodic_branch": {
+      "method": "sequential_minimum_image_unwrap",
+      "max_raw_fractional_step": 0.06695766186054514,
+      "max_raw_cartesian_step_A": 0.4658405556134885,
+      "fixed_atoms_exactly_preserved": true
+    },
+    "warnings": [],
+    "requires_human_review": true,
+    "contract_sha256": "eeecfe26404dafb2008fbdc5529081d5584bbc5b4883c00a0096a2f32858454a",
+    "atom_map_sha256": "ef5b3d3d64884fde2a673dd35bef48a2a965c026edb6a8dd1c4eb22b100ae157",
+    "compatibility_sha256": "4ef0c782834fd07afca2621a5235bb67c2ea913bd650b93123c21538c35c165d",
+    "fingerprint_id": "c559d07a96c3c20e1f86a407075db30b455bbadf772b6770db6cdb4c74b4e621",
+    "strategy_source": "rule_based",
+    "template_id": null,
+    "waypoint_strategy": [
+      "reactant",
+      "reviewed_reaction_waypoint",
+      "product"
+    ],
+    "interpolation_strategy": "segmented_idpp"
+  },
+  "path_geometry": {
+    "schema_version": 1,
+    "document_kind": "neb_path_geometry_diagnosis",
+    "producer": "scripts.neb_agent.diagnose_path_geometry",
+    "source_files": [
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\00\\POSCAR",
+        "sha256": "d4ea48b0bd50eb816341926eae637455f9aa03acc24386a2627d620068bfafba"
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\01\\POSCAR",
+        "sha256": "7e57cd23082074125fcf2362d548912ef8ed7d4282d8076dfa100c504dc9928b"
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\02\\POSCAR",
+        "sha256": "386e155a1719c47089d36741ed37c3edcd99879dfaecd30cdb3524cbc09fa392"
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\03\\POSCAR",
+        "sha256": "974720ac93da7a6788f7aa4767a8cccce77c3d46bd80763f0de8714b7b6624b1"
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\04\\POSCAR",
+        "sha256": "fa0de12d866bdbef2e80d318ec6b693aacaa93f34ba51ed3f3b10c7ee05f2291"
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\configs\\neb_agent\\default_thresholds.yaml",
+        "sha256": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c"
+      }
+    ],
+    "status": "PASS",
+    "errors": [],
+    "warnings": [
+      "nebmovie.pl visual review remains required"
+    ],
+    "thresholds": {
+      "min_distance_factor": 0.55,
+      "absolute_min_distance_A": 1.0,
+      "image_jump_warning_A": 1.0,
+      "fixed_position_tolerance_A": 0.0001,
+      "internal_minimum_warning_eV": 0.2,
+      "barrierless_force_threshold_eVA": 0.2,
+      "high_force_warning_threshold_eVA": 1.5,
+      "min_ionic_steps_for_force_warning": 5,
+      "persistent_high_force_failure_min_ionic_steps": 10,
+      "scf_consecutive_exhaustion_hard_min": 3,
+      "surface_penetration_warning_A": 0.2,
+      "desorption_height_change_warning_A": 2.0,
+      "reaction_coordinate_backtrack_warning_A": 0.25,
+      "magnetic_continuity_warning_threshold_muB": 2.0
+    },
+    "reaction_atom_indices_zero_based": [
+      49
+    ],
+    "reaction_pairs_zero_based": [],
+    "fixed_atom_indices_zero_based": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "images": [
+      {
+        "image": "00",
+        "source": "calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\00\\POSCAR",
+        "minimum_pair_distance_A": 1.099075606757729,
+        "minimum_pair_zero_based": [
+          46,
+          47
+        ],
+        "collision_threshold_A": 0.781,
+        "max_step_from_previous_A": 0.0,
+        "max_raw_fractional_step_from_previous": 0.0,
+        "periodic_branch_shift_atom_indices_zero_based": [],
+        "max_fixed_displacement_from_initial_A": 0.0,
+        "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+        "reaction_distances": []
+      },
+      {
+        "image": "01",
+        "source": "calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\01\\POSCAR",
+        "minimum_pair_distance_A": 1.0992163129654433,
+        "minimum_pair_zero_based": [
+          46,
+          47
+        ],
+        "collision_threshold_A": 0.781,
+        "max_step_from_previous_A": 0.46584055561694604,
+        "max_raw_fractional_step_from_previous": 0.06695766186099997,
+        "periodic_branch_shift_atom_indices_zero_based": [],
+        "max_fixed_displacement_from_initial_A": 0.0,
+        "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+        "reaction_distances": []
+      },
+      {
+        "image": "02",
+        "source": "calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\02\\POSCAR",
+        "minimum_pair_distance_A": 1.0996681926076988,
+        "minimum_pair_zero_based": [
+          46,
+          47
+        ],
+        "collision_threshold_A": 0.781,
+        "max_step_from_previous_A": 0.46584055560967524,
+        "max_raw_fractional_step_from_previous": 0.06695766186000002,
+        "periodic_branch_shift_atom_indices_zero_based": [],
+        "max_fixed_displacement_from_initial_A": 0.0,
+        "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+        "reaction_distances": []
+      },
+      {
+        "image": "03",
+        "source": "calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\03\\POSCAR",
+        "minimum_pair_distance_A": 1.0999855845895816,
+        "minimum_pair_zero_based": [
+          46,
+          47
+        ],
+        "collision_threshold_A": 0.781,
+        "max_step_from_previous_A": 0.3305804559799346,
+        "max_raw_fractional_step_from_previous": 0.04677245485300002,
+        "periodic_branch_shift_atom_indices_zero_based": [],
+        "max_fixed_displacement_from_initial_A": 0.0,
+        "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+        "reaction_distances": []
+      },
+      {
+        "image": "04",
+        "source": "calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\04\\POSCAR",
+        "minimum_pair_distance_A": 1.1003682685417002,
+        "minimum_pair_zero_based": [
+          46,
+          47
+        ],
+        "collision_threshold_A": 0.781,
+        "max_step_from_previous_A": 0.3305804559826752,
+        "max_raw_fractional_step_from_previous": 0.04677245485299997,
+        "periodic_branch_shift_atom_indices_zero_based": [],
+        "max_fixed_displacement_from_initial_A": 0.0,
+        "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+        "reaction_distances": []
+      }
+    ],
+    "requires_visual_review": true
+  }
+}

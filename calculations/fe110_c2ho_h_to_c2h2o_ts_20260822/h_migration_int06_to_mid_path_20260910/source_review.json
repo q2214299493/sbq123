@@ -1,0 +1,66 @@
+{
+  "status": "reviewed_for_initial_path_preparation_only",
+  "reviewer": "Codex",
+  "sources": [
+    {
+      "role": "initial",
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration1357_valley06_relax_20260909\\completed_review_20260910\\CONTCAR",
+      "sha256": "2b53dedc909c678c2e8f7f1e4fc9643c6f87e78e26c8a818b8d9c8dfa7c73029",
+      "registry": {
+        "calculation_id": "fe110_h_migration1357_valley06_relax_9748648",
+        "structure_file_id": "fe110_h_migration1357_valley06_relax_9748648_CONTCAR_final",
+        "static_result_id": "fe110_h_migration1357_valley06_relax_9748648_final_toten"
+      }
+    },
+    {
+      "role": "final",
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\intermediate_image02_relax_20260901\\CONTCAR",
+      "sha256": "ab7f0a6221073c140675a57f2e73a776c5da2d8bfe0bfc4a5d5b9756f4e790ce",
+      "registry": {
+        "calculation_id": "fe110_ads_c2ho_h_c2h2o_9737143",
+        "structure_file_id": "file_fe110_ads_c2ho_h_c2h2o_9737143_CONTCAR_final",
+        "static_result_id": "result_fe110_ads_c2ho_h_c2h2o_9737143_final_toten"
+      }
+    },
+    {
+      "role": "reviewed_ML_waypoint_only",
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\gpu_split_paths_dual_model_20260901\\gpu_return_job1357\\images\\07\\POSCAR",
+      "sha256": "d45f553ae4b66b6c52cc7ecad23f236e323ed1d6a8b1eb4406ef24e47cf85ef5"
+    }
+  ],
+  "parent_contract_sha256": "0fcfc359449ad1be333d159ecbb6e720861fc0b279779912a43ec8148aae7689",
+  "gpu_manifest_sha256": "ac49dfa1673bdfe26a762686ddb7f6681086a81b06c24314f49537c04921507e",
+  "retrieval_review_sha256": "c7f8db4f1b9cc378921da2771e4cf64c4d80b9a7682c40897e74f46880de4780",
+  "triad_registry_lookup": [
+    {
+      "image": "06",
+      "structure_sha256": "40a64036a5bf13aa5a30729c53902f94126438e19685d1bfe2096d1396826a43",
+      "registry_hash_matches": [
+        {
+          "file_id": "fe110_h_migration1357_valley06_relax_9748648_POSCAR",
+          "calculation_id": "fe110_h_migration1357_valley06_relax_9748648",
+          "role": "input",
+          "filename": "POSCAR"
+        }
+      ]
+    },
+    {
+      "image": "07",
+      "structure_sha256": "d45f553ae4b66b6c52cc7ecad23f236e323ed1d6a8b1eb4406ef24e47cf85ef5",
+      "registry_hash_matches": []
+    },
+    {
+      "image": "08",
+      "structure_sha256": "bd3111e485d97c81a5b3df97b5d85ad0fecbcc51a8eec5e359e25807aa674936",
+      "registry_hash_matches": []
+    }
+  ],
+  "interior_images": 3,
+  "waypoint_role": "ML07 locates the Fe38/Fe41 bridge crossing; not a TS.",
+  "site_change_one_based": "H50 leaves Fe40 support and approaches Fe39 while passing between Fe38 and Fe41.",
+  "method_rationale": "New short ordinary no-climb NEB seed with one reviewed waypoint; direct Dimer lacks exact VASP peak-triad validation.",
+  "limits": [
+    "No new calculation authorized or submitted.",
+    "First IS-A-to-INT06 interval and image02 remain open."
+  ]
+}

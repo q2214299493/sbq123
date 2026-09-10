@@ -1,6 +1,6 @@
 # Current State
 
-State updated: 2026-08-27 CST. This file is a compact snapshot, not a history.
+State updated: 2026-09-10 CST. This file is a compact snapshot, not a history.
 Detailed job maps and old decisions live in `tasks/current_task.md`, module
 READMEs, and the provenance protocols.
 
@@ -124,16 +124,17 @@ accepted TS path, or barrier is established yet.
 ## Active Transition-State Gate
 
 <!-- state-handoff:start active-fe-110-co-dissociation-test-current-gate -->
-### Active Gate - 2026-08-27 GPU Job 1327 Failed; Revised Path Design Required
+### Active Gate - 2026-09-10 INT06-to-MID Inputs Prepared; Submission Authority Pending
 
-- Held-out VASP jobs `9731537`-`9731543` are `DONE` and quality-passed; frozen MatRIS passed the six-structure primary held-out gate, while AQCat25 remains a force/geometry auditor.
-- MZ73 job `1327` produced exit code `1` during restrained preconditioning step `9`, before ordinary MatRIS ML-NEB and before the AQCat25 fixed-path audit.
-- The required forming O-H `1.1-1.8 A` coverage fell from five to two internal images; at least three were required, so the geometry guard correctly stopped the run.
-- O-H monotonicity, C1-C2 preservation, adjacent RMSD, maximum movable-atom step, minimum pair distance, and periodic-branch checks still passed.
-- No complete GPU path, Dimer parent, VASP result, TS, barrier, fine-tuning, automatic retry, or resubmission exists.
-- The completed seven-job VASP batch remains accepted held-out evidence; job `1327` is a separate failed GPU path attempt and does not invalidate that batch.
+- 9748648: LSF DONE; ordinary valley06 relaxation completed in 79 steps; electronic and force criteria passed (0.0177274761 eV/A < 0.020).
+- INT06 accepted as intact C2HO* + H* mapped migration endpoint; final TOTEN -388.50564344 eV under fe110_converged_toten_sigma0p20_v1.
+- Schema9 registry completion applied: 12 inserted records and one workflow projection change; receipt in h_migration1357_valley06_relax_20260909/completed_review_20260910/registry_receipt.json.
+- IS-A -> INT06 and INT06 -> MID are two path intervals awaiting TS evidence; image02 remains an unresolved first-interval ML minimum.
+- The previously accepted MID -> FS O-H TS and 1.28582718 eV forward electronic barrier remain complete; do not repeat.
+- No new NEB/Dimer/frequency/static/GPU calculation submitted; no Hessian, exhaustive symmetry equivalence or complete migration-barrier claim.
+- INT06 -> MID local input package prepared: 3 interior images, 96 cores; VTST movie/distance, exact-MIC geometry, INCAR and input preflight checks completed. Execution gate has no allowed submission action without exact-package user authority. No new calculation was submitted.
 
-Next action: Prepare and review a revised preconditioning or resampling design that preserves at least three O-H interval images; require new explicit authorization before any rerun.
+Next action: Obtain exact-package authorization for INT06 -> MID ordinary NEB (3 images, 96 cores, NSW=300; bundle 1e34b1df2a0b4ee304cc2d5040e4fed365e0ead2421e049bba873cb232631735); then verify backend POTCAR, bind authorization, reevaluate the execution gate and submit only if SUBMIT_VASP is allowed.
 <!-- state-handoff:end active-fe-110-co-dissociation-test-current-gate -->
 
 ### Historical Evidence

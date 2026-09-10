@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "document_kind": "neb_path_geometry_diagnosis",
+  "producer": "scripts.neb_agent.diagnose_path_geometry",
+  "source_files": [
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\00\\POSCAR",
+      "sha256": "d4ea48b0bd50eb816341926eae637455f9aa03acc24386a2627d620068bfafba"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\01\\POSCAR",
+      "sha256": "7e57cd23082074125fcf2362d548912ef8ed7d4282d8076dfa100c504dc9928b"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\02\\POSCAR",
+      "sha256": "386e155a1719c47089d36741ed37c3edcd99879dfaecd30cdb3524cbc09fa392"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\03\\POSCAR",
+      "sha256": "974720ac93da7a6788f7aa4767a8cccce77c3d46bd80763f0de8714b7b6624b1"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\04\\POSCAR",
+      "sha256": "fa0de12d866bdbef2e80d318ec6b693aacaa93f34ba51ed3f3b10c7ee05f2291"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\INCAR",
+      "sha256": "0ae0af5e1eaae8ed1e277ae73ce42fbeee8f5c21ca9137434961fb55992a68d2"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\configs\\neb_agent\\default_thresholds.yaml",
+      "sha256": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c"
+    }
+  ],
+  "status": "PASS",
+  "errors": [],
+  "warnings": [
+    "nebmovie.pl visual review remains required"
+  ],
+  "thresholds": {
+    "min_distance_factor": 0.55,
+    "absolute_min_distance_A": 1.0,
+    "image_jump_warning_A": 1.0,
+    "fixed_position_tolerance_A": 0.0001,
+    "internal_minimum_warning_eV": 0.2,
+    "barrierless_force_threshold_eVA": 0.2,
+    "high_force_warning_threshold_eVA": 1.5,
+    "min_ionic_steps_for_force_warning": 5,
+    "persistent_high_force_failure_min_ionic_steps": 10,
+    "scf_consecutive_exhaustion_hard_min": 3,
+    "surface_penetration_warning_A": 0.2,
+    "desorption_height_change_warning_A": 2.0,
+    "reaction_coordinate_backtrack_warning_A": 0.25,
+    "magnetic_continuity_warning_threshold_muB": 2.0
+  },
+  "reaction_atom_indices_zero_based": [
+    49
+  ],
+  "reaction_pairs_zero_based": [],
+  "fixed_atom_indices_zero_based": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "images": [
+    {
+      "image": "00",
+      "source": "calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\00\\POSCAR",
+      "minimum_pair_distance_A": 1.099075606757729,
+      "minimum_pair_zero_based": [
+        46,
+        47
+      ],
+      "collision_threshold_A": 0.781,
+      "max_step_from_previous_A": 0.0,
+      "max_raw_fractional_step_from_previous": 0.0,
+      "periodic_branch_shift_atom_indices_zero_based": [],
+      "max_fixed_displacement_from_initial_A": 0.0,
+      "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+      "reaction_distances": []
+    },
+    {
+      "image": "01",
+      "source": "calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\01\\POSCAR",
+      "minimum_pair_distance_A": 1.0992163129654433,
+      "minimum_pair_zero_based": [
+        46,
+        47
+      ],
+      "collision_threshold_A": 0.781,
+      "max_step_from_previous_A": 0.46584055561694604,
+      "max_raw_fractional_step_from_previous": 0.06695766186099997,
+      "periodic_branch_shift_atom_indices_zero_based": [],
+      "max_fixed_displacement_from_initial_A": 0.0,
+      "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+      "reaction_distances": []
+    },
+    {
+      "image": "02",
+      "source": "calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\02\\POSCAR",
+      "minimum_pair_distance_A": 1.0996681926076988,
+      "minimum_pair_zero_based": [
+        46,
+        47
+      ],
+      "collision_threshold_A": 0.781,
+      "max_step_from_previous_A": 0.46584055560967524,
+      "max_raw_fractional_step_from_previous": 0.06695766186000002,
+      "periodic_branch_shift_atom_indices_zero_based": [],
+      "max_fixed_displacement_from_initial_A": 0.0,
+      "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+      "reaction_distances": []
+    },
+    {
+      "image": "03",
+      "source": "calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\03\\POSCAR",
+      "minimum_pair_distance_A": 1.0999855845895816,
+      "minimum_pair_zero_based": [
+        46,
+        47
+      ],
+      "collision_threshold_A": 0.781,
+      "max_step_from_previous_A": 0.3305804559799346,
+      "max_raw_fractional_step_from_previous": 0.04677245485300002,
+      "periodic_branch_shift_atom_indices_zero_based": [],
+      "max_fixed_displacement_from_initial_A": 0.0,
+      "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+      "reaction_distances": []
+    },
+    {
+      "image": "04",
+      "source": "calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\plan\\path_candidate\\04\\POSCAR",
+      "minimum_pair_distance_A": 1.1003682685417002,
+      "minimum_pair_zero_based": [
+        46,
+        47
+      ],
+      "collision_threshold_A": 0.781,
+      "max_step_from_previous_A": 0.3305804559826752,
+      "max_raw_fractional_step_from_previous": 0.04677245485299997,
+      "periodic_branch_shift_atom_indices_zero_based": [],
+      "max_fixed_displacement_from_initial_A": 0.0,
+      "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+      "reaction_distances": []
+    }
+  ],
+  "requires_visual_review": true
+}

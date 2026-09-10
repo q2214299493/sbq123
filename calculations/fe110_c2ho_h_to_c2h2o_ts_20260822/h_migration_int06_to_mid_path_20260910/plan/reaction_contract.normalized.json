@@ -1,0 +1,298 @@
+{
+  "version": 1,
+  "reaction_id": "fe110_c2ho_h_migration_INT06_9748648_to_MID9737143",
+  "reaction_family": "surface_preorganization",
+  "reactant_id": "c2ho_plus_h_int06_job9748648",
+  "product_id": "c2ho_plus_h_mid_job9737143",
+  "index_base": 0,
+  "atom_map": [
+    {
+      "is": 0,
+      "fs": 0
+    },
+    {
+      "is": 1,
+      "fs": 1
+    },
+    {
+      "is": 2,
+      "fs": 2
+    },
+    {
+      "is": 3,
+      "fs": 3
+    },
+    {
+      "is": 4,
+      "fs": 4
+    },
+    {
+      "is": 5,
+      "fs": 5
+    },
+    {
+      "is": 6,
+      "fs": 6
+    },
+    {
+      "is": 7,
+      "fs": 7
+    },
+    {
+      "is": 8,
+      "fs": 8
+    },
+    {
+      "is": 9,
+      "fs": 9
+    },
+    {
+      "is": 10,
+      "fs": 10
+    },
+    {
+      "is": 11,
+      "fs": 11
+    },
+    {
+      "is": 12,
+      "fs": 12
+    },
+    {
+      "is": 13,
+      "fs": 13
+    },
+    {
+      "is": 14,
+      "fs": 14
+    },
+    {
+      "is": 15,
+      "fs": 15
+    },
+    {
+      "is": 16,
+      "fs": 16
+    },
+    {
+      "is": 17,
+      "fs": 17
+    },
+    {
+      "is": 18,
+      "fs": 18
+    },
+    {
+      "is": 19,
+      "fs": 19
+    },
+    {
+      "is": 20,
+      "fs": 20
+    },
+    {
+      "is": 21,
+      "fs": 21
+    },
+    {
+      "is": 22,
+      "fs": 22
+    },
+    {
+      "is": 23,
+      "fs": 23
+    },
+    {
+      "is": 24,
+      "fs": 24
+    },
+    {
+      "is": 25,
+      "fs": 25
+    },
+    {
+      "is": 26,
+      "fs": 26
+    },
+    {
+      "is": 27,
+      "fs": 27
+    },
+    {
+      "is": 28,
+      "fs": 28
+    },
+    {
+      "is": 29,
+      "fs": 29
+    },
+    {
+      "is": 30,
+      "fs": 30
+    },
+    {
+      "is": 31,
+      "fs": 31
+    },
+    {
+      "is": 32,
+      "fs": 32
+    },
+    {
+      "is": 33,
+      "fs": 33
+    },
+    {
+      "is": 34,
+      "fs": 34
+    },
+    {
+      "is": 35,
+      "fs": 35
+    },
+    {
+      "is": 36,
+      "fs": 36
+    },
+    {
+      "is": 37,
+      "fs": 37
+    },
+    {
+      "is": 38,
+      "fs": 38
+    },
+    {
+      "is": 39,
+      "fs": 39
+    },
+    {
+      "is": 40,
+      "fs": 40
+    },
+    {
+      "is": 41,
+      "fs": 41
+    },
+    {
+      "is": 42,
+      "fs": 42
+    },
+    {
+      "is": 43,
+      "fs": 43
+    },
+    {
+      "is": 44,
+      "fs": 44
+    },
+    {
+      "is": 45,
+      "fs": 45
+    },
+    {
+      "is": 46,
+      "fs": 46
+    },
+    {
+      "is": 47,
+      "fs": 47
+    },
+    {
+      "is": 48,
+      "fs": 48
+    },
+    {
+      "is": 49,
+      "fs": 49
+    }
+  ],
+  "reaction_atoms": [
+    49
+  ],
+  "broken_bonds": [],
+  "formed_bonds": [],
+  "reaction_coordinates": [
+    {
+      "name": "H50_to_arriving_Fe39",
+      "kind": "distance",
+      "atoms": [
+        49,
+        38
+      ],
+      "important_interval_A": [
+        1.8217332982169685,
+        3.2880133053906118
+      ],
+      "role": "primary"
+    }
+  ],
+  "site_changes": [
+    "h49:fe39_to_fe38_via_fe37_fe40"
+  ],
+  "compatibility": {
+    "material": "fe",
+    "surface": "fe110",
+    "branch": "true_fe110_5layer_5x5x1",
+    "slab_model": "fe45_bottom18_fixed",
+    "xc": "pbe",
+    "potcar_family": "paw_pbe",
+    "encut_ev": 400.0,
+    "kmesh": [
+      5,
+      5,
+      1
+    ],
+    "magnetic_state": "ispin2_ferromagnetic_fe_2p2_seed",
+    "coverage": "3x3_single_c2ho_plus_single_h_to_c2h2o",
+    "ismear": 1,
+    "sigma_ev": 0.2,
+    "vacuum_thickness_angstrom": 15.0,
+    "fixed_atom_indices_zero_based": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "ldipol": false,
+    "final_energy_convention": "fe110_converged_toten_sigma0p20_v1"
+  },
+  "endpoints": {
+    "initial": {
+      "calculation_id": "fe110_h_migration1357_valley06_relax_9748648",
+      "structure_file_id": "fe110_h_migration1357_valley06_relax_9748648_CONTCAR_final",
+      "static_result_id": "fe110_h_migration1357_valley06_relax_9748648_final_toten"
+    },
+    "final": {
+      "calculation_id": "fe110_ads_c2ho_h_c2h2o_9737143",
+      "structure_file_id": "file_fe110_ads_c2ho_h_c2h2o_9737143_CONTCAR_final",
+      "static_result_id": "result_fe110_ads_c2ho_h_c2h2o_9737143_final_toten"
+    }
+  },
+  "waypoint_files": [
+    "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_path_20260910\\waypoint07.vasp"
+  ],
+  "retrieval_constraints": {
+    "accepted_local_inputs_only": true,
+    "source_gate": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\retrieval\\transferability_review.json",
+    "decision": "REUSE_VERIFIED_LOCAL_ENDPOINTS_AND_EXISTING_ML_WAYPOINT",
+    "reason": "Same mapped H migration subinterval; no new external coordinates, parameters or energies."
+  },
+  "atom_map_sha256": "ef5b3d3d64884fde2a673dd35bef48a2a965c026edb6a8dd1c4eb22b100ae157",
+  "compatibility_sha256": "4ef0c782834fd07afca2621a5235bb67c2ea913bd650b93123c21538c35c165d",
+  "contract_sha256": "eeecfe26404dafb2008fbdc5529081d5584bbc5b4883c00a0096a2f32858454a"
+}
