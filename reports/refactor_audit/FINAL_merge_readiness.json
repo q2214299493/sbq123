@@ -1,0 +1,1192 @@
+{
+  "document_class": "GENERATED_CURRENT_REPORT",
+  "as_of": "2026-09-10T09:30:03.836409+00:00",
+  "evidence_kind": "SOFTWARE_ACCEPTANCE_AUDIT",
+  "repository": "https://github.com/q2214299493/sbq123.git",
+  "candidate_branch": "codex/ac-closeout-thickness-workflow",
+  "candidate_sha": "9e968201ac5fc5996b1c428bf9e9dc8e81434e45",
+  "candidate_tree_sha": "9a497120e39769865f24c520bd5a6d2dc01a60cb",
+  "audit_branch": "codex/final-merge-readiness-confirmation",
+  "source_version": "9e968201ac5fc5996b1c428bf9e9dc8e81434e45",
+  "source_scope": "Locked candidate final independent merge-readiness confirmation",
+  "CODE_MERGE_READINESS": "NOT_READY_TO_MERGE",
+  "PRODUCTION_OPERATION_READINESS": "UNVERIFIED",
+  "DEVELOPMENT_WORKSPACE_SYNC": "NOT_PERFORMED",
+  "LIVE_STATE_RECONCILIATION": "NOT_PERFORMED",
+  "external_scientific_actions": 0,
+  "known_p0_open": 0,
+  "known_p1_open": 0,
+  "new_p0": 0,
+  "new_p1": 1,
+  "open_p0": 0,
+  "open_p1": 1,
+  "open_p2": 1,
+  "open_p3": 0,
+  "merge_blocking_verification_gaps": 0,
+  "source_audit": {
+    "candidate_sha": "9e968201ac5fc5996b1c428bf9e9dc8e81434e45",
+    "tree": "9a497120e39769865f24c520bd5a6d2dc01a60cb",
+    "os": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.9",
+    "ancestry": {
+      "origin/codex/b1-execution-lifecycle": {
+        "sha": "b1c59addbc7d7be64347db66a201dc5841404341",
+        "is_ancestor": true
+      },
+      "origin/codex/b2-scientific-contract": {
+        "sha": "3d9e9070e48a6cb65d9b4c0334adb4243f36dd0c",
+        "is_ancestor": true
+      },
+      "origin/codex/b3-evidence-ml-governance": {
+        "sha": "9f4332f082d4e286ce43c5a137a62ac1e30fa441",
+        "is_ancestor": true
+      },
+      "origin/codex/b4-registry-state-management": {
+        "sha": "fbbb7bb26d28867d9766cc7fca84077fa54cf3d6",
+        "is_ancestor": true
+      },
+      "origin/codex/b5-architecture-boundaries": {
+        "sha": "3a1bb3f461147a7dc9b5df5efca89de621d27f38",
+        "is_ancestor": true
+      },
+      "origin/codex/b6-documentation-data-governance": {
+        "sha": "93c09db8a6008a873ef7cc8bc7b4cc1e2a8cc22a",
+        "is_ancestor": true
+      },
+      "origin/codex/b7-release-environment": {
+        "sha": "7a0b745df96de2762a6f289e9eeda1a3c298fe9d",
+        "is_ancestor": true
+      },
+      "first_failed_audit": {
+        "sha": "fad1d32607723c851c457a5fb6fa85898cdc1edf",
+        "is_ancestor": true
+      },
+      "scientific_claim_repair": {
+        "sha": "a050fe28b25f1fc5ee91f5e7e3fb7fc1150a2157",
+        "is_ancestor": true
+      },
+      "second_failed_audit": {
+        "sha": "a24bda4fb82c325bdcc385c9b089a061ddcf7096",
+        "is_ancestor": true
+      },
+      "execution_repair": {
+        "sha": "9bf950b09b965ea832148fb3ad0f44625492652e",
+        "is_ancestor": true
+      },
+      "previous_closeout": {
+        "sha": "fae4339f7f91b52c13f4b993c9791e7110f13249",
+        "is_ancestor": true
+      },
+      "thickness_repair": {
+        "sha": "9e968201ac5fc5996b1c428bf9e9dc8e81434e45",
+        "is_ancestor": true
+      }
+    },
+    "scientific_ast": [
+      "LATTICE_A",
+      "LAYERS",
+      "VACUUM_A",
+      "RELAX_MESH",
+      "STATIC_MESH",
+      "EV_A2_TO_J_M2",
+      "incar_relax",
+      "incar_static",
+      "write_kpoints",
+      "layer_indices",
+      "build_slab",
+      "validate",
+      "surface_excess_formula"
+    ],
+    "identical_generated_inputs": [
+      "campaign.json",
+      "bulk_reference\\INCAR",
+      "bulk_reference\\KPOINTS",
+      "bulk_reference\\POSCAR",
+      "layers_8\\relax\\INCAR",
+      "layers_8\\relax\\KPOINTS",
+      "layers_8\\relax\\POSCAR",
+      "layers_8\\static\\INCAR",
+      "layers_8\\static\\KPOINTS",
+      "layers_8\\static\\POSCAR",
+      "layers_7\\relax\\INCAR",
+      "layers_7\\relax\\KPOINTS",
+      "layers_7\\relax\\POSCAR",
+      "layers_7\\static\\INCAR",
+      "layers_7\\static\\KPOINTS",
+      "layers_7\\static\\POSCAR",
+      "layers_6\\relax\\INCAR",
+      "layers_6\\relax\\KPOINTS",
+      "layers_6\\relax\\POSCAR",
+      "layers_6\\static\\INCAR",
+      "layers_6\\static\\KPOINTS",
+      "layers_6\\static\\POSCAR",
+      "layers_5\\relax\\INCAR",
+      "layers_5\\relax\\KPOINTS",
+      "layers_5\\relax\\POSCAR",
+      "layers_5\\static\\INCAR",
+      "layers_5\\static\\KPOINTS",
+      "layers_5\\static\\POSCAR",
+      "layers_4\\relax\\INCAR",
+      "layers_4\\relax\\KPOINTS",
+      "layers_4\\relax\\POSCAR",
+      "layers_4\\static\\INCAR",
+      "layers_4\\static\\KPOINTS",
+      "layers_4\\static\\POSCAR"
+    ],
+    "repair_changed_files": [
+      "modules/convergence_workflow/README.md",
+      "reports/refactor_audit/AC_CLOSEOUT_thickness_workflow_repair_report.md",
+      "scripts/convergence/common.py",
+      "scripts/convergence/setup_true_fe110_thickness_retest.py",
+      "scripts/convergence/thickness_stage.py",
+      "tests/test_convergence_common.py",
+      "tests/test_thickness_workflow_safety.py"
+    ],
+    "historical_reports_preserved": 17,
+    "maintained_python_files": 232,
+    "scheduler_owners": {
+      "scripts/neb_agent/submission.py": [
+        464,
+        544
+      ]
+    },
+    "shell_paths": [
+      "modules/convergence_workflow/inputs/fe110_true_facet_thickness_20260627/bulk_reference/run.lsf",
+      "modules/convergence_workflow/inputs/fe110_true_facet_thickness_20260627/layers_4/run_chain.lsf",
+      "modules/convergence_workflow/inputs/fe110_true_facet_thickness_20260627/layers_5/run_chain.lsf",
+      "modules/convergence_workflow/inputs/fe110_true_facet_thickness_20260627/layers_6/run_chain.lsf",
+      "modules/convergence_workflow/inputs/fe110_true_facet_thickness_20260627/layers_7/run_chain.lsf",
+      "modules/convergence_workflow/inputs/fe110_true_facet_thickness_20260627/layers_8/run_chain.lsf",
+      "scripts/aqcat25_gpu_job.sh",
+      "scripts/aqcat25_ml_neb_job.sh",
+      "scripts/aqcat25_mz73_env.sh",
+      "scripts/aqcat25_ts_finetune_job.sh",
+      "scripts/aqcat25_ts_force_prediction_batch_job.sh",
+      "scripts/dual_model_ml_neb_job.sh",
+      "scripts/dual_model_ts_force_prediction_batch_job.sh",
+      "scripts/dual_model_ts_force_prediction_batch_job_v2.sh",
+      "scripts/git_snapshot.ps1",
+      "scripts/matris_finetune_speed_benchmark_job.sh",
+      "scripts/mlip_same_structure_benchmark_job.sh",
+      "scripts/neb_agent/check_neb_job.sh",
+      "scripts/templates/sunboquan_vasp.lsf"
+    ]
+  },
+  "validation": {
+    "ruff": {
+      "command": "python -m ruff check scripts modules tests",
+      "exit": 0,
+      "started_at": "2026-09-10T09:12:56.061566+00:00",
+      "wall_seconds": 1.01,
+      "summary": [
+        "All checks passed!"
+      ],
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "skill_ruff": {
+      "command": "python -m ruff check skills/fe-vasp-incar-custodian/scripts/incar_custodian.py",
+      "exit": 0,
+      "started_at": "2026-09-10T09:12:57.074757+00:00",
+      "wall_seconds": 0.16,
+      "summary": [
+        "All checks passed!"
+      ],
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "full": {
+      "command": "python -m pytest -o addopts= -q",
+      "exit": 0,
+      "started_at": "2026-09-10T09:12:57.234215+00:00",
+      "wall_seconds": 491.51,
+      "summary": [
+        "1267 passed in 488.79s (0:08:08)"
+      ],
+      "log_sha256": "f75acb47df77929ee348d1b0c1c9eefba2255fa21663b03c00ef3e9fbca665d7"
+    },
+    "focused_final": {
+      "command": "python -m pytest -o addopts= -q tests/test_thickness_workflow_safety.py tests/test_convergence_common.py tests/test_true_fe110_thickness.py tests/test_alpha_fe_bulk_submission.py tests/test_scheduler_mutation_ownership.py tests/test_scientific_claim_authority.py tests/test_residual_parser_ownership.py tests/test_aqcat25_calibration.py",
+      "exit": 0,
+      "started_at": "2026-09-10T09:21:08.742800+00:00",
+      "wall_seconds": 159.5,
+      "summary": [
+        "183 passed in 145.98s (0:02:25)"
+      ],
+      "log_sha256": "b6d219bf53e6da9f02c505e792d5e611a7c6d823b095dbab77728e751f6a330c"
+    },
+    "B1": {
+      "command": "python -m pytest -o addopts= -q tests/test_execution_lifecycle.py tests/test_neb_execution_gate.py tests/test_execution_gate_compatibility.py tests/test_execution_backends.py tests/test_gpu_execution_lifecycle.py tests/test_artifact_io.py tests/test_alpha_fe_bulk_submission.py",
+      "exit": 0,
+      "started_at": "2026-09-10T09:23:48.240114+00:00",
+      "wall_seconds": 193.91,
+      "summary": [
+        "260 passed in 189.61s (0:03:09)"
+      ],
+      "log_sha256": "6f46d4b0fe2c47f32b565151bcc4ac0bdc7934215372eeaf270be88f3a0b253d"
+    },
+    "B2": {
+      "command": "python -m pytest -o addopts= -q tests/test_b2_scientific_contract.py tests/test_b21_scientific_acceptance.py tests/test_ts_strategy_engine.py",
+      "exit": 0,
+      "started_at": "2026-09-10T09:27:02.150714+00:00",
+      "wall_seconds": 76.79,
+      "summary": [
+        "162 passed in 73.16s (0:01:13)"
+      ],
+      "log_sha256": "4139ba3412dd8eafa76e133252780244ddbe1f8e5433d541e978f2ad2fc5b212"
+    },
+    "AC_B2_001": {
+      "command": "python -m pytest -o addopts= -q tests/test_scientific_claim_authority.py",
+      "exit": 0,
+      "started_at": "2026-09-10T09:28:18.945331+00:00",
+      "wall_seconds": 31.44,
+      "summary": [
+        "31 passed in 28.34s"
+      ],
+      "log_sha256": "f259c425f83aa35fc14fbf3d3b31a68501b5ddac8ec7469d852c08cdd574d2b3"
+    },
+    "B3": {
+      "command": "python -m pytest -o addopts= -q tests/test_b3_evidence_governance.py tests/test_b3_ml_governance.py",
+      "exit": 0,
+      "started_at": "2026-09-10T09:28:50.382504+00:00",
+      "wall_seconds": 18.25,
+      "summary": [
+        "68 passed in 8.01s"
+      ],
+      "log_sha256": "c169244117d37f5052cb12973e11b0599a437c91cec29c268119bd84c612ddcb"
+    },
+    "B4": {
+      "command": "python -m pytest -o addopts= -q tests/test_registry_write.py tests/test_b4_registry_governance.py tests/test_b4_state_governance.py tests/test_registry_schema.py tests/test_state_manager.py",
+      "exit": 0,
+      "started_at": "2026-09-10T09:29:08.629522+00:00",
+      "wall_seconds": 16.64,
+      "summary": [
+        "121 passed in 15.54s"
+      ],
+      "log_sha256": "5d8ab3cebee452fbc58827fc4e77e0dbf785df383d8d00870db518bec8e6a2a5"
+    },
+    "B5": {
+      "command": "python -m pytest -o addopts= -q tests/test_b5_architecture_boundaries.py tests/test_code_structure.py tests/test_repository_contracts.py",
+      "exit": 0,
+      "started_at": "2026-09-10T09:29:25.269411+00:00",
+      "wall_seconds": 18.23,
+      "summary": [
+        "56 passed in 17.08s"
+      ],
+      "log_sha256": "20b6f7aa4142483c37dd1cf52673fb44cfdcc62118f46898f20b2daf6f59c571"
+    },
+    "B6": {
+      "command": "python -m pytest -o addopts= -q tests/test_b6_governance.py",
+      "exit": 0,
+      "started_at": "2026-09-10T09:29:43.500921+00:00",
+      "wall_seconds": 3.42,
+      "summary": [
+        "26 passed in 1.98s"
+      ],
+      "log_sha256": "e502c3d0d179fb0d8b1341b41b7e4153ad67e17c432027a0767f15e8d11e92e4"
+    },
+    "B7": {
+      "command": "python -m pytest -o addopts= -q tests/test_b7_release.py",
+      "exit": 0,
+      "started_at": "2026-09-10T09:29:46.918084+00:00",
+      "wall_seconds": 1.76,
+      "summary": [
+        "17 passed in 0.83s"
+      ],
+      "log_sha256": "bdcd373f136ada0bacf5d6385ec3957117a47a6cec5d12b2c6e69f6132dcb6e5"
+    },
+    "diff_check": {
+      "command": "git diff --check",
+      "exit": 0,
+      "started_at": "2026-09-10T09:29:48.682400+00:00",
+      "wall_seconds": 0.07,
+      "summary": [
+        ""
+      ],
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "release": {
+      "command": "python -m scripts.validate_release --source C:\\Users\\86177\\AppData\\Local\\Temp\\sbq123-final-readiness-20260910 --output C:\\Users\\86177\\AppData\\Local\\Temp\\sbq123-final-readiness-evidence-20260910\\release",
+      "exit": 0,
+      "started_at": "2026-09-10T09:13:06.420176+00:00",
+      "wall_seconds": 96.91,
+      "summary": [
+        "{\"status\": \"PASS\", \"parity\": true, \"wheel_files\": 287}"
+      ],
+      "log_sha256": "26da3062a732ffd723fa3caa204a75cb9beeedbb9265af92db84b09d20575a43"
+    }
+  },
+  "remote_ci": {
+    "run_id": 34455339742,
+    "head_sha": "9e968201ac5fc5996b1c428bf9e9dc8e81434e45",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/q2214299493/sbq123/actions/runs/34455339742",
+    "jobs": [
+      {
+        "id": 102800303376,
+        "name": "wheel (windows-latest)",
+        "head_sha": "9e968201ac5fc5996b1c428bf9e9dc8e81434e45",
+        "status": "completed",
+        "conclusion": "success",
+        "labels": [
+          "windows-latest"
+        ],
+        "python": "3.11.9",
+        "evidence": [
+          "2026-09-10T08:28:26.3188211Z Microsoft Windows Server 2025",
+          "2026-09-10T08:28:36.4712627Z Successfully set up CPython (3.11.9)",
+          "2026-09-10T08:29:49.7539301Z {\"status\": \"PASS\", \"parity\": true, \"wheel_files\": 287}"
+        ]
+      },
+      {
+        "id": 102800303668,
+        "name": "wheel (ubuntu-latest)",
+        "head_sha": "9e968201ac5fc5996b1c428bf9e9dc8e81434e45",
+        "status": "completed",
+        "conclusion": "success",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "python": "3.11.16",
+        "evidence": [
+          "2026-09-10T08:28:28.7682639Z Successfully set up CPython (3.11.16)",
+          "2026-09-10T08:28:57.1847369Z {\"status\": \"PASS\", \"parity\": true, \"wheel_files\": 287}"
+        ]
+      },
+      {
+        "id": 102800303762,
+        "name": "engineering (windows-latest)",
+        "head_sha": "9e968201ac5fc5996b1c428bf9e9dc8e81434e45",
+        "status": "completed",
+        "conclusion": "success",
+        "labels": [
+          "windows-latest"
+        ],
+        "python": "3.11.9",
+        "evidence": [
+          "2026-09-10T08:28:25.9286283Z Microsoft Windows Server 2025",
+          "2026-09-10T08:28:37.3379028Z Successfully set up CPython (3.11.9)",
+          "2026-09-10T08:32:54.5918305Z 263 passed in 110.71s (0:01:50)"
+        ]
+      },
+      {
+        "id": 102800303768,
+        "name": "validate",
+        "head_sha": "9e968201ac5fc5996b1c428bf9e9dc8e81434e45",
+        "status": "completed",
+        "conclusion": "success",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "python": "3.11.16",
+        "evidence": [
+          "2026-09-10T08:28:27.6938360Z Successfully set up CPython (3.11.16)",
+          "2026-09-10T08:30:29.8986824Z 1267 passed in 88.85s (0:01:28)"
+        ]
+      },
+      {
+        "id": 102800303921,
+        "name": "engineering (ubuntu-latest)",
+        "head_sha": "9e968201ac5fc5996b1c428bf9e9dc8e81434e45",
+        "status": "completed",
+        "conclusion": "success",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "python": "3.11.16",
+        "evidence": [
+          "2026-09-10T08:28:28.8969576Z Successfully set up CPython (3.11.16)",
+          "2026-09-10T08:29:29.6665901Z 263 passed in 21.63s"
+        ]
+      }
+    ]
+  },
+  "release": {
+    "status": "PASS",
+    "parity": true,
+    "wheel_sha256": "078279726674c973251c12b0e759bf79068551152b6823bad02553928d077521",
+    "wheel_members": 287,
+    "resources": 60,
+    "environments": {
+      "editable": {
+        "console_scripts": {
+          "capability-readiness": {
+            "exit_code": 0,
+            "help_sha256": "21b8acb457191a879cd8bf5f2b95d591614b048843671d76416b0b78e26f2df0"
+          },
+          "catalysis-search": {
+            "exit_code": 0,
+            "help_sha256": "2cf49e7a3ec5d5ff5b251bed583e1ee0a24d2c0b174cc51a8655243ca2caaa73"
+          },
+          "catalysis-validate": {
+            "exit_code": 0,
+            "help_sha256": "1c0291a2ede25a2ca2296b6f4d6f158129e6b901e64b8ab645ce7f34e1e48e36"
+          },
+          "document-governance": {
+            "exit_code": 0,
+            "help_sha256": "dfc90937aecd1d96b9c26b80226cce3a7461f4af3481386053dfa8a2dbd3aa24"
+          },
+          "registry-init": {
+            "exit_code": 0,
+            "help_sha256": "44d30b240b3f5872e71de24c88d7731577b3a1d66de4e8d96885810dd02862c3"
+          },
+          "registry-promote": {
+            "exit_code": 0,
+            "help_sha256": "f8c35d017b89b2d40b2e76d30725919b5be69a775b652deb2330db444b24e158"
+          },
+          "registry-write": {
+            "exit_code": 0,
+            "help_sha256": "3dc1bb94ba31d37acb0bc83271288b171fa6b804d6676805c741db79dd022dd3"
+          },
+          "repo-state": {
+            "exit_code": 0,
+            "help_sha256": "7758cc42f9ab64225f38f270cf9f05f0eea1974b84fc04b68b7174f871bdf310"
+          },
+          "ts-strategy": {
+            "exit_code": 0,
+            "help_sha256": "a8f1f3d9e1b6ce2a436b63508f0e266486ec92046d8b445075e0544c7bc34d05"
+          }
+        },
+        "dependencies": {
+          "PyYAML": "6.0.3",
+          "ase": "NOT_INSTALLED",
+          "build": "NOT_INSTALLED",
+          "jsonschema": "4.26.0",
+          "matplotlib": "NOT_INSTALLED",
+          "numpy": "2.5.3",
+          "pymatgen": "NOT_INSTALLED",
+          "sella": "NOT_INSTALLED",
+          "sentence-transformers": "NOT_INSTALLED",
+          "setuptools": "NOT_INSTALLED",
+          "wheel": "NOT_INSTALLED"
+        },
+        "evidence_kind": "SOFTWARE_ENVIRONMENT",
+        "installation": "editable",
+        "os": "Windows-11-10.0.26200-SP0",
+        "package_version": "0.1.0",
+        "python": "3.13.9",
+        "requires_python": ">=3.11",
+        "resources": {
+          "configs/adsmind_lite/adsorbate_rules.yaml": "5fabd2942be9d450587002e298f18ea611e7e76546ae25bb8ae1fd2d5fe47f52",
+          "configs/adsmind_lite/analysis_rules.yaml": "2c57676904ad43d74e11802cb369c0d59ba14939c3c436598a449eae6b1f1bfd",
+          "configs/adsmind_lite/backend.yaml": "7facae362a006044d88f7e8d0364a1c6dae1c181451855637894955a8225261d",
+          "configs/adsmind_lite/evidence_gate.yaml": "499d5dab64f6453afcc3098763b827dc3fea23c7f919981d757fb7b7bff2d714",
+          "configs/adsmind_lite/iron_fts_prescreen.yaml": "fd8723d69d0f1f2e78c2e33b3b5ced0c35bff6976f6ca958221fe2bfb82a2592",
+          "configs/adsmind_lite/prescreen_rules.yaml": "fdc1ced8ad0522c4240f237e13d0916717bc9c2e9c334bc6b3c5b121924c30a1",
+          "configs/adsmind_lite/site_rules.yaml": "e4c06d98ea336d238157933c24a6679537794cabe04b75b5c1334e7523359e92",
+          "configs/adsmind_lite/surfaces.yaml": "8e14b5acb4d6ceca2c1eed9e79474a30c9cc5846d9511dfd9ad2e30d2b121251",
+          "configs/adsorption_result_promotion.yaml": "26727aca4b339c3e673f8799a6132005a0688816c671ccf41bb1b44c43d1ac54",
+          "configs/aqcat25_domain_gate.yaml": "a5d6d1802d368ecb5a4b6f65b537770363aeeb57e3d2c7b207c824ab170bfaa1",
+          "configs/aqcat25_handoff.schema.json": "0ec6012a2193b99152d485bff083354e74a30759bf21e65561b14f75eb1c9f0a",
+          "configs/aqcat25_ts_active_learning.schema.json": "1210996e2a2d481f608b4c9e88baeb8a5b6f015a56ddf947c7e6be7eaec0b6ed",
+          "configs/aqcat25_ts_active_learning.yaml": "efc0ec187e38407d5aaf4b496799ff870cfe3d1eff06fa0f61a169815e8bc435",
+          "configs/aqcat25_ts_domain_gate.yaml": "3398f68e23c6402af80b591bf3e4246905fa97b0dfd5b3136491a3e136b246bb",
+          "configs/data_governance.yaml": "8f81d7c15891b2f77fdc926a2f41edef13399414f423d34e3049551a02fdef9a",
+          "configs/dimer_gate.yaml": "b2269cbc313b5009ef45c444f8d32b78160ad18377adcb0ffb5337e4990b3717",
+          "configs/dual_model_ts_active_learning.yaml": "3509a5ff01a9042acd1ff1a3b02863eea10b28da28d32384c562c94d367e6f2c",
+          "configs/execution_backends.yaml": "31d9b7b3a39f0240e0d63370f1e34cb8da50a46047db009a44652bcbfc72337d",
+          "configs/fe110_adsorbates_h2_chx_pilot.yaml": "37ba9a5eeb89e998c42c37176d7aaf462b9af3ef2f182dd3e6c6cdb78ab7850b",
+          "configs/fe110_adsorbates_oxygenated_main_pilot.yaml": "20ed15cb556057f5b1d448c5516b68872f47f03a9a89d4fdf76c3e25c9b40171",
+          "configs/fe110_adsorbates_step12a.yaml": "a8acca52d4c888d2de42ee3c07368e9ba33fd779e1799be7f2f1855e44108779",
+          "configs/incar_custodian/project_profiles.yaml": "3fecfc0dcad21bdda078f83a3d6e910073a6fea0b82b5df9f8b54b91e0c33723",
+          "configs/neb_agent/default_thresholds.yaml": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c",
+          "configs/neb_agent/path_constraints_schema.json": "fbd4315d251bcb7430920a9ffe9c433c46cff551772036856e9a9cab9fdd2444",
+          "configs/neb_agent/retrieval_prior_schema.json": "1502d4fc2330c934d3bce028a4aefc808c76fe80e844376959ce8a38532abbbe",
+          "configs/neb_path_quality_control_v2.yaml": "db2c5d32e3b5f732f7b733df8fbcb62360177a0164de0cb7e1a51848475f0b92",
+          "configs/offline_mlip_fusion_feasibility.yaml": "71debc281f91fe8909ccb8f07dd8b4cf3d7a5f89e6a1bb2610f66cfdddc1ac02",
+          "configs/postprocessing_software.yaml": "0fd4d28bc78fd16106ad1cee844a9e8c46c24b2471ad78902b28ca5b16393b85",
+          "configs/registry_legacy_writers.yaml": "25ca262a3defa9b5c0a43776a025ddc7e8a31faca2b3d122d7cdd939a131ef77",
+          "configs/release_resources.json": "6f182f6fb1ec6f281025bd3746e080ff41b8682eb040c88a7fb24ed859268c0b",
+          "configs/skill_routing.yaml": "8123e15eb396dcf06d08ba1dddacdba485e44bde2202579a6dec514ff8d992d9",
+          "configs/state_handoff.yaml": "870b88033f79e794d373843220ea25787a5267c2a59ada6d60fc703747a7a477",
+          "configs/state_handoff_event.schema.json": "f0d4bffbee1051abf8beabc0d9d30b1de83f2385f7fafff47acbcf27e6fbcf87",
+          "configs/structure_purpose_routing.yaml": "c3a1b15dc1a4d215defdea6c825850a775db2aadc30ee2996436f817f4d98bf1",
+          "configs/true_fe110_production.yaml": "e7e888f07b2aaf961a13fda67857940953af28a2679d466af965102286dffcdf",
+          "configs/ts_connectivity_gate.yaml": "43427e5bd1a7950d7ee6defc0ce43c14c80b37b04175ee790fba1f61c629fe88",
+          "configs/ts_strategy_engine/families.yaml": "5d15d3961f9b738b65346ece4e2d25280d5ca20ebb2eeea4a63efa81e1763f88",
+          "configs/ts_strategy_engine/learning.yaml": "b999a9c12c14e7c0cd5fe06e2b5b1a62de94b29e1750d8e8372e29dcd3157e59",
+          "configs/ts_validation_pipeline.yaml": "5f59dd300977b7ad8115b2490bbf8015a392a3b3bd1ff2deb149da4991c672ea",
+          "modules/calculation_registry/migrations/001_ts_endpoint_records.sql": "e84506a2b1106dc564bef9fb14f60832315c4829f5f56d4e59b509886961119e",
+          "modules/calculation_registry/migrations/001_ts_endpoint_records_rollback.sql": "bb95bda8141294dbfba06987dea595b28c538def7b3690441e790fb3b3ae7db2",
+          "modules/calculation_registry/migrations/009_registry_governance.sql": "b957c9e6dc6a12827c38ef4e2fc64178b72086e6c14604cdd7cbb35e5b08662c",
+          "modules/calculation_registry/migrations/009_registry_governance_rollback.sql": "26be5658a0d9fe8af8d4f91dfd3d88808f4fe864d63d6f9ea70d5384d9b6b9c3",
+          "modules/calculation_registry/schema.sql": "eb8d1efe1c59bb81d71de7674eb6f4f7c0d424ff627849844500ce0b924ebebc",
+          "scripts/aqcat25_gpu_job.sh": "fd0ebe37e62391bb63c7645b6150e8a81f1eb4945a9ee6776e6406238907c8bc",
+          "scripts/aqcat25_ml_neb_job.sh": "fb8b5479e3b38b745293e1632bc14dea34df1e80d031b93c694c697ccb86e208",
+          "scripts/aqcat25_mz73_env.sh": "fbb20362b853dbc9435597fb849741f87c200c8f21fa1e396a78793490756b94",
+          "scripts/aqcat25_ts_finetune_job.sh": "65797176e2518fe415fc5e8dc583e4a238d3eddd9618c1662d19b02d1732c61f",
+          "scripts/aqcat25_ts_force_prediction_batch_job.sh": "d458a1d15d30b7bcb6c60741ddf191374a6c1e1dde74e2b26cb5da35afc0fc91",
+          "scripts/dual_model_ml_neb_job.sh": "ae086b69e30afa70e899b9e6dd6f576ebb23030a1c51d4bbc45920533561fbf0",
+          "scripts/dual_model_ts_force_prediction_batch_job.sh": "53dc1ad1cb75aae09f2430bdcc72638480d3f51c3d662240af61e781c2075d2c",
+          "scripts/dual_model_ts_force_prediction_batch_job_v2.sh": "cd09a940b2228cab4282af387416d17c9e13b27a1f4fd6eb7ac2a32cfdc92308",
+          "scripts/matris_finetune_speed_benchmark_job.sh": "217fa3fbf39322b09ab8689b57d8cc1f149f8aa7e9aff62b4d91c07fab8af4c3",
+          "scripts/mlip_same_structure_benchmark_job.sh": "6b0de74bb416984233b479b915bc5390b2426dcbd839528b1a75961eca2182c3",
+          "scripts/neb_agent/check_neb_job.sh": "0bc671b1c31d363e697e100473c7f5e0a7423229b49d898138b4f95ddd954d33",
+          "scripts/registry_excel_writer.mjs": "d85f0e19e4918b3d3982b30b4330fc4f959a69e6226f20f0c0c4e18fbece7d72",
+          "scripts/templates/sunboquan_vasp.lsf": "c7d5ca158a4383ab7b37747e13540784fe00248f713d762627f1b05bb6cdb19c",
+          "skills/catalysis-data-retrieval/references/image_query_schema.json": "a25255f1707d9d88faa8553cc25547668a188cb2513973352e652b14fa2a02af",
+          "skills/catalysis-data-retrieval/references/record_schema.json": "a74b3925b93002519594c27abe63a59314c019496511ae3e30acebd4453926a6",
+          "skills/catalysis-data-retrieval/references/sources.yaml": "93655af3494bcdcd2400f4cb1e70fc476d592f0cf22e9f28bd3ae95d37a11a00"
+        },
+        "smoke": {
+          "contract_sha256": "37be6a240363e639ba45ad742ee9d7dedd2b63073e48562f8ef7e84f5fbf316f",
+          "evidence_kind": "SOFTWARE_ENVIRONMENT",
+          "external_actions": 0,
+          "idempotent": true,
+          "inserted": 2,
+          "schema_version": 9,
+          "scientific_acceptance": false,
+          "status": "PASS"
+        }
+      },
+      "wheel": {
+        "console_scripts": {
+          "capability-readiness": {
+            "exit_code": 0,
+            "help_sha256": "21b8acb457191a879cd8bf5f2b95d591614b048843671d76416b0b78e26f2df0"
+          },
+          "catalysis-search": {
+            "exit_code": 0,
+            "help_sha256": "2cf49e7a3ec5d5ff5b251bed583e1ee0a24d2c0b174cc51a8655243ca2caaa73"
+          },
+          "catalysis-validate": {
+            "exit_code": 0,
+            "help_sha256": "1c0291a2ede25a2ca2296b6f4d6f158129e6b901e64b8ab645ce7f34e1e48e36"
+          },
+          "document-governance": {
+            "exit_code": 0,
+            "help_sha256": "dfc90937aecd1d96b9c26b80226cce3a7461f4af3481386053dfa8a2dbd3aa24"
+          },
+          "registry-init": {
+            "exit_code": 0,
+            "help_sha256": "44d30b240b3f5872e71de24c88d7731577b3a1d66de4e8d96885810dd02862c3"
+          },
+          "registry-promote": {
+            "exit_code": 0,
+            "help_sha256": "f8c35d017b89b2d40b2e76d30725919b5be69a775b652deb2330db444b24e158"
+          },
+          "registry-write": {
+            "exit_code": 0,
+            "help_sha256": "3dc1bb94ba31d37acb0bc83271288b171fa6b804d6676805c741db79dd022dd3"
+          },
+          "repo-state": {
+            "exit_code": 0,
+            "help_sha256": "7758cc42f9ab64225f38f270cf9f05f0eea1974b84fc04b68b7174f871bdf310"
+          },
+          "ts-strategy": {
+            "exit_code": 0,
+            "help_sha256": "a8f1f3d9e1b6ce2a436b63508f0e266486ec92046d8b445075e0544c7bc34d05"
+          }
+        },
+        "dependencies": {
+          "PyYAML": "6.0.3",
+          "ase": "NOT_INSTALLED",
+          "build": "NOT_INSTALLED",
+          "jsonschema": "4.26.0",
+          "matplotlib": "NOT_INSTALLED",
+          "numpy": "2.5.3",
+          "pymatgen": "NOT_INSTALLED",
+          "sella": "NOT_INSTALLED",
+          "sentence-transformers": "NOT_INSTALLED",
+          "setuptools": "NOT_INSTALLED",
+          "wheel": "NOT_INSTALLED"
+        },
+        "evidence_kind": "SOFTWARE_ENVIRONMENT",
+        "installation": "wheel",
+        "os": "Windows-11-10.0.26200-SP0",
+        "package_version": "0.1.0",
+        "python": "3.13.9",
+        "requires_python": ">=3.11",
+        "resources": {
+          "configs/adsmind_lite/adsorbate_rules.yaml": "5fabd2942be9d450587002e298f18ea611e7e76546ae25bb8ae1fd2d5fe47f52",
+          "configs/adsmind_lite/analysis_rules.yaml": "2c57676904ad43d74e11802cb369c0d59ba14939c3c436598a449eae6b1f1bfd",
+          "configs/adsmind_lite/backend.yaml": "7facae362a006044d88f7e8d0364a1c6dae1c181451855637894955a8225261d",
+          "configs/adsmind_lite/evidence_gate.yaml": "499d5dab64f6453afcc3098763b827dc3fea23c7f919981d757fb7b7bff2d714",
+          "configs/adsmind_lite/iron_fts_prescreen.yaml": "fd8723d69d0f1f2e78c2e33b3b5ced0c35bff6976f6ca958221fe2bfb82a2592",
+          "configs/adsmind_lite/prescreen_rules.yaml": "fdc1ced8ad0522c4240f237e13d0916717bc9c2e9c334bc6b3c5b121924c30a1",
+          "configs/adsmind_lite/site_rules.yaml": "e4c06d98ea336d238157933c24a6679537794cabe04b75b5c1334e7523359e92",
+          "configs/adsmind_lite/surfaces.yaml": "8e14b5acb4d6ceca2c1eed9e79474a30c9cc5846d9511dfd9ad2e30d2b121251",
+          "configs/adsorption_result_promotion.yaml": "26727aca4b339c3e673f8799a6132005a0688816c671ccf41bb1b44c43d1ac54",
+          "configs/aqcat25_domain_gate.yaml": "a5d6d1802d368ecb5a4b6f65b537770363aeeb57e3d2c7b207c824ab170bfaa1",
+          "configs/aqcat25_handoff.schema.json": "0ec6012a2193b99152d485bff083354e74a30759bf21e65561b14f75eb1c9f0a",
+          "configs/aqcat25_ts_active_learning.schema.json": "1210996e2a2d481f608b4c9e88baeb8a5b6f015a56ddf947c7e6be7eaec0b6ed",
+          "configs/aqcat25_ts_active_learning.yaml": "efc0ec187e38407d5aaf4b496799ff870cfe3d1eff06fa0f61a169815e8bc435",
+          "configs/aqcat25_ts_domain_gate.yaml": "3398f68e23c6402af80b591bf3e4246905fa97b0dfd5b3136491a3e136b246bb",
+          "configs/data_governance.yaml": "8f81d7c15891b2f77fdc926a2f41edef13399414f423d34e3049551a02fdef9a",
+          "configs/dimer_gate.yaml": "b2269cbc313b5009ef45c444f8d32b78160ad18377adcb0ffb5337e4990b3717",
+          "configs/dual_model_ts_active_learning.yaml": "3509a5ff01a9042acd1ff1a3b02863eea10b28da28d32384c562c94d367e6f2c",
+          "configs/execution_backends.yaml": "31d9b7b3a39f0240e0d63370f1e34cb8da50a46047db009a44652bcbfc72337d",
+          "configs/fe110_adsorbates_h2_chx_pilot.yaml": "37ba9a5eeb89e998c42c37176d7aaf462b9af3ef2f182dd3e6c6cdb78ab7850b",
+          "configs/fe110_adsorbates_oxygenated_main_pilot.yaml": "20ed15cb556057f5b1d448c5516b68872f47f03a9a89d4fdf76c3e25c9b40171",
+          "configs/fe110_adsorbates_step12a.yaml": "a8acca52d4c888d2de42ee3c07368e9ba33fd779e1799be7f2f1855e44108779",
+          "configs/incar_custodian/project_profiles.yaml": "3fecfc0dcad21bdda078f83a3d6e910073a6fea0b82b5df9f8b54b91e0c33723",
+          "configs/neb_agent/default_thresholds.yaml": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c",
+          "configs/neb_agent/path_constraints_schema.json": "fbd4315d251bcb7430920a9ffe9c433c46cff551772036856e9a9cab9fdd2444",
+          "configs/neb_agent/retrieval_prior_schema.json": "1502d4fc2330c934d3bce028a4aefc808c76fe80e844376959ce8a38532abbbe",
+          "configs/neb_path_quality_control_v2.yaml": "db2c5d32e3b5f732f7b733df8fbcb62360177a0164de0cb7e1a51848475f0b92",
+          "configs/offline_mlip_fusion_feasibility.yaml": "71debc281f91fe8909ccb8f07dd8b4cf3d7a5f89e6a1bb2610f66cfdddc1ac02",
+          "configs/postprocessing_software.yaml": "0fd4d28bc78fd16106ad1cee844a9e8c46c24b2471ad78902b28ca5b16393b85",
+          "configs/registry_legacy_writers.yaml": "25ca262a3defa9b5c0a43776a025ddc7e8a31faca2b3d122d7cdd939a131ef77",
+          "configs/release_resources.json": "6f182f6fb1ec6f281025bd3746e080ff41b8682eb040c88a7fb24ed859268c0b",
+          "configs/skill_routing.yaml": "8123e15eb396dcf06d08ba1dddacdba485e44bde2202579a6dec514ff8d992d9",
+          "configs/state_handoff.yaml": "870b88033f79e794d373843220ea25787a5267c2a59ada6d60fc703747a7a477",
+          "configs/state_handoff_event.schema.json": "f0d4bffbee1051abf8beabc0d9d30b1de83f2385f7fafff47acbcf27e6fbcf87",
+          "configs/structure_purpose_routing.yaml": "c3a1b15dc1a4d215defdea6c825850a775db2aadc30ee2996436f817f4d98bf1",
+          "configs/true_fe110_production.yaml": "e7e888f07b2aaf961a13fda67857940953af28a2679d466af965102286dffcdf",
+          "configs/ts_connectivity_gate.yaml": "43427e5bd1a7950d7ee6defc0ce43c14c80b37b04175ee790fba1f61c629fe88",
+          "configs/ts_strategy_engine/families.yaml": "5d15d3961f9b738b65346ece4e2d25280d5ca20ebb2eeea4a63efa81e1763f88",
+          "configs/ts_strategy_engine/learning.yaml": "b999a9c12c14e7c0cd5fe06e2b5b1a62de94b29e1750d8e8372e29dcd3157e59",
+          "configs/ts_validation_pipeline.yaml": "5f59dd300977b7ad8115b2490bbf8015a392a3b3bd1ff2deb149da4991c672ea",
+          "modules/calculation_registry/migrations/001_ts_endpoint_records.sql": "e84506a2b1106dc564bef9fb14f60832315c4829f5f56d4e59b509886961119e",
+          "modules/calculation_registry/migrations/001_ts_endpoint_records_rollback.sql": "bb95bda8141294dbfba06987dea595b28c538def7b3690441e790fb3b3ae7db2",
+          "modules/calculation_registry/migrations/009_registry_governance.sql": "b957c9e6dc6a12827c38ef4e2fc64178b72086e6c14604cdd7cbb35e5b08662c",
+          "modules/calculation_registry/migrations/009_registry_governance_rollback.sql": "26be5658a0d9fe8af8d4f91dfd3d88808f4fe864d63d6f9ea70d5384d9b6b9c3",
+          "modules/calculation_registry/schema.sql": "eb8d1efe1c59bb81d71de7674eb6f4f7c0d424ff627849844500ce0b924ebebc",
+          "scripts/aqcat25_gpu_job.sh": "fd0ebe37e62391bb63c7645b6150e8a81f1eb4945a9ee6776e6406238907c8bc",
+          "scripts/aqcat25_ml_neb_job.sh": "fb8b5479e3b38b745293e1632bc14dea34df1e80d031b93c694c697ccb86e208",
+          "scripts/aqcat25_mz73_env.sh": "fbb20362b853dbc9435597fb849741f87c200c8f21fa1e396a78793490756b94",
+          "scripts/aqcat25_ts_finetune_job.sh": "65797176e2518fe415fc5e8dc583e4a238d3eddd9618c1662d19b02d1732c61f",
+          "scripts/aqcat25_ts_force_prediction_batch_job.sh": "d458a1d15d30b7bcb6c60741ddf191374a6c1e1dde74e2b26cb5da35afc0fc91",
+          "scripts/dual_model_ml_neb_job.sh": "ae086b69e30afa70e899b9e6dd6f576ebb23030a1c51d4bbc45920533561fbf0",
+          "scripts/dual_model_ts_force_prediction_batch_job.sh": "53dc1ad1cb75aae09f2430bdcc72638480d3f51c3d662240af61e781c2075d2c",
+          "scripts/dual_model_ts_force_prediction_batch_job_v2.sh": "cd09a940b2228cab4282af387416d17c9e13b27a1f4fd6eb7ac2a32cfdc92308",
+          "scripts/matris_finetune_speed_benchmark_job.sh": "217fa3fbf39322b09ab8689b57d8cc1f149f8aa7e9aff62b4d91c07fab8af4c3",
+          "scripts/mlip_same_structure_benchmark_job.sh": "6b0de74bb416984233b479b915bc5390b2426dcbd839528b1a75961eca2182c3",
+          "scripts/neb_agent/check_neb_job.sh": "0bc671b1c31d363e697e100473c7f5e0a7423229b49d898138b4f95ddd954d33",
+          "scripts/registry_excel_writer.mjs": "d85f0e19e4918b3d3982b30b4330fc4f959a69e6226f20f0c0c4e18fbece7d72",
+          "scripts/templates/sunboquan_vasp.lsf": "c7d5ca158a4383ab7b37747e13540784fe00248f713d762627f1b05bb6cdb19c",
+          "skills/catalysis-data-retrieval/references/image_query_schema.json": "a25255f1707d9d88faa8553cc25547668a188cb2513973352e652b14fa2a02af",
+          "skills/catalysis-data-retrieval/references/record_schema.json": "a74b3925b93002519594c27abe63a59314c019496511ae3e30acebd4453926a6",
+          "skills/catalysis-data-retrieval/references/sources.yaml": "93655af3494bcdcd2400f4cb1e70fc476d592f0cf22e9f28bd3ae95d37a11a00"
+        },
+        "smoke": {
+          "contract_sha256": "37be6a240363e639ba45ad742ee9d7dedd2b63073e48562f8ef7e84f5fbf316f",
+          "evidence_kind": "SOFTWARE_ENVIRONMENT",
+          "external_actions": 0,
+          "idempotent": true,
+          "inserted": 2,
+          "schema_version": 9,
+          "scientific_acceptance": false,
+          "status": "PASS"
+        }
+      }
+    },
+    "blob_equality": {
+      "matched_python_members": 222,
+      "critical": {
+        "scripts/aqcat25_calibration.py": "56ac45732f317d725d0a85940a0f245cb141ceb4fa73d06297f838b5094b330a",
+        "scripts/convergence/common.py": "83ba5439d0d50ecee248ddacae0bc2f66d6d8eaf55119a3d774c57ef5f01d720",
+        "scripts/convergence/setup_alpha_fe_bulk_smearing.py": "52823f2b854e7b7458ce866991eecf102351a6292e2ce812424bc6708b282cac",
+        "scripts/convergence/setup_true_fe110_thickness_retest.py": "4f2f06361b85b922ea443ed11a462789a64e58e6fd81f5c12ac887289091c8cd",
+        "scripts/convergence/thickness_stage.py": "e74d1be3251dca6f4cebf9e385001dedcfe495bfeb55cd2cf4a2d19cdce0885e"
+      }
+    },
+    "installed_payload": {
+      "helper_origin": "C:\\Users\\86177\\AppData\\Local\\Temp\\sbq123-final-readiness-evidence-20260910\\release\\wheel-venv\\Lib\\site-packages\\scripts\\convergence\\thickness_stage.py",
+      "results": [
+        {
+          "kind": "chain",
+          "mode": "valid",
+          "exit": 0,
+          "fake_calls": 2,
+          "record": "COMPLETE stage=complete exit_code=0 scientific_acceptance=false"
+        },
+        {
+          "kind": "static",
+          "mode": "valid",
+          "exit": 0,
+          "fake_calls": 1,
+          "record": "COMPLETE stage=complete exit_code=0 scientific_acceptance=false"
+        },
+        {
+          "kind": "chain",
+          "mode": "exit9",
+          "exit": 9,
+          "fake_calls": 1,
+          "record": "FAILED stage=relax exit_code=9 scientific_acceptance=false"
+        },
+        {
+          "kind": "static",
+          "mode": "exit9",
+          "exit": 9,
+          "fake_calls": 1,
+          "record": "FAILED stage=static exit_code=9 scientific_acceptance=false"
+        },
+        {
+          "kind": "chain",
+          "mode": "old",
+          "exit": 65,
+          "fake_calls": 0,
+          "record": "FAILED stage=preflight exit_code=65 scientific_acceptance=false"
+        },
+        {
+          "kind": "static",
+          "mode": "missing",
+          "exit": 65,
+          "fake_calls": 1,
+          "record": "FAILED stage=static exit_code=65 scientific_acceptance=false"
+        }
+      ],
+      "external_actions": 0
+    }
+  },
+  "known_issue_closure": {
+    "AC-B2-001": {
+      "status": "CLOSED",
+      "evidence": "test_scientific_claim_authority.py: fake Grade-A/True rejected at Python/CLI; stale summaries and underlying DIMER/VFA/NEB data revoke old actions; barrier booleans rejected; positive real owner fixtures pass",
+      "repair_sha": "a050fe28b25f1fc5ee91f5e7e3fb7fc1150a2157"
+    },
+    "AC-RERUN-B1-001": {
+      "status": "CLOSED",
+      "evidence": "test_alpha_fe_bulk_submission.py: actual adapter -> canonical submit; no authorization 0 dispatches; concurrent callers exactly 1; uncertain receipt/timeout/missing ID/rejection does not retry",
+      "repair_sha": "9bf950b09b965ea832148fb3ad0f44625492652e"
+    },
+    "AC-RERUN-B2-001": {
+      "status": "CLOSED",
+      "evidence": "test_residual_parser_ownership.py: raw_incar_value delegates read_incar_values; semicolon MAGMOM literal 3*2.0 retained",
+      "repair_sha": "9bf950b09b965ea832148fb3ad0f44625492652e"
+    },
+    "AC-RERUN-B2-002": {
+      "status": "CLOSED",
+      "evidence": "test_residual_parser_ownership.py: parse_final_outcar delegates parse_outcar; old completed output plus newer incomplete cycle is not complete",
+      "repair_sha": "9bf950b09b965ea832148fb3ad0f44625492652e"
+    },
+    "AC-CLOSEOUT-B1-001": {
+      "status": "CLOSED",
+      "evidence": "test_thickness_workflow_safety.py: real generated chain/static scripts; relax error 9 stops static; old output rejected; static error propagated; positive complete and scientific_acceptance=false; fresh installed-wheel payload probes agree",
+      "repair_sha": "9e968201ac5fc5996b1c428bf9e9dc8e81434e45"
+    },
+    "AC-CLOSEOUT-B2-001": {
+      "status": "CLOSED",
+      "evidence": "test_convergence_common.py and test_thickness_workflow_safety.py: signed/exponent TOTEN; malformed/nonfinite rejected; incomplete bulk refused; incomplete slab surface excess null; no scientific promotion",
+      "repair_sha": "9e968201ac5fc5996b1c428bf9e9dc8e81434e45"
+    }
+  },
+  "new_findings": [
+    {
+      "id": "FINAL-B1-001",
+      "severity": "P1",
+      "status": "OPEN",
+      "merge_blocking": true,
+      "owner": "scripts/scheduler_evidence.py:31-38",
+      "caller": "scripts/ts_strategy_engine/active_learning_cli.py:168-171,256-259",
+      "title": "Read-only scheduler evidence query accepts remote shell commands in job_id",
+      "evidence": {
+        "id": "FINAL-B1-001",
+        "severity": "P1",
+        "source": "scripts/scheduler_evidence.py:31",
+        "transport_argv": [
+          "ssh",
+          "sunboquan-codex",
+          "bjobs",
+          "-a",
+          "123; bkill 456 #"
+        ],
+        "joined_remote_command": "bjobs -a 123; bkill 456 #",
+        "simulation_stdout": "FAKE_QUERY\nFAKE_MUTATION:456\n",
+        "simulation_exit": 0,
+        "gate_calls": 0,
+        "real_ssh_calls": 0,
+        "external_scientific_actions": 0,
+        "mechanism": "Unvalidated job_id reaches SSH remote-shell command; local shell=False does not quote the remote argv. Validation after subprocess cannot prevent dispatch.",
+        "cli_reproduced": true,
+        "cli_entry": "scripts.ts_strategy_engine.active_learning_cli.main: capture-lsf-evidence"
+      },
+      "impact": "An ordinary capture-lsf-evidence request can execute an additional scheduler command without the authoritative gate. A later parse/validation failure occurs after dispatch.",
+      "recommended_followup": "In a separately authorized repair, apply the existing canonical job-ID validator before constructing the SSH command; add API and CLI invalid-input/no-dispatch regressions and cover remote argv injection in ownership tests. No repair in this audit."
+    },
+    {
+      "id": "FINAL-B2-001",
+      "severity": "P2",
+      "status": "OPEN",
+      "merge_blocking": false,
+      "owner": "scripts/convergence/setup_alpha_fe_bulk_smearing.py:159-194",
+      "title": "Diagnostic alpha-Fe CSV finished flag retains historical completion",
+      "evidence": {
+        "source": "scripts\\convergence\\setup_alpha_fe_bulk_smearing.py",
+        "summary_finished": "True",
+        "canonical_normal_completion": false,
+        "scope": "diagnostic CSV only; no scheduler, registry, or acceptance calls",
+        "external_actions": 0,
+        "summary_call_inventory": [
+          "abs",
+          "bool",
+          "csv.DictWriter",
+          "float",
+          "last_matching_float",
+          "out.open",
+          "outcar.exists",
+          "outcar.read_text",
+          "print",
+          "re.compile",
+          "rows.append",
+          "writer.writeheader",
+          "writer.writerows"
+        ],
+        "source_sha256": "52823f2b854e7b7458ce866991eecf102351a6292e2ce812424bc6708b282cac"
+      },
+      "impact": "New incomplete run is displayed as finished in a diagnostic CSV. No maintained consumer was found promoting this field into a gate, registry acceptance, or scheduler dispatch; canonical parser remains false.",
+      "recommended_followup": "Separate diagnostic-parser followup; do not treat this CSV flag as final scientific convergence."
+    }
+  ],
+  "B1_B7_matrix": {
+    "B1 Execution Safety": {
+      "verdict": "FAIL",
+      "reason": "Required regression group passes, but new FINAL-B1-001 bypasses scheduler mutation authority."
+    },
+    "B2 Scientific Contract / VASP": {
+      "verdict": "PASS_WITH_NONBLOCKING_LIMITATION",
+      "reason": "Critical scientific validators and known blockers pass. Diagnostic-only FINAL-B2-001 remains P2."
+    },
+    "B3 Evidence / ML Governance": {
+      "verdict": "PASS_WITH_NONBLOCKING_LIMITATION",
+      "reason": "B3 evidence/ML regression group passes. Acquisition through scheduler query inherits FINAL-B1-001; overall merge remains blocked."
+    },
+    "B4 Registry / State": {
+      "verdict": "PASS",
+      "reason": "Critical transactions/schema/state regressions pass on temporary data; not production reconciliation."
+    },
+    "B5 Architecture": {
+      "verdict": "FAIL",
+      "reason": "Maintained tests pass, but static owner scanner misses runtime job-ID remote-shell injection."
+    },
+    "B6 Documentation / Data Governance": {
+      "verdict": "PASS_WITH_NONBLOCKING_LIMITATION",
+      "reason": "B6 tests pass; existing historical task/projection drift remain documented source-publication limitations; the prior audit recorded eight unclassified SKILL frontmatters."
+    },
+    "B7 Release / Environment": {
+      "verdict": "PASS",
+      "reason": "Fresh wheel/editable/outside-source/resource probes and five exact-candidate CI jobs pass."
+    },
+    "AC-B2-001": {
+      "verdict": "PASS",
+      "reason": "test_scientific_claim_authority.py: fake Grade-A/True rejected at Python/CLI; stale summaries and underlying DIMER/VFA/NEB data revoke old actions; barrier booleans rejected; positive real owner fixtures pass"
+    },
+    "AC-RERUN-B1-001": {
+      "verdict": "PASS",
+      "reason": "test_alpha_fe_bulk_submission.py: actual adapter -> canonical submit; no authorization 0 dispatches; concurrent callers exactly 1; uncertain receipt/timeout/missing ID/rejection does not retry"
+    },
+    "AC-CLOSEOUT thickness workflow": {
+      "verdict": "PASS",
+      "reason": "Both closeout defects independently closed for regenerated payloads and diagnostic extraction; historical scripts unchanged."
+    }
+  },
+  "limitations": [
+    {
+      "kind": "PRODUCTION_ONLY_UNVERIFIED",
+      "merge_blocking": false,
+      "description": "No real SSH/scheduler/VASP/MPI/GPU/production DB/workbook actions. HPC deployment, vendor environment, network filesystem atomicity and MPI signal forwarding unverified."
+    },
+    {
+      "kind": "EXTERNAL_CODE_SCOPE",
+      "merge_blocking": false,
+      "description": "Explicit user-supplied --runner/monitor script/writer and absent archived dist.pl contents are not certified. Reviewed maintained implementations are enumerated; arbitrary external code is outside this finite audit."
+    },
+    {
+      "kind": "DOCUMENT_STATE",
+      "merge_blocking": false,
+      "description": "Read-only startup audit: one existing managed_projection_drift error and one review request for docs/06_MODULE_MAP.md transition_state_search. Historical Dimer task is not current live state. Preserved without sync/reconciliation."
+    },
+    {
+      "kind": "HISTORICAL_PAYLOADS",
+      "merge_blocking": false,
+      "description": "Six retained 20260627 thickness .lsf artifacts were not rewritten. They must not be reused as repaired payloads; current module README requires a new directory and regeneration/reviewed recovery."
+    },
+    {
+      "kind": "PLATFORM_SCOPE",
+      "merge_blocking": false,
+      "description": "Local Windows 11/Python 3.13.9/Git Bash; exact-candidate CI supplies Ubuntu/Python 3.11.16 and Windows Server 2025/Python 3.11.9 evidence. No local native Linux claim."
+    }
+  ],
+  "scheduler_scan": {
+    "static_literal_owners": {
+      "scripts/neb_agent/submission.py": [
+        464,
+        544
+      ]
+    },
+    "effective_mutation_capable_paths": [
+      "scripts/neb_agent/submission.py",
+      "scripts/scheduler_evidence.py"
+    ],
+    "singleton_authority_verified": false,
+    "resolved_external_sinks": [
+      {
+        "path": "scripts/adsmind_lite/audit_remote_fe110_batch.py",
+        "line": 50,
+        "sink": "subprocess.run"
+      },
+      {
+        "path": "scripts/adsorption/backfill_step12a_registry.py",
+        "line": 234,
+        "sink": "subprocess.run"
+      },
+      {
+        "path": "scripts/aqcat25_ts_force_prediction_batch.py",
+        "line": 101,
+        "sink": "subprocess.run"
+      },
+      {
+        "path": "scripts/collect_dual_model_ts_vasp_labels.py",
+        "line": 49,
+        "sink": "subprocess.run"
+      },
+      {
+        "path": "scripts/neb_agent/remote_monitor.py",
+        "line": 53,
+        "sink": "subprocess.run"
+      },
+      {
+        "path": "scripts/neb_agent/submission.py",
+        "line": 576,
+        "sink": "subprocess.run"
+      },
+      {
+        "path": "scripts/prepare_reviewed_neb_peak_dimer.py",
+        "line": 65,
+        "sink": "subprocess.run"
+      },
+      {
+        "path": "scripts/registry_excel_promotion.py",
+        "line": 439,
+        "sink": "subprocess.run"
+      },
+      {
+        "path": "scripts/release_environment.py",
+        "line": 44,
+        "sink": "subprocess.run"
+      },
+      {
+        "path": "scripts/scheduler_evidence.py",
+        "line": 38,
+        "sink": "subprocess.run"
+      },
+      {
+        "path": "scripts/state_manager/audit.py",
+        "line": 358,
+        "sink": "subprocess.run"
+      },
+      {
+        "path": "scripts/state_manager/audit.py",
+        "line": 380,
+        "sink": "subprocess.run"
+      },
+      {
+        "path": "scripts/state_manager/proposals.py",
+        "line": 353,
+        "sink": "subprocess.run"
+      },
+      {
+        "path": "scripts/state_manager/stale_items.py",
+        "line": 17,
+        "sink": "subprocess.run"
+      },
+      {
+        "path": "scripts/state_manager/stale_items.py",
+        "line": 190,
+        "sink": "subprocess.run"
+      },
+      {
+        "path": "scripts/validate_release.py",
+        "line": 20,
+        "sink": "subprocess.run"
+      },
+      {
+        "path": "scripts/validate_release.py",
+        "line": 49,
+        "sink": "subprocess.run"
+      }
+    ],
+    "literal_tokens": [
+      {
+        "path": "scripts/neb_agent/submission.py",
+        "line": 105,
+        "text": "    \"\"\"Read-only recovery: missing/corrupt receipts never authorize another bsub.\"\"\""
+      },
+      {
+        "path": "scripts/neb_agent/submission.py",
+        "line": 450,
+        "text": "        # Full verification and bsub share one command for BOTH upload modes."
+      },
+      {
+        "path": "scripts/neb_agent/submission.py",
+        "line": 462,
+        "text": "            \"bsub script.lsf\","
+      },
+      {
+        "path": "scripts/neb_agent/submission.py",
+        "line": 544,
+        "text": "    completed = _run([\"ssh\", host, \"bkill\", str(job_id)])"
+      }
+    ],
+    "extra_inert_guard_probes": {
+      "sources": [
+        "import subprocess as sp\ncmd=['ssh',host]\ncmd.extend(['qdel',job])\nsp.run(cmd)",
+        "from subprocess import Popen as start\nbase='sba'+'tch'\ncmd=[base,'job.sh']\nstart(cmd)",
+        "import os as sysops\ncommand='qsub job.sh'\nsysops.system(command)"
+      ],
+      "detected_lines": [
+        [
+          4
+        ],
+        [
+          4
+        ],
+        [
+          3
+        ]
+      ]
+    },
+    "method": "Tracked Python AST import aliases, assignments, concatenation, append/extend, wrapper propagation; manual review of all resolved subprocess sinks and shell/template inventory; independent job-ID taint reproduction revealed a missed owner."
+  },
+  "artifact_scan": {
+    "tracked_count": 1314,
+    "hits": [],
+    "over_10MB": [],
+    "scope": "tracked filenames and private-key content headers; wheel strict resource/source allowlist additionally verified"
+  },
+  "preserved_report_blobs": [
+    {
+      "path": "reports/refactor_audit/AC_B2_001_repair_report.md",
+      "blob": "ee2fa0f4e143283c6516e00526ffec4ea4a45f4b"
+    },
+    {
+      "path": "reports/refactor_audit/AC_CLOSEOUT_thickness_workflow_repair_report.md",
+      "blob": "7200acdf3163312173c2b48d07ad26e7c68d5abc"
+    },
+    {
+      "path": "reports/refactor_audit/AC_RERUN_B1_001_execution_closure_report.md",
+      "blob": "0cfbd5ef2f48a0c9827da7ea9a304d9f8460d4db"
+    },
+    {
+      "path": "reports/refactor_audit/B1_B7_acceptance.json",
+      "blob": "d7602764db03d4dc95b18bc7eefaa4834b3e6ec9"
+    },
+    {
+      "path": "reports/refactor_audit/B1_B7_acceptance_closeout.json",
+      "blob": "9a26c8c3689741ddea50194bcabe3ff92abe53fb"
+    },
+    {
+      "path": "reports/refactor_audit/B1_B7_acceptance_closeout_report.md",
+      "blob": "51ddbe2f3587f9a170c1680ce1e1a8e515bf2c38"
+    },
+    {
+      "path": "reports/refactor_audit/B1_B7_acceptance_report.md",
+      "blob": "b3a069f43ac9163a7f70d140141b72430097e745"
+    },
+    {
+      "path": "reports/refactor_audit/B1_B7_acceptance_rerun.json",
+      "blob": "561af669e3be38a92c492dde70a0cf73d8a2e71a"
+    },
+    {
+      "path": "reports/refactor_audit/B1_B7_acceptance_rerun_report.md",
+      "blob": "b5d236fcb2d7b135fd72dbf182807135c64cfe85"
+    },
+    {
+      "path": "reports/refactor_audit/B1_completion_report.md",
+      "blob": "a57b7801c68fe2d6b131ed2fc3b97f9e362838d5"
+    },
+    {
+      "path": "reports/refactor_audit/B2_completion_report.md",
+      "blob": "873f8bf6f6e704b2cae6a9f95a7e911d9b89ea36"
+    },
+    {
+      "path": "reports/refactor_audit/B3_completion_report.md",
+      "blob": "d49cfc546f3da39a0fcefe784b104d29692f247c"
+    },
+    {
+      "path": "reports/refactor_audit/B4_completion_report.md",
+      "blob": "751fb057662c847d50e5dc947b43f0487117ec05"
+    },
+    {
+      "path": "reports/refactor_audit/B5_completion_report.md",
+      "blob": "d4de30bc768567386771bb41f4dd13296c0995d6"
+    },
+    {
+      "path": "reports/refactor_audit/B5_dependency_inventory.md",
+      "blob": "2bfe2c038326fcd9a5dfe742881eece556c75be3"
+    },
+    {
+      "path": "reports/refactor_audit/B6_completion_report.md",
+      "blob": "c5f485030440bbf63d70d1557a58a50e98410cc3"
+    },
+    {
+      "path": "reports/refactor_audit/B7_completion_report.md",
+      "blob": "42d41e0395bdb2065805c06c294c0fd507acd023"
+    },
+    {
+      "path": "reports/refactor_audit/full_coverage_report.md",
+      "blob": "694c5db2b7b3832d2c3fb0ddd8d38c6a649ae995"
+    }
+  ],
+  "public_reference": "https://man.openbsd.org/ssh",
+  "allowed_tracked_outputs": [
+    "reports/refactor_audit/FINAL_merge_readiness_report.md",
+    "reports/refactor_audit/FINAL_merge_readiness.json"
+  ],
+  "publication": "Only these reports; no merge/main update/development sync/source repair. Audit commit SHA is reported after commit, not embedded self-referentially.",
+  "independent_reproduction_programs": {
+    "scheduler_injection_probe.py": "from pathlib import Path\nimport subprocess,json\nfrom unittest.mock import patch\nimport sys\nsys.path.insert(0,str(Path.cwd()))\nfrom scripts import scheduler_evidence as owner\nroot=Path.cwd();assert Path(owner.__file__).resolve().is_relative_to(root)\nev=Path(r'C:/Users/86177/AppData/Local/Temp/sbq123-final-readiness-evidence-20260910')\nobserved=[]\ndef fake_ssh(argv,**kwargs):\n observed.append(argv)\n return subprocess.CompletedProcess(argv,1,'','simulated transport end')\nwith patch.object(owner.subprocess,'run',fake_ssh):\n try: owner.query_lsf_job('123; bkill 456 #')\n except RuntimeError: pass\nassert len(observed)==1\nargv=observed[0];assert argv[0]=='ssh'\n# OpenSSH joins remote argv with spaces. Only Bash functions exist in this local\n# reproduction; neither ssh, bjobs nor bkill executables are called.\ncommand=' '.join(argv[2:])\nscript='bjobs() { printf \"FAKE_QUERY\\\\n\"; }; bkill() { printf \"FAKE_MUTATION:%s\\\\n\" \"$*\"; }; '+command\nr=subprocess.run(['C:/Program Files/Git/bin/bash.exe','--noprofile','--norc','-c',script],capture_output=True,text=True,timeout=10)\nassert 'FAKE_MUTATION:456' in r.stdout,(r.returncode,r.stdout,r.stderr)\nresult=dict(id='FINAL-B1-001',severity='P1',source='scripts/scheduler_evidence.py:30',transport_argv=argv,joined_remote_command=command,simulation_stdout=r.stdout,simulation_exit=r.returncode,gate_calls=0,real_ssh_calls=0,external_scientific_actions=0,mechanism='Unvalidated job_id reaches SSH remote-shell command; local shell=False does not quote the remote argv. Validation after subprocess cannot prevent dispatch.')\n(ev/'scheduler_injection_probe.json').write_text(json.dumps(result,indent=2),encoding='utf-8');print(json.dumps(result,indent=2))\n\nfrom scripts.ts_strategy_engine import active_learning_cli\ncli_calls=[]\ndef fake_cli_ssh(argv,**kwargs):\n    cli_calls.append(argv)\n    return subprocess.CompletedProcess(argv,1,'','simulated transport end')\nwith patch.object(owner.subprocess,'run',fake_cli_ssh):\n    try: active_learning_cli.main(['capture-lsf-evidence','--job-id','123; bkill 456 #','--output',str(ev/'never-created.json')])\n    except RuntimeError: pass\nassert cli_calls==observed\nassert not (ev/'never-created.json').exists()\nresult['cli_reproduced']=True\nresult['cli_entry']='scripts.ts_strategy_engine.active_learning_cli.main: capture-lsf-evidence'\n(ev/'scheduler_injection_probe.json').write_text(json.dumps(result,indent=2),encoding='utf-8')\nprint('CLI reproduced: unvalidated shell command reaches transport before evidence creation')\n",
+    "source_audit.py": "import pathlib,ast,json,subprocess,sys,hashlib,platform\nroot=pathlib.Path.cwd();ev=pathlib.Path(r'C:/Users/86177/AppData/Local/Temp/sbq123-final-readiness-evidence-20260910');sha='9e968201ac5fc5996b1c428bf9e9dc8e81434e45';base='fae4339f7f91b52c13f4b993c9791e7110f13249'\ndef git(*a):return subprocess.check_output(['git',*a],cwd=root)\nold=json.loads((root/'reports/refactor_audit/B1_B7_acceptance_closeout.json').read_text(encoding='utf-8'))\na={k:dict(sha=v['sha'],is_ancestor=subprocess.run(['git','merge-base','--is-ancestor',v['sha'],sha],cwd=root).returncode==0) for k,v in old['source_review']['ancestry'].items()}\nfor k,s in [('previous_closeout',base),('thickness_repair',sha)]:a[k]=dict(sha=s,is_ancestor=subprocess.run(['git','merge-base','--is-ancestor',s,sha],cwd=root).returncode==0)\nassert all(x['is_ancestor'] for x in a.values())\nname='scripts/convergence/setup_true_fe110_thickness_retest.py'\nleft=ast.parse(git('show',base+':'+name).decode('utf-8'));right=ast.parse(git('show',sha+':'+name).decode('utf-8'))\ndef science(tree):\n values={}\n for n in tree.body:\n  if isinstance(n,ast.Assign):\n   for t in n.targets:\n    if isinstance(t,ast.Name) and t.id in {'LATTICE_A','LAYERS','VACUUM_A','RELAX_MESH','STATIC_MESH','EV_A2_TO_J_M2'}:values[t.id]=ast.dump(n,include_attributes=False)\n  if isinstance(n,ast.FunctionDef) and n.name in {'incar_relax','incar_static','write_kpoints','layer_indices','build_slab','validate'}:values[n.name]=ast.dump(n,include_attributes=False)\n for n in ast.walk(tree):\n  if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='gamma' for t in n.targets):values['surface_excess_formula']=ast.dump(n.value.orelse,include_attributes=False)\n return values\nassert science(left)==science(right)\n# Execute only the two input generators in temporary output roots, never their CLI or shell payloads.\nsys.path.insert(0,str(root))\nfrom scripts.convergence import setup_true_fe110_thickness_retest as current\nassert pathlib.Path(current.__file__).resolve()==(root/name).resolve()\nns={'__name__':'audit_base_generator','__file__':str(root/name)};exec(compile(left,'<locked-base>','exec'),ns)\nns['setup'](ev/'freeze-base');current.setup(ev/'freeze-candidate')\ninputs=[]\nfor p in (ev/'freeze-base').rglob('*'):\n if p.is_file() and p.suffix!='.lsf':\n  rel=p.relative_to(ev/'freeze-base');q=ev/'freeze-candidate'/rel\n  assert p.read_bytes()==q.read_bytes(),rel\n  inputs.append(str(rel))\nchanged=git('diff','--name-only',base,sha).decode().splitlines()\nprior=git('ls-tree','-r',base,'reports/refactor_audit').decode().splitlines();now=set(git('ls-tree','-r',sha,'reports/refactor_audit').decode().splitlines());assert all(s in now for s in prior)\nsys.path.insert(0,str(root/'tests'));from scheduler_architecture import dispatch_sites\nowners={};parsed=0;shells=[]\nfor name in git('ls-files','scripts','modules','skills').decode().splitlines():\n p=root/name\n if 'archive' in p.parts:continue\n if p.suffix=='.py':\n  parsed+=1;sites=dispatch_sites(ast.parse(p.read_text(encoding='utf-8-sig')))\n  if sites:owners[name]=sites\n elif p.suffix in {'.sh','.ps1','.bat','.cmd','.lsf'}:shells.append(name)\nassert set(owners)=={'scripts/neb_agent/submission.py'}\nr=dict(candidate_sha=sha,tree=git('rev-parse','HEAD^{tree}').decode().strip(),os=platform.platform(),python=platform.python_version(),ancestry=a,scientific_ast=list(science(left)),identical_generated_inputs=inputs,repair_changed_files=changed,historical_reports_preserved=len(prior),maintained_python_files=parsed,scheduler_owners=owners,shell_paths=shells)\n(ev/'source_audit.json').write_text(json.dumps(r,indent=2),encoding='utf-8');print(json.dumps({k:v for k,v in r.items() if k not in {'shell_paths','ancestry','identical_generated_inputs'}},indent=2));print('identical generated inputs',len(inputs))\n",
+    "installed_probe.py": "import sys,pathlib,subprocess,json,os\nroot=pathlib.Path.cwd();sys.path.insert(0,str(root));sys.path.insert(0,str(root/'tests'))\nfrom test_thickness_workflow_safety import Payload\nassert pathlib.Path(sys.modules['scripts.convergence.setup_true_fe110_thickness_retest'].__file__).resolve().is_relative_to(root)\nev=pathlib.Path(r'C:/Users/86177/AppData/Local/Temp/sbq123-final-readiness-evidence-20260910');py=ev/'release/wheel-venv/Scripts/python.exe'\nenv={k:v for k,v in os.environ.items() if k not in {'PYTHONPATH','PYTHONHOME'}}\nprobe=subprocess.run([str(py),'-c','import scripts.convergence.thickness_stage as m; print(m.__file__)'],cwd=ev/'release/outside',env=env,capture_output=True,text=True,check=True)\nassert str(ev/'release/wheel-venv').lower().replace('\\\\','/') in probe.stdout.lower().replace('\\\\','/')\nresults=[]\nfor kind,mode,expected,count in [('chain','valid',0,2),('static','valid',0,1),('chain','exit9',9,1),('static','exit9',9,1),('chain','old',65,0),('static','missing',65,1)]:\n p=Payload(ev/('installed-'+kind+'-'+mode),kind);p.env.pop('PYTHONPATH',None);p.env.pop('PYTHONHOME',None);p.env['THICKNESS_PYTHON']=py.as_posix()\n if mode=='old':(p.stages[0]/'OUTCAR').write_text('retained old output')\n else:p.env['FAKE_'+('RELAX' if kind=='chain' else 'STATIC')]=mode\n r=p.run();assert r.returncode==expected,(kind,mode,r.returncode,r.stderr);assert len(p.calls())==count\n record=p.record();assert 'scientific_acceptance=false' in record\n results.append(dict(kind=kind,mode=mode,exit=r.returncode,fake_calls=len(p.calls()),record=record.strip()))\n print(kind,mode,r.returncode,count,flush=True)\n(ev/'installed_payload.json').write_text(json.dumps({'helper_origin':probe.stdout.strip(),'results':results,'external_actions':0},indent=2),encoding='utf-8')\n"
+  },
+  "evidence_hashes": {
+    "AC_B2_001.log": "f259c425f83aa35fc14fbf3d3b31a68501b5ddac8ec7469d852c08cdd574d2b3",
+    "AC_B2_001.result.json": "387f810497444d499f3498952740a4db710737bae928bab0e23156e8282901ef",
+    "alpha-diagnostic-probe.json": "e492b3fe3697772c18fe7fc4652a45cae6d2f0214a6a3eca4fd74d93d1ef484d",
+    "artifact_scan.json": "83ee292ad5655f476d78431bbb4b686d1ef18383089c760ff09edb8c2dd71b36",
+    "B1.log": "6f46d4b0fe2c47f32b565151bcc4ac0bdc7934215372eeaf270be88f3a0b253d",
+    "B1.result.json": "46323c72cf8003dcabbccd71c0f4a4aee3810ac8ccd25c9389fe8a5b621f0253",
+    "B2.log": "4139ba3412dd8eafa76e133252780244ddbe1f8e5433d541e978f2ad2fc5b212",
+    "B2.result.json": "c7afadb59bb37d0f414e914822b822d9fa4b3ed900fcb2d5adc6173cc1a479da",
+    "B3.log": "c169244117d37f5052cb12973e11b0599a437c91cec29c268119bd84c612ddcb",
+    "B3.result.json": "b3a7e75af641381a8cb1848ec8a8d431713397a4e2737b1bb116ddb61af6c834",
+    "B4.log": "5d8ab3cebee452fbc58827fc4e77e0dbf785df383d8d00870db518bec8e6a2a5",
+    "B4.result.json": "9142e2661f90a515d5801fd27021dbc57c7ed8eb482b25028da05240502f1452",
+    "B5.log": "20b6f7aa4142483c37dd1cf52673fb44cfdcc62118f46898f20b2daf6f59c571",
+    "B5.result.json": "004055feda039a91c5d3a4c8e19df22f2dac101f4f886edc23b1a7e0cb5c1a7e",
+    "B6.log": "e502c3d0d179fb0d8b1341b41b7e4153ad67e17c432027a0767f15e8d11e92e4",
+    "B6.result.json": "ae78812e65e760400a5c231e06ee1c5e00c43f0ad3b984d9c9f2709361a1cd39",
+    "B7.log": "bdcd373f136ada0bacf5d6385ec3957117a47a6cec5d12b2c6e69f6132dcb6e5",
+    "B7.result.json": "99b429284912aa463108c71e420181d5e3adff08e64e28c79f17a362d53b1a73",
+    "diff_check.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "diff_check.result.json": "852468bd5106dcb44f59f035c214ac6767b1b7bde9756269481fd97f9407490d",
+    "external_calls.json": "272e49b55f095be390c33b8494eeb64c732f6c0347f59236e0482350385aaa74",
+    "extra_guard_probes.json": "7fb493e0f1a2591b0f8805ea3ff5871bd50806d1cf6cb53ada0598aead71b2f6",
+    "focused_final.log": "b6d219bf53e6da9f02c505e792d5e611a7c6d823b095dbab77728e751f6a330c",
+    "focused_final.result.json": "22b50955fb269c40fe604ea08f03480873b69480dc58f4f9533f2194706ad3c0",
+    "full.log": "f75acb47df77929ee348d1b0c1c9eefba2255fa21663b03c00ef3e9fbca665d7",
+    "full.result.json": "ce794424d2ae22abab974fe07cc803443b81fe5980dae2aacc3390e911a05b37",
+    "installed_payload.json": "a467588756e0986aac04604634773bb5347b45de441dd8aa15afab3c67b9038d",
+    "installed_probe.py": "9800ca6a1b626043319aafb65bda1638d16ffc6745de6955930093d307a7bf14",
+    "preserved_reports.json": "8cdb9d68285b4cb5271f58cd64583e77cd18cbb7e9ce8d0c2ba44c421cb78655",
+    "release.log": "26da3062a732ffd723fa3caa204a75cb9beeedbb9265af92db84b09d20575a43",
+    "release.result.json": "9f2f7dc6372204967cd8df2535132eca251afc6e061ea17e421711fa4ca8a015",
+    "remote_ci.json": "359ca992d58c25bc662aeea37325f977b71700615935a9a0e92f7c4e29c4ce67",
+    "resolved_sinks.json": "08eb9ebb46455301389be6ef912ca114d191fd4c35bae084ed6756b34c7ba2b0",
+    "ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "ruff.result.json": "5e30d163d18372cb5548a01d5e2e679e03e4efdd5995c3c6fdcf577a8ee71b31",
+    "run_checks.py": "8422a55fad0de64d9e1d6ee22b34bba2ee8ca9046698ced6d87dedf58fe5b95c",
+    "scheduler_injection_probe.json": "b5f05173e80604e7e722543b3cf3ed158baaf2ca4f6f3528cfeb12f9e32f5081",
+    "scheduler_injection_probe.py": "d5a7680929a681a46ca5edc48ae6128be9eee25a7ce50a0c7400c3c60458a6ac",
+    "scheduler_tokens.json": "44c31f6a2b3133a91b873de47792d3170496627195cd1c8ec9b266b2963f406a",
+    "skill_ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "skill_ruff.result.json": "6571bfec0014fc85c0018e2afddd26c3e8afeb9ac22962830a27205f878d8224",
+    "source_audit.json": "4116b41bf411fffb338b894b56acdec3158d58dc032fcdd5e8e5178ed27fa7c9",
+    "source_audit.py": "a57df36af4f524dc36a1ebd9dcd688c6603bd2ab13fd261acc56e2d136ed7b5c",
+    "wheel_blob_equality.json": "d7150dbd137ff58ccc575405510fb550068245449663f81822bf23679b0ed033"
+  },
+  "test_counts": {
+    "full_passed": 1267,
+    "focused_final_passed": 183,
+    "full_failed": 0,
+    "full_skipped": 0,
+    "full_deselected": 0
+  },
+  "prepublication_checks": {
+    "candidate_branch_rechecked": "9e968201ac5fc5996b1c428bf9e9dc8e81434e45",
+    "no_tracked_candidate_modifications": true,
+    "prior_reports_preserved": 18,
+    "document_governance_exit": 0,
+    "report_paths_only": true
+  }
+}
