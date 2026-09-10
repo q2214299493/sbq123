@@ -1,0 +1,15 @@
+diff --git a/scripts/aqcat25_mz73_env.sh b/scripts/aqcat25_mz73_env.sh
+index cba97af..ce43a79 100644
+--- a/scripts/aqcat25_mz73_env.sh
++++ b/scripts/aqcat25_mz73_env.sh
+@@ -49,7 +49,9 @@ aqcat25_setup_mz73_environment() {
+   export TORCH_SCATTER_USE_PYG_LIB=0
+   export WANDB_MODE=disabled
+   export PYTORCH_CUDA_ALLOC_CONF=${PYTORCH_CUDA_ALLOC_CONF:-expandable_segments:True}
+-  aqcat25_require_remote_path "$AQCAT_ROOT" "$AQCAT_PYTHON" "$AQCAT_PILOT_ROOT" \
++  # A venv interpreter may link to system Python. It is executed, never a write
++  # target; retain canonical containment for its parent and every writable path.
++  aqcat25_require_remote_path "$AQCAT_ROOT" "$(dirname -- "$AQCAT_PYTHON")" "$AQCAT_PILOT_ROOT" \
+     "$XDG_CACHE_HOME" "$TORCH_HOME" "$HF_HOME" "$TMPDIR" "$@" || return 2
+   test -x "$AQCAT_PYTHON" || return 2
+   mkdir -p "$XDG_CACHE_HOME" "$TORCH_HOME" "$HF_HOME" "$TMPDIR" "$@"
