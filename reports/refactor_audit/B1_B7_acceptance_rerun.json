@@ -1,0 +1,3766 @@
+{
+  "document_class": "GENERATED_CURRENT_REPORT",
+  "evidence_kind": "INDEPENDENT_SOFTWARE_ACCEPTANCE_AUDIT",
+  "repository": "https://github.com/q2214299493/sbq123.git",
+  "candidate_branch": "codex/ac-b2-001-scientific-claim-authority",
+  "audit_branch": "codex/b1-b7-final-acceptance-rerun",
+  "candidate": {
+    "candidate_sha": "a050fe28b25f1fc5ee91f5e7e3fb7fc1150a2157",
+    "tree_sha": "5cfd613ee0d5e315848046a962733aff1300aad8",
+    "main_sha": "5c5fed9b4a0691a893af3d03eaae10636999aa85",
+    "merge_base": "5c5fed9b4a0691a893af3d03eaae10636999aa85",
+    "timestamp": "2026-09-10T04:29:39.182801+00:00",
+    "os": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.9",
+    "source": "C:\\Users\\86177\\AppData\\Local\\Temp\\sbq123-acceptance-rerun",
+    "ancestry": [
+      {
+        "branch": "origin/codex/b1-execution-lifecycle",
+        "sha": "b1c59addbc7d7be64347db66a201dc5841404341",
+        "ancestor": true
+      },
+      {
+        "branch": "origin/codex/b2-scientific-contract",
+        "sha": "3d9e9070e48a6cb65d9b4c0334adb4243f36dd0c",
+        "ancestor": true
+      },
+      {
+        "branch": "origin/codex/b3-evidence-ml-governance",
+        "sha": "9f4332f082d4e286ce43c5a137a62ac1e30fa441",
+        "ancestor": true
+      },
+      {
+        "branch": "origin/codex/b4-registry-state-management",
+        "sha": "fbbb7bb26d28867d9766cc7fca84077fa54cf3d6",
+        "ancestor": true
+      },
+      {
+        "branch": "origin/codex/b5-architecture-boundaries",
+        "sha": "3a1bb3f461147a7dc9b5df5efca89de621d27f38",
+        "ancestor": true
+      },
+      {
+        "branch": "origin/codex/b6-documentation-data-governance",
+        "sha": "93c09db8a6008a873ef7cc8bc7b4cc1e2a8cc22a",
+        "ancestor": true
+      },
+      {
+        "branch": "origin/codex/b7-release-environment",
+        "sha": "7a0b745df96de2762a6f289e9eeda1a3c298fe9d",
+        "ancestor": true
+      },
+      {
+        "branch": "origin/codex/b1-b7-final-acceptance",
+        "sha": "fad1d32607723c851c457a5fb6fa85898cdc1edf",
+        "ancestor": true
+      },
+      {
+        "branch": "origin/codex/ac-b2-001-scientific-claim-authority",
+        "sha": "a050fe28b25f1fc5ee91f5e7e3fb7fc1150a2157",
+        "ancestor": true
+      }
+    ],
+    "commit_chain": [
+      "4a8c3bbb4c2ac6254c462f39dccaa7ebaf1c773a 5c5fed9b4a0691a893af3d03eaae10636999aa85 refactor: reserve and bind execution lifecycle",
+      "1ec8f3e787fd52353fa70419a206d764c07ae13a 4a8c3bbb4c2ac6254c462f39dccaa7ebaf1c773a docs: correct task publication target to sbq123",
+      "b90ef54a0d1a6a094c0a0a616966038be744b277 1ec8f3e787fd52353fa70419a206d764c07ae13a fix: close B1 execution lifecycle and CI contracts",
+      "b1c59addbc7d7be64347db66a201dc5841404341 b90ef54a0d1a6a094c0a0a616966038be744b277 refactor: restore pure execution decision ownership for B1.2",
+      "99b82eab15aaf22ef7dc880af54e77314eb49b53 b1c59addbc7d7be64347db66a201dc5841404341 refactor: harden scientific contracts and VASP final-state validation",
+      "3d9e9070e48a6cb65d9b4c0334adb4243f36dd0c 99b82eab15aaf22ef7dc880af54e77314eb49b53 fix: bind DIMER VFA acceptance and reject nonfinite barriers",
+      "9f4332f082d4e286ce43c5a137a62ac1e30fa441 3d9e9070e48a6cb65d9b4c0334adb4243f36dd0c refactor: harden evidence lifecycle and ML data governance",
+      "e4465aa9e1521a3b9ec3dabba40badb5f17d772a 9f4332f082d4e286ce43c5a137a62ac1e30fa441 refactor: harden registry transactions and state management",
+      "fbbb7bb26d28867d9766cc7fca84077fa54cf3d6 e4465aa9e1521a3b9ec3dabba40badb5f17d772a fix: close registry batch and compatibility review contracts",
+      "3a1bb3f461147a7dc9b5df5efca89de621d27f38 fbbb7bb26d28867d9766cc7fca84077fa54cf3d6 refactor: enforce architecture boundaries and capability ownership",
+      "93c09db8a6008a873ef7cc8bc7b4cc1e2a8cc22a 3a1bb3f461147a7dc9b5df5efca89de621d27f38 refactor: establish documentation and data governance",
+      "03739665465d8548e22d154aa2a8d4209f04983c 93c09db8a6008a873ef7cc8bc7b4cc1e2a8cc22a refactor: harden release packaging and cross-platform reproducibility",
+      "7a0b745df96de2762a6f289e9eeda1a3c298fe9d 03739665465d8548e22d154aa2a8d4209f04983c refactor: harden release packaging and cross-platform reproducibility",
+      "fad1d32607723c851c457a5fb6fa85898cdc1edf 7a0b745df96de2762a6f289e9eeda1a3c298fe9d audit: verify B1-B7 whole-repository acceptance",
+      "a050fe28b25f1fc5ee91f5e7e3fb7fc1150a2157 fad1d32607723c851c457a5fb6fa85898cdc1edf fix: bind TS and barrier claims to current scientific evidence"
+    ],
+    "inventory": [
+      "M\t.gitattributes",
+      "M\t.github/workflows/state-manager.yml",
+      "M\t.gitignore",
+      "M\tAGENTS.md",
+      "A\tMANIFEST.in",
+      "M\tREADME.md",
+      "M\tconfigs/aqcat25_ts_active_learning.schema.json",
+      "A\tconfigs/data_governance.yaml",
+      "A\tconfigs/release_resources.json",
+      "M\tdocs/00_PROJECT_BRIEF.md",
+      "M\tdocs/01_METHOD_PROTOCOL.md",
+      "M\tdocs/02_CURRENT_STATE.md",
+      "M\tdocs/03_DECISIONS_LOG.md",
+      "M\tdocs/04_ERROR_LOG.md",
+      "M\tdocs/05_FILE_INDEX.md",
+      "M\tdocs/06_MODULE_MAP.md",
+      "M\tdocs/07_MEMORY_INDEX.md",
+      "M\tdocs/08_HISTORICAL_RESULTS.md",
+      "M\tdocs/09_USER_PREFERENCES.md",
+      "M\tdocs/10_TS_VALIDATION_PROTOCOL.md",
+      "M\tdocs/11_DATA_PROVENANCE_PROTOCOL.md",
+      "M\tdocs/12_WORKFLOW_ARCHITECTURE.md",
+      "M\tdocs/13_AGENT_ERROR_REFLECTION.md",
+      "M\tdocs/13_WORK_HANDOFF.md",
+      "M\tdocs/14_CODE_ARCHITECTURE_GUIDE.md",
+      "A\tdocs/DOCUMENT_GOVERNANCE.md",
+      "M\tdocs/FE110_CO_DISSOCIATION_HANDOFF_20260807.md",
+      "A\tdocs/INSTALLATION.md",
+      "M\tdocs/PUBLIC_RELEASE.md",
+      "A\tdocs/history/current_state_chronology_before_B6_20260909.md",
+      "M\tmodules/adsmind_lite/README.md",
+      "M\tmodules/adsorption_workflow/README.md",
+      "M\tmodules/baseline_mkm/README.md",
+      "M\tmodules/calculation_registry/README.md",
+      "A\tmodules/calculation_registry/migrations/009_registry_governance.sql",
+      "A\tmodules/calculation_registry/migrations/009_registry_governance_rollback.sql",
+      "M\tmodules/calculation_registry/schema.sql",
+      "M\tmodules/catalysis_data_retrieval/README.md",
+      "M\tmodules/convergence_workflow/README.md",
+      "M\tmodules/coverage_mkm/README.md",
+      "M\tmodules/fe_convergence_baseline/README.md",
+      "M\tmodules/fe_convergence_baseline/validate_baseline.py",
+      "M\tmodules/git_versioning/README.md",
+      "M\tmodules/incar_custodian/README.md",
+      "M\tmodules/kinetic_data/README.md",
+      "M\tmodules/memory_migration/README.md",
+      "M\tmodules/reaction_network/README.md",
+      "M\tmodules/reactor_simulation/README.md",
+      "M\tmodules/sensitivity_uncertainty/README.md",
+      "M\tmodules/state_handoff/README.md",
+      "M\tmodules/surface_kmc/README.md",
+      "M\tmodules/thermochemistry/README.md",
+      "M\tmodules/transition_state_search/README.md",
+      "M\tmodules/ts_vibrational_validation/README.md",
+      "M\tpyproject.toml",
+      "A\treports/capability_readiness.json",
+      "A\treports/capability_readiness.md",
+      "A\treports/refactor_audit/AC_B2_001_repair_report.md",
+      "A\treports/refactor_audit/B1_B7_acceptance.json",
+      "A\treports/refactor_audit/B1_B7_acceptance_report.md",
+      "A\treports/refactor_audit/B1_completion_report.md",
+      "A\treports/refactor_audit/B2_completion_report.md",
+      "A\treports/refactor_audit/B3_completion_report.md",
+      "A\treports/refactor_audit/B4_completion_report.md",
+      "A\treports/refactor_audit/B5_completion_report.md",
+      "A\treports/refactor_audit/B5_dependency_inventory.md",
+      "A\treports/refactor_audit/B6_completion_report.md",
+      "A\treports/refactor_audit/B7_completion_report.md",
+      "A\treports/refactor_audit/full_coverage_report.md",
+      "A\treports/release_environment.json",
+      "M\tscripts/README.md",
+      "M\tscripts/adsmind_lite/adsmind_common.py",
+      "M\tscripts/adsmind_lite/analyze_relaxed_adsorption.py",
+      "M\tscripts/adsmind_lite/deduplicate_adsorption_states.py",
+      "M\tscripts/adsmind_lite/detect_surface_sites.py",
+      "M\tscripts/adsmind_lite/evidence_gate.py",
+      "A\tscripts/adsmind_lite/evidence_lifecycle.py",
+      "M\tscripts/adsmind_lite/generate_adsorption_candidates.py",
+      "M\tscripts/adsmind_lite/plan_adsorption_candidates.py",
+      "M\tscripts/adsmind_lite/prescreen.py",
+      "M\tscripts/adsmind_lite/validate_candidates.py",
+      "M\tscripts/adsorption/analyze_fe110_ch_h_relaxation.py",
+      "M\tscripts/adsorption/backfill_step12a_registry.py",
+      "M\tscripts/adsorption/build_fe110_adsorption.py",
+      "M\tscripts/adsorption/build_fe110_care_isomers.py",
+      "M\tscripts/adsorption/finalize_step12a_gas_references.py",
+      "M\tscripts/adsorption/preflight_fe110_adsorption.py",
+      "M\tscripts/adsorption/preflight_gas_references.py",
+      "M\tscripts/adsorption/register_step12a_gas_reference_submission.py",
+      "M\tscripts/adsorption/register_step12a_oh_restart.py",
+      "M\tscripts/aqcat25_gpu_job.sh",
+      "M\tscripts/aqcat25_handoff.py",
+      "M\tscripts/aqcat25_ml_neb_job.sh",
+      "M\tscripts/aqcat25_mz73_env.sh",
+      "M\tscripts/aqcat25_ts_finetune_job.sh",
+      "M\tscripts/aqcat25_ts_force_prediction.py",
+      "M\tscripts/aqcat25_ts_force_prediction_batch_job.sh",
+      "M\tscripts/aqcat25_ts_schema.py",
+      "M\tscripts/aqcat25_ts_training_data.py",
+      "M\tscripts/artifact_io.py",
+      "A\tscripts/catalysis_retrieval/__init__.py",
+      "A\tscripts/catalysis_retrieval/cli.py",
+      "A\tscripts/catalysis_retrieval/ranking.py",
+      "A\tscripts/catalysis_retrieval/records.py",
+      "A\tscripts/catalysis_retrieval/validate_cli.py",
+      "A\tscripts/catalysis_retrieval/workflow.py",
+      "M\tscripts/convergence/setup_alpha_fe_bulk_smearing.py",
+      "A\tscripts/document_governance.py",
+      "M\tscripts/dual_model_ml_neb_job.sh",
+      "M\tscripts/dual_model_ts_force_prediction_batch.py",
+      "M\tscripts/dual_model_ts_force_prediction_batch_job.sh",
+      "M\tscripts/dual_model_ts_force_prediction_batch_job_v2.sh",
+      "M\tscripts/execution_backends.py",
+      "A\tscripts/generate_capability_readiness.py",
+      "M\tscripts/init_registry.py",
+      "M\tscripts/matris_energy_force_finetune.py",
+      "M\tscripts/matris_finetune_speed_benchmark.py",
+      "M\tscripts/matris_finetune_speed_benchmark_job.sh",
+      "A\tscripts/matris_training_data.py",
+      "M\tscripts/matris_training_exclusions.py",
+      "M\tscripts/mlip_same_structure_benchmark_job.sh",
+      "M\tscripts/neb_agent/analyze_neb_outputs.py",
+      "M\tscripts/neb_agent/diagnose_path_geometry.py",
+      "M\tscripts/neb_agent/path_quality_cli.py",
+      "M\tscripts/neb_agent/path_quality_control.py",
+      "M\tscripts/neb_agent/path_quality_service.py",
+      "M\tscripts/neb_agent/pilot_validation.py",
+      "M\tscripts/neb_agent/remote_monitor.py",
+      "M\tscripts/neb_agent/submission.py",
+      "M\tscripts/neb_agent/utils_vasp.py",
+      "M\tscripts/offline_mlip_fusion_feasibility.py",
+      "A\tscripts/optional_dependencies.py",
+      "A\tscripts/prediction_provenance.py",
+      "M\tscripts/prepare_aqcat25_ml_neb_handoff.py",
+      "M\tscripts/prepare_matris_remote_finetune_bundle.py",
+      "M\tscripts/prepare_matris_replay_finetune_package.py",
+      "M\tscripts/prepare_reviewed_neb_peak_dimer.py",
+      "M\tscripts/prepare_ts_heldout_vasp_label_batch.py",
+      "A\tscripts/provenance_fields.py",
+      "A\tscripts/registry_acceptance.py",
+      "A\tscripts/registry_compatibility.py",
+      "A\tscripts/registry_connection.py",
+      "M\tscripts/registry_excel_promotion.py",
+      "A\tscripts/registry_mutations.py",
+      "M\tscripts/registry_schema.py",
+      "A\tscripts/registry_transactions.py",
+      "M\tscripts/registry_write.py",
+      "A\tscripts/release_build.py",
+      "A\tscripts/release_environment.py",
+      "A\tscripts/release_smoke.py",
+      "M\tscripts/review_completed_neb_parent.py",
+      "A\tscripts/runtime_resources.py",
+      "A\tscripts/scientific_validation.py",
+      "M\tscripts/select_dual_model_ts_vasp_labels.py",
+      "A\tscripts/state_manager/application_log.py",
+      "M\tscripts/state_manager/cli.py",
+      "A\tscripts/state_manager/job_lifecycle.py",
+      "M\tscripts/state_manager/lifecycle.py",
+      "M\tscripts/state_manager/models.py",
+      "M\tscripts/state_manager/projections.py",
+      "M\tscripts/state_manager/proposals.py",
+      "M\tscripts/state_manager/stale_items.py",
+      "M\tscripts/state_manager/store.py",
+      "M\tscripts/ts_endpoint/database.py",
+      "M\tscripts/ts_endpoint/purpose.py",
+      "M\tscripts/ts_endpoint/validator.py",
+      "M\tscripts/ts_strategy_engine/active_learning_cli.py",
+      "M\tscripts/ts_strategy_engine/active_learning_path_labels.py",
+      "M\tscripts/ts_strategy_engine/active_learning_state.py",
+      "M\tscripts/ts_strategy_engine/active_learning_training.py",
+      "M\tscripts/ts_strategy_engine/cli.py",
+      "M\tscripts/ts_strategy_engine/cli_commands.py",
+      "M\tscripts/ts_strategy_engine/contract.py",
+      "M\tscripts/ts_strategy_engine/dimer_analysis.py",
+      "M\tscripts/ts_strategy_engine/dimer_gate.py",
+      "M\tscripts/ts_strategy_engine/dimer_gate_common.py",
+      "M\tscripts/ts_strategy_engine/dimer_path_gate.py",
+      "M\tscripts/ts_strategy_engine/evidence.py",
+      "M\tscripts/ts_strategy_engine/execution_decision.py",
+      "M\tscripts/ts_strategy_engine/execution_evidence.py",
+      "M\tscripts/ts_strategy_engine/execution_gate.py",
+      "M\tscripts/ts_strategy_engine/execution_path_rules.py",
+      "M\tscripts/ts_strategy_engine/fingerprint.py",
+      "M\tscripts/ts_strategy_engine/handoff.py",
+      "M\tscripts/ts_strategy_engine/learning_cli.py",
+      "M\tscripts/ts_strategy_engine/matched_static_evidence.py",
+      "M\tscripts/ts_strategy_engine/registry.py",
+      "A\tscripts/ts_strategy_engine/scientific_claims.py",
+      "M\tscripts/ts_strategy_engine/strategy.py",
+      "M\tscripts/ts_strategy_engine/strategy_learning.py",
+      "M\tscripts/ts_strategy_engine/templates.py",
+      "M\tscripts/ts_strategy_engine/workflow.py",
+      "M\tscripts/ts_validation/analyze_vfa.py",
+      "A\tscripts/ts_validation/barrier_values.py",
+      "M\tscripts/ts_validation/connectivity.py",
+      "M\tscripts/ts_validation/prepare_vfa_from_ts_image.py",
+      "M\tscripts/ts_validation/validation_pipeline.py",
+      "A\tscripts/validate_release.py",
+      "M\tscripts/vasp_inputs.py",
+      "M\tscripts/vasp_lsf.py",
+      "M\tscripts/vasp_result_gate.py",
+      "M\tskills/catalysis-data-retrieval/SKILL.md",
+      "M\tskills/catalysis-data-retrieval/references/record_schema.json",
+      "M\tskills/catalysis-data-retrieval/scripts/hybrid_search.py",
+      "M\tskills/catalysis-data-retrieval/scripts/validate_records.py",
+      "M\ttasks/backlog.md",
+      "M\ttasks/current_task.md",
+      "A\ttests/evidence_fixtures.py",
+      "A\ttests/registry_fixture_mutation.py",
+      "A\ttests/scientific_claim_fixtures.py",
+      "M\ttests/test_adsmind_prescreen.py",
+      "M\ttests/test_adsorption_evidence_gate.py",
+      "M\ttests/test_aqcat25_ts_active_learning.py",
+      "M\ttests/test_artifact_io.py",
+      "A\ttests/test_b21_scientific_acceptance.py",
+      "A\ttests/test_b2_scientific_contract.py",
+      "A\ttests/test_b3_evidence_governance.py",
+      "A\ttests/test_b3_ml_governance.py",
+      "A\ttests/test_b4_registry_governance.py",
+      "A\ttests/test_b4_state_governance.py",
+      "A\ttests/test_b5_architecture_boundaries.py",
+      "A\ttests/test_b6_governance.py",
+      "A\ttests/test_b7_release.py",
+      "M\ttests/test_code_structure.py",
+      "A\ttests/test_execution_lifecycle.py",
+      "M\ttests/test_fe110_c2_coads_labels.py",
+      "A\ttests/test_gpu_execution_lifecycle.py",
+      "M\ttests/test_neb_execution_gate.py",
+      "M\ttests/test_neb_submission.py",
+      "M\ttests/test_registry_excel_promotion.py",
+      "M\ttests/test_registry_schema.py",
+      "M\ttests/test_registry_write.py",
+      "A\ttests/test_scientific_claim_authority.py",
+      "M\ttests/test_structure_purpose_manager.py",
+      "M\ttests/test_ts_endpoint_contracts.py",
+      "M\ttests/test_ts_strategy_engine.py",
+      "M\ttests/test_ts_strategy_learning.py",
+      "M\ttests/test_ts_validation.py",
+      "M\ttests/test_ts_validation_pipeline.py",
+      "M\ttests/test_vasp_output_streaming.py"
+    ],
+    "historical_unchanged": {
+      "reports/refactor_audit/B1_B7_acceptance_report.md": true,
+      "reports/refactor_audit/B1_B7_acceptance.json": true
+    }
+  },
+  "audit_completed_at": "2026-09-10T04:48:46.748757+00:00",
+  "CODE_MERGE_READINESS": "NOT_READY_TO_MERGE",
+  "PRODUCTION_OPERATION_READINESS": "UNVERIFIED",
+  "LIVE_STATE_RECONCILIATION": "STATE_RECONCILIATION_REQUIRED",
+  "external_scientific_actions": 0,
+  "severity_counts": {
+    "P0": 1,
+    "P1": 0,
+    "P2": 2,
+    "P3": 0
+  },
+  "findings": [
+    {
+      "id": "AC-RERUN-B1-001",
+      "severity": "P0",
+      "blocking": true,
+      "packages": [
+        "B1",
+        "B5"
+      ],
+      "title": "Maintained alpha-Fe campaign bypasses B1 and dispatches twice under concurrency",
+      "location": "scripts/convergence/setup_alpha_fe_bulk_smearing.py:124 submit; 137-159 check/write/dispatch; 177-179 receipt/remove; main --submit",
+      "root_cause": "A separate public submit implementation checks marker/attempt existence, then uses atomic replacement instead of exclusive reservation creation. It calls subprocess.run([bsub, run.lsf]) without the gate, execution authorization, backend restriction or input/evidence/POTCAR binding. Atomic replacement does not serialize competing submitters.",
+      "reproduction": "Create one temporary case/run.lsf only. Set module WORKDIR and CASES to the fixture. Replace subprocess.run with a fake returning distinct job IDs. Synchronize two threads immediately before the unchanged _write_json_atomic, after both have passed absence checks. Two concurrent real submit() calls reach fake bsub for the same case without any gate/authorization/bundle. This synchronization selects a possible race schedule; it does not replace reservation logic.",
+      "observed": {
+        "function": "scripts/convergence/setup_alpha_fe_bulk_smearing.py::submit",
+        "cases": 1,
+        "concurrent_callers": 2,
+        "fake_dispatch_count": 2,
+        "fake_dispatches": [
+          {
+            "argv": [
+              "bsub",
+              "run.lsf"
+            ],
+            "cwd": "C:\\Users\\86177\\AppData\\Local\\Temp\\b1b7-rerun-evidence\\legacy-submit-fixture\\case"
+          },
+          {
+            "argv": [
+              "bsub",
+              "run.lsf"
+            ],
+            "cwd": "C:\\Users\\86177\\AppData\\Local\\Temp\\b1b7-rerun-evidence\\legacy-submit-fixture\\case"
+          }
+        ],
+        "outcomes": [
+          "returned",
+          "FileNotFoundError: [WinError 2] 系统找不到指定的文件。: 'C:\\\\Users\\\\86177\\\\AppData\\\\Local\\\\Temp\\\\b1b7-rerun-evidence\\\\legacy-submit-fixture\\\\case\\\\submission_attempt.json'"
+        ],
+        "gate_or_authorization_files": [],
+        "external_scientific_actions": 0
+      },
+      "impact": "On a configured scheduler host this maintained entry can create duplicate expensive VASP jobs and bypass the B1 contract. One caller returns; the other raises FileNotFoundError deleting the shared attempt after both dispatches. P0 denotes demonstrated duplicate external-execution risk; no real job was submitted during the audit.",
+      "origin": "Pre-existing in main; B2 updated its INCAR check but left this entry operational. modules/convergence_workflow/README.md lists it and tests/test_alpha_fe_bulk_submission.py exercises it; it is not archived/dead.",
+      "test_gap": "B5 counts only the exact string bsub script.lsf and misses the list [bsub, run.lsf]. Legacy tests cover sequential markers and timeout recovery but no concurrent/execution-authorization boundary. Canonical NEB executor tests remain passing.",
+      "recommended_repair_scope": "Separately close or route this existing campaign submission entry through the established B1 boundary, preserving scientific settings. Add fake-command concurrent/no-authorization regressions across all maintained dispatch forms. Do not add another executor."
+    },
+    {
+      "id": "AC-RERUN-B2-001",
+      "severity": "P2",
+      "blocking": false,
+      "packages": [
+        "B2",
+        "B5"
+      ],
+      "title": "Custodian raw MAGMOM lookup retains a divergent INCAR parser",
+      "location": "skills/fe-vasp-incar-custodian/scripts/incar_custodian.py:46 raw_incar_value; main call at 484",
+      "root_cause": "Independent line/equals splitting misses semicolon-separated tags after the first setting.",
+      "reproduction": "NELM=60; MAGMOM = 3*2.0 returns raw_incar_value(path, MAGMOM)=None; vasp_result_gate.read_incar_values(path)[MAGMOM] returns 3*2.0.",
+      "impact": "Literal MAGMOM retention disagrees with the authoritative parser. Main INCAR loading uses pymatgen; no changed numerical spin values or accepted-science error was demonstrated. Nonblocking maintenance/format-preservation defect.",
+      "origin": "Pre-existing; unchanged by B1-B7/AC repair.",
+      "recommended_repair_scope": "Use the existing INCAR owner for raw tag lookup, preserve the optional-return API, and cover semicolon/literal retention."
+    },
+    {
+      "id": "AC-RERUN-B2-002",
+      "severity": "P2",
+      "blocking": false,
+      "packages": [
+        "B2",
+        "B3",
+        "B5"
+      ],
+      "title": "Calibration OUTCAR metadata retains historical completion booleans",
+      "location": "scripts/aqcat25_calibration.py:25 parse_final_outcar; extract_labels",
+      "root_cause": "The force/energy extractor independently accumulates ionic_converged/normal_completion and does not reset them for a newer incomplete run.",
+      "reproduction": "A synthetic completed converged force/energy block followed by vasp.6 and a new incomplete Iteration 1(1) yields ionic_converged=true and normal_completion=true here. The current utils_vasp.parse_outcar owner instead reports normal_completion=false and incomplete=true.",
+      "impact": "Direct extraction/calibration metadata can misrepresent current completion. Inspected accepted registry and active-learning/dual-model force-label paths also invoke validate_vasp_relaxation/final_scf_status, which fail closed. No accepted-result bypass is established; this is P2 rather than a claimed P1 false acceptance.",
+      "origin": "Pre-existing extractor; unchanged. Force/energy extraction is legitimate, but current-completion interpretation should delegate.",
+      "recommended_repair_scope": "Preserve extraction API and delegate completion/current-cycle interpretation to the VASP owner; cover appended/truncated output through direct label extraction."
+    }
+  ],
+  "acceptance_matrix": {
+    "B1": {
+      "name": "Execution Safety",
+      "verdict": "FAIL",
+      "checks_performed": [
+        "Inspected ScientificReadiness -> ExecutionAuthorization -> EvidenceBinding -> InputBundle -> SubmissionReservation -> SubmissionResult in the gate and canonical executor.",
+        "Verified canonical workdir, bundle/evidence/source hashes, POTCAR/spec identity and digest/job/path checks before shell construction.",
+        "Ran reservation concurrency, hard death/crash-after-submit, no automatic uncertain retry, stale evidence, traversal/symlink, upload/reuse full remote manifest, remote reservation and scoped stop tests.",
+        "Reviewed AQCat25/dual-model/MatRIS bootstrap EXIT/INT/TERM/HUP guards, realpath containment and fallback failure records; executed fake-command shell regressions.",
+        "Searched all maintained external dispatch patterns and independently reproduced the legacy campaign race."
+      ],
+      "owners": [
+        "scripts/ts_strategy_engine/execution_gate.py",
+        "scripts/ts_strategy_engine/execution_evidence.py",
+        "scripts/neb_agent/submission.py",
+        "scripts/artifact_io.py",
+        "scripts/aqcat25_mz73_env.sh"
+      ],
+      "evidence": "Canonical executor and 246 focused tests pass; separate legacy reproduction reaches two fake dispatches for one case.",
+      "remaining_limitation": "Canonical B1 correctness does not cover the legacy convergence executor. No real scheduler was used.",
+      "blocking_finding_ids": [
+        "AC-RERUN-B1-001"
+      ],
+      "focused_tests": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-o",
+          "addopts=",
+          "-q",
+          "tests/test_execution_lifecycle.py",
+          "tests/test_neb_execution_gate.py",
+          "tests/test_execution_gate_compatibility.py",
+          "tests/test_execution_backends.py",
+          "tests/test_gpu_execution_lifecycle.py",
+          "tests/test_artifact_io.py",
+          "tests/test_alpha_fe_bulk_submission.py"
+        ],
+        "exit_code": 0,
+        "wall_duration_seconds": 125.3,
+        "summary": "246 passed in 118.26s (0:01:58)",
+        "passed": 246,
+        "failed": 0,
+        "skipped": 0,
+        "collected": 246,
+        "pytest_duration_seconds": 118.26
+      }
+    },
+    "B2": {
+      "name": "Scientific Contract / VASP",
+      "verdict": "PASS_WITH_NONBLOCKING_LIMITATION",
+      "checks_performed": [
+        "Inspected explicit latest-started/latest-completed/final-target SCF semantics; tested newer incomplete cycles, NELM exhaustion, truncated and multi-ionic/appended outputs.",
+        "Reviewed current authoritative INCAR semicolon/comment/whitespace/duplicate handling and all maintained caller matches; residual raw MAGMOM parser recorded.",
+        "Verified raw and already-normalized contracts both reach _normalize_contract_payload; hash checks cannot replace finite, positive-kmesh/ENCUT, atom-map/index-base and required-text validation.",
+        "Inspected chemical_events/family_event_matches and C-O/C-C tests; atom-renumbered chemical events, structure similarity and exact result identity remain distinct.",
+        "Ran B2/B2.1, real TS persistence, cross-object DIMER/VFA, frequency-only denial, finite/nonnegative barrier and valid negative-energy regressions.",
+        "Compared configs, protocol bodies and parameter-related code diffs against main."
+      ],
+      "owners": [
+        "scripts/vasp_result_gate.py",
+        "scripts/neb_agent/utils_vasp.py",
+        "scripts/scientific_validation.py",
+        "scripts/ts_strategy_engine/contract.py",
+        "scripts/ts_strategy_engine/fingerprint.py",
+        "scripts/ts_strategy_engine/strategy.py",
+        "scripts/ts_validation/analyze_vfa.py",
+        "scripts/ts_validation/validation_pipeline.py",
+        "scripts/ts_strategy_engine/matched_static_evidence.py"
+      ],
+      "evidence": "162 focused tests pass. Current authoritative acceptance paths fail closed; residual metadata/raw-tag disagreements independently reproduced.",
+      "remaining_limitation": "Two nonblocking P2 parser discrepancies; no accepted-science bypass demonstrated. No production scientific evidence revalidated.",
+      "blocking_finding_ids": [],
+      "focused_tests": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-o",
+          "addopts=",
+          "-q",
+          "tests/test_b2_scientific_contract.py",
+          "tests/test_b21_scientific_acceptance.py",
+          "tests/test_ts_strategy_engine.py"
+        ],
+        "exit_code": 0,
+        "wall_duration_seconds": 56.16,
+        "summary": "162 passed in 53.90s",
+        "passed": 162,
+        "failed": 0,
+        "skipped": 0,
+        "collected": 162,
+        "pytest_duration_seconds": 53.9
+      }
+    },
+    "AC_B2_001": {
+      "name": "Scientific Claim Closure",
+      "verdict": "PASS",
+      "checks_performed": [
+        "Independently called decide_execution and build_decision with boolean-only DIMER/Grade-A summaries, including a hash-bound fake summary file: both fail closed.",
+        "Built real synthetic DIMER and NEB fixtures via maintained scientific owners; current APPROVE_TS_CANDIDATE works with no execution authorization.",
+        "Old require_action rejects Grade-C summary, VFA OUTCAR/POSCAR/review/handoff, DIMER final structure/analysis, NEB contract and connectivity-branch mutations.",
+        "Confirmed underlying-source mutation revokes claims while the validation summary stays byte-identical.",
+        "Inspected source_bindings_valid reuse and use-time gate replay, DIMER pipeline/NEB-VFA/connectivity delegation, unchanged DIMER connectivity policy and downstream matched-static owner.",
+        "Ran real TS registration and barrier/template persistence regressions; stale gate fails before insertion and barrier booleans cannot authorize reporting."
+      ],
+      "owners": [
+        "scripts/ts_strategy_engine/scientific_claims.py",
+        "scripts/ts_strategy_engine/execution_gate.py",
+        "scripts/ts_validation/analyze_vfa.py",
+        "scripts/ts_validation/validation_pipeline.py",
+        "scripts/ts_strategy_engine/evidence.py"
+      ],
+      "evidence": "31 maintained focused tests plus 10 independently authored scenario checks pass. Positive current TS permits only APPROVE_TS_CANDIDATE.",
+      "remaining_limitation": "Synthetic sources and supplied review records; production evidence/reviewer identity outside the established evidence contract is not certified.",
+      "blocking_finding_ids": [],
+      "focused_tests": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-o",
+          "addopts=",
+          "-q",
+          "tests/test_scientific_claim_authority.py"
+        ],
+        "exit_code": 0,
+        "wall_duration_seconds": 27.1,
+        "summary": "31 passed in 20.80s",
+        "passed": 31,
+        "failed": 0,
+        "skipped": 0,
+        "collected": 31,
+        "pytest_duration_seconds": 20.8
+      }
+    },
+    "B3": {
+      "name": "Evidence / ML Governance",
+      "verdict": "PASS_WITH_NONBLOCKING_LIMITATION",
+      "checks_performed": [
+        "Reviewed every IMPORTED -> SCHEMA_VALID -> SOURCE_VERIFIED -> CONTENT_BOUND -> REVIEWED -> TRANSFERABLE check; supplied booleans/stage flags do not promote evidence.",
+        "Source immutable-reference/snapshot hash, extracted span/content hash, reviewer/time/subject and target compatibility are checked separately.",
+        "Inspected embedding model/source/content provenance, finite dimensions/rectangular arrays, zero-norm rejection and overflow-safe cosine.",
+        "Inspected model/version/input/time/uncertainty provenance, explicit unavailable uncertainty and candidate-only prediction restrictions; accepted-registry rejection tested.",
+        "Reviewed train/validation/test source-row, calculation, reaction and permutation-invariant structure exclusions; descriptor collisions block splits rather than prove scientific equivalence.",
+        "Ran actual evidence promotion, retrieval ranking, registry rejection, fake model producer and training-preflight paths."
+      ],
+      "owners": [
+        "scripts/adsmind_lite/evidence_lifecycle.py",
+        "scripts/catalysis_retrieval/records.py",
+        "scripts/catalysis_retrieval/ranking.py",
+        "scripts/prediction_provenance.py",
+        "scripts/matris_training_exclusions.py",
+        "scripts/matris_training_data.py",
+        "scripts/registry_acceptance.py"
+      ],
+      "evidence": "68 focused tests pass; no automatic retrieval/prediction-to-accepted-fact route found in inspected acceptance paths.",
+      "remaining_limitation": "Calibration metadata P2 recorded. No real training, inference or scientific benchmarking performed.",
+      "blocking_finding_ids": [],
+      "focused_tests": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-o",
+          "addopts=",
+          "-q",
+          "tests/test_b3_evidence_governance.py",
+          "tests/test_b3_ml_governance.py"
+        ],
+        "exit_code": 0,
+        "wall_duration_seconds": 8.54,
+        "summary": "68 passed in 5.27s",
+        "passed": 68,
+        "failed": 0,
+        "skipped": 0,
+        "collected": 68,
+        "pytest_duration_seconds": 5.27
+      }
+    },
+    "B4": {
+      "name": "Registry / State",
+      "verdict": "PASS",
+      "checks_performed": [
+        "Reviewed complete planning in a snapshot, plan/batch hashes, database identity/fingerprint, explicit approval and BEGIN IMMEDIATE apply.",
+        "Tested invalid input before mutation, changed plan, stale DB, transaction rollback, immutable receipts, duplicate apply and idempotent replay.",
+        "Verified omitted rows normalizes to rows={}; status-only validate/plan/approved apply/replay succeeds and stale expectations fail.",
+        "Verified immutable compatibility revisions, old calculation revision retention and timezone-aware review timestamps for both APIs.",
+        "Inspected immutable event/result/file/review/TS/barrier/template guards and job transition/recovery history; ran migration, rollback and incompatible-schema checks on temporary SQLite.",
+        "Normal open_registry (including legacy migrate=True) validates schema but does not silently migrate. State crash/receipt/rollback/event regressions use synthetic state only."
+      ],
+      "owners": [
+        "scripts/registry_mutations.py",
+        "scripts/registry_transactions.py",
+        "scripts/registry_connection.py",
+        "scripts/registry_compatibility.py",
+        "scripts/registry_schema.py",
+        "scripts/state_manager/",
+        "modules/calculation_registry/migrations/009_registry_governance.sql"
+      ],
+      "evidence": "121 focused tests pass on temporary registry/state fixtures.",
+      "remaining_limitation": "Live task reconciliation and deployed registry schema remain unverified; existing managed projection drift is recorded separately.",
+      "blocking_finding_ids": [],
+      "focused_tests": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-o",
+          "addopts=",
+          "-q",
+          "tests/test_registry_write.py",
+          "tests/test_b4_registry_governance.py",
+          "tests/test_b4_state_governance.py",
+          "tests/test_registry_schema.py",
+          "tests/test_state_manager.py"
+        ],
+        "exit_code": 0,
+        "wall_duration_seconds": 13.86,
+        "summary": "121 passed in 11.98s",
+        "passed": 121,
+        "failed": 0,
+        "skipped": 0,
+        "collected": 121,
+        "pytest_duration_seconds": 11.98
+      }
+    },
+    "B5": {
+      "name": "Architecture",
+      "verdict": "FAIL",
+      "checks_performed": [
+        "Reconstructed AST graph of 221 script modules / 759 internal edges including function-local imports; reviewed current infrastructure/registry dependency closure and cycle tests.",
+        "Checked no domain-to-CLI or shared-infrastructure-to-TS direction, no CLI SQL in maintained adapters, import-only facades and no new sys.path hacks.",
+        "Verified one gate, execution authorization validator, registry connection, evidence lifecycle and resource resolver; execution_gate remains 150 lines.",
+        "scientific_claims is a narrow application delegation boundary with no SQL/scheduler/submission/VFA parsing/DIMER scientific rules.",
+        "Complete dispatch search and independent race disprove repository-wide sole-submit-owner assertion; the exact-string B5 test misses the legacy executor.",
+        "Reviewed unsupported catalyst profiles, zero-incoming newly added modules against console/build/CI registrations, and all residual duplicate parser candidates."
+      ],
+      "owners": [
+        "tests/test_b5_architecture_boundaries.py",
+        "scripts/ts_strategy_engine/scientific_claims.py",
+        "scripts/registry_connection.py",
+        "scripts/runtime_resources.py",
+        "scripts/adsmind_lite/site_detection.py"
+      ],
+      "evidence": "56 focused tests pass but the second working submit executor is independently confirmed.",
+      "remaining_limitation": "Static import graphs are not proof of every dynamic route. Legacy executor and residual parser ownership need separate closure.",
+      "blocking_finding_ids": [
+        "AC-RERUN-B1-001"
+      ],
+      "focused_tests": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-o",
+          "addopts=",
+          "-q",
+          "tests/test_b5_architecture_boundaries.py",
+          "tests/test_code_structure.py",
+          "tests/test_repository_contracts.py"
+        ],
+        "exit_code": 0,
+        "wall_duration_seconds": 12.48,
+        "summary": "56 passed in 11.08s",
+        "passed": 56,
+        "failed": 0,
+        "skipped": 0,
+        "collected": 56,
+        "pytest_duration_seconds": 11.08
+      }
+    },
+    "B6": {
+      "name": "Documentation / Data Governance",
+      "verdict": "PASS_WITH_NONBLOCKING_LIMITATION",
+      "checks_performed": [
+        "Read the single DOCUMENT_GOVERNANCE authority model and distinctions among code state, dated observations, history, accepted science, predictions and unverified production.",
+        "Verified supported code schema 9 versus NOT_VERIFIED_IN_B6 production, timestamped scheduler observations and historical filename-independent authority.",
+        "Generated readiness twice in a fresh external source copy: byte-identical and equal to checked-in outputs.",
+        "Verified tests/status do not promote science; kinetic_data stays Planned and downstream thermochemistry/network/kinetics/KMC/reactor/sensitivity modules stay Blocked.",
+        "Audited data_governance classes and prediction paths; directory classification cannot establish scientific acceptance.",
+        "Checked links in all 211 tracked Markdown files: zero broken links. All 203 classifier-supported documents were checked; seven current/reference/generated views have no wording findings."
+      ],
+      "owners": [
+        "docs/DOCUMENT_GOVERNANCE.md",
+        "configs/data_governance.yaml",
+        "scripts/document_governance.py",
+        "scripts/generate_capability_readiness.py"
+      ],
+      "evidence": "26 focused tests pass; two readiness generations are byte-identical, match checked-in views and retain scientific/production separation.",
+      "remaining_limitation": "Eight SKILL.md documents have skill frontmatter unsupported by this document classifier. Links were checked; classification was not marked PASS. Live state not reconciled.",
+      "blocking_finding_ids": [],
+      "focused_tests": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-o",
+          "addopts=",
+          "-q",
+          "tests/test_b6_governance.py"
+        ],
+        "exit_code": 0,
+        "wall_duration_seconds": 2.0,
+        "summary": "26 passed in 1.14s",
+        "passed": 26,
+        "failed": 0,
+        "skipped": 0,
+        "collected": 26,
+        "pytest_duration_seconds": 1.14
+      }
+    },
+    "B7": {
+      "name": "Release / Environment",
+      "verdict": "PASS",
+      "checks_performed": [
+        "Fresh actual wheel exported from the candidate index, built and installed into a clean normal-wheel venv and separate editable venv outside the repository.",
+        "Verified outside-repository cwd, cleared PYTHONPATH/PYTHONHOME, all nine console scripts and 60 runtime resources including schema/migration SQL and retrieval schemas.",
+        "Verified REPOSITORY_CONTEXT_REQUIRED errors, explicit-root tools, editable/wheel parity and synthetic smoke with scientific_acceptance=false.",
+        "Inspected every one of 286 wheel members; all 221 Python members are byte-identical to the candidate Git blobs.",
+        "Queried exact candidate GitHub validate/Ubuntu, engineering/Windows+Ubuntu and wheel/Windows+Ubuntu jobs; all five succeeded with configured Python 3.11."
+      ],
+      "owners": [
+        "scripts/validate_release.py",
+        "scripts/release_environment.py",
+        "scripts/release_smoke.py",
+        "scripts/runtime_resources.py",
+        "configs/release_resources.json",
+        ".github/workflows/state-manager.yml"
+      ],
+      "evidence": "17 focused tests pass; fresh release exit 0/PASS/parity true; all five exact-candidate CI jobs success.",
+      "remaining_limitation": "Packaging includes the known legacy executor source; release success cannot remove its source-level B1 blocker or establish real HPC/GPU operation.",
+      "blocking_finding_ids": [],
+      "focused_tests": {
+        "command": [
+          "python",
+          "-m",
+          "pytest",
+          "-o",
+          "addopts=",
+          "-q",
+          "tests/test_b7_release.py"
+        ],
+        "exit_code": 0,
+        "wall_duration_seconds": 2.0,
+        "summary": "17 passed in 0.78s",
+        "passed": 17,
+        "failed": 0,
+        "skipped": 0,
+        "collected": 17,
+        "pytest_duration_seconds": 0.78
+      }
+    }
+  },
+  "source_integrity": {
+    "files_scanned": 1303,
+    "total_bytes": 7960966,
+    "name_candidates": [],
+    "content_candidates": [],
+    "large_files": [
+      {
+        "path": "configs/public_source_snapshot.json",
+        "size": 368187
+      }
+    ],
+    "binary_files": []
+  },
+  "full_pytest": {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-o",
+      "addopts=",
+      "-q"
+    ],
+    "exit_code": 0,
+    "duration_seconds": 311.63,
+    "summary": "1128 passed in 309.08s (0:05:09)",
+    "collected": 1128,
+    "passed": 1128,
+    "failed": 0,
+    "skipped": 0,
+    "pytest_duration_seconds": 309.08,
+    "prior_repair_passed": 1128,
+    "count_difference": 0
+  },
+  "ruff": {
+    "command": [
+      "python",
+      "-m",
+      "ruff",
+      "check",
+      "scripts",
+      "modules",
+      "tests"
+    ],
+    "exit_code": 0,
+    "duration_seconds": 0.33
+  },
+  "diff_check": {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "duration_seconds": 0.06
+  },
+  "focused_results": {
+    "B1": {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-o",
+        "addopts=",
+        "-q",
+        "tests/test_execution_lifecycle.py",
+        "tests/test_neb_execution_gate.py",
+        "tests/test_execution_gate_compatibility.py",
+        "tests/test_execution_backends.py",
+        "tests/test_gpu_execution_lifecycle.py",
+        "tests/test_artifact_io.py",
+        "tests/test_alpha_fe_bulk_submission.py"
+      ],
+      "exit_code": 0,
+      "wall_duration_seconds": 125.3,
+      "summary": "246 passed in 118.26s (0:01:58)",
+      "passed": 246,
+      "failed": 0,
+      "skipped": 0,
+      "collected": 246,
+      "pytest_duration_seconds": 118.26
+    },
+    "B2": {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-o",
+        "addopts=",
+        "-q",
+        "tests/test_b2_scientific_contract.py",
+        "tests/test_b21_scientific_acceptance.py",
+        "tests/test_ts_strategy_engine.py"
+      ],
+      "exit_code": 0,
+      "wall_duration_seconds": 56.16,
+      "summary": "162 passed in 53.90s",
+      "passed": 162,
+      "failed": 0,
+      "skipped": 0,
+      "collected": 162,
+      "pytest_duration_seconds": 53.9
+    },
+    "AC_B2_001": {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-o",
+        "addopts=",
+        "-q",
+        "tests/test_scientific_claim_authority.py"
+      ],
+      "exit_code": 0,
+      "wall_duration_seconds": 27.1,
+      "summary": "31 passed in 20.80s",
+      "passed": 31,
+      "failed": 0,
+      "skipped": 0,
+      "collected": 31,
+      "pytest_duration_seconds": 20.8
+    },
+    "B3": {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-o",
+        "addopts=",
+        "-q",
+        "tests/test_b3_evidence_governance.py",
+        "tests/test_b3_ml_governance.py"
+      ],
+      "exit_code": 0,
+      "wall_duration_seconds": 8.54,
+      "summary": "68 passed in 5.27s",
+      "passed": 68,
+      "failed": 0,
+      "skipped": 0,
+      "collected": 68,
+      "pytest_duration_seconds": 5.27
+    },
+    "B4": {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-o",
+        "addopts=",
+        "-q",
+        "tests/test_registry_write.py",
+        "tests/test_b4_registry_governance.py",
+        "tests/test_b4_state_governance.py",
+        "tests/test_registry_schema.py",
+        "tests/test_state_manager.py"
+      ],
+      "exit_code": 0,
+      "wall_duration_seconds": 13.86,
+      "summary": "121 passed in 11.98s",
+      "passed": 121,
+      "failed": 0,
+      "skipped": 0,
+      "collected": 121,
+      "pytest_duration_seconds": 11.98
+    },
+    "B5": {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-o",
+        "addopts=",
+        "-q",
+        "tests/test_b5_architecture_boundaries.py",
+        "tests/test_code_structure.py",
+        "tests/test_repository_contracts.py"
+      ],
+      "exit_code": 0,
+      "wall_duration_seconds": 12.48,
+      "summary": "56 passed in 11.08s",
+      "passed": 56,
+      "failed": 0,
+      "skipped": 0,
+      "collected": 56,
+      "pytest_duration_seconds": 11.08
+    },
+    "B6": {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-o",
+        "addopts=",
+        "-q",
+        "tests/test_b6_governance.py"
+      ],
+      "exit_code": 0,
+      "wall_duration_seconds": 2.0,
+      "summary": "26 passed in 1.14s",
+      "passed": 26,
+      "failed": 0,
+      "skipped": 0,
+      "collected": 26,
+      "pytest_duration_seconds": 1.14
+    },
+    "B7": {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-o",
+        "addopts=",
+        "-q",
+        "tests/test_b7_release.py"
+      ],
+      "exit_code": 0,
+      "wall_duration_seconds": 2.0,
+      "summary": "17 passed in 0.78s",
+      "passed": 17,
+      "failed": 0,
+      "skipped": 0,
+      "collected": 17,
+      "pytest_duration_seconds": 0.78
+    }
+  },
+  "focused_total_passed": 727,
+  "independent_claim_reproduction": [
+    {
+      "name": "original_boolean_pattern",
+      "status": "PASS",
+      "evidence": {
+        "python_decision": "NEEDS_CURRENT_TS_VALIDATION_EVIDENCE",
+        "file_bound_fake_decision": "NEEDS_CURRENT_TS_VALIDATION_EVIDENCE",
+        "reason_codes": [
+          "CURRENT_TS_VALIDATION_EVIDENCE_INVALID"
+        ]
+      }
+    },
+    {
+      "name": "summary_vfa_analysis_json",
+      "status": "PASS",
+      "evidence": {
+        "initial": "VALIDATED_TS",
+        "execution_authorization": null,
+        "changed": "summary/vfa_analysis.json",
+        "unchanged_summary": false,
+        "old_claim": "DENIED"
+      }
+    },
+    {
+      "name": "vfa_OUTCAR",
+      "status": "PASS",
+      "evidence": {
+        "initial": "VALIDATED_TS",
+        "execution_authorization": null,
+        "changed": "vfa/OUTCAR",
+        "unchanged_summary": true,
+        "old_claim": "DENIED"
+      }
+    },
+    {
+      "name": "vfa_POSCAR",
+      "status": "PASS",
+      "evidence": {
+        "initial": "VALIDATED_TS",
+        "execution_authorization": null,
+        "changed": "vfa/POSCAR",
+        "unchanged_summary": true,
+        "old_claim": "DENIED"
+      }
+    },
+    {
+      "name": "vfa_vfa_review_json",
+      "status": "PASS",
+      "evidence": {
+        "initial": "VALIDATED_TS",
+        "execution_authorization": null,
+        "changed": "vfa/vfa_review.json",
+        "unchanged_summary": true,
+        "old_claim": "DENIED"
+      }
+    },
+    {
+      "name": "vfa_vfa_handoff_json",
+      "status": "PASS",
+      "evidence": {
+        "initial": "VALIDATED_TS",
+        "execution_authorization": null,
+        "changed": "vfa/vfa_handoff.json",
+        "unchanged_summary": true,
+        "old_claim": "DENIED"
+      }
+    },
+    {
+      "name": "dimer_CONTCAR",
+      "status": "PASS",
+      "evidence": {
+        "initial": "VALIDATED_TS",
+        "execution_authorization": null,
+        "changed": "dimer/CONTCAR",
+        "unchanged_summary": true,
+        "old_claim": "DENIED"
+      }
+    },
+    {
+      "name": "dimer_dimer_analysis_json",
+      "status": "PASS",
+      "evidence": {
+        "initial": "VALIDATED_TS",
+        "execution_authorization": null,
+        "changed": "dimer/dimer_analysis.json",
+        "unchanged_summary": true,
+        "old_claim": "DENIED"
+      }
+    },
+    {
+      "name": "neb_contract",
+      "status": "PASS",
+      "evidence": {
+        "initial": "VALIDATED_TS",
+        "unchanged_summary": true,
+        "changed": "contract",
+        "old_claim": "DENIED"
+      }
+    },
+    {
+      "name": "neb_connectivity_branch",
+      "status": "PASS",
+      "evidence": {
+        "initial": "VALIDATED_TS",
+        "unchanged_summary": true,
+        "changed": "connectivity_branch",
+        "old_claim": "DENIED"
+      }
+    }
+  ],
+  "residual_parser_reproduction": {
+    "incar": {
+      "raw_MAGMOM": null,
+      "canonical_MAGMOM": "3*2.0"
+    },
+    "outcar": {
+      "legacy_ionic_converged": true,
+      "legacy_normal_completion": true,
+      "current_owner_normal_completion": false,
+      "current_owner_incomplete": true
+    },
+    "scope": "metadata/formatting disagreement; accepted registry and current force-label paths additionally invoke authoritative final SCF validation; no accepted-result bypass established"
+  },
+  "scientific_parameter_preservation": {
+    "unchanged_existing_config_count": 37,
+    "unchanged_existing_configs": [
+      "configs/adsmind_lite/adsorbate_rules.yaml",
+      "configs/adsmind_lite/analysis_rules.yaml",
+      "configs/adsmind_lite/backend.yaml",
+      "configs/adsmind_lite/evidence_gate.yaml",
+      "configs/adsmind_lite/iron_fts_prescreen.yaml",
+      "configs/adsmind_lite/prescreen_rules.yaml",
+      "configs/adsmind_lite/site_rules.yaml",
+      "configs/adsmind_lite/surfaces.yaml",
+      "configs/adsorption_result_promotion.yaml",
+      "configs/aqcat25_domain_gate.yaml",
+      "configs/aqcat25_handoff.schema.json",
+      "configs/aqcat25_ts_active_learning.yaml",
+      "configs/aqcat25_ts_domain_gate.yaml",
+      "configs/dimer_gate.yaml",
+      "configs/dual_model_ts_active_learning.yaml",
+      "configs/execution_backends.yaml",
+      "configs/fe110_adsorbates_h2_chx_pilot.yaml",
+      "configs/fe110_adsorbates_oxygenated_main_pilot.yaml",
+      "configs/fe110_adsorbates_step12a.yaml",
+      "configs/incar_custodian/project_profiles.yaml",
+      "configs/neb_agent/default_thresholds.yaml",
+      "configs/neb_agent/path_constraints_schema.json",
+      "configs/neb_agent/retrieval_prior_schema.json",
+      "configs/neb_path_quality_control_v2.yaml",
+      "configs/offline_mlip_fusion_feasibility.yaml",
+      "configs/postprocessing_software.yaml",
+      "configs/public_source_snapshot.json",
+      "configs/registry_legacy_writers.yaml",
+      "configs/skill_routing.yaml",
+      "configs/state_handoff.yaml",
+      "configs/state_handoff_event.schema.json",
+      "configs/structure_purpose_routing.yaml",
+      "configs/true_fe110_production.yaml",
+      "configs/ts_connectivity_gate.yaml",
+      "configs/ts_strategy_engine/families.yaml",
+      "configs/ts_strategy_engine/learning.yaml",
+      "configs/ts_validation_pipeline.yaml"
+    ],
+    "protocols": {
+      "docs/01_METHOD_PROTOCOL.md": {
+        "body_identical": true,
+        "baseline_body_sha256": "03db2f337b28faba82aa98060598fc5b07cb7bd08c2504649c63dbe1518a0657"
+      },
+      "docs/10_TS_VALIDATION_PROTOCOL.md": {
+        "body_identical": true,
+        "baseline_body_sha256": "09ba47ac24903652bd30270261833428a85a9c80f711d2ef56d725ccd6acfd27"
+      },
+      "docs/11_DATA_PROVENANCE_PROTOCOL.md": {
+        "body_identical": true,
+        "baseline_body_sha256": "a9956b2d07093978ef1533e1b602f6feecbb1d582660d11b1b0eaeecef136669"
+      }
+    },
+    "calculation_changes": [],
+    "changed_config_explanations": {
+      "configs/aqcat25_ts_active_learning.schema.json": "adds prediction_provenance schema; no physical values",
+      "configs/data_governance.yaml": "new classification model; no physical values",
+      "configs/release_resources.json": "package resource enumeration; no physical values"
+    },
+    "implementation_review": "All parameter-key diff lines reviewed. Shared parser, finite/range and current-evidence checks; runtime resource relocation; MatRIS compatibility checks moved unchanged into matris_training_data; VFA common_evidence retains identical threshold conjunction. Release-smoke constants are synthetic only. No unexplained scientific value changes found."
+  },
+  "architecture": {
+    "parsed_source_files": 299,
+    "runtime_graph_nodes": 221,
+    "runtime_graph_edges": 759,
+    "graph": {
+      "scripts.aqcat25_calibration": [
+        "scripts.artifact_io",
+        "scripts.execution_backends"
+      ],
+      "scripts.aqcat25_handoff": [
+        "scripts.artifact_io",
+        "scripts.runtime_resources"
+      ],
+      "scripts.aqcat25_ml_neb": [
+        "scripts.aqcat25_handoff",
+        "scripts.artifact_io"
+      ],
+      "scripts.aqcat25_ml_path_committee": [
+        "scripts.aqcat25_handoff",
+        "scripts.aqcat25_ml_neb",
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.ml_neb_path"
+      ],
+      "scripts.aqcat25_ts_active_learning": [
+        "scripts.ts_strategy_engine.active_learning_cli"
+      ],
+      "scripts.aqcat25_ts_checkpoint_validation": [
+        "scripts.artifact_io"
+      ],
+      "scripts.aqcat25_ts_force_prediction": [
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io"
+      ],
+      "scripts.aqcat25_ts_force_prediction_batch": [
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io"
+      ],
+      "scripts.aqcat25_ts_schema": [
+        "scripts.artifact_io",
+        "scripts.runtime_resources"
+      ],
+      "scripts.aqcat25_ts_training_data": [
+        "scripts.artifact_io",
+        "scripts.matris_training_data",
+        "scripts.matris_training_exclusions",
+        "scripts.scientific_validation"
+      ],
+      "scripts.artifact_io": [],
+      "scripts.assess_dual_model_ts_heldout_errors": [
+        "scripts.artifact_io",
+        "scripts.assess_dual_model_ts_vasp_errors"
+      ],
+      "scripts.assess_dual_model_ts_vasp_errors": [
+        "scripts.artifact_io"
+      ],
+      "scripts.bind_reviewed_dimer_execution": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.submission",
+        "scripts.ts_strategy_engine.execution_gate"
+      ],
+      "scripts.collect_dual_model_ts_vasp_labels": [
+        "scripts.aqcat25_calibration",
+        "scripts.artifact_io",
+        "scripts.execution_backends",
+        "scripts.neb_agent.utils_vasp",
+        "scripts.scheduler_evidence",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.document_governance": [
+        "scripts.provenance_fields",
+        "scripts.registry_schema",
+        "scripts.runtime_resources"
+      ],
+      "scripts.dual_model_ml_neb": [
+        "scripts.aqcat25_ml_neb",
+        "scripts.artifact_io",
+        "scripts.ml_sella_candidate",
+        "scripts.mlip_same_structure_benchmark"
+      ],
+      "scripts.dual_model_ts_force_prediction_batch": [
+        "scripts.artifact_io",
+        "scripts.mlip_same_structure_benchmark"
+      ],
+      "scripts.execution_backends": [
+        "scripts.runtime_resources"
+      ],
+      "scripts.generate_capability_readiness": [
+        "scripts.artifact_io",
+        "scripts.document_governance",
+        "scripts.registry_schema",
+        "scripts.runtime_resources"
+      ],
+      "scripts.init_registry": [
+        "scripts.registry_schema",
+        "scripts.runtime_resources"
+      ],
+      "scripts.jsonl_io": [],
+      "scripts.matris_energy_force_finetune": [
+        "scripts.artifact_io",
+        "scripts.matris_finetune_speed_benchmark",
+        "scripts.matris_training_data",
+        "scripts.matris_training_exclusions",
+        "scripts.prediction_provenance",
+        "scripts.scientific_validation"
+      ],
+      "scripts.matris_finetune_speed_benchmark": [
+        "scripts.artifact_io",
+        "scripts.matris_training_exclusions",
+        "scripts.prediction_provenance",
+        "scripts.scientific_validation"
+      ],
+      "scripts.matris_frozen_heldout_validate": [
+        "scripts.artifact_io",
+        "scripts.matris_energy_force_finetune",
+        "scripts.matris_finetune_speed_benchmark"
+      ],
+      "scripts.matris_sella_local_peak": [
+        "scripts.aqcat25_ml_neb",
+        "scripts.artifact_io",
+        "scripts.dual_model_ml_neb",
+        "scripts.execution_backends",
+        "scripts.ml_candidate_source",
+        "scripts.ml_sella_candidate",
+        "scripts.mlip_same_structure_benchmark",
+        "scripts.prepare_dual_model_ts_active_learning_round"
+      ],
+      "scripts.matris_sella_smoke": [
+        "scripts.aqcat25_ml_neb",
+        "scripts.artifact_io",
+        "scripts.ml_sella_candidate",
+        "scripts.mlip_same_structure_benchmark"
+      ],
+      "scripts.matris_training_data": [
+        "scripts.artifact_io",
+        "scripts.matris_training_exclusions",
+        "scripts.neb_agent.utils_structure",
+        "scripts.provenance_fields",
+        "scripts.scheduler_evidence",
+        "scripts.scientific_validation",
+        "scripts.ts_strategy_engine.active_learning_common"
+      ],
+      "scripts.matris_training_exclusions": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_structure",
+        "scripts.provenance_fields",
+        "scripts.scientific_validation"
+      ],
+      "scripts.matris_ts_path_committee": [
+        "scripts.artifact_io",
+        "scripts.dual_model_ts_force_prediction_batch",
+        "scripts.mlip_same_structure_benchmark"
+      ],
+      "scripts.mlip_same_structure_benchmark": [
+        "scripts.artifact_io"
+      ],
+      "scripts.ml_candidate_source": [
+        "scripts.aqcat25_ml_neb",
+        "scripts.artifact_io",
+        "scripts.dual_model_ml_neb",
+        "scripts.prepare_dual_model_ts_active_learning_round"
+      ],
+      "scripts.ml_sella_candidate": [
+        "scripts.aqcat25_ml_neb",
+        "scripts.artifact_io"
+      ],
+      "scripts.offline_mlip_fusion_feasibility": [
+        "scripts.artifact_io",
+        "scripts.runtime_resources"
+      ],
+      "scripts.optional_dependencies": [],
+      "scripts.prediction_provenance": [
+        "scripts.provenance_fields",
+        "scripts.scientific_validation"
+      ],
+      "scripts.prepare_aqcat25_ml_neb_handoff": [
+        "scripts.aqcat25_handoff",
+        "scripts.artifact_io",
+        "scripts.runtime_resources",
+        "scripts.ts_strategy_engine.contract"
+      ],
+      "scripts.prepare_dual_model_ts_active_learning_round": [
+        "scripts.artifact_io",
+        "scripts.dual_model_ts_force_prediction_batch"
+      ],
+      "scripts.prepare_dual_model_ts_heldout_candidates": [
+        "scripts.artifact_io",
+        "scripts.matris_training_exclusions",
+        "scripts.neb_agent.utils_structure"
+      ],
+      "scripts.prepare_dual_model_ts_heldout_execution": [
+        "scripts.artifact_io",
+        "scripts.matris_training_exclusions",
+        "scripts.vasp_inputs"
+      ],
+      "scripts.prepare_matris_finetune_request": [
+        "scripts.artifact_io",
+        "scripts.matris_training_exclusions"
+      ],
+      "scripts.prepare_matris_remote_finetune_bundle": [
+        "scripts.artifact_io",
+        "scripts.matris_energy_force_finetune"
+      ],
+      "scripts.prepare_matris_replay_finetune_package": [
+        "scripts.artifact_io",
+        "scripts.matris_training_data",
+        "scripts.matris_training_exclusions",
+        "scripts.neb_agent.utils_structure",
+        "scripts.prepare_matris_finetune_request",
+        "scripts.scientific_validation"
+      ],
+      "scripts.prepare_ml_candidate_active_learning": [
+        "scripts.artifact_io",
+        "scripts.dual_model_ml_neb",
+        "scripts.dual_model_ts_force_prediction_batch",
+        "scripts.matris_sella_local_peak",
+        "scripts.ml_candidate_source",
+        "scripts.prepare_dual_model_ts_active_learning_round"
+      ],
+      "scripts.prepare_ml_candidate_rerun": [
+        "scripts.artifact_io",
+        "scripts.dual_model_ml_neb",
+        "scripts.execution_backends",
+        "scripts.matris_sella_local_peak",
+        "scripts.prepare_matris_finetune_request"
+      ],
+      "scripts.prepare_reviewed_neb_peak_dimer": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_structure",
+        "scripts.runtime_resources",
+        "scripts.scheduler_evidence",
+        "scripts.ts_strategy_engine.contract",
+        "scripts.ts_strategy_engine.dimer_gate",
+        "scripts.ts_strategy_engine.execution_gate",
+        "scripts.ts_strategy_engine.handoff",
+        "scripts.ts_strategy_engine.path_evidence",
+        "scripts.vasp_inputs"
+      ],
+      "scripts.prepare_ts_heldout_aqcat_prediction_batch": [
+        "scripts.aqcat25_calibration",
+        "scripts.aqcat25_handoff",
+        "scripts.aqcat25_ts_force_prediction_batch",
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io"
+      ],
+      "scripts.prepare_ts_heldout_validation_candidates": [
+        "scripts.artifact_io",
+        "scripts.matris_training_exclusions",
+        "scripts.neb_agent.utils_structure",
+        "scripts.ts_strategy_engine.active_learning_common",
+        "scripts.ts_strategy_engine.active_learning_domain"
+      ],
+      "scripts.prepare_ts_heldout_vasp_label_batch": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.submission",
+        "scripts.runtime_resources",
+        "scripts.vasp_inputs"
+      ],
+      "scripts.provenance_fields": [],
+      "scripts.registry_acceptance": [
+        "scripts.adsmind_lite.evidence_lifecycle",
+        "scripts.aqcat25_calibration",
+        "scripts.artifact_io",
+        "scripts.scientific_validation",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.registry_compatibility": [
+        "scripts.artifact_io",
+        "scripts.provenance_fields",
+        "scripts.registry_connection",
+        "scripts.registry_transactions",
+        "scripts.scientific_validation"
+      ],
+      "scripts.registry_connection": [
+        "scripts.registry_schema"
+      ],
+      "scripts.registry_excel_promotion": [
+        "scripts.artifact_io",
+        "scripts.registry_connection",
+        "scripts.registry_transactions",
+        "scripts.runtime_resources",
+        "scripts.scientific_validation",
+        "scripts.state_manager.store",
+        "scripts.ts_validation.barrier_values"
+      ],
+      "scripts.registry_mutations": [
+        "scripts.artifact_io",
+        "scripts.provenance_fields",
+        "scripts.registry_acceptance",
+        "scripts.registry_connection",
+        "scripts.registry_transactions",
+        "scripts.scientific_validation",
+        "scripts.state_manager.job_lifecycle"
+      ],
+      "scripts.registry_schema": [
+        "scripts.runtime_resources"
+      ],
+      "scripts.registry_transactions": [
+        "scripts.artifact_io",
+        "scripts.provenance_fields",
+        "scripts.registry_connection"
+      ],
+      "scripts.registry_write": [
+        "scripts.registry_mutations",
+        "scripts.runtime_resources"
+      ],
+      "scripts.release_build": [],
+      "scripts.release_environment": [
+        "scripts.release_smoke",
+        "scripts.runtime_resources"
+      ],
+      "scripts.release_smoke": [
+        "scripts.artifact_io",
+        "scripts.registry_mutations",
+        "scripts.registry_schema",
+        "scripts.registry_transactions",
+        "scripts.runtime_resources",
+        "scripts.ts_strategy_engine.contract"
+      ],
+      "scripts.review_completed_neb_parent": [
+        "scripts.aqcat25_calibration",
+        "scripts.artifact_io",
+        "scripts.neb_agent.analyze_neb_outputs",
+        "scripts.neb_agent.diagnose_path_geometry",
+        "scripts.neb_agent.utils_structure",
+        "scripts.runtime_resources",
+        "scripts.ts_strategy_engine.contract",
+        "scripts.ts_strategy_engine.path_evidence"
+      ],
+      "scripts.runtime_resources": [],
+      "scripts.scheduler_evidence": [
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io",
+        "scripts.execution_backends"
+      ],
+      "scripts.scientific_validation": [],
+      "scripts.select_dual_model_ts_vasp_labels": [
+        "scripts.artifact_io",
+        "scripts.runtime_resources",
+        "scripts.vasp_inputs"
+      ],
+      "scripts.validate_release": [
+        "scripts.release_environment"
+      ],
+      "scripts.vasp_inputs": [
+        "scripts.aqcat25_calibration",
+        "scripts.artifact_io",
+        "scripts.runtime_resources",
+        "scripts.vasp_lsf"
+      ],
+      "scripts.vasp_lsf": [
+        "scripts.runtime_resources"
+      ],
+      "scripts.vasp_result_gate": [
+        "scripts.execution_backends",
+        "scripts.neb_agent.utils_vasp",
+        "scripts.scientific_validation"
+      ],
+      "scripts.workflow_geometry": [],
+      "scripts.__init__": [],
+      "scripts.adsmind_lite.adsmind_common": [
+        "scripts.artifact_io",
+        "scripts.jsonl_io",
+        "scripts.optional_dependencies"
+      ],
+      "scripts.adsmind_lite.analyze_relaxed_adsorption": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.relaxed_analysis",
+        "scripts.runtime_resources"
+      ],
+      "scripts.adsmind_lite.audit_remote_fe110_batch": [
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.execution_backends"
+      ],
+      "scripts.adsmind_lite.candidate_export": [
+        "scripts.adsmind_lite.adsmind_common"
+      ],
+      "scripts.adsmind_lite.candidate_generation": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsmind_lite.core": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.candidate_export",
+        "scripts.adsmind_lite.candidate_generation",
+        "scripts.adsmind_lite.relaxed_analysis",
+        "scripts.adsmind_lite.site_detection",
+        "scripts.adsmind_lite.state_deduplication"
+      ],
+      "scripts.adsmind_lite.deduplicate_adsorption_states": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.state_deduplication",
+        "scripts.runtime_resources"
+      ],
+      "scripts.adsmind_lite.detect_surface_sites": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.site_detection",
+        "scripts.runtime_resources"
+      ],
+      "scripts.adsmind_lite.evidence_gate": [
+        "scripts.adsmind_lite.evidence_lifecycle",
+        "scripts.artifact_io",
+        "scripts.catalysis_retrieval.records",
+        "scripts.runtime_resources"
+      ],
+      "scripts.adsmind_lite.evidence_lifecycle": [
+        "scripts.artifact_io",
+        "scripts.prediction_provenance",
+        "scripts.provenance_fields",
+        "scripts.scientific_validation"
+      ],
+      "scripts.adsmind_lite.export_vasp_ready": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.candidate_export"
+      ],
+      "scripts.adsmind_lite.fts_prescreen": [
+        "scripts.adsmind_lite.adsmind_common"
+      ],
+      "scripts.adsmind_lite.generate_adsorption_candidates": [
+        "scripts.adsmind_lite.candidate_generation",
+        "scripts.runtime_resources"
+      ],
+      "scripts.adsmind_lite.plan_adsorption_candidates": [
+        "scripts.adsmind_lite.evidence_gate",
+        "scripts.adsmind_lite.fts_prescreen",
+        "scripts.adsmind_lite.prescreen",
+        "scripts.artifact_io",
+        "scripts.runtime_resources"
+      ],
+      "scripts.adsmind_lite.prescreen": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.evidence_gate",
+        "scripts.adsmind_lite.fts_prescreen"
+      ],
+      "scripts.adsmind_lite.relaxed_analysis": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.candidate_generation",
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsmind_lite.site_detection": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsorption.build_fe110_adsorption"
+      ],
+      "scripts.adsmind_lite.state_deduplication": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.relaxed_analysis",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsmind_lite.validate_candidates": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.relaxed_analysis",
+        "scripts.runtime_resources"
+      ],
+      "scripts.adsmind_lite.__init__": [],
+      "scripts.adsorption.analyze_fe110_ch_h_relaxation": [
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_vasp",
+        "scripts.vasp_result_gate",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsorption.backfill_step12a_registry": [
+        "scripts.adsmind_lite.audit_remote_fe110_batch",
+        "scripts.artifact_io",
+        "scripts.execution_backends",
+        "scripts.neb_agent.utils_vasp",
+        "scripts.scientific_validation",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.adsorption.build_fe110_adsorption": [
+        "scripts.runtime_resources",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsorption.build_fe110_c2_coads": [
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.adsorption.c2_coads_catalog",
+        "scripts.adsorption.c2_coads_geometry",
+        "scripts.artifact_io",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsorption.build_fe110_care_isomers": [
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.artifact_io",
+        "scripts.prediction_provenance",
+        "scripts.scientific_validation",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsorption.build_fe110_ch_h_coads": [
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.artifact_io",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsorption.build_gas_cho_chxo": [
+        "scripts.adsorption.gas_vasp_common"
+      ],
+      "scripts.adsorption.build_gas_h2_chx": [
+        "scripts.adsorption.gas_vasp_common"
+      ],
+      "scripts.adsorption.build_gas_oxygenated_isomers": [
+        "scripts.adsorption.gas_vasp_common"
+      ],
+      "scripts.adsorption.build_gas_step12a_references": [
+        "scripts.adsorption.gas_vasp_common"
+      ],
+      "scripts.adsorption.c2_coads_catalog": [
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.adsorption.c2_coads_geometry"
+      ],
+      "scripts.adsorption.c2_coads_geometry": [
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsorption.finalize_step12a_gas_references": [
+        "scripts.adsorption.build_gas_step12a_references",
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_vasp",
+        "scripts.registry_connection",
+        "scripts.registry_mutations",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.adsorption.gas_vasp_common": [],
+      "scripts.adsorption.preflight_fe110_adsorption": [
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.artifact_io",
+        "scripts.optional_dependencies",
+        "scripts.runtime_resources",
+        "scripts.vasp_lsf",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.adsorption.preflight_gas_references": [
+        "scripts.adsorption.build_gas_step12a_references",
+        "scripts.adsorption.gas_vasp_common",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.adsorption.register_step12a_gas_reference_submission": [
+        "scripts.artifact_io",
+        "scripts.registry_mutations",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.adsorption.register_step12a_oh_restart": [
+        "scripts.artifact_io",
+        "scripts.registry_mutations"
+      ],
+      "scripts.adsorption.render_fe110_ch_h_candidates": [
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsorption.__init__": [],
+      "scripts.catalysis_retrieval.cli": [
+        "scripts.catalysis_retrieval.records",
+        "scripts.catalysis_retrieval.workflow"
+      ],
+      "scripts.catalysis_retrieval.ranking": [
+        "scripts.adsmind_lite.evidence_lifecycle",
+        "scripts.catalysis_retrieval.records",
+        "scripts.optional_dependencies",
+        "scripts.scientific_validation"
+      ],
+      "scripts.catalysis_retrieval.records": [
+        "scripts.adsmind_lite.evidence_lifecycle",
+        "scripts.jsonl_io",
+        "scripts.runtime_resources",
+        "scripts.scientific_validation"
+      ],
+      "scripts.catalysis_retrieval.validate_cli": [
+        "scripts.catalysis_retrieval.records"
+      ],
+      "scripts.catalysis_retrieval.workflow": [
+        "scripts.catalysis_retrieval.ranking",
+        "scripts.catalysis_retrieval.records",
+        "scripts.scientific_validation"
+      ],
+      "scripts.catalysis_retrieval.__init__": [],
+      "scripts.convergence.common": [],
+      "scripts.convergence.setup_alpha_fe_bulk_smearing": [
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.convergence.setup_true_fe110_thickness_retest": [],
+      "scripts.neb_agent.analyze_neb_outputs": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.cli_common",
+        "scripts.neb_agent.magnetic_continuity",
+        "scripts.neb_agent.utils_report",
+        "scripts.neb_agent.utils_structure",
+        "scripts.neb_agent.utils_vasp",
+        "scripts.runtime_resources",
+        "scripts.scientific_validation",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.neb_agent.check_endpoints": [
+        "scripts.neb_agent.utils_report",
+        "scripts.neb_agent.utils_structure",
+        "scripts.ts_strategy_engine.contract"
+      ],
+      "scripts.neb_agent.cli_common": [],
+      "scripts.neb_agent.crop_neb_path": [
+        "scripts.neb_agent.cli_common",
+        "scripts.neb_agent.utils_report",
+        "scripts.neb_agent.utils_structure"
+      ],
+      "scripts.neb_agent.diagnose_path_geometry": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.cli_common",
+        "scripts.neb_agent.utils_report",
+        "scripts.neb_agent.utils_structure",
+        "scripts.runtime_resources",
+        "scripts.scientific_validation",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.neb_agent.generate_path": [
+        "scripts.neb_agent.cli_common",
+        "scripts.neb_agent.utils_report",
+        "scripts.neb_agent.utils_structure",
+        "scripts.ts_strategy_engine.execution_gate"
+      ],
+      "scripts.neb_agent.magnetic_continuity": [],
+      "scripts.neb_agent.path_quality_cli": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.path_quality_service",
+        "scripts.runtime_resources"
+      ],
+      "scripts.neb_agent.path_quality_control": [
+        "scripts.neb_agent.utils_structure",
+        "scripts.neb_agent.utils_vasp",
+        "scripts.optional_dependencies",
+        "scripts.scientific_validation"
+      ],
+      "scripts.neb_agent.path_quality_service": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.path_quality_control",
+        "scripts.scientific_validation",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.neb_agent.pilot_validation": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.magnetic_continuity",
+        "scripts.neb_agent.path_quality_service",
+        "scripts.neb_agent.utils_structure",
+        "scripts.neb_agent.utils_vasp",
+        "scripts.runtime_resources",
+        "scripts.scheduler_evidence",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.neb_agent.prepare_restart": [
+        "scripts.neb_agent.cli_common",
+        "scripts.neb_agent.utils_report",
+        "scripts.neb_agent.utils_structure"
+      ],
+      "scripts.neb_agent.remote_monitor": [
+        "scripts.runtime_resources"
+      ],
+      "scripts.neb_agent.retrieval_prior_adapter": [
+        "scripts.neb_agent.cli_common",
+        "scripts.neb_agent.utils_report",
+        "scripts.neb_agent.utils_retrieval"
+      ],
+      "scripts.neb_agent.split_by_intermediate": [
+        "scripts.neb_agent.cli_common",
+        "scripts.neb_agent.utils_report",
+        "scripts.neb_agent.utils_structure"
+      ],
+      "scripts.neb_agent.submission": [
+        "scripts.artifact_io",
+        "scripts.convergence.common",
+        "scripts.execution_backends",
+        "scripts.neb_agent.pilot_validation",
+        "scripts.neb_agent.utils_structure",
+        "scripts.ts_strategy_engine.dimer_gate",
+        "scripts.ts_strategy_engine.execution_evidence",
+        "scripts.ts_strategy_engine.execution_gate",
+        "scripts.ts_strategy_engine.execution_path_rules",
+        "scripts.ts_strategy_engine.learning_evidence",
+        "scripts.ts_strategy_engine.learning_store",
+        "scripts.ts_strategy_engine.strategy_learning",
+        "scripts.ts_validation.dimer_frequency_gate",
+        "scripts.ts_validation.prepare_vfa_from_ts_image",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.neb_agent.utils_report": [
+        "scripts.artifact_io"
+      ],
+      "scripts.neb_agent.utils_retrieval": [],
+      "scripts.neb_agent.utils_structure": [
+        "scripts.workflow_geometry"
+      ],
+      "scripts.neb_agent.utils_vasp": [
+        "scripts.scientific_validation"
+      ],
+      "scripts.neb_agent.__init__": [],
+      "scripts.state_manager.application_log": [
+        "scripts.artifact_io",
+        "scripts.state_manager.models",
+        "scripts.state_manager.store"
+      ],
+      "scripts.state_manager.audit": [
+        "scripts.artifact_io",
+        "scripts.state_manager.models",
+        "scripts.state_manager.projections",
+        "scripts.state_manager.store"
+      ],
+      "scripts.state_manager.baseline": [
+        "scripts.artifact_io",
+        "scripts.state_manager.models"
+      ],
+      "scripts.state_manager.checkpoints": [
+        "scripts.state_manager.models",
+        "scripts.state_manager.store"
+      ],
+      "scripts.state_manager.cli": [
+        "scripts.state_manager.audit",
+        "scripts.state_manager.baseline",
+        "scripts.state_manager.checkpoints",
+        "scripts.state_manager.imports",
+        "scripts.state_manager.lifecycle",
+        "scripts.state_manager.lifecycle_views",
+        "scripts.state_manager.models",
+        "scripts.state_manager.proposals",
+        "scripts.state_manager.reconciliation",
+        "scripts.state_manager.review_reuse",
+        "scripts.state_manager.stale_items",
+        "scripts.state_manager.state_compaction",
+        "scripts.state_manager.store"
+      ],
+      "scripts.state_manager.imports": [
+        "scripts.artifact_io",
+        "scripts.state_manager.baseline",
+        "scripts.state_manager.models",
+        "scripts.state_manager.projections",
+        "scripts.state_manager.store"
+      ],
+      "scripts.state_manager.job_lifecycle": [
+        "scripts.provenance_fields"
+      ],
+      "scripts.state_manager.lifecycle": [
+        "scripts.artifact_io",
+        "scripts.state_manager.models",
+        "scripts.state_manager.projections",
+        "scripts.state_manager.store"
+      ],
+      "scripts.state_manager.lifecycle_views": [
+        "scripts.artifact_io",
+        "scripts.state_manager.models",
+        "scripts.state_manager.projections"
+      ],
+      "scripts.state_manager.models": [
+        "scripts.artifact_io",
+        "scripts.runtime_resources"
+      ],
+      "scripts.state_manager.projections": [
+        "scripts.artifact_io",
+        "scripts.runtime_resources",
+        "scripts.state_manager.models"
+      ],
+      "scripts.state_manager.proposals": [
+        "scripts.artifact_io",
+        "scripts.state_manager.application_log",
+        "scripts.state_manager.models",
+        "scripts.state_manager.projections",
+        "scripts.state_manager.store"
+      ],
+      "scripts.state_manager.reconciliation": [
+        "scripts.artifact_io",
+        "scripts.state_manager.models",
+        "scripts.state_manager.store"
+      ],
+      "scripts.state_manager.review_reuse": [
+        "scripts.artifact_io",
+        "scripts.state_manager.models"
+      ],
+      "scripts.state_manager.stale_items": [
+        "scripts.artifact_io",
+        "scripts.document_governance",
+        "scripts.runtime_resources",
+        "scripts.state_manager.models"
+      ],
+      "scripts.state_manager.state_compaction": [
+        "scripts.artifact_io",
+        "scripts.state_manager.models"
+      ],
+      "scripts.state_manager.store": [
+        "scripts.artifact_io",
+        "scripts.provenance_fields",
+        "scripts.state_manager.models"
+      ],
+      "scripts.state_manager.__init__": [
+        "scripts.state_manager.models",
+        "scripts.state_manager.store"
+      ],
+      "scripts.state_manager.__main__": [
+        "scripts.state_manager.cli"
+      ],
+      "scripts.ts_endpoint.database": [
+        "scripts.registry_connection",
+        "scripts.runtime_resources"
+      ],
+      "scripts.ts_endpoint.evidence": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.relaxed_analysis",
+        "scripts.neb_agent.utils_structure"
+      ],
+      "scripts.ts_endpoint.generator": [
+        "scripts.ts_endpoint.validator"
+      ],
+      "scripts.ts_endpoint.purpose": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.artifact_io",
+        "scripts.runtime_resources",
+        "scripts.ts_endpoint.database",
+        "scripts.ts_endpoint.generator"
+      ],
+      "scripts.ts_endpoint.validator": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.neb_agent.utils_structure",
+        "scripts.optional_dependencies",
+        "scripts.runtime_resources",
+        "scripts.ts_endpoint.evidence"
+      ],
+      "scripts.ts_endpoint.__init__": [],
+      "scripts.ts_strategy_engine.active_learning": [
+        "scripts.ts_strategy_engine.active_learning_calibration",
+        "scripts.ts_strategy_engine.active_learning_common",
+        "scripts.ts_strategy_engine.active_learning_domain",
+        "scripts.ts_strategy_engine.active_learning_handoff",
+        "scripts.ts_strategy_engine.active_learning_label",
+        "scripts.ts_strategy_engine.active_learning_path",
+        "scripts.ts_strategy_engine.active_learning_state",
+        "scripts.ts_strategy_engine.active_learning_training"
+      ],
+      "scripts.ts_strategy_engine.active_learning_calibration": [
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.active_learning_common"
+      ],
+      "scripts.ts_strategy_engine.active_learning_cli": [
+        "scripts.runtime_resources",
+        "scripts.scheduler_evidence",
+        "scripts.ts_strategy_engine.active_learning",
+        "scripts.ts_strategy_engine.active_learning_common",
+        "scripts.ts_strategy_engine.active_learning_state"
+      ],
+      "scripts.ts_strategy_engine.active_learning_common": [
+        "scripts.aqcat25_handoff",
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io",
+        "scripts.execution_backends",
+        "scripts.ts_strategy_engine.contract",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.ts_strategy_engine.active_learning_domain": [
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_structure",
+        "scripts.ts_strategy_engine.active_learning_common"
+      ],
+      "scripts.ts_strategy_engine.active_learning_handoff": [
+        "scripts.aqcat25_calibration",
+        "scripts.aqcat25_handoff",
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io",
+        "scripts.execution_backends",
+        "scripts.ts_strategy_engine.active_learning_common"
+      ],
+      "scripts.ts_strategy_engine.active_learning_label": [
+        "scripts.aqcat25_calibration",
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io",
+        "scripts.execution_backends",
+        "scripts.neb_agent.utils_structure",
+        "scripts.scheduler_evidence",
+        "scripts.ts_strategy_engine.active_learning_common",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.ts_strategy_engine.active_learning_path": [
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.active_learning_common",
+        "scripts.ts_strategy_engine.active_learning_path_labels",
+        "scripts.ts_strategy_engine.active_learning_path_predictions",
+        "scripts.ts_strategy_engine.active_learning_path_rerun",
+        "scripts.ts_strategy_engine.active_learning_path_selection",
+        "scripts.ts_strategy_engine.contract"
+      ],
+      "scripts.ts_strategy_engine.active_learning_path_common": [
+        "scripts.aqcat25_handoff",
+        "scripts.artifact_io"
+      ],
+      "scripts.ts_strategy_engine.active_learning_path_labels": [
+        "scripts.aqcat25_calibration",
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_structure",
+        "scripts.runtime_resources",
+        "scripts.scheduler_evidence",
+        "scripts.ts_strategy_engine.active_learning_common",
+        "scripts.ts_strategy_engine.active_learning_path_common",
+        "scripts.ts_strategy_engine.ml_neb_path",
+        "scripts.vasp_inputs",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.ts_strategy_engine.active_learning_path_predictions": [
+        "scripts.aqcat25_calibration",
+        "scripts.aqcat25_handoff",
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io",
+        "scripts.execution_backends",
+        "scripts.ts_strategy_engine.active_learning_common",
+        "scripts.ts_strategy_engine.active_learning_path_common"
+      ],
+      "scripts.ts_strategy_engine.active_learning_path_rerun": [
+        "scripts.aqcat25_handoff",
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.active_learning_common",
+        "scripts.ts_strategy_engine.active_learning_path_common"
+      ],
+      "scripts.ts_strategy_engine.active_learning_path_selection": [
+        "scripts.aqcat25_calibration",
+        "scripts.aqcat25_handoff",
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.active_learning_common",
+        "scripts.ts_strategy_engine.active_learning_path_common",
+        "scripts.ts_strategy_engine.ml_neb_path"
+      ],
+      "scripts.ts_strategy_engine.active_learning_scheduler": [
+        "scripts.scheduler_evidence"
+      ],
+      "scripts.ts_strategy_engine.active_learning_state": [
+        "scripts.artifact_io",
+        "scripts.runtime_resources",
+        "scripts.ts_strategy_engine.active_learning_common",
+        "scripts.ts_strategy_engine.contract",
+        "scripts.vasp_inputs"
+      ],
+      "scripts.ts_strategy_engine.active_learning_training": [
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io",
+        "scripts.execution_backends",
+        "scripts.matris_training_data",
+        "scripts.matris_training_exclusions",
+        "scripts.neb_agent.utils_structure",
+        "scripts.ts_strategy_engine.active_learning_common"
+      ],
+      "scripts.ts_strategy_engine.cli": [
+        "scripts.optional_dependencies",
+        "scripts.runtime_resources",
+        "scripts.ts_strategy_engine.cli_commands"
+      ],
+      "scripts.ts_strategy_engine.cli_commands": [
+        "scripts.neb_agent.cli_common",
+        "scripts.ts_strategy_engine.active_learning_cli",
+        "scripts.ts_strategy_engine.contract",
+        "scripts.ts_strategy_engine.dimer_analysis",
+        "scripts.ts_strategy_engine.evidence",
+        "scripts.ts_strategy_engine.handoff",
+        "scripts.ts_strategy_engine.learning_cli",
+        "scripts.ts_strategy_engine.ml_neb_path",
+        "scripts.ts_strategy_engine.path_evidence",
+        "scripts.ts_strategy_engine.templates",
+        "scripts.ts_strategy_engine.workflow",
+        "scripts.ts_validation.analyze_vfa",
+        "scripts.ts_validation.connectivity",
+        "scripts.ts_validation.prepare_connectivity",
+        "scripts.ts_validation.prepare_vfa_from_ts_image",
+        "scripts.ts_validation.validation_pipeline"
+      ],
+      "scripts.ts_strategy_engine.connectivity_evidence": [
+        "scripts.artifact_io",
+        "scripts.execution_backends"
+      ],
+      "scripts.ts_strategy_engine.contract": [
+        "scripts.artifact_io",
+        "scripts.optional_dependencies",
+        "scripts.scientific_validation"
+      ],
+      "scripts.ts_strategy_engine.dimer_analysis": [
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_report",
+        "scripts.neb_agent.utils_structure",
+        "scripts.neb_agent.utils_vasp",
+        "scripts.scientific_validation",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.ts_strategy_engine.dimer_gate": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_structure",
+        "scripts.runtime_resources",
+        "scripts.ts_strategy_engine.dimer_gate_common",
+        "scripts.ts_strategy_engine.dimer_path_gate"
+      ],
+      "scripts.ts_strategy_engine.dimer_gate_common": [
+        "scripts.runtime_resources",
+        "scripts.scientific_validation"
+      ],
+      "scripts.ts_strategy_engine.dimer_path_gate": [
+        "scripts.artifact_io",
+        "scripts.runtime_resources",
+        "scripts.ts_strategy_engine.dimer_gate_common",
+        "scripts.ts_strategy_engine.ml_neb_path"
+      ],
+      "scripts.ts_strategy_engine.evidence": [
+        "scripts.artifact_io",
+        "scripts.registry_compatibility",
+        "scripts.ts_strategy_engine.connectivity_evidence",
+        "scripts.ts_strategy_engine.execution_gate",
+        "scripts.ts_strategy_engine.matched_static_evidence",
+        "scripts.ts_strategy_engine.registry",
+        "scripts.ts_strategy_engine.templates"
+      ],
+      "scripts.ts_strategy_engine.execution_decision": [
+        "scripts.artifact_io"
+      ],
+      "scripts.ts_strategy_engine.execution_evidence": [
+        "scripts.artifact_io",
+        "scripts.scheduler_evidence",
+        "scripts.ts_strategy_engine.execution_decision"
+      ],
+      "scripts.ts_strategy_engine.execution_gate": [
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.execution_decision",
+        "scripts.ts_strategy_engine.execution_evidence",
+        "scripts.ts_strategy_engine.execution_path_rules",
+        "scripts.ts_strategy_engine.execution_submission_rules"
+      ],
+      "scripts.ts_strategy_engine.execution_gate_cli": [
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.execution_evidence",
+        "scripts.ts_strategy_engine.execution_gate"
+      ],
+      "scripts.ts_strategy_engine.execution_path_rules": [
+        "scripts.ts_strategy_engine.dimer_gate",
+        "scripts.ts_strategy_engine.execution_decision",
+        "scripts.ts_strategy_engine.execution_evidence",
+        "scripts.ts_strategy_engine.scientific_claims"
+      ],
+      "scripts.ts_strategy_engine.execution_submission_rules": [
+        "scripts.ts_strategy_engine.execution_decision",
+        "scripts.ts_strategy_engine.execution_evidence"
+      ],
+      "scripts.ts_strategy_engine.fingerprint": [
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.contract"
+      ],
+      "scripts.ts_strategy_engine.handoff": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_report",
+        "scripts.neb_agent.utils_structure",
+        "scripts.ts_strategy_engine.contract",
+        "scripts.ts_strategy_engine.dimer_gate",
+        "scripts.ts_strategy_engine.execution_gate",
+        "scripts.ts_strategy_engine.path_evidence"
+      ],
+      "scripts.ts_strategy_engine.learning_cli": [
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.learning_evidence",
+        "scripts.ts_strategy_engine.learning_store",
+        "scripts.ts_strategy_engine.strategy_learning",
+        "scripts.ts_strategy_engine.workflow"
+      ],
+      "scripts.ts_strategy_engine.learning_evidence": [
+        "scripts.artifact_io",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.ts_strategy_engine.learning_store": [
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.registry"
+      ],
+      "scripts.ts_strategy_engine.matched_static_evidence": [
+        "scripts.execution_backends",
+        "scripts.scientific_validation",
+        "scripts.ts_strategy_engine.contract",
+        "scripts.ts_validation.barrier_values"
+      ],
+      "scripts.ts_strategy_engine.ml_neb_path": [
+        "scripts.artifact_io"
+      ],
+      "scripts.ts_strategy_engine.path_evidence": [
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.fingerprint"
+      ],
+      "scripts.ts_strategy_engine.registry": [
+        "scripts.registry_compatibility",
+        "scripts.registry_connection",
+        "scripts.registry_schema",
+        "scripts.ts_validation.barrier_values"
+      ],
+      "scripts.ts_strategy_engine.scientific_claims": [
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.execution_decision",
+        "scripts.ts_strategy_engine.execution_evidence",
+        "scripts.ts_validation.analyze_vfa",
+        "scripts.ts_validation.validation_pipeline"
+      ],
+      "scripts.ts_strategy_engine.strategy": [
+        "scripts.scientific_validation",
+        "scripts.ts_strategy_engine.execution_gate",
+        "scripts.ts_strategy_engine.fingerprint",
+        "scripts.ts_strategy_engine.strategy_learning"
+      ],
+      "scripts.ts_strategy_engine.strategy_learning": [
+        "scripts.artifact_io",
+        "scripts.runtime_resources",
+        "scripts.ts_strategy_engine.learning_evidence",
+        "scripts.ts_strategy_engine.learning_store",
+        "scripts.ts_strategy_engine.registry",
+        "scripts.ts_strategy_engine.templates",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.ts_strategy_engine.templates": [
+        "scripts.ts_strategy_engine.matched_static_evidence",
+        "scripts.ts_strategy_engine.registry"
+      ],
+      "scripts.ts_strategy_engine.workflow": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.analyze_neb_outputs",
+        "scripts.neb_agent.check_endpoints",
+        "scripts.neb_agent.diagnose_path_geometry",
+        "scripts.neb_agent.generate_path",
+        "scripts.neb_agent.path_quality_service",
+        "scripts.neb_agent.submission",
+        "scripts.neb_agent.utils_structure",
+        "scripts.runtime_resources",
+        "scripts.ts_strategy_engine.contract",
+        "scripts.ts_strategy_engine.evidence",
+        "scripts.ts_strategy_engine.fingerprint",
+        "scripts.ts_strategy_engine.learning_evidence",
+        "scripts.ts_strategy_engine.learning_store",
+        "scripts.ts_strategy_engine.path_evidence",
+        "scripts.ts_strategy_engine.strategy",
+        "scripts.ts_strategy_engine.strategy_learning",
+        "scripts.ts_strategy_engine.templates",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.ts_strategy_engine.__init__": [],
+      "scripts.ts_validation.analyze_vfa": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.analyze_neb_outputs",
+        "scripts.neb_agent.diagnose_path_geometry",
+        "scripts.neb_agent.utils_report",
+        "scripts.neb_agent.utils_structure",
+        "scripts.neb_agent.utils_vasp",
+        "scripts.runtime_resources",
+        "scripts.scientific_validation",
+        "scripts.ts_strategy_engine.contract",
+        "scripts.ts_strategy_engine.dimer_analysis",
+        "scripts.ts_strategy_engine.path_evidence",
+        "scripts.ts_validation.connectivity",
+        "scripts.ts_validation.dimer_frequency_gate"
+      ],
+      "scripts.ts_validation.barrier_values": [
+        "scripts.scientific_validation"
+      ],
+      "scripts.ts_validation.connectivity": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.relaxed_analysis",
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_structure",
+        "scripts.runtime_resources",
+        "scripts.ts_strategy_engine.contract",
+        "scripts.ts_strategy_engine.path_evidence",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.ts_validation.dimer_frequency_gate": [
+        "scripts.artifact_io"
+      ],
+      "scripts.ts_validation.prepare_connectivity": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_structure"
+      ],
+      "scripts.ts_validation.prepare_vfa_from_ts_image": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.cli_common",
+        "scripts.neb_agent.utils_report",
+        "scripts.neb_agent.utils_structure",
+        "scripts.ts_strategy_engine.contract",
+        "scripts.ts_strategy_engine.handoff",
+        "scripts.ts_validation.analyze_vfa",
+        "scripts.ts_validation.dimer_frequency_gate"
+      ],
+      "scripts.ts_validation.validation_pipeline": [
+        "scripts.artifact_io",
+        "scripts.runtime_resources",
+        "scripts.ts_validation.analyze_vfa"
+      ],
+      "scripts.ts_validation.__init__": []
+    },
+    "capability_definitions": {
+      "require_incar": [
+        "modules/fe_convergence_baseline/validate_baseline.py:69"
+      ],
+      "validate_arguments": [
+        "modules/state_handoff/archive/2026-08-07/repository-items-d365620c27afc7c752614a67/VASP2Kinetics/src/cli_arguments.py:8"
+      ],
+      "parse_oszicar": [
+        "modules/state_handoff/archive/2026-08-07/repository-items-d365620c27afc7c752614a67/VASP2Kinetics/src/vasp/oszicar_parser.py:37",
+        "scripts/adsorption/analyze_fe110_ch_h_relaxation.py:29",
+        "scripts/neb_agent/utils_vasp.py:47"
+      ],
+      "parse_outcar": [
+        "modules/state_handoff/archive/2026-08-07/repository-items-d365620c27afc7c752614a67/VASP2Kinetics/src/vasp/outcar_parser.py:42",
+        "scripts/adsorption/analyze_fe110_ch_h_relaxation.py:66",
+        "scripts/adsorption/finalize_step12a_gas_references.py:95",
+        "scripts/neb_agent/utils_vasp.py:135"
+      ],
+      "_write_complete_outcar": [
+        "modules/state_handoff/archive/2026-08-07/repository-items-d365620c27afc7c752614a67/VASP2Kinetics/tests/test_vasp_parser.py:20"
+      ],
+      "test_normal_outcar_uses_last_toten": [
+        "modules/state_handoff/archive/2026-08-07/repository-items-d365620c27afc7c752614a67/VASP2Kinetics/tests/test_vasp_parser.py:41"
+      ],
+      "test_missing_outcar_is_explicit": [
+        "modules/state_handoff/archive/2026-08-07/repository-items-d365620c27afc7c752614a67/VASP2Kinetics/tests/test_vasp_parser.py:65"
+      ],
+      "test_empty_outcar_is_rejected": [
+        "modules/state_handoff/archive/2026-08-07/repository-items-d365620c27afc7c752614a67/VASP2Kinetics/tests/test_vasp_parser.py:73"
+      ],
+      "test_normal_oszicar": [
+        "modules/state_handoff/archive/2026-08-07/repository-items-d365620c27afc7c752614a67/VASP2Kinetics/tests/test_vasp_parser.py:87"
+      ],
+      "assess_evidence": [
+        "scripts/adsmind_lite/evidence_lifecycle.py:117"
+      ],
+      "render_incar": [
+        "scripts/adsorption/gas_vasp_common.py:58"
+      ],
+      "parse_final_outcar": [
+        "scripts/aqcat25_calibration.py:25"
+      ],
+      "_canonical_incar": [
+        "scripts/collect_dual_model_ts_vasp_labels.py:26"
+      ],
+      "_validate_incar": [
+        "scripts/collect_dual_model_ts_vasp_labels.py:72"
+      ],
+      "write_incar": [
+        "scripts/convergence/setup_alpha_fe_bulk_smearing.py:39"
+      ],
+      "submit": [
+        "scripts/convergence/setup_alpha_fe_bulk_smearing.py:124",
+        "scripts/neb_agent/submission.py:375"
+      ],
+      "incar_relax": [
+        "scripts/convergence/setup_true_fe110_thickness_retest.py:24"
+      ],
+      "incar_static": [
+        "scripts/convergence/setup_true_fe110_thickness_retest.py:49"
+      ],
+      "_validate_limits": [
+        "scripts/matris_sella_local_peak.py:61"
+      ],
+      "_outcar_has_normal_footer": [
+        "scripts/mlip_same_structure_benchmark.py:88"
+      ],
+      "_incar_integer": [
+        "scripts/neb_agent/analyze_neb_outputs.py:30"
+      ],
+      "_incar_float": [
+        "scripts/neb_agent/analyze_neb_outputs.py:35"
+      ],
+      "_incar_logical": [
+        "scripts/neb_agent/analyze_neb_outputs.py:40"
+      ],
+      "_incar_images": [
+        "scripts/neb_agent/diagnose_path_geometry.py:59"
+      ],
+      "_incar_nelm": [
+        "scripts/neb_agent/path_quality_cli.py:67"
+      ],
+      "_advance_outcar_cycle": [
+        "scripts/neb_agent/utils_vasp.py:99"
+      ],
+      "_validate_ts_system_compatibility": [
+        "scripts/prepare_matris_replay_finetune_package.py:167"
+      ],
+      "open_registry": [
+        "scripts/registry_connection.py:32"
+      ],
+      "resource_path": [
+        "scripts/runtime_resources.py:22"
+      ],
+      "_validate_done_when_results": [
+        "scripts/state_manager/models.py:403"
+      ],
+      "_validate_validation_results": [
+        "scripts/state_manager/models.py:414"
+      ],
+      "_validate_artifact_results": [
+        "scripts/state_manager/models.py:430"
+      ],
+      "validate_ts_evidence_files": [
+        "scripts/ts_strategy_engine/connectivity_evidence.py:122"
+      ],
+      "_positive_incar_float": [
+        "scripts/ts_strategy_engine/dimer_analysis.py:24"
+      ],
+      "analyze_dimer": [
+        "scripts/ts_strategy_engine/dimer_analysis.py:121"
+      ],
+      "_validate_ts_payload": [
+        "scripts/ts_strategy_engine/evidence.py:225"
+      ],
+      "validated_ts": [
+        "scripts/ts_strategy_engine/execution_evidence.py:211"
+      ],
+      "decide_execution": [
+        "scripts/ts_strategy_engine/execution_gate.py:29"
+      ],
+      "require_action": [
+        "scripts/ts_strategy_engine/execution_gate.py:82"
+      ],
+      "validate_costs": [
+        "scripts/ts_strategy_engine/learning_evidence.py:96"
+      ],
+      "barrier_values": [
+        "scripts/ts_strategy_engine/matched_static_evidence.py:145"
+      ],
+      "scientific_claim_decision": [
+        "scripts/ts_strategy_engine/scientific_claims.py:38"
+      ],
+      "_validate_endpoints": [
+        "scripts/ts_strategy_engine/workflow.py:103"
+      ],
+      "_incar_has_climb": [
+        "scripts/ts_strategy_engine/workflow.py:320"
+      ],
+      "analyze_vfa": [
+        "scripts/ts_validation/analyze_vfa.py:269"
+      ],
+      "validate_barrier_values": [
+        "scripts/ts_validation/barrier_values.py:12"
+      ],
+      "_format_incar": [
+        "scripts/vasp_inputs.py:30"
+      ],
+      "read_incar_values": [
+        "scripts/vasp_result_gate.py:11"
+      ],
+      "incar_value": [
+        "scripts/vasp_result_gate.py:47"
+      ],
+      "final_scf_status": [
+        "scripts/vasp_result_gate.py:55"
+      ],
+      "final_scf_state": [
+        "scripts/vasp_result_gate.py:73"
+      ],
+      "raw_incar_value": [
+        "skills/fe-vasp-incar-custodian/scripts/incar_custodian.py:46"
+      ],
+      "write_incar_candidate": [
+        "skills/fe-vasp-incar-custodian/scripts/incar_custodian.py:59"
+      ],
+      "validate_incar": [
+        "skills/fe-vasp-incar-custodian/scripts/incar_custodian.py:249"
+      ],
+      "maybe_write_incar_candidate": [
+        "skills/fe-vasp-incar-custodian/scripts/incar_custodian.py:441"
+      ]
+    },
+    "zero_internal_incoming": [
+      "scripts.aqcat25_ml_path_committee",
+      "scripts.aqcat25_ts_active_learning",
+      "scripts.aqcat25_ts_checkpoint_validation",
+      "scripts.aqcat25_ts_force_prediction",
+      "scripts.aqcat25_ts_training_data",
+      "scripts.assess_dual_model_ts_heldout_errors",
+      "scripts.bind_reviewed_dimer_execution",
+      "scripts.collect_dual_model_ts_vasp_labels",
+      "scripts.generate_capability_readiness",
+      "scripts.init_registry",
+      "scripts.matris_frozen_heldout_validate",
+      "scripts.matris_sella_smoke",
+      "scripts.matris_ts_path_committee",
+      "scripts.offline_mlip_fusion_feasibility",
+      "scripts.prepare_aqcat25_ml_neb_handoff",
+      "scripts.prepare_dual_model_ts_heldout_candidates",
+      "scripts.prepare_dual_model_ts_heldout_execution",
+      "scripts.prepare_matris_remote_finetune_bundle",
+      "scripts.prepare_matris_replay_finetune_package",
+      "scripts.prepare_ml_candidate_active_learning",
+      "scripts.prepare_ml_candidate_rerun",
+      "scripts.prepare_reviewed_neb_peak_dimer",
+      "scripts.prepare_ts_heldout_aqcat_prediction_batch",
+      "scripts.prepare_ts_heldout_validation_candidates",
+      "scripts.prepare_ts_heldout_vasp_label_batch",
+      "scripts.registry_excel_promotion",
+      "scripts.registry_write",
+      "scripts.release_build",
+      "scripts.review_completed_neb_parent",
+      "scripts.select_dual_model_ts_vasp_labels",
+      "scripts.validate_release",
+      "scripts.adsmind_lite.analyze_relaxed_adsorption",
+      "scripts.adsmind_lite.core",
+      "scripts.adsmind_lite.deduplicate_adsorption_states",
+      "scripts.adsmind_lite.detect_surface_sites",
+      "scripts.adsmind_lite.export_vasp_ready",
+      "scripts.adsmind_lite.generate_adsorption_candidates",
+      "scripts.adsmind_lite.plan_adsorption_candidates",
+      "scripts.adsmind_lite.validate_candidates",
+      "scripts.adsmind_lite.__init__",
+      "scripts.adsorption.analyze_fe110_ch_h_relaxation",
+      "scripts.adsorption.backfill_step12a_registry",
+      "scripts.adsorption.build_fe110_c2_coads",
+      "scripts.adsorption.build_fe110_care_isomers",
+      "scripts.adsorption.build_fe110_ch_h_coads",
+      "scripts.adsorption.build_gas_cho_chxo",
+      "scripts.adsorption.build_gas_h2_chx",
+      "scripts.adsorption.build_gas_oxygenated_isomers",
+      "scripts.adsorption.finalize_step12a_gas_references",
+      "scripts.adsorption.preflight_fe110_adsorption",
+      "scripts.adsorption.preflight_gas_references",
+      "scripts.adsorption.register_step12a_gas_reference_submission",
+      "scripts.adsorption.register_step12a_oh_restart",
+      "scripts.adsorption.render_fe110_ch_h_candidates",
+      "scripts.adsorption.__init__",
+      "scripts.catalysis_retrieval.cli",
+      "scripts.catalysis_retrieval.validate_cli",
+      "scripts.catalysis_retrieval.__init__",
+      "scripts.convergence.setup_alpha_fe_bulk_smearing",
+      "scripts.convergence.setup_true_fe110_thickness_retest",
+      "scripts.neb_agent.crop_neb_path",
+      "scripts.neb_agent.path_quality_cli",
+      "scripts.neb_agent.prepare_restart",
+      "scripts.neb_agent.remote_monitor",
+      "scripts.neb_agent.retrieval_prior_adapter",
+      "scripts.neb_agent.split_by_intermediate",
+      "scripts.neb_agent.__init__",
+      "scripts.state_manager.__init__",
+      "scripts.state_manager.__main__",
+      "scripts.ts_endpoint.purpose",
+      "scripts.ts_endpoint.__init__",
+      "scripts.ts_strategy_engine.active_learning_scheduler",
+      "scripts.ts_strategy_engine.cli",
+      "scripts.ts_strategy_engine.execution_gate_cli",
+      "scripts.ts_strategy_engine.__init__",
+      "scripts.ts_validation.__init__"
+    ]
+  },
+  "duplication_classification": [
+    {
+      "category": "GENUINE_DUPLICATION",
+      "subject": "Legacy convergence submit executor",
+      "finding": "AC-RERUN-B1-001"
+    },
+    {
+      "category": "GENUINE_DUPLICATION",
+      "subject": "Custodian raw INCAR tag parser",
+      "finding": "AC-RERUN-B2-001"
+    },
+    {
+      "category": "GENUINE_DUPLICATION",
+      "subject": "Calibration completion interpretation",
+      "finding": "AC-RERUN-B2-002"
+    },
+    {
+      "category": "LEGITIMATE_REVALIDATION",
+      "subject": "Gate creation/use and persistence repeat source/identity/file/job checks at distinct trust boundaries; this is not duplicated acceptance science."
+    },
+    {
+      "category": "LEGITIMATE_REVALIDATION",
+      "subject": "GPU bootstrap guard is mirrored so missing shared environment code still leaves failure evidence; a mirrored-guard regression checks consistency."
+    },
+    {
+      "category": "COMPATIBILITY_FACADE",
+      "subject": "ts_strategy_engine.registry, registry_write, retrieval skill facades and preparation geometry/scope aliases delegate to one owner."
+    },
+    {
+      "category": "UNREFERENCED_REVIEW_REQUIRED",
+      "subject": "Six new modules initially have zero static incoming edges: package __init__, retrieval CLI/validation CLI, readiness CLI, release build hook and release runner. All are resolved by package/console/pyproject/CI registrations; no newly dead module confirmed."
+    }
+  ],
+  "governance": {
+    "deterministic": true,
+    "checked_in_equal": true,
+    "hashes": {
+      "capability_readiness.json": "ba8cc64c9978e2acb8b1dd4cf8fdf3cbf2b342915d10f76b2de5f82eeeb03e5c",
+      "capability_readiness.md": "9c526207cf1559f66087772e4c735222c6a118e567db52d91efe77e056e9bb4e"
+    },
+    "links": {
+      "README.md": [],
+      "docs/DOCUMENT_GOVERNANCE.md": [],
+      "docs/02_CURRENT_STATE.md": [],
+      "docs/06_MODULE_MAP.md": [],
+      "docs/PUBLIC_RELEASE.md": [],
+      "reports/capability_readiness.md": [],
+      "docs/history/current_state_chronology_before_B6_20260909.md": []
+    },
+    "wording_findings": {
+      "README.md": [],
+      "docs/DOCUMENT_GOVERNANCE.md": [],
+      "docs/02_CURRENT_STATE.md": [],
+      "docs/06_MODULE_MAP.md": [],
+      "docs/PUBLIC_RELEASE.md": [],
+      "reports/capability_readiness.md": [],
+      "docs/history/current_state_chronology_before_B6_20260909.md": []
+    },
+    "supported_code_schema": 9,
+    "production_schema_version": "NOT_VERIFIED_IN_B6",
+    "modules": [
+      {
+        "module": "state_handoff",
+        "module_status": "Active",
+        "implementation": "partial",
+        "tests": [
+          "unit",
+          "integration"
+        ],
+        "scientific_validation": "not_applicable",
+        "production_readiness": "unverified",
+        "evidence": [
+          "scripts/state_manager/store.py",
+          "tests/test_state_manager.py",
+          "reports/refactor_audit/B5_completion_report.md"
+        ],
+        "scope": "tested implemented subset; no scientific acceptance or production verification inferred"
+      },
+      {
+        "module": "catalysis_data_retrieval",
+        "module_status": "Active",
+        "implementation": "partial",
+        "tests": [
+          "unit",
+          "integration"
+        ],
+        "scientific_validation": "not_applicable",
+        "production_readiness": "unverified",
+        "evidence": [
+          "scripts/catalysis_retrieval/ranking.py",
+          "tests/test_catalysis_retrieval.py",
+          "reports/refactor_audit/B5_completion_report.md"
+        ],
+        "scope": "tested implemented subset; no scientific acceptance or production verification inferred"
+      },
+      {
+        "module": "convergence_workflow",
+        "module_status": "Active",
+        "implementation": "unknown",
+        "tests": [
+          "unknown"
+        ],
+        "scientific_validation": "unknown",
+        "production_readiness": "unverified",
+        "evidence": [],
+        "scope": "No explicit maturity evidence; do not infer from status or file existence."
+      },
+      {
+        "module": "adsorption_workflow",
+        "module_status": "Active",
+        "implementation": "unknown",
+        "tests": [
+          "unknown"
+        ],
+        "scientific_validation": "unknown",
+        "production_readiness": "unverified",
+        "evidence": [],
+        "scope": "No explicit maturity evidence; do not infer from status or file existence."
+      },
+      {
+        "module": "adsmind_lite",
+        "module_status": "Active",
+        "implementation": "partial",
+        "tests": [
+          "unit",
+          "integration"
+        ],
+        "scientific_validation": "unknown",
+        "production_readiness": "unverified",
+        "evidence": [
+          "scripts/adsmind_lite/candidate_generation.py",
+          "tests/test_adsmind_lite.py",
+          "reports/refactor_audit/B5_completion_report.md"
+        ],
+        "scope": "tested implemented subset; no scientific acceptance or production verification inferred"
+      },
+      {
+        "module": "fe_convergence_baseline",
+        "module_status": "Active",
+        "implementation": "unknown",
+        "tests": [
+          "unknown"
+        ],
+        "scientific_validation": "unknown",
+        "production_readiness": "unverified",
+        "evidence": [],
+        "scope": "No explicit maturity evidence; do not infer from status or file existence."
+      },
+      {
+        "module": "transition_state_search",
+        "module_status": "Active",
+        "implementation": "partial",
+        "tests": [
+          "unit",
+          "integration"
+        ],
+        "scientific_validation": "unknown",
+        "production_readiness": "unverified",
+        "evidence": [
+          "scripts/ts_strategy_engine/workflow.py",
+          "tests/test_ts_strategy_engine.py",
+          "reports/refactor_audit/B5_completion_report.md"
+        ],
+        "scope": "tested implemented subset; no scientific acceptance or production verification inferred"
+      },
+      {
+        "module": "ts_vibrational_validation",
+        "module_status": "Active",
+        "implementation": "unknown",
+        "tests": [
+          "unknown"
+        ],
+        "scientific_validation": "unknown",
+        "production_readiness": "unverified",
+        "evidence": [],
+        "scope": "No explicit maturity evidence; do not infer from status or file existence."
+      },
+      {
+        "module": "memory_migration",
+        "module_status": "Completed",
+        "implementation": "unknown",
+        "tests": [
+          "unknown"
+        ],
+        "scientific_validation": "unknown",
+        "production_readiness": "unverified",
+        "evidence": [],
+        "scope": "No explicit maturity evidence; do not infer from status or file existence."
+      },
+      {
+        "module": "git_versioning",
+        "module_status": "Active",
+        "implementation": "unknown",
+        "tests": [
+          "unknown"
+        ],
+        "scientific_validation": "unknown",
+        "production_readiness": "unverified",
+        "evidence": [],
+        "scope": "No explicit maturity evidence; do not infer from status or file existence."
+      },
+      {
+        "module": "calculation_registry",
+        "module_status": "Active",
+        "implementation": "partial",
+        "tests": [
+          "unit",
+          "integration"
+        ],
+        "scientific_validation": "not_applicable",
+        "production_readiness": "unverified",
+        "evidence": [
+          "scripts/registry_mutations.py",
+          "tests/test_b4_registry_governance.py",
+          "reports/refactor_audit/B5_completion_report.md"
+        ],
+        "scope": "tested implemented subset; no scientific acceptance or production verification inferred"
+      },
+      {
+        "module": "incar_custodian",
+        "module_status": "Active",
+        "implementation": "unknown",
+        "tests": [
+          "unknown"
+        ],
+        "scientific_validation": "unknown",
+        "production_readiness": "unverified",
+        "evidence": [],
+        "scope": "No explicit maturity evidence; do not infer from status or file existence."
+      },
+      {
+        "module": "kinetic_data",
+        "module_status": "Planned",
+        "implementation": "unknown",
+        "tests": [
+          "unknown"
+        ],
+        "scientific_validation": "unknown",
+        "production_readiness": "unverified",
+        "evidence": [],
+        "scope": "No explicit maturity evidence; do not infer from status or file existence."
+      },
+      {
+        "module": "thermochemistry",
+        "module_status": "Blocked",
+        "implementation": "unknown",
+        "tests": [
+          "unknown"
+        ],
+        "scientific_validation": "unknown",
+        "production_readiness": "blocked",
+        "evidence": [],
+        "scope": "No explicit maturity evidence; do not infer from status or file existence."
+      },
+      {
+        "module": "reaction_network",
+        "module_status": "Blocked",
+        "implementation": "unknown",
+        "tests": [
+          "unknown"
+        ],
+        "scientific_validation": "unknown",
+        "production_readiness": "blocked",
+        "evidence": [],
+        "scope": "No explicit maturity evidence; do not infer from status or file existence."
+      },
+      {
+        "module": "baseline_mkm",
+        "module_status": "Blocked",
+        "implementation": "unknown",
+        "tests": [
+          "unknown"
+        ],
+        "scientific_validation": "unknown",
+        "production_readiness": "blocked",
+        "evidence": [],
+        "scope": "No explicit maturity evidence; do not infer from status or file existence."
+      },
+      {
+        "module": "coverage_mkm",
+        "module_status": "Blocked",
+        "implementation": "unknown",
+        "tests": [
+          "unknown"
+        ],
+        "scientific_validation": "unknown",
+        "production_readiness": "blocked",
+        "evidence": [],
+        "scope": "No explicit maturity evidence; do not infer from status or file existence."
+      },
+      {
+        "module": "surface_kmc",
+        "module_status": "Blocked",
+        "implementation": "unknown",
+        "tests": [
+          "unknown"
+        ],
+        "scientific_validation": "unknown",
+        "production_readiness": "blocked",
+        "evidence": [],
+        "scope": "No explicit maturity evidence; do not infer from status or file existence."
+      },
+      {
+        "module": "reactor_simulation",
+        "module_status": "Blocked",
+        "implementation": "unknown",
+        "tests": [
+          "unknown"
+        ],
+        "scientific_validation": "unknown",
+        "production_readiness": "blocked",
+        "evidence": [],
+        "scope": "No explicit maturity evidence; do not infer from status or file existence."
+      },
+      {
+        "module": "sensitivity_uncertainty",
+        "module_status": "Blocked",
+        "implementation": "unknown",
+        "tests": [
+          "unknown"
+        ],
+        "scientific_validation": "unknown",
+        "production_readiness": "blocked",
+        "evidence": [],
+        "scope": "No explicit maturity evidence; do not infer from status or file existence."
+      }
+    ],
+    "prediction_classifications": {
+      "outputs/predictions/data.json": "PREDICTION",
+      "calculations/run/gpu_result_manifest.json": "PREDICTION",
+      "data/candidates/structure.vasp": "PREDICTION"
+    }
+  },
+  "all_markdown": {
+    "markdown_files_checked": 211,
+    "documents_with_findings": [],
+    "classification_not_supported": [
+      {
+        "path": "skills/catalysis-data-retrieval/SKILL.md",
+        "reason": "invalid document classification: C:\\Users\\86177\\AppData\\Local\\Temp\\sbq123-acceptance-rerun\\skills\\catalysis-data-retrieval\\SKILL.md"
+      },
+      {
+        "path": "skills/chemical-plausibility-gate/SKILL.md",
+        "reason": "invalid document classification: C:\\Users\\86177\\AppData\\Local\\Temp\\sbq123-acceptance-rerun\\skills\\chemical-plausibility-gate\\SKILL.md"
+      },
+      {
+        "path": "skills/dataset-compatibility-gate/SKILL.md",
+        "reason": "invalid document classification: C:\\Users\\86177\\AppData\\Local\\Temp\\sbq123-acceptance-rerun\\skills\\dataset-compatibility-gate\\SKILL.md"
+      },
+      {
+        "path": "skills/fe-vasp-incar-custodian/SKILL.md",
+        "reason": "invalid document classification: C:\\Users\\86177\\AppData\\Local\\Temp\\sbq123-acceptance-rerun\\skills\\fe-vasp-incar-custodian\\SKILL.md"
+      },
+      {
+        "path": "skills/fe110-adsorbate-pilot-builder/SKILL.md",
+        "reason": "invalid document classification: C:\\Users\\86177\\AppData\\Local\\Temp\\sbq123-acceptance-rerun\\skills\\fe110-adsorbate-pilot-builder\\SKILL.md"
+      },
+      {
+        "path": "skills/neb-path-builder/SKILL.md",
+        "reason": "invalid document classification: C:\\Users\\86177\\AppData\\Local\\Temp\\sbq123-acceptance-rerun\\skills\\neb-path-builder\\SKILL.md"
+      },
+      {
+        "path": "skills/surface-adsorption-builder/SKILL.md",
+        "reason": "invalid document classification: C:\\Users\\86177\\AppData\\Local\\Temp\\sbq123-acceptance-rerun\\skills\\surface-adsorption-builder\\SKILL.md"
+      },
+      {
+        "path": "skills/vasp-catalysis-workflow/SKILL.md",
+        "reason": "invalid document classification: C:\\Users\\86177\\AppData\\Local\\Temp\\sbq123-acceptance-rerun\\skills\\vasp-catalysis-workflow\\SKILL.md"
+      }
+    ]
+  },
+  "release_command": {
+    "command": [
+      "python",
+      "-m",
+      "scripts.validate_release",
+      "--source",
+      "C:\\Users\\86177\\AppData\\Local\\Temp\\sbq123-acceptance-rerun",
+      "--output",
+      "C:\\Users\\86177\\AppData\\Local\\Temp\\b1b7-rerun-evidence\\fresh-release"
+    ],
+    "exit_code": 0,
+    "duration_seconds": 69.25
+  },
+  "release": {
+    "builder": {
+      "dependencies": {
+        "PyYAML": "6.0.3",
+        "ase": "3.29.0",
+        "build": "NOT_INSTALLED",
+        "jsonschema": "4.25.0",
+        "matplotlib": "3.10.6",
+        "numpy": "2.3.5",
+        "pymatgen": "2026.5.4",
+        "sella": "2.6.0",
+        "sentence-transformers": "5.6.0",
+        "setuptools": "80.9.0",
+        "wheel": "0.45.1"
+      },
+      "os": "Windows-11-10.0.26200-SP0",
+      "python": "3.13.9"
+    },
+    "clean_checkout": true,
+    "environments": {
+      "editable": {
+        "console_scripts": {
+          "capability-readiness": {
+            "exit_code": 0,
+            "help_sha256": "21b8acb457191a879cd8bf5f2b95d591614b048843671d76416b0b78e26f2df0"
+          },
+          "catalysis-search": {
+            "exit_code": 0,
+            "help_sha256": "2cf49e7a3ec5d5ff5b251bed583e1ee0a24d2c0b174cc51a8655243ca2caaa73"
+          },
+          "catalysis-validate": {
+            "exit_code": 0,
+            "help_sha256": "1c0291a2ede25a2ca2296b6f4d6f158129e6b901e64b8ab645ce7f34e1e48e36"
+          },
+          "document-governance": {
+            "exit_code": 0,
+            "help_sha256": "dfc90937aecd1d96b9c26b80226cce3a7461f4af3481386053dfa8a2dbd3aa24"
+          },
+          "registry-init": {
+            "exit_code": 0,
+            "help_sha256": "44d30b240b3f5872e71de24c88d7731577b3a1d66de4e8d96885810dd02862c3"
+          },
+          "registry-promote": {
+            "exit_code": 0,
+            "help_sha256": "f8c35d017b89b2d40b2e76d30725919b5be69a775b652deb2330db444b24e158"
+          },
+          "registry-write": {
+            "exit_code": 0,
+            "help_sha256": "3dc1bb94ba31d37acb0bc83271288b171fa6b804d6676805c741db79dd022dd3"
+          },
+          "repo-state": {
+            "exit_code": 0,
+            "help_sha256": "7758cc42f9ab64225f38f270cf9f05f0eea1974b84fc04b68b7174f871bdf310"
+          },
+          "ts-strategy": {
+            "exit_code": 0,
+            "help_sha256": "a8f1f3d9e1b6ce2a436b63508f0e266486ec92046d8b445075e0544c7bc34d05"
+          }
+        },
+        "dependencies": {
+          "PyYAML": "6.0.3",
+          "ase": "NOT_INSTALLED",
+          "build": "NOT_INSTALLED",
+          "jsonschema": "4.26.0",
+          "matplotlib": "NOT_INSTALLED",
+          "numpy": "2.5.3",
+          "pymatgen": "NOT_INSTALLED",
+          "sella": "NOT_INSTALLED",
+          "sentence-transformers": "NOT_INSTALLED",
+          "setuptools": "NOT_INSTALLED",
+          "wheel": "NOT_INSTALLED"
+        },
+        "evidence_kind": "SOFTWARE_ENVIRONMENT",
+        "installation": "editable",
+        "os": "Windows-11-10.0.26200-SP0",
+        "package_version": "0.1.0",
+        "python": "3.13.9",
+        "requires_python": ">=3.11",
+        "resources": {
+          "configs/adsmind_lite/adsorbate_rules.yaml": "5fabd2942be9d450587002e298f18ea611e7e76546ae25bb8ae1fd2d5fe47f52",
+          "configs/adsmind_lite/analysis_rules.yaml": "2c57676904ad43d74e11802cb369c0d59ba14939c3c436598a449eae6b1f1bfd",
+          "configs/adsmind_lite/backend.yaml": "7facae362a006044d88f7e8d0364a1c6dae1c181451855637894955a8225261d",
+          "configs/adsmind_lite/evidence_gate.yaml": "499d5dab64f6453afcc3098763b827dc3fea23c7f919981d757fb7b7bff2d714",
+          "configs/adsmind_lite/iron_fts_prescreen.yaml": "fd8723d69d0f1f2e78c2e33b3b5ced0c35bff6976f6ca958221fe2bfb82a2592",
+          "configs/adsmind_lite/prescreen_rules.yaml": "fdc1ced8ad0522c4240f237e13d0916717bc9c2e9c334bc6b3c5b121924c30a1",
+          "configs/adsmind_lite/site_rules.yaml": "e4c06d98ea336d238157933c24a6679537794cabe04b75b5c1334e7523359e92",
+          "configs/adsmind_lite/surfaces.yaml": "8e14b5acb4d6ceca2c1eed9e79474a30c9cc5846d9511dfd9ad2e30d2b121251",
+          "configs/adsorption_result_promotion.yaml": "26727aca4b339c3e673f8799a6132005a0688816c671ccf41bb1b44c43d1ac54",
+          "configs/aqcat25_domain_gate.yaml": "a5d6d1802d368ecb5a4b6f65b537770363aeeb57e3d2c7b207c824ab170bfaa1",
+          "configs/aqcat25_handoff.schema.json": "0ec6012a2193b99152d485bff083354e74a30759bf21e65561b14f75eb1c9f0a",
+          "configs/aqcat25_ts_active_learning.schema.json": "1210996e2a2d481f608b4c9e88baeb8a5b6f015a56ddf947c7e6be7eaec0b6ed",
+          "configs/aqcat25_ts_active_learning.yaml": "efc0ec187e38407d5aaf4b496799ff870cfe3d1eff06fa0f61a169815e8bc435",
+          "configs/aqcat25_ts_domain_gate.yaml": "3398f68e23c6402af80b591bf3e4246905fa97b0dfd5b3136491a3e136b246bb",
+          "configs/data_governance.yaml": "8f81d7c15891b2f77fdc926a2f41edef13399414f423d34e3049551a02fdef9a",
+          "configs/dimer_gate.yaml": "b2269cbc313b5009ef45c444f8d32b78160ad18377adcb0ffb5337e4990b3717",
+          "configs/dual_model_ts_active_learning.yaml": "3509a5ff01a9042acd1ff1a3b02863eea10b28da28d32384c562c94d367e6f2c",
+          "configs/execution_backends.yaml": "31d9b7b3a39f0240e0d63370f1e34cb8da50a46047db009a44652bcbfc72337d",
+          "configs/fe110_adsorbates_h2_chx_pilot.yaml": "37ba9a5eeb89e998c42c37176d7aaf462b9af3ef2f182dd3e6c6cdb78ab7850b",
+          "configs/fe110_adsorbates_oxygenated_main_pilot.yaml": "20ed15cb556057f5b1d448c5516b68872f47f03a9a89d4fdf76c3e25c9b40171",
+          "configs/fe110_adsorbates_step12a.yaml": "a8acca52d4c888d2de42ee3c07368e9ba33fd779e1799be7f2f1855e44108779",
+          "configs/incar_custodian/project_profiles.yaml": "3fecfc0dcad21bdda078f83a3d6e910073a6fea0b82b5df9f8b54b91e0c33723",
+          "configs/neb_agent/default_thresholds.yaml": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c",
+          "configs/neb_agent/path_constraints_schema.json": "fbd4315d251bcb7430920a9ffe9c433c46cff551772036856e9a9cab9fdd2444",
+          "configs/neb_agent/retrieval_prior_schema.json": "1502d4fc2330c934d3bce028a4aefc808c76fe80e844376959ce8a38532abbbe",
+          "configs/neb_path_quality_control_v2.yaml": "db2c5d32e3b5f732f7b733df8fbcb62360177a0164de0cb7e1a51848475f0b92",
+          "configs/offline_mlip_fusion_feasibility.yaml": "71debc281f91fe8909ccb8f07dd8b4cf3d7a5f89e6a1bb2610f66cfdddc1ac02",
+          "configs/postprocessing_software.yaml": "0fd4d28bc78fd16106ad1cee844a9e8c46c24b2471ad78902b28ca5b16393b85",
+          "configs/registry_legacy_writers.yaml": "25ca262a3defa9b5c0a43776a025ddc7e8a31faca2b3d122d7cdd939a131ef77",
+          "configs/release_resources.json": "6f182f6fb1ec6f281025bd3746e080ff41b8682eb040c88a7fb24ed859268c0b",
+          "configs/skill_routing.yaml": "8123e15eb396dcf06d08ba1dddacdba485e44bde2202579a6dec514ff8d992d9",
+          "configs/state_handoff.yaml": "870b88033f79e794d373843220ea25787a5267c2a59ada6d60fc703747a7a477",
+          "configs/state_handoff_event.schema.json": "f0d4bffbee1051abf8beabc0d9d30b1de83f2385f7fafff47acbcf27e6fbcf87",
+          "configs/structure_purpose_routing.yaml": "c3a1b15dc1a4d215defdea6c825850a775db2aadc30ee2996436f817f4d98bf1",
+          "configs/true_fe110_production.yaml": "e7e888f07b2aaf961a13fda67857940953af28a2679d466af965102286dffcdf",
+          "configs/ts_connectivity_gate.yaml": "43427e5bd1a7950d7ee6defc0ce43c14c80b37b04175ee790fba1f61c629fe88",
+          "configs/ts_strategy_engine/families.yaml": "5d15d3961f9b738b65346ece4e2d25280d5ca20ebb2eeea4a63efa81e1763f88",
+          "configs/ts_strategy_engine/learning.yaml": "b999a9c12c14e7c0cd5fe06e2b5b1a62de94b29e1750d8e8372e29dcd3157e59",
+          "configs/ts_validation_pipeline.yaml": "5f59dd300977b7ad8115b2490bbf8015a392a3b3bd1ff2deb149da4991c672ea",
+          "modules/calculation_registry/migrations/001_ts_endpoint_records.sql": "e84506a2b1106dc564bef9fb14f60832315c4829f5f56d4e59b509886961119e",
+          "modules/calculation_registry/migrations/001_ts_endpoint_records_rollback.sql": "bb95bda8141294dbfba06987dea595b28c538def7b3690441e790fb3b3ae7db2",
+          "modules/calculation_registry/migrations/009_registry_governance.sql": "b957c9e6dc6a12827c38ef4e2fc64178b72086e6c14604cdd7cbb35e5b08662c",
+          "modules/calculation_registry/migrations/009_registry_governance_rollback.sql": "26be5658a0d9fe8af8d4f91dfd3d88808f4fe864d63d6f9ea70d5384d9b6b9c3",
+          "modules/calculation_registry/schema.sql": "eb8d1efe1c59bb81d71de7674eb6f4f7c0d424ff627849844500ce0b924ebebc",
+          "scripts/aqcat25_gpu_job.sh": "fd0ebe37e62391bb63c7645b6150e8a81f1eb4945a9ee6776e6406238907c8bc",
+          "scripts/aqcat25_ml_neb_job.sh": "fb8b5479e3b38b745293e1632bc14dea34df1e80d031b93c694c697ccb86e208",
+          "scripts/aqcat25_mz73_env.sh": "fbb20362b853dbc9435597fb849741f87c200c8f21fa1e396a78793490756b94",
+          "scripts/aqcat25_ts_finetune_job.sh": "65797176e2518fe415fc5e8dc583e4a238d3eddd9618c1662d19b02d1732c61f",
+          "scripts/aqcat25_ts_force_prediction_batch_job.sh": "d458a1d15d30b7bcb6c60741ddf191374a6c1e1dde74e2b26cb5da35afc0fc91",
+          "scripts/dual_model_ml_neb_job.sh": "ae086b69e30afa70e899b9e6dd6f576ebb23030a1c51d4bbc45920533561fbf0",
+          "scripts/dual_model_ts_force_prediction_batch_job.sh": "53dc1ad1cb75aae09f2430bdcc72638480d3f51c3d662240af61e781c2075d2c",
+          "scripts/dual_model_ts_force_prediction_batch_job_v2.sh": "cd09a940b2228cab4282af387416d17c9e13b27a1f4fd6eb7ac2a32cfdc92308",
+          "scripts/matris_finetune_speed_benchmark_job.sh": "217fa3fbf39322b09ab8689b57d8cc1f149f8aa7e9aff62b4d91c07fab8af4c3",
+          "scripts/mlip_same_structure_benchmark_job.sh": "6b0de74bb416984233b479b915bc5390b2426dcbd839528b1a75961eca2182c3",
+          "scripts/neb_agent/check_neb_job.sh": "0bc671b1c31d363e697e100473c7f5e0a7423229b49d898138b4f95ddd954d33",
+          "scripts/registry_excel_writer.mjs": "d85f0e19e4918b3d3982b30b4330fc4f959a69e6226f20f0c0c4e18fbece7d72",
+          "scripts/templates/sunboquan_vasp.lsf": "c7d5ca158a4383ab7b37747e13540784fe00248f713d762627f1b05bb6cdb19c",
+          "skills/catalysis-data-retrieval/references/image_query_schema.json": "a25255f1707d9d88faa8553cc25547668a188cb2513973352e652b14fa2a02af",
+          "skills/catalysis-data-retrieval/references/record_schema.json": "a74b3925b93002519594c27abe63a59314c019496511ae3e30acebd4453926a6",
+          "skills/catalysis-data-retrieval/references/sources.yaml": "93655af3494bcdcd2400f4cb1e70fc476d592f0cf22e9f28bd3ae95d37a11a00"
+        },
+        "smoke": {
+          "contract_sha256": "37be6a240363e639ba45ad742ee9d7dedd2b63073e48562f8ef7e84f5fbf316f",
+          "evidence_kind": "SOFTWARE_ENVIRONMENT",
+          "external_actions": 0,
+          "idempotent": true,
+          "inserted": 2,
+          "schema_version": 9,
+          "scientific_acceptance": false,
+          "status": "PASS"
+        }
+      },
+      "wheel": {
+        "console_scripts": {
+          "capability-readiness": {
+            "exit_code": 0,
+            "help_sha256": "21b8acb457191a879cd8bf5f2b95d591614b048843671d76416b0b78e26f2df0"
+          },
+          "catalysis-search": {
+            "exit_code": 0,
+            "help_sha256": "2cf49e7a3ec5d5ff5b251bed583e1ee0a24d2c0b174cc51a8655243ca2caaa73"
+          },
+          "catalysis-validate": {
+            "exit_code": 0,
+            "help_sha256": "1c0291a2ede25a2ca2296b6f4d6f158129e6b901e64b8ab645ce7f34e1e48e36"
+          },
+          "document-governance": {
+            "exit_code": 0,
+            "help_sha256": "dfc90937aecd1d96b9c26b80226cce3a7461f4af3481386053dfa8a2dbd3aa24"
+          },
+          "registry-init": {
+            "exit_code": 0,
+            "help_sha256": "44d30b240b3f5872e71de24c88d7731577b3a1d66de4e8d96885810dd02862c3"
+          },
+          "registry-promote": {
+            "exit_code": 0,
+            "help_sha256": "f8c35d017b89b2d40b2e76d30725919b5be69a775b652deb2330db444b24e158"
+          },
+          "registry-write": {
+            "exit_code": 0,
+            "help_sha256": "3dc1bb94ba31d37acb0bc83271288b171fa6b804d6676805c741db79dd022dd3"
+          },
+          "repo-state": {
+            "exit_code": 0,
+            "help_sha256": "7758cc42f9ab64225f38f270cf9f05f0eea1974b84fc04b68b7174f871bdf310"
+          },
+          "ts-strategy": {
+            "exit_code": 0,
+            "help_sha256": "a8f1f3d9e1b6ce2a436b63508f0e266486ec92046d8b445075e0544c7bc34d05"
+          }
+        },
+        "dependencies": {
+          "PyYAML": "6.0.3",
+          "ase": "NOT_INSTALLED",
+          "build": "NOT_INSTALLED",
+          "jsonschema": "4.26.0",
+          "matplotlib": "NOT_INSTALLED",
+          "numpy": "2.5.3",
+          "pymatgen": "NOT_INSTALLED",
+          "sella": "NOT_INSTALLED",
+          "sentence-transformers": "NOT_INSTALLED",
+          "setuptools": "NOT_INSTALLED",
+          "wheel": "NOT_INSTALLED"
+        },
+        "evidence_kind": "SOFTWARE_ENVIRONMENT",
+        "installation": "wheel",
+        "os": "Windows-11-10.0.26200-SP0",
+        "package_version": "0.1.0",
+        "python": "3.13.9",
+        "requires_python": ">=3.11",
+        "resources": {
+          "configs/adsmind_lite/adsorbate_rules.yaml": "5fabd2942be9d450587002e298f18ea611e7e76546ae25bb8ae1fd2d5fe47f52",
+          "configs/adsmind_lite/analysis_rules.yaml": "2c57676904ad43d74e11802cb369c0d59ba14939c3c436598a449eae6b1f1bfd",
+          "configs/adsmind_lite/backend.yaml": "7facae362a006044d88f7e8d0364a1c6dae1c181451855637894955a8225261d",
+          "configs/adsmind_lite/evidence_gate.yaml": "499d5dab64f6453afcc3098763b827dc3fea23c7f919981d757fb7b7bff2d714",
+          "configs/adsmind_lite/iron_fts_prescreen.yaml": "fd8723d69d0f1f2e78c2e33b3b5ced0c35bff6976f6ca958221fe2bfb82a2592",
+          "configs/adsmind_lite/prescreen_rules.yaml": "fdc1ced8ad0522c4240f237e13d0916717bc9c2e9c334bc6b3c5b121924c30a1",
+          "configs/adsmind_lite/site_rules.yaml": "e4c06d98ea336d238157933c24a6679537794cabe04b75b5c1334e7523359e92",
+          "configs/adsmind_lite/surfaces.yaml": "8e14b5acb4d6ceca2c1eed9e79474a30c9cc5846d9511dfd9ad2e30d2b121251",
+          "configs/adsorption_result_promotion.yaml": "26727aca4b339c3e673f8799a6132005a0688816c671ccf41bb1b44c43d1ac54",
+          "configs/aqcat25_domain_gate.yaml": "a5d6d1802d368ecb5a4b6f65b537770363aeeb57e3d2c7b207c824ab170bfaa1",
+          "configs/aqcat25_handoff.schema.json": "0ec6012a2193b99152d485bff083354e74a30759bf21e65561b14f75eb1c9f0a",
+          "configs/aqcat25_ts_active_learning.schema.json": "1210996e2a2d481f608b4c9e88baeb8a5b6f015a56ddf947c7e6be7eaec0b6ed",
+          "configs/aqcat25_ts_active_learning.yaml": "efc0ec187e38407d5aaf4b496799ff870cfe3d1eff06fa0f61a169815e8bc435",
+          "configs/aqcat25_ts_domain_gate.yaml": "3398f68e23c6402af80b591bf3e4246905fa97b0dfd5b3136491a3e136b246bb",
+          "configs/data_governance.yaml": "8f81d7c15891b2f77fdc926a2f41edef13399414f423d34e3049551a02fdef9a",
+          "configs/dimer_gate.yaml": "b2269cbc313b5009ef45c444f8d32b78160ad18377adcb0ffb5337e4990b3717",
+          "configs/dual_model_ts_active_learning.yaml": "3509a5ff01a9042acd1ff1a3b02863eea10b28da28d32384c562c94d367e6f2c",
+          "configs/execution_backends.yaml": "31d9b7b3a39f0240e0d63370f1e34cb8da50a46047db009a44652bcbfc72337d",
+          "configs/fe110_adsorbates_h2_chx_pilot.yaml": "37ba9a5eeb89e998c42c37176d7aaf462b9af3ef2f182dd3e6c6cdb78ab7850b",
+          "configs/fe110_adsorbates_oxygenated_main_pilot.yaml": "20ed15cb556057f5b1d448c5516b68872f47f03a9a89d4fdf76c3e25c9b40171",
+          "configs/fe110_adsorbates_step12a.yaml": "a8acca52d4c888d2de42ee3c07368e9ba33fd779e1799be7f2f1855e44108779",
+          "configs/incar_custodian/project_profiles.yaml": "3fecfc0dcad21bdda078f83a3d6e910073a6fea0b82b5df9f8b54b91e0c33723",
+          "configs/neb_agent/default_thresholds.yaml": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c",
+          "configs/neb_agent/path_constraints_schema.json": "fbd4315d251bcb7430920a9ffe9c433c46cff551772036856e9a9cab9fdd2444",
+          "configs/neb_agent/retrieval_prior_schema.json": "1502d4fc2330c934d3bce028a4aefc808c76fe80e844376959ce8a38532abbbe",
+          "configs/neb_path_quality_control_v2.yaml": "db2c5d32e3b5f732f7b733df8fbcb62360177a0164de0cb7e1a51848475f0b92",
+          "configs/offline_mlip_fusion_feasibility.yaml": "71debc281f91fe8909ccb8f07dd8b4cf3d7a5f89e6a1bb2610f66cfdddc1ac02",
+          "configs/postprocessing_software.yaml": "0fd4d28bc78fd16106ad1cee844a9e8c46c24b2471ad78902b28ca5b16393b85",
+          "configs/registry_legacy_writers.yaml": "25ca262a3defa9b5c0a43776a025ddc7e8a31faca2b3d122d7cdd939a131ef77",
+          "configs/release_resources.json": "6f182f6fb1ec6f281025bd3746e080ff41b8682eb040c88a7fb24ed859268c0b",
+          "configs/skill_routing.yaml": "8123e15eb396dcf06d08ba1dddacdba485e44bde2202579a6dec514ff8d992d9",
+          "configs/state_handoff.yaml": "870b88033f79e794d373843220ea25787a5267c2a59ada6d60fc703747a7a477",
+          "configs/state_handoff_event.schema.json": "f0d4bffbee1051abf8beabc0d9d30b1de83f2385f7fafff47acbcf27e6fbcf87",
+          "configs/structure_purpose_routing.yaml": "c3a1b15dc1a4d215defdea6c825850a775db2aadc30ee2996436f817f4d98bf1",
+          "configs/true_fe110_production.yaml": "e7e888f07b2aaf961a13fda67857940953af28a2679d466af965102286dffcdf",
+          "configs/ts_connectivity_gate.yaml": "43427e5bd1a7950d7ee6defc0ce43c14c80b37b04175ee790fba1f61c629fe88",
+          "configs/ts_strategy_engine/families.yaml": "5d15d3961f9b738b65346ece4e2d25280d5ca20ebb2eeea4a63efa81e1763f88",
+          "configs/ts_strategy_engine/learning.yaml": "b999a9c12c14e7c0cd5fe06e2b5b1a62de94b29e1750d8e8372e29dcd3157e59",
+          "configs/ts_validation_pipeline.yaml": "5f59dd300977b7ad8115b2490bbf8015a392a3b3bd1ff2deb149da4991c672ea",
+          "modules/calculation_registry/migrations/001_ts_endpoint_records.sql": "e84506a2b1106dc564bef9fb14f60832315c4829f5f56d4e59b509886961119e",
+          "modules/calculation_registry/migrations/001_ts_endpoint_records_rollback.sql": "bb95bda8141294dbfba06987dea595b28c538def7b3690441e790fb3b3ae7db2",
+          "modules/calculation_registry/migrations/009_registry_governance.sql": "b957c9e6dc6a12827c38ef4e2fc64178b72086e6c14604cdd7cbb35e5b08662c",
+          "modules/calculation_registry/migrations/009_registry_governance_rollback.sql": "26be5658a0d9fe8af8d4f91dfd3d88808f4fe864d63d6f9ea70d5384d9b6b9c3",
+          "modules/calculation_registry/schema.sql": "eb8d1efe1c59bb81d71de7674eb6f4f7c0d424ff627849844500ce0b924ebebc",
+          "scripts/aqcat25_gpu_job.sh": "fd0ebe37e62391bb63c7645b6150e8a81f1eb4945a9ee6776e6406238907c8bc",
+          "scripts/aqcat25_ml_neb_job.sh": "fb8b5479e3b38b745293e1632bc14dea34df1e80d031b93c694c697ccb86e208",
+          "scripts/aqcat25_mz73_env.sh": "fbb20362b853dbc9435597fb849741f87c200c8f21fa1e396a78793490756b94",
+          "scripts/aqcat25_ts_finetune_job.sh": "65797176e2518fe415fc5e8dc583e4a238d3eddd9618c1662d19b02d1732c61f",
+          "scripts/aqcat25_ts_force_prediction_batch_job.sh": "d458a1d15d30b7bcb6c60741ddf191374a6c1e1dde74e2b26cb5da35afc0fc91",
+          "scripts/dual_model_ml_neb_job.sh": "ae086b69e30afa70e899b9e6dd6f576ebb23030a1c51d4bbc45920533561fbf0",
+          "scripts/dual_model_ts_force_prediction_batch_job.sh": "53dc1ad1cb75aae09f2430bdcc72638480d3f51c3d662240af61e781c2075d2c",
+          "scripts/dual_model_ts_force_prediction_batch_job_v2.sh": "cd09a940b2228cab4282af387416d17c9e13b27a1f4fd6eb7ac2a32cfdc92308",
+          "scripts/matris_finetune_speed_benchmark_job.sh": "217fa3fbf39322b09ab8689b57d8cc1f149f8aa7e9aff62b4d91c07fab8af4c3",
+          "scripts/mlip_same_structure_benchmark_job.sh": "6b0de74bb416984233b479b915bc5390b2426dcbd839528b1a75961eca2182c3",
+          "scripts/neb_agent/check_neb_job.sh": "0bc671b1c31d363e697e100473c7f5e0a7423229b49d898138b4f95ddd954d33",
+          "scripts/registry_excel_writer.mjs": "d85f0e19e4918b3d3982b30b4330fc4f959a69e6226f20f0c0c4e18fbece7d72",
+          "scripts/templates/sunboquan_vasp.lsf": "c7d5ca158a4383ab7b37747e13540784fe00248f713d762627f1b05bb6cdb19c",
+          "skills/catalysis-data-retrieval/references/image_query_schema.json": "a25255f1707d9d88faa8553cc25547668a188cb2513973352e652b14fa2a02af",
+          "skills/catalysis-data-retrieval/references/record_schema.json": "a74b3925b93002519594c27abe63a59314c019496511ae3e30acebd4453926a6",
+          "skills/catalysis-data-retrieval/references/sources.yaml": "93655af3494bcdcd2400f4cb1e70fc476d592f0cf22e9f28bd3ae95d37a11a00"
+        },
+        "smoke": {
+          "contract_sha256": "37be6a240363e639ba45ad742ee9d7dedd2b63073e48562f8ef7e84f5fbf316f",
+          "evidence_kind": "SOFTWARE_ENVIRONMENT",
+          "external_actions": 0,
+          "idempotent": true,
+          "inserted": 2,
+          "schema_version": 9,
+          "scientific_acceptance": false,
+          "status": "PASS"
+        }
+      }
+    },
+    "evidence_kind": "SOFTWARE_ENVIRONMENT",
+    "parity": true,
+    "status": "PASS",
+    "wheel": {
+      "excluded_artifacts": [],
+      "file_count": 286,
+      "filename": "sbq_catalyst_agent_workflow-0.1.0-py3-none-any.whl",
+      "members": [
+        "scripts/__init__.py",
+        "scripts/aqcat25_calibration.py",
+        "scripts/aqcat25_handoff.py",
+        "scripts/aqcat25_ml_neb.py",
+        "scripts/aqcat25_ml_path_committee.py",
+        "scripts/aqcat25_ts_active_learning.py",
+        "scripts/aqcat25_ts_checkpoint_validation.py",
+        "scripts/aqcat25_ts_force_prediction.py",
+        "scripts/aqcat25_ts_force_prediction_batch.py",
+        "scripts/aqcat25_ts_schema.py",
+        "scripts/aqcat25_ts_training_data.py",
+        "scripts/artifact_io.py",
+        "scripts/assess_dual_model_ts_heldout_errors.py",
+        "scripts/assess_dual_model_ts_vasp_errors.py",
+        "scripts/bind_reviewed_dimer_execution.py",
+        "scripts/collect_dual_model_ts_vasp_labels.py",
+        "scripts/document_governance.py",
+        "scripts/dual_model_ml_neb.py",
+        "scripts/dual_model_ts_force_prediction_batch.py",
+        "scripts/execution_backends.py",
+        "scripts/generate_capability_readiness.py",
+        "scripts/init_registry.py",
+        "scripts/jsonl_io.py",
+        "scripts/matris_energy_force_finetune.py",
+        "scripts/matris_finetune_speed_benchmark.py",
+        "scripts/matris_frozen_heldout_validate.py",
+        "scripts/matris_sella_local_peak.py",
+        "scripts/matris_sella_smoke.py",
+        "scripts/matris_training_data.py",
+        "scripts/matris_training_exclusions.py",
+        "scripts/matris_ts_path_committee.py",
+        "scripts/ml_candidate_source.py",
+        "scripts/ml_sella_candidate.py",
+        "scripts/mlip_same_structure_benchmark.py",
+        "scripts/offline_mlip_fusion_feasibility.py",
+        "scripts/optional_dependencies.py",
+        "scripts/prediction_provenance.py",
+        "scripts/prepare_aqcat25_ml_neb_handoff.py",
+        "scripts/prepare_dual_model_ts_active_learning_round.py",
+        "scripts/prepare_dual_model_ts_heldout_candidates.py",
+        "scripts/prepare_dual_model_ts_heldout_execution.py",
+        "scripts/prepare_matris_finetune_request.py",
+        "scripts/prepare_matris_remote_finetune_bundle.py",
+        "scripts/prepare_matris_replay_finetune_package.py",
+        "scripts/prepare_ml_candidate_active_learning.py",
+        "scripts/prepare_ml_candidate_rerun.py",
+        "scripts/prepare_reviewed_neb_peak_dimer.py",
+        "scripts/prepare_ts_heldout_aqcat_prediction_batch.py",
+        "scripts/prepare_ts_heldout_validation_candidates.py",
+        "scripts/prepare_ts_heldout_vasp_label_batch.py",
+        "scripts/provenance_fields.py",
+        "scripts/registry_acceptance.py",
+        "scripts/registry_compatibility.py",
+        "scripts/registry_connection.py",
+        "scripts/registry_excel_promotion.py",
+        "scripts/registry_mutations.py",
+        "scripts/registry_schema.py",
+        "scripts/registry_transactions.py",
+        "scripts/registry_write.py",
+        "scripts/release_build.py",
+        "scripts/release_environment.py",
+        "scripts/release_smoke.py",
+        "scripts/review_completed_neb_parent.py",
+        "scripts/runtime_resources.py",
+        "scripts/scheduler_evidence.py",
+        "scripts/scientific_validation.py",
+        "scripts/select_dual_model_ts_vasp_labels.py",
+        "scripts/validate_release.py",
+        "scripts/vasp_inputs.py",
+        "scripts/vasp_lsf.py",
+        "scripts/vasp_result_gate.py",
+        "scripts/workflow_geometry.py",
+        "scripts/_resources/configs/adsorption_result_promotion.yaml",
+        "scripts/_resources/configs/aqcat25_domain_gate.yaml",
+        "scripts/_resources/configs/aqcat25_handoff.schema.json",
+        "scripts/_resources/configs/aqcat25_ts_active_learning.schema.json",
+        "scripts/_resources/configs/aqcat25_ts_active_learning.yaml",
+        "scripts/_resources/configs/aqcat25_ts_domain_gate.yaml",
+        "scripts/_resources/configs/data_governance.yaml",
+        "scripts/_resources/configs/dimer_gate.yaml",
+        "scripts/_resources/configs/dual_model_ts_active_learning.yaml",
+        "scripts/_resources/configs/execution_backends.yaml",
+        "scripts/_resources/configs/fe110_adsorbates_h2_chx_pilot.yaml",
+        "scripts/_resources/configs/fe110_adsorbates_oxygenated_main_pilot.yaml",
+        "scripts/_resources/configs/fe110_adsorbates_step12a.yaml",
+        "scripts/_resources/configs/neb_path_quality_control_v2.yaml",
+        "scripts/_resources/configs/offline_mlip_fusion_feasibility.yaml",
+        "scripts/_resources/configs/postprocessing_software.yaml",
+        "scripts/_resources/configs/registry_legacy_writers.yaml",
+        "scripts/_resources/configs/release_resources.json",
+        "scripts/_resources/configs/skill_routing.yaml",
+        "scripts/_resources/configs/state_handoff.yaml",
+        "scripts/_resources/configs/state_handoff_event.schema.json",
+        "scripts/_resources/configs/structure_purpose_routing.yaml",
+        "scripts/_resources/configs/true_fe110_production.yaml",
+        "scripts/_resources/configs/ts_connectivity_gate.yaml",
+        "scripts/_resources/configs/ts_validation_pipeline.yaml",
+        "scripts/_resources/configs/adsmind_lite/adsorbate_rules.yaml",
+        "scripts/_resources/configs/adsmind_lite/analysis_rules.yaml",
+        "scripts/_resources/configs/adsmind_lite/backend.yaml",
+        "scripts/_resources/configs/adsmind_lite/evidence_gate.yaml",
+        "scripts/_resources/configs/adsmind_lite/iron_fts_prescreen.yaml",
+        "scripts/_resources/configs/adsmind_lite/prescreen_rules.yaml",
+        "scripts/_resources/configs/adsmind_lite/site_rules.yaml",
+        "scripts/_resources/configs/adsmind_lite/surfaces.yaml",
+        "scripts/_resources/configs/incar_custodian/project_profiles.yaml",
+        "scripts/_resources/configs/neb_agent/default_thresholds.yaml",
+        "scripts/_resources/configs/neb_agent/path_constraints_schema.json",
+        "scripts/_resources/configs/neb_agent/retrieval_prior_schema.json",
+        "scripts/_resources/configs/ts_strategy_engine/families.yaml",
+        "scripts/_resources/configs/ts_strategy_engine/learning.yaml",
+        "scripts/_resources/modules/calculation_registry/schema.sql",
+        "scripts/_resources/modules/calculation_registry/migrations/001_ts_endpoint_records.sql",
+        "scripts/_resources/modules/calculation_registry/migrations/001_ts_endpoint_records_rollback.sql",
+        "scripts/_resources/modules/calculation_registry/migrations/009_registry_governance.sql",
+        "scripts/_resources/modules/calculation_registry/migrations/009_registry_governance_rollback.sql",
+        "scripts/_resources/scripts/aqcat25_gpu_job.sh",
+        "scripts/_resources/scripts/aqcat25_ml_neb_job.sh",
+        "scripts/_resources/scripts/aqcat25_mz73_env.sh",
+        "scripts/_resources/scripts/aqcat25_ts_finetune_job.sh",
+        "scripts/_resources/scripts/aqcat25_ts_force_prediction_batch_job.sh",
+        "scripts/_resources/scripts/dual_model_ml_neb_job.sh",
+        "scripts/_resources/scripts/dual_model_ts_force_prediction_batch_job.sh",
+        "scripts/_resources/scripts/dual_model_ts_force_prediction_batch_job_v2.sh",
+        "scripts/_resources/scripts/matris_finetune_speed_benchmark_job.sh",
+        "scripts/_resources/scripts/mlip_same_structure_benchmark_job.sh",
+        "scripts/_resources/scripts/registry_excel_writer.mjs",
+        "scripts/_resources/scripts/neb_agent/check_neb_job.sh",
+        "scripts/_resources/scripts/templates/sunboquan_vasp.lsf",
+        "scripts/_resources/skills/catalysis-data-retrieval/references/image_query_schema.json",
+        "scripts/_resources/skills/catalysis-data-retrieval/references/record_schema.json",
+        "scripts/_resources/skills/catalysis-data-retrieval/references/sources.yaml",
+        "scripts/adsmind_lite/__init__.py",
+        "scripts/adsmind_lite/adsmind_common.py",
+        "scripts/adsmind_lite/analyze_relaxed_adsorption.py",
+        "scripts/adsmind_lite/audit_remote_fe110_batch.py",
+        "scripts/adsmind_lite/candidate_export.py",
+        "scripts/adsmind_lite/candidate_generation.py",
+        "scripts/adsmind_lite/core.py",
+        "scripts/adsmind_lite/deduplicate_adsorption_states.py",
+        "scripts/adsmind_lite/detect_surface_sites.py",
+        "scripts/adsmind_lite/evidence_gate.py",
+        "scripts/adsmind_lite/evidence_lifecycle.py",
+        "scripts/adsmind_lite/export_vasp_ready.py",
+        "scripts/adsmind_lite/fts_prescreen.py",
+        "scripts/adsmind_lite/generate_adsorption_candidates.py",
+        "scripts/adsmind_lite/plan_adsorption_candidates.py",
+        "scripts/adsmind_lite/prescreen.py",
+        "scripts/adsmind_lite/relaxed_analysis.py",
+        "scripts/adsmind_lite/site_detection.py",
+        "scripts/adsmind_lite/state_deduplication.py",
+        "scripts/adsmind_lite/validate_candidates.py",
+        "scripts/adsorption/__init__.py",
+        "scripts/adsorption/analyze_fe110_ch_h_relaxation.py",
+        "scripts/adsorption/backfill_step12a_registry.py",
+        "scripts/adsorption/build_fe110_adsorption.py",
+        "scripts/adsorption/build_fe110_c2_coads.py",
+        "scripts/adsorption/build_fe110_care_isomers.py",
+        "scripts/adsorption/build_fe110_ch_h_coads.py",
+        "scripts/adsorption/build_gas_cho_chxo.py",
+        "scripts/adsorption/build_gas_h2_chx.py",
+        "scripts/adsorption/build_gas_oxygenated_isomers.py",
+        "scripts/adsorption/build_gas_step12a_references.py",
+        "scripts/adsorption/c2_coads_catalog.py",
+        "scripts/adsorption/c2_coads_geometry.py",
+        "scripts/adsorption/finalize_step12a_gas_references.py",
+        "scripts/adsorption/gas_vasp_common.py",
+        "scripts/adsorption/preflight_fe110_adsorption.py",
+        "scripts/adsorption/preflight_gas_references.py",
+        "scripts/adsorption/register_step12a_gas_reference_submission.py",
+        "scripts/adsorption/register_step12a_oh_restart.py",
+        "scripts/adsorption/render_fe110_ch_h_candidates.py",
+        "scripts/catalysis_retrieval/__init__.py",
+        "scripts/catalysis_retrieval/cli.py",
+        "scripts/catalysis_retrieval/ranking.py",
+        "scripts/catalysis_retrieval/records.py",
+        "scripts/catalysis_retrieval/validate_cli.py",
+        "scripts/catalysis_retrieval/workflow.py",
+        "scripts/convergence/common.py",
+        "scripts/convergence/setup_alpha_fe_bulk_smearing.py",
+        "scripts/convergence/setup_true_fe110_thickness_retest.py",
+        "scripts/neb_agent/__init__.py",
+        "scripts/neb_agent/analyze_neb_outputs.py",
+        "scripts/neb_agent/check_endpoints.py",
+        "scripts/neb_agent/cli_common.py",
+        "scripts/neb_agent/crop_neb_path.py",
+        "scripts/neb_agent/diagnose_path_geometry.py",
+        "scripts/neb_agent/generate_path.py",
+        "scripts/neb_agent/magnetic_continuity.py",
+        "scripts/neb_agent/path_quality_cli.py",
+        "scripts/neb_agent/path_quality_control.py",
+        "scripts/neb_agent/path_quality_service.py",
+        "scripts/neb_agent/pilot_validation.py",
+        "scripts/neb_agent/prepare_restart.py",
+        "scripts/neb_agent/remote_monitor.py",
+        "scripts/neb_agent/retrieval_prior_adapter.py",
+        "scripts/neb_agent/split_by_intermediate.py",
+        "scripts/neb_agent/submission.py",
+        "scripts/neb_agent/utils_report.py",
+        "scripts/neb_agent/utils_retrieval.py",
+        "scripts/neb_agent/utils_structure.py",
+        "scripts/neb_agent/utils_vasp.py",
+        "scripts/state_manager/__init__.py",
+        "scripts/state_manager/__main__.py",
+        "scripts/state_manager/application_log.py",
+        "scripts/state_manager/audit.py",
+        "scripts/state_manager/baseline.py",
+        "scripts/state_manager/checkpoints.py",
+        "scripts/state_manager/cli.py",
+        "scripts/state_manager/imports.py",
+        "scripts/state_manager/job_lifecycle.py",
+        "scripts/state_manager/lifecycle.py",
+        "scripts/state_manager/lifecycle_views.py",
+        "scripts/state_manager/models.py",
+        "scripts/state_manager/projections.py",
+        "scripts/state_manager/proposals.py",
+        "scripts/state_manager/reconciliation.py",
+        "scripts/state_manager/review_reuse.py",
+        "scripts/state_manager/stale_items.py",
+        "scripts/state_manager/state_compaction.py",
+        "scripts/state_manager/store.py",
+        "scripts/ts_endpoint/__init__.py",
+        "scripts/ts_endpoint/database.py",
+        "scripts/ts_endpoint/evidence.py",
+        "scripts/ts_endpoint/generator.py",
+        "scripts/ts_endpoint/purpose.py",
+        "scripts/ts_endpoint/validator.py",
+        "scripts/ts_strategy_engine/__init__.py",
+        "scripts/ts_strategy_engine/active_learning.py",
+        "scripts/ts_strategy_engine/active_learning_calibration.py",
+        "scripts/ts_strategy_engine/active_learning_cli.py",
+        "scripts/ts_strategy_engine/active_learning_common.py",
+        "scripts/ts_strategy_engine/active_learning_domain.py",
+        "scripts/ts_strategy_engine/active_learning_handoff.py",
+        "scripts/ts_strategy_engine/active_learning_label.py",
+        "scripts/ts_strategy_engine/active_learning_path.py",
+        "scripts/ts_strategy_engine/active_learning_path_common.py",
+        "scripts/ts_strategy_engine/active_learning_path_labels.py",
+        "scripts/ts_strategy_engine/active_learning_path_predictions.py",
+        "scripts/ts_strategy_engine/active_learning_path_rerun.py",
+        "scripts/ts_strategy_engine/active_learning_path_selection.py",
+        "scripts/ts_strategy_engine/active_learning_scheduler.py",
+        "scripts/ts_strategy_engine/active_learning_state.py",
+        "scripts/ts_strategy_engine/active_learning_training.py",
+        "scripts/ts_strategy_engine/cli.py",
+        "scripts/ts_strategy_engine/cli_commands.py",
+        "scripts/ts_strategy_engine/connectivity_evidence.py",
+        "scripts/ts_strategy_engine/contract.py",
+        "scripts/ts_strategy_engine/dimer_analysis.py",
+        "scripts/ts_strategy_engine/dimer_gate.py",
+        "scripts/ts_strategy_engine/dimer_gate_common.py",
+        "scripts/ts_strategy_engine/dimer_path_gate.py",
+        "scripts/ts_strategy_engine/evidence.py",
+        "scripts/ts_strategy_engine/execution_decision.py",
+        "scripts/ts_strategy_engine/execution_evidence.py",
+        "scripts/ts_strategy_engine/execution_gate.py",
+        "scripts/ts_strategy_engine/execution_gate_cli.py",
+        "scripts/ts_strategy_engine/execution_path_rules.py",
+        "scripts/ts_strategy_engine/execution_submission_rules.py",
+        "scripts/ts_strategy_engine/fingerprint.py",
+        "scripts/ts_strategy_engine/handoff.py",
+        "scripts/ts_strategy_engine/learning_cli.py",
+        "scripts/ts_strategy_engine/learning_evidence.py",
+        "scripts/ts_strategy_engine/learning_store.py",
+        "scripts/ts_strategy_engine/matched_static_evidence.py",
+        "scripts/ts_strategy_engine/ml_neb_path.py",
+        "scripts/ts_strategy_engine/path_evidence.py",
+        "scripts/ts_strategy_engine/registry.py",
+        "scripts/ts_strategy_engine/scientific_claims.py",
+        "scripts/ts_strategy_engine/strategy.py",
+        "scripts/ts_strategy_engine/strategy_learning.py",
+        "scripts/ts_strategy_engine/templates.py",
+        "scripts/ts_strategy_engine/workflow.py",
+        "scripts/ts_validation/__init__.py",
+        "scripts/ts_validation/analyze_vfa.py",
+        "scripts/ts_validation/barrier_values.py",
+        "scripts/ts_validation/connectivity.py",
+        "scripts/ts_validation/dimer_frequency_gate.py",
+        "scripts/ts_validation/prepare_connectivity.py",
+        "scripts/ts_validation/prepare_vfa_from_ts_image.py",
+        "scripts/ts_validation/validation_pipeline.py",
+        "sbq_catalyst_agent_workflow-0.1.0.dist-info/METADATA",
+        "sbq_catalyst_agent_workflow-0.1.0.dist-info/WHEEL",
+        "sbq_catalyst_agent_workflow-0.1.0.dist-info/entry_points.txt",
+        "sbq_catalyst_agent_workflow-0.1.0.dist-info/top_level.txt",
+        "sbq_catalyst_agent_workflow-0.1.0.dist-info/RECORD"
+      ],
+      "sha256": "540ab56281d78efe55fffd9df7804bd695c1968595eaa61951842718742cde9a",
+      "wheel_metadata": "Wheel-Version: 1.0\nGenerator: setuptools (84.0.0)\nRoot-Is-Purelib: true\nTag: py3-none-any\n\n"
+    }
+  },
+  "wheel_candidate_parity": {
+    "python_members_checked": 221,
+    "exact_candidate_blob_parity": true
+  },
+  "remote_ci": [
+    {
+      "id": 34436758260,
+      "name": "Repository and release validation",
+      "head_sha": "a050fe28b25f1fc5ee91f5e7e3fb7fc1150a2157",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/q2214299493/sbq123/actions/runs/34436758260",
+      "jobs": [
+        {
+          "id": 102743331109,
+          "name": "validate",
+          "status": "completed",
+          "conclusion": "success",
+          "labels": [
+            "ubuntu-latest"
+          ],
+          "html_url": "https://github.com/q2214299493/sbq123/actions/runs/34436758260/job/102743331109"
+        },
+        {
+          "id": 102743331297,
+          "name": "engineering (windows-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "labels": [
+            "windows-latest"
+          ],
+          "html_url": "https://github.com/q2214299493/sbq123/actions/runs/34436758260/job/102743331297"
+        },
+        {
+          "id": 102743331312,
+          "name": "engineering (ubuntu-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "labels": [
+            "ubuntu-latest"
+          ],
+          "html_url": "https://github.com/q2214299493/sbq123/actions/runs/34436758260/job/102743331312"
+        },
+        {
+          "id": 102743331342,
+          "name": "wheel (windows-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "labels": [
+            "windows-latest"
+          ],
+          "html_url": "https://github.com/q2214299493/sbq123/actions/runs/34436758260/job/102743331342"
+        },
+        {
+          "id": 102743331467,
+          "name": "wheel (ubuntu-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "labels": [
+            "ubuntu-latest"
+          ],
+          "html_url": "https://github.com/q2214299493/sbq123/actions/runs/34436758260/job/102743331467"
+        }
+      ]
+    }
+  ],
+  "state_audit": {
+    "command": [
+      "python",
+      "-m",
+      "scripts.state_manager.cli",
+      "--root",
+      ".",
+      "audit",
+      "--phase",
+      "start"
+    ],
+    "exit_code": 1,
+    "output": "phase=start errors=1 warnings=3 review_required=4\nERROR managed_projection_drift: Managed projection changed outside the recorded event: docs/06_MODULE_MAP.md#module_row:transition_state_search [docs/06_MODULE_MAP.md]\nWARNING external_worktree_review: Additional Git worktree requires ownership review: C:/Users/86177/AppData/Local/Temp/sbq123-ac-b2-001 [C:/Users/86177/AppData/Local/Temp/sbq123-ac-b2-001]\nWARNING external_worktree_review: Additional Git worktree requires ownership review: C:/Users/86177/AppData/Local/Temp/sbq123-final-acceptance [C:/Users/86177/AppData/Local/Temp/sbq123-final-acceptance]\nWARNING external_worktree_review: Additional Git worktree requires ownership review: C:/Users/86177/AppData/Local/Temp/sbq123-final-audit.git [C:/Users/86177/AppData/Local/Temp/sbq123-final-audit.git]\n"
+  },
+  "production_limitations": [
+    "Production registry deployment/schema not queried",
+    "Live scheduler not queried",
+    "HPC credentials/environment not tested",
+    "No real VASP/VTST/GPU/training",
+    "Scientific performance not established",
+    "Task reconciliation unresolved; no state sync/event/projection writes"
+  ],
+  "audit_integrity": {
+    "source_changes": false,
+    "historical_reports_preserved": true,
+    "development_checkout_untouched": true,
+    "only_intended_tracked_outputs": [
+      "reports/refactor_audit/B1_B7_acceptance_rerun_report.md",
+      "reports/refactor_audit/B1_B7_acceptance_rerun.json"
+    ],
+    "did_not_stop_after_blocker": true,
+    "checks_stopped_for_blocker": [],
+    "network_scope": "Git fetch/public GitHub API and pip only. gh CLI lacked authentication; public API succeeded.",
+    "inspection_recoveries": [
+      "Incorrect initial guessed inspection paths were corrected by file discovery.",
+      "Parameter-diff inspection retried with UTF-8 after local GBK decoding failed.",
+      "Markdown audit continues per file, records eight unsupported skill-frontmatter documents and still checks all their links."
+    ]
+  },
+  "test_quality": {
+    "authoritative_path_coverage": {
+      "B1": [
+        "Inspected ScientificReadiness -> ExecutionAuthorization -> EvidenceBinding -> InputBundle -> SubmissionReservation -> SubmissionResult in the gate and canonical executor.",
+        "Verified canonical workdir, bundle/evidence/source hashes, POTCAR/spec identity and digest/job/path checks before shell construction.",
+        "Ran reservation concurrency, hard death/crash-after-submit, no automatic uncertain retry, stale evidence, traversal/symlink, upload/reuse full remote manifest, remote reservation and scoped stop tests.",
+        "Reviewed AQCat25/dual-model/MatRIS bootstrap EXIT/INT/TERM/HUP guards, realpath containment and fallback failure records; executed fake-command shell regressions.",
+        "Searched all maintained external dispatch patterns and independently reproduced the legacy campaign race."
+      ],
+      "B2": [
+        "Inspected explicit latest-started/latest-completed/final-target SCF semantics; tested newer incomplete cycles, NELM exhaustion, truncated and multi-ionic/appended outputs.",
+        "Reviewed current authoritative INCAR semicolon/comment/whitespace/duplicate handling and all maintained caller matches; residual raw MAGMOM parser recorded.",
+        "Verified raw and already-normalized contracts both reach _normalize_contract_payload; hash checks cannot replace finite, positive-kmesh/ENCUT, atom-map/index-base and required-text validation.",
+        "Inspected chemical_events/family_event_matches and C-O/C-C tests; atom-renumbered chemical events, structure similarity and exact result identity remain distinct.",
+        "Ran B2/B2.1, real TS persistence, cross-object DIMER/VFA, frequency-only denial, finite/nonnegative barrier and valid negative-energy regressions.",
+        "Compared configs, protocol bodies and parameter-related code diffs against main."
+      ],
+      "AC_B2_001": [
+        "Independently called decide_execution and build_decision with boolean-only DIMER/Grade-A summaries, including a hash-bound fake summary file: both fail closed.",
+        "Built real synthetic DIMER and NEB fixtures via maintained scientific owners; current APPROVE_TS_CANDIDATE works with no execution authorization.",
+        "Old require_action rejects Grade-C summary, VFA OUTCAR/POSCAR/review/handoff, DIMER final structure/analysis, NEB contract and connectivity-branch mutations.",
+        "Confirmed underlying-source mutation revokes claims while the validation summary stays byte-identical.",
+        "Inspected source_bindings_valid reuse and use-time gate replay, DIMER pipeline/NEB-VFA/connectivity delegation, unchanged DIMER connectivity policy and downstream matched-static owner.",
+        "Ran real TS registration and barrier/template persistence regressions; stale gate fails before insertion and barrier booleans cannot authorize reporting."
+      ],
+      "B3": [
+        "Reviewed every IMPORTED -> SCHEMA_VALID -> SOURCE_VERIFIED -> CONTENT_BOUND -> REVIEWED -> TRANSFERABLE check; supplied booleans/stage flags do not promote evidence.",
+        "Source immutable-reference/snapshot hash, extracted span/content hash, reviewer/time/subject and target compatibility are checked separately.",
+        "Inspected embedding model/source/content provenance, finite dimensions/rectangular arrays, zero-norm rejection and overflow-safe cosine.",
+        "Inspected model/version/input/time/uncertainty provenance, explicit unavailable uncertainty and candidate-only prediction restrictions; accepted-registry rejection tested.",
+        "Reviewed train/validation/test source-row, calculation, reaction and permutation-invariant structure exclusions; descriptor collisions block splits rather than prove scientific equivalence.",
+        "Ran actual evidence promotion, retrieval ranking, registry rejection, fake model producer and training-preflight paths."
+      ],
+      "B4": [
+        "Reviewed complete planning in a snapshot, plan/batch hashes, database identity/fingerprint, explicit approval and BEGIN IMMEDIATE apply.",
+        "Tested invalid input before mutation, changed plan, stale DB, transaction rollback, immutable receipts, duplicate apply and idempotent replay.",
+        "Verified omitted rows normalizes to rows={}; status-only validate/plan/approved apply/replay succeeds and stale expectations fail.",
+        "Verified immutable compatibility revisions, old calculation revision retention and timezone-aware review timestamps for both APIs.",
+        "Inspected immutable event/result/file/review/TS/barrier/template guards and job transition/recovery history; ran migration, rollback and incompatible-schema checks on temporary SQLite.",
+        "Normal open_registry (including legacy migrate=True) validates schema but does not silently migrate. State crash/receipt/rollback/event regressions use synthetic state only."
+      ],
+      "B5": [
+        "Reconstructed AST graph of 221 script modules / 759 internal edges including function-local imports; reviewed current infrastructure/registry dependency closure and cycle tests.",
+        "Checked no domain-to-CLI or shared-infrastructure-to-TS direction, no CLI SQL in maintained adapters, import-only facades and no new sys.path hacks.",
+        "Verified one gate, execution authorization validator, registry connection, evidence lifecycle and resource resolver; execution_gate remains 150 lines.",
+        "scientific_claims is a narrow application delegation boundary with no SQL/scheduler/submission/VFA parsing/DIMER scientific rules.",
+        "Complete dispatch search and independent race disprove repository-wide sole-submit-owner assertion; the exact-string B5 test misses the legacy executor.",
+        "Reviewed unsupported catalyst profiles, zero-incoming newly added modules against console/build/CI registrations, and all residual duplicate parser candidates."
+      ],
+      "B6": [
+        "Read the single DOCUMENT_GOVERNANCE authority model and distinctions among code state, dated observations, history, accepted science, predictions and unverified production.",
+        "Verified supported code schema 9 versus NOT_VERIFIED_IN_B6 production, timestamped scheduler observations and historical filename-independent authority.",
+        "Generated readiness twice in a fresh external source copy: byte-identical and equal to checked-in outputs.",
+        "Verified tests/status do not promote science; kinetic_data stays Planned and downstream thermochemistry/network/kinetics/KMC/reactor/sensitivity modules stay Blocked.",
+        "Audited data_governance classes and prediction paths; directory classification cannot establish scientific acceptance.",
+        "Checked links in all 211 tracked Markdown files: zero broken links. All 203 classifier-supported documents were checked; seven current/reference/generated views have no wording findings."
+      ],
+      "B7": [
+        "Fresh actual wheel exported from the candidate index, built and installed into a clean normal-wheel venv and separate editable venv outside the repository.",
+        "Verified outside-repository cwd, cleared PYTHONPATH/PYTHONHOME, all nine console scripts and 60 runtime resources including schema/migration SQL and retrieval schemas.",
+        "Verified REPOSITORY_CONTEXT_REQUIRED errors, explicit-root tools, editable/wheel parity and synthetic smoke with scientific_acceptance=false.",
+        "Inspected every one of 286 wheel members; all 221 Python members are byte-identical to the candidate Git blobs.",
+        "Queried exact candidate GitHub validate/Ubuntu, engineering/Windows+Ubuntu and wheel/Windows+Ubuntu jobs; all five succeeded with configured Python 3.11."
+      ]
+    },
+    "gap": "B5 counts only the exact string bsub script.lsf and misses the list [bsub, run.lsf]. Legacy tests cover sequential markers and timeout recovery but no concurrent/execution-authorization boundary. Canonical NEB executor tests remain passing.",
+    "scientific_verifiers_mocked": false,
+    "legacy_reproduction_external_dispatch": "fake only",
+    "current_gate_line_count": 150
+  },
+  "reproduction_programs": {
+    "independent_claims.py": "import sys,json,traceback\nfrom pathlib import Path\nroot=Path('C:/Users/86177/AppData/Local/Temp/sbq123-acceptance-rerun')\nsys.path[:0]=[str(root),str(root/'tests')]\nfrom scripts.artifact_io import write_json,load_json_object,sha256_file\nfrom scripts.ts_strategy_engine.execution_gate import decide_execution,require_action\nfrom scripts.ts_strategy_engine.execution_gate_cli import build_decision\nfrom test_b21_scientific_acceptance import bound_case\nfrom tests.scientific_claim_fixtures import neb_vfa_case\nfrom test_ts_strategy_engine import contract\nout=Path('C:/Users/86177/AppData/Local/Temp/b1b7-rerun-evidence')\nbase=out/'independent-fixtures';base.mkdir()\nresults=[]\ndef check(name,fn):\n try: detail=fn();results.append({'name':name,'status':'PASS','evidence':detail})\n except Exception as e:results.append({'name':name,'status':'FAIL','error':str(e),'traceback':traceback.format_exc()})\ndef gate(source):\n p=source.parent\n for name,data in [('geometry',{'status':'PASS'}),('analysis',{'path_binding_valid':True,'image_sequence_complete':True})]:write_json(p/(name+'.json'),data)\n (p/'thresholds.yaml').write_text('{}\\n')\n request=write_json(p/'audit_request.json',{'geometry_file':'geometry.json','analysis_file':'analysis.json','thresholds_file':'thresholds.yaml','validation_file':str(source),'climb':False,'path_reviewed':False})\n dest=p/'audit_gate.json';return dest,build_decision(request,dest)\ndef denied(path,decision,action):\n try:require_action(path,action,decision['state_sha256'])\n except (ValueError,PermissionError):return True\n return False\ndef absent():\n fake={'source_method':'dimer','frequency_grade':'A','frequency_structure_hash_valid':True,'dimer_technical_acceptance':True,'compatible_final_energy_barrier_valid':True}\n d=decide_execution({'status':'PASS'},{'path_binding_valid':True,'image_sequence_complete':True},{},climb=False,path_reviewed=False,validation=fake)\n assert d['DECISION']!='VALIDATED_TS' and not d['TS_CLAIM_ALLOWED']\n p,d2=gate(write_json(base/'fake/validation.json',fake))\n assert d2['DECISION']!='VALIDATED_TS' and not d2['TS_CLAIM_ALLOWED']\n assert all(denied(p,d2,a) for a in ('APPROVE_TS_CANDIDATE','REPORT_FINAL_BARRIER'))\n return {'python_decision':d['DECISION'],'file_bound_fake_decision':d2['DECISION'],'reason_codes':d2['REASON_CODES']}\ncheck('original_boolean_pattern',absent)\ndef dimer_change(label,owner,name):\n c=bound_case(base/label);summary=c['vfa']/'vfa_analysis.json';path,d=gate(summary)\n require_action(path,'APPROVE_TS_CANDIDATE',d['state_sha256'])\n assert d['execution_authorization'] is None and d['ALLOWED_ACTIONS']==['APPROVE_TS_CANDIDATE']\n assert all(denied(path,d,a) for a in ('REPORT_FINAL_BARRIER','SUBMIT_VASP','STOP_JOB','CONTINUE_JOB'))\n before=summary.read_bytes()\n if owner=='summary':write_json(summary,{**load_json_object(summary),'grade':'C','dimer_technical_acceptance':False})\n else:\n  changed=c[owner]/name;changed.write_bytes(changed.read_bytes()+b'\\n');assert summary.read_bytes()==before\n assert all(denied(path,d,a) for a in ('APPROVE_TS_CANDIDATE','REPORT_FINAL_BARRIER'))\n return {'initial':'VALIDATED_TS','execution_authorization':None,'changed':owner+'/'+name,'unchanged_summary':owner!='summary','old_claim':'DENIED'}\nfor owner,name in [('summary','vfa_analysis.json'),('vfa','OUTCAR'),('vfa','POSCAR'),('vfa','vfa_review.json'),('vfa','vfa_handoff.json'),('dimer','CONTCAR'),('dimer','dimer_analysis.json')]:\n label=(owner+'_'+name).replace('.','_');check(label,lambda o=owner,n=name,l=label:dimer_change(l,o,n))\ndef neb_change(label,which):\n c=neb_vfa_case(base/label,contract());summary=c['vfa']/'vfa_analysis.json';p,d=gate(summary)\n require_action(p,'APPROVE_TS_CANDIDATE',d['state_sha256']);before=summary.read_bytes()\n changed=c['contract_path'] if which=='contract' else c['plus']/'OUTCAR'\n changed.write_bytes(changed.read_bytes()+b'\\n');assert before==summary.read_bytes()\n assert all(denied(p,d,a) for a in ('APPROVE_TS_CANDIDATE','REPORT_FINAL_BARRIER'))\n return {'initial':'VALIDATED_TS','unchanged_summary':True,'changed':which,'old_claim':'DENIED'}\nfor which in ['contract','connectivity_branch']:check('neb_'+which,lambda w=which:neb_change('neb_'+w,w))\n(out/'independent_claims.json').write_text(json.dumps(results,indent=2));print(json.dumps(results,indent=2))\nassert all(r['status']=='PASS' for r in results)\n",
+    "legacy_submit_repro.py": "import sys,json,threading,subprocess\nfrom pathlib import Path\nfrom concurrent.futures import ThreadPoolExecutor\nroot=Path('C:/Users/86177/AppData/Local/Temp/sbq123-acceptance-rerun')\nsys.path[:0]=[str(root),str(root/'scripts/convergence')]\nfrom scripts.convergence import setup_alpha_fe_bulk_smearing as alpha\nout=Path('C:/Users/86177/AppData/Local/Temp/b1b7-rerun-evidence')\nwork=out/'legacy-submit-fixture';job=work/'case';job.mkdir(parents=True);(job/'run.lsf').write_text('# synthetic only\\n')\nalpha.WORKDIR=work;alpha.CASES=[('case',0,0.1)]\nbarrier=threading.Barrier(2);calls=[];lock=threading.Lock()\noriginal_write=alpha._write_json_atomic\noriginal_run=alpha.subprocess.run\ndef synchronize_before_write(*args,**kwargs):\n barrier.wait(timeout=10);return original_write(*args,**kwargs)\ndef fake_run(argv,**kwargs):\n with lock:\n  n=len(calls)+1;calls.append({'argv':argv,'cwd':str(kwargs['cwd'])})\n return subprocess.CompletedProcess(argv,0,stdout=f'Job <{100+n}> is submitted\\n',stderr='')\nalpha._write_json_atomic=synchronize_before_write\nalpha.subprocess.run=fake_run\ndef invoke():\n try:alpha.submit();return 'returned'\n except Exception as e:return type(e).__name__+': '+str(e)\ntry:\n with ThreadPoolExecutor(max_workers=2) as pool: outcomes=list(pool.map(lambda _:invoke(),range(2)))\nfinally:alpha.subprocess.run=original_run;alpha._write_json_atomic=original_write\nresult={'function':'scripts/convergence/setup_alpha_fe_bulk_smearing.py::submit','cases':1,'concurrent_callers':2,'fake_dispatch_count':len(calls),'fake_dispatches':calls,'outcomes':outcomes,'gate_or_authorization_files':[],'external_scientific_actions':0}\n(out/'legacy_submission_reproduction.json').write_text(json.dumps(result,indent=2));print(json.dumps(result,indent=2))\nassert len(calls)==2,'race was not reproduced'\n"
+  }
+}
