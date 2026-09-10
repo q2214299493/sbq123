@@ -3,27 +3,20 @@ from __future__ import annotations
 
 import argparse
 import csv
-import json
-import os
 import re
 import shutil
-import subprocess
-import tempfile
 from pathlib import Path
 
 from scripts.vasp_result_gate import read_incar_values
 
-from common import (
-    EXTERNAL_COMMAND_TIMEOUT_SECONDS,
-    last_matching_float,
-)
+from scripts.artifact_io import load_json_object, sha256_file
+from scripts.convergence.common import last_matching_float
+from scripts.neb_agent import submission
 
 
 WORKDIR = Path("~/sbq/agent/jobs/convergence/alpha_fe_bulk_smearing_20260623").expanduser()
 SOURCE = Path("~/sbq/agent/jobs/convergence/fe_bulk_fe110_slab_20260618/alpha_fe_bulk/reference").expanduser()
 LSF = Path("~/vasp541std.lsf").expanduser()
-SUBMISSION_ATTEMPT_FILE = "submission_attempt.json"
-SUBMISSION_RECORD_FILE = "submitted.jobid"
 CASES = [
     ("ISMEAR_m5_TETRA", -5, 0.05),
     ("ISMEAR_0_SIGMA_0p05", 0, 0.05),
@@ -75,6 +68,8 @@ def setup() -> None:
     missing = [str(path) for path in required if not path.exists()]
     if missing:
         raise FileNotFoundError("Missing required files: " + ", ".join(missing))
+    if any((WORKDIR / label / "run.lsf").exists() for label, _, _ in CASES):
+        raise ValueError("Legacy run.lsf inputs require reviewed handoff to script.lsf before setup")
 
     WORKDIR.mkdir(parents=True, exist_ok=True)
     for label, ismear, sigma in CASES:
@@ -82,7 +77,8 @@ def setup() -> None:
         job_dir.mkdir(parents=True, exist_ok=True)
         shutil.copy2(SOURCE / "POSCAR", job_dir / "POSCAR")
         shutil.copy2(SOURCE / "POTCAR", job_dir / "POTCAR")
-        shutil.copy2(LSF, job_dir / "run.lsf")
+        shutil.copy2(LSF, job_dir / "script.lsf")
+        (job_dir / "POTCAR.spec").write_text(f"sha256={sha256_file(SOURCE / 'POTCAR')}\n", encoding="ascii")
         write_incar(job_dir / "INCAR", ismear, sigma)
         write_kpoints(job_dir / "KPOINTS")
 
@@ -100,7 +96,7 @@ def check() -> None:
     errors: list[str] = []
     for label, expected_ismear, expected_sigma in CASES:
         job_dir = WORKDIR / label
-        for name in ("POSCAR", "POTCAR", "INCAR", "KPOINTS", "run.lsf"):
+        for name in ("POSCAR", "POTCAR", "INCAR", "KPOINTS", "script.lsf", "POTCAR.spec"):
             if not (job_dir / name).exists():
                 errors.append(f"{label}: missing {name}")
         if not (job_dir / "INCAR").exists():
@@ -121,86 +117,42 @@ def check() -> None:
     print(f"Input audit passed for {len(CASES)} jobs")
 
 
-def submit() -> None:
-    missing = [
-        str(WORKDIR / label / "run.lsf")
-        for label, _, _ in CASES
-        if not (WORKDIR / label / "run.lsf").is_file()
-    ]
-    if missing:
-        raise FileNotFoundError(
-            "Submission refused because required run.lsf files are missing: "
-            + ", ".join(missing)
+def submit(submission_manifest: Path | None = None) -> None:
+    """Apply explicit per-case handoffs through the canonical execution authority.
+
+    The manifest maps campaign labels to reviewed canonical submit arguments.
+    It is routing data, never an authorization or a submission receipt.
+    """
+    if submission_manifest is None:
+        raise ValueError(
+            "CANONICAL_EXECUTION_AUTHORIZATION_REQUIRED: supply --submission-manifest "
+            "with a reviewed gate decision and canonical bundle for each selected case; "
+            "see modules/convergence_workflow/README.md"
         )
-
-    for label, _, _ in CASES:
-        job_dir = WORKDIR / label
-        marker = job_dir / SUBMISSION_RECORD_FILE
-        attempt = job_dir / SUBMISSION_ATTEMPT_FILE
-        if marker.exists():
-            print(f"{label}: already submitted as {marker.read_text().splitlines()[0]}")
-            continue
-        if attempt.exists():
-            raise RuntimeError(
-                "submission retry refused because a previous bsub outcome is "
-                f"unresolved; inspect {attempt} and follow SUBMISSION_RECOVERY.md"
-            )
-        _write_json_atomic(
-            attempt,
-            {
-                "status": "SUBMISSION_OUTCOME_UNRESOLVED",
-                "case": label,
-                "command": ["bsub", "run.lsf"],
-                "working_directory": str(job_dir),
-            },
-        )
-        try:
-            proc = subprocess.run(
-                ["bsub", "run.lsf"],
-                cwd=job_dir,
-                text=True,
-                capture_output=True,
-                check=False,
-                timeout=EXTERNAL_COMMAND_TIMEOUT_SECONDS,
-            )
-        except subprocess.TimeoutExpired as exc:
-            raise RuntimeError(
-                "Submission outcome is unresolved because bsub timed out after "
-                f"{EXTERNAL_COMMAND_TIMEOUT_SECONDS} seconds for {label}; "
-                f"inspect {attempt} and follow SUBMISSION_RECOVERY.md"
-            ) from exc
-        output = (proc.stdout + proc.stderr).strip()
-        match = re.search(r"Job <(\d+)>", output)
-        if proc.returncode != 0 or not match:
-            raise RuntimeError(
-                f"Submission outcome is unresolved for {label}: {output}; "
-                f"inspect {attempt} and follow SUBMISSION_RECOVERY.md"
-            )
-        _write_text_atomic(marker, match.group(1) + "\n" + output + "\n")
-        attempt.unlink()
-        print(f"{label}: {match.group(1)}")
-
-
-def _write_text_atomic(path: Path, content: str) -> None:
-    descriptor, temporary_name = tempfile.mkstemp(
-        dir=path.parent,
-        prefix=f".{path.name}.",
-        suffix=".tmp",
-    )
-    temporary = Path(temporary_name)
-    try:
-        with os.fdopen(descriptor, "w", encoding="ascii", newline="\n") as handle:
-            handle.write(content)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary, path)
-    except BaseException:
-        temporary.unlink(missing_ok=True)
-        raise
-
-
-def _write_json_atomic(path: Path, payload: dict[str, object]) -> None:
-    _write_text_atomic(path, json.dumps(payload, indent=2, ensure_ascii=True) + "\n")
+    handoffs = load_json_object(submission_manifest)
+    required = {"workdir", "decision_path", "host", "remote_dir", "potcar_source", "potcar_sha256", "action"}
+    labels = {label for label, _, _ in CASES}
+    if not handoffs or not set(handoffs) <= labels:
+        raise ValueError("submission manifest must select known campaign cases")
+    # Validate routing for the whole selection before any case can be dispatched.
+    for label, handoff in handoffs.items():
+        if not isinstance(handoff, dict) or set(handoff) != required:
+            raise ValueError(f"{label}: expected canonical submit fields {sorted(required)}")
+        if any(not isinstance(value, str) or not value.strip() for value in handoff.values()):
+            raise ValueError(f"{label}: canonical submit fields must be non-empty text")
+        directory = Path(handoff["workdir"])
+        if not directory.is_absolute() or directory.resolve() != (WORKDIR / label).resolve():
+            raise ValueError(f"{label}: workdir must identify this campaign case")
+        if not Path(handoff["decision_path"]).is_absolute():
+            raise ValueError(f"{label}: decision_path must be absolute")
+        if handoff["action"] != "SUBMIT_DIAGNOSTIC_VASP":
+            raise ValueError(f"{label}: static smearing handoff requires SUBMIT_DIAGNOSTIC_VASP")
+        if (directory / "submitted.jobid").exists() or (directory / "submitted.jobid").is_symlink():
+            raise ValueError(f"{label}: legacy submitted.jobid requires reviewed reconciliation before canonical handoff")
+    for label, handoff in handoffs.items():
+        arguments = {**handoff, "workdir": Path(handoff["workdir"]), "decision_path": Path(handoff["decision_path"])}
+        result = submission.submit(**arguments)
+        print(f"{label}: {result['job_id']}")
 
 
 def summary() -> None:
@@ -266,6 +218,7 @@ def main() -> None:
     parser.add_argument("--setup", action="store_true")
     parser.add_argument("--check", action="store_true")
     parser.add_argument("--submit", action="store_true")
+    parser.add_argument("--submission-manifest", type=Path, help="Reviewed per-case canonical handoffs (JSON)")
     parser.add_argument("--summary", action="store_true")
     args = parser.parse_args()
     if args.setup:
@@ -273,7 +226,7 @@ def main() -> None:
     if args.check:
         check()
     if args.submit:
-        submit()
+        submit(args.submission_manifest)
     if args.summary:
         summary()
 

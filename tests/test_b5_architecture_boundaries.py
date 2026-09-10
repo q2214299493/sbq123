@@ -5,6 +5,8 @@ from pathlib import Path
 
 import pytest
 
+from scheduler_architecture import dispatch_sites
+
 from scripts.artifact_io import sha256_json
 from scripts.ts_strategy_engine.registry import open_registry, compatibility_fingerprint
 from scripts.ts_strategy_engine.matched_static_evidence import validate_barrier_values
@@ -162,8 +164,8 @@ def test_authoritative_capabilities_have_one_implementation():
         for node in ast.walk(tree):
             if isinstance(node, ast.FunctionDef) and node.name in found:
                 found[node.name].append(path)
-            if isinstance(node, ast.Constant) and node.value == "bsub script.lsf":
-                dispatch.append(path)
+        if dispatch_sites(tree):
+            dispatch.append(path)
     assert found == {name: [path] for name, path in expected.items()}
     assert dispatch == ["scripts/neb_agent/submission.py"]
 

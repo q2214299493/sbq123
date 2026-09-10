@@ -55,6 +55,52 @@ Select transferable VASP numerical and slab settings for a precisely defined mat
 
 These scripts have distinct scopes. Submission flags require task-level review and registry setup before use.
 
+### Alpha-Fe canonical execution handoff
+
+`setup_alpha_fe_bulk_smearing --setup` now creates the canonical `script.lsf`
+with the original LSF bytes and a `POTCAR.spec` containing only the source
+POTCAR SHA-256 identity. The scientific inputs and summary convention are unchanged.
+An existing `run.lsf` causes setup to stop: review its byte-preserving handoff to
+`script.lsf` explicitly before regenerating inputs. The tool never maintains two
+independently mutable LSF templates or rewrites existing legacy submission markers.
+
+`--submit` without a manifest fails with
+`CANONICAL_EXECUTION_AUTHORIZATION_REQUIRED`. For each selected case, prepare the
+canonical `submission_preflight.json`, current source-bound scientific evidence,
+and a gate decision using the existing B1 authorization procedure described in
+[`SUBMISSION_RECOVERY.md`](../../SUBMISSION_RECOVERY.md) and
+[`transition_state_search`](../transition_state_search/README.md).
+POTCAR source/hash, target, bundle, action and evidence must match that reviewed
+authorization. Neither `--check` nor the routing manifest grants authorization.
+
+Pass `--submit --submission-manifest /absolute/path/reviewed-handoffs.json`:
+
+```json
+{
+  "ISMEAR_m5_TETRA": {
+    "workdir": "/absolute/campaign/ISMEAR_m5_TETRA",
+    "decision_path": "/absolute/review/gate-decision.json",
+    "host": "sunboquan-codex",
+    "remote_dir": "~/sbq/reviewed-campaign/ISMEAR_m5_TETRA",
+    "potcar_source": "~/sbq/reviewed-potentials/POTCAR",
+    "potcar_sha256": "REPLACE_WITH_REVIEWED_SHA256",
+    "action": "SUBMIT_DIAGNOSTIC_VASP"
+  }
+}
+```
+
+Replace illustrative paths with reviewed values; workdir must be the selected
+case under the configured campaign `WORKDIR`. The manifest selects one or more
+known labels. Each delegates to `scripts.neb_agent.submission.submit`; alternatively
+use that owner's CLI (`python -m scripts.neb_agent.submission --help`). Cases are
+independent submissions, not an atomic multi-job transaction: stop on the first
+failure and inspect canonical receipts before preparing any further handoff.
+
+Canonical immutable reservations and `submission_record.json` replace the old
+`submitted.jobid` success marker. Any old marker requires reviewed reconciliation;
+an unresolved canonical reservation is never automatically retried. The campaign
+adapter creates no authorization, reservation, scheduler command or private receipt.
+
 Old wrong-facet generator scripts have been removed from the repository.
 
 ## Done Criteria

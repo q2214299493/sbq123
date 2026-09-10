@@ -12,6 +12,7 @@ from typing import Any
 
 from scripts.artifact_io import load_json_object, sha256_file, sha256_text
 from scripts.execution_backends import load_execution_backends
+from scripts.neb_agent.utils_vasp import parse_outcar
 
 def parse_poscar_symbols(path: Path) -> list[str]:
     lines = path.read_text(encoding="utf-8").splitlines()
@@ -25,15 +26,9 @@ def parse_poscar_symbols(path: Path) -> list[str]:
 def parse_final_outcar(path: Path) -> dict[str, Any]:
     latest_forces: list[list[float]] | None = None
     latest_toten: float | None = None
-    ionic_converged = False
-    normal_completion = False
     with path.open("r", encoding="utf-8", errors="replace") as handle:
         iterator = iter(handle)
         for line in iterator:
-            if "reached required accuracy" in line:
-                ionic_converged = True
-            if "General timing and accounting informations" in line:
-                normal_completion = True
             if "free  energy   TOTEN" in line:
                 fields = line.split()
                 try:
@@ -63,9 +58,10 @@ def parse_final_outcar(path: Path) -> dict[str, Any]:
         raise ValueError(f"{path}: no TOTAL-FORCE block")
     if latest_toten is None:
         raise ValueError(f"{path}: no TOTEN value")
+    state = parse_outcar(path)
     return {
-        "ionic_converged": ionic_converged,
-        "normal_completion": normal_completion,
+        "ionic_converged": state["reached_required_accuracy"],
+        "normal_completion": state["normal_completion"],
         "final_toten_eV": latest_toten,
         "forces_eV_per_A": latest_forces,
     }

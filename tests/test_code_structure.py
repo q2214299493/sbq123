@@ -5,6 +5,8 @@ import hashlib
 from collections import defaultdict
 from pathlib import Path
 
+from scheduler_architecture import dispatch_sites
+
 
 ROOT = Path(__file__).resolve().parents[1]
 CODE_ROOTS = (ROOT / "scripts", ROOT / "skills", ROOT / "modules" / "fe_convergence_baseline")
@@ -182,12 +184,11 @@ def test_neb_authorization_application_and_submission_have_single_owners() -> No
             if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
                 if node.name in {"require_execution_authorization", "bind_execution"}:
                     owners[node.name].append(path.relative_to(ROOT).as_posix())
-                # The TS/NEB lifecycle has one submit API. Convergence campaign
-                # setup has a separate pre-existing scope outside this lifecycle.
+                # Campaign adapters may expose submit(), but cannot own dispatch.
                 if node.name == "submit" and path.parent.name in {"neb_agent", "ts_strategy_engine", "ts_validation"}:
                     owners["submit"].append(path.relative_to(ROOT).as_posix())
-            if isinstance(node, ast.Constant) and node.value == "bsub script.lsf":
-                owners["vasp_dispatch"].append(path.relative_to(ROOT).as_posix())
+        if dispatch_sites(tree):
+            owners["vasp_dispatch"].append(path.relative_to(ROOT).as_posix())
     assert owners == {
         "require_execution_authorization": ["scripts/ts_strategy_engine/execution_evidence.py"],
         "bind_execution": ["scripts/ts_strategy_engine/execution_evidence.py"],

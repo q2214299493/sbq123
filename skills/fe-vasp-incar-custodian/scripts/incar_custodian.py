@@ -11,6 +11,8 @@ from typing import Any
 
 import yaml
 
+from scripts.vasp_result_gate import read_incar_values
+
 
 SKILL_ROOT = Path(__file__).resolve().parents[1]
 CALCULATION_TYPES = (
@@ -46,14 +48,7 @@ def write_json(path: Path, payload: dict[str, Any]) -> None:
 def raw_incar_value(path: Path | None, key: str) -> str | None:
     if path is None or not path.is_file():
         return None
-    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
-        clean = line.split("#", 1)[0].split("!", 1)[0]
-        if "=" not in clean:
-            continue
-        name, value = clean.split("=", 1)
-        if name.strip().upper() == key.upper():
-            return value.strip()
-    return None
+    return read_incar_values(path).get(key.upper())
 
 
 def write_incar_candidate(incar_class: Any, values: dict[str, Any], path: Path, magmom_text: str | None) -> None:
