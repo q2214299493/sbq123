@@ -1,0 +1,545 @@
+{
+  "schema_version": 1,
+  "document_kind": "dual_model_gpu_ml_neb_path_manifest",
+  "status": "needs_work_review",
+  "result_class": "predicted_path_candidate_only",
+  "run_kind": "production_gpu_path_candidate",
+  "source_request": {
+    "path": "../../request.json",
+    "sha256": "ff5e8516df91b2b4a977c06a4f8a49d3ce17664ec49f857f39e6bebfb6ed754c"
+  },
+  "models": {
+    "primary": {
+      "backend": "matris",
+      "identifier": "MatRIS_c16f569_feCOH",
+      "checkpoint_sha256": "1e6a85b33db075ad1637eca7537084024a694b1340358911212d8a5c518c6601",
+      "remote_checkpoint_path": "/home/sbq/sbq/mlip_same_structure_benchmark_20260825/MatRIS_4M_FeCOH_compliant.pth.tar"
+    },
+    "secondary": {
+      "backend": "aqcat25",
+      "identifier": "AQCat25 demo_single model.pt",
+      "checkpoint_sha256": "e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50",
+      "remote_checkpoint_path": "/home/sbq/sbq/aqcat25/demo_single/model.pt"
+    }
+  },
+  "runner_sha256": "e08f8c984214177ffa2bb0afbe2dd1bbc5f6a1dd847a3ac6fa322c551e629c59",
+  "reaction": {
+    "reaction_id": "fe110_c2ho_h_migration_INT06_9748648_to_MID9737143",
+    "contract_sha256": "eeecfe26404dafb2008fbdc5529081d5584bbc5b4883c00a0096a2f32858454a",
+    "atom_map_sha256": "ef5b3d3d64884fde2a673dd35bef48a2a965c026edb6a8dd1c4eb22b100ae157",
+    "compatibility_sha256": "4ef0c782834fd07afca2621a5235bb67c2ea913bd650b93123c21538c35c165d",
+    "indexed_bond_changes": [],
+    "reaction_coordinates": [
+      {
+        "name": "H50_to_arriving_Fe39",
+        "kind": "distance",
+        "atoms": [
+          49,
+          38
+        ],
+        "important_interval_A": [
+          1.8217332982169685,
+          3.2880133053906118
+        ],
+        "role": "primary"
+      }
+    ]
+  },
+  "optimizer": {
+    "restrained_preconditioning": {
+      "converged": true,
+      "steps": 0
+    },
+    "constraint_release": {
+      "temporary_constraints_applied": [],
+      "stage_snapshots": [
+        {
+          "stage": "unrestrained_seed_validated",
+          "manifest_path": "stage_snapshots/unrestrained_seed_validated/snapshot_manifest.json",
+          "manifest_sha256": "674029e82a2e6f74c417b00ddf194896a88f7e9b04037b80418a8b279b435a0f",
+          "converged": true,
+          "steps": 0
+        }
+      ],
+      "staged_release": [],
+      "nonconverged_stage_action": "not_applicable",
+      "constraint_target_reference": "prevalidated_unrestrained_seed",
+      "reaction_coordinate_redistributions": [],
+      "released_before_ordinary_ml_neb": true,
+      "post_release_fixed_atom_indices_zero_based": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ]
+      ],
+      "post_release_internal_coordinate_constraint_count": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "post_release_position_restraint_count": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "ordinary_ml_neb": {
+      "converged": true,
+      "steps": 12
+    },
+    "ml_ci_neb": {
+      "requested": "off",
+      "readiness_passed": true,
+      "readiness_reasons": [],
+      "ran": false
+    },
+    "final_stage": "ordinary_ml_neb",
+    "final_converged": true,
+    "final_steps": 12
+  },
+  "images": [
+    {
+      "image": "00",
+      "structure_path": "images/00/POSCAR",
+      "structure_sha256": "4b183e5d7b21dfc1576c483e69a64c88cf77b78388c38a3dccf48238f5db873c",
+      "predicted_energy_eV": -399.7763156890869,
+      "predicted_physical_force_max_eVA": 0.37763168672574376,
+      "projected_neb_force_max_eVA": 0.0,
+      "spring_force_max_eVA": 0.0,
+      "reaction_coordinate_value": 0.0,
+      "key_bond_distances_A": {},
+      "minimum_pair_distance_A": 1.0990756067577316,
+      "model_disagreement": {
+        "movable_force_vector_rmse_eVA": 0.0839159143009892,
+        "movable_force_difference_max_norm_eVA": 0.49374744480085314
+      },
+      "model_disagreement_reason": "two_distinct_models_exact_same_structure",
+      "uncertainty_status": "sampling_score_not_calibrated_uncertainty"
+    },
+    {
+      "image": "01",
+      "structure_path": "images/01/POSCAR",
+      "structure_sha256": "3eb0c6ea36b0c0d06be43ed8e39f285ec089b4391efe61d486ac53e633b23fd3",
+      "predicted_energy_eV": -399.7440814971924,
+      "predicted_physical_force_max_eVA": 0.30835907910087756,
+      "projected_neb_force_max_eVA": 0.06664080147436988,
+      "spring_force_max_eVA": 0.038225088458591024,
+      "reaction_coordinate_value": 0.0,
+      "key_bond_distances_A": {},
+      "minimum_pair_distance_A": 1.0990297554009538,
+      "model_disagreement": {
+        "movable_force_vector_rmse_eVA": 0.0831606341659476,
+        "movable_force_difference_max_norm_eVA": 0.452375116389193
+      },
+      "model_disagreement_reason": "two_distinct_models_exact_same_structure",
+      "uncertainty_status": "sampling_score_not_calibrated_uncertainty"
+    },
+    {
+      "image": "02",
+      "structure_path": "images/02/POSCAR",
+      "structure_sha256": "21115f8aa333c1aa0053556cd7a377a86fa6c43ba7b42f80bb6620e144923aa2",
+      "predicted_energy_eV": -399.66068267822266,
+      "predicted_physical_force_max_eVA": 0.02574014117550826,
+      "projected_neb_force_max_eVA": 0.011733284779862982,
+      "spring_force_max_eVA": 0.008391806658410321,
+      "reaction_coordinate_value": 0.0,
+      "key_bond_distances_A": {},
+      "minimum_pair_distance_A": 1.099711086722297,
+      "model_disagreement": {
+        "movable_force_vector_rmse_eVA": 0.07859921011143634,
+        "movable_force_difference_max_norm_eVA": 0.44276772269165443
+      },
+      "model_disagreement_reason": "two_distinct_models_exact_same_structure",
+      "uncertainty_status": "sampling_score_not_calibrated_uncertainty"
+    },
+    {
+      "image": "03",
+      "structure_path": "images/03/POSCAR",
+      "structure_sha256": "58788a37914d42f604acf2399db8d12f870e52785c436de272ec431c499e3ff8",
+      "predicted_energy_eV": -399.7356176376343,
+      "predicted_physical_force_max_eVA": 0.24333169566039087,
+      "projected_neb_force_max_eVA": 0.060052976790992765,
+      "spring_force_max_eVA": 0.03210769954160069,
+      "reaction_coordinate_value": 0.0,
+      "key_bond_distances_A": {},
+      "minimum_pair_distance_A": 1.0985687792636154,
+      "model_disagreement": {
+        "movable_force_vector_rmse_eVA": 0.07813077991476518,
+        "movable_force_difference_max_norm_eVA": 0.4206507171245192
+      },
+      "model_disagreement_reason": "two_distinct_models_exact_same_structure",
+      "uncertainty_status": "sampling_score_not_calibrated_uncertainty"
+    },
+    {
+      "image": "04",
+      "structure_path": "images/04/POSCAR",
+      "structure_sha256": "70a8c73b2ef602992b3586e24cae2655dde6d1ff81e86bf112ee2e2cc15ab293",
+      "predicted_energy_eV": -399.7276544570923,
+      "predicted_physical_force_max_eVA": 0.30720085863870256,
+      "projected_neb_force_max_eVA": 0.0,
+      "spring_force_max_eVA": 0.0,
+      "reaction_coordinate_value": 0.0,
+      "key_bond_distances_A": {},
+      "minimum_pair_distance_A": 1.1003682685417004,
+      "model_disagreement": {
+        "movable_force_vector_rmse_eVA": 0.07966339613395786,
+        "movable_force_difference_max_norm_eVA": 0.4306984905780344
+      },
+      "model_disagreement_reason": "two_distinct_models_exact_same_structure",
+      "uncertainty_status": "sampling_score_not_calibrated_uncertainty"
+    }
+  ],
+  "adjacent_rmsd_A": [
+    0.09172281826830957,
+    0.08467886299663127,
+    0.08619530440649358,
+    0.08036451416239897
+  ],
+  "geometry_guards": {
+    "preserved_bonds": [
+      {
+        "name": "C1_C2",
+        "atoms_zero_based": [
+          45,
+          46
+        ],
+        "distances_A": [
+          1.4108502248310715,
+          1.416006339110813,
+          1.4176480121575392,
+          1.420673247852509,
+          1.4151613833308911
+        ],
+        "minimum_A": 1.4108502248310715,
+        "maximum_A": 1.420673247852509,
+        "assessment_mode": "graded_warning",
+        "accepted_window_A": [
+          1.25,
+          1.6
+        ],
+        "accepted_window_passed": true,
+        "hard_window_A": [
+          1.1,
+          1.9
+        ],
+        "hard_passed": true,
+        "level": "pass",
+        "passed": true
+      },
+      {
+        "name": "C2_O",
+        "atoms_zero_based": [
+          46,
+          47
+        ],
+        "distances_A": [
+          1.291423843418185,
+          1.283394401706066,
+          1.2832466451310796,
+          1.2797224135499201,
+          1.2841671896162385
+        ],
+        "minimum_A": 1.2797224135499201,
+        "maximum_A": 1.291423843418185,
+        "assessment_mode": "graded_warning",
+        "accepted_window_A": [
+          1.15,
+          1.55
+        ],
+        "accepted_window_passed": true,
+        "hard_window_A": [
+          0.9,
+          2.0
+        ],
+        "hard_passed": true,
+        "level": "pass",
+        "passed": true
+      },
+      {
+        "name": "C1_H48",
+        "atoms_zero_based": [
+          45,
+          48
+        ],
+        "distances_A": [
+          1.0990756067577316,
+          1.0990297554009538,
+          1.0997110867222972,
+          1.0985687792636154,
+          1.1003682685417007
+        ],
+        "minimum_A": 1.0985687792636154,
+        "maximum_A": 1.1003682685417007,
+        "assessment_mode": "graded_warning",
+        "accepted_window_A": [
+          0.9,
+          1.3
+        ],
+        "accepted_window_passed": true,
+        "hard_window_A": [
+          0.7,
+          1.8
+        ],
+        "hard_passed": true,
+        "level": "pass",
+        "passed": true
+      }
+    ],
+    "monitored_bonds": [
+      {
+        "name": "H50_Fe39_site_contact",
+        "atoms_zero_based": [
+          49,
+          38
+        ],
+        "distances_A": [
+          3.288013305390475,
+          2.9433239448706936,
+          2.5148313999791756,
+          2.0169640708901633,
+          1.8217332982150132
+        ],
+        "important_interval_A": [
+          1.8217332982169685,
+          3.2880133053906118
+        ],
+        "important_interval_tolerance_A": 0.0,
+        "effective_important_interval_A": [
+          1.8217332982169685,
+          3.2880133053906118
+        ],
+        "covered_internal_images": [
+          "01",
+          "02",
+          "03"
+        ],
+        "borderline_internal_images": [],
+        "minimum_internal_images": 0,
+        "coverage_passed": true,
+        "coverage_review_required": false,
+        "coverage_continuation_passed": true,
+        "monotonic_direction": null,
+        "maximum_backtrack_A": 0.0,
+        "backtracks_A": [],
+        "maximum_observed_backtrack_A": 0.0,
+        "monotonic_passed": true,
+        "passed": true
+      }
+    ],
+    "adjacent_rmsd_A": [
+      0.09172281826830957,
+      0.08467886299663127,
+      0.08619530440649358,
+      0.08036451416239897
+    ],
+    "maximum_adjacent_rmsd_A": 0.09172281826830957,
+    "adjacent_rmsd_passed": true,
+    "maximum_single_movable_atom_steps_A": [
+      0.39562299743882673,
+      0.4595226550676167,
+      0.4760775381675355,
+      0.2758474021985258
+    ],
+    "maximum_single_movable_atom_step_A": 0.4760775381675355,
+    "maximum_single_movable_atom_step_limit_A": 1.2,
+    "maximum_single_movable_atom_step_passed": true,
+    "minimum_pair_distances_A": [
+      1.0990756067577316,
+      1.0990297554009538,
+      1.099711086722297,
+      1.0985687792636154,
+      1.1003682685417004
+    ],
+    "minimum_pair_distance_passed": true,
+    "periodic_branch_numeric_passed": true,
+    "passed": true
+  },
+  "single_strict_internal_peak": true,
+  "strict_internal_peak_images": [
+    "02"
+  ],
+  "fixed_path_model_comparison": {
+    "comparison_scope": "exact_structure_hashes; within_model_relative_energy_to_image_00",
+    "interpretation": "model_model_disagreement_sampling_score_not_calibrated_uncertainty",
+    "images": [
+      {
+        "image": "00",
+        "structure_path": "images/00/POSCAR",
+        "structure_sha256": "4b183e5d7b21dfc1576c483e69a64c88cf77b78388c38a3dccf48238f5db873c",
+        "primary_energy_eV": -399.7763156890869,
+        "secondary_energy_eV": -3.121443748474121,
+        "primary_relative_energy_eV": 0.0,
+        "secondary_relative_energy_eV": 0.0,
+        "movable_force_vector_rmse_eVA": 0.0839159143009892,
+        "movable_force_difference_max_norm_eVA": 0.49374744480085314,
+        "key_bond_distances_A": {}
+      },
+      {
+        "image": "01",
+        "structure_path": "images/01/POSCAR",
+        "structure_sha256": "3eb0c6ea36b0c0d06be43ed8e39f285ec089b4391efe61d486ac53e633b23fd3",
+        "primary_energy_eV": -399.7440814971924,
+        "secondary_energy_eV": -2.9342920780181885,
+        "primary_relative_energy_eV": 0.03223419189453125,
+        "secondary_relative_energy_eV": 0.18715167045593262,
+        "movable_force_vector_rmse_eVA": 0.0831606341659476,
+        "movable_force_difference_max_norm_eVA": 0.452375116389193,
+        "key_bond_distances_A": {}
+      },
+      {
+        "image": "02",
+        "structure_path": "images/02/POSCAR",
+        "structure_sha256": "21115f8aa333c1aa0053556cd7a377a86fa6c43ba7b42f80bb6620e144923aa2",
+        "primary_energy_eV": -399.66068267822266,
+        "secondary_energy_eV": -2.855902671813965,
+        "primary_relative_energy_eV": 0.11563301086425781,
+        "secondary_relative_energy_eV": 0.26554107666015625,
+        "movable_force_vector_rmse_eVA": 0.07859921011143634,
+        "movable_force_difference_max_norm_eVA": 0.44276772269165443,
+        "key_bond_distances_A": {}
+      },
+      {
+        "image": "03",
+        "structure_path": "images/03/POSCAR",
+        "structure_sha256": "58788a37914d42f604acf2399db8d12f870e52785c436de272ec431c499e3ff8",
+        "primary_energy_eV": -399.7356176376343,
+        "secondary_energy_eV": -2.931788921356201,
+        "primary_relative_energy_eV": 0.04069805145263672,
+        "secondary_relative_energy_eV": 0.18965482711791992,
+        "movable_force_vector_rmse_eVA": 0.07813077991476518,
+        "movable_force_difference_max_norm_eVA": 0.4206507171245192,
+        "key_bond_distances_A": {}
+      },
+      {
+        "image": "04",
+        "structure_path": "images/04/POSCAR",
+        "structure_sha256": "70a8c73b2ef602992b3586e24cae2655dde6d1ff81e86bf112ee2e2cc15ab293",
+        "primary_energy_eV": -399.7276544570923,
+        "secondary_energy_eV": -3.035020351409912,
+        "primary_relative_energy_eV": 0.048661231994628906,
+        "secondary_relative_energy_eV": 0.08642339706420898,
+        "movable_force_vector_rmse_eVA": 0.07966339613395786,
+        "movable_force_difference_max_norm_eVA": 0.4306984905780344,
+        "key_bond_distances_A": {}
+      }
+    ]
+  },
+  "restrictions": {
+    "predicted_candidate_only": true,
+    "reportable_dft": false,
+    "automatic_vasp_submission": false,
+    "dimer_parent_accepted": false
+  },
+  "producer": {
+    "backend": "aqcat_gpu",
+    "hostname": "MZ73",
+    "gpu_job_id": "1517"
+  },
+  "producer_exit_record": {
+    "path": "producer_exit_record.json",
+    "sha256": "2878ebbc4e97431e0407247050550696a22b1953a0585bba3591d6dcdb3ba528",
+    "status": "success",
+    "exit_code": 0,
+    "evidence_class": "producer_process_only_not_scheduler_accounting"
+  }
+}

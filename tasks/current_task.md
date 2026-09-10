@@ -7,15 +7,14 @@ Complete earlier IS-A to MID H surface migration through validated intermediate 
 
 ## Current Evidence Snapshot
 
-- 9748648: LSF DONE; ordinary valley06 relaxation completed in 79 steps; electronic and force criteria passed (0.0177274761 eV/A < 0.020).
-- INT06 accepted as intact C2HO* + H* mapped migration endpoint; final TOTEN -388.50564344 eV under fe110_converged_toten_sigma0p20_v1.
-- Schema9 registry completion applied: 12 inserted records and one workflow projection change; receipt in h_migration1357_valley06_relax_20260909/completed_review_20260910/registry_receipt.json.
-- IS-A -> INT06 and INT06 -> MID are two path intervals awaiting TS evidence; image02 remains an unresolved first-interval ML minimum.
-- The previously accepted MID -> FS O-H TS and 1.28582718 eV forward electronic barrier remain complete; do not repeat.
-- No Hessian, complete migration barrier or new VASP result established; the GPU1512 attempt produced no model output.
-- GPU1512 submitted under explicit user authority, then Slurm FAILED with ExitCode=3:0 at startup. Allocated GPU0 had 7465 MiB free <12000 MiB; guard exited before model execution. No ML-NEB steps, predictions, automatic retry or VASP submission. Failed job/input/evidence records registered.
-- Prior GPU1 jobs1513/1514/1516 failed before model; diagnostic1515 identified inherited TMPDIR. Failures retained; Python symlink and task-local TMPDIR corrections now exercised successfully by GPU1517.
-- User-requested GPU0 job1517 submitted 16:29:07; at16:29:16 Slurm RUNNING, scheduler GPU0 and model GPU UUID agree, PID2591707 verified. ML-NEB FIRE step1 completed, fmax0.296261 eV/A; prediction-only, not converged or validated TS.
+- INT06 VASP9748648 accepted as intact mapped C2HO* + H* endpoint: 79 steps, fmax0.0177274761 eV/A, final TOTEN -388.50564344 eV under fe110_converged_toten_sigma0p20_v1.
+- IS-A -> INT06 and INT06 -> MID remain separate intervals awaiting validated TS evidence; earlier full-path image02 is an unresolved first-interval ML minimum.
+- Accepted MID -> FS O-H TS and 1.28582718 eV forward electronic barrier remain complete; do not repeat.
+- GPU1517 on physical GPU0: producer exited success0 at2026-09-10T08:29:50Z; ordinary ML-NEB converged after12steps, projected fmax0.066641 eV/A. No ML-CI. Queue empty, scheduler terminal UNKNOWN because historical accounting unavailable.
+- Complete five-frame candidate reviewed in work: source/atom/cell/endpoint/fixed18Fe checks, exact MIC geometry, dist.pl, nebmovie.pl1 and visual inspection passed. H50 remains on surface; C2HO intact.
+- MatRIS and AQCat25 both peak at02: respective predicted relative heights0.115633 and0.265541 eV. Model disagreement is not VASP error calibration; sparse path does not establish unique MEP or TS.
+- Candidate accepted_for_force_diagnosis_only; dimer_parent_accepted=false. Exact optimized01/02/03 lack compatible VASP energies/forces. Execution gate NEEDS_SUBMISSION_PREFLIGHT, ALLOWED_ACTIONS=[]. No new calculation submitted.
+- Completion/review registry batch applied:43 inserts and one workflow change running -> needs_review; scheduler UNKNOWN kept separate from producer convergence. Prior failed GPU attempts remain retained.
 
 ## Lifecycle Status
 
@@ -23,11 +22,11 @@ Complete earlier IS-A to MID H surface migration through validated intermediate 
 
 ## One Executable Step
 
-Check GPU1517 on MZ73 at /home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_ml_neb_20260910_gpu0; retrieve and review the complete ML path when it finishes before selecting any VASP route.
+Prepare compatible VASP static energy/force diagnosis for exact GPU1517 final images01/02/03; review inputs/resources and execution gate before any submission, then assess Dimer eligibility.
 
 ## Submission Boundary
 
-One GPU0 job1517 is running under explicit user authority. No automatic VASP submission or model retry authorized.
+GPU1517 producer has completed. This review authorizes no new GPU/VASP submission; prepare reviewable VASP diagnosis inputs before seeking submission authority.
 
 ## Authoritative Constraint
 
@@ -45,9 +44,6 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 ## Authoritative References
 
 - docs/reviews/valley9748648_accepted_20260910.md
-- docs/reviews/int06_mid_path_prepared_20260910.md
-- docs/reviews/int06_mid_gpu_prepared_20260910.md
-- docs/reviews/int06_mid_gpu1512_startup_failure_20260910.md
-- docs/reviews/int06_mid_gpu1_attempts_20260910.md
-- docs/reviews/int06_mid_gpu1517_started_20260910.md
+- docs/reviews/oh_ts_accepted_barrier_20260910.md
+- docs/reviews/int06_mid_gpu1517_path_review_20260910.md
 <!-- state-handoff:end current_task -->

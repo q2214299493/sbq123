@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-10T11:29:12.431607+00:00",
+  "recorded_at": "2026-09-10T11:29:12.431607+00:00",
+  "evidence": [
+    {
+      "locator": "docs/reviews/int06_mid_gpu1517_path_review_20260910.md",
+      "sha256": "48f91bb5b54b2d0ee3b01d9e595537829feaf4c6c9821906159a429dddde731b",
+      "authority": "module_validation",
+      "observed_at": "2026-09-10T11:29:12.431607+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_to_mid_gpu_20260910/attempt_gpu0_20260910/review_job1517/candidate_work_review.json",
+      "sha256": "892d64dd6f11583572bcb0b855f927f6df46a6f7b5bb66531349ca9eb555f44c",
+      "authority": "module_validation",
+      "observed_at": "2026-09-10T11:29:12.431607+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_to_mid_gpu_20260910/attempt_gpu0_20260910/review_job1517/execution_gate.json",
+      "sha256": "7b18e5b70c4699d07daf622e086c3e10010ecc576f4a82147b4fbcd09da1d154",
+      "authority": "module_validation",
+      "observed_at": "2026-09-10T11:29:12.431607+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_to_mid_gpu_20260910/attempt_gpu0_20260910/review_job1517/registry_receipt.json",
+      "sha256": "b2ec2eac9a83df383b09bda089d9ca97f30d8ddd8f35a5ab816b9231a5867f61",
+      "authority": "calculation_registry",
+      "observed_at": "2026-09-10T11:29:12.431607+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "event_id": "state-gpu1517-reviewed-20260910",
+  "event_type": "state_observed",
+  "entity": {
+    "kind": "state",
+    "id": "active-fe-110-co-dissociation-test-current-gate",
+    "module": "transition_state_search"
+  },
+  "summary": "GPU1517 producer completed; full ML path reviewed and accepted for force diagnosis only, not validated TS.",
+  "payload": {
+    "block_id": "active-fe-110-co-dissociation-test-current-gate",
+    "section": "## Active Transition-State Gate",
+    "title": "Active Gate - 2026-09-10 GPU1517 ML Path Reviewed; VASP Force Diagnosis Needed",
+    "facts": [
+      "INT06 VASP9748648 accepted as intact mapped C2HO* + H* endpoint: 79 steps, fmax0.0177274761 eV/A, final TOTEN -388.50564344 eV under fe110_converged_toten_sigma0p20_v1.",
+      "IS-A -> INT06 and INT06 -> MID remain separate intervals awaiting validated TS evidence; earlier full-path image02 is an unresolved first-interval ML minimum.",
+      "Accepted MID -> FS O-H TS and 1.28582718 eV forward electronic barrier remain complete; do not repeat.",
+      "GPU1517 on physical GPU0: producer exited success0 at2026-09-10T08:29:50Z; ordinary ML-NEB converged after12steps, projected fmax0.066641 eV/A. No ML-CI. Queue empty, scheduler terminal UNKNOWN because historical accounting unavailable.",
+      "Complete five-frame candidate reviewed in work: source/atom/cell/endpoint/fixed18Fe checks, exact MIC geometry, dist.pl, nebmovie.pl1 and visual inspection passed. H50 remains on surface; C2HO intact.",
+      "MatRIS and AQCat25 both peak at02: respective predicted relative heights0.115633 and0.265541 eV. Model disagreement is not VASP error calibration; sparse path does not establish unique MEP or TS.",
+      "Candidate accepted_for_force_diagnosis_only; dimer_parent_accepted=false. Exact optimized01/02/03 lack compatible VASP energies/forces. Execution gate NEEDS_SUBMISSION_PREFLIGHT, ALLOWED_ACTIONS=[]. No new calculation submitted.",
+      "Completion/review registry batch applied:43 inserts and one workflow change running -> needs_review; scheduler UNKNOWN kept separate from producer convergence. Prior failed GPU attempts remain retained."
+    ],
+    "next_action": "Prepare compatible VASP static energy/force diagnosis for exact GPU1517 final images01/02/03; review inputs/resources and execution gate before any submission, then assess Dimer eligibility.",
+    "project_state_header": true
+  },
+  "supersedes": [
+    "state-gpu1517-running-20260910"
+  ]
+}

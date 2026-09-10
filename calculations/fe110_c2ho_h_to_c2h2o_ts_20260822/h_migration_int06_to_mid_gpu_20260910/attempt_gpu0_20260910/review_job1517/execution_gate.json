@@ -1,0 +1,560 @@
+{
+  "schema_version": 2,
+  "gate": "AUTHORITATIVE_NEB_EXECUTION_GATE",
+  "generated_at_utc": "2026-09-10T11:23:28.244408+00:00",
+  "state_sha256": "df01b8283acfe397903e313d3fbb2fe30c920092391a67df6e5ae86fd67220ed",
+  "DECISION": "NEEDS_SUBMISSION_PREFLIGHT",
+  "REASON_CODES": [
+    "SUBMISSION_PREFLIGHT_MISSING"
+  ],
+  "EVIDENCE": {
+    "geometry": {
+      "schema_version": 1,
+      "document_kind": "neb_path_geometry_diagnosis",
+      "producer": "scripts.neb_agent.diagnose_path_geometry",
+      "source_files": [
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\path_review_export\\00\\CONTCAR",
+          "sha256": "4b183e5d7b21dfc1576c483e69a64c88cf77b78388c38a3dccf48238f5db873c"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\path_review_export\\01\\CONTCAR",
+          "sha256": "3eb0c6ea36b0c0d06be43ed8e39f285ec089b4391efe61d486ac53e633b23fd3"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\path_review_export\\02\\CONTCAR",
+          "sha256": "21115f8aa333c1aa0053556cd7a377a86fa6c43ba7b42f80bb6620e144923aa2"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\path_review_export\\03\\CONTCAR",
+          "sha256": "58788a37914d42f604acf2399db8d12f870e52785c436de272ec431c499e3ff8"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\path_review_export\\04\\CONTCAR",
+          "sha256": "70a8c73b2ef602992b3586e24cae2655dde6d1ff81e86bf112ee2e2cc15ab293"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\configs\\neb_agent\\default_thresholds.yaml",
+          "sha256": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c"
+        }
+      ],
+      "status": "PASS",
+      "errors": [],
+      "warnings": [
+        "nebmovie.pl visual review remains required"
+      ],
+      "thresholds": {
+        "min_distance_factor": 0.55,
+        "absolute_min_distance_A": 1.0,
+        "image_jump_warning_A": 1.0,
+        "fixed_position_tolerance_A": 0.0001,
+        "internal_minimum_warning_eV": 0.2,
+        "barrierless_force_threshold_eVA": 0.2,
+        "high_force_warning_threshold_eVA": 1.5,
+        "min_ionic_steps_for_force_warning": 5,
+        "persistent_high_force_failure_min_ionic_steps": 10,
+        "scf_consecutive_exhaustion_hard_min": 3,
+        "surface_penetration_warning_A": 0.2,
+        "desorption_height_change_warning_A": 2.0,
+        "reaction_coordinate_backtrack_warning_A": 0.25,
+        "magnetic_continuity_warning_threshold_muB": 2.0
+      },
+      "reaction_atom_indices_zero_based": [
+        45,
+        46,
+        47,
+        48,
+        49
+      ],
+      "reaction_pairs_zero_based": [
+        [
+          49,
+          38
+        ],
+        [
+          49,
+          39
+        ]
+      ],
+      "fixed_atom_indices_zero_based": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "images": [
+        {
+          "image": "00",
+          "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\path_review_export\\00\\CONTCAR",
+          "minimum_pair_distance_A": 1.0990756067577312,
+          "minimum_pair_zero_based": [
+            46,
+            47
+          ],
+          "collision_threshold_A": 0.781,
+          "max_step_from_previous_A": 0.0,
+          "max_raw_fractional_step_from_previous": 0.0,
+          "periodic_branch_shift_atom_indices_zero_based": [],
+          "max_fixed_displacement_from_initial_A": 0.0,
+          "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+          "reaction_distances": [
+            {
+              "atoms_zero_based": [
+                49,
+                38
+              ],
+              "labels": [
+                "H",
+                "Fe"
+              ],
+              "distance_A": 3.2880133053904737
+            },
+            {
+              "atoms_zero_based": [
+                49,
+                39
+              ],
+              "labels": [
+                "H",
+                "Fe"
+              ],
+              "distance_A": 1.7847304768476897
+            }
+          ]
+        },
+        {
+          "image": "01",
+          "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\path_review_export\\01\\CONTCAR",
+          "minimum_pair_distance_A": 1.0990297554009543,
+          "minimum_pair_zero_based": [
+            46,
+            47
+          ],
+          "collision_threshold_A": 0.781,
+          "max_step_from_previous_A": 0.39562299743882684,
+          "max_raw_fractional_step_from_previous": 0.0567250818610571,
+          "periodic_branch_shift_atom_indices_zero_based": [],
+          "max_fixed_displacement_from_initial_A": 0.0,
+          "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+          "reaction_distances": [
+            {
+              "atoms_zero_based": [
+                49,
+                38
+              ],
+              "labels": [
+                "H",
+                "Fe"
+              ],
+              "distance_A": 2.9433239448706936
+            },
+            {
+              "atoms_zero_based": [
+                49,
+                39
+              ],
+              "labels": [
+                "H",
+                "Fe"
+              ],
+              "distance_A": 2.1102087239641567
+            }
+          ]
+        },
+        {
+          "image": "02",
+          "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\path_review_export\\02\\CONTCAR",
+          "minimum_pair_distance_A": 1.099711086722297,
+          "minimum_pair_zero_based": [
+            46,
+            47
+          ],
+          "collision_threshold_A": 0.781,
+          "max_step_from_previous_A": 0.4595226550676167,
+          "max_raw_fractional_step_from_previous": 0.06561436928907477,
+          "periodic_branch_shift_atom_indices_zero_based": [],
+          "max_fixed_displacement_from_initial_A": 0.0,
+          "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+          "reaction_distances": [
+            {
+              "atoms_zero_based": [
+                49,
+                38
+              ],
+              "labels": [
+                "H",
+                "Fe"
+              ],
+              "distance_A": 2.5148313999791756
+            },
+            {
+              "atoms_zero_based": [
+                49,
+                39
+              ],
+              "labels": [
+                "H",
+                "Fe"
+              ],
+              "distance_A": 2.6093193102009207
+            }
+          ]
+        },
+        {
+          "image": "03",
+          "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\path_review_export\\03\\CONTCAR",
+          "minimum_pair_distance_A": 1.0985687792636147,
+          "minimum_pair_zero_based": [
+            46,
+            47
+          ],
+          "collision_threshold_A": 0.781,
+          "max_step_from_previous_A": 0.4760775381675357,
+          "max_raw_fractional_step_from_previous": 0.0675361052899246,
+          "periodic_branch_shift_atom_indices_zero_based": [],
+          "max_fixed_displacement_from_initial_A": 0.0,
+          "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+          "reaction_distances": [
+            {
+              "atoms_zero_based": [
+                49,
+                38
+              ],
+              "labels": [
+                "H",
+                "Fe"
+              ],
+              "distance_A": 2.0169640708901624
+            },
+            {
+              "atoms_zero_based": [
+                49,
+                39
+              ],
+              "labels": [
+                "H",
+                "Fe"
+              ],
+              "distance_A": 3.016517968576625
+            }
+          ]
+        },
+        {
+          "image": "04",
+          "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\path_review_export\\04\\CONTCAR",
+          "minimum_pair_distance_A": 1.1003682685417022,
+          "minimum_pair_zero_based": [
+            46,
+            47
+          ],
+          "collision_threshold_A": 0.781,
+          "max_step_from_previous_A": 0.27584740219852594,
+          "max_raw_fractional_step_from_previous": 0.03758467698694351,
+          "periodic_branch_shift_atom_indices_zero_based": [],
+          "max_fixed_displacement_from_initial_A": 0.0,
+          "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+          "reaction_distances": [
+            {
+              "atoms_zero_based": [
+                49,
+                38
+              ],
+              "labels": [
+                "H",
+                "Fe"
+              ],
+              "distance_A": 1.8217332982150127
+            },
+            {
+              "atoms_zero_based": [
+                49,
+                39
+              ],
+              "labels": [
+                "H",
+                "Fe"
+              ],
+              "distance_A": 3.214591217306817
+            }
+          ]
+        }
+      ],
+      "requires_visual_review": true
+    },
+    "analysis": {
+      "schema_version": 1,
+      "document_kind": "neb_output_analysis",
+      "producer": "scripts.neb_agent.analyze_neb_outputs",
+      "source_files": [
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\configs\\neb_agent\\default_thresholds.yaml",
+          "sha256": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c"
+        }
+      ],
+      "status": "NO_OUTPUT",
+      "images": [
+        {
+          "image": "00",
+          "ionic_steps": 0,
+          "final_energy_eV": null,
+          "final_neb_force_eVA": null,
+          "final_atomic_force_eVA": null,
+          "energy_history_last10_eV": [],
+          "neb_force_history_last10_eVA": [],
+          "atomic_force_history_last10_eVA": [],
+          "neb_force_trend": "insufficient_data",
+          "atomic_force_trend": "insufficient_data",
+          "scf_iterations_last_ionic_step": null,
+          "scf_iterations_last10": [],
+          "reached_required_accuracy": false,
+          "electronically_converged": false,
+          "electronic_final_state": {
+            "electronically_converged": false,
+            "status": "UNKNOWN"
+          },
+          "normal_completion": false,
+          "final_total_magnetization_muB": null,
+          "reaction_atom_local_magnetization_muB": {},
+          "fatal_keywords": [],
+          "has_output": false,
+          "relative_energy_eV": null
+        },
+        {
+          "image": "01",
+          "ionic_steps": 0,
+          "final_energy_eV": null,
+          "final_neb_force_eVA": null,
+          "final_atomic_force_eVA": null,
+          "energy_history_last10_eV": [],
+          "neb_force_history_last10_eVA": [],
+          "atomic_force_history_last10_eVA": [],
+          "neb_force_trend": "insufficient_data",
+          "atomic_force_trend": "insufficient_data",
+          "scf_iterations_last_ionic_step": null,
+          "scf_iterations_last10": [],
+          "reached_required_accuracy": false,
+          "electronically_converged": false,
+          "electronic_final_state": {
+            "electronically_converged": false,
+            "status": "UNKNOWN"
+          },
+          "normal_completion": false,
+          "final_total_magnetization_muB": null,
+          "reaction_atom_local_magnetization_muB": {},
+          "fatal_keywords": [],
+          "has_output": false,
+          "relative_energy_eV": null
+        },
+        {
+          "image": "02",
+          "ionic_steps": 0,
+          "final_energy_eV": null,
+          "final_neb_force_eVA": null,
+          "final_atomic_force_eVA": null,
+          "energy_history_last10_eV": [],
+          "neb_force_history_last10_eVA": [],
+          "atomic_force_history_last10_eVA": [],
+          "neb_force_trend": "insufficient_data",
+          "atomic_force_trend": "insufficient_data",
+          "scf_iterations_last_ionic_step": null,
+          "scf_iterations_last10": [],
+          "reached_required_accuracy": false,
+          "electronically_converged": false,
+          "electronic_final_state": {
+            "electronically_converged": false,
+            "status": "UNKNOWN"
+          },
+          "normal_completion": false,
+          "final_total_magnetization_muB": null,
+          "reaction_atom_local_magnetization_muB": {},
+          "fatal_keywords": [],
+          "has_output": false,
+          "relative_energy_eV": null
+        },
+        {
+          "image": "03",
+          "ionic_steps": 0,
+          "final_energy_eV": null,
+          "final_neb_force_eVA": null,
+          "final_atomic_force_eVA": null,
+          "energy_history_last10_eV": [],
+          "neb_force_history_last10_eVA": [],
+          "atomic_force_history_last10_eVA": [],
+          "neb_force_trend": "insufficient_data",
+          "atomic_force_trend": "insufficient_data",
+          "scf_iterations_last_ionic_step": null,
+          "scf_iterations_last10": [],
+          "reached_required_accuracy": false,
+          "electronically_converged": false,
+          "electronic_final_state": {
+            "electronically_converged": false,
+            "status": "UNKNOWN"
+          },
+          "normal_completion": false,
+          "final_total_magnetization_muB": null,
+          "reaction_atom_local_magnetization_muB": {},
+          "fatal_keywords": [],
+          "has_output": false,
+          "relative_energy_eV": null
+        },
+        {
+          "image": "04",
+          "ionic_steps": 0,
+          "final_energy_eV": null,
+          "final_neb_force_eVA": null,
+          "final_atomic_force_eVA": null,
+          "energy_history_last10_eV": [],
+          "neb_force_history_last10_eVA": [],
+          "atomic_force_history_last10_eVA": [],
+          "neb_force_trend": "insufficient_data",
+          "atomic_force_trend": "insufficient_data",
+          "scf_iterations_last_ionic_step": null,
+          "scf_iterations_last10": [],
+          "reached_required_accuracy": false,
+          "electronically_converged": false,
+          "electronic_final_state": {
+            "electronically_converged": false,
+            "status": "UNKNOWN"
+          },
+          "normal_completion": false,
+          "final_total_magnetization_muB": null,
+          "reaction_atom_local_magnetization_muB": {},
+          "fatal_keywords": [],
+          "has_output": false,
+          "relative_energy_eV": null
+        }
+      ],
+      "complete_energy_profile": false,
+      "maximum_image": null,
+      "internal_maximum": false,
+      "internal_minimum_warning": false,
+      "internal_minimum_images": [],
+      "monotonic_energy_profile": false,
+      "fatal_keywords": [],
+      "configured_nelm": null,
+      "configured_nsw": null,
+      "configured_images": null,
+      "configured_ediffg_eVA": null,
+      "parent_neb_method": "needs_confirmation",
+      "image_sequence_complete": false,
+      "scf_exhausted_images": [],
+      "scf_persistent_failure_images": [],
+      "scf_warning": false,
+      "scf_failure": false,
+      "force_warning_policy": {
+        "threshold_eVA": 1.5,
+        "startup_window_ionic_steps": 5,
+        "persistent_failure_minimum_ionic_steps": 10,
+        "requires_non_decreasing_trend": true,
+        "early_high_force_is_failure": false,
+        "warning_is_hard_failure": false,
+        "high_force_with_independent_geometry_periodic_or_magnetic_anomaly_is_failure": true
+      },
+      "high_force_observations": [],
+      "high_force_warnings": [],
+      "persistent_high_force_failure_images": [],
+      "nsw_stopped_without_convergence_images": [],
+      "technically_converged": false,
+      "geometry_validated": false,
+      "path_reviewed": false,
+      "scientifically_valid": false,
+      "magnetic_continuity": {
+        "rule": "MAGNETIC_CONTINUITY_RULE",
+        "severity": "SOFT_WARNING",
+        "warning_threshold_muB": 2.0,
+        "warnings": [],
+        "action": "CHECK_MAGNETIC_STATE_CONTINUITY",
+        "stops_current_job": false,
+        "blocks_ordinary_no_climb_neb": false,
+        "proves_magnetic_state_switch": false
+      },
+      "barrierless_candidate": false,
+      "energy_profile_status": "interim_neb_only_not_reportable_barrier"
+    },
+    "thresholds": {
+      "min_distance_factor": 0.55,
+      "absolute_min_distance_A": 1.0,
+      "image_jump_warning_A": 1.0,
+      "fixed_position_tolerance_A": 0.0001,
+      "internal_minimum_warning_eV": 0.2,
+      "barrierless_force_threshold_eVA": 0.2,
+      "high_force_warning_threshold_eVA": 1.5,
+      "min_ionic_steps_for_force_warning": 5,
+      "persistent_high_force_failure_min_ionic_steps": 10,
+      "scf_consecutive_exhaustion_hard_min": 3,
+      "surface_penetration_warning_A": 0.2,
+      "desorption_height_change_warning_A": 2.0,
+      "reaction_coordinate_backtrack_warning_A": 0.25,
+      "magnetic_continuity_warning_threshold_muB": 2.0
+    },
+    "path_quality": {},
+    "preflight": {},
+    "validation": {},
+    "scheduler": {},
+    "authorization": {},
+    "source_bindings": {
+      "geometry": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\path_review_export\\path_geometry_diagnosis.json",
+        "sha256": "18597f87cc2df472a7de5dcf6a143e7ff69fa5ea0243e0cf58c9ec1a2d312ffb"
+      },
+      "analysis": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\path_review_export\\neb_analysis.json",
+        "sha256": "800866176d15b1665908c6f2520461cbf0da3a7078929a135c503c8d8f85fccb"
+      },
+      "thresholds": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\configs\\neb_agent\\default_thresholds.yaml",
+        "sha256": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c"
+      }
+    },
+    "climb": false,
+    "path_reviewed": true
+  },
+  "CRITICAL_IMAGES": [],
+  "CHEMICAL_INTERPRETATION": null,
+  "FILES_SAVED": [],
+  "ALLOWED_ACTIONS": [],
+  "FORBIDDEN_ACTIONS": [
+    "CONTINUE_JOB",
+    "STOP_JOB",
+    "REBUILD_PATH",
+    "SUBMIT_DIAGNOSTIC_VASP",
+    "SUBMIT_VASP",
+    "ENABLE_CI_NEB",
+    "PREPARE_DIMER_HANDOFF",
+    "START_DIMER",
+    "START_VFA",
+    "APPROVE_TS_CANDIDATE",
+    "REPORT_FINAL_BARRIER"
+  ],
+  "NEXT_REQUIRED_CHECK": "RUN_RESOURCE_AND_INPUT_PREFLIGHT",
+  "SUBMISSION_ALLOWED": false,
+  "CI_NEB_ALLOWED": false,
+  "DIMER_ALLOWED": false,
+  "VFA_ALLOWED": false,
+  "TS_CLAIM_ALLOWED": false,
+  "COMPUTE_COST_ASSESSMENT": null,
+  "scientific_readiness": {
+    "decision": "NEEDS_SUBMISSION_PREFLIGHT",
+    "reason_codes": [
+      "SUBMISSION_PREFLIGHT_MISSING"
+    ],
+    "eligible_actions": []
+  },
+  "execution_authorization_error": "explicit execution authorization is missing or invalid",
+  "execution_authorization": null,
+  "evidence_binding": null
+}

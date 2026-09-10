@@ -1,0 +1,34 @@
+{
+  "document_kind": "dual_model_candidate_work_review",
+  "candidate_manifest_sha256": "affacabdce3fcc22cab7636f3f86e9b20d15b1739a8930cc60026e2bdf325dae",
+  "reviewer": "Codex",
+  "reviewed_at": "2026-09-10T11:23:28.196785+00:00",
+  "decision": "accepted_for_force_diagnosis_only",
+  "geometry_continuity": "accepted",
+  "periodic_mapping": "accepted",
+  "atom_mapping_and_fixed_mask": "accepted",
+  "endpoint_identity": "accepted",
+  "reaction_coordinate_resolution": "accepted_as_coarse_candidate_not_proof_of_unique_MEP",
+  "elementary_step_assignment": "surface_H_migration_candidate_only",
+  "candidate_peak_image": "02",
+  "visual_review": "Top and side views inspected with exact MIC distances and completed-path VTST movie; no surface penetration, collision or adsorbate connectivity change.",
+  "evidence": {
+    "exact_mic_geometry.json": "9e1c7372aaf867e1fcc773a587e73454214a2876c4eec38208001ae87823f034",
+    "vtst_review.json": "a4c3503db50b2521a2af4d8b9ceeebca59b28b635e6ed1281692916342a8a594",
+    "path_review.png": "d53c4353e28ce7910f5abf9ec6b1fe9a755785c95ca67fa71adc0ba62934463f"
+  },
+  "limitations": [
+    "No exact VASP 01/02/03 triad or validated model-VASP force agreement for this optimized path.",
+    "MatRIS image03 is 0.007963 eV below04; coarse primary path has a shallow product-side dip, not confirmed intermediate.",
+    "Dual-model manifest generic reaction_coordinate_value is zero and key_bond_distances_A empty because no internal bond changes; work review recomputed H50 surface distances independently.",
+    "Dual-model manifest is not the generic gpu_ml_neb_path_manifest required by the Dimer finalizer. No schema conversion or Dimer-parent acceptance performed.",
+    "Model-model disagreement is not calibrated error; no training is justified without VASP error evidence."
+  ],
+  "predicted_peak_heights_eV": {
+    "MatRIS": 0.11563301086425781,
+    "AQCat25": 0.26554107666015625
+  },
+  "dimer_parent_accepted": false,
+  "reportable_barrier": false,
+  "submission_authorized": false
+}
