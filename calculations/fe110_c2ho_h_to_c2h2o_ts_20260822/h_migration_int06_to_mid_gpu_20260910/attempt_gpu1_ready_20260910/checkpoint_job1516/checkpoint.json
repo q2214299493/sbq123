@@ -1,0 +1,23 @@
+{
+  "observed_at": "2026-09-10T08:12:02.770636+00:00",
+  "queries": {
+    "scheduler": {
+      "exit_code": 0,
+      "stdout": "JobId=1516 JobName=int06-mid-gpu1 UserId=sbq(1024) GroupId=sbq(1024) MCS_label=N/A Priority=4294901490 Nice=0 Account=(null) QOS=(null) JobState=FAILED Reason=NonZeroExitCode Dependency=(null) Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=1:0 RunTime=00:00:01 TimeLimit=06:00:00 TimeMin=N/A SubmitTime=2026-09-10T16:11:51 EligibleTime=2026-09-10T16:11:51 AccrueTime=2026-09-10T16:11:51 StartTime=2026-09-10T16:11:51 EndTime=2026-09-10T16:11:52 Deadline=N/A SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-10T16:11:51 Scheduler=Main Partition=normal AllocNode:Sid=MZ73:2558060 ReqNodeList=(null) ExcNodeList=(null) NodeList=MZ73 BatchHost=MZ73 NumNodes=1 NumCPUs=4 NumTasks=1 CPUs/Task=4 ReqB:S:C:T=0:0:*:* TRES=cpu=4,node=1,billing=4 Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=* MinCPUsNode=4 MinMemoryNode=40G MinTmpDiskNode=0 Features=(null) DelayBoot=00:00:00 OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null) Command=/home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_ml_neb_20260910_gpu1_envfix_tmpfix/execution/allocated_gpu_guard.sh WorkDir=/home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_ml_neb_20260910_gpu1_envfix_tmpfix StdErr=/home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_ml_neb_20260910_gpu1_envfix_tmpfix/logs/production-1516.out StdIn=/dev/null StdOut=/home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_ml_neb_20260910_gpu1_envfix_tmpfix/logs/production-1516.out Power= TresPerNode=gres:gpu:1 \n",
+      "stderr": ""
+    },
+    "gpu_processes": {
+      "exit_code": 0,
+      "stdout": "862480, GPU-483c224e-cc19-13e2-24ad-c83efd14fa75, 386, /home/public/soft/testing/envs/py3119/bin/python\n862481, GPU-483c224e-cc19-13e2-24ad-c83efd14fa75, 386, /home/public/soft/testing/envs/py3119/bin/python\n1484391, GPU-483c224e-cc19-13e2-24ad-c83efd14fa75, 386, /home/public/soft/testing/envs/py3119/bin/python\n684259, GPU-483c224e-cc19-13e2-24ad-c83efd14fa75, 386, /home/public/soft/testing/envs/py3119/bin/python\n2455320, GPU-483c224e-cc19-13e2-24ad-c83efd14fa75, 15040, .venv/bin/python\n2418061, GPU-450609b3-d1fd-ac33-d03a-79891be402da, 9338, /home/ubuntu/hdd/cyn/CatGPT/.venv/bin/python\n2551903, GPU-450609b3-d1fd-ac33-d03a-79891be402da, 4076, .venv/bin/python\n2418062, GPU-7ec6ab8a-91a2-450d-04c1-a0d472452b5b, 9338, /home/ubuntu/hdd/cyn/CatGPT/.venv/bin/python\n2455522, GPU-e72f50ad-d93f-c404-04c4-51dccc85727e, 15022, .venv/bin/python\n",
+      "stderr": ""
+    },
+    "job_pids": {
+      "exit_code": 1,
+      "stdout": "PID      JOBID    STEPID   LOCALID GLOBALID\n",
+      "stderr": "JobId=1516 does not exist on node (null).\n"
+    }
+  },
+  "logs": {
+    "logs/production-1516.out": "Traceback (most recent call last):\n  File \"<stdin>\", line 12, in <module>\nAssertionError: GPU1 free memory below startup threshold\n"
+  }
+}

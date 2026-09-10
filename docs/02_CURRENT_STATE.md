@@ -124,7 +124,7 @@ accepted TS path, or barrier is established yet.
 ## Active Transition-State Gate
 
 <!-- state-handoff:start active-fe-110-co-dissociation-test-current-gate -->
-### Active Gate - 2026-09-10 GPU1512 Startup Failed; Assigned GPU Memory Blocker
+### Active Gate - 2026-09-10 GPU1 Launch Attempts Failed Before Model; Memory Blocker
 
 - 9748648: LSF DONE; ordinary valley06 relaxation completed in 79 steps; electronic and force criteria passed (0.0177274761 eV/A < 0.020).
 - INT06 accepted as intact C2HO* + H* mapped migration endpoint; final TOTEN -388.50564344 eV under fe110_converged_toten_sigma0p20_v1.
@@ -133,8 +133,9 @@ accepted TS path, or barrier is established yet.
 - The previously accepted MID -> FS O-H TS and 1.28582718 eV forward electronic barrier remain complete; do not repeat.
 - No Hessian, complete migration barrier or new VASP result established; the GPU1512 attempt produced no model output.
 - GPU1512 submitted under explicit user authority, then Slurm FAILED with ExitCode=3:0 at startup. Allocated GPU0 had 7465 MiB free <12000 MiB; guard exited before model execution. No ML-NEB steps, predictions, automatic retry or VASP submission. Failed job/input/evidence records registered.
+- GPU1 launches 1513/1514 failed before model execution on Python symlink and Slurm TMPDIR=/tmp checks; diagnostic1515 confirmed TMPDIR. Both corrections prepared/tested; latest1516 FAILED before model on GPU1 free-memory guard. At 16:12:54 GPU1 had 10641 MiB free <12000. All attempts preserved and registered; no model steps or active task job.
 
-Next action: Resolve the assigned-GPU free-memory condition (at least 12000 MiB), then obtain explicit authority for one new attempt of the unchanged reviewed GPU request. Preserve job1512 failure; do not rerun the existing submission driver or override scheduler-assigned devices.
+Next action: Recheck physical GPU1 free memory against the current 12000 MiB startup threshold, then verify the corrected full startup under Slurm before progressing the ML path. Preserve all failed attempts; no current model result exists.
 <!-- state-handoff:end active-fe-110-co-dissociation-test-current-gate -->
 
 ### Historical Evidence

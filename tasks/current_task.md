@@ -14,6 +14,7 @@ Complete earlier IS-A to MID H surface migration through validated intermediate 
 - The previously accepted MID -> FS O-H TS and 1.28582718 eV forward electronic barrier remain complete; do not repeat.
 - No Hessian, complete migration barrier or new VASP result established; the GPU1512 attempt produced no model output.
 - GPU1512 submitted under explicit user authority, then Slurm FAILED with ExitCode=3:0 at startup. Allocated GPU0 had 7465 MiB free <12000 MiB; guard exited before model execution. No ML-NEB steps, predictions, automatic retry or VASP submission. Failed job/input/evidence records registered.
+- GPU1 launches 1513/1514 failed before model execution on Python symlink and Slurm TMPDIR=/tmp checks; diagnostic1515 confirmed TMPDIR. Both corrections prepared/tested; latest1516 FAILED before model on GPU1 free-memory guard. At 16:12:54 GPU1 had 10641 MiB free <12000. All attempts preserved and registered; no model steps or active task job.
 
 ## Lifecycle Status
 
@@ -21,11 +22,11 @@ Complete earlier IS-A to MID H surface migration through validated intermediate 
 
 ## One Executable Step
 
-Resolve the assigned-GPU free-memory condition (at least 12000 MiB), then obtain explicit authority for one new attempt of the unchanged reviewed GPU request. Preserve job1512 failure; do not rerun the existing submission driver or override scheduler-assigned devices.
+Recheck physical GPU1 free memory against the current 12000 MiB startup threshold, then verify the corrected full startup under Slurm before progressing the ML path. Preserve all failed attempts; no current model result exists.
 
 ## Submission Boundary
 
-One submitted GPU attempt failed before model execution. Automatic retry and VASP submission remain unauthorized; another attempt requires explicit authority.
+Repeated user instruction to submit GPU1 was acted on; startup attempts failed before model execution. No calculation is running, no model retry or VASP task is active.
 
 ## Authoritative Constraint
 
@@ -46,4 +47,5 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 - docs/reviews/int06_mid_path_prepared_20260910.md
 - docs/reviews/int06_mid_gpu_prepared_20260910.md
 - docs/reviews/int06_mid_gpu1512_startup_failure_20260910.md
+- docs/reviews/int06_mid_gpu1_attempts_20260910.md
 <!-- state-handoff:end current_task -->

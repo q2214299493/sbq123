@@ -1,0 +1,23 @@
+{
+  "pytest_command": "python -m pytest tests/test_gpu_execution_lifecycle.py tests/test_dual_model_ml_neb.py -q",
+  "pytest_exit_code": 0,
+  "ruff": "PASS",
+  "python_compilation": "PASS",
+  "gpu_binding_guard_cases": [
+    "valid PASS",
+    "low_memory PASS",
+    "wrong_card PASS",
+    "other_job PASS"
+  ],
+  "remote_environment_setup_exit_code": 0,
+  "latest_job": "1516",
+  "latest_scheduler_status": "FAILED",
+  "model_execution_verified": false,
+  "gpu1_free_memory_MiB": 10641,
+  "registry_quick_check": "ok",
+  "registry_foreign_key_violations": 0,
+  "registry_inserted": 117,
+  "full_slurm_model_startup": "not verified",
+  "global_safe_sync": "blocked by unrelated PKG-INFO classification drift",
+  "task_and_current_state_projections": "applied review-free"
+}
