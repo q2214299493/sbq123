@@ -47,6 +47,17 @@ def prepare_ts_handoff(
     return source
 
 
+def _gpu_path_mode(left, right, center):
+    from ase.geometry import find_mic
+
+    mode, _ = find_mic((right.frac - left.frac) @ center.cell, center.cell, pbc=(True, True, False))
+    for index, flags in enumerate(center.flags):
+        for axis, flag in enumerate(flags):
+            if flag == "F":
+                mode[index, axis] = 0.0
+    return mode
+
+
 def prepare_dimer_handoff(
     source_image: Path,
     previous_image: Path,
@@ -108,6 +119,8 @@ def prepare_dimer_handoff(
     if errors:
         raise SystemExit("DIMER image incompatibility: " + ", ".join(errors))
     mode = minimum_image_delta(left.frac, right.frac) @ center.cell
+    if analysis.get("parent_neb_method") == "gpu_ml_neb_reviewed_path":
+        mode = _gpu_path_mode(left, right, center)
     fixed = [
         index
         for index, flags in enumerate(center.flags)

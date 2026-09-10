@@ -1,0 +1,572 @@
+{
+  "schema_version": 2,
+  "gate": "AUTHORITATIVE_NEB_EXECUTION_GATE",
+  "generated_at_utc": "2026-09-10T11:48:45.673032+00:00",
+  "state_sha256": "b9dbd2d8ac0bcceeef2e049c9986b9d16a581d66cf8eec520bb02e6bc5861c6b",
+  "DECISION": "READY_FOR_DIMER",
+  "REASON_CODES": [],
+  "EVIDENCE": {
+    "geometry": {
+      "schema_version": 1,
+      "document_kind": "neb_path_geometry_diagnosis",
+      "producer": "scripts.neb_agent.diagnose_path_geometry",
+      "source_files": [
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\path_review_export\\00\\CONTCAR",
+          "sha256": "4b183e5d7b21dfc1576c483e69a64c88cf77b78388c38a3dccf48238f5db873c"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\path_review_export\\01\\CONTCAR",
+          "sha256": "3eb0c6ea36b0c0d06be43ed8e39f285ec089b4391efe61d486ac53e633b23fd3"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\path_review_export\\02\\CONTCAR",
+          "sha256": "21115f8aa333c1aa0053556cd7a377a86fa6c43ba7b42f80bb6620e144923aa2"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\path_review_export\\03\\CONTCAR",
+          "sha256": "58788a37914d42f604acf2399db8d12f870e52785c436de272ec431c499e3ff8"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\path_review_export\\04\\CONTCAR",
+          "sha256": "70a8c73b2ef602992b3586e24cae2655dde6d1ff81e86bf112ee2e2cc15ab293"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\configs\\neb_agent\\default_thresholds.yaml",
+          "sha256": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c"
+        }
+      ],
+      "status": "PASS",
+      "errors": [],
+      "warnings": [
+        "nebmovie.pl visual review remains required"
+      ],
+      "thresholds": {
+        "min_distance_factor": 0.55,
+        "absolute_min_distance_A": 1.0,
+        "image_jump_warning_A": 1.0,
+        "fixed_position_tolerance_A": 0.0001,
+        "internal_minimum_warning_eV": 0.2,
+        "barrierless_force_threshold_eVA": 0.2,
+        "high_force_warning_threshold_eVA": 1.5,
+        "min_ionic_steps_for_force_warning": 5,
+        "persistent_high_force_failure_min_ionic_steps": 10,
+        "scf_consecutive_exhaustion_hard_min": 3,
+        "surface_penetration_warning_A": 0.2,
+        "desorption_height_change_warning_A": 2.0,
+        "reaction_coordinate_backtrack_warning_A": 0.25,
+        "magnetic_continuity_warning_threshold_muB": 2.0
+      },
+      "reaction_atom_indices_zero_based": [
+        45,
+        46,
+        47,
+        48,
+        49
+      ],
+      "reaction_pairs_zero_based": [
+        [
+          49,
+          38
+        ],
+        [
+          49,
+          39
+        ]
+      ],
+      "fixed_atom_indices_zero_based": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "images": [
+        {
+          "image": "00",
+          "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\path_review_export\\00\\CONTCAR",
+          "minimum_pair_distance_A": 1.0990756067577312,
+          "minimum_pair_zero_based": [
+            46,
+            47
+          ],
+          "collision_threshold_A": 0.781,
+          "max_step_from_previous_A": 0.0,
+          "max_raw_fractional_step_from_previous": 0.0,
+          "periodic_branch_shift_atom_indices_zero_based": [],
+          "max_fixed_displacement_from_initial_A": 0.0,
+          "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+          "reaction_distances": [
+            {
+              "atoms_zero_based": [
+                49,
+                38
+              ],
+              "labels": [
+                "H",
+                "Fe"
+              ],
+              "distance_A": 3.2880133053904737
+            },
+            {
+              "atoms_zero_based": [
+                49,
+                39
+              ],
+              "labels": [
+                "H",
+                "Fe"
+              ],
+              "distance_A": 1.7847304768476897
+            }
+          ]
+        },
+        {
+          "image": "01",
+          "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\path_review_export\\01\\CONTCAR",
+          "minimum_pair_distance_A": 1.0990297554009543,
+          "minimum_pair_zero_based": [
+            46,
+            47
+          ],
+          "collision_threshold_A": 0.781,
+          "max_step_from_previous_A": 0.39562299743882684,
+          "max_raw_fractional_step_from_previous": 0.0567250818610571,
+          "periodic_branch_shift_atom_indices_zero_based": [],
+          "max_fixed_displacement_from_initial_A": 0.0,
+          "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+          "reaction_distances": [
+            {
+              "atoms_zero_based": [
+                49,
+                38
+              ],
+              "labels": [
+                "H",
+                "Fe"
+              ],
+              "distance_A": 2.9433239448706936
+            },
+            {
+              "atoms_zero_based": [
+                49,
+                39
+              ],
+              "labels": [
+                "H",
+                "Fe"
+              ],
+              "distance_A": 2.1102087239641567
+            }
+          ]
+        },
+        {
+          "image": "02",
+          "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\path_review_export\\02\\CONTCAR",
+          "minimum_pair_distance_A": 1.099711086722297,
+          "minimum_pair_zero_based": [
+            46,
+            47
+          ],
+          "collision_threshold_A": 0.781,
+          "max_step_from_previous_A": 0.4595226550676167,
+          "max_raw_fractional_step_from_previous": 0.06561436928907477,
+          "periodic_branch_shift_atom_indices_zero_based": [],
+          "max_fixed_displacement_from_initial_A": 0.0,
+          "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+          "reaction_distances": [
+            {
+              "atoms_zero_based": [
+                49,
+                38
+              ],
+              "labels": [
+                "H",
+                "Fe"
+              ],
+              "distance_A": 2.5148313999791756
+            },
+            {
+              "atoms_zero_based": [
+                49,
+                39
+              ],
+              "labels": [
+                "H",
+                "Fe"
+              ],
+              "distance_A": 2.6093193102009207
+            }
+          ]
+        },
+        {
+          "image": "03",
+          "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\path_review_export\\03\\CONTCAR",
+          "minimum_pair_distance_A": 1.0985687792636147,
+          "minimum_pair_zero_based": [
+            46,
+            47
+          ],
+          "collision_threshold_A": 0.781,
+          "max_step_from_previous_A": 0.4760775381675357,
+          "max_raw_fractional_step_from_previous": 0.0675361052899246,
+          "periodic_branch_shift_atom_indices_zero_based": [],
+          "max_fixed_displacement_from_initial_A": 0.0,
+          "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+          "reaction_distances": [
+            {
+              "atoms_zero_based": [
+                49,
+                38
+              ],
+              "labels": [
+                "H",
+                "Fe"
+              ],
+              "distance_A": 2.0169640708901624
+            },
+            {
+              "atoms_zero_based": [
+                49,
+                39
+              ],
+              "labels": [
+                "H",
+                "Fe"
+              ],
+              "distance_A": 3.016517968576625
+            }
+          ]
+        },
+        {
+          "image": "04",
+          "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\path_review_export\\04\\CONTCAR",
+          "minimum_pair_distance_A": 1.1003682685417022,
+          "minimum_pair_zero_based": [
+            46,
+            47
+          ],
+          "collision_threshold_A": 0.781,
+          "max_step_from_previous_A": 0.27584740219852594,
+          "max_raw_fractional_step_from_previous": 0.03758467698694351,
+          "periodic_branch_shift_atom_indices_zero_based": [],
+          "max_fixed_displacement_from_initial_A": 0.0,
+          "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+          "reaction_distances": [
+            {
+              "atoms_zero_based": [
+                49,
+                38
+              ],
+              "labels": [
+                "H",
+                "Fe"
+              ],
+              "distance_A": 1.8217332982150127
+            },
+            {
+              "atoms_zero_based": [
+                49,
+                39
+              ],
+              "labels": [
+                "H",
+                "Fe"
+              ],
+              "distance_A": 3.214591217306817
+            }
+          ]
+        }
+      ],
+      "requires_visual_review": true
+    },
+    "analysis": {
+      "document_kind": "gpu_dimer_parent_analysis",
+      "producer": "scripts.prepare_gpu_path_dimer",
+      "source_files": [
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_gpu1517_direct_review_20260910.json",
+          "sha256": "03f548035d2778c47635fd6153e933fce499aba6115db3f9988d8bed1a290106"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\raw\\output\\production\\dual_model_gpu_ml_neb_path_manifest.candidate.json",
+          "sha256": "affacabdce3fcc22cab7636f3f86e9b20d15b1739a8930cc60026e2bdf325dae"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\raw\\reaction_contract.normalized.json",
+          "sha256": "18a9f2689fa38d5754eadce1faa28c6a8b4b532133465a5b61c21a948f7e6724"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\raw\\request.json",
+          "sha256": "ff5e8516df91b2b4a977c06a4f8a49d3ce17664ec49f857f39e6bebfb6ed754c"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\configs\\dimer_gate.yaml",
+          "sha256": "f22b4c1d53621f8b6c51a9b3264c2869a0db7519537bd802ca90b870168a9c24"
+        }
+      ],
+      "status": "ML_CANDIDATE_REVIEWED",
+      "parent_neb_method": "gpu_ml_neb_reviewed_path",
+      "maximum_image": "02",
+      "internal_maximum": true,
+      "image_sequence_complete": true,
+      "geometry_validated": true,
+      "path_reviewed": true,
+      "path_binding_valid": true,
+      "dimer_gate_policy_file": "C:\\Users\\86177\\Desktop\\work\\configs\\dimer_gate.yaml",
+      "dimer_gate_policy_sha256": "f22b4c1d53621f8b6c51a9b3264c2869a0db7519537bd802ca90b870168a9c24",
+      "gpu_reviewed_path_evidence": {
+        "request": {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\raw\\request.json",
+          "sha256": "ff5e8516df91b2b4a977c06a4f8a49d3ce17664ec49f857f39e6bebfb6ed754c"
+        },
+        "manifest": {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\raw\\output\\production\\dual_model_gpu_ml_neb_path_manifest.candidate.json",
+          "sha256": "affacabdce3fcc22cab7636f3f86e9b20d15b1739a8930cc60026e2bdf325dae"
+        },
+        "review": {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_gpu1517_direct_review_20260910.json",
+          "sha256": "03f548035d2778c47635fd6153e933fce499aba6115db3f9988d8bed1a290106"
+        },
+        "contract": {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\raw\\reaction_contract.normalized.json",
+          "sha256": "18a9f2689fa38d5754eadce1faa28c6a8b4b532133465a5b61c21a948f7e6724"
+        }
+      },
+      "images": [
+        {
+          "image": "00",
+          "structure_sha256": "4b183e5d7b21dfc1576c483e69a64c88cf77b78388c38a3dccf48238f5db873c",
+          "source": "ML_prediction_only"
+        },
+        {
+          "image": "01",
+          "structure_sha256": "3eb0c6ea36b0c0d06be43ed8e39f285ec089b4391efe61d486ac53e633b23fd3",
+          "source": "ML_prediction_only"
+        },
+        {
+          "image": "02",
+          "structure_sha256": "21115f8aa333c1aa0053556cd7a377a86fa6c43ba7b42f80bb6620e144923aa2",
+          "source": "ML_prediction_only"
+        },
+        {
+          "image": "03",
+          "structure_sha256": "58788a37914d42f604acf2399db8d12f870e52785c436de272ec431c499e3ff8",
+          "source": "ML_prediction_only"
+        },
+        {
+          "image": "04",
+          "structure_sha256": "70a8c73b2ef602992b3586e24cae2655dde6d1ff81e86bf112ee2e2cc15ab293",
+          "source": "ML_prediction_only"
+        }
+      ],
+      "contract_sha256": "eeecfe26404dafb2008fbdc5529081d5584bbc5b4883c00a0096a2f32858454a",
+      "atom_map_sha256": "ef5b3d3d64884fde2a673dd35bef48a2a965c026edb6a8dd1c4eb22b100ae157",
+      "compatibility_sha256": "4ef0c782834fd07afca2621a5235bb67c2ea913bd650b93123c21538c35c165d"
+    },
+    "thresholds": {
+      "min_distance_factor": 0.55,
+      "absolute_min_distance_A": 1.0,
+      "image_jump_warning_A": 1.0,
+      "fixed_position_tolerance_A": 0.0001,
+      "internal_minimum_warning_eV": 0.2,
+      "barrierless_force_threshold_eVA": 0.2,
+      "high_force_warning_threshold_eVA": 1.5,
+      "min_ionic_steps_for_force_warning": 5,
+      "persistent_high_force_failure_min_ionic_steps": 10,
+      "scf_consecutive_exhaustion_hard_min": 3,
+      "surface_penetration_warning_A": 0.2,
+      "desorption_height_change_warning_A": 2.0,
+      "reaction_coordinate_backtrack_warning_A": 0.25,
+      "magnetic_continuity_warning_threshold_muB": 2.0
+    },
+    "path_quality": {},
+    "preflight": {
+      "schema_version": 1,
+      "kind": "dimer",
+      "passed": true,
+      "errors": [],
+      "cores": 80,
+      "images": null,
+      "files": {
+        "INCAR": "7e4e956a5ea9efd66648d86ff47a1f8614f9d4144bbfcbb7ccfea154bcaf553f",
+        "KPOINTS": "0d7e291117433dac5393f29520b635e92f06e6c8e91aa941137c86b1d39162ae",
+        "POTCAR.spec": "9528f5cac58de3cc83a576c828915ce9c2ab72d4ec3be5e409f7476042f7e1bb",
+        "script.lsf": "abc0f1be67d3cf2cf4a55d5d3b1dc4b3d51fe895ee876ca87113504fedf05502",
+        "POSCAR": "21115f8aa333c1aa0053556cd7a377a86fa6c43ba7b42f80bb6620e144923aa2",
+        "PREVIOUS_POSCAR": "3eb0c6ea36b0c0d06be43ed8e39f285ec089b4391efe61d486ac53e633b23fd3",
+        "NEXT_POSCAR": "58788a37914d42f604acf2399db8d12f870e52785c436de272ec431c499e3ff8",
+        "MODECAR": "50770019e7454bfef5afb5454fddfdd8b649ad816c5ef453e3d19db6e7ae4037",
+        "dimer_handoff.json": "efa387a01c44991bd23a8c34499d5492d7577a7e29e6ee55914bed9fc9c79053",
+        "mode_review.json": "a50aeb64534423a43142395e647a2599e2ab38624e7f1387c1b621ca112ae8a8"
+      },
+      "bundle_sha256": "6d6e0a92db3e7f92d030f4fc2b135b0c235197bd80242706525f615147ac8af5",
+      "strategy_retry_check": {
+        "input_key": "326988269d24e8fc383f4e3d552842d1e68c0fd988a83df20f8f467f47c69261",
+        "blocked_attempts": [],
+        "review_attempts": [],
+        "status": "NO_KNOWN_FAILURE"
+      },
+      "dimer_hard_gate_passed": true,
+      "dimer_hard_gate": {
+        "hard_gate_passed": true,
+        "hard_gate_errors": [],
+        "hard_checks": {
+          "candidate_triad_hard_gate_bound": true,
+          "modecar_atom_count_and_order_bound": true,
+          "triad_structure_contract_preserved": true,
+          "fixed_mode_components_zero": true,
+          "modecar_finite": true,
+          "modecar_nonzero": true,
+          "modecar_normalized": true,
+          "mode_main_components_match_reaction_center": true,
+          "chemical_continuity_and_mode_review_accepted": true,
+          "gpu_parent_analysis_unchanged": true,
+          "gpu_reviewed_parent_still_valid": true
+        },
+        "mode_norm": 1.0000000000000793,
+        "reaction_atom_mode_fraction": 0.9778275719103667,
+        "compatibility_errors": [],
+        "recommended_checks": {
+          "parent_neb_technically_converged": false,
+          "strict_local_energy_maximum": false,
+          "triad_forces_clearly_reduced": false,
+          "coarse_neb_other_images_stable_peak_stalled": false,
+          "single_target_process_without_stable_intermediate": true,
+          "candidate_between_is_and_fs": null,
+          "mode_provenance_hash_bound": true
+        }
+      },
+      "dimer_recommended_gate": {
+        "parent_neb_technically_converged": false,
+        "strict_local_energy_maximum": false,
+        "triad_forces_clearly_reduced": false,
+        "coarse_neb_other_images_stable_peak_stalled": false,
+        "single_target_process_without_stable_intermediate": true,
+        "candidate_between_is_and_fs": null,
+        "mode_provenance_hash_bound": true
+      }
+    },
+    "validation": {},
+    "scheduler": {},
+    "authorization": {
+      "schema_version": 1,
+      "document_kind": "user_execution_authorization",
+      "calculation_kind": "dimer",
+      "action": "START_DIMER",
+      "authorized_at": "2026-09-10T11:48:45.550994+00:00",
+      "source": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_dimer_gpu1517_20260910\\user_submission_request_20260910.md",
+        "sha256": "54a6fbc959b6064586e74739314bd1990d44b0f9f7b66ec5e777cf45e905d3e2"
+      },
+      "target": {
+        "server_alias": "sunboquan-codex",
+        "remote_dir": "~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_migration_int06_mid_dimer_gpu1517_20260910"
+      },
+      "workdir_identity": "c:\\users\\86177\\desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_dimer_gpu1517_20260910",
+      "bundle_sha256": "6d6e0a92db3e7f92d030f4fc2b135b0c235197bd80242706525f615147ac8af5",
+      "evidence_sha256": "e0be48f3e76a6ad9c7d647f82065ccf0ada18f76839d6f819f4168c991459765",
+      "potcar": {
+        "source": "~/sbq/Fe110/potcars/Fe_C_O_H/POTCAR",
+        "sha256": "e3bc41a37d795bfcf1b1dc9a2a9ddfb5ef86aa5dc9aa0ac5a3583471a0982f85",
+        "spec_sha256": "9528f5cac58de3cc83a576c828915ce9c2ab72d4ec3be5e409f7476042f7e1bb"
+      }
+    },
+    "source_bindings": {
+      "analysis": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_gpu1517_dimer_parent_20260910\\analysis.json",
+        "sha256": "846040e2786d7decc62a4b8dba1f3b68b6fe97e6f6dce37110db803ce05498cc"
+      },
+      "thresholds": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\configs\\neb_agent\\default_thresholds.yaml",
+        "sha256": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c"
+      },
+      "geometry": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\path_review_export\\path_geometry_diagnosis.json",
+        "sha256": "18597f87cc2df472a7de5dcf6a143e7ff69fa5ea0243e0cf58c9ec1a2d312ffb"
+      },
+      "preflight": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_dimer_gpu1517_20260910\\submission_preflight.json",
+        "sha256": "74dc3b066d8631f4f0e3f2b570724aea5f8209bf32f4d70dadde4358cedcc014"
+      },
+      "authorization": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_dimer_gpu1517_20260910\\user_execution_authorization.json",
+        "sha256": "f6c5a60a12a209952529b50582dbaa6f8d63f87e419e4c74514b97a9d4bf533c"
+      }
+    },
+    "climb": false,
+    "path_reviewed": true
+  },
+  "CRITICAL_IMAGES": [],
+  "CHEMICAL_INTERPRETATION": null,
+  "FILES_SAVED": [],
+  "ALLOWED_ACTIONS": [
+    "START_DIMER"
+  ],
+  "FORBIDDEN_ACTIONS": [
+    "CONTINUE_JOB",
+    "STOP_JOB",
+    "REBUILD_PATH",
+    "SUBMIT_DIAGNOSTIC_VASP",
+    "SUBMIT_VASP",
+    "ENABLE_CI_NEB",
+    "PREPARE_DIMER_HANDOFF",
+    "START_VFA",
+    "APPROVE_TS_CANDIDATE",
+    "REPORT_FINAL_BARRIER"
+  ],
+  "NEXT_REQUIRED_CHECK": "SUBMIT_DIMER",
+  "SUBMISSION_ALLOWED": true,
+  "CI_NEB_ALLOWED": false,
+  "DIMER_ALLOWED": true,
+  "VFA_ALLOWED": false,
+  "TS_CLAIM_ALLOWED": false,
+  "COMPUTE_COST_ASSESSMENT": null,
+  "scientific_readiness": {
+    "decision": "READY_FOR_DIMER",
+    "reason_codes": [],
+    "eligible_actions": [
+      "START_DIMER"
+    ]
+  },
+  "execution_authorization_error": null,
+  "execution_authorization": {
+    "action": "START_DIMER",
+    "target": {
+      "remote_dir": "~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_migration_int06_mid_dimer_gpu1517_20260910",
+      "server_alias": "sunboquan-codex"
+    },
+    "binding": {
+      "workdir_identity": "c:\\users\\86177\\desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_dimer_gpu1517_20260910",
+      "bundle_sha256": "6d6e0a92db3e7f92d030f4fc2b135b0c235197bd80242706525f615147ac8af5",
+      "evidence_sha256": "e0be48f3e76a6ad9c7d647f82065ccf0ada18f76839d6f819f4168c991459765"
+    },
+    "source": {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_dimer_gpu1517_20260910\\user_submission_request_20260910.md",
+      "sha256": "54a6fbc959b6064586e74739314bd1990d44b0f9f7b66ec5e777cf45e905d3e2"
+    },
+    "potcar": {
+      "sha256": "e3bc41a37d795bfcf1b1dc9a2a9ddfb5ef86aa5dc9aa0ac5a3583471a0982f85",
+      "source": "~/sbq/Fe110/potcars/Fe_C_O_H/POTCAR",
+      "spec_sha256": "9528f5cac58de3cc83a576c828915ce9c2ab72d4ec3be5e409f7476042f7e1bb"
+    }
+  },
+  "evidence_binding": {
+    "workdir_identity": "c:\\users\\86177\\desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_dimer_gpu1517_20260910",
+    "bundle_sha256": "6d6e0a92db3e7f92d030f4fc2b135b0c235197bd80242706525f615147ac8af5",
+    "evidence_sha256": "e0be48f3e76a6ad9c7d647f82065ccf0ada18f76839d6f819f4168c991459765"
+  }
+}

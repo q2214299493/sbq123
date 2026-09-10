@@ -179,6 +179,15 @@ VASP/VTST calculation that supplies project energies, forces, relaxed
 structures, paths, frequencies, and displacement evidence. GPU-to-VASP direct
 transfer and automatic submission are forbidden.
 
+### Reviewed GPU path to VASP Dimer (approved 2026-09-10)
+
+A hash-bound, chemically reasonable complete GPU path may enter VASP Dimer
+as `gpu_ml_neb_reviewed_path` after work-side source, geometry, periodic branch,
+reaction-event and MODECAR review. Three VASP static labels and ML/VASP force
+agreement are optional diagnostics for this branch. It grants starting-candidate
+eligibility only. Keep the locked VASP numerical protocol, execution preflight,
+explicit submission authority, Dimer convergence and frequency acceptance gates.
+
 ## 4A. Transition-State Acceptance Gate
 
 Apply only `docs/10_TS_VALIDATION_PROTOCOL.md`; saddle-search convergence alone is not TS acceptance.

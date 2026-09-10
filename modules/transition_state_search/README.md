@@ -407,14 +407,16 @@ outside the executor remains forbidden.
 
 `configs/dimer_gate.yaml` and `scripts/ts_strategy_engine/dimer_gate.py` define
 the DIMER candidate gate. The following are hard requirements before
-`START_DIMER`:
+`START_DIMER`; the reviewed GPU candidate branch below replaces only the
+three-image VASP-output prerequisite:
 
 - candidate, previous, and next structures have identical cells, elements,
   atom order, and Selective Dynamics;
 - the candidate is an internal numbered image with two immediately adjacent,
   geometrically continuous neighbors;
-- all three images have complete, normally terminated, electronically
-  converged outputs with finite energies and atomic forces;
+- for VASP NEB parents and the VASP-validated GPU branch, all three images
+  have complete, normally terminated, electronically converged VASP outputs
+  with finite energies and atomic forces;
 - reaction-center motion is continuous on one periodic branch. Numerical
   displacement checks and an accepted chemical review must exclude atom
   jumps, adsorption-site discontinuity, and mechanism switching;
@@ -444,7 +446,7 @@ Applicable parent/refinement cases include:
 - a slowly finishing CI-NEB peak may proceed to DIMER when its local triad
   passes the hard gate even if the whole CI path has not reached final force
   precision;
-- a GPU ML-NEB path may proceed directly to DIMER only under the distinct
+- the optional VASP-validated GPU ML-NEB route uses the distinct
   `gpu_ml_neb_vasp_validated_triad` parent method. The complete GPU path must be
   hash-bound and pass geometry, periodic-branch, reaction-coordinate, and
   elementary-step review. The exact candidate and its two neighbors must each
@@ -458,6 +460,24 @@ Applicable parent/refinement cases include:
 - denser k-points or higher ENCUT may be used only as a separately reviewed,
   compatible refinement branch. Energies from incompatible branches must not
   be mixed.
+
+User-approved revision (2026-09-10): a complete, reasonable GPU ML-NEB path
+may instead enter `gpu_ml_neb_reviewed_path` directly. The current adapter
+supports the MatRIS/AQCat25 dual-model manifest. Recompute source hashes,
+all-image geometry, atom/cell/fixed-mask and endpoint identity; require a
+hash-bound work review of periodic continuity, reaction-coordinate resolution,
+elementary-step assignment and selection of an internal candidate with adjacent
+neighbors. Review the exact-image MODECAR and run the ordinary Dimer input,
+resource and execution-authorization gates. Use
+`python -m scripts.prepare_gpu_path_dimer --help` to prepare the handoff.
+
+For this branch, three VASP static labels, ML/VASP force agreement, calibrated
+ML uncertainty, full ML-NEB convergence and a strict energy maximum are optional
+selection evidence, not mandatory entry gates. A reviewable candidate is not
+an accepted TS: its energies/forces remain ML predictions. VASP Dimer technical
+convergence and the existing frequency/compatible-energy acceptance sequence
+remain mandatory. This review-only entry does not authorize remote execution;
+the user must authorize the concrete Dimer task through the current gate.
 
 The coarse-NEB peak-stall rule authorizes only
 `PREPARE_DIMER_HANDOFF`. It does not prove that the stalled peak is a saddle
@@ -524,16 +544,16 @@ NEB-force warning and failure semantics are strict:
    include more labels and a GPU rerun, a bounded VASP micro/ordinary NEB,
    CI-NEB for an already continuous single peak, a qualifying GPU-local-triad
    DIMER handoff, or splitting a genuine multi-peak path. GPU acceleration may
-   replace a routine VASP coarse NEB when its DIMER-specific VASP triad gate
-   passes; it never replaces the VASP DIMER, frequency, or barrier evidence.
+   replace a routine VASP coarse NEB when either applicable GPU Dimer parent
+   gate passes; it never replaces the VASP DIMER, frequency, or barrier evidence.
    Only the authoritative gate may select continuation, stopping, rebuilding,
    CI-NEB, or DIMER refinement.
    A passed result is `path_stage_valid`; it is never a scientifically
    validated TS before the applicable frequency gate.
-9. DIMER starts only from a candidate that passes the local three-image and
+9. DIMER starts only from a candidate that passes its applicable parent and
    MODECAR hard gate above; the parent can be ordinary NEB, CI-NEB, or a
-   `gpu_ml_neb_vasp_validated_triad` path that passes its additional exact-
-   structure VASP and force-agreement checks. Inspect
+   `gpu_ml_neb_vasp_validated_triad` path with exact VASP/force checks, or a
+   `gpu_ml_neb_reviewed_path` with the approved geometry/review-only entry. Inspect
    initial and final modes against their SHA-256-bound review records.
    Technical convergence also requires a valid source/final structure pair,
    `ICHAIN=2`, final electronic convergence, VASP maximum atomic-force

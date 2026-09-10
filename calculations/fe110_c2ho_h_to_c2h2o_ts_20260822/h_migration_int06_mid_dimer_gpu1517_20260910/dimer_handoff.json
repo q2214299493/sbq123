@@ -1,0 +1,96 @@
+{
+  "source_ts_candidate": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\raw\\output\\production\\images\\02\\POSCAR",
+  "source_sha256": "21115f8aa333c1aa0053556cd7a377a86fa6c43ba7b42f80bb6620e144923aa2",
+  "previous_image": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\raw\\output\\production\\images\\01\\POSCAR",
+  "next_image": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\raw\\output\\production\\images\\03\\POSCAR",
+  "mode_source": "adjacent_reviewed_path_images",
+  "analysis_source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_gpu1517_dimer_parent_20260910\\analysis.json",
+  "analysis_sha256": "846040e2786d7decc62a4b8dba1f3b68b6fe97e6f6dce37110db803ce05498cc",
+  "path_review_source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_gpu1517_dimer_parent_20260910\\path_review.json",
+  "path_review_sha256": "1a1a95217fda9acf46d5bcf247e50943437378a229807e040cac2fe751830137",
+  "parent_neb_method": "gpu_ml_neb_reviewed_path",
+  "modecar_status": "generated_requires_visual_review",
+  "mode_norm": 1.0,
+  "reaction_atom_mode_fraction": 0.9778275719103965,
+  "candidate_hard_gate": {
+    "schema_version": 2,
+    "policy_file": "C:\\Users\\86177\\Desktop\\work\\configs\\dimer_gate.yaml",
+    "policy_sha256": "f22b4c1d53621f8b6c51a9b3264c2869a0db7519537bd802ca90b870168a9c24",
+    "image_names": [
+      "01",
+      "02",
+      "03"
+    ],
+    "parent_method": "gpu_ml_neb_reviewed_path",
+    "hard_checks": {
+      "eligible_parent_method": true,
+      "numbered_internal_adjacent_images": true,
+      "cell_elements_order_selective_dynamics_match": true,
+      "reaction_indices_valid": true,
+      "reaction_center_numeric_continuity": true,
+      "continuous_periodic_branch": true,
+      "gpu_source_model_reaction_bound": true,
+      "gpu_contract_bound": true,
+      "gpu_complete_path_geometry_valid": true,
+      "gpu_path_review_accepted": true,
+      "gpu_reviewed_internal_candidate": true,
+      "gpu_exact_reviewed_triad": true,
+      "gpu_live_policy_bound": true,
+      "gpu_reviewed_parent_valid": true
+    },
+    "hard_gate_passed": true,
+    "hard_gate_errors": [],
+    "compatibility_errors": [],
+    "reaction_atom_neighbor_steps": {
+      "previous_to_candidate_A": 0.4595226550676167,
+      "candidate_to_next_A": 0.4760775381675357
+    },
+    "periodic_branch_shifts": {
+      "previous_to_candidate": 0.0,
+      "candidate_to_next": 0.0
+    },
+    "recommended_checks": {
+      "parent_neb_technically_converged": false,
+      "strict_local_energy_maximum": false,
+      "triad_forces_clearly_reduced": false,
+      "coarse_neb_other_images_stable_peak_stalled": false,
+      "single_target_process_without_stable_intermediate": true,
+      "candidate_between_is_and_fs": null,
+      "mode_provenance_hash_bound": null
+    },
+    "recommended_gate_passed": false,
+    "gpu_ml_neb_parent_evidence": {
+      "passed": true,
+      "checks": {
+        "gpu_source_model_reaction_bound": true,
+        "gpu_contract_bound": true,
+        "gpu_complete_path_geometry_valid": true,
+        "gpu_path_review_accepted": true,
+        "gpu_reviewed_internal_candidate": true,
+        "gpu_exact_reviewed_triad": true,
+        "gpu_live_policy_bound": true
+      },
+      "errors": [],
+      "role": "predicted_starting_candidate_only",
+      "vasp_triad_required": false
+    }
+  },
+  "recommended_gate": {
+    "parent_neb_technically_converged": false,
+    "strict_local_energy_maximum": false,
+    "triad_forces_clearly_reduced": false,
+    "coarse_neb_other_images_stable_peak_stalled": false,
+    "single_target_process_without_stable_intermediate": true,
+    "candidate_between_is_and_fs": null,
+    "mode_provenance_hash_bound": true
+  },
+  "dimer_gate_policy_sha256": "f22b4c1d53621f8b6c51a9b3264c2869a0db7519537bd802ca90b870168a9c24",
+  "contract_sha256": "eeecfe26404dafb2008fbdc5529081d5584bbc5b4883c00a0096a2f32858454a",
+  "atom_map_sha256": "ef5b3d3d64884fde2a673dd35bef48a2a965c026edb6a8dd1c4eb22b100ae157",
+  "compatibility_sha256": "4ef0c782834fd07afca2621a5235bb67c2ea913bd650b93123c21538c35c165d",
+  "path_generation_sha256": "affacabdce3fcc22cab7636f3f86e9b20d15b1739a8930cc60026e2bdf325dae",
+  "submitted": false,
+  "previous_sha256": "3eb0c6ea36b0c0d06be43ed8e39f285ec089b4391efe61d486ac53e633b23fd3",
+  "next_sha256": "58788a37914d42f604acf2399db8d12f870e52785c436de272ec431c499e3ff8",
+  "modecar_sha256": "50770019e7454bfef5afb5454fddfdd8b649ad816c5ef453e3d19db6e7ae4037"
+}

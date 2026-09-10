@@ -1417,3 +1417,15 @@
   execution gate. Remote GPU/VASP submission, fine-tuning, NEB/Dimer/frequency
   execution, and final scientific acceptance remain explicit authorized
   actions.
+
+## 2026-09-10 - Reviewed GPU path may enter VASP Dimer directly
+
+User explicitly approved: “修改 可以gpu直接进入dimer 只要路径 合理”.
+A complete, hash-bound, chemically reasonable GPU path can use
+`gpu_ml_neb_reviewed_path`; compatible VASP peak-triad statics and ML/VASP
+force agreement are optional diagnostics for this branch. Preserve atom/cell/
+fixed-mask/endpoint identity, periodic and chemical path review, reviewed MODECAR,
+VASP inputs, current execution gate and explicit submission authority. This is
+starting-candidate eligibility only; Dimer convergence, frequency validation and
+compatible final energies remain required. First use: GPU1517 image02 to
+VASP Dimer9749920,80cores; scheduler PEND at checkpoint.

@@ -160,3 +160,9 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
   and geometry checks used by local Sella and active-learning handoff.
 - `modules/transition_state_search/SELLA_LOCAL_PEAK.md`: exact request/review
   fields, deployment, bounded execution, return and validation limitations.
+
+## Reviewed GPU path to Dimer
+
+- `scripts/ts_strategy_engine/gpu_dimer_parent.py`: live source/geometry/review validation for direct GPU candidate entry.
+- `scripts/prepare_gpu_path_dimer.py`: canonical-gate Dimer handoff and input preparation; never submits.
+- `docs/reviews/gpu1517_direct_dimer9749920_20260910.md`: approved rule revision, review, verification and submission evidence.

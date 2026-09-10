@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-10T11:52:21.773713+00:00",
+  "recorded_at": "2026-09-10T11:52:21.773713+00:00",
+  "evidence": [
+    {
+      "locator": "docs/reviews/gpu1517_direct_dimer9749920_20260910.md",
+      "sha256": "79ca56850d855e50fa6d053b88955555cc3a75a91bb06a876b3d64001c1d489a",
+      "authority": "repository_document",
+      "observed_at": "2026-09-10T11:52:21.773713+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_gpu1517_20260910/submission_record.json",
+      "sha256": "42be21c609e8dc2e1796c7d79c7d39d45c4e7a16b02566b46c5c5d327ffc57db",
+      "authority": "repository_document",
+      "observed_at": "2026-09-10T11:52:21.773713+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_gpu1517_20260910/scheduler_checkpoint.json",
+      "sha256": "845fefb5a370f48baee1073030fef09ed0d41ecb1ebd765ebe5be7fe5edca24e",
+      "authority": "scheduler",
+      "observed_at": "2026-09-10T11:52:21.773713+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_gpu1517_20260910/registry_receipt.json",
+      "sha256": "5e21e3256859a037e13933bf3735c9048d9ed143cf643cb5edb68c5d35bd9e84",
+      "authority": "calculation_registry",
+      "observed_at": "2026-09-10T11:52:21.773713+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_gpu1517_20260910/execution_gate_decision.json",
+      "sha256": "e93195e234021c0ee8f6085532c2de9e62fdfabc6348c60942393d74e745cee6",
+      "authority": "module_validation",
+      "observed_at": "2026-09-10T11:52:21.773713+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "event_id": "task-dimer9749920-submitted-20260910",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "User-approved direct reviewed GPU path entry; VASP Dimer9749920 submitted, PEND.",
+  "payload": {
+    "objective": "Complete earlier IS-A to MID H surface migration through validated intermediate and TS evidence.",
+    "phase": "active",
+    "current_evidence": [
+      "INT06 VASP9748648 accepted as mapped C2HO*+H* endpoint; final TOTEN -388.50564344eV, fmax0.0177274761eV/A.",
+      "GPU1517 complete five-frame path reviewed: H50 surface migration, C2HO intact, fixed18Fe and endpoint identity preserved; both models select02. ML values remain predicted candidates.",
+      "User approved direct reviewed-GPU-to-Dimer entry on2026-09-10. New gpu_ml_neb_reviewed_path removes mandatory VASP triad/force agreement for candidate entry only; geometry/source/periodic/chemical/MODECAR and execution gates remain required.",
+      "Dimer9749920 submitted through canonical gate on sunboquan-codex,80cores,Gkn_normal. Checkpoint2026-09-10T11:49:52Z LSF PEND; electronic/ionic progress not yet established.",
+      "MODECAR from exact01/03 neighbors: H50 norm fraction0.97782757, fixed18Fe zero; numeric and visual review passed. Input and authorization gates passed;29 registry records inserted.",
+      "Dimer convergence and frequency validation remain required before accepting TS; no migration barrier established. IS-A->INT06 remains unresolved; do not infer exactly two TS.",
+      "Previously accepted MID->FS O-H TS and1.28582718eV forward electronic barrier remain complete; do not repeat."
+    ],
+    "one_executable_step": "Monitor VASP Dimer9749920 at sunboquan-codex:~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_migration_int06_mid_dimer_gpu1517_20260910; inspect convergence and mode before frequency handoff.",
+    "submission_boundary": "One Dimer9749920 submitted under explicit user authority; no automatic retry, additional submission or TS acceptance.",
+    "done_when": [
+      "Independent valley relaxation and geometry reviewed; then define scientifically supported migration segments."
+    ],
+    "constraints": [
+      "Same H50 moves; preserve SIGMA0.20 and bottom18Fe fixed.",
+      "Do not rerun MID-to-FS O-H work."
+    ],
+    "authoritative_references": [
+      "docs/reviews/gpu1517_direct_dimer9749920_20260910.md",
+      "docs/reviews/valley9748648_accepted_20260910.md",
+      "docs/reviews/oh_ts_accepted_barrier_20260910.md"
+    ]
+  },
+  "supersedes": [
+    "task-gpu1517-reviewed-20260910"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "profile_path": "C:\\Users\\86177\\Desktop\\work\\configs\\true_fe110_production.yaml",
+  "profile_sha256": "fbad642502134ca1123741f0bdf3194d2914e230981d38aab90debd4b965bcd3",
+  "stage": "dimer",
+  "gamma_mesh": [
+    5,
+    5,
+    1
+  ],
+  "cores": 80,
+  "magnetic_branch": "default_fe_2p2_muB",
+  "incar": {
+    "PREC": "Accurate",
+    "EDIFF": 1e-07,
+    "EDIFFG": -0.02,
+    "ISPIN": 2,
+    "ISMEAR": 1,
+    "SIGMA": 0.2,
+    "ALGO": "Fast",
+    "LREAL": false,
+    "LASPH": true,
+    "NELM": 200,
+    "NELMIN": 5,
+    "IBRION": 3,
+    "POTIM": 0,
+    "ISIF": 2,
+    "NSW": 300,
+    "ISYM": 0,
+    "LDIPOL": false,
+    "LCHARG": false,
+    "LWAVE": false,
+    "ICHAIN": 2,
+    "IOPT": 2,
+    "DdR": 0.005,
+    "DRotMax": 1,
+    "DFNMin": 0.01,
+    "DFNMax": 1.0,
+    "GGA": "PE",
+    "ENCUT": 400
+  }
+}

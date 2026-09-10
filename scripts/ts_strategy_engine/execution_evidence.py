@@ -64,6 +64,11 @@ def source_bindings_valid(
             except ValueError:
                 return False
         expected = TRUSTED_ARTIFACTS.get(name)
+        if name == "analysis" and current.get("parent_neb_method") == "gpu_ml_neb_reviewed_path":
+            from .gpu_dimer_parent import validate_reviewed_gpu_parent
+            expected = ("gpu_dimer_parent_analysis", "scripts.prepare_gpu_path_dimer")
+            if not validate_reviewed_gpu_parent(current)["passed"]:
+                return False
         if expected and (
             current.get("document_kind") != expected[0]
             or current.get("producer") != expected[1]

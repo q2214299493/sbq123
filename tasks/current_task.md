@@ -7,14 +7,13 @@ Complete earlier IS-A to MID H surface migration through validated intermediate 
 
 ## Current Evidence Snapshot
 
-- INT06 VASP9748648 accepted as intact mapped C2HO* + H* endpoint: 79 steps, fmax0.0177274761 eV/A, final TOTEN -388.50564344 eV under fe110_converged_toten_sigma0p20_v1.
-- IS-A -> INT06 and INT06 -> MID remain separate intervals awaiting validated TS evidence; earlier full-path image02 is an unresolved first-interval ML minimum.
-- Accepted MID -> FS O-H TS and 1.28582718 eV forward electronic barrier remain complete; do not repeat.
-- GPU1517 on physical GPU0: producer exited success0 at2026-09-10T08:29:50Z; ordinary ML-NEB converged after12steps, projected fmax0.066641 eV/A. No ML-CI. Queue empty, scheduler terminal UNKNOWN because historical accounting unavailable.
-- Complete five-frame candidate reviewed in work: source/atom/cell/endpoint/fixed18Fe checks, exact MIC geometry, dist.pl, nebmovie.pl1 and visual inspection passed. H50 remains on surface; C2HO intact.
-- MatRIS and AQCat25 both peak at02: respective predicted relative heights0.115633 and0.265541 eV. Model disagreement is not VASP error calibration; sparse path does not establish unique MEP or TS.
-- Candidate accepted_for_force_diagnosis_only; dimer_parent_accepted=false. Exact optimized01/02/03 lack compatible VASP energies/forces. Execution gate NEEDS_SUBMISSION_PREFLIGHT, ALLOWED_ACTIONS=[]. No new calculation submitted.
-- Completion/review registry batch applied:43 inserts and one workflow change running -> needs_review; scheduler UNKNOWN kept separate from producer convergence. Prior failed GPU attempts remain retained.
+- INT06 VASP9748648 accepted as mapped C2HO*+H* endpoint; final TOTEN -388.50564344eV, fmax0.0177274761eV/A.
+- GPU1517 complete five-frame path reviewed: H50 surface migration, C2HO intact, fixed18Fe and endpoint identity preserved; both models select02. ML values remain predicted candidates.
+- User approved direct reviewed-GPU-to-Dimer entry on2026-09-10. New gpu_ml_neb_reviewed_path removes mandatory VASP triad/force agreement for candidate entry only; geometry/source/periodic/chemical/MODECAR and execution gates remain required.
+- Dimer9749920 submitted through canonical gate on sunboquan-codex,80cores,Gkn_normal. Checkpoint2026-09-10T11:49:52Z LSF PEND; electronic/ionic progress not yet established.
+- MODECAR from exact01/03 neighbors: H50 norm fraction0.97782757, fixed18Fe zero; numeric and visual review passed. Input and authorization gates passed;29 registry records inserted.
+- Dimer convergence and frequency validation remain required before accepting TS; no migration barrier established. IS-A->INT06 remains unresolved; do not infer exactly two TS.
+- Previously accepted MID->FS O-H TS and1.28582718eV forward electronic barrier remain complete; do not repeat.
 
 ## Lifecycle Status
 
@@ -22,11 +21,11 @@ Complete earlier IS-A to MID H surface migration through validated intermediate 
 
 ## One Executable Step
 
-Prepare compatible VASP static energy/force diagnosis for exact GPU1517 final images01/02/03; review inputs/resources and execution gate before any submission, then assess Dimer eligibility.
+Monitor VASP Dimer9749920 at sunboquan-codex:~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_migration_int06_mid_dimer_gpu1517_20260910; inspect convergence and mode before frequency handoff.
 
 ## Submission Boundary
 
-GPU1517 producer has completed. This review authorizes no new GPU/VASP submission; prepare reviewable VASP diagnosis inputs before seeking submission authority.
+One Dimer9749920 submitted under explicit user authority; no automatic retry, additional submission or TS acceptance.
 
 ## Authoritative Constraint
 
@@ -43,7 +42,7 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 
 ## Authoritative References
 
+- docs/reviews/gpu1517_direct_dimer9749920_20260910.md
 - docs/reviews/valley9748648_accepted_20260910.md
 - docs/reviews/oh_ts_accepted_barrier_20260910.md
-- docs/reviews/int06_mid_gpu1517_path_review_20260910.md
 <!-- state-handoff:end current_task -->

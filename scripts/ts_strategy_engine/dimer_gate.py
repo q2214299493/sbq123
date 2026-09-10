@@ -20,6 +20,7 @@ from .dimer_path_gate import _evaluate_gpu_ml_neb_parent, coarse_neb_peak_stall_
 from .dimer_gate_common import _finite, _force_reduced
 
 from .dimer_gate_common import load_policy as load_policy
+from .gpu_dimer_parent import PARENT_METHOD, validate_reviewed_gpu_parent
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -142,6 +143,15 @@ def evaluate_candidate_triad(
         "continuous_periodic_branch": periodic_mapping,
     }
     gpu_parent_evidence: dict[str, Any] | None = None
+    if parent_method == PARENT_METHOD:
+        for key in ("triad_outputs_complete", "triad_electronically_converged",
+                    "triad_energy_and_atomic_force_readable"):
+            checks.pop(key)
+        gpu_parent_evidence = validate_reviewed_gpu_parent(
+            analysis, image_paths=(previous_path, candidate_path, next_path), policy=policy,
+        )
+        checks.update(gpu_parent_evidence["checks"])
+        checks["gpu_reviewed_parent_valid"] = gpu_parent_evidence["passed"]
     if parent_method == "gpu_ml_neb_vasp_validated_triad":
         gpu_parent_evidence = _evaluate_gpu_ml_neb_parent(
             analysis,
@@ -275,6 +285,16 @@ def validate_modecar_bundle(
         >= float(hard["reaction_atom_mode_fraction_min"]),
         "chemical_continuity_and_mode_review_accepted": semantic_review,
     }
+    if manifest.get("parent_neb_method") == PARENT_METHOD:
+        try:
+            source = Path(manifest["analysis_source"])
+            analysis = load_json_object(source)
+            checks["gpu_parent_analysis_unchanged"] = sha256_file(source) == manifest["analysis_sha256"]
+            checks["gpu_reviewed_parent_still_valid"] = validate_reviewed_gpu_parent(
+                analysis, image_paths=(previous_path, poscar_path, next_path), policy=policy,
+            )["passed"]
+        except (OSError, ValueError, KeyError, TypeError):
+            checks["gpu_reviewed_parent_still_valid"] = False
     return {
         "hard_gate_passed": all(checks.values()),
         "hard_gate_errors": [name for name, passed in checks.items() if not passed],
