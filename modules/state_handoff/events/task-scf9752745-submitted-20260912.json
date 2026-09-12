@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-12T03:25:19.086064+00:00",
+  "recorded_at": "2026-09-12T03:25:19.086064+00:00",
+  "evidence": [
+    {
+      "locator": "docs/reviews/int06_mid_scf9752745_20260912.md",
+      "sha256": "0924631507f4c24f3afb88576c33eee3b44ed66ff4f59a3226fd2d3df7e91c4d",
+      "authority": "repository_document",
+      "observed_at": "2026-09-12T03:25:19.086064+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_scf_normal_20260912/submission_record.json",
+      "sha256": "ae87eeaa08b3436b1efc1265ba1967076adff15f1e9c402a741e763654f6054f",
+      "authority": "repository_document",
+      "observed_at": "2026-09-12T03:25:19.086064+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_scf_normal_20260912/scheduler_checkpoint.json",
+      "sha256": "2757efac3522ec18a4fb82e1d0dfffebc6a88f2c059354457a65c57ff10a0cbc",
+      "authority": "scheduler",
+      "observed_at": "2026-09-12T03:25:19.086064+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_scf_normal_20260912/execution_gate_decision.json",
+      "sha256": "1d5a3533fe5112011207c2746a88440e94f3e5708d78d2ef25148c533884683c",
+      "authority": "module_validation",
+      "observed_at": "2026-09-12T03:25:19.086064+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_gpu1517_20260910/stop_20260912/scheduler_confirmation.json",
+      "sha256": "37c1833094beceae642fd1841c2cbea1771b7ae40883adcb774818c23e6cebcd",
+      "authority": "scheduler",
+      "observed_at": "2026-09-12T03:25:19.086064+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "event_id": "task-scf9752745-submitted-20260912",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "Dimer9749920 stopped; user-authorized original-center SCF diagnostic9752745 submitted, PEND.",
+  "payload": {
+    "objective": "Complete earlier IS-A to MID H surface migration through validated intermediate and TS evidence.",
+    "phase": "active",
+    "current_evidence": [
+      "INT06 endpoint9748648 and MID->FS O-H TS remain accepted; earlier IS-A->INT06 unresolved.",
+      "Reviewed GPU1517 frame02 remains a predicted starting candidate; direct reviewed-GPU-to-Dimer policy remains in force.",
+      "Dimer9749920 stopped by user; scheduler EXIT. Ten completed SCF cycles exhausted NELM200 without convergence; no accepted migration TS.",
+      "Structure diagnosis: C2HO and neighboring Fe adjust, H50 stays near Fe38-Fe41 bridge; unconverged forces cannot prove geometric overshoot.",
+      "User authorized one original-center fixed-geometry SCF test. ALGO Normal, EDIFF1e-7, NELM200,80cores, same physical branch; LORBIT11 adds local magnetic projections.",
+      "SCF diagnostic9752745 submitted through current bound gate on sunboquan-codex; checkpoint2026-09-12T03:23:46Z PEND; no output acceptance."
+    ],
+    "one_executable_step": "Monitor SCF9752745; after electronic convergence and exact-geometry validation, compare atom-resolved forces and local Fe moments before deciding transverse relaxation or Dimer.",
+    "submission_boundary": "One fixed-geometry SCF9752745 authorized and submitted; no automatic retry, Dimer restart or TS acceptance.",
+    "done_when": [
+      "Independent valley relaxation and geometry reviewed; then define scientifically supported migration segments."
+    ],
+    "constraints": [
+      "Same H50 moves; preserve SIGMA0.20 and bottom18Fe fixed.",
+      "Do not rerun MID-to-FS O-H work."
+    ],
+    "authoritative_references": [
+      "docs/reviews/int06_mid_scf9752745_20260912.md",
+      "docs/reviews/gpu1517_direct_dimer9749920_20260910.md",
+      "docs/reviews/valley9748648_accepted_20260910.md",
+      "docs/reviews/oh_ts_accepted_barrier_20260910.md"
+    ]
+  },
+  "supersedes": [
+    "task-dimer9749920-submitted-20260910"
+  ]
+}

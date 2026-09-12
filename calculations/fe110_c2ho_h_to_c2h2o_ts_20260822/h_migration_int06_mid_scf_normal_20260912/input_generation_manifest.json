@@ -1,0 +1,96 @@
+{
+  "builder": {
+    "profile_path": "C:\\Users\\86177\\Desktop\\work\\configs\\true_fe110_production.yaml",
+    "profile_sha256": "fbad642502134ca1123741f0bdf3194d2914e230981d38aab90debd4b965bcd3",
+    "stage": "transition_state.active_learning_force_label",
+    "base_profile": "final_static",
+    "compatibility_incar_source": "final_energy_policy.required_surface_incar",
+    "compatibility_incar": {
+      "ISMEAR": 1,
+      "SIGMA": 0.2
+    },
+    "final_energy_convention": "fe110_converged_toten_sigma0p20_v1",
+    "gamma_mesh": [
+      5,
+      5,
+      1
+    ],
+    "cores": 32,
+    "incar": {
+      "PREC": "Accurate",
+      "EDIFF": 1e-06,
+      "ISPIN": 2,
+      "ISMEAR": 1,
+      "SIGMA": 0.2,
+      "ALGO": "Fast",
+      "LREAL": false,
+      "LASPH": true,
+      "NELM": 200,
+      "NELMIN": 5,
+      "NSW": 0,
+      "IBRION": -1,
+      "ISYM": 0,
+      "LDIPOL": false,
+      "LCHARG": false,
+      "LWAVE": false,
+      "GGA": "PE",
+      "ENCUT": 400,
+      "NPAR": 4,
+      "LORBIT": 11
+    }
+  },
+  "purpose": "single_original_center_fixed_geometry_SCF_and_atom_resolved_force_diagnosis",
+  "reviewed_overrides": {
+    "ALGO": {
+      "old": "Fast",
+      "new": "Normal"
+    },
+    "DDR": {
+      "old": 0.005,
+      "new": null
+    },
+    "DFNMAX": {
+      "old": 1.0,
+      "new": null
+    },
+    "DFNMIN": {
+      "old": 0.01,
+      "new": null
+    },
+    "DROTMAX": {
+      "old": 1,
+      "new": null
+    },
+    "IBRION": {
+      "old": 3,
+      "new": -1
+    },
+    "ICHAIN": {
+      "old": 2,
+      "new": null
+    },
+    "IOPT": {
+      "old": 2,
+      "new": null
+    },
+    "LORBIT": {
+      "old": null,
+      "new": 11
+    },
+    "NSW": {
+      "old": 300,
+      "new": 0
+    }
+  },
+  "cores": 80,
+  "source_POSCAR": {
+    "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_dimer_gpu1517_20260910\\POSCAR",
+    "sha256": "21115f8aa333c1aa0053556cd7a377a86fa6c43ba7b42f80bb6620e144923aa2"
+  },
+  "source_INCAR": {
+    "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_dimer_gpu1517_20260910\\INCAR",
+    "sha256": "7e4e956a5ea9efd66648d86ff47a1f8614f9d4144bbfcbb7ccfea154bcaf553f"
+  },
+  "interpretation": "diagnostic_only_not_final_TS_or_barrier",
+  "cold_start": "new empty calculation directory; no WAVECAR or CHGCAR supplied"
+}

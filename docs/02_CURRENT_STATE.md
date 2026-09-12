@@ -1,6 +1,6 @@
 # Current State
 
-State updated: 2026-09-10 CST. This file is a compact snapshot, not a history.
+State updated: 2026-09-12 CST. This file is a compact snapshot, not a history.
 Detailed job maps and old decisions live in `tasks/current_task.md`, module
 READMEs, and the provenance protocols.
 
@@ -124,17 +124,16 @@ accepted TS path, or barrier is established yet.
 ## Active Transition-State Gate
 
 <!-- state-handoff:start active-fe-110-co-dissociation-test-current-gate -->
-### Active Gate - 2026-09-10 Reviewed GPU Path to Dimer9749920; PEND
+### Active Gate - 2026-09-12 Original-center SCF9752745; PEND
 
-- INT06 VASP9748648 accepted as mapped C2HO*+H* endpoint; final TOTEN -388.50564344eV, fmax0.0177274761eV/A.
-- GPU1517 complete five-frame path reviewed: H50 surface migration, C2HO intact, fixed18Fe and endpoint identity preserved; both models select02. ML values remain predicted candidates.
-- User approved direct reviewed-GPU-to-Dimer entry on2026-09-10. New gpu_ml_neb_reviewed_path removes mandatory VASP triad/force agreement for candidate entry only; geometry/source/periodic/chemical/MODECAR and execution gates remain required.
-- Dimer9749920 submitted through canonical gate on sunboquan-codex,80cores,Gkn_normal. Checkpoint2026-09-10T11:49:52Z LSF PEND; electronic/ionic progress not yet established.
-- MODECAR from exact01/03 neighbors: H50 norm fraction0.97782757, fixed18Fe zero; numeric and visual review passed. Input and authorization gates passed;29 registry records inserted.
-- Dimer convergence and frequency validation remain required before accepting TS; no migration barrier established. IS-A->INT06 remains unresolved; do not infer exactly two TS.
-- Previously accepted MID->FS O-H TS and1.28582718eV forward electronic barrier remain complete; do not repeat.
+- INT06 endpoint9748648 and MID->FS O-H TS remain accepted; earlier IS-A->INT06 unresolved.
+- Reviewed GPU1517 frame02 remains a predicted starting candidate; direct reviewed-GPU-to-Dimer policy remains in force.
+- Dimer9749920 stopped by user; scheduler EXIT. Ten completed SCF cycles exhausted NELM200 without convergence; no accepted migration TS.
+- Structure diagnosis: C2HO and neighboring Fe adjust, H50 stays near Fe38-Fe41 bridge; unconverged forces cannot prove geometric overshoot.
+- User authorized one original-center fixed-geometry SCF test. ALGO Normal, EDIFF1e-7, NELM200,80cores, same physical branch; LORBIT11 adds local magnetic projections.
+- SCF diagnostic9752745 submitted through current bound gate on sunboquan-codex; checkpoint2026-09-12T03:23:46Z PEND; no output acceptance.
 
-Next action: Monitor Dimer9749920, then evaluate Dimer convergence and mode before frequency validation.
+Next action: Monitor SCF9752745 and compare electronically converged exact-geometry forces and local moments.
 <!-- state-handoff:end active-fe-110-co-dissociation-test-current-gate -->
 
 ### Historical Evidence

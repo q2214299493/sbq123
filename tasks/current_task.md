@@ -7,13 +7,12 @@ Complete earlier IS-A to MID H surface migration through validated intermediate 
 
 ## Current Evidence Snapshot
 
-- INT06 VASP9748648 accepted as mapped C2HO*+H* endpoint; final TOTEN -388.50564344eV, fmax0.0177274761eV/A.
-- GPU1517 complete five-frame path reviewed: H50 surface migration, C2HO intact, fixed18Fe and endpoint identity preserved; both models select02. ML values remain predicted candidates.
-- User approved direct reviewed-GPU-to-Dimer entry on2026-09-10. New gpu_ml_neb_reviewed_path removes mandatory VASP triad/force agreement for candidate entry only; geometry/source/periodic/chemical/MODECAR and execution gates remain required.
-- Dimer9749920 submitted through canonical gate on sunboquan-codex,80cores,Gkn_normal. Checkpoint2026-09-10T11:49:52Z LSF PEND; electronic/ionic progress not yet established.
-- MODECAR from exact01/03 neighbors: H50 norm fraction0.97782757, fixed18Fe zero; numeric and visual review passed. Input and authorization gates passed;29 registry records inserted.
-- Dimer convergence and frequency validation remain required before accepting TS; no migration barrier established. IS-A->INT06 remains unresolved; do not infer exactly two TS.
-- Previously accepted MID->FS O-H TS and1.28582718eV forward electronic barrier remain complete; do not repeat.
+- INT06 endpoint9748648 and MID->FS O-H TS remain accepted; earlier IS-A->INT06 unresolved.
+- Reviewed GPU1517 frame02 remains a predicted starting candidate; direct reviewed-GPU-to-Dimer policy remains in force.
+- Dimer9749920 stopped by user; scheduler EXIT. Ten completed SCF cycles exhausted NELM200 without convergence; no accepted migration TS.
+- Structure diagnosis: C2HO and neighboring Fe adjust, H50 stays near Fe38-Fe41 bridge; unconverged forces cannot prove geometric overshoot.
+- User authorized one original-center fixed-geometry SCF test. ALGO Normal, EDIFF1e-7, NELM200,80cores, same physical branch; LORBIT11 adds local magnetic projections.
+- SCF diagnostic9752745 submitted through current bound gate on sunboquan-codex; checkpoint2026-09-12T03:23:46Z PEND; no output acceptance.
 
 ## Lifecycle Status
 
@@ -21,11 +20,11 @@ Complete earlier IS-A to MID H surface migration through validated intermediate 
 
 ## One Executable Step
 
-Monitor VASP Dimer9749920 at sunboquan-codex:~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_migration_int06_mid_dimer_gpu1517_20260910; inspect convergence and mode before frequency handoff.
+Monitor SCF9752745; after electronic convergence and exact-geometry validation, compare atom-resolved forces and local Fe moments before deciding transverse relaxation or Dimer.
 
 ## Submission Boundary
 
-One Dimer9749920 submitted under explicit user authority; no automatic retry, additional submission or TS acceptance.
+One fixed-geometry SCF9752745 authorized and submitted; no automatic retry, Dimer restart or TS acceptance.
 
 ## Authoritative Constraint
 
@@ -42,6 +41,7 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 
 ## Authoritative References
 
+- docs/reviews/int06_mid_scf9752745_20260912.md
 - docs/reviews/gpu1517_direct_dimer9749920_20260910.md
 - docs/reviews/valley9748648_accepted_20260910.md
 - docs/reviews/oh_ts_accepted_barrier_20260910.md

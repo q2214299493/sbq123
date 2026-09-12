@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "document_kind": "scheduler_job_evidence",
+  "stage": "diagnostic_static",
+  "scheduler": "LSF",
+  "server_alias": "sunboquan-codex",
+  "job_id": "9752745",
+  "status": "PEND",
+  "checked_at": "2026-09-12T03:23:46Z",
+  "source_command": "ssh sunboquan-codex bjobs -a 9752745",
+  "query": {
+    "argv": [
+      "ssh",
+      "sunboquan-codex",
+      "bjobs",
+      "-a",
+      "9752745"
+    ],
+    "returncode": 0,
+    "stdout": "JOBID   USER    STAT  QUEUE      FROM_HOST   EXEC_HOST   JOB_NAME   SUBMIT_TIME\n9752745 nsgkn_c PEND  Gkn_normal ycn02                   script.lsf Sep 12 11:25\n",
+    "stderr": "",
+    "stdout_sha256": "51ba284e5aabc387f4fd517b55a6de70a26e1be29ae36b6f90d7fd9b28100dcb"
+  }
+}
