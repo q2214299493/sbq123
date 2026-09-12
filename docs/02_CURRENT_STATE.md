@@ -124,18 +124,18 @@ accepted TS path, or barrier is established yet.
 ## Active Transition-State Gate
 
 <!-- state-handoff:start active-fe-110-co-dissociation-test-current-gate -->
-### Active Gate - 2026-09-13 SCF9753825 allocated RUN; VASP startup unverified
+### Active Gate - 2026-09-13 SCF9753825 repeated dispatch failure; latest RUN unverified
 
 - SCF9753658 user-stopped and confirmed EXIT after incomplete MPI startup (64/80 ranks; no ranks on gknew0440); no electronic steps.
 - User authorized one replacement with identical SCF inputs and 80 cores, excluding gknew0440; SCF9753825 submitted via a current bound gate.
-- SCF9753825 scheduler RUN; actual request select[hname!=gknew0440] span[ptile=32], allocation gknew0421:32/gknew0447:32/gknew0716:16.
-- Checkpoint 2026-09-12T17:13:55Z: two node checks found 0 VASP ranks; no vasp.out/OUTCAR/OSZICAR; bpeek reports starting. MPI and SCF progress unverified.
+- SCF9753825 cycles RUN/PEND and changes allocations; bjobs -l explicitly reported Failed in talking to server to start the job. Exclusion of gknew0440 remains effective.
+- Latest stored checkpoint 2026-09-12T17:18:51Z: RUN redispatched to gknew0444:32/gknew0421:32/gknew0447:16; no verified MPI or electronic startup. Earlier checks found 0 VASP ranks and no output.
 - ALGO Normal, EDIFF1e-7, NELM200, original geometry and physical settings preserved; LWAVE/LCHARG enabled for electronic-state recovery.
 - SuccessfulSCF9752745 converged96steps without saved restart state; independent Normal Dimer9753172 diverged before movement and remains stopped.
 - Require normal electronic convergence, unchanged geometry and valid completed WAVECAR/CHGCAR before restart verification. No migration TS accepted.
 - INT06 endpoint and MID->FS O-H TS remain accepted; earlier IS-A->INT06 remains unresolved.
 
-Next action: Verify actual 80-rank launch and electronic output of SCF9753825; no SCF acceptance until convergence and saved-state validation.
+Next action: Check cluster execution-host launch communication; do not tune SCF parameters or resubmit again based solely on scheduler RUN.
 <!-- state-handoff:end active-fe-110-co-dissociation-test-current-gate -->
 
 ### Historical Evidence
