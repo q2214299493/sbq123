@@ -632,6 +632,14 @@ recomputes the bundle hash, verifies MPI-rank divisibility and the remote
 POTCAR hash, and rejects unlisted actions. Specialized numerical helpers remain
 under `scripts/neb_agent/`; they are evidence backends, not workflow authority.
 
+For LSF node restrictions, the hash-bound `script.lsf` may contain one
+`#BSUB -R 'select[hname!=gknew0440]'` directive. Preflight records it and the
+executor passes it explicitly as a quoted `bsub -R` argument, because submission
+by script filename does not itself apply BSUB comments. Duplicate, malformed,
+or other BSUB directives fail preflight; changing the script requires a new gate.
+The sunboquan site hook cannot preserve double quotes inside this expression;
+use the shown unquoted hostname form and verify the scheduler's recorded request.
+
 ## Code Architecture
 
 - `cli.py`: argument parsing and thin command adapters only.

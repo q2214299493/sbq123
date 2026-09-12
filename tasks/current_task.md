@@ -7,12 +7,13 @@ Complete earlier IS-A to MID H surface migration through validated intermediate 
 
 ## Current Evidence Snapshot
 
-- Dimer9749920 and9753172 remain user-stopped; no migration TS accepted.
-- SuccessfulSCF9752745 converged96steps, but its electronic state was not saved; an independent Normal Dimer cold start diverged before center movement.
-- User resumed staged recovery: save converged original-center electronic state, then verify restart before a short Dimer trial.
-- Step1 SCF9753658 submitted via current hash-bound gate on sunboquan-codex,80cores,Gkn_normal; checkpoint2026-09-12T13:02:29Z PEND.
-- Compared with successfulSCF9752745, only LWAVE/LCHARG are enabled. Original geometry,ALGO Normal,EDIFF1e-7,NELM200 and physical settings preserved.
-- Require electronic convergence, normal completion, unchanged geometry and valid completed WAVECAR/CHGCAR before restart verification; file existence alone is insufficient.
+- SCF9753658 user-stopped and confirmed EXIT after incomplete MPI startup (64/80 ranks; no ranks on gknew0440); no electronic steps.
+- User authorized one replacement with identical SCF inputs and 80 cores, excluding gknew0440; SCF9753825 submitted via a current bound gate.
+- SCF9753825 scheduler RUN; actual request select[hname!=gknew0440] span[ptile=32], allocation gknew0421:32/gknew0447:32/gknew0716:16.
+- Checkpoint 2026-09-12T17:13:55Z: two node checks found 0 VASP ranks; no vasp.out/OUTCAR/OSZICAR; bpeek reports starting. MPI and SCF progress unverified.
+- ALGO Normal, EDIFF1e-7, NELM200, original geometry and physical settings preserved; LWAVE/LCHARG enabled for electronic-state recovery.
+- SuccessfulSCF9752745 converged96steps without saved restart state; independent Normal Dimer9753172 diverged before movement and remains stopped.
+- Require normal electronic convergence, unchanged geometry and valid completed WAVECAR/CHGCAR before restart verification. No migration TS accepted.
 - INT06 endpoint and MID->FS O-H TS remain accepted; earlier IS-A->INT06 remains unresolved.
 
 ## Lifecycle Status
@@ -21,11 +22,11 @@ Complete earlier IS-A to MID H surface migration through validated intermediate 
 
 ## One Executable Step
 
-Monitor SCF9753658 and validate electronic convergence, unchanged geometry, and completed compatible WAVECAR/CHGCAR before preparing restart verification.
+Check actual 80-rank MPI startup and SCF9753825 output, then validate convergence and saved WAVECAR/CHGCAR before restart verification.
 
 ## Submission Boundary
 
-One fixed-geometry SCF9753658 submitted for step1; no automatic retry or long Dimer submission.
+One user-authorized replacement SCF9753825 submitted; no further retry or Dimer submission.
 
 ## Authoritative Constraint
 
@@ -33,7 +34,7 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 
 ## Done When
 
-- Independent valley relaxation and geometry reviewed; then define scientifically supported migration segments.
+- Original-center SCF converges normally with valid saved electronic state, then restart reproducibility is verified before a separately gated short Dimer trial.
 
 ## Constraints
 
@@ -42,6 +43,7 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 
 ## Authoritative References
 
+- docs/reviews/int06_mid_scf9753825_no0440_20260913.md
 - docs/reviews/int06_mid_scf9753658_save_state_20260912.md
 - docs/reviews/int06_mid_dimer9753172_stopped_20260912.md
 - docs/reviews/int06_mid_dimer9753172_normal_20260912.md

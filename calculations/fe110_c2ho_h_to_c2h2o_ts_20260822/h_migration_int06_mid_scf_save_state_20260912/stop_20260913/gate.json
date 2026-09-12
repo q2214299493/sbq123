@@ -1,0 +1,154 @@
+{
+  "schema_version": 2,
+  "gate": "AUTHORITATIVE_NEB_EXECUTION_GATE",
+  "generated_at_utc": "2026-09-12T16:55:47.028358+00:00",
+  "state_sha256": "e0b23041ab45733ca94e8cc215c0d8cc7dc31df8c66d5d857a76ff01d0e93a19",
+  "DECISION": "STOP_USER_REQUESTED",
+  "REASON_CODES": [
+    "EXPLICIT_USER_STOP_REQUEST"
+  ],
+  "EVIDENCE": {
+    "geometry": {},
+    "analysis": {},
+    "thresholds": {
+      "min_distance_factor": 0.55,
+      "absolute_min_distance_A": 1.0,
+      "image_jump_warning_A": 1.0,
+      "fixed_position_tolerance_A": 0.0001,
+      "internal_minimum_warning_eV": 0.2,
+      "barrierless_force_threshold_eVA": 0.2,
+      "high_force_warning_threshold_eVA": 1.5,
+      "min_ionic_steps_for_force_warning": 5,
+      "persistent_high_force_failure_min_ionic_steps": 10,
+      "scf_consecutive_exhaustion_hard_min": 3,
+      "surface_penetration_warning_A": 0.2,
+      "desorption_height_change_warning_A": 2.0,
+      "reaction_coordinate_backtrack_warning_A": 0.25,
+      "magnetic_continuity_warning_threshold_muB": 2.0
+    },
+    "path_quality": {},
+    "preflight": {},
+    "validation": {},
+    "scheduler": {
+      "schema_version": 1,
+      "document_kind": "scheduler_job_evidence",
+      "stage": "diagnostic_static",
+      "scheduler": "LSF",
+      "server_alias": "sunboquan-codex",
+      "job_id": "9753658",
+      "status": "RUN",
+      "checked_at": "2026-09-12T16:55:46Z",
+      "source_command": "ssh sunboquan-codex bjobs -a 9753658",
+      "query": {
+        "argv": [
+          "ssh",
+          "sunboquan-codex",
+          "bjobs",
+          "-a",
+          "9753658"
+        ],
+        "returncode": 0,
+        "stdout": "JOBID   USER    STAT  QUEUE      FROM_HOST   EXEC_HOST   JOB_NAME   SUBMIT_TIME\n9753658 nsgkn_c RUN   Gkn_normal ycn02       32*gknew023 script.lsf Sep 12 21:04\n                                             32*gknew0627\n                                             16*gknew0440\n",
+        "stderr": "",
+        "stdout_sha256": "c2ded7d8578c16f510c560786e184d2f2f58541b51dbc3b0f8ff4ffd0cf904f4"
+      }
+    },
+    "authorization": {
+      "schema_version": 1,
+      "document_kind": "user_execution_authorization",
+      "action": "STOP_JOB",
+      "job_id": "9753658",
+      "allowed_scheduler_statuses": [
+        "RUN",
+        "PEND"
+      ],
+      "authorized_at": "2026-09-12T16:55:46.989741+00:00",
+      "source": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_scf_save_state_20260912\\stop_20260913\\user_request.md",
+        "sha256": "999d6fdc1d2b4334ee21f902fa818082f8dda9cc3c71af4f5e3c39a8b480bc12"
+      },
+      "target": {
+        "server_alias": "sunboquan-codex",
+        "remote_dir": "~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_migration_int06_mid_scf_save_state_20260912",
+        "job_id": "9753658"
+      },
+      "workdir_identity": "c:\\users\\86177\\desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_scf_save_state_20260912",
+      "bundle_sha256": "cc2739b8e24901cdf41fc960f542b8d60247645e3bf26c0ef404a788326a80a0",
+      "evidence_sha256": "9d94a160cb0afc780d5db8d4c7a212a607591dfc0682bfa6d1211bf76b8ffd62"
+    },
+    "source_bindings": {
+      "scheduler": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_scf_save_state_20260912\\stop_20260913\\scheduler_before.json",
+        "sha256": "eeaf2a7bbe83b3b41cf8d4bd0b88e9fcdd5cda226e0bbf24b2a33919cf7a2e3f"
+      },
+      "thresholds": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\configs\\neb_agent\\default_thresholds.yaml",
+        "sha256": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c"
+      },
+      "authorization": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_scf_save_state_20260912\\stop_20260913\\authorization.json",
+        "sha256": "ef004c3f33e4b58ce21f1fa69840125d80d9e4ae680e17ec454105a2bfb6c237"
+      }
+    },
+    "climb": false,
+    "path_reviewed": false
+  },
+  "CRITICAL_IMAGES": [],
+  "CHEMICAL_INTERPRETATION": null,
+  "FILES_SAVED": [],
+  "ALLOWED_ACTIONS": [
+    "STOP_JOB"
+  ],
+  "FORBIDDEN_ACTIONS": [
+    "CONTINUE_JOB",
+    "REBUILD_PATH",
+    "SUBMIT_DIAGNOSTIC_VASP",
+    "SUBMIT_VASP",
+    "ENABLE_CI_NEB",
+    "PREPARE_DIMER_HANDOFF",
+    "START_DIMER",
+    "START_VFA",
+    "APPROVE_TS_CANDIDATE",
+    "REPORT_FINAL_BARRIER"
+  ],
+  "NEXT_REQUIRED_CHECK": "CONFIRM_LSF_EXIT",
+  "SUBMISSION_ALLOWED": false,
+  "CI_NEB_ALLOWED": false,
+  "DIMER_ALLOWED": false,
+  "VFA_ALLOWED": false,
+  "TS_CLAIM_ALLOWED": false,
+  "COMPUTE_COST_ASSESSMENT": null,
+  "scientific_readiness": {
+    "decision": "STOP_USER_REQUESTED",
+    "reason_codes": [
+      "EXPLICIT_USER_STOP_REQUEST"
+    ],
+    "eligible_actions": [
+      "STOP_JOB"
+    ]
+  },
+  "execution_authorization_error": null,
+  "execution_authorization": {
+    "action": "STOP_JOB",
+    "target": {
+      "job_id": "9753658",
+      "remote_dir": "~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_migration_int06_mid_scf_save_state_20260912",
+      "server_alias": "sunboquan-codex"
+    },
+    "binding": {
+      "workdir_identity": "c:\\users\\86177\\desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_scf_save_state_20260912",
+      "bundle_sha256": "cc2739b8e24901cdf41fc960f542b8d60247645e3bf26c0ef404a788326a80a0",
+      "evidence_sha256": "9d94a160cb0afc780d5db8d4c7a212a607591dfc0682bfa6d1211bf76b8ffd62"
+    },
+    "source": {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_scf_save_state_20260912\\stop_20260913\\user_request.md",
+      "sha256": "999d6fdc1d2b4334ee21f902fa818082f8dda9cc3c71af4f5e3c39a8b480bc12"
+    },
+    "potcar": {}
+  },
+  "evidence_binding": {
+    "workdir_identity": "c:\\users\\86177\\desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_scf_save_state_20260912",
+    "bundle_sha256": "cc2739b8e24901cdf41fc960f542b8d60247645e3bf26c0ef404a788326a80a0",
+    "evidence_sha256": "9d94a160cb0afc780d5db8d4c7a212a607591dfc0682bfa6d1211bf76b8ffd62"
+  }
+}

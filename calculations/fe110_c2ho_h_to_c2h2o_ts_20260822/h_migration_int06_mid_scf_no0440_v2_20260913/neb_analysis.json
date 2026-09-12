@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "document_kind": "neb_output_analysis",
+  "producer": "scripts.neb_agent.analyze_neb_outputs",
+  "analysis_inputs": {
+    "workdir": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_scf_no0440_v2_20260913",
+    "thresholds_path": "C:\\Users\\86177\\Desktop\\work\\configs\\neb_agent\\default_thresholds.yaml",
+    "reaction_indices": [
+      49
+    ]
+  },
+  "source_files": [
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_scf_no0440_v2_20260913\\INCAR",
+      "sha256": "87b801884b4cef233613a229d5565ec71c1eff90d7b9c8467953ab33e4502fca"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\configs\\neb_agent\\default_thresholds.yaml",
+      "sha256": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c"
+    }
+  ],
+  "status": "NO_OUTPUT",
+  "images": [],
+  "complete_energy_profile": false,
+  "maximum_image": null,
+  "internal_maximum": false,
+  "internal_minimum_warning": false,
+  "internal_minimum_images": [],
+  "monotonic_energy_profile": false,
+  "fatal_keywords": [],
+  "configured_nelm": 200,
+  "configured_nsw": 0,
+  "configured_images": null,
+  "configured_ediffg_eVA": -0.02,
+  "parent_neb_method": "needs_confirmation",
+  "image_sequence_complete": false,
+  "scf_exhausted_images": [],
+  "scf_persistent_failure_images": [],
+  "scf_warning": false,
+  "scf_failure": false,
+  "force_warning_policy": {
+    "threshold_eVA": 1.5,
+    "startup_window_ionic_steps": 5,
+    "persistent_failure_minimum_ionic_steps": 10,
+    "requires_non_decreasing_trend": true,
+    "early_high_force_is_failure": false,
+    "warning_is_hard_failure": false,
+    "high_force_with_independent_geometry_periodic_or_magnetic_anomaly_is_failure": true
+  },
+  "high_force_observations": [],
+  "high_force_warnings": [],
+  "persistent_high_force_failure_images": [],
+  "nsw_stopped_without_convergence_images": [],
+  "technically_converged": false,
+  "geometry_validated": false,
+  "path_reviewed": false,
+  "scientifically_valid": false,
+  "magnetic_continuity": {
+    "rule": "MAGNETIC_CONTINUITY_RULE",
+    "severity": "SOFT_WARNING",
+    "warning_threshold_muB": 2.0,
+    "warnings": [],
+    "action": "CHECK_MAGNETIC_STATE_CONTINUITY",
+    "stops_current_job": false,
+    "blocks_ordinary_no_climb_neb": false,
+    "proves_magnetic_state_switch": false
+  },
+  "barrierless_candidate": false,
+  "energy_profile_status": "interim_neb_only_not_reportable_barrier"
+}

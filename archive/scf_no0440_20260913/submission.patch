@@ -1,0 +1,138 @@
+diff --git a/scripts/neb_agent/submission.py b/scripts/neb_agent/submission.py
+index 83beac6..7adc578 100644
+--- a/scripts/neb_agent/submission.py
++++ b/scripts/neb_agent/submission.py
+@@ -132,6 +132,7 @@ def preflight(
+     incar = read_incar_values(workdir / "INCAR") if core_ready else {}
+     cores = _script_cores(workdir / "script.lsf") if core_ready else None
+     errors = [f"missing:{name}" for name in missing]
++    resource_fields = _resource_preflight(workdir / "script.lsf", errors)
+     dimer_gate: dict[str, Any] = {}
+     vfa_gate: dict[str, Any] = {}
+     connectivity_gate: dict[str, Any] = {}
+@@ -173,6 +174,7 @@ def preflight(
+         "files": manifest,
+         "bundle_sha256": sha256_json({"kind": kind, "files": manifest}),
+         "strategy_retry_check": learning_check,
++        **resource_fields,
+     }
+     if kind == "dimer":
+         payload["dimer_hard_gate_passed"] = bool(dimer_gate.get("hard_gate_passed"))
+@@ -192,6 +194,39 @@ def preflight(
+     return payload
+ 
+ 
++def _resource_preflight(path: Path, errors: list[str]) -> dict[str, str]:
++    if not path.is_file():
++        return {}
++    try:
++        requirement = _script_resource_requirement(path)
++    except ValueError as exc:
++        errors.append(f"invalid_lsf_directive:{exc}")
++        return {}
++    return {"resource_requirement": requirement} if requirement is not None else {}
++
++
++def _script_resource_requirement(path: Path) -> str | None:
++    """Forward the one supported BSUB directive from the hash-bound script."""
++    requirement = None
++    for line in path.read_text(encoding="utf-8").splitlines():
++        if not re.match(r"^\s*#BSUB(?:\s|$)", line):
++            continue
++        tokens = shlex.split(line.strip()[5:])
++        if len(tokens) != 2 or tokens[0] != "-R" or not tokens[1].strip():
++            raise ValueError("only one #BSUB -R 'resource requirement' is supported")
++        if requirement is not None:
++            raise ValueError("duplicate #BSUB -R directive")
++        requirement = tokens[1]
++    return requirement
++
++
++def _bsub_command(report: dict[str, Any]) -> str:
++    args = ["bsub"]
++    if report.get("resource_requirement") is not None:
++        args.extend(["-R", report["resource_requirement"]])
++    return shlex.join([*args, "script.lsf"])
++
++
+ def _required_files(kind: str) -> list[str]:
+     required = ["INCAR", "KPOINTS", "POTCAR.spec", "script.lsf"]
+     if kind in {"diagnostic_static", "dimer", "vfa", "connectivity_relax", "adsorption_relaxation"}:
+@@ -471,7 +506,7 @@ def submit(
+             f"if test ! -e {remote_dir}/POTCAR; then cp {potcar_source} {remote_dir}/POTCAR; fi",
+             *_remote_bundle_checks(remote_dir, {**dict(bundle.files), "POTCAR": potcar_sha256}),
+             f"cd {remote_dir}",
+-            "bsub script.lsf",
++            _bsub_command(report),
+         ])
+         completed = _run(["ssh", host, remote_check])
+         matches = JOB_ID.findall(completed.stdout)
+diff --git a/tests/test_neb_submission.py b/tests/test_neb_submission.py
+index e6c96da..4aa840e 100644
+--- a/tests/test_neb_submission.py
++++ b/tests/test_neb_submission.py
+@@ -1,6 +1,7 @@
+ from __future__ import annotations
+ 
+ import json
++import shlex
+ from pathlib import Path
+ 
+ import numpy as np
+@@ -460,3 +461,56 @@ def test_successful_submit_preserves_reservation_with_success_record(
+     assert result["job_id"] == "123"
+     assert (workdir / submission.SUBMISSION_ATTEMPT_FILE).is_file()
+     assert (workdir / submission.SUBMISSION_RECORD_FILE).is_file()
++
++
++@pytest.mark.parametrize("directive", [
++    "#BSUB -R", "#BSUB -R ''", "#BSUB -q queue",
++    "#BSUB -R 'unterminated", "#BSUB -R a\n#BSUB -R b",
++])
++def test_invalid_resource_directive_fails_preflight(tmp_path, directive):
++    _common(tmp_path, "NSW=0\nIBRION=-1\n", 80)
++    (tmp_path / "POSCAR").write_text("test structure", encoding="utf-8")
++    (tmp_path / "script.lsf").write_text("NP=80\n" + directive, encoding="utf-8")
++    report = preflight(tmp_path, "diagnostic_static")
++    assert not report["passed"]
++    assert any(error.startswith("invalid_lsf_directive:") for error in report["errors"])
++
++
++def test_bound_resource_requirement_reaches_bsub(tmp_path, monkeypatch):
++    from scripts.artifact_io import load_json_object, write_json
++    from tests.test_execution_lifecycle import authorize_evidence, launch
++
++    workdir, decision_path, _ = prepare_submission(tmp_path, monkeypatch)
++    requirement = 'select[hname!="gknew0440"]'
++    (workdir / "script.lsf").write_text(
++        "NP=1\n#BSUB -R " + shlex.quote(requirement) + "\n", encoding="utf-8",
++    )
++    report = submission.preflight(workdir, "diagnostic_static")
++    assert report["passed"] and report["resource_requirement"] == requirement
++    evidence = load_json_object(decision_path)["EVIDENCE"]
++    evidence["preflight"] = report
++    evidence["source_bindings"]["preflight"]["sha256"] = sha256_file(
++        workdir / "submission_preflight.json",
++    )
++    write_json(decision_path, authorize_evidence(workdir, evidence))
++    commands = []
++
++    def fake_run(argv):
++        commands.append(argv[-1])
++        return type("Result", (), {"stdout": "Job <123> is submitted"})()
++
++    monkeypatch.setattr(submission, "_run", fake_run)
++    monkeypatch.setattr(submission, "_upload_manifest_files", lambda *args: None)
++    assert launch(workdir, decision_path)["job_id"] == "123"
++    assert submission._bsub_command(report) in shlex.split(commands[-1])[2]
++    assert shlex.split(submission._bsub_command(report)) == [
++        "bsub", "-R", requirement, "script.lsf",
++    ]
++
++
++def test_bsub_resource_is_single_shell_argument():
++    requirement = 'select[hname!="x"]; $(touch forbidden)'
++    assert shlex.split(submission._bsub_command({"resource_requirement": requirement})) == [
++        "bsub", "-R", requirement, "script.lsf",
++    ]
++    assert submission._bsub_command({}) == "bsub script.lsf"

@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-12T17:15:57.438489+00:00",
+  "recorded_at": "2026-09-12T17:15:57.438489+00:00",
+  "evidence": [
+    {
+      "locator": "docs/reviews/int06_mid_scf9753825_no0440_20260913.md",
+      "sha256": "91bdb99626941ff55b4572391dcf414d85fcf482def83e72e5b7afbe54ab491c",
+      "authority": "repository_document",
+      "observed_at": "2026-09-12T17:15:57.438489+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_scf_no0440_v2_20260913/submission_record.json",
+      "sha256": "fabae2b1223c24fca7a6418b8593a18f189c94499cc66efee1bbba6f2f9ec807",
+      "authority": "repository_document",
+      "observed_at": "2026-09-12T17:15:57.438489+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_scf_no0440_v2_20260913/scheduler_live_checkpoint.json",
+      "sha256": "3e0b452fe44e0b2b7de87a1711237c32e67e099cfa2eba683c09dfb3271e9bce",
+      "authority": "scheduler",
+      "observed_at": "2026-09-12T17:15:57.438489+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_scf_no0440_v2_20260913/scheduler_resource_verification.json",
+      "sha256": "83477dcb1a2f04ee54d0063ac1a9a1cb4820b15b8e3d49094a6c2f94c8f86af1",
+      "authority": "scheduler",
+      "observed_at": "2026-09-12T17:15:57.438489+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_scf_no0440_v2_20260913/mpi_checkpoint_2.json",
+      "sha256": "135e7816cd82bf187622e37ac7209702ec518d6c221e22132aa4ad060495ad22",
+      "authority": "repository_document",
+      "observed_at": "2026-09-12T17:15:57.438489+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_scf_no0440_v2_20260913/output_checkpoint_2.json",
+      "sha256": "b99d099e3534967d0ded271a6dfdf42ebd6c79ef77b48892aea63af1af1a4733",
+      "authority": "repository_document",
+      "observed_at": "2026-09-12T17:15:57.438489+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_scf_no0440_v2_20260913/execution_gate_decision.json",
+      "sha256": "b8bbbeff766db6e5f406ce5a68b8cdb99f02581ed59fea78256691ea6a4e43e5",
+      "authority": "module_validation",
+      "observed_at": "2026-09-12T17:15:57.438489+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_scf_save_state_20260912/stop_20260913/scheduler_confirmation.json",
+      "sha256": "28f822b8a738e4b326a50fd6a1b0c4780191b839d7917752ddffb1f2da0aa8d2",
+      "authority": "scheduler",
+      "observed_at": "2026-09-12T17:15:57.438489+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "event_id": "state-scf9753825-submitted-20260913",
+  "event_type": "state_observed",
+  "entity": {
+    "kind": "state",
+    "id": "active-fe-110-co-dissociation-test-current-gate",
+    "module": "transition_state_search"
+  },
+  "summary": "SCF9753658 stopped; replacement SCF9753825 excludes gknew0440, allocated RUN but VASP startup unverified.",
+  "payload": {
+    "block_id": "active-fe-110-co-dissociation-test-current-gate",
+    "section": "## Active Transition-State Gate",
+    "title": "Active Gate - 2026-09-13 SCF9753825 allocated RUN; VASP startup unverified",
+    "facts": [
+      "SCF9753658 user-stopped and confirmed EXIT after incomplete MPI startup (64/80 ranks; no ranks on gknew0440); no electronic steps.",
+      "User authorized one replacement with identical SCF inputs and 80 cores, excluding gknew0440; SCF9753825 submitted via a current bound gate.",
+      "SCF9753825 scheduler RUN; actual request select[hname!=gknew0440] span[ptile=32], allocation gknew0421:32/gknew0447:32/gknew0716:16.",
+      "Checkpoint 2026-09-12T17:13:55Z: two node checks found 0 VASP ranks; no vasp.out/OUTCAR/OSZICAR; bpeek reports starting. MPI and SCF progress unverified.",
+      "ALGO Normal, EDIFF1e-7, NELM200, original geometry and physical settings preserved; LWAVE/LCHARG enabled for electronic-state recovery.",
+      "SuccessfulSCF9752745 converged96steps without saved restart state; independent Normal Dimer9753172 diverged before movement and remains stopped.",
+      "Require normal electronic convergence, unchanged geometry and valid completed WAVECAR/CHGCAR before restart verification. No migration TS accepted.",
+      "INT06 endpoint and MID->FS O-H TS remain accepted; earlier IS-A->INT06 remains unresolved."
+    ],
+    "next_action": "Verify actual 80-rank launch and electronic output of SCF9753825; no SCF acceptance until convergence and saved-state validation.",
+    "project_state_header": true
+  },
+  "supersedes": [
+    "state-scf9753658-submitted-20260912"
+  ]
+}

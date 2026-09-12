@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "document_kind": "scheduler_job_evidence",
+  "stage": "diagnostic_static",
+  "scheduler": "LSF",
+  "server_alias": "sunboquan-codex",
+  "job_id": "9753825",
+  "status": "RUN",
+  "checked_at": "2026-09-12T17:13:55Z",
+  "source_command": "ssh sunboquan-codex bjobs -a 9753825",
+  "query": {
+    "argv": [
+      "ssh",
+      "sunboquan-codex",
+      "bjobs",
+      "-a",
+      "9753825"
+    ],
+    "returncode": 0,
+    "stdout": "JOBID   USER    STAT  QUEUE      FROM_HOST   EXEC_HOST   JOB_NAME   SUBMIT_TIME\n9753825 nsgkn_c RUN   Gkn_normal ycn02       32*gknew044 script.lsf Sep 13 01:08\n                                             32*gknew0421\n                                             16*gknew0512\n",
+    "stderr": "",
+    "stdout_sha256": "4e4a03fa50712378a2c5a14f4d2062bf4729b28960ea6c470098f04627ef1951"
+  }
+}

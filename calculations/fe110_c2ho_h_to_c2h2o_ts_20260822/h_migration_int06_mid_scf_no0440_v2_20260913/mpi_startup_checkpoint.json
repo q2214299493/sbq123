@@ -1,0 +1,31 @@
+{
+  "checked_at": "2026-09-12T17:06:38.986024+00:00",
+  "job_id": "9753825",
+  "nodes": [
+    {
+      "host": "gknew0421",
+      "returncode": 0,
+      "vasp_ranks": 0,
+      "command": "lsrun -m gknew0421 ps -u nsgkn_chengdj3 -o pid,ppid,stat,pcpu,etime,comm,wchan:24",
+      "stdout": "  PID  PPID STAT %CPU     ELAPSED COMMAND         WCHAN\n23176  5005 S<s   0.0       00:01 res             poll_schedule_timeout\n23177 23176 R     0.0       00:00 ps              -\n",
+      "stderr": ""
+    },
+    {
+      "host": "gknew0447",
+      "returncode": 0,
+      "vasp_ranks": 0,
+      "command": "lsrun -m gknew0447 ps -u nsgkn_chengdj3 -o pid,ppid,stat,pcpu,etime,comm,wchan:24",
+      "stdout": "  PID  PPID STAT %CPU     ELAPSED COMMAND         WCHAN\n16715  4125 S<s   0.0       00:00 res             poll_schedule_timeout\n16716 16715 R     0.0       00:00 ps              -\n",
+      "stderr": ""
+    },
+    {
+      "host": "gknew0716",
+      "returncode": 0,
+      "vasp_ranks": 0,
+      "command": "lsrun -m gknew0716 ps -u nsgkn_chengdj3 -o pid,ppid,stat,pcpu,etime,comm,wchan:24",
+      "stdout": "  PID  PPID STAT %CPU     ELAPSED COMMAND         WCHAN\n42529  3753 S<s   0.0       00:00 res             poll_schedule_timeout\n42530 42529 R     0.0       00:00 ps              -\n",
+      "stderr": ""
+    }
+  ],
+  "total_vasp_ranks": 0
+}

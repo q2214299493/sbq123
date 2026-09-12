@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import re
+import shlex
 import shutil
 import subprocess
 import tempfile
@@ -45,6 +46,7 @@ def preflight(workdir: Path, kind: str, *, learning_database: Path = LEARNING_DA
     incar = read_incar_values(workdir / "INCAR") if core_ready else {}
     cores = _script_cores(workdir / "script.lsf") if core_ready else None
     errors = [f"missing:{name}" for name in missing]
+    resource_fields = _resource_preflight(workdir / "script.lsf", errors)
     dimer_gate: dict[str, Any] = {}
     vfa_gate: dict[str, Any] = {}
     connectivity_gate: dict[str, Any] = {}
@@ -80,6 +82,7 @@ def preflight(workdir: Path, kind: str, *, learning_database: Path = LEARNING_DA
         "files": manifest,
         "bundle_sha256": sha256_json({"kind": kind, "files": manifest}),
         "strategy_retry_check": learning_check,
+        **resource_fields,
     }
     if kind == "dimer":
         payload["dimer_hard_gate_passed"] = bool(dimer_gate.get("hard_gate_passed"))
@@ -93,6 +96,39 @@ def preflight(workdir: Path, kind: str, *, learning_database: Path = LEARNING_DA
         payload["connectivity_hard_gate"] = connectivity_gate
     write_json(workdir / "submission_preflight.json", payload)
     return payload
+
+
+def _resource_preflight(path: Path, errors: list[str]) -> dict[str, str]:
+    if not path.is_file():
+        return {}
+    try:
+        requirement = _script_resource_requirement(path)
+    except ValueError as exc:
+        errors.append(f"invalid_lsf_directive:{exc}")
+        return {}
+    return {"resource_requirement": requirement} if requirement is not None else {}
+
+
+def _script_resource_requirement(path: Path) -> str | None:
+    """Forward the one supported BSUB directive from the hash-bound script."""
+    requirement = None
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not re.match(r"^\s*#BSUB(?:\s|$)", line):
+            continue
+        tokens = shlex.split(line.strip()[5:])
+        if len(tokens) != 2 or tokens[0] != "-R" or not tokens[1].strip():
+            raise ValueError("only one #BSUB -R 'resource requirement' is supported")
+        if requirement is not None:
+            raise ValueError("duplicate #BSUB -R directive")
+        requirement = tokens[1]
+    return requirement
+
+
+def _bsub_command(report: dict[str, Any]) -> str:
+    args = ["bsub"]
+    if report.get("resource_requirement") is not None:
+        args.extend(["-R", report["resource_requirement"]])
+    return shlex.join([*args, "script.lsf"])
 
 
 def _required_files(kind: str) -> list[str]:
@@ -372,7 +408,7 @@ def submit(
         f"cp {potcar_source} {remote_dir}/POTCAR && "
         f"test \"$(sha256sum {remote_dir}/POTCAR | awk '{{print $1}}')\" = {potcar_sha256} && "
         f"cd {remote_dir} && test -s INCAR && test -s KPOINTS && test -s POTCAR && "
-        "bsub script.lsf"
+        f"{_bsub_command(current)}"
     )
     write_json(
         attempt_path,

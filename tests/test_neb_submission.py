@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import shlex
 from pathlib import Path
 
 import numpy as np
@@ -476,3 +477,39 @@ def test_successful_submit_replaces_attempt_with_success_record(
     assert result["job_id"] == "123"
     assert not (workdir / submission.SUBMISSION_ATTEMPT_FILE).exists()
     assert (workdir / submission.SUBMISSION_RECORD_FILE).is_file()
+
+
+@pytest.mark.parametrize("directive", [
+    "#BSUB -R", "#BSUB -R ''", "#BSUB -q queue",
+    "#BSUB -R 'unterminated", "#BSUB -R a\n#BSUB -R b",
+])
+def test_invalid_resource_directive_fails_preflight(tmp_path, directive):
+    _common(tmp_path, "NSW=0\nIBRION=-1\n", 80)
+    (tmp_path / "POSCAR").write_text("test structure", encoding="utf-8")
+    (tmp_path / "script.lsf").write_text("NP=80\n" + directive, encoding="utf-8")
+    report = preflight(tmp_path, "diagnostic_static")
+    assert not report["passed"]
+    assert any(error.startswith("invalid_lsf_directive:") for error in report["errors"])
+
+
+def test_bsub_resource_is_single_shell_argument():
+    requirement = 'select[hname!="x"]; $(touch forbidden)'
+    assert shlex.split(submission._bsub_command({"resource_requirement": requirement})) == [
+        "bsub", "-R", requirement, "script.lsf",
+    ]
+    assert submission._bsub_command({}) == "bsub script.lsf"
+
+
+def test_resource_requirement_reaches_release_bsub(tmp_path, monkeypatch):
+    workdir, decision, report = _mock_submit_dependencies(tmp_path, monkeypatch)
+    report["resource_requirement"] = "select[hname!=gknew0440]"
+    commands = []
+
+    def fake_run(argv):
+        commands.append(argv[-1])
+        return type("Result", (), {"stdout": "Job <123> is submitted"})()
+
+    monkeypatch.setattr(submission, "_run", fake_run)
+    submission.submit(workdir, decision, "sunboquan-codex", "~/sbq/job",
+                      "~/sbq/POTCAR", "a" * 64, "SUBMIT_DIAGNOSTIC_VASP")
+    assert submission._bsub_command(report) in commands[-1]

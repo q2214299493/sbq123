@@ -124,17 +124,18 @@ accepted TS path, or barrier is established yet.
 ## Active Transition-State Gate
 
 <!-- state-handoff:start active-fe-110-co-dissociation-test-current-gate -->
-### Active Gate - 2026-09-12 Save-state SCF9753658; PEND
+### Active Gate - 2026-09-13 SCF9753825 allocated RUN; VASP startup unverified
 
-- Dimer9749920 and9753172 remain user-stopped; no migration TS accepted.
-- SuccessfulSCF9752745 converged96steps, but its electronic state was not saved; an independent Normal Dimer cold start diverged before center movement.
-- User resumed staged recovery: save converged original-center electronic state, then verify restart before a short Dimer trial.
-- Step1 SCF9753658 submitted via current hash-bound gate on sunboquan-codex,80cores,Gkn_normal; checkpoint2026-09-12T13:02:29Z PEND.
-- Compared with successfulSCF9752745, only LWAVE/LCHARG are enabled. Original geometry,ALGO Normal,EDIFF1e-7,NELM200 and physical settings preserved.
-- Require electronic convergence, normal completion, unchanged geometry and valid completed WAVECAR/CHGCAR before restart verification; file existence alone is insufficient.
+- SCF9753658 user-stopped and confirmed EXIT after incomplete MPI startup (64/80 ranks; no ranks on gknew0440); no electronic steps.
+- User authorized one replacement with identical SCF inputs and 80 cores, excluding gknew0440; SCF9753825 submitted via a current bound gate.
+- SCF9753825 scheduler RUN; actual request select[hname!=gknew0440] span[ptile=32], allocation gknew0421:32/gknew0447:32/gknew0716:16.
+- Checkpoint 2026-09-12T17:13:55Z: two node checks found 0 VASP ranks; no vasp.out/OUTCAR/OSZICAR; bpeek reports starting. MPI and SCF progress unverified.
+- ALGO Normal, EDIFF1e-7, NELM200, original geometry and physical settings preserved; LWAVE/LCHARG enabled for electronic-state recovery.
+- SuccessfulSCF9752745 converged96steps without saved restart state; independent Normal Dimer9753172 diverged before movement and remains stopped.
+- Require normal electronic convergence, unchanged geometry and valid completed WAVECAR/CHGCAR before restart verification. No migration TS accepted.
 - INT06 endpoint and MID->FS O-H TS remain accepted; earlier IS-A->INT06 remains unresolved.
 
-Next action: Validate SCF9753658 and saved electronic state before restart verification.
+Next action: Verify actual 80-rank launch and electronic output of SCF9753825; no SCF acceptance until convergence and saved-state validation.
 <!-- state-handoff:end active-fe-110-co-dissociation-test-current-gate -->
 
 ### Historical Evidence
