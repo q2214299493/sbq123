@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-12T13:03:21.498607+00:00",
+  "recorded_at": "2026-09-12T13:03:21.498607+00:00",
+  "evidence": [
+    {
+      "locator": "docs/reviews/int06_mid_scf9753658_save_state_20260912.md",
+      "sha256": "11884595e0a18f9ee1ebbb2a33e9b3a36614b9167548b8b3e15ae8c7cb2d0adf",
+      "authority": "repository_document",
+      "observed_at": "2026-09-12T13:03:21.498607+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_scf_save_state_20260912/submission_record.json",
+      "sha256": "6a28679586d6621cddee819f29d2dbaad73aa0735768ed8ad12e220d35fd8bc1",
+      "authority": "repository_document",
+      "observed_at": "2026-09-12T13:03:21.498607+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_scf_save_state_20260912/scheduler_checkpoint.json",
+      "sha256": "de7acba8fb0b90849b3531f31cc76cec7f2e2ca9da46bfd2cb82bef1e8f2db52",
+      "authority": "scheduler",
+      "observed_at": "2026-09-12T13:03:21.498607+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_scf_save_state_20260912/execution_gate_decision.json",
+      "sha256": "8e7c956cf098c6bd5a404071442176e9b681efbf733c19b5bcc78eed285ddf4d",
+      "authority": "module_validation",
+      "observed_at": "2026-09-12T13:03:21.498607+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "event_id": "state-scf9753658-submitted-20260912",
+  "event_type": "state_observed",
+  "entity": {
+    "kind": "state",
+    "id": "active-fe-110-co-dissociation-test-current-gate",
+    "module": "transition_state_search"
+  },
+  "summary": "User resumed recovery; step1 SCF9753658 submitted to save converged electronic state, PEND.",
+  "payload": {
+    "block_id": "active-fe-110-co-dissociation-test-current-gate",
+    "section": "## Active Transition-State Gate",
+    "title": "Active Gate - 2026-09-12 Save-state SCF9753658; PEND",
+    "facts": [
+      "Dimer9749920 and9753172 remain user-stopped; no migration TS accepted.",
+      "SuccessfulSCF9752745 converged96steps, but its electronic state was not saved; an independent Normal Dimer cold start diverged before center movement.",
+      "User resumed staged recovery: save converged original-center electronic state, then verify restart before a short Dimer trial.",
+      "Step1 SCF9753658 submitted via current hash-bound gate on sunboquan-codex,80cores,Gkn_normal; checkpoint2026-09-12T13:02:29Z PEND.",
+      "Compared with successfulSCF9752745, only LWAVE/LCHARG are enabled. Original geometry,ALGO Normal,EDIFF1e-7,NELM200 and physical settings preserved.",
+      "Require electronic convergence, normal completion, unchanged geometry and valid completed WAVECAR/CHGCAR before restart verification; file existence alone is insufficient.",
+      "INT06 endpoint and MID->FS O-H TS remain accepted; earlier IS-A->INT06 remains unresolved."
+    ],
+    "next_action": "Validate SCF9753658 and saved electronic state before restart verification.",
+    "project_state_header": true
+  },
+  "supersedes": [
+    "state-dimer9753172-stopped-20260912"
+  ]
+}

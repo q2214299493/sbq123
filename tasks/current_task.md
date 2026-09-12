@@ -7,12 +7,13 @@ Complete earlier IS-A to MID H surface migration through validated intermediate 
 
 ## Current Evidence Snapshot
 
-- Dimer9753172 explicitly stopped by user; scheduler EXIT confirmed2026-09-12T12:52:03Z. Outputs retained; no retry.
-- SCF9752745 genuinely converged96steps on unchanged original geometry; this did not establish reproducible cold-start stability.
-- Normal Dimer9753172 diverged during first fixed-center SCF, exhausted200steps, no complete DIMCAR row; forces/energies are invalid for TS interpretation.
-- POSCAR/POTCAR/KPOINTS hashes and major effective electronic settings match the successful static; both ISTART0/ICHARG2 cold starts, no converged wavefunction transferred.
-- Initial SCF trajectories separate before any center movement; step21 BRMIX precedes massive non-Hermitian DAV warnings. Specific numerical/implementation root cause remains unresolved.
-- No migration TS accepted. INT06 endpoint and MID->FS O-H TS remain accepted; earlier IS-A->INT06 unresolved.
+- Dimer9749920 and9753172 remain user-stopped; no migration TS accepted.
+- SuccessfulSCF9752745 converged96steps, but its electronic state was not saved; an independent Normal Dimer cold start diverged before center movement.
+- User resumed staged recovery: save converged original-center electronic state, then verify restart before a short Dimer trial.
+- Step1 SCF9753658 submitted via current hash-bound gate on sunboquan-codex,80cores,Gkn_normal; checkpoint2026-09-12T13:02:29Z PEND.
+- Compared with successfulSCF9752745, only LWAVE/LCHARG are enabled. Original geometry,ALGO Normal,EDIFF1e-7,NELM200 and physical settings preserved.
+- Require electronic convergence, normal completion, unchanged geometry and valid completed WAVECAR/CHGCAR before restart verification; file existence alone is insufficient.
+- INT06 endpoint and MID->FS O-H TS remain accepted; earlier IS-A->INT06 remains unresolved.
 
 ## Lifecycle Status
 
@@ -20,11 +21,11 @@ Complete earlier IS-A to MID H surface migration through validated intermediate 
 
 ## One Executable Step
 
-Review successful-static versus failed-Dimer cold-start evidence; prepare a reproducible electronic restart strategy only after user resumes work.
+Monitor SCF9753658 and validate electronic convergence, unchanged geometry, and completed compatible WAVECAR/CHGCAR before preparing restart verification.
 
 ## Submission Boundary
 
-User stopped Dimer9753172; no further calculation, retry or Dimer restart authorized.
+One fixed-geometry SCF9753658 submitted for step1; no automatic retry or long Dimer submission.
 
 ## Authoritative Constraint
 
@@ -41,6 +42,7 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 
 ## Authoritative References
 
+- docs/reviews/int06_mid_scf9753658_save_state_20260912.md
 - docs/reviews/int06_mid_dimer9753172_stopped_20260912.md
 - docs/reviews/int06_mid_dimer9753172_normal_20260912.md
 - docs/reviews/int06_mid_scf9752745_20260912.md

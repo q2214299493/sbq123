@@ -124,16 +124,17 @@ accepted TS path, or barrier is established yet.
 ## Active Transition-State Gate
 
 <!-- state-handoff:start active-fe-110-co-dissociation-test-current-gate -->
-### Active Gate - 2026-09-12 Dimer9753172 stopped; EXIT
+### Active Gate - 2026-09-12 Save-state SCF9753658; PEND
 
-- Dimer9753172 explicitly stopped by user; scheduler EXIT confirmed2026-09-12T12:52:03Z. Outputs retained; no retry.
-- SCF9752745 genuinely converged96steps on unchanged original geometry; this did not establish reproducible cold-start stability.
-- Normal Dimer9753172 diverged during first fixed-center SCF, exhausted200steps, no complete DIMCAR row; forces/energies are invalid for TS interpretation.
-- POSCAR/POTCAR/KPOINTS hashes and major effective electronic settings match the successful static; both ISTART0/ICHARG2 cold starts, no converged wavefunction transferred.
-- Initial SCF trajectories separate before any center movement; step21 BRMIX precedes massive non-Hermitian DAV warnings. Specific numerical/implementation root cause remains unresolved.
-- No migration TS accepted. INT06 endpoint and MID->FS O-H TS remain accepted; earlier IS-A->INT06 unresolved.
+- Dimer9749920 and9753172 remain user-stopped; no migration TS accepted.
+- SuccessfulSCF9752745 converged96steps, but its electronic state was not saved; an independent Normal Dimer cold start diverged before center movement.
+- User resumed staged recovery: save converged original-center electronic state, then verify restart before a short Dimer trial.
+- Step1 SCF9753658 submitted via current hash-bound gate on sunboquan-codex,80cores,Gkn_normal; checkpoint2026-09-12T13:02:29Z PEND.
+- Compared with successfulSCF9752745, only LWAVE/LCHARG are enabled. Original geometry,ALGO Normal,EDIFF1e-7,NELM200 and physical settings preserved.
+- Require electronic convergence, normal completion, unchanged geometry and valid completed WAVECAR/CHGCAR before restart verification; file existence alone is insufficient.
+- INT06 endpoint and MID->FS O-H TS remain accepted; earlier IS-A->INT06 remains unresolved.
 
-Next action: Explain SCF cold-start failure; await user direction before new execution.
+Next action: Validate SCF9753658 and saved electronic state before restart verification.
 <!-- state-handoff:end active-fe-110-co-dissociation-test-current-gate -->
 
 ### Historical Evidence
