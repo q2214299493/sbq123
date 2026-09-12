@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-12T12:53:05.628901+00:00",
+  "recorded_at": "2026-09-12T12:53:05.628901+00:00",
+  "evidence": [
+    {
+      "locator": "docs/reviews/int06_mid_dimer9753172_stopped_20260912.md",
+      "sha256": "dd6c40ed1bd8dbc94b89b9ceb125d4c74c379068d19b09b1fbc8da98b177a72c",
+      "authority": "repository_document",
+      "observed_at": "2026-09-12T12:53:05.628901+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_normal_20260912/stop_20260912/scheduler_confirmation.json",
+      "sha256": "8d046c85b8ce7a04d0c59a6b419227c4fb818ea01f85077453c6e8f482700f3c",
+      "authority": "scheduler",
+      "observed_at": "2026-09-12T12:53:05.628901+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_normal_20260912/stop_20260912/stop_receipt.json",
+      "sha256": "af32ecfda3c0645c49aeb9200ba4bb2cc741f58103cb4272ff31f418bce02d60",
+      "authority": "repository_document",
+      "observed_at": "2026-09-12T12:53:05.628901+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_normal_20260912/stop_20260912/gate.json",
+      "sha256": "9804cb7ee16bc0f806af7e1423bfcc0885d55f594b591e793b9a184c02bee9f5",
+      "authority": "module_validation",
+      "observed_at": "2026-09-12T12:53:05.628901+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "event_id": "task-dimer9753172-stopped-20260912",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "User stopped divergent Dimer9753172; EXIT confirmed; explain cold-start transfer limitation.",
+  "payload": {
+    "objective": "Complete earlier IS-A to MID H surface migration through validated intermediate and TS evidence.",
+    "phase": "active",
+    "current_evidence": [
+      "Dimer9753172 explicitly stopped by user; scheduler EXIT confirmed2026-09-12T12:52:03Z. Outputs retained; no retry.",
+      "SCF9752745 genuinely converged96steps on unchanged original geometry; this did not establish reproducible cold-start stability.",
+      "Normal Dimer9753172 diverged during first fixed-center SCF, exhausted200steps, no complete DIMCAR row; forces/energies are invalid for TS interpretation.",
+      "POSCAR/POTCAR/KPOINTS hashes and major effective electronic settings match the successful static; both ISTART0/ICHARG2 cold starts, no converged wavefunction transferred.",
+      "Initial SCF trajectories separate before any center movement; step21 BRMIX precedes massive non-Hermitian DAV warnings. Specific numerical/implementation root cause remains unresolved.",
+      "No migration TS accepted. INT06 endpoint and MID->FS O-H TS remain accepted; earlier IS-A->INT06 unresolved."
+    ],
+    "one_executable_step": "Review successful-static versus failed-Dimer cold-start evidence; prepare a reproducible electronic restart strategy only after user resumes work.",
+    "submission_boundary": "User stopped Dimer9753172; no further calculation, retry or Dimer restart authorized.",
+    "done_when": [
+      "Independent valley relaxation and geometry reviewed; then define scientifically supported migration segments."
+    ],
+    "constraints": [
+      "Same H50 moves; preserve SIGMA0.20 and bottom18Fe fixed.",
+      "Do not rerun MID-to-FS O-H work."
+    ],
+    "authoritative_references": [
+      "docs/reviews/int06_mid_dimer9753172_stopped_20260912.md",
+      "docs/reviews/int06_mid_dimer9753172_normal_20260912.md",
+      "docs/reviews/int06_mid_scf9752745_20260912.md",
+      "docs/reviews/gpu1517_direct_dimer9749920_20260910.md",
+      "docs/reviews/valley9748648_accepted_20260910.md",
+      "docs/reviews/oh_ts_accepted_barrier_20260910.md"
+    ]
+  },
+  "supersedes": [
+    "task-dimer9753172-submitted-20260912"
+  ]
+}

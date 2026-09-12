@@ -7,13 +7,12 @@ Complete earlier IS-A to MID H surface migration through validated intermediate 
 
 ## Current Evidence Snapshot
 
-- INT06 endpoint9748648 and MID->FS O-H TS remain accepted; earlier IS-A->INT06 remains unresolved.
-- Original Dimer9749920 remains user-stopped EXIT after persistent SCF failure.
-- Exact original-center SCF9752745: DONE, normal completion,96steps electronically converged at EDIFF1e-7, no BRMIX, geometry unchanged.
-- Converged original-center residual forces persist: C47 fmax0.352661eV/A, Fe37 approximately0.221065eV/A. This does not establish a TS.
-- User explicitly requested Dimer after SCF diagnosis. New9753172 uses original reviewed GPU1517 frame02/01/03/MODECAR; only ALGO changes Fast->Normal,80cores, all other Dimer settings unchanged.
-- Dimer9753172 passed current hard/input/execution gates and was submitted on sunboquan-codex. Checkpoint2026-09-12T08:34:23Z PEND.
-- Direct reviewed-GPU-to-Dimer candidate policy remains valid; Dimer and frequency acceptance are still required before reporting a migration barrier.
+- Dimer9753172 explicitly stopped by user; scheduler EXIT confirmed2026-09-12T12:52:03Z. Outputs retained; no retry.
+- SCF9752745 genuinely converged96steps on unchanged original geometry; this did not establish reproducible cold-start stability.
+- Normal Dimer9753172 diverged during first fixed-center SCF, exhausted200steps, no complete DIMCAR row; forces/energies are invalid for TS interpretation.
+- POSCAR/POTCAR/KPOINTS hashes and major effective electronic settings match the successful static; both ISTART0/ICHARG2 cold starts, no converged wavefunction transferred.
+- Initial SCF trajectories separate before any center movement; step21 BRMIX precedes massive non-Hermitian DAV warnings. Specific numerical/implementation root cause remains unresolved.
+- No migration TS accepted. INT06 endpoint and MID->FS O-H TS remain accepted; earlier IS-A->INT06 unresolved.
 
 ## Lifecycle Status
 
@@ -21,11 +20,11 @@ Complete earlier IS-A to MID H surface migration through validated intermediate 
 
 ## One Executable Step
 
-Monitor Dimer9753172: electronic convergence, atomic forces, center/rotation progress and C2HO-Fe/H50 geometry before frequency handoff.
+Review successful-static versus failed-Dimer cold-start evidence; prepare a reproducible electronic restart strategy only after user resumes work.
 
 ## Submission Boundary
 
-One Dimer9753172 submitted under explicit user authority; no automatic retries or TS acceptance.
+User stopped Dimer9753172; no further calculation, retry or Dimer restart authorized.
 
 ## Authoritative Constraint
 
@@ -42,6 +41,7 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 
 ## Authoritative References
 
+- docs/reviews/int06_mid_dimer9753172_stopped_20260912.md
 - docs/reviews/int06_mid_dimer9753172_normal_20260912.md
 - docs/reviews/int06_mid_scf9752745_20260912.md
 - docs/reviews/gpu1517_direct_dimer9749920_20260910.md
