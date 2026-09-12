@@ -124,16 +124,17 @@ accepted TS path, or barrier is established yet.
 ## Active Transition-State Gate
 
 <!-- state-handoff:start active-fe-110-co-dissociation-test-current-gate -->
-### Active Gate - 2026-09-12 Original-center SCF9752745; PEND
+### Active Gate - 2026-09-12 Normal Dimer9753172; PEND
 
-- INT06 endpoint9748648 and MID->FS O-H TS remain accepted; earlier IS-A->INT06 unresolved.
-- Reviewed GPU1517 frame02 remains a predicted starting candidate; direct reviewed-GPU-to-Dimer policy remains in force.
-- Dimer9749920 stopped by user; scheduler EXIT. Ten completed SCF cycles exhausted NELM200 without convergence; no accepted migration TS.
-- Structure diagnosis: C2HO and neighboring Fe adjust, H50 stays near Fe38-Fe41 bridge; unconverged forces cannot prove geometric overshoot.
-- User authorized one original-center fixed-geometry SCF test. ALGO Normal, EDIFF1e-7, NELM200,80cores, same physical branch; LORBIT11 adds local magnetic projections.
-- SCF diagnostic9752745 submitted through current bound gate on sunboquan-codex; checkpoint2026-09-12T03:23:46Z PEND; no output acceptance.
+- INT06 endpoint9748648 and MID->FS O-H TS remain accepted; earlier IS-A->INT06 remains unresolved.
+- Original Dimer9749920 remains user-stopped EXIT after persistent SCF failure.
+- Exact original-center SCF9752745: DONE, normal completion,96steps electronically converged at EDIFF1e-7, no BRMIX, geometry unchanged.
+- Converged original-center residual forces persist: C47 fmax0.352661eV/A, Fe37 approximately0.221065eV/A. This does not establish a TS.
+- User explicitly requested Dimer after SCF diagnosis. New9753172 uses original reviewed GPU1517 frame02/01/03/MODECAR; only ALGO changes Fast->Normal,80cores, all other Dimer settings unchanged.
+- Dimer9753172 passed current hard/input/execution gates and was submitted on sunboquan-codex. Checkpoint2026-09-12T08:34:23Z PEND.
+- Direct reviewed-GPU-to-Dimer candidate policy remains valid; Dimer and frequency acceptance are still required before reporting a migration barrier.
 
-Next action: Monitor SCF9752745 and compare electronically converged exact-geometry forces and local moments.
+Next action: Monitor Dimer9753172 electronic/force/geometry progress before frequency validation.
 <!-- state-handoff:end active-fe-110-co-dissociation-test-current-gate -->
 
 ### Historical Evidence

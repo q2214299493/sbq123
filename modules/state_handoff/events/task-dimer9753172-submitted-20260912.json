@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-12T08:35:54.314233+00:00",
+  "recorded_at": "2026-09-12T08:35:54.314233+00:00",
+  "evidence": [
+    {
+      "locator": "docs/reviews/int06_mid_dimer9753172_normal_20260912.md",
+      "sha256": "a172f229d38d754f1b3adf575e3b73b06c90082c07328510cd7bf1547ebbdd94",
+      "authority": "repository_document",
+      "observed_at": "2026-09-12T08:35:54.314233+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_normal_20260912/submission_record.json",
+      "sha256": "9f4db1236216a43405d2ad415ba58af5d8a1b234c4b565bfff0d087e7c5abe7f",
+      "authority": "repository_document",
+      "observed_at": "2026-09-12T08:35:54.314233+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_normal_20260912/scheduler_checkpoint.json",
+      "sha256": "0bcd287427dbeae35c716bd529c1968337bd44f393f903f8d54b5957b84fc2ca",
+      "authority": "scheduler",
+      "observed_at": "2026-09-12T08:35:54.314233+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_normal_20260912/execution_gate_decision.json",
+      "sha256": "31f413c60fe16c6479e4fe966d0e5eaad7c8810816fedc65a7caaa224b333323",
+      "authority": "module_validation",
+      "observed_at": "2026-09-12T08:35:54.314233+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_scf_normal_20260912/completed_20260912/scf_validation.json",
+      "sha256": "7fa071aa28cbb5dc1ff9f6af2a8cb95afc5f4d833f11b9dc484007983d6af09c",
+      "authority": "module_validation",
+      "observed_at": "2026-09-12T08:35:54.314233+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_scf_normal_20260912/completed_20260912/scheduler_evidence.json",
+      "sha256": "1bbed08c7156bfddec0b299124c38cf033e66135690a975ba646f8cd3a532dd3",
+      "authority": "scheduler",
+      "observed_at": "2026-09-12T08:35:54.314233+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "event_id": "task-dimer9753172-submitted-20260912",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "SCF9752745 converged; user-requested Normal Dimer9753172 submitted, PEND.",
+  "payload": {
+    "objective": "Complete earlier IS-A to MID H surface migration through validated intermediate and TS evidence.",
+    "phase": "active",
+    "current_evidence": [
+      "INT06 endpoint9748648 and MID->FS O-H TS remain accepted; earlier IS-A->INT06 remains unresolved.",
+      "Original Dimer9749920 remains user-stopped EXIT after persistent SCF failure.",
+      "Exact original-center SCF9752745: DONE, normal completion,96steps electronically converged at EDIFF1e-7, no BRMIX, geometry unchanged.",
+      "Converged original-center residual forces persist: C47 fmax0.352661eV/A, Fe37 approximately0.221065eV/A. This does not establish a TS.",
+      "User explicitly requested Dimer after SCF diagnosis. New9753172 uses original reviewed GPU1517 frame02/01/03/MODECAR; only ALGO changes Fast->Normal,80cores, all other Dimer settings unchanged.",
+      "Dimer9753172 passed current hard/input/execution gates and was submitted on sunboquan-codex. Checkpoint2026-09-12T08:34:23Z PEND.",
+      "Direct reviewed-GPU-to-Dimer candidate policy remains valid; Dimer and frequency acceptance are still required before reporting a migration barrier."
+    ],
+    "one_executable_step": "Monitor Dimer9753172: electronic convergence, atomic forces, center/rotation progress and C2HO-Fe/H50 geometry before frequency handoff.",
+    "submission_boundary": "One Dimer9753172 submitted under explicit user authority; no automatic retries or TS acceptance.",
+    "done_when": [
+      "Independent valley relaxation and geometry reviewed; then define scientifically supported migration segments."
+    ],
+    "constraints": [
+      "Same H50 moves; preserve SIGMA0.20 and bottom18Fe fixed.",
+      "Do not rerun MID-to-FS O-H work."
+    ],
+    "authoritative_references": [
+      "docs/reviews/int06_mid_dimer9753172_normal_20260912.md",
+      "docs/reviews/int06_mid_scf9752745_20260912.md",
+      "docs/reviews/gpu1517_direct_dimer9749920_20260910.md",
+      "docs/reviews/valley9748648_accepted_20260910.md",
+      "docs/reviews/oh_ts_accepted_barrier_20260910.md"
+    ]
+  },
+  "supersedes": [
+    "task-scf9752745-submitted-20260912"
+  ]
+}

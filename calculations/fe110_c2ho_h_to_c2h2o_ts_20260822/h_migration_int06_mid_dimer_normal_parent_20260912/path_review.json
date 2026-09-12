@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "document_kind": "gpu_dimer_path_review",
+  "status": "accepted",
+  "candidate_manifest_sha256": "affacabdce3fcc22cab7636f3f86e9b20d15b1739a8930cc60026e2bdf325dae",
+  "policy_sha256": "f22b4c1d53621f8b6c51a9b3264c2869a0db7519537bd802ca90b870168a9c24",
+  "candidate_image": "02",
+  "reviewer": "Codex, numerical and visual path review",
+  "reviewed_at": "2026-09-10T11:47:17.111119+00:00",
+  "target_reaction_event": "H50 surface migration INT06 to MID; C2HO skeleton retained",
+  "reaction_atom_indices_zero_based": [
+    49
+  ],
+  "evidence": {
+    "geometry": {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\path_review_export\\path_geometry_diagnosis.json",
+      "sha256": "18597f87cc2df472a7de5dcf6a143e7ff69fa5ea0243e0cf58c9ec1a2d312ffb"
+    },
+    "movie": {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\path_review_export\\movie.xyz",
+      "sha256": "92a3dfd81597bf67d1fcaf946e96bd6d9e9bdcca5e6fbe5cbcb9fc2cc77295fd"
+    },
+    "dist": {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_to_mid_gpu_20260910\\attempt_gpu0_20260910\\review_job1517\\vtst_review.json",
+      "sha256": "a4c3503db50b2521a2af4d8b9ceeebca59b28b635e6ed1281692916342a8a594"
+    }
+  },
+  "geometry_continuity": "accepted",
+  "periodic_mapping": "accepted",
+  "reaction_coordinate_resolution": "accepted",
+  "elementary_step_assignment": "accepted",
+  "candidate_selection": "accepted",
+  "notes": "Five-frame path and top/side rendering reviewed; exact MIC minimum1.098569A, adjacent maximum0.476078A, fixed drift0. H50 remains above surface. Both models select02. User approved geometry-reviewed GPU-to-Dimer entry without VASP triad. Shallow MatRIS03 dip remains uncertain; no unique MEP or TS claim.",
+  "vasp_triad_performed": false,
+  "scientific_status": "predicted_starting_candidate_only"
+}
