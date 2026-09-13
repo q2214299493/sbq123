@@ -1,0 +1,54 @@
+{
+  "document_kind": "review_only_scf_mixing_control",
+  "created_date": "2026-09-13",
+  "status": "AWAITING_USER_REVIEW_NOT_SUBMITTABLE",
+  "scope": "one_fixed_geometry_diagnostic_static_candidate_not_a_TS",
+  "source_job_id": "9753825",
+  "successful_reference_job_id": "9752745",
+  "source_directory": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_scf_no0440_v2_20260913",
+  "source_sha256": {
+    "INCAR": "87b801884b4cef233613a229d5565ec71c1eff90d7b9c8467953ab33e4502fca",
+    "POSCAR": "21115f8aa333c1aa0053556cd7a377a86fa6c43ba7b42f80bb6620e144923aa2",
+    "KPOINTS": "0d7e291117433dac5393f29520b635e92f06e6c8e91aa941137c86b1d39162ae",
+    "POTCAR.spec": "9528f5cac58de3cc83a576c828915ce9c2ab72d4ec3be5e409f7476042f7e1bb"
+  },
+  "remote_POTCAR_sha256": "e3bc41a37d795bfcf1b1dc9a2a9ddfb5ef86aa5dc9aa0ac5a3583471a0982f85",
+  "remote_input_hash_check_time": "2026-09-13T08:51:38+08:00",
+  "candidate": "INCAR.recommended",
+  "candidate_sha256": "61b24fd7c4699e466b3ea3559460a4199934ba10ad4d10b109d6bfe4d9bea7cf",
+  "effective_parameter_changes": {
+    "AMIX": {"old_effective": 0.4, "new": 0.2},
+    "AMIX_MAG": {"old_effective": 1.6, "new": 0.8}
+  },
+  "unchanged_effective_mixing_parameters": {
+    "IMIX": 4,
+    "BMIX": 1.0,
+    "BMIX_MAG": 1.0,
+    "AMIN": 0.1
+  },
+  "only_allowed_incar_changes": ["AMIX", "AMIX_MAG"],
+  "future_input_requirements": {
+    "new_empty_run_directory": true,
+    "copy_exact_bound_POSCAR_KPOINTS": true,
+    "do_not_copy_failed_electronic_state": true,
+    "expected_ISTART": 0,
+    "expected_ICHARG": 2,
+    "expected_INIWAV": 1,
+    "mpi_ranks": 80,
+    "preserve_existing_launcher_and_node_exclusion": true,
+    "no_change_to_checkpoint_or_ML_path": true
+  },
+  "authorization": {
+    "local_review_preparation_only": true,
+    "remote_submission": false,
+    "stop_existing_job": false,
+    "canonical_submission_gate_created": false
+  },
+  "interpretation_limits": [
+    "A single success cannot isolate the charge channel from the magnetic channel.",
+    "A single cold-start comparison cannot establish statistically robust reproducibility.",
+    "File integrity and single-writer checks remain required before interpreting results.",
+    "Converged static forces do not establish a transition state."
+  ],
+  "reference_url": "https://vasp.at/wiki/index.php/AMIX_MAG"
+}
