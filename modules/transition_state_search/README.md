@@ -582,6 +582,16 @@ part of DIMER TS acceptance. Connectivity remains an optional diagnostic.
 
 ## Command Surface
 
+### Bounded fixed-geometry SCF repair chain
+
+`scf_repair_chain` is a diagnostic submission kind, not NEB/Dimer/TS acceptance.
+It delegates up to three conditional static stages within one allocation through
+the execution gate. It requires a separate hash-bound three-stage user scope;
+ordinary `diagnostic_static` authority cannot launch the chain. See
+`docs/reviews/scf_chain_executor_20260915/README.md` for its manifest, portable
+runtime, positive warning/stop tolerances, no-retry behavior and validation limits.
+No default production tolerance or automatic submission is introduced.
+
 ```powershell
 python -m scripts.ts_strategy_engine.cli plan --is IS --fs FS --contract reaction.yaml --workdir PLAN
 python -m scripts.ts_strategy_engine.cli plan --is IS --fs FS --contract reaction.yaml --workdir PLAN --initialize-path --waypoint WAYPOINT

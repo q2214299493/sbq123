@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import argparse
+import base64
+import json
 import re
 import shlex
 import shutil
@@ -37,6 +39,7 @@ JOB_ID = re.compile(r"Job <(\d+)>")
 SUBMISSION_ATTEMPT_FILE = "submission_attempt.json"
 SUBMISSION_RECORD_FILE = "submission_record.json"
 EXPECTED_ACTION = {
+    "scf_repair_chain": "SUBMIT_DIAGNOSTIC_VASP",
     "diagnostic_static": "SUBMIT_DIAGNOSTIC_VASP",
     "neb_pilot": "SUBMIT_DIAGNOSTIC_VASP",
     "ordinary_neb": "SUBMIT_VASP",
@@ -136,6 +139,7 @@ def preflight(
     vfa_gate: dict[str, Any] = {}
     connectivity_gate: dict[str, Any] = {}
     adsorption_gate: dict[str, Any] = {}
+    scf_chain: dict[str, Any] = {}
     images: list[Path] = []
     if kind in NEB_KINDS and core_ready:
         neb_errors, images = _check_neb(workdir, kind, incar, cores)
@@ -157,6 +161,9 @@ def preflight(
 
         adsorption_gate = adsorption_preflight(workdir, cores=cores or 0, write_report=False)
         errors.extend(adsorption_gate["errors"])
+    if kind == "scf_repair_chain" and not missing:
+        scf_chain = _check_scf_chain(workdir, cores, errors)
+        required.extend(scf_chain.get("additional_files", []))
     files = [workdir / name for name in required if (workdir / name).is_file()]
     files.extend(directory / "POSCAR" for directory in images if (directory / "POSCAR").is_file())
     manifest = {path.relative_to(workdir).as_posix(): sha256_file(path) for path in files}
@@ -173,6 +180,7 @@ def preflight(
         "files": manifest,
         "bundle_sha256": sha256_json({"kind": kind, "files": manifest}),
         "strategy_retry_check": learning_check,
+        **({"scf_chain": scf_chain} if kind == "scf_repair_chain" else {}),
     }
     if kind == "dimer":
         payload["dimer_hard_gate_passed"] = bool(dimer_gate.get("hard_gate_passed"))
@@ -192,8 +200,20 @@ def preflight(
     return payload
 
 
+def _check_scf_chain(workdir: Path, cores: int | None, errors: list[str]) -> dict:
+    from scripts.neb_agent.scf_chain_bundle import check_bundle
+
+    try:
+        return check_bundle(workdir, cores)
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        errors.append("scf_chain:" + str(exc))
+        return {}
+
+
 def _required_files(kind: str) -> list[str]:
     required = ["INCAR", "KPOINTS", "POTCAR.spec", "script.lsf"]
+    if kind == "scf_repair_chain":
+        return required + ["POSCAR", "scf_chain.json", "scf_chain_runtime.pyz"]
     if kind in {"diagnostic_static", "dimer", "vfa", "connectivity_relax", "adsorption_relaxation"}:
         required.append("POSCAR")
         if kind == "adsorption_relaxation":
@@ -461,6 +481,14 @@ def submit(
         )
         # Full verification and bsub share one command for BOTH upload modes.
         # POTCAR is copied first, then included in the complete final manifest.
+        submission_command = "bsub script.lsf"
+        if bundle.kind == "scf_repair_chain":
+            from scripts.ts_strategy_engine.execution_gate import make_runtime_permit
+
+            permit = make_runtime_permit(decision, decision_digest)
+            encoded = base64.b64encode(json.dumps(permit, sort_keys=True).encode()).decode("ascii")
+            # The SCF preflight enforces this exact, hash-bound site launcher.
+            submission_command = "SCF_CHAIN_PERMIT=" + shlex.quote(encoded) + " bsub -R 'select[hname!=gknew0440]' script.lsf"
         remote_check = _remote_shell([
             *_remote_path_checks(remote_lock + "/reservation_id"),
             f'test "$(cat {remote_lock}/reservation_id)" = {reservation.reservation_id}',
@@ -471,7 +499,7 @@ def submit(
             f"if test ! -e {remote_dir}/POTCAR; then cp {potcar_source} {remote_dir}/POTCAR; fi",
             *_remote_bundle_checks(remote_dir, {**dict(bundle.files), "POTCAR": potcar_sha256}),
             f"cd {remote_dir}",
-            "bsub script.lsf",
+            submission_command,
         ])
         completed = _run(["ssh", host, remote_check])
         matches = JOB_ID.findall(completed.stdout)
@@ -510,6 +538,8 @@ def _verify_submission_binding(
         raise ValueError("gate decision changed after validation")
     validated = require_action(decision_path, action, decision["state_sha256"])
     auth = validated["EVIDENCE"]["authorization"]
+    if bundle.kind == "scf_repair_chain" and report["scf_chain"]["potcar_sha256"] != potcar_sha256:
+        raise ValueError("SCF chain POTCAR differs from execution authorization")
     if (
         auth["action"] != action
         or auth["target"] != {"server_alias": host, "remote_dir": remote_dir}

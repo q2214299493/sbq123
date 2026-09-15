@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-15T04:17:23Z",
+  "recorded_at": "2026-09-15T04:17:23Z",
+  "evidence": [
+    {
+      "locator": "docs/reviews/scf_chain_executor_20260915/README.md",
+      "sha256": "f2961668f6976670adfa6a010b5afce855423a0d25207da931d5a0bf0efb2c70",
+      "authority": "repository_document",
+      "observed_at": "2026-09-15T04:17:23Z"
+    },
+    {
+      "locator": "docs/reviews/scf_chain_executor_20260915/validation.txt",
+      "sha256": "32506d0689585c0575a983991ed1fb4562106b36dd17a15c1654ed631eee72be",
+      "authority": "repository_document",
+      "observed_at": "2026-09-15T04:17:23Z"
+    },
+    {
+      "locator": "docs/reviews/scf_chain_executor_20260915/pytest_results.xml",
+      "sha256": "4161cde411ba84e03d0edb8b9551678a71b93467481dc96aa4223888e6dc5ba0",
+      "authority": "repository_document",
+      "observed_at": "2026-09-15T04:17:23Z"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "event_id": "task-scf-chain-implementation-tested-20260915",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "Three-stage SCF executor implemented and locally tested; no new calculation authorized or submitted.",
+  "payload": {
+    "objective": "Complete earlier IS-A to MID H surface migration through validated intermediate and TS evidence.",
+    "phase": "active",
+    "current_evidence": [
+      "User approved implementation and tests only; no new VASP/MPI/LSF calculation executed in this task.",
+      "Three-stage fixed-density, self-consistent cold-start, restart-reproducibility chain implemented with canonical hash-bound scope and failure stops.",
+      "Local validation:142 tests passed,4 inapplicable parameter combinations skipped; synthetic execution and mock submission only.",
+      "Offline job9752745 parsing recovered50 force vectors and50 local moments; actual NCORE1 comes from distribution, not recommended banner NCORE4.",
+      "Real NCORE8/80rank recovery and B-to-C restart remain untested; root cause not proved. Prior PEND record was submission-time evidence, not a current scheduler check."
+    ],
+    "one_executable_step": "Prepare and review actual three-stage input manifest, baseline comparisons, positive warning/stop tolerances and remote read-only runtime preflight; do not submit before separate authorization.",
+    "submission_boundary": "Implementation/testing only. A new three-stage allocation requires separate reviewed scf_chain_scope and canonical SUBMIT_DIAGNOSTIC_VASP authority. No retry or Dimer submission authorized.",
+    "done_when": [
+      "Original-center SCF converges normally with valid saved electronic state, then restart reproducibility is verified before a separately gated short Dimer trial."
+    ],
+    "constraints": [
+      "Same H50 moves; preserve SIGMA0.20 and bottom18Fe fixed.",
+      "Do not rerun MID-to-FS O-H work."
+    ],
+    "authoritative_references": [
+      "docs/reviews/scf_chain_executor_20260915/README.md",
+      "docs/reviews/scf_chain_executor_20260915/validation.txt",
+      "docs/reviews/scf_chain_executor_20260915/pytest_results.xml"
+    ]
+  },
+  "supersedes": [
+    "task-fixed-density9755394-submitted-20260914"
+  ]
+}

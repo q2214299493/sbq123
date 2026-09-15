@@ -7,6 +7,7 @@ from scripts.artifact_io import load_json_object, require_sha256, sha256_json
 
 from .execution_decision import ACTIONS, GATE_NAME
 from .execution_evidence import bind_execution as _bind_execution
+from .scf_chain_gate import decide_stage as decide_scf_stage, make_runtime_permit
 from .execution_path_rules import (
     INITIAL_SUBMISSIONS, blocking_decision, progress_decision,
 )
@@ -24,6 +25,8 @@ __all__ = [
     "decide_execution",
     "require_action",
     "validate_decision",
+    "decide_scf_stage",
+    "make_runtime_permit",
 ]
 
 

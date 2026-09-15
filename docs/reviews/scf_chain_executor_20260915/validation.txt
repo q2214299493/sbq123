@@ -1,0 +1,35 @@
+2026-09-15 local validation (no VASP/MPI/SSH/LSF executed)
+
+1. python -m py_compile
+   All seven task-changed production Python modules: exit 0.
+2. python -m ruff check
+   Seven production modules and tests/test_scf_repair_chain.py: exit 0.
+3. python -m pytest tests/test_scf_repair_chain.py tests/test_neb_submission.py
+   tests/test_neb_execution_gate.py tests/test_execution_gate_compatibility.py
+   tests/test_execution_lifecycle.py -o addopts='' -q --disable-warnings
+   --junitxml=docs/reviews/scf_chain_executor_20260915/pytest_results.xml
+   Exit 0: 142 passed, 4 skipped in 36.26 s.
+   The four skips are intentionally inapplicable parameter combinations:
+   non-selfconsistent A does not provide restart/branch acceptance;
+   only C is required to read restart files. These are not waived failures.
+
+Coverage: synthetic three-stage success, stops in A/B/C, numerical residual
+failure despite an EDIFF sentence, missing normal footer, process exit failure,
+wrong actual NCORE, empty restart state, wrong energy branch, missing proof of
+restart use, warning-zone continuation, missing/stale permit, changed input,
+existing reservation/lock, wrong allocation, changed completed output, periodic
+equivalence versus drift, zipapp precheck without execution, initial canonical
+scope refusal, fully hash-bound canonical mock submission and duplicate refusal.
+
+Additional read-only check of real job9752745 completed_20260912 files:
+electronic_pass=true; normal_end=true; runtime_matches=true;
+actual NCORE=1, NBANDS=320, ENCUT=400, ISTART=0, ICHARG=2;
+geometry_max_drift_A=7.875223707252682e-06 (printed output rounding);
+50 force vectors; 50 local moments; TOTEN=-388.28288317 eV;
+total_moment=105.0208746 muB; errors=[];
+No raw files were edited. This checks parsing, not the proposed NCORE=8 run.
+
+Not tested: remote Python/LSF environment and permit forwarding; actual MPI
+launch; true stage A/B/C calculations and numerical recovery; actual B-to-C
+WAVECAR/CHGCAR reuse. Production manifest and numerical comparison tolerances
+are not approved by this software-test record. No TS or barrier acceptance.

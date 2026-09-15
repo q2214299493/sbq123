@@ -246,6 +246,18 @@ def progress_decision(
                 (),
                 "RUN_RESOURCE_AND_INPUT_PREFLIGHT",
             )
+        if preflight.get("kind") == "scf_repair_chain":
+            from .scf_chain_gate import ACTION, scope_matches
+
+            if not scope_matches(evidence):
+                return _make_decision(
+                    "NEEDS_SCF_CHAIN_SCOPE", ["THREE_STAGE_AUTHORIZATION_MISSING"],
+                    evidence, (), "REVIEW_AND_AUTHORIZE_HASH_BOUND_THREE_STAGE_CHAIN",
+                )
+            return _make_decision(
+                "READY_FOR_SCF_REPAIR_CHAIN", [], evidence, (ACTION,),
+                "SUBMIT_ONE_ALLOCATION_WITH_CONDITIONAL_STAGE_GATES",
+            )
         ready = INITIAL_SUBMISSIONS.get(preflight.get("kind"))
         if ready:
             decision, action, next_check = ready
