@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-15T05:32:36Z",
+  "recorded_at": "2026-09-15T05:32:36Z",
+  "evidence": [
+    {
+      "locator": "docs/reviews/scf_chain_input_review_20260915/user_submission_authorization.md",
+      "sha256": "669daf003d6eb586bc892aaa1ceacd1464a54c725cd1d35f519db9e824f5bbd8",
+      "authority": "repository_document",
+      "observed_at": "2026-09-15T05:32:36Z"
+    },
+    {
+      "locator": "docs/reviews/scf_chain_input_review_20260915/submission_record.json",
+      "sha256": "887899fbeb939946e07a91f6e1de7ef004ec47a306e98789dd934638b4058197",
+      "authority": "repository_document",
+      "observed_at": "2026-09-15T05:32:36Z"
+    },
+    {
+      "locator": "docs/reviews/scf_chain_input_review_20260915/scheduler_after_submission.json",
+      "sha256": "386b82e6939aa25d0208456d5abd49ef3675d0a8675a0592972b4c94c03def56",
+      "authority": "repository_document",
+      "observed_at": "2026-09-15T05:32:36Z"
+    },
+    {
+      "locator": "docs/reviews/scf_chain_input_review_20260915/user_execution_authorization.json",
+      "sha256": "c5eb32985b3ae059ee11936d32f9e51d0eead6fd4a16078879f4a28065c9a2cb",
+      "authority": "repository_document",
+      "observed_at": "2026-09-15T05:32:36Z"
+    },
+    {
+      "locator": "docs/reviews/scf_chain_input_review_20260915/execution_gate_decision.json",
+      "sha256": "934e9e43dcf4016401f75e9df8f2a8adfe55c259c2a3ebe390d80b817cbe0661",
+      "authority": "repository_document",
+      "observed_at": "2026-09-15T05:32:36Z"
+    },
+    {
+      "locator": "docs/reviews/scf_chain_input_review_20260915/input_review.json",
+      "sha256": "eccb86637908c2a21fc4f786cb525e3a272f0a832ce41259fbc0f9a5259cadfe",
+      "authority": "repository_document",
+      "observed_at": "2026-09-15T05:32:36Z"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "event_id": "task-scf-chain-submitted-20260915",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "Authorized frozen three-stage SCF job 9757725 submitted once; scheduler PEND.",
+  "payload": {
+    "objective": "Complete earlier IS-A to MID H surface migration through validated intermediate and TS evidence.",
+    "phase": "active",
+    "current_evidence": [
+      "User explicitly authorized the frozen three-stage scope and positive warning/stop policy.",
+      "Canonical current hash-bound gate allowed SUBMIT_DIAGNOSTIC_VASP; immutable bundle verified unchanged.",
+      "Exactly one LSF allocation submitted: job 9757725, Gkn_normal, scheduler PEND at 2026-09-15T05:31:42Z.",
+      "80 ranks; A_fixed_density then B_self_consistent then C_restart, conditional on each prior stage passing.",
+      "Maximum 10800 seconds per stage, 9 hours total; no automatic retry.",
+      "Same 50-atom geometry and SIGMA=0.20 physical branch; candidate NCORE=8 and NBANDS=320.",
+      "Not yet evidence of electronic convergence, saved-state reproducibility, numerical repair, or TS validity."
+    ],
+    "one_executable_step": "Inspect job 9757725 stage progress and immutable stage evidence; if terminal, validate A/B/C outcomes and report without retry or Dimer submission.",
+    "submission_boundary": "One authorized submission consumed. No further allocation, resubmission, Dimer, or scientific acceptance authorized.",
+    "done_when": [
+      "Original-center SCF converges normally with valid saved electronic state, then restart reproducibility is verified before a separately gated short Dimer trial."
+    ],
+    "constraints": [
+      "Same H50 moves; preserve SIGMA0.20 and bottom18Fe fixed.",
+      "Do not rerun MID-to-FS O-H work."
+    ],
+    "authoritative_references": [
+      "docs/reviews/scf_chain_input_review_20260915/user_submission_authorization.md",
+      "docs/reviews/scf_chain_input_review_20260915/submission_record.json",
+      "docs/reviews/scf_chain_input_review_20260915/scheduler_after_submission.json",
+      "docs/reviews/scf_chain_input_review_20260915/user_execution_authorization.json",
+      "docs/reviews/scf_chain_input_review_20260915/execution_gate_decision.json",
+      "docs/reviews/scf_chain_input_review_20260915/input_review.json"
+    ]
+  },
+  "supersedes": [
+    "task-scf-chain-inputs-prepared-20260915"
+  ]
+}
