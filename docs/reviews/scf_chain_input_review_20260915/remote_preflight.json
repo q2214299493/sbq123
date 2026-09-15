@@ -1,0 +1,63 @@
+{
+  "executable": "/home_gkn/users/nsgkn_chengdj3/soft/vasp541vtst/bin/vasp_std",
+  "executable_sha256": "bda029d99f505f136ddaeb13aa38d15ac2ae5d1369d7432c533f75c78416cbfa",
+  "host": "ycn02",
+  "libraries": {
+    "command": [
+      "ldd",
+      "/home_gkn/users/nsgkn_chengdj3/soft/vasp541vtst/bin/vasp_std"
+    ],
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "\tlinux-vdso.so.1 =>  (0x00007ffe6cbc1000)\n\tlibmkl_intel_lp64.so => /home_gkx/compiler/intel/intel2016/compilers_and_libraries_2016.3.210/linux/mkl/lib/intel64/libmkl_intel_lp64.so (0x00007efd0b1c9000)\n\tlibmkl_sequential.so => /home_gkx/compiler/intel/intel2016/compilers_and_libraries_2016.3.210/linux/mkl/lib/intel64/libmkl_sequential.so (0x00007efd0a4f0000)\n\tlibmkl_core.so => /home_gkx/compiler/intel/intel2016/compilers_and_libraries_2016.3.210/linux/mkl/lib/intel64/libmkl_core.so (0x00007efd08adf000)\n\tlibstdc++.so.6 => /lib64/libstdc++.so.6 (0x00007efd087d7000)\n\tlibmkl_blacs_intelmpi_lp64.so => /home_gkx/compiler/intel/intel2016/compilers_and_libraries_2016.3.210/linux/mkl/lib/intel64/libmkl_blacs_intelmpi_lp64.so (0x00007efd0859b000)\n\tlibmpifort.so.12 => /home_gkx/compiler/intel/intel2016/compilers_and_libraries_2016.3.210/linux/mpi/intel64/lib/libmpifort.so.12 (0x00007efd081fd000)\n\tlibmpi.so.12 => /home_gkx/compiler/intel/intel2016/compilers_and_libraries_2016.3.210/linux/mpi/intel64/lib/libmpi.so.12 (0x00007efd07a2e000)\n\tlibdl.so.2 => /lib64/libdl.so.2 (0x00007efd0782a000)\n\tlibrt.so.1 => /lib64/librt.so.1 (0x00007efd07622000)\n\tlibpthread.so.0 => /lib64/libpthread.so.0 (0x00007efd07406000)\n\tlibm.so.6 => /lib64/libm.so.6 (0x00007efd07104000)\n\tlibc.so.6 => /lib64/libc.so.6 (0x00007efd06d36000)\n\tlibgcc_s.so.1 => /lib64/libgcc_s.so.1 (0x00007efd06b20000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007efd0bcd9000)\n"
+  },
+  "mpi_calculation_executed": false,
+  "mpi_version": {
+    "command": [
+      "/home_gkx/compiler/intel/intel2016/compilers_and_libraries_2016.3.210/linux/mpi/intel64/bin/mpirun",
+      "--version"
+    ],
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "Intel(R) MPI Library for Linux* OS, Version 5.1.3 Build 20160120 (build id: 14053)\nCopyright (C) 2003-2016, Intel Corporation. All rights reserved.\n"
+  },
+  "mpirun": "/home_gkx/compiler/intel/intel2016/compilers_and_libraries_2016.3.210/linux/mpi/intel64/bin/mpirun",
+  "mpirun_sha256": "4f9fae64dad3ccef59b0f08eee1dd8bb4eed543f05120e0bcb26a18fa14faf4f",
+  "observed_at": "2026-09-15T04:44:38.025057+00:00",
+  "parent_writable": true,
+  "potcar_sha256": "e3bc41a37d795bfcf1b1dc9a2a9ddfb5ef86aa5dc9aa0ac5a3583471a0982f85",
+  "python": {
+    "command": "/home_gkn/users/nsgkn_chengdj3/bin/python3",
+    "executable": "/home_gkn/users/nsgkn_chengdj3/bin/python3",
+    "version": "3.14.5"
+  },
+  "remote_writes": false,
+  "scheduler": {
+    "command": [
+      "bjobs",
+      "-a",
+      "9755394"
+    ],
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "JOBID   USER    STAT  QUEUE      FROM_HOST   EXEC_HOST   JOB_NAME   SUBMIT_TIME\n9755394 nsgkn_c DONE  Gkn_normal ycn02       32*gknew022 script.lsf Sep 14 11:59\n                                             32*gknew0611\n                                             16*gknew0616\n"
+  },
+  "server_alias": "sunboquan-codex",
+  "source_input_hashes": {
+    "INCAR": "7808e24d1b16f5a20f02c4c941a18914453a9e2784f407bad6619fa373d70b6f",
+    "KPOINTS": "0d7e291117433dac5393f29520b635e92f06e6c8e91aa941137c86b1d39162ae",
+    "POSCAR": "21115f8aa333c1aa0053556cd7a377a86fa6c43ba7b42f80bb6620e144923aa2",
+    "POTCAR": "e3bc41a37d795bfcf1b1dc9a2a9ddfb5ef86aa5dc9aa0ac5a3583471a0982f85"
+  },
+  "source_output_sizes": {
+    "CHGCAR": 0,
+    "CONTCAR": 0,
+    "OSZICAR": 4732,
+    "OUTCAR": 127243,
+    "WAVECAR": 0
+  },
+  "source_stdout_tail": "   355\n  2.419575757289357E-003\n WARNING: Sub-Space-Matrix is not hermitian in DAV          356\n -0.480431240676772     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          357\n -0.205627609528709     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          358\n  0.104649242042696     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          359\n -0.462219377876418     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          360\n  0.250436108042853     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          361\n -0.389758970521727     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          362\n  0.154530954439060     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          363\n  2.519701390082294E-002\n WARNING: Sub-Space-Matrix is not hermitian in DAV          364\n -0.167206086488427     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          365\n -9.456312934582706E-002\n WARNING: Sub-Space-Matrix is not hermitian in DAV          366\n  0.726067352288665     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          367\n -3.953884305942789E-002\n WARNING: Sub-Space-Matrix is not hermitian in DAV          368\n -0.444664945621982     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          369\n -0.441278804934410     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          370\n -0.107307644988691     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          371\n  3.022117502331622E-002\n WARNING: Sub-Space-Matrix is not hermitian in DAV          372\n  4.471906696305039E-003\n WARNING: Sub-Space-Matrix is not hermitian in DAV          373\n -0.452064495216615     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          374\n  5.386381769629462E-003\n WARNING: Sub-Space-Matrix is not hermitian in DAV          375\n  0.339245675096777     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          376\n  0.553721097367598     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          377\n -0.272055977272654     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          378\n  -1.53059524835639     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          379\n -0.689229623585565     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          380\n -0.682180209169689     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          381\n -5.250150303313961E-002\n WARNING: Sub-Space-Matrix is not hermitian in DAV          382\n  0.715032866560629     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          383\n  3.088659532656340E-002\n WARNING: Sub-Space-Matrix is not hermitian in DAV          384\n  0.619526883798193     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          385\n -0.314438586590391     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          386\n -0.475214524542086     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          387\n -1.379093338442320E-003\n WARNING: Sub-Space-Matrix is not hermitian in DAV          388\n -0.191339104195732     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          389\n -0.223021108660556     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          390\n  0.317511360353908     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          391\n  0.123805935751113     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          392\n  0.170538181761880     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          393\n -5.826766645521216E-002\n WARNING: Sub-Space-Matrix is not hermitian in DAV          394\n -0.344321692008861     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          395\n -0.490389699671618     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          396\n -0.106928138675742     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          397\n  0.101233183272061     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          398\n  0.522808421476872     \n WARNING: Sub-Space-Matrix is not hermitian in DAV          399\n  2.122088615567631E-002\n WARNING: Sub-Space-Matrix is not hermitian in DAV          400\n  0.201221520133582     \nError EDDDAV: Call to ZHEGV failed. Returncode =   1 2 160\n",
+  "target": "/home_gkn/users/nsgkn_chengdj3/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_migration_int06_mid_scf_chain_20260915",
+  "target_exists": false,
+  "vasp_executed": false
+}

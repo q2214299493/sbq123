@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-15T04:34:48Z",
+  "recorded_at": "2026-09-15T04:34:48Z",
+  "evidence": [
+    {
+      "locator": "docs/reviews/scf_chain_input_review_20260915/README.md",
+      "sha256": "8d1ba5441edbe03ab9cd735b64143386a73e1a7a6839c613a103c61656d2a4a8",
+      "authority": "repository_document",
+      "observed_at": "2026-09-15T04:34:48Z"
+    },
+    {
+      "locator": "docs/reviews/scf_chain_input_review_20260915/input_review.json",
+      "sha256": "eccb86637908c2a21fc4f786cb525e3a272f0a832ce41259fbc0f9a5259cadfe",
+      "authority": "repository_document",
+      "observed_at": "2026-09-15T04:34:48Z"
+    },
+    {
+      "locator": "docs/reviews/scf_chain_input_review_20260915/incar_validation.json",
+      "sha256": "efe30eea40b6d374e6b99cd6f94386f1c0862d31419b590f3fe5e98170f5aede",
+      "authority": "repository_document",
+      "observed_at": "2026-09-15T04:34:48Z"
+    },
+    {
+      "locator": "docs/reviews/scf_chain_input_review_20260915/remote_preflight.json",
+      "sha256": "6dbbc494df35b852e709feed1af75d3f78f309e052e84279a8954600a4874ab8",
+      "authority": "repository_document",
+      "observed_at": "2026-09-15T04:34:48Z"
+    },
+    {
+      "locator": "docs/reviews/scf_chain_input_review_20260915/runtime_syntax_check.json",
+      "sha256": "3b8edce7dd439fc8c027bfb8c8e7ba5f2a3c3dd3ccbdac930ea1a98dff8cbe64",
+      "authority": "repository_document",
+      "observed_at": "2026-09-15T04:34:48Z"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_scf_chain_20260915/submission_preflight.json",
+      "sha256": "964ca08fca01aeea516d23cf2d94df2b08efb5bafefb4486f5ea49aec6c984c2",
+      "authority": "repository_document",
+      "observed_at": "2026-09-15T04:34:48Z"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_scf_chain_20260915/execution_gate_review_only.json",
+      "sha256": "09c16751aa14d93f3c0c1b720ebc3afae78875c11a13b21733a1c35924112500",
+      "authority": "repository_document",
+      "observed_at": "2026-09-15T04:34:48Z"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "event_id": "task-scf-chain-inputs-prepared-20260915",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "Real SCF chain inputs prepared and preflight passed; user review and submission scope still required.",
+  "payload": {
+    "objective": "Complete earlier IS-A to MID H surface migration through validated intermediate and TS evidence.",
+    "phase": "active",
+    "current_evidence": [
+      "Real three-stage input package prepared at h_migration_int06_mid_scf_chain_20260915; local canonical preflight passed and source hashes verified.",
+      "Same50atom Fe45C2OH2 geometry and fixed indices0-17; physical branch SIGMA0.20 unchanged;80ranks,NCORE8,explicitNBANDS320 are candidate settings.",
+      "Baseline9752745 full atom-resolved force/moment data validated from unchanged raw files; no old failed electronic state copied.",
+      "Remote read-only check found Python3.14.5,unchanged VASP/POTCAR hashes,no missing sourced runtime libraries; eleven runtime members compiled and bash syntax passed without running calculations.",
+      "9755394 scheduler DONE; stdout tail has EDDDAV/ZHEGV; WAVECAR,CHGCAR,CONTCAR empty. Not successful SCF recovery.",
+      "Positive two-level comparison thresholds prepared for user review;10800seconds per stage,at most9hours for one80rank allocation.",
+      "Execution gate NEEDS_SCF_CHAIN_SCOPE;ALLOWED_ACTIONS empty;no upload,no submission,no automatic retry."
+    ],
+    "one_executable_step": "Obtain user review of the frozen comparison thresholds and9hour maximum budget plus separate scf_chain_scope submission authority; only then create a current bound submission gate.",
+    "submission_boundary": "Prepared only; continue did not authorize a new calculation. Do not submit until the exact three-stage scope is explicitly approved. No Dimer or scientific result acceptance.",
+    "done_when": [
+      "Original-center SCF converges normally with valid saved electronic state, then restart reproducibility is verified before a separately gated short Dimer trial."
+    ],
+    "constraints": [
+      "Same H50 moves; preserve SIGMA0.20 and bottom18Fe fixed.",
+      "Do not rerun MID-to-FS O-H work."
+    ],
+    "authoritative_references": [
+      "docs/reviews/scf_chain_input_review_20260915/README.md",
+      "docs/reviews/scf_chain_input_review_20260915/input_review.json",
+      "docs/reviews/scf_chain_input_review_20260915/incar_validation.json",
+      "docs/reviews/scf_chain_input_review_20260915/remote_preflight.json",
+      "docs/reviews/scf_chain_input_review_20260915/runtime_syntax_check.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_scf_chain_20260915/submission_preflight.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_scf_chain_20260915/execution_gate_review_only.json"
+    ]
+  },
+  "supersedes": [
+    "task-scf-chain-implementation-tested-20260915"
+  ]
+}
