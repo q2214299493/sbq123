@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-16T11:22:36.263678+00:00",
+  "recorded_at": "2026-09-16T11:22:36.263678+00:00",
+  "evidence": [
+    {
+      "locator": "docs/reviews/int06_mid_dimer_gpu1635_20260916.md",
+      "sha256": "97d96612b50666a27ec52d140c3a0ecf77d4c14a8cba69243920fb2d2ce94527",
+      "authority": "repository_document",
+      "observed_at": "2026-09-16T11:22:36.263678+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_gpu1635_20260916/submission_record.json",
+      "sha256": "1d476ea3324a1c96752ecbf4f9043bf46a82bf5e67bc38401315a6b9fd380703",
+      "authority": "repository_document",
+      "observed_at": "2026-09-16T11:22:36.263678+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_gpu1635_20260916/execution_gate_decision.json",
+      "sha256": "f32f16ce6a1a6171ff6ba887dc6112edea06c1683d97ba7030f6490206c0b76d",
+      "authority": "repository_document",
+      "observed_at": "2026-09-16T11:22:36.263678+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_gpu1635_20260916/submission_preflight.json",
+      "sha256": "609c9fde191946da2fd0e00336e007e0f25014c62dfe1f8e5a88fc994477de11",
+      "authority": "repository_document",
+      "observed_at": "2026-09-16T11:22:36.263678+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_gpu1635_20260916/user_execution_authorization.json",
+      "sha256": "272981d8a797e4b2fd38a624dc0985ad83c70fe18cc17d36b69234eb32dce534",
+      "authority": "repository_document",
+      "observed_at": "2026-09-16T11:22:36.263678+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_gpu1635_20260916/mode_review.json",
+      "sha256": "7280c4d05f9cd0eb4c49a6bffe1eda1f5b2980ca6cb66ee8a0b3582360e9844c",
+      "authority": "repository_document",
+      "observed_at": "2026-09-16T11:22:36.263678+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "event_id": "task-int06-mid-dimer9781734-submitted-20260916",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "User authorized new Dimer from GPU1635 image05; LSF9781734 submitted, initial PEND.",
+  "payload": {
+    "objective": "Complete earlier IS-A to MID H surface migration through validated intermediate and TS evidence.",
+    "phase": "active",
+    "current_evidence": [
+      "GPU1635 completed normally: ordinary ML-NEB 19 steps, maximum NEB force0.088104eV/A, nine images, same-path AQCat audit complete.",
+      "Full path reviewed; image05 selected with neighbors04/06. Flat04-05 peak and similarity to failed old center explicitly disclosed.",
+      "Canonical parent, mode and submission gates passed; START_DIMER authorized by current user request.",
+      "VASP Dimer9781734 submitted on sunboquan-codex; first live scheduler observation PEND. 80ranks, excluding gknew0440.",
+      "Project default Dimer profile, SIGMA0.20, EDIFF1e-7, EDIFFG-0.02, NSW300; no old electronic restart files.",
+      "Old SCF failure is not proven resolved; no TS or final barrier accepted. No automatic retry."
+    ],
+    "one_executable_step": "Check9781734 scheduler and actual VASP startup, electronic stability and Dimer force/curvature progress.",
+    "submission_boundary": "One explicit Dimer authorization consumed by9781734. Do not submit another job or restart old SCF branches.",
+    "done_when": [
+      "Obtain a validated INT06-to-MID migration TS from the reviewed new-path GPU or VASP coarse-NEB branch, then retain compatible barrier and strategy evidence."
+    ],
+    "constraints": [
+      "Same H50 moves; preserve SIGMA0.20 and bottom18Fe fixed.",
+      "Do not rerun MID-to-FS O-H work."
+    ],
+    "authoritative_references": [
+      "docs/reviews/int06_mid_dimer_gpu1635_20260916.md",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_gpu1635_20260916/submission_record.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_gpu1635_20260916/execution_gate_decision.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_gpu1635_20260916/submission_preflight.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_gpu1635_20260916/user_execution_authorization.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_gpu1635_20260916/mode_review.json"
+    ]
+  },
+  "supersedes": [
+    "task-int06-mid-fresh-gpu1635-submitted-20260916"
+  ]
+}

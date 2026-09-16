@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "kind": "dimer",
+  "passed": true,
+  "errors": [],
+  "cores": 80,
+  "images": null,
+  "files": {
+    "INCAR": "7e4e956a5ea9efd66648d86ff47a1f8614f9d4144bbfcbb7ccfea154bcaf553f",
+    "KPOINTS": "0d7e291117433dac5393f29520b635e92f06e6c8e91aa941137c86b1d39162ae",
+    "POTCAR.spec": "9528f5cac58de3cc83a576c828915ce9c2ab72d4ec3be5e409f7476042f7e1bb",
+    "script.lsf": "a25cd3c460ef7bf1e4724a1bf1c1a38bee10d5d0cd992bf6914e58efa121107d",
+    "POSCAR": "0bada36d9cb23959e3a956c97058eb09b35723a9750e099ea6f11f0941c58ece",
+    "PREVIOUS_POSCAR": "e6b256943db2f61a4a32e7dd5fd4d89d626f9c2e3d97c4d5fc0e47de29c63f7e",
+    "NEXT_POSCAR": "67536c6b69f19f20c54d0c4f57e034cf1acace53708f24c01d108be127353b59",
+    "MODECAR": "8e8de8e58df813bce17041b27a91de761c9912ac43576e889c9b51ae3b95fcaf",
+    "dimer_handoff.json": "074bf32640e612793204683506cd4b451e36fc69415aa94de14e12e67750c5b5",
+    "mode_review.json": "7280c4d05f9cd0eb4c49a6bffe1eda1f5b2980ca6cb66ee8a0b3582360e9844c"
+  },
+  "bundle_sha256": "6065e506e4bb6aad9337d2b039cdb59230e6962bb2280afd59e790daeea443f0",
+  "strategy_retry_check": {
+    "input_key": "8fdfae489edab8a63b27c725f817d78bd1c273ba7c62c8414ff66a7fa3b59c4e",
+    "blocked_attempts": [],
+    "review_attempts": [],
+    "status": "NO_KNOWN_FAILURE"
+  },
+  "resource_requirement": "select[hname!=gknew0440]",
+  "dimer_hard_gate_passed": true,
+  "dimer_hard_gate": {
+    "hard_gate_passed": true,
+    "hard_gate_errors": [],
+    "hard_checks": {
+      "candidate_triad_hard_gate_bound": true,
+      "modecar_atom_count_and_order_bound": true,
+      "triad_structure_contract_preserved": true,
+      "fixed_mode_components_zero": true,
+      "modecar_finite": true,
+      "modecar_nonzero": true,
+      "modecar_normalized": true,
+      "mode_main_components_match_reaction_center": true,
+      "chemical_continuity_and_mode_review_accepted": true,
+      "gpu_parent_analysis_unchanged": true,
+      "gpu_reviewed_parent_still_valid": true
+    },
+    "mode_norm": 0.9999999999998032,
+    "reaction_atom_mode_fraction": 0.9826275713001427,
+    "compatibility_errors": [],
+    "recommended_checks": {
+      "parent_neb_technically_converged": false,
+      "strict_local_energy_maximum": false,
+      "triad_forces_clearly_reduced": false,
+      "coarse_neb_other_images_stable_peak_stalled": false,
+      "single_target_process_without_stable_intermediate": true,
+      "candidate_between_is_and_fs": null,
+      "mode_provenance_hash_bound": true
+    }
+  },
+  "dimer_recommended_gate": {
+    "parent_neb_technically_converged": false,
+    "strict_local_energy_maximum": false,
+    "triad_forces_clearly_reduced": false,
+    "coarse_neb_other_images_stable_peak_stalled": false,
+    "single_target_process_without_stable_intermediate": true,
+    "candidate_between_is_and_fs": null,
+    "mode_provenance_hash_bound": true
+  }
+}
