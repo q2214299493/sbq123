@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-16T03:48:32Z",
+  "recorded_at": "2026-09-16T03:48:32Z",
+  "evidence": [
+    {
+      "locator": "docs/reviews/int06_mid_fresh_seed_20260916.md",
+      "sha256": "c69cc29c36da9d46fe450e9c7a8caaf97fe0e33ef801b8e1922f3b98813494fe",
+      "authority": "repository_document",
+      "observed_at": "2026-09-16T03:48:32Z"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_fresh_seed_20260916/local_preflight.json",
+      "sha256": "081f2ec695a7a955a805125580520a54aceb24a273eff3d7c475519d7c378e92",
+      "authority": "repository_document",
+      "observed_at": "2026-09-16T03:48:32Z"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_fresh_seed_20260916/endpoint_idpp_plan/path_candidate/exact_mic_geometry.json",
+      "sha256": "43b0a339625f49a76834ee5121225ecc30675a7922eb059730f5206ee2388269",
+      "authority": "repository_document",
+      "observed_at": "2026-09-16T03:48:32Z"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_fresh_seed_20260916/endpoint_idpp_plan/path_candidate/execution_gate.json",
+      "sha256": "9f37f3dc11a57c5615f7d4f41c566ea8cf985f37b6feaf71eea6b6244bfeb435",
+      "authority": "repository_document",
+      "observed_at": "2026-09-16T03:48:32Z"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_fresh_seed_20260916/retired_scf9757725/disposition.json",
+      "sha256": "67af465eb8ec0de9b745c71e306a3b26aeb56d6d19a4fb38fe62543800688834",
+      "authority": "repository_document",
+      "observed_at": "2026-09-16T03:48:32Z"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_fresh_seed_20260916/retired_scf9757725/scheduler.json",
+      "sha256": "344318f766b7f52626088d8485eac318af3202f16ae098ede06186d8244a4d83",
+      "authority": "repository_document",
+      "observed_at": "2026-09-16T03:48:32Z"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "event_id": "task-int06-mid-fresh-seed-20260916",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "User retired failed SCF-centered path; fresh nine-frame endpoint IDPP seed prepared for GPU review.",
+  "payload": {
+    "objective": "Complete earlier IS-A to MID H surface migration through validated intermediate and TS evidence.",
+    "phase": "active",
+    "current_evidence": [
+      "9757725 EXIT; fixed-density stage A failed, no stages B/C; user retired further old-center SCF trials.",
+      "Accepted endpoints INT06 9748648 and MID 9737143 retained; no change to accepted MID-to-FS O-H TS.",
+      "Fresh endpoint-only full-atom IDPP: 7 internal images, 9 total; no old ML interior copied.",
+      "Exact MIC, identity, fixed layer, molecular connectivity, eight dist.pl and nebmovie.pl 0 checks passed.",
+      "Adjacent maximum atomic step 0.197171 A; seed remains same migration corridor, not proof of a new mechanism or SCF repair.",
+      "MatRIS-primary/AQCat25 exact-path GPU request is draft only; no model, remote preflight or submission.",
+      "User-selected fallback: if this GPU route is unusable, prepare VASP ordinary coarse NEB; no mandatory pilot or automatic old-input retry."
+    ],
+    "one_executable_step": "Review fresh INT06-to-MID seed with user, then finalize runtime bindings and MZ73 no-model preflight for one concrete GPU request.",
+    "submission_boundary": "No executable GPU package or VASP submission gate yet. Exact package review and authorization still required; do not restart retired SCF jobs.",
+    "done_when": [
+      "Obtain a validated INT06-to-MID migration TS from the reviewed new-path GPU or VASP coarse-NEB branch, then retain compatible barrier and strategy evidence."
+    ],
+    "constraints": [
+      "Same H50 moves; preserve SIGMA0.20 and bottom18Fe fixed.",
+      "Do not rerun MID-to-FS O-H work."
+    ],
+    "authoritative_references": [
+      "docs/reviews/int06_mid_fresh_seed_20260916.md",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_fresh_seed_20260916/local_preflight.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_fresh_seed_20260916/endpoint_idpp_plan/path_candidate/exact_mic_geometry.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_fresh_seed_20260916/endpoint_idpp_plan/path_candidate/execution_gate.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_fresh_seed_20260916/retired_scf9757725/disposition.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_fresh_seed_20260916/retired_scf9757725/scheduler.json"
+    ]
+  },
+  "supersedes": [
+    "task-scf-chain-submitted-20260915"
+  ]
+}
