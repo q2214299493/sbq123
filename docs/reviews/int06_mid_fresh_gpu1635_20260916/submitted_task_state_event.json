@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-16T04:30:00+00:00",
+  "recorded_at": "2026-09-16T04:30:00+00:00",
+  "evidence": [
+    {
+      "locator": "docs/reviews/int06_mid_fresh_gpu1635_20260916.md",
+      "sha256": "9b2aa842e347281e7ab55462a16124c9914cddcad3bf93a44c6d7ffea7a863b4",
+      "authority": "repository_document",
+      "observed_at": "2026-09-16T04:30:00+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_fresh_seed_20260916/submission_20260916/submit.result.json",
+      "sha256": "f241fdd1683baa85ec576343fdd162107f646509280d2449f4fbe2b70e0dde2b",
+      "authority": "repository_document",
+      "observed_at": "2026-09-16T04:30:00+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_fresh_seed_20260916/submission_20260916/remote_preflight.result.json",
+      "sha256": "c133a55489810dd70d19ccc1364005ab07973275d8aeb2bb95b42cc7ba813f39",
+      "authority": "repository_document",
+      "observed_at": "2026-09-16T04:30:00+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_fresh_seed_20260916/submission_20260916/execution/authorization.json",
+      "sha256": "74b91fb829f4f3c6e3c2819bed7fd740cdaec953ff5698ebf56cdc5192ae6684",
+      "authority": "repository_document",
+      "observed_at": "2026-09-16T04:30:00+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_fresh_seed_20260916/submission_20260916/startup_checkpoint.json",
+      "sha256": "aba70e782240a95f386d166a95ff2822feefd32d932034730c461b40b00ce01a",
+      "authority": "repository_document",
+      "observed_at": "2026-09-16T04:30:00+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "event_id": "task-int06-mid-fresh-gpu1635-submitted-20260916",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "Reviewed fresh nine-frame seed submitted once as MZ73 GPU job 1635.",
+  "payload": {
+    "objective": "Complete earlier IS-A to MID H surface migration through validated intermediate and TS evidence.",
+    "phase": "active",
+    "current_evidence": [
+      "User accepted the fresh INT06-to-MID seed and authorized one GPU submission.",
+      "Local and remote payload/model/geometry preflights passed; 17 related tests passed.",
+      "MZ73 submission 1635 succeeded; startup checkpoint records live scheduler state and assigned GPU.",
+      "Nine frames, seven internal; MatRIS ordinary ML-NEB followed by AQCat25 same-path audit.",
+      "One GPU, four CPUs, 40 GB RAM, six hours, maximum 400 optimization steps; no requeue.",
+      "No convergence, TS acceptance or barrier claim; old SCF repair branch remains retired.",
+      "If GPU path is unusable, prepare reviewed VASP ordinary coarse NEB, not another old-center SCF retry."
+    ],
+    "one_executable_step": "Check job 1635 and collect its complete path and producer evidence for work-side review when finished.",
+    "submission_boundary": "One authorized GPU submission consumed. No automatic GPU retry or VASP submission; no new monitoring automation.",
+    "done_when": [
+      "Obtain a validated INT06-to-MID migration TS from the reviewed new-path GPU or VASP coarse-NEB branch, then retain compatible barrier and strategy evidence."
+    ],
+    "constraints": [
+      "Same H50 moves; preserve SIGMA0.20 and bottom18Fe fixed.",
+      "Do not rerun MID-to-FS O-H work."
+    ],
+    "authoritative_references": [
+      "docs/reviews/int06_mid_fresh_gpu1635_20260916.md",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_fresh_seed_20260916/submission_20260916/submit.result.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_fresh_seed_20260916/submission_20260916/remote_preflight.result.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_fresh_seed_20260916/submission_20260916/execution/authorization.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_fresh_seed_20260916/submission_20260916/startup_checkpoint.json"
+    ]
+  },
+  "supersedes": [
+    "task-int06-mid-fresh-seed-20260916"
+  ]
+}

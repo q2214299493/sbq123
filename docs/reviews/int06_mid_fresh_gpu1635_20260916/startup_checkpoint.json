@@ -1,0 +1,8 @@
+{
+  "observed_at": "2026-09-16T04:30:00+00:00",
+  "source": "MZ73 squeue and job-owned gpu_binding.json",
+  "command": "squeue -h -j 1635 -o '%i|%T|%M|%R'; cat /home/sbq/sbq/aqcat25_ts_pilot/handoffs/int06_mid_fresh_seed_20260916/gpu_binding.json",
+  "stdout": "1635|RUNNING|3:37|MZ73\n{\n  \"job_id\": \"1635\",\n  \"physical_index\": 2,\n  \"gpu_uuid\": \"GPU-7ec6ab8a-91a2-450d-04c1-a0d472452b5b\",\n  \"free_memory_MiB\": 24066,\n  \"inherited_cuda_visible_devices\": \"2\",\n  \"scheduler_allocation_matches_target\": true\n}",
+  "stderr": "",
+  "returncode": 0
+}
