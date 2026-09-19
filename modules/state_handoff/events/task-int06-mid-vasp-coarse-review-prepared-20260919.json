@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-19T13:10:23.501955+00:00",
+  "recorded_at": "2026-09-19T13:10:23.501955+00:00",
+  "evidence": [
+    {
+      "locator": "docs/reviews/int06_mid_vasp_coarse_review_20260919.md",
+      "sha256": "cc685c2a9ee17bfc846af1b579b40d33993aa8c1b4de74ac8410d4a3a463af04",
+      "authority": "repository_document",
+      "observed_at": "2026-09-19T13:10:23.501955+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_coarse_review_20260919/local_verification.json",
+      "sha256": "91fbf693d9bac935998f86869f8e62b3b247af395b74938ac6d335d6858751f8",
+      "authority": "repository_document",
+      "observed_at": "2026-09-19T13:10:23.501955+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_coarse_review_20260919/scf_comparison_plan.json",
+      "sha256": "eb6c643619bc02863b2502f4dd4494aa1f584607f40d8a203479167d37c9237a",
+      "authority": "repository_document",
+      "observed_at": "2026-09-19T13:10:23.501955+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_coarse_review_20260919/scf9789895_final/summary.json",
+      "sha256": "4fd4d81abcc12d78be6ec54d038ea6a2c1bef89d91cf5bac8821f7f8d071d300",
+      "authority": "repository_document",
+      "observed_at": "2026-09-19T13:10:23.501955+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_coarse_review_20260919/path_candidate/execution_gate.json",
+      "sha256": "dd00e23f577885719656d9a020a4df094677a2af8e338db4229d8832886136b8",
+      "authority": "repository_document",
+      "observed_at": "2026-09-19T13:10:23.501955+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_coarse_review_20260919/path_candidate/submission_preflight.json",
+      "sha256": "d2c3e951ac942bb111641352e00bbfcd1c3f8937d783b2a342e8fa1f359f7a24",
+      "authority": "repository_document",
+      "observed_at": "2026-09-19T13:10:23.501955+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_coarse_review_20260919/path_review.png",
+      "sha256": "249da2d1926ddf04ae33ae5784ce433689cd31c7b367e2b7815a81d8d4a0a1a1",
+      "authority": "repository_document",
+      "observed_at": "2026-09-19T13:10:23.501955+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "event_id": "task-int06-mid-vasp-coarse-review-prepared-20260919",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "Prepared seven-frame INT06-MID VASP candidate and reviewed SCF comparison proposal; no new submission.",
+  "payload": {
+    "objective": "Complete earlier IS-A to MID H surface migration through validated intermediate and TS evidence.",
+    "phase": "active",
+    "current_evidence": [
+      "Latest9789895 is DONE but electronic failure at200 iterations; invalid forces/restart files.",
+      "New endpoint-only full-atom IDPP candidate00-06: five internal images; geometry and VTST checks passed.",
+      "Draft80-rank ordinary NEB: local INCAR and input preflight PASS, not electronic or scientific validation.",
+      "Path review pending; canonical execution gate forbids submission. Fixed-geometry ALGO All comparison proposed only.",
+      "No new VASP/GPU calculation, checkpoint training, TS or barrier accepted."
+    ],
+    "one_executable_step": "Obtain review of the new INT06-MID path and the one-variable fixed-geometry electronic comparison before preparing its executable authorized package.",
+    "submission_boundary": "Preparation only. Do not submit coarse NEB, SCF diagnostic or Dimer without specific reviewed authorization and current gate.",
+    "done_when": [
+      "Obtain a validated INT06-to-MID migration TS from the reviewed new-path GPU or VASP coarse-NEB branch, then retain compatible barrier and strategy evidence."
+    ],
+    "constraints": [
+      "Same H50 moves; preserve SIGMA0.20 and bottom18Fe fixed.",
+      "Do not rerun MID-to-FS O-H work."
+    ],
+    "authoritative_references": [
+      "docs/reviews/int06_mid_vasp_coarse_review_20260919.md",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_coarse_review_20260919/local_verification.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_coarse_review_20260919/scf_comparison_plan.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_coarse_review_20260919/scf9789895_final/summary.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_coarse_review_20260919/path_candidate/execution_gate.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_coarse_review_20260919/path_candidate/submission_preflight.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_coarse_review_20260919/path_review.png"
+    ]
+  },
+  "supersedes": [
+    "task-int06-mid-dimer9781734-submitted-20260916"
+  ]
+}
