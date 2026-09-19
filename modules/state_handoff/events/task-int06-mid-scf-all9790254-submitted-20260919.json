@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-19T13:34:24.908194+00:00",
+  "recorded_at": "2026-09-19T13:34:24.908194+00:00",
+  "evidence": [
+    {
+      "locator": "docs/reviews/int06_mid_scf_all9790254_submitted_20260919.md",
+      "sha256": "9fedd0bfe44386f04c47d4f419b1976f5d7f8163cfe53058a5e49fe8a26ac788",
+      "authority": "repository_document",
+      "observed_at": "2026-09-19T13:34:24.908194+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_gpu1635_parent_scf_all_20260919/submission_record.json",
+      "sha256": "18415a90dc09dfbf0fff3fb30bb04d32e44d6f91791fd19b96e6de07c214340a",
+      "authority": "repository_document",
+      "observed_at": "2026-09-19T13:34:24.908194+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_gpu1635_parent_scf_all_20260919/execution_gate_decision.json",
+      "sha256": "3f5dad676211ac8dfeaa06537ea290a2b239caac4ee490aed6b901ebe439cf7f",
+      "authority": "repository_document",
+      "observed_at": "2026-09-19T13:34:24.908194+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_gpu1635_parent_scf_all_20260919/submission_preflight.json",
+      "sha256": "93c8dcb152f5156e4a7c188606e97b2f77f1b044448f4c26b96240a3a53762f4",
+      "authority": "repository_document",
+      "observed_at": "2026-09-19T13:34:24.908194+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_gpu1635_parent_scf_all_20260919/diagnostic_input_review.json",
+      "sha256": "52360526e375786574ce00f84fde419b33243552d0fedeee9be01a5a977d1592",
+      "authority": "repository_document",
+      "observed_at": "2026-09-19T13:34:24.908194+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_gpu1635_parent_scf_all_20260919/user_execution_authorization.json",
+      "sha256": "9b9acde0c75b32b4b28a559b138668451955d161e5a9966020073fa33a2176a4",
+      "authority": "repository_document",
+      "observed_at": "2026-09-19T13:34:24.908194+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "event_id": "task-int06-mid-scf-all9790254-submitted-20260919",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "User-authorized fixed-geometry ALGO All diagnostic9790254 submitted; initial scheduler PEND.",
+  "payload": {
+    "objective": "Complete earlier IS-A to MID H surface migration through validated intermediate and TS evidence.",
+    "phase": "active",
+    "current_evidence": [
+      "9789895 ended DONE but failed electronically; its forces and restart files remain invalid.",
+      "New7-image INT06-MID ordinary NEB draft is geometry-valid but not authorized for submission.",
+      "User authorized one fixed-geometry diagnostic;9790254 submitted with ALGO All, all other explicit inputs matching9789598.",
+      "80ranks, SIGMA0.20, cold start, excludes gknew0440. Canonical gate and input checks passed; remote hashes verified.",
+      "First scheduler check PEND. No electronic result, TS, barrier or training claim."
+    ],
+    "one_executable_step": "Check9790254 scheduler, actual electronic progress and normal completion, then review finite forces and magnetic branch before any NEB decision.",
+    "submission_boundary": "The one-job authorization is consumed by9790254. No automatic retry, NEB, Dimer or training submission.",
+    "done_when": [
+      "Obtain a validated INT06-to-MID migration TS from the reviewed new-path GPU or VASP coarse-NEB branch, then retain compatible barrier and strategy evidence."
+    ],
+    "constraints": [
+      "Same H50 moves; preserve SIGMA0.20 and bottom18Fe fixed.",
+      "Do not rerun MID-to-FS O-H work."
+    ],
+    "authoritative_references": [
+      "docs/reviews/int06_mid_scf_all9790254_submitted_20260919.md",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_gpu1635_parent_scf_all_20260919/submission_record.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_gpu1635_parent_scf_all_20260919/execution_gate_decision.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_gpu1635_parent_scf_all_20260919/submission_preflight.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_gpu1635_parent_scf_all_20260919/diagnostic_input_review.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_dimer_gpu1635_parent_scf_all_20260919/user_execution_authorization.json"
+    ]
+  },
+  "supersedes": [
+    "task-int06-mid-vasp-coarse-review-prepared-20260919"
+  ]
+}
