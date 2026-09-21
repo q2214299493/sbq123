@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-21T14:38:26.446213+00:00",
+  "recorded_at": "2026-09-21T14:38:26.446213+00:00",
+  "evidence": [
+    {
+      "locator": "docs/reviews/int06_mid_direct_vasp9793467_20260921.md",
+      "sha256": "ebe9024437ab9d4802da9a821ba4930ca2cfa8683af4a9cabd1de5cedf1c9c3c",
+      "authority": "repository_document",
+      "observed_at": "2026-09-21T14:38:26.446213+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/registry_receipt.json",
+      "sha256": "897ad85e91f56d5527e27c93fb3fbe05b9c2e78b24740b54425de9038a852b13",
+      "authority": "repository_document",
+      "observed_at": "2026-09-21T14:38:26.446213+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/smooth_review/completed_work_review.json",
+      "sha256": "d7166465de6166e6e3ac13cc4908ce778dd287f78e0e90ff255bb841ea46a60d",
+      "authority": "repository_document",
+      "observed_at": "2026-09-21T14:38:26.446213+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ordinary_neb/submission_record.json",
+      "sha256": "3b9347311b9044c726fede2b3fd11a52a635f7cf3b579891038eeb40511047b4",
+      "authority": "repository_document",
+      "observed_at": "2026-09-21T14:38:26.446213+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ordinary_neb/execution_gate_decision.json",
+      "sha256": "9bef8d54666f4c0117a5a0b24eb0fc8184c362b12bae6e5ffb08ab03ac538786",
+      "authority": "repository_document",
+      "observed_at": "2026-09-21T14:38:26.446213+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ordinary_neb/scheduler_submission_checkpoint.json",
+      "sha256": "aab3ead00cd74b700fdb374c06d824a9e510fb3a4c96e753110f563d296ad8ae",
+      "authority": "repository_document",
+      "observed_at": "2026-09-21T14:38:26.446213+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ordinary_neb/path_review.json",
+      "sha256": "011615b048985b5ca0f5a426241e3e199b01cfd285e2a8d8b4525d78cb44b615",
+      "authority": "repository_document",
+      "observed_at": "2026-09-21T14:38:26.446213+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ordinary_neb/path_generation_report.json",
+      "sha256": "7fe7c5d19d7dc7aaeb269546a4807448d5c35d6dd4f553bbd3737bd0ccf47826",
+      "authority": "repository_document",
+      "observed_at": "2026-09-21T14:38:26.446213+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "event_id": "task-int06-mid-direct-vasp9793467-submitted-20260921",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "User-authorized no-GPU endpoint-derived ordinary VASP NEB9793467 submitted; first checkpoint PEND.",
+  "payload": {
+    "objective": "Complete earlier IS-A to MID H surface migration through validated intermediate and TS evidence.",
+    "phase": "active",
+    "current_evidence": [
+      "New direct VASP ordinary NEB9793467 submitted on sunboquan-codex; saved scheduler PEND.",
+      "Registered INT06/9748648 and MID/9737143 endpoints; seven images, five internal,80ranks. No GPU, no pilot, no failed interior/restart copied.",
+      "Smooth H50 seed biased toward Fe38 and elevated; initial geometric candidate only, not proven MEP. No extra runtime restraints; C2HO retained.",
+      "Geometry/VTST/visual review, INCAR audit, hash-bound SUBMIT_VASP gate and remote hashes passed.",
+      "Ordinary stage Fast,EDIFF1e-5,EDIFFG-0.05,SIGMA0.20,NSW300,NELM200,NPAR4,LORBIT11; exclude gknew0440.",
+      "Job and input provenance registered; no TS, accepted energy or training data promoted."
+    ],
+    "one_executable_step": "Check9793467 scheduler and every image electronic/NEB-force/geometry progress using compact monitor; avoid parameter scans or duplicate submissions.",
+    "submission_boundary": "User-authorized one rebuilt direct VASP NEB consumed by9793467. No automatic retry. If successful, prepare quality-passed exact VASP labels, frozen-heldout exclusions, replay and model-error review before a scoped GPU fine-tuning handoff.",
+    "done_when": [
+      "Obtain a validated INT06-to-MID migration TS from the reviewed new-path GPU or VASP coarse-NEB branch, then retain compatible barrier and strategy evidence."
+    ],
+    "constraints": [
+      "Same H50 moves; preserve SIGMA0.20 and bottom18Fe fixed.",
+      "Do not rerun MID-to-FS O-H work."
+    ],
+    "authoritative_references": [
+      "docs/reviews/int06_mid_direct_vasp9793467_20260921.md",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/registry_receipt.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/smooth_review/completed_work_review.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ordinary_neb/submission_record.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ordinary_neb/execution_gate_decision.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ordinary_neb/scheduler_submission_checkpoint.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ordinary_neb/path_review.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ordinary_neb/path_generation_report.json"
+    ]
+  },
+  "supersedes": [
+    "task-int06-mid-all9790254-stopped-20260920"
+  ]
+}
