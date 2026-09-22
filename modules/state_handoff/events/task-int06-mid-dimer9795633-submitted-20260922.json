@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-22T15:49:18.737687+00:00",
+  "recorded_at": "2026-09-22T15:49:18.737687+00:00",
+  "evidence": [
+    {
+      "locator": "docs/reviews/int06_mid_dimer9795633_20260922.md",
+      "sha256": "d7b67d671373c69a87fa2b9319857c98ef6c2db40b25b7d0bb83d7bd9479fc09",
+      "authority": "repository_document",
+      "observed_at": "2026-09-22T15:49:18.737687+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/dimer_peak03_20260922/submission_record.json",
+      "sha256": "768b0587949bd8793799dbec45b226d4c27ea8c09658f04bb3c3154bb0470cae",
+      "authority": "repository_document",
+      "observed_at": "2026-09-22T15:49:18.737687+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/dimer_peak03_20260922/execution_gate_decision.json",
+      "sha256": "c849967f501b68b582aa52b1d9f2016e824304219b1cb57fb110efd563bd403c",
+      "authority": "repository_document",
+      "observed_at": "2026-09-22T15:49:18.737687+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/dimer_peak03_20260922/registry_receipt.json",
+      "sha256": "1631b429a2182d0ad0e69d915e107b59b75d1111c93c97298bef446a4cbeb6dd",
+      "authority": "repository_document",
+      "observed_at": "2026-09-22T15:49:18.737687+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/dimer_peak03_20260922/scheduler_submission_checkpoint.json",
+      "sha256": "829ccf4b5ea5f7904f191805c103afbf935364b6620000530d6080abc5cd42f8",
+      "authority": "repository_document",
+      "observed_at": "2026-09-22T15:49:18.737687+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/completed_review/normalization_evidence.json",
+      "sha256": "a26c297e706a877aee9ffbab8bdd6c4fdb4088d7c0d8019bb31dd4f6e1648c1b",
+      "authority": "repository_document",
+      "observed_at": "2026-09-22T15:49:18.737687+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/completed_review/path_review.json",
+      "sha256": "f79caadc3b23d156478a03399a12afb897d1d05646a0bdab1512ae3414c24808",
+      "authority": "repository_document",
+      "observed_at": "2026-09-22T15:49:18.737687+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/completed_review/candidate_triad_gate.json",
+      "sha256": "b51f9659e25f1153867334182aba81a06fca28b8b9b7984a37f455a5a2817c8b",
+      "authority": "repository_document",
+      "observed_at": "2026-09-22T15:49:18.737687+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "event_id": "task-int06-mid-dimer9795633-submitted-20260922",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "NEB9793467 completed and final periodic branch reviewed; user-authorized peak03 Dimer9795633 submitted, initial PEND.",
+  "payload": {
+    "objective": "Complete earlier IS-A to MID H surface migration through validated intermediate and TS evidence.",
+    "phase": "active",
+    "current_evidence": [
+      "VASP ordinary NEB9793467 DONE,102 steps; all electronic/required-accuracy/normal-completion checks passed.",
+      "Final geometry passed after integer in-plane lattice translations only; fixed drift0,max adjacent step0.285058A; visual/VTST checks complete.",
+      "Peak03 with neighbors02/04 selected for H50 surface migration INT06-to-MID. MODECAR H50 norm0.978090,fixed components0.",
+      "Dimer9795633 submitted via current hash-bound START_DIMER gate; first scheduler checkpoint PEND. 80ranks,no pilot,no GPU.",
+      "Project Dimer Fast,EDIFF1e-7,EDIFFG-0.02,SIGMA0.20,NSW300; excludesgknew0440.",
+      "Submission/input provenance registered; no accepted TS,barrier or training data."
+    ],
+    "one_executable_step": "Check Dimer9795633 scheduler,electronic convergence,maximum atomic force,curvature and DIMCAR residuals; do not duplicate or retry.",
+    "submission_boundary": "One user-authorized Dimer consumed by9795633. No automatic retry or frequency submission. Validated path data may later enter reviewed training preparation, not automatic GPU training.",
+    "done_when": [
+      "Obtain a validated INT06-to-MID migration TS from the reviewed new-path GPU or VASP coarse-NEB branch, then retain compatible barrier and strategy evidence."
+    ],
+    "constraints": [
+      "Same H50 moves; preserve SIGMA0.20 and bottom18Fe fixed.",
+      "Do not rerun MID-to-FS O-H work."
+    ],
+    "authoritative_references": [
+      "docs/reviews/int06_mid_dimer9795633_20260922.md",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/dimer_peak03_20260922/submission_record.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/dimer_peak03_20260922/execution_gate_decision.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/dimer_peak03_20260922/registry_receipt.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/dimer_peak03_20260922/scheduler_submission_checkpoint.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/completed_review/normalization_evidence.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/completed_review/path_review.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/completed_review/candidate_triad_gate.json"
+    ]
+  },
+  "supersedes": [
+    "task-int06-mid-direct-vasp9793467-submitted-20260921"
+  ]
+}
