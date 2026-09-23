@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-23T03:16:59.175270+00:00",
+  "recorded_at": "2026-09-23T03:16:59.175270+00:00",
+  "evidence": [
+    {
+      "locator": "docs/reviews/int06_mid_dimer9795943_lf_retry_20260923.md",
+      "sha256": "f80df1963459bac24229adf50fbab475280d86dfa071f8c304a21e63eabfc730",
+      "authority": "repository_document",
+      "observed_at": "2026-09-23T03:16:59.175270+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/dimer_peak03_lf_retry_20260923/submission_record.json",
+      "sha256": "d6f9ff1970d2ccfa9faf4873e0a4e00cd24d9f69c44f2018135710083fe6664f",
+      "authority": "repository_document",
+      "observed_at": "2026-09-23T03:16:59.175270+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/dimer_peak03_lf_retry_20260923/execution_gate_decision.json",
+      "sha256": "6864dd94c8ab24d1d5175be6b479d21fac069cd5c93c9a3789ed5bd7e16dc3ed",
+      "authority": "repository_document",
+      "observed_at": "2026-09-23T03:16:59.175270+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/dimer_peak03_lf_retry_20260923/registry_receipt.json",
+      "sha256": "210c45dcf12a2ea4359bf7701185456615a98ba15bd8a2201fb79af7d8d52e73",
+      "authority": "repository_document",
+      "observed_at": "2026-09-23T03:16:59.175270+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/dimer_peak03_lf_retry_20260923/scheduler_submission_checkpoint.json",
+      "sha256": "0a81fe34a178769a573f47203ecc4ced8de5a0459d265c9083f4c197e01edb1b",
+      "authority": "repository_document",
+      "observed_at": "2026-09-23T03:16:59.175270+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/dimer_peak03_lf_retry_20260923/lf_repair_verification.json",
+      "sha256": "35fce04cfff7003b6acf0712525a7a4440cbf0d5982e37bb44ceea4423a89b50",
+      "authority": "repository_document",
+      "observed_at": "2026-09-23T03:16:59.175270+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/dimer_peak03_lf_retry_20260923/source_job_exit.json",
+      "sha256": "b769b24f57059ac72df560221ad991d84092d41ad3f622614d07e1df4f15d53c",
+      "authority": "repository_document",
+      "observed_at": "2026-09-23T03:16:59.175270+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "event_id": "task-int06-mid-dimer9795943-lf-retry-20260923",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "9795633 launcher failed before VASP due to CRLF. User authorized LF-only repair;9795943 submitted,initial PEND.",
+  "payload": {
+    "objective": "Complete earlier IS-A to MID H surface migration through validated intermediate and TS evidence.",
+    "phase": "active",
+    "current_evidence": [
+      "NEB9793467 reviewed peak03 and neighbors02/04 remain the H50 migration parent.",
+      "Dimer9795633 EXIT before VASP: mixedCRLF script made Intel environment path include CR; no electronic or ionic steps.",
+      "Explicitly authorized replacement9795943 submitted; initial PEND. Only script CRLF-to-LF changed,9 other input/review hashes identical.",
+      "Local/remote bash-n passed; remote Intel environment file exists; current START_DIMER gate passed.",
+      "80ranks,Fast,EDIFF1e-7,EDIFFG-0.02,SIGMA0.20,NSW300 unchanged; failed directory preserved.",
+      "New submission and old EXIT provenance registered; no accepted TS or training data."
+    ],
+    "one_executable_step": "Check9795943 runtime launch and electronic startup,then Dimer force/curvature; no automatic retry.",
+    "submission_boundary": "User-authorized one LF-only retry consumed by9795943; no further retry or frequency submission authorized.",
+    "done_when": [
+      "Obtain a validated INT06-to-MID migration TS from the reviewed new-path GPU or VASP coarse-NEB branch, then retain compatible barrier and strategy evidence."
+    ],
+    "constraints": [
+      "Same H50 moves; preserve SIGMA0.20 and bottom18Fe fixed.",
+      "Do not rerun MID-to-FS O-H work."
+    ],
+    "authoritative_references": [
+      "docs/reviews/int06_mid_dimer9795943_lf_retry_20260923.md",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/dimer_peak03_lf_retry_20260923/submission_record.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/dimer_peak03_lf_retry_20260923/execution_gate_decision.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/dimer_peak03_lf_retry_20260923/registry_receipt.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/dimer_peak03_lf_retry_20260923/scheduler_submission_checkpoint.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/dimer_peak03_lf_retry_20260923/lf_repair_verification.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/dimer_peak03_lf_retry_20260923/source_job_exit.json"
+    ]
+  },
+  "supersedes": [
+    "task-int06-mid-dimer9795633-submitted-20260922"
+  ]
+}
