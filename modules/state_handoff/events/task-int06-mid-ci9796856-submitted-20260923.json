@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-23T14:36:57.127840+00:00",
+  "recorded_at": "2026-09-23T14:36:57.127840+00:00",
+  "evidence": [
+    {
+      "locator": "docs/reviews/int06_mid_ci_neb_20260923.md",
+      "sha256": "e699f5b196bcf30468342647f0509fdc268494432a73aa0a74d01b13ff7e6da6",
+      "authority": "repository_document",
+      "observed_at": "2026-09-23T14:36:57.127840+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ci_neb_20260923/submission_record.json",
+      "sha256": "d920b2ee21eb2d1411733d69805ab73d588b3365c7e1f90e1ba1c67780299411",
+      "authority": "repository_document",
+      "observed_at": "2026-09-23T14:36:57.127840+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ci_neb_20260923/execution_gate_decision.json",
+      "sha256": "a8380bb7c3ee499c1bfc340a585f8be62628ae1ce6233c5cd31a4c0760992b27",
+      "authority": "repository_document",
+      "observed_at": "2026-09-23T14:36:57.127840+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ci_neb_20260923/registry_receipt.json",
+      "sha256": "ce7e3cd7b0466d2b7a34695f91c02b380411547a84af4f30ecbd6823909b8ee5",
+      "authority": "repository_document",
+      "observed_at": "2026-09-23T14:36:57.127840+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ci_neb_20260923/scheduler_submission_checkpoint.json",
+      "sha256": "0750fdc212984a6aabe37da27245e888c7c6dea6f7363a39e5cfd67d1b3005ef",
+      "authority": "repository_document",
+      "observed_at": "2026-09-23T14:36:57.127840+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ci_neb_20260923/parent_ci_readiness.json",
+      "sha256": "a0db6621cda96ba6d1b658ee7810009c7858081b3c07d50b894a7db79b0e2b69",
+      "authority": "repository_document",
+      "observed_at": "2026-09-23T14:36:57.127840+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ci_neb_20260923/dimer_stop_confirmed.json",
+      "sha256": "794ed48b88fe70e2fd87bca1cb0869b31d8577586e88a4a3bded4f3fced58e9e",
+      "authority": "repository_document",
+      "observed_at": "2026-09-23T14:36:57.127840+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "event_id": "task-int06-mid-ci9796856-submitted-20260923",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "User cancelled Dimer9795943,confirmed EXIT; CI-NEB9796856 submitted from reviewed ordinary9793467 final path.",
+  "payload": {
+    "objective": "Complete earlier IS-A to MID H surface migration through validated intermediate and TS evidence.",
+    "phase": "active",
+    "current_evidence": [
+      "Dimer9795943 stopped through user-bound gate; EXIT confirmed. Repeated SCF nonconvergence; no accepted TS.",
+      "Ordinary9793467 normalized final path reused unchanged;7images,5internal; no unconverged Dimer geometry or restart.",
+      "Actual final5energy evaluations peak03 stable; XDATCAR drift/force/geometry CI-readiness passed; no thresholds changed.",
+      "CI-NEB9796856 submitted via ENABLE_CI_NEB; see saved scheduler checkpoint.80ranks,no pilot.",
+      "Fast,SIGMA0.20,EDIFF1e-5,EDIFFG-0.02,LCLIMBtrue,IOPT1,NPAR4,NSW300; pureLF script,excludegknew0440.",
+      "Submission and cancelled Dimer provenance registered; no accepted TS/barrier."
+    ],
+    "one_executable_step": "Monitor CI-NEB9796856 electronic and projected/atomic-force progress across01-05; verify runtime before interpreting convergence.",
+    "submission_boundary": "One user-authorized method-switch submission consumed by9796856. No automatic retry,parameter changes or additional frequency submission.",
+    "done_when": [
+      "Obtain a validated INT06-to-MID migration TS from the reviewed new-path GPU or VASP coarse-NEB branch, then retain compatible barrier and strategy evidence."
+    ],
+    "constraints": [
+      "Same H50 moves; preserve SIGMA0.20 and bottom18Fe fixed.",
+      "Do not rerun MID-to-FS O-H work."
+    ],
+    "authoritative_references": [
+      "docs/reviews/int06_mid_ci_neb_20260923.md",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ci_neb_20260923/submission_record.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ci_neb_20260923/execution_gate_decision.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ci_neb_20260923/registry_receipt.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ci_neb_20260923/scheduler_submission_checkpoint.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ci_neb_20260923/parent_ci_readiness.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ci_neb_20260923/dimer_stop_confirmed.json"
+    ]
+  },
+  "supersedes": [
+    "task-int06-mid-dimer9795943-lf-retry-20260923"
+  ]
+}
