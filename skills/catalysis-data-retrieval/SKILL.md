@@ -48,6 +48,12 @@ this skill implements that route and does not override its owning configs.
 - Require compatible local relaxation and final statics for every reportable
   energy. External values may guide ordering but cannot validate local energy.
 
+For phase-aware iron-FT computation, competing mechanistic models, and
+cross-paper visual maps with source-figure references, consult
+`references/iron-fts-computational-methodology.md`. It is a literature
+synthesis only: it does not override the whitelist-first gate, locked local
+method protocols, or local validation requirements.
+
 ## Access
 
 Use direct official APIs/downloads where available. No MCP server is required by this skill. Materials Project may require `MP_API_KEY`; other credentials and unverified endpoints remain `Needs confirmation`. Read `references/sources.yaml` for current connector status.
