@@ -1,12 +1,12 @@
 # Iron-Based Fischer–Tropsch Computational Literature: Method Reference
 
 **Reviewed:** 2026-09-25
-**Scope:** 40 DOI-distinct primary computational, surface-science, kinetic,
+**Scope:** 50 DOI-distinct primary computational, surface-science, kinetic,
 operando, isotope-tracing, and combined theory/experiment papers relevant to
 iron and iron-carbide Fischer–Tropsch synthesis (FTS): the original 20-paper
-mechanism set, seven evidence-bridge papers, and 13 phase/condition/defect
-extensions. This
-is a source-linked methodology reference, not an accepted local calculation
+mechanism set, seven evidence-bridge papers, 13 phase/condition/defect
+extensions, and ten promoter/size/carbon-pool extensions. This is a
+source-linked methodology reference, not an accepted local calculation
 result, parameter set, or claim that one mechanism is settled. The summaries
 are deliberately limited to publisher metadata/abstracts and checked article
 text where accessible; they are not a substitute for reading the full papers
@@ -56,6 +56,16 @@ and supporting information.
 | “Fischer–Tropsch synthesis and water gas shift kinetics for a precipitated iron catalyst,” *Catalysis Today* **275** (2016), 49–58. [DOI](https://doi.org/10.1016/j.cattod.2016.01.006) | Fe–Si–K catalyst data over low/high CO conversion are fit to simultaneous FT/WGS kinetic forms; the authors test 26 models and report an improved description including CO₂ inhibition in their FTS model. | Treat CO₂, H₂O and conversion as kinetic covariates, not just gas products. Fitted H-assisted and formate route assignments remain mechanistic hypotheses, not uniquely observed steps. |
 | Xu et al., “Effects of surface hydrophobization on the phase evolution behavior of iron-based catalyst during Fischer–Tropsch synthesis,” *Nature Communications* **15** (2024), 7099. [DOI](https://doi.org/10.1038/s41467-024-51472-w) | In-situ XRD and CO+H₂O model exposures compare hydrophilic versus hydrophobic Fe–Mn/SiO₂-shell catalysts; water access and shell thickness alter Fe₅C₂-to-Fe₃O₄ evolution and FTS performance. | Model water-driven reoxidation as a competing state change; do not infer that a hydrophobic shell only changes an elementary barrier, because mass transfer and shell geometry also change. |
 | Qian et al., “Stabilized ε-Fe₂C catalyst with Mn tuning to suppress C₁ byproduct selectivity for high-temperature olefin synthesis,” *Nature Communications* **15** (2024), 5128. [DOI](https://doi.org/10.1038/s41467-024-49472-x) | Mn-modified ε-Fe₂C is studied through phase/FTS characterization, pulse experiments, ab-initio nanoreactor simulations and static DFT on ε-Fe₂C(001)/MnO models; the authors connect the interface with altered CO₂ and olefin pathways. | Keep measured products separate from computed interface mechanisms. Mn location/chemical state and the ε-Fe₂C(001) model cannot be silently transferred to other promoters, carbides or metallic Fe. |
+| “CO adsorption on potassium promoted Fe(110),” *Surface Science* **84** (1979), 295–314. [DOI](https://doi.org/10.1016/0039-6028(79)90139-0) | UPS, XPS, AES and flash desorption compare K-covered and clean Fe(110); the authors report changed molecular CO adsorption and a greater dissociation probability upon heating as K coverage increases. | Include promoter coverage and preparation in any K/Fe(110) comparison. A UHV thermal-desorption trend does not establish FTS turnover or transfer a K state to K₂O-promoted carbide. |
+| Curulla-Ferré et al., “A DFT Study of the Adsorption and Dissociation of CO on Sulfur-Precovered Fe(100),” *The Journal of Physical Chemistry B* **110** (2006), 13897–13904. [DOI](https://doi.org/10.1021/jp055979v) | DFT compares clean and S-p(2×2)-precovered Fe(100) CO adsorption/cleavage; the authors report that sulfur changes the dissociation thermochemistry from strongly exothermic to slightly endothermic in those models. | Treat sulfur coverage and geometry as explicit poisoning variables. An Fe(100) result is not a numerical correction to the project's Fe(110) energies or a universal poison threshold. |
+| Cheng et al., “Density Functional Theory Study of Iron and Cobalt Carbides for Fischer–Tropsch Synthesis,” *The Journal of Physical Chemistry C* **114** (2010), 1085–1093. [DOI](https://doi.org/10.1021/jp908482q) | First-principles comparison of selected Fe/Co carbide models considers CO cleavage, C₁ hydrogenation and C₁–C₁ coupling together; the authors attribute different modeled FT activity/methane tendencies to the carbide chemistry. | Benchmark a linked elementary-step network, not a single adsorption energy. Fe-versus-Co comparisons do not identify the operative Fe phase/facet or prove reactor selectivity. |
+| Ordomsky et al., “The role of carbon atoms of supported iron carbides in Fischer–Tropsch synthesis,” *Catalysis Science & Technology* **5** (2015), 1433–1437. [DOI](https://doi.org/10.1039/C4CY01631A) | Supported carbide hydrogenation/regeneration and isotope-labeling experiments are interpreted as participation of carbide carbon in chain-growth initiation in the investigated catalyst. | Track feed carbon separately from pre-existing carbide carbon and compare early product transients; do not infer that lattice carbon supplies every propagation step or dominates all FTS products. |
+| Cheng et al., “Pore size effects in high-temperature Fischer–Tropsch synthesis over supported iron catalysts,” *Journal of Catalysis* **328** (2015), 139–150. [DOI](https://doi.org/10.1016/j.jcat.2014.12.007) | Mesoporous silica pore-size series changes Fe particle size and ease of carburization; the authors report more χ-Fe₅C₂ formation and stronger FT performance in their larger-pore catalysts. | Support pore size, Fe crystallite size and phase fraction co-vary; do not label the reactor trend an isolated intrinsic pore-size or facet effect. |
+| Xie et al., “Size and Promoter Effects in Supported Iron Fischer–Tropsch Catalysts: Insights from Experiment and Theory,” *ACS Catalysis* **6** (2016), 3147–3157. [DOI](https://doi.org/10.1021/acscatal.6b00131) | Steady-state ¹²CO/¹³CO and H₂/D₂ transient experiments on 2–7 nm supported carbide particles, with/without Na+S, estimate reactive-carbon residence/coverage; DFT examines H adsorption on promoted carbide models. | Distinguish measured transients from fitted carbon pools and DFT promoter interpretation; particle size and promoter state must accompany any methane/olefin trend. |
+| “Water adsorption on the stoichiometric and defected Fe(110) surfaces,” *Surface Science* **668** (2018), 144–149. [DOI](https://doi.org/10.1016/j.susc.2017.10.030) | DFT/DFT-D3 compares molecular H₂O on pristine and vacancy-defected Fe(110); the modeled water favors sites at or beside a vacancy and does not dissociate spontaneously on the pristine model. | Add water/vacancy occupancy as a potential competing surface-state constraint. The study is adsorption modeling, not an FT water-removal rate or an operando oxidation observation. |
+| Wezendonk et al., “Controlled formation of iron carbides and their performance in Fischer–Tropsch synthesis,” *Journal of Catalysis* **362** (2018), 106–117. [DOI](https://doi.org/10.1016/j.jcat.2018.03.034) | MOF-derived Fe@C catalysts are activated to compare predominantly χ-Fe₅C₂ and ε′-Fe₂.₂C with in-situ Mössbauer and parallel FT tests; the paper reports similar surface-normalized activity but phase-dependent selectivity in its controlled comparison. | Do not turn phase-specific selectivity into a universal activity ranking. The authors explicitly do not identify atomistic active sites on the dynamic carbide surfaces. |
+| Chakrabarty et al., “Elucidating the role of extended surface defects at Fe surfaces on CO adsorption and dissociation,” *Applied Surface Science* **491** (2019), 792–798. [DOI](https://doi.org/10.1016/j.apsusc.2019.05.278) | DFT and ReaxFF molecular dynamics compare Fe surface vacancy clusters/grain-boundary topologies and report easier CO adsorption/cleavage in their defect models. | This expands the defect hypothesis beyond isolated Fe(110) vacancies, but its principal application is metal dusting; ReaxFF predictions require domain-specific validation before FTS use. |
+| Wen et al., “Catalytic Behavior and In Situ X-Ray Diffraction of Promoted Iron Catalysts for Fischer–Tropsch Synthesis,” *Chemie Ingenieur Technik* **94** (2022), 1756–1764. [DOI](https://doi.org/10.1002/cite.202200056) | In-situ XRD follows Fe–Cu–K catalysts with ZnO, SiO₂ or Al₂O₃ during reduction and 220 °C/9 bar FTS; the paper reports changes in ε-Fe₂C/χ-Fe₅C₂ trajectories and links phase proportions with product/rate trends in its catalyst series. | Structural promoter, residual FeAl₂O₄, phase fraction and conversion co-vary. Its inferred ε-versus-χ ranking is not interchangeable with phase-isolated studies at different conditions. |
 
 Publisher metadata and abstracts were checked against journal records and DOI
 records; article text or an author/institutional paper was used where available.
@@ -63,7 +73,10 @@ Chang et al. and van der Laan & Beenackers were checked at publisher-abstract
 level only; Wu et al. was checked against the publisher article summary. The
 new Fe(110) adsorption, defect, CO₂-feed, genesis and FT/WGS kinetic entries
 were likewise summarized at publisher abstract/highlight level where full text
-was unavailable. Do not
+was unavailable. The new K/Fe(110), sulfur/Fe(100), carbide DFT, pore-size,
+water/Fe(110) and extended-defect entries are also bounded by publisher
+abstracts/highlights; the RSC carbon-pool and Wiley phase-evolution records
+were checked against publisher article text. Do not
 read additional numerical, figure-specific or site-specific claims into those
 abstract-level records. This reference has not independently reprocessed every
 supporting-information file or reproduced the published calculations.
@@ -104,15 +117,22 @@ consensus.
    then ask whether competing microscopic accounts are distinguishable at
    reactor level. These are complementary evidence tiers, not a chronological
    proof that one surface mechanism is correct.
+6. **Promoter, size and carbon-pool controls (1979–2022).** K/S-modified Fe
+   surfaces and Na/S-promoted carbide particles separate electronic/site effects
+   from preparation-dependent particle populations. Pore-size series and
+   controlled carbide formation test whether phase, particle size and support
+   can be disentangled. Isotope transients address the carbon pool directly;
+   their fitted residence times and a DFT site model are not the same type of
+   evidence.
 
 ## Structural model map
 
-| Model family represented here | Examples in the 40-paper set | What must remain explicit |
+| Model family represented here | Examples in the 50-paper set | What must remain explicit |
 |---|---|---|
-| Metallic bcc Fe | Fe(100), stepped Fe(710); pristine, CO-covered and vacancy-defected Fe(110); carbon-covered Fe(100)/(110)/(210) | Facet/step/defect topology, surface carbon coverage, H/CO coadsorption, and whether the model is clean, precovered or carburized. |
+| Metallic bcc Fe | Fe(100), stepped Fe(710); pristine, K-covered, S-covered, CO-covered and vacancy-defected Fe(110)/(100); carbon-covered Fe(100)/(110)/(210) | Facet/step/defect topology, promoter/poison species and coverage, surface carbon, H/CO/H₂O coadsorption, and whether the model is clean, precovered or carburized. |
 | Hägg carbide χ-Fe₅C₂ | (001), (010), (100), (110), (111), (221), (510), and other terminations | Bulk phase is not enough: specify Miller index, termination, surface/interstitial carbon, vacancy pattern, reconstruction and promoter placement. |
 | Other iron carbides | ε-Fe₂C(111)/(1̅21), θ-Fe₃C(111), hcp-Fe₇C₃(211), and reconstructed Fe₃C/Fe₇C₃ facets | Crystal structure, carbon coordination/topology, exposed surface composition and phase-specific conditions; do not merge their energies with χ-Fe₅C₂. |
-| Promoted carbide models | K₂O/χ-Fe₅C₂, MnO/ε-Fe₂C(001) and promoted Fe-carbide catalyst studies | Promoter species and chemical state, exact position/distance to active site, loading, support/model boundary, and whether evidence is computational or experimental. |
+| Promoted carbide models | K₂O/χ-Fe₅C₂, MnO/ε-Fe₂C(001), Na₂S/Fe₅C₂ and promoted Fe-carbide catalyst studies | Promoter species and chemical state, exact position/distance to active site, loading, support/model boundary, and whether evidence is computational or experimental. |
 | Supported/encapsulated Fe carbide | Fe carbide in porous carbon, ε-Fe₂C@graphene and hydrophobic Fe–Mn/SiO₂-shell catalysts | Particle size, confinement, water access, diffusion, phase stability and time-on-stream; a free slab cannot represent these together. |
 
 For an actual calculation plan, the minimum comparison unit should therefore be
@@ -181,7 +201,26 @@ flowchart TD
     F --> G[Microkinetics or kinetic Monte Carlo<br/>only with declared event/rate assumptions]
     G --> H[Compare against matched kinetic / operando evidence]
     H -. update structural constraints .-> A
+    I[Isotope transients and operando phase evolution<br/>carbon pools, residence times, time on stream] -. independent constraints .-> H
 ```
+
+### 4. Why catalyst formulation cannot be collapsed into a single slab label
+
+```mermaid
+flowchart LR
+    F[Formulation and treatment<br/>support pore size, Fe loading, K/S/Na,<br/>reduction and carburization] --> P[Measured state<br/>particle size, carbide fraction,<br/>surface carbon/poison coverage]
+    F --> T[Transport and exposure<br/>pore diffusion, water access,<br/>time on stream]
+    P --> O[Measured FT observables<br/>rate, CO2, methane, olefins, C5+]
+    T --> O
+    P --> M[Candidate DFT surface models<br/>phase, facet, vacancy, promoter site]
+    M -. predicts conditional steps .-> O
+    X[Isotope-switch transients] -. constrains carbon-pool assignments .-> M
+```
+
+This is a newly drawn **confounding map**, not an article figure or a causal
+estimate. The pore-size, promoter, controlled-carbide and transient studies
+alter more than one node at once. A surface-normalized rate or isotope-pool
+fit cannot alone certify the model at `M` as the unique working site.
 
 ### Selected original figure atlas
 
@@ -200,6 +239,7 @@ flowchart TD
 | Fig. 4a and Table 1: Fe-loading stability/activity and phase comparison for graphene-confined ε-Fe₂C | Separates a confined-particle experimental trend from the article's DFT chemical-potential and interface-stability analysis; the support is an explicit model variable. | [Lyu et al., Nature Communications 2020](https://www.nature.com/articles/s41467-020-20068-5) |
 | Figs. 2–3: CO/H₂O exposure sequence and in-situ Fe₅C₂/Fe₃O₄ diffraction trends | Matched hydrophilic/hydrophobic shell comparison directly addresses water access and carbide reoxidation under the paper's model-gas conditions. Do not mistake the CO+H₂O challenge for full FTS. | [Xu et al., Nature Communications 2024](https://www.nature.com/articles/s41467-024-51472-w) |
 | Fig. 5: simulated MnO/ε-Fe₂C(001) reaction-network and oxygen-removal comparisons | Model-generated pathways connect promoter/interface placement to candidate CO₂-forming routes; they do not by themselves establish the measured product mechanism. | [Qian et al., Nature Communications 2024](https://www.nature.com/articles/s41467-024-49472-x) |
+| Fig. 4 and Fig. 5: in-situ phase fractions and FTS rates of Fe–Cu–K catalysts with ZnO/SiO₂/Al₂O₃ promoters | Fig. 4 tracks Rietveld-derived α-Fe, ε-Fe₂C, χ-Fe₅C₂ (and persistent FeAl₂O₄ where present); Fig. 5 gives reactor rates for the same formulations under the paper's 220 °C, 9 bar test. A cross-catalyst correlation does not isolate the intrinsic activity of one carbide phase. | [Wen et al., Chemie Ingenieur Technik 2022](https://onlinelibrary.wiley.com/doi/10.1002/cite.202200056) |
 
 The figure numbers/captions above were checked against publisher-hosted article
 text/PDF records. The remaining papers are linked in the literature matrix but
@@ -250,6 +290,30 @@ The first two rows group two papers each; the remaining nine rows each
 describe one, for **13 DOI-distinct additions**. Their numerical results are
 not imported into the local calculation registry.
 
+## Promoter, size and carbon-pool reading cards: ten additions
+
+These ten papers supply *comparators* to the earlier Fe(110) and carbide
+mechanism set. Publisher abstracts/highlights support the concise statements
+below; only the explicitly indexed Wiley figures above were verified at
+figure-caption level for this addition. Missing graph numbers are intentionally
+not guessed.
+
+| Source | Defined study and evidence type | Methodological question to retain | Non-transferable or unresolved boundary |
+|---|---|---|---|
+| K-promoted Fe(110), 1979 | UHV Fe(110) with varying K; UPS/XPS/AES and flash desorption of CO. | Does adding K alter CO coverage, bonding and thermal cleavage on a *metallic* site? | K/Fe(110) is neither K₂O/χ-Fe₅C₂ nor a reactor-condition measurement. |
+| Curulla-Ferré et al. 2006 | DFT on clean versus S-p(2×2)-covered Fe(100). | Could an adsorbed poison change both CO site availability and cleavage thermochemistry? | Explicit Fe(100) S arrangement; cannot supply an Fe(110) poisoning correction. |
+| Cheng et al. 2010 | Comparative first-principles Fe/Co carbide elementary-step network. | Do CO cleavage, C₁ hydrogenation and C–C coupling lead to a coherent activity/selectivity hypothesis? | Modeled metal/carbide trends are not direct product-rate observations or phase identification. |
+| Ordomsky et al. 2015 | Supported Fe-carbide hydrogenation/regeneration and isotope tracing. | Can old carbide C appear in an initial chain-growth event? | The authors' assigned initiation contribution is not proof that lattice C dominates steady-state propagation. |
+| Cheng et al. 2015 pore-size series | Silica-supported Fe with varied pore size; particle/phase characterization and high-temperature FTS. | Does a support change carburization and product distribution through particle size and transport together? | Pore diameter, Fe crystallite size and carbide fraction were not independently fixed. |
+| Xie et al. 2016 | 2–7 nm supported carbide, with/without Na+S; ¹²CO/¹³CO and H₂/D₂ steady-state transient analysis plus DFT. | Are reactive-carbon residence/coverage and H adsorption sensitive to size and promoter state? | Fitted carbon pools and calculated Na₂S/Fe₅C₂ H sites are not direct images of every turnover site. |
+| Fe(110) water adsorption, 2018 | Clean/vacancy Fe(110) DFT and DFT-D3 molecular-water adsorption. | Should a vacancy be preoccupied by H₂O before testing CO/O/H pathways? | Static molecular adsorption does not determine high-pressure coverage, WGS, or water-driven reoxidation. |
+| Wezendonk et al. 2018 | Same MOF-derived Fe@C precursor, two targeted carbide-rich preparations, in-situ Mössbauer and parallel LTFT testing. | Can phase-specific rates and selectivity be compared with controlled precursor/particle context? | Similar surface-normalized rates in this comparison do not negate different rankings measured on other supports/conditions. |
+| Chakrabarty et al. 2019 | DFT plus ReaxFF-MD of vacancy clusters/grain boundaries on Fe, developed for metal dusting. | Could extended defects change CO splitting beyond an isolated vacancy? | Corrosion-oriented force-field simulations are candidate structural ideas, not validated FTS kinetics. |
+| Wen et al. 2022 | Fe–Cu–K with ZnO/SiO₂/Al₂O₃; in-situ XRD and fixed-bed FTS at 220 °C/9 bar. | How do structural promoters alter phase evolution and reactor output together? | Cross-formulation phase–rate correlations retain possible support, residual-spinel and conversion confounding. |
+
+The ten additions contribute exactly ten new DOIs. No external numerical
+energy or rate is registered as a local computational result.
+
 ### Cross-paper questions to preserve as conflicts, not resolve by citation count
 
 1. **What is the working surface?** Metallic Fe(110) is an appropriate *defined
@@ -272,6 +336,14 @@ not imported into the local calculation registry.
    locator. A cropped figure or a redrawn pathway is not independently verified
    evidence. Do not digitize numerical values without axes, uncertainty and
    source-condition review.
+5. **Does ε-carbide have a uniquely higher intrinsic activity?** The controlled
+   Fe@C χ-versus-ε′ comparison reports similar surface-normalized rates,
+   whereas the promoted Fe–Cu–K in-situ XRD study associates higher ε fraction
+   with higher rates in its catalyst series. They differ in carbide variant,
+   support/promoters, phase quantification and conditions. Preserve both as
+   scoped observations/inferences; do not settle the ranking by averaging or
+   citation count. The same caution applies to low-CO₂ ε(′)-carbide behavior
+   versus CO₂ trends in other promoted formulations.
 
 ## Methodology synthesis for future iron-FT studies
 
