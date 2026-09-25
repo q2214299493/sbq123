@@ -55,7 +55,7 @@ Tasks are ordered by priority and should be handled one per Codex thread.
 8. **P3 - Implement baseline mean-field MKM**
    Done when steady-state coverages, TOF, selectivity, site balance, and DRC are reproducible. Blocked until TS validation, kinetic schema, thermochemistry, and reaction-network tasks are complete.
 9. **P3 - Decide whether coverage-self-consistent MKM is required**
-   Done when coverage dependence is evidenced and interaction parameters/ranges are defined, or the module is explicitly deemed unnecessary.
+   After the Fe(110) C₂H₂O baseline MKM, assess whether major adsorbate coverages materially change accepted intermediate/TS free energies and pathway ranking. Use Wang et al., *J. Catal.* 439 (2024) 115786, DOI:10.1016/j.jcat.2024.115786, as a methodological reference for self- and cross-interactions and coverage self-consistency, not as a source of Fe parameters. Done when coverage dependence is evidenced and interaction parameters/ranges are defined, or the module is explicitly deemed unnecessary.
 10. **P3 - Build CATKINAS input/export templates**
    Done when validated kinetic-data records can generate traceable CATKINAS `INPUT_*` files for single/curve/map runs, with no hand-entered energies or missing provenance.
 11. **P3 - Implement surface-reaction KMC if spatial effects matter**
