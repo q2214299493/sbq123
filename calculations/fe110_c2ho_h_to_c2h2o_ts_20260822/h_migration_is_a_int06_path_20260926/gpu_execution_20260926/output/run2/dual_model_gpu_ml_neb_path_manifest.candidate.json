@@ -1,0 +1,910 @@
+{
+  "schema_version": 1,
+  "document_kind": "dual_model_gpu_ml_neb_path_manifest",
+  "status": "needs_work_review",
+  "result_class": "predicted_path_candidate_only",
+  "run_kind": "production_gpu_path_candidate",
+  "source_request": {
+    "path": "../../request.json",
+    "sha256": "6011d0a9b1a0430e3b273b9180f2d6484683589a81def2d168418696e8bf4d32"
+  },
+  "models": {
+    "primary": {
+      "backend": "matris",
+      "identifier": "MatRIS_c16f569_feCOH",
+      "checkpoint_sha256": "8e53cfb0e54aec7aa918cefae3ce7b4a9488d87231626f7ae4bc98fdebdbeb49",
+      "remote_checkpoint_path": "/home/sbq/sbq/matris_energy_force_finetune_c2hoh_retention_candidate2_20260902/results/job_1506/epoch_checkpoints/epoch_006.pth.tar"
+    },
+    "secondary": {
+      "backend": "aqcat25",
+      "identifier": "AQCat25 demo_single model.pt",
+      "checkpoint_sha256": "e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50",
+      "remote_checkpoint_path": "/home/sbq/sbq/aqcat25/demo_single/model.pt"
+    }
+  },
+  "runner_sha256": "e08f8c984214177ffa2bb0afbe2dd1bbc5f6a1dd847a3ac6fa322c551e629c59",
+  "reaction": {
+    "reaction_id": "fe110_c2ho_h_migration_ISA9725473_to_INT06_9748648",
+    "contract_sha256": "845c69d6804118448ee94ac62be67d476c072cb62a31924e215f50e20cc5482e",
+    "atom_map_sha256": "ef5b3d3d64884fde2a673dd35bef48a2a965c026edb6a8dd1c4eb22b100ae157",
+    "compatibility_sha256": "4ef0c782834fd07afca2621a5235bb67c2ea913bd650b93123c21538c35c165d",
+    "reaction_coordinates": [
+      {
+        "name": "H50_to_arriving_Fe38",
+        "kind": "distance",
+        "atoms": [
+          49,
+          37
+        ],
+        "important_interval_A": [
+          1.8067732026191474,
+          3.313119570535061
+        ],
+        "role": "primary"
+      }
+    ],
+    "indexed_bond_changes": []
+  },
+  "optimizer": {
+    "restrained_preconditioning": {
+      "converged": true,
+      "steps": 0
+    },
+    "constraint_release": {
+      "temporary_constraints_applied": [],
+      "stage_snapshots": [
+        {
+          "stage": "unrestrained_seed_validated",
+          "manifest_path": "stage_snapshots/unrestrained_seed_validated/snapshot_manifest.json",
+          "manifest_sha256": "fc23c61319fcecd9edf8fdf7fb25c3a9885943b43f8091c696569856e003fec2",
+          "converged": true,
+          "steps": 0
+        }
+      ],
+      "staged_release": [],
+      "nonconverged_stage_action": "not_applicable",
+      "constraint_target_reference": "prevalidated_unrestrained_seed",
+      "reaction_coordinate_redistributions": [],
+      "released_before_ordinary_ml_neb": true,
+      "post_release_fixed_atom_indices_zero_based": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ]
+      ],
+      "post_release_internal_coordinate_constraint_count": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "post_release_position_restraint_count": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "ordinary_ml_neb": {
+      "converged": true,
+      "steps": 19
+    },
+    "ml_ci_neb": {
+      "requested": "off",
+      "readiness_passed": false,
+      "readiness_reasons": [
+        "strict_internal_peak_count_3"
+      ],
+      "ran": false
+    },
+    "final_stage": "ordinary_ml_neb",
+    "final_converged": true,
+    "final_steps": 19
+  },
+  "images": [
+    {
+      "image": "00",
+      "structure_path": "images/00/POSCAR",
+      "structure_sha256": "5d86ef906c002415a0e03030936f1cc32f2ca0782c0d5d9180f4ea42c01cf178",
+      "predicted_energy_eV": -404.02212142944336,
+      "predicted_physical_force_max_eVA": 0.3009932181466801,
+      "projected_neb_force_max_eVA": 0.0,
+      "spring_force_max_eVA": 0.0,
+      "reaction_coordinate_value": 0.0,
+      "key_bond_distances_A": {},
+      "minimum_pair_distance_A": 1.0998614787279488,
+      "model_disagreement": {
+        "movable_force_vector_rmse_eVA": 0.06974397366610713,
+        "movable_force_difference_max_norm_eVA": 0.42074657036283625
+      },
+      "model_disagreement_reason": "two_distinct_models_exact_same_structure",
+      "uncertainty_status": "sampling_score_not_calibrated_uncertainty"
+    },
+    {
+      "image": "01",
+      "structure_path": "images/01/POSCAR",
+      "structure_sha256": "7810d7e71cca28d149875c98bfae54ff2034f01b945c39fac5874ea54ebad33e",
+      "predicted_energy_eV": -403.99460792541504,
+      "predicted_physical_force_max_eVA": 0.1246650033386698,
+      "projected_neb_force_max_eVA": 0.04531737325623385,
+      "spring_force_max_eVA": 0.0070072869688897425,
+      "reaction_coordinate_value": 0.0,
+      "key_bond_distances_A": {},
+      "minimum_pair_distance_A": 1.1019509096216962,
+      "model_disagreement": {
+        "movable_force_vector_rmse_eVA": 0.05966080628330557,
+        "movable_force_difference_max_norm_eVA": 0.3597765237755985
+      },
+      "model_disagreement_reason": "two_distinct_models_exact_same_structure",
+      "uncertainty_status": "sampling_score_not_calibrated_uncertainty"
+    },
+    {
+      "image": "02",
+      "structure_path": "images/02/POSCAR",
+      "structure_sha256": "8e564c871bb86f4a37ba39076c7b9d21f793f2d5f78deeca5a4c189e596272ef",
+      "predicted_energy_eV": -404.02073860168457,
+      "predicted_physical_force_max_eVA": 0.2241628863113729,
+      "projected_neb_force_max_eVA": 0.03596455668381618,
+      "spring_force_max_eVA": 0.007436817055149064,
+      "reaction_coordinate_value": 0.0,
+      "key_bond_distances_A": {},
+      "minimum_pair_distance_A": 1.1016661410798922,
+      "model_disagreement": {
+        "movable_force_vector_rmse_eVA": 0.06380588949308935,
+        "movable_force_difference_max_norm_eVA": 0.36492818134901445
+      },
+      "model_disagreement_reason": "two_distinct_models_exact_same_structure",
+      "uncertainty_status": "sampling_score_not_calibrated_uncertainty"
+    },
+    {
+      "image": "03",
+      "structure_path": "images/03/POSCAR",
+      "structure_sha256": "0f2583792e4b712ff99f37232a0c8d00389a5ecc517a6aadf43d35b9f0808ca5",
+      "predicted_energy_eV": -404.0415287017822,
+      "predicted_physical_force_max_eVA": 0.02964061497605182,
+      "projected_neb_force_max_eVA": 0.030327529482838914,
+      "spring_force_max_eVA": 0.0072023100137797915,
+      "reaction_coordinate_value": 0.0,
+      "key_bond_distances_A": {},
+      "minimum_pair_distance_A": 1.1018031874456269,
+      "model_disagreement": {
+        "movable_force_vector_rmse_eVA": 0.06081909780356537,
+        "movable_force_difference_max_norm_eVA": 0.3478826034210005
+      },
+      "model_disagreement_reason": "two_distinct_models_exact_same_structure",
+      "uncertainty_status": "sampling_score_not_calibrated_uncertainty"
+    },
+    {
+      "image": "04",
+      "structure_path": "images/04/POSCAR",
+      "structure_sha256": "3d9c967a3c0462e1c47f55a6fa8095e1f12d0fe40725db026e57e077ef31a1ed",
+      "predicted_energy_eV": -403.97067070007324,
+      "predicted_physical_force_max_eVA": 0.3268624207068823,
+      "projected_neb_force_max_eVA": 0.04272942823785595,
+      "spring_force_max_eVA": 0.003218340087068987,
+      "reaction_coordinate_value": 0.0,
+      "key_bond_distances_A": {},
+      "minimum_pair_distance_A": 1.1020982241262167,
+      "model_disagreement": {
+        "movable_force_vector_rmse_eVA": 0.06501871490923718,
+        "movable_force_difference_max_norm_eVA": 0.36232802053924723
+      },
+      "model_disagreement_reason": "two_distinct_models_exact_same_structure",
+      "uncertainty_status": "sampling_score_not_calibrated_uncertainty"
+    },
+    {
+      "image": "05",
+      "structure_path": "images/05/POSCAR",
+      "structure_sha256": "04006441c9734610cac56849c4e1fd71fadcaab8fb0e0ddb5e03882248cb9d70",
+      "predicted_energy_eV": -403.8899898529053,
+      "predicted_physical_force_max_eVA": 0.14153036210656308,
+      "projected_neb_force_max_eVA": 0.047181367083075604,
+      "spring_force_max_eVA": 0.010655976824860644,
+      "reaction_coordinate_value": 0.0,
+      "key_bond_distances_A": {},
+      "minimum_pair_distance_A": 1.1025057844063466,
+      "model_disagreement": {
+        "movable_force_vector_rmse_eVA": 0.06538788057224755,
+        "movable_force_difference_max_norm_eVA": 0.3699588972400165
+      },
+      "model_disagreement_reason": "two_distinct_models_exact_same_structure",
+      "uncertainty_status": "sampling_score_not_calibrated_uncertainty"
+    },
+    {
+      "image": "06",
+      "structure_path": "images/06/POSCAR",
+      "structure_sha256": "a323c4a030890330156386165001c59f92a90497bbd8f18ea007e560b68c46b1",
+      "predicted_energy_eV": -403.91106605529785,
+      "predicted_physical_force_max_eVA": 0.10361938752932862,
+      "projected_neb_force_max_eVA": 0.043422534452903554,
+      "spring_force_max_eVA": 0.029146651520896006,
+      "reaction_coordinate_value": 0.0,
+      "key_bond_distances_A": {},
+      "minimum_pair_distance_A": 1.102080622844986,
+      "model_disagreement": {
+        "movable_force_vector_rmse_eVA": 0.06375403574438257,
+        "movable_force_difference_max_norm_eVA": 0.3594500366626949
+      },
+      "model_disagreement_reason": "two_distinct_models_exact_same_structure",
+      "uncertainty_status": "sampling_score_not_calibrated_uncertainty"
+    },
+    {
+      "image": "07",
+      "structure_path": "images/07/POSCAR",
+      "structure_sha256": "255ab376616aacf70f1ca1e9d279626c07e08cc65017e00cc65db64c6a5f063b",
+      "predicted_energy_eV": -403.98950576782227,
+      "predicted_physical_force_max_eVA": 0.3356467079311398,
+      "projected_neb_force_max_eVA": 0.06112016702322531,
+      "spring_force_max_eVA": 0.057877047645229045,
+      "reaction_coordinate_value": 0.0,
+      "key_bond_distances_A": {},
+      "minimum_pair_distance_A": 1.1018711698100898,
+      "model_disagreement": {
+        "movable_force_vector_rmse_eVA": 0.06684975137028476,
+        "movable_force_difference_max_norm_eVA": 0.37011692966141224
+      },
+      "model_disagreement_reason": "two_distinct_models_exact_same_structure",
+      "uncertainty_status": "sampling_score_not_calibrated_uncertainty"
+    },
+    {
+      "image": "08",
+      "structure_path": "images/08/POSCAR",
+      "structure_sha256": "8a36b05cd2a01c74e65b777916a2e9af3bba6508595b00e5ac1fd36e1a7e3424",
+      "predicted_energy_eV": -404.0849208831787,
+      "predicted_physical_force_max_eVA": 0.1403404689468285,
+      "projected_neb_force_max_eVA": 0.08158462218634933,
+      "spring_force_max_eVA": 0.01481868304683657,
+      "reaction_coordinate_value": 0.0,
+      "key_bond_distances_A": {},
+      "minimum_pair_distance_A": 1.1010376888839812,
+      "model_disagreement": {
+        "movable_force_vector_rmse_eVA": 0.06557378428484537,
+        "movable_force_difference_max_norm_eVA": 0.3772911763289993
+      },
+      "model_disagreement_reason": "two_distinct_models_exact_same_structure",
+      "uncertainty_status": "sampling_score_not_calibrated_uncertainty"
+    },
+    {
+      "image": "09",
+      "structure_path": "images/09/POSCAR",
+      "structure_sha256": "b0be5d67733282ed8253128dbdf5d44991438eb140a7dd4b6d04bdccc436dd67",
+      "predicted_energy_eV": -404.0232181549072,
+      "predicted_physical_force_max_eVA": 0.05861057140779456,
+      "projected_neb_force_max_eVA": 0.06196582154507055,
+      "spring_force_max_eVA": 0.017330032953159772,
+      "reaction_coordinate_value": 0.0,
+      "key_bond_distances_A": {},
+      "minimum_pair_distance_A": 1.1008214200469262,
+      "model_disagreement": {
+        "movable_force_vector_rmse_eVA": 0.06282371273205471,
+        "movable_force_difference_max_norm_eVA": 0.3718220117058639
+      },
+      "model_disagreement_reason": "two_distinct_models_exact_same_structure",
+      "uncertainty_status": "sampling_score_not_calibrated_uncertainty"
+    },
+    {
+      "image": "10",
+      "structure_path": "images/10/POSCAR",
+      "structure_sha256": "b3db94166230f5c3888d70011d93f6d4b2ba72c1b2374f9686802b2ffd62fdff",
+      "predicted_energy_eV": -404.0441036224365,
+      "predicted_physical_force_max_eVA": 0.3063304792561748,
+      "projected_neb_force_max_eVA": 0.0,
+      "spring_force_max_eVA": 0.0,
+      "reaction_coordinate_value": 0.0,
+      "key_bond_distances_A": {},
+      "minimum_pair_distance_A": 1.0990756067577316,
+      "model_disagreement": {
+        "movable_force_vector_rmse_eVA": 0.06815996950802537,
+        "movable_force_difference_max_norm_eVA": 0.4270696255395791
+      },
+      "model_disagreement_reason": "two_distinct_models_exact_same_structure",
+      "uncertainty_status": "sampling_score_not_calibrated_uncertainty"
+    }
+  ],
+  "adjacent_rmsd_A": [
+    0.06454789478516282,
+    0.06328710113367347,
+    0.061940638746425684,
+    0.06062708510675636,
+    0.0600522870213737,
+    0.061955715225182936,
+    0.0671636270555866,
+    0.07751085790234394,
+    0.08018125559835564,
+    0.07704627004948418
+  ],
+  "geometry_guards": {
+    "preserved_bonds": [
+      {
+        "name": "C1_C2",
+        "atoms_zero_based": [
+          45,
+          46
+        ],
+        "distances_A": [
+          1.4161464335356349,
+          1.420279171362472,
+          1.4190403185743554,
+          1.4181613881521218,
+          1.4181046900055827,
+          1.417671735939198,
+          1.4169929905756211,
+          1.4159499018334227,
+          1.4158673802854858,
+          1.4159458484984724,
+          1.4108502248310715
+        ],
+        "minimum_A": 1.4108502248310715,
+        "maximum_A": 1.420279171362472,
+        "assessment_mode": "graded_warning",
+        "accepted_window_A": [
+          1.25,
+          1.6
+        ],
+        "accepted_window_passed": true,
+        "hard_window_A": [
+          1.1,
+          1.9
+        ],
+        "hard_passed": true,
+        "level": "pass",
+        "passed": true
+      },
+      {
+        "name": "C2_O",
+        "atoms_zero_based": [
+          46,
+          47
+        ],
+        "distances_A": [
+          1.2882029601662837,
+          1.2829613631299097,
+          1.2841439816013538,
+          1.2855023754606532,
+          1.2856418015157198,
+          1.2848420098560107,
+          1.2841540760590755,
+          1.2844860652742864,
+          1.2849953408803838,
+          1.285427077331835,
+          1.291423843418185
+        ],
+        "minimum_A": 1.2829613631299097,
+        "maximum_A": 1.291423843418185,
+        "assessment_mode": "graded_warning",
+        "accepted_window_A": [
+          1.15,
+          1.55
+        ],
+        "accepted_window_passed": true,
+        "hard_window_A": [
+          0.9,
+          2.0
+        ],
+        "hard_passed": true,
+        "level": "pass",
+        "passed": true
+      },
+      {
+        "name": "C1_H49_original",
+        "atoms_zero_based": [
+          45,
+          48
+        ],
+        "distances_A": [
+          1.0998614787279488,
+          1.1019509096216962,
+          1.101666141079892,
+          1.1018031874456269,
+          1.1020982241262167,
+          1.1025057844063466,
+          1.102080622844986,
+          1.1018711698100898,
+          1.1010376888839812,
+          1.1008214200469262,
+          1.0990756067577316
+        ],
+        "minimum_A": 1.0990756067577316,
+        "maximum_A": 1.1025057844063466,
+        "assessment_mode": "graded_warning",
+        "accepted_window_A": [
+          0.9,
+          1.3
+        ],
+        "accepted_window_passed": true,
+        "hard_window_A": [
+          0.7,
+          1.8
+        ],
+        "hard_passed": true,
+        "level": "pass",
+        "passed": true
+      }
+    ],
+    "monitored_bonds": [
+      {
+        "name": "H50_to_arriving_Fe38",
+        "atoms_zero_based": [
+          49,
+          37
+        ],
+        "distances_A": [
+          3.3131195705289835,
+          3.5111750570528883,
+          3.728153015833956,
+          3.8555818063689693,
+          3.63365735845893,
+          3.406002025536206,
+          3.1662161447296295,
+          2.915955075515432,
+          2.563120443084749,
+          2.0976418337866605,
+          1.8067732026151753
+        ],
+        "important_interval_A": [
+          1.8067732026191474,
+          3.313119570535061
+        ],
+        "important_interval_tolerance_A": 0.0,
+        "effective_important_interval_A": [
+          1.8067732026191474,
+          3.313119570535061
+        ],
+        "covered_internal_images": [
+          "06",
+          "07",
+          "08",
+          "09"
+        ],
+        "borderline_internal_images": [],
+        "minimum_internal_images": 0,
+        "coverage_passed": true,
+        "coverage_review_required": false,
+        "coverage_continuation_passed": true,
+        "monotonic_direction": null,
+        "maximum_backtrack_A": 0.0,
+        "backtracks_A": [],
+        "maximum_observed_backtrack_A": 0.0,
+        "monotonic_passed": true,
+        "passed": true
+      }
+    ],
+    "adjacent_rmsd_A": [
+      0.06454789478516282,
+      0.06328710113367347,
+      0.061940638746425684,
+      0.06062708510675636,
+      0.0600522870213737,
+      0.061955715225182936,
+      0.0671636270555866,
+      0.07751085790234394,
+      0.08018125559835564,
+      0.07704627004948418
+    ],
+    "maximum_adjacent_rmsd_A": 0.08018125559835564,
+    "adjacent_rmsd_passed": true,
+    "maximum_single_movable_atom_steps_A": [
+      0.3421925537292029,
+      0.34954900897297236,
+      0.3266775303165668,
+      0.3351846739213438,
+      0.33623751984558875,
+      0.34674197647779914,
+      0.37567852700810017,
+      0.42398498513418287,
+      0.446326478745714,
+      0.41389782512506385
+    ],
+    "maximum_single_movable_atom_step_A": 0.446326478745714,
+    "maximum_single_movable_atom_step_limit_A": 1.2,
+    "maximum_single_movable_atom_step_passed": true,
+    "minimum_pair_distances_A": [
+      1.0998614787279488,
+      1.1019509096216962,
+      1.1016661410798922,
+      1.1018031874456269,
+      1.1020982241262167,
+      1.1025057844063466,
+      1.102080622844986,
+      1.1018711698100898,
+      1.1010376888839812,
+      1.1008214200469262,
+      1.0990756067577316
+    ],
+    "minimum_pair_distance_passed": true,
+    "periodic_branch_numeric_passed": true,
+    "passed": true
+  },
+  "single_strict_internal_peak": false,
+  "strict_internal_peak_images": [
+    "01",
+    "05",
+    "09"
+  ],
+  "fixed_path_model_comparison": {
+    "comparison_scope": "exact_structure_hashes; within_model_relative_energy_to_image_00",
+    "interpretation": "model_model_disagreement_sampling_score_not_calibrated_uncertainty",
+    "images": [
+      {
+        "image": "00",
+        "structure_path": "images/00/POSCAR",
+        "structure_sha256": "5d86ef906c002415a0e03030936f1cc32f2ca0782c0d5d9180f4ea42c01cf178",
+        "primary_energy_eV": -404.02212142944336,
+        "secondary_energy_eV": -3.1267740726470947,
+        "primary_relative_energy_eV": 0.0,
+        "secondary_relative_energy_eV": 0.0,
+        "movable_force_vector_rmse_eVA": 0.06974397366610713,
+        "movable_force_difference_max_norm_eVA": 0.42074657036283625,
+        "key_bond_distances_A": {}
+      },
+      {
+        "image": "01",
+        "structure_path": "images/01/POSCAR",
+        "structure_sha256": "7810d7e71cca28d149875c98bfae54ff2034f01b945c39fac5874ea54ebad33e",
+        "primary_energy_eV": -403.99460792541504,
+        "secondary_energy_eV": -3.0725491046905518,
+        "primary_relative_energy_eV": 0.027513504028320312,
+        "secondary_relative_energy_eV": 0.05422496795654297,
+        "movable_force_vector_rmse_eVA": 0.05966080628330557,
+        "movable_force_difference_max_norm_eVA": 0.3597765237755985,
+        "key_bond_distances_A": {}
+      },
+      {
+        "image": "02",
+        "structure_path": "images/02/POSCAR",
+        "structure_sha256": "8e564c871bb86f4a37ba39076c7b9d21f793f2d5f78deeca5a4c189e596272ef",
+        "primary_energy_eV": -404.02073860168457,
+        "secondary_energy_eV": -3.080855131149292,
+        "primary_relative_energy_eV": 0.0013828277587890625,
+        "secondary_relative_energy_eV": 0.045918941497802734,
+        "movable_force_vector_rmse_eVA": 0.06380588949308935,
+        "movable_force_difference_max_norm_eVA": 0.36492818134901445,
+        "key_bond_distances_A": {}
+      },
+      {
+        "image": "03",
+        "structure_path": "images/03/POSCAR",
+        "structure_sha256": "0f2583792e4b712ff99f37232a0c8d00389a5ecc517a6aadf43d35b9f0808ca5",
+        "primary_energy_eV": -404.0415287017822,
+        "secondary_energy_eV": -3.110980272293091,
+        "primary_relative_energy_eV": -0.019407272338867188,
+        "secondary_relative_energy_eV": 0.015793800354003906,
+        "movable_force_vector_rmse_eVA": 0.06081909780356537,
+        "movable_force_difference_max_norm_eVA": 0.3478826034210005,
+        "key_bond_distances_A": {}
+      },
+      {
+        "image": "04",
+        "structure_path": "images/04/POSCAR",
+        "structure_sha256": "3d9c967a3c0462e1c47f55a6fa8095e1f12d0fe40725db026e57e077ef31a1ed",
+        "primary_energy_eV": -403.97067070007324,
+        "secondary_energy_eV": -3.0755906105041504,
+        "primary_relative_energy_eV": 0.05145072937011719,
+        "secondary_relative_energy_eV": 0.051183462142944336,
+        "movable_force_vector_rmse_eVA": 0.06501871490923718,
+        "movable_force_difference_max_norm_eVA": 0.36232802053924723,
+        "key_bond_distances_A": {}
+      },
+      {
+        "image": "05",
+        "structure_path": "images/05/POSCAR",
+        "structure_sha256": "04006441c9734610cac56849c4e1fd71fadcaab8fb0e0ddb5e03882248cb9d70",
+        "primary_energy_eV": -403.8899898529053,
+        "secondary_energy_eV": -3.001354217529297,
+        "primary_relative_energy_eV": 0.13213157653808594,
+        "secondary_relative_energy_eV": 0.12541985511779785,
+        "movable_force_vector_rmse_eVA": 0.06538788057224755,
+        "movable_force_difference_max_norm_eVA": 0.3699588972400165,
+        "key_bond_distances_A": {}
+      },
+      {
+        "image": "06",
+        "structure_path": "images/06/POSCAR",
+        "structure_sha256": "a323c4a030890330156386165001c59f92a90497bbd8f18ea007e560b68c46b1",
+        "primary_energy_eV": -403.91106605529785,
+        "secondary_energy_eV": -2.982815980911255,
+        "primary_relative_energy_eV": 0.11105537414550781,
+        "secondary_relative_energy_eV": 0.14395809173583984,
+        "movable_force_vector_rmse_eVA": 0.06375403574438257,
+        "movable_force_difference_max_norm_eVA": 0.3594500366626949,
+        "key_bond_distances_A": {}
+      },
+      {
+        "image": "07",
+        "structure_path": "images/07/POSCAR",
+        "structure_sha256": "255ab376616aacf70f1ca1e9d279626c07e08cc65017e00cc65db64c6a5f063b",
+        "primary_energy_eV": -403.98950576782227,
+        "secondary_energy_eV": -3.0737662315368652,
+        "primary_relative_energy_eV": 0.03261566162109375,
+        "secondary_relative_energy_eV": 0.05300784111022949,
+        "movable_force_vector_rmse_eVA": 0.06684975137028476,
+        "movable_force_difference_max_norm_eVA": 0.37011692966141224,
+        "key_bond_distances_A": {}
+      },
+      {
+        "image": "08",
+        "structure_path": "images/08/POSCAR",
+        "structure_sha256": "8a36b05cd2a01c74e65b777916a2e9af3bba6508595b00e5ac1fd36e1a7e3424",
+        "primary_energy_eV": -404.0849208831787,
+        "secondary_energy_eV": -3.1352591514587402,
+        "primary_relative_energy_eV": -0.06279945373535156,
+        "secondary_relative_energy_eV": -0.008485078811645508,
+        "movable_force_vector_rmse_eVA": 0.06557378428484537,
+        "movable_force_difference_max_norm_eVA": 0.3772911763289993,
+        "key_bond_distances_A": {}
+      },
+      {
+        "image": "09",
+        "structure_path": "images/09/POSCAR",
+        "structure_sha256": "b0be5d67733282ed8253128dbdf5d44991438eb140a7dd4b6d04bdccc436dd67",
+        "primary_energy_eV": -404.0232181549072,
+        "secondary_energy_eV": -3.103999614715576,
+        "primary_relative_energy_eV": -0.0010967254638671875,
+        "secondary_relative_energy_eV": 0.022774457931518555,
+        "movable_force_vector_rmse_eVA": 0.06282371273205471,
+        "movable_force_difference_max_norm_eVA": 0.3718220117058639,
+        "key_bond_distances_A": {}
+      },
+      {
+        "image": "10",
+        "structure_path": "images/10/POSCAR",
+        "structure_sha256": "b3db94166230f5c3888d70011d93f6d4b2ba72c1b2374f9686802b2ffd62fdff",
+        "primary_energy_eV": -404.0441036224365,
+        "secondary_energy_eV": -3.121441125869751,
+        "primary_relative_energy_eV": -0.021982192993164062,
+        "secondary_relative_energy_eV": 0.00533294677734375,
+        "movable_force_vector_rmse_eVA": 0.06815996950802537,
+        "movable_force_difference_max_norm_eVA": 0.4270696255395791,
+        "key_bond_distances_A": {}
+      }
+    ]
+  },
+  "restrictions": {
+    "predicted_candidate_only": true,
+    "reportable_dft": false,
+    "automatic_vasp_submission": false,
+    "dimer_parent_accepted": false
+  },
+  "producer": {
+    "backend": "aqcat_gpu",
+    "hostname": "MZ73",
+    "gpu_job_id": "1802"
+  },
+  "producer_exit_record": {
+    "path": "producer_exit_record.json",
+    "sha256": "61895d22bdbd2ccabf533a12bab9bb75f0004d9b2500888be8f06f576b618507",
+    "status": "success",
+    "exit_code": 0,
+    "evidence_class": "producer_process_only_not_scheduler_accounting"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-26T08:02:38.604324+00:00",
+  "recorded_at": "2026-09-26T08:02:38.604324+00:00",
+  "event_id": "task-is-a-int06-gpu1802-returned-20260926",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "GPU1802 producer completed ordinary ML-NEB in19 steps; complete exact-path AQCat25 audit and recomputed geometry pass, three predicted peaks require review.",
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/gpu_execution_20260926/gpu1802_return_checks.json",
+      "sha256": "5f7bebe43ba9c2b7ece88d7e9af3a773652221c0cae3f77355b4675a09b0c7ed",
+      "authority": "module_validation",
+      "observed_at": "2026-09-26T08:02:38.604324+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/gpu_execution_20260926/output/run2/dual_model_gpu_ml_neb_path_manifest.candidate.json",
+      "sha256": "1cf8e270fede562eb4937fed53b12e897934ff674cbae40d8a010779c6a429f3",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-26T08:02:38.604324+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/gpu_execution_20260926/output/run2/producer_exit_record.json",
+      "sha256": "61895d22bdbd2ccabf533a12bab9bb75f0004d9b2500888be8f06f576b618507",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-26T08:02:38.604324+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/gpu_execution_20260926/request.json",
+      "sha256": "6011d0a9b1a0430e3b273b9180f2d6484683589a81def2d168418696e8bf4d32",
+      "authority": "repository_document",
+      "observed_at": "2026-09-26T08:02:38.604324+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "payload": {
+    "objective": "Optimize the reviewed IS-A9725473 to INT06_9748648 H surface migration with MatRIS and AQCat25 audit before VASP coarse NEB.",
+    "phase": "active",
+    "current_evidence": [
+      "GPU1802 producer exited0 at2026-09-26T07:07:45Z; live Slurm record purged, terminal scheduler status unavailable.",
+      "Ordinary MatRIS ML-NEB converged in19 steps, maximum NEB force0.081585 eV/A below0.10; complete11-image AQCat25 exact-path audit returned.",
+      "Request6011d0a9/checkpoints/runner and all returned structure hashes verified; geometry recomputed PASS, max adjacent RMSD0.080181 A, movie11frames matches snapshots.",
+      "Predicted MatRIS local peaks01/05/09, global maximum05; do not infer three real TS from an ML profile.",
+      "No ML-CI, restraints, new training or VASP submission; returned path remains needs_work_review."
+    ],
+    "one_executable_step": "Review the complete multi-peak ML path and H50 site changes, then prepare the appropriate compatible VASP coarse-NEB handoff; do not submit without authorization.",
+    "submission_boundary": "One retry was explicitly authorized and submitted. No automatic additional GPU rerun, fine-tuning or VASP submission.",
+    "done_when": [
+      "GPU1802 produces reviewed complete-path evidence and audit, or a bounded failure with its first/last valid structures preserved."
+    ],
+    "constraints": [
+      "Keep accepted INT06-MID and MID-FS segments unchanged.",
+      "Preserve request/checkpoint hashes, atom order, fixed Fe0-17 and SIGMA0.20 compatibility.",
+      "GPU predictions cannot establish a TS or electronic barrier."
+    ],
+    "authoritative_references": [
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/gpu_execution_20260926/gpu1802_return_checks.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/gpu_execution_20260926/output/run2/dual_model_gpu_ml_neb_path_manifest.candidate.json"
+    ]
+  },
+  "supersedes": [
+    "task-is-a-int06-gpu1802-runtime-started-20260926"
+  ]
+}
