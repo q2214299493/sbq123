@@ -3,27 +3,28 @@
 
 ## Objective
 
-Optimize the reviewed IS-A9725473 to INT06_9748648 H surface migration with MatRIS and AQCat25 audit before VASP coarse NEB.
+Submit the reviewed GPU1802 complete IS-A9725473 -> INT06_9748648 path as one ordinary VASP coarse NEB.
 
 ## Current Evidence Snapshot
 
-- GPU1802 producer exited0 at2026-09-26T07:07:45Z; live Slurm record purged, terminal scheduler status unavailable.
-- Ordinary MatRIS ML-NEB converged in19 steps, maximum NEB force0.081585 eV/A below0.10; complete11-image AQCat25 exact-path audit returned.
-- Request6011d0a9/checkpoints/runner and all returned structure hashes verified; geometry recomputed PASS, max adjacent RMSD0.080181 A, movie11frames matches snapshots.
-- Predicted MatRIS local peaks01/05/09, global maximum05; do not infer three real TS from an ML profile.
-- No ML-CI, restraints, new training or VASP submission; returned path remains needs_work_review.
+- User authorized review then coarse NEB; full11-image GPU1802 path reviewed numerically and in top/side/profile views.
+- H50 changes neighboring Fe coordination continuously; C2HO/originalCH remain intact, no new OH/CH bond. Three ML peaks remain predictions, not accepted TS/intermediates.
+- Exact GPU snapshots copied without interpolation; locked PBE/ENCUT400/Gamma5x5x1/SIGMA0.20/Fe2.2 branch, Fast/EDIFF1e-5/EDIFFG-0.05/NSW300/no-climb/no-restraints.
+- Nine interiors require rank/image/NPAR divisibility;108ranks=9x12,NPAR4. No pilot added. Geometry/VTST movie11frames/input custodian and canonical preflight pass; current gate lists SUBMIT_VASP.
+- Bounded live SSH check exit255 timed out after connection/handshake; verbose read-only check stalled at public-key offer. No remote output/POTCAR verification obtained.
+- Canonical submission state NOT_RESERVED: no executor reservation, upload,bsub or jobID. Submission authority remains available for this exact package, not consumed.
 
 ## Lifecycle Status
 
-- Phase: `active`
+- Phase: `blocked`
 
 ## One Executable Step
 
-Review the complete multi-peak ML path and H50 site changes, then prepare the appropriate compatible VASP coarse-NEB handoff; do not submit without authorization.
+When sunboquan-codex SSH authentication responds, rerun a new bounded read-only POTCAR/duplicate-job precheck, revalidate the existing gate and submit this exact authorized ordinary NEB once through the canonical executor.
 
 ## Submission Boundary
 
-One retry was explicitly authorized and submitted. No automatic additional GPU rerun, fine-tuning or VASP submission.
+User already authorized one reviewed coarse NEB. No pilot, duplicate submission, automatic retry, CI,Dimer,training or changes to accepted intervals.
 
 ## Authoritative Constraint
 
@@ -31,7 +32,7 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 
 ## Done When
 
-- GPU1802 produces reviewed complete-path evidence and audit, or a bounded failure with its first/last valid structures preserved.
+- One actual ordinary NEB submission receipt and scheduler checkpoint are recorded, or a bounded remote precheck failure is truthfully retained without claiming submission.
 
 ## Constraints
 
@@ -41,6 +42,10 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 
 ## Authoritative References
 
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/gpu_execution_20260926/gpu1802_return_checks.json
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/gpu_execution_20260926/output/run2/dual_model_gpu_ml_neb_path_manifest.candidate.json
+- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/path_review.json
+- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/work_review_evidence.json
+- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/execution_gate_decision.json
+- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/submission_preflight.json
+- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/remote_submission_precheck.json
+- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/user_execution_request.json
 <!-- state-handoff:end current_task -->
