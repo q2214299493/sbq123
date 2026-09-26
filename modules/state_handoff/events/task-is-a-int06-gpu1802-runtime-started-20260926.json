@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-26T06:50:07Z",
+  "recorded_at": "2026-09-26T06:50:07Z",
+  "event_id": "task-is-a-int06-gpu1802-runtime-started-20260926",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "GPU1802 passed the TMPDIR bootstrap and started ordinary ML-NEB; four completed steps with declining predicted NEB force, not converged.",
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/gpu_execution_20260926/submission_record_retry1.json",
+      "sha256": "cc5309c5809f7084543beb6f56202b18ee5ccb4ee8b2c3c3260ef010ee49b405",
+      "authority": "module_validation",
+      "observed_at": "2026-09-26T06:48:03Z"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/gpu_execution_20260926/scheduler_retry1_1802.txt",
+      "sha256": "46685ea609799b6d95caafebe26bf993f6037f2761d823569310ab91e4ec19dd",
+      "authority": "scheduler",
+      "observed_at": "2026-09-26T06:48:03Z"
+    },
+    {
+      "locator": "docs/reviews/is_a_int06_gpu1802_retry1_submitted_20260926.md",
+      "sha256": "8b3e77fd3431ca170150251a9a91806c7bd3968aab77acf488c341ca02882713",
+      "authority": "repository_document",
+      "observed_at": "2026-09-26T06:48:03Z"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/gpu_execution_20260926/retry1_initial_ml_neb_state.json",
+      "sha256": "e2b21412d7eb29208bb115180a9b1a6ffe6728c378d02fbd7705a50656d57ccc",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-26T06:50:07Z"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/gpu_execution_20260926/retry1_initial_ordinary_ml_neb.log",
+      "sha256": "7f50da2eb332cd7df4a204bb0e102603f611f7f345a5b1f81a667667acc91bf9",
+      "authority": "calculation_file",
+      "observed_at": "2026-09-26T06:50:07Z"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "payload": {
+    "objective": "Optimize the reviewed IS-A9725473 to INT06_9748648 H surface migration with MatRIS and AQCat25 audit before VASP coarse NEB.",
+    "phase": "active",
+    "current_evidence": [
+      "Authorized retry1802 submitted once; scheduler RUNNING on MZ73.",
+      "TMPDIR is explicitly contained; request checksum check after wrapper environment setup passed.",
+      "Exact 11-image request6011d0a9 unchanged; MatRIS epoch6 ordinary ML-NEB plus AQCat25 fixed-path audit, max400 steps/fmax0.10.",
+      "Prior GPU1793/output/run1 preserved; no VASP, fine-tuning, ML-CI or added reaction-coordinate restraints.",
+      "Actual ordinary ML-NEB runtime confirms4 completed steps; FIRE fmax1.149017 ->0.993399 ->0.766573 ->0.558104 ->0.423483 eV/A, still above0.10. No OOM in this captured checkpoint; AQCat25 audit not yet started."
+    ],
+    "one_executable_step": "Collect GPU1802 runtime/producer completion or failure, then review the complete path geometry, peaks and exact AQCat25 audit before preparing VASP.",
+    "submission_boundary": "One retry was explicitly authorized and submitted. No automatic additional GPU rerun, fine-tuning or VASP submission.",
+    "done_when": [
+      "GPU1802 produces reviewed complete-path evidence and audit, or a bounded failure with its first/last valid structures preserved."
+    ],
+    "constraints": [
+      "Keep accepted INT06-MID and MID-FS segments unchanged.",
+      "Preserve request/checkpoint hashes, atom order, fixed Fe0-17 and SIGMA0.20 compatibility.",
+      "GPU predictions cannot establish a TS or electronic barrier."
+    ],
+    "authoritative_references": [
+      "docs/reviews/is_a_int06_gpu1802_retry1_submitted_20260926.md",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/gpu_execution_20260926/submission_record_retry1.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/gpu_execution_20260926/request.json"
+    ]
+  },
+  "supersedes": [
+    "task-is-a-int06-gpu1802-retry1-submitted-20260926"
+  ]
+}
