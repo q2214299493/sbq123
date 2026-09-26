@@ -11,7 +11,7 @@ Submit the reviewed GPU1802 complete IS-A9725473 -> INT06_9748648 path as one or
 - H50 changes neighboring Fe coordination continuously; C2HO/originalCH remain intact, no new OH/CH bond. Three ML peaks remain predictions, not accepted TS/intermediates.
 - Exact GPU snapshots copied without interpolation; locked PBE/ENCUT400/Gamma5x5x1/SIGMA0.20/Fe2.2 branch, Fast/EDIFF1e-5/EDIFFG-0.05/NSW300/no-climb/no-restraints.
 - Nine interiors require rank/image/NPAR divisibility;108ranks=9x12,NPAR4. No pilot added. Geometry/VTST movie11frames/input custodian and canonical preflight pass; current gate lists SUBMIT_VASP.
-- Bounded live SSH check exit255 timed out after connection/handshake; verbose read-only check stalled at public-key offer. No remote output/POTCAR verification obtained.
+- Renewed2026-09-26 user submission instruction: fresh SSH precheck exit255 Connection closed; bounded diagnostic TCP/KEX/hostkey passed then publickey reply timed out. Server-side cause not established; no remote command ran.
 - Canonical submission state NOT_RESERVED: no executor reservation, upload,bsub or jobID. Submission authority remains available for this exact package, not consumed.
 
 ## Lifecycle Status
@@ -20,7 +20,7 @@ Submit the reviewed GPU1802 complete IS-A9725473 -> INT06_9748648 path as one or
 
 ## One Executable Step
 
-When sunboquan-codex SSH authentication responds, rerun a new bounded read-only POTCAR/duplicate-job precheck, revalidate the existing gate and submit this exact authorized ordinary NEB once through the canonical executor.
+Confirm sunboquan-codex can authenticate with the configured agent key; after connectivity is restored, revalidate the unchanged gate and submit this exact authorized NEB once.
 
 ## Submission Boundary
 
@@ -46,6 +46,7 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 - calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/work_review_evidence.json
 - calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/execution_gate_decision.json
 - calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/submission_preflight.json
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/remote_submission_precheck.json
 - calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/user_execution_request.json
+- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/remote_submission_precheck_retry1.json
+- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/ssh_diagnostic_retry1.json
 <!-- state-handoff:end current_task -->

@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-26T08:35:12.490205+00:00",
+  "recorded_at": "2026-09-26T08:35:12.490205+00:00",
+  "event_id": "task-is-a-int06-vasp-ssh-recheck-failed-20260926",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "Renewed user submission request: unchanged NEB preflight/gate verified, SSH retry closed then stalled at public-key reply; no executor reservation/upload/bsub.",
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/path_review.json",
+      "sha256": "4dfb8a5d866613fd97ca15fc5960f8a6c02a8907d6921760eb9fdd8d9b219daf",
+      "authority": "module_validation",
+      "observed_at": "2026-09-26T08:16:22.735174+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/work_review_evidence.json",
+      "sha256": "8edfc37442ad761b75984acd0c81ce4455e20b23747a55affad97559d92a238a",
+      "authority": "structure_output",
+      "observed_at": "2026-09-26T08:16:22.735174+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/execution_gate_decision.json",
+      "sha256": "62cf26709ba9203f33f837841b76ef45c5fb3c1d7e395569dc704e149655f210",
+      "authority": "module_validation",
+      "observed_at": "2026-09-26T08:16:22.735174+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/submission_preflight.json",
+      "sha256": "5e71c80f18d1672b39de9f518da90701111603c16f76350fbb91a28bc66b01ef",
+      "authority": "module_validation",
+      "observed_at": "2026-09-26T08:16:22.735174+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/user_execution_request.json",
+      "sha256": "7a448e4d16c0ed208e418cf71967fffde7d68185f2998a90ddef264405a2352f",
+      "authority": "user_authorization",
+      "observed_at": "2026-09-26T08:16:22.735174+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/remote_submission_precheck_retry1.json",
+      "sha256": "85555af56918f6b2fa31e647c1e69e024c6d6e955e690753324398696dc67cb0",
+      "authority": "repository_document",
+      "observed_at": "2026-09-26T08:35:12.490205+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/ssh_diagnostic_retry1.json",
+      "sha256": "b01d98932d72019af12b541347ebe0f7f12cc26953a7e096f29bca8c12592bcd",
+      "authority": "repository_document",
+      "observed_at": "2026-09-26T08:35:12.490205+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "payload": {
+    "objective": "Submit the reviewed GPU1802 complete IS-A9725473 -> INT06_9748648 path as one ordinary VASP coarse NEB.",
+    "phase": "blocked",
+    "current_evidence": [
+      "User authorized review then coarse NEB; full11-image GPU1802 path reviewed numerically and in top/side/profile views.",
+      "H50 changes neighboring Fe coordination continuously; C2HO/originalCH remain intact, no new OH/CH bond. Three ML peaks remain predictions, not accepted TS/intermediates.",
+      "Exact GPU snapshots copied without interpolation; locked PBE/ENCUT400/Gamma5x5x1/SIGMA0.20/Fe2.2 branch, Fast/EDIFF1e-5/EDIFFG-0.05/NSW300/no-climb/no-restraints.",
+      "Nine interiors require rank/image/NPAR divisibility;108ranks=9x12,NPAR4. No pilot added. Geometry/VTST movie11frames/input custodian and canonical preflight pass; current gate lists SUBMIT_VASP.",
+      "Renewed2026-09-26 user submission instruction: fresh SSH precheck exit255 Connection closed; bounded diagnostic TCP/KEX/hostkey passed then publickey reply timed out. Server-side cause not established; no remote command ran.",
+      "Canonical submission state NOT_RESERVED: no executor reservation, upload,bsub or jobID. Submission authority remains available for this exact package, not consumed."
+    ],
+    "one_executable_step": "Confirm sunboquan-codex can authenticate with the configured agent key; after connectivity is restored, revalidate the unchanged gate and submit this exact authorized NEB once.",
+    "submission_boundary": "User already authorized one reviewed coarse NEB. No pilot, duplicate submission, automatic retry, CI,Dimer,training or changes to accepted intervals.",
+    "done_when": [
+      "One actual ordinary NEB submission receipt and scheduler checkpoint are recorded, or a bounded remote precheck failure is truthfully retained without claiming submission."
+    ],
+    "constraints": [
+      "Keep accepted INT06-MID and MID-FS segments unchanged.",
+      "Preserve request/checkpoint hashes, atom order, fixed Fe0-17 and SIGMA0.20 compatibility.",
+      "GPU predictions cannot establish a TS or electronic barrier."
+    ],
+    "authoritative_references": [
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/path_review.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/work_review_evidence.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/execution_gate_decision.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/submission_preflight.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/user_execution_request.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/remote_submission_precheck_retry1.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/ssh_diagnostic_retry1.json"
+    ]
+  },
+  "supersedes": [
+    "task-is-a-int06-gpu1802-vasp-prepared-ssh-blocked-20260926"
+  ]
+}
