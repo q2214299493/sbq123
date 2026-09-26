@@ -1,0 +1,266 @@
+{
+  "schema_version": 1,
+  "document_kind": "dual_model_ml_neb_request",
+  "request_id": "int06_mid_ci9796856_exact_seed_bounded_20260926",
+  "run_kind": "bounded_gpu_path_drift_test",
+  "result_class": "predicted_path_candidate_only",
+  "automatic_vasp_submission": false,
+  "source_plan": {
+    "method": "exact reviewed final VASP CI-NEB 00-06; no IDPP or waypoint rebuilding",
+    "source_ci_neb_job_id": "9796856",
+    "source_path_review_sha256": "9653c30cbf5deb83f642fcab23f3c252e4262c9fcaf11009b5ebd8b3b9898167"
+  },
+  "models": {
+    "primary": {
+      "backend": "matris",
+      "identifier": "MatRIS_c16f569_feCOH",
+      "checkpoint_sha256": "8e53cfb0e54aec7aa918cefae3ce7b4a9488d87231626f7ae4bc98fdebdbeb49",
+      "remote_checkpoint_path": "/home/sbq/sbq/matris_energy_force_finetune_c2hoh_retention_candidate2_20260902/results/job_1506/epoch_checkpoints/epoch_006.pth.tar"
+    },
+    "secondary": {
+      "backend": "aqcat25",
+      "identifier": "AQCat25 demo_single model.pt",
+      "checkpoint_sha256": "e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50",
+      "remote_checkpoint_path": "/home/sbq/sbq/aqcat25/demo_single/model.pt"
+    }
+  },
+  "reaction": {
+    "reaction_id": "fe110_c2ho_h_migration_INT06_9748648_to_MID9737143",
+    "contract_sha256": "7317d2a7e2af4271f6f694aa3ec0b4a2b2bad6fd59bd2e0ac7f7b678e84acfa8",
+    "atom_map_sha256": "ef5b3d3d64884fde2a673dd35bef48a2a965c026edb6a8dd1c4eb22b100ae157",
+    "compatibility_sha256": "4ef0c782834fd07afca2621a5235bb67c2ea913bd650b93123c21538c35c165d",
+    "indexed_bond_changes": [],
+    "reaction_coordinates": [
+      {
+        "name": "H50_to_arriving_Fe39",
+        "kind": "distance",
+        "atoms": [
+          49,
+          38
+        ],
+        "important_interval_A": [
+          1.8217332982169685,
+          3.2880133053906118
+        ],
+        "role": "primary"
+      }
+    ]
+  },
+  "fixed_atom_indices_zero_based": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "images": [
+    {
+      "image": "00",
+      "path": "structures/00.vasp",
+      "sha256": "bb0abed1064d5881bdf65409b9b0bfa945fd55e321f60e33cf1b7a3badf66c27",
+      "source_path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ci_completed_review_20260925/00/POSCAR",
+      "source_sha256": "bb0abed1064d5881bdf65409b9b0bfa945fd55e321f60e33cf1b7a3badf66c27"
+    },
+    {
+      "image": "01",
+      "path": "structures/01.vasp",
+      "sha256": "c238754f01247767f2c6eea4216a58f88867df2a8d6c570ace150207b34f0574",
+      "source_path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ci_completed_review_20260925/01/CONTCAR",
+      "source_sha256": "c238754f01247767f2c6eea4216a58f88867df2a8d6c570ace150207b34f0574"
+    },
+    {
+      "image": "02",
+      "path": "structures/02.vasp",
+      "sha256": "a97621aaeaa5b31f03ad6e5be6419504fa749665c2284fa7e8e23181a6ba7fe6",
+      "source_path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ci_completed_review_20260925/02/CONTCAR",
+      "source_sha256": "a97621aaeaa5b31f03ad6e5be6419504fa749665c2284fa7e8e23181a6ba7fe6"
+    },
+    {
+      "image": "03",
+      "path": "structures/03.vasp",
+      "sha256": "78fd4e81fab629e9e3f8480cb95c8fdccd49fe84edfa9540aa749daa6da5f69b",
+      "source_path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ci_completed_review_20260925/03/CONTCAR",
+      "source_sha256": "78fd4e81fab629e9e3f8480cb95c8fdccd49fe84edfa9540aa749daa6da5f69b"
+    },
+    {
+      "image": "04",
+      "path": "structures/04.vasp",
+      "sha256": "3c6a1e5377b2183afb8768a4c6903298a32f757729069afa0ffd6f5c3a7b72e8",
+      "source_path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ci_completed_review_20260925/04/CONTCAR",
+      "source_sha256": "3c6a1e5377b2183afb8768a4c6903298a32f757729069afa0ffd6f5c3a7b72e8"
+    },
+    {
+      "image": "05",
+      "path": "structures/05.vasp",
+      "sha256": "c0d042f3b956584eb4985a2fd30f98bd5ddeab3d64e318643582f971a5d75f73",
+      "source_path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ci_completed_review_20260925/05/CONTCAR",
+      "source_sha256": "c0d042f3b956584eb4985a2fd30f98bd5ddeab3d64e318643582f971a5d75f73"
+    },
+    {
+      "image": "06",
+      "path": "structures/06.vasp",
+      "sha256": "a508a50b0851832089b5bbbbef252a4232b2a2ebb2d6788f97c92a94c2a00158",
+      "source_path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ci_completed_review_20260925/06/POSCAR",
+      "source_sha256": "a508a50b0851832089b5bbbbef252a4232b2a2ebb2d6788f97c92a94c2a00158"
+    }
+  ],
+  "preconditioning": {
+    "enabled": false,
+    "purpose": "No artificial coordinate restraints; fresh endpoint-only seed"
+  },
+  "ordinary_ml_neb": {
+    "spring_constant_eV_per_A2": 1.0,
+    "fmax_eV_per_A": 0.1,
+    "max_steps": 40,
+    "ml_ci": "off",
+    "ci_fmax_eV_per_A": 0.05,
+    "ci_max_steps": 200,
+    "monitored_geometry_guard": {
+      "enforce_monitored_bond_monotonicity": false,
+      "monitored_bond_backtrack_mode": "off",
+      "monitored_bond_monotonicity_scope": "all_path",
+      "maximum_monitored_bond_backtrack_A": 0.05,
+      "borderline_monitored_bond_backtrack_A": 0.07,
+      "require_monitored_bond_interval_coverage": false
+    },
+    "purpose": "one 40-step unrestrained ordinary ML-NEB drift test from converged CI-NEB path"
+  },
+  "geometry_guards": {
+    "preserved_bonds": [
+      {
+        "name": "C1_C2",
+        "atoms_zero_based": [
+          45,
+          46
+        ],
+        "minimum_A": 1.25,
+        "maximum_A": 1.6,
+        "assessment_mode": "graded_warning",
+        "hard_minimum_A": 1.1,
+        "hard_maximum_A": 1.9
+      },
+      {
+        "name": "C2_O",
+        "atoms_zero_based": [
+          46,
+          47
+        ],
+        "minimum_A": 1.15,
+        "maximum_A": 1.55,
+        "assessment_mode": "graded_warning",
+        "hard_minimum_A": 0.9,
+        "hard_maximum_A": 2.0
+      },
+      {
+        "name": "C1_H48",
+        "atoms_zero_based": [
+          45,
+          48
+        ],
+        "minimum_A": 0.9,
+        "maximum_A": 1.3,
+        "assessment_mode": "graded_warning",
+        "hard_minimum_A": 0.7,
+        "hard_maximum_A": 1.8
+      }
+    ],
+    "monitored_bonds": [
+      {
+        "name": "H50_Fe39_site_contact",
+        "atoms_zero_based": [
+          49,
+          38
+        ],
+        "important_interval_A": [
+          1.8217332982169685,
+          3.2880133053906118
+        ],
+        "minimum_internal_images": 0
+      }
+    ],
+    "minimum_pair_distance_A": 0.65,
+    "maximum_adjacent_rmsd_A": 0.75,
+    "maximum_single_movable_atom_step_A": 1.2
+  },
+  "scheduler_resources": {
+    "backend": "MZ73_slurm",
+    "nodes": 1,
+    "tasks": 1,
+    "cpus_per_task": 4,
+    "gpus": 1,
+    "memory_GB": 40,
+    "walltime": "02:00:00"
+  },
+  "runtime_bindings": {
+    "aqcat25_handoff.py": "ffc8eaca450517f5e6a4f156c924434f6d7b762972ddc246caa3b845961fb2ea",
+    "aqcat25_ml_neb.py": "7d7d81be3a1d6938cb2a0bc2f99d406c8b168f8f4e51f67febd1ecae4b0296e7",
+    "aqcat25_mz73_env.sh": "948b433079a88f96c38ed0b5a634acd3fbaca53d280fb1d2331f7931517dba0b",
+    "artifact_io.py": "5c3f4762413a164ea7adb6d5d89ab9bc9aeb09ec024259b7a7fec02cb942ac53",
+    "dual_model_ml_neb.py": "e08f8c984214177ffa2bb0afbe2dd1bbc5f6a1dd847a3ac6fa322c551e629c59",
+    "dual_model_ml_neb_job.sh": "ae086b69e30afa70e899b9e6dd6f576ebb23030a1c51d4bbc45920533561fbf0",
+    "mlip_same_structure_benchmark.py": "7fbdb8a4b2a74f69faaa6e10eba7d1b7218ce86a2a1754c65a53551b5fab8655",
+    "ml_sella_candidate.py": "3f2e025a41f0cd910164bc9d4816ab1c5333a9fd38707d00a9c5dd5ef53378d9"
+  },
+  "production_limits": {
+    "image_count": 7,
+    "production_submission_authorized": true,
+    "automatic_vasp_submission": false,
+    "required_return_status": "needs_work_review",
+    "required_work_review_before_vasp": true,
+    "automatic_retry": false,
+    "preconditioning_disabled": true,
+    "restraint_release_disabled": true,
+    "direct_unrestrained_ordinary_ml_neb": true,
+    "ml_ci_disabled_for_this_run": true,
+    "interval_image_count_is_review_evidence_not_single_hard_gate": true,
+    "failure_requires_independent_geometry_or_persistent_path_evidence": true
+  },
+  "restraint_release": {
+    "purpose": "not applicable; no temporary coordinate restraints are present",
+    "require_each_stage_convergence": false,
+    "nonconverged_stage_action": "fail",
+    "stages": []
+  },
+  "domain_validation": {
+    "status": "on_path_force_screen_passed_off_path_drift_untested",
+    "parent_request_sha256": "7dedbc43aba3ad6c465549710f8c6dda050137819110cbb6992ac47b17a9f151",
+    "quantitative_uncertainty_calibrated": false,
+    "note": "Epoch 6 passed the exact-structure CI-path screening batch 1785; this bounded optimizer test does not confer TS-domain calibration."
+  },
+  "final_geometry_guard": {
+    "enforce_monitored_bond_monotonicity": false,
+    "monitored_bond_backtrack_mode": "off",
+    "monitored_bond_monotonicity_scope": "all_path",
+    "maximum_monitored_bond_backtrack_A": 0.05,
+    "borderline_monitored_bond_backtrack_A": 0.07,
+    "require_monitored_bond_interval_coverage": false
+  },
+  "source_evidence_files": {
+    "reaction_contract.normalized.json": "4de3946f4e7b4e2625e9683f798dd5a03b6b56629031da51e7304bb2d9eb9bcb",
+    "review/path_review.json": "c47c380c52b0c85b12fbabe66b7a093c478285a2c4c9604d943abd48139bf055",
+    "review/path_generation_report.json": "9ec6bac390101c397bad50ebefa1cf4d8b7ca1e5240e18861d1a3d7c43d12807",
+    "review/exact_mic_geometry.json": "43b0a339625f49a76834ee5121225ecc30675a7922eb059730f5206ee2388269",
+    "review/dist.dat": "f67700ad3723f65e9e6c7847009419a3b446be520d4680a1d67b277160b208ae",
+    "review/movie.xyz": "145b58e527465070c8bdcce47769776294856257a4cd6724d0ea45c6931dcf44",
+    "review/vtst_checks.json": "e11e21474c4bf8118fd44f2a305c947091eff8073a14f4f21054c1c7caf1bc54",
+    "review/path_review.png": "428b085ff2692d14b0188c852dd534aa14b11133307c65c9dee4eac5125eb469"
+  },
+  "fallback_policy": {
+    "gpu_attempts": 1,
+    "on_drift": "review same-structure VASP static labels before any fine-tune",
+    "automatic_submission": false
+  }
+}

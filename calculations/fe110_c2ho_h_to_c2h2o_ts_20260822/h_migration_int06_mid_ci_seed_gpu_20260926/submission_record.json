@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "document_kind": "bounded_ci_seeded_gpu_ml_neb_submission",
+  "reaction_segment": "INT06_to_MID_H_surface_migration",
+  "source_vasp_ci_neb_job_id": "9796856",
+  "source_path_review_sha256": "9653c30cbf5deb83f642fcab23f3c252e4262c9fcaf11009b5ebd8b3b9898167",
+  "request_sha256": "2d51b762074bc87f769c203ada6eef59e7d0e95b3efb83ebf53ddabe80d87d21",
+  "gpu_slurm_job_id": "1788",
+  "scheduler_at_submission": "RUNNING",
+  "remote_root": "/home/sbq/sbq/aqcat25_ts_pilot/handoffs/h_migration_int06_mid_ci_seed_gpu_20260926",
+  "primary_checkpoint_sha256": "8e53cfb0e54aec7aa918cefae3ce7b4a9488d87231626f7ae4bc98fdebdbeb49",
+  "secondary_checkpoint_sha256": "e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50",
+  "ordinary_ml_neb_max_steps": 40,
+  "ml_ci": false,
+  "automatic_retry": false,
+  "automatic_vasp_submission": false,
+  "fine_tuning": false,
+  "local_preflight": {
+    "request_and_images_load": true,
+    "image_count": 7,
+    "atom_count": 50,
+    "fixed_atom_count": 18,
+    "initial_geometry_guard_passed": true
+  },
+  "remote_preflight": {
+    "request_sha256_matched": true,
+    "runtime_sha256_matched": true,
+    "primary_and_secondary_checkpoint_sha256_matched": true
+  },
+  "scientific_status": "running_prediction_only_not_ts_validation"
+}
