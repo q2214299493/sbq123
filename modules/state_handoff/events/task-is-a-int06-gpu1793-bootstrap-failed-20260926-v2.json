@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-26T04:12:05Z",
+  "recorded_at": "2026-09-26T04:12:05Z",
+  "event_id": "task-is-a-int06-gpu1793-bootstrap-failed-20260926-v2",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "Authorized GPU1793 failed before model startup; scheduled TMPDIR write-boundary cause confirmed and minimal environment-only retry prepared, not submitted.",
+  "evidence": [
+    {
+      "locator": "docs/reviews/is_a_int06_gpu1793_bootstrap_failure_20260926.md",
+      "sha256": "d220185c37cde33609f80a5e1c9d14fbf9f8e1cc9ce21541c9c1bc71a71a64ba",
+      "authority": "repository_document",
+      "observed_at": "2026-09-26T04:12:05Z"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/gpu_execution_20260926/submission_record.json",
+      "sha256": "b2caaff7dbce06482637a66a3e109880edc2e5af84cdceebea337b846a1faf17",
+      "authority": "module_validation",
+      "observed_at": "2026-09-26T04:12:05Z"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/gpu_execution_20260926/scheduler_1793.txt",
+      "sha256": "6621e5456f6b8c2e33c32eaf13abd9c902bb5c9f804501397281efef6fc3c1e2",
+      "authority": "scheduler",
+      "observed_at": "2026-09-26T04:12:05Z"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "payload": {
+    "objective": "Accelerate remaining IS-A9725473 to INT06_9748648 H surface migration with MatRIS, audit with AQCat25, then review before VASP coarse NEB.",
+    "phase": "verification",
+    "current_evidence": [
+      "Reviewed 11-image candidate and local/remote model-free input/runtime/checkpoint checks PASS; exact path remains unchanged.",
+      "Slurm GPU1793 FAILED ExitCode2:0 after2 seconds; wrapper receipt confirms bootstrap failure; zero optimizer steps and no model output.",
+      "CPU-only environment probe1794 confirms TMPDIR=/tmp; explicit /home/sbq/sbq/aqcat25/tmp passes no-model setup.",
+      "Environment-only retry prepared; no second GPU model run or VASP submission."
+    ],
+    "one_executable_step": "Obtain authorization for one resubmission with explicit contained TMPDIR, unchanged request/checkpoints, fresh output/run2 and no automatic retry.",
+    "submission_boundary": "1793 was submitted once under user authority; it failed before model startup. A separate authorization is needed for the prepared retry; no VASP authorized.",
+    "done_when": [
+      "One GPU run produces a complete reviewed candidate path plus exact AQCat25 audit, or records a bounded diagnosable failure before choosing the next route."
+    ],
+    "constraints": [
+      "Keep accepted INT06-MID and MID-FS calculations unchanged.",
+      "No added coordinate restraints, ML-CI, automatic retry/fine-tuning or VASP submission.",
+      "Preserve SIGMA0.20 compatibility and fixed Fe0-17."
+    ],
+    "authoritative_references": [
+      "docs/reviews/is_a_int06_gpu1793_bootstrap_failure_20260926.md",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/gpu_execution_20260926/request.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/gpu_execution_20260926/submission_record.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/gpu_execution_20260926/environment_retry_plan.json"
+    ]
+  },
+  "supersedes": [
+    "task-is-a-int06-path-prepared-20260926"
+  ]
+}

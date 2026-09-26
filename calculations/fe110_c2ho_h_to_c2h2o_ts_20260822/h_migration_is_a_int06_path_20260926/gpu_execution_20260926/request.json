@@ -1,0 +1,288 @@
+{
+  "schema_version": 1,
+  "document_kind": "dual_model_ml_neb_request",
+  "request_id": "is_a9725473_to_int06_9748648_ordinary_gpu_20260926",
+  "run_kind": "production_gpu_path_candidate",
+  "result_class": "predicted_path_candidate_only",
+  "automatic_vasp_submission": false,
+  "source_plan": {
+    "method": "user-reviewed H surface waypoints and segmented IDPP; preserve exact 00-10 POSCAR bytes",
+    "source_path_review_sha256": "6afe04c9beb9b77bb9e83ee7ab31da1717a5f5680236ef6366e0375799cca9e1",
+    "reference_ML_valley02": "not_verified_DFT_minimum"
+  },
+  "models": {
+    "primary": {
+      "backend": "matris",
+      "identifier": "MatRIS_c16f569_feCOH",
+      "checkpoint_sha256": "8e53cfb0e54aec7aa918cefae3ce7b4a9488d87231626f7ae4bc98fdebdbeb49",
+      "remote_checkpoint_path": "/home/sbq/sbq/matris_energy_force_finetune_c2hoh_retention_candidate2_20260902/results/job_1506/epoch_checkpoints/epoch_006.pth.tar"
+    },
+    "secondary": {
+      "backend": "aqcat25",
+      "identifier": "AQCat25 demo_single model.pt",
+      "checkpoint_sha256": "e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50",
+      "remote_checkpoint_path": "/home/sbq/sbq/aqcat25/demo_single/model.pt"
+    }
+  },
+  "reaction": {
+    "reaction_id": "fe110_c2ho_h_migration_ISA9725473_to_INT06_9748648",
+    "contract_sha256": "845c69d6804118448ee94ac62be67d476c072cb62a31924e215f50e20cc5482e",
+    "atom_map_sha256": "ef5b3d3d64884fde2a673dd35bef48a2a965c026edb6a8dd1c4eb22b100ae157",
+    "compatibility_sha256": "4ef0c782834fd07afca2621a5235bb67c2ea913bd650b93123c21538c35c165d",
+    "reaction_coordinates": [
+      {
+        "name": "H50_to_arriving_Fe38",
+        "kind": "distance",
+        "atoms": [
+          49,
+          37
+        ],
+        "important_interval_A": [
+          1.8067732026191474,
+          3.313119570535061
+        ],
+        "role": "primary"
+      }
+    ],
+    "indexed_bond_changes": []
+  },
+  "fixed_atom_indices_zero_based": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "images": [
+    {
+      "image": "00",
+      "path": "structures/00.vasp",
+      "sha256": "6eaa3c249575b540f65d1a9b7645e5e87e7a9338bc6e6f616327364a84892fc5",
+      "source_path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/plan/path_candidate/00/POSCAR",
+      "source_sha256": "6eaa3c249575b540f65d1a9b7645e5e87e7a9338bc6e6f616327364a84892fc5"
+    },
+    {
+      "image": "01",
+      "path": "structures/01.vasp",
+      "sha256": "af39cc55233a99411f95cca98792656e536022e3661abbf8af4986567cfa69ce",
+      "source_path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/plan/path_candidate/01/POSCAR",
+      "source_sha256": "af39cc55233a99411f95cca98792656e536022e3661abbf8af4986567cfa69ce"
+    },
+    {
+      "image": "02",
+      "path": "structures/02.vasp",
+      "sha256": "acb30a70054dd1b6c9d358eee6e5a30cc9838d6b429375f0101fdd7f21c47bb1",
+      "source_path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/plan/path_candidate/02/POSCAR",
+      "source_sha256": "acb30a70054dd1b6c9d358eee6e5a30cc9838d6b429375f0101fdd7f21c47bb1"
+    },
+    {
+      "image": "03",
+      "path": "structures/03.vasp",
+      "sha256": "5f931e04b58b16a769e963fa3c9400c45260dccc6c46444e0c6dde26d0e83974",
+      "source_path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/plan/path_candidate/03/POSCAR",
+      "source_sha256": "5f931e04b58b16a769e963fa3c9400c45260dccc6c46444e0c6dde26d0e83974"
+    },
+    {
+      "image": "04",
+      "path": "structures/04.vasp",
+      "sha256": "1e34304a7c38e47cc43132c6a54dc3f2c019e0f9e9c4fe1653df6376b5bcdf7e",
+      "source_path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/plan/path_candidate/04/POSCAR",
+      "source_sha256": "1e34304a7c38e47cc43132c6a54dc3f2c019e0f9e9c4fe1653df6376b5bcdf7e"
+    },
+    {
+      "image": "05",
+      "path": "structures/05.vasp",
+      "sha256": "4716e9795ee9ae4713025e2f013559f92707096ccd0e32ccdf048e4a20703996",
+      "source_path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/plan/path_candidate/05/POSCAR",
+      "source_sha256": "4716e9795ee9ae4713025e2f013559f92707096ccd0e32ccdf048e4a20703996"
+    },
+    {
+      "image": "06",
+      "path": "structures/06.vasp",
+      "sha256": "736dfcbb9a06342ffb11f35057296960ad24ef44875edf279953e980b093e513",
+      "source_path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/plan/path_candidate/06/POSCAR",
+      "source_sha256": "736dfcbb9a06342ffb11f35057296960ad24ef44875edf279953e980b093e513"
+    },
+    {
+      "image": "07",
+      "path": "structures/07.vasp",
+      "sha256": "21c51afe56436d41b848358ea6eebe2b7f75e79542874506f6c9c6266a233dec",
+      "source_path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/plan/path_candidate/07/POSCAR",
+      "source_sha256": "21c51afe56436d41b848358ea6eebe2b7f75e79542874506f6c9c6266a233dec"
+    },
+    {
+      "image": "08",
+      "path": "structures/08.vasp",
+      "sha256": "a8d6b177f0511efb164bc8a5a0c20318a677b82c8ce9719bda40a2ab67794446",
+      "source_path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/plan/path_candidate/08/POSCAR",
+      "source_sha256": "a8d6b177f0511efb164bc8a5a0c20318a677b82c8ce9719bda40a2ab67794446"
+    },
+    {
+      "image": "09",
+      "path": "structures/09.vasp",
+      "sha256": "87ec4007e02ca2e9bec4675db81d7df3b0daa0accd4b73b557e48a6cbe538d0e",
+      "source_path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/plan/path_candidate/09/POSCAR",
+      "source_sha256": "87ec4007e02ca2e9bec4675db81d7df3b0daa0accd4b73b557e48a6cbe538d0e"
+    },
+    {
+      "image": "10",
+      "path": "structures/10.vasp",
+      "sha256": "fdfc051d2df3108679fd171ba0d4af8a345881fdee5907431b33d34e39bb5933",
+      "source_path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/plan/path_candidate/10/POSCAR",
+      "source_sha256": "fdfc051d2df3108679fd171ba0d4af8a345881fdee5907431b33d34e39bb5933"
+    }
+  ],
+  "preconditioning": {
+    "enabled": false,
+    "purpose": "No additional H/O-H/C-C coordinate restraints"
+  },
+  "ordinary_ml_neb": {
+    "spring_constant_eV_per_A2": 1.0,
+    "fmax_eV_per_A": 0.1,
+    "max_steps": 400,
+    "ml_ci": "off",
+    "ci_fmax_eV_per_A": 0.05,
+    "ci_max_steps": 200,
+    "monitored_geometry_guard": {
+      "enforce_monitored_bond_monotonicity": false,
+      "monitored_bond_backtrack_mode": "off",
+      "require_monitored_bond_interval_coverage": false
+    },
+    "purpose": "One unrestrained ordinary ML-NEB of the reviewed IS-A to INT06 interval; no automatic retry"
+  },
+  "geometry_guards": {
+    "preserved_bonds": [
+      {
+        "name": "C1_C2",
+        "atoms_zero_based": [
+          45,
+          46
+        ],
+        "minimum_A": 1.25,
+        "maximum_A": 1.6,
+        "assessment_mode": "graded_warning",
+        "hard_minimum_A": 1.1,
+        "hard_maximum_A": 1.9
+      },
+      {
+        "name": "C2_O",
+        "atoms_zero_based": [
+          46,
+          47
+        ],
+        "minimum_A": 1.15,
+        "maximum_A": 1.55,
+        "assessment_mode": "graded_warning",
+        "hard_minimum_A": 0.9,
+        "hard_maximum_A": 2.0
+      },
+      {
+        "name": "C1_H49_original",
+        "atoms_zero_based": [
+          45,
+          48
+        ],
+        "minimum_A": 0.9,
+        "maximum_A": 1.3,
+        "assessment_mode": "graded_warning",
+        "hard_minimum_A": 0.7,
+        "hard_maximum_A": 1.8
+      }
+    ],
+    "monitored_bonds": [
+      {
+        "name": "H50_to_arriving_Fe38",
+        "atoms_zero_based": [
+          49,
+          37
+        ],
+        "important_interval_A": [
+          1.8067732026191474,
+          3.313119570535061
+        ],
+        "minimum_internal_images": 0
+      }
+    ],
+    "minimum_pair_distance_A": 0.65,
+    "maximum_adjacent_rmsd_A": 0.75,
+    "maximum_single_movable_atom_step_A": 1.2
+  },
+  "scheduler_resources": {
+    "backend": "MZ73_slurm",
+    "nodes": 1,
+    "tasks": 1,
+    "cpus_per_task": 4,
+    "gpus": 1,
+    "memory_GB": 40,
+    "walltime": "02:00:00"
+  },
+  "runtime_bindings": {
+    "aqcat25_handoff.py": "ffc8eaca450517f5e6a4f156c924434f6d7b762972ddc246caa3b845961fb2ea",
+    "aqcat25_ml_neb.py": "7d7d81be3a1d6938cb2a0bc2f99d406c8b168f8f4e51f67febd1ecae4b0296e7",
+    "aqcat25_mz73_env.sh": "948b433079a88f96c38ed0b5a634acd3fbaca53d280fb1d2331f7931517dba0b",
+    "artifact_io.py": "5c3f4762413a164ea7adb6d5d89ab9bc9aeb09ec024259b7a7fec02cb942ac53",
+    "dual_model_ml_neb.py": "e08f8c984214177ffa2bb0afbe2dd1bbc5f6a1dd847a3ac6fa322c551e629c59",
+    "dual_model_ml_neb_job.sh": "ae086b69e30afa70e899b9e6dd6f576ebb23030a1c51d4bbc45920533561fbf0",
+    "mlip_same_structure_benchmark.py": "7fbdb8a4b2a74f69faaa6e10eba7d1b7218ce86a2a1754c65a53551b5fab8655",
+    "ml_sella_candidate.py": "3f2e025a41f0cd910164bc9d4816ab1c5333a9fd38707d00a9c5dd5ef53378d9",
+    "gpu_preflight.py": "3a3af98a3e4d59c1d304de8407893741871a48ddc5b0a08489a492f064d72b1b"
+  },
+  "production_limits": {
+    "image_count": 11,
+    "production_submission_authorized": true,
+    "automatic_vasp_submission": false,
+    "required_return_status": "needs_work_review",
+    "required_work_review_before_vasp": true,
+    "automatic_retry": false,
+    "preconditioning_disabled": true,
+    "restraint_release_disabled": true,
+    "direct_unrestrained_ordinary_ml_neb": true,
+    "ml_ci_disabled_for_this_run": true,
+    "interval_image_count_is_review_evidence_not_single_hard_gate": true,
+    "failure_requires_independent_geometry_or_persistent_path_evidence": true
+  },
+  "restraint_release": {
+    "purpose": "not applicable; no temporary coordinate restraints are present",
+    "require_each_stage_convergence": false,
+    "nonconverged_stage_action": "fail",
+    "stages": []
+  },
+  "domain_validation": {
+    "status": "new_interval_not_exact_structure_VASP_validated",
+    "quantitative_uncertainty_calibrated": false,
+    "note": "Reuse frozen epoch6. Previous INT06-MID screening/drift success does not validate this longer IS-A-INT06 interval."
+  },
+  "final_geometry_guard": {
+    "enforce_monitored_bond_monotonicity": false,
+    "monitored_bond_backtrack_mode": "off",
+    "require_monitored_bond_interval_coverage": false
+  },
+  "source_evidence_files": {
+    "reaction_contract.normalized.json": "1f566b87ac29f2899443872b4bb50d1a29aa477eaadfc36a84750be7900faf5c",
+    "review/path_generation_report.json": "032d74e590c7d0e6c507798b673ca8ae3d22a6e81363b0b92d4133bc41ad4502",
+    "review/path_review.user_accepted.json": "6afe04c9beb9b77bb9e83ee7ab31da1717a5f5680236ef6366e0375799cca9e1",
+    "review/exact_mic_checks.json": "3d82a76da51a17d272dd9094e4c8e556c26d27ab14741f616e81677b572e2f88",
+    "review/dist.dat": "a22cf8d8a7e33f19f5f3c2687ff8bc7312afb5d79a74fffee7707fbe5564e1c8",
+    "review/movie": "6b02558d471e8e08a38209d9b27b8b4e4326716bd142224367cea2b0030d31bb",
+    "review/vtst_checks.json": "d846e81a6215ebc86e7f37fedc50f2f8463ca06e4978dd7adb059507a67e642a",
+    "review/path_review.png": "f6bb9ad31624da481e39e1b568c220de82e69694693621aa0f1ff5ed3f1003cf"
+  },
+  "fallback_policy": {
+    "gpu_attempts": 1,
+    "automatic_submission": false,
+    "on_drift": "Preserve last-valid/failure geometry, assess exact MatRIS/AQCat25/VASP labels before deciding fine-tune versus path repair/local VASP."
+  }
+}
