@@ -121,7 +121,7 @@ def validate_source_saddle_job(
 
 def validate_ts_evidence_files(connection: sqlite3.Connection, payload: dict[str, Any]) -> None:
     expected = {payload["frequency_output_file_id"]: "frequency_output"}
-    if str(payload.get("source_method", "")).lower() != "dimer":
+    if str(payload.get("source_method", "")).lower() not in {"dimer", "ci_neb"}:
         expected.update(
             {
                 payload["positive_displacement_file_id"]: "mode_positive_displacement",
@@ -147,7 +147,7 @@ def validate_ts_evidence_files(connection: sqlite3.Connection, payload: dict[str
     if invalid:
         raise ValueError("TS validation file evidence is missing, unconfirmed, or has the wrong role")
     if (
-        str(payload.get("source_method", "")).lower() != "dimer"
+        str(payload.get("source_method", "")).lower() not in {"dimer", "ci_neb"}
         and evidence[payload["connectivity_report_file_id"]]["sha256"]
         != payload["connectivity_report_sha256"]
     ):

@@ -48,19 +48,27 @@ requires it. Frequency reports must identify the result as partial-Hessian.
 For ZPE or thermal corrections, use one consistent reviewed active-set
 definition for IS, TS, and FS.
 
-For DIMER-derived candidates, bidirectional downhill connectivity is optional
-diagnostic evidence and is not part of TS acceptance. NEB/CI-NEB candidates
-retain their existing connectivity policy unless separately changed.
+For DIMER- and CI-NEB-derived candidates, bidirectional downhill connectivity is
+optional diagnostic evidence and is not part of TS acceptance (CI-NEB revision
+explicitly approved 2026-09-26). CI-NEB still requires a currently converged
+climbing-image source, a continuous reviewed endpoint-bound VASP path, matched
+saddle/frequency geometry, and the accepted target imaginary mode. Ordinary
+NEB retains its existing connectivity requirement; changing a source-method
+label cannot bypass that requirement.
 
 The numerical boundary between a meaningful imaginary mode and a small soft
 mode is **Needs confirmation** for automatic multi-mode classification. A
-normally completed DIMER frequency calculation with exactly one raw imaginary
+normally completed DIMER or converged CI-NEB frequency calculation with exactly one raw imaginary
 mode may still receive Grade A when the mode is explicitly reviewed and
 accepted as the target reaction coordinate; this reviewed single-mode rule does
 not require a separate VFA A/B/C classification stage. Multiple or borderline
 modes remain `Ungraded` until the configured soft/meaningful thresholds resolve
 them. The frequency setup and review must be stored with each result; optional
 displacement/connectivity diagnostics retain their own provenance when present.
+For CI-NEB, the explicit bound review must additionally record
+`single_imaginary_mode_assessment=accepted_target_mode`; this does not invent a
+numeric cutoff or waive incomplete output, multiple modes, source convergence,
+path continuity or an ambiguous mode assignment.
 
 Multiple TS candidates and multiple imaginary modes are separate cases. Two
 imaginary modes on one structure remain one unresolved higher-order/soft-mode
@@ -96,7 +104,7 @@ All criteria must be satisfied:
 - The TS structure has no evident geometric abnormality.
 - When automatic frequency thresholds are unset, a hash-bound explicit review
   may establish the preceding two items only for a complete single-imaginary-
-  mode DIMER result; it cannot waive a second mode, incomplete output, or an
+  mode DIMER or converged CI-NEB result; it cannot waive a second mode, incomplete output, or an
   ambiguous mode assignment.
 
 Database action: accept as a validated TS and allow use in thermochemistry, MKM, and KMC after the remaining free-energy requirements are met.
@@ -118,7 +126,7 @@ remain `Ungraded`; multiple clear imaginary modes are Grade C.
 
 Optional bidirectional downhill analysis uses
 `configs/ts_connectivity_gate.yaml`. Its result is diagnostic for DIMER and
-does not alter the DIMER/VFA grade.
+CI-NEB and does not replace or waive their required saddle/frequency evidence.
 
 ## Grade C: Not Eligible for MKM/KMC
 
@@ -157,7 +165,8 @@ Database action: reject from the validated kinetic dataset. Preserve provenance 
 
 The reaction-coordinate imaginary mode must be excluded from the TS vibrational partition function. No soft mode may be silently removed or converted without a documented method and review.
 
-The converged NEB profile is diagnostic. A technically accepted DIMER result
-may supply the TS member of the formal energy chain. Reported forward and
+The ordinary NEB profile is diagnostic. A technically accepted DIMER or
+converged CI-NEB result with accepted frequency validation may supply the TS
+member of the formal energy chain. Reported forward and
 reverse barriers require compatible registered IS/TS/FS final `OUTCAR` `TOTEN`
 values under one reference convention and hash-bound source outputs.

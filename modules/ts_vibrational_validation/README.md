@@ -37,9 +37,14 @@ Determine whether a NEB/CI-NEB/DIMER candidate is a first-order saddle for the i
    Fe(110) branch these use `ISMEAR=1`, `SIGMA=0.20 eV`; no extra single-point
    is required.
 
-The existing connectivity commands remain available as optional diagnostics
-and for non-DIMER policies. Their output cannot override failed DIMER or
-frequency evidence.
+The existing connectivity commands remain optional diagnostics for DIMER and,
+by the 2026-09-26 user-approved revision, CI-NEB. Ordinary NEB retains its
+connectivity requirement. CI-NEB acceptance reinterprets current raw VASP
+outputs to verify actual climbing-image convergence, endpoint/contract-bound
+path continuity and saddle/frequency geometry. A reviewed complete single
+imaginary mode can pass with unset numerical thresholds only with the explicit
+`single_imaginary_mode_assessment=accepted_target_mode` review. Optional
+downhill output cannot override failed saddle or frequency evidence.
 
 ## Resumable Automated Pipeline
 

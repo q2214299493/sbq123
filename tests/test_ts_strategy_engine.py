@@ -447,6 +447,9 @@ def test_grade_a_template_is_evidence_bound_and_transferred(tmp_path: Path) -> N
     assert strategy["automatic_submission"] is False
     with fixture_connection(db) as connection:
         connection.execute("UPDATE files SET sha256=NULL WHERE file_id='mode_plus'")
+    assert load_templates(db)[0]["evidence_valid"] is True
+    with fixture_connection(db) as connection:
+        connection.execute("UPDATE files SET sha256=NULL WHERE file_id='vfa_outcar'")
     assert load_templates(db)[0]["evidence_valid"] is False
 
 

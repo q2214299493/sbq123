@@ -616,8 +616,13 @@ python -m scripts.ts_strategy_engine.cli record --help
 only after real visual/chemical review and reviewer/date entry. Generated-path,
 `dist.pl`, `nebmovie.pl 0`, contract, atom-map, and compatibility hashes are
 checked before advancement. No missing or altered evidence is inferred.
-Grade A/B frequency output remains `Ungraded` while the meaningful-imaginary
-and soft-mode thresholds in `configs/true_fe110_production.yaml` are null.
+Automatic A/B frequency classification remains `Ungraded` while the numerical
+thresholds are null. The explicitly reviewed complete single-mode DIMER rule,
+and the user-approved 2026-09-26 converged CI-NEB single-target-mode rule, remain
+available through `docs/10_TS_VALIDATION_PROTOCOL.md`. CI-NEB downhill
+connectivity is optional; current climbing-source convergence, reviewed
+continuous endpoint-bound path, frequency geometry and target-mode acceptance
+remain required. Ordinary NEB connectivity policy is unchanged.
 
 The unified workflow CLI never submits or stops jobs. The only submission
 executor is `scripts.neb_agent.submission`; it requires a current gate decision,

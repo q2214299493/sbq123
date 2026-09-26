@@ -74,6 +74,8 @@ def neb_vfa_case(root: Path, contract: dict, *, custom_review: bool = False) -> 
     assert report['grade_a_connectivity_eligible'], report
     vfa_review = write_json(vfa / 'review.json', {
         **hashes, 'status': 'accepted', 'source_method': 'ci_neb',
+        'reaction_contract_file': str(contract_path),
+        'reaction_contract_file_sha256': sha256_file(contract_path),
         'validation_calculation_id': 'calc_vfa', 'source_saddle_calculation_id': 'calc_ts',
         'source_job_record_id': 'job_ts_source', 'frequency_output_file_id': 'vfa_outcar',
         'positive_displacement_file_id': 'mode_plus', 'negative_displacement_file_id': 'mode_minus',

@@ -166,8 +166,12 @@ are never copied into a new result through strategy similarity.
 For a DIMER-derived candidate, final TS acceptance requires DIMER technical
 acceptance and the configured vibrational-frequency validation; bidirectional
 downhill connectivity is optional diagnostic evidence and is not an acceptance
-gate. NEB/CI-NEB candidates retain their existing source-method connectivity
-policy.
+gate. By user approval on 2026-09-26, CI-NEB also uses optional downhill
+connectivity, while retaining current climbing-source convergence, continuous
+endpoint-bound VASP path and accepted target-mode evidence. Ordinary NEB retains
+its existing source-method connectivity policy. Apply the reviewed single-mode
+CI-NEB rule in `docs/10_TS_VALIDATION_PROTOCOL.md` when automatic frequency
+thresholds are unset; no numerical threshold is inferred.
 
 TS frequency validation uses a contract-defined local finite-difference
 partial Hessian by default for all reactions. Every reaction atom must be

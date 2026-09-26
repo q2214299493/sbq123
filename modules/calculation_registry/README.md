@@ -82,7 +82,7 @@ migration preserves all existing scientific rows.
 HISTORICAL_SCHEMA: version 8 retains the TS evidence binding introduced in
 version 4 and binds TS validation to the source saddle,
 frequency output, reaction contract, atom map, and method branch. DIMER
-validations may omit positive/negative mode displacements and connectivity;
+and user-approved CI-NEB validations may omit positive/negative mode displacements and connectivity;
 those fields remain available for optional diagnostics and for methods whose
 policy still requires connectivity. Reportable barriers require accepted,
 compatible IS/TS/FS final-energy records. In the active Fe(110) branch these

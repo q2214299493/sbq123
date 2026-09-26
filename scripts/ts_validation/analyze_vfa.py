@@ -266,6 +266,20 @@ def _underlying_vfa_sources(source_method: str, handoff: dict, review_root: Path
     return evidence_paths
 
 
+def _ci_contract_binding(
+    review: dict[str, Any], review_root: Path, contract: dict[str, Any],
+) -> tuple[Path | None, bool]:
+    path = _resolve_bound_path(review.get("reaction_contract_file"), review_root)
+    if review.get("source_method") != "ci_neb" or path is None or not path.is_file():
+        return path, False
+    from scripts.ts_strategy_engine.contract import load_contract
+
+    return path, bool(
+        review.get("reaction_contract_file_sha256") == sha256_file(path)
+        and load_contract(path) == contract
+    )
+
+
 def analyze_vfa(
     workdir: Path,
     contract: dict[str, Any],
@@ -282,11 +296,13 @@ def analyze_vfa(
     imaginary = [mode for mode in modes if mode["imaginary"]]
     review = _review(review_path)
     source_method = str(review.get("source_method", "")).lower()
-    connectivity_required = source_method != "dimer"
+    connectivity_required = source_method not in {"dimer", "ci_neb"}
     normal_completion = bool(parse_outcar(outcar_path).get("normal_completion"))
     review_root = review_path.parent if review_path else workdir
+    contract_source, ci_contract_bound = _ci_contract_binding(review, review_root, contract)
     handoff = _bound_vfa_handoff(review, review_root, workdir, contract)
-    connectivity = _connectivity_report(
+    # CI-NEB downhill diagnostics are separate provenance, not claim inputs.
+    connectivity = {} if source_method == "ci_neb" else _connectivity_report(
         review, review_root, workdir, outcar_path, contract, handoff
     )
     branches = connectivity.get("branches") or []
@@ -373,12 +389,33 @@ def analyze_vfa(
         and review.get("compatibility_sha256") == contract["compatibility_sha256"]
         and handoff
         and reaction_overlap
+        and (source_method != "ci_neb" or ci_contract_bound)
         and (
             source_method != "dimer"
             or handoff.get("_dimer_technical_acceptance") is True
         )
     )
-    common_evidence = bool(review_evidence and thresholds_configured and principal_meaningful)
+    ci_neb_technical_acceptance = False
+    if source_method == "ci_neb" and review_evidence:
+        saddle_path = _resolve_bound_path(handoff["saddle_analysis_source"], review_root)
+        _validate_current_neb_source(
+            handoff, saddle_path, workdir, contract, expected_method="ci_neb"
+        )
+        ci_neb_technical_acceptance = True
+    reviewed_single_ci_mode = bool(
+        source_method == "ci_neb"
+        and not thresholds_configured
+        and review_evidence
+        and ci_neb_technical_acceptance
+        and len(imaginary) == 1
+        and review.get("status") == "accepted"
+        and review.get("single_imaginary_mode_assessment") == "accepted_target_mode"
+    )
+    common_evidence = bool(
+        review_evidence
+        and (source_method != "ci_neb" or ci_neb_technical_acceptance)
+        and ((thresholds_configured and principal_meaningful) or reviewed_single_ci_mode)
+    )
     connectivity_evidence = bool(
         connectivity.get("status") == "PASS"
         and connectivity.get("grade_a_connectivity_eligible") is True
@@ -413,10 +450,12 @@ def analyze_vfa(
     )
     if not text or not modes or not normal_completion:
         grade = "Ungraded"
-    elif not thresholds_configured:
+    elif not thresholds_configured and not reviewed_single_ci_mode:
         grade = "Ungraded"
     elif review and review.get("status") == "rejected":
         grade = "C"
+    elif reviewed_single_ci_mode and grade_a_review:
+        grade = "A"
     elif len(significant_imaginary) == 0 and not unresolved_imaginary:
         grade = "C"
     elif len(significant_imaginary) > 1:
@@ -430,6 +469,8 @@ def analyze_vfa(
     else:
         grade = "Ungraded"
     evidence_paths = [outcar_path, workdir / "POSCAR", workdir / "vfa_scope_review.json"]
+    if source_method == "ci_neb" and contract_source:
+        evidence_paths.append(contract_source)
     evidence_paths.extend(Path(value) for value in (
         review_path, handoff.get("_evidence_path"),
         (handoff.get("_dimer_frequency_gate") or {}).get("manual_review_path"),
@@ -450,9 +491,13 @@ def analyze_vfa(
         "validation_basis": (
             "DIMER_CONVERGENCE_AND_VIBRATIONAL_FREQUENCY"
             if source_method == "dimer"
+            else "CONVERGED_CI_NEB_PATH_AND_VIBRATIONAL_FREQUENCY"
+            if source_method == "ci_neb"
             else "SADDLE_SEARCH_VIBRATION_AND_BIDIRECTIONAL_CONNECTIVITY"
         ),
         "connectivity_required": connectivity_required,
+        "ci_neb_technical_acceptance": ci_neb_technical_acceptance,
+        "reviewed_single_ci_mode": reviewed_single_ci_mode,
         "validation_calculation_id": review.get("validation_calculation_id"),
         "source_saddle_calculation_id": review.get("source_saddle_calculation_id"),
         "source_job_record_id": review.get("source_job_record_id"),
@@ -632,10 +677,11 @@ def validate_neb_vfa_binding(vfa: dict[str, Any], vfa_path: Path) -> None:
         raise ValueError("current VFA handoff binding is invalid")
     saddle_path = _resolve_bound_path(handoff["saddle_analysis_source"], workdir)
     _validate_current_neb_source(handoff, saddle_path, workdir, contract)
-    from scripts.ts_validation.connectivity import validate_current_connectivity
+    if method != "ci_neb":
+        from scripts.ts_validation.connectivity import validate_current_connectivity
 
-    connectivity_path = Path(vfa["connectivity_report"])
-    validate_current_connectivity(load_json_object(connectivity_path), connectivity_path)
+        connectivity_path = Path(vfa["connectivity_report"])
+        validate_current_connectivity(load_json_object(connectivity_path), connectivity_path)
     current = analyze_vfa(
         workdir, contract, Path(vfa["review_path"]),
         None if vfa["frequency_policy_is_default"] else vfa["frequency_policy"],
@@ -645,7 +691,10 @@ def validate_neb_vfa_binding(vfa: dict[str, Any], vfa_path: Path) -> None:
         raise ValueError("current NEB/VFA scientific evidence is not Grade A")
 
 
-def _validate_current_neb_source(handoff: dict, saddle_path: Path, workdir: Path, contract: dict) -> None:
+def _validate_current_neb_source(
+    handoff: dict, saddle_path: Path, workdir: Path, contract: dict,
+    *, expected_method: str | None = None,
+) -> None:
     from scripts.neb_agent.analyze_neb_outputs import analyze
     from scripts.neb_agent.diagnose_path_geometry import diagnose
     from scripts.ts_strategy_engine.path_evidence import validate_path_binding, validate_path_review
@@ -656,9 +705,13 @@ def _validate_current_neb_source(handoff: dict, saddle_path: Path, workdir: Path
     inputs = saddle["analysis_inputs"]
     root, thresholds = Path(inputs["workdir"]), Path(inputs["thresholds_path"])
     source = _resolve_bound_path(handoff["source_ts_candidate"], workdir)
+    if source is None or not source.is_file() or sha256_file(source) != handoff.get("source_sha256"):
+        raise ValueError("NEB source saddle file hash is missing or stale")
     if root.resolve() != source.parent.parent.resolve() or not same_vfa_geometry(source, workdir / "POSCAR"):
         raise ValueError("NEB/VFA saddle structure identity mismatch")
     current = analyze(root, thresholds, contract["reaction_atoms"], write_output=False)
+    if expected_method and current.get("parent_neb_method") != expected_method:
+        raise ValueError("CI-NEB acceptance requires an actual climbing-image source")
     if not current["technically_converged"] or not current["internal_maximum"] or str(current["maximum_image"]) != source.parent.name:
         raise ValueError("current NEB source is not a converged saddle candidate")
     # The workflow enriches these two parser fields using their own owners.
