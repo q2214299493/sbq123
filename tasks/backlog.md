@@ -69,6 +69,11 @@ Tasks are ordered by priority and should be handled one per Codex thread.
 15. **P3 - Define the broader long-term catalyst-agent scope**
    Done when systems, reactions, deliverables, and publication criteria are added to the project brief.
 
+## Deferred by the IS-A to INT06 path request (2026-09-26)
+
+- P2: Complete compatible INT06→MID electronic-barrier registration and automatic Grade-A strategy/TS-table linkage after the current remaining-H path review. Do not repeat accepted calculations.
+- P2: Align the legacy `neb_ci_neb_bidirectional_connectivity_policy` label in `configs/execution_backends.yaml` with the approved CI optional-connectivity policy; preserve backend roles and ordinary-NEB rules.
+
 <!-- state-handoff:start task_backlog_events -->
 ## Managed Backlog
 

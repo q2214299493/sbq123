@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-26T03:19:25Z",
+  "recorded_at": "2026-09-26T03:19:25Z",
+  "event_id": "task-is-a-int06-path-prepared-20260926",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "User requests remaining H migration via GPU then ordinary VASP NEB; IS-A to INT06 candidate 11-frame path prepared and checked locally, not submitted.",
+  "evidence": [
+    {
+      "locator": "docs/reviews/is_a_int06_path_prepared_20260926.md",
+      "sha256": "73061177a2e06e118be913205a6a0c2e5101e13fd7ba84fd7c36d700838702fa",
+      "authority": "repository_document",
+      "observed_at": "2026-09-26T03:19:25Z"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/exact_mic_checks.json",
+      "sha256": "3d82a76da51a17d272dd9094e4c8e556c26d27ab14741f616e81677b572e2f88",
+      "authority": "module_validation",
+      "observed_at": "2026-09-26T03:19:25Z"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/movie_validation.json",
+      "sha256": "0e277b01fd477273d5006a7b8e7aaa088cef7f1ee8d96660e850d3f24c82d379",
+      "authority": "module_validation",
+      "observed_at": "2026-09-26T03:19:25Z"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "payload": {
+    "objective": "Construct and review remaining IS-A9725473 to INT06_9748648 H migration path before GPU acceleration and VASP ordinary NEB.",
+    "phase": "verification",
+    "current_evidence": [
+      "Exact registered endpoint byte hashes verified; identity 50-atom map and bottom Fe0-17 fixed preserved.",
+      "11 total candidate images00-10, nine interiors; three H-only candidate corridor waypoints from hash-verified GPU1357, other atoms endpoint-blended and segmented IDPP initialized. No extra physical restraints.",
+      "Canonical path geometry PASS; exact 2D MIC max step0.404713 A, max branch residual1.42e-15 A; C-C/C-O/original C-H intact, O-H remains3.079728-4.062300 A.",
+      "Endpoint registry PASS; geometry REVIEW only for H mapped displacement3.277097 A. This is a path interval, not a proven single elementary event.",
+      "Ten VTST dist.pl calls and nebmovie.pl0 exit0; 11 movie frames match image geometry/order, max rounding error4.63e-14 A. Visual H corridor reviewed; hash-bound user path review remains needs_review.",
+      "No GPU model, VASP, SCF, Dimer or frequency executed/submitted. Old ML valley02 remains unverified as a DFT minimum."
+    ],
+    "one_executable_step": "Obtain user structural approval of this IS-A to INT06 corridor, then prepare one hash-bound MatRIS epoch6 ordinary ML-NEB plus fixed-path AQCat25 audit request. VASP ordinary NEB follows work-side GPU path review.",
+    "submission_boundary": "The user chooses GPU then coarse NEB, but this newly constructed exact path has not received structural approval or concrete-package submission authority; no remote job submitted.",
+    "done_when": [
+      "Reviewed candidate path/geometry/movie supplied; subsequent GPU and VASP stages keep separate current input and execution gates."
+    ],
+    "constraints": [
+      "Do not rerun accepted INT06-to-MID or MID-to-FS O-H segments.",
+      "No additional H/O-H/C-C restraints and no inherited O-H gate thresholds.",
+      "No assumption of one saddle or genuine ML valley02 intermediate.",
+      "Preserve SIGMA0.20 compatibility, atom order and fixed Fe0-17."
+    ],
+    "authoritative_references": [
+      "docs/reviews/is_a_int06_path_prepared_20260926.md",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/geometry_table.csv",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/path_review.png",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_is_a_int06_path_20260926/plan/path_candidate/path_review.json"
+    ]
+  },
+  "supersedes": [
+    "task-int06-mid-ci-grade-a-registered-20260926"
+  ]
+}
