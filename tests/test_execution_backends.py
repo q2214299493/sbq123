@@ -54,6 +54,24 @@ def test_runtime_backend_contract_rejects_weakened_authority(tmp_path: Path) -> 
         require_gpu_backend("other-host", "Slurm")
 
 
+def test_explicit_alternate_is_scoped_and_keeps_default(tmp_path: Path) -> None:
+    payload = yaml.safe_load(CONFIG.read_text(encoding="utf-8"))
+    payload["backends"]["vasp"]["authorized_alternates"] = {
+        "reviewed-temp": {"scheduler": "LSF", "scope": "reviewed-job"}
+    }
+    changed = tmp_path / "execution_backends.yaml"
+    changed.write_text(yaml.safe_dump(payload), encoding="utf-8")
+    assert load_execution_backends(changed).vasp.server_alias == "sunboquan-codex"
+    assert require_vasp_backend(
+        "reviewed-temp", "LSF", path=changed, workdir_name="reviewed-job"
+    ).server_alias == "reviewed-temp"
+    with pytest.raises(ValueError, match="not authorized for this workdir"):
+        require_vasp_backend("reviewed-temp", "LSF", path=changed, workdir_name="other-job")
+    for host, scheduler in (("reviewed-temp", "Slurm"), ("unreviewed", "LSF")):
+        with pytest.raises(ValueError, match="authoritative VASP backend"):
+            require_vasp_backend(host, scheduler, path=changed)
+
+
 def test_runtime_backend_contract_keeps_dimer_connectivity_diagnostic(
     tmp_path: Path,
 ) -> None:
@@ -120,3 +138,10 @@ def test_submission_rejects_unconfigured_host_before_filesystem_or_network(
             "0" * 64,
             "SUBMIT_VASP",
         )
+
+
+def test_remote_boundary_uses_canonical_home_and_keeps_symlink_guards() -> None:
+    checks = submission._remote_path_checks("~/sbq/Fe110/ts/job")
+    assert checks[0] == 'test "$(realpath -e ~/sbq)" = "$(realpath -e "$HOME")/sbq"'
+    assert "test ! -L ~/sbq" in checks
+    assert "test ! -L ~/sbq/Fe110/ts/job" in checks

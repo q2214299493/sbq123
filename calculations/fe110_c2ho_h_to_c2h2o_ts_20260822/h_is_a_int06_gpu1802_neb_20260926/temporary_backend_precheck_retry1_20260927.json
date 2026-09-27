@@ -1,0 +1,11 @@
+{
+  "checked_at": "2026-09-27T15:48:57.872684+00:00",
+  "server_alias": "sunboquan-cdj1-temp",
+  "hostname": "10.68.0.103",
+  "user": "nsgkx_cdj1",
+  "command": "bash -c 'set -euo pipefail; test \"$(id -un)\" = nsgkx_cdj1 && test \"$(hostname)\" = ycn03 && test -x \"$HOME/soft/vasp541vtst/bin/vasp_std\" && test -r /home_gkx/env/intel/intel2016.sh && test \"$(realpath -e ~/sbq)\" = \"$(realpath -e \"$HOME\")/sbq\" && test ! -e ~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_is_a_int06_gpu1802_neb_20260926 && test ! -e ~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_is_a_int06_gpu1802_neb_20260926.submission-reservation && test \"$({ cat \"$HOME/sbq/Fe_agent_demo/review_jobs/adsorption/fe110_c_o_coads_top25_top30/POTCAR\"; awk '\"'\"'{if(n>=1) print; if($0 ~ /End of Dataset/) n++}'\"'\"' \"$HOME/sbq/Fe_agent_demo/review_jobs/afe110/Fe110_H_bridge/POTCAR\"; } | sha256sum | awk '\"'\"'{print $1}'\"'\"')\" = e3bc41a37d795bfcf1b1dc9a2a9ddfb5ef86aa5dc9aa0ac5a3583471a0982f85 && mkdir -p ~/sbq/Fe110/potcars/Fe_C_O_H && if test ! -e ~/sbq/Fe110/potcars/Fe_C_O_H/POTCAR; then (set -C; { cat \"$HOME/sbq/Fe_agent_demo/review_jobs/adsorption/fe110_c_o_coads_top25_top30/POTCAR\"; awk '\"'\"'{if(n>=1) print; if($0 ~ /End of Dataset/) n++}'\"'\"' \"$HOME/sbq/Fe_agent_demo/review_jobs/afe110/Fe110_H_bridge/POTCAR\"; } > ~/sbq/Fe110/potcars/Fe_C_O_H/POTCAR); fi && test \"$(sha256sum ~/sbq/Fe110/potcars/Fe_C_O_H/POTCAR | awk '\"'\"'{print $1}'\"'\"')\" = e3bc41a37d795bfcf1b1dc9a2a9ddfb5ef86aa5dc9aa0ac5a3583471a0982f85 && sha256sum ~/sbq/Fe110/potcars/Fe_C_O_H/POTCAR'",
+  "exit_code": 0,
+  "stdout": "\r \r \r \r \r \r \r \r \r \r \r \r \r \r \r \r 一一一一一一一一一一一一一一一一一\n |用户类型:包核时用户\n |核数:128\n |剩余机时:417104.34\n |到期时间:2029/07/09\n 一一一一一一一一一一一一一一一一一\r\ne3bc41a37d795bfcf1b1dc9a2a9ddfb5ef86aa5dc9aa0ac5a3583471a0982f85  /home_gkx/users/nsgkx_cdj1/sbq/Fe110/potcars/Fe_C_O_H/POTCAR\n",
+  "stderr": "",
+  "status": "PASS"
+}

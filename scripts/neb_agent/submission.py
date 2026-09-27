@@ -383,7 +383,7 @@ def submit(
     reuse_uploaded: bool = False,
 ) -> dict[str, Any]:
     configured = load_execution_backends().vasp
-    backend = require_vasp_backend(host, configured.name)
+    backend = require_vasp_backend(host, configured.name, workdir_name=workdir.name)
     workdir = workdir.resolve(strict=True)
     attempt_path = workdir / SUBMISSION_ATTEMPT_FILE
     record_path = workdir / SUBMISSION_RECORD_FILE
@@ -604,7 +604,7 @@ def _remote_path_checks(path: str, *, allow_root: bool = False) -> list[str]:
     require_remote_path(path, allow_root=allow_root)
     parts = path.split("/")
     return [
-        'test "$(realpath -e ~/sbq)" = "$HOME/sbq"',
+        'test "$(realpath -e ~/sbq)" = "$(realpath -e "$HOME")/sbq"',
         *(f"test ! -L {'/'.join(parts[:index])}" for index in range(2, len(parts) + 1)),
     ]
 

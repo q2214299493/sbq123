@@ -1,0 +1,11 @@
+{
+  "observed_at": "2026-09-27T15:51:23.737716+00:00",
+  "command": "printf 'RESERVATION\\n'; test -d ~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_is_a_int06_gpu1802_neb_20260926.submission-reservation && cat ~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_is_a_int06_gpu1802_neb_20260926.submission-reservation/reservation_id; printf 'TARGET_EXISTS\\n'; if test -e ~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_is_a_int06_gpu1802_neb_20260926; then ls -ld ~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_is_a_int06_gpu1802_neb_20260926; find ~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_is_a_int06_gpu1802_neb_20260926 -maxdepth 2 -type f -print | head -n 20; else printf 'NO_TARGET_DIRECTORY\\n'; fi; printf 'SCHEDULER_CHECKPOINT\\n'; bjobs -a -w 2>&1 | head -c 4000",
+  "server_alias": "sunboquan-cdj1-temp",
+  "exit_code": 0,
+  "stdout": "\r \r \r \r \r \r \r \r \r \r \r \r \r \r \r \r 一一一一一一一一一一一一一一一一一\n |用户类型:包核时用户\n |核数:128\n |剩余机时:417104.34\n |到期时间:2029/07/09\n 一一一一一一一一一一一一一一一一一\r\nRESERVATION\n6bcd3d8ff54840648e7b6420243571fa\nTARGET_EXISTS\nNO_TARGET_DIRECTORY\nSCHEDULER_CHECKPOINT\nJOBID   USER    STAT  QUEUE      FROM_HOST   EXEC_HOST   JOB_NAME   SUBMIT_TIME\n9757379 nsgkx_cdj1 RUN   Gkn_normal ycn03       32*gknew0217 541vtst.lsf Sep 15 11:15\n9757393 nsgkx_cdj1 RUN   Gkn_normal ycn03       32*gknew0724 541vtst.lsf Sep 15 11:26\n9757377 nsgkx_cdj1 DONE  Gkn_normal ycn03       32*gknew0513 541vtst.lsf Sep 15 11:13\n9757383 nsgkx_cdj1 DONE  Gkn_normal ycn03       32*gknew0644 541vtst.lsf Sep 15 11:18\n9757388 nsgkx_cdj1 DONE  Gkn_normal ycn03       32*gknew0647 541vtst.lsf Sep 15 11:23\n9757396 nsgkx_cdj1 DONE  Gkn_normal ycn03       32*gknew0322 541vtst.lsf Sep 15 11:29\n",
+  "stderr": "",
+  "failed_stage": "SCP_UPLOAD_BEFORE_BSUB",
+  "failure": "scp: Received message too long 220204320; non-interactive shell banner",
+  "resolution": "Human confirmation required; preserve both local and remote reservations. No automatic retry."
+}

@@ -73,6 +73,14 @@ backends:
     role: authoritative_first_principles_calculation
     ssh_alias: sunboquan-codex
     scheduler: LSF
+    # User-authorized temporary account; default calculation identities unchanged.
+    authorized_alternates:
+      sunboquan-cdj1-temp:
+        scheduler: LSF
+        hostname: 10.68.0.103
+        user: nsgkx_cdj1
+        port: 22
+        scope: h_is_a_int06_gpu1802_neb_20260926
     allowed:
       - vasp_static_energy_and_force
       - vasp_adsorption_relaxation_and_final_static
