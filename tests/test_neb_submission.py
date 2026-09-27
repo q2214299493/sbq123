@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import tarfile
 from pathlib import Path
 
 import numpy as np
@@ -300,17 +302,43 @@ def test_upload_stages_only_manifest_files(tmp_path: Path, monkeypatch) -> None:
     (workdir / "unrequested.md").write_text("exclude", encoding="ascii")
     uploaded: list[str] = []
 
-    def inspect_upload(argv: list[str]):
-        staged = Path(argv[2])
-        uploaded.extend(
-            path.relative_to(staged).as_posix()
-            for path in staged.rglob("*")
-            if path.is_file()
-        )
+    def inspect_upload(argv: list[str], *, stdin):
+        assert argv[:2] == ["ssh", "host"]
+        assert "test ! -e ~/sbq/calculation" in argv[2]
+        assert "tar --keep-old-files --no-same-owner -xf -" in argv[2]
+        with tarfile.open(fileobj=stdin, mode="r:") as archive:
+            uploaded.extend(member.name for member in archive.getmembers())
+            assert archive.extractfile("calculation/INCAR").read() == b"required"
 
     monkeypatch.setattr(submission, "_run", inspect_upload)
     submission._upload_manifest_files("host", "~/sbq", workdir, {"INCAR": sha256_file(workdir / "INCAR")})
-    assert uploaded == ["INCAR"]
+    assert uploaded == ["calculation/INCAR"]
+
+
+def test_upload_rejects_changed_manifest_before_ssh(tmp_path: Path, monkeypatch) -> None:
+    workdir = tmp_path / "calculation"
+    workdir.mkdir()
+    source = workdir / "INCAR"
+    source.write_text("original", encoding="ascii")
+    digest = sha256_file(source)
+    source.write_text("changed", encoding="ascii")
+    calls = []
+    monkeypatch.setattr(submission, "_run", lambda *args, **kwargs: calls.append(args))
+    with pytest.raises(ValueError, match="staged submission bundle changed"):
+        submission._upload_manifest_files("host", "~/sbq", workdir, {"INCAR": digest})
+    assert not calls
+
+
+def test_ssh_upload_runner_accepts_banner_and_checks_exit(monkeypatch) -> None:
+    def completed(argv, **kwargs):
+        assert "stdin" in kwargs
+        return subprocess.CompletedProcess(argv, 0, "login banner\n", "")
+    monkeypatch.setattr(submission.subprocess, "run", completed)
+    assert submission._run(["ssh", "host", "true"]).returncode == 0
+    monkeypatch.setattr(submission.subprocess, "run", lambda argv, **kwargs:
+                        subprocess.CompletedProcess(argv, 1, "login banner\n", "tar failed"))
+    with pytest.raises(RuntimeError, match="tar failed"):
+        submission._run(["ssh", "host", "false"])
 
 
 def test_stop_job_accepts_gate_bound_pending_job(tmp_path: Path, monkeypatch) -> None:

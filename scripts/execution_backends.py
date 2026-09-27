@@ -110,7 +110,9 @@ def require_vasp_backend(
     alternates = payload["backends"]["vasp"].get("authorized_alternates", {})
     alternate = alternates.get(str(server_alias)) if isinstance(alternates, dict) else None
     if isinstance(alternate, dict) and alternate.get("scheduler") == "LSF" and str(scheduler) == "LSF":
-        if workdir_name is not None and alternate.get("scope") != workdir_name:
+        scopes = alternate.get("scope")
+        scopes = scopes if isinstance(scopes, list) else [scopes]
+        if workdir_name is not None and workdir_name not in scopes:
             raise ValueError("temporary VASP backend is not authorized for this workdir")
         return SchedulerBackend(name="LSF", server_alias=str(server_alias))
     if (str(server_alias), str(scheduler)) != (

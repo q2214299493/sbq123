@@ -145,3 +145,22 @@ def test_remote_boundary_uses_canonical_home_and_keeps_symlink_guards() -> None:
     assert checks[0] == 'test "$(realpath -e ~/sbq)" = "$(realpath -e "$HOME")/sbq"'
     assert "test ! -L ~/sbq" in checks
     assert "test ! -L ~/sbq/Fe110/ts/job" in checks
+
+
+def test_temporary_backend_scheduler_evidence_validates() -> None:
+    from scripts.artifact_io import sha256_text
+    from scripts.scheduler_evidence import validate_stored_lsf_evidence
+
+    stdout = "JOBID USER STAT\n123 nsgkx_cdj1 PEND\n"
+    evidence = {
+        "schema_version": 1, "document_kind": "scheduler_job_evidence",
+        "stage": "ordinary_neb", "scheduler": "LSF", "server_alias": "sunboquan-cdj1-temp",
+        "job_id": "123", "status": "PEND", "checked_at": "2026-09-28T00:00:00Z",
+        "source_command": "ssh sunboquan-cdj1-temp bjobs -a 123",
+        "query": {"argv": ["ssh", "sunboquan-cdj1-temp", "bjobs", "-a", "123"],
+                  "returncode": 0, "stdout": stdout, "stderr": "", "stdout_sha256": sha256_text(stdout)},
+    }
+    validate_stored_lsf_evidence(evidence)
+    evidence["server_alias"] = "unreviewed-host"
+    with pytest.raises(ValueError):
+        validate_stored_lsf_evidence(evidence)

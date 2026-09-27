@@ -80,7 +80,9 @@ backends:
         hostname: 10.68.0.103
         user: nsgkx_cdj1
         port: 22
-        scope: h_is_a_int06_gpu1802_neb_20260926
+        scope:
+          - h_is_a_int06_gpu1802_neb_20260926
+          - h_is_a_int06_gpu1802_neb_temp_r2_20260928
     allowed:
       - vasp_static_energy_and_force
       - vasp_adsorption_relaxation_and_final_static

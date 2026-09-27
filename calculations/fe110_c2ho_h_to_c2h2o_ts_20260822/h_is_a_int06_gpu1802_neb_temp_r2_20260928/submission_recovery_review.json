@@ -1,0 +1,20 @@
+{
+  "reviewed_at": "2026-09-27T16:13:10.450798+00:00",
+  "user_reply": "继续",
+  "prior_question": "确认本次没有匹配作业，并授权修复上传后重新提交？",
+  "scope": "One new attempt with banner-safe upload; original local/remote reservations remain unchanged.",
+  "old_attempt": {
+    "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_20260926\\submission_attempt.json",
+    "sha256": "7e879db45f10c7679e3792d313c0bc75238ffe9b1901223b74286066568ed826"
+  },
+  "old_failure_evidence": {
+    "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_20260926\\temporary_upload_failure_reconciliation_20260927.json",
+    "sha256": "cb8d4b58c770d2646b132f7023f61d1e2cca8d459147f1158da04ad560a2aeb0"
+  },
+  "fresh_read_only_check": {
+    "command": "set -e; test ! -e ~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_is_a_int06_gpu1802_neb_20260926; test \"$(cat ~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_is_a_int06_gpu1802_neb_20260926.submission-reservation/reservation_id)\" = 6bcd3d8ff54840648e7b6420243571fa; test ! -e ~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_is_a_int06_gpu1802_neb_temp_r2_20260928; test ! -e ~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_is_a_int06_gpu1802_neb_temp_r2_20260928.submission-reservation; test \"$(sha256sum ~/sbq/Fe110/potcars/Fe_C_O_H/POTCAR | awk '{print $1}')\" = e3bc41a37d795bfcf1b1dc9a2a9ddfb5ef86aa5dc9aa0ac5a3583471a0982f85; printf 'OLD_TARGET_ABSENT_AND_RESERVATION_PRESERVED\\n'; bjobs -a -w",
+    "exit_code": 0,
+    "stdout": "\r \r \r \r \r \r \r \r \r \r \r \r \r \r \r \r 一一一一一一一一一一一一一一一一一\n |用户类型:包核时用户\n |核数:128\n |剩余机时:417104.34\n |到期时间:2029/07/09\n 一一一一一一一一一一一一一一一一一\r\nOLD_TARGET_ABSENT_AND_RESERVATION_PRESERVED\nJOBID   USER    STAT  QUEUE      FROM_HOST   EXEC_HOST   JOB_NAME   SUBMIT_TIME\n9757379 nsgkx_cdj1 RUN   Gkn_normal ycn03       32*gknew0217 541vtst.lsf Sep 15 11:15\n9757393 nsgkx_cdj1 RUN   Gkn_normal ycn03       32*gknew0724 541vtst.lsf Sep 15 11:26\n9757377 nsgkx_cdj1 DONE  Gkn_normal ycn03       32*gknew0513 541vtst.lsf Sep 15 11:13\n9757383 nsgkx_cdj1 DONE  Gkn_normal ycn03       32*gknew0644 541vtst.lsf Sep 15 11:18\n9757388 nsgkx_cdj1 DONE  Gkn_normal ycn03       32*gknew0647 541vtst.lsf Sep 15 11:23\n9757396 nsgkx_cdj1 DONE  Gkn_normal ycn03       32*gknew0322 541vtst.lsf Sep 15 11:29\n"
+  },
+  "scientific_inputs": "Byte-identical original preflight manifest; same accepted review and VTST movie evidence."
+}

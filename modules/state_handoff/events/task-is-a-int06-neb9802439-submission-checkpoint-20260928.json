@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-27T16:20:25.257109+00:00",
+  "recorded_at": "2026-09-27T16:20:25.257109+00:00",
+  "event_id": "task-is-a-int06-neb9802439-submission-checkpoint-20260928",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "Banner-safe SSH tar transfer verified exact manifest; authorized new attempt submitted as LSF9802439 on temporary account. Scheduler PEND; no ionic/TS result.",
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928/submission_record.json",
+      "sha256": "5c90c01686ccde2babe42914b04e5fe2cd2d829595b04824048c1b8005d54dbc",
+      "authority": "repository_document",
+      "observed_at": "2026-09-27T16:20:25.257109+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928/submission_attempt.json",
+      "sha256": "22d57317c7b05977ec0d2c30ffba1e83c26b256975260d29bd43da956e33233b",
+      "authority": "repository_document",
+      "observed_at": "2026-09-27T16:20:25.257109+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928/scheduler_checkpoint_submission.json",
+      "sha256": "fe65ae10768df099648c49853e9770a43e88717ece34059e60c3dd3cc45e50d0",
+      "authority": "scheduler",
+      "observed_at": "2026-09-27T16:20:25.257109+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928/execution_gate_decision.json",
+      "sha256": "fb88ccc9bf535d1f4b08edfe46711de7c99493659f0080abdd1bcc949d38d17b",
+      "authority": "module_validation",
+      "observed_at": "2026-09-27T16:20:25.257109+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928/submission_preflight.json",
+      "sha256": "841bdebef1cdbd93fe2295be74a206ab1ba9c2a7e0cefd9c3d07d096e262a3b4",
+      "authority": "module_validation",
+      "observed_at": "2026-09-27T16:20:25.257109+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928/submission_recovery_review.json",
+      "sha256": "94ee3214d1392d37a4b691f4d3c45297e68cd4c6ee750acc31d61ee918f2c889",
+      "authority": "user_authorization",
+      "observed_at": "2026-09-27T16:20:25.257109+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928/user_execution_request.json",
+      "sha256": "fb87b2c8c6ae7811b90ebc6e877fa4d1e16e849483bf43825caaced227a0154e",
+      "authority": "user_authorization",
+      "observed_at": "2026-09-27T16:20:25.257109+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928/scientific_input_identity.json",
+      "sha256": "db2b059262356944159fdfbab5c8a57a3246d558e240e7534d51b353e6a8860e",
+      "authority": "repository_document",
+      "observed_at": "2026-09-27T16:20:25.257109+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "payload": {
+    "objective": "Monitor ordinary coarse NEB9802439 for the remaining IS-A9725473 -> INT06_9748648 H migration.",
+    "phase": "active",
+    "current_evidence": [
+      "User continued after upload-failure recovery review; prior unresolved local/remote reservation remains immutable, separate new attempt directory used.",
+      "New SSH tar stdin transfer avoids login-banner SCP framing failure. Remote canonical executor verified all input hashes and exact original Fe/C/O/H POTCAR before bsub.",
+      "Actual LSF receipt:9802439 on sunboquan-cdj1-temp (10.68.0.103/nsgkx_cdj1), Gkn_normal. Latest hash-bound scheduler checkpoint PEND; VASP progress not yet established.",
+      "Canonical initial compact monitor: images01-09 have0 ionic steps and no energy/force values. Missing output is not electronic convergence or TS evidence.",
+      "Scientific files byte-identical:11 structures/9 interiors,108ranks/NPAR4,Fast,EDIFF1e-5,EDIFFG-0.05,NSW300,SIGMA0.20,no climb,pilot or restraints. New bundle hash differs only because geometry evidence binds new source paths.",
+      "New workdir:calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928; same basename under ~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/.",
+      "54 backend/submission/execution-gate tests and88 scheduler evidence/mutation-boundary tests passed; targeted compilation/Ruff passed. No convergence/barrier/Grade-A claim."
+    ],
+    "one_executable_step": "At the next requested checkpoint, query LSF9802439 on sunboquan-cdj1-temp and use the canonical compact NEB monitor; distinguish queue, SCF, ionic force and path states.",
+    "submission_boundary": "One ordinary NEB submitted. No duplicate/retry, pilot, CI,Dimer, stop or parameter change without a fresh current gate and user authority; preserve old failure markers.",
+    "done_when": [
+      "NEB9802439 is monitored with scheduler and per-image evidence; a completed/stopped path is reviewed before any authorized refinement."
+    ],
+    "constraints": [
+      "Keep accepted INT06-MID and MID-FS segments unchanged.",
+      "Preserve request/checkpoint hashes, atom order, fixed Fe0-17 and SIGMA0.20 compatibility.",
+      "GPU predictions cannot establish a TS or electronic barrier."
+    ],
+    "authoritative_references": [
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928/submission_record.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928/submission_attempt.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928/scheduler_checkpoint_submission.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928/execution_gate_decision.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928/submission_preflight.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928/submission_recovery_review.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928/user_execution_request.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928/scientific_input_identity.json"
+    ]
+  },
+  "supersedes": [
+    "task-is-a-int06-temp-upload-blocked-20260927"
+  ]
+}

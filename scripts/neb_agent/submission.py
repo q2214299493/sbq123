@@ -5,11 +5,12 @@ import re
 import shlex
 import shutil
 import subprocess
+import tarfile
 import tempfile
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, BinaryIO
 from uuid import uuid4
 
 from scripts.artifact_io import (
@@ -571,7 +572,7 @@ def _script_cores(path: Path) -> int | None:
     return int(match.group(1)) if match else None
 
 
-def _run(argv: list[str]) -> subprocess.CompletedProcess[str]:
+def _run(argv: list[str], *, stdin: BinaryIO | None = None) -> subprocess.CompletedProcess[str]:
     try:
         completed = subprocess.run(
             argv,
@@ -579,6 +580,7 @@ def _run(argv: list[str]) -> subprocess.CompletedProcess[str]:
             encoding="utf-8",
             errors="replace",
             capture_output=True,
+            stdin=stdin,
             check=False,
             timeout=EXTERNAL_COMMAND_TIMEOUT_SECONDS,
         )
@@ -651,7 +653,19 @@ def _upload_manifest_files(
             shutil.copy2(source, target)
             if sha256_file(target) != digest:
                 raise ValueError(f"staged submission bundle changed: {relative}")
-        _run(["scp", "-r", str(staged), f"{host}:{remote_parent}/"])
+        # Login banners may corrupt SCP/SFTP framing. Upload tar on SSH stdin;
+        # remote stdout is independent and still captured by the command runner.
+        archive_path = Path(temporary) / "inputs.tar"
+        with tarfile.open(archive_path, "w") as archive:
+            for relative in sorted(validated):
+                archive.add(staged / relative, arcname=f"{workdir.name}/{relative}", recursive=False)
+        command = _remote_shell([
+            *_remote_path_checks(remote_parent, allow_root=True),
+            f"test ! -e {remote_parent}/{workdir.name}",
+            f"tar --keep-old-files --no-same-owner -xf - -C {remote_parent}",
+        ])
+        with archive_path.open("rb") as payload:
+            _run(["ssh", host, command], stdin=payload)
 
 
 def main() -> None:

@@ -3,28 +3,29 @@
 
 ## Objective
 
-Submit the reviewed GPU1802 complete IS-A9725473 -> INT06_9748648 path as one ordinary VASP coarse NEB.
+Monitor ordinary coarse NEB9802439 for the remaining IS-A9725473 -> INT06_9748648 H migration.
 
 ## Current Evidence Snapshot
 
-- User authorized temporary 10.68.0.103:22/nsgkx_cdj1 account for this existing coarse NEB only; separate alias sunboquan-cdj1-temp. Default backend unchanged.
-- Login ycn03/LSF/VTST executable and Intel environment verified. Fe/C/O/H POTCAR assembled remotely from existing licensed datasets, exact original SHA256 e3bc41a37d795bfcf1b1dc9a2a9ddfb5ef86aa5dc9aa0ac5a3583471a0982f85.
-- Scientific/input bundle unchanged:108 ranks,9 interiors,NPAR4,Fast,EDIFF1e-5,EDIFFG-0.05,NSW300,SIGMA0.20,no pilot or restraints. New target-bound gate lists SUBMIT_VASP.
-- Resolved legitimate mapped HOME path by canonical comparison while retaining symlink guards;51 related backend/submission/gate tests passed.
-- Canonical executor created local/remote reservation, then SCP failed: Received message too long 220204320 because login banner contaminated transfer. bsub stage not reached; no new job ID obtained.
-- Canonical status UNKNOWN_NEEDS_RECONCILIATION retained; read-only reservation/directory/scheduler evidence saved. Never remove marker or automatically retry.
+- User continued after upload-failure recovery review; prior unresolved local/remote reservation remains immutable, separate new attempt directory used.
+- New SSH tar stdin transfer avoids login-banner SCP framing failure. Remote canonical executor verified all input hashes and exact original Fe/C/O/H POTCAR before bsub.
+- Actual LSF receipt:9802439 on sunboquan-cdj1-temp (10.68.0.103/nsgkx_cdj1), Gkn_normal. Latest hash-bound scheduler checkpoint PEND; VASP progress not yet established.
+- Canonical initial compact monitor: images01-09 have0 ionic steps and no energy/force values. Missing output is not electronic convergence or TS evidence.
+- Scientific files byte-identical:11 structures/9 interiors,108ranks/NPAR4,Fast,EDIFF1e-5,EDIFFG-0.05,NSW300,SIGMA0.20,no climb,pilot or restraints. New bundle hash differs only because geometry evidence binds new source paths.
+- New workdir:calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928; same basename under ~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/.
+- 54 backend/submission/execution-gate tests and88 scheduler evidence/mutation-boundary tests passed; targeted compilation/Ruff passed. No convergence/barrier/Grade-A claim.
 
 ## Lifecycle Status
 
-- Phase: `blocked`
+- Phase: `active`
 
 ## One Executable Step
 
-Review read-only upload-failure recovery evidence with the operator; obtain explicit confirmation of no matching job and authority for a new submission, then repair banner-safe transport without altering scientific inputs.
+At the next requested checkpoint, query LSF9802439 on sunboquan-cdj1-temp and use the canonical compact NEB monitor; distinguish queue, SCF, ionic force and path states.
 
 ## Submission Boundary
 
-No new submission or deletion of reservations until explicit human recovery confirmation. Keep default sunboquan-codex and accepted other reaction intervals unchanged.
+One ordinary NEB submitted. No duplicate/retry, pilot, CI,Dimer, stop or parameter change without a fresh current gate and user authority; preserve old failure markers.
 
 ## Authoritative Constraint
 
@@ -32,7 +33,7 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 
 ## Done When
 
-- One actual ordinary NEB submission receipt and scheduler checkpoint are recorded, or a bounded remote precheck failure is truthfully retained without claiming submission.
+- NEB9802439 is monitored with scheduler and per-image evidence; a completed/stopped path is reviewed before any authorized refinement.
 
 ## Constraints
 
@@ -42,10 +43,12 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 
 ## Authoritative References
 
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/temporary_backend_precheck_retry1_20260927.json
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/temporary_execution_gate_decision_20260927.json
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/user_temporary_backend_request_20260927.json
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/submission_attempt.json
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/submission_record.json
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_20260926/temporary_upload_failure_reconciliation_20260927.json
+- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928/submission_record.json
+- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928/submission_attempt.json
+- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928/scheduler_checkpoint_submission.json
+- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928/execution_gate_decision.json
+- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928/submission_preflight.json
+- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928/submission_recovery_review.json
+- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928/user_execution_request.json
+- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_temp_r2_20260928/scientific_input_identity.json
 <!-- state-handoff:end current_task -->
