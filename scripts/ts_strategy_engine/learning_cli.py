@@ -7,6 +7,8 @@ from pathlib import Path
 
 from scripts.artifact_io import load_json_object, write_json
 
+from .learning_cases import build_cases
+from .learning_evaluation import evaluate_cases
 from .learning_evidence import attempt_input_hashes, bind_files
 from .learning_store import DEFAULT_DATABASE, read_events
 from .workflow import start_vasp_attempt
@@ -49,10 +51,26 @@ def parser() -> argparse.ArgumentParser:
     compare = commands.add_parser("compare", help="Compare frozen cases without promoting a strategy or a result.")
     compare.add_argument("--baseline-id", required=True)
     compare.add_argument("--candidate-id", required=True)
+    build = commands.add_parser("cases-build", help="Build a source-bound offline diagnostic case bundle.")
+    build.add_argument("--manifest", type=Path, required=True)
+    build.add_argument("--allowed-root", type=Path, required=True)
+    build.add_argument("--bundle", type=Path, required=True)
+    evaluation = commands.add_parser("cases-evaluate", help="Score saved answers without a registry or model.")
+    evaluation.add_argument("--bundle", type=Path, required=True)
+    evaluation.add_argument("--answers", type=Path, required=True)
+    evaluation.add_argument("--report", type=Path, required=True)
     return root
 
 
+def _dispatch_cases(args: argparse.Namespace):
+    if args.command == "cases-build":
+        return build_cases(args.manifest, args.allowed_root, args.bundle)
+    return evaluate_cases(args.bundle, args.answers, args.report)
+
+
 def _dispatch(args: argparse.Namespace):
+    if args.command in {"cases-build", "cases-evaluate"}:
+        return _dispatch_cases(args)
     database = args.database
     if args.command == "methods":
         return reference_methods()

@@ -84,8 +84,16 @@ def observe(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
             raise ValueError("observation pointer must be a nonempty JSON pointer")
         try:
             for token in pointer[1:].split("/"):
+                if "~" in token.replace("~0", "").replace("~1", ""):
+                    raise ValueError("invalid JSON pointer escape")
                 token = token.replace("~1", "/").replace("~0", "~")
-                value = value[int(token)] if isinstance(value, list) else value[token]
+                if isinstance(value, list):
+                    if not token.isascii() or not token.isdecimal() \
+                            or (len(token) > 1 and token.startswith("0")):
+                        raise ValueError("invalid JSON array index")
+                    value = value[int(token)]
+                else:
+                    value = value[token]
         except (KeyError, IndexError, TypeError, ValueError) as exc:
             raise ValueError(f"observation pointer does not exist: {pointer}") from exc
         if type(value) is not type(item["value"]) or value != item["value"]:

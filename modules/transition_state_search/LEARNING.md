@@ -25,6 +25,35 @@ History records may contain task-specific provenance, but none is transferable
 scientific evidence for a different reaction. Existing TS/barrier writers and
 the active final-energy convention are unchanged.
 
+## Offline diagnostic cases
+
+`learning cases-build --manifest CASES.json --allowed-root SNAPSHOT_DIR --bundle NEW_DIR`
+builds a write-once bundle from an explicit JSON case manifest. The manifest
+has `schema_version: 1` and a `cases` array. Each case provides `case_id`,
+`group_id`, `question`, `provenance` (`synthetic`, `reviewed_real`, or
+`incomplete`), a nonempty `public_evidence` list, and `reference` or `null`.
+Each evidence item has `evidence_id`, `path`, `sha256`, `pointer`, and scalar
+`value`. A scored reference has `review_status: approved`, a nonempty
+`review_basis`, a separate `source` with the same four observation fields, and
+`expected` with `failure_class`, `root_cause_status`, `next_review`, and
+`evidence_ids`. The reference source's selected value must equal `expected`.
+Source paths must resolve to small JSON files inside the allowed root.
+
+Only `public.json` should be given to an answer generator. `private.json`
+contains source paths and references; file separation is not an access control
+boundary. The manifest author must check that selected values contain no later
+conclusions. `manifest.json` is written last and marks a complete bundle.
+
+`learning cases-evaluate --bundle NEW_DIR --answers ANSWERS.json --report NEW_REPORT.json`
+scores saved answers without opening a registry or running a model. The answer
+file contains `schema_version: 1`, the bundle's `public_sha256`, and an
+`answers` array. Each answer has `case_id`, the public case's `input_sha256`,
+`failure_class`, `root_cause_status`, `next_review`, and `evidence_ids`.
+The report lists every case, missing or invalid answers, unknown IDs, and the
+scorable denominator. A match means agreement with the supplied review
+reference, not scientific TS validation or measured real-world improvement.
+Both commands use new output paths and leave the current calculation unchanged.
+
 ## Warm start and reference methods
 
 Install local orchestration dependencies with `python -m pip install -e ".[dev,neb,sella]"`.
