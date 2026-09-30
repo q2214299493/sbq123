@@ -72,8 +72,14 @@ backends:
   vasp:
     role: authoritative_first_principles_calculation
     ssh_alias: sunboquan-codex
+    # User-selected default since 2026-09-30; SSH alias sbq123 is equivalent.
+    # Resolve through the local OpenSSH config, retaining the canonical alias
+    # used by existing submission gates and scheduler evidence.
+    hostname: 10.68.0.103
+    user: nsgkn_chengdj3
+    port: 22
     scheduler: LSF
-    # User-authorized temporary account; default calculation identities unchanged.
+    # Existing jobs on this separate account retain their scoped backend.
     authorized_alternates:
       sunboquan-cdj1-temp:
         scheduler: LSF

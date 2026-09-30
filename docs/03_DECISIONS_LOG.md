@@ -1436,3 +1436,19 @@ governance: docs/DOCUMENT_GOVERNANCE.md
   execution gate. Remote GPU/VASP submission, fine-tuning, NEB/Dimer/frequency
   execution, and final scientific acceptance remain explicit authorized
   actions.
+
+## 2026-09-30 - Default VASP submission through the sbq123 connection
+
+- User requests all future VASP submissions through the screenshot connection
+  `sbq123`: `nsgkn_chengdj3@10.68.0.103:22`. Read-only SSH confirms that exact
+  username, LSF commands, and login host `ycn03`.
+- Preserve canonical alias `sunboquan-codex` for existing submission/gate
+  consumers; its local OpenSSH target is now this connection, with `sbq123`
+  as an equivalent alias. Connection metadata is recorded in
+  `configs/execution_backends.yaml`. MZ73 GPU routing is unchanged.
+- Job9806036 retains backend `sunboquan-cdj1-temp` / `nsgkx_cdj1`; this
+  preference does not stop, migrate, duplicate, or authorize a new submission.
+- Preserve the resource preference of 16 or 32 ranks per node under resource
+  pressure, subject to image/rank divisibility, the account quota, and reviewed
+  job-specific exceptions. Each actual submission still needs its own current
+  preflight and execution gate.
