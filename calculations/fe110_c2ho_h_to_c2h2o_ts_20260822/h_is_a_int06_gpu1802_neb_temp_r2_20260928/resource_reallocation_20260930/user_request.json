@@ -1,0 +1,5 @@
+{
+  "verbatim": "可以",
+  "context": "User confirmed the proposed exception: retain all 9 internal images, use 72 total MPI ranks and at most 16 ranks per node, stop pending LSF job 9802439, and submit one separately gated replacement on the authorized temporary VASP backend.",
+  "scope": "Only if LSF job 9802439 remains PEND: stop that exact job through the current STOP_JOB gate, verify its terminal state, then submit one identical-science ordinary NEB replacement with NP=72 and NP_PER_NODE=16 through a fresh hash-bound SUBMIT_VASP gate. Do not stop a running job, duplicate a live job, alter the image structures or INCAR, or resubmit after an ambiguous result."
+}

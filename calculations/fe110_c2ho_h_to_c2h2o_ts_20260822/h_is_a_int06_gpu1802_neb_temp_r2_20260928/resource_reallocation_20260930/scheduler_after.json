@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "document_kind": "scheduler_job_evidence",
+  "stage": "vasp_force_label",
+  "scheduler": "LSF",
+  "server_alias": "sunboquan-cdj1-temp",
+  "job_id": "9802439",
+  "status": "EXIT",
+  "checked_at": "2026-09-30T05:19:31Z",
+  "source_command": "ssh sunboquan-cdj1-temp bjobs -a 9802439",
+  "query": {
+    "argv": [
+      "ssh",
+      "sunboquan-cdj1-temp",
+      "bjobs",
+      "-a",
+      "9802439"
+    ],
+    "returncode": 0,
+    "stdout": "\r \r \r \r \r \r \r \r \r \r \r \r \r \r \r \r 一一一一一一一一一一一一一一一一一\n |用户类型:包核时用户\n |核数:128\n |剩余机时:417099.81\n |到期时间:2029/07/09\n 一一一一一一一一一一一一一一一一一\r\nJOBID   USER    STAT  QUEUE      FROM_HOST   EXEC_HOST   JOB_NAME   SUBMIT_TIME\n9802439 nsgkx_c EXIT  Gkn_normal ycn03          -        script.lsf Sep 28 00:17\n",
+    "stderr": "",
+    "stdout_sha256": "9988f08725fa07f613e5764f8da96d1b66c2a6c955eb6737ec872a68b0ac986b"
+  }
+}

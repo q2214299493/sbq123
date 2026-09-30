@@ -1066,6 +1066,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
   their row order as atom order and has a regression test; scheduler evidence
   Schema now accepts the explicit `vfa` stage.
 
+## 2026-09-30 - Resource-aware VASP allocation preference
+
+- When cluster slots are scarce, prefer a per-node cap of 16 or 32 cores and a total rank count that is a multiple of that cap where the image count, `NPAR`, account quota, and scheduler permit it. This is a preference, not a reason to violate NEB MPI divisibility or change a reviewed path.
+- For the current nine-internal-image, `NPAR=4` ordinary NEB, the user approved a 72-rank, `NP_PER_NODE=16` exception: 72/9=8 ranks per image. The pending 108-rank job 9802439 was stopped and replacement 9806036 submitted through fresh gates. A smaller request is not a guarantee of shorter queue time or faster VASP runtime.
+- Any later resource change to a submitted job still requires its own live-state check, current hash-bound execution gate, and user authority.
+
 <!-- state-handoff:start task_decision_events -->
 ## Managed Decisions
 
