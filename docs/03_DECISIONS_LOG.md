@@ -1452,3 +1452,10 @@ governance: docs/DOCUMENT_GOVERNANCE.md
   pressure, subject to image/rank divisibility, the account quota, and reviewed
   job-specific exceptions. Each actual submission still needs its own current
   preflight and execution gate.
+
+- Subsequent explicit instruction: cancel old NEB9806036, remove the old
+  `sunboquan-cdj1-temp` SSH connection, and submit the same scientific inputs
+  with 108 ranks on the new default account. STOP_JOB confirmed EXIT before
+  the connection was removed. Replacement NEB9808511 requests 108 ranks and
+  `span[ptile=16]`; its submission checkpoint is PEND. Historical calculation
+  evidence and unrelated jobs are preserved.

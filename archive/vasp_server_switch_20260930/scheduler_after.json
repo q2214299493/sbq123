@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "document_kind": "scheduler_job_evidence",
+  "stage": "ordinary_neb",
+  "scheduler": "LSF",
+  "server_alias": "sunboquan-cdj1-temp",
+  "job_id": "9806036",
+  "status": "EXIT",
+  "checked_at": "2026-09-30T13:19:44.690425+00:00",
+  "source_command": "ssh sunboquan-cdj1-temp bjobs -a 9806036",
+  "query": {
+    "argv": [
+      "ssh",
+      "sunboquan-cdj1-temp",
+      "bjobs",
+      "-a",
+      "9806036"
+    ],
+    "returncode": 0,
+    "stdout": "\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n 一一一一一一一一一一一一一一一一一\n |用户类型:包核时用户\n |核数:128\n |剩余机时:417099.81\n |到期时间:2029/07/09\n 一一一一一一一一一一一一一一一一一\nJOBID   USER    STAT  QUEUE      FROM_HOST   EXEC_HOST   JOB_NAME   SUBMIT_TIME\n9806036 nsgkx_c EXIT  Gkn_normal ycn03          -        script.lsf Sep 30 13:19\n",
+    "stderr": "",
+    "stdout_sha256": "74f2f2b435fe920916112888e861b987d7ae1d2aee66004ec6212029050c4977"
+  }
+}

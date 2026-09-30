@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-09-30T13:24:02.385609+00:00",
+  "recorded_at": "2026-09-30T13:24:02.385609+00:00",
+  "event_id": "task-is-a-int06-neb9808511-sbq123-switch-20260930",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "User-authorized account switch: NEB9806036 EXIT; identical-science 108-rank NEB9808511 submitted on sbq123 and PEND.",
+  "evidence": [
+    {
+      "locator": "archive/vasp_server_switch_20260930/user_request.json",
+      "sha256": "9200dfe80432e5fbdf4ff0d80c64cd3a80e91cbd67b03c573df5d98b818bba1d",
+      "authority": "user_authorization",
+      "observed_at": "2026-09-30T13:24:02.385609+00:00"
+    },
+    {
+      "locator": "archive/vasp_server_switch_20260930/stop_receipt.json",
+      "sha256": "77173322a87557e7e854dfa067f4098aa7eb569a5181fdb0d57230c8d46e64cf",
+      "authority": "repository_document",
+      "observed_at": "2026-09-30T13:24:02.385609+00:00"
+    },
+    {
+      "locator": "archive/vasp_server_switch_20260930/scheduler_after.json",
+      "sha256": "71de185fcbdd3faccfbe8c3828289c4a3a31c15c7fbd94051ffe5a42e403c27e",
+      "authority": "scheduler",
+      "observed_at": "2026-09-30T13:24:02.385609+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930/server_switch_identity.json",
+      "sha256": "232989abb1d3f5669361952c3a6154b7b14a4aab1478f865a17bf68502737c98",
+      "authority": "module_validation",
+      "observed_at": "2026-09-30T13:24:02.385609+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930/submission_preflight.json",
+      "sha256": "74d1554f6f0d87e232b4e828f95bf9fa11e5896913355cd5736b3beda61e0ac2",
+      "authority": "module_validation",
+      "observed_at": "2026-09-30T13:24:02.385609+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930/execution_gate_decision.json",
+      "sha256": "d15841dce3b119dd3e2b72f17b994bee169f6ff56d3491fb157951ce91b58a29",
+      "authority": "module_validation",
+      "observed_at": "2026-09-30T13:24:02.385609+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930/submission_record.json",
+      "sha256": "df3e22af5b177b2aa426e21d2779d3ebe0b736e92d2ac98ca87a7bef62371643",
+      "authority": "repository_document",
+      "observed_at": "2026-09-30T13:24:02.385609+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930/scheduler_checkpoint_submission.json",
+      "sha256": "20c56eb0a7a6c0bfee676678367f7fd3487840cf613a63d57db41a4289c8ab47",
+      "authority": "scheduler",
+      "observed_at": "2026-09-30T13:24:02.385609+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "payload": {
+    "objective": "Monitor ordinary coarse NEB9808511 for the remaining IS-A9725473 -> INT06_9748648 H migration.",
+    "phase": "active",
+    "current_evidence": [
+      "User changed the future VASP default connection to nsgkn_chengdj3@10.68.0.103:22 (sunboquan-codex / sbq123).",
+      "Old NEB9806036 was PEND when the current STOP_JOB executor stopped it; raw scheduler evidence confirms EXIT. Its old temporary SSH connection was removed; calculation files and other jobs were retained.",
+      "Replacement NEB9808511 was submitted once with 108 ranks, 12 ranks per internal image, NPAR4 and NP_PER_NODE16. Its saved scheduler checkpoint is PEND.",
+      "All eleven POSCARs, INCAR, KPOINTS, POTCAR.spec, contract and reviewed dist/movie/path evidence are byte-identical to the source package. The geometry parser and execution evidence were regenerated against the replacement directory.",
+      "Geometry diagnosis, ordinary-NEB preflight and current SUBMIT_VASP gate passed. No convergence, TS, barrier or Grade-A result is claimed."
+    ],
+    "one_executable_step": "At the next requested checkpoint query LSF9808511 through sunboquan-codex and run the canonical compact NEB monitor for ~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930; separate scheduler, electronic, force and geometry states.",
+    "submission_boundary": "One replacement ordinary NEB submitted under explicit user authority. No duplicate, restart, resource change, CI/Dimer or stop without a current gate and user authority.",
+    "done_when": [
+      "NEB9808511 is monitored with scheduler and per-image evidence; a completed/stopped path is reviewed before any authorized refinement."
+    ],
+    "constraints": [
+      "Keep accepted INT06-MID and MID-FS segments unchanged.",
+      "Preserve atom order, fixed Fe0-17, nine internal images, NPAR4 and SIGMA0.20 compatibility.",
+      "User explicitly requested 108 total ranks for this replacement; under resource pressure retain a 16- or 32-rank per-node cap subject to image/rank divisibility and quota.",
+      "GPU predictions cannot establish a TS or electronic barrier."
+    ],
+    "authoritative_references": [
+      "archive/vasp_server_switch_20260930/user_request.json",
+      "archive/vasp_server_switch_20260930/stop_receipt.json",
+      "archive/vasp_server_switch_20260930/scheduler_after.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930/server_switch_identity.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930/submission_preflight.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930/execution_gate_decision.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930/submission_record.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930/scheduler_checkpoint_submission.json"
+    ]
+  },
+  "supersedes": [
+    "task-is-a-int06-neb9806036-resource-reallocation-20260930"
+  ]
+}
