@@ -1,0 +1,33 @@
+python -B -m scripts.state_manager.cli audit --phase start | exit=1
+python -B -m pytest -o addopts= -q tests/test_execution_lifecycle.py tests/test_alpha_fe_bulk_submission.py tests/test_b6_governance.py | exit=1
+python -B -m pytest -o addopts= -q tests/test_execution_lifecycle.py tests/test_alpha_fe_bulk_submission.py | exit=0
+python -B -m scripts.generate_capability_readiness --root . (first) | exit=0
+python -B -m scripts.generate_capability_readiness --root . (second) | exit=0
+python -B -m py_compile tests/test_execution_lifecycle.py tests/test_alpha_fe_bulk_submission.py | exit=0
+python -B -c (changed module import check) | exit=0
+python -B -m pytest -o addopts= -q tests/test_execution_lifecycle.py tests/test_alpha_fe_bulk_submission.py tests/test_b6_governance.py tests/test_ts_strategy_engine.py tests/test_neb_submission.py | exit=0
+python -B -m pytest -o addopts= -q tests/test_artifact_io.py tests/test_execution_lifecycle.py tests/test_execution_backends.py tests/test_registry_write.py tests/test_b4_registry_governance.py tests/test_b4_state_governance.py tests/test_registry_schema.py tests/test_state_manager.py tests/test_b5_architecture_boundaries.py tests/test_b6_governance.py tests/test_b7_release.py | exit=0
+python -B -m py_compile tests/test_execution_lifecycle.py tests/test_alpha_fe_bulk_submission.py (final) | exit=0
+python -B -m ruff check tests/test_execution_lifecycle.py tests/test_alpha_fe_bulk_submission.py (final) | exit=0
+python -B -m pytest -o addopts= -q tests/test_execution_lifecycle.py tests/test_alpha_fe_bulk_submission.py tests/test_b6_governance.py tests/test_ts_strategy_engine.py tests/test_neb_submission.py (final) | exit=0
+git diff --check | exit=0
+Baseline exception parser first attempt | exit=1 | cause=pytest long heading uses one underscore; corrected regex parser | exit=0
+python -B -m pytest -o addopts= -q tests/test_artifact_io.py tests/test_execution_lifecycle.py tests/test_execution_backends.py tests/test_registry_write.py tests/test_b4_registry_governance.py tests/test_b4_state_governance.py tests/test_registry_schema.py tests/test_state_manager.py tests/test_b5_architecture_boundaries.py tests/test_b6_governance.py tests/test_b7_release.py (final) | exit=0
+python -B -m pytest -o addopts= -q --collect-only | exit=0 | collection only; not test execution
+git diff --check (final) | exit=0
+Repair record metadata and whitespace check | exit=1
+Repair record metadata and whitespace check (corrected timezone-qualified as_of) | exit=0
+git diff --check (after report correction) | exit=0
+Repair report local link validation | exit=0
+Final Git scope and new skip/xfail inspection | exit=0
+Continuation: local environment inventory (wsl UTF-16 decoded; known Conda Python probes) | exit=0
+Continuation: AST comparison against HEAD (original tests/assertions/parameterizations) and build_readiness comparison | exit=0
+Continuation: bundled Python probe; WSL stderr decoded from OEM GB18030 (prior decoding invalid, not evidence of tests) | exit=0
+Continuation: repair report metadata, local links, whitespace | exit=0
+git diff --check (continuation) | exit=0
+JAX_PLATFORMS=cpu CUDA_VISIBLE_DEVICES=empty python -B -c (JAX CPU device check) | exit=0
+git diff --check (Sella preflight report) | exit=0
+JAX_PLATFORMS=cpu CUDA_VISIBLE_DEVICES=empty PYTHONUTF8=1 python -B -m pytest -o addopts= -q --junitxml=archive/vasp_default_ci_repair_20260930/A3_full.xml | exit=0
+JUnit summary and five actual Sella execution nodes validation | exit=0
+Final report metadata, local links and whitespace after full pytest | exit=0
+git diff --check (after full pytest) | exit=0

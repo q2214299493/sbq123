@@ -1,0 +1,39 @@
+{
+  "summary": {
+    "tests": 1372,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "platform": "Windows",
+  "python": "3.13.9",
+  "JAX_PLATFORMS": "cpu",
+  "CUDA_VISIBLE_DEVICES": "",
+  "actual_sella_nodes": [
+    {
+      "node": "tests/test_matris_sella_local_peak.py::test_real_sella_starts_from_unconverged_multi_peak_path_and_joins_labels",
+      "status": "passed",
+      "seconds": 3.253
+    },
+    {
+      "node": "tests/test_matris_sella_local_peak.py::test_budget_or_geometry_stop_preserves_last_valid_seed[1-0.15]",
+      "status": "passed",
+      "seconds": 1.078
+    },
+    {
+      "node": "tests/test_matris_sella_local_peak.py::test_budget_or_geometry_stop_preserves_last_valid_seed[200-0.001]",
+      "status": "passed",
+      "seconds": 1.119
+    },
+    {
+      "node": "tests/test_ml_sella_candidate.py::test_real_sella_finds_analytic_saddle_preserves_fixed_cell_and_restart",
+      "status": "passed",
+      "seconds": 0.132
+    },
+    {
+      "node": "tests/test_ml_sella_candidate.py::test_real_sella_records_geometry_failure_and_last_valid_iterate",
+      "status": "passed",
+      "seconds": 0.032
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "bundled_python": {
+    "command": [
+      "C:/Users/86177/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe",
+      "-B",
+      "-c",
+      "import importlib.metadata as m, json, sys; names=['pytest','ruff','numpy','PyYAML','jsonschema','pymatgen','ase']; installed={d.metadata['Name'].lower():d.version for d in m.distributions()}; print(json.dumps({'version':sys.version,'executable':sys.executable,'packages':{n:installed.get(n.lower(),'MISSING') for n in names}}))"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"version\": \"3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]\", \"executable\": \"C:\\\\Users\\\\86177\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\python.exe\", \"packages\": {\"pytest\": \"MISSING\", \"ruff\": \"MISSING\", \"numpy\": \"2.3.5\", \"PyYAML\": \"MISSING\", \"jsonschema\": \"MISSING\", \"pymatgen\": \"MISSING\", \"ase\": \"MISSING\"}}\n",
+    "stderr": ""
+  },
+  "wsl": {
+    "command": [
+      "wsl",
+      "--list",
+      "--verbose"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "未安装适用于 Linux 的 Windows 子系统。可通过运行 “wsl.exe --install” 进行安装。\r\r\n有关详细信息，请访问 https://aka.ms/wslinstall\r\r\n"
+  }
+}

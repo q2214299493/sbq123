@@ -1,0 +1,142 @@
+[
+  {
+    "node_id": "tests/test_execution_lifecycle.py::test_concurrent_submitters_have_one_reservation_and_one_submit",
+    "phase": "tar upload _run(stdin=payload), before fake dispatch",
+    "actual_error_lines": [
+      "E       assert 0 == 2",
+      "E        +  where 0 = len([])",
+      "E        +  and   2 = len([RuntimeError('submission retry refused: UNKNOWN_NEEDS_RECONCILIATION; reservation already exists'), TypeError(\"test_concurrent_submitters_have_one_reservation_and_one_submit.<locals>.remote() got an unexpected keyword argument 'stdin'\")])"
+    ]
+  },
+  {
+    "node_id": "tests/test_execution_lifecycle.py::test_crash_after_submit_is_unknown_and_never_retried",
+    "phase": "tar upload _run(stdin=payload), before fake dispatch",
+    "actual_error_lines": [
+      "E               TypeError: test_crash_after_submit_is_unknown_and_never_retried.<locals>.remote() got an unexpected keyword argument 'stdin'"
+    ]
+  },
+  {
+    "node_id": "tests/test_execution_lifecycle.py::test_stale_evidence_after_upload_prevents_bsub",
+    "phase": "tar upload _run(stdin=payload), before fake dispatch",
+    "actual_error_lines": [
+      "E               TypeError: test_stale_evidence_after_upload_prevents_bsub.<locals>.remote() got an unexpected keyword argument 'stdin'"
+    ]
+  },
+  {
+    "node_id": "tests/test_execution_lifecycle.py::test_full_remote_manifest_verified_immediately_before_bsub[None-False]",
+    "phase": "tar upload _run(stdin=payload), before fake dispatch",
+    "actual_error_lines": [
+      "E               TypeError: test_full_remote_manifest_verified_immediately_before_bsub.<locals>.corrupt_then_run() got an unexpected keyword argument 'stdin'"
+    ]
+  },
+  {
+    "node_id": "tests/test_execution_lifecycle.py::test_full_remote_manifest_verified_immediately_before_bsub[INCAR-False]",
+    "phase": "tar upload _run(stdin=payload), before fake dispatch",
+    "actual_error_lines": [
+      "E               TypeError: test_full_remote_manifest_verified_immediately_before_bsub.<locals>.corrupt_then_run() got an unexpected keyword argument 'stdin'"
+    ]
+  },
+  {
+    "node_id": "tests/test_execution_lifecycle.py::test_full_remote_manifest_verified_immediately_before_bsub[POSCAR-False]",
+    "phase": "tar upload _run(stdin=payload), before fake dispatch",
+    "actual_error_lines": [
+      "E               TypeError: test_full_remote_manifest_verified_immediately_before_bsub.<locals>.corrupt_then_run() got an unexpected keyword argument 'stdin'"
+    ]
+  },
+  {
+    "node_id": "tests/test_execution_lifecycle.py::test_full_remote_manifest_verified_immediately_before_bsub[POTCAR-False]",
+    "phase": "tar upload _run(stdin=payload), before fake dispatch",
+    "actual_error_lines": [
+      "E               TypeError: test_full_remote_manifest_verified_immediately_before_bsub.<locals>.corrupt_then_run() got an unexpected keyword argument 'stdin'"
+    ]
+  },
+  {
+    "node_id": "tests/test_execution_lifecycle.py::test_full_remote_manifest_verified_immediately_before_bsub[source_POTCAR-False]",
+    "phase": "tar upload _run(stdin=payload), before fake dispatch",
+    "actual_error_lines": [
+      "E               TypeError: test_full_remote_manifest_verified_immediately_before_bsub.<locals>.corrupt_then_run() got an unexpected keyword argument 'stdin'"
+    ]
+  },
+  {
+    "node_id": "tests/test_execution_lifecycle.py::test_full_remote_manifest_verified_immediately_before_bsub[extra-False]",
+    "phase": "tar upload _run(stdin=payload), before fake dispatch",
+    "actual_error_lines": [
+      "E               TypeError: test_full_remote_manifest_verified_immediately_before_bsub.<locals>.corrupt_then_run() got an unexpected keyword argument 'stdin'"
+    ]
+  },
+  {
+    "node_id": "tests/test_execution_lifecycle.py::test_hard_process_death_after_bsub_keeps_unknown_reservation",
+    "phase": "tar upload _run(stdin=payload), before fake dispatch; child exits 1 instead of reaching accepted marker and exit 91",
+    "actual_error_lines": [
+      "E       AssertionError: Traceback (most recent call last):",
+      "E           File \"<string>\", line 14, in <module>",
+      "E             submission.submit(workdir, decision, 'sunboquan-codex', '~/sbq/job', '~/sbq/POTCAR', 'a'*64, 'SUBMIT_DIAGNOSTIC_VASP')",
+      "E             ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "E           File \"C:\\Users\\86177\\.codex\\worktrees\\is-a-int06-resource-72r\\work\\scripts\\neb_agent\\submission.py\", line 446, in submit",
+      "E             _upload_manifest_files(host, parent, workdir, dict(bundle.files))",
+      "E             ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "E           File \"C:\\Users\\86177\\.codex\\worktrees\\is-a-int06-resource-72r\\work\\scripts\\neb_agent\\submission.py\", line 668, in _upload_manifest_files",
+      "E             _run([\"ssh\", host, command], stdin=payload)",
+      "E             ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "E         TypeError: remote() got an unexpected keyword argument 'stdin'",
+      "E         ",
+      "E       assert 1 == 91",
+      "E        +  where 1 = CompletedProcess(args=['C:\\\\Anaconda\\\\python.exe', '-B', '-c', \"\\nimport os, sys, subprocess\\nfrom functools import pa...\\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nTypeError: remote() got an unexpected keyword argument \\'stdin\\'\\n').returncode"
+    ]
+  },
+  {
+    "node_id": "tests/test_alpha_fe_bulk_submission.py::test_alpha_positive_canonical_receipt_and_immutable_reservation",
+    "phase": "tar upload _run(stdin=payload), before fake dispatch",
+    "actual_error_lines": [
+      "E               TypeError: fake_remote.<locals>.remote() got an unexpected keyword argument 'stdin'"
+    ]
+  },
+  {
+    "node_id": "tests/test_alpha_fe_bulk_submission.py::test_alpha_concurrent_callers_dispatch_once",
+    "phase": "tar upload _run(stdin=payload), before fake dispatch",
+    "actual_error_lines": [
+      "E       assert 2 == 1",
+      "E        +  where 2 = len([TypeError(\"fake_remote.<locals>.remote() got an unexpected keyword argument 'stdin'\"), RuntimeError('submission retry refused: UNKNOWN_NEEDS_RECONCILIATION; reservation already exists')])"
+    ]
+  },
+  {
+    "node_id": "tests/test_alpha_fe_bulk_submission.py::test_alpha_uncertain_dispatch_never_retries[receipt_loss]",
+    "phase": "tar upload _run(stdin=payload), before fake dispatch",
+    "actual_error_lines": [
+      "E               TypeError: test_alpha_uncertain_dispatch_never_retries.<locals>.remote() got an unexpected keyword argument 'stdin'"
+    ]
+  },
+  {
+    "node_id": "tests/test_alpha_fe_bulk_submission.py::test_alpha_uncertain_dispatch_never_retries[timeout]",
+    "phase": "tar upload _run(stdin=payload), before fake dispatch",
+    "actual_error_lines": [
+      "E               TypeError: test_alpha_uncertain_dispatch_never_retries.<locals>.remote() got an unexpected keyword argument 'stdin'"
+    ]
+  },
+  {
+    "node_id": "tests/test_alpha_fe_bulk_submission.py::test_alpha_uncertain_dispatch_never_retries[missing_job_id]",
+    "phase": "tar upload _run(stdin=payload), before fake dispatch",
+    "actual_error_lines": [
+      "E               TypeError: test_alpha_uncertain_dispatch_never_retries.<locals>.remote() got an unexpected keyword argument 'stdin'"
+    ]
+  },
+  {
+    "node_id": "tests/test_alpha_fe_bulk_submission.py::test_alpha_uncertain_dispatch_never_retries[rejection]",
+    "phase": "tar upload _run(stdin=payload), before fake dispatch",
+    "actual_error_lines": [
+      "E               TypeError: test_alpha_uncertain_dispatch_never_retries.<locals>.remote() got an unexpected keyword argument 'stdin'"
+    ]
+  },
+  {
+    "node_id": "tests/test_b6_governance.py::test_readiness_generation_is_deterministic_and_matches_checked_in_view",
+    "phase": "checked-in derived report byte comparison",
+    "actual_error_lines": [
+      "E       assert {'capability_... blocked |\\n\"} == {'capability_... blocked |\\n\"}",
+      "E         ",
+      "E         Omitting 1 identical items, use -vv to show",
+      "E         Differing items:",
+      "E         {'capability_readiness.json': b'{\\n  \"document_class\": \"GENERATED_CURRENT_REPORT\",\\n  \"authority\": \"DERIVED_NOT_AUTHOR...e\": [],\\n      \"scope\": \"No explicit maturity evidence; do not infer from status or file existence.\"\\n    }\\n  ]\\n}\\n'} != {'capability_readiness.json': b'{\\n  \"document_class\": \"GENERATED_CURRENT_REPORT\",\\n  \"authority\": \"DERIVED_NOT_AUTHOR...e\": [],\\n      \"scope\": \"No explicit maturity evidence; do not infer from status or file existence.\"\\n    }\\n  ]\\n}\\n'}",
+      "E         Use -v to get more diff"
+    ]
+  }
+]

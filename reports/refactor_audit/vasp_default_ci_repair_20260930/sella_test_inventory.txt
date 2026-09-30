@@ -1,0 +1,73 @@
+tests\test_aqcat25_ts_active_learning.py:25:    prepare_ba_sella_rerun,
+tests\test_aqcat25_ts_active_learning.py:748:def test_validated_finetune_result_builds_hash_bound_ba_sella_rerun_handoff(tmp_path: Path) -> None:
+tests\test_aqcat25_ts_active_learning.py:817:    request = prepare_ba_sella_rerun(state_path, tmp_path / "rerun")
+tests\test_aqcat25_ts_active_learning.py:820:    assert load_state(state_path)["status"] == "awaiting_ba_sella_rerun_result"
+tests\test_matris_sella_local_peak.py:12:from scripts.matris_sella_local_peak import prepare_request, run, validate_request
+tests\test_matris_sella_local_peak.py:13:from scripts.ml_sella_candidate import BudgetCalculator, SellaBudgetExhausted
+tests\test_matris_sella_local_peak.py:15:from scripts.prepare_ml_candidate_rerun import _sella_followup
+tests\test_matris_sella_local_peak.py:18:from tests.test_ml_sella_candidate import POLICY, _path_run
+tests\test_matris_sella_local_peak.py:36:    source, checkpoint, secondary, parent_path, _, parent = _path_run(tmp_path, monkeypatch, sella=False)
+tests\test_matris_sella_local_peak.py:46:    review = {"document_kind": "sella_local_peak_work_review", "reviewer": "analytic-test-fixture",
+tests\test_matris_sella_local_peak.py:72:def test_real_sella_starts_from_unconverged_multi_peak_path_and_joins_labels(tmp_path, monkeypatch):
+tests\test_matris_sella_local_peak.py:73:    pytest.importorskip("sella")
+tests\test_matris_sella_local_peak.py:83:    assert manifest["sella_refinement"]["status"] == "needs_work_review"
+tests\test_matris_sella_local_peak.py:84:    result = load_json_object(output / "sella/candidate_manifest.json")
+tests\test_matris_sella_local_peak.py:85:    final = read(output / "sella" / result["last_valid_structure"]["path"])
+tests\test_matris_sella_local_peak.py:95:    state = prepare_candidate_round(source, manifest_path, review_path, POLICY, tmp_path / "al", method="ml_neb_sella")
+tests\test_matris_sella_local_peak.py:100:    assert "sella_final" in {row["sample_id"] for row in selected}
+tests\test_matris_sella_local_peak.py:101:    followup = _sella_followup(state, load_json_object(source))
+tests\test_matris_sella_local_peak.py:107:        prepare_candidate_round(source, manifest_path, review_path, POLICY, tmp_path / "bad_al", method="ml_neb_sella")
+tests\test_matris_sella_local_peak.py:150:    pytest.importorskip("sella")
+tests\test_matris_sella_local_peak.py:157:    result = load_json_object(output / "sella/candidate_manifest.json")
+tests\test_matris_sella_local_peak.py:168:    from tests.test_ml_sella_candidate import SaddleCalculator, _seed
+tests\test_matris_sella_local_peak.py:170:    monkeypatch.setattr("scripts.ml_sella_candidate.time.monotonic", lambda: next(times))
+tests\test_matris_sella_local_peak.py:174:    with pytest.raises(SellaBudgetExhausted, match="after model"):
+tests\test_matris_sella_smoke.py:9:from scripts.matris_sella_smoke import BudgetCalculator, validate_request
+tests\test_matris_sella_smoke.py:30:    request = {'document_kind': 'matris_sella_smoke_request', 'execution_authorized': True,
+tests\test_ml_sella_candidate.py:14:from scripts.ml_sella_candidate import refine_peak, validate_settings
+tests\test_ml_sella_candidate.py:47:def test_real_sella_finds_analytic_saddle_preserves_fixed_cell_and_restart(tmp_path):
+tests\test_ml_sella_candidate.py:48:    pytest.importorskip("sella")
+tests\test_ml_sella_candidate.py:51:    result = refine_peak(seed, SaddleCalculator(), SETTINGS, tmp_path / "sella", source={},
+tests\test_ml_sella_candidate.py:57:    final = read(tmp_path / "sella" / last["path"])
+tests\test_ml_sella_candidate.py:64:    resumed = refine_peak(final, SaddleCalculator(), SETTINGS, tmp_path / "resumed", source={},
+tests\test_ml_sella_candidate.py:69:def test_real_sella_records_geometry_failure_and_last_valid_iterate(tmp_path):
+tests\test_ml_sella_candidate.py:70:    pytest.importorskip("sella")
+tests\test_ml_sella_candidate.py:71:    result = refine_peak(_seed(), SaddleCalculator(), SETTINGS, tmp_path / "sella", source={},
+tests\test_ml_sella_candidate.py:87:    pytest.importorskip("sella")
+tests\test_ml_sella_candidate.py:91:        refine_peak(atoms, SaddleCalculator(), SETTINGS, tmp_path / "sella", source={},
+tests\test_ml_sella_candidate.py:93:    assert not (tmp_path / "sella").exists()
+tests\test_ml_sella_candidate.py:96:def _path_run(tmp_path, monkeypatch, *, sella=True):
+tests\test_ml_sella_candidate.py:110:    if sella:
+tests\test_ml_sella_candidate.py:111:        request["sella_refinement"] = SETTINGS
+tests\test_ml_sella_candidate.py:113:    monkeypatch.setattr("scripts.dual_model_ml_neb.require_sella", lambda: None)
+tests\test_ml_sella_candidate.py:122:        manifest = {"document_kind": "ml_sella_candidate_manifest", "source": source,
+tests\test_ml_sella_candidate.py:128:    monkeypatch.setattr("scripts.dual_model_ml_neb.refine_peak", test_refinement)
+tests\test_ml_sella_candidate.py:140:@pytest.mark.parametrize("method", ["ml_neb", "ml_neb_sella"])
+tests\test_ml_sella_candidate.py:142:    request, primary, secondary, manifest, review, payload = _path_run(tmp_path, monkeypatch, sella=method.endswith("sella"))
+tests\test_ml_sella_candidate.py:151:    if method.endswith("sella"):
+tests\test_ml_sella_candidate.py:152:        assert "sella_final" in {row["sample_id"] for row in selected}
+tests\test_ml_sella_candidate.py:153:        assert payload["sella_refinement"]["status"] == "needs_work_review"
+tests\test_ml_sella_candidate.py:155:        assert "sella_refinement" not in payload
+tests\test_ml_sella_candidate.py:161:    payload["sella_refinement"] = SETTINGS
+tests\test_ml_sella_candidate.py:164:        raise RuntimeError("Sella unavailable")
+tests\test_ml_sella_candidate.py:165:    monkeypatch.setattr("scripts.dual_model_ml_neb.require_sella", missing)
+tests\test_ml_sella_candidate.py:189:        prepare_candidate_round(request, manifest, review, POLICY, tmp_path / "learning", method="ml_neb_sella")
+tests\test_ml_sella_candidate.py:193:def test_unknown_sella_request_option_fails_during_preflight(tmp_path):
+tests\test_ml_sella_candidate.py:196:    payload["sella_refinement"] = {**SETTINGS, "order": 0}
+tests\test_ml_sella_candidate.py:203:def test_sella_labels_use_existing_error_gate(tmp_path, monkeypatch, force_error, valid_label):
+tests\test_ml_sella_candidate.py:206:    state = prepare_candidate_round(request, manifest, review, POLICY, destination, method="ml_neb_sella")
+tests\test_ml_sella_candidate.py:216:    assert "sella_final" in {row["sample_id"] for row in batch["labels"]}
+tests\test_ml_sella_candidate.py:248:    state = prepare_candidate_round(request, manifest, review, POLICY, directory, method="ml_neb_sella")
+tests\test_ml_sella_candidate.py:280:def test_new_checkpoint_rerun_preserves_entire_path_and_sella(tmp_path, monkeypatch):
+tests\test_ml_sella_candidate.py:288:    assert rerun["sella_refinement"] == original["sella_refinement"]
+tests\test_repository_contracts.py:221:        "predicted_ba_sella_candidate",
+tests\test_repository_contracts.py:230:        "mz73_ba_sella_rerun_with_new_checkpoint",
+tests\test_ts_strategy_learning.py:115:def test_sella_is_reference_only_and_cannot_clear_existing_stop(db, tmp_path):
+tests\test_ts_strategy_learning.py:118:    child = learning.propose_variant(db, root, {"candidate_method": "aqcat25_ba_sella"}, "test candidate branch", [observation(evidence)])
+tests\test_ts_strategy_learning.py:121:    assert result["status"] == "NEEDS_BA_SELLA_CANDIDATE_HANDOFF_REVIEW"
+tests\test_ts_strategy_learning.py:123:    assert result["reference_methods"]["aqcat25_ba_sella"]["establishes_ts"] is False
+tests\test_ts_strategy_learning.py:310:def test_default_strategy_exposes_sella_without_selecting_it():
+tests\test_ts_strategy_learning.py:315:    assert "aqcat25_ba_sella" in strategy["reference_methods"]
+tests\test_ts_strategy_learning.py:326:    assert "aqcat25_ba_sella" in capsys.readouterr().out
+tests\test_ts_strategy_learning.py:386:    child = learning.propose_variant(db, root, {"candidate_method": "aqcat25_ba_sella"}, "reference only", [observation(evidence)])
+tests\test_ts_strategy_learning.py:399:    assert result["status"] == "NEEDS_BA_SELLA_CANDIDATE_HANDOFF_REVIEW"

@@ -1,0 +1,1227 @@
+................................FFF.F.F.F.F.F.F...............F.FF...... [ 64%]
+..FFFF...............F..................                                 [100%]
+================================== FAILURES ===================================
+_______ test_concurrent_submitters_have_one_reservation_and_one_submit ________
+
+tmp_path = WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_concurrent_submitters_hav0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021BC337AC10>
+
+    def test_concurrent_submitters_have_one_reservation_and_one_submit(tmp_path, monkeypatch):
+        workdir, decision, _ = prepare_submission(tmp_path, monkeypatch)
+        barrier = threading.Barrier(2)
+        real_write = submission.write_json_exclusive
+        receipts = []
+
+        def reserve(path, payload):
+            if path.name == submission.SUBMISSION_ATTEMPT_FILE:
+                barrier.wait(timeout=10)
+            return real_write(path, payload)
+
+        def remote(argv):
+            if "bsub script.lsf" in argv[-1]:
+                receipts.append("submitted")
+            return subprocess.CompletedProcess(argv, 0, "Job <123> is submitted", "")
+
+        monkeypatch.setattr(submission, "write_json_exclusive", reserve)
+        monkeypatch.setattr(submission, "_run", remote)
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            futures = [pool.submit(launch, workdir, decision) for _ in range(2)]
+        successes = [future.result() for future in futures if future.exception() is None]
+        errors = [future.exception() for future in futures if future.exception() is not None]
+>       assert len(successes) == len(errors) == 1
+E       assert 0 == 2
+E        +  where 0 = len([])
+E        +  and   2 = len([RuntimeError('submission retry refused: UNKNOWN_NEEDS_RECONCILIATION; reservation already exists'), TypeError("test_concurrent_submitters_have_one_reservation_and_one_submit.<locals>.remote() got an unexpected keyword argument 'stdin'")])
+
+tests\test_execution_lifecycle.py:180: AssertionError
+____________ test_crash_after_submit_is_unknown_and_never_retried _____________
+
+tmp_path = WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_crash_after_submit_is_unk0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021BC62B7BD0>
+
+    def test_crash_after_submit_is_unknown_and_never_retried(tmp_path, monkeypatch):
+        workdir, decision, _ = prepare_submission(tmp_path, monkeypatch)
+        real_write = submission.write_json_exclusive
+        calls = []
+
+        def crash_on_receipt(path, payload):
+            if path.name == submission.SUBMISSION_RECORD_FILE:
+                raise OSError("simulated process loss before receipt")
+            return real_write(path, payload)
+
+        def remote(argv):
+            if "bsub script.lsf" in argv[-1]:
+                calls.append("submitted")
+            return subprocess.CompletedProcess(argv, 0, "Job <123> is submitted", "")
+
+        monkeypatch.setattr(submission, "_run", remote)
+        monkeypatch.setattr(submission, "write_json_exclusive", crash_on_receipt)
+        with pytest.raises(OSError, match="process loss"):
+>           launch(workdir, decision)
+
+tests\test_execution_lifecycle.py:204:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_execution_lifecycle.py:100: in launch
+    return submission.submit(workdir, decision, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\neb_agent\submission.py:446: in submit
+    _upload_manifest_files(host, parent, workdir, dict(bundle.files))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+host = 'sunboquan-codex', remote_parent = '~/sbq'
+workdir = WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_crash_after_submit_is_unk0/job')
+files = {'INCAR': '63bb0ff43bb80114c2d4471e1c8eab03df61d07292a4467e3f341a6d80a40dd9', 'KPOINTS': '5efb5934c3764ae1438a65a82dc6...980391540ad2953d7d7556a735e6d', 'POTCAR.spec': '1d1d987b827d5d0850061978921c0c086b889e84417afcac85c9b5f3491a39ed', ...}
+
+    def _upload_manifest_files(
+        host: str, remote_parent: str, workdir: Path, files: dict[str, str]
+    ) -> None:
+        """Upload only hash-bound preflight files, preserving their relative paths."""
+        require_remote_path(remote_parent, allow_root=True)
+        require_relative_input_path(workdir.name)
+        validated = {
+            require_relative_input_path(name): require_sha256(digest, label=name)
+            for name, digest in files.items()
+        }
+        with tempfile.TemporaryDirectory(prefix="vasp-submit-") as temporary:
+            staged = Path(temporary) / workdir.name
+            for relative, digest in validated.items():
+                source = require_local_input(workdir, relative)
+                target = staged / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(source, target)
+                if sha256_file(target) != digest:
+                    raise ValueError(f"staged submission bundle changed: {relative}")
+            # Login banners may corrupt SCP/SFTP framing. Upload tar on SSH stdin;
+            # remote stdout is independent and still captured by the command runner.
+            archive_path = Path(temporary) / "inputs.tar"
+            with tarfile.open(archive_path, "w") as archive:
+                for relative in sorted(validated):
+                    archive.add(staged / relative, arcname=f"{workdir.name}/{relative}", recursive=False)
+            command = _remote_shell([
+                *_remote_path_checks(remote_parent, allow_root=True),
+                f"test ! -e {remote_parent}/{workdir.name}",
+                f"tar --keep-old-files --no-same-owner -xf - -C {remote_parent}",
+            ])
+            with archive_path.open("rb") as payload:
+>               _run(["ssh", host, command], stdin=payload)
+E               TypeError: test_crash_after_submit_is_unknown_and_never_retried.<locals>.remote() got an unexpected keyword argument 'stdin'
+
+scripts\neb_agent\submission.py:668: TypeError
+_______________ test_stale_evidence_after_upload_prevents_bsub ________________
+
+tmp_path = WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_stale_evidence_after_uplo0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021BC634BD20>
+
+    def test_stale_evidence_after_upload_prevents_bsub(tmp_path, monkeypatch):
+        workdir, decision, _ = prepare_submission(tmp_path, monkeypatch)
+        calls = []
+
+        def remote(argv):
+            calls.append(argv)
+            if argv[0] == "scp":
+                (workdir / "analysis.json").write_text("{}", encoding="ascii")
+            return subprocess.CompletedProcess(argv, 0, "", "")
+
+        monkeypatch.setattr(submission, "_run", remote)
+        with pytest.raises(ValueError):
+>           launch(workdir, decision)
+
+tests\test_execution_lifecycle.py:225:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_execution_lifecycle.py:100: in launch
+    return submission.submit(workdir, decision, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\neb_agent\submission.py:446: in submit
+    _upload_manifest_files(host, parent, workdir, dict(bundle.files))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+host = 'sunboquan-codex', remote_parent = '~/sbq'
+workdir = WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_stale_evidence_after_uplo0/job')
+files = {'INCAR': '63bb0ff43bb80114c2d4471e1c8eab03df61d07292a4467e3f341a6d80a40dd9', 'KPOINTS': '5efb5934c3764ae1438a65a82dc6...980391540ad2953d7d7556a735e6d', 'POTCAR.spec': '1d1d987b827d5d0850061978921c0c086b889e84417afcac85c9b5f3491a39ed', ...}
+
+    def _upload_manifest_files(
+        host: str, remote_parent: str, workdir: Path, files: dict[str, str]
+    ) -> None:
+        """Upload only hash-bound preflight files, preserving their relative paths."""
+        require_remote_path(remote_parent, allow_root=True)
+        require_relative_input_path(workdir.name)
+        validated = {
+            require_relative_input_path(name): require_sha256(digest, label=name)
+            for name, digest in files.items()
+        }
+        with tempfile.TemporaryDirectory(prefix="vasp-submit-") as temporary:
+            staged = Path(temporary) / workdir.name
+            for relative, digest in validated.items():
+                source = require_local_input(workdir, relative)
+                target = staged / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(source, target)
+                if sha256_file(target) != digest:
+                    raise ValueError(f"staged submission bundle changed: {relative}")
+            # Login banners may corrupt SCP/SFTP framing. Upload tar on SSH stdin;
+            # remote stdout is independent and still captured by the command runner.
+            archive_path = Path(temporary) / "inputs.tar"
+            with tarfile.open(archive_path, "w") as archive:
+                for relative in sorted(validated):
+                    archive.add(staged / relative, arcname=f"{workdir.name}/{relative}", recursive=False)
+            command = _remote_shell([
+                *_remote_path_checks(remote_parent, allow_root=True),
+                f"test ! -e {remote_parent}/{workdir.name}",
+                f"tar --keep-old-files --no-same-owner -xf - -C {remote_parent}",
+            ])
+            with archive_path.open("rb") as payload:
+>               _run(["ssh", host, command], stdin=payload)
+E               TypeError: test_stale_evidence_after_upload_prevents_bsub.<locals>.remote() got an unexpected keyword argument 'stdin'
+
+scripts\neb_agent\submission.py:668: TypeError
+___ test_full_remote_manifest_verified_immediately_before_bsub[None-False] ____
+
+tmp_path = WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_full_remote_manifest_veri0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021BC63D6270>
+reuse = False, corruption = None
+
+    @pytest.mark.parametrize("reuse", [False, True])
+    @pytest.mark.parametrize("corruption", [None, "INCAR", "POSCAR", "POTCAR", "source_POTCAR", "extra"])
+    def test_full_remote_manifest_verified_immediately_before_bsub(tmp_path, monkeypatch, reuse, corruption):
+        workdir, decision, report = prepare_submission(tmp_path, monkeypatch)
+        sandbox = RemoteSandbox(tmp_path)
+        # Bind a real test POTCAR, then regenerate the explicit scope and decision.
+        potcar = sandbox.home / "sbq" / "POTCAR"
+        potcar.write_text("test potential", encoding="ascii")
+        digest = sha256_file(potcar)
+        payload = load_json_object(decision)
+        auth = payload["EVIDENCE"]["authorization"]
+        auth["potcar"]["sha256"] = digest
+        auth_path = workdir / "user_execution_authorization.json"
+        write_json(auth_path, auth)
+        evidence = payload["EVIDENCE"]
+        evidence["source_bindings"]["authorization"]["sha256"] = sha256_file(auth_path)
+        regenerated = decide_execution(evidence["geometry"], evidence["analysis"], evidence["thresholds"],
+                                       climb=False, path_reviewed=True, preflight=report,
+                                       authorization=auth, source_bindings=evidence["source_bindings"])
+        write_json(decision, regenerated)
+        remote_dir = sandbox.home / "sbq" / "job"
+        if reuse:
+            remote_dir.mkdir()
+            for name in report["files"]:
+                shutil.copy2(workdir / name, remote_dir / name)
+
+        def corrupt_then_run(argv):
+            if "bsub script.lsf" in argv[-1] and corruption:
+                target = (
+                    potcar if corruption == "source_POTCAR"
+                    else remote_dir / ("WAVECAR" if corruption == "extra" else corruption)
+                )
+                target.write_text("corrupted", encoding="ascii")
+            return sandbox.run(argv)
+
+        monkeypatch.setattr(submission, "_run", corrupt_then_run)
+        if corruption:
+            with pytest.raises(RuntimeError, match="verification failed"):
+                launch(workdir, decision, reuse_uploaded=reuse, potcar_sha256=digest)
+            assert not (sandbox.home / "submissions").exists()
+            assert submission.submission_status(workdir)["status"] == submission.UNKNOWN
+        else:
+>           assert launch(workdir, decision, reuse_uploaded=reuse, potcar_sha256=digest)["job_id"] == "123"
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_execution_lifecycle.py:320:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_execution_lifecycle.py:100: in launch
+    return submission.submit(workdir, decision, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\neb_agent\submission.py:446: in submit
+    _upload_manifest_files(host, parent, workdir, dict(bundle.files))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+host = 'sunboquan-codex', remote_parent = '~/sbq'
+workdir = WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_full_remote_manifest_veri0/job')
+files = {'INCAR': '63bb0ff43bb80114c2d4471e1c8eab03df61d07292a4467e3f341a6d80a40dd9', 'KPOINTS': '5efb5934c3764ae1438a65a82dc6...980391540ad2953d7d7556a735e6d', 'POTCAR.spec': '1d1d987b827d5d0850061978921c0c086b889e84417afcac85c9b5f3491a39ed', ...}
+
+    def _upload_manifest_files(
+        host: str, remote_parent: str, workdir: Path, files: dict[str, str]
+    ) -> None:
+        """Upload only hash-bound preflight files, preserving their relative paths."""
+        require_remote_path(remote_parent, allow_root=True)
+        require_relative_input_path(workdir.name)
+        validated = {
+            require_relative_input_path(name): require_sha256(digest, label=name)
+            for name, digest in files.items()
+        }
+        with tempfile.TemporaryDirectory(prefix="vasp-submit-") as temporary:
+            staged = Path(temporary) / workdir.name
+            for relative, digest in validated.items():
+                source = require_local_input(workdir, relative)
+                target = staged / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(source, target)
+                if sha256_file(target) != digest:
+                    raise ValueError(f"staged submission bundle changed: {relative}")
+            # Login banners may corrupt SCP/SFTP framing. Upload tar on SSH stdin;
+            # remote stdout is independent and still captured by the command runner.
+            archive_path = Path(temporary) / "inputs.tar"
+            with tarfile.open(archive_path, "w") as archive:
+                for relative in sorted(validated):
+                    archive.add(staged / relative, arcname=f"{workdir.name}/{relative}", recursive=False)
+            command = _remote_shell([
+                *_remote_path_checks(remote_parent, allow_root=True),
+                f"test ! -e {remote_parent}/{workdir.name}",
+                f"tar --keep-old-files --no-same-owner -xf - -C {remote_parent}",
+            ])
+            with archive_path.open("rb") as payload:
+>               _run(["ssh", host, command], stdin=payload)
+E               TypeError: test_full_remote_manifest_verified_immediately_before_bsub.<locals>.corrupt_then_run() got an unexpected keyword argument 'stdin'
+
+scripts\neb_agent\submission.py:668: TypeError
+___ test_full_remote_manifest_verified_immediately_before_bsub[INCAR-False] ___
+
+tmp_path = WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_full_remote_manifest_veri2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021BC6344360>
+reuse = False, corruption = 'INCAR'
+
+    @pytest.mark.parametrize("reuse", [False, True])
+    @pytest.mark.parametrize("corruption", [None, "INCAR", "POSCAR", "POTCAR", "source_POTCAR", "extra"])
+    def test_full_remote_manifest_verified_immediately_before_bsub(tmp_path, monkeypatch, reuse, corruption):
+        workdir, decision, report = prepare_submission(tmp_path, monkeypatch)
+        sandbox = RemoteSandbox(tmp_path)
+        # Bind a real test POTCAR, then regenerate the explicit scope and decision.
+        potcar = sandbox.home / "sbq" / "POTCAR"
+        potcar.write_text("test potential", encoding="ascii")
+        digest = sha256_file(potcar)
+        payload = load_json_object(decision)
+        auth = payload["EVIDENCE"]["authorization"]
+        auth["potcar"]["sha256"] = digest
+        auth_path = workdir / "user_execution_authorization.json"
+        write_json(auth_path, auth)
+        evidence = payload["EVIDENCE"]
+        evidence["source_bindings"]["authorization"]["sha256"] = sha256_file(auth_path)
+        regenerated = decide_execution(evidence["geometry"], evidence["analysis"], evidence["thresholds"],
+                                       climb=False, path_reviewed=True, preflight=report,
+                                       authorization=auth, source_bindings=evidence["source_bindings"])
+        write_json(decision, regenerated)
+        remote_dir = sandbox.home / "sbq" / "job"
+        if reuse:
+            remote_dir.mkdir()
+            for name in report["files"]:
+                shutil.copy2(workdir / name, remote_dir / name)
+
+        def corrupt_then_run(argv):
+            if "bsub script.lsf" in argv[-1] and corruption:
+                target = (
+                    potcar if corruption == "source_POTCAR"
+                    else remote_dir / ("WAVECAR" if corruption == "extra" else corruption)
+                )
+                target.write_text("corrupted", encoding="ascii")
+            return sandbox.run(argv)
+
+        monkeypatch.setattr(submission, "_run", corrupt_then_run)
+        if corruption:
+            with pytest.raises(RuntimeError, match="verification failed"):
+>               launch(workdir, decision, reuse_uploaded=reuse, potcar_sha256=digest)
+
+tests\test_execution_lifecycle.py:316:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_execution_lifecycle.py:100: in launch
+    return submission.submit(workdir, decision, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\neb_agent\submission.py:446: in submit
+    _upload_manifest_files(host, parent, workdir, dict(bundle.files))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+host = 'sunboquan-codex', remote_parent = '~/sbq'
+workdir = WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_full_remote_manifest_veri2/job')
+files = {'INCAR': '63bb0ff43bb80114c2d4471e1c8eab03df61d07292a4467e3f341a6d80a40dd9', 'KPOINTS': '5efb5934c3764ae1438a65a82dc6...980391540ad2953d7d7556a735e6d', 'POTCAR.spec': '1d1d987b827d5d0850061978921c0c086b889e84417afcac85c9b5f3491a39ed', ...}
+
+    def _upload_manifest_files(
+        host: str, remote_parent: str, workdir: Path, files: dict[str, str]
+    ) -> None:
+        """Upload only hash-bound preflight files, preserving their relative paths."""
+        require_remote_path(remote_parent, allow_root=True)
+        require_relative_input_path(workdir.name)
+        validated = {
+            require_relative_input_path(name): require_sha256(digest, label=name)
+            for name, digest in files.items()
+        }
+        with tempfile.TemporaryDirectory(prefix="vasp-submit-") as temporary:
+            staged = Path(temporary) / workdir.name
+            for relative, digest in validated.items():
+                source = require_local_input(workdir, relative)
+                target = staged / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(source, target)
+                if sha256_file(target) != digest:
+                    raise ValueError(f"staged submission bundle changed: {relative}")
+            # Login banners may corrupt SCP/SFTP framing. Upload tar on SSH stdin;
+            # remote stdout is independent and still captured by the command runner.
+            archive_path = Path(temporary) / "inputs.tar"
+            with tarfile.open(archive_path, "w") as archive:
+                for relative in sorted(validated):
+                    archive.add(staged / relative, arcname=f"{workdir.name}/{relative}", recursive=False)
+            command = _remote_shell([
+                *_remote_path_checks(remote_parent, allow_root=True),
+                f"test ! -e {remote_parent}/{workdir.name}",
+                f"tar --keep-old-files --no-same-owner -xf - -C {remote_parent}",
+            ])
+            with archive_path.open("rb") as payload:
+>               _run(["ssh", host, command], stdin=payload)
+E               TypeError: test_full_remote_manifest_verified_immediately_before_bsub.<locals>.corrupt_then_run() got an unexpected keyword argument 'stdin'
+
+scripts\neb_agent\submission.py:668: TypeError
+__ test_full_remote_manifest_verified_immediately_before_bsub[POSCAR-False] ___
+
+tmp_path = WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_full_remote_manifest_veri4')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021BC62B7D90>
+reuse = False, corruption = 'POSCAR'
+
+    @pytest.mark.parametrize("reuse", [False, True])
+    @pytest.mark.parametrize("corruption", [None, "INCAR", "POSCAR", "POTCAR", "source_POTCAR", "extra"])
+    def test_full_remote_manifest_verified_immediately_before_bsub(tmp_path, monkeypatch, reuse, corruption):
+        workdir, decision, report = prepare_submission(tmp_path, monkeypatch)
+        sandbox = RemoteSandbox(tmp_path)
+        # Bind a real test POTCAR, then regenerate the explicit scope and decision.
+        potcar = sandbox.home / "sbq" / "POTCAR"
+        potcar.write_text("test potential", encoding="ascii")
+        digest = sha256_file(potcar)
+        payload = load_json_object(decision)
+        auth = payload["EVIDENCE"]["authorization"]
+        auth["potcar"]["sha256"] = digest
+        auth_path = workdir / "user_execution_authorization.json"
+        write_json(auth_path, auth)
+        evidence = payload["EVIDENCE"]
+        evidence["source_bindings"]["authorization"]["sha256"] = sha256_file(auth_path)
+        regenerated = decide_execution(evidence["geometry"], evidence["analysis"], evidence["thresholds"],
+                                       climb=False, path_reviewed=True, preflight=report,
+                                       authorization=auth, source_bindings=evidence["source_bindings"])
+        write_json(decision, regenerated)
+        remote_dir = sandbox.home / "sbq" / "job"
+        if reuse:
+            remote_dir.mkdir()
+            for name in report["files"]:
+                shutil.copy2(workdir / name, remote_dir / name)
+
+        def corrupt_then_run(argv):
+            if "bsub script.lsf" in argv[-1] and corruption:
+                target = (
+                    potcar if corruption == "source_POTCAR"
+                    else remote_dir / ("WAVECAR" if corruption == "extra" else corruption)
+                )
+                target.write_text("corrupted", encoding="ascii")
+            return sandbox.run(argv)
+
+        monkeypatch.setattr(submission, "_run", corrupt_then_run)
+        if corruption:
+            with pytest.raises(RuntimeError, match="verification failed"):
+>               launch(workdir, decision, reuse_uploaded=reuse, potcar_sha256=digest)
+
+tests\test_execution_lifecycle.py:316:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_execution_lifecycle.py:100: in launch
+    return submission.submit(workdir, decision, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\neb_agent\submission.py:446: in submit
+    _upload_manifest_files(host, parent, workdir, dict(bundle.files))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+host = 'sunboquan-codex', remote_parent = '~/sbq'
+workdir = WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_full_remote_manifest_veri4/job')
+files = {'INCAR': '63bb0ff43bb80114c2d4471e1c8eab03df61d07292a4467e3f341a6d80a40dd9', 'KPOINTS': '5efb5934c3764ae1438a65a82dc6...980391540ad2953d7d7556a735e6d', 'POTCAR.spec': '1d1d987b827d5d0850061978921c0c086b889e84417afcac85c9b5f3491a39ed', ...}
+
+    def _upload_manifest_files(
+        host: str, remote_parent: str, workdir: Path, files: dict[str, str]
+    ) -> None:
+        """Upload only hash-bound preflight files, preserving their relative paths."""
+        require_remote_path(remote_parent, allow_root=True)
+        require_relative_input_path(workdir.name)
+        validated = {
+            require_relative_input_path(name): require_sha256(digest, label=name)
+            for name, digest in files.items()
+        }
+        with tempfile.TemporaryDirectory(prefix="vasp-submit-") as temporary:
+            staged = Path(temporary) / workdir.name
+            for relative, digest in validated.items():
+                source = require_local_input(workdir, relative)
+                target = staged / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(source, target)
+                if sha256_file(target) != digest:
+                    raise ValueError(f"staged submission bundle changed: {relative}")
+            # Login banners may corrupt SCP/SFTP framing. Upload tar on SSH stdin;
+            # remote stdout is independent and still captured by the command runner.
+            archive_path = Path(temporary) / "inputs.tar"
+            with tarfile.open(archive_path, "w") as archive:
+                for relative in sorted(validated):
+                    archive.add(staged / relative, arcname=f"{workdir.name}/{relative}", recursive=False)
+            command = _remote_shell([
+                *_remote_path_checks(remote_parent, allow_root=True),
+                f"test ! -e {remote_parent}/{workdir.name}",
+                f"tar --keep-old-files --no-same-owner -xf - -C {remote_parent}",
+            ])
+            with archive_path.open("rb") as payload:
+>               _run(["ssh", host, command], stdin=payload)
+E               TypeError: test_full_remote_manifest_verified_immediately_before_bsub.<locals>.corrupt_then_run() got an unexpected keyword argument 'stdin'
+
+scripts\neb_agent\submission.py:668: TypeError
+__ test_full_remote_manifest_verified_immediately_before_bsub[POTCAR-False] ___
+
+tmp_path = WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_full_remote_manifest_veri6')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021BC6345710>
+reuse = False, corruption = 'POTCAR'
+
+    @pytest.mark.parametrize("reuse", [False, True])
+    @pytest.mark.parametrize("corruption", [None, "INCAR", "POSCAR", "POTCAR", "source_POTCAR", "extra"])
+    def test_full_remote_manifest_verified_immediately_before_bsub(tmp_path, monkeypatch, reuse, corruption):
+        workdir, decision, report = prepare_submission(tmp_path, monkeypatch)
+        sandbox = RemoteSandbox(tmp_path)
+        # Bind a real test POTCAR, then regenerate the explicit scope and decision.
+        potcar = sandbox.home / "sbq" / "POTCAR"
+        potcar.write_text("test potential", encoding="ascii")
+        digest = sha256_file(potcar)
+        payload = load_json_object(decision)
+        auth = payload["EVIDENCE"]["authorization"]
+        auth["potcar"]["sha256"] = digest
+        auth_path = workdir / "user_execution_authorization.json"
+        write_json(auth_path, auth)
+        evidence = payload["EVIDENCE"]
+        evidence["source_bindings"]["authorization"]["sha256"] = sha256_file(auth_path)
+        regenerated = decide_execution(evidence["geometry"], evidence["analysis"], evidence["thresholds"],
+                                       climb=False, path_reviewed=True, preflight=report,
+                                       authorization=auth, source_bindings=evidence["source_bindings"])
+        write_json(decision, regenerated)
+        remote_dir = sandbox.home / "sbq" / "job"
+        if reuse:
+            remote_dir.mkdir()
+            for name in report["files"]:
+                shutil.copy2(workdir / name, remote_dir / name)
+
+        def corrupt_then_run(argv):
+            if "bsub script.lsf" in argv[-1] and corruption:
+                target = (
+                    potcar if corruption == "source_POTCAR"
+                    else remote_dir / ("WAVECAR" if corruption == "extra" else corruption)
+                )
+                target.write_text("corrupted", encoding="ascii")
+            return sandbox.run(argv)
+
+        monkeypatch.setattr(submission, "_run", corrupt_then_run)
+        if corruption:
+            with pytest.raises(RuntimeError, match="verification failed"):
+>               launch(workdir, decision, reuse_uploaded=reuse, potcar_sha256=digest)
+
+tests\test_execution_lifecycle.py:316:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_execution_lifecycle.py:100: in launch
+    return submission.submit(workdir, decision, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\neb_agent\submission.py:446: in submit
+    _upload_manifest_files(host, parent, workdir, dict(bundle.files))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+host = 'sunboquan-codex', remote_parent = '~/sbq'
+workdir = WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_full_remote_manifest_veri6/job')
+files = {'INCAR': '63bb0ff43bb80114c2d4471e1c8eab03df61d07292a4467e3f341a6d80a40dd9', 'KPOINTS': '5efb5934c3764ae1438a65a82dc6...980391540ad2953d7d7556a735e6d', 'POTCAR.spec': '1d1d987b827d5d0850061978921c0c086b889e84417afcac85c9b5f3491a39ed', ...}
+
+    def _upload_manifest_files(
+        host: str, remote_parent: str, workdir: Path, files: dict[str, str]
+    ) -> None:
+        """Upload only hash-bound preflight files, preserving their relative paths."""
+        require_remote_path(remote_parent, allow_root=True)
+        require_relative_input_path(workdir.name)
+        validated = {
+            require_relative_input_path(name): require_sha256(digest, label=name)
+            for name, digest in files.items()
+        }
+        with tempfile.TemporaryDirectory(prefix="vasp-submit-") as temporary:
+            staged = Path(temporary) / workdir.name
+            for relative, digest in validated.items():
+                source = require_local_input(workdir, relative)
+                target = staged / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(source, target)
+                if sha256_file(target) != digest:
+                    raise ValueError(f"staged submission bundle changed: {relative}")
+            # Login banners may corrupt SCP/SFTP framing. Upload tar on SSH stdin;
+            # remote stdout is independent and still captured by the command runner.
+            archive_path = Path(temporary) / "inputs.tar"
+            with tarfile.open(archive_path, "w") as archive:
+                for relative in sorted(validated):
+                    archive.add(staged / relative, arcname=f"{workdir.name}/{relative}", recursive=False)
+            command = _remote_shell([
+                *_remote_path_checks(remote_parent, allow_root=True),
+                f"test ! -e {remote_parent}/{workdir.name}",
+                f"tar --keep-old-files --no-same-owner -xf - -C {remote_parent}",
+            ])
+            with archive_path.open("rb") as payload:
+>               _run(["ssh", host, command], stdin=payload)
+E               TypeError: test_full_remote_manifest_verified_immediately_before_bsub.<locals>.corrupt_then_run() got an unexpected keyword argument 'stdin'
+
+scripts\neb_agent\submission.py:668: TypeError
+_ test_full_remote_manifest_verified_immediately_before_bsub[source_POTCAR-False] _
+
+tmp_path = WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_full_remote_manifest_veri8')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021BC6349E10>
+reuse = False, corruption = 'source_POTCAR'
+
+    @pytest.mark.parametrize("reuse", [False, True])
+    @pytest.mark.parametrize("corruption", [None, "INCAR", "POSCAR", "POTCAR", "source_POTCAR", "extra"])
+    def test_full_remote_manifest_verified_immediately_before_bsub(tmp_path, monkeypatch, reuse, corruption):
+        workdir, decision, report = prepare_submission(tmp_path, monkeypatch)
+        sandbox = RemoteSandbox(tmp_path)
+        # Bind a real test POTCAR, then regenerate the explicit scope and decision.
+        potcar = sandbox.home / "sbq" / "POTCAR"
+        potcar.write_text("test potential", encoding="ascii")
+        digest = sha256_file(potcar)
+        payload = load_json_object(decision)
+        auth = payload["EVIDENCE"]["authorization"]
+        auth["potcar"]["sha256"] = digest
+        auth_path = workdir / "user_execution_authorization.json"
+        write_json(auth_path, auth)
+        evidence = payload["EVIDENCE"]
+        evidence["source_bindings"]["authorization"]["sha256"] = sha256_file(auth_path)
+        regenerated = decide_execution(evidence["geometry"], evidence["analysis"], evidence["thresholds"],
+                                       climb=False, path_reviewed=True, preflight=report,
+                                       authorization=auth, source_bindings=evidence["source_bindings"])
+        write_json(decision, regenerated)
+        remote_dir = sandbox.home / "sbq" / "job"
+        if reuse:
+            remote_dir.mkdir()
+            for name in report["files"]:
+                shutil.copy2(workdir / name, remote_dir / name)
+
+        def corrupt_then_run(argv):
+            if "bsub script.lsf" in argv[-1] and corruption:
+                target = (
+                    potcar if corruption == "source_POTCAR"
+                    else remote_dir / ("WAVECAR" if corruption == "extra" else corruption)
+                )
+                target.write_text("corrupted", encoding="ascii")
+            return sandbox.run(argv)
+
+        monkeypatch.setattr(submission, "_run", corrupt_then_run)
+        if corruption:
+            with pytest.raises(RuntimeError, match="verification failed"):
+>               launch(workdir, decision, reuse_uploaded=reuse, potcar_sha256=digest)
+
+tests\test_execution_lifecycle.py:316:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_execution_lifecycle.py:100: in launch
+    return submission.submit(workdir, decision, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\neb_agent\submission.py:446: in submit
+    _upload_manifest_files(host, parent, workdir, dict(bundle.files))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+host = 'sunboquan-codex', remote_parent = '~/sbq'
+workdir = WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_full_remote_manifest_veri8/job')
+files = {'INCAR': '63bb0ff43bb80114c2d4471e1c8eab03df61d07292a4467e3f341a6d80a40dd9', 'KPOINTS': '5efb5934c3764ae1438a65a82dc6...980391540ad2953d7d7556a735e6d', 'POTCAR.spec': '1d1d987b827d5d0850061978921c0c086b889e84417afcac85c9b5f3491a39ed', ...}
+
+    def _upload_manifest_files(
+        host: str, remote_parent: str, workdir: Path, files: dict[str, str]
+    ) -> None:
+        """Upload only hash-bound preflight files, preserving their relative paths."""
+        require_remote_path(remote_parent, allow_root=True)
+        require_relative_input_path(workdir.name)
+        validated = {
+            require_relative_input_path(name): require_sha256(digest, label=name)
+            for name, digest in files.items()
+        }
+        with tempfile.TemporaryDirectory(prefix="vasp-submit-") as temporary:
+            staged = Path(temporary) / workdir.name
+            for relative, digest in validated.items():
+                source = require_local_input(workdir, relative)
+                target = staged / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(source, target)
+                if sha256_file(target) != digest:
+                    raise ValueError(f"staged submission bundle changed: {relative}")
+            # Login banners may corrupt SCP/SFTP framing. Upload tar on SSH stdin;
+            # remote stdout is independent and still captured by the command runner.
+            archive_path = Path(temporary) / "inputs.tar"
+            with tarfile.open(archive_path, "w") as archive:
+                for relative in sorted(validated):
+                    archive.add(staged / relative, arcname=f"{workdir.name}/{relative}", recursive=False)
+            command = _remote_shell([
+                *_remote_path_checks(remote_parent, allow_root=True),
+                f"test ! -e {remote_parent}/{workdir.name}",
+                f"tar --keep-old-files --no-same-owner -xf - -C {remote_parent}",
+            ])
+            with archive_path.open("rb") as payload:
+>               _run(["ssh", host, command], stdin=payload)
+E               TypeError: test_full_remote_manifest_verified_immediately_before_bsub.<locals>.corrupt_then_run() got an unexpected keyword argument 'stdin'
+
+scripts\neb_agent\submission.py:668: TypeError
+___ test_full_remote_manifest_verified_immediately_before_bsub[extra-False] ___
+
+tmp_path = WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_full_remote_manifest_veri10')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021BC63D6E40>
+reuse = False, corruption = 'extra'
+
+    @pytest.mark.parametrize("reuse", [False, True])
+    @pytest.mark.parametrize("corruption", [None, "INCAR", "POSCAR", "POTCAR", "source_POTCAR", "extra"])
+    def test_full_remote_manifest_verified_immediately_before_bsub(tmp_path, monkeypatch, reuse, corruption):
+        workdir, decision, report = prepare_submission(tmp_path, monkeypatch)
+        sandbox = RemoteSandbox(tmp_path)
+        # Bind a real test POTCAR, then regenerate the explicit scope and decision.
+        potcar = sandbox.home / "sbq" / "POTCAR"
+        potcar.write_text("test potential", encoding="ascii")
+        digest = sha256_file(potcar)
+        payload = load_json_object(decision)
+        auth = payload["EVIDENCE"]["authorization"]
+        auth["potcar"]["sha256"] = digest
+        auth_path = workdir / "user_execution_authorization.json"
+        write_json(auth_path, auth)
+        evidence = payload["EVIDENCE"]
+        evidence["source_bindings"]["authorization"]["sha256"] = sha256_file(auth_path)
+        regenerated = decide_execution(evidence["geometry"], evidence["analysis"], evidence["thresholds"],
+                                       climb=False, path_reviewed=True, preflight=report,
+                                       authorization=auth, source_bindings=evidence["source_bindings"])
+        write_json(decision, regenerated)
+        remote_dir = sandbox.home / "sbq" / "job"
+        if reuse:
+            remote_dir.mkdir()
+            for name in report["files"]:
+                shutil.copy2(workdir / name, remote_dir / name)
+
+        def corrupt_then_run(argv):
+            if "bsub script.lsf" in argv[-1] and corruption:
+                target = (
+                    potcar if corruption == "source_POTCAR"
+                    else remote_dir / ("WAVECAR" if corruption == "extra" else corruption)
+                )
+                target.write_text("corrupted", encoding="ascii")
+            return sandbox.run(argv)
+
+        monkeypatch.setattr(submission, "_run", corrupt_then_run)
+        if corruption:
+            with pytest.raises(RuntimeError, match="verification failed"):
+>               launch(workdir, decision, reuse_uploaded=reuse, potcar_sha256=digest)
+
+tests\test_execution_lifecycle.py:316:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_execution_lifecycle.py:100: in launch
+    return submission.submit(workdir, decision, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\neb_agent\submission.py:446: in submit
+    _upload_manifest_files(host, parent, workdir, dict(bundle.files))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+host = 'sunboquan-codex', remote_parent = '~/sbq'
+workdir = WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_full_remote_manifest_veri10/job')
+files = {'INCAR': '63bb0ff43bb80114c2d4471e1c8eab03df61d07292a4467e3f341a6d80a40dd9', 'KPOINTS': '5efb5934c3764ae1438a65a82dc6...980391540ad2953d7d7556a735e6d', 'POTCAR.spec': '1d1d987b827d5d0850061978921c0c086b889e84417afcac85c9b5f3491a39ed', ...}
+
+    def _upload_manifest_files(
+        host: str, remote_parent: str, workdir: Path, files: dict[str, str]
+    ) -> None:
+        """Upload only hash-bound preflight files, preserving their relative paths."""
+        require_remote_path(remote_parent, allow_root=True)
+        require_relative_input_path(workdir.name)
+        validated = {
+            require_relative_input_path(name): require_sha256(digest, label=name)
+            for name, digest in files.items()
+        }
+        with tempfile.TemporaryDirectory(prefix="vasp-submit-") as temporary:
+            staged = Path(temporary) / workdir.name
+            for relative, digest in validated.items():
+                source = require_local_input(workdir, relative)
+                target = staged / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(source, target)
+                if sha256_file(target) != digest:
+                    raise ValueError(f"staged submission bundle changed: {relative}")
+            # Login banners may corrupt SCP/SFTP framing. Upload tar on SSH stdin;
+            # remote stdout is independent and still captured by the command runner.
+            archive_path = Path(temporary) / "inputs.tar"
+            with tarfile.open(archive_path, "w") as archive:
+                for relative in sorted(validated):
+                    archive.add(staged / relative, arcname=f"{workdir.name}/{relative}", recursive=False)
+            command = _remote_shell([
+                *_remote_path_checks(remote_parent, allow_root=True),
+                f"test ! -e {remote_parent}/{workdir.name}",
+                f"tar --keep-old-files --no-same-owner -xf - -C {remote_parent}",
+            ])
+            with archive_path.open("rb") as payload:
+>               _run(["ssh", host, command], stdin=payload)
+E               TypeError: test_full_remote_manifest_verified_immediately_before_bsub.<locals>.corrupt_then_run() got an unexpected keyword argument 'stdin'
+
+scripts\neb_agent\submission.py:668: TypeError
+________ test_hard_process_death_after_bsub_keeps_unknown_reservation _________
+
+tmp_path = WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_hard_process_death_after_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021BC63D4EC0>
+
+    def test_hard_process_death_after_bsub_keeps_unknown_reservation(tmp_path, monkeypatch):
+        import sys
+
+        workdir, decision, _ = prepare_submission(tmp_path, monkeypatch)
+        script = """
+    import os, sys, subprocess
+    from functools import partial
+    from pathlib import Path
+    from scripts.neb_agent import submission
+    workdir, decision, database = map(Path, sys.argv[1:])
+    submission.preflight = partial(submission.preflight, learning_database=database)
+    def remote(argv):
+        if 'bsub script.lsf' in argv[-1]:
+            (workdir / 'mock_scheduler_accepted').write_text('123')
+            os._exit(91)
+        return subprocess.CompletedProcess(argv, 0, '', '')
+    submission._run = remote
+    submission.submit(workdir, decision, 'sunboquan-codex', '~/sbq/job', '~/sbq/POTCAR', 'a'*64, 'SUBMIT_DIAGNOSTIC_VASP')
+    """
+        process = subprocess.run([sys.executable, "-B", "-c", script, str(workdir), str(decision),
+                                  str(tmp_path / "learning.sqlite3")], capture_output=True, text=True, timeout=30)
+>       assert process.returncode == 91, process.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "<string>", line 14, in <module>
+E             submission.submit(workdir, decision, 'sunboquan-codex', '~/sbq/job', '~/sbq/POTCAR', 'a'*64, 'SUBMIT_DIAGNOSTIC_VASP')
+E             ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "C:\Users\86177\.codex\worktrees\is-a-int06-resource-72r\work\scripts\neb_agent\submission.py", line 446, in submit
+E             _upload_manifest_files(host, parent, workdir, dict(bundle.files))
+E             ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "C:\Users\86177\.codex\worktrees\is-a-int06-resource-72r\work\scripts\neb_agent\submission.py", line 668, in _upload_manifest_files
+E             _run(["ssh", host, command], stdin=payload)
+E             ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         TypeError: remote() got an unexpected keyword argument 'stdin'
+E
+E       assert 1 == 91
+E        +  where 1 = CompletedProcess(args=['C:\\Anaconda\\python.exe', '-B', '-c', "\nimport os, sys, subprocess\nfrom functools import pa...\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: remote() got an unexpected keyword argument \'stdin\'\n').returncode
+
+tests\test_execution_lifecycle.py:420: AssertionError
+_______ test_alpha_positive_canonical_receipt_and_immutable_reservation _______
+
+campaign = (WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_alpha_positive_canonical_0/job'), Win...C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_alpha_positive_canonical_0/reviewed-handoffs.json'))
+fake_remote = []
+
+    def test_alpha_positive_canonical_receipt_and_immutable_reservation(campaign, fake_remote):
+        workdir, _, manifest = campaign
+>       alpha.submit(manifest)
+
+tests\test_alpha_fe_bulk_submission.py:62:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\convergence\setup_alpha_fe_bulk_smearing.py:155: in submit
+    result = submission.submit(**arguments)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\neb_agent\submission.py:446: in submit
+    _upload_manifest_files(host, parent, workdir, dict(bundle.files))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+host = 'sunboquan-codex', remote_parent = '~/sbq'
+workdir = WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_alpha_positive_canonical_0/job')
+files = {'INCAR': '76532f8ca59038633edd449f07070233884875049f03ea586d2e245a82fba5b9', 'KPOINTS': '93683349748c8831c468872ced23...4b3ebb7fb1982890f3cd24097d44d', 'POTCAR.spec': '347215e3c2df8bab4ad971cb10fcdef01b60759e85c64f9f4efbdd2df412a6ee', ...}
+
+    def _upload_manifest_files(
+        host: str, remote_parent: str, workdir: Path, files: dict[str, str]
+    ) -> None:
+        """Upload only hash-bound preflight files, preserving their relative paths."""
+        require_remote_path(remote_parent, allow_root=True)
+        require_relative_input_path(workdir.name)
+        validated = {
+            require_relative_input_path(name): require_sha256(digest, label=name)
+            for name, digest in files.items()
+        }
+        with tempfile.TemporaryDirectory(prefix="vasp-submit-") as temporary:
+            staged = Path(temporary) / workdir.name
+            for relative, digest in validated.items():
+                source = require_local_input(workdir, relative)
+                target = staged / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(source, target)
+                if sha256_file(target) != digest:
+                    raise ValueError(f"staged submission bundle changed: {relative}")
+            # Login banners may corrupt SCP/SFTP framing. Upload tar on SSH stdin;
+            # remote stdout is independent and still captured by the command runner.
+            archive_path = Path(temporary) / "inputs.tar"
+            with tarfile.open(archive_path, "w") as archive:
+                for relative in sorted(validated):
+                    archive.add(staged / relative, arcname=f"{workdir.name}/{relative}", recursive=False)
+            command = _remote_shell([
+                *_remote_path_checks(remote_parent, allow_root=True),
+                f"test ! -e {remote_parent}/{workdir.name}",
+                f"tar --keep-old-files --no-same-owner -xf - -C {remote_parent}",
+            ])
+            with archive_path.open("rb") as payload:
+>               _run(["ssh", host, command], stdin=payload)
+E               TypeError: fake_remote.<locals>.remote() got an unexpected keyword argument 'stdin'
+
+scripts\neb_agent\submission.py:668: TypeError
+_________________ test_alpha_concurrent_callers_dispatch_once _________________
+
+campaign = (WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_alpha_concurrent_callers_0/job'), Win...C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_alpha_concurrent_callers_0/reviewed-handoffs.json'))
+fake_remote = []
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021BC346C0C0>
+
+    def test_alpha_concurrent_callers_dispatch_once(campaign, fake_remote, monkeypatch):
+        workdir, _, manifest = campaign
+        barrier = threading.Barrier(2)
+        original = submission.write_json_exclusive
+
+        def synchronized_reservation(path, payload):
+            if path.name == submission.SUBMISSION_ATTEMPT_FILE:
+                barrier.wait(timeout=10)
+            return original(path, payload)
+
+        monkeypatch.setattr(submission, "write_json_exclusive", synchronized_reservation)
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            futures = [pool.submit(alpha.submit, manifest) for _ in range(2)]
+        errors = [future.exception() for future in futures if future.exception()]
+>       assert len(errors) == 1
+E       assert 2 == 1
+E        +  where 2 = len([TypeError("fake_remote.<locals>.remote() got an unexpected keyword argument 'stdin'"), RuntimeError('submission retry refused: UNKNOWN_NEEDS_RECONCILIATION; reservation already exists')])
+
+tests\test_alpha_fe_bulk_submission.py:91: AssertionError
+__________ test_alpha_uncertain_dispatch_never_retries[receipt_loss] __________
+
+campaign = (WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_alpha_uncertain_dispatch_0/job'), Win...C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_alpha_uncertain_dispatch_0/reviewed-handoffs.json'))
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021BC346EE40>
+failure = 'receipt_loss'
+
+    @pytest.mark.parametrize("failure", ["receipt_loss", "timeout", "missing_job_id", "rejection"])
+    def test_alpha_uncertain_dispatch_never_retries(campaign, monkeypatch, failure):
+        workdir, _, manifest = campaign
+        calls = []
+        original = submission.write_json_exclusive
+
+        def write_receipt(path, payload):
+            if failure == "receipt_loss" and path.name == submission.SUBMISSION_RECORD_FILE:
+                raise OSError("simulated crash before receipt")
+            return original(path, payload)
+
+        def remote(argv):
+            if "bsub script.lsf" in argv[-1]:
+                calls.append(argv)
+                if failure == "timeout":
+                    raise subprocess.TimeoutExpired(argv, 300)
+                if failure == "rejection":
+                    raise RuntimeError("fake scheduler rejection")
+            output = "accepted without ID" if failure == "missing_job_id" else "Job <321> is submitted"
+            return subprocess.CompletedProcess(argv, 0, output, "")
+
+        monkeypatch.setattr(submission, "_run", remote)
+        monkeypatch.setattr(submission, "write_json_exclusive", write_receipt)
+        with pytest.raises((OSError, RuntimeError, subprocess.TimeoutExpired)):
+>           alpha.submit(manifest)
+
+tests\test_alpha_fe_bulk_submission.py:150:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\convergence\setup_alpha_fe_bulk_smearing.py:155: in submit
+    result = submission.submit(**arguments)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\neb_agent\submission.py:446: in submit
+    _upload_manifest_files(host, parent, workdir, dict(bundle.files))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+host = 'sunboquan-codex', remote_parent = '~/sbq'
+workdir = WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_alpha_uncertain_dispatch_0/job')
+files = {'INCAR': '76532f8ca59038633edd449f07070233884875049f03ea586d2e245a82fba5b9', 'KPOINTS': '93683349748c8831c468872ced23...4b3ebb7fb1982890f3cd24097d44d', 'POTCAR.spec': '347215e3c2df8bab4ad971cb10fcdef01b60759e85c64f9f4efbdd2df412a6ee', ...}
+
+    def _upload_manifest_files(
+        host: str, remote_parent: str, workdir: Path, files: dict[str, str]
+    ) -> None:
+        """Upload only hash-bound preflight files, preserving their relative paths."""
+        require_remote_path(remote_parent, allow_root=True)
+        require_relative_input_path(workdir.name)
+        validated = {
+            require_relative_input_path(name): require_sha256(digest, label=name)
+            for name, digest in files.items()
+        }
+        with tempfile.TemporaryDirectory(prefix="vasp-submit-") as temporary:
+            staged = Path(temporary) / workdir.name
+            for relative, digest in validated.items():
+                source = require_local_input(workdir, relative)
+                target = staged / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(source, target)
+                if sha256_file(target) != digest:
+                    raise ValueError(f"staged submission bundle changed: {relative}")
+            # Login banners may corrupt SCP/SFTP framing. Upload tar on SSH stdin;
+            # remote stdout is independent and still captured by the command runner.
+            archive_path = Path(temporary) / "inputs.tar"
+            with tarfile.open(archive_path, "w") as archive:
+                for relative in sorted(validated):
+                    archive.add(staged / relative, arcname=f"{workdir.name}/{relative}", recursive=False)
+            command = _remote_shell([
+                *_remote_path_checks(remote_parent, allow_root=True),
+                f"test ! -e {remote_parent}/{workdir.name}",
+                f"tar --keep-old-files --no-same-owner -xf - -C {remote_parent}",
+            ])
+            with archive_path.open("rb") as payload:
+>               _run(["ssh", host, command], stdin=payload)
+E               TypeError: test_alpha_uncertain_dispatch_never_retries.<locals>.remote() got an unexpected keyword argument 'stdin'
+
+scripts\neb_agent\submission.py:668: TypeError
+____________ test_alpha_uncertain_dispatch_never_retries[timeout] _____________
+
+campaign = (WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_alpha_uncertain_dispatch_1/job'), Win...C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_alpha_uncertain_dispatch_1/reviewed-handoffs.json'))
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021BC3408750>
+failure = 'timeout'
+
+    @pytest.mark.parametrize("failure", ["receipt_loss", "timeout", "missing_job_id", "rejection"])
+    def test_alpha_uncertain_dispatch_never_retries(campaign, monkeypatch, failure):
+        workdir, _, manifest = campaign
+        calls = []
+        original = submission.write_json_exclusive
+
+        def write_receipt(path, payload):
+            if failure == "receipt_loss" and path.name == submission.SUBMISSION_RECORD_FILE:
+                raise OSError("simulated crash before receipt")
+            return original(path, payload)
+
+        def remote(argv):
+            if "bsub script.lsf" in argv[-1]:
+                calls.append(argv)
+                if failure == "timeout":
+                    raise subprocess.TimeoutExpired(argv, 300)
+                if failure == "rejection":
+                    raise RuntimeError("fake scheduler rejection")
+            output = "accepted without ID" if failure == "missing_job_id" else "Job <321> is submitted"
+            return subprocess.CompletedProcess(argv, 0, output, "")
+
+        monkeypatch.setattr(submission, "_run", remote)
+        monkeypatch.setattr(submission, "write_json_exclusive", write_receipt)
+        with pytest.raises((OSError, RuntimeError, subprocess.TimeoutExpired)):
+>           alpha.submit(manifest)
+
+tests\test_alpha_fe_bulk_submission.py:150:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\convergence\setup_alpha_fe_bulk_smearing.py:155: in submit
+    result = submission.submit(**arguments)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\neb_agent\submission.py:446: in submit
+    _upload_manifest_files(host, parent, workdir, dict(bundle.files))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+host = 'sunboquan-codex', remote_parent = '~/sbq'
+workdir = WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_alpha_uncertain_dispatch_1/job')
+files = {'INCAR': '76532f8ca59038633edd449f07070233884875049f03ea586d2e245a82fba5b9', 'KPOINTS': '93683349748c8831c468872ced23...4b3ebb7fb1982890f3cd24097d44d', 'POTCAR.spec': '347215e3c2df8bab4ad971cb10fcdef01b60759e85c64f9f4efbdd2df412a6ee', ...}
+
+    def _upload_manifest_files(
+        host: str, remote_parent: str, workdir: Path, files: dict[str, str]
+    ) -> None:
+        """Upload only hash-bound preflight files, preserving their relative paths."""
+        require_remote_path(remote_parent, allow_root=True)
+        require_relative_input_path(workdir.name)
+        validated = {
+            require_relative_input_path(name): require_sha256(digest, label=name)
+            for name, digest in files.items()
+        }
+        with tempfile.TemporaryDirectory(prefix="vasp-submit-") as temporary:
+            staged = Path(temporary) / workdir.name
+            for relative, digest in validated.items():
+                source = require_local_input(workdir, relative)
+                target = staged / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(source, target)
+                if sha256_file(target) != digest:
+                    raise ValueError(f"staged submission bundle changed: {relative}")
+            # Login banners may corrupt SCP/SFTP framing. Upload tar on SSH stdin;
+            # remote stdout is independent and still captured by the command runner.
+            archive_path = Path(temporary) / "inputs.tar"
+            with tarfile.open(archive_path, "w") as archive:
+                for relative in sorted(validated):
+                    archive.add(staged / relative, arcname=f"{workdir.name}/{relative}", recursive=False)
+            command = _remote_shell([
+                *_remote_path_checks(remote_parent, allow_root=True),
+                f"test ! -e {remote_parent}/{workdir.name}",
+                f"tar --keep-old-files --no-same-owner -xf - -C {remote_parent}",
+            ])
+            with archive_path.open("rb") as payload:
+>               _run(["ssh", host, command], stdin=payload)
+E               TypeError: test_alpha_uncertain_dispatch_never_retries.<locals>.remote() got an unexpected keyword argument 'stdin'
+
+scripts\neb_agent\submission.py:668: TypeError
+_________ test_alpha_uncertain_dispatch_never_retries[missing_job_id] _________
+
+campaign = (WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_alpha_uncertain_dispatch_2/job'), Win...C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_alpha_uncertain_dispatch_2/reviewed-handoffs.json'))
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021BC619C4B0>
+failure = 'missing_job_id'
+
+    @pytest.mark.parametrize("failure", ["receipt_loss", "timeout", "missing_job_id", "rejection"])
+    def test_alpha_uncertain_dispatch_never_retries(campaign, monkeypatch, failure):
+        workdir, _, manifest = campaign
+        calls = []
+        original = submission.write_json_exclusive
+
+        def write_receipt(path, payload):
+            if failure == "receipt_loss" and path.name == submission.SUBMISSION_RECORD_FILE:
+                raise OSError("simulated crash before receipt")
+            return original(path, payload)
+
+        def remote(argv):
+            if "bsub script.lsf" in argv[-1]:
+                calls.append(argv)
+                if failure == "timeout":
+                    raise subprocess.TimeoutExpired(argv, 300)
+                if failure == "rejection":
+                    raise RuntimeError("fake scheduler rejection")
+            output = "accepted without ID" if failure == "missing_job_id" else "Job <321> is submitted"
+            return subprocess.CompletedProcess(argv, 0, output, "")
+
+        monkeypatch.setattr(submission, "_run", remote)
+        monkeypatch.setattr(submission, "write_json_exclusive", write_receipt)
+        with pytest.raises((OSError, RuntimeError, subprocess.TimeoutExpired)):
+>           alpha.submit(manifest)
+
+tests\test_alpha_fe_bulk_submission.py:150:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\convergence\setup_alpha_fe_bulk_smearing.py:155: in submit
+    result = submission.submit(**arguments)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\neb_agent\submission.py:446: in submit
+    _upload_manifest_files(host, parent, workdir, dict(bundle.files))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+host = 'sunboquan-codex', remote_parent = '~/sbq'
+workdir = WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_alpha_uncertain_dispatch_2/job')
+files = {'INCAR': '76532f8ca59038633edd449f07070233884875049f03ea586d2e245a82fba5b9', 'KPOINTS': '93683349748c8831c468872ced23...4b3ebb7fb1982890f3cd24097d44d', 'POTCAR.spec': '347215e3c2df8bab4ad971cb10fcdef01b60759e85c64f9f4efbdd2df412a6ee', ...}
+
+    def _upload_manifest_files(
+        host: str, remote_parent: str, workdir: Path, files: dict[str, str]
+    ) -> None:
+        """Upload only hash-bound preflight files, preserving their relative paths."""
+        require_remote_path(remote_parent, allow_root=True)
+        require_relative_input_path(workdir.name)
+        validated = {
+            require_relative_input_path(name): require_sha256(digest, label=name)
+            for name, digest in files.items()
+        }
+        with tempfile.TemporaryDirectory(prefix="vasp-submit-") as temporary:
+            staged = Path(temporary) / workdir.name
+            for relative, digest in validated.items():
+                source = require_local_input(workdir, relative)
+                target = staged / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(source, target)
+                if sha256_file(target) != digest:
+                    raise ValueError(f"staged submission bundle changed: {relative}")
+            # Login banners may corrupt SCP/SFTP framing. Upload tar on SSH stdin;
+            # remote stdout is independent and still captured by the command runner.
+            archive_path = Path(temporary) / "inputs.tar"
+            with tarfile.open(archive_path, "w") as archive:
+                for relative in sorted(validated):
+                    archive.add(staged / relative, arcname=f"{workdir.name}/{relative}", recursive=False)
+            command = _remote_shell([
+                *_remote_path_checks(remote_parent, allow_root=True),
+                f"test ! -e {remote_parent}/{workdir.name}",
+                f"tar --keep-old-files --no-same-owner -xf - -C {remote_parent}",
+            ])
+            with archive_path.open("rb") as payload:
+>               _run(["ssh", host, command], stdin=payload)
+E               TypeError: test_alpha_uncertain_dispatch_never_retries.<locals>.remote() got an unexpected keyword argument 'stdin'
+
+scripts\neb_agent\submission.py:668: TypeError
+___________ test_alpha_uncertain_dispatch_never_retries[rejection] ____________
+
+campaign = (WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_alpha_uncertain_dispatch_3/job'), Win...C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_alpha_uncertain_dispatch_3/reviewed-handoffs.json'))
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000021BC33DD5C0>
+failure = 'rejection'
+
+    @pytest.mark.parametrize("failure", ["receipt_loss", "timeout", "missing_job_id", "rejection"])
+    def test_alpha_uncertain_dispatch_never_retries(campaign, monkeypatch, failure):
+        workdir, _, manifest = campaign
+        calls = []
+        original = submission.write_json_exclusive
+
+        def write_receipt(path, payload):
+            if failure == "receipt_loss" and path.name == submission.SUBMISSION_RECORD_FILE:
+                raise OSError("simulated crash before receipt")
+            return original(path, payload)
+
+        def remote(argv):
+            if "bsub script.lsf" in argv[-1]:
+                calls.append(argv)
+                if failure == "timeout":
+                    raise subprocess.TimeoutExpired(argv, 300)
+                if failure == "rejection":
+                    raise RuntimeError("fake scheduler rejection")
+            output = "accepted without ID" if failure == "missing_job_id" else "Job <321> is submitted"
+            return subprocess.CompletedProcess(argv, 0, output, "")
+
+        monkeypatch.setattr(submission, "_run", remote)
+        monkeypatch.setattr(submission, "write_json_exclusive", write_receipt)
+        with pytest.raises((OSError, RuntimeError, subprocess.TimeoutExpired)):
+>           alpha.submit(manifest)
+
+tests\test_alpha_fe_bulk_submission.py:150:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\convergence\setup_alpha_fe_bulk_smearing.py:155: in submit
+    result = submission.submit(**arguments)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\neb_agent\submission.py:446: in submit
+    _upload_manifest_files(host, parent, workdir, dict(bundle.files))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+host = 'sunboquan-codex', remote_parent = '~/sbq'
+workdir = WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_alpha_uncertain_dispatch_3/job')
+files = {'INCAR': '76532f8ca59038633edd449f07070233884875049f03ea586d2e245a82fba5b9', 'KPOINTS': '93683349748c8831c468872ced23...4b3ebb7fb1982890f3cd24097d44d', 'POTCAR.spec': '347215e3c2df8bab4ad971cb10fcdef01b60759e85c64f9f4efbdd2df412a6ee', ...}
+
+    def _upload_manifest_files(
+        host: str, remote_parent: str, workdir: Path, files: dict[str, str]
+    ) -> None:
+        """Upload only hash-bound preflight files, preserving their relative paths."""
+        require_remote_path(remote_parent, allow_root=True)
+        require_relative_input_path(workdir.name)
+        validated = {
+            require_relative_input_path(name): require_sha256(digest, label=name)
+            for name, digest in files.items()
+        }
+        with tempfile.TemporaryDirectory(prefix="vasp-submit-") as temporary:
+            staged = Path(temporary) / workdir.name
+            for relative, digest in validated.items():
+                source = require_local_input(workdir, relative)
+                target = staged / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(source, target)
+                if sha256_file(target) != digest:
+                    raise ValueError(f"staged submission bundle changed: {relative}")
+            # Login banners may corrupt SCP/SFTP framing. Upload tar on SSH stdin;
+            # remote stdout is independent and still captured by the command runner.
+            archive_path = Path(temporary) / "inputs.tar"
+            with tarfile.open(archive_path, "w") as archive:
+                for relative in sorted(validated):
+                    archive.add(staged / relative, arcname=f"{workdir.name}/{relative}", recursive=False)
+            command = _remote_shell([
+                *_remote_path_checks(remote_parent, allow_root=True),
+                f"test ! -e {remote_parent}/{workdir.name}",
+                f"tar --keep-old-files --no-same-owner -xf - -C {remote_parent}",
+            ])
+            with archive_path.open("rb") as payload:
+>               _run(["ssh", host, command], stdin=payload)
+E               TypeError: test_alpha_uncertain_dispatch_never_retries.<locals>.remote() got an unexpected keyword argument 'stdin'
+
+scripts\neb_agent\submission.py:668: TypeError
+___ test_readiness_generation_is_deterministic_and_matches_checked_in_view ____
+
+tmp_path = WindowsPath('C:/Users/86177/AppData/Local/Temp/pytest-of-86177/pytest-1471/test_readiness_generation_is_d0')
+
+    def test_readiness_generation_is_deterministic_and_matches_checked_in_view(tmp_path):
+        root = fixture_root(tmp_path)
+        first = {p.name: p.read_bytes() for p in generate(root)}
+        second = {p.name: p.read_bytes() for p in generate(root)}
+        assert first == second
+>       assert first == {name: (ROOT / "reports" / name).read_bytes() for name in first}
+E       assert {'capability_... blocked |\n"} == {'capability_... blocked |\n"}
+E
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'capability_readiness.json': b'{\n  "document_class": "GENERATED_CURRENT_REPORT",\n  "authority": "DERIVED_NOT_AUTHOR...e": [],\n      "scope": "No explicit maturity evidence; do not infer from status or file existence."\n    }\n  ]\n}\n'} != {'capability_readiness.json': b'{\n  "document_class": "GENERATED_CURRENT_REPORT",\n  "authority": "DERIVED_NOT_AUTHOR...e": [],\n      "scope": "No explicit maturity evidence; do not infer from status or file existence."\n    }\n  ]\n}\n'}
+E         Use -v to get more diff
+
+tests\test_b6_governance.py:73: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_execution_lifecycle.py::test_concurrent_submitters_have_one_reservation_and_one_submit
+FAILED tests/test_execution_lifecycle.py::test_crash_after_submit_is_unknown_and_never_retried
+FAILED tests/test_execution_lifecycle.py::test_stale_evidence_after_upload_prevents_bsub
+FAILED tests/test_execution_lifecycle.py::test_full_remote_manifest_verified_immediately_before_bsub[None-False]
+FAILED tests/test_execution_lifecycle.py::test_full_remote_manifest_verified_immediately_before_bsub[INCAR-False]
+FAILED tests/test_execution_lifecycle.py::test_full_remote_manifest_verified_immediately_before_bsub[POSCAR-False]
+FAILED tests/test_execution_lifecycle.py::test_full_remote_manifest_verified_immediately_before_bsub[POTCAR-False]
+FAILED tests/test_execution_lifecycle.py::test_full_remote_manifest_verified_immediately_before_bsub[source_POTCAR-False]
+FAILED tests/test_execution_lifecycle.py::test_full_remote_manifest_verified_immediately_before_bsub[extra-False]
+FAILED tests/test_execution_lifecycle.py::test_hard_process_death_after_bsub_keeps_unknown_reservation
+FAILED tests/test_alpha_fe_bulk_submission.py::test_alpha_positive_canonical_receipt_and_immutable_reservation
+FAILED tests/test_alpha_fe_bulk_submission.py::test_alpha_concurrent_callers_dispatch_once
+FAILED tests/test_alpha_fe_bulk_submission.py::test_alpha_uncertain_dispatch_never_retries[receipt_loss]
+FAILED tests/test_alpha_fe_bulk_submission.py::test_alpha_uncertain_dispatch_never_retries[timeout]
+FAILED tests/test_alpha_fe_bulk_submission.py::test_alpha_uncertain_dispatch_never_retries[missing_job_id]
+FAILED tests/test_alpha_fe_bulk_submission.py::test_alpha_uncertain_dispatch_never_retries[rejection]
+FAILED tests/test_b6_governance.py::test_readiness_generation_is_deterministic_and_matches_checked_in_view
+17 failed, 95 passed in 25.98s

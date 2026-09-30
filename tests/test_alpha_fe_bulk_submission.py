@@ -12,7 +12,7 @@ from scripts.convergence import setup_alpha_fe_bulk_smearing as alpha
 from scripts.neb_agent import submission
 from scripts.ts_strategy_engine.execution_gate import decide_execution
 from scripts.vasp_result_gate import read_incar_values
-from test_execution_lifecycle import ACTION, HOST, POTCAR, authorize_evidence, prepare_submission
+from test_execution_lifecycle import ACTION, HOST, POTCAR, authorize_evidence, prepare_submission, verify_mock_upload
 
 
 @pytest.fixture
@@ -45,10 +45,12 @@ def campaign(tmp_path, monkeypatch):
 
 
 @pytest.fixture
-def fake_remote(monkeypatch):
+def fake_remote(campaign, monkeypatch):
+    workdir, _, _ = campaign
     dispatches = []
 
-    def remote(argv):
+    def remote(argv, *, stdin=None):
+        verify_mock_upload(workdir, argv, stdin=stdin)
         if "bsub script.lsf" in argv[-1]:
             dispatches.append(argv)
         return subprocess.CompletedProcess(argv, 0, "Job <321> is submitted", "")
@@ -134,7 +136,8 @@ def test_alpha_uncertain_dispatch_never_retries(campaign, monkeypatch, failure):
             raise OSError("simulated crash before receipt")
         return original(path, payload)
 
-    def remote(argv):
+    def remote(argv, *, stdin=None):
+        verify_mock_upload(workdir, argv, stdin=stdin)
         if "bsub script.lsf" in argv[-1]:
             calls.append(argv)
             if failure == "timeout":
@@ -146,7 +149,14 @@ def test_alpha_uncertain_dispatch_never_retries(campaign, monkeypatch, failure):
 
     monkeypatch.setattr(submission, "_run", remote)
     monkeypatch.setattr(submission, "write_json_exclusive", write_receipt)
-    with pytest.raises((OSError, RuntimeError, subprocess.TimeoutExpired)):
+    expected = {
+        "receipt_loss": (OSError, "simulated crash before receipt"),
+        "timeout": (subprocess.TimeoutExpired, "timed out after 300 seconds"),
+        "missing_job_id": (RuntimeError, "could not parse one LSF job ID: accepted without ID"),
+        "rejection": (RuntimeError, "fake scheduler rejection"),
+    }
+    error, message = expected[failure]
+    with pytest.raises(error, match=message):
         alpha.submit(manifest)
     before = (workdir / submission.SUBMISSION_ATTEMPT_FILE).read_bytes()
     assert submission.submission_status(workdir)["status"] == submission.UNKNOWN
