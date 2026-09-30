@@ -43,6 +43,10 @@ Only `public.json` should be given to an answer generator. `private.json`
 contains source paths and references; file separation is not an access control
 boundary. The manifest author must check that selected values contain no later
 conclusions. `manifest.json` is written last and marks a complete bundle.
+The private bundle format is version 2: it records the original allowed root
+and rechecks every source and reviewed reference before scoring. Older bundles
+without that scope must be rebuilt from their original manifest and sources;
+the public case and answer schema remain version 1.
 
 `learning cases-evaluate --bundle NEW_DIR --answers ANSWERS.json --report NEW_REPORT.json`
 scores saved answers without opening a registry or running a model. The answer
@@ -52,6 +56,14 @@ file contains `schema_version: 1`, the bundle's `public_sha256`, and an
 The report lists every case, missing or invalid answers, unknown IDs, and the
 scorable denominator. A match means agreement with the supplied review
 reference, not scientific TS validation or measured real-world improvement.
+Structural answer errors write a failure report and make the CLI exit with code
+2. A valid answer that disagrees with its reference is a scored mismatch and
+does not make the CLI fail. `integrity_ok` describes answer-set structure;
+`comparison_ready` also requires at least one case and a scored reference for
+every case. Reports bind the public input, private reference/source package,
+policy, builder, evaluator, and answer-file hashes. Older reports missing these
+identities cannot establish a fair version comparison. The global `--output`
+option is unavailable for these two commands; use `--report` for evaluation.
 Both commands use new output paths and leave the current calculation unchanged.
 
 ## Warm start and reference methods

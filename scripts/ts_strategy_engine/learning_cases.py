@@ -11,6 +11,7 @@ from .strategy_learning import POLICY, policy
 
 
 SCHEMA_VERSION = 1
+PRIVATE_FORMAT_VERSION = 2
 MAX_SOURCE_BYTES = 1_000_000
 PROVENANCE = {"synthetic", "reviewed_real", "incomplete"}
 ROOT_STATUSES = {"confirmed", "hypothesis", "unknown"}
@@ -32,7 +33,7 @@ def _source(item: dict[str, Any], root: Path, *, public: bool) -> dict[str, Any]
     if path.stat().st_size > MAX_SOURCE_BYTES:
         raise ValueError("JSON source exceeds the small-snapshot limit")
     if require_sha256(item["sha256"], label="source sha256") != sha256_file(path):
-        raise ValueError(f"source hash changed: {item['path']}")
+        raise ValueError(f"stale evidence: source hash changed: {item['path']}")
     if public:
         if not isinstance(item["pointer"], str):
             raise ValueError("public evidence pointer must be a string")
@@ -81,6 +82,41 @@ def _reference(reference: Any, provenance: str, selected: list[dict[str, Any]],
     return {**reference, "source": source}
 
 
+def validate_built_case(public_case: dict[str, Any], private_case: dict[str, Any],
+                        root: Path) -> None:
+    """Recheck the builder contract when an existing bundle is loaded."""
+    exact_keys(public_case, {"case_id", "group_id", "question", "evidence", "input_sha256"})
+    exact_keys(private_case, {"case_id", "group_id", "provenance", "sources", "reference"})
+    for key in ("case_id", "group_id"):
+        if not isinstance(public_case[key], str) or not public_case[key].strip() \
+                or public_case[key] != private_case[key]:
+            raise ValueError(f"public/private {key} mapping changed")
+    if not isinstance(public_case["question"], str) or not public_case["question"].strip() \
+            or not isinstance(private_case["provenance"], str) \
+            or private_case["provenance"] not in PROVENANCE:
+        raise ValueError("case metadata changed")
+    sources = private_case["sources"]
+    if not isinstance(sources, list) or not sources:
+        raise ValueError("case sources must be nonempty")
+    selected = [_source(item, root, public=True) for item in sources]
+    if selected != sources:
+        raise ValueError("case source paths are not canonical")
+    ids = [item["evidence_id"] for item in selected]
+    if len(ids) != len(set(ids)):
+        raise ValueError("duplicate evidence_id in case bundle")
+    visible = [{"evidence_id": item["evidence_id"], "pointer": item["pointer"],
+                "value": item["value"], "source_sha256": item["sha256"]}
+               for item in selected]
+    if public_case["evidence"] != visible:
+        raise ValueError("public evidence and private source mapping disagree")
+    reference = _reference(private_case["reference"], private_case["provenance"], selected, root)
+    if reference != private_case["reference"]:
+        raise ValueError("reference source path is not canonical")
+    identity = {key: value for key, value in public_case.items() if key != "input_sha256"}
+    if public_case["input_sha256"] != sha256_json(identity):
+        raise ValueError("public case identity changed")
+
+
 def build_cases(spec_path: Path, allowed_root: Path, output_dir: Path) -> dict[str, Any]:
     """Create a write-once bundle; manifest.json is the completion marker."""
     root = allowed_root.resolve(strict=True)
@@ -89,7 +125,8 @@ def build_cases(spec_path: Path, allowed_root: Path, output_dir: Path) -> dict[s
         raise ValueError("case manifest must be inside the allowed root")
     spec = load_json_object(spec_path)
     exact_keys(spec, {"schema_version", "cases"})
-    if spec["schema_version"] != SCHEMA_VERSION or not isinstance(spec["cases"], list):
+    if type(spec["schema_version"]) is not int or spec["schema_version"] != SCHEMA_VERSION \
+            or not isinstance(spec["cases"], list):
         raise ValueError("unsupported case manifest")
     public_cases: list[dict[str, Any]] = []
     private_cases: list[dict[str, Any]] = []
@@ -103,7 +140,7 @@ def build_cases(spec_path: Path, allowed_root: Path, output_dir: Path) -> dict[s
         if case_id in seen:
             raise ValueError(f"duplicate case_id: {case_id}")
         seen.add(case_id)
-        if case["provenance"] not in PROVENANCE:
+        if not isinstance(case["provenance"], str) or case["provenance"] not in PROVENANCE:
             raise ValueError("unknown case provenance")
         evidence = case["public_evidence"]
         if not isinstance(evidence, list) or not evidence:
@@ -122,7 +159,8 @@ def build_cases(spec_path: Path, allowed_root: Path, output_dir: Path) -> dict[s
         private_cases.append({"case_id": case_id, "group_id": case["group_id"],
                               "provenance": case["provenance"], "sources": selected, "reference": reference})
     public = {"schema_version": SCHEMA_VERSION, "cases": public_cases}
-    private = {"schema_version": SCHEMA_VERSION, "public_sha256": sha256_json(public),
+    private = {"schema_version": SCHEMA_VERSION, "bundle_format_version": PRIVATE_FORMAT_VERSION,
+               "allowed_root": str(root), "public_sha256": sha256_json(public),
                "policy_sha256": sha256_file(POLICY),
                "builder_sha256": sha256_file(Path(__file__)), "cases": private_cases}
     marker = {"schema_version": SCHEMA_VERSION, "public_sha256": sha256_json(public),

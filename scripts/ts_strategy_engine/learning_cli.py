@@ -117,12 +117,16 @@ def main(argv: list[str] | None = None) -> None:
     root = parser()
     args = root.parse_args(argv)
     try:
+        if args.command in {"cases-build", "cases-evaluate"} and args.output is not None:
+            raise ValueError("--output is not supported for diagnostic case commands")
         if args.output and args.output.exists():
             raise ValueError(f"report already exists: {args.output}")
         result = _dispatch(args)
         if args.output:
             write_json(args.output, result)
         print(json.dumps(result, ensure_ascii=False, indent=2))
+        if args.command == "cases-evaluate" and not result["integrity_ok"]:
+            root.exit(2, f"strategy learning: invalid answer set; details in {args.report}\n")
     except (OSError, ValueError, KeyError, TypeError) as exc:
         root.exit(2, f"strategy learning: {exc}\n")
 
