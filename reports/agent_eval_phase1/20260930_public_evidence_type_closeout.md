@@ -1,0 +1,9 @@
+# Phase 1 public evidence type closeout
+
+- Base: `codex/phase1-diagnostic-cases-20260929` at `3787f40eb7b01508f9e8820fda2912cba6ccc854`; worktree initially clean.
+- Root cause: Python list/dict equality treats `false == 0`, `true == 1`, and `1 == 1.0` as true. `validate_built_case` therefore accepted a resealed public evidence value whose type differed from the unchanged private source.
+- Change: compare public and reconstructed evidence with the existing `sha256_json` canonical JSON identity. No source, reference, CLI, database, or scientific contract was changed.
+- Red test: six parameterized directions changed only `public.json` evidence and the dependent public/private/marker hashes. Original JSON source and `private.sources` stayed unchanged. `python -m pytest tests/test_ts_learning_cases.py::test_resealed_public_evidence_type_change_is_rejected -q --tb=line` exited 1 with six “DID NOT RAISE” failures before the fix; after the fix it exited 0 with six passes. Each test requires rejection before any score report is written.
+- Final checks (Windows, Python 3.13.9): `python -m py_compile scripts/ts_strategy_engine/learning_cases.py tests/test_ts_learning_cases.py` exit 0; `ruff check scripts/ts_strategy_engine/learning_cases.py tests/test_ts_learning_cases.py` exit 0; `python -m pytest tests/test_ts_learning_cases.py tests/test_ts_strategy_learning.py tests/test_b5_architecture_boundaries.py -q` exit 0, 103 tests (46 + 35 + 22); `git diff --check` exit 0.
+- Final SHA-256: `learning_cases.py` `884b91b7de1c1f226b64e5038bb2425cdbc683593f4e4611e95dd96c8235f0c4`; `test_ts_learning_cases.py` `72f02dad12f49f9158f892fad1c7378f04e4f97d8bb06be81b77a86bceca7ba2`.
+- Not verified: real reviewed cases, Linux behavior, full repository suite. No real calculation or production database was accessed. At audit time, this work was uncommitted and unpushed; `repo-state sync` was not run.

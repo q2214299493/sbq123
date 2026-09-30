@@ -224,6 +224,47 @@ def _rebind_private(bundle: Path, update):
     write_json(marker_path, marker)
 
 
+@pytest.mark.parametrize("source_value,public_value", [
+    (False, 0), (0, False), (True, 1), (1, True), (1, 1.0), (1.0, 1),
+])
+def test_resealed_public_evidence_type_change_is_rejected(tmp_path, source_value, public_value):
+    manifest, expected = fixture_case(tmp_path)
+    source_path = tmp_path / "snapshot.json"
+    write_json(source_path, {"stage": source_value, "note": "pre-answer observation"})
+    spec = json.loads(manifest.read_text())
+    spec["cases"][0]["public_evidence"][0]["value"] = source_value
+    spec["cases"][0]["public_evidence"][0]["sha256"] = sha256_file(source_path)
+    write_json(manifest, spec)
+    bundle = tmp_path / "bundle"
+    build_cases(manifest, tmp_path, bundle)
+    original_source_sha256 = sha256_file(source_path)
+    original_sources_sha256 = sha256_json(json.loads((bundle / "private.json").read_text())["cases"][0]["sources"])
+
+    public_path = bundle / "public.json"
+    public = json.loads(public_path.read_text())
+    case = public["cases"][0]
+    case["evidence"][0]["value"] = public_value
+    case["input_sha256"] = sha256_json({key: value for key, value in case.items()
+                                        if key != "input_sha256"})
+    write_json(public_path, public)
+    public_sha256 = sha256_json(public)
+    _rebind_private(bundle, lambda private: private.update(public_sha256=public_sha256))
+    marker_path = bundle / "manifest.json"
+    marker = json.loads(marker_path.read_text())
+    marker["public_sha256"] = public_sha256
+    write_json(marker_path, marker)
+    assert sha256_file(source_path) == original_source_sha256
+    assert sha256_json(json.loads((bundle / "private.json").read_text())["cases"][0]["sources"]) \
+        == original_sources_sha256
+
+    answers_path = tmp_path / "answers.json"
+    write_json(answers_path, valid_answer(bundle, expected))
+    report_path = tmp_path / "report.json"
+    with pytest.raises(ValueError, match="public evidence and private source mapping disagree"):
+        evaluate_cases(bundle, answers_path, report_path)
+    assert not report_path.exists()
+
+
 @pytest.mark.parametrize("damage", ["expected", "approval", "incomplete", "duplicate_case",
                                      "same_source", "outside_root"])
 def test_resealed_invalid_private_bundle_is_rejected(tmp_path, damage):

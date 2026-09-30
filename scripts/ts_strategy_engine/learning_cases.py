@@ -107,7 +107,7 @@ def validate_built_case(public_case: dict[str, Any], private_case: dict[str, Any
     visible = [{"evidence_id": item["evidence_id"], "pointer": item["pointer"],
                 "value": item["value"], "source_sha256": item["sha256"]}
                for item in selected]
-    if public_case["evidence"] != visible:
+    if sha256_json(public_case["evidence"]) != sha256_json(visible):
         raise ValueError("public evidence and private source mapping disagree")
     reference = _reference(private_case["reference"], private_case["provenance"], selected, root)
     if reference != private_case["reference"]:
