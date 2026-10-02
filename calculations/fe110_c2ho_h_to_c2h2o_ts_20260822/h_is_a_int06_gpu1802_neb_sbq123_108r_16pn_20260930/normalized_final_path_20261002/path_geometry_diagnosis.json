@@ -1,0 +1,283 @@
+{
+  "schema_version": 1,
+  "document_kind": "neb_path_geometry_diagnosis",
+  "producer": "scripts.neb_agent.diagnose_path_geometry",
+  "source_files": [
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\normalized_final_path_20261002\\00\\POSCAR",
+      "sha256": "6eaa3c249575b540f65d1a9b7645e5e87e7a9338bc6e6f616327364a84892fc5"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\normalized_final_path_20261002\\01\\POSCAR",
+      "sha256": "c657bfef680a2266b13492e183c4917c93bac1cfee99983d9e064bd4e07d6c58"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\normalized_final_path_20261002\\02\\POSCAR",
+      "sha256": "9f209515fa3d6344449d3abcbbc08e2c0d673ff30a31fe2b1fbdc53b6272a205"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\normalized_final_path_20261002\\03\\POSCAR",
+      "sha256": "286be30a5472c27d65a4b4bb21fc0a71720005cb040a5d96d6625730362c8482"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\normalized_final_path_20261002\\04\\POSCAR",
+      "sha256": "79603c2c756de7799d452920f34f56ba0477dee450bfe293f3d0c68a8fbe3f2c"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\normalized_final_path_20261002\\05\\POSCAR",
+      "sha256": "e550b522a48d6133e122a5bc33b60510e1d2ffa625959696ea30d06ad7428459"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\normalized_final_path_20261002\\06\\POSCAR",
+      "sha256": "bdaadf1031c4b698bbcd828ad14dd415a9cc8a7c84b06c2d1ec0aad0990b92c0"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\normalized_final_path_20261002\\07\\POSCAR",
+      "sha256": "6db63bfd7313ae2bd140fb66b8e774eb6472af3b755cbf8929198a82a578abfb"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\normalized_final_path_20261002\\08\\POSCAR",
+      "sha256": "3b74ebb9bb58305f3fbc26fd033b942a8080264b4dcef0c08ec8b78c7ceb3f1a"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\normalized_final_path_20261002\\09\\POSCAR",
+      "sha256": "a8333c4dff61bd243e49b8476f3bc8ac2d78998a1902e1585215ebc7d01be9bc"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\normalized_final_path_20261002\\10\\POSCAR",
+      "sha256": "fdfc051d2df3108679fd171ba0d4af8a345881fdee5907431b33d34e39bb5933"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\normalized_final_path_20261002\\INCAR",
+      "sha256": "b78d1ab2535f122d742c90524ee5a4ed83320abc05f675ff84cf79a22966f47e"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\configs\\neb_agent\\default_thresholds.yaml",
+      "sha256": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c"
+    }
+  ],
+  "status": "PASS",
+  "errors": [],
+  "warnings": [
+    "nebmovie.pl visual review remains required"
+  ],
+  "thresholds": {
+    "min_distance_factor": 0.55,
+    "absolute_min_distance_A": 1.0,
+    "image_jump_warning_A": 1.0,
+    "fixed_position_tolerance_A": 0.0001,
+    "internal_minimum_warning_eV": 0.2,
+    "barrierless_force_threshold_eVA": 0.2,
+    "high_force_warning_threshold_eVA": 1.5,
+    "min_ionic_steps_for_force_warning": 5,
+    "persistent_high_force_failure_min_ionic_steps": 10,
+    "scf_consecutive_exhaustion_hard_min": 3,
+    "surface_penetration_warning_A": 0.2,
+    "desorption_height_change_warning_A": 2.0,
+    "reaction_coordinate_backtrack_warning_A": 0.25,
+    "magnetic_continuity_warning_threshold_muB": 2.0
+  },
+  "reaction_atom_indices_zero_based": [
+    49
+  ],
+  "reaction_pairs_zero_based": [],
+  "fixed_atom_indices_zero_based": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "images": [
+    {
+      "image": "00",
+      "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\normalized_final_path_20261002\\00\\POSCAR",
+      "minimum_pair_distance_A": 1.09986147872795,
+      "minimum_pair_zero_based": [
+        46,
+        47
+      ],
+      "collision_threshold_A": 0.781,
+      "max_step_from_previous_A": 0.0,
+      "max_raw_fractional_step_from_previous": 0.0,
+      "periodic_branch_shift_atom_indices_zero_based": [],
+      "max_fixed_displacement_from_initial_A": 0.0,
+      "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+      "reaction_distances": []
+    },
+    {
+      "image": "01",
+      "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\normalized_final_path_20261002\\01\\POSCAR",
+      "minimum_pair_distance_A": 1.100448177552111,
+      "minimum_pair_zero_based": [
+        46,
+        47
+      ],
+      "collision_threshold_A": 0.781,
+      "max_step_from_previous_A": 0.3397876955942615,
+      "max_raw_fractional_step_from_previous": 0.05636183962899999,
+      "periodic_branch_shift_atom_indices_zero_based": [],
+      "max_fixed_displacement_from_initial_A": 0.0,
+      "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+      "reaction_distances": []
+    },
+    {
+      "image": "02",
+      "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\normalized_final_path_20261002\\02\\POSCAR",
+      "minimum_pair_distance_A": 1.1002923456039557,
+      "minimum_pair_zero_based": [
+        46,
+        47
+      ],
+      "collision_threshold_A": 0.781,
+      "max_step_from_previous_A": 0.3502172125483941,
+      "max_raw_fractional_step_from_previous": 0.05828535605899998,
+      "periodic_branch_shift_atom_indices_zero_based": [],
+      "max_fixed_displacement_from_initial_A": 0.0,
+      "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+      "reaction_distances": []
+    },
+    {
+      "image": "03",
+      "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\normalized_final_path_20261002\\03\\POSCAR",
+      "minimum_pair_distance_A": 1.10039144082266,
+      "minimum_pair_zero_based": [
+        46,
+        47
+      ],
+      "collision_threshold_A": 0.781,
+      "max_step_from_previous_A": 0.34167242553856836,
+      "max_raw_fractional_step_from_previous": 0.05630747900200006,
+      "periodic_branch_shift_atom_indices_zero_based": [],
+      "max_fixed_displacement_from_initial_A": 0.0,
+      "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+      "reaction_distances": []
+    },
+    {
+      "image": "04",
+      "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\normalized_final_path_20261002\\04\\POSCAR",
+      "minimum_pair_distance_A": 1.1002023632854183,
+      "minimum_pair_zero_based": [
+        46,
+        47
+      ],
+      "collision_threshold_A": 0.781,
+      "max_step_from_previous_A": 0.36837300307237375,
+      "max_raw_fractional_step_from_previous": 0.03433845356999998,
+      "periodic_branch_shift_atom_indices_zero_based": [],
+      "max_fixed_displacement_from_initial_A": 0.0,
+      "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+      "reaction_distances": []
+    },
+    {
+      "image": "05",
+      "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\normalized_final_path_20261002\\05\\POSCAR",
+      "minimum_pair_distance_A": 1.1001902731662638,
+      "minimum_pair_zero_based": [
+        46,
+        47
+      ],
+      "collision_threshold_A": 0.781,
+      "max_step_from_previous_A": 0.3735683607449869,
+      "max_raw_fractional_step_from_previous": 0.033252370690999955,
+      "periodic_branch_shift_atom_indices_zero_based": [],
+      "max_fixed_displacement_from_initial_A": 0.0,
+      "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+      "reaction_distances": []
+    },
+    {
+      "image": "06",
+      "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\normalized_final_path_20261002\\06\\POSCAR",
+      "minimum_pair_distance_A": 1.099722971906954,
+      "minimum_pair_zero_based": [
+        46,
+        47
+      ],
+      "collision_threshold_A": 0.781,
+      "max_step_from_previous_A": 0.381885519426653,
+      "max_raw_fractional_step_from_previous": 0.034851519105000006,
+      "periodic_branch_shift_atom_indices_zero_based": [],
+      "max_fixed_displacement_from_initial_A": 0.0,
+      "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+      "reaction_distances": []
+    },
+    {
+      "image": "07",
+      "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\normalized_final_path_20261002\\07\\POSCAR",
+      "minimum_pair_distance_A": 1.0992097173487823,
+      "minimum_pair_zero_based": [
+        46,
+        47
+      ],
+      "collision_threshold_A": 0.781,
+      "max_step_from_previous_A": 0.3925715146299412,
+      "max_raw_fractional_step_from_previous": 0.03424021465900001,
+      "periodic_branch_shift_atom_indices_zero_based": [],
+      "max_fixed_displacement_from_initial_A": 0.0,
+      "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+      "reaction_distances": []
+    },
+    {
+      "image": "08",
+      "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\normalized_final_path_20261002\\08\\POSCAR",
+      "minimum_pair_distance_A": 1.0987033639577348,
+      "minimum_pair_zero_based": [
+        46,
+        47
+      ],
+      "collision_threshold_A": 0.781,
+      "max_step_from_previous_A": 0.3639635827990147,
+      "max_raw_fractional_step_from_previous": 0.05002262255400003,
+      "periodic_branch_shift_atom_indices_zero_based": [],
+      "max_fixed_displacement_from_initial_A": 0.0,
+      "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+      "reaction_distances": []
+    },
+    {
+      "image": "09",
+      "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\normalized_final_path_20261002\\09\\POSCAR",
+      "minimum_pair_distance_A": 1.0987976792636436,
+      "minimum_pair_zero_based": [
+        46,
+        47
+      ],
+      "collision_threshold_A": 0.781,
+      "max_step_from_previous_A": 0.3999496582007662,
+      "max_raw_fractional_step_from_previous": 0.06661005532199998,
+      "periodic_branch_shift_atom_indices_zero_based": [],
+      "max_fixed_displacement_from_initial_A": 0.0,
+      "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+      "reaction_distances": []
+    },
+    {
+      "image": "10",
+      "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\normalized_final_path_20261002\\10\\POSCAR",
+      "minimum_pair_distance_A": 1.099075606757729,
+      "minimum_pair_zero_based": [
+        46,
+        47
+      ],
+      "collision_threshold_A": 0.781,
+      "max_step_from_previous_A": 0.4016276035203582,
+      "max_raw_fractional_step_from_previous": 0.06690442613499997,
+      "periodic_branch_shift_atom_indices_zero_based": [],
+      "max_fixed_displacement_from_initial_A": 0.0,
+      "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+      "reaction_distances": []
+    }
+  ],
+  "requires_visual_review": true
+}

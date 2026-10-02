@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-10-02T14:50:54.546522+00:00",
+  "recorded_at": "2026-10-02T14:50:54.546522+00:00",
+  "event_id": "task-is-a-int06-ci9826728-20261002",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "Ordinary NEB9808511 completed and reviewed; user-authorized CI-NEB9826728 submitted once and PEND.",
+  "evidence": [
+    {
+      "locator": "archive/ci_neb9808511_20261002/user_request.json",
+      "sha256": "4fcc22ddf0f9dae9fea083f7f220dcd5bb6fd93dd9e55cbbb6024f83200a1d49",
+      "authority": "user_authorization",
+      "observed_at": "2026-10-02T14:50:54.546522+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_ci9808511_sbq123_108r_20261002/parent_scheduler_evidence.json",
+      "sha256": "177c2d1f4342af924509f94ac6821b34f772603017b7f7f484b9d398d0190763",
+      "authority": "scheduler",
+      "observed_at": "2026-10-02T14:50:54.546522+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930/normalized_final_path_20261002/normalization_receipt.json",
+      "sha256": "a80ea2f1d74c9a6675d85613b64f95d03ae9b623254f3ac2a4cb82b5ca92b384",
+      "authority": "module_validation",
+      "observed_at": "2026-10-02T14:50:54.546522+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_ci9808511_sbq123_108r_20261002/completed_parent_analysis.json",
+      "sha256": "dc7f13b1c83da20d95c0c444388054912c7100183e0bf4252ff152e58cb96edc",
+      "authority": "module_validation",
+      "observed_at": "2026-10-02T14:50:54.546522+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_ci9808511_sbq123_108r_20261002/path_review.json",
+      "sha256": "ad3ec7ef7462b80249522a83001283a609765a4ffa4abbdf20cd5013e9af9294",
+      "authority": "module_validation",
+      "observed_at": "2026-10-02T14:50:54.546522+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_ci9808511_sbq123_108r_20261002/submission_preflight.json",
+      "sha256": "1b42d393c08f516c0dc06064caaa3a43f9e5c6b3347729f36c7d6bd2ff627b90",
+      "authority": "module_validation",
+      "observed_at": "2026-10-02T14:50:54.546522+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_ci9808511_sbq123_108r_20261002/execution_gate_decision.json",
+      "sha256": "d2452b4836ed9062babcb888bdcb2a8a2e42ff64844747b750ad6f0c52301bfc",
+      "authority": "module_validation",
+      "observed_at": "2026-10-02T14:50:54.546522+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_ci9808511_sbq123_108r_20261002/submission_record.json",
+      "sha256": "7e1d1714ed69e0e8123c6e0ab0937ab6506b7e4b44f20e5abb77828cd20e36d0",
+      "authority": "repository_document",
+      "observed_at": "2026-10-02T14:50:54.546522+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_ci9808511_sbq123_108r_20261002/scheduler_checkpoint_submission.json",
+      "sha256": "5e085b55cb6213e032a82995e6339efff4c96ee6ab78497fd6ec7a806a18cedc",
+      "authority": "scheduler",
+      "observed_at": "2026-10-02T14:50:54.546522+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "payload": {
+    "objective": "Monitor CI-NEB9826728 for IS-A9725473 -> INT06_9748648 H migration.",
+    "phase": "active",
+    "current_evidence": [
+      "Parent ordinary NEB9808511 is DONE; all nine internal images completed normally with final electronic convergence, 71 steps and maximum final NEB force0.049947 eV/A.",
+      "Final structures were recovered with OUTCAR/OSZICAR/XDATCAR. Integer lattice translations only remove Fe periodic branch wrapping; atom order, fixedFe0-17 and physical structures are retained. Normalized geometry PASS; maximum adjacent atom displacement0.401628 A.",
+      "Actual TOTEN maximum is image05. Lower peaks01 and09 remain diagnostic migration features; this refinement does not claim a single elementary TS for the whole multi-peak path.",
+      "VTST dist.pl and nebmovie.pl0 completed; numeric and actual-coordinate visual review accepted. CI preflight and current hash-bound ENABLE_CI_NEB execution authorization pass.",
+      "CI-NEB9826728 submitted once on sunboquan-codex/sbq123, statusPEND; nine internal images,108 MPI ranks,12 per image,NPAR4,per-node cap16; LCLIMB true,IOPT1,EDIFFG -0.02,ALGO Fast,SIGMA0.20,NSW300.",
+      "No final TS, virtual frequency, electronic barrier or Grade-A acceptance is claimed for this migration segment yet."
+    ],
+    "one_executable_step": "At the next requested checkpoint query LSF9826728 and the canonical compact NEB monitor for ~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_is_a_int06_ci9808511_sbq123_108r_20261002; distinguish queue state, electronic convergence, CI/NEB forces, geometry and scientific validity.",
+    "submission_boundary": "One CI refinement authorized and submitted. No duplicate, restart, new GPU, Dimer or frequency submission without current evidence and user authority.",
+    "done_when": [
+      "CI path is technically converged and reviewed; later frequency validation and compatible-energy registration require their own gates."
+    ],
+    "constraints": [
+      "Preserve accepted INT06-MID and MID-FS segments.",
+      "Preserve atom mapping, fixedFe0-17 and SIGMA0.20 compatibility branch.",
+      "108 total ranks retained with16-per-node cap and12 per internal image.",
+      "CI climbs the currently highest internal image dynamically; initial maximum05 does not lock image05 forever."
+    ],
+    "authoritative_references": [
+      "archive/ci_neb9808511_20261002/user_request.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_ci9808511_sbq123_108r_20261002/parent_scheduler_evidence.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930/normalized_final_path_20261002/normalization_receipt.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_ci9808511_sbq123_108r_20261002/completed_parent_analysis.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_ci9808511_sbq123_108r_20261002/path_review.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_ci9808511_sbq123_108r_20261002/submission_preflight.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_ci9808511_sbq123_108r_20261002/execution_gate_decision.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_ci9808511_sbq123_108r_20261002/submission_record.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_ci9808511_sbq123_108r_20261002/scheduler_checkpoint_submission.json"
+    ]
+  },
+  "supersedes": [
+    "task-is-a-int06-neb9808511-sbq123-switch-20260930"
+  ]
+}

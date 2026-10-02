@@ -1,0 +1,286 @@
+{
+  "schema_version": 2,
+  "PATH_QUALITY_STATUS": "CI_NEB_READINESS_EVIDENCE",
+  "REASON_CODES": [
+    "C_gap_persistent_or_increasing"
+  ],
+  "CRITICAL_IMAGES": [
+    "08",
+    "09"
+  ],
+  "EVIDENCE": {
+    "reaction_coordinate_A": {
+      "00": 3.3131195705289853,
+      "01": 3.5013443049016626,
+      "02": 3.7231992455555485,
+      "03": 3.8607768882732882,
+      "04": 3.6280450356775393,
+      "05": 3.376366465899851,
+      "06": 3.1077264948693593,
+      "07": 2.840457231236724,
+      "08": 2.5274754330195273,
+      "09": 2.1063572550271576,
+      "10": 1.8067732026151755
+    },
+    "critical_gap_history_A": [
+      0.4209751533835808,
+      0.42097756503966366,
+      0.42100852087192475,
+      0.4211181779923696,
+      0.4211181779923696
+    ],
+    "critical_pair_displacement": {
+      "max_displacement_A": 0.3999496582015587,
+      "rms_displacement_A": 0.058058541294325326,
+      "largest_moves": [
+        {
+          "atom_index_zero_based": 49,
+          "element": "H",
+          "displacement_A": 0.3999496582015587
+        },
+        {
+          "atom_index_zero_based": 37,
+          "element": "Fe",
+          "displacement_A": 0.05360788086006919
+        },
+        {
+          "atom_index_zero_based": 40,
+          "element": "Fe",
+          "displacement_A": 0.03167600748341066
+        }
+      ]
+    },
+    "electronic_failure_images": [],
+    "conditions": {
+      "A_abnormal_adjacent_displacement": false,
+      "B_large_reaction_coordinate_gap": false,
+      "C_gap_persistent_or_increasing": true,
+      "E_important_interval_unsampled": false,
+      "F_sharp_energy_corner": false,
+      "G_neighbouring_images_in_separate_basins": false,
+      "H_force_drop_from_product_basin_motion": false,
+      "I_unstable_highest_image": false,
+      "J_image_ordering_or_collapse": false
+    },
+    "condition_families": {
+      "discontinuity": false,
+      "persistence": true,
+      "basin_separation": false,
+      "energy_shape": false,
+      "ordering": false
+    },
+    "independent_evidence_families": [
+      "persistence"
+    ],
+    "monitor_warnings": []
+  },
+  "CHEMICAL_INTERPRETATION": "no persistent underresolved reaction-coordinate gap was proven",
+  "FILES_SAVED": [],
+  "NEXT_REQUIRED_EVIDENCE_CHECK": "REVIEW_CI_NEB_READINESS",
+  "execution_authority": "scripts.ts_strategy_engine.execution_gate.decide_execution",
+  "COMPUTE_COST_ASSESSMENT": "continue only while the path remains structurally valid",
+  "document_kind": "neb_path_quality_evidence",
+  "producer": "scripts.neb_agent.path_quality_control",
+  "source_files": [
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\00\\POSCAR",
+      "sha256": "5d86ef906c002415a0e03030936f1cc32f2ca0782c0d5d9180f4ea42c01cf178"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\01\\CONTCAR",
+      "sha256": "5432d0b822491a595d2fbc826c6c5a4a1246fbb8443b349acdb7a6560dc176b3"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\01\\OSZICAR",
+      "sha256": "94e6d2dce2cbcf1385ada6c7dcbe8b2522c7cbfc940a8cc90078fea00f302325"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\01\\OUTCAR",
+      "sha256": "aecb8bc98297ffb286f99ceb28d67b5ffbf5d370da1b2c3ce8f3f943f4db4d38"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\01\\POSCAR",
+      "sha256": "7810d7e71cca28d149875c98bfae54ff2034f01b945c39fac5874ea54ebad33e"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\01\\XDATCAR",
+      "sha256": "fecdd5d498f7b405168a33f68f56056ece671ff32732136b8c0998dfe0454492"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\02\\CONTCAR",
+      "sha256": "302fd48be5429eef2c98cb77e70b3723c4fe347c6355a7d847da7fc2c5e58592"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\02\\OSZICAR",
+      "sha256": "29a63b400ba3281056d6cee6453f48c2cc9b6351e0fbc26295ef3cc4772d35ae"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\02\\OUTCAR",
+      "sha256": "e5bb470e36a65f9b2c5abd91ebb9f68f3b5c7cac26bfc4bb1b374a767ada7a61"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\02\\POSCAR",
+      "sha256": "8e564c871bb86f4a37ba39076c7b9d21f793f2d5f78deeca5a4c189e596272ef"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\02\\XDATCAR",
+      "sha256": "2dc7f1e71522af42244460db91e72a13dd3229add7f5f1874b89155d477446a4"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\03\\CONTCAR",
+      "sha256": "8f140d37ec615e4d7a03ce12c9a51d2a66a6e149a3d095a6f70f4f21a60e16e9"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\03\\OSZICAR",
+      "sha256": "59f8edee00ce0cb5d510d3923946cd487928a0f54720694d9b21d9273c205f34"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\03\\OUTCAR",
+      "sha256": "0ed99f4cea8f139842a924c83a246b28cf1c8ef673ee750adb541d649ebd8680"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\03\\POSCAR",
+      "sha256": "0f2583792e4b712ff99f37232a0c8d00389a5ecc517a6aadf43d35b9f0808ca5"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\03\\XDATCAR",
+      "sha256": "5ec7d6c359a283450cb2b9efae6042346955059f13aee1a84fde78dac5567cf5"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\04\\CONTCAR",
+      "sha256": "07dd57170700d8434324962d6457e63dffb3c7e4177f50493c718e7e5787ff9e"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\04\\OSZICAR",
+      "sha256": "b8daece51c4c91bee281076f8238a73a3781e9d3d4fa9e18312812de324d984a"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\04\\OUTCAR",
+      "sha256": "01e99257aa6e1f7172bad4f0e54a32a3993012327068ffa52d0a261f9c36437f"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\04\\POSCAR",
+      "sha256": "3d9c967a3c0462e1c47f55a6fa8095e1f12d0fe40725db026e57e077ef31a1ed"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\04\\XDATCAR",
+      "sha256": "425d47b0400fe35a90ec52c42129b8ac4bd1c48cbb9c286dd8a5259bb4bcb1e2"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\05\\CONTCAR",
+      "sha256": "16505620574318656d15c7e75f60d7d4b9d88f08516cc184f3124cc278fa69cd"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\05\\OSZICAR",
+      "sha256": "da5746bb9061f5a42d976a704a823ae85aab40b8f578503698aaa50c714535a5"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\05\\OUTCAR",
+      "sha256": "e0eee155242584249a48dfa9274767e84fc1693eac437b7d11994bee18fe5a18"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\05\\POSCAR",
+      "sha256": "04006441c9734610cac56849c4e1fd71fadcaab8fb0e0ddb5e03882248cb9d70"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\05\\XDATCAR",
+      "sha256": "172b9f3ccffc9abe014c6679ee97202d701807a68bbcdaa552987e236bd40712"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\06\\CONTCAR",
+      "sha256": "d1a401840696f839c4eb7a8699c0e20ae407536e5002480d62f036b8d2d3fc1d"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\06\\OSZICAR",
+      "sha256": "fadf95690ffe2e9ab773c6131d5b4340b4e93897e8161f0c5c502ce3e2db31f4"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\06\\OUTCAR",
+      "sha256": "fb83500b79d0c8ed9f353bf9fdd7ea3ebe601d1f33daa3f7dd79ddac0c0799ee"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\06\\POSCAR",
+      "sha256": "a323c4a030890330156386165001c59f92a90497bbd8f18ea007e560b68c46b1"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\06\\XDATCAR",
+      "sha256": "e631046c8b0412aeda5b81ae68e7a41efe09060f5b82fb6f02145f2e5e57aa1a"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\07\\CONTCAR",
+      "sha256": "07d787d422a37f5f8830b948f3f2fe20e42306c14a25cbc3ec5168b8f980fc4d"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\07\\OSZICAR",
+      "sha256": "acc6ab0d6412cd46f07ceda6dacf7d65bca0aaf0292364a6b546af694676f623"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\07\\OUTCAR",
+      "sha256": "067a3ec33774477d799d7e37148e4ee8973d6d87cd631a8fd72e6bfac61db17c"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\07\\POSCAR",
+      "sha256": "255ab376616aacf70f1ca1e9d279626c07e08cc65017e00cc65db64c6a5f063b"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\07\\XDATCAR",
+      "sha256": "305e8714277cbca3a79d4a804bd99234357a3057ee5cd1359647cfde25da1ea6"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\08\\CONTCAR",
+      "sha256": "b42afd5407804bc5cbf41129becd0aba4f1ea559cbd5206ac512e8cc58dc143f"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\08\\OSZICAR",
+      "sha256": "d929dab8d9cd6cb1c138ca7a7062e8ade450af95d01540fcd7f4256b4a16d589"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\08\\OUTCAR",
+      "sha256": "f8425b75f0b61f34b88c969c470b9e9233991bda0700966cb928022689f0097f"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\08\\POSCAR",
+      "sha256": "8a36b05cd2a01c74e65b777916a2e9af3bba6508595b00e5ac1fd36e1a7e3424"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\08\\XDATCAR",
+      "sha256": "91a1d66fea802f4be444926f9a3b153f44f143b07b80f50599f9aa6db165eed7"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\09\\CONTCAR",
+      "sha256": "89509c1eba7047d274429b0055adc003436dade6384a6866556f8a51d7553242"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\09\\OSZICAR",
+      "sha256": "91f486c5f8c02b9d9825d1f15f2f917a4f79506583919ef0a9dd4026dca3018a"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\09\\OUTCAR",
+      "sha256": "75fe67e79dd5ccb40cf78f8c7df8af7e7a9e3b9b2c3d8bec726a195d03d61fbb"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\09\\POSCAR",
+      "sha256": "b0be5d67733282ed8253128dbdf5d44991438eb140a7dd4b6d04bdccc436dd67"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\09\\XDATCAR",
+      "sha256": "bd3bc3e6fec3acb40ee5e4ffc4eaa6059093bf07c4c46651ff17a5bd743253d1"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\10\\POSCAR",
+      "sha256": "b3db94166230f5c3888d70011d93f6d4b2ba72c1b2374f9686802b2ffd62fdff"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930\\completed_review_20261002\\quality_monitor_evidence.json",
+      "sha256": "6ebdfe1b7b6e98e1e5eaa4b7c5860197d5f5e4e394d7167457944b8b090c9bab"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\configs\\neb_agent\\default_thresholds.yaml",
+      "sha256": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\configs\\neb_path_quality_control_v2.yaml",
+      "sha256": "db2c5d32e3b5f732f7b733df8fbcb62360177a0164de0cb7e1a51848475f0b92"
+    }
+  ]
+}

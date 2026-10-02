@@ -106,7 +106,7 @@
       "properties": {
         "schema_version": { "const": 1 },
         "document_kind": { "const": "scheduler_job_evidence" },
-        "stage": { "enum": ["vasp_force_label", "force_prediction", "force_only_finetuning", "ba_sella_rerun", "neb_pilot", "ordinary_neb", "diagnostic_static", "dimer", "vfa"] },
+        "stage": { "enum": ["vasp_force_label", "force_prediction", "force_only_finetuning", "ba_sella_rerun", "neb_pilot", "ordinary_neb", "ci_neb", "diagnostic_static", "dimer", "vfa"] },
         "scheduler": { "enum": ["LSF", "Slurm"] },
         "server_alias": { "enum": ["sunboquan-codex", "sunboquan-cdj1-temp", "MZ73"] },
         "job_id": { "$ref": "#/$defs/nonempty" },
