@@ -1,6 +1,8 @@
 # Phase 2A 真实诊断候选交付
 
-当前版本：[revision_03_user_approved_20261001](revision_03_user_approved_20261001/README.md)。5项范围限定的本次用户批准参考已构建，已准备好等待独立答题；隔离尚未验证。材料属于已公开开发/回归案例，没有正式答案或评分成绩。
+当前参考版本：[revision_03_user_approved_20261001](revision_03_user_approved_20261001/README.md)。5项范围限定的本次用户批准参考已构建；隔离尚未验证。该目录保留参考准备阶段记录，材料属于已公开开发/回归案例。
+
+首次[公开开发集受控试运行](public_development_smoke_20261002_45a0ff40/README.md)已保存原始回答与评分：5题可评分、3题匹配。没有建立严格读取隔离或能力提升；本次提交推送依据用户随后明确授权。
 
 以下保留 revision_02 的历史草稿说明。历史状态：**AWAITING_REFERENCE_REVIEW**。5个真实历史候选、1个反应组、47项公开标量；当时已批准参考和可评分案例均为0。
 

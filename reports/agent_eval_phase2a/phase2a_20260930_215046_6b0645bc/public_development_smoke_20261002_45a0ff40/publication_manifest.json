@@ -1,0 +1,175 @@
+{
+  "published_at": "2026-10-02T23:29:59.132385+08:00",
+  "publication_authority": "Subsequent explicit user instruction: 提交推送. Frozen run records describe the preceding execution stage.",
+  "publication_parent_commit": "286ad0cbc4c4cbca455f018e26ff48fac170d646",
+  "code_baseline": "b353ba4a00d0ee1d5b3f833dc71d0634f1a1e9cd",
+  "evaluation_mode": "public_development_smoke",
+  "reference_access_isolation_verified": false,
+  "capability_improvement_established": false,
+  "public_sha256": "500d33ac92a838371e1f76e096e6bc0db95ec8d864c0993495a2467a191d9ba2",
+  "execution_model_setting": "gpt-6.1-sol",
+  "backend_model_identifier": "unknown: not present in CLI-visible events",
+  "answer_task_attempts": 1,
+  "scoring_attempts": 1,
+  "answer_regenerations": 0,
+  "underlying_model_request_count": "unknown",
+  "elapsed_seconds": 52.164,
+  "scorable_cases": 5,
+  "matched_cases": 3,
+  "visible_activity_audit": {
+    "status": "NO_EXPLICIT_CONTAMINATION_OBSERVED",
+    "explicit_contamination_detected": false,
+    "overall_contamination_status": "unknown",
+    "visible_jsonl_records": 6,
+    "malformed_visible_records": [],
+    "visible_item_types": [
+      "error",
+      "error",
+      "agent_message"
+    ],
+    "observed_tool_calls": 0,
+    "visible_reference_markers": [],
+    "observed_external_reference_read": false,
+    "hidden_context_injection": "unknown",
+    "all_tools_disabled_verified": false,
+    "reference_access_isolation_verified": false,
+    "limitations": "Complete CLI-visible stdout events are preserved. No raw backend request/context or tool capability snapshot is available. Not observing a call/read does not prove technical impossibility."
+  },
+  "publication_audit_exit_code": 1,
+  "publication_audit_counts": {
+    "error": 1,
+    "warning": 17,
+    "review_required": 18
+  },
+  "archive": {
+    "path": "deliverables.zip",
+    "sha256": "b171026233cc2f77609a9e6825ed468f4f73771d414b557d9d1dc1b5656d4c9d",
+    "bytes": 27318,
+    "files": [
+      {
+        "path": "answer_runtime/FORMAT.json",
+        "sha256": "11f76df88b9c04fa0d659b91b9aca5f4bb21b6269f02bcd57bb613024594cf9d",
+        "bytes": 782
+      },
+      {
+        "path": "answer_runtime/TASK.md",
+        "sha256": "26ae69ce85652fcf5c1a59e6323db4a58b4abe590539eb2b68a2d53037b9d747",
+        "bytes": 1921
+      },
+      {
+        "path": "answer_runtime/public.json",
+        "sha256": "c6ee145202a18f48d39324064615c4789c9530c0a57c118e9cb00319b61847dc",
+        "bytes": 13580
+      },
+      {
+        "path": "control/answers.json",
+        "sha256": "09ad2852fa2466904c123a5c8758e79df9d2013fa5098396b89ed682871fe8bf",
+        "bytes": 1935
+      },
+      {
+        "path": "control/execution_receipt.json",
+        "sha256": "373dd68c99eb9e1766f5966ca99a6614852c77fa90a5ed6b03b0058634b3794f",
+        "bytes": 731
+      },
+      {
+        "path": "control/execution_settings.json",
+        "sha256": "9a30d822a488c6ae35ad24818daf5278ece4801ea33295a2b66b77814459d873",
+        "bytes": 4090
+      },
+      {
+        "path": "control/extraction_record.json",
+        "sha256": "0a0afe7d74f83d5ba1d3e6284f2fcff9e0272625fa4839f4dfd548ec39712d4b",
+        "bytes": 422
+      },
+      {
+        "path": "control/first_events.jsonl",
+        "sha256": "5e68601d1c5df05be6141ca1cf2a46d67d3691886e8494482e3b5349d4f210ce",
+        "bytes": 3097
+      },
+      {
+        "path": "control/first_raw_answer.txt",
+        "sha256": "09ad2852fa2466904c123a5c8758e79df9d2013fa5098396b89ed682871fe8bf",
+        "bytes": 1935
+      },
+      {
+        "path": "control/first_stderr.txt",
+        "sha256": "efb6b7fe2fd8f6c8cf8b0c7b28879e4491129e1eaf21029b3d0928785c26448a",
+        "bytes": 158
+      },
+      {
+        "path": "control/run_smoke.py",
+        "sha256": "c037fee5e3660618b7fa2643e493235b884f9961e169c545a2d27ff55526ae32",
+        "bytes": 8012
+      },
+      {
+        "path": "control/score_report.json",
+        "sha256": "764248a545d53846edbb34613f17fb88f349a1e0c113cf7c69155a8f6f5c4a74",
+        "bytes": 1844
+      },
+      {
+        "path": "control/scorer_stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "control/scorer_stdout.txt",
+        "sha256": "ccf2535e19f7af87bf0c9f0c9c10e332add253aae02e1b32b613bf1e206185ef",
+        "bytes": 1905
+      },
+      {
+        "path": "control/scoring_execution.json",
+        "sha256": "d2c15acffec776b01a4ab4b0ee024b5036dd744b7d98ce4a4e380ee37e767d4a",
+        "bytes": 887
+      },
+      {
+        "path": "control/submitted_input.txt",
+        "sha256": "2302d6f6dccda8e0d4db15abd5886160669171dcf9144db40fc5dc21270454b4",
+        "bytes": 16814
+      },
+      {
+        "path": "control/visible_activity_audit.json",
+        "sha256": "e2a594d682acb63954a0d681dad209cbbe168daac0a199324676343a6ba6dde7",
+        "bytes": 730
+      },
+      {
+        "path": "run_report.json",
+        "sha256": "e630d3655c597784b8c4a54c5665f19336863e36b49de72a66c59499f7a64be8",
+        "bytes": 5264
+      },
+      {
+        "path": "run_report.md",
+        "sha256": "71720f439041b63f96a43e2190f3c63b48c3d701057c9b2e13b1b333597285d6",
+        "bytes": 3734
+      },
+      {
+        "path": "artifact_manifest.json",
+        "bytes": 2894,
+        "sha256": "6c4814102010fc3400eb284627673c82ed402faeb753a51d2862799461e8edb1"
+      }
+    ]
+  },
+  "excluded": "control/cli_runtime_state: CLI internal scratch state, not needed to reproduce scoring",
+  "checks": {
+    "manifest_files_verified": 19,
+    "archive_members_byte_verified": 20,
+    "archive_crc_ok": true,
+    "raw_answer_equals_scoring_input": true
+  },
+  "not_run": [
+    "new answer task",
+    "new scoring attempt",
+    "source/reference/question changes",
+    "repo-state sync",
+    "merge",
+    "scientific calculations",
+    "production database operations"
+  ],
+  "not_verified": [
+    "strict reference access isolation",
+    "backend model snapshot",
+    "underlying model request count",
+    "hidden context injection",
+    "new publication CI",
+    "portable scoring replay"
+  ]
+}
