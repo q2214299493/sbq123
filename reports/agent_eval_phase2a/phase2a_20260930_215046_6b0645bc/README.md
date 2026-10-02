@@ -1,6 +1,8 @@
 # Phase 2A 真实诊断候选交付
 
-状态：**AWAITING_REFERENCE_REVIEW**。5个真实历史候选、1个反应组、47项公开标量；已批准参考和可评分案例均为0。没有模型回答或评分成绩。
+当前版本：[revision_03_user_approved_20261001](revision_03_user_approved_20261001/README.md)。5项范围限定的本次用户批准参考已构建，已准备好等待独立答题；隔离尚未验证。材料属于已公开开发/回归案例，没有正式答案或评分成绩。
+
+以下保留 revision_02 的历史草稿说明。历史状态：**AWAITING_REFERENCE_REVIEW**。5个真实历史候选、1个反应组、47项公开标量；当时已批准参考和可评分案例均为0。
 
 本提交依据准备完成后的“推送”指令，只发布本轮产物。代码审查基线为 b353ba4a00d0ee1d5b3f833dc71d0634f1a1e9cd；未改生产源码、原始历史材料或科学接受标准，未执行repo-state sync。
 
@@ -11,7 +13,7 @@
 
 ZIP SHA-256：707067151a433394dd3c88d4a1690c314d181f568a50b48fa8eb663b4531381b。
 
-## 使用最终修订版
+## 使用旧草稿 revision_02（历史说明）
 
 解压到一个新的目录，只使用 revision_02 中的审核队列、intake、draft_bundle和answer_pack。根目录初版包是superseded草稿；保留它们用于追溯二轮范围审查修正，不能混用版本。
 
