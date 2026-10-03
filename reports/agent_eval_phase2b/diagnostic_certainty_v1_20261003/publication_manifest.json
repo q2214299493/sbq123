@@ -1,0 +1,290 @@
+{
+  "published_at": "2026-10-03T22:13:46.658074+08:00",
+  "publication_authority": "Subsequent explicit user instruction: 推送. Frozen run records retain the prior experiment-stage no-publication boundary.",
+  "publication_parent_commit": "697153133a4d430120543b02f6cd5abe1d481c73",
+  "branch": "codex/phase2a-diagnostic-trial-20260930",
+  "code_baseline": "b353ba4a00d0ee1d5b3f833dc71d0634f1a1e9cd",
+  "evaluation_mode": "public_development_smoke",
+  "reference_access_isolation_verified": false,
+  "capability_improvement_established": false,
+  "public_sha256": "500d33ac92a838371e1f76e096e6bc0db95ec8d864c0993495a2467a191d9ba2",
+  "harness_id": "diagnostic_certainty_v1",
+  "harness_sha256": "e45bbff5866ec94794be22fb36854b91a9ba5e78dbbb72f8b6259cde948630cc",
+  "comparison_category": "IMPROVED_NO_REGRESSION",
+  "baseline_counts": {
+    "total": 5,
+    "scorable": 5,
+    "matched": 3,
+    "groups": 1,
+    "reference_unavailable": 0,
+    "missing_or_invalid": 0,
+    "unknown_case_ids": [],
+    "malformed_answers": 0
+  },
+  "candidate_counts": {
+    "total": 5,
+    "scorable": 5,
+    "matched": 5,
+    "groups": 1,
+    "reference_unavailable": 0,
+    "missing_or_invalid": 0,
+    "unknown_case_ids": [],
+    "malformed_answers": 0
+  },
+  "case_results": [
+    {
+      "case_id": "c001",
+      "baseline_status": "match",
+      "candidate_status": "match",
+      "original_match_preserved": true
+    },
+    {
+      "case_id": "c002",
+      "baseline_status": "diagnosis_mismatch",
+      "candidate_status": "match",
+      "original_match_preserved": null
+    },
+    {
+      "case_id": "c003",
+      "baseline_status": "match",
+      "candidate_status": "match",
+      "original_match_preserved": true
+    },
+    {
+      "case_id": "c004",
+      "baseline_status": "match",
+      "candidate_status": "match",
+      "original_match_preserved": true
+    },
+    {
+      "case_id": "c005",
+      "baseline_status": "diagnosis_mismatch",
+      "candidate_status": "match",
+      "original_match_preserved": null
+    }
+  ],
+  "candidate_answer_task_attempts": 1,
+  "candidate_scoring_attempts": 1,
+  "answer_regenerations": 0,
+  "execution_model_setting": "gpt-6.1-sol",
+  "backend_model_identifier": "unknown: not present in CLI-visible events",
+  "baseline_cli_version": "codex-cli 0.159.0-alpha.12.1",
+  "candidate_cli_version": "codex-cli 0.160.0",
+  "elapsed_seconds": 48.844,
+  "publication_audit_exit_code": 1,
+  "publication_audit_counts": {
+    "error": 1,
+    "warning": 17,
+    "review_required": 18
+  },
+  "publication_audit_errors": [
+    {
+      "code": "managed_projection_drift",
+      "severity": "error",
+      "summary": "Managed projection changed outside the recorded event: docs/06_MODULE_MAP.md#module_row:transition_state_search",
+      "paths": [
+        "docs/06_MODULE_MAP.md"
+      ],
+      "review_required": true,
+      "suggested_action": "Import the manual change as a reviewed event or restore the projection.",
+      "details": {}
+    }
+  ],
+  "archive": {
+    "path": "deliverables.zip",
+    "bytes": 46674,
+    "sha256": "1aea9ae791204ed72734c9c1b004cf37cb4b981384389a6b931751577f73eae8",
+    "files": [
+      {
+        "path": "answer_runtime/FORMAT.json",
+        "bytes": 782,
+        "sha256": "11f76df88b9c04fa0d659b91b9aca5f4bb21b6269f02bcd57bb613024594cf9d"
+      },
+      {
+        "path": "answer_runtime/TASK.md",
+        "bytes": 1921,
+        "sha256": "26ae69ce85652fcf5c1a59e6323db4a58b4abe590539eb2b68a2d53037b9d747"
+      },
+      {
+        "path": "answer_runtime/public.json",
+        "bytes": 13580,
+        "sha256": "c6ee145202a18f48d39324064615c4789c9530c0a57c118e9cb00319b61847dc"
+      },
+      {
+        "path": "comparison_report.json",
+        "bytes": 5281,
+        "sha256": "c230b23d490785c614fd2a046df37983156e127e1d3e7b02dfcb04dc80aa0d9c"
+      },
+      {
+        "path": "comparison_report.md",
+        "bytes": 3368,
+        "sha256": "89ab9aa974fc68fa481baaccf7f4d7f890ea1192432d65621b63af2d6ebe7356"
+      },
+      {
+        "path": "control/answers.json",
+        "bytes": 1937,
+        "sha256": "021375dd1d12dc1e12ab7469a2d5bacd4ba5871152abc248f77c7599da9798a7"
+      },
+      {
+        "path": "control/audit_execution.json",
+        "bytes": 333,
+        "sha256": "1432422f011e5a9003da4fd7d36816533d7c434cdca8d37eedc4f35f32dd8236"
+      },
+      {
+        "path": "control/cli_exec_help.txt",
+        "bytes": 4031,
+        "sha256": "0e82cfde0122715250e93dc65866caa956b2ac5b9d0b20ec4ad4f9e81486509e"
+      },
+      {
+        "path": "control/cli_features.txt",
+        "bytes": 10111,
+        "sha256": "ef69b7a8badd62ad03b41929f63960f769cc3c8704df81db54cbcd8051b51833"
+      },
+      {
+        "path": "control/cli_help.txt",
+        "bytes": 5849,
+        "sha256": "4a7f0188d4d6e6d812c5cfbcf82468336b899acd5e437de7450421a403c0071e"
+      },
+      {
+        "path": "control/cli_version.txt",
+        "bytes": 18,
+        "sha256": "f6464b8cc67af75deb2589fe1dbcde152fc15ffb76a91de1cf0686b4623afb1e"
+      },
+      {
+        "path": "control/configuration_check.json",
+        "bytes": 1692,
+        "sha256": "62feae45d6ce9108e685d9ca34bd7f862d2a3686d165a4c561c0fb3e05bf4c06"
+      },
+      {
+        "path": "control/execution_receipt.json",
+        "bytes": 731,
+        "sha256": "b0b32ca334aa709c83e9b6abf80ceee38a834518baa62daa76968dd885edff3c"
+      },
+      {
+        "path": "control/execution_settings.json",
+        "bytes": 4279,
+        "sha256": "345c9e8d587a85e8e81165c53801f4d573a45f323e1345e7d0b6d95f9239acbd"
+      },
+      {
+        "path": "control/extraction_record.json",
+        "bytes": 352,
+        "sha256": "50a8393b82f10f1a64253819777b5d3abb5b1764540eba07bfeefaf723d7037b"
+      },
+      {
+        "path": "control/first_events.jsonl",
+        "bytes": 3101,
+        "sha256": "81b67d696d8da4d45ed41debf8ae4fb6437c3d34b4d8da718f725342e1409f07"
+      },
+      {
+        "path": "control/first_raw_answer.txt",
+        "bytes": 1937,
+        "sha256": "021375dd1d12dc1e12ab7469a2d5bacd4ba5871152abc248f77c7599da9798a7"
+      },
+      {
+        "path": "control/first_stderr.txt",
+        "bytes": 158,
+        "sha256": "ebdafbc9793eeae91c383fdeeb9fbe78bd13c73c139717e6aa6a20ed0c4cb7fd"
+      },
+      {
+        "path": "control/immutable_materials_before.json",
+        "bytes": 12465,
+        "sha256": "4cd559e4c31e5a001244ce95d5f553e5d6c46252a5c738e6e43ccdf015ebb701"
+      },
+      {
+        "path": "control/repository_audit.json",
+        "bytes": 18204,
+        "sha256": "ca42c2551ffd0306755a779bd6d69729217883adda306b58acad3442a3d44877"
+      },
+      {
+        "path": "control/run_candidate.py",
+        "bytes": 8014,
+        "sha256": "f5f74287ab907ff0f1ccf21a1b49d480f07f11c2415222815a8b4ea19fc17d33"
+      },
+      {
+        "path": "control/score_and_compare.py",
+        "bytes": 12764,
+        "sha256": "b10dbc686926ed632d66dd896f1ad09da06fdbeb6ff3001db651e0b62fb03695"
+      },
+      {
+        "path": "control/score_report.json",
+        "bytes": 1818,
+        "sha256": "3e2bf3471016c737a655f3ee0e1a32f353f6e9d568ef0240734f3a641e985350"
+      },
+      {
+        "path": "control/scorer_stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "control/scorer_stdout.txt",
+        "bytes": 1879,
+        "sha256": "9b660f45c5e4230456949b814e156d5a96b724858ac02f5e42781dd9e381b71f"
+      },
+      {
+        "path": "control/scoring_execution.json",
+        "bytes": 886,
+        "sha256": "d7bde95e6540112d8099a93b8f455a30cb7aba6119a24cf625335a22375c920d"
+      },
+      {
+        "path": "control/scoring_started.json",
+        "bytes": 868,
+        "sha256": "e47f6f77577b405e02f956b75fc76cb1632a62050cf9cf985f13c04da62b627c"
+      },
+      {
+        "path": "control/submitted_input.txt",
+        "bytes": 17403,
+        "sha256": "a3f26f103c34a77060d955b1c33cf5d56332cf3c8ad46d2348880cdf007b1a60"
+      },
+      {
+        "path": "control/visible_activity_audit.json",
+        "bytes": 553,
+        "sha256": "edb728e8760511f1a531481f4ed94d3f3d5bf0ab70c31f9cf8092c56cc39657d"
+      },
+      {
+        "path": "harness/diagnostic_certainty_v1.txt",
+        "bytes": 588,
+        "sha256": "e45bbff5866ec94794be22fb36854b91a9ba5e78dbbb72f8b6259cde948630cc"
+      },
+      {
+        "path": "harness/manifest.json",
+        "bytes": 310,
+        "sha256": "d3f1fb639a13caa20c93506f3a97dfbc298259b800829d1fa59862f6fe946dd7"
+      },
+      {
+        "path": "artifact_manifest.json",
+        "bytes": 4720,
+        "sha256": "304314cb67d6d10aaa5bc68b45943b115c07646846672289302f3cb336bbad5d"
+      },
+      {
+        "path": "final_verification.json",
+        "bytes": 910,
+        "sha256": "ba4b3618003d0c8aa940f0e3f5273ec9dc9a0479eb18d72e3c043192abe074b6"
+      }
+    ]
+  },
+  "checks": {
+    "original_manifest_entries_verified": 31,
+    "archive_members_byte_verified": 33,
+    "archive_crc_ok": true,
+    "immutable_baseline_reference_files_verified": 47,
+    "raw_answer_equals_scoring_input": true
+  },
+  "excluded": "control/cli_runtime_state: CLI internal scratch state; no credentials or private reference copies are delivered.",
+  "not_run": [
+    "model or scoring rerun",
+    "second harness version",
+    "production promotion",
+    "benchmark/reference/scorer/source changes",
+    "repo-state sync",
+    "merge",
+    "scientific calculations/training",
+    "production database operations"
+  ],
+  "not_verified": [
+    "new publication CI",
+    "strict reference access isolation",
+    "backend model snapshot",
+    "harness-only causal attribution",
+    "portable scoring replay"
+  ]
+}

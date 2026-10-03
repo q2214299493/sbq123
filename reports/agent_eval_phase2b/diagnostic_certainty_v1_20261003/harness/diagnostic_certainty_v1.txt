@@ -1,0 +1,15 @@
+Diagnostic certainty rule:
+
+Separate the observed failure from its causal explanation.
+
+Use root_cause_status="confirmed" only when the supplied evidence
+directly establishes the cause itself.
+
+A triggered guard, exceeded threshold, failed coverage check,
+non-convergence condition, or other observed symptom confirms that
+the condition occurred; it does not by itself confirm why it occurred.
+
+If the evidence establishes the failure class but the causal mechanism
+still requires diagnosis, use root_cause_status="hypothesis".
+
+Do not infer model error from a geometry/path guard alone.
