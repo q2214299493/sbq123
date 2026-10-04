@@ -1,0 +1,194 @@
+{
+  "schema_version": 2,
+  "gate": "AUTHORITATIVE_NEB_EXECUTION_GATE",
+  "generated_at_utc": "2026-10-04T15:23:13.112491+00:00",
+  "state_sha256": "3161eb5f347ae43d723bb025f4fa848f94005c2ba65b71df2683b57bc98a146f",
+  "DECISION": "STOP_USER_REQUESTED",
+  "REASON_CODES": [
+    "EXPLICIT_USER_STOP_REQUEST"
+  ],
+  "EVIDENCE": {
+    "geometry": {},
+    "analysis": {},
+    "thresholds": {
+      "min_distance_factor": 0.55,
+      "absolute_min_distance_A": 1.0,
+      "image_jump_warning_A": 1.0,
+      "fixed_position_tolerance_A": 0.0001,
+      "internal_minimum_warning_eV": 0.2,
+      "barrierless_force_threshold_eVA": 0.2,
+      "high_force_warning_threshold_eVA": 1.5,
+      "min_ionic_steps_for_force_warning": 5,
+      "persistent_high_force_failure_min_ionic_steps": 10,
+      "scf_consecutive_exhaustion_hard_min": 3,
+      "surface_penetration_warning_A": 0.2,
+      "desorption_height_change_warning_A": 2.0,
+      "reaction_coordinate_backtrack_warning_A": 0.25,
+      "magnetic_continuity_warning_threshold_muB": 2.0
+    },
+    "path_quality": {},
+    "preflight": {
+      "schema_version": 1,
+      "kind": "ci_neb",
+      "passed": true,
+      "errors": [],
+      "cores": 108,
+      "images": 9,
+      "files": {
+        "INCAR": "d50108e35c35d7e23b423528b9ac2a3a6636db99659c271ac5d61d1e9f20071b",
+        "KPOINTS": "0d7e291117433dac5393f29520b635e92f06e6c8e91aa941137c86b1d39162ae",
+        "POTCAR.spec": "9528f5cac58de3cc83a576c828915ce9c2ab72d4ec3be5e409f7476042f7e1bb",
+        "script.lsf": "a0c87f15940e9aba913a87e7de406418fd3a10631dbcde593bc9c1ba77266499",
+        "path_generation_report.json": "2f6434cee1b593613263441ebe715558bfa0cc21ca100c2108e91783e705c1c9",
+        "path_geometry_diagnosis.json": "18650569c058a8228087f70988ea10d875bdd9ae622040bf431ccef3ac03f968",
+        "path_review.json": "ad3ec7ef7462b80249522a83001283a609765a4ffa4abbdf20cd5013e9af9294",
+        "dist.dat": "b54c123b2d6d16fb9f2acdc760ff375351124693398b5f0429356f4ed389e6e4",
+        "movie.xyz": "ee8cb85822379fdcf5a7da364b6de007b1ebe0fbee53347763f7f079609df22c",
+        "00/POSCAR": "6eaa3c249575b540f65d1a9b7645e5e87e7a9338bc6e6f616327364a84892fc5",
+        "01/POSCAR": "c657bfef680a2266b13492e183c4917c93bac1cfee99983d9e064bd4e07d6c58",
+        "02/POSCAR": "9f209515fa3d6344449d3abcbbc08e2c0d673ff30a31fe2b1fbdc53b6272a205",
+        "03/POSCAR": "286be30a5472c27d65a4b4bb21fc0a71720005cb040a5d96d6625730362c8482",
+        "04/POSCAR": "79603c2c756de7799d452920f34f56ba0477dee450bfe293f3d0c68a8fbe3f2c",
+        "05/POSCAR": "e550b522a48d6133e122a5bc33b60510e1d2ffa625959696ea30d06ad7428459",
+        "06/POSCAR": "bdaadf1031c4b698bbcd828ad14dd415a9cc8a7c84b06c2d1ec0aad0990b92c0",
+        "07/POSCAR": "6db63bfd7313ae2bd140fb66b8e774eb6472af3b755cbf8929198a82a578abfb",
+        "08/POSCAR": "3b74ebb9bb58305f3fbc26fd033b942a8080264b4dcef0c08ec8b78c7ceb3f1a",
+        "09/POSCAR": "a8333c4dff61bd243e49b8476f3bc8ac2d78998a1902e1585215ebc7d01be9bc",
+        "10/POSCAR": "fdfc051d2df3108679fd171ba0d4af8a345881fdee5907431b33d34e39bb5933"
+      },
+      "bundle_sha256": "4431c7f8a53bc357ebef9917e6d0981738b970c4782c050bbd4451b954e0810a",
+      "strategy_retry_check": {
+        "input_key": "72cfe03a5a90f208f7b7e62a3bce6663ff05d995530d00188c275d3bbbbcdd6a",
+        "blocked_attempts": [],
+        "review_attempts": [],
+        "status": "NO_KNOWN_FAILURE"
+      }
+    },
+    "validation": {},
+    "scheduler": {
+      "schema_version": 1,
+      "document_kind": "scheduler_job_evidence",
+      "stage": "ci_neb",
+      "scheduler": "LSF",
+      "server_alias": "sunboquan-codex",
+      "job_id": "9826728",
+      "status": "RUN",
+      "checked_at": "2026-10-04T15:23:13Z",
+      "source_command": "ssh sunboquan-codex bjobs -a 9826728",
+      "query": {
+        "argv": [
+          "ssh",
+          "sunboquan-codex",
+          "bjobs",
+          "-a",
+          "9826728"
+        ],
+        "returncode": 0,
+        "stdout": "JOBID   USER    STAT  QUEUE      FROM_HOST   EXEC_HOST   JOB_NAME   SUBMIT_TIME\n9826728 nsgkn_c RUN   Gkn_normal ycn03       16*gknew073 script.lsf Oct  2 22:50\n                                             16*gknew0245\n                                             16*gknew0340\n                                             16*gknew0232\n                                             16*gknew0522\n                                             16*gknew0611\n                                             12*gknew0721\n",
+        "stderr": "",
+        "stdout_sha256": "aab2efc2132045581f2d6747ed3021bd464592608b2480eadfd953d88b411829"
+      }
+    },
+    "authorization": {
+      "schema_version": 1,
+      "document_kind": "user_execution_authorization",
+      "action": "STOP_JOB",
+      "job_id": "9826728",
+      "allowed_scheduler_statuses": [
+        "PEND",
+        "RUN"
+      ],
+      "authorized_at": "2026-10-04T15:23:13.076082+00:00",
+      "source": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\archive\\neb9808511_dimer_20261004\\user_request.json",
+        "sha256": "e8379dcff9bf7756b5099b04290e8c0ceab967a5a93bcb1231d9ed4bdbc5dced"
+      },
+      "target": {
+        "server_alias": "sunboquan-codex",
+        "job_id": "9826728",
+        "remote_dir": "~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_is_a_int06_ci9808511_sbq123_108r_20261002"
+      },
+      "workdir_identity": "c:\\users\\86177\\desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_ci9808511_sbq123_108r_20261002",
+      "bundle_sha256": "4431c7f8a53bc357ebef9917e6d0981738b970c4782c050bbd4451b954e0810a",
+      "evidence_sha256": "050688f806cbc3f9f4b40051fbd555d1f9cfea85c8d5c3185e348230225a241e"
+    },
+    "source_bindings": {
+      "thresholds": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\configs\\neb_agent\\default_thresholds.yaml",
+        "sha256": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c"
+      },
+      "scheduler": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\archive\\neb9808511_dimer_20261004\\scheduler_before.json",
+        "sha256": "380c640f0c9b969dbe14e85cf51ebb5019f852cf797096c20d025cd19a57a5dd"
+      },
+      "preflight": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_ci9808511_sbq123_108r_20261002\\submission_preflight.json",
+        "sha256": "1b42d393c08f516c0dc06064caaa3a43f9e5c6b3347729f36c7d6bd2ff627b90"
+      },
+      "authorization": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\archive\\neb9808511_dimer_20261004\\stop_authorization.json",
+        "sha256": "0bfcd612263e137d814a0ba7d59cba17326ed3f78a5a1fd751a6d214e9a9cb31"
+      }
+    },
+    "climb": true,
+    "path_reviewed": false
+  },
+  "CRITICAL_IMAGES": [],
+  "CHEMICAL_INTERPRETATION": null,
+  "FILES_SAVED": [],
+  "ALLOWED_ACTIONS": [
+    "STOP_JOB"
+  ],
+  "FORBIDDEN_ACTIONS": [
+    "CONTINUE_JOB",
+    "REBUILD_PATH",
+    "SUBMIT_DIAGNOSTIC_VASP",
+    "SUBMIT_VASP",
+    "ENABLE_CI_NEB",
+    "PREPARE_DIMER_HANDOFF",
+    "START_DIMER",
+    "START_VFA",
+    "APPROVE_TS_CANDIDATE",
+    "REPORT_FINAL_BARRIER"
+  ],
+  "NEXT_REQUIRED_CHECK": "CONFIRM_LSF_EXIT",
+  "SUBMISSION_ALLOWED": false,
+  "CI_NEB_ALLOWED": false,
+  "DIMER_ALLOWED": false,
+  "VFA_ALLOWED": false,
+  "TS_CLAIM_ALLOWED": false,
+  "COMPUTE_COST_ASSESSMENT": null,
+  "scientific_readiness": {
+    "decision": "STOP_USER_REQUESTED",
+    "reason_codes": [
+      "EXPLICIT_USER_STOP_REQUEST"
+    ],
+    "eligible_actions": [
+      "STOP_JOB"
+    ]
+  },
+  "execution_authorization_error": null,
+  "execution_authorization": {
+    "action": "STOP_JOB",
+    "target": {
+      "job_id": "9826728",
+      "remote_dir": "~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_is_a_int06_ci9808511_sbq123_108r_20261002",
+      "server_alias": "sunboquan-codex"
+    },
+    "binding": {
+      "workdir_identity": "c:\\users\\86177\\desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_ci9808511_sbq123_108r_20261002",
+      "bundle_sha256": "4431c7f8a53bc357ebef9917e6d0981738b970c4782c050bbd4451b954e0810a",
+      "evidence_sha256": "050688f806cbc3f9f4b40051fbd555d1f9cfea85c8d5c3185e348230225a241e"
+    },
+    "source": {
+      "path": "C:\\Users\\86177\\Desktop\\work\\archive\\neb9808511_dimer_20261004\\user_request.json",
+      "sha256": "e8379dcff9bf7756b5099b04290e8c0ceab967a5a93bcb1231d9ed4bdbc5dced"
+    },
+    "potcar": {}
+  },
+  "evidence_binding": {
+    "workdir_identity": "c:\\users\\86177\\desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_ci9808511_sbq123_108r_20261002",
+    "bundle_sha256": "4431c7f8a53bc357ebef9917e6d0981738b970c4782c050bbd4451b954e0810a",
+    "evidence_sha256": "050688f806cbc3f9f4b40051fbd555d1f9cfea85c8d5c3185e348230225a241e"
+  }
+}

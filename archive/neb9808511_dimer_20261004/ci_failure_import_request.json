@@ -1,0 +1,47 @@
+{
+  "attempt_id": "ci9826728_scf_failure_20261004",
+  "task_id": "fe110_c2ho_h_migration_ISA9725473_to_INT06_9748648",
+  "kind": "ci_neb",
+  "inputs": {
+    "INCAR": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_ci9808511_sbq123_108r_20261002\\INCAR",
+    "KPOINTS": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_ci9808511_sbq123_108r_20261002\\KPOINTS",
+    "POTCAR.spec": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_ci9808511_sbq123_108r_20261002\\POTCAR.spec",
+    "script.lsf": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_ci9808511_sbq123_108r_20261002\\script.lsf",
+    "00/POSCAR": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_ci9808511_sbq123_108r_20261002\\00\\POSCAR",
+    "01/POSCAR": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_ci9808511_sbq123_108r_20261002\\01\\POSCAR",
+    "02/POSCAR": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_ci9808511_sbq123_108r_20261002\\02\\POSCAR",
+    "03/POSCAR": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_ci9808511_sbq123_108r_20261002\\03\\POSCAR",
+    "04/POSCAR": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_ci9808511_sbq123_108r_20261002\\04\\POSCAR",
+    "05/POSCAR": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_ci9808511_sbq123_108r_20261002\\05\\POSCAR",
+    "06/POSCAR": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_ci9808511_sbq123_108r_20261002\\06\\POSCAR",
+    "07/POSCAR": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_ci9808511_sbq123_108r_20261002\\07\\POSCAR",
+    "08/POSCAR": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_ci9808511_sbq123_108r_20261002\\08\\POSCAR",
+    "09/POSCAR": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_ci9808511_sbq123_108r_20261002\\09\\POSCAR",
+    "10/POSCAR": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_ci9808511_sbq123_108r_20261002\\10\\POSCAR"
+  },
+  "outcome": {
+    "status": "failure",
+    "failure_class": "scf",
+    "root_cause_status": "confirmed",
+    "deterministic": true,
+    "reviewer": "Codex: repeated observed NELM exhaustion in image06; exact-input retry blocked. Physical cause remains unproven; no model-error claim.",
+    "observations": [
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_ci9808511_sbq123_108r_20261002\\stopped_review_20261004\\neb_analysis.json",
+        "sha256": "6cb9d0b1dbaf4e197cbfc2af54b3647a0084f6d6a3a4452b3f55b10fad32a8cd",
+        "pointer": "/scf_exhausted_images",
+        "value": [
+          "06"
+        ]
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\archive\\neb9808511_dimer_20261004\\scheduler_after.json",
+        "sha256": "8e69142ca81bf7ff2d350c4ca34d2dbf8fa7fd0ca2a50e6d11d9cf72dd26771b",
+        "pointer": "/status",
+        "value": "EXIT"
+      }
+    ],
+    "costs": {},
+    "ts_template_id": null
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-10-04T15:33:34.646022+00:00",
+  "recorded_at": "2026-10-04T15:33:34.646022+00:00",
+  "event_id": "task-is-a-int06-dimer9833429-20261004",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "User cancelled CI9826728 (EXIT); reviewed ordinary NEB9808511 peak05 Dimer9833429 submitted once, PEND.",
+  "evidence": [
+    {
+      "locator": "archive/neb9808511_dimer_20261004/user_request.json",
+      "sha256": "e8379dcff9bf7756b5099b04290e8c0ceab967a5a93bcb1231d9ed4bdbc5dced",
+      "authority": "user_authorization",
+      "observed_at": "2026-10-04T15:33:34.646022+00:00"
+    },
+    {
+      "locator": "archive/neb9808511_dimer_20261004/stop_receipt.json",
+      "sha256": "d2ddb633bd2762f8116c16a60a9ad512c66506fba0be7b82f6c67960de008f98",
+      "authority": "repository_document",
+      "observed_at": "2026-10-04T15:33:34.646022+00:00"
+    },
+    {
+      "locator": "archive/neb9808511_dimer_20261004/scheduler_after.json",
+      "sha256": "8e69142ca81bf7ff2d350c4ca34d2dbf8fa7fd0ca2a50e6d11d9cf72dd26771b",
+      "authority": "scheduler",
+      "observed_at": "2026-10-04T15:33:34.646022+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/dimer_handoff.json",
+      "sha256": "00ea62696c6c1263a4473e2f1c8ba1e1adc14f41275100769726d38b326aea55",
+      "authority": "module_validation",
+      "observed_at": "2026-10-04T15:33:34.646022+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/mode_review.json",
+      "sha256": "a9d0e75c9afd1fdace759f65edbf939bd7578e0b625e2e12a1eca009d96dd2a9",
+      "authority": "module_validation",
+      "observed_at": "2026-10-04T15:33:34.646022+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/dimer_mode_validation.json",
+      "sha256": "e69a9adf7b68c91476eb04fcdc941a6a247db9293ff8acf6e8980b895fc929c9",
+      "authority": "module_validation",
+      "observed_at": "2026-10-04T15:33:34.646022+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/submission_preflight.json",
+      "sha256": "5382d57a0d4c5f77aa91590222a36526236febaf2b51cba6127480d8afd4bb07",
+      "authority": "module_validation",
+      "observed_at": "2026-10-04T15:33:34.646022+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/execution_gate_decision.json",
+      "sha256": "c3b2bbdcbe82d1f4f687811246741e009bc31df8eee34ae462e1d9c7f9e49ea6",
+      "authority": "module_validation",
+      "observed_at": "2026-10-04T15:33:34.646022+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/submission_record.json",
+      "sha256": "20d063b6238a4af433ce68403adaafc6ee331859e8c4cb9322a8c66486161efa",
+      "authority": "repository_document",
+      "observed_at": "2026-10-04T15:33:34.646022+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/scheduler_checkpoint_submission.json",
+      "sha256": "d7097dfd311f1844361dc19b019bee95480d9e0baf4d72c5a64e935140215026",
+      "authority": "scheduler",
+      "observed_at": "2026-10-04T15:33:34.646022+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "payload": {
+    "objective": "Monitor Dimer9833429 from ordinary NEB9808511 peak05 for IS-A to INT06 H migration.",
+    "phase": "active",
+    "current_evidence": [
+      "CI9826728 cancelled through explicit user STOP_JOB authorization; scheduler EXIT confirmed; remote files retained.",
+      "Ordinary NEB9808511 remains accepted as a technically converged parent:71 steps, maximum final NEB force0.049947 eV/A. Reuse its normalized final04/05/06, not failed CI final structures.",
+      "Peak05 triad passes electronic, normal-termination, geometry, atom-order/fixed-mask and periodic mapping checks. Actual-coordinate mode review accepted; H50 amplitude0.98415, fixedFe0-17 zero.",
+      "Dimer9833429 submitted once on sunboquan-codex/sbq123; schedulerPEND;32 total ranks,16 per node;ALGO Fast,SIGMA0.20,EDIFF1e-7,EDIFFG-0.02,IOPT2,NSW300.",
+      "This refines local migration peak05; lower peaks01/09 are not proven eliminated. No TS acceptance, frequency, barrier or Grade-A result claimed."
+    ],
+    "one_executable_step": "At the next requested checkpoint query LSF9833429 and Dimer OUTCAR/OSZICAR/DIMCAR; distinguish electronic convergence, force/torque/curvature, geometry and scientific validity.",
+    "submission_boundary": "One Dimer authorized and submitted; no duplicate, restart, GPU or frequency calculation automatically authorized.",
+    "done_when": [
+      "Dimer technically converged and reviewed; later local frequency and compatible-energy registration require current gates."
+    ],
+    "constraints": [
+      "Preserve accepted INT06-MID and MID-FS segments.",
+      "Preserve atom mapping, fixedFe0-17 and SIGMA0.20 compatibility branch.",
+      "32 ranks,16-per-node cap for this single Dimer;108 ranks belonged to nine-image NEB."
+    ],
+    "authoritative_references": [
+      "archive/neb9808511_dimer_20261004/user_request.json",
+      "archive/neb9808511_dimer_20261004/stop_receipt.json",
+      "archive/neb9808511_dimer_20261004/scheduler_after.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/dimer_handoff.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/mode_review.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/dimer_mode_validation.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/submission_preflight.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/execution_gate_decision.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/submission_record.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/scheduler_checkpoint_submission.json"
+    ]
+  },
+  "supersedes": [
+    "task-is-a-int06-ci9826728-20261002"
+  ]
+}

@@ -3,16 +3,15 @@
 
 ## Objective
 
-Monitor CI-NEB9826728 for IS-A9725473 -> INT06_9748648 H migration.
+Monitor Dimer9833429 from ordinary NEB9808511 peak05 for IS-A to INT06 H migration.
 
 ## Current Evidence Snapshot
 
-- Parent ordinary NEB9808511 is DONE; all nine internal images completed normally with final electronic convergence, 71 steps and maximum final NEB force0.049947 eV/A.
-- Final structures were recovered with OUTCAR/OSZICAR/XDATCAR. Integer lattice translations only remove Fe periodic branch wrapping; atom order, fixedFe0-17 and physical structures are retained. Normalized geometry PASS; maximum adjacent atom displacement0.401628 A.
-- Actual TOTEN maximum is image05. Lower peaks01 and09 remain diagnostic migration features; this refinement does not claim a single elementary TS for the whole multi-peak path.
-- VTST dist.pl and nebmovie.pl0 completed; numeric and actual-coordinate visual review accepted. CI preflight and current hash-bound ENABLE_CI_NEB execution authorization pass.
-- CI-NEB9826728 submitted once on sunboquan-codex/sbq123, statusPEND; nine internal images,108 MPI ranks,12 per image,NPAR4,per-node cap16; LCLIMB true,IOPT1,EDIFFG -0.02,ALGO Fast,SIGMA0.20,NSW300.
-- No final TS, virtual frequency, electronic barrier or Grade-A acceptance is claimed for this migration segment yet.
+- CI9826728 cancelled through explicit user STOP_JOB authorization; scheduler EXIT confirmed; remote files retained.
+- Ordinary NEB9808511 remains accepted as a technically converged parent:71 steps, maximum final NEB force0.049947 eV/A. Reuse its normalized final04/05/06, not failed CI final structures.
+- Peak05 triad passes electronic, normal-termination, geometry, atom-order/fixed-mask and periodic mapping checks. Actual-coordinate mode review accepted; H50 amplitude0.98415, fixedFe0-17 zero.
+- Dimer9833429 submitted once on sunboquan-codex/sbq123; schedulerPEND;32 total ranks,16 per node;ALGO Fast,SIGMA0.20,EDIFF1e-7,EDIFFG-0.02,IOPT2,NSW300.
+- This refines local migration peak05; lower peaks01/09 are not proven eliminated. No TS acceptance, frequency, barrier or Grade-A result claimed.
 
 ## Lifecycle Status
 
@@ -20,11 +19,11 @@ Monitor CI-NEB9826728 for IS-A9725473 -> INT06_9748648 H migration.
 
 ## One Executable Step
 
-At the next requested checkpoint query LSF9826728 and the canonical compact NEB monitor for ~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_is_a_int06_ci9808511_sbq123_108r_20261002; distinguish queue state, electronic convergence, CI/NEB forces, geometry and scientific validity.
+At the next requested checkpoint query LSF9833429 and Dimer OUTCAR/OSZICAR/DIMCAR; distinguish electronic convergence, force/torque/curvature, geometry and scientific validity.
 
 ## Submission Boundary
 
-One CI refinement authorized and submitted. No duplicate, restart, new GPU, Dimer or frequency submission without current evidence and user authority.
+One Dimer authorized and submitted; no duplicate, restart, GPU or frequency calculation automatically authorized.
 
 ## Authoritative Constraint
 
@@ -32,24 +31,24 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 
 ## Done When
 
-- CI path is technically converged and reviewed; later frequency validation and compatible-energy registration require their own gates.
+- Dimer technically converged and reviewed; later local frequency and compatible-energy registration require current gates.
 
 ## Constraints
 
 - Preserve accepted INT06-MID and MID-FS segments.
 - Preserve atom mapping, fixedFe0-17 and SIGMA0.20 compatibility branch.
-- 108 total ranks retained with16-per-node cap and12 per internal image.
-- CI climbs the currently highest internal image dynamically; initial maximum05 does not lock image05 forever.
+- 32 ranks,16-per-node cap for this single Dimer;108 ranks belonged to nine-image NEB.
 
 ## Authoritative References
 
-- archive/ci_neb9808511_20261002/user_request.json
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_ci9808511_sbq123_108r_20261002/parent_scheduler_evidence.json
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930/normalized_final_path_20261002/normalization_receipt.json
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_ci9808511_sbq123_108r_20261002/completed_parent_analysis.json
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_ci9808511_sbq123_108r_20261002/path_review.json
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_ci9808511_sbq123_108r_20261002/submission_preflight.json
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_ci9808511_sbq123_108r_20261002/execution_gate_decision.json
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_ci9808511_sbq123_108r_20261002/submission_record.json
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_ci9808511_sbq123_108r_20261002/scheduler_checkpoint_submission.json
+- archive/neb9808511_dimer_20261004/user_request.json
+- archive/neb9808511_dimer_20261004/stop_receipt.json
+- archive/neb9808511_dimer_20261004/scheduler_after.json
+- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/dimer_handoff.json
+- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/mode_review.json
+- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/dimer_mode_validation.json
+- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/submission_preflight.json
+- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/execution_gate_decision.json
+- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/submission_record.json
+- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/scheduler_checkpoint_submission.json
 <!-- state-handoff:end current_task -->
