@@ -1,0 +1,84 @@
+{
+  "reaction": "C2HO* + H* -> C2H2O* + *",
+  "ordered_states": [
+    "IS-A9725473",
+    "INT06_9748648",
+    "MID9737143",
+    "FS-A9725471"
+  ],
+  "unit": "eV",
+  "temperature_K": null,
+  "pressure_Pa": null,
+  "energy_convention": "fe110_converged_toten_sigma0p20_v1",
+  "steps": [
+    {
+      "step": "IS_A_to_INT06",
+      "initial_state": "IS-A9725473",
+      "final_state": "INT06_9748648",
+      "source_job_id": "9833429",
+      "status": "TECHNICALLY_CONVERGED_NEEDS_FINAL_MODE_REVIEW",
+      "grade": "Ungraded",
+      "kinetic_eligible": false,
+      "barriers": [],
+      "strategies": [],
+      "delta_G_eV": null
+    },
+    {
+      "step": "INT06_to_MID",
+      "initial_state": "INT06_9748648",
+      "final_state": "MID9737143",
+      "validation": {
+        "ts_validation_id": "fe110_int06_mid_ci9796856_vfa9798421_grade_a",
+        "source_saddle_calculation_id": "fe110_int06_mid_ci_neb_9796856",
+        "grade": "A",
+        "kinetic_eligible": 1,
+        "imaginary_frequencies_cm1": "[386.611701]"
+      },
+      "barriers": [],
+      "strategies": [],
+      "delta_G_eV": null,
+      "thermochemistry_ready": false,
+      "source_authority": "Existing registry acceptance; no historical revalidation performed"
+    },
+    {
+      "step": "MID_to_FS",
+      "initial_state": "MID9737143",
+      "final_state": "FS-A9725471",
+      "validation": {
+        "ts_validation_id": "fe110_c2ho_oh_dimer9746548_vfa9747902_accepted_20260910",
+        "source_saddle_calculation_id": "fe110_c2ho_h_dimer_9746548",
+        "grade": "A",
+        "kinetic_eligible": 1,
+        "imaginary_frequencies_cm1": "[1407.654162]"
+      },
+      "barriers": [
+        {
+          "barrier_set_id": "fe110_c2ho_oh_mid9737143_ts9746548_fs9725471_sigma0p20",
+          "forward_barrier_ev": 1.2858271800000125,
+          "reverse_barrier_ev": 0.8948170500000288,
+          "reaction_energy_ev": 0.39101012999998375,
+          "validation_status": "accepted"
+        }
+      ],
+      "strategies": [
+        {
+          "template_id": "fe110_c2ho_oh_local_micro_neb_dimer9746548_grade_a",
+          "outcome": "success",
+          "validation_grade": "A"
+        }
+      ],
+      "delta_G_eV": null,
+      "thermochemistry_ready": false,
+      "source_authority": "Existing registry acceptance; no historical revalidation performed"
+    }
+  ],
+  "overall_status": "searches_finished_validation_and_registration_incomplete",
+  "whole_route_grade_a": false,
+  "kinetics_ready": false,
+  "remaining": [
+    "IS-A-to-INT06 final mode and DIMCAR soft residual review",
+    "IS-A-to-INT06 local frequency validation and compatible barrier/strategy registration",
+    "INT06-to-MID compatible barrier and success-strategy registration",
+    "Lower ordinary-NEB peaks01/09 remain diagnostic features, not separately accepted TSs"
+  ]
+}

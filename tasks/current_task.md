@@ -3,27 +3,27 @@
 
 ## Objective
 
-Monitor Dimer9833429 from ordinary NEB9808511 peak05 for IS-A to INT06 H migration.
+Review Dimer9833429 final mode and soft residuals before IS-A-to-INT06 TS frequency validation.
 
 ## Current Evidence Snapshot
 
-- CI9826728 cancelled through explicit user STOP_JOB authorization; scheduler EXIT confirmed; remote files retained.
-- Ordinary NEB9808511 remains accepted as a technically converged parent:71 steps, maximum final NEB force0.049947 eV/A. Reuse its normalized final04/05/06, not failed CI final structures.
-- Peak05 triad passes electronic, normal-termination, geometry, atom-order/fixed-mask and periodic mapping checks. Actual-coordinate mode review accepted; H50 amplitude0.98415, fixedFe0-17 zero.
-- Dimer9833429 submitted once on sunboquan-codex/sbq123; schedulerPEND;32 total ranks,16 per node;ALGO Fast,SIGMA0.20,EDIFF1e-7,EDIFFG-0.02,IOPT2,NSW300.
-- This refines local migration peak05; lower peaks01/09 are not proven eliminated. No TS acceptance, frequency, barrier or Grade-A result claimed.
+- Dimer9833429 scheduler DONE; remote output hashes match recovered files. Normal termination, final SCF convergence and VASP maximum force0.015998 eV/A pass; last complete curvature-0.63616 eV/A2.
+- Completed search candidate recorded in project_registry.sqlite3 with workflow needs_review; no Grade-A, final barrier or successful strategy inserted.
+- DIMCAR Force0.05255/Torque0.29241 remain explicit soft warnings; final_mode_review is needs_review; local frequency not performed. User recording request is not interpreted as residual acceptance.
+- INT06-to-MID CI9796856/VFA9798421 already has registered Grade A; compatible barrier and successful strategy records not found. MID-to-FS Dimer9746548/VFA9747902 has Grade A, accepted electronic barrier1.28582718 eV and success strategy.
+- Full route IS-A -> INT06 -> MID -> FS-A is mapped, but validation/registration not complete; minor parent peaks01/09 remain diagnostic features.
 
 ## Lifecycle Status
 
-- Phase: `active`
+- Phase: `verification`
 
 ## One Executable Step
 
-At the next requested checkpoint query LSF9833429 and Dimer OUTCAR/OSZICAR/DIMCAR; distinguish electronic convergence, force/torque/curvature, geometry and scientific validity.
+Review current final NEWMODECAR and request the exact DIMCAR soft-residual decision before preparing frequency validation; do not submit a new calculation from the recording request.
 
 ## Submission Boundary
 
-One Dimer authorized and submitted; no duplicate, restart, GPU or frequency calculation automatically authorized.
+Record-only user scope; no frequency, continuation, GPU or other expensive submission authorized.
 
 ## Authoritative Constraint
 
@@ -41,14 +41,9 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 
 ## Authoritative References
 
-- archive/neb9808511_dimer_20261004/user_request.json
-- archive/neb9808511_dimer_20261004/stop_receipt.json
-- archive/neb9808511_dimer_20261004/scheduler_after.json
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/dimer_handoff.json
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/mode_review.json
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/dimer_mode_validation.json
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/submission_preflight.json
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/execution_gate_decision.json
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/submission_record.json
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/scheduler_checkpoint_submission.json
+- archive/dimer9833429_record_20261006/user_request.json
+- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/scheduler_evidence.json
+- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/dimer_analysis.json
+- archive/dimer9833429_record_20261006/route_inventory.json
+- archive/dimer9833429_record_20261006/registry_receipt.json
 <!-- state-handoff:end current_task -->

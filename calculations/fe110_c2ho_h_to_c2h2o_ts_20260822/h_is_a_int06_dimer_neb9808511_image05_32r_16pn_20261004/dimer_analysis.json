@@ -1,0 +1,187 @@
+{
+  "status": "TECHNICALLY_CONVERGED_NEEDS_FINAL_MODE_REVIEW",
+  "dimcar_rows": [
+    {
+      "step": 1,
+      "force_eVA": 0.09045,
+      "torque_eVA": 0.15968,
+      "energy_eV": -388.34696,
+      "curvature_eVA2": -0.69853,
+      "angle_deg": 0.96632
+    },
+    {
+      "step": 2,
+      "force_eVA": 0.19081,
+      "torque_eVA": 0.66355,
+      "energy_eV": -388.34144,
+      "curvature_eVA2": -0.54378,
+      "angle_deg": 2.39723
+    },
+    {
+      "step": 3,
+      "force_eVA": 0.19043,
+      "torque_eVA": 0.30954,
+      "energy_eV": -388.34161,
+      "curvature_eVA2": -0.57802,
+      "angle_deg": 0.3803
+    },
+    {
+      "step": 4,
+      "force_eVA": 0.06765,
+      "torque_eVA": 0.38883,
+      "energy_eV": -388.34203,
+      "curvature_eVA2": -0.61211,
+      "angle_deg": 0.48421
+    },
+    {
+      "step": 5,
+      "force_eVA": 0.08964,
+      "torque_eVA": 0.39326,
+      "energy_eV": -388.34215,
+      "curvature_eVA2": -0.61642,
+      "angle_deg": 0.32618
+    },
+    {
+      "step": 6,
+      "force_eVA": 0.059,
+      "torque_eVA": 0.28679,
+      "energy_eV": -388.34226,
+      "curvature_eVA2": -0.62961,
+      "angle_deg": 0.41195
+    },
+    {
+      "step": 7,
+      "force_eVA": 0.04452,
+      "torque_eVA": 0.36458,
+      "energy_eV": -388.34238,
+      "curvature_eVA2": -0.64238,
+      "angle_deg": 0.37771
+    },
+    {
+      "step": 8,
+      "force_eVA": 0.05255,
+      "torque_eVA": 0.29241,
+      "energy_eV": -388.34242,
+      "curvature_eVA2": -0.63616,
+      "angle_deg": 0.28433
+    },
+    {
+      "step": 9,
+      "force_eVA": 0.05255,
+      "torque_eVA": null,
+      "energy_eV": -388.34242,
+      "curvature_eVA2": null,
+      "angle_deg": null
+    }
+  ],
+  "complete_dimcar_rows": 8,
+  "translation_steps": 9,
+  "force_target_eVA": 0.02,
+  "torque_target_eVA": 0.01,
+  "final_force_eVA": 0.05255,
+  "final_torque_eVA": 0.29241,
+  "final_curvature_eVA2": -0.63616,
+  "force_converged": false,
+  "dimer_force_converged": false,
+  "torque_converged": false,
+  "dimer_soft_gate_passed": false,
+  "dimer_soft_warnings": [
+    "DIMER_FORCE_ABOVE_TARGET",
+    "DIMER_TORQUE_ABOVE_DFNMIN"
+  ],
+  "final_atomic_force_eVA": 0.015998,
+  "final_atomic_force_max_eVA": 0.015998,
+  "final_atomic_force_rms_eVA": 0.004661,
+  "vasp_force_convergence_source": "OUTCAR:last_complete_FORCES_max_atom",
+  "vasp_force_converged": true,
+  "negative_curvature": true,
+  "contract_bound": true,
+  "evidence_gate": {
+    "checks": {
+      "contract_hashes": true,
+      "source_structure_hash": true,
+      "final_structure": true,
+      "dimer_input": true,
+      "electronic_convergence": true,
+      "scheduler_done": true
+    },
+    "passed": true,
+    "errors": [],
+    "scf": {
+      "last_electronic_iteration": 73,
+      "last_delta_e_eV": -2.0078e-08,
+      "ediff_eV": 1e-07,
+      "nelm": 200,
+      "electronically_converged": true,
+      "electronic_convergence_source": "OUTCAR_EDIFF_TERMINATION"
+    },
+    "scheduler_job_id": "9833429",
+    "scheduler_evidence_sha256": "b57d4d35109c3fb45878c07b535981f006e6a742b36e501f1adf9946b88e3f83"
+  },
+  "mode_reviewed": true,
+  "final_mode_reviewed": false,
+  "contract_sha256": "845c69d6804118448ee94ac62be67d476c072cb62a31924e215f50e20cc5482e",
+  "atom_map_sha256": "ef5b3d3d64884fde2a673dd35bef48a2a965c026edb6a8dd1c4eb22b100ae157",
+  "compatibility_sha256": "4ef0c782834fd07afca2621a5235bb67c2ea913bd650b93123c21538c35c165d",
+  "path_generation_sha256": "2f6434cee1b593613263441ebe715558bfa0cc21ca100c2108e91783e705c1c9",
+  "positive_curvature_streak": 0,
+  "normal_completion": true,
+  "fatal_keywords": [],
+  "technically_converged": false,
+  "final_structure": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004\\CONTCAR",
+  "final_structure_sha256": "1797b34dbce3c5c9374595dfb3590cdc32f22a240e321f59cde572be3b770b34",
+  "ts_candidate_id": null,
+  "source_files": [
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004\\CONTCAR",
+      "sha256": "1797b34dbce3c5c9374595dfb3590cdc32f22a240e321f59cde572be3b770b34"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004\\DIMCAR",
+      "sha256": "78c4fa6ab27b7879665bcae18e80497be91a349d79bd89b3c918d0464fcd04cd"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004\\INCAR",
+      "sha256": "7e4e956a5ea9efd66648d86ff47a1f8614f9d4144bbfcbb7ccfea154bcaf553f"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004\\MODECAR",
+      "sha256": "c8c84d005a4df85e59b072ffab1191a91c31733cb96384c489ec8dc7e3227852"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004\\NEWMODECAR",
+      "sha256": "4fc3bd2edf44f90614a23dfba1ded9083e59a0959b93ea53c9f64532929911b3"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004\\OSZICAR",
+      "sha256": "96b8bc3e6fd399fe8eb574a7740f6034e85b828e87d502218d57036c67a07dc9"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004\\OUTCAR",
+      "sha256": "2414b439afd47af56a27841c83c7c06653fc35323c77ea337eacd659893f641c"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004\\POSCAR",
+      "sha256": "e550b522a48d6133e122a5bc33b60510e1d2ffa625959696ea30d06ad7428459"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004\\dimer_handoff.json",
+      "sha256": "00ea62696c6c1263a4473e2f1c8ba1e1adc14f41275100769726d38b326aea55"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004\\final_mode_review.json",
+      "sha256": "7ae4cb0071fcf76b951a895805c90b495ae99ec289b9dc96e46b15d04d7d2e1c"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004\\mode_review.json",
+      "sha256": "a9d0e75c9afd1fdace759f65edbf939bd7578e0b625e2e12a1eca009d96dd2a9"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004\\scheduler_evidence.json",
+      "sha256": "b57d4d35109c3fb45878c07b535981f006e6a742b36e501f1adf9946b88e3f83"
+    }
+  ],
+  "final_mode": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004\\NEWMODECAR",
+  "scientifically_valid": false,
+  "requires_frequency_and_connectivity_validation": true
+}

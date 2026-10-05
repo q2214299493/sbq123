@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-10-05T16:09:09.210877+00:00",
+  "recorded_at": "2026-10-05T16:09:09.210877+00:00",
+  "event_id": "task-is-a-int06-dimer9833429-recorded-pending-validation-20261006",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "transition_state_search"
+  },
+  "summary": "User-requested candidate completion registered: Dimer9833429 DONE and VASP force gate passes; full reaction route remains incompletely validated.",
+  "evidence": [
+    {
+      "locator": "archive/dimer9833429_record_20261006/user_request.json",
+      "sha256": "112f05c782bda3457ddf9f35eef3de701cb3853eafb117369fb107f7918bfa53",
+      "authority": "user_authorization",
+      "observed_at": "2026-10-05T16:09:09.210877+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/scheduler_evidence.json",
+      "sha256": "b57d4d35109c3fb45878c07b535981f006e6a742b36e501f1adf9946b88e3f83",
+      "authority": "scheduler",
+      "observed_at": "2026-10-05T16:09:09.210877+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/dimer_analysis.json",
+      "sha256": "620e9da52b1be29341b245e723721432848f36c6c462ec52df2833ca60f28fb9",
+      "authority": "module_validation",
+      "observed_at": "2026-10-05T16:09:09.210877+00:00"
+    },
+    {
+      "locator": "archive/dimer9833429_record_20261006/route_inventory.json",
+      "sha256": "b4997708404e4651595893301653d5bf3e0a717c5dc18023d80d6348c1e8e2ca",
+      "authority": "repository_document",
+      "observed_at": "2026-10-05T16:09:09.210877+00:00"
+    },
+    {
+      "locator": "archive/dimer9833429_record_20261006/registry_receipt.json",
+      "sha256": "c0a579183c8482dc68c4ec0cb66e73aaaedee6144c1fd964de228b53e98223ff",
+      "authority": "repository_document",
+      "observed_at": "2026-10-05T16:09:09.210877+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "payload": {
+    "objective": "Review Dimer9833429 final mode and soft residuals before IS-A-to-INT06 TS frequency validation.",
+    "phase": "verification",
+    "current_evidence": [
+      "Dimer9833429 scheduler DONE; remote output hashes match recovered files. Normal termination, final SCF convergence and VASP maximum force0.015998 eV/A pass; last complete curvature-0.63616 eV/A2.",
+      "Completed search candidate recorded in project_registry.sqlite3 with workflow needs_review; no Grade-A, final barrier or successful strategy inserted.",
+      "DIMCAR Force0.05255/Torque0.29241 remain explicit soft warnings; final_mode_review is needs_review; local frequency not performed. User recording request is not interpreted as residual acceptance.",
+      "INT06-to-MID CI9796856/VFA9798421 already has registered Grade A; compatible barrier and successful strategy records not found. MID-to-FS Dimer9746548/VFA9747902 has Grade A, accepted electronic barrier1.28582718 eV and success strategy.",
+      "Full route IS-A -> INT06 -> MID -> FS-A is mapped, but validation/registration not complete; minor parent peaks01/09 remain diagnostic features."
+    ],
+    "one_executable_step": "Review current final NEWMODECAR and request the exact DIMCAR soft-residual decision before preparing frequency validation; do not submit a new calculation from the recording request.",
+    "submission_boundary": "Record-only user scope; no frequency, continuation, GPU or other expensive submission authorized.",
+    "done_when": [
+      "Dimer technically converged and reviewed; later local frequency and compatible-energy registration require current gates."
+    ],
+    "constraints": [
+      "Preserve accepted INT06-MID and MID-FS segments.",
+      "Preserve atom mapping, fixedFe0-17 and SIGMA0.20 compatibility branch.",
+      "32 ranks,16-per-node cap for this single Dimer;108 ranks belonged to nine-image NEB."
+    ],
+    "authoritative_references": [
+      "archive/dimer9833429_record_20261006/user_request.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/scheduler_evidence.json",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/dimer_analysis.json",
+      "archive/dimer9833429_record_20261006/route_inventory.json",
+      "archive/dimer9833429_record_20261006/registry_receipt.json"
+    ]
+  },
+  "supersedes": [
+    "task-is-a-int06-dimer9833429-20261004"
+  ]
+}
