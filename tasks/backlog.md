@@ -74,6 +74,15 @@ Tasks are ordered by priority and should be handled one per Codex thread.
 - P2: Complete compatible INT06→MID electronic-barrier registration and automatic Grade-A strategy/TS-table linkage after the current remaining-H path review. Do not repeat accepted calculations.
 - P2: Align the legacy `neb_ci_neb_bidirectional_connectivity_policy` label in `configs/execution_backends.yaml` with the approved CI optional-connectivity policy; preserve backend roles and ordinary-NEB rules.
 
+## Deferred by five-species Fe(110) adsorption request (2026-10-06)
+
+- P2: Resume Dimer9833429 final-mode/residual review before local frequency
+  preparation. The candidate is registered as needs_review, not accepted Grade-A;
+  full IS-A → INT06 → MID → FS-A TS validation remains incomplete. No new
+  frequency calculation is authorized by the adsorption request. Evidence:
+  `archive/dimer9833429_record_20261006/route_inventory.json` and
+  `modules/state_handoff/events/task-is-a-int06-dimer9833429-recorded-pending-validation-20261006.json`.
+
 <!-- state-handoff:start task_backlog_events -->
 ## Managed Backlog
 

@@ -1,0 +1,43 @@
+{
+  "status": "SOURCE_INSPECTED_MOTIF_TRANSFER_NEEDS_REVIEW",
+  "external_energy_imported": false,
+  "sources": [
+    {
+      "id": "li2018_fe110_successive_dissociation",
+      "title": "Successive Dissociation of CO, CH4, C2H6, and CH3CHO on Fe(110): Retrosynthetic Understanding of FTS Mechanism",
+      "journal": "The Journal of Physical Chemistry C",
+      "doi": "10.1021/acs.jpcc.8b10310",
+      "publisher_url": "https://pubs.acs.org/doi/10.1021/acs.jpcc.8b10310",
+      "doi_verified": true,
+      "verification": "Publisher search content and ACS Figshare resource_doi of article7442948 agree; downloaded SI title/authors agree.",
+      "si_url": "https://ndownloader.figshare.com/files/13778723",
+      "geometry_evidence": [
+        {"species_id": "01", "location": "SI page19, Figure S19, IS", "scope": "CCH adsorption pose in reaction calculations; not three independently compared adsorption minima"},
+        {"species_id": "02", "location": "SI page19, Figure S18, IS", "scope": "CCH2 adsorption pose; keep hydrogen placement distinct from acetylene"},
+        {"species_id": "03", "location": "SI page17, Figure S16, IS", "scope": "CHCO adsorption pose; compare side-on C coordination and oxygen orientation"},
+        {"species_id": "04", "location": "SI page14, Figure S13, reaction12c FS", "scope": "CCHO+H coadsorption geometry only; spectator H prevents direct single-adsorbate stability transfer"}
+      ],
+      "compatibility": "Literature p(5x5) Fe110, target p(3x3) Fe45; coverage and numerical settings are not identical. Geometry guidance only.",
+      "transfer_review": "NOT_YET_ACCEPTED",
+      "supports_three_stable_motifs_per_species": false
+    },
+    {
+      "id": "erley1984_fe110_methylene_ketene",
+      "title": "EELS spectra of methylene and ketene on Fe(110)",
+      "journal": "Surface Science",
+      "doi": "10.1016/0039-6028(84)90583-1",
+      "publisher_url": "https://www.sciencedirect.com/science/article/pii/0039602884905831",
+      "doi_verified": true,
+      "scope": "Publisher abstract proposes an unstable vinylidene formed from CH2 and coadsorbed carbon. It does not supply three stable CCH2 adsorption motifs.",
+      "transfer_review": "BACKGROUND_ONLY_NOT_BUILD_READY"
+    },
+    {
+      "id": "rsc_fe100_not_transferable",
+      "publisher_url": "https://www.rsc.org/suppdata/c7/cp/c7cp06693g/c7cp06693g1.pdf",
+      "scope": "CHCO appears in Fe9/Fe100 adsorption table, not exact Fe110 motif evidence.",
+      "transfer_review": "REJECT_EXACT_SURFACE_MISMATCH"
+    }
+  ],
+  "species05": "No exact Fe110 CCOH stable-motif comparison was found in this bounded search; retain original local CARE candidates as predicted guidance only.",
+  "remaining": ["Symmetry-aware motif review", "Formal transfer review before external motif construction", "GPU handoff and checkpoint-domain review", "Compatible VASP relaxation before any stability claim"]
+}

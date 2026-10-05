@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-06",
+  "request": "Retrieve literature-supported Fe(110) adsorption motifs for five exact CARE species, preferably AQCat25 pre-relaxation; aim for three distinct candidates when evidence supports them, report additional motifs for user selection.",
+  "surface": "true Fe(110), Fe45, five layers, bottom 18 Fe fixed",
+  "species": [
+    {"id": "01", "formula": "C2H", "connectivity": "[C][CH]", "care_prefix": "XEHVFKKSDRMODV"},
+    {"id": "02", "formula": "C2H2", "connectivity": "[C][CH2]", "care_prefix": "SNVLJLYUUXKWOJ"},
+    {"id": "03", "formula": "C2HO", "connectivity": "[CH][C][O]", "care_prefix": "QEJQAPYSVNHDJF"},
+    {"id": "04", "formula": "C2HO", "connectivity": "[C][CH][O]", "care_prefix": "YOHSXODKVUPAKH"},
+    {"id": "05", "formula": "C2HO", "connectivity": "[C][C]O", "display_connectivity": "[C]-[C]-OH", "care_prefix": "XMHKKYSQISNWMY"}
+  ],
+  "whitelist_stage": {
+    "status": "NO_WHITELIST_MATCH",
+    "scope": "Bounded web discovery of indexed whitelist resources; not proof that every underlying database lacks these structures.",
+    "queries": [
+      "Fe(110) C2H C2H2 adsorption, catalysis-hub.org/archive.materialscloud.org/iochem-bd.org/opencatalystproject.org",
+      "Fe(110) CHCO CCOH CCHO adsorption, catalysis-hub.org/nomad-lab.eu/materialscloud.org/fair-chem.github.io",
+      "site:catalysis-hub.org Fe C2H",
+      "site:iochem-bd.org Fe(110) hydrogenation",
+      "site:nomad-lab.eu Fe(110) C2",
+      "site:fair-chem.github.io C2H"
+    ],
+    "usable_records": [],
+    "rejected_discovery": "Materials Cloud impurity adsorption record2024.64 has Fe110 but lists other atomic/molecular adsorbates, not these exact C2 graphs; COF/ceria records do not match the material.",
+    "hybrid_ranking": "NOT_RUN_NO_MATCHING_RECORDS",
+    "production_retrieval_pass": false,
+    "next_source_scope": "Controlled authoritative primary-journal adsorption-motif fallback"
+  },
+  "submission": {"gpu_submitted": false, "vasp_submitted": false, "boundary": "Prepare and review evidence/candidates first; no unreviewed expensive batch submission."}
+}

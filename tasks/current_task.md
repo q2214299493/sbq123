@@ -3,27 +3,27 @@
 
 ## Objective
 
-Review Dimer9833429 final mode and soft residuals before IS-A-to-INT06 TS frequency validation.
+Review Fe110 adsorption motifs for C2H, CCH2 and three C2HO hydrogen-placement isomers; prepare bounded AQCat25 pre-relaxation candidates.
 
 ## Current Evidence Snapshot
 
-- Dimer9833429 scheduler DONE; remote output hashes match recovered files. Normal termination, final SCF convergence and VASP maximum force0.015998 eV/A pass; last complete curvature-0.63616 eV/A2.
-- Completed search candidate recorded in project_registry.sqlite3 with workflow needs_review; no Grade-A, final barrier or successful strategy inserted.
-- DIMCAR Force0.05255/Torque0.29241 remain explicit soft warnings; final_mode_review is needs_review; local frequency not performed. User recording request is not interpreted as residual acceptance.
-- INT06-to-MID CI9796856/VFA9798421 already has registered Grade A; compatible barrier and successful strategy records not found. MID-to-FS Dimer9746548/VFA9747902 has Grade A, accepted electronic barrier1.28582718 eV and success strategy.
-- Full route IS-A -> INT06 -> MID -> FS-A is mapped, but validation/registration not complete; minor parent peaks01/09 remain diagnostic features.
+- Original local CARE C2 network contains three predicted Fe48 poses per exact species; all15 preserved and mapped with existing Fe110 mapper to the verified Fe45 clean slab.
+- 14 initial geometry checks pass; CCH2 cfg0 is flagged by the adsorbate-height rule. This is not proof of a collision or a stability result.
+- CHCO configs0/1/2 are height-only seed variants, not three distinct adsorption motifs. Surface symmetry equivalence of other poses remains unreviewed.
+- Bounded whitelist search found no usable exact record; controlled literature fallback identified ACS JPCC2018 SI geometries for CCH, CCH2, CHCO and CCHO+H. No three-minimum literature claim or external energy import.
+- MZ73 SSH connection closed remotely; GPU resource state unknown. No GPU or VASP submitted. Prior Dimer9833429 formal mode/frequency review remains deferred in backlog.
 
 ## Lifecycle Status
 
-- Phase: `verification`
+- Phase: `active`
 
 ## One Executable Step
 
-Review current final NEWMODECAR and request the exact DIMCAR soft-residual decision before preparing frequency validation; do not submit a new calculation from the recording request.
+Review initial motif equivalence and CCH2 cfg0 height flag, then freeze the selected candidate list for an AQCat25 handoff; do not submit unreviewed inputs.
 
 ## Submission Boundary
 
-Record-only user scope; no frequency, continuation, GPU or other expensive submission authorized.
+User requests adsorption calculations with GPU preference. Preparation is authorized; expensive remote execution waits for reviewed hash-bound inputs and explicit bounded submission authority.
 
 ## Authoritative Constraint
 
@@ -31,19 +31,19 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 
 ## Done When
 
-- Dimer technically converged and reviewed; later local frequency and compatible-energy registration require current gates.
+- Exact identities, literature limits, candidate geometry and duplicate issues are reviewable before GPU/VASP submission.
 
 ## Constraints
 
-- Preserve accepted INT06-MID and MID-FS segments.
-- Preserve atom mapping, fixedFe0-17 and SIGMA0.20 compatibility branch.
-- 32 ranks,16-per-node cap for this single Dimer;108 ranks belonged to nine-image NEB.
+- Use true Fe110 Fe45 five-layer branch, fixedFe0-17 and SIGMA0.20 production method.
+- Do not substitute acetylene for CCH2 or mix the three C2HO graphs.
+- Candidate counts follow distinct supported motifs; no blind three-site padding or ML global-minimum claims.
+- AQCat25 is adsorption pre-relaxation primary; results return through work before VASP.
 
 ## Authoritative References
 
-- archive/dimer9833429_record_20261006/user_request.json
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/scheduler_evidence.json
-- calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/dimer_analysis.json
-- archive/dimer9833429_record_20261006/route_inventory.json
-- archive/dimer9833429_record_20261006/registry_receipt.json
+- archive/fe110_five_c2_adsorption_20261006/REVIEW.md
+- archive/fe110_five_c2_adsorption_20261006/request_and_retrieval.json
+- calculations/fe110_five_c2_adsorption_20261006/candidate_review.json
+- archive/fe110_five_c2_adsorption_20261006/literature_review.json
 <!-- state-handoff:end current_task -->

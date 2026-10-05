@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-10-05T17:01:17+00:00",
+  "recorded_at": "2026-10-05T17:01:17+00:00",
+  "event_id": "task-fe110-five-c2-adsorption-review-20261006",
+  "event_type": "task_updated",
+  "entity": {"kind": "task", "id": "task-current", "module": "adsorption_workflow"},
+  "summary": "New user request: review literature and local CARE poses for five connectivity-specific Fe110 adsorbates before bounded GPU pre-relaxation.",
+  "evidence": [
+    {"locator": "archive/fe110_five_c2_adsorption_20261006/request_and_retrieval.json", "sha256": "d36058dbbb13a264c87706ffd64de62b3772429e12af2a417030bef10c75ca01", "authority": "user_authorization", "observed_at": "2026-10-05T17:01:17+00:00"},
+    {"locator": "calculations/fe110_five_c2_adsorption_20261006/candidate_review.json", "sha256": "6af2282eed83ed8d400d806730786029a2646fcf6ec7133cc073461031b99ac2", "authority": "module_validation", "observed_at": "2026-10-05T17:01:17+00:00"},
+    {"locator": "archive/fe110_five_c2_adsorption_20261006/literature_review.json", "sha256": "6d7c1c1cfc700e2b99ec6ea9459ed7b684deea60524be9b50304acef56ccf292", "authority": "repository_document", "observed_at": "2026-10-05T17:01:17+00:00"}
+  ],
+  "review": {"required": false, "reason_codes": [], "status": "not_required"},
+  "payload": {
+    "objective": "Review Fe110 adsorption motifs for C2H, CCH2 and three C2HO hydrogen-placement isomers; prepare bounded AQCat25 pre-relaxation candidates.",
+    "phase": "active",
+    "current_evidence": [
+      "Original local CARE C2 network contains three predicted Fe48 poses per exact species; all15 preserved and mapped with existing Fe110 mapper to the verified Fe45 clean slab.",
+      "14 initial geometry checks pass; CCH2 cfg0 is flagged by the adsorbate-height rule. This is not proof of a collision or a stability result.",
+      "CHCO configs0/1/2 are height-only seed variants, not three distinct adsorption motifs. Surface symmetry equivalence of other poses remains unreviewed.",
+      "Bounded whitelist search found no usable exact record; controlled literature fallback identified ACS JPCC2018 SI geometries for CCH, CCH2, CHCO and CCHO+H. No three-minimum literature claim or external energy import.",
+      "MZ73 SSH connection closed remotely; GPU resource state unknown. No GPU or VASP submitted. Prior Dimer9833429 formal mode/frequency review remains deferred in backlog."
+    ],
+    "one_executable_step": "Review initial motif equivalence and CCH2 cfg0 height flag, then freeze the selected candidate list for an AQCat25 handoff; do not submit unreviewed inputs.",
+    "submission_boundary": "User requests adsorption calculations with GPU preference. Preparation is authorized; expensive remote execution waits for reviewed hash-bound inputs and explicit bounded submission authority.",
+    "done_when": [
+      "Exact identities, literature limits, candidate geometry and duplicate issues are reviewable before GPU/VASP submission."
+    ],
+    "constraints": [
+      "Use true Fe110 Fe45 five-layer branch, fixedFe0-17 and SIGMA0.20 production method.",
+      "Do not substitute acetylene for CCH2 or mix the three C2HO graphs.",
+      "Candidate counts follow distinct supported motifs; no blind three-site padding or ML global-minimum claims.",
+      "AQCat25 is adsorption pre-relaxation primary; results return through work before VASP."
+    ],
+    "authoritative_references": [
+      "archive/fe110_five_c2_adsorption_20261006/REVIEW.md",
+      "archive/fe110_five_c2_adsorption_20261006/request_and_retrieval.json",
+      "calculations/fe110_five_c2_adsorption_20261006/candidate_review.json",
+      "archive/fe110_five_c2_adsorption_20261006/literature_review.json"
+    ]
+  },
+  "supersedes": ["task-is-a-int06-dimer9833429-recorded-pending-validation-20261006"]
+}
