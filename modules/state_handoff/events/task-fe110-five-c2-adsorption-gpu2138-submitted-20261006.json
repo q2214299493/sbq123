@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-10-06T03:39:14+00:00",
+  "recorded_at": "2026-10-06T03:39:14+00:00",
+  "event_id": "task-fe110-five-c2-adsorption-gpu2138-submitted-20261006",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "adsorption_workflow"
+  },
+  "summary": "User-authorized AQCat25 adsorption batch2138 submitted for12 reviewed candidates; bootstrap failures2136/2137 preserved.",
+  "evidence": [
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/gpu_batch_v3/reviewed_plan.json",
+      "sha256": "545b08c86b162847dee437dea03057dc4621ce5839abfc0e45bd4d6a15e98157",
+      "authority": "user_authorization",
+      "observed_at": "2026-10-06T03:39:14+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/gpu_submission_evidence.json",
+      "sha256": "abfa2b4bfab56db885a16370647c5760fadc038428c26c78fef63a910f1a977a",
+      "authority": "module_validation",
+      "observed_at": "2026-10-06T03:39:14+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/gpu_submission_evidence/scheduler_2138.txt",
+      "sha256": "e511c69533ec4ec503ce9e894b5f99d0cd25b894dafd8807c4c8497c0c4bc542",
+      "authority": "scheduler",
+      "observed_at": "2026-10-06T03:39:14+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "payload": {
+    "objective": "Review Fe110 adsorption motifs for C2H, CCH2 and three C2HO hydrogen-placement isomers; prepare bounded AQCat25 pre-relaxation candidates.",
+    "phase": "active",
+    "current_evidence": [
+      "User explicitly authorized GPU pre-relaxation only; no VASP submitted.",
+      "12 selected local CARE seeds (species counts3/2/1/3/3) pass initial geometry and hash-bound schema/ASE preflight; three excluded raw seeds retained.",
+      "MZ73 Slurm2138 scheduler=FAILED; one GPU,4CPU,32GiB,120minute limit; maximum80 LBFGS steps per candidate at0.10eV/A.",
+      "Failed bootstrap2136/2137 did not produce adsorption results. Task-local runtime handles verified root symlink and pins cache/temp paths; no global scientific method change.",
+      "Final geometry/chemistry and duplicate review remain pending. Predictions are not reportable adsorption energies. Prior Dimer9833429 review remains deferred."
+    ],
+    "one_executable_step": "After2138 finishes, collect all producer receipts, return manifests and predicted structures; validate in work and review final chemistry/sites/duplicates before requesting VASP.",
+    "submission_boundary": "GPU12 batch explicitly authorized and submitted. No automatic continuation/resubmission or VASP handoff.",
+    "done_when": [
+      "Exact identities, literature limits, candidate geometry and duplicate issues are reviewable before GPU/VASP submission."
+    ],
+    "constraints": [
+      "Use true Fe110 Fe45 five-layer branch, fixedFe0-17 and SIGMA0.20 production method.",
+      "Do not substitute acetylene for CCH2 or mix the three C2HO graphs.",
+      "Candidate counts follow distinct supported motifs; no blind three-site padding or ML global-minimum claims.",
+      "AQCat25 is adsorption pre-relaxation primary; results return through work before VASP."
+    ],
+    "authoritative_references": [
+      "archive/fe110_five_c2_adsorption_20261006/REVIEW.md",
+      "archive/fe110_five_c2_adsorption_20261006/request_and_retrieval.json",
+      "calculations/fe110_five_c2_adsorption_20261006/candidate_review.json",
+      "archive/fe110_five_c2_adsorption_20261006/literature_review.json",
+      "calculations/fe110_five_c2_adsorption_20261006/gpu_submission_evidence.json",
+      "calculations/fe110_five_c2_adsorption_20261006/gpu_batch_v3/batch_manifest.json"
+    ]
+  },
+  "supersedes": [
+    "task-fe110-five-c2-adsorption-review-20261006"
+  ]
+}

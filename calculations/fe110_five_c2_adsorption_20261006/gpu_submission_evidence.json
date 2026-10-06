@@ -1,0 +1,52 @@
+{
+  "observed_at": "2026-10-06T03:39:14+00:00",
+  "jobs": [
+    {
+      "job_id": "2136",
+      "version": "v1",
+      "scheduler_state": "FAILED",
+      "remote_root": "/home/sbq/sbq/aqcat25_ts_pilot/fe110_five_c2_adsorption_20261006_gpu_v1",
+      "scheduler_evidence_sha256": "993f4d8229df7094a89d192e9f6ec3fbdf4e6b309cf1671d7a1107fa8811df41"
+    },
+    {
+      "job_id": "2137",
+      "version": "v2",
+      "scheduler_state": "FAILED",
+      "remote_root": "/home/sbq/sbq/aqcat25_ts_pilot/fe110_five_c2_adsorption_20261006_gpu_v2",
+      "scheduler_evidence_sha256": "b4dc2d41d1479dddbd99bfc714bdd227388e308daaa0190bc5918eb4b6983b32"
+    },
+    {
+      "job_id": "2138",
+      "version": "v3",
+      "scheduler_state": "FAILED",
+      "remote_root": "/home/sbq/sbq/aqcat25_ts_pilot/fe110_five_c2_adsorption_20261006_gpu_v3",
+      "scheduler_evidence_sha256": "e511c69533ec4ec503ce9e894b5f99d0cd25b894dafd8807c4c8497c0c4bc542"
+    }
+  ],
+  "active_job_id": "2138",
+  "candidate_count": 12,
+  "species_candidate_counts": [
+    3,
+    2,
+    1,
+    3,
+    3
+  ],
+  "batch_manifest_sha256": "c9066a2f6a0241356eba850060f1328ab74906eca202a47b23ff6ebb63031bbe",
+  "checks": {
+    "python_syntax": "pass",
+    "12_handoff_schema_hash_atom_order_SD": "pass",
+    "remote_no_model_ASE_preflight": "pass",
+    "shell_syntax": "pass",
+    "canonical_root_containment_positive_and_escape_negative_tests": "pass"
+  },
+  "scientific_status": "predicted_candidate_generation_only_not_VASP_validated",
+  "failures": "2136/2137 exited during bootstrap before any candidate output; preserved. v3 pins permitted cache/temp directories and preserves canonical containment.",
+  "unverified": [
+    "optimizer convergence",
+    "final chemistry",
+    "final site",
+    "post-relaxation duplicates",
+    "VASP energies"
+  ]
+}

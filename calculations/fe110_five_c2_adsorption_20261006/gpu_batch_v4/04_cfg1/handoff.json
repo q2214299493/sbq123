@@ -1,0 +1,138 @@
+{
+  "schema_version": 2,
+  "direction": "work_to_gpu",
+  "workflow_kind": "adsorption",
+  "handoff_id": "fe110_five_c2_20261006_04_cfg1",
+  "source_workflow_sha256": "545b08c86b162847dee437dea03057dc4621ce5839abfc0e45bd4d6a15e98157",
+  "candidate_structure": {
+    "path": "POSCAR",
+    "sha256": "9c0378b0ccffe5fa3dd2af35a27bc468099cb00a9cee366fba35cd55c266d4ea",
+    "format": "vasp_poscar",
+    "atom_count": 49,
+    "atom_order_sha256": "4b02a989fb2bb78573d64099687209cfb3886d4d70b1d4c0a407cd9f5b76c1a2"
+  },
+  "compatibility": {
+    "branch": "true_fe110_5layer_5x5x1",
+    "slab_model": "true_fe110_fe45_5layer",
+    "facet": "110",
+    "sha256": "851922b78e5e64b4afae7dfc7437af7cee2894491a50a01da3f5be26dcf0b593"
+  },
+  "model": {
+    "identifier": "AQCat25 demo_single model.pt",
+    "checkpoint_sha256": "e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50",
+    "fmax_eV_per_A": 0.1,
+    "max_steps": 80
+  },
+  "selective_dynamics": {
+    "fixed_atom_indices_1based": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18
+    ],
+    "free_atom_count": 31
+  },
+  "adsorption": {
+    "evidence_gated_plan_sha256": "545b08c86b162847dee437dea03057dc4621ce5839abfc0e45bd4d6a15e98157",
+    "clean_slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+    "identity_and_connectivity": "YOHSXODKVUPAKH-UHFFFAOYSA-N* [C][CH][O]",
+    "intended_motif": "[{\"atom\": \"C1\", \"nearest_fe_angstrom\": 2.4835644123978975, \"site\": \"top\", \"lateral_offset_angstrom\": 0.3543838080271365}, {\"atom\": \"C2\", \"nearest_fe_angstrom\": 2.281198937844512, \"site\": \"hollow\", \"lateral_offset_angstrom\": 0.24893090825351866}, {\"atom\": \"O1\", \"nearest_fe_angstrom\": 2.242482637934128, \"site\": \"hollow\", \"lateral_offset_angstrom\": 0.2315451266927428}]",
+    "surface_elements": [
+      "Fe"
+    ],
+    "adsorbate_atoms": [
+      {
+        "index_1based": 46,
+        "symbol": "C",
+        "role": "anchor"
+      },
+      {
+        "index_1based": 47,
+        "symbol": "C",
+        "role": "anchor"
+      },
+      {
+        "index_1based": 48,
+        "symbol": "O",
+        "role": "anchor"
+      },
+      {
+        "index_1based": 49,
+        "symbol": "H",
+        "role": "non_anchor"
+      }
+    ],
+    "connectivity_constraints": [],
+    "monitored_pairs": [
+      {
+        "label": "internal_46_47",
+        "atoms_1based": [
+          46,
+          47
+        ]
+      },
+      {
+        "label": "internal_46_48",
+        "atoms_1based": [
+          46,
+          48
+        ]
+      },
+      {
+        "label": "internal_46_49",
+        "atoms_1based": [
+          46,
+          49
+        ]
+      },
+      {
+        "label": "seed_surface_contact_46",
+        "atoms_1based": [
+          46,
+          42
+        ]
+      },
+      {
+        "label": "seed_surface_contact_47",
+        "atoms_1based": [
+          47,
+          42
+        ]
+      },
+      {
+        "label": "seed_surface_contact_48",
+        "atoms_1based": [
+          48,
+          42
+        ]
+      },
+      {
+        "label": "seed_surface_contact_49",
+        "atoms_1based": [
+          49,
+          42
+        ]
+      }
+    ]
+  },
+  "restrictions": {
+    "predicted_candidate_only": true,
+    "submit_vasp": false,
+    "scientific_acceptance": false,
+    "direct_gpu_to_vasp_handoff": false
+  }
+}

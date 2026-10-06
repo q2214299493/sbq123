@@ -1,0 +1,85 @@
+{
+  "user_authorization": "2026-10-06: 先提交gpu加速",
+  "action": "SUBMIT_BOUNDED_AQCAT25_ADSORPTION_PRE_RELAXATION_ONLY",
+  "candidate_review_sha256": "6af2282eed83ed8d400d806730786029a2646fcf6ec7133cc073461031b99ac2",
+  "retrieval_evidence_sha256": "d36058dbbb13a264c87706ffd64de62b3772429e12af2a417030bef10c75ca01",
+  "literature_review_sha256": "6d7c1c1cfc700e2b99ec6ea9459ed7b684deea60524be9b50304acef56ccf292",
+  "source_kind": "user_owned_local_CARE_predicted_poses_not_verified_stable_minima",
+  "source_network_sha256": "c4de04dd8c4ba99ea16977ffa0fe44752baa13d85f768535a7e0bd0d6a8f1632",
+  "selected": [
+    {
+      "species_id": "01",
+      "config_id": "0",
+      "source_structure_sha256": "1803804bad38f6c8bac0a5c7be8c7fd3d9c7a9aa26cbb097880327f94cfc6886"
+    },
+    {
+      "species_id": "01",
+      "config_id": "1",
+      "source_structure_sha256": "82236a5045057fdbc25f87e0c1048004f2846cddfc9119ea24cbf0725c522266"
+    },
+    {
+      "species_id": "01",
+      "config_id": "2",
+      "source_structure_sha256": "4a9994e15c50a471eec653f15c30af03ab9f8bcabed61d4551efc5ed780d08e4"
+    },
+    {
+      "species_id": "02",
+      "config_id": "2",
+      "source_structure_sha256": "ebd14fc538fc8644ed3e93f29f216f5d5ab1940a3352c7174cc64c203ba43c01"
+    },
+    {
+      "species_id": "02",
+      "config_id": "1",
+      "source_structure_sha256": "5ac00cd6fc395b21f7f8bee30a3e34ae979f42c7a28d67a3a7d1798d8e998a52"
+    },
+    {
+      "species_id": "03",
+      "config_id": "0",
+      "source_structure_sha256": "bae70901a1b6eab91e6f3b7d0b87bdcc536fb4455bc768fe5fff85712a0c9873"
+    },
+    {
+      "species_id": "04",
+      "config_id": "0",
+      "source_structure_sha256": "228909489a05c940e0344fedcf1e4136627ee165a96f9ca45d4987226aba3376"
+    },
+    {
+      "species_id": "04",
+      "config_id": "1",
+      "source_structure_sha256": "9c0378b0ccffe5fa3dd2af35a27bc468099cb00a9cee366fba35cd55c266d4ea"
+    },
+    {
+      "species_id": "04",
+      "config_id": "2",
+      "source_structure_sha256": "6ae5c000900a8b39a6e74c01b36423e4ed8fa413fe72940623f155903f660357"
+    },
+    {
+      "species_id": "05",
+      "config_id": "0",
+      "source_structure_sha256": "09aa1e187eb0c670217d0f19f556585f1aa0a5ac60a047e0649d47ff889887d2"
+    },
+    {
+      "species_id": "05",
+      "config_id": "1",
+      "source_structure_sha256": "0e3660469cef18885bd67bb5d5c44e740becc9c326b9dd666bca791380d7e472"
+    },
+    {
+      "species_id": "05",
+      "config_id": "2",
+      "source_structure_sha256": "edb00cd567ee90604737b7003adba4e7af25e782bcc3f52b9f1fda9903916d75"
+    }
+  ],
+  "excluded": {
+    "02/cfg0": "initial height gate needs review",
+    "03/cfg1": "height-only variant of cfg0",
+    "03/cfg2": "height-only variant of cfg0"
+  },
+  "limits": {
+    "steps_per_candidate": 80,
+    "fmax_eV_per_A": 0.1,
+    "gpu_count": 1,
+    "walltime_minutes": 120,
+    "submit_vasp": false
+  },
+  "review": "Initial geometry and connectivity pass; other surface-symmetry duplicates remain to be assessed after return. No stable/global-minimum claim.",
+  "constraints": "Only original bottom18 Fe fixed; no artificial bond or height restraints. Connectivity monitored, not enforced by optimizer."
+}

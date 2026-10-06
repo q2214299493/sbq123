@@ -1,0 +1,59 @@
+{
+  "observed_at": "2026-10-06T03:41:24+00:00",
+  "jobs": [
+    {
+      "job_id": "2136",
+      "version": "v1",
+      "scheduler_state": "FAILED",
+      "remote_root": "/home/sbq/sbq/aqcat25_ts_pilot/fe110_five_c2_adsorption_20261006_gpu_v1",
+      "scheduler_evidence_sha256": "993f4d8229df7094a89d192e9f6ec3fbdf4e6b309cf1671d7a1107fa8811df41"
+    },
+    {
+      "job_id": "2137",
+      "version": "v2",
+      "scheduler_state": "FAILED",
+      "remote_root": "/home/sbq/sbq/aqcat25_ts_pilot/fe110_five_c2_adsorption_20261006_gpu_v2",
+      "scheduler_evidence_sha256": "b4dc2d41d1479dddbd99bfc714bdd227388e308daaa0190bc5918eb4b6983b32"
+    },
+    {
+      "job_id": "2138",
+      "version": "v3",
+      "scheduler_state": "FAILED",
+      "remote_root": "/home/sbq/sbq/aqcat25_ts_pilot/fe110_five_c2_adsorption_20261006_gpu_v3",
+      "scheduler_evidence_sha256": "e511c69533ec4ec503ce9e894b5f99d0cd25b894dafd8807c4c8497c0c4bc542"
+    },
+    {
+      "job_id": "2139",
+      "version": "v4",
+      "scheduler_state": "RUNNING",
+      "remote_root": "/home/sbq/sbq/aqcat25_ts_pilot/fe110_five_c2_adsorption_20261006_gpu_v4",
+      "scheduler_evidence_sha256": "935c3dc944be2680ebe1d9a3fdd73f4e96849ca1f5bd7614d9e8f1be99093acd"
+    }
+  ],
+  "active_job_id": "2139",
+  "candidate_count": 12,
+  "species_candidate_counts": [
+    3,
+    2,
+    1,
+    3,
+    3
+  ],
+  "batch_manifest_sha256": "efa84ef9a0a77ab4e4ec1aaa94b6fe83be4980a434eb25c410241e080a27ac03",
+  "checks": {
+    "python_syntax": "pass",
+    "12_handoff_schema_hash_atom_order_SD": "pass",
+    "remote_no_model_ASE_preflight": "pass",
+    "shell_syntax": "pass",
+    "canonical_root_containment_positive_and_escape_negative_tests": "pass"
+  },
+  "scientific_status": "predicted_candidate_generation_only_not_VASP_validated",
+  "failures": "2136/2137/2138 exited during bootstrap before any candidate optimization; preserved. v4 fixes both canonical-root checks and pins permitted cache/temp directories.",
+  "unverified": [
+    "optimizer convergence",
+    "final chemistry",
+    "final site",
+    "post-relaxation duplicates",
+    "VASP energies"
+  ]
+}

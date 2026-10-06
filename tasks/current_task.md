@@ -7,11 +7,11 @@ Review Fe110 adsorption motifs for C2H, CCH2 and three C2HO hydrogen-placement i
 
 ## Current Evidence Snapshot
 
-- Original local CARE C2 network contains three predicted Fe48 poses per exact species; all15 preserved and mapped with existing Fe110 mapper to the verified Fe45 clean slab.
-- 14 initial geometry checks pass; CCH2 cfg0 is flagged by the adsorbate-height rule. This is not proof of a collision or a stability result.
-- CHCO configs0/1/2 are height-only seed variants, not three distinct adsorption motifs. Surface symmetry equivalence of other poses remains unreviewed.
-- Bounded whitelist search found no usable exact record; controlled literature fallback identified ACS JPCC2018 SI geometries for CCH, CCH2, CHCO and CCHO+H. No three-minimum literature claim or external energy import.
-- MZ73 SSH connection closed remotely; GPU resource state unknown. No GPU or VASP submitted. Prior Dimer9833429 formal mode/frequency review remains deferred in backlog.
+- User explicitly authorized GPU pre-relaxation only; no VASP submitted.
+- 12 selected local CARE seeds (species counts3/2/1/3/3) pass initial geometry and hash-bound schema/ASE preflight; three excluded raw seeds retained.
+- MZ73 Slurm2139 scheduler=RUNNING; one GPU,4CPU,32GiB,120minute limit; maximum80 LBFGS steps per candidate at0.10eV/A.
+- Failed bootstrap2136/2137/2138 did not produce adsorption results. Task-local runtime handles verified root symlink and pins cache/temp paths; no global scientific method change.
+- Final geometry/chemistry and duplicate review remain pending. Predictions are not reportable adsorption energies. Prior Dimer9833429 review remains deferred.
 
 ## Lifecycle Status
 
@@ -19,11 +19,11 @@ Review Fe110 adsorption motifs for C2H, CCH2 and three C2HO hydrogen-placement i
 
 ## One Executable Step
 
-Review initial motif equivalence and CCH2 cfg0 height flag, then freeze the selected candidate list for an AQCat25 handoff; do not submit unreviewed inputs.
+After2139 finishes, collect all producer receipts, return manifests and predicted structures; validate in work and review final chemistry/sites/duplicates before requesting VASP.
 
 ## Submission Boundary
 
-User requests adsorption calculations with GPU preference. Preparation is authorized; expensive remote execution waits for reviewed hash-bound inputs and explicit bounded submission authority.
+GPU12 batch explicitly authorized and submitted. No automatic continuation/resubmission or VASP handoff.
 
 ## Authoritative Constraint
 
@@ -46,4 +46,6 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 - archive/fe110_five_c2_adsorption_20261006/request_and_retrieval.json
 - calculations/fe110_five_c2_adsorption_20261006/candidate_review.json
 - archive/fe110_five_c2_adsorption_20261006/literature_review.json
+- calculations/fe110_five_c2_adsorption_20261006/gpu_submission_evidence_2139.json
+- calculations/fe110_five_c2_adsorption_20261006/gpu_batch_v4/batch_manifest.json
 <!-- state-handoff:end current_task -->
