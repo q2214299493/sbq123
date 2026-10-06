@@ -1,0 +1,31 @@
+{
+  "executed_commands": [
+    {
+      "command": "python -m py_compile archive/fe110_five_c2_adsorption_20261006/prepare_supplement_gpu.py archive/fe110_five_c2_adsorption_20261006/supplement_gpu_remote.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python -m ruff check archive/fe110_five_c2_adsorption_20261006/prepare_supplement_gpu.py archive/fe110_five_c2_adsorption_20261006/supplement_gpu_remote.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python -m pytest tests/test_fe110_c2_supplement.py -q",
+      "exit_code": 0,
+      "passed": 4
+    }
+  ],
+  "five_local_handoff_validations": "PASS",
+  "remote_preflight": {
+    "status": "PASS_NO_MODEL_RUN",
+    "evidence_sha256": "4969dc26fcccb7612149f6dbd6487bbd1549b85d03eaab64320d27de1f52f73e"
+  },
+  "remote_checks": [
+    "host identity",
+    "frozen package and checkpoint hashes",
+    "five ASE input loads",
+    "atom order and Selective Dynamics",
+    "three shell syntax checks",
+    "no prior output"
+  ],
+  "scientific_acceptance": false
+}

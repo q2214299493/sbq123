@@ -1,0 +1,47 @@
+{
+  "user_authorization": "2026-10-06: 提交gpu加速",
+  "action": "SUBMIT_BOUNDED_AQCAT25_ADSORPTION_PRE_RELAXATION_ONLY",
+  "candidate_review_sha256": "e0e0fc7415610d13d5b1a92274035520f906a167122797ba44e8b9a6f32fee76",
+  "original_review_sha256": "6af2282eed83ed8d400d806730786029a2646fcf6ec7133cc073461031b99ac2",
+  "prior_runtime_manifest_sha256": "efa84ef9a0a77ab4e4ec1aaa94b6fe83be4980a434eb25c410241e080a27ac03",
+  "source_kind": "reviewed_user_owned_local_CARE_template_variants_not_verified_minima",
+  "selected": [
+    {
+      "name": "01_extra1",
+      "structure_sha256": "a550e6519ac1378e896733416a989401b47a457361fc893ff89982b86589ac1d"
+    },
+    {
+      "name": "02_extra1",
+      "structure_sha256": "5e82ab88edcac7e5128b17c5298c0a08f462ae77a1be790c5a4934d687d4a384"
+    },
+    {
+      "name": "02_extra2",
+      "structure_sha256": "4f114b9fbc1729a6c2d020c79a4fcbda59300faeabb207e881a883f1872f42f7"
+    },
+    {
+      "name": "03_extra1",
+      "structure_sha256": "d066e4e3a741ed12a2ce785adace618d679afef7adf57380ded05c0fdb26042b"
+    },
+    {
+      "name": "03_extra2",
+      "structure_sha256": "cb66e8ea3814f1e1c411f471b71b3787ce8b3a6c06f10927fbc12e93cca49ddf"
+    }
+  ],
+  "checkpoint_sha256": "e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50",
+  "limits": {
+    "steps_per_candidate": 80,
+    "fmax_eV_per_A": 0.1,
+    "gpu_count": 1,
+    "cpu_count": 4,
+    "host_memory_GiB": 32,
+    "walltime_minutes": 120
+  },
+  "constraints": "Only bottom18 Fe fixed. No internal-bond, height or adsorption-site forces.",
+  "chemical_review": "All adsorbate pairs monitored. Empty runner constraint list is not a chemistry verdict; canonical exact-graph review is required after return.",
+  "restrictions": {
+    "submit_vasp": false,
+    "fine_tune": false,
+    "automatic_resubmit": false,
+    "scientific_acceptance": false
+  }
+}
