@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-10-06T15:10:21.050017+00:00",
+  "recorded_at": "2026-10-06T15:10:21.050017+00:00",
+  "event_id": "task-fe110-five-c2-adsorption-supplement-reviewed-20261006",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "adsorption_workflow"
+  },
+  "summary": "Five additional intact local-template adsorption starting candidates constructed for user review; no new jobs.",
+  "evidence": [
+    {
+      "locator": "archive/fe110_five_c2_adsorption_20261006/supplement_plan.json",
+      "sha256": "b8b10624f74c42d49a31177b920d34a88f9a812c026559f7ef9a7caf67cc91b7",
+      "authority": "repository_document",
+      "observed_at": "2026-10-06T15:10:21.050017+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/supplement_v1/candidate_review.json",
+      "sha256": "e0e0fc7415610d13d5b1a92274035520f906a167122797ba44e8b9a6f32fee76",
+      "authority": "module_validation",
+      "observed_at": "2026-10-06T15:10:21.050017+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/supplement_v1/validation_summary.json",
+      "sha256": "ff7c23c24e325518883fadc91eb5234d50521b185b4f2c5bd20675e1eac323a9",
+      "authority": "module_validation",
+      "observed_at": "2026-10-06T15:10:21.050017+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/supplement_v1/structure_review.png",
+      "sha256": "7559949d3256bdf2da92bdcf7b140c3d2d579447618faf9b928d14d65ba84aaf",
+      "authority": "structure_output",
+      "observed_at": "2026-10-06T15:10:21.050017+00:00"
+    },
+    {
+      "locator": "archive/fe110_five_c2_adsorption_20261006/SUPPLEMENT_REVIEW.md",
+      "sha256": "16f8a6223cac2e02933dbaba5eeef86dea72cf0a2001820f9c5001522e964b57",
+      "authority": "repository_document",
+      "observed_at": "2026-10-06T15:10:21.050017+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "payload": {
+    "objective": "Optimize the five exact Fe110 C2 adsorption identities with reviewed GPU candidates and a chemistry-preserving direct-VASP fallback.",
+    "phase": "active",
+    "current_evidence": [
+      "GPU2139 returned12 validated predictions. Chemistry review excluded fragmented02_cfg1 and03_cfg0 output;01_cfg0 duplicates01_cfg2.",
+      "Nine intact distinct GPU outputs plus intact pre-GPU03_cfg0 were submitted as10 ordinary adsorption relaxations, species counts2/1/1/3/3.",
+      "LSF9839748-9839757 allPEND in the saved snapshot;32MPI ranks each. Electronic/ionic convergence not yet assessed.",
+      "Production PBE/PAW-PBE,ENCUT400,Gamma5x5x1,SIGMA0.20,Fe45five-layer,fixedFe0-17 preserved; no artificial bond restraints.",
+      "Registry received submission/job/input metadata only, no predicted energy or accepted adsorption result. Prior TS work remains deferred.",
+      "37 relevant tests pass;10 extended lifecycle tests have existing stdin mock incompatibility; no unrelated source repair.",
+      "User requested supplementation. Five additional candidates01_extra1,02_extra1/2,03_extra1/2 built from exact local templates, not externally proven minima.",
+      "All5exported initial geometries pass canonical chemistry/contacts/cell/fixed-layer review; clean-slab symmetry and H permutation checks exclude periodic/reflection/height-only duplicates.",
+      "Nominal input counts would be3/3/3/3/3; the new5are not relaxed and may merge or fragment later. Existing10VASP jobs unchanged; no fresh scheduler observation in this step.",
+      "Python syntax,Ruff,4bounded tests and5POSCAR reparse checks pass. NewGPU/VASP submissions remain unauthorized."
+    ],
+    "one_executable_step": "Review the five supplemental structures with the user; after separate authorization prepare/run a bounded AQCat25 batch and return results for chemistry/domain/duplicate review.",
+    "submission_boundary": "Existing10VASP jobs unchanged. Five new initial structures await review; no new GPU/VASP execution or automatic resubmission authorized.",
+    "done_when": [
+      "Completed VASP candidates have convergence, exact chemical identity, site and duplicate reviews before accepted result/energy promotion."
+    ],
+    "constraints": [
+      "Use true Fe110 Fe45 five-layer branch, fixedFe0-17 and SIGMA0.20 production method.",
+      "Do not substitute acetylene for CCH2 or mix the three C2HO graphs.",
+      "Candidate counts follow distinct supported motifs; no blind three-site padding or ML global-minimum claims.",
+      "AQCat25 is adsorption pre-relaxation primary; results return through work before VASP."
+    ],
+    "authoritative_references": [
+      "archive/fe110_five_c2_adsorption_20261006/REVIEW.md",
+      "archive/fe110_five_c2_adsorption_20261006/request_and_retrieval.json",
+      "calculations/fe110_five_c2_adsorption_20261006/candidate_review.json",
+      "archive/fe110_five_c2_adsorption_20261006/literature_review.json",
+      "calculations/fe110_five_c2_adsorption_20261006/gpu_submission_evidence_2139.json",
+      "calculations/fe110_five_c2_adsorption_20261006/gpu_batch_v4/batch_manifest.json",
+      "calculations/fe110_five_c2_adsorption_20261006/gpu_return_review.json",
+      "calculations/fe110_five_c2_adsorption_20261006/vasp_batch_v1/batch_manifest.json",
+      "calculations/fe110_five_c2_adsorption_20261006/vasp_batch_v1/submission_summary.json",
+      "calculations/fe110_five_c2_adsorption_20261006/vasp_batch_v1/registry_receipt.json",
+      "archive/fe110_five_c2_adsorption_20261006/SUPPLEMENT_REVIEW.md",
+      "calculations/fe110_five_c2_adsorption_20261006/supplement_v1/candidate_review.json",
+      "calculations/fe110_five_c2_adsorption_20261006/supplement_v1/structure_review.png"
+    ]
+  },
+  "supersedes": [
+    "task-fe110-five-c2-adsorption-vasp-submitted-20261006"
+  ]
+}

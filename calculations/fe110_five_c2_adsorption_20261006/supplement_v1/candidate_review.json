@@ -1,0 +1,876 @@
+{
+  "plan_path": "C:\\Users\\86177\\Desktop\\work\\archive\\fe110_five_c2_adsorption_20261006\\supplement_plan.json",
+  "plan_sha256": "b8b10624f74c42d49a31177b920d34a88f9a812c026559f7ef9a7caf67cc91b7",
+  "slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+  "source_review_sha256": "6af2282eed83ed8d400d806730786029a2646fcf6ec7133cc073461031b99ac2",
+  "candidates": [
+    {
+      "name": "01_extra1",
+      "species_id": "01",
+      "source_config": "1",
+      "anchor_global_0based": 46,
+      "site": "long_bridge",
+      "azimuth_deg": 0.0,
+      "tilt_deg": 25.0,
+      "axis_from": 46,
+      "axis_to": 45,
+      "hypothesis": "bare C at long bridge, CH end tilted outward along the long Fe-row direction",
+      "connectivity": "[C][CH]",
+      "care_code": "XEHVFKKSDRMODV-UHFFFAOYSA-N*",
+      "source_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\01_C2H_XEHVFKKSDRMODV\\cfg1\\POSCAR",
+      "source_sha256": "82236a5045057fdbc25f87e0c1048004f2846cddfc9119ea24cbf0725c522266",
+      "geometry": {
+        "verdict": "pass",
+        "site_label": "η²(C,C)/t-lb",
+        "atom_site_details": [
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 2.270557719316129,
+            "site": "top",
+            "lateral_offset_angstrom": 0.018679153890577456
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.1499999999999972,
+            "site": "long_bridge",
+            "lateral_offset_angstrom": 4.707814750370964e-16
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 2.1499999999999972,
+        "nearest_h_fe_angstrom": 2.8800341029512304,
+        "minimum_adsorbate_height_angstrom": 1.6199686732910816,
+        "maximum_bond_length_change_angstrom": 6.661338147750939e-16,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": true,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [],
+        "needs_early_relaxation_review": false
+      },
+      "bond_distances": [
+        {
+          "atoms_0based": [
+            45,
+            46
+          ],
+          "distance_A": 1.5389782174380437
+        },
+        {
+          "atoms_0based": [
+            45,
+            47
+          ],
+          "distance_A": 1.0642933799884358
+        }
+      ],
+      "nearest_Fe": [
+        {
+          "atom": "C45",
+          "nearest_Fe": [
+            {
+              "index_0based": 44,
+              "distance_A": 2.270557719316129
+            },
+            {
+              "index_0based": 37,
+              "distance_A": 3.3311182991502926
+            },
+            {
+              "index_0based": 41,
+              "distance_A": 3.331139008233439
+            }
+          ]
+        },
+        {
+          "atom": "C46",
+          "nearest_Fe": [
+            {
+              "index_0based": 43,
+              "distance_A": 2.1499999999999972
+            },
+            {
+              "index_0based": 44,
+              "distance_A": 2.150011613854662
+            },
+            {
+              "index_0based": 41,
+              "distance_A": 2.573060465067838
+            }
+          ]
+        },
+        {
+          "atom": "H47",
+          "nearest_Fe": [
+            {
+              "index_0based": 44,
+              "distance_A": 2.8800341029512304
+            },
+            {
+              "index_0based": 42,
+              "distance_A": 3.3072178689556364
+            },
+            {
+              "index_0based": 39,
+              "distance_A": 3.407905741980276
+            }
+          ]
+        }
+      ],
+      "symmetry_comparison": {
+        "operation_count": 36,
+        "height_shift_removed": true,
+        "closest": [
+          "original_cfg2",
+          0.942016092522891
+        ],
+        "all_RMSD_A": {
+          "original_cfg0": 0.972053753560266,
+          "original_cfg1": 1.3522144668632905,
+          "original_cfg2": 0.942016092522891,
+          "GPU_01_cfg1": 1.0925139587619626,
+          "GPU_01_cfg2": 1.3751126578647013
+        }
+      },
+      "status": "GEOMETRY_PASS_REVIEW_REQUIRED_NOT_RELAXED",
+      "structure_path": "calculations/fe110_five_c2_adsorption_20261006/supplement_v1/01_extra1/POSCAR",
+      "structure_sha256": "a550e6519ac1378e896733416a989401b47a457361fc893ff89982b86589ac1d"
+    },
+    {
+      "name": "02_extra1",
+      "species_id": "02",
+      "source_config": "2",
+      "anchor_global_0based": 46,
+      "site": "long_bridge",
+      "azimuth_deg": 0.0,
+      "tilt_deg": 35.0,
+      "axis_from": 46,
+      "axis_to": 45,
+      "hypothesis": "bare C at long bridge, intact CH2 end tilted outward along the long Fe-row direction",
+      "connectivity": "[C][CH2]",
+      "care_code": "SNVLJLYUUXKWOJ-UHFFFAOYSA-N*",
+      "source_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\02_C2H2_SNVLJLYUUXKWOJ\\cfg2\\POSCAR",
+      "source_sha256": "ebd14fc538fc8644ed3e93f29f216f5d5ab1940a3352c7174cc64c203ba43c01",
+      "geometry": {
+        "verdict": "pass",
+        "site_label": "η²(C,C)/t-lb",
+        "atom_site_details": [
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 2.5081983634872933,
+            "site": "top",
+            "lateral_offset_angstrom": 0.15165732483445668
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.1499999999999972,
+            "site": "long_bridge",
+            "lateral_offset_angstrom": 4.707814750370964e-16
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 2.1499999999999972,
+        "nearest_h_fe_angstrom": 2.6444237642660724,
+        "minimum_adsorbate_height_angstrom": 1.6199686732910816,
+        "maximum_bond_length_change_angstrom": 1.3322676295501878e-15,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": true,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [],
+        "needs_early_relaxation_review": false
+      },
+      "bond_distances": [
+        {
+          "atoms_0based": [
+            45,
+            46
+          ],
+          "distance_A": 1.54038515326282
+        },
+        {
+          "atoms_0based": [
+            45,
+            47
+          ],
+          "distance_A": 1.0828348603835982
+        },
+        {
+          "atoms_0based": [
+            45,
+            48
+          ],
+          "distance_A": 1.0829092863825498
+        }
+      ],
+      "nearest_Fe": [
+        {
+          "atom": "C45",
+          "nearest_Fe": [
+            {
+              "index_0based": 44,
+              "distance_A": 2.5081983634872933
+            },
+            {
+              "index_0based": 37,
+              "distance_A": 3.443260831529718
+            },
+            {
+              "index_0based": 41,
+              "distance_A": 3.443278715466498
+            }
+          ]
+        },
+        {
+          "atom": "C46",
+          "nearest_Fe": [
+            {
+              "index_0based": 43,
+              "distance_A": 2.1499999999999972
+            },
+            {
+              "index_0based": 44,
+              "distance_A": 2.150011613854662
+            },
+            {
+              "index_0based": 41,
+              "distance_A": 2.573060465067838
+            }
+          ]
+        },
+        {
+          "atom": "H47",
+          "nearest_Fe": [
+            {
+              "index_0based": 44,
+              "distance_A": 3.2898181625676286
+            },
+            {
+              "index_0based": 38,
+              "distance_A": 3.6642472208841443
+            },
+            {
+              "index_0based": 37,
+              "distance_A": 3.696767570673675
+            }
+          ]
+        },
+        {
+          "atom": "H48",
+          "nearest_Fe": [
+            {
+              "index_0based": 44,
+              "distance_A": 2.6444237642660724
+            },
+            {
+              "index_0based": 39,
+              "distance_A": 2.85377698495466
+            },
+            {
+              "index_0based": 41,
+              "distance_A": 3.3599865018224073
+            }
+          ]
+        }
+      ],
+      "symmetry_comparison": {
+        "operation_count": 36,
+        "height_shift_removed": true,
+        "closest": [
+          "GPU_02_cfg2",
+          0.74549461818984
+        ],
+        "all_RMSD_A": {
+          "original_cfg0": 1.2229484667803716,
+          "original_cfg2": 1.2629500193370315,
+          "original_cfg1": 1.1231741937566484,
+          "GPU_02_cfg2": 0.74549461818984
+        }
+      },
+      "status": "GEOMETRY_PASS_REVIEW_REQUIRED_NOT_RELAXED",
+      "structure_path": "calculations/fe110_five_c2_adsorption_20261006/supplement_v1/02_extra1/POSCAR",
+      "structure_sha256": "5e82ab88edcac7e5128b17c5298c0a08f462ae77a1be790c5a4934d687d4a384"
+    },
+    {
+      "name": "02_extra2",
+      "species_id": "02",
+      "source_config": "2",
+      "anchor_global_0based": 46,
+      "site": "short_bridge",
+      "azimuth_deg": 90.0,
+      "tilt_deg": 40.0,
+      "axis_from": 46,
+      "axis_to": 45,
+      "hypothesis": "bare C at short bridge, intact CH2 end tilted outward across the long Fe rows",
+      "connectivity": "[C][CH2]",
+      "care_code": "SNVLJLYUUXKWOJ-UHFFFAOYSA-N*",
+      "source_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\02_C2H2_SNVLJLYUUXKWOJ\\cfg2\\POSCAR",
+      "source_sha256": "ebd14fc538fc8644ed3e93f29f216f5d5ab1940a3352c7174cc64c203ba43c01",
+      "geometry": {
+        "verdict": "pass",
+        "site_label": "η¹(C)/sb",
+        "atom_site_details": [
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 2.8524676275983425,
+            "site": "top",
+            "lateral_offset_angstrom": 0.7293992713608753
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.15,
+            "site": "short_bridge",
+            "lateral_offset_angstrom": 0.0
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 2.15,
+        "nearest_h_fe_angstrom": 2.9842625052298715,
+        "minimum_adsorbate_height_angstrom": 1.7673975526393857,
+        "maximum_bond_length_change_angstrom": 1.5543122344752192e-15,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": true,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [],
+        "needs_early_relaxation_review": false
+      },
+      "bond_distances": [
+        {
+          "atoms_0based": [
+            45,
+            46
+          ],
+          "distance_A": 1.5403851532628186
+        },
+        {
+          "atoms_0based": [
+            45,
+            47
+          ],
+          "distance_A": 1.0828348603835998
+        },
+        {
+          "atoms_0based": [
+            45,
+            48
+          ],
+          "distance_A": 1.08290928638255
+        }
+      ],
+      "nearest_Fe": [
+        {
+          "atom": "C45",
+          "nearest_Fe": [
+            {
+              "index_0based": 43,
+              "distance_A": 2.8524676275983425
+            },
+            {
+              "index_0based": 37,
+              "distance_A": 3.3780018439439528
+            },
+            {
+              "index_0based": 44,
+              "distance_A": 3.4831788175303706
+            }
+          ]
+        },
+        {
+          "atom": "C46",
+          "nearest_Fe": [
+            {
+              "index_0based": 41,
+              "distance_A": 2.15
+            },
+            {
+              "index_0based": 43,
+              "distance_A": 2.1500227624347077
+            },
+            {
+              "index_0based": 40,
+              "distance_A": 2.9356500657219233
+            }
+          ]
+        },
+        {
+          "atom": "H47",
+          "nearest_Fe": [
+            {
+              "index_0based": 43,
+              "distance_A": 3.4706017344016193
+            },
+            {
+              "index_0based": 36,
+              "distance_A": 4.058062998963255
+            },
+            {
+              "index_0based": 37,
+              "distance_A": 4.13483458538137
+            }
+          ]
+        },
+        {
+          "atom": "H48",
+          "nearest_Fe": [
+            {
+              "index_0based": 37,
+              "distance_A": 2.9842625052298715
+            },
+            {
+              "index_0based": 44,
+              "distance_A": 3.186352197966768
+            },
+            {
+              "index_0based": 43,
+              "distance_A": 3.2834258722467324
+            }
+          ]
+        }
+      ],
+      "symmetry_comparison": {
+        "operation_count": 36,
+        "height_shift_removed": true,
+        "closest": [
+          "GPU_02_cfg2",
+          1.0040111472120894
+        ],
+        "all_RMSD_A": {
+          "original_cfg0": 1.2238602923476292,
+          "original_cfg2": 1.4249794023454414,
+          "original_cfg1": 1.3125940639695919,
+          "GPU_02_cfg2": 1.0040111472120894,
+          "02_extra1": 1.3039860923253124
+        }
+      },
+      "status": "GEOMETRY_PASS_REVIEW_REQUIRED_NOT_RELAXED",
+      "structure_path": "calculations/fe110_five_c2_adsorption_20261006/supplement_v1/02_extra2/POSCAR",
+      "structure_sha256": "4f114b9fbc1729a6c2d020c79a4fcbda59300faeabb207e881a883f1872f42f7"
+    },
+    {
+      "name": "03_extra1",
+      "species_id": "03",
+      "source_config": "0",
+      "anchor_global_0based": 45,
+      "site": "short_bridge",
+      "binding_distance_A": 2.35,
+      "azimuth_deg": 0.0,
+      "tilt_deg": 15.0,
+      "axis_from": 45,
+      "axis_to": 46,
+      "hypothesis": "CH carbon at short bridge, intact C-C-O skeleton side-on/tilted along the long Fe-row direction",
+      "connectivity": "[CH][C][O]",
+      "care_code": "QEJQAPYSVNHDJF-UHFFFAOYSA-N*",
+      "source_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\03_C2HO_QEJQAPYSVNHDJF\\cfg0\\POSCAR",
+      "source_sha256": "bae70901a1b6eab91e6f3b7d0b87bdcc536fb4455bc768fe5fff85712a0c9873",
+      "geometry": {
+        "verdict": "pass",
+        "site_label": "η¹(C)/sb",
+        "atom_site_details": [
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 2.3500000000000005,
+            "site": "short_bridge",
+            "lateral_offset_angstrom": 0.0
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.6797596031040625,
+            "site": "short_bridge",
+            "lateral_offset_angstrom": 0.06915448632397671
+          },
+          {
+            "atom": "O1",
+            "nearest_fe_angstrom": 3.02251032375053,
+            "site": "short_bridge",
+            "lateral_offset_angstrom": 0.00930244953191806
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 2.3500000000000005,
+        "nearest_h_fe_angstrom": 2.0243001018123294,
+        "minimum_adsorbate_height_angstrom": 1.731072856562589,
+        "maximum_bond_length_change_angstrom": 2.220446049250313e-15,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": true,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [],
+        "needs_early_relaxation_review": false
+      },
+      "bond_distances": [
+        {
+          "atoms_0based": [
+            45,
+            46
+          ],
+          "distance_A": 1.5349226227712738
+        },
+        {
+          "atoms_0based": [
+            45,
+            48
+          ],
+          "distance_A": 1.0618762751050206
+        },
+        {
+          "atoms_0based": [
+            46,
+            47
+          ],
+          "distance_A": 1.4013804173680644
+        }
+      ],
+      "nearest_Fe": [
+        {
+          "atom": "C45",
+          "nearest_Fe": [
+            {
+              "index_0based": 41,
+              "distance_A": 2.3500000000000005
+            },
+            {
+              "index_0based": 43,
+              "distance_A": 2.3500236354278727
+            },
+            {
+              "index_0based": 40,
+              "distance_A": 3.085135752206322
+            }
+          ]
+        },
+        {
+          "atom": "C46",
+          "nearest_Fe": [
+            {
+              "index_0based": 44,
+              "distance_A": 2.6797596031040625
+            },
+            {
+              "index_0based": 41,
+              "distance_A": 2.7160067585284877
+            },
+            {
+              "index_0based": 39,
+              "distance_A": 3.313785249099415
+            }
+          ]
+        },
+        {
+          "atom": "O47",
+          "nearest_Fe": [
+            {
+              "index_0based": 39,
+              "distance_A": 3.02251032375053
+            },
+            {
+              "index_0based": 44,
+              "distance_A": 3.0269170003483326
+            },
+            {
+              "index_0based": 42,
+              "distance_A": 3.620090094966065
+            }
+          ]
+        },
+        {
+          "atom": "H48",
+          "nearest_Fe": [
+            {
+              "index_0based": 43,
+              "distance_A": 2.0243001018123294
+            },
+            {
+              "index_0based": 40,
+              "distance_A": 2.278969425622892
+            },
+            {
+              "index_0based": 41,
+              "distance_A": 2.645227493690498
+            }
+          ]
+        }
+      ],
+      "symmetry_comparison": {
+        "operation_count": 36,
+        "height_shift_removed": true,
+        "closest": [
+          "original_cfg2",
+          1.1770213863658148
+        ],
+        "all_RMSD_A": {
+          "original_cfg0": 1.1770218207418837,
+          "original_cfg1": 1.1770219535205484,
+          "original_cfg2": 1.1770213863658148
+        }
+      },
+      "status": "GEOMETRY_PASS_REVIEW_REQUIRED_NOT_RELAXED",
+      "structure_path": "calculations/fe110_five_c2_adsorption_20261006/supplement_v1/03_extra1/POSCAR",
+      "structure_sha256": "d066e4e3a741ed12a2ce785adace618d679afef7adf57380ded05c0fdb26042b"
+    },
+    {
+      "name": "03_extra2",
+      "species_id": "03",
+      "source_config": "0",
+      "anchor_global_0based": 45,
+      "site": "long_bridge",
+      "binding_distance_A": 2.35,
+      "azimuth_deg": 90.0,
+      "tilt_deg": 10.0,
+      "axis_from": 45,
+      "axis_to": 46,
+      "hypothesis": "CH carbon at long bridge, intact C-C-O skeleton tilted across the long Fe rows",
+      "connectivity": "[CH][C][O]",
+      "care_code": "QEJQAPYSVNHDJF-UHFFFAOYSA-N*",
+      "source_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\03_C2HO_QEJQAPYSVNHDJF\\cfg0\\POSCAR",
+      "source_sha256": "bae70901a1b6eab91e6f3b7d0b87bdcc536fb4455bc768fe5fff85712a0c9873",
+      "geometry": {
+        "verdict": "pass",
+        "site_label": "η³(C,C,O)/lb-t-h",
+        "atom_site_details": [
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 2.3499999999999983,
+            "site": "long_bridge",
+            "lateral_offset_angstrom": 4.707814750370964e-16
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.198616604353291,
+            "site": "top",
+            "lateral_offset_angstrom": 0.48742510840195163
+          },
+          {
+            "atom": "O1",
+            "nearest_fe_angstrom": 2.548691350530687,
+            "site": "hollow",
+            "lateral_offset_angstrom": 0.43994671593356416
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 2.198616604353291,
+        "nearest_h_fe_angstrom": 1.9429140553032398,
+        "minimum_adsorbate_height_angstrom": 1.6929054635056513,
+        "maximum_bond_length_change_angstrom": 4.440892098500626e-16,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": true,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [],
+        "needs_early_relaxation_review": false
+      },
+      "bond_distances": [
+        {
+          "atoms_0based": [
+            45,
+            46
+          ],
+          "distance_A": 1.5349226227712738
+        },
+        {
+          "atoms_0based": [
+            45,
+            48
+          ],
+          "distance_A": 1.0618762751050215
+        },
+        {
+          "atoms_0based": [
+            46,
+            47
+          ],
+          "distance_A": 1.401380417368067
+        }
+      ],
+      "nearest_Fe": [
+        {
+          "atom": "C45",
+          "nearest_Fe": [
+            {
+              "index_0based": 43,
+              "distance_A": 2.3499999999999983
+            },
+            {
+              "index_0based": 44,
+              "distance_A": 2.3500123131694743
+            },
+            {
+              "index_0based": 41,
+              "distance_A": 2.742375960107122
+            }
+          ]
+        },
+        {
+          "atom": "C46",
+          "nearest_Fe": [
+            {
+              "index_0based": 37,
+              "distance_A": 2.198616604353291
+            },
+            {
+              "index_0based": 43,
+              "distance_A": 2.9797744828325996
+            },
+            {
+              "index_0based": 44,
+              "distance_A": 2.979859408394619
+            }
+          ]
+        },
+        {
+          "atom": "O47",
+          "nearest_Fe": [
+            {
+              "index_0based": 37,
+              "distance_A": 2.548691350530687
+            },
+            {
+              "index_0based": 39,
+              "distance_A": 2.9867008114313807
+            },
+            {
+              "index_0based": 40,
+              "distance_A": 2.986812823577326
+            }
+          ]
+        },
+        {
+          "atom": "H48",
+          "nearest_Fe": [
+            {
+              "index_0based": 41,
+              "distance_A": 1.9429140553032398
+            },
+            {
+              "index_0based": 44,
+              "distance_A": 2.4408246221991687
+            },
+            {
+              "index_0based": 43,
+              "distance_A": 2.440876347005985
+            }
+          ]
+        }
+      ],
+      "symmetry_comparison": {
+        "operation_count": 36,
+        "height_shift_removed": true,
+        "closest": [
+          "original_cfg1",
+          1.8096058517446276
+        ],
+        "all_RMSD_A": {
+          "original_cfg0": 1.8096058757389044,
+          "original_cfg1": 1.8096058517446276,
+          "original_cfg2": 1.8096063589033253,
+          "03_extra1": 2.102864372964771
+        }
+      },
+      "status": "GEOMETRY_PASS_REVIEW_REQUIRED_NOT_RELAXED",
+      "structure_path": "calculations/fe110_five_c2_adsorption_20261006/supplement_v1/03_extra2/POSCAR",
+      "structure_sha256": "cb66e8ea3814f1e1c411f471b71b3787ce8b3a6c06f10927fbc12e93cca49ddf"
+    }
+  ],
+  "gpu_submitted": false,
+  "vasp_submitted": false,
+  "after_addition_candidate_counts": [
+    3,
+    3,
+    3,
+    3,
+    3
+  ],
+  "count_caution": "15 initial candidates, NOT15 distinct converged minima; relaxation may merge or dissociate.",
+  "scientific_acceptance": false
+}

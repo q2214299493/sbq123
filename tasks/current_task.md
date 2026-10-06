@@ -13,6 +13,10 @@ Optimize the five exact Fe110 C2 adsorption identities with reviewed GPU candida
 - Production PBE/PAW-PBE,ENCUT400,Gamma5x5x1,SIGMA0.20,Fe45five-layer,fixedFe0-17 preserved; no artificial bond restraints.
 - Registry received submission/job/input metadata only, no predicted energy or accepted adsorption result. Prior TS work remains deferred.
 - 37 relevant tests pass;10 extended lifecycle tests have existing stdin mock incompatibility; no unrelated source repair.
+- User requested supplementation. Five additional candidates01_extra1,02_extra1/2,03_extra1/2 built from exact local templates, not externally proven minima.
+- All5exported initial geometries pass canonical chemistry/contacts/cell/fixed-layer review; clean-slab symmetry and H permutation checks exclude periodic/reflection/height-only duplicates.
+- Nominal input counts would be3/3/3/3/3; the new5are not relaxed and may merge or fragment later. Existing10VASP jobs unchanged; no fresh scheduler observation in this step.
+- Python syntax,Ruff,4bounded tests and5POSCAR reparse checks pass. NewGPU/VASP submissions remain unauthorized.
 
 ## Lifecycle Status
 
@@ -20,11 +24,11 @@ Optimize the five exact Fe110 C2 adsorption identities with reviewed GPU candida
 
 ## One Executable Step
 
-At the next authorized status check, inspect queue and compact electronic/ionic progress of9839748-9839757; after completion review target connectivity/sites/duplicates before result registration.
+Review the five supplemental structures with the user; after separate authorization prepare/run a bounded AQCat25 batch and return results for chemistry/domain/duplicate review.
 
 ## Submission Boundary
 
-This10-job adsorption batch explicitly authorized and submitted; no automatic resubmission, TS, frequency or gas-reference submission.
+Existing10VASP jobs unchanged. Five new initial structures await review; no new GPU/VASP execution or automatic resubmission authorized.
 
 ## Authoritative Constraint
 
@@ -53,4 +57,7 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 - calculations/fe110_five_c2_adsorption_20261006/vasp_batch_v1/batch_manifest.json
 - calculations/fe110_five_c2_adsorption_20261006/vasp_batch_v1/submission_summary.json
 - calculations/fe110_five_c2_adsorption_20261006/vasp_batch_v1/registry_receipt.json
+- archive/fe110_five_c2_adsorption_20261006/SUPPLEMENT_REVIEW.md
+- calculations/fe110_five_c2_adsorption_20261006/supplement_v1/candidate_review.json
+- calculations/fe110_five_c2_adsorption_20261006/supplement_v1/structure_review.png
 <!-- state-handoff:end current_task -->

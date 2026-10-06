@@ -1,0 +1,19 @@
+{
+  "request": "再补足其他的",
+  "scope": "Build five review-only additional intact candidates for species01/02/03; no GPU or VASP submission authorized by this plan.",
+  "source_kind": "user_owned_local_CARE_geometry_template",
+  "scientific_status": "experimental_orientation_and_binding_variants_NOT_established_stable_motifs",
+  "literature_status": "Existing bounded whitelist NO_WHITELIST_MATCH and publisher SI review retained; no claim that literature establishes three minima.",
+  "binding_distance_A": 2.15,
+  "candidates": [
+    {"name":"01_extra1","species_id":"01","source_config":"1","anchor_global_0based":46,"site":"long_bridge","azimuth_deg":0.0,"tilt_deg":25.0,"axis_from":46,"axis_to":45,"hypothesis":"bare C at long bridge, CH end tilted outward along the long Fe-row direction"},
+    {"name":"02_extra1","species_id":"02","source_config":"2","anchor_global_0based":46,"site":"long_bridge","azimuth_deg":0.0,"tilt_deg":35.0,"axis_from":46,"axis_to":45,"hypothesis":"bare C at long bridge, intact CH2 end tilted outward along the long Fe-row direction"},
+    {"name":"02_extra2","species_id":"02","source_config":"2","anchor_global_0based":46,"site":"short_bridge","azimuth_deg":90.0,"tilt_deg":40.0,"axis_from":46,"axis_to":45,"hypothesis":"bare C at short bridge, intact CH2 end tilted outward across the long Fe rows"},
+    {"name":"03_extra1","species_id":"03","source_config":"0","anchor_global_0based":45,"site":"short_bridge","binding_distance_A":2.35,"azimuth_deg":0.0,"tilt_deg":15.0,"axis_from":45,"axis_to":46,"hypothesis":"CH carbon at short bridge, intact C-C-O skeleton side-on/tilted along the long Fe-row direction"},
+    {"name":"03_extra2","species_id":"03","source_config":"0","anchor_global_0based":45,"site":"long_bridge","binding_distance_A":2.35,"azimuth_deg":90.0,"tilt_deg":10.0,"axis_from":45,"axis_to":46,"hypothesis":"CH carbon at long bridge, intact C-C-O skeleton tilted across the long Fe rows"}
+  ],
+  "excluded": ["height-only variants", "periodic translations or clean-slab symmetry equivalents", "acetylene substitution", "broken C-C/C-H fragments", "blind full-site sweep"],
+  "review_required_before_execution": true,
+  "predicted_rank": null,
+  "confidence": "Needs review; geometric proposals only"
+}
