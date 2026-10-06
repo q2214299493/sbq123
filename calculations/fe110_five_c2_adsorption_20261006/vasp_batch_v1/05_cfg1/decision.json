@@ -1,0 +1,748 @@
+{
+  "schema_version": 2,
+  "gate": "AUTHORITATIVE_NEB_EXECUTION_GATE",
+  "generated_at_utc": "2026-10-06T14:45:15.307872+00:00",
+  "state_sha256": "b7bbbfbeb52e9b3d0dd27518ebcd7cf1216676295ee91b30d6efe9cbeb9a02ae",
+  "DECISION": "READY_FOR_ADSORPTION_RELAXATION",
+  "REASON_CODES": [],
+  "EVIDENCE": {
+    "geometry": {},
+    "analysis": {},
+    "thresholds": {
+      "schema_version": 1,
+      "system": "true_bcc_alpha_Fe_110_3x3",
+      "dataset_consistency": {
+        "status": "selected_5_layer_user_directed",
+        "rule": "All reportable clean-slab, adsorption, endpoint, reaction, and NEB data must use one selected slab thickness.",
+        "selected_layers": 5,
+        "convergence_reference_layers": 7,
+        "note": "The active production dataset uses five layers by explicit user decision. Seven-layer calculations may exist only as validation and their energies must not be mixed into production."
+      },
+      "scope": {
+        "functional": "PBE",
+        "incar_gga": "PE",
+        "spin_polarized": true,
+        "bulk_source_job": 9556519,
+        "bulk_lattice_A": 2.8269483674,
+        "potcar_order": [
+          "Fe",
+          "C",
+          "O"
+        ],
+        "encut_eV": 400,
+        "vacuum_A": 15.0,
+        "fixed_bottom_layers": 2
+      },
+      "fast_screening": {
+        "purpose": [
+          "adsorption_site_screening",
+          "initial_geometry_relaxation",
+          "reaction_path_exploration"
+        ],
+        "layers": 5,
+        "clean_slab_atoms": 45,
+        "gamma_mesh": [
+          5,
+          5,
+          1
+        ],
+        "incar": {
+          "PREC": "Accurate",
+          "EDIFF": 1e-05,
+          "EDIFFG": -0.05,
+          "ISPIN": 2,
+          "ISMEAR": 1,
+          "SIGMA": 0.2,
+          "ALGO": "Fast",
+          "LREAL": false,
+          "LASPH": true,
+          "NELM": 200,
+          "NELMIN": 5,
+          "IBRION": 2,
+          "POTIM": 0.2,
+          "ISIF": 2,
+          "NSW": 200,
+          "ISYM": 0,
+          "LDIPOL": false,
+          "LCHARG": false,
+          "LWAVE": false
+        },
+        "acceptance": "The five-layer production model is selected by explicit user decision; screening results remain interim until reviewed and recomputed with the compatible five-layer final-static protocol."
+      },
+      "routine_production": {
+        "purpose": [
+          "adsorption_geometry",
+          "endpoint_relaxation"
+        ],
+        "layers": 5,
+        "clean_slab_atoms": 45,
+        "gamma_mesh": [
+          5,
+          5,
+          1
+        ],
+        "incar": {
+          "PREC": "Accurate",
+          "EDIFF": 1e-05,
+          "EDIFFG": -0.02,
+          "ISPIN": 2,
+          "ISMEAR": 1,
+          "SIGMA": 0.2,
+          "ALGO": "Fast",
+          "LREAL": false,
+          "LASPH": true,
+          "NELM": 200,
+          "NELMIN": 5,
+          "IBRION": 2,
+          "POTIM": 0.2,
+          "ISIF": 2,
+          "NSW": 300,
+          "ISYM": 0,
+          "LDIPOL": false,
+          "LCHARG": false,
+          "LWAVE": false
+        },
+        "magmom_rule": "Fe=2.2 mu_B; C=0.0; O=0.0; preserve POSCAR species groups"
+      },
+      "ordinary_neb": {
+        "layers": 5,
+        "gamma_mesh": [
+          5,
+          5,
+          1
+        ],
+        "cores": 128,
+        "performance_incar": {
+          "NPAR": 4
+        },
+        "incar": {
+          "PREC": "Accurate",
+          "EDIFF": 1e-05,
+          "EDIFFG": -0.05,
+          "ISPIN": 2,
+          "ISMEAR": 1,
+          "SIGMA": 0.2,
+          "ALGO": "Fast",
+          "LREAL": false,
+          "LASPH": true,
+          "NELM": 200,
+          "NELMIN": 5,
+          "IBRION": 3,
+          "POTIM": 0,
+          "ISIF": 2,
+          "NSW": 300,
+          "ISYM": 0,
+          "LDIPOL": false,
+          "LCHARG": false,
+          "LWAVE": false,
+          "ICHAIN": 0,
+          "IOPT": 3,
+          "TIMESTEP": 0.05,
+          "MAXMOVE": 0.1,
+          "SPRING": -5,
+          "LCLIMB": false
+        },
+        "note": "Start with the minimum reviewed image count; add images only around excessive displacement or high curvature."
+      },
+      "final_static": {
+        "purpose": [
+          "optional_convergence_check",
+          "legacy_matched_static_compatibility"
+        ],
+        "layers": 5,
+        "gamma_mesh": [
+          5,
+          5,
+          1
+        ],
+        "incar": {
+          "PREC": "Accurate",
+          "EDIFF": 1e-06,
+          "ISPIN": 2,
+          "ISMEAR": 1,
+          "SIGMA": 0.1,
+          "ALGO": "Fast",
+          "LREAL": false,
+          "LASPH": true,
+          "NELM": 200,
+          "NELMIN": 5,
+          "NSW": 0,
+          "IBRION": -1,
+          "ISYM": 0,
+          "LDIPOL": false,
+          "LCHARG": false,
+          "LWAVE": false
+        }
+      },
+      "final_energy_policy": {
+        "active_convention": "fe110_converged_toten_sigma0p20_v1",
+        "single_point_required": false,
+        "source_energy": "final_OUTCAR_TOTEN",
+        "accepted_surface_sources": [
+          "ionically_converged_routine_production_relaxation",
+          "technically_accepted_dimer"
+        ],
+        "required_surface_incar": {
+          "ISMEAR": 1,
+          "SIGMA": 0.2
+        },
+        "required_review": [
+          "scheduler_done",
+          "electronic_convergence",
+          "ionic_or_dimer_technical_convergence",
+          "geometry_valid",
+          "source_outcar_hash_bound",
+          "compatible_energy_fingerprint"
+        ],
+        "compatibility_rule": "Every energy difference must use the same active convention and identical XC, POTCAR, ENCUT, slab, k-mesh, magnetic, ISMEAR, SIGMA, fixed-atom, dipole, vacuum, and coverage branch. E0 may be stored as supplemental evidence but is not the active energy difference.",
+        "legacy_final_static_use": "Existing SIGMA=0.10 matched statics remain provenance or optional convergence checks and must not be mixed with the active SIGMA=0.20 TOTEN convention."
+      },
+      "transition_state": {
+        "active_learning_force_label": {
+          "purpose": "exact_structure_static_force_label_only",
+          "base_profile": "final_static",
+          "cores": 32,
+          "performance_incar": {
+            "NPAR": 4,
+            "LORBIT": 11
+          }
+        },
+        "parameter_policy": {
+          "policy_version": 1,
+          "fixed_dft_basis": {
+            "production_branch": "true_Fe110_five_layer",
+            "slab_layers": 5,
+            "clean_slab_atoms": 45,
+            "fixed_bottom_layers": 2,
+            "lateral_cell_coverage_and_vacuum": "inherit from the accepted endpoint reaction contract; identical for IS, path images, TS, and FS",
+            "functional": "PBE",
+            "incar_gga": "PE",
+            "potcar_family": "PAW_PBE",
+            "potcar_order": [
+              "Fe",
+              "C",
+              "O"
+            ],
+            "encut_eV": 400,
+            "gamma_mesh": [
+              5,
+              5,
+              1
+            ],
+            "spin_polarized": true,
+            "magmom_rule": "Fe=2.2 mu_B; C=0.0; O=0.0; preserve POSCAR species groups",
+            "symmetry": "ISYM=0",
+            "dipole_policy": "LDIPOL=false",
+            "atom_order_and_selective_dynamics": "locked",
+            "compatibility_fingerprint_required": true
+          },
+          "allowed_to_vary_by_approved_stage": {
+            "ordinary_neb": [
+              "EDIFF",
+              "EDIFFG",
+              "ISMEAR",
+              "SIGMA",
+              "ALGO",
+              "AMIX",
+              "BMIX",
+              "AMIX_MAG",
+              "BMIX_MAG",
+              "ISTART",
+              "ICHARG",
+              "IBRION",
+              "IOPT",
+              "IMAGES",
+              "SPRING",
+              "LCLIMB",
+              "NSW",
+              "NELM",
+              "NPAR",
+              "core_count"
+            ],
+            "refine_neb": [
+              "EDIFF",
+              "EDIFFG",
+              "ISMEAR",
+              "SIGMA",
+              "IOPT",
+              "IMAGES",
+              "SPRING",
+              "LCLIMB",
+              "NSW",
+              "NELM",
+              "core_count"
+            ],
+            "ci_neb": [
+              "EDIFF",
+              "EDIFFG",
+              "ISMEAR",
+              "SIGMA",
+              "IOPT",
+              "IMAGES",
+              "SPRING",
+              "LCLIMB",
+              "NSW",
+              "NELM",
+              "core_count"
+            ],
+            "dimer": [
+              "EDIFF",
+              "EDIFFG",
+              "ISMEAR",
+              "SIGMA",
+              "IOPT",
+              "DdR",
+              "DRotMax",
+              "DFNMin",
+              "DFNMax",
+              "NSW",
+              "NELM",
+              "core_count"
+            ],
+            "vfa": [
+              "EDIFF",
+              "IBRION",
+              "NFREE",
+              "POTIM",
+              "active_atom_set",
+              "core_count"
+            ],
+            "connectivity_relax": [
+              "EDIFF",
+              "EDIFFG",
+              "IBRION",
+              "POTIM",
+              "NSW",
+              "NELM",
+              "core_count"
+            ],
+            "matched_static": [
+              "EDIFF",
+              "ISMEAR",
+              "SIGMA",
+              "NSW",
+              "IBRION",
+              "core_count"
+            ]
+          },
+          "approved_magnetic_initialization_branches": {
+            "fe110_co_dissociation_highspin_seed_v1": {
+              "stages": [
+                "ordinary_neb"
+              ],
+              "moments_muB": {
+                "Fe": 2.4,
+                "C": 0.0,
+                "O": 0.0
+              },
+              "evidence_job_id": "9639279",
+              "evidence_rule": "Exact image-06 geometry converged to the adjacent-image high-spin branch and was 2.29958246 eV below the failed 2.2 mu_B/Fe cold-start branch."
+            }
+          },
+          "variation_rule": "Only the owning stage template may change the listed parameters; every other DFT basis and compatibility field remains fixed. Any exception requires an explicit protocol decision and a new compatibility branch.",
+          "result_promotion": {
+            "aqcat25_energy": "predicted_candidate_only",
+            "neb_profile_energy": "diagnostic_only",
+            "reportable_barrier_requires": [
+              "accepted_grade_a_ts",
+              "validated_vibrational_mode",
+              "source_method_validation_complete",
+              "compatible_converged_SIGMA_0p20_IS_TS_FS_TOTEN",
+              "identical_compatibility_fingerprint"
+            ],
+            "source_method_validation": {
+              "dimer": [
+                "dimer_technical_acceptance",
+                "validated_vibrational_mode"
+              ],
+              "neb": [
+                "validated_bidirectional_connectivity"
+              ],
+              "ci_neb": [
+                "validated_bidirectional_connectivity"
+              ]
+            },
+            "final_energy_profile": "final_energy_policy",
+            "final_energy_convention": "fe110_converged_toten_sigma0p20_v1",
+            "final_energy_source": "final_OUTCAR_TOTEN",
+            "matched_static_required": false,
+            "registry_database": "data/project_registry.sqlite3",
+            "rule": "Register the accepted IS/TS/FS structures, energies, hashes, compatibility fingerprint, validation status, and provenance before promoting a barrier to the project dataset."
+          }
+        },
+        "refine_neb": {
+          "incar": {
+            "PREC": "Accurate",
+            "EDIFF": 1e-05,
+            "EDIFFG": -0.02,
+            "ISPIN": 2,
+            "ISMEAR": 1,
+            "SIGMA": 0.2,
+            "ALGO": "Fast",
+            "LREAL": false,
+            "LASPH": true,
+            "NELM": 200,
+            "NELMIN": 5,
+            "IBRION": 3,
+            "POTIM": 0,
+            "ISIF": 2,
+            "NSW": 300,
+            "ISYM": 0,
+            "LDIPOL": false,
+            "LCHARG": false,
+            "LWAVE": false,
+            "ICHAIN": 0,
+            "IOPT": 3,
+            "TIMESTEP": 0.05,
+            "MAXMOVE": 0.1,
+            "SPRING": -5,
+            "LCLIMB": false
+          }
+        },
+        "ci_neb": {
+          "incar": {
+            "PREC": "Accurate",
+            "EDIFF": 1e-05,
+            "EDIFFG": -0.02,
+            "ISPIN": 2,
+            "ISMEAR": 1,
+            "SIGMA": 0.2,
+            "ALGO": "Fast",
+            "LREAL": false,
+            "LASPH": true,
+            "NELM": 200,
+            "NELMIN": 5,
+            "IBRION": 3,
+            "POTIM": 0,
+            "ISIF": 2,
+            "NSW": 300,
+            "ISYM": 0,
+            "LDIPOL": false,
+            "LCHARG": false,
+            "LWAVE": false,
+            "ICHAIN": 0,
+            "IOPT": 1,
+            "SPRING": -5,
+            "LCLIMB": true
+          }
+        },
+        "dimer": {
+          "source": "Henkelman VTST dimer method; mode and settings require workflow review before submission",
+          "incar": {
+            "PREC": "Accurate",
+            "EDIFF": 1e-07,
+            "EDIFFG": -0.02,
+            "ISPIN": 2,
+            "ISMEAR": 1,
+            "SIGMA": 0.2,
+            "ALGO": "Fast",
+            "LREAL": false,
+            "LASPH": true,
+            "NELM": 200,
+            "NELMIN": 5,
+            "IBRION": 3,
+            "POTIM": 0,
+            "ISIF": 2,
+            "NSW": 300,
+            "ISYM": 0,
+            "LDIPOL": false,
+            "LCHARG": false,
+            "LWAVE": false,
+            "ICHAIN": 2,
+            "IOPT": 2,
+            "DdR": 0.005,
+            "DRotMax": 1,
+            "DFNMin": 0.01,
+            "DFNMax": 1.0
+          }
+        },
+        "vfa": {
+          "method": "finite_difference_partial_hessian",
+          "scope": "contract-defined local partial Hessian; full movable-slab Hessian is not required by default",
+          "active_set_policy": {
+            "required_atoms": "reaction_contract_reaction_atoms",
+            "optional_local_environment": "directly_coordinated_surface_atoms",
+            "fixed_slab_atoms_forbidden": true,
+            "full_hessian_required": false,
+            "expand_only_when": [
+              "principal_mode_assignment_is_ambiguous",
+              "local_surface_mode_coupling_is_unresolved",
+              "explicitly_requested"
+            ],
+            "thermochemistry_rule": "Use the same reviewed local active-set definition for IS, TS, and FS.",
+            "reporting_rule": "Label frequencies and thermal corrections as partial-Hessian results."
+          },
+          "validation": {
+            "status": "needs_confirmation",
+            "meaningful_imaginary_frequency_min_cm1": null,
+            "additional_soft_mode_abs_max_cm1": null,
+            "rule": "Grade A/B remains blocked until both project thresholds are explicitly reviewed and configured."
+          },
+          "incar": {
+            "PREC": "Accurate",
+            "EDIFF": 1e-07,
+            "ISPIN": 2,
+            "ISMEAR": 1,
+            "SIGMA": 0.1,
+            "ALGO": "Fast",
+            "LREAL": false,
+            "LASPH": true,
+            "NELM": 200,
+            "NELMIN": 5,
+            "NSW": 1,
+            "IBRION": 5,
+            "ISYM": 0,
+            "LDIPOL": false,
+            "LCHARG": false,
+            "LWAVE": false,
+            "NFREE": 2,
+            "POTIM": 0.015
+          }
+        },
+        "connectivity_relax": {
+          "purpose": "downhill relaxation from positive or negative imaginary-mode displacement",
+          "cores": 32,
+          "incar": {
+            "PREC": "Accurate",
+            "EDIFF": 1e-05,
+            "EDIFFG": -0.02,
+            "ISPIN": 2,
+            "ISMEAR": 1,
+            "SIGMA": 0.2,
+            "ALGO": "Fast",
+            "LREAL": false,
+            "LASPH": true,
+            "NELM": 200,
+            "NELMIN": 5,
+            "IBRION": 2,
+            "POTIM": 0.2,
+            "ISIF": 2,
+            "NSW": 300,
+            "ISYM": 0,
+            "LDIPOL": false,
+            "LCHARG": false,
+            "LWAVE": false
+          }
+        }
+      },
+      "publication_validation": {
+        "status": "separate_validation_only_not_active_production",
+        "layers": 8,
+        "clean_slab_atoms": 72,
+        "gamma_mesh_relax": [
+          5,
+          5,
+          1
+        ],
+        "gamma_mesh_static": [
+          5,
+          5,
+          1
+        ],
+        "required_states": [
+          "clean_slab",
+          "molecular_CO_initial_state",
+          "dissociated_C_O_final_state",
+          "transition_state_candidate"
+        ],
+        "acceptance": {
+          "adsorption_or_reaction_energy_change_eV": 0.03,
+          "barrier_change_eV": 0.05
+        }
+      },
+      "compatibility_rules": [
+        "The active production dataset is the user-selected five-layer branch; later layer-count comparisons are validation only and do not change production automatically.",
+        "Every reportable production slab, adsorption, endpoint, and NEB calculation uses five layers unless a later explicit user decision supersedes this branch.",
+        "Lock GGA=PE, the approved PAW-PBE POTCAR family, and ENCUT=400 eV across every adsorption-energy component; use ISPIN=2 for Fe-containing magnetic systems.",
+        "Use identical lateral cell, layer count, vacuum, fixed-layer rule, slab mesh, smearing branch, and dipole policy for all periodic slab terms in one energy difference.",
+        "Metals and oxides may use separately converged smearing, magnetic, and DFT+U groups; never mix groups inside one reported energy difference.",
+        "Never mix seven-layer and eight-layer total energies in one adsorption energy, reaction energy, or barrier.",
+        "Do not transfer old non-current adsorption/NEB settings or energies into the true Fe(110) 5x5x1 branch.",
+        "Gas CO is closed-shell and non-spin-polarized: use GGA=PE, the same PAW-PBE POTCAR family, ENCUT=400 eV, Gamma-only sampling, ISPIN=1, no MAGMOM, and one consistently reused sufficiently large cubic box."
+      ]
+    },
+    "path_quality": {},
+    "preflight": {
+      "schema_version": 1,
+      "kind": "adsorption_relaxation",
+      "passed": true,
+      "errors": [],
+      "cores": 32,
+      "images": null,
+      "files": {
+        "INCAR": "3a93daccd880e5130601dc3f615e1c48710ece237f8d7a221b90ace41e53c745",
+        "KPOINTS": "0d7e291117433dac5393f29520b635e92f06e6c8e91aa941137c86b1d39162ae",
+        "POTCAR.spec": "e61de6d7d9f2a7ad03f919e52ceceb1c5ecf85e3e0c2c82269f136dd3457c1a0",
+        "script.lsf": "cd33ce86388d6f34a05348efc4e64508b7d0e7d5d24a3ce5226cc4f9a6a1d9a0",
+        "POSCAR": "bd4923c9ac7be6a0da089c1434bda66de27beaf4ad52b0366436559db2c40339",
+        "candidate_manifest.json": "35a97903fbd6215e3d780e57aebbdbd93d018f3cafe7fc220104364002d06a0b"
+      },
+      "bundle_sha256": "0f436e4970aa26cbb2074d264f532dfb042055fafc811758268da93a1b1b844c",
+      "strategy_retry_check": {
+        "input_key": "487d479fa35bca782f7929b4107d3dddfff29394943b45f513bf504e13e5bbc3",
+        "blocked_attempts": [],
+        "review_attempts": [],
+        "status": "NO_KNOWN_FAILURE"
+      },
+      "adsorption_hard_gate_passed": true,
+      "adsorption_hard_gate": {
+        "kind": "adsorption_relaxation",
+        "passed": true,
+        "errors": [],
+        "warnings": [],
+        "profile_path": "C:\\Users\\86177\\Desktop\\work\\configs\\true_fe110_production.yaml",
+        "profile_sha256": "fbad642502134ca1123741f0bdf3194d2914e230981d38aab90debd4b965bcd3",
+        "files": {
+          "POSCAR": "bd4923c9ac7be6a0da089c1434bda66de27beaf4ad52b0366436559db2c40339",
+          "INCAR": "3a93daccd880e5130601dc3f615e1c48710ece237f8d7a221b90ace41e53c745",
+          "KPOINTS": "0d7e291117433dac5393f29520b635e92f06e6c8e91aa941137c86b1d39162ae",
+          "POTCAR.spec": "e61de6d7d9f2a7ad03f919e52ceceb1c5ecf85e3e0c2c82269f136dd3457c1a0",
+          "script.lsf": "cd33ce86388d6f34a05348efc4e64508b7d0e7d5d24a3ce5226cc4f9a6a1d9a0",
+          "candidate_manifest.json": "35a97903fbd6215e3d780e57aebbdbd93d018f3cafe7fc220104364002d06a0b"
+        },
+        "structure": {
+          "symbols": [
+            "Fe",
+            "O",
+            "C",
+            "H"
+          ],
+          "counts": [
+            45,
+            1,
+            2,
+            1
+          ],
+          "fixed_zero_based": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17
+          ]
+        },
+        "incar_stage": "routine_production",
+        "gamma_mesh": [
+          5,
+          5,
+          1
+        ],
+        "cores": 32,
+        "potcar_local_policy": "POTCAR contents remain remote; verify exact species order and SHA-256 before submission"
+      }
+    },
+    "validation": {},
+    "scheduler": {},
+    "authorization": {
+      "schema_version": 1,
+      "document_kind": "user_execution_authorization",
+      "action": "SUBMIT_VASP",
+      "calculation_kind": "adsorption_relaxation",
+      "authorized_at": "2026-10-06T14:45:11.815478+00:00",
+      "source": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\archive\\fe110_five_c2_adsorption_20261006\\vasp_authorization.md",
+        "sha256": "6d2f86941162b70e5205b2156148fd3aeecff334632d4894f841004e99184fae"
+      },
+      "target": {
+        "server_alias": "sunboquan-codex",
+        "remote_dir": "~/sbq/Fe110/adsorption/fe110_five_c2_20261006/05_cfg1"
+      },
+      "workdir_identity": "c:\\users\\86177\\desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\vasp_batch_v1\\05_cfg1",
+      "bundle_sha256": "0f436e4970aa26cbb2074d264f532dfb042055fafc811758268da93a1b1b844c",
+      "evidence_sha256": "1e0d71f14ae212f90dc4891a8d77b84c117f1aa6d9dbbb0b6103e5ca925b1fd8",
+      "potcar": {
+        "source": "~/sbq/Fe110/potcars/Fe_O_C_H/POTCAR",
+        "sha256": "cfdeb95d5ce5ab92e2ff0c0cdd1cd3870fbbe3a929822c631e09fd828c511a4f",
+        "spec_sha256": "e61de6d7d9f2a7ad03f919e52ceceb1c5ecf85e3e0c2c82269f136dd3457c1a0"
+      }
+    },
+    "source_bindings": {
+      "thresholds": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\configs\\true_fe110_production.yaml",
+        "sha256": "fbad642502134ca1123741f0bdf3194d2914e230981d38aab90debd4b965bcd3"
+      },
+      "preflight": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\vasp_batch_v1\\05_cfg1\\submission_preflight.json",
+        "sha256": "7ff129ceca41e45d61ccbe5bd92e04e35dd74f771b18c294f8430626f774f0af"
+      },
+      "authorization": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\vasp_batch_v1\\05_cfg1\\user_execution_authorization.json",
+        "sha256": "f92b788789ce4ea3db5ef351ca58c4d28ffd2003075683c1f8ba80ba0a53988b"
+      }
+    },
+    "climb": false,
+    "path_reviewed": true
+  },
+  "CRITICAL_IMAGES": [],
+  "CHEMICAL_INTERPRETATION": null,
+  "FILES_SAVED": [],
+  "ALLOWED_ACTIONS": [
+    "SUBMIT_VASP"
+  ],
+  "FORBIDDEN_ACTIONS": [
+    "CONTINUE_JOB",
+    "STOP_JOB",
+    "REBUILD_PATH",
+    "SUBMIT_DIAGNOSTIC_VASP",
+    "ENABLE_CI_NEB",
+    "PREPARE_DIMER_HANDOFF",
+    "START_DIMER",
+    "START_VFA",
+    "APPROVE_TS_CANDIDATE",
+    "REPORT_FINAL_BARRIER"
+  ],
+  "NEXT_REQUIRED_CHECK": "SUBMIT_REVIEWED_ORDINARY_RELAXATION",
+  "SUBMISSION_ALLOWED": true,
+  "CI_NEB_ALLOWED": false,
+  "DIMER_ALLOWED": false,
+  "VFA_ALLOWED": false,
+  "TS_CLAIM_ALLOWED": false,
+  "COMPUTE_COST_ASSESSMENT": null,
+  "scientific_readiness": {
+    "decision": "READY_FOR_ADSORPTION_RELAXATION",
+    "reason_codes": [],
+    "eligible_actions": [
+      "SUBMIT_VASP"
+    ]
+  },
+  "execution_authorization_error": null,
+  "execution_authorization": {
+    "action": "SUBMIT_VASP",
+    "target": {
+      "remote_dir": "~/sbq/Fe110/adsorption/fe110_five_c2_20261006/05_cfg1",
+      "server_alias": "sunboquan-codex"
+    },
+    "binding": {
+      "workdir_identity": "c:\\users\\86177\\desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\vasp_batch_v1\\05_cfg1",
+      "bundle_sha256": "0f436e4970aa26cbb2074d264f532dfb042055fafc811758268da93a1b1b844c",
+      "evidence_sha256": "1e0d71f14ae212f90dc4891a8d77b84c117f1aa6d9dbbb0b6103e5ca925b1fd8"
+    },
+    "source": {
+      "path": "C:\\Users\\86177\\Desktop\\work\\archive\\fe110_five_c2_adsorption_20261006\\vasp_authorization.md",
+      "sha256": "6d2f86941162b70e5205b2156148fd3aeecff334632d4894f841004e99184fae"
+    },
+    "potcar": {
+      "sha256": "cfdeb95d5ce5ab92e2ff0c0cdd1cd3870fbbe3a929822c631e09fd828c511a4f",
+      "source": "~/sbq/Fe110/potcars/Fe_O_C_H/POTCAR",
+      "spec_sha256": "e61de6d7d9f2a7ad03f919e52ceceb1c5ecf85e3e0c2c82269f136dd3457c1a0"
+    }
+  },
+  "evidence_binding": {
+    "workdir_identity": "c:\\users\\86177\\desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\vasp_batch_v1\\05_cfg1",
+    "bundle_sha256": "0f436e4970aa26cbb2074d264f532dfb042055fafc811758268da93a1b1b844c",
+    "evidence_sha256": "1e0d71f14ae212f90dc4891a8d77b84c117f1aa6d9dbbb0b6103e5ca925b1fd8"
+  }
+}

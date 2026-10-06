@@ -54,6 +54,10 @@ def preflight(workdir: Path, *, profile_path: Path = DEFAULT_PROFILE, cores: int
         (("Fe", "C", "H"), (45, 1, 1)),
         (("Fe", "C", "H"), (45, 1, 2)),
         (("Fe", "C", "O", "H"), (45, 2, 1, 2)),
+        (("Fe", "C", "H"), (45, 2, 1)),
+        (("Fe", "C", "H"), (45, 2, 2)),
+        (("Fe", "C", "O", "H"), (45, 2, 1, 1)),
+        (("Fe", "O", "C", "H"), (45, 1, 2, 1)),
     }
     composition = (tuple(structure.symbols), tuple(structure.counts))
     if composition not in allowed_compositions:

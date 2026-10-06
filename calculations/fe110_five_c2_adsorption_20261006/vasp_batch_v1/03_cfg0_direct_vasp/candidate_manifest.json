@@ -1,0 +1,64 @@
+{
+  "species_id": "03",
+  "care_code": "QEJQAPYSVNHDJF-UHFFFAOYSA-N*",
+  "formula": "C2HO",
+  "connectivity": "[CH][C][O]",
+  "source_structure": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\03_C2HO_QEJQAPYSVNHDJF\\cfg0\\POSCAR",
+  "source_sha256": "bae70901a1b6eab91e6f3b7d0b87bdcc536fb4455bc768fe5fff85712a0c9873",
+  "source_role": "intact_pre_GPU_direct_VASP_fallback",
+  "candidate_review_sha256": "6af2282eed83ed8d400d806730786029a2646fcf6ec7133cc073461031b99ac2",
+  "gpu_return_review_sha256": "0009ab9e58d8d21623ce8caf9beda071e8f84de0fe8b91cb5403ae9d5625964a",
+  "geometry_checks": {
+    "cell_and_fixed_atoms_preserved": true,
+    "target_edges_preserved": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        1,
+        2
+      ]
+    ],
+    "minimum_surface_contact_A": 2.0846771304790535
+  },
+  "builder": {
+    "profile_path": "C:\\Users\\86177\\Desktop\\work\\configs\\true_fe110_production.yaml",
+    "profile_sha256": "fbad642502134ca1123741f0bdf3194d2914e230981d38aab90debd4b965bcd3",
+    "stage": "routine_production",
+    "gamma_mesh": [
+      5,
+      5,
+      1
+    ],
+    "cores": 32,
+    "incar": {
+      "PREC": "Accurate",
+      "EDIFF": 1e-05,
+      "EDIFFG": -0.02,
+      "ISPIN": 2,
+      "ISMEAR": 1,
+      "SIGMA": 0.2,
+      "ALGO": "Fast",
+      "LREAL": false,
+      "LASPH": true,
+      "NELM": 200,
+      "NELMIN": 5,
+      "IBRION": 2,
+      "POTIM": 0.2,
+      "ISIF": 2,
+      "NSW": 300,
+      "ISYM": 0,
+      "LDIPOL": false,
+      "LCHARG": false,
+      "LWAVE": false,
+      "GGA": "PE",
+      "ENCUT": 400
+    }
+  },
+  "scientific_status": "starting_candidate_only"
+}

@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "kind": "adsorption_relaxation",
+  "passed": true,
+  "errors": [],
+  "cores": 32,
+  "images": null,
+  "files": {
+    "INCAR": "1f5f02e9b02e1e13bcaf6d460f04c5e11895c30b6b51c2385b0ccabf100a7bfd",
+    "KPOINTS": "0d7e291117433dac5393f29520b635e92f06e6c8e91aa941137c86b1d39162ae",
+    "POTCAR.spec": "9528f5cac58de3cc83a576c828915ce9c2ab72d4ec3be5e409f7476042f7e1bb",
+    "script.lsf": "cd33ce86388d6f34a05348efc4e64508b7d0e7d5d24a3ce5226cc4f9a6a1d9a0",
+    "POSCAR": "a06d3f30ec9b208ac21892d103cace2004ad13f0b5a1e9fea5c2254af30a8b75",
+    "candidate_manifest.json": "4f6dacc3ad843b4019d32ae61d169dcd46958db33e4754545e496615deefcdea"
+  },
+  "bundle_sha256": "d3562962b7e650fb517bc271caf668fbc580f65a8ae99d73898ed9bf529273a5",
+  "strategy_retry_check": {
+    "input_key": "6f8ea2122865691ce573ac1d98c15f41802eb82ff3f6e19eb16a5a5004aaaf58",
+    "blocked_attempts": [],
+    "review_attempts": [],
+    "status": "NO_KNOWN_FAILURE"
+  },
+  "adsorption_hard_gate_passed": true,
+  "adsorption_hard_gate": {
+    "kind": "adsorption_relaxation",
+    "passed": true,
+    "errors": [],
+    "warnings": [],
+    "profile_path": "C:\\Users\\86177\\Desktop\\work\\configs\\true_fe110_production.yaml",
+    "profile_sha256": "fbad642502134ca1123741f0bdf3194d2914e230981d38aab90debd4b965bcd3",
+    "files": {
+      "POSCAR": "a06d3f30ec9b208ac21892d103cace2004ad13f0b5a1e9fea5c2254af30a8b75",
+      "INCAR": "1f5f02e9b02e1e13bcaf6d460f04c5e11895c30b6b51c2385b0ccabf100a7bfd",
+      "KPOINTS": "0d7e291117433dac5393f29520b635e92f06e6c8e91aa941137c86b1d39162ae",
+      "POTCAR.spec": "9528f5cac58de3cc83a576c828915ce9c2ab72d4ec3be5e409f7476042f7e1bb",
+      "script.lsf": "cd33ce86388d6f34a05348efc4e64508b7d0e7d5d24a3ce5226cc4f9a6a1d9a0",
+      "candidate_manifest.json": "4f6dacc3ad843b4019d32ae61d169dcd46958db33e4754545e496615deefcdea"
+    },
+    "structure": {
+      "symbols": [
+        "Fe",
+        "C",
+        "O",
+        "H"
+      ],
+      "counts": [
+        45,
+        2,
+        1,
+        1
+      ],
+      "fixed_zero_based": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    "incar_stage": "routine_production",
+    "gamma_mesh": [
+      5,
+      5,
+      1
+    ],
+    "cores": 32,
+    "potcar_local_policy": "POTCAR contents remain remote; verify exact species order and SHA-256 before submission"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "occurred_at": "2026-10-06T14:49:29.444918+00:00",
+  "recorded_at": "2026-10-06T14:49:29.444918+00:00",
+  "event_id": "task-fe110-five-c2-adsorption-vasp-submitted-20261006",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "adsorption_workflow"
+  },
+  "summary": "Ten explicitly authorized connectivity-specific Fe110 adsorption relaxations submitted; queue snapshot PEND for9839748-9839757.",
+  "evidence": [
+    {
+      "locator": "archive/fe110_five_c2_adsorption_20261006/vasp_authorization.md",
+      "sha256": "6d2f86941162b70e5205b2156148fd3aeecff334632d4894f841004e99184fae",
+      "authority": "user_authorization",
+      "observed_at": "2026-10-06T14:49:29.444918+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/gpu_return_review.json",
+      "sha256": "0009ab9e58d8d21623ce8caf9beda071e8f84de0fe8b91cb5403ae9d5625964a",
+      "authority": "module_validation",
+      "observed_at": "2026-10-06T14:49:29.444918+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/vasp_batch_v1/submission_summary.json",
+      "sha256": "fced85aa837747048fcd2fdd19949c70c803c834a8d6c694d4db2aae74a0b42f",
+      "authority": "module_validation",
+      "observed_at": "2026-10-06T14:49:29.444918+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/vasp_batch_v1/scheduler_snapshot.txt",
+      "sha256": "20fbd35740a9afd85b190518a969e4e96ffb245253ff4e4194af0ad453b6ce40",
+      "authority": "scheduler",
+      "observed_at": "2026-10-06T14:49:29.444918+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/vasp_batch_v1/registry_receipt.json",
+      "sha256": "7e8dbdc57b8f31cd9e3602b7dc578ac20c3a5b9ef1f3f41eece86cf3bc08e9a3",
+      "authority": "calculation_registry",
+      "observed_at": "2026-10-06T14:49:29.444918+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "payload": {
+    "objective": "Optimize the five exact Fe110 C2 adsorption identities with reviewed GPU candidates and a chemistry-preserving direct-VASP fallback.",
+    "phase": "active",
+    "current_evidence": [
+      "GPU2139 returned12 validated predictions. Chemistry review excluded fragmented02_cfg1 and03_cfg0 output;01_cfg0 duplicates01_cfg2.",
+      "Nine intact distinct GPU outputs plus intact pre-GPU03_cfg0 were submitted as10 ordinary adsorption relaxations, species counts2/1/1/3/3.",
+      "LSF9839748-9839757 allPEND in the saved snapshot;32MPI ranks each. Electronic/ionic convergence not yet assessed.",
+      "Production PBE/PAW-PBE,ENCUT400,Gamma5x5x1,SIGMA0.20,Fe45five-layer,fixedFe0-17 preserved; no artificial bond restraints.",
+      "Registry received submission/job/input metadata only, no predicted energy or accepted adsorption result. Prior TS work remains deferred.",
+      "37 relevant tests pass;10 extended lifecycle tests have existing stdin mock incompatibility; no unrelated source repair."
+    ],
+    "one_executable_step": "At the next authorized status check, inspect queue and compact electronic/ionic progress of9839748-9839757; after completion review target connectivity/sites/duplicates before result registration.",
+    "submission_boundary": "This10-job adsorption batch explicitly authorized and submitted; no automatic resubmission, TS, frequency or gas-reference submission.",
+    "done_when": [
+      "Completed VASP candidates have convergence, exact chemical identity, site and duplicate reviews before accepted result/energy promotion."
+    ],
+    "constraints": [
+      "Use true Fe110 Fe45 five-layer branch, fixedFe0-17 and SIGMA0.20 production method.",
+      "Do not substitute acetylene for CCH2 or mix the three C2HO graphs.",
+      "Candidate counts follow distinct supported motifs; no blind three-site padding or ML global-minimum claims.",
+      "AQCat25 is adsorption pre-relaxation primary; results return through work before VASP."
+    ],
+    "authoritative_references": [
+      "archive/fe110_five_c2_adsorption_20261006/REVIEW.md",
+      "archive/fe110_five_c2_adsorption_20261006/request_and_retrieval.json",
+      "calculations/fe110_five_c2_adsorption_20261006/candidate_review.json",
+      "archive/fe110_five_c2_adsorption_20261006/literature_review.json",
+      "calculations/fe110_five_c2_adsorption_20261006/gpu_submission_evidence_2139.json",
+      "calculations/fe110_five_c2_adsorption_20261006/gpu_batch_v4/batch_manifest.json",
+      "calculations/fe110_five_c2_adsorption_20261006/gpu_return_review.json",
+      "calculations/fe110_five_c2_adsorption_20261006/vasp_batch_v1/batch_manifest.json",
+      "calculations/fe110_five_c2_adsorption_20261006/vasp_batch_v1/submission_summary.json",
+      "calculations/fe110_five_c2_adsorption_20261006/vasp_batch_v1/registry_receipt.json"
+    ]
+  },
+  "supersedes": [
+    "task-fe110-five-c2-adsorption-gpu2139-submitted-20261006"
+  ]
+}

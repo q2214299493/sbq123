@@ -3,15 +3,16 @@
 
 ## Objective
 
-Review Fe110 adsorption motifs for C2H, CCH2 and three C2HO hydrogen-placement isomers; prepare bounded AQCat25 pre-relaxation candidates.
+Optimize the five exact Fe110 C2 adsorption identities with reviewed GPU candidates and a chemistry-preserving direct-VASP fallback.
 
 ## Current Evidence Snapshot
 
-- User explicitly authorized GPU pre-relaxation only; no VASP submitted.
-- 12 selected local CARE seeds (species counts3/2/1/3/3) pass initial geometry and hash-bound schema/ASE preflight; three excluded raw seeds retained.
-- MZ73 Slurm2139 scheduler=RUNNING; one GPU,4CPU,32GiB,120minute limit; maximum80 LBFGS steps per candidate at0.10eV/A.
-- Failed bootstrap2136/2137/2138 did not produce adsorption results. Task-local runtime handles verified root symlink and pins cache/temp paths; no global scientific method change.
-- Final geometry/chemistry and duplicate review remain pending. Predictions are not reportable adsorption energies. Prior Dimer9833429 review remains deferred.
+- GPU2139 returned12 validated predictions. Chemistry review excluded fragmented02_cfg1 and03_cfg0 output;01_cfg0 duplicates01_cfg2.
+- Nine intact distinct GPU outputs plus intact pre-GPU03_cfg0 were submitted as10 ordinary adsorption relaxations, species counts2/1/1/3/3.
+- LSF9839748-9839757 allPEND in the saved snapshot;32MPI ranks each. Electronic/ionic convergence not yet assessed.
+- Production PBE/PAW-PBE,ENCUT400,Gamma5x5x1,SIGMA0.20,Fe45five-layer,fixedFe0-17 preserved; no artificial bond restraints.
+- Registry received submission/job/input metadata only, no predicted energy or accepted adsorption result. Prior TS work remains deferred.
+- 37 relevant tests pass;10 extended lifecycle tests have existing stdin mock incompatibility; no unrelated source repair.
 
 ## Lifecycle Status
 
@@ -19,11 +20,11 @@ Review Fe110 adsorption motifs for C2H, CCH2 and three C2HO hydrogen-placement i
 
 ## One Executable Step
 
-After2139 finishes, collect all producer receipts, return manifests and predicted structures; validate in work and review final chemistry/sites/duplicates before requesting VASP.
+At the next authorized status check, inspect queue and compact electronic/ionic progress of9839748-9839757; after completion review target connectivity/sites/duplicates before result registration.
 
 ## Submission Boundary
 
-GPU12 batch explicitly authorized and submitted. No automatic continuation/resubmission or VASP handoff.
+This10-job adsorption batch explicitly authorized and submitted; no automatic resubmission, TS, frequency or gas-reference submission.
 
 ## Authoritative Constraint
 
@@ -31,7 +32,7 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 
 ## Done When
 
-- Exact identities, literature limits, candidate geometry and duplicate issues are reviewable before GPU/VASP submission.
+- Completed VASP candidates have convergence, exact chemical identity, site and duplicate reviews before accepted result/energy promotion.
 
 ## Constraints
 
@@ -48,4 +49,8 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 - archive/fe110_five_c2_adsorption_20261006/literature_review.json
 - calculations/fe110_five_c2_adsorption_20261006/gpu_submission_evidence_2139.json
 - calculations/fe110_five_c2_adsorption_20261006/gpu_batch_v4/batch_manifest.json
+- calculations/fe110_five_c2_adsorption_20261006/gpu_return_review.json
+- calculations/fe110_five_c2_adsorption_20261006/vasp_batch_v1/batch_manifest.json
+- calculations/fe110_five_c2_adsorption_20261006/vasp_batch_v1/submission_summary.json
+- calculations/fe110_five_c2_adsorption_20261006/vasp_batch_v1/registry_receipt.json
 <!-- state-handoff:end current_task -->

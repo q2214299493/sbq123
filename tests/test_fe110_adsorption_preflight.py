@@ -86,3 +86,21 @@ def test_preflight_accepts_c2ho_h_endpoint_composition(tmp_path: Path) -> None:
     report = preflight(tmp_path)
     assert report["passed"] is True
     assert report["structure"]["counts"] == [45, 2, 1, 2]
+
+
+@pytest.mark.parametrize("symbols,counts", [
+    ("Fe C H", "45 2 1"),
+    ("Fe C H", "45 2 2"),
+    ("Fe C O H", "45 2 1 1"),
+    ("Fe O C H", "45 1 2 1"),
+])
+def test_preflight_accepts_reviewed_five_species_batch(tmp_path, symbols, counts):
+    number = sum(map(int, counts.split()))
+    coordinates = ["0 0 0 F F F"] * 18 + ["0.2 0.2 0.6 T T T"] * (number - 18)
+    (tmp_path / "POSCAR").write_text(
+        "C2 adsorption preflight fixture\n1.0\n10 0 0\n0 10 0\n0 0 20\n"
+        + symbols + "\n" + counts + "\nSelective dynamics\nDirect\n"
+        + "\n".join(coordinates) + "\n", encoding="ascii")
+    build_fe110_adsorption_relaxation(tmp_path)
+    (tmp_path / "candidate_manifest.json").write_text('{"candidate":"reviewed_C2"}', encoding="ascii")
+    assert preflight(tmp_path)["passed"]

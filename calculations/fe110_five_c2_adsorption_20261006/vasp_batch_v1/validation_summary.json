@@ -1,0 +1,24 @@
+{
+  "python_syntax": "PASS",
+  "ruff_task_helpers_and_preflight": "PASS",
+  "pytest_adsorption_preflight_adapter_submission": {
+    "passed": 37
+  },
+  "extended_lifecycle_suite": {
+    "failed": 10,
+    "blocker": "Existing upload executor uses _run(stdin=...), but existing lifecycle test remote mocks reject stdin; unrelated source changes preserved, not repaired in this task."
+  },
+  "actual_inputs": {
+    "geometry_graph_cell_fixed_atoms": "10_PASS",
+    "custodian_no_blockers_or_warnings": "10_PASS",
+    "canonical_preflight_execution_authorization": "10_PASS",
+    "remote_input_and_POTCAR_hash_verification": "10_PASS",
+    "unique_submission_receipts": "10_SUBMITTED"
+  },
+  "unverified": [
+    "electronic convergence",
+    "ionic convergence",
+    "final chemical identity",
+    "reportable adsorption energies"
+  ]
+}
