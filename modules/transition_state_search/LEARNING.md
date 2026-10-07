@@ -29,30 +29,63 @@ the active final-energy convention are unchanged.
 
 `learning cases-build --manifest CASES.json --allowed-root SNAPSHOT_DIR --bundle NEW_DIR`
 builds a write-once bundle from an explicit JSON case manifest. The manifest
-has `schema_version: 1` and a `cases` array. Each case provides `case_id`,
+has `schema_version: 2` and a `cases` array. Each case provides `case_id`,
 `group_id`, `question`, `provenance` (`synthetic`, `reviewed_real`, or
 `incomplete`), a nonempty `public_evidence` list, and `reference` or `null`.
 Each evidence item has `evidence_id`, `path`, `sha256`, `pointer`, and scalar
 `value`. A scored reference has `review_status: approved`, a nonempty
 `review_basis`, a separate `source` with the same four observation fields, and
-`expected` with `failure_class`, `root_cause_status`, `next_review`, and
-`evidence_ids`. The reference source's selected value must equal `expected`.
+`expected` with `failure_class`, `causal_claim`, `causal_status`,
+`causal_evidence_ids`, `next_review`, and `evidence_ids`. The reference source's
+selected value must have the same canonical JSON identity as `expected`.
 Source paths must resolve to small JSON files inside the allowed root.
 
 Only `public.json` should be given to an answer generator. `private.json`
 contains source paths and references; file separation is not an access control
 boundary. The manifest author must check that selected values contain no later
 conclusions. `manifest.json` is written last and marks a complete bundle.
-The private bundle format is version 2: it records the original allowed root
-and rechecks every source and reviewed reference before scoring. Older bundles
-without that scope must be rebuilt from their original manifest and sources;
-the public case and answer schema remain version 1.
+The private bundle format is version 3: it retains the original allowed root
+and rechecks every source and reviewed reference before scoring. Public,
+manifest, answer-set and report schema versions are 2. The current builder and
+evaluator explicitly reject older formats. Historical files remain readable as
+JSON for audit, but are not scored by this version. Rebuilding requires a newly
+reviewed claim and evidence binding; a legacy `root_cause_status` cannot be
+automatically converted into a causal claim. Preserve historical frozen bundles
+and reports; use new paths and freshly reviewed reference artifacts for schema 2.
 
 `learning cases-evaluate --bundle NEW_DIR --answers ANSWERS.json --report NEW_REPORT.json`
 scores saved answers without opening a registry or running a model. The answer
-file contains `schema_version: 1`, the bundle's `public_sha256`, and an
+file contains `schema_version: 2`, the bundle's `public_sha256`, and an
 `answers` array. Each answer has `case_id`, the public case's `input_sha256`,
-`failure_class`, `root_cause_status`, `next_review`, and `evidence_ids`.
+the six diagnosis fields listed above. No additional answer/reference fields are
+allowed. For example, a structurally valid diagnosis is:
+
+```json
+{
+  "failure_class": "runtime",
+  "causal_claim": null,
+  "causal_status": "unknown",
+  "causal_evidence_ids": [],
+  "next_review": "repair_runtime_without_training",
+  "evidence_ids": ["observed_error"]
+}
+```
+
+`unknown` requires a null claim and empty causal IDs. `hypothesis` and
+`confirmed` require a nonempty string claim and nonempty causal IDs. IDs must
+be unique; causal IDs must be a subset of the answer/reference's `evidence_ids`,
+which must themselves cite public evidence. A scored reference still requires
+nonempty `evidence_ids`. Certainty does not select a failure class or route:
+the existing policy maps `failure_class` to `next_review` independently.
+
+The reviewer must make a hypothesis a specific, testable causal direction and
+ensure confirmed evidence directly establishes the written claim itself.
+Confirmation never automatically establishes a deeper cause: permission-system
+denial and a missing executable bit are distinct claims with potentially
+different certainty. Code validates structure only. It does not prove causal
+support, testability or scientific truth, and uses no keyword truth validator.
+Scoring compares claim text exactly and both ID lists as sets, along with
+class, causal status and route. Paraphrase equivalence is not evaluated.
 The report lists every case, missing or invalid answers, unknown IDs, and the
 scorable denominator. A match means agreement with the supplied review
 reference, not scientific TS validation or measured real-world improvement.
@@ -65,6 +98,9 @@ policy, builder, evaluator, and answer-file hashes. Older reports missing these
 identities cannot establish a fair version comparison. The global `--output`
 option is unavailable for these two commands; use `--report` for evaluation.
 Both commands use new output paths and leave the current calculation unchanged.
+This offline representation does not migrate production outcome/event records:
+`learning outcome`, imports, revisions and retry gates retain their existing
+`root_cause_status` schema and behavior. An offline score is not an outcome event.
 
 ## Warm start and reference methods
 

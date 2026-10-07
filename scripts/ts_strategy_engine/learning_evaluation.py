@@ -8,13 +8,12 @@ from scripts import artifact_io
 from scripts.artifact_io import load_json_object, require_sha256, sha256_file, sha256_json, write_json_exclusive
 
 from . import learning_cases, learning_evidence, strategy_learning
-from .learning_cases import PRIVATE_FORMAT_VERSION, ROOT_STATUSES, SCHEMA_VERSION, validate_built_case
+from .learning_cases import DIAGNOSIS_KEYS, PRIVATE_FORMAT_VERSION, SCHEMA_VERSION, diagnosis_error, validate_built_case
 from .learning_evidence import exact_keys
-from .strategy_learning import POLICY, policy
+from .strategy_learning import POLICY
 
 
-ANSWER_KEYS = {"case_id", "input_sha256", "failure_class", "root_cause_status",
-               "next_review", "evidence_ids"}
+ANSWER_KEYS = {"case_id", "input_sha256"} | DIAGNOSIS_KEYS
 
 
 def _load_bundle(bundle: Path) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
@@ -25,7 +24,7 @@ def _load_bundle(bundle: Path) -> tuple[dict[str, Any], dict[str, Any], dict[str
     exact_keys(public, {"schema_version", "cases"})
     if type(private.get("bundle_format_version")) is not int \
             or private["bundle_format_version"] != PRIVATE_FORMAT_VERSION:
-        raise ValueError("legacy case bundle lacks source-scope validation; rebuild it")
+        raise ValueError("legacy case bundle lacks explicit causal claims; re-review references and rebuild it")
     exact_keys(private, {"schema_version", "bundle_format_version", "allowed_root", "public_sha256",
                          "policy_sha256", "builder_sha256", "cases"})
     if any(type(value["schema_version"]) is not int or value["schema_version"] != SCHEMA_VERSION
@@ -61,18 +60,10 @@ def _answer_error(answer: Any, public_case: dict[str, Any]) -> str | None:
         exact_keys(answer, ANSWER_KEYS)
         if answer["case_id"] != public_case["case_id"] or answer["input_sha256"] != public_case["input_sha256"]:
             return "input_identity_mismatch"
-        if answer["failure_class"] not in policy()["failure_routes"] \
-                or answer["root_cause_status"] not in ROOT_STATUSES \
-                or answer["next_review"] != policy()["failure_routes"][answer["failure_class"]]:
-            return "invalid_diagnosis_fields"
-        ids = answer["evidence_ids"]
         allowed = {item["evidence_id"] for item in public_case["evidence"]}
-        if not isinstance(ids, list) or any(not isinstance(item, str) for item in ids) \
-                or len(ids) != len(set(ids)) or not set(ids) <= allowed:
-            return "invalid_evidence_ids"
+        return diagnosis_error({key: answer[key] for key in DIAGNOSIS_KEYS}, allowed)
     except (ValueError, KeyError, TypeError):
         return "invalid_answer_shape"
-    return None
 
 
 def evaluate_cases(bundle: Path, answers_path: Path, report_path: Path) -> dict[str, Any]:
@@ -121,10 +112,9 @@ def evaluate_cases(bundle: Path, answers_path: Path, report_path: Path) -> dict[
         else:
             answer = candidates[0]
             expected = reference["expected"]
-            fields = ("failure_class", "root_cause_status", "next_review", "evidence_ids")
             status = "match" if all(
-                set(answer[key]) == set(expected[key]) if key == "evidence_ids"
-                else answer[key] == expected[key] for key in fields
+                set(answer[key]) == set(expected[key]) if key in {"evidence_ids", "causal_evidence_ids"}
+                else answer[key] == expected[key] for key in DIAGNOSIS_KEYS
             ) else "diagnosis_mismatch"
             matched += status == "match"
         rows.append({"case_id": case_id, "group_id": public_case["group_id"],

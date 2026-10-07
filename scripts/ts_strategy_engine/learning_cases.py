@@ -10,14 +10,43 @@ from .learning_evidence import exact_keys, observe
 from .strategy_learning import POLICY, policy
 
 
-SCHEMA_VERSION = 1
-PRIVATE_FORMAT_VERSION = 2
+SCHEMA_VERSION = 2
+PRIVATE_FORMAT_VERSION = 3
 MAX_SOURCE_BYTES = 1_000_000
 PROVENANCE = {"synthetic", "reviewed_real", "incomplete"}
-ROOT_STATUSES = {"confirmed", "hypothesis", "unknown"}
+CAUSAL_STATUSES = {"confirmed", "hypothesis", "unknown"}
+DIAGNOSIS_KEYS = {"failure_class", "causal_claim", "causal_status", "causal_evidence_ids",
+                  "next_review", "evidence_ids"}
 PRIVATE_POINTER_TOKENS = {"answer", "diagnosis", "expected", "failure_class", "root_cause_status",
+                          "causal_claim", "causal_status", "causal_evidence_ids",
                           "next_review", "reviewer", "reference", "posthoc", "password",
                           "secret", "token", "credential", "api_key"}
+
+
+def diagnosis_error(diagnosis: Any, allowed_ids: set[str]) -> str | None:
+    """Validate offline structure only; never judge whether a causal claim is true."""
+    exact_keys(diagnosis, DIAGNOSIS_KEYS)
+    routes = policy()["failure_routes"]
+    failure_class, status = diagnosis["failure_class"], diagnosis["causal_status"]
+    if not isinstance(failure_class, str) or failure_class not in routes \
+            or not isinstance(status, str) or status not in CAUSAL_STATUSES \
+            or diagnosis["next_review"] != routes[failure_class]:
+        return "invalid_diagnosis_fields"
+    ids = diagnosis["evidence_ids"]
+    if not isinstance(ids, list) or any(not isinstance(item, str) for item in ids) \
+            or len(ids) != len(set(ids)) or not set(ids) <= allowed_ids:
+        return "invalid_evidence_ids"
+    causal_ids = diagnosis["causal_evidence_ids"]
+    if not isinstance(causal_ids, list) or any(not isinstance(item, str) for item in causal_ids) \
+            or len(causal_ids) != len(set(causal_ids)) or not set(causal_ids) <= set(ids):
+        return "invalid_causal_evidence_ids"
+    claim = diagnosis["causal_claim"]
+    if status == "unknown":
+        if claim is not None or causal_ids:
+            return "invalid_causal_fields"
+    elif not isinstance(claim, str) or not claim.strip() or not causal_ids:
+        return "invalid_causal_fields"
+    return None
 
 
 def _source(item: dict[str, Any], root: Path, *, public: bool) -> dict[str, Any]:
@@ -66,18 +95,13 @@ def _reference(reference: Any, provenance: str, selected: list[dict[str, Any]],
             or source["sha256"] in {item["sha256"] for item in selected}:
         raise ValueError("reference source must be separate from public input sources")
     expected = reference["expected"]
-    exact_keys(expected, {"failure_class", "root_cause_status", "next_review", "evidence_ids"})
-    routes = policy()["failure_routes"]
-    if not isinstance(expected["failure_class"], str) or not isinstance(expected["root_cause_status"], str) \
-            or expected["failure_class"] not in routes or expected["root_cause_status"] not in ROOT_STATUSES \
-            or expected["next_review"] != routes[expected["failure_class"]]:
-        raise ValueError("reference diagnosis conflicts with the learning policy")
-    ids = expected["evidence_ids"]
     allowed = {item["evidence_id"] for item in selected}
-    if not isinstance(ids, list) or not ids or any(not isinstance(item, str) for item in ids) \
-            or len(ids) != len(set(ids)) or not set(ids) <= allowed:
+    error = diagnosis_error(expected, allowed)
+    if error == "invalid_evidence_ids" or not expected["evidence_ids"]:
         raise ValueError("reference cites unavailable or repeated public evidence")
-    if source["value"] != expected:
+    if error:
+        raise ValueError(f"invalid reference structure: {error}")
+    if sha256_json(source["value"]) != sha256_json(expected):
         raise ValueError("reference source and expected diagnosis differ")
     return {**reference, "source": source}
 
@@ -127,7 +151,7 @@ def build_cases(spec_path: Path, allowed_root: Path, output_dir: Path) -> dict[s
     exact_keys(spec, {"schema_version", "cases"})
     if type(spec["schema_version"]) is not int or spec["schema_version"] != SCHEMA_VERSION \
             or not isinstance(spec["cases"], list):
-        raise ValueError("unsupported case manifest")
+        raise ValueError("unsupported case manifest; schema 2 requires reviewed causal claims; rebuild it")
     public_cases: list[dict[str, Any]] = []
     private_cases: list[dict[str, Any]] = []
     seen: set[str] = set()
