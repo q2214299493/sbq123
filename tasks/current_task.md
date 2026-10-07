@@ -14,7 +14,12 @@ Optimize the five exact Fe110 C2 adsorption identities with reviewed GPU candida
 - Duplicate review uses36clean-slab top-side-preserving symmetries,xyPBC,Hpermutations,actual relaxed height; never compare ML and DFT absolute energies.
 - One new03_extra2_repair_v1 uses intact exactCARE template,centralC46shortbridge,flat chain alongFe rows,C46-Fe2.20A; canonical geometry passes without warnings,minimum seed-motifRMSD0.40653A.
 - Repair is unrelaxed; no bonds forced, no model fine-tuning and no DFT protocol change. Original45Fe slab and fixedFe0-17 preserved.
-- Python syntax,Ruff,12related tests and figure inspection pass; existing10VASP jobs untouched. No new GPU/VASP submission or accepted-energy registration.
+- Previous repair review remains historical unrelaxed input evidence; original failed seed/results unchanged.
+- User continuation authorized only03_extra2_repair_v1 bounded GPUpre-relaxation; newmanifestdd7c2522cdda517efbfe4f659ab26d379cbfede99ad646582b2b9bde06b572f7.
+- Localschema/input/hashchecks,Pythoncompile,Ruff and5focusedtestsPASS; MZ73remote no-modelpreflightPASS; checkpoint unchanged.
+- GPUjob2176schedulerRUNNING at2026-10-07T16:00:28.242106+00:00; oneGPU,4CPU,32GiB,30min,80LBFGSsteps,MLfmax0.10eV/A.
+- OnlyFe0-17fixed; no internal-bond/site/heightrestraints. Optimizer convergence cannot establish intactCHCO; returnedchemistry/site/duplicate/domainreviewrequired.
+- Existing10VASPjobs and otherGPU candidates untouched; noVASPsubmission,modeltraining,acceptedenergyregistrationorautomaticresubmission.
 
 ## Lifecycle Status
 
@@ -22,11 +27,11 @@ Optimize the five exact Fe110 C2 adsorption identities with reviewed GPU candida
 
 ## One Executable Step
 
-Review the rebuilt CHCO seed with the user and obtain separate authorization for one bounded AQCat25 pre-relaxation; retain three distinct intact GPU candidates for later VASP input review and hold02_extra1.
+Check GPU2176 at the next requested checkpoint; on exit collect hash-bound producer/result/structure artifacts and review intact CHCO connectivity, adsorption geometry and duplicates before any VASP handoff.
 
 ## Submission Boundary
 
-User authorized review/deduplication and one geometry repair only. No new GPU/VASP execution, stop, resubmit, model fine-tuning or accepted-result promotion.
+User authorized the single bounded repaired-seed GPUjob2176 only. No further GPU/VASP submission, automatic resubmission, stops or fine-tuning.
 
 ## Authoritative Constraint
 
@@ -64,4 +69,10 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 - calculations/fe110_five_c2_adsorption_20261006/gpu_supplement_review_v1/review.json
 - calculations/fe110_five_c2_adsorption_20261006/supplement_repair_v1/repair_review.json
 - docs/reviews/fe110_gpu2142_adsorption_review_20261007.md
+- calculations/fe110_five_c2_adsorption_20261006/gpu_repair_v1/batch_manifest.json
+- calculations/fe110_five_c2_adsorption_20261006/gpu_repair_v1/reviewed_plan.json
+- calculations/fe110_five_c2_adsorption_20261006/gpu_repair_submission_v1/preflight_binding.json
+- calculations/fe110_five_c2_adsorption_20261006/gpu_repair_submission_v1/submission_summary.json
+- calculations/fe110_five_c2_adsorption_20261006/gpu_repair_submission_v1/submit.txt
+- calculations/fe110_five_c2_adsorption_20261006/gpu_repair_submission_v1/scheduler_2176.txt
 <!-- state-handoff:end current_task -->

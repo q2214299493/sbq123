@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-five-c2-adsorption-repair-gpu2176-submitted-20261008",
+  "occurred_at": "2026-10-07T16:00:28.242106+00:00",
+  "recorded_at": "2026-10-07T16:01:17.715812+00:00",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "adsorption_workflow"
+  },
+  "summary": "One repaired CHCO candidate submitted as bounded AQCat25 GPU job2176; no new VASP or fine-tuning.",
+  "evidence": [
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/gpu_repair_v1/batch_manifest.json",
+      "sha256": "dd7c2522cdda517efbfe4f659ab26d379cbfede99ad646582b2b9bde06b572f7",
+      "authority": "repository_document",
+      "observed_at": "2026-10-07T16:00:28.242106+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/gpu_repair_v1/reviewed_plan.json",
+      "sha256": "a9314ff123d76e85142dda446ef75fb3f03b5a5210b91d67f482d5f87a290328",
+      "authority": "repository_document",
+      "observed_at": "2026-10-07T16:00:28.242106+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/gpu_repair_submission_v1/preflight_binding.json",
+      "sha256": "81e9c6aa9941a20df2505b756cb389588c53bd0f566b21dcffdb418b88fc5d06",
+      "authority": "repository_document",
+      "observed_at": "2026-10-07T16:00:28.242106+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/gpu_repair_submission_v1/submission_summary.json",
+      "sha256": "1b0d1471f76a87903db0176540fee11dc4796ae2d4d08b186585d480f90b82e1",
+      "authority": "repository_document",
+      "observed_at": "2026-10-07T16:00:28.242106+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/gpu_repair_submission_v1/submit.txt",
+      "sha256": "49feb03c55e2312a53edd86ef52290d4902719b6b46260b8ae94346f709b8c38",
+      "authority": "repository_document",
+      "observed_at": "2026-10-07T16:00:28.242106+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/gpu_repair_submission_v1/scheduler_2176.txt",
+      "sha256": "fefa7e7159649b5bdd4b32ca1b6b72aa141ca373e6489e700ba91ba1229afb44",
+      "authority": "scheduler",
+      "observed_at": "2026-10-07T16:00:28.242106+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "payload": {
+    "objective": "Optimize the five exact Fe110 C2 adsorption identities with reviewed GPU candidates and a chemistry-preserving direct-VASP fallback.",
+    "phase": "active",
+    "current_evidence": [
+      "All5GPU2142producer exit records report0 and returned hashes/schema/checkpoint/source identities validate; no durable Slurm terminal state claimed.",
+      "All5reach MLfmax0.10eV/A, but03_extra2breaks CC1.5349->2.9355A intoCH+CO; failed input/output preserved, not accepted as targetCHCO.",
+      "01_extra1,02_extra2,03_extra1 are intact and distinct from sampled previousGPU/VASP geometries; secondary CH2-C45/O47 off-symmetry site warnings retained, not final-site acceptance.",
+      "02_extra1RMSD0.18567A to the sampled live02_cfg2VASP structure; hold as possible duplicate, not proven same final minimum and no source deletion.",
+      "Duplicate review uses36clean-slab top-side-preserving symmetries,xyPBC,Hpermutations,actual relaxed height; never compare ML and DFT absolute energies.",
+      "One new03_extra2_repair_v1 uses intact exactCARE template,centralC46shortbridge,flat chain alongFe rows,C46-Fe2.20A; canonical geometry passes without warnings,minimum seed-motifRMSD0.40653A.",
+      "Repair is unrelaxed; no bonds forced, no model fine-tuning and no DFT protocol change. Original45Fe slab and fixedFe0-17 preserved.",
+      "Previous repair review remains historical unrelaxed input evidence; original failed seed/results unchanged.",
+      "User continuation authorized only03_extra2_repair_v1 bounded GPUpre-relaxation; newmanifestdd7c2522cdda517efbfe4f659ab26d379cbfede99ad646582b2b9bde06b572f7.",
+      "Localschema/input/hashchecks,Pythoncompile,Ruff and5focusedtestsPASS; MZ73remote no-modelpreflightPASS; checkpoint unchanged.",
+      "GPUjob2176schedulerRUNNING at2026-10-07T16:00:28.242106+00:00; oneGPU,4CPU,32GiB,30min,80LBFGSsteps,MLfmax0.10eV/A.",
+      "OnlyFe0-17fixed; no internal-bond/site/heightrestraints. Optimizer convergence cannot establish intactCHCO; returnedchemistry/site/duplicate/domainreviewrequired.",
+      "Existing10VASPjobs and otherGPU candidates untouched; noVASPsubmission,modeltraining,acceptedenergyregistrationorautomaticresubmission."
+    ],
+    "one_executable_step": "Check GPU2176 at the next requested checkpoint; on exit collect hash-bound producer/result/structure artifacts and review intact CHCO connectivity, adsorption geometry and duplicates before any VASP handoff.",
+    "submission_boundary": "User authorized the single bounded repaired-seed GPUjob2176 only. No further GPU/VASP submission, automatic resubmission, stops or fine-tuning.",
+    "done_when": [
+      "Completed VASP candidates have convergence, exact chemical identity, site and duplicate reviews before accepted result/energy promotion."
+    ],
+    "constraints": [
+      "Use true Fe110 Fe45 five-layer branch, fixedFe0-17 and SIGMA0.20 production method.",
+      "Do not substitute acetylene for CCH2 or mix the three C2HO graphs.",
+      "Candidate counts follow distinct supported motifs; no blind three-site padding or ML global-minimum claims.",
+      "AQCat25 is adsorption pre-relaxation primary; results return through work before VASP."
+    ],
+    "authoritative_references": [
+      "archive/fe110_five_c2_adsorption_20261006/REVIEW.md",
+      "archive/fe110_five_c2_adsorption_20261006/request_and_retrieval.json",
+      "calculations/fe110_five_c2_adsorption_20261006/candidate_review.json",
+      "archive/fe110_five_c2_adsorption_20261006/literature_review.json",
+      "calculations/fe110_five_c2_adsorption_20261006/gpu_submission_evidence_2139.json",
+      "calculations/fe110_five_c2_adsorption_20261006/gpu_batch_v4/batch_manifest.json",
+      "calculations/fe110_five_c2_adsorption_20261006/gpu_return_review.json",
+      "calculations/fe110_five_c2_adsorption_20261006/vasp_batch_v1/batch_manifest.json",
+      "calculations/fe110_five_c2_adsorption_20261006/vasp_batch_v1/submission_summary.json",
+      "calculations/fe110_five_c2_adsorption_20261006/vasp_batch_v1/registry_receipt.json",
+      "archive/fe110_five_c2_adsorption_20261006/SUPPLEMENT_REVIEW.md",
+      "calculations/fe110_five_c2_adsorption_20261006/supplement_v1/candidate_review.json",
+      "calculations/fe110_five_c2_adsorption_20261006/supplement_v1/structure_review.png",
+      "archive/fe110_five_c2_adsorption_20261006/SUPPLEMENT_GPU_SUBMISSION.md",
+      "calculations/fe110_five_c2_adsorption_20261006/gpu_supplement_v1/batch_manifest.json",
+      "calculations/fe110_five_c2_adsorption_20261006/gpu_supplement_submission_v1/submission_summary.json",
+      "calculations/fe110_five_c2_adsorption_20261006/gpu_supplement_review_v1/review.json",
+      "calculations/fe110_five_c2_adsorption_20261006/supplement_repair_v1/repair_review.json",
+      "docs/reviews/fe110_gpu2142_adsorption_review_20261007.md",
+      "calculations/fe110_five_c2_adsorption_20261006/gpu_repair_v1/batch_manifest.json",
+      "calculations/fe110_five_c2_adsorption_20261006/gpu_repair_v1/reviewed_plan.json",
+      "calculations/fe110_five_c2_adsorption_20261006/gpu_repair_submission_v1/preflight_binding.json",
+      "calculations/fe110_five_c2_adsorption_20261006/gpu_repair_submission_v1/submission_summary.json",
+      "calculations/fe110_five_c2_adsorption_20261006/gpu_repair_submission_v1/submit.txt",
+      "calculations/fe110_five_c2_adsorption_20261006/gpu_repair_submission_v1/scheduler_2176.txt"
+    ]
+  },
+  "supersedes": [
+    "task-fe110-five-c2-adsorption-gpu2142-reviewed-repair-20261007"
+  ]
+}

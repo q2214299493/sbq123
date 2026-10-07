@@ -15,6 +15,7 @@ from scripts.artifact_io import sha256_file, write_json
 ROOT = Path(__file__).resolve().parents[2]
 PACKAGE = ROOT / "calculations/fe110_five_c2_adsorption_20261006/gpu_supplement_v1"
 EVIDENCE = PACKAGE.parent / "gpu_supplement_submission_v1"
+EXPECTED_REMOTE = "/home/sbq/sbq/aqcat25_ts_pilot/fe110_five_c2_adsorption_20261006_gpu_supplement_v1"
 SSH = ["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=15", "-o", "IdentitiesOnly=yes",
        "-i", "C:/Users/86177/.ssh/id_ed25519_fe_agent", "-p", "36039", "sbq@10sx4jr711576.vicp.fun"]
 
@@ -40,7 +41,7 @@ def main():
     manifest_path = PACKAGE / "batch_manifest.json"
     batch = json.loads(manifest_path.read_text())
     remote = batch["remote_root"]
-    assert remote == "/home/sbq/sbq/aqcat25_ts_pilot/fe110_five_c2_adsorption_20261006_gpu_supplement_v1"
+    assert remote == EXPECTED_REMOTE
     for item in batch["files"]:
         assert sha256_file(PACKAGE / item["path"]) == item["sha256"]
     digest = sha256_file(manifest_path)
@@ -92,7 +93,7 @@ def main():
         if not match:
             raise ValueError("Missing scheduler state")
         record = {"job_id": job, "scheduler_state": match.group(1), "remote_root": remote,
-                  "observed_at": datetime.now(timezone.utc).isoformat(), "candidate_count": 5,
+                  "observed_at": datetime.now(timezone.utc).isoformat(), "candidate_count": len(batch["handoffs"]),
                   "names": [r["name"] for r in batch["handoffs"]], "batch_manifest_sha256": digest,
                   "submission_receipt_sha256": sha256_file(EVIDENCE / "submit.txt"),
                   "scheduler_evidence_sha256": sha256_file(EVIDENCE / f"scheduler_{job}.txt"),

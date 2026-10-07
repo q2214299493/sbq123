@@ -1,0 +1,6 @@
+{
+  "command": "set -eu; test \"$(hostname)\" = MZ73; cd /home/sbq/sbq/aqcat25_ts_pilot/fe110_five_c2_adsorption_20261007_gpu_repair_v1; printf '%s  batch_manifest.json\\n' dd7c2522cdda517efbfe4f659ab26d379cbfede99ad646582b2b9bde06b572f7 | sha256sum -c -; export AQCAT_PILOT_ROOT=/home/sbq/sbq/aqcat25_ts_pilot/fe110_five_c2_adsorption_20261007_gpu_repair_v1/runtime; export AQCAT_ROOT=/home/sbq/sbq/aqcat25; export AQCAT_PYTHON=/home/sbq/sbq/ml_ts_acceleration/venv/bin/python; export TMPDIR=/home/sbq/sbq/aqcat25_ts_pilot/fe110_five_c2_adsorption_20261007_gpu_repair_v1/tmp XDG_CACHE_HOME=/home/sbq/sbq/aqcat25_ts_pilot/fe110_five_c2_adsorption_20261007_gpu_repair_v1/cache/xdg TORCH_HOME=/home/sbq/sbq/aqcat25_ts_pilot/fe110_five_c2_adsorption_20261007_gpu_repair_v1/cache/torch HF_HOME=/home/sbq/sbq/aqcat25_ts_pilot/fe110_five_c2_adsorption_20261007_gpu_repair_v1/cache/huggingface; . \"$AQCAT_PILOT_ROOT/aqcat25_mz73_env.sh\"; aqcat25_setup_mz73_environment; bash -n batch_job.sh; bash -n runtime/aqcat25_gpu_job.sh; bash -n runtime/aqcat25_mz73_env.sh; \"$AQCAT_PYTHON\" preflight.py",
+  "exit_code": 0,
+  "observed_at": "2026-10-07T16:00:08.559979+00:00",
+  "output_sha256": "3dc801e3608d0ea63775a26f0ad2e172c213e0c685eb250cc2894da4948cb93d"
+}

@@ -1,0 +1,6 @@
+{
+  "command": "set -eu; cd /home/sbq/sbq/aqcat25_ts_pilot/fe110_five_c2_adsorption_20261007_gpu_repair_v1; printf '%s  batch_manifest.json\\n' dd7c2522cdda517efbfe4f659ab26d379cbfede99ad646582b2b9bde06b572f7 | sha256sum -c - >&2; set -C; : > submission_attempt.lock; sbatch --parsable --output=/home/sbq/sbq/aqcat25_ts_pilot/fe110_five_c2_adsorption_20261007_gpu_repair_v1/slurm-%j.out batch_job.sh > submission_receipt.txt; cat submission_receipt.txt",
+  "exit_code": 0,
+  "observed_at": "2026-10-07T16:00:27.043384+00:00",
+  "output_sha256": "49feb03c55e2312a53edd86ef52290d4902719b6b46260b8ae94346f709b8c38"
+}

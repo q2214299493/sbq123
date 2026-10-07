@@ -1,0 +1,30 @@
+{
+  "user_authorization": "2026-10-07: 继续; scoped to the immediately proposed one repaired-seed bounded GPU pre-relaxation",
+  "action": "SUBMIT_BOUNDED_AQCAT25_ADSORPTION_PRE_RELAXATION_ONLY",
+  "repair_review_sha256": "d94fcd4562e37ec9f1c15217490015c03ae7a25a7ccae832926b6de3ca577e74",
+  "source_kind": "same_intact_user_owned_local_CARE_template_rigid_reorientation",
+  "selected": [
+    {
+      "name": "03_extra2_repair_v1",
+      "structure_sha256": "08c070b90b29aaba2b405f32420478af9fe72938eab6982557971564345edd03"
+    }
+  ],
+  "prior_runtime_manifest_sha256": "eba3524bc6a64800dd93a849824ea40adeb1fa887a37eda059fe64ccb47beda6",
+  "checkpoint_sha256": "e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50",
+  "limits": {
+    "steps_per_candidate": 80,
+    "fmax_eV_per_A": 0.1,
+    "gpu_count": 1,
+    "cpu_count": 4,
+    "host_memory_GiB": 32,
+    "walltime_minutes": 30
+  },
+  "constraints": "Only original bottom18Fe fixed; no bond, height or adsorption-site restraints added.",
+  "chemical_review": "All six adsorbate pairs monitored; work-side exact-graph review after return is mandatory.",
+  "restrictions": {
+    "submit_vasp": false,
+    "fine_tune": false,
+    "automatic_resubmit": false,
+    "scientific_acceptance": false
+  }
+}

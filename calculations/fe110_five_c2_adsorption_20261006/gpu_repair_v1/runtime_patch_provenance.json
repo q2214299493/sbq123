@@ -1,0 +1,13 @@
+{
+  "failed_jobs": [
+    "2136",
+    "2137",
+    "2138"
+  ],
+  "model_started": false,
+  "cause": "Canonical root guard incorrectly requires lexical root to equal its realpath; MZ73 root is a symlink.",
+  "observed_lexical_root": "/home/sbq/sbq",
+  "observed_real_root": "/home/ubuntu/hdd/sbq/sbq",
+  "change": "Task-local environment helper resolves the allowed root and verifies every write target remains inside that canonical root. Global helper and prior package unchanged.",
+  "environment_policy": "Pin writable cache/temp paths under the allowed root instead of inheriting scheduler scratch paths. Trace bootstrap to retain exact failures."
+}
