@@ -1,0 +1,688 @@
+{
+  "job": "2142",
+  "records": [
+    {
+      "name": "01_extra1",
+      "status": "UNIQUE_REVIEWED_GPU_CANDIDATE",
+      "source_structure_sha256": "46688e75fffb48998610ae2fb1beb02a14aee1cbfec2002b9c85e1bc3b4d9e03",
+      "return_validation": "PASS",
+      "ML_converged": true,
+      "steps": 29,
+      "ML_fmax_eV_A": 0.08828729485649862,
+      "geometry": {
+        "checks": {
+          "finite_positions": true,
+          "atom_order": true,
+          "cell": true,
+          "fixed_coordinates": true,
+          "fixed_indices": true,
+          "chemistry": true,
+          "surface_contact": true,
+          "no_nonbonded_collision": true
+        },
+        "pass": true,
+        "chemistry": {
+          "connectivity_changed": false,
+          "dissociated": false,
+          "chemical_event": "none",
+          "lost_bonds": [],
+          "formed_bonds": [],
+          "initial_fragment_count": 1,
+          "relaxed_fragment_count": 1
+        },
+        "bonds": [
+          {
+            "atoms_0based": [
+              45,
+              46
+            ],
+            "initial_A": 1.5389782174380437,
+            "final_A": 1.3376838772426578
+          },
+          {
+            "atoms_0based": [
+              45,
+              47
+            ],
+            "initial_A": 1.0642933799884358,
+            "final_A": 1.0872322042629232
+          }
+        ],
+        "contacts": [
+          {
+            "atom_0based": 45,
+            "symbol": "C",
+            "nearest_Fe_0based": 44,
+            "Fe_distance_A": 1.91055982405506,
+            "site": "top",
+            "lateral_A": 0.3668613876154485
+          },
+          {
+            "atom_0based": 46,
+            "symbol": "C",
+            "nearest_Fe_0based": 43,
+            "Fe_distance_A": 1.844157563872092,
+            "site": "long_bridge",
+            "lateral_A": 0.12780923253017992
+          },
+          {
+            "atom_0based": 47,
+            "symbol": "H",
+            "nearest_Fe_0based": 44,
+            "Fe_distance_A": 2.83564314475294,
+            "site": "top",
+            "lateral_A": 0.0513958628671349
+          }
+        ],
+        "minimum_nonbonded_A": 2.2808026428454813
+      },
+      "domain_assessment": {
+        "calibration_id": "aqcat25_fe45_v1",
+        "status": "in_domain",
+        "method": "empirical force error on compatible VASP final-force labels; no per-candidate uncertainty from one checkpoint",
+        "reasons": [
+          "compatible Fe45 composition envelope and all empirical force thresholds passed"
+        ]
+      },
+      "comparisons": [
+        {
+          "name": "01_cfg2",
+          "kind": "same_checkpoint_GPU",
+          "RMSD_A": 1.2670436341109785,
+          "geometry_match": false,
+          "same_model_energy_difference_eV": 0.24794816970825195,
+          "path": "calculations/fe110_five_c2_adsorption_20261006/gpu_batch_v4/01_cfg2/output/job_2139/POSCAR",
+          "sha256": "6322a8554ee429f066428d337c564703f48dffc1baa12e4524debe3222716127"
+        },
+        {
+          "name": "01_cfg1",
+          "kind": "same_checkpoint_GPU",
+          "RMSD_A": 0.8705743962620434,
+          "geometry_match": false,
+          "same_model_energy_difference_eV": 0.23082518577575684,
+          "path": "calculations/fe110_five_c2_adsorption_20261006/gpu_batch_v4/01_cfg1/output/job_2139/POSCAR",
+          "sha256": "91107b3093e27afe8e4c7e3085b42d0dc854001043bd8001f4df8c30eb04796d"
+        },
+        {
+          "name": "VASP_input_01_cfg2",
+          "kind": "VASP_input",
+          "RMSD_A": 1.2670436341109785,
+          "geometry_match": false,
+          "same_model_energy_difference_eV": null,
+          "path": "calculations/fe110_five_c2_adsorption_20261006/vasp_batch_v1/01_cfg2/POSCAR",
+          "sha256": "6322a8554ee429f066428d337c564703f48dffc1baa12e4524debe3222716127"
+        },
+        {
+          "name": "VASP_snapshot_01_cfg2",
+          "kind": "unreviewed_live_VASP_structure",
+          "RMSD_A": 1.2254317722362182,
+          "geometry_match": false,
+          "same_model_energy_difference_eV": null,
+          "path": "calculations/fe110_five_c2_adsorption_20261006/gpu_supplement_review_v1/vasp_structure_snapshot/01_cfg2/CONTCAR",
+          "sha256": "5a75c7bf9c0f539d4eb8bed1f52917d7c1823d1715361996ccbea9d3c7a2a6ec"
+        },
+        {
+          "name": "VASP_input_01_cfg1",
+          "kind": "VASP_input",
+          "RMSD_A": 0.8705743962620434,
+          "geometry_match": false,
+          "same_model_energy_difference_eV": null,
+          "path": "calculations/fe110_five_c2_adsorption_20261006/vasp_batch_v1/01_cfg1/POSCAR",
+          "sha256": "91107b3093e27afe8e4c7e3085b42d0dc854001043bd8001f4df8c30eb04796d"
+        },
+        {
+          "name": "VASP_snapshot_01_cfg1",
+          "kind": "unreviewed_live_VASP_structure",
+          "RMSD_A": 1.1881401531941835,
+          "geometry_match": false,
+          "same_model_energy_difference_eV": null,
+          "path": "calculations/fe110_five_c2_adsorption_20261006/gpu_supplement_review_v1/vasp_structure_snapshot/01_cfg1/CONTCAR",
+          "sha256": "5a048fa9d09b4b92e0098a9478c67fa8abf01be3d46ac46da872f0948cbef577"
+        }
+      ],
+      "duplicates": [],
+      "VASP_geometry_matches": [],
+      "predicted_energy_eV_NOT_DFT": -2.6659069061279297
+    },
+    {
+      "name": "02_extra1",
+      "status": "GEOMETRIC_MATCH_EXISTING_VASP",
+      "source_structure_sha256": "82d58efa423b3ba93af3dbc79ead601afdae0d756815976ee66d805fbdf01af7",
+      "return_validation": "PASS",
+      "ML_converged": true,
+      "steps": 24,
+      "ML_fmax_eV_A": 0.08423335164035343,
+      "geometry": {
+        "checks": {
+          "finite_positions": true,
+          "atom_order": true,
+          "cell": true,
+          "fixed_coordinates": true,
+          "fixed_indices": true,
+          "chemistry": true,
+          "surface_contact": true,
+          "no_nonbonded_collision": true
+        },
+        "pass": true,
+        "chemistry": {
+          "connectivity_changed": false,
+          "dissociated": false,
+          "chemical_event": "none",
+          "lost_bonds": [],
+          "formed_bonds": [],
+          "initial_fragment_count": 1,
+          "relaxed_fragment_count": 1
+        },
+        "bonds": [
+          {
+            "atoms_0based": [
+              45,
+              46
+            ],
+            "initial_A": 1.54038515326282,
+            "final_A": 1.4116459442979832
+          },
+          {
+            "atoms_0based": [
+              45,
+              47
+            ],
+            "initial_A": 1.0828348603835982,
+            "final_A": 1.0970217405454445
+          },
+          {
+            "atoms_0based": [
+              45,
+              48
+            ],
+            "initial_A": 1.0829092863825498,
+            "final_A": 1.0945803452424046
+          }
+        ],
+        "contacts": [
+          {
+            "atom_0based": 45,
+            "symbol": "C",
+            "nearest_Fe_0based": 44,
+            "Fe_distance_A": 2.1799450121024475,
+            "site": "top",
+            "lateral_A": 0.33695840671084404
+          },
+          {
+            "atom_0based": 46,
+            "symbol": "C",
+            "nearest_Fe_0based": 43,
+            "Fe_distance_A": 1.8879354868711118,
+            "site": "long_bridge",
+            "lateral_A": 0.186646515754204
+          },
+          {
+            "atom_0based": 47,
+            "symbol": "H",
+            "nearest_Fe_0based": 44,
+            "Fe_distance_A": 2.8393181536298715,
+            "site": "hollow",
+            "lateral_A": 0.42175545215018373
+          },
+          {
+            "atom_0based": 48,
+            "symbol": "H",
+            "nearest_Fe_0based": 44,
+            "Fe_distance_A": 2.770632036981921,
+            "site": "unknown",
+            "lateral_A": 0.48486276721486476
+          }
+        ],
+        "minimum_nonbonded_A": 1.8416240667787023
+      },
+      "domain_assessment": {
+        "calibration_id": "aqcat25_fe45_v1",
+        "status": "in_domain",
+        "method": "empirical force error on compatible VASP final-force labels; no per-candidate uncertainty from one checkpoint",
+        "reasons": [
+          "compatible Fe45 composition envelope and all empirical force thresholds passed"
+        ]
+      },
+      "comparisons": [
+        {
+          "name": "02_cfg2",
+          "kind": "same_checkpoint_GPU",
+          "RMSD_A": 0.777291170808514,
+          "geometry_match": false,
+          "same_model_energy_difference_eV": 0.33939409255981445,
+          "path": "calculations/fe110_five_c2_adsorption_20261006/gpu_batch_v4/02_cfg2/output/job_2139/POSCAR",
+          "sha256": "e854cd0b34f5f914ab22db8c354afef4464ccf9dbf88a5b96413b2c205f4efd7"
+        },
+        {
+          "name": "VASP_input_02_cfg2",
+          "kind": "VASP_input",
+          "RMSD_A": 0.777291170808514,
+          "geometry_match": false,
+          "same_model_energy_difference_eV": null,
+          "path": "calculations/fe110_five_c2_adsorption_20261006/vasp_batch_v1/02_cfg2/POSCAR",
+          "sha256": "e854cd0b34f5f914ab22db8c354afef4464ccf9dbf88a5b96413b2c205f4efd7"
+        },
+        {
+          "name": "VASP_snapshot_02_cfg2",
+          "kind": "unreviewed_live_VASP_structure",
+          "RMSD_A": 0.18567030607848592,
+          "geometry_match": true,
+          "same_model_energy_difference_eV": null,
+          "path": "calculations/fe110_five_c2_adsorption_20261006/gpu_supplement_review_v1/vasp_structure_snapshot/02_cfg2/CONTCAR",
+          "sha256": "fbae685f15beaf5a8dc80d141f0e1cccddf7dfbbca7c8469a032bebefd480b69"
+        }
+      ],
+      "duplicates": [],
+      "VASP_geometry_matches": [
+        {
+          "name": "VASP_snapshot_02_cfg2",
+          "kind": "unreviewed_live_VASP_structure",
+          "RMSD_A": 0.18567030607848592,
+          "geometry_match": true,
+          "same_model_energy_difference_eV": null,
+          "path": "calculations/fe110_five_c2_adsorption_20261006/gpu_supplement_review_v1/vasp_structure_snapshot/02_cfg2/CONTCAR",
+          "sha256": "fbae685f15beaf5a8dc80d141f0e1cccddf7dfbbca7c8469a032bebefd480b69"
+        }
+      ],
+      "predicted_energy_eV_NOT_DFT": -3.1429214477539062
+    },
+    {
+      "name": "02_extra2",
+      "status": "UNIQUE_REVIEWED_GPU_CANDIDATE",
+      "source_structure_sha256": "782662dcdc5049607aa4525616410d53d8b2e17bf33f7d08e0845ec353b154db",
+      "return_validation": "PASS",
+      "ML_converged": true,
+      "steps": 32,
+      "ML_fmax_eV_A": 0.06634281623283896,
+      "geometry": {
+        "checks": {
+          "finite_positions": true,
+          "atom_order": true,
+          "cell": true,
+          "fixed_coordinates": true,
+          "fixed_indices": true,
+          "chemistry": true,
+          "surface_contact": true,
+          "no_nonbonded_collision": true
+        },
+        "pass": true,
+        "chemistry": {
+          "connectivity_changed": false,
+          "dissociated": false,
+          "chemical_event": "none",
+          "lost_bonds": [],
+          "formed_bonds": [],
+          "initial_fragment_count": 1,
+          "relaxed_fragment_count": 1
+        },
+        "bonds": [
+          {
+            "atoms_0based": [
+              45,
+              46
+            ],
+            "initial_A": 1.5403851532628188,
+            "final_A": 1.3963953428799605
+          },
+          {
+            "atoms_0based": [
+              45,
+              47
+            ],
+            "initial_A": 1.0828348603835998,
+            "final_A": 1.0945535917902116
+          },
+          {
+            "atoms_0based": [
+              45,
+              48
+            ],
+            "initial_A": 1.08290928638255,
+            "final_A": 1.099751781308652
+          }
+        ],
+        "contacts": [
+          {
+            "atom_0based": 45,
+            "symbol": "C",
+            "nearest_Fe_0based": 43,
+            "Fe_distance_A": 2.3048956388695143,
+            "site": "unknown",
+            "lateral_A": 0.7326729018485643
+          },
+          {
+            "atom_0based": 46,
+            "symbol": "C",
+            "nearest_Fe_0based": 44,
+            "Fe_distance_A": 1.8817773121681018,
+            "site": "long_bridge",
+            "lateral_A": 0.3286522761340855
+          },
+          {
+            "atom_0based": 47,
+            "symbol": "H",
+            "nearest_Fe_0based": 43,
+            "Fe_distance_A": 2.7675698023004314,
+            "site": "top",
+            "lateral_A": 0.3791699050009061
+          },
+          {
+            "atom_0based": 48,
+            "symbol": "H",
+            "nearest_Fe_0based": 37,
+            "Fe_distance_A": 2.681585482944905,
+            "site": "short_bridge",
+            "lateral_A": 0.30947567512199065
+          }
+        ],
+        "minimum_nonbonded_A": 1.84619683108718
+      },
+      "domain_assessment": {
+        "calibration_id": "aqcat25_fe45_v1",
+        "status": "in_domain",
+        "method": "empirical force error on compatible VASP final-force labels; no per-candidate uncertainty from one checkpoint",
+        "reasons": [
+          "compatible Fe45 composition envelope and all empirical force thresholds passed"
+        ]
+      },
+      "comparisons": [
+        {
+          "name": "02_cfg2",
+          "kind": "same_checkpoint_GPU",
+          "RMSD_A": 0.9525260937748794,
+          "geometry_match": false,
+          "same_model_energy_difference_eV": 0.3492116928100586,
+          "path": "calculations/fe110_five_c2_adsorption_20261006/gpu_batch_v4/02_cfg2/output/job_2139/POSCAR",
+          "sha256": "e854cd0b34f5f914ab22db8c354afef4464ccf9dbf88a5b96413b2c205f4efd7"
+        },
+        {
+          "name": "VASP_input_02_cfg2",
+          "kind": "VASP_input",
+          "RMSD_A": 0.9525260937748794,
+          "geometry_match": false,
+          "same_model_energy_difference_eV": null,
+          "path": "calculations/fe110_five_c2_adsorption_20261006/vasp_batch_v1/02_cfg2/POSCAR",
+          "sha256": "e854cd0b34f5f914ab22db8c354afef4464ccf9dbf88a5b96413b2c205f4efd7"
+        },
+        {
+          "name": "VASP_snapshot_02_cfg2",
+          "kind": "unreviewed_live_VASP_structure",
+          "RMSD_A": 0.4343061109070939,
+          "geometry_match": false,
+          "same_model_energy_difference_eV": null,
+          "path": "calculations/fe110_five_c2_adsorption_20261006/gpu_supplement_review_v1/vasp_structure_snapshot/02_cfg2/CONTCAR",
+          "sha256": "fbae685f15beaf5a8dc80d141f0e1cccddf7dfbbca7c8469a032bebefd480b69"
+        },
+        {
+          "name": "02_extra1",
+          "kind": "same_checkpoint_GPU",
+          "RMSD_A": 0.5294475991885184,
+          "geometry_match": false,
+          "same_model_energy_difference_eV": 0.00981760025024414,
+          "path": "calculations/fe110_five_c2_adsorption_20261006/gpu_supplement_v1/02_extra1/output/job_2142/POSCAR",
+          "sha256": "82d58efa423b3ba93af3dbc79ead601afdae0d756815976ee66d805fbdf01af7"
+        }
+      ],
+      "duplicates": [],
+      "VASP_geometry_matches": [],
+      "predicted_energy_eV_NOT_DFT": -3.1527390480041504
+    },
+    {
+      "name": "03_extra1",
+      "status": "UNIQUE_REVIEWED_GPU_CANDIDATE",
+      "source_structure_sha256": "d5a57459e2baf09e359bbd2dedb6a864aff539a9eddc4ce27024f7e2b2181624",
+      "return_validation": "PASS",
+      "ML_converged": true,
+      "steps": 52,
+      "ML_fmax_eV_A": 0.08490493106780106,
+      "geometry": {
+        "checks": {
+          "finite_positions": true,
+          "atom_order": true,
+          "cell": true,
+          "fixed_coordinates": true,
+          "fixed_indices": true,
+          "chemistry": true,
+          "surface_contact": true,
+          "no_nonbonded_collision": true
+        },
+        "pass": true,
+        "chemistry": {
+          "connectivity_changed": false,
+          "dissociated": false,
+          "chemical_event": "none",
+          "lost_bonds": [],
+          "formed_bonds": [],
+          "initial_fragment_count": 1,
+          "relaxed_fragment_count": 1
+        },
+        "bonds": [
+          {
+            "atoms_0based": [
+              45,
+              46
+            ],
+            "initial_A": 1.5349226227712747,
+            "final_A": 1.4152341956680348
+          },
+          {
+            "atoms_0based": [
+              45,
+              48
+            ],
+            "initial_A": 1.0618762751050197,
+            "final_A": 1.1003757786168955
+          },
+          {
+            "atoms_0based": [
+              46,
+              47
+            ],
+            "initial_A": 1.4013804173680642,
+            "final_A": 1.286209918346442
+          }
+        ],
+        "contacts": [
+          {
+            "atom_0based": 45,
+            "symbol": "C",
+            "nearest_Fe_0based": 43,
+            "Fe_distance_A": 2.078138781114213,
+            "site": "long_bridge",
+            "lateral_A": 0.304208106835126
+          },
+          {
+            "atom_0based": 46,
+            "symbol": "C",
+            "nearest_Fe_0based": 44,
+            "Fe_distance_A": 2.0092060896060153,
+            "site": "hollow",
+            "lateral_A": 0.31154550854889246
+          },
+          {
+            "atom_0based": 47,
+            "symbol": "O",
+            "nearest_Fe_0based": 39,
+            "Fe_distance_A": 2.1002139070230914,
+            "site": "unknown",
+            "lateral_A": 0.6307835557709671
+          },
+          {
+            "atom_0based": 48,
+            "symbol": "H",
+            "nearest_Fe_0based": 43,
+            "Fe_distance_A": 2.5996425115190225,
+            "site": "long_bridge",
+            "lateral_A": 0.38168903064704746
+          }
+        ],
+        "minimum_nonbonded_A": 2.1784503949051457
+      },
+      "domain_assessment": {
+        "calibration_id": "aqcat25_fe45_v1",
+        "status": "in_domain",
+        "method": "empirical force error on compatible VASP final-force labels; no per-candidate uncertainty from one checkpoint",
+        "reasons": [
+          "compatible Fe45 composition envelope and all empirical force thresholds passed"
+        ]
+      },
+      "comparisons": [
+        {
+          "name": "VASP_input_03_cfg0_direct_vasp",
+          "kind": "VASP_input",
+          "RMSD_A": 1.186639176518489,
+          "geometry_match": false,
+          "same_model_energy_difference_eV": null,
+          "path": "calculations/fe110_five_c2_adsorption_20261006/vasp_batch_v1/03_cfg0_direct_vasp/POSCAR",
+          "sha256": "bae70901a1b6eab91e6f3b7d0b87bdcc536fb4455bc768fe5fff85712a0c9873"
+        }
+      ],
+      "duplicates": [],
+      "VASP_geometry_matches": [],
+      "predicted_energy_eV_NOT_DFT": -2.6111042499542236
+    },
+    {
+      "name": "03_extra2",
+      "status": "REJECT_TARGET_GRAPH_CHANGED",
+      "source_structure_sha256": "c1c2f58971e76637bd9a421d855b0ae32b78db9f9e920e8c193150950297764a",
+      "return_validation": "PASS",
+      "ML_converged": true,
+      "steps": 56,
+      "ML_fmax_eV_A": 0.061426183944481155,
+      "geometry": {
+        "checks": {
+          "finite_positions": true,
+          "atom_order": true,
+          "cell": true,
+          "fixed_coordinates": true,
+          "fixed_indices": true,
+          "chemistry": false,
+          "surface_contact": true,
+          "no_nonbonded_collision": true
+        },
+        "pass": false,
+        "chemistry": {
+          "connectivity_changed": true,
+          "dissociated": true,
+          "chemical_event": "dissociation",
+          "lost_bonds": [
+            [
+              0,
+              1
+            ]
+          ],
+          "formed_bonds": [],
+          "initial_fragment_count": 1,
+          "relaxed_fragment_count": 2
+        },
+        "bonds": [
+          {
+            "atoms_0based": [
+              45,
+              46
+            ],
+            "initial_A": 1.5349226227712738,
+            "final_A": 2.935478963183084
+          },
+          {
+            "atoms_0based": [
+              45,
+              48
+            ],
+            "initial_A": 1.0618762751050215,
+            "final_A": 1.105071944299274
+          },
+          {
+            "atoms_0based": [
+              46,
+              47
+            ],
+            "initial_A": 1.401380417368067,
+            "final_A": 1.1895990959385654
+          }
+        ],
+        "contacts": [
+          {
+            "atom_0based": 45,
+            "symbol": "C",
+            "nearest_Fe_0based": 43,
+            "Fe_distance_A": 1.9191650887250238,
+            "site": "long_bridge",
+            "lateral_A": 0.12249893996415825
+          },
+          {
+            "atom_0based": 46,
+            "symbol": "C",
+            "nearest_Fe_0based": 37,
+            "Fe_distance_A": 1.798179778434246,
+            "site": "unknown",
+            "lateral_A": 0.5732491163985098
+          },
+          {
+            "atom_0based": 47,
+            "symbol": "O",
+            "nearest_Fe_0based": 37,
+            "Fe_distance_A": 2.9672175408583525,
+            "site": "hollow",
+            "lateral_A": 0.15501427739737544
+          },
+          {
+            "atom_0based": 48,
+            "symbol": "H",
+            "nearest_Fe_0based": 43,
+            "Fe_distance_A": 2.705494602413428,
+            "site": "long_bridge",
+            "lateral_A": 0.23996713163057445
+          }
+        ],
+        "minimum_nonbonded_A": 3.045974270219312
+      },
+      "domain_assessment": {
+        "calibration_id": "aqcat25_fe45_v1",
+        "status": "in_domain",
+        "method": "empirical force error on compatible VASP final-force labels; no per-candidate uncertainty from one checkpoint",
+        "reasons": [
+          "compatible Fe45 composition envelope and all empirical force thresholds passed"
+        ]
+      },
+      "comparisons": [
+        {
+          "name": "VASP_input_03_cfg0_direct_vasp",
+          "kind": "VASP_input",
+          "RMSD_A": 1.579438004135458,
+          "geometry_match": false,
+          "same_model_energy_difference_eV": null,
+          "path": "calculations/fe110_five_c2_adsorption_20261006/vasp_batch_v1/03_cfg0_direct_vasp/POSCAR",
+          "sha256": "bae70901a1b6eab91e6f3b7d0b87bdcc536fb4455bc768fe5fff85712a0c9873"
+        },
+        {
+          "name": "03_extra1",
+          "kind": "same_checkpoint_GPU",
+          "RMSD_A": 1.704178156665654,
+          "geometry_match": false,
+          "same_model_energy_difference_eV": 0.7423322200775146,
+          "path": "calculations/fe110_five_c2_adsorption_20261006/gpu_supplement_v1/03_extra1/output/job_2142/POSCAR",
+          "sha256": "d5a57459e2baf09e359bbd2dedb6a864aff539a9eddc4ce27024f7e2b2181624"
+        }
+      ],
+      "duplicates": [],
+      "VASP_geometry_matches": [],
+      "predicted_energy_eV_NOT_DFT": -3.3534364700317383
+    }
+  ],
+  "surface_symmetry_operations": 36,
+  "height_shift_removed_for_relaxed_duplicates": false,
+  "identical_H_permutations": true,
+  "energy_comparison_policy": "Only same-checkpoint compatible GPU predictions; no ML/DFT energy comparison or energy promotion.",
+  "VASP_snapshots": "Geometry-only live snapshots, not accepted final energies or endpoints.",
+  "rules_sha256": "45bab93237e78f37287f36ec1626b0d38b38fe0c17f913a9062fdc7d65bcceed",
+  "input_manifest_sha256": "eba3524bc6a64800dd93a849824ea40adeb1fa887a37eda059fe64ccb47beda6",
+  "selected": [
+    "01_extra1",
+    "02_extra2",
+    "03_extra1"
+  ],
+  "submit_gpu": false,
+  "submit_vasp": false,
+  "scientific_acceptance": false
+}

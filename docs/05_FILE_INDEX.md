@@ -153,6 +153,13 @@ Superseded NEB runs and imported packages are under `archive/`; they are not cur
 
 Embedded commands in these locations are non-authoritative unless `tasks/current_task.md` explicitly promotes them.
 
+## Fe110 five-species adsorption GPU2142 review (2026-10-07)
+
+- `docs/reviews/fe110_gpu2142_adsorption_review_20261007.md`: exact-graph, site warnings, symmetry duplicate review and unsubmitted CHCO repair scope.
+- `calculations/fe110_five_c2_adsorption_20261006/gpu_supplement_review_v1/review.json`: hash-bound returns/comparisons; VASP snapshots are geometry-only.
+- `calculations/fe110_five_c2_adsorption_20261006/supplement_repair_v1/repair_review.json`: intact-template rebuild recipe, source hashes and new POSCAR.
+- `calculations/fe110_five_c2_adsorption_20261006/supplement_repair_v1/repair_comparison.png`: original, failed ML fragments and repaired initial geometry.
+
 ## Exclusions
 
 `.gitignore` excludes licensed `POTCAR`, credentials, VASP runtime output, generated databases/caches, temporary diagnostics, and large local source/model data. Do not force-add excluded material.

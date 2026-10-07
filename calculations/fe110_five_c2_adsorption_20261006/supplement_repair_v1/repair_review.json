@@ -1,0 +1,103 @@
+{
+  "user_request": "对剩下四个进行审核去重 剩下一个做修改",
+  "identity": "QEJQAPYSVNHDJF-UHFFFAOYSA-N* [CH][C][O]",
+  "recipe": {
+    "name": "03_extra2_repair_v1",
+    "species_id": "03",
+    "anchor_global_0based": 46,
+    "site": "short_bridge",
+    "azimuth_deg": 0.0,
+    "tilt_deg": 0.0,
+    "axis_from": 46,
+    "axis_to": 45,
+    "binding_distance_A": 2.2,
+    "hypothesis": "Central C46 anchors at short bridge; intact CH-C-O chain parallel to long Fe rows, without pulling its two carbons toward opposed transverse sites."
+  },
+  "source_kind": "same_intact_user_owned_local_CARE_template_rigid_reorientation",
+  "source_path": "calculations/fe110_five_c2_adsorption_20261006/03_C2HO_QEJQAPYSVNHDJF/cfg0/POSCAR",
+  "source_sha256": "bae70901a1b6eab91e6f3b7d0b87bdcc536fb4455bc768fe5fff85712a0c9873",
+  "slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+  "original_review_sha256": "6af2282eed83ed8d400d806730786029a2646fcf6ec7133cc073461031b99ac2",
+  "failed_review_sha256": "f0ac7f608451f16f6b5ef7ac8033c5a4b799dd23f9356615537223fad57d89aa",
+  "failed_output_sha256": "c1c2f58971e76637bd9a421d855b0ae32b78db9f9e920e8c193150950297764a",
+  "observed_failure": "CC1.5349A ->2.9355A; CH and CO fragments retain bonds. This is ML dissociation evidence, not proof that the actual DFT intact state is unstable.",
+  "change": "Anchor CH-C45 long bridge -> central C46 short bridge; chain azimuth90 ->0degrees, tilt10 ->0degrees. Original internal geometry and all45clean-slab Fe positions preserved.",
+  "not_changed": [
+    "atom order",
+    "exact graph and internal bond lengths",
+    "cell",
+    "fixedFe0-17",
+    "model checkpoint",
+    "DFT protocol"
+  ],
+  "constraints": "Only original bottom18Fe fixed; no bond, height or adsorption-site restraints added.",
+  "geometry": {
+    "verdict": "pass",
+    "site_label": "η³(C,C,O)/sb-sb-sb",
+    "atom_site_details": [
+      {
+        "atom": "C1",
+        "nearest_fe_angstrom": 2.1640162697372682,
+        "site": "short_bridge",
+        "lateral_offset_angstrom": 0.1214556899149087
+      },
+      {
+        "atom": "C2",
+        "nearest_fe_angstrom": 2.1999999999999975,
+        "site": "short_bridge",
+        "lateral_offset_angstrom": 0.0
+      },
+      {
+        "atom": "O1",
+        "nearest_fe_angstrom": 2.196175626975346,
+        "site": "short_bridge",
+        "lateral_offset_angstrom": 0.012069240158906968
+      }
+    ],
+    "nearest_heavy_fe_angstrom": 2.1640162697372682,
+    "nearest_h_fe_angstrom": 2.1371814490329495,
+    "minimum_adsorbate_height_angstrom": 1.8278910755094397,
+    "maximum_bond_length_change_angstrom": 4.440892098500626e-16,
+    "connectivity_edges_local_0based": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        1,
+        2
+      ]
+    ],
+    "checks": {
+      "composition_and_order": true,
+      "bottom_18_fe_fixed": true,
+      "adsorbate_fully_mobile": true,
+      "connectivity_preserved": true,
+      "internal_geometry_preserved": true,
+      "adsorbate_above_surface": true,
+      "no_hard_heavy_fe_contact": true,
+      "no_hard_h_fe_contact": true
+    },
+    "warnings": [],
+    "needs_early_relaxation_review": false
+  },
+  "symmetry_RMSD_A_height_removed_initial_seed_only": {
+    "original_cfg0": 1.1373698764812274,
+    "original_cfg1": 1.137369794914428,
+    "original_cfg2": 1.137369880214805,
+    "03_extra1_ML": 1.2238623682711944,
+    "03_extra1_seed": 0.40653237068632037,
+    "03_extra2_failed_seed": 2.0975987683381123
+  },
+  "structure_path": "calculations/fe110_five_c2_adsorption_20261006/supplement_repair_v1/03_extra2_repair_v1/POSCAR",
+  "structure_sha256": "08c070b90b29aaba2b405f32420478af9fe72938eab6982557971564345edd03",
+  "status": "GEOMETRY_PASS_UNRELAXED_REVIEW_ONLY",
+  "gpu_submitted": false,
+  "vasp_submitted": false,
+  "scientific_acceptance": false,
+  "risk": "Reorientation may still dissociate or merge during relaxation; no force/model-error conclusion without same-structure VASP evidence."
+}

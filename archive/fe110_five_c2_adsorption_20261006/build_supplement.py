@@ -45,10 +45,11 @@ def surface_symmetries(slab):
     return operations
 
 
-def equivalent_rmsd(first, second, operations):
+def equivalent_rmsd(first, second, operations, *, remove_height_shift=True):
     """Adsorbate comparison under actual slab symmetry; identical H may permute.
 
-    Remove only uniform z height shift so height-only seeds cannot pad motif counts.
+    Optional uniform z shift removal prevents height-only initial-seed padding.
+    Relaxed-state comparison must retain the actual adsorption height.
     No arbitrary adsorbate Kabsch rotation or lateral COM alignment is permitted.
     """
     symbols = expanded_symbols(first)[45:]
@@ -62,7 +63,8 @@ def equivalent_rmsd(first, second, operations):
             for i, j in zip(hs, order):
                 indices[i] = j
             delta = minimum_image_delta_xy(mapped[indices] - first.frac[45:]) @ first.cell
-            delta[:, 2] -= delta[:, 2].mean()
+            if remove_height_shift:
+                delta[:, 2] -= delta[:, 2].mean()
             best = min(best, float(np.sqrt(np.mean(np.sum(delta**2, axis=1)))))
     return best
 

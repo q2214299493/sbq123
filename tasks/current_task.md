@@ -7,13 +7,14 @@ Optimize the five exact Fe110 C2 adsorption identities with reviewed GPU candida
 
 ## Current Evidence Snapshot
 
-- Existing10VASP adsorption jobs9839748-9839757 unchanged; last saved snapshotPEND, not re-queried in this GPU submission step.
-- User explicitly authorized five supplemental structures01_extra1,02_extra1/2,03_extra1/2 for bounded AQCat25 pre-relaxation.
-- Five initial structures pass canonical geometry/connectivity/symmetry-duplicate review; nominal input counts3/3/3/3/3 do not establish distinct stable final minima.
-- Frozen package SHA256eba3524bc6a64800dd93a849824ea40adeb1fa887a37eda059fe64ccb47beda6; verified prior task-local runtime reused, no global method changes.
-- MZ73 Slurm2142 scheduler=RUNNING observed2026-10-06T15:34:59.598662+00:00; oneGPU,4CPU,32GiB,120minutes,5sequential candidates,80steps each,fmax0.10eV/A.
-- Only bottom18Fe fixed; no artificial bond/height/site forces. All adsorbate pairs monitored; final exact chemistry still requires canonical review in work.
-- Python syntax,Ruff,4bounded tests,5handoff validations and remote no-model hash/ASE/shell preflight pass. No new VASP, fine-tuning or accepted-energy registration.
+- All5GPU2142producer exit records report0 and returned hashes/schema/checkpoint/source identities validate; no durable Slurm terminal state claimed.
+- All5reach MLfmax0.10eV/A, but03_extra2breaks CC1.5349->2.9355A intoCH+CO; failed input/output preserved, not accepted as targetCHCO.
+- 01_extra1,02_extra2,03_extra1 are intact and distinct from sampled previousGPU/VASP geometries; secondary CH2-C45/O47 off-symmetry site warnings retained, not final-site acceptance.
+- 02_extra1RMSD0.18567A to the sampled live02_cfg2VASP structure; hold as possible duplicate, not proven same final minimum and no source deletion.
+- Duplicate review uses36clean-slab top-side-preserving symmetries,xyPBC,Hpermutations,actual relaxed height; never compare ML and DFT absolute energies.
+- One new03_extra2_repair_v1 uses intact exactCARE template,centralC46shortbridge,flat chain alongFe rows,C46-Fe2.20A; canonical geometry passes without warnings,minimum seed-motifRMSD0.40653A.
+- Repair is unrelaxed; no bonds forced, no model fine-tuning and no DFT protocol change. Original45Fe slab and fixedFe0-17 preserved.
+- Python syntax,Ruff,12related tests and figure inspection pass; existing10VASP jobs untouched. No new GPU/VASP submission or accepted-energy registration.
 
 ## Lifecycle Status
 
@@ -21,11 +22,11 @@ Optimize the five exact Fe110 C2 adsorption identities with reviewed GPU candida
 
 ## One Executable Step
 
-After2142 finishes, collect producer receipts, result manifests and predicted structures; validate return hashes and review exact chemistry, sites, convergence and duplicates in work before requesting VASP.
+Review the rebuilt CHCO seed with the user and obtain separate authorization for one bounded AQCat25 pre-relaxation; retain three distinct intact GPU candidates for later VASP input review and hold02_extra1.
 
 ## Submission Boundary
 
-Five-candidate GPU batch2142 explicitly authorized and submitted. Existing10VASP jobs untouched. No automatic resubmission, fine-tuning or new VASP execution authorized.
+User authorized review/deduplication and one geometry repair only. No new GPU/VASP execution, stop, resubmit, model fine-tuning or accepted-result promotion.
 
 ## Authoritative Constraint
 
@@ -60,4 +61,7 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 - archive/fe110_five_c2_adsorption_20261006/SUPPLEMENT_GPU_SUBMISSION.md
 - calculations/fe110_five_c2_adsorption_20261006/gpu_supplement_v1/batch_manifest.json
 - calculations/fe110_five_c2_adsorption_20261006/gpu_supplement_submission_v1/submission_summary.json
+- calculations/fe110_five_c2_adsorption_20261006/gpu_supplement_review_v1/review.json
+- calculations/fe110_five_c2_adsorption_20261006/supplement_repair_v1/repair_review.json
+- docs/reviews/fe110_gpu2142_adsorption_review_20261007.md
 <!-- state-handoff:end current_task -->

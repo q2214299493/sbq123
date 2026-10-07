@@ -1,0 +1,275 @@
+{
+  "schema_version": 2,
+  "direction": "gpu_to_work",
+  "handoff_id": "fe110_five_c2_20261006_supplement_03_extra1",
+  "workflow_kind": "adsorption",
+  "source_workflow_sha256": "1fc033d0b4c276466508ff4d4cc2899b82351c9052fec8ab09483b506eac7938",
+  "source_handoff": {
+    "path": "handoff.json",
+    "sha256": "06273347b845d4f5edbe98940592e3e33ab081469ace0489bf1701b0cf40a9d6"
+  },
+  "candidate_structure": {
+    "path": "output/job_2142/POSCAR",
+    "sha256": "d5a57459e2baf09e359bbd2dedb6a864aff539a9eddc4ce27024f7e2b2181624",
+    "format": "vasp_poscar",
+    "atom_count": 49,
+    "atom_order_sha256": "4b02a989fb2bb78573d64099687209cfb3886d4d70b1d4c0a407cd9f5b76c1a2"
+  },
+  "adsorption": {
+    "evidence_gated_plan_sha256": "1fc033d0b4c276466508ff4d4cc2899b82351c9052fec8ab09483b506eac7938",
+    "clean_slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+    "identity_and_connectivity": "QEJQAPYSVNHDJF-UHFFFAOYSA-N* [CH][C][O]",
+    "intended_motif": "{\"site\": \"short_bridge\", \"anchor_global_0based\": 45, \"azimuth_deg\": 0.0, \"tilt_deg\": 15.0, \"hypothesis\": \"CH carbon at short bridge, intact C-C-O skeleton side-on/tilted along the long Fe-row direction\"}",
+    "surface_elements": [
+      "Fe"
+    ],
+    "adsorbate_atoms": [
+      {
+        "index_1based": 46,
+        "symbol": "C",
+        "role": "anchor"
+      },
+      {
+        "index_1based": 47,
+        "symbol": "C",
+        "role": "anchor"
+      },
+      {
+        "index_1based": 48,
+        "symbol": "O",
+        "role": "anchor"
+      },
+      {
+        "index_1based": 49,
+        "symbol": "H",
+        "role": "non_anchor"
+      }
+    ],
+    "connectivity_constraints": [],
+    "monitored_pairs": [
+      {
+        "label": "adsorbate_46_47",
+        "atoms_1based": [
+          46,
+          47
+        ]
+      },
+      {
+        "label": "adsorbate_46_48",
+        "atoms_1based": [
+          46,
+          48
+        ]
+      },
+      {
+        "label": "adsorbate_46_49",
+        "atoms_1based": [
+          46,
+          49
+        ]
+      },
+      {
+        "label": "adsorbate_47_48",
+        "atoms_1based": [
+          47,
+          48
+        ]
+      },
+      {
+        "label": "adsorbate_47_49",
+        "atoms_1based": [
+          47,
+          49
+        ]
+      },
+      {
+        "label": "adsorbate_48_49",
+        "atoms_1based": [
+          48,
+          49
+        ]
+      }
+    ]
+  },
+  "producer": {
+    "backend": "aqcat_gpu",
+    "hostname": "MZ73",
+    "gpu_job_id": "2142",
+    "model_identifier": "AQCat25 demo_single model.pt",
+    "checkpoint_sha256": "e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50"
+  },
+  "result": {
+    "result_class": "predicted_adsorption_candidate_only",
+    "optimizer_status": "converged",
+    "optimizer_steps": 52,
+    "predicted_energy": {
+      "value": -2.6111042499542236,
+      "unit": "eV",
+      "reportable_dft": false
+    },
+    "predicted_force": {
+      "fmax": 0.08490493106780106,
+      "unit": "eV/A",
+      "reportable_dft": false
+    },
+    "geometry_before": {
+      "pairs": {
+        "adsorbate_46_47": {
+          "atoms_1based": [
+            46,
+            47
+          ],
+          "distance_A": 1.5349226227712747
+        },
+        "adsorbate_46_48": {
+          "atoms_1based": [
+            46,
+            48
+          ],
+          "distance_A": 2.9363030401393377
+        },
+        "adsorbate_46_49": {
+          "atoms_1based": [
+            46,
+            49
+          ],
+          "distance_A": 1.0618762751050197
+        },
+        "adsorbate_47_48": {
+          "atoms_1based": [
+            47,
+            48
+          ],
+          "distance_A": 1.4013804173680644
+        },
+        "adsorbate_47_49": {
+          "atoms_1based": [
+            47,
+            49
+          ],
+          "distance_A": 2.596798897876293
+        },
+        "adsorbate_48_49": {
+          "atoms_1based": [
+            48,
+            49
+          ],
+          "distance_A": 3.9981793152443554
+        }
+      },
+      "anchors": [
+        {
+          "atom_index_1based": 46,
+          "symbol": "C",
+          "nearest_surface_atom_index_1based": 42,
+          "nearest_surface_distance_A": 2.350000000000001
+        },
+        {
+          "atom_index_1based": 47,
+          "symbol": "C",
+          "nearest_surface_atom_index_1based": 45,
+          "nearest_surface_distance_A": 2.679759603104063
+        },
+        {
+          "atom_index_1based": 48,
+          "symbol": "O",
+          "nearest_surface_atom_index_1based": 40,
+          "nearest_surface_distance_A": 3.02251032375053
+        }
+      ]
+    },
+    "geometry_after": {
+      "pairs": {
+        "adsorbate_46_47": {
+          "atoms_1based": [
+            46,
+            47
+          ],
+          "distance_A": 1.4152341956680337
+        },
+        "adsorbate_46_48": {
+          "atoms_1based": [
+            46,
+            48
+          ],
+          "distance_A": 2.5780124237901876
+        },
+        "adsorbate_46_49": {
+          "atoms_1based": [
+            46,
+            49
+          ],
+          "distance_A": 1.1003757786168957
+        },
+        "adsorbate_47_48": {
+          "atoms_1based": [
+            47,
+            48
+          ],
+          "distance_A": 1.2862099183464433
+        },
+        "adsorbate_47_49": {
+          "atoms_1based": [
+            47,
+            49
+          ],
+          "distance_A": 2.1784503949051452
+        },
+        "adsorbate_48_49": {
+          "atoms_1based": [
+            48,
+            49
+          ],
+          "distance_A": 3.0230226615179303
+        }
+      },
+      "anchors": [
+        {
+          "atom_index_1based": 46,
+          "symbol": "C",
+          "nearest_surface_atom_index_1based": 44,
+          "nearest_surface_distance_A": 2.078138781114214
+        },
+        {
+          "atom_index_1based": 47,
+          "symbol": "C",
+          "nearest_surface_atom_index_1based": 45,
+          "nearest_surface_distance_A": 2.0092060896060158
+        },
+        {
+          "atom_index_1based": 48,
+          "symbol": "O",
+          "nearest_surface_atom_index_1based": 40,
+          "nearest_surface_distance_A": 2.1002139070230923
+        }
+      ]
+    },
+    "connectivity_status": "pass",
+    "structure_invariants": {
+      "atom_order_preserved": true,
+      "cell_preserved": true,
+      "fixed_atoms_preserved": true
+    }
+  },
+  "domain_assessment": {
+    "calibration_id": "aqcat25_fe45_v1",
+    "status": "in_domain",
+    "method": "empirical force error on compatible VASP final-force labels; no per-candidate uncertainty from one checkpoint",
+    "reasons": [
+      "compatible Fe45 composition envelope and all empirical force thresholds passed"
+    ]
+  },
+  "producer_exit_record": {
+    "path": "output/job_2142/producer_exit_record.json",
+    "sha256": "4fcb78b5a4eea36831464bac8d03db27b1958d27f7fd1fc0a6f1bd91a6bc5fce",
+    "status": "success",
+    "exit_code": 0,
+    "evidence_class": "producer_process_only_not_scheduler_accounting"
+  },
+  "restrictions": {
+    "predicted_candidate_only": true,
+    "submit_vasp": false,
+    "scientific_acceptance": false,
+    "direct_gpu_to_vasp_handoff": false
+  }
+}

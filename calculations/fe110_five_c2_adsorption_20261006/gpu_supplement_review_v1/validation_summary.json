@@ -1,0 +1,27 @@
+{
+  "recorded_at": "2026-10-07T15:49:34.302076+00:00",
+  "python_syntax": "PASS",
+  "focused_ruff": "PASS",
+  "pytest": {
+    "passed": 12,
+    "command": "python -m pytest tests/test_fe110_c2_supplement.py tests/test_fe110_c2_review_repair.py -q"
+  },
+  "five_return_hash_schema_exit_checkpoint_validations": "PASS",
+  "chemistry": {
+    "intact": 4,
+    "fragmented": 1
+  },
+  "duplicate_review": {
+    "distinct_new_candidates": 3,
+    "live_VASP_geometry_match_standby": 1
+  },
+  "repair": "GEOMETRY_PASS_WITHOUT_WARNINGS_NOT_RELAXED",
+  "figure_inspection": "PASS",
+  "scientific_acceptance": false,
+  "remaining": [
+    "secondary off-symmetry site warnings require review",
+    "repair ML relaxation",
+    "VASP final chemistry/sites/convergence",
+    "compatible accepted energy registration"
+  ]
+}
