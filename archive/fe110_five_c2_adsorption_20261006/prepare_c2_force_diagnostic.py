@@ -89,6 +89,11 @@ def verify_frame(atoms, frame):
     return forces
 
 
+def require_done(states, selected):
+    if any(states.get(selected[n]["job_id"]) != "DONE" for n in NAMES):
+        raise ValueError("Only closed DONE jobs selected for immutable source labels")
+
+
 def prepare():
     if DEST.exists():
         raise FileExistsError("Preserve frozen diagnostic package; inspect before resuming")
@@ -101,8 +106,7 @@ def prepare():
     states = {
         line.split()[0]: line.split()[2] for line in scheduler.stdout.decode().splitlines() if line.split() and line.split()[0].isdigit()
     }
-    if any(states.get(selected[n]["job_id"]) != "DONE" for n in NAMES):
-        raise ValueError("Only closed DONE jobs selected for immutable source labels")
+    require_done(states, selected)
     source = "NAMES=" + repr(NAMES) + "\n" + REMOTE_READER
     try:
         returned = subprocess.run(
