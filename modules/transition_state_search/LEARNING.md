@@ -102,6 +102,28 @@ This offline representation does not migrate production outcome/event records:
 `learning outcome`, imports, revisions and retry gates retain their existing
 `root_cause_status` schema and behavior. An offline score is not an outcome event.
 
+## Read-only next-review advice (Phase 3B)
+
+Use saved, structurally valid schema-2 public cases and diagnosis answers to produce
+bounded next-review suggestions without opening the registry or executing jobs:
+
+```powershell
+python -m scripts.ts_strategy_engine.cli learning advise-next --public FROZEN_PUBLIC.json --answers SAVED_ANSWERS.json --expected-public-sha256 FROZEN_PUBLIC_SHA256 --report NEW_ADVICE.json
+```
+
+This command requires the explicitly reviewed public-input hash, rechecks every
+public case identity and the answer/evidence-ID structure, and fails closed on
+missing or malformed answers. It reuses the current policy routes; it cannot
+establish scientific causality. `unknown` prioritizes gathering cause-specific
+evidence; `hypothesis` asks for a test of the stated claim; `confirmed` asks for
+a scope review. Geometry and optimizer cases with a non-unknown cause may list
+existing TS strategy *fields to review*, never settings values or job actions.
+The advice is always `ADVISORY_ONLY_NOT_AUTHORIZED` and marks source-file
+reverification, scientific-cause validation, and TS-change authorization false.
+All scientific review and any actual method change remain with the owning
+module, existing strategy proposal checks, and sole execution gate. No LLM,
+database, SSH, training, scheduler or VASP calls are made by this command.
+
 ## Warm start and reference methods
 
 Install local orchestration dependencies with `python -m pip install -e ".[dev,neb,sella]"`.
