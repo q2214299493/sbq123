@@ -10,6 +10,7 @@ from scripts.artifact_io import load_json_object, write_json
 from .learning_cases import build_cases
 from .learning_evaluation import evaluate_cases
 from .learning_evidence import attempt_input_hashes, bind_files
+from .historical_replay import replay_history
 from .next_review import recommend_next_reviews
 from .learning_store import DEFAULT_DATABASE, read_events
 from .workflow import start_vasp_attempt
@@ -65,10 +66,16 @@ def parser() -> argparse.ArgumentParser:
     advice.add_argument("--answers", type=Path, required=True)
     advice.add_argument("--expected-public-sha256", required=True)
     advice.add_argument("--report", type=Path, required=True)
+    replay = commands.add_parser("replay-history", help="Replay saved, hash-bound historical snapshots without execution.")
+    replay.add_argument("--request", type=Path, required=True)
+    replay.add_argument("--expected-request-sha256", required=True)
+    replay.add_argument("--report", type=Path, required=True)
     return root
 
 
 def _dispatch_cases(args: argparse.Namespace):
+    if args.command == "replay-history":
+        return replay_history(args.request, args.report, args.expected_request_sha256)
     if args.command == "cases-build":
         return build_cases(args.manifest, args.allowed_root, args.bundle)
     if args.command == "advise-next":
@@ -78,7 +85,7 @@ def _dispatch_cases(args: argparse.Namespace):
 
 
 def _dispatch(args: argparse.Namespace):
-    if args.command in {"cases-build", "cases-evaluate", "advise-next"}:
+    if args.command in {"cases-build", "cases-evaluate", "advise-next", "replay-history"}:
         return _dispatch_cases(args)
     database = args.database
     if args.command == "methods":
@@ -126,7 +133,7 @@ def main(argv: list[str] | None = None) -> None:
     root = parser()
     args = root.parse_args(argv)
     try:
-        if args.command in {"cases-build", "cases-evaluate", "advise-next"} and args.output is not None:
+        if args.command in {"cases-build", "cases-evaluate", "advise-next", "replay-history"} and args.output is not None:
             raise ValueError("--output is not supported for diagnostic case commands")
         if args.output and args.output.exists():
             raise ValueError(f"report already exists: {args.output}")

@@ -124,6 +124,81 @@ All scientific review and any actual method change remain with the owning
 module, existing strategy proposal checks, and sole execution gate. No LLM,
 database, SSH, training, scheduler or VASP calls are made by this command.
 
+## Saved historical decision replay (Phase 3C)
+
+```powershell
+python -m scripts.ts_strategy_engine.cli learning replay-history --request REPLAY.json --expected-request-sha256 REPLAY_FILE_SHA256 --report NEW_REPLAY_REPORT.json
+```
+
+This is an artifact audit, not an executor or a new strategy store. It reads no
+registry and never calls `read_events()`: that function resolves outcome revisions
+to their latest state, which would leak later knowledge into an earlier decision.
+Keep original snapshots and Phase 3A/3B materials unchanged. All report paths are
+write-once. Input and source JSON snapshots are limited to 1 MB each.
+
+The explicit schema-1 request contains `public`, `answers`, and `advice` file
+references (`path`, file `sha256`), `traces`, and `unreplayable`. Phase 3B advice is
+recomputed in an isolated temporary directory using its existing validator and
+must match the saved advice exactly, including its current policy binding.
+
+Each trace has these fields (see the synthetic local test fixture for an example):
+
+- `case_id`: one frozen public/advice case; its `group_id` is the recorded task ID.
+- `decision`, `action`, and each `after` entry: `event_id`, `at`, `job`, `fact`.
+  Each of the last three is an existing observation (`path`, `sha256`, JSON
+  `pointer`, exact `value`) from the same timestamped snapshot. Times require
+  explicit timezones. Decisions and subsequent observations must be ordered;
+  duplicate event IDs, unrelated jobs and tasks fail validation.
+- `evidence`: `evidence_id`, `source` observation, and `links`. Links are a chain
+  of observed file hashes starting in the decision snapshot and ending at that
+  evidence source. Every public evidence item must match its original scalar
+  value, pointer and source hash and have this decision-time availability witness.
+  A later revision cannot replace an earlier source through a final-state reader.
+- `task`, `failure_job`, `request`: observations binding the failure task/job and
+  the decision snapshot's request hash. `action_parent` observes the decision's
+  file hash in the action snapshot; `action_task` observes its task identity.
+- `authorization`: null or `event`, `binding`, `task`. The binding is the
+  authorization file hash recorded in the action; its true scope fact, task,
+  failed job and pre-action time are checked. This establishes a saved historical
+  binding only, never current authorization or execution-gate acceptance.
+- `costs`: observations from `after` snapshots, using existing `gpu_hours`,
+  `vasp_core_hours`, or `force_calls` validation. Missing costs stay unknown.
+- `recorded_classification`: null or `/outcome/failure_class` from an existing
+  saved historical import request. Its task and failure-source hash must match.
+  It is a retrospective comparison only, excluded from decision-time evidence.
+
+`unreplayable` lists additional `case_id`, nonempty `evidence_gaps`, and optional
+known `sources` (`path`, file `sha256`, checked without using them as past evidence); incomplete
+traces with null decision/action or no subsequent observation also return
+`UNREPLAYABLE`. Missing or stale bound files, invalid temporal links, mismatched
+advice and corrupt identities reject the request without publishing a report.
+
+The report separates the saved `next_review`, actual action facts, retrospective
+classification/route agreement and remaining semantic review. Unmatched or
+unverifiable classification withholds TS field hints. No settings values, method
+proposal, model-error conclusion or execution authority is generated. Prior
+same-task/request cases are repeat clues only: the full environment/input retry
+condition is not established, so this feature never creates an exact-input ban.
+
+Local saved-material audit, 2026-10-10: one real trace covered GPU 1347's runtime
+failure, the 2026-08-29 01:19 +08 retry review, 01:20:30 submission of GPU 1348,
+and its later saved path review. The source directory is
+`calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_complete_path_rebuild_v10_nonabsolute_guards_20260829/`;
+the classification came from `outputs/ts_strategy_learning_20260905/historical_gpu_1347_request.json`.
+Failure, review and action file identities were respectively
+`8ef3e785c603fb2b8bd0917db2bc2c7d00a8988a3967cfe6cb122239a3fba34b`,
+`1e6788cec00e01a7f0307ee0cbf8a7b0e09299076fa010cf10ee6711642094ff`, and
+`bcebd69b16befd2326ac7019b95001928ea19106f0a82ccf6e54b3b0d0b1265d`.
+GPU 1508 was `UNREPLAYABLE` in the inspected prepared case: its saved failure
+review did not establish a corresponding next action. Imported inputs were null
+and costs empty. These private/local calculation artifacts are not distributed
+by this source change. The new runtime answer was a retrospective reconstruction,
+not a blinded Agent evaluation or a new Gold reference. Only synthetic tests
+cover repeated-request behavior and alternative diagnostic priorities. No real
+repeat-input success, counterfactual success rate, saved compute or optimal budget
+is established; original timestamp claims are verified as stored records, not
+independently authenticated clock observations.
+
 ## Warm start and reference methods
 
 Install local orchestration dependencies with `python -m pip install -e ".[dev,neb,sella]"`.
