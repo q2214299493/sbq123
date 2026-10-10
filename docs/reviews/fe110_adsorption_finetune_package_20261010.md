@@ -97,4 +97,30 @@ MZ73 只读 CPU checkpoint 检查确认基准 SHA、模型配置和 PyTorch2.4.1
 - Slurm accounting 已禁用，使用 `scontrol` 已完成状态作为调度证据。诊断只执行脚本前25行（无模型），创建了失败作业的空 output/job_2181 目录；该目录不是训练输出。
 - Pythoncompile/Ruff和4个提交边界测试通过。没有自动重投、提交 VASP、读取留出预测或晋级模型。
 
-下一步：准备无模型的 Slurm bootstrap 环境对照并审核；定位实际失败检查后修正启动器，再单独授权重投训练。不要更改训练数据或科学参数来掩盖启动问题。
+## 2026-10-10 启动问题定位和 v4 修复
+
+用户“继续”授权无模型诊断和必要修复，没有授权 GPU 训练重投。
+Slurm CPU 诊断2182复现 ExitCode2，明确失败于 environment_setup：
+批处理继承 `TMPDIR=/tmp`，环境工具保留该值，随后授权写路径检查拒绝 `/tmp`。
+SSH 预检时 TMPDIR 未设置，因此使用授权目录默认值。这是启动器环境处理问题，不是模型误差或训练不收敛。
+
+最小修复：训练 wrapper 在环境设置前显式设 `TMPDIR="$RUN_ROOT/tmp"`；
+提前安装现有 bootstrap 错误记录器；增加 `--no-requeue`，与不自动重试政策一致。
+不修改共享环境工具，不放宽写目录安全边界，不改变结构、VASP标签、模型、优化器或训练预算。
+
+修复对照2183在真实 Slurm 批处理中执行新 wrapper 的完整环境启动前缀，
+同样继承 `/tmp`，明确切换到作业内临时目录后通过：COMPLETED/0:0、运行1秒。
+两个诊断均不申请 GPU、不加载 checkpoint、不执行 Python/模型/训练；每个请求1CPU，
+Slurm硬件分配显示2逻辑CPU。证据：`adsorption_bootstrap_diagnosis_v1/`。
+
+新的 `adsorption_finetune_review_v4/training_request.json` 请求 SHA：
+`9f634620c40a4da397853085f4cfcdf366548832115a641b35f34fb366bd5f2a`。
+80项绑定中78项逐字节不变，仅 config.yml 中远程v3→v4路径及修复wrapper变化；
+34/12/16 split、checkpoint哈希和4epoch/lr1e-5/1GPU/4CPU/32GB/30min预算全部不变。
+原v3请求、失败训练2181和所有预检/诊断记录保持原样。
+
+已验证 Pythoncompile、Ruff、26项相关测试、远程两个probe与新wrapper的bash-n、
+v4完整文件绑定及本地标签验证。2183通过仅证明启动前缀修复，不证明完整训练能运行、
+候选误差下降或VASP加速；冻结heldout未用于本次判断。v4尚未上传或提交训练。
+
+下一步：单独授权上述v4请求哈希的一次训练重投，随后做新包远程预检和当前GPU资源检查，仅提交一个训练作业。

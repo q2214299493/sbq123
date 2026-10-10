@@ -11,10 +11,10 @@ from pathlib import Path
 from scripts.artifact_io import sha256_file, write_json
 
 ROOT = Path(__file__).resolve().parents[2]
-PACKAGE = ROOT / "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_review_v3"
-EVIDENCE = PACKAGE.parent / "adsorption_finetune_submission_v3"
-REMOTE = "/home/sbq/sbq/adsorption_c2_finetune_20261010_v3"
-EXPECTED = "2e1b517270395b414c8e7079cf95df93656014e24ce2db3f1e6b5e0ac3c40d16"
+PACKAGE = ROOT / "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_review_v4"
+EVIDENCE = PACKAGE.parent / "adsorption_finetune_submission_v4"
+REMOTE = "/home/sbq/sbq/adsorption_c2_finetune_20261010_v4"
+EXPECTED = "9f634620c40a4da397853085f4cfcdf366548832115a641b35f34fb366bd5f2a"
 
 
 def main():

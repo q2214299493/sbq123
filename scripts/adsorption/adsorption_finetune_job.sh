@@ -7,13 +7,15 @@
 #SBATCH --gres=gpu:1
 #SBATCH --mem=32G
 #SBATCH --time=00:30:00
+#SBATCH --no-requeue
 #SBATCH --output=c2-ads-force-ft-%j.out
 
 set -euo pipefail
 PACKAGE_ROOT=${PACKAGE_ROOT:?explicit package root required}
 AUTHORIZATION=${AUTHORIZATION:?hash-bound explicit user authorization required}
-case "$PACKAGE_ROOT" in /home/sbq/sbq/*) ;; *) exit 2 ;; esac
+case "$PACKAGE_ROOT" in /home/sbq/sbq/*) ;; *) echo "PACKAGE_ROOT outside authorized boundary" >&2; exit 2 ;; esac
 source "$PACKAGE_ROOT/runtime/aqcat25_mz73_env.sh"
+aqcat25_install_bootstrap_guard
 aqcat25_require_remote_path "$PACKAGE_ROOT" "$AUTHORIZATION"
 aqcat25_require_mz73
 : "${SLURM_JOB_ID:?Slurm job id required}"
@@ -21,6 +23,8 @@ REQUEST=$PACKAGE_ROOT/training_request.json
 ADAPTER=$PACKAGE_ROOT/runtime/force_finetune.py
 RUN_ROOT=$PACKAGE_ROOT/output/job_$SLURM_JOB_ID
 test ! -e "$RUN_ROOT"
+# Slurm sets TMPDIR=/tmp on MZ73. Never inherit an external writable path.
+export TMPDIR="$RUN_ROOT/tmp"
 aqcat25_setup_mz73_environment "$RUN_ROOT"
 EXIT_RECORD=$RUN_ROOT/producer_exit_record.json
 STARTED_UTC=$(date -u +%Y-%m-%dT%H:%M:%SZ)

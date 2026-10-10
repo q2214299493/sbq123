@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2-adsorption-bootstrap-repaired-v4-20261010",
+  "occurred_at": "2026-10-10T14:34:50+00:00",
+  "recorded_at": "2026-10-10T14:34:50+00:00",
+  "event_type": "task_updated",
+  "entity": {"kind": "task", "id": "task-current", "module": "adsorption_workflow"},
+  "summary": "Reproduce Slurm TMPDIR bootstrap failure without model, verify per-job temporary path repair on CPU, prepare fresh v4 request; no training retry submitted.",
+  "evidence": [
+    {"locator": "calculations/fe110_five_c2_adsorption_20261006/adsorption_bootstrap_diagnosis_v1/probe_2182.txt", "sha256": "a8041af6f4dcbf266a3680e9caebabb682ceb89d585a672e985d8111787a5e5f", "authority": "calculation_file", "observed_at": "2026-10-10T14:34:50+00:00"},
+    {"locator": "calculations/fe110_five_c2_adsorption_20261006/adsorption_bootstrap_diagnosis_v1/repair_probe_2183.txt", "sha256": "ee2a1f2ddd593984bc75c99d0ded3e0a55f5f61a932157d3484357aba7032900", "authority": "scheduler", "observed_at": "2026-10-10T14:34:50+00:00"},
+    {"locator": "calculations/fe110_five_c2_adsorption_20261006/adsorption_bootstrap_diagnosis_v1/diagnosis_summary.json", "sha256": "231e5ccd507efaf747fd307baa44c1f97bb78804ef2cebc08b34540f216d2668", "authority": "module_validation", "observed_at": "2026-10-10T14:34:50+00:00"},
+    {"locator": "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_review_v4/training_request.json", "sha256": "9f634620c40a4da397853085f4cfcdf366548832115a641b35f34fb366bd5f2a", "authority": "module_validation", "observed_at": "2026-10-10T14:34:50+00:00"},
+    {"locator": "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_review_v4/retry_preparation.json", "sha256": "8732de266ca6dad6a4876376d5708b35f74c135ab071b56d6e33a3b8105dd22e", "authority": "module_validation", "observed_at": "2026-10-10T14:34:50+00:00"},
+    {"locator": "scripts/adsorption/adsorption_finetune_job.sh", "sha256": "875eead1c2ed7eabb192cf9dccfac49908dfd729d6cfba65bfffba91d0d0d3b8", "authority": "module_validation", "observed_at": "2026-10-10T14:34:50+00:00"},
+    {"locator": "docs/reviews/fe110_adsorption_finetune_package_20261010.md", "sha256": "be746d2dac78e23d6eb4c48e1f0ab2012e1b4555c2c76f839c25ad206b2b11e0", "authority": "repository_document", "observed_at": "2026-10-10T14:34:50+00:00"}
+  ],
+  "review": {"required": false, "reason_codes": [], "status": "not_required"},
+  "supersedes": ["task-fe110-c2-adsorption-finetune2181-startup-failed-20261010"],
+  "payload": {
+    "objective": "Optimize the five exact Fe110 C2 adsorption identities and validate whether GPU-assisted model adaptation actually reduces compatible VASP relaxation work and total compute cost.",
+    "phase": "active",
+    "current_evidence": [
+      "User continued bounded no-model diagnosis and necessary repair. No GPU training retry authority inferred.",
+      "Slurm CPU probe2182 reproduced exit2 at environment_setup: inherited TMPDIR=/tmp violates approved writable boundary. SSH preflight lacked TMPDIR, masking the batch-only condition. Failure is engineering startup, not model error.",
+      "Actual repaired wrapper prefix sets per-job TMPDIR before setup and installs early bootstrap guard; CPU probe2183 COMPLETED/0:0. No GPU requested, Python/model/checkpoint never executed. Requested1CPU, schedulerallocated2logicalCPU; probes ran1-2seconds.",
+      "Fresh v4 request SHA9f634620c40a4da397853085f4cfcdf366548832115a641b35f34fb366bd5f2a. 78of80artifacts unchanged; only remote config paths and repaired wrapper changed. Data, baseline checkpoint,34/12/16splits and4epoch/lr1e-5/1GPU/4CPU/32GB/30min unchanged.",
+      "Pythoncompile,Ruff,26related tests, remotebash-n andlocalv4file/labelbindings passed. Original v3 failed training2181 and evidence remain intact.",
+      "v4 training package is prepared locally, not uploaded/submitted. No heldout selection, VASP submission or model promotion. Complete GPU training chain, force improvement and actual VASP acceleration remain unverified."
+    ],
+    "one_executable_step": "Obtain separate authorization of v4 request SHA9f634620c40a4da397853085f4cfcdf366548832115a641b35f34fb366bd5f2a for one bounded training retry; then perform fresh MZ73 package/runtime/GPU preflight and submit exactly once.",
+    "submission_boundary": "No GPU training retry authorized yet. CPU-only no-model diagnostic probes2182/2183 completed. No VASP submission, checkpoint promotion, automatic retry or heldout model selection allowed.",
+    "done_when": ["Completed VASP candidates have convergence, exact chemical identity, site and duplicate reviews before accepted result/energy promotion."],
+    "constraints": [
+      "Use true Fe110 Fe45 five-layer branch, fixedFe0-17 and SIGMA0.20 production method.",
+      "Do not substitute acetylene for CCH2 or mix the three C2HO graphs.",
+      "Candidate counts follow distinct supported motifs; no blind three-site padding or ML global-minimum claims.",
+      "AQCat25 is adsorption pre-relaxation primary; results return through work before VASP."
+    ],
+    "authoritative_references": [
+      "configs/execution_backends.yaml", "modules/adsorption_workflow/README.md",
+      "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_review_v4/training_request.json",
+      "calculations/fe110_five_c2_adsorption_20261006/adsorption_bootstrap_diagnosis_v1/diagnosis_summary.json",
+      "docs/reviews/fe110_adsorption_finetune_package_20261010.md",
+      "scripts/adsorption/adsorption_finetune_job.sh",
+      "archive/fe110_five_c2_adsorption_20261006/launch_adsorption_finetune.py"
+    ]
+  }
+}
