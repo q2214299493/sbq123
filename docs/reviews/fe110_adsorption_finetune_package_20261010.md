@@ -123,4 +123,32 @@ Slurm硬件分配显示2逻辑CPU。证据：`adsorption_bootstrap_diagnosis_v1/
 v4完整文件绑定及本地标签验证。2183通过仅证明启动前缀修复，不证明完整训练能运行、
 候选误差下降或VASP加速；冻结heldout未用于本次判断。v4尚未上传或提交训练。
 
-下一步：单独授权上述v4请求哈希的一次训练重投，随后做新包远程预检和当前GPU资源检查，仅提交一个训练作业。
+## 2026-10-10 v4 授权提交与采样器初始化失败
+
+用户“提交”授权v4请求的一次训练重投，独立授权文件与80项原绑定文件已上传。
+新包远程CPU预检通过；提交前GPU0/1/3有空闲显存，GPU2接近占满。
+只提交一次 **2184**：1GPU/4CPU/32GB/30min、禁止requeue。
+
+实际结果：2184初始RUNNING，随后 **FAILED/ExitCode1:0，运行31秒**。
+已通过原TMPDIR启动问题，生成warmstart并启动Fairchem、加载模型，
+但在训练数据采样器构建阶段触发 `UnsupportedDatasetError`：
+`BalancedBatchSampler` 要求 `natoms` 元数据，现有包没有提供。
+真实源码确认即使单GPU已禁用平衡分配，也仍执行该元数据检查；仅设置
+`load_balancing=false` 不足以修复。训练/开发DB共用目录，但长度分别34/12，
+后续必须分别提供长度及逐行原子数相符的元数据并显式绑定各自 `metadata_path`，
+不能共用默认metadata.npz或跳过标签检查。
+
+另发现Fairchem CLI的 `build_config` 用命令行默认seed0覆盖YAML的42；
+本次尚未进入训练迭代，但再次提交前必须显式传入已审核seed42，并检查合并后的实际配置。
+模型参数没有进行训练更新；未生成训练候选，原基准checkpoint未覆盖。
+这不是显存OOM、标签误差、训练不收敛或吸附物理不稳定的证据。
+
+现有预检验证了AseDBDataset图转换，但没有构建实际BalancedBatchSampler，
+也没有核对CLI合并后配置，因此预检通过不足以证明完整训练链可执行。
+退出记录已正常保存并收回，故启动记录修复生效。
+证据：`adsorption_finetune_submission_v4/` 中授权、提交回执、
+training_start_2184.txt、runtime_sampler_config_diagnosis.txt和producer_exit_record_2184.json。
+没有自动重投、VASP提交、heldout模型选择或checkpoint晋级。
+
+下一步：准备各split独立natoms元数据和显式seed传递的最小修复；
+无模型CPU预检须覆盖真实采样器完整遍历及CLI最终参数，再形成新哈希请求供授权。
