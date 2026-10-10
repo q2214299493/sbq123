@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2-acceleration-adjustment-prepared-20261010",
+  "occurred_at": "2026-10-10T12:27:09.446095+00:00",
+  "recorded_at": "2026-10-10T12:27:09.446095+00:00",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "adsorption_workflow"
+  },
+  "summary": "Prepare existing-trajectory model-adaptation data and matched total-cost benchmark for C2 adsorption; 56 label candidates, no training or new scientific job.",
+  "evidence": [
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/adsorption_acceleration_rebuild_v2/collection_receipt.json",
+      "sha256": "fa624002da7177021251b980a7428b017b20c875555f8e9481561e8112661e3d",
+      "authority": "module_validation",
+      "observed_at": "2026-10-10T12:27:09.446095+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/adsorption_acceleration_rebuild_v2/dataset_review.json",
+      "sha256": "5352db3188d96b2848a513fdf6cdd0163cc93ff2d6a289933a1c6fd4b95f7763",
+      "authority": "module_validation",
+      "observed_at": "2026-10-10T12:27:09.446095+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/adsorption_acceleration_rebuild_v2/geometry_split_review.json",
+      "sha256": "7a1a6ba91be174c176010882720f2768976c794821c811004563ec5cae528c01",
+      "authority": "module_validation",
+      "observed_at": "2026-10-10T12:27:09.446095+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/adsorption_acceleration_rebuild_v2/acceleration_adjustment_plan.json",
+      "sha256": "586b14ca872eb72e7862a1437289b0ddc1cd5156de5b3a02300c70557db142b3",
+      "authority": "module_validation",
+      "observed_at": "2026-10-10T12:27:09.446095+00:00"
+    },
+    {
+      "locator": "docs/reviews/fe110_adsorption_acceleration_adjustment_20261010.md",
+      "sha256": "dc1e365230190ce7cc670568c8f1a991224a24dd69394d84f773444c6a55145c",
+      "authority": "module_validation",
+      "observed_at": "2026-10-10T12:27:09.446095+00:00"
+    },
+    {
+      "locator": "scripts/adsorption/acceleration_benchmark.py",
+      "sha256": "4135951912d183917a89c097531ec6a3baae75d34e2e5543ea352e205cf09933",
+      "authority": "module_validation",
+      "observed_at": "2026-10-10T12:27:09.446095+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/adsorption_acceleration_rebuild_v1/collection_failure.json",
+      "sha256": "e0d7d0db1aa3256596786fdb4434be6f8c794196d4d52351485ce84a06b18938",
+      "authority": "module_validation",
+      "observed_at": "2026-10-10T12:27:09.446095+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "supersedes": [
+    "task-fe110-c2-matris2180-compared-20261010"
+  ],
+  "payload": {
+    "objective": "Optimize the five exact Fe110 C2 adsorption identities and validate whether GPU-assisted model adaptation actually reduces compatible VASP relaxation work and total compute cost.",
+    "phase": "active",
+    "current_evidence": [
+      "Previous exact-structure comparison shows small ML force is not DFT readiness; MatRIS improves C/O but worsens final Fe/H, no automatic model replacement.",
+      "Read-only existing-output collection v1 timed out; failure preserved. Corrected streaming v2 completed without new GPU/VASP calculation.",
+      "Seven closed trajectories yield 56 source-bound frame labels: train32, development8, whole-job-heldout16. EDIFF/cycle/energy/force/coordinate checks passed.",
+      "All56 geometry checks passed; zero cross-split strict equivalents. Near-duplicate/site review, replay compatibility and adsorption training adapter remain required.",
+      "Implemented matched-run step/time/GPU/shared-cost/amortization comparison. No training submitted, checkpoint promoted or achieved acceleration measured.",
+      "Last CHCO snapshot:9839757 fragmented RUN,9842107 intact RUN,repair9842136 PEND; no live status recheck or job mutation this preparation step."
+    ],
+    "one_executable_step": "Complete adsorption-specific training-input adaptation and near-duplicate/replay compatibility review from the frozen56 frames; present one bounded GPU training request for separate authorization.",
+    "submission_boundary": "Local preparation only. No new GPU/VASP job, training, model promotion, stop or VASP parameter change authorized.",
+    "done_when": [
+      "Completed VASP candidates have convergence, exact chemical identity, site and duplicate reviews before accepted result/energy promotion."
+    ],
+    "constraints": [
+      "Use true Fe110 Fe45 five-layer branch, fixedFe0-17 and SIGMA0.20 production method.",
+      "Do not substitute acetylene for CCH2 or mix the three C2HO graphs.",
+      "Candidate counts follow distinct supported motifs; no blind three-site padding or ML global-minimum claims.",
+      "AQCat25 is adsorption pre-relaxation primary; results return through work before VASP."
+    ],
+    "authoritative_references": [
+      "configs/execution_backends.yaml",
+      "modules/adsorption_workflow/README.md",
+      "configs/true_fe110_production.yaml",
+      "calculations/fe110_five_c2_adsorption_20261006/adsorption_acceleration_rebuild_v2/collection_receipt.json",
+      "calculations/fe110_five_c2_adsorption_20261006/adsorption_acceleration_rebuild_v2/dataset_review.json",
+      "calculations/fe110_five_c2_adsorption_20261006/adsorption_acceleration_rebuild_v2/geometry_split_review.json",
+      "calculations/fe110_five_c2_adsorption_20261006/adsorption_acceleration_rebuild_v2/acceleration_adjustment_plan.json",
+      "docs/reviews/fe110_adsorption_acceleration_adjustment_20261010.md",
+      "scripts/adsorption/acceleration_benchmark.py",
+      "calculations/fe110_five_c2_adsorption_20261006/adsorption_acceleration_rebuild_v1/collection_failure.json"
+    ]
+  }
+}

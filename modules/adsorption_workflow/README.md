@@ -175,6 +175,23 @@ confirmation** until promoted through the current adsorption gate.
 
 An adsorption state may be a NEB endpoint, but a tilted or stretched intermediate is not automatically a stable endpoint. Adsorption convergence does not prove a transition state.
 
+### Opt-in C2 acceleration adjustment experiment
+
+For the user-requested C2 adsorption acceleration adjustment, use the local
+review in `docs/reviews/fe110_adsorption_acceleration_adjustment_20261010.md`.
+Existing closed VASP trajectories supply off-equilibrium and near-minimum
+label candidates; split complete jobs before training, not adjacent random
+frames. Geometry/source/replay review and an adsorption-specific training
+adapter are required before an explicitly authorized GPU training run.
+Prepared frames are neither accepted endpoints nor reportable energy records.
+
+`scripts/adsorption/acceleration_benchmark.py` accounts for steps, elapsed
+runtime, GPU overhead, incremental training/label cost and declared amortization
+on matched, scientifically reviewed runs. It has no submission, model-promotion,
+geometry-acceptance or TS authority. Single-point force agreement or ML force
+convergence alone does not demonstrate acceleration. No default backend/model,
+DFT protocol or existing job is changed by this experimental preparation.
+
 ## Code ownership
 
 - `scripts/adsorption/gas_vasp_common.py` owns the common gas-reference INCAR,
