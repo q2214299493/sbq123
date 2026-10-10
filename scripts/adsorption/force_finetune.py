@@ -91,6 +91,23 @@ def load_manifest(path: Path) -> dict:
     return payload
 
 
+def validate_sampler_contract(path: Path, request: dict, config: dict) -> None:
+    if request.get("runtime_contract_version", 1) < 2:
+        return  # retain validation of immutable historical packages
+    if config.get("seed") != request["training_limits"]["seed"]:
+        raise ValueError("seed mismatch")
+    if config["optim"]["batch_size"] != request["training_limits"]["batch_size"]:
+        raise ValueError("batch size mismatch")
+    bound = {item["path"] for item in request["artifacts"]}
+    for split, key in (("train", "train"), ("development", "val")):
+        filename = f"{split}_metadata.npz"
+        if filename not in bound or f"{split}.db" not in bound:
+            raise ValueError("split metadata/database not hash bound")
+        if config["dataset"][key].get("metadata_path") != request["remote_package_root"] + "/" + filename:
+            raise ValueError("split metadata path mismatch")
+        validate_database_metadata(path.parent / f"{split}.db", path.parent / filename)
+
+
 def verify_request(path: Path) -> dict:
     request = json.loads(path.read_text(encoding="utf-8"))
     if request.get("document_kind") != "aqcat25_adsorption_small_finetune_request":
@@ -108,6 +125,7 @@ def verify_request(path: Path) -> dict:
         raise ValueError("epoch limit mismatch")
     if config["optim"]["lr_initial"] != request["training_limits"]["learning_rate"]:
         raise ValueError("learning rate mismatch")
+    validate_sampler_contract(path, request, config)
     loss = {name: values for entry in config["loss_functions"] for name, values in entry.items()}
     if loss["energy"]["coefficient"] != 0 or loss["forces"]["coefficient"] != 1:
         raise ValueError("force-only loss changed")
@@ -124,6 +142,34 @@ def verify_request(path: Path) -> dict:
             raise ValueError("fixed atoms must be excluded from force objective")
     return {"status": "LOCAL_PACKAGE_VALID", "counts": counts,
             "training_authorized": request["training_authorized"], "model_run": False}
+
+
+def build_database_metadata(database: Path, output: Path) -> dict:
+    """Use true ASE row order; never derive counts from a guessed formula."""
+    if not database.is_file():
+        raise FileNotFoundError(database)
+    rows = list(connect(database).select())
+    if not rows:
+        raise ValueError("empty database")
+    # Exclusive creation preserves existing bound evidence.
+    with output.open("xb") as handle:
+        np.savez(handle, natoms=np.asarray([row.natoms for row in rows], dtype=np.int64),
+                 row_ids=np.asarray([row.id for row in rows], dtype=np.int64))
+    return validate_database_metadata(database, output)
+
+
+def validate_database_metadata(database: Path, metadata: Path) -> dict:
+    if not database.is_file():
+        raise FileNotFoundError(database)
+    rows = list(connect(database).select())
+    with np.load(metadata, allow_pickle=False) as values:
+        for field, expected in (("natoms", [row.natoms for row in rows]),
+                                ("row_ids", [row.id for row in rows])):
+            actual = values[field]
+            if (actual.shape != (len(rows),) or not np.issubdtype(actual.dtype, np.integer)
+                    or not np.array_equal(actual, expected)):
+                raise ValueError("database metadata mismatch: " + field)
+    return {"rows": len(rows), "database_sha256": digest(database), "metadata_sha256": digest(metadata)}
 
 
 def build_database(manifest: Path, output: Path, split: str) -> int:

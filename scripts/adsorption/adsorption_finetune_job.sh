@@ -51,7 +51,7 @@ trap 'exit 130' INT
 "$AQCAT_PYTHON" "$ADAPTER" verify --request "$REQUEST"
 "$AQCAT_PYTHON" "$ADAPTER" warm-start --request "$REQUEST" --authorization "$AUTHORIZATION" --output "$RUN_ROOT/warmstart.pt"
 cd "$RUN_ROOT"
-"$AQCAT_PYTHON" -m fairchem.core._cli --checkpoint "$RUN_ROOT/warmstart.pt" --mode train --config-yml "$PACKAGE_ROOT/config.yml" --amp
+"$AQCAT_PYTHON" -m fairchem.core._cli --checkpoint "$RUN_ROOT/warmstart.pt" --mode train --config-yml "$PACKAGE_ROOT/config.yml" --seed 42 --amp
 # Only this job's validation-selected checkpoint may be exported. Never fall
 # back silently to an unvalidated last checkpoint or overwrite the baseline.
 mapfile -t candidates < <(find "$RUN_ROOT" -type f -name best_checkpoint.pt)

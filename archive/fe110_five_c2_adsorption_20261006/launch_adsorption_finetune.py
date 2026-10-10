@@ -11,10 +11,10 @@ from pathlib import Path
 from scripts.artifact_io import sha256_file, write_json
 
 ROOT = Path(__file__).resolve().parents[2]
-PACKAGE = ROOT / "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_review_v4"
-EVIDENCE = PACKAGE.parent / "adsorption_finetune_submission_v4"
-REMOTE = "/home/sbq/sbq/adsorption_c2_finetune_20261010_v4"
-EXPECTED = "9f634620c40a4da397853085f4cfcdf366548832115a641b35f34fb366bd5f2a"
+PACKAGE = ROOT / "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_review_v6"
+EVIDENCE = PACKAGE.parent / "adsorption_finetune_submission_v6"
+REMOTE = "/home/sbq/sbq/adsorption_c2_finetune_20261010_v6"
+EXPECTED = "5e04e87a2a04f3937734f2592c2f442172d24cfb189a14d66554b854c50cb311"
 
 
 def main():
@@ -39,8 +39,8 @@ def main():
     transport = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(transport)
     transport.EVIDENCE = EVIDENCE
-    preflight_script = Path(__file__).with_name("preflight_adsorption_finetune.py")
-    extras = {"submission_authorization.json": authorization, "preflight_v2.py": preflight_script}
+    preflight_script = PACKAGE / "runtime/preflight_adsorption_finetune.py"
+    extras = {"submission_authorization.json": authorization}
     authorization_sha = sha256_file(authorization)
     preflight_sha = sha256_file(preflight_script)
     verify = (f"printf '%s  training_request.json\\n' {EXPECTED} | sha256sum -c - >&2; "
@@ -58,26 +58,26 @@ def main():
         print(result.decode().strip())
     elif action == "preflight":
         command = (f"set -eu; cd {REMOTE}; " + verify
-                   + f"printf '%s  preflight_v2.py\\n' {preflight_sha} | sha256sum -c -; "
+                   + f"printf '%s  runtime/preflight_adsorption_finetune.py\\n' {preflight_sha} | sha256sum -c -; "
                    + "source runtime/aqcat25_mz73_env.sh; aqcat25_require_mz73; "
                    + "aqcat25_setup_mz73_environment; bash -n runtime/adsorption_finetune_job.sh; "
                    + '"$AQCAT_PYTHON" runtime/force_finetune.py verify --request training_request.json; '
-                   + f'"$AQCAT_PYTHON" preflight_v2.py {REMOTE}; '
+                   + f'"$AQCAT_PYTHON" runtime/preflight_adsorption_finetune.py {REMOTE}; '
                    + "nvidia-smi --query-gpu=index,memory.total,memory.used,utilization.gpu --format=csv,noheader; "
                    + "squeue -u sbq -h -o '%i %T %j'")
-        result = transport.run(command, "preflight_v2.txt")
+        result = transport.run(command, "preflight.txt")
         assert b'"status": "PASS_NO_MODEL_RUN"' in result
         write_json(EVIDENCE / "preflight_binding.json", {
             "status": "PASS_NO_MODEL_RUN", "request_sha256": EXPECTED,
             "authorization_sha256": authorization_sha, "preflight_script_sha256": preflight_sha,
-            "remote_preflight_sha256": sha256_file(EVIDENCE / "preflight_v2.txt")})
+            "remote_preflight_sha256": sha256_file(EVIDENCE / "preflight.txt")})
         print(result.decode().strip())
     else:
         binding = json.loads((EVIDENCE / "preflight_binding.json").read_text(encoding="utf-8"))
         assert binding["status"] == "PASS_NO_MODEL_RUN" and binding["request_sha256"] == EXPECTED
         assert binding["authorization_sha256"] == authorization_sha
         assert binding["preflight_script_sha256"] == preflight_sha
-        assert binding["remote_preflight_sha256"] == sha256_file(EVIDENCE / "preflight_v2.txt")
+        assert binding["remote_preflight_sha256"] == sha256_file(EVIDENCE / "preflight.txt")
         with (EVIDENCE / "local_submission_reservation.json").open("x", encoding="utf-8") as handle:
             json.dump({"request_sha256": EXPECTED, "automatic_retry": False}, handle)
         result = transport.run(f"set -eu; cd {REMOTE}; " + verify + "set -C; : > submission_attempt.lock; "

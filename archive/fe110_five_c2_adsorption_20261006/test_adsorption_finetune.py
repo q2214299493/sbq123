@@ -10,7 +10,7 @@ from ase.db import connect
 from ase.io import write
 
 from archive.fe110_five_c2_adsorption_20261006.prepare_adsorption_finetune import expand_magmom, select_temporal_frames
-from scripts.adsorption.force_finetune import build_database, digest, force_metrics, load_manifest, local_path, verify_request, warm_start
+from scripts.adsorption.force_finetune import build_database, build_database_metadata, digest, force_metrics, load_manifest, local_path, validate_database_metadata, validate_sampler_contract, verify_request, warm_start
 
 
 @pytest.fixture
@@ -112,6 +112,77 @@ def test_force_groups_and_fixed_mask():
     assert metrics["movable"]["atom_count"] == 3
     with pytest.raises(ValueError, match="nonfinite"):
         force_metrics(reference, np.full((4, 3), np.nan), ["Fe", "Fe", "C", "H"], [0])
+
+
+def test_metadata_real_row_order_and_exclusive_output(tmp_path):
+    database = tmp_path / "train.db"
+    db = connect(database)
+    db.write(Atoms("H"))
+    db.write(Atoms("CH"))
+    db.write(Atoms("C2H"))
+    db.delete([2])  # gapped ids must not be interpreted as sequential indices
+    output = tmp_path / "metadata.npz"
+    assert build_database_metadata(database, output)["rows"] == 2
+    with np.load(output, allow_pickle=False) as values:
+        assert values["natoms"].tolist() == [1, 3]
+        assert values["row_ids"].tolist() == [1, 3]
+    with pytest.raises(FileExistsError):
+        build_database_metadata(database, output)
+
+
+@pytest.mark.parametrize("natoms", [[1.0, 2.0], [2, 1], [1]])
+def test_metadata_reject_float_wrong_order_and_wrong_length(tmp_path, natoms):
+    database = tmp_path / "train.db"
+    db = connect(database)
+    db.write(Atoms("H"))
+    db.write(Atoms("CH"))
+    metadata = tmp_path / "metadata.npz"
+    np.savez(metadata, natoms=np.asarray(natoms), row_ids=np.asarray([1, 2]))
+    with pytest.raises(ValueError, match="metadata mismatch"):
+        validate_database_metadata(database, metadata)
+
+
+def test_missing_database_not_created(tmp_path):
+    missing = tmp_path / "absent.db"
+    with pytest.raises(FileNotFoundError):
+        build_database_metadata(missing, tmp_path / "metadata.npz")
+    assert not missing.exists()
+
+
+@pytest.fixture
+def sampler_contract(tmp_path):
+    remote = "/home/sbq/sbq/package"
+    request = {"runtime_contract_version": 2, "remote_package_root": remote,
+               "training_limits": {"seed": 42, "batch_size": 1}, "artifacts": []}
+    config = {"seed": 42, "optim": {"batch_size": 1}, "dataset": {}}
+    for split, key in (("train", "train"), ("development", "val")):
+        database = tmp_path / f"{split}.db"
+        connect(database).write(Atoms("CH"))
+        metadata = tmp_path / f"{split}_metadata.npz"
+        build_database_metadata(database, metadata)
+        config["dataset"][key] = {"metadata_path": remote + "/" + metadata.name}
+        request["artifacts"] += [{"path": database.name}, {"path": metadata.name}]
+    return tmp_path / "request.json", request, config
+
+
+def test_sampler_contract_valid(sampler_contract):
+    validate_sampler_contract(*sampler_contract)
+
+
+@pytest.mark.parametrize("problem,message", [("seed", "seed mismatch"), ("batch", "batch size"),
+                                            ("unbound", "not hash bound"), ("shared", "path mismatch")])
+def test_sampler_contract_fail_closed(sampler_contract, problem, message):
+    path, request, config = sampler_contract
+    if problem == "seed":
+        config["seed"] = 0
+    elif problem == "batch":
+        config["optim"]["batch_size"] = 2
+    elif problem == "unbound":
+        request["artifacts"].pop()
+    else:
+        config["dataset"]["val"]["metadata_path"] = config["dataset"]["train"]["metadata_path"]
+    with pytest.raises(ValueError, match=message):
+        validate_sampler_contract(path, request, config)
 
 
 def test_temporal_dedup_preserves_high_force_and_frozen_heldout():

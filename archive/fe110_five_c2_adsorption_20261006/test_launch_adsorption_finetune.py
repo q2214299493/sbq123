@@ -13,6 +13,8 @@ def package(tmp_path, monkeypatch):
     evidence = tmp_path / "evidence"
     package.mkdir()
     evidence.mkdir()
+    (package / "runtime").mkdir()
+    (package / "runtime/preflight_adsorption_finetune.py").write_text("# test fixture\n", encoding="utf-8")
     request = package / "training_request.json"
     request.write_text(json.dumps({"remote_package_root": launch.REMOTE, "artifacts": []}), encoding="utf-8")
     digest = sha256_file(request)

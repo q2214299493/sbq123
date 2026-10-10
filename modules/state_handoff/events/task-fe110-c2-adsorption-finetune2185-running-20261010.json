@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2-adsorption-finetune2185-running-20261010",
+  "occurred_at": "2026-10-10T15:16:42.930627+00:00",
+  "recorded_at": "2026-10-10T15:16:42.930627+00:00",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "adsorption_workflow"
+  },
+  "summary": "Sampler/CLI engineering repair validated; conditional one-run v6 job2185 now performs real training, not yet completed or promoted.",
+  "evidence": [
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_submission_v6/submission_authorization.json",
+      "sha256": "0e367c917123869893cfed0f03d8f93515d23391df3ad86b89d895f10a3cbbb4",
+      "authority": "user_authorization",
+      "observed_at": "2026-10-10T15:16:42.930627+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_submission_v6/preflight_binding.json",
+      "sha256": "f72e8ecd0ab49d24a3eeec8573574a99ea98e7e02775995c5944379a0a4cbe5c",
+      "authority": "module_validation",
+      "observed_at": "2026-10-10T15:16:42.930627+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_submission_v6/submission_summary.json",
+      "sha256": "f6fd8be9791f3126058d765dc264648c9937ad4edca9c7974b3e57a256079279",
+      "authority": "module_validation",
+      "observed_at": "2026-10-10T15:16:42.930627+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_submission_v6/training_progress_2185.txt",
+      "sha256": "859436d10e2a4da1b2c2fba6e9e0564b0d85b3e8b9b1c9816fb8a4d2e5d8d090",
+      "authority": "calculation_file",
+      "observed_at": "2026-10-10T15:16:42.930627+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_submission_v6/engineering_validation.json",
+      "sha256": "86d68182a218acf56fe618bd7be2476c975d004cb5c9c8a5655557a4ab7be925",
+      "authority": "module_validation",
+      "observed_at": "2026-10-10T15:16:42.930627+00:00"
+    },
+    {
+      "locator": "docs/reviews/fe110_adsorption_finetune_package_20261010.md",
+      "sha256": "b23cb8e5af42a51bc32e86f4dc05a138889be8044c9a2a4336a517a89ce67a5b",
+      "authority": "repository_document",
+      "observed_at": "2026-10-10T15:16:42.930627+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "supersedes": [
+    "task-fe110-c2-adsorption-finetune2184-sampler-failed-20261010"
+  ],
+  "payload": {
+    "objective": "Optimize the five exact Fe110 C2 adsorption identities and validate whether GPU-assisted model adaptation actually reduces compatible VASP relaxation work and total compute cost.",
+    "phase": "active",
+    "current_evidence": [
+      "User 补齐 then 把所有问题理清楚再提交 conditionally authorized one unchanged-budget repair retry after real runtime preflight, not automatic retries or promotion.",
+      "Per-split integer natoms/row_ids metadata from original ASE DBs and explicit metadata_path repaired sampler; --seed42 repaired CLI override. Labels/DB bytes/splits34/12/16/baseline/force-only objective/budget unchanged.",
+      "v5 CPU preflight failed because new preflight incorrectly compared shuffled Fairchem Subset against sequential raw rows. No GPU submitted; v6 resolves actual indices/row_ids; metadata unchanged.",
+      "v6 hash5e04e87a2a04f3937734f2592c2f442172d24cfb189a14d66554b854c50cb311 binds83artifacts. Localcompile/Ruff/33tests and MZ73bash-n/actualtrainer datasets,samplers,DataLoader fulltrain34/development12 traversal and finalCLIconfig PASS_NO_MODEL_RUN. Heldout not predicted/selected.",
+      "One MZ73job2185 submitted1GPU/4CPU/32GB/30min/4epochs/lr1e-5/batch1/seed42/requeue0. Latest snapshotRUNNING at1min26sec; actualseed42 and trainingepoch0.0294to0.2059/loss0.0236to0.0229 demonstrate real training iterations, not completion or independent performance.",
+      "No baseline replacement, heldout model selection, VASP submission, scientific acceptance, acceleration proof or automatic retry. Complete GPU training/development evaluation chain remains unverified."
+    ],
+    "one_executable_step": "Check job2185 terminal scheduler/process evidence and grouped development baseline/candidate force comparison; preserve failure evidence and no automatic retry.",
+    "submission_boundary": "Conditional v6 one-run authority consumed by2185; no additional GPU retry, VASP, heldout model selection or checkpoint promotion authorized.",
+    "done_when": [
+      "Completed VASP candidates have convergence, exact chemical identity, site and duplicate reviews before accepted result/energy promotion."
+    ],
+    "constraints": [
+      "Use true Fe110 Fe45 five-layer branch, fixedFe0-17 and SIGMA0.20 production method.",
+      "Do not substitute acetylene for CCH2 or mix the three C2HO graphs.",
+      "Candidate counts follow distinct supported motifs; no blind three-site padding or ML global-minimum claims.",
+      "AQCat25 is adsorption pre-relaxation primary; results return through work before VASP."
+    ],
+    "authoritative_references": [
+      "configs/execution_backends.yaml",
+      "modules/adsorption_workflow/README.md",
+      "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_review_v6/training_request.json",
+      "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_submission_v6/submission_summary.json",
+      "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_submission_v6/training_progress_2185.txt",
+      "docs/reviews/fe110_adsorption_finetune_package_20261010.md",
+      "scripts/adsorption/adsorption_finetune_job.sh"
+    ]
+  }
+}

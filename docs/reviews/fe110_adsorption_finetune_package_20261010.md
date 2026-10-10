@@ -150,5 +150,38 @@ v4完整文件绑定及本地标签验证。2183通过仅证明启动前缀修�
 training_start_2184.txt、runtime_sampler_config_diagnosis.txt和producer_exit_record_2184.json。
 没有自动重投、VASP提交、heldout模型选择或checkpoint晋级。
 
-下一步：准备各split独立natoms元数据和显式seed传递的最小修复；
-无模型CPU预检须覆盖真实采样器完整遍历及CLI最终参数，再形成新哈希请求供授权。
+后续修复见以下记录；原v4输入及失败证据保持原样。
+
+## 2026-10-10 sampler/CLI 修复与 v6 一次提交
+
+用户“补齐”，随后“把所有问题理清楚再提交”，授权在已知工程问题修复、
+实际运行环境预检通过后提交一次同预算受限训练，而非自动重试或模型晋级。
+
+修复内容：`train_metadata.npz`/`development_metadata.npz`分别来自原ASE DB
+真实行序，存储integer natoms和row_ids；各split显式绑定metadata_path。
+34/12/16拆分、结构/原始力标签、DB字节、基准checkpoint和训练预算不变。
+wrapper显式传`--seed 42`；本地validator核对seed、batch、两份元数据及其哈希绑定。
+
+预检扩展为解析实际wrapper命令并调用真实Fairchem parser/build_config，
+随后绕过模型构造，仅运行实际trainer的load_datasets、factory、sampler及DataLoader，
+核对全量结构、raw forces、fixed mask、zero tags、natoms及样本覆盖。
+v5仅上传及CPU预检，**没有提交GPU**。该预检错误地用顺序DB行作参照，
+未考虑Fairchem factory默认Subset重排；因此断言失败，不能解释为元数据或标签错误。
+v6按实际Subset.indices和row_ids取参照，原元数据不变；v5失败证据保留。
+
+v6请求SHA：`5e04e87a2a04f3937734f2592c2f442172d24cfb189a14d66554b854c50cb311`。
+相比v4，77项不变，3项更新（config、wrapper、adapter），新增2份metadata及绑定的预检。
+Pythoncompile/Ruff与33项相关正常/异常测试通过；MZ73 bash-n和无模型CPU预检通过，
+真实train34/development12 sampler/DataLoader全遍历，最终CLI seed42、world_size1，
+训练参数与审核config一致；未用heldout预测或选择模型。
+
+通过后仅提交 **2185**：1GPU/4CPU/32GB/30min、4epoch/lr1e-5/batch1/seed42、requeue0。
+远程目录：`/home/sbq/sbq/adsorption_c2_finetune_20261010_v6`。
+提交回执及初始RUNNING证据：`adsorption_finetune_submission_v6/`。
+运行1分26秒的checkpoint仍RUNNING；真实cmd.seed42，训练日志已有epoch
+0.0294→0.2059及loss0.0236→0.0229，证明已越过初始化并进行训练迭代。
+这些早期训练指标不是独立泛化、开发集保留或加速收益验证。
+无模型CPU预检不覆盖GPU反向传播、完整训练结束、开发集误差下降或实际VASP加速；
+任何后续运行错误须保存证据，不能自动重投。现用模型没有替换，未提交VASP。
+
+下一步：核对2185真实训练迭代、正常终止及开发集比较；候选冻结后才能另行做独立留出验证。
