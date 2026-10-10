@@ -44,16 +44,19 @@ def freeze(root, spec, public, answers):
     return root / "replay.json"
 
 
-def sample(root, suffix="1", hour="01"):
+def sample(root, suffix="1", hour="01", *, value="execution denied", background=None):
     root.mkdir(exist_ok=True)
     def save(name, value):
         path = root / f"{name}.json"
         write_json(path, value)
         return path
-    failure = save("failure", {"task": "task-1", "job": f"failure-{suffix}", "symptom": "execution denied"})
-    decision = save("decision", {"at": f"2026-08-29T{hour}:19:00+08:00", "job": f"failure-{suffix}",
-                                 "fact": "review runtime", "request": "a" * 64,
-                                 "failure_sha256": sha256_file(failure)})
+    failure = save("failure", {"task": "task-1", "job": f"failure-{suffix}", "symptom": value})
+    decision_data = {"at": f"2026-08-29T{hour}:19:00+08:00", "job": f"failure-{suffix}",
+                     "fact": "review runtime", "request": "a" * 64, "failure_sha256": sha256_file(failure)}
+    if background is not None:
+        shared = save(background, {"value": 400.0 if background == "config" else "a" * 64})
+        decision_data["background_sha256"] = sha256_file(shared)
+    decision = save("decision", decision_data)
     auth = save("auth", {"at": f"2026-08-29T{hour}:18:30+08:00", "job": f"failure-{suffix}",
                          "fact": True, "task": "task-1"})
     action = save("action", {"at": f"2026-08-29T{hour}:20:30+08:00", "job": f"retry-{suffix}",
@@ -81,6 +84,13 @@ def sample(root, suffix="1", hour="01"):
                  "task": observation(auth, "/task")},
              "after": [event(after, f"after-{suffix}")], "costs": [observation(after, "/force_calls")],
              "recorded_classification": observation(classification, "/outcome/failure_class")}
+    if background is not None:
+        source = observation(shared, "/value")
+        case["evidence"].append({"evidence_id": "e2", "pointer": source["pointer"], "value": source["value"],
+                                 "source_sha256": source["sha256"]})
+        trace["evidence"].append({"evidence_id": "e2", "source": source,
+                                  "links": [observation(decision, "/background_sha256")]})
+        answer["evidence_ids"].append("e2")
     spec = {"schema_version": 1, "traces": [trace], "unreplayable": []}
     public, answers = {"schema_version": 2, "cases": [case]}, {"schema_version": 2, "answers": [answer]}
     path = freeze(root, spec, public, answers)
@@ -89,6 +99,62 @@ def sample(root, suffix="1", hour="01"):
 
 def run(path, root):
     return replay_history(path, root / "report.json", sha256_file(path))
+
+
+@pytest.mark.parametrize("original,changed", [
+    (False, 0), (0, False), (True, 1), (1, True), (1, 1.0), (1.0, 1),
+])
+def test_public_evidence_requires_strict_json_types(tmp_path, original, changed):
+    normal = tmp_path / "normal"
+    path, _, _, _ = sample(normal, value=original)
+    assert run(path, normal)["records"][0]["route_matches_recorded_classification"] is True
+
+    altered = tmp_path / "altered"
+    _, spec, public, answers = sample(altered, value=original)
+    source_sha = sha256_file(altered / "failure.json")
+    witness_sha = sha256_file(altered / "decision.json")
+    public["cases"][0]["evidence"][0]["value"] = changed
+    path = freeze(altered, spec, public, answers)
+    assert sha256_file(altered / "failure.json") == source_sha
+    assert sha256_file(altered / "decision.json") == witness_sha
+    with pytest.raises(ValueError, match="source differs from frozen public evidence"):
+        run(path, altered)
+    assert not (altered / "report.json").exists()
+
+
+@pytest.mark.parametrize("background", ["config", "request"])
+@pytest.mark.parametrize("failure_class", ["runtime", "optimizer"])
+def test_shared_background_cannot_bind_another_failure(tmp_path, background, failure_class):
+    _, spec, public, answers = sample(tmp_path, background=background)
+    other = tmp_path / "other-failure.json"
+    write_json(other, {"task": "task-1", "job": "failure-OTHER", "symptom": "optimizer exhausted"})
+    classification = tmp_path / "foreign-classification.json"
+    write_json(classification, {"task_id": "task-1", "attempt_id": "failure-OTHER", "outcome": {
+        "status": "failure", "failure_class": failure_class,
+        "observations": [observation(other, "/symptom"), observation(tmp_path / f"{background}.json", "/value")]}})
+    spec["traces"][0]["recorded_classification"] = observation(classification, "/outcome/failure_class")
+    if failure_class == "optimizer":
+        answers["answers"][0].update(failure_class="optimizer", next_review="diagnose_optimizer_and_path",
+                                     causal_status="hypothesis", causal_claim="Optimizer cause to test",
+                                     causal_evidence_ids=["e1"])
+    path = freeze(tmp_path, spec, public, answers)
+    with pytest.raises(ValueError, match="lacks this failure's source binding"):
+        run(path, tmp_path)
+    assert not (tmp_path / "report.json").exists()
+
+
+@pytest.mark.parametrize("background", ["config", "request"])
+def test_exact_failure_binding_accepts_shared_background_and_import_attempt_id(tmp_path, background):
+    path, spec, _, _ = sample(tmp_path, background=background)
+    classification = load_json_object(tmp_path / "classification.json")
+    classification["attempt_id"] = "historical-import-1"
+    classification["outcome"]["observations"].append(observation(tmp_path / f"{background}.json", "/value"))
+    write_json(tmp_path / "classification.json", classification)
+    spec["traces"][0]["recorded_classification"] = observation(tmp_path / "classification.json", "/outcome/failure_class")
+    write_json(path, spec)
+    row = run(path, tmp_path)["records"][0]
+    assert row["route_matches_recorded_classification"] is True
+    assert row["recorded_authorization_verified"] is True
 
 
 def test_saved_trace_preserves_boundaries_and_has_no_execution_authority(tmp_path):

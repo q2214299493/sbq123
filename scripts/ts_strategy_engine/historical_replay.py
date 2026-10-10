@@ -65,8 +65,9 @@ def _pre_evidence(trace: dict[str, Any], case: dict[str, Any]) -> list[dict[str,
             raise ValueError("missing, fabricated or repeated replay evidence ID")
         seen.add(name)
         public = visible[name]
-        if public != {"evidence_id": name, "pointer": source["pointer"],
-                      "value": source["value"], "source_sha256": source["sha256"]}:
+        expected = {"evidence_id": name, "pointer": source["pointer"],
+                    "value": source["value"], "source_sha256": source["sha256"]}
+        if sha256_json(public) != sha256_json(expected):
             raise ValueError("replay source differs from frozen public evidence")
         parent = _identity(trace["decision"]["at"])
         if not isinstance(item["links"], list):
@@ -86,7 +87,7 @@ def _pre_evidence(trace: dict[str, Any], case: dict[str, Any]) -> list[dict[str,
     return selected
 
 
-def _classification(trace: dict[str, Any], case: dict[str, Any], sources: list[dict[str, Any]]) -> str | None:
+def _classification(trace: dict[str, Any], case: dict[str, Any]) -> str | None:
     item = trace["recorded_classification"]
     if item is None:
         return None
@@ -96,8 +97,9 @@ def _classification(trace: dict[str, Any], case: dict[str, Any], sources: list[d
     if item["pointer"] != "/outcome/failure_class" or record.get("task_id") != case["group_id"] \
             or record["outcome"].get("status") != "failure":
         raise ValueError("historical classification belongs to a different task")
-    hashes = {source["source"]["sha256"] for source in sources}
-    if not any(obs.get("sha256") in hashes for obs in record["outcome"]["observations"]):
+    # _trace already binds this snapshot to the decision's concrete failure job and task.
+    failure_sha256 = trace["failure_job"]["sha256"]
+    if not any(obs.get("sha256") == failure_sha256 for obs in record["outcome"]["observations"]):
         raise ValueError("historical classification lacks this failure's source binding")
     if item["value"] not in policy()["failure_routes"]:
         raise ValueError("unknown historical failure class")
@@ -164,7 +166,7 @@ def _trace(trace: dict[str, Any], case: dict[str, Any], recommendation: dict[str
     if earlier and cutoff <= datetime.fromisoformat(earlier[-1]["decision_at"]):
         raise ValueError("replay decisions must be in strict chronological order")
     aftermath = _aftermath(trace, cutoff, case["group_id"], seen)
-    recorded_class = _classification(trace, case, sources)
+    recorded_class = _classification(trace, case)
     matches = None if recorded_class is None else recommendation["next_review"] == policy()["failure_routes"][recorded_class]
     prior = [row["case_id"] for row in earlier if row["task_id"] == case["group_id"]
              and row["request_sha256"] == request["value"]]
