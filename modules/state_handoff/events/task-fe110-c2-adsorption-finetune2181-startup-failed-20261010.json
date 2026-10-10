@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2-adsorption-finetune2181-startup-failed-20261010",
+  "occurred_at": "2026-10-10T14:20:00+00:00",
+  "recorded_at": "2026-10-10T14:20:00+00:00",
+  "event_type": "task_updated",
+  "entity": {"kind": "task", "id": "task-current", "module": "adsorption_workflow"},
+  "summary": "User authorized exact v3 request; uploaded and CPU-preflighted; single MZ73 training2181 failed before training at shell bootstrap, no retry or model promotion.",
+  "evidence": [
+    {"locator": "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_submission_v3/submission_authorization.json", "sha256": "1b0a4483e26027303d622452425ab47d2c3b4ae150d4d02ccc55233849495797", "authority": "user_authorization", "observed_at": "2026-10-10T14:20:00+00:00"},
+    {"locator": "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_submission_v3/preflight_binding.json", "sha256": "00d3c0a2a7e96aa685300b849feb57e7355b0f4f1318cf68bf2c0cbcca5735a4", "authority": "module_validation", "observed_at": "2026-10-10T14:20:00+00:00"},
+    {"locator": "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_submission_v3/startup_2181.txt", "sha256": "04c3c4021da7bf6b0b2840c6cb5551a1ca666e8f7507ecd161db0ece19db234a", "authority": "scheduler", "observed_at": "2026-10-10T14:20:00+00:00"},
+    {"locator": "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_submission_v3/startup_summary.json", "sha256": "e81aeb018a1cfc30d4b0b180968ead7f0d2da71d852cf057331c1c948b4cb04b", "authority": "module_validation", "observed_at": "2026-10-10T14:20:00+00:00"},
+    {"locator": "docs/reviews/fe110_adsorption_finetune_package_20261010.md", "sha256": "bfc9a5e3948d16ebdeedb80a09246422ec2adfeee5f902df02843d90b65529f4", "authority": "module_validation", "observed_at": "2026-10-10T14:20:00+00:00"},
+    {"locator": "archive/fe110_five_c2_adsorption_20261006/launch_adsorption_finetune.py", "sha256": "beb76752f6ef286324a1c334ce30705af5135be3055c91f87037e769c4084596", "authority": "module_validation", "observed_at": "2026-10-10T14:20:00+00:00"},
+    {"locator": "archive/fe110_five_c2_adsorption_20261006/preflight_adsorption_finetune.py", "sha256": "f29aa3615a2a0f32f92460ecfc56b3e8eaf111167aaf36e10a264d760eaf7f8e", "authority": "module_validation", "observed_at": "2026-10-10T14:20:00+00:00"}
+  ],
+  "review": {"required": false, "reason_codes": [], "status": "not_required"},
+  "supersedes": ["task-fe110-c2-adsorption-finetune-review-ready-20261010"],
+  "payload": {
+    "objective": "Optimize the five exact Fe110 C2 adsorption identities and validate whether GPU-assisted model adaptation actually reduces compatible VASP relaxation work and total compute cost.",
+    "phase": "active",
+    "current_evidence": [
+      "User message 启动 authorizes one v3 adsorption-only request SHA2e1b517270395b414c8e7079cf95df93656014e24ce2db3f1e6b5e0ac3c40d16, not automatic retries or VASP/model promotion.",
+      "Exact80artifacts plus original request/separate authorization uploaded to MZ73 /home/sbq/sbq/adsorption_c2_finetune_20261010_v3. Train34,development12,heldout16 splits unchanged.",
+      "Actual MZ73 no-model runtime preflight PASS: Fairchem/FiLM/trainer imports, train/development graphs, exact forces/fixed masks/zero tags, periodic-equivalent positions and baseline checkpoint architecture/hash. Heldout not consumed for training/epoch choice.",
+      "One training job2181 submitted with1GPU/4CPU/32GB/30min/4epochs. Initial schedulerRUNNING thenFAILED ExitCode2:0 elapsed1s; zero-byte log, no producer receipt/warmstart/candidate. No training-start or accuracy/speedup claim.",
+      "Failure bounded to pretraining shell/bootstrap; exact Slurm environment/check still unverified. SSH bootstrap passes, which does not establish batch environment. Accounting unavailable; scontrol authoritative for final job state.",
+      "No-model diagnostic executed first25wrapper lines and created empty output/job_2181; this is not a training result. Original failed receipts retained. Pythoncompile/Ruff and4submission-boundary tests pass.",
+      "No automatic retry, checkpoint promotion, VASP submission or heldout prediction. Existing species03 CHCO data-coverage and actual VASP speedup limitations remain."
+    ],
+    "one_executable_step": "Prepare and review a bounded no-model Slurm bootstrap environment contrast to identify job2181's actual failed check; repair the startup cause without changing data/scientific parameters, then obtain separate retry authorization.",
+    "submission_boundary": "Original one-run authorization consumed by2181. No training retry, new VASP submission, checkpoint promotion or heldout-based model selection authorized.",
+    "done_when": ["Completed VASP candidates have convergence, exact chemical identity, site and duplicate reviews before accepted result/energy promotion."],
+    "constraints": [
+      "Use true Fe110 Fe45 five-layer branch, fixedFe0-17 and SIGMA0.20 production method.",
+      "Do not substitute acetylene for CCH2 or mix the three C2HO graphs.",
+      "Candidate counts follow distinct supported motifs; no blind three-site padding or ML global-minimum claims.",
+      "AQCat25 is adsorption pre-relaxation primary; results return through work before VASP."
+    ],
+    "authoritative_references": [
+      "configs/execution_backends.yaml", "modules/adsorption_workflow/README.md",
+      "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_review_v3/training_request.json",
+      "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_submission_v3/startup_summary.json",
+      "docs/reviews/fe110_adsorption_finetune_package_20261010.md",
+      "archive/fe110_five_c2_adsorption_20261006/launch_adsorption_finetune.py"
+    ]
+  }
+}

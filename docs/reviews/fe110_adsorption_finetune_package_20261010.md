@@ -63,7 +63,8 @@ site 审查及邻近 Fe 信息在 `near_duplicate_review.json`；这些标签不
 - 重新初始化训练 epoch/optimizer，禁止恢复预训练进度而跳过这次小规模训练。
 - 不自动晋级。冻结留出集在候选确定后另行验证，不参与此次 epoch 选择。
 
-远程拟用 `/home/sbq/sbq/adsorption_c2_finetune_20261010_v3`，尚未上传或提交。
+远程包为 `/home/sbq/sbq/adsorption_c2_finetune_20261010_v3`。
+初始审核时尚未上传或提交；2026-10-10 用户“启动”后的实际执行记录见下文。
 运行前必须完成 MZ73 无训练的包/运行环境预检，并取得上述请求哈希的单独用户授权。
 执行器拒绝缺失、过期或不匹配的授权。这里只准备训练，不同时授权新的 DFT。
 
@@ -82,4 +83,18 @@ MZ73 只读 CPU checkpoint 检查确认基准 SHA、模型配置和 PyTorch2.4.1
 直接 VASP、原 AQCat25+VASP、候选+VASP。报告离子步和时间，并计入 GPU/标签/训练成本；
 可复用已有兼容对照，但不能从单点误差下降推断已获得实际加速。
 
-下一步：审核本包；确认34/12/16分配及4epoch/30分钟预算后，单独授权小规模 GPU 训练。
+## 2026-10-10 启动记录
+
+用户“启动”单独授权原始请求哈希 `2e1b517270395b414c8e7079cf95df93656014e24ce2db3f1e6b5e0ac3c40d16`。
+未修改原请求的初始未授权快照；独立授权、预检、提交与失败证据保存在
+`calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_submission_v3/`。
+
+- 原80项绑定文件、请求、独立授权已上传；没有上传基准 checkpoint 或 POTCAR。
+- MZ73 CPU 预检通过：真实 Fairchem/FiLM 注册、训练34/开发12逐行 graph/原子顺序、力标签、固定层、零 tags、基准 checkpoint 哈希及架构一致；未训练或读取留出集作模型选择。
+- 首次坐标检查错误地直接比较已折回晶胞的 graph 坐标；确认读取器明确使用 `wrap_positions(...,eps=0)` 后，改用同一周期等价表达检查。原始数据和训练 runtime 未变，失败预检与修正版本均保留。
+- 只提交一次训练作业 **2181**，1 GPU/4 CPU/32 GB/30分钟、4 epoch。初次调度为 RUNNING；启动检查随后确认 **FAILED，ExitCode=2:0，运行1秒**。
+- Slurm日志0字节，无正常退出记录、warmstart 或候选 checkpoint，不能声称训练已开始或已提高精度。失败限定在训练启动前的 shell/bootstrap 阶段；具体是哪个检查或批处理环境值尚未确认。SSH 下路径/hostname检查通过，不等于 Slurm 环境检查通过。
+- Slurm accounting 已禁用，使用 `scontrol` 已完成状态作为调度证据。诊断只执行脚本前25行（无模型），创建了失败作业的空 output/job_2181 目录；该目录不是训练输出。
+- Pythoncompile/Ruff和4个提交边界测试通过。没有自动重投、提交 VASP、读取留出预测或晋级模型。
+
+下一步：准备无模型的 Slurm bootstrap 环境对照并审核；定位实际失败检查后修正启动器，再单独授权重投训练。不要更改训练数据或科学参数来掩盖启动问题。

@@ -33,6 +33,8 @@ Only unresolved problems belong here. Resolved detail through 2026-06-27 is pres
 
 | `E-021` | AQCat25 adsorption GPU2142/03_extra2 reached its ML force threshold but split exact `[CH][C][O]` at C45-C46: 1.5349A ->2.9355A | Normal producer exit is not chemical acceptance. Preserve original input and returned CH+CO fragments; no conclusion that the DFT intact state is unstable or that checkpoint fine-tuning is necessary | User-authorized intact-template reorientation03_extra2_repair_v1: centralC46 short bridge, flat chain along Fe rows, no artificial bond restraints. Initial geometry passes; new relaxation remains unsubmitted. Review: `docs/reviews/fe110_gpu2142_adsorption_review_20261007.md` |
 
+| `E-022` | Adsorption force fine-tuning2181 passed CPU/no-model preflight but Slurm exited2:0 after1s before training; stdout0bytes, no producer receipt/warmstart/candidate | This is an unresolved batch bootstrap failure, not a model/force-fit failure. SSH-side bootstrap passes but batch environment is unverified. Original request/data/checkpoint preserved; no retry | Prepare a reviewed no-model Slurm environment/bootstrap contrast, locate the failed check, then repair startup and separately authorize training retry. Evidence: adsorption_finetune_submission_v3/startup_summary.json |
+
 Update this table in place. Move resolved items to historical results or Git history; do not append routine job checkpoints.
 
 ## 2026-08-02 - 112-Core Exact-Path Pilot Electronic Failure in Images 06-07
