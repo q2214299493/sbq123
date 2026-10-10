@@ -192,6 +192,15 @@ geometry-acceptance or TS authority. Single-point force agreement or ML force
 convergence alone does not demonstrate acceleration. No default backend/model,
 DFT protocol or existing job is changed by this experimental preparation.
 
+The bounded adsorption-specific adapter is
+`scripts/adsorption/force_finetune.py`; the explicit-authorization GPU wrapper
+is `scripts/adsorption/adsorption_finetune_job.sh`. The scoped C2 package review
+is `docs/reviews/fe110_adsorption_finetune_package_20261010.md`. It preserves
+whole-job heldout isolation and source force/geometry hashes, with compatible
+replay and fixed-atom masks. Intermediate frames are force labels, not accepted
+endpoints. Development regression is separate from frozen heldout validation;
+no automatic checkpoint promotion or acceleration claim is granted.
+
 ## Code ownership
 
 - `scripts/adsorption/gas_vasp_common.py` owns the common gas-reference INCAR,

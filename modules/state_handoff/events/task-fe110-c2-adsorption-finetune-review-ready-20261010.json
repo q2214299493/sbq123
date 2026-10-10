@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2-adsorption-finetune-review-ready-20261010",
+  "occurred_at": "2026-10-10T12:58:59.153904+00:00",
+  "recorded_at": "2026-10-10T12:58:59.153904+00:00",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "adsorption_workflow"
+  },
+  "summary": "Prepare reviewed-source adsorption force fine-tuning package with near-duplicate exclusion, compatible replay and bounded separate-authorization GPU request; no training submitted.",
+  "evidence": [
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_review_v3/training_request.json",
+      "sha256": "2e1b517270395b414c8e7079cf95df93656014e24ce2db3f1e6b5e0ac3c40d16",
+      "authority": "module_validation",
+      "observed_at": "2026-10-10T12:58:59.153904+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_review_v3/training_manifest.json",
+      "sha256": "12a6f0e9cc94a2dad33086b7fe81c7cc4ae8f3a7ec3f1cda1b58549e8eae456b",
+      "authority": "module_validation",
+      "observed_at": "2026-10-10T12:58:59.153904+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_review_v3/selection_review.json",
+      "sha256": "1305a537063da6634a0018a10aeba295cd9964535e40f80e66842e3105a439eb",
+      "authority": "module_validation",
+      "observed_at": "2026-10-10T12:58:59.153904+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_review_v3/replay_compatibility.json",
+      "sha256": "74176979fd7bfee7d06ae34bb4f61dc28663b51cad8d28c466af668b840311b9",
+      "authority": "module_validation",
+      "observed_at": "2026-10-10T12:58:59.153904+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_review_v3/replay_labels.reviewed.json",
+      "sha256": "3837d18120761776015065294fe4c861416713553a3c697896cdc580c5d9e717",
+      "authority": "module_validation",
+      "observed_at": "2026-10-10T12:58:59.153904+00:00"
+    },
+    {
+      "locator": "docs/reviews/fe110_adsorption_finetune_package_20261010.md",
+      "sha256": "7cedab467acb60a2829f53a3b4407533f69780e1cc745fd9a083b8614048108a",
+      "authority": "module_validation",
+      "observed_at": "2026-10-10T12:58:59.153904+00:00"
+    },
+    {
+      "locator": "scripts/adsorption/force_finetune.py",
+      "sha256": "1ba6719f6594de4b9185eb19fa472d6ed789b308cef3c78f1a6b1471cd715672",
+      "authority": "module_validation",
+      "observed_at": "2026-10-10T12:58:59.153904+00:00"
+    },
+    {
+      "locator": "scripts/adsorption/adsorption_finetune_job.sh",
+      "sha256": "6b045697fd666ebbf9300737fb786fa6a1517ef0d7ec0f1cdf8b90cd04aa487c",
+      "authority": "module_validation",
+      "observed_at": "2026-10-10T12:58:59.153904+00:00"
+    },
+    {
+      "locator": "archive/fe110_five_c2_adsorption_20261006/prepare_adsorption_finetune.py",
+      "sha256": "d264d68d439d6f35f60f44848a5221ba513dc67a22673f8bc277327ea339b67a",
+      "authority": "module_validation",
+      "observed_at": "2026-10-10T12:58:59.153904+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "supersedes": [
+    "task-fe110-c2-acceleration-adjustment-prepared-20261010"
+  ],
+  "payload": {
+    "objective": "Optimize the five exact Fe110 C2 adsorption identities and validate whether GPU-assisted model adaptation actually reduces compatible VASP relaxation work and total compute cost.",
+    "phase": "active",
+    "current_evidence": [
+      "56 frozen C2 frames reviewed using36surface symmetries/xyPBC/Hpermutation/actual height;5train frames near heldout removed and2 redundant temporal force frames represented by final steps.",
+      "13old adsorption replay sources compatible with active SIGMA0.20/Gamma5x5x1/Fe45/fixed0-17/POTCAR/magnetic branch; exact final force/TOTEN,SCF,normal-completion and printed-coordinate checks passed.",
+      "Final v3 package:train34(25C2+9replay),development12(8C2+4replay),frozenheldout16. Cross-split near duplicates absent; actual ASE DB counts match;80artifact bindings valid.",
+      "Adsorption-only adapter preserves source force/geometry and fixed masks; training uses4epochs/lr1e-5/seed42/1GPU/30min, rejects stale or missing separate authorization. No training or new VASP submitted.",
+      "Pythoncompile,Ruff,bash-n and33targeted tests passed. MZ73 CPU baseline inspection only; complete GPU training/runtime chain and speedup not yet tested.",
+      "species03 CHCO coverage remains absent; local preparation does not recheck current CHCO job status or mutate jobs. No checkpoint or accepted energy promoted."
+    ],
+    "one_executable_step": "Review v3 request SHA2e1b517270395b414c8e7079cf95df93656014e24ce2db3f1e6b5e0ac3c40d16 and separately authorize one bounded adsorption GPU fine-tuning run; only then perform MZ73 package/runtime preflight and submit.",
+    "submission_boundary": "Review-ready only. No new GPU/VASP submission, model promotion, job stop, DFT parameter change or automatic retry authorized.",
+    "done_when": [
+      "Completed VASP candidates have convergence, exact chemical identity, site and duplicate reviews before accepted result/energy promotion."
+    ],
+    "constraints": [
+      "Use true Fe110 Fe45 five-layer branch, fixedFe0-17 and SIGMA0.20 production method.",
+      "Do not substitute acetylene for CCH2 or mix the three C2HO graphs.",
+      "Candidate counts follow distinct supported motifs; no blind three-site padding or ML global-minimum claims.",
+      "AQCat25 is adsorption pre-relaxation primary; results return through work before VASP."
+    ],
+    "authoritative_references": [
+      "configs/execution_backends.yaml",
+      "modules/adsorption_workflow/README.md",
+      "configs/true_fe110_production.yaml",
+      "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_review_v3/training_request.json",
+      "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_review_v3/training_manifest.json",
+      "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_review_v3/selection_review.json",
+      "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_review_v3/replay_compatibility.json",
+      "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_review_v3/replay_labels.reviewed.json",
+      "docs/reviews/fe110_adsorption_finetune_package_20261010.md",
+      "scripts/adsorption/force_finetune.py",
+      "scripts/adsorption/adsorption_finetune_job.sh",
+      "archive/fe110_five_c2_adsorption_20261006/prepare_adsorption_finetune.py"
+    ]
+  }
+}
