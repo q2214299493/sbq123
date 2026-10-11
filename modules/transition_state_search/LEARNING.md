@@ -199,6 +199,136 @@ repeat-input success, counterfactual success rate, saved compute or optimal budg
 is established; original timestamp claims are verified as stored records, not
 independently authenticated clock observations.
 
+## Local workflow review-order loop
+
+This loop changes only the order of the existing `advise-next` TS-field review
+hints. It derives those fields from `next_review.review_field_orders()`, checked
+against the existing strategy settings schema. It cannot change a parameter
+value, diagnostic route, causal status, evidence requirement, scientific check
+or execution permission. Unknown causes still receive no TS-field hints.
+GPU1508 execution remains a separate paused branch.
+
+There is no database, global default or registry/index for this loop. An explicit
+local `--store` contains content-addressed `policies/ID.json`, at most one
+`evaluations/CANDIDATE_ID.json`, and one `decisions/CANDIDATE_ID.json`. Writes
+are exclusive and identical repeats are idempotent; conflicting writes fail.
+A short exclusive `.write.lock` serializes mutations. A leftover lock after a
+process crash blocks writes; investigate ownership before removing it manually.
+Status is derived from these artifacts. Engine/policy, parent, input, source,
+evaluation and decision bindings are rechecked on use. An accepted successor
+makes its parent unavailable for new proposals, while that parent remains
+readable as a control. Use a new baseline after code or evidence changes; old
+artifacts are retained and never silently migrated.
+
+Run all operations through the existing learning entry point:
+
+```powershell
+python -m scripts.ts_strategy_engine.cli learning workflow-baseline --store LOCAL_STORE --request BASELINE.json
+python -m scripts.ts_strategy_engine.cli learning workflow-propose --store LOCAL_STORE --request CANDIDATE.json
+python -m scripts.ts_strategy_engine.cli learning workflow-status --store LOCAL_STORE --policy-id RETURNED_ID
+python -m scripts.ts_strategy_engine.cli learning workflow-bind-evaluation --store LOCAL_STORE --request EVALUATION.json
+python -m scripts.ts_strategy_engine.cli learning workflow-decide --store LOCAL_STORE --request HUMAN_DECISION.json
+```
+
+`BASELINE.json` has exactly `scope` (nonempty trial/review name), `provenance`
+(`saved_real` or `synthetic`), `inputs` (`public` and `answers`, each a file
+reference), and `observations` (nonempty existing scalar JSON observations).
+File references have `path` and file `sha256`; observations additionally have
+`pointer` and exact-type `value`. The schema-2 input pair goes through the
+existing diagnosis validator. Every public evidence value must have a matching
+original-source hash, pointer and value in these observations. This captures P0
+from code and files, not from a chat reconstruction.
+
+`CANDIDATE.json` has exactly `parent_id`, `scope`, `changes`, `rationale`,
+`observations`, and `evaluation_contract`. `changes` maps exactly one existing
+failure class to a full, nontrivial permutation of that class's existing review
+fields. For example, reversing the two geometry hints is structurally permitted;
+its usefulness still needs task-specific evidence. The parent must be P0 or an
+accepted candidate, in the same frozen scope and input set. Evidence and a
+specific rationale are mandatory. The contract is fixed when proposing:
+
+```json
+{
+  "method": "paired_saved_review_traces_v1",
+  "rules": {
+    "all_required_checks_pass": true,
+    "no_per_task_regression": true,
+    "strictly_fewer_review_actions_on_at_least_one_task": true
+  },
+  "tasks": [{
+    "case_id": "ACTUAL_CASE_ID",
+    "task_id": "ACTUAL_PUBLIC_GROUP_ID",
+    "input_sha256": "ACTUAL_CASE_INPUT_SHA256",
+    "required_checks": ["TASK_SPECIFIC_PREDECLARED_CHECK_ID"]
+  }]
+}
+```
+
+Declare the necessary diagnostic-priority and review-completeness checks before
+evaluation. The tasks must cover the frozen public input exactly. This first
+method compares counts of **recorded review actions**, only when every
+predeclared check has a source-bound true observation on both sides. Each task
+must have no increase in actions, and at least one must have fewer. Any failed
+check or per-task increase returns `NOT_SUPPORTED`; aggregate gains cannot hide
+a regression. This is a bounded workflow-effort measure, not a correctness
+oracle or a TS-success, text-match, replay-route, time or compute-cost score.
+Check semantics and faithful collection still require human review; hashes
+establish identity, not scientific truth or reviewer authentication.
+
+Generate saved advice for both policies with the same frozen public/answers:
+
+```powershell
+python -m scripts.ts_strategy_engine.cli learning advise-next --public PUBLIC.json --answers ANSWERS.json --expected-public-sha256 PUBLIC_CANONICAL_SHA256 --report NEW_ADVICE.json --workflow-store LOCAL_STORE --workflow-policy RETURNED_ID --workflow-scope DECLARED_SCOPE --offline-evaluation
+```
+
+`EVALUATION.json` has exactly `schema_version: 1`, `candidate_id`, `parent_id`,
+`scope`, `contract_sha256`, `provenance`, and `pairs`. Each pair contains
+`case_id`, `parent` and `candidate` trace file references (or null for missing
+traces). A trace file contains exactly `schema_version: 1`, `provenance`,
+`policy_id`, `scope`, `contract_sha256`, `case_id`, `task_id`, `input_sha256`,
+`advice` (the saved offline advice file reference), `actions` and `checks`.
+Each action has a unique `event_id`, an allowed `field`, and a scalar source
+`observation`; the fields' first visits must follow the selected complete order.
+Repeated actions count individually. Each check has `check_id` and a scalar
+`observation` whose value is true, false or unmeasured null. Retain raw collection
+records. Advice is reconstructed with the existing validator and compared in
+full; different tasks, versions, inputs, methods, orders and stale sources fail.
+`improved: true` alone is never an evaluation.
+
+No result means `WAITING_FOR_EVALUATION`, with null comparison/evaluation ID.
+Partial results return `NEEDS_MORE_EVIDENCE` and explicit gaps without freezing
+an incomplete binding. Preserve the partial input and later submit a new,
+complete source file. A complete comparison is bound once, including unsupported
+results. Supporting evidence yields `AWAITING_HUMAN_REVIEW`, never acceptance.
+There is no automatic evaluator, Gold creation, model call, scheduler or retry.
+
+`HUMAN_DECISION.json` has exactly `candidate_id`, `evaluation_id` (returned by
+binding, or null for rejection before evaluation), `decision` (`ACCEPT` or
+`REJECT`), `reviewer`, `reason`, and `actor_kind`. For real records the actor
+is `human`; a synthetic fixture requires `synthetic_fixture`. Acceptance needs
+the exact supporting evaluation. Rejection retains all artifacts. Conflicting
+decisions fail. This implementation task makes no real acceptance decision.
+
+An accepted real version can be selected by the same explicit `advise-next`
+flags **without** `--offline-evaluation`, only in its exact frozen review scope.
+The output records `workflow_strategy` identity, scope, provenance and mode.
+Unaccepted candidates require explicit offline preview; rejected candidates
+cannot be selected. Synthetic versions always require offline mode, including
+after a simulated acceptance. With no workflow flags, the original report and
+ordering remain unchanged. A selected version never authorizes computation or
+clears STOP, and is never installed into the production Agent or global config.
+
+The runnable end-to-end synthetic examples are also the regression tests:
+
+```powershell
+python -m pytest -o addopts= -q tests/test_ts_workflow_improvement.py -k end_to_end
+```
+
+They exercise P0 -> P1 -> waiting -> paired synthetic traces -> simulated human
+acceptance -> actual changed `advise-next` order -> P1 as the next parent.
+These fixtures establish software behavior only. No real workflow gain, TS
+success, cost saving or GPU result is established by them.
+
 ## Warm start and reference methods
 
 Install local orchestration dependencies with `python -m pip install -e ".[dev,neb,sella]"`.

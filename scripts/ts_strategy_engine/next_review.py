@@ -25,8 +25,19 @@ _TS_FIELD_HINTS = {
 }
 
 
+def review_field_orders() -> dict[str, list[str]]:
+    """The existing advice fields, checked against the owning settings schema."""
+    orders = {key: list(value) for key, value in _TS_FIELD_HINTS.items()}
+    allowed = set(policy()["settings_schema"]["properties"])
+    if any(not set(order) <= allowed for order in orders.values()):
+        raise ValueError("strategy-review hint conflicts with existing strategy policy")
+    return orders
+
+
 def recommend_next_reviews(public_path: Path, answers_path: Path, report_path: Path,
-                           expected_public_sha256: str) -> dict[str, Any]:
+                           expected_public_sha256: str, *, workflow_store: Path | None = None,
+                           workflow_policy: str | None = None, workflow_scope: str | None = None,
+                           offline_evaluation: bool = False) -> dict[str, Any]:
     """Validate frozen public identities and answers; write advisory-only output once."""
     public, answers = load_json_object(public_path), load_json_object(answers_path)
     exact_keys(public, {"schema_version", "cases"})
@@ -49,9 +60,14 @@ def recommend_next_reviews(public_path: Path, answers_path: Path, report_path: P
             raise ValueError("next-review answers require unique nonempty case IDs")
         by_id[case_id] = answer
 
+    orders = review_field_orders()
+    strategy_identity = None
+    if workflow_store is not None or workflow_policy is not None or workflow_scope is not None or offline_evaluation:
+        from .workflow_improvement import select_policy
+        orders, strategy_identity = select_policy(workflow_store, workflow_policy, workflow_scope,
+                                                  public, answers_path, offline_evaluation)
     suggestions = []
     seen: set[str] = set()
-    allowed_fields = set(policy()["settings_schema"]["properties"])
     for case in public["cases"]:
         exact_keys(case, {"case_id", "group_id", "question", "evidence", "input_sha256"})
         case_id = case["case_id"]
@@ -80,9 +96,7 @@ def recommend_next_reviews(public_path: Path, answers_path: Path, report_path: P
         if error:
             raise ValueError(f"invalid diagnosis for {case_id}: {error}")
         status = answer["causal_status"]
-        hints = _TS_FIELD_HINTS.get(answer["failure_class"], ()) if status != "unknown" else ()
-        if not set(hints) <= allowed_fields:
-            raise ValueError("strategy-review hint conflicts with existing strategy policy")
+        hints = orders.get(answer["failure_class"], ()) if status != "unknown" else ()
         suggestions.append({
             "case_id": case_id,
             "group_id": case["group_id"],
@@ -110,6 +124,8 @@ def recommend_next_reviews(public_path: Path, answers_path: Path, report_path: P
         "ts_strategy_changes_authorized": False,
         "recommendations": suggestions,
     }
+    if strategy_identity is not None:
+        report["workflow_strategy"] = strategy_identity
     report_path.parent.mkdir(parents=True, exist_ok=True)
     write_json_exclusive(report_path, report)
     return report

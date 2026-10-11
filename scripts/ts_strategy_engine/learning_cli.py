@@ -5,7 +5,7 @@ import argparse
 import json
 from pathlib import Path
 
-from scripts.artifact_io import load_json_object, write_json
+from scripts.artifact_io import load_json_object, sha256_file, write_json
 
 from .learning_cases import build_cases
 from .learning_evaluation import evaluate_cases
@@ -18,6 +18,7 @@ from .strategy_learning import (
     capture_baseline, capture_workdir, compare_variants, propose_variant,
     import_failure, record_outcome, reference_methods, retry_assessment, start_attempt, revise_outcome,
 )
+from .workflow_improvement import create_baseline, propose_policy, policy_status, bind_evaluation, record_decision
 
 
 def parser() -> argparse.ArgumentParser:
@@ -66,6 +67,17 @@ def parser() -> argparse.ArgumentParser:
     advice.add_argument("--answers", type=Path, required=True)
     advice.add_argument("--expected-public-sha256", required=True)
     advice.add_argument("--report", type=Path, required=True)
+    advice.add_argument("--workflow-store", type=Path)
+    advice.add_argument("--workflow-policy")
+    advice.add_argument("--workflow-scope")
+    advice.add_argument("--offline-evaluation", action="store_true", help="Explicit offline candidate/fixture preview only.")
+    for name in ("workflow-baseline", "workflow-propose", "workflow-bind-evaluation", "workflow-decide", "workflow-status"):
+        command = commands.add_parser(name, help="Local immutable review-order artifacts; no database or execution.")
+        command.add_argument("--store", type=Path, required=True)
+        if name == "workflow-status":
+            command.add_argument("--policy-id", required=True)
+        else:
+            command.add_argument("--request", type=Path, required=True)
     replay = commands.add_parser("replay-history", help="Replay saved, hash-bound historical snapshots without execution.")
     replay.add_argument("--request", type=Path, required=True)
     replay.add_argument("--expected-request-sha256", required=True)
@@ -80,13 +92,25 @@ def _dispatch_cases(args: argparse.Namespace):
         return build_cases(args.manifest, args.allowed_root, args.bundle)
     if args.command == "advise-next":
         return recommend_next_reviews(args.public, args.answers, args.report,
-                                      args.expected_public_sha256)
+                                      args.expected_public_sha256, workflow_store=args.workflow_store,
+                                      workflow_policy=args.workflow_policy, workflow_scope=args.workflow_scope,
+                                      offline_evaluation=args.offline_evaluation)
     return evaluate_cases(args.bundle, args.answers, args.report)
 
 
+def _dispatch_workflow(args: argparse.Namespace):
+    if args.command == "workflow-status":
+        return policy_status(args.store, args.policy_id)
+    if args.command == "workflow-bind-evaluation":
+        return bind_evaluation(args.store, {"path": str(args.request.resolve()), "sha256": sha256_file(args.request)})
+    handlers = {"workflow-baseline": create_baseline, "workflow-propose": propose_policy, "workflow-decide": record_decision}
+    return handlers[args.command](args.store, load_json_object(args.request))
+
+
 def _dispatch(args: argparse.Namespace):
-    if args.command in {"cases-build", "cases-evaluate", "advise-next", "replay-history"}:
-        return _dispatch_cases(args)
+    if args.command.startswith("workflow-") or args.command in {"cases-build", "cases-evaluate", "advise-next", "replay-history"}:
+        handler = _dispatch_workflow if args.command.startswith("workflow-") else _dispatch_cases
+        return handler(args)
     database = args.database
     if args.command == "methods":
         return reference_methods()
@@ -133,7 +157,8 @@ def main(argv: list[str] | None = None) -> None:
     root = parser()
     args = root.parse_args(argv)
     try:
-        if args.command in {"cases-build", "cases-evaluate", "advise-next", "replay-history"} and args.output is not None:
+        if (args.command in {"cases-build", "cases-evaluate", "advise-next", "replay-history"}
+                or args.command.startswith("workflow-")) and args.output is not None:
             raise ValueError("--output is not supported for diagnostic case commands")
         if args.output and args.output.exists():
             raise ValueError(f"report already exists: {args.output}")
