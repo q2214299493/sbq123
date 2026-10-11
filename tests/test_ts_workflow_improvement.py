@@ -71,7 +71,7 @@ def advice(env, identity=None, *, offline=False, name="advice.json", scope=None)
     return recommend_next_reviews(env["public"], env["answers"], env["root"] / name, env["public_hash"], **options)
 
 
-def evaluation(env, candidate_counts=(2, 2), candidate_check=True):
+def evaluation(env, candidate_counts=(2, 2), candidate_check=True, parent_counts=(3, 3)):
     """Saved paired traces and scalar raw observations, explicitly synthetic fixtures."""
     directory = env["root"] / "synthetic-evaluation"
     directory.mkdir()
@@ -83,27 +83,31 @@ def evaluation(env, candidate_counts=(2, 2), candidate_check=True):
         report_path = env["root"] / report_name
         for index, task in enumerate(env["proposal"]["evaluation_contract"]["tasks"]):
             fields = report["recommendations"][index]["ts_strategy_fields_to_review"]
-            count = (3 if name == "parent" else candidate_counts[index]) if fields else 0
+            count = (parent_counts[index] if name == "parent" else candidate_counts[index]) if fields else 0
             order = [fields[0]] * (count - 1) + [fields[-1]] if fields else []
             raw = directory / f"{name}-{index}-raw.json"
-            write_json(raw, {"actions": [f"synthetic recorded action {j}" for j in range(count)],
-                             "checks": {key: True if name == "parent" else candidate_check for key in task["required_checks"]}})
-            trace = {"schema_version": 1, "provenance": env["baseline"]["provenance"], "policy_id": identity,
+            context = {"schema_version": 2, "provenance": env["baseline"]["provenance"], "policy_id": identity,
                      "scope": env["baseline"]["scope"], "contract_sha256": env["p1"]["contract_sha256"],
-                     **{key: task[key] for key in ("case_id", "task_id", "input_sha256")}, "advice": reference(report_path),
+                     **{key: task[key] for key in ("case_id", "task_id", "input_sha256")}}
+            write_json(raw, {**context,
+                             "actions": [{"event_id": f"{name}-{index}-{j}", "sequence": j, "field": field,
+                                          "result": f"synthetic recorded action {j}"} for j, field in enumerate(order)],
+                             "checks": [{"check_id": key, "result": True if name == "parent" else candidate_check}
+                                        for key in task["required_checks"]]})
+            trace = {**context, "advice": reference(report_path), "source": reference(raw),
                      "actions": [{"event_id": f"{name}-{index}-{j}", "field": field,
-                                  "observation": observation(raw, f"/actions/{j}", f"synthetic recorded action {j}")}
+                                  "observation": observation(raw, f"/actions/{j}/result", f"synthetic recorded action {j}")}
                                  for j, field in enumerate(order)],
-                     "checks": [{"check_id": key, "observation": observation(raw, f"/checks/{key}",
+                     "checks": [{"check_id": key, "observation": observation(raw, f"/checks/{j}/result",
                                                                                  True if name == "parent" else candidate_check)}
-                                for key in task["required_checks"]]}
+                                for j, key in enumerate(task["required_checks"])]}
             trace_path = directory / f"{name}-{index}.json"
             write_json(trace_path, trace)
             if name == "parent":
                 pairs.append({"case_id": task["case_id"], "parent": reference(trace_path)})
             else:
                 pairs[index]["candidate"] = reference(trace_path)
-    request = {"schema_version": 1, "candidate_id": env["p1"]["policy_id"], "parent_id": env["p0"]["policy_id"],
+    request = {"schema_version": 2, "candidate_id": env["p1"]["policy_id"], "parent_id": env["p0"]["policy_id"],
                "scope": env["baseline"]["scope"], "contract_sha256": env["p1"]["contract_sha256"],
                "provenance": env["baseline"]["provenance"], "pairs": pairs}
     path = directory / "evaluation.json"
@@ -245,12 +249,13 @@ def test_missing_measurements_are_gaps_not_zero_or_success(tmp_path, missing):
             item = trace["checks"][0]["observation"]
             raw = Path(item["path"])
             data = load_json_object(raw)
-            data["checks"][trace["checks"][0]["check_id"]] = None
+            data["checks"][0]["result"] = None
             write_json(raw, data)
             for check in trace["checks"]:
                 check["observation"].update(reference(raw))
             for action in trace["actions"]:
                 action["observation"].update(reference(raw))
+            trace["source"] = reference(raw)
             item["value"] = None
         else:
             trace[missing] = []
@@ -386,3 +391,198 @@ def test_outer_learning_entrypoint_exposes_workflow_commands():
     result = subprocess.run([sys.executable, "-m", "scripts.ts_strategy_engine.cli", "learning", "--help"],
                             capture_output=True, text=True, check=True)
     assert "workflow-propose" in result.stdout and "workflow-decide" in result.stdout
+
+
+@pytest.mark.parametrize("damage", ["relabeled_duplicate", "foreign_raw"])
+def test_raw_source_ownership_and_duplicate_counts_are_rejected(tmp_path, damage):
+    env = experiment(tmp_path)
+    path = evaluation(env)
+    request = load_json_object(path)
+    trace_path = Path(request["pairs"][0]["parent"]["path"])
+    trace = load_json_object(trace_path)
+    raw_path = Path(trace["actions"][0]["observation"]["path"])
+    raw = load_json_object(raw_path)
+    if damage == "relabeled_duplicate":
+        raw["actions"].pop(1)
+        if isinstance(raw["actions"][1], dict):
+            raw["actions"][1]["sequence"] = 1
+        write_json(raw_path, raw)
+        for action, index in zip(trace["actions"], (0, 0, 1)):
+            value = raw["actions"][index]
+            suffix = "/result" if isinstance(value, dict) else ""
+            action["observation"] = observation(raw_path, f"/actions/{index}{suffix}",
+                                                value["result"] if isinstance(value, dict) else value)
+        trace["actions"][1]["event_id"] = "relabeled-same-original-action"
+    else:
+        raw.update({"task_id": "foreign-task", "case_id": "foreign-case", "policy_id": "a" * 64,
+                    "input_sha256": "b" * 64, "contract_sha256": "c" * 64, "scope": "foreign-scope"})
+        write_json(raw_path, raw)
+        for action in trace["actions"]:
+            action["observation"].update(reference(raw_path))
+    for check in trace["checks"]:
+        check["observation"].update(reference(raw_path))
+    if "source" in trace:
+        trace["source"] = reference(raw_path)
+    write_json(trace_path, trace)
+    request["pairs"][0]["parent"] = reference(trace_path)
+    write_json(path, request)
+    with pytest.raises(ValueError):
+        loop.bind_evaluation(env["store"], reference(path))
+    assert not (env["store"] / "evaluations" / f"{env['p1']['policy_id']}.json").exists()
+
+
+def save_changed_pair(path, request, side, trace_path, trace, raw_path=None, raw=None):
+    if raw_path is not None:
+        write_json(raw_path, raw)
+        trace["source"] = reference(raw_path)
+        for item in trace["actions"] + trace["checks"]:
+            item["observation"].update(reference(raw_path))
+    write_json(trace_path, trace)
+    request["pairs"][0][side] = reference(trace_path)
+    write_json(path, request)
+
+
+@pytest.mark.parametrize("key", ["case_id", "task_id", "policy_id", "input_sha256", "contract_sha256", "scope", "provenance"])
+def test_each_raw_source_identity_must_match_the_trace(tmp_path, key):
+    env = experiment(tmp_path)
+    path = evaluation(env)
+    request = load_json_object(path)
+    trace_path = Path(request["pairs"][0]["candidate"]["path"])
+    trace = load_json_object(trace_path)
+    raw_path = Path(trace["source"]["path"])
+    raw = load_json_object(raw_path)
+    raw[key] = "foreign-identity"
+    save_changed_pair(path, request, "candidate", trace_path, trace, raw_path, raw)
+    with pytest.raises(ValueError, match="identity mismatch"):
+        loop.bind_evaluation(env["store"], reference(path))
+
+
+@pytest.mark.parametrize("kind", ["actions", "checks"])
+def test_foreign_action_or_check_cannot_borrow_correct_outer_identity(tmp_path, kind):
+    env = experiment(tmp_path)
+    path = evaluation(env)
+    request = load_json_object(path)
+    trace_path = Path(request["pairs"][0]["candidate"]["path"])
+    trace = load_json_object(trace_path)
+    raw = load_json_object(Path(trace["source"]["path"]))
+    raw["task_id"] = "other-task"
+    foreign_path = tmp_path / "foreign-raw.json"
+    write_json(foreign_path, raw)
+    trace[kind][0]["observation"].update(reference(foreign_path))
+    save_changed_pair(path, request, "candidate", trace_path, trace)
+    with pytest.raises(ValueError, match="bound original event"):
+        loop.bind_evaluation(env["store"], reference(path))
+
+
+@pytest.mark.parametrize("damage", ["event_id", "field", "sequence", "sequence_bool", "duplicate_raw_id", "check_id", "check_bool"])
+def test_raw_event_identity_order_and_check_types_are_checked(tmp_path, damage):
+    env = experiment(tmp_path)
+    path = evaluation(env)
+    request = load_json_object(path)
+    trace_path = Path(request["pairs"][0]["candidate"]["path"])
+    trace = load_json_object(trace_path)
+    raw_path = Path(trace["source"]["path"])
+    raw = load_json_object(raw_path)
+    if damage == "event_id":
+        raw["actions"][0]["event_id"] = "different-original-event"
+    elif damage == "field":
+        raw["actions"][0]["field"] = raw["actions"][1]["field"]
+    elif damage.startswith("sequence"):
+        raw["actions"][0]["sequence"] = False if damage == "sequence_bool" else 9
+    elif damage == "duplicate_raw_id":
+        raw["actions"][1]["event_id"] = raw["actions"][0]["event_id"]
+    elif damage == "check_id":
+        raw["checks"][0]["check_id"] = "foreign-check"
+    else:
+        raw["checks"][0]["result"] = 1
+        trace["checks"][0]["observation"]["value"] = 1
+    save_changed_pair(path, request, "candidate", trace_path, trace, raw_path, raw)
+    with pytest.raises(ValueError):
+        loop.bind_evaluation(env["store"], reference(path))
+
+
+def test_same_source_event_copied_to_another_path_cannot_count_twice(tmp_path):
+    env = experiment(tmp_path)
+    path = evaluation(env)
+    request = load_json_object(path)
+    trace_path = Path(request["pairs"][0]["parent"]["path"])
+    trace = load_json_object(trace_path)
+    alias = tmp_path / "raw-path-alias.json"
+    alias.write_bytes(Path(trace["source"]["path"]).read_bytes())
+    trace["actions"][1]["observation"] = {**trace["actions"][0]["observation"], **reference(alias)}
+    save_changed_pair(path, request, "parent", trace_path, trace)
+    with pytest.raises(ValueError, match="bound original event"):
+        loop.bind_evaluation(env["store"], reference(path))
+
+
+@pytest.mark.parametrize("parent_counts,status", [((3, 3), "AWAITING_HUMAN_REVIEW"), ((2, 2), "NOT_SUPPORTED")])
+def test_equal_text_from_distinct_events_counts_independently(tmp_path, parent_counts, status):
+    env = experiment(tmp_path)
+    path = evaluation(env, parent_counts=parent_counts)
+    request = load_json_object(path)
+    for pair in request["pairs"]:
+        for side in ("parent", "candidate"):
+            trace_path = Path(pair[side]["path"])
+            trace = load_json_object(trace_path)
+            raw_path = Path(trace["source"]["path"])
+            raw = load_json_object(raw_path)
+            for action in raw["actions"]:
+                action["result"] = "same text, independent event identities"
+            write_json(raw_path, raw)
+            trace["source"] = reference(raw_path)
+            for action in trace["actions"]:
+                action["observation"].update(reference(raw_path))
+                action["observation"]["value"] = "same text, independent event identities"
+            for check in trace["checks"]:
+                check["observation"].update(reference(raw_path))
+            write_json(trace_path, trace)
+            pair[side] = reference(trace_path)
+    write_json(path, request)
+    result = loop.bind_evaluation(env["store"], reference(path))
+    assert result["status"] == status
+    assert result["comparison"]["tasks"][0]["parent"]["review_actions"] == parent_counts[0]
+    assert result["comparison"]["tasks"][0]["candidate"]["review_actions"] == 2
+
+
+def test_full_field_coverage_cannot_hide_an_omitted_original_action(tmp_path):
+    env = experiment(tmp_path)
+    path = evaluation(env)
+    request = load_json_object(path)
+    trace_path = Path(request["pairs"][0]["parent"]["path"])
+    trace = load_json_object(trace_path)
+    raw_path = Path(trace["source"]["path"])
+    raw = load_json_object(raw_path)
+    raw["actions"][1]["field"] = raw["actions"][2]["field"]
+    trace["actions"][1]["field"] = raw["actions"][1]["field"]
+    trace["actions"].pop()
+    save_changed_pair(path, request, "parent", trace_path, trace, raw_path, raw)
+    result = loop.bind_evaluation(env["store"], reference(path))
+    assert result["status"] == "NEEDS_MORE_EVIDENCE" and result["evaluation_id"] is None
+
+
+@pytest.mark.parametrize("kind", ["evaluation", "trace", "raw", "unbound_raw"])
+def test_legacy_or_unbound_records_are_not_given_invented_metadata(tmp_path, kind):
+    env = experiment(tmp_path)
+    path = evaluation(env)
+    request = load_json_object(path)
+    if kind == "evaluation":
+        request["schema_version"] = 1
+        write_json(path, request)
+    else:
+        trace_path = Path(request["pairs"][0]["candidate"]["path"])
+        trace = load_json_object(trace_path)
+        if kind == "trace":
+            trace["schema_version"] = 1
+            save_changed_pair(path, request, "candidate", trace_path, trace)
+        else:
+            raw_path = Path(trace["source"]["path"])
+            raw = load_json_object(raw_path)
+            if kind == "raw":
+                raw["schema_version"] = 1
+            else:
+                del raw["policy_id"]
+            save_changed_pair(path, request, "candidate", trace_path, trace, raw_path, raw)
+    original_hash = sha256_file(path)
+    with pytest.raises(ValueError):
+        loop.bind_evaluation(env["store"], reference(path))
+    assert sha256_file(path) == original_hash

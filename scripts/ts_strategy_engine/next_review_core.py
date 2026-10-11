@@ -1,0 +1,130 @@
+"""Shared diagnostic validation and advice construction; no strategy-store dependency."""
+from __future__ import annotations
+
+from typing import Any
+
+from scripts.artifact_io import require_sha256, sha256_json
+from .learning_cases import DIAGNOSIS_KEYS, SCHEMA_VERSION, diagnosis_error
+from .learning_evidence import exact_keys
+from .strategy_learning import policy
+
+
+_REVIEW_FOCUS = {
+    "unknown": "collect_cause_specific_evidence",
+    "hypothesis": "test_specific_causal_claim",
+    "confirmed": "review_scope_of_claim_and_evidence",
+}
+_TS_FIELD_HINTS = {
+    "geometry": ("interpolation_strategy", "initial_images"),
+    "optimizer": ("candidate_method",),
+}
+
+
+def review_field_orders() -> dict[str, list[str]]:
+    """The existing advice fields, checked against the owning settings schema."""
+    orders = {key: list(value) for key, value in _TS_FIELD_HINTS.items()}
+    allowed = set(policy()["settings_schema"]["properties"])
+    if any(not set(order) <= allowed for order in orders.values()):
+        raise ValueError("strategy-review hint conflicts with existing strategy policy")
+    return orders
+
+
+def _validated_orders(orders: dict | None) -> dict:
+    existing = review_field_orders()
+    if orders is None:
+        return existing
+    exact_keys(orders, set(existing))
+    for key, fields in existing.items():
+        proposed = orders[key]
+        if not isinstance(proposed, list) or any(not isinstance(field, str) for field in proposed) \
+                or len(proposed) != len(fields) or set(proposed) != set(fields):
+            raise ValueError("review orders must retain every existing field exactly once")
+    return orders
+
+
+def build_next_reviews(public: dict, answers: dict, expected_public_sha256: str,
+                       answers_sha256: str, policy_sha256: str, *, orders: dict | None = None,
+                       strategy_identity: dict | None = None) -> dict[str, Any]:
+    """Validate the same frozen diagnosis pair and construct advisory-only data."""
+    exact_keys(public, {"schema_version", "cases"})
+    exact_keys(answers, {"schema_version", "public_sha256", "answers"})
+    public_hash = sha256_json(public)
+    if public_hash != require_sha256(expected_public_sha256, label="expected public SHA-256"):
+        raise ValueError("public evidence differs from the explicitly approved input identity")
+    if type(public["schema_version"]) is not int or public["schema_version"] != SCHEMA_VERSION \
+            or type(answers["schema_version"]) is not int or answers["schema_version"] != SCHEMA_VERSION \
+            or not isinstance(public["cases"], list) or not public["cases"] \
+            or not isinstance(answers["answers"], list) \
+            or answers["public_sha256"] != public_hash:
+        raise ValueError("next-review input requires a matching nonempty schema-2 public/answer pair")
+
+    by_id: dict[str, dict[str, Any]] = {}
+    for answer in answers["answers"]:
+        exact_keys(answer, {"case_id", "input_sha256"} | DIAGNOSIS_KEYS)
+        case_id = answer["case_id"]
+        if not isinstance(case_id, str) or not case_id or case_id in by_id:
+            raise ValueError("next-review answers require unique nonempty case IDs")
+        by_id[case_id] = answer
+
+    orders = _validated_orders(orders)
+    suggestions = []
+    seen: set[str] = set()
+    for case in public["cases"]:
+        exact_keys(case, {"case_id", "group_id", "question", "evidence", "input_sha256"})
+        case_id = case["case_id"]
+        if not isinstance(case_id, str) or not case_id or case_id in seen \
+                or not isinstance(case["group_id"], str) or not case["group_id"] \
+                or not isinstance(case["question"], str) or not case["question"].strip() \
+                or not isinstance(case["evidence"], list) or not case["evidence"]:
+            raise ValueError("invalid or repeated public diagnostic case")
+        seen.add(case_id)
+        if case["input_sha256"] != sha256_json({k: v for k, v in case.items() if k != "input_sha256"}):
+            raise ValueError(f"public case identity changed: {case_id}")
+        evidence_ids: set[str] = set()
+        for item in case["evidence"]:
+            exact_keys(item, {"evidence_id", "pointer", "value", "source_sha256"})
+            evidence_id = item["evidence_id"]
+            if not isinstance(evidence_id, str) or not evidence_id or evidence_id in evidence_ids \
+                    or not isinstance(item["pointer"], str) or not item["pointer"].startswith("/") \
+                    or isinstance(item["value"], (dict, list)):
+                raise ValueError(f"invalid public evidence identity: {case_id}")
+            require_sha256(item["source_sha256"], label="public evidence source SHA-256")
+            evidence_ids.add(evidence_id)
+        answer = by_id.get(case_id)
+        if answer is None or answer["input_sha256"] != case["input_sha256"]:
+            raise ValueError(f"missing or mismatched answer for {case_id}")
+        error = diagnosis_error({key: answer[key] for key in DIAGNOSIS_KEYS}, evidence_ids)
+        if error:
+            raise ValueError(f"invalid diagnosis for {case_id}: {error}")
+        status = answer["causal_status"]
+        hints = orders.get(answer["failure_class"], ()) if status != "unknown" else ()
+        suggestions.append({
+            "case_id": case_id,
+            "group_id": case["group_id"],
+            "failure_class": answer["failure_class"],
+            "causal_status": status,
+            "causal_claim": answer["causal_claim"],
+            "causal_evidence_ids": answer["causal_evidence_ids"],
+            "next_review": answer["next_review"],
+            "review_focus": _REVIEW_FOCUS[status],
+            "ts_strategy_fields_to_review": list(hints),
+            "requires_owning_review": True,
+            "automatic_execution": False,
+        })
+    if set(by_id) != seen:
+        raise ValueError("next-review answers must cover exactly the public case IDs")
+
+    report = {
+        "schema_version": 1,
+        "status": "ADVISORY_ONLY_NOT_AUTHORIZED",
+        "public_sha256": public_hash,
+        "answers_sha256": answers_sha256,
+        "policy_sha256": policy_sha256,
+        "public_source_files_reverified": False,
+        "causal_claims_scientifically_validated": False,
+        "ts_strategy_changes_authorized": False,
+        "recommendations": suggestions,
+    }
+    if strategy_identity is not None:
+        report["workflow_strategy"] = strategy_identity
+    return report

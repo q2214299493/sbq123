@@ -202,7 +202,7 @@ independently authenticated clock observations.
 ## Local workflow review-order loop
 
 This loop changes only the order of the existing `advise-next` TS-field review
-hints. It derives those fields from `next_review.review_field_orders()`, checked
+hints. It derives those fields from `next_review_core.review_field_orders()`, checked
 against the existing strategy settings schema. It cannot change a parameter
 value, diagnostic route, causal status, evidence requirement, scientific check
 or execution permission. Unknown causes still receive no TS-field hints.
@@ -219,6 +219,10 @@ evaluation and decision bindings are rechecked on use. An accepted successor
 makes its parent unavailable for new proposals, while that parent remains
 readable as a control. Use a new baseline after code or evidence changes; old
 artifacts are retained and never silently migrated.
+The dependency direction is `next_review` -> `workflow_improvement` -> shared
+advice/evaluation code. `next_review_core` owns diagnosis validation and advice
+construction; `workflow_evaluation` owns source identity and paired comparison.
+Neither imports the workflow selector or its public advice wrapper.
 
 Run all operations through the existing learning entry point:
 
@@ -249,7 +253,7 @@ specific rationale are mandatory. The contract is fixed when proposing:
 
 ```json
 {
-  "method": "paired_saved_review_traces_v1",
+  "method": "paired_saved_review_traces_v2",
   "rules": {
     "all_required_checks_pass": true,
     "no_per_task_regression": true,
@@ -281,19 +285,40 @@ Generate saved advice for both policies with the same frozen public/answers:
 python -m scripts.ts_strategy_engine.cli learning advise-next --public PUBLIC.json --answers ANSWERS.json --expected-public-sha256 PUBLIC_CANONICAL_SHA256 --report NEW_ADVICE.json --workflow-store LOCAL_STORE --workflow-policy RETURNED_ID --workflow-scope DECLARED_SCOPE --offline-evaluation
 ```
 
-`EVALUATION.json` has exactly `schema_version: 1`, `candidate_id`, `parent_id`,
+`EVALUATION.json` has exactly `schema_version: 2`, `candidate_id`, `parent_id`,
 `scope`, `contract_sha256`, `provenance`, and `pairs`. Each pair contains
 `case_id`, `parent` and `candidate` trace file references (or null for missing
-traces). A trace file contains exactly `schema_version: 1`, `provenance`,
+traces). A trace file contains exactly `schema_version: 2`, `provenance`,
 `policy_id`, `scope`, `contract_sha256`, `case_id`, `task_id`, `input_sha256`,
-`advice` (the saved offline advice file reference), `actions` and `checks`.
+`advice` (the saved offline advice file reference), `source` (one frozen raw
+event-log file reference), `actions` and `checks`.
 Each action has a unique `event_id`, an allowed `field`, and a scalar source
 `observation`; the fields' first visits must follow the selected complete order.
-Repeated actions count individually. Each check has `check_id` and a scalar
+Distinct original actions count individually. Each check has `check_id` and a scalar
 `observation` whose value is true, false or unmeasured null. Retain raw collection
 records. Advice is reconstructed with the existing validator and compared in
 full; different tasks, versions, inputs, methods, orders and stale sources fail.
 `improved: true` alone is never an evaluation.
+
+The raw source is also schema 2 and contains exactly `schema_version`,
+`provenance`, `policy_id`, `scope`, `contract_sha256`, `case_id`, `task_id`,
+`input_sha256`, `actions`, and `checks`. Its identity must match the trace and
+predeclared task/experiment. Each raw action has `event_id`, `sequence` (its
+0-based array position), `field`, and scalar `result`. IDs are unique in that
+log. Each raw check has `check_id` and boolean/null `result`. The trace observes
+`/actions/INDEX/result` or `/checks/INDEX/result` in this exact bound file and
+must retain the original ID, field and order. A byte-identical path alias is
+the same source event. Relabeling, repeated references, wrong source ownership,
+and out-of-order records are rejected; incomplete coverage cannot qualify for
+review. Equal result text on two distinct source events still counts twice.
+
+This is a version boundary, not a production event-schema change: schema-1
+evaluations/traces and logs without verifiable ownership are rejected, never
+assigned invented metadata. The policy and decision artifact formats stay at
+schema 1; saved evaluation bindings use schema 2. Engine bindings now include
+the shared advice and evaluation module hashes. Preserve old artifacts; use a
+new baseline/contract and source-bound records for this version. Only synthetic
+fixtures may be regenerated with explicit synthetic event identities.
 
 No result means `WAITING_FOR_EVALUATION`, with null comparison/evaluation ID.
 Partial results return `NEEDS_MORE_EVIDENCE` and explicit gaps without freezing
