@@ -19,6 +19,7 @@ from .strategy_learning import (
     import_failure, record_outcome, reference_methods, retry_assessment, start_attempt, revise_outcome,
 )
 from .workflow_improvement import create_baseline, propose_policy, policy_status, bind_evaluation, record_decision
+from .workflow_review_runner import run_review
 
 
 def parser() -> argparse.ArgumentParser:
@@ -78,6 +79,16 @@ def parser() -> argparse.ArgumentParser:
             command.add_argument("--policy-id", required=True)
         else:
             command.add_argument("--request", type=Path, required=True)
+    review = commands.add_parser("workflow-run-review", help="One independent read-only review; no model turn by default.")
+    review.add_argument("--store", type=Path, required=True)
+    review.add_argument("--request", type=Path, required=True)
+    review.add_argument("--output-dir", type=Path, required=True)
+    review.add_argument("--model", required=True, help="Explicit model identity, also recorded in prepare mode.")
+    review.add_argument("--effort", choices=["minimal", "low", "medium", "high", "xhigh"], required=True)
+    review.add_argument("--timeout-seconds", type=float, default=120)
+    review.add_argument("--codex", help="Actual local executable; no upgrade or installation.")
+    review.add_argument("--probe-backend", action="store_true", help="Local help/schema/stdio probe; no model turn.")
+    review.add_argument("--execute", action="store_true", help="Request a model review; blocked unless native read confinement is verified.")
     replay = commands.add_parser("replay-history", help="Replay saved, hash-bound historical snapshots without execution.")
     replay.add_argument("--request", type=Path, required=True)
     replay.add_argument("--expected-request-sha256", required=True)
@@ -99,6 +110,9 @@ def _dispatch_cases(args: argparse.Namespace):
 
 
 def _dispatch_workflow(args: argparse.Namespace):
+    if args.command == "workflow-run-review":
+        return run_review(args.store, args.request, args.output_dir, model=args.model, effort=args.effort,
+                          timeout=args.timeout_seconds, codex=args.codex, probe=args.probe_backend, execute=args.execute)
     if args.command == "workflow-status":
         return policy_status(args.store, args.policy_id)
     if args.command == "workflow-bind-evaluation":
@@ -166,6 +180,8 @@ def main(argv: list[str] | None = None) -> None:
         if args.output:
             write_json(args.output, result)
         print(json.dumps(result, ensure_ascii=False, indent=2))
+        if args.command == "workflow-run-review" and result["status"] == "BLOCKED":
+            root.exit(2, "strategy learning: model review blocked; see result.json\n")
         if args.command == "cases-evaluate" and not result["integrity_ok"]:
             root.exit(2, f"strategy learning: invalid answer set; details in {args.report}\n")
     except (OSError, ValueError, KeyError, TypeError) as exc:

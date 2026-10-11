@@ -201,6 +201,93 @@ independently authenticated clock observations.
 
 ## Local workflow review-order loop
 
+### Independent read-only review adapter
+
+`workflow-run-review` handles one arm of an already frozen local trial. It does
+not change P0/P1, run both arms, accept a policy, generate paths, or run a model
+by default. A new output directory is mandatory. Source IDs resolve only through
+the frozen material manifest; lexical escapes, symlinks/reparse points, stale
+hashes, reference answers and workflow decision files are rejected. The model
+prompt contains the public case and selected field order, never the saved answers
+or the other arm's outputs. The two host tools bind their own field; they accept
+only evidence IDs, with no shell, path, expression, write or submission parameter.
+
+Use a schema-1 runner request (separate from the immutable trial):
+
+```json
+{
+  "schema_version": 1,
+  "trial": {"path": "ABSOLUTE/TRIAL.json", "sha256": "ACTUAL_FILE_SHA256"},
+  "candidate_id": "EXISTING_P1_ID",
+  "policy_id": "EXISTING_P0_OR_P1_ID",
+  "scope": "EXISTING_SCOPE",
+  "case_id": "EXISTING_CASE_ID",
+  "task_id": "EXISTING_TASK_ID",
+  "input_sha256": "EXISTING_INPUT_SHA256"
+}
+```
+
+`TRIAL.json` must retain the existing `inputs`, `evaluation_contract`, `scope`,
+`provenance` and `materials` (`evidence_id -> path/sha256`, with original-source
+metadata permitted). Parent/candidate identities and their existing advice engine
+bindings are validated by the workflow lifecycle. No second registry is created.
+
+```text
+python -m scripts.ts_strategy_engine.cli learning workflow-run-review --store LOCAL_STORE --request ARM_REQUEST.json --output-dir NEW_ARM_DIRECTORY --model EXPLICIT_MODEL --effort medium
+python -m scripts.ts_strategy_engine.cli learning workflow-run-review --store LOCAL_STORE --request ARM_REQUEST.json --output-dir NEW_PROBE_DIRECTORY --model EXPLICIT_MODEL --effort medium --timeout-seconds 120 --codex ABSOLUTE_CODEX_EXECUTABLE --probe-backend
+```
+
+`--probe-backend` invokes local version/help/features/schema generation and a
+fresh ephemeral stdio thread, but sends **zero model turns**. It uses a fresh
+child-only Codex home without copying authentication. It records the executable
+hash, actual session response, permission settings, disabled native features,
+MCP inventory and an innocuous outside-workspace file-RPC probe. No installation,
+upgrade, environment repair or network/model test is performed.
+
+Compatibility verified locally with Codex `0.162.0-alpha.17.2`: stdio initialization,
+new threads, dynamic tool specs and schema-2 host collection are supported.
+However, the legacy `readOnly` policy has no evidence-directory read allowlist;
+the native client file RPC can read the outside canary. That RPC uses host
+authority and is **not** proof of a model escape. The backend exposes no verified
+native-tool inventory/read-confinement attestation here. Disabled features and
+an empty MCP list do not prove that all reading channels are restricted.
+Consequently `--execute` currently writes `BLOCKED` and exits 2 **before any
+`turn/start`**, with no bypass/override. Live authenticated model execution is
+deliberately unavailable until that boundary can be independently verified; this
+adapter does not introduce a permission workaround. A new session establishes
+context independence only, separately from read confinement and log completeness.
+
+Offline synthetic transport tests exercise the actual host tools, real temporary
+file parsing, call-ID retransmission deduplication, independent duplicate calls,
+stream interruption, forbidden tools and an eighth-call limit. The stdio child
+has a hard process watchdog (default 120 seconds, explicit maximum 3600). A
+protocol retransmission consumes no second operation; an independent failed
+operation remains counted. A ninth operation is denied and journaled. One model
+turn only; no resume/fork, subagent or automatic retry.
+
+The host flushes `journal.jsonl` before operations and preserves protocol arrivals,
+start/completion/failure receipts, timestamps, source identities and real returns
+(credential-like values redacted). Each action binds task/input/contract/policy,
+session/turn/call and a host event ID. `raw.json` and `trace.json` are write-once
+schema-2 projections. Interrupted runs retain all actions and raw checks, but
+export an incomplete check projection so the existing evaluator cannot qualify
+them as complete. Final model prose never sets a check. Only the narrow
+deterministic checks `source_and_task_identity`,
+`interpolation_strategy_evidence_read`, and `initial_images_evidence_read` can be
+set by these host operations. Other predeclared checks (including existing real
+chemical/review-completeness checks) remain `null`, without rewriting the frozen
+contract. Complete transport recording alone is not complete scientific review.
+Prepare/probe mode produces no review trace and cannot be bound as an evaluation.
+
+```text
+python -m pytest -o addopts= -q tests/test_ts_workflow_review_runner.py
+```
+
+These are synthetic software tests, not a real P0/P1 experiment. Trace pairs can
+use the existing `workflow-bind-evaluation` entry; missing human judgments remain
+`NEEDS_MORE_EVIDENCE`. Private artifacts, credentials and transcripts stay local.
+GPU1508 remains paused; this interface provides no calculation execution authority.
+
 This loop changes only the order of the existing `advise-next` TS-field review
 hints. It derives those fields from `next_review_core.review_field_orders()`, checked
 against the existing strategy settings schema. It cannot change a parameter
