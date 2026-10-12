@@ -15,12 +15,13 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 Tasks are ordered by priority and should be handled one per Codex thread.
 
-## Deferred by adsorption 06–10 preparation (2026-10-12)
+## Deferred after adsorption 01–05 final review (2026-10-12)
 
-- Preserve the ongoing 01–05 adsorption calculations; do not stop or resubmit.
-  Last verified 2026-10-12 11:52: job9839757 finished in295steps/fmax0.0181,
-  but C–C2.787A requires fragmentation/reclassification review; job9842136
-  was RUN at99completedsteps/fmax0.0854 with intact C–C1.412A.
+- 01–05 final review is complete: five accepted representatives, five duplicate
+  sources, one dissociated original target, three representatives awaiting DONE
+  scheduler evidence or an explicit task-scoped exception. Do not rerun by default.
+- 06–10: fifteen prepared candidates_v2 await human structural/evidence review
+  and separate GPU authorization; no GPU or VASP was submitted for this set.
 - Independently validate the adsorption fine-tuning candidate and quantify
   matched VASP acceleration before checkpoint promotion; preparation of06–10
   does not authorize heldout prediction, new training, or promotion.

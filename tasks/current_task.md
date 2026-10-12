@@ -3,16 +3,17 @@
 
 ## Objective
 
-Prepare three distinct exploratory Fe110 adsorption candidates for each exact graph06–10, after whitelist/primary-literature review, for human structural review before computation.
+Review the fourteen completed Fe110 adsorption01–05 structures, surface-aware duplicates and compatibility, and register only fully eligible results.
 
 ## Current Evidence Snapshot
 
-- Bounded whitelist search found no usable exact-target motifs; live Catalysis-Hub endpoint access failed. No production semantic-ranking success or exhaustive absence claim.
-- Primary Fe110 papers concern CH2CO and CHCH2 but do not provide three verified stable configurations for each target; rare COC/OH graphs remain explicitly exploratory.
-- Prepared candidates_v2:11 distinct local CARE pose transfers and4 user-authorized rigid reanchors;15 molecular graphs/H placements, slab/flags and hash checks passed;48 scoped tests passed.
-- True Fe45 clean slab and Fe0-17 fixed preserved. Interleaved C/O records are reordered with an atom map; long molecular branches are unwrapped along bonds.
-- Three soft seed warnings remain:06-A,07-A,09-B. Minimum selected seed RMSD0.487A under36 face-preserving slab operations; no height-only padding.
-- No model run, GPU/VASP submission, accepted stable motif, adsorption energy registration or checkpoint promotion. Existing01–05 calculations remain untouched.
+- All14 source sets collected and SHA256-verified; all VASP normal termination, final SCF and movable-atom force conditions pass.
+- 13 intended graphs/H placements preserved;03_cfg0_direct_vasp reclassifies to CH+CO fragments and is rejected for the original intact target.
+- Five surface-aware duplicate sources; eight retained geometric representatives are not a global-minimum or distinct-basin proof.
+- Canonical append-only registration and DB readback confirm5 accepted representatives,5 duplicates,1 rejected original target and3 needs_review.
+- 02_extra2,04_cfg2,05_cfg1 have valid scientific output but lack required original scheduler DONE evidence; keep UNKNOWN and do not invent acceptance.
+- 112 new source-file records,14 reviews,14 compatibility records,14 scheduler observations and10 result records; no duplicate jobs or calculations.
+- No adsorption-energy reference tuple, thermal correction, Excel promotion, model promotion or new scientific submission. Prepared06–10 remain deferred.
 
 ## Lifecycle Status
 
@@ -20,11 +21,11 @@ Prepare three distinct exploratory Fe110 adsorption candidates for each exact gr
 
 ## One Executable Step
 
-Human-review the fifteen candidates_v2 structures, literature scope and three soft warnings before preparing a separately authorized GPU batch.
+Resolve the task-scoped acceptance decision for the three scheduler-evidence-pending representatives; recover original DONE evidence or obtain explicit user authority before preparing any policy exception.
 
 ## Submission Boundary
 
-Local preparation only. GPU/VASP execution requires separate explicit authorization and current owning-module review/handoff; constructed hypotheses cannot bypass production evidence gates.
+Review and registration only; do not submit, restart or alter any GPU/VASP calculation, waive scheduler requirements or promote a checkpoint.
 
 ## Authoritative Constraint
 
@@ -32,22 +33,23 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 
 ## Done When
 
-- Five exact graphs each have three distinct geometry-audited candidate structures, source/construction provenance and reviewable figures/tables; submission remains unauthorized.
+- Every original calculation has hash-bound final convergence, chemistry and compatibility review and duplicate disposition.
+- Fully eligible representatives have canonical append-only accepted records and successful database readback; exclusions retain truthful status.
+- Three missing-scheduler-evidence representatives remain explicitly pending until evidence or separate policy authority exists.
 
 ## Constraints
 
-- Use the accepted Fe45 five-layer slab, exact element/coordinate maps and bottom Fe0-17 fixed.
-- Do not replace COC by CCO, move OH hydrogen to carbon, or import literature/model energies as DFT results.
-- This user's three-seed construction request is task-scoped exploratory authority, not a global change to stable-motif or execution rules.
-- Do not promote the unvalidated fine-tuning checkpoint or alter existing calculations.
+- Use the accepted Fe45 branch, true species order and bottom18 fixed; preserve original source bytes.
+- Do not promote fragments as the original graph, duplicate energy rows, arbitrary rotated molecular matches, or inferred adsorption energies.
+- Missing LSF history is UNKNOWN, not failure and not an invented DONE.
+- 06–10 preparation and the fine-tuning candidate stay in backlog; this task grants no computation authority.
 
 ## Authoritative References
 
-- configs/execution_backends.yaml
 - modules/adsorption_workflow/README.md
-- configs/adsmind_lite/fe110_c2_06_10_exploratory_20261012.json
-- docs/reviews/fe110_c2_06_10_literature_20261012.md
-- calculations/fe110_c2_adsorption_06_10_20261012/structure_review.md
-- calculations/fe110_c2_adsorption_06_10_20261012/candidates_v2/candidate_review.json
+- modules/calculation_registry/README.md
+- configs/true_fe110_production.yaml
+- docs/reviews/fe110_c2_01_05_completion_20261012.md
+- calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/registration_v2/post_apply_verification.json
 - tasks/backlog.md
 <!-- state-handoff:end current_task -->

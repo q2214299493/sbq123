@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2-01-05-completion-review-20261012",
+  "occurred_at": "2026-10-12T14:10:09+00:00",
+  "recorded_at": "2026-10-12T14:10:09+00:00",
+  "event_type": "task_updated",
+  "entity": {"kind": "task", "id": "task-current", "module": "adsorption_workflow"},
+  "summary": "User-authorized final review completed for14 original adsorption jobs; canonical registry receipt confirms5 accepted,5 duplicate,1 rejected target and3 needs-review representatives. No new calculation.",
+  "evidence": [
+    {"locator": "docs/reviews/fe110_c2_01_05_completion_20261012.md", "sha256": "007c5293d592f189ca25f705a0fdfc2dc15d51b3de406f7622f62d54e636ac27", "authority": "repository_document", "observed_at": "2026-10-12T14:10:09+00:00"},
+    {"locator": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/registration_v2/registry_receipt.json", "sha256": "72fcda2b449bf62f3dba9a32b65e290c42b495c1ab6bf29a51fa6643258139d2", "authority": "module_validation", "observed_at": "2026-10-12T14:07:09+00:00"},
+    {"locator": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/registration_v2/post_apply_verification.json", "sha256": "27bab60f62649896122f6576099f66448e01fd52ac990f740405bab0e95abe2f", "authority": "module_validation", "observed_at": "2026-10-12T14:07:09+00:00"},
+    {"locator": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/registration_v2/scientific_decisions.json", "sha256": "6068512982cc3a5d7f2e9aaf95bbe076eacde5c3cfec11f11d488f961d705575", "authority": "module_validation", "observed_at": "2026-10-12T14:10:09+00:00"}
+  ],
+  "review": {"required": false, "reason_codes": [], "status": "not_required"},
+  "supersedes": ["task-fe110-c2-06-10-prepared-review-20261012"],
+  "payload": {
+    "objective": "Review the fourteen completed Fe110 adsorption01–05 structures, surface-aware duplicates and compatibility, and register only fully eligible results.",
+    "phase": "active",
+    "current_evidence": [
+      "All14 source sets collected and SHA256-verified; all VASP normal termination, final SCF and movable-atom force conditions pass.",
+      "13 intended graphs/H placements preserved;03_cfg0_direct_vasp reclassifies to CH+CO fragments and is rejected for the original intact target.",
+      "Five surface-aware duplicate sources; eight retained geometric representatives are not a global-minimum or distinct-basin proof.",
+      "Canonical append-only registration and DB readback confirm5 accepted representatives,5 duplicates,1 rejected original target and3 needs_review.",
+      "02_extra2,04_cfg2,05_cfg1 have valid scientific output but lack required original scheduler DONE evidence; keep UNKNOWN and do not invent acceptance.",
+      "112 new source-file records,14 reviews,14 compatibility records,14 scheduler observations and10 result records; no duplicate jobs or calculations.",
+      "No adsorption-energy reference tuple, thermal correction, Excel promotion, model promotion or new scientific submission. Prepared06–10 remain deferred."
+    ],
+    "one_executable_step": "Resolve the task-scoped acceptance decision for the three scheduler-evidence-pending representatives; recover original DONE evidence or obtain explicit user authority before preparing any policy exception.",
+    "submission_boundary": "Review and registration only; do not submit, restart or alter any GPU/VASP calculation, waive scheduler requirements or promote a checkpoint.",
+    "done_when": [
+      "Every original calculation has hash-bound final convergence, chemistry and compatibility review and duplicate disposition.",
+      "Fully eligible representatives have canonical append-only accepted records and successful database readback; exclusions retain truthful status.",
+      "Three missing-scheduler-evidence representatives remain explicitly pending until evidence or separate policy authority exists."
+    ],
+    "constraints": [
+      "Use the accepted Fe45 branch, true species order and bottom18 fixed; preserve original source bytes.",
+      "Do not promote fragments as the original graph, duplicate energy rows, arbitrary rotated molecular matches, or inferred adsorption energies.",
+      "Missing LSF history is UNKNOWN, not failure and not an invented DONE.",
+      "06–10 preparation and the fine-tuning candidate stay in backlog; this task grants no computation authority."
+    ],
+    "authoritative_references": [
+      "modules/adsorption_workflow/README.md", "modules/calculation_registry/README.md",
+      "configs/true_fe110_production.yaml", "docs/reviews/fe110_c2_01_05_completion_20261012.md",
+      "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/registration_v2/post_apply_verification.json", "tasks/backlog.md"
+    ]
+  }
+}

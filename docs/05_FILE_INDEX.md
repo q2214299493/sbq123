@@ -15,6 +15,14 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 This is a navigation index, not a duplicate file listing. Use `git ls-files` for the complete tracked inventory.
 
+Fe110 C₂ adsorption01–05 completion (2026-10-12):
+`docs/reviews/fe110_c2_01_05_completion_20261012.md` indexes final chemistry,
+surface-aware duplicates and five accepted registry representatives. Raw sources,
+three scheduler-evidence-pending representatives and the exact registry receipt
+are under `calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/`.
+Read-only collection/review and manifest-only preparation entrypoints are
+`scripts/adsorption/{collect_completed_batch,review_completed_batch,prepare_completion_registration}.py`.
+
 Strategy improvement: `modules/transition_state_search/LEARNING.md` documents
 warm-start capture, reference BA-Sella selection, immutable failure history,
 the submission retry check, and the complete local CLI. Its policy is
