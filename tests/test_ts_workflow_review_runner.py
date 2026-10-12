@@ -348,6 +348,70 @@ def test_prepare_cli_never_launches_process_or_production_database(frozen, monke
     assert not (frozen["root"] / "prepare" / "trace.json").exists()
 
 
+@pytest.mark.parametrize("value", ["task-001", "task-local", "case-task-local", "event-task-001",
+                                   "task-" + "x" * 64, "case-sk-local", "event-sk-001",
+                                   {"nested": [{"task_id": "task-local", "ok": True}]}])
+def test_redaction_preserves_non_sensitive_identity_and_nested_results(value):
+    assert protocol.redacted(value) == value
+
+
+def test_redaction_preserves_unchanged_JSON_return_bytes():
+    text = '{  "task_id": "task-local", "case_id": "case-task-001", "fmax": 400.0, "ok": true }\n'
+    assert protocol.redacted(text) == text
+
+
+@pytest.mark.parametrize("key", ["api_key", "apiKey", "password", "secret", "access_token", "credential", "Authorization"])
+def test_redaction_keeps_sensitive_field_protection(key):
+    payload = {"task_id": "task-local", "nested": [{key: "synthetic fixture secret", "result": "kept"}]}
+    assert protocol.redacted(payload) == {"task_id": "task-local", "nested": [{key: "[REDACTED]", "result": "kept"}]}
+
+
+@pytest.mark.parametrize("credential", ["sk-secret", "sk-" + "aB012345" * 6, "sk-proj-" + "aB012345" * 8,
+                                        "sk-svcacct-" + "aB012345" * 8])
+def test_redaction_masks_only_standalone_synthetic_API_credential(credential):
+    assert protocol.redacted(f"task-001 before {credential}; task-local after") == "task-001 before [REDACTED]; task-local after"
+
+
+@pytest.mark.parametrize("scheme", ["Bearer", "bearer", "BEARER"])
+def test_redaction_masks_only_synthetic_bearer_token(scheme):
+    text = f"task-local before {scheme} eyJhbGci.fixture.signature==; event-task-001 after"
+    assert protocol.redacted(text) == f"task-local before {scheme} [REDACTED]; event-task-001 after"
+
+
+def test_redaction_of_nested_JSON_tool_return_keeps_non_sensitive_values():
+    credential = "sk-proj-" + "aB012345" * 8
+    returned = {"task_id": "task-local", "nested": [{"apiKey": credential, "count": 11}],
+                "note": f"before {credential} after", "ok": True, "number": 400.0}
+    payload = {"contentItems": [{"type": "inputText", "text": json.dumps(returned)}], "success": True}
+    masked = protocol.redacted(payload)
+    expected = {**returned, "nested": [{"apiKey": "[REDACTED]", "count": 11}], "note": "before [REDACTED] after"}
+    assert json.loads(masked["contentItems"][0]["text"]) == expected
+    assert type(json.loads(masked["contentItems"][0]["text"])["number"]) is float
+    assert masked["success"] is True and credential not in json.dumps(masked)
+    assert protocol.redacted(masked) == masked
+
+
+def test_ReviewRun_record_preserves_identity_and_partially_redacts_JSON_return(frozen):
+    run = prepared(frozen, "synthetic-redaction-journal")
+    credential = "sk-proj-" + "aB012345" * 8
+    ordinary = '{ "task_id": "task-001", "result": "geometry saved", "count": 11 }'
+    sensitive = json.dumps({"task_id": "task-local", "api_key": credential,
+                            "note": "before Bearer synthetic.fixture.token after", "count": 15})
+    payload = {"task_id": "task-001", "case_id": "case-task-local", "event_id": "event-task-001",
+               "nested": [{"password": "synthetic fixture password", "result": "kept"}],
+               "ordinary_return": ordinary, "tool_return": {"contentItems": [{"type": "inputText", "text": sensitive}]}}
+    run.record("synthetic_redaction_regression", payload)
+    data = (run.output / "journal.jsonl").read_text(encoding="utf-8")
+    row = next(json.loads(line) for line in data.splitlines() if json.loads(line)["kind"] == "synthetic_redaction_regression")
+    assert row["task_id"] == "task-001" and row["case_id"] == "case-task-local" and row["event_id"] == "event-task-001"
+    assert row["ordinary_return"] == ordinary
+    assert row["nested"] == [{"password": "[REDACTED]", "result": "kept"}]
+    assert json.loads(row["tool_return"]["contentItems"][0]["text"]) == {
+        "task_id": "task-local", "api_key": "[REDACTED]", "note": "before Bearer [REDACTED] after", "count": 15}
+    assert credential not in data and "synthetic.fixture.token" not in data and "synthetic fixture password" not in data
+    assert payload["tool_return"]["contentItems"][0]["text"] == sensitive  # The caller's original return is not mutated.
+
+
 def test_live_execution_fails_closed_even_with_forged_probe_claim(frozen, monkeypatch):
     request = frozen["root"] / "request.json"
     write_json(request, frozen["request"])
@@ -381,7 +445,7 @@ def test_stdio_synthetic_child_deadline_and_redaction(tmp_path, monkeypatch):
         transport.close()
     assert time.monotonic() - started < 3 and transport.process.poll() is not None
     assert protocol.redacted({"apiKey": "secret", "Authorization": "Bearer abc", "text": "sk-secret"}) == {
-        "apiKey": "[REDACTED]", "Authorization": "[REDACTED]", "text": "[REDACTED credential-like text]"}
+        "apiKey": "[REDACTED]", "Authorization": "[REDACTED]", "text": "[REDACTED]"}
 
 
 def test_synthetic_stdio_wire_end_to_end_reads_files(frozen, monkeypatch):

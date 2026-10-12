@@ -7,6 +7,7 @@ import json
 import os
 from pathlib import Path
 import queue
+import re
 import shutil
 import subprocess
 import threading
@@ -46,8 +47,19 @@ def redacted(value):
                 else redacted(v) for k, v in value.items()}
     if isinstance(value, list):
         return [redacted(v) for v in value]
-    if isinstance(value, str) and ("Bearer " in value or "sk-" in value):
-        return "[REDACTED credential-like text]"
+    if isinstance(value, str):
+        if value.lstrip().startswith(("{", "[")):
+            try:
+                document = json.loads(value)
+            except json.JSONDecodeError:
+                pass
+            else:
+                masked = redacted(document)
+                # Preserve unchanged tool-return text, including whitespace and number spelling.
+                return value if masked == document else json.dumps(masked, ensure_ascii=False)
+        # A standalone API-key-shaped token, never the substring inside task-* IDs.
+        value = re.sub(r"(?<![A-Za-z0-9_-])sk-[A-Za-z0-9_-]+(?![A-Za-z0-9_-])", "[REDACTED]", value)
+        return re.sub(r"(?i)(\bBearer[ \t]+)[A-Za-z0-9._~+/-]+={0,2}", r"\1[REDACTED]", value)
     return value
 
 
