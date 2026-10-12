@@ -1,0 +1,1420 @@
+{
+  "schema_version": 1,
+  "document_kind": "calculation_registry_batch",
+  "batch_id": "fe110_c2_three_scheduler_exceptions_20261013",
+  "created_at": "2026-10-12T16:56:28.968744+00:00",
+  "reviewer": "User-authorized Codex scientific review",
+  "reason": "\u90fd\u5f55\u5165\u5427 \u7136\u540e\u628a\u90a315\u4e2a\u4e5f\u63d0\u4ea4gpu",
+  "rows": {
+    "files": [
+      {
+        "file_id": "fe110_five_c2_adsorption_20261006_02_extra2_scheduler_exception_20261013_review",
+        "calculation_id": "fe110_five_c2_adsorption_20261006_02_extra2",
+        "job_record_id": "lsf_9842106",
+        "role": "scientific_review",
+        "filename": "02_extra2_review.json",
+        "local_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\registration_exception_20261013\\02_extra2_review.json",
+        "storage_mode": "local_only",
+        "byte_size": 7323,
+        "sha256": "c170bb1d31a9f288ffa24e325896f74db029f561a50ca63a7f62c840a7f474c8",
+        "existence_status": "confirmed"
+      },
+      {
+        "file_id": "fe110_five_c2_adsorption_20261006_04_cfg2_scheduler_exception_20261013_review",
+        "calculation_id": "fe110_five_c2_adsorption_20261006_04_cfg2",
+        "job_record_id": "lsf_9839755",
+        "role": "scientific_review",
+        "filename": "04_cfg2_review.json",
+        "local_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\registration_exception_20261013\\04_cfg2_review.json",
+        "storage_mode": "local_only",
+        "byte_size": 7326,
+        "sha256": "278e57784c826d98e82439ca7dddb7af8a449f3d291b48f5c078855cb83c618b",
+        "existence_status": "confirmed"
+      },
+      {
+        "file_id": "fe110_five_c2_adsorption_20261006_05_cfg1_scheduler_exception_20261013_review",
+        "calculation_id": "fe110_five_c2_adsorption_20261006_05_cfg1",
+        "job_record_id": "lsf_9839754",
+        "role": "scientific_review",
+        "filename": "05_cfg1_review.json",
+        "local_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\registration_exception_20261013\\05_cfg1_review.json",
+        "storage_mode": "local_only",
+        "byte_size": 7314,
+        "sha256": "fcb8e5f72736bbc3127bc3b441ce7573a68a0b86cb470a45812512beb9b564ab",
+        "existence_status": "confirmed"
+      }
+    ],
+    "results": [
+      {
+        "result_id": "fe110_five_c2_adsorption_20261006_02_extra2_scheduler_exception_20261013_final_toten",
+        "calculation_id": "fe110_five_c2_adsorption_20261006_02_extra2",
+        "result_name": "final_toten",
+        "numeric_value": -380.90590972,
+        "unit": "eV",
+        "source_file_id": "fe110_five_c2_adsorption_20261006_02_extra2_completion_20261012_OUTCAR",
+        "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+        "source_locator": "final free energy TOTEN",
+        "extraction_method": "scripts.aqcat25_calibration.parse_final_outcar with reviewed VASP relaxation evidence",
+        "validation_status": "accepted_compatible_final_energy",
+        "created_at": "2026-10-12T16:56:28.968744+00:00",
+        "notes": "Explicit scheduler-evidence exception; scheduler UNKNOWN. No inferred adsorption energy or thermal corrections."
+      },
+      {
+        "result_id": "fe110_five_c2_adsorption_20261006_02_extra2_scheduler_exception_20261013_final_max_movable_force",
+        "calculation_id": "fe110_five_c2_adsorption_20261006_02_extra2",
+        "result_name": "final_max_movable_force",
+        "numeric_value": 0.01958574731788399,
+        "unit": "eV/angstrom",
+        "source_file_id": "fe110_five_c2_adsorption_20261006_02_extra2_completion_20261012_OUTCAR",
+        "reference_convention": "movable_atoms_vector_norm",
+        "source_locator": "final TOTAL-FORCE block; Fe0-17 excluded",
+        "extraction_method": "scripts.aqcat25_calibration.parse_final_outcar with reviewed VASP relaxation evidence",
+        "validation_status": "reviewed",
+        "created_at": "2026-10-12T16:56:28.968744+00:00",
+        "notes": "Explicit scheduler-evidence exception; scheduler UNKNOWN. No inferred adsorption energy or thermal corrections."
+      },
+      {
+        "result_id": "fe110_five_c2_adsorption_20261006_04_cfg2_scheduler_exception_20261013_final_toten",
+        "calculation_id": "fe110_five_c2_adsorption_20261006_04_cfg2",
+        "result_name": "final_toten",
+        "numeric_value": -384.12661226,
+        "unit": "eV",
+        "source_file_id": "fe110_five_c2_adsorption_20261006_04_cfg2_completion_20261012_OUTCAR",
+        "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+        "source_locator": "final free energy TOTEN",
+        "extraction_method": "scripts.aqcat25_calibration.parse_final_outcar with reviewed VASP relaxation evidence",
+        "validation_status": "accepted_compatible_final_energy",
+        "created_at": "2026-10-12T16:56:28.968744+00:00",
+        "notes": "Explicit scheduler-evidence exception; scheduler UNKNOWN. No inferred adsorption energy or thermal corrections."
+      },
+      {
+        "result_id": "fe110_five_c2_adsorption_20261006_04_cfg2_scheduler_exception_20261013_final_max_movable_force",
+        "calculation_id": "fe110_five_c2_adsorption_20261006_04_cfg2",
+        "result_name": "final_max_movable_force",
+        "numeric_value": 0.013765965603618221,
+        "unit": "eV/angstrom",
+        "source_file_id": "fe110_five_c2_adsorption_20261006_04_cfg2_completion_20261012_OUTCAR",
+        "reference_convention": "movable_atoms_vector_norm",
+        "source_locator": "final TOTAL-FORCE block; Fe0-17 excluded",
+        "extraction_method": "scripts.aqcat25_calibration.parse_final_outcar with reviewed VASP relaxation evidence",
+        "validation_status": "reviewed",
+        "created_at": "2026-10-12T16:56:28.968744+00:00",
+        "notes": "Explicit scheduler-evidence exception; scheduler UNKNOWN. No inferred adsorption energy or thermal corrections."
+      },
+      {
+        "result_id": "fe110_five_c2_adsorption_20261006_05_cfg1_scheduler_exception_20261013_final_toten",
+        "calculation_id": "fe110_five_c2_adsorption_20261006_05_cfg1",
+        "result_name": "final_toten",
+        "numeric_value": -383.78675386,
+        "unit": "eV",
+        "source_file_id": "fe110_five_c2_adsorption_20261006_05_cfg1_completion_20261012_OUTCAR",
+        "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+        "source_locator": "final free energy TOTEN",
+        "extraction_method": "scripts.aqcat25_calibration.parse_final_outcar with reviewed VASP relaxation evidence",
+        "validation_status": "accepted_compatible_final_energy",
+        "created_at": "2026-10-12T16:56:28.968744+00:00",
+        "notes": "Explicit scheduler-evidence exception; scheduler UNKNOWN. No inferred adsorption energy or thermal corrections."
+      },
+      {
+        "result_id": "fe110_five_c2_adsorption_20261006_05_cfg1_scheduler_exception_20261013_final_max_movable_force",
+        "calculation_id": "fe110_five_c2_adsorption_20261006_05_cfg1",
+        "result_name": "final_max_movable_force",
+        "numeric_value": 0.019900418111185505,
+        "unit": "eV/angstrom",
+        "source_file_id": "fe110_five_c2_adsorption_20261006_05_cfg1_completion_20261012_OUTCAR",
+        "reference_convention": "movable_atoms_vector_norm",
+        "source_locator": "final TOTAL-FORCE block; Fe0-17 excluded",
+        "extraction_method": "scripts.aqcat25_calibration.parse_final_outcar with reviewed VASP relaxation evidence",
+        "validation_status": "reviewed",
+        "created_at": "2026-10-12T16:56:28.968744+00:00",
+        "notes": "Explicit scheduler-evidence exception; scheduler UNKNOWN. No inferred adsorption energy or thermal corrections."
+      }
+    ],
+    "reviews": [
+      {
+        "review_id": "fe110_five_c2_adsorption_20261006_02_extra2_scheduler_exception_20261013_review",
+        "calculation_id": "fe110_five_c2_adsorption_20261006_02_extra2",
+        "review_type": "adsorption_completion_task_scoped_scheduler_exception",
+        "decision": "accept",
+        "reviewer": "User-authorized Codex scientific review",
+        "reviewed_at": "2026-10-12T16:56:28.968744+00:00",
+        "evidence": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\registration_exception_20261013\\02_extra2_review.json#sha256=c170bb1d31a9f288ffa24e325896f74db029f561a50ca63a7f62c840a7f474c8",
+        "reason": "Convergence, intended graph, geometry, branch and source hashes pass; user explicitly accepts missing scheduler terminal evidence for this result only."
+      },
+      {
+        "review_id": "fe110_five_c2_adsorption_20261006_04_cfg2_scheduler_exception_20261013_review",
+        "calculation_id": "fe110_five_c2_adsorption_20261006_04_cfg2",
+        "review_type": "adsorption_completion_task_scoped_scheduler_exception",
+        "decision": "accept",
+        "reviewer": "User-authorized Codex scientific review",
+        "reviewed_at": "2026-10-12T16:56:28.968744+00:00",
+        "evidence": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\registration_exception_20261013\\04_cfg2_review.json#sha256=278e57784c826d98e82439ca7dddb7af8a449f3d291b48f5c078855cb83c618b",
+        "reason": "Convergence, intended graph, geometry, branch and source hashes pass; user explicitly accepts missing scheduler terminal evidence for this result only."
+      },
+      {
+        "review_id": "fe110_five_c2_adsorption_20261006_05_cfg1_scheduler_exception_20261013_review",
+        "calculation_id": "fe110_five_c2_adsorption_20261006_05_cfg1",
+        "review_type": "adsorption_completion_task_scoped_scheduler_exception",
+        "decision": "accept",
+        "reviewer": "User-authorized Codex scientific review",
+        "reviewed_at": "2026-10-12T16:56:28.968744+00:00",
+        "evidence": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\registration_exception_20261013\\05_cfg1_review.json#sha256=fcb8e5f72736bbc3127bc3b441ce7573a68a0b86cb470a45812512beb9b564ab",
+        "reason": "Convergence, intended graph, geometry, branch and source hashes pass; user explicitly accepts missing scheduler terminal evidence for this result only."
+      }
+    ],
+    "job_status_history": [
+      {
+        "status_event_id": 275,
+        "job_record_id": "lsf_9842106",
+        "scheduler_status": "UNKNOWN",
+        "scientific_status": "converged_accept",
+        "checked_at": "2026-10-12T16:56:28.968744+00:00",
+        "source_command": "bjobs -a -w; bhist -l; bacct -l (same three jobs, live check 2026-10-13 Asia/Shanghai)",
+        "source_text": "bjobs: Job is not found; bhist: No matching job found; bacct: No job was found satisfying your specification.",
+        "reviewer": "User-authorized Codex scientific review",
+        "notes": "Terminal queue status unavailable; never inferred from VASP. Explicit task-scoped user exception."
+      },
+      {
+        "status_event_id": 276,
+        "job_record_id": "lsf_9839755",
+        "scheduler_status": "UNKNOWN",
+        "scientific_status": "converged_accept",
+        "checked_at": "2026-10-12T16:56:28.968744+00:00",
+        "source_command": "bjobs -a -w; bhist -l; bacct -l (same three jobs, live check 2026-10-13 Asia/Shanghai)",
+        "source_text": "bjobs: Job is not found; bhist: No matching job found; bacct: No job was found satisfying your specification.",
+        "reviewer": "User-authorized Codex scientific review",
+        "notes": "Terminal queue status unavailable; never inferred from VASP. Explicit task-scoped user exception."
+      },
+      {
+        "status_event_id": 277,
+        "job_record_id": "lsf_9839754",
+        "scheduler_status": "UNKNOWN",
+        "scientific_status": "converged_accept",
+        "checked_at": "2026-10-12T16:56:28.968744+00:00",
+        "source_command": "bjobs -a -w; bhist -l; bacct -l (same three jobs, live check 2026-10-13 Asia/Shanghai)",
+        "source_text": "bjobs: Job is not found; bhist: No matching job found; bacct: No job was found satisfying your specification.",
+        "reviewer": "User-authorized Codex scientific review",
+        "notes": "Terminal queue status unavailable; never inferred from VASP. Explicit task-scoped user exception."
+      }
+    ]
+  },
+  "workflow_status_changes": [
+    {
+      "status_change_id": "fe110_five_c2_adsorption_20261006_02_extra2_scheduler_exception_20261013_accepted",
+      "calculation_id": "fe110_five_c2_adsorption_20261006_02_extra2",
+      "expected_workflow_status": "needs_review",
+      "new_workflow_status": "accepted",
+      "changed_at": "2026-10-12T16:56:28.968744+00:00",
+      "reviewer": "User-authorized Codex scientific review",
+      "reason": "Convergence, intended graph, geometry, branch and source hashes pass; user explicitly accepts missing scheduler terminal evidence for this result only."
+    },
+    {
+      "status_change_id": "fe110_five_c2_adsorption_20261006_04_cfg2_scheduler_exception_20261013_accepted",
+      "calculation_id": "fe110_five_c2_adsorption_20261006_04_cfg2",
+      "expected_workflow_status": "needs_review",
+      "new_workflow_status": "accepted",
+      "changed_at": "2026-10-12T16:56:28.968744+00:00",
+      "reviewer": "User-authorized Codex scientific review",
+      "reason": "Convergence, intended graph, geometry, branch and source hashes pass; user explicitly accepts missing scheduler terminal evidence for this result only."
+    },
+    {
+      "status_change_id": "fe110_five_c2_adsorption_20261006_05_cfg1_scheduler_exception_20261013_accepted",
+      "calculation_id": "fe110_five_c2_adsorption_20261006_05_cfg1",
+      "expected_workflow_status": "needs_review",
+      "new_workflow_status": "accepted",
+      "changed_at": "2026-10-12T16:56:28.968744+00:00",
+      "reviewer": "User-authorized Codex scientific review",
+      "reason": "Convergence, intended graph, geometry, branch and source hashes pass; user explicitly accepts missing scheduler terminal evidence for this result only."
+    }
+  ],
+  "result_provenance": {
+    "fe110_five_c2_adsorption_20261006_02_extra2_scheduler_exception_20261013_final_toten": {
+      "type": "calculated_result",
+      "registry_stage": "accepted_result",
+      "evidence": {
+        "claim": {
+          "id": "fe110_five_c2_adsorption_20261006_02_extra2_scheduler_exception_20261013_final_toten",
+          "type": "calculated_result",
+          "statement": "Reviewed VASP final_toten for fe110_five_c2_adsorption_20261006_02_extra2; no prediction or adsorption-energy inference.",
+          "source_reference": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\registration_exception_20261013\\02_extra2_review.json",
+          "status": "reviewed",
+          "evidence_relationship": "supports",
+          "scope": "registry_acceptance",
+          "domain": "adsorption_workflow",
+          "compatibility": {
+            "branch": "true_fe110_5layer_5x5x1",
+            "cell_angstrom": [
+              [
+                8.4808451022,
+                0.0,
+                0.0
+              ],
+              [
+                4.2404225511,
+                5.996863081958339,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                22.995817442611116
+              ]
+            ],
+            "clean_slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+            "coverage": "3x3_one_C2H2",
+            "ediff_ev": 1e-05,
+            "encut_ev": 400.0,
+            "final_energy_convention": "fe110_converged_toten_sigma0p20_v1",
+            "fixed_atom_indices_zero_based": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "force_threshold_ev_per_A": 0.02,
+            "ismear": 1,
+            "kmesh": [
+              5,
+              5,
+              1
+            ],
+            "ldipol": false,
+            "magnetic_state": "ispin2_Fe2p2_adsorbate0_seed",
+            "material": "fe",
+            "potcar_bundle_sha256": "bd39c0ebfbbe6207bc8e1b976677b4687ae2d2956f5a74dc1dea3298adef063a",
+            "potcar_family": "paw_pbe",
+            "sigma_ev": 0.2,
+            "slab_layers": 5,
+            "slab_model": "fe45_bottom18_fixed",
+            "surface": "fe110",
+            "vacuum_thickness_angstrom": 14.981751034348626,
+            "xc": "pbe"
+          },
+          "result_sha256": "bd0d236d797f5018aa0866b31f28724ee0af19e727aeddbe0ba85c90527a6451",
+          "validation_sha256": "df7e8bf0bba036e41f1bfabb3e61c80be7b57ce75c77b0e4d885b28cc4076851"
+        },
+        "source": {
+          "identity": "hash-bound adsorption completion review of collected VASP outputs",
+          "reference": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\registration_exception_20261013\\02_extra2_review.json",
+          "retrieved_at": "2026-10-12T16:56:28.968744+00:00",
+          "snapshot": {
+            "text": "{\n  \"record\": {\n    \"name\": \"02_extra2\",\n    \"job_id\": \"9842106\",\n    \"species_id\": \"02\",\n    \"target_graph\": \"[C][CH2]\",\n    \"formula\": \"C2H2\",\n    \"directory\": \"C:\\\\Users\\\\86177\\\\Desktop\\\\work\\\\calculations\\\\fe110_five_c2_adsorption_20261006\\\\final_review_20261012\\\\sources\\\\02_extra2\",\n    \"collection_sha256\": \"a31f6212c152cc41fe2ee4db236686957aff7998fa2e6bc44c7218bde5f5750f\",\n    \"candidate_manifest_sha256\": \"207557dc3ff52364d90e66de44030e3797d29c5017822ccf7f023dd9bf7619eb\",\n    \"convergence\": {\n      \"normal_completion\": true,\n      \"ionic_converged\": true,\n      \"last_electronic_iteration\": 7,\n      \"last_delta_e_eV\": -4.3544e-06,\n      \"last_delta_eps_eV\": -6.2862e-07,\n      \"ediff_eV\": 1e-05,\n      \"nelm\": 200,\n      \"electronically_converged\": true,\n      \"electronic_convergence_source\": \"OUTCAR_EDIFF_TERMINATION\",\n      \"latest_started_electronic_cycle\": {\n        \"cycle\": 90,\n        \"ionic_step\": 90,\n        \"iteration\": 7,\n        \"delta_e_eV\": -4.3544e-06,\n        \"delta_eps_eV\": -6.2862e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"latest_completed_electronic_cycle\": {\n        \"cycle\": 90,\n        \"ionic_step\": 90,\n        \"iteration\": 7,\n        \"delta_e_eV\": -4.3544e-06,\n        \"delta_eps_eV\": -6.2862e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"final_target_step\": {\n        \"cycle\": 90,\n        \"ionic_step\": 90,\n        \"iteration\": 7,\n        \"delta_e_eV\": -4.3544e-06,\n        \"delta_eps_eV\": -6.2862e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"final_target_complete\": true,\n      \"final_target_explicit_convergence\": true,\n      \"incomplete\": false,\n      \"status\": \"PASS\"\n    },\n    \"ionic_steps\": 90,\n    \"final_toten_eV\": -380.90590972,\n    \"fmax_movable_eV_A\": 0.01958574731788399,\n    \"force_limit_eV_A\": 0.02,\n    \"compatibility_checks\": {\n      \"GGA\": true,\n      \"ENCUT\": true,\n      \"EDIFF\": true,\n      \"EDIFFG\": true,\n      \"ISPIN\": true,\n      \"ISMEAR\": true,\n      \"SIGMA\": true,\n      \"ISIF\": true,\n      \"dipole_off\": true,\n      \"atom_order\": true,\n      \"clean_Fe45\": true,\n      \"cell\": true,\n      \"flags\": true,\n      \"fixed_positions\": true,\n      \"input_fixed_positions\": true,\n      \"potcar\": true,\n      \"kmesh\": true,\n      \"magmom\": true\n    },\n    \"chemistry\": {\n      \"connectivity_changed\": false,\n      \"dissociated\": false,\n      \"chemical_event\": \"none\",\n      \"lost_bonds\": [],\n      \"formed_bonds\": [],\n      \"initial_fragment_count\": 1,\n      \"relaxed_fragment_count\": 1\n    },\n    \"signature_match\": true,\n    \"minimum_Fe_adsorbate_A\": 1.867223241092105,\n    \"maximum_slab_displacement_A\": 0.2160010938294621,\n    \"internal_distances\": [\n      {\n        \"atoms_0based\": [\n          45,\n          46\n        ],\n        \"pair\": \"C-C\",\n        \"distance_A\": 1.4036457501205482,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          45,\n          47\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 1.0951561051126475,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          45,\n          48\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 1.098501671525078,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          46,\n          47\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 2.1871359049674175,\n        \"bond\": false\n      },\n      {\n        \"atoms_0based\": [\n          46,\n          48\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 2.177438023674655,\n        \"bond\": false\n      },\n      {\n        \"atoms_0based\": [\n          47,\n          48\n        ],\n        \"pair\": \"H-H\",\n        \"distance_A\": 1.8356301782245446,\n        \"bond\": false\n      }\n    ],\n    \"contacts\": [\n      {\n        \"atom_0based\": 45,\n        \"symbol\": \"C\",\n        \"nearest_Fe_0based\": 43,\n        \"nearest_Fe_A\": 2.1808166125906756,\n        \"three_nearest_Fe\": [\n          [\n            2.1808166125906756,\n            43\n          ],\n          [\n            2.8164107650270225,\n            37\n          ],\n          [\n            3.109790479949422,\n            41\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.5609892141948228,\n        \"off_symmetry\": true,\n        \"height_above_top_Fe_A\": 2.0196268623641167\n      },\n      {\n        \"atom_0based\": 46,\n        \"symbol\": \"C\",\n        \"nearest_Fe_0based\": 44,\n        \"nearest_Fe_A\": 1.867223241092105,\n        \"three_nearest_Fe\": [\n          [\n            1.867223241092105,\n            44\n          ],\n          [\n            1.9473723169484378,\n            43\n          ],\n          [\n            2.0308659121275845,\n            41\n          ]\n        ],\n        \"closest_site_projection\": \"long_bridge\",\n        \"lateral_offset_A\": 0.23591049293493244,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 1.0899241797268253\n      },\n      {\n        \"atom_0based\": 47,\n        \"symbol\": \"H\",\n        \"nearest_Fe_0based\": 43,\n        \"nearest_Fe_A\": 2.707174909704939,\n        \"three_nearest_Fe\": [\n          [\n            2.707174909704939,\n            43\n          ],\n          [\n            3.369733551799067,\n            40\n          ],\n          [\n            3.371776765327715,\n            41\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.47492140752011996,\n        \"off_symmetry\": true,\n        \"height_above_top_Fe_A\": 2.6041721213448206\n      },\n      {\n        \"atom_0based\": 48,\n        \"symbol\": \"H\",\n        \"nearest_Fe_0based\": 37,\n        \"nearest_Fe_A\": 2.7281109911139736,\n        \"three_nearest_Fe\": [\n          [\n            2.7281109911139736,\n            37\n          ],\n          [\n            2.91164679018552,\n            43\n          ],\n          [\n            3.3252127609167497,\n            36\n          ]\n        ],\n        \"closest_site_projection\": \"short_bridge\",\n        \"lateral_offset_A\": 0.23416901282762279,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 2.48338268966927\n      }\n    ],\n    \"blockers\": [],\n    \"eligible_for_review\": true,\n    \"scientific_acceptance\": false,\n    \"duplicate_of\": null\n  },\n  \"decision\": {\n    \"decision\": \"accept\",\n    \"reason\": \"Convergence, intended graph, geometry, branch and source hashes pass; user explicitly accepts missing scheduler terminal evidence for this result only.\"\n  },\n  \"scheduler_exception\": {\n    \"scope\": \"three named completed adsorption calculations only\",\n    \"authorizing_user_request\": \"\\u90fd\\u5f55\\u5165\\u5427 \\u7136\\u540e\\u628a\\u90a315\\u4e2a\\u4e5f\\u63d0\\u4ea4gpu\",\n    \"authorized_at\": \"2026-10-12T16:56:28.968744+00:00\",\n    \"names\": [\n      \"02_extra2\",\n      \"04_cfg2\",\n      \"05_cfg1\"\n    ],\n    \"requirement_waived\": \"original_scheduler_DONE_evidence\",\n    \"scheduler_status\": \"UNKNOWN\",\n    \"infer_DONE\": false,\n    \"scientific_checks_waived\": [],\n    \"production_policy_changed\": false\n  },\n  \"analysis_sha256\": \"73d1c4def2f44db2106cc4afa7e8c4e67db5a4ab78210199811846c84711a53e\",\n  \"previous_batch_sha256\": \"4e7685bbe9835a69a51a900300fb6568d058dbc0bcc6f4e27adef0d755298fcb\",\n  \"reviewer\": \"User-authorized Codex scientific review\",\n  \"reviewed_at\": \"2026-10-12T16:56:28.968744+00:00\"\n}\n",
+            "sha256": "c170bb1d31a9f288ffa24e325896f74db029f561a50ca63a7f62c840a7f474c8"
+          },
+          "immutable_reference": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\registration_exception_20261013\\02_extra2_review.json#sha256=c170bb1d31a9f288ffa24e325896f74db029f561a50ca63a7f62c840a7f474c8"
+        },
+        "content": {
+          "text": "{\n  \"record\": {\n    \"name\": \"02_extra2\",\n    \"job_id\": \"9842106\",\n    \"species_id\": \"02\",\n    \"target_graph\": \"[C][CH2]\",\n    \"formula\": \"C2H2\",\n    \"directory\": \"C:\\\\Users\\\\86177\\\\Desktop\\\\work\\\\calculations\\\\fe110_five_c2_adsorption_20261006\\\\final_review_20261012\\\\sources\\\\02_extra2\",\n    \"collection_sha256\": \"a31f6212c152cc41fe2ee4db236686957aff7998fa2e6bc44c7218bde5f5750f\",\n    \"candidate_manifest_sha256\": \"207557dc3ff52364d90e66de44030e3797d29c5017822ccf7f023dd9bf7619eb\",\n    \"convergence\": {\n      \"normal_completion\": true,\n      \"ionic_converged\": true,\n      \"last_electronic_iteration\": 7,\n      \"last_delta_e_eV\": -4.3544e-06,\n      \"last_delta_eps_eV\": -6.2862e-07,\n      \"ediff_eV\": 1e-05,\n      \"nelm\": 200,\n      \"electronically_converged\": true,\n      \"electronic_convergence_source\": \"OUTCAR_EDIFF_TERMINATION\",\n      \"latest_started_electronic_cycle\": {\n        \"cycle\": 90,\n        \"ionic_step\": 90,\n        \"iteration\": 7,\n        \"delta_e_eV\": -4.3544e-06,\n        \"delta_eps_eV\": -6.2862e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"latest_completed_electronic_cycle\": {\n        \"cycle\": 90,\n        \"ionic_step\": 90,\n        \"iteration\": 7,\n        \"delta_e_eV\": -4.3544e-06,\n        \"delta_eps_eV\": -6.2862e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"final_target_step\": {\n        \"cycle\": 90,\n        \"ionic_step\": 90,\n        \"iteration\": 7,\n        \"delta_e_eV\": -4.3544e-06,\n        \"delta_eps_eV\": -6.2862e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"final_target_complete\": true,\n      \"final_target_explicit_convergence\": true,\n      \"incomplete\": false,\n      \"status\": \"PASS\"\n    },\n    \"ionic_steps\": 90,\n    \"final_toten_eV\": -380.90590972,\n    \"fmax_movable_eV_A\": 0.01958574731788399,\n    \"force_limit_eV_A\": 0.02,\n    \"compatibility_checks\": {\n      \"GGA\": true,\n      \"ENCUT\": true,\n      \"EDIFF\": true,\n      \"EDIFFG\": true,\n      \"ISPIN\": true,\n      \"ISMEAR\": true,\n      \"SIGMA\": true,\n      \"ISIF\": true,\n      \"dipole_off\": true,\n      \"atom_order\": true,\n      \"clean_Fe45\": true,\n      \"cell\": true,\n      \"flags\": true,\n      \"fixed_positions\": true,\n      \"input_fixed_positions\": true,\n      \"potcar\": true,\n      \"kmesh\": true,\n      \"magmom\": true\n    },\n    \"chemistry\": {\n      \"connectivity_changed\": false,\n      \"dissociated\": false,\n      \"chemical_event\": \"none\",\n      \"lost_bonds\": [],\n      \"formed_bonds\": [],\n      \"initial_fragment_count\": 1,\n      \"relaxed_fragment_count\": 1\n    },\n    \"signature_match\": true,\n    \"minimum_Fe_adsorbate_A\": 1.867223241092105,\n    \"maximum_slab_displacement_A\": 0.2160010938294621,\n    \"internal_distances\": [\n      {\n        \"atoms_0based\": [\n          45,\n          46\n        ],\n        \"pair\": \"C-C\",\n        \"distance_A\": 1.4036457501205482,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          45,\n          47\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 1.0951561051126475,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          45,\n          48\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 1.098501671525078,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          46,\n          47\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 2.1871359049674175,\n        \"bond\": false\n      },\n      {\n        \"atoms_0based\": [\n          46,\n          48\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 2.177438023674655,\n        \"bond\": false\n      },\n      {\n        \"atoms_0based\": [\n          47,\n          48\n        ],\n        \"pair\": \"H-H\",\n        \"distance_A\": 1.8356301782245446,\n        \"bond\": false\n      }\n    ],\n    \"contacts\": [\n      {\n        \"atom_0based\": 45,\n        \"symbol\": \"C\",\n        \"nearest_Fe_0based\": 43,\n        \"nearest_Fe_A\": 2.1808166125906756,\n        \"three_nearest_Fe\": [\n          [\n            2.1808166125906756,\n            43\n          ],\n          [\n            2.8164107650270225,\n            37\n          ],\n          [\n            3.109790479949422,\n            41\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.5609892141948228,\n        \"off_symmetry\": true,\n        \"height_above_top_Fe_A\": 2.0196268623641167\n      },\n      {\n        \"atom_0based\": 46,\n        \"symbol\": \"C\",\n        \"nearest_Fe_0based\": 44,\n        \"nearest_Fe_A\": 1.867223241092105,\n        \"three_nearest_Fe\": [\n          [\n            1.867223241092105,\n            44\n          ],\n          [\n            1.9473723169484378,\n            43\n          ],\n          [\n            2.0308659121275845,\n            41\n          ]\n        ],\n        \"closest_site_projection\": \"long_bridge\",\n        \"lateral_offset_A\": 0.23591049293493244,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 1.0899241797268253\n      },\n      {\n        \"atom_0based\": 47,\n        \"symbol\": \"H\",\n        \"nearest_Fe_0based\": 43,\n        \"nearest_Fe_A\": 2.707174909704939,\n        \"three_nearest_Fe\": [\n          [\n            2.707174909704939,\n            43\n          ],\n          [\n            3.369733551799067,\n            40\n          ],\n          [\n            3.371776765327715,\n            41\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.47492140752011996,\n        \"off_symmetry\": true,\n        \"height_above_top_Fe_A\": 2.6041721213448206\n      },\n      {\n        \"atom_0based\": 48,\n        \"symbol\": \"H\",\n        \"nearest_Fe_0based\": 37,\n        \"nearest_Fe_A\": 2.7281109911139736,\n        \"three_nearest_Fe\": [\n          [\n            2.7281109911139736,\n            37\n          ],\n          [\n            2.91164679018552,\n            43\n          ],\n          [\n            3.3252127609167497,\n            36\n          ]\n        ],\n        \"closest_site_projection\": \"short_bridge\",\n        \"lateral_offset_A\": 0.23416901282762279,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 2.48338268966927\n      }\n    ],\n    \"blockers\": [],\n    \"eligible_for_review\": true,\n    \"scientific_acceptance\": false,\n    \"duplicate_of\": null\n  },\n  \"decision\": {\n    \"decision\": \"accept\",\n    \"reason\": \"Convergence, intended graph, geometry, branch and source hashes pass; user explicitly accepts missing scheduler terminal evidence for this result only.\"\n  },\n  \"scheduler_exception\": {\n    \"scope\": \"three named completed adsorption calculations only\",\n    \"authorizing_user_request\": \"\\u90fd\\u5f55\\u5165\\u5427 \\u7136\\u540e\\u628a\\u90a315\\u4e2a\\u4e5f\\u63d0\\u4ea4gpu\",\n    \"authorized_at\": \"2026-10-12T16:56:28.968744+00:00\",\n    \"names\": [\n      \"02_extra2\",\n      \"04_cfg2\",\n      \"05_cfg1\"\n    ],\n    \"requirement_waived\": \"original_scheduler_DONE_evidence\",\n    \"scheduler_status\": \"UNKNOWN\",\n    \"infer_DONE\": false,\n    \"scientific_checks_waived\": [],\n    \"production_policy_changed\": false\n  },\n  \"analysis_sha256\": \"73d1c4def2f44db2106cc4afa7e8c4e67db5a4ab78210199811846c84711a53e\",\n  \"previous_batch_sha256\": \"4e7685bbe9835a69a51a900300fb6568d058dbc0bcc6f4e27adef0d755298fcb\",\n  \"reviewer\": \"User-authorized Codex scientific review\",\n  \"reviewed_at\": \"2026-10-12T16:56:28.968744+00:00\"\n}\n",
+          "start": 0,
+          "end": 7323,
+          "sha256": "c170bb1d31a9f288ffa24e325896f74db029f561a50ca63a7f62c840a7f474c8"
+        },
+        "review": {
+          "reviewer": "User-authorized Codex scientific review",
+          "reviewed_at": "2026-10-12T16:56:28.968744+00:00",
+          "decision": "accepted",
+          "scope": "registry_acceptance",
+          "subject_sha256": "f747af6c543080c0813c7b4fd34e93e48ec79ed5b963e5c51beef9d5cf2f6890"
+        },
+        "transfer": {
+          "review_sha256": "f4464db77427dbfe93990b4e3cbebd49ecaeacaf4bf33951c9610dfd67196ae4",
+          "domain": "adsorption_workflow",
+          "compatibility": {
+            "branch": "true_fe110_5layer_5x5x1",
+            "cell_angstrom": [
+              [
+                8.4808451022,
+                0.0,
+                0.0
+              ],
+              [
+                4.2404225511,
+                5.996863081958339,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                22.995817442611116
+              ]
+            ],
+            "clean_slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+            "coverage": "3x3_one_C2H2",
+            "ediff_ev": 1e-05,
+            "encut_ev": 400.0,
+            "final_energy_convention": "fe110_converged_toten_sigma0p20_v1",
+            "fixed_atom_indices_zero_based": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "force_threshold_ev_per_A": 0.02,
+            "ismear": 1,
+            "kmesh": [
+              5,
+              5,
+              1
+            ],
+            "ldipol": false,
+            "magnetic_state": "ispin2_Fe2p2_adsorbate0_seed",
+            "material": "fe",
+            "potcar_bundle_sha256": "bd39c0ebfbbe6207bc8e1b976677b4687ae2d2956f5a74dc1dea3298adef063a",
+            "potcar_family": "paw_pbe",
+            "sigma_ev": 0.2,
+            "slab_layers": 5,
+            "slab_model": "fe45_bottom18_fixed",
+            "surface": "fe110",
+            "vacuum_thickness_angstrom": 14.981751034348626,
+            "xc": "pbe"
+          }
+        }
+      },
+      "scientific_validation": {
+        "owner": "vasp_relaxation",
+        "directory": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\sources\\02_extra2",
+        "source_files": {
+          "INCAR": "e601aed376edb96249230712e2d6fddcc655ef10d0939460e6f5a28b42497d1c",
+          "POSCAR": "782662dcdc5049607aa4525616410d53d8b2e17bf33f7d08e0845ec353b154db",
+          "CONTCAR": "850b8187f1ed4ad237d2824b25f2aa84a71b9dc00344a219b729ba54361a04eb",
+          "OUTCAR": "a33db53412a4f9ada729d563ad9aa5bc139b7c641626cd7ffad6781474f23d49",
+          "OSZICAR": "bdb59c3d0fca6155fa3476773d05f7e85d8a1cdd9ea484320910f7b017716970"
+        },
+        "completion_review_sha256": "c170bb1d31a9f288ffa24e325896f74db029f561a50ca63a7f62c840a7f474c8",
+        "scheduler_exception": {
+          "scope": "three named completed adsorption calculations only",
+          "authorizing_user_request": "\u90fd\u5f55\u5165\u5427 \u7136\u540e\u628a\u90a315\u4e2a\u4e5f\u63d0\u4ea4gpu",
+          "authorized_at": "2026-10-12T16:56:28.968744+00:00",
+          "names": [
+            "02_extra2",
+            "04_cfg2",
+            "05_cfg1"
+          ],
+          "requirement_waived": "original_scheduler_DONE_evidence",
+          "scheduler_status": "UNKNOWN",
+          "infer_DONE": false,
+          "scientific_checks_waived": [],
+          "production_policy_changed": false
+        }
+      }
+    },
+    "fe110_five_c2_adsorption_20261006_02_extra2_scheduler_exception_20261013_final_max_movable_force": {
+      "type": "calculated_result",
+      "registry_stage": "candidate",
+      "evidence": {
+        "claim": {
+          "id": "fe110_five_c2_adsorption_20261006_02_extra2_scheduler_exception_20261013_final_max_movable_force",
+          "type": "calculated_result",
+          "statement": "Reviewed VASP final_max_movable_force for fe110_five_c2_adsorption_20261006_02_extra2; no prediction or adsorption-energy inference.",
+          "source_reference": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\registration_exception_20261013\\02_extra2_review.json",
+          "status": "reviewed",
+          "evidence_relationship": "supports",
+          "scope": "registry_acceptance",
+          "domain": "adsorption_workflow",
+          "compatibility": {
+            "branch": "true_fe110_5layer_5x5x1",
+            "cell_angstrom": [
+              [
+                8.4808451022,
+                0.0,
+                0.0
+              ],
+              [
+                4.2404225511,
+                5.996863081958339,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                22.995817442611116
+              ]
+            ],
+            "clean_slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+            "coverage": "3x3_one_C2H2",
+            "ediff_ev": 1e-05,
+            "encut_ev": 400.0,
+            "final_energy_convention": "fe110_converged_toten_sigma0p20_v1",
+            "fixed_atom_indices_zero_based": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "force_threshold_ev_per_A": 0.02,
+            "ismear": 1,
+            "kmesh": [
+              5,
+              5,
+              1
+            ],
+            "ldipol": false,
+            "magnetic_state": "ispin2_Fe2p2_adsorbate0_seed",
+            "material": "fe",
+            "potcar_bundle_sha256": "bd39c0ebfbbe6207bc8e1b976677b4687ae2d2956f5a74dc1dea3298adef063a",
+            "potcar_family": "paw_pbe",
+            "sigma_ev": 0.2,
+            "slab_layers": 5,
+            "slab_model": "fe45_bottom18_fixed",
+            "surface": "fe110",
+            "vacuum_thickness_angstrom": 14.981751034348626,
+            "xc": "pbe"
+          },
+          "result_sha256": "33599013574649f3dc24a617eb633da8fa505b9f430599be1d513e77c3a83c59",
+          "validation_sha256": "df7e8bf0bba036e41f1bfabb3e61c80be7b57ce75c77b0e4d885b28cc4076851"
+        },
+        "source": {
+          "identity": "hash-bound adsorption completion review of collected VASP outputs",
+          "reference": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\registration_exception_20261013\\02_extra2_review.json",
+          "retrieved_at": "2026-10-12T16:56:28.968744+00:00",
+          "snapshot": {
+            "text": "{\n  \"record\": {\n    \"name\": \"02_extra2\",\n    \"job_id\": \"9842106\",\n    \"species_id\": \"02\",\n    \"target_graph\": \"[C][CH2]\",\n    \"formula\": \"C2H2\",\n    \"directory\": \"C:\\\\Users\\\\86177\\\\Desktop\\\\work\\\\calculations\\\\fe110_five_c2_adsorption_20261006\\\\final_review_20261012\\\\sources\\\\02_extra2\",\n    \"collection_sha256\": \"a31f6212c152cc41fe2ee4db236686957aff7998fa2e6bc44c7218bde5f5750f\",\n    \"candidate_manifest_sha256\": \"207557dc3ff52364d90e66de44030e3797d29c5017822ccf7f023dd9bf7619eb\",\n    \"convergence\": {\n      \"normal_completion\": true,\n      \"ionic_converged\": true,\n      \"last_electronic_iteration\": 7,\n      \"last_delta_e_eV\": -4.3544e-06,\n      \"last_delta_eps_eV\": -6.2862e-07,\n      \"ediff_eV\": 1e-05,\n      \"nelm\": 200,\n      \"electronically_converged\": true,\n      \"electronic_convergence_source\": \"OUTCAR_EDIFF_TERMINATION\",\n      \"latest_started_electronic_cycle\": {\n        \"cycle\": 90,\n        \"ionic_step\": 90,\n        \"iteration\": 7,\n        \"delta_e_eV\": -4.3544e-06,\n        \"delta_eps_eV\": -6.2862e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"latest_completed_electronic_cycle\": {\n        \"cycle\": 90,\n        \"ionic_step\": 90,\n        \"iteration\": 7,\n        \"delta_e_eV\": -4.3544e-06,\n        \"delta_eps_eV\": -6.2862e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"final_target_step\": {\n        \"cycle\": 90,\n        \"ionic_step\": 90,\n        \"iteration\": 7,\n        \"delta_e_eV\": -4.3544e-06,\n        \"delta_eps_eV\": -6.2862e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"final_target_complete\": true,\n      \"final_target_explicit_convergence\": true,\n      \"incomplete\": false,\n      \"status\": \"PASS\"\n    },\n    \"ionic_steps\": 90,\n    \"final_toten_eV\": -380.90590972,\n    \"fmax_movable_eV_A\": 0.01958574731788399,\n    \"force_limit_eV_A\": 0.02,\n    \"compatibility_checks\": {\n      \"GGA\": true,\n      \"ENCUT\": true,\n      \"EDIFF\": true,\n      \"EDIFFG\": true,\n      \"ISPIN\": true,\n      \"ISMEAR\": true,\n      \"SIGMA\": true,\n      \"ISIF\": true,\n      \"dipole_off\": true,\n      \"atom_order\": true,\n      \"clean_Fe45\": true,\n      \"cell\": true,\n      \"flags\": true,\n      \"fixed_positions\": true,\n      \"input_fixed_positions\": true,\n      \"potcar\": true,\n      \"kmesh\": true,\n      \"magmom\": true\n    },\n    \"chemistry\": {\n      \"connectivity_changed\": false,\n      \"dissociated\": false,\n      \"chemical_event\": \"none\",\n      \"lost_bonds\": [],\n      \"formed_bonds\": [],\n      \"initial_fragment_count\": 1,\n      \"relaxed_fragment_count\": 1\n    },\n    \"signature_match\": true,\n    \"minimum_Fe_adsorbate_A\": 1.867223241092105,\n    \"maximum_slab_displacement_A\": 0.2160010938294621,\n    \"internal_distances\": [\n      {\n        \"atoms_0based\": [\n          45,\n          46\n        ],\n        \"pair\": \"C-C\",\n        \"distance_A\": 1.4036457501205482,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          45,\n          47\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 1.0951561051126475,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          45,\n          48\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 1.098501671525078,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          46,\n          47\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 2.1871359049674175,\n        \"bond\": false\n      },\n      {\n        \"atoms_0based\": [\n          46,\n          48\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 2.177438023674655,\n        \"bond\": false\n      },\n      {\n        \"atoms_0based\": [\n          47,\n          48\n        ],\n        \"pair\": \"H-H\",\n        \"distance_A\": 1.8356301782245446,\n        \"bond\": false\n      }\n    ],\n    \"contacts\": [\n      {\n        \"atom_0based\": 45,\n        \"symbol\": \"C\",\n        \"nearest_Fe_0based\": 43,\n        \"nearest_Fe_A\": 2.1808166125906756,\n        \"three_nearest_Fe\": [\n          [\n            2.1808166125906756,\n            43\n          ],\n          [\n            2.8164107650270225,\n            37\n          ],\n          [\n            3.109790479949422,\n            41\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.5609892141948228,\n        \"off_symmetry\": true,\n        \"height_above_top_Fe_A\": 2.0196268623641167\n      },\n      {\n        \"atom_0based\": 46,\n        \"symbol\": \"C\",\n        \"nearest_Fe_0based\": 44,\n        \"nearest_Fe_A\": 1.867223241092105,\n        \"three_nearest_Fe\": [\n          [\n            1.867223241092105,\n            44\n          ],\n          [\n            1.9473723169484378,\n            43\n          ],\n          [\n            2.0308659121275845,\n            41\n          ]\n        ],\n        \"closest_site_projection\": \"long_bridge\",\n        \"lateral_offset_A\": 0.23591049293493244,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 1.0899241797268253\n      },\n      {\n        \"atom_0based\": 47,\n        \"symbol\": \"H\",\n        \"nearest_Fe_0based\": 43,\n        \"nearest_Fe_A\": 2.707174909704939,\n        \"three_nearest_Fe\": [\n          [\n            2.707174909704939,\n            43\n          ],\n          [\n            3.369733551799067,\n            40\n          ],\n          [\n            3.371776765327715,\n            41\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.47492140752011996,\n        \"off_symmetry\": true,\n        \"height_above_top_Fe_A\": 2.6041721213448206\n      },\n      {\n        \"atom_0based\": 48,\n        \"symbol\": \"H\",\n        \"nearest_Fe_0based\": 37,\n        \"nearest_Fe_A\": 2.7281109911139736,\n        \"three_nearest_Fe\": [\n          [\n            2.7281109911139736,\n            37\n          ],\n          [\n            2.91164679018552,\n            43\n          ],\n          [\n            3.3252127609167497,\n            36\n          ]\n        ],\n        \"closest_site_projection\": \"short_bridge\",\n        \"lateral_offset_A\": 0.23416901282762279,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 2.48338268966927\n      }\n    ],\n    \"blockers\": [],\n    \"eligible_for_review\": true,\n    \"scientific_acceptance\": false,\n    \"duplicate_of\": null\n  },\n  \"decision\": {\n    \"decision\": \"accept\",\n    \"reason\": \"Convergence, intended graph, geometry, branch and source hashes pass; user explicitly accepts missing scheduler terminal evidence for this result only.\"\n  },\n  \"scheduler_exception\": {\n    \"scope\": \"three named completed adsorption calculations only\",\n    \"authorizing_user_request\": \"\\u90fd\\u5f55\\u5165\\u5427 \\u7136\\u540e\\u628a\\u90a315\\u4e2a\\u4e5f\\u63d0\\u4ea4gpu\",\n    \"authorized_at\": \"2026-10-12T16:56:28.968744+00:00\",\n    \"names\": [\n      \"02_extra2\",\n      \"04_cfg2\",\n      \"05_cfg1\"\n    ],\n    \"requirement_waived\": \"original_scheduler_DONE_evidence\",\n    \"scheduler_status\": \"UNKNOWN\",\n    \"infer_DONE\": false,\n    \"scientific_checks_waived\": [],\n    \"production_policy_changed\": false\n  },\n  \"analysis_sha256\": \"73d1c4def2f44db2106cc4afa7e8c4e67db5a4ab78210199811846c84711a53e\",\n  \"previous_batch_sha256\": \"4e7685bbe9835a69a51a900300fb6568d058dbc0bcc6f4e27adef0d755298fcb\",\n  \"reviewer\": \"User-authorized Codex scientific review\",\n  \"reviewed_at\": \"2026-10-12T16:56:28.968744+00:00\"\n}\n",
+            "sha256": "c170bb1d31a9f288ffa24e325896f74db029f561a50ca63a7f62c840a7f474c8"
+          },
+          "immutable_reference": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\registration_exception_20261013\\02_extra2_review.json#sha256=c170bb1d31a9f288ffa24e325896f74db029f561a50ca63a7f62c840a7f474c8"
+        },
+        "content": {
+          "text": "{\n  \"record\": {\n    \"name\": \"02_extra2\",\n    \"job_id\": \"9842106\",\n    \"species_id\": \"02\",\n    \"target_graph\": \"[C][CH2]\",\n    \"formula\": \"C2H2\",\n    \"directory\": \"C:\\\\Users\\\\86177\\\\Desktop\\\\work\\\\calculations\\\\fe110_five_c2_adsorption_20261006\\\\final_review_20261012\\\\sources\\\\02_extra2\",\n    \"collection_sha256\": \"a31f6212c152cc41fe2ee4db236686957aff7998fa2e6bc44c7218bde5f5750f\",\n    \"candidate_manifest_sha256\": \"207557dc3ff52364d90e66de44030e3797d29c5017822ccf7f023dd9bf7619eb\",\n    \"convergence\": {\n      \"normal_completion\": true,\n      \"ionic_converged\": true,\n      \"last_electronic_iteration\": 7,\n      \"last_delta_e_eV\": -4.3544e-06,\n      \"last_delta_eps_eV\": -6.2862e-07,\n      \"ediff_eV\": 1e-05,\n      \"nelm\": 200,\n      \"electronically_converged\": true,\n      \"electronic_convergence_source\": \"OUTCAR_EDIFF_TERMINATION\",\n      \"latest_started_electronic_cycle\": {\n        \"cycle\": 90,\n        \"ionic_step\": 90,\n        \"iteration\": 7,\n        \"delta_e_eV\": -4.3544e-06,\n        \"delta_eps_eV\": -6.2862e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"latest_completed_electronic_cycle\": {\n        \"cycle\": 90,\n        \"ionic_step\": 90,\n        \"iteration\": 7,\n        \"delta_e_eV\": -4.3544e-06,\n        \"delta_eps_eV\": -6.2862e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"final_target_step\": {\n        \"cycle\": 90,\n        \"ionic_step\": 90,\n        \"iteration\": 7,\n        \"delta_e_eV\": -4.3544e-06,\n        \"delta_eps_eV\": -6.2862e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"final_target_complete\": true,\n      \"final_target_explicit_convergence\": true,\n      \"incomplete\": false,\n      \"status\": \"PASS\"\n    },\n    \"ionic_steps\": 90,\n    \"final_toten_eV\": -380.90590972,\n    \"fmax_movable_eV_A\": 0.01958574731788399,\n    \"force_limit_eV_A\": 0.02,\n    \"compatibility_checks\": {\n      \"GGA\": true,\n      \"ENCUT\": true,\n      \"EDIFF\": true,\n      \"EDIFFG\": true,\n      \"ISPIN\": true,\n      \"ISMEAR\": true,\n      \"SIGMA\": true,\n      \"ISIF\": true,\n      \"dipole_off\": true,\n      \"atom_order\": true,\n      \"clean_Fe45\": true,\n      \"cell\": true,\n      \"flags\": true,\n      \"fixed_positions\": true,\n      \"input_fixed_positions\": true,\n      \"potcar\": true,\n      \"kmesh\": true,\n      \"magmom\": true\n    },\n    \"chemistry\": {\n      \"connectivity_changed\": false,\n      \"dissociated\": false,\n      \"chemical_event\": \"none\",\n      \"lost_bonds\": [],\n      \"formed_bonds\": [],\n      \"initial_fragment_count\": 1,\n      \"relaxed_fragment_count\": 1\n    },\n    \"signature_match\": true,\n    \"minimum_Fe_adsorbate_A\": 1.867223241092105,\n    \"maximum_slab_displacement_A\": 0.2160010938294621,\n    \"internal_distances\": [\n      {\n        \"atoms_0based\": [\n          45,\n          46\n        ],\n        \"pair\": \"C-C\",\n        \"distance_A\": 1.4036457501205482,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          45,\n          47\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 1.0951561051126475,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          45,\n          48\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 1.098501671525078,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          46,\n          47\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 2.1871359049674175,\n        \"bond\": false\n      },\n      {\n        \"atoms_0based\": [\n          46,\n          48\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 2.177438023674655,\n        \"bond\": false\n      },\n      {\n        \"atoms_0based\": [\n          47,\n          48\n        ],\n        \"pair\": \"H-H\",\n        \"distance_A\": 1.8356301782245446,\n        \"bond\": false\n      }\n    ],\n    \"contacts\": [\n      {\n        \"atom_0based\": 45,\n        \"symbol\": \"C\",\n        \"nearest_Fe_0based\": 43,\n        \"nearest_Fe_A\": 2.1808166125906756,\n        \"three_nearest_Fe\": [\n          [\n            2.1808166125906756,\n            43\n          ],\n          [\n            2.8164107650270225,\n            37\n          ],\n          [\n            3.109790479949422,\n            41\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.5609892141948228,\n        \"off_symmetry\": true,\n        \"height_above_top_Fe_A\": 2.0196268623641167\n      },\n      {\n        \"atom_0based\": 46,\n        \"symbol\": \"C\",\n        \"nearest_Fe_0based\": 44,\n        \"nearest_Fe_A\": 1.867223241092105,\n        \"three_nearest_Fe\": [\n          [\n            1.867223241092105,\n            44\n          ],\n          [\n            1.9473723169484378,\n            43\n          ],\n          [\n            2.0308659121275845,\n            41\n          ]\n        ],\n        \"closest_site_projection\": \"long_bridge\",\n        \"lateral_offset_A\": 0.23591049293493244,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 1.0899241797268253\n      },\n      {\n        \"atom_0based\": 47,\n        \"symbol\": \"H\",\n        \"nearest_Fe_0based\": 43,\n        \"nearest_Fe_A\": 2.707174909704939,\n        \"three_nearest_Fe\": [\n          [\n            2.707174909704939,\n            43\n          ],\n          [\n            3.369733551799067,\n            40\n          ],\n          [\n            3.371776765327715,\n            41\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.47492140752011996,\n        \"off_symmetry\": true,\n        \"height_above_top_Fe_A\": 2.6041721213448206\n      },\n      {\n        \"atom_0based\": 48,\n        \"symbol\": \"H\",\n        \"nearest_Fe_0based\": 37,\n        \"nearest_Fe_A\": 2.7281109911139736,\n        \"three_nearest_Fe\": [\n          [\n            2.7281109911139736,\n            37\n          ],\n          [\n            2.91164679018552,\n            43\n          ],\n          [\n            3.3252127609167497,\n            36\n          ]\n        ],\n        \"closest_site_projection\": \"short_bridge\",\n        \"lateral_offset_A\": 0.23416901282762279,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 2.48338268966927\n      }\n    ],\n    \"blockers\": [],\n    \"eligible_for_review\": true,\n    \"scientific_acceptance\": false,\n    \"duplicate_of\": null\n  },\n  \"decision\": {\n    \"decision\": \"accept\",\n    \"reason\": \"Convergence, intended graph, geometry, branch and source hashes pass; user explicitly accepts missing scheduler terminal evidence for this result only.\"\n  },\n  \"scheduler_exception\": {\n    \"scope\": \"three named completed adsorption calculations only\",\n    \"authorizing_user_request\": \"\\u90fd\\u5f55\\u5165\\u5427 \\u7136\\u540e\\u628a\\u90a315\\u4e2a\\u4e5f\\u63d0\\u4ea4gpu\",\n    \"authorized_at\": \"2026-10-12T16:56:28.968744+00:00\",\n    \"names\": [\n      \"02_extra2\",\n      \"04_cfg2\",\n      \"05_cfg1\"\n    ],\n    \"requirement_waived\": \"original_scheduler_DONE_evidence\",\n    \"scheduler_status\": \"UNKNOWN\",\n    \"infer_DONE\": false,\n    \"scientific_checks_waived\": [],\n    \"production_policy_changed\": false\n  },\n  \"analysis_sha256\": \"73d1c4def2f44db2106cc4afa7e8c4e67db5a4ab78210199811846c84711a53e\",\n  \"previous_batch_sha256\": \"4e7685bbe9835a69a51a900300fb6568d058dbc0bcc6f4e27adef0d755298fcb\",\n  \"reviewer\": \"User-authorized Codex scientific review\",\n  \"reviewed_at\": \"2026-10-12T16:56:28.968744+00:00\"\n}\n",
+          "start": 0,
+          "end": 7323,
+          "sha256": "c170bb1d31a9f288ffa24e325896f74db029f561a50ca63a7f62c840a7f474c8"
+        },
+        "review": {
+          "reviewer": "User-authorized Codex scientific review",
+          "reviewed_at": "2026-10-12T16:56:28.968744+00:00",
+          "decision": "accepted",
+          "scope": "registry_acceptance",
+          "subject_sha256": "eaac57be571f0f91d50a7b4118e0a2d0b2e252097807ceae64f90dab0491bc84"
+        },
+        "transfer": {
+          "review_sha256": "be941adcbbd455f6d4872a622719caa7a30085a0d7502d49d99eafe1aabc7f53",
+          "domain": "adsorption_workflow",
+          "compatibility": {
+            "branch": "true_fe110_5layer_5x5x1",
+            "cell_angstrom": [
+              [
+                8.4808451022,
+                0.0,
+                0.0
+              ],
+              [
+                4.2404225511,
+                5.996863081958339,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                22.995817442611116
+              ]
+            ],
+            "clean_slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+            "coverage": "3x3_one_C2H2",
+            "ediff_ev": 1e-05,
+            "encut_ev": 400.0,
+            "final_energy_convention": "fe110_converged_toten_sigma0p20_v1",
+            "fixed_atom_indices_zero_based": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "force_threshold_ev_per_A": 0.02,
+            "ismear": 1,
+            "kmesh": [
+              5,
+              5,
+              1
+            ],
+            "ldipol": false,
+            "magnetic_state": "ispin2_Fe2p2_adsorbate0_seed",
+            "material": "fe",
+            "potcar_bundle_sha256": "bd39c0ebfbbe6207bc8e1b976677b4687ae2d2956f5a74dc1dea3298adef063a",
+            "potcar_family": "paw_pbe",
+            "sigma_ev": 0.2,
+            "slab_layers": 5,
+            "slab_model": "fe45_bottom18_fixed",
+            "surface": "fe110",
+            "vacuum_thickness_angstrom": 14.981751034348626,
+            "xc": "pbe"
+          }
+        }
+      },
+      "scientific_validation": {
+        "owner": "vasp_relaxation",
+        "directory": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\sources\\02_extra2",
+        "source_files": {
+          "INCAR": "e601aed376edb96249230712e2d6fddcc655ef10d0939460e6f5a28b42497d1c",
+          "POSCAR": "782662dcdc5049607aa4525616410d53d8b2e17bf33f7d08e0845ec353b154db",
+          "CONTCAR": "850b8187f1ed4ad237d2824b25f2aa84a71b9dc00344a219b729ba54361a04eb",
+          "OUTCAR": "a33db53412a4f9ada729d563ad9aa5bc139b7c641626cd7ffad6781474f23d49",
+          "OSZICAR": "bdb59c3d0fca6155fa3476773d05f7e85d8a1cdd9ea484320910f7b017716970"
+        },
+        "completion_review_sha256": "c170bb1d31a9f288ffa24e325896f74db029f561a50ca63a7f62c840a7f474c8",
+        "scheduler_exception": {
+          "scope": "three named completed adsorption calculations only",
+          "authorizing_user_request": "\u90fd\u5f55\u5165\u5427 \u7136\u540e\u628a\u90a315\u4e2a\u4e5f\u63d0\u4ea4gpu",
+          "authorized_at": "2026-10-12T16:56:28.968744+00:00",
+          "names": [
+            "02_extra2",
+            "04_cfg2",
+            "05_cfg1"
+          ],
+          "requirement_waived": "original_scheduler_DONE_evidence",
+          "scheduler_status": "UNKNOWN",
+          "infer_DONE": false,
+          "scientific_checks_waived": [],
+          "production_policy_changed": false
+        }
+      }
+    },
+    "fe110_five_c2_adsorption_20261006_04_cfg2_scheduler_exception_20261013_final_toten": {
+      "type": "calculated_result",
+      "registry_stage": "accepted_result",
+      "evidence": {
+        "claim": {
+          "id": "fe110_five_c2_adsorption_20261006_04_cfg2_scheduler_exception_20261013_final_toten",
+          "type": "calculated_result",
+          "statement": "Reviewed VASP final_toten for fe110_five_c2_adsorption_20261006_04_cfg2; no prediction or adsorption-energy inference.",
+          "source_reference": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\registration_exception_20261013\\04_cfg2_review.json",
+          "status": "reviewed",
+          "evidence_relationship": "supports",
+          "scope": "registry_acceptance",
+          "domain": "adsorption_workflow",
+          "compatibility": {
+            "branch": "true_fe110_5layer_5x5x1",
+            "cell_angstrom": [
+              [
+                8.4808451022,
+                0.0,
+                0.0
+              ],
+              [
+                4.2404225511,
+                5.996863081958339,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                22.995817442611116
+              ]
+            ],
+            "clean_slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+            "coverage": "3x3_one_C2HO",
+            "ediff_ev": 1e-05,
+            "encut_ev": 400.0,
+            "final_energy_convention": "fe110_converged_toten_sigma0p20_v1",
+            "fixed_atom_indices_zero_based": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "force_threshold_ev_per_A": 0.02,
+            "ismear": 1,
+            "kmesh": [
+              5,
+              5,
+              1
+            ],
+            "ldipol": false,
+            "magnetic_state": "ispin2_Fe2p2_adsorbate0_seed",
+            "material": "fe",
+            "potcar_bundle_sha256": "e3bc41a37d795bfcf1b1dc9a2a9ddfb5ef86aa5dc9aa0ac5a3583471a0982f85",
+            "potcar_family": "paw_pbe",
+            "sigma_ev": 0.2,
+            "slab_layers": 5,
+            "slab_model": "fe45_bottom18_fixed",
+            "surface": "fe110",
+            "vacuum_thickness_angstrom": 14.981751034348626,
+            "xc": "pbe"
+          },
+          "result_sha256": "a7f8db04dad702c8304e4534cb3dd706909b741e8c986b5e9004b3c0923a039a",
+          "validation_sha256": "c2fed83dbccf03969444957d0ab270dc0b346a7fa54b6146619ce96d4a4007e0"
+        },
+        "source": {
+          "identity": "hash-bound adsorption completion review of collected VASP outputs",
+          "reference": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\registration_exception_20261013\\04_cfg2_review.json",
+          "retrieved_at": "2026-10-12T16:56:28.968744+00:00",
+          "snapshot": {
+            "text": "{\n  \"record\": {\n    \"name\": \"04_cfg2\",\n    \"job_id\": \"9839755\",\n    \"species_id\": \"04\",\n    \"target_graph\": \"[C][CH][O]\",\n    \"formula\": \"C2HO\",\n    \"directory\": \"C:\\\\Users\\\\86177\\\\Desktop\\\\work\\\\calculations\\\\fe110_five_c2_adsorption_20261006\\\\final_review_20261012\\\\sources\\\\04_cfg2\",\n    \"collection_sha256\": \"9ad51993613d4d0201ae0a89988447e466f4f48f03bbaa62297bff19a23b3f2e\",\n    \"candidate_manifest_sha256\": \"4f6dacc3ad843b4019d32ae61d169dcd46958db33e4754545e496615deefcdea\",\n    \"convergence\": {\n      \"normal_completion\": true,\n      \"ionic_converged\": true,\n      \"last_electronic_iteration\": 7,\n      \"last_delta_e_eV\": -5.2539e-06,\n      \"last_delta_eps_eV\": -3.3509e-07,\n      \"ediff_eV\": 1e-05,\n      \"nelm\": 200,\n      \"electronically_converged\": true,\n      \"electronic_convergence_source\": \"OUTCAR_EDIFF_TERMINATION\",\n      \"latest_started_electronic_cycle\": {\n        \"cycle\": 218,\n        \"ionic_step\": 218,\n        \"iteration\": 7,\n        \"delta_e_eV\": -5.2539e-06,\n        \"delta_eps_eV\": -3.3509e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"latest_completed_electronic_cycle\": {\n        \"cycle\": 218,\n        \"ionic_step\": 218,\n        \"iteration\": 7,\n        \"delta_e_eV\": -5.2539e-06,\n        \"delta_eps_eV\": -3.3509e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"final_target_step\": {\n        \"cycle\": 218,\n        \"ionic_step\": 218,\n        \"iteration\": 7,\n        \"delta_e_eV\": -5.2539e-06,\n        \"delta_eps_eV\": -3.3509e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"final_target_complete\": true,\n      \"final_target_explicit_convergence\": true,\n      \"incomplete\": false,\n      \"status\": \"PASS\"\n    },\n    \"ionic_steps\": 218,\n    \"final_toten_eV\": -384.12661226,\n    \"fmax_movable_eV_A\": 0.013765965603618221,\n    \"force_limit_eV_A\": 0.02,\n    \"compatibility_checks\": {\n      \"GGA\": true,\n      \"ENCUT\": true,\n      \"EDIFF\": true,\n      \"EDIFFG\": true,\n      \"ISPIN\": true,\n      \"ISMEAR\": true,\n      \"SIGMA\": true,\n      \"ISIF\": true,\n      \"dipole_off\": true,\n      \"atom_order\": true,\n      \"clean_Fe45\": true,\n      \"cell\": true,\n      \"flags\": true,\n      \"fixed_positions\": true,\n      \"input_fixed_positions\": true,\n      \"potcar\": true,\n      \"kmesh\": true,\n      \"magmom\": true\n    },\n    \"chemistry\": {\n      \"connectivity_changed\": false,\n      \"dissociated\": false,\n      \"chemical_event\": \"none\",\n      \"lost_bonds\": [],\n      \"formed_bonds\": [],\n      \"initial_fragment_count\": 1,\n      \"relaxed_fragment_count\": 1\n    },\n    \"signature_match\": true,\n    \"minimum_Fe_adsorbate_A\": 1.8918892633253195,\n    \"maximum_slab_displacement_A\": 0.30459711833674186,\n    \"internal_distances\": [\n      {\n        \"atoms_0based\": [\n          45,\n          46\n        ],\n        \"pair\": \"C-C\",\n        \"distance_A\": 1.4304550308064135,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          45,\n          47\n        ],\n        \"pair\": \"C-O\",\n        \"distance_A\": 1.3883517765201647,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          45,\n          48\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 1.0955254326144788,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          46,\n          47\n        ],\n        \"pair\": \"C-O\",\n        \"distance_A\": 2.4548540650183606,\n        \"bond\": false\n      },\n      {\n        \"atoms_0based\": [\n          46,\n          48\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 2.235213536303796,\n        \"bond\": false\n      },\n      {\n        \"atoms_0based\": [\n          47,\n          48\n        ],\n        \"pair\": \"O-H\",\n        \"distance_A\": 2.0798233364262217,\n        \"bond\": false\n      }\n    ],\n    \"contacts\": [\n      {\n        \"atom_0based\": 45,\n        \"symbol\": \"C\",\n        \"nearest_Fe_0based\": 41,\n        \"nearest_Fe_A\": 2.084620466096032,\n        \"three_nearest_Fe\": [\n          [\n            2.084620466096032,\n            41\n          ],\n          [\n            2.66701474223441,\n            38\n          ],\n          [\n            2.8948723503104303,\n            43\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.5240778072578622,\n        \"off_symmetry\": true,\n        \"height_above_top_Fe_A\": 1.614960620942238\n      },\n      {\n        \"atom_0based\": 46,\n        \"symbol\": \"C\",\n        \"nearest_Fe_0based\": 43,\n        \"nearest_Fe_A\": 1.8918892633253195,\n        \"three_nearest_Fe\": [\n          [\n            1.8918892633253195,\n            43\n          ],\n          [\n            1.8989907533287982,\n            41\n          ],\n          [\n            1.999367289161684,\n            44\n          ]\n        ],\n        \"closest_site_projection\": \"hollow\",\n        \"lateral_offset_A\": 0.24410143620192146,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 0.9675223441860794\n      },\n      {\n        \"atom_0based\": 47,\n        \"symbol\": \"O\",\n        \"nearest_Fe_0based\": 40,\n        \"nearest_Fe_A\": 2.0165880284226394,\n        \"three_nearest_Fe\": [\n          [\n            2.0165880284226394,\n            40\n          ],\n          [\n            2.0518812528506563,\n            38\n          ],\n          [\n            2.7041880390563087,\n            41\n          ]\n        ],\n        \"closest_site_projection\": \"hollow\",\n        \"lateral_offset_A\": 0.37348797314726206,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 1.4968062878061907\n      },\n      {\n        \"atom_0based\": 48,\n        \"symbol\": \"H\",\n        \"nearest_Fe_0based\": 41,\n        \"nearest_Fe_A\": 2.8155448626493174,\n        \"three_nearest_Fe\": [\n          [\n            2.8155448626493174,\n            41\n          ],\n          [\n            3.2094721213511703,\n            38\n          ],\n          [\n            3.3345299842515344,\n            36\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.46167856486258463,\n        \"off_symmetry\": true,\n        \"height_above_top_Fe_A\": 2.4216559493310896\n      }\n    ],\n    \"blockers\": [],\n    \"eligible_for_review\": true,\n    \"scientific_acceptance\": false,\n    \"duplicate_of\": null\n  },\n  \"decision\": {\n    \"decision\": \"accept\",\n    \"reason\": \"Convergence, intended graph, geometry, branch and source hashes pass; user explicitly accepts missing scheduler terminal evidence for this result only.\"\n  },\n  \"scheduler_exception\": {\n    \"scope\": \"three named completed adsorption calculations only\",\n    \"authorizing_user_request\": \"\\u90fd\\u5f55\\u5165\\u5427 \\u7136\\u540e\\u628a\\u90a315\\u4e2a\\u4e5f\\u63d0\\u4ea4gpu\",\n    \"authorized_at\": \"2026-10-12T16:56:28.968744+00:00\",\n    \"names\": [\n      \"02_extra2\",\n      \"04_cfg2\",\n      \"05_cfg1\"\n    ],\n    \"requirement_waived\": \"original_scheduler_DONE_evidence\",\n    \"scheduler_status\": \"UNKNOWN\",\n    \"infer_DONE\": false,\n    \"scientific_checks_waived\": [],\n    \"production_policy_changed\": false\n  },\n  \"analysis_sha256\": \"73d1c4def2f44db2106cc4afa7e8c4e67db5a4ab78210199811846c84711a53e\",\n  \"previous_batch_sha256\": \"4e7685bbe9835a69a51a900300fb6568d058dbc0bcc6f4e27adef0d755298fcb\",\n  \"reviewer\": \"User-authorized Codex scientific review\",\n  \"reviewed_at\": \"2026-10-12T16:56:28.968744+00:00\"\n}\n",
+            "sha256": "278e57784c826d98e82439ca7dddb7af8a449f3d291b48f5c078855cb83c618b"
+          },
+          "immutable_reference": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\registration_exception_20261013\\04_cfg2_review.json#sha256=278e57784c826d98e82439ca7dddb7af8a449f3d291b48f5c078855cb83c618b"
+        },
+        "content": {
+          "text": "{\n  \"record\": {\n    \"name\": \"04_cfg2\",\n    \"job_id\": \"9839755\",\n    \"species_id\": \"04\",\n    \"target_graph\": \"[C][CH][O]\",\n    \"formula\": \"C2HO\",\n    \"directory\": \"C:\\\\Users\\\\86177\\\\Desktop\\\\work\\\\calculations\\\\fe110_five_c2_adsorption_20261006\\\\final_review_20261012\\\\sources\\\\04_cfg2\",\n    \"collection_sha256\": \"9ad51993613d4d0201ae0a89988447e466f4f48f03bbaa62297bff19a23b3f2e\",\n    \"candidate_manifest_sha256\": \"4f6dacc3ad843b4019d32ae61d169dcd46958db33e4754545e496615deefcdea\",\n    \"convergence\": {\n      \"normal_completion\": true,\n      \"ionic_converged\": true,\n      \"last_electronic_iteration\": 7,\n      \"last_delta_e_eV\": -5.2539e-06,\n      \"last_delta_eps_eV\": -3.3509e-07,\n      \"ediff_eV\": 1e-05,\n      \"nelm\": 200,\n      \"electronically_converged\": true,\n      \"electronic_convergence_source\": \"OUTCAR_EDIFF_TERMINATION\",\n      \"latest_started_electronic_cycle\": {\n        \"cycle\": 218,\n        \"ionic_step\": 218,\n        \"iteration\": 7,\n        \"delta_e_eV\": -5.2539e-06,\n        \"delta_eps_eV\": -3.3509e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"latest_completed_electronic_cycle\": {\n        \"cycle\": 218,\n        \"ionic_step\": 218,\n        \"iteration\": 7,\n        \"delta_e_eV\": -5.2539e-06,\n        \"delta_eps_eV\": -3.3509e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"final_target_step\": {\n        \"cycle\": 218,\n        \"ionic_step\": 218,\n        \"iteration\": 7,\n        \"delta_e_eV\": -5.2539e-06,\n        \"delta_eps_eV\": -3.3509e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"final_target_complete\": true,\n      \"final_target_explicit_convergence\": true,\n      \"incomplete\": false,\n      \"status\": \"PASS\"\n    },\n    \"ionic_steps\": 218,\n    \"final_toten_eV\": -384.12661226,\n    \"fmax_movable_eV_A\": 0.013765965603618221,\n    \"force_limit_eV_A\": 0.02,\n    \"compatibility_checks\": {\n      \"GGA\": true,\n      \"ENCUT\": true,\n      \"EDIFF\": true,\n      \"EDIFFG\": true,\n      \"ISPIN\": true,\n      \"ISMEAR\": true,\n      \"SIGMA\": true,\n      \"ISIF\": true,\n      \"dipole_off\": true,\n      \"atom_order\": true,\n      \"clean_Fe45\": true,\n      \"cell\": true,\n      \"flags\": true,\n      \"fixed_positions\": true,\n      \"input_fixed_positions\": true,\n      \"potcar\": true,\n      \"kmesh\": true,\n      \"magmom\": true\n    },\n    \"chemistry\": {\n      \"connectivity_changed\": false,\n      \"dissociated\": false,\n      \"chemical_event\": \"none\",\n      \"lost_bonds\": [],\n      \"formed_bonds\": [],\n      \"initial_fragment_count\": 1,\n      \"relaxed_fragment_count\": 1\n    },\n    \"signature_match\": true,\n    \"minimum_Fe_adsorbate_A\": 1.8918892633253195,\n    \"maximum_slab_displacement_A\": 0.30459711833674186,\n    \"internal_distances\": [\n      {\n        \"atoms_0based\": [\n          45,\n          46\n        ],\n        \"pair\": \"C-C\",\n        \"distance_A\": 1.4304550308064135,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          45,\n          47\n        ],\n        \"pair\": \"C-O\",\n        \"distance_A\": 1.3883517765201647,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          45,\n          48\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 1.0955254326144788,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          46,\n          47\n        ],\n        \"pair\": \"C-O\",\n        \"distance_A\": 2.4548540650183606,\n        \"bond\": false\n      },\n      {\n        \"atoms_0based\": [\n          46,\n          48\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 2.235213536303796,\n        \"bond\": false\n      },\n      {\n        \"atoms_0based\": [\n          47,\n          48\n        ],\n        \"pair\": \"O-H\",\n        \"distance_A\": 2.0798233364262217,\n        \"bond\": false\n      }\n    ],\n    \"contacts\": [\n      {\n        \"atom_0based\": 45,\n        \"symbol\": \"C\",\n        \"nearest_Fe_0based\": 41,\n        \"nearest_Fe_A\": 2.084620466096032,\n        \"three_nearest_Fe\": [\n          [\n            2.084620466096032,\n            41\n          ],\n          [\n            2.66701474223441,\n            38\n          ],\n          [\n            2.8948723503104303,\n            43\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.5240778072578622,\n        \"off_symmetry\": true,\n        \"height_above_top_Fe_A\": 1.614960620942238\n      },\n      {\n        \"atom_0based\": 46,\n        \"symbol\": \"C\",\n        \"nearest_Fe_0based\": 43,\n        \"nearest_Fe_A\": 1.8918892633253195,\n        \"three_nearest_Fe\": [\n          [\n            1.8918892633253195,\n            43\n          ],\n          [\n            1.8989907533287982,\n            41\n          ],\n          [\n            1.999367289161684,\n            44\n          ]\n        ],\n        \"closest_site_projection\": \"hollow\",\n        \"lateral_offset_A\": 0.24410143620192146,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 0.9675223441860794\n      },\n      {\n        \"atom_0based\": 47,\n        \"symbol\": \"O\",\n        \"nearest_Fe_0based\": 40,\n        \"nearest_Fe_A\": 2.0165880284226394,\n        \"three_nearest_Fe\": [\n          [\n            2.0165880284226394,\n            40\n          ],\n          [\n            2.0518812528506563,\n            38\n          ],\n          [\n            2.7041880390563087,\n            41\n          ]\n        ],\n        \"closest_site_projection\": \"hollow\",\n        \"lateral_offset_A\": 0.37348797314726206,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 1.4968062878061907\n      },\n      {\n        \"atom_0based\": 48,\n        \"symbol\": \"H\",\n        \"nearest_Fe_0based\": 41,\n        \"nearest_Fe_A\": 2.8155448626493174,\n        \"three_nearest_Fe\": [\n          [\n            2.8155448626493174,\n            41\n          ],\n          [\n            3.2094721213511703,\n            38\n          ],\n          [\n            3.3345299842515344,\n            36\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.46167856486258463,\n        \"off_symmetry\": true,\n        \"height_above_top_Fe_A\": 2.4216559493310896\n      }\n    ],\n    \"blockers\": [],\n    \"eligible_for_review\": true,\n    \"scientific_acceptance\": false,\n    \"duplicate_of\": null\n  },\n  \"decision\": {\n    \"decision\": \"accept\",\n    \"reason\": \"Convergence, intended graph, geometry, branch and source hashes pass; user explicitly accepts missing scheduler terminal evidence for this result only.\"\n  },\n  \"scheduler_exception\": {\n    \"scope\": \"three named completed adsorption calculations only\",\n    \"authorizing_user_request\": \"\\u90fd\\u5f55\\u5165\\u5427 \\u7136\\u540e\\u628a\\u90a315\\u4e2a\\u4e5f\\u63d0\\u4ea4gpu\",\n    \"authorized_at\": \"2026-10-12T16:56:28.968744+00:00\",\n    \"names\": [\n      \"02_extra2\",\n      \"04_cfg2\",\n      \"05_cfg1\"\n    ],\n    \"requirement_waived\": \"original_scheduler_DONE_evidence\",\n    \"scheduler_status\": \"UNKNOWN\",\n    \"infer_DONE\": false,\n    \"scientific_checks_waived\": [],\n    \"production_policy_changed\": false\n  },\n  \"analysis_sha256\": \"73d1c4def2f44db2106cc4afa7e8c4e67db5a4ab78210199811846c84711a53e\",\n  \"previous_batch_sha256\": \"4e7685bbe9835a69a51a900300fb6568d058dbc0bcc6f4e27adef0d755298fcb\",\n  \"reviewer\": \"User-authorized Codex scientific review\",\n  \"reviewed_at\": \"2026-10-12T16:56:28.968744+00:00\"\n}\n",
+          "start": 0,
+          "end": 7326,
+          "sha256": "278e57784c826d98e82439ca7dddb7af8a449f3d291b48f5c078855cb83c618b"
+        },
+        "review": {
+          "reviewer": "User-authorized Codex scientific review",
+          "reviewed_at": "2026-10-12T16:56:28.968744+00:00",
+          "decision": "accepted",
+          "scope": "registry_acceptance",
+          "subject_sha256": "995f0316657fa430f29d25d334f5f652977b0e9acbebc989fa12e616c96c9699"
+        },
+        "transfer": {
+          "review_sha256": "b2666e70c5316328364b5f05b0645c92ee639a4ccc30e3c1467d3b5ca02fc887",
+          "domain": "adsorption_workflow",
+          "compatibility": {
+            "branch": "true_fe110_5layer_5x5x1",
+            "cell_angstrom": [
+              [
+                8.4808451022,
+                0.0,
+                0.0
+              ],
+              [
+                4.2404225511,
+                5.996863081958339,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                22.995817442611116
+              ]
+            ],
+            "clean_slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+            "coverage": "3x3_one_C2HO",
+            "ediff_ev": 1e-05,
+            "encut_ev": 400.0,
+            "final_energy_convention": "fe110_converged_toten_sigma0p20_v1",
+            "fixed_atom_indices_zero_based": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "force_threshold_ev_per_A": 0.02,
+            "ismear": 1,
+            "kmesh": [
+              5,
+              5,
+              1
+            ],
+            "ldipol": false,
+            "magnetic_state": "ispin2_Fe2p2_adsorbate0_seed",
+            "material": "fe",
+            "potcar_bundle_sha256": "e3bc41a37d795bfcf1b1dc9a2a9ddfb5ef86aa5dc9aa0ac5a3583471a0982f85",
+            "potcar_family": "paw_pbe",
+            "sigma_ev": 0.2,
+            "slab_layers": 5,
+            "slab_model": "fe45_bottom18_fixed",
+            "surface": "fe110",
+            "vacuum_thickness_angstrom": 14.981751034348626,
+            "xc": "pbe"
+          }
+        }
+      },
+      "scientific_validation": {
+        "owner": "vasp_relaxation",
+        "directory": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\sources\\04_cfg2",
+        "source_files": {
+          "INCAR": "1f5f02e9b02e1e13bcaf6d460f04c5e11895c30b6b51c2385b0ccabf100a7bfd",
+          "POSCAR": "a06d3f30ec9b208ac21892d103cace2004ad13f0b5a1e9fea5c2254af30a8b75",
+          "CONTCAR": "7872662c85bc94b83d118e17ccd99f2df8c67c6f1d1dd43fd6d2c5819d7ec935",
+          "OUTCAR": "adbe4b6a5130f25d483bb124012c825a32721d426831d77a35b758eb56b410a8",
+          "OSZICAR": "6d7647cb3aa15a486edb26b919d3215b183560e3c142467ee868783172d8ea57"
+        },
+        "completion_review_sha256": "278e57784c826d98e82439ca7dddb7af8a449f3d291b48f5c078855cb83c618b",
+        "scheduler_exception": {
+          "scope": "three named completed adsorption calculations only",
+          "authorizing_user_request": "\u90fd\u5f55\u5165\u5427 \u7136\u540e\u628a\u90a315\u4e2a\u4e5f\u63d0\u4ea4gpu",
+          "authorized_at": "2026-10-12T16:56:28.968744+00:00",
+          "names": [
+            "02_extra2",
+            "04_cfg2",
+            "05_cfg1"
+          ],
+          "requirement_waived": "original_scheduler_DONE_evidence",
+          "scheduler_status": "UNKNOWN",
+          "infer_DONE": false,
+          "scientific_checks_waived": [],
+          "production_policy_changed": false
+        }
+      }
+    },
+    "fe110_five_c2_adsorption_20261006_04_cfg2_scheduler_exception_20261013_final_max_movable_force": {
+      "type": "calculated_result",
+      "registry_stage": "candidate",
+      "evidence": {
+        "claim": {
+          "id": "fe110_five_c2_adsorption_20261006_04_cfg2_scheduler_exception_20261013_final_max_movable_force",
+          "type": "calculated_result",
+          "statement": "Reviewed VASP final_max_movable_force for fe110_five_c2_adsorption_20261006_04_cfg2; no prediction or adsorption-energy inference.",
+          "source_reference": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\registration_exception_20261013\\04_cfg2_review.json",
+          "status": "reviewed",
+          "evidence_relationship": "supports",
+          "scope": "registry_acceptance",
+          "domain": "adsorption_workflow",
+          "compatibility": {
+            "branch": "true_fe110_5layer_5x5x1",
+            "cell_angstrom": [
+              [
+                8.4808451022,
+                0.0,
+                0.0
+              ],
+              [
+                4.2404225511,
+                5.996863081958339,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                22.995817442611116
+              ]
+            ],
+            "clean_slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+            "coverage": "3x3_one_C2HO",
+            "ediff_ev": 1e-05,
+            "encut_ev": 400.0,
+            "final_energy_convention": "fe110_converged_toten_sigma0p20_v1",
+            "fixed_atom_indices_zero_based": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "force_threshold_ev_per_A": 0.02,
+            "ismear": 1,
+            "kmesh": [
+              5,
+              5,
+              1
+            ],
+            "ldipol": false,
+            "magnetic_state": "ispin2_Fe2p2_adsorbate0_seed",
+            "material": "fe",
+            "potcar_bundle_sha256": "e3bc41a37d795bfcf1b1dc9a2a9ddfb5ef86aa5dc9aa0ac5a3583471a0982f85",
+            "potcar_family": "paw_pbe",
+            "sigma_ev": 0.2,
+            "slab_layers": 5,
+            "slab_model": "fe45_bottom18_fixed",
+            "surface": "fe110",
+            "vacuum_thickness_angstrom": 14.981751034348626,
+            "xc": "pbe"
+          },
+          "result_sha256": "672019ad7aff62b9e739f097043ab9b86b5f35df5868eae693d1e3eda1475c58",
+          "validation_sha256": "c2fed83dbccf03969444957d0ab270dc0b346a7fa54b6146619ce96d4a4007e0"
+        },
+        "source": {
+          "identity": "hash-bound adsorption completion review of collected VASP outputs",
+          "reference": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\registration_exception_20261013\\04_cfg2_review.json",
+          "retrieved_at": "2026-10-12T16:56:28.968744+00:00",
+          "snapshot": {
+            "text": "{\n  \"record\": {\n    \"name\": \"04_cfg2\",\n    \"job_id\": \"9839755\",\n    \"species_id\": \"04\",\n    \"target_graph\": \"[C][CH][O]\",\n    \"formula\": \"C2HO\",\n    \"directory\": \"C:\\\\Users\\\\86177\\\\Desktop\\\\work\\\\calculations\\\\fe110_five_c2_adsorption_20261006\\\\final_review_20261012\\\\sources\\\\04_cfg2\",\n    \"collection_sha256\": \"9ad51993613d4d0201ae0a89988447e466f4f48f03bbaa62297bff19a23b3f2e\",\n    \"candidate_manifest_sha256\": \"4f6dacc3ad843b4019d32ae61d169dcd46958db33e4754545e496615deefcdea\",\n    \"convergence\": {\n      \"normal_completion\": true,\n      \"ionic_converged\": true,\n      \"last_electronic_iteration\": 7,\n      \"last_delta_e_eV\": -5.2539e-06,\n      \"last_delta_eps_eV\": -3.3509e-07,\n      \"ediff_eV\": 1e-05,\n      \"nelm\": 200,\n      \"electronically_converged\": true,\n      \"electronic_convergence_source\": \"OUTCAR_EDIFF_TERMINATION\",\n      \"latest_started_electronic_cycle\": {\n        \"cycle\": 218,\n        \"ionic_step\": 218,\n        \"iteration\": 7,\n        \"delta_e_eV\": -5.2539e-06,\n        \"delta_eps_eV\": -3.3509e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"latest_completed_electronic_cycle\": {\n        \"cycle\": 218,\n        \"ionic_step\": 218,\n        \"iteration\": 7,\n        \"delta_e_eV\": -5.2539e-06,\n        \"delta_eps_eV\": -3.3509e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"final_target_step\": {\n        \"cycle\": 218,\n        \"ionic_step\": 218,\n        \"iteration\": 7,\n        \"delta_e_eV\": -5.2539e-06,\n        \"delta_eps_eV\": -3.3509e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"final_target_complete\": true,\n      \"final_target_explicit_convergence\": true,\n      \"incomplete\": false,\n      \"status\": \"PASS\"\n    },\n    \"ionic_steps\": 218,\n    \"final_toten_eV\": -384.12661226,\n    \"fmax_movable_eV_A\": 0.013765965603618221,\n    \"force_limit_eV_A\": 0.02,\n    \"compatibility_checks\": {\n      \"GGA\": true,\n      \"ENCUT\": true,\n      \"EDIFF\": true,\n      \"EDIFFG\": true,\n      \"ISPIN\": true,\n      \"ISMEAR\": true,\n      \"SIGMA\": true,\n      \"ISIF\": true,\n      \"dipole_off\": true,\n      \"atom_order\": true,\n      \"clean_Fe45\": true,\n      \"cell\": true,\n      \"flags\": true,\n      \"fixed_positions\": true,\n      \"input_fixed_positions\": true,\n      \"potcar\": true,\n      \"kmesh\": true,\n      \"magmom\": true\n    },\n    \"chemistry\": {\n      \"connectivity_changed\": false,\n      \"dissociated\": false,\n      \"chemical_event\": \"none\",\n      \"lost_bonds\": [],\n      \"formed_bonds\": [],\n      \"initial_fragment_count\": 1,\n      \"relaxed_fragment_count\": 1\n    },\n    \"signature_match\": true,\n    \"minimum_Fe_adsorbate_A\": 1.8918892633253195,\n    \"maximum_slab_displacement_A\": 0.30459711833674186,\n    \"internal_distances\": [\n      {\n        \"atoms_0based\": [\n          45,\n          46\n        ],\n        \"pair\": \"C-C\",\n        \"distance_A\": 1.4304550308064135,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          45,\n          47\n        ],\n        \"pair\": \"C-O\",\n        \"distance_A\": 1.3883517765201647,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          45,\n          48\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 1.0955254326144788,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          46,\n          47\n        ],\n        \"pair\": \"C-O\",\n        \"distance_A\": 2.4548540650183606,\n        \"bond\": false\n      },\n      {\n        \"atoms_0based\": [\n          46,\n          48\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 2.235213536303796,\n        \"bond\": false\n      },\n      {\n        \"atoms_0based\": [\n          47,\n          48\n        ],\n        \"pair\": \"O-H\",\n        \"distance_A\": 2.0798233364262217,\n        \"bond\": false\n      }\n    ],\n    \"contacts\": [\n      {\n        \"atom_0based\": 45,\n        \"symbol\": \"C\",\n        \"nearest_Fe_0based\": 41,\n        \"nearest_Fe_A\": 2.084620466096032,\n        \"three_nearest_Fe\": [\n          [\n            2.084620466096032,\n            41\n          ],\n          [\n            2.66701474223441,\n            38\n          ],\n          [\n            2.8948723503104303,\n            43\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.5240778072578622,\n        \"off_symmetry\": true,\n        \"height_above_top_Fe_A\": 1.614960620942238\n      },\n      {\n        \"atom_0based\": 46,\n        \"symbol\": \"C\",\n        \"nearest_Fe_0based\": 43,\n        \"nearest_Fe_A\": 1.8918892633253195,\n        \"three_nearest_Fe\": [\n          [\n            1.8918892633253195,\n            43\n          ],\n          [\n            1.8989907533287982,\n            41\n          ],\n          [\n            1.999367289161684,\n            44\n          ]\n        ],\n        \"closest_site_projection\": \"hollow\",\n        \"lateral_offset_A\": 0.24410143620192146,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 0.9675223441860794\n      },\n      {\n        \"atom_0based\": 47,\n        \"symbol\": \"O\",\n        \"nearest_Fe_0based\": 40,\n        \"nearest_Fe_A\": 2.0165880284226394,\n        \"three_nearest_Fe\": [\n          [\n            2.0165880284226394,\n            40\n          ],\n          [\n            2.0518812528506563,\n            38\n          ],\n          [\n            2.7041880390563087,\n            41\n          ]\n        ],\n        \"closest_site_projection\": \"hollow\",\n        \"lateral_offset_A\": 0.37348797314726206,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 1.4968062878061907\n      },\n      {\n        \"atom_0based\": 48,\n        \"symbol\": \"H\",\n        \"nearest_Fe_0based\": 41,\n        \"nearest_Fe_A\": 2.8155448626493174,\n        \"three_nearest_Fe\": [\n          [\n            2.8155448626493174,\n            41\n          ],\n          [\n            3.2094721213511703,\n            38\n          ],\n          [\n            3.3345299842515344,\n            36\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.46167856486258463,\n        \"off_symmetry\": true,\n        \"height_above_top_Fe_A\": 2.4216559493310896\n      }\n    ],\n    \"blockers\": [],\n    \"eligible_for_review\": true,\n    \"scientific_acceptance\": false,\n    \"duplicate_of\": null\n  },\n  \"decision\": {\n    \"decision\": \"accept\",\n    \"reason\": \"Convergence, intended graph, geometry, branch and source hashes pass; user explicitly accepts missing scheduler terminal evidence for this result only.\"\n  },\n  \"scheduler_exception\": {\n    \"scope\": \"three named completed adsorption calculations only\",\n    \"authorizing_user_request\": \"\\u90fd\\u5f55\\u5165\\u5427 \\u7136\\u540e\\u628a\\u90a315\\u4e2a\\u4e5f\\u63d0\\u4ea4gpu\",\n    \"authorized_at\": \"2026-10-12T16:56:28.968744+00:00\",\n    \"names\": [\n      \"02_extra2\",\n      \"04_cfg2\",\n      \"05_cfg1\"\n    ],\n    \"requirement_waived\": \"original_scheduler_DONE_evidence\",\n    \"scheduler_status\": \"UNKNOWN\",\n    \"infer_DONE\": false,\n    \"scientific_checks_waived\": [],\n    \"production_policy_changed\": false\n  },\n  \"analysis_sha256\": \"73d1c4def2f44db2106cc4afa7e8c4e67db5a4ab78210199811846c84711a53e\",\n  \"previous_batch_sha256\": \"4e7685bbe9835a69a51a900300fb6568d058dbc0bcc6f4e27adef0d755298fcb\",\n  \"reviewer\": \"User-authorized Codex scientific review\",\n  \"reviewed_at\": \"2026-10-12T16:56:28.968744+00:00\"\n}\n",
+            "sha256": "278e57784c826d98e82439ca7dddb7af8a449f3d291b48f5c078855cb83c618b"
+          },
+          "immutable_reference": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\registration_exception_20261013\\04_cfg2_review.json#sha256=278e57784c826d98e82439ca7dddb7af8a449f3d291b48f5c078855cb83c618b"
+        },
+        "content": {
+          "text": "{\n  \"record\": {\n    \"name\": \"04_cfg2\",\n    \"job_id\": \"9839755\",\n    \"species_id\": \"04\",\n    \"target_graph\": \"[C][CH][O]\",\n    \"formula\": \"C2HO\",\n    \"directory\": \"C:\\\\Users\\\\86177\\\\Desktop\\\\work\\\\calculations\\\\fe110_five_c2_adsorption_20261006\\\\final_review_20261012\\\\sources\\\\04_cfg2\",\n    \"collection_sha256\": \"9ad51993613d4d0201ae0a89988447e466f4f48f03bbaa62297bff19a23b3f2e\",\n    \"candidate_manifest_sha256\": \"4f6dacc3ad843b4019d32ae61d169dcd46958db33e4754545e496615deefcdea\",\n    \"convergence\": {\n      \"normal_completion\": true,\n      \"ionic_converged\": true,\n      \"last_electronic_iteration\": 7,\n      \"last_delta_e_eV\": -5.2539e-06,\n      \"last_delta_eps_eV\": -3.3509e-07,\n      \"ediff_eV\": 1e-05,\n      \"nelm\": 200,\n      \"electronically_converged\": true,\n      \"electronic_convergence_source\": \"OUTCAR_EDIFF_TERMINATION\",\n      \"latest_started_electronic_cycle\": {\n        \"cycle\": 218,\n        \"ionic_step\": 218,\n        \"iteration\": 7,\n        \"delta_e_eV\": -5.2539e-06,\n        \"delta_eps_eV\": -3.3509e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"latest_completed_electronic_cycle\": {\n        \"cycle\": 218,\n        \"ionic_step\": 218,\n        \"iteration\": 7,\n        \"delta_e_eV\": -5.2539e-06,\n        \"delta_eps_eV\": -3.3509e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"final_target_step\": {\n        \"cycle\": 218,\n        \"ionic_step\": 218,\n        \"iteration\": 7,\n        \"delta_e_eV\": -5.2539e-06,\n        \"delta_eps_eV\": -3.3509e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"final_target_complete\": true,\n      \"final_target_explicit_convergence\": true,\n      \"incomplete\": false,\n      \"status\": \"PASS\"\n    },\n    \"ionic_steps\": 218,\n    \"final_toten_eV\": -384.12661226,\n    \"fmax_movable_eV_A\": 0.013765965603618221,\n    \"force_limit_eV_A\": 0.02,\n    \"compatibility_checks\": {\n      \"GGA\": true,\n      \"ENCUT\": true,\n      \"EDIFF\": true,\n      \"EDIFFG\": true,\n      \"ISPIN\": true,\n      \"ISMEAR\": true,\n      \"SIGMA\": true,\n      \"ISIF\": true,\n      \"dipole_off\": true,\n      \"atom_order\": true,\n      \"clean_Fe45\": true,\n      \"cell\": true,\n      \"flags\": true,\n      \"fixed_positions\": true,\n      \"input_fixed_positions\": true,\n      \"potcar\": true,\n      \"kmesh\": true,\n      \"magmom\": true\n    },\n    \"chemistry\": {\n      \"connectivity_changed\": false,\n      \"dissociated\": false,\n      \"chemical_event\": \"none\",\n      \"lost_bonds\": [],\n      \"formed_bonds\": [],\n      \"initial_fragment_count\": 1,\n      \"relaxed_fragment_count\": 1\n    },\n    \"signature_match\": true,\n    \"minimum_Fe_adsorbate_A\": 1.8918892633253195,\n    \"maximum_slab_displacement_A\": 0.30459711833674186,\n    \"internal_distances\": [\n      {\n        \"atoms_0based\": [\n          45,\n          46\n        ],\n        \"pair\": \"C-C\",\n        \"distance_A\": 1.4304550308064135,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          45,\n          47\n        ],\n        \"pair\": \"C-O\",\n        \"distance_A\": 1.3883517765201647,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          45,\n          48\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 1.0955254326144788,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          46,\n          47\n        ],\n        \"pair\": \"C-O\",\n        \"distance_A\": 2.4548540650183606,\n        \"bond\": false\n      },\n      {\n        \"atoms_0based\": [\n          46,\n          48\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 2.235213536303796,\n        \"bond\": false\n      },\n      {\n        \"atoms_0based\": [\n          47,\n          48\n        ],\n        \"pair\": \"O-H\",\n        \"distance_A\": 2.0798233364262217,\n        \"bond\": false\n      }\n    ],\n    \"contacts\": [\n      {\n        \"atom_0based\": 45,\n        \"symbol\": \"C\",\n        \"nearest_Fe_0based\": 41,\n        \"nearest_Fe_A\": 2.084620466096032,\n        \"three_nearest_Fe\": [\n          [\n            2.084620466096032,\n            41\n          ],\n          [\n            2.66701474223441,\n            38\n          ],\n          [\n            2.8948723503104303,\n            43\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.5240778072578622,\n        \"off_symmetry\": true,\n        \"height_above_top_Fe_A\": 1.614960620942238\n      },\n      {\n        \"atom_0based\": 46,\n        \"symbol\": \"C\",\n        \"nearest_Fe_0based\": 43,\n        \"nearest_Fe_A\": 1.8918892633253195,\n        \"three_nearest_Fe\": [\n          [\n            1.8918892633253195,\n            43\n          ],\n          [\n            1.8989907533287982,\n            41\n          ],\n          [\n            1.999367289161684,\n            44\n          ]\n        ],\n        \"closest_site_projection\": \"hollow\",\n        \"lateral_offset_A\": 0.24410143620192146,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 0.9675223441860794\n      },\n      {\n        \"atom_0based\": 47,\n        \"symbol\": \"O\",\n        \"nearest_Fe_0based\": 40,\n        \"nearest_Fe_A\": 2.0165880284226394,\n        \"three_nearest_Fe\": [\n          [\n            2.0165880284226394,\n            40\n          ],\n          [\n            2.0518812528506563,\n            38\n          ],\n          [\n            2.7041880390563087,\n            41\n          ]\n        ],\n        \"closest_site_projection\": \"hollow\",\n        \"lateral_offset_A\": 0.37348797314726206,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 1.4968062878061907\n      },\n      {\n        \"atom_0based\": 48,\n        \"symbol\": \"H\",\n        \"nearest_Fe_0based\": 41,\n        \"nearest_Fe_A\": 2.8155448626493174,\n        \"three_nearest_Fe\": [\n          [\n            2.8155448626493174,\n            41\n          ],\n          [\n            3.2094721213511703,\n            38\n          ],\n          [\n            3.3345299842515344,\n            36\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.46167856486258463,\n        \"off_symmetry\": true,\n        \"height_above_top_Fe_A\": 2.4216559493310896\n      }\n    ],\n    \"blockers\": [],\n    \"eligible_for_review\": true,\n    \"scientific_acceptance\": false,\n    \"duplicate_of\": null\n  },\n  \"decision\": {\n    \"decision\": \"accept\",\n    \"reason\": \"Convergence, intended graph, geometry, branch and source hashes pass; user explicitly accepts missing scheduler terminal evidence for this result only.\"\n  },\n  \"scheduler_exception\": {\n    \"scope\": \"three named completed adsorption calculations only\",\n    \"authorizing_user_request\": \"\\u90fd\\u5f55\\u5165\\u5427 \\u7136\\u540e\\u628a\\u90a315\\u4e2a\\u4e5f\\u63d0\\u4ea4gpu\",\n    \"authorized_at\": \"2026-10-12T16:56:28.968744+00:00\",\n    \"names\": [\n      \"02_extra2\",\n      \"04_cfg2\",\n      \"05_cfg1\"\n    ],\n    \"requirement_waived\": \"original_scheduler_DONE_evidence\",\n    \"scheduler_status\": \"UNKNOWN\",\n    \"infer_DONE\": false,\n    \"scientific_checks_waived\": [],\n    \"production_policy_changed\": false\n  },\n  \"analysis_sha256\": \"73d1c4def2f44db2106cc4afa7e8c4e67db5a4ab78210199811846c84711a53e\",\n  \"previous_batch_sha256\": \"4e7685bbe9835a69a51a900300fb6568d058dbc0bcc6f4e27adef0d755298fcb\",\n  \"reviewer\": \"User-authorized Codex scientific review\",\n  \"reviewed_at\": \"2026-10-12T16:56:28.968744+00:00\"\n}\n",
+          "start": 0,
+          "end": 7326,
+          "sha256": "278e57784c826d98e82439ca7dddb7af8a449f3d291b48f5c078855cb83c618b"
+        },
+        "review": {
+          "reviewer": "User-authorized Codex scientific review",
+          "reviewed_at": "2026-10-12T16:56:28.968744+00:00",
+          "decision": "accepted",
+          "scope": "registry_acceptance",
+          "subject_sha256": "8b1afa825c48f8c5d1e2470eaa36df8e4f3e33de61bc63be7a8012dc56588bdd"
+        },
+        "transfer": {
+          "review_sha256": "3a69f291ff9c7adb30260d6184b26840fa5f230b076343c51d73c0f44c02dc57",
+          "domain": "adsorption_workflow",
+          "compatibility": {
+            "branch": "true_fe110_5layer_5x5x1",
+            "cell_angstrom": [
+              [
+                8.4808451022,
+                0.0,
+                0.0
+              ],
+              [
+                4.2404225511,
+                5.996863081958339,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                22.995817442611116
+              ]
+            ],
+            "clean_slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+            "coverage": "3x3_one_C2HO",
+            "ediff_ev": 1e-05,
+            "encut_ev": 400.0,
+            "final_energy_convention": "fe110_converged_toten_sigma0p20_v1",
+            "fixed_atom_indices_zero_based": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "force_threshold_ev_per_A": 0.02,
+            "ismear": 1,
+            "kmesh": [
+              5,
+              5,
+              1
+            ],
+            "ldipol": false,
+            "magnetic_state": "ispin2_Fe2p2_adsorbate0_seed",
+            "material": "fe",
+            "potcar_bundle_sha256": "e3bc41a37d795bfcf1b1dc9a2a9ddfb5ef86aa5dc9aa0ac5a3583471a0982f85",
+            "potcar_family": "paw_pbe",
+            "sigma_ev": 0.2,
+            "slab_layers": 5,
+            "slab_model": "fe45_bottom18_fixed",
+            "surface": "fe110",
+            "vacuum_thickness_angstrom": 14.981751034348626,
+            "xc": "pbe"
+          }
+        }
+      },
+      "scientific_validation": {
+        "owner": "vasp_relaxation",
+        "directory": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\sources\\04_cfg2",
+        "source_files": {
+          "INCAR": "1f5f02e9b02e1e13bcaf6d460f04c5e11895c30b6b51c2385b0ccabf100a7bfd",
+          "POSCAR": "a06d3f30ec9b208ac21892d103cace2004ad13f0b5a1e9fea5c2254af30a8b75",
+          "CONTCAR": "7872662c85bc94b83d118e17ccd99f2df8c67c6f1d1dd43fd6d2c5819d7ec935",
+          "OUTCAR": "adbe4b6a5130f25d483bb124012c825a32721d426831d77a35b758eb56b410a8",
+          "OSZICAR": "6d7647cb3aa15a486edb26b919d3215b183560e3c142467ee868783172d8ea57"
+        },
+        "completion_review_sha256": "278e57784c826d98e82439ca7dddb7af8a449f3d291b48f5c078855cb83c618b",
+        "scheduler_exception": {
+          "scope": "three named completed adsorption calculations only",
+          "authorizing_user_request": "\u90fd\u5f55\u5165\u5427 \u7136\u540e\u628a\u90a315\u4e2a\u4e5f\u63d0\u4ea4gpu",
+          "authorized_at": "2026-10-12T16:56:28.968744+00:00",
+          "names": [
+            "02_extra2",
+            "04_cfg2",
+            "05_cfg1"
+          ],
+          "requirement_waived": "original_scheduler_DONE_evidence",
+          "scheduler_status": "UNKNOWN",
+          "infer_DONE": false,
+          "scientific_checks_waived": [],
+          "production_policy_changed": false
+        }
+      }
+    },
+    "fe110_five_c2_adsorption_20261006_05_cfg1_scheduler_exception_20261013_final_toten": {
+      "type": "calculated_result",
+      "registry_stage": "accepted_result",
+      "evidence": {
+        "claim": {
+          "id": "fe110_five_c2_adsorption_20261006_05_cfg1_scheduler_exception_20261013_final_toten",
+          "type": "calculated_result",
+          "statement": "Reviewed VASP final_toten for fe110_five_c2_adsorption_20261006_05_cfg1; no prediction or adsorption-energy inference.",
+          "source_reference": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\registration_exception_20261013\\05_cfg1_review.json",
+          "status": "reviewed",
+          "evidence_relationship": "supports",
+          "scope": "registry_acceptance",
+          "domain": "adsorption_workflow",
+          "compatibility": {
+            "branch": "true_fe110_5layer_5x5x1",
+            "cell_angstrom": [
+              [
+                8.4808451022,
+                0.0,
+                0.0
+              ],
+              [
+                4.2404225511,
+                5.996863081958339,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                22.995817442611116
+              ]
+            ],
+            "clean_slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+            "coverage": "3x3_one_C2HO",
+            "ediff_ev": 1e-05,
+            "encut_ev": 400.0,
+            "final_energy_convention": "fe110_converged_toten_sigma0p20_v1",
+            "fixed_atom_indices_zero_based": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "force_threshold_ev_per_A": 0.02,
+            "ismear": 1,
+            "kmesh": [
+              5,
+              5,
+              1
+            ],
+            "ldipol": false,
+            "magnetic_state": "ispin2_Fe2p2_adsorbate0_seed",
+            "material": "fe",
+            "potcar_bundle_sha256": "cfdeb95d5ce5ab92e2ff0c0cdd1cd3870fbbe3a929822c631e09fd828c511a4f",
+            "potcar_family": "paw_pbe",
+            "sigma_ev": 0.2,
+            "slab_layers": 5,
+            "slab_model": "fe45_bottom18_fixed",
+            "surface": "fe110",
+            "vacuum_thickness_angstrom": 14.981751034348626,
+            "xc": "pbe"
+          },
+          "result_sha256": "a1f73793f359c83eae6a77dbb665825a1daf8fd5bc9876121da64ac3b2cf65d1",
+          "validation_sha256": "27c59a1f07730073c3a4e67a4879ff581a1a266a1288fda853f4da1e90fa06f0"
+        },
+        "source": {
+          "identity": "hash-bound adsorption completion review of collected VASP outputs",
+          "reference": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\registration_exception_20261013\\05_cfg1_review.json",
+          "retrieved_at": "2026-10-12T16:56:28.968744+00:00",
+          "snapshot": {
+            "text": "{\n  \"record\": {\n    \"name\": \"05_cfg1\",\n    \"job_id\": \"9839754\",\n    \"species_id\": \"05\",\n    \"target_graph\": \"[C][C]O\",\n    \"formula\": \"C2HO\",\n    \"directory\": \"C:\\\\Users\\\\86177\\\\Desktop\\\\work\\\\calculations\\\\fe110_five_c2_adsorption_20261006\\\\final_review_20261012\\\\sources\\\\05_cfg1\",\n    \"collection_sha256\": \"e751334ab80ce0a8c99d3735a7bab2ef111cabe88b57228cdafe4ab17630fad2\",\n    \"candidate_manifest_sha256\": \"35a97903fbd6215e3d780e57aebbdbd93d018f3cafe7fc220104364002d06a0b\",\n    \"convergence\": {\n      \"normal_completion\": true,\n      \"ionic_converged\": true,\n      \"last_electronic_iteration\": 5,\n      \"last_delta_e_eV\": 3.0489e-06,\n      \"last_delta_eps_eV\": -1.0374e-07,\n      \"ediff_eV\": 1e-05,\n      \"nelm\": 200,\n      \"electronically_converged\": true,\n      \"electronic_convergence_source\": \"OUTCAR_EDIFF_TERMINATION\",\n      \"latest_started_electronic_cycle\": {\n        \"cycle\": 113,\n        \"ionic_step\": 113,\n        \"iteration\": 5,\n        \"delta_e_eV\": 3.0489e-06,\n        \"delta_eps_eV\": -1.0374e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"latest_completed_electronic_cycle\": {\n        \"cycle\": 113,\n        \"ionic_step\": 113,\n        \"iteration\": 5,\n        \"delta_e_eV\": 3.0489e-06,\n        \"delta_eps_eV\": -1.0374e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"final_target_step\": {\n        \"cycle\": 113,\n        \"ionic_step\": 113,\n        \"iteration\": 5,\n        \"delta_e_eV\": 3.0489e-06,\n        \"delta_eps_eV\": -1.0374e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"final_target_complete\": true,\n      \"final_target_explicit_convergence\": true,\n      \"incomplete\": false,\n      \"status\": \"PASS\"\n    },\n    \"ionic_steps\": 113,\n    \"final_toten_eV\": -383.78675386,\n    \"fmax_movable_eV_A\": 0.019900418111185505,\n    \"force_limit_eV_A\": 0.02,\n    \"compatibility_checks\": {\n      \"GGA\": true,\n      \"ENCUT\": true,\n      \"EDIFF\": true,\n      \"EDIFFG\": true,\n      \"ISPIN\": true,\n      \"ISMEAR\": true,\n      \"SIGMA\": true,\n      \"ISIF\": true,\n      \"dipole_off\": true,\n      \"atom_order\": true,\n      \"clean_Fe45\": true,\n      \"cell\": true,\n      \"flags\": true,\n      \"fixed_positions\": true,\n      \"input_fixed_positions\": true,\n      \"potcar\": true,\n      \"kmesh\": true,\n      \"magmom\": true\n    },\n    \"chemistry\": {\n      \"connectivity_changed\": false,\n      \"dissociated\": false,\n      \"chemical_event\": \"none\",\n      \"lost_bonds\": [],\n      \"formed_bonds\": [],\n      \"initial_fragment_count\": 1,\n      \"relaxed_fragment_count\": 1\n    },\n    \"signature_match\": true,\n    \"minimum_Fe_adsorbate_A\": 1.8476162371910552,\n    \"maximum_slab_displacement_A\": 0.26235584208263596,\n    \"internal_distances\": [\n      {\n        \"atoms_0based\": [\n          45,\n          46\n        ],\n        \"pair\": \"O-C\",\n        \"distance_A\": 1.3341109297402396,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          45,\n          47\n        ],\n        \"pair\": \"O-C\",\n        \"distance_A\": 2.515722634451942,\n        \"bond\": false\n      },\n      {\n        \"atoms_0based\": [\n          45,\n          48\n        ],\n        \"pair\": \"O-H\",\n        \"distance_A\": 0.9820694887129886,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          46,\n          47\n        ],\n        \"pair\": \"C-C\",\n        \"distance_A\": 1.3712032526732845,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          46,\n          48\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 1.905590546164681,\n        \"bond\": false\n      },\n      {\n        \"atoms_0based\": [\n          47,\n          48\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 2.666852130225045,\n        \"bond\": false\n      }\n    ],\n    \"contacts\": [\n      {\n        \"atom_0based\": 45,\n        \"symbol\": \"O\",\n        \"nearest_Fe_0based\": 41,\n        \"nearest_Fe_A\": 3.0487088208629873,\n        \"three_nearest_Fe\": [\n          [\n            3.0487088208629873,\n            41\n          ],\n          [\n            3.7109311439164068,\n            44\n          ],\n          [\n            3.715600929863306,\n            43\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.3000451911940426,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 2.930124830963207\n      },\n      {\n        \"atom_0based\": 46,\n        \"symbol\": \"C\",\n        \"nearest_Fe_0based\": 41,\n        \"nearest_Fe_A\": 1.8476162371910552,\n        \"three_nearest_Fe\": [\n          [\n            1.8476162371910552,\n            41\n          ],\n          [\n            2.6845165523771115,\n            43\n          ],\n          [\n            2.889427174927338,\n            38\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.34061288263686834,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 1.673101361722468\n      },\n      {\n        \"atom_0based\": 47,\n        \"symbol\": \"C\",\n        \"nearest_Fe_0based\": 40,\n        \"nearest_Fe_A\": 1.848760593392007,\n        \"three_nearest_Fe\": [\n          [\n            1.848760593392007,\n            40\n          ],\n          [\n            2.033635370705935,\n            41\n          ],\n          [\n            2.1698673632560457,\n            43\n          ]\n        ],\n        \"closest_site_projection\": \"long_bridge\",\n        \"lateral_offset_A\": 0.10111587299916268,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 1.039736151862721\n      },\n      {\n        \"atom_0based\": 48,\n        \"symbol\": \"H\",\n        \"nearest_Fe_0based\": 41,\n        \"nearest_Fe_A\": 3.7495291230437235,\n        \"three_nearest_Fe\": [\n          [\n            3.7495291230437235,\n            41\n          ],\n          [\n            4.003838087823336,\n            43\n          ],\n          [\n            4.237582707077029,\n            38\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.6860884635222396,\n        \"off_symmetry\": true,\n        \"height_above_top_Fe_A\": 3.546627978434765\n      }\n    ],\n    \"blockers\": [],\n    \"eligible_for_review\": true,\n    \"scientific_acceptance\": false,\n    \"duplicate_of\": null\n  },\n  \"decision\": {\n    \"decision\": \"accept\",\n    \"reason\": \"Convergence, intended graph, geometry, branch and source hashes pass; user explicitly accepts missing scheduler terminal evidence for this result only.\"\n  },\n  \"scheduler_exception\": {\n    \"scope\": \"three named completed adsorption calculations only\",\n    \"authorizing_user_request\": \"\\u90fd\\u5f55\\u5165\\u5427 \\u7136\\u540e\\u628a\\u90a315\\u4e2a\\u4e5f\\u63d0\\u4ea4gpu\",\n    \"authorized_at\": \"2026-10-12T16:56:28.968744+00:00\",\n    \"names\": [\n      \"02_extra2\",\n      \"04_cfg2\",\n      \"05_cfg1\"\n    ],\n    \"requirement_waived\": \"original_scheduler_DONE_evidence\",\n    \"scheduler_status\": \"UNKNOWN\",\n    \"infer_DONE\": false,\n    \"scientific_checks_waived\": [],\n    \"production_policy_changed\": false\n  },\n  \"analysis_sha256\": \"73d1c4def2f44db2106cc4afa7e8c4e67db5a4ab78210199811846c84711a53e\",\n  \"previous_batch_sha256\": \"4e7685bbe9835a69a51a900300fb6568d058dbc0bcc6f4e27adef0d755298fcb\",\n  \"reviewer\": \"User-authorized Codex scientific review\",\n  \"reviewed_at\": \"2026-10-12T16:56:28.968744+00:00\"\n}\n",
+            "sha256": "fcb8e5f72736bbc3127bc3b441ce7573a68a0b86cb470a45812512beb9b564ab"
+          },
+          "immutable_reference": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\registration_exception_20261013\\05_cfg1_review.json#sha256=fcb8e5f72736bbc3127bc3b441ce7573a68a0b86cb470a45812512beb9b564ab"
+        },
+        "content": {
+          "text": "{\n  \"record\": {\n    \"name\": \"05_cfg1\",\n    \"job_id\": \"9839754\",\n    \"species_id\": \"05\",\n    \"target_graph\": \"[C][C]O\",\n    \"formula\": \"C2HO\",\n    \"directory\": \"C:\\\\Users\\\\86177\\\\Desktop\\\\work\\\\calculations\\\\fe110_five_c2_adsorption_20261006\\\\final_review_20261012\\\\sources\\\\05_cfg1\",\n    \"collection_sha256\": \"e751334ab80ce0a8c99d3735a7bab2ef111cabe88b57228cdafe4ab17630fad2\",\n    \"candidate_manifest_sha256\": \"35a97903fbd6215e3d780e57aebbdbd93d018f3cafe7fc220104364002d06a0b\",\n    \"convergence\": {\n      \"normal_completion\": true,\n      \"ionic_converged\": true,\n      \"last_electronic_iteration\": 5,\n      \"last_delta_e_eV\": 3.0489e-06,\n      \"last_delta_eps_eV\": -1.0374e-07,\n      \"ediff_eV\": 1e-05,\n      \"nelm\": 200,\n      \"electronically_converged\": true,\n      \"electronic_convergence_source\": \"OUTCAR_EDIFF_TERMINATION\",\n      \"latest_started_electronic_cycle\": {\n        \"cycle\": 113,\n        \"ionic_step\": 113,\n        \"iteration\": 5,\n        \"delta_e_eV\": 3.0489e-06,\n        \"delta_eps_eV\": -1.0374e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"latest_completed_electronic_cycle\": {\n        \"cycle\": 113,\n        \"ionic_step\": 113,\n        \"iteration\": 5,\n        \"delta_e_eV\": 3.0489e-06,\n        \"delta_eps_eV\": -1.0374e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"final_target_step\": {\n        \"cycle\": 113,\n        \"ionic_step\": 113,\n        \"iteration\": 5,\n        \"delta_e_eV\": 3.0489e-06,\n        \"delta_eps_eV\": -1.0374e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"final_target_complete\": true,\n      \"final_target_explicit_convergence\": true,\n      \"incomplete\": false,\n      \"status\": \"PASS\"\n    },\n    \"ionic_steps\": 113,\n    \"final_toten_eV\": -383.78675386,\n    \"fmax_movable_eV_A\": 0.019900418111185505,\n    \"force_limit_eV_A\": 0.02,\n    \"compatibility_checks\": {\n      \"GGA\": true,\n      \"ENCUT\": true,\n      \"EDIFF\": true,\n      \"EDIFFG\": true,\n      \"ISPIN\": true,\n      \"ISMEAR\": true,\n      \"SIGMA\": true,\n      \"ISIF\": true,\n      \"dipole_off\": true,\n      \"atom_order\": true,\n      \"clean_Fe45\": true,\n      \"cell\": true,\n      \"flags\": true,\n      \"fixed_positions\": true,\n      \"input_fixed_positions\": true,\n      \"potcar\": true,\n      \"kmesh\": true,\n      \"magmom\": true\n    },\n    \"chemistry\": {\n      \"connectivity_changed\": false,\n      \"dissociated\": false,\n      \"chemical_event\": \"none\",\n      \"lost_bonds\": [],\n      \"formed_bonds\": [],\n      \"initial_fragment_count\": 1,\n      \"relaxed_fragment_count\": 1\n    },\n    \"signature_match\": true,\n    \"minimum_Fe_adsorbate_A\": 1.8476162371910552,\n    \"maximum_slab_displacement_A\": 0.26235584208263596,\n    \"internal_distances\": [\n      {\n        \"atoms_0based\": [\n          45,\n          46\n        ],\n        \"pair\": \"O-C\",\n        \"distance_A\": 1.3341109297402396,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          45,\n          47\n        ],\n        \"pair\": \"O-C\",\n        \"distance_A\": 2.515722634451942,\n        \"bond\": false\n      },\n      {\n        \"atoms_0based\": [\n          45,\n          48\n        ],\n        \"pair\": \"O-H\",\n        \"distance_A\": 0.9820694887129886,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          46,\n          47\n        ],\n        \"pair\": \"C-C\",\n        \"distance_A\": 1.3712032526732845,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          46,\n          48\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 1.905590546164681,\n        \"bond\": false\n      },\n      {\n        \"atoms_0based\": [\n          47,\n          48\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 2.666852130225045,\n        \"bond\": false\n      }\n    ],\n    \"contacts\": [\n      {\n        \"atom_0based\": 45,\n        \"symbol\": \"O\",\n        \"nearest_Fe_0based\": 41,\n        \"nearest_Fe_A\": 3.0487088208629873,\n        \"three_nearest_Fe\": [\n          [\n            3.0487088208629873,\n            41\n          ],\n          [\n            3.7109311439164068,\n            44\n          ],\n          [\n            3.715600929863306,\n            43\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.3000451911940426,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 2.930124830963207\n      },\n      {\n        \"atom_0based\": 46,\n        \"symbol\": \"C\",\n        \"nearest_Fe_0based\": 41,\n        \"nearest_Fe_A\": 1.8476162371910552,\n        \"three_nearest_Fe\": [\n          [\n            1.8476162371910552,\n            41\n          ],\n          [\n            2.6845165523771115,\n            43\n          ],\n          [\n            2.889427174927338,\n            38\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.34061288263686834,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 1.673101361722468\n      },\n      {\n        \"atom_0based\": 47,\n        \"symbol\": \"C\",\n        \"nearest_Fe_0based\": 40,\n        \"nearest_Fe_A\": 1.848760593392007,\n        \"three_nearest_Fe\": [\n          [\n            1.848760593392007,\n            40\n          ],\n          [\n            2.033635370705935,\n            41\n          ],\n          [\n            2.1698673632560457,\n            43\n          ]\n        ],\n        \"closest_site_projection\": \"long_bridge\",\n        \"lateral_offset_A\": 0.10111587299916268,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 1.039736151862721\n      },\n      {\n        \"atom_0based\": 48,\n        \"symbol\": \"H\",\n        \"nearest_Fe_0based\": 41,\n        \"nearest_Fe_A\": 3.7495291230437235,\n        \"three_nearest_Fe\": [\n          [\n            3.7495291230437235,\n            41\n          ],\n          [\n            4.003838087823336,\n            43\n          ],\n          [\n            4.237582707077029,\n            38\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.6860884635222396,\n        \"off_symmetry\": true,\n        \"height_above_top_Fe_A\": 3.546627978434765\n      }\n    ],\n    \"blockers\": [],\n    \"eligible_for_review\": true,\n    \"scientific_acceptance\": false,\n    \"duplicate_of\": null\n  },\n  \"decision\": {\n    \"decision\": \"accept\",\n    \"reason\": \"Convergence, intended graph, geometry, branch and source hashes pass; user explicitly accepts missing scheduler terminal evidence for this result only.\"\n  },\n  \"scheduler_exception\": {\n    \"scope\": \"three named completed adsorption calculations only\",\n    \"authorizing_user_request\": \"\\u90fd\\u5f55\\u5165\\u5427 \\u7136\\u540e\\u628a\\u90a315\\u4e2a\\u4e5f\\u63d0\\u4ea4gpu\",\n    \"authorized_at\": \"2026-10-12T16:56:28.968744+00:00\",\n    \"names\": [\n      \"02_extra2\",\n      \"04_cfg2\",\n      \"05_cfg1\"\n    ],\n    \"requirement_waived\": \"original_scheduler_DONE_evidence\",\n    \"scheduler_status\": \"UNKNOWN\",\n    \"infer_DONE\": false,\n    \"scientific_checks_waived\": [],\n    \"production_policy_changed\": false\n  },\n  \"analysis_sha256\": \"73d1c4def2f44db2106cc4afa7e8c4e67db5a4ab78210199811846c84711a53e\",\n  \"previous_batch_sha256\": \"4e7685bbe9835a69a51a900300fb6568d058dbc0bcc6f4e27adef0d755298fcb\",\n  \"reviewer\": \"User-authorized Codex scientific review\",\n  \"reviewed_at\": \"2026-10-12T16:56:28.968744+00:00\"\n}\n",
+          "start": 0,
+          "end": 7314,
+          "sha256": "fcb8e5f72736bbc3127bc3b441ce7573a68a0b86cb470a45812512beb9b564ab"
+        },
+        "review": {
+          "reviewer": "User-authorized Codex scientific review",
+          "reviewed_at": "2026-10-12T16:56:28.968744+00:00",
+          "decision": "accepted",
+          "scope": "registry_acceptance",
+          "subject_sha256": "dec8c58f60c6e0481ec0e92539f5521924728d39972709a1579cae7352d3b4aa"
+        },
+        "transfer": {
+          "review_sha256": "0d6cdb5604abedbb236d1d7fdd85f42c59e290c2eff5112c8464b8682af5d655",
+          "domain": "adsorption_workflow",
+          "compatibility": {
+            "branch": "true_fe110_5layer_5x5x1",
+            "cell_angstrom": [
+              [
+                8.4808451022,
+                0.0,
+                0.0
+              ],
+              [
+                4.2404225511,
+                5.996863081958339,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                22.995817442611116
+              ]
+            ],
+            "clean_slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+            "coverage": "3x3_one_C2HO",
+            "ediff_ev": 1e-05,
+            "encut_ev": 400.0,
+            "final_energy_convention": "fe110_converged_toten_sigma0p20_v1",
+            "fixed_atom_indices_zero_based": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "force_threshold_ev_per_A": 0.02,
+            "ismear": 1,
+            "kmesh": [
+              5,
+              5,
+              1
+            ],
+            "ldipol": false,
+            "magnetic_state": "ispin2_Fe2p2_adsorbate0_seed",
+            "material": "fe",
+            "potcar_bundle_sha256": "cfdeb95d5ce5ab92e2ff0c0cdd1cd3870fbbe3a929822c631e09fd828c511a4f",
+            "potcar_family": "paw_pbe",
+            "sigma_ev": 0.2,
+            "slab_layers": 5,
+            "slab_model": "fe45_bottom18_fixed",
+            "surface": "fe110",
+            "vacuum_thickness_angstrom": 14.981751034348626,
+            "xc": "pbe"
+          }
+        }
+      },
+      "scientific_validation": {
+        "owner": "vasp_relaxation",
+        "directory": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\sources\\05_cfg1",
+        "source_files": {
+          "INCAR": "3a93daccd880e5130601dc3f615e1c48710ece237f8d7a221b90ace41e53c745",
+          "POSCAR": "bd4923c9ac7be6a0da089c1434bda66de27beaf4ad52b0366436559db2c40339",
+          "CONTCAR": "6c595fad4b5557968d73c19ae30a5d13126a5fd9dcb2bc6bba7a808fb01d01eb",
+          "OUTCAR": "0e63250143bf9859196dc692195355c5d03ea8d5ce75a3382fe7d871b9329bf4",
+          "OSZICAR": "9b012722463900b34ececa63bd4d7c7dbfe48c9cb6c47038d953a48a93245f62"
+        },
+        "completion_review_sha256": "fcb8e5f72736bbc3127bc3b441ce7573a68a0b86cb470a45812512beb9b564ab",
+        "scheduler_exception": {
+          "scope": "three named completed adsorption calculations only",
+          "authorizing_user_request": "\u90fd\u5f55\u5165\u5427 \u7136\u540e\u628a\u90a315\u4e2a\u4e5f\u63d0\u4ea4gpu",
+          "authorized_at": "2026-10-12T16:56:28.968744+00:00",
+          "names": [
+            "02_extra2",
+            "04_cfg2",
+            "05_cfg1"
+          ],
+          "requirement_waived": "original_scheduler_DONE_evidence",
+          "scheduler_status": "UNKNOWN",
+          "infer_DONE": false,
+          "scientific_checks_waived": [],
+          "production_policy_changed": false
+        }
+      }
+    },
+    "fe110_five_c2_adsorption_20261006_05_cfg1_scheduler_exception_20261013_final_max_movable_force": {
+      "type": "calculated_result",
+      "registry_stage": "candidate",
+      "evidence": {
+        "claim": {
+          "id": "fe110_five_c2_adsorption_20261006_05_cfg1_scheduler_exception_20261013_final_max_movable_force",
+          "type": "calculated_result",
+          "statement": "Reviewed VASP final_max_movable_force for fe110_five_c2_adsorption_20261006_05_cfg1; no prediction or adsorption-energy inference.",
+          "source_reference": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\registration_exception_20261013\\05_cfg1_review.json",
+          "status": "reviewed",
+          "evidence_relationship": "supports",
+          "scope": "registry_acceptance",
+          "domain": "adsorption_workflow",
+          "compatibility": {
+            "branch": "true_fe110_5layer_5x5x1",
+            "cell_angstrom": [
+              [
+                8.4808451022,
+                0.0,
+                0.0
+              ],
+              [
+                4.2404225511,
+                5.996863081958339,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                22.995817442611116
+              ]
+            ],
+            "clean_slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+            "coverage": "3x3_one_C2HO",
+            "ediff_ev": 1e-05,
+            "encut_ev": 400.0,
+            "final_energy_convention": "fe110_converged_toten_sigma0p20_v1",
+            "fixed_atom_indices_zero_based": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "force_threshold_ev_per_A": 0.02,
+            "ismear": 1,
+            "kmesh": [
+              5,
+              5,
+              1
+            ],
+            "ldipol": false,
+            "magnetic_state": "ispin2_Fe2p2_adsorbate0_seed",
+            "material": "fe",
+            "potcar_bundle_sha256": "cfdeb95d5ce5ab92e2ff0c0cdd1cd3870fbbe3a929822c631e09fd828c511a4f",
+            "potcar_family": "paw_pbe",
+            "sigma_ev": 0.2,
+            "slab_layers": 5,
+            "slab_model": "fe45_bottom18_fixed",
+            "surface": "fe110",
+            "vacuum_thickness_angstrom": 14.981751034348626,
+            "xc": "pbe"
+          },
+          "result_sha256": "47c3bd0e8103e6f7f4c7a632b8b5afdd78d89009c15bc413b5c413abd82635f7",
+          "validation_sha256": "27c59a1f07730073c3a4e67a4879ff581a1a266a1288fda853f4da1e90fa06f0"
+        },
+        "source": {
+          "identity": "hash-bound adsorption completion review of collected VASP outputs",
+          "reference": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\registration_exception_20261013\\05_cfg1_review.json",
+          "retrieved_at": "2026-10-12T16:56:28.968744+00:00",
+          "snapshot": {
+            "text": "{\n  \"record\": {\n    \"name\": \"05_cfg1\",\n    \"job_id\": \"9839754\",\n    \"species_id\": \"05\",\n    \"target_graph\": \"[C][C]O\",\n    \"formula\": \"C2HO\",\n    \"directory\": \"C:\\\\Users\\\\86177\\\\Desktop\\\\work\\\\calculations\\\\fe110_five_c2_adsorption_20261006\\\\final_review_20261012\\\\sources\\\\05_cfg1\",\n    \"collection_sha256\": \"e751334ab80ce0a8c99d3735a7bab2ef111cabe88b57228cdafe4ab17630fad2\",\n    \"candidate_manifest_sha256\": \"35a97903fbd6215e3d780e57aebbdbd93d018f3cafe7fc220104364002d06a0b\",\n    \"convergence\": {\n      \"normal_completion\": true,\n      \"ionic_converged\": true,\n      \"last_electronic_iteration\": 5,\n      \"last_delta_e_eV\": 3.0489e-06,\n      \"last_delta_eps_eV\": -1.0374e-07,\n      \"ediff_eV\": 1e-05,\n      \"nelm\": 200,\n      \"electronically_converged\": true,\n      \"electronic_convergence_source\": \"OUTCAR_EDIFF_TERMINATION\",\n      \"latest_started_electronic_cycle\": {\n        \"cycle\": 113,\n        \"ionic_step\": 113,\n        \"iteration\": 5,\n        \"delta_e_eV\": 3.0489e-06,\n        \"delta_eps_eV\": -1.0374e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"latest_completed_electronic_cycle\": {\n        \"cycle\": 113,\n        \"ionic_step\": 113,\n        \"iteration\": 5,\n        \"delta_e_eV\": 3.0489e-06,\n        \"delta_eps_eV\": -1.0374e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"final_target_step\": {\n        \"cycle\": 113,\n        \"ionic_step\": 113,\n        \"iteration\": 5,\n        \"delta_e_eV\": 3.0489e-06,\n        \"delta_eps_eV\": -1.0374e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"final_target_complete\": true,\n      \"final_target_explicit_convergence\": true,\n      \"incomplete\": false,\n      \"status\": \"PASS\"\n    },\n    \"ionic_steps\": 113,\n    \"final_toten_eV\": -383.78675386,\n    \"fmax_movable_eV_A\": 0.019900418111185505,\n    \"force_limit_eV_A\": 0.02,\n    \"compatibility_checks\": {\n      \"GGA\": true,\n      \"ENCUT\": true,\n      \"EDIFF\": true,\n      \"EDIFFG\": true,\n      \"ISPIN\": true,\n      \"ISMEAR\": true,\n      \"SIGMA\": true,\n      \"ISIF\": true,\n      \"dipole_off\": true,\n      \"atom_order\": true,\n      \"clean_Fe45\": true,\n      \"cell\": true,\n      \"flags\": true,\n      \"fixed_positions\": true,\n      \"input_fixed_positions\": true,\n      \"potcar\": true,\n      \"kmesh\": true,\n      \"magmom\": true\n    },\n    \"chemistry\": {\n      \"connectivity_changed\": false,\n      \"dissociated\": false,\n      \"chemical_event\": \"none\",\n      \"lost_bonds\": [],\n      \"formed_bonds\": [],\n      \"initial_fragment_count\": 1,\n      \"relaxed_fragment_count\": 1\n    },\n    \"signature_match\": true,\n    \"minimum_Fe_adsorbate_A\": 1.8476162371910552,\n    \"maximum_slab_displacement_A\": 0.26235584208263596,\n    \"internal_distances\": [\n      {\n        \"atoms_0based\": [\n          45,\n          46\n        ],\n        \"pair\": \"O-C\",\n        \"distance_A\": 1.3341109297402396,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          45,\n          47\n        ],\n        \"pair\": \"O-C\",\n        \"distance_A\": 2.515722634451942,\n        \"bond\": false\n      },\n      {\n        \"atoms_0based\": [\n          45,\n          48\n        ],\n        \"pair\": \"O-H\",\n        \"distance_A\": 0.9820694887129886,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          46,\n          47\n        ],\n        \"pair\": \"C-C\",\n        \"distance_A\": 1.3712032526732845,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          46,\n          48\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 1.905590546164681,\n        \"bond\": false\n      },\n      {\n        \"atoms_0based\": [\n          47,\n          48\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 2.666852130225045,\n        \"bond\": false\n      }\n    ],\n    \"contacts\": [\n      {\n        \"atom_0based\": 45,\n        \"symbol\": \"O\",\n        \"nearest_Fe_0based\": 41,\n        \"nearest_Fe_A\": 3.0487088208629873,\n        \"three_nearest_Fe\": [\n          [\n            3.0487088208629873,\n            41\n          ],\n          [\n            3.7109311439164068,\n            44\n          ],\n          [\n            3.715600929863306,\n            43\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.3000451911940426,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 2.930124830963207\n      },\n      {\n        \"atom_0based\": 46,\n        \"symbol\": \"C\",\n        \"nearest_Fe_0based\": 41,\n        \"nearest_Fe_A\": 1.8476162371910552,\n        \"three_nearest_Fe\": [\n          [\n            1.8476162371910552,\n            41\n          ],\n          [\n            2.6845165523771115,\n            43\n          ],\n          [\n            2.889427174927338,\n            38\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.34061288263686834,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 1.673101361722468\n      },\n      {\n        \"atom_0based\": 47,\n        \"symbol\": \"C\",\n        \"nearest_Fe_0based\": 40,\n        \"nearest_Fe_A\": 1.848760593392007,\n        \"three_nearest_Fe\": [\n          [\n            1.848760593392007,\n            40\n          ],\n          [\n            2.033635370705935,\n            41\n          ],\n          [\n            2.1698673632560457,\n            43\n          ]\n        ],\n        \"closest_site_projection\": \"long_bridge\",\n        \"lateral_offset_A\": 0.10111587299916268,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 1.039736151862721\n      },\n      {\n        \"atom_0based\": 48,\n        \"symbol\": \"H\",\n        \"nearest_Fe_0based\": 41,\n        \"nearest_Fe_A\": 3.7495291230437235,\n        \"three_nearest_Fe\": [\n          [\n            3.7495291230437235,\n            41\n          ],\n          [\n            4.003838087823336,\n            43\n          ],\n          [\n            4.237582707077029,\n            38\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.6860884635222396,\n        \"off_symmetry\": true,\n        \"height_above_top_Fe_A\": 3.546627978434765\n      }\n    ],\n    \"blockers\": [],\n    \"eligible_for_review\": true,\n    \"scientific_acceptance\": false,\n    \"duplicate_of\": null\n  },\n  \"decision\": {\n    \"decision\": \"accept\",\n    \"reason\": \"Convergence, intended graph, geometry, branch and source hashes pass; user explicitly accepts missing scheduler terminal evidence for this result only.\"\n  },\n  \"scheduler_exception\": {\n    \"scope\": \"three named completed adsorption calculations only\",\n    \"authorizing_user_request\": \"\\u90fd\\u5f55\\u5165\\u5427 \\u7136\\u540e\\u628a\\u90a315\\u4e2a\\u4e5f\\u63d0\\u4ea4gpu\",\n    \"authorized_at\": \"2026-10-12T16:56:28.968744+00:00\",\n    \"names\": [\n      \"02_extra2\",\n      \"04_cfg2\",\n      \"05_cfg1\"\n    ],\n    \"requirement_waived\": \"original_scheduler_DONE_evidence\",\n    \"scheduler_status\": \"UNKNOWN\",\n    \"infer_DONE\": false,\n    \"scientific_checks_waived\": [],\n    \"production_policy_changed\": false\n  },\n  \"analysis_sha256\": \"73d1c4def2f44db2106cc4afa7e8c4e67db5a4ab78210199811846c84711a53e\",\n  \"previous_batch_sha256\": \"4e7685bbe9835a69a51a900300fb6568d058dbc0bcc6f4e27adef0d755298fcb\",\n  \"reviewer\": \"User-authorized Codex scientific review\",\n  \"reviewed_at\": \"2026-10-12T16:56:28.968744+00:00\"\n}\n",
+            "sha256": "fcb8e5f72736bbc3127bc3b441ce7573a68a0b86cb470a45812512beb9b564ab"
+          },
+          "immutable_reference": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\registration_exception_20261013\\05_cfg1_review.json#sha256=fcb8e5f72736bbc3127bc3b441ce7573a68a0b86cb470a45812512beb9b564ab"
+        },
+        "content": {
+          "text": "{\n  \"record\": {\n    \"name\": \"05_cfg1\",\n    \"job_id\": \"9839754\",\n    \"species_id\": \"05\",\n    \"target_graph\": \"[C][C]O\",\n    \"formula\": \"C2HO\",\n    \"directory\": \"C:\\\\Users\\\\86177\\\\Desktop\\\\work\\\\calculations\\\\fe110_five_c2_adsorption_20261006\\\\final_review_20261012\\\\sources\\\\05_cfg1\",\n    \"collection_sha256\": \"e751334ab80ce0a8c99d3735a7bab2ef111cabe88b57228cdafe4ab17630fad2\",\n    \"candidate_manifest_sha256\": \"35a97903fbd6215e3d780e57aebbdbd93d018f3cafe7fc220104364002d06a0b\",\n    \"convergence\": {\n      \"normal_completion\": true,\n      \"ionic_converged\": true,\n      \"last_electronic_iteration\": 5,\n      \"last_delta_e_eV\": 3.0489e-06,\n      \"last_delta_eps_eV\": -1.0374e-07,\n      \"ediff_eV\": 1e-05,\n      \"nelm\": 200,\n      \"electronically_converged\": true,\n      \"electronic_convergence_source\": \"OUTCAR_EDIFF_TERMINATION\",\n      \"latest_started_electronic_cycle\": {\n        \"cycle\": 113,\n        \"ionic_step\": 113,\n        \"iteration\": 5,\n        \"delta_e_eV\": 3.0489e-06,\n        \"delta_eps_eV\": -1.0374e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"latest_completed_electronic_cycle\": {\n        \"cycle\": 113,\n        \"ionic_step\": 113,\n        \"iteration\": 5,\n        \"delta_e_eV\": 3.0489e-06,\n        \"delta_eps_eV\": -1.0374e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"final_target_step\": {\n        \"cycle\": 113,\n        \"ionic_step\": 113,\n        \"iteration\": 5,\n        \"delta_e_eV\": 3.0489e-06,\n        \"delta_eps_eV\": -1.0374e-07,\n        \"complete\": true,\n        \"explicit_convergence\": false,\n        \"malformed\": false\n      },\n      \"final_target_complete\": true,\n      \"final_target_explicit_convergence\": true,\n      \"incomplete\": false,\n      \"status\": \"PASS\"\n    },\n    \"ionic_steps\": 113,\n    \"final_toten_eV\": -383.78675386,\n    \"fmax_movable_eV_A\": 0.019900418111185505,\n    \"force_limit_eV_A\": 0.02,\n    \"compatibility_checks\": {\n      \"GGA\": true,\n      \"ENCUT\": true,\n      \"EDIFF\": true,\n      \"EDIFFG\": true,\n      \"ISPIN\": true,\n      \"ISMEAR\": true,\n      \"SIGMA\": true,\n      \"ISIF\": true,\n      \"dipole_off\": true,\n      \"atom_order\": true,\n      \"clean_Fe45\": true,\n      \"cell\": true,\n      \"flags\": true,\n      \"fixed_positions\": true,\n      \"input_fixed_positions\": true,\n      \"potcar\": true,\n      \"kmesh\": true,\n      \"magmom\": true\n    },\n    \"chemistry\": {\n      \"connectivity_changed\": false,\n      \"dissociated\": false,\n      \"chemical_event\": \"none\",\n      \"lost_bonds\": [],\n      \"formed_bonds\": [],\n      \"initial_fragment_count\": 1,\n      \"relaxed_fragment_count\": 1\n    },\n    \"signature_match\": true,\n    \"minimum_Fe_adsorbate_A\": 1.8476162371910552,\n    \"maximum_slab_displacement_A\": 0.26235584208263596,\n    \"internal_distances\": [\n      {\n        \"atoms_0based\": [\n          45,\n          46\n        ],\n        \"pair\": \"O-C\",\n        \"distance_A\": 1.3341109297402396,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          45,\n          47\n        ],\n        \"pair\": \"O-C\",\n        \"distance_A\": 2.515722634451942,\n        \"bond\": false\n      },\n      {\n        \"atoms_0based\": [\n          45,\n          48\n        ],\n        \"pair\": \"O-H\",\n        \"distance_A\": 0.9820694887129886,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          46,\n          47\n        ],\n        \"pair\": \"C-C\",\n        \"distance_A\": 1.3712032526732845,\n        \"bond\": true\n      },\n      {\n        \"atoms_0based\": [\n          46,\n          48\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 1.905590546164681,\n        \"bond\": false\n      },\n      {\n        \"atoms_0based\": [\n          47,\n          48\n        ],\n        \"pair\": \"C-H\",\n        \"distance_A\": 2.666852130225045,\n        \"bond\": false\n      }\n    ],\n    \"contacts\": [\n      {\n        \"atom_0based\": 45,\n        \"symbol\": \"O\",\n        \"nearest_Fe_0based\": 41,\n        \"nearest_Fe_A\": 3.0487088208629873,\n        \"three_nearest_Fe\": [\n          [\n            3.0487088208629873,\n            41\n          ],\n          [\n            3.7109311439164068,\n            44\n          ],\n          [\n            3.715600929863306,\n            43\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.3000451911940426,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 2.930124830963207\n      },\n      {\n        \"atom_0based\": 46,\n        \"symbol\": \"C\",\n        \"nearest_Fe_0based\": 41,\n        \"nearest_Fe_A\": 1.8476162371910552,\n        \"three_nearest_Fe\": [\n          [\n            1.8476162371910552,\n            41\n          ],\n          [\n            2.6845165523771115,\n            43\n          ],\n          [\n            2.889427174927338,\n            38\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.34061288263686834,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 1.673101361722468\n      },\n      {\n        \"atom_0based\": 47,\n        \"symbol\": \"C\",\n        \"nearest_Fe_0based\": 40,\n        \"nearest_Fe_A\": 1.848760593392007,\n        \"three_nearest_Fe\": [\n          [\n            1.848760593392007,\n            40\n          ],\n          [\n            2.033635370705935,\n            41\n          ],\n          [\n            2.1698673632560457,\n            43\n          ]\n        ],\n        \"closest_site_projection\": \"long_bridge\",\n        \"lateral_offset_A\": 0.10111587299916268,\n        \"off_symmetry\": false,\n        \"height_above_top_Fe_A\": 1.039736151862721\n      },\n      {\n        \"atom_0based\": 48,\n        \"symbol\": \"H\",\n        \"nearest_Fe_0based\": 41,\n        \"nearest_Fe_A\": 3.7495291230437235,\n        \"three_nearest_Fe\": [\n          [\n            3.7495291230437235,\n            41\n          ],\n          [\n            4.003838087823336,\n            43\n          ],\n          [\n            4.237582707077029,\n            38\n          ]\n        ],\n        \"closest_site_projection\": \"top\",\n        \"lateral_offset_A\": 0.6860884635222396,\n        \"off_symmetry\": true,\n        \"height_above_top_Fe_A\": 3.546627978434765\n      }\n    ],\n    \"blockers\": [],\n    \"eligible_for_review\": true,\n    \"scientific_acceptance\": false,\n    \"duplicate_of\": null\n  },\n  \"decision\": {\n    \"decision\": \"accept\",\n    \"reason\": \"Convergence, intended graph, geometry, branch and source hashes pass; user explicitly accepts missing scheduler terminal evidence for this result only.\"\n  },\n  \"scheduler_exception\": {\n    \"scope\": \"three named completed adsorption calculations only\",\n    \"authorizing_user_request\": \"\\u90fd\\u5f55\\u5165\\u5427 \\u7136\\u540e\\u628a\\u90a315\\u4e2a\\u4e5f\\u63d0\\u4ea4gpu\",\n    \"authorized_at\": \"2026-10-12T16:56:28.968744+00:00\",\n    \"names\": [\n      \"02_extra2\",\n      \"04_cfg2\",\n      \"05_cfg1\"\n    ],\n    \"requirement_waived\": \"original_scheduler_DONE_evidence\",\n    \"scheduler_status\": \"UNKNOWN\",\n    \"infer_DONE\": false,\n    \"scientific_checks_waived\": [],\n    \"production_policy_changed\": false\n  },\n  \"analysis_sha256\": \"73d1c4def2f44db2106cc4afa7e8c4e67db5a4ab78210199811846c84711a53e\",\n  \"previous_batch_sha256\": \"4e7685bbe9835a69a51a900300fb6568d058dbc0bcc6f4e27adef0d755298fcb\",\n  \"reviewer\": \"User-authorized Codex scientific review\",\n  \"reviewed_at\": \"2026-10-12T16:56:28.968744+00:00\"\n}\n",
+          "start": 0,
+          "end": 7314,
+          "sha256": "fcb8e5f72736bbc3127bc3b441ce7573a68a0b86cb470a45812512beb9b564ab"
+        },
+        "review": {
+          "reviewer": "User-authorized Codex scientific review",
+          "reviewed_at": "2026-10-12T16:56:28.968744+00:00",
+          "decision": "accepted",
+          "scope": "registry_acceptance",
+          "subject_sha256": "b45c18e47e66b112b8a423ff483b304ed508773706d887becd01962e99af42f8"
+        },
+        "transfer": {
+          "review_sha256": "ccf1d2bab86aa4a5cf15a6fdd175429fc4e9d13e1e88e00876a6eb147c2cd6d3",
+          "domain": "adsorption_workflow",
+          "compatibility": {
+            "branch": "true_fe110_5layer_5x5x1",
+            "cell_angstrom": [
+              [
+                8.4808451022,
+                0.0,
+                0.0
+              ],
+              [
+                4.2404225511,
+                5.996863081958339,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                22.995817442611116
+              ]
+            ],
+            "clean_slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+            "coverage": "3x3_one_C2HO",
+            "ediff_ev": 1e-05,
+            "encut_ev": 400.0,
+            "final_energy_convention": "fe110_converged_toten_sigma0p20_v1",
+            "fixed_atom_indices_zero_based": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17
+            ],
+            "force_threshold_ev_per_A": 0.02,
+            "ismear": 1,
+            "kmesh": [
+              5,
+              5,
+              1
+            ],
+            "ldipol": false,
+            "magnetic_state": "ispin2_Fe2p2_adsorbate0_seed",
+            "material": "fe",
+            "potcar_bundle_sha256": "cfdeb95d5ce5ab92e2ff0c0cdd1cd3870fbbe3a929822c631e09fd828c511a4f",
+            "potcar_family": "paw_pbe",
+            "sigma_ev": 0.2,
+            "slab_layers": 5,
+            "slab_model": "fe45_bottom18_fixed",
+            "surface": "fe110",
+            "vacuum_thickness_angstrom": 14.981751034348626,
+            "xc": "pbe"
+          }
+        }
+      },
+      "scientific_validation": {
+        "owner": "vasp_relaxation",
+        "directory": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\sources\\05_cfg1",
+        "source_files": {
+          "INCAR": "3a93daccd880e5130601dc3f615e1c48710ece237f8d7a221b90ace41e53c745",
+          "POSCAR": "bd4923c9ac7be6a0da089c1434bda66de27beaf4ad52b0366436559db2c40339",
+          "CONTCAR": "6c595fad4b5557968d73c19ae30a5d13126a5fd9dcb2bc6bba7a808fb01d01eb",
+          "OUTCAR": "0e63250143bf9859196dc692195355c5d03ea8d5ce75a3382fe7d871b9329bf4",
+          "OSZICAR": "9b012722463900b34ececa63bd4d7c7dbfe48c9cb6c47038d953a48a93245f62"
+        },
+        "completion_review_sha256": "fcb8e5f72736bbc3127bc3b441ce7573a68a0b86cb470a45812512beb9b564ab",
+        "scheduler_exception": {
+          "scope": "three named completed adsorption calculations only",
+          "authorizing_user_request": "\u90fd\u5f55\u5165\u5427 \u7136\u540e\u628a\u90a315\u4e2a\u4e5f\u63d0\u4ea4gpu",
+          "authorized_at": "2026-10-12T16:56:28.968744+00:00",
+          "names": [
+            "02_extra2",
+            "04_cfg2",
+            "05_cfg1"
+          ],
+          "requirement_waived": "original_scheduler_DONE_evidence",
+          "scheduler_status": "UNKNOWN",
+          "infer_DONE": false,
+          "scientific_checks_waived": [],
+          "production_policy_changed": false
+        }
+      }
+    }
+  }
+}

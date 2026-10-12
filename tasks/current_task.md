@@ -3,17 +3,13 @@
 
 ## Objective
 
-Review the fourteen completed Fe110 adsorption01–05 structures, surface-aware duplicates and compatibility, and register only fully eligible results.
+Finish three authorized adsorption registrations and submit the reviewed fifteen 06–10 GPU pre-relaxations after scheduler recovery.
 
 ## Current Evidence Snapshot
 
-- All14 source sets collected and SHA256-verified; all VASP normal termination, final SCF and movable-atom force conditions pass.
-- 13 intended graphs/H placements preserved;03_cfg0_direct_vasp reclassifies to CH+CO fragments and is rejected for the original intact target.
-- Five surface-aware duplicate sources; eight retained geometric representatives are not a global-minimum or distinct-basin proof.
-- Canonical append-only registration and DB readback confirm5 accepted representatives,5 duplicates,1 rejected original target and3 needs_review.
-- 02_extra2,04_cfg2,05_cfg1 have valid scientific output but lack required original scheduler DONE evidence; keep UNKNOWN and do not invent acceptance.
-- 112 new source-file records,14 reviews,14 compatibility records,14 scheduler observations and10 result records; no duplicate jobs or calculations.
-- No adsorption-energy reference tuple, thermal correction, Excel promotion, model promotion or new scientific submission. Prepared06–10 remain deferred.
+- Registry readback:8 accepted,5 duplicate,1 rejected; three new accepted representatives retain scheduler UNKNOWN under explicit user authority.
+- Fifteen frozen candidates uploaded; original AQCat25 checkpoint, no new restraints, no model promotion; local/remote no-model preflight passed.
+- MZ73 slurmctld/slurmd failed; controller process absent; queue query failed and sbatch test-only timed out. No real sbatch or GPU job ID.
 
 ## Lifecycle Status
 
@@ -21,11 +17,11 @@ Review the fourteen completed Fe110 adsorption01–05 structures, surface-aware 
 
 ## One Executable Step
 
-Resolve the task-scoped acceptance decision for the three scheduler-evidence-pending representatives; recover original DONE evidence or obtain explicit user authority before preparing any policy exception.
+Obtain administrator restoration of MZ73 Slurm, then recheck live scheduler, immutable package and absence of prior outputs/submission before submitting the authorized frozen fifteen-candidate GPU batch.
 
 ## Submission Boundary
 
-Review and registration only; do not submit, restart or alter any GPU/VASP calculation, waive scheduler requirements or promote a checkpoint.
+User-authorized exact GPU batch only; no VASP, checkpoint promotion, service restart, direct launch, unrelated job changes or repeated submission.
 
 ## Authoritative Constraint
 
@@ -33,23 +29,18 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 
 ## Done When
 
-- Every original calculation has hash-bound final convergence, chemistry and compatibility review and duplicate disposition.
-- Fully eligible representatives have canonical append-only accepted records and successful database readback; exclusions retain truthful status.
-- Three missing-scheduler-evidence representatives remain explicitly pending until evidence or separate policy authority exists.
+- Three named results are accepted through canonical append-only registration with truthful UNKNOWN scheduler status and database readback.
+- Fifteen authorized GPU candidates have passing frozen-input preflight and a confirmed scheduler submission receipt; never infer success from upload.
 
 ## Constraints
 
-- Use the accepted Fe45 branch, true species order and bottom18 fixed; preserve original source bytes.
-- Do not promote fragments as the original graph, duplicate energy rows, arbitrary rotated molecular matches, or inferred adsorption energies.
-- Missing LSF history is UNKNOWN, not failure and not an invented DONE.
-- 06–10 preparation and the fine-tuning candidate stay in backlog; this task grants no computation authority.
+- Preserve scientific source bytes and default scheduler_DONE policy outside three reviewed exceptions.
+- GPU predictions are candidates only; return to work for chemical and duplicate review before any VASP handoff.
 
 ## Authoritative References
 
 - modules/adsorption_workflow/README.md
 - modules/calculation_registry/README.md
-- configs/true_fe110_production.yaml
-- docs/reviews/fe110_c2_01_05_completion_20261012.md
-- calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/registration_v2/post_apply_verification.json
-- tasks/backlog.md
+- configs/execution_backends.yaml
+- docs/reviews/fe110_c2_registration_gpu_20261013.md
 <!-- state-handoff:end current_task -->

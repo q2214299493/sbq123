@@ -15,13 +15,15 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 Tasks are ordered by priority and should be handled one per Codex thread.
 
-## Deferred after adsorption 01–05 final review (2026-10-12)
+## Deferred after adsorption 01–05 registration (2026-10-13)
 
-- 01–05 final review is complete: five accepted representatives, five duplicate
-  sources, one dissociated original target, three representatives awaiting DONE
-  scheduler evidence or an explicit task-scoped exception. Do not rerun by default.
-- 06–10: fifteen prepared candidates_v2 await human structural/evidence review
-  and separate GPU authorization; no GPU or VASP was submitted for this set.
+- 01–05: eight accepted representatives, five duplicate sources and one
+  dissociated original target. Three accepted results retain scheduler UNKNOWN
+  under the user's task-scoped exception; do not rerun by default.
+- 06–10: fifteen GPU pre-relaxations are now user-authorized, uploaded and
+  no-model preflight-passed. MZ73 Slurm services failed; no real submission or
+  model execution occurred. Restore scheduler availability, then recheck hashes,
+  duplicates and resources before submitting the same frozen package.
 - Independently validate the adsorption fine-tuning candidate and quantify
   matched VASP acceleration before checkpoint promotion; preparation of06–10
   does not authorize heldout prediction, new training, or promotion.

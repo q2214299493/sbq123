@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2-registration-gpu-blocked-20261013",
+  "occurred_at": "2026-10-12T17:02:32.618650+00:00",
+  "recorded_at": "2026-10-12T17:02:32.618650+00:00",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "adsorption_workflow"
+  },
+  "summary": "Three authorized scheduler-evidence exceptions registered; fifteen reviewed GPU candidates uploaded and preflight-passed but MZ73 Slurm services failed; no GPU job submitted.",
+  "evidence": [
+    {
+      "locator": "docs/reviews/fe110_c2_registration_gpu_20261013.md",
+      "sha256": "38dc81ed97f7d02af1e670b0519e9fb3a394a0d1f9b594d35d642975912324bf",
+      "authority": "repository_document",
+      "observed_at": "2026-10-12T17:02:32.618650+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/registration_exception_20261013/user_authorization.json",
+      "sha256": "b204c3a8bc0ecf41d225e22d713101ce633597f455ebbded617cd4e25a831185",
+      "authority": "user_authorization",
+      "observed_at": "2026-10-12T17:02:32.618650+00:00"
+    },
+    {
+      "locator": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/registration_exception_20261013/post_apply_verification.json",
+      "sha256": "a22775a58116e47a8959dd284c9e006806cc8f9f2ed26f23f7010db2721ffb77",
+      "authority": "calculation_registry",
+      "observed_at": "2026-10-12T17:02:32.618650+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/gpu_batch_v1/remote_preflight.json",
+      "sha256": "151d23d43eb75eb585aad64f2238887653f4c56963750b14eea7697fac8d167c",
+      "authority": "module_validation",
+      "observed_at": "2026-10-12T17:02:32.618650+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/gpu_batch_v1/scheduler_preflight.json",
+      "sha256": "2e9ecffe8dcaa963cea92bca0275e3b9323a2621c659986fc8eecde00259c461",
+      "authority": "scheduler",
+      "observed_at": "2026-10-12T17:02:32.618650+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "supersedes": [
+    "task-fe110-c2-01-05-completion-review-20261012"
+  ],
+  "payload": {
+    "objective": "Finish three authorized adsorption registrations and submit the reviewed fifteen 06\u201310 GPU pre-relaxations after scheduler recovery.",
+    "phase": "active",
+    "current_evidence": [
+      "Registry readback:8 accepted,5 duplicate,1 rejected; three new accepted representatives retain scheduler UNKNOWN under explicit user authority.",
+      "Fifteen frozen candidates uploaded; original AQCat25 checkpoint, no new restraints, no model promotion; local/remote no-model preflight passed.",
+      "MZ73 slurmctld/slurmd failed; controller process absent; queue query failed and sbatch test-only timed out. No real sbatch or GPU job ID."
+    ],
+    "one_executable_step": "Obtain administrator restoration of MZ73 Slurm, then recheck live scheduler, immutable package and absence of prior outputs/submission before submitting the authorized frozen fifteen-candidate GPU batch.",
+    "submission_boundary": "User-authorized exact GPU batch only; no VASP, checkpoint promotion, service restart, direct launch, unrelated job changes or repeated submission.",
+    "done_when": [
+      "Three named results are accepted through canonical append-only registration with truthful UNKNOWN scheduler status and database readback.",
+      "Fifteen authorized GPU candidates have passing frozen-input preflight and a confirmed scheduler submission receipt; never infer success from upload."
+    ],
+    "constraints": [
+      "Preserve scientific source bytes and default scheduler_DONE policy outside three reviewed exceptions.",
+      "GPU predictions are candidates only; return to work for chemical and duplicate review before any VASP handoff."
+    ],
+    "authoritative_references": [
+      "modules/adsorption_workflow/README.md",
+      "modules/calculation_registry/README.md",
+      "configs/execution_backends.yaml",
+      "docs/reviews/fe110_c2_registration_gpu_20261013.md"
+    ]
+  }
+}

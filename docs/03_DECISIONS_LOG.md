@@ -13,6 +13,20 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Decisions Log
 
+## 2026-10-13 — Three task-scoped scheduler-evidence exceptions
+
+- User explicitly authorized registration of 02_extra2/9842106,
+  04_cfg2/9839755 and 05_cfg1/9839754 after missing DONE evidence was explained.
+  Accept their hash-bound compatible, converged VASP results; retain scheduler
+  UNKNOWN. This does not waive scientific checks or change the default policy.
+- User also authorized the prepared fifteen 06–10 GPU pre-relaxations. Keep the
+  original AQCat25 model and exploratory labels. Upload/no-model preflight passed;
+  Slurm services failed, so no real submission occurred. No service restart or
+  direct GPU launch is authorized by this record.
+- Evidence: `docs/reviews/fe110_c2_registration_gpu_20261013.md` and its named
+  canonical receipts. No new VASP or model-promotion authority.
+
+
 ## 2026-09-05 - Add Sella to the current MatRIS candidate loop
 
 - User requested Sella integration and comparison with the current workflow.

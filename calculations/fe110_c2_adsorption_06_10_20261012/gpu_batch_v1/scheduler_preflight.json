@@ -1,0 +1,6 @@
+{
+  "command": "hostname; ps -C slurmctld -o pid,args; systemctl is-active slurmctld slurmd; grep -E \"^(SlurmctldHost|ControlMachine|SlurmctldPort|ClusterName)\" /etc/slurm/slurm.conf; timeout 15 squeue -u sbq; timeout 15 sbatch --test-only /home/sbq/sbq/aqcat25_ts_pilot/fe110_c2_06_10_20261013_gpu_v1/batch_job.sh",
+  "exit_code": 124,
+  "stdout": "MZ73\n    PID COMMAND\nfailed\nfailed\nClusterName=cool\nSlurmctldPort=6817\nSlurmctldHost=MZ73\n",
+  "stderr": ""
+}
