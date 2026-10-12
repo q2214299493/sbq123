@@ -15,6 +15,16 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 Tasks are ordered by priority and should be handled one per Codex thread.
 
+## Deferred by adsorption 06–10 preparation (2026-10-12)
+
+- Preserve the ongoing 01–05 adsorption calculations; do not stop or resubmit.
+  Last verified 2026-10-12 11:52: job9839757 finished in295steps/fmax0.0181,
+  but C–C2.787A requires fragmentation/reclassification review; job9842136
+  was RUN at99completedsteps/fmax0.0854 with intact C–C1.412A.
+- Independently validate the adsorption fine-tuning candidate and quantify
+  matched VASP acceleration before checkpoint promotion; preparation of06–10
+  does not authorize heldout prediction, new training, or promotion.
+
 ## Infrastructure
 
 1. **P1 - Populate and validate the calculation registry with active true Fe(110) jobs**

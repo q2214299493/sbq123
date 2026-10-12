@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2-06-10-prepared-review-20261012",
+  "occurred_at": "2026-10-12T04:10:17+00:00",
+  "recorded_at": "2026-10-12T04:10:17+00:00",
+  "event_type": "task_updated",
+  "entity": {"kind": "task", "id": "task-current", "module": "adsorption_workflow"},
+  "summary": "User-requested literature-first 06–10 preparation: fifteen distinct exploratory initial seeds, no GPU/VASP submission or stable-state acceptance.",
+  "evidence": [
+    {"locator": "configs/adsmind_lite/fe110_c2_06_10_exploratory_20261012.json", "sha256": "c2619ae3ff3888578f0b2a9e8020bd96a9a8b65b5ba8f039a815310d17a47867", "authority": "user_authorization", "observed_at": "2026-10-12T04:10:17+00:00"},
+    {"locator": "calculations/fe110_c2_adsorption_06_10_20261012/candidates_v2/candidate_review.json", "sha256": "b4949ebfa1cf1d5c8b5f4d00c3a31ac0c757980506ceb52b4c75c726e6644cc8", "authority": "module_validation", "observed_at": "2026-10-12T04:10:17+00:00"},
+    {"locator": "docs/reviews/fe110_c2_06_10_literature_20261012.md", "sha256": "8669f6dc4e69ba6221ce07344a518a4333f36b27075a0eddbab460cebac60ed2", "authority": "repository_document", "observed_at": "2026-10-12T04:10:17+00:00"}
+  ],
+  "review": {"required": false, "reason_codes": [], "status": "not_required"},
+  "supersedes": ["task-fe110-c2-adsorption-finetune2185-running-20261010"],
+  "payload": {
+    "objective": "Prepare three distinct exploratory Fe110 adsorption candidates for each exact graph06–10, after whitelist/primary-literature review, for human structural review before computation.",
+    "phase": "active",
+    "current_evidence": [
+      "Bounded whitelist search found no usable exact-target motifs; live Catalysis-Hub endpoint access failed. No production semantic-ranking success or exhaustive absence claim.",
+      "Primary Fe110 papers concern CH2CO and CHCH2 but do not provide three verified stable configurations for each target; rare COC/OH graphs remain explicitly exploratory.",
+      "Prepared candidates_v2:11 distinct local CARE pose transfers and4 user-authorized rigid reanchors;15 molecular graphs/H placements, slab/flags and hash checks passed;48 scoped tests passed.",
+      "True Fe45 clean slab and Fe0-17 fixed preserved. Interleaved C/O records are reordered with an atom map; long molecular branches are unwrapped along bonds.",
+      "Three soft seed warnings remain:06-A,07-A,09-B. Minimum selected seed RMSD0.487A under36 face-preserving slab operations; no height-only padding.",
+      "No model run, GPU/VASP submission, accepted stable motif, adsorption energy registration or checkpoint promotion. Existing01–05 calculations remain untouched."
+    ],
+    "one_executable_step": "Human-review the fifteen candidates_v2 structures, literature scope and three soft warnings before preparing a separately authorized GPU batch.",
+    "submission_boundary": "Local preparation only. GPU/VASP execution requires separate explicit authorization and current owning-module review/handoff; constructed hypotheses cannot bypass production evidence gates.",
+    "done_when": ["Five exact graphs each have three distinct geometry-audited candidate structures, source/construction provenance and reviewable figures/tables; submission remains unauthorized."],
+    "constraints": [
+      "Use the accepted Fe45 five-layer slab, exact element/coordinate maps and bottom Fe0-17 fixed.",
+      "Do not replace COC by CCO, move OH hydrogen to carbon, or import literature/model energies as DFT results.",
+      "This user's three-seed construction request is task-scoped exploratory authority, not a global change to stable-motif or execution rules.",
+      "Do not promote the unvalidated fine-tuning checkpoint or alter existing calculations."
+    ],
+    "authoritative_references": [
+      "configs/execution_backends.yaml", "modules/adsorption_workflow/README.md",
+      "configs/adsmind_lite/fe110_c2_06_10_exploratory_20261012.json",
+      "docs/reviews/fe110_c2_06_10_literature_20261012.md",
+      "calculations/fe110_c2_adsorption_06_10_20261012/structure_review.md",
+      "calculations/fe110_c2_adsorption_06_10_20261012/candidates_v2/candidate_review.json",
+      "tasks/backlog.md"
+    ]
+  }
+}
