@@ -130,16 +130,41 @@ def _prerequisite_status(name, assessment, evidence):
     return "PASS" if item["value"] is True else "CHECK_NOT_TRUE"
 
 
-def _resource_ownership(strategy, backends):
+def _method_references(strategy, family_strategy):
+    """Normalize both historical/current representations against existing owners; no execution order."""
+    schema = set(policy()["settings_schema"]["properties"]["candidate_method"]["enum"])
+    references = set(strategy["reference_methods"]) & schema
+    eligible = (set(family_strategy["neb_settings"]["candidate_methods"]) | references) & schema
+    methods, excluded = set(references), []
+    neb = strategy["neb_settings"]
+    if not isinstance(neb, dict):
+        excluded.append({"source_field": "neb_settings", "reason": "method_reference_requires_object"})
+        neb = {}
+    for field in ("candidate_methods", "sequence"):
+        values = neb.get(field, [])
+        if not isinstance(values, list):
+            excluded.append({"source_field": field, "reason": "method_reference_requires_array"})
+            continue
+        for method in values:
+            if not isinstance(method, str) or method not in eligible:
+                excluded.append({"source_field": field, "method": method,
+                                 "reason": "not_in_existing_family_or_reference_method_catalog"})
+            else:
+                methods.add(method)
+    return {"methods": sorted(methods), "excluded": excluded, "sequence_is_execution_order": False}
+
+
+def _resource_ownership(strategy, backends, method_references):
     """Resolve existing family/reference metadata through the owning backend contract."""
     hours = {"aqcat_gpu": "gpu_hours", "vasp": "vasp_core_hours"}
     primary = backends["dual_model_ts_path_acceleration"]["primary_model"]
     result = {}
-    for method in strategy["neb_settings"].get("candidate_methods", []):
-        # compose_strategy's family candidates are the existing VASP routes.
-        owner = "vasp" if backends["backends"]["vasp"]["role"] == "authoritative_first_principles_calculation" else None
-        result[method] = {"backend": owner, "hour_budget_field": hours.get(owner)}
-    for method, reference in strategy["reference_methods"].items():
+    for method in method_references["methods"]:
+        reference = strategy["reference_methods"].get(method)
+        if reference is None:
+            owner = "vasp" if backends["backends"]["vasp"]["role"] == "authoritative_first_principles_calculation" else None
+            result[method] = {"backend": owner, "hour_budget_field": hours.get(owner)}
+            continue
         capability = reference.get("backend_capability")
         if capability is None and reference.get("model") == f"current_{primary}_checkpoint":
             capability = f"{primary}_energy_force_inference"
@@ -154,10 +179,11 @@ def _method_candidates(context):
     """Methods are taken from existing composition/schema; prerequisites from their owners."""
     assessment, strategy = context["assessment"], context["strategy"]
     gate, budget, evidence = context["gate"], context["budget"], context["evidence"]
-    permitted = set(strategy["neb_settings"].get("candidate_methods", [])) | set(strategy["reference_methods"])
     candidates = []
     for method, support in assessment["method_support"].items():
-        if method not in permitted:
+        if method not in context["resource_ownership"]:
+            candidates.append({"kind": "excluded_TS_search_candidate", "method": method,
+                "reason": "method_not_in_normalized_strategy_references", "proposal": None, "automatic_execution": False})
             continue
         reference = strategy["reference_methods"].get(method)
         if reference is not None:
@@ -325,8 +351,10 @@ def plan_next(database: Path, request_path: Path, expected_request_sha256: str, 
     rules = yaml.safe_load(families.read_text(encoding="utf-8"))
     ranked, snapshot, template_errors = template_references(database, current_fingerprint, expected_template_snapshot_sha256,
                                                           enabled=use_templates)
-    strategy = compose_strategy(current_fingerprint, ranked, rules)
-    resources = _resource_ownership(strategy, yaml.safe_load(BACKEND_CONFIG.read_text(encoding="utf-8")))
+    family_strategy = compose_strategy(current_fingerprint, [], rules)
+    strategy = compose_strategy(current_fingerprint, ranked, rules) if ranked else family_strategy
+    methods = _method_references(strategy, family_strategy)
+    resources = _resource_ownership(strategy, yaml.safe_load(BACKEND_CONFIG.read_text(encoding="utf-8")), methods)
     history = _history(database, spec["task_id"], key)
     context = {"request": spec, "assessment": assessment, "evidence": evidence, "input_key": key,
                "gate": gate, "budget": _budget(spec["budget"]), "strategy": strategy, "history": history,
@@ -342,6 +370,9 @@ def plan_next(database: Path, request_path: Path, expected_request_sha256: str, 
     if history_token(database) != token:
         raise ValueError("history changed during planning; review a new snapshot")
     result = build_plan(context)
+    if use_templates or methods["excluded"]:
+        methods["without_current_diagnostic_support"] = sorted(set(methods["methods"]) - assessment["method_support"].keys())
+        result["method_references"] = methods
     if use_templates:
         if template_snapshot(database)["snapshot_sha256"] != snapshot["snapshot_sha256"]:
             raise ValueError("template registry changed during planning; capture a new snapshot")

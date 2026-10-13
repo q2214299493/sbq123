@@ -21,11 +21,12 @@ from tests.test_ts_decision_planner import add_history, synthetic_trial, update_
 from tests.test_ts_strategy_engine import database as scientific_database, raw_contract, successful_record
 
 
-def trial(tmp_path, **options):
+def trial(tmp_path, *, template_settings=None, **options):
     # This existing fixture records Grade A via the actual gate/validation/barrier
     # path, including atomic template registration. Never inject evidence_valid.
     tmp_path.mkdir(parents=True, exist_ok=True)
-    scientific_database(tmp_path / "synthetic.sqlite3")
+    record = successful_record(neb_settings=template_settings) if template_settings is not None else None
+    scientific_database(tmp_path / "synthetic.sqlite3", learning_record=record)
     database, request = synthetic_trial(tmp_path, **options)
     assert load_templates(database)[0]["evidence_valid"] is True
     return database, request
@@ -292,3 +293,190 @@ def test_template_cannot_qualify_a_different_prerequisite_source(tmp_path):
     candidate = next(c for c in result["candidates"] if c["kind"] == "TS_search_candidate")
     assert candidate["prerequisite_checks"]["reviewed_gpu_handoff"] == "SOURCE_CHECK_IDENTITY_MISMATCH"
     assert candidate["proposal"] is None and candidate["status"] == "NEEDS_MORE_EVIDENCE"
+
+
+@pytest.mark.parametrize("vasp_hours", [1.5, 0, None])
+def test_template_sequence_keeps_ci_candidate_and_its_budget_checks(tmp_path, vasp_hours):
+    database, request = trial(tmp_path, method="ci_neb")
+    spec = load_json_object(request)
+    gate = decide_execution(
+        {"status": "PASS"},
+        {"path_binding_valid": True, "image_sequence_complete": True, "internal_maximum": True},
+        {}, climb=False, path_reviewed=True,
+        path_quality={"PATH_QUALITY_STATUS": "CI_NEB_READINESS_EVIDENCE"},
+        preflight={"kind": "ci_neb", "passed": True},
+        source_bindings={"assessment": spec["assessment"]},
+    )
+    assert "ENABLE_CI_NEB" in gate["scientific_readiness"]["eligible_actions"]
+    gate_path = tmp_path / "ci-readiness.json"
+    write_json(gate_path, gate)
+    update_trial(request, request_changes={
+        "gate": bind_files({"gate": str(gate_path)})["gate"],
+        "budget": {**spec["budget"], "vasp_core_hours": vasp_hours},
+    })
+    before = sha256_file(database)
+    baseline = plan_next(database, request, sha256_file(request))
+    reused = with_templates(database, request)
+    assert reused["template_reference"]["selected_template_id"] == "fe110_co_split_grade_a"
+    assert reused["composed_strategy"]["neb_settings"]["sequence"] == ["ordinary_neb", "ci_neb"]
+    assert reused["current_strategy_settings"] == baseline["current_strategy_settings"]
+
+    def ci_candidates(result):
+        return [c for c in result["candidates"]
+                if c["kind"] == "TS_search_candidate" and c["method"] == "ci_neb"]
+
+    old = ci_candidates(baseline)
+    new = ci_candidates(reused)
+    assert len(old) == 1  # prerequisite / proposal control
+    assert len(new) == 1, "Valid historical sequence silently dropped the supported ci_neb candidate"
+    assert new[0]["backend"] == "vasp"
+    assert new[0]["hour_budget_field"] == "vasp_core_hours"
+    assert new[0]["status"] == old[0]["status"]
+    assert (new[0]["proposal"] is None) == (vasp_hours == 0)
+    assert new[0]["budget_fit"] == "NOT_ESTABLISHED"
+    assert not new[0]["automatic_execution"]
+    assert sha256_file(database) == before
+
+
+def ci_readiness(request, folder):
+    spec = load_json_object(request)
+    gate = decide_execution({"status": "PASS"},
+        {"path_binding_valid": True, "image_sequence_complete": True, "internal_maximum": True},
+        {}, climb=False, path_reviewed=True, path_quality={"PATH_QUALITY_STATUS": "CI_NEB_READINESS_EVIDENCE"},
+        preflight={"kind": "ci_neb", "passed": True}, source_bindings={"assessment": spec["assessment"]})
+    assert "ENABLE_CI_NEB" in gate["scientific_readiness"]["eligible_actions"]
+    path = folder / "synthetic-ci-readiness.json"
+    write_json(path, gate)
+    update_trial(request, request_changes={"gate": bind_files({"gate": str(path)})["gate"]})
+    return gate
+
+
+@pytest.mark.parametrize("settings", [
+    {"candidate_methods": ["ordinary_neb", "ci_neb"]},
+    {"sequence": ["ci_neb", "ordinary_neb"]},
+    {"candidate_methods": ["ci_neb"], "sequence": ["ordinary_neb", "ci_neb", "ci_neb"]},
+])
+def test_supported_representations_share_one_method_and_resource_binding(tmp_path, monkeypatch, settings):
+    from scripts.ts_strategy_engine import decision_planner
+    database, request = trial(tmp_path, method="ci_neb", template_settings=settings)
+    ci_readiness(request, tmp_path)
+    snapshot = template_reference.template_snapshot(database)
+    spec = load_json_object(request)
+    variant = copy.deepcopy(get_event(database, "variant", spec["variant_id"]))
+    before = sha256_file(database)
+    observed = {}
+    original = decision_planner._resource_ownership
+    def capture(strategy, backends, methods):
+        result = original(strategy, backends, methods)
+        observed.update(methods=copy.deepcopy(methods), resources=copy.deepcopy(result))
+        return result
+    monkeypatch.setattr(decision_planner, "_resource_ownership", capture)
+    result = with_templates(database, request, snapshot["snapshot_sha256"])
+    assert result["template_reference"]["selected_template_id"] == "fe110_co_split_grade_a"
+    assert result["composed_strategy"]["neb_settings"] == settings
+    assert result["method_references"]["methods"] == observed["methods"]["methods"]
+    assert set(observed["resources"]) == set(result["method_references"]["methods"])
+    assert observed["resources"]["ci_neb"] == {"backend": "vasp", "hour_budget_field": "vasp_core_hours"}
+    candidates = [c for c in result["candidates"] if c["kind"] == "TS_search_candidate" and c["method"] == "ci_neb"]
+    assert len(candidates) == 1 and candidates[0]["status"] == "CONSIDER_FOR_REVIEW"
+    assert result["method_references"]["sequence_is_execution_order"] is False
+    assert result["ranking"] == "UNRANKED_NO_COMPARATIVE_EVIDENCE"
+    assert result["current_strategy_settings"] == variant["settings"]
+    assert get_event(database, "variant", spec["variant_id"]) == variant
+    assert template_reference.template_snapshot(database) == snapshot and sha256_file(database) == before
+
+
+@pytest.mark.parametrize("settings,ci_present,reason", [
+    ({"sequence": ["ci_neb", "run_any_command", 7, None, ["ci_neb"]]}, True,
+     "not_in_existing_family_or_reference_method_catalog"),
+    ({"candidate_methods": ["ci_neb", "unregistered_method"]}, True,
+     "not_in_existing_family_or_reference_method_catalog"),
+    ({"sequence": "ci_neb"}, False, "method_reference_requires_array"),
+    ([], False, "method_reference_requires_object"),
+])
+def test_unrecognized_template_method_values_are_excluded_explicitly(tmp_path, settings, ci_present, reason):
+    database, request = trial(tmp_path, method="ci_neb", template_settings=settings)
+    ci_readiness(request, tmp_path)
+    before = sha256_file(database)
+    result = with_templates(database, request)
+    assert result["template_reference"]["selected_template_id"] == "fe110_co_split_grade_a"
+    references = result["method_references"]
+    assert reason in {item["reason"] for item in references["excluded"]}
+    assert "run_any_command" not in references["methods"] and "unregistered_method" not in references["methods"]
+    searches = [c for c in result["candidates"] if c["kind"] == "TS_search_candidate"]
+    assert [c["method"] for c in searches] == (["ci_neb"] if ci_present else [])
+    if not ci_present:
+        excluded = [c for c in result["candidates"] if c["kind"] == "excluded_TS_search_candidate"]
+        assert excluded == [{"kind": "excluded_TS_search_candidate", "method": "ci_neb",
+            "reason": "method_not_in_normalized_strategy_references", "proposal": None, "automatic_execution": False}]
+    assert sha256_file(database) == before
+
+
+@pytest.mark.parametrize("blocker", ["missing_gate", "STOP", "runtime", "unknown", "path_missing", "retry"])
+def test_historical_ci_reference_preserves_current_review_and_retry_checks(tmp_path, blocker):
+    options = {"method": "ci_neb"}
+    if blocker == "runtime":
+        options["failure"] = "runtime"
+    elif blocker == "unknown":
+        options["certainty"] = "unknown"
+    elif blocker == "path_missing":
+        options["path"] = False
+    database, request = trial(tmp_path, **options)
+    if blocker == "STOP":
+        spec = load_json_object(request)
+        gate = decide_execution({"status": "STOP", "errors": ["synthetic mapping failure"]}, {}, {}, climb=False,
+            path_reviewed=False, source_bindings={"assessment": spec["assessment"]})
+        path = tmp_path / "synthetic-stop.json"
+        write_json(path, gate)
+        update_trial(request, request_changes={"gate": bind_files({"gate": str(path)})["gate"]})
+    elif blocker != "missing_gate":
+        ci_readiness(request, tmp_path)
+    if blocker == "retry":
+        add_history(database, request)
+    before = sha256_file(database)
+    result = with_templates(database, request)
+    assert result["template_reference"]["selected_template_id"] == "fe110_co_split_grade_a"
+    searches = [c for c in result["candidates"] if c["kind"] == "TS_search_candidate"]
+    if blocker == "missing_gate":
+        assert len(searches) == 1
+        assert searches[0]["status"] == "NEEDS_MORE_EVIDENCE" and searches[0]["proposal"] is None
+        assert searches[0]["missing_prerequisites"] == ["owning_gate_scientific_prerequisites"]
+    elif blocker == "retry":
+        assert result["unchanged_retry"]["status"] == "BLOCKED_KNOWN_FAILURE"
+        assert result["unchanged_retry"]["execution_permitted_by_planner"] is False
+        assert any(item["kind"] == "retry_review" for item in result["mandatory_first"])
+    else:
+        assert searches == []
+    if blocker == "STOP":
+        assert result["current_gate"] == gate and result["current_STOP_preserved"]
+    assert not result["automatic_submission"] and not result["execution_permissions_changed"]
+    assert sha256_file(database) == before
+
+
+def test_template_method_reference_does_not_replace_current_causal_support(tmp_path):
+    database, request = trial(tmp_path)
+    ci_readiness(request, tmp_path)
+    result = with_templates(database, request)
+    assert "ci_neb" in result["method_references"]["methods"]
+    assert "ci_neb" in result["method_references"]["without_current_diagnostic_support"]
+    assert all(c.get("method") != "ci_neb" for c in result["candidates"])
+
+
+def test_schema_known_method_still_requires_the_current_family_catalog(tmp_path, monkeypatch):
+    import yaml
+    from scripts.ts_strategy_engine import decision_planner
+    database, request = trial(tmp_path, method="ci_neb")
+    ci_readiness(request, tmp_path)
+    original = decision_planner.resource_path
+    rules = yaml.safe_load(original("configs/ts_strategy_engine/families.yaml").read_text(encoding="utf-8"))
+    rules["priority_families"]["co_dissociation"]["vasp_candidate_methods"] = ["ordinary_neb"]
+    local_rules = tmp_path / "synthetic-restricted-family.yaml"
+    local_rules.write_text(yaml.safe_dump(rules), encoding="utf-8")
+    monkeypatch.setattr(decision_planner, "resource_path", lambda name: local_rules if name ==
+                        "configs/ts_strategy_engine/families.yaml" else original(name))
+    result = with_templates(database, request)
+    assert result["template_reference"]["selected_template_id"] == "fe110_co_split_grade_a"
+    assert "ci_neb" not in result["method_references"]["methods"]
+    assert {"source_field": "sequence", "method": "ci_neb",
+        "reason": "not_in_existing_family_or_reference_method_catalog"} in result["method_references"]["excluded"]
+    assert any(c["kind"] == "excluded_TS_search_candidate" and c["method"] == "ci_neb" for c in result["candidates"])
