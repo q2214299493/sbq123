@@ -20,15 +20,19 @@ from .strategy_learning import (
 )
 from .workflow_improvement import create_baseline, propose_policy, policy_status, bind_evaluation, record_decision
 from .workflow_review_runner import run_review
+from .decision_planner import plan_next
 
 
 def parser() -> argparse.ArgumentParser:
     root = argparse.ArgumentParser(description="Evidence-backed strategy variants, attempts and comparisons; no execution.")
-    root.add_argument("--database", type=Path, default=DEFAULT_DATABASE)
+    root.add_argument("--database", type=Path)
     root.add_argument("--output", type=Path, help="New report file; existing files are never replaced.")
     commands = root.add_subparsers(dest="command", required=True)
     commands.add_parser("methods", help="List reference candidate generators and their boundaries.")
     commands.add_parser("history", help="List compact version and attempt status.")
+    planning = commands.add_parser("plan-next", help="Source-bound TS decision advice; explicit history database required.")
+    planning.add_argument("--request", type=Path, required=True)
+    planning.add_argument("--expected-request-sha256", required=True)
     baseline = commands.add_parser("capture", help="Capture an existing NEB without resetting its progress.")
     baseline.add_argument("--workdir", type=Path, required=True)
     baseline.add_argument("--task-id", required=True)
@@ -99,6 +103,8 @@ def parser() -> argparse.ArgumentParser:
 
 
 def _dispatch_cases(args: argparse.Namespace):
+    if args.command == "plan-next":
+        return plan_next(args.database, args.request, args.expected_request_sha256)
     if args.command == "replay-history":
         return replay_history(args.request, args.report, args.expected_request_sha256)
     if args.command == "cases-build":
@@ -125,10 +131,10 @@ def _dispatch_workflow(args: argparse.Namespace):
 
 
 def _dispatch(args: argparse.Namespace):
-    if args.command.startswith("workflow-") or args.command in {"cases-build", "cases-evaluate", "advise-next", "replay-history"}:
+    if args.command.startswith("workflow-") or args.command in {"cases-build", "cases-evaluate", "advise-next", "replay-history", "plan-next"}:
         handler = _dispatch_workflow if args.command.startswith("workflow-") else _dispatch_cases
         return handler(args)
-    database = args.database
+    database = args.database if args.database is not None else DEFAULT_DATABASE
     if args.command == "methods":
         return reference_methods()
     if args.command == "history":

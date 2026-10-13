@@ -709,3 +709,68 @@ a separately authorized scientific task.
   identities were not reconstructed, so they are advisory records with null
   input keys, not fabricated hard bans or scored variant outcomes.
 - No job was started, resubmitted, stopped, or modified during adoption.
+
+## TS Decision Planner v1 (read only)
+
+```powershell
+python -m scripts.ts_strategy_engine.cli learning --database FROZEN.sqlite3 --output NEW_PLAN.json plan-next --request PLAN_REQUEST.json --expected-request-sha256 REQUEST_FILE_SHA256
+python -m pytest -o addopts= -q tests/test_ts_decision_planner.py
+```
+
+`plan-next` requires an explicit database; other learning commands retain their
+existing default. It reads current reviewed history, including merged outcome
+revisions. This is current-state advice, never reconstruction of what a past
+decision already knew. It appends no history, proposes no registered variant,
+changes no gate, and runs no calculation. Report destinations must be new files.
+
+The version-1 request has exactly: `schema_version`, `task_id`, `variant_id`,
+`variant_sha256`, `history_sha256`, `kind`, `inputs`, `assessment`, `gate`, `budget`.
+`variant_id`/`variant_sha256` identify the existing immutable strategy record;
+`history_sha256` is the existing `learning_store.history_token(database)`.
+`inputs` uses the existing role-to-`{path, sha256}` file bindings and must include
+`contract`. Input identity uses `attempt_input_hashes` and `input_key`, including
+the existing complete-manifest checks for VASP inputs. A shared request file
+alone does not establish that every required retry input is unchanged.
+`assessment` and non-null `gate` are file bindings. A supplied gate is validated
+by its owner and must bind this assessment; its STOP and permissions are retained.
+An absent gate stays an explicit evidence gap and grants no permission.
+
+The assessment contains exactly `task_id`, `variant_id`, `input_key`,
+`provenance`, `diagnosis`, `evidence`, `path_evidence_ids`, `prerequisites`,
+`method_support`. `diagnosis` retains the Phase 3A claim/status/evidence structure
+and failure routes. Every evidence row is `{evidence_id, path, sha256, pointer,
+value}` selecting a scalar with its exact JSON type. Its raw JSON source must
+carry the matching `task_id` and `input_key`; mismatched or stale bindings fail.
+`provenance` is `synthetic`, `reviewed_real`, or `incomplete`; identity hashes do
+not certify scientific truth, review quality or a human's identity.
+
+`path_evidence_ids` cites actual path observations. `prerequisites` maps names
+from existing reference-method prerequisites to boolean/null evidence IDs;
+missing, false or null checks cannot qualify a method. Standard VASP methods
+use the existing gate's scientific prerequisites. `method_support` maps an
+existing method to `{rationale, evidence_ids}` and must cite causal evidence.
+An optimizer label alone does not produce a method choice. Geometry advice
+reviews existing interpolation/image fields without inventing new values.
+Runtime/input/SCF and unknown causes take diagnostic priority. Existing STOP
+prevents search-method consideration until its owning review is complete.
+
+`budget` is null, or an object with exactly `remaining_attempts`,
+`vasp_core_hours`, `gpu_hours`, `force_calls`. These are caller-declared remaining
+ceilings, not authorized allocations; each value may be null. Attempt and force
+ceilings are nonnegative integers; hour ceilings are finite nonnegative numbers.
+The captured task attempt quota is checked independently. Exhausted attempt or
+force ceilings suppress proposal drafts. Unknown future costs stay
+`NOT_MEASURED` and budget fit stays `NOT_ESTABLISHED`; historical observed costs
+are reported separately and never become a future prediction or zero.
+
+Results separate exact input (with task identity), same task and other tasks;
+confirmed deterministic exact-input failures block unchanged retry, while pending
+or stale histories require waiting/review. Supported method drafts retain the
+existing `propose_variant` request shape, but are not saved or applied. Existing
+parent/candidate comparisons reuse `compare_variants` without assigning scores
+to untried methods or promoting a strategy. Candidates remain unranked without
+comparative evidence, and predicted candidates never establish a validated TS.
+
+The executable end-to-end examples in `test_ts_decision_planner.py` use synthetic
+files and a temporary registry. They verify integration and decision differences,
+not actual scientific benefit. No real historical case is reclassified or edited.
