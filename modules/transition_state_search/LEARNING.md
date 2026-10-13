@@ -251,11 +251,63 @@ the native client file RPC can read the outside canary. That RPC uses host
 authority and is **not** proof of a model escape. The backend exposes no verified
 native-tool inventory/read-confinement attestation here. Disabled features and
 an empty MCP list do not prove that all reading channels are restricted.
-Consequently `--execute` currently writes `BLOCKED` and exits 2 **before any
-`turn/start`**, with no bypass/override. Live authenticated model execution is
-deliberately unavailable until that boundary can be independently verified; this
-adapter does not introduce a permission workaround. A new session establishes
-context independence only, separately from read confinement and log completeness.
+That legacy diagnostic remains insufficient for `--execute`. The explicit live
+branch now requires a separately generated named filesystem configuration,
+native MXC read/deny/write probes, actual effective configuration confirmation,
+an empty MCP surface and managed ChatGPT-account authentication. Every missing
+condition produces `BLOCKED` before a model turn. There is no override flag.
+A new session establishes context independence only, separately from read
+confinement and log completeness.
+
+The task-owned authentication home starts with only
+`cli_auth_credentials_store="keyring"`. Complete official `codex login
+--device-auth` in that home using a child-process `CODEX_HOME`, before execution.
+No personal config or credential files are copied. The runner promotes only this
+exact bootstrap to its explicit configuration; arbitrary existing config is
+rejected. Each configuration is bound to its workspace and evidence paths, so
+it cannot be silently reused for a different arm. Authentication must report
+`type=chatgpt`; API-key and unauthenticated modes remain blocked.
+
+```text
+python -m scripts.ts_strategy_engine.cli learning workflow-run-review --store LOCAL_STORE --request ARM_REQUEST.json --output-dir NEW_ARM_DIRECTORY --model EXPLICIT_MODEL --effort medium --auth-home ISOLATED_AUTH_HOME --max-tool-calls 2 --timeout-seconds 180 --execute
+```
+
+`review_live` defines two scopes: the outer App Server client runs under MXC with
+only runtime/auth-state write access plus read-only workspace/evidence access;
+model commands select a separate named profile that denies auth-home access,
+filesystem writes and command networking. Both deny other filesystem paths,
+with explicit `:minimal` runtime read exceptions. The existing managed OpenAI
+authentication route is configured under a task-owned provider label with zero
+HTTP/stream retries; it has no API-key variable or alternate base URL. The same
+service is used, not a new paid API. Known native tool features remain disabled;
+unexpected RPC tools or native activities terminate the review. These controls
+do not establish an exhaustive inventory of every model-visible capability.
+
+The real branch performs one fresh thread and one `turn/start`, processes actual
+`item/tool/call` requests, returns host-read evidence, and exports the existing
+schema-2 projections. `run_mode` distinguishes `real_codex` from
+`synthetic_transport`; material `provenance` is unchanged. The command limit can
+be narrowed from eight to two, and the process watchdog enforces the supplied
+wall-clock limit. There are no automatic additional turns or agent retries.
+Startup stderr is captured with credential filtering, process exit is recorded,
+and concurrent host journal writes are serialized.
+
+Native probes are host-initiated tests of the sandbox, not model tool calls.
+The client `fs/readFile` API is a separate host capability. Do not report either
+as an observed model escape. `whole_filesystem_isolation` remains `UNKNOWN`;
+only the tested read/write boundary and host evidence-ID whitelist are reported.
+
+Current local observation (2026-10-13): the native MXC canary matrix passed, but
+the outer sandboxed App Server ended its stdout before the `initialize` response.
+The first EOF/protocol record was retained, and **zero `turn/start` requests**
+were sent. The original probe did not retain stderr, so its startup cause is
+unknown; subsequent code preserves stderr for a separately authorized diagnostic.
+The real model path is therefore **not accepted or demonstrated**. No scientific
+review or workflow benefit was evaluated. No retry follows this failure.
+
+Official references: [permissions](https://learn.chatgpt.com/docs/permissions),
+[native Windows sandbox](https://learn.chatgpt.com/docs/windows/windows-sandbox),
+[App Server authentication](https://learn.chatgpt.com/docs/app-server).
 
 Offline synthetic transport tests exercise the actual host tools, real temporary
 file parsing, call-ID retransmission deduplication, independent duplicate calls,

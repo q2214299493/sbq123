@@ -89,6 +89,8 @@ def parser() -> argparse.ArgumentParser:
     review.add_argument("--codex", help="Actual local executable; no upgrade or installation.")
     review.add_argument("--probe-backend", action="store_true", help="Local help/schema/stdio probe; no model turn.")
     review.add_argument("--execute", action="store_true", help="Request a model review; blocked unless native read confinement is verified.")
+    review.add_argument("--auth-home", type=Path, help="Explicit isolated Codex authentication home; live execution only.")
+    review.add_argument("--max-tool-calls", type=int, default=8, help="Per-run operation cap in [1, 8].")
     replay = commands.add_parser("replay-history", help="Replay saved, hash-bound historical snapshots without execution.")
     replay.add_argument("--request", type=Path, required=True)
     replay.add_argument("--expected-request-sha256", required=True)
@@ -112,7 +114,8 @@ def _dispatch_cases(args: argparse.Namespace):
 def _dispatch_workflow(args: argparse.Namespace):
     if args.command == "workflow-run-review":
         return run_review(args.store, args.request, args.output_dir, model=args.model, effort=args.effort,
-                          timeout=args.timeout_seconds, codex=args.codex, probe=args.probe_backend, execute=args.execute)
+                          timeout=args.timeout_seconds, codex=args.codex, probe=args.probe_backend, execute=args.execute,
+                          auth_home=args.auth_home, max_tool_calls=args.max_tool_calls)
     if args.command == "workflow-status":
         return policy_status(args.store, args.policy_id)
     if args.command == "workflow-bind-evaluation":

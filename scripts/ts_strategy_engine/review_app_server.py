@@ -66,12 +66,14 @@ def redacted(value):
 class Stdio:
     """One child process, one absolute deadline, no retries or resumed sessions."""
 
-    def __init__(self, binary: Path, directory: Path, timeout: float, record):
+    def __init__(self, binary: Path, directory: Path, timeout: float, record, *, auth_home: Path | None = None,
+                 client_profile: str | None = None):
         self.deadline = time.monotonic() + timeout
         self.record, self.pending, self.messages = record, deque(), queue.Queue(maxsize=256)
         self.serial = 0
-        home = directory / "codex-home"
-        home.mkdir()
+        home = auth_home or directory / "codex-home"
+        if auth_home is None:
+            home.mkdir()
         environment = os.environ.copy()
         environment["CODEX_HOME"] = str(home)
         # A probe needs no credentials. Do not inherit model/API authentication variables.
@@ -79,14 +81,20 @@ class Stdio:
             if any(term in key.upper() for term in ("API_KEY", "AUTH_TOKEN", "ACCESS_TOKEN")):
                 del environment[key]
         flags = [part for feature in DISABLED_FEATURES for part in ("--disable", feature)]
+        command = [str(binary), "app-server", "--stdio", *flags, "--strict-config", "-c", 'web_search="disabled"']
+        if client_profile:
+            command = [str(binary), "sandbox", "--include-managed-config", "--permission-profile", client_profile,
+                       "-C", str(directory / "workspace"), "--", *command]
         self.process = subprocess.Popen(
-            [str(binary), "app-server", "--stdio", *flags, "-c", 'web_search="disabled"'],
+            command,
             cwd=directory / "workspace", env=environment, stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
             creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
         )
         self.reader = threading.Thread(target=self._read, daemon=True)
         self.reader.start()
+        self.error_reader = threading.Thread(target=self._read_errors, daemon=True)
+        self.error_reader.start()
         self.watchdog = threading.Timer(timeout, self._expire)
         self.watchdog.daemon = True
         self.watchdog.start()
@@ -94,6 +102,22 @@ class Stdio:
     def _expire(self):
         if self.process.poll() is None:
             self.process.kill()  # Hard bound also covers blocked writes or an unresponsive peer.
+
+    def _read_errors(self):
+        try:
+            while True:
+                line = self.process.stderr.readline(MAX_MESSAGE + 1)
+                if not line:
+                    return
+                text = line.decode("utf-8", errors="replace").rstrip()
+                if re.search(r"(?i)\b(access_?token|refresh_?token|api_?key|authorization|password|credential|secret)\b", text):
+                    text = "[REDACTED sensitive stderr]"
+                self.record("stderr", {"text": redacted(text), "truncated": len(line) > MAX_MESSAGE})
+                if len(line) > MAX_MESSAGE:
+                    self.process.kill()
+                    return
+        except (OSError, ValueError):
+            return
 
     def _read(self):
         try:
@@ -158,22 +182,30 @@ class Stdio:
         except subprocess.TimeoutExpired:
             self.process.kill()
             self.process.wait(timeout=2)
-        for stream in (self.process.stdin, self.process.stdout):
+        self.error_reader.join(timeout=1)
+        self.record("process_exited", {"exit_code": self.process.returncode})
+        for stream in (self.process.stdin, self.process.stdout, self.process.stderr):
             stream.close()
 
 
 def start_session(transport, workspace: Path, model: str, effort: str, tools: list) -> dict:
-    transport.rpc("initialize", {"clientInfo": {"name": "workflow_review", "version": "1"},
-                  "capabilities": {"experimentalApi": True, "explicitGatewayOauth": True}})
-    transport.send({"method": "initialized"})
-    result = transport.rpc("thread/start", {
-        "model": model, "approvalPolicy": "never", "sandbox": "read-only",
+    if not getattr(transport, "initialized", False):
+        transport.rpc("initialize", {"clientInfo": {"name": "workflow_review", "version": "1"},
+                      "capabilities": {"experimentalApi": True, "explicitGatewayOauth": True}})
+        transport.send({"method": "initialized"})
+        transport.initialized = True
+    profile = getattr(transport, "model_profile", None)
+    params = {
+        "model": model, "approvalPolicy": "never", **({"permissions": profile} if profile else {"sandbox": "read-only"}),
+        **({"modelProvider": transport.account_provider} if profile else {}),
+        "allowProviderModelFallback": False,
         "cwd": str(workspace.resolve()), "ephemeral": True, "environments": [],
         "runtimeWorkspaceRoots": [str(workspace.resolve())], "selectedCapabilityRoots": [],
         "baseInstructions": "Only the two supplied review tools are permitted. No delegation or other tools.",
         "developerInstructions": "Read-only evidence review. Never execute calculations or accept a strategy.",
         "config": {"model_reasoning_effort": effort, "web_search": "disabled"}, "dynamicTools": tools,
-    })
+    }
+    result = transport.rpc("thread/start", params)
     thread = result["thread"]
     if thread.get("parentThreadId") or thread.get("forkedFromId") or thread["turns"] \
             or not thread["ephemeral"] or result["model"] != model \
@@ -181,13 +213,16 @@ def start_session(transport, workspace: Path, model: str, effort: str, tools: li
         raise ValueError("new session/model/permission identity mismatch")
     if result.get("reasoningEffort") != effort:
         raise ValueError("reasoning effort not confirmed by backend")
+    if profile and result.get("activePermissionProfile", {}).get("id") != profile:
+        raise ValueError("named read/deny profile was not applied")
+    if profile and result.get("modelProvider") != transport.account_provider:
+        raise ValueError("session is not using the admitted ChatGPT-account provider")
     return result
 
 
-def probe_backend(binary: Path, directory: Path, timeout: float, model: str, effort: str, tools: list) -> dict:
-    """Local help/schema/session probe only. Never sends turn/start or copies auth."""
+def verify_protocol(binary: Path, directory: Path, timeout: float) -> dict:
+    """Verify local help and generated schema without a thread or authentication."""
     directory.mkdir()
-    (directory / "workspace").mkdir()
     deadline = time.monotonic() + timeout
     def command(arguments):
         remaining = deadline - time.monotonic()
@@ -218,6 +253,17 @@ def probe_backend(binary: Path, directory: Path, timeout: float, model: str, eff
             or not {"threadId", "input", "sandboxPolicy", "effort"} <= turn["properties"].keys() \
             or not {"arguments", "callId", "threadId", "turnId", "tool"} <= call["properties"].keys():
         raise ValueError("incompatible app-server protocol")
+    if "permissions" not in start["properties"] or "permissions" not in turn["properties"]:
+        raise ValueError("named filesystem permissions unsupported by local protocol")
+    return {"version": version, "executable": str(binary), "executable_sha256": sha256_file(binary),
+            "protocol_compatible": True}
+
+
+def probe_backend(binary: Path, directory: Path, timeout: float, model: str, effort: str, tools: list) -> dict:
+    """Legacy readOnly diagnostic, never sufficient admission for live inference."""
+    deadline = time.monotonic() + timeout
+    compatibility = verify_protocol(binary, directory, timeout)
+    (directory / "workspace").mkdir()
     events = []
     def record(direction, message):
         events.append({"direction": direction, "message": redacted(message)})
@@ -229,8 +275,7 @@ def probe_backend(binary: Path, directory: Path, timeout: float, model: str, eff
         native = transport.rpc("fs/readFile", {"path": str(canary.resolve())})
         outside_read = base64.b64decode(native["dataBase64"]) == b"OUTSIDE_MATERIAL_CANARY"
         mcp = transport.rpc("mcpServerStatus/list", {})
-        result = {"version": version, "executable": str(binary), "executable_sha256": sha256_file(binary),
-                  "protocol_compatible": True, "session": redacted(session), "new_session_verified": True,
+        result = {**compatibility, "session": redacted(session), "new_session_verified": True,
                   "mcp_servers": redacted(mcp), "disabled_features": list(DISABLED_FEATURES),
                   "native_client_rpc_reads_outside_workspace": outside_read,
                   "model_read_scope_verified": False, "model_turns_started": 0,

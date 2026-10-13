@@ -6,12 +6,14 @@ import json
 import os
 from pathlib import Path
 import time
+import threading
 import uuid
 
 from scripts.artifact_io import sha256_file, sha256_json, write_json_exclusive
 from .learning_evidence import exact_keys, observe
 from .review_app_server import executable, probe_backend, redacted, start_session
 from .review_evidence import EvidenceTools, TOOLS, new_output, safe_file
+from .review_live import LiveStdio
 from .workflow_improvement import _expected_advice, _policy, _source, policy_status
 
 
@@ -65,31 +67,36 @@ def load_trial(store: Path, request: dict) -> dict:
 class ReviewRun:
     """Only host tool completions produce actions/checks; final prose has no authority."""
 
-    def __init__(self, loaded: dict, output: Path, model: str, effort: str, timeout: float):
+    def __init__(self, loaded: dict, output: Path, model: str, effort: str, timeout: float, max_tool_calls: int = 8):
         if not model.strip() or effort not in {"minimal", "low", "medium", "high", "xhigh"} \
                 or isinstance(timeout, bool) or not 0 < timeout <= 3600:
             raise ValueError("explicit model/effort and process timeout (0, 3600] required")
+        if type(max_tool_calls) is not int or not 1 <= max_tool_calls <= 8:
+            raise ValueError("tool call limit must be an integer in [1, 8]")
         output = new_output(output, [loaded["trial_root"], loaded["store"]])
         (output / "workspace").mkdir()
         self.loaded, self.output = loaded, output.resolve()
         self.model, self.effort, self.timeout = model, effort, timeout
+        self.max_tool_calls, self.run_mode, self.permission_evidence = max_tool_calls, "NOT_RUN", None
         self.run_id = str(uuid.uuid4())
         self.context = {k: v for k, v in loaded["context"].items() if k != "required_checks"}
         self.calls, self.cache, self.checks = [], {}, {}
         self.thread_id = self.session_id = self.turn_id = None
         self.incomplete, self.problem, self.finished = False, None, False
+        self.turn_start_attempts = 0
         self.deadline = time.monotonic() + timeout
+        self.journal_lock = threading.Lock()
         self.record("prepared", {"run_id": self.run_id, **self.context, "model": model, "effort": effort,
                                 "request": loaded["request"],
-                                "max_tool_calls": 8, "process_timeout_seconds": timeout,
+                                "max_tool_calls": max_tool_calls, "process_timeout_seconds": timeout,
                                 "runtime_sources": {name: sha256_file(Path(__file__).with_name(name)) for name in
-                                                   ("workflow_review_runner.py", "review_evidence.py", "review_app_server.py")}})
+                                                   ("workflow_review_runner.py", "review_evidence.py", "review_app_server.py", "review_live.py")}})
         write_json_exclusive(self.output / "advice.json", loaded["advice"])
 
     def record(self, kind: str, value: dict):
         payload = {"kind": kind, "time_utc": datetime.now(timezone.utc).isoformat(), **redacted(value)}
         # Host-owned append-only journal; flushed before tool execution/response.
-        with (self.output / "journal.jsonl").open("a", encoding="utf-8") as handle:
+        with self.journal_lock, (self.output / "journal.jsonl").open("a", encoding="utf-8") as handle:
             handle.write(json.dumps(payload, ensure_ascii=False) + "\n")
             handle.flush()
             os.fsync(handle.fileno())
@@ -120,7 +127,7 @@ class ReviewRun:
         if tool not in TOOLS or params.get("namespace") not in {None, ""}:
             self._stop("unapproved native/namespace/write/delegation tool")
             return EvidenceTools.response({"error": self.problem}, False)
-        if len(self.calls) >= 8 or time.monotonic() >= self.deadline or self.incomplete:
+        if len(self.calls) >= self.max_tool_calls or time.monotonic() >= self.deadline or self.incomplete:
             self._stop("review tool/process budget exhausted or run already interrupted")
             return EvidenceTools.response({"error": self.problem}, False)
         field = TOOLS[tool]
@@ -153,10 +160,16 @@ class ReviewRun:
         return response
 
     def drive(self, transport, *, synthetic: bool = False) -> dict:
-        """Synthetic transport exercise only until a backend with verified read confinement exists."""
-        if not synthetic or self.context["provenance"] != "synthetic":
+        """A single turn, distinguishing material provenance from actual transport."""
+        live = isinstance(transport, LiveStdio) and transport.admitted
+        if not live and (not synthetic or self.context["provenance"] != "synthetic"):
             raise ValueError("live model review blocked: evidence-only native read confinement unverified")
-        self.record("synthetic_transport", {"not_a_real_model_review": True})
+        if live and synthetic:
+            raise ValueError("real Codex transport cannot be labelled simulated")
+        self.run_mode = "real_codex" if live else "synthetic_transport"
+        self.permission_evidence = transport.evidence if live else None
+        self.record("runtime", {"run_mode": self.run_mode, "material_provenance": self.context["provenance"],
+                                "permission_evidence": self.permission_evidence})
         try:
             session = start_session(transport, self.output / "workspace", self.model, self.effort,
                                     self.loaded["tools"].specs())
@@ -169,10 +182,14 @@ class ReviewRun:
             prompt = {"case": case, "review_order": self.loaded["order"],
                       "evidence_ids": sorted(self.loaded["tools"].materials),
                       "required_checks": self.loaded["task"]["required_checks"],
-                      "instruction": "Review using only the supplied tools, in order. Human judgments remain pending. Maximum 8 calls, one turn. No calculations, acceptance or delegation."}
+                      "instruction": f"Call the supplied evidence tools in the declared order. Human judgments remain pending. Maximum {self.max_tool_calls} calls, one turn. No calculations, acceptance or delegation."}
+            write_json_exclusive(self.output / "turn-reservation.json", {"run_id": self.run_id, "thread_id": self.thread_id,
+                                                                       "run_mode": self.run_mode, "max_turns": 1})
+            self.turn_start_attempts = 1
             turn = transport.rpc("turn/start", {"threadId": self.thread_id, "model": self.model,
                          "effort": self.effort, "approvalPolicy": "never", "environments": [],
-                         "sandboxPolicy": {"type": "readOnly", "networkAccess": False},
+                         **({"permissions": transport.model_profile} if live else
+                            {"sandboxPolicy": {"type": "readOnly", "networkAccess": False}}),
                          "input": [{"type": "text", "text": json.dumps(prompt, ensure_ascii=False)}]})
             self.turn_id = turn["turn"]["id"]
             while not self.incomplete:
@@ -188,28 +205,41 @@ class ReviewRun:
                 elif "id" in message and method:
                     transport.send({"id": message["id"], "error": {"code": -32601, "message": "host rejects extra tools"}})
                     self._stop("unapproved server request")
-                elif method in {"thread/started", "thread/status/changed", "thread/tokenUsage/updated"}:
-                    if params.get("threadId", params.get("thread", {}).get("id")) != self.thread_id:
-                        raise ValueError("notification thread mismatch")
-                elif method in {"turn/completed", "turn/started", "item/started", "item/completed", "item/agentMessage/delta"}:
-                    if params.get("threadId") != self.thread_id or (
-                            params.get("turn", {}).get("id", params.get("turnId")) != self.turn_id):
-                        raise ValueError("notification session/turn mismatch")
-                    item = params.get("item", {})
-                    if method.startswith("item/") and item.get("type") not in {None, "agentMessage", "reasoning", "dynamicToolCall"}:
-                        raise ValueError("native tool activity/delegation forbidden")
-                    if method == "turn/completed":
-                        self.finished = params["turn"]["status"] == "completed"
-                        if not self.finished:
-                            self._stop("turn failed/interrupted")
-                        break
-                else:
-                    raise ValueError(f"unexpected protocol notification: {method}")
+                elif self.notification(method, params):
+                    break
         except (EOFError, TimeoutError, ValueError, OSError, KeyError, TypeError) as exc:
             self._stop(f"review interrupted: {exc}")
         finally:
             transport.close()
         return self.export()
+
+    def notification(self, method: str, params: dict) -> bool:
+        """Validate non-tool events independently of the RPC execution loop."""
+        if method in {"thread/started", "thread/status/changed", "thread/tokenUsage/updated"}:
+            if params.get("threadId", params.get("thread", {}).get("id")) != self.thread_id:
+                raise ValueError("notification thread mismatch")
+            return False
+        if method == "error":
+            self._stop(f"backend error: {redacted(params)}")
+            return True
+        if method in {"account/updated", "account/rateLimits/updated"}:
+            return False  # Metadata only; it cannot alter admission or execute an operation.
+        allowed = {"turn/completed", "turn/started", "item/started", "item/completed", "item/agentMessage/delta",
+                   "item/reasoning/summaryTextDelta", "item/reasoning/summaryPartAdded", "item/reasoning/textDelta"}
+        if method not in allowed:
+            raise ValueError(f"unexpected protocol notification: {method}")
+        if params.get("threadId") != self.thread_id or (
+                params.get("turn", {}).get("id", params.get("turnId")) != self.turn_id):
+            raise ValueError("notification session/turn mismatch")
+        item = params.get("item", {})
+        if method.startswith("item/") and item.get("type") not in {None, "agentMessage", "reasoning", "dynamicToolCall"}:
+            raise ValueError("native tool activity/delegation forbidden")
+        if method == "turn/completed":
+            self.finished = params["turn"]["status"] == "completed"
+            if not self.finished:
+                self._stop("turn failed/interrupted")
+            return True
+        return False
 
     def export(self) -> dict:
         for call in self.calls:
@@ -233,11 +263,16 @@ class ReviewRun:
                  "checks": [{"check_id": c["check_id"], "observation": observation(f"/checks/{i}/result", c["result"])}
                             for i, c in enumerate(checks)] if complete else []}
         write_json_exclusive(self.output / "trace.json", trace)
-        result = {"run_id": self.run_id, "status": "RECORDED" if complete else "INCOMPLETE",
+        status = "RECORDED" if complete else "INCOMPLETE"
+        if self.run_mode == "real_codex" and self.turn_start_attempts == 0:
+            status = "BLOCKED"
+        result = {"run_id": self.run_id, "status": status, "turn_start_attempts": self.turn_start_attempts,
                   "provenance": self.context["provenance"], "actual_tool_calls": len(self.calls),
+                  "run_mode": self.run_mode, "permission_evidence": self.permission_evidence,
                   "session_id": self.session_id, "thread_id": self.thread_id, "problem": self.problem,
                   "session_independence": "NEW_SESSION" if self.session_id else "NOT_TESTED",
-                  "model_read_scope": "NOT_VERIFIED", "log_completeness": complete,
+                  "model_read_scope": "PROBED_NATIVE_MXC_AND_HOST_ID_WHITELIST" if self.permission_evidence else "NOT_VERIFIED",
+                  "whole_filesystem_isolation": "UNKNOWN", "log_completeness": complete,
                   "required_checks": checks, "trace": reference(self.output / "trace.json"),
                   "scientific_success": "NOT_EVALUATED", "automatic_acceptance": False}
         write_json_exclusive(self.output / "result.json", result)
@@ -245,21 +280,29 @@ class ReviewRun:
 
 
 def run_review(store: Path, request_path: Path, output: Path, *, model: str, effort: str,
-               timeout: float = 120, codex: str | None = None, probe: bool = False, execute: bool = False) -> dict:
+               timeout: float = 120, codex: str | None = None, probe: bool = False, execute: bool = False,
+               auth_home: Path | None = None, max_tool_calls: int = 8) -> dict:
     request = _source(reference(request_path))
     loaded = load_trial(store, request)
-    run = ReviewRun(loaded, output, model, effort, timeout)
+    run = ReviewRun(loaded, output, model, effort, timeout, max_tool_calls)
     result = {"status": "PREPARED", "output": str(run.output), "policy_id": request["policy_id"],
-              "order": loaded["order"], "model_calls": 0, "max_tool_calls": 8,
+              "order": loaded["order"], "model_calls": 0, "max_tool_calls": max_tool_calls,
               "process_timeout_seconds": timeout, "model_read_scope": "NOT_VERIFIED"}
-    if probe or execute:
+    if execute:
+        try:
+            if auth_home is None:
+                raise ValueError("live execution requires an explicit isolated --auth-home and official ChatGPT login")
+            paths = [loaded["tools"].path(identity) for identity in loaded["tools"].materials]
+            transport = LiveStdio(executable(codex), run.output, timeout, run.protocol, auth_home, paths)
+            return run.drive(transport)
+        except (OSError, ValueError, TimeoutError, EOFError, KeyError, TypeError) as exc:
+            run.record("live_blocked", {"error": str(exc), "model_turns_started": 0})
+            result.update(status="BLOCKED", reason=str(exc))
+    elif probe:
         try:
             result["backend"] = probe_backend(executable(codex), run.output / "backend", timeout,
                                               model, effort, loaded["tools"].specs())
         except (OSError, ValueError, TimeoutError) as exc:
             result.update(status="BLOCKED", reason=f"backend protocol probe failed: {exc}")
-    if execute:
-        # Current backend cannot attest native read restrictions. There is deliberately no override flag.
-        result.update(status="BLOCKED", reason=result.get("reason") or result["backend"]["blocking_reason"])
     write_json_exclusive(run.output / "result.json", result)
     return result

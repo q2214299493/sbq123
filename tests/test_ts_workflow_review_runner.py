@@ -16,6 +16,7 @@ from scripts.ts_strategy_engine import learning_cli, review_app_server as protoc
 from scripts.ts_strategy_engine import workflow_improvement as loop
 from scripts.ts_strategy_engine.review_evidence import EvidenceTools
 from scripts.ts_strategy_engine.workflow_review_runner import ReviewRun, load_trial, reference, run_review
+from scripts.ts_strategy_engine import review_live
 
 
 @pytest.fixture
@@ -486,3 +487,149 @@ for line in sys.stdin:
     assert sum(e["kind"] == "action_finished" for e in events) == 2
     assert any(e["kind"] == "protocol" and e["message"].get("method") == "initialize" for e in events)
     assert all(e["response"]["success"] for e in events if e["kind"] == "action_finished")
+
+
+def test_isolated_configuration_pins_read_deny_and_keeps_login_bootstrap(tmp_path):
+    """Synthetic configuration only, no authentication or native process."""
+    home, workspace = tmp_path / "auth", tmp_path / "workspace"
+    home.mkdir()
+    workspace.mkdir()
+    evidence = workspace / "material.json"
+    write_json(evidence, {"synthetic": True})
+    (home / "config.toml").write_text('cli_auth_credentials_store="keyring"\n')
+    expected = review_live.configure(home, workspace, [evidence])
+    assert review_live.configure(home, workspace, [evidence]) == expected
+    model = expected["permissions"][review_live.MODEL_PROFILE]
+    client = expected["permissions"][review_live.CLIENT_PROFILE]
+    assert model["filesystem"][":root"] == "deny" and model["filesystem"][str(home.as_posix())] == "deny"
+    assert model["filesystem"][str(evidence.as_posix())] == "read"
+    assert not model["network"]["enabled"] and client["network"]["enabled"]
+    provider = expected["model_providers"][review_live.ACCOUNT_PROVIDER]
+    assert provider["requires_openai_auth"] and provider["request_max_retries"] == provider["stream_max_retries"] == 0
+    assert "env_key" not in provider and "base_url" not in provider  # Existing managed-auth service, no API-key endpoint.
+    (home / "config.toml").write_text('approval_policy="always"\n')
+    with pytest.raises(ValueError, match="different configuration"):
+        review_live.configure(home, workspace, [evidence])
+    assert (home / "config.toml").read_text() == 'approval_policy="always"\n'
+
+
+def test_synthetic_native_probe_records_actual_command_returns_and_first_error(tmp_path, monkeypatch):
+    """Synthetic native-command returns test admission logic, never prove real confinement."""
+    from types import SimpleNamespace
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    calls = []
+    def native(command, **kwargs):
+        calls.append(command)
+        allowed = command[-1].endswith("read-canary.txt")
+        return SimpleNamespace(returncode=0 if allowed else 1, stdout=b"SAFE_READ_CANARY" if allowed else b"", stderr=b"")
+    monkeypatch.setattr(review_live.subprocess, "run", native)
+    if not hasattr(subprocess, "CREATE_NO_WINDOW"):
+        monkeypatch.setattr(review_live.subprocess, "CREATE_NO_WINDOW", 0, raising=False)
+    proof = review_live.native_probe(Path("synthetic-codex"), tmp_path / "auth", workspace, tmp_path, 10)
+    assert proof["passed"] and len(calls) == 6 and not proof["model_invoked_probe"]
+    other = tmp_path / "failure"
+    other.mkdir()
+    (other / "workspace").mkdir()
+    calls.clear()
+    def failed(command, **kwargs):
+        calls.append(command)
+        return SimpleNamespace(returncode=1, stdout=b"", stderr=b"synthetic startup failure")
+    monkeypatch.setattr(review_live.subprocess, "run", failed)
+    with pytest.raises(ValueError, match="first error"):
+        review_live.native_probe(Path("synthetic-codex"), tmp_path / "auth", other / "workspace", other, 10)
+    assert len(calls) == 1 and not load_json_object(other / "native-permission-probe.json")["passed"]
+
+
+def test_named_profile_session_rejects_legacy_fallback(frozen):
+    run = prepared(frozen, "named-profile")
+    peer = SyntheticTransport(run.loaded["order"], ["seed_generation"])
+    peer.model_profile, peer.account_provider = review_live.MODEL_PROFILE, review_live.ACCOUNT_PROVIDER
+    original = peer.rpc
+    def rpc(method, params):
+        result = original(method, params)
+        if method == "thread/start":
+            assert params["permissions"] == review_live.MODEL_PROFILE and "sandbox" not in params
+            result["activePermissionProfile"] = {"id": ":read-only"}
+            result["modelProvider"] = review_live.ACCOUNT_PROVIDER
+        return result
+    peer.rpc = rpc
+    with pytest.raises(ValueError, match="not applied"):
+        protocol.start_session(peer, run.output / "workspace", run.model, run.effort, run.loaded["tools"].specs())
+
+
+def test_live_eof_blocks_without_turn_and_preserves_first_error(frozen, monkeypatch):
+    request = frozen["root"] / "request.json"
+    write_json(request, frozen["request"])
+    def eof(*args):
+        raise EOFError("synthetic preflight EOF; no model turn")
+    monkeypatch.setattr("scripts.ts_strategy_engine.workflow_review_runner.LiveStdio", eof)
+    monkeypatch.setattr("scripts.ts_strategy_engine.workflow_review_runner.executable", lambda _: Path(sys.executable))
+    output = frozen["root"] / "live-eof"
+    result = run_review(frozen["store"], request, output, model="synthetic-model", effort="medium", execute=True,
+                        auth_home=frozen["root"] / "auth", max_tool_calls=2, timeout=180)
+    assert result["status"] == "BLOCKED" and result["model_calls"] == 0 and "EOF" in result["reason"]
+    assert load_json_object(output / "result.json") == result
+    assert "live_blocked" in (output / "journal.jsonl").read_text()
+
+
+def test_two_call_limit_and_transport_provenance_are_separate(frozen):
+    loaded = load_trial(frozen["store"], frozen["request"])
+    run = ReviewRun(loaded, frozen["root"] / "two-tools", "synthetic-model", "medium", 180, max_tool_calls=2)
+    assert run.tool_call(call(run, "first"))["success"]
+    assert run.tool_call(call(run, "second", tool="inspect_image_allocation"))["success"]
+    assert not run.tool_call(call(run, "third"))["success"]
+    assert len(run.calls) == 2 and run.incomplete
+    normal = prepared(frozen, "fixture-mode")
+    result = normal.drive(SyntheticTransport(normal.loaded["order"], ["seed_generation"]), synthetic=True)
+    assert result["provenance"] == "synthetic" and result["run_mode"] == "synthetic_transport"
+
+
+def test_stdio_preserves_synthetic_startup_stderr_without_credentials(tmp_path, monkeypatch):
+    """Real local subprocess, synthetic failure only; zero Codex/model calls."""
+    directory = tmp_path / "stderr"
+    directory.mkdir()
+    (directory / "workspace").mkdir()
+    child = directory / "synthetic_startup_failure.py"
+    child.write_text("import sys\nprint('synthetic startup denied',file=sys.stderr,flush=True)\n"
+                     "print('Authorization: Bearer synthetic.fixture',file=sys.stderr,flush=True)\nsys.exit(7)\n")
+    original = subprocess.Popen
+    def launch(*args, **kwargs):
+        return original([sys.executable, str(child)], **kwargs)
+    monkeypatch.setattr(protocol.subprocess, "Popen", launch)
+    events = []
+    transport = protocol.Stdio(Path(sys.executable), directory, 10, lambda direction, message: events.append((direction, message)))
+    try:
+        with pytest.raises(EOFError):
+            transport.receive()
+    finally:
+        transport.close()
+    assert ("process_exited", {"exit_code": 7}) in events
+    assert any(e[0] == "stderr" and e[1]["text"] == "synthetic startup denied" for e in events)
+    assert "synthetic.fixture" not in json.dumps(events)
+
+
+def test_admitted_live_branch_rpc_shape_with_synthetic_server_only(frozen, monkeypatch):
+    """Synthetic server fixture tests live dispatch shape; NOT a real Codex connectivity result."""
+    import scripts.ts_strategy_engine.workflow_review_runner as runner
+    class AdmittedFixture(SyntheticTransport):
+        admitted = True
+        model_profile, account_provider = review_live.MODEL_PROFILE, review_live.ACCOUNT_PROVIDER
+        evidence = {"transport_fixture": True, "not_real_permission_evidence": True}
+
+        def rpc(self, method, params):
+            result = super().rpc(method, params)
+            if method == "thread/start":
+                assert params["permissions"] == review_live.MODEL_PROFILE and "sandbox" not in params
+                assert not params["allowProviderModelFallback"]
+                result.update(activePermissionProfile={"id": review_live.MODEL_PROFILE}, modelProvider=review_live.ACCOUNT_PROVIDER)
+            elif method == "turn/start":
+                assert params["permissions"] == review_live.MODEL_PROFILE and "sandboxPolicy" not in params
+            return result
+    monkeypatch.setattr(runner, "LiveStdio", AdmittedFixture)
+    run = prepared(frozen, "live-branch-unit-fixture")
+    peer = AdmittedFixture(run.loaded["order"], ["seed_generation"])
+    result = run.drive(peer)
+    assert result["run_mode"] == "real_codex" and result["provenance"] == "synthetic"
+    assert result["permission_evidence"]["transport_fixture"] and result["turn_start_attempts"] == 1
+    assert sum(r["method"] == "turn/start" for r in peer.sent) == 1 and result["actual_tool_calls"] == 2
