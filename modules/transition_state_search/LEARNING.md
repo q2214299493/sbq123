@@ -784,3 +784,47 @@ comparative evidence, and predicted candidates never establish a validated TS.
 The executable end-to-end examples in `test_ts_decision_planner.py` use synthetic
 files and a temporary registry. They verify integration and decision differences,
 not actual scientific benefit. No real historical case is reclassified or edited.
+
+### Optional registered-template reference
+
+```powershell
+python -m scripts.ts_strategy_engine.cli learning --database FROZEN.sqlite3 --output TEMPLATE_SNAPSHOT.json template-snapshot
+python -m scripts.ts_strategy_engine.cli learning --database FROZEN.sqlite3 --output NEW_REFERENCE_PLAN.json plan-next --request PLAN_REQUEST.json --expected-request-sha256 REQUEST_FILE_SHA256 --use-templates --expected-template-snapshot-sha256 SNAPSHOT_SHA256
+python -m pytest -o addopts= -q tests/test_ts_planner_template_reuse.py tests/test_ts_decision_planner.py
+```
+
+Review the snapshot, then supply its `snapshot_sha256` value (not the hash of
+`TEMPLATE_SNAPSHOT.json`). Both commands use the same explicit database. Neither
+appends registry/history rows. The original request schema is unchanged; without
+the two template options, the original planner behavior/report is unchanged.
+
+The snapshot binds complete template rows, their associated validation/barrier
+rows and validation/structure file registrations, the existing loaded evidence
+view, and the retrieval/validation/composition code identities. A template or
+related registration/review change invalidates the old binding independently of
+`history_sha256`. Concurrent changes during loading/planning are rejected.
+
+The bound current contract supplies the fingerprint. Existing `load_templates`,
+`validate_record`, `rank_templates` and `compose_strategy` determine eligibility,
+similarity and method transfer; missing atom symbols/events are never filled from
+history. `template_reference` reports the source calculation and validation,
+matching conditions, existing threshold, rejection reasons, method choices and
+nontransferable fields. No qualified match uses the existing family-rule fallback.
+
+`composed_strategy` may borrow a qualified template's method strategy;
+`current_strategy_settings`, the variant and current inputs remain unchanged.
+Coordinates, indices, MODECAR, image counts, energies and barriers are not imported.
+Strategy transfer and result-transfer eligibility retain their existing separate
+semantics, including method reference across compatible-event but incompatible
+energy branches; this entry imports no scientific results even for an exact match.
+Registered evidence satisfying the existing validator is reported separately from
+physical file revalidation: this read-only entry does not reopen every historical
+physical source. Malformed template JSON fails closed; invalid registered evidence
+or forbidden strategy fields cannot qualify a success template.
+
+Template similarity is neither method effectiveness nor success probability.
+Current diagnostic priority, task checks, STOP, retry and resource limits still
+govern all proposal drafts. Temporary-registry integration tests use the existing
+gate/TS-validation/matched-barrier registration fixtures. They demonstrate template
+influence and rejection paths, not real scientific benefit; real benefit remains
+unverified.

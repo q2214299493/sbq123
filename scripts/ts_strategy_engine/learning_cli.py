@@ -21,6 +21,7 @@ from .strategy_learning import (
 from .workflow_improvement import create_baseline, propose_policy, policy_status, bind_evaluation, record_decision
 from .workflow_review_runner import run_review
 from .decision_planner import plan_next
+from .template_reference import template_snapshot
 
 
 def parser() -> argparse.ArgumentParser:
@@ -30,9 +31,12 @@ def parser() -> argparse.ArgumentParser:
     commands = root.add_subparsers(dest="command", required=True)
     commands.add_parser("methods", help="List reference candidate generators and their boundaries.")
     commands.add_parser("history", help="List compact version and attempt status.")
+    commands.add_parser("template-snapshot", help="Capture registered template/evidence identity from an explicit database; read only.")
     planning = commands.add_parser("plan-next", help="Source-bound TS decision advice; explicit history database required.")
     planning.add_argument("--request", type=Path, required=True)
     planning.add_argument("--expected-request-sha256", required=True)
+    planning.add_argument("--use-templates", action="store_true", help="Explicit method-strategy reference only; requires a frozen snapshot hash.")
+    planning.add_argument("--expected-template-snapshot-sha256")
     baseline = commands.add_parser("capture", help="Capture an existing NEB without resetting its progress.")
     baseline.add_argument("--workdir", type=Path, required=True)
     baseline.add_argument("--task-id", required=True)
@@ -103,8 +107,11 @@ def parser() -> argparse.ArgumentParser:
 
 
 def _dispatch_cases(args: argparse.Namespace):
+    if args.command == "template-snapshot":
+        return template_snapshot(args.database)
     if args.command == "plan-next":
-        return plan_next(args.database, args.request, args.expected_request_sha256)
+        return plan_next(args.database, args.request, args.expected_request_sha256, use_templates=args.use_templates,
+                         expected_template_snapshot_sha256=args.expected_template_snapshot_sha256)
     if args.command == "replay-history":
         return replay_history(args.request, args.report, args.expected_request_sha256)
     if args.command == "cases-build":
@@ -131,7 +138,7 @@ def _dispatch_workflow(args: argparse.Namespace):
 
 
 def _dispatch(args: argparse.Namespace):
-    if args.command.startswith("workflow-") or args.command in {"cases-build", "cases-evaluate", "advise-next", "replay-history", "plan-next"}:
+    if args.command.startswith("workflow-") or args.command in {"cases-build", "cases-evaluate", "advise-next", "replay-history", "plan-next", "template-snapshot"}:
         handler = _dispatch_workflow if args.command.startswith("workflow-") else _dispatch_cases
         return handler(args)
     database = args.database if args.database is not None else DEFAULT_DATABASE

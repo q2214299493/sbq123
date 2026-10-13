@@ -18,6 +18,7 @@ from .learning_evidence import attempt_input_hashes, exact_keys, input_key, obse
 from .learning_store import get_event, history_token, read_events
 from .next_review_core import review_field_orders
 from .strategy import compose_strategy
+from .template_reference import reference_report, template_references, template_snapshot
 from .strategy_learning import POLICY, _validate_settings, compare_variants, policy, retry_assessment, task_lessons
 
 
@@ -267,7 +268,24 @@ def build_plan(context):
             "future_cost": dict.fromkeys(COST_FIELDS, "NOT_MEASURED")}
 
 
-def plan_next(database: Path, request_path: Path, expected_request_sha256: str):
+def _current_gate(reference, assessment):
+    """Retain the existing owner validation and current task/input evidence binding."""
+    if reference is None:
+        return None
+    validate_files({"gate": reference})
+    gate = load_json_object(Path(reference["path"]))
+    validate_decision(gate)
+    bindings = gate["EVIDENCE"].get("source_bindings", {})
+    if not bindings:
+        raise ValueError("current gate must bind its raw evidence")
+    validate_files(bindings)
+    if not any(source == assessment for source in bindings.values()):
+        raise ValueError("gate does not bind the current task/input assessment")
+    return gate
+
+
+def plan_next(database: Path, request_path: Path, expected_request_sha256: str, *,
+              use_templates: bool = False, expected_template_snapshot_sha256: str | None = None):
     """Read-only adapter; request and history must be explicitly frozen by the caller."""
     if database is None:
         raise ValueError("plan-next requires an explicit --database; production defaults are forbidden")
@@ -301,19 +319,13 @@ def plan_next(database: Path, request_path: Path, expected_request_sha256: str):
     if contract["reaction_id"] != spec["task_id"]:
         raise ValueError("reaction contract task mismatch")
     assessment, evidence = _assessment(spec["assessment"], spec["task_id"], spec["variant_id"], key)
-    gate = None
-    if spec["gate"] is not None:
-        validate_files({"gate": spec["gate"]})
-        gate = load_json_object(Path(spec["gate"]["path"]))
-        validate_decision(gate)
-        bindings = gate["EVIDENCE"].get("source_bindings", {})
-        if not bindings:
-            raise ValueError("current gate must bind its raw evidence")
-        validate_files(bindings)
-        if not any(reference == spec["assessment"] for reference in bindings.values()):
-            raise ValueError("gate does not bind the current task/input assessment")
+    gate = _current_gate(spec["gate"], spec["assessment"])
     families = resource_path("configs/ts_strategy_engine/families.yaml")
-    strategy = compose_strategy(build_fingerprint(contract), [], yaml.safe_load(families.read_text(encoding="utf-8")))
+    current_fingerprint = build_fingerprint(contract)
+    rules = yaml.safe_load(families.read_text(encoding="utf-8"))
+    ranked, snapshot, template_errors = template_references(database, current_fingerprint, expected_template_snapshot_sha256,
+                                                          enabled=use_templates)
+    strategy = compose_strategy(current_fingerprint, ranked, rules)
     resources = _resource_ownership(strategy, yaml.safe_load(BACKEND_CONFIG.read_text(encoding="utf-8")))
     history = _history(database, spec["task_id"], key)
     context = {"request": spec, "assessment": assessment, "evidence": evidence, "input_key": key,
@@ -330,6 +342,10 @@ def plan_next(database: Path, request_path: Path, expected_request_sha256: str):
     if history_token(database) != token:
         raise ValueError("history changed during planning; review a new snapshot")
     result = build_plan(context)
+    if use_templates:
+        if template_snapshot(database)["snapshot_sha256"] != snapshot["snapshot_sha256"]:
+            raise ValueError("template registry changed during planning; capture a new snapshot")
+        result["template_reference"] = reference_report(ranked, snapshot, template_errors, strategy, rules)
     result["bindings"] = {"request_sha256": expected_request_sha256, "history_sha256": token,
                           "variant_sha256": spec["variant_sha256"], "assessment": spec["assessment"],
                           "inputs": spec["inputs"], "learning_policy_sha256": sha256_file(POLICY),
