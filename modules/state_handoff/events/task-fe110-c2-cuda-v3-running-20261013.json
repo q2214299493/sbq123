@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2-cuda-v3-running-20261013",
+  "occurred_at": "2026-10-13T03:40:23.701855+00:00",
+  "recorded_at": "2026-10-13T03:40:23.701855+00:00",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "adsorption_workflow"
+  },
+  "summary": "User-approved CUDA restart is running on physical GPU1; original CPU batch had already ended and all outputs are preserved. Actual CUDA model tensor and LBFGS/process evidence verified.",
+  "evidence": [
+    {
+      "locator": "docs/reviews/fe110_c2_cuda_restart_20261013.md",
+      "sha256": "aa1be179b6f5b7d7c5862962daac46519a6d68c227a3194ddf9a5e0962881e22",
+      "authority": "repository_document",
+      "observed_at": "2026-10-13T03:40:23.701855+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/gpu_direct_v3/direct_request.json",
+      "sha256": "62f62a26872beb40df1b89c90f663f81f7903e4f8c3f60917895c2f640857bb6",
+      "authority": "user_authorization",
+      "observed_at": "2026-10-13T03:40:23.701855+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/gpu_direct_v3/startup_checkpoint.json",
+      "sha256": "61e082f81d8438de4aedf696b426fe67b3578e72b5ef7dd97d76c5ec4a393149",
+      "authority": "calculation_file",
+      "observed_at": "2026-10-13T03:40:23.701855+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/gpu_direct_v3/registry_launch_receipt.json",
+      "sha256": "960a06e71358011c2af2a72404c27ec50e2e2e6e2bde34a42b08180132dcb31d",
+      "authority": "calculation_registry",
+      "observed_at": "2026-10-13T03:40:23.701855+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/gpu_direct_v2/user_authorized_stop_receipt.json",
+      "sha256": "64e0a016e5da5ea0d4f45192ae2fdd4dafc3548cd1bb4a807566e2a45d482ffa",
+      "authority": "calculation_file",
+      "observed_at": "2026-10-13T03:40:23.701855+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "supersedes": [
+    "task-fe110-c2-direct-cpu-binding-review-20261013"
+  ],
+  "payload": {
+    "objective": "Complete and review fifteen CUDA AQCat25 adsorption pre-relaxations for species06-10, preserving all CPU-trial evidence.",
+    "phase": "active",
+    "current_evidence": [
+      "Original CPU PID114670 had already ended with producer exit0/all15; no stop signal sent and60 predicted output files preserved/hash-inventoried.",
+      "CUDA v3 direct run ID direct-fe110-c2-0610-20261013-v3, parent PID121917, physical GPU1; scheduler NONE/job ID null.",
+      "Actual model tensor device cuda:0 maps pinned physical GPU1 UUID; live GPU compute process observed. 06_A reached71 ML steps/fmax0.060894; chemistry and final stable-state review pending.",
+      "Original initial structures/checkpoint/optimizer/max80 unchanged; serial15 with7200-second wall bound. No VASP, model promotion or accepted adsorption-energy result.",
+      "Canonical registry old CPU done/new GPU running, quick_check ok/FK clear; local25 scoped tests and remote no-model/CUDA startup checks passed."
+    ],
+    "one_executable_step": "Check the direct v3 process/producer receipts at the next requested checkpoint; after completion collect all15 predicted structures and perform work-side geometry, connectivity, convergence and duplicate review before any VASP preparation.",
+    "submission_boundary": "Already authorized exact GPU1 batch only; do not duplicate launch, change shared services/others jobs, submit VASP or accept predicted values as DFT.",
+    "done_when": [
+      "Actual GPU execution remains bound to CUDA tensor/UUID, source checkpoint and immutable input hashes.",
+      "All fifteen outputs and producer exit evidence are collected and reviewed for ML convergence, chemistry/geometry and duplicates; scientific acceptance stays separate."
+    ],
+    "constraints": [
+      "Keep prior CPU outputs and all source versions; no invented scheduler DONE or numeric job ID.",
+      "A predicted optimizer pass is not a stable adsorption minimum or reportable energy; downstream VASP needs separate authorization."
+    ],
+    "authoritative_references": [
+      "configs/execution_backends.yaml",
+      "modules/adsorption_workflow/README.md",
+      "modules/calculation_registry/README.md",
+      "docs/reviews/fe110_c2_cuda_restart_20261013.md"
+    ]
+  }
+}

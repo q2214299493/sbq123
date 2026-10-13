@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "document_kind": "calculation_registry_batch",
+  "batch_id": "fe110_c2_06_10_gpu_direct_20261013_v3_CUDA_started",
+  "created_at": "2026-10-13T03:38:17.683563+00:00",
+  "reviewer": "User-authorized Codex scientific review",
+  "reason": "Explicit approved GPU restart with actual CUDA model device and GPU process evidence; predictions remain unaccepted.",
+  "rows": {
+    "jobs": [
+      {
+        "job_record_id": "gpu_direct_fe110_c2_0610_20261013_v3",
+        "calculation_id": "fe110_c2_06_10_gpu_direct_20261013_v3",
+        "scheduler_job_id": null,
+        "scheduler": "NONE",
+        "server_alias": "MZ73",
+        "queue": null,
+        "remote_directory": "/home/sbq/sbq/aqcat25_ts_pilot/fe110_c2_06_10_20261013_gpu_direct_v3",
+        "submit_script": "direct_gpu_batch.py launch",
+        "submitted_at": null,
+        "started_at": "2026-10-13T03:36:36.652984+00:00"
+      }
+    ],
+    "job_status_history": [
+      {
+        "status_event_id": 280,
+        "job_record_id": "gpu_direct_fe110_c2_0610_20261013_v3",
+        "scheduler_status": "UNKNOWN",
+        "scientific_status": "GPU ML pre-relaxation running; CUDA tensor and physical GPU1 process verified",
+        "checked_at": "2026-10-13T03:38:17.683563+00:00",
+        "source_command": "read execution_device.json; ps -p121917; nvidia-smi; bounded LBFGS log",
+        "source_text": "Parent PID121917 active; CUDA tensor cuda:0 maps physical GPU1 UUID; GPU compute process observed. 06_A reached ML fmax0.060894 in71 steps; scientific review pending.",
+        "reviewer": "User-authorized Codex scientific review",
+        "notes": "Independent direct run, no scheduler job ID; not VASP or accepted adsorption energy."
+      }
+    ],
+    "files": [
+      {
+        "file_id": "fe110_c2_06_10_gpu_direct_20261013_v3_startup_0",
+        "calculation_id": "fe110_c2_06_10_gpu_direct_20261013_v3",
+        "job_record_id": "gpu_direct_fe110_c2_0610_20261013_v3",
+        "role": "actual_CUDA_process_execution_evidence",
+        "filename": "direct_launch_receipt.json",
+        "local_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_06_10_20261012\\gpu_direct_v3\\direct_launch_receipt.json",
+        "remote_path": "/home/sbq/sbq/aqcat25_ts_pilot/fe110_c2_06_10_20261013_gpu_direct_v3/direct_launch_receipt.json",
+        "storage_mode": "local_and_remote",
+        "byte_size": 356,
+        "sha256": "8519306ebb3b459f0f56c216e3871623e63b39147b87cbecfcf505d4a9e89d01",
+        "existence_status": "confirmed"
+      },
+      {
+        "file_id": "fe110_c2_06_10_gpu_direct_20261013_v3_startup_1",
+        "calculation_id": "fe110_c2_06_10_gpu_direct_20261013_v3",
+        "job_record_id": "gpu_direct_fe110_c2_0610_20261013_v3",
+        "role": "actual_CUDA_process_execution_evidence",
+        "filename": "direct_started.json",
+        "local_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_06_10_20261012\\gpu_direct_v3\\direct_started.json",
+        "remote_path": "/home/sbq/sbq/aqcat25_ts_pilot/fe110_c2_06_10_20261013_gpu_direct_v3/direct_started.json",
+        "storage_mode": "local_and_remote",
+        "byte_size": 191,
+        "sha256": "e1bce0686c0f62e97599ff19ce412559032196428c7d646563e3b1cdb7badcf2",
+        "existence_status": "confirmed"
+      },
+      {
+        "file_id": "fe110_c2_06_10_gpu_direct_20261013_v3_startup_2",
+        "calculation_id": "fe110_c2_06_10_gpu_direct_20261013_v3",
+        "job_record_id": "gpu_direct_fe110_c2_0610_20261013_v3",
+        "role": "actual_CUDA_process_execution_evidence",
+        "filename": "startup_checkpoint.json",
+        "local_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_06_10_20261012\\gpu_direct_v3\\startup_checkpoint.json",
+        "remote_path": null,
+        "storage_mode": "local_only",
+        "byte_size": 2523,
+        "sha256": "61e082f81d8438de4aedf696b426fe67b3578e72b5ef7dd97d76c5ec4a393149",
+        "existence_status": "confirmed"
+      }
+    ]
+  },
+  "workflow_status_changes": [
+    {
+      "status_change_id": "fe110_c2_06_10_gpu_direct_20261013_v3_running",
+      "calculation_id": "fe110_c2_06_10_gpu_direct_20261013_v3",
+      "expected_workflow_status": "registered",
+      "new_workflow_status": "running",
+      "changed_at": "2026-10-13T03:38:17.683563+00:00",
+      "reviewer": "User-authorized Codex scientific review",
+      "reason": "Real CUDA GPU1 pre-relaxation verified; final predicted candidates and scientific review pending."
+    }
+  ]
+}

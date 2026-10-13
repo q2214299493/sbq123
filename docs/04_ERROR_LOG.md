@@ -13,18 +13,6 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Error Log
 
-## 2026-10-13 — GPU request silently used calculator CPU default
-
-- Actual v2 direct trial PID114670 has LBFGS activity but no GPU1 compute
-  process. The deployed OCPCalculator defaults cpu=True and the copied
-  adsorption runtime omitted cpu=False. GPU execution is not established.
-- Explicit CUDA invocation, pre-model CPU-keyword rejection and tensor-device
-  assertions are prepared and tested; CUDA rerun remains unvalidated.
-- Preserve all outputs. Stopping the active trial and a corrected GPU restart
-  await user direction; do not infer all historical GPU jobs were CPU jobs.
-- Evidence: `docs/reviews/fe110_c2_direct_gpu_attempt_20261013.md`.
-
-
 Only unresolved problems belong here. Resolved detail through 2026-06-27 is preserved in `archive/state_history/ERROR_LOG_through_20260627.md` and Git history.
 
 | ID | Open problem | Impact | Next action / owner |

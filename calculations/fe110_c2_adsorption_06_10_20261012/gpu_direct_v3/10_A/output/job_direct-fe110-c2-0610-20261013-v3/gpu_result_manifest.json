@@ -1,0 +1,352 @@
+{
+  "schema_version": 2,
+  "direction": "gpu_to_work",
+  "handoff_id": "fe110_c2_06_10_20261013_10_A",
+  "workflow_kind": "adsorption",
+  "source_workflow_sha256": "ae16c4b50821645c1d6552dd99286e3d7e436c392d48ff70290de8c4ec2d70c3",
+  "source_handoff": {
+    "path": "handoff.json",
+    "sha256": "08cbcd5d0413fc9860553008868aa29c0ad890c087d4f5cb95ecc84c19aaa9c8"
+  },
+  "candidate_structure": {
+    "path": "output/job_direct-fe110-c2-0610-20261013-v3/POSCAR",
+    "sha256": "896c82e8db0e8f70425065b3ad18b771e2abccff64bc4ebcfcbf944d25b1f8a2",
+    "format": "vasp_poscar",
+    "atom_count": 50,
+    "atom_order_sha256": "75411d464fbfc6c7636c1dbcd9f762272b23c443ad0a8e58994eddb731e5e6d9"
+  },
+  "adsorption": {
+    "evidence_gated_plan_sha256": "ae16c4b50821645c1d6552dd99286e3d7e436c392d48ff70290de8c4ec2d70c3",
+    "clean_slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+    "identity_and_connectivity": "ORGHESHFQPYLAO [CH][CH2]",
+    "intended_motif": "LOCAL_CARE_POSE_TRANSFER: \u03b7\u00b2(C,C)/t-t",
+    "surface_elements": [
+      "Fe"
+    ],
+    "adsorbate_atoms": [
+      {
+        "index_1based": 46,
+        "symbol": "C",
+        "role": "anchor"
+      },
+      {
+        "index_1based": 47,
+        "symbol": "C",
+        "role": "anchor"
+      },
+      {
+        "index_1based": 48,
+        "symbol": "H",
+        "role": "non_anchor"
+      },
+      {
+        "index_1based": 49,
+        "symbol": "H",
+        "role": "non_anchor"
+      },
+      {
+        "index_1based": 50,
+        "symbol": "H",
+        "role": "non_anchor"
+      }
+    ],
+    "connectivity_constraints": [],
+    "monitored_pairs": [
+      {
+        "label": "46_47",
+        "atoms_1based": [
+          46,
+          47
+        ]
+      },
+      {
+        "label": "46_48",
+        "atoms_1based": [
+          46,
+          48
+        ]
+      },
+      {
+        "label": "46_49",
+        "atoms_1based": [
+          46,
+          49
+        ]
+      },
+      {
+        "label": "46_50",
+        "atoms_1based": [
+          46,
+          50
+        ]
+      },
+      {
+        "label": "47_48",
+        "atoms_1based": [
+          47,
+          48
+        ]
+      },
+      {
+        "label": "47_49",
+        "atoms_1based": [
+          47,
+          49
+        ]
+      },
+      {
+        "label": "47_50",
+        "atoms_1based": [
+          47,
+          50
+        ]
+      },
+      {
+        "label": "48_49",
+        "atoms_1based": [
+          48,
+          49
+        ]
+      },
+      {
+        "label": "48_50",
+        "atoms_1based": [
+          48,
+          50
+        ]
+      },
+      {
+        "label": "49_50",
+        "atoms_1based": [
+          49,
+          50
+        ]
+      }
+    ]
+  },
+  "producer": {
+    "backend": "aqcat_gpu",
+    "hostname": "MZ73",
+    "gpu_job_id": "direct-fe110-c2-0610-20261013-v3",
+    "model_identifier": "AQCat25 demo_single model.pt",
+    "checkpoint_sha256": "e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50"
+  },
+  "result": {
+    "result_class": "predicted_adsorption_candidate_only",
+    "optimizer_status": "converged",
+    "optimizer_steps": 43,
+    "predicted_energy": {
+      "value": -3.234114170074463,
+      "unit": "eV",
+      "reportable_dft": false
+    },
+    "predicted_force": {
+      "fmax": 0.07990991027978363,
+      "unit": "eV/A",
+      "reportable_dft": false
+    },
+    "geometry_before": {
+      "pairs": {
+        "46_47": {
+          "atoms_1based": [
+            46,
+            47
+          ],
+          "distance_A": 1.4150517162601048
+        },
+        "46_48": {
+          "atoms_1based": [
+            46,
+            48
+          ],
+          "distance_A": 1.0657596591079543
+        },
+        "46_49": {
+          "atoms_1based": [
+            46,
+            49
+          ],
+          "distance_A": 2.172463750117482
+        },
+        "46_50": {
+          "atoms_1based": [
+            46,
+            50
+          ],
+          "distance_A": 2.1725064568527754
+        },
+        "47_48": {
+          "atoms_1based": [
+            47,
+            48
+          ],
+          "distance_A": 2.480811375368059
+        },
+        "47_49": {
+          "atoms_1based": [
+            47,
+            49
+          ],
+          "distance_A": 1.0828240333279722
+        },
+        "47_50": {
+          "atoms_1based": [
+            47,
+            50
+          ],
+          "distance_A": 1.0828478974971891
+        },
+        "48_49": {
+          "atoms_1based": [
+            48,
+            49
+          ],
+          "distance_A": 3.167818275633637
+        },
+        "48_50": {
+          "atoms_1based": [
+            48,
+            50
+          ],
+          "distance_A": 3.1678634851968885
+        },
+        "49_50": {
+          "atoms_1based": [
+            49,
+            50
+          ],
+          "distance_A": 1.87039177737895
+        }
+      },
+      "anchors": [
+        {
+          "atom_index_1based": 46,
+          "symbol": "C",
+          "nearest_surface_atom_index_1based": 42,
+          "nearest_surface_distance_A": 2.4063648865449068
+        },
+        {
+          "atom_index_1based": 47,
+          "symbol": "C",
+          "nearest_surface_atom_index_1based": 42,
+          "nearest_surface_distance_A": 2.406364893165266
+        }
+      ]
+    },
+    "geometry_after": {
+      "pairs": {
+        "46_47": {
+          "atoms_1based": [
+            46,
+            47
+          ],
+          "distance_A": 1.434252924256575
+        },
+        "46_48": {
+          "atoms_1based": [
+            46,
+            48
+          ],
+          "distance_A": 1.1652797554008516
+        },
+        "46_49": {
+          "atoms_1based": [
+            46,
+            49
+          ],
+          "distance_A": 2.202414735651512
+        },
+        "46_50": {
+          "atoms_1based": [
+            46,
+            50
+          ],
+          "distance_A": 2.210060429252579
+        },
+        "47_48": {
+          "atoms_1based": [
+            47,
+            48
+          ],
+          "distance_A": 2.1617994639349374
+        },
+        "47_49": {
+          "atoms_1based": [
+            47,
+            49
+          ],
+          "distance_A": 1.0982243045506666
+        },
+        "47_50": {
+          "atoms_1based": [
+            47,
+            50
+          ],
+          "distance_A": 1.093427324400832
+        },
+        "48_49": {
+          "atoms_1based": [
+            48,
+            49
+          ],
+          "distance_A": 2.4425856977419667
+        },
+        "48_50": {
+          "atoms_1based": [
+            48,
+            50
+          ],
+          "distance_A": 3.088656751773029
+        },
+        "49_50": {
+          "atoms_1based": [
+            49,
+            50
+          ],
+          "distance_A": 1.8339369423956067
+        }
+      },
+      "anchors": [
+        {
+          "atom_index_1based": 46,
+          "symbol": "C",
+          "nearest_surface_atom_index_1based": 44,
+          "nearest_surface_distance_A": 1.9914594973021769
+        },
+        {
+          "atom_index_1based": 47,
+          "symbol": "C",
+          "nearest_surface_atom_index_1based": 42,
+          "nearest_surface_distance_A": 2.1496459769957204
+        }
+      ]
+    },
+    "connectivity_status": "pass",
+    "structure_invariants": {
+      "atom_order_preserved": true,
+      "cell_preserved": true,
+      "fixed_atoms_preserved": true
+    }
+  },
+  "domain_assessment": {
+    "calibration_id": "aqcat25_fe45_v1",
+    "status": "in_domain",
+    "method": "empirical force error on compatible VASP final-force labels; no per-candidate uncertainty from one checkpoint",
+    "reasons": [
+      "compatible Fe45 composition envelope and all empirical force thresholds passed"
+    ]
+  },
+  "producer_exit_record": {
+    "path": "output/job_direct-fe110-c2-0610-20261013-v3/producer_exit_record.json",
+    "sha256": "98c04fcab39dff0b4fd54d27c1e2edc410b1434ed2ef52455b92572922ef794c",
+    "status": "success",
+    "exit_code": 0,
+    "evidence_class": "producer_process_only_not_scheduler_accounting"
+  },
+  "restrictions": {
+    "predicted_candidate_only": true,
+    "submit_vasp": false,
+    "scientific_acceptance": false,
+    "direct_gpu_to_vasp_handoff": false
+  }
+}

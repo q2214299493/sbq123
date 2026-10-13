@@ -13,6 +13,18 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Decisions Log
 
+## 2026-10-13 — Approved CUDA-corrected restart and verified GPU1
+
+- User explicitly approved stopping only the prior CPU trial and restarting on
+  GPU1. The CPU parent had already ended normally, so no signal was sent;
+  all15 outputs remain preserved and predicted-only.
+- v3 uses unchanged original initial structures/model, explicit cpu=False and
+  actual tensor/physical-GPU proof. Independent ID/PID121917 and live GPU1
+  inference are recorded; default Slurm, shared services and others' jobs stay
+  unchanged. No VASP or final scientific acceptance is authorized here.
+- Evidence: `docs/reviews/fe110_c2_cuda_restart_20261013.md`.
+
+
 ## 2026-10-13 — Scoped independent GPU1 execution trial
 
 - User “你试试” authorizes the proposed direct GPU1 serial execution of the

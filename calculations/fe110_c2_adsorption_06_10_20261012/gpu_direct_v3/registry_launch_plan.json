@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "document_kind": "calculation_registry_batch_plan",
+  "batch_id": "fe110_c2_06_10_gpu_direct_20261013_v3_CUDA_started",
+  "batch_sha256": "dc39f6aa5efa3ead57e4ae79f2f2b5d209a3fbe4b6d83c223b892d5a48f3bcb6",
+  "insert_count": 5,
+  "update_count": 1,
+  "unchanged_count": 0,
+  "actions": [
+    {
+      "table": "jobs",
+      "index": 0,
+      "action": "insert"
+    },
+    {
+      "table": "job_status_history",
+      "index": 0,
+      "action": "insert"
+    },
+    {
+      "table": "files",
+      "index": 0,
+      "action": "insert"
+    },
+    {
+      "table": "files",
+      "index": 1,
+      "action": "insert"
+    },
+    {
+      "table": "files",
+      "index": 2,
+      "action": "insert"
+    },
+    {
+      "table": "calculation_workflow_status_history",
+      "index": 0,
+      "action": "update"
+    }
+  ],
+  "approval_identity": "User-authorized Codex scientific review",
+  "database_fingerprint": "fecedf62a06ddd30d1a0d4866d2409173669e061356efc2b324e9c647ede50b6",
+  "database_identity": "C:\\Users\\86177\\Desktop\\work\\data\\project_registry.sqlite3",
+  "scope": [
+    "calculation_workflow_status_history",
+    "files",
+    "job_status_history",
+    "jobs"
+  ],
+  "plan_sha256": "ac4bb2725691ce65e17849500043955494326ee746c2dfddee89addee6d24b3c"
+}

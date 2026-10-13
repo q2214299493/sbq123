@@ -13,6 +13,13 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+Fe110 C2 species06–10 verified CUDA completion (2026-10-13):
+`docs/reviews/fe110_c2_cuda_completion_20261013.md` indexes all15 original-byte
+GPU returns, actual CUDA binding, preliminary graph checks and canonical receipts.
+`docs/reviews/fe110_c2_cuda_restart_20261013.md` preserves restart/CPU-retention
+and device-assertion evidence. No VASP or accepted adsorption energy for this set.
+
+
 This is a navigation index, not a duplicate file listing. Use `git ls-files` for the complete tracked inventory.
 
 Fe110 C₂ adsorption01–05 completion (2026-10-12):

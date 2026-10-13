@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2-cuda-v3-return-review-20261013",
+  "occurred_at": "2026-10-13T03:51:00.279938+00:00",
+  "recorded_at": "2026-10-13T03:51:00.279938+00:00",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "adsorption_workflow"
+  },
+  "summary": "All15 CUDA producers complete in138.303seconds; original-byte returns and actual GPU bindings verified. Twelve target graphs preserved;06_A/06_B/09_B need chemistry review; no VASP.",
+  "evidence": [
+    {
+      "locator": "docs/reviews/fe110_c2_cuda_completion_20261013.md",
+      "sha256": "a38d3f56d209dcbcb0f119aac03a0d6d3678db8d4738a728acfd166cc723e6c2",
+      "authority": "repository_document",
+      "observed_at": "2026-10-13T03:51:00.279938+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/gpu_direct_v3/direct_batch_exit_record.json",
+      "sha256": "7322eb6a745b7b20924b71cb664fc9f3f91e46ec6f537297a1f9cfc67aca33ac",
+      "authority": "calculation_file",
+      "observed_at": "2026-10-13T03:51:00.279938+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/gpu_direct_v3/return_validation.json",
+      "sha256": "5116c60c6a1bcb3da25315d9658f587d9f8c936faa964d9331fb23693ff0712d",
+      "authority": "module_validation",
+      "observed_at": "2026-10-13T03:51:00.279938+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/gpu_direct_v3/output_inventory.json",
+      "sha256": "d65ddbfe30f93b6c9d33cc12f9e0ee075ad0b8bc1bf3977d02dce87097daca83",
+      "authority": "calculation_file",
+      "observed_at": "2026-10-13T03:51:00.279938+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/gpu_direct_v3/registry_completion_receipt.json",
+      "sha256": "30550b6cc7065e5d60bedd62d28a1cc32f844a412055e597e4673d27f6ad288f",
+      "authority": "calculation_registry",
+      "observed_at": "2026-10-13T03:51:00.279938+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "supersedes": [
+    "task-fe110-c2-cuda-v3-running-20261013"
+  ],
+  "payload": {
+    "objective": "Review the completed fifteen CUDA adsorption candidate structures and duplicates before a separately authorized VASP handoff.",
+    "phase": "active",
+    "current_evidence": [
+      "CUDA direct v3 producer exit0/all15 completed; elapsed138.303s; parent121917 exited. No Slurm job ID.",
+      "All15 model-device/UUID bindings, return manifests, remote/local output hashes and producer structure invariants pass; original CPU outputs preserved.",
+      "All15 reach unchanged ML fmax0.10 within19-74steps;12 retain expected graph/H placement;06_A/06_B/09_B flagged for chemical review.",
+      "Canonical completion records GPU workflow done with scheduler UNKNOWN/NONE; predictions remain outside accepted energy tables. No VASP, model promotion or VASP speedup claim."
+    ],
+    "one_executable_step": "Review all15 final predicted structures and surface-aware duplicates; specifically diagnose06_A/06_B hydrogen connectivity and09_B graph change before selecting any VASP candidates. Do not remove evidence-required motifs based only on ML.",
+    "submission_boundary": "Already authorized exact GPU1 batch only; do not duplicate launch, change shared services/others jobs, submit VASP or accept predicted values as DFT.",
+    "done_when": [
+      "Actual GPU execution remains bound to CUDA tensor/UUID, source checkpoint and immutable input hashes.",
+      "All fifteen outputs and producer exit evidence are collected and reviewed for ML convergence, chemistry/geometry and duplicates; scientific acceptance stays separate."
+    ],
+    "constraints": [
+      "Keep prior CPU outputs and all source versions; no invented scheduler DONE or numeric job ID.",
+      "A predicted optimizer pass is not a stable adsorption minimum or reportable energy; downstream VASP needs separate authorization."
+    ],
+    "authoritative_references": [
+      "configs/execution_backends.yaml",
+      "modules/adsorption_workflow/README.md",
+      "modules/calculation_registry/README.md",
+      "docs/reviews/fe110_c2_cuda_restart_20261013.md"
+    ]
+  }
+}

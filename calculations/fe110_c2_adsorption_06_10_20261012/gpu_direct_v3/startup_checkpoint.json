@@ -1,0 +1,56 @@
+{
+  "run_id": "direct-fe110-c2-0610-20261013-v3",
+  "records": {
+    "direct_launch_receipt.json": {
+      "run_id": "direct-fe110-c2-0610-20261013-v3",
+      "pid": 121917,
+      "request_sha256": "62f62a26872beb40df1b89c90f663f81f7903e4f8c3f60917895c2f640857bb6",
+      "launched_at": "2026-10-13T03:36:36.584191+00:00",
+      "execution_mode": "direct_no_scheduler",
+      "scheduler_job_id": null,
+      "gpu_index": 1,
+      "gpu_uuid": "GPU-450609b3-d1fd-ac33-d03a-79891be402da"
+    },
+    "direct_started.json": {
+      "run_id": "direct-fe110-c2-0610-20261013-v3",
+      "pid": 121917,
+      "started_at": "2026-10-13T03:36:36.652984+00:00",
+      "execution_mode": "direct_no_scheduler",
+      "scheduler_job_id": null
+    },
+    "direct_batch_exit_record.json": null,
+    "06_A/output/job_direct-fe110-c2-0610-20261013-v3/execution_device.json": {
+      "model_device": "cuda:0",
+      "physical_gpu_uuid": "GPU-450609b3-d1fd-ac33-d03a-79891be402da",
+      "pid": 121958,
+      "execution_mode": "direct_no_scheduler",
+      "scheduler_job_id": null
+    }
+  },
+  "model_progress": [
+    "LBFGS:   64 11:36:49       -2.837517        0.350982",
+    "LBFGS:   65 11:36:49       -2.941039        0.474073",
+    "LBFGS:   66 11:36:49       -2.908864        0.451256",
+    "LBFGS:   67 11:36:50       -3.184447        0.717162",
+    "LBFGS:   68 11:36:50       -3.345031        0.422902",
+    "LBFGS:   69 11:36:50       -3.436068        0.366485",
+    "LBFGS:   70 11:36:50       -3.454469        0.122655",
+    "LBFGS:   71 11:36:50       -3.483575        0.060894"
+  ],
+  "model_errors": [],
+  "process": {
+    "exit_code": 0,
+    "stdout": "    PID    PPID STAT     ELAPSED COMMAND\n 121917       1 Ss         01:15 /home/sbq/sbq/ml_ts_acceleration/venv/bin/python /home/sbq/sbq/aqcat25_ts_pilot/fe110_c2_06_10_20261013_gpu_direct_v3/direct_gpu_batch.py run direct_request.json --request-sha256 62f62a26872beb40df1b89c90f663f81f7903e4f8c3f60917895c2f640857bb6\n",
+    "stderr": ""
+  },
+  "gpu_processes": {
+    "exit_code": 0,
+    "stdout": "32432, /home/cyn/zga/env/comfy/bin/python, GPU-483c224e-cc19-13e2-24ad-c83efd14fa75, 6360 MiB\n122443, /home/sbq/sbq/ml_ts_acceleration/venv/bin/python, GPU-450609b3-d1fd-ac33-d03a-79891be402da, 2700 MiB\n9313, /home/cyn/zga/env/comfy/bin/python, GPU-7ec6ab8a-91a2-450d-04c1-a0d472452b5b, 6074 MiB\n",
+    "stderr": ""
+  },
+  "gpu_usage": {
+    "exit_code": 0,
+    "stdout": "0, 6461 MiB, 0 %\n1, 2723 MiB, 36 %\n2, 6229 MiB, 0 %\n3, 15 MiB, 0 %\n",
+    "stderr": ""
+  }
+}
