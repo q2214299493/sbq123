@@ -13,6 +13,17 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Decisions Log
 
+## 2026-10-13 — Scoped independent GPU1 execution trial
+
+- User “你试试” authorizes the proposed direct GPU1 serial execution of the
+  fifteen frozen 06–10 candidates; keep Slurm as the default for other work.
+  Use an independent ID/PID and producer receipts, not a fake Slurm ID.
+- v2 process startup exposed an inherited CPU-default calculator invocation.
+  Record actual CPU execution, prepare explicit CUDA binding/tensor assertions,
+  and obtain separate authority before stopping the active CPU trial.
+- Evidence: `docs/reviews/fe110_c2_direct_gpu_attempt_20261013.md`.
+
+
 ## 2026-10-13 — Three task-scoped scheduler-evidence exceptions
 
 - User explicitly authorized registration of 02_extra2/9842106,

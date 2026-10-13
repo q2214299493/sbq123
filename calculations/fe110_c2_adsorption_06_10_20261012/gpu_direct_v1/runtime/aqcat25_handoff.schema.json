@@ -1,0 +1,368 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/schemas/aqcat25-handoff-v2.json",
+  "title": "AQCat25 work/GPU handoff contract",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "direction",
+    "handoff_id",
+    "workflow_kind",
+    "source_workflow_sha256",
+    "candidate_structure",
+    "restrictions"
+  ],
+  "properties": {
+    "schema_version": {"const": 2},
+    "direction": {"enum": ["work_to_gpu", "gpu_to_work"]},
+    "handoff_id": {"type": "string", "minLength": 1},
+    "workflow_kind": {"enum": ["adsorption", "transition_state"]},
+    "source_workflow_sha256": {"$ref": "#/$defs/sha256"},
+    "source_handoff": {"$ref": "#/$defs/hashedFile"},
+    "candidate_structure": {"$ref": "#/$defs/fileRef"},
+    "compatibility": {"$ref": "#/$defs/compatibility"},
+    "model": {"$ref": "#/$defs/model"},
+    "selective_dynamics": {"$ref": "#/$defs/selectiveDynamics"},
+    "adsorption": {"$ref": "#/$defs/adsorption"},
+    "transition_state": {"$ref": "#/$defs/transitionState"},
+    "producer": {"$ref": "#/$defs/producer"},
+    "result": {"$ref": "#/$defs/result"},
+    "domain_assessment": {"$ref": "#/$defs/domainAssessment"},
+    "producer_exit_record": {"$ref": "#/$defs/producerExitRecord"},
+    "restrictions": {"$ref": "#/$defs/restrictions"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"direction": {"const": "work_to_gpu"}}},
+      "then": {
+        "required": ["compatibility", "model", "selective_dynamics"],
+        "not": {
+          "anyOf": [
+            {"required": ["producer"]},
+            {"required": ["result"]},
+            {"required": ["domain_assessment"]},
+            {"required": ["producer_exit_record"]}
+          ]
+        }
+      },
+      "else": {
+        "required": ["source_handoff", "producer", "result", "domain_assessment", "producer_exit_record"],
+        "not": {
+          "anyOf": [
+            {"required": ["compatibility"]},
+            {"required": ["model"]},
+            {"required": ["selective_dynamics"]}
+          ]
+        }
+      }
+    },
+    {
+      "if": {"properties": {"workflow_kind": {"const": "adsorption"}}},
+      "then": {
+        "required": ["adsorption"],
+        "not": {"required": ["transition_state"]}
+      },
+      "else": {
+        "required": ["transition_state"],
+        "not": {"required": ["adsorption"]}
+      }
+    }
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "positiveIndex": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "hashedFile": {
+      "type": "object",
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      },
+      "additionalProperties": false
+    },
+    "fileRef": {
+      "type": "object",
+      "required": ["path", "sha256", "format", "atom_count", "atom_order_sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "format": {"const": "vasp_poscar"},
+        "atom_count": {"type": "integer", "minimum": 1},
+        "atom_order_sha256": {"$ref": "#/$defs/sha256"}
+      },
+      "additionalProperties": false
+    },
+    "compatibility": {
+      "type": "object",
+      "required": ["branch", "sha256", "slab_model", "facet"],
+      "properties": {
+        "branch": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "slab_model": {"type": "string", "minLength": 1},
+        "facet": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "model": {
+      "type": "object",
+      "required": ["identifier", "checkpoint_sha256", "fmax_eV_per_A", "max_steps"],
+      "properties": {
+        "identifier": {"type": "string", "minLength": 1},
+        "checkpoint_sha256": {"$ref": "#/$defs/sha256"},
+        "fmax_eV_per_A": {"type": "number", "exclusiveMinimum": 0},
+        "max_steps": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "selectiveDynamics": {
+      "type": "object",
+      "required": ["fixed_atom_indices_1based", "free_atom_count"],
+      "properties": {
+        "fixed_atom_indices_1based": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/positiveIndex"},
+          "uniqueItems": true
+        },
+        "free_atom_count": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "adsorbateAtom": {
+      "type": "object",
+      "required": ["index_1based", "symbol", "role"],
+      "properties": {
+        "index_1based": {"$ref": "#/$defs/positiveIndex"},
+        "symbol": {"type": "string", "pattern": "^[A-Z][a-z]?$"},
+        "role": {"enum": ["anchor", "non_anchor"]}
+      },
+      "additionalProperties": false
+    },
+    "pairRule": {
+      "type": "object",
+      "required": ["label", "atoms_1based"],
+      "properties": {
+        "label": {"type": "string", "minLength": 1},
+        "atoms_1based": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/positiveIndex"},
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "min_distance_A": {"type": "number", "minimum": 0},
+        "max_distance_A": {"type": "number", "exclusiveMinimum": 0}
+      },
+      "anyOf": [
+        {"required": ["min_distance_A"]},
+        {"required": ["max_distance_A"]}
+      ],
+      "additionalProperties": false
+    },
+    "monitoredPair": {
+      "type": "object",
+      "required": ["label", "atoms_1based"],
+      "properties": {
+        "label": {"type": "string", "minLength": 1},
+        "atoms_1based": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/positiveIndex"},
+          "minItems": 2,
+          "maxItems": 2
+        }
+      },
+      "additionalProperties": false
+    },
+    "adsorption": {
+      "type": "object",
+      "required": [
+        "evidence_gated_plan_sha256",
+        "clean_slab_sha256",
+        "identity_and_connectivity",
+        "intended_motif",
+        "surface_elements",
+        "adsorbate_atoms",
+        "connectivity_constraints",
+        "monitored_pairs"
+      ],
+      "properties": {
+        "evidence_gated_plan_sha256": {"$ref": "#/$defs/sha256"},
+        "clean_slab_sha256": {"$ref": "#/$defs/sha256"},
+        "identity_and_connectivity": {"type": "string", "minLength": 1},
+        "intended_motif": {"type": "string", "minLength": 1},
+        "surface_elements": {
+          "type": "array",
+          "items": {"type": "string", "pattern": "^[A-Z][a-z]?$"},
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "adsorbate_atoms": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/adsorbateAtom"},
+          "minItems": 1
+        },
+        "connectivity_constraints": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/pairRule"}
+        },
+        "monitored_pairs": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/monitoredPair"}
+        }
+      },
+      "additionalProperties": false
+    },
+    "bondChange": {
+      "type": "object",
+      "required": ["atoms_1based", "change"],
+      "properties": {
+        "atoms_1based": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/positiveIndex"},
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "change": {"enum": ["form", "break", "order_change"]}
+      },
+      "additionalProperties": false
+    },
+    "transitionState": {
+      "type": "object",
+      "required": [
+        "normalized_reaction_contract_sha256",
+        "atom_map_sha256",
+        "initial_structure",
+        "waypoint_structures",
+        "final_structure",
+        "indexed_bond_changes"
+      ],
+      "properties": {
+        "normalized_reaction_contract_sha256": {"$ref": "#/$defs/sha256"},
+        "atom_map_sha256": {"$ref": "#/$defs/sha256"},
+        "initial_structure": {"$ref": "#/$defs/fileRef"},
+        "waypoint_structures": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/fileRef"}
+        },
+        "final_structure": {"$ref": "#/$defs/fileRef"},
+        "indexed_bond_changes": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/bondChange"},
+          "minItems": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "producer": {
+      "type": "object",
+      "required": ["backend", "hostname", "gpu_job_id", "model_identifier", "checkpoint_sha256"],
+      "properties": {
+        "backend": {"const": "aqcat_gpu"},
+        "hostname": {"type": "string", "minLength": 1},
+        "gpu_job_id": {"type": "string", "minLength": 1},
+        "model_identifier": {"type": "string", "minLength": 1},
+        "checkpoint_sha256": {"$ref": "#/$defs/sha256"}
+      },
+      "additionalProperties": false
+    },
+    "predictedEnergy": {
+      "type": "object",
+      "required": ["value", "unit", "reportable_dft"],
+      "properties": {
+        "value": {"type": "number"},
+        "unit": {"const": "eV"},
+        "reportable_dft": {"const": false}
+      },
+      "additionalProperties": false
+    },
+    "predictedForce": {
+      "type": "object",
+      "required": ["fmax", "unit", "reportable_dft"],
+      "properties": {
+        "fmax": {"type": "number", "minimum": 0},
+        "unit": {"const": "eV/A"},
+        "reportable_dft": {"const": false}
+      },
+      "additionalProperties": false
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "result_class",
+        "optimizer_status",
+        "optimizer_steps",
+        "predicted_energy",
+        "predicted_force",
+        "geometry_before",
+        "geometry_after",
+        "connectivity_status",
+        "structure_invariants"
+      ],
+      "properties": {
+        "result_class": {
+          "enum": ["predicted_adsorption_candidate_only", "predicted_transition_state_candidate_only"]
+        },
+        "optimizer_status": {"enum": ["converged", "unfinished", "failed"]},
+        "optimizer_steps": {"type": "integer", "minimum": 0},
+        "predicted_energy": {"$ref": "#/$defs/predictedEnergy"},
+        "predicted_force": {"$ref": "#/$defs/predictedForce"},
+        "geometry_before": {"type": "object"},
+        "geometry_after": {"type": "object"},
+        "connectivity_status": {"enum": ["pass", "fail", "not_applicable"]},
+        "structure_invariants": {
+          "type": "object",
+          "required": ["atom_order_preserved", "cell_preserved", "fixed_atoms_preserved"],
+          "properties": {
+            "atom_order_preserved": {"type": "boolean"},
+            "cell_preserved": {"type": "boolean"},
+            "fixed_atoms_preserved": {"type": "boolean"}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "domainAssessment": {
+      "type": "object",
+      "required": ["calibration_id", "status", "method", "reasons"],
+      "properties": {
+        "calibration_id": {"type": ["string", "null"]},
+        "status": {"enum": ["in_domain", "out_of_domain", "calibration_failed", "uncalibrated"]},
+        "method": {"type": "string", "minLength": 1},
+        "reasons": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        }
+      },
+      "additionalProperties": false
+    },
+    "producerExitRecord": {
+      "type": "object",
+      "required": ["path", "sha256", "status", "exit_code", "evidence_class"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "status": {"enum": ["success", "failed"]},
+        "exit_code": {"type": "integer", "minimum": 0, "maximum": 255},
+        "evidence_class": {"const": "producer_process_only_not_scheduler_accounting"}
+      },
+      "additionalProperties": false
+    },
+    "restrictions": {
+      "type": "object",
+      "required": ["predicted_candidate_only", "submit_vasp", "scientific_acceptance", "direct_gpu_to_vasp_handoff"],
+      "properties": {
+        "predicted_candidate_only": {"const": true},
+        "submit_vasp": {"const": false},
+        "scientific_acceptance": {"const": false},
+        "direct_gpu_to_vasp_handoff": {"const": false}
+      },
+      "additionalProperties": false
+    }
+  }
+}

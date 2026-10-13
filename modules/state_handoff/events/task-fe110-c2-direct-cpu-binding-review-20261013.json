@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2-direct-cpu-binding-review-20261013",
+  "occurred_at": "2026-10-13T02:34:03.747881+00:00",
+  "recorded_at": "2026-10-13T02:34:03.747881+00:00",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "adsorption_workflow"
+  },
+  "summary": "User-authorized direct trial started without Slurm; actual calculator CPU default discovered. CUDA correction prepared; stopping the active CPU trial awaits explicit user authority.",
+  "evidence": [
+    {
+      "locator": "docs/reviews/fe110_c2_direct_gpu_attempt_20261013.md",
+      "sha256": "ced8d3f182f0de9c4f29b42853cad6da14c8b739cb70e74ba9f746deaba30e0e",
+      "authority": "repository_document",
+      "observed_at": "2026-10-13T02:34:03.747881+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/gpu_direct_v2/direct_request.json",
+      "sha256": "aabacfd7bbeb3fc452ebd9ba4818e7bc9582def8d59eb23e2136bac493c1b11e",
+      "authority": "user_authorization",
+      "observed_at": "2026-10-13T02:34:03.747881+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/gpu_direct_v2/direct_launch_receipt.json",
+      "sha256": "19ff94a1bb757f316658b75613326457691c3cc2952dc49497e44455835b3593",
+      "authority": "calculation_file",
+      "observed_at": "2026-10-13T02:34:03.747881+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/gpu_direct_v2/registry_launch_receipt.json",
+      "sha256": "7aab4e04991a9ad1700981992fce8a13e91449fc2f163bfb5c85fcc1711bc1b4",
+      "authority": "calculation_registry",
+      "observed_at": "2026-10-13T02:34:03.747881+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/gpu_direct_v2/cpu_attempt_checkpoint.json",
+      "sha256": "d12c3e5e9bc0c124d7fb2944c60f82866d1342b07d4e79258c5a97b7f2130e45",
+      "authority": "calculation_file",
+      "observed_at": "2026-10-13T02:34:03.747881+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "supersedes": [
+    "task-fe110-c2-registration-gpu-blocked-20261013"
+  ],
+  "payload": {
+    "objective": "Repair and verify actual GPU execution for the user-authorized fifteen adsorption candidates; preserve the independent CPU trial evidence.",
+    "phase": "active",
+    "current_evidence": [
+      "Direct trial run ID direct-fe110-c2-0610-20261013-v2, PID114670, scheduler NONE/job ID null; exact launch records and registry receipts exist.",
+      "Copied patched_calc omitted cpu=False; deployed OCPCalculator defaults cpu=True. LBFGS activity is CPU execution, not verified GPU acceleration.",
+      "Explicit cpu=False and model tensor CUDA/UUID assertions prepared in v3 source; current scoped syntax/Ruff/25 device-backend-handoff tests pass. CUDA loading/inference not tested.",
+      "Separate user question asks permission to stop only the CPU trial and its children, retain outputs, then freeze/preflight the corrected GPU1 package. No stop performed."
+    ],
+    "one_executable_step": "Obtain explicit authority to stop the active CPU trial, verify its PID/process group, then freeze and preflight a fresh CUDA-corrected v3 GPU1 request before launching. If it already ended, preserve its exit evidence and resolve the corrected rerun authority.",
+    "submission_boundary": "Only fifteen original candidates and original checkpoint; no VASP, other user process, service restart, fake scheduler ID, model promotion or unapproved termination.",
+    "done_when": [
+      "Actual requested GPU execution is demonstrated by CUDA model tensor binding, physical GPU UUID and live process evidence.",
+      "All fifteen predicted outputs and producer exit records return for work-side chemical/geometry/duplicate review; never infer scientific acceptance from producer completion."
+    ],
+    "constraints": [
+      "Preserve v1 preflight failure, v2 CPU outputs and all immutable hashes.",
+      "Do not relabel current CPU execution as GPU acceleration or extrapolate it to all historical GPU tasks."
+    ],
+    "authoritative_references": [
+      "configs/execution_backends.yaml",
+      "scripts/adsorption/direct_gpu_batch.py",
+      "modules/adsorption_workflow/README.md",
+      "docs/reviews/fe110_c2_direct_gpu_attempt_20261013.md"
+    ]
+  }
+}

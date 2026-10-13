@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "document_kind": "calculation_registry_batch",
+  "batch_id": "fe110_c2_06_10_gpu_direct_20261013_cpu_attempt_started",
+  "created_at": "2026-10-13T02:30:45.146534+00:00",
+  "reviewer": "User-authorized Codex scientific review",
+  "reason": "Record actual direct process startup and discovered CPU default honestly; no GPU execution/success claim.",
+  "rows": {
+    "jobs": [
+      {
+        "job_record_id": "gpu_direct_fe110_c2_0610_20261013_v2",
+        "calculation_id": "fe110_c2_06_10_gpu_direct_20261013",
+        "scheduler_job_id": null,
+        "scheduler": "NONE",
+        "server_alias": "MZ73",
+        "queue": null,
+        "remote_directory": "/home/sbq/sbq/aqcat25_ts_pilot/fe110_c2_06_10_20261013_gpu_direct_v2",
+        "submit_script": "direct_gpu_batch.py launch",
+        "submitted_at": null,
+        "started_at": "2026-10-13T02:24:51.206546+00:00"
+      }
+    ],
+    "job_status_history": [
+      {
+        "status_event_id": 278,
+        "job_record_id": "gpu_direct_fe110_c2_0610_20261013_v2",
+        "scheduler_status": "UNKNOWN",
+        "scientific_status": "ML candidate producer running on CPU; requested GPU binding not established",
+        "checked_at": "2026-10-13T02:30:45.146534+00:00",
+        "source_command": "ps -p 114670; nvidia-smi; read OCPCalculator cpu default and actual runtime patched_calc call",
+        "source_text": "PID114670 active; model LBFGS steps observed; physical GPU1 has no compute process. OCPCalculator defaults cpu=True; this runtime omitted cpu=False.",
+        "reviewer": "User-authorized Codex scientific review",
+        "notes": "Direct run_id direct-fe110-c2-0610-20261013-v2 is NOT a Slurm ID. User approval to stop this active attempt is pending; no scientific result accepted."
+      }
+    ],
+    "files": [
+      {
+        "file_id": "fe110_c2_06_10_gpu_direct_20261013_launch_0",
+        "calculation_id": "fe110_c2_06_10_gpu_direct_20261013",
+        "job_record_id": "gpu_direct_fe110_c2_0610_20261013_v2",
+        "role": "direct_process_execution_evidence",
+        "filename": "direct_launch_receipt.json",
+        "local_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_06_10_20261012\\gpu_direct_v2\\direct_launch_receipt.json",
+        "remote_path": "/home/sbq/sbq/aqcat25_ts_pilot/fe110_c2_06_10_20261013_gpu_direct_v2/direct_launch_receipt.json",
+        "storage_mode": "local_and_remote",
+        "byte_size": 356,
+        "sha256": "19ff94a1bb757f316658b75613326457691c3cc2952dc49497e44455835b3593",
+        "existence_status": "confirmed"
+      },
+      {
+        "file_id": "fe110_c2_06_10_gpu_direct_20261013_launch_1",
+        "calculation_id": "fe110_c2_06_10_gpu_direct_20261013",
+        "job_record_id": "gpu_direct_fe110_c2_0610_20261013_v2",
+        "role": "direct_process_execution_evidence",
+        "filename": "direct_started.json",
+        "local_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_06_10_20261012\\gpu_direct_v2\\direct_started.json",
+        "remote_path": "/home/sbq/sbq/aqcat25_ts_pilot/fe110_c2_06_10_20261013_gpu_direct_v2/direct_started.json",
+        "storage_mode": "local_and_remote",
+        "byte_size": 191,
+        "sha256": "f1cd2052d00fb01a4f691a1efee1630627d76e214e39cc115e3a085be478c64b",
+        "existence_status": "confirmed"
+      }
+    ]
+  },
+  "workflow_status_changes": [
+    {
+      "status_change_id": "fe110_c2_06_10_gpu_direct_20261013_actual_running",
+      "calculation_id": "fe110_c2_06_10_gpu_direct_20261013",
+      "expected_workflow_status": "registered",
+      "new_workflow_status": "running",
+      "changed_at": "2026-10-13T02:30:45.146534+00:00",
+      "reviewer": "User-authorized Codex scientific review",
+      "reason": "Direct model optimization is running; requested GPU execution remains unproven due to cpu=True default."
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "schema_version": 2,
+  "direction": "work_to_gpu",
+  "workflow_kind": "adsorption",
+  "handoff_id": "fe110_c2_06_10_20261013_06_B",
+  "source_workflow_sha256": "ae16c4b50821645c1d6552dd99286e3d7e436c392d48ff70290de8c4ec2d70c3",
+  "candidate_structure": {
+    "path": "POSCAR",
+    "sha256": "eb5db69c3b9c16c8933481d086a9843f7b0ca8d7ff84f79d3607b695cd0d408e",
+    "format": "vasp_poscar",
+    "atom_count": 49,
+    "atom_order_sha256": "4b02a989fb2bb78573d64099687209cfb3886d4d70b1d4c0a407cd9f5b76c1a2"
+  },
+  "compatibility": {
+    "branch": "true_fe110_5layer_5x5x1",
+    "slab_model": "true_fe110_fe45_5layer",
+    "facet": "110",
+    "sha256": "851922b78e5e64b4afae7dfc7437af7cee2894491a50a01da3f5be26dcf0b593"
+  },
+  "model": {
+    "identifier": "AQCat25 demo_single model.pt",
+    "checkpoint_sha256": "e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50",
+    "fmax_eV_per_A": 0.1,
+    "max_steps": 80
+  },
+  "selective_dynamics": {
+    "fixed_atom_indices_1based": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18
+    ],
+    "free_atom_count": 31
+  },
+  "adsorption": {
+    "evidence_gated_plan_sha256": "ae16c4b50821645c1d6552dd99286e3d7e436c392d48ff70290de8c4ec2d70c3",
+    "clean_slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+    "identity_and_connectivity": "LXFVPGPVUCITAS [C]O[CH]",
+    "intended_motif": "LOCAL_CARE_POSE_TRANSFER: \u03b7\u00b3(C,C,O)/lb-lb-h",
+    "surface_elements": [
+      "Fe"
+    ],
+    "adsorbate_atoms": [
+      {
+        "index_1based": 46,
+        "symbol": "C",
+        "role": "anchor"
+      },
+      {
+        "index_1based": 47,
+        "symbol": "C",
+        "role": "anchor"
+      },
+      {
+        "index_1based": 48,
+        "symbol": "O",
+        "role": "anchor"
+      },
+      {
+        "index_1based": 49,
+        "symbol": "H",
+        "role": "non_anchor"
+      }
+    ],
+    "connectivity_constraints": [],
+    "monitored_pairs": [
+      {
+        "label": "46_47",
+        "atoms_1based": [
+          46,
+          47
+        ]
+      },
+      {
+        "label": "46_48",
+        "atoms_1based": [
+          46,
+          48
+        ]
+      },
+      {
+        "label": "46_49",
+        "atoms_1based": [
+          46,
+          49
+        ]
+      },
+      {
+        "label": "47_48",
+        "atoms_1based": [
+          47,
+          48
+        ]
+      },
+      {
+        "label": "47_49",
+        "atoms_1based": [
+          47,
+          49
+        ]
+      },
+      {
+        "label": "48_49",
+        "atoms_1based": [
+          48,
+          49
+        ]
+      }
+    ]
+  },
+  "restrictions": {
+    "predicted_candidate_only": true,
+    "submit_vasp": false,
+    "scientific_acceptance": false,
+    "direct_gpu_to_vasp_handoff": false
+  }
+}

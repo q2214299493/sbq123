@@ -48,6 +48,24 @@ backends:
       required_workflow_evidence: producer_exit_record
       producer_exit_record_is_scheduler_authority: false
       admin_resolution: enable Slurm accounting storage and job accounting on MZ73
+    direct_execution_exceptions:
+      fe110_c2_06_10_20261013:
+        authorized_by: user_explicit_20261013_try_direct_gpu1
+        scope: fifteen_reviewed_adsorption_candidates_only
+        remote_root: /home/sbq/sbq/aqcat25_ts_pilot/fe110_c2_06_10_20261013_gpu_direct_v2
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        gpu_index: 1
+        gpu_uuid: GPU-450609b3-d1fd-ac33-d03a-79891be402da
+        execution_mode: direct_no_scheduler
+        executor: scripts/adsorption/direct_gpu_batch.py
+        candidate_count: 15
+        parallel_candidates: 1
+        max_wall_seconds: 7200
+        explicit_authorization_required: true
+        producer_exit_record_required: true
+        scheduler_job_id: null
+        slurm_id_emulation: forbidden
+        alter_shared_services_or_other_users_jobs: forbidden
     allowed:
       - aqcat_energy_force_inference
       - matris_energy_force_inference
