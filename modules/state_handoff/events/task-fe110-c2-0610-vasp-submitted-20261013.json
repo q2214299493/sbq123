@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2-0610-vasp-submitted-20261013",
+  "occurred_at": "2026-10-13T09:45:36.294163+00:00",
+  "recorded_at": "2026-10-13T09:45:36.294163+00:00",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "adsorption_workflow"
+  },
+  "summary": "All15 CUDA candidates reviewed and explicitly authorized VASP relaxations submitted as LSF9848799-9848813;32 ranks each,3 predicted coadsorbate reclassifications;no final energy acceptance.",
+  "evidence": [
+    {
+      "locator": "docs/reviews/fe110_c2_06_10_vasp_submission_20261013.md",
+      "sha256": "f70f4ee52128030607012d81d4294eaa8795bcae781b0a663aa601f4c7cfaf40",
+      "authority": "repository_document",
+      "observed_at": "2026-10-13T09:45:36.294163+00:00"
+    },
+    {
+      "locator": "archive/fe110_c2_adsorption_06_10_20261013/vasp_authorization.md",
+      "sha256": "32b9399539d15f9fd8362cb4d059f439abb00f9789d660cddca7033d58e09398",
+      "authority": "user_authorization",
+      "observed_at": "2026-10-13T09:45:36.294163+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/vasp_batch_v1/submission_summary.json",
+      "sha256": "91be2748d437170bb6a73c85edeebfcd4137b415dcf080a55d00748d280d7c2d",
+      "authority": "scheduler",
+      "observed_at": "2026-10-13T09:45:36.294163+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/vasp_batch_v1/structure_review.json",
+      "sha256": "b6467a93fa325dc320aadedf76a7242bea378794082ac6e1bcbe3c8e5fa82996",
+      "authority": "module_validation",
+      "observed_at": "2026-10-13T09:45:36.294163+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/vasp_batch_v1/registry_receipt.json",
+      "sha256": "a0938c8135f41f82e2e9bfbb32699a6d873dd1b0f97e5d905a138c7a5bd6db8d",
+      "authority": "calculation_registry",
+      "observed_at": "2026-10-13T09:45:36.294163+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "supersedes": [
+    "task-fe110-c2-cuda-v3-return-review-20261013"
+  ],
+  "payload": {
+    "objective": "Monitor the fifteen authorized Fe110 C2 adsorption/coadsorption VASP relaxations and review final chemistry/convergence before automatic eligible-result registration.",
+    "phase": "active",
+    "current_evidence": [
+      "All15 GPU returned structures reviewed;12 target graphs intact and surface-symmetry nonduplicate;06_A/06_B predicted CO+C+H and09_B predicted CH2+CO retained by explicit user selection.",
+      "All15 unchanged routine_production input preflights and current SUBMIT_VASP gates pass;32 MPI ranks/max32 per node;SIGMA0.20;NSW300;no added pilot.",
+      "Canonical executor submitted real LSF jobs9848799-9848813 to sunboquan-codex;exact bundle/POTCAR verification and immutable receipts exist.",
+      "First live snapshot:06_A/9848799 RUN,other14 PEND;queue status only. Electronic/ionic convergence and final VASP chemistry not yet assessed.",
+      "Submission-only canonical registry batch applied for all15;no result energies accepted. Original CPU/GPU inputs and outputs retained."
+    ],
+    "one_executable_step": "Check these15 jobs with one bounded live scheduler/output checkpoint, separating queue,electronic,ionic and geometry state;do not repeat submission.",
+    "submission_boundary": "User authorized this exact15-job batch only;no automatic retry,stop,new calculation,model promotion or final energy acceptance.",
+    "done_when": [
+      "All15 jobs have truthful terminal scheduler and electronic/ionic evidence.",
+      "Final structures are reviewed for species/sites/duplicates and compatible VASP energies are automatically registered only when eligible."
+    ],
+    "constraints": [
+      "Retain the3 changed-chemistry inputs under reviewed coadsorbate labels rather than pretending original target graphs are intact.",
+      "GPU predictions are not accepted DFT data;final VASP chemistry and convergence control registration."
+    ],
+    "authoritative_references": [
+      "configs/execution_backends.yaml",
+      "modules/adsorption_workflow/README.md",
+      "modules/calculation_registry/README.md",
+      "docs/reviews/fe110_c2_06_10_vasp_submission_20261013.md"
+    ]
+  }
+}

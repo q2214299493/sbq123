@@ -13,6 +13,17 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Decisions Log
 
+## 2026-10-13 — All fifteen CUDA candidates submitted to VASP
+
+- User authorized all15 after the12 intact/3 changed-chemistry review. Keep
+  06_A/06_B as predicted CO+C+H and09_B as predicted CH2+CO starting states,
+  retaining original targets separately; no predicted energy acceptance.
+- Use32 MPI ranks/max32 per node, unchanged Fe45 routine_production and
+  SIGMA0.20; no added pilot, bond constraint or parameter tuning.
+- Canonical executor produced actual LSF receipts9848799–9848813; register
+  jobs/inputs only and independently check final VASP convergence/chemistry.
+- Evidence: `docs/reviews/fe110_c2_06_10_vasp_submission_20261013.md`.
+
 ## 2026-10-13 — Approved CUDA-corrected restart and verified GPU1
 
 - User explicitly approved stopping only the prior CPU trial and restarting on

@@ -13,6 +13,13 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+Fe110 C2 species06–10 authorized VASP batch (2026-10-13):
+`docs/reviews/fe110_c2_06_10_vasp_submission_20261013.md` indexes all15
+LSF jobs9848799–9848813, original CUDA structure review/reclassification,
+32-rank inputs, canonical gates and submission-only registry evidence in
+`calculations/fe110_c2_adsorption_06_10_20261012/vasp_batch_v1/`.
+No final adsorption result is accepted at submission.
+
 Fe110 C2 species06–10 verified CUDA completion (2026-10-13):
 `docs/reviews/fe110_c2_cuda_completion_20261013.md` indexes all15 original-byte
 GPU returns, actual CUDA binding, preliminary graph checks and canonical receipts.

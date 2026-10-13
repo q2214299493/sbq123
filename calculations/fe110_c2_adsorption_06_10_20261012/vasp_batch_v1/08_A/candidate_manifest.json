@@ -1,0 +1,179 @@
+{
+  "species_id": "08",
+  "formula": "C2H2O",
+  "care_code": "KQXYVMHIWIXTEY",
+  "connectivity": "[C][CH]O",
+  "submitted_connectivity": "[C][CH]O",
+  "source_structure": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_06_10_20261012\\gpu_direct_v3\\08_A\\output\\job_direct-fe110-c2-0610-20261013-v3\\POSCAR",
+  "source_sha256": "344da5d9919a3ad08179def31f4892305033ef405c7430ef37e31185143f790b",
+  "source_role": "reviewed_CUDA_direct_v3_prediction",
+  "source_candidate_plan_sha256": "b4949ebfa1cf1d5c8b5f4d00c3a31ac0c757980506ceb52b4c75c726e6644cc8",
+  "gpu_return_validation_sha256": "5116c60c6a1bcb3da25315d9658f587d9f8c936faa964d9331fb23693ff0712d",
+  "source_clean_slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+  "geometry_checks": {
+    "atom_order_cell_constraints_pass": true,
+    "minimum_Fe_adsorbate_A": 1.9510617015998333,
+    "initial_species": "[C][CH]O",
+    "predicted_final_species": "[C][CH]O",
+    "plausibility_status": "PASS",
+    "chemical_event": "intact_adsorption",
+    "source_sha256": "344da5d9919a3ad08179def31f4892305033ef405c7430ef37e31185143f790b",
+    "bond_distances": [
+      {
+        "atoms_0based": [
+          45,
+          46
+        ],
+        "pair": "O-C",
+        "distance_A": 1.3668362822260227
+      },
+      {
+        "atoms_0based": [
+          45,
+          48
+        ],
+        "pair": "O-H",
+        "distance_A": 0.980157682789739
+      },
+      {
+        "atoms_0based": [
+          46,
+          47
+        ],
+        "pair": "C-C",
+        "distance_A": 1.392754999208912
+      },
+      {
+        "atoms_0based": [
+          46,
+          49
+        ],
+        "pair": "C-H",
+        "distance_A": 1.0937454638044724
+      }
+    ],
+    "nearest_Fe": [
+      {
+        "atom": "O45",
+        "neighbors": [
+          {
+            "Fe_index_0based": 41,
+            "distance_A": 3.441470290933829
+          },
+          {
+            "Fe_index_0based": 38,
+            "distance_A": 3.604045744095813
+          },
+          {
+            "Fe_index_0based": 40,
+            "distance_A": 4.009341634890302
+          }
+        ]
+      },
+      {
+        "atom": "C46",
+        "neighbors": [
+          {
+            "Fe_index_0based": 41,
+            "distance_A": 2.49902030276612
+          },
+          {
+            "Fe_index_0based": 43,
+            "distance_A": 3.0502339615220038
+          },
+          {
+            "Fe_index_0based": 40,
+            "distance_A": 3.2688579168297287
+          }
+        ]
+      },
+      {
+        "atom": "C47",
+        "neighbors": [
+          {
+            "Fe_index_0based": 40,
+            "distance_A": 1.9510617015998333
+          },
+          {
+            "Fe_index_0based": 41,
+            "distance_A": 1.9596411363014656
+          },
+          {
+            "Fe_index_0based": 43,
+            "distance_A": 1.9916421063496588
+          }
+        ]
+      },
+      {
+        "atom": "H48",
+        "neighbors": [
+          {
+            "Fe_index_0based": 38,
+            "distance_A": 3.0062914315788194
+          },
+          {
+            "Fe_index_0based": 41,
+            "distance_A": 3.5200338908611117
+          },
+          {
+            "Fe_index_0based": 40,
+            "distance_A": 3.6346703462094907
+          }
+        ]
+      },
+      {
+        "atom": "H49",
+        "neighbors": [
+          {
+            "Fe_index_0based": 41,
+            "distance_A": 2.990486539417217
+          },
+          {
+            "Fe_index_0based": 44,
+            "distance_A": 3.243527597723157
+          },
+          {
+            "Fe_index_0based": 43,
+            "distance_A": 3.263607932113395
+          }
+        ]
+      }
+    ],
+    "user_review_scope": "All15 explicitly selected after chemistry review; predicted starting states only"
+  },
+  "builder": {
+    "profile_path": "C:\\Users\\86177\\Desktop\\work\\configs\\true_fe110_production.yaml",
+    "profile_sha256": "fbad642502134ca1123741f0bdf3194d2914e230981d38aab90debd4b965bcd3",
+    "stage": "routine_production",
+    "gamma_mesh": [
+      5,
+      5,
+      1
+    ],
+    "cores": 32,
+    "incar": {
+      "PREC": "Accurate",
+      "EDIFF": 1e-05,
+      "EDIFFG": -0.02,
+      "ISPIN": 2,
+      "ISMEAR": 1,
+      "SIGMA": 0.2,
+      "ALGO": "Fast",
+      "LREAL": false,
+      "LASPH": true,
+      "NELM": 200,
+      "NELMIN": 5,
+      "IBRION": 2,
+      "POTIM": 0.2,
+      "ISIF": 2,
+      "NSW": 300,
+      "ISYM": 0,
+      "LDIPOL": false,
+      "LCHARG": false,
+      "LWAVE": false,
+      "GGA": "PE",
+      "ENCUT": 400
+    }
+  },
+  "scientific_status": "starting_candidate_only_no_DFT_acceptance"
+}
