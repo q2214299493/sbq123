@@ -175,7 +175,7 @@ def _insert_file(connection: sqlite3.Connection, file_id: str, calculation_id: s
     )
 
 
-def database(path: Path, *, compatibility=None, missing_job_history=None) -> Path:
+def database(path: Path, *, compatibility=None, missing_job_history=None, learning_record=None) -> Path:
     active_contract = contract()
     from tests.scientific_claim_fixtures import neb_vfa_case
 
@@ -323,7 +323,7 @@ def database(path: Path, *, compatibility=None, missing_job_history=None) -> Pat
         initial_result_id="is_energy",
         ts_result_id="ts_energy",
         final_result_id="fs_energy",
-        learning_record=successful_record(),
+        learning_record=successful_record() if learning_record is None else learning_record,
     )
     if missing_job_history:
         with fixture_connection(path) as connection:
