@@ -7,6 +7,7 @@ from pathlib import Path
 import yaml
 
 from scripts.artifact_io import load_json_object, require_sha256, sha256_file, sha256_json
+from scripts.execution_backends import DEFAULT_CONFIG as BACKEND_CONFIG
 from scripts.runtime_resources import resource_path
 from scripts.scientific_validation import finite_number
 from .contract import load_contract
@@ -118,6 +119,36 @@ def _history(database, task_id, key):
     return rows
 
 
+def _prerequisite_status(name, assessment, evidence):
+    """Bind the supported raw checks map to its owning prerequisite, not an arbitrary ID."""
+    item = evidence.get(assessment["prerequisites"].get(name))
+    if item is None:
+        return "NOT_SUPPLIED"
+    if item["pointer"] != f"/checks/{name}":
+        return "SOURCE_CHECK_IDENTITY_MISMATCH"
+    return "PASS" if item["value"] is True else "CHECK_NOT_TRUE"
+
+
+def _resource_ownership(strategy, backends):
+    """Resolve existing family/reference metadata through the owning backend contract."""
+    hours = {"aqcat_gpu": "gpu_hours", "vasp": "vasp_core_hours"}
+    primary = backends["dual_model_ts_path_acceleration"]["primary_model"]
+    result = {}
+    for method in strategy["neb_settings"].get("candidate_methods", []):
+        # compose_strategy's family candidates are the existing VASP routes.
+        owner = "vasp" if backends["backends"]["vasp"]["role"] == "authoritative_first_principles_calculation" else None
+        result[method] = {"backend": owner, "hour_budget_field": hours.get(owner)}
+    for method, reference in strategy["reference_methods"].items():
+        capability = reference.get("backend_capability")
+        if capability is None and reference.get("model") == f"current_{primary}_checkpoint":
+            capability = f"{primary}_energy_force_inference"
+        owners = [name for name, settings in backends["backends"].items()
+                  if capability is not None and capability in settings.get("allowed", [])]
+        owner = owners[0] if len(owners) == 1 else None
+        result[method] = {"backend": owner, "hour_budget_field": hours.get(owner)}
+    return result
+
+
 def _method_candidates(context):
     """Methods are taken from existing composition/schema; prerequisites from their owners."""
     assessment, strategy = context["assessment"], context["strategy"]
@@ -130,8 +161,8 @@ def _method_candidates(context):
         reference = strategy["reference_methods"].get(method)
         if reference is not None:
             required = reference["prerequisites"]
-            missing = [name for name in required if name not in assessment["prerequisites"] or
-                       evidence[assessment["prerequisites"][name]]["value"] is not True]
+            checks = {name: _prerequisite_status(name, assessment, evidence) for name in required}
+            missing = [name for name, status in checks.items() if status != "PASS"]
             prerequisites = {name: assessment["prerequisites"].get(name) for name in required}
         else:
             # Translate existing method identities to the owning gate, without new scientific rules.
@@ -140,7 +171,14 @@ def _method_candidates(context):
             ready = gate is not None and action in gate["scientific_readiness"]["eligible_actions"]
             missing = [] if ready else ["owning_gate_scientific_prerequisites"]
             prerequisites = {"owning_gate_action": action}
-        exhausted = budget["remaining_attempts"] == 0 or budget["force_calls"] == 0 or context["variant_attempts_remaining"] == 0
+            checks = {"owning_gate_scientific_prerequisites": "PASS" if ready else "CHECK_NOT_TRUE"}
+        ownership = context["resource_ownership"][method]
+        hour_field = ownership["hour_budget_field"]
+        missing.extend(["backend_resource_ownership_unknown"] if hour_field is None else [])
+        blockers = [name for name in ("remaining_attempts", "force_calls") if budget[name] == 0]
+        blockers.extend(["variant_attempts_remaining"] if context["variant_attempts_remaining"] == 0 else [])
+        blockers.extend([hour_field] if hour_field is not None and budget[hour_field] == 0 else [])
+        exhausted = bool(blockers)
         proposal = None
         if not missing and not exhausted and method != context["variant_settings"]["candidate_method"]:
             proposal = {"parent_id": context["request"]["variant_id"], "changes": {"candidate_method": method},
@@ -150,6 +188,7 @@ def _method_candidates(context):
         candidates.append({"kind": "TS_search_candidate", "method": method,
             "rationale": support["rationale"], "evidence_ids": support["evidence_ids"],
             "prerequisites": prerequisites, "missing_prerequisites": missing,
+            "prerequisite_checks": checks, **ownership, "budget_blockers": blockers,
             "status": "NEEDS_MORE_EVIDENCE" if missing else "BUDGET_EXHAUSTED" if exhausted else "CONSIDER_FOR_REVIEW",
             "future_cost": dict.fromkeys(COST_FIELDS, "NOT_MEASURED"), "budget_fit": "NOT_ESTABLISHED",
             "result_class": reference["result_class"] if reference else "requires_existing_TS_validation",
@@ -275,12 +314,14 @@ def plan_next(database: Path, request_path: Path, expected_request_sha256: str):
             raise ValueError("gate does not bind the current task/input assessment")
     families = resource_path("configs/ts_strategy_engine/families.yaml")
     strategy = compose_strategy(build_fingerprint(contract), [], yaml.safe_load(families.read_text(encoding="utf-8")))
+    resources = _resource_ownership(strategy, yaml.safe_load(BACKEND_CONFIG.read_text(encoding="utf-8")))
     history = _history(database, spec["task_id"], key)
     context = {"request": spec, "assessment": assessment, "evidence": evidence, "input_key": key,
                "gate": gate, "budget": _budget(spec["budget"]), "strategy": strategy, "history": history,
                "comparison": compare_variants(database, variant["parent_id"], spec["variant_id"]) if variant["parent_id"] else None,
                "variant_settings": variant["settings"],
                "review_fields": review_field_orders(),
+               "resource_ownership": resources,
                "variant_attempts_remaining": max(0, variant["attempt_budget"] - sum(
                    row["task_id"] == spec["task_id"] and row["variant_id"] is not None for row in history)),
                "retry": retry_assessment(database, spec["kind"], hashes), "lessons": task_lessons(database, spec["task_id"]),
@@ -292,5 +333,6 @@ def plan_next(database: Path, request_path: Path, expected_request_sha256: str):
     result["bindings"] = {"request_sha256": expected_request_sha256, "history_sha256": token,
                           "variant_sha256": spec["variant_sha256"], "assessment": spec["assessment"],
                           "inputs": spec["inputs"], "learning_policy_sha256": sha256_file(POLICY),
+                          "execution_backends_sha256": sha256_file(BACKEND_CONFIG),
                           "family_rules_sha256": sha256_file(families)}
     return result

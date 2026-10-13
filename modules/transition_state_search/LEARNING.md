@@ -746,7 +746,11 @@ not certify scientific truth, review quality or a human's identity.
 
 `path_evidence_ids` cites actual path observations. `prerequisites` maps names
 from existing reference-method prerequisites to boolean/null evidence IDs;
-missing, false or null checks cannot qualify a method. Standard VASP methods
+the supported source format is a raw `checks` object, with each observation
+selecting exactly `/checks/<prerequisite-name>`. Evidence IDs may be arbitrary;
+another check's True, a mismatched pointer or an unsupported source format
+cannot qualify the required check. Missing, false or null checks remain pending.
+Standard VASP methods
 use the existing gate's scientific prerequisites. `method_support` maps an
 existing method to `{rationale, evidence_ids}` and must cite causal evidence.
 An optimizer label alone does not produce a method choice. Geometry advice
@@ -759,7 +763,13 @@ prevents search-method consideration until its owning review is complete.
 ceilings, not authorized allocations; each value may be null. Attempt and force
 ceilings are nonnegative integers; hour ceilings are finite nonnegative numbers.
 The captured task attempt quota is checked independently. Exhausted attempt or
-force ceilings suppress proposal drafts. Unknown future costs stay
+force ceilings suppress proposal drafts. Relevant zero-hour ceilings also
+suppress drafts: family VASP routes use `vasp_core_hours`; reference-method
+capabilities/model metadata are resolved through `execution_backends.yaml` to
+their resource (`aqcat_gpu` uses `gpu_hours`). The selected backend, hour field,
+blocking ceiling and backend-config hash are recorded. Unrelated zero-hour
+ceilings do not block other resources; null stays unknown. Unresolved ownership
+requires more evidence, never a guessed backend. Unknown future costs stay
 `NOT_MEASURED` and budget fit stays `NOT_ESTABLISHED`; historical observed costs
 are reported separately and never become a future prediction or zero.
 

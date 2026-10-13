@@ -390,3 +390,119 @@ def test_pure_plan_has_no_file_IO_and_does_not_mutate_inputs(tmp_path, monkeypat
     monkeypatch.setattr(io, "open", reject_IO)
     assert original(context)["candidates"]
     assert context == before
+
+
+def _searches(report):
+    return [row for row in report["candidates"] if row["kind"] == "TS_search_candidate"]
+
+
+def test_false_handoff_cannot_be_replaced_by_other_true_prerequisite(tmp_path):
+    """Attachment's integration reproduction, using the real plan_next entry."""
+    database, request = synthetic_trial(tmp_path, method="aqcat25_ba_sella")
+    spec = load_json_object(request)
+    assessment = load_json_object(Path(spec["assessment"]["path"]))
+    raw_path = Path(assessment["evidence"][0]["path"])
+    raw = load_json_object(raw_path)
+    raw["checks"]["reviewed_gpu_handoff"] = False
+    write_json(raw_path, raw)
+    for item in assessment["evidence"]:
+        item["sha256"] = sha256_file(raw_path)
+        if item["evidence_id"] == "reviewed_gpu_handoff":
+            item["value"] = False
+    update_trial(request, assessment_changes={"evidence": assessment["evidence"]})
+    control = _searches(run_trial(database, request))[0]
+    assert control["status"] == "NEEDS_MORE_EVIDENCE" and control["proposal"] is None
+    before_raw = sha256_file(raw_path)
+    prerequisites = dict(assessment["prerequisites"])
+    prerequisites["reviewed_gpu_handoff"] = "compatible_model_and_environment"
+    update_trial(request, assessment_changes={"prerequisites": prerequisites})
+    candidate = _searches(run_trial(database, request))[0]
+    assert candidate["status"] == "NEEDS_MORE_EVIDENCE" and candidate["proposal"] is None
+    assert candidate["prerequisite_checks"]["reviewed_gpu_handoff"] == "SOURCE_CHECK_IDENTITY_MISMATCH"
+    assert "reviewed_gpu_handoff" in candidate["missing_prerequisites"]
+    assert sha256_file(raw_path) == before_raw
+
+
+def test_zero_GPU_hour_ceiling_blocks_AQCat_GPU_proposal(tmp_path):
+    """Attachment's zero-hour case, with a normal candidate as its control."""
+    database, request = synthetic_trial(tmp_path, method="aqcat25_ba_sella")
+    assert _searches(run_trial(database, request))[0]["proposal"] is not None
+    budget = load_json_object(request)["budget"]
+    budget["gpu_hours"] = 0
+    update_trial(request, request_changes={"budget": budget})
+    candidate = _searches(run_trial(database, request))[0]
+    assert candidate["status"] == "BUDGET_EXHAUSTED" and candidate["proposal"] is None
+    assert candidate["budget_blockers"] == ["gpu_hours"]
+    assert candidate["automatic_execution"] is False
+
+
+@pytest.mark.parametrize("wrong_pointer", ["/checks/compatible_model_and_environment", "/path_geometry_valid"])
+def test_check_binding_uses_raw_item_identity_not_evidence_ID_name(tmp_path, wrong_pointer):
+    database, request = synthetic_trial(tmp_path, method="aqcat25_ba_sella")
+    spec = load_json_object(request)
+    assessment = load_json_object(Path(spec["assessment"]["path"]))
+    item = next(row for row in assessment["evidence"] if row["evidence_id"] == "reviewed_gpu_handoff")
+    # Arbitrary ID is valid when it still selects the required source check.
+    item["evidence_id"] = "opaque-check-17"
+    prerequisites = dict(assessment["prerequisites"], reviewed_gpu_handoff="opaque-check-17")
+    update_trial(request, assessment_changes={"prerequisites": prerequisites, "evidence": assessment["evidence"]})
+    assert _searches(run_trial(database, request))[0]["proposal"] is not None
+    raw_hash = sha256_file(Path(item["path"]))
+    # A matching-looking ID must not launder another True (or unsupported format).
+    item["evidence_id"] = "reviewed_gpu_handoff"
+    item["pointer"] = wrong_pointer
+    prerequisites["reviewed_gpu_handoff"] = "reviewed_gpu_handoff"
+    update_trial(request, assessment_changes={"prerequisites": prerequisites, "evidence": assessment["evidence"]})
+    candidate = _searches(run_trial(database, request))[0]
+    assert candidate["status"] == "NEEDS_MORE_EVIDENCE" and candidate["proposal"] is None
+    assert candidate["prerequisite_checks"]["reviewed_gpu_handoff"] == "SOURCE_CHECK_IDENTITY_MISMATCH"
+    assert sha256_file(Path(item["path"])) == raw_hash
+
+
+@pytest.mark.parametrize("method,hour_field", [("aqcat25_ba_sella", "gpu_hours"),
+                                              ("matris_ml_neb_sella", "gpu_hours"), ("ci_neb", "vasp_core_hours")])
+@pytest.mark.parametrize("limit", [0, None, 1.5])
+def test_only_relevant_hour_budget_blocks_actual_plan(tmp_path, method, hour_field, limit):
+    database, request = synthetic_trial(tmp_path, method=method)
+    spec = load_json_object(request)
+    budget = dict(spec["budget"], gpu_hours=0, vasp_core_hours=0)
+    budget[hour_field] = limit
+    changes = {"budget": budget}
+    if method == "ci_neb":
+        # The real gate supplies scientific prerequisites; no execution authorization.
+        gate = decide_execution({"status": "PASS"}, {"path_binding_valid": True, "image_sequence_complete": True,
+            "internal_maximum": True}, {}, climb=False, path_reviewed=True,
+            path_quality={"PATH_QUALITY_STATUS": "CI_NEB_READINESS_EVIDENCE"},
+            preflight={"kind": "ci_neb", "passed": True}, source_bindings={"assessment": spec["assessment"]})
+        assert "ENABLE_CI_NEB" in gate["scientific_readiness"]["eligible_actions"]
+        gate_path = tmp_path / "synthetic-ci-gate.json"
+        write_json(gate_path, gate)
+        changes["gate"] = bind_files({"gate": str(gate_path)})["gate"]
+    update_trial(request, request_changes=changes)
+    candidate = _searches(run_trial(database, request))[0]
+    assert candidate["hour_budget_field"] == hour_field
+    assert candidate["backend"] == ("aqcat_gpu" if hour_field == "gpu_hours" else "vasp")
+    if limit == 0:
+        assert candidate["status"] == "BUDGET_EXHAUSTED" and candidate["proposal"] is None
+        assert candidate["budget_blockers"] == [hour_field]
+    else:
+        assert candidate["status"] == "CONSIDER_FOR_REVIEW" and candidate["proposal"] is not None
+        assert candidate["budget_blockers"] == []
+    assert candidate["budget_fit"] == "NOT_ESTABLISHED"
+    assert set(candidate["future_cost"].values()) == {"NOT_MEASURED"}
+
+
+def test_unresolved_backend_ownership_requires_evidence_not_a_default_resource(tmp_path, monkeypatch):
+    import yaml
+    from scripts.ts_strategy_engine import decision_planner as planner
+    database, request = synthetic_trial(tmp_path, method="aqcat25_ba_sella")
+    config = yaml.safe_load(planner.BACKEND_CONFIG.read_text(encoding="utf-8"))
+    config["backends"]["aqcat_gpu"]["allowed"].remove("ba_sella_candidate_search")
+    local_config = tmp_path / "synthetic-backends.yaml"
+    local_config.write_text(yaml.safe_dump(config), encoding="utf-8")
+    monkeypatch.setattr(planner, "BACKEND_CONFIG", local_config)
+    candidate = _searches(run_trial(database, request))[0]
+    assert candidate["backend"] is None and candidate["hour_budget_field"] is None
+    assert candidate["status"] == "NEEDS_MORE_EVIDENCE" and candidate["proposal"] is None
+    assert "backend_resource_ownership_unknown" in candidate["missing_prerequisites"]
+    assert candidate["budget_fit"] == "NOT_ESTABLISHED"
