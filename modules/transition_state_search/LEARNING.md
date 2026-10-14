@@ -796,7 +796,7 @@ python -m pytest -o addopts= -q tests/test_ts_planner_template_reuse.py tests/te
 Review the snapshot, then supply its `snapshot_sha256` value (not the hash of
 `TEMPLATE_SNAPSHOT.json`). Both commands use the same explicit database. Neither
 appends registry/history rows. The original request schema is unchanged; without
-the two template options, the original planner behavior/report is unchanged.
+the two template options, candidate generation and eligibility retain the existing rules.
 
 The snapshot binds complete template rows, their associated validation/barrier
 rows and validation/structure file registrations, the existing loaded evidence
@@ -828,3 +828,41 @@ govern all proposal drafts. Temporary-registry integration tests use the existin
 gate/TS-validation/matched-barrier registration fixtures. They demonstrate template
 influence and rejection paths, not real scientific benefit; real benefit remains
 unverified.
+
+### Evidence-supported candidate priority (v1)
+
+The same `plan-next` commands now annotate each generated TS search candidate
+with `rank`, `reasons`, source-bound `supporting_evidence`, `blocking_conditions`
+and `uncertainty`, plus report `ranking_type: evidence_supported_priority`.
+No new request fields, database, model, learned score or execution permission
+are introduced. Template reference still requires the explicit snapshot options.
+
+Only candidates already eligible for review can receive a rank. Missing checks,
+relevant zero-resource ceilings and an unchanged current variant/method with an
+exact-input failure confirmed by `retry_assessment` prevent ranking. Task-local
+lessons retain their evidence/scope; unrelated failures never become method bans.
+Unknown causes, upstream failures, missing path evidence and STOP retain their
+existing diagnostic priority and generate no TS-method ranking.
+
+Priority compares qualified templates that explicitly reference that method,
+using the existing similarity, strategy-transfer eligibility and result-transfer
+eligibility, then whether the relevant resource ceilings are known. General
+method-catalog membership alone supplies no historical support. This is a
+lexicographic evidence priority, not a weighted score or method-effect estimate.
+Template sequence is reference only. Equal evidence stays tied; if no comparative
+evidence exists, ranks are null and `ranking` remains
+`UNRANKED_NO_COMPARATIVE_EVIDENCE`, preserving input order. Blocked entries also
+have null rank; only eligible candidate positions can be reordered.
+
+A positive ceiling does not establish budget fit when cost is `NOT_MEASURED`.
+Result-transfer eligibility describes the evidence match; no scientific result
+is imported. Even a ranked candidate remains advisory, with
+`automatic_execution: false` and the existing fresh-input/retry/gate reviews.
+
+```powershell
+python -m pytest -o addopts= -q tests/test_ts_candidate_ranking.py tests/test_ts_decision_planner.py tests/test_ts_planner_template_reuse.py
+```
+
+These integration tests use the existing synthetic scientific registry fixtures
+and actual validation/registration APIs. Ranking functionality is verified;
+real scientific benefit is not evaluated.

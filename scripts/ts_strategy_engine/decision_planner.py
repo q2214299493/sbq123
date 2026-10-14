@@ -11,6 +11,7 @@ from scripts.execution_backends import DEFAULT_CONFIG as BACKEND_CONFIG
 from scripts.runtime_resources import resource_path
 from scripts.scientific_validation import finite_number
 from .contract import load_contract
+from .candidate_priority import normalize_method_references, rank_candidates
 from .execution_gate import validate_decision
 from .fingerprint import build_fingerprint
 from .learning_cases import diagnosis_error
@@ -135,23 +136,9 @@ def _method_references(strategy, family_strategy):
     schema = set(policy()["settings_schema"]["properties"]["candidate_method"]["enum"])
     references = set(strategy["reference_methods"]) & schema
     eligible = (set(family_strategy["neb_settings"]["candidate_methods"]) | references) & schema
-    methods, excluded = set(references), []
-    neb = strategy["neb_settings"]
-    if not isinstance(neb, dict):
-        excluded.append({"source_field": "neb_settings", "reason": "method_reference_requires_object"})
-        neb = {}
-    for field in ("candidate_methods", "sequence"):
-        values = neb.get(field, [])
-        if not isinstance(values, list):
-            excluded.append({"source_field": field, "reason": "method_reference_requires_array"})
-            continue
-        for method in values:
-            if not isinstance(method, str) or method not in eligible:
-                excluded.append({"source_field": field, "method": method,
-                                 "reason": "not_in_existing_family_or_reference_method_catalog"})
-            else:
-                methods.add(method)
-    return {"methods": sorted(methods), "excluded": excluded, "sequence_is_execution_order": False}
+    result = normalize_method_references(strategy["neb_settings"], eligible)
+    result["methods"] = sorted(set(result["methods"]) | references)
+    return result
 
 
 def _resource_ownership(strategy, backends, method_references):
@@ -369,7 +356,8 @@ def plan_next(database: Path, request_path: Path, expected_request_sha256: str, 
                                       if row["input_key"] == key and row["outcome"] is None]}
     if history_token(database) != token:
         raise ValueError("history changed during planning; review a new snapshot")
-    result = build_plan(context)
+    result = rank_candidates(build_plan(context), context, ranked,
+                             rules.get("strategy_transfer_threshold", rules["template_transfer_threshold"]))
     if use_templates or methods["excluded"]:
         methods["without_current_diagnostic_support"] = sorted(set(methods["methods"]) - assessment["method_support"].keys())
         result["method_references"] = methods
@@ -381,5 +369,6 @@ def plan_next(database: Path, request_path: Path, expected_request_sha256: str, 
                           "variant_sha256": spec["variant_sha256"], "assessment": spec["assessment"],
                           "inputs": spec["inputs"], "learning_policy_sha256": sha256_file(POLICY),
                           "execution_backends_sha256": sha256_file(BACKEND_CONFIG),
+                          "candidate_priority_sha256": sha256_file(Path(__file__).with_name("candidate_priority.py")),
                           "family_rules_sha256": sha256_file(families)}
     return result
