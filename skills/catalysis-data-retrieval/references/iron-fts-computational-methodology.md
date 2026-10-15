@@ -1,16 +1,27 @@
 # Iron-Based Fischer–Tropsch Computational Literature: Method Reference
 
-**Reviewed:** 2026-09-25
-**Scope:** 50 DOI-distinct primary computational, surface-science, kinetic,
+**Reviewed:** 2026-10-15
+**Scope:** 80 DOI-distinct primary computational, surface-science, kinetic,
 operando, isotope-tracing, and combined theory/experiment papers relevant to
 iron and iron-carbide Fischer–Tropsch synthesis (FTS): the original 20-paper
 mechanism set, seven evidence-bridge papers, 13 phase/condition/defect
-extensions, and ten promoter/size/carbon-pool extensions. This is a
+extensions, ten promoter/size/carbon-pool extensions, and 30 additional
+high-authority journal papers on phase evolution, promoters, active-carbon
+pools, interfaces and mechanistic models. This is a
 source-linked methodology reference, not an accepted local calculation
 result, parameter set, or claim that one mechanism is settled. The summaries
 are deliberately limited to publisher metadata/abstracts and checked article
 text where accessible; they are not a substitute for reading the full papers
 and supporting information.
+
+**Journal-screening boundary:** The 30 additions below were restricted to
+*Science*, *Journal of the American Chemical Society*, *ACS Catalysis*,
+*Journal of Catalysis*, and *Applied Catalysis B*. Journal quartiles vary by
+year, subject category and ranking system; this is a venue-quality screen,
+not a certified article-by-article CAS/JCR quartile record. The inherited
+50-paper set has **not** been retrospectively filtered to this venue list.
+An entry here is a bibliographic/methodology lead, **not** an accepted
+EvidenceSpan, an ingested full text, or validated local Fe(110) evidence.
 
 ## Curated primary literature
 
@@ -66,6 +77,46 @@ and supporting information.
 | Wezendonk et al., “Controlled formation of iron carbides and their performance in Fischer–Tropsch synthesis,” *Journal of Catalysis* **362** (2018), 106–117. [DOI](https://doi.org/10.1016/j.jcat.2018.03.034) | MOF-derived Fe@C catalysts are activated to compare predominantly χ-Fe₅C₂ and ε′-Fe₂.₂C with in-situ Mössbauer and parallel FT tests; the paper reports similar surface-normalized activity but phase-dependent selectivity in its controlled comparison. | Do not turn phase-specific selectivity into a universal activity ranking. The authors explicitly do not identify atomistic active sites on the dynamic carbide surfaces. |
 | Chakrabarty et al., “Elucidating the role of extended surface defects at Fe surfaces on CO adsorption and dissociation,” *Applied Surface Science* **491** (2019), 792–798. [DOI](https://doi.org/10.1016/j.apsusc.2019.05.278) | DFT and ReaxFF molecular dynamics compare Fe surface vacancy clusters/grain-boundary topologies and report easier CO adsorption/cleavage in their defect models. | This expands the defect hypothesis beyond isolated Fe(110) vacancies, but its principal application is metal dusting; ReaxFF predictions require domain-specific validation before FTS use. |
 | Wen et al., “Catalytic Behavior and In Situ X-Ray Diffraction of Promoted Iron Catalysts for Fischer–Tropsch Synthesis,” *Chemie Ingenieur Technik* **94** (2022), 1756–1764. [DOI](https://doi.org/10.1002/cite.202200056) | In-situ XRD follows Fe–Cu–K catalysts with ZnO, SiO₂ or Al₂O₃ during reduction and 220 °C/9 bar FTS; the paper reports changes in ε-Fe₂C/χ-Fe₅C₂ trajectories and links phase proportions with product/rate trends in its catalyst series. | Structural promoter, residual FeAl₂O₄, phase fraction and conversion co-vary. Its inferred ε-versus-χ ranking is not interchangeable with phase-isolated studies at different conditions. |
+
+### High-authority extension: works 51–80
+
+These 30 DOI/title/journal identities were checked against Crossref metadata
+and the linked publisher record. Scientific notes are bounded to accessible
+publisher abstracts/highlights, not independent full-text or SI verification.
+They are grouped by scientific question rather than an assumed consensus.
+
+| Work | Reported question or method | Use and transfer boundary |
+|---|---|---|
+| Torres Galvis et al., “Supported Iron Nanoparticles as Catalysts for Sustainable Production of Lower Olefins,” *Science* (2012). [DOI](https://doi.org/10.1126/science.1215614) | Supported, promoted Fe nanoparticle FTO performance connects synthesis, particle state and product distribution. | Benchmark practical olefin selectivity only with matched conversion, promoters, support and conditions; this does not identify an Fe(110) elementary-step barrier. |
+| Torres Galvis et al., “Iron Particle Size Effects for Direct Production of Lower Olefins from Synthesis Gas,” *JACS* (2012). [DOI](https://doi.org/10.1021/ja304958u) | Controlled Fe particle-size series studies size-dependent syngas-to-olefin behavior. | Particle size, promoter loading and accessible sites must be co-recorded; do not transfer nanoparticle trends to an infinite slab without a model bridge. |
+| Yang et al., “Fe₅C₂ Nanoparticles: A Facile Bromide-Induced Synthesis and as an Active Phase for Fischer–Tropsch Synthesis,” *JACS* (2012). [DOI](https://doi.org/10.1021/ja305048p) | Phase-directed synthesis and FTS testing of Fe₅C₂ nanoparticles. | Establishes a controlled phase-comparison route, not a universal active facet or termination. |
+| “Monolayer Iron Carbide Films on Au(111) as a Fischer–Tropsch Model Catalyst,” *ACS Catalysis* (2014). [DOI](https://doi.org/10.1021/cs500902z) | Atomically accessible ultrathin iron-carbide film serves as a surface-science FTS model. | Separate film/Au electronic and preparation effects from a supported working carbide particle. |
+| “Phase Transformations in Iron Fischer–Tropsch Catalysts during Temperature-Programmed Reduction,” *Journal of Catalysis* (2000). [DOI](https://doi.org/10.1006/jcat.2000.3024) | Temperature-programmed treatment and structural probes follow Fe phase transformations. | Activation history and impurities/support state belong in any phase comparison; ex-situ or programmed transformations are not steady-state surface identity. |
+| Xie et al., “Size and Promoter Effects on Stability of Carbon-Nanofiber-Supported Iron-Based Fischer–Tropsch Catalysts,” *ACS Catalysis* (2016). [DOI](https://doi.org/10.1021/acscatal.6b00321) | Particle-size and Na/S promotion series probes stability during FTO operation. | Track time-on-stream, size and carbon deposition separately from intrinsic reaction energetics. |
+| Li et al., “Atomically Defined Iron Carbide Surface for Fischer–Tropsch Synthesis Catalysis,” *ACS Catalysis* (2019). [DOI](https://doi.org/10.1021/acscatal.8b03684) | Surface-science preparation and characterization isolate an Fe-carbide surface for CO chemistry. | A defined model surface tests site hypotheses, but UHV film structure need not be the operando catalyst surface. |
+| Paalanen et al., “Combined In Situ X-ray Powder Diffractometry/Raman Spectroscopy of Iron Carbide and Carbon Species Evolution in Fe(−Na–S)/α-Al₂O₃ Catalysts during Fischer–Tropsch Synthesis,” *ACS Catalysis* (2020). [DOI](https://doi.org/10.1021/acscatal.0c01851) | Simultaneous in-situ XRPD/Raman tracks oxide, metal, carbide and carbon-deposit evolution during FTS. | Keep bulk phase and Raman-visible deposits distinct from kinetically active surface carbon; promoter, pretreatment and time matter. |
+| “Oxidation of Hägg Carbide during High-Temperature Fischer–Tropsch Synthesis: Size-Dependent Thermodynamics and In Situ Observations,” *ACS Catalysis* (2021). [DOI](https://doi.org/10.1021/acscatal.1c03719) | In-situ observation and thermodynamic analysis examine size-dependent carbide oxidation. | Water/oxygen chemical potential and size constrain phase persistence; do not use one clean-slab barrier as a phase-stability proof. |
+| “The role of H₂ in Fe carburization by CO in Fischer-Tropsch catalysts,” *Journal of Catalysis* (2021). [DOI](https://doi.org/10.1016/j.jcat.2021.05.027) | CO/H₂ exposure experiments investigate oxygen removal and carburization kinetics. | Activation gas composition and O-removal kinetics must accompany a carbide model; pretreatment observations are not a direct FTS turnover mechanism. |
+| “Genesis of an Fe₅C₂@Fe₃O₄ core/shell structure during CO carburization of metallic iron nanoparticles,” *Journal of Catalysis* (2022). [DOI](https://doi.org/10.1016/j.jcat.2022.01.029) | Spatially resolved carburization study follows carbide/oxide shell formation. | Core/shell topology and phase timing make a single homogeneous slab incomplete; CO-carburization is not identical to all syngas steady states. |
+| “Influence of carbon deposits on Fe-carbide for the Fischer-Tropsch reaction,” *Journal of Catalysis* (2022). [DOI](https://doi.org/10.1016/j.jcat.2022.11.002) | Transient kinetic analysis links deposited carbon to activity and product shifts. | Distinguish reactive intermediates, lattice carbon and deactivating deposits; avoid treating every C signal as the same pool. |
+| Xu et al., “A hydrophobic FeMn@Si catalyst increases olefins from syngas by suppressing C₁ by-products,” *Science* (2021). [DOI](https://doi.org/10.1126/science.abb3649) | Hydrophobic catalyst architecture tests water exposure and olefin/C₁ selectivity. | Shell, Mn, transport and water effects co-vary; use as a water-management hypothesis, not an isolated Fe-site rate constant. |
+| “A possible role of paramagnetic states of iron carbides in the Fischer–Tropsch synthesis selectivity of nanosized slurry catalysts,” *Journal of Catalysis* (2019). [DOI](https://doi.org/10.1016/j.jcat.2019.09.033) | Magnetic-state measurements are compared with slurry catalyst selectivity. | The title and association are explicitly tentative; do not convert correlation into a proven spin-controlled elementary pathway. |
+| “Atomic-level insight into the carburization process of iron-based catalysts: A ReaxFF molecular dynamics study,” *Journal of Catalysis* (2024). [DOI](https://doi.org/10.1016/j.jcat.2024.115719) | Reactive-force-field dynamics explore atomistic carburization trajectories. | Treat ReaxFF trajectories as model hypotheses needing experimental and higher-level electronic-structure validation, not measured FTS rates. |
+| Han et al., “Interface-Induced Phase Evolution and Spatial Distribution of Fe-Based Catalysts for Fischer–Tropsch Synthesis,” *ACS Catalysis* (2023). [DOI](https://doi.org/10.1021/acscatal.2c06425) | Interface-sensitive phase evolution and distribution are linked with catalyst behavior. | Preserve interface location and phase spatial heterogeneity; phase/activity correlation alone does not isolate an elementary active site. |
+| Khasu et al., “Empowering Catalyst Supports: A New Concept for Catalyst Design Demonstrated in the Fischer–Tropsch Synthesis,” *ACS Catalysis* (2023). [DOI](https://doi.org/10.1021/acscatal.3c00924) | Promoter-bearing supports alter Fe catalyst preparation and FTS outcomes. | Support chemistry, promoter location and phase formation co-vary; do not transfer an apparent promotion benefit as a single DFT energy correction. |
+| Liu et al., “Hydrophobic interfaces regulate iron carbide phases and catalytic performance of FeZnOₓ nanoparticles for Fischer-Tropsch to olefins,” *Applied Catalysis B* (2023). [DOI](https://doi.org/10.1016/j.apcatb.2023.122697) | Interface modification probes phase evolution and FTO selectivity. | Separate hydrophobicity, Zn-containing phases and transport from intrinsic carbide surface kinetics. |
+| Wang et al., “Reversing the Selectivity of Alkanes and Alkenes in Iron-Based Fischer–Tropsch Synthesis: The Precise Control and Fundamental Role of Sodium Promotor,” *ACS Catalysis* (2024). [DOI](https://doi.org/10.1021/acscatal.4c02252) | Na-dose series plus operando/probe methods link promoter state to olefin/paraffin changes. | Record Na loading and evolution; a product switch cannot be attributed only to one elementary barrier. |
+| “Mechanistic Insights into CO Reactivity on Iron-Based Catalysts: Role of Surface Atomic Carbon,” *ACS Catalysis* (2024). [DOI](https://doi.org/10.1021/acscatal.4c03596) | Atomically controlled Fe–C surface models compare CO chemistry with different surface-carbon states. | Surface C is part of site identity; the model-film result needs a bridge to supported catalyst conditions. |
+| “Machine learning descriptors for CO activation on iron-based Fischer–Tropsch catalysts,” *Journal of Catalysis* (2025). [DOI](https://doi.org/10.1016/j.jcat.2024.115921) | DFT-derived descriptor/ML analysis explores CO-activation trends across Fe-based models. | Descriptor prediction is conditional on training structures and electronic method; it cannot replace explicit local TS validation. |
+| “Selective production of light α-olefins and long-chain α-olefins from CO₂/H₂ and CO/H₂ over iron-based catalysts: Effects of Na₂S and H₂O,” *Journal of Catalysis* (2024). [DOI](https://doi.org/10.1016/j.jcat.2024.115587) | Compares feed composition, water and promotion across related Fe catalyst conditions. | CO₂/H₂ and CO/H₂ are different chemical-potential/oxygen-balance branches; never pool their selectivities or kinetic parameters silently. |
+| “Removal of carbon deposits on χ-Fe₅C₂ Fischer–Tropsch catalysts,” *Journal of Catalysis* (2025). [DOI](https://doi.org/10.1016/j.jcat.2025.116030) | Studies removal of deposits on carbide catalysts and accompanying activity changes. | Distinguish reversible deposit removal from carbide reconstruction and permanently altered active-site populations. |
+| Dwarica et al., “Hydrogen Adsorption, Reactivity, and Catalysis on Colloidal Iron Carbide Nanoparticles,” *ACS Catalysis* (2025). [DOI](https://doi.org/10.1021/acscatal.5c00480) | Colloidal carbide models probe H adsorption/reactivity alongside catalysis. | H surface availability constrains pathways, but nanoparticle ligand/termination history and DFT models must be retained. |
+| Chen et al., “Charge-Tuned CO Activation over a χ-Fe₅C₂ Fischer–Tropsch Catalyst,” *ACS Catalysis* (2018). [DOI](https://doi.org/10.1021/acscatal.7b04370) | DFT tests site-dependent Fe charge and a CO-activation descriptor across selected carbide/promoted/vacancy models. | Charge/BEP relationships are model-conditioned descriptors, not proof of a unique active site or transferable barrier. |
+| Lu et al., “Revealing the activity of different iron carbides for Fischer-Tropsch synthesis,” *Applied Catalysis B* (2021). [DOI](https://doi.org/10.1016/j.apcatb.2020.119521) | Compares carbide phases and FTS performance under the reported preparation and reaction protocol. | Phase activity rankings need surface-area, conversion and phase-purity controls before comparison with another catalyst. |
+| Ren et al., “The nature of K promotion of χ-Fe₅C₂ for high chain-growth probability in the Fischer–Tropsch reaction,” *Applied Catalysis B* (2025). [DOI](https://doi.org/10.1016/j.apcatb.2025.125403) | DFT and microkinetics examine K₂O effects on CO activation, C hydrogenation and chain growth. | Keep K chemical form/coverage and kinetic assumptions explicit; predicted chain-growth probability is not an experimental fact. |
+| Casavola et al., “Promoted Iron Nanocrystals Obtained via Ligand Exchange as Active and Selective Catalysts for Synthesis Gas Conversion,” *ACS Catalysis* (2017). [DOI](https://doi.org/10.1021/acscatal.7b00847) | Ligand exchange places Na/S promoters on colloidal Fe-derived catalysts and tests FTO. | Promoter placement and synthesis history alter the material; do not equate it with bulk-doped or unpromoted Fe. |
+| “Influence of Promotion on the Growth of Anchored Colloidal Iron Oxide Nanoparticles during Synthesis Gas Conversion,” *ACS Catalysis* (2020). [DOI](https://doi.org/10.1021/acscatal.9b04380) | Tracks promoted-particle growth during syngas conversion. | Catalyst morphology may evolve while selectivity is measured; preserve time and promoter-location context. |
+| “Supported Fe₂C catalysts originated from Fe₂N phase and active for Fischer-Tropsch synthesis,” *Applied Catalysis B* (2021). [DOI](https://doi.org/10.1016/j.apcatb.2020.119702) | Nitrided precursor route produces supported carbide and FTS activity. | Precursor-dependent phase formation is a synthesis route, not evidence that Fe₂C is always the working phase. |
 
 Publisher metadata and abstracts were checked against journal records and DOI
 records; article text or an author/institutional paper was used where available.
@@ -127,7 +178,7 @@ consensus.
 
 ## Structural model map
 
-| Model family represented here | Examples in the 50-paper set | What must remain explicit |
+| Model family represented here | Examples in the 80-paper set | What must remain explicit |
 |---|---|---|
 | Metallic bcc Fe | Fe(100), stepped Fe(710); pristine, K-covered, S-covered, CO-covered and vacancy-defected Fe(110)/(100); carbon-covered Fe(100)/(110)/(210) | Facet/step/defect topology, promoter/poison species and coverage, surface carbon, H/CO/H₂O coadsorption, and whether the model is clean, precovered or carburized. |
 | Hägg carbide χ-Fe₅C₂ | (001), (010), (100), (110), (111), (221), (510), and other terminations | Bulk phase is not enough: specify Miller index, termination, surface/interstitial carbon, vacancy pattern, reconstruction and promoter placement. |
@@ -221,6 +272,52 @@ This is a newly drawn **confounding map**, not an article figure or a causal
 estimate. The pore-size, promoter, controlled-carbide and transient studies
 alter more than one node at once. A surface-normalized rate or isotope-pool
 fit cannot alone certify the model at `M` as the unique working site.
+
+### 5. Carbon pools and what each measurement can constrain
+
+```mermaid
+flowchart LR
+    Feed[CO / labeled CO feed] --> Ads[Adsorbed CO and reactive C1 pool]
+    Feed --> Lattice[Carbide lattice / near-surface C]
+    Feed --> Deposit[Deposited carbon]
+    Ads --> Products[Hydrocarbons / oxygenates]
+    Lattice -. possible exchange .-> Ads
+    Deposit -. blocks or modifies .-> Ads
+    Isotope[Isotope-switch and transient kinetics] -. constrains turnover and exchange .-> Ads
+    Isotope -. constrains exchange .-> Lattice
+    Raman[In-situ Raman] -. detects selected deposits .-> Deposit
+    Phase[In-situ XRPD / other phase probes] -. constrains bulk phase .-> Lattice
+```
+
+The pools and diagnostic limits are motivated by [in-situ XRPD/Raman](https://doi.org/10.1021/acscatal.0c01851),
+[isotope-exchange kinetics](https://doi.org/10.1021/acscatal.1c05634), and
+[deposit-sensitive transients](https://doi.org/10.1016/j.jcat.2022.11.002).
+This is a measurement-to-question map, not an assertion that a Raman band
+measures the chain-growth monomer or that lattice carbon supplies every product.
+
+### 6. Activation and reoxidation are separate evidence gates
+
+```mermaid
+flowchart LR
+    Precursor[Oxide / nitride / metallic precursor] --> Activation[Reduction and carburization<br/>feed, temperature, time]
+    Activation --> Carbide[Candidate carbide / oxide spatial state]
+    Water[Water and oxygen chemical potential] --> Reoxidation[Possible reoxidation]
+    Carbide --> Reoxidation
+    Reoxidation --> Working[Working-state candidate]
+    Shell[Support, shell, promoters and particle size] -. modify .-> Activation
+    Shell -. modify .-> Reoxidation
+    Operando[Operando phase + spatial probes] -. check .-> Carbide
+    Operando -. check .-> Working
+    Kinetics[Matched kinetic and product data] -. test consequence .-> Working
+```
+
+This separates precursor transformation, oxidation resistance and FTS
+performance. See [temperature-programmed phase change](https://doi.org/10.1006/jcat.2000.3024),
+[H₂-dependent carburization](https://doi.org/10.1016/j.jcat.2021.05.027),
+[core/shell genesis](https://doi.org/10.1016/j.jcat.2022.01.029),
+[size-dependent oxidation](https://doi.org/10.1021/acscatal.1c03719), and
+[hydrophobic FeMn@Si](https://doi.org/10.1126/science.abb3649).
+An ex-situ phase label alone does not pass the working-state gate.
 
 ### Selected original figure atlas
 
