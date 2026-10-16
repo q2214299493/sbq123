@@ -27,6 +27,11 @@ original 50-paper set has **not** been retrospectively filtered to this venue li
 An entry here is a bibliographic/methodology lead, **not** an accepted
 EvidenceSpan, an ingested full text, or validated local Fe(110) evidence.
 
+For a source-access-labelled, figure-located 11-paper cross-check focused on
+initial Fe(110) CO activation versus working-surface/carbon-pool evidence, see
+[the Fe(110) evidence matrix](iron-fts-fe110-evidence-matrix.md). It is likewise
+an audit aid, not trusted SPC knowledge or a local computational result.
+
 ## Curated primary literature
 
 | Work | Computational question and reported conclusion | Methodological use and boundary |
