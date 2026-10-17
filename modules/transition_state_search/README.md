@@ -627,6 +627,14 @@ under `scripts/neb_agent/`; they are evidence backends, not workflow authority.
 
 ## Code Architecture
 
+- Main-worktree RSI integration is opt-in at `cli_commands._plan_command`, before
+  `workflow.plan`. `rsi_advice.py` consumes the fixed-version, no-model
+  `learning advise-next` interface and the workflow materializes an ordered,
+  pending review plan. It never changes scientific parameters or action authority.
+  See [LEARNING.md](LEARNING.md#opt-in-main-worktree-rsi-review-planning) for input
+  binding, recorded rejection of invalid explicit requests, and the distinction
+  between planned review order and completed scientific review. Omitting RSI
+  options preserves the existing workflow; invalid explicit advice stops the call.
 - `cli.py`: argument parsing and thin command adapters only.
 - `workflow.py`: endpoint-to-path planning and NEB analysis orchestration.
 - `execution_gate.py`: the only NEB action authority and action validator.

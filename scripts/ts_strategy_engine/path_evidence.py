@@ -13,6 +13,24 @@ def require_file(path: Path, label: str) -> None:
         raise SystemExit(f"{label} not found: {path}")
 
 
+def _resolve_waypoints(contract_path: Path, contract: dict[str, Any], explicit: tuple[Path, ...]) -> tuple[Path, ...]:
+    values = [Path(value) for value in contract.get("waypoint_files", [])] + list(explicit)
+    return tuple(value if value.is_absolute() else contract_path.parent / value for value in values)
+
+
+def _resolve_constraints(request, contract: dict[str, Any]) -> Path | None:
+    constraints = request.constraints
+    if constraints is None and contract.get("retrieval_constraints"):
+        retrieval = contract["retrieval_constraints"]
+        value = retrieval.get("constraints_file") if isinstance(retrieval, dict) else retrieval
+        if value:
+            path = Path(str(value))
+            constraints = path if path.is_absolute() else request.contract.parent / path
+    if constraints is not None:
+        require_file(constraints, "reviewed retrieval constraints")
+    return constraints
+
+
 def load_json_object(path: Path, label: str) -> dict[str, Any]:
     require_file(path, label)
     try:

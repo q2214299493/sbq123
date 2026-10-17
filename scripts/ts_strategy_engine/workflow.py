@@ -24,12 +24,16 @@ from scripts.neb_agent.path_quality_service import (
 from .contract import load_contract
 from .evidence import validate_endpoint_evidence
 from .fingerprint import build_fingerprint, rank_templates
-from .path_evidence import load_json_object, require_file, validate_path_binding, validate_path_review
+from .path_evidence import (
+    load_json_object, require_file, validate_path_binding, validate_path_review,
+    _resolve_waypoints, _resolve_constraints,
+)
 from .strategy import compose_strategy, decide_search
 from .templates import load_templates
 from .learning_store import get_event
 from .strategy_learning import apply_variant, task_lessons, start_attempt
 from .learning_evidence import vasp_input_hashes
+from .rsi_advice import consume_advice, record_plan_binding
 
 @dataclass(frozen=True)
 class PlanRequest:
@@ -49,6 +53,7 @@ class PlanRequest:
     gate_decision: Path | None = None
     gate_state_sha256: str | None = None
     strategy_variant: str | None = None
+    rsi_advice: dict[str, Any] | None = None
 
 @dataclass(frozen=True)
 class AnalyzeRequest:
@@ -92,10 +97,14 @@ def plan(request: PlanRequest) -> dict[str, Any]:
             raise ValueError("BA-Sella is a GPU candidate reference branch; prepare its reviewed handoff instead of a NEB path")
         if request.initialize_path and strategy["candidate_method_preference"] == "matris_ml_neb_sella":
             raise ValueError("MatRIS NEB/Sella requires a reviewed dual-model GPU request with sella_refinement settings")
+    review = consume_advice(request)
+    if review is not None:
+        strategy["workflow_review"] = review
     _write_plan_evidence(request, contract, fingerprint, templates, ranked)
     if not strategy["status"].startswith("STOP") and request.initialize_path:
         _initialize_path(request, contract, fingerprint, strategy)
     _finish_plan(request.workdir, strategy)
+    record_plan_binding(request, review)
     if strategy["status"].startswith("STOP"):
         raise SystemExit(2)
     return strategy
@@ -186,22 +195,6 @@ def _initialize_path(
         if geometry["status"] == "STOP"
         else "NEEDS_PATH_REVIEW"
     )
-
-def _resolve_waypoints(contract_path: Path, contract: dict[str, Any], explicit: tuple[Path, ...]) -> tuple[Path, ...]:
-    values = [Path(value) for value in contract.get("waypoint_files", [])] + list(explicit)
-    return tuple(value if value.is_absolute() else contract_path.parent / value for value in values)
-
-def _resolve_constraints(request: PlanRequest, contract: dict[str, Any]) -> Path | None:
-    constraints = request.constraints
-    if constraints is None and contract.get("retrieval_constraints"):
-        retrieval = contract["retrieval_constraints"]
-        value = retrieval.get("constraints_file") if isinstance(retrieval, dict) else retrieval
-        if value:
-            path = Path(str(value))
-            constraints = path if path.is_absolute() else request.contract.parent / path
-    if constraints is not None:
-        require_file(constraints, "reviewed retrieval constraints")
-    return constraints
 
 def _path_provenance(
     contract: dict[str, Any], fingerprint: dict[str, Any], strategy: dict[str, Any]
