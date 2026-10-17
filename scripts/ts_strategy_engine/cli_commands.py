@@ -7,26 +7,29 @@ import json
 
 def _plan_command(args: argparse.Namespace) -> None:
     from .workflow import PlanRequest, plan
-    plan(
-        PlanRequest(
-            initial=args.initial,
-            final=args.final,
-            contract=args.contract,
-            workdir=args.workdir,
-            database=args.database,
-            families=args.families,
-            thresholds=args.thresholds,
-            initialize_path=args.initialize_path,
-            constraints=args.constraints,
-            waypoint=tuple(args.waypoint),
-            output_dir=args.output_dir,
-            images=args.images,
-            strategy_variant=args.strategy_variant,
-            rebuild=args.rebuild,
-            gate_decision=args.gate_decision,
-            gate_state_sha256=args.gate_state_sha256,
-        )
+    from dataclasses import replace
+    from .rsi_advice import prepare_advice
+    request = PlanRequest(
+        initial=args.initial,
+        final=args.final,
+        contract=args.contract,
+        workdir=args.workdir,
+        database=args.database,
+        families=args.families,
+        thresholds=args.thresholds,
+        initialize_path=args.initialize_path,
+        constraints=args.constraints,
+        waypoint=tuple(args.waypoint),
+        output_dir=args.output_dir,
+        images=args.images,
+        strategy_variant=args.strategy_variant,
+        rebuild=args.rebuild,
+        gate_decision=args.gate_decision,
+        gate_state_sha256=args.gate_state_sha256,
     )
+    advice = prepare_advice(request, getattr(args, "rsi_request", None),
+                            getattr(args, "rsi_request_sha256", None))
+    plan(replace(request, rsi_advice=advice))
 
 def _path_review_command(args: argparse.Namespace) -> None:
     from .path_evidence import (
