@@ -1,12 +1,12 @@
 # Fe(110) CO 活化与铁基费托：首批跨文献证据矩阵
 
-**核对日期：** 2026-10-16
+**核对日期：** 初版 2026-10-16；F02 正文与图注复核 2026-10-17
 
 **性质：** 文献方法论审计与选题线索；不是 SPC 中已 `ACCEPTED` 的 SourceClaim/ReportedResult，不是本项目的 VASP 结果，也不是执行许可。
 
 **边界：** 当前项目的金属 Fe(110) 五层模型是一个明确的初始模型；文献中的七层 Fe(110)、覆盖/碳化 Fe(110)、不同铁碳化物晶面和实际催化剂都不能直接视为同一个体系。
 
-本矩阵从 [120 篇总目录](iron-fts-computational-methodology.md) 中选 11 篇，与「初始 Fe(110) 上 CO 如何活化、碳如何进入表面、实际反应时表面会否改变」最接近。选取依据是**原始研究与问题相关性**，不是按刊物分区替代逐篇证据审查。11 个主文 DOI 的题名、刊物、年份已对照 Crossref 元数据；8 篇核到可读正文和相应图题/图注，F06/F11 另核到开放 SI 的重点页，F02 仍只有出版方摘要/预览。**这些核对不等于 11 篇的 Supporting Information 已逐页审核。**
+本矩阵从 [120 篇总目录](iron-fts-computational-methodology.md) 中选 11 篇，与「初始 Fe(110) 上 CO 如何活化、碳如何进入表面、实际反应时表面会否改变」最接近。选取依据是**原始研究与问题相关性**，不是按刊物分区替代逐篇证据审查。11 个主文 DOI 的题名、刊物、年份已对照 Crossref 元数据；9 篇核到可读正文和相应图题/图注，其中 F02 经机构访问核到出版社 HTML 正文但未保存 PDF；F06/F11 另核到开放 SI 的重点页。**这些核对不等于 11 篇的 Supporting Information 已逐页审核。**
 
 ## 证据矩阵
 
@@ -15,7 +15,7 @@
 | ID / 原始研究 | 访问级别、体系和方法 | 有界的科学信息与定位 | 对当前 Fe(110) 的可用性与禁止推断 |
 |---|---|---|---|
 | F01 [Jiang & Carter, *Surface Science* 570 (2004), 167–177](https://doi.org/10.1016/j.susc.2004.07.035); [作者保存的发表版 PDF](https://cpb-us-w2.wpmucdn.com/research.seas.ucla.edu/dist/c/2/files/2019/08/EAC-154.pdf) | **正文+图注**；自旋极化周期 DFT/CI-NEB；金属 Fe(110) 七层 slab，CO 0.25/0.50 ML；比较 PBE/RPBE/PKZB。 | 图 1 列吸附位；图 5、6 是 on-top 与 long-bridge 起点的直接 C–O 断裂路径。作者在 0.25 ML、PBE、on-top 起点报告 1.52 eV 势垒，并在模型终态得到嵌入表层的 C。 | **最直接的同晶面方法对照**，可审查端点、吸附位、覆盖度和 C 插入几何；七层/覆盖度/泛函/能量基准不同，1.52 eV 绝非当前五层计算的目标值或已验证势垒。模型终态也不证明实际工况的碳化相。 |
-| F02 [Ojeda 等，*Journal of Catalysis* 272 (2010), 287–297](https://doi.org/10.1016/j.jcat.2010.04.012) | **摘要/预览**；实验动力学与代表性、CO 覆盖的 Fe/Co 表面的 DFT。出版方预览提及 Fe–Zn–Cu–K 催化剂及 508 K 的速率分析；该文目前显示需购买/机构权限。 | [PNNL 作者成果页的摘要](https://www.pnnl.gov/publications/co-activation-pathways-and-mechanism-fischer-tropsch-synthesis)报告：在其研究条件下，H-assisted CO 活化是主要动力学相关路径；Fe 上 direct 路径仍可少量并行，作者称高温、碱金属促进时可能更有利。作者以 H₂O/CO₂ 氧去向区分路径。预览提到图 1、2，但完整图注、速率式和模型参数尚未复核。 | 使 **direct 与 H-assisted 并列为待检机制**；不能把真实催化剂的动力学结论直接变成洁净 Fe(110) 的优势路径，更不能从摘要移植势垒。 |
+| F02 [Ojeda 等，*Journal of Catalysis* 272 (2010), 287–297](https://doi.org/10.1016/j.jcat.2010.04.012) | **机构访问 HTML 正文+图注；PDF 未保存**。实验为 Fe–Zn–Cu–K 催化剂在 508 K 的压力/速率扫描；理论为自旋极化 PW91、四层 2 × 2 Fe(110)/Co(0001) slab（顶部两层放松）、0.5 ML spectator CO 模型与 CI-NEB，见 [§2.2](https://www.sciencedirect.com/science/article/pii/S0021951710001399#aep-section-id31) 与 [§2.3](https://www.sciencedirect.com/science/article/pii/S0021951710001399#aep-section-id32)。 | [图 1](https://www.sciencedirect.com/science/article/pii/S0021951710001399#fig1)/[图 2](https://www.sciencedirect.com/science/article/pii/S0021951710001399#fig2) 分别改变 CO/H₂ 入口压力并扫描转化率；[图 5](https://www.sciencedirect.com/science/article/pii/S0021951710001399#fig5)/[图 6](https://www.sciencedirect.com/science/article/pii/S0021951710001399#fig6) 是初级 CO₂ 生成与 H₂O/CO₂ 氧去向；[Scheme 1](https://www.sciencedirect.com/science/article/pii/S0021951710001399#sch1)/[Scheme 2](https://www.sciencedirect.com/science/article/pii/S0021951710001399#sch2) 对列 direct 与 H-assisted 路径；[Table 2](https://www.sciencedirect.com/science/article/pii/S0021951710001399#tbl2)/[Table 3](https://www.sciencedirect.com/science/article/pii/S0021951710001399#tbl3) 和 [图 8](https://www.sciencedirect.com/science/article/pii/S0021951710001399#fig8)/[图 10](https://www.sciencedirect.com/science/article/pii/S0021951710001399#fig10)/[图 11](https://www.sciencedirect.com/science/article/pii/S0021951710001399#fig11) 给出覆盖度、吸附/路径计算及结构。作者据实验动力学和其模型解释 H-assisted 路径占主导，同时保留 Fe 上并行的 direct 路径。 | 使 **direct 与 H-assisted 并列为待检机制**；实验催化剂与四层、PW91、CO 覆盖的理论 slab 均不能等同于当前五层项目模型。图中势垒或催化剂氧选择性不移植为本项目数值、批准路径或已证实机理。 |
 | F03 [Shipilin 等，*ACS Catalysis* 12 (2022), 7609–7621](https://doi.org/10.1021/acscatal.2c00905); [开放全文](https://pmc.ncbi.nlm.nih.gov/articles/PMC9254136/) | **正文+图注**；Fe(110) 单晶，原位 XPS、表面 XRD、质谱并结合理论；改变压力、温度、CO:H₂ 和暴露时间。 | 图 2 给 85/700 mbar、1CO:4H₂ 下的谱；图 4 给 233 °C、200 mbar 下随时间变化的 C 1s；图 7 比较金属与反应后含 θ-Fe₃C 的衍射。作者将多种碳物种/相与表面演化联系起来。 | **直接提示“初始金属面”与“反应中表面”应分开**。XPS 峰归属、表面有序相衍射和真实催化活性并非同一种证据；图 1 是示意图，不是直接测量。其工况不能自动对应项目计算的真空 slab。 |
 | F04 [Chai 等，*ACS Catalysis* (2022)](https://doi.org/10.1021/acscatal.1c05634); [机构保存 PDF](https://repository.tudelft.nl/file/File_591abbde-1465-4d8e-8bc6-cf21ea3f8dd6) | **正文+图注**；Raney 衍生铁碳化物，¹²CO/¹³CO 切换、TPH、SSITKA 等同位素/动力学探针。 | 图 4、5 将表面/体相碳的同位素变化与碳进入/流出速率并置；论文据此讨论可交换碳库与并行路径。 | 是“碳从何而来”的**实验约束**，不是金属 Fe(110) 上某个 C 吸附位或某条 NEB 的证明。碳库定量只可连同该论文催化剂、条件、分析模型阅读；不移植比例。 |
 | F05 [Broos 等，*J. Phys. Chem. C* (2018)](https://doi.org/10.1021/acs.jpcc.8b01064); [开放全文](https://pmc.ncbi.nlm.nih.gov/articles/PMC5949720/) | **正文+图注**；χ-Fe₅C₂ 多种表面终止的 DFT/反应速率模型。 | 图 2 定义终止面记号，图 4 显示各表面位点及 CO/H 吸附，图 5 比较 direct、CHO 和 COH 辅助断裂的**模型相对速率**。 | 提供“终止面/局部位点是比较约束”的方法；图 5 不是 Fe(110) 实测速率，也不能跨模型只比一条势垒。 |
@@ -53,9 +53,14 @@
 | F06 | [SI DOI](https://doi.org/10.1021/acs.jpcc.8b06988.s001)，Figshare article `7035857`，16 页；`f436dd599495a861be390af05bf9b4da4c2accc23d06a34626f055480305ad48` | 全文页码/表图目录检索；可视复核 S3 Table S1/S2 与 S4 Table S3。未把 S5–S15 的所有图表视为已逐项审核。 |
 | F11 | [SI DOI](https://doi.org/10.1021/acs.jpcc.3c08180.s001)，Figshare article `25449713`，7 页；`f38bfa5037aab6e782382e91cfa5b915d3931ff5b151b9d8c339748bc35eb452` | 全文页码/图目录检索；正文核 S2/S3/S7，可视复核 S3 Fig. S2、S7 Fig. S6。未把全部拟合谱当作已独立重分析。 |
 
-## F02 全文可得性复核（2026-10-16）
+## F02 出版社 HTML 正文与图表复核（2026-10-17）
 
-这是访问与引文核验记录，**不是**主文科学内容的复核。Crossref 的[该 DOI 记录](https://api.crossref.org/works/10.1016%2Fj.jcat.2010.04.012)确认题名、刊物和出版方，其 text-mining 链接并不表示公众可读取全文。[PNNL 成果页](https://www.pnnl.gov/publications/co-activation-pathways-and-mechanism-fischer-tropsch-synthesis)提供摘要而非正文；[作者课题组论文目录](https://manos.engr.wisc.edu/fischer-tropsch-synthesis/)仅指向 DOI。对照 [OpenAlex API 记录](https://api.openalex.org/works/https://doi.org/10.1016/j.jcat.2010.04.012)的 `oa_status=closed`、`any_repository_has_fulltext=false`，以及 [Semantic Scholar API 记录](https://api.semanticscholar.org/graph/v1/paper/DOI:10.1016/j.jcat.2010.04.012?fields=title,year,openAccessPdf,url,externalIds)的 `openAccessPdf.status=CLOSED`，这次未找到可确认合法公开的 F02 主文。ScienceDirect 本机请求返回 403；这**不证明**持有机构订阅的用户不能访问。引用该论文的开放论文或学位论文不能替代 F02 原文的图注、方程和计算表面核对。
+2026-10-16 的公开可得性检查仍适用：Crossref 的[该 DOI 记录](https://api.crossref.org/works/10.1016%2Fj.jcat.2010.04.012)确认书目信息，[PNNL 成果页](https://www.pnnl.gov/publications/co-activation-pathways-and-mechanism-fischer-tropsch-synthesis)只有摘要，公开检索未找到可确认合法的开放 PDF。2026-10-17 在用户已具机构访问权限的浏览器中，实际核对了[出版社 HTML 正文](https://www.sciencedirect.com/science/article/pii/S0021951710001399)的相关方法、结果段落和下列图表；无凭据的本机 PDF 请求仍返回 403，浏览器 PDF 下载未形成可核验本地文件。**这不是 PDF 已下载或 SPC 来源审核完成。**
+
+- **实验与动力学（§2.2、§3.1、§3.3）：** Fe–Zn–Cu–K 固定床实验在 508 K 扫描 CO/H₂ 入口压力；图 1、2 的烃生成速率受 CO 转化率影响，作者用零转化率外推分析初始速率。图 5 分离初级 CO₂ 生成，图 6 是 H₂O/CO₂ 氧去向；作者据此讨论 direct/H-assisted 并行机制。这些是该催化剂及分析模型的实验报告与解释，不等同于 Fe(110) slab 的直接观测。
+- **计算模型与判据（§2.3、§3.5）：** DACAPO、PW91、四层 2 × 2 slab、顶部两层放松、自旋极化；Fe(110) 用 16 k 点，平面波截断 25 Ry；CI-NEB 至少七个中间图像，并以单一虚频检查鞍点。Table 2/3 分别列洁净/0.5 ML CO 覆盖的吸附能和该覆盖下的基元步骤能量；图 8 显示 CO 覆盖度影响，图 10/11 给出 Fe(110) 路径示意与初态/过渡态/终态几何。论文还指出，判断动力学相关步骤不能只比较孤立势垒，须考虑物种覆盖度。**这些参数是论文的方法事实，不是本项目参数建议或收敛证明。**
+- **图谱索引：** 图 1/2（压力—烃生成速率）、图 5/6（初级 CO₂ 与氧去向）、Scheme 1/2（竞争路径）、图 8/9（覆盖度与吸附几何）、图 10/11（Fe 路径与过渡态结构）；各图的出版社锚点见 F02 表格行。本机仅保存了这些页面图像的个人阅读副本，**未把版权图像提交到仓库**；本矩阵只保留出版社链接和释义。
+- **剩余边界：** 未保存并逐页核对正式 PDF；Supporting Information、动力学方程的代数推导、Table 2/3 的全部数值和每个结构尚未逐项复核。未创建 SourceDocument/EvidenceSpan/SourceQuote 或科学 curation，不能将本段直接提升为 SPC 可信知识。
 
 ## 跨文献关系：相互约束，而非投票选“正确机理”
 
@@ -68,17 +73,17 @@
 
 | 方向 | 可区分的问题 | 必须保留的对照/限制 |
 |---|---|---|
-| D1 初始金属面上的 CO 活化 | 在**项目已批准的 Fe(110) 模型**中，direct 与定义清楚的 H-assisted 路径是否指向不同的可观测中间体/氧去向？ | 先核同一表面覆盖度、H 化学势/共吸附、初态与终态、泛函和能量约定。F01 只能指导几何/位点审查，F02 的主文仍待读；F06 的碳化物 SI 数字不得直接移植。 |
+| D1 初始金属面上的 CO 活化 | 在**项目已批准的 Fe(110) 模型**中，direct 与定义清楚的 H-assisted 路径是否指向不同的可观测中间体/氧去向？ | 先核同一表面覆盖度、H 化学势/共吸附、初态与终态、泛函和能量约定。F01 只能指导几何/位点审查；F02 虽已核出版社 HTML，但其四层 PW91/0.5 ML CO 模型不能代替当前五层项目结果；F06 的碳化物 SI 数字不得直接移植。 |
 | D2 由初始面到含碳面 | 预吸附/嵌入 C 或结构改变会否改变可达位点与路径排序？ | F01 的 C 嵌入是计算终态，F03 是原位表面演化；把不同碳含量/相列为**不同 SystemFingerprint**。任何扩大已锁定模型的计算，需要另行科学审批。 |
 | D3 碳库与氧去向的判别 | 所见产物碳来自吸附 CO 还是可交换碳库？氧主要通过哪类通道离开？ | F04/F10 主要约束实验设计与结果解释；单靠一条 VASP NEB 不能回答碳源份额或实际催化剂整体氧收支。需要相匹配的同位素/产物数据或显式列为证据缺口。 |
 
 ## 纳入可信知识前仍缺什么
 
-- F02 的正文目前是购买/机构访问，尚未核对完整图注、速率式和模型定义；需用户或机构合法提供全文，不能以其他论文的转述替代。
+- F02 已核机构访问的出版社 HTML 中的相关正文、图注和模型定义，但未保存 PDF、未逐项核对 SI、全部数值及方程推导，也未形成 SPC 可验证的精确来源版本与科学 curation。
 - F06、F11 已核到开放 SI 的重点页，但主文完整方法和相关图注仍未直接读完；F06 的 Table S3 数字只按 SI 原定义保存为**模型结果**，F11 的 Fig. S2/S6 只支持实验控制/局限，不升级为已确认机理。其余 SI 图表未逐项审核。
 - 其余 8 篇虽定位到正文与图注，**本矩阵没有完成全部 SI、原始数据和每个数值的逐条复核**。图注与正文仍需与精确 SourceDocument 版本、EvidenceSpan 和 SourceQuote 绑定。
 - 对具体数值先记录量、单位、体系、晶面/终止面、覆盖度、压力/温度、泛函、参考态和结果类型；缺字段时标记 `incomparable/unresolved`，不要以“同为 eV”视作可比。
 - 文献中的作者假设、实测、计算预测、模拟速率与本项目结果分开；冲突保留为 ConflictSet/ComparisonConstraint，不按论文数量或刊物声望自动解决。
 - 若要写入 SPC 可信知识库，需通过现有来源/表示选择、精确引文、结构定位与独立科学记录审核；本 Markdown 目录不等于那些审核记录，更不会自动创建它们。
 
-**最小下一步：** 经合法渠道取得 F02 正文，核对其图 1、2 的完整条件、动力学式和理论表面；在此之前，D1 仍是待审查的问题而非批准的计算方案。此处不提交 VASP/NEB、不导出任何可执行任务。
+**最小下一步：** 在合法访问条件下保存并核验 F02 的正式 PDF/SI，再逐项核对 Table 1–3 的方程、数值与能量基准，建立精确来源和引用绑定；D1 仍是待审查的问题而非批准的计算方案。此处不提交 VASP/NEB、不导出任何可执行任务。
