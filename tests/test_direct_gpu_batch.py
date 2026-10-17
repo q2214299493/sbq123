@@ -5,7 +5,7 @@ from types import SimpleNamespace
 import pytest
 
 from scripts.adsorption.direct_gpu_batch import (
-    checked_request, cuda_binding, environment, gpu_available, require_cuda_keyword,
+    checked_backend, checked_request, cuda_binding, environment, gpu_available, job_wrapper, require_cuda_keyword,
 )
 
 
@@ -73,3 +73,38 @@ def test_explicit_cuda_keyword_passes(tmp_path):
     source = tmp_path / 'runner.py'
     source.write_text('patched_calc(cpu=False)', encoding='utf-8')
     require_cuda_keyword(source)
+
+
+@pytest.mark.parametrize('kind', ['cpu', 'cuda'])
+def test_matris_cuda_binding_checks_model_not_request(monkeypatch, kind):
+    monkeypatch.setenv('CUDA_VISIBLE_DEVICES', 'GPU-matris')
+    model = SimpleNamespace(parameters=lambda: iter([SimpleNamespace(device=SimpleNamespace(type=kind))]))
+    calculator = SimpleNamespace(model=model)
+    if kind == 'cpu':
+        with pytest.raises(RuntimeError, match='model parameters'):
+            cuda_binding(calculator)
+    else:
+        assert cuda_binding(calculator)['physical_gpu_uuid'] == 'GPU-matris'
+
+
+def test_matris_environment_and_wrapper_are_scoped():
+    root = Path('/home/sbq/sbq/trial')
+    request = dict(model_backend='matris', checkpoint_path='/home/sbq/sbq/provider.pth', gpu_uuid='GPU-real')
+    env = environment(root, request)
+    assert env['MATRIS_CHECKPOINT'] == request['checkpoint_path']
+    assert 'vendor/MatRIS' in env['PYTHONPATH']
+    assert job_wrapper(request, root).name == 'matris_adsorption_gpu_job.sh'
+    assert job_wrapper({}, root).name == 'aqcat25_gpu_job.sh'
+
+
+def test_old_aqcat_backend_remains_the_default():
+    assert checked_backend({}, {}) == 'aqcat25'
+
+
+@pytest.mark.parametrize('change', ['model_backend', 'checkpoint_path', 'checkpoint_sha256'])
+def test_backend_and_checkpoint_cannot_escape_exception(change):
+    exception = dict(model_backend='matris', checkpoint_path='/approved/model.pth', checkpoint_sha256='a' * 64)
+    request = dict(exception)
+    request[change] = 'other'
+    with pytest.raises(ValueError, match='unauthorized'):
+        checked_backend(request, exception)

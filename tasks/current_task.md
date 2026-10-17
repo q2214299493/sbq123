@@ -3,15 +3,16 @@
 
 ## Objective
 
-Monitor the fifteen authorized Fe110 C2 adsorption/coadsorption VASP relaxations and review final chemistry/convergence before automatic eligible-result registration.
+Review the completed six-candidate MatRIS adsorption GPU trial before deciding on any further comparison; preserve the existing15 VASP calculations.
 
 ## Current Evidence Snapshot
 
-- All15 GPU returned structures reviewed;12 target graphs intact and surface-symmetry nonduplicate;06_A/06_B predicted CO+C+H and09_B predicted CH2+CO retained by explicit user selection.
-- All15 unchanged routine_production input preflights and current SUBMIT_VASP gates pass;32 MPI ranks/max32 per node;SIGMA0.20;NSW300;no added pilot.
-- Canonical executor submitted real LSF jobs9848799-9848813 to sunboquan-codex;exact bundle/POTCAR verification and immutable receipts exist.
-- First live snapshot:06_A/9848799 RUN,other14 PEND;queue status only. Electronic/ionic convergence and final VASP chemistry not yet assessed.
-- Submission-only canonical registry batch applied for all15;no result energies accepted. Original CPU/GPU inputs and outputs retained.
+- User explicitly authorized one direct GPU2 trial:06_C,07_B,07_C,08_A,09_A,10_A;80 steps each,fmax0.10,max1800s;no VASP/training/default promotion.
+- Provider-baseline MatRIS SHA1e6a85b33db075ad1637eca7537084024a694b1340358911212d8a5c518c6601;all source seeds identical to the prior AQCat batch.
+- Direct run PID2398967 completed exit0 in59.653618s;canonical receipts and all6 outputs preserved;actual CUDA GPU2 UUID verified.
+- All6 schema/source/cell/order/fixed-layer checks pass;5 ML-force-converged and5 original graphs preserved.06_C stopped at80 steps,fmax0.275277 and predicted CO+C+H.
+- MatRIS ML steps exceed matched AQCat steps on all6 seeds;downstream VASP force agreement and acceleration are not measured. No model promoted.
+- All15 existing VASP jobs9848799-9848813 remain untouched and are carried in backlog for monitoring/final eligible-result registration;not freshly polled in this GPU-only turn.
 
 ## Lifecycle Status
 
@@ -19,11 +20,11 @@ Monitor the fifteen authorized Fe110 C2 adsorption/coadsorption VASP relaxations
 
 ## One Executable Step
 
-Check these15 jobs with one bounded live scheduler/output checkpoint, separating queue,electronic,ionic and geometry state;do not repeat submission.
+Present the six predicted outcomes for user review; obtain separate authority before any new MatRIS→VASP comparison, further GPU run or training.
 
 ## Submission Boundary
 
-User authorized this exact15-job batch only;no automatic retry,stop,new calculation,model promotion or final energy acceptance.
+Only the completed six-candidate GPU2 trial was authorized. No automatic retry,new VASP,training,model promotion,service modification or existing-job stop.
 
 ## Authoritative Constraint
 
@@ -31,18 +32,18 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 
 ## Done When
 
-- All15 jobs have truthful terminal scheduler and electronic/ionic evidence.
-- Final structures are reviewed for species/sites/duplicates and compatible VASP energies are automatically registered only when eligible.
+- All6 canonical outputs and exact source/model/device/geometry reviews are preserved without DFT acceptance claims.
+- User has reviewed the trial and selected a next scoped action or closed this model trial without promotion.
 
 ## Constraints
 
-- Retain the3 changed-chemistry inputs under reviewed coadsorbate labels rather than pretending original target graphs are intact.
-- GPU predictions are not accepted DFT data;final VASP chemistry and convergence control registration.
+- 06_C is a changed-chemistry,not-ML-converged prediction;do not label it as intact C-O-CH or as a final DFT state.
+- Existing VASP results retain their own completion/chemistry/compatibility/registry workflow;GPU trial cannot replace it.
 
 ## Authoritative References
 
 - configs/execution_backends.yaml
 - modules/adsorption_workflow/README.md
-- modules/calculation_registry/README.md
-- docs/reviews/fe110_c2_06_10_vasp_submission_20261013.md
+- docs/reviews/fe110_matris_adsorption_trial_20261018.md
+- calculations/fe110_c2_adsorption_06_10_20261012/matris_direct_v1/returned_review.json
 <!-- state-handoff:end current_task -->

@@ -201,6 +201,18 @@ replay and fixed-atom masks. Intermediate frames are force labels, not accepted
 endpoints. Development regression is separate from frozen heldout validation;
 no automatic checkpoint promotion or acceleration claim is granted.
 
+### Authorized MatRIS adsorption trial
+
+The separately authorized six-seed MatRIS-primary adsorption trial is documented
+in `docs/reviews/fe110_matris_adsorption_trial_20261018.md`. It uses the original
+provider FeCOH checkpoint, not the OH-specific fine-tune, and the existing
+direct-execution controller with one exact GPU2 exception in
+`configs/execution_backends.yaml`. `scripts/adsorption/matris_adsorption_relax.py`
+reuses the frozen endpoint geometry helpers and the shared MatRIS calculator
+loader. It proves actual CUDA tensor placement and returns schema-v2 handoffs
+with an explicitly uncalibrated domain status. This bounded trial does not
+promote a model, change adsorption defaults, authorize VASP, or establish speedup.
+
 ## Code ownership
 
 - `scripts/adsorption/gas_vasp_common.py` owns the common gas-reference INCAR,

@@ -50,22 +50,51 @@ def checked_request(path, digest):
         raise ValueError('unauthorized walltime')
     if request['execution_mode'] != 'direct_no_scheduler' or request['scheduler_job_id'] is not None:
         raise ValueError('direct execution has no scheduler job ID')
-    if request['authorization']['user_request'] != '你试试':
+    if request['authorization']['user_request'] != exception.get('authorizing_user_request', '你试试'):
         raise ValueError('missing task-specific user authorization')
+    backend = checked_backend(request, exception)
     manifest = root / 'batch_manifest.json'
     if sha256_file(manifest) != request['batch_manifest_sha256']:
         raise ValueError('candidate batch changed')
     batch = load_json_object(manifest)
+    check_batch_files(root, canonical_root, batch, exception, backend)
+    return request, root, batch
+
+
+def checked_backend(request, exception):
+    backend = request.get('model_backend', 'aqcat25')
+    if backend not in {'aqcat25', 'matris'} or backend != exception.get('model_backend', 'aqcat25'):
+        raise ValueError('unauthorized model backend')
+    if backend == 'matris':
+        for key in ('checkpoint_path', 'checkpoint_sha256'):
+            if request.get(key) != exception[key]:
+                raise ValueError('unauthorized MatRIS checkpoint')
+    return backend
+
+
+def check_batch_files(root, canonical_root, batch, exception, backend):
     if len(batch['handoffs']) != exception['candidate_count']:
         raise ValueError('unauthorized candidate count')
     if len({r['name'] for r in batch['handoffs']}) != len(batch['handoffs']):
         raise ValueError('duplicate candidate names')
+    if 'candidate_names' in exception and [r['name'] for r in batch['handoffs']] != exception['candidate_names']:
+        raise ValueError('unauthorized candidate names')
     for item in batch['files']:
         target = (root / item['path']).resolve()
         if not target.is_relative_to(canonical_root) or sha256_file(target) != item['sha256']:
             raise ValueError('stale or escaping input file')
-    require_cuda_keyword(root / 'runtime/relax_endpoint_candidates.py')
-    return request, root, batch
+    if backend == 'aqcat25':
+        require_cuda_keyword(root / 'runtime/relax_endpoint_candidates.py')
+    else:
+        for item in batch['handoffs']:
+            handoff = load_json_object(root / item['name'] / 'handoff.json')
+            if sha256_file(root / item['name'] / 'handoff.json') != item['handoff_sha256']:
+                raise ValueError('MatRIS handoff changed')
+            for key, expected in (('checkpoint_sha256', exception['checkpoint_sha256']),
+                                  ('max_steps', exception['max_steps']),
+                                  ('fmax_eV_per_A', exception['fmax_eV_per_A'])):
+                if handoff['model'][key] != expected:
+                    raise ValueError('unauthorized MatRIS optimizer/model setting')
 
 
 def require_cuda_keyword(path):
@@ -108,12 +137,18 @@ def environment(root, request):
                MKL_NUM_THREADS='4', OPENBLAS_NUM_THREADS='4', PYTHONUNBUFFERED='1')
     env['PYTHONPATH'] = ':'.join([str(root), str(root / 'runtime'), '/home/sbq/sbq/aqcat25/python_pkgs',
                                 '/home/sbq/sbq/aqcat25/vendor'])
+    if request.get('model_backend') == 'matris':
+        env['MATRIS_CHECKPOINT'] = request['checkpoint_path']
+        env['PYTHONPATH'] += ':/home/sbq/sbq/mlip_same_structure_benchmark_20260825/vendor/MatRIS'
     return env
 
 
 def cuda_binding(calculator):
     """Check actual model tensors, not CUDA availability or a GPU request label."""
-    device = next(calculator.trainer.model.parameters()).device
+    model = getattr(calculator, 'model', None)
+    if model is None:
+        model = calculator.trainer.model
+    device = next(model.parameters()).device
     if device.type != 'cuda':
         raise RuntimeError(f'GPU request has model parameters on {device}; refuse optimization')
     visible = os.environ.get('CUDA_VISIBLE_DEVICES', '')
@@ -124,10 +159,15 @@ def cuda_binding(calculator):
             'scheduler_job_id': None}
 
 
+def job_wrapper(request, root):
+    name = 'matris_adsorption_gpu_job.sh' if request.get('model_backend') == 'matris' else 'aqcat25_gpu_job.sh'
+    return root / 'runtime' / name
+
+
 def preflight(request, root):
     gpu_available(request)
     env = environment(root, request)
-    subprocess.run(['bash', '-n', str(root / 'runtime/aqcat25_gpu_job.sh')], check=True, timeout=10)
+    subprocess.run(['bash', '-n', str(job_wrapper(request, root))], check=True, timeout=10)
     subprocess.run([env['AQCAT_PYTHON'], str(root / 'preflight.py'), '--remote'],
                    env=env, cwd=root, check=True, timeout=45)
 
@@ -189,7 +229,7 @@ def run(path, digest):
                            SOURCE_HANDOFF_SHA256=item['handoff_sha256'])
                 print(json.dumps({'candidate_started': item['name'], 'run_id': request['run_id']}), flush=True)
                 with (root / item['name'] / 'direct_model.log').open('xb') as log:
-                    child = subprocess.Popen(['bash', str(root / 'runtime/aqcat25_gpu_job.sh')],
+                    child = subprocess.Popen(['bash', str(job_wrapper(request, root))],
                                              env=env, cwd=root, stdout=log, stderr=subprocess.STDOUT,
                                              start_new_session=True)
                     exit_code = child.wait(timeout=remaining)

@@ -96,6 +96,17 @@ Tasks are ordered by priority and should be handled one per Codex thread.
   `archive/dimer9833429_record_20261006/route_inventory.json` and
   `modules/state_handoff/events/task-is-a-int06-dimer9833429-recorded-pending-validation-20261006.json`.
 
+## Retained during the MatRIS adsorption trial (2026-10-18)
+
+- P1: Continue the fifteen Fe(110) adsorption VASP jobs9848799–9848813 and final
+  chemistry/duplicate/compatible-energy review. This GPU trial neither stopped
+  nor resubmitted them. Register only eligible reviewed VASP results under the
+  existing standing completion policy; no MatRIS prediction is a DFT result.
+- P2: After user review of the six-seed MatRIS trial, prepare a bounded matched
+  MatRIS→VASP comparison only if requested. No new VASP or training is authorized
+  by this GPU2-only trial. Evidence:
+  `docs/reviews/fe110_matris_adsorption_trial_20261018.md`.
+
 <!-- state-handoff:start task_backlog_events -->
 ## Managed Backlog
 
