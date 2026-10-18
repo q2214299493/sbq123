@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-adsorption-2185-validated-mixed-20261018",
+  "occurred_at": "2026-10-18T06:34:10.619499+00:00",
+  "recorded_at": "2026-10-18T06:34:10.619499+00:00",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "adsorption_workflow"
+  },
+  "summary": "Authorized frozen2185 GPU validation completed;heldout force errors improve but06_C loses target motif;no model promotion/training/VASP.",
+  "evidence": [
+    {
+      "locator": "docs/reviews/fe110_adsorption_validation_2185_20261018.md",
+      "sha256": "b137c95f8892dad8c07f7666eef3d98738139792ef69afaacebf310a6702dd49",
+      "authority": "repository_document",
+      "observed_at": "2026-10-18T06:34:10.619499+00:00"
+    },
+    {
+      "locator": "archive/fe110_adsorption_validation_20261018/authorization.md",
+      "sha256": "de5d1581d8ee52695b4a87e6a258401b665683436f492e1bda56759ee9ed9b80",
+      "authority": "user_authorization",
+      "observed_at": "2026-10-18T06:34:10.619499+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_validation_2185_20261018_v2/validation_request.json",
+      "sha256": "efc24c23206686aa0ae70d793d5da298c79c2ad5f5659f3ee4ab25d45f50a69f",
+      "authority": "repository_document",
+      "observed_at": "2026-10-18T06:34:10.619499+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_validation_2185_20261018_v2/validation_review.json",
+      "sha256": "27c3cc2329733ecbd095af4eb9d0ab87607c93c57eda8cfc59c0592a1eb6cac1",
+      "authority": "module_validation",
+      "observed_at": "2026-10-18T06:34:10.619499+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_validation_2185_20261018_v2/returned/output/producer_exit_record.json",
+      "sha256": "46aeecbe4fe2e5a48cde03fbe32bc58f1b92304643a139c3df1505cdfdc3c8ea",
+      "authority": "calculation_file",
+      "observed_at": "2026-10-18T06:34:10.619499+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_validation_2185_20261018_v2/failure_case.json",
+      "sha256": "32a119132e284211b0c0d5f346cd7acab6b767b16718a782c34c7138c2e0759e",
+      "authority": "module_validation",
+      "observed_at": "2026-10-18T06:34:10.619499+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_validation_2185_20261018_v2/validation_junit.xml",
+      "sha256": "ec94d1442862c969383dc922e62b02713e184a6bf83bb63680d2e13056a68a52",
+      "authority": "module_validation",
+      "observed_at": "2026-10-18T06:34:10.619499+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "supersedes": [
+    "task-fe110-adsorption-calibration-ready-20261018"
+  ],
+  "payload": {
+    "objective": "Use completed frozen2185 validation evidence to improve adsorption acceleration without promoting a chemically unreliable raw-seed optimizer.",
+    "phase": "active",
+    "current_evidence": [
+      "User authorized validation;only one GPU1 direct run v2 executed;actual model PID2578442 on cuda:0;producer exit0 after22.34s;59 returned files hash-verified.",
+      "Frozen16 frames from2whole heldout jobs:adsorbate force vectorRMSE0.234745→0.106876eV/A(-54.5%);all reported Fe/C/O/H groups improve;no training or epoch selection.",
+      "Same-seed adsorbate RMSD to the same existing DFT reference:06_C0.866→1.694A with CO+C+H prediction;07_B1.623→1.595A;08_A0.956→0.611A. Geometry is mixed,not general acceleration success.",
+      "Minimum-start drift is small underML fmax0.10,but candidate06_C/07_B stop at0steps;do not interpret this as equality of DFT and ML stationary points.",
+      "Failure case saved:06_C target motif lost;DFT error at the failed ML geometry remains unmeasured;model error versus basin selection is unresolved.",
+      "Existing24 compatible DFT frames remain untrained. Local next-force-comparison plan only;no new VASP or automatic training,default-model change,or retry."
+    ],
+    "one_executable_step": "Prepare a bounded exact-structure baseline/candidate force comparison on the existing24DFT frames,prioritizing06_C off-equilibrium;obtain new GPU authorization before execution,then decide whether fine-tuning is justified.",
+    "submission_boundary": "The authorized16heldout/3geometry GPU validation has finished. No further GPU/VASP/training/promotion is authorized.",
+    "done_when": [
+      "Completed frozen validation force/geometry evidence and the06_C failure case are preserved without an acceleration/global-stability claim.",
+      "New-domain exact-structure errors are reviewed before selecting a targeted adaptation or alternative pre-relaxation strategy.",
+      "Any adopted acceleration is ultimately checked against compatible matched VASP steps/time and reviewed final chemistry."
+    ],
+    "constraints": [
+      "Do not use the observed16heldout frames for gradients or retrospective epoch choice.",
+      "LowML force alone does not preserve an adsorption motif;06_C failed-target prediction cannot replace its intactDFT reference.",
+      "Do not change VASP parameters,other jobs,backend roles or existing checkpoints. MatRIS remains an optional audit model."
+    ],
+    "authoritative_references": [
+      "configs/execution_backends.yaml",
+      "modules/adsorption_workflow/README.md",
+      "docs/reviews/fe110_adsorption_validation_2185_20261018.md",
+      "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_validation_2185_20261018_v2/validation_review.json"
+    ]
+  }
+}

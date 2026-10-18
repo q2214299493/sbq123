@@ -35,6 +35,8 @@ Only unresolved problems belong here. Resolved detail through 2026-06-27 is pres
 
 | `E-023` (resolved runtime cause) | 2184 failed before batches due missing natoms metadata and CLI seed0 override | v6 separately binds train34/development12 metadata, explicit seed42 and actual sampler/loader/CLI preflight. Authorized2185 RUNNING with real training iterations; full training and acceleration not yet verified | Preserve v4/v5 failure evidence; check2185 terminal result and grouped development comparison, no automatic retry or model promotion. Evidence: adsorption_finetune_submission_v6/training_progress_2185.txt; scoped package review |
 
+| `E-ADS-2185-06C` | Frozen candidate2185 improves16heldout force errors but raw-seed06_C predictsCO+C+H;adsorbate RMSD1.693806A despiteMLfmax0.093004eV/A | Target-motif loss is not a runtime failure or proof that the DFT intact state is unstable. DFT force error at this failedML geometry is unmeasured;local model error versus different basin selection remains unresolved | Preserve failure_case.json and do not promote the candidate globally. Next prepare exact predictions on existing24DFT frames before deciding another fine-tune;no automatic GPU/VASP/training. Review: `docs/reviews/fe110_adsorption_validation_2185_20261018.md` |
+
 Update this table in place. Move resolved items to historical results or Git history; do not append routine job checkpoints.
 
 ## 2026-08-02 - 112-Core Exact-Path Pilot Electronic Failure in Images 06-07

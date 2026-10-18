@@ -202,3 +202,10 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
   and geometry checks used by local Sella and active-learning handoff.
 - `modules/transition_state_search/SELLA_LOCAL_PEAK.md`: exact request/review
   fields, deployment, bounded execution, return and validation limitations.
+
+## Frozen adsorption candidate2185 validation (2026-10-18)
+
+- `docs/reviews/fe110_adsorption_validation_2185_20261018.md`: independent-force and same-seed/minimum-start geometry results;06_C target-motif loss and non-promotion boundary.
+- `archive/fe110_adsorption_validation_20261018/`: frozen validation runtime, preparation, bounded dispatch, review and tests;no training/VASP authority.
+- `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_validation_2185_20261018_v2/validation_review.json`: complete returned-evidence review, source hashes and grouped errors.
+- `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_validation_2185_20261018_v2/failure_case.json`: source-bound06_C failure case;DFT error at the failedML geometry remains unmeasured.

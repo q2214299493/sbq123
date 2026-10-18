@@ -3,16 +3,16 @@
 
 ## Objective
 
-Calibrate adsorption acceleration using existing compatible VASP structures/trajectories and the existing frozen AQCat25 candidate; preserve ongoing VASP work.
+Use completed frozen2185 validation evidence to improve adsorption acceleration without promoting a chemically unreliable raw-seed optimizer.
 
 ## Current Evidence Snapshot
 
-- Existing training2185 completed with producer exit0;candidate SHA33b615feef2860e744d67ba964a27d1b60b9be7abdc9e754d5e264c10e96b160;not promoted.
-- Original source package34train/12development/16heldout passed hash/source/mask validation;12development groups improve;C2adsorbate vectorRMSE0.222462→0.083809eV/A.
-- No new model was run;old16heldout remain unconsumed. Development agreement does not establish better minima or measured VASP speedup.
-- Recovered3 complete existing jobs06_C/07_B/08_A:24 exact-frame labels;SIGMA0.20/POTCAR/SCF/coordinates/force/energy/fixed-layer/graph checks pass;no cross-split near duplicates against old62rows.
-- Four-job read did not complete within its180s budget;08_B missing,partial receipt preserved,no VASP rerun or repeated full collection. XDATCAR cell rounding handled using input lattice and printed precision.
-- New24rows are future training candidates only. Existing15VASP jobs remain untouched;no new training,GPU/VASP submission or model-default change.
+- User authorized validation;only one GPU1 direct run v2 executed;actual model PID2578442 on cuda:0;producer exit0 after22.34s;59 returned files hash-verified.
+- Frozen16 frames from2whole heldout jobs:adsorbate force vectorRMSE0.234745→0.106876eV/A(-54.5%);all reported Fe/C/O/H groups improve;no training or epoch selection.
+- Same-seed adsorbate RMSD to the same existing DFT reference:06_C0.866→1.694A with CO+C+H prediction;07_B1.623→1.595A;08_A0.956→0.611A. Geometry is mixed,not general acceleration success.
+- Minimum-start drift is small underML fmax0.10,but candidate06_C/07_B stop at0steps;do not interpret this as equality of DFT and ML stationary points.
+- Failure case saved:06_C target motif lost;DFT error at the failed ML geometry remains unmeasured;model error versus basin selection is unresolved.
+- Existing24 compatible DFT frames remain untrained. Local next-force-comparison plan only;no new VASP or automatic training,default-model change,or retry.
 
 ## Lifecycle Status
 
@@ -20,11 +20,11 @@ Calibrate adsorption acceleration using existing compatible VASP structures/traj
 
 ## One Executable Step
 
-Prepare one hash-bound executable GPU validation request for frozen2185:16heldout exact-force comparisons plus bounded geometry drift/same-seed comparisons; obtain separate submission authority before execution.
+Prepare a bounded exact-structure baseline/candidate force comparison on the existing24DFT frames,prioritizing06_C off-equilibrium;obtain new GPU authorization before execution,then decide whether fine-tuning is justified.
 
 ## Submission Boundary
 
-Local collection,preparation and review only. No new scientific execution,training,retry,promotion or existing-job stop authorized.
+The authorized16heldout/3geometry GPU validation has finished. No further GPU/VASP/training/promotion is authorized.
 
 ## Authoritative Constraint
 
@@ -32,20 +32,20 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 
 ## Done When
 
-- Existing2185 producer/checkpoint/development evidence is retrieved byte-for-byte and reviewed without an independent-calibration or speedup claim.
-- Available new trajectory labels are source/SCF/geometry/compatibility/split reviewed;missing08_B and original heldout isolation remain explicit.
-- A separately authorized GPU validation has tested the frozen candidate on heldout forces and bounded DFT-minimum/same-seed geometry before adoption.
+- Completed frozen validation force/geometry evidence and the06_C failure case are preserved without an acceleration/global-stability claim.
+- New-domain exact-structure errors are reviewed before selecting a targeted adaptation or alternative pre-relaxation strategy.
+- Any adopted acceleration is ultimately checked against compatible matched VASP steps/time and reviewed final chemistry.
 
 ## Constraints
 
-- Previously screened06_C/07_B/08_A are not pristine heldout data;do not train/select epochs on the frozen16.
-- Force-only adaptation does not calibrate adsorption-energy ranking;do not loosen DFT criteria or claim acceleration without matched VASP timing.
-- MatRIS remains an audit option and all backend roles remain unchanged.
+- Do not use the observed16heldout frames for gradients or retrospective epoch choice.
+- LowML force alone does not preserve an adsorption motif;06_C failed-target prediction cannot replace its intactDFT reference.
+- Do not change VASP parameters,other jobs,backend roles or existing checkpoints. MatRIS remains an optional audit model.
 
 ## Authoritative References
 
 - configs/execution_backends.yaml
 - modules/adsorption_workflow/README.md
-- docs/reviews/fe110_adsorption_calibration_20261018.md
-- calculations/fe110_c2_adsorption_06_10_20261012/adsorption_calibration_20261018_v1/development_review.json
+- docs/reviews/fe110_adsorption_validation_2185_20261018.md
+- calculations/fe110_c2_adsorption_06_10_20261012/adsorption_validation_2185_20261018_v2/validation_review.json
 <!-- state-handoff:end current_task -->

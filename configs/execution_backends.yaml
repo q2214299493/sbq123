@@ -49,6 +49,31 @@ backends:
       producer_exit_record_is_scheduler_authority: false
       admin_resolution: enable Slurm accounting storage and job accounting on MZ73
     direct_execution_exceptions:
+      fe110_adsorption_validation_2185_20261018:
+        authorized_by: user_explicit_20261018_validate_frozen_adsorption_candidate
+        authorizing_user_request: 验证
+        scope: frozen2185_sixteen_heldout_and_three_existing_geometry_cases_only
+        remote_root: /home/sbq/sbq/aqcat25_ts_pilot/adsorption_validation_2185_20261018_v2
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        gpu_index: 1
+        gpu_uuid: GPU-450609b3-d1fd-ac33-d03a-79891be402da
+        execution_mode: direct_no_scheduler
+        executor: archive/fe110_adsorption_validation_20261018/runtime.py
+        model_backend: aqcat25
+        baseline_checkpoint_sha256: e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50
+        candidate_checkpoint_sha256: 33b615feef2860e744d67ba964a27d1b60b9be7abdc9e754d5e264c10e96b160
+        heldout_count: 16
+        geometry_case_names: [06_C, 07_B, 08_A]
+        seed_max_steps: 80
+        minimum_drift_max_steps: 20
+        fmax_eV_per_A: 0.10
+        max_wall_seconds: 1800
+        explicit_authorization_required: true
+        producer_exit_record_required: true
+        scheduler_job_id: null
+        slurm_id_emulation: forbidden
+        training_or_vasp_execution: forbidden
+        alter_shared_services_or_other_users_jobs: forbidden
       fe110_matris_adsorption_trial_20261018:
         authorized_by: user_explicit_20261018_direct_gpu2_six_matris_trials
         authorizing_user_request: 你尝试一下 授权
