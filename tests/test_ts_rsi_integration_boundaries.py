@@ -159,3 +159,50 @@ def test_overridden_constraints_are_not_effective_inputs(indirect_trial, monkeyp
     assert workflow._resolve_constraints(env["request"], workflow.load_contract(env["request"].contract)) == explicit
     assert plan["workflow_review"]["execution_authorized"] is False
     assert plan["workflow_review"]["scientific_review_completed"] is False
+
+
+@pytest.mark.parametrize("kind", ["decisions", "evaluations"])
+def test_new_referenced_lifecycle_file_rejects_pending_advice(trial, monkeypatch, kind):
+    """Synthetic transport; a new referenced file invalidates the old snapshot."""
+    select_policy(trial, reverse=True)
+    original = rsi_advice.prepare_advice
+    def prepare(*args, **kwargs):
+        context = original(*args, **kwargs)
+        identity = trial["identity"]
+        path = trial["store"] / kind / f"{identity}.json"
+        assert not path.exists()
+        payload = {"schema_version": 1, "candidate_id": identity,
+                   "evaluation_id": None, "decision": "REJECT",
+                   "reviewer": "synthetic fixture", "reason": "rejected after advice creation",
+                   "actor_kind": "synthetic_fixture"} if kind == "decisions" else {
+                       "schema_version": 2, "source": reference(trial["source"]),
+                       "comparison": {"fixture": "new unreviewed lifecycle record"}}
+        # Even an invalid newly introduced record must invalidate the snapshot;
+        # it must not silently inherit the already-generated advice's status.
+        write_json(path, payload)
+        return context
+    monkeypatch.setattr(rsi_advice, "prepare_advice", prepare)
+    with pytest.raises(ValueError, match="policy changed after invocation"):
+        run_plan(trial)
+    assert not (trial["request"].workdir / "ts_strategy.json").exists()
+    assert not (trial["request"].workdir / "rsi_integration.json").exists()
+    rejected = load_json_object(trial["request"].workdir / "rsi_rejection.json")
+    assert rejected["status"] == "unavailable"
+    assert rejected["automatic_execution"] is False
+
+
+def test_unrelated_lifecycle_record_does_not_invalidate_advice(trial, monkeypatch):
+    original = rsi_advice.prepare_advice
+    def prepare(*args, **kwargs):
+        context = original(*args, **kwargs)
+        path = trial["store"] / "decisions" / ("0" * 64 + ".json")
+        assert path.stem != trial["identity"] and not path.exists()
+        write_json(path, {"decision": "REJECT", "fixture": "unrelated policy"})
+        return context
+    monkeypatch.setattr(rsi_advice, "prepare_advice", prepare)
+    plan = run_plan(trial)
+    review = plan["workflow_review"]
+    assert review["status"] == "ADOPTED_FOR_REVIEW_PLANNING"
+    assert all(item["check_status"] == "PENDING" for item in review["items"])
+    assert review["scientific_review_completed"] is False
+    assert review["execution_authorized"] is False

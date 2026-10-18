@@ -127,7 +127,12 @@ def _policy_sources(store: Path, identity: str) -> list[Path]:
 
 def _validate_advice(context: dict) -> dict:
     spec = _source(context["request"])
-    if not source_file_manifest_valid({"source_files": context["sources"]}):
+    # Re-enumerate referenced lifecycle files: a new decision was absent from
+    # the original manifest and cannot be detected by rehashing old entries.
+    current_sources = source_file_manifest([Path(context["request"]["path"]), POLICY,
+        *_policy_sources(Path(spec["store"]), spec["policy_id"])])
+    if not source_file_manifest_valid({"source_files": context["sources"]}) \
+            or sha256_json(current_sources) != sha256_json(context["sources"]):
         raise ValueError("RSI evidence or policy changed after invocation")
     if not source_file_manifest_valid(context["runtime"]):
         raise ValueError("RSI producer source changed after invocation")
