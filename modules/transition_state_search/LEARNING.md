@@ -241,3 +241,111 @@ a separately authorized scientific task.
   identities were not reconstructed, so they are advisory records with null
   input keys, not fabricated hard bans or scored variant outcomes.
 - No job was started, resubmitted, stopped, or modified during adoption.
+
+## Opt-in main-worktree RSI review planning
+
+The single integration point is `_plan_command -> prepare_advice -> workflow.plan`.
+`workflow.plan` calls `consume_advice` and materializes `workflow_review.items`
+in the selected order. This is a pending review plan, not a claim that a model
+or a human performed the checks. Scientific parameters, mandatory validations,
+STOP decisions and execution permissions remain owned by the existing workflow.
+No model, App Server, sandbox probe or scheduler is part of this advice call.
+
+The existing main CLI exposes `--rsi-request` and `--rsi-request-sha256` on
+`plan`; inspect them with `python -m scripts.ts_strategy_engine.cli plan --help`.
+With neither option, existing plan output is unchanged and no RSI process or
+artifact is created. With an explicit RSI request, the trusted operator must
+configure the producer source via `--rsi-source-root ABSOLUTE_DIRECTORY` or
+the per-host `SBQ_RSI_SOURCE_ROOT` environment variable. The CLI option takes
+precedence. The configured directory must be a clean Git checkout root at
+the **unchanged pinned revision** `79cc038eac32e8526f6a5ccdb768182dd8b3e828`,
+with matching strategy policy and a verified source-file manifest.
+The source path does not belong in the task-controlled RSI request JSON.
+Setting the environment variable alone does not enable RSI. The source flag
+requires an explicit RSI request; there is no fallback to a personal worktree.
+The resolved source root and verified manifest are recorded in the invocation.
+It can be deployed at different absolute paths on Windows, Linux, or an
+isolated worker host that runs the planning CLI. This is a per-host producer,
+**not** an authenticated cross-machine HTTPS or SSH service; no network endpoint
+is introduced by this integration. A remote RPC backend requires a separate
+authorized design and verified identity, transport and evidence-access bounds.
+Source changes, unavailable dependencies, an invalid policy or an invalid response produce a recorded
+`unavailable` result and stop that explicit request. They do not automatically
+continue ordinary planning or path initialization. To use the original workflow,
+the caller must separately choose a new call without RSI options. Neither path
+clears an existing scientific blocker or creates execution authority.
+
+The integration request is a local JSON object with exactly these fields:
+
+| Field | Meaning |
+|---|---|
+| `schema_version` | Integer `1`, for this local integration reference only |
+| `task_id` | Current reaction contract's `reaction_id`, also the selected public case's `group_id`; not an inferred repository-governance task ID |
+| `case_id` | One existing, source-bound case in the selected policy inputs |
+| `rsi_revision` | The full fixed source revision above |
+| `store` | Absolute path to the existing workflow policy store |
+| `policy_id`, `scope` | Exact existing workflow selection identities |
+| `plan_inputs` | `scripts.ts_strategy_engine.rsi_advice.plan_inputs(request)` for the actual `workflow.PlanRequest` |
+| `offline_evaluation` | Explicit boolean; synthetic/unaccepted candidate previews require `true` |
+
+`plan_inputs` uses the existing file/hash tools to bind IS/FS, contract, family
+and threshold configuration, effective constraints, ordered waypoints and gate file,
+plus database location, variant identity, image override and path/rebuild
+options. Binding and path preparation share the existing resolver: contract
+waypoints precede explicit waypoints, and relative waypoints use the contract's
+directory. Explicit constraints override the contract's dictionary/string
+reference; the overridden file is not an effective input. Indirect source bytes
+are hashed and rechecked at consumption. All bound references use absolute paths. No chat-derived
+parameter or old hash substitutes for these inputs. The request file itself
+must match the explicit CLI SHA-256. Public/answers and original observations
+come from the existing policy record; no new Gold or diagnosis is generated.
+The child uses its own fixed cwd and package sources, not a mixed PYTHONPATH.
+The existing RSI validator still owns policy, scope, schema-2 diagnosis and
+candidate acceptance checks; the main schema-1 case interface is unchanged.
+
+Advice may change only the review plan. Unknown causal status retains its
+evidence route with no TS field hints. Offline candidate preview is not
+consumed for path preparation/rebuild; this conflict stops the explicit call
+before path preparation. The ordinary workflow retains its own
+gates. A workflow policy ACCEPT and adopting an order for a single plan are
+different facts. This integration never records an ACCEPT.
+
+For a valid explicit request, the plan records `workflow_review.status` as
+`ADOPTED_FOR_REVIEW_PLANNING`, with invocation/task identity,
+source-bound advice, selection identity and ordered pending items when valid.
+`scientific_review_completed=false` and `execution_authorized=false` are
+preserved. Producer rejection, timeout and missing/stale evidence retain their
+reason in `rsi/<invocation_id>/invocation-result.json`; producer exit code is
+`null` when no exit code was obtained. Consumption-stage rejection is recorded
+in `rsi_rejection.json`. Rejected calls create neither a final plan nor an
+adoption/execution receipt.
+
+Successful producer launches retain `rsi/<invocation_id>/invocation-started.json`,
+`invocation-result.json` and the producer's original `advice.json` in the new
+plan directory; unsuccessful launches retain the available first records.
+`rsi_integration.json` connects invocation, adoption and the final
+`ts_strategy.json` file hash. Execution and outcome remain `null` until they
+actually exist. A receipt write error is reported and does not discard an
+otherwise valid ordinary plan. A scientific endpoint STOP still stops before
+plan adoption; an invocation result alone is not completed integration evidence.
+
+For a later separately authorized VASP attempt, the existing `learning start`
+request's `inputs` mapping can include file references named `workflow_plan`
+and `rsi_integration`, alongside the complete actual computational inputs.
+Existing attempt/outcome identities then provide the backlink without any
+production schema change. For VASP, `attempt_input_hashes` still filters to
+real VASP inputs; adding provenance cannot bypass identical-input retry checks.
+`start-vasp` does not add these optional references automatically. No attempt,
+execution or outcome is fabricated by planning.
+For other backends, do not append provenance to computational inputs merely to
+link RSI: their retry identity may include all input hashes. The existing
+outcome `observations` interface can instead reference the integration receipt
+and its `/invocation/invocation_id`, preserving the original computational
+input identity and all required scientific observations.
+
+Integration tests use a clearly synthetic, no-model CLI transport and the real
+main workflow with temporary registry fixtures. They verify changed review
+order, unchanged scientific strategy, disabled-option compatibility, explicit
+source/version rejection, effective indirect-input binding,
+rejection and existing STOP. They are not real RSI model execution, scientific
+validation, paired strategy evaluation or evidence of improved performance.
