@@ -3,16 +3,16 @@
 
 ## Objective
 
-Resolve06_C actual ML failure-boundary force errors before choosing targeted adsorption adaptation;do not replace force/geometry evidence with a low ML fmax claim.
+Obtain the authorized three06_C exact-structure VASP force labels to diagnose actual ML motif loss before choosing another fine-tune.
 
 ## Current Evidence Snapshot
 
-- User authorized local preparation only. Three frozen58-frame ML-trajectory samples selected:before003,after004,final057. No optimization or remote calculation was run.
-- First persistent C46-O47 graph change3→4 has distance1.703323→1.880522A;final57 is3.443902A. C45-H48 later leaves the graph at36→37;final57 C-H2.419268A. Graph cutoffs describe sampling,not physical reaction thresholds.
-- All3 finite/noncollision/order/cell/fixed-mask checks and canonical diagnostic-static preflights pass;POSCAR coordinate round-trip delta1.78e-15A. Actual changed chemistry remains diagnosis-only,not accepted adsorption.
-- Inputs reuse active force-label builder:PBE/ENCUT400/Gamma5x5x1/ISPIN2/SIGMA0.20/ALGOFast/EDIFF1e-6/NSW0/IBRION-1/LORBIT11/NPAR4,32ranks each;species-resolvedMAGMOM49 entries. Custodian read-only checks pass3/3 with no changes.
-- 27same-order49-atom references audited;closest adsorbateRMSDs0.4148/0.3678/1.3548A;no near old-heldout match at0.20A warning. Existing24frames remain untrained;three new points are screened diagnostics,not independent heldout.
-- 29targeted tests pass and two figures were visually inspected. DFT error,magnetic/SCF behavior,basin stability and VASP acceleration remain unmeasured;POTCAR live hash and submission gates still required.
+- User request 任务进展 然后提交 authorizes exactly06C_before_003,06C_after_004,06C_final_057;the unchanged frozen batch SHA is7830bd801ff8b3c2cdae07eb007a2c1eaf032b11cd437a30d103f3f44fcfe62f.
+- All three input manifests remain unchanged and local canonical submission states are NOT_RESERVED. Existing local preflights/29tests remain preparation evidence;no new calculation was run.
+- Read-only sunboquan-codex prerequisite exited255:configured nsgkn_chengdj3@10.68.0.103 returns Permission denied(publickey,gssapi-keyex,gssapi-with-mic,password).
+- One bounded SSH diagnostic establishes connection,key-file presence and explicit public-key offer,but the server rejects it. No agent socket is present;that does not explain rejection of the explicitly offered key. Account/key-policy cause remains unverified.
+- Zero remote uploads,bsub calls,reservations or new job IDs. Remote POTCAR was not read and no execution gate issued. No password attempt,credential change,alternate-account login,DFT setting change,GPU work or training occurred.
+- Actual ML-boundary DFT forces and model-error/basin diagnosis remain unmeasured. Frozen16heldout and untrained24frame boundaries are preserved.
 
 ## Lifecycle Status
 
@@ -20,11 +20,11 @@ Resolve06_C actual ML failure-boundary force errors before choosing targeted ads
 
 ## One Executable Step
 
-Review the prepared06C_before_003/06C_after_004/06C_final_057 geometries and obtain separate exact-three-job VASP static submission authority;then require the current canonical diagnostic gate and live POTCAR hash before execution.
+Restore configured sunboquan-codex account key authentication;then recheck current input/POTCAR hashes and canonical SUBMIT_DIAGNOSTIC_VASP gates before submitting exactly the already-authorized three jobs.
 
 ## Submission Boundary
 
-PREPARED_NOT_SUBMITTED:zero remote uploads or GPU/VASP/training jobs. Local preparation is not user geometry acceptance,not SUBMIT_DIAGNOSTIC_VASP authority and not model promotion.
+AUTHORIZED_AWAITING_SSH_AUTHENTICATION:the exact three static jobs are authorized but not uploaded,reserved or submitted. Do not switch accounts,change inputs,repeat unchanged login attempts or start GPU/training.
 
 ## Authoritative Constraint
 
@@ -38,15 +38,14 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 
 ## Constraints
 
-- Preserve saved source frames,element order,cell,PBC and fixedFe0-17;no bond constraint or geometry repair in exact-force labels.
-- Keep observed16heldout excluded from training/replay/epoch selection;existing24new-domain frames and all3new diagnostic structures remain untrained.
-- No automatic VASP/GPU/training submission,default-model change,unreviewed DFT parameter adjustment or accepted-energy/database promotion.
+- Keep three32-rank SIGMA0.20 NSW0 input bundles and saved geometry/order/cell/fixedFe0-17 unchanged;authentication failure does not justify scientific changes.
+- Do not read,display,copy or modify private-key contents. No alternate account or credentials are authorized by this diagnostic.
+- Preserve observed16heldout exclusions and untrained24frames;no GPU,training,model promotion or accepted-energy/database registration is authorized.
 
 ## Authoritative References
 
 - configs/execution_backends.yaml
-- configs/true_fe110_production.yaml
-- modules/adsorption_workflow/README.md
-- docs/reviews/fe110_06c_failure_boundary_labels_20261018.md
-- calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_boundary_labels_20261018_v1/batch_request.json
+- docs/reviews/fe110_06c_submission_auth_failure_20261018.md
+- archive/fe110_adsorption_validation_20261018/authorization_submit_06c_20261018.md
+- calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_boundary_labels_20261018_v1/authorized_submission_status.json
 <!-- state-handoff:end current_task -->

@@ -223,3 +223,9 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `archive/fe110_adsorption_validation_20261018/prepare_06c_boundary.py`: local-only trajectory selection, source/overlap review and canonical force-label builder/preflight reuse.
 - `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_boundary_labels_20261018_v1/batch_request.json`: unsubmitted frames3/4/57 exact-structure static batch.
 - `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_boundary_labels_20261018_v1/selected_structures.png`: top/side views; periodic display only, no input geometry changes.
+
+## 06_C authorized submission prerequisite failure (2026-10-18)
+
+- `docs/reviews/fe110_06c_submission_auth_failure_20261018.md`: SSH authentication evidence;no upload,bsub,reservation or job ID.
+- `archive/fe110_adsorption_validation_20261018/authorization_submit_06c_20261018.md`: exact user request and hash-bound three-job scope.
+- `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_boundary_labels_20261018_v1/authorized_submission_status.json`: unchanged inputs and unconsumed submission authority pending authentication.

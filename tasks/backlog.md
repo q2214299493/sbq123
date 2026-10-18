@@ -123,12 +123,13 @@ Tasks are ordered by priority and should be handled one per Codex thread.
   `docs/reviews/fe110_adsorption_force24_2185_20261018.md`.
 - Prepared:06_C savedML frames3/4/57 selected as before/after/final failure
   diagnostic structures;three32-rank SIGMA0.20 NSW0 input packages pass local
-  preflight and await user review/submission authority. Review:
+  preflight. User authorized submission;SSH key authentication rejected before
+  any upload or job. Review:
   `docs/reviews/fe110_06c_failure_boundary_labels_20261018.md`.
-- P1: After review and separate authorization,obtain these three exact-structure
-  VASP labels before another fine-tune. Existing24 frames remain untrained and
-  observed16heldout remain excluded from fitting/epoch selection;no additional
-  GPU,VASP or training job is authorized by local preparation.
+- P1: Restore configured sunboquan-codex key authentication,then recheck POTCAR
+  and current canonical gates for exactly the authorized three static labels.
+  Existing24 frames remain untrained and observed16heldout remain excluded
+  from fitting/epoch selection;no GPU,training or other VASP task is authorized.
 
 <!-- state-handoff:start task_backlog_events -->
 ## Managed Backlog

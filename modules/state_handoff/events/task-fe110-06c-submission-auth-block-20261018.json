@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-06c-submission-auth-block-20261018",
+  "occurred_at": "2026-10-18T10:31:55+00:00",
+  "recorded_at": "2026-10-18T10:31:55+00:00",
+  "event_type": "task_updated",
+  "entity": {"kind": "task", "id": "task-current", "module": "adsorption_workflow"},
+  "summary": "User authorized the exact three static labels;remote prerequisite failed SSH key authentication before any upload,reservation or submission;inputs unchanged.",
+  "evidence": [
+    {
+      "locator": "docs/reviews/fe110_06c_submission_auth_failure_20261018.md",
+      "sha256": "1fe1de72957cb72a4adcbb1648992a52af379a3d2c347e5613184eb34a41f313",
+      "authority": "repository_document",
+      "observed_at": "2026-10-18T10:31:55+00:00"
+    },
+    {
+      "locator": "archive/fe110_adsorption_validation_20261018/authorization_submit_06c_20261018.md",
+      "sha256": "e7d85b168c046fd4d5b109d60526bf840d200c0e86d83ecedb67f6327ef97a4a",
+      "authority": "user_authorization",
+      "observed_at": "2026-10-18T10:31:55+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_boundary_labels_20261018_v1/remote_presubmission_check.json",
+      "sha256": "dd460df2b4f3bcad2d660bfec5f9a07d15a94a7e03f1550f93d1d7461b2c6cb9",
+      "authority": "repository_document",
+      "observed_at": "2026-10-18T10:31:55+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_boundary_labels_20261018_v1/ssh_auth_diagnosis.json",
+      "sha256": "fcfbc990c7b94268dfd972c9c87bf302a14cfe6304024197a70590fd8ffc1a54",
+      "authority": "repository_document",
+      "observed_at": "2026-10-18T10:31:55+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_boundary_labels_20261018_v1/authorized_submission_status.json",
+      "sha256": "da0f3ce8bb8fc16f9e3217ce39dba1db7427fb56f5df0ea512916ced9a69b384",
+      "authority": "repository_document",
+      "observed_at": "2026-10-18T10:31:55+00:00"
+    }
+  ],
+  "review": {"required": false, "reason_codes": [], "status": "not_required"},
+  "supersedes": ["task-fe110-06c-boundary-labels-prepared-20261018"],
+  "payload": {
+    "objective": "Obtain the authorized three06_C exact-structure VASP force labels to diagnose actual ML motif loss before choosing another fine-tune.",
+    "phase": "active",
+    "current_evidence": [
+      "User request 任务进展 然后提交 authorizes exactly06C_before_003,06C_after_004,06C_final_057;the unchanged frozen batch SHA is7830bd801ff8b3c2cdae07eb007a2c1eaf032b11cd437a30d103f3f44fcfe62f.",
+      "All three input manifests remain unchanged and local canonical submission states are NOT_RESERVED. Existing local preflights/29tests remain preparation evidence;no new calculation was run.",
+      "Read-only sunboquan-codex prerequisite exited255:configured nsgkn_chengdj3@10.68.0.103 returns Permission denied(publickey,gssapi-keyex,gssapi-with-mic,password).",
+      "One bounded SSH diagnostic establishes connection,key-file presence and explicit public-key offer,but the server rejects it. No agent socket is present;that does not explain rejection of the explicitly offered key. Account/key-policy cause remains unverified.",
+      "Zero remote uploads,bsub calls,reservations or new job IDs. Remote POTCAR was not read and no execution gate issued. No password attempt,credential change,alternate-account login,DFT setting change,GPU work or training occurred.",
+      "Actual ML-boundary DFT forces and model-error/basin diagnosis remain unmeasured. Frozen16heldout and untrained24frame boundaries are preserved."
+    ],
+    "one_executable_step": "Restore configured sunboquan-codex account key authentication;then recheck current input/POTCAR hashes and canonical SUBMIT_DIAGNOSTIC_VASP gates before submitting exactly the already-authorized three jobs.",
+    "submission_boundary": "AUTHORIZED_AWAITING_SSH_AUTHENTICATION:the exact three static jobs are authorized but not uploaded,reserved or submitted. Do not switch accounts,change inputs,repeat unchanged login attempts or start GPU/training.",
+    "done_when": [
+      "ActualML failure-boundary exact-structure VASP forces are normal/electronically converged,complete and compatibility/hash-bound.",
+      "Identical-POSCAR originalAQCat25/frozen2185 errors and key-bond force directions are reviewed before choosing targeted adaptation or a basin/geometry strategy.",
+      "Any adopted acceleration is checked against compatible matched VASP steps/time and reviewed final chemistry."
+    ],
+    "constraints": [
+      "Keep three32-rank SIGMA0.20 NSW0 input bundles and saved geometry/order/cell/fixedFe0-17 unchanged;authentication failure does not justify scientific changes.",
+      "Do not read,display,copy or modify private-key contents. No alternate account or credentials are authorized by this diagnostic.",
+      "Preserve observed16heldout exclusions and untrained24frames;no GPU,training,model promotion or accepted-energy/database registration is authorized."
+    ],
+    "authoritative_references": [
+      "configs/execution_backends.yaml",
+      "docs/reviews/fe110_06c_submission_auth_failure_20261018.md",
+      "archive/fe110_adsorption_validation_20261018/authorization_submit_06c_20261018.md",
+      "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_boundary_labels_20261018_v1/authorized_submission_status.json"
+    ]
+  }
+}
