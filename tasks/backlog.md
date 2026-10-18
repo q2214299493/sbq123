@@ -121,10 +121,14 @@ Tasks are ordered by priority and should be handled one per Codex thread.
 - Completed: authorized baseline/frozen2185 exact-force comparison on existing24
   frames;adsorbate vectorRMSE0.225356→0.123129eV/A;all24 frames improve. Review:
   `docs/reviews/fe110_adsorption_force24_2185_20261018.md`.
-- P1: Select pre/post motif-loss06_C structures from its saved ML trajectory and
-  prepare a bounded same-structure VASP force-label comparison before another
-  fine-tune. The new24 labels remain untrained;no further GPU/VASP/training is
-  authorized. Keep the observed16heldout out of fitting/epoch selection.
+- Prepared:06_C savedML frames3/4/57 selected as before/after/final failure
+  diagnostic structures;three32-rank SIGMA0.20 NSW0 input packages pass local
+  preflight and await user review/submission authority. Review:
+  `docs/reviews/fe110_06c_failure_boundary_labels_20261018.md`.
+- P1: After review and separate authorization,obtain these three exact-structure
+  VASP labels before another fine-tune. Existing24 frames remain untrained and
+  observed16heldout remain excluded from fitting/epoch selection;no additional
+  GPU,VASP or training job is authorized by local preparation.
 
 <!-- state-handoff:start task_backlog_events -->
 ## Managed Backlog

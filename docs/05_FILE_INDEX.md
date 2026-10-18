@@ -216,3 +216,10 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `archive/fe110_adsorption_validation_20261018/force24.py`: source-bound force-only preparation and review;no training or geometry optimization.
 - `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_force24_2185_20261018_v1/force_comparison_review.json`: raw prediction bindings and per-frame/per-source/per-stage metrics.
 - `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_force24_2185_20261018_v1/frame_comparison.csv`: compact48-row original/candidate force comparison.
+
+## 06_C actual ML failure-boundary labels (2026-10-18)
+
+- `docs/reviews/fe110_06c_failure_boundary_labels_20261018.md`: three saved geometries, distances/Fe contacts, fixed-parameter static inputs and unresolved submission boundary.
+- `archive/fe110_adsorption_validation_20261018/prepare_06c_boundary.py`: local-only trajectory selection, source/overlap review and canonical force-label builder/preflight reuse.
+- `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_boundary_labels_20261018_v1/batch_request.json`: unsubmitted frames3/4/57 exact-structure static batch.
+- `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_boundary_labels_20261018_v1/selected_structures.png`: top/side views; periodic display only, no input geometry changes.
