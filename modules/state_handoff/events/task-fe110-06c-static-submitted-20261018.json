@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-06c-static-submitted-20261018",
+  "occurred_at": "2026-10-18T11:00:53+00:00",
+  "recorded_at": "2026-10-18T11:00:53+00:00",
+  "event_type": "task_updated",
+  "entity": {"kind": "task", "id": "task-current", "module": "adsorption_workflow"},
+  "summary": "Configured SSH recovered;exactly three unchanged static labels submitted through current canonical gates as9896148/9896149/9896150;observed PEND,not force validated.",
+  "evidence": [
+    {
+      "locator": "docs/reviews/fe110_06c_static_submission_20261018.md",
+      "sha256": "12b0233a429b1b6c935713f81f7bbcda09f34e1a220ed0a359a48fa6ea490703",
+      "authority": "repository_document",
+      "observed_at": "2026-10-18T11:00:53+00:00"
+    },
+    {
+      "locator": "archive/fe110_adsorption_validation_20261018/authorization_submit_06c_20261018.md",
+      "sha256": "e7d85b168c046fd4d5b109d60526bf840d200c0e86d83ecedb67f6327ef97a4a",
+      "authority": "user_authorization",
+      "observed_at": "2026-10-18T11:00:53+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_boundary_labels_20261018_v1/submission_summary.json",
+      "sha256": "4795c80cdefe7af0c66cba351503ca2286531f53eae4d37e453f50b4cc18bbaa",
+      "authority": "repository_document",
+      "observed_at": "2026-10-18T11:00:53+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_boundary_labels_20261018_v1/ready_for_authorized_submission_v2.json",
+      "sha256": "3b42f7f11ad5433c6951e07ba9c629aaa7043789e2a8af9d41ab5e16f661ab57",
+      "authority": "repository_document",
+      "observed_at": "2026-10-18T11:00:53+00:00"
+    }
+  ],
+  "review": {"required": false, "reason_codes": [], "status": "not_required"},
+  "supersedes": ["task-fe110-06c-submission-auth-block-20261018"],
+  "payload": {
+    "objective": "Obtain the three submitted06_C exact-structure VASP force labels to diagnose actual ML motif loss before choosing another fine-tune.",
+    "phase": "active",
+    "current_evidence": [
+      "User-authorized unchanged frames3/4/57 were canonically submitted as06C_before_003=9896148,06C_after_004=9896149,06C_final_057=9896150;each32 ranks,SIGMA0.20,NSW0.",
+      "Configured sunboquan-codex now authenticates as nsgkn_chengdj3 on ycn03;remote POTCAR/runtime and no-duplicate prerequisites passed without account,credential,structure or DFT changes. Earlier rejection cause remains unverified.",
+      "All three canonical reservations/receipts are SUBMITTED and live bjobs reports PEND;no electronic convergence,complete force labels or scientific acceptance yet.",
+      "First local gate draft exposed tuple/list JSON source-binding mismatch before submission. Saved-JSON binding corrected in the scoped adapter;failed draft retained,three revised gates validated. Focused17tests,py_compile and Ruff passed.",
+      "Original15 adsorption jobs were checked read-only:9 show normal electronic/force-converged completion,07_C exhausted300steps at0.470608eV/A,4RUN,1PEND. This checkpoint does not establish final geometry/registry acceptance;no old jobs changed.",
+      "ActualML failure-boundary DFT error and basin diagnosis remain unmeasured. Frozen16heldout exclusions and24untrained frames are preserved;no GPU,training or model promotion occurred."
+    ],
+    "one_executable_step": "Check9896148/9896149/9896150 for normal termination,EDIFF convergence and complete compatible exact-structure force data;do not resubmit.",
+    "submission_boundary": "THREE_AUTHORIZED_STATICS_SUBMITTED:9896148/9896149/9896150;no additional VASP,GPU,training,checkpoint promotion,old-job mutation or accepted-energy registration is authorized by this step.",
+    "done_when": [
+      "ActualML failure-boundary exact-structure VASP forces are normal/electronically converged,complete and compatibility/hash-bound.",
+      "Identical-POSCAR originalAQCat25/frozen2185 errors and key-bond force directions are reviewed before choosing targeted adaptation or a basin/geometry strategy.",
+      "Any adopted acceleration is checked against compatible matched VASP steps/time and reviewed final chemistry."
+    ],
+    "constraints": [
+      "Keep three32-rank SIGMA0.20 NSW0 input bundles and saved geometry/order/cell/fixedFe0-17 unchanged. Preserve all canonical reservations and avoid duplicate submissions.",
+      "Do not read,display,copy or modify private-key contents. No alternate account or credentials are authorized.",
+      "Preserve observed16heldout exclusions and24untrained frames;no GPU,training,model promotion or accepted-energy/database registration is authorized by this diagnostic."
+    ],
+    "authoritative_references": [
+      "configs/execution_backends.yaml",
+      "docs/reviews/fe110_06c_static_submission_20261018.md",
+      "archive/fe110_adsorption_validation_20261018/authorization_submit_06c_20261018.md",
+      "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_boundary_labels_20261018_v1/submission_summary.json"
+    ]
+  }
+}

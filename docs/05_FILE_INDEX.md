@@ -221,7 +221,7 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 
 - `docs/reviews/fe110_06c_failure_boundary_labels_20261018.md`: three saved geometries, distances/Fe contacts, fixed-parameter static inputs and unresolved submission boundary.
 - `archive/fe110_adsorption_validation_20261018/prepare_06c_boundary.py`: local-only trajectory selection, source/overlap review and canonical force-label builder/preflight reuse.
-- `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_boundary_labels_20261018_v1/batch_request.json`: unsubmitted frames3/4/57 exact-structure static batch.
+- `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_boundary_labels_20261018_v1/batch_request.json`: frozen frames3/4/57 exact-structure static batch;submission status is in the later receipts.
 - `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_boundary_labels_20261018_v1/selected_structures.png`: top/side views; periodic display only, no input geometry changes.
 
 ## 06_C authorized submission prerequisite failure (2026-10-18)
@@ -229,3 +229,9 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `docs/reviews/fe110_06c_submission_auth_failure_20261018.md`: SSH authentication evidence;no upload,bsub,reservation or job ID.
 - `archive/fe110_adsorption_validation_20261018/authorization_submit_06c_20261018.md`: exact user request and hash-bound three-job scope.
 - `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_boundary_labels_20261018_v1/authorized_submission_status.json`: unchanged inputs and unconsumed submission authority pending authentication.
+
+## 06_C authorized static submission (2026-10-18)
+
+- `docs/reviews/fe110_06c_static_submission_20261018.md`: recovered configured login,three canonical job IDs,unchanged scientific scope and local binding correction/tests.
+- `archive/fe110_adsorption_validation_20261018/submit_06c_boundary.py`: exact-three-only adapter to existing canonical gates/submission;no direct bsub or credential changes.
+- `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_boundary_labels_20261018_v1/submission_summary.json`: immutable successful receipts for9896148/9896149/9896150;supersedes the earlier authentication-block status.

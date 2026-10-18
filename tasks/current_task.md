@@ -3,16 +3,16 @@
 
 ## Objective
 
-Obtain the authorized three06_C exact-structure VASP force labels to diagnose actual ML motif loss before choosing another fine-tune.
+Obtain the three submitted06_C exact-structure VASP force labels to diagnose actual ML motif loss before choosing another fine-tune.
 
 ## Current Evidence Snapshot
 
-- User request 任务进展 然后提交 authorizes exactly06C_before_003,06C_after_004,06C_final_057;the unchanged frozen batch SHA is7830bd801ff8b3c2cdae07eb007a2c1eaf032b11cd437a30d103f3f44fcfe62f.
-- All three input manifests remain unchanged and local canonical submission states are NOT_RESERVED. Existing local preflights/29tests remain preparation evidence;no new calculation was run.
-- Read-only sunboquan-codex prerequisite exited255:configured nsgkn_chengdj3@10.68.0.103 returns Permission denied(publickey,gssapi-keyex,gssapi-with-mic,password).
-- One bounded SSH diagnostic establishes connection,key-file presence and explicit public-key offer,but the server rejects it. No agent socket is present;that does not explain rejection of the explicitly offered key. Account/key-policy cause remains unverified.
-- Zero remote uploads,bsub calls,reservations or new job IDs. Remote POTCAR was not read and no execution gate issued. No password attempt,credential change,alternate-account login,DFT setting change,GPU work or training occurred.
-- Actual ML-boundary DFT forces and model-error/basin diagnosis remain unmeasured. Frozen16heldout and untrained24frame boundaries are preserved.
+- User-authorized unchanged frames3/4/57 were canonically submitted as06C_before_003=9896148,06C_after_004=9896149,06C_final_057=9896150;each32 ranks,SIGMA0.20,NSW0.
+- Configured sunboquan-codex now authenticates as nsgkn_chengdj3 on ycn03;remote POTCAR/runtime and no-duplicate prerequisites passed without account,credential,structure or DFT changes. Earlier rejection cause remains unverified.
+- All three canonical reservations/receipts are SUBMITTED and live bjobs reports PEND;no electronic convergence,complete force labels or scientific acceptance yet.
+- First local gate draft exposed tuple/list JSON source-binding mismatch before submission. Saved-JSON binding corrected in the scoped adapter;failed draft retained,three revised gates validated. Focused17tests,py_compile and Ruff passed.
+- Original15 adsorption jobs were checked read-only:9 show normal electronic/force-converged completion,07_C exhausted300steps at0.470608eV/A,4RUN,1PEND. This checkpoint does not establish final geometry/registry acceptance;no old jobs changed.
+- ActualML failure-boundary DFT error and basin diagnosis remain unmeasured. Frozen16heldout exclusions and24untrained frames are preserved;no GPU,training or model promotion occurred.
 
 ## Lifecycle Status
 
@@ -20,11 +20,11 @@ Obtain the authorized three06_C exact-structure VASP force labels to diagnose ac
 
 ## One Executable Step
 
-Restore configured sunboquan-codex account key authentication;then recheck current input/POTCAR hashes and canonical SUBMIT_DIAGNOSTIC_VASP gates before submitting exactly the already-authorized three jobs.
+Check9896148/9896149/9896150 for normal termination,EDIFF convergence and complete compatible exact-structure force data;do not resubmit.
 
 ## Submission Boundary
 
-AUTHORIZED_AWAITING_SSH_AUTHENTICATION:the exact three static jobs are authorized but not uploaded,reserved or submitted. Do not switch accounts,change inputs,repeat unchanged login attempts or start GPU/training.
+THREE_AUTHORIZED_STATICS_SUBMITTED:9896148/9896149/9896150;no additional VASP,GPU,training,checkpoint promotion,old-job mutation or accepted-energy registration is authorized by this step.
 
 ## Authoritative Constraint
 
@@ -38,14 +38,14 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 
 ## Constraints
 
-- Keep three32-rank SIGMA0.20 NSW0 input bundles and saved geometry/order/cell/fixedFe0-17 unchanged;authentication failure does not justify scientific changes.
-- Do not read,display,copy or modify private-key contents. No alternate account or credentials are authorized by this diagnostic.
-- Preserve observed16heldout exclusions and untrained24frames;no GPU,training,model promotion or accepted-energy/database registration is authorized.
+- Keep three32-rank SIGMA0.20 NSW0 input bundles and saved geometry/order/cell/fixedFe0-17 unchanged. Preserve all canonical reservations and avoid duplicate submissions.
+- Do not read,display,copy or modify private-key contents. No alternate account or credentials are authorized.
+- Preserve observed16heldout exclusions and24untrained frames;no GPU,training,model promotion or accepted-energy/database registration is authorized by this diagnostic.
 
 ## Authoritative References
 
 - configs/execution_backends.yaml
-- docs/reviews/fe110_06c_submission_auth_failure_20261018.md
+- docs/reviews/fe110_06c_static_submission_20261018.md
 - archive/fe110_adsorption_validation_20261018/authorization_submit_06c_20261018.md
-- calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_boundary_labels_20261018_v1/authorized_submission_status.json
+- calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_boundary_labels_20261018_v1/submission_summary.json
 <!-- state-handoff:end current_task -->
