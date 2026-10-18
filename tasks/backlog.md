@@ -118,10 +118,13 @@ Tasks are ordered by priority and should be handled one per Codex thread.
   geometry comparisons. Force RMSE improved but06_C lost its target motif;
   no default-model replacement or measured VASP speedup. Evidence:
   `docs/reviews/fe110_adsorption_validation_2185_20261018.md`.
-- P1: Prepare exact baseline/candidate force predictions on existing24DFT
-  frames,especially06_C off-equilibrium,before choosing another fine-tune.
-  The new24 labels remain untrained;further GPU/VASP execution needs new
-  authorization. Keep the observed16heldout out of fitting/epoch selection.
+- Completed: authorized baseline/frozen2185 exact-force comparison on existing24
+  frames;adsorbate vectorRMSE0.225356→0.123129eV/A;all24 frames improve. Review:
+  `docs/reviews/fe110_adsorption_force24_2185_20261018.md`.
+- P1: Select pre/post motif-loss06_C structures from its saved ML trajectory and
+  prepare a bounded same-structure VASP force-label comparison before another
+  fine-tune. The new24 labels remain untrained;no further GPU/VASP/training is
+  authorized. Keep the observed16heldout out of fitting/epoch selection.
 
 <!-- state-handoff:start task_backlog_events -->
 ## Managed Backlog

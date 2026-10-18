@@ -57,9 +57,21 @@ def load_atoms(path: Path):
     return atoms
 
 
+def validate_force_only_scope(request: dict, exception: dict) -> None:
+    if request["limits"] or request["geometry_cases"] or request.get("sample_role") != "screened_untrained_diagnostic_not_independent_heldout":
+        raise ValueError("force-only comparison cannot optimize geometry or claim independent heldout")
+    rows = request["samples"]
+    if len(rows) != exception["sample_count"] or len({r["sample_id"] for r in rows}) != exception["sample_count"]:
+        raise ValueError("diagnostic sample scope/count changed")
+    if sorted({r["source_name"] for r in rows}) != exception["source_names"]:
+        raise ValueError("diagnostic source scope changed")
+
+
 def validate_scope(request: dict, authorization: dict, request_sha: str, exception: dict) -> None:
+    force_only = request.get("document_kind") == "adsorption_exact_trajectory_force_comparison"
+    action = "RUN_GPU_ADSORPTION_EXACT_FORCES" if force_only else "RUN_GPU_ADSORPTION_FROZEN_VALIDATION"
     if (authorization.get("request_sha256") != request_sha or authorization.get("user_authorized") is not True
-            or authorization.get("action") != "RUN_GPU_ADSORPTION_FROZEN_VALIDATION"):
+            or authorization.get("action") != action):
         raise ValueError("missing or stale explicit user authorization")
     for key in ("gpu_index", "gpu_uuid", "max_wall_seconds", "remote_root"):
         if request[key] != exception[key]:
@@ -71,13 +83,15 @@ def validate_scope(request: dict, authorization: dict, request_sha: str, excepti
     for model in ("baseline", "candidate"):
         if request["models"][model]["sha256"] != exception[model + "_checkpoint_sha256"]:
             raise ValueError("unauthorized checkpoint")
-    if request["limits"] != {"seed_max_steps": exception["seed_max_steps"],
+    if force_only:
+        validate_force_only_scope(request, exception)
+    elif request["limits"] != {"seed_max_steps": exception["seed_max_steps"],
                              "minimum_drift_max_steps": exception["minimum_drift_max_steps"],
                              "fmax_eV_per_A": exception["fmax_eV_per_A"]}:
         raise ValueError("optimizer budget changed")
-    if len(request["heldout"]) != exception["heldout_count"] or len({r["sample_id"] for r in request["heldout"]}) != exception["heldout_count"]:
+    if not force_only and (len(request["heldout"]) != exception["heldout_count"] or len({r["sample_id"] for r in request["heldout"]}) != exception["heldout_count"]):
         raise ValueError("heldout scope/count changed")
-    if [case["name"] for case in request["geometry_cases"]] != exception["geometry_case_names"]:
+    if not force_only and [case["name"] for case in request["geometry_cases"]] != exception["geometry_case_names"]:
         raise ValueError("geometry cases changed")
     if authorization["user_request"] != exception["authorizing_user_request"]:
         raise ValueError("user scope changed")
@@ -87,15 +101,23 @@ def verify_labels(root: Path, request: dict) -> None:
     if digest(local_path(root, request["source_manifest_path"])) != request["source_manifest_sha256"]:
         raise ValueError("source training manifest changed")
     source = json.loads(local_path(root, request["source_manifest_path"]).read_bytes())
-    expected = {row["sample_id"]: row for row in source["splits"]["heldout"]}
-    if {row["sample_id"] for row in request["heldout"]} != set(expected):
+    force_only = request.get("document_kind") == "adsorption_exact_trajectory_force_comparison"
+    rows = request["samples"] if force_only else request["heldout"]
+    originals = source["samples"] if force_only else source["splits"]["heldout"]
+    expected = {row["sample_id"]: row for row in originals}
+    if len(expected) != len(originals) or {row["sample_id"] for row in rows} != set(expected):
         raise ValueError("frozen heldout membership changed")
-    for row in request["heldout"]:
+    for row in rows:
         original = expected[row["sample_id"]]
-        for key in ("structure_sha256", "forces_eV_per_A", "symbols", "calculation_group", "source_OUTCAR_sha256"):
+        keys = ["structure_sha256", "forces_eV_per_A", "symbols", "fixed_atom_indices_0based", "source_OUTCAR_sha256"]
+        keys += ["source_name", "source_job_id", "ionic_step", "source_total_steps", "source_force_table_sha256", "source_XDATCAR_sha256"] if force_only else ["calculation_group"]
+        for key in keys:
             if row[key] != original[key]:
                 raise ValueError("frozen heldout label changed: " + key)
-        atoms = load_atoms(local_path(root, row["structure_path"]))
+        path = local_path(root, row["structure_path"])
+        if digest(path) != row["structure_sha256"]:
+            raise ValueError("structure bytes do not match exact label")
+        atoms = load_atoms(path)
         forces = np.asarray(row["forces_eV_per_A"], dtype=float)
         if forces.shape != (len(atoms), 3) or not np.isfinite(forces).all():
             raise ValueError("incomplete/nonfinite reference forces")
@@ -112,7 +134,7 @@ def verify_labels(root: Path, request: dict) -> None:
 def verify(path: Path, authorization_path: Path, remote: bool = False) -> dict:
     root = path.parent.resolve()
     request = json.loads(path.read_bytes())
-    if request.get("document_kind") != "adsorption_frozen_checkpoint_gpu_validation":
+    if request.get("document_kind") not in ("adsorption_frozen_checkpoint_gpu_validation", "adsorption_exact_trajectory_force_comparison"):
         raise ValueError("not a frozen adsorption validation")
     authorization = json.loads(authorization_path.read_bytes())
     policy = local_path(root, request["policy"]["path"])
@@ -194,7 +216,7 @@ def predict_heldout(root: Path, rows: list, calc, deadline: float) -> list:
         result.append({"sample_id": row["sample_id"], "structure_sha256": row["structure_sha256"],
             "predicted_forces_eV_per_A": predicted.tolist(),
             "metrics": force_metrics(row["forces_eV_per_A"], predicted, row["symbols"], row["fixed_atom_indices_0based"])})
-        print("heldout " + row["sample_id"], flush=True)
+        print("prediction " + row["sample_id"], flush=True)
     return result
 
 
@@ -222,14 +244,17 @@ def run(path: Path, authorization: Path) -> None:
             calc = patched_calc(checkpoint_path=model["path"], is_spin_off=False, is_low_fi=False, cpu=False)
             binding = cuda_binding(calc)
             save(output / (name + "_device.json"), binding)
-            predictions = predict_heldout(root, request["heldout"], calc, deadline)
-            save(output / (name + "_heldout.json"), {"checkpoint_sha256": model["sha256"], "samples": predictions})
+            force_only = request["document_kind"] == "adsorption_exact_trajectory_force_comparison"
+            predictions = predict_heldout(root, request["samples"] if force_only else request["heldout"], calc, deadline)
+            suffix = "_forces.json" if force_only else "_heldout.json"
+            save(output / (name + suffix), {"checkpoint_sha256": model["sha256"], "samples": predictions})
             cases = []
             for case in request["geometry_cases"]:
                 for origin in ("seed", "minimum"):
                     cases.append(relax_case(root, output / name, case, origin, calc, request["limits"], deadline))
                     print(name + " geometry " + case["name"] + " " + origin, flush=True)
-            save(output / (name + "_geometry.json"), {"cases": cases})
+            if not force_only:
+                save(output / (name + "_geometry.json"), {"cases": cases})
             del calc
             gc.collect()
             torch.cuda.empty_cache()
@@ -262,7 +287,7 @@ def main() -> None:
             gpu_available(request)
             from fairchem.core.common.relaxation.ase_utils import patched_calc  # noqa: F401
             from fairchem.core.models.equiformer_v2 import equiformer_v2_film  # noqa: F401
-        print(json.dumps({"status": "PREFLIGHT_PASS", "heldout_count": len(request["heldout"]),
+        print(json.dumps({"status": "PREFLIGHT_PASS", "sample_count": len(request.get("samples", request.get("heldout", []))),
                           "geometry_cases": len(request["geometry_cases"]), "model_executed": False}))
 
 

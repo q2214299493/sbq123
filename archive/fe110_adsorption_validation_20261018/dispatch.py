@@ -6,6 +6,7 @@ import argparse
 import json
 import subprocess
 import tarfile
+from pathlib import Path
 
 import yaml
 
@@ -166,9 +167,19 @@ print(json.dumps({'archive_sha256':hashlib.sha256(archive.read_bytes()).hexdiges
 
 
 def main() -> None:
+    global DEST, REMOTE
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", choices=("deploy", "preflight", "launch", "poll", "collect"))
+    parser.add_argument("--package", type=Path, help="Explicit work-side package; remote root is read from its bound request")
     args = parser.parse_args()
+    if args.package:
+        DEST = args.package.resolve()
+        if not DEST.is_relative_to(ROOT / "calculations"):
+            raise ValueError("package must be in work calculations")
+        request = json.loads((DEST / "validation_request.json").read_bytes())
+        REMOTE = request["remote_root"]
+        from .runtime import verify
+        verify(DEST / "validation_request.json", DEST / "submission_authorization.json")
     {"deploy": deploy, "preflight": preflight, "launch": launch, "poll": poll, "collect": collect}[args.action]()
 
 

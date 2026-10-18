@@ -209,3 +209,10 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `archive/fe110_adsorption_validation_20261018/`: frozen validation runtime, preparation, bounded dispatch, review and tests;no training/VASP authority.
 - `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_validation_2185_20261018_v2/validation_review.json`: complete returned-evidence review, source hashes and grouped errors.
 - `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_validation_2185_20261018_v2/failure_case.json`: source-bound06_C failure case;DFT error at the failedML geometry remains unmeasured.
+
+## Existing24 exact-force comparison (2026-10-18)
+
+- `docs/reviews/fe110_adsorption_force24_2185_20261018.md`: completed24-frame diagnostic, grouped/staged force improvement and unresolved06_C failure boundary.
+- `archive/fe110_adsorption_validation_20261018/force24.py`: source-bound force-only preparation and review;no training or geometry optimization.
+- `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_force24_2185_20261018_v1/force_comparison_review.json`: raw prediction bindings and per-frame/per-source/per-stage metrics.
+- `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_force24_2185_20261018_v1/frame_comparison.csv`: compact48-row original/candidate force comparison.
