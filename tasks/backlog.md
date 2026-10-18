@@ -107,6 +107,19 @@ Tasks are ordered by priority and should be handled one per Codex thread.
   by this GPU2-only trial. Evidence:
   `docs/reviews/fe110_matris_adsorption_trial_20261018.md`.
 
+## Retained during adsorption model calibration (2026-10-18)
+
+- P1: Preserve and monitor the existing15 VASP jobs9848799–9848813; eligible
+  final adsorption review/registration remains separate from force-label use.
+- P2: If needed, recover only08_B trajectory evidence not returned by the
+  bounded read-only collection. Three complete jobs already supply24 verified
+  new training candidates; do not repeat the complete batch or rerun VASP.
+- P2: Review existing candidate2185 with frozen16 heldout and bounded geometry
+  drift/same-seed comparisons before default-model replacement or another
+  fine-tune. The new24 labels have not updated any checkpoint; no new GPU/VASP
+  submission is authorized. Evidence:
+  `docs/reviews/fe110_adsorption_calibration_20261018.md`.
+
 <!-- state-handoff:start task_backlog_events -->
 ## Managed Backlog
 

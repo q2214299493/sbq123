@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-adsorption-calibration-prepared-20261018",
+  "occurred_at": "2026-10-18T04:10:43.558110+00:00",
+  "recorded_at": "2026-10-18T04:10:43.558110+00:00",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "adsorption_workflow"
+  },
+  "summary": "Reuse completed adsorption candidate2185 and24 new compatible trajectory labels; development improved, independent and geometry validation pending; no new scientific job.",
+  "evidence": [
+    {
+      "locator": "docs/reviews/fe110_adsorption_calibration_20261018.md",
+      "sha256": "588a0bb32df4c407d12a0131b0b8f500e2c90b3c8d3f78236af005dc0d898880",
+      "authority": "repository_document",
+      "observed_at": "2026-10-18T04:10:43.558110+00:00"
+    },
+    {
+      "locator": "archive/fe110_adsorption_calibration_20261018/authorization.md",
+      "sha256": "af15ba6f9668f5fea618ca074bbf763c68ae23aa35d7eb7e2c3af8db0e8e7ca1",
+      "authority": "user_authorization",
+      "observed_at": "2026-10-18T04:10:43.558110+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_calibration_20261018_v1/development_review.json",
+      "sha256": "4eb59972d0fcdc059349d96caad98b3393bbc024a34f203839af9a5789ae5502",
+      "authority": "module_validation",
+      "observed_at": "2026-10-18T04:10:43.558110+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_calibration_20261018_v1/current_trajectories/dataset_review.json",
+      "sha256": "fd982424d088e1c4edf699394520108a0825d4fc26e7c0bd06f84cbcfac56d1a",
+      "authority": "module_validation",
+      "observed_at": "2026-10-18T04:10:43.558110+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_calibration_20261018_v1/current_trajectories/split_review.json",
+      "sha256": "8e42dbfcd144e7c2f9011be9770d73620c0d4041d389ec667780af08737659d8",
+      "authority": "module_validation",
+      "observed_at": "2026-10-18T04:10:43.558110+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_calibration_20261018_v1/independent_validation_plan.json",
+      "sha256": "a5a85a0d409a0ca2c1affe44d81f98993afb07d516232b798fa2fc3ef4b49b37",
+      "authority": "repository_document",
+      "observed_at": "2026-10-18T04:10:43.558110+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_calibration_20261018_v1/validation_junit.xml",
+      "sha256": "2fc12bd254f6003644ecc47679f1a9b2b5a1176d45e2f60a4cac0890fc5cea14",
+      "authority": "module_validation",
+      "observed_at": "2026-10-18T04:10:43.558110+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "supersedes": [
+    "task-fe110-matris-adsorption-trial-20261018"
+  ],
+  "payload": {
+    "objective": "Calibrate adsorption acceleration using existing compatible VASP structures/trajectories and the existing frozen AQCat25 candidate; preserve ongoing VASP work.",
+    "phase": "active",
+    "current_evidence": [
+      "Existing training2185 completed with producer exit0;candidate SHA33b615feef2860e744d67ba964a27d1b60b9be7abdc9e754d5e264c10e96b160;not promoted.",
+      "Original source package34train/12development/16heldout passed hash/source/mask validation;12development groups improve;C2adsorbate vectorRMSE0.222462→0.083809eV/A.",
+      "No new model was run;old16heldout remain unconsumed. Development agreement does not establish better minima or measured VASP speedup.",
+      "Recovered3 complete existing jobs06_C/07_B/08_A:24 exact-frame labels;SIGMA0.20/POTCAR/SCF/coordinates/force/energy/fixed-layer/graph checks pass;no cross-split near duplicates against old62rows.",
+      "Four-job read did not complete within its180s budget;08_B missing,partial receipt preserved,no VASP rerun or repeated full collection. XDATCAR cell rounding handled using input lattice and printed precision.",
+      "New24rows are future training candidates only. Existing15VASP jobs remain untouched;no new training,GPU/VASP submission or model-default change."
+    ],
+    "one_executable_step": "Prepare one hash-bound executable GPU validation request for frozen2185:16heldout exact-force comparisons plus bounded geometry drift/same-seed comparisons; obtain separate submission authority before execution.",
+    "submission_boundary": "Local collection,preparation and review only. No new scientific execution,training,retry,promotion or existing-job stop authorized.",
+    "done_when": [
+      "Existing2185 producer/checkpoint/development evidence is retrieved byte-for-byte and reviewed without an independent-calibration or speedup claim.",
+      "Available new trajectory labels are source/SCF/geometry/compatibility/split reviewed;missing08_B and original heldout isolation remain explicit.",
+      "A separately authorized GPU validation has tested the frozen candidate on heldout forces and bounded DFT-minimum/same-seed geometry before adoption."
+    ],
+    "constraints": [
+      "Previously screened06_C/07_B/08_A are not pristine heldout data;do not train/select epochs on the frozen16.",
+      "Force-only adaptation does not calibrate adsorption-energy ranking;do not loosen DFT criteria or claim acceleration without matched VASP timing.",
+      "MatRIS remains an audit option and all backend roles remain unchanged."
+    ],
+    "authoritative_references": [
+      "configs/execution_backends.yaml",
+      "modules/adsorption_workflow/README.md",
+      "docs/reviews/fe110_adsorption_calibration_20261018.md",
+      "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_calibration_20261018_v1/development_review.json"
+    ]
+  }
+}
