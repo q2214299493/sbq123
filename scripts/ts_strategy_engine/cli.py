@@ -59,6 +59,8 @@ def _add_plan_parser(commands: argparse._SubParsersAction) -> None:
     planning.add_argument("--rebuild", action="store_true")
     planning.add_argument("--gate-decision", type=Path)
     planning.add_argument("--gate-state-sha256")
+    planning.add_argument("--rsi-source-root", type=Path,
+                          help="Operator-chosen local clean RSI checkout root; overrides SBQ_RSI_SOURCE_ROOT; no remote API.")
     planning.add_argument("--rsi-request", type=Path, help="Explicit hash-bound RSI review-order request; no model execution.")
     planning.add_argument("--rsi-request-sha256", help="Expected file SHA-256 of the RSI request; invalid explicit advice stops this request.")
     planning.set_defaults(handler=_plan_command)

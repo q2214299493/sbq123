@@ -254,10 +254,22 @@ No model, App Server, sandbox probe or scheduler is part of this advice call.
 The existing main CLI exposes `--rsi-request` and `--rsi-request-sha256` on
 `plan`; inspect them with `python -m scripts.ts_strategy_engine.cli plan --help`.
 With neither option, existing plan output is unchanged and no RSI process or
-artifact is created. The RSI source is fixed to the existing
-`~/.codex/worktrees/workflow-improvement-loop/work` tree at
-`79cc038eac32e8526f6a5ccdb768182dd8b3e828`. Source changes, unavailable
-dependencies, an invalid policy or an invalid response produce a recorded
+artifact is created. With an explicit RSI request, the trusted operator must
+configure the producer source via `--rsi-source-root ABSOLUTE_DIRECTORY` or
+the per-host `SBQ_RSI_SOURCE_ROOT` environment variable. The CLI option takes
+precedence. The configured directory must be a clean Git checkout root at
+the **unchanged pinned revision** `79cc038eac32e8526f6a5ccdb768182dd8b3e828`,
+with matching strategy policy and a verified source-file manifest.
+The source path does not belong in the task-controlled RSI request JSON.
+Setting the environment variable alone does not enable RSI. The source flag
+requires an explicit RSI request; there is no fallback to a personal worktree.
+The resolved source root and verified manifest are recorded in the invocation.
+It can be deployed at different absolute paths on Windows, Linux, or an
+isolated worker host that runs the planning CLI. This is a per-host producer,
+**not** an authenticated cross-machine HTTPS or SSH service; no network endpoint
+is introduced by this integration. A remote RPC backend requires a separate
+authorized design and verified identity, transport and evidence-access bounds.
+Source changes, unavailable dependencies, an invalid policy or an invalid response produce a recorded
 `unavailable` result and stop that explicit request. They do not automatically
 continue ordinary planning or path initialization. To use the original workflow,
 the caller must separately choose a new call without RSI options. Neither path

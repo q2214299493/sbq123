@@ -90,8 +90,8 @@ def test_effective_path_source_change_rejects_full_workflow(indirect_trial, monk
     before_contract = sha256_file(request.contract)
     original = rsi_advice.prepare_advice
     reached = []
-    def prepare(*args):
-        context = original(*args)
+    def prepare(*args, **kwargs):
+        context = original(*args, **kwargs)
         assert context["status"] == "available"
         changed.write_bytes(changed.read_bytes() + b" ")
         return context
@@ -144,8 +144,8 @@ def test_overridden_constraints_are_not_effective_inputs(indirect_trial, monkeyp
     env["request"] = replace(env["request"], constraints=explicit)
     select_policy(env)
     original = rsi_advice.prepare_advice
-    def prepare(*args):
-        context = original(*args)
+    def prepare(*args, **kwargs):
+        context = original(*args, **kwargs)
         if missing:
             env["indirect_constraints"].unlink()  # Only this temporary synthetic fixture.
         else:

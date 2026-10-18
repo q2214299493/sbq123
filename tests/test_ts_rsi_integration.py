@@ -47,7 +47,7 @@ with Path(value("--report")).open("x", encoding="utf-8") as handle:
     json.dump(reply, handle)
 print("synthetic no-model CLI transport")
 ''', encoding="utf-8")
-    monkeypatch.setattr(rsi_advice, "_runtime", lambda: {
+    monkeypatch.setattr(rsi_advice, "_runtime", lambda _root=None: {
         "root": str(backend), "revision": rsi_advice.RSI_REVISION,
         "interface": "synthetic_cli_transport", "synthetic_fixture": True,
         "source_files": source_file_manifest([producer]), "model_calls": 0})
@@ -170,7 +170,7 @@ def test_explicit_unavailable_stops_and_default_call_has_no_rsi_side_effects(tri
     assert "workflow_review" not in baseline
     assert not (trial["root"] / "disabled/rsi").exists()
     assert not (trial["root"] / "disabled/rsi_integration.json").exists()
-    def unavailable():
+    def unavailable(_root=None):
         raise OSError("synthetic unavailable runtime")
     monkeypatch.setattr(rsi_advice, "_runtime", unavailable)
     with pytest.raises(ValueError, match="synthetic unavailable runtime"):
@@ -210,8 +210,8 @@ def test_stale_request_hash_and_incomplete_evidence_stop(trial):
 @pytest.mark.parametrize("damage", ["evidence", "advice", "policy"])
 def test_changed_sources_between_invocation_and_consumption_cannot_be_adopted(trial, monkeypatch, damage):
     original = rsi_advice.prepare_advice
-    def prepare(*args):
-        context = original(*args)
+    def prepare(*args, **kwargs):
+        context = original(*args, **kwargs)
         assert context["status"] == "available"
         path = {"evidence": trial["source"], "advice": Path(context["advice"]["path"]),
                 "policy": trial["store"] / "policies" / f"{trial['identity']}.json"}[damage]
@@ -343,11 +343,12 @@ def test_offline_advice_does_not_authorize_path_preparation(trial):
 
 @pytest.mark.parametrize("dirty", [False, True])
 def test_actual_source_admission_rejects_wrong_head_or_dirty_tree(trial, monkeypatch, dirty):
-    monkeypatch.setattr(rsi_advice, "RSI_ROOT", trial["backend"])
+    monkeypatch.setenv(rsi_advice.RSI_SOURCE_ROOT_ENV, str(trial["backend"].resolve()))
     monkeypatch.setattr(rsi_advice, "_runtime", ACTUAL_RUNTIME_CHECK)
     def git_probe(argv, cwd):
         assert argv[0] == "git" and cwd == trial["backend"]
-        data = ((rsi_advice.RSI_REVISION if dirty else "0" * 40).encode() if argv[1] == "rev-parse"
+        data = ((str(trial["backend"].resolve()).encode() if argv[-1] == "--show-toplevel" else
+                 (rsi_advice.RSI_REVISION if dirty else "0" * 40).encode()) if argv[1] == "rev-parse"
                 else (b" M scripts/fixture.py" if dirty else b""))
         return subprocess.CompletedProcess(argv, 0, data, b"")
     monkeypatch.setattr(rsi_advice, "_run", git_probe)

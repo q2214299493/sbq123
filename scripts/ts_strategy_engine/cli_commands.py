@@ -28,7 +28,8 @@ def _plan_command(args: argparse.Namespace) -> None:
         gate_state_sha256=args.gate_state_sha256,
     )
     advice = prepare_advice(request, getattr(args, "rsi_request", None),
-                            getattr(args, "rsi_request_sha256", None))
+                            getattr(args, "rsi_request_sha256", None),
+                            source_root=getattr(args, "rsi_source_root", None))
     plan(replace(request, rsi_advice=advice))
 
 def _path_review_command(args: argparse.Namespace) -> None:

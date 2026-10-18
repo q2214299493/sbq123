@@ -19,7 +19,8 @@ from .path_evidence import _resolve_constraints, _resolve_waypoints
 from .strategy_learning import POLICY, policy
 
 
-RSI_ROOT = Path.home() / ".codex/worktrees/workflow-improvement-loop/work"
+RSI_SOURCE_ROOT_ENV = "SBQ_RSI_SOURCE_ROOT"
+# Always verify the exact approved producer revision, independent of its location.
 RSI_REVISION = "79cc038eac32e8526f6a5ccdb768182dd8b3e828"
 TIMEOUT_SECONDS = 30
 
@@ -62,8 +63,25 @@ def _run(argv: list[str], cwd: Path):
                           timeout=TIMEOUT_SECONDS, check=False)
 
 
-def _runtime() -> dict:
-    root = RSI_ROOT.resolve(strict=True)
+def _source_root(operator_root: Path | None = None) -> Path:
+    """Select a versioned checkout on this host; never from the untrusted task JSON."""
+    selected = operator_root if operator_root is not None else os.environ.get(RSI_SOURCE_ROOT_ENV)
+    if selected is None or not str(selected).strip():
+        raise ValueError(f"RSI source not configured: pass --rsi-source-root or set {RSI_SOURCE_ROOT_ENV}")
+    path = Path(selected).expanduser()
+    if not path.is_absolute():
+        raise ValueError("RSI source root must be an absolute directory on the invoking host")
+    root = path.resolve(strict=True)
+    if not root.is_dir():
+        raise ValueError("RSI source root is not a directory")
+    return root
+
+
+def _runtime(operator_root: Path | None = None) -> dict:
+    root = _source_root(operator_root)
+    toplevel = _run(["git", "rev-parse", "--show-toplevel"], root)
+    if toplevel.returncode or Path(toplevel.stdout.decode("utf-8").strip()).resolve() != root:
+        raise ValueError("RSI source root must be a Git checkout root")
     head = _run(["git", "rev-parse", "HEAD"], root)
     dirty = _run(["git", "status", "--porcelain=v1", "--untracked-files=all",
                   "--", "scripts", "configs", "pyproject.toml"], root)
@@ -157,9 +175,12 @@ def _validate_advice(context: dict) -> dict:
     return {"selection": selection, "row": row, "input_sha256": case["input_sha256"]}
 
 
-def prepare_advice(request, request_path: Path | None, expected_sha256: str | None) -> dict | None:
+def prepare_advice(request, request_path: Path | None, expected_sha256: str | None,
+                   *, source_root: Path | None = None) -> dict | None:
     """No option preserves ordinary planning; an explicit invalid request stops."""
     if request_path is None and expected_sha256 is None:
+        if source_root is not None:
+            raise ValueError("--rsi-source-root requires an explicit RSI request")
         return None
     context = {"status": "unavailable", "invocation_id": uuid.uuid4().hex,
                "started_at": datetime.now(timezone.utc).isoformat(), "task_id": None,
@@ -189,7 +210,7 @@ def prepare_advice(request, request_path: Path | None, expected_sha256: str | No
         record = _source(_reference(policy_path))
         sources = _policy_sources(store, spec["policy_id"])
         context["sources"] = source_file_manifest([request_path, POLICY, *sources])
-        context["runtime"] = _runtime()
+        context["runtime"] = _runtime(source_root)
         public = _source(record["inputs"]["public"])
         directory.mkdir(parents=True, exist_ok=False)
         report_path = directory / "advice.json"
