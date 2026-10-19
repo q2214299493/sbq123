@@ -271,3 +271,10 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `docs/reviews/fe110_adsorption_training_execution_precheck_20261019.md`: exact authority,failedSlurm/directory-alias evidence and no-run boundary.
 - `archive/fe110_adsorption_training_comparison_20261019/execute.py`, `test_execute.py`, `authorization_run_20261019.md`: immutable authorization binding and read-only live probe;no execution fallback.
 - `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_execution_20261019_v1/`: authorization records,raw live precheck/receipt,143-test evidence and runtime blocker verification.
+
+## Adsorption direct GPU training attempt and DDP fix (2026-10-20)
+
+- `docs/reviews/fe110_adsorption_direct_training_20261020.md`: exact direct/portable bindings,actualCUDA failure,energy-head parameter mapping and CPU-DDP-only fix validation.
+- `scripts/adsorption/direct_force_training.py`, `direct_training_arm.py`: no-retry sequential controller,native CUDA guard and bounded resources;`role_force_trainer.py` adds zero-energy graph liveness without energy fitting.
+- `archive/fe110_adsorption_direct_training_20261020/`: exclusive deployment,portable numerical QA,canonical collection,tests and explicit scope.
+- `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_direct_20261020_v1/`: frozen execution package,supplementary CPU preflight,174-test evidence,returned producer files and pending-GPU-fix provenance.

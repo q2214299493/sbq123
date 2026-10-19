@@ -49,6 +49,35 @@ backends:
       producer_exit_record_is_scheduler_authority: false
       admin_resolution: enable Slurm accounting storage and job accounting on MZ73
     direct_execution_exceptions:
+      fe110_adsorption_role_training_20261020:
+        authorized_by: user_explicit_20261020_run_gpu1_training_comparison
+        authorizing_user_request: 跑
+        scope: frozen_control_then_treatment_adsorption_force_training_only
+        remote_root: /home/sbq/sbq/adsorption_training_comparison_20261019_v1
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        gpu_index: 1
+        gpu_uuid: GPU-450609b3-d1fd-ac33-d03a-79891be402da
+        execution_mode: direct_no_scheduler
+        executor: scripts/adsorption/direct_force_training.py
+        model_backend: aqcat25_role_force_training
+        original_comparison_sha256: f5db5cb7b1e98d6153bba8bbc41a0d0697fd29c79162a4ef0298a91969660987
+        arm_request_sha256:
+          control: dbad960b964805277333d21bce0a1669e38085c9ab742f5ed53a88a9a5b2d026
+          treatment: 8b740e698d2bac32bb9f918012372a1aaf4e410d9bfef61397bb55ce95ab69ca
+        max_wall_seconds: 3600
+        per_arm_wall_seconds: 1800
+        max_epochs: 2
+        max_optimizer_steps_per_arm: 496
+        CPU_count: 4
+        memory_GB: 32
+        parallel_arms: 1
+        automatic_retries: 0
+        explicit_authorization_required: true
+        producer_exit_record_required: true
+        scheduler_job_id: null
+        slurm_id_emulation: forbidden
+        model_promotion_or_vasp_execution: forbidden
+        alter_shared_services_or_other_users_jobs: forbidden
       fe110_adsorption_06c_boundary_force_20261019:
         authorized_by: user_explicit_20261019_three_exact_boundary_force_comparisons
         authorizing_user_request: 授权运行这一个受限预测批次

@@ -30,7 +30,13 @@ class RoleForceTrainer(EquiformerV2ForcesTrainer):
             raise ValueError("force element references are unsupported")
         if "forces" in self.normalizers:
             target = self.normalizers["forces"].norm(target)
-        return grouped_force_loss(out["forces"], target, batch.adsorption_force_weights.to(device=out["forces"].device), batch.fixed, batch.natoms)
+        loss = grouped_force_loss(out["forces"], target, batch.adsorption_force_weights.to(device=out["forces"].device), batch.fixed, batch.natoms)
+        # Native Fairchem wraps even one-rank runs in DDP without unused-param
+        # detection. Keep the untrained energy head in the graph with exactly
+        # zero gradient;do not introduce an energy-fitting objective.
+        if "energy" in out:
+            loss = loss + 0.0 * out["energy"].sum()
+        return loss
 
     def _compute_metrics(self, out, batch, evaluator, metrics=None):
         metrics = super()._compute_metrics(out, batch, evaluator, metrics)

@@ -224,6 +224,13 @@ against role/source-stage training,with identical development selection and no
 heldout model use. Packages are prepared only;GPU execution and on-disk
 deployment preflight still need separate exact-hash user authorization.
 
+The authorized direct attempt and native-DDP diagnosis are recorded in
+`docs/reviews/fe110_adsorption_direct_training_20261020.md`. Force-only role
+loss retains a zero-coefficient energy-output graph dependency because the
+deployed one-rank DDP otherwise rejects the unused energy head. This does not
+add an energy-fitting objective. Synthetic native-DDP CPU regression passes;
+the corrected full-model GPU runtime still needs fresh bindings/authorization.
+
 ### Authorized MatRIS adsorption trial
 
 The separately authorized six-seed MatRIS-primary adsorption trial is documented

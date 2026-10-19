@@ -133,15 +133,16 @@ Tasks are ordered by priority and should be handled one per Codex thread.
   AQCat25 initialization,identical248train/60development labels and bounded
   2epoch/496step/30min-per-arm budget;137tests and native RAM-only CLI checks pass.
   Review:`docs/reviews/fe110_adsorption_training_comparison_20261019.md`.
-- P1: Both arms explicitly authorized by user“运行”,but22:32CST live preflight
-  foundSlurmfailed and frozen helper incompatible with the current directory alias.
-  No upload/submission/model run;new direct-execution package needs separate scope.
-  Review:`docs/reviews/fe110_adsorption_training_execution_precheck_20261019.md`.
+- P1: User“跑” separately authorized GPU1 direct mode. Actual control enteredCUDA
+  then exited on nativeDDP unused energy-head parameters;no epoch/candidate/treatment.
+  Source fix passed nativeCPU toyDDP2steps;fresh runtime/request binding and renewed
+  GPU authority remain required.No automatic retry.
+  Review:`docs/reviews/fe110_adsorption_direct_training_20261020.md`.
   Existing24frames are exactly recovered (23retained,one force/geometry duplicate);
   none trained. Observed16heldout remain excluded from fitting/epoch selection.
   Three actualML failure labels are train candidates,not independenttest.
   Current training emphasizesC2HO/C2H2O;C2H3has test-only coverage until eligible
-  10B/10Cresults are reviewed in a later version. No newVASP authorized;no GPU run yet.
+  10B/10Cresults are reviewed in a later version. No newVASP authorized;no correctedGPU training result yet.
 
 <!-- state-handoff:start task_backlog_events -->
 ## Managed Backlog

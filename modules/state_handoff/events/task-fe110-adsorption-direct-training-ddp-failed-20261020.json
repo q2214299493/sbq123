@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-adsorption-direct-training-ddp-failed-20261020",
+  "occurred_at": "2026-10-19T16:29:55.597410+00:00",
+  "recorded_at": "2026-10-19T16:29:55.597410+00:00",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "adsorption_workflow"
+  },
+  "summary": "Authorized direct control enteredGPU1 but failed on9unusedDDP energy-head tensors;no treatment/candidate.Source zero-energy graph fix passes nativeCPU toyDDP,not re-run on GPU.",
+  "evidence": [
+    {
+      "locator": "docs/reviews/fe110_adsorption_direct_training_20261020.md",
+      "sha256": "c2142a537077f815e0d3b42b2e831b8262e39351709ab3c1a07398af515f84af",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T16:29:55.597410+00:00"
+    },
+    {
+      "locator": "archive/fe110_adsorption_direct_training_20261020/scope.md",
+      "sha256": "748be1d38f82cc9dca7612495dd1456c64bea7b07234ee909948394420c82c60",
+      "authority": "user_authorization",
+      "observed_at": "2026-10-19T16:29:55.597410+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_direct_20261020_v1/package/direct_request.json",
+      "sha256": "b0cc4cf03ee9e2fd52fa0c7deb86f204e771b15263be8001af703f29af7d6203",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T16:29:55.597410+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_direct_20261020_v1/portable_preflight/preflight_adjustment.json",
+      "sha256": "1ef4e590e27a2e8d372075c907e290b2e8d4dd41b1857896cc8feff6b3905b3b",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T16:29:55.597410+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_direct_20261020_v1/verification_receipt.json",
+      "sha256": "8d842c195f4a37986321222517530a83f3a0edd38caec44b9347471f8444bdec",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T16:29:55.597410+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_direct_20261020_v1/collection_receipt.json",
+      "sha256": "0d9d5e2c7566eab8560b64fc081997220e6a8c1cd03106c3b3da214f7c065715",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T16:29:55.597410+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_direct_20261020_v1/scoped_tests_postfix.xml",
+      "sha256": "b10952e06e8e96609c14f172e7628ccae6de287c0988a1b3eb934ac2dda5ddc8",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T16:29:55.597410+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_direct_20261020_v1/returned/direct_batch_exit_record.json",
+      "sha256": "da16d0dd363f7cf3f222dd4f76937a61c235d3e815b4f2946892507810cc284f",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T16:29:55.597410+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_direct_20261020_v1/returned/ddp_parameter_diagnostic.json",
+      "sha256": "b884d96540a35289386c4c722b1cba406e9901f935733643d709be0ccfddc37c",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T16:29:55.597410+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_direct_20261020_v1/returned/ddp_cpu_regression.json",
+      "sha256": "3a38b82b35cb2b991648d499c6fe7c1fcbedc1f4ecfd2feb201f141e5e8743c9",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T16:29:55.597410+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "supersedes": [
+    "task-fe110-adsorption-training-live-precheck-blocked-20261019"
+  ],
+  "payload": {
+    "objective": "Complete the adsorption training comparison after fresh corrected-runtime binding and renewed GPU authority;do not infer success from CPU tests.",
+    "phase": "blocked",
+    "current_evidence": [
+      "User“跑” authorized GPU1 direct mode with unchanged2epoch/496step/30min-per-arm,total60min,no-retry scope.Backend policy adds only this exception.Direct request b0cc4cf03ee9e2fd52fa0c7deb86f204e771b15263be8001af703f29af7d6203 preserves all original bound arm artifacts.",
+      "Both on-disk/nativeCPU preflights pass with supplementary hash-bound coordinate-decoding allowance1e-12A;observed cross-platform difference1.776e-15A.All cell/PBC/rawforces and source hashes remain exact.No geometry optimization or data change.",
+      "Actual direct controllerPID2888886/controlPID2888895 ran2026-10-20 00:22:34–00:22:52CST;actual model parameters CUDAcuda:0 on physicalGPU1 UUID450609b3.Producers exited1 before a completed epoch;no candidate,treatment or automatic retry.",
+      "Native error lists9unused tensors374–382;CPU mapping confirms all are output_heads.energy.*.New force-only role loss omitted their graph dependency;native one-rank DDP rejects the next forward.This is adapter integration failure,not evidence of model accuracy.",
+      "Source fix adds exactly-zero energy-output graph dependency without energy fitting.NativeCPU toyDDP reproduces old failure after1step and passes2fixed steps with identical force loss/gradients;corrected roleSHAaf3019d8755bb3a91bf2c97dae5c491f60dc8d90bb4792773cb1fb6cb2e4a90e.Not deployed/retried for AQCat25GPU.",
+      "174scoped regressions plus compilation/Ruff pass;11original producer/diagnostic/log files returned byte-exact with remote SHA verification.Source/failed runtime and logs preserved.No model promotion,heldout model evaluation,newVASP or speedup claim."
+    ],
+    "one_executable_step": "Bind the corrected role runtime into fresh reviewed arm/direct requests and obtain renewed GPU execution authority;then verify consecutive native forward/backward steps within the same bounded training process.No old-package hot patch or automatic retry.",
+    "submission_boundary": "DIRECT_V1_AUTHORITY_CONSUMED_BY_FAILED_FIRST_ATTEMPT:correctedGPU relaunch,newVASP,model promotion,extra budget and automatic retries are not authorized.",
+    "done_when": [
+      "Fresh corrected-runtime/source and data bindings pass actual native preflight and explicit authority checks.",
+      "Both bounded arms complete actualCUDA forward/backward training and return producer/checkpoint evidence without heldout epoch selection.",
+      "Grouped development review truthfully distinguishes candidate quality from independent validation and measured VASP acceleration."
+    ],
+    "constraints": [
+      "Preserve all old frozen packages,source data and failure evidence;do not overwrite or reuse old launch markers.",
+      "Keep46newheldout and16observedheldout out of gradients/epoch selection;no independent validation claimed for training failure structures.",
+      "The zero energy graph dependency is a DDP execution fix,not an energy-loss/DFT/geometry/weighting change.",
+      "CPU toyDDP success does not establish corrected full-model GPU/AMP behavior or scientific acceleration.",
+      "No automatic retry;new corrected compute requires fresh request hash authorization."
+    ],
+    "authoritative_references": [
+      "configs/execution_backends.yaml",
+      "docs/reviews/fe110_adsorption_direct_training_20261020.md",
+      "archive/fe110_adsorption_direct_training_20261020/scope.md",
+      "scripts/adsorption/role_force_trainer.py",
+      "scripts/adsorption/direct_force_training.py",
+      "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_direct_20261020_v1/verification_receipt.json"
+    ]
+  }
+}
