@@ -3,16 +3,16 @@
 
 ## Objective
 
-Obtain the three submitted06_C exact-structure VASP force labels to diagnose actual ML motif loss before choosing another fine-tune.
+Use the completed actualML failure-boundary comparison to choose a justified next adsorption-acceleration adjustment without promoting the current model or automatically training.
 
 ## Current Evidence Snapshot
 
-- User-authorized unchanged frames3/4/57 were canonically submitted as06C_before_003=9896148,06C_after_004=9896149,06C_final_057=9896150;each32 ranks,SIGMA0.20,NSW0.
-- Configured sunboquan-codex now authenticates as nsgkn_chengdj3 on ycn03;remote POTCAR/runtime and no-duplicate prerequisites passed without account,credential,structure or DFT changes. Earlier rejection cause remains unverified.
-- All three canonical reservations/receipts are SUBMITTED and live bjobs reports PEND;no electronic convergence,complete force labels or scientific acceptance yet.
-- First local gate draft exposed tuple/list JSON source-binding mismatch before submission. Saved-JSON binding corrected in the scoped adapter;failed draft retained,three revised gates validated. Focused17tests,py_compile and Ruff passed.
-- Original15 adsorption jobs were checked read-only:9 show normal electronic/force-converged completion,07_C exhausted300steps at0.470608eV/A,4RUN,1PEND. This checkpoint does not establish final geometry/registry acceptance;no old jobs changed.
-- ActualML failure-boundary DFT error and basin diagnosis remain unmeasured. Frozen16heldout exclusions and24untrained frames are preserved;no GPU,training or model promotion occurred.
+- VASP9896148/9896149/9896150 are DONE,normal,EDIFF-converged,with complete finite49-atom forces,exact input/coordinate/POTCAR binding and full local/total magnetic records;SIGMA0.20 NSW0 unchanged.
+- User separately authorized one3-structure/two-frozen-model GPU force batch. MZ73 GPU1 actual CUDA execution completed with producer exit0 in6.58s;9returned files verified,no scheduler job emulation.
+- Pooled adsorbate vectorRMSE0.269503→0.228471eV/A (15.225% improvement);per-frame before/after/final0.232212→0.177792,0.296110→0.254448,0.276209→0.245445.
+- C46 error worsens before0.121081→0.234470 and after0.234895→0.383298eV/A;pooled carbon RMSE worsens0.232396→0.258324,while O/H improve. MovableFe essentially unchanged/slightly worse.
+- Final057 frozen2185 fmax0.093003 differs fromDFT0.337048eV/A. Bond projections show local residual errors,but three points do not establish a sole optimizer/basin/path cause or prove the fragmented DFT basin unstable.
+- 57scoped tests,compilation/import/Ruff and294-row CSV uniqueness/RMSE recomputation passed. Existing16heldout exclusions and24untrained frames unchanged;no new training,VASP,checkpoint promotion or accepted-energy registration.
 
 ## Lifecycle Status
 
@@ -20,11 +20,11 @@ Obtain the three submitted06_C exact-structure VASP force labels to diagnose act
 
 ## One Executable Step
 
-Check9896148/9896149/9896150 for normal termination,EDIFF convergence and complete compatible exact-structure force data;do not resubmit.
+Review whether to prepare a targeted carbon/local-Fe force correction request with adsorption replay and isolated validation;any further GPU training requires separate user authorization.
 
 ## Submission Boundary
 
-THREE_AUTHORIZED_STATICS_SUBMITTED:9896148/9896149/9896150;no additional VASP,GPU,training,checkpoint promotion,old-job mutation or accepted-energy registration is authorized by this step.
+ONE_AUTHORIZED_FORCE_INFERENCE_BATCH_COMPLETE:do not rerun it,train,promote,change old jobs or submit additional VASP under its consumed authority.
 
 ## Authoritative Constraint
 
@@ -38,14 +38,15 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 
 ## Constraints
 
-- Keep three32-rank SIGMA0.20 NSW0 input bundles and saved geometry/order/cell/fixedFe0-17 unchanged. Preserve all canonical reservations and avoid duplicate submissions.
-- Do not read,display,copy or modify private-key contents. No alternate account or credentials are authorized.
-- Preserve observed16heldout exclusions and24untrained frames;no GPU,training,model promotion or accepted-energy/database registration is authorized by this diagnostic.
+- Preserve the frozen3POSCARs,VASP raw outputs,actual checkpoint hashes,all raw forces and fixedFe0-17 metric exclusion. Force labels are not accepted adsorption minima or reportable energies.
+- These3screened related failure points are not independent heldout validation. Keep16observed heldout and24untrained frames isolated;no automatic threshold-based training or model promotion.
+- Only work reviews GPU returns;MZ73 is inference/training backend and sunboquan-codex is VASP backend. Preserve credentials and other users' processes.
 
 ## Authoritative References
 
 - configs/execution_backends.yaml
-- docs/reviews/fe110_06c_static_submission_20261018.md
-- archive/fe110_adsorption_validation_20261018/authorization_submit_06c_20261018.md
-- calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_boundary_labels_20261018_v1/submission_summary.json
+- docs/reviews/fe110_06c_boundary_force_comparison_20261019.md
+- archive/fe110_adsorption_validation_20261018/authorization_boundary_force_20261019.md
+- calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_force_comparison_20261019_v1/force_comparison_review.json
+- calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_force_comparison_20261019_v1/per_atom_force_errors.csv
 <!-- state-handoff:end current_task -->

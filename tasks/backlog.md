@@ -121,12 +121,12 @@ Tasks are ordered by priority and should be handled one per Codex thread.
 - Completed: authorized baseline/frozen2185 exact-force comparison on existing24
   frames;adsorbate vectorRMSE0.225356→0.123129eV/A;all24 frames improve. Review:
   `docs/reviews/fe110_adsorption_force24_2185_20261018.md`.
-- Submitted:06_C savedML frames3/4/57 exact-force diagnostics are9896148,
-  9896149,9896150,each32 ranks,SIGMA0.20,NSW0;live observation PEND.
-  SSH recovered without account/input changes;all canonical gates and
-  submissions passed. Review:`docs/reviews/fe110_06c_static_submission_20261018.md`.
-- P1: Validate those three completed VASP labels,then compare the exact saved
-  structures with originalAQCat25/frozen2185 before choosing further training.
+- Completed:06_C frames3/4/57 VASP9896148/9896149/9896150 labels and authorized
+  exact-POSCAR originalAQCat25/frozen2185 inference. Adsorbate RMSE improves
+  0.269503→0.228471eV/A,but C46 before/after worsens and finalDFTfmax0.337048
+  differs fromML0.093003. Review:`docs/reviews/fe110_06c_boundary_force_comparison_20261019.md`.
+- P1: Review targeted carbon/local-Fe force correction with adsorption replay
+  and isolated validation before separately authorizing any new training.
   Existing24 frames remain untrained and observed16heldout remain excluded
   from fitting/epoch selection;no GPU,training or other VASP task is authorized.
 

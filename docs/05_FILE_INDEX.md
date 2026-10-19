@@ -235,3 +235,11 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `docs/reviews/fe110_06c_static_submission_20261018.md`: recovered configured login,three canonical job IDs,unchanged scientific scope and local binding correction/tests.
 - `archive/fe110_adsorption_validation_20261018/submit_06c_boundary.py`: exact-three-only adapter to existing canonical gates/submission;no direct bsub or credential changes.
 - `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_boundary_labels_20261018_v1/submission_summary.json`: immutable successful receipts for9896148/9896149/9896150;supersedes the earlier authentication-block status.
+
+## 06_C completed exact-force comparison (2026-10-19)
+
+- `docs/reviews/fe110_06c_boundary_force_comparison_20261019.md`: actual failed-trajectory labels,all12 adsorbate vector errors,bond-direction caveats and unresolved carbon-force mismatch.
+- `archive/fe110_adsorption_validation_20261018/boundary_force.py`: write-once static collection,canonical SCF/raw-coordinate checks,exact GPU package and per-atom comparison.
+- `archive/fe110_adsorption_validation_20261018/authorization_boundary_force_20261019.md`: separate explicit authority for one3-structure/two-frozen-model inference batch only.
+- `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_force_comparison_20261019_v1/force_comparison_review.json`: verified grouped/per-frame results;not independent heldout or model promotion.
+- `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_force_comparison_20261019_v1/per_atom_force_errors.csv`:294 raw-xyz/error rows with fixed-atom exclusion flags.
