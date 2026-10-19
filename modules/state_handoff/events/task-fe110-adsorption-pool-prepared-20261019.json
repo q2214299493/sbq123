@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-adsorption-pool-prepared-20261019",
+  "occurred_at": "2026-10-19T04:41:24+00:00",
+  "recorded_at": "2026-10-19T04:41:24+00:00",
+  "event_type": "task_updated",
+  "entity": {"kind": "task", "id": "task-current", "module": "adsorption_workflow"},
+  "summary": "Phase1 existing-VASP adsorption force pool rebuilt and verified;carbon/localFe training proposals prepared but no training runtime integration,GPU calculation or model promotion.",
+  "evidence": [
+    {"locator": "docs/reviews/fe110_adsorption_pool_rebuild_20261019.md", "sha256": "448a606570b458074916bc06148f4a36ae4dff48a71fe16846e7d8fe7f6c6336", "authority": "repository_document", "observed_at": "2026-10-19T04:41:24+00:00"},
+    {"locator": "archive/fe110_adsorption_pool_rebuild_20261019/request_scope.md", "sha256": "f59f4657e8d8a9feb81c7206bb968b6cb56f576bb858039157665c04ff7532e7", "authority": "user_authorization", "observed_at": "2026-10-19T04:41:24+00:00"},
+    {"locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_pool_rebuild_20261019_v1/prepared_v2/training_manifest.json", "sha256": "6deb86d4fcb2bfbde29f7d2d6faf3f2663afa2ac04c9d8a79659c876e6234330", "authority": "repository_document", "observed_at": "2026-10-19T04:41:24+00:00"},
+    {"locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_pool_rebuild_20261019_v1/prepared_v2/pool_review.json", "sha256": "279ba638c7cc6e3f7b9451879bd8467b7ba1b064850031d44bcc0cfd99c8f5bc", "authority": "repository_document", "observed_at": "2026-10-19T04:41:24+00:00"},
+    {"locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_pool_rebuild_20261019_v1/prepared_v2/training_adjustment_review.json", "sha256": "95c84349e7aae5bbc37cb78ddf62017513c9fac9cf96a20bd731005c2f714713", "authority": "repository_document", "observed_at": "2026-10-19T04:41:24+00:00"},
+    {"locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_pool_rebuild_20261019_v1/prepared_v2/verification_receipt.json", "sha256": "0828f4d25a5c68580edad5773f61df2fd661b32e4302ba70ff14daa333d862c7", "authority": "repository_document", "observed_at": "2026-10-19T04:41:24+00:00"},
+    {"locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_pool_rebuild_20261019_v1/prepared_v2/scoped_tests.xml", "sha256": "e8ed67a5924d424d5ce2ab5a22eafb644a0a1807be600eae57031b42b3b83faa", "authority": "repository_document", "observed_at": "2026-10-19T04:41:24+00:00"}
+  ],
+  "review": {"required": false, "reason_codes": [], "status": "not_required"},
+  "supersedes": ["task-fe110-06c-boundary-force-compared-20261019"],
+  "payload": {
+    "objective": "Prepare an evidence-first adsorption training pool and problem-targeted carbon/localFe correction proposal before further training or acceleration claims.",
+    "phase": "verification",
+    "current_evidence": [
+      "Read-only collection of13closed VASP trajectories produced312eligible force frames;reused62prior reviewed frames and3actualML failure-boundary labels.No VASP rerun or GPU action.",
+      "After3cross-split near-overlap exclusions and4same-job geometry/force redundancy exclusions,the pool contains248train,60development,46newtest and16quarantined observedheldout frames.Whole-job partitioning preserved.",
+      "Original24frames exactly recovered in geometry/forces/OUTCAR/XDATCAR/raw-table hashes;23retained,one represented by a near-identical neighbor.Original16observedheldout membership and labels unchanged.",
+      "All3before/after/final failedML labels are train candidates,not independent validation.07Cis not an accepted minimum;its24selected electronically converged frames are force-only diagnostic labels.",
+      "Prepared proposed chemical-role weights and source/stage sampler probabilities;actualFairchem runtime integration remains required.No training or checkpoint promotion occurred.",
+      "Compilation,Ruff and30scoped tests passed;canonical manifest and independent13260cross-split geometry comparisons passed.CSV370uniqueIDs matches manifest and train probabilities sum1."
+    ],
+    "one_executable_step": "Review phase1 pool and proposed carbon/localFe loss and source/stage sampler before separately implementing and testing their actualFairchem runtime integration;no GPU training is authorized.",
+    "submission_boundary": "PHASE1_LOCAL_DATA_PREPARATION_ONLY:do not train,infer,promote,submit VASP,stop/resubmit useful jobs or register scientific adsorption results under this scope.",
+    "done_when": [
+      "Existing VASP force labels are compatibility/source/coordinate/order/fixed-mask validated and complete.",
+      "Whole-job splits and near-overlap checks preserve original16observedheldout and isolate newtest from train/development.",
+      "Problem-targeted role/sampling proposals,QA evidence and training-not-executed boundaries are reviewable."
+    ],
+    "constraints": [
+      "Preserve original VASP data,old pool,failed read/preparation attempts and frozen model checkpoints.Raw force arrays and stored atom order are unchanged.",
+      "No gradient or epoch/weight selection on heldout;three related failure labels are not heldout.Old16was previously observed,not a fresh blindtest.",
+      "Newtest09C/10Awas previously candidate-screened.C2H3currently has test-only coverage;running10B/10Cexcluded.No universal adsorption or TS transfer claim.",
+      "Proposed role weights2:1:1:2:1 and3A radius are trial settings,not calibrated physical gates.CurrentFairchem does not consume proposed_* fields.ActualVASP steps/time benefit remains unmeasured.",
+      "MZ73is GPU backend and sunboquan-codexis VASP backend;work owns all review/authorization."
+    ],
+    "authoritative_references": [
+      "configs/execution_backends.yaml",
+      "docs/reviews/fe110_adsorption_pool_rebuild_20261019.md",
+      "archive/fe110_adsorption_pool_rebuild_20261019/request_scope.md",
+      "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_pool_rebuild_20261019_v1/prepared_v2/training_manifest.json",
+      "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_pool_rebuild_20261019_v1/prepared_v2/training_adjustment_review.json",
+      "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_pool_rebuild_20261019_v1/prepared_v2/verification_receipt.json"
+    ]
+  }
+}

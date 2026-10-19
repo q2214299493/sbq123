@@ -243,3 +243,10 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `archive/fe110_adsorption_validation_20261018/authorization_boundary_force_20261019.md`: separate explicit authority for one3-structure/two-frozen-model inference batch only.
 - `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_force_comparison_20261019_v1/force_comparison_review.json`: verified grouped/per-frame results;not independent heldout or model promotion.
 - `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_06c_force_comparison_20261019_v1/per_atom_force_errors.csv`:294 raw-xyz/error rows with fixed-atom exclusion flags.
+
+## Adsorption training-pool rebuild phase1 (2026-10-19)
+
+- `docs/reviews/fe110_adsorption_pool_rebuild_20261019.md`: actual counts,source isolation,role/sampling proposals,validation and untrained boundary.
+- `archive/fe110_adsorption_pool_rebuild_20261019/`: scoped collection/preparation,chemical-role and permutation audit,tests and exact user scope.
+- `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_pool_rebuild_20261019_v1/prepared_v2/training_manifest.json`: verified248/60/46 splits plus16quarantined observedheldout;not a runnable GPU package.
+- Same folder `pool_review.json`, `training_adjustment_review.json`, `label_coverage_review.json`, `pool_inventory.csv`, `verification_receipt.json`, `scoped_tests.xml`: exclusion/role/coverage/QA evidence.

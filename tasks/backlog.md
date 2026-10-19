@@ -111,9 +111,9 @@ Tasks are ordered by priority and should be handled one per Codex thread.
 
 - P1: Preserve and monitor the existing15 VASP jobs9848799–9848813; eligible
   final adsorption review/registration remains separate from force-label use.
-- P2: If needed, recover only08_B trajectory evidence not returned by the
-  bounded read-only collection. Three complete jobs already supply24 verified
-  new training candidates; do not repeat the complete batch or rerun VASP.
+- Completed: phase1 read-only recovery now covers13closed trajectories including08_B;
+  no VASP rerun. New pool retains248train/60development/46newtest plus16quarantined
+  observedheldout. Review:`docs/reviews/fe110_adsorption_pool_rebuild_20261019.md`.
 - Completed: frozen2185 validation used16heldout and3same-seed/minimum-start
   geometry comparisons. Force RMSE improved but06_C lost its target motif;
   no default-model replacement or measured VASP speedup. Evidence:
@@ -125,10 +125,13 @@ Tasks are ordered by priority and should be handled one per Codex thread.
   exact-POSCAR originalAQCat25/frozen2185 inference. Adsorbate RMSE improves
   0.269503→0.228471eV/A,but C46 before/after worsens and finalDFTfmax0.337048
   differs fromML0.093003. Review:`docs/reviews/fe110_06c_boundary_force_comparison_20261019.md`.
-- P1: Review targeted carbon/local-Fe force correction with adsorption replay
-  and isolated validation before separately authorizing any new training.
-  Existing24 frames remain untrained and observed16heldout remain excluded
-  from fitting/epoch selection;no GPU,training or other VASP task is authorized.
+- P1: Review phase1 pool and implement/test actualFairchem grouped-force loss
+  and source/stage sampler before preparing separately authorized bounded training.
+  Existing24frames are exactly recovered (23retained,one force/geometry duplicate);
+  none trained. Observed16heldout remain excluded from fitting/epoch selection.
+  Three actualML failure labels are train candidates,not independenttest.
+  Current training emphasizesC2HO/C2H2O;C2H3has test-only coverage until eligible
+  10B/10Cresults are reviewed in a later version. No GPU or newVASP authorized.
 
 <!-- state-handoff:start task_backlog_events -->
 ## Managed Backlog
