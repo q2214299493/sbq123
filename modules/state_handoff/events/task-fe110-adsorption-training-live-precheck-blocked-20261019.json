@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-adsorption-training-live-precheck-blocked-20261019",
+  "occurred_at": "2026-10-19T14:33:33.242636+00:00",
+  "recorded_at": "2026-10-19T14:33:33.242636+00:00",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "adsorption_workflow"
+  },
+  "summary": "User authorized reviewed two-arm training,but liveMZ73 precheck found unavailableSlurm and incompatible frozen directory guard.No upload/submission/model run.",
+  "evidence": [
+    {
+      "locator": "docs/reviews/fe110_adsorption_training_execution_precheck_20261019.md",
+      "sha256": "1892f7e2f1d6f8b5a947051a53f33b9cf24e8e45bcea3772a6ad80655ac02e13",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T14:33:33.242636+00:00"
+    },
+    {
+      "locator": "archive/fe110_adsorption_training_comparison_20261019/authorization_run_20261019.md",
+      "sha256": "78eaa655cd425a2560249e4b03fd89fa88857dbe7e06aa2a2febdb4100645362",
+      "authority": "user_authorization",
+      "observed_at": "2026-10-19T14:33:33.242636+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_execution_20261019_v1/comparison_authorization.json",
+      "sha256": "ef63a135e97dd042acaec12e720cc27ec396a9bfbbd2d9c94135637908756405",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T14:33:33.242636+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_execution_20261019_v1/live_preflight.json",
+      "sha256": "e93d957a10730172cd370aa7af1f71fa5c2038571f8dd1ed2f47317404b09d0f",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T14:33:33.242636+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_execution_20261019_v1/live_preflight_receipt.json",
+      "sha256": "51dc89643607adb78d92e1089619555d5d64f65807637e6bc22680028e85465b",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T14:33:33.242636+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_execution_20261019_v1/verification_receipt.json",
+      "sha256": "17b99d8c330d1fe1086b275c01c257602db45a2a8eebf3e81452236956446d36",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T14:33:33.242636+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_execution_20261019_v1/scoped_tests.xml",
+      "sha256": "87acb00238610be1348438ae815bf69923b7df7239a6034da450dd28442520de",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T14:33:33.242636+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "supersedes": [
+    "task-fe110-adsorption-training-comparison-prepared-20261019"
+  ],
+  "payload": {
+    "objective": "Execute the authorized bounded adsorption training comparison after resolving verified runtime blockers within explicit authority.",
+    "phase": "blocked",
+    "current_evidence": [
+      "User“运行” authorized comparison f5db5cb7b1e98d6153bba8bbc41a0d0697fd29c79162a4ef0298a91969660987 and both exact arm requests.Separate immutable authorization files created;frozen package/artifacts unchanged.",
+      "MZ73 live2026-10-19T14:32:29Z:slurmctld/slurmd failed;sinfo exit1 controller unreachable;squeue12second timeout.Scheduler state unavailable,not proof of an empty queue.",
+      "GPU1 RTX4090 has24066MiB free,0percent utilization at the snapshot;not reserved.Baseline checkpoint hash matches e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50.",
+      "Declared /home/sbq/sbq resolves to /home/ubuntu/hdd/sbq/sbq;frozen helper requires the alias resolve to itself and rejects it.Target package absent.No upload,sbatch attempt,remote file write,training or inference.",
+      "143scoped tests pass plus compilation/Ruff.Explicit UTF8 fixed a local authorization-read failure before SSH;authorization was not recreated and no compute retry occurred."
+    ],
+    "one_executable_step": "Obtain explicit scope for a new bounded GPU1 direct-execution package with reviewed canonical-directory handling,or administrator-restoredSlurm plus corrected-wrapper review;do not submit unchanged or reuse old direct exceptions.",
+    "submission_boundary": "EXACT_ORIGINAL_SLURM_PACKAGE_AUTHORIZED_BUT_PRECHECK_BLOCKED:alternative direct execution,service restart,other users'GPU/process changes,newVASP,extra budget,retries and model promotion are not authorized.",
+    "done_when": [
+      "Authorized deployment/runtime and realGPU preflight pass with fresh exact hashes and correct boundary checks.",
+      "Both arms execute sequentially within2epochs/496steps/30min each,total60GPUminutes,and return truthful producer/scheduler evidence.",
+      "Grouped development results and frozen candidate artifacts return to work without heldout-driven epoch selection or automatic promotion."
+    ],
+    "constraints": [
+      "Preserve original pool,model/data/splits and all failed/partial evidence.No automatic resubmission or budget expansion.",
+      "Keep46newheldout and16observedheldout outside training/epoch selection.NoVASP or model promotion authority.",
+      "Do not emulate SLURM_JOB_ID or treat previous direct-GPU exceptions as authority for this comparison.",
+      "Canonical path alias handling must be reviewed in a fresh runtime binding,not patched into the immutable original package.",
+      "Code tests/free GPU memory do not establish full-model CUDA/AMP safety,scientific accuracy or actual acceleration."
+    ],
+    "authoritative_references": [
+      "configs/execution_backends.yaml",
+      "docs/reviews/fe110_adsorption_training_execution_precheck_20261019.md",
+      "archive/fe110_adsorption_training_comparison_20261019/authorization_run_20261019.md",
+      "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_comparison_20261019_v1/comparison_request.json",
+      "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_execution_20261019_v1/verification_receipt.json"
+    ]
+  }
+}

@@ -265,3 +265,9 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `archive/fe110_adsorption_training_comparison_20261019/`: write-once preparation,read-only native checks,independent audit,scope and tests.
 - `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_comparison_20261019_v1/comparison_request.json`: binds uniform/role-source-stage arms;no GPU submission or automatic promotion.
 - Same directory `verification_receipt.json`, `native_cli.*`, `native_cadence.*`, `scoped_tests.xml`: preparation evidence only;not model-quality or VASP speedup evidence.
+
+## Authorized adsorption training live precheck (2026-10-19)
+
+- `docs/reviews/fe110_adsorption_training_execution_precheck_20261019.md`: exact authority,failedSlurm/directory-alias evidence and no-run boundary.
+- `archive/fe110_adsorption_training_comparison_20261019/execute.py`, `test_execute.py`, `authorization_run_20261019.md`: immutable authorization binding and read-only live probe;no execution fallback.
+- `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_execution_20261019_v1/`: authorization records,raw live precheck/receipt,143-test evidence and runtime blocker verification.
