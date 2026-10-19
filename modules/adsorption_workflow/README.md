@@ -215,6 +215,15 @@ real-label DB roundtrip and deployed-Fairchem synthetic CPU checks. No model
 training,GPU-kernel validation,promotion or acceleration is established by these
 tests;new training packages and compute still require review/authorization.
 
+The bounded v3 comparison review is
+`docs/reviews/fe110_adsorption_training_comparison_20261019.md`.
+`force_training_preflight.py` checks raw-label/role DB alignment,namespace,budget
+and the native CLI;`role_training_job.sh` binds the package namespace before the
+actual trainer launch. Two common-initialization arms compare uniform training
+against role/source-stage training,with identical development selection and no
+heldout model use. Packages are prepared only;GPU execution and on-disk
+deployment preflight still need separate exact-hash user authorization.
+
 ### Authorized MatRIS adsorption trial
 
 The separately authorized six-seed MatRIS-primary adsorption trial is documented

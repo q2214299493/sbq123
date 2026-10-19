@@ -3,16 +3,15 @@
 
 ## Objective
 
-Prepare a problem-targeted adsorption force-training comparison after validated role/sampling runtime integration,without inferring model quality from code tests.
+Review bounded adsorption force-training comparison;execute GPU only after separate exact-hash user authorization.
 
 ## Current Evidence Snapshot
 
-- 124local scoped tests passed,with compilation/Ruff and independent evidence checks. Legacy unweighted request/database behavior preserved.
-- Real248train/60developmentASEDB roundtrip preserves all raw forces,atom order,fixedFe0-17,zero tags,role weights and sampling probability row alignment. Original phase1manifest SHA6deb86d4fcb2bfbde29f7d2d6faf3f2663afa2ac04c9d8a79659c876e6234330 unchanged.
-- Opt-in RoleForceTrainer consumes per-atom weights,source/stage sampling metadata and grouped physical-unit development/replay metrics. V3 rejects old/default trainer or omitted role fields/runtime sources.
-- MZ73 actualFairchem CPU test used3train/3validation synthetic fixtures:registry selection,dataset factory,shuffledSubset mapping,sampler,collater,normalized loss and physical metrics passed. No actual structures uploaded,no force model instantiated,no modelcheckpoint loaded or written,CUDA uninitialized.
-- CPU FP16/BF16 regressions exposed a new-adapter mixed-dtype dot-product bug;fixed by at-leastFP32 loss arithmetic and retaining metadata precision. Failed fixture/API and regression evidence preserved;not a cause claim for old2185 scientific force errors.
-- No GPU training,inference,newVASP,checkpoint promotion or acceleration claim. ActualGPU kernels/fullmodel optimizer behavior remain untested.
+- Prepared comparison SHA f5db5cb7b1e98d6153bba8bbc41a0d0697fd29c79162a4ef0298a91969660987:control dbad960b964805277333d21bce0a1669e38085c9ab742f5ed53a88a9a5b2d026;treatment 8b740e698d2bac32bb9f918012372a1aaf4e410d9bfef61397bb55ce95ab69ca.
+- Both arms freeze originalAQCat25 e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50,identical248train/60development structures/forces,and common role-aware development epoch selection.Control train weights/probabilities only are derived;original pool and treatment manifest bytes unchanged.
+- Each arm max2epochs/496optimizersteps/30minutes,oneGPU/4CPU/32GB,seed42,lr1e-5;sequential proposed total60GPUminutes.No automatic retries or promotion.
+- 137scoped tests passed plus compile/Ruff/Bash and independent package hash/label/design checks.NativeMZ73 CLI/config/registry passed using RAM modules;no actual labels uploaded,model loaded,CUDA initialized or remote files written.
+- Actual native eval_every is optimizer-step cadence;new arms validate/checkpoint once per248step epoch,instead of inherited per-step validation.No actual training or accuracy/speedup result exists.
 
 ## Lifecycle Status
 
@@ -20,11 +19,11 @@ Prepare a problem-targeted adsorption force-training comparison after validated 
 
 ## One Executable Step
 
-Prepare a reviewed runtime-v3 bounded training comparison package with frozen initialization,data/runtime hashes,grouped development selection,budget and actualCLI/PYTHONPATH preflight;do not execute GPU training without separate authority.
+Obtain user review of the two-arm initialization/design/budget,then separate exact-arm-hash deployment/GPU authorization;do not infer execution authority from prepared-package checks.
 
 ## Submission Boundary
 
-CPU_ADAPTER_TESTING_COMPLETE_ONLY:noGPU training/inference,newVASP,oldjob mutation,checkpoint promotion or accepted scientific registration authorized.
+PREPARED_FOR_REVIEW_ONLY:no GPU training/inference,private dataset upload,new VASP,oldjob mutation,model promotion or scientific registration authorized.
 
 ## Authoritative Constraint
 
@@ -32,25 +31,24 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 
 ## Done When
 
-- Role-weighted force objective and source/stage sampler are consumed by explicit actualFairchem adapter rather than unused configuration.
-- Raw-label/weight database roundtrip,normalization,fixed gradients,mixed precision,resume and legacy regression tests pass.
-- No-model CPU test evidence and remaining actualGPU/model-accuracy/speedup boundaries are recorded before a new training request.
+- Two arms bind identical physical labels/splits/initialization with only reviewed training-weight and sampling differences.
+- Bounded budget,actual CLI and namespace packaging,raw DB/role alignment and scoped regressions are checked.
+- Exact request hashes,no-model evidence and remaining GPU/scientific boundaries are provided for user review.
 
 ## Constraints
 
-- Default/deployed Fairchem and old packages remain unchanged;new adapter is explicit opt-in and no new submitted training package yet exists.
-- Keep46newheldout and16observedheldout outside training and epoch selection;three actualML boundary labels are train candidates,not independent validation.
-- Role values come from reviewed per-frame metadata,not copied atom IDs or universal2:1:1:2:1/3A rules. Fixed atoms receive zero loss and gradient.
-- Weighted sampling is single-process and with replacement;an epoch has dataset-length draws,not guaranteed unique visits. C2H3still has test-only coverage.
-- CPU AMP tensor tests do not establish GPU full-model AMP safety or any scientific force/geometry/acceleration improvement. O/H/replay metrics exist but training curves/retention decisions remain untested.
+- Default/deployed Fairchem and old packages remain unchanged;runtimev3 is explicit opt-in.
+- Keep46newheldout and16observedheldout outside gradients/epoch choice;integrity reads only,noheldoutDB or model loader.C2H3has test-only coverage.
+- Common original initialization is a proposal rather than proved better than2185;combined weighting+sampling comparison cannot isolate each component.
+- Single seed/twoepochs is a bounded experiment,not proof of training convergence or acceleration.O/H/replay regressions are review warnings;no zero-tolerance promotion gate.
+- On-disk deployment/PYTHONPATH,baseline checkpoint,current scheduler/GPU and full-model AMP/optimizer preflight remain required after authority.Old direct-execution exceptions cannot authorize this package.
 
 ## Authoritative References
 
 - configs/execution_backends.yaml
-- docs/reviews/fe110_adsorption_role_runtime_tests_20261019.md
-- scripts/adsorption/force_finetune.py
-- scripts/adsorption/force_role_data.py
-- scripts/adsorption/force_role_runtime.py
-- scripts/adsorption/role_force_trainer.py
-- calculations/fe110_c2_adsorption_06_10_20261012/adsorption_runtime_test_20261019_v1/verification_receipt.json
+- docs/reviews/fe110_adsorption_training_comparison_20261019.md
+- scripts/adsorption/force_training_preflight.py
+- scripts/adsorption/role_training_job.sh
+- calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_comparison_20261019_v1/comparison_request.json
+- calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_comparison_20261019_v1/verification_receipt.json
 <!-- state-handoff:end current_task -->

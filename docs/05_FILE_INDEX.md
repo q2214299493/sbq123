@@ -257,3 +257,11 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `scripts/adsorption/force_role_data.py`, `force_role_runtime.py`, `role_force_trainer.py`: v3 metadata contract,differentiable role objective,resumable weighted sampler and optional trainer.
 - `tests/test_adsorption_role_runtime.py`, `archive/fe110_adsorption_runtime_test_20261019/`: regression and reproducible bounded interface/CPU evidence checks.
 - `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_runtime_test_20261019_v1/verification_receipt.json`: source/data/test binding;not force-model accuracy or speedup validation.
+
+## Bounded adsorption training comparison prepared (2026-10-19)
+
+- `docs/reviews/fe110_adsorption_training_comparison_20261019.md`: two-arm design,budget,exact request hashes,137tests and pending GPU authority.
+- `scripts/adsorption/force_training_preflight.py`, `role_training_job.sh`: explicit v3 raw-label/role/budget/namespace/native CLI checks and separately authorized launcher.
+- `archive/fe110_adsorption_training_comparison_20261019/`: write-once preparation,read-only native checks,independent audit,scope and tests.
+- `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_comparison_20261019_v1/comparison_request.json`: binds uniform/role-source-stage arms;no GPU submission or automatic promotion.
+- Same directory `verification_receipt.json`, `native_cli.*`, `native_cadence.*`, `scoped_tests.xml`: preparation evidence only;not model-quality or VASP speedup evidence.

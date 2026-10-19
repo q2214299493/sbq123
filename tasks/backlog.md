@@ -129,9 +129,12 @@ Tasks are ordered by priority and should be handled one per Codex thread.
   development/replay metrics and v3 fail-closed contract passed124tests plus
   deployed native CPU fixtures;real248train/60developmentDB roundtrip passed.
   Review:`docs/reviews/fe110_adsorption_role_runtime_tests_20261019.md`.
-- P1: Prepare a reviewed v3 bounded training comparison package with frozen
-  initialization,budget,actualCLI/PYTHONPATH and runtime hashes;noGPU execution
-  is authorized by CPU testing and no model improvement has been measured.
+- Completed: prepared two v3 training comparison arms with frozen common original
+  AQCat25 initialization,identical248train/60development labels and bounded
+  2epoch/496step/30min-per-arm budget;137tests and native RAM-only CLI checks pass.
+  Review:`docs/reviews/fe110_adsorption_training_comparison_20261019.md`.
+- P1: User review then separate exact-hash deployment/GPU authority;no actual
+  model improvement or acceleration has been measured. On-disk/GPU preflight pending.
   Existing24frames are exactly recovered (23retained,one force/geometry duplicate);
   none trained. Observed16heldout remain excluded from fitting/epoch selection.
   Three actualML failure labels are train candidates,not independenttest.

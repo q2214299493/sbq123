@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-adsorption-training-comparison-prepared-20261019",
+  "occurred_at": "2026-10-19T14:13:41.747462+00:00",
+  "recorded_at": "2026-10-19T14:13:41.747462+00:00",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "adsorption_workflow"
+  },
+  "summary": "Prepared two hash-bound role-runtime-v3 training comparison arms;137tests and RAM-only nativeCLI checks passed.No GPU execution or scientific promotion.",
+  "evidence": [
+    {
+      "locator": "docs/reviews/fe110_adsorption_training_comparison_20261019.md",
+      "sha256": "82b43e709836c6465f5ec6692ca92cbad7feef7acabcc705958b0165f427fa31",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T14:13:41.747462+00:00"
+    },
+    {
+      "locator": "archive/fe110_adsorption_training_comparison_20261019/request_scope.md",
+      "sha256": "9a60734580c9c33f48d3eee85aa8a23e1ccf6d90da372cca2caa96deaefb51ee",
+      "authority": "user_authorization",
+      "observed_at": "2026-10-19T14:13:41.747462+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_comparison_20261019_v1/comparison_request.json",
+      "sha256": "f5db5cb7b1e98d6153bba8bbc41a0d0697fd29c79162a4ef0298a91969660987",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T14:13:41.747462+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_comparison_20261019_v1/verification_receipt.json",
+      "sha256": "f252f78ae828280b3e374a7962ac928b9adcbb0065c5b7dd82047f78deeb3ba4",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T14:13:41.747462+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_comparison_20261019_v1/validation_commands.json",
+      "sha256": "087c3de8635440a1525f3e5b7194d2a80b6134683b613f23a5f490428ca570c0",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T14:13:41.747462+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_comparison_20261019_v1/scoped_tests.xml",
+      "sha256": "1200b7db312e6cd5a8de827720840a6124c97a192178b63f4e1927bd83900c84",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T14:13:41.747462+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_comparison_20261019_v1/native_cli.json",
+      "sha256": "ca1937daf05f48b83abf13a8040ad9dd953d4909e299e44022cfd4942e081d33",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T14:13:41.747462+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_comparison_20261019_v1/native_cli_receipt.json",
+      "sha256": "dd7a9247dc6deb008c2bd6997963ba9ab4a6ae5635dfdb6108fbff6663fda0fe",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T14:13:41.747462+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "supersedes": [
+    "task-fe110-adsorption-role-runtime-cpu-tested-20261019"
+  ],
+  "payload": {
+    "objective": "Review bounded adsorption force-training comparison;execute GPU only after separate exact-hash user authorization.",
+    "phase": "verification",
+    "current_evidence": [
+      "Prepared comparison SHA f5db5cb7b1e98d6153bba8bbc41a0d0697fd29c79162a4ef0298a91969660987:control dbad960b964805277333d21bce0a1669e38085c9ab742f5ed53a88a9a5b2d026;treatment 8b740e698d2bac32bb9f918012372a1aaf4e410d9bfef61397bb55ce95ab69ca.",
+      "Both arms freeze originalAQCat25 e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50,identical248train/60development structures/forces,and common role-aware development epoch selection.Control train weights/probabilities only are derived;original pool and treatment manifest bytes unchanged.",
+      "Each arm max2epochs/496optimizersteps/30minutes,oneGPU/4CPU/32GB,seed42,lr1e-5;sequential proposed total60GPUminutes.No automatic retries or promotion.",
+      "137scoped tests passed plus compile/Ruff/Bash and independent package hash/label/design checks.NativeMZ73 CLI/config/registry passed using RAM modules;no actual labels uploaded,model loaded,CUDA initialized or remote files written.",
+      "Actual native eval_every is optimizer-step cadence;new arms validate/checkpoint once per248step epoch,instead of inherited per-step validation.No actual training or accuracy/speedup result exists."
+    ],
+    "one_executable_step": "Obtain user review of the two-arm initialization/design/budget,then separate exact-arm-hash deployment/GPU authorization;do not infer execution authority from prepared-package checks.",
+    "submission_boundary": "PREPARED_FOR_REVIEW_ONLY:no GPU training/inference,private dataset upload,new VASP,oldjob mutation,model promotion or scientific registration authorized.",
+    "done_when": [
+      "Two arms bind identical physical labels/splits/initialization with only reviewed training-weight and sampling differences.",
+      "Bounded budget,actual CLI and namespace packaging,raw DB/role alignment and scoped regressions are checked.",
+      "Exact request hashes,no-model evidence and remaining GPU/scientific boundaries are provided for user review."
+    ],
+    "constraints": [
+      "Default/deployed Fairchem and old packages remain unchanged;runtimev3 is explicit opt-in.",
+      "Keep46newheldout and16observedheldout outside gradients/epoch choice;integrity reads only,noheldoutDB or model loader.C2H3has test-only coverage.",
+      "Common original initialization is a proposal rather than proved better than2185;combined weighting+sampling comparison cannot isolate each component.",
+      "Single seed/twoepochs is a bounded experiment,not proof of training convergence or acceleration.O/H/replay regressions are review warnings;no zero-tolerance promotion gate.",
+      "On-disk deployment/PYTHONPATH,baseline checkpoint,current scheduler/GPU and full-model AMP/optimizer preflight remain required after authority.Old direct-execution exceptions cannot authorize this package."
+    ],
+    "authoritative_references": [
+      "configs/execution_backends.yaml",
+      "docs/reviews/fe110_adsorption_training_comparison_20261019.md",
+      "scripts/adsorption/force_training_preflight.py",
+      "scripts/adsorption/role_training_job.sh",
+      "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_comparison_20261019_v1/comparison_request.json",
+      "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_comparison_20261019_v1/verification_receipt.json"
+    ]
+  }
+}
