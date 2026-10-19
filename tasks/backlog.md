@@ -125,8 +125,13 @@ Tasks are ordered by priority and should be handled one per Codex thread.
   exact-POSCAR originalAQCat25/frozen2185 inference. Adsorbate RMSE improves
   0.269503→0.228471eV/A,but C46 before/after worsens and finalDFTfmax0.337048
   differs fromML0.093003. Review:`docs/reviews/fe110_06c_boundary_force_comparison_20261019.md`.
-- P1: Review phase1 pool and implement/test actualFairchem grouped-force loss
-  and source/stage sampler before preparing separately authorized bounded training.
+- Completed: opt-inFairchem grouped-force loss,source/stage sampler,grouped
+  development/replay metrics and v3 fail-closed contract passed124tests plus
+  deployed native CPU fixtures;real248train/60developmentDB roundtrip passed.
+  Review:`docs/reviews/fe110_adsorption_role_runtime_tests_20261019.md`.
+- P1: Prepare a reviewed v3 bounded training comparison package with frozen
+  initialization,budget,actualCLI/PYTHONPATH and runtime hashes;noGPU execution
+  is authorized by CPU testing and no model improvement has been measured.
   Existing24frames are exactly recovered (23retained,one force/geometry duplicate);
   none trained. Observed16heldout remain excluded from fitting/epoch selection.
   Three actualML failure labels are train candidates,not independenttest.

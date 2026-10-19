@@ -121,6 +121,9 @@ def verify_request(path: Path) -> dict:
     if request["split_counts"] != counts:
         raise ValueError("request count mismatch")
     config = yaml.safe_load(local_path(path.parent, request["config_path"]).read_text())
+    if any("proposed_per_atom_loss_weights" in row for rows in manifest["splits"].values() for row in rows):
+        from scripts.adsorption.force_role_data import validate_role_contract
+        validate_role_contract(request, config)
     if config["optim"]["max_epochs"] != request["training_limits"]["epochs"]:
         raise ValueError("epoch limit mismatch")
     if config["optim"]["lr_initial"] != request["training_limits"]["learning_rate"]:
@@ -152,9 +155,14 @@ def build_database_metadata(database: Path, output: Path) -> dict:
     if not rows:
         raise ValueError("empty database")
     # Exclusive creation preserves existing bound evidence.
+    from scripts.adsorption.force_role_data import sampling_probabilities
+    arrays = {"natoms": np.asarray([row.natoms for row in rows], dtype=np.int64),
+              "row_ids": np.asarray([row.id for row in rows], dtype=np.int64)}
+    probabilities = sampling_probabilities(rows)
+    if probabilities is not None:
+        arrays["adsorption_sampling_probability"] = probabilities
     with output.open("xb") as handle:
-        np.savez(handle, natoms=np.asarray([row.natoms for row in rows], dtype=np.int64),
-                 row_ids=np.asarray([row.id for row in rows], dtype=np.int64))
+        np.savez(handle, **arrays)
     return validate_database_metadata(database, output)
 
 
@@ -169,6 +177,13 @@ def validate_database_metadata(database: Path, metadata: Path) -> dict:
             if (actual.shape != (len(rows),) or not np.issubdtype(actual.dtype, np.integer)
                     or not np.array_equal(actual, expected)):
                 raise ValueError("database metadata mismatch: " + field)
+        from scripts.adsorption.force_role_data import sampling_probabilities
+        probabilities = sampling_probabilities(rows)
+        if probabilities is not None and ("adsorption_sampling_probability" not in values or
+                not np.array_equal(values["adsorption_sampling_probability"], probabilities)):
+            raise ValueError("database sampling metadata mismatch")
+        if probabilities is None and "adsorption_sampling_probability" in values:
+            raise ValueError("unexpected sampling metadata on unweighted dataset")
     return {"rows": len(rows), "database_sha256": digest(database), "metadata_sha256": digest(metadata)}
 
 
@@ -187,10 +202,14 @@ def build_database(manifest: Path, output: Path, split: str) -> int:
             atoms.set_tags(np.zeros(len(atoms), dtype=int))
             energy = row["energy_eV_force_label_only"]
             atoms.calc = SinglePointCalculator(atoms, energy=energy, forces=row["forces_eV_per_A"])
-            database.write(atoms, data={"sid": row["sample_id"], "fid": row["ionic_step"],
+            data = {"sid": row["sample_id"], "fid": row["ionic_step"],
                 "is_spin_off": False, "is_low_fi": False, "adsorption_energy": energy,
-                "sample_role": row["sample_role"], "calculation_group": row["calculation_group"],
-                "reportable_final_energy": False, "source_outcar_sha256": row["source_OUTCAR_sha256"]})
+                "sample_role": row.get("sample_role", "adsorption_trajectory_" + row.get("stage", split)), "calculation_group": row["calculation_group"],
+                "reportable_final_energy": False, "source_outcar_sha256": row["source_OUTCAR_sha256"]}
+            if "proposed_per_atom_loss_weights" in row:
+                from scripts.adsorption.force_role_data import role_metadata
+                data.update(role_metadata(row, split))
+            database.write(atoms, data=data)
     return len(payload["splits"][split])
 
 

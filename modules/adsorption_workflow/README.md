@@ -201,6 +201,20 @@ replay and fixed-atom masks. Intermediate frames are force labels, not accepted
 endpoints. Development regression is separate from frozen heldout validation;
 no automatic checkpoint promotion or acceleration claim is granted.
 
+### Opt-in role-weighted force runtime
+
+The new optional adapter is `scripts/adsorption/role_force_trainer.py` with
+`force_role_data.py` and `force_role_runtime.py`. The canonical request adapter
+rejects role-weighted manifests under pre-v3 runtime contracts. V3 binds these
+sources and requires role tensors in graph conversion plus role-aware development
+selection. Legacy unweighted packages keep their existing path. Role weights
+come from the reviewed manifest,not a universal carbon index or distance rule.
+The sampler is single-process,with replacement and exact epoch/batch resume.
+See `docs/reviews/fe110_adsorption_role_runtime_tests_20261019.md` for124tests,
+real-label DB roundtrip and deployed-Fairchem synthetic CPU checks. No model
+training,GPU-kernel validation,promotion or acceleration is established by these
+tests;new training packages and compute still require review/authorization.
+
 ### Authorized MatRIS adsorption trial
 
 The separately authorized six-seed MatRIS-primary adsorption trial is documented

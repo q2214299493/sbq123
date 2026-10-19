@@ -3,16 +3,16 @@
 
 ## Objective
 
-Prepare an evidence-first adsorption training pool and problem-targeted carbon/localFe correction proposal before further training or acceleration claims.
+Prepare a problem-targeted adsorption force-training comparison after validated role/sampling runtime integration,without inferring model quality from code tests.
 
 ## Current Evidence Snapshot
 
-- Read-only collection of13closed VASP trajectories produced312eligible force frames;reused62prior reviewed frames and3actualML failure-boundary labels.No VASP rerun or GPU action.
-- After3cross-split near-overlap exclusions and4same-job geometry/force redundancy exclusions,the pool contains248train,60development,46newtest and16quarantined observedheldout frames.Whole-job partitioning preserved.
-- Original24frames exactly recovered in geometry/forces/OUTCAR/XDATCAR/raw-table hashes;23retained,one represented by a near-identical neighbor.Original16observedheldout membership and labels unchanged.
-- All3before/after/final failedML labels are train candidates,not independent validation.07Cis not an accepted minimum;its24selected electronically converged frames are force-only diagnostic labels.
-- Prepared proposed chemical-role weights and source/stage sampler probabilities;actualFairchem runtime integration remains required.No training or checkpoint promotion occurred.
-- Compilation,Ruff and30scoped tests passed;canonical manifest and independent13260cross-split geometry comparisons passed.CSV370uniqueIDs matches manifest and train probabilities sum1.
+- 124local scoped tests passed,with compilation/Ruff and independent evidence checks. Legacy unweighted request/database behavior preserved.
+- Real248train/60developmentASEDB roundtrip preserves all raw forces,atom order,fixedFe0-17,zero tags,role weights and sampling probability row alignment. Original phase1manifest SHA6deb86d4fcb2bfbde29f7d2d6faf3f2663afa2ac04c9d8a79659c876e6234330 unchanged.
+- Opt-in RoleForceTrainer consumes per-atom weights,source/stage sampling metadata and grouped physical-unit development/replay metrics. V3 rejects old/default trainer or omitted role fields/runtime sources.
+- MZ73 actualFairchem CPU test used3train/3validation synthetic fixtures:registry selection,dataset factory,shuffledSubset mapping,sampler,collater,normalized loss and physical metrics passed. No actual structures uploaded,no force model instantiated,no modelcheckpoint loaded or written,CUDA uninitialized.
+- CPU FP16/BF16 regressions exposed a new-adapter mixed-dtype dot-product bug;fixed by at-leastFP32 loss arithmetic and retaining metadata precision. Failed fixture/API and regression evidence preserved;not a cause claim for old2185 scientific force errors.
+- No GPU training,inference,newVASP,checkpoint promotion or acceleration claim. ActualGPU kernels/fullmodel optimizer behavior remain untested.
 
 ## Lifecycle Status
 
@@ -20,11 +20,11 @@ Prepare an evidence-first adsorption training pool and problem-targeted carbon/l
 
 ## One Executable Step
 
-Review phase1 pool and proposed carbon/localFe loss and source/stage sampler before separately implementing and testing their actualFairchem runtime integration;no GPU training is authorized.
+Prepare a reviewed runtime-v3 bounded training comparison package with frozen initialization,data/runtime hashes,grouped development selection,budget and actualCLI/PYTHONPATH preflight;do not execute GPU training without separate authority.
 
 ## Submission Boundary
 
-PHASE1_LOCAL_DATA_PREPARATION_ONLY:do not train,infer,promote,submit VASP,stop/resubmit useful jobs or register scientific adsorption results under this scope.
+CPU_ADAPTER_TESTING_COMPLETE_ONLY:noGPU training/inference,newVASP,oldjob mutation,checkpoint promotion or accepted scientific registration authorized.
 
 ## Authoritative Constraint
 
@@ -32,24 +32,25 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 
 ## Done When
 
-- Existing VASP force labels are compatibility/source/coordinate/order/fixed-mask validated and complete.
-- Whole-job splits and near-overlap checks preserve original16observedheldout and isolate newtest from train/development.
-- Problem-targeted role/sampling proposals,QA evidence and training-not-executed boundaries are reviewable.
+- Role-weighted force objective and source/stage sampler are consumed by explicit actualFairchem adapter rather than unused configuration.
+- Raw-label/weight database roundtrip,normalization,fixed gradients,mixed precision,resume and legacy regression tests pass.
+- No-model CPU test evidence and remaining actualGPU/model-accuracy/speedup boundaries are recorded before a new training request.
 
 ## Constraints
 
-- Preserve original VASP data,old pool,failed read/preparation attempts and frozen model checkpoints.Raw force arrays and stored atom order are unchanged.
-- No gradient or epoch/weight selection on heldout;three related failure labels are not heldout.Old16was previously observed,not a fresh blindtest.
-- Newtest09C/10Awas previously candidate-screened.C2H3currently has test-only coverage;running10B/10Cexcluded.No universal adsorption or TS transfer claim.
-- Proposed role weights2:1:1:2:1 and3A radius are trial settings,not calibrated physical gates.CurrentFairchem does not consume proposed_* fields.ActualVASP steps/time benefit remains unmeasured.
-- MZ73is GPU backend and sunboquan-codexis VASP backend;work owns all review/authorization.
+- Default/deployed Fairchem and old packages remain unchanged;new adapter is explicit opt-in and no new submitted training package yet exists.
+- Keep46newheldout and16observedheldout outside training and epoch selection;three actualML boundary labels are train candidates,not independent validation.
+- Role values come from reviewed per-frame metadata,not copied atom IDs or universal2:1:1:2:1/3A rules. Fixed atoms receive zero loss and gradient.
+- Weighted sampling is single-process and with replacement;an epoch has dataset-length draws,not guaranteed unique visits. C2H3still has test-only coverage.
+- CPU AMP tensor tests do not establish GPU full-model AMP safety or any scientific force/geometry/acceleration improvement. O/H/replay metrics exist but training curves/retention decisions remain untested.
 
 ## Authoritative References
 
 - configs/execution_backends.yaml
-- docs/reviews/fe110_adsorption_pool_rebuild_20261019.md
-- archive/fe110_adsorption_pool_rebuild_20261019/request_scope.md
-- calculations/fe110_c2_adsorption_06_10_20261012/adsorption_pool_rebuild_20261019_v1/prepared_v2/training_manifest.json
-- calculations/fe110_c2_adsorption_06_10_20261012/adsorption_pool_rebuild_20261019_v1/prepared_v2/training_adjustment_review.json
-- calculations/fe110_c2_adsorption_06_10_20261012/adsorption_pool_rebuild_20261019_v1/prepared_v2/verification_receipt.json
+- docs/reviews/fe110_adsorption_role_runtime_tests_20261019.md
+- scripts/adsorption/force_finetune.py
+- scripts/adsorption/force_role_data.py
+- scripts/adsorption/force_role_runtime.py
+- scripts/adsorption/role_force_trainer.py
+- calculations/fe110_c2_adsorption_06_10_20261012/adsorption_runtime_test_20261019_v1/verification_receipt.json
 <!-- state-handoff:end current_task -->

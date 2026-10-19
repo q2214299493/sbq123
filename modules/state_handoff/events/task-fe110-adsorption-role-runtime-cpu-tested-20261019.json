@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-adsorption-role-runtime-cpu-tested-20261019",
+  "occurred_at": "2026-10-19T12:55:03+00:00",
+  "recorded_at": "2026-10-19T12:55:03+00:00",
+  "event_type": "task_updated",
+  "entity": {"kind": "task", "id": "task-current", "module": "adsorption_workflow"},
+  "summary": "Opt-in role-weighted adsorption trainer,sampler and grouped metrics passed local and deployed nativeFairchem CPU tests;no force model run,GPU training or promotion.",
+  "evidence": [
+    {"locator": "docs/reviews/fe110_adsorption_role_runtime_tests_20261019.md", "sha256": "abc08b3d393720d9de5bc2d4c94536b3665e65765442e15e37ba22894338c5ea", "authority": "repository_document", "observed_at": "2026-10-19T12:55:03+00:00"},
+    {"locator": "archive/fe110_adsorption_runtime_test_20261019/request_scope.md", "sha256": "bd74c307d904b8ce3b9ce0455c285e298aa08429145bfee48feed59f007a675e", "authority": "user_authorization", "observed_at": "2026-10-19T12:55:03+00:00"},
+    {"locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_runtime_test_20261019_v1/verification_receipt.json", "sha256": "1b26311dc17cd05ed09fe6789345a8ed2236b3b7ddc3f93b7cb5ada4a8a1e804", "authority": "repository_document", "observed_at": "2026-10-19T12:55:03+00:00"},
+    {"locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_runtime_test_20261019_v1/local_smoke_receipt.json", "sha256": "4b4c9bf3111413e0a9dc9434509848730a8443d459b985284aeac4fe1d83d33a", "authority": "repository_document", "observed_at": "2026-10-19T12:55:03+00:00"},
+    {"locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_runtime_test_20261019_v1/native_cpu_smoke_4.json", "sha256": "4d20e48deb762ef833341d7dff24498f2b070be7dfde1f4de58ad17d762aa2da", "authority": "repository_document", "observed_at": "2026-10-19T12:55:03+00:00"},
+    {"locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_runtime_test_20261019_v1/native_cpu_smoke_4.receipt.json", "sha256": "37216589aa200ac9e3512e04e63285af05d126c9a1c6d659fd1696b94a5722df", "authority": "repository_document", "observed_at": "2026-10-19T12:55:03+00:00"},
+    {"locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_runtime_test_20261019_v1/final_scoped_tests.xml", "sha256": "23de49636eefc2f30c6cb51d8224abb6b197ff63a78082b47876901bdcbcbc53", "authority": "repository_document", "observed_at": "2026-10-19T12:55:03+00:00"}
+  ],
+  "review": {"required": false, "reason_codes": [], "status": "not_required"},
+  "supersedes": ["task-fe110-adsorption-pool-prepared-20261019"],
+  "payload": {
+    "objective": "Prepare a problem-targeted adsorption force-training comparison after validated role/sampling runtime integration,without inferring model quality from code tests.",
+    "phase": "verification",
+    "current_evidence": [
+      "124local scoped tests passed,with compilation/Ruff and independent evidence checks. Legacy unweighted request/database behavior preserved.",
+      "Real248train/60developmentASEDB roundtrip preserves all raw forces,atom order,fixedFe0-17,zero tags,role weights and sampling probability row alignment. Original phase1manifest SHA6deb86d4fcb2bfbde29f7d2d6faf3f2663afa2ac04c9d8a79659c876e6234330 unchanged.",
+      "Opt-in RoleForceTrainer consumes per-atom weights,source/stage sampling metadata and grouped physical-unit development/replay metrics. V3 rejects old/default trainer or omitted role fields/runtime sources.",
+      "MZ73 actualFairchem CPU test used3train/3validation synthetic fixtures:registry selection,dataset factory,shuffledSubset mapping,sampler,collater,normalized loss and physical metrics passed. No actual structures uploaded,no force model instantiated,no modelcheckpoint loaded or written,CUDA uninitialized.",
+      "CPU FP16/BF16 regressions exposed a new-adapter mixed-dtype dot-product bug;fixed by at-leastFP32 loss arithmetic and retaining metadata precision. Failed fixture/API and regression evidence preserved;not a cause claim for old2185 scientific force errors.",
+      "No GPU training,inference,newVASP,checkpoint promotion or acceleration claim. ActualGPU kernels/fullmodel optimizer behavior remain untested."
+    ],
+    "one_executable_step": "Prepare a reviewed runtime-v3 bounded training comparison package with frozen initialization,data/runtime hashes,grouped development selection,budget and actualCLI/PYTHONPATH preflight;do not execute GPU training without separate authority.",
+    "submission_boundary": "CPU_ADAPTER_TESTING_COMPLETE_ONLY:noGPU training/inference,newVASP,oldjob mutation,checkpoint promotion or accepted scientific registration authorized.",
+    "done_when": [
+      "Role-weighted force objective and source/stage sampler are consumed by explicit actualFairchem adapter rather than unused configuration.",
+      "Raw-label/weight database roundtrip,normalization,fixed gradients,mixed precision,resume and legacy regression tests pass.",
+      "No-model CPU test evidence and remaining actualGPU/model-accuracy/speedup boundaries are recorded before a new training request."
+    ],
+    "constraints": [
+      "Default/deployed Fairchem and old packages remain unchanged;new adapter is explicit opt-in and no new submitted training package yet exists.",
+      "Keep46newheldout and16observedheldout outside training and epoch selection;three actualML boundary labels are train candidates,not independent validation.",
+      "Role values come from reviewed per-frame metadata,not copied atom IDs or universal2:1:1:2:1/3A rules. Fixed atoms receive zero loss and gradient.",
+      "Weighted sampling is single-process and with replacement;an epoch has dataset-length draws,not guaranteed unique visits. C2H3still has test-only coverage.",
+      "CPU AMP tensor tests do not establish GPU full-model AMP safety or any scientific force/geometry/acceleration improvement. O/H/replay metrics exist but training curves/retention decisions remain untested."
+    ],
+    "authoritative_references": [
+      "configs/execution_backends.yaml",
+      "docs/reviews/fe110_adsorption_role_runtime_tests_20261019.md",
+      "scripts/adsorption/force_finetune.py",
+      "scripts/adsorption/force_role_data.py",
+      "scripts/adsorption/force_role_runtime.py",
+      "scripts/adsorption/role_force_trainer.py",
+      "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_runtime_test_20261019_v1/verification_receipt.json"
+    ]
+  }
+}

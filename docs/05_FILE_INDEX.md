@@ -250,3 +250,10 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `archive/fe110_adsorption_pool_rebuild_20261019/`: scoped collection/preparation,chemical-role and permutation audit,tests and exact user scope.
 - `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_pool_rebuild_20261019_v1/prepared_v2/training_manifest.json`: verified248/60/46 splits plus16quarantined observedheldout;not a runnable GPU package.
 - Same folder `pool_review.json`, `training_adjustment_review.json`, `label_coverage_review.json`, `pool_inventory.csv`, `verification_receipt.json`, `scoped_tests.xml`: exclusion/role/coverage/QA evidence.
+
+## Opt-in adsorption force-role runtime tests (2026-10-19)
+
+- `docs/reviews/fe110_adsorption_role_runtime_tests_20261019.md`:124tests,actual248/60DB roundtrip,nativeFairchem CPU fixtures,AMP fix and no-model boundary.
+- `scripts/adsorption/force_role_data.py`, `force_role_runtime.py`, `role_force_trainer.py`: v3 metadata contract,differentiable role objective,resumable weighted sampler and optional trainer.
+- `tests/test_adsorption_role_runtime.py`, `archive/fe110_adsorption_runtime_test_20261019/`: regression and reproducible bounded interface/CPU evidence checks.
+- `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_runtime_test_20261019_v1/verification_receipt.json`: source/data/test binding;not force-model accuracy or speedup validation.
