@@ -38,7 +38,11 @@ def check_database_labels(root, request):
             original = read(local_path(root, source["structure_path"]), format="vasp")
             if dbrow.data.sid != source["sample_id"] or atoms.get_chemical_symbols() != source["symbols"]:
                 raise ValueError("database row identity/order mismatch")
-            for actual, expected_array in ((atoms.positions, original.positions), (atoms.cell.array, original.cell.array),
+            # Windows-built ASE DBs and Linux POSCAR decoding differ by ~1e-15 A.
+            # This is numerical serialization tolerance,not geometry relaxation.
+            if not np.allclose(atoms.positions, original.positions, rtol=0., atol=1e-12):
+                raise ValueError("database coordinates exceed 1e-12 A roundtrip allowance")
+            for actual, expected_array in ((atoms.cell.array, original.cell.array),
                                            (atoms.pbc, original.pbc), (atoms.get_forces(apply_constraint=False), source["forces_eV_per_A"])):
                 if not np.array_equal(actual, expected_array):
                     raise ValueError("database geometry/raw force differs from source")

@@ -133,16 +133,19 @@ Tasks are ordered by priority and should be handled one per Codex thread.
   AQCat25 initialization,identical248train/60development labels and bounded
   2epoch/496step/30min-per-arm budget;137tests and native RAM-only CLI checks pass.
   Review:`docs/reviews/fe110_adsorption_training_comparison_20261019.md`.
-- P1: User“跑” separately authorized GPU1 direct mode. Actual control enteredCUDA
-  then exited on nativeDDP unused energy-head parameters;no epoch/candidate/treatment.
-  Source fix passed nativeCPU toyDDP2steps;fresh runtime/request binding and renewed
-  GPU authority remain required.No automatic retry.
-  Review:`docs/reviews/fe110_adsorption_direct_training_20261020.md`.
+- P1: The one explicitly authorized corrected v2 comparison completed both arms,
+  each2epochs/496iterations,exit0.NativeCUDA backwards1/2 prove two real optimizer
+  updates and zero energy-head gradients;180tests pass. Development roleMAE is
+  control0.0398 versus treatment0.0403eV/A,not independent validation or speedup.
+  Review grouped retention and prepare a frozen-candidate independent-validation
+  proposal without running it.No automatic retry or model promotion.
+  Review:`docs/reviews/fe110_adsorption_training_retry_20261020.md`.
   Existing24frames are exactly recovered (23retained,one force/geometry duplicate);
   none trained. Observed16heldout remain excluded from fitting/epoch selection.
   Three actualML failure labels are train candidates,not independenttest.
   Current training emphasizesC2HO/C2H2O;C2H3has test-only coverage until eligible
-  10B/10Cresults are reviewed in a later version. No newVASP authorized;no correctedGPU training result yet.
+  10B/10Cresults are reviewed in a later version. No newVASP,heldout model evaluation,
+  production promotion or measured-speedup claim authorized.
 
 <!-- state-handoff:start task_backlog_events -->
 ## Managed Backlog

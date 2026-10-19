@@ -231,6 +231,20 @@ deployed one-rank DDP otherwise rejects the unused energy head. This does not
 add an energy-fitting objective. Synthetic native-DDP CPU regression passes;
 the corrected full-model GPU runtime still needs fresh bindings/authorization.
 
+The separately authorized corrected attempt is recorded in
+`docs/reviews/fe110_adsorption_training_retry_20261020.md`. It uses a new v2
+package,unchanged physical data and budget,and an observer for the first two
+native CUDA backwards in the same training process. Actual optimizer updates
+are counted separately from AMP iterations. The canonical coordinate-only
+roundtrip tolerance is1e-12A;raw forces and source hashes remain exact. Neither
+training completion nor a development improvement establishes heldout quality
+or measured VASP acceleration.
+The authorized v2 completed both two-epoch CUDA arms with successful producer
+exits and same-process startup checks. Development roleMAE was0.0398eV/A
+(uniform control) versus0.0403eV/A (role/source-stage treatment);the combined
+treatment is not demonstrated superior. Native logs are rounded;independent
+validation and a matched VASP acceleration benchmark remain unperformed.
+
 ### Authorized MatRIS adsorption trial
 
 The separately authorized six-seed MatRIS-primary adsorption trial is documented

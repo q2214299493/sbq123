@@ -278,3 +278,10 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `scripts/adsorption/direct_force_training.py`, `direct_training_arm.py`: no-retry sequential controller,native CUDA guard and bounded resources;`role_force_trainer.py` adds zero-energy graph liveness without energy fitting.
 - `archive/fe110_adsorption_direct_training_20261020/`: exclusive deployment,portable numerical QA,canonical collection,tests and explicit scope.
 - `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_direct_20261020_v1/`: frozen execution package,supplementary CPU preflight,174-test evidence,returned producer files and pending-GPU-fix provenance.
+
+## Corrected adsorption training retry (2026-10-20)
+
+- `docs/reviews/fe110_adsorption_training_retry_20261020.md`: fresh exact request hashes,one repaired attempt and actual native-CUDA evidence boundary.
+- `archive/fe110_adsorption_training_retry_20261020/`: exclusive v2 preparation/transport/deployment/collection,scope and regression tests.
+- `scripts/adsorption/direct_training_arm.py`: same-process consecutive-backward observer with actual optimizer update counts;no extra steps.
+- `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_direct_20261020_v2/`: unchanged physical data,new runtime bindings,180-test result,native preflights and producer evidence.

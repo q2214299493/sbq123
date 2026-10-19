@@ -200,6 +200,10 @@ def execute_arms(path, sha, request, root, exception, completed):
             finished = load_json_object(output / "training_completed.json")
             if binding["model_device"] != "cuda:0" or finished["optimizer_steps"] != exception["max_optimizer_steps_per_arm"]:
                 raise RuntimeError("producer did not prove CUDA/full bounded training completion")
+            if request.get("native_two_backward_check"):
+                startup = load_json_object(output / "native_two_backward_check.json")
+                if startup["status"] != "PASS_NATIVE_CUDA_TWO_BACKWARDS" or startup["request_sha256"] != sha:
+                    raise RuntimeError("missing same-process consecutive native backward evidence")
             completed.append(arm)
             print(json.dumps({"arm_completed": arm, "optimizer_steps": finished["optimizer_steps"]}), flush=True)
     finally:

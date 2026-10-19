@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-adsorption-corrected-training-completed-20261020",
+  "occurred_at": "2026-10-19T16:47:32.768178+00:00",
+  "recorded_at": "2026-10-19T16:47:32.768178+00:00",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "adsorption_workflow"
+  },
+  "summary": "One explicitly authorized corrected GPU1 retry completed both248train/60development arms,2epochs/496iterations each;native two-backward/zero-energy-gradient checks pass.No heldout/promotion/speedup claim.",
+  "evidence": [
+    {
+      "locator": "docs/reviews/fe110_adsorption_training_retry_20261020.md",
+      "sha256": "f22164802cd6cd140d3dc34f634e8cf64c057e66dd56321ed7023af94b1bf92f",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T16:47:32.768178+00:00"
+    },
+    {
+      "locator": "archive/fe110_adsorption_training_retry_20261020/scope.md",
+      "sha256": "97bc4841c1e8b865eef8b721ddd0a64776f27b63c8a22a4a1354411901ad00d4",
+      "authority": "user_authorization",
+      "observed_at": "2026-10-19T16:47:32.768178+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_direct_20261020_v2/package/direct_request.json",
+      "sha256": "78e6ae1c5611b747a035e92cf4b1bfb4308129f80460ea1fc2d28c83177ca555",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T16:47:32.768178+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_direct_20261020_v2/verification_receipt.json",
+      "sha256": "c7b1e49be22a1d9305af3c9d1f92114fb7bce64f18d605e5d2cc3b0eca5b9328",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T16:47:32.768178+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_direct_20261020_v2/collection_receipt.json",
+      "sha256": "3195020fccebfc78c0b4dfa6be93b9539b4d5e07a9932dfa5b8c9cc52c9f44ad",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T16:47:32.768178+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_direct_20261020_v2/scoped_tests.xml",
+      "sha256": "7ac0f726f1ac71127b381d3bfbdb2c7ff1401b9c6842221e53b7be7ac22f92ac",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T16:47:32.768178+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_direct_20261020_v2/returned/direct_batch_exit_record.json",
+      "sha256": "be85e667c20f4a7b7026d1701ae0089037e1c0c64158169955c90df64ef33cfe",
+      "authority": "repository_document",
+      "observed_at": "2026-10-19T16:47:32.768178+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "supersedes": [
+    "task-fe110-adsorption-direct-training-ddp-failed-20261020"
+  ],
+  "payload": {
+    "objective": "Review the completed corrected adsorption training comparison;retain development versus heldout and measured-acceleration boundaries.",
+    "phase": "verification",
+    "current_evidence": [
+      "User“修复好再跑一次” explicitly authorized one new corrected attempt.New v2 hashes preserve original physical labels,splits,recipes and base checkpoint;v1 failure untouched.",
+      "Both actual MZ73 CPU/native CLI/checkpoint preflights and180scoped regressions pass.Only coordinate decoding uses1e-12A tolerance;raw forces/cell/PBC/roles and source hashes exact.",
+      "Both control and treatment ran on physicalGPU1 UUID450609b3;each completed2epochs/496native iterations and exited0.Each same-process startup receipt proves two real optimizer updates and exact-zero energy-head gradients.",
+      "The DDP integration failure is repaired in actual full-model GPU training.Not evidence of model transferability or actual VASP speedup.",
+      "Native development metrics are available in verification_receipt.json;they are rounded training-selection metrics,not independent heldout results.46newheldout and16observedheldout remain excluded.",
+      "Both candidate checkpoints remain unpromoted;no newVASP,extra GPU inference,automatic retry or production replacement authorized."
+    ],
+    "one_executable_step": "Review grouped development/retention results,then prepare an exact-hash independent validation proposal for the chosen frozen candidate without running it yet.",
+    "submission_boundary": "ONE_CORRECTED_RETRY_COMPLETED:compute authority consumed.No further training,heldout GPU evaluation,promotion or VASP without its own scope and authorization.",
+    "done_when": [
+      "Returned producer evidence and same-process native CUDA checks establish both bounded training runs completed.",
+      "Grouped development comparison distinguishes combined recipe effects from independent validation.",
+      "A chosen frozen candidate has a reviewable independent-validation proposal;no acceleration claim without a matched VASP benchmark."
+    ],
+    "constraints": [
+      "Preserve v1 failures and v2 immutable package/checkpoints;no old-package hot patch.",
+      "46newheldout and16observedheldout are excluded from training and epoch selection;no unseen-domain or C2H3 training claim.",
+      "Energy output is untrained;force-only candidate energies cannot enter scientific tables.",
+      "No automatic retry,production promotion or measured VASP acceleration claim."
+    ],
+    "authoritative_references": [
+      "configs/execution_backends.yaml",
+      "docs/reviews/fe110_adsorption_training_retry_20261020.md",
+      "archive/fe110_adsorption_training_retry_20261020/scope.md",
+      "scripts/adsorption/direct_training_arm.py",
+      "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_direct_20261020_v2/verification_receipt.json"
+    ]
+  }
+}
