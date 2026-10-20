@@ -1,0 +1,58 @@
+{
+  "executed_at": "2026-10-20T02:33:53.365133+00:00",
+  "source_sha256": "d376ab466f9d6251f1ad0114537b3df4a827d24d7dd77f274c1357e20fcb552c",
+  "test_sha256": "c94180d5fed057603aefb792e96708d7141b4ec9dc1f704107e5318bb70f711d",
+  "commands": [
+    {
+      "command": [
+        "C:\\Anaconda\\python.exe",
+        "-m",
+        "py_compile",
+        "archive/fe110_c2_11_15_20261020/refine_and_audit.py",
+        "tests/test_fe110_c2_seed_chemistry.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Anaconda\\python.exe",
+        "-c",
+        "from archive.fe110_c2_11_15_20261020.refine_and_audit import bend_branch, metrics"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Anaconda\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "archive/fe110_c2_11_15_20261020/refine_and_audit.py",
+        "tests/test_fe110_c2_seed_chemistry.py"
+      ],
+      "exit_code": 0,
+      "stdout": "All checks passed!\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Anaconda\\python.exe",
+        "-m",
+        "pytest",
+        "-o",
+        "addopts=",
+        "-q",
+        "tests/test_fe110_c2_seed_chemistry.py",
+        "tests/test_fe110_care_batch.py",
+        "tests/test_fe110_care_requested_seeds.py"
+      ],
+      "exit_code": 0,
+      "stdout": ".................................                                        [100%]\n33 passed in 0.57s\n",
+      "stderr": ""
+    }
+  ]
+}

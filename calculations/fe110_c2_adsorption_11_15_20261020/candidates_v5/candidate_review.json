@@ -1,0 +1,4599 @@
+{
+  "status": "PASS_INITIAL_GEOMETRY_REVIEW_ONLY",
+  "scientific_acceptance": false,
+  "relaxed": false,
+  "gpu_ready": false,
+  "submitted": false,
+  "source_manifest_sha256": "35cbe5430f0da811b305f9328d8763906bdd2cb58cc13307d05a74dc76e92d79",
+  "request_sha256": "2518f7492f2a1d7abc06d424d2503fd84c0e69b1e9d63e603e0e8a8fadd7ee56",
+  "slab_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\true_fe110_clean_20260629\\results\\job_9557161\\CONTCAR",
+  "slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+  "builder_sha256": "d376ab466f9d6251f1ad0114537b3df4a827d24d7dd77f274c1357e20fcb552c",
+  "candidates": [
+    {
+      "name": "11_A",
+      "species_id": "11",
+      "formula": "C2H3",
+      "connectivity": "[C]-CH3",
+      "source_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_11_15_20261020\\candidates_v3\\11_A\\POSCAR",
+      "source_sha256": "daddb6f7e9b33d116a3d461affca3b6a682001bb6a8eb2cb185e6ee9b0604562",
+      "changed": false,
+      "recipe": null,
+      "geometry": {
+        "checks": {
+          "exact_graph_and_H_placement": true,
+          "finite_cell_and_coordinates": true,
+          "same_cell_and_all_Fe_coordinates": true,
+          "same_Fe_flags_all_adsorbates_mobile": true,
+          "bond_length_construction_windows": true,
+          "supported_non_linear_heavy_centers": true,
+          "substituent_angles": true,
+          "no_short_Fe_contacts": true,
+          "required_binding_atoms_attached": true,
+          "all_adsorbate_atoms_above_top_by_1p60A": true,
+          "nonbonded_contacts_at_least_1A": true,
+          "periodic_molecule_copies_above_2A": true,
+          "no_opposite_slab_image_overlap": true
+        },
+        "plausibility_status": "PASS",
+        "status_scope": "INITIAL_GEOMETRY_ONLY_NOT_RELAXED",
+        "scientific_acceptance": false,
+        "bonds": [
+          {
+            "atoms_1based": [
+              46,
+              47
+            ],
+            "elements": [
+              "C",
+              "C"
+            ],
+            "distance_A": 1.5431058358997092
+          },
+          {
+            "atoms_1based": [
+              46,
+              48
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0932020224807215
+          },
+          {
+            "atoms_1based": [
+              46,
+              49
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0931959490114436
+          },
+          {
+            "atoms_1based": [
+              46,
+              50
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0931703019280528
+          }
+        ],
+        "angles": [
+          {
+            "atoms_1based": [
+              50,
+              46,
+              47
+            ],
+            "elements": [
+              "H",
+              "C",
+              "C"
+            ],
+            "angle_deg": 110.76299172639114
+          },
+          {
+            "atoms_1based": [
+              50,
+              46,
+              48
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 108.1489199582456
+          },
+          {
+            "atoms_1based": [
+              50,
+              46,
+              49
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 108.1483539631592
+          },
+          {
+            "atoms_1based": [
+              47,
+              46,
+              48
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 110.76236122389592
+          },
+          {
+            "atoms_1based": [
+              47,
+              46,
+              49
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 110.762482185165
+          },
+          {
+            "atoms_1based": [
+              48,
+              46,
+              49
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 108.1513085831511
+          }
+        ],
+        "nearest_Fe": [
+          {
+            "atom_1based": 46,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 3.6108909256491457
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 3.7019712067088952
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 3.7019791216088818
+              }
+            ]
+          },
+          {
+            "atom_1based": 47,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.250000000000002
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 2.3934127344777796
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 2.393434913725841
+              }
+            ]
+          },
+          {
+            "atom_1based": 48,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 45,
+                "distance_A": 3.8285872111581014
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 4.091934191882721
+              },
+              {
+                "Fe_1based": 40,
+                "distance_A": 4.3541650554406734
+              }
+            ]
+          },
+          {
+            "atom_1based": 49,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 3.810763971928244
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 4.138817448896334
+              },
+              {
+                "Fe_1based": 41,
+                "distance_A": 4.4111790212942354
+              }
+            ]
+          },
+          {
+            "atom_1based": 50,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 44,
+                "distance_A": 3.8650093482823977
+              },
+              {
+                "Fe_1based": 38,
+                "distance_A": 4.166018389752104
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 4.202339032669801
+              }
+            ]
+          }
+        ],
+        "minimum_nonbonded_contact": [
+          1.7704697204273072,
+          49,
+          50
+        ],
+        "minimum_periodic_copy_contact": [
+          5.753934426889001,
+          48,
+          50,
+          1,
+          -1,
+          0
+        ],
+        "opposite_slab_image_min_A": 11.260909841246912,
+        "remaining_z_vacuum_gap_A": 11.23832567968864,
+        "minimum_adsorbate_height_A": 1.8127872900872912
+      },
+      "previous_label": "C_hollow_upright",
+      "predicted_energy_inherited": false,
+      "structure": "11_A/POSCAR",
+      "structure_sha256": "daddb6f7e9b33d116a3d461affca3b6a682001bb6a8eb2cb185e6ee9b0604562",
+      "unchanged_source_bytes": true
+    },
+    {
+      "name": "11_B",
+      "species_id": "11",
+      "formula": "C2H3",
+      "connectivity": "[C]-CH3",
+      "source_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_11_15_20261020\\candidates_v3\\11_B\\POSCAR",
+      "source_sha256": "e996b6eb9f99f83d66300c4dc4e4babf21062a5fc5dfee64781ed9acb6b2a9ce",
+      "changed": false,
+      "recipe": null,
+      "geometry": {
+        "checks": {
+          "exact_graph_and_H_placement": true,
+          "finite_cell_and_coordinates": true,
+          "same_cell_and_all_Fe_coordinates": true,
+          "same_Fe_flags_all_adsorbates_mobile": true,
+          "bond_length_construction_windows": true,
+          "supported_non_linear_heavy_centers": true,
+          "substituent_angles": true,
+          "no_short_Fe_contacts": true,
+          "required_binding_atoms_attached": true,
+          "all_adsorbate_atoms_above_top_by_1p60A": true,
+          "nonbonded_contacts_at_least_1A": true,
+          "periodic_molecule_copies_above_2A": true,
+          "no_opposite_slab_image_overlap": true
+        },
+        "plausibility_status": "PASS",
+        "status_scope": "INITIAL_GEOMETRY_ONLY_NOT_RELAXED",
+        "scientific_acceptance": false,
+        "bonds": [
+          {
+            "atoms_1based": [
+              46,
+              47
+            ],
+            "elements": [
+              "C",
+              "C"
+            ],
+            "distance_A": 1.5431058358997094
+          },
+          {
+            "atoms_1based": [
+              46,
+              48
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0932020224807208
+          },
+          {
+            "atoms_1based": [
+              46,
+              49
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0931959490114438
+          },
+          {
+            "atoms_1based": [
+              46,
+              50
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.093170301928053
+          }
+        ],
+        "angles": [
+          {
+            "atoms_1based": [
+              50,
+              46,
+              47
+            ],
+            "elements": [
+              "H",
+              "C",
+              "C"
+            ],
+            "angle_deg": 110.76299172639095
+          },
+          {
+            "atoms_1based": [
+              50,
+              46,
+              48
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 108.14891995824564
+          },
+          {
+            "atoms_1based": [
+              50,
+              46,
+              49
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 108.14835396315917
+          },
+          {
+            "atoms_1based": [
+              47,
+              46,
+              48
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 110.76236122389604
+          },
+          {
+            "atoms_1based": [
+              47,
+              46,
+              49
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 110.76248218516508
+          },
+          {
+            "atoms_1based": [
+              48,
+              46,
+              49
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 108.15130858315106
+          }
+        ],
+        "nearest_Fe": [
+          {
+            "atom_1based": 46,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 45,
+                "distance_A": 3.15302149573509
+              },
+              {
+                "Fe_1based": 38,
+                "distance_A": 3.757737862389305
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 3.757747139372974
+              }
+            ]
+          },
+          {
+            "atom_1based": 47,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 44,
+                "distance_A": 2.2499999999999982
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 2.2500119918833166
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.6571851512466775
+              }
+            ]
+          },
+          {
+            "atom_1based": 48,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 45,
+                "distance_A": 4.153266269077318
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 4.207721907501964
+              },
+              {
+                "Fe_1based": 38,
+                "distance_A": 4.397615208679884
+              }
+            ]
+          },
+          {
+            "atom_1based": 49,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 45,
+                "distance_A": 3.26974198598306
+              },
+              {
+                "Fe_1based": 39,
+                "distance_A": 3.6275953693397587
+              },
+              {
+                "Fe_1based": 38,
+                "distance_A": 3.643019617194374
+              }
+            ]
+          },
+          {
+            "atom_1based": 50,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 45,
+                "distance_A": 3.307400257240331
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 3.6385236172516198
+              },
+              {
+                "Fe_1based": 40,
+                "distance_A": 3.6627269208838027
+              }
+            ]
+          }
+        ],
+        "minimum_nonbonded_contact": [
+          1.7704697204273068,
+          49,
+          50
+        ],
+        "minimum_periodic_copy_contact": [
+          5.900458917872019,
+          48,
+          50,
+          -1,
+          1,
+          0
+        ],
+        "opposite_slab_image_min_A": 11.128609045850766,
+        "remaining_z_vacuum_gap_A": 11.048442743690234,
+        "minimum_adsorbate_height_A": 1.750506586352314
+      },
+      "previous_label": "C_long_bridge_tilted",
+      "predicted_energy_inherited": false,
+      "structure": "11_B/POSCAR",
+      "structure_sha256": "e996b6eb9f99f83d66300c4dc4e4babf21062a5fc5dfee64781ed9acb6b2a9ce",
+      "unchanged_source_bytes": true
+    },
+    {
+      "name": "11_C",
+      "species_id": "11",
+      "formula": "C2H3",
+      "connectivity": "[C]-CH3",
+      "source_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_11_15_20261020\\candidates_v3\\11_C\\POSCAR",
+      "source_sha256": "67eaf572196f405211cb3335d5c1c0f2379dad0c393e076346d1fd25c38b945d",
+      "changed": false,
+      "recipe": null,
+      "geometry": {
+        "checks": {
+          "exact_graph_and_H_placement": true,
+          "finite_cell_and_coordinates": true,
+          "same_cell_and_all_Fe_coordinates": true,
+          "same_Fe_flags_all_adsorbates_mobile": true,
+          "bond_length_construction_windows": true,
+          "supported_non_linear_heavy_centers": true,
+          "substituent_angles": true,
+          "no_short_Fe_contacts": true,
+          "required_binding_atoms_attached": true,
+          "all_adsorbate_atoms_above_top_by_1p60A": true,
+          "nonbonded_contacts_at_least_1A": true,
+          "periodic_molecule_copies_above_2A": true,
+          "no_opposite_slab_image_overlap": true
+        },
+        "plausibility_status": "PASS",
+        "status_scope": "INITIAL_GEOMETRY_ONLY_NOT_RELAXED",
+        "scientific_acceptance": false,
+        "bonds": [
+          {
+            "atoms_1based": [
+              46,
+              47
+            ],
+            "elements": [
+              "C",
+              "C"
+            ],
+            "distance_A": 1.5431058358997092
+          },
+          {
+            "atoms_1based": [
+              46,
+              48
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0932020224807226
+          },
+          {
+            "atoms_1based": [
+              46,
+              49
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0931959490114436
+          },
+          {
+            "atoms_1based": [
+              46,
+              50
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0931703019280532
+          }
+        ],
+        "angles": [
+          {
+            "atoms_1based": [
+              50,
+              46,
+              47
+            ],
+            "elements": [
+              "H",
+              "C",
+              "C"
+            ],
+            "angle_deg": 110.76299172639102
+          },
+          {
+            "atoms_1based": [
+              50,
+              46,
+              48
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 108.14891995824563
+          },
+          {
+            "atoms_1based": [
+              50,
+              46,
+              49
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 108.14835396315925
+          },
+          {
+            "atoms_1based": [
+              47,
+              46,
+              48
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 110.76236122389602
+          },
+          {
+            "atoms_1based": [
+              47,
+              46,
+              49
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 110.762482185165
+          },
+          {
+            "atoms_1based": [
+              48,
+              46,
+              49
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 108.15130858315106
+          }
+        ],
+        "nearest_Fe": [
+          {
+            "atom_1based": 46,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 3.7431055960195914
+              },
+              {
+                "Fe_1based": 37,
+                "distance_A": 4.472599231160005
+              },
+              {
+                "Fe_1based": 39,
+                "distance_A": 4.472668813106614
+              }
+            ]
+          },
+          {
+            "atom_1based": 47,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.1999997601198826
+              },
+              {
+                "Fe_1based": 37,
+                "distance_A": 3.291409199943363
+              },
+              {
+                "Fe_1based": 39,
+                "distance_A": 3.2914821250930997
+              }
+            ]
+          },
+          {
+            "atom_1based": 48,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 4.2552412603048175
+              },
+              {
+                "Fe_1based": 40,
+                "distance_A": 4.508009041197553
+              },
+              {
+                "Fe_1based": 37,
+                "distance_A": 4.590860128251099
+              }
+            ]
+          },
+          {
+            "atom_1based": 49,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 4.25523970250257
+              },
+              {
+                "Fe_1based": 39,
+                "distance_A": 4.370862372906233
+              },
+              {
+                "Fe_1based": 37,
+                "distance_A": 4.707338948176193
+              }
+            ]
+          },
+          {
+            "atom_1based": 50,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 4.255233134424039
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 4.374408035543857
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 4.6750924810312
+              }
+            ]
+          }
+        ],
+        "minimum_nonbonded_contact": [
+          1.7704697204273074,
+          49,
+          50
+        ],
+        "minimum_periodic_copy_contact": [
+          5.753934426889002,
+          48,
+          50,
+          1,
+          -1,
+          0
+        ],
+        "opposite_slab_image_min_A": 10.899214461883687,
+        "remaining_z_vacuum_gap_A": 10.851182019904062,
+        "minimum_adsorbate_height_A": 2.1999309498718684
+      },
+      "previous_label": "CARE_C_top",
+      "predicted_energy_inherited": false,
+      "structure": "11_C/POSCAR",
+      "structure_sha256": "67eaf572196f405211cb3335d5c1c0f2379dad0c393e076346d1fd25c38b945d",
+      "unchanged_source_bytes": true
+    },
+    {
+      "name": "12_A",
+      "species_id": "12",
+      "formula": "C2H3O",
+      "connectivity": "CH3-[C]-[O]",
+      "source_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_11_15_20261020\\candidates_v3\\12_A\\POSCAR",
+      "source_sha256": "ad3a61abf18a8f73e92bdfb4123f4abdeda4ad28f22b8be5dbbb87c0c9d5479c",
+      "changed": true,
+      "recipe": {
+        "CCO_angle_deg": 120.0,
+        "placement": {
+          "site": "top",
+          "azimuth_deg": 0.0,
+          "tilt_deg": 60.0,
+          "binding_distance_A": 2.1
+        }
+      },
+      "geometry": {
+        "checks": {
+          "exact_graph_and_H_placement": true,
+          "finite_cell_and_coordinates": true,
+          "same_cell_and_all_Fe_coordinates": true,
+          "same_Fe_flags_all_adsorbates_mobile": true,
+          "bond_length_construction_windows": true,
+          "supported_non_linear_heavy_centers": true,
+          "substituent_angles": true,
+          "no_short_Fe_contacts": true,
+          "required_binding_atoms_attached": true,
+          "all_adsorbate_atoms_above_top_by_1p60A": true,
+          "nonbonded_contacts_at_least_1A": true,
+          "periodic_molecule_copies_above_2A": true,
+          "no_opposite_slab_image_overlap": true
+        },
+        "plausibility_status": "PASS",
+        "status_scope": "INITIAL_GEOMETRY_ONLY_NOT_RELAXED",
+        "scientific_acceptance": false,
+        "bonds": [
+          {
+            "atoms_1based": [
+              46,
+              47
+            ],
+            "elements": [
+              "C",
+              "C"
+            ],
+            "distance_A": 1.4610396237692227
+          },
+          {
+            "atoms_1based": [
+              46,
+              49
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0936397786032197
+          },
+          {
+            "atoms_1based": [
+              46,
+              50
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0938179615237213
+          },
+          {
+            "atoms_1based": [
+              46,
+              51
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0933693810507141
+          },
+          {
+            "atoms_1based": [
+              47,
+              48
+            ],
+            "elements": [
+              "C",
+              "O"
+            ],
+            "distance_A": 1.4049604466494596
+          }
+        ],
+        "angles": [
+          {
+            "atoms_1based": [
+              50,
+              46,
+              47
+            ],
+            "elements": [
+              "H",
+              "C",
+              "C"
+            ],
+            "angle_deg": 110.82260107377907
+          },
+          {
+            "atoms_1based": [
+              50,
+              46,
+              49
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 108.12842332916264
+          },
+          {
+            "atoms_1based": [
+              50,
+              46,
+              51
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 108.07560568948027
+          },
+          {
+            "atoms_1based": [
+              47,
+              46,
+              49
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 110.78445257077186
+          },
+          {
+            "atoms_1based": [
+              47,
+              46,
+              51
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 110.81623755104064
+          },
+          {
+            "atoms_1based": [
+              49,
+              46,
+              51
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 108.10269656581083
+          },
+          {
+            "atoms_1based": [
+              46,
+              47,
+              48
+            ],
+            "elements": [
+              "C",
+              "C",
+              "O"
+            ],
+            "angle_deg": 120.00000000000007
+          }
+        ],
+        "nearest_Fe": [
+          {
+            "atom_1based": 46,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 3.4436733278182636
+              },
+              {
+                "Fe_1based": 40,
+                "distance_A": 3.9648444514890104
+              },
+              {
+                "Fe_1based": 37,
+                "distance_A": 3.973290312954764
+              }
+            ]
+          },
+          {
+            "atom_1based": 47,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.100000000000003
+              },
+              {
+                "Fe_1based": 37,
+                "distance_A": 3.2254270896792407
+              },
+              {
+                "Fe_1based": 39,
+                "distance_A": 3.225500096859559
+              }
+            ]
+          },
+          {
+            "atom_1based": 48,
+            "element": "O",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.5266408246225787
+              },
+              {
+                "Fe_1based": 41,
+                "distance_A": 2.5361578119839723
+              },
+              {
+                "Fe_1based": 39,
+                "distance_A": 2.8993086727255646
+              }
+            ]
+          },
+          {
+            "atom_1based": 49,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 40,
+                "distance_A": 3.44113795539054
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 3.614174037080106
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 3.6935897018796138
+              }
+            ]
+          },
+          {
+            "atom_1based": 50,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 4.165159530455927
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 4.513592122897264
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 4.640977334131189
+              }
+            ]
+          },
+          {
+            "atom_1based": 51,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 37,
+                "distance_A": 3.9220839177317175
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 3.9772029732488487
+              },
+              {
+                "Fe_1based": 40,
+                "distance_A": 4.368359441259816
+              }
+            ]
+          }
+        ],
+        "minimum_nonbonded_contact": [
+          1.770319580539086,
+          50,
+          51
+        ],
+        "minimum_periodic_copy_contact": [
+          5.479246652925843,
+          48,
+          49,
+          -1,
+          0,
+          0
+        ],
+        "opposite_slab_image_min_A": 10.883188425664558,
+        "remaining_z_vacuum_gap_A": 10.8648436758168,
+        "minimum_adsorbate_height_A": 2.09993118975199
+      },
+      "previous_label": "CARE_eta2_C_O",
+      "predicted_energy_inherited": false,
+      "structure": "12_A/POSCAR",
+      "structure_sha256": "cacf28fb88bacfee22a7a39e52cbe047cb692e5fa081752b088e543ef4fb4c2d",
+      "unchanged_source_bytes": false
+    },
+    {
+      "name": "12_B",
+      "species_id": "12",
+      "formula": "C2H3O",
+      "connectivity": "CH3-[C]-[O]",
+      "source_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_11_15_20261020\\candidates_v3\\12_B\\POSCAR",
+      "source_sha256": "c27d20082d19532a9c8c5e8b47fd09b280e1ab0790986004e3d12c513177668d",
+      "changed": true,
+      "recipe": {
+        "CCO_angle_deg": 120.0,
+        "placement": {
+          "site": "long_bridge",
+          "azimuth_deg": 90.0,
+          "tilt_deg": 50.0,
+          "binding_distance_A": 2.35
+        }
+      },
+      "geometry": {
+        "checks": {
+          "exact_graph_and_H_placement": true,
+          "finite_cell_and_coordinates": true,
+          "same_cell_and_all_Fe_coordinates": true,
+          "same_Fe_flags_all_adsorbates_mobile": true,
+          "bond_length_construction_windows": true,
+          "supported_non_linear_heavy_centers": true,
+          "substituent_angles": true,
+          "no_short_Fe_contacts": true,
+          "required_binding_atoms_attached": true,
+          "all_adsorbate_atoms_above_top_by_1p60A": true,
+          "nonbonded_contacts_at_least_1A": true,
+          "periodic_molecule_copies_above_2A": true,
+          "no_opposite_slab_image_overlap": true
+        },
+        "plausibility_status": "PASS",
+        "status_scope": "INITIAL_GEOMETRY_ONLY_NOT_RELAXED",
+        "scientific_acceptance": false,
+        "bonds": [
+          {
+            "atoms_1based": [
+              46,
+              47
+            ],
+            "elements": [
+              "C",
+              "C"
+            ],
+            "distance_A": 1.4610396237692251
+          },
+          {
+            "atoms_1based": [
+              46,
+              49
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0936397786032213
+          },
+          {
+            "atoms_1based": [
+              46,
+              50
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0938179615237207
+          },
+          {
+            "atoms_1based": [
+              46,
+              51
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0933693810507112
+          },
+          {
+            "atoms_1based": [
+              47,
+              48
+            ],
+            "elements": [
+              "C",
+              "O"
+            ],
+            "distance_A": 1.4049604466494605
+          }
+        ],
+        "angles": [
+          {
+            "atoms_1based": [
+              50,
+              46,
+              47
+            ],
+            "elements": [
+              "H",
+              "C",
+              "C"
+            ],
+            "angle_deg": 110.82260107377896
+          },
+          {
+            "atoms_1based": [
+              50,
+              46,
+              49
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 108.12842332916298
+          },
+          {
+            "atoms_1based": [
+              50,
+              46,
+              51
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 108.07560568948053
+          },
+          {
+            "atoms_1based": [
+              47,
+              46,
+              49
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 110.78445257077126
+          },
+          {
+            "atoms_1based": [
+              47,
+              46,
+              51
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 110.81623755104054
+          },
+          {
+            "atoms_1based": [
+              49,
+              46,
+              51
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 108.1026965658111
+          },
+          {
+            "atoms_1based": [
+              46,
+              47,
+              48
+            ],
+            "elements": [
+              "C",
+              "C",
+              "O"
+            ],
+            "angle_deg": 119.99999999999994
+          }
+        ],
+        "nearest_Fe": [
+          {
+            "atom_1based": 46,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 38,
+                "distance_A": 3.1785095131107504
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 3.4437538363815436
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 3.4438069410399583
+              }
+            ]
+          },
+          {
+            "atom_1based": 47,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 44,
+                "distance_A": 2.3499999999999983
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 2.350012313169474
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.742375960107122
+              }
+            ]
+          },
+          {
+            "atom_1based": 48,
+            "element": "O",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.208800541938403
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 2.9004016003026076
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 2.9004597617534604
+              }
+            ]
+          },
+          {
+            "atom_1based": 49,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 38,
+                "distance_A": 2.7287838032543874
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 3.445109500812135
+              },
+              {
+                "Fe_1based": 40,
+                "distance_A": 3.5549262326262387
+              }
+            ]
+          },
+          {
+            "atom_1based": 50,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 44,
+                "distance_A": 3.9529110790325386
+              },
+              {
+                "Fe_1based": 38,
+                "distance_A": 4.135137165346442
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 4.359097102137284
+              }
+            ]
+          },
+          {
+            "atom_1based": 51,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 45,
+                "distance_A": 3.561034694349263
+              },
+              {
+                "Fe_1based": 38,
+                "distance_A": 3.6212906818546284
+              },
+              {
+                "Fe_1based": 39,
+                "distance_A": 3.9186808288066297
+              }
+            ]
+          }
+        ],
+        "minimum_nonbonded_contact": [
+          1.770319580539085,
+          50,
+          51
+        ],
+        "minimum_periodic_copy_contact": [
+          4.719392031078677,
+          48,
+          49,
+          1,
+          -1,
+          0
+        ],
+        "opposite_slab_image_min_A": 11.19744534086037,
+        "remaining_z_vacuum_gap_A": 11.153929654656029,
+        "minimum_adsorbate_height_A": 1.8772982816522426
+      },
+      "previous_label": "acyl_C_long_bridge",
+      "predicted_energy_inherited": false,
+      "structure": "12_B/POSCAR",
+      "structure_sha256": "a50e10fc1b38fb87c094839776fe3213168b5b414299116300003697c1de82c1",
+      "unchanged_source_bytes": false
+    },
+    {
+      "name": "12_C",
+      "species_id": "12",
+      "formula": "C2H3O",
+      "connectivity": "CH3-[C]-[O]",
+      "source_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_11_15_20261020\\candidates_v3\\12_C\\POSCAR",
+      "source_sha256": "3a52432ad28f268602349a02bf5539172d20a3f7053be116ab8126c6beed9e9d",
+      "changed": true,
+      "recipe": {
+        "CCO_angle_deg": 120.0,
+        "placement": {
+          "site": "short_bridge",
+          "azimuth_deg": 0.0,
+          "tilt_deg": 55.0,
+          "binding_distance_A": 2.25
+        }
+      },
+      "geometry": {
+        "checks": {
+          "exact_graph_and_H_placement": true,
+          "finite_cell_and_coordinates": true,
+          "same_cell_and_all_Fe_coordinates": true,
+          "same_Fe_flags_all_adsorbates_mobile": true,
+          "bond_length_construction_windows": true,
+          "supported_non_linear_heavy_centers": true,
+          "substituent_angles": true,
+          "no_short_Fe_contacts": true,
+          "required_binding_atoms_attached": true,
+          "all_adsorbate_atoms_above_top_by_1p60A": true,
+          "nonbonded_contacts_at_least_1A": true,
+          "periodic_molecule_copies_above_2A": true,
+          "no_opposite_slab_image_overlap": true
+        },
+        "plausibility_status": "PASS",
+        "status_scope": "INITIAL_GEOMETRY_ONLY_NOT_RELAXED",
+        "scientific_acceptance": false,
+        "bonds": [
+          {
+            "atoms_1based": [
+              46,
+              47
+            ],
+            "elements": [
+              "C",
+              "C"
+            ],
+            "distance_A": 1.4610396237692223
+          },
+          {
+            "atoms_1based": [
+              46,
+              49
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0936397786032228
+          },
+          {
+            "atoms_1based": [
+              46,
+              50
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0938179615237222
+          },
+          {
+            "atoms_1based": [
+              46,
+              51
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0933693810507144
+          },
+          {
+            "atoms_1based": [
+              47,
+              48
+            ],
+            "elements": [
+              "C",
+              "O"
+            ],
+            "distance_A": 1.4049604466494623
+          }
+        ],
+        "angles": [
+          {
+            "atoms_1based": [
+              50,
+              46,
+              47
+            ],
+            "elements": [
+              "H",
+              "C",
+              "C"
+            ],
+            "angle_deg": 110.82260107377915
+          },
+          {
+            "atoms_1based": [
+              50,
+              46,
+              49
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 108.12842332916284
+          },
+          {
+            "atoms_1based": [
+              50,
+              46,
+              51
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 108.07560568948018
+          },
+          {
+            "atoms_1based": [
+              47,
+              46,
+              49
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 110.78445257077155
+          },
+          {
+            "atoms_1based": [
+              47,
+              46,
+              51
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 110.81623755104069
+          },
+          {
+            "atoms_1based": [
+              49,
+              46,
+              51
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 108.10269656581089
+          },
+          {
+            "atoms_1based": [
+              46,
+              47,
+              48
+            ],
+            "elements": [
+              "C",
+              "C",
+              "O"
+            ],
+            "angle_deg": 120.00000000000001
+          }
+        ],
+        "nearest_Fe": [
+          {
+            "atom_1based": 46,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 3.2452155432006897
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 3.486857441274138
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 3.5917387951805315
+              }
+            ]
+          },
+          {
+            "atom_1based": 47,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.2500000000000013
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 2.2500232320946085
+              },
+              {
+                "Fe_1based": 41,
+                "distance_A": 3.0096597912131955
+              }
+            ]
+          },
+          {
+            "atom_1based": 48,
+            "element": "O",
+            "neighbors": [
+              {
+                "Fe_1based": 44,
+                "distance_A": 2.349590134052318
+              },
+              {
+                "Fe_1based": 41,
+                "distance_A": 2.3578505983348452
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 3.0784788044801688
+              }
+            ]
+          },
+          {
+            "atom_1based": 49,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 45,
+                "distance_A": 2.940744307173013
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 3.389345077974979
+              },
+              {
+                "Fe_1based": 40,
+                "distance_A": 3.6276703356513855
+              }
+            ]
+          },
+          {
+            "atom_1based": 50,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 44,
+                "distance_A": 4.048921126544441
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 4.207515187025794
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 4.270147119804839
+              }
+            ]
+          },
+          {
+            "atom_1based": 51,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 3.4722717990296825
+              },
+              {
+                "Fe_1based": 37,
+                "distance_A": 4.149320130130854
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 4.166046478908221
+              }
+            ]
+          }
+        ],
+        "minimum_nonbonded_contact": [
+          1.770319580539086,
+          50,
+          51
+        ],
+        "minimum_periodic_copy_contact": [
+          5.342884408846226,
+          48,
+          49,
+          -1,
+          0,
+          0
+        ],
+        "opposite_slab_image_min_A": 11.163085232691614,
+        "remaining_z_vacuum_gap_A": 11.102653277744668,
+        "minimum_adsorbate_height_A": 1.8877705218823504
+      },
+      "previous_label": "acyl_C_short_bridge",
+      "predicted_energy_inherited": false,
+      "structure": "12_C/POSCAR",
+      "structure_sha256": "1b7bfe1e12eb62368abf6a29d2d0c3962febc1a357bcf418d2beafcf3ac94003",
+      "unchanged_source_bytes": false
+    },
+    {
+      "name": "13_A",
+      "species_id": "13",
+      "formula": "C2H3O",
+      "connectivity": "[CH2]-[C]-OH",
+      "source_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_11_15_20261020\\candidates_v3\\13_A\\POSCAR",
+      "source_sha256": "e910a260c9571692641b8f116de075ab260fa9070e0e7e210565165bbadafcb3",
+      "changed": true,
+      "recipe": {
+        "CCO_angle_deg": 120.0,
+        "placement": {
+          "site": "long_bridge",
+          "azimuth_deg": 0.0,
+          "tilt_deg": 0.0,
+          "binding_distance_A": 2.35
+        }
+      },
+      "geometry": {
+        "checks": {
+          "exact_graph_and_H_placement": true,
+          "finite_cell_and_coordinates": true,
+          "same_cell_and_all_Fe_coordinates": true,
+          "same_Fe_flags_all_adsorbates_mobile": true,
+          "bond_length_construction_windows": true,
+          "supported_non_linear_heavy_centers": true,
+          "substituent_angles": true,
+          "no_short_Fe_contacts": true,
+          "required_binding_atoms_attached": true,
+          "all_adsorbate_atoms_above_top_by_1p60A": true,
+          "nonbonded_contacts_at_least_1A": true,
+          "periodic_molecule_copies_above_2A": true,
+          "no_opposite_slab_image_overlap": true
+        },
+        "plausibility_status": "PASS",
+        "status_scope": "INITIAL_GEOMETRY_ONLY_NOT_RELAXED",
+        "scientific_acceptance": false,
+        "bonds": [
+          {
+            "atoms_1based": [
+              46,
+              47
+            ],
+            "elements": [
+              "O",
+              "C"
+            ],
+            "distance_A": 1.3248136709951828
+          },
+          {
+            "atoms_1based": [
+              46,
+              49
+            ],
+            "elements": [
+              "O",
+              "H"
+            ],
+            "distance_A": 0.972006353375644
+          },
+          {
+            "atoms_1based": [
+              47,
+              48
+            ],
+            "elements": [
+              "C",
+              "C"
+            ],
+            "distance_A": 1.4110570104976752
+          },
+          {
+            "atoms_1based": [
+              48,
+              50
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.082019180757311
+          },
+          {
+            "atoms_1based": [
+              48,
+              51
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0820221290466554
+          }
+        ],
+        "angles": [
+          {
+            "atoms_1based": [
+              47,
+              46,
+              49
+            ],
+            "elements": [
+              "C",
+              "O",
+              "H"
+            ],
+            "angle_deg": 110.58469934165221
+          },
+          {
+            "atoms_1based": [
+              46,
+              47,
+              48
+            ],
+            "elements": [
+              "O",
+              "C",
+              "C"
+            ],
+            "angle_deg": 119.99999999999994
+          },
+          {
+            "atoms_1based": [
+              50,
+              48,
+              47
+            ],
+            "elements": [
+              "H",
+              "C",
+              "C"
+            ],
+            "angle_deg": 120.1378179226321
+          },
+          {
+            "atoms_1based": [
+              50,
+              48,
+              51
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 119.6744535583215
+          },
+          {
+            "atoms_1based": [
+              47,
+              48,
+              51
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 120.13715630908833
+          }
+        ],
+        "nearest_Fe": [
+          {
+            "atom_1based": 46,
+            "element": "O",
+            "neighbors": [
+              {
+                "Fe_1based": 44,
+                "distance_A": 3.1165693787193405
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 3.668549934426273
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 3.685596962003829
+              }
+            ]
+          },
+          {
+            "atom_1based": 47,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 44,
+                "distance_A": 2.3499999999999983
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 2.350012313169474
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.742375960107122
+              }
+            ]
+          },
+          {
+            "atom_1based": 48,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 45,
+                "distance_A": 1.8774117417237899
+              },
+              {
+                "Fe_1based": 38,
+                "distance_A": 3.084090510572934
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 3.084113421783946
+              }
+            ]
+          },
+          {
+            "atom_1based": 49,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 44,
+                "distance_A": 4.009688519284902
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 4.0484686633332565
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 4.201628304286027
+              }
+            ]
+          },
+          {
+            "atom_1based": 50,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 45,
+                "distance_A": 2.2741589907037234
+              },
+              {
+                "Fe_1based": 39,
+                "distance_A": 2.4351611808063773
+              },
+              {
+                "Fe_1based": 38,
+                "distance_A": 2.998005311749366
+              }
+            ]
+          },
+          {
+            "atom_1based": 51,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 45,
+                "distance_A": 2.0141422098435
+              },
+              {
+                "Fe_1based": 40,
+                "distance_A": 2.2004746188703344
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.810749859175703
+              }
+            ]
+          }
+        ],
+        "minimum_nonbonded_contact": [
+          1.8710332469312143,
+          50,
+          51
+        ],
+        "minimum_periodic_copy_contact": [
+          5.4203014082481165,
+          46,
+          50,
+          0,
+          -1,
+          0
+        ],
+        "opposite_slab_image_min_A": 11.294867396387513,
+        "remaining_z_vacuum_gap_A": 11.211974875339425,
+        "minimum_adsorbate_height_A": 1.7079358467035721
+      },
+      "previous_label": "CARE_C_C_OH_orientation_1",
+      "predicted_energy_inherited": false,
+      "structure": "13_A/POSCAR",
+      "structure_sha256": "0127f164894671be3d2a54e3380bd9ecf5037ca852b765f82bca6c136af12f59",
+      "unchanged_source_bytes": false
+    },
+    {
+      "name": "13_B",
+      "species_id": "13",
+      "formula": "C2H3O",
+      "connectivity": "[CH2]-[C]-OH",
+      "source_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_11_15_20261020\\candidates_v3\\13_B\\POSCAR",
+      "source_sha256": "9bb48f3142694fc3d3cf0ea96e7f167517b5850cefbade6b3f65b789cf645e54",
+      "changed": true,
+      "recipe": {
+        "CCO_angle_deg": 120.0,
+        "placement": {
+          "site": "short_bridge",
+          "azimuth_deg": 45.0,
+          "tilt_deg": 0.0,
+          "binding_distance_A": 2.45
+        }
+      },
+      "geometry": {
+        "checks": {
+          "exact_graph_and_H_placement": true,
+          "finite_cell_and_coordinates": true,
+          "same_cell_and_all_Fe_coordinates": true,
+          "same_Fe_flags_all_adsorbates_mobile": true,
+          "bond_length_construction_windows": true,
+          "supported_non_linear_heavy_centers": true,
+          "substituent_angles": true,
+          "no_short_Fe_contacts": true,
+          "required_binding_atoms_attached": true,
+          "all_adsorbate_atoms_above_top_by_1p60A": true,
+          "nonbonded_contacts_at_least_1A": true,
+          "periodic_molecule_copies_above_2A": true,
+          "no_opposite_slab_image_overlap": true
+        },
+        "plausibility_status": "PASS",
+        "status_scope": "INITIAL_GEOMETRY_ONLY_NOT_RELAXED",
+        "scientific_acceptance": false,
+        "bonds": [
+          {
+            "atoms_1based": [
+              46,
+              47
+            ],
+            "elements": [
+              "O",
+              "C"
+            ],
+            "distance_A": 1.3248077262286002
+          },
+          {
+            "atoms_1based": [
+              46,
+              49
+            ],
+            "elements": [
+              "O",
+              "H"
+            ],
+            "distance_A": 0.9719916215272426
+          },
+          {
+            "atoms_1based": [
+              47,
+              48
+            ],
+            "elements": [
+              "C",
+              "C"
+            ],
+            "distance_A": 1.411050665359539
+          },
+          {
+            "atoms_1based": [
+              48,
+              50
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0820318848641661
+          },
+          {
+            "atoms_1based": [
+              48,
+              51
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0820445345870349
+          }
+        ],
+        "angles": [
+          {
+            "atoms_1based": [
+              47,
+              46,
+              49
+            ],
+            "elements": [
+              "C",
+              "O",
+              "H"
+            ],
+            "angle_deg": 110.58523704303678
+          },
+          {
+            "atoms_1based": [
+              46,
+              47,
+              48
+            ],
+            "elements": [
+              "O",
+              "C",
+              "C"
+            ],
+            "angle_deg": 119.99999999999991
+          },
+          {
+            "atoms_1based": [
+              50,
+              48,
+              47
+            ],
+            "elements": [
+              "H",
+              "C",
+              "C"
+            ],
+            "angle_deg": 120.13555521239084
+          },
+          {
+            "atoms_1based": [
+              50,
+              48,
+              51
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 119.67582518876051
+          },
+          {
+            "atoms_1based": [
+              47,
+              48,
+              51
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 120.13804917347997
+          }
+        ],
+        "nearest_Fe": [
+          {
+            "atom_1based": 46,
+            "element": "O",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 3.5146956021046987
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 3.5919206305975844
+              },
+              {
+                "Fe_1based": 41,
+                "distance_A": 3.701447604934316
+              }
+            ]
+          },
+          {
+            "atom_1based": 47,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.45
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 2.450023984778155
+              },
+              {
+                "Fe_1based": 41,
+                "distance_A": 3.1619729590599976
+              }
+            ]
+          },
+          {
+            "atom_1based": 48,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 45,
+                "distance_A": 2.4008345799018054
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 2.7220101245030133
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.9288063043694983
+              }
+            ]
+          },
+          {
+            "atom_1based": 49,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 4.132437291520115
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 4.260095573623163
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 4.644222781747655
+              }
+            ]
+          },
+          {
+            "atom_1based": 50,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 45,
+                "distance_A": 1.9056189507561772
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.883970026459501
+              },
+              {
+                "Fe_1based": 40,
+                "distance_A": 2.978545377429029
+              }
+            ]
+          },
+          {
+            "atom_1based": 51,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 38,
+                "distance_A": 2.512507205915986
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 2.8898999200345976
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 2.9171836215288143
+              }
+            ]
+          }
+        ],
+        "minimum_nonbonded_contact": [
+          1.8710766180465837,
+          50,
+          51
+        ],
+        "minimum_periodic_copy_contact": [
+          4.730412046703555,
+          46,
+          51,
+          0,
+          -1,
+          0
+        ],
+        "opposite_slab_image_min_A": 11.019664145618338,
+        "remaining_z_vacuum_gap_A": 10.973666238471498,
+        "minimum_adsorbate_height_A": 1.885449994442423
+      },
+      "previous_label": "CARE_C_C_OH_orientation_2",
+      "predicted_energy_inherited": false,
+      "structure": "13_B/POSCAR",
+      "structure_sha256": "5483cb4083133346148fc3d41be7fcb2077eb631120d4c7188e5c0b6faf3ca21",
+      "unchanged_source_bytes": false
+    },
+    {
+      "name": "13_C",
+      "species_id": "13",
+      "formula": "C2H3O",
+      "connectivity": "[CH2]-[C]-OH",
+      "source_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_11_15_20261020\\candidates_v3\\13_C\\POSCAR",
+      "source_sha256": "eba4185fabfc352472ac6c30d57825a89a4935eefa47112079bf88083fa90b56",
+      "changed": true,
+      "recipe": {
+        "CCO_angle_deg": 120.0,
+        "placement": {
+          "site": "top",
+          "azimuth_deg": 90.0,
+          "tilt_deg": 0.0,
+          "binding_distance_A": 2.1
+        }
+      },
+      "geometry": {
+        "checks": {
+          "exact_graph_and_H_placement": true,
+          "finite_cell_and_coordinates": true,
+          "same_cell_and_all_Fe_coordinates": true,
+          "same_Fe_flags_all_adsorbates_mobile": true,
+          "bond_length_construction_windows": true,
+          "supported_non_linear_heavy_centers": true,
+          "substituent_angles": true,
+          "no_short_Fe_contacts": true,
+          "required_binding_atoms_attached": true,
+          "all_adsorbate_atoms_above_top_by_1p60A": true,
+          "nonbonded_contacts_at_least_1A": true,
+          "periodic_molecule_copies_above_2A": true,
+          "no_opposite_slab_image_overlap": true
+        },
+        "plausibility_status": "PASS",
+        "status_scope": "INITIAL_GEOMETRY_ONLY_NOT_RELAXED",
+        "scientific_acceptance": false,
+        "bonds": [
+          {
+            "atoms_1based": [
+              46,
+              47
+            ],
+            "elements": [
+              "O",
+              "C"
+            ],
+            "distance_A": 1.3248136709951792
+          },
+          {
+            "atoms_1based": [
+              46,
+              49
+            ],
+            "elements": [
+              "O",
+              "H"
+            ],
+            "distance_A": 0.9720063533756454
+          },
+          {
+            "atoms_1based": [
+              47,
+              48
+            ],
+            "elements": [
+              "C",
+              "C"
+            ],
+            "distance_A": 1.4110570104976747
+          },
+          {
+            "atoms_1based": [
+              48,
+              50
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.08201918075731
+          },
+          {
+            "atoms_1based": [
+              48,
+              51
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.082022129046656
+          }
+        ],
+        "angles": [
+          {
+            "atoms_1based": [
+              47,
+              46,
+              49
+            ],
+            "elements": [
+              "C",
+              "O",
+              "H"
+            ],
+            "angle_deg": 110.58469934165238
+          },
+          {
+            "atoms_1based": [
+              46,
+              47,
+              48
+            ],
+            "elements": [
+              "O",
+              "C",
+              "C"
+            ],
+            "angle_deg": 120.00000000000001
+          },
+          {
+            "atoms_1based": [
+              50,
+              48,
+              47
+            ],
+            "elements": [
+              "H",
+              "C",
+              "C"
+            ],
+            "angle_deg": 120.13781792263205
+          },
+          {
+            "atoms_1based": [
+              50,
+              48,
+              51
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 119.67445355832153
+          },
+          {
+            "atoms_1based": [
+              47,
+              48,
+              51
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 120.13715630908835
+          }
+        ],
+        "nearest_Fe": [
+          {
+            "atom_1based": 46,
+            "element": "O",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 3.314194457055782
+              },
+              {
+                "Fe_1based": 37,
+                "distance_A": 3.785376085258722
+              },
+              {
+                "Fe_1based": 39,
+                "distance_A": 3.785438642180034
+              }
+            ]
+          },
+          {
+            "atom_1based": 47,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.100000000000003
+              },
+              {
+                "Fe_1based": 37,
+                "distance_A": 3.2254270896792407
+              },
+              {
+                "Fe_1based": 39,
+                "distance_A": 3.225500096859559
+              }
+            ]
+          },
+          {
+            "atom_1based": 48,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.5300359457673025
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 2.5987965967925724
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 2.5987986466389215
+              }
+            ]
+          },
+          {
+            "atom_1based": 49,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 3.9954778276279144
+              },
+              {
+                "Fe_1based": 37,
+                "distance_A": 4.618163724962874
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 4.665841968645453
+              }
+            ]
+          },
+          {
+            "atom_1based": 50,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 44,
+                "distance_A": 2.2804867410286813
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 3.104933100210785
+              },
+              {
+                "Fe_1based": 38,
+                "distance_A": 3.1619966259035475
+              }
+            ]
+          },
+          {
+            "atom_1based": 51,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 45,
+                "distance_A": 1.9931745377516448
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.8971800990843652
+              },
+              {
+                "Fe_1based": 38,
+                "distance_A": 2.958233741902391
+              }
+            ]
+          }
+        ],
+        "minimum_nonbonded_contact": [
+          1.8710332469312136,
+          50,
+          51
+        ],
+        "minimum_periodic_copy_contact": [
+          4.841893910711225,
+          46,
+          50,
+          1,
+          -1,
+          0
+        ],
+        "opposite_slab_image_min_A": 10.990432317130768,
+        "remaining_z_vacuum_gap_A": 10.989341967239678,
+        "minimum_adsorbate_height_A": 1.9305687548033195
+      },
+      "previous_label": "radical_C_short_bridge",
+      "predicted_energy_inherited": false,
+      "structure": "13_C/POSCAR",
+      "structure_sha256": "c3d7932da9dfd7ecb6239d12268e7ebe9b6572c7d12cfc4867b437532e255506",
+      "unchanged_source_bytes": false
+    },
+    {
+      "name": "14_A",
+      "species_id": "14",
+      "formula": "C2H3O",
+      "connectivity": "[C]-O-CH3",
+      "source_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_11_15_20261020\\candidates_v3\\14_A\\POSCAR",
+      "source_sha256": "3e7d212f16899985a9247328f51dfcb72ee7438fdf29323a38c48fd05fded207",
+      "changed": false,
+      "recipe": null,
+      "geometry": {
+        "checks": {
+          "exact_graph_and_H_placement": true,
+          "finite_cell_and_coordinates": true,
+          "same_cell_and_all_Fe_coordinates": true,
+          "same_Fe_flags_all_adsorbates_mobile": true,
+          "bond_length_construction_windows": true,
+          "supported_non_linear_heavy_centers": true,
+          "substituent_angles": true,
+          "no_short_Fe_contacts": true,
+          "required_binding_atoms_attached": true,
+          "all_adsorbate_atoms_above_top_by_1p60A": true,
+          "nonbonded_contacts_at_least_1A": true,
+          "periodic_molecule_copies_above_2A": true,
+          "no_opposite_slab_image_overlap": true
+        },
+        "plausibility_status": "PASS",
+        "status_scope": "INITIAL_GEOMETRY_ONLY_NOT_RELAXED",
+        "scientific_acceptance": false,
+        "bonds": [
+          {
+            "atoms_1based": [
+              46,
+              48
+            ],
+            "elements": [
+              "C",
+              "O"
+            ],
+            "distance_A": 1.4198824209368024
+          },
+          {
+            "atoms_1based": [
+              46,
+              49
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0945198147500477
+          },
+          {
+            "atoms_1based": [
+              46,
+              50
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.095664862869223
+          },
+          {
+            "atoms_1based": [
+              46,
+              51
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.095652788664781
+          },
+          {
+            "atoms_1based": [
+              47,
+              48
+            ],
+            "elements": [
+              "C",
+              "O"
+            ],
+            "distance_A": 1.4109532728244012
+          }
+        ],
+        "angles": [
+          {
+            "atoms_1based": [
+              50,
+              46,
+              49
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 107.95823642019496
+          },
+          {
+            "atoms_1based": [
+              50,
+              46,
+              48
+            ],
+            "elements": [
+              "H",
+              "C",
+              "O"
+            ],
+            "angle_deg": 111.19329840167312
+          },
+          {
+            "atoms_1based": [
+              50,
+              46,
+              51
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 110.31459355930897
+          },
+          {
+            "atoms_1based": [
+              49,
+              46,
+              48
+            ],
+            "elements": [
+              "H",
+              "C",
+              "O"
+            ],
+            "angle_deg": 108.08568161570268
+          },
+          {
+            "atoms_1based": [
+              49,
+              46,
+              51
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 107.95838000399858
+          },
+          {
+            "atoms_1based": [
+              48,
+              46,
+              51
+            ],
+            "elements": [
+              "O",
+              "C",
+              "H"
+            ],
+            "angle_deg": 111.19225516203865
+          },
+          {
+            "atoms_1based": [
+              46,
+              48,
+              47
+            ],
+            "elements": [
+              "C",
+              "O",
+              "C"
+            ],
+            "angle_deg": 110.71155027044546
+          }
+        ],
+        "nearest_Fe": [
+          {
+            "atom_1based": 46,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 45,
+                "distance_A": 3.5099518233278317
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 3.547782826976422
+              },
+              {
+                "Fe_1based": 40,
+                "distance_A": 3.70088268471364
+              }
+            ]
+          },
+          {
+            "atom_1based": 47,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 44,
+                "distance_A": 2.2499999999999982
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 2.2500119918833166
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.6571851512466775
+              }
+            ]
+          },
+          {
+            "atom_1based": 48,
+            "element": "O",
+            "neighbors": [
+              {
+                "Fe_1based": 45,
+                "distance_A": 3.055690365667329
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 3.6504552636862186
+              },
+              {
+                "Fe_1based": 38,
+                "distance_A": 3.6509606453252
+              }
+            ]
+          },
+          {
+            "atom_1based": 49,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 45,
+                "distance_A": 4.4029034703980505
+              },
+              {
+                "Fe_1based": 40,
+                "distance_A": 4.409055102230531
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 4.622271151800161
+              }
+            ]
+          },
+          {
+            "atom_1based": 50,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 3.3869515685352853
+              },
+              {
+                "Fe_1based": 37,
+                "distance_A": 4.02569213901811
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 4.051633202665975
+              }
+            ]
+          },
+          {
+            "atom_1based": 51,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 40,
+                "distance_A": 2.6720424497024644
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 3.010083551067404
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 3.167623664746373
+              }
+            ]
+          }
+        ],
+        "minimum_nonbonded_contact": [
+          1.7714192954399615,
+          49,
+          51
+        ],
+        "minimum_periodic_copy_contact": [
+          5.007810592388631,
+          47,
+          51,
+          -1,
+          1,
+          0
+        ],
+        "opposite_slab_image_min_A": 10.849324503247097,
+        "remaining_z_vacuum_gap_A": 10.772302732703459,
+        "minimum_adsorbate_height_A": 1.750506586352314
+      },
+      "previous_label": "terminal_C_long_bridge",
+      "predicted_energy_inherited": false,
+      "structure": "14_A/POSCAR",
+      "structure_sha256": "3e7d212f16899985a9247328f51dfcb72ee7438fdf29323a38c48fd05fded207",
+      "unchanged_source_bytes": true
+    },
+    {
+      "name": "14_B",
+      "species_id": "14",
+      "formula": "C2H3O",
+      "connectivity": "[C]-O-CH3",
+      "source_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_11_15_20261020\\candidates_v3\\14_B\\POSCAR",
+      "source_sha256": "9f5c96d2ed2b2b2a7f108caeb9ac7951ff8111d873fbef6dbeb081075a7d5f07",
+      "changed": false,
+      "recipe": null,
+      "geometry": {
+        "checks": {
+          "exact_graph_and_H_placement": true,
+          "finite_cell_and_coordinates": true,
+          "same_cell_and_all_Fe_coordinates": true,
+          "same_Fe_flags_all_adsorbates_mobile": true,
+          "bond_length_construction_windows": true,
+          "supported_non_linear_heavy_centers": true,
+          "substituent_angles": true,
+          "no_short_Fe_contacts": true,
+          "required_binding_atoms_attached": true,
+          "all_adsorbate_atoms_above_top_by_1p60A": true,
+          "nonbonded_contacts_at_least_1A": true,
+          "periodic_molecule_copies_above_2A": true,
+          "no_opposite_slab_image_overlap": true
+        },
+        "plausibility_status": "PASS",
+        "status_scope": "INITIAL_GEOMETRY_ONLY_NOT_RELAXED",
+        "scientific_acceptance": false,
+        "bonds": [
+          {
+            "atoms_1based": [
+              46,
+              48
+            ],
+            "elements": [
+              "C",
+              "O"
+            ],
+            "distance_A": 1.4198824209368013
+          },
+          {
+            "atoms_1based": [
+              46,
+              49
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0945198147500477
+          },
+          {
+            "atoms_1based": [
+              46,
+              50
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0956648628692227
+          },
+          {
+            "atoms_1based": [
+              46,
+              51
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0956527886647813
+          },
+          {
+            "atoms_1based": [
+              47,
+              48
+            ],
+            "elements": [
+              "C",
+              "O"
+            ],
+            "distance_A": 1.4109532728244016
+          }
+        ],
+        "angles": [
+          {
+            "atoms_1based": [
+              50,
+              46,
+              49
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 107.95823642019485
+          },
+          {
+            "atoms_1based": [
+              50,
+              46,
+              48
+            ],
+            "elements": [
+              "H",
+              "C",
+              "O"
+            ],
+            "angle_deg": 111.19329840167312
+          },
+          {
+            "atoms_1based": [
+              50,
+              46,
+              51
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 110.31459355930888
+          },
+          {
+            "atoms_1based": [
+              49,
+              46,
+              48
+            ],
+            "elements": [
+              "H",
+              "C",
+              "O"
+            ],
+            "angle_deg": 108.08568161570271
+          },
+          {
+            "atoms_1based": [
+              49,
+              46,
+              51
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 107.95838000399863
+          },
+          {
+            "atoms_1based": [
+              48,
+              46,
+              51
+            ],
+            "elements": [
+              "O",
+              "C",
+              "H"
+            ],
+            "angle_deg": 111.19225516203879
+          },
+          {
+            "atoms_1based": [
+              46,
+              48,
+              47
+            ],
+            "elements": [
+              "C",
+              "O",
+              "C"
+            ],
+            "angle_deg": 110.71155027044544
+          }
+        ],
+        "nearest_Fe": [
+          {
+            "atom_1based": 46,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 45,
+                "distance_A": 3.366805249505062
+              },
+              {
+                "Fe_1based": 38,
+                "distance_A": 3.845524273768438
+              },
+              {
+                "Fe_1based": 39,
+                "distance_A": 3.932632486407442
+              }
+            ]
+          },
+          {
+            "atom_1based": 47,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.250000000000002
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 2.3934127344777796
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 2.393434913725841
+              }
+            ]
+          },
+          {
+            "atom_1based": 48,
+            "element": "O",
+            "neighbors": [
+              {
+                "Fe_1based": 44,
+                "distance_A": 3.34805032977203
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 3.3480707694152825
+              },
+              {
+                "Fe_1based": 38,
+                "distance_A": 3.6126274117125248
+              }
+            ]
+          },
+          {
+            "atom_1based": 49,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 45,
+                "distance_A": 4.411366283950236
+              },
+              {
+                "Fe_1based": 38,
+                "distance_A": 4.541834543604442
+              },
+              {
+                "Fe_1based": 39,
+                "distance_A": 4.645658006121833
+              }
+            ]
+          },
+          {
+            "atom_1based": 50,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 45,
+                "distance_A": 3.488231412835224
+              },
+              {
+                "Fe_1based": 40,
+                "distance_A": 3.9242732945344083
+              },
+              {
+                "Fe_1based": 43,
+                "distance_A": 4.086617005907124
+              }
+            ]
+          },
+          {
+            "atom_1based": 51,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 45,
+                "distance_A": 2.8499629069689782
+              },
+              {
+                "Fe_1based": 39,
+                "distance_A": 2.9163516963268044
+              },
+              {
+                "Fe_1based": 38,
+                "distance_A": 3.1080338692389016
+              }
+            ]
+          }
+        ],
+        "minimum_nonbonded_contact": [
+          1.7714192954399617,
+          49,
+          51
+        ],
+        "minimum_periodic_copy_contact": [
+          4.898747973878389,
+          47,
+          51,
+          0,
+          -1,
+          0
+        ],
+        "opposite_slab_image_min_A": 10.76642671852681,
+        "remaining_z_vacuum_gap_A": 10.710022028968481,
+        "minimum_adsorbate_height_A": 1.8127872900872912
+      },
+      "previous_label": "terminal_C_hollow",
+      "predicted_energy_inherited": false,
+      "structure": "14_B/POSCAR",
+      "structure_sha256": "9f5c96d2ed2b2b2a7f108caeb9ac7951ff8111d873fbef6dbeb081075a7d5f07",
+      "unchanged_source_bytes": true
+    },
+    {
+      "name": "14_C",
+      "species_id": "14",
+      "formula": "C2H3O",
+      "connectivity": "[C]-O-CH3",
+      "source_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_11_15_20261020\\candidates_v3\\14_C\\POSCAR",
+      "source_sha256": "cdc8ce43a6e6885558bd9cbc300f9939bcf237fa494e450ceb2684f50d365e42",
+      "changed": false,
+      "recipe": null,
+      "geometry": {
+        "checks": {
+          "exact_graph_and_H_placement": true,
+          "finite_cell_and_coordinates": true,
+          "same_cell_and_all_Fe_coordinates": true,
+          "same_Fe_flags_all_adsorbates_mobile": true,
+          "bond_length_construction_windows": true,
+          "supported_non_linear_heavy_centers": true,
+          "substituent_angles": true,
+          "no_short_Fe_contacts": true,
+          "required_binding_atoms_attached": true,
+          "all_adsorbate_atoms_above_top_by_1p60A": true,
+          "nonbonded_contacts_at_least_1A": true,
+          "periodic_molecule_copies_above_2A": true,
+          "no_opposite_slab_image_overlap": true
+        },
+        "plausibility_status": "PASS",
+        "status_scope": "INITIAL_GEOMETRY_ONLY_NOT_RELAXED",
+        "scientific_acceptance": false,
+        "bonds": [
+          {
+            "atoms_1based": [
+              46,
+              48
+            ],
+            "elements": [
+              "C",
+              "O"
+            ],
+            "distance_A": 1.419882420936801
+          },
+          {
+            "atoms_1based": [
+              46,
+              49
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0945198147500523
+          },
+          {
+            "atoms_1based": [
+              46,
+              50
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0956648628692225
+          },
+          {
+            "atoms_1based": [
+              46,
+              51
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.095652788664779
+          },
+          {
+            "atoms_1based": [
+              47,
+              48
+            ],
+            "elements": [
+              "C",
+              "O"
+            ],
+            "distance_A": 1.4109532728244005
+          }
+        ],
+        "angles": [
+          {
+            "atoms_1based": [
+              50,
+              46,
+              49
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 107.95823642019478
+          },
+          {
+            "atoms_1based": [
+              50,
+              46,
+              48
+            ],
+            "elements": [
+              "H",
+              "C",
+              "O"
+            ],
+            "angle_deg": 111.1932984016731
+          },
+          {
+            "atoms_1based": [
+              50,
+              46,
+              51
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 110.31459355930903
+          },
+          {
+            "atoms_1based": [
+              49,
+              46,
+              48
+            ],
+            "elements": [
+              "H",
+              "C",
+              "O"
+            ],
+            "angle_deg": 108.08568161570261
+          },
+          {
+            "atoms_1based": [
+              49,
+              46,
+              51
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 107.95838000399858
+          },
+          {
+            "atoms_1based": [
+              48,
+              46,
+              51
+            ],
+            "elements": [
+              "O",
+              "C",
+              "H"
+            ],
+            "angle_deg": 111.19225516203885
+          },
+          {
+            "atoms_1based": [
+              46,
+              48,
+              47
+            ],
+            "elements": [
+              "C",
+              "O",
+              "C"
+            ],
+            "angle_deg": 110.7115502704454
+          }
+        ],
+        "nearest_Fe": [
+          {
+            "atom_1based": 46,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 44,
+                "distance_A": 4.318973395163199
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 4.322222201429303
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 4.511603714022729
+              }
+            ]
+          },
+          {
+            "atom_1based": 47,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.199999867302904
+              },
+              {
+                "Fe_1based": 37,
+                "distance_A": 3.2914092985747327
+              },
+              {
+                "Fe_1based": 39,
+                "distance_A": 3.291482237596781
+              }
+            ]
+          },
+          {
+            "atom_1based": 48,
+            "element": "O",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 3.610953140127304
+              },
+              {
+                "Fe_1based": 37,
+                "distance_A": 4.362601658972122
+              },
+              {
+                "Fe_1based": 39,
+                "distance_A": 4.362671608388264
+              }
+            ]
+          },
+          {
+            "atom_1based": 49,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 5.361035126781639
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 5.379597728654082
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 5.529638670467446
+              }
+            ]
+          },
+          {
+            "atom_1based": 50,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 45,
+                "distance_A": 3.91962316330926
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 4.233212623006667
+              },
+              {
+                "Fe_1based": 38,
+                "distance_A": 4.305265068841912
+              }
+            ]
+          },
+          {
+            "atom_1based": 51,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 44,
+                "distance_A": 3.82061378871843
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 4.329440632434286
+              },
+              {
+                "Fe_1based": 41,
+                "distance_A": 4.403215674727754
+              }
+            ]
+          }
+        ],
+        "minimum_nonbonded_contact": [
+          1.771419295439962,
+          49,
+          51
+        ],
+        "minimum_periodic_copy_contact": [
+          5.278427995533403,
+          51,
+          48,
+          -1,
+          1,
+          0
+        ],
+        "opposite_slab_image_min_A": 9.858510668571222,
+        "remaining_z_vacuum_gap_A": 9.77533568683728,
+        "minimum_adsorbate_height_A": 2.1999310570548882
+      },
+      "previous_label": "CARE_terminal_C_top",
+      "predicted_energy_inherited": false,
+      "structure": "14_C/POSCAR",
+      "structure_sha256": "cdc8ce43a6e6885558bd9cbc300f9939bcf237fa494e450ceb2684f50d365e42",
+      "unchanged_source_bytes": true
+    },
+    {
+      "name": "15_A",
+      "species_id": "15",
+      "formula": "C2H4",
+      "connectivity": "[CH2]-[CH2]",
+      "source_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_11_15_20261020\\candidates_v3\\15_A\\POSCAR",
+      "source_sha256": "db6a750c2357d99033acede38aea824f8fa76659e9c734f3634e1b877a202910",
+      "changed": false,
+      "recipe": null,
+      "geometry": {
+        "checks": {
+          "exact_graph_and_H_placement": true,
+          "finite_cell_and_coordinates": true,
+          "same_cell_and_all_Fe_coordinates": true,
+          "same_Fe_flags_all_adsorbates_mobile": true,
+          "bond_length_construction_windows": true,
+          "supported_non_linear_heavy_centers": true,
+          "substituent_angles": true,
+          "no_short_Fe_contacts": true,
+          "required_binding_atoms_attached": true,
+          "all_adsorbate_atoms_above_top_by_1p60A": true,
+          "nonbonded_contacts_at_least_1A": true,
+          "periodic_molecule_copies_above_2A": true,
+          "no_opposite_slab_image_overlap": true
+        },
+        "plausibility_status": "PASS",
+        "status_scope": "INITIAL_GEOMETRY_ONLY_NOT_RELAXED",
+        "scientific_acceptance": false,
+        "bonds": [
+          {
+            "atoms_1based": [
+              46,
+              47
+            ],
+            "elements": [
+              "C",
+              "C"
+            ],
+            "distance_A": 1.4279339628680134
+          },
+          {
+            "atoms_1based": [
+              46,
+              48
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0827518302743013
+          },
+          {
+            "atoms_1based": [
+              46,
+              49
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0827817384831835
+          },
+          {
+            "atoms_1based": [
+              47,
+              50
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0827817291622175
+          },
+          {
+            "atoms_1based": [
+              47,
+              51
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.082751861373919
+          }
+        ],
+        "angles": [
+          {
+            "atoms_1based": [
+              47,
+              46,
+              49
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 120.04841282792
+          },
+          {
+            "atoms_1based": [
+              47,
+              46,
+              48
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 120.04566857530017
+          },
+          {
+            "atoms_1based": [
+              49,
+              46,
+              48
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 119.90591859674988
+          },
+          {
+            "atoms_1based": [
+              46,
+              47,
+              50
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 120.04839990909008
+          },
+          {
+            "atoms_1based": [
+              46,
+              47,
+              51
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 120.04569330926533
+          },
+          {
+            "atoms_1based": [
+              50,
+              47,
+              51
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 119.90590678163248
+          }
+        ],
+        "nearest_Fe": [
+          {
+            "atom_1based": 46,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.3499999999999974
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 2.4876565470859084
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 2.487677125771015
+              }
+            ]
+          },
+          {
+            "atom_1based": 47,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 45,
+                "distance_A": 2.0068856726669653
+              },
+              {
+                "Fe_1based": 38,
+                "distance_A": 2.739911428964166
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 3.1202754694944526
+              }
+            ]
+          },
+          {
+            "atom_1based": 48,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 44,
+                "distance_A": 1.9737807152178455
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.7020000077366593
+              },
+              {
+                "Fe_1based": 41,
+                "distance_A": 3.062724544008263
+              }
+            ]
+          },
+          {
+            "atom_1based": 49,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.0113049073895577
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 2.846628685450383
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 3.111346770728971
+              }
+            ]
+          },
+          {
+            "atom_1based": 50,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 38,
+                "distance_A": 2.125185523533265
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 2.450707426950288
+              },
+              {
+                "Fe_1based": 39,
+                "distance_A": 2.8941254710808817
+              }
+            ]
+          },
+          {
+            "atom_1based": 51,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 45,
+                "distance_A": 2.073995437605157
+              },
+              {
+                "Fe_1based": 39,
+                "distance_A": 2.8675337793516564
+              },
+              {
+                "Fe_1based": 43,
+                "distance_A": 2.943444747445794
+              }
+            ]
+          }
+        ],
+        "minimum_nonbonded_contact": [
+          1.8745173905229608,
+          50,
+          51
+        ],
+        "minimum_periodic_copy_contact": [
+          4.769040638637907,
+          49,
+          50,
+          0,
+          -1,
+          0
+        ],
+        "opposite_slab_image_min_A": 13.01688750373271,
+        "remaining_z_vacuum_gap_A": 13.010735166319165,
+        "minimum_adsorbate_height_A": 1.8999941968895566
+      },
+      "previous_label": "multi_Fe_C_C_hollow_guided",
+      "predicted_energy_inherited": false,
+      "structure": "15_A/POSCAR",
+      "structure_sha256": "db6a750c2357d99033acede38aea824f8fa76659e9c734f3634e1b877a202910",
+      "unchanged_source_bytes": true
+    },
+    {
+      "name": "15_B",
+      "species_id": "15",
+      "formula": "C2H4",
+      "connectivity": "[CH2]-[CH2]",
+      "source_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_11_15_20261020\\candidates_v3\\15_B\\POSCAR",
+      "source_sha256": "1b0c4d73277c312e0fdcd056be28f5c445565f84754d966ed5a996056188a57b",
+      "changed": false,
+      "recipe": null,
+      "geometry": {
+        "checks": {
+          "exact_graph_and_H_placement": true,
+          "finite_cell_and_coordinates": true,
+          "same_cell_and_all_Fe_coordinates": true,
+          "same_Fe_flags_all_adsorbates_mobile": true,
+          "bond_length_construction_windows": true,
+          "supported_non_linear_heavy_centers": true,
+          "substituent_angles": true,
+          "no_short_Fe_contacts": true,
+          "required_binding_atoms_attached": true,
+          "all_adsorbate_atoms_above_top_by_1p60A": true,
+          "nonbonded_contacts_at_least_1A": true,
+          "periodic_molecule_copies_above_2A": true,
+          "no_opposite_slab_image_overlap": true
+        },
+        "plausibility_status": "PASS",
+        "status_scope": "INITIAL_GEOMETRY_ONLY_NOT_RELAXED",
+        "scientific_acceptance": false,
+        "bonds": [
+          {
+            "atoms_1based": [
+              46,
+              47
+            ],
+            "elements": [
+              "C",
+              "C"
+            ],
+            "distance_A": 1.4279339628680148
+          },
+          {
+            "atoms_1based": [
+              46,
+              48
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0827518302743013
+          },
+          {
+            "atoms_1based": [
+              46,
+              49
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0827817384831826
+          },
+          {
+            "atoms_1based": [
+              47,
+              50
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0827817291622168
+          },
+          {
+            "atoms_1based": [
+              47,
+              51
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.08275186137392
+          }
+        ],
+        "angles": [
+          {
+            "atoms_1based": [
+              47,
+              46,
+              49
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 120.04841282791998
+          },
+          {
+            "atoms_1based": [
+              47,
+              46,
+              48
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 120.04566857530011
+          },
+          {
+            "atoms_1based": [
+              49,
+              46,
+              48
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 119.90591859674991
+          },
+          {
+            "atoms_1based": [
+              46,
+              47,
+              50
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 120.04839990909008
+          },
+          {
+            "atoms_1based": [
+              46,
+              47,
+              51
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 120.04569330926529
+          },
+          {
+            "atoms_1based": [
+              50,
+              47,
+              51
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 119.90590678163252
+          }
+        ],
+        "nearest_Fe": [
+          {
+            "atom_1based": 46,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.4082665939852217
+              },
+              {
+                "Fe_1based": 37,
+                "distance_A": 3.1042115115027977
+              },
+              {
+                "Fe_1based": 40,
+                "distance_A": 3.1240166156904094
+              }
+            ]
+          },
+          {
+            "atom_1based": 47,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.4082665954880027
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 3.104381372719412
+              },
+              {
+                "Fe_1based": 41,
+                "distance_A": 3.124037345129671
+              }
+            ]
+          },
+          {
+            "atom_1based": 48,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 37,
+                "distance_A": 2.484477386655414
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.7537001073640175
+              },
+              {
+                "Fe_1based": 40,
+                "distance_A": 2.956875560432924
+              }
+            ]
+          },
+          {
+            "atom_1based": 49,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 45,
+                "distance_A": 2.5950850205962213
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.8124210817597133
+              },
+              {
+                "Fe_1based": 40,
+                "distance_A": 2.9233272069581875
+              }
+            ]
+          },
+          {
+            "atom_1based": 50,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 39,
+                "distance_A": 2.5313382741924495
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.753728363226439
+              },
+              {
+                "Fe_1based": 41,
+                "distance_A": 2.8670135482812777
+              }
+            ]
+          },
+          {
+            "atom_1based": 51,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 44,
+                "distance_A": 2.5495085366533994
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.8123948538493577
+              },
+              {
+                "Fe_1based": 41,
+                "distance_A": 3.011572559106527
+              }
+            ]
+          }
+        ],
+        "minimum_nonbonded_contact": [
+          1.8745173905229613,
+          50,
+          51
+        ],
+        "minimum_periodic_copy_contact": [
+          4.398424000430595,
+          48,
+          51,
+          1,
+          -1,
+          0
+        ],
+        "opposite_slab_image_min_A": 12.687563033340718,
+        "remaining_z_vacuum_gap_A": 12.646309490294186,
+        "minimum_adsorbate_height_A": 2.264419872914546
+      },
+      "previous_label": "CARE_eta2_C_C_long_bridge",
+      "predicted_energy_inherited": false,
+      "structure": "15_B/POSCAR",
+      "structure_sha256": "1b0c4d73277c312e0fdcd056be28f5c445565f84754d966ed5a996056188a57b",
+      "unchanged_source_bytes": true
+    },
+    {
+      "name": "15_C",
+      "species_id": "15",
+      "formula": "C2H4",
+      "connectivity": "[CH2]-[CH2]",
+      "source_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_11_15_20261020\\candidates_v3\\15_C\\POSCAR",
+      "source_sha256": "72c51ad48b1ec176613e6bd34ac252bc98cbe71eecdc209edb13924ab0cb167f",
+      "changed": false,
+      "recipe": null,
+      "geometry": {
+        "checks": {
+          "exact_graph_and_H_placement": true,
+          "finite_cell_and_coordinates": true,
+          "same_cell_and_all_Fe_coordinates": true,
+          "same_Fe_flags_all_adsorbates_mobile": true,
+          "bond_length_construction_windows": true,
+          "supported_non_linear_heavy_centers": true,
+          "substituent_angles": true,
+          "no_short_Fe_contacts": true,
+          "required_binding_atoms_attached": true,
+          "all_adsorbate_atoms_above_top_by_1p60A": true,
+          "nonbonded_contacts_at_least_1A": true,
+          "periodic_molecule_copies_above_2A": true,
+          "no_opposite_slab_image_overlap": true
+        },
+        "plausibility_status": "PASS",
+        "status_scope": "INITIAL_GEOMETRY_ONLY_NOT_RELAXED",
+        "scientific_acceptance": false,
+        "bonds": [
+          {
+            "atoms_1based": [
+              46,
+              47
+            ],
+            "elements": [
+              "C",
+              "C"
+            ],
+            "distance_A": 1.4279339628680132
+          },
+          {
+            "atoms_1based": [
+              46,
+              48
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0827518302743
+          },
+          {
+            "atoms_1based": [
+              46,
+              49
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.082781738483184
+          },
+          {
+            "atoms_1based": [
+              47,
+              50
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.0827817291622173
+          },
+          {
+            "atoms_1based": [
+              47,
+              51
+            ],
+            "elements": [
+              "C",
+              "H"
+            ],
+            "distance_A": 1.082751861373919
+          }
+        ],
+        "angles": [
+          {
+            "atoms_1based": [
+              47,
+              46,
+              49
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 120.0484128279199
+          },
+          {
+            "atoms_1based": [
+              47,
+              46,
+              48
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 120.04566857530018
+          },
+          {
+            "atoms_1based": [
+              49,
+              46,
+              48
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 119.90591859674993
+          },
+          {
+            "atoms_1based": [
+              46,
+              47,
+              50
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 120.04839990908998
+          },
+          {
+            "atoms_1based": [
+              46,
+              47,
+              51
+            ],
+            "elements": [
+              "C",
+              "C",
+              "H"
+            ],
+            "angle_deg": 120.04569330926545
+          },
+          {
+            "atoms_1based": [
+              50,
+              47,
+              51
+            ],
+            "elements": [
+              "H",
+              "C",
+              "H"
+            ],
+            "angle_deg": 119.90590678163252
+          }
+        ],
+        "nearest_Fe": [
+          {
+            "atom_1based": 46,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.2500000000000013
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 2.2500232320946085
+              },
+              {
+                "Fe_1based": 41,
+                "distance_A": 3.009659791213195
+              }
+            ]
+          },
+          {
+            "atom_1based": 47,
+            "element": "C",
+            "neighbors": [
+              {
+                "Fe_1based": 44,
+                "distance_A": 2.0608284729001842
+              },
+              {
+                "Fe_1based": 38,
+                "distance_A": 2.5554215186930507
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 2.871066433589712
+              }
+            ]
+          },
+          {
+            "atom_1based": 48,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 41,
+                "distance_A": 2.2452776904338583
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 2.4209126052341134
+              },
+              {
+                "Fe_1based": 42,
+                "distance_A": 2.5181005849823817
+              }
+            ]
+          },
+          {
+            "atom_1based": 49,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 42,
+                "distance_A": 1.9903001209898015
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 2.73439167852291
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 2.9625654344046697
+              }
+            ]
+          },
+          {
+            "atom_1based": 50,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 44,
+                "distance_A": 2.103820483946227
+              },
+              {
+                "Fe_1based": 37,
+                "distance_A": 2.4268140160696987
+              },
+              {
+                "Fe_1based": 38,
+                "distance_A": 2.681298290263012
+              }
+            ]
+          },
+          {
+            "atom_1based": 51,
+            "element": "H",
+            "neighbors": [
+              {
+                "Fe_1based": 38,
+                "distance_A": 2.193126413884653
+              },
+              {
+                "Fe_1based": 45,
+                "distance_A": 2.4581639177149452
+              },
+              {
+                "Fe_1based": 44,
+                "distance_A": 2.7095633954899214
+              }
+            ]
+          }
+        ],
+        "minimum_nonbonded_contact": [
+          1.8745173905229606,
+          50,
+          51
+        ],
+        "minimum_periodic_copy_contact": [
+          4.2132056757082115,
+          49,
+          50,
+          1,
+          -1,
+          0
+        ],
+        "opposite_slab_image_min_A": 13.068496176179108,
+        "remaining_z_vacuum_gap_A": 13.058469971369526,
+        "minimum_adsorbate_height_A": 1.8522593918391959
+      },
+      "previous_label": "C_C_short_bridge_orientation",
+      "predicted_energy_inherited": false,
+      "structure": "15_C/POSCAR",
+      "structure_sha256": "72c51ad48b1ec176613e6bd34ac252bc98cbe71eecdc209edb13924ab0cb167f",
+      "unchanged_source_bytes": true
+    }
+  ],
+  "same_species_deduplication": [
+    {
+      "names": [
+        "11_A",
+        "11_B"
+      ],
+      "RMSD_A": 1.1028203982366958
+    },
+    {
+      "names": [
+        "11_A",
+        "11_C"
+      ],
+      "RMSD_A": 1.3326862409333284
+    },
+    {
+      "names": [
+        "11_B",
+        "11_C"
+      ],
+      "RMSD_A": 0.8346206932473329
+    },
+    {
+      "names": [
+        "12_A",
+        "12_B"
+      ],
+      "RMSD_A": 1.7985399651497678
+    },
+    {
+      "names": [
+        "12_A",
+        "12_C"
+      ],
+      "RMSD_A": 1.181035528296572
+    },
+    {
+      "names": [
+        "12_B",
+        "12_C"
+      ],
+      "RMSD_A": 1.4916288647003524
+    },
+    {
+      "names": [
+        "13_A",
+        "13_B"
+      ],
+      "RMSD_A": 1.3634692393706076
+    },
+    {
+      "names": [
+        "13_A",
+        "13_C"
+      ],
+      "RMSD_A": 1.8558471070667504
+    },
+    {
+      "names": [
+        "13_B",
+        "13_C"
+      ],
+      "RMSD_A": 1.1688741981971764
+    },
+    {
+      "names": [
+        "14_A",
+        "14_B"
+      ],
+      "RMSD_A": 1.0855902558295576
+    },
+    {
+      "names": [
+        "14_A",
+        "14_C"
+      ],
+      "RMSD_A": 0.8075742225305487
+    },
+    {
+      "names": [
+        "14_B",
+        "14_C"
+      ],
+      "RMSD_A": 1.353894684645529
+    },
+    {
+      "names": [
+        "15_A",
+        "15_B"
+      ],
+      "RMSD_A": 1.3366946949963705
+    },
+    {
+      "names": [
+        "15_A",
+        "15_C"
+      ],
+      "RMSD_A": 1.0572821004191404
+    },
+    {
+      "names": [
+        "15_B",
+        "15_C"
+      ],
+      "RMSD_A": 1.0225460022036588
+    }
+  ],
+  "minimum_seed_RMSD_A": 0.8075742225305487,
+  "construction_assumptions": [
+    "The unsupported linear CCO centers in species 12/13 are replaced by bent 120 degree trial geometries. This is an explicit construction assumption, not a measured Fe(110) equilibrium angle.",
+    "Existing covalent bond lengths, exact connectivity and H placement are preserved by rotating whole O/OH branches.",
+    "Bond/angle/contact windows are conservative initial-seed screening heuristics, not an electronic-structure or stability acceptance protocol.",
+    "Source-provenance energies are not inherited by any changed structure.",
+    "The nine other initial structures are retained only after the same expanded audit; unchanged POSCAR bytes are preserved."
+  ]
+}

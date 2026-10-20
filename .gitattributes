@@ -93,3 +93,7 @@ modules/state_handoff/events/task-fe110-five-c2-adsorption-repair-gpu2176-submit
 
 # Preserve the exact bytes bound by the 11-15 candidate evidence manifests.
 calculations/fe110_c2_adsorption_11_15_20261020/** -text -eol
+
+# Preserve formatting in immutable clean-reference and CSV evidence bytes.
+calculations/fe110_c2_adsorption_11_15_20261020/candidates_v5/POSCAR.clean_reference whitespace=-blank-at-eol,-blank-at-eof
+calculations/fe110_c2_adsorption_11_15_20261020/candidates_v5/geometry_summary.csv whitespace=-blank-at-eol,-blank-at-eof

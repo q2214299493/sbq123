@@ -1,0 +1,20 @@
+{
+  "scope": "Current geometry-review task only",
+  "corrected": 6,
+  "retained_identical": 9,
+  "source_issue": "Six unsupported linear CCO centers were absent from the earlier angle audit.",
+  "construction_assumption": "120 degree trial CCO geometry; no equilibrium or minimum-energy claim",
+  "prototype_v4": "Locally preserved; final v5 adds complete periodic-image checks and fresh source hash after scoped lint cleanup.",
+  "failed_trials": [
+    "Initial 13_B short-bridge seed had H-Fe below 1.90 A. Raising the center binding distance from 2.35 to 2.45 A removes that starting contact.",
+    "Initial verifier import named the helper owner incorrectly; corrected to the actual build_fe110_care_batch owner.",
+    "Scoped Ruff initially flagged one long orchestration function. Deduplication and CSV writing were separated; current source and tests pass."
+  ],
+  "remaining_unverified": [
+    "relaxed stability",
+    "electronic structure and magnetic state",
+    "forces",
+    "energy ranking"
+  ],
+  "state_manager_blocker": "multiple unsuperseded events for task-current: task-fe110-adsorption-control-heldout46-verified-20261020 and task-fe110-c2-11-15-prepared-20261020. No other task was superseded or overwritten."
+}

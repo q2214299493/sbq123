@@ -188,3 +188,11 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `calculations/fe110_c2_adsorption_11_15_20261020/candidates_v3/structure_review.md`: canonical 15 POSCARs, five figures and per-candidate geometry table.
 - `calculations/fe110_c2_adsorption_11_15_20261020/initial_geometry_verification.json`: independent graph, PBC, slab/constraint and equivalent-atom deduplication checks.
 - `archive/fe110_c2_11_15_20261020/verify_and_document.py`: bounded CPU verification and provenance/documentation builder.
+
+## Fe(110) 11–15 chemical geometry follow-up (2026-10-20)
+
+- `docs/reviews/fe110_c2_11_15_geometry_review_20261020.md`: six unsupported linear CCO templates corrected; initial-geometry scope and remaining scientific uncertainty.
+- `configs/adsmind_lite/fe110_c2_11_15_geometry_review_20261020.json`: bound v3 source and explicitly assumed 120-degree bent-template recipes.
+- `calculations/fe110_c2_adsorption_11_15_20261020/candidates_v5/`: current 15-structure package, per-structure checks, figures and independent POSCAR readback; v3 is retained provenance.
+- `archive/fe110_c2_11_15_20261020/refine_and_audit.py` and `verify_refined_package.py`: angle-aware initial-geometry review, O/OH branch correction, full periodic-image screening and independent graph/bond verification.
+- `tests/test_fe110_c2_seed_chemistry.py`: bond/H/slab invariants, periodic branch rotation and regression for previously unchecked linear centers.
