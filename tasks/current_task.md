@@ -3,28 +3,28 @@
 
 ## Objective
 
-Prepare a matched three-pair VASP steps/time benchmark without changing the production model or submitting calculations.
+Complete the authorized three-pair VASP relaxation benchmark and compare compatible same-minimum cost,without model promotion.
 
 ## Current Evidence Snapshot
 
-- Six reviewed seed-origin final POSCARs:06_C/09_C/10_A x original AQCat25/frozen uniform-control;no minimum-drift starts.
-- Canonical routine-production builder,32ranks/job,32/node,ALGO Fast,SIGMA0.20,EDIFFG-0.02,NSW300;within-pair method/resource files byte-identical.
-- 6/6unified adsorption preflights pass;source/return/POSCAR hashes,cell/order/fixedFe0-17 and final graph checked;22related tests pass.
-- 06_C transient C-O elongation/site difference and09_C mixed geometry warning retained;not automatic same-basin acceptance.
-- All inputs local only,no job IDs,no upload,newVASP0,newGPU0;POTCAR still needs fresh remote verification.
-- Historical131/101/114steps are not exact matched controls;VASP savings unmeasured.No checkpoint promotion.
+- User explicitly authorized exact six prepared jobs;all source/bundle hashes and remote POTCAR family/order/SHA passed;canonical SUBMIT_VASP gates and executor used.
+- 06_C baseline9910781/control9910783 RUN;09_C baseline9910785/control9910787 PEND;10_A baseline9910789/control9910791 PEND at2026-10-20T07:13:59Z.
+- Each32MPIranks,32/node,NSW300,unchangedproductionALGO Fast/SIGMA0.20/EDIFFG-0.02;existing128rankaccountquota respected.No pilot or old-job cancellation.
+- Six immutable submission receipts and scheduler raw/hash evidence;registry96newjob/input rows(6calculations+6jobs+6history+78files),zero scientific results.
+- Scheduler schema gained adsorption_relaxation metadata only;first reporting error did not affect submissions,no resubmit.122related regressions pass.
+- No electronic/ionic convergence,final basin,elapsedcost or measuredspeedup assessed;no newGPU/training/modelpromotion.
 
 ## Lifecycle Status
 
-- Phase: `verification`
+- Phase: `active`
 
 ## One Executable Step
 
-Obtain separate explicit authority for the exact six prepared VASP inputs before generating a current submission gate and checking remote POTCAR/duplicates.
+At the next requested checkpoint inspect these six live scheduler/calculation sources;compare convergence and compatible final minima before performance accounting.
 
 ## Submission Boundary
 
-PREPARED_LOCAL_ONLY:execution_authorized=false;ALLOWED_ACTIONS=[];no upload or submission authorized.
+Exact six submissions consumed.No automaticretry,newVASP,newGPU,parameter/geometrychange,training or modelpromotion authorized.
 
 ## Authoritative Constraint
 
@@ -32,24 +32,23 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 
 ## Done When
 
-- Explicit exact-six-job submission authorization,current hash-bound gate and live remote input/POTCAR checks exist before execution.
-- Each run is reviewed for termination,electronic/force convergence,chemical identity and final adsorption basin.
-- Only compatible same-minimum pairs compare ionic/SCF work,time,CPU/GPU and declared shared costs before a speedup claim.
+- Each of six jobs has terminal scheduler evidence and separately reviewed electronic/force/geometry status.
+- Compatible same-minimum pairs compare ionicsteps,totalSCFwork,elapsedtime,CPUcorehours and GPU/sharedcost;different minima or failures are not speedup ratios.
+- Qualified converged adsorption results are registered through owning scientific gates;unqualified cases retain truthful status.
 
 ## Constraints
 
-- Freeze the candidate;no geometry-test-driven checkpoint/epoch reselection.
-- 06_C is in-domain training-source diagnostic;09_C/10_A are observed after force validation,not fresh blind selection.
-- Treat06_C transient elongation and09_C mixed results as warnings,not arbitrary hard rejection or blanket success.
-- Retain other11-15 structure-preparation files/event in backlog;no actions on that branch.
-- No automaticpilot/retry or model reselection;no unrelated11-15task changes.
-- Six simultaneous jobs would require192ranks;concurrency and real runtime remain unapproved/unmeasured.
+- Freeze both checkpoints and all six submitted inputs;no result-driven checkpoint/epoch reselection.
+- 06_C training-source/site-difference/transientelongation and09_Cmixedgeometry warnings remain;no blanket success.
+- Old131/101/114-step jobs are not exact matched controls;no speedup claim before final scientific review.
+- Do not affect other running jobs or11-15preparation;do not bypass accountquota or auto-retry.
+- Routine checks remain on demand;no recurring monitor was created.
 
 ## Authoritative References
 
-- configs/true_fe110_production.yaml
 - configs/execution_backends.yaml
-- docs/reviews/fe110_adsorption_control_paired_vasp3_20261020.md
-- calculations/fe110_c2_adsorption_06_10_20261012/adsorption_control_paired_vasp3_20261020_v1/batch_manifest.json
-- calculations/fe110_c2_adsorption_06_10_20261012/adsorption_control_paired_vasp3_20261020_v1/preparation_receipt_v2.json
+- configs/true_fe110_production.yaml
+- docs/reviews/fe110_adsorption_control_paired_vasp3_submission_20261020.md
+- calculations/fe110_c2_adsorption_06_10_20261012/adsorption_control_paired_vasp3_20261020_v1/submission_summary.json
+- calculations/fe110_c2_adsorption_06_10_20261012/adsorption_control_paired_vasp3_20261020_v1/submission_registry_receipt.json
 <!-- state-handoff:end current_task -->

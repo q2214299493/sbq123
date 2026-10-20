@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-adsorption-control-paired-vasp3-submitted-20261020",
+  "occurred_at": "2026-10-20T07:16:36.220600+00:00",
+  "recorded_at": "2026-10-20T07:16:36.220600+00:00",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "adsorption_workflow"
+  },
+  "summary": "User-authorized six paired VASP relaxations submitted and job/input provenance registered;initial2RUN/4PEND.No convergence or speedup claim.",
+  "evidence": [
+    {
+      "locator": "docs/reviews/fe110_adsorption_control_paired_vasp3_submission_20261020.md",
+      "sha256": "f7fe7d9b4e71cb78282fa95dcec69a7e1626d028783ab4b2539084974d77261b",
+      "authority": "repository_document",
+      "observed_at": "2026-10-20T07:16:36.220600+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_control_paired_vasp3_20261020_v1/submission_summary.json",
+      "sha256": "82c5c5e73ebf5374214696410e5f6ecc6276e6025ddf14e634cac895904c076c",
+      "authority": "repository_document",
+      "observed_at": "2026-10-20T07:16:36.220600+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_control_paired_vasp3_20261020_v1/submission_registry_receipt.json",
+      "sha256": "69d564eb41730b5c747f7b51ba546d736b64fe231c8e5de0f07d5a260bc4f7c2",
+      "authority": "repository_document",
+      "observed_at": "2026-10-20T07:16:36.220600+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_control_paired_vasp3_20261020_v1/scheduler_stage_regression_tests.xml",
+      "sha256": "389991d214a7760da81a725fc0608fe6f76cf9295867e029417f682309ada69e",
+      "authority": "repository_document",
+      "observed_at": "2026-10-20T07:16:36.220600+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "supersedes": [
+    "task-fe110-adsorption-control-paired-vasp3-prepared-20261020"
+  ],
+  "payload": {
+    "objective": "Complete the authorized three-pair VASP relaxation benchmark and compare compatible same-minimum cost,without model promotion.",
+    "phase": "active",
+    "current_evidence": [
+      "User explicitly authorized exact six prepared jobs;all source/bundle hashes and remote POTCAR family/order/SHA passed;canonical SUBMIT_VASP gates and executor used.",
+      "06_C baseline9910781/control9910783 RUN;09_C baseline9910785/control9910787 PEND;10_A baseline9910789/control9910791 PEND at2026-10-20T07:13:59Z.",
+      "Each32MPIranks,32/node,NSW300,unchangedproductionALGO Fast/SIGMA0.20/EDIFFG-0.02;existing128rankaccountquota respected.No pilot or old-job cancellation.",
+      "Six immutable submission receipts and scheduler raw/hash evidence;registry96newjob/input rows(6calculations+6jobs+6history+78files),zero scientific results.",
+      "Scheduler schema gained adsorption_relaxation metadata only;first reporting error did not affect submissions,no resubmit.122related regressions pass.",
+      "No electronic/ionic convergence,final basin,elapsedcost or measuredspeedup assessed;no newGPU/training/modelpromotion."
+    ],
+    "one_executable_step": "At the next requested checkpoint inspect these six live scheduler/calculation sources;compare convergence and compatible final minima before performance accounting.",
+    "submission_boundary": "Exact six submissions consumed.No automaticretry,newVASP,newGPU,parameter/geometrychange,training or modelpromotion authorized.",
+    "done_when": [
+      "Each of six jobs has terminal scheduler evidence and separately reviewed electronic/force/geometry status.",
+      "Compatible same-minimum pairs compare ionicsteps,totalSCFwork,elapsedtime,CPUcorehours and GPU/sharedcost;different minima or failures are not speedup ratios.",
+      "Qualified converged adsorption results are registered through owning scientific gates;unqualified cases retain truthful status."
+    ],
+    "constraints": [
+      "Freeze both checkpoints and all six submitted inputs;no result-driven checkpoint/epoch reselection.",
+      "06_C training-source/site-difference/transientelongation and09_Cmixedgeometry warnings remain;no blanket success.",
+      "Old131/101/114-step jobs are not exact matched controls;no speedup claim before final scientific review.",
+      "Do not affect other running jobs or11-15preparation;do not bypass accountquota or auto-retry.",
+      "Routine checks remain on demand;no recurring monitor was created."
+    ],
+    "authoritative_references": [
+      "configs/execution_backends.yaml",
+      "configs/true_fe110_production.yaml",
+      "docs/reviews/fe110_adsorption_control_paired_vasp3_submission_20261020.md",
+      "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_control_paired_vasp3_20261020_v1/submission_summary.json",
+      "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_control_paired_vasp3_20261020_v1/submission_registry_receipt.json"
+    ]
+  }
+}

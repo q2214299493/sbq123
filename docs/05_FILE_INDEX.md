@@ -13,6 +13,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## Paired adsorption VASP submission — 2026-10-20
+
+- `docs/reviews/fe110_adsorption_control_paired_vasp3_submission_20261020.md`: six submitted jobs9910781/83/85/87/89/91, initial RUN/PEND observations and job-only registration.
+- `archive/fe110_adsorption_paired_vasp3_20261020/submit.py`: exact reviewed inputs, live POTCAR/target checks, canonical gates/executor and submission snapshots; no automatic retries.
+- `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_control_paired_vasp3_20261020_v1/submission_summary.json`: six actual receipts, live scheduler bindings and remote roots.
+
 ## Paired adsorption VASP benchmark preparation — 2026-10-20
 
 - `docs/reviews/fe110_adsorption_control_paired_vasp3_20261020.md`: three original/control pairs, unchanged production settings, geometry warnings and preparation-only boundary.
