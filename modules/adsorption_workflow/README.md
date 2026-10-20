@@ -249,8 +249,12 @@ benchmark remains unperformed.
 The separately authorized frozencontrol46-frame force test is documented in
 `docs/reviews/fe110_adsorption_control_heldout46_20261020.md`. Both models used
 identical disjoint09_C/10_A structures on CUDA;adsorbate vectorRMSE decreased
-from0.200850 to0.062348eV/A. This is bounded force validation only;geometry
-retention,matched VASP speedup and production promotion remain unperformed.
+from0.200850 to0.062348eV/A. This supports bounded force validation,not by
+itself geometry retention,matched VASP speedup or production promotion.
+The later3-case same-seed/minimum geometry comparison is documented in
+`docs/reviews/fe110_adsorption_control_geometry3_20261020.md`. It retains mixed
+09_C results and transient06_C C-O elongation;no matched VASP speedup or default
+model replacement is established by those short GPU optimizations.
 
 ### Authorized MatRIS adsorption trial
 

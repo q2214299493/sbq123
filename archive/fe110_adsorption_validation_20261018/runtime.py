@@ -98,7 +98,9 @@ def validate_scope(request: dict, authorization: dict, request_sha: str, excepti
         validate_force_only_scope(request, exception)
     elif request["limits"] != {"seed_max_steps": exception["seed_max_steps"],
                              "minimum_drift_max_steps": exception["minimum_drift_max_steps"],
-                             "fmax_eV_per_A": exception["fmax_eV_per_A"]}:
+                             "fmax_eV_per_A": exception["fmax_eV_per_A"],
+                             **({"minimum_drift_fmax_eV_A": exception["minimum_drift_fmax_eV_A"]}
+                                if "minimum_drift_fmax_eV_A" in exception else {})}:
         raise ValueError("optimizer budget changed")
     if not force_only and (len(request["heldout"]) != exception["heldout_count"] or len({r["sample_id"] for r in request["heldout"]}) != exception["heldout_count"]):
         raise ValueError("heldout scope/count changed")
@@ -231,8 +233,9 @@ def relax_case(root: Path, output: Path, case: dict, origin: str, calc, limits: 
     optimizer.attach(lambda: require_safe_step(atoms, deadline), interval=1)
     started = time.monotonic()
     error, converged = None, False
+    target_fmax = limits.get("minimum_drift_fmax_eV_A", limits["fmax_eV_per_A"]) if origin == "minimum" else limits["fmax_eV_per_A"]
     try:
-        converged = bool(optimizer.run(fmax=limits["fmax_eV_per_A"], steps=maximum))
+        converged = bool(optimizer.run(fmax=target_fmax, steps=maximum))
     except TimeoutError:
         raise
     except Exception as exc:
@@ -245,6 +248,7 @@ def relax_case(root: Path, output: Path, case: dict, origin: str, calc, limits: 
               "status": "ERROR_PRESERVED" if error else "ML_CONVERGED" if converged else "STEP_LIMIT_NOT_CONVERGED",
               "optimizer_steps": int(optimizer.nsteps), "converged": converged, "error": error,
               "elapsed_seconds": time.monotonic() - started, "max_steps": maximum,
+              "ML_optimizer_fmax_target_eV_A": target_fmax,
               "scientific_acceptance": False}
     if error is None:
         result["ML_movable_fmax_eV_A"] = float(np.linalg.norm(atoms.get_forces()[18:], axis=1).max())

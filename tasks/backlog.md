@@ -24,9 +24,19 @@ Tasks are ordered by priority and should be handled one per Codex thread.
   no-model preflight-passed. MZ73 Slurm services failed; no real submission or
   model execution occurred. Restore scheduler availability, then recheck hashes,
   duplicates and resources before submitting the same frozen package.
-- Independently validate the adsorption fine-tuning candidate and quantify
-  matched VASP acceleration before checkpoint promotion; preparation of06–10
-  does not authorize heldout prediction, new training, or promotion.
+- Frozencontrol46-frame force validation and3-system same-seed/minimum geometry
+  diagnostics completed after separate authorization on2026-10-20.Mixed geometry
+  gains do not establish VASP acceleration or authorize checkpoint promotion.
+  See `docs/reviews/fe110_adsorption_control_geometry3_20261020.md`.
+  Matched VASP optimization steps/time remain unmeasured and unsubmitted.
+
+## Deferred during adsorption geometry comparison (2026-10-20)
+
+- The independent11–15 structure-preparation task retains its original files,
+  review and pending authorization boundary in
+  `modules/state_handoff/events/task-fe110-c2-11-15-prepared-20261020.json`.
+  No structure or calculation is changed by selecting model validation as the
+  current task;resume that preparation/review separately.
 
 ## Infrastructure
 

@@ -297,3 +297,9 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `docs/reviews/fe110_adsorption_control_heldout46_20261020.md`: actual independent force results,tail/near-final behavior and no-speedup boundary.
 - `archive/fe110_adsorption_heldout46_20261020/`: authorized immutable-package preparation,paired role metrics,tests and result-state recording.
 - `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_control_heldout46_20261020_v1/`: private exact-label package,CUDA producer/return evidence,77-test record and verified force review.
+
+## Adsorption same-seed geometry comparison (2026-10-20)
+
+- `docs/reviews/fe110_adsorption_control_geometry3_20261020.md`:3-case paired geometry/near-minimum results,full structural table and retained warnings.
+- `archive/fe110_adsorption_geometry3_20261020/`: source-bound geometry-only package,corrected review,all-frame audit and tests;no VASP submission.
+- `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_control_geometry3_20261020_v1/`: one GPU execution,12short optimizations,389frames,original parser/report snapshots and corrected result evidence.

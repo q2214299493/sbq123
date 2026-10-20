@@ -3,17 +3,17 @@
 
 ## Objective
 
-Review the frozencontrol independent-validation proposal before any new GPU execution;no default-model replacement or speedup claim.
+Review completed paired geometry comparison and prepare a matched VASP steps/time benchmark for separate authorization;no default model promotion.
 
 ## Current Evidence Snapshot
 
-- User requested grouped-error review and independent-validation candidate selection.No new GPU inference/training/relaxation or VASP was authorized or run.
-- Read-only CPU checkpoint checks confirm baseline/control/treatment hashes and architecture.Candidates omit epoch/step but contain val_metrics.Nativebest bytes match each export.
-- Actual export roleMAE:control0.03978188027,treatment0.04030279919eV/A.Treatment improvesC0.97%,O18.43%,replay5.39%,but worsensH36.14%,nearFe9.30%,otherFe19.20%.Soft review warnings,not zero-tolerance rejection.
-- Freezecontrol SHA256cfcac123cd56b866a1ea36cc780a3aee634f3aeec979bda4ae8bee2cc831e523 using development only.Single seed/twoepochs is not a statistical-superiority claim.
-- Native checkpoint.pt is saved before validation;its best_val_metric lags epoch2.Do not substitute that stale value for actual exported val_metrics.
-- Proposalbf2e4a7c745ae6569f69c70a262c8854566d8b6a123592ca123cbfc6dbfe0c92 freezes baseline/control46exact heldout structures,09_C/10_A23each;oldobserved16 excluded.92force predictions proposed,zero executed.Whole-job/equivalence/source-label integrity verified.
-- Six directly related tests,compile and scoped Ruff pass.No scientific runtime changed;original proposal and generation source snapshot preserved.
+- One authorized GPU1 batch:3cases x2models x2origins=12short optimizations,26.54s,producer exit0;no training or VASP.
+- Exact raw seeds and converged DFT references06_C/09_C/10_A,Fe0-17fixed;seed80steps/MLfmax0.10,minimum20steps/MLfmax0.02.
+- Seed adsorptionRMSD baseline->control:06_C0.865754->0.435064,09_C0.310857->0.330731,10_A0.297582->0.188551A.Mixed,not blanket improvement.
+- Candidate minimum drift06_C~0A/0steps,09_C0.091542A/20steps/fmax0.046635 not converged,10_A0.000886A/2steps.
+- All12 final graphs preserved.389trajectory frames fixed atoms unchanged,max adjacent displacement0.20A;06_C both models transient C46-O47~1.85-1.87A then recover.
+- JSON list/tuple graph-flag bug corrected in v2local analysis;original report/source retained and no GPU rerun.82related tests pass.
+- Historical DFT started at older ML outputs,not exact current raw seeds;old131/101/114steps do not prove matched speedup.No default replacement.
 
 ## Lifecycle Status
 
@@ -21,11 +21,11 @@ Review the frozencontrol independent-validation proposal before any new GPU exec
 
 ## One Executable Step
 
-Present the frozen46-frame force-only baseline/control validation proposal for separate scope/budget approval;only then prepare an executable GPU request/backend binding.No heldout-driven model reselection.
+Prepare/review three baseline/control paired VASP relaxation inputs at the unchanged production branch;only submit with separate explicit authority.
 
 ## Submission Boundary
 
-PROPOSAL_ONLY_NOT_EXECUTABLE_NOT_AUTHORIZED:GPU evaluation,training,relaxation,VASP and production promotion remain unauthorized.
+GPU_GEOMETRY_COMPARISON_COMPLETE_ONLY:no new VASP,training,relaxation rerun or checkpoint promotion authorized.
 
 ## Authoritative Constraint
 
@@ -33,21 +33,21 @@ Execution backend roles and handoffs remain governed by `configs/execution_backe
 
 ## Done When
 
-- The frozen candidate/proposal and separate compute budget receive explicit user authorization.
-- An exact-hash executable validation package passes native/input/backend preflight before any model prediction.
-- Independent results retain per-job/role/failure-tail review and do not substitute for geometry or a matched VASP acceleration benchmark.
+- Geometry/source/trajectory warnings are retained in the review.
+- Matched VASP scope/resources/cost receive separate authorization before execution.
+- Compatible final states,ionic steps,SCF work and total cost are compared before an acceleration claim.
 
 ## Constraints
 
-- No test-driven candidate reselection or use of46heldout/16observed frames for fitting/epoch selection.
-- 46frames represent two correlated trajectories,not46independent environments;mother jobs were screened and baseline pretraining overlap is unknown.
-- C2H3 lacks training coverage;candidate energies remain untrained and TS-domain acceptance absent.
-- Preserve old packages,checkpoints and source evidence;no automatic retries or production replacement.
+- Freeze the candidate;no geometry-test-driven checkpoint/epoch reselection.
+- 06_C is in-domain training-source diagnostic;09_C/10_A are observed after force validation,not fresh blind selection.
+- Treat06_C transient elongation and09_C mixed results as warnings,not arbitrary hard rejection or blanket success.
+- Retain other11-15 structure-preparation files/event in backlog;no actions on that branch.
 
 ## Authoritative References
 
 - configs/execution_backends.yaml
-- docs/reviews/fe110_adsorption_candidate_selection_20261020.md
-- calculations/fe110_c2_adsorption_06_10_20261012/adsorption_candidate_review_20261020_v1/independent_validation_proposal.json
-- calculations/fe110_c2_adsorption_06_10_20261012/adsorption_candidate_review_20261020_v1/validation_receipt.json
+- docs/reviews/fe110_adsorption_control_geometry3_20261020.md
+- calculations/fe110_c2_adsorption_06_10_20261012/adsorption_control_geometry3_20261020_v1/geometry_comparison_review_v2.json
+- calculations/fe110_c2_adsorption_06_10_20261012/adsorption_control_geometry3_20261020_v1/validation_receipt.json
 <!-- state-handoff:end current_task -->

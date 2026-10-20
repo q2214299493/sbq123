@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-adsorption-control-geometry3-reviewed-20261020",
+  "occurred_at": "2026-10-20T02:48:46.072111+00:00",
+  "recorded_at": "2026-10-20T02:48:46.072111+00:00",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "adsorption_workflow"
+  },
+  "summary": "Authorized3-case baseline/control raw-seed/minimum geometry comparison completed.Mixed gains;06_C transient elongation retained.No VASP or promotion.",
+  "evidence": [
+    {
+      "locator": "docs/reviews/fe110_adsorption_control_geometry3_20261020.md",
+      "sha256": "f90b3e40d60c879624fd103148d18e41e37d518e51a057ba7048fea316925f37",
+      "authority": "repository_document",
+      "observed_at": "2026-10-20T02:48:46.072111+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_control_geometry3_20261020_v1/validation_receipt.json",
+      "sha256": "c530fc24a066b82731b11bfc79bfcbe6996ac33d0e6dd3ba4e0afac44e3d1f5d",
+      "authority": "repository_document",
+      "observed_at": "2026-10-20T02:48:46.072111+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_control_geometry3_20261020_v1/geometry_comparison_review_v2.json",
+      "sha256": "bf2940dc7fcd02962ec07e13f047b78a53e1a27790885b449e5280bee083a6c6",
+      "authority": "repository_document",
+      "observed_at": "2026-10-20T02:48:46.072111+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_control_geometry3_20261020_v1/trajectory_audit.json",
+      "sha256": "4f85de6f79fc4a6e7e78fb340f37aade0d495de6bc8c16c6baae0c863b888556",
+      "authority": "repository_document",
+      "observed_at": "2026-10-20T02:48:46.072111+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "supersedes": [
+    "reconciled-task-updated-task-task-current-9fcd2113d1d1cd99bfd5"
+  ],
+  "payload": {
+    "objective": "Review completed paired geometry comparison and prepare a matched VASP steps/time benchmark for separate authorization;no default model promotion.",
+    "phase": "verification",
+    "current_evidence": [
+      "One authorized GPU1 batch:3cases x2models x2origins=12short optimizations,26.54s,producer exit0;no training or VASP.",
+      "Exact raw seeds and converged DFT references06_C/09_C/10_A,Fe0-17fixed;seed80steps/MLfmax0.10,minimum20steps/MLfmax0.02.",
+      "Seed adsorptionRMSD baseline->control:06_C0.865754->0.435064,09_C0.310857->0.330731,10_A0.297582->0.188551A.Mixed,not blanket improvement.",
+      "Candidate minimum drift06_C~0A/0steps,09_C0.091542A/20steps/fmax0.046635 not converged,10_A0.000886A/2steps.",
+      "All12 final graphs preserved.389trajectory frames fixed atoms unchanged,max adjacent displacement0.20A;06_C both models transient C46-O47~1.85-1.87A then recover.",
+      "JSON list/tuple graph-flag bug corrected in v2local analysis;original report/source retained and no GPU rerun.82related tests pass.",
+      "Historical DFT started at older ML outputs,not exact current raw seeds;old131/101/114steps do not prove matched speedup.No default replacement."
+    ],
+    "one_executable_step": "Prepare/review three baseline/control paired VASP relaxation inputs at the unchanged production branch;only submit with separate explicit authority.",
+    "submission_boundary": "GPU_GEOMETRY_COMPARISON_COMPLETE_ONLY:no new VASP,training,relaxation rerun or checkpoint promotion authorized.",
+    "done_when": [
+      "Geometry/source/trajectory warnings are retained in the review.",
+      "Matched VASP scope/resources/cost receive separate authorization before execution.",
+      "Compatible final states,ionic steps,SCF work and total cost are compared before an acceleration claim."
+    ],
+    "constraints": [
+      "Freeze the candidate;no geometry-test-driven checkpoint/epoch reselection.",
+      "06_C is in-domain training-source diagnostic;09_C/10_A are observed after force validation,not fresh blind selection.",
+      "Treat06_C transient elongation and09_C mixed results as warnings,not arbitrary hard rejection or blanket success.",
+      "Retain other11-15 structure-preparation files/event in backlog;no actions on that branch."
+    ],
+    "authoritative_references": [
+      "configs/execution_backends.yaml",
+      "docs/reviews/fe110_adsorption_control_geometry3_20261020.md",
+      "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_control_geometry3_20261020_v1/geometry_comparison_review_v2.json",
+      "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_control_geometry3_20261020_v1/validation_receipt.json"
+    ]
+  }
+}

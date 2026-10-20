@@ -1535,3 +1535,15 @@ governance: docs/DOCUMENT_GOVERNANCE.md
   before claiming acceleration.No further compute is authorized by test success.
 - Evidence:`docs/reviews/fe110_adsorption_control_heldout46_20261020.md` and
   `adsorption_control_heldout46_20261020_v1/validation_receipt.json`.
+
+## 2026-10-20 — ADS-CONTROL-GEOMETRY3: retain mixed results before VASP benchmark
+
+- User authorized one small same-seed geometry comparison,not new VASP.
+  Three systems/two models/two origins completed;all final molecular graphs
+  retained,but06_C transient C-O elongation and09_C mixed improvements remain
+  warnings.No new training/checkpoint selection/default replacement.
+- Force-test improvement and closer geometry are not measured acceleration.
+  Prepare a matched baseline/control VASP-relaxation proposal only;separate
+  explicit submission authority is required before those costly jobs.
+- Evidence:`docs/reviews/fe110_adsorption_control_geometry3_20261020.md` and
+  `adsorption_control_geometry3_20261020_v1/validation_receipt.json`.
