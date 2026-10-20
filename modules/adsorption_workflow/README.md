@@ -242,8 +242,15 @@ or measured VASP acceleration.
 The authorized v2 completed both two-epoch CUDA arms with successful producer
 exits and same-process startup checks. Development roleMAE was0.0398eV/A
 (uniform control) versus0.0403eV/A (role/source-stage treatment);the combined
-treatment is not demonstrated superior. Native logs are rounded;independent
-validation and a matched VASP acceleration benchmark remain unperformed.
+treatment is not demonstrated superior. Native logs are rounded. The later
+independent force validation is recorded below;a matched VASP acceleration
+benchmark remains unperformed.
+
+The separately authorized frozencontrol46-frame force test is documented in
+`docs/reviews/fe110_adsorption_control_heldout46_20261020.md`. Both models used
+identical disjoint09_C/10_A structures on CUDA;adsorbate vectorRMSE decreased
+from0.200850 to0.062348eV/A. This is bounded force validation only;geometry
+retention,matched VASP speedup and production promotion remain unperformed.
 
 ### Authorized MatRIS adsorption trial
 

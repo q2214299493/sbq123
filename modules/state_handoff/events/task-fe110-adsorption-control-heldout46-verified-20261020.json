@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-adsorption-control-heldout46-verified-20261020",
+  "occurred_at": "2026-10-20T02:33:13.626908+00:00",
+  "recorded_at": "2026-10-20T02:33:13.626908+00:00",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "adsorption_workflow"
+  },
+  "summary": "Authorized frozen46 baseline/control exact-force validation completed on CUDA;all46 framewise adsorption RMSEs lower.No training,relaxation,VASP,promotion or measured speedup.",
+  "evidence": [
+    {
+      "locator": "docs/reviews/fe110_adsorption_control_heldout46_20261020.md",
+      "sha256": "09fa9d297b7d6fd23a2f3b1954f8eca6e55a1818d052fb595266380f8a64d004",
+      "authority": "repository_document",
+      "observed_at": "2026-10-20T02:33:13.626908+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_control_heldout46_20261020_v1/validation_receipt.json",
+      "sha256": "5cb474545b733ff546338a56fd139c1c9f20e40dc588944fe828b69748b7f059",
+      "authority": "repository_document",
+      "observed_at": "2026-10-20T02:33:13.626908+00:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_control_heldout46_20261020_v1/independent_force_review.json",
+      "sha256": "e81413850cdf5965419ab4956c326f068f4f5c911c6f29ac37b676668aeaad22",
+      "authority": "repository_document",
+      "observed_at": "2026-10-20T02:33:13.626908+00:00"
+    }
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  },
+  "supersedes": [
+    "task-fe110-adsorption-control-candidate-review-20261020"
+  ],
+  "payload": {
+    "objective": "Review the completed frozencontrol independent force test;prepare no further compute without separate scope authorization.",
+    "phase": "verification",
+    "current_evidence": [
+      "User request:验证.One force-only batch authorized:46exact structures,92predictions,600s,no retries.",
+      "MZ73 physicalGPU1 completed92predictions in10.83s;both model tensors on CUDA,producer exit0.Hash-bound returns verified.",
+      "Frozen46 from09_C/10_A23each;excluded from current training/development.Oldobserved16 quarantined;no test-driven model reselection.",
+      "Adsorbate vectorRMSE0.2008503->0.0623483eV/A;46/46frames lower.C0.273153->0.085540,O0.306065->0.077458,H0.047502->0.026850.",
+      "09_C adsorptionRMSE0.175747->0.047953;10_A0.223147->0.073994eV/A.Two correlated trajectories only,not broad domain certification.",
+      "Adsorbate maximum error0.431043->0.163611eV/A;candidate worst movable error0.227754.Nearest-final sampled DFT forces0.0213/0.0215,not converged endpoints.",
+      "77related tests passed.No geometric optimization,new VASP,energy ranking,production promotion or measured acceleration."
+    ],
+    "one_executable_step": "Present a small same-seed pre-relaxation/near-minimum drift comparison for separate authorization before any new GPU or VASP execution.",
+    "submission_boundary": "AUTHORIZED46_FORCE_TEST_COMPLETE_ONLY:no further GPU training/relaxation,VASP submission or default-model replacement authorized.",
+    "done_when": [
+      "Frozen force results,role/job/tail/near-final behavior and limitations are documented.",
+      "Any proposed next geometry or matched VASP benchmark receives separate scope/budget authorization.",
+      "Actual geometry retention and matched VASP steps/time are tested before claiming acceleration."
+    ],
+    "constraints": [
+      "Preserve frozen checkpoint,proposal and raw source bytes;no heldout-driven model reselection.",
+      "46frames are two correlated trajectories;mother-job screening and unknown base-pretraining overlap remain disclosed.",
+      "C2H3 extrapolation bounded to10_A;10_C high-force rearrangement and TS-domain remain unvalidated.",
+      "Current success is force prediction,not optimizer stability or VASP speedup;do not promote automatically."
+    ],
+    "authoritative_references": [
+      "configs/execution_backends.yaml",
+      "docs/reviews/fe110_adsorption_control_heldout46_20261020.md",
+      "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_control_heldout46_20261020_v1/validation_receipt.json",
+      "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_control_heldout46_20261020_v1/independent_force_review.json"
+    ]
+  }
+}

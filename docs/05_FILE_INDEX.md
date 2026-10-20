@@ -291,3 +291,9 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `docs/reviews/fe110_adsorption_candidate_selection_20261020.md`: per-role tradeoffs,control candidate freeze,correct export-metric provenance and pending46-frame validation.
 - `archive/fe110_adsorption_candidate_review_20261020/`: read-only CPU metadata review,local proposal preparation and scoped tests;no scientific executor.
 - `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_candidate_review_20261020_v1/`: exact checkpoint metrics,source-preserved local review,non-executable validation proposal and hash receipts.
+
+## Adsorption frozen-control heldout46 validation (2026-10-20)
+
+- `docs/reviews/fe110_adsorption_control_heldout46_20261020.md`: actual independent force results,tail/near-final behavior and no-speedup boundary.
+- `archive/fe110_adsorption_heldout46_20261020/`: authorized immutable-package preparation,paired role metrics,tests and result-state recording.
+- `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_control_heldout46_20261020_v1/`: private exact-label package,CUDA producer/return evidence,77-test record and verified force review.

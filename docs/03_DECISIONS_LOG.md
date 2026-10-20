@@ -1522,3 +1522,16 @@ governance: docs/DOCUMENT_GOVERNANCE.md
   chemical-domain acceptance or a measured VASP speedup claim.
 - Evidence:`docs/reviews/fe110_adsorption_candidate_selection_20261020.md` and
   the hash-bound non-executable proposal in `adsorption_candidate_review_20261020_v1/`.
+
+## 2026-10-20 — ADS-CONTROL-HELDOUT46: force validation is not speedup
+
+- User authorized one frozen46-frame baseline/control force-only batch.
+  Preserve the pre-test candidate;do not reselect on heldout or replace defaults.
+- Adsorbate vectorRMSE decreased0.200850->0.062348eV/A on two excluded jobs;
+  all46 frame-level adsorption RMSEs decreased. Tail and near-final checks remain
+  part of review;this is neither a broad-domain guarantee nor optimizer validation.
+- Next is a separately authorized same-seed/near-minimum geometry comparison,
+  not more blind training. A matched VASP steps/time benchmark is still required
+  before claiming acceleration.No further compute is authorized by test success.
+- Evidence:`docs/reviews/fe110_adsorption_control_heldout46_20261020.md` and
+  `adsorption_control_heldout46_20261020_v1/validation_receipt.json`.

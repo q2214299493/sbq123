@@ -21,6 +21,7 @@ from ase.optimize import LBFGS
 FORCE_ONLY_KINDS = {
     "adsorption_exact_trajectory_force_comparison",
     "adsorption_exact_static_force_comparison",
+    "adsorption_independent_force_validation",
 }
 
 if __package__:
@@ -63,13 +64,18 @@ def load_atoms(path: Path):
 
 
 def validate_force_only_scope(request: dict, exception: dict) -> None:
-    if request["limits"] or request["geometry_cases"] or request.get("sample_role") != "screened_untrained_diagnostic_not_independent_heldout":
-        raise ValueError("force-only comparison cannot optimize geometry or claim independent heldout")
+    independent = request.get("document_kind") == "adsorption_independent_force_validation"
+    role = "frozen_whole_job_heldout_not_used_for_current_fit_or_selection" if independent else "screened_untrained_diagnostic_not_independent_heldout"
+    if request["limits"] or request["geometry_cases"] or request.get("sample_role") != role:
+        raise ValueError("force-only comparison has invalid optimization scope or sample role")
     rows = request["samples"]
     if len(rows) != exception["sample_count"] or len({r["sample_id"] for r in rows}) != exception["sample_count"]:
         raise ValueError("diagnostic sample scope/count changed")
     if sorted({r["source_name"] for r in rows}) != exception["source_names"]:
         raise ValueError("diagnostic source scope changed")
+    if independent and (request["source_manifest_sha256"] != exception["frozen_proposal_sha256"]
+                        or len(rows)*len(request["models"]) != exception["prediction_count"]):
+        raise ValueError("frozen proposal or prediction budget changed")
 
 
 def validate_scope(request: dict, authorization: dict, request_sha: str, exception: dict) -> None:
@@ -102,10 +108,43 @@ def validate_scope(request: dict, authorization: dict, request_sha: str, excepti
         raise ValueError("user scope changed")
 
 
+def verify_independent_source(root: Path, request: dict, source: dict) -> None:
+    """Preserve the reviewed proposal; relocate paths without changing labels."""
+    if (source.get("document_kind") != "adsorption_independent_validation_proposal"
+            or source.get("selected_arm") != "control"
+            or not source.get("selection_frozen_before_heldout_prediction")
+            or request["models"] != source["models"]):
+        raise ValueError("independent candidate selection changed")
+    bound = request["frozen_training_manifest"]
+    if bound["sha256"] != source["training_manifest"]["sha256"] or digest(local_path(root, bound["path"])) != bound["sha256"]:
+        raise ValueError("independent training split changed")
+    manifest = json.loads(local_path(root, bound["path"]).read_bytes())
+    test = manifest["splits"]["heldout"]
+    other = manifest["splits"]["train"] + manifest["splits"]["development"]
+    for key in ("calculation_group", "structure_equivalence_sha256"):
+        if {r[key] for r in test} & {r[key] for r in other}:
+            raise ValueError("independent whole-job/equivalent-structure leakage")
+    if len(manifest["quarantined_observed_heldout"]) != 16 or {r["sample_id"] for r in test} != {r["sample_id"] for r in source["samples"]}:
+        raise ValueError("independent heldout membership changed")
+    originals = {r["sample_id"]: r for r in source["samples"]}
+    for row in request["samples"]:
+        original = originals[row["sample_id"]]
+        for key, value in original.items():
+            if key not in {"structure_path", "label_source"} and row.get(key) != value:
+                raise ValueError("independent frozen label changed: " + key)
+        label = row["label_source"]
+        if any(label[key] != original["label_source"][key] for key in ("sample_id", "sha256")):
+            raise ValueError("independent source-label binding changed")
+        if digest(local_path(root, label["path"])) != label["sha256"]:
+            raise ValueError("independent label-source bytes changed")
+
+
 def verify_labels(root: Path, request: dict) -> None:
     if digest(local_path(root, request["source_manifest_path"])) != request["source_manifest_sha256"]:
         raise ValueError("source training manifest changed")
     source = json.loads(local_path(root, request["source_manifest_path"]).read_bytes())
+    if request.get("document_kind") == "adsorption_independent_force_validation":
+        verify_independent_source(root, request, source)
     force_only = request.get("document_kind") in FORCE_ONLY_KINDS
     rows = request["samples"] if force_only else request["heldout"]
     originals = source["samples"] if force_only else source["splits"]["heldout"]
