@@ -285,3 +285,9 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `archive/fe110_adsorption_training_retry_20261020/`: exclusive v2 preparation/transport/deployment/collection,scope and regression tests.
 - `scripts/adsorption/direct_training_arm.py`: same-process consecutive-backward observer with actual optimizer update counts;no extra steps.
 - `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_direct_20261020_v2/`: unchanged physical data,new runtime bindings,180-test result,native preflights and producer evidence.
+
+## Adsorption candidate grouped review (2026-10-20)
+
+- `docs/reviews/fe110_adsorption_candidate_selection_20261020.md`: per-role tradeoffs,control candidate freeze,correct export-metric provenance and pending46-frame validation.
+- `archive/fe110_adsorption_candidate_review_20261020/`: read-only CPU metadata review,local proposal preparation and scoped tests;no scientific executor.
+- `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_candidate_review_20261020_v1/`: exact checkpoint metrics,source-preserved local review,non-executable validation proposal and hash receipts.

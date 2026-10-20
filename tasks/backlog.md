@@ -137,11 +137,13 @@ Tasks are ordered by priority and should be handled one per Codex thread.
   each2epochs/496iterations,exit0.NativeCUDA backwards1/2 prove two real optimizer
   updates and zero energy-head gradients;180tests pass. Development roleMAE is
   control0.0398 versus treatment0.0403eV/A,not independent validation or speedup.
-  Review grouped retention and prepare a frozen-candidate independent-validation
-  proposal without running it.No automatic retry or model promotion.
-  Review:`docs/reviews/fe110_adsorption_training_retry_20261020.md`.
-  Existing24frames are exactly recovered (23retained,one force/geometry duplicate);
-  none trained. Observed16heldout remain excluded from fitting/epoch selection.
+  Grouped review selects frozencontrol by the shared development metric;
+  treatment C/O gains do not offset H/Fe regressions. The46-frame baseline/control
+  validation proposal is prepared only,not executable or authorized.No automatic retry.
+  Review:`docs/reviews/fe110_adsorption_candidate_selection_20261020.md`.
+  Existing24frames are exactly recovered (23retained,one force/geometry duplicate)
+  in the pool now used for training;replacement sampling does not guarantee every
+  frame was drawn. Observed16heldout remain excluded from fitting/epoch selection.
   Three actualML failure labels are train candidates,not independenttest.
   Current training emphasizesC2HO/C2H2O;C2H3has test-only coverage until eligible
   10B/10Cresults are reviewed in a later version. No newVASP,heldout model evaluation,

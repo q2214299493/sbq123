@@ -1507,3 +1507,18 @@ governance: docs/DOCUMENT_GOVERNANCE.md
   the connection was removed. Replacement NEB9808511 requests 108 ranks and
   `span[ptile=16]`; its submission checkpoint is PEND. Historical calculation
   evidence and unrelated jobs are preserved.
+
+## 2026-10-20 — ADS-CONTROL-CANDIDATE: freeze for independent validation only
+
+- User requested grouped-error review and selection of an independent-validation
+  candidate. Freeze the two-epoch uniform-control export
+  `cfcac123cd56b866a1ea36cc780a3aee634f3aeec979bda4ae8bee2cc831e523`;
+  retain the role/source-stage treatment without promoting either model.
+- Shared development role-vectorMAE is0.03978188027 versus0.04030279919eV/A.
+  Treatment improvesC/O/replay but regressesH/Fe. Use actual export `val_metrics`,
+  not the pre-validation native-resume checkpoint's stale `best_val_metric`.
+- Prepare originalAQCat25 versus frozencontrol on the disjoint09_C/10_A46frames;
+  old observed16 remain quarantined. This is not execution authority,independent
+  chemical-domain acceptance or a measured VASP speedup claim.
+- Evidence:`docs/reviews/fe110_adsorption_candidate_selection_20261020.md` and
+  the hash-bound non-executable proposal in `adsorption_candidate_review_20261020_v1/`.
