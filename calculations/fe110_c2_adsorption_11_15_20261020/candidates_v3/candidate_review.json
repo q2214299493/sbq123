@@ -1,0 +1,3889 @@
+{
+  "version": 1,
+  "status": "PREPARED_FOR_HUMAN_REVIEW_ONLY",
+  "submitted": false,
+  "scientific_acceptance": false,
+  "gpu_ready": false,
+  "stable_motif_claim": false,
+  "surface_branch": "true_fe110_5layer_5x5x1",
+  "source_network": "C:\\Users\\86177\\Desktop\\app\\CARE_Fe110_FT_C1_C6\\evaluated_networks\\ft_C2O1_Fe110_eval.pkl.json.gz",
+  "source_network_sha256": "c4de04dd8c4ba99ea16977ffa0fe44752baa13d85f768535a7e0bd0d6a8f1632",
+  "source_slab": "calculations\\true_fe110_clean_20260629\\results\\job_9557161\\CONTCAR",
+  "source_slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+  "request_sha256": "edb03f3be38a18d556fb41ff14a544ae6862ae8b60833f96e55dbaa9d132b3f9",
+  "builder_source_files": [
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\scripts\\adsorption\\build_fe110_adsorption.py",
+      "sha256": "10097eb4b4d25429e8ab034c7b0b603d52ba83f9fd6782e8c24c2d53c27e4179"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\scripts\\adsorption\\build_fe110_care_batch.py",
+      "sha256": "4a163cf4ffd4e21732f1a09d787c224b24a8938a4917de41dd706aeb28191b97"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\scripts\\adsorption\\build_fe110_care_isomers.py",
+      "sha256": "d895969fa4882d8b7c1eb9c2e6fdbbb62eb3c2ff7a390070284ed1194e642f16"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\scripts\\workflow_geometry.py",
+      "sha256": "0eacfedbfca975fa990b4f4056a7a0daf3a99bfd876e182cbf116ff0b7f5f6f6"
+    }
+  ],
+  "deduplication": {
+    "scope": "initial_seeds_only",
+    "slab_operation_count": 36,
+    "height_shift_removed": true,
+    "RMSD_tolerance_A": 0.2,
+    "rules_sha256": "45bab93237e78f37287f36ec1626b0d38b38fe0c17f913a9062fdc7d65bcceed",
+    "pairwise": [
+      {
+        "species_id": "11",
+        "pair": [
+          "A",
+          "B"
+        ],
+        "RMSD_A": 1.1028203982366958
+      },
+      {
+        "species_id": "11",
+        "pair": [
+          "A",
+          "C"
+        ],
+        "RMSD_A": 1.3326862409333287
+      },
+      {
+        "species_id": "11",
+        "pair": [
+          "B",
+          "C"
+        ],
+        "RMSD_A": 0.8346206932473329
+      },
+      {
+        "species_id": "12",
+        "pair": [
+          "A",
+          "B"
+        ],
+        "RMSD_A": 1.3542427444634486
+      },
+      {
+        "species_id": "12",
+        "pair": [
+          "A",
+          "C"
+        ],
+        "RMSD_A": 1.7828436976657072
+      },
+      {
+        "species_id": "12",
+        "pair": [
+          "B",
+          "C"
+        ],
+        "RMSD_A": 1.8146532655780125
+      },
+      {
+        "species_id": "13",
+        "pair": [
+          "A",
+          "B"
+        ],
+        "RMSD_A": 0.4397826902312397
+      },
+      {
+        "species_id": "13",
+        "pair": [
+          "A",
+          "C"
+        ],
+        "RMSD_A": 1.8551693009785748
+      },
+      {
+        "species_id": "13",
+        "pair": [
+          "B",
+          "C"
+        ],
+        "RMSD_A": 1.9262004771698984
+      },
+      {
+        "species_id": "14",
+        "pair": [
+          "A",
+          "B"
+        ],
+        "RMSD_A": 1.0855902558295576
+      },
+      {
+        "species_id": "14",
+        "pair": [
+          "A",
+          "C"
+        ],
+        "RMSD_A": 0.8075742225305487
+      },
+      {
+        "species_id": "14",
+        "pair": [
+          "B",
+          "C"
+        ],
+        "RMSD_A": 1.353894684645529
+      },
+      {
+        "species_id": "15",
+        "pair": [
+          "A",
+          "B"
+        ],
+        "RMSD_A": 1.337962719722908
+      },
+      {
+        "species_id": "15",
+        "pair": [
+          "A",
+          "C"
+        ],
+        "RMSD_A": 1.0572821004191406
+      },
+      {
+        "species_id": "15",
+        "pair": [
+          "B",
+          "C"
+        ],
+        "RMSD_A": 1.022546002203658
+      }
+    ]
+  },
+  "exclusions": [
+    {
+      "species_id": "11",
+      "excluded_originals": [
+        {
+          "config": "1",
+          "reason": "not_selected_by_explicit_plan"
+        },
+        {
+          "config": "2",
+          "reason": "not_selected_by_explicit_plan"
+        }
+      ]
+    },
+    {
+      "species_id": "12",
+      "excluded_originals": [
+        {
+          "config": "0",
+          "reason": "not_selected_by_explicit_plan"
+        },
+        {
+          "config": "1",
+          "reason": "not_selected_by_explicit_plan"
+        }
+      ]
+    },
+    {
+      "species_id": "13",
+      "excluded_originals": [
+        {
+          "config": "2",
+          "reason": "not_selected_by_explicit_plan"
+        }
+      ]
+    },
+    {
+      "species_id": "14",
+      "excluded_originals": [
+        {
+          "config": "1",
+          "reason": "not_selected_by_explicit_plan"
+        },
+        {
+          "config": "2",
+          "reason": "not_selected_by_explicit_plan"
+        }
+      ]
+    },
+    {
+      "species_id": "15",
+      "excluded_originals": [
+        {
+          "config": "0",
+          "reason": "geometry_review_failed"
+        },
+        {
+          "config": "1",
+          "reason": "geometry_review_failed"
+        }
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "origin": "USER_AUTHORIZED_RIGID_REANCHOR_HYPOTHESIS",
+      "parent": "0",
+      "source_config": null,
+      "recipe": {
+        "site": "hollow",
+        "anchor_local_0based": 1,
+        "axis_to_local_0based": 0,
+        "azimuth_deg": 0.0,
+        "tilt_deg": 90.0,
+        "binding_distance_A": 2.25,
+        "anchor_H_count": 0
+      },
+      "CARE_mu_source_order_only_eV": null,
+      "geometry_review": {
+        "verdict": "pass",
+        "site_label": "η¹(C)/h",
+        "atom_site_details": [
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 3.6108909256491453,
+            "site": "hollow",
+            "lateral_offset_angstrom": 0.0
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.250000000000002,
+            "site": "hollow",
+            "lateral_offset_angstrom": 0.0
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 2.250000000000002,
+        "nearest_h_fe_angstrom": 3.810763971928244,
+        "minimum_adsorbate_height_angstrom": 1.8127872900872912,
+        "maximum_bond_length_change_angstrom": 1.1102230246251565e-15,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": true,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [],
+        "needs_early_relaxation_review": false
+      },
+      "requested_label": "C_hollow_upright",
+      "selection_basis": "Ethylidyne C-end multicoordination hypothesis; literature supports species, not these exact coordinates or a local minimum.",
+      "minimum_seed_RMSD_A": null,
+      "name": "11_A",
+      "species_id": "11",
+      "formula": "C2H3",
+      "connectivity": "[C]-CH3",
+      "care_code": "ADLIKHXOGUAKPM",
+      "structure": "11_A/POSCAR",
+      "structure_sha256": "daddb6f7e9b33d116a3d461affca3b6a682001bb6a8eb2cb185e6ee9b0604562",
+      "status": "GEOMETRY_PASS_REVIEW_REQUIRED_NOT_RELAXED_NOT_GPU_READY",
+      "bond_distances": [
+        {
+          "atoms_0based": [
+            45,
+            46
+          ],
+          "pair": "C-C",
+          "distance_A": 1.5431058358997094
+        },
+        {
+          "atoms_0based": [
+            45,
+            47
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0932020224807215
+        },
+        {
+          "atoms_0based": [
+            45,
+            48
+          ],
+          "pair": "C-H",
+          "distance_A": 1.093195949011444
+        },
+        {
+          "atoms_0based": [
+            45,
+            49
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0931703019280528
+        }
+      ],
+      "nearest_Fe": [
+        {
+          "atom": "C45",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 3.6108909256491453
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 3.7019712067088952
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 3.7019791216088818
+            }
+          ]
+        },
+        {
+          "atom": "C46",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.250000000000002
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 2.3934127344777796
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 2.393434913725841
+            }
+          ]
+        },
+        {
+          "atom": "H47",
+          "neighbors": [
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 3.828587211158101
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 4.091934191882721
+            },
+            {
+              "Fe_index_0based": 39,
+              "distance_A": 4.3541650554406734
+            }
+          ]
+        },
+        {
+          "atom": "H48",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 3.810763971928244
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 4.138817448896335
+            },
+            {
+              "Fe_index_0based": 40,
+              "distance_A": 4.4111790212942354
+            }
+          ]
+        },
+        {
+          "atom": "H49",
+          "neighbors": [
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 3.8650093482823973
+            },
+            {
+              "Fe_index_0based": 37,
+              "distance_A": 4.166018389752104
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 4.202339032669801
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "origin": "USER_AUTHORIZED_RIGID_REANCHOR_HYPOTHESIS",
+      "parent": "0",
+      "source_config": null,
+      "recipe": {
+        "site": "long_bridge",
+        "anchor_local_0based": 1,
+        "axis_to_local_0based": 0,
+        "azimuth_deg": 0.0,
+        "tilt_deg": 60.0,
+        "binding_distance_A": 2.25,
+        "anchor_H_count": 0
+      },
+      "CARE_mu_source_order_only_eV": null,
+      "geometry_review": {
+        "verdict": "pass",
+        "site_label": "η¹(C)/lb",
+        "atom_site_details": [
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 3.15302149573509,
+            "site": "top",
+            "lateral_offset_angstrom": 0.641914040835935
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.2499999999999982,
+            "site": "long_bridge",
+            "lateral_offset_angstrom": 4.707814750370964e-16
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 2.2499999999999982,
+        "nearest_h_fe_angstrom": 3.26974198598306,
+        "minimum_adsorbate_height_angstrom": 1.750506586352314,
+        "maximum_bond_length_change_angstrom": 1.7763568394002505e-15,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": true,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [],
+        "needs_early_relaxation_review": false
+      },
+      "requested_label": "C_long_bridge_tilted",
+      "selection_basis": "Lower-coordination alternative using the local Fe(110) C/CHx experience; constructed hypothesis.",
+      "minimum_seed_RMSD_A": 1.1028203982366958,
+      "name": "11_B",
+      "species_id": "11",
+      "formula": "C2H3",
+      "connectivity": "[C]-CH3",
+      "care_code": "ADLIKHXOGUAKPM",
+      "structure": "11_B/POSCAR",
+      "structure_sha256": "e996b6eb9f99f83d66300c4dc4e4babf21062a5fc5dfee64781ed9acb6b2a9ce",
+      "status": "GEOMETRY_PASS_REVIEW_REQUIRED_NOT_RELAXED_NOT_GPU_READY",
+      "bond_distances": [
+        {
+          "atoms_0based": [
+            45,
+            46
+          ],
+          "pair": "C-C",
+          "distance_A": 1.5431058358997094
+        },
+        {
+          "atoms_0based": [
+            45,
+            47
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0932020224807208
+        },
+        {
+          "atoms_0based": [
+            45,
+            48
+          ],
+          "pair": "C-H",
+          "distance_A": 1.093195949011444
+        },
+        {
+          "atoms_0based": [
+            45,
+            49
+          ],
+          "pair": "C-H",
+          "distance_A": 1.093170301928053
+        }
+      ],
+      "nearest_Fe": [
+        {
+          "atom": "C45",
+          "neighbors": [
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 3.15302149573509
+            },
+            {
+              "Fe_index_0based": 37,
+              "distance_A": 3.757737862389305
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 3.757747139372974
+            }
+          ]
+        },
+        {
+          "atom": "C46",
+          "neighbors": [
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 2.2499999999999982
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 2.2500119918833166
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.657185151246677
+            }
+          ]
+        },
+        {
+          "atom": "H47",
+          "neighbors": [
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 4.153266269077318
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 4.207721907501964
+            },
+            {
+              "Fe_index_0based": 37,
+              "distance_A": 4.397615208679883
+            }
+          ]
+        },
+        {
+          "atom": "H48",
+          "neighbors": [
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 3.26974198598306
+            },
+            {
+              "Fe_index_0based": 38,
+              "distance_A": 3.6275953693397587
+            },
+            {
+              "Fe_index_0based": 37,
+              "distance_A": 3.6430196171943736
+            }
+          ]
+        },
+        {
+          "atom": "H49",
+          "neighbors": [
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 3.3074002572403307
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 3.6385236172516198
+            },
+            {
+              "Fe_index_0based": 39,
+              "distance_A": 3.6627269208838027
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source_config": "0",
+      "origin": "LOCAL_CARE_POSE_TRANSFER",
+      "CARE_mu_source_order_only_eV": -29.760150909423828,
+      "CARE_grouping_permutation": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52
+      ],
+      "geometry_review": {
+        "verdict": "pass",
+        "site_label": "η¹(C)/t",
+        "atom_site_details": [
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 3.7431055960195914,
+            "site": "top",
+            "lateral_offset_angstrom": 5.840241397571129e-08
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.1999997601198826,
+            "site": "top",
+            "lateral_offset_angstrom": 5.840241397571129e-08
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 2.1999997601198826,
+        "nearest_h_fe_angstrom": 4.255233134424039,
+        "minimum_adsorbate_height_angstrom": 2.1999309498718684,
+        "maximum_bond_length_change_angstrom": 0.0,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": true,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [],
+        "needs_early_relaxation_review": false
+      },
+      "requested_label": "CARE_C_top",
+      "selection_basis": "Intact existing local CARE pose; its other two source poses are near duplicates, and its prediction is not a DFT energy.",
+      "minimum_seed_RMSD_A": 0.8346206932473329,
+      "name": "11_C",
+      "species_id": "11",
+      "formula": "C2H3",
+      "connectivity": "[C]-CH3",
+      "care_code": "ADLIKHXOGUAKPM",
+      "structure": "11_C/POSCAR",
+      "structure_sha256": "67eaf572196f405211cb3335d5c1c0f2379dad0c393e076346d1fd25c38b945d",
+      "status": "GEOMETRY_PASS_REVIEW_REQUIRED_NOT_RELAXED_NOT_GPU_READY",
+      "bond_distances": [
+        {
+          "atoms_0based": [
+            45,
+            46
+          ],
+          "pair": "C-C",
+          "distance_A": 1.5431058358997094
+        },
+        {
+          "atoms_0based": [
+            45,
+            47
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0932020224807226
+        },
+        {
+          "atoms_0based": [
+            45,
+            48
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0931959490114436
+        },
+        {
+          "atoms_0based": [
+            45,
+            49
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0931703019280534
+        }
+      ],
+      "nearest_Fe": [
+        {
+          "atom": "C45",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 3.7431055960195914
+            },
+            {
+              "Fe_index_0based": 36,
+              "distance_A": 4.472599231160005
+            },
+            {
+              "Fe_index_0based": 38,
+              "distance_A": 4.472668813106614
+            }
+          ]
+        },
+        {
+          "atom": "C46",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.1999997601198826
+            },
+            {
+              "Fe_index_0based": 36,
+              "distance_A": 3.291409199943363
+            },
+            {
+              "Fe_index_0based": 38,
+              "distance_A": 3.2914821250930992
+            }
+          ]
+        },
+        {
+          "atom": "H47",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 4.2552412603048175
+            },
+            {
+              "Fe_index_0based": 39,
+              "distance_A": 4.508009041197553
+            },
+            {
+              "Fe_index_0based": 36,
+              "distance_A": 4.590860128251099
+            }
+          ]
+        },
+        {
+          "atom": "H48",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 4.25523970250257
+            },
+            {
+              "Fe_index_0based": 38,
+              "distance_A": 4.370862372906233
+            },
+            {
+              "Fe_index_0based": 36,
+              "distance_A": 4.707338948176193
+            }
+          ]
+        },
+        {
+          "atom": "H49",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 4.255233134424039
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 4.374408035543857
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 4.6750924810312
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source_config": "2",
+      "origin": "LOCAL_CARE_POSE_TRANSFER",
+      "CARE_mu_source_order_only_eV": -36.67890930175781,
+      "CARE_grouping_permutation": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53
+      ],
+      "geometry_review": {
+        "verdict": "pass",
+        "site_label": "η²(C,O)/t-t",
+        "atom_site_details": [
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 3.2693562310531474,
+            "site": "long_bridge",
+            "lateral_offset_angstrom": 0.1857443974569827
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.621489944846813,
+            "site": "top",
+            "lateral_offset_angstrom": 0.6614082854405626
+          },
+          {
+            "atom": "O1",
+            "nearest_fe_angstrom": 2.166736332794161,
+            "site": "top",
+            "lateral_offset_angstrom": 0.6614079370906913
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 2.166736332794161,
+        "nearest_h_fe_angstrom": 2.493587274699863,
+        "minimum_adsorbate_height_angstrom": 2.063250330506447,
+        "maximum_bond_length_change_angstrom": 0.0,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": true,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [],
+        "needs_early_relaxation_review": false
+      },
+      "requested_label": "CARE_eta2_C_O",
+      "selection_basis": "Primary Fe(110) research supports acetyl as an intermediate; geometry is an intact local CARE C/O-bound seed, not a published minimum reconstruction.",
+      "minimum_seed_RMSD_A": null,
+      "name": "12_A",
+      "species_id": "12",
+      "formula": "C2H3O",
+      "connectivity": "CH3-[C]-[O]",
+      "care_code": "TUCNEACPLKLKNU",
+      "structure": "12_A/POSCAR",
+      "structure_sha256": "ad3a61abf18a8f73e92bdfb4123f4abdeda4ad28f22b8be5dbbb87c0c9d5479c",
+      "status": "GEOMETRY_PASS_REVIEW_REQUIRED_NOT_RELAXED_NOT_GPU_READY",
+      "bond_distances": [
+        {
+          "atoms_0based": [
+            45,
+            46
+          ],
+          "pair": "C-C",
+          "distance_A": 1.4610396237692247
+        },
+        {
+          "atoms_0based": [
+            45,
+            48
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0936397786032195
+        },
+        {
+          "atoms_0based": [
+            45,
+            49
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0938179615237207
+        },
+        {
+          "atoms_0based": [
+            45,
+            50
+          ],
+          "pair": "C-H",
+          "distance_A": 1.093369381050714
+        },
+        {
+          "atoms_0based": [
+            46,
+            47
+          ],
+          "pair": "C-O",
+          "distance_A": 1.4049604466494616
+        }
+      ],
+      "nearest_Fe": [
+        {
+          "atom": "C45",
+          "neighbors": [
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 3.2693562310531474
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 3.4242412714589006
+            },
+            {
+              "Fe_index_0based": 37,
+              "distance_A": 3.6174909436700915
+            }
+          ]
+        },
+        {
+          "atom": "C46",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.621489944846813
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 3.172476979152205
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 3.2250506267017407
+            }
+          ]
+        },
+        {
+          "atom": "O47",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.166736332794161
+            },
+            {
+              "Fe_index_0based": 36,
+              "distance_A": 2.8082788511164347
+            },
+            {
+              "Fe_index_0based": 38,
+              "distance_A": 2.867639752416629
+            }
+          ]
+        },
+        {
+          "atom": "H48",
+          "neighbors": [
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 2.493587274699863
+            },
+            {
+              "Fe_index_0based": 37,
+              "distance_A": 2.723175617051508
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 3.1566161803637387
+            }
+          ]
+        },
+        {
+          "atom": "H49",
+          "neighbors": [
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 3.9914838054630772
+            },
+            {
+              "Fe_index_0based": 37,
+              "distance_A": 4.461289957875828
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 4.513863968865114
+            }
+          ]
+        },
+        {
+          "atom": "H50",
+          "neighbors": [
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 3.3442997718072762
+            },
+            {
+              "Fe_index_0based": 37,
+              "distance_A": 3.6930296848583275
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 3.9629153215471
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "origin": "USER_AUTHORIZED_RIGID_REANCHOR_HYPOTHESIS",
+      "parent": "2",
+      "source_config": null,
+      "recipe": {
+        "site": "long_bridge",
+        "anchor_local_0based": 1,
+        "axis_to_local_0based": 2,
+        "azimuth_deg": 90.0,
+        "tilt_deg": -20.0,
+        "binding_distance_A": 2.6,
+        "anchor_H_count": 0
+      },
+      "CARE_mu_source_order_only_eV": null,
+      "geometry_review": {
+        "verdict": "pass",
+        "site_label": "η²(C,O)/lb-h",
+        "atom_site_details": [
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 2.754016781360877,
+            "site": "top",
+            "lateral_offset_angstrom": 0.6261012446548095
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.599999999999998,
+            "site": "long_bridge",
+            "lateral_offset_angstrom": 4.707814750370964e-16
+          },
+          {
+            "atom": "O1",
+            "nearest_fe_angstrom": 1.8320663714833114,
+            "site": "hollow",
+            "lateral_offset_angstrom": 0.6538880288766107
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 1.8320663714833114,
+        "nearest_h_fe_angstrom": 1.984284589326829,
+        "minimum_adsorbate_height_angstrom": 1.7016049218031828,
+        "maximum_bond_length_change_angstrom": 1.1102230246251565e-15,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": true,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [],
+        "needs_early_relaxation_review": false
+      },
+      "requested_label": "acyl_C_long_bridge",
+      "selection_basis": "C/O dual-center bridge alternative with the methyl group pointing outward; constructed hypothesis using the existing intact acyl geometry.",
+      "minimum_seed_RMSD_A": 1.3542427444634486,
+      "name": "12_B",
+      "species_id": "12",
+      "formula": "C2H3O",
+      "connectivity": "CH3-[C]-[O]",
+      "care_code": "TUCNEACPLKLKNU",
+      "structure": "12_B/POSCAR",
+      "structure_sha256": "c27d20082d19532a9c8c5e8b47fd09b280e1ab0790986004e3d12c513177668d",
+      "status": "GEOMETRY_PASS_REVIEW_REQUIRED_NOT_RELAXED_NOT_GPU_READY",
+      "bond_distances": [
+        {
+          "atoms_0based": [
+            45,
+            46
+          ],
+          "pair": "C-C",
+          "distance_A": 1.4610396237692247
+        },
+        {
+          "atoms_0based": [
+            45,
+            48
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0936397786032204
+        },
+        {
+          "atoms_0based": [
+            45,
+            49
+          ],
+          "pair": "C-H",
+          "distance_A": 1.09381796152372
+        },
+        {
+          "atoms_0based": [
+            45,
+            50
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0933693810507135
+        },
+        {
+          "atoms_0based": [
+            46,
+            47
+          ],
+          "pair": "C-O",
+          "distance_A": 1.4049604466494605
+        }
+      ],
+      "nearest_Fe": [
+        {
+          "atom": "C45",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.754016781360877
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 3.3279810134228196
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 3.3280286588631376
+            }
+          ]
+        },
+        {
+          "atom": "C46",
+          "neighbors": [
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 2.599999999999998
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 2.6000129362481528
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.9594102496462216
+            }
+          ]
+        },
+        {
+          "atom": "O47",
+          "neighbors": [
+            {
+              "Fe_index_0based": 37,
+              "distance_A": 1.8320663714833114
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 2.576139398077827
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 2.5762241714991174
+            }
+          ]
+        },
+        {
+          "atom": "H48",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 1.984284589326829
+            },
+            {
+              "Fe_index_0based": 36,
+              "distance_A": 2.917946418586533
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 2.995721538128696
+            }
+          ]
+        },
+        {
+          "atom": "H49",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 3.6844545275040446
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 3.962842370838445
+            },
+            {
+              "Fe_index_0based": 39,
+              "distance_A": 4.265024639436555
+            }
+          ]
+        },
+        {
+          "atom": "H50",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 3.0977196132428033
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 3.3959154519742105
+            },
+            {
+              "Fe_index_0based": 40,
+              "distance_A": 3.440699943400259
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "origin": "USER_AUTHORIZED_RIGID_REANCHOR_HYPOTHESIS",
+      "parent": "2",
+      "source_config": null,
+      "recipe": {
+        "site": "short_bridge",
+        "anchor_local_0based": 1,
+        "axis_to_local_0based": 2,
+        "azimuth_deg": 0.0,
+        "tilt_deg": -20.0,
+        "binding_distance_A": 2.5,
+        "anchor_H_count": 0
+      },
+      "CARE_mu_source_order_only_eV": null,
+      "geometry_review": {
+        "verdict": "pass",
+        "site_label": "η²(C,O)/sb-sb",
+        "atom_site_details": [
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 2.9364455299425134,
+            "site": "short_bridge",
+            "lateral_offset_angstrom": 0.040521303207463236
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.4999999999999973,
+            "site": "short_bridge",
+            "lateral_offset_angstrom": 0.0
+          },
+          {
+            "atom": "O1",
+            "nearest_fe_angstrom": 2.0646930938744488,
+            "site": "short_bridge",
+            "lateral_offset_angstrom": 0.09323601885103569
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 2.0646930938744488,
+        "nearest_h_fe_angstrom": 2.0220623502130977,
+        "minimum_adsorbate_height_angstrom": 1.6991856125651754,
+        "maximum_bond_length_change_angstrom": 1.7763568394002505e-15,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": true,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [],
+        "needs_early_relaxation_review": false
+      },
+      "requested_label": "acyl_C_short_bridge",
+      "selection_basis": "Inequivalent bridge and carbonyl orientation; constructed hypothesis, no imported literature energy.",
+      "minimum_seed_RMSD_A": 1.7828436976657076,
+      "name": "12_C",
+      "species_id": "12",
+      "formula": "C2H3O",
+      "connectivity": "CH3-[C]-[O]",
+      "care_code": "TUCNEACPLKLKNU",
+      "structure": "12_C/POSCAR",
+      "structure_sha256": "3a52432ad28f268602349a02bf5539172d20a3f7053be116ab8126c6beed9e9d",
+      "status": "GEOMETRY_PASS_REVIEW_REQUIRED_NOT_RELAXED_NOT_GPU_READY",
+      "bond_distances": [
+        {
+          "atoms_0based": [
+            45,
+            46
+          ],
+          "pair": "C-C",
+          "distance_A": 1.4610396237692247
+        },
+        {
+          "atoms_0based": [
+            45,
+            48
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0936397786032213
+        },
+        {
+          "atoms_0based": [
+            45,
+            49
+          ],
+          "pair": "C-H",
+          "distance_A": 1.09381796152372
+        },
+        {
+          "atoms_0based": [
+            45,
+            50
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0933693810507132
+        },
+        {
+          "atoms_0based": [
+            46,
+            47
+          ],
+          "pair": "C-O",
+          "distance_A": 1.4049604466494616
+        }
+      ],
+      "nearest_Fe": [
+        {
+          "atom": "C45",
+          "neighbors": [
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 2.9364455299425134
+            },
+            {
+              "Fe_index_0based": 40,
+              "distance_A": 2.9558516644644928
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 3.5360563675255796
+            }
+          ]
+        },
+        {
+          "atom": "C46",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.4999999999999973
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 2.500024142268118
+            },
+            {
+              "Fe_index_0based": 40,
+              "distance_A": 3.200871464445829
+            }
+          ]
+        },
+        {
+          "atom": "O47",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.0646930938744488
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 2.127531020344829
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 2.8275807020187935
+            }
+          ]
+        },
+        {
+          "atom": "H48",
+          "neighbors": [
+            {
+              "Fe_index_0based": 40,
+              "distance_A": 2.0220623502130977
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 2.754065231348018
+            },
+            {
+              "Fe_index_0based": 42,
+              "distance_A": 2.8186033030270603
+            }
+          ]
+        },
+        {
+          "atom": "H49",
+          "neighbors": [
+            {
+              "Fe_index_0based": 40,
+              "distance_A": 3.675601962343387
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 4.001666436088112
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 4.211581947518395
+            }
+          ]
+        },
+        {
+          "atom": "H50",
+          "neighbors": [
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 3.074613879214571
+            },
+            {
+              "Fe_index_0based": 42,
+              "distance_A": 3.436773586593998
+            },
+            {
+              "Fe_index_0based": 36,
+              "distance_A": 3.5441206218450216
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source_config": "0",
+      "origin": "LOCAL_CARE_POSE_TRANSFER",
+      "CARE_mu_source_order_only_eV": -36.09568786621094,
+      "CARE_grouping_permutation": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53
+      ],
+      "geometry_review": {
+        "verdict": "pass",
+        "site_label": "η³(O,C,C)/sb-t-t",
+        "atom_site_details": [
+          {
+            "atom": "O1",
+            "nearest_fe_angstrom": 2.3795260764703654,
+            "site": "short_bridge",
+            "lateral_offset_angstrom": 0.3868320184914415
+          },
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 2.2153486652452634,
+            "site": "top",
+            "lateral_offset_angstrom": 0.705528520429882
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.215348647742891,
+            "site": "top",
+            "lateral_offset_angstrom": 0.7055284900677955
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 2.215348647742891,
+        "nearest_h_fe_angstrom": 2.3960197892791197,
+        "minimum_adsorbate_height_angstrom": 1.9305685565646318,
+        "maximum_bond_length_change_angstrom": 0.0,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            5
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": true,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [],
+        "needs_early_relaxation_review": false
+      },
+      "requested_label": "CARE_C_C_OH_orientation_1",
+      "selection_basis": "No exact Fe(110) literature geometry recovered; use the existing intact local pose, retaining the hydroxyl H on O.",
+      "minimum_seed_RMSD_A": null,
+      "name": "13_A",
+      "species_id": "13",
+      "formula": "C2H3O",
+      "connectivity": "[CH2]-[C]-OH",
+      "care_code": "QNCSIOQOWBORKW",
+      "structure": "13_A/POSCAR",
+      "structure_sha256": "e910a260c9571692641b8f116de075ab260fa9070e0e7e210565165bbadafcb3",
+      "status": "GEOMETRY_PASS_REVIEW_REQUIRED_NOT_RELAXED_NOT_GPU_READY",
+      "bond_distances": [
+        {
+          "atoms_0based": [
+            45,
+            46
+          ],
+          "pair": "O-C",
+          "distance_A": 1.324813670995177
+        },
+        {
+          "atoms_0based": [
+            45,
+            48
+          ],
+          "pair": "O-H",
+          "distance_A": 0.9720063533756443
+        },
+        {
+          "atoms_0based": [
+            46,
+            47
+          ],
+          "pair": "C-C",
+          "distance_A": 1.4110570104976745
+        },
+        {
+          "atoms_0based": [
+            47,
+            49
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0820191807573114
+        },
+        {
+          "atoms_0based": [
+            47,
+            50
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0820221290466563
+        }
+      ],
+      "nearest_Fe": [
+        {
+          "atom": "O45",
+          "neighbors": [
+            {
+              "Fe_index_0based": 39,
+              "distance_A": 2.3795260764703654
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 2.5298696569204773
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.9164065537096073
+            }
+          ]
+        },
+        {
+          "atom": "C46",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.2153486652452634
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 2.8436411815854172
+            },
+            {
+              "Fe_index_0based": 39,
+              "distance_A": 3.0224029804011834
+            }
+          ]
+        },
+        {
+          "atom": "C47",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.215348647742891
+            },
+            {
+              "Fe_index_0based": 38,
+              "distance_A": 2.8436250606086033
+            },
+            {
+              "Fe_index_0based": 40,
+              "distance_A": 3.022437479029214
+            }
+          ]
+        },
+        {
+          "atom": "H48",
+          "neighbors": [
+            {
+              "Fe_index_0based": 39,
+              "distance_A": 3.192098894951979
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 3.2734926475318606
+            },
+            {
+              "Fe_index_0based": 42,
+              "distance_A": 3.7797060011210637
+            }
+          ]
+        },
+        {
+          "atom": "H49",
+          "neighbors": [
+            {
+              "Fe_index_0based": 38,
+              "distance_A": 2.4001953310267985
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.7167486984984364
+            },
+            {
+              "Fe_index_0based": 40,
+              "distance_A": 3.231720555412706
+            }
+          ]
+        },
+        {
+          "atom": "H50",
+          "neighbors": [
+            {
+              "Fe_index_0based": 40,
+              "distance_A": 2.3960197892791197
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 2.4729794634130555
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.4766469064891203
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source_config": "1",
+      "origin": "LOCAL_CARE_POSE_TRANSFER",
+      "CARE_mu_source_order_only_eV": -35.69445037841797,
+      "CARE_grouping_permutation": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53
+      ],
+      "geometry_review": {
+        "verdict": "pass",
+        "site_label": "η³(O,C,C)/lb-t-t",
+        "atom_site_details": [
+          {
+            "atom": "O1",
+            "nearest_fe_angstrom": 2.337510379243621,
+            "site": "long_bridge",
+            "lateral_offset_angstrom": 0.6236751124471697
+          },
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 2.3103603978340654,
+            "site": "top",
+            "lateral_offset_angstrom": 0.7055253289392538
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.310360401024533,
+            "site": "top",
+            "lateral_offset_angstrom": 0.7055253364202893
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 2.3103603978340654,
+        "nearest_h_fe_angstrom": 2.2850935243077495,
+        "minimum_adsorbate_height_angstrom": 1.9632016274520492,
+        "maximum_bond_length_change_angstrom": 0.0,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            5
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": true,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [],
+        "needs_early_relaxation_review": false
+      },
+      "requested_label": "CARE_C_C_OH_orientation_2",
+      "selection_basis": "Distinct local CARE OH/chain orientation, not a literature stable-motif claim.",
+      "minimum_seed_RMSD_A": 0.4397826902312397,
+      "name": "13_B",
+      "species_id": "13",
+      "formula": "C2H3O",
+      "connectivity": "[CH2]-[C]-OH",
+      "care_code": "QNCSIOQOWBORKW",
+      "structure": "13_B/POSCAR",
+      "structure_sha256": "9bb48f3142694fc3d3cf0ea96e7f167517b5850cefbade6b3f65b789cf645e54",
+      "status": "GEOMETRY_PASS_REVIEW_REQUIRED_NOT_RELAXED_NOT_GPU_READY",
+      "bond_distances": [
+        {
+          "atoms_0based": [
+            45,
+            46
+          ],
+          "pair": "O-C",
+          "distance_A": 1.3248077262286004
+        },
+        {
+          "atoms_0based": [
+            45,
+            48
+          ],
+          "pair": "O-H",
+          "distance_A": 0.9719916215272423
+        },
+        {
+          "atoms_0based": [
+            46,
+            47
+          ],
+          "pair": "C-C",
+          "distance_A": 1.4110506653595394
+        },
+        {
+          "atoms_0based": [
+            47,
+            49
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0820318848641657
+        },
+        {
+          "atoms_0based": [
+            47,
+            50
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0820445345870344
+        }
+      ],
+      "nearest_Fe": [
+        {
+          "atom": "O45",
+          "neighbors": [
+            {
+              "Fe_index_0based": 40,
+              "distance_A": 2.337510379243621
+            },
+            {
+              "Fe_index_0based": 38,
+              "distance_A": 2.9592982931805554
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.9890666834864743
+            }
+          ]
+        },
+        {
+          "atom": "C46",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.3103603978340654
+            },
+            {
+              "Fe_index_0based": 38,
+              "distance_A": 3.0307197924997964
+            },
+            {
+              "Fe_index_0based": 40,
+              "distance_A": 3.0571964382284804
+            }
+          ]
+        },
+        {
+          "atom": "C47",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.310360401024533
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 3.0307356470959324
+            },
+            {
+              "Fe_index_0based": 39,
+              "distance_A": 3.0571729331915742
+            }
+          ]
+        },
+        {
+          "atom": "H48",
+          "neighbors": [
+            {
+              "Fe_index_0based": 40,
+              "distance_A": 3.13082280146119
+            },
+            {
+              "Fe_index_0based": 38,
+              "distance_A": 3.623199441962534
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 3.893812687558858
+            }
+          ]
+        },
+        {
+          "atom": "H49",
+          "neighbors": [
+            {
+              "Fe_index_0based": 36,
+              "distance_A": 2.2850935243077495
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.4966930085146317
+            },
+            {
+              "Fe_index_0based": 39,
+              "distance_A": 2.6257123192670826
+            }
+          ]
+        },
+        {
+          "atom": "H50",
+          "neighbors": [
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 2.6113628398321564
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.85226038012973
+            },
+            {
+              "Fe_index_0based": 39,
+              "distance_A": 3.0595473045331083
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "origin": "USER_AUTHORIZED_RIGID_REANCHOR_HYPOTHESIS",
+      "parent": "0",
+      "source_config": null,
+      "recipe": {
+        "site": "short_bridge",
+        "anchor_local_0based": 1,
+        "axis_to_local_0based": 2,
+        "azimuth_deg": 90.0,
+        "tilt_deg": -10.0,
+        "binding_distance_A": 2.5,
+        "anchor_H_count": 0
+      },
+      "CARE_mu_source_order_only_eV": null,
+      "geometry_review": {
+        "verdict": "pass",
+        "site_label": "η³(O,C,C)/sb-sb-sb",
+        "atom_site_details": [
+          {
+            "atom": "O1",
+            "nearest_fe_angstrom": 2.5242160660541058,
+            "site": "short_bridge",
+            "lateral_offset_angstrom": 0.6932485031563786
+          },
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 2.4999999999999973,
+            "site": "short_bridge",
+            "lateral_offset_angstrom": 0.0
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.096422008428092,
+            "site": "short_bridge",
+            "lateral_offset_angstrom": 0.6094092406536051
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 2.096422008428092,
+        "nearest_h_fe_angstrom": 2.0159106673168137,
+        "minimum_adsorbate_height_angstrom": 1.6735586321661042,
+        "maximum_bond_length_change_angstrom": 1.3322676295501878e-15,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            5
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": true,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [],
+        "needs_early_relaxation_review": false
+      },
+      "requested_label": "radical_C_short_bridge",
+      "selection_basis": "Graph-defined unhydrogenated carbon anchoring with intact CH2 and OH groups; constructed hypothesis.",
+      "minimum_seed_RMSD_A": 1.855169300978574,
+      "name": "13_C",
+      "species_id": "13",
+      "formula": "C2H3O",
+      "connectivity": "[CH2]-[C]-OH",
+      "care_code": "QNCSIOQOWBORKW",
+      "structure": "13_C/POSCAR",
+      "structure_sha256": "eba4185fabfc352472ac6c30d57825a89a4935eefa47112079bf88083fa90b56",
+      "status": "GEOMETRY_PASS_REVIEW_REQUIRED_NOT_RELAXED_NOT_GPU_READY",
+      "bond_distances": [
+        {
+          "atoms_0based": [
+            45,
+            46
+          ],
+          "pair": "O-C",
+          "distance_A": 1.3248136709951783
+        },
+        {
+          "atoms_0based": [
+            45,
+            48
+          ],
+          "pair": "O-H",
+          "distance_A": 0.9720063533756448
+        },
+        {
+          "atoms_0based": [
+            46,
+            47
+          ],
+          "pair": "C-C",
+          "distance_A": 1.411057010497675
+        },
+        {
+          "atoms_0based": [
+            47,
+            49
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0820191807573107
+        },
+        {
+          "atoms_0based": [
+            47,
+            50
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0820221290466558
+        }
+      ],
+      "nearest_Fe": [
+        {
+          "atom": "O45",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.5242160660541058
+            },
+            {
+              "Fe_index_0based": 38,
+              "distance_A": 3.0233204484984637
+            },
+            {
+              "Fe_index_0based": 40,
+              "distance_A": 3.2189827614908517
+            }
+          ]
+        },
+        {
+          "atom": "C46",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.4999999999999973
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 2.500024142268118
+            },
+            {
+              "Fe_index_0based": 40,
+              "distance_A": 3.200871464445829
+            }
+          ]
+        },
+        {
+          "atom": "C47",
+          "neighbors": [
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 2.096422008428092
+            },
+            {
+              "Fe_index_0based": 37,
+              "distance_A": 2.613680221371631
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 2.896719524122254
+            }
+          ]
+        },
+        {
+          "atom": "H48",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 3.42936866636175
+            },
+            {
+              "Fe_index_0based": 38,
+              "distance_A": 3.7677415628816147
+            },
+            {
+              "Fe_index_0based": 40,
+              "distance_A": 4.069971521473452
+            }
+          ]
+        },
+        {
+          "atom": "H49",
+          "neighbors": [
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 2.1934096361806414
+            },
+            {
+              "Fe_index_0based": 36,
+              "distance_A": 2.5287861975010837
+            },
+            {
+              "Fe_index_0based": 37,
+              "distance_A": 2.7641681849931032
+            }
+          ]
+        },
+        {
+          "atom": "H50",
+          "neighbors": [
+            {
+              "Fe_index_0based": 37,
+              "distance_A": 2.0159106673168137
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 2.2457522645413497
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 2.50011177769064
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "origin": "USER_AUTHORIZED_RIGID_REANCHOR_HYPOTHESIS",
+      "parent": "0",
+      "source_config": null,
+      "recipe": {
+        "site": "long_bridge",
+        "anchor_local_0based": 1,
+        "axis_to_local_0based": 2,
+        "azimuth_deg": 0.0,
+        "tilt_deg": 60.0,
+        "binding_distance_A": 2.25,
+        "anchor_H_count": 0
+      },
+      "CARE_mu_source_order_only_eV": null,
+      "geometry_review": {
+        "verdict": "pass",
+        "site_label": "η¹(C)/lb",
+        "atom_site_details": [
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 3.5099518233278317,
+            "site": "hollow",
+            "lateral_offset_angstrom": 0.20020985288465984
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.2499999999999982,
+            "site": "long_bridge",
+            "lateral_offset_angstrom": 4.707814750370964e-16
+          },
+          {
+            "atom": "O1",
+            "nearest_fe_angstrom": 3.055690365667329,
+            "site": "long_bridge",
+            "lateral_offset_angstrom": 0.7054766364122005
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 2.2499999999999982,
+        "nearest_h_fe_angstrom": 2.672042449702465,
+        "minimum_adsorbate_height_angstrom": 1.750506586352314,
+        "maximum_bond_length_change_angstrom": 4.6629367034256575e-15,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": true,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [],
+        "needs_early_relaxation_review": false
+      },
+      "requested_label": "terminal_C_long_bridge",
+      "selection_basis": "No exact literature geometry recovered; terminal unhydrogenated carbon is the anchor and the C-O-C ether skeleton is retained.",
+      "minimum_seed_RMSD_A": null,
+      "name": "14_A",
+      "species_id": "14",
+      "formula": "C2H3O",
+      "connectivity": "[C]-O-CH3",
+      "care_code": "BCXVOZDDJVCTNO",
+      "structure": "14_A/POSCAR",
+      "structure_sha256": "3e7d212f16899985a9247328f51dfcb72ee7438fdf29323a38c48fd05fded207",
+      "status": "GEOMETRY_PASS_REVIEW_REQUIRED_NOT_RELAXED_NOT_GPU_READY",
+      "bond_distances": [
+        {
+          "atoms_0based": [
+            45,
+            47
+          ],
+          "pair": "C-O",
+          "distance_A": 1.4198824209368024
+        },
+        {
+          "atoms_0based": [
+            45,
+            48
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0945198147500477
+        },
+        {
+          "atoms_0based": [
+            45,
+            49
+          ],
+          "pair": "C-H",
+          "distance_A": 1.095664862869223
+        },
+        {
+          "atoms_0based": [
+            45,
+            50
+          ],
+          "pair": "C-H",
+          "distance_A": 1.095652788664781
+        },
+        {
+          "atoms_0based": [
+            46,
+            47
+          ],
+          "pair": "C-O",
+          "distance_A": 1.4109532728244012
+        }
+      ],
+      "nearest_Fe": [
+        {
+          "atom": "C45",
+          "neighbors": [
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 3.5099518233278317
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 3.547782826976422
+            },
+            {
+              "Fe_index_0based": 39,
+              "distance_A": 3.70088268471364
+            }
+          ]
+        },
+        {
+          "atom": "C46",
+          "neighbors": [
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 2.2499999999999982
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 2.2500119918833166
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.657185151246677
+            }
+          ]
+        },
+        {
+          "atom": "O47",
+          "neighbors": [
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 3.055690365667329
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 3.6504552636862186
+            },
+            {
+              "Fe_index_0based": 37,
+              "distance_A": 3.6509606453252
+            }
+          ]
+        },
+        {
+          "atom": "H48",
+          "neighbors": [
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 4.4029034703980505
+            },
+            {
+              "Fe_index_0based": 39,
+              "distance_A": 4.409055102230531
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 4.622271151800161
+            }
+          ]
+        },
+        {
+          "atom": "H49",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 3.3869515685352862
+            },
+            {
+              "Fe_index_0based": 36,
+              "distance_A": 4.02569213901811
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 4.051633202665975
+            }
+          ]
+        },
+        {
+          "atom": "H50",
+          "neighbors": [
+            {
+              "Fe_index_0based": 39,
+              "distance_A": 2.672042449702465
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 3.010083551067404
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 3.167623664746373
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "origin": "USER_AUTHORIZED_RIGID_REANCHOR_HYPOTHESIS",
+      "parent": "0",
+      "source_config": null,
+      "recipe": {
+        "site": "hollow",
+        "anchor_local_0based": 1,
+        "axis_to_local_0based": 2,
+        "azimuth_deg": 90.0,
+        "tilt_deg": 60.0,
+        "binding_distance_A": 2.25,
+        "anchor_H_count": 0
+      },
+      "CARE_mu_source_order_only_eV": null,
+      "geometry_review": {
+        "verdict": "pass",
+        "site_label": "η¹(C)/h",
+        "atom_site_details": [
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 3.3668052495050627,
+            "site": "top",
+            "lateral_offset_angstrom": 0.5637321560423473
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.250000000000002,
+            "site": "hollow",
+            "lateral_offset_angstrom": 0.0
+          },
+          {
+            "atom": "O1",
+            "nearest_fe_angstrom": 3.34805032977203,
+            "site": "long_bridge",
+            "lateral_offset_angstrom": 0.039133489606812615
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 2.250000000000002,
+        "nearest_h_fe_angstrom": 2.8499629069689782,
+        "minimum_adsorbate_height_angstrom": 1.8127872900872912,
+        "maximum_bond_length_change_angstrom": 4.6629367034256575e-15,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": true,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [],
+        "needs_early_relaxation_review": false
+      },
+      "requested_label": "terminal_C_hollow",
+      "selection_basis": "Multicoordinate terminal carbon alternative with methoxy branch pointing outward; constructed hypothesis.",
+      "minimum_seed_RMSD_A": 1.0855902558295574,
+      "name": "14_B",
+      "species_id": "14",
+      "formula": "C2H3O",
+      "connectivity": "[C]-O-CH3",
+      "care_code": "BCXVOZDDJVCTNO",
+      "structure": "14_B/POSCAR",
+      "structure_sha256": "9f5c96d2ed2b2b2a7f108caeb9ac7951ff8111d873fbef6dbeb081075a7d5f07",
+      "status": "GEOMETRY_PASS_REVIEW_REQUIRED_NOT_RELAXED_NOT_GPU_READY",
+      "bond_distances": [
+        {
+          "atoms_0based": [
+            45,
+            47
+          ],
+          "pair": "C-O",
+          "distance_A": 1.4198824209368013
+        },
+        {
+          "atoms_0based": [
+            45,
+            48
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0945198147500477
+        },
+        {
+          "atoms_0based": [
+            45,
+            49
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0956648628692227
+        },
+        {
+          "atoms_0based": [
+            45,
+            50
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0956527886647813
+        },
+        {
+          "atoms_0based": [
+            46,
+            47
+          ],
+          "pair": "C-O",
+          "distance_A": 1.4109532728244014
+        }
+      ],
+      "nearest_Fe": [
+        {
+          "atom": "C45",
+          "neighbors": [
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 3.3668052495050627
+            },
+            {
+              "Fe_index_0based": 37,
+              "distance_A": 3.8455242737684383
+            },
+            {
+              "Fe_index_0based": 38,
+              "distance_A": 3.9326324864074422
+            }
+          ]
+        },
+        {
+          "atom": "C46",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.250000000000002
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 2.3934127344777796
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 2.393434913725841
+            }
+          ]
+        },
+        {
+          "atom": "O47",
+          "neighbors": [
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 3.34805032977203
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 3.3480707694152825
+            },
+            {
+              "Fe_index_0based": 37,
+              "distance_A": 3.6126274117125248
+            }
+          ]
+        },
+        {
+          "atom": "H48",
+          "neighbors": [
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 4.411366283950236
+            },
+            {
+              "Fe_index_0based": 37,
+              "distance_A": 4.541834543604442
+            },
+            {
+              "Fe_index_0based": 38,
+              "distance_A": 4.645658006121833
+            }
+          ]
+        },
+        {
+          "atom": "H49",
+          "neighbors": [
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 3.488231412835224
+            },
+            {
+              "Fe_index_0based": 39,
+              "distance_A": 3.9242732945344083
+            },
+            {
+              "Fe_index_0based": 42,
+              "distance_A": 4.086617005907124
+            }
+          ]
+        },
+        {
+          "atom": "H50",
+          "neighbors": [
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 2.8499629069689782
+            },
+            {
+              "Fe_index_0based": 38,
+              "distance_A": 2.9163516963268035
+            },
+            {
+              "Fe_index_0based": 37,
+              "distance_A": 3.1080338692389016
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source_config": "0",
+      "origin": "LOCAL_CARE_POSE_TRANSFER",
+      "CARE_mu_source_order_only_eV": -36.01230239868164,
+      "CARE_grouping_permutation": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        50,
+        49,
+        51,
+        52,
+        53
+      ],
+      "geometry_review": {
+        "verdict": "pass",
+        "site_label": "η¹(C)/t",
+        "atom_site_details": [
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 4.318973395163199,
+            "site": "hollow",
+            "lateral_offset_angstrom": 0.3033998058335614
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.199999867302904,
+            "site": "top",
+            "lateral_offset_angstrom": 1.0963952537724163e-07
+          },
+          {
+            "atom": "O1",
+            "nearest_fe_angstrom": 3.610953140127304,
+            "site": "top",
+            "lateral_offset_angstrom": 1.0963952537724163e-07
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 2.199999867302904,
+        "nearest_h_fe_angstrom": 3.82061378871843,
+        "minimum_adsorbate_height_angstrom": 2.1999310570548882,
+        "maximum_bond_length_change_angstrom": 0.0,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": true,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [],
+        "needs_early_relaxation_review": false
+      },
+      "requested_label": "CARE_terminal_C_top",
+      "selection_basis": "Existing intact C-bound CARE pose for a lower-coordination comparison; not acetyl and not methoxy alone.",
+      "minimum_seed_RMSD_A": 0.8075742225305489,
+      "name": "14_C",
+      "species_id": "14",
+      "formula": "C2H3O",
+      "connectivity": "[C]-O-CH3",
+      "care_code": "BCXVOZDDJVCTNO",
+      "structure": "14_C/POSCAR",
+      "structure_sha256": "cdc8ce43a6e6885558bd9cbc300f9939bcf237fa494e450ceb2684f50d365e42",
+      "status": "GEOMETRY_PASS_REVIEW_REQUIRED_NOT_RELAXED_NOT_GPU_READY",
+      "bond_distances": [
+        {
+          "atoms_0based": [
+            45,
+            47
+          ],
+          "pair": "C-O",
+          "distance_A": 1.419882420936801
+        },
+        {
+          "atoms_0based": [
+            45,
+            48
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0945198147500523
+        },
+        {
+          "atoms_0based": [
+            45,
+            49
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0956648628692225
+        },
+        {
+          "atoms_0based": [
+            45,
+            50
+          ],
+          "pair": "C-H",
+          "distance_A": 1.095652788664779
+        },
+        {
+          "atoms_0based": [
+            46,
+            47
+          ],
+          "pair": "C-O",
+          "distance_A": 1.4109532728244005
+        }
+      ],
+      "nearest_Fe": [
+        {
+          "atom": "C45",
+          "neighbors": [
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 4.318973395163199
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 4.322222201429303
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 4.511603714022729
+            }
+          ]
+        },
+        {
+          "atom": "C46",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.199999867302904
+            },
+            {
+              "Fe_index_0based": 36,
+              "distance_A": 3.291409298574733
+            },
+            {
+              "Fe_index_0based": 38,
+              "distance_A": 3.291482237596781
+            }
+          ]
+        },
+        {
+          "atom": "O47",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 3.610953140127304
+            },
+            {
+              "Fe_index_0based": 36,
+              "distance_A": 4.362601658972123
+            },
+            {
+              "Fe_index_0based": 38,
+              "distance_A": 4.362671608388264
+            }
+          ]
+        },
+        {
+          "atom": "H48",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 5.361035126781638
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 5.379597728654082
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 5.529638670467446
+            }
+          ]
+        },
+        {
+          "atom": "H49",
+          "neighbors": [
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 3.91962316330926
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 4.233212623006668
+            },
+            {
+              "Fe_index_0based": 37,
+              "distance_A": 4.305265068841912
+            }
+          ]
+        },
+        {
+          "atom": "H50",
+          "neighbors": [
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 3.82061378871843
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 4.329440632434286
+            },
+            {
+              "Fe_index_0based": 40,
+              "distance_A": 4.403215674727755
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "origin": "USER_AUTHORIZED_RIGID_REANCHOR_HYPOTHESIS",
+      "parent": "2",
+      "source_config": null,
+      "recipe": {
+        "site": "hollow",
+        "anchor_local_0based": 0,
+        "axis_to_local_0based": 1,
+        "azimuth_deg": 45.0,
+        "tilt_deg": 0.0,
+        "binding_distance_A": 2.35,
+        "anchor_H_count": 2
+      },
+      "CARE_mu_source_order_only_eV": null,
+      "geometry_review": {
+        "verdict": "pass",
+        "site_label": "η²(C,C)/h-t",
+        "atom_site_details": [
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 2.3499999999999974,
+            "site": "hollow",
+            "lateral_offset_angstrom": 0.0
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.0068856726669653,
+            "site": "top",
+            "lateral_offset_angstrom": 0.5300717007244927
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 2.0068856726669653,
+        "nearest_h_fe_angstrom": 1.9737807152178455,
+        "minimum_adsorbate_height_angstrom": 1.8999941968895566,
+        "maximum_bond_length_change_angstrom": 8.881784197001252e-16,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": true,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [],
+        "needs_early_relaxation_review": false
+      },
+      "requested_label": "multi_Fe_C_C_hollow_guided",
+      "selection_basis": "Fe(110) EELS favors triangular multicenter ethylene adsorption. This is a qualitative geometry hypothesis, not the published trans-twisted structure or a verified minimum.",
+      "minimum_seed_RMSD_A": null,
+      "name": "15_A",
+      "species_id": "15",
+      "formula": "C2H4",
+      "connectivity": "[CH2]-[CH2]",
+      "care_code": "VGGSQFUCUMXWEO",
+      "structure": "15_A/POSCAR",
+      "structure_sha256": "db6a750c2357d99033acede38aea824f8fa76659e9c734f3634e1b877a202910",
+      "status": "GEOMETRY_PASS_REVIEW_REQUIRED_NOT_RELAXED_NOT_GPU_READY",
+      "bond_distances": [
+        {
+          "atoms_0based": [
+            45,
+            46
+          ],
+          "pair": "C-C",
+          "distance_A": 1.4279339628680134
+        },
+        {
+          "atoms_0based": [
+            45,
+            47
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0827518302743013
+        },
+        {
+          "atoms_0based": [
+            45,
+            48
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0827817384831835
+        },
+        {
+          "atoms_0based": [
+            46,
+            49
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0827817291622175
+        },
+        {
+          "atoms_0based": [
+            46,
+            50
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0827518613739193
+        }
+      ],
+      "nearest_Fe": [
+        {
+          "atom": "C45",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.3499999999999974
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 2.4876565470859084
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 2.487677125771015
+            }
+          ]
+        },
+        {
+          "atom": "C46",
+          "neighbors": [
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 2.0068856726669653
+            },
+            {
+              "Fe_index_0based": 37,
+              "distance_A": 2.739911428964166
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 3.1202754694944526
+            }
+          ]
+        },
+        {
+          "atom": "H47",
+          "neighbors": [
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 1.9737807152178455
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.7020000077366593
+            },
+            {
+              "Fe_index_0based": 40,
+              "distance_A": 3.062724544008263
+            }
+          ]
+        },
+        {
+          "atom": "H48",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.0113049073895577
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 2.846628685450383
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 3.1113467707289706
+            }
+          ]
+        },
+        {
+          "atom": "H49",
+          "neighbors": [
+            {
+              "Fe_index_0based": 37,
+              "distance_A": 2.1251855235332653
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 2.450707426950288
+            },
+            {
+              "Fe_index_0based": 38,
+              "distance_A": 2.894125471080881
+            }
+          ]
+        },
+        {
+          "atom": "H50",
+          "neighbors": [
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 2.073995437605157
+            },
+            {
+              "Fe_index_0based": 38,
+              "distance_A": 2.8675337793516564
+            },
+            {
+              "Fe_index_0based": 42,
+              "distance_A": 2.9434447474457945
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source_config": "2",
+      "origin": "LOCAL_CARE_POSE_TRANSFER",
+      "CARE_mu_source_order_only_eV": -33.19850158691406,
+      "CARE_grouping_permutation": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53
+      ],
+      "geometry_review": {
+        "verdict": "pass",
+        "site_label": "η²(C,C)/lb-lb",
+        "atom_site_details": [
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 2.4082665939852217,
+            "site": "long_bridge",
+            "lateral_offset_angstrom": 0.7012777706760529
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.4082665954880027,
+            "site": "long_bridge",
+            "lateral_offset_angstrom": 0.7012399795881795
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 2.4082665939852217,
+        "nearest_h_fe_angstrom": 2.484477386655414,
+        "minimum_adsorbate_height_angstrom": 2.264419872914546,
+        "maximum_bond_length_change_angstrom": 0.0,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": true,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [],
+        "needs_early_relaxation_review": false
+      },
+      "requested_label": "CARE_eta2_C_C_long_bridge",
+      "selection_basis": "Only original ethylene pose passing the hard geometry gate; two original poses with too-low atoms are excluded.",
+      "minimum_seed_RMSD_A": 1.3379627197229087,
+      "name": "15_B",
+      "species_id": "15",
+      "formula": "C2H4",
+      "connectivity": "[CH2]-[CH2]",
+      "care_code": "VGGSQFUCUMXWEO",
+      "structure": "15_B/POSCAR",
+      "structure_sha256": "1b0c4d73277c312e0fdcd056be28f5c445565f84754d966ed5a996056188a57b",
+      "status": "GEOMETRY_PASS_REVIEW_REQUIRED_NOT_RELAXED_NOT_GPU_READY",
+      "bond_distances": [
+        {
+          "atoms_0based": [
+            45,
+            46
+          ],
+          "pair": "C-C",
+          "distance_A": 1.4279339628680137
+        },
+        {
+          "atoms_0based": [
+            45,
+            47
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0827518302743016
+        },
+        {
+          "atoms_0based": [
+            45,
+            48
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0827817384831835
+        },
+        {
+          "atoms_0based": [
+            46,
+            49
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0827817291622168
+        },
+        {
+          "atoms_0based": [
+            46,
+            50
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0827518613739202
+        }
+      ],
+      "nearest_Fe": [
+        {
+          "atom": "C45",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.4082665939852217
+            },
+            {
+              "Fe_index_0based": 36,
+              "distance_A": 3.1042115115027977
+            },
+            {
+              "Fe_index_0based": 39,
+              "distance_A": 3.1240166156904103
+            }
+          ]
+        },
+        {
+          "atom": "C46",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.4082665954880027
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 3.104381372719412
+            },
+            {
+              "Fe_index_0based": 40,
+              "distance_A": 3.124037345129671
+            }
+          ]
+        },
+        {
+          "atom": "H47",
+          "neighbors": [
+            {
+              "Fe_index_0based": 36,
+              "distance_A": 2.484477386655414
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.7537001073640175
+            },
+            {
+              "Fe_index_0based": 39,
+              "distance_A": 2.956875560432924
+            }
+          ]
+        },
+        {
+          "atom": "H48",
+          "neighbors": [
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 2.5950850205962213
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.8124210817597133
+            },
+            {
+              "Fe_index_0based": 39,
+              "distance_A": 2.923327206958188
+            }
+          ]
+        },
+        {
+          "atom": "H49",
+          "neighbors": [
+            {
+              "Fe_index_0based": 38,
+              "distance_A": 2.531338274192449
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.753728363226439
+            },
+            {
+              "Fe_index_0based": 40,
+              "distance_A": 2.8670135482812777
+            }
+          ]
+        },
+        {
+          "atom": "H50",
+          "neighbors": [
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 2.5495085366533994
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.812394853849358
+            },
+            {
+              "Fe_index_0based": 40,
+              "distance_A": 3.011572559106527
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "origin": "USER_AUTHORIZED_RIGID_REANCHOR_HYPOTHESIS",
+      "parent": "2",
+      "source_config": null,
+      "recipe": {
+        "site": "short_bridge",
+        "anchor_local_0based": 0,
+        "axis_to_local_0based": 1,
+        "azimuth_deg": 90.0,
+        "tilt_deg": 0.0,
+        "binding_distance_A": 2.25,
+        "anchor_H_count": 2
+      },
+      "CARE_mu_source_order_only_eV": null,
+      "geometry_review": {
+        "verdict": "pass",
+        "site_label": "η²(C,C)/sb-sb",
+        "atom_site_details": [
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 2.2500000000000013,
+            "site": "short_bridge",
+            "lateral_offset_angstrom": 0.0
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.0608284729001842,
+            "site": "short_bridge",
+            "lateral_offset_angstrom": 0.571095161703121
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 2.0608284729001842,
+        "nearest_h_fe_angstrom": 1.9903001209898015,
+        "minimum_adsorbate_height_angstrom": 1.8522593918391959,
+        "maximum_bond_length_change_angstrom": 8.881784197001252e-16,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": true,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [],
+        "needs_early_relaxation_review": false
+      },
+      "requested_label": "C_C_short_bridge_orientation",
+      "selection_basis": "Inequivalent Fe-row direction and bridge coordination, retaining both CH2 groups; constructed hypothesis.",
+      "minimum_seed_RMSD_A": 1.0225460022036585,
+      "name": "15_C",
+      "species_id": "15",
+      "formula": "C2H4",
+      "connectivity": "[CH2]-[CH2]",
+      "care_code": "VGGSQFUCUMXWEO",
+      "structure": "15_C/POSCAR",
+      "structure_sha256": "72c51ad48b1ec176613e6bd34ac252bc98cbe71eecdc209edb13924ab0cb167f",
+      "status": "GEOMETRY_PASS_REVIEW_REQUIRED_NOT_RELAXED_NOT_GPU_READY",
+      "bond_distances": [
+        {
+          "atoms_0based": [
+            45,
+            46
+          ],
+          "pair": "C-C",
+          "distance_A": 1.4279339628680128
+        },
+        {
+          "atoms_0based": [
+            45,
+            47
+          ],
+          "pair": "C-H",
+          "distance_A": 1.082751830274301
+        },
+        {
+          "atoms_0based": [
+            45,
+            48
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0827817384831835
+        },
+        {
+          "atoms_0based": [
+            46,
+            49
+          ],
+          "pair": "C-H",
+          "distance_A": 1.0827817291622164
+        },
+        {
+          "atoms_0based": [
+            46,
+            50
+          ],
+          "pair": "C-H",
+          "distance_A": 1.08275186137392
+        }
+      ],
+      "nearest_Fe": [
+        {
+          "atom": "C45",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.2500000000000013
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 2.2500232320946085
+            },
+            {
+              "Fe_index_0based": 40,
+              "distance_A": 3.0096597912131955
+            }
+          ]
+        },
+        {
+          "atom": "C46",
+          "neighbors": [
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 2.0608284729001842
+            },
+            {
+              "Fe_index_0based": 37,
+              "distance_A": 2.5554215186930507
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 2.871066433589712
+            }
+          ]
+        },
+        {
+          "atom": "H47",
+          "neighbors": [
+            {
+              "Fe_index_0based": 40,
+              "distance_A": 2.2452776904338583
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 2.4209126052341134
+            },
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 2.518100584982381
+            }
+          ]
+        },
+        {
+          "atom": "H48",
+          "neighbors": [
+            {
+              "Fe_index_0based": 41,
+              "distance_A": 1.9903001209898015
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 2.7343916785229103
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 2.9625654344046697
+            }
+          ]
+        },
+        {
+          "atom": "H49",
+          "neighbors": [
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 2.103820483946227
+            },
+            {
+              "Fe_index_0based": 36,
+              "distance_A": 2.4268140160696996
+            },
+            {
+              "Fe_index_0based": 37,
+              "distance_A": 2.6812982902630114
+            }
+          ]
+        },
+        {
+          "atom": "H50",
+          "neighbors": [
+            {
+              "Fe_index_0based": 37,
+              "distance_A": 2.1931264138846536
+            },
+            {
+              "Fe_index_0based": 44,
+              "distance_A": 2.4581639177149452
+            },
+            {
+              "Fe_index_0based": 43,
+              "distance_A": 2.7095633954899214
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "next_gate": "Human review of literature scope, local predictions, constructed motifs and soft geometry warnings; no execution authorized."
+}

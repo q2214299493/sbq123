@@ -1,0 +1,312 @@
+{
+  "version": 1,
+  "surface_branch": "true_fe110_5layer_5x5x1",
+  "source_network_sha256": "c4de04dd8c4ba99ea16977ffa0fe44752baa13d85f768535a7e0bd0d6a8f1632",
+  "source_slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+  "candidate_count_per_species": 3,
+  "allow_exploratory_reanchor": true,
+  "authorization_scope": "User requests three starting adsorption structures per exact graph in image rows 11-15, prioritizing literature guidance and allowing previous experience or reasonable constructed models when literature is absent. Local geometry preparation only.",
+  "submitted": false,
+  "targets": [
+    {
+      "id": "11",
+      "care_prefix": "ADLIKHXOGUAKPM",
+      "formula": "C2H3",
+      "connectivity": "[C]-CH3",
+      "signature": [
+        [
+          "C",
+          0,
+          [
+            "C"
+          ]
+        ],
+        [
+          "C",
+          3,
+          [
+            "C"
+          ]
+        ]
+      ],
+      "seed_recipes": [
+        {
+          "source_config": "0",
+          "label": "C_hollow_upright",
+          "selection_basis": "Ethylidyne C-end multicoordination hypothesis; literature supports species, not these exact coordinates or a local minimum.",
+          "placement": {
+            "site": "hollow",
+            "anchor_local_0based": 1,
+            "axis_to_local_0based": 0,
+            "azimuth_deg": 0.0,
+            "tilt_deg": 90.0,
+            "binding_distance_A": 2.25,
+            "anchor_H_count": 0
+          }
+        },
+        {
+          "source_config": "0",
+          "label": "C_long_bridge_tilted",
+          "selection_basis": "Lower-coordination alternative using the local Fe(110) C/CHx experience; constructed hypothesis.",
+          "placement": {
+            "site": "long_bridge",
+            "anchor_local_0based": 1,
+            "axis_to_local_0based": 0,
+            "azimuth_deg": 0.0,
+            "tilt_deg": 60.0,
+            "binding_distance_A": 2.25,
+            "anchor_H_count": 0
+          }
+        },
+        {
+          "source_config": "0",
+          "label": "CARE_C_top",
+          "selection_basis": "Intact existing local CARE pose; its other two source poses are near duplicates, and its prediction is not a DFT energy."
+        }
+      ]
+    },
+    {
+      "id": "12",
+      "care_prefix": "TUCNEACPLKLKNU",
+      "formula": "C2H3O",
+      "connectivity": "CH3-[C]-[O]",
+      "signature": [
+        [
+          "C",
+          0,
+          [
+            "C",
+            "O"
+          ]
+        ],
+        [
+          "C",
+          3,
+          [
+            "C"
+          ]
+        ],
+        [
+          "O",
+          0,
+          [
+            "C"
+          ]
+        ]
+      ],
+      "seed_recipes": [
+        {
+          "source_config": "2",
+          "label": "CARE_eta2_C_O",
+          "selection_basis": "Primary Fe(110) research supports acetyl as an intermediate; geometry is an intact local CARE C/O-bound seed, not a published minimum reconstruction."
+        },
+        {
+          "source_config": "2",
+          "label": "acyl_C_long_bridge",
+          "selection_basis": "C/O dual-center bridge alternative with the methyl group pointing outward; constructed hypothesis using the existing intact acyl geometry.",
+          "placement": {
+            "site": "long_bridge",
+            "anchor_local_0based": 1,
+            "axis_to_local_0based": 2,
+            "azimuth_deg": 90.0,
+            "tilt_deg": -20.0,
+            "binding_distance_A": 2.6,
+            "anchor_H_count": 0
+          }
+        },
+        {
+          "source_config": "2",
+          "label": "acyl_C_short_bridge",
+          "selection_basis": "Inequivalent bridge and carbonyl orientation; constructed hypothesis, no imported literature energy.",
+          "placement": {
+            "site": "short_bridge",
+            "anchor_local_0based": 1,
+            "axis_to_local_0based": 2,
+            "azimuth_deg": 0.0,
+            "tilt_deg": -20.0,
+            "binding_distance_A": 2.5,
+            "anchor_H_count": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "13",
+      "care_prefix": "QNCSIOQOWBORKW",
+      "formula": "C2H3O",
+      "connectivity": "[CH2]-[C]-OH",
+      "signature": [
+        [
+          "C",
+          0,
+          [
+            "C",
+            "O"
+          ]
+        ],
+        [
+          "C",
+          2,
+          [
+            "C"
+          ]
+        ],
+        [
+          "O",
+          1,
+          [
+            "C"
+          ]
+        ]
+      ],
+      "seed_recipes": [
+        {
+          "source_config": "0",
+          "label": "CARE_C_C_OH_orientation_1",
+          "selection_basis": "No exact Fe(110) literature geometry recovered; use the existing intact local pose, retaining the hydroxyl H on O."
+        },
+        {
+          "source_config": "1",
+          "label": "CARE_C_C_OH_orientation_2",
+          "selection_basis": "Distinct local CARE OH/chain orientation, not a literature stable-motif claim."
+        },
+        {
+          "source_config": "0",
+          "label": "radical_C_short_bridge",
+          "selection_basis": "Graph-defined unhydrogenated carbon anchoring with intact CH2 and OH groups; constructed hypothesis.",
+          "placement": {
+            "site": "short_bridge",
+            "anchor_local_0based": 1,
+            "axis_to_local_0based": 2,
+            "azimuth_deg": 90.0,
+            "tilt_deg": -10.0,
+            "binding_distance_A": 2.5,
+            "anchor_H_count": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "14",
+      "care_prefix": "BCXVOZDDJVCTNO",
+      "formula": "C2H3O",
+      "connectivity": "[C]-O-CH3",
+      "signature": [
+        [
+          "C",
+          0,
+          [
+            "O"
+          ]
+        ],
+        [
+          "C",
+          3,
+          [
+            "O"
+          ]
+        ],
+        [
+          "O",
+          0,
+          [
+            "C",
+            "C"
+          ]
+        ]
+      ],
+      "seed_recipes": [
+        {
+          "source_config": "0",
+          "label": "terminal_C_long_bridge",
+          "selection_basis": "No exact literature geometry recovered; terminal unhydrogenated carbon is the anchor and the C-O-C ether skeleton is retained.",
+          "placement": {
+            "site": "long_bridge",
+            "anchor_local_0based": 1,
+            "axis_to_local_0based": 2,
+            "azimuth_deg": 0.0,
+            "tilt_deg": 60.0,
+            "binding_distance_A": 2.25,
+            "anchor_H_count": 0
+          }
+        },
+        {
+          "source_config": "0",
+          "label": "terminal_C_hollow",
+          "selection_basis": "Multicoordinate terminal carbon alternative with methoxy branch pointing outward; constructed hypothesis.",
+          "placement": {
+            "site": "hollow",
+            "anchor_local_0based": 1,
+            "axis_to_local_0based": 2,
+            "azimuth_deg": 90.0,
+            "tilt_deg": 60.0,
+            "binding_distance_A": 2.25,
+            "anchor_H_count": 0
+          }
+        },
+        {
+          "source_config": "0",
+          "label": "CARE_terminal_C_top",
+          "selection_basis": "Existing intact C-bound CARE pose for a lower-coordination comparison; not acetyl and not methoxy alone."
+        }
+      ]
+    },
+    {
+      "id": "15",
+      "care_prefix": "VGGSQFUCUMXWEO",
+      "formula": "C2H4",
+      "connectivity": "[CH2]-[CH2]",
+      "signature": [
+        [
+          "C",
+          2,
+          [
+            "C"
+          ]
+        ],
+        [
+          "C",
+          2,
+          [
+            "C"
+          ]
+        ]
+      ],
+      "seed_recipes": [
+        {
+          "source_config": "2",
+          "label": "multi_Fe_C_C_hollow_guided",
+          "selection_basis": "Fe(110) EELS favors triangular multicenter ethylene adsorption. This is a qualitative geometry hypothesis, not the published trans-twisted structure or a verified minimum.",
+          "placement": {
+            "site": "hollow",
+            "anchor_local_0based": 0,
+            "axis_to_local_0based": 1,
+            "azimuth_deg": 45.0,
+            "tilt_deg": 0.0,
+            "binding_distance_A": 2.35,
+            "anchor_H_count": 2
+          }
+        },
+        {
+          "source_config": "2",
+          "label": "CARE_eta2_C_C_long_bridge",
+          "selection_basis": "Only original ethylene pose passing the hard geometry gate; two original poses with too-low atoms are excluded."
+        },
+        {
+          "source_config": "2",
+          "label": "C_C_short_bridge_orientation",
+          "selection_basis": "Inequivalent Fe-row direction and bridge coordination, retaining both CH2 groups; constructed hypothesis.",
+          "placement": {
+            "site": "short_bridge",
+            "anchor_local_0based": 0,
+            "axis_to_local_0based": 1,
+            "azimuth_deg": 90.0,
+            "tilt_deg": 0.0,
+            "binding_distance_A": 2.25,
+            "anchor_H_count": 2
+          }
+        }
+      ]
+    }
+  ]
+}

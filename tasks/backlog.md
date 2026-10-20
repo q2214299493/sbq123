@@ -103,3 +103,7 @@ Tasks are ordered by priority and should be handled one per Codex thread.
 Classify/characterize editable-build metadata and package resources before any cleanup.
 The existing `sbq_catalyst_agent_workflow.egg-info/PKG-INFO` mismatch remains unresolved;
 no deletion, reclassification event or state-transaction change is authorized by this note.
+
+## Deferred during 11–15 preparation (2026-10-20)
+
+The previously frozen control validation proposal still needs separate scope/budget approval: 46 frames / 92 force predictions, proposal SHA256 `bf2e4a7c745ae6569f69c70a262c8854566d8b6a123592ca123cbfc6dbfe0c92`. This structure-preparation task authorizes no GPU, VASP or model promotion.

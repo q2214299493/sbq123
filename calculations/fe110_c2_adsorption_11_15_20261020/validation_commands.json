@@ -1,0 +1,64 @@
+[
+  {
+    "command": [
+      "C:\\Anaconda\\python.exe",
+      "-m",
+      "py_compile",
+      "scripts/adsorption/build_fe110_care_batch.py",
+      "tests/test_fe110_care_requested_seeds.py",
+      "archive\\fe110_c2_11_15_20261020\\verify_and_document.py"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "C:\\Anaconda\\python.exe",
+      "-c",
+      "import scripts.adsorption.build_fe110_care_batch"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "C:\\Anaconda\\python.exe",
+      "-m",
+      "ruff",
+      "check",
+      "scripts/adsorption/build_fe110_care_batch.py",
+      "tests/test_fe110_care_requested_seeds.py",
+      "archive\\fe110_c2_11_15_20261020\\verify_and_document.py"
+    ],
+    "exit_code": 0,
+    "stdout": "All checks passed!\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "C:\\Anaconda\\python.exe",
+      "-m",
+      "pytest",
+      "-o",
+      "addopts=",
+      "-q",
+      "tests/test_fe110_care_batch.py",
+      "tests/test_fe110_care_requested_seeds.py"
+    ],
+    "exit_code": 0,
+    "stdout": "......................                                                   [100%]\n22 passed in 0.42s\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "C:\\Anaconda\\python.exe",
+      "skills/catalysis-data-retrieval/scripts/validate_records.py",
+      "calculations\\fe110_c2_adsorption_11_15_20261020\\retrieval\\records.jsonl"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"records\": 0,\n  \"valid\": true,\n  \"failures\": []\n}\n",
+    "stderr": ""
+  }
+]

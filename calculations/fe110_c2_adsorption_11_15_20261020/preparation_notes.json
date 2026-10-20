@@ -1,0 +1,21 @@
+{
+  "final_version": "candidates_v3",
+  "status": "PREPARED_FOR_REVIEW_NOT_RELAXED",
+  "preserved_local_versions": {
+    "candidates_v1": "First geometry package; branch-wrapping defect in some plots.",
+    "candidates_v2": "Plots fixed; superseded selection-exclusion bookkeeping clarified in v3."
+  },
+  "failed_preparation_attempts": [
+    "An initial 11 anchor-index assumption targeted methyl carbon; exact graph audit corrected the anchor before any output was written.",
+    "An initial 12 placement lowered atoms into the surface; hard geometry rejection occurred before output. Final negative carbonyl tilt and larger distance pass unchanged thresholds.",
+    "RDKit is absent in the local environment; independent V3000 valence/bond parsing replaces that optional graph check.",
+    "The first receipt serialization rejected a numpy boolean before data were written. The zero-byte verification.json is preserved; explicit Python booleans and serialize-before-open fix receipt writing."
+  ],
+  "not_executed": [
+    "GPU inference",
+    "ML relaxation",
+    "VASP",
+    "energy extraction",
+    "registry or Excel promotion"
+  ]
+}

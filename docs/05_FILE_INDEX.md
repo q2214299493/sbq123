@@ -180,3 +180,11 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
   and geometry checks used by local Sella and active-learning handoff.
 - `modules/transition_state_search/SELLA_LOCAL_PEAK.md`: exact request/review
   fields, deployment, bounded execution, return and validation limitations.
+
+## Fe(110) adsorption structures 11–15 (2026-10-20)
+
+- `docs/reviews/fe110_c2_11_15_preparation_20261020.md`: construction scope, literature limits and validation outcome.
+- `configs/adsmind_lite/fe110_c2_11_15_exploratory_20261020.json`: exact identities and three explicit geometry recipes per species; no execution authority.
+- `calculations/fe110_c2_adsorption_11_15_20261020/candidates_v3/structure_review.md`: canonical 15 POSCARs, five figures and per-candidate geometry table.
+- `calculations/fe110_c2_adsorption_11_15_20261020/initial_geometry_verification.json`: independent graph, PBC, slab/constraint and equivalent-atom deduplication checks.
+- `archive/fe110_c2_11_15_20261020/verify_and_document.py`: bounded CPU verification and provenance/documentation builder.

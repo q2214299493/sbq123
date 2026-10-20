@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "event_id": "task-fe110-c2-11-15-prepared-20261020",
+  "event_type": "task_updated",
+  "entity": {
+    "kind": "task",
+    "id": "task-current",
+    "module": "adsorption_workflow"
+  },
+  "occurred_at": "2026-10-20T10:20:07.129422+08:00",
+  "recorded_at": "2026-10-20T10:20:07.129422+08:00",
+  "summary": "Prepared three initial geometry candidates for each exact image row 11-15; 15 geometry checks and 22 related tests pass. No stability acceptance or scientific execution.",
+  "payload": {
+    "objective": "Prepare literature-informed starting adsorption geometries for exact rows 11-15, three per graph, with user-authorized rational construction where coordinates are unavailable.",
+    "phase": "verification",
+    "current_evidence": [
+      "Canonical package: calculations/fe110_c2_adsorption_11_15_20261020/candidates_v3; 15 POSCARs and five top/side comparison figures.",
+      "Whitelist bounded search found no usable exact geometry records; primary literature supplies context only, not three transferable minimum-energy coordinates per species.",
+      "Exact graph/H placement, full Fe45 slab/cell/constraints, contacts and symmetry deduplication independently pass for all 15; zero current-rule soft warnings; minimum same-species RMSD 0.4398 A.",
+      "Syntax, import, scoped Ruff and 22 directly related tests pass; source/geometry/command receipts retained.",
+      "Frozen control validation proposal remains pending separately in tasks/backlog.md. No GPU inference, ML relaxation, VASP, energy extraction or registry/Excel promotion executed."
+    ],
+    "one_executable_step": "Review the 15 initial structures, literature scope and constructed hypotheses; separately define any future pre-relaxation scope.",
+    "submission_boundary": "LOCAL_PREPARATION_ONLY_NOT_RELAXED_NOT_GPU_READY: no GPU/VASP execution, energy or stable-minimum acceptance.",
+    "done_when": [
+      "Five exact molecular graphs each have three reviewable nonduplicate POSCARs.",
+      "Cell/slab/constraints/chemistry/contact checks pass with source provenance, plots and geometry tables.",
+      "Related source changes pass required lightweight validation and literature limitations remain explicit."
+    ],
+    "constraints": [
+      "Do not label literature-informed or constructed seeds as confirmed stable minima.",
+      "Preserve three C2H3O connectivities and OH hydrogen placement.",
+      "Preserve the active true Fe45 Fe(110) model and all existing calculation data.",
+      "No external/predicted energies enter local results; no execution or model promotion authority."
+    ],
+    "authoritative_references": [
+      "configs/adsmind_lite/fe110_c2_11_15_exploratory_20261020.json",
+      "docs/reviews/fe110_c2_11_15_preparation_20261020.md",
+      "calculations/fe110_c2_adsorption_11_15_20261020/initial_geometry_verification.json",
+      "configs/execution_backends.yaml"
+    ]
+  },
+  "evidence": [
+    {
+      "locator": "calculations/fe110_c2_adsorption_11_15_20261020/authorization_scope.json",
+      "sha256": "12a97c4b77fd22e851a8248c4bc99af1d997f56c7d3d07a1b8d61d39909ebb69",
+      "authority": "user_authorization",
+      "observed_at": "2026-10-20T10:20:07.129422+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_11_15_20261020/initial_geometry_verification.json",
+      "sha256": "b3479031b8761de28cdd696e20e0df97801d9399cd953edc2d034aaa74c231e9",
+      "authority": "module_validation",
+      "observed_at": "2026-10-20T10:20:07.129422+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_11_15_20261020/validation_commands.json",
+      "sha256": "eea050fed2a418ac79f6e05b95cfc2598b5ea0ada1829064dcc09ffed12553de",
+      "authority": "module_validation",
+      "observed_at": "2026-10-20T10:20:07.129422+08:00"
+    },
+    {
+      "locator": "calculations/fe110_c2_adsorption_11_15_20261020/candidates_v3/candidate_review.json",
+      "sha256": "35cbe5430f0da811b305f9328d8763906bdd2cb58cc13307d05a74dc76e92d79",
+      "authority": "repository_document",
+      "observed_at": "2026-10-20T10:20:07.129422+08:00"
+    }
+  ],
+  "supersedes": [
+    "task-fe110-adsorption-control-candidate-review-20261020"
+  ],
+  "review": {
+    "required": false,
+    "reason_codes": [],
+    "status": "not_required"
+  }
+}

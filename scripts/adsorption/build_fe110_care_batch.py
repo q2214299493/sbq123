@@ -108,11 +108,34 @@ def construct_extra(source, slab, sites, operations, kept, target, tolerance):
     raise ValueError(f"no safe nonduplicate fallback for {target['id']}; do not pad the batch")
 
 
-def draw_pose(axes, pose: Poscar, slab: Poscar, name: str):
-    symbols = expanded_symbols(pose)
+def display_coordinates(pose: Poscar) -> np.ndarray:
+    """Unwrap bonded adsorbates for plots without splitting a long branch at PBC."""
     ads_indices = adsorbate_indices(pose)
     anchor = pose.frac[ads_indices[0]]
     cart = minimum_image_delta_xy(pose.frac - anchor) @ pose.cell
+    edges = connectivity(pose, ads_indices)
+    visited = {0}
+    pending = [0]
+    for current in pending:
+        for first, second in edges:
+            if current not in (first, second):
+                continue
+            neighbor = second if current == first else first
+            if neighbor in visited:
+                continue
+            a, b = ads_indices[current], ads_indices[neighbor]
+            cart[b] = cart[a] + minimum_image_delta_xy(pose.frac[b] - pose.frac[a]) @ pose.cell
+            visited.add(neighbor)
+            pending.append(neighbor)
+    if len(visited) != len(ads_indices):
+        raise ValueError("cannot draw a disconnected adsorbate as one molecule")
+    return cart
+
+
+def draw_pose(axes, pose: Poscar, slab: Poscar, name: str):
+    symbols = expanded_symbols(pose)
+    ads_indices = adsorbate_indices(pose)
+    cart = display_coordinates(pose)
     top_z = float(np.max(cart[:45, 2]))
     colors = {"C": "#222222", "O": "#d93737", "H": "#38bdf8"}
     heavy = [i for i in ads_indices if symbols[i] != "H"]
@@ -137,6 +160,62 @@ def draw_pose(axes, pose: Poscar, slab: Poscar, name: str):
         ax.set_title(name + (" side" if side else " top"), fontsize=10)
         ax.set_xlabel("chain direction / A" if side else "x / A")
         ax.set_ylabel("z / A" if side else "y / A")
+
+
+def requested_seeds(target, originals, slab, sites, operations, tolerance):
+    """Build explicitly requested review seeds; never infer a stable motif or pad failures."""
+    recipes = target["seed_recipes"]
+    if len(recipes) != 3:
+        raise ValueError("an explicit seed plan must contain exactly three recipes")
+    parents = {config: (pose, metadata) for _, config, _, pose, metadata, _ in originals}
+    kept = []
+    for recipe in recipes:
+        config = str(recipe["source_config"])
+        if config not in parents:
+            raise ValueError(f"missing requested source configuration: {config}")
+        parent, parent_metadata = parents[config]
+        pose = parent
+        metadata = dict(parent_metadata)
+        placement = recipe.get("placement")
+        if placement is not None:
+            ads = adsorbate_indices(parent)
+            first, second = placement["anchor_local_0based"], placement["axis_to_local_0based"]
+            symbols = expanded_symbols(parent)
+            edges = connectivity(parent, ads)
+            if (not isinstance(first, int) or not isinstance(second, int)
+                    or not 0 <= first < len(ads) or not 0 <= second < len(ads)
+                    or symbols[ads[first]] == "H" or symbols[ads[second]] == "H"
+                    or tuple(sorted((first, second))) not in edges):
+                raise ValueError("requested anchor axis must join two bonded heavy atoms")
+            hydrogen_neighbors = sum(
+                symbols[ads[b if a == first else a]] == "H"
+                for a, b in edges if first in (a, b)
+            )
+            if hydrogen_neighbors != placement["anchor_H_count"]:
+                raise ValueError("requested anchor hydrogen count does not match the exact graph")
+            pose = rigid_reanchor_pose(
+                parent, slab, sites[placement["site"]], anchor=ads[first], axis_to=ads[second],
+                azimuth_deg=placement["azimuth_deg"], tilt_deg=placement["tilt_deg"],
+                binding_distance_A=placement["binding_distance_A"],
+            )
+            metadata = {
+                "origin": "USER_AUTHORIZED_RIGID_REANCHOR_HYPOTHESIS", "parent": config,
+                "source_config": None, "recipe": placement,
+                "CARE_mu_source_order_only_eV": None,
+            }
+        geometry = review(parent, pose, adsorbate_indices(parent))
+        if geometry["verdict"] != "pass" or molecular_signature(pose) != target["signature"]:
+            raise ValueError(f"requested seed failed geometry/identity: {target['id']} {recipe['label']}: {geometry['checks']}")
+        scores = [equivalent_pose_rmsd(pose, other, operations) for other, _ in kept]
+        if scores and min(scores) <= tolerance:
+            raise ValueError(f"requested seed is a near duplicate: {target['id']} {recipe['label']}")
+        metadata.update({
+            "geometry_review": geometry, "requested_label": recipe["label"],
+            "selection_basis": recipe["selection_basis"],
+            "minimum_seed_RMSD_A": min(scores) if scores else None,
+        })
+        kept.append((pose, metadata))
+    return kept
 
 
 def prepare_group(target, network, slab, sites, operations, tolerance):
@@ -165,6 +244,17 @@ def prepare_group(target, network, slab, sites, operations, tolerance):
             excluded.append({"config": config, "reason": "near_duplicate_seed", "RMSD_A": min(scores)})
             continue
         kept.append((pose, metadata))
+    if "seed_recipes" in target:
+        selected = requested_seeds(target, originals, slab, sites, operations, tolerance)
+        used = {str(recipe["source_config"]) for recipe in target["seed_recipes"]}
+        excluded = [
+            {"config": config, "reason": (
+                "geometry_review_failed" if metadata["geometry_review"]["verdict"] != "pass"
+                else "not_selected_by_explicit_plan"
+            )}
+            for _, config, _, _, metadata, _ in originals if config not in used
+        ]
+        return (target, selected, excluded), originals
     if not kept:
         raise ValueError(f"no intact safe parent for {target['id']}; construction is blocked")
     kept = kept[:3]
