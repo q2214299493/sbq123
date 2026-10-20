@@ -13,6 +13,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## Paired adsorption VASP benchmark preparation — 2026-10-20
+
+- `docs/reviews/fe110_adsorption_control_paired_vasp3_20261020.md`: three original/control pairs, unchanged production settings, geometry warnings and preparation-only boundary.
+- `calculations/fe110_c2_adsorption_06_10_20261012/adsorption_control_paired_vasp3_20261020_v1/batch_manifest.json`: six exact POSCAR/input/preflight bindings; no upload or submission authorization.
+- `archive/fe110_adsorption_paired_vasp3_20261020/prepare.py`: bounded local adapter using the canonical adsorption builder/preflight; never executes scientific calculations.
+
 Fe110 C2 species06–10 authorized VASP batch (2026-10-13):
 `docs/reviews/fe110_c2_06_10_vasp_submission_20261013.md` indexes all15
 LSF jobs9848799–9848813, original CUDA structure review/reclassification,
