@@ -13,6 +13,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## Adsorption06–10 complete table view —2026-10-22
+
+- `docs/reviews/fe110_c2_06_10_table_sync_20261022.md`:15 original06–10 A/B/C records in the existing pending sheet;12 missing result sets registered without accepting unreviewed energies.
+- `outputs/adsorption_table_06_10_sync_20261022_v1/`: exact registry and workbook receipts, original-byte backup,15-record readback and unchanged formal-sheet checks.
+- `archive/fe110_c2_06_10_table_sync_20261022/`: bounded preparation, append-only spreadsheet view, readback and focused tests.
+
 ## Adsorption database-to-table synchronization —2026-10-22
 
 - `docs/reviews/fe110_adsorption_table_sync_20261022.md`:9 accepted rows appended to the canonical adsorption workbook and3 metadata-only pending06 records; original55 rows verified unchanged.
