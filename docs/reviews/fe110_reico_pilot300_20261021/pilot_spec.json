@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "document_kind": "fe110_reico_pilot_research_proposal_not_execution_config",
+  "as_of": "2026-10-21",
+  "status": "PREPARED_FOR_REVIEW_NOT_EXECUTABLE",
+  "authorization_scope": "prepare approximately 300-configuration pilot proposal only",
+  "scientific_scope": "current Fe(110) adsorption of C2/C3 C-H-O species on the existing Fe45 branch",
+  "execution_authority": "none",
+  "counts_are_proposed_caps_not_generated_results": true,
+  "max_new_dft_label_configurations": 300,
+  "composition_targets": {"C2HO": 45, "C2H2O": 60, "C2H3": 45, "C3H2O": 150},
+  "random_sampling": {
+    "method": "random adsorbate atom positions followed by bounded ML optimization and trajectory sampling on fixed Fe45 slab",
+    "full_paper_reproduction": false,
+    "max_cpu_initial_configurations": 2000,
+    "max_optimization_trajectory_families": 100,
+    "families_by_carbon_count": {"C2": 50, "C3": 50},
+    "max_optimizer_steps_per_trajectory": 30,
+    "max_selected_frames_per_trajectory": 3,
+    "select_only_final_frames": false,
+    "generation_seed_proposal": 42,
+    "max_sampling_gpu_hours_proposal": 1,
+    "teacher_checkpoint_sha256_from_existing_binding": "e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50",
+    "teacher_needs_fresh_hash_and_runtime_preflight": true,
+    "random_coordinate_ranges_and_contact_rules": "Needs confirmation in bounded CPU geometry review",
+    "underfilled_pool_action": "report actual count; do not pad, retry or expand automatically"
+  },
+  "new_data_partition_proposal": {
+    "split_unit": "complete random optimization trajectory family, frozen before sample selection",
+    "train": {"families": 80, "max_frames": 240},
+    "development": {"families": 10, "max_frames": 30},
+    "final_test": {"families": 10, "max_frames": 30},
+    "equal_C2_C3_target_in_each_partition": true,
+    "cross_partition_near_duplicates": "remove or quarantine without moving heldout families into training",
+    "existing_46_and_observed_16": "remain excluded from fitting and epoch selection; observed results are regression evidence"
+  },
+  "dft_label_proposal": {
+    "first_probe_configurations_included_in_300": 6,
+    "targets": ["compatible fixed-geometry TOTEN", "complete all-atom forces", "total and local magnetic moments"],
+    "electronic_convergence_required": true,
+    "ionic_convergence_required_for_training_frame": false,
+    "final_adsorption_state_requires_separate_ionic_and_geometry_acceptance": true,
+    "compatibility_authority": "configs/true_fe110_production.yaml and docs/01_METHOD_PROTOCOL.md",
+    "vasp_backend": "sunboquan-codex",
+    "numeric_input_and_resources": "Needs confirmation through owning label builder and exact-input preflight",
+    "failed_or_ambiguous_magnetic_label_action": "quarantine with reason; no automatic additional calculations"
+  },
+  "training_comparison_proposal": {
+    "model_family": "small NequIP conservative energy-force model",
+    "architecture_version_and_runtime": "Needs confirmation in native preflight",
+    "arm_A": "reviewed existing energy-force training pool",
+    "arm_B": "same pool plus at most 240 new random-sampled training configurations",
+    "same_initial_weights_model_optimizer_seed_and_update_budget": true,
+    "max_actual_optimizer_updates_per_arm": 4000,
+    "max_gpu_hours_per_arm": 1,
+    "gpu_count_per_arm": 1,
+    "cpu_count_proposal": 4,
+    "memory_GiB_proposal": 32,
+    "common_development_pool": "existing 60 plus at most 30 new development frames",
+    "new_test_usage": "evaluate at most 30 new test frames after freezing candidates; no test-driven reselection",
+    "attribution_limit": "combined new-data-package effect; not isolated attribution of randomization or C3 coverage"
+  },
+  "performance_proposal": {
+    "min_seeds_by_carbon_count": {"C2": 2, "C3": 2},
+    "routes": ["direct DFT relaxation", "original model preoptimization plus DFT", "new candidate preoptimization plus DFT"],
+    "max_relaxations_in_later_separate_stage": 12,
+    "paired_seed_and_method_and_resource_and_reviewed_minimum_required": true,
+    "draft_expansion_signal_min_vasp_cpu_core_hour_reduction_each_group": 0.2,
+    "draft_signal_is_not_active_execution_or_scientific_acceptance_gate": true,
+    "report_label_sampling_training_inference_and_vasp_costs": true,
+    "future_task_count_and_amortization": "Needs confirmation before performance trial",
+    "separate_cpu_core_hours_and_gpu_hours": true,
+    "no_statistical_or_global_transfer_claim_from_four_seeds": true
+  },
+  "expansion": {
+    "user_intent": "consider thousands only after a good measured pilot result",
+    "included_in_this_proposal": false,
+    "automatic": false,
+    "separate_scope_budget_and_user_authorization_required": true
+  },
+  "actual_execution_this_task": {"generated_structures": 0, "gpu_jobs": 0, "dft_jobs": 0, "training_runs": 0, "model_promotions": 0},
+  "restart_and_failure_policy": "immutable stage manifests and producer receipts; preserve failures; resume only unfinished work under current scope; no automatic retry"
+}

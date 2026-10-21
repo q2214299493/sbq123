@@ -79,3 +79,9 @@ Tasks are ordered by priority and should be handled one per Codex thread.
 Classify/characterize editable-build metadata and package resources before any cleanup.
 The existing `sbq_catalyst_agent_workflow.egg-info/PKG-INFO` mismatch remains unresolved;
 no deletion, reclassification event or state-transaction change is authorized by this note.
+
+## Fe110 REICO pilot300 proposal — 2026-10-21
+
+- User confirmed current Fe(110) adsorption scope and preparation of approximately 300 configurations; consider thousands only after useful measured C2/C3 acceleration.
+- Prepared `docs/reviews/fe110_reico_pilot300_20261021/`: review-only proposal, draft sampling/DFT/training/benchmark caps and source-byte inventory. No executable generator, GPU/DFT/training submission or model promotion.
+- Next: freeze composition and trajectory splits, review local random geometry bounds and existing E/F/magnetic label compatibility, then prepare separately authorized native sampling preflight. Preserve the existing paired VASP benchmark and its independent task.

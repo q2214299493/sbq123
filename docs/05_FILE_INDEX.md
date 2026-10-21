@@ -173,3 +173,9 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
   and geometry checks used by local Sella and active-learning handoff.
 - `modules/transition_state_search/SELLA_LOCAL_PEAK.md`: exact request/review
   fields, deployment, bounded execution, return and validation limitations.
+
+## Fe110 REICO pilot300 proposal — 2026-10-21
+
+- `docs/reviews/fe110_reico_pilot300_20261021/README.md`: scope, staged 300-configuration pilot design, C2/C3 correctness and fully accounted performance review, conditional expansion and execution boundaries.
+- `docs/reviews/fe110_reico_pilot300_20261021/pilot_spec.json`: review-only structured draft; no existing runner consumes it and it grants no execution authority.
+- `docs/reviews/fe110_reico_pilot300_20261021/source_inventory.json`: SHA256-bound source inventory and actual read-only metadata checks; scientific input files are referenced but not included in the publication bundle.

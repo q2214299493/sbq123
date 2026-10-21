@@ -1430,3 +1430,10 @@ governance: docs/DOCUMENT_GOVERNANCE.md
   execution gate. Remote GPU/VASP submission, fine-tuning, NEB/Dimer/frequency
   execution, and final scientific acceptance remain explicit authorized
   actions.
+
+## 2026-10-21 — Fe110 REICO pilot300 scope
+
+- User selected the existing Fe(110) adsorption domain, approximately 300 deduplicated atomic configurations for a proposal, and conditional later expansion to thousands after a good C2/C3 speedup result. This is proposal-preparation authority only.
+- Method proposal: random adsorbate configurations on fixed Fe45, bounded optimization-trajectory sampling, surface-aware deduplication, compatible DFT single-point energy/force labels and conservative NequIP A/B training. Numeric quotas, timing caps and the draft 20% per-group VASP core-hour signal are proposed values, not approved execution or scientific gates.
+- Existing raw candidates/labels and observed heldout exclusions remain intact. Historical C3H2O candidate08 fragmentation is not an intact-C3 reference. No calculation was run and no acceleration established.
+- Evidence and outstanding preflights: `docs/reviews/fe110_reico_pilot300_20261021/README.md`, `pilot_spec.json`, `source_inventory.json`.
