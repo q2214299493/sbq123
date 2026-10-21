@@ -13,6 +13,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## Adsorption database-to-table synchronization —2026-10-22
+
+- `docs/reviews/fe110_adsorption_table_sync_20261022.md`:9 accepted rows appended to the canonical adsorption workbook and3 metadata-only pending06 records; original55 rows verified unchanged.
+- `outputs/adsorption_table_sync_20261022_v1/`: original workbook backup, exact promotion requests/plans/receipts, saved-XLSX verification and before/after views.
+- `archive/fe110_adsorption_excel_sync_20261022/`: bounded preparation, canonical publication and workbook verification adapters.
+
 ## 06 A/B/C registration and01–05 coadsorption audit —2026-10-21
 
 - `docs/reviews/fe110_06abc_coads_registry_20261021.md`: three06 endpoint records plus the omitted03 CH+CO interpretation; preserves original rejection and truthful scheduler/acceptance boundaries.

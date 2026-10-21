@@ -92,6 +92,13 @@ transition-state/path domain.
     as accepted results. Do not infer an adsorption energy when the clean-slab
     and adsorbate reference tuple is incomplete; Excel promotion remains a
     separate gate.
+    Database registration alone does not complete the user-facing adsorption
+    table handoff. Synchronize accepted values through the existing hash-bound
+    Excel promotion gate in the same completion workflow. When acceptance is
+    blocked, show the registered identity/status in a separate metadata-only
+    pending view, never as an accepted numeric energy row. Report database and
+    workbook completion separately; claim table synchronization only after its
+    saved values and provenance receipts are verified.
 
 ### Chemistry-aware pre-screen and staged relaxation
 

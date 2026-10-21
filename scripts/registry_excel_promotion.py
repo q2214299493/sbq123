@@ -182,9 +182,9 @@ def _adsorption_context(connection: sqlite3.Connection, calculation_id: str) -> 
     item = dict(row)
     if item["module"] != "adsorption_workflow":
         raise ValueError("adsorption promotion requires a calculation owned by adsorption_workflow")
-    if item["workflow_status"] not in {"static_accepted", "energy_accepted"}:
+    if item["workflow_status"] not in {"accepted", "static_accepted", "energy_accepted"}:
         raise ValueError(
-            "adsorption promotion requires workflow_status=static_accepted or energy_accepted"
+            "adsorption promotion requires workflow_status=accepted, static_accepted or energy_accepted"
         )
     if not item["compatibility_fingerprint"]:
         raise ValueError("adsorption promotion requires a registered compatibility fingerprint")
@@ -195,6 +195,22 @@ def _adsorption_context(connection: sqlite3.Connection, calculation_id: str) -> 
         """,
         (calculation_id,),
     ).fetchone()
+    if scheduler_record is None:
+        # A reviewed reclassification reuses its declared parent's job, never
+        # invents a second run. Require the accepted result's exact OUTCAR link.
+        scheduler_record = connection.execute(
+            """
+            SELECT 1 FROM calculations AS c
+            JOIN results AS r ON r.calculation_id=c.calculation_id
+            JOIN files AS f ON f.file_id=r.source_file_id AND f.calculation_id=c.calculation_id
+            JOIN jobs AS j ON j.job_record_id=f.job_record_id AND j.calculation_id=c.parent_calculation_id
+            JOIN job_status_history AS h ON h.job_record_id=j.job_record_id
+            WHERE c.calculation_id=? AND f.filename='OUTCAR'
+              AND r.validation_status IN ('accepted_matched_static','accepted_compatible_final_energy')
+            LIMIT 1
+            """,
+            (calculation_id,),
+        ).fetchone()
     if scheduler_record is None:
         raise ValueError("adsorption promotion requires a recorded scheduler status")
     return item
