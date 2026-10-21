@@ -13,6 +13,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## 06 A/B/C registration and01–05 coadsorption audit —2026-10-21
+
+- `docs/reviews/fe110_06abc_coads_registry_20261021.md`: three06 endpoint records plus the omitted03 CH+CO interpretation; preserves original rejection and truthful scheduler/acceptance boundaries.
+- `calculations/fe110_c2_adsorption_06_10_20261012/coadsorption_registration_20261021_v1/`: exact append-only plan, scientific reviews, old-batch audit and transaction evidence.
+- `archive/fe110_coads_registry_20261021/`: bounded collection, preparation, readback and chemistry tests; no new scientific execution.
+
 ## C₂ adsorption06–10 endpoint deduplication — 2026-10-21
 
 - `docs/reviews/fe110_c2_06_10_dedup_20261021.md`: original15 plus two closed06_C benchmarks;9 intact target candidates,3 reclassified candidates,2 nonconverged exclusions and near-duplicate08_B/08_C warning.
