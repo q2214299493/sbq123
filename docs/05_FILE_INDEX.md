@@ -13,6 +13,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## C₂ adsorption06–10 endpoint deduplication — 2026-10-21
+
+- `docs/reviews/fe110_c2_06_10_dedup_20261021.md`: original15 plus two closed06_C benchmarks;9 intact target candidates,3 reclassified candidates,2 nonconverged exclusions and near-duplicate08_B/08_C warning.
+- `calculations/fe110_c2_adsorption_06_10_20261012/dedup_final_review_20261021_v1/dedup_summary.json`: source-bound count and reclassified duplicate comparisons; no database acceptance or deletion.
+- `archive/fe110_c2_dedup_20261021/`: read-only final-frame collection and canonical surface-aware review adapters/tests.
+
 ## Paired adsorption VASP submission — 2026-10-20
 
 - `docs/reviews/fe110_adsorption_control_paired_vasp3_submission_20261020.md`: six submitted jobs9910781/83/85/87/89/91, initial RUN/PEND observations and job-only registration.
