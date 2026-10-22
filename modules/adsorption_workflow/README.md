@@ -196,3 +196,16 @@ An adsorption state may be a NEB endpoint, but a tilted or stretched intermediat
 ## Done Criteria
 
 Every accepted state is converged, geometrically valid, traceable to compatible references, and registered with its input/output evidence in the same completion workflow without waiting for a separate user reminder.
+
+### REICO-inspired CPU geometry pilot (2026-10-22)
+
+The explicitly requested Fe45 C2/C3 random-training-environment pilot uses
+`scripts/adsorption/reico_random_geometry.py` and
+`configs/fe110_reico_pilot/geometry_v1.json`. It preserves the verified slab,
+cell, atom order and fixed mask, samples C/O/H positions with draft pairwise
+distance guards, and freezes trajectory-family splits before sampling.
+This is off-equilibrium training-environment generation, not the stable-motif
+adsorption planner above. No energy, stable molecular graph, scientific result,
+GPU execution, relaxation, DFT or model training is established by this step.
+The bounded run, underfilled family and validation are recorded in
+`docs/reviews/fe110_reico_geometry_step1_20261022/README.md`.

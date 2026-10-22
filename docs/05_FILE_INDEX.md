@@ -179,3 +179,11 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `docs/reviews/fe110_reico_pilot300_20261021/README.md`: scope, staged 300-configuration pilot design, C2/C3 correctness and fully accounted performance review, conditional expansion and execution boundaries.
 - `docs/reviews/fe110_reico_pilot300_20261021/pilot_spec.json`: review-only structured draft; no existing runner consumes it and it grants no execution authority.
 - `docs/reviews/fe110_reico_pilot300_20261021/source_inventory.json`: SHA256-bound source inventory and actual read-only metadata checks; scientific input files are referenced but not included in the publication bundle.
+
+## Fe110 REICO geometry first step - 2026-10-22
+
+- scripts/adsorption/reico_random_geometry.py: deterministic CPU-only off-equilibrium C/O/H sampling on the hash-bound Fe45 slab,whole-family splits,collision guards,immutable outputs and bounded resume.
+- configs/fe110_reico_pilot/geometry_v1.json: pairwise draft distances,coordinate ranges,seed,family budgets and preassigned partitions.
+- tests/test_reico_random_geometry.py:19 focused geometry/provenance/resume/failure tests without scientific compute.
+- docs/reviews/fe110_reico_geometry_step1_20261022/: review and independent readback facts;99 candidates,one failed family,no GPU/DFT/training.
+- calculations/fe110_reico_pilot300_20261022/geometry_v1/: primary-workspace-only raw inputs,299 family artifacts,immutable summaries and preview;not copied into the source-release branch.

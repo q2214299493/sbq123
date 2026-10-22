@@ -1,0 +1,101 @@
+{
+  "as_of": "2026-10-22",
+  "kind": "independent_CPU_geometry_readback_review",
+  "candidate_root": "calculations/fe110_reico_pilot300_20261022/geometry_v1",
+  "summary_sha256": "6c66c4bca7b27a53a0c388f4dddac5da264f740453d2768b6f14b69af65dd5e6",
+  "binding": {
+    "config_sha256": "4e153c143c952fb25e0295576b5d7a9f73eced1cabfc9d76520364d791780b5b",
+    "slab_sha256": "a8559cde11ce414e80433f8674052c1ad868058ce3b6260ac32c1b2570e4b92b",
+    "generator_sha256": "a2d2cab1723237786aae6ff4b9bc1f2fe6c2e9aa7ae91ee25e249fb59f214b55",
+    "ase_version": "3.29.0",
+    "numpy_version": "2.3.5"
+  },
+  "requested_families": 100,
+  "generated_candidates": 99,
+  "failed_families": [
+    {
+      "family_id": "family_0084",
+      "composition": "C3H2O",
+      "partition": "train",
+      "attempts": 20,
+      "reason_counts": {
+        "SHORT_CONTACT:C-O": 8,
+        "SHORT_CONTACT:H-H": 1,
+        "SHORT_CONTACT:C-C": 10,
+        "SHORT_CONTACT:C-H": 8,
+        "SHORT_CONTACT:H-O": 1,
+        "SHORT_CONTACT:C-Fe": 3,
+        "SHORT_CONTACT:Fe-H": 1,
+        "SHORT_CONTACT:Fe-O": 2
+      }
+    }
+  ],
+  "actual_attempts": 407,
+  "rejected_attempts": 308,
+  "rejection_reason_occurrences": {
+    "SHORT_CONTACT:C-H": 105,
+    "NO_HEAVY_ATOM_SURFACE_CONTACT": 27,
+    "SHORT_CONTACT:C-C": 115,
+    "SHORT_CONTACT:C-O": 100,
+    "SHORT_CONTACT:Fe-H": 33,
+    "SHORT_CONTACT:H-H": 9,
+    "SHORT_CONTACT:C-Fe": 67,
+    "ISOLATED_ADSORBATE_ATOM": 1,
+    "SHORT_CONTACT:H-O": 25,
+    "SHORT_CONTACT:Fe-O": 12
+  },
+  "composition_counts": {
+    "C2HO": 15,
+    "C2H2O": 20,
+    "C2H3": 15,
+    "C3H2O": 49
+  },
+  "partition_counts": {
+    "train": 79,
+    "final_test": 10,
+    "development": 10
+  },
+  "carbon_partition_counts": {
+    "C2_train": 40,
+    "C3_train": 39,
+    "C2_final_test": 5,
+    "C3_development": 5,
+    "C3_final_test": 5,
+    "C2_development": 5
+  },
+  "all_fixed_masks_bottom_18_Fe": true,
+  "maximum_preserved_Fe_coordinate_error_A": 4.440892098500626e-16,
+  "maximum_preserved_cell_error_A": 0.0,
+  "minimum_distances_by_element_pair_A": {
+    "C-Fe": 1.602045686156667,
+    "C-C": 1.1345103471864437,
+    "Fe-O": 1.620462770913869,
+    "C-O": 1.0572194128629513,
+    "Fe-H": 1.3127352015658023,
+    "C-H": 0.8537409984031807,
+    "H-O": 0.823361082688113,
+    "H-H": 0.7929559729659258
+  },
+  "maximum_nearest_Fe_by_element_A": {
+    "C_nearest_Fe_A": 3.78227877058567,
+    "O_nearest_Fe_A": 3.71679072635056,
+    "H_nearest_Fe_A": 4.094499686939172
+  },
+  "periodic_vacuum_gap_range_A": [
+    11.01431953902,
+    13.12594477355757
+  ],
+  "adsorbate_height_range_A": [
+    0.8297505911240766,
+    3.9856804609799976
+  ],
+  "raw_family_artifact_files_verified": 299,
+  "raw_artifact_index_sha256": "81512475ac5ac71ca5f984f97e03efa424210362a2e37b386e0fdc8758eef8a1",
+  "exact_duplicate_keys_unique": 99,
+  "full_surface_symmetry_or_SOAP_deduplication_done": false,
+  "molecular_graph_or_valence_enforced": false,
+  "geometry_guard_status": "ALL_GENERATED_CANDIDATES_PASS_DECLARED_DISTANCE_AND_BOUNDARY_GUARDS",
+  "relaxation_or_DFT_or_training_run": false,
+  "scientific_stability_or_model_readiness_established": false,
+  "maximum_later_selected_frames_at_3_per_successful_family": 297
+}

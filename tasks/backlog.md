@@ -85,3 +85,11 @@ no deletion, reclassification event or state-transaction change is authorized by
 - User confirmed current Fe(110) adsorption scope and preparation of approximately 300 configurations; consider thousands only after useful measured C2/C3 acceleration.
 - Prepared `docs/reviews/fe110_reico_pilot300_20261021/`: review-only proposal, draft sampling/DFT/training/benchmark caps and source-byte inventory. No executable generator, GPU/DFT/training submission or model promotion.
 - Next: freeze composition and trajectory splits, review local random geometry bounds and existing E/F/magnetic label compatibility, then prepare separately authorized native sampling preflight. Preserve the existing paired VASP benchmark and its independent task.
+
+## Fe110 REICO geometry first step - 2026-10-22
+
+- User authorized local CPU random generation with element-pair distance guards; current paired VASP benchmark remains unchanged.
+- Completed bounded generation: 99/100 starting families (50 C2,49 C3),407 attempts; family_0084 exhausted20 attempts without retry or padding. Train79/development10/final_test10; no labels or optimization.
+- Independent POSCAR/contact/boundary readback and299 family-file hashes verified;19 focused tests pass. Full resume leaves305 files unchanged. See docs/reviews/fe110_reico_geometry_step1_20261022/.
+- Next: prepare a very small representative ML-preoptimization runtime preflight. GPU/DFT/training and full diversity selection are still unexecuted; no automatic expansion.
+- repo-state sync --safe-only failed on the existing sbq_catalyst_agent_workflow.egg-info/PKG-INFO classification hash mismatch; no unrelated repair.

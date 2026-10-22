@@ -48,3 +48,9 @@ Update this table in place. Move resolved items to historical results or Git his
 ## Managed Open Errors
 
 <!-- state-handoff:end task_error_events -->
+
+## 2026-10-22 - repo-state sync classification hash conflict
+
+- Command: repo-state sync --safe-only; actual exit code1. Error: repository item changed after classification: sbq_catalyst_agent_workflow.egg-info/PKG-INFO.
+- Scope: existing repository classification/source-byte mismatch; not a Fe110 geometry or scientific-validation failure. No classification event or generated package metadata was rewritten to bypass the guard.
+- Impact: managed repository-state synchronization remains incomplete. Task-owned CPU geometry files and their explicit checks are retained; source publication is reported separately.

@@ -1437,3 +1437,11 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 - Method proposal: random adsorbate configurations on fixed Fe45, bounded optimization-trajectory sampling, surface-aware deduplication, compatible DFT single-point energy/force labels and conservative NequIP A/B training. Numeric quotas, timing caps and the draft 20% per-group VASP core-hour signal are proposed values, not approved execution or scientific gates.
 - Existing raw candidates/labels and observed heldout exclusions remain intact. Historical C3H2O candidate08 fragmentation is not an intact-C3 reference. No calculation was run and no acceleration established.
 - Evidence and outstanding preflights: `docs/reviews/fe110_reico_pilot300_20261021/README.md`, `pilot_spec.json`, `source_inventory.json`.
+
+## 2026-10-22 - Fe110 REICO CPU geometry pilot
+
+- Direct user authority covers the first local random-generation step and replacement of the uniform1.5A cutoff with pairwise draft collision guards. It does not authorize GPU,DFT or training.
+- Preserve the verified Fe45 slab/cell/order and18 fixed bottom Fe; randomize C/O/H coordinates. Config configs/fe110_reico_pilot/geometry_v1.json is the sole numeric generation specification. These are off-equilibrium training environments,not accepted adsorption minima or fixed molecular identities.
+- Freeze100 trajectory families and partitions before generation; cap20 attempts per family. Retain99 candidates and the failed C3 training family without padding; later3-frame-per-family cap implies at most297 selected frames from this pool.
+- Record raw coordinates/rejections and immutable hashes. Basic distance checks do not establish model-domain validity,SCF/magnetic convergence,stability,final symmetry/SOAP deduplication or measured acceleration.
+- Review: docs/reviews/fe110_reico_geometry_step1_20261022/README.md and geometry_review.json.

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "purpose": "CPU_RANDOM_GEOMETRY_REVIEW_ONLY",
+  "as_of": "2026-10-22",
+  "source_slab": "calculations/true_fe110_clean_20260629/POSCAR",
+  "source_slab_sha256": "a8559cde11ce414e80433f8674052c1ad868058ce3b6260ac32c1b2570e4b92b",
+  "base_seed": 42,
+  "max_attempts_per_family": 20,
+  "element_order": ["C", "O", "H"],
+  "lateral_half_width_A": 1.7,
+  "height_above_top_Fe_A": {"C": [1.2, 3.6], "O": [1.2, 3.6], "H": [0.8, 4.0]},
+  "pair_minimum_A": {
+    "C-Fe": 1.60, "Fe-O": 1.55, "Fe-H": 1.30,
+    "C-C": 1.10, "C-O": 1.05, "C-H": 0.85,
+    "O-O": 1.05, "H-O": 0.80, "H-H": 0.60
+  },
+  "maximum_nearest_neighbor_A": 3.0,
+  "maximum_closest_heavy_atom_Fe_A": 2.8,
+  "minimum_periodic_vacuum_gap_A": 8.0,
+  "compositions": [
+    {"name": "C2HO", "counts": {"C": 2, "O": 1, "H": 1}, "families": {"train": 12, "development": 2, "final_test": 1}},
+    {"name": "C2H2O", "counts": {"C": 2, "O": 1, "H": 2}, "families": {"train": 16, "development": 2, "final_test": 2}},
+    {"name": "C2H3", "counts": {"C": 2, "O": 0, "H": 3}, "families": {"train": 12, "development": 1, "final_test": 2}},
+    {"name": "C3H2O", "counts": {"C": 3, "O": 1, "H": 2}, "families": {"train": 40, "development": 5, "final_test": 5}}
+  ],
+  "interpretation": "Draft distance guards for off-equilibrium sampling, not validated bond lengths or stability criteria. No molecular identity or valence is enforced. Slab coordinates, cell and fixed mask stay unchanged. No GPU, DFT, energy evaluation or training."
+}
