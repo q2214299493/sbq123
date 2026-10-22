@@ -1453,3 +1453,10 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 - Six successful canonical submissions and scheduler evidence recorded;registry150 INSERT/zeroUPDATE includes jobs/provenance only,not accepted energies or adsorption states. Existing VASP jobs,checkpoints and production method remain unchanged.
 - No ML optimization is needed to establish these references. Exact frozen-model predictions are prepared only;model-domain suitability and any later DFT short-optimization/training package depend on the measured forces.
 - Evidence: docs/reviews/fe110_reico_probe6_20261022/README.md,input_review.json,execution_status.json,user_authorization.md.
+
+## 2026-10-22 - Six random-probe force comparison
+
+- User requested completion,SCF/magnetic review and exact frozen-model force comparison. Six statics passed normal/electronic/coordinate/raw-force checks;12 CUDA predictions completed on unchanged checkpoints,without relaxation/training/new VASP.
+- Six-probe adsorbate vectorRMSE is0.28461eV/A(original) and0.27165eV/A(control),zero reversed adsorbate forces. Overall improvement4.55%;C2 combined RMSE essentially unchanged. This supports a bounded short-trajectory sampling trial recommendation,not measured acceleration or production promotion.
+- Magnetic moments are complete and all Fe local moments positive;no multi-initial-state magnetic ground-state proof. Six training-domain probes are not an independent test or full99-family validation. Next suggested six-seed10-20-step trial remains unexecuted;no automatic expansion beyond the existing300-label cap.
+- Evidence: docs/reviews/fe110_reico_probe6_20261022/force_review.md and force_review.json.

@@ -1,6 +1,6 @@
 # Fe(110) REICO 首轮六个 DFT 单点探针
 
-日期：2026-10-22。**六个 DFT 固定几何单点已通过规范执行器实际提交；12:53（Asia/Shanghai）快照为 1 RUN、5 PEND。尚无已接受的 DFT 标签或模型准确性结论。**
+日期：2026-10-22。**最新复核：六个单点均 DONE，正常结束且 SCF/原始力/磁矩检查通过；原始模型与 control 的 12 次同坐标力预测完成。结果支持小批短程 ML 采样试验，尚无实际优化轨迹或加速结论。** 详细结果见 [force_review.md](force_review.md) 与 `force_review.json`；下文 12:53 的提交快照保留为历史记录。
 
 用户接受先做少量 DFT 参照、再判断是否让 ML 主导优化采样的流程，原话与本阶段具体范围见不可变的 `user_authorization.md`。本次把少量探针具体化为六个，属于原约 300 个构型标注预算，后续新构型标注最多剩余 294 个；本阶段不提交剩余构型，不运行离子优化、训练或自动重试。
 
@@ -63,7 +63,8 @@
 - `submission_summary.json`：六个实际提交回执齐备后生成；不存在时不得假设六个都已提交。
 - `scheduler_summary.json` 与各目录 `scheduler_after_submission.json`：本次六作业的实际调度输出、查询时间及哈希。
 - `submission_registry_{batch,plan,approval,receipt}.json`：现有注册接口的一次追加事务证据。
-- `exact_prediction_plan.json`：后续同几何模型对照方案，当前不是可执行 GPU 请求。
+- `exact_prediction_plan.json`：预测前冻结的同几何对照方案，原文件不是可执行 GPU 请求；实际请求与结果见本轮 `force_review.md`。
+- 同目录 `execution_status.json` 保留提交阶段的 12:53 历史快照；最新检查与力对照状态以 `force_review.json` 为准。
 
 源码入口为 `scripts/adsorption/reico_probe_batch.py`。它只准备输入，不包含上传、提交或模型调用。语法/导入、定向 Ruff 以及新选点测试和共享 VASP 构建器测试共 16 项通过；实际六包又经过独立参数验证与规范执行门核验。没有运行全仓库测试。
 
@@ -71,7 +72,7 @@
 
 DFT 完成后检查正常结束、EDIFF 在 NELM 前收敛、原子序和固定坐标对应、完整原始力，以及总/局部磁矩。SCF 收敛不等于找到了磁性全局基态；磁态异常或标签不合格时保留原因，不自动追加多磁初态或重算。
 
-计划在相同六个 POSCAR 上比较原始 AQCat25 与已冻结 control 的力，共最多 12 次固定几何预测。执行前仍须重新核对原生 checkpoint、CUDA、运行时和该六点范围；当前没有 ML 松弛或 GPU 预测结果。
+该计划已在用户本轮明确要求后完成：原生 checkpoint、CUDA、运行时和六点范围重新绑定，完成 12 次相同 POSCAR 力预测。吸附原子向量 RMSE 为原始 0.28461、control 0.27165 eV/Å；没有 ML 松弛。原计划文件和此前回执保留为不可变历史证据。
 
 比较重点是各吸附原子的力向量大小、方向、C/H/O 分组误差和压缩原子对的相对受力，Fe 误差单独报告，不用 45 个 Fe 的平均值掩盖吸附原子错误。不同预训练能量零点的裸总能量不直接当作能量误差比较。
 

@@ -196,3 +196,9 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - docs/reviews/fe110_reico_probe6_20261022/user_authorization.md: immutable record of the accepted workflow and bounded six-probe scope,referenced by all six execution gates.
 - docs/reviews/fe110_reico_probe6_20261022/input_review.json and execution_status.json: numeric input/gate hashes and actual submission/scheduler/registry snapshot;no DFT accuracy claim.
 - calculations/fe110_reico_pilot300_20261022/probe6_v1/: local-only six input bundles,source selection,canonical gates/receipts,LSF raw evidence and registry batch/plan/approval/receipt.
+
+## Fe110 REICO six-probe force review - 2026-10-22
+
+- scripts/adsorption/reico_probe_review.py and tests/test_reico_probe_review.py: exact static coordinate/raw-force/SCF/magnetic checks and separately grouped directional/relative-force diagnostics;no scientific-job executor.
+- docs/reviews/fe110_reico_probe6_20261022/force_review.md,force_review.json,force_comparison_authorization.md: current results,source hashes,limits and literal user scope. Earlier execution_status.json remains the submission-stage snapshot.
+- calculations/fe110_reico_pilot300_20261022/probe6_v1/checks/20261022T084625Z/: local-only raw48-file collection,scheduler evidence,reviewed E/F/moments,12 prediction outputs,device/exit proofs and reviewed completion registry transaction.

@@ -220,3 +220,13 @@ individual hash-bound diagnostic gates and the canonical submission executor.
 See `docs/reviews/fe110_reico_probe6_20261022/README.md`. Electronic and magnetic
 label admission must precede force comparison; six training-domain probes
 cannot validate the whole random pool or establish measured acceleration.
+
+The user-requested six-probe review is complete;see the same review directory's
+force_review.md and force_review.json. All six statics are electronically
+converged with complete moments and exact raw-force/coordinate correspondence.
+Twelve frozen original/control CUDA predictions give adsorbate vectorRMSE
+0.28461/0.27165eV/A and no reversed adsorbate directions. The modest4.55% overall
+change and essentially unchanged C2 RMSE support only a small short-trajectory
+sampling trial recommendation;no relaxation,training,new VASP or measured
+acceleration occurred. scripts/adsorption/reico_probe_review.py reuses existing
+SCF/force owners for the local review;it has no execution authority.

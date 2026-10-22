@@ -94,10 +94,10 @@ no deletion, reclassification event or state-transaction change is authorized by
 - Next: prepare a very small representative ML-preoptimization runtime preflight. GPU/DFT/training and full diversity selection are still unexecuted; no automatic expansion.
 - repo-state sync --safe-only failed on the existing sbq_catalyst_agent_workflow.egg-info/PKG-INFO classification hash mismatch; no unrelated repair.
 
-## Fe110 REICO six DFT probes submitted - 2026-10-22
+## Fe110 REICO six DFT probes reviewed - 2026-10-22
 
 - Latest user accepted DFT-reference-first execution before random ML optimization. Six training-family static probes submitted through canonical gates/executor;original coordinates,NSW0,32ranks each.
-- family_0029=9918415 RUN;family_0002=9918416 PEND;family_0007=9918418 PEND;family_0078=9918420 PEND;family_0052=9918423 PEND;family_0004=9918425 PEND at2026-10-22T04:53:24-25Z. Scheduler state only;electronic/magnetic validity unassessed.
-- All six count within the original300-label cap. No ML prediction,ML optimization,training,retry,remaining-pool submission or old-job change. Canonical registry added150 metadata rows,zero accepted scientific results.
-- Next requested checkpoint: inspect these six actual jobs/outputs,admit compatible fixed-geometry E/F/magnetic labels,then prepare exact six-point original/frozencontrol inference before judging the sampling model. No automatic watch or further scientific jobs created.
+- All six are DONE at2026-10-22T08:46:33-34Z;normal/static coordinate/raw force/SCF checks pass in70-83 electronic steps. Total moments105.1993-107.7598muB;all Fe local moments positive,range1.095-2.675muB;global magnetic ground state unverified.
+- Completed12 exact fixed-geometry CUDA predictions with frozen original/control checkpoints. Adsorbate vectorRMSE0.28461/0.27165eV/A;zero reversed adsorbate directions,modest4.55% overall improvement and essentially unchanged C2 combined RMSE. No ML optimization,training,new DFT or retry;all six stay within300-label cap. Registry recorded six DONE observations and source files,zero accepted adsorption results.
+- Next recommendation: separately scoped six-seed10-20-step ML sampling trial retaining initial/intermediate frames with small DFT force checks before any300-label expansion. Not executed or automatically authorized by this checkpoint. Review: docs/reviews/fe110_reico_probe6_20261022/force_review.md.
 - Authoritative handoff: docs/reviews/fe110_reico_probe6_20261022/ and calculations/fe110_reico_pilot300_20261022/probe6_v1/. Existing paired benchmark is preserved. Managed sync remains blocked by the existing PKG-INFO classification hash mismatch.

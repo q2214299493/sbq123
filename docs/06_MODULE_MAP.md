@@ -136,3 +136,7 @@ catalysis_data_retrieval:
   scope: tested implemented subset; no scientific acceptance or production verification
     inferred
 ```
+
+### REICO six-probe sampling gate - 2026-10-22
+
+adsorption_workflow remains Active. Six exact statics passed electronic/raw-force/moment checks and12 frozen-model CUDA predictions completed. Results support only a bounded short-trajectory trial recommendation;actual sampling,near-minimum accuracy and measured C2/C3 VASP acceleration remain unverified. See docs/reviews/fe110_reico_probe6_20261022/force_review.md.
