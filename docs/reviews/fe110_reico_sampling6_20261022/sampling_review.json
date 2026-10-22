@@ -1,0 +1,380 @@
+{
+  "document_kind": "reviewed_reico_sampling6_return",
+  "request_sha256": "84eb0f3201dee7ec96ff46352e05eef2d566e18bba60d18cefc969e2c55a591c",
+  "return_manifest_sha256": "890646f226a17b94939318ff6909cff71a41e67ec3d6b28f943421bc1b0bf9cc",
+  "producer": {
+    "run_id": "direct-fe110-reico-sampling6-20261022-v1",
+    "exit_code": 0,
+    "request_sha256": "84eb0f3201dee7ec96ff46352e05eef2d566e18bba60d18cefc969e2c55a591c",
+    "started_utc": "2026-10-22T10:09:03.844033+00:00",
+    "finished_utc": "2026-10-22T10:09:15.667105+00:00",
+    "error": null,
+    "scheduler_job_id": null,
+    "evidence_class": "producer_process_only_not_scheduler_state",
+    "training_performed": false,
+    "model_promoted": false,
+    "vasp_submitted": false
+  },
+  "device": {
+    "model_device": "cuda:0",
+    "physical_gpu_uuid": "GPU-450609b3-d1fd-ac33-d03a-79891be402da",
+    "pid": 3379985,
+    "execution_mode": "direct_no_scheduler",
+    "scheduler_job_id": null
+  },
+  "checkpoint_sha256": "cfcac123cd56b866a1ea36cc780a3aee634f3aeec979bda4ae8bee2cc831e523",
+  "cases": [
+    {
+      "family_id": "family_0029",
+      "composition": "C2HO",
+      "status": "STEP_LIMIT_REACHED",
+      "optimizer_steps": 20,
+      "saved_frames": 21,
+      "valid_frames": 21,
+      "last_valid_step": 20,
+      "error": null,
+      "initial_ML_adsorbate_fmax_eV_A": 5.174578666687012,
+      "last_valid_ML_adsorbate_fmax_eV_A": 4.641833305358887,
+      "initial_force_max_abs_repeat_difference_eV_A": 7.152557373046875e-07,
+      "selected_step": 10,
+      "final_geometry_audit": {
+        "failures": [],
+        "pair_minima_A": {
+          "C-Fe": 2.2030708848366354,
+          "C-C": 2.906055831209623,
+          "Fe-O": 2.1903939732525837,
+          "C-O": 1.1507336382213391,
+          "Fe-H": 2.1980628454587956,
+          "C-H": 3.2160646593868005,
+          "H-O": 2.248812274379043
+        },
+        "Fe_Fe_minimum_A": 2.357938314209619,
+        "minimum_height_above_top_Fe_A": 1.8651712597066918,
+        "periodic_vacuum_gap_A": 11.605141220948251,
+        "adsorbate_RMSD_from_seed_A": 0.33023994590265693
+      }
+    },
+    {
+      "family_id": "family_0002",
+      "composition": "C2H2O",
+      "status": "STEP_LIMIT_REACHED",
+      "optimizer_steps": 20,
+      "saved_frames": 21,
+      "valid_frames": 21,
+      "last_valid_step": 20,
+      "error": null,
+      "initial_ML_adsorbate_fmax_eV_A": 7.991235256195068,
+      "last_valid_ML_adsorbate_fmax_eV_A": 3.0397911071777344,
+      "initial_force_max_abs_repeat_difference_eV_A": 2.4437904357910156e-05,
+      "selected_step": 20,
+      "final_geometry_audit": {
+        "failures": [],
+        "pair_minima_A": {
+          "C-Fe": 1.6561367078911466,
+          "C-C": 2.828797043836141,
+          "Fe-O": 2.562090037910002,
+          "C-O": 1.2073986743949139,
+          "Fe-H": 3.6198674539884186,
+          "C-H": 3.0740435717152,
+          "H-O": 2.7895629323446127,
+          "H-H": 0.6907569299371231
+        },
+        "Fe_Fe_minimum_A": 2.277311597550179,
+        "minimum_height_above_top_Fe_A": 0.6502434242905473,
+        "periodic_vacuum_gap_A": 11.245869728339425,
+        "adsorbate_RMSD_from_seed_A": 0.5891914712009281
+      }
+    },
+    {
+      "family_id": "family_0007",
+      "composition": "C2H3",
+      "status": "STEP_LIMIT_REACHED",
+      "optimizer_steps": 20,
+      "saved_frames": 21,
+      "valid_frames": 21,
+      "last_valid_step": 20,
+      "error": null,
+      "initial_ML_adsorbate_fmax_eV_A": 3.960421323776245,
+      "last_valid_ML_adsorbate_fmax_eV_A": 4.479132652282715,
+      "initial_force_max_abs_repeat_difference_eV_A": 8.285045623779297e-06,
+      "selected_step": 10,
+      "final_geometry_audit": {
+        "failures": [],
+        "pair_minima_A": {
+          "C-Fe": 1.617966350733083,
+          "C-C": 3.1740889599777073,
+          "Fe-H": 1.8747411006047787,
+          "C-H": 1.1022889104217288,
+          "H-H": 2.2681748777660857
+        },
+        "Fe_Fe_minimum_A": 2.3413106194375963,
+        "minimum_height_above_top_Fe_A": 0.9905192847552176,
+        "periodic_vacuum_gap_A": 11.4581966222777,
+        "adsorbate_RMSD_from_seed_A": 0.6211187072590875
+      }
+    },
+    {
+      "family_id": "family_0078",
+      "composition": "C3H2O",
+      "status": "STEP_LIMIT_REACHED",
+      "optimizer_steps": 20,
+      "saved_frames": 21,
+      "valid_frames": 21,
+      "last_valid_step": 20,
+      "error": null,
+      "initial_ML_adsorbate_fmax_eV_A": 21.91486930847168,
+      "last_valid_ML_adsorbate_fmax_eV_A": 3.0001654624938965,
+      "initial_force_max_abs_repeat_difference_eV_A": 3.0338764190673828e-05,
+      "selected_step": 20,
+      "final_geometry_audit": {
+        "failures": [],
+        "pair_minima_A": {
+          "C-Fe": 2.042743350521822,
+          "C-C": 1.2808726110738902,
+          "Fe-O": 1.995377408161285,
+          "C-O": 1.3133033337945657,
+          "Fe-H": 1.8208917479635234,
+          "C-H": 1.1528791609086195,
+          "H-O": 2.0771638166674373,
+          "H-H": 3.043946759347146
+        },
+        "Fe_Fe_minimum_A": 2.3879941529455158,
+        "minimum_height_above_top_Fe_A": 0.7771996984106782,
+        "periodic_vacuum_gap_A": 11.930723259092638,
+        "adsorbate_RMSD_from_seed_A": 0.5597313898826218
+      }
+    },
+    {
+      "family_id": "family_0052",
+      "composition": "C3H2O",
+      "status": "GUARD_STOP_PRESERVED",
+      "optimizer_steps": 8,
+      "saved_frames": 9,
+      "valid_frames": 8,
+      "last_valid_step": 7,
+      "error": "SamplingGuardError: SHORT_CONTACT:C-Fe",
+      "initial_ML_adsorbate_fmax_eV_A": 5.508758068084717,
+      "last_valid_ML_adsorbate_fmax_eV_A": 4.367380142211914,
+      "initial_force_max_abs_repeat_difference_eV_A": 5.4717063903808594e-05,
+      "selected_step": 7,
+      "final_geometry_audit": {
+        "failures": [
+          "SHORT_CONTACT:C-Fe"
+        ],
+        "pair_minima_A": {
+          "C-Fe": 1.5946487388506019,
+          "C-C": 1.37100549301076,
+          "Fe-O": 3.4884781886220906,
+          "C-O": 1.765417000311507,
+          "Fe-H": 2.2121405217707357,
+          "C-H": 1.1817857100156117,
+          "H-O": 1.2055821223205172,
+          "H-H": 2.014272462951831
+        },
+        "Fe_Fe_minimum_A": 2.420585490935077,
+        "minimum_height_above_top_Fe_A": 1.5052366528493426,
+        "periodic_vacuum_gap_A": 11.264665069249133,
+        "adsorbate_RMSD_from_seed_A": 0.13356756405744305
+      }
+    },
+    {
+      "family_id": "family_0004",
+      "composition": "C3H2O",
+      "status": "STEP_LIMIT_REACHED",
+      "optimizer_steps": 20,
+      "saved_frames": 21,
+      "valid_frames": 21,
+      "last_valid_step": 20,
+      "error": null,
+      "initial_ML_adsorbate_fmax_eV_A": 4.32106351852417,
+      "last_valid_ML_adsorbate_fmax_eV_A": 2.4343650341033936,
+      "initial_force_max_abs_repeat_difference_eV_A": 2.8848648071289062e-05,
+      "selected_step": 20,
+      "final_geometry_audit": {
+        "failures": [],
+        "pair_minima_A": {
+          "C-Fe": 1.6670782189961404,
+          "C-C": 2.9916399815133277,
+          "Fe-O": 2.3823977834471384,
+          "C-O": 1.1732077461432278,
+          "Fe-H": 3.6258556665008186,
+          "C-H": 2.385474850942681,
+          "H-O": 2.927763716165681,
+          "H-H": 0.7588217344872317
+        },
+        "Fe_Fe_minimum_A": 2.2603022255380436,
+        "minimum_height_above_top_Fe_A": 0.7881016281338233,
+        "periodic_vacuum_gap_A": 11.086529516010973,
+        "adsorbate_RMSD_from_seed_A": 0.619108742334998
+      }
+    }
+  ],
+  "total_frames": 114,
+  "geometry_guard_valid_frames": 113,
+  "noninitial_guard_valid_frames": 107,
+  "DFT_labeled_initial_frames": 6,
+  "new_DFT_labels": 0,
+  "selected_candidates": [
+    {
+      "sample_id": "family_0029_step010",
+      "family_id": "family_0029",
+      "composition": "C2HO",
+      "step": 10,
+      "target_step": 10,
+      "structure_path": "calculations\\fe110_reico_pilot300_20261022\\sampling6_v1\\returned\\output\\sampling\\family_0029\\step_010.vasp",
+      "structure_sha256": "3dbd8851a7ccf7c73e296580085dac359051262ca23e7bcfff759b4e6d0a94fd",
+      "partition": "train",
+      "geometry_audit": {
+        "failures": [],
+        "pair_minima_A": {
+          "C-Fe": 1.847895709394401,
+          "C-C": 2.712653340713875,
+          "Fe-O": 2.3814651855523707,
+          "C-O": 1.2946558350438448,
+          "Fe-H": 2.257834385426318,
+          "C-H": 2.8571635385635066,
+          "H-O": 2.298530157201569
+        },
+        "Fe_Fe_minimum_A": 2.4146790143502477,
+        "minimum_height_above_top_Fe_A": 1.6922459231464089,
+        "periodic_vacuum_gap_A": 11.893896015277459,
+        "adsorbate_RMSD_from_seed_A": 0.20245051403385395
+      }
+    },
+    {
+      "sample_id": "family_0002_step020",
+      "family_id": "family_0002",
+      "composition": "C2H2O",
+      "step": 20,
+      "target_step": 20,
+      "structure_path": "calculations\\fe110_reico_pilot300_20261022\\sampling6_v1\\returned\\output\\sampling\\family_0002\\step_020.vasp",
+      "structure_sha256": "3b49f8e490d20e2931e0272583d25daee7a1c68a172fea6d4a7aae6533d9d363",
+      "partition": "train",
+      "geometry_audit": {
+        "failures": [],
+        "pair_minima_A": {
+          "C-Fe": 1.6561367078911466,
+          "C-C": 2.828797043836141,
+          "Fe-O": 2.562090037910002,
+          "C-O": 1.2073986743949139,
+          "Fe-H": 3.6198674539884186,
+          "C-H": 3.0740435717152,
+          "H-O": 2.7895629323446127,
+          "H-H": 0.6907569299371231
+        },
+        "Fe_Fe_minimum_A": 2.277311597550179,
+        "minimum_height_above_top_Fe_A": 0.6502434242905473,
+        "periodic_vacuum_gap_A": 11.245869728339425,
+        "adsorbate_RMSD_from_seed_A": 0.5891914712009281
+      }
+    },
+    {
+      "sample_id": "family_0007_step010",
+      "family_id": "family_0007",
+      "composition": "C2H3",
+      "step": 10,
+      "target_step": 10,
+      "structure_path": "calculations\\fe110_reico_pilot300_20261022\\sampling6_v1\\returned\\output\\sampling\\family_0007\\step_010.vasp",
+      "structure_sha256": "c58b9bbc65cd90cafc75cc4a298019bcc2f0ce8823835f98f50f18de27d608e8",
+      "partition": "train",
+      "geometry_audit": {
+        "failures": [],
+        "pair_minima_A": {
+          "C-Fe": 1.7122104320852554,
+          "C-C": 3.0565239065917527,
+          "Fe-H": 1.8362183671957326,
+          "C-H": 1.1116078488524836,
+          "H-H": 2.308564984210414
+        },
+        "Fe_Fe_minimum_A": 2.368930334949433,
+        "minimum_height_above_top_Fe_A": 1.2195794951505174,
+        "periodic_vacuum_gap_A": 11.453715739764622,
+        "adsorbate_RMSD_from_seed_A": 0.3237150416864063
+      }
+    },
+    {
+      "sample_id": "family_0078_step020",
+      "family_id": "family_0078",
+      "composition": "C3H2O",
+      "step": 20,
+      "target_step": 20,
+      "structure_path": "calculations\\fe110_reico_pilot300_20261022\\sampling6_v1\\returned\\output\\sampling\\family_0078\\step_020.vasp",
+      "structure_sha256": "d759669e54b668973ab82449b82b7d5c22ab73e6121c4f5235b85151ff849839",
+      "partition": "train",
+      "geometry_audit": {
+        "failures": [],
+        "pair_minima_A": {
+          "C-Fe": 2.042743350521822,
+          "C-C": 1.2808726110738902,
+          "Fe-O": 1.995377408161285,
+          "C-O": 1.3133033337945657,
+          "Fe-H": 1.8208917479635234,
+          "C-H": 1.1528791609086195,
+          "H-O": 2.0771638166674373,
+          "H-H": 3.043946759347146
+        },
+        "Fe_Fe_minimum_A": 2.3879941529455158,
+        "minimum_height_above_top_Fe_A": 0.7771996984106782,
+        "periodic_vacuum_gap_A": 11.930723259092638,
+        "adsorbate_RMSD_from_seed_A": 0.5597313898826218
+      }
+    },
+    {
+      "sample_id": "family_0052_step007",
+      "family_id": "family_0052",
+      "composition": "C3H2O",
+      "step": 7,
+      "target_step": 10,
+      "structure_path": "calculations\\fe110_reico_pilot300_20261022\\sampling6_v1\\returned\\output\\sampling\\family_0052\\step_007.vasp",
+      "structure_sha256": "b5a1c1a524db9cb80a85e47181e1a0c9c8f286416392b8a276e27972c800ec4c",
+      "partition": "train",
+      "geometry_audit": {
+        "failures": [],
+        "pair_minima_A": {
+          "C-Fe": 1.6039632020822125,
+          "C-C": 1.3709734778744627,
+          "Fe-O": 3.495712114138499,
+          "C-O": 1.6927164428802577,
+          "Fe-H": 2.20878789296071,
+          "C-H": 1.190804501411287,
+          "H-O": 1.235410130797229,
+          "H-H": 2.0234953554475044
+        },
+        "Fe_Fe_minimum_A": 2.4278937118956523,
+        "minimum_height_above_top_Fe_A": 1.5083813762622498,
+        "periodic_vacuum_gap_A": 11.239705270838144,
+        "adsorbate_RMSD_from_seed_A": 0.1119657110814113
+      }
+    },
+    {
+      "sample_id": "family_0004_step020",
+      "family_id": "family_0004",
+      "composition": "C3H2O",
+      "step": 20,
+      "target_step": 20,
+      "structure_path": "calculations\\fe110_reico_pilot300_20261022\\sampling6_v1\\returned\\output\\sampling\\family_0004\\step_020.vasp",
+      "structure_sha256": "db9d9f84ae0e02c42a014a5c1f989aae19fc841733adb65b2325448755bc524c",
+      "partition": "train",
+      "geometry_audit": {
+        "failures": [],
+        "pair_minima_A": {
+          "C-Fe": 1.6670782189961404,
+          "C-C": 2.9916399815133277,
+          "Fe-O": 2.3823977834471384,
+          "C-O": 1.1732077461432278,
+          "Fe-H": 3.6258556665008186,
+          "C-H": 2.385474850942681,
+          "H-O": 2.927763716165681,
+          "H-H": 0.7588217344872317
+        },
+        "Fe_Fe_minimum_A": 2.2603022255380436,
+        "minimum_height_above_top_Fe_A": 0.7881016281338233,
+        "periodic_vacuum_gap_A": 11.086529516010973,
+        "adsorbate_RMSD_from_seed_A": 0.619108742334998
+      }
+    }
+  ],
+  "scientific_acceptance": false,
+  "dedup_scope": "selected six versus their seeds and same-composition selected frames;0.10A same-order adsorbate RMSD",
+  "full_pool_clustering_or_permutation_invariance": false
+}

@@ -202,3 +202,10 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - scripts/adsorption/reico_probe_review.py and tests/test_reico_probe_review.py: exact static coordinate/raw-force/SCF/magnetic checks and separately grouped directional/relative-force diagnostics;no scientific-job executor.
 - docs/reviews/fe110_reico_probe6_20261022/force_review.md,force_review.json,force_comparison_authorization.md: current results,source hashes,limits and literal user scope. Earlier execution_status.json remains the submission-stage snapshot.
 - calculations/fe110_reico_pilot300_20261022/probe6_v1/checks/20261022T084625Z/: local-only raw48-file collection,scheduler evidence,reviewed E/F/moments,12 prediction outputs,device/exit proofs and reviewed completion registry transaction.
+
+## Fe110 REICO six short trajectories - 2026-10-22
+
+- scripts/adsorption/reico_sampling.py and tests/test_reico_sampling.py: bounded sampling scope,geometry/fixed-layer/step guards,per-frame preservation and restart;called only through the native hash-bound runtime.
+- archive/fe110_reico_sampling6_20261022/review.py: one-off114-frame return review and six static input preparations;never submits.
+- docs/reviews/fe110_reico_sampling6_20261022/: literal authorization,current run/selection evidence and numerical status.
+- calculations/fe110_reico_pilot300_20261022/sampling6_v1/: local-only request/producer/device/114rawframe artifacts,113guard-valid frames,six pending DFT input bundles and reviewed metadata-only registry transaction.

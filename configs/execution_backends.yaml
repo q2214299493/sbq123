@@ -49,6 +49,38 @@ backends:
       producer_exit_record_is_scheduler_authority: false
       admin_resolution: enable Slurm accounting storage and job accounting on MZ73
     direct_execution_exceptions:
+      fe110_reico_sampling6_20261022:
+        authorized_by: user_explicit_20261022_continue_six_seed_short_sampling
+        authorizing_user_request: 可以继续吧
+        scope: six_reviewed_training_seeds_frozen_control_twenty_step_ML_sampling_only
+        remote_root: /home/sbq/sbq/aqcat25_ts_pilot/reico_sampling6_20261022_v1
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        gpu_index: 1
+        gpu_uuid: GPU-450609b3-d1fd-ac33-d03a-79891be402da
+        execution_mode: direct_no_scheduler
+        executor: archive/fe110_adsorption_validation_20261018/runtime.py
+        model_backend: aqcat25
+        candidate_checkpoint_sha256: cfcac123cd56b866a1ea36cc780a3aee634f3aeec979bda4ae8bee2cc831e523
+        source_manifest_sha256: e7d7523814dd9c56a5be63f6ae364850eb8a31cc851769e23968208effe8fdeb
+        generation_config_sha256: 4e153c143c952fb25e0295576b5d7a9f73eced1cabfc9d76520364d791780b5b
+        sample_count: 6
+        source_names: [family_0002, family_0004, family_0007, family_0029, family_0052, family_0078]
+        limits:
+          max_steps: 20
+          maxstep_A: 0.05
+          ML_fmax_eV_A: 0.10
+          minimum_Fe_Fe_A: 1.8
+          minimum_adsorbate_height_A: -0.5
+          minimum_periodic_vacuum_gap_A: 8.0
+        max_wall_seconds: 600
+        automatic_retries: 0
+        explicit_authorization_required: true
+        producer_exit_record_required: true
+        scheduler_job_id: null
+        slurm_id_emulation: forbidden
+        training_or_vasp_execution: forbidden
+        production_model_promotion: forbidden
+        alter_shared_services_or_other_users_jobs: forbidden
       fe110_reico_probe6_exact_forces_20261022:
         authorized_by: user_explicit_20261022_six_completed_static_force_comparison
         authorizing_user_request: 看一下这6个单点算完了吗，算完了就检查收敛和磁矩，再对比模型和DFT的力，看看能不能用于优化采样。

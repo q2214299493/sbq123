@@ -230,3 +230,14 @@ change and essentially unchanged C2 RMSE support only a small short-trajectory
 sampling trial recommendation;no relaxation,training,new VASP or measured
 acceleration occurred. scripts/adsorption/reico_probe_review.py reuses existing
 SCF/force owners for the local review;it has no execution authority.
+
+The explicitly continued six-seed short sampling stage is recorded in
+docs/reviews/fe110_reico_sampling6_20261022/. It uses the native runtime's
+separate adsorption_bounded_random_sampling authorization branch and
+scripts/adsorption/reico_sampling.py:at most20LBFGSsteps,maxstep0.05A,
+per-frame raw-force/geometry preservation and fixed-layer/contact guards.
+Five cases reached the step cap;0052stopped at8 on the draft C-Fe guard.
+All114frames are retained,including the boundary;107newguard-valid frames
+are unlabeled. None is a converged/accepted adsorption state. Six sampled
+static inputs are prepared and checked but not submitted;no new training
+or expansion is authorized by a producer exit or geometry guard pass.

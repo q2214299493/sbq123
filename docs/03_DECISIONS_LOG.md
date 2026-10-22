@@ -1460,3 +1460,10 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 - Six-probe adsorbate vectorRMSE is0.28461eV/A(original) and0.27165eV/A(control),zero reversed adsorbate forces. Overall improvement4.55%;C2 combined RMSE essentially unchanged. This supports a bounded short-trajectory sampling trial recommendation,not measured acceleration or production promotion.
 - Magnetic moments are complete and all Fe local moments positive;no multi-initial-state magnetic ground-state proof. Six training-domain probes are not an independent test or full99-family validation. Next suggested six-seed10-20-step trial remains unexecuted;no automatic expansion beyond the existing300-label cap.
 - Evidence: docs/reviews/fe110_reico_probe6_20261022/force_review.md and force_review.json.
+
+## 2026-10-22 - Six-family bounded ML sampling
+
+- User approved continuing the short sampling pilot. Reused the six reviewed local train-family seeds and frozen control cfcac123...1e523;LBFGS at most20steps,maxstep0.05A,ML fmax0.10eV/A,with unchanged Fe45 order/cell and18fixed Fe. No new external motif or production-method change.
+- Actual CUDA producer exit0;5cases20steps,0052guard stop at8 with C-Fe1.594649A below draft1.60A. Retain114frames,113within guards,107newunlabeled. Boundary failure is preserved and does not prove DFT invalidity. 0007model fmax rises3.960to4.479eV/A;no converged geometry or measured acceleration claim.
+- Six predetermined-family sampled frames prepared for DFT,including0052last-valid7;canonical static andINCAR checks PASS. No newDFT/training submitted;exact six-job submission approval is pending separately.
+- Evidence: docs/reviews/fe110_reico_sampling6_20261022/. All trajectory frames stay in train;no automatic99-family/300-label expansion.

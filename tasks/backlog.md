@@ -101,3 +101,11 @@ no deletion, reclassification event or state-transaction change is authorized by
 - Completed12 exact fixed-geometry CUDA predictions with frozen original/control checkpoints. Adsorbate vectorRMSE0.28461/0.27165eV/A;zero reversed adsorbate directions,modest4.55% overall improvement and essentially unchanged C2 combined RMSE. No ML optimization,training,new DFT or retry;all six stay within300-label cap. Registry recorded six DONE observations and source files,zero accepted adsorption results.
 - Next recommendation: separately scoped six-seed10-20-step ML sampling trial retaining initial/intermediate frames with small DFT force checks before any300-label expansion. Not executed or automatically authorized by this checkpoint. Review: docs/reviews/fe110_reico_probe6_20261022/force_review.md.
 - Authoritative handoff: docs/reviews/fe110_reico_probe6_20261022/ and calculations/fe110_reico_pilot300_20261022/probe6_v1/. Existing paired benchmark is preserved. Managed sync remains blocked by the existing PKG-INFO classification hash mismatch.
+
+## Fe110 REICO short sampling complete;new statics pending - 2026-10-22
+
+- Six frozen-control short trajectories actually ran on CUDA:5x20steps andfamily_0052guardstopat8.114frames,113guardvalid,107newunlabeled;alltrain. No ML optimizer convergence or measured speedup.
+- family_0007modelmaximumforceincreased;0052C-Fegurad1.60A crossed to1.594649A. Retain these diagnostics without loosening limits or rerunning.
+- Six preselected new statics prepared:0029step10,0002step20,0007step10,0078step20,0052step7,0004step20. All6canonicalpreflights andINCARvalidations PASS;32cores each,NSW0,activeSIGMA0.20. No newDFT ortraining yet.
+- Pending: explicit approval for these6newDFTjobs through the in-chat question,then fresh per-job execution gates/canonical executor. Existing6labels plus6new would be12/300,not permission to submit the remaining budget.
+- Evidence: docs/reviews/fe110_reico_sampling6_20261022/ and calculations/fe110_reico_pilot300_20261022/sampling6_v1/. Managed sync still blocked by the unchanged PKG-INFO classification hash conflict.

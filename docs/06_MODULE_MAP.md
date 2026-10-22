@@ -140,3 +140,7 @@ catalysis_data_retrieval:
 ### REICO six-probe sampling gate - 2026-10-22
 
 adsorption_workflow remains Active. Six exact statics passed electronic/raw-force/moment checks and12 frozen-model CUDA predictions completed. Results support only a bounded short-trajectory trial recommendation;actual sampling,near-minimum accuracy and measured C2/C3 VASP acceleration remain unverified. See docs/reviews/fe110_reico_probe6_20261022/force_review.md.
+
+### REICO six short trajectories - 2026-10-22
+
+adsorption_workflow remains Active. The bounded six-family CUDA sampling ran:five20-step cases andone8-step contact-guard stop.114frames retained,107newguard-valid frames remain unlabeled. Six preflighted static inputs await explicit new-submission authority;post-trajectory DFT force accuracy and measured acceleration remain unverified. See docs/reviews/fe110_reico_sampling6_20261022/.

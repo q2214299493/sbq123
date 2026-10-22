@@ -22,6 +22,7 @@ FORCE_ONLY_KINDS = {
     "adsorption_exact_trajectory_force_comparison",
     "adsorption_exact_static_force_comparison",
     "adsorption_independent_force_validation",
+    "adsorption_bounded_random_sampling",
 }
 
 if __package__:
@@ -79,6 +80,13 @@ def validate_force_only_scope(request: dict, exception: dict) -> None:
 
 
 def validate_scope(request: dict, authorization: dict, request_sha: str, exception: dict) -> None:
+    if request.get("document_kind") == "adsorption_bounded_random_sampling":
+        if __package__:
+            from scripts.adsorption.reico_sampling import validate_sampling_scope
+        else:
+            from reico_sampling import validate_sampling_scope
+        validate_sampling_scope(request, authorization, request_sha, exception)
+        return
     force_only = request.get("document_kind") in FORCE_ONLY_KINDS
     action = "RUN_GPU_ADSORPTION_EXACT_FORCES" if force_only else "RUN_GPU_ADSORPTION_FROZEN_VALIDATION"
     if (authorization.get("request_sha256") != request_sha or authorization.get("user_authorized") is not True
@@ -156,7 +164,7 @@ def verify_labels(root: Path, request: dict) -> None:
     for row in rows:
         original = expected[row["sample_id"]]
         keys = ["structure_sha256", "forces_eV_per_A", "symbols", "fixed_atom_indices_0based", "source_OUTCAR_sha256"]
-        if request.get("document_kind") == "adsorption_exact_static_force_comparison":
+        if request.get("document_kind") in {"adsorption_exact_static_force_comparison", "adsorption_bounded_random_sampling"}:
             keys += ["source_name", "source_job_id", "ionic_step", "source_force_table_sha256", "source_POSCAR_sha256", "source_INCAR_sha256"]
         else:
             keys += ["source_name", "source_job_id", "ionic_step", "source_total_steps", "source_force_table_sha256", "source_XDATCAR_sha256"] if force_only else ["calculation_group"]
@@ -295,6 +303,16 @@ def run(path: Path, authorization: Path) -> None:
             calc = patched_calc(checkpoint_path=model["path"], is_spin_off=False, is_low_fi=False, cpu=False)
             binding = cuda_binding(calc)
             save(output / (name + "_device.json"), binding)
+            if request["document_kind"] == "adsorption_bounded_random_sampling":
+                if __package__:
+                    from scripts.adsorption.reico_sampling import run_sampling
+                else:
+                    from reico_sampling import run_sampling
+                save(output / "sampling_result.json", run_sampling(root, request, calc, deadline))
+                del calc
+                gc.collect()
+                torch.cuda.empty_cache()
+                continue
             force_only = request["document_kind"] in FORCE_ONLY_KINDS
             predictions = predict_heldout(root, request["samples"] if force_only else request["heldout"], calc, deadline)
             suffix = "_forces.json" if force_only else "_heldout.json"
