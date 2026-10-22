@@ -209,3 +209,14 @@ adsorption planner above. No energy, stable molecular graph, scientific result,
 GPU execution, relaxation, DFT or model training is established by this step.
 The bounded run, underfilled family and validation are recorded in
 `docs/reviews/fe110_reico_geometry_step1_20261022/README.md`.
+
+### Six DFT probes before random ML sampling (2026-10-22)
+
+`scripts/adsorption/reico_probe_batch.py` selects six original CPU-generated
+training-family structures by composition and contact-distance quantiles,
+then reuses the canonical exact-geometry static builder/preflight. It never
+uploads,submits,optimizes or calls a model. User-triggered execution retains
+individual hash-bound diagnostic gates and the canonical submission executor.
+See `docs/reviews/fe110_reico_probe6_20261022/README.md`. Electronic and magnetic
+label admission must precede force comparison; six training-domain probes
+cannot validate the whole random pool or establish measured acceleration.

@@ -1445,3 +1445,11 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 - Freeze100 trajectory families and partitions before generation; cap20 attempts per family. Retain99 candidates and the failed C3 training family without padding; later3-frame-per-family cap implies at most297 selected frames from this pool.
 - Record raw coordinates/rejections and immutable hashes. Basic distance checks do not establish model-domain validity,SCF/magnetic convergence,stability,final symmetry/SOAP deduplication or measured acceleration.
 - Review: docs/reviews/fe110_reico_geometry_step1_20261022/README.md and geometry_review.json.
+
+## 2026-10-22 - DFT-reference-first random-sampling pilot
+
+- User accepted executing the preceding DFT-reference-first recommendation. Scope concretized as six exact-geometry static probes,threeC2/threeC3,within the original300-label pilot. This stage binds six jobs;Remaining new-configuration label cap is294,not an authorized next batch.
+- Geometry-only composition/contact-quantile selection uses training families exclusively;no independent final-test or full-domain validation claim. Preserve the original coordinates,ISPIN2 magnetic initialization and active SIGMA0.20/TOTEN branch;require electronic/coordinate/force/magnetic checks before label admission.
+- Six successful canonical submissions and scheduler evidence recorded;registry150 INSERT/zeroUPDATE includes jobs/provenance only,not accepted energies or adsorption states. Existing VASP jobs,checkpoints and production method remain unchanged.
+- No ML optimization is needed to establish these references. Exact frozen-model predictions are prepared only;model-domain suitability and any later DFT short-optimization/training package depend on the measured forces.
+- Evidence: docs/reviews/fe110_reico_probe6_20261022/README.md,input_review.json,execution_status.json,user_authorization.md.

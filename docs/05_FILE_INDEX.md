@@ -187,3 +187,12 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - tests/test_reico_random_geometry.py:19 focused geometry/provenance/resume/failure tests without scientific compute.
 - docs/reviews/fe110_reico_geometry_step1_20261022/: review and independent readback facts;99 candidates,one failed family,no GPU/DFT/training.
 - calculations/fe110_reico_pilot300_20261022/geometry_v1/: primary-workspace-only raw inputs,299 family artifacts,immutable summaries and preview;not copied into the source-release branch.
+
+## Fe110 REICO six DFT probes - 2026-10-22
+
+- scripts/adsorption/reico_probe_batch.py: six training-family geometry probes and canonical fixed-geometry VASP input preparation;no upload/submission/model call.
+- tests/test_reico_probe_batch.py: deterministic composition/geometry selection,heldout exclusion,underfill and invalid-descriptor checks;with existing builder tests16 pass.
+- docs/reviews/fe110_reico_probe6_20261022/README.md: actual six jobs,queue snapshot,label-admission and model-comparison boundaries,registry and sync outcome.
+- docs/reviews/fe110_reico_probe6_20261022/user_authorization.md: immutable record of the accepted workflow and bounded six-probe scope,referenced by all six execution gates.
+- docs/reviews/fe110_reico_probe6_20261022/input_review.json and execution_status.json: numeric input/gate hashes and actual submission/scheduler/registry snapshot;no DFT accuracy claim.
+- calculations/fe110_reico_pilot300_20261022/probe6_v1/: local-only six input bundles,source selection,canonical gates/receipts,LSF raw evidence and registry batch/plan/approval/receipt.
