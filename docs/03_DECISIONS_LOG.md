@@ -1474,3 +1474,10 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 - Preserve original batch_request.json as the prepared snapshot;submission_summary.json and per-case receipts establish actual submissions. Registry plan b3e78865b8075c2c7e34cf3e53c1c244ce36366823d93c91f4c1fdceb5e70b28 applied:151 INSERT,zero UPDATE,only calculation/job/status/file provenance.
 - Require normal termination,SCF,coordinate/raw-force and total/local-moment checks before using labels;fixed-geometry statics do not require ionic convergence. Compare exact-coordinate frozen-model forces before any sampling expansion;12/300 configurations only if all six new labels qualify.
 - Evidence: docs/reviews/fe110_reico_sampling6_20261022/dft_submission_status.json and dft_submission_authorization.md. Managed state sync remains blocked by the existing PKG-INFO classification hash conflict.
+
+## 2026-10-22 — Collect off-equilibrium data before judging the new model
+
+- User explicitly rejected old-model minimum/convergence accuracy as a prerequisite for gathering data and replied“可以的继续”. Execute bounded geometry-only sampling and selection;keep high-force/nonconverged/changed-connectivity candidates,subject to existing draft geometry/numeric safety guards. Require electronic rather than ionic convergence for later DFT single-point labels.
+- Freeze original99-family partitions. Reuse6completed trajectories;run only remaining93 with the same control checkpoint and20step/0.05A bounds. Actual process exits0;preserve all1995frames and7guard boundaries. Do not promote prediction/stability/acceleration claims.
+- Select up to3perfamily using frozen0.10A vector RMSD,XY periodicity/equal-element matching and movableFe context;no model-energy/error/convergence filtering. Final292frames include12existinglabels;280newcompatible32corestatic inputs prepared only. New DFT submission scope and training resources remain separate concrete execution decisions.
+- Source registry transaction aa5043371bf7dc3ca3c348ba3905807d5fd31493bf7b79fc5f66664aff70d1a1 applied:1549INSERT/6workflowupdates;no newjobs or accepted science results. Current evidence:docs/reviews/fe110_reico_sampling93_20261022/.

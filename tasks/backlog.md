@@ -109,3 +109,11 @@ no deletion, reclassification event or state-transaction change is authorized by
 - User approved the six preselected new statics:0029step10,0002step20,0007step10,0078step20,0052step7,0004step20. All6 canonical gates/preflights and INCAR validations PASS;32cores each,NSW0,activeSIGMA0.20. Submitted through the canonical executor as LSF9919076-9919081;all PEND at2026-10-22T11:35:30-31Z. No new training.
 - Next: after these six statics finish,review SCF,exact raw coordinates/forces and total/local magnetic moments,then compare frozen-model forces. Existing6labels plus6new would be12/300;remaining288 is not new execution authority. Submission registry:151 INSERT,zero UPDATE,zero accepted results;17 focused tests pass.
 - Evidence: docs/reviews/fe110_reico_sampling6_20261022/ and calculations/fe110_reico_pilot300_20261022/sampling6_v1/. Managed sync still blocked by the unchanged PKG-INFO classification hash conflict.
+
+## Fe110 REICO292 candidates ready for DFT — 2026-10-22
+
+- User corrected the stage objective and authorized continuing sampling/deduplication;old-model accuracy/minimum convergence is not a prerequisite for collecting training data.
+- Actual remaining93-family CUDA run exited0 in127.36s;87step caps and6guard stops. Combined with previous6families:1995frames,1988guardvalid,7boundary frames preserved. No resampling or threshold relaxation.
+- Geometry-only selection:292frames,C2=147/C3=145;train233/development30/final_test29. Existing12DFTlabels reused exactly;280newstatics prepared,all canonicalpreflights and per-caseINCAR checks pass. Independent14029pair enumeration passes0.10A vector RMSD;minimum0.103246A.
+- Pending: user confirmation of the concrete newDFT scope,then fresh canonical gates/executor. First24 option is frozen(C2/C3each12,eachpartition8,24families). Full280resource extrapolation is4433-7272allocatedcorehours,35-57h at full128cores excluding queue;not guaranteed. No newDFT/training has run.
+- Evidence:docs/reviews/fe110_reico_sampling93_20261022/ and calculations/fe110_reico_pilot300_20261022/sampling93_v1/. Primary96/publication66tests pass;registry1549INSERT/6workflowupdates,zero newjobs/acceptedresults. Managed sync still blocked by existingPKG-INFO mismatch.

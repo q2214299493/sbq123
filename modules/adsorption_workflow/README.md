@@ -239,5 +239,9 @@ per-frame raw-force/geometry preservation and fixed-layer/contact guards.
 Five cases reached the step cap;0052stopped at8 on the draft C-Fe guard.
 All114frames are retained,including the boundary;107newguard-valid frames
 are unlabeled. None is a converged/accepted adsorption state. Six sampled
-static inputs are prepared and checked but not submitted;no new training
-or expansion is authorized by a producer exit or geometry guard pass.
+static inputs subsequently completed DFT electronic/raw-force/moment checks.
+The separately authorized remaining93-family sampling and geometry-only selection
+are recorded in docs/reviews/fe110_reico_sampling93_20261022/:292 selected frames,
+including12 reused DFT labels,with280 new static input bundles prepared only.
+Old-model accuracy or optimizer convergence is not a sampling/selection gate.
+No new DFT submission,training or production promotion follows from this review.

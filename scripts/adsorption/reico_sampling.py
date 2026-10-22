@@ -11,6 +11,7 @@ from ase.io import write
 from ase.optimize import LBFGS
 
 KIND = "adsorption_bounded_random_sampling"
+UNLABELED_ROLE = "frozen_family_unlabeled_geometry_sampling"
 
 
 def validate_sampling_scope(request, authorization, request_sha, exception):
@@ -22,6 +23,8 @@ def validate_sampling_scope(request, authorization, request_sha, exception):
     for key in ("gpu_index", "gpu_uuid", "remote_root", "max_wall_seconds", "limits"):
         if request[key] != exception[key]:
             raise ValueError("sampling scope changed: " + key)
+    if request.get("max_return_bytes", 32_000_000) != exception.get("max_return_bytes", 32_000_000):
+        raise ValueError("sampling return size cap changed")
     if (request["execution_mode"] != "direct_no_scheduler" or request["scheduler_job_id"] is not None
             or set(request["models"]) != {"candidate"}
             or request["models"]["candidate"]["sha256"] != exception["candidate_checkpoint_sha256"]):
@@ -33,8 +36,66 @@ def validate_sampling_scope(request, authorization, request_sha, exception):
             or request["source_manifest_sha256"] != exception["source_manifest_sha256"]
             or request["generation_config_sha256"] != exception["generation_config_sha256"]
             or request["geometry_cases"]
-            or request["sample_role"] != "screened_untrained_diagnostic_not_independent_heldout"):
+            or request["sample_role"] != exception.get(
+                "sample_role", "screened_untrained_diagnostic_not_independent_heldout")):
         raise ValueError("sampling source membership or role changed")
+    if request["sample_role"] not in {
+            UNLABELED_ROLE, "screened_untrained_diagnostic_not_independent_heldout"}:
+        raise ValueError("unknown sampling source role")
+
+
+def verify_unlabeled_sources(root: Path, request: dict) -> None:
+    """Verify frozen random geometry sources without inventing reference labels."""
+    if __package__:
+        from archive.fe110_adsorption_validation_20261018.runtime import digest, load_atoms, local_path
+    else:
+        from runtime import digest, load_atoms, local_path
+    source_path = local_path(root, request["source_manifest_path"])
+    if digest(source_path) != request["source_manifest_sha256"]:
+        raise ValueError("unlabeled source manifest changed")
+    source = json.loads(source_path.read_bytes())
+    if (source.get("document_kind") != "frozen_reico_unlabeled_sampling_sources"
+            or source["samples"] != request["samples"]):
+        raise ValueError("unlabeled source membership or partition changed")
+    summary_path = local_path(root, source["generation_summary_path"])
+    config_path = local_path(root, request["generation_config_path"])
+    slab_path = local_path(root, source["slab_path"])
+    if (digest(summary_path) != source["generation_summary_sha256"]
+            or digest(config_path) != request["generation_config_sha256"]):
+        raise ValueError("frozen generation evidence changed")
+    summary = json.loads(summary_path.read_bytes())
+    config = json.loads(config_path.read_bytes())
+    if (summary["binding"]["config_sha256"] != request["generation_config_sha256"]
+            or digest(slab_path) != summary["binding"]["slab_sha256"]):
+        raise ValueError("frozen slab/config binding changed")
+    from ase.io import read
+    slab = read(slab_path, format="vasp")
+    families = {r["family_id"]: r for r in summary["families"]}
+    for row in request["samples"]:
+        original = families[row["sample_id"]]
+        record_path = local_path(root, row["family_record_path"])
+        if digest(record_path) != row["family_record_sha256"]:
+            raise ValueError("random family record changed")
+        record = json.loads(record_path.read_bytes())
+        if (row["source_name"] != row["sample_id"]
+                or row["partition"] not in {"train", "development", "final_test"}
+                or any(row[k] != original[k] for k in ("composition", "partition"))
+                or record["family_id"] != row["sample_id"]
+                or record["status"] != original["status"] or record["status"] != "CPU_GEOMETRY_CANDIDATE"
+                or record["poscar_sha256"] != row["structure_sha256"]
+                or any(record[k] != row[k] for k in ("composition", "partition"))):
+            raise ValueError("frozen random family identity changed")
+        path = local_path(root, row["structure_path"])
+        if digest(path) != row["structure_sha256"]:
+            raise ValueError("unlabeled source structure changed")
+        atoms = load_atoms(path)
+        if (atoms.get_chemical_symbols() != row["symbols"]
+                or row["fixed_atom_indices_0based"] != list(range(18))
+                or not np.allclose(atoms.cell, slab.cell, atol=1e-12, rtol=0)
+                or not np.allclose(atoms.positions[:45], slab.positions, atol=1e-12, rtol=0)):
+            raise ValueError("unlabeled slab/order/mask changed")
+        if geometry_audit(atoms, atoms, config["pair_minimum_A"], request["limits"])["failures"]:
+            raise ValueError("unlabeled initial geometry guard failed")
 
 
 def geometry_audit(atoms, initial, pair_minimum, limits):
@@ -159,7 +220,8 @@ def run_sampling(root: Path, request: dict, calculator, deadline: float):
         record = sample_case(atoms, root / "output" / "sampling" / source["sample_id"],
                              request["limits"], guards, deadline)
         cases.append({"sample_id": source["sample_id"], "composition": source["composition"],
-                      "partition": "train", "source_structure_sha256": source["structure_sha256"], **record})
+                      "partition": source.get("partition", "train"),
+                      "source_structure_sha256": source["structure_sha256"], **record})
         print("sampling " + source["sample_id"] + " " + record["status"], flush=True)
     return {"cases": cases, "checkpoint_sha256": request["models"]["candidate"]["sha256"],
             "frames_are_ML_predictions_not_DFT_labels": True, "training_performed": False}

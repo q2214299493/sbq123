@@ -1,0 +1,184 @@
+{
+  "document_kind": "fe110_reico_sampling93_selection_and_preparation_status",
+  "as_of_utc": "2026-10-22T15:44:25.848330+00:00",
+  "status": "SAMPLING_AND_GEOMETRY_SELECTION_COMPLETE_DFT_INPUTS_PREPARED_NOT_SUBMITTED",
+  "sampling_request_sha256": "c8d0127fb015fc10b6f8597cc8a709f64a674d862f3f89f7ab3d40a6d85d0dbf",
+  "sampling_authorization_sha256": "f4102057f4ff66c0f4be00886f53d57ae40a569cfc885945863f19e23b472daf",
+  "producer": {
+    "run_id": "direct-fe110-reico-sampling93-20261022-v1",
+    "exit_code": 0,
+    "request_sha256": "c8d0127fb015fc10b6f8597cc8a709f64a674d862f3f89f7ab3d40a6d85d0dbf",
+    "started_utc": "2026-10-22T15:27:19.996852+00:00",
+    "finished_utc": "2026-10-22T15:29:27.358517+00:00",
+    "error": null,
+    "scheduler_job_id": null,
+    "evidence_class": "producer_process_only_not_scheduler_state",
+    "training_performed": false,
+    "model_promoted": false,
+    "vasp_submitted": false
+  },
+  "GPU_model_device": "cuda:0",
+  "physical_GPU_uuid": "GPU-450609b3-d1fd-ac33-d03a-79891be402da",
+  "checkpoint_sha256": "cfcac123cd56b866a1ea36cc780a3aee634f3aeec979bda4ae8bee2cc831e523",
+  "new_sampling_families": 93,
+  "new_sampling_case_status_counts": {
+    "STEP_LIMIT_REACHED": 87,
+    "GUARD_STOP_PRESERVED": 6
+  },
+  "previous_families_reused": 6,
+  "total_families": 99,
+  "total_frames": 1995,
+  "guard_valid_frames": 1988,
+  "boundary_frames_preserved": 7,
+  "selected_total": 292,
+  "existing_DFT_labels": 12,
+  "new_DFT_candidates_and_prepared_inputs": 280,
+  "selected_partition_counts": {
+    "train": 233,
+    "final_test": 29,
+    "development": 30
+  },
+  "selected_composition_counts": {
+    "C2HO": 45,
+    "C2H2O": 58,
+    "C2H3": 44,
+    "C3H2O": 145
+  },
+  "selected_C2_C3_counts": {
+    "C2": 147,
+    "C3": 145
+  },
+  "selected_manifest_sha256": "022e46102437678a541c587bbd30aaa1e0db27992ea8fcedca3092343701cd34",
+  "prepared_DFT_batch_sha256": "117bdce2fdbd2220a48412976db7e1a295151b1ff0b48c7a869a47dff2f6ec08",
+  "independent_geometry_validation": {
+    "document_kind": "independent_selected_geometry_and_input_audit",
+    "selection_sha256": "022e46102437678a541c587bbd30aaa1e0db27992ea8fcedca3092343701cd34",
+    "selected_count": 292,
+    "family_count": 99,
+    "existing_DFT_labels": 12,
+    "prepared_unsubmitted_statics": 280,
+    "independent_same_composition_pair_checks": 14029,
+    "minimum_vector_RMSD_A": 0.10324618228662771,
+    "closest_pair": [
+      "family_0016_step007",
+      "family_0016_step000"
+    ],
+    "method": "Brute-force same-element mappings,XY periodic minimum images,and fixed-order movable-Fe RMSD;no predicted energy/accuracy/convergence filter.",
+    "partition_counts": {
+      "train": 233,
+      "final_test": 29,
+      "development": 30
+    },
+    "input_hash_and_per_case_INCAR_validations_pass": 280,
+    "training_runs": 0,
+    "new_DFT_jobs_submitted": 0
+  },
+  "new_DFT_jobs_submitted": 0,
+  "new_training_runs": 0,
+  "first24_proposal_sha256": "e8217ad236a55c609b4efb8470bc9151c79c2826e56536132b7225269b7d27f8",
+  "first24_partition_counts": {
+    "train": 8,
+    "development": 8,
+    "final_test": 8
+  },
+  "first24_carbon_counts": {
+    "C2": 12,
+    "C3": 12
+  },
+  "resource_estimate": {
+    "document_kind": "DFT_label_resource_reference_only",
+    "reference_completed_statics": [
+      {
+        "sample_id": "family_0029_step010",
+        "elapsed_seconds": 2589.691,
+        "allocated_core_hours": 23.019475555555555
+      },
+      {
+        "sample_id": "family_0002_step020",
+        "elapsed_seconds": 1781.017,
+        "allocated_core_hours": 15.831262222222223
+      },
+      {
+        "sample_id": "family_0007_step010",
+        "elapsed_seconds": 1864.442,
+        "allocated_core_hours": 16.57281777777778
+      },
+      {
+        "sample_id": "family_0078_step020",
+        "elapsed_seconds": 2665.763,
+        "allocated_core_hours": 23.69567111111111
+      },
+      {
+        "sample_id": "family_0052_step007",
+        "elapsed_seconds": 1823.003,
+        "allocated_core_hours": 16.20447111111111
+      },
+      {
+        "sample_id": "family_0004_step020",
+        "elapsed_seconds": 2921.773,
+        "allocated_core_hours": 25.971315555555556
+      }
+    ],
+    "new_DFT_jobs": 280,
+    "cores_per_job": 32,
+    "account_core_limit": 128,
+    "projected_allocated_core_hours_if_each_matches_observed_range": [
+      4432.753422222223,
+      7271.968355555556
+    ],
+    "projected_runtime_hours_at_full128core_utilization_excluding_queue": [
+      34.63088611111112,
+      56.81225277777778
+    ],
+    "limitations": "Rough extrapolation from six different sampled frames;new SCF/magnetic difficulty,queue and shared-account availability can change actual cost;not a guaranteed budget."
+  },
+  "registry_receipt": {
+    "schema_version": 1,
+    "document_kind": "calculation_registry_batch_result",
+    "batch_id": "fe110_reico_sampling93_selection_20261022_v1",
+    "batch_sha256": "cc57b3e45d6d248932143eb77025b4db9f165083c749a29a785aa62518f92efb",
+    "plan_sha256": "aa5043371bf7dc3ca3c348ba3905807d5fd31493bf7b79fc5f66664aff70d1a1",
+    "inserted": 1549,
+    "updated": 6,
+    "unchanged": 0,
+    "already_applied": false
+  },
+  "tests_primary_passed": 96,
+  "tests_publication_branch_passed": 66,
+  "validation_failures_resolved": [
+    "Initial Ruff complexity findings fixed by separating frame input validation;no scientific settings changed.",
+    "Initial preparation unit tests caught str/Path API mismatch before real input creation;fixed and tests passed.",
+    "Initial selection used component instead of vector RMSD;corrected to the existing0.10Angstrom vector definition;raw trajectories unchanged.",
+    "Publication tests exposed an accidental dependency on the primary live registry;tests now use isolated temporary registries;66 publication checks pass."
+  ],
+  "SSH_deployment_issue": {
+    "observed_error": "Exceeded MaxStartups before authentication",
+    "resolved": true,
+    "recovery": "Inspected target/archive state and hash-verified missing-only extraction;fresh receipts;one actual GPU launch;no automatic scientific retry."
+  },
+  "repo_state_sync": {
+    "exit_code": 1,
+    "blocker": "repository item changed after classification: sbq_catalyst_agent_workflow.egg-info/PKG-INFO"
+  },
+  "scientific_limits": [
+    "No old-model accuracy or optimizer convergence gate for candidate selection.",
+    "Distance guards are draft safety bounds;boundary frames retained for separate review.",
+    "No molecular graph/valence/minimum or global surface-symmetry uniqueness guarantee.",
+    "Final-test families had geometry/model-output integrity checks only;no independent DFT error used for selection.",
+    "New model training and actual C2/C3 acceleration have not occurred."
+  ],
+  "next_action": "Confirm the concrete new DFT submission scope;then fresh per-job canonical execution gates and executor.",
+  "source_sha256": {
+    "scripts/adsorption/reico_sampling.py": "7e186d9fe2bcb282006a55516322b3e7c11af2f3199d0371a321a468f9cca8a9",
+    "scripts/adsorption/reico_selection.py": "e0647caaf442e673ce38218ae00565e1d5668a0a1413f5246967cd9e10dfcdb9",
+    "archive/fe110_adsorption_validation_20261018/runtime.py": "8b53ddf461bc0136a91f585a6648aef70b4a52703ff8eca99169ff19197ec350",
+    "archive/fe110_adsorption_validation_20261018/dispatch.py": "67674c19ee528b36f6f4b736a2aec8a0f7beb0378d8a621834bb3fd025a28197",
+    "archive/fe110_adsorption_validation_20261018/prepare.py": "5a8cc109cdefcdd9174ecafa376c943cd4746a1c4f2a6f330b0877ec5cd5efaa",
+    "archive/fe110_reico_sampling93_20261022/prepare.py": "84da6b37af9a3e0c410aa4c4619add6d3519b4ab8d9d04e04c8b3175e1302505",
+    "archive/fe110_reico_sampling93_20261022/review.py": "131794552421e834fa6b0597e58de2588e83962bbe7f7ac9b472a60a6f90b5fe",
+    "archive/fe110_reico_sampling93_20261022/prepare_labels.py": "abaad4ed8d0c04437751971ea10b76a1b0f95cf8ae99386903b2c9e2f78ea22f",
+    "tests/test_reico_unlabeled_sampling.py": "4389cbd7e4a04e0f3ea2c6392d8af5941c151b475d43cc3682188c905468ab8f",
+    "tests/test_reico_selection.py": "cfe4ec4816ba0f783a968b759297063e67eddf2f09d1297e2abe156665d380d2",
+    "tests/test_reico_prepare_labels.py": "987d2d949ef5e29276420d5506d1c1cfe90d061b378a9bad7f5ace3ead97b494"
+  }
+}

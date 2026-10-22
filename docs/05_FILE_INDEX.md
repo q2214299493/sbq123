@@ -211,3 +211,11 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - calculations/fe110_reico_pilot300_20261022/sampling6_v1/: local-only request/producer/device/114rawframe artifacts,113guard-valid frames,six submitted DFT input/gate/receipt bundles (LSF9919076-9919081) and reviewed metadata-only registry transactions.
 
 - archive/fe110_reico_sampling6_20261022/submit.py and tests/test_reico_sampled_submission.py: exact-scope canonical submission binding;new DFT authorization and submission checkpoint in docs/reviews/fe110_reico_sampling6_20261022/.
+
+## Fe110 REICO292 sampling and DFT preparation — 2026-10-22
+
+- scripts/adsorption/reico_sampling.py: separate hash-bound geometry-only source mode,preserving original family partitions without invented DFT references.
+- scripts/adsorption/reico_selection.py: geometry-only family selection,periodic/equal-element deduplication,and preserved existing labels.
+- archive/fe110_reico_sampling93_20261022/{prepare,review,prepare_labels}.py: exact93-family package,raw-return audit/292selection,and280unsubmitted static inputs. Existing dispatch.py and its original prepare.py import dependency are included for standalone source replay.
+- tests/test_reico_unlabeled_sampling.py,test_reico_selection.py,test_reico_prepare_labels.py: scope/source integrity,split isolation,vector-RMSD/permutation checks,static-branch invariants and isolated preparation resume tests.
+- docs/reviews/fe110_reico_sampling93_20261022/: user authority,current results and limits;raw/checkpoint/selection/input/registry artifacts are local-only under calculations/fe110_reico_pilot300_20261022/sampling93_v1/.

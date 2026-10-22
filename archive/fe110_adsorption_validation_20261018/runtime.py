@@ -149,7 +149,20 @@ def verify_independent_source(root: Path, request: dict, source: dict) -> None:
             raise ValueError("independent label-source bytes changed")
 
 
+def verify_unlabeled_sampling_sources(root: Path, request: dict) -> None:
+    # Keep the optional sampler out of old standalone force-only packages.
+    if __package__:
+        from scripts.adsorption.reico_sampling import verify_unlabeled_sources
+    else:
+        from reico_sampling import verify_unlabeled_sources
+    verify_unlabeled_sources(root, request)
+
+
 def verify_labels(root: Path, request: dict) -> None:
+    if (request.get("document_kind") == "adsorption_bounded_random_sampling"
+            and request.get("sample_role") == "frozen_family_unlabeled_geometry_sampling"):
+        verify_unlabeled_sampling_sources(root, request)
+        return
     if digest(local_path(root, request["source_manifest_path"])) != request["source_manifest_sha256"]:
         raise ValueError("source training manifest changed")
     source = json.loads(local_path(root, request["source_manifest_path"]).read_bytes())
