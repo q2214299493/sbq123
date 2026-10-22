@@ -1,7 +1,7 @@
 {
   "document_kind": "fe110_reico_sampling93_selection_and_preparation_status",
-  "as_of_utc": "2026-10-22T15:44:25.848330+00:00",
-  "status": "SAMPLING_AND_GEOMETRY_SELECTION_COMPLETE_DFT_INPUTS_PREPARED_NOT_SUBMITTED",
+  "as_of_utc": "2026-10-22T16:39:42.749554+00:00",
+  "status": "PARTIAL_SUBMISSION_BLOCKED_BY_SERVER_JOB_COUNT_LIMIT",
   "sampling_request_sha256": "c8d0127fb015fc10b6f8597cc8a709f64a674d862f3f89f7ab3d40a6d85d0dbf",
   "sampling_authorization_sha256": "f4102057f4ff66c0f4be00886f53d57ae40a569cfc885945863f19e23b472daf",
   "producer": {
@@ -73,7 +73,7 @@
     "training_runs": 0,
     "new_DFT_jobs_submitted": 0
   },
-  "new_DFT_jobs_submitted": 0,
+  "new_DFT_jobs_submitted": 204,
   "new_training_runs": 0,
   "first24_proposal_sha256": "e8217ad236a55c609b4efb8470bc9151c79c2826e56536132b7225269b7d27f8",
   "first24_partition_counts": {
@@ -167,7 +167,7 @@
     "Final-test families had geometry/model-output integrity checks only;no independent DFT error used for selection.",
     "New model training and actual C2/C3 acceleration have not occurred."
   ],
-  "next_action": "Confirm the concrete new DFT submission scope;then fresh per-job canonical execution gates and executor.",
+  "next_action": "After queue headroom returns,reconcile retained reservations under the owning protocol,then submit only outstanding originally authorized inputs;no new sampling or training.",
   "source_sha256": {
     "scripts/adsorption/reico_sampling.py": "7e186d9fe2bcb282006a55516322b3e7c11af2f3199d0371a321a468f9cca8a9",
     "scripts/adsorption/reico_selection.py": "e0647caaf442e673ce38218ae00565e1d5668a0a1413f5246967cd9e10dfcdb9",
@@ -179,6 +179,16 @@
     "archive/fe110_reico_sampling93_20261022/prepare_labels.py": "abaad4ed8d0c04437751971ea10b76a1b0f95cf8ae99386903b2c9e2f78ea22f",
     "tests/test_reico_unlabeled_sampling.py": "4389cbd7e4a04e0f3ea2c6392d8af5941c151b475d43cc3682188c905468ab8f",
     "tests/test_reico_selection.py": "cfe4ec4816ba0f783a968b759297063e67eddf2f09d1297e2abe156665d380d2",
-    "tests/test_reico_prepare_labels.py": "987d2d949ef5e29276420d5506d1c1cfe90d061b378a9bad7f5ace3ead97b494"
+    "tests/test_reico_prepare_labels.py": "987d2d949ef5e29276420d5506d1c1cfe90d061b378a9bad7f5ace3ead97b494",
+    "archive/fe110_reico_sampling93_20261022/submit.py": "c42beccb744ab80ead813e285da3e3c29b9d73ed03b09fb87a3c74ab62e4c8ea",
+    "archive/fe110_reico_sampling93_20261022/submission_review.py": "38f822b87899064656d352ee8ff5e282d673792a3a865b948792873734701296",
+    "archive/fe110_reico_sampling93_20261022/inspect_submission_limit.py": "1658c6a4fdab4811f51734b2482250aecec728cea7588b021d05b657df1f5601",
+    "tests/test_reico_labels280_submission.py": "69190232e7a27db5b7f8b28e52f2ac1914711f4316770cf8199861271d2b9f4f",
+    "tests/test_reico_labels280_review.py": "594e185bc83bccd06ae3e556bc6fe0d3b46d5af49245b36ee5c25b6951838a94"
+  },
+  "new_DFT_jobs_without_success_receipt": 76,
+  "DFT_submission_checkpoint": {
+    "path": "docs\\reviews\\fe110_reico_sampling93_20261022\\dft_submission_status.json",
+    "sha256": "52a5fd205ccaec3acce39ba0448b1d05f90ea0985445404ddd606fd240bea716"
   }
 }

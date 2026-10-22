@@ -149,8 +149,10 @@ adsorption_workflow remains Active. The bounded six-family CUDA sampling ran:fiv
 
 adsorption_workflow remains Active. All99 generated families now have short
 ML trajectories;geometry-only selection retained292frames and preserves the
-frozen train/development/final_test partitions.12DFTlabels reused;280newstatic
-inputs pass validation but remain unsubmitted. New model training and actual
-C2/C3 acceleration remain unverified. Old-model minimum/convergence accuracy
+frozen train/development/final_test partitions.12DFTlabels reused;all280static
+input/gates pass. User authorized280;204actual submissions(3RUN/201PEND).
+Server job-count limit blocks completion:69untouched,6esubrefusals,1SSHtimeout.
+Seven reservations require review;no retries/background supplement. New model
+training and actual C2/C3 acceleration remain unverified. Old-model minimum/convergence accuracy
 is not a precondition for this data-collection stage. Evidence:
 docs/reviews/fe110_reico_sampling93_20261022/.

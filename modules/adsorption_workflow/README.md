@@ -242,6 +242,11 @@ are unlabeled. None is a converged/accepted adsorption state. Six sampled
 static inputs subsequently completed DFT electronic/raw-force/moment checks.
 The separately authorized remaining93-family sampling and geometry-only selection
 are recorded in docs/reviews/fe110_reico_sampling93_20261022/:292 selected frames,
-including12 reused DFT labels,with280 new static input bundles prepared only.
+including12 reused DFT labels. The user subsequently authorized all280new
+statics;all input/gates pass and204actual submissions are recorded. Server
+job-count rejection blocks the rest:69untouched,6explicit esubrefusals,1SSHtimeout.
+Preserve7unknown reservations and check queue headroom before continuation;
+no automatic retry or background supplement is running. Current checkpoint:
+docs/reviews/fe110_reico_sampling93_20261022/dft_submission_status.json.
 Old-model accuracy or optimizer convergence is not a sampling/selection gate.
-No new DFT submission,training or production promotion follows from this review.
+New labels remain scientifically unreviewed;no training or production promotion.

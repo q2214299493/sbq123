@@ -219,3 +219,12 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - archive/fe110_reico_sampling93_20261022/{prepare,review,prepare_labels}.py: exact93-family package,raw-return audit/292selection,and280unsubmitted static inputs. Existing dispatch.py and its original prepare.py import dependency are included for standalone source replay.
 - tests/test_reico_unlabeled_sampling.py,test_reico_selection.py,test_reico_prepare_labels.py: scope/source integrity,split isolation,vector-RMSD/permutation checks,static-branch invariants and isolated preparation resume tests.
 - docs/reviews/fe110_reico_sampling93_20261022/: user authority,current results and limits;raw/checkpoint/selection/input/registry artifacts are local-only under calculations/fe110_reico_pilot300_20261022/sampling93_v1/.
+
+## Fe110 REICO280 authorized submission checkpoint — 2026-10-23
+
+- archive/fe110_reico_sampling93_20261022/submit.py:exact280scope/source/POTCAR binding,per-job canonical execution gates and bounded submission tranches;successful receipts reused,unknown reservations never retried.
+- archive/fe110_reico_sampling93_20261022/submission_review.py:strict full or explicit partial receipt/LSF checkpoints and metadata-only registry plans;never submits or automatically approves a registry plan.
+- archive/fe110_reico_sampling93_20261022/inspect_submission_limit.py:read-only Python3.6 remote metadata diagnostic;its broad hash sweep timed out. Successful short bjobs/ps fallback evidence is retained separately.
+- tests/test_reico_labels280_submission.py and test_reico_labels280_review.py:scope/source/gate integrity,tranche boundaries,receipt reuse,unknown-state refusal,and truthful partial checkpoints.
+- docs/reviews/fe110_reico_sampling93_20261022/{dft_submission_authorization.md,dft_submission_status.json}:literal280job authority and actual204submitted/76outstanding status. execution_status.json links this checkpoint.
+- calculations/fe110_reico_pilot300_20261022/sampling93_v1/dft_inputs_v1/:local-only frozen280inputs/gates,204receipts,7protectedunknowns,initial_submission_checkpoint.json,minimal_submission_limit_reconciliation.json,submission_failure_review.json,remaining_submission_plan.json,and reviewed3881INSERT registry transaction.

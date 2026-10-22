@@ -54,3 +54,11 @@ Update this table in place. Move resolved items to historical results or Git his
 - Command: repo-state sync --safe-only; actual exit code1. Error: repository item changed after classification: sbq_catalyst_agent_workflow.egg-info/PKG-INFO.
 - Scope: existing repository classification/source-byte mismatch; not a Fe110 geometry or scientific-validation failure. No classification event or generated package metadata was rewritten to bypass the guard.
 - Impact: managed repository-state synchronization remains incomplete. Task-owned CPU geometry files and their explicit checks are retained; source publication is reported separately.
+
+## 2026-10-23 — REICO280 submission stopped by server job-count rejection
+
+- After204successful receipts,six canonical submissions exited255:“You should not submit too many jobs. Request aborted by esub. Job not submitted.” Another submission(family_0097_step020)timed out after300s. These are submission failures/uncertainty;no DFT SCF failure has been established.
+- At2026-10-22T16:36:22Z,the full account query matched204known jobs(3RUN/201PEND),with no unmatched recent/active job or matching residual submission process. Preserve all7UNKNOWN_NEEDS_RECONCILIATION records and remote reservations;do not infer successful submission or erase guards. Six have explicit refusals;the timeout remains outcome-unconfirmed.
+- Remaining76include69never attempted. Confirm server job-count policy/current allowance and use owning reconciliation protocol before supplementing the original authorized scope. No automatic retry or background supplement is active;existing204jobs continue.
+- Two broad read-only metadata probes timed out at50/65s;remote hash sweep remains unverified. Short native bjobs/ps queries passed and source bytes are saved in dft_inputs_v1/minimal_submission_limit_reconciliation.json. No calculation was stopped or input rewritten.
+- Evidence:docs/reviews/fe110_reico_sampling93_20261022/dft_submission_status.json;local failure review and remaining_submission_plan.json under calculations/fe110_reico_pilot300_20261022/sampling93_v1/dft_inputs_v1/.

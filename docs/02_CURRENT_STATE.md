@@ -88,13 +88,13 @@ latest observation. Its scientific claims are not revalidated in B6.
 Next action: Prepare and review a revised preconditioning or resampling design that preserves at least three O-H interval images; require new explicit authorization before any rerun.
 <!-- state-handoff:end active-fe-110-co-dissociation-test-current-gate -->
 
-### Fe110 random-sampling dataset checkpoint — 2026-10-22
+### Fe110 random-sampling dataset checkpoint — 2026-10-23
 
-REICO sampling now covers all99 generated local families:1995frames,1988within
-draft geometry guards. Geometry-only selection retained292frames(train233,
-development30,final_test29),including12 reviewed static labels.280 new32core
-static inputs pass preflight/INCAR checks but remain unsubmitted;no new training
-or measured C2/C3 acceleration. Old-model convergence/accuracy is not a
-sampling gate. Current evidence:docs/reviews/fe110_reico_sampling93_20261022/.
-Managed sync remains blocked by the existing PKG-INFO classification hash conflict;
-the separate paired VASP benchmark remains unchanged.
+All99 local families sampled;1995frames→292selected(train233/dev30/test29),
+including12 reviewed DFTlabels. User authorized280 new32corestatics;allinputs/
+gates pass.204submitted:3RUN/201PEND(96cores)at2026-10-22T16:36Z.
+76 lack success receipts:69untouched,6esubrefusals,1SSHtimeout;no retries.
+Server job-count headroom and7reservation reviews block remaining submissions.
+No new training or measured C2/C3 acceleration. Evidence:
+docs/reviews/fe110_reico_sampling93_20261022/dft_submission_status.json.
+Managed sync remains blocked by existing PKG-INFO;paired benchmark unchanged.

@@ -1481,3 +1481,11 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 - Freeze original99-family partitions. Reuse6completed trajectories;run only remaining93 with the same control checkpoint and20step/0.05A bounds. Actual process exits0;preserve all1995frames and7guard boundaries. Do not promote prediction/stability/acceleration claims.
 - Select up to3perfamily using frozen0.10A vector RMSD,XY periodicity/equal-element matching and movableFe context;no model-energy/error/convergence filtering. Final292frames include12existinglabels;280newcompatible32corestatic inputs prepared only. New DFT submission scope and training resources remain separate concrete execution decisions.
 - Source registry transaction aa5043371bf7dc3ca3c348ba3905807d5fd31493bf7b79fc5f66664aff70d1a1 applied:1549INSERT/6workflowupdates;no newjobs or accepted science results. Current evidence:docs/reviews/fe110_reico_sampling93_20261022/.
+
+## 2026-10-23 — Authorized280 statics;204 submitted before server rejection
+
+- User explicitly selected“分批提交全部280个（推荐）”after disclosure of32cores/job,128accountcores and rough4433-7272allocatedcorehours. Bind all280 to frozen batch117bdce2fdbd2220a48412976db7e1a295151b1ff0b48c7a869a47dff2f6ec08;reuse12labels. No parameter change,extra structure or new training.
+- All280canonical input/gates pass. Canonical executor returned204unique matching receipts. Exact account recheck at2026-10-22T16:36:22Z:3RUN/201PEND,96runningcores;new scientific outputs unreviewed.
+- Server esub refused6requests for too many jobs;another SSH submission timed out after300s. Preserve all7unknown reservations/receipts. No additional matching recent/active job or submission process observed;one timeout outcome remains unconfirmed. Exact configured job-count threshold needs confirmation.
+- Remaining76=69untouched+7requiring recovery review. Keep original280authority;confirm current server submission allowance and reconcile reservations before supplementing only unsubmitted inputs. No automatic retry/background supplement and no existing calculation stopped.
+- Reviewed registry plan da03fe0318c435ea956ee810f64bf2d5e1dd1c8fe8652a04ee01fad5093941a1 applied:3881INSERT/0UPDATE,204real jobs and provenance only;zero accepted results. Evidence:docs/reviews/fe110_reico_sampling93_20261022/dft_submission_status.json.
