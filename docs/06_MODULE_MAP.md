@@ -143,4 +143,4 @@ adsorption_workflow remains Active. Six exact statics passed electronic/raw-forc
 
 ### REICO six short trajectories - 2026-10-22
 
-adsorption_workflow remains Active. The bounded six-family CUDA sampling ran:five20-step cases andone8-step contact-guard stop.114frames retained,107newguard-valid frames remain unlabeled. Six preflighted static inputs await explicit new-submission authority;post-trajectory DFT force accuracy and measured acceleration remain unverified. See docs/reviews/fe110_reico_sampling6_20261022/.
+adsorption_workflow remains Active. The bounded six-family CUDA sampling ran:five20-step cases andone8-step contact-guard stop.114frames retained,107newguard-valid frames remain unlabeled. User approved six new sampled statics;canonical submissions LSF9919076-9919081 are all PEND at2026-10-22T11:35:30-31Z. Six new calculation/job records and provenance were registered without accepted results. Post-trajectory DFT force accuracy and measured acceleration remain unverified. See docs/reviews/fe110_reico_sampling6_20261022/.

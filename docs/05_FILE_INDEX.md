@@ -208,4 +208,6 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - scripts/adsorption/reico_sampling.py and tests/test_reico_sampling.py: bounded sampling scope,geometry/fixed-layer/step guards,per-frame preservation and restart;called only through the native hash-bound runtime.
 - archive/fe110_reico_sampling6_20261022/review.py: one-off114-frame return review and six static input preparations;never submits.
 - docs/reviews/fe110_reico_sampling6_20261022/: literal authorization,current run/selection evidence and numerical status.
-- calculations/fe110_reico_pilot300_20261022/sampling6_v1/: local-only request/producer/device/114rawframe artifacts,113guard-valid frames,six pending DFT input bundles and reviewed metadata-only registry transaction.
+- calculations/fe110_reico_pilot300_20261022/sampling6_v1/: local-only request/producer/device/114rawframe artifacts,113guard-valid frames,six submitted DFT input/gate/receipt bundles (LSF9919076-9919081) and reviewed metadata-only registry transactions.
+
+- archive/fe110_reico_sampling6_20261022/submit.py and tests/test_reico_sampled_submission.py: exact-scope canonical submission binding;new DFT authorization and submission checkpoint in docs/reviews/fe110_reico_sampling6_20261022/.

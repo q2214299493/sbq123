@@ -102,10 +102,10 @@ no deletion, reclassification event or state-transaction change is authorized by
 - Next recommendation: separately scoped six-seed10-20-step ML sampling trial retaining initial/intermediate frames with small DFT force checks before any300-label expansion. Not executed or automatically authorized by this checkpoint. Review: docs/reviews/fe110_reico_probe6_20261022/force_review.md.
 - Authoritative handoff: docs/reviews/fe110_reico_probe6_20261022/ and calculations/fe110_reico_pilot300_20261022/probe6_v1/. Existing paired benchmark is preserved. Managed sync remains blocked by the existing PKG-INFO classification hash mismatch.
 
-## Fe110 REICO short sampling complete;new statics pending - 2026-10-22
+## Fe110 REICO short sampling complete;six new statics submitted - 2026-10-22
 
 - Six frozen-control short trajectories actually ran on CUDA:5x20steps andfamily_0052guardstopat8.114frames,113guardvalid,107newunlabeled;alltrain. No ML optimizer convergence or measured speedup.
 - family_0007modelmaximumforceincreased;0052C-Fegurad1.60A crossed to1.594649A. Retain these diagnostics without loosening limits or rerunning.
-- Six preselected new statics prepared:0029step10,0002step20,0007step10,0078step20,0052step7,0004step20. All6canonicalpreflights andINCARvalidations PASS;32cores each,NSW0,activeSIGMA0.20. No newDFT ortraining yet.
-- Pending: explicit approval for these6newDFTjobs through the in-chat question,then fresh per-job execution gates/canonical executor. Existing6labels plus6new would be12/300,not permission to submit the remaining budget.
+- User approved the six preselected new statics:0029step10,0002step20,0007step10,0078step20,0052step7,0004step20. All6 canonical gates/preflights and INCAR validations PASS;32cores each,NSW0,activeSIGMA0.20. Submitted through the canonical executor as LSF9919076-9919081;all PEND at2026-10-22T11:35:30-31Z. No new training.
+- Next: after these six statics finish,review SCF,exact raw coordinates/forces and total/local magnetic moments,then compare frozen-model forces. Existing6labels plus6new would be12/300;remaining288 is not new execution authority. Submission registry:151 INSERT,zero UPDATE,zero accepted results;17 focused tests pass.
 - Evidence: docs/reviews/fe110_reico_sampling6_20261022/ and calculations/fe110_reico_pilot300_20261022/sampling6_v1/. Managed sync still blocked by the unchanged PKG-INFO classification hash conflict.

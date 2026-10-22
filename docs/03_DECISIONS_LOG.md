@@ -1467,3 +1467,10 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 - Actual CUDA producer exit0;5cases20steps,0052guard stop at8 with C-Fe1.594649A below draft1.60A. Retain114frames,113within guards,107newunlabeled. Boundary failure is preserved and does not prove DFT invalidity. 0007model fmax rises3.960to4.479eV/A;no converged geometry or measured acceleration claim.
 - Six predetermined-family sampled frames prepared for DFT,including0052last-valid7;canonical static andINCAR checks PASS. No newDFT/training submitted;exact six-job submission approval is pending separately.
 - Evidence: docs/reviews/fe110_reico_sampling6_20261022/. All trajectory frames stay in train;no automatic99-family/300-label expansion.
+
+## 2026-10-22 - Six sampled-frame DFT submissions
+
+- User replied “可以” to the concrete six-new-frame submission scope. Frozen sampled inputs,source hashes,remote POTCARs and six execution decisions verified;canonical executor returned LSF9919076-9919081,32cores each. First exact scheduler check at11:35:30-31Z is PEND for all six. No retry,training,additional sampling or protocol change.
+- Preserve original batch_request.json as the prepared snapshot;submission_summary.json and per-case receipts establish actual submissions. Registry plan b3e78865b8075c2c7e34cf3e53c1c244ce36366823d93c91f4c1fdceb5e70b28 applied:151 INSERT,zero UPDATE,only calculation/job/status/file provenance.
+- Require normal termination,SCF,coordinate/raw-force and total/local-moment checks before using labels;fixed-geometry statics do not require ionic convergence. Compare exact-coordinate frozen-model forces before any sampling expansion;12/300 configurations only if all six new labels qualify.
+- Evidence: docs/reviews/fe110_reico_sampling6_20261022/dft_submission_status.json and dft_submission_authorization.md. Managed state sync remains blocked by the existing PKG-INFO classification hash conflict.

@@ -1,6 +1,6 @@
 {
   "document_kind": "reico_sampling6_execution_and_preparation_status",
-  "as_of_utc": "2026-10-22T10:18:01.015860+00:00",
+  "as_of_utc": "2026-10-22T11:38:12.114241+00:00",
   "sampling_request_sha256": "84eb0f3201dee7ec96ff46352e05eef2d566e18bba60d18cefc969e2c55a591c",
   "sampling_review_sha256": "5196de758c88169cf7980c15529667d0d4a620ee9394b8e49a7cfef5e7b71b22",
   "candidate_batch_sha256": "037509b016c3e42c94a3c2a3e9cff2db375b7017322cc78423e914a8cdfa5696",
@@ -195,7 +195,7 @@
   "guard_valid_frames": 113,
   "new_unlabeled_guard_valid_frames": 107,
   "selected_DFT_candidates": 6,
-  "new_DFT_jobs_submitted": 0,
+  "new_DFT_jobs_submitted": 6,
   "training_runs": 0,
   "canonical_static_preflights_pass": 6,
   "incar_custodian_pass": 6,
@@ -215,11 +215,64 @@
     "exit_code": 1,
     "blocker": "repository item changed after classification: sbq_catalyst_agent_workflow.egg-info/PKG-INFO"
   },
-  "pending_action": "explicit_authorization_for_six_new_DFT_static_submissions",
+  "pending_action": "Review six DFT normal termination,SCF,raw coordinates/forces,total/local moments;then compare frozen-model forces at exact coordinates.",
   "focused_tests_publication_branch": 31,
   "source_sha256": {
     "scripts/adsorption/reico_sampling.py": "44abd3499072f2ce9c32b68ec22747be4ad6b5aed7696d275aecd6f815363194",
     "archive/fe110_adsorption_validation_20261018/runtime.py": "77ab0bd8e0cf9f1b7ddafd0f95c90bb1626112af8e73d93de18624e9f0943acb",
     "archive/fe110_reico_sampling6_20261022/review.py": "74290621c247137680bdb3376e0af6409333ceacfcd5f867dc48e2fe5c6b5d11"
-  }
+  },
+  "DFT_submission_status_file": "dft_submission_status.json",
+  "DFT_submission_registry_receipt": {
+    "schema_version": 1,
+    "document_kind": "calculation_registry_batch_result",
+    "batch_id": "fe110_reico_sampled6_submission_20261022_v1",
+    "batch_sha256": "ee3be333fb64edda10d72393ac5e31288c4e34da3e93bd96aa5845b24d4431ec",
+    "plan_sha256": "b3e78865b8075c2c7e34cf3e53c1c244ce36366823d93c91f4c1fdceb5e70b28",
+    "inserted": 151,
+    "updated": 0,
+    "unchanged": 0,
+    "already_applied": false
+  },
+  "DFT_submission_checkpoint": [
+    {
+      "sample_id": "family_0029_step010",
+      "job_id": "9919076",
+      "status": "PEND",
+      "checked_at": "2026-10-22T11:35:30Z"
+    },
+    {
+      "sample_id": "family_0002_step020",
+      "job_id": "9919077",
+      "status": "PEND",
+      "checked_at": "2026-10-22T11:35:30Z"
+    },
+    {
+      "sample_id": "family_0007_step010",
+      "job_id": "9919078",
+      "status": "PEND",
+      "checked_at": "2026-10-22T11:35:30Z"
+    },
+    {
+      "sample_id": "family_0078_step020",
+      "job_id": "9919079",
+      "status": "PEND",
+      "checked_at": "2026-10-22T11:35:31Z"
+    },
+    {
+      "sample_id": "family_0052_step007",
+      "job_id": "9919080",
+      "status": "PEND",
+      "checked_at": "2026-10-22T11:35:31Z"
+    },
+    {
+      "sample_id": "family_0004_step020",
+      "job_id": "9919081",
+      "status": "PEND",
+      "checked_at": "2026-10-22T11:35:31Z"
+    }
+  ],
+  "DFT_submission_focused_tests_primary": 17,
+  "DFT_submission_focused_tests_publication_branch": 14,
+  "publication_validation_initial_error": "Requested regression file archive/fe110_adsorption_validation_20261018/test_submit_06c_boundary.py is absent from this source-release history;initial collection ran zero tests. Reran the two present test files:14 passed. All17 tests passed in the primary workspace."
 }

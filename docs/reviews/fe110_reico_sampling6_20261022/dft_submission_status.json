@@ -1,0 +1,84 @@
+{
+  "document_kind": "fe110_reico_sampled6_dft_submission_checkpoint",
+  "as_of_utc": "2026-10-22T11:38:12.114241+00:00",
+  "status": "SIX_NEW_SAMPLED_STATICS_SUBMITTED",
+  "prepared_batch_sha256": "037509b016c3e42c94a3c2a3e9cff2db375b7017322cc78423e914a8cdfa5696",
+  "authorization_sha256": "8154b930dd5efb70f19506a4dd3df6ffd67730ee2c543e4294f2d730a27e9cc5",
+  "submission_summary_sha256": "355d854e7430c8df3aa48e2df4a62bce1d99bd792e9595ace0a11d31cb6070fe",
+  "ready_for_submission_sha256": "3561ccbb21f4327cd2a00f20a6fc5139e7fff0c8b31780bb924dcce11aed6ead",
+  "scheduler_summary_sha256": "aa547a2d9de2a1061194820a452aced51a16f316b72d121470496dcaa358a80e",
+  "new_DFT_jobs_submitted": 6,
+  "cores_per_job": 32,
+  "account_core_limit": 128,
+  "records": [
+    {
+      "sample_id": "family_0029_step010",
+      "job_id": "9919076",
+      "status": "PEND",
+      "checked_at": "2026-10-22T11:35:30Z"
+    },
+    {
+      "sample_id": "family_0002_step020",
+      "job_id": "9919077",
+      "status": "PEND",
+      "checked_at": "2026-10-22T11:35:30Z"
+    },
+    {
+      "sample_id": "family_0007_step010",
+      "job_id": "9919078",
+      "status": "PEND",
+      "checked_at": "2026-10-22T11:35:30Z"
+    },
+    {
+      "sample_id": "family_0078_step020",
+      "job_id": "9919079",
+      "status": "PEND",
+      "checked_at": "2026-10-22T11:35:31Z"
+    },
+    {
+      "sample_id": "family_0052_step007",
+      "job_id": "9919080",
+      "status": "PEND",
+      "checked_at": "2026-10-22T11:35:31Z"
+    },
+    {
+      "sample_id": "family_0004_step020",
+      "job_id": "9919081",
+      "status": "PEND",
+      "checked_at": "2026-10-22T11:35:31Z"
+    }
+  ],
+  "electronic_convergence": "Not assessed",
+  "magnetic_moments": "Not assessed",
+  "same_coordinate_force_comparison": "Not assessed",
+  "training_runs": 0,
+  "additional_sampling_runs": 0,
+  "original_accepted_probe_labels": 6,
+  "total_configurations_if_all_new_labels_pass": 12,
+  "pilot_cap": 300,
+  "remaining_if_all_pass": 288,
+  "remaining_cap_is_execution_authority": false,
+  "registry_receipt": {
+    "schema_version": 1,
+    "document_kind": "calculation_registry_batch_result",
+    "batch_id": "fe110_reico_sampled6_submission_20261022_v1",
+    "batch_sha256": "ee3be333fb64edda10d72393ac5e31288c4e34da3e93bd96aa5845b24d4431ec",
+    "plan_sha256": "b3e78865b8075c2c7e34cf3e53c1c244ce36366823d93c91f4c1fdceb5e70b28",
+    "inserted": 151,
+    "updated": 0,
+    "unchanged": 0,
+    "already_applied": false
+  },
+  "primary_focused_tests_passed": 17,
+  "repo_state_sync": {
+    "exit_code": 1,
+    "blocker": "repository item changed after classification: sbq_catalyst_agent_workflow.egg-info/PKG-INFO"
+  },
+  "next_action": "Review six DFT normal termination,SCF,raw coordinates/forces,total/local moments;then compare frozen-model forces at exact coordinates.",
+  "source_sha256": {
+    "archive/fe110_reico_sampling6_20261022/submit.py": "734b10584bd1d0738e89e649cb2f8f1e8aeb32fb331f691ab6b75222534b8411",
+    "tests/test_reico_sampled_submission.py": "71d21eae347ed4397d31e57b5452beecfe87dee339da40619b40dcf4aee6210a"
+  },
+  "DFT_submission_focused_tests_publication_branch": 14,
+  "publication_validation_initial_error": "Requested regression file archive/fe110_adsorption_validation_20261018/test_submit_06c_boundary.py is absent from this source-release history;initial collection ran zero tests. Reran the two present test files:14 passed. All17 tests passed in the primary workspace."
+}
