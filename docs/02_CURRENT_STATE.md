@@ -103,3 +103,7 @@ Managed sync remains blocked by existing PKG-INFO;paired benchmark unchanged.
 ### Fe110 C3 source recovery — 2026-10-23
 
 Known relative subdirectories are readable;9629858/9629859 outputs recovered with hashes. Both normal80step exits and finalSCFconverged,but ionicnotconverged,fmax0.860795/0.565336eV/A,bothCO+C2H2. No intactC3 frame below0.05eV/A among160steps. Localmoments missing;no accepted anchor,new job or model run. Evidence:docs/reviews/fe110_c3_source_recovery_20261023/README.md.
+
+### Fe110 C3 targeted preparation — 2026-10-23
+
+Two local revisedC3H2O graphs(05/07) pass geometry/custodian/canonical input gates;80steps,32cores each,LORBIT11,unchanged physical production branch. Local screen80_v2 only;no upload/submission/ML run. Historical two-job reference648-735corehours;real cost and intact near-equilibrium structures unverified. Await explicit two-job approval and live queue/POTCAR checks. Evidence:docs/reviews/fe110_c3_targeted_relaxation_20261023/README.md.

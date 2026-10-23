@@ -124,5 +124,5 @@ no deletion, reclassification event or state-transaction change is authorized by
 ## Fe110 intact C3 near-equilibrium gap — 2026-10-23
 
 - Recovered9629858/9629859:both80stepDFTpaths fragmented toCO+C2H2;no intact frame below0.05eV/A. Neither is a stable anchor.
-- Prepare a small reviewed relaxation proposal for the actual target C3 graph; no new DFT/continuation/training is authorized by this recovery. Existing off-equilibrium paths remain label candidates pending per-frame SCF/magnetic review.
+- Two revised localC3 candidates(05/07) now have reviewed80step/32core input packages with local-moment output;both canonical preflights pass.No upload/submission;estimated combined648-735corehours is a historical reference,not a cost cap. Await exact two-job approval before remote checks/gates. Existing off-equilibrium paths remain label candidates pending per-frame SCF/magnetic review. Preparation:docs/reviews/fe110_c3_targeted_relaxation_20261023/README.md.
 - Evidence:docs/reviews/fe110_c3_source_recovery_20261023/README.md.

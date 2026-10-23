@@ -234,3 +234,10 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 
 - `docs/reviews/fe110_c3_source_recovery_20261023/README.md`: verified recovery of9629858/9629859;both80steps,SCFconverged,but0.860795/0.565336eV/A andCO+C2H2 fragmentation;no stable intact-C3 anchor.
 - `calculations/fe110_c3_existing_recovery_20261023/collection_v1/`: immutable remote/local file hashes,original outputs,v2 force-coordinate checks and160-frame diagnostic. No new scientific execution.
+
+## Fe110 C3 targeted input preparation — 2026-10-23
+
+- archive/fe110_c3_targeted_relaxation_20261023/prepare.py:local-only two-source geometry review,canonical screening input generation,custodian and submission-preflight checks;rejects existing output roots.
+- scripts/vasp_inputs.py and scripts/adsorption/preflight_fe110_adsorption.py:explicit80step screening and local-moment options plus C3H2O support;production defaults unchanged.
+- tests/test_fe110_adsorption_screening.py:stage/budget/physical-method/magnetic-output rejection and unified-gate regressions.
+- docs/reviews/fe110_c3_targeted_relaxation_20261023/:review,exact small input snapshots,hash inventory,cost references and validation;no POTCAR contents or actual submission.

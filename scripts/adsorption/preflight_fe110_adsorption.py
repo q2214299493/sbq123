@@ -36,7 +36,41 @@ def _equal(actual: Any, expected: Any) -> bool:
     return str(actual).lower() == str(expected).lower()
 
 
-def preflight(workdir: Path, *, profile_path: Path = DEFAULT_PROFILE, cores: int = 32) -> dict[str, Any]:
+def _stage_settings(workdir: Path, profile: dict) -> tuple[dict, dict, list[str]]:
+    errors: list[str] = []
+    try:
+        candidate = json.loads((workdir / "candidate_manifest.json").read_text(encoding="utf-8"))
+        if not isinstance(candidate, dict):
+            raise ValueError("candidate manifest must be an object")
+    except (ValueError, UnicodeError) as exc:
+        errors.append(f"INVALID_CANDIDATE_MANIFEST:{exc}")
+        candidate = {}
+    relaxation_stage = candidate.get("relaxation_stage", "routine_production")
+    if relaxation_stage not in ("routine_production", "screening"):
+        errors.append("UNKNOWN_RELAXATION_STAGE")
+    local_moments = candidate.get("write_local_moments", False)
+    if not isinstance(local_moments, bool):
+        errors.append("INVALID_LOCAL_MOMENT_FLAG")
+    expected = {
+        **profile["routine_production"]["incar"],
+        "GGA": profile["scope"]["incar_gga"],
+        "ENCUT": profile["scope"]["encut_eV"],
+    }
+    policy_path = None
+    if relaxation_stage == "screening":
+        policy_path = resource_path("configs/adsmind_lite/prescreen_rules.yaml")
+        policy = yaml.safe_load(policy_path.read_text(encoding="utf-8"))
+        expected["NSW"] = int(policy["staged_relaxation"]["screening_nsw"])
+    if local_moments is True:
+        expected["LORBIT"] = profile["transition_state"]["active_learning_force_label"]["performance_incar"]["LORBIT"]
+    return expected, {
+        "relaxation_stage": relaxation_stage,
+        "write_local_moments": local_moments,
+        "screening_policy_sha256": sha256_file(policy_path) if policy_path else None,
+    }, errors
+
+
+def preflight(workdir: Path, *, profile_path: Path = DEFAULT_PROFILE, cores: int = 32, write_report: bool = True) -> dict[str, Any]:
     required = ["POSCAR", "INCAR", "KPOINTS", "POTCAR.spec", "script.lsf", "candidate_manifest.json"]
     errors: list[str] = []
     warnings: list[str] = []
@@ -49,11 +83,14 @@ def preflight(workdir: Path, *, profile_path: Path = DEFAULT_PROFILE, cores: int
 
     profile = yaml.safe_load(profile_path.read_text(encoding="utf-8"))
     stage = profile["routine_production"]
+    expected_incar, stage_metadata, stage_errors = _stage_settings(workdir, profile)
+    errors.extend(stage_errors)
     structure = read_poscar(workdir / "POSCAR")
     allowed_compositions = {
         (("Fe", "C", "H"), (45, 1, 1)),
         (("Fe", "C", "H"), (45, 1, 2)),
         (("Fe", "C", "O", "H"), (45, 2, 1, 2)),
+        (("Fe", "C", "O", "H"), (45, 3, 1, 2)),
     }
     composition = (tuple(structure.symbols), tuple(structure.counts))
     if composition not in allowed_compositions:
@@ -64,11 +101,6 @@ def preflight(workdir: Path, *, profile_path: Path = DEFAULT_PROFILE, cores: int
         errors.append("UNEXPECTED_CONSTRAINT_ABOVE_BOTTOM_18_FE")
 
     incar = Incar(read_incar_values(workdir / "INCAR"))
-    expected_incar = {
-        **stage["incar"],
-        "GGA": profile["scope"]["incar_gga"],
-        "ENCUT": profile["scope"]["encut_eV"],
-    }
     for key, expected in expected_incar.items():
         if key not in incar or not _equal(incar[key], expected):
             errors.append(f"INCAR_MISMATCH:{key}")
@@ -107,15 +139,17 @@ def preflight(workdir: Path, *, profile_path: Path = DEFAULT_PROFILE, cores: int
             "fixed_zero_based": [index for index, flags in enumerate(structure.flags) if flags == ("F", "F", "F")],
         },
         "incar_stage": "routine_production",
+        **stage_metadata,
         "gamma_mesh": mesh,
         "cores": cores,
         "potcar_local_policy": "POTCAR contents remain remote; verify exact species order and SHA-256 before submission",
     }
-    (workdir / "adsorption_submission_preflight.json").write_text(
-        json.dumps(result, indent=2, ensure_ascii=False) + "\n",
-        encoding="utf-8",
-        newline="\n",
-    )
+    if write_report:
+        (workdir / "adsorption_submission_preflight.json").write_text(
+            json.dumps(result, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+            newline="\n",
+        )
     return result
 
 

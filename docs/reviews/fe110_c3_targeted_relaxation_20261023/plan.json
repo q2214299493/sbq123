@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "status": "PREPARED",
+  "submitted": false,
+  "new_ML_run": false,
+  "cases": [
+    {
+      "name": "05_C3H2O_FLJNAOYG_cfg2",
+      "exact_smiles": "[C]C[C][O]",
+      "preflight_passed": true,
+      "errors": [],
+      "bundle_sha256": "9f6bc84ac1963d380be8217597673f75ebc7d2f9fa0b6fe05a206b4e9f64596f",
+      "custodian_validation_sha256": "0aa7af1d46e80b94b059a08facf58b021216b0ce5544f08a651792ad83e15d3a"
+    },
+    {
+      "name": "07_C3H2O_POVFFVOJ_cfg2",
+      "exact_smiles": "[C]C([CH])[O]",
+      "preflight_passed": true,
+      "errors": [],
+      "bundle_sha256": "64c02bde4ad3a03f4b17929e972cc6fa74c73dda51aabe28e145cf18cef5efa1",
+      "custodian_validation_sha256": "ea350181568e30ff69d80ad103478a945d6473bfd98cd86316983d6808f6fa94"
+    }
+  ],
+  "budget": {
+    "jobs": 2,
+    "cores_per_job": 32,
+    "max_parallel_jobs": 2,
+    "max_concurrent_cores": 64,
+    "max_ionic_steps_per_job": 80,
+    "automatic_continuation": false,
+    "account_core_quota": 128,
+    "live_queue_headroom_check_required_before_submission": true
+  },
+  "timing_references": [
+    {
+      "job_id": "9629858",
+      "OUTCAR_sha256": "713d847881a6d0a220c1ad6c7dae0bddfb8bf6885051725524fd12119564ac6e",
+      "cores": 32,
+      "ionic_steps": 80,
+      "elapsed_seconds": 41366.233,
+      "allocated_core_hours_estimate": 367.6998488888889
+    },
+    {
+      "job_id": "9629859",
+      "OUTCAR_sha256": "a1c25c7f8db5f7e4636a1f907d5e87ee1ce3393ab641a5e033e726346e6462dd",
+      "cores": 32,
+      "ionic_steps": 80,
+      "elapsed_seconds": 36438.871,
+      "allocated_core_hours_estimate": 323.90107555555556
+    }
+  ],
+  "two_job_core_hour_reference_range": [
+    647.8021511111111,
+    735.3996977777778
+  ],
+  "timing_is_estimate_not_cost_cap": true,
+  "submission_requires_fresh_explicit_authority": true,
+  "POTCAR": {
+    "contents_copied": false,
+    "order": [
+      "Fe",
+      "C",
+      "O",
+      "H"
+    ],
+    "historical_same_order_sha256": "e3bc41a37d795bfcf1b1dc9a2a9ddfb5ef86aa5dc9aa0ac5a3583471a0982f85",
+    "remote_reverification_required": true
+  }
+}

@@ -44,6 +44,7 @@ EXPECTED_ACTION = {
     "dimer": "START_DIMER",
     "vfa": "START_VFA",
     "connectivity_relax": "SUBMIT_VASP",
+    "adsorption_relaxation": "SUBMIT_VASP",
 }
 NEB_KINDS = {"neb_pilot", "ordinary_neb", "ci_neb"}
 UNKNOWN = "UNKNOWN_NEEDS_RECONCILIATION"
@@ -134,6 +135,7 @@ def preflight(
     dimer_gate: dict[str, Any] = {}
     vfa_gate: dict[str, Any] = {}
     connectivity_gate: dict[str, Any] = {}
+    adsorption_gate: dict[str, Any] = {}
     images: list[Path] = []
     if kind in NEB_KINDS and core_ready:
         neb_errors, images = _check_neb(workdir, kind, incar, cores)
@@ -150,6 +152,11 @@ def preflight(
     if kind == "connectivity_relax" and core_ready:
         connectivity_errors, connectivity_gate = _check_connectivity_relax(workdir, incar)
         errors.extend(connectivity_errors)
+    if kind == "adsorption_relaxation" and core_ready:
+        from scripts.adsorption.preflight_fe110_adsorption import preflight as adsorption_preflight
+
+        adsorption_gate = adsorption_preflight(workdir, cores=cores or 0, write_report=False)
+        errors.extend(adsorption_gate["errors"])
     files = [workdir / name for name in required if (workdir / name).is_file()]
     files.extend(directory / "POSCAR" for directory in images if (directory / "POSCAR").is_file())
     manifest = {path.relative_to(workdir).as_posix(): sha256_file(path) for path in files}
@@ -177,6 +184,9 @@ def preflight(
     if kind == "connectivity_relax":
         payload["connectivity_hard_gate_passed"] = not connectivity_gate.get("errors")
         payload["connectivity_hard_gate"] = connectivity_gate
+    if kind == "adsorption_relaxation":
+        payload["adsorption_hard_gate_passed"] = adsorption_gate.get("passed") is True
+        payload["adsorption_hard_gate"] = adsorption_gate
     if write_report:
         write_json(workdir / "submission_preflight.json", payload)
     return payload
@@ -184,9 +194,11 @@ def preflight(
 
 def _required_files(kind: str) -> list[str]:
     required = ["INCAR", "KPOINTS", "POTCAR.spec", "script.lsf"]
-    if kind in {"diagnostic_static", "dimer", "vfa", "connectivity_relax"}:
+    if kind in {"diagnostic_static", "dimer", "vfa", "connectivity_relax", "adsorption_relaxation"}:
         required.append("POSCAR")
-        if kind == "dimer":
+        if kind == "adsorption_relaxation":
+            required.append("candidate_manifest.json")
+        elif kind == "dimer":
             required.extend(
                 (
                     "PREVIOUS_POSCAR",

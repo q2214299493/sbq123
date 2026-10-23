@@ -53,6 +53,8 @@ def build_fe110_adsorption_relaxation(
     *,
     cores: int = 32,
     profile_path: Path = DEFAULT_PROFILE,
+    screening: bool = False,
+    write_local_moments: bool = False,
 ) -> dict[str, Any]:
     """Render one active-branch Fe(110) adsorption relaxation package."""
 
@@ -71,6 +73,13 @@ def build_fe110_adsorption_relaxation(
             "ENCUT": scope["encut_eV"],
         }
     )
+    if screening:
+        policy = yaml.safe_load(
+            resource_path("configs/adsmind_lite/prescreen_rules.yaml").read_text(encoding="utf-8")
+        )
+        incar["NSW"] = int(policy["staged_relaxation"]["screening_nsw"])
+    if write_local_moments:
+        incar["LORBIT"] = profile["transition_state"]["active_learning_force_label"]["performance_incar"]["LORBIT"]
     mesh = stage["gamma_mesh"]
     (destination / "INCAR").write_text(_format_incar(incar, symbols), encoding="ascii")
     (destination / "KPOINTS").write_text(
@@ -90,6 +99,8 @@ def build_fe110_adsorption_relaxation(
         "gamma_mesh": mesh,
         "cores": ranks,
         "incar": incar,
+        "relaxation_stage": "screening" if screening else "routine_production",
+        "write_local_moments": write_local_moments,
     }
 
 

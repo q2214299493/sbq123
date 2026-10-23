@@ -1,0 +1,41 @@
+{
+  "publication_actual_input_checks": [
+    {
+      "name": "05_C3H2O_FLJNAOYG_cfg2",
+      "preflight_passed": true,
+      "bundle_sha256_unchanged": true,
+      "files": 6
+    },
+    {
+      "name": "07_C3H2O_POVFFVOJ_cfg2",
+      "preflight_passed": true,
+      "bundle_sha256_unchanged": true,
+      "files": 6
+    }
+  ],
+  "inventory_files_verified": 16,
+  "publication_tests": [
+    {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "103",
+      "time": "30.443",
+      "timestamp": "2026-10-23T19:09:16.453848+08:00",
+      "hostname": "Kyle"
+    }
+  ],
+  "submitted": false,
+  "primary_tests": {
+    "tests": 56,
+    "failures": 0,
+    "errors": 0
+  },
+  "state_sync": {
+    "status": "BLOCKED_EXISTING_CLASSIFICATION_HASH",
+    "command": "repo-state sync --safe-only",
+    "error": "repository item changed after classification: sbq_catalyst_agent_workflow.egg-info/PKG-INFO",
+    "automatic_approval_or_bypass": false
+  }
+}

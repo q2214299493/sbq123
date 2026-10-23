@@ -1,0 +1,193 @@
+{
+  "name": "07_C3H2O_POVFFVOJ_cfg2",
+  "formula": "C3H2O",
+  "exact_smiles": "[C]C([CH])[O]",
+  "purpose": "intact_C3_near_equilibrium_label_source_search",
+  "relaxation_stage": "screening",
+  "write_local_moments": true,
+  "geometry_review": {
+    "verdict": "pass",
+    "site_label": "η⁴(C,C,C,O)/lb-t-sb-sb",
+    "atom_site_details": [
+      {
+        "atom": "C1",
+        "nearest_fe_angstrom": 2.411584382035664,
+        "site": "long_bridge",
+        "lateral_offset_angstrom": 0.19108344368655683
+      },
+      {
+        "atom": "C2",
+        "nearest_fe_angstrom": 2.4909981136639514,
+        "site": "top",
+        "lateral_offset_angstrom": 0.011653100277879233
+      },
+      {
+        "atom": "C3",
+        "nearest_fe_angstrom": 2.105702682600651,
+        "site": "short_bridge",
+        "lateral_offset_angstrom": 0.2409376199601843
+      },
+      {
+        "atom": "O1",
+        "nearest_fe_angstrom": 2.4210523266918873,
+        "site": "short_bridge",
+        "lateral_offset_angstrom": 0.05967458464952475
+      }
+    ],
+    "nearest_heavy_fe_angstrom": 2.105702682600651,
+    "nearest_h_fe_angstrom": 2.7940159127000266,
+    "minimum_adsorbate_height_angstrom": 1.817509173826009,
+    "maximum_bond_length_change_angstrom": 1.7763568394002505e-15,
+    "connectivity_edges_local_0based": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        4
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        1,
+        5
+      ]
+    ],
+    "checks": {
+      "composition_and_order": true,
+      "bottom_18_fe_fixed": true,
+      "adsorbate_fully_mobile": true,
+      "connectivity_preserved": true,
+      "internal_geometry_preserved": true,
+      "adsorbate_above_surface": true,
+      "no_hard_heavy_fe_contact": true,
+      "no_hard_h_fe_contact": true
+    },
+    "warnings": [],
+    "needs_early_relaxation_review": false,
+    "bonds_A": [
+      {
+        "adsorbate_local_0based": [
+          0,
+          1
+        ],
+        "distance": 1.465277743244747
+      },
+      {
+        "adsorbate_local_0based": [
+          0,
+          4
+        ],
+        "distance": 1.0586467705313998
+      },
+      {
+        "adsorbate_local_0based": [
+          1,
+          2
+        ],
+        "distance": 1.5557533729347823
+      },
+      {
+        "adsorbate_local_0based": [
+          1,
+          3
+        ],
+        "distance": 1.3120367884845787
+      },
+      {
+        "adsorbate_local_0based": [
+          1,
+          5
+        ],
+        "distance": 1.0987541354131616
+      }
+    ],
+    "nearest_Fe": [
+      {
+        "atom_1based": 46,
+        "Fe_1based": 37,
+        "distance_A": 2.411584382035664
+      },
+      {
+        "atom_1based": 47,
+        "Fe_1based": 37,
+        "distance_A": 2.4909981136639514
+      },
+      {
+        "atom_1based": 48,
+        "Fe_1based": 42,
+        "distance_A": 2.105702682600651
+      },
+      {
+        "atom_1based": 49,
+        "Fe_1based": 43,
+        "distance_A": 2.4210523266918873
+      },
+      {
+        "atom_1based": 50,
+        "Fe_1based": 38,
+        "distance_A": 2.7940159127000266
+      },
+      {
+        "atom_1based": 51,
+        "Fe_1based": 37,
+        "distance_A": 3.5666695448650505
+      }
+    ]
+  },
+  "builder": {
+    "profile_path": "C:\\Users\\86177\\Desktop\\work\\configs\\true_fe110_production.yaml",
+    "profile_sha256": "fbad642502134ca1123741f0bdf3194d2914e230981d38aab90debd4b965bcd3",
+    "stage": "routine_production",
+    "gamma_mesh": [
+      5,
+      5,
+      1
+    ],
+    "cores": 32,
+    "incar": {
+      "PREC": "Accurate",
+      "EDIFF": 1e-05,
+      "EDIFFG": -0.02,
+      "ISPIN": 2,
+      "ISMEAR": 1,
+      "SIGMA": 0.2,
+      "ALGO": "Fast",
+      "LREAL": false,
+      "LASPH": true,
+      "NELM": 200,
+      "NELMIN": 5,
+      "IBRION": 2,
+      "POTIM": 0.2,
+      "ISIF": 2,
+      "NSW": 80,
+      "ISYM": 0,
+      "LDIPOL": false,
+      "LCHARG": false,
+      "LWAVE": false,
+      "GGA": "PE",
+      "ENCUT": 400,
+      "LORBIT": 11
+    },
+    "relaxation_stage": "screening",
+    "write_local_moments": true
+  },
+  "source": {
+    "kind": "previously_reviewed_local_CARE_candidate_prediction_only",
+    "revised_POSCAR_sha256": "fc9fba03f6f8ffa661fc450e3e128a83901d89356f3640bfe9a108a2ab0b3fba",
+    "raw_POSCAR_sha256": "0ea9f6b331d533b5bd55c44f14173958cf62b830b9237ef1016f1eaed4dafeac",
+    "manifest_sha256": "6e86bf273905fb71fbcb7831f5a817a69e7f313d2c399ef8e835cfb99b6e9165",
+    "revision_manifest_sha256": "7153008da57207ec8581c93c3289d06b2fce5cb84a99a5d155a55dad465be5bd",
+    "clean_slab_sha256": "a8559cde11ce414e80433f8674052c1ad868058ce3b6260ac32c1b2570e4b92b"
+  },
+  "accepted_endpoint": false,
+  "stability_verified": false,
+  "submitted": false
+}
