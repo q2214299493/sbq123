@@ -1,0 +1,623 @@
+{
+  "status": "JOINT_AUDIT_COMPLETE",
+  "completed_utc": "2026-10-23T15:44:35.591826+00:00",
+  "training_frames": 366,
+  "pool_frames": 1597,
+  "original_selected_training_frames": 233,
+  "chemical_coverage": {
+    "C2H2O": {
+      "graph_signature": {
+        "pool_types": 35,
+        "original233_covered": 29,
+        "current366_covered": 12,
+        "current_missing": 23,
+        "missing_if_all_original_selected_labels_admitted": 6
+      },
+      "coordination_signature": {
+        "pool_types": 37,
+        "original233_covered": 31,
+        "current366_covered": 19,
+        "current_missing": 18,
+        "missing_if_all_original_selected_labels_admitted": 6
+      },
+      "joint_signature": {
+        "pool_types": 71,
+        "original233_covered": 43,
+        "current366_covered": 18,
+        "current_missing": 53,
+        "missing_if_all_original_selected_labels_admitted": 28
+      }
+    },
+    "C2H3": {
+      "graph_signature": {
+        "pool_types": 15,
+        "original233_covered": 13,
+        "current366_covered": 12,
+        "current_missing": 3,
+        "missing_if_all_original_selected_labels_admitted": 2
+      },
+      "coordination_signature": {
+        "pool_types": 32,
+        "original233_covered": 23,
+        "current366_covered": 15,
+        "current_missing": 17,
+        "missing_if_all_original_selected_labels_admitted": 9
+      },
+      "joint_signature": {
+        "pool_types": 74,
+        "original233_covered": 34,
+        "current366_covered": 21,
+        "current_missing": 53,
+        "missing_if_all_original_selected_labels_admitted": 40
+      }
+    },
+    "C2HO": {
+      "graph_signature": {
+        "pool_types": 14,
+        "original233_covered": 13,
+        "current366_covered": 11,
+        "current_missing": 3,
+        "missing_if_all_original_selected_labels_admitted": 0
+      },
+      "coordination_signature": {
+        "pool_types": 33,
+        "original233_covered": 24,
+        "current366_covered": 16,
+        "current_missing": 17,
+        "missing_if_all_original_selected_labels_admitted": 9
+      },
+      "joint_signature": {
+        "pool_types": 53,
+        "original233_covered": 31,
+        "current366_covered": 16,
+        "current_missing": 37,
+        "missing_if_all_original_selected_labels_admitted": 22
+      }
+    },
+    "C3H2O": {
+      "graph_signature": {
+        "pool_types": 70,
+        "original233_covered": 56,
+        "current366_covered": 33,
+        "current_missing": 37,
+        "missing_if_all_original_selected_labels_admitted": 14
+      },
+      "coordination_signature": {
+        "pool_types": 109,
+        "original233_covered": 74,
+        "current366_covered": 37,
+        "current_missing": 72,
+        "missing_if_all_original_selected_labels_admitted": 35
+      },
+      "joint_signature": {
+        "pool_types": 203,
+        "original233_covered": 106,
+        "current366_covered": 50,
+        "current_missing": 153,
+        "missing_if_all_original_selected_labels_admitted": 97
+      }
+    }
+  },
+  "SOAP_with_fixed_prior_thresholds": {
+    "C2H2O": {
+      "pool_frames": 317,
+      "reference_frames": 159,
+      "fixed_thresholds": {
+        "C": 0.08535179412289015,
+        "O": 0.0898687782722723,
+        "H": 0.12015728225583215,
+        "Fe": 0.004208975225563415
+      },
+      "above_internal_threshold": 86,
+      "maximum_ratio": 4.163551774742724
+    },
+    "C2H3": {
+      "pool_frames": 252,
+      "reference_frames": 29,
+      "fixed_thresholds": {
+        "C": 0.07606188904996011,
+        "H": 0.06275675844925127,
+        "Fe": 0.003181107959193352
+      },
+      "above_internal_threshold": 30,
+      "maximum_ratio": 1.754933890047172
+    },
+    "C2HO": {
+      "pool_frames": 252,
+      "reference_frames": 101,
+      "fixed_thresholds": {
+        "C": 0.07091479789586884,
+        "O": 0.06793808034074231,
+        "H": 0.07742072782627735,
+        "Fe": 0.003115219035946782
+      },
+      "above_internal_threshold": 79,
+      "maximum_ratio": 2.457120165823892
+    },
+    "C3H2O": {
+      "pool_frames": 776,
+      "reference_frames": 54,
+      "fixed_thresholds": {
+        "C": 0.0650476043280145,
+        "O": 0.07298191673490154,
+        "H": 0.07839428380255671,
+        "Fe": 0.00291684723710417
+      },
+      "above_internal_threshold": 256,
+      "maximum_ratio": 4.115693635793978
+    }
+  },
+  "training_force_by_composition": {
+    "C2": {
+      "frames": 1,
+      "source_groups": 1,
+      "fmax_range_eV_A": [
+        0.010431251938286219,
+        0.010431251938286219
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 1,
+        "[0.05,0.1)": 0,
+        "[0.1,0.5)": 0,
+        "[0.5,1)": 0,
+        "[1,2)": 0,
+        "[2,5)": 0,
+        "[5,10)": 0,
+        "[10,inf)": 0
+      },
+      "low_force_le_0p05": 1,
+      "low_force_source_groups": [
+        "legacy_vasp_directory_c2_hlbh"
+      ],
+      "low_force_graphs": 1,
+      "low_force_joint_strata": 1,
+      "connected_low_force_frames": 1,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 1
+      },
+      "graphs": 1,
+      "joint_strata": 1
+    },
+    "C2H": {
+      "frames": 7,
+      "source_groups": 1,
+      "fmax_range_eV_A": [
+        0.019731193856429467,
+        0.38342661733896355
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 1,
+        "[0.05,0.1)": 1,
+        "[0.1,0.5)": 5,
+        "[0.5,1)": 0,
+        "[1,2)": 0,
+        "[2,5)": 0,
+        "[5,10)": 0,
+        "[10,inf)": 0
+      },
+      "low_force_le_0p05": 1,
+      "low_force_source_groups": [
+        "current_vasp_job_9839749"
+      ],
+      "low_force_graphs": 1,
+      "low_force_joint_strata": 1,
+      "connected_low_force_frames": 1,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 7
+      },
+      "graphs": 1,
+      "joint_strata": 2
+    },
+    "C2H2": {
+      "frames": 7,
+      "source_groups": 1,
+      "fmax_range_eV_A": [
+        0.01841379691970127,
+        0.6359793943116396
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 1,
+        "[0.05,0.1)": 0,
+        "[0.1,0.5)": 4,
+        "[0.5,1)": 2,
+        "[1,2)": 0,
+        "[2,5)": 0,
+        "[5,10)": 0,
+        "[10,inf)": 0
+      },
+      "low_force_le_0p05": 1,
+      "low_force_source_groups": [
+        "current_vasp_job_9839750"
+      ],
+      "low_force_graphs": 1,
+      "low_force_joint_strata": 1,
+      "connected_low_force_frames": 1,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 7
+      },
+      "graphs": 1,
+      "joint_strata": 2
+    },
+    "C2H2O": {
+      "frames": 159,
+      "source_groups": 14,
+      "fmax_range_eV_A": [
+        0.016955419104227414,
+        25.723091897740908
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 17,
+        "[0.05,0.1)": 28,
+        "[0.1,0.5)": 63,
+        "[0.5,1)": 26,
+        "[1,2)": 10,
+        "[2,5)": 8,
+        "[5,10)": 6,
+        "[10,inf)": 1
+      },
+      "low_force_le_0p05": 17,
+      "low_force_source_groups": [
+        "current_vasp_job_9848802",
+        "current_vasp_job_9848803",
+        "current_vasp_job_9848804",
+        "current_vasp_job_9848805",
+        "current_vasp_job_9848807",
+        "current_vasp_job_9848809"
+      ],
+      "low_force_graphs": 3,
+      "low_force_joint_strata": 4,
+      "connected_low_force_frames": 10,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 141,
+        "LOCAL_MOMENTS_REVIEWED_POSITIVE_FE": 18
+      },
+      "graphs": 14,
+      "joint_strata": 35
+    },
+    "C2H3": {
+      "frames": 29,
+      "source_groups": 9,
+      "fmax_range_eV_A": [
+        0.019901702690975968,
+        11.098220361238193
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 4,
+        "[0.05,0.1)": 1,
+        "[0.1,0.5)": 1,
+        "[0.5,1)": 0,
+        "[1,2)": 3,
+        "[2,5)": 14,
+        "[5,10)": 5,
+        "[10,inf)": 1
+      },
+      "low_force_le_0p05": 4,
+      "low_force_source_groups": [
+        "current_vasp_job_9848812"
+      ],
+      "low_force_graphs": 1,
+      "low_force_joint_strata": 1,
+      "connected_low_force_frames": 4,
+      "magnetic_review_levels": {
+        "LOCAL_MOMENTS_REVIEWED_POSITIVE_FE": 23,
+        "LEGACY_TOTAL_MAGNETIZATION_ONLY": 6
+      },
+      "graphs": 12,
+      "joint_strata": 22
+    },
+    "C2HO": {
+      "frames": 101,
+      "source_groups": 12,
+      "fmax_range_eV_A": [
+        0.01608737719455847,
+        13.491385728559575
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 9,
+        "[0.05,0.1)": 13,
+        "[0.1,0.5)": 42,
+        "[0.5,1)": 11,
+        "[1,2)": 7,
+        "[2,5)": 11,
+        "[5,10)": 7,
+        "[10,inf)": 1
+      },
+      "low_force_le_0p05": 9,
+      "low_force_source_groups": [
+        "current_vasp_job_9839753",
+        "current_vasp_job_9848799",
+        "current_vasp_job_9848800",
+        "current_vasp_job_9848801"
+      ],
+      "low_force_graphs": 3,
+      "low_force_joint_strata": 4,
+      "connected_low_force_frames": 4,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 84,
+        "LOCAL_MOMENTS_REVIEWED_POSITIVE_FE": 17
+      },
+      "graphs": 12,
+      "joint_strata": 27
+    },
+    "C2O": {
+      "frames": 1,
+      "source_groups": 1,
+      "fmax_range_eV_A": [
+        0.015360460832930762,
+        0.015360460832930762
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 1,
+        "[0.05,0.1)": 0,
+        "[0.1,0.5)": 0,
+        "[0.5,1)": 0,
+        "[1,2)": 0,
+        "[2,5)": 0,
+        "[5,10)": 0,
+        "[10,inf)": 0
+      },
+      "low_force_le_0p05": 1,
+      "low_force_source_groups": [
+        "legacy_vasp_directory_c2pluso_hlbh_lb"
+      ],
+      "low_force_graphs": 1,
+      "low_force_joint_strata": 1,
+      "connected_low_force_frames": 0,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 1
+      },
+      "graphs": 1,
+      "joint_strata": 1
+    },
+    "C3H2O": {
+      "frames": 54,
+      "source_groups": 20,
+      "fmax_range_eV_A": [
+        0.6590064564827874,
+        28.180300902323008
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 0,
+        "[0.05,0.1)": 0,
+        "[0.1,0.5)": 0,
+        "[0.5,1)": 2,
+        "[1,2)": 5,
+        "[2,5)": 23,
+        "[5,10)": 14,
+        "[10,inf)": 10
+      },
+      "low_force_le_0p05": 0,
+      "low_force_source_groups": [],
+      "low_force_graphs": 0,
+      "low_force_joint_strata": 0,
+      "connected_low_force_frames": 0,
+      "magnetic_review_levels": {
+        "LOCAL_MOMENTS_REVIEWED_POSITIVE_FE": 54
+      },
+      "graphs": 33,
+      "joint_strata": 50
+    },
+    "CH": {
+      "frames": 1,
+      "source_groups": 1,
+      "fmax_range_eV_A": [
+        0.017483637321793196,
+        0.017483637321793196
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 1,
+        "[0.05,0.1)": 0,
+        "[0.1,0.5)": 0,
+        "[0.5,1)": 0,
+        "[1,2)": 0,
+        "[2,5)": 0,
+        "[5,10)": 0,
+        "[10,inf)": 0
+      },
+      "low_force_le_0p05": 1,
+      "low_force_source_groups": [
+        "legacy_vasp_directory_ch_top"
+      ],
+      "low_force_graphs": 1,
+      "low_force_joint_strata": 1,
+      "connected_low_force_frames": 1,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 1
+      },
+      "graphs": 1,
+      "joint_strata": 1
+    },
+    "CH3": {
+      "frames": 1,
+      "source_groups": 1,
+      "fmax_range_eV_A": [
+        0.018292620260640626,
+        0.018292620260640626
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 1,
+        "[0.05,0.1)": 0,
+        "[0.1,0.5)": 0,
+        "[0.5,1)": 0,
+        "[1,2)": 0,
+        "[2,5)": 0,
+        "[5,10)": 0,
+        "[10,inf)": 0
+      },
+      "low_force_le_0p05": 1,
+      "low_force_source_groups": [
+        "legacy_vasp_directory_ch3_top"
+      ],
+      "low_force_graphs": 1,
+      "low_force_joint_strata": 1,
+      "connected_low_force_frames": 1,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 1
+      },
+      "graphs": 1,
+      "joint_strata": 1
+    },
+    "CH3O": {
+      "frames": 1,
+      "source_groups": 1,
+      "fmax_range_eV_A": [
+        0.013541788692783536,
+        0.013541788692783536
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 1,
+        "[0.05,0.1)": 0,
+        "[0.1,0.5)": 0,
+        "[0.5,1)": 0,
+        "[1,2)": 0,
+        "[2,5)": 0,
+        "[5,10)": 0,
+        "[10,inf)": 0
+      },
+      "low_force_le_0p05": 1,
+      "low_force_source_groups": [
+        "legacy_vasp_directory_ch3o_oend_top"
+      ],
+      "low_force_graphs": 1,
+      "low_force_joint_strata": 1,
+      "connected_low_force_frames": 1,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 1
+      },
+      "graphs": 1,
+      "joint_strata": 1
+    },
+    "CH4": {
+      "frames": 1,
+      "source_groups": 1,
+      "fmax_range_eV_A": [
+        0.018983368958116996,
+        0.018983368958116996
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 1,
+        "[0.05,0.1)": 0,
+        "[0.1,0.5)": 0,
+        "[0.5,1)": 0,
+        "[1,2)": 0,
+        "[2,5)": 0,
+        "[5,10)": 0,
+        "[10,inf)": 0
+      },
+      "low_force_le_0p05": 1,
+      "low_force_source_groups": [
+        "legacy_vasp_directory_ch4_top"
+      ],
+      "low_force_graphs": 1,
+      "low_force_joint_strata": 1,
+      "connected_low_force_frames": 1,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 1
+      },
+      "graphs": 1,
+      "joint_strata": 1
+    },
+    "CH4O": {
+      "frames": 1,
+      "source_groups": 1,
+      "fmax_range_eV_A": [
+        0.0181322396300071,
+        0.0181322396300071
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 1,
+        "[0.05,0.1)": 0,
+        "[0.1,0.5)": 0,
+        "[0.5,1)": 0,
+        "[1,2)": 0,
+        "[2,5)": 0,
+        "[5,10)": 0,
+        "[10,inf)": 0
+      },
+      "low_force_le_0p05": 1,
+      "low_force_source_groups": [
+        "legacy_vasp_directory_ch4o_oend_top"
+      ],
+      "low_force_graphs": 1,
+      "low_force_joint_strata": 1,
+      "connected_low_force_frames": 1,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 1
+      },
+      "graphs": 1,
+      "joint_strata": 1
+    },
+    "CHO": {
+      "frames": 1,
+      "source_groups": 1,
+      "fmax_range_eV_A": [
+        0.01582127235717785,
+        0.01582127235717785
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 1,
+        "[0.05,0.1)": 0,
+        "[0.1,0.5)": 0,
+        "[0.5,1)": 0,
+        "[1,2)": 0,
+        "[2,5)": 0,
+        "[5,10)": 0,
+        "[10,inf)": 0
+      },
+      "low_force_le_0p05": 1,
+      "low_force_source_groups": [
+        "legacy_vasp_directory_cho_cend_top"
+      ],
+      "low_force_graphs": 1,
+      "low_force_joint_strata": 1,
+      "connected_low_force_frames": 1,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 1
+      },
+      "graphs": 1,
+      "joint_strata": 1
+    },
+    "CO": {
+      "frames": 1,
+      "source_groups": 1,
+      "fmax_range_eV_A": [
+        0.018402298063013762,
+        0.018402298063013762
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 1,
+        "[0.05,0.1)": 0,
+        "[0.1,0.5)": 0,
+        "[0.5,1)": 0,
+        "[1,2)": 0,
+        "[2,5)": 0,
+        "[5,10)": 0,
+        "[10,inf)": 0
+      },
+      "low_force_le_0p05": 1,
+      "low_force_source_groups": [
+        "legacy_vasp_directory_cpluso_lb_h"
+      ],
+      "low_force_graphs": 1,
+      "low_force_joint_strata": 1,
+      "connected_low_force_frames": 0,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 1
+      },
+      "graphs": 1,
+      "joint_strata": 1
+    }
+  },
+  "missing_joint_strata": 296,
+  "missing_strata_with_existing_selected_inputs": 109,
+  "missing_strata_with_robust_examples": 243,
+  "near_pairs": 1043,
+  "near_pairs_below_0p1_A": 656,
+  "near_pairs_force_RMSE_above_1_eV_A": 68,
+  "new_descriptor_training_frames": 254,
+  "reserved_labels_used": false,
+  "selection_weights_or_magnetic_tiers_changed": false,
+  "new_DFT_or_model_execution": false,
+  "local_summary_sha256": "30ef811215474a20f2bfc1ada8f171775c52a7899c10820e3e3a4ace90fb858a",
+  "unchanged_training_manifest_sha256": "6a9121a26bc2a8eb51641cfe0b694fb3c4c4c719e791eaa2d4fc6fe0b10e9ebb"
+}

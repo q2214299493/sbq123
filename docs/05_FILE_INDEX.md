@@ -265,3 +265,7 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - docs/reviews/fe110_combined_force_package_20261023/:366/78/53data-only package review,16quarantined sources,magnetic tiers,isolation,independent DB/source verification and validation receipts.
 - calculations/fe110_reico_pilot300_20261022/combined_force_package_20261023_v2/training_manifest.json:current local force-only data manifest;train/dev DBs and full package_inventory.json colocated. V1is preserved failed summary checkpoint.
 - archive/fe110_combined_force_package_20261023/ and configs/fe110_reico_pilot/combined_force_package_v1.json:bounded local assembler/verifier and frozen source configuration;tests/test_combined_force_package.py.
+
+- docs/reviews/fe110_joint_coverage_20261023/:366frame joint force/environment audit,current and conditional missing-type lists,fixed-threshold SOAP comparisons and validation receipts.
+- calculations/fe110_reico_pilot300_20261022/joint_coverage_20261023_v3/:local fulltraining/pool environments,1043DFTforcepairs,254newSOAPcache entries,bindings and checkpoints;original366package unchanged.
+- scripts/adsorption/reico_joint_coverage.py;archive/fe110_joint_coverage_20261023/;configs/fe110_reico_pilot/joint_coverage_v1.json;tests/test_reico_joint_coverage.py:training-only joint diagnostics,bounded local runner and independent count/SOAP/permutation/conditional verification.

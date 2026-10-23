@@ -1505,3 +1505,11 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 - Native source and444DBrow integrity checks pass,including release adapters;51primary/44release tests pass.Original frozen packages/checkpoints unchanged;no heldoutDB,model/configuration execution request,GPU,DFT or training.No automatic submission or modelpromotion.
 - V1failed only at final coverage-summary legacy-family mapping;all original data and failure/source snapshots retained.V2is successful and inventory-bound.Next prepare a bounded experiment design and resource budget before separate runtime authority.
 - Evidence:docs/reviews/fe110_combined_force_package_20261023/README.md.
+
+## 2026-10-23 - Joint coverage of the frozen366 training frames
+
+- User authorized existing-data composition/local-environment/force audit only.Fixed original233SOAP thresholds;training-only366labels and1597random traingeometries;254local descriptors added,original caches immutable.
+- Current296missing contact-joint types include109fillable by original selected inputs;121trainselected labels remain outside package.Conditional all121pass review:187residual groups,75with all-cutoff missing examples;SOAP451to1is conditional geometry coverage,not actual admission/model improvement.
+- C2H3lowforce4frames are1job/1joint type;C3H2O54frames havefmax>=0.659eV/A.No newrandom DFT budget supported now;first review existing selected labels,then address task-relevant low/mid-force gaps if separately authorized.No fixed supplemental count.
+- Keep all366samples/weights/partitions/magnetic grades;1043near-pair comparisons show realforcevariation,including24pairs below0.10Awithadsorbate deltaRMSE>1eV/A.Independent counts,freshSOAP,18permutationpairs and conditional sets pass;33tests pass in each checkout.No training/newDFT/GPU or pausedC3 restart.
+- Evidence:docs/reviews/fe110_joint_coverage_20261023/README.md;current local output joint_coverage_20261023_v3.

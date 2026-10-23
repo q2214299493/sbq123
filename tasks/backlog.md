@@ -143,7 +143,7 @@ no deletion, reclassification event or state-transaction change is authorized by
 - Magnetism:approved same spin input,totalM105.9810-105.9993muB,maxadjacent0.0034muB;localmoments absent.Keep LEGACY_TOTAL_MAGNETIZATION_ONLY scope,not new-static full magneticQC.
 - Existing3C3jobs/458frames yield zero intactC3 lowforce frames(<=0.05eV/A);9lowforce frames areCO+C2H2,not intact anchors.
 - Completed local combined_force_package_20261023_v2:366train/78dev/53heldout,plus16oldobserved-heldout quarantined;6late10_B included with unchanged total-only magnetic grade.48894geometry comparisons,zero conflicts;all513source labels and444train/dev DBrows verified.No model/runtime request generated.
-- Next:define the bounded force-training comparison,initializer and resource budget,then prepare a separately authorized execution request.Continue no training/newDFT/automaticretry or pausedC3 restart.
+- Current366 joint coverage review complete:296missing joint types;109fillable by existing selected inputs;conditional remainder187,75cutoff-robust.121original selected training labels not yet admitted.Next:on a requested checkpoint collect/QC existing selected labels before any supplemental-label decision;C3lowforce and independentC2H3lowforce remain priority data gaps.No newDFT/training/retry or pausedC3 restart.Evidence:docs/reviews/fe110_joint_coverage_20261023/README.md.
 - Package evidence:docs/reviews/fe110_combined_force_package_20261023/README.md.
 - Supplement evidence:docs/reviews/fe110_10b_lowforce_20261023/README.md.
 - Local follow-up evidence:calculations/fe110_reico_pilot300_20261022/status_lowforce_check_20261023_v1/checkpoint_summary.json.

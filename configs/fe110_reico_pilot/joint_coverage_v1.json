@@ -1,0 +1,56 @@
+{
+  "purpose": "TRAIN_ONLY_JOINT_COVERAGE_NO_NEW_DFT_OR_MODEL",
+  "inputs": {
+    "manifest": {
+      "path": "calculations/fe110_reico_pilot300_20261022/combined_force_package_20261023_v2/training_manifest.json",
+      "sha256": "6a9121a26bc2a8eb51641cfe0b694fb3c4c4c719e791eaa2d4fc6fe0b10e9ebb"
+    },
+    "inventory": {
+      "path": "calculations/fe110_reico_pilot300_20261022/sampling93_v1/selection/frame_inventory.json",
+      "sha256": "da7eb52ca134fd92cc403f6b2a4fbbdfaa2e9f584b05e397bd8ca828e60d5b61"
+    },
+    "selection": {
+      "path": "calculations/fe110_reico_pilot300_20261022/sampling93_v1/selection/selected_frames.json",
+      "sha256": "022e46102437678a541c587bbd30aaa1e0db27992ea8fcedca3092343701cd34"
+    },
+    "prior_frames": {
+      "path": "calculations/fe110_reico_pilot300_20261022/stratified_audit_v1/frame_environments.json",
+      "sha256": "ca83f9bbb2c1ff27d27b22c5504eb71f4f2c3cb3e803445d99086a92382ae4a0"
+    },
+    "prior_soap": {
+      "path": "calculations/fe110_reico_pilot300_20261022/stratified_audit_v1/composition_soap.json",
+      "sha256": "5b90ad67c6cad0c7ad93ea73aa6de7193e42a50a0612de606d9795abc3dcdbfd"
+    },
+    "prior_cache_inventory": {
+      "path": "calculations/fe110_reico_pilot300_20261022/stratified_audit_v1/cache_inventory.json",
+      "sha256": "165b131f0a180bf83fbb0882ce2d94b423f924b27ed984092ecc8436b5aa1c61"
+    },
+    "prior_coverage": {
+      "path": "calculations/fe110_reico_pilot300_20261022/coverage_audit_v1/coverage.json",
+      "sha256": "2826dfcebc632b9ea4526c7649099b1105394c10f3fea24e6b7d024648af5624"
+    },
+    "analysis_rules": {
+      "path": "configs/adsmind_lite/analysis_rules.yaml",
+      "sha256": "45bab93237e78f37287f36ec1626b0d38b38fe0c17f913a9062fdc7d65bcceed"
+    }
+  },
+  "output": "calculations/fe110_reico_pilot300_20261022/joint_coverage_20261023_v3",
+  "force_edges_eV_A": [
+    0,
+    0.05,
+    0.1,
+    0.5,
+    1,
+    2,
+    5,
+    10
+  ],
+  "radius_scales": [
+    1.2,
+    1.25,
+    1.3
+  ],
+  "near_pair_A": 0.2,
+  "SOAP_threshold_policy": "Frozen composition-specific thresholds from original233; never recalibrated on reserved data",
+  "selection_policy": "diagnostics only; unchanged 366 labels, magnetic tiers, weights, partitions"
+}
