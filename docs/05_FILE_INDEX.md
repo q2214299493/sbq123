@@ -256,3 +256,5 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - scripts/adsorption/reico_force_coverage.py and configs/fe110_reico_pilot/force_qc_v1.json:raw-force bins,periodic equal-element correspondence and vector force differences;no reserved adaptive analysis or force-based deletion.
 - tests/test_reico_force_coverage.py:force/source/partition boundaries and numberedEDIFF-after-energy regression.
 - docs/reviews/fe110_reico_label_qc_20261023/:raw-scheduler checkpoint,QCmetadata,training statistics and reproducible validation;raw VASP/forces remain local.
+
+- calculations/fe110_reico_pilot300_20261022/status_lowforce_check_20261023_v1/checkpoint_summary.json:read-only125DONE checkpoint,4incremental staticQC,10_B intactC2H3 source recheck,and458frame historicalC3 force/chemistry search;local runtime evidence,no newDFT.

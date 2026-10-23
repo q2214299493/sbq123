@@ -92,9 +92,11 @@ Next action: Prepare and review a revised preconditioning or resampling design t
 
 All99 local families sampled;1995frames→292selected(train233/dev30/test29),
 including12 reusedDFTlabels.280newstatics authorized;204success receipts.
-At2026-10-23T12:10:48Z:121DONE/3RUN/80PEND;76without success receipts remain untouched,7unknown reservations unreconciled.
-121completed+12reused statics pass exact-coordinate/raw-force/SCF/local-moment QC;110train/17dev/6test.Only110train analyzed,allfmax>0.5eV/A;legacy248bindings pass,37lowforce labels but noC2H3/C3H2O.13same-family nearpairs show real force changes,not model error.No newDFT/GPU/training or measuredspeedup.
+At2026-10-23T13:02:58Z:125DONE/4RUN/75PEND;76without success receipts remain untouched,7unknown reservations unreconciled.
+125completed+12reused statics pass exact-coordinate/raw-force/SCF/local-moment QC;112train/18dev/7test.4new completions pass QC;training fmax remains>0.5eV/A.Legacy248still has noC2H3/C3H2O lowforce labels.13nearby-pair results remain the prior110train checkpoint,not recomputed.No newDFT/GPU/training or measuredspeedup.
 Evidence:docs/reviews/fe110_reico_label_qc_20261023/README.md.
+Existing-source follow-up:10_B(job9848812),intactC2H3,final296,fmax0.0199017eV/A,is a candidate only;10_A remains whole-job heldout.10_B has no0.20A overlap against513reserved geometries under the existing fixed-Fe metric;full symmetry/magnetic training admission remains unreviewed.Three historical C3jobs(9627285/9629858/9629859),458frames,contain no intactC3 frame withfmax<=0.05eV/A;9lowforce frames areCO+C2H2.9627285 finalSCF/ionic/branch/raw-force correspondence pass;localmoments absent and intermediateSCF not all reviewed.
+Local evidence:calculations/fe110_reico_pilot300_20261022/status_lowforce_check_20261023_v1/checkpoint_summary.json.
 Training-only stratified audit complete:1597frames/233references;23missing graphs,187missing graph+Fe-contact strata,71representatives below0.10A RMSD. One SOAP gap after composition-specific calibration;only1of8examples remains joint-uncovered at all3radius scales. Diagnostic only;no selection/job/model changes. Evidence:docs/reviews/fe110_reico_stratified_audit_20261023/README.md.
 Managed sync remains blocked by existing PKG-INFO;paired benchmark unchanged.
 
