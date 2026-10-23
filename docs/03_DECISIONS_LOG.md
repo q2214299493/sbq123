@@ -1489,3 +1489,10 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 - Server esub refused6requests for too many jobs;another SSH submission timed out after300s. Preserve all7unknown reservations/receipts. No additional matching recent/active job or submission process observed;one timeout outcome remains unconfirmed. Exact configured job-count threshold needs confirmation.
 - Remaining76=69untouched+7requiring recovery review. Keep original280authority;confirm current server submission allowance and reconcile reservations before supplementing only unsubmitted inputs. No automatic retry/background supplement and no existing calculation stopped.
 - Reviewed registry plan da03fe0318c435ea956ee810f64bf2d5e1dd1c8fe8652a04ee01fad5093941a1 applied:3881INSERT/0UPDATE,204real jobs and provenance only;zero accepted results. Evidence:docs/reviews/fe110_reico_sampling93_20261022/dft_submission_status.json.
+
+## 2026-10-23 - Reuse six late10_B frames as an isolated legacy force supplement
+
+- User requested extraction,per-frameSCF/magnetism and isolation checks before admission;no newDFT.Closed job9848812 steps264/272/280/288/295/296 all pass source/raw-force/SCF/intactC2H3 checks and full clean-face symmetry/equal-element isolation;4fmax<=0.05eV/A.
+- Retain6as LEGACY_TOTAL_MAGNETIZATION_ONLY force-only supplement under the existing20261019 trajectory review scope.TotalM105.9810-105.9993muB,maxadjacentlatechange0.0034muB;localFe moment signs and magneticgroundstate unverified.No claim of local-moment-complete newstatic QC or energy-training admission.
+- Keep10_Awhole-job heldout and every frozen package unchanged;future combined package must preserve job isolation and this review tier.NoDFT/GPU/training/modelpromotion or pausedC3 restart.
+- Evidence:docs/reviews/fe110_10b_lowforce_20261023/README.md;6real frames independently verified and replayed identically in the release checkout.

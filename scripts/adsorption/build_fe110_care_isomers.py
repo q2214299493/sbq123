@@ -286,5 +286,26 @@ def main() -> None:
         print(f"{item['name']} {review_data['verdict']}")
 
 
+def surface_pose_symmetries(slab: Poscar) -> list[tuple[np.ndarray, np.ndarray]]:
+    """Use only actual clean-slab symmetries that retain the adsorbing face."""
+    import spglib
+
+    if slab.symbols != ["Fe"] or slab.counts != [45]:
+        raise ValueError("pose comparison requires the clean Fe45 reference")
+    data = spglib.get_symmetry((slab.cell, slab.frac, [26] * 45), symprec=0.01)
+    if data is None:
+        raise ValueError("clean-slab symmetry identification failed")
+    operations = [
+        (rotation, translation)
+        for rotation, translation in zip(data["rotations"], data["translations"], strict=True)
+        if np.array_equal(rotation[2], [0, 0, 1])
+        and np.array_equal(rotation[:, 2], [0, 0, 1])
+        and abs(translation[2] - round(translation[2])) < 1e-8
+    ]
+    if not operations:
+        raise ValueError("no face-preserving slab symmetry operations")
+    return operations
+
+
 if __name__ == "__main__":
     main()

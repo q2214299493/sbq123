@@ -258,3 +258,6 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - docs/reviews/fe110_reico_label_qc_20261023/:raw-scheduler checkpoint,QCmetadata,training statistics and reproducible validation;raw VASP/forces remain local.
 
 - calculations/fe110_reico_pilot300_20261022/status_lowforce_check_20261023_v1/checkpoint_summary.json:read-only125DONE checkpoint,4incremental staticQC,10_B intactC2H3 source recheck,and458frame historicalC3 force/chemistry search;local runtime evidence,no newDFT.
+
+- docs/reviews/fe110_10b_lowforce_20261023/:six-frameSCF/force/magnetic-tier/full-symmetry isolation review and validation receipts. Local candidate data:calculations/fe110_reico_pilot300_20261022/10b_lowforce_review_20261023_v1/force_supplement.json;existing frozen training packages unchanged.
+- archive/fe110_10b_lowforce_20261023/:bounded read-only collector,exact legacy-owner snapshots,and independent force-supplement reviewer;tests/test_10b_lowforce_review.py.

@@ -139,8 +139,10 @@ no deletion, reclassification event or state-transaction change is authorized by
 - Completed121DONE collections+12reused raw-static rechecks;133PASS,110train/17dev/6test.Only training used for force distributions/13nearby pairs;allnewtrain fmax>0.5eV/A.
 - Legacy248canonical bindings rechecked,37lowforce labels;noC2H3/C3H2O lowforce source in these audited labels.13near-pair differences independently verified;retain both geometries rather than declaring DFT error.
 - Follow-up2026-10-23T13:02:58Z:125DONE/4RUN/75PEND;4incremental staticsPASS,total137(112train/18dev/7test).76without success receipts and7unknown reservations untouched.
-- Existing10_B intactC2H3 final296 fmax0.0199017eV/A is a reuse candidate;10_A stays heldout.10_B passes the existing513reserved-geometry0.20A diagnostic;full symmetry/magnetic/source admission remains before training.
+- Completed10_B six lateframe extraction and per-frameSCF/raw-force/intact-graph review;all6pass full-symmetry isolation against70same-composition reserved structures,within513reserved geometries.4fmax<=0.05eV/A.Independent legacy force supplement retained;no frozen package mutation.
+- Magnetism:approved same spin input,totalM105.9810-105.9993muB,maxadjacent0.0034muB;localmoments absent.Keep LEGACY_TOTAL_MAGNETIZATION_ONLY scope,not new-static full magneticQC.
 - Existing3C3jobs/458frames yield zero intactC3 lowforce frames(<=0.05eV/A);9lowforce frames areCO+C2H2,not intact anchors.
-- Next:review a small set of existing10_B late-trajectory frames for per-frame SCF/magnetism and cross-split equivalence before a training package.No newDFT,automaticretry,GPU/training or pausedC3 restart.
+- Next:prepare a new combined force-training package with original job splits and explicit magnetic-review tiers;include the6reviewed10_B legacy candidates without contaminating10_A.No newDFT,automaticretry,GPU/training or pausedC3 restart.
+- Supplement evidence:docs/reviews/fe110_10b_lowforce_20261023/README.md.
 - Local follow-up evidence:calculations/fe110_reico_pilot300_20261022/status_lowforce_check_20261023_v1/checkpoint_summary.json.
 - Evidence:docs/reviews/fe110_reico_label_qc_20261023/README.md.
