@@ -119,3 +119,10 @@ no deletion, reclassification event or state-transaction change is authorized by
 - Remaining76:69never attempted,6esub job-count refusals,1SSHtimeout. All7unknown reservations preserved;no extra corresponding queue job/process observed at checkpoint. Exact server job-count threshold needs confirmation. No automatic retry or background supplement.
 - Next executable step: after queue headroom returns,reconcile7reservations through the owner protocol,then only supplement outstanding originally authorized inputs;do not repeat existing jobs. Plan:dft_inputs_v1/remaining_submission_plan.json.
 - Evidence:docs/reviews/fe110_reico_sampling93_20261022/dft_submission_status.json. Primary70/publication22submission tests pass;new registry3881INSERT/0UPDATE for204actual jobs,no acceptedresults/training/acceleration. Managed sync still blocked by existingPKG-INFO mismatch.
+
+
+## Fe110 intact C3 near-equilibrium gap — 2026-10-23
+
+- Recovered9629858/9629859:both80stepDFTpaths fragmented toCO+C2H2;no intact frame below0.05eV/A. Neither is a stable anchor.
+- Prepare a small reviewed relaxation proposal for the actual target C3 graph; no new DFT/continuation/training is authorized by this recovery. Existing off-equilibrium paths remain label candidates pending per-frame SCF/magnetic review.
+- Evidence:docs/reviews/fe110_c3_source_recovery_20261023/README.md.

@@ -98,3 +98,8 @@ Server job-count headroom and7reservation reviews block remaining submissions.
 No new training or measured C2/C3 acceleration. Evidence:
 docs/reviews/fe110_reico_sampling93_20261022/dft_submission_status.json.
 Managed sync remains blocked by existing PKG-INFO;paired benchmark unchanged.
+
+
+### Fe110 C3 source recovery — 2026-10-23
+
+Known relative subdirectories are readable;9629858/9629859 outputs recovered with hashes. Both normal80step exits and finalSCFconverged,but ionicnotconverged,fmax0.860795/0.565336eV/A,bothCO+C2H2. No intactC3 frame below0.05eV/A among160steps. Localmoments missing;no accepted anchor,new job or model run. Evidence:docs/reviews/fe110_c3_source_recovery_20261023/README.md.

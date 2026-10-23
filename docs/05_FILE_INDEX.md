@@ -228,3 +228,9 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - tests/test_reico_labels280_submission.py and test_reico_labels280_review.py:scope/source/gate integrity,tranche boundaries,receipt reuse,unknown-state refusal,and truthful partial checkpoints.
 - docs/reviews/fe110_reico_sampling93_20261022/{dft_submission_authorization.md,dft_submission_status.json}:literal280job authority and actual204submitted/76outstanding status. execution_status.json links this checkpoint.
 - calculations/fe110_reico_pilot300_20261022/sampling93_v1/dft_inputs_v1/:local-only frozen280inputs/gates,204receipts,7protectedunknowns,initial_submission_checkpoint.json,minimal_submission_limit_reconciliation.json,submission_failure_review.json,remaining_submission_plan.json,and reviewed3881INSERT registry transaction.
+
+
+## Fe110 C3 source recovery — 2026-10-23
+
+- `docs/reviews/fe110_c3_source_recovery_20261023/README.md`: verified recovery of9629858/9629859;both80steps,SCFconverged,but0.860795/0.565336eV/A andCO+C2H2 fragmentation;no stable intact-C3 anchor.
+- `calculations/fe110_c3_existing_recovery_20261023/collection_v1/`: immutable remote/local file hashes,original outputs,v2 force-coordinate checks and160-frame diagnostic. No new scientific execution.

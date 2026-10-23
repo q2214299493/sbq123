@@ -1,0 +1,124 @@
+{
+  "job_id": "9629858",
+  "case": "01_single_C_top",
+  "source_directory": "calculations\\fe110_c3_existing_recovery_20261023\\collection_v1\\9629858",
+  "collection_sha256": "df63c4a1dadef8ef7235627573b88689148cc4fe08bb890e23cc4641e7763417",
+  "ionic_steps": 80,
+  "normal_completion": true,
+  "final_SCF": {
+    "last_electronic_iteration": 11,
+    "last_delta_e_eV": -4.9931e-06,
+    "ediff_eV": 1e-05,
+    "nelm": 200,
+    "electronically_converged": true,
+    "electronic_convergence_source": "OUTCAR_EDIFF_TERMINATION"
+  },
+  "relaxation_gate": {
+    "passed": false,
+    "reason": "VASP relaxation result gate failed: ionic_convergence_missing"
+  },
+  "fmax_movable_eV_A": 0.8607949181692467,
+  "adsorbate_fmax_eV_A": 0.8607949181692467,
+  "final_TOTEN_eV_metadata_only": -395.2024957,
+  "reportable_energy": false,
+  "canonical_ASE_raw_force_match": true,
+  "force_CONTCAR_coordinate_match": true,
+  "force_CONTCAR_max_difference_A": 7.875216143104127e-06,
+  "compatibility_checks": {
+    "GGA": true,
+    "ENCUT": true,
+    "EDIFF": true,
+    "EDIFFG": true,
+    "ISPIN": true,
+    "ISMEAR": true,
+    "SIGMA": true,
+    "ISIF": true,
+    "dipole_off": true,
+    "atom_order": true,
+    "clean_Fe45": true,
+    "cell": true,
+    "flags": true,
+    "fixed_positions": true,
+    "input_fixed_positions": true,
+    "potcar": true,
+    "kmesh": true,
+    "magmom": true
+  },
+  "OUTCAR_position_rounding_bound_max_A": 8.660254037844387e-06,
+  "minimum_Fe_adsorbate_A": 1.8469671531267613,
+  "chemistry": {
+    "connectivity_changed": true,
+    "dissociated": true,
+    "chemical_event": "dissociation",
+    "lost_bonds": [
+      [
+        1,
+        3
+      ]
+    ],
+    "formed_bonds": [],
+    "initial_fragment_count": 1,
+    "relaxed_fragment_count": 2
+  },
+  "signature_match": false,
+  "initial_edges_local_0based": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      2,
+      3
+    ]
+  ],
+  "final_edges_local_0based": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      2,
+      3
+    ]
+  ],
+  "final_fragment_formulas_geometry_diagnostic": [
+    "C2H2",
+    "CO"
+  ],
+  "magnetism": {
+    "total_last_muB": 106.3132,
+    "total_range_muB": [
+      105.2817,
+      106.4726
+    ],
+    "local_moment_count": 0,
+    "local_moments_complete": false,
+    "global_magnetic_minimum_verified": false,
+    "scope": "No LORBIT local-moment table in legacy output; total moment and input branch only."
+  },
+  "raw_force_label_candidate": true,
+  "low_force_candidate_below_0p05": false,
+  "intact_C3_anchor_candidate": false,
+  "scientific_acceptance": false,
+  "training_authorized": false
+}
