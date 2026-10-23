@@ -269,3 +269,7 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - docs/reviews/fe110_joint_coverage_20261023/:366frame joint force/environment audit,current and conditional missing-type lists,fixed-threshold SOAP comparisons and validation receipts.
 - calculations/fe110_reico_pilot300_20261022/joint_coverage_20261023_v3/:local fulltraining/pool environments,1043DFTforcepairs,254newSOAPcache entries,bindings and checkpoints;original366package unchanged.
 - scripts/adsorption/reico_joint_coverage.py;archive/fe110_joint_coverage_20261023/;configs/fe110_reico_pilot/joint_coverage_v1.json;tests/test_reico_joint_coverage.py:training-only joint diagnostics,bounded local runner and independent count/SOAP/permutation/conditional verification.
+
+- docs/reviews/fe110_reico_followup_20261024/:19newstaticQC checkpoint,378frame training-only coverage projection,two paused C3sources,two isolated geometrybackups andvalidation receipts.
+- calculations/fe110_reico_pilot300_20261022/followup_20261024_v2/:114collectedrawfiles,19QCrows,156combinedlabelrecords,378frame auditview andcandidategeometries;v1retains initialnetwork failure,no sourcepackage mutation.
+- archive/fe110_reico_followup_20261024/;configs/fe110_reico_pilot/followup_20261024_v1.json;tests/test_reico_followup_20261024.py:exact receipt-backed collection,resume-safe failed-snapshot guard,nativeQC,isolated auditupdate andreal-label verification.

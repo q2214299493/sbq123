@@ -1513,3 +1513,11 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 - C2H3lowforce4frames are1job/1joint type;C3H2O54frames havefmax>=0.659eV/A.No newrandom DFT budget supported now;first review existing selected labels,then address task-relevant low/mid-force gaps if separately authorized.No fixed supplemental count.
 - Keep all366samples/weights/partitions/magnetic grades;1043near-pair comparisons show realforcevariation,including24pairs below0.10Awithadsorbate deltaRMSE>1eV/A.Independent counts,freshSOAP,18permutationpairs and conditional sets pass;33tests pass in each checkout.No training/newDFT/GPU or pausedC3 restart.
 - Evidence:docs/reviews/fe110_joint_coverage_20261023/README.md;current local output joint_coverage_20261023_v3.
+
+## 2026-10-24 - Recover existing selected labels before supplemental DFT
+
+- User authorized collection/QC and a small targeted candidate list only.No newDFT/training or pausedC3 restart.InitialSSH/TCP failure retained;after user restored connectivity,query79exact outstanding success-receipt jobs once:19DONE/4RUN/56PEND at00:10:48Beijing.65of121unadmitted traininputs lack successful receipts;not treated as pendingjobs.
+- Collect114source files for19DONE results;all19staticSCF/rawforce/localFe-moment QC PASS(12train/2dev/5test).Total selectedlabels156PASS(124train/20dev/12test);reserved physicalQC never enters adaptive coverage.12newtrain labels pass1824full-symmetry comparisons against513reserved geometries.
+- Auditview378labels reducesjoint gaps296to284 andfixed-prior-thresholdSOAP gaps451to366;original366trainingpackage/weights/partitions/magneticgrades unchanged.C3H2O59stillno fmax<=0.05;C2H3fourlowforce labelsstill1source/type.
+- Keep05/07C3prepared sources paused as priority lowforce-source proposals;family0039step006 and0086step014 remain force-unknown geometry backups,isolated in280comparisons.No immediate newrandom high-energy DFT recommendation;first consume44existingRUN/PEND trainingjobs when complete.Neither187conditional gaptypes nor2backups imply a DFT budget.
+- 42tests pass in eachcheckout;19real staticlabels replay identically in each;378force-bin/directset counts and4candidate hashes pass.Evidence:docs/reviews/fe110_reico_followup_20261024/README.md.
