@@ -126,3 +126,10 @@ no deletion, reclassification event or state-transaction change is authorized by
 - Recovered9629858/9629859:both80stepDFTpaths fragmented toCO+C2H2;no intact frame below0.05eV/A. Neither is a stable anchor.
 - Two revised localC3 candidates(05/07) now have reviewed80step/32core input packages with local-moment output;both canonical preflights pass.No upload/submission;estimated combined648-735corehours is a historical reference,not a cost cap. Await exact two-job approval before remote checks/gates. Existing off-equilibrium paths remain label candidates pending per-frame SCF/magnetic review. Preparation:docs/reviews/fe110_c3_targeted_relaxation_20261023/README.md.
 - Evidence:docs/reviews/fe110_c3_source_recovery_20261023/README.md.
+
+## Fe110 composition/connectivity/coordination coverage — 2026-10-23
+
+- Completed local cached-SOAP and geometric stratum audit on1597training frames;233original references and all292selections/partitions preserved.
+- Missing23graph/187joint contact strata;71representatives close to original selections. Strong radius sensitivity,so these are not187required DFT labels.8examples isolated from reserved geometry;only family_0086_step014 remains joint-uncovered at all3scales.
+- Next:after existing DFT labels pass electronic/magnetic/source QC,check force-range coverage and similar-geometry force differences before deciding any supplemental labels.No newDFT/model/training or pausedC3 job authorized/executed.
+- Evidence:docs/reviews/fe110_reico_stratified_audit_20261023/README.md.

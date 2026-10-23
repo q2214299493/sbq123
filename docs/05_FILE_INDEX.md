@@ -241,3 +241,11 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - scripts/vasp_inputs.py and scripts/adsorption/preflight_fe110_adsorption.py:explicit80step screening and local-moment options plus C3H2O support;production defaults unchanged.
 - tests/test_fe110_adsorption_screening.py:stage/budget/physical-method/magnetic-output rejection and unified-gate regressions.
 - docs/reviews/fe110_c3_targeted_relaxation_20261023/:review,exact small input snapshots,hash inventory,cost references and validation;no POTCAR contents or actual submission.
+
+## Fe110 stratified training coverage — 2026-10-23
+
+- scripts/adsorption/reico_chemical_environments.py:exact equal-element graph canonicalization,Fe-neighbor counts and joint geometric strata.
+- scripts/adsorption/reico_stratified_audit.py and configs/fe110_reico_pilot/stratified_audit_v1.json:read-only training/cache analysis,composition-local SOAP,missing-type representatives and radius sensitivity.
+- tests/test_reico_stratified_audit.py:permutation invariance,graph/coordination coupling,composition isolation,reserved-data refusal and cache-only policy.
+- archive/fe110_reico_stratified_audit_20261023/verify.py:real-frame SOAP/NumPy/contact/count verification and8example sensitivity check.
+- docs/reviews/fe110_reico_stratified_audit_20261023/:review,canonical result snapshots and validation receipts;full1597frame table/cache remain local.

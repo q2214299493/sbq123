@@ -1,0 +1,417 @@
+{
+  "status": "AUDIT_COMPLETE",
+  "completed_utc": "2026-10-23T11:57:35.313055+00:00",
+  "scope": "TRAIN_GEOMETRY_AND_CACHED_SOAP_ONLY",
+  "training_frames": 1597,
+  "selected_training_frames": 233,
+  "composition_SOAP": {
+    "C2H2O": {
+      "pool_frames": 317,
+      "pool_families": 16,
+      "selected_frames": 46,
+      "thresholds": {
+        "C": 0.08535179412289015,
+        "O": 0.0898687782722723,
+        "H": 0.12015728225583215,
+        "Fe": 0.004208975225563415
+      },
+      "quantile_sensitivity": {
+        "0.9": {
+          "C": 0.07330478578196276,
+          "O": 0.08664946627792791,
+          "H": 0.10021405091609435,
+          "Fe": 0.003303255027775043
+        },
+        "0.95": {
+          "C": 0.08535179412289015,
+          "O": 0.0898687782722723,
+          "H": 0.12015728225583215,
+          "Fe": 0.004208975225563415
+        },
+        "0.99": {
+          "C": 0.10661396041387101,
+          "O": 0.1030718338332476,
+          "H": 0.13724805941487173,
+          "Fe": 0.007344944941488108
+        }
+      },
+      "coverage": {
+        "C": {
+          "local_environment_count": 634,
+          "above_internal_threshold": 0,
+          "fraction_within_internal_threshold": 1.0,
+          "p95_cosine_distance": 0.009867649463491699,
+          "maximum_cosine_distance": 0.024356600785175098
+        },
+        "O": {
+          "local_environment_count": 317,
+          "above_internal_threshold": 0,
+          "fraction_within_internal_threshold": 1.0,
+          "p95_cosine_distance": 0.011590003960702729,
+          "maximum_cosine_distance": 0.01778149188792144
+        },
+        "H": {
+          "local_environment_count": 634,
+          "above_internal_threshold": 0,
+          "fraction_within_internal_threshold": 1.0,
+          "p95_cosine_distance": 0.01348400960349856,
+          "maximum_cosine_distance": 0.03234590564221451
+        },
+        "Fe": {
+          "local_environment_count": 1506,
+          "above_internal_threshold": 0,
+          "fraction_within_internal_threshold": 1.0,
+          "p95_cosine_distance": 0.00044840214227961916,
+          "maximum_cosine_distance": 0.0027146014466814528
+        }
+      },
+      "SOAP_gap_frames": 0
+    },
+    "C2H3": {
+      "pool_frames": 252,
+      "pool_families": 12,
+      "selected_frames": 36,
+      "thresholds": {
+        "C": 0.07606188904996011,
+        "H": 0.06275675844925127,
+        "Fe": 0.003181107959193352
+      },
+      "quantile_sensitivity": {
+        "0.9": {
+          "C": 0.06490955713909674,
+          "H": 0.05577004760318559,
+          "Fe": 0.0025394970196972455
+        },
+        "0.95": {
+          "C": 0.07606188904996011,
+          "H": 0.06275675844925127,
+          "Fe": 0.003181107959193352
+        },
+        "0.99": {
+          "C": 0.0876462683315141,
+          "H": 0.07239870762272423,
+          "Fe": 0.0065921370600938185
+        }
+      },
+      "coverage": {
+        "C": {
+          "local_environment_count": 504,
+          "above_internal_threshold": 0,
+          "fraction_within_internal_threshold": 1.0,
+          "p95_cosine_distance": 0.013905823796670363,
+          "maximum_cosine_distance": 0.025397730602400692
+        },
+        "H": {
+          "local_environment_count": 756,
+          "above_internal_threshold": 0,
+          "fraction_within_internal_threshold": 1.0,
+          "p95_cosine_distance": 0.009552025434758887,
+          "maximum_cosine_distance": 0.03162783391133728
+        },
+        "Fe": {
+          "local_environment_count": 1435,
+          "above_internal_threshold": 0,
+          "fraction_within_internal_threshold": 1.0,
+          "p95_cosine_distance": 0.0005226690869757799,
+          "maximum_cosine_distance": 0.0022074177799501493
+        }
+      },
+      "SOAP_gap_frames": 0
+    },
+    "C2HO": {
+      "pool_frames": 252,
+      "pool_families": 12,
+      "selected_frames": 36,
+      "thresholds": {
+        "C": 0.07091479789586884,
+        "O": 0.06793808034074231,
+        "H": 0.07742072782627735,
+        "Fe": 0.003115219035946782
+      },
+      "quantile_sensitivity": {
+        "0.9": {
+          "C": 0.05763520165232655,
+          "O": 0.04709054273849739,
+          "H": 0.0668734652649639,
+          "Fe": 0.002823460854434923
+        },
+        "0.95": {
+          "C": 0.07091479789586884,
+          "O": 0.06793808034074231,
+          "H": 0.07742072782627735,
+          "Fe": 0.003115219035946782
+        },
+        "0.99": {
+          "C": 0.11618692358946542,
+          "O": 0.07978591789283752,
+          "H": 0.10091639100339844,
+          "Fe": 0.005682664284759077
+        }
+      },
+      "coverage": {
+        "C": {
+          "local_environment_count": 504,
+          "above_internal_threshold": 0,
+          "fraction_within_internal_threshold": 1.0,
+          "p95_cosine_distance": 0.009880430448177204,
+          "maximum_cosine_distance": 0.018380182369299503
+        },
+        "O": {
+          "local_environment_count": 252,
+          "above_internal_threshold": 0,
+          "fraction_within_internal_threshold": 1.0,
+          "p95_cosine_distance": 0.007639961546591702,
+          "maximum_cosine_distance": 0.01473957673956594
+        },
+        "H": {
+          "local_environment_count": 252,
+          "above_internal_threshold": 0,
+          "fraction_within_internal_threshold": 1.0,
+          "p95_cosine_distance": 0.009149207085198095,
+          "maximum_cosine_distance": 0.027161470863751647
+        },
+        "Fe": {
+          "local_environment_count": 1223,
+          "above_internal_threshold": 1,
+          "fraction_within_internal_threshold": 0.9991823385118561,
+          "p95_cosine_distance": 0.0004788957007934022,
+          "maximum_cosine_distance": 0.0031804597545923574
+        }
+      },
+      "SOAP_gap_frames": 1
+    },
+    "C3H2O": {
+      "pool_frames": 776,
+      "pool_families": 39,
+      "selected_frames": 115,
+      "thresholds": {
+        "C": 0.0650476043280145,
+        "O": 0.07298191673490154,
+        "H": 0.07839428380255671,
+        "Fe": 0.00291684723710417
+      },
+      "quantile_sensitivity": {
+        "0.9": {
+          "C": 0.05693584537167592,
+          "O": 0.06012149199155468,
+          "H": 0.0630830137556134,
+          "Fe": 0.0020711437978182534
+        },
+        "0.95": {
+          "C": 0.0650476043280145,
+          "O": 0.07298191673490154,
+          "H": 0.07839428380255671,
+          "Fe": 0.00291684723710417
+        },
+        "0.99": {
+          "C": 0.08960098412242179,
+          "O": 0.0937748170129797,
+          "H": 0.10107652822467506,
+          "Fe": 0.004491498580563935
+        }
+      },
+      "coverage": {
+        "C": {
+          "local_environment_count": 2328,
+          "above_internal_threshold": 0,
+          "fraction_within_internal_threshold": 1.0,
+          "p95_cosine_distance": 0.009212971612202083,
+          "maximum_cosine_distance": 0.030560270713252846
+        },
+        "O": {
+          "local_environment_count": 776,
+          "above_internal_threshold": 0,
+          "fraction_within_internal_threshold": 1.0,
+          "p95_cosine_distance": 0.009889214495076876,
+          "maximum_cosine_distance": 0.033349064356854696
+        },
+        "H": {
+          "local_environment_count": 1552,
+          "above_internal_threshold": 0,
+          "fraction_within_internal_threshold": 1.0,
+          "p95_cosine_distance": 0.008645601017288184,
+          "maximum_cosine_distance": 0.02652641429226099
+        },
+        "Fe": {
+          "local_environment_count": 4600,
+          "above_internal_threshold": 0,
+          "fraction_within_internal_threshold": 1.0,
+          "p95_cosine_distance": 0.0004001009110203681,
+          "maximum_cosine_distance": 0.0024843772580410706
+        }
+      },
+      "SOAP_gap_frames": 0
+    }
+  },
+  "chemical_strata": {
+    "C2H2O": {
+      "graph_signature": {
+        "pool_strata": 35,
+        "covered_strata": 29,
+        "missing_strata": 6,
+        "frames_in_missing_strata": 18
+      },
+      "coordination_signature": {
+        "pool_strata": 37,
+        "covered_strata": 31,
+        "missing_strata": 6,
+        "frames_in_missing_strata": 30
+      },
+      "joint_signature": {
+        "pool_strata": 71,
+        "covered_strata": 43,
+        "missing_strata": 28,
+        "frames_in_missing_strata": 81
+      },
+      "events_pool": {
+        "none": 115,
+        "association": 81,
+        "bond_rearrangement": 95,
+        "dissociation": 26
+      },
+      "events_selected": {
+        "none": 21,
+        "association": 11,
+        "bond_rearrangement": 10,
+        "dissociation": 4
+      }
+    },
+    "C2H3": {
+      "graph_signature": {
+        "pool_strata": 15,
+        "covered_strata": 13,
+        "missing_strata": 2,
+        "frames_in_missing_strata": 13
+      },
+      "coordination_signature": {
+        "pool_strata": 32,
+        "covered_strata": 23,
+        "missing_strata": 9,
+        "frames_in_missing_strata": 37
+      },
+      "joint_signature": {
+        "pool_strata": 74,
+        "covered_strata": 34,
+        "missing_strata": 40,
+        "frames_in_missing_strata": 106
+      },
+      "events_pool": {
+        "none": 74,
+        "association": 159,
+        "dissociation": 15,
+        "bond_rearrangement": 4
+      },
+      "events_selected": {
+        "none": 14,
+        "association": 19,
+        "dissociation": 3
+      }
+    },
+    "C2HO": {
+      "graph_signature": {
+        "pool_strata": 14,
+        "covered_strata": 13,
+        "missing_strata": 1,
+        "frames_in_missing_strata": 8
+      },
+      "coordination_signature": {
+        "pool_strata": 33,
+        "covered_strata": 24,
+        "missing_strata": 9,
+        "frames_in_missing_strata": 31
+      },
+      "joint_signature": {
+        "pool_strata": 53,
+        "covered_strata": 31,
+        "missing_strata": 22,
+        "frames_in_missing_strata": 55
+      },
+      "events_pool": {
+        "none": 149,
+        "dissociation": 25,
+        "association": 78
+      },
+      "events_selected": {
+        "none": 24,
+        "dissociation": 3,
+        "association": 9
+      }
+    },
+    "C3H2O": {
+      "graph_signature": {
+        "pool_strata": 70,
+        "covered_strata": 56,
+        "missing_strata": 14,
+        "frames_in_missing_strata": 48
+      },
+      "coordination_signature": {
+        "pool_strata": 109,
+        "covered_strata": 74,
+        "missing_strata": 35,
+        "frames_in_missing_strata": 95
+      },
+      "joint_signature": {
+        "pool_strata": 203,
+        "covered_strata": 106,
+        "missing_strata": 97,
+        "frames_in_missing_strata": 246
+      },
+      "events_pool": {
+        "none": 254,
+        "association": 391,
+        "dissociation": 43,
+        "bond_rearrangement": 88
+      },
+      "events_selected": {
+        "none": 51,
+        "association": 47,
+        "dissociation": 7,
+        "bond_rearrangement": 10
+      }
+    }
+  },
+  "diagnostic_representatives": 187,
+  "priority_examples": 8,
+  "selected_list_changed": false,
+  "reserved_labels_or_model_errors_used": false,
+  "new_DFT_ML_or_training": false,
+  "force_coverage_reviewed": false,
+  "source_files": [
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\coverage_audit_v1\\audit_summary.json",
+      "sha256": "c27cf2cd3057e38e7d26bad8ffe5a22834864e8223f30b9f6eb6eb6a34587616"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\coverage_audit_v1\\coverage.json",
+      "sha256": "2826dfcebc632b9ea4526c7649099b1105394c10f3fea24e6b7d024648af5624"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\sampling93_v1\\selection\\frame_inventory.json",
+      "sha256": "da7eb52ca134fd92cc403f6b2a4fbbdfaa2e9f584b05e397bd8ca828e60d5b61"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\sampling93_v1\\selection\\selected_frames.json",
+      "sha256": "022e46102437678a541c587bbd30aaa1e0db27992ea8fcedca3092343701cd34"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\configs\\adsmind_lite\\analysis_rules.yaml",
+      "sha256": "45bab93237e78f37287f36ec1626b0d38b38fe0c17f913a9062fdc7d65bcceed"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\configs\\fe110_reico_pilot\\stratified_audit_v1.json",
+      "sha256": "f0aafc57857093c1ab132cc91df6568d8d73415ed9aa40f9f3aa9e9d1b053676"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\scripts\\adsmind_lite\\relaxed_analysis.py",
+      "sha256": "3ab96bc578e34b9b1e0ae470e072b7c825f336cea764d57ac209c55eb7a0e330"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\scripts\\adsorption\\reico_chemical_environments.py",
+      "sha256": "729ff1e5b47e58b865edf9a6a6f692d35c2e93be37ddd9ba08a557bc02e92eba"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\scripts\\adsorption\\reico_stratified_audit.py",
+      "sha256": "2711a9ef1ea39ccf44fc947399a5e06d1377c3bbc142f38440a71e4e0678beaa"
+    }
+  ]
+}

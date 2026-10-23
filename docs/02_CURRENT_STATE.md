@@ -97,6 +97,7 @@ gates pass.204submitted:3RUN/201PEND(96cores)at2026-10-22T16:36Z.
 Server job-count headroom and7reservation reviews block remaining submissions.
 No new training or measured C2/C3 acceleration. Evidence:
 docs/reviews/fe110_reico_sampling93_20261022/dft_submission_status.json.
+Training-only stratified audit complete:1597frames/233references;23missing graphs,187missing graph+Fe-contact strata,71representatives below0.10A RMSD. One SOAP gap after composition-specific calibration;only1of8examples remains joint-uncovered at all3radius scales. Diagnostic only;no selection/job/model changes. Evidence:docs/reviews/fe110_reico_stratified_audit_20261023/README.md.
 Managed sync remains blocked by existing PKG-INFO;paired benchmark unchanged.
 
 

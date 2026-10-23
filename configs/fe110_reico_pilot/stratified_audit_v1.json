@@ -1,0 +1,11 @@
+{
+  "purpose": "LOCAL_TRAIN_ONLY_STRATIFIED_GEOMETRY_AUDIT_NO_DFT",
+  "prior_audit": "calculations/fe110_reico_pilot300_20261022/coverage_audit_v1",
+  "analysis_rules": "configs/adsmind_lite/analysis_rules.yaml",
+  "leave_family_out_quantile": 0.95,
+  "diagnostic_radius_scales": [1.20, 1.25, 1.30],
+  "geometry_duplicate_A": 0.10,
+  "reserved_geometry_isolation_A": 0.20,
+  "priority_examples_per_composition": 2,
+  "interpretation": "Geometric contact graphs and Fe coordination counts are diagnostic strata, not bond orders, stable species or a DFT budget. Reuse cached SOAP only; never alter selections, reserved partitions, labels, jobs or models."
+}
