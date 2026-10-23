@@ -1,0 +1,122 @@
+{
+  "document_kind": "anchor_coverage_and_sampling_origin_diagnostic",
+  "anchors": [
+    {
+      "sample_id": "07_A_step251",
+      "family_id": "current_vasp_job_9848802",
+      "composition": "C2H2O",
+      "novelty_ratio": 1.6476063274507102,
+      "worst_cosine_distance_by_element": {
+        "C": 0.026337690293667948,
+        "O": 0.04540672743678287,
+        "H": 0.024460072707791602,
+        "Fe": 0.004439945747558238
+      },
+      "exceeds_internal_threshold": true
+    },
+    {
+      "sample_id": "06_B_step151",
+      "family_id": "current_vasp_job_9848800",
+      "composition": "C2HO",
+      "novelty_ratio": 1.1926271540311801,
+      "worst_cosine_distance_by_element": {
+        "C": 0.030543052714462227,
+        "O": 0.06584616419429878,
+        "H": 0.007123724937133535,
+        "Fe": 0.003213874438778297
+      },
+      "exceeds_internal_threshold": true
+    },
+    {
+      "sample_id": "06_A_step095",
+      "family_id": "current_vasp_job_9848799",
+      "composition": "C2HO",
+      "novelty_ratio": 1.1477087968321884,
+      "worst_cosine_distance_by_element": {
+        "C": 0.02570621758827385,
+        "O": 0.07635689391794309,
+        "H": 0.008034148004078534,
+        "Fe": 0.002459232721541582
+      },
+      "exceeds_internal_threshold": true
+    },
+    {
+      "sample_id": "08_A_step236",
+      "family_id": "current_vasp_job_9848805",
+      "composition": "C2H2O",
+      "novelty_ratio": 0.6327003272052749,
+      "worst_cosine_distance_by_element": {
+        "C": 0.0309955341909961,
+        "O": 0.01841779920079678,
+        "H": 0.038873187418396404,
+        "Fe": 0.0011396124656105622
+      },
+      "exceeds_internal_threshold": false
+    },
+    {
+      "sample_id": "07_B_step198",
+      "family_id": "current_vasp_job_9848803",
+      "composition": "C2H2O",
+      "novelty_ratio": 0.8523206956497182,
+      "worst_cosine_distance_by_element": {
+        "C": 0.029457098182680386,
+        "O": 0.016299960176667794,
+        "H": 0.046427836227146635,
+        "Fe": 0.0022968215071503817
+      },
+      "exceeds_internal_threshold": false
+    },
+    {
+      "sample_id": "09_B_step165",
+      "family_id": "current_vasp_job_9848809",
+      "composition": "C2H2O",
+      "novelty_ratio": 1.648546138812787,
+      "worst_cosine_distance_by_element": {
+        "C": 0.026380752865137858,
+        "O": 0.045465000696386815,
+        "H": 0.02435020255941245,
+        "Fe": 0.004442478337650324
+      },
+      "exceeds_internal_threshold": true
+    },
+    {
+      "sample_id": "08_C_step266",
+      "family_id": "current_vasp_job_9848807",
+      "composition": "C2H2O",
+      "novelty_ratio": 0.607787380151758,
+      "worst_cosine_distance_by_element": {
+        "C": 0.03079242628408163,
+        "O": 0.015813511764941834,
+        "H": 0.030290751970098007,
+        "Fe": 0.001637856658452952
+      },
+      "exceeds_internal_threshold": false
+    }
+  ],
+  "anchors_above_random_pool_internal_threshold": 4,
+  "selected_training_sampling_origins": {
+    "random_initial_without_ML": 79,
+    "ML_trajectory": 154
+  },
+  "interpretation": "Anchor distance is geometry only. Low DFT force comes from the separate audited training labels; no model precision or stability proof.",
+  "source_files": [
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\coverage_audit_v1\\audit_summary.json",
+      "sha256": "c27cf2cd3057e38e7d26bad8ffe5a22834864e8223f30b9f6eb6eb6a34587616"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\coverage_audit_v1\\coverage.json",
+      "sha256": "2826dfcebc632b9ea4526c7649099b1105394c10f3fea24e6b7d024648af5624"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\coverage_audit_v1\\supplement_plan.json",
+      "sha256": "9b51e7a59a9516fd6cd5a28c99aed7000530200046ca5518cb62289a0308a2b4"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\scripts\\adsorption\\reico_anchor_coverage.py",
+      "sha256": "0d71fbddf099b729090cab024004aa472771528635bce9227cf8aec0efbc690f"
+    }
+  ],
+  "reserved_forces_or_energies_used": false,
+  "new_DFT_or_GPU": false
+}

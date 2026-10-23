@@ -1,0 +1,110 @@
+{
+  "document_kind": "fe110_reico_training_coverage_audit",
+  "completed_utc": "2026-10-23T07:10:09.082190+00:00",
+  "status": "AUDIT_COMPLETE",
+  "source_files": [
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_06_10_20261012\\adsorption_training_comparison_20261019_v1\\control\\training_manifest.json",
+      "sha256": "b6372a96646eaf8df8918c776ff7677b9b9842dd7c6ef3ced1aa764dae6145b1"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\adsorption_finetune_review_v3\\replay_compatibility.json",
+      "sha256": "74176979fd7bfee7d06ae34bb4f61dc28663b51cad8d28c466af668b840311b9"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\adsorption_finetune_review_v3\\training_manifest.json",
+      "sha256": "12a6f0e9cc94a2dad33086b7fe81c7cc4ae8f3a7ec3f1cda1b58549e8eae456b"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\sampling93_v1\\selection\\frame_inventory.json",
+      "sha256": "da7eb52ca134fd92cc403f6b2a4fbbdfaa2e9f584b05e397bd8ca828e60d5b61"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\sampling93_v1\\selection\\selected_frames.json",
+      "sha256": "022e46102437678a541c587bbd30aaa1e0db27992ea8fcedca3092343701cd34"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\configs\\fe110_reico_pilot\\coverage_audit_v1.json",
+      "sha256": "f301e11c0f1dd500a67359485da9966775bf7d4d560e111c71ab86bf944a9cf0"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\docs\\reviews\\fe110_adsorption_finetune_package_20261010.md",
+      "sha256": "b23cb8e5af42a51bc32e86f4dc05a138889be8044c9a2a4336a517a89ce67a5b"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\docs\\reviews\\fe110_adsorption_training_comparison_20261019.md",
+      "sha256": "82b43e709836c6465f5ec6692ca92cbad7feef7acabcc705958b0165f427fa31"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\scripts\\adsorption\\force_finetune.py",
+      "sha256": "023ad75d95f8f96dbc4e820c3f50af62cc77fc888d04181d0a5cbca73d29b97e"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\scripts\\adsorption\\reico_dataset_audit.py",
+      "sha256": "a9ff7b17d4b70e55a8eda6f3a6d4a5fe521abc08ee348338f6833d5e52f7cd07"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\scripts\\adsorption\\reico_environment_audit.py",
+      "sha256": "6d0a8e4106e56248d4e70e33d3939ee40dc6d967b4842f63530c242d65c291a2"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\scripts\\adsorption\\reico_selection.py",
+      "sha256": "e0647caaf442e673ce38218ae00565e1d5668a0a1413f5246967cd9e10dfcdb9"
+    }
+  ],
+  "config": {
+    "purpose": "LOCAL_DATASET_AUDIT_AND_PROPOSAL_ONLY",
+    "inventory": "calculations/fe110_reico_pilot300_20261022/sampling93_v1/selection/frame_inventory.json",
+    "selection": "calculations/fe110_reico_pilot300_20261022/sampling93_v1/selection/selected_frames.json",
+    "prior_manifest": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_comparison_20261019_v1/control/training_manifest.json",
+    "reserved_geometry_catalogs": [
+      "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_review_v3/training_manifest.json"
+    ],
+    "compatibility_evidence": [
+      "docs/reviews/fe110_adsorption_training_comparison_20261019.md",
+      "docs/reviews/fe110_adsorption_finetune_package_20261010.md",
+      "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_review_v3/replay_compatibility.json"
+    ],
+    "soap": {
+      "species": [
+        "Fe",
+        "C",
+        "H",
+        "O"
+      ],
+      "r_cut": 5.0,
+      "n_max": 4,
+      "l_max": 3,
+      "sigma": 0.5,
+      "periodic": true,
+      "average": "off",
+      "dtype": "float64"
+    },
+    "near_Fe_A": 3.0,
+    "leave_family_out_quantile": 0.95,
+    "maximum_random_addition_proposals": 8,
+    "geometry_duplicate_A": 0.1,
+    "reserved_geometry_isolation_A": 0.2,
+    "near_equilibrium_force_diagnostic_eV_A": 0.05,
+    "anchor_force_candidate_eV_A": 0.02,
+    "notes": "SOAP distances, force bins and proposal count are descriptive pilot settings, not physical acceptance or a proven minimum budget. Original 292 selections, partitions and existing jobs stay unchanged. No heldout forces/energies or ML predictions are used."
+  },
+  "versions": {
+    "dscribe": "2.1.2",
+    "sparse": "0.19.2",
+    "ase": "3.29.0",
+    "numpy": "2.3.5",
+    "scipy": "1.16.3"
+  },
+  "training_frames_audited": 1597,
+  "selected_training_frames": 233,
+  "reserved_geometry_only_records": 513,
+  "reserved_forces_or_energies_used": false,
+  "reusable_training_label_rows": 248,
+  "low_force_anchor_candidates": 7,
+  "random_addition_proposals": 2,
+  "original_selection_changed": false,
+  "GPU_or_DFT_execution": false,
+  "training_performed": false,
+  "model_accuracy_or_speedup_established": false
+}

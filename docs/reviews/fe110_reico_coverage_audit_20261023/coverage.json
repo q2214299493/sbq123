@@ -1,0 +1,134 @@
+{
+  "training_pool": {
+    "frames": 1597,
+    "families": 79,
+    "compositions": {
+      "C2HO": 252,
+      "C2H2O": 317,
+      "C2H3": 252,
+      "C3H2O": 776
+    }
+  },
+  "existing_selected_training": {
+    "frames": 233,
+    "families": 79,
+    "compositions": {
+      "C2HO": 36,
+      "C2H2O": 46,
+      "C2H3": 36,
+      "C3H2O": 115
+    }
+  },
+  "descriptor": {
+    "soap": {
+      "species": [
+        "Fe",
+        "C",
+        "H",
+        "O"
+      ],
+      "r_cut": 5.0,
+      "n_max": 4,
+      "l_max": 3,
+      "sigma": 0.5,
+      "periodic": true,
+      "average": "off",
+      "dtype": "float64"
+    },
+    "near_Fe_A": 3.0,
+    "dscribe": "2.1.2"
+  },
+  "descriptor_features": 544,
+  "calibration": "Per-element p95 nearest cosine distance, excluding the query trajectory family from references.",
+  "thresholds": {
+    "C": 0.06193895703616148,
+    "O": 0.06652984984405201,
+    "H": 0.06144012535935403,
+    "Fe": 0.0026947855647216573
+  },
+  "calibration_quantile_sensitivity": {
+    "0.9": {
+      "C": 0.05482957950911416,
+      "O": 0.05886724692391021,
+      "H": 0.054929830333765806,
+      "Fe": 0.001876109593285613
+    },
+    "0.95": {
+      "C": 0.06193895703616148,
+      "O": 0.06652984984405201,
+      "H": 0.06144012535935403,
+      "Fe": 0.0026947855647216573
+    },
+    "0.99": {
+      "C": 0.07897384010861568,
+      "O": 0.0950004574798908,
+      "H": 0.073359484400419,
+      "Fe": 0.004492655740262374
+    }
+  },
+  "before": {
+    "C": {
+      "local_environment_count": 3970,
+      "above_internal_threshold": 0,
+      "fraction_within_internal_threshold": 1.0,
+      "p95_cosine_distance": 0.010010939165735132,
+      "maximum_cosine_distance": 0.030560270713252846
+    },
+    "O": {
+      "local_environment_count": 1345,
+      "above_internal_threshold": 0,
+      "fraction_within_internal_threshold": 1.0,
+      "p95_cosine_distance": 0.010230778118514815,
+      "maximum_cosine_distance": 0.033349064356854696
+    },
+    "H": {
+      "local_environment_count": 3194,
+      "above_internal_threshold": 0,
+      "fraction_within_internal_threshold": 1.0,
+      "p95_cosine_distance": 0.009679989576265717,
+      "maximum_cosine_distance": 0.03234590564221451
+    },
+    "Fe": {
+      "local_environment_count": 8764,
+      "above_internal_threshold": 3,
+      "fraction_within_internal_threshold": 0.9996576905522593,
+      "p95_cosine_distance": 0.00042679881314066086,
+      "maximum_cosine_distance": 0.0031804597545923574
+    }
+  },
+  "after_proposed_additions": {
+    "C": {
+      "local_environment_count": 3970,
+      "above_internal_threshold": 0,
+      "fraction_within_internal_threshold": 1.0,
+      "p95_cosine_distance": 0.009955751292431867,
+      "maximum_cosine_distance": 0.030560270713252846
+    },
+    "O": {
+      "local_environment_count": 1345,
+      "above_internal_threshold": 0,
+      "fraction_within_internal_threshold": 1.0,
+      "p95_cosine_distance": 0.010230778118514815,
+      "maximum_cosine_distance": 0.033349064356854696
+    },
+    "H": {
+      "local_environment_count": 3194,
+      "above_internal_threshold": 0,
+      "fraction_within_internal_threshold": 1.0,
+      "p95_cosine_distance": 0.00962177260033486,
+      "maximum_cosine_distance": 0.03234590564221451
+    },
+    "Fe": {
+      "local_environment_count": 8764,
+      "above_internal_threshold": 0,
+      "fraction_within_internal_threshold": 1.0,
+      "p95_cosine_distance": 0.00041693401298841816,
+      "maximum_cosine_distance": 0.0024843772580410706
+    }
+  },
+  "before_frame_gap_count": 3,
+  "after_frame_gap_count": 0,
+  "proposal_count": 2,
+  "proposal_scope": "At most one addition per training family; no selections or jobs modified.",
+  "interpretation": "Relative geometric coverage diagnostic, not force accuracy, chemical completeness or a global minimum data budget."
+}

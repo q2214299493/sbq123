@@ -1,0 +1,261 @@
+{
+  "random_training_additions": [
+    {
+      "sample_id": "family_0013_step016",
+      "family_id": "family_0013",
+      "composition": "C2HO",
+      "novelty_ratio": 1.180227397767312,
+      "worst_cosine_distance_by_element": {
+        "C": 0.010064304805368463,
+        "O": 0.002077427485783656,
+        "H": 0.0016154405497919022,
+        "Fe": 0.0031804597545923574
+      },
+      "exceeds_internal_threshold": true,
+      "source": {
+        "sample_id": "family_0013_step016",
+        "family_id": "family_0013",
+        "composition": "C2HO",
+        "partition": "train",
+        "step": 16,
+        "structure_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\sampling93_v1\\returned\\output\\sampling\\family_0013\\step_016.vasp",
+        "structure_sha256": "e547e0aeae38387159fff293f8548560328c815b6da1f07a855b0096bf7e3f36",
+        "frame_metadata_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\sampling93_v1\\returned\\output\\sampling\\family_0013\\step_016.json",
+        "frame_metadata_sha256": "73b3611910e38752869238f6d0158c6823177f2d07c2b15b55b9dc16f67c8ea6",
+        "geometry_guard_failures": [],
+        "already_DFT_labeled": false
+      },
+      "action": "PROPOSE_DFT_SINGLE_POINT_ONLY_NOT_SUBMITTED"
+    },
+    {
+      "sample_id": "family_0054_step004",
+      "family_id": "family_0054",
+      "composition": "C2H2O",
+      "novelty_ratio": 1.007353416991397,
+      "worst_cosine_distance_by_element": {
+        "C": 0.005557972374445219,
+        "O": 0.0016530472100740878,
+        "H": 0.00860989000725454,
+        "Fe": 0.0027146014466814528
+      },
+      "exceeds_internal_threshold": true,
+      "source": {
+        "sample_id": "family_0054_step004",
+        "family_id": "family_0054",
+        "composition": "C2H2O",
+        "partition": "train",
+        "step": 4,
+        "structure_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\sampling93_v1\\returned\\output\\sampling\\family_0054\\step_004.vasp",
+        "structure_sha256": "9f73ae93b2759af10ece8f93a354f186ea62592f0e10b7848ebb72fe0461d06e",
+        "frame_metadata_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\sampling93_v1\\returned\\output\\sampling\\family_0054\\step_004.json",
+        "frame_metadata_sha256": "6469bf0e0490b266682f8f65ccf708fab148d800950d070824e852b5d77f1e52",
+        "geometry_guard_failures": [],
+        "already_DFT_labeled": false
+      },
+      "action": "PROPOSE_DFT_SINGLE_POINT_ONLY_NOT_SUBMITTED"
+    }
+  ],
+  "low_force_anchor_candidates": [
+    {
+      "sample_id": "07_A_step251",
+      "source_name": "07_A",
+      "source_job_id": "9848802",
+      "calculation_group": "current_vasp_job_9848802",
+      "stage": "last2",
+      "original_graph_preserved": false,
+      "parent_ionic_converged": true,
+      "source_OUTCAR_sha256": "f355ff1fa7aada737103a084b7a3cf0f5e1d9a375e0df4d52a51f66801681104",
+      "total_magnetization_muB": 105.4899,
+      "accepted_endpoint": false,
+      "structure_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_06_10_20261012\\adsorption_training_comparison_20261019_v1\\control\\structures\\07_A_step251.vasp",
+      "structure_sha256": "b2f36a440e82d4cbb40fd9add2e56dd55ecf8ec3a8d5a9e8b969488507787cf0",
+      "formula": "C2H2O",
+      "movable_fmax_eV_A": 0.016955419104227414,
+      "raw_label_binding_verified": true,
+      "label_source": {
+        "path": "candidate_labels.json",
+        "sha256": "5ac425a6069db4acb87c4ead330be85c40d2925f87ca1bb31da3b0a2d919d059",
+        "sample_id": "07_A_step251"
+      },
+      "source_partition": "train",
+      "reserved_geometry_overlaps": [],
+      "reuse_status": "LABEL_REUSE_CANDIDATE"
+    },
+    {
+      "sample_id": "06_B_step151",
+      "source_name": "06_B",
+      "source_job_id": "9848800",
+      "calculation_group": "current_vasp_job_9848800",
+      "stage": "last2",
+      "original_graph_preserved": true,
+      "parent_ionic_converged": true,
+      "source_OUTCAR_sha256": "13dfce9a78b05cd194e991331d780b5d3bd34aae14f681066343d5bf827ed4ea",
+      "total_magnetization_muB": 104.9599,
+      "accepted_endpoint": false,
+      "structure_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_06_10_20261012\\adsorption_training_comparison_20261019_v1\\control\\structures\\06_B_step151.vasp",
+      "structure_sha256": "93d5f0122169e6a1a5dd989e20aeea7f2de56ddcadd75d7f09bb3201da9f52df",
+      "formula": "C2HO",
+      "movable_fmax_eV_A": 0.01800210526577378,
+      "raw_label_binding_verified": true,
+      "label_source": {
+        "path": "candidate_labels.json",
+        "sha256": "5ac425a6069db4acb87c4ead330be85c40d2925f87ca1bb31da3b0a2d919d059",
+        "sample_id": "06_B_step151"
+      },
+      "source_partition": "train",
+      "reserved_geometry_overlaps": [],
+      "reuse_status": "LABEL_REUSE_CANDIDATE"
+    },
+    {
+      "sample_id": "06_A_step095",
+      "source_name": "06_A",
+      "source_job_id": "9848799",
+      "calculation_group": "current_vasp_job_9848799",
+      "stage": "last2",
+      "original_graph_preserved": true,
+      "parent_ionic_converged": true,
+      "source_OUTCAR_sha256": "e2d49db202884c40efb1df9c6e823b8db76ad7eaa2ffe8e0dddc1b5a3025b6ac",
+      "total_magnetization_muB": 105.5296,
+      "accepted_endpoint": false,
+      "structure_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_06_10_20261012\\adsorption_training_comparison_20261019_v1\\control\\structures\\06_A_step095.vasp",
+      "structure_sha256": "f1e86ce229d0555c73944d73da86dce6f6641386494981b884aa946367019d1a",
+      "formula": "C2HO",
+      "movable_fmax_eV_A": 0.018145425070799526,
+      "raw_label_binding_verified": true,
+      "label_source": {
+        "path": "candidate_labels.json",
+        "sha256": "5ac425a6069db4acb87c4ead330be85c40d2925f87ca1bb31da3b0a2d919d059",
+        "sample_id": "06_A_step095"
+      },
+      "source_partition": "train",
+      "reserved_geometry_overlaps": [],
+      "reuse_status": "LABEL_REUSE_CANDIDATE"
+    },
+    {
+      "sample_id": "08_A_step236",
+      "source_name": "08_A",
+      "source_job_id": "9848805",
+      "calculation_group": "current_vasp_job_9848805",
+      "stage": "last2",
+      "original_graph_preserved": true,
+      "parent_ionic_converged": true,
+      "source_OUTCAR_sha256": "e0d88465123daf768e116805973e3af8470873160cff58fcab55ba2ff87c09d0",
+      "total_magnetization_muB": 106.3741,
+      "accepted_endpoint": false,
+      "structure_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_06_10_20261012\\adsorption_training_comparison_20261019_v1\\control\\structures\\08_A_step236.vasp",
+      "structure_sha256": "60cc637a588b1d112fc5d1db35b5f5228bda803c33dbc2e3d2a19ea16d24dbf2",
+      "formula": "C2H2O",
+      "movable_fmax_eV_A": 0.0183948511274215,
+      "raw_label_binding_verified": true,
+      "label_source": {
+        "path": "candidate_labels.json",
+        "sha256": "5ac425a6069db4acb87c4ead330be85c40d2925f87ca1bb31da3b0a2d919d059",
+        "sample_id": "08_A_step236"
+      },
+      "source_partition": "train",
+      "reserved_geometry_overlaps": [],
+      "reuse_status": "LABEL_REUSE_CANDIDATE"
+    },
+    {
+      "sample_id": "07_B_step198",
+      "source_name": "07_B",
+      "source_job_id": "9848803",
+      "calculation_group": "current_vasp_job_9848803",
+      "stage": "last2",
+      "original_graph_preserved": true,
+      "parent_ionic_converged": true,
+      "source_OUTCAR_sha256": "8f33c970710b4fb2e44ea364b740c64b48371dcaab5067a0fef4f7609e94a4f2",
+      "total_magnetization_muB": 105.7613,
+      "accepted_endpoint": false,
+      "structure_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_06_10_20261012\\adsorption_training_comparison_20261019_v1\\control\\structures\\07_B_step198.vasp",
+      "structure_sha256": "3fa43e93b24a6d1fd0e86be6505cf7a630ba9133f9cd783a73c89e7cad01efd7",
+      "formula": "C2H2O",
+      "movable_fmax_eV_A": 0.018517335148449412,
+      "raw_label_binding_verified": true,
+      "label_source": {
+        "path": "candidate_labels.json",
+        "sha256": "5ac425a6069db4acb87c4ead330be85c40d2925f87ca1bb31da3b0a2d919d059",
+        "sample_id": "07_B_step198"
+      },
+      "source_partition": "train",
+      "reserved_geometry_overlaps": [],
+      "reuse_status": "LABEL_REUSE_CANDIDATE"
+    },
+    {
+      "sample_id": "09_B_step165",
+      "source_name": "09_B",
+      "source_job_id": "9848809",
+      "calculation_group": "current_vasp_job_9848809",
+      "stage": "last2",
+      "original_graph_preserved": true,
+      "parent_ionic_converged": true,
+      "source_OUTCAR_sha256": "a6581f755e84309c8d0f443fa9a087553687826e29f62eafee37adf66c6521cc",
+      "total_magnetization_muB": 105.4904,
+      "accepted_endpoint": false,
+      "structure_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_06_10_20261012\\adsorption_training_comparison_20261019_v1\\control\\structures\\09_B_step165.vasp",
+      "structure_sha256": "97eb23e245e40c06c71c5d6fcbb2d934776c5190ffb8fa01193cd2a5b1c1d6e1",
+      "formula": "C2H2O",
+      "movable_fmax_eV_A": 0.019161558417832306,
+      "raw_label_binding_verified": true,
+      "label_source": {
+        "path": "candidate_labels.json",
+        "sha256": "5ac425a6069db4acb87c4ead330be85c40d2925f87ca1bb31da3b0a2d919d059",
+        "sample_id": "09_B_step165"
+      },
+      "source_partition": "train",
+      "reserved_geometry_overlaps": [],
+      "reuse_status": "LABEL_REUSE_CANDIDATE"
+    },
+    {
+      "sample_id": "08_C_step266",
+      "source_name": "08_C",
+      "source_job_id": "9848807",
+      "calculation_group": "current_vasp_job_9848807",
+      "stage": "last2",
+      "original_graph_preserved": true,
+      "parent_ionic_converged": true,
+      "source_OUTCAR_sha256": "19f1f57bed1ed3a6e9b51c73293d0432ee9c82e667633e998d53f1a54a942e4b",
+      "total_magnetization_muB": 106.4814,
+      "accepted_endpoint": false,
+      "structure_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_06_10_20261012\\adsorption_training_comparison_20261019_v1\\control\\structures\\08_C_step266.vasp",
+      "structure_sha256": "f3df7744f0060de6edf2ada18d30f8774e42916e32ee7a06fe2f81c23a30eaa3",
+      "formula": "C2H2O",
+      "movable_fmax_eV_A": 0.01989522892554896,
+      "raw_label_binding_verified": true,
+      "label_source": {
+        "path": "candidate_labels.json",
+        "sha256": "5ac425a6069db4acb87c4ead330be85c40d2925f87ca1bb31da3b0a2d919d059",
+        "sample_id": "08_C_step266"
+      },
+      "source_partition": "train",
+      "reserved_geometry_overlaps": [],
+      "reuse_status": "LABEL_REUSE_CANDIDATE"
+    }
+  ],
+  "anchor_perturbation_recipe_not_generated": [
+    {
+      "kind": "adsorbate_rigid_height",
+      "delta_z_A": -0.1
+    },
+    {
+      "kind": "adsorbate_rigid_height",
+      "delta_z_A": 0.1
+    },
+    {
+      "kind": "adsorbate_random_displacement",
+      "rms_A": 0.03,
+      "seed": 42
+    },
+    {
+      "kind": "adsorbate_random_displacement",
+      "rms_A": 0.06,
+      "seed": 43
+    }
+  ],
+  "perturbation_count_upper_bound_before_guards": 28,
+  "C3_anchor_scope": "No C3 labels in the audited prior training package; other project sources still require a separate bounded audit.",
+  "next_gate": "Review source/fixed-mask/chemistry/magnetism, generate guarded model-independent candidates, then authorize exact new single points.",
+  "training_authorized": false,
+  "DFT_submitted": false,
+  "new_geometries_generated": false
+}
