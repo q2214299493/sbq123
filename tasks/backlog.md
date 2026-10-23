@@ -133,3 +133,10 @@ no deletion, reclassification event or state-transaction change is authorized by
 - Missing23graph/187joint contact strata;71representatives close to original selections. Strong radius sensitivity,so these are not187required DFT labels.8examples isolated from reserved geometry;only family_0086_step014 remains joint-uncovered at all3scales.
 - Next:after existing DFT labels pass electronic/magnetic/source QC,check force-range coverage and similar-geometry force differences before deciding any supplemental labels.No newDFT/model/training or pausedC3 job authorized/executed.
 - Evidence:docs/reviews/fe110_reico_stratified_audit_20261023/README.md.
+
+## Fe110 existing DFT label QC and force coverage — 2026-10-23
+
+- Completed121DONE collections+12reused raw-static rechecks;133PASS,110train/17dev/6test.Only training used for force distributions/13nearby pairs;allnewtrain fmax>0.5eV/A.
+- Legacy248canonical bindings rechecked,37lowforce labels;noC2H3/C3H2O lowforce source in these audited labels.13near-pair differences independently verified;retain both geometries rather than declaring DFT error.
+- No extra randomDFT now. Next prepare a bounded small-trial training package from eligible sources with original splits;keep lowforceC2H3/C3 gap explicit.83submitted unfinished at snapshot and76without success receipts untouched;no retry/training or pausedC3 restart.
+- Evidence:docs/reviews/fe110_reico_label_qc_20261023/README.md.

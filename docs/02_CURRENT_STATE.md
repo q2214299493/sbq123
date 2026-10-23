@@ -91,12 +91,10 @@ Next action: Prepare and review a revised preconditioning or resampling design t
 ### Fe110 random-sampling dataset checkpoint — 2026-10-23
 
 All99 local families sampled;1995frames→292selected(train233/dev30/test29),
-including12 reviewed DFTlabels. User authorized280 new32corestatics;allinputs/
-gates pass.204submitted:3RUN/201PEND(96cores)at2026-10-22T16:36Z.
-76 lack success receipts:69untouched,6esubrefusals,1SSHtimeout;no retries.
-Server job-count headroom and7reservation reviews block remaining submissions.
-No new training or measured C2/C3 acceleration. Evidence:
-docs/reviews/fe110_reico_sampling93_20261022/dft_submission_status.json.
+including12 reusedDFTlabels.280newstatics authorized;204success receipts.
+At2026-10-23T12:10:48Z:121DONE/3RUN/80PEND;76without success receipts remain untouched,7unknown reservations unreconciled.
+121completed+12reused statics pass exact-coordinate/raw-force/SCF/local-moment QC;110train/17dev/6test.Only110train analyzed,allfmax>0.5eV/A;legacy248bindings pass,37lowforce labels but noC2H3/C3H2O.13same-family nearpairs show real force changes,not model error.No newDFT/GPU/training or measuredspeedup.
+Evidence:docs/reviews/fe110_reico_label_qc_20261023/README.md.
 Training-only stratified audit complete:1597frames/233references;23missing graphs,187missing graph+Fe-contact strata,71representatives below0.10A RMSD. One SOAP gap after composition-specific calibration;only1of8examples remains joint-uncovered at all3radius scales. Diagnostic only;no selection/job/model changes. Evidence:docs/reviews/fe110_reico_stratified_audit_20261023/README.md.
 Managed sync remains blocked by existing PKG-INFO;paired benchmark unchanged.
 
@@ -107,4 +105,4 @@ Known relative subdirectories are readable;9629858/9629859 outputs recovered wit
 
 ### Fe110 C3 targeted preparation — 2026-10-23
 
-Two local revisedC3H2O graphs(05/07) pass geometry/custodian/canonical input gates;80steps,32cores each,LORBIT11,unchanged physical production branch. Local screen80_v2 only;no upload/submission/ML run. Historical two-job reference648-735corehours;real cost and intact near-equilibrium structures unverified. Await explicit two-job approval and live queue/POTCAR checks. Evidence:docs/reviews/fe110_c3_targeted_relaxation_20261023/README.md.
+Two local revisedC3H2O graphs(05/07) pass geometry/custodian/canonical input gates;80steps,32cores each,LORBIT11,unchanged physical production branch. Local screen80_v2 only;no upload/submission/ML run. Historical two-job reference648-735corehours;real cost and intact near-equilibrium structures unverified. User explicitly asked to hold these two jobs;do not submit or resume without a new request. Evidence:docs/reviews/fe110_c3_targeted_relaxation_20261023/README.md.

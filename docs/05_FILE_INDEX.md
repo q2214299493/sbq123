@@ -249,3 +249,10 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - tests/test_reico_stratified_audit.py:permutation invariance,graph/coordination coupling,composition isolation,reserved-data refusal and cache-only policy.
 - archive/fe110_reico_stratified_audit_20261023/verify.py:real-frame SOAP/NumPy/contact/count verification and8example sensitivity check.
 - docs/reviews/fe110_reico_stratified_audit_20261023/:review,canonical result snapshots and validation receipts;full1597frame table/cache remain local.
+
+## Fe110 DFT label QC and force coverage — 2026-10-23
+
+- archive/fe110_reico_label_qc_20261023/{collect,review,verify}.py:exactDONE readonly collection,raw-static revalidation,train-only analysis and independent real-pair verification.
+- scripts/adsorption/reico_force_coverage.py and configs/fe110_reico_pilot/force_qc_v1.json:raw-force bins,periodic equal-element correspondence and vector force differences;no reserved adaptive analysis or force-based deletion.
+- tests/test_reico_force_coverage.py:force/source/partition boundaries and numberedEDIFF-after-energy regression.
+- docs/reviews/fe110_reico_label_qc_20261023/:raw-scheduler checkpoint,QCmetadata,training statistics and reproducible validation;raw VASP/forces remain local.

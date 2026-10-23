@@ -1,0 +1,9 @@
+{
+  "purpose": "EXISTING_DFT_LABEL_QC_AND_TRAINING_FORCE_COVERAGE_ONLY",
+  "force_bin_lower_edges_eV_A": [0.0, 0.05, 0.10, 0.50, 1.0, 2.0, 5.0, 10.0],
+  "near_pair_maximum_vector_RMSD_A": 0.20,
+  "original_geometry_duplicate_A": 0.10,
+  "force_definition": "Raw OUTCAR forces; fixed bottom 18 Fe excluded only from movable metrics. No ionic convergence or low-force requirement for static labels.",
+  "magnetic_policy": "Same approved ferromagnetic initialization; any nonpositive Fe local moment is retained as a review flag and withheld from training diagnostics pending review. Positive Fe moments do not establish the global magnetic ground state.",
+  "scope": "QC may inspect reserved labels for source/physical completeness only. Adaptive coverage and near-pair force analysis consume training labels only. No new DFT, GPU, training, checkpoint change or submission reconciliation."
+}
