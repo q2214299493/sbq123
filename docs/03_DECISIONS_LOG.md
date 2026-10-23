@@ -1496,3 +1496,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 - Retain6as LEGACY_TOTAL_MAGNETIZATION_ONLY force-only supplement under the existing20261019 trajectory review scope.TotalM105.9810-105.9993muB,maxadjacentlatechange0.0034muB;localFe moment signs and magneticgroundstate unverified.No claim of local-moment-complete newstatic QC or energy-training admission.
 - Keep10_Awhole-job heldout and every frozen package unchanged;future combined package must preserve job isolation and this review tier.NoDFT/GPU/training/modelpromotion or pausedC3 restart.
 - Evidence:docs/reviews/fe110_10b_lowforce_20261023/README.md;6real frames independently verified and replayed identically in the release checkout.
+
+## 2026-10-23 - Assemble combined force data only; do not train
+
+- User explicitly requested a new package including6late10_B frames while preserving partitions and magnetic grades,and prohibited training;later continue did not lift that limit.
+- Freeze reviewed137random statics plus legacy248/60/46 and16quarantined observed-heldout sources.New v2data package:366train(248+112+6),78dev(60+18),53heldout(46+7),16quarantined.No sample repartitioned;48894applicable real-surface-symmetry/permutation checks against513reserved geometries found0conflicts.
+- Keep force-only objective and existing uniform-control frame/atom recipe;renormalize train sampling to1/366.Preserve legacy source review grade,positive-localFe static grade,and10_B LEGACY_TOTAL_MAGNETIZATION_ONLY in manifest andDBs.No energy-training or magneticgroundstate acceptance.
+- Native source and444DBrow integrity checks pass,including release adapters;51primary/44release tests pass.Original frozen packages/checkpoints unchanged;no heldoutDB,model/configuration execution request,GPU,DFT or training.No automatic submission or modelpromotion.
+- V1failed only at final coverage-summary legacy-family mapping;all original data and failure/source snapshots retained.V2is successful and inventory-bound.Next prepare a bounded experiment design and resource budget before separate runtime authority.
+- Evidence:docs/reviews/fe110_combined_force_package_20261023/README.md.

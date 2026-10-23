@@ -261,3 +261,7 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 
 - docs/reviews/fe110_10b_lowforce_20261023/:six-frameSCF/force/magnetic-tier/full-symmetry isolation review and validation receipts. Local candidate data:calculations/fe110_reico_pilot300_20261022/10b_lowforce_review_20261023_v1/force_supplement.json;existing frozen training packages unchanged.
 - archive/fe110_10b_lowforce_20261023/:bounded read-only collector,exact legacy-owner snapshots,and independent force-supplement reviewer;tests/test_10b_lowforce_review.py.
+
+- docs/reviews/fe110_combined_force_package_20261023/:366/78/53data-only package review,16quarantined sources,magnetic tiers,isolation,independent DB/source verification and validation receipts.
+- calculations/fe110_reico_pilot300_20261022/combined_force_package_20261023_v2/training_manifest.json:current local force-only data manifest;train/dev DBs and full package_inventory.json colocated. V1is preserved failed summary checkpoint.
+- archive/fe110_combined_force_package_20261023/ and configs/fe110_reico_pilot/combined_force_package_v1.json:bounded local assembler/verifier and frozen source configuration;tests/test_combined_force_package.py.
