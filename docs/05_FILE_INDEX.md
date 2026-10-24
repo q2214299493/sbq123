@@ -273,3 +273,7 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - docs/reviews/fe110_reico_followup_20261024/:19newstaticQC checkpoint,378frame training-only coverage projection,two paused C3sources,two isolated geometrybackups andvalidation receipts.
 - calculations/fe110_reico_pilot300_20261022/followup_20261024_v2/:114collectedrawfiles,19QCrows,156combinedlabelrecords,378frame auditview andcandidategeometries;v1retains initialnetwork failure,no sourcepackage mutation.
 - archive/fe110_reico_followup_20261024/;configs/fe110_reico_pilot/followup_20261024_v1.json;tests/test_reico_followup_20261024.py:exact receipt-backed collection,resume-safe failed-snapshot guard,nativeQC,isolated auditupdate andreal-label verification.
+
+- docs/reviews/fe110_reico_remaining_20261024/:original-batch and16-case human authorizations,76new-job checkpoint,280logical success receipts,registry/test/evidence digests.
+- calculations/fe110_reico_pilot300_20261022/remaining_submission_20261024_v1/:native read-only checkpoints,serial progress,preserved unknown attempts,new16workdirs/gates/receipts,resolution mapping,exact76-job scheduler snapshot and applied registryv2.
+- archive/fe110_reico_remaining_20261024/ and tests/test_reico_remaining_submission_20261024.py:bounded original-scope continuation,human-confirmed fresh attempts,idempotency barriers and final verification/registry planning.

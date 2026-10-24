@@ -1521,3 +1521,10 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 - Auditview378labels reducesjoint gaps296to284 andfixed-prior-thresholdSOAP gaps451to366;original366trainingpackage/weights/partitions/magneticgrades unchanged.C3H2O59stillno fmax<=0.05;C2H3fourlowforce labelsstill1source/type.
 - Keep05/07C3prepared sources paused as priority lowforce-source proposals;family0039step006 and0086step014 remain force-unknown geometry backups,isolated in280comparisons.No immediate newrandom high-energy DFT recommendation;first consume44existingRUN/PEND trainingjobs when complete.Neither187conditional gaptypes nor2backups imply a DFT budget.
 - 42tests pass in eachcheckout;19real staticlabels replay identically in each;378force-bin/directset counts and4candidate hashes pass.Evidence:docs/reviews/fe110_reico_followup_20261024/README.md.
+
+## 2026-10-24 - Complete original selected static submissions
+
+- User authorized the remaining original batch,then explicitly confirmed "确认16份无重复，提交新尝试" for exact recovery proposal2bf820480302be93c320bbd2311b57fc775bc925722a522ff39411c3c3363779.
+- Continue69never-reserved inputs:60successes,9SSH-unknown outcomes;combine9with prior7for16fresh canonical directory attempts after human confirmation.Preserve old markers/records/locks,original scientific inputs,32cores/job and128account slots.
+- Actual new76success receipts complete280unique logical jobs(264original+16fresh);12reused labels remain separate.At15:07:51Beijing:new7613DONE/4RUN/59PEND.Scientific output QC pending;no training/pausedC3 execution.
+- Reviewed exact registry plan58e4f8991b1bf639a24c8c77dd151dbad9ce20813b2197fb2fd043096f295857 and applied1453INSERT/0UPDATE,status/provenance only.Evidence:docs/reviews/fe110_reico_remaining_20261024/README.md.

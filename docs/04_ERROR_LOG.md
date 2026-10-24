@@ -62,3 +62,9 @@ Update this table in place. Move resolved items to historical results or Git his
 - Remaining76include69never attempted. Confirm server job-count policy/current allowance and use owning reconciliation protocol before supplementing the original authorized scope. No automatic retry or background supplement is active;existing204jobs continue.
 - Two broad read-only metadata probes timed out at50/65s;remote hash sweep remains unverified. Short native bjobs/ps queries passed and source bytes are saved in dft_inputs_v1/minimal_submission_limit_reconciliation.json. No calculation was stopped or input rewritten.
 - Evidence:docs/reviews/fe110_reico_sampling93_20261022/dft_submission_status.json;local failure review and remaining_submission_plan.json under calculations/fe110_reico_pilot300_20261022/sampling93_v1/dft_inputs_v1/.
+
+## 2026-10-24 - SSH-interrupted static submissions and human-confirmed recovery
+
+- Nine new native attempts lost SSH before a success receipt;connection resets/closures were observed,the cause remains unverified.A bounded later authentication check succeeded.Original seven unknown attempts and these nine were never automatically retried.
+- Read-only queue/process/path inspection found no uniquely matching unreceipted job;absence alone was not treated as proof of failure.User explicitly confirmed no duplicates and authorized16fresh-directory attempts.All16now have native success receipts,with original attempt/record hashes and remote locks retained.
+- Old markers remain historically UNKNOWN;logical sample submission is resolved through explicit old-to-new mapping.No DFT SCF failure is inferred from SSH outcomes.Evidence:remaining_submission_20261024_v1/recovery16_resolution.json and docs/reviews/fe110_reico_remaining_20261024/README.md.
