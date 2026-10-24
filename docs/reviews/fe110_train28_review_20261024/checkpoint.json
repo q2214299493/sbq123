@@ -1,0 +1,286 @@
+{
+  "checked_at_UTC": "2026-10-24T13:36:25.355949+00:00",
+  "checked_at_Beijing": "2026-10-24T21:36:25.355949+08:00",
+  "summary": {
+    "checked_at": "2026-10-24T13:36:25.355949+00:00",
+    "scope": 28,
+    "scheduler_counts": {
+      "PEND": 20,
+      "DONE": 5,
+      "RUN": 3
+    },
+    "new_reviewed": 5,
+    "new_qc_counts": {
+      "PASS": 5
+    },
+    "new_train_eligible": 5,
+    "scope_not_yet_reviewed": 23,
+    "collection_failures": [],
+    "additional_gap_groups": 4,
+    "covered_of_original40_gap_groups": 18,
+    "remaining_of_original40_gap_groups": 22,
+    "joint_gaps_if_new_candidates_admitted": 211,
+    "all_selected_labels_reviewed": 262,
+    "all_selected_qc_counts": {
+      "PASS": 260,
+      "MAGNETIC_REVIEW_REQUIRED": 1,
+      "REJECTED_OR_INCOMPLETE": 1
+    },
+    "all_selected_pass_partitions": {
+      "train": 208,
+      "development": 27,
+      "final_test": 25
+    },
+    "force_by_composition": {
+      "C3H2O": {
+        "frames": 5,
+        "minimum_movable_fmax_eV_A": 1.4020411582410839,
+        "maximum_movable_fmax_eV_A": 15.871603759465298,
+        "low_force_le_0p05": 0
+      }
+    },
+    "geometry_isolation": {
+      "geometry_conflicts": [],
+      "quarantined_sample_ids": [],
+      "comparisons": 1050,
+      "threshold_A": 0.2,
+      "reserved_geometries": 513,
+      "reserved_forces_or_energies_used": false,
+      "method": "real clean-face Fe110 symmetry,XY MIC,all equal-element permutations;conservative adsorbate RMSD"
+    },
+    "original366package_changed": false,
+    "current440audit_changed": false,
+    "new_DFT_GPU_or_training": false
+  },
+  "new_labels_metadata": [
+    {
+      "sample_id": "family_0062_step010",
+      "source_job_id": "9921416",
+      "composition": "C3H2O",
+      "partition": "train",
+      "data_qc_status": "PASS",
+      "SCF": {
+        "last_electronic_iteration": 71,
+        "last_delta_e_eV": -1.49e-07,
+        "ediff_eV": 1e-06,
+        "nelm": 200,
+        "electronically_converged": true,
+        "electronic_convergence_source": "OUTCAR_EDIFF_TERMINATION"
+      },
+      "Fe_positive_moment_count": 45,
+      "total_magnetization_muB": 104.0159392,
+      "magnetic_review_level": "LOCAL_MOMENTS_REVIEWED_POSITIVE_FE",
+      "adsorbate_fmax_eV_A": 2.9001813037577495
+    },
+    {
+      "sample_id": "family_0076_step000",
+      "source_job_id": "9921425",
+      "composition": "C3H2O",
+      "partition": "train",
+      "data_qc_status": "PASS",
+      "SCF": {
+        "last_electronic_iteration": 77,
+        "last_delta_e_eV": -4.4544e-07,
+        "ediff_eV": 1e-06,
+        "nelm": 200,
+        "electronically_converged": true,
+        "electronic_convergence_source": "OUTCAR_EDIFF_TERMINATION"
+      },
+      "Fe_positive_moment_count": 45,
+      "total_magnetization_muB": 104.4811762,
+      "magnetic_review_level": "LOCAL_MOMENTS_REVIEWED_POSITIVE_FE",
+      "adsorbate_fmax_eV_A": 4.876547771083659
+    },
+    {
+      "sample_id": "family_0076_step020",
+      "source_job_id": "9921427",
+      "composition": "C3H2O",
+      "partition": "train",
+      "data_qc_status": "PASS",
+      "SCF": {
+        "last_electronic_iteration": 60,
+        "last_delta_e_eV": 8.2062e-08,
+        "ediff_eV": 1e-06,
+        "nelm": 200,
+        "electronically_converged": true,
+        "electronic_convergence_source": "OUTCAR_EDIFF_TERMINATION"
+      },
+      "Fe_positive_moment_count": 45,
+      "total_magnetization_muB": 105.8561911,
+      "magnetic_review_level": "LOCAL_MOMENTS_REVIEWED_POSITIVE_FE",
+      "adsorbate_fmax_eV_A": 1.4020411582410839
+    },
+    {
+      "sample_id": "family_0077_step000",
+      "source_job_id": "9921428",
+      "composition": "C3H2O",
+      "partition": "train",
+      "data_qc_status": "PASS",
+      "SCF": {
+        "last_electronic_iteration": 76,
+        "last_delta_e_eV": -1.9997e-07,
+        "ediff_eV": 1e-06,
+        "nelm": 200,
+        "electronically_converged": true,
+        "electronic_convergence_source": "OUTCAR_EDIFF_TERMINATION"
+      },
+      "Fe_positive_moment_count": 45,
+      "total_magnetization_muB": 106.0755112,
+      "magnetic_review_level": "LOCAL_MOMENTS_REVIEWED_POSITIVE_FE",
+      "adsorbate_fmax_eV_A": 15.871603759465298
+    },
+    {
+      "sample_id": "family_0088_step020",
+      "source_job_id": "9921429",
+      "composition": "C3H2O",
+      "partition": "train",
+      "data_qc_status": "PASS",
+      "SCF": {
+        "last_electronic_iteration": 73,
+        "last_delta_e_eV": -7.8678e-07,
+        "ediff_eV": 1e-06,
+        "nelm": 200,
+        "electronically_converged": true,
+        "electronic_convergence_source": "OUTCAR_EDIFF_TERMINATION"
+      },
+      "Fe_positive_moment_count": 45,
+      "total_magnetization_muB": 107.0121893,
+      "magnetic_review_level": "LOCAL_MOMENTS_REVIEWED_POSITIVE_FE",
+      "adsorbate_fmax_eV_A": 4.099772598670565
+    }
+  ],
+  "remaining_job_ids": [
+    "9921444",
+    "9921448",
+    "9921449",
+    "9921450",
+    "9921451",
+    "9921452",
+    "9921453",
+    "9921454",
+    "9921456",
+    "9921458",
+    "9921430",
+    "9921431",
+    "9921432",
+    "9921459",
+    "9921434",
+    "9921435",
+    "9921436",
+    "9921437",
+    "9921438",
+    "9921439",
+    "9921440",
+    "9921441",
+    "9921442"
+  ],
+  "source_files": [
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\archive\\fe110_train28_review_20261024\\finalize.py",
+      "sha256": "1fd2bf780fbb6ab53ec169945ba310bdcfda5716e6e73a82185920b50d942eb1"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\archive\\fe110_train28_review_20261024\\process.py",
+      "sha256": "474e943e0eb6c512045b2118207de5c842f6a986dc497cc456be213c8775b0fb"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\archive\\fe110_train28_review_20261024\\run.py",
+      "sha256": "cd0241242ba3b33c138b336dc1ad691e2ed1cc114f23a5e122364a05a9b39336"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\archive\\fe110_train28_review_20261024\\verify.py",
+      "sha256": "eac90757ae7c4cfc7e1ff8ff7f2a4f99578f4bf9337285e70e61b5f093b920c4"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\configs\\fe110_reico_pilot\\train28_review_20261024_v1.json",
+      "sha256": "38f0bfe2dadee2a107c2014b629a8a784059294f758ad575a096305a52171e8e"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\tests\\test_train28_review_20261024.py",
+      "sha256": "b453310cb531a0e335a50aa2ddbb8734097354c2ef444122124725417fc8d062"
+    }
+  ],
+  "local_evidence_files": [
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\train28_review_20261024_v1\\all_selected_label_qc_local_only.json",
+      "sha256": "4715ada2baaae222c978ff5a026a969c46afba29573f854fb63e9a79a43ba0e6"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\train28_review_20261024_v1\\eligible_training_labels_local_only.json",
+      "sha256": "85f76caddd24227c950c08d52616df8f11d4826681179dc832ec63b2f9033e41"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\train28_review_20261024_v1\\gap_contribution.json",
+      "sha256": "ee5276631da47a4e0e77921f54ab1ba0aa1c5dbddce8a1ad2aa8d7557defd0a7"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\train28_review_20261024_v1\\isolation_binding.json",
+      "sha256": "9b89d2de97ee03dceb83c92fbc3c54419b423b5fcf335d99655eab6a05a4e161"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\train28_review_20261024_v1\\main_collection_binding.json",
+      "sha256": "9df1c775f13cbe8b98ee99191a6c250745bb54bcab1688dbc901282741d919c1"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\train28_review_20261024_v1\\new_label_qc_local_only.json",
+      "sha256": "14907cb82759bb02ce1616a4072455e82fd5c6d53baa62170ff7cfbf71a8fe41"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\train28_review_20261024_v1\\new_training_isolation.json",
+      "sha256": "64e34f024b00824d547ce6c64c857ec2bdd98852def1f4a96ccb44916c64534d"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\train28_review_20261024_v1\\primary_tests.xml",
+      "sha256": "3b5942fa0ee2b940a95fe33af76c6282adbfe7ed24ce430475c83ac19a798959"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\train28_review_20261024_v1\\publication_tests.xml",
+      "sha256": "e2eaf079bc49b43312eecb4a3b18e739904e9e50fa644a33a557184e7c8a2a62"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\train28_review_20261024_v1\\publication_verification.json",
+      "sha256": "34e04aa7806accabb6f39c7ecbe39018d8a7f3ba4f7bc8d4cff30b31158c406d"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\train28_review_20261024_v1\\qc_summary.json",
+      "sha256": "5d1a7c9fc0a71540053ce6ee5892bed13217baea6c4fe5dc138e014628e104d5"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\train28_review_20261024_v1\\registry_apply_receipt.json",
+      "sha256": "1e0297842e1e51265e109c0ee4e9829e01846df594a8a954548640fd31de94d9"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\train28_review_20261024_v1\\registry_approval.json",
+      "sha256": "373e9f50bdf877e29813057e378fc24b6e6de77f5917883abbe8caed029c66f0"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\train28_review_20261024_v1\\registry_batch.json",
+      "sha256": "22ba60045b5f294cb45dd36c05476ee642c0118c344d3a9dc29a1b95ff98ff4b"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\train28_review_20261024_v1\\registry_plan.json",
+      "sha256": "ac84bd95430d98ba4eb7984f07e81b1175f2f2cf89a2028bb63e3703a339c708"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\train28_review_20261024_v1\\registry_review.json",
+      "sha256": "0471ce03f314c2e5a3e87245b1ac358fb20061298818bc1260d6ac4ab27613e1"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\train28_review_20261024_v1\\scheduler_snapshot.json",
+      "sha256": "2843c9a6267f38ec01e38f84ef3ec3f1d4f784669f1318548e062125e62633d5"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\train28_review_20261024_v1\\scope_binding.json",
+      "sha256": "ff22a8e614df25a88ab1a1a221912d99ed2f0a01ebb284cac46988fb3434849b"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\train28_review_20261024_v1\\summary.json",
+      "sha256": "4b80c86cc9e598f655274b5ba12d79c572a4b3104df667fa683399fc3887f2bd"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\train28_review_20261024_v1\\verification.json",
+      "sha256": "a4c9aafab76e46d84a0f640de404cb91ad3ea935abb7b271e4a9518e7ede2942"
+    }
+  ],
+  "raw_forces_or_VASP_outputs_included": false
+}

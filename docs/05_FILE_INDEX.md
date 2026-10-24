@@ -293,3 +293,7 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - docs/reviews/fe110_train29_review_20261024/:exact29job checkpoint,one C3H2O PASSlabel,additional gap contribution,native registry and dual-checkout validation evidence hashes.
 - calculations/fe110_reico_pilot300_20261022/train29_review_20261024_v1/:six collected rawfiles,one caseQC,cumulative257records,210-comparison isolation,28remainingjobs and native registry receipts;local only.
 - archive/fe110_train29_review_20261024/;configs/fe110_reico_pilot/train29_review_20261024_v1.json;tests/test_train29_review_20261024.py:hash-bound incremental29scope,nativeQC reuse,isolation/conditional contribution,registry planning and real-label replay.
+
+- docs/reviews/fe110_train28_review_20261024/:exact28job checkpoint,fiveC3H2O PASSlabels,four incremental types,registry and dual-checkout validation hashes.
+- calculations/fe110_reico_pilot300_20261022/train28_review_20261024_v1/:30rawfiles,fivecaseQC,cumulative262records,1050-comparison isolation,23remainingjobs and native registry receipts;local only.
+- archive/fe110_train28_review_20261024/;configs/fe110_reico_pilot/train28_review_20261024_v1.json;tests/test_train28_review_20261024.py:configured receipt-backed recovery,nativeQC,isolation,contribution without double-counting,registry planning and raw-label replay.
