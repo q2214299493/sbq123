@@ -1542,3 +1542,10 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 - Keep originalSOAP composition/element p95,threecontact scales andforcebins.Jointmissing284to229;SOAPthreshold-exceeding366to68.C2H3SOAP0still40discrete gaps;neither metric proves modelprecision.
 - Separate229remaining groups:40canbe addressed by45unreviewed original traininglabels,2only by currently quarantined selectedlabels,187have no originalselected representative.Conditionally admitting45afterQC leaves189types;do not retain old187projection that assumes bothquarantinespass.No unknown DFTforce is imputed.
 - C3H2O84trainlabels stilllackfmax<=0.05(min0.659006);C2H3fourlowforce labels stillonejob/type under total-onlymagnetic grade.32tests plus440rawforce-bin counts and8cachedSOAPdistance checks pass in eachcheckout.Evidence:docs/reviews/fe110_joint_update_20261024/README.md.
+
+## 2026-10-24 - Review remaining45 gap-linked original training inputs
+
+- User explicitly authorized the45unreviewed original training inputs linkedto40joint gaps.Exclude development/final-test and both oldquarantines.Query exact45once at20:00:51Beijing:16DONE/3RUN/26PEND;no submissions or livejob changes.
+- Prefer one DONErepresentative per gap,then retain all remaining DONElabels;16collected/QCPASS,16isolated against513reserved geometries in2557comparisons,zero conflicts.Existing scientific rules and magnetic grades unchanged.
+- New16candidates can fill13of40groups(C2HO1/C2H2O9/C3H2O3);27pending-linked groups remain.Cumulative256reviewed/254PASS,202train/27dev/25test.No newlowforce.Candidates not merged into440audit or366package;229to216is conditional contribution,not re-computed SOAP.
+- Native registry plan140ee18e840621c83a5631d3912d49c099e62a0811a5d923a28d24bd10cc7b4e reviewed/applied:153INSERT,16DONEprojectionUPDATE with immutable histories;no accepted endpoints or reported energies.45tests and16real-label replays pass percheckout.Evidence:docs/reviews/fe110_train45_review_20261024/README.md.

@@ -285,3 +285,7 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - docs/reviews/fe110_joint_update_20261024/:440frame jointcoverage comparison,229classified residual types,68fixedSOAP exceedances,forcebins and independent verification/evidence digests.
 - calculations/fe110_reico_pilot300_20261022/joint_update_20261024_v1/:new440auditview,per-joint force tables,229groups,training-poolSOAPscores,cache/input/output bindings and45-label geometry-only conditional projection(excludes2quarantines);local force arrays only.
 - archive/fe110_joint_update_20261024/;configs/fe110_reico_pilot/joint_update_20261024_v1.json;tests/test_joint_update_20261024.py:PASS-only merge,bound cache reuse,quarantine-aware gap classification,raw-force andSOAP verification.
+
+- docs/reviews/fe110_train45_review_20261024/:exact45train snapshot,16PASS/isolated labels,13-gap conditional contribution,remaining29and review/test/registry evidence digests.
+- calculations/fe110_reico_pilot300_20261022/train45_review_20261024_v1/:original smoke and clean-main bindings,96raw VASP files,16caseQC,cumulative256labels,2557-comparison isolation,candidate contribution and applied registry receipt;local only.
+- archive/fe110_train45_review_20261024/;configs/fe110_reico_pilot/train45_review_20261024_v1.json;tests/test_train45_review_20261024.py:exact training-only scope,priority without deletion,nativeQC reuse,isolation,registry planning and dual-checkout real-label verification.Historical process.py remains immutable;active entry is process_main.py.
