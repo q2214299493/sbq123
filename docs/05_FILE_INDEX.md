@@ -289,3 +289,7 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - docs/reviews/fe110_train45_review_20261024/:exact45train snapshot,16PASS/isolated labels,13-gap conditional contribution,remaining29and review/test/registry evidence digests.
 - calculations/fe110_reico_pilot300_20261022/train45_review_20261024_v1/:original smoke and clean-main bindings,96raw VASP files,16caseQC,cumulative256labels,2557-comparison isolation,candidate contribution and applied registry receipt;local only.
 - archive/fe110_train45_review_20261024/;configs/fe110_reico_pilot/train45_review_20261024_v1.json;tests/test_train45_review_20261024.py:exact training-only scope,priority without deletion,nativeQC reuse,isolation,registry planning and dual-checkout real-label verification.Historical process.py remains immutable;active entry is process_main.py.
+
+- docs/reviews/fe110_train29_review_20261024/:exact29job checkpoint,one C3H2O PASSlabel,additional gap contribution,native registry and dual-checkout validation evidence hashes.
+- calculations/fe110_reico_pilot300_20261022/train29_review_20261024_v1/:six collected rawfiles,one caseQC,cumulative257records,210-comparison isolation,28remainingjobs and native registry receipts;local only.
+- archive/fe110_train29_review_20261024/;configs/fe110_reico_pilot/train29_review_20261024_v1.json;tests/test_train29_review_20261024.py:hash-bound incremental29scope,nativeQC reuse,isolation/conditional contribution,registry planning and real-label replay.

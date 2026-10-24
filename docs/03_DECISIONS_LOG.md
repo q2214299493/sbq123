@@ -1549,3 +1549,9 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 - Prefer one DONErepresentative per gap,then retain all remaining DONElabels;16collected/QCPASS,16isolated against513reserved geometries in2557comparisons,zero conflicts.Existing scientific rules and magnetic grades unchanged.
 - New16candidates can fill13of40groups(C2HO1/C2H2O9/C3H2O3);27pending-linked groups remain.Cumulative256reviewed/254PASS,202train/27dev/25test.No newlowforce.Candidates not merged into440audit or366package;229to216is conditional contribution,not re-computed SOAP.
 - Native registry plan140ee18e840621c83a5631d3912d49c099e62a0811a5d923a28d24bd10cc7b4e reviewed/applied:153INSERT,16DONEprojectionUPDATE with immutable histories;no accepted endpoints or reported energies.45tests and16real-label replays pass percheckout.Evidence:docs/reviews/fe110_train45_review_20261024/README.md.
+
+## 2026-10-24 - Recover completed results from the remaining29 training jobs
+
+- User requested continuation of exact29 unreviewed original training submissions;query once at20:34:06Beijing:1DONE/4RUN/24PEND.Recover only job9921426 family0076step010,C3H2O;SCF73/200,45positiveFe local moments,native staticQC PASS;210applicable full-symmetry comparisons against513reserved geometries,zero conflicts.
+- Cumulative257reviewed/255PASS(203train/27dev/25test),two earlier quarantines preserved.New1could fillone additional type;prior16+new1could cover14of40pending-linked types,conditional jointgaps229to215,26pending-linked types remain.No SOAPrecompute/package merge/newDFT/training or pausedC3restart;fmax4.990634eV/A does not supply a lowforce source.
+- Review/apply native registry plan75ab30d55691487bc122dc623958d223b061f77e3daafcb7d0baca4d748e306e:18INSERT(17files+1status),1DONEprojectionUPDATE with immutable history,no accepted results.49tests andone real-label replay pass percheckout.Evidence:docs/reviews/fe110_train29_review_20261024/README.md.

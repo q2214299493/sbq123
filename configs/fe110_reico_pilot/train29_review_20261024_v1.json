@@ -1,0 +1,56 @@
+{
+  "purpose": "COLLECT_EXACT29_REMAINING_TRAINING_SUBMISSIONS_AFTER_REVIEWED256_CHECKPOINT",
+  "inputs": {
+    "conditional": {
+      "path": "calculations/fe110_reico_pilot300_20261022/joint_update_20261024_v1/conditional_geometry_only_gaps.json",
+      "sha256": "e8ee8d0841f85b8fa95a90ca81a75544418d632ba86ee77920f115fee831cc59"
+    },
+    "gaps": {
+      "path": "calculations/fe110_reico_pilot300_20261022/joint_update_20261024_v1/missing_environments.json",
+      "sha256": "32604d28bfdc9d4f40881abaffc1e17267087666ce26f771107eed59a1bfdcfc"
+    },
+    "previous_audit": {
+      "path": "calculations/fe110_reico_pilot300_20261022/joint_update_20261024_v1/audit_training_view_local_only.json",
+      "sha256": "9ebce7b77247282adf688d1ae9adace437066d12d1ee8ee03c817c375a48bdc2"
+    },
+    "previous_labels": {
+      "path": "calculations/fe110_reico_pilot300_20261022/train45_review_20261024_v1/all_selected_label_qc_local_only.json",
+      "sha256": "da7f76d9434f0a46ebbb79d0926ab7a453bc9a0fc38e42dec6caa21e3d59b650"
+    },
+    "checkpoint": {
+      "path": "calculations/fe110_reico_pilot300_20261022/remaining_submission_20261024_v1/final_submission_checkpoint.json",
+      "sha256": "8b40c325658afb950ea852770c4f1af516496634e7484074b53e4dab08841c94"
+    },
+    "selection": {
+      "path": "calculations/fe110_reico_pilot300_20261022/sampling93_v1/selection/selected_frames.json",
+      "sha256": "022e46102437678a541c587bbd30aaa1e0db27992ea8fcedca3092343701cd34"
+    },
+    "batch": {
+      "path": "calculations/fe110_reico_pilot300_20261022/sampling93_v1/dft_inputs_v1/batch_request.json",
+      "sha256": "117bdce2fdbd2220a48412976db7e1a295151b1ff0b48c7a869a47dff2f6ec08"
+    },
+    "frozen_manifest": {
+      "path": "calculations/fe110_reico_pilot300_20261022/combined_force_package_20261023_v2/training_manifest.json",
+      "sha256": "6a9121a26bc2a8eb51641cfe0b694fb3c4c4c719e791eaa2d4fc6fe0b10e9ebb"
+    },
+    "previous_scope_config": {
+      "path": "configs/fe110_reico_pilot/train45_review_20261024_v1.json",
+      "sha256": "4c8ef679a44f1f07a90221da727a9abc24608f34818f9fb8e5dcc6830971841f"
+    },
+    "previous_new_labels": {
+      "path": "calculations/fe110_reico_pilot300_20261022/train45_review_20261024_v1/new_label_qc_local_only.json",
+      "sha256": "db949d64bc4f01763aeb76141edc5d88c77050fdc56ac276593ffd1f6f077681"
+    },
+    "previous_contribution": {
+      "path": "calculations/fe110_reico_pilot300_20261022/train45_review_20261024_v1/gap_contribution.json",
+      "sha256": "f401b56fdad2acd0ad2bd3f02d8e77e0476d55e32a2d40c11f51de40e9f81576"
+    },
+    "previous_snapshot": {
+      "path": "calculations/fe110_reico_pilot300_20261022/train45_review_20261024_v1/scheduler_snapshot.json",
+      "sha256": "f3398cc49ba8d192092cec6963e6f5a82aaaceabac71cb0ba18449ac8712b95e"
+    }
+  },
+  "output": "calculations/fe110_reico_pilot300_20261022/train29_review_20261024_v1",
+  "batch_size": 20,
+  "new_DFT_GPU_training_or_submission": false
+}
