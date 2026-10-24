@@ -1,0 +1,927 @@
+{
+  "status": "TRAINING_JOINT_COVERAGE_UPDATE_COMPLETE",
+  "training_frames": 440,
+  "prior_training_frames": 378,
+  "added_training_frames": 62,
+  "pool_frames": 1597,
+  "original_selected_train": 233,
+  "selected_train_in_current_view": 186,
+  "selected_train_not_in_view": 47,
+  "unreviewed_selected_train": 45,
+  "quarantined_selected_train": [
+    "family_0028_step000",
+    "family_0086_step000"
+  ],
+  "per_composition": {
+    "C2H2O": {
+      "prior_frames": 162,
+      "current_frames": 176,
+      "prior_missing_joint_types": 50,
+      "current_missing_joint_types": 38,
+      "newly_covered_joint_types": 12,
+      "gap_categories": {
+        "EXISTING_SELECTED_LABELS_AWAIT_QC": 10,
+        "UNSELECTED_LOCAL_ENVIRONMENT": 28
+      },
+      "robust_missing_groups_all_cutoffs": 27,
+      "prior_SOAP_gap_frames": 82,
+      "current_SOAP_gap_frames": 10,
+      "low_force_le_0p05": 17,
+      "low_force_source_groups": [
+        "current_vasp_job_9848802",
+        "current_vasp_job_9848803",
+        "current_vasp_job_9848804",
+        "current_vasp_job_9848805",
+        "current_vasp_job_9848807",
+        "current_vasp_job_9848809"
+      ],
+      "low_force_joint_strata": 4,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 141,
+        "LOCAL_MOMENTS_REVIEWED_POSITIVE_FE": 35
+      }
+    },
+    "C2H3": {
+      "prior_frames": 29,
+      "current_frames": 42,
+      "prior_missing_joint_types": 53,
+      "current_missing_joint_types": 40,
+      "newly_covered_joint_types": 13,
+      "gap_categories": {
+        "UNSELECTED_LOCAL_ENVIRONMENT": 40
+      },
+      "robust_missing_groups_all_cutoffs": 13,
+      "prior_SOAP_gap_frames": 30,
+      "current_SOAP_gap_frames": 0,
+      "low_force_le_0p05": 4,
+      "low_force_source_groups": [
+        "current_vasp_job_9848812"
+      ],
+      "low_force_joint_strata": 1,
+      "magnetic_review_levels": {
+        "LOCAL_MOMENTS_REVIEWED_POSITIVE_FE": 36,
+        "LEGACY_TOTAL_MAGNETIZATION_ONLY": 6
+      }
+    },
+    "C2HO": {
+      "prior_frames": 105,
+      "current_frames": 115,
+      "prior_missing_joint_types": 33,
+      "current_missing_joint_types": 26,
+      "newly_covered_joint_types": 7,
+      "gap_categories": {
+        "EXISTING_SELECTED_LABELS_AWAIT_QC": 4,
+        "UNSELECTED_LOCAL_ENVIRONMENT": 22
+      },
+      "robust_missing_groups_all_cutoffs": 11,
+      "prior_SOAP_gap_frames": 41,
+      "current_SOAP_gap_frames": 1,
+      "low_force_le_0p05": 9,
+      "low_force_source_groups": [
+        "current_vasp_job_9839753",
+        "current_vasp_job_9848799",
+        "current_vasp_job_9848800",
+        "current_vasp_job_9848801"
+      ],
+      "low_force_joint_strata": 4,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 84,
+        "LOCAL_MOMENTS_REVIEWED_POSITIVE_FE": 31
+      }
+    },
+    "C3H2O": {
+      "prior_frames": 59,
+      "current_frames": 84,
+      "prior_missing_joint_types": 148,
+      "current_missing_joint_types": 125,
+      "newly_covered_joint_types": 23,
+      "gap_categories": {
+        "EXISTING_SELECTED_LABELS_AWAIT_QC": 26,
+        "ONLY_QUARANTINED_SELECTED_LABELS": 2,
+        "UNSELECTED_LOCAL_ENVIRONMENT": 97
+      },
+      "robust_missing_groups_all_cutoffs": 89,
+      "prior_SOAP_gap_frames": 213,
+      "current_SOAP_gap_frames": 57,
+      "low_force_le_0p05": 0,
+      "low_force_source_groups": [],
+      "low_force_joint_strata": 0,
+      "magnetic_review_levels": {
+        "LOCAL_MOMENTS_REVIEWED_POSITIVE_FE": 84
+      }
+    }
+  },
+  "SOAP_with_fixed_prior_thresholds": {
+    "C2H2O": {
+      "pool_frames": 317,
+      "reference_frames": 176,
+      "fixed_thresholds": {
+        "C": 0.08535179412289015,
+        "O": 0.0898687782722723,
+        "H": 0.12015728225583215,
+        "Fe": 0.004208975225563415
+      },
+      "above_internal_threshold": 10,
+      "maximum_ratio": 1.1471248805243186
+    },
+    "C2H3": {
+      "pool_frames": 252,
+      "reference_frames": 42,
+      "fixed_thresholds": {
+        "C": 0.07606188904996011,
+        "H": 0.06275675844925127,
+        "Fe": 0.003181107959193352
+      },
+      "above_internal_threshold": 0,
+      "maximum_ratio": 0.6939147643734462
+    },
+    "C2HO": {
+      "pool_frames": 252,
+      "reference_frames": 115,
+      "fixed_thresholds": {
+        "C": 0.07091479789586884,
+        "O": 0.06793808034074231,
+        "H": 0.07742072782627735,
+        "Fe": 0.003115219035946782
+      },
+      "above_internal_threshold": 1,
+      "maximum_ratio": 1.020942578320419
+    },
+    "C3H2O": {
+      "pool_frames": 776,
+      "reference_frames": 84,
+      "fixed_thresholds": {
+        "C": 0.0650476043280145,
+        "O": 0.07298191673490154,
+        "H": 0.07839428380255671,
+        "Fe": 0.00291684723710417
+      },
+      "above_internal_threshold": 57,
+      "maximum_ratio": 3.176607092216412
+    }
+  },
+  "prior_missing_joint_types": 284,
+  "missing_joint_types": 229,
+  "gap_categories": {
+    "EXISTING_SELECTED_LABELS_AWAIT_QC": 40,
+    "ONLY_QUARANTINED_SELECTED_LABELS": 2,
+    "UNSELECTED_LOCAL_ENVIRONMENT": 187
+  },
+  "conditional_missing_if45_unreviewed_pass": 189,
+  "conditional_reference_frames": 485,
+  "training_force_by_composition": {
+    "C2": {
+      "frames": 1,
+      "source_groups": 1,
+      "fmax_range_eV_A": [
+        0.010431251938286219,
+        0.010431251938286219
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 1,
+        "[0.05,0.1)": 0,
+        "[0.1,0.5)": 0,
+        "[0.5,1)": 0,
+        "[1,2)": 0,
+        "[2,5)": 0,
+        "[5,10)": 0,
+        "[10,inf)": 0
+      },
+      "low_force_le_0p05": 1,
+      "low_force_source_groups": [
+        "legacy_vasp_directory_c2_hlbh"
+      ],
+      "low_force_graphs": 1,
+      "low_force_joint_strata": 1,
+      "connected_low_force_frames": 1,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 1
+      },
+      "graphs": 1,
+      "joint_strata": 1
+    },
+    "C2H": {
+      "frames": 7,
+      "source_groups": 1,
+      "fmax_range_eV_A": [
+        0.019731193856429467,
+        0.38342661733896355
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 1,
+        "[0.05,0.1)": 1,
+        "[0.1,0.5)": 5,
+        "[0.5,1)": 0,
+        "[1,2)": 0,
+        "[2,5)": 0,
+        "[5,10)": 0,
+        "[10,inf)": 0
+      },
+      "low_force_le_0p05": 1,
+      "low_force_source_groups": [
+        "current_vasp_job_9839749"
+      ],
+      "low_force_graphs": 1,
+      "low_force_joint_strata": 1,
+      "connected_low_force_frames": 1,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 7
+      },
+      "graphs": 1,
+      "joint_strata": 2
+    },
+    "C2H2": {
+      "frames": 7,
+      "source_groups": 1,
+      "fmax_range_eV_A": [
+        0.01841379691970127,
+        0.6359793943116396
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 1,
+        "[0.05,0.1)": 0,
+        "[0.1,0.5)": 4,
+        "[0.5,1)": 2,
+        "[1,2)": 0,
+        "[2,5)": 0,
+        "[5,10)": 0,
+        "[10,inf)": 0
+      },
+      "low_force_le_0p05": 1,
+      "low_force_source_groups": [
+        "current_vasp_job_9839750"
+      ],
+      "low_force_graphs": 1,
+      "low_force_joint_strata": 1,
+      "connected_low_force_frames": 1,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 7
+      },
+      "graphs": 1,
+      "joint_strata": 2
+    },
+    "C2H2O": {
+      "frames": 176,
+      "source_groups": 19,
+      "fmax_range_eV_A": [
+        0.016955419104227414,
+        31.40978954019554
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 17,
+        "[0.05,0.1)": 28,
+        "[0.1,0.5)": 63,
+        "[0.5,1)": 26,
+        "[1,2)": 15,
+        "[2,5)": 13,
+        "[5,10)": 11,
+        "[10,inf)": 3
+      },
+      "low_force_le_0p05": 17,
+      "low_force_source_groups": [
+        "current_vasp_job_9848802",
+        "current_vasp_job_9848803",
+        "current_vasp_job_9848804",
+        "current_vasp_job_9848805",
+        "current_vasp_job_9848807",
+        "current_vasp_job_9848809"
+      ],
+      "low_force_graphs": 3,
+      "low_force_joint_strata": 4,
+      "connected_low_force_frames": 10,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 141,
+        "LOCAL_MOMENTS_REVIEWED_POSITIVE_FE": 35
+      },
+      "graphs": 26,
+      "joint_strata": 50
+    },
+    "C2H3": {
+      "frames": 42,
+      "source_groups": 13,
+      "fmax_range_eV_A": [
+        0.019901702690975968,
+        11.098220361238193
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 4,
+        "[0.05,0.1)": 1,
+        "[0.1,0.5)": 1,
+        "[0.5,1)": 0,
+        "[1,2)": 4,
+        "[2,5)": 22,
+        "[5,10)": 9,
+        "[10,inf)": 1
+      },
+      "low_force_le_0p05": 4,
+      "low_force_source_groups": [
+        "current_vasp_job_9848812"
+      ],
+      "low_force_graphs": 1,
+      "low_force_joint_strata": 1,
+      "connected_low_force_frames": 4,
+      "magnetic_review_levels": {
+        "LOCAL_MOMENTS_REVIEWED_POSITIVE_FE": 36,
+        "LEGACY_TOTAL_MAGNETIZATION_ONLY": 6
+      },
+      "graphs": 13,
+      "joint_strata": 35
+    },
+    "C2HO": {
+      "frames": 115,
+      "source_groups": 17,
+      "fmax_range_eV_A": [
+        0.01608737719455847,
+        23.76629246792554
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 9,
+        "[0.05,0.1)": 13,
+        "[0.1,0.5)": 42,
+        "[0.5,1)": 11,
+        "[1,2)": 10,
+        "[2,5)": 18,
+        "[5,10)": 10,
+        "[10,inf)": 2
+      },
+      "low_force_le_0p05": 9,
+      "low_force_source_groups": [
+        "current_vasp_job_9839753",
+        "current_vasp_job_9848799",
+        "current_vasp_job_9848800",
+        "current_vasp_job_9848801"
+      ],
+      "low_force_graphs": 3,
+      "low_force_joint_strata": 4,
+      "connected_low_force_frames": 4,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 84,
+        "LOCAL_MOMENTS_REVIEWED_POSITIVE_FE": 31
+      },
+      "graphs": 15,
+      "joint_strata": 38
+    },
+    "C2O": {
+      "frames": 1,
+      "source_groups": 1,
+      "fmax_range_eV_A": [
+        0.015360460832930762,
+        0.015360460832930762
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 1,
+        "[0.05,0.1)": 0,
+        "[0.1,0.5)": 0,
+        "[0.5,1)": 0,
+        "[1,2)": 0,
+        "[2,5)": 0,
+        "[5,10)": 0,
+        "[10,inf)": 0
+      },
+      "low_force_le_0p05": 1,
+      "low_force_source_groups": [
+        "legacy_vasp_directory_c2pluso_hlbh_lb"
+      ],
+      "low_force_graphs": 1,
+      "low_force_joint_strata": 1,
+      "connected_low_force_frames": 0,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 1
+      },
+      "graphs": 1,
+      "joint_strata": 1
+    },
+    "C3H2O": {
+      "frames": 84,
+      "source_groups": 31,
+      "fmax_range_eV_A": [
+        0.6590064564827874,
+        28.990409243371694
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 0,
+        "[0.05,0.1)": 0,
+        "[0.1,0.5)": 0,
+        "[0.5,1)": 2,
+        "[1,2)": 10,
+        "[2,5)": 37,
+        "[5,10)": 19,
+        "[10,inf)": 16
+      },
+      "low_force_le_0p05": 0,
+      "low_force_source_groups": [],
+      "low_force_graphs": 0,
+      "low_force_joint_strata": 0,
+      "connected_low_force_frames": 0,
+      "magnetic_review_levels": {
+        "LOCAL_MOMENTS_REVIEWED_POSITIVE_FE": 84
+      },
+      "graphs": 47,
+      "joint_strata": 78
+    },
+    "CH": {
+      "frames": 1,
+      "source_groups": 1,
+      "fmax_range_eV_A": [
+        0.017483637321793196,
+        0.017483637321793196
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 1,
+        "[0.05,0.1)": 0,
+        "[0.1,0.5)": 0,
+        "[0.5,1)": 0,
+        "[1,2)": 0,
+        "[2,5)": 0,
+        "[5,10)": 0,
+        "[10,inf)": 0
+      },
+      "low_force_le_0p05": 1,
+      "low_force_source_groups": [
+        "legacy_vasp_directory_ch_top"
+      ],
+      "low_force_graphs": 1,
+      "low_force_joint_strata": 1,
+      "connected_low_force_frames": 1,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 1
+      },
+      "graphs": 1,
+      "joint_strata": 1
+    },
+    "CH3": {
+      "frames": 1,
+      "source_groups": 1,
+      "fmax_range_eV_A": [
+        0.018292620260640626,
+        0.018292620260640626
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 1,
+        "[0.05,0.1)": 0,
+        "[0.1,0.5)": 0,
+        "[0.5,1)": 0,
+        "[1,2)": 0,
+        "[2,5)": 0,
+        "[5,10)": 0,
+        "[10,inf)": 0
+      },
+      "low_force_le_0p05": 1,
+      "low_force_source_groups": [
+        "legacy_vasp_directory_ch3_top"
+      ],
+      "low_force_graphs": 1,
+      "low_force_joint_strata": 1,
+      "connected_low_force_frames": 1,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 1
+      },
+      "graphs": 1,
+      "joint_strata": 1
+    },
+    "CH3O": {
+      "frames": 1,
+      "source_groups": 1,
+      "fmax_range_eV_A": [
+        0.013541788692783536,
+        0.013541788692783536
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 1,
+        "[0.05,0.1)": 0,
+        "[0.1,0.5)": 0,
+        "[0.5,1)": 0,
+        "[1,2)": 0,
+        "[2,5)": 0,
+        "[5,10)": 0,
+        "[10,inf)": 0
+      },
+      "low_force_le_0p05": 1,
+      "low_force_source_groups": [
+        "legacy_vasp_directory_ch3o_oend_top"
+      ],
+      "low_force_graphs": 1,
+      "low_force_joint_strata": 1,
+      "connected_low_force_frames": 1,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 1
+      },
+      "graphs": 1,
+      "joint_strata": 1
+    },
+    "CH4": {
+      "frames": 1,
+      "source_groups": 1,
+      "fmax_range_eV_A": [
+        0.018983368958116996,
+        0.018983368958116996
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 1,
+        "[0.05,0.1)": 0,
+        "[0.1,0.5)": 0,
+        "[0.5,1)": 0,
+        "[1,2)": 0,
+        "[2,5)": 0,
+        "[5,10)": 0,
+        "[10,inf)": 0
+      },
+      "low_force_le_0p05": 1,
+      "low_force_source_groups": [
+        "legacy_vasp_directory_ch4_top"
+      ],
+      "low_force_graphs": 1,
+      "low_force_joint_strata": 1,
+      "connected_low_force_frames": 1,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 1
+      },
+      "graphs": 1,
+      "joint_strata": 1
+    },
+    "CH4O": {
+      "frames": 1,
+      "source_groups": 1,
+      "fmax_range_eV_A": [
+        0.0181322396300071,
+        0.0181322396300071
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 1,
+        "[0.05,0.1)": 0,
+        "[0.1,0.5)": 0,
+        "[0.5,1)": 0,
+        "[1,2)": 0,
+        "[2,5)": 0,
+        "[5,10)": 0,
+        "[10,inf)": 0
+      },
+      "low_force_le_0p05": 1,
+      "low_force_source_groups": [
+        "legacy_vasp_directory_ch4o_oend_top"
+      ],
+      "low_force_graphs": 1,
+      "low_force_joint_strata": 1,
+      "connected_low_force_frames": 1,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 1
+      },
+      "graphs": 1,
+      "joint_strata": 1
+    },
+    "CHO": {
+      "frames": 1,
+      "source_groups": 1,
+      "fmax_range_eV_A": [
+        0.01582127235717785,
+        0.01582127235717785
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 1,
+        "[0.05,0.1)": 0,
+        "[0.1,0.5)": 0,
+        "[0.5,1)": 0,
+        "[1,2)": 0,
+        "[2,5)": 0,
+        "[5,10)": 0,
+        "[10,inf)": 0
+      },
+      "low_force_le_0p05": 1,
+      "low_force_source_groups": [
+        "legacy_vasp_directory_cho_cend_top"
+      ],
+      "low_force_graphs": 1,
+      "low_force_joint_strata": 1,
+      "connected_low_force_frames": 1,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 1
+      },
+      "graphs": 1,
+      "joint_strata": 1
+    },
+    "CO": {
+      "frames": 1,
+      "source_groups": 1,
+      "fmax_range_eV_A": [
+        0.018402298063013762,
+        0.018402298063013762
+      ],
+      "fmax_histogram": {
+        "[0,0.05)": 1,
+        "[0.05,0.1)": 0,
+        "[0.1,0.5)": 0,
+        "[0.5,1)": 0,
+        "[1,2)": 0,
+        "[2,5)": 0,
+        "[5,10)": 0,
+        "[10,inf)": 0
+      },
+      "low_force_le_0p05": 1,
+      "low_force_source_groups": [
+        "legacy_vasp_directory_cpluso_lb_h"
+      ],
+      "low_force_graphs": 1,
+      "low_force_joint_strata": 1,
+      "connected_low_force_frames": 0,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 1
+      },
+      "graphs": 1,
+      "joint_strata": 1
+    }
+  },
+  "force_edges_eV_A": [
+    0,
+    0.05,
+    0.1,
+    0.5,
+    1,
+    2,
+    5,
+    10
+  ],
+  "radius_scales": [
+    1.2,
+    1.25,
+    1.3
+  ],
+  "new_descriptor_calculations": 0,
+  "frozen366package_changed": false,
+  "reserved_labels_used_for_coverage_or_ranking": false,
+  "new_DFT_GPU_training_or_submission": false,
+  "chemical_coverage": {
+    "C2H2O": {
+      "graph_signature": {
+        "pool_types": 35,
+        "original233_covered": 29,
+        "current_covered": 24,
+        "current_missing": 11,
+        "missing_if_all_original_selected_labels_admitted": 6
+      },
+      "coordination_signature": {
+        "pool_types": 37,
+        "original233_covered": 31,
+        "current_covered": 27,
+        "current_missing": 10,
+        "missing_if_all_original_selected_labels_admitted": 6
+      },
+      "joint_signature": {
+        "pool_types": 71,
+        "original233_covered": 43,
+        "current_covered": 33,
+        "current_missing": 38,
+        "missing_if_all_original_selected_labels_admitted": 28
+      }
+    },
+    "C2H3": {
+      "graph_signature": {
+        "pool_types": 15,
+        "original233_covered": 13,
+        "current_covered": 13,
+        "current_missing": 2,
+        "missing_if_all_original_selected_labels_admitted": 2
+      },
+      "coordination_signature": {
+        "pool_types": 32,
+        "original233_covered": 23,
+        "current_covered": 23,
+        "current_missing": 9,
+        "missing_if_all_original_selected_labels_admitted": 9
+      },
+      "joint_signature": {
+        "pool_types": 74,
+        "original233_covered": 34,
+        "current_covered": 34,
+        "current_missing": 40,
+        "missing_if_all_original_selected_labels_admitted": 40
+      }
+    },
+    "C2HO": {
+      "graph_signature": {
+        "pool_types": 14,
+        "original233_covered": 13,
+        "current_covered": 14,
+        "current_missing": 0,
+        "missing_if_all_original_selected_labels_admitted": 0
+      },
+      "coordination_signature": {
+        "pool_types": 33,
+        "original233_covered": 24,
+        "current_covered": 22,
+        "current_missing": 11,
+        "missing_if_all_original_selected_labels_admitted": 9
+      },
+      "joint_signature": {
+        "pool_types": 53,
+        "original233_covered": 31,
+        "current_covered": 27,
+        "current_missing": 26,
+        "missing_if_all_original_selected_labels_admitted": 22
+      }
+    },
+    "C3H2O": {
+      "graph_signature": {
+        "pool_types": 70,
+        "original233_covered": 56,
+        "current_covered": 47,
+        "current_missing": 23,
+        "missing_if_all_original_selected_labels_admitted": 14
+      },
+      "coordination_signature": {
+        "pool_types": 109,
+        "original233_covered": 74,
+        "current_covered": 58,
+        "current_missing": 51,
+        "missing_if_all_original_selected_labels_admitted": 35
+      },
+      "joint_signature": {
+        "pool_types": 203,
+        "original233_covered": 106,
+        "current_covered": 78,
+        "current_missing": 125,
+        "missing_if_all_original_selected_labels_admitted": 97
+      }
+    }
+  },
+  "native_field_aliases": {
+    "current_covered": "current366_covered in unchanged owning implementation;current reference has440frames"
+  },
+  "primary_verification": {
+    "status": "PASS",
+    "training_frames": 440,
+    "new_training_labels": 62,
+    "raw_force_bin_rows_independently_checked": 440,
+    "missing_joint_types": 229,
+    "conditional_missing_excluding_quarantines": 189,
+    "SOAP_frame_distance_checks": [
+      "family_0046_step020",
+      "family_0042_step011",
+      "family_0023_step016",
+      "family_0011_step000",
+      "family_0013_step016",
+      "family_0009_step000",
+      "family_0028_step000",
+      "family_0071_step000"
+    ],
+    "frozen366package_unchanged": true,
+    "source_checkout": "C:\\Users\\86177\\Desktop\\work",
+    "source_files": [
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\archive\\fe110_joint_update_20261024\\verify.py",
+        "sha256": "9b4da64ce45309930e091d8dcf22a809e918fcdb101677cd11d15c752ce6b3e5"
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\combined_force_package_20261023_v2\\training_manifest.json",
+        "sha256": "6a9121a26bc2a8eb51641cfe0b694fb3c4c4c719e791eaa2d4fc6fe0b10e9ebb"
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\completed_label_qc_20261024_v1\\eligible_training_labels_local_only.json",
+        "sha256": "39f09bb96ead0de035fb280b1bdf868c3c9c64ea67d826131b5b6894bc0da0a3"
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\followup_20261024_v2\\audit_training_view_local_only.json",
+        "sha256": "a38e0d7ef5e860b47b397ff2eab470a39a0b78a66acb3e49092da7201071c421"
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261024_v1\\output_inventory.json",
+        "sha256": "a7ca51e1bf9a8f60d3e84a5e5b4e2005b72b70f6a846764a5b31f50944075038"
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261024_v1\\summary.json",
+        "sha256": "0a297791c2c1714740e8eafaf08d6bfd06a141cdeef7f70a72f7ba6b424398bf"
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\configs\\fe110_reico_pilot\\joint_update_20261024_v1.json",
+        "sha256": "65e8c65fb9f88896b6bb009b889391eb7c0d8ea85bd955a7a5f848081d08c07c"
+      }
+    ]
+  },
+  "publication_verification": {
+    "status": "PASS",
+    "training_frames": 440,
+    "new_training_labels": 62,
+    "raw_force_bin_rows_independently_checked": 440,
+    "missing_joint_types": 229,
+    "conditional_missing_excluding_quarantines": 189,
+    "SOAP_frame_distance_checks": [
+      "family_0046_step020",
+      "family_0042_step011",
+      "family_0023_step016",
+      "family_0011_step000",
+      "family_0013_step016",
+      "family_0009_step000",
+      "family_0028_step000",
+      "family_0071_step000"
+    ],
+    "frozen366package_unchanged": true,
+    "source_checkout": "C:\\Users\\86177\\.codex\\worktrees\\fe110-reico-pilot300\\work",
+    "source_files": [
+      {
+        "path": "C:\\Users\\86177\\.codex\\worktrees\\fe110-reico-pilot300\\work\\archive\\fe110_joint_update_20261024\\verify.py",
+        "sha256": "9b4da64ce45309930e091d8dcf22a809e918fcdb101677cd11d15c752ce6b3e5"
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\combined_force_package_20261023_v2\\training_manifest.json",
+        "sha256": "6a9121a26bc2a8eb51641cfe0b694fb3c4c4c719e791eaa2d4fc6fe0b10e9ebb"
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\completed_label_qc_20261024_v1\\eligible_training_labels_local_only.json",
+        "sha256": "39f09bb96ead0de035fb280b1bdf868c3c9c64ea67d826131b5b6894bc0da0a3"
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\followup_20261024_v2\\audit_training_view_local_only.json",
+        "sha256": "a38e0d7ef5e860b47b397ff2eab470a39a0b78a66acb3e49092da7201071c421"
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261024_v1\\output_inventory.json",
+        "sha256": "a7ca51e1bf9a8f60d3e84a5e5b4e2005b72b70f6a846764a5b31f50944075038"
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261024_v1\\summary.json",
+        "sha256": "0a297791c2c1714740e8eafaf08d6bfd06a141cdeef7f70a72f7ba6b424398bf"
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\configs\\fe110_reico_pilot\\joint_update_20261024_v1.json",
+        "sha256": "65e8c65fb9f88896b6bb009b889391eb7c0d8ea85bd955a7a5f848081d08c07c"
+      }
+    ]
+  },
+  "test_results": {
+    "primary": {
+      "passed": 32,
+      "report_sha256": "92580e9dce77e342fe6a5095e5026d7ae15692d4cb74296fb4979aa9f8b159ea"
+    },
+    "publication": {
+      "passed": 32,
+      "report_sha256": "949f58c77b17dee6cb5d760afe5dfdfdfef6b7125297d70e9c27faf3a089a126"
+    }
+  },
+  "native_evidence": [
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261024_v1\\SOAP_frame_scores.json",
+      "sha256": "0dc4cbf76a2f0c9ae425b8d6beaaa6e43aa3b4262ebc9191c549b4d7de5f01d4"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261024_v1\\audit_training_view_local_only.json",
+      "sha256": "9ebce7b77247282adf688d1ae9adace437066d12d1ee8ee03c817c375a48bdc2"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261024_v1\\cache_binding.json",
+      "sha256": "1c8cae2c46c32269cf265ea9873365c7755d52dc8ce5a9a5b4fc06eed849d3a2"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261024_v1\\chemical_coverage_native.json",
+      "sha256": "dd791e3d84001462a719edb8491d980cc955bd5aacf366364b37ab5f4280bf1c"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261024_v1\\conditional_geometry_only_gaps.json",
+      "sha256": "e8ee8d0841f85b8fa95a90ca81a75544418d632ba86ee77920f115fee831cc59"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261024_v1\\independent_verification.json",
+      "sha256": "e01b2d11fa586888d9f1283c0c4e78bdf5b94054e648ea3d875073d812ecc6ef"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261024_v1\\input_binding.json",
+      "sha256": "712741b4d56933793911dfc0ae462b0973fc1279678e54603a36bc1345de9740"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261024_v1\\missing_environments.json",
+      "sha256": "32604d28bfdc9d4f40881abaffc1e17267087666ce26f771107eed59a1bfdcfc"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261024_v1\\output_inventory.json",
+      "sha256": "a7ca51e1bf9a8f60d3e84a5e5b4e2005b72b70f6a846764a5b31f50944075038"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261024_v1\\publication_independent_verification.json",
+      "sha256": "26ac5ea1f31febcaf82172c2f2575d5c1b9dfd421bfd20f85363ff3e36de9b0c"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261024_v1\\summary.json",
+      "sha256": "0a297791c2c1714740e8eafaf08d6bfd06a141cdeef7f70a72f7ba6b424398bf"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261024_v1\\training_joint_force.json",
+      "sha256": "3de8a603a155a9ff8bb36263ddec7047f08f40ea3663994fc943cbe744feef4c"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\archive\\fe110_joint_update_20261024\\run.py",
+      "sha256": "a276bbfeae0948f8c55ba6a2abd61b722bdf9043f098c550d21e8ab250f0df97"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\archive\\fe110_joint_update_20261024\\verify.py",
+      "sha256": "9b4da64ce45309930e091d8dcf22a809e918fcdb101677cd11d15c752ce6b3e5"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\configs\\fe110_reico_pilot\\joint_update_20261024_v1.json",
+      "sha256": "65e8c65fb9f88896b6bb009b889391eb7c0d8ea85bd955a7a5f848081d08c07c"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\tests\\test_joint_update_20261024.py",
+      "sha256": "d1984cca4735361d7719bd88be1f531a84ecf00e34aca263c3a4d44a6a38957a"
+    }
+  ]
+}

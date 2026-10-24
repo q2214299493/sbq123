@@ -281,3 +281,7 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - docs/reviews/fe110_completed_label_qc_20261024/:84-label batch QC checkpoint,82PASS/2exceptions,62isolated trainlabels,force ranges,test counts and native evidence hashes.
 - calculations/fe110_reico_pilot300_20261022/completed_label_qc_20261024_v1/:five batch receipts,504raw VASP files,per-labelQC,cumulative240labels,62eligible traincandidates,9018comparison isolation and reviewed/applied registry evidence;local only.
 - archive/fe110_completed_label_qc_20261024/;configs/fe110_reico_pilot/completed_label_qc_20261024_v1.json;tests/test_completed_label_qc_20261024.py:receipt-directory-aware incremental collection,nativeQC,partition/magnetic quarantine,isolation,verification and registry planning.
+
+- docs/reviews/fe110_joint_update_20261024/:440frame jointcoverage comparison,229classified residual types,68fixedSOAP exceedances,forcebins and independent verification/evidence digests.
+- calculations/fe110_reico_pilot300_20261022/joint_update_20261024_v1/:new440auditview,per-joint force tables,229groups,training-poolSOAPscores,cache/input/output bindings and45-label geometry-only conditional projection(excludes2quarantines);local force arrays only.
+- archive/fe110_joint_update_20261024/;configs/fe110_reico_pilot/joint_update_20261024_v1.json;tests/test_joint_update_20261024.py:PASS-only merge,bound cache reuse,quarantine-aware gap classification,raw-force andSOAP verification.

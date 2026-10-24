@@ -1535,3 +1535,10 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 - Native static scientific thresholds unchanged:82PASS(62train/7dev/13test);family0028step000 requires localFe-moment review;family0086step000 hits200of200SCF boundary despite OUTCAR EDIFF marker.Both remain excluded,no auto retry or tuning.
 - Cumulative240reviewed/238PASS.62newtrain labels pass9018full-symmetry comparisons against513reserved geometries,zero conflicts;none has movable fmax<=0.05eV/A.Keep366trainingpackage/378auditview and all magnetic grades/partitions unchanged;no model/newDFT execution or jointSOAP update.
 - Review/apply registry plan7c0a9ede646f26815ea1841d89c9424f0384ae7b9279471f291c473a1acb6f18:765native INSERT,71DONEprojection UPDATE with immutable history;no accepted energies/endpoints.43related tests pass per checkout.Evidence:docs/reviews/fe110_completed_label_qc_20261024/README.md.
+
+## 2026-10-24 - Refresh joint coverage using isolated PASS training labels
+
+- User explicitly authorized composition/local-environment/force coverage update.Extend only prior378auditwith62isolatedPASS trainlabels,retaining all original rows,magnetic grades and partitions;440referenceframes,1597training queries.No newdescriptors,threshold fitting,training DB mutation,GPU or DFT.
+- Keep originalSOAP composition/element p95,threecontact scales andforcebins.Jointmissing284to229;SOAPthreshold-exceeding366to68.C2H3SOAP0still40discrete gaps;neither metric proves modelprecision.
+- Separate229remaining groups:40canbe addressed by45unreviewed original traininglabels,2only by currently quarantined selectedlabels,187have no originalselected representative.Conditionally admitting45afterQC leaves189types;do not retain old187projection that assumes bothquarantinespass.No unknown DFTforce is imputed.
+- C3H2O84trainlabels stilllackfmax<=0.05(min0.659006);C2H3fourlowforce labels stillonejob/type under total-onlymagnetic grade.32tests plus440rawforce-bin counts and8cachedSOAPdistance checks pass in eachcheckout.Evidence:docs/reviews/fe110_joint_update_20261024/README.md.

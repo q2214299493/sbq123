@@ -1,0 +1,59 @@
+{
+  "purpose": "UPDATE_TRAIN_ONLY_COMPOSITION_LOCAL_ENVIRONMENT_FORCE_COVERAGE",
+  "inputs": {
+    "prior_training": {
+      "path": "calculations/fe110_reico_pilot300_20261022/followup_20261024_v2/audit_training_view_local_only.json",
+      "sha256": "a38e0d7ef5e860b47b397ff2eab470a39a0b78a66acb3e49092da7201071c421"
+    },
+    "prior_summary": {
+      "path": "calculations/fe110_reico_pilot300_20261022/followup_20261024_v2/summary.json",
+      "sha256": "88221b95a2427d437a46fb89cd66ab51c999e38bec2263edf35d8f687ee2bcd8"
+    },
+    "additions": {
+      "path": "calculations/fe110_reico_pilot300_20261022/completed_label_qc_20261024_v1/eligible_training_labels_local_only.json",
+      "sha256": "39f09bb96ead0de035fb280b1bdf868c3c9c64ea67d826131b5b6894bc0da0a3"
+    },
+    "isolation": {
+      "path": "calculations/fe110_reico_pilot300_20261022/completed_label_qc_20261024_v1/new_training_isolation.json",
+      "sha256": "b3fb37d6198d8f265fc33cf77e782cf15faf490c374a305b27a38e3172326efa"
+    },
+    "pool": {
+      "path": "calculations/fe110_reico_pilot300_20261022/joint_coverage_20261023_v3/pool_environments.json",
+      "sha256": "20c28bf9f5857e2f9145a57a13385a6f3b7f7b72ea8e183a4c5557e796199f80"
+    },
+    "cache_inventory": {
+      "path": "calculations/fe110_reico_pilot300_20261022/joint_coverage_20261023_v3/descriptor_inventory.json",
+      "sha256": "f917a5928b766bd376b91078f0b42c16308c48e6aceaa1dee6f985c336cb2f82"
+    },
+    "base_config": {
+      "path": "configs/fe110_reico_pilot/joint_coverage_v1.json",
+      "sha256": "9a0b78f6d34839684157e1794d7fb0fcfc44ebfdacdca77bffff1fb8bb838d5c"
+    },
+    "prior_soap": {
+      "path": "calculations/fe110_reico_pilot300_20261022/stratified_audit_v1/composition_soap.json",
+      "sha256": "5b90ad67c6cad0c7ad93ea73aa6de7193e42a50a0612de606d9795abc3dcdbfd"
+    },
+    "selection": {
+      "path": "calculations/fe110_reico_pilot300_20261022/sampling93_v1/selection/selected_frames.json",
+      "sha256": "022e46102437678a541c587bbd30aaa1e0db27992ea8fcedca3092343701cd34"
+    },
+    "frozen_manifest": {
+      "path": "calculations/fe110_reico_pilot300_20261022/combined_force_package_20261023_v2/training_manifest.json",
+      "sha256": "6a9121a26bc2a8eb51641cfe0b694fb3c4c4c719e791eaa2d4fc6fe0b10e9ebb"
+    },
+    "analysis_rules": {
+      "path": "configs/adsmind_lite/analysis_rules.yaml",
+      "sha256": "45bab93237e78f37287f36ec1626b0d38b38fe0c17f913a9062fdc7d65bcceed"
+    },
+    "quarantine_authority": {
+      "path": "docs/reviews/fe110_completed_label_qc_20261024/checkpoint.json",
+      "sha256": "b32b887542372a4636c6030643e0bea1f2273aa0992b5eb912ba9eadca563ad3"
+    }
+  },
+  "excluded_training_sample_ids": [
+    "family_0028_step000",
+    "family_0086_step000"
+  ],
+  "output": "calculations/fe110_reico_pilot300_20261022/joint_update_20261024_v1",
+  "new_DFT_GPU_training_or_submission": false
+}
