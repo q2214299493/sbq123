@@ -68,3 +68,9 @@ Update this table in place. Move resolved items to historical results or Git his
 - Nine new native attempts lost SSH before a success receipt;connection resets/closures were observed,the cause remains unverified.A bounded later authentication check succeeded.Original seven unknown attempts and these nine were never automatically retried.
 - Read-only queue/process/path inspection found no uniquely matching unreceipted job;absence alone was not treated as proof of failure.User explicitly confirmed no duplicates and authorized16fresh-directory attempts.All16now have native success receipts,with original attempt/record hashes and remote locks retained.
 - Old markers remain historically UNKNOWN;logical sample submission is resolved through explicit old-to-new mapping.No DFT SCF failure is inferred from SSH outcomes.Evidence:remaining_submission_20261024_v1/recovery16_resolution.json and docs/reviews/fe110_reico_remaining_20261024/README.md.
+
+## 2026-10-24 - Two completed static labels quarantined by existing QC
+
+- family_0028_step000(job9919443,C3H2Otrain):normal completion and83-stepSCF;Fe0based39local moment=-0.953muB,44of45Fe positive,total102.1782971muB.StatusMAGNETIC_REVIEW_REQUIRED;full raw evidence retained,not admitted to training.
+- family_0086_step000(job9919414,C3H2Otrain):normal termination,no recognized fatal keyword;iteration200/NELM200,lastOSZICARdE=-8.7262e-4eV,EDIFF1e-6eV.OUTCAR has EDIFF termination marker but original label rule rejects reaching NELM;statusREJECTED_OR_INCOMPLETE.Do not reclassify as accepted or infer convergence from marker alone.
+- No recovery computation or parameter changes authorized/executed;both remain separately reviewable.84collections all succeeded;these are scientific label-admission exceptions,not transfer failures.Evidence:docs/reviews/fe110_completed_label_qc_20261024/README.md and completed_label_qc_20261024_v1/case_qc/.

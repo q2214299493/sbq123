@@ -1,0 +1,845 @@
+{
+  "checked_at": "2026-10-24T08:48:16.822053+00:00",
+  "new_labels_reviewed": 84,
+  "new_qc_counts": {
+    "PASS": 82,
+    "MAGNETIC_REVIEW_REQUIRED": 1,
+    "REJECTED_OR_INCOMPLETE": 1
+  },
+  "new_partitions": {
+    "train": 64,
+    "development": 7,
+    "final_test": 13
+  },
+  "all_selected_labels_reviewed": 240,
+  "all_selected_qc_counts": {
+    "PASS": 238,
+    "MAGNETIC_REVIEW_REQUIRED": 1,
+    "REJECTED_OR_INCOMPLETE": 1
+  },
+  "all_selected_pass_partitions": {
+    "train": 186,
+    "development": 27,
+    "final_test": 25
+  },
+  "new_isolated_train_eligible": 62,
+  "geometry_isolation": {
+    "geometry_conflicts": [],
+    "quarantined_sample_ids": [],
+    "comparisons": 9018,
+    "threshold_A": 0.2,
+    "reserved_geometries": 513,
+    "reserved_forces_or_energies_used": false,
+    "method": "real clean-face Fe110 symmetry,XY MIC,all equal-element permutations;conservative adsorbate RMSD"
+  },
+  "new_train_force_by_composition": {
+    "C2H2O": {
+      "frames": 14,
+      "movable_fmax_min_eV_A": 1.321180147755029,
+      "movable_fmax_max_eV_A": 20.835300481710984,
+      "movable_fmax_le_0_05": 0
+    },
+    "C2H3": {
+      "frames": 13,
+      "movable_fmax_min_eV_A": 1.530556615986158,
+      "movable_fmax_max_eV_A": 6.955879369612227,
+      "movable_fmax_le_0_05": 0
+    },
+    "C2HO": {
+      "frames": 10,
+      "movable_fmax_min_eV_A": 1.264760302836075,
+      "movable_fmax_max_eV_A": 6.465397071308846,
+      "movable_fmax_le_0_05": 0
+    },
+    "C3H2O": {
+      "frames": 25,
+      "movable_fmax_min_eV_A": 1.655133624577182,
+      "movable_fmax_max_eV_A": 28.990409243371694,
+      "movable_fmax_le_0_05": 0
+    }
+  },
+  "new_training_source_families": 26,
+  "remaining_snapshot_jobs_not_DONE": 52,
+  "collection_failures": [],
+  "new_DFT_GPU_or_training": false,
+  "frozen_training_package_366_changed": false,
+  "previous_audit_view_378_changed": false,
+  "joint_SOAP_coverage_recomputed": false,
+  "magnetic_global_ground_state_verified": false,
+  "verification": {
+    "status": "PASS",
+    "new_labels": 84,
+    "local_remote_raw_hashes_checked": 504,
+    "immutable_input_hashes_checked": 252,
+    "isolated_training_eligible": 62,
+    "new_QC_counts": {
+      "PASS": 82,
+      "MAGNETIC_REVIEW_REQUIRED": 1,
+      "REJECTED_OR_INCOMPLETE": 1
+    },
+    "test_pass_counts": {
+      "primary": 43,
+      "publication": 43
+    },
+    "frozen366_training_manifest_unchanged": true,
+    "reserved_partition_admission": 0,
+    "source_files": [
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\archive\\fe110_completed_label_qc_20261024\\verify.py",
+        "sha256": "15a1fd106ac7aeb11e212ded3fbfc2e1458c3d1b301529b92ebfd683734a0ead"
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\completed_label_qc_20261024_v1\\all_selected_label_qc_local_only.json",
+        "sha256": "c511f31eb116af568564ec7cddcd49093308e6f893c2695a3ced5ec1b77e763d"
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\completed_label_qc_20261024_v1\\batch_processing_summary.json",
+        "sha256": "e505b80350b559ce035f033a25edafeb3ff54a32e7f2d4cdb0a9fbcb46911f9b"
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\completed_label_qc_20261024_v1\\eligible_training_labels_local_only.json",
+        "sha256": "39f09bb96ead0de035fb280b1bdf868c3c9c64ea67d826131b5b6894bc0da0a3"
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\completed_label_qc_20261024_v1\\isolation_binding.json",
+        "sha256": "090cf2c4b2435b8979bdc00ea22e0651c4311c64a234af675a696ac17a55f9b2"
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\completed_label_qc_20261024_v1\\new_label_qc_local_only.json",
+        "sha256": "2fd059cf610c777c4ae1dbafb5da08e97577789a1316ee6ec0be04af3e587a9e"
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\completed_label_qc_20261024_v1\\primary_tests_final.xml",
+        "sha256": "c38554d07541294d7f15e6b2000f27144169c6d5225a142863485d31c2e2816f"
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\completed_label_qc_20261024_v1\\release_tests_final.xml",
+        "sha256": "5a24a5a1612ff96c13a5ffe728993b463468521c330cb2b3c786322b13916112"
+      },
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\configs\\fe110_reico_pilot\\completed_label_qc_20261024_v1.json",
+        "sha256": "92a85e655e3e2a458b01f04a68917e8f19e47730668646f722eb55634bf4f9da"
+      }
+    ]
+  },
+  "registry_apply_receipt": {
+    "schema_version": 1,
+    "document_kind": "calculation_registry_batch_result",
+    "batch_id": "fe110_completed_label_qc_20261024_v1",
+    "batch_sha256": "a7fc1aa2996ef9c815c69caf439bbbd8f4a9c708f3446a0dd0e74fa68a01fff6",
+    "plan_sha256": "7c0a9ede646f26815ea1841d89c9424f0384ae7b9279471f291c473a1acb6f18",
+    "inserted": 765,
+    "updated": 71,
+    "unchanged": 0,
+    "already_applied": false
+  },
+  "new_labels": [
+    {
+      "sample_id": "family_0011_step000",
+      "source_job_id": "9919401",
+      "partition": "train",
+      "composition": "C2H3",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0011_step014",
+      "source_job_id": "9919409",
+      "partition": "train",
+      "composition": "C2H3",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0011_step020",
+      "source_job_id": "9919417",
+      "partition": "train",
+      "composition": "C2H3",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0012_step010",
+      "source_job_id": "9919425",
+      "partition": "development",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0012_step020",
+      "source_job_id": "9919433",
+      "partition": "development",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0013_step000",
+      "source_job_id": "9919441",
+      "partition": "train",
+      "composition": "C2HO",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0013_step009",
+      "source_job_id": "9919445",
+      "partition": "train",
+      "composition": "C2HO",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0013_step020",
+      "source_job_id": "9919451",
+      "partition": "train",
+      "composition": "C2HO",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0014_step000",
+      "source_job_id": "9919407",
+      "partition": "final_test",
+      "composition": "C2H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0014_step004",
+      "source_job_id": "9919456",
+      "partition": "final_test",
+      "composition": "C2H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0015_step000",
+      "source_job_id": "9921302",
+      "partition": "train",
+      "composition": "C2H3",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0015_step010",
+      "source_job_id": "9921304",
+      "partition": "train",
+      "composition": "C2H3",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0015_step020",
+      "source_job_id": "9921305",
+      "partition": "train",
+      "composition": "C2H3",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0016_step000",
+      "source_job_id": "9921303",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0016_step020",
+      "source_job_id": "9921306",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0017_step000",
+      "source_job_id": "9921308",
+      "partition": "train",
+      "composition": "C2HO",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0017_step010",
+      "source_job_id": "9921307",
+      "partition": "train",
+      "composition": "C2HO",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0017_step020",
+      "source_job_id": "9921310",
+      "partition": "train",
+      "composition": "C2HO",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0018_step000",
+      "source_job_id": "9921311",
+      "partition": "train",
+      "composition": "C2H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0018_step010",
+      "source_job_id": "9921309",
+      "partition": "train",
+      "composition": "C2H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0018_step020",
+      "source_job_id": "9921314",
+      "partition": "train",
+      "composition": "C2H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0019_step000",
+      "source_job_id": "9921313",
+      "partition": "train",
+      "composition": "C2H3",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0026_step011",
+      "source_job_id": "9919405",
+      "partition": "train",
+      "composition": "C2H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0026_step020",
+      "source_job_id": "9919413",
+      "partition": "train",
+      "composition": "C2H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0027_step000",
+      "source_job_id": "9919420",
+      "partition": "train",
+      "composition": "C2H3",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0027_step006",
+      "source_job_id": "9919428",
+      "partition": "train",
+      "composition": "C2H3",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0027_step012",
+      "source_job_id": "9919436",
+      "partition": "train",
+      "composition": "C2H3",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0028_step000",
+      "source_job_id": "9919443",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "MAGNETIC_REVIEW_REQUIRED"
+    },
+    {
+      "sample_id": "family_0028_step009",
+      "source_job_id": "9919449",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0028_step020",
+      "source_job_id": "9919455",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0030_step000",
+      "source_job_id": "9921312",
+      "partition": "train",
+      "composition": "C2H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0030_step011",
+      "source_job_id": "9921316",
+      "partition": "train",
+      "composition": "C2H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0030_step020",
+      "source_job_id": "9921317",
+      "partition": "train",
+      "composition": "C2H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0031_step000",
+      "source_job_id": "9921315",
+      "partition": "train",
+      "composition": "C2H3",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0031_step009",
+      "source_job_id": "9921318",
+      "partition": "train",
+      "composition": "C2H3",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0031_step020",
+      "source_job_id": "9921319",
+      "partition": "train",
+      "composition": "C2H3",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0032_step000",
+      "source_job_id": "9919415",
+      "partition": "final_test",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0032_step010",
+      "source_job_id": "9921320",
+      "partition": "final_test",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0032_step020",
+      "source_job_id": "9921322",
+      "partition": "final_test",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0033_step000",
+      "source_job_id": "9921321",
+      "partition": "train",
+      "composition": "C2HO",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0033_step010",
+      "source_job_id": "9921323",
+      "partition": "train",
+      "composition": "C2HO",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0034_step010",
+      "source_job_id": "9921325",
+      "partition": "development",
+      "composition": "C2H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0034_step020",
+      "source_job_id": "9921324",
+      "partition": "development",
+      "composition": "C2H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0041_step020",
+      "source_job_id": "9919403",
+      "partition": "train",
+      "composition": "C2HO",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0042_step000",
+      "source_job_id": "9919411",
+      "partition": "train",
+      "composition": "C2H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0042_step011",
+      "source_job_id": "9919419",
+      "partition": "train",
+      "composition": "C2H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0042_step020",
+      "source_job_id": "9919427",
+      "partition": "train",
+      "composition": "C2H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0043_step000",
+      "source_job_id": "9919435",
+      "partition": "final_test",
+      "composition": "C2H3",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0044_step000",
+      "source_job_id": "9919442",
+      "partition": "development",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0044_step010",
+      "source_job_id": "9919448",
+      "partition": "development",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0045_step000",
+      "source_job_id": "9919454",
+      "partition": "development",
+      "composition": "C2HO",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0057_step020",
+      "source_job_id": "9919402",
+      "partition": "train",
+      "composition": "C2HO",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0058_step000",
+      "source_job_id": "9919410",
+      "partition": "train",
+      "composition": "C2H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0058_step011",
+      "source_job_id": "9919418",
+      "partition": "train",
+      "composition": "C2H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0058_step020",
+      "source_job_id": "9919426",
+      "partition": "train",
+      "composition": "C2H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0059_step000",
+      "source_job_id": "9919434",
+      "partition": "final_test",
+      "composition": "C2H3",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0059_step010",
+      "source_job_id": "9919440",
+      "partition": "final_test",
+      "composition": "C2H3",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0059_step020",
+      "source_job_id": "9919444",
+      "partition": "final_test",
+      "composition": "C2H3",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0060_step000",
+      "source_job_id": "9919450",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0060_step011",
+      "source_job_id": "9919457",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0072_step000",
+      "source_job_id": "9919400",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0072_step012",
+      "source_job_id": "9919408",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0072_step020",
+      "source_job_id": "9919416",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0073_step000",
+      "source_job_id": "9919423",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0073_step011",
+      "source_job_id": "9919432",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0073_step020",
+      "source_job_id": "9919438",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0074_step000",
+      "source_job_id": "9919447",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0074_step010",
+      "source_job_id": "9919453",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0074_step020",
+      "source_job_id": "9919458",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0075_step011",
+      "source_job_id": "9919422",
+      "partition": "final_test",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0080_step020",
+      "source_job_id": "9919430",
+      "partition": "final_test",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0085_step000",
+      "source_job_id": "9919437",
+      "partition": "final_test",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0085_step020",
+      "source_job_id": "9919406",
+      "partition": "final_test",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0086_step000",
+      "source_job_id": "9919414",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "REJECTED_OR_INCOMPLETE"
+    },
+    {
+      "sample_id": "family_0086_step008",
+      "source_job_id": "9919424",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0086_step020",
+      "source_job_id": "9919431",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0087_step000",
+      "source_job_id": "9919439",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0087_step011",
+      "source_job_id": "9919446",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0087_step020",
+      "source_job_id": "9919452",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0088_step000",
+      "source_job_id": "9919459",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0096_step010",
+      "source_job_id": "9919404",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0096_step020",
+      "source_job_id": "9919412",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0097_step000",
+      "source_job_id": "9919421",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    },
+    {
+      "sample_id": "family_0097_step010",
+      "source_job_id": "9919429",
+      "partition": "train",
+      "composition": "C3H2O",
+      "data_qc_status": "PASS"
+    }
+  ],
+  "exception_details": [
+    {
+      "sample_id": "family_0028_step000",
+      "partition": "train",
+      "composition": "C3H2O",
+      "source_job_id": "9919443",
+      "total_magnetization_muB": 102.1782971,
+      "Fe_moment_range_muB": [
+        -0.953,
+        2.648
+      ],
+      "Fe_positive_moment_count": 44,
+      "magnetic_review_flags": [
+        "NONPOSITIVE_FE_LOCAL_MOMENT_REQUIRES_BRANCH_REVIEW"
+      ],
+      "data_qc_status": "MAGNETIC_REVIEW_REQUIRED",
+      "magnetic_review_level": "NEEDS_MAGNETIC_REVIEW"
+    },
+    {
+      "sample_id": "family_0086_step000",
+      "partition": "train",
+      "composition": "C3H2O",
+      "source_job_id": "9919414",
+      "data_qc_status": "REJECTED_OR_INCOMPLETE",
+      "reason": "electronic/normal-completion gate failed",
+      "SCF_diagnostic": {
+        "last_electronic_iteration": 200,
+        "last_delta_e_eV": -0.00087262,
+        "ediff_eV": 1e-06,
+        "nelm": 200,
+        "electronically_converged": true,
+        "electronic_convergence_source": "OUTCAR_EDIFF_TERMINATION"
+      }
+    }
+  ],
+  "native_evidence": [
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\completed_label_qc_20261024_v1\\all_selected_label_qc_local_only.json",
+      "sha256": "c511f31eb116af568564ec7cddcd49093308e6f893c2695a3ced5ec1b77e763d"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\completed_label_qc_20261024_v1\\batch_processing_summary.json",
+      "sha256": "e505b80350b559ce035f033a25edafeb3ff54a32e7f2d4cdb0a9fbcb46911f9b"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\completed_label_qc_20261024_v1\\collection_binding.json",
+      "sha256": "f412a24cecde6f9d0fa35d7545e4e82b22d1a98db2aaffb2ad69366017d54127"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\completed_label_qc_20261024_v1\\eligible_training_labels_local_only.json",
+      "sha256": "39f09bb96ead0de035fb280b1bdf868c3c9c64ea67d826131b5b6894bc0da0a3"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\completed_label_qc_20261024_v1\\isolation_binding.json",
+      "sha256": "090cf2c4b2435b8979bdc00ea22e0651c4311c64a234af675a696ac17a55f9b2"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\completed_label_qc_20261024_v1\\new_label_qc_local_only.json",
+      "sha256": "2fd059cf610c777c4ae1dbafb5da08e97577789a1316ee6ec0be04af3e587a9e"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\completed_label_qc_20261024_v1\\new_training_isolation.json",
+      "sha256": "b3fb37d6198d8f265fc33cf77e782cf15faf490c374a305b27a38e3172326efa"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\completed_label_qc_20261024_v1\\qc_summary.json",
+      "sha256": "3500d6d6e2af8fb8855990a7d4c68e27c6339bbfd988ec5b9bfa6116bea752e3"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\completed_label_qc_20261024_v1\\registry_apply_receipt.json",
+      "sha256": "248ee182f0400a4483083b666149d334edc1f59bb6b6fbbbf9e2fc1d5ed2adcf"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\completed_label_qc_20261024_v1\\registry_approval.json",
+      "sha256": "fbbea509462471c3804867d8596ccd71d5aa8c8356ab7d192e97b4a8289694b4"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\completed_label_qc_20261024_v1\\registry_batch.json",
+      "sha256": "4df4032d076faf6aa861f4e44a2df77ad4089d3bb26f2a84c3a99a644890f078"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\completed_label_qc_20261024_v1\\registry_plan.json",
+      "sha256": "3a6fcc0e9b9bb28a698f3e74d504eb57898fe0921df7587ca0508906b4ffc69d"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\completed_label_qc_20261024_v1\\registry_review.json",
+      "sha256": "7b7587bb4c9dcd5681e7c8a93372daf7ca9f15b9ce924608d22a5a1398655118"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\completed_label_qc_20261024_v1\\scheduler_snapshot.json",
+      "sha256": "0fd475bfdbdab76cf7e7f8e5b612db5f597528bf8186e36c07af92bf8303038f"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\completed_label_qc_20261024_v1\\verification.json",
+      "sha256": "a6ff358bff16aa4ff37cee41e694de6841b33709eb7a188d4e1bb6ed4ad675d9"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\archive\\fe110_completed_label_qc_20261024\\finalize.py",
+      "sha256": "5c0e033cc31e4f6e81895bfc8199b2b149778c523ca2cf75b24cdd869e9b6a8a"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\archive\\fe110_completed_label_qc_20261024\\run.py",
+      "sha256": "0620df5be26ef90cdb76fbbfda5611b3c23e48f529dd5588b152f00013d0b20a"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\archive\\fe110_completed_label_qc_20261024\\verify.py",
+      "sha256": "15a1fd106ac7aeb11e212ded3fbfc2e1458c3d1b301529b92ebfd683734a0ead"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\configs\\fe110_reico_pilot\\completed_label_qc_20261024_v1.json",
+      "sha256": "92a85e655e3e2a458b01f04a68917e8f19e47730668646f722eb55634bf4f9da"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\tests\\test_completed_label_qc_20261024.py",
+      "sha256": "56e696730c767fbc9a3e9d002195daab244485996f3576ca09840ab1fa6e1ba6"
+    }
+  ]
+}

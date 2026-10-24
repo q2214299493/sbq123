@@ -1528,3 +1528,10 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 - Continue69never-reserved inputs:60successes,9SSH-unknown outcomes;combine9with prior7for16fresh canonical directory attempts after human confirmation.Preserve old markers/records/locks,original scientific inputs,32cores/job and128account slots.
 - Actual new76success receipts complete280unique logical jobs(264original+16fresh);12reused labels remain separate.At15:07:51Beijing:new7613DONE/4RUN/59PEND.Scientific output QC pending;no training/pausedC3 execution.
 - Reviewed exact registry plan58e4f8991b1bf639a24c8c77dd151dbad9ce20813b2197fb2fd043096f295857 and applied1453INSERT/0UPDATE,status/provenance only.Evidence:docs/reviews/fe110_reico_remaining_20261024/README.md.
+
+## 2026-10-24 - Batch review completed original static labels
+
+- Explicit user request:对已经结束的开始分批处理.Use280receipt directory map(including16fresh attempts),skip156reviewed labels,and freeze136job query at16:48:16Beijing:84DONE/4RUN/48PEND.Collect/QC84in20/20/20/20/4batches after one-case smoke.
+- Native static scientific thresholds unchanged:82PASS(62train/7dev/13test);family0028step000 requires localFe-moment review;family0086step000 hits200of200SCF boundary despite OUTCAR EDIFF marker.Both remain excluded,no auto retry or tuning.
+- Cumulative240reviewed/238PASS.62newtrain labels pass9018full-symmetry comparisons against513reserved geometries,zero conflicts;none has movable fmax<=0.05eV/A.Keep366trainingpackage/378auditview and all magnetic grades/partitions unchanged;no model/newDFT execution or jointSOAP update.
+- Review/apply registry plan7c0a9ede646f26815ea1841d89c9424f0384ae7b9279471f291c473a1acb6f18:765native INSERT,71DONEprojection UPDATE with immutable history;no accepted energies/endpoints.43related tests pass per checkout.Evidence:docs/reviews/fe110_completed_label_qc_20261024/README.md.

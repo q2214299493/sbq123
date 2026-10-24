@@ -277,3 +277,7 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - docs/reviews/fe110_reico_remaining_20261024/:original-batch and16-case human authorizations,76new-job checkpoint,280logical success receipts,registry/test/evidence digests.
 - calculations/fe110_reico_pilot300_20261022/remaining_submission_20261024_v1/:native read-only checkpoints,serial progress,preserved unknown attempts,new16workdirs/gates/receipts,resolution mapping,exact76-job scheduler snapshot and applied registryv2.
 - archive/fe110_reico_remaining_20261024/ and tests/test_reico_remaining_submission_20261024.py:bounded original-scope continuation,human-confirmed fresh attempts,idempotency barriers and final verification/registry planning.
+
+- docs/reviews/fe110_completed_label_qc_20261024/:84-label batch QC checkpoint,82PASS/2exceptions,62isolated trainlabels,force ranges,test counts and native evidence hashes.
+- calculations/fe110_reico_pilot300_20261022/completed_label_qc_20261024_v1/:five batch receipts,504raw VASP files,per-labelQC,cumulative240labels,62eligible traincandidates,9018comparison isolation and reviewed/applied registry evidence;local only.
+- archive/fe110_completed_label_qc_20261024/;configs/fe110_reico_pilot/completed_label_qc_20261024_v1.json;tests/test_completed_label_qc_20261024.py:receipt-directory-aware incremental collection,nativeQC,partition/magnetic quarantine,isolation,verification and registry planning.
