@@ -297,3 +297,7 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - docs/reviews/fe110_train28_review_20261024/:exact28job checkpoint,fiveC3H2O PASSlabels,four incremental types,registry and dual-checkout validation hashes.
 - calculations/fe110_reico_pilot300_20261022/train28_review_20261024_v1/:30rawfiles,fivecaseQC,cumulative262records,1050-comparison isolation,23remainingjobs and native registry receipts;local only.
 - archive/fe110_train28_review_20261024/;configs/fe110_reico_pilot/train28_review_20261024_v1.json;tests/test_train28_review_20261024.py:configured receipt-backed recovery,nativeQC,isolation,contribution without double-counting,registry planning and raw-label replay.
+
+- docs/reviews/fe110_final30_qc_20261025/:final30PASS,complete292-label totals,training-only isolation and conditional coverage,registry/validation hashes;no raw force arrays.
+- calculations/fe110_reico_pilot300_20261022/final30_qc_20261025_v1/:frozen30DONE snapshot,20/10batch receipts,180rawfiles,30caseQC,292cumulative labels,23isolated traincandidates and native registry receipts;local only.
+- archive/fe110_final30_qc_20261025/;configs/fe110_reico_pilot/final30_qc_20261025_v1.json;tests/test_final30_qc_20261025.py:mixed-partition physicalQC,native scientific gates,isolation,conditional contribution,registry planning and30-label replay.

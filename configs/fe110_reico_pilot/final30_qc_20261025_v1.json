@@ -1,0 +1,68 @@
+{
+  "purpose": "PHYSICAL_QC_FINAL30_ORIGINAL_LABELS_KEEP_ALL_PARTITIONS_AND_MAGNETIC_GRADES",
+  "inputs": {
+    "conditional": {
+      "path": "calculations/fe110_reico_pilot300_20261022/joint_update_20261024_v1/conditional_geometry_only_gaps.json",
+      "sha256": "e8ee8d0841f85b8fa95a90ca81a75544418d632ba86ee77920f115fee831cc59"
+    },
+    "gaps": {
+      "path": "calculations/fe110_reico_pilot300_20261022/joint_update_20261024_v1/missing_environments.json",
+      "sha256": "32604d28bfdc9d4f40881abaffc1e17267087666ce26f771107eed59a1bfdcfc"
+    },
+    "previous_audit": {
+      "path": "calculations/fe110_reico_pilot300_20261022/joint_update_20261024_v1/audit_training_view_local_only.json",
+      "sha256": "9ebce7b77247282adf688d1ae9adace437066d12d1ee8ee03c817c375a48bdc2"
+    },
+    "previous_labels": {
+      "path": "calculations/fe110_reico_pilot300_20261022/train28_review_20261024_v1/all_selected_label_qc_local_only.json",
+      "sha256": "4715ada2baaae222c978ff5a026a969c46afba29573f854fb63e9a79a43ba0e6"
+    },
+    "checkpoint": {
+      "path": "calculations/fe110_reico_pilot300_20261022/remaining_submission_20261024_v1/final_submission_checkpoint.json",
+      "sha256": "8b40c325658afb950ea852770c4f1af516496634e7484074b53e4dab08841c94"
+    },
+    "selection": {
+      "path": "calculations/fe110_reico_pilot300_20261022/sampling93_v1/selection/selected_frames.json",
+      "sha256": "022e46102437678a541c587bbd30aaa1e0db27992ea8fcedca3092343701cd34"
+    },
+    "batch": {
+      "path": "calculations/fe110_reico_pilot300_20261022/sampling93_v1/dft_inputs_v1/batch_request.json",
+      "sha256": "117bdce2fdbd2220a48412976db7e1a295151b1ff0b48c7a869a47dff2f6ec08"
+    },
+    "frozen_manifest": {
+      "path": "calculations/fe110_reico_pilot300_20261022/combined_force_package_20261023_v2/training_manifest.json",
+      "sha256": "6a9121a26bc2a8eb51641cfe0b694fb3c4c4c719e791eaa2d4fc6fe0b10e9ebb"
+    },
+    "previous_eligible16": {
+      "path": "calculations/fe110_reico_pilot300_20261022/train45_review_20261024_v1/eligible_training_labels_local_only.json",
+      "sha256": "808701c48d8636c21937691c713e9c93555cb23a99db5b52c1ff0ad4736013d4"
+    },
+    "previous_eligible1": {
+      "path": "calculations/fe110_reico_pilot300_20261022/train29_review_20261024_v1/eligible_training_labels_local_only.json",
+      "sha256": "4daa9e5be22664a8f2e272eb1c2deab7a3da016821d2a6a1eacb309502b2944c"
+    },
+    "previous_eligible5": {
+      "path": "calculations/fe110_reico_pilot300_20261022/train28_review_20261024_v1/eligible_training_labels_local_only.json",
+      "sha256": "85f76caddd24227c950c08d52616df8f11d4826681179dc832ec63b2f9033e41"
+    },
+    "snapshot": {
+      "path": "calculations/fe110_reico_pilot300_20261022/status_20261025_025641_086419_UTC/scheduler_snapshot.json",
+      "sha256": "8a5f1af1b59cec435ce1b15499e1131bece9210e3b653b56193526b8d74f0ff2"
+    }
+  },
+  "output": "calculations/fe110_reico_pilot300_20261022/final30_qc_20261025_v1",
+  "batch_size": 20,
+  "new_DFT_GPU_training_or_submission": false,
+  "expected_remaining": 30,
+  "previous_reviewed": 262,
+  "expected_partitions": {
+    "train": 23,
+    "development": 3,
+    "final_test": 4
+  },
+  "prior_candidate_keys": [
+    "previous_eligible16",
+    "previous_eligible1",
+    "previous_eligible5"
+  ]
+}
