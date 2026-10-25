@@ -1,0 +1,230 @@
+{
+  "completed_at_Beijing": "2026-10-25T14:04:48.930616+08:00",
+  "training_frames": 485,
+  "prior_training_frames": 440,
+  "new_training_labels": 45,
+  "pool_frames": 1597,
+  "prior_missing_joint_types": 229,
+  "missing_joint_types": 189,
+  "gap_categories": {
+    "ONLY_QUARANTINED_SELECTED_LABELS": 2,
+    "UNSELECTED_LOCAL_ENVIRONMENT": 187
+  },
+  "per_composition": {
+    "C2H2O": {
+      "prior_frames": 176,
+      "current_frames": 187,
+      "prior_missing_joint_types": 38,
+      "current_missing_joint_types": 28,
+      "newly_covered_joint_types": 10,
+      "gap_categories": {
+        "UNSELECTED_LOCAL_ENVIRONMENT": 28
+      },
+      "robust_missing_groups_all_cutoffs": 12,
+      "prior_SOAP_gap_frames": 10,
+      "current_SOAP_gap_frames": 0,
+      "low_force_le_0p05": 17,
+      "low_force_source_groups": [
+        "current_vasp_job_9848802",
+        "current_vasp_job_9848803",
+        "current_vasp_job_9848804",
+        "current_vasp_job_9848805",
+        "current_vasp_job_9848807",
+        "current_vasp_job_9848809"
+      ],
+      "low_force_joint_strata": 4,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 141,
+        "LOCAL_MOMENTS_REVIEWED_POSITIVE_FE": 46
+      }
+    },
+    "C2H3": {
+      "prior_frames": 42,
+      "current_frames": 42,
+      "prior_missing_joint_types": 40,
+      "current_missing_joint_types": 40,
+      "newly_covered_joint_types": 0,
+      "gap_categories": {
+        "UNSELECTED_LOCAL_ENVIRONMENT": 40
+      },
+      "robust_missing_groups_all_cutoffs": 13,
+      "prior_SOAP_gap_frames": 0,
+      "current_SOAP_gap_frames": 0,
+      "low_force_le_0p05": 4,
+      "low_force_source_groups": [
+        "current_vasp_job_9848812"
+      ],
+      "low_force_joint_strata": 1,
+      "magnetic_review_levels": {
+        "LOCAL_MOMENTS_REVIEWED_POSITIVE_FE": 36,
+        "LEGACY_TOTAL_MAGNETIZATION_ONLY": 6
+      }
+    },
+    "C2HO": {
+      "prior_frames": 115,
+      "current_frames": 120,
+      "prior_missing_joint_types": 26,
+      "current_missing_joint_types": 22,
+      "newly_covered_joint_types": 4,
+      "gap_categories": {
+        "UNSELECTED_LOCAL_ENVIRONMENT": 22
+      },
+      "robust_missing_groups_all_cutoffs": 6,
+      "prior_SOAP_gap_frames": 1,
+      "current_SOAP_gap_frames": 1,
+      "low_force_le_0p05": 9,
+      "low_force_source_groups": [
+        "current_vasp_job_9839753",
+        "current_vasp_job_9848799",
+        "current_vasp_job_9848800",
+        "current_vasp_job_9848801"
+      ],
+      "low_force_joint_strata": 4,
+      "magnetic_review_levels": {
+        "PRESERVED_LEGACY_SOURCE_REVIEW": 84,
+        "LOCAL_MOMENTS_REVIEWED_POSITIVE_FE": 36
+      }
+    },
+    "C3H2O": {
+      "prior_frames": 84,
+      "current_frames": 113,
+      "prior_missing_joint_types": 125,
+      "current_missing_joint_types": 99,
+      "newly_covered_joint_types": 26,
+      "gap_categories": {
+        "ONLY_QUARANTINED_SELECTED_LABELS": 2,
+        "UNSELECTED_LOCAL_ENVIRONMENT": 97
+      },
+      "robust_missing_groups_all_cutoffs": 48,
+      "prior_SOAP_gap_frames": 57,
+      "current_SOAP_gap_frames": 3,
+      "low_force_le_0p05": 0,
+      "low_force_source_groups": [],
+      "low_force_joint_strata": 0,
+      "magnetic_review_levels": {
+        "LOCAL_MOMENTS_REVIEWED_POSITIVE_FE": 113
+      }
+    }
+  },
+  "SOAP_gap_frames_before": 68,
+  "SOAP_gap_frames_after": 4,
+  "SOAP_outlier_ids": [
+    "family_0013_step016",
+    "family_0028_step000",
+    "family_0028_step001",
+    "family_0028_step002"
+  ],
+  "robust_missing_groups_with_at_least_one_frame": 79,
+  "pool_frames_in_missing_joint_types": 492,
+  "prior_isolation_audits_reused": 4,
+  "prior_isolation_comparisons_reused": 8087,
+  "new_geometry_comparisons": 0,
+  "test_results": {
+    "primary_tests.xml": {
+      "passed": 43,
+      "skipped": 1,
+      "skip_reasons": [
+        "could not import 'dscribe.descriptors': No module named 'dscribe'"
+      ]
+    },
+    "publication_tests.xml": {
+      "passed": 43,
+      "skipped": 1,
+      "skip_reasons": [
+        "could not import 'dscribe.descriptors': No module named 'dscribe'"
+      ]
+    }
+  },
+  "all_original_partitions_and_magnetic_tiers_preserved": true,
+  "original366training_package_changed": false,
+  "new_DFT_GPU_or_training": false,
+  "source_files": [
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\archive\\fe110_joint_update_20261025\\prepare.py",
+      "sha256": "75e269512d3135334a279eac2d41c73844c8a9015fe697435420bcbd3e8ee2b3"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\archive\\fe110_joint_update_20261025\\run.py",
+      "sha256": "18761710512f98e92b82e28ce6c5128bf555963e5ce48013634e9aef3d6bd2c0"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\archive\\fe110_joint_update_20261025\\verify.py",
+      "sha256": "28b9429210ea7874b889a56e8adf2d15934bef42729c48483fda8bbe9a378270"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\configs\\fe110_reico_pilot\\joint_update_20261025_v1.json",
+      "sha256": "040143e5e0a3ea4567c5934dc389a45fa78206a38be04befcd5f991869187470"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\tests\\test_joint_update_20261025.py",
+      "sha256": "3c9441ab03c700e31163293bdcb5a7f686f492fe45296da11f7033473eb18fc8"
+    }
+  ],
+  "local_evidence_files": [
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261025_v1\\SOAP_frame_scores.json",
+      "sha256": "02873c017fea9ada4e83e745c5eeabc1dfbef20a2d61a5a1f8617924ffd558b5"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261025_v1\\audit_training_view_local_only.json",
+      "sha256": "dd23d9d3d27e5f572475903dfaf94108d14d4a4f697cf145ddf887ebc7177ba0"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261025_v1\\cache_binding.json",
+      "sha256": "1c8cae2c46c32269cf265ea9873365c7755d52dc8ce5a9a5b4fc06eed849d3a2"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261025_v1\\chemical_coverage_native.json",
+      "sha256": "80d671b3825ec4242551752159d6d5d17989c738ed2be578a9cb4826a05ae449"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261025_v1\\completion_boundary.json",
+      "sha256": "2ac0ccf4e0429863182d21f88c88d2bfc2f946e139baa5a2601cdf295c777034"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261025_v1\\independent_verification.json",
+      "sha256": "43d2838f1b238a2785b5b8926324874d4e3a77d3e836c7fcb9da5985bb50a952"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261025_v1\\input_binding.json",
+      "sha256": "e3777d1c92c796b308e4d1724c997e410d6aeb95bb3a5b98af182579516d17f3"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261025_v1\\isolated_additions_local_only.json",
+      "sha256": "1b1319a5d07cc3ed773d50cd2af0211e9489d7497bf8ac5a610f9e4dfaa475b3"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261025_v1\\missing_environments.json",
+      "sha256": "2700f0ace7481a6ae6d402a6d2cec770f5724ce9374f870769d6c639ebacb268"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261025_v1\\output_inventory.json",
+      "sha256": "d5f82cff43f9fb80da69875d8b3490a362d5da4f85e03e3ebd341771247feadc"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261025_v1\\primary_tests.xml",
+      "sha256": "4585a7c723fb2de7c9f3f67c726c76625fd1753354bdcb45c4476de6eb522bee"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261025_v1\\publication_tests.xml",
+      "sha256": "81fa3738c827dfabb6cf4210a5e62ba012761d64d99b3b9f6347c1f52cbdf883"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261025_v1\\publication_verification.json",
+      "sha256": "690ea4cedc872effef2ae66f7732e468b3ffcef8cafa53a7ce413177d63e774b"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261025_v1\\reused_isolation_evidence.json",
+      "sha256": "becde4460ee134415169282eaffcbd95083e6d84dc86a926d48c9a1da235788f"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261025_v1\\summary.json",
+      "sha256": "74e0b3d6fdf39a6f6b0a6cfda2d6a424c0411d85c15e2463eefb4437bf48db6e"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\joint_update_20261025_v1\\training_joint_force.json",
+      "sha256": "dbf8aa76360c8dd5567e6e6649dd086b57a7a371193922d3ff26e71eaf17721a"
+    }
+  ],
+  "gap_catalog_sha256": "73e0d5a61f6535b1f43d99985f6965b87bcc83afa2c175f782e2f7a024afcf61"
+}

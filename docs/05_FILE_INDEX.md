@@ -301,3 +301,7 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - docs/reviews/fe110_final30_qc_20261025/:final30PASS,complete292-label totals,training-only isolation and conditional coverage,registry/validation hashes;no raw force arrays.
 - calculations/fe110_reico_pilot300_20261022/final30_qc_20261025_v1/:frozen30DONE snapshot,20/10batch receipts,180rawfiles,30caseQC,292cumulative labels,23isolated traincandidates and native registry receipts;local only.
 - archive/fe110_final30_qc_20261025/;configs/fe110_reico_pilot/final30_qc_20261025_v1.json;tests/test_final30_qc_20261025.py:mixed-partition physicalQC,native scientific gates,isolation,conditional contribution,registry planning and30-label replay.
+
+- docs/reviews/fe110_joint_update_20261025/:485frame coverage review,complete189-type residual catalog,fourSOAPoutliers,force-source/magnetic boundaries and verification hashes.
+- calculations/fe110_reico_pilot300_20261022/joint_update_20261025_v1/:bound45candidate merge,reused isolation/cache evidence,485auditview,jointforce tables,189nativegroups,1597SOAPscores and dual-checkout verification;local force arrays only.
+- archive/fe110_joint_update_20261025/;configs/fe110_reico_pilot/joint_update_20261025_v1.json;tests/test_joint_update_20261025.py:isolated PASS merge,fixed-threshold coverage with native owners,raw-force/magnetic preservation and independent SOAP/count verification.
