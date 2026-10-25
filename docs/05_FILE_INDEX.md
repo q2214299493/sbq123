@@ -305,3 +305,7 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - docs/reviews/fe110_joint_update_20261025/:485frame coverage review,complete189-type residual catalog,fourSOAPoutliers,force-source/magnetic boundaries and verification hashes.
 - calculations/fe110_reico_pilot300_20261022/joint_update_20261025_v1/:bound45candidate merge,reused isolation/cache evidence,485auditview,jointforce tables,189nativegroups,1597SOAPscores and dual-checkout verification;local force arrays only.
 - archive/fe110_joint_update_20261025/;configs/fe110_reico_pilot/joint_update_20261025_v1.json;tests/test_joint_update_20261025.py:isolated PASS merge,fixed-threshold coverage with native owners,raw-force/magnetic preservation and independent SOAP/count verification.
+
+- docs/reviews/fe110_targeted_shortlist_20261025/:five non-executable source/review proposals,per-object gap and use conditions,geometry table,label-budget boundary and verification hashes.
+- calculations/fe110_reico_pilot300_20261022/targeted_shortlist_20261025_v1/:five independent geometry audits,source/geometry binding,910-comparison isolation,shortlist,retained initial path-alias replay failure and dual-checkout verification;no DFT inputs or new labels.
+- archive/fe110_targeted_shortlist_20261025/;configs/fe110_reico_pilot/targeted_shortlist_20261025_v1.json;tests/test_targeted_shortlist_20261025.py:labelled target-graph source selection,reserved/magnetic/fragment exclusions and independent POSCAR replay.
