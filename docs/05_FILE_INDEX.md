@@ -313,3 +313,7 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - docs/reviews/fe110_grouped_supplement_20261025/:12new single-point candidates,2reserve points,2separate labelled optimization sources,all189type dispositions,138approximate environment clusters and source/validation hashes.
 - calculations/fe110_reico_pilot300_20261022/grouped_supplement_20261025_v1/:local full candidate records,mutual SOAP distances,2384-comparison isolation,16native geometry checks and publication-code replay including initial cwd failure;no newDFT inputs or labels.
 - archive/fe110_grouped_supplement_20261025/;tests/test_grouped_supplement_20261025.py:training-only fixed-threshold complete-link grouping,nontransitive clustering/graph-boundary tests and independent candidate geometry verification.
+
+- docs/reviews/fe110_grouped_inputs_20261025/:exact12single-point+2bounded80-step optimization input inventory,parameter branches,remotePOTCARsource metadata,reference core-hour budget and validation bindings.
+- calculations/fe110_reico_pilot300_20261022/grouped_inputs_20261025_v1/:14local native input packages,canonical preflights/Custodian reviews,cost references,binding/verification and retained initial timing-parser failure;no POTCARbody or submissions.
+- archive/fe110_grouped_inputs_20261025/;tests/test_grouped_inputs_20261025.py:resumable local preparation/native bundle rechecks,bounded OUTCARtiming plus OSZICARstep validation,and independent input verification;no remote executor.

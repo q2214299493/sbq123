@@ -1,0 +1,83 @@
+{
+  "status": "LOCAL12_PLUS2_INPUTS_VALIDATED_NOT_SUBMITTED",
+  "primary_tests": 25,
+  "publication_tests": 21,
+  "actual_input_preflights": 14,
+  "custodian_reviews": 14,
+  "budget": {
+    "single_points": 12,
+    "optimizations": 2,
+    "cores_per_job": 32,
+    "max_ionic_steps_per_optimization": 80,
+    "automatic_continuation": false,
+    "account_core_quota_planning_assumption": 128,
+    "max_concurrent_jobs_assuming_empty_account": 4,
+    "single_point_reference_core_hours": [
+      219.98048,
+      287.34592
+    ],
+    "optimization_reference_core_hours": [
+      647.8021511111111,
+      735.3996977777778
+    ],
+    "combined_reference_core_hours": [
+      867.7826311111112,
+      1022.7456177777777
+    ],
+    "separate_batches_ideal_hours_without_queue": [
+      11.840506111111111,
+      13.735510277777777
+    ],
+    "cost_is_historical_envelope_not_confidence_interval_or_cap": true,
+    "optimization_reference_mismatch": "C3-only old runs haveNPAR4 and noLORBIT;new canonical C2H3/C3 runs write local moments and inherit defaultNPAR;analogy only",
+    "monetary_cost": null,
+    "account_price_per_core_hour": "UNKNOWN",
+    "live_quota_queue_and_target_POTCAR_rechecks_required": true
+  },
+  "source_files": [
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\archive\\fe110_grouped_inputs_20261025\\prepare.py",
+      "sha256": "3760d1b72230514c8f837ade2b7e93d8e6691b759833a3fea0eb6ae6fc405dde"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\archive\\fe110_grouped_inputs_20261025\\verify.py",
+      "sha256": "6b5a5b5c8550c844655a87abbaf145d3666f1c29b4647a6c57747a4eced10ed0"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\grouped_inputs_20261025_v1\\cost_reference_initial_failure.json",
+      "sha256": "04b25bf41c87bc6e4244ab35bcf1e36a079c4280741823b84f25b917850fe923"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\grouped_inputs_20261025_v1\\input_binding.json",
+      "sha256": "7b7d6ca27dcc4d3242ec71b87a12587fcf2d27a2e11f5cbe5a2f815a3bf8ef68"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\grouped_inputs_20261025_v1\\verification.json",
+      "sha256": "1ced22b960da1575bfafc085ac443c9a1b709f0f561013b051ef7a2d34f4b75f"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\grouped_inputs_potcar_check_20261025_v1.json",
+      "sha256": "4101a9663ac673f8189f64c1234ecde454af5ac43533995071a77189e1a26c85"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\grouped_inputs_potcar_check_20261025_v2.json",
+      "sha256": "e0dc18922d544cf01ef96015d281bb3850f4b74da14510f0eb82e9c5e6b0c037"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\docs\\reviews\\fe110_grouped_inputs_20261025\\README.md",
+      "sha256": "0b97db4df22760601a59aa7b715ea7065081efdf665296eedd5950dc19c3a37f"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\docs\\reviews\\fe110_grouped_inputs_20261025\\cost_reference.json",
+      "sha256": "0bca470df7ba7390574d630a48d0dda3cca13060a1b04ee30e7a4f6a35498534"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\docs\\reviews\\fe110_grouped_inputs_20261025\\input_plan.json",
+      "sha256": "c4d07263fd11564c6a682dab3dae3a45119941fe1949b2e2b9ad810340908ab5"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\tests\\test_grouped_inputs_20261025.py",
+      "sha256": "498ce42d094391b8027b736d39404930151cff7b1462074a7852af3fdb3e0583"
+    }
+  ]
+}
