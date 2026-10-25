@@ -309,3 +309,7 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - docs/reviews/fe110_targeted_shortlist_20261025/:five non-executable source/review proposals,per-object gap and use conditions,geometry table,label-budget boundary and verification hashes.
 - calculations/fe110_reico_pilot300_20261022/targeted_shortlist_20261025_v1/:five independent geometry audits,source/geometry binding,910-comparison isolation,shortlist,retained initial path-alias replay failure and dual-checkout verification;no DFT inputs or new labels.
 - archive/fe110_targeted_shortlist_20261025/;configs/fe110_reico_pilot/targeted_shortlist_20261025_v1.json;tests/test_targeted_shortlist_20261025.py:labelled target-graph source selection,reserved/magnetic/fragment exclusions and independent POSCAR replay.
+
+- docs/reviews/fe110_grouped_supplement_20261025/:12new single-point candidates,2reserve points,2separate labelled optimization sources,all189type dispositions,138approximate environment clusters and source/validation hashes.
+- calculations/fe110_reico_pilot300_20261022/grouped_supplement_20261025_v1/:local full candidate records,mutual SOAP distances,2384-comparison isolation,16native geometry checks and publication-code replay including initial cwd failure;no newDFT inputs or labels.
+- archive/fe110_grouped_supplement_20261025/;tests/test_grouped_supplement_20261025.py:training-only fixed-threshold complete-link grouping,nontransitive clustering/graph-boundary tests and independent candidate geometry verification.
