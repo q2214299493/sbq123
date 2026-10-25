@@ -317,3 +317,7 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - docs/reviews/fe110_grouped_inputs_20261025/:exact12single-point+2bounded80-step optimization input inventory,parameter branches,remotePOTCARsource metadata,reference core-hour budget and validation bindings.
 - calculations/fe110_reico_pilot300_20261022/grouped_inputs_20261025_v1/:14local native input packages,canonical preflights/Custodian reviews,cost references,binding/verification and retained initial timing-parser failure;no POTCARbody or submissions.
 - archive/fe110_grouped_inputs_20261025/;tests/test_grouped_inputs_20261025.py:resumable local preparation/native bundle rechecks,bounded OUTCARtiming plus OSZICARstep validation,and independent input verification;no remote executor.
+
+- docs/reviews/fe110_grouped_submission_20261025/:human exact14authorization,14native-success job list,first2RUN/12PENDsnapshot,registry/readback facts and validation hashes.
+- calculations/fe110_reico_pilot300_20261022/grouped_submission_20261025_v1/:read-only runtime/quota/POTCAR/target checks,14bound gates and success summary,raw exact-ID LSF evidence,reviewed288row registry plan/approval/receipt/readbacks;no accepted results.
+- archive/fe110_grouped_submission_20261025/;tests/test_grouped_submission_20261025.py:canonical mixed-kind14scope submission,non-retry receipt safeguards,exact scheduler evidence and provenance-only registry/readback;no direct bsub or scientific acceptance.
