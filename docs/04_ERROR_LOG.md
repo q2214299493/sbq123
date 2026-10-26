@@ -74,3 +74,7 @@ Update this table in place. Move resolved items to historical results or Git his
 - family_0028_step000(job9919443,C3H2Otrain):normal completion and83-stepSCF;Fe0based39local moment=-0.953muB,44of45Fe positive,total102.1782971muB.StatusMAGNETIC_REVIEW_REQUIRED;full raw evidence retained,not admitted to training.
 - family_0086_step000(job9919414,C3H2Otrain):normal termination,no recognized fatal keyword;iteration200/NELM200,lastOSZICARdE=-8.7262e-4eV,EDIFF1e-6eV.OUTCAR has EDIFF termination marker but original label rule rejects reaching NELM;statusREJECTED_OR_INCOMPLETE.Do not reclassify as accepted or infer convergence from marker alone.
 - No recovery computation or parameter changes authorized/executed;both remain separately reviewable.84collections all succeeded;these are scientific label-admission exceptions,not transfer failures.Evidence:docs/reviews/fe110_completed_label_qc_20261024/README.md and completed_label_qc_20261024_v1/case_qc/.
+
+## 2026-10-26 - Grouped static9922612 withheld at NELM boundary
+
+family_0021_step004/C2HO finished normally but reached200/NELM200; lastSCFdeltaE=-9.8411e-5eV anddeltaeps=-2.1269e-5eV vsEDIFF1e-6eV. The generic marker summary can sayconverged; the established strict static validator rejects the NELM boundary. Exclude from training candidates; retain rawoutputs and source identity. No retry authorized or submitted. Evidence: calculations/fe110_reico_pilot300_20261022/grouped_qc_20261026_v2/independent_verification.json. Resolution pending any separately authorized recovery decision.

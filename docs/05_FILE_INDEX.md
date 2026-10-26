@@ -321,3 +321,7 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - docs/reviews/fe110_grouped_submission_20261025/:human exact14authorization,14native-success job list,first2RUN/12PENDsnapshot,registry/readback facts and validation hashes.
 - calculations/fe110_reico_pilot300_20261022/grouped_submission_20261025_v1/:read-only runtime/quota/POTCAR/target checks,14bound gates and success summary,raw exact-ID LSF evidence,reviewed288row registry plan/approval/receipt/readbacks;no accepted results.
 - archive/fe110_grouped_submission_20261025/;tests/test_grouped_submission_20261025.py:canonical mixed-kind14scope submission,non-retry receipt safeguards,exact scheduler evidence and provenance-only registry/readback;no direct bsub or scientific acceptance.
+
+- `docs/reviews/fe110_grouped_qc_20261026/README.md`, `candidate_index.json`, `checkpoint_v3.json`: completed14-job recovery;172frame audit/171PASS,169eligible/27proposed force-label candidates;all splits and magnetic tiers retained.
+- `calculations/fe110_reico_pilot300_20261022/grouped_qc_20261026_v2/`: hash-verified raw14collections,all-frame QC/SCF diagnostics,force-table byte bindings,isolation,169/27candidate lists,138INSERT+14UPDATEreceipt/152readbacks,202test results. Local scientific evidence;no raw data or POTCAR publication.
+- `archive/fe110_grouped_qc_20261026/` and `tests/test_grouped_qc_20261026.py`: bounded collection/raw-frame review/replay/metadata registration/report code and tests. Failedv1SSHstdin evidence retained locally;current review usesv2.
