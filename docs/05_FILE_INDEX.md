@@ -337,3 +337,8 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `docs/reviews/fe110_c3_submission_20261027/`:exact human one-job authorization,9924387PEND firstsnapshot,source-bound submission/registry/test checkpoint.
 - `archive/fe110_c3_submission_20261027/`, `tests/test_c3_submission_20261027.py`:single-budget native gate/executor orchestration,nonretry safeguards and provenance-only registration/readback;207primary/192publicationtests.
 - `calculations/fe110_reico_pilot300_20261022/c3_submission_20261027_v1/`:immutable execution copy/gate/receipt,scheduler evidence,reviewed26row registry plan/approval/receipt/readbacks and diagnostics;POTCARbody remains remote.
+
+- `docs/reviews/fe110_training512_20261027/`:one512frame force-trial proposal/requestSHA,budget,validation boundaries and44/44tests;not deployed/trained.
+- `configs/fe110_reico_pilot/training512_20261027_v1.json`, `archive/fe110_training512_20261027/`, `tests/test_training512_20261027.py`:bounded local package preparation,independent dataset/config/runtime verification andportable synthetic test fixtures.
+- `calculations/fe110_reico_pilot300_20261022/training512_20261027_v1/`:immutable executable training request/native preflight,1972source/1987artifact checks,execution-policy proposal,validation plan,read-onlyMZ73resource/CPUarchitecture probes andtestreceipts;private labels/weights stay outofGit.
+- `scripts/adsorption/direct_force_training.py`:explicit hash-bound singlearm support with unchanged historical defaulttwoarm scope;existing bounded trainer/runtime dependencies included inpublication source for this trial.
