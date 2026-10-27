@@ -1,0 +1,1273 @@
+{
+  "status": "ML_PAIR2_COMPLETE_DFT4_PREPARED_AWAITING_BUDGET",
+  "request_sha256": "66639dd57cce930a923f8e25ff81aa438aaaab4286953530fbbf6b00e7014db3",
+  "models": {
+    "control": {
+      "path": "/home/sbq/sbq/adsorption_training_comparison_20261020_v2/control/output/direct-adsorption-role-ab-20261020-v2/candidate.pt",
+      "sha256": "cfcac123cd56b866a1ea36cc780a3aee634f3aeec979bda4ae8bee2cc831e523"
+    },
+    "new512": {
+      "path": "/home/sbq/sbq/fe110_force_training512_gpu0_20261027_v1/control/output/direct-fe110-force512-gpu0-20261027-v1/candidate.pt",
+      "sha256": "513decf4ebd823cf8f87a79e787fdbd543b657fd582184f2ab23845d281d6aeb"
+    }
+  },
+  "limits": {
+    "seed_max_steps": 80,
+    "fmax_eV_per_A": 0.1,
+    "LBFGS_maxstep_A": 0.2
+  },
+  "producer_elapsed_seconds": 26.355506,
+  "cases": [
+    {
+      "model": "control",
+      "name": "10_A",
+      "origin": "seed",
+      "source_structure_sha256": "04990eb8ae6dc84d9626dd0480220201664499f79c389d1c6070081325497d4b",
+      "status": "ML_CONVERGED",
+      "optimizer_steps": 47,
+      "converged": true,
+      "error": null,
+      "elapsed_seconds": 2.7757431399077177,
+      "max_steps": 80,
+      "ML_optimizer_fmax_target_eV_A": 0.1,
+      "scientific_acceptance": false,
+      "ML_movable_fmax_eV_A": 0.09045077860355377,
+      "composition": "C2H3",
+      "trajectory_audit": {
+        "frames": 48,
+        "fixed_max_displacement_A": 9.415629500741929e-16,
+        "maximum_adjacent_atom_displacement_A": 0.2000000000000001,
+        "minimum_pair_distance_over_trajectory_A": 1.0512650363312295,
+        "graph_changed_frames_0based": [],
+        "seed_graph": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ]
+        ],
+        "final_graph": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ]
+        ],
+        "final_graph_preserved": true,
+        "ML_fmax_history_eV_A": [
+          3.5987626403477178,
+          3.1016691773331173,
+          2.60696200570616,
+          3.175529307820067,
+          3.2243922718980564,
+          1.9158353301588766,
+          1.3354975255188613,
+          1.163431844176915,
+          0.9876484662122118,
+          1.0665205167939278,
+          0.7912670928668204,
+          0.5697114976290906,
+          0.4172081930505269,
+          0.29303838548983513,
+          0.2851568677946794,
+          0.5067995975316134,
+          0.6485320792561449,
+          0.5876703794042838,
+          0.3613540461893619,
+          0.3910381477727393,
+          0.4291535433086798,
+          0.35893875076041054,
+          0.25017486697181557,
+          0.2684861995239096,
+          0.4257388580613875,
+          0.5658440807191479,
+          0.6095085885144728,
+          0.440609846904942,
+          0.5079277032036583,
+          0.489249580817545,
+          0.5820087123948215,
+          0.31740627456557385,
+          0.5217911013865021,
+          0.3767722224401408,
+          0.6855954900008244,
+          0.9416298623636005,
+          0.8927575428180324,
+          0.5703259565012905,
+          0.6187058110347219,
+          0.7262998700244476,
+          0.4458955558642427,
+          0.3619450517109143,
+          0.5520383549463246,
+          0.24231654533616526,
+          0.16270889222436422,
+          0.15435703820894822,
+          0.10752081886263244,
+          0.09045078010156231
+        ]
+      },
+      "initial_placement_checker_on_final_diagnostic_only": {
+        "verdict": "block",
+        "site_label": "η²(C,C)/h-t",
+        "atom_site_details": [
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 1.9954307587701507,
+            "site": "hollow",
+            "lateral_offset_angstrom": 0.18331444091198518
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.111951342487593,
+            "site": "top",
+            "lateral_offset_angstrom": 0.376468631471819
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 1.9954307587701507,
+        "nearest_h_fe_angstrom": 1.7763695479279153,
+        "minimum_adsorbate_height_angstrom": 1.2949308215506754,
+        "maximum_bond_length_change_angstrom": 0.0,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": false,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [
+          "short_H-Fe_contact_below_1.90_angstrom_review_at_early_relaxation",
+          "adsorbate_atom_below_1.60_angstrom_above_top_Fe_review_at_early_relaxation"
+        ],
+        "needs_early_relaxation_review": true
+      },
+      "post_relaxation_geometry_review": {
+        "status": "DIAGNOSTIC_DFT_GEOMETRY_READY",
+        "diagnostic_DFT_geometry_ready": true,
+        "scientifically_accepted": false,
+        "minimum_pair_distance_A": 1.0941520515251184,
+        "minimum_height_above_highest_relaxed_Fe_A": 1.2949308215506754,
+        "maximum_slab_displacement_A": 0.12154867817249855,
+        "fragment_formulas_from_connectivity": [
+          "C2H3"
+        ],
+        "intact_original_target_retained": true,
+        "initial_CARE_placement_height_threshold_applied_as_final_gate": false,
+        "interpretation": "intact ML candidate;DFT acceptance pending"
+      },
+      "final_POSCAR_sha256": "67ecb64cbed6723eb303cf1b0d4caa2da22dacc0f17d2ff9e671c49b009ea685",
+      "geometry_eligible_for_DFT_review": true,
+      "DFT_force_or_convergence_verified": false
+    },
+    {
+      "model": "control",
+      "name": "C3_05",
+      "origin": "seed",
+      "source_structure_sha256": "6ed0169ab43c93e3b53092ea2bc76a5179f833752e9f1ccb0eabc61b76a63868",
+      "status": "ML_CONVERGED",
+      "optimizer_steps": 68,
+      "converged": true,
+      "error": null,
+      "elapsed_seconds": 3.584361508022994,
+      "max_steps": 80,
+      "ML_optimizer_fmax_target_eV_A": 0.1,
+      "scientific_acceptance": false,
+      "ML_movable_fmax_eV_A": 0.07026240229606628,
+      "composition": "C3H2O",
+      "trajectory_audit": {
+        "frames": 69,
+        "fixed_max_displacement_A": 1.8831259001483858e-15,
+        "maximum_adjacent_atom_displacement_A": 0.2000000000000039,
+        "minimum_pair_distance_over_trajectory_A": 1.074868894092866,
+        "graph_changed_frames_0based": [
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68
+        ],
+        "seed_graph": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "final_graph": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "final_graph_preserved": false,
+        "ML_fmax_history_eV_A": [
+          6.843834950307902,
+          3.791936586321533,
+          8.049736285517216,
+          2.8668654103340243,
+          1.7117293914434109,
+          2.490823119031219,
+          1.8530484301386196,
+          1.307993229349059,
+          0.9127162542851779,
+          0.6971044619619396,
+          0.7342280916351238,
+          0.5460872265725787,
+          0.36836295264827273,
+          0.39268909143706243,
+          0.4328194684945321,
+          0.4557811526400628,
+          0.512014745749995,
+          0.42653515746301723,
+          0.5130484391661904,
+          0.43536705544538,
+          0.6136510538312692,
+          0.7064475623779307,
+          0.4986953544646879,
+          0.5201484251519987,
+          0.887483326668754,
+          0.516899322582309,
+          0.49957918672412815,
+          0.7701859496735082,
+          0.745066262761398,
+          0.7065987697037145,
+          0.41897611487615877,
+          0.6371210847083626,
+          0.33814194378773527,
+          0.543060304330437,
+          1.2032865145784768,
+          1.4170345948120995,
+          1.4063615550950932,
+          1.048279372400773,
+          1.5200643092894555,
+          1.017955426070354,
+          0.6485182357433338,
+          0.567065007432261,
+          0.7509900664890508,
+          0.3750392430362046,
+          0.2835996024785773,
+          0.29061835366122074,
+          0.38517457523465487,
+          0.33397578657424376,
+          0.2710109235065775,
+          0.18949736687042049,
+          0.1672129793200726,
+          0.2578256659229353,
+          0.29457513325153184,
+          0.19848913980843025,
+          0.18265703141279965,
+          0.2070587957179268,
+          0.2530428817220741,
+          0.2130665096648369,
+          0.21608694193710268,
+          0.20117403695447536,
+          0.1953964898429436,
+          0.21008142520151543,
+          0.1866256000559669,
+          0.1565693584018152,
+          0.16617590619890907,
+          0.1556779576223704,
+          0.16699733953770812,
+          0.10105095106097702,
+          0.07026240064562897
+        ]
+      },
+      "initial_placement_checker_on_final_diagnostic_only": {
+        "verdict": "block",
+        "site_label": "η¹(C)/sb",
+        "atom_site_details": [
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 2.2036073055559853,
+            "site": "short_bridge",
+            "lateral_offset_angstrom": 0.6480789938324357
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 1.9244501297737593,
+            "site": "short_bridge",
+            "lateral_offset_angstrom": 1.2081123172473722
+          },
+          {
+            "atom": "C3",
+            "nearest_fe_angstrom": 1.8699478916606815,
+            "site": "short_bridge",
+            "lateral_offset_angstrom": 0.8289129415116049
+          },
+          {
+            "atom": "O1",
+            "nearest_fe_angstrom": 2.889401284508017,
+            "site": "short_bridge",
+            "lateral_offset_angstrom": 1.1503618332169634
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 1.8699478916606815,
+        "nearest_h_fe_angstrom": 2.74145862676537,
+        "minimum_adsorbate_height_angstrom": 0.7628861540251588,
+        "maximum_bond_length_change_angstrom": 0.0,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": false,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [
+          "adsorbate_atom_below_1.60_angstrom_above_top_Fe_review_at_early_relaxation"
+        ],
+        "needs_early_relaxation_review": true
+      },
+      "post_relaxation_geometry_review": {
+        "status": "DIAGNOSTIC_DFT_GEOMETRY_READY",
+        "diagnostic_DFT_geometry_ready": true,
+        "scientifically_accepted": false,
+        "minimum_pair_distance_A": 1.095628405571667,
+        "minimum_height_above_highest_relaxed_Fe_A": 0.7628861540251588,
+        "maximum_slab_displacement_A": 0.36534790153493174,
+        "fragment_formulas_from_connectivity": [
+          "C2H2",
+          "CO"
+        ],
+        "intact_original_target_retained": false,
+        "initial_CARE_placement_height_threshold_applied_as_final_gate": false,
+        "interpretation": "C3 fragmentation is a diagnostic product candidate;not an intact C3 success"
+      },
+      "final_POSCAR_sha256": "4653f06227c4a5007b290a1e737cd23c86d6e66dada0af5f98b76397809aad27",
+      "geometry_eligible_for_DFT_review": true,
+      "DFT_force_or_convergence_verified": false
+    },
+    {
+      "model": "new512",
+      "name": "10_A",
+      "origin": "seed",
+      "source_structure_sha256": "04990eb8ae6dc84d9626dd0480220201664499f79c389d1c6070081325497d4b",
+      "status": "ML_CONVERGED",
+      "optimizer_steps": 48,
+      "converged": true,
+      "error": null,
+      "elapsed_seconds": 2.538410923909396,
+      "max_steps": 80,
+      "ML_optimizer_fmax_target_eV_A": 0.1,
+      "scientific_acceptance": false,
+      "ML_movable_fmax_eV_A": 0.08802463859319687,
+      "composition": "C2H3",
+      "trajectory_audit": {
+        "frames": 49,
+        "fixed_max_displacement_A": 9.415629500741929e-16,
+        "maximum_adjacent_atom_displacement_A": 0.19999999999999965,
+        "minimum_pair_distance_over_trajectory_A": 1.0532978302445661,
+        "graph_changed_frames_0based": [],
+        "seed_graph": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ]
+        ],
+        "final_graph": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ]
+        ],
+        "final_graph_preserved": true,
+        "ML_fmax_history_eV_A": [
+          3.6627700984959657,
+          3.161151282066426,
+          2.715208040995228,
+          3.117560573127254,
+          3.5609166471541123,
+          1.8887335296242738,
+          1.3066756390156453,
+          1.2485145710268954,
+          1.0416495306715075,
+          1.0713961225070183,
+          0.7576768442720235,
+          0.5975192863065768,
+          0.43470751826759785,
+          0.3226021771775815,
+          0.3126808006536485,
+          0.5147756387848162,
+          0.637745652137356,
+          0.5463465468784162,
+          0.3129378581078777,
+          0.3741044143006305,
+          0.3867141774979534,
+          0.31743371405329873,
+          0.24594820215268864,
+          0.2801464157182165,
+          0.428021953789414,
+          0.5734507475280836,
+          0.5755813236131492,
+          0.47199920858647926,
+          0.5195246465058028,
+          0.5693891618273302,
+          0.6683488634476183,
+          0.3745462898272635,
+          0.4753061449954881,
+          0.540666889559087,
+          0.7361373316322604,
+          0.8125287354847816,
+          0.5697079168538458,
+          0.5215963854303884,
+          0.6471175161778537,
+          0.5619320102121502,
+          0.2988225843412852,
+          0.31660954789996953,
+          0.24496057982394148,
+          0.19507190966662005,
+          0.23560213695441945,
+          0.14907325413353384,
+          0.1635894611784392,
+          0.11229832860549405,
+          0.08802464503543692
+        ]
+      },
+      "initial_placement_checker_on_final_diagnostic_only": {
+        "verdict": "block",
+        "site_label": "η²(C,C)/h-t",
+        "atom_site_details": [
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 1.991790936692711,
+            "site": "hollow",
+            "lateral_offset_angstrom": 0.16934782600269307
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 2.10843613341877,
+            "site": "top",
+            "lateral_offset_angstrom": 0.3673008293073917
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 1.991790936692711,
+        "nearest_h_fe_angstrom": 1.792152931815694,
+        "minimum_adsorbate_height_angstrom": 1.2957206442099363,
+        "maximum_bond_length_change_angstrom": 0.0,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": false,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [
+          "short_H-Fe_contact_below_1.90_angstrom_review_at_early_relaxation",
+          "adsorbate_atom_below_1.60_angstrom_above_top_Fe_review_at_early_relaxation"
+        ],
+        "needs_early_relaxation_review": true
+      },
+      "post_relaxation_geometry_review": {
+        "status": "DIAGNOSTIC_DFT_GEOMETRY_READY",
+        "diagnostic_DFT_geometry_ready": true,
+        "scientifically_accepted": false,
+        "minimum_pair_distance_A": 1.0941894198545823,
+        "minimum_height_above_highest_relaxed_Fe_A": 1.2957206442099363,
+        "maximum_slab_displacement_A": 0.11921542269811636,
+        "fragment_formulas_from_connectivity": [
+          "C2H3"
+        ],
+        "intact_original_target_retained": true,
+        "initial_CARE_placement_height_threshold_applied_as_final_gate": false,
+        "interpretation": "intact ML candidate;DFT acceptance pending"
+      },
+      "final_POSCAR_sha256": "eff75f0b79b7b92784c7e490912ebb7ca66568bea662a0de4e42a44f9994337f",
+      "geometry_eligible_for_DFT_review": true,
+      "DFT_force_or_convergence_verified": false
+    },
+    {
+      "model": "new512",
+      "name": "C3_05",
+      "origin": "seed",
+      "source_structure_sha256": "6ed0169ab43c93e3b53092ea2bc76a5179f833752e9f1ccb0eabc61b76a63868",
+      "status": "STEP_LIMIT_NOT_CONVERGED",
+      "optimizer_steps": 80,
+      "converged": false,
+      "error": null,
+      "elapsed_seconds": 4.211547392886132,
+      "max_steps": 80,
+      "ML_optimizer_fmax_target_eV_A": 0.1,
+      "scientific_acceptance": false,
+      "ML_movable_fmax_eV_A": 0.22869695723056793,
+      "composition": "C3H2O",
+      "trajectory_audit": {
+        "frames": 81,
+        "fixed_max_displacement_A": 1.8831259001483858e-15,
+        "maximum_adjacent_atom_displacement_A": 0.20000000000000193,
+        "minimum_pair_distance_over_trajectory_A": 1.0736302711170589,
+        "graph_changed_frames_0based": [
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80
+        ],
+        "seed_graph": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "final_graph": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "final_graph_preserved": false,
+        "ML_fmax_history_eV_A": [
+          6.893322921124148,
+          3.8828820401892843,
+          8.084143321113723,
+          3.205294941321863,
+          1.6916570747027964,
+          2.047483884992357,
+          1.9345155830849006,
+          1.123488120788691,
+          0.9269430888890382,
+          0.8046843170643236,
+          0.9721190979207694,
+          0.6042529729866619,
+          0.35428724395278166,
+          0.35235595892612653,
+          0.47483951954517434,
+          0.6079203331712468,
+          0.4662451422246776,
+          0.3742581113823959,
+          0.4382458420424735,
+          0.5001650038588257,
+          0.6416306949244199,
+          0.7910638243896282,
+          0.4822941186921368,
+          0.5860916624331571,
+          0.6626460828136008,
+          0.6210767760388332,
+          0.5356543093669991,
+          0.688621610321752,
+          0.5898682023285495,
+          0.46842475220554675,
+          0.40935312673544233,
+          0.4892028584516754,
+          0.37552533900722607,
+          0.32792894033696407,
+          0.30763805785137377,
+          0.303152396613621,
+          0.2125879058666753,
+          0.20134885896590762,
+          0.19236231507003912,
+          0.20605983507806952,
+          0.5243782609272566,
+          2.452161075602671,
+          0.46055653487125864,
+          0.4331807249183932,
+          0.1566793884474545,
+          0.8180391904680671,
+          0.16457294349765308,
+          0.21612436734653442,
+          0.17733418896568795,
+          0.20731280805432853,
+          0.46228603340926294,
+          0.3122760557342138,
+          0.3049445923488982,
+          2.5446724590102563,
+          2.1139864237403345,
+          4.956081254323351,
+          2.6582149205005576,
+          1.3270422673832984,
+          0.9197676057663974,
+          0.9631229619742024,
+          0.49850836081140765,
+          0.76154959845193,
+          0.5877766751302915,
+          0.2759661124881912,
+          0.2742383407346197,
+          0.2801015486729732,
+          0.25197638593950494,
+          0.27851158949513055,
+          0.3125747407851727,
+          0.25991822548911114,
+          0.2149814799052403,
+          0.15709944755107086,
+          0.15938088305211315,
+          0.19482166746394533,
+          0.2064873115037159,
+          0.21550429278678288,
+          0.2115603997865937,
+          0.22894308598376328,
+          0.17215694909359414,
+          0.15884705502074029,
+          0.22869696752060445
+        ]
+      },
+      "initial_placement_checker_on_final_diagnostic_only": {
+        "verdict": "block",
+        "site_label": "η²(C,C)/sb-sb",
+        "atom_site_details": [
+          {
+            "atom": "C1",
+            "nearest_fe_angstrom": 2.213570125251648,
+            "site": "short_bridge",
+            "lateral_offset_angstrom": 0.6519354304530529
+          },
+          {
+            "atom": "C2",
+            "nearest_fe_angstrom": 1.9099580377536343,
+            "site": "short_bridge",
+            "lateral_offset_angstrom": 1.172598410859937
+          },
+          {
+            "atom": "C3",
+            "nearest_fe_angstrom": 1.8710838441010689,
+            "site": "short_bridge",
+            "lateral_offset_angstrom": 0.752545456395336
+          },
+          {
+            "atom": "O1",
+            "nearest_fe_angstrom": 2.8134407128809285,
+            "site": "short_bridge",
+            "lateral_offset_angstrom": 1.0678542117208294
+          }
+        ],
+        "nearest_heavy_fe_angstrom": 1.8710838441010689,
+        "nearest_h_fe_angstrom": 2.771453632732064,
+        "minimum_adsorbate_height_angstrom": 0.7670760899515034,
+        "maximum_bond_length_change_angstrom": 0.0,
+        "connectivity_edges_local_0based": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "checks": {
+          "composition_and_order": true,
+          "bottom_18_fe_fixed": true,
+          "adsorbate_fully_mobile": true,
+          "connectivity_preserved": true,
+          "internal_geometry_preserved": true,
+          "adsorbate_above_surface": false,
+          "no_hard_heavy_fe_contact": true,
+          "no_hard_h_fe_contact": true
+        },
+        "warnings": [
+          "adsorbate_atom_below_1.60_angstrom_above_top_Fe_review_at_early_relaxation"
+        ],
+        "needs_early_relaxation_review": true
+      },
+      "post_relaxation_geometry_review": {
+        "status": "DIAGNOSTIC_DFT_GEOMETRY_READY",
+        "diagnostic_DFT_geometry_ready": true,
+        "scientifically_accepted": false,
+        "minimum_pair_distance_A": 1.0960392836040174,
+        "minimum_height_above_highest_relaxed_Fe_A": 0.7670760899515034,
+        "maximum_slab_displacement_A": 0.38311797944194587,
+        "fragment_formulas_from_connectivity": [
+          "C2H2",
+          "CO"
+        ],
+        "intact_original_target_retained": false,
+        "initial_CARE_placement_height_threshold_applied_as_final_gate": false,
+        "interpretation": "C3 fragmentation is a diagnostic product candidate;not an intact C3 success"
+      },
+      "final_POSCAR_sha256": "13faa714f588c00c30f83a436d4066912126b6272ae2e64c0a51b691da4bd225",
+      "geometry_eligible_for_DFT_review": true,
+      "DFT_force_or_convergence_verified": false
+    }
+  ],
+  "old_new_final_geometry": {
+    "10_A": {
+      "adsorbate_RMSD_A": 0.04562549198868341,
+      "heavy_adsorbate_RMSD_A": 0.03464764893769868,
+      "movable_Fe_RMSD_A": 0.012502231409899884,
+      "slab_RMSD_A": 0.009684186808194705,
+      "adsorbate_max_displacement_A": 0.05925766061002088,
+      "reference_graph": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ]
+      ],
+      "final_graph": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ]
+      ],
+      "minimum_pair_distance_A": 1.0941894198545823,
+      "nearest_Fe": [
+        {
+          "atom_index_0based": 45,
+          "symbol": "C",
+          "Fe_index_0based": 43,
+          "distance_A": 1.9917909366927118,
+          "height_A": 16.826407429958163
+        },
+        {
+          "atom_index_0based": 46,
+          "symbol": "C",
+          "Fe_index_0based": 41,
+          "distance_A": 2.108436133418771,
+          "height_A": 17.580186419143335
+        },
+        {
+          "atom_index_0based": 47,
+          "symbol": "H",
+          "Fe_index_0based": 40,
+          "distance_A": 1.792152931815693,
+          "height_A": 17.194620549360664
+        },
+        {
+          "atom_index_0based": 48,
+          "symbol": "H",
+          "Fe_index_0based": 41,
+          "distance_A": 2.774167175691728,
+          "height_A": 18.20980561920415
+        },
+        {
+          "atom_index_0based": 49,
+          "symbol": "H",
+          "Fe_index_0based": 41,
+          "distance_A": 2.7398834774518517,
+          "height_A": 17.96681111352502
+        }
+      ],
+      "C_O_distances": [],
+      "same_graph_between_ML_models": true
+    },
+    "C3_05": {
+      "adsorbate_RMSD_A": 0.09796706770405403,
+      "heavy_adsorbate_RMSD_A": 0.10401057021943833,
+      "movable_Fe_RMSD_A": 0.025846508991330282,
+      "slab_RMSD_A": 0.02002061977620449,
+      "adsorbate_max_displacement_A": 0.17408763637278132,
+      "reference_graph": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "final_graph": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "minimum_pair_distance_A": 1.0960392836040174,
+      "nearest_Fe": [
+        {
+          "atom_index_0based": 45,
+          "symbol": "C",
+          "Fe_index_0based": 44,
+          "distance_A": 2.2135701252516475,
+          "height_A": 17.74282211491383
+        },
+        {
+          "atom_index_0based": 46,
+          "symbol": "C",
+          "Fe_index_0based": 39,
+          "distance_A": 1.9099580377536336,
+          "height_A": 16.61093290547846
+        },
+        {
+          "atom_index_0based": 47,
+          "symbol": "C",
+          "Fe_index_0based": 44,
+          "distance_A": 1.871083844101069,
+          "height_A": 16.983947415054157
+        },
+        {
+          "atom_index_0based": 48,
+          "symbol": "O",
+          "Fe_index_0based": 37,
+          "distance_A": 2.8134407128809302,
+          "height_A": 18.064790352543316
+        },
+        {
+          "atom_index_0based": 49,
+          "symbol": "H",
+          "Fe_index_0based": 44,
+          "distance_A": 2.771453632732064,
+          "height_A": 18.39525074295328
+        },
+        {
+          "atom_index_0based": 50,
+          "symbol": "H",
+          "Fe_index_0based": 44,
+          "distance_A": 2.851460818812571,
+          "height_A": 18.21574014661645
+        }
+      ],
+      "C_O_distances": [
+        {
+          "C_index_0based": 45,
+          "O_index_0based": 48,
+          "distance_A": 5.206294444186424
+        },
+        {
+          "C_index_0based": 46,
+          "O_index_0based": 48,
+          "distance_A": 5.179354716046204
+        },
+        {
+          "C_index_0based": 47,
+          "O_index_0based": 48,
+          "distance_A": 1.207128199115054
+        }
+      ],
+      "same_graph_between_ML_models": true
+    }
+  },
+  "DFT_job_bundles": [
+    {
+      "name": "10_A",
+      "model": "control",
+      "path": "calculations/fe110_reico_pilot300_20261022/paired_relaxation2_20261027_v2/dft_screen80/10_A/control",
+      "bundle_sha256": "83b46d6b0dc8678d071fe8dc424ea3f2daa2fff49a69d45a3c33e8f29323dbff",
+      "files": {
+        "INCAR": "af4c80853cfdc0fcdf571fbfd607ceabba31c4210d6f853d081356c3ed2ec937",
+        "KPOINTS": "0d7e291117433dac5393f29520b635e92f06e6c8e91aa941137c86b1d39162ae",
+        "POTCAR.spec": "865dbddcfb8f5c9ab513eeda22b717d344883bdd4b1a6a3d3fa717e931450a84",
+        "script.lsf": "cd33ce86388d6f34a05348efc4e64508b7d0e7d5d24a3ce5226cc4f9a6a1d9a0",
+        "POSCAR": "67ecb64cbed6723eb303cf1b0d4caa2da22dacc0f17d2ff9e671c49b009ea685",
+        "candidate_manifest.json": "89529bc76aaf148aaab26b3332978859cf663e6ea69c0f9e52715dcf9250bf68"
+      },
+      "preflight_passed": true,
+      "original_seed_sha256": "04990eb8ae6dc84d9626dd0480220201664499f79c389d1c6070081325497d4b",
+      "starting_chemical_fragments": [
+        "C2H3"
+      ],
+      "scheduler_job_id": null,
+      "submitted": false
+    },
+    {
+      "name": "C3_05",
+      "model": "control",
+      "path": "calculations/fe110_reico_pilot300_20261022/paired_relaxation2_20261027_v2/dft_screen80/C3_05/control",
+      "bundle_sha256": "8756561ed9f95dd4dd8e151e1b479cfbe53d8a1d4c1df1f23a2261190374442d",
+      "files": {
+        "INCAR": "8f9ee857d8338885b2ae64680303edebbf9585920a448c56ce02950beede81cc",
+        "KPOINTS": "0d7e291117433dac5393f29520b635e92f06e6c8e91aa941137c86b1d39162ae",
+        "POTCAR.spec": "9528f5cac58de3cc83a576c828915ce9c2ab72d4ec3be5e409f7476042f7e1bb",
+        "script.lsf": "cd33ce86388d6f34a05348efc4e64508b7d0e7d5d24a3ce5226cc4f9a6a1d9a0",
+        "POSCAR": "4653f06227c4a5007b290a1e737cd23c86d6e66dada0af5f98b76397809aad27",
+        "candidate_manifest.json": "d0f8a5fb6e3c98fc1436fc67a6ba2d4f56e47a4be941079ea5cf78bc5066fc55"
+      },
+      "preflight_passed": true,
+      "original_seed_sha256": "6ed0169ab43c93e3b53092ea2bc76a5179f833752e9f1ccb0eabc61b76a63868",
+      "starting_chemical_fragments": [
+        "C2H2",
+        "CO"
+      ],
+      "scheduler_job_id": null,
+      "submitted": false
+    },
+    {
+      "name": "10_A",
+      "model": "new512",
+      "path": "calculations/fe110_reico_pilot300_20261022/paired_relaxation2_20261027_v2/dft_screen80/10_A/new512",
+      "bundle_sha256": "ed570a464955801d129bcd18a708a36425ee841b826052056757bff93a4cc099",
+      "files": {
+        "INCAR": "af4c80853cfdc0fcdf571fbfd607ceabba31c4210d6f853d081356c3ed2ec937",
+        "KPOINTS": "0d7e291117433dac5393f29520b635e92f06e6c8e91aa941137c86b1d39162ae",
+        "POTCAR.spec": "865dbddcfb8f5c9ab513eeda22b717d344883bdd4b1a6a3d3fa717e931450a84",
+        "script.lsf": "cd33ce86388d6f34a05348efc4e64508b7d0e7d5d24a3ce5226cc4f9a6a1d9a0",
+        "POSCAR": "eff75f0b79b7b92784c7e490912ebb7ca66568bea662a0de4e42a44f9994337f",
+        "candidate_manifest.json": "e8bb9764367b0b1d61c1c66327cf99f670b5dcce69329a9f4b053affa71216d0"
+      },
+      "preflight_passed": true,
+      "original_seed_sha256": "04990eb8ae6dc84d9626dd0480220201664499f79c389d1c6070081325497d4b",
+      "starting_chemical_fragments": [
+        "C2H3"
+      ],
+      "scheduler_job_id": null,
+      "submitted": false
+    },
+    {
+      "name": "C3_05",
+      "model": "new512",
+      "path": "calculations/fe110_reico_pilot300_20261022/paired_relaxation2_20261027_v2/dft_screen80/C3_05/new512",
+      "bundle_sha256": "b274f7ee129ce2742f74b108494a6237b6afe22e086b950f56e23c0aed5fcd5c",
+      "files": {
+        "INCAR": "8f9ee857d8338885b2ae64680303edebbf9585920a448c56ce02950beede81cc",
+        "KPOINTS": "0d7e291117433dac5393f29520b635e92f06e6c8e91aa941137c86b1d39162ae",
+        "POTCAR.spec": "9528f5cac58de3cc83a576c828915ce9c2ab72d4ec3be5e409f7476042f7e1bb",
+        "script.lsf": "cd33ce86388d6f34a05348efc4e64508b7d0e7d5d24a3ce5226cc4f9a6a1d9a0",
+        "POSCAR": "13faa714f588c00c30f83a436d4066912126b6272ae2e64c0a51b691da4bd225",
+        "candidate_manifest.json": "e7d7ec0ad483b01e4c4969b3b67ff0cb804bc8dddbdb154d2e2501fee82c7fe9"
+      },
+      "preflight_passed": true,
+      "original_seed_sha256": "6ed0169ab43c93e3b53092ea2bc76a5179f833752e9f1ccb0eabc61b76a63868",
+      "starting_chemical_fragments": [
+        "C2H2",
+        "CO"
+      ],
+      "scheduler_job_id": null,
+      "submitted": false
+    }
+  ],
+  "budget": {
+    "cores_each": 32,
+    "max_concurrent_cores": 128,
+    "NSW_each": 80,
+    "automatic_continuation_or_retry": false,
+    "force_criterion_eV_A": 0.02,
+    "EDIFF_eV": 1e-05,
+    "ISMEAR": 1,
+    "SIGMA_eV": 0.2,
+    "LORBIT": 11,
+    "live_queue_and_remote_POTCAR_recheck_required": true
+  },
+  "cost_reference": {
+    "C2_observations": [
+      {
+        "job_id": "9910789",
+        "observed_ionic_steps": 113,
+        "observed_elapsed_seconds": 81105.567,
+        "observed_cores": 32,
+        "allocated_core_hours": 720.9383733333333,
+        "linear_80step_core_hours_reference": 510.3988483775811
+      },
+      {
+        "job_id": "9910791",
+        "observed_ionic_steps": 76,
+        "observed_elapsed_seconds": 61785.955,
+        "observed_cores": 32,
+        "allocated_core_hours": 549.208488888889,
+        "linear_80step_core_hours_reference": 578.1141988304094
+      }
+    ],
+    "C3_observations": [
+      {
+        "job_id": "9629858",
+        "OUTCAR_sha256": "713d847881a6d0a220c1ad6c7dae0bddfb8bf6885051725524fd12119564ac6e",
+        "cores": 32,
+        "ionic_steps": 80,
+        "elapsed_seconds": 41366.233,
+        "allocated_core_hours_estimate": 367.6998488888889
+      },
+      {
+        "job_id": "9629859",
+        "OUTCAR_sha256": "a1c25c7f8db5f7e4636a1f907d5e87ee1ce3393ab641a5e033e726346e6462dd",
+        "cores": 32,
+        "ionic_steps": 80,
+        "elapsed_seconds": 36438.871,
+        "allocated_core_hours_estimate": 323.90107555555556
+      }
+    ],
+    "pair_core_hour_references": {
+      "C2_pair": [
+        1020.7976967551622,
+        1156.2283976608187
+      ],
+      "C3_pair": [
+        647.8021511111111,
+        735.3996977777778
+      ]
+    },
+    "four_job_core_hour_reference_range": [
+      1668.5998478662732,
+      1891.6280954385966
+    ],
+    "is_cost_cap_or_prediction_of_convergence": false,
+    "queue_wait_included": false,
+    "limitations": "Historical different starts,nodes,SCF work and output settings;linear step scaling is only a budget reference",
+    "source_files": [
+      {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2_adsorption_06_10_20261012\\adsorption_control_paired_vasp3_20261020_v1\\runtime_evidence_20261023T115308Z\\benchmark_evidence_summary_v2.json",
+        "sha256": "4fafaeba35c1b94acfa6269e0e6217816a9e2a9e346a5b90c9a26cbb195235b3"
+      }
+    ]
+  },
+  "DFT_execution_authorized": false,
+  "DFT_submitted": false,
+  "model_promoted": false,
+  "source_files": [
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\paired_relaxation2_20261027_v2\\dft_screen80\\plan.json",
+      "sha256": "0a83684c456a2aba35e10eaa6e1ca6bae90c75554639f6af86f95d8b1677353d"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\paired_relaxation2_20261027_v2\\geometry_review_v2.json",
+      "sha256": "fe784707b7da7c0dc93d3548ed3d33ce5e88acd51683ba10f76c366dc42acf89"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\paired_relaxation2_20261027_v2\\independent_verification_v2.json",
+      "sha256": "77e6a213e776d1a94c635a7d41bf5a0a421074b1a235c1ac7329eb1d515ce941"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\paired_relaxation2_20261027_v2\\postrun_review.json",
+      "sha256": "e24339091a1a731432d473ea546c47e23a7e1eadd28e13a5a69ca61f02d7845d"
+    }
+  ]
+}

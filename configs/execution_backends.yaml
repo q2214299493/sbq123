@@ -49,6 +49,74 @@ backends:
       producer_exit_record_is_scheduler_authority: false
       admin_resolution: enable Slurm accounting storage and job accounting on MZ73
     direct_execution_exceptions:
+      fe110_paired_relaxation2_20261027:
+        scope:
+          remote_root: /home/sbq/sbq/fe110_paired_relaxation2_20261027_v2
+          gpu_index: 0
+          gpu_uuid: GPU-483c224e-cc19-13e2-24ad-c83efd14fa75
+          gpu_sharing:
+            mode: resident_service_allowlist
+            allowed_processes:
+            - pid: 755831
+              uid: 1007
+              start_ticks: 25755244
+              script: wsgi_recommender.py
+            - pid: 755832
+              uid: 1007
+              start_ticks: 25755244
+              script: wsgi_recommender.py
+            - pid: 755833
+              uid: 1007
+              start_ticks: 25755244
+              script: wsgi_recommender.py
+            - pid: 755834
+              uid: 1007
+              start_ticks: 25755244
+              script: wsgi_recommender.py
+            - pid: 2068650
+              uid: 1007
+              start_ticks: 33232802
+              script: wsgi_recommender.py
+            - pid: 2068651
+              uid: 1007
+              start_ticks: 33232802
+              script: wsgi_recommender.py
+            - pid: 2068649
+              uid: 1007
+              start_ticks: 33232801
+              script: wsgi_recommender.py
+            - pid: 2068648
+              uid: 1007
+              start_ticks: 33232801
+              script: wsgi_recommender.py
+            max_training_memory_MiB: 16384
+          max_wall_seconds: 600
+          CPU_count: 4
+          memory_GB: 32
+          models:
+            control:
+              path: /home/sbq/sbq/adsorption_training_comparison_20261020_v2/control/output/direct-adsorption-role-ab-20261020-v2/candidate.pt
+              sha256: cfcac123cd56b866a1ea36cc780a3aee634f3aeec979bda4ae8bee2cc831e523
+            new512:
+              path: /home/sbq/sbq/fe110_force_training512_gpu0_20261027_v1/control/output/direct-fe110-force512-gpu0-20261027-v1/candidate.pt
+              sha256: 513decf4ebd823cf8f87a79e787fdbd543b657fd582184f2ab23845d281d6aeb
+          cases:
+          - name: 10_A
+            composition: C2H3
+            seed_path: geometry/10_A/POSCAR
+            seed_sha256: 04990eb8ae6dc84d9626dd0480220201664499f79c389d1c6070081325497d4b
+          - name: C3_05
+            composition: C3H2O
+            seed_path: geometry/C3_05/POSCAR
+            seed_sha256: 6ed0169ab43c93e3b53092ea2bc76a5179f833752e9f1ccb0eabc61b76a63868
+          limits:
+            seed_max_steps: 80
+            fmax_eV_per_A: 0.1
+            LBFGS_maxstep_A: 0.2
+        authorizing_user_request: 同一起点的小规模C₂/C₃优化对照，再以一致的DFT标准检查终态和实际成本。
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        automatic_retries: 0
+        VASP_submission_authority: false
       fe110_fixed53_force_comparison_20261027:
         remote_root: /home/sbq/sbq/fe110_fixed53_comparison_20261027_v1
         gpu_index: 0

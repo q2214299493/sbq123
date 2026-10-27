@@ -354,3 +354,7 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `docs/reviews/fe110_fixed53_comparison_20261027/`:fixed53 three-model force-error tables,exposure/lowforce/direction limits,authorization andsource-bound summary;50primary/33publicationtests.
 - `scripts/adsorption/fixed_force_comparison.py`, `archive/fe110_fixed53_comparison_20261027/`, `tests/test_fixed53_comparison_20261027.py`, `tests/test_fixed53_force_analysis.py`:exact frozen inference scope,bounded native execution,raw-vector analysis andindependent scalar audit;no fitting oroptimizer.
 - `calculations/fe110_reico_pilot300_20261022/fixed53_comparison_20261027_v1/`:immutable request/policy/data/runtime copies,159rawpredictions andstart/exit/source/test/audit receipts;private labels/weights/rawoutputs remain outsideGit.
+
+- `docs/reviews/fe110_pair2_20261027/`:same-start two-seed four-run MLresults,C3fragment/step-cap limitations,DFTscreen80exactscope/costreference/authorizationboundary andsource-bound checkpoint.
+- `archive/fe110_pair2_20261027/`, `tests/test_pair2_20261027.py`:frozenpair request/native boundedexecution,fulltrajectoryreview,fragmentclassification,fourDFTinputpreparation andindependentverification;47primary/38publicationtests.
+- `calculations/fe110_reico_pilot300_20261022/paired_relaxation2_20261027_v2/`:boundrequest66639dd5,native start/exit/27file return,247MLframes,geometry_review_v2,independent_verification_v2,postrunreview anddft_screen80/plan.json;fourDFTjobs NOT_SUBMITTED. Failedlocalv1draft retained.
