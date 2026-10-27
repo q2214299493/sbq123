@@ -346,3 +346,7 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `docs/reviews/fe110_training512_submit_20261027/`:exact one-trial human authorization,1994file deployment/nativeCPUpreflight/GPUblocker report andsource-bound checkpoint;trainingnotstarted.
 - `archive/fe110_training512_submit_20261027/`, `tests/test_training512_submit_20261027.py`:one-time authorization binding/exclusive deployment,read-only native status andindependent no-start verification;50tests each checkout.
 - `calculations/fe110_reico_pilot300_20261022/training512_submit_20261027_v1/`:previouspolicybyte snapshot,prebindingreview,one-exception proof,upload/CPUpreflight/status/verification/testreceipts;rootbackendonlyadds fe110_force_training512_20261027.
+
+- `docs/reviews/fe110_training512_gpu0_20261027/`:GPU0sharing human authorization,successful2epoch/1024iteration run,143.193248s,13file return andcandidateSHA/devmetric boundaries;65tests each checkout.
+- `archive/fe110_training512_gpu0_20261027/`, `tests/test_training512_gpu0_20261027.py`:fresh binding/exclusive deployment/GPU1retirement/nativeexecution,bounded artifact return/validation andsharedgate/archive safety tests.
+- `calculations/fe110_reico_pilot300_20261022/training512_gpu0_20261027_v1/`:immutable request/probes/preflight/start/exit/data-change/retirement/return/verification evidence;`returned/control/output/direct-fe110-force512-gpu0-20261027-v1/candidate.pt` frozen at513decf4ebd823cf8f87a79e787fdbd543b657fd582184f2ab23845d281d6aeb;weights/logs remain outofGit.

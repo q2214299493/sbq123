@@ -106,6 +106,34 @@ def require_cuda_keyword(path):
         raise ValueError('GPU calculator must explicitly set cpu=False')
 
 
+def gpu_process_identity(pid):
+    root = Path('/proc') / str(pid)
+    args = (root / 'cmdline').read_bytes().split(bytes([0]))
+    scripts = [Path(arg.decode(errors='replace')).name for arg in args if arg.endswith(b'.py')]
+    return {'pid': pid, 'uid': root.stat().st_uid,
+            'start_ticks': int((root / 'stat').read_text().rsplit(')', 1)[1].split()[19]),
+            'script': scripts[0] if scripts else None}
+
+
+def shared_gpu_processes(request, actual_pids):
+    sharing = request.get('gpu_sharing')
+    if sharing is None:
+        if actual_pids:
+            raise ValueError('authorized GPU has an existing compute process; no process stopped')
+        return
+    if (sharing.get('mode') != 'resident_service_allowlist'
+            or type(sharing.get('max_training_memory_MiB')) is not int
+            or not 0 < sharing['max_training_memory_MiB'] < 20000):
+        raise ValueError('invalid explicit GPU sharing contract')
+    rows = sharing.get('allowed_processes', [])
+    if not rows or len(rows) > 16 or len({r['pid'] for r in rows}) != len(rows):
+        raise ValueError('invalid resident process allowlist')
+    permitted = {row['pid']: row for row in rows}
+    for pid in actual_pids:
+        if pid not in permitted or gpu_process_identity(pid) != permitted[pid]:
+            raise ValueError('GPU resident process is new or its identity changed')
+
+
 def gpu_available(request):
     output = subprocess.check_output([
         'nvidia-smi', '--query-gpu=index,uuid,memory.free', '--format=csv,noheader,nounits'
@@ -119,8 +147,9 @@ def gpu_available(request):
     processes = subprocess.check_output([
         'nvidia-smi', '--query-compute-apps=gpu_uuid,pid', '--format=csv,noheader'
     ], timeout=10).decode()
-    if any(line.split(',')[0].strip() == request['gpu_uuid'] for line in processes.splitlines()):
-        raise ValueError('authorized GPU has an existing compute process; no process stopped')
+    actual = [int(line.split(',')[1].strip()) for line in processes.splitlines()
+              if line.split(',')[0].strip() == request['gpu_uuid']]
+    shared_gpu_processes(request, actual)
 
 
 def environment(root, request):

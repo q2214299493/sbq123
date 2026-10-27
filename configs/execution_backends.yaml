@@ -49,6 +49,73 @@ backends:
       producer_exit_record_is_scheduler_authority: false
       admin_resolution: enable Slurm accounting storage and job accounting on MZ73
     direct_execution_exceptions:
+      fe110_force_training512_gpu0_20261027:
+        authorized_by: user_explicit_20261027_use_sharedGPU0_for_existing512_trial
+        authorizing_user_request: 用吧
+        scope: one_uniform_force_only512_frame_candidate_on_allowlisted_sharedGPU0
+        arms:
+        - control
+        remote_root: /home/sbq/sbq/fe110_force_training512_gpu0_20261027_v1
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        gpu_index: 0
+        gpu_uuid: GPU-483c224e-cc19-13e2-24ad-c83efd14fa75
+        gpu_sharing:
+          mode: resident_service_allowlist
+          allowed_processes:
+          - pid: 755831
+            uid: 1007
+            start_ticks: 25755244
+            script: wsgi_recommender.py
+          - pid: 755832
+            uid: 1007
+            start_ticks: 25755244
+            script: wsgi_recommender.py
+          - pid: 755833
+            uid: 1007
+            start_ticks: 25755244
+            script: wsgi_recommender.py
+          - pid: 755834
+            uid: 1007
+            start_ticks: 25755244
+            script: wsgi_recommender.py
+          - pid: 2068650
+            uid: 1007
+            start_ticks: 33232802
+            script: wsgi_recommender.py
+          - pid: 2068651
+            uid: 1007
+            start_ticks: 33232802
+            script: wsgi_recommender.py
+          - pid: 2068649
+            uid: 1007
+            start_ticks: 33232801
+            script: wsgi_recommender.py
+          - pid: 2068648
+            uid: 1007
+            start_ticks: 33232801
+            script: wsgi_recommender.py
+          max_training_memory_MiB: 16384
+        execution_mode: direct_no_scheduler
+        executor: scripts/adsorption/direct_force_training.py
+        model_backend: aqcat25_role_force_training
+        original_comparison_sha256: 1cf959d527e03a3ddccb7fb38e617310ec7552d8eda16e6083a8161e5c1d1e2e
+        arm_request_sha256:
+          control: 440209427fbd5a346eff483d90631c740be644f2f0e01fed280940949e0bcea8
+        max_wall_seconds: 1800
+        per_arm_wall_seconds: 1800
+        max_epochs: 2
+        max_optimizer_steps_per_arm: 1024
+        CPU_count: 4
+        memory_GB: 32
+        parallel_arms: 1
+        automatic_retries: 0
+        explicit_authorization_required: true
+        producer_exit_record_required: true
+        scheduler_job_id: null
+        slurm_id_emulation: forbidden
+        model_promotion_or_vasp_execution: forbidden
+        alter_shared_services_or_other_users_jobs: forbidden
+        supersedes_unstarted_exception: fe110_force_training512_20261027
       fe110_force_training512_20261027:
         authorized_by: user_explicit_20261027_submit_one_reviewed512_frame_trial
         authorizing_user_request: 提交

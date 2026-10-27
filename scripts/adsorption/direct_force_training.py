@@ -48,8 +48,8 @@ def verify(path, expected_sha, remote=False):
     if sha256_file(policy) != request["policy"]["sha256"]:
         raise ValueError("backend policy changed")
     exception = yaml.safe_load(policy.read_text(encoding="utf-8"))["backends"]["aqcat_gpu"]["direct_execution_exceptions"][request["exception_id"]]
-    for key in ("remote_root", "gpu_index", "gpu_uuid", "max_wall_seconds", "per_arm_wall_seconds"):
-        if request[key] != exception[key]:
+    for key in ("remote_root", "gpu_index", "gpu_uuid", "max_wall_seconds", "per_arm_wall_seconds", "gpu_sharing"):
+        if request.get(key) != exception.get(key):
             raise ValueError("execution scope changed: " + key)
     approval = load_json_object(root / "direct_authorization.json")
     if (approval.get("request_sha256") != expected_sha or approval.get("user_authorized") is not True

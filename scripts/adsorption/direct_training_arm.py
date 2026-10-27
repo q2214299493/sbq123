@@ -18,6 +18,16 @@ from scripts.adsorption.force_training_preflight import check_native_cli, verify
 def install_cuda_guard(request, output, exception):
     import torch
     from scripts.adsorption.role_force_trainer import RoleForceTrainer
+    sharing = request.get("gpu_sharing")
+    if sharing is not None:
+        total = torch.cuda.get_device_properties(0).total_memory
+        limit = sharing["max_training_memory_MiB"] * 1024**2
+        if not 0 < limit < total:
+            raise ValueError("invalid reviewed CUDA allocator limit")
+        torch.cuda.set_per_process_memory_fraction(limit / total, device=0)
+        write_json_exclusive(output / "cuda_allocator_budget.json", {"max_training_memory_MiB": sharing["max_training_memory_MiB"],
+            "device_total_bytes": total, "physical_gpu_uuid": request["gpu_uuid"], "allocator_fraction": limit / total,
+            "scope": "PyTorch allocator only;driver and external libraries are not a hard device-memory cap"})
     if request.get("native_two_backward_check"):
         install_two_backward_guard(RoleForceTrainer, request, output)
     original = RoleForceTrainer.train
