@@ -342,3 +342,7 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `configs/fe110_reico_pilot/training512_20261027_v1.json`, `archive/fe110_training512_20261027/`, `tests/test_training512_20261027.py`:bounded local package preparation,independent dataset/config/runtime verification andportable synthetic test fixtures.
 - `calculations/fe110_reico_pilot300_20261022/training512_20261027_v1/`:immutable executable training request/native preflight,1972source/1987artifact checks,execution-policy proposal,validation plan,read-onlyMZ73resource/CPUarchitecture probes andtestreceipts;private labels/weights stay outofGit.
 - `scripts/adsorption/direct_force_training.py`:explicit hash-bound singlearm support with unchanged historical defaulttwoarm scope;existing bounded trainer/runtime dependencies included inpublication source for this trial.
+
+- `docs/reviews/fe110_training512_submit_20261027/`:exact one-trial human authorization,1994file deployment/nativeCPUpreflight/GPUblocker report andsource-bound checkpoint;trainingnotstarted.
+- `archive/fe110_training512_submit_20261027/`, `tests/test_training512_submit_20261027.py`:one-time authorization binding/exclusive deployment,read-only native status andindependent no-start verification;50tests each checkout.
+- `calculations/fe110_reico_pilot300_20261022/training512_submit_20261027_v1/`:previouspolicybyte snapshot,prebindingreview,one-exception proof,upload/CPUpreflight/status/verification/testreceipts;rootbackendonlyadds fe110_force_training512_20261027.

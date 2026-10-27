@@ -49,6 +49,36 @@ backends:
       producer_exit_record_is_scheduler_authority: false
       admin_resolution: enable Slurm accounting storage and job accounting on MZ73
     direct_execution_exceptions:
+      fe110_force_training512_20261027:
+        authorized_by: user_explicit_20261027_submit_one_reviewed512_frame_trial
+        authorizing_user_request: 提交
+        scope: one_uniform_force_only512_frame_candidate
+        arms:
+        - control
+        remote_root: /home/sbq/sbq/fe110_force_training512_20261027_v1
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        gpu_index: 1
+        gpu_uuid: GPU-450609b3-d1fd-ac33-d03a-79891be402da
+        execution_mode: direct_no_scheduler
+        executor: scripts/adsorption/direct_force_training.py
+        model_backend: aqcat25_role_force_training
+        original_comparison_sha256: 049e1a5007d360628b30a4abe915bcb38cb5a548049cad7e56e66ae48ee356a9
+        arm_request_sha256:
+          control: fbc1fb2d7b8753e5429db2253559cff5a68669a0f620eebe515f01ad6c1c84e7
+        max_wall_seconds: 1800
+        per_arm_wall_seconds: 1800
+        max_epochs: 2
+        max_optimizer_steps_per_arm: 1024
+        CPU_count: 4
+        memory_GB: 32
+        parallel_arms: 1
+        automatic_retries: 0
+        explicit_authorization_required: true
+        producer_exit_record_required: true
+        scheduler_job_id: null
+        slurm_id_emulation: forbidden
+        model_promotion_or_vasp_execution: forbidden
+        alter_shared_services_or_other_users_jobs: forbidden
       fe110_reico_sampling93_20261022:
         authorized_by: user_explicit_20261022_continue_sampling_and_deduplication
         authorizing_user_request: 可以的继续
