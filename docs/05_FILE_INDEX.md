@@ -358,3 +358,7 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `docs/reviews/fe110_pair2_20261027/`:same-start two-seed four-run MLresults,C3fragment/step-cap limitations,DFTscreen80exactscope/costreference/authorizationboundary andsource-bound checkpoint.
 - `archive/fe110_pair2_20261027/`, `tests/test_pair2_20261027.py`:frozenpair request/native boundedexecution,fulltrajectoryreview,fragmentclassification,fourDFTinputpreparation andindependentverification;47primary/38publicationtests.
 - `calculations/fe110_reico_pilot300_20261022/paired_relaxation2_20261027_v2/`:boundrequest66639dd5,native start/exit/27file return,247MLframes,geometry_review_v2,independent_verification_v2,postrunreview anddft_screen80/plan.json;fourDFTjobs NOT_SUBMITTED. Failedlocalv1draft retained.
+
+- `docs/reviews/fe110_pair2_submission_20261027/`:exact4jobhumanauthorization,jobIDs/initialPEND snapshot,32rank80step/0.02scope,88metadataregister/readback andsource-bound checkpoint;no scientificacceptance.
+- `archive/fe110_pair2_submission_20261027/`, `tests/test_pair2_submission_20261027.py`:fourcanonicalgate/executor adapter,transientreadonlySSH recovery,batched scheduler evidence andmetadata-onlyregistry plan/readback;153primary/136publicationtests.
+- `calculations/fe110_reico_pilot300_20261022/paired_submission4_20261027_v1/`:frozen24inputcopies/nativeauth/gates/reservations/receipts for9925060/62/63/65,initialscheduler snapshot,POTCARmetadata,registryplan/approval/receipt/readback andintegrity/tests;runtime/licensecontent remain outsideGit.

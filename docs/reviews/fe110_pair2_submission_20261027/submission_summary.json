@@ -1,0 +1,108 @@
+{
+  "checked_at": "2026-10-27T14:20:52.398733+00:00",
+  "status": "FOUR_SUBMITTED",
+  "records": [
+    {
+      "name": "10_A",
+      "model": "control",
+      "job_id": "9925060",
+      "remote_dir": "~/sbq/Fe110/adsorption/force512_paired2_20261027_v1/10_A/control",
+      "scheduler_status": "PEND",
+      "cores": 32,
+      "receipt_sha256": "5ef072b12e58f5fdf7d44ec5b3f6541041b50df7d7a4679d1aa55650e9bc3d67",
+      "scheduler_evidence_sha256": "81e5233c1db15456ef87e02b1729069a00865773da5b238b180367db6036a90a",
+      "scientific_status": "Not assessed"
+    },
+    {
+      "name": "C3_05",
+      "model": "control",
+      "job_id": "9925062",
+      "remote_dir": "~/sbq/Fe110/adsorption/force512_paired2_20261027_v1/C3_05/control",
+      "scheduler_status": "PEND",
+      "cores": 32,
+      "receipt_sha256": "8e3fcf276ecdd228804d79b5c35e88c5e2c9a0d9500ed0e70956b51eb9002d90",
+      "scheduler_evidence_sha256": "89c2f9084ee71352b1ca6a36266c686ec263ebb47acb794d0a6f68eb7370325f",
+      "scientific_status": "Not assessed"
+    },
+    {
+      "name": "10_A",
+      "model": "new512",
+      "job_id": "9925063",
+      "remote_dir": "~/sbq/Fe110/adsorption/force512_paired2_20261027_v1/10_A/new512",
+      "scheduler_status": "PEND",
+      "cores": 32,
+      "receipt_sha256": "2cc0f9e9fde8f2a6a9cf17c9f7ecc91998da7610cc4982ad9e1fc31a6d9849a5",
+      "scheduler_evidence_sha256": "bdc88bd2126d0668e73ba5c69bb9a583e2a60370d33b1c55225d3b711d9b59d0",
+      "scientific_status": "Not assessed"
+    },
+    {
+      "name": "C3_05",
+      "model": "new512",
+      "job_id": "9925065",
+      "remote_dir": "~/sbq/Fe110/adsorption/force512_paired2_20261027_v1/C3_05/new512",
+      "scheduler_status": "PEND",
+      "cores": 32,
+      "receipt_sha256": "bbf48e1dac9420d168741272e023b4726c82c56d7729cc55f7e2d0b8a03b9217",
+      "scheduler_evidence_sha256": "fd6b0b8e451e6f7570b59e973e3f36af18a707b1133c210b25764a3e82dff6ea",
+      "scientific_status": "Not assessed"
+    }
+  ],
+  "new_VASP_submitted": 4,
+  "no_automatic_retry_or_continuation": true,
+  "source_files": [
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\paired_submission4_20261027_v1\\registration_verification.json",
+      "sha256": "31778e7b625c4db566d3915d1eeb3b156d3a0c6cf13ee29fb37cd9244beaef97"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\paired_submission4_20261027_v1\\registry_receipt.json",
+      "sha256": "d659c3c40382ee21718f1d8769908c8cfdbad529edf4b51fbaf469db6537cfd9"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\paired_submission4_20261027_v1\\submission_integrity.json",
+      "sha256": "8d8809f1e98ccfc7680f36043659b9b2e9ff22218eb2fd491eba6c88045ba025"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\paired_submission4_20261027_v1\\submission_summary.json",
+      "sha256": "5c5bd6bf65e245fd63047876789df7d5f5bafbdfefdc5be690757c7c6c8f1489"
+    }
+  ],
+  "method": {
+    "cores_each": 32,
+    "max_ionic_steps": 80,
+    "DFT_force_criterion_eV_A": 0.02,
+    "LORBIT": 11,
+    "automatic_continuation_or_retry": false
+  },
+  "original_source_plan_sha256": "0a83684c456a2aba35e10eaa6e1ca6bae90c75554639f6af86f95d8b1677353d",
+  "submitted_bundle_sha256": {
+    "10_A/control": "83b46d6b0dc8678d071fe8dc424ea3f2daa2fff49a69d45a3c33e8f29323dbff",
+    "C3_05/control": "8756561ed9f95dd4dd8e151e1b479cfbe53d8a1d4c1df1f23a2261190374442d",
+    "10_A/new512": "ed570a464955801d129bcd18a708a36425ee841b826052056757bff93a4cc099",
+    "C3_05/new512": "b274f7ee129ce2742f74b108494a6237b6afe22e086b950f56e23c0aed5fcd5c"
+  },
+  "native_integrity": {
+    "status": "PASS_FOUR_UNIQUE_NATIVE_SUBMISSIONS_AND_FROZEN_INPUTS",
+    "job_ids": [
+      "9925060",
+      "9925062",
+      "9925063",
+      "9925065"
+    ],
+    "canonical_SUBMIT_VASP_gates": 4,
+    "input_hashes_verified": 24,
+    "cores_each": 32,
+    "max_steps_each": 80,
+    "force_criterion_eV_A": 0.02,
+    "local_moment_output_LORBIT": 11,
+    "scientific_convergence_reviewed": false
+  },
+  "registry_readback": {
+    "status": "PASS_FOUR_SUBMISSION_METADATA_READBACK",
+    "registry_rows_read_back": 88,
+    "scientific_result_rows": 0,
+    "submitted_input_hashes_unchanged": 24
+  },
+  "cost_or_acceleration_verified": false,
+  "training_started": false
+}
