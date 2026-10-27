@@ -49,6 +49,114 @@ backends:
       producer_exit_record_is_scheduler_authority: false
       admin_resolution: enable Slurm accounting storage and job accounting on MZ73
     direct_execution_exceptions:
+      fe110_fixed53_force_comparison_20261027:
+        remote_root: /home/sbq/sbq/fe110_fixed53_comparison_20261027_v1
+        gpu_index: 0
+        gpu_uuid: GPU-483c224e-cc19-13e2-24ad-c83efd14fa75
+        gpu_sharing:
+          mode: resident_service_allowlist
+          allowed_processes:
+          - pid: 755831
+            uid: 1007
+            start_ticks: 25755244
+            script: wsgi_recommender.py
+          - pid: 755832
+            uid: 1007
+            start_ticks: 25755244
+            script: wsgi_recommender.py
+          - pid: 755833
+            uid: 1007
+            start_ticks: 25755244
+            script: wsgi_recommender.py
+          - pid: 755834
+            uid: 1007
+            start_ticks: 25755244
+            script: wsgi_recommender.py
+          - pid: 2068650
+            uid: 1007
+            start_ticks: 33232802
+            script: wsgi_recommender.py
+          - pid: 2068651
+            uid: 1007
+            start_ticks: 33232802
+            script: wsgi_recommender.py
+          - pid: 2068649
+            uid: 1007
+            start_ticks: 33232801
+            script: wsgi_recommender.py
+          - pid: 2068648
+            uid: 1007
+            start_ticks: 33232801
+            script: wsgi_recommender.py
+          max_training_memory_MiB: 16384
+        max_wall_seconds: 600
+        sample_ids:
+        - 09_C_step001
+        - 09_C_step002
+        - 09_C_step003
+        - 09_C_step004
+        - 09_C_step005
+        - 09_C_step008
+        - 09_C_step014
+        - 09_C_step021
+        - 09_C_step025
+        - 09_C_step028
+        - 09_C_step034
+        - 09_C_step041
+        - 09_C_step048
+        - 09_C_step050
+        - 09_C_step054
+        - 09_C_step061
+        - 09_C_step068
+        - 09_C_step074
+        - 09_C_step076
+        - 09_C_step081
+        - 09_C_step088
+        - 09_C_step094
+        - 09_C_step100
+        - 10_A_step001
+        - 10_A_step002
+        - 10_A_step003
+        - 10_A_step004
+        - 10_A_step005
+        - 10_A_step009
+        - 10_A_step016
+        - 10_A_step024
+        - 10_A_step028
+        - 10_A_step031
+        - 10_A_step039
+        - 10_A_step046
+        - 10_A_step054
+        - 10_A_step057
+        - 10_A_step061
+        - 10_A_step069
+        - 10_A_step076
+        - 10_A_step084
+        - 10_A_step086
+        - 10_A_step091
+        - 10_A_step099
+        - 10_A_step106
+        - 10_A_step113
+        - family_0006_step010
+        - family_0006_step020
+        - family_0080_step000
+        - family_0080_step006
+        - family_0090_step010
+        - family_0090_step020
+        - family_0025_step000
+        model_checkpoint_sha256:
+          baseline: e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50
+          control: cfcac123cd56b866a1ea36cc780a3aee634f3aeec979bda4ae8bee2cc831e523
+          new512: 513decf4ebd823cf8f87a79e787fdbd543b657fd582184f2ab23845d281d6aeb
+        authorizing_user_request: 固定结构上的新旧模型力误差对照。
+        authorized_by: user_explicit_fixed_structure_force_comparison_20261027
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        executor: scripts/adsorption/fixed_force_comparison.py
+        prediction_count: 159
+        CPU_count: 4
+        memory_GB: 32
+        automatic_retries: 0
+        training_or_optimization: forbidden
       fe110_force_training512_gpu0_20261027:
         authorized_by: user_explicit_20261027_use_sharedGPU0_for_existing512_trial
         authorizing_user_request: 用吧
