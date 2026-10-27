@@ -1,0 +1,77 @@
+{
+  "purpose": "TRAIN_ONLY512_COMPOSITION_LOCAL_ENVIRONMENT_FORCE_COVERAGE",
+  "inputs": {
+    "manifest": {
+      "path": "calculations/fe110_reico_pilot300_20261022/combined_force_package_20261027_v3/training_manifest.json",
+      "sha256": "ebf30df5cb009ac24293ca2b59e384b9158e796d4ec53301bf537b224dcfe4ee"
+    },
+    "package_verification": {
+      "path": "calculations/fe110_reico_pilot300_20261022/combined_force_package_20261027_v3/independent_verification.json",
+      "sha256": "302e507263ed61b28442871ad4aafaa0fdaf412e1c7037139cabf92c8605d619"
+    },
+    "prior_training": {
+      "path": "calculations/fe110_reico_pilot300_20261022/joint_update_20261025_v1/audit_training_view_local_only.json",
+      "sha256": "dd23d9d3d27e5f572475903dfaf94108d14d4a4f697cf145ddf887ebc7177ba0"
+    },
+    "prior_summary": {
+      "path": "calculations/fe110_reico_pilot300_20261022/joint_update_20261025_v1/summary.json",
+      "sha256": "74e0b3d6fdf39a6f6b0a6cfda2d6a424c0411d85c15e2463eefb4437bf48db6e"
+    },
+    "pool": {
+      "path": "calculations/fe110_reico_pilot300_20261022/joint_coverage_20261023_v3/pool_environments.json",
+      "sha256": "20c28bf9f5857e2f9145a57a13385a6f3b7f7b72ea8e183a4c5557e796199f80"
+    },
+    "cache_inventory": {
+      "path": "calculations/fe110_reico_pilot300_20261022/joint_coverage_20261023_v3/descriptor_inventory.json",
+      "sha256": "f917a5928b766bd376b91078f0b42c16308c48e6aceaa1dee6f985c336cb2f82"
+    },
+    "prior_soap": {
+      "path": "calculations/fe110_reico_pilot300_20261022/stratified_audit_v1/composition_soap.json",
+      "sha256": "5b90ad67c6cad0c7ad93ea73aa6de7193e42a50a0612de606d9795abc3dcdbfd"
+    },
+    "selection": {
+      "path": "calculations/fe110_reico_pilot300_20261022/sampling93_v1/selection/selected_frames.json",
+      "sha256": "022e46102437678a541c587bbd30aaa1e0db27992ea8fcedca3092343701cd34"
+    },
+    "base_config": {
+      "path": "configs/fe110_reico_pilot/joint_coverage_v1.json",
+      "sha256": "9a0b78f6d34839684157e1794d7fb0fcfc44ebfdacdca77bffff1fb8bb838d5c"
+    },
+    "analysis_rules": {
+      "path": "configs/adsmind_lite/analysis_rules.yaml",
+      "sha256": "45bab93237e78f37287f36ec1626b0d38b38fe0c17f913a9062fdc7d65bcceed"
+    },
+    "excluded_target_qc": {
+      "path": "calculations/fe110_reico_pilot300_20261022/grouped_qc_20261026_v2/case_qc/family_0021_step004.json",
+      "sha256": "5d04a6a46411af8dc081aea65838f6b9df6e8c812fc12aab7b3278540fcb6669"
+    }
+  },
+  "output": "calculations/fe110_reico_pilot300_20261022/joint_update512_20261027_v1",
+  "descriptor_runtime": ".codex_tmp/fe110_soap_deps",
+  "expected_training": 512,
+  "expected_prior_training": 485,
+  "expected_new_frames": 27,
+  "expected_new_descriptors": 16,
+  "expected_pool": 1597,
+  "original_selected_quarantines": [
+    "family_0028_step000",
+    "family_0086_step000"
+  ],
+  "excluded_target_label": "family_0021_step004",
+  "force_edges_eV_A": [
+    0,
+    0.05,
+    0.1,
+    0.5,
+    1,
+    2,
+    5,
+    10
+  ],
+  "radius_scales": [
+    1.2,
+    1.25,
+    1.3
+  ],
+  "training_or_new_DFT_GPU_submission": false
+}
