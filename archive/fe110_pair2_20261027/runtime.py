@@ -28,6 +28,10 @@ def check_scope(request, approval, exception, digest):
         raise ValueError("exact paired-relaxation human authorization missing")
     if request["scope"] != exception["scope"]:
         raise ValueError("paired relaxation scope changed")
+    if request.get("document_kind") == "fe110_scratch512_paired_relaxation":
+        from archive.fe110_scratch512_20261028.relaxation_adapter import check_scope as check_scratch_scope
+        check_scratch_scope(request)
+        return
     scope = request["scope"]
     if scope["models"].keys() != {"control", "new512"} or [r["name"] for r in scope["cases"]] != ["10_A", "C3_05"]:
         raise ValueError("two frozen models and two preselected seeds required")
@@ -71,6 +75,9 @@ def verify(path, remote=False):
 
 def worker(path):
     request, root, scope = verify(path, remote=True)
+    if request.get("document_kind") == "fe110_scratch512_paired_relaxation":
+        from archive.fe110_scratch512_20261028.relaxation_adapter import sequence
+        return sequence(path)
     output = root / "output"
     started = datetime.now(timezone.utc).isoformat()
     code, error = 1, None
@@ -86,7 +93,8 @@ def worker(path):
         if LBFGS.defaults["maxstep"] != scope["limits"]["LBFGS_maxstep_A"]:
             raise ValueError("native optimizer default changed")
         total = torch.cuda.get_device_properties(0).total_memory
-        torch.cuda.set_per_process_memory_fraction(scope["gpu_sharing"]["max_training_memory_MiB"] * 1024**2 / total)
+        memory_limit = scope.get("allocator_limit_MiB", scope.get("gpu_sharing", {}).get("max_training_memory_MiB"))
+        torch.cuda.set_per_process_memory_fraction(memory_limit * 1024**2 / total)
         deadline = time.monotonic() + scope["max_wall_seconds"]
         for model_name, model in scope["models"].items():
             calc = patched_calc(checkpoint_path=model["path"], is_spin_off=False, is_low_fi=False, cpu=False)
