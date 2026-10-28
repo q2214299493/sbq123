@@ -12,6 +12,7 @@ from ase.geometry import find_mic
 
 from scripts.artifact_io import sha256_file, write_json
 from scripts.aqcat25_calibration import parse_final_outcar
+from scripts.neb_agent.utils_vasp import last_positions
 from scripts.neb_agent.analyze_neb_outputs import analyze
 from scripts.neb_agent.diagnose_path_geometry import diagnose
 from scripts.neb_agent.utils_structure import (
@@ -19,26 +20,6 @@ from scripts.neb_agent.utils_structure import (
 )
 from scripts.ts_strategy_engine.contract import load_contract
 from scripts.ts_strategy_engine.path_evidence import validate_path_binding
-
-
-def last_positions(path: Path, count: int) -> np.ndarray:
-    latest = None
-    with path.open(encoding="utf-8", errors="replace") as handle:
-        for line in handle:
-            if "TOTAL-FORCE (eV/Angst)" not in line:
-                continue
-            next(handle, None)
-            rows = []
-            for _ in range(count):
-                fields = next(handle, "").split()
-                if len(fields) < 6:
-                    break
-                rows.append([float(x) for x in fields[:3]])
-            if len(rows) == count:
-                latest = np.asarray(rows)
-    if latest is None:
-        raise ValueError(f"No complete position/force block: {path}")
-    return latest
 
 
 def main() -> None:

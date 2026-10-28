@@ -4,6 +4,11 @@ Status: implemented local tooling; improved scientific success rates remain unme
 Owner: `transition_state_search`. This extends the current workflow and uses
 the existing registry, planning, submission and validation layers.
 
+The project-wide goal-driven interface is now owned by
+[`research_assistant`](../research_assistant/README.md). It reuses these tools
+without requiring every question to be a TS failure. This module retains the
+legacy diagnosis/review-order contracts and all TS scientific/execution authority.
+
 ## Components and authority
 
 | Component | Responsibility |
@@ -14,8 +19,9 @@ the existing registry, planning, submission and validation layers.
 | `strategy_learning.py` | Baseline capture, proposals, attempts, task-local lessons, retry checks and comparison |
 | `learning_cli.py` | Explicit local commands through `ts_strategy_engine.cli learning` |
 
-Dependency direction is CLI -> learning/evidence -> registry. The learner does
-not call an LLM API, SSH, VASP, a GPU runner, or a training optimizer. The agent
+Dependency direction is CLI -> learning/evidence -> registry. The strategy-event
+learner does not call an LLM API, SSH, VASP, a GPU runner, or a training optimizer.
+The separately documented diagnosis/research interfaces use the guarded model route. The agent
 proposes a change from source evidence; deterministic code validates it. There
 is no second scheduler, TS validator, model trainer, or execution authority.
 

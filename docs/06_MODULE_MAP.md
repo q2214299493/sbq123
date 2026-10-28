@@ -25,6 +25,7 @@ Allowed statuses: `Planned`, `Active`, `Blocked`, `Completed`.
 |---|---|---|---|
 | `state_handoff` | Active | none | Audit/event/proposal manager implemented in review-first mode; initial managed-view baseline adoption requires one exact user-approved proposal |
 | `catalysis_data_retrieval` | Active | source access, semantic model | CatApp and OC20NEB/CatTSunami machine access need confirmation |
+| `research_assistant` | Active | owning scientific modules, existing guarded ChatGPT transport | Source implementation supports diagnosis, option comparison and research plans through registered host evidence tools; offline verification and actual tool receipts are separate from model-selected live acceptance. No independent scientific/execution gate; online connectors and SPC adapter are not claimed connected. |
 | `convergence_workflow` | Active | retrieval, server | Five-layer production branch selected; clean static `9574228` accepted; any later layer-count comparison is validation-only |
 | `adsorption_workflow` | Active | retrieval, AQCat25 GPU, VASP, convergence, registry | AQCat25 endpoint-relax interface smoke passed in job `727`; production batch handoff and compatible VASP relaxations/final statics remain required |
 | `adsmind_lite` | Active | CARE species, clean slabs, adsorption rules | Fe(110) benchmark and Fe(100)/Fe(111) metallic detectors pass; carbide/oxide remain manifest-only and need real-surface validation |

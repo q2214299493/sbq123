@@ -3,6 +3,8 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
+import numpy as np
+
 from scripts.scientific_validation import finite_number, integer_number
 
 
@@ -229,3 +231,23 @@ def trailing_threshold_count(values: list[int], threshold: int | None) -> int:
             break
         count += 1
     return count
+
+
+def last_positions(path: Path, count: int) -> np.ndarray:
+    latest = None
+    with path.open(encoding="utf-8", errors="replace") as handle:
+        for line in handle:
+            if "TOTAL-FORCE (eV/Angst)" not in line:
+                continue
+            next(handle, None)
+            rows = []
+            for _ in range(count):
+                fields = next(handle, "").split()
+                if len(fields) < 6:
+                    break
+                rows.append([float(x) for x in fields[:3]])
+            if len(rows) == count:
+                latest = np.asarray(rows)
+    if latest is None:
+        raise ValueError(f"No complete position/force block: {path}")
+    return latest

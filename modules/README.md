@@ -18,6 +18,10 @@ modules. `state_handoff` owns repository task/history lifecycle events and
 managed views; `git_versioning`, `memory_migration`, and project state files
 provide continuity but do not make scientific decisions.
 
+`research_assistant` owns the project-wide goal/evidence/hypothesis/options
+dialogue and usage feedback. It orchestrates registered tools from the scientific
+owners above; it owns no independent scientific criterion or execution gate.
+
 `catalysis_data_retrieval` is the single external-data owner before any new
 calculation or externally seeded structure/path/parameter. It searches the
 approved whitelist first and, for adsorption motifs only, may use

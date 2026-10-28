@@ -100,3 +100,18 @@ no deletion, reclassification event or state-transaction change is authorized by
   was made for this chain. The first two diagnosis-use goals are complete;
   resolving the whole path root cause is not a prerequisite for new-case use.
   See `docs/reviews/rsi_round3_20261028.md` and the local snapshot report.
+
+## Research assistant follow-up — 2026-10-29
+
+- Human owners should review the OH, C3 and Fe(110) advice/acceptance chains;
+  software checks and source citations do not establish scientific success.
+  Adoption, human effort and subsequent results remain unknown until feedback.
+- Wire bounded remote/scheduler collection, online method connectors or complete
+  workflow input packages only through their existing owners when needed. Native
+  callbacks remain a separate unaccepted capability; do not widen permissions.
+- Keep usage feedback distinct from scientific outcomes. Stabilize the current
+  goal/evidence/hypothesis/options/acceptance contract before a thin SPC consumer
+  or any reviewed tool-selection/candidate-ranking change; none is implemented.
+- Retain the existing state-sync source-history failure separately; no unrelated
+  state repair or reopening of job 1508 root-cause work is authorized here.
+  See `docs/reviews/research_assistant_20261029.md` for completed scope and limits.

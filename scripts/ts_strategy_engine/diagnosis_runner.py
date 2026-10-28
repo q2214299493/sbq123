@@ -16,6 +16,7 @@ from .advice_report import load_evidence_status, load_review_context, render_rep
 from .diagnostic_advice import DiagnosticEvidence, backend_output_schema, load_case, output_schema, validate_output
 from .review_app_server import executable, redacted, start_session
 from .review_evidence import _no_links, new_output, safe_file
+from .review_events import ReviewEvents
 from .review_live import CREDENTIAL_STORES, LiveStdio, admission_stage
 from .strategy_learning import POLICY, policy
 
@@ -35,7 +36,7 @@ def producer_identity() -> dict:
         name: sha256_file(Path(__file__).with_name(name)) for name in names}, "policy_sha256": sha256_file(POLICY)}
 
 
-class DiagnosisRun:
+class DiagnosisRun(ReviewEvents):
     def __init__(self, loaded: dict, output: Path, model: str, effort: str, checkpoint: str,
                  timeout: float, max_tool_calls: int, credential_store: str = "keyring", evidence_access: str = "host-tools",
                  review_context: Path | None = None, evidence_status: Path | None = None, *, _prompt_transform=None):
@@ -172,54 +173,6 @@ class DiagnosisRun:
         self.record("tool_completed", {"call_id": identity, "result": result})
         self.cache[identity] = fingerprint, result
         return result
-
-    def _notification(self, method: str, params: dict):
-        if method == "remoteControl/status/changed":
-            if params.get("status") != "disabled":
-                raise ValueError("unexpected active remote-control surface")
-            return
-        if method == "warning":
-            if params.get("threadId") != self.thread_id or not isinstance(params.get("message"), str):
-                raise ValueError("warning thread/message mismatch")
-            self.backend_warnings.append(params["message"])
-            return
-        if method in {"account/updated", "account/rateLimits/updated"}:
-            return
-        if method == "error":
-            raise ValueError(f"backend error: {redacted(params)}")
-        if method in {"thread/started", "thread/status/changed", "thread/tokenUsage/updated"}:
-            if params.get("threadId", params.get("thread", {}).get("id")) != self.thread_id:
-                raise ValueError("notification thread mismatch")
-            if method == "thread/tokenUsage/updated":
-                self.token_usage = params.get("tokenUsage")
-            return
-        allowed = {"turn/completed", "turn/started", "item/started", "item/completed", "item/agentMessage/delta",
-                   "item/reasoning/summaryTextDelta", "item/reasoning/summaryPartAdded", "item/reasoning/textDelta",
-                   "turn/moderationMetadata"}
-        if method not in allowed or params.get("threadId") != self.thread_id \
-                or params.get("turn", {}).get("id", params.get("turnId")) != self.turn_id:
-            raise ValueError("unexpected notification or turn mismatch")
-        if method.startswith("item/"):
-            self._item_event(method, params.get("item", {}))
-        if method == "turn/completed":
-            if params["turn"]["status"] != "completed":
-                raise ValueError("diagnostic turn failed/interrupted")
-            self.turn_completed = True
-
-    def _item_event(self, method: str, item: dict):
-        if item.get("type") == "userMessage":
-            content = item.get("content", [])
-            if len(content) != 1 or content[0].get("type") != "text" \
-                    or content[0].get("text") != json.dumps(self.prompt, ensure_ascii=False):
-                raise ValueError("user message differs from the reserved frozen input")
-            return
-        if item.get("type") not in {None, "agentMessage", "reasoning", "dynamicToolCall"}:
-            raise ValueError("native activity or delegation forbidden")
-        if method == "item/completed" and item.get("type") == "agentMessage":
-            if not isinstance(item.get("id"), str) or not isinstance(item.get("text"), str):
-                raise ValueError("model message identity/text missing")
-            self.messages[item["id"]] = item["text"]
-            self.message_phases[item["id"]] = item.get("phase")
 
     def drive(self, transport, *, probe_live: bool = False, synthetic: bool = False):
         if synthetic:
