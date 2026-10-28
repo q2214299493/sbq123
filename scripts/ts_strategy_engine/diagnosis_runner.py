@@ -12,7 +12,7 @@ import uuid
 from jsonschema import ValidationError
 
 from scripts.artifact_io import load_json_object, sha256_file, sha256_json, write_json_exclusive
-from .advice_report import render_report
+from .advice_report import load_review_context, render_report
 from .diagnostic_advice import DiagnosticEvidence, backend_output_schema, load_case, output_schema, validate_output
 from .review_app_server import executable, redacted, start_session
 from .review_evidence import _no_links, new_output, safe_file
@@ -37,7 +37,8 @@ def producer_identity() -> dict:
 
 class DiagnosisRun:
     def __init__(self, loaded: dict, output: Path, model: str, effort: str, checkpoint: str,
-                 timeout: float, max_tool_calls: int, credential_store: str = "keyring", evidence_access: str = "host-tools"):
+                 timeout: float, max_tool_calls: int, credential_store: str = "keyring", evidence_access: str = "host-tools",
+                 review_context: Path | None = None):
         if not model.strip() or effort not in {"minimal", "low", "medium", "high", "xhigh"}:
             raise ValueError("explicit supported model and effort required")
         if credential_store not in CREDENTIAL_STORES:
@@ -53,6 +54,16 @@ class DiagnosisRun:
         self.output = new_output(output, [loaded["bundle"], loaded["root"]])
         (self.output / "workspace").mkdir()
         self.workspace = self.output / "workspace"
+        self.review_context, self.review_context_ref = load_review_context(review_context, loaded)
+        if self.review_context_ref is not None:
+            original_ref = self.review_context_ref
+            snapshot = self.output / "review_context.snapshot.json"
+            with snapshot.open("xb") as handle:
+                handle.write(Path(original_ref["path"]).read_bytes())
+            if sha256_file(snapshot) != original_ref["sha256"]:
+                raise ValueError("report context changed while freezing")
+            self.review_context_ref = {"path": str(snapshot), "sha256": sha256_file(snapshot), "original": original_ref,
+                                       "scope": "HOST_REPORT_ONLY_NOT_MODEL_INPUT"}
         self.tools = DiagnosticEvidence(loaded)
         self.model, self.effort = model, effort
         self.credential_store = credential_store
@@ -267,6 +278,7 @@ class DiagnosisRun:
                    "task_id": self.loaded["case"]["group_id"], "input_sha256": self.loaded["case"]["input_sha256"],
                    "checkpoint": self.checkpoint, "recommendation": model_output,
                    "evidence_access": self.evidence_access,
+                   "review_context": self.review_context_ref,
                    "source_references": self.loaded["sources"], "causal_claims_scientifically_validated": False,
                    "execution_authorized": False, "scientific_success": "NOT_EVALUATED"}
         payload["recommendation_id"] = sha256_json(payload)
@@ -281,7 +293,9 @@ class DiagnosisRun:
         elif probe_live and self.problem is None:
             status = "LIVE_ADMITTED_NO_TURN" if self.run_mode == "real_codex" else "OFFLINE_TEST_ADMITTED_NO_TURN"
         receipt = {"schema_version": 1, "run_id": self.run_id, "status": status, "run_mode": self.run_mode,
-            "model": self.model, "effort": self.effort, "checkpoint": self.checkpoint, "case_usage": "calibration",
+            "model": self.model, "effort": self.effort, "checkpoint": self.checkpoint,
+            "case_usage": self.review_context["review_kind"] if self.review_context else "calibration",
+            "review_context": self.review_context_ref,
             "credential_store": self.credential_store,
             "evidence_access": self.evidence_access,
             "bundle_provenance": self.loaded["provenance"],
@@ -309,16 +323,16 @@ class DiagnosisRun:
             if item["exit_code"] not in {None, 0}), self.exit_code)
         write_json_exclusive(self.output / "run_receipt.json", receipt)
         with (self.output / "review.md").open("x", encoding="utf-8") as handle:
-            handle.write(render_report(receipt, self.loaded, self.recommendation))
+            handle.write(render_report(receipt, self.loaded, self.recommendation, self.review_context))
         return receipt
 
 
 def run_diagnosis(bundle: Path, case_id: str, output: Path, *, model: str, effort: str, checkpoint: str,
                   auth_home: Path, codex: str | None = None, timeout: float = 180,
                   max_tool_calls: int = 4, probe_live: bool = False, credential_store: str = "keyring",
-                  evidence_access: str = "host-tools") -> dict:
+                  evidence_access: str = "host-tools", review_context: Path | None = None) -> dict:
     loaded = load_case(bundle, case_id)
-    run = DiagnosisRun(loaded, output, model, effort, checkpoint, timeout, max_tool_calls, credential_store, evidence_access)
+    run = DiagnosisRun(loaded, output, model, effort, checkpoint, timeout, max_tool_calls, credential_store, evidence_access, review_context)
     transport = None
     try:
         run.tools.verify()

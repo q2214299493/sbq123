@@ -88,3 +88,13 @@ no deletion, reclassification event or state-transaction change is authorized by
   Do not weaken native permissions or relabel frozen-context turns as tool runs.
   The explicit frozen-context diagnosis entry is usable independently; this item
   does not authorize scientific jobs, main integration or SPC changes.
+
+## RSI job 1508 snapshot evidence — follow-up, 2026-10-28
+
+- The original exception-to-producer-exit chain is now verified. Next, locate
+  the failed/nearest persisted snapshot and its write ordering, independently
+  verify the exceeding atom mapping, and compare initial/preceding snapshots.
+  Snapshot availability remains unknown; the historical atom assignment has
+  not been independently recomputed. This is read-only evidence work, not
+  authority to rerun calculations, change thresholds or approve a repair.
+  See `docs/reviews/rsi_round2_20261028.md` and the local use feedback.

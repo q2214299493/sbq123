@@ -453,3 +453,84 @@ def test_context_contract_still_rejects_changed_original_source(frozen, tmp_path
     with pytest.raises(ValueError, match="changed"):
         run.drive(FrozenContextPeer(run), synthetic=True)
     assert not (run.output / "answers.json").exists()
+
+
+def host_review_context(frozen, tmp_path):
+    parent, history = tmp_path / "parent.json", tmp_path / "history.json"
+    write_json(parent, {"task_id": frozen["case"]["group_id"]})
+    write_json(history, {"interpretation": "HOST_ONLY_HISTORY_NEVER_IN_MODEL"})
+    def ref(path):
+        return {"path": str(path), "sha256": sha256_file(path)}
+    value = {"schema_version": 1, "case_id": frozen["case"]["case_id"], "review_kind": "unblinded_followup",
+        "parent_run": ref(parent), "new_information": ["Synthetic new raw record"],
+        "judgment_changes": [{"judgment": "Direct cause", "before": "unknown", "after": "raw event observed",
+            "change": "strengthened", "evidence_ids": ["distance"]}],
+        "metric_definitions": [{"evidence_id": "distance", "label": "Distance", "meaning": "Synthetic adjacent-frame metric",
+            "unit": "angstrom", "comparison": "Adjacent frames, not time steps"}],
+        "historical_review_source": ref(history), "historical_interpretations": [{"claim": "HOST_ONLY_HISTORY_NEVER_IN_MODEL",
+            "primary_evidence_assessment": "Separate from primary evidence", "evidence_ids": ["distance"]}],
+        "remaining_unknown": ["Synthetic causal ambiguity remains"]}
+    path = tmp_path / "review_context.json"
+    write_json(path, value)
+    return path, value
+
+
+def test_report_shows_full_hypotheses_and_conditional_proposals(frozen, tmp_path):
+    from scripts.ts_strategy_engine.advice_report import render_report
+    run = new_run(frozen, tmp_path / "full-report")
+    run.drive(SyntheticPeer(run), synthetic=True)
+    receipt = run.finish()
+    payload = deepcopy(run.recommendation)
+    m = payload["recommendation"]
+    m["hypotheses"] = [{"claim": "Alternative path explanation", "supporting_evidence_ids": ["distance"],
+        "opposing_evidence_ids": ["distance"], "uncertainty": "Independent force evidence absent"}]
+    m["conditional_proposals"] = [{"condition": "Only after independent mapping review", "proposal": "Review a candidate plan",
+                                   "evidence_ids": ["distance"]}]
+    text = render_report(receipt, frozen, payload)
+    for expected in ("Alternative path explanation", "支持", "反对或限制证据", "Independent force evidence absent",
+                     "Only after independent mapping review", "Review a candidate plan", "均未批准执行"):
+        assert expected in text
+
+
+def test_empty_proposal_list_is_explicit_not_filled(frozen, tmp_path):
+    run = new_run(frozen, tmp_path / "empty-proposals")
+    run.drive(SyntheticPeer(run), synthetic=True)
+    run.finish()
+    text = (run.output / "review.md").read_text(encoding="utf-8")
+    assert "条件性方案为空" in text and "未补造策略修改建议" in text
+
+
+def test_followup_context_is_hash_bound_host_only_and_reports_changes(frozen, tmp_path):
+    path, value = host_review_context(frozen, tmp_path)
+    run = runner.DiagnosisRun(frozen, tmp_path / "followup", "synthetic-model", "medium", "2026-10-28T12:00:00Z",
+                              30, 4, evidence_access="frozen-context", review_context=path)
+    assert "HOST_ONLY_HISTORY" not in json.dumps(run.prompt)
+    snapshot = Path(run.review_context_ref["path"])
+    assert snapshot.read_bytes() == path.read_bytes()
+    run.drive(FrozenContextPeer(run), synthetic=True)
+    receipt = run.finish()
+    assert receipt["case_usage"] == "unblinded_followup"
+    assert receipt["review_context"]["scope"] == "HOST_REPORT_ONLY_NOT_MODEL_INPUT"
+    text = (run.output / "review.md").read_text(encoding="utf-8")
+    for expected in (value["new_information"][0], "增强", "angstrom", "not time steps", "HOST_ONLY_HISTORY_NEVER_IN_MODEL",
+                     value["remaining_unknown"][0]):
+        assert expected in text
+
+
+@pytest.mark.parametrize("mode", ["wrong_case", "stale_history", "unknown_metric", "wrong_parent"])
+def test_invalid_host_review_context_rejected_before_model(frozen, tmp_path, mode):
+    from scripts.ts_strategy_engine.advice_report import load_review_context
+    path, value = host_review_context(frozen, tmp_path)
+    if mode == "wrong_case":
+        value["case_id"] = "other"
+    elif mode == "stale_history":
+        Path(value["historical_review_source"]["path"]).write_text("changed")
+    elif mode == "unknown_metric":
+        value["metric_definitions"][0]["evidence_id"] = "invented"
+    else:
+        parent = Path(value["parent_run"]["path"])
+        write_json(parent, {"task_id": "another task"})
+        value["parent_run"]["sha256"] = sha256_file(parent)
+    write_json(path, value)
+    with pytest.raises(ValueError):
+        load_review_context(path, frozen)

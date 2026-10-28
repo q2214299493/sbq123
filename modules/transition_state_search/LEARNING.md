@@ -220,6 +220,38 @@ next-review, workflow and review-runner suites. Actual local admission evidence
 and remaining limitations are recorded in
 [the round-one implementation record](../../docs/reviews/rsi_round1_20261028.md).
 
+### Follow-up evidence and complete reports
+
+Keep the preceding bundle, raw answer and run receipt unchanged. Build a new
+case/input for newly acquired evidence, use its actual acquisition cutoff, and
+identify the preceding hypothesis as unvalidated context. A historical follow-up
+is not a blind test. Reuse the successful model, effort, explicit credential
+store and evidence-access contract; do not switch modes to obtain acceptance.
+
+An optional `--review-context ABSOLUTE_JSON` binds host-only report notes to the
+new case and a hash-checked parent run for the same task. It contains
+`new_information`, `judgment_changes`, `metric_definitions`, a hash-checked
+`historical_review_source`, separate `historical_interpretations`, and
+`remaining_unknown`. These notes are byte-snapshotted in the output and referenced
+by the recommendations/receipt; they never enter the model prompt or read view.
+Evidence IDs in the notes must exist in the selected new case. A changed parent,
+historical source, wrong task/case or unknown metric reference rejects the input.
+
+`review.md` now shows all hypotheses, their supporting/opposing evidence and
+uncertainty, all conditional proposals (or an explicit empty statement), the
+first check with A/B outcomes, observations, metric definitions and the cited
+source index. Host evidence comparisons and historical interpretations are
+labelled separately from the model's claims. Long raw excerpts are abbreviated
+only in the display; their complete values remain in the source-bound input.
+
+Save use feedback beside the run, separately from scientific outcomes: historical
+overlap, whether the check was executable/performed, which uncertainty changed,
+and measured human review time. Unmeasured human time stays null/unknown; model
+or tool wall time is not a substitute. Such feedback never approves a strategy,
+changes a scientific threshold or establishes a successful calculation.
+The concrete round-two record is in
+[the evidence follow-up](../../docs/reviews/rsi_round2_20261028.md).
+
 ## Read-only next-review advice (Phase 3B)
 
 Use saved, structurally valid schema-2 public cases and diagnosis answers to produce
