@@ -1,6 +1,6 @@
 # C₂H₃三臂DFT验收输入
 
-**三套输入已生成，3项只读INCAR审核、3项canonical adsorption_relaxation预检及18个核心输入哈希复核通过。未上传、未提交、没有SUBMIT_VASP授权。** 本次只准备原始直接DFT、NequIP后DFT和微调后DFT，不包括C₃。
+**三套输入准备和审核完成后，用户明确要求“提交”；现已通过canonical执行器提交为9926805/9926806/9926807，首次23:41队列核对均PEND。** 本文件保留输入依据；本次执行授权与回执见[正式提交记录](../fe110_c2_three_arm_submission_20261028/README.md)。原准备plan.json的未提交字段保留为历史快照，不原地改写。不包括C₃。
 
 输入根目录：`calculations/fe110_reico_pilot300_20261022/scratch512_speed2_20261028_v2/c2_three_arm_dft300_v1/`。
 
@@ -41,12 +41,12 @@ INCAR、KPOINTS、POTCAR.spec和script.lsf在三臂之间逐字节相同。坐�
 
 旧10_A两项计时样本按三项均运行300步线性放大的参考量为约**5,742–6,504核时**。这是不同起点/节点/SCF难度的历史量级，**不是本次费用上限、耗时预测或收敛保证**，不作为本次速度基线；提前收敛会减少实际成本，排队另计。
 
-提交前仍需核对sunboquan-codex上实际PAW-PBE POTCAR的Fe/C/H顺序与全文SHA、当前账户余量、最新输入哈希，以及明确的三项计算预算授权。当前ALLOWED_ACTIONS为空，未创建提交允许动作；本次没有检查实时队列或远端POTCAR，没有上传或提交。
+后续正式提交阶段已核对sunboquan-codex实际PAW-PBE POTCAR顺序/SHA、32/128核占用及本次96核余量，并绑定用户“提交”指令和新门决策。三个门均允许SUBMIT_VASP，三项已分别提交；详见独立提交记录。原准备包的ALLOWED_ACTIONS为空只表示准备时状态，不代表后续提交未发生。
 
 ## 已执行验证
 
 两份ML来源与原始共同起点绑定复核，三项几何检查、只读INCAR审核和统一提交预检通过；独立读取实际INCAR核对力标准、300步、50个MAGMOM与LORBIT，并复核18个核心输入哈希、三臂方法/资源一致及新目录无重启文件。55项相关来源、构建器、preflight和几何回归通过；新任务源语法和限定Ruff通过，未跑全仓库测试。
 
-实际DFT力、SCF、收敛步数、磁性分支、同一终态和加速均未验证。下一步仅审阅这三套输入和具体提交预算；保持不提交状态。
+实际DFT力、SCF、收敛步数、磁性分支、同一终态和加速仍未验证。下一步按用户请求检查已提交三项的队列和实际计算文件；不自动重试或续算。
 
 repo-state sync --safe-only仍被既有sbq_catalyst_agent_workflow.egg-info/PKG-INFO分类后变化阻塞，退出2；未改动该无关文件，不声称managed任务视图已同步。
