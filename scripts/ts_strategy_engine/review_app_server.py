@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import base64
 from collections import deque
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -23,6 +24,16 @@ DISABLED_FEATURES = (
     "daemon_auto_start",
 )
 MAX_MESSAGE = 1024 * 1024
+
+
+def child_environment(home: Path) -> dict:
+    """Use the same existing isolated account for local admission and real launch."""
+    environment = os.environ.copy()
+    environment["CODEX_HOME"] = str(home)
+    for key in list(environment):
+        if any(term in key.upper() for term in ("API_KEY", "AUTH_TOKEN", "ACCESS_TOKEN")):
+            del environment[key]
+    return environment
 
 
 def executable(value: str | None) -> Path:
@@ -63,31 +74,43 @@ def redacted(value):
     return value
 
 
+def stderr_capture(data: bytes) -> dict:
+    """Keep original error bytes when safe, including Windows local-codepage errors."""
+    try:
+        text, encoding = data.decode("utf-8"), "utf-8"
+    except UnicodeDecodeError:
+        encoding = "mbcs" if os.name == "nt" else "utf-8"
+        text = data.decode(encoding, errors="replace")
+    masked = redacted(text)
+    sensitive = re.search(r"(?i)\b(access_?token|refresh_?token|api_?key|authorization|password|credential|secret)\b", text)
+    if sensitive:
+        masked = "[REDACTED sensitive stderr]"
+    return {"text": masked, "encoding": encoding, "sha256": hashlib.sha256(data).hexdigest(),
+            "raw_base64": base64.b64encode(data).decode("ascii") if masked == text else None}
+
+
 class Stdio:
     """One child process, one absolute deadline, no retries or resumed sessions."""
 
     def __init__(self, binary: Path, directory: Path, timeout: float, record, *, auth_home: Path | None = None,
-                 client_profile: str | None = None):
+                 client_profile: str | None = None, workspace: Path | None = None):
         self.deadline = time.monotonic() + timeout
         self.record, self.pending, self.messages = record, deque(), queue.Queue(maxsize=256)
         self.serial = 0
+        workspace = workspace or directory / "workspace"
         home = auth_home or directory / "codex-home"
         if auth_home is None:
             home.mkdir()
-        environment = os.environ.copy()
-        environment["CODEX_HOME"] = str(home)
-        # A probe needs no credentials. Do not inherit model/API authentication variables.
-        for key in list(environment):
-            if any(term in key.upper() for term in ("API_KEY", "AUTH_TOKEN", "ACCESS_TOKEN")):
-                del environment[key]
+        environment = child_environment(home)
         flags = [part for feature in DISABLED_FEATURES for part in ("--disable", feature)]
         command = [str(binary), "app-server", "--stdio", *flags, "--strict-config", "-c", 'web_search="disabled"']
         if client_profile:
             command = [str(binary), "sandbox", "--include-managed-config", "--permission-profile", client_profile,
-                       "-C", str(directory / "workspace"), "--", *command]
+                       "-C", str(workspace), "--", *command]
+        self.record("process_starting", {"argv": command, "auth_home": str(home), "cwd": str(workspace)})
         self.process = subprocess.Popen(
             command,
-            cwd=directory / "workspace", env=environment, stdin=subprocess.PIPE,
+            cwd=workspace, env=environment, stdin=subprocess.PIPE,
             stdout=subprocess.PIPE, stderr=subprocess.PIPE,
             creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
         )
@@ -109,10 +132,8 @@ class Stdio:
                 line = self.process.stderr.readline(MAX_MESSAGE + 1)
                 if not line:
                     return
-                text = line.decode("utf-8", errors="replace").rstrip()
-                if re.search(r"(?i)\b(access_?token|refresh_?token|api_?key|authorization|password|credential|secret)\b", text):
-                    text = "[REDACTED sensitive stderr]"
-                self.record("stderr", {"text": redacted(text), "truncated": len(line) > MAX_MESSAGE})
+                captured = stderr_capture(line)
+                self.record("stderr", {**captured, "text": captured["text"].rstrip(), "truncated": len(line) > MAX_MESSAGE})
                 if len(line) > MAX_MESSAGE:
                     self.process.kill()
                     return
@@ -188,7 +209,7 @@ class Stdio:
             stream.close()
 
 
-def start_session(transport, workspace: Path, model: str, effort: str, tools: list) -> dict:
+def start_session(transport, workspace: Path, model: str, effort: str, tools: list, *, instructions: str | None = None) -> dict:
     if not getattr(transport, "initialized", False):
         transport.rpc("initialize", {"clientInfo": {"name": "workflow_review", "version": "1"},
                       "capabilities": {"experimentalApi": True, "explicitGatewayOauth": True}})
@@ -201,7 +222,7 @@ def start_session(transport, workspace: Path, model: str, effort: str, tools: li
         "allowProviderModelFallback": False,
         "cwd": str(workspace.resolve()), "ephemeral": True, "environments": [],
         "runtimeWorkspaceRoots": [str(workspace.resolve())], "selectedCapabilityRoots": [],
-        "baseInstructions": "Only the two supplied review tools are permitted. No delegation or other tools.",
+        "baseInstructions": instructions or "Only the two supplied review tools are permitted. No delegation or other tools.",
         "developerInstructions": "Read-only evidence review. Never execute calculations or accept a strategy.",
         "config": {"model_reasoning_effort": effort, "web_search": "disabled"}, "dynamicTools": tools,
     }
@@ -220,19 +241,36 @@ def start_session(transport, workspace: Path, model: str, effort: str, tools: li
     return result
 
 
-def verify_protocol(binary: Path, directory: Path, timeout: float) -> dict:
+def verify_protocol(binary: Path, directory: Path, timeout: float, *, auth_home: Path | None = None) -> dict:
     """Verify local help and generated schema without a thread or authentication."""
     directory.mkdir()
     deadline = time.monotonic() + timeout
+    commands = []
+    environment = child_environment(auth_home) if auth_home is not None else None
     def command(arguments):
         remaining = deadline - time.monotonic()
         if remaining <= 0:
             raise TimeoutError("protocol probe budget exhausted")
         try:
-            result = subprocess.run([str(binary), *arguments], capture_output=True, timeout=remaining,
+            result = subprocess.run([str(binary), *arguments], capture_output=True, timeout=remaining, env=environment,
                                     creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0)
         except subprocess.TimeoutExpired as exc:
+            commands.append({"argv": [str(binary), *arguments], "exit_code": None, "timed_out": True,
+                             "stdout": redacted((exc.stdout or b"").decode("utf-8", errors="replace")),
+                             "stderr": redacted((exc.stderr or b"").decode("utf-8", errors="replace"))})
+            write_json_exclusive(directory / f"command-{len(commands):02d}.json", commands[-1])
             raise TimeoutError("local protocol command exceeded probe deadline") from exc
+        except OSError as exc:
+            write_json_exclusive(directory / f"command-{len(commands) + 1:02d}.json", {
+                "argv": [str(binary), *arguments], "auth_home": str(auth_home) if auth_home else None,
+                "exit_code": None, "timed_out": False, "os_error": str(exc), "stdout": "", "stderr": ""})
+            raise
+        captured = stderr_capture(result.stderr)
+        commands.append({"argv": [str(binary), *arguments], "auth_home": str(auth_home) if auth_home else None,
+                         "exit_code": result.returncode, "timed_out": False,
+                         "stdout": redacted(result.stdout.decode("utf-8", errors="replace")),
+                         "stderr": captured["text"], "stderr_capture": captured})
+        write_json_exclusive(directory / f"command-{len(commands):02d}.json", commands[-1])
         if result.returncode:
             raise ValueError(f"Codex protocol probe failed: {arguments}, exit={result.returncode}")
         return result.stdout.decode("utf-8")

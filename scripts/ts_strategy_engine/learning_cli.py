@@ -20,6 +20,7 @@ from .strategy_learning import (
 )
 from .workflow_improvement import create_baseline, propose_policy, policy_status, bind_evaluation, record_decision
 from .workflow_review_runner import run_review
+from .diagnosis_runner import run_diagnosis
 
 
 def parser() -> argparse.ArgumentParser:
@@ -91,6 +92,18 @@ def parser() -> argparse.ArgumentParser:
     review.add_argument("--execute", action="store_true", help="Request a model review; blocked unless native read confinement is verified.")
     review.add_argument("--auth-home", type=Path, help="Explicit isolated Codex authentication home; live execution only.")
     review.add_argument("--max-tool-calls", type=int, default=8, help="Per-run operation cap in [1, 8].")
+    diagnosis = commands.add_parser("diagnose", help="Generate one new diagnosis from a frozen case with existing ChatGPT auth; fail explicitly if blocked.")
+    diagnosis.add_argument("--bundle", type=Path, required=True)
+    diagnosis.add_argument("--case-id", required=True)
+    diagnosis.add_argument("--checkpoint", required=True, help="Frozen observation cutoff, ISO time with timezone; not current queue state.")
+    diagnosis.add_argument("--output-dir", type=Path, required=True)
+    diagnosis.add_argument("--model", required=True)
+    diagnosis.add_argument("--effort", choices=["minimal", "low", "medium", "high", "xhigh"], required=True)
+    diagnosis.add_argument("--auth-home", type=Path, required=True, help="Existing isolated managed ChatGPT login, never personal config or copied credentials.")
+    diagnosis.add_argument("--codex", help="Actual local codex.exe, with no installation or upgrade.")
+    diagnosis.add_argument("--timeout-seconds", type=float, default=180)
+    diagnosis.add_argument("--max-tool-calls", type=int, default=4)
+    diagnosis.add_argument("--probe-live", action="store_true", help="Same LiveStdio admission and thread check, then close with zero turn/start.")
     replay = commands.add_parser("replay-history", help="Replay saved, hash-bound historical snapshots without execution.")
     replay.add_argument("--request", type=Path, required=True)
     replay.add_argument("--expected-request-sha256", required=True)
@@ -174,21 +187,29 @@ def main(argv: list[str] | None = None) -> None:
     root = parser()
     args = root.parse_args(argv)
     try:
-        if (args.command in {"cases-build", "cases-evaluate", "advise-next", "replay-history"}
+        if (args.command in {"cases-build", "cases-evaluate", "advise-next", "replay-history", "diagnose"}
                 or args.command.startswith("workflow-")) and args.output is not None:
             raise ValueError("--output is not supported for diagnostic case commands")
         if args.output and args.output.exists():
             raise ValueError(f"report already exists: {args.output}")
-        result = _dispatch(args)
+        result = _diagnose(args) if args.command == "diagnose" else _dispatch(args)
         if args.output:
             write_json(args.output, result)
         print(json.dumps(result, ensure_ascii=False, indent=2))
         if args.command == "workflow-run-review" and result["status"] == "BLOCKED":
             root.exit(2, "strategy learning: model review blocked; see result.json\n")
+        if args.command == "diagnose" and result["status"] == "BLOCKED":
+            root.exit(2, "strategy learning: no new diagnosis; see run_receipt.json and review.md\n")
         if args.command == "cases-evaluate" and not result["integrity_ok"]:
             root.exit(2, f"strategy learning: invalid answer set; details in {args.report}\n")
     except (OSError, ValueError, KeyError, TypeError) as exc:
         root.exit(2, f"strategy learning: {exc}\n")
+
+
+def _diagnose(args: argparse.Namespace):
+    return run_diagnosis(args.bundle, args.case_id, args.output_dir, model=args.model, effort=args.effort,
+                         checkpoint=args.checkpoint, auth_home=args.auth_home, codex=args.codex,
+                         timeout=args.timeout_seconds, max_tool_calls=args.max_tool_calls, probe_live=args.probe_live)
 
 
 if __name__ == "__main__":
