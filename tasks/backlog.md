@@ -89,12 +89,14 @@ no deletion, reclassification event or state-transaction change is authorized by
   The explicit frozen-context diagnosis entry is usable independently; this item
   does not authorize scientific jobs, main integration or SPC changes.
 
-## RSI job 1508 snapshot evidence — follow-up, 2026-10-28
+## RSI job 1508 bounded snapshot check — completed, 2026-10-28
 
-- The original exception-to-producer-exit chain is now verified. Next, locate
-  the failed/nearest persisted snapshot and its write ordering, independently
-  verify the exceeding atom mapping, and compare initial/preceding snapshots.
-  Snapshot availability remains unknown; the historical atom assignment has
-  not been independently recomputed. This is read-only evidence work, not
-  authority to rerun calculations, change thresholds or approve a repair.
-  See `docs/reviews/rsi_round2_20261028.md` and the local use feedback.
+- Registered local and remote files agree. The restart metrics match the failed
+  checkpoint and the bound writer saves restart/state before the guard observer.
+  Independent MIC calculations locate the exceeding atom at zero-based 49,
+  one-based 50, H, matching the original structure order and historical dual
+  index fields. The separate step-267 snapshot was not found within the bounded
+  locations; retention remains unknown. No calculation or further model call
+  was made for this chain. The first two diagnosis-use goals are complete;
+  resolving the whole path root cause is not a prerequisite for new-case use.
+  See `docs/reviews/rsi_round3_20261028.md` and the local snapshot report.

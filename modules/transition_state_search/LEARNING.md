@@ -252,6 +252,40 @@ changes a scientific threshold or establishes a successful calculation.
 The concrete round-two record is in
 [the evidence follow-up](../../docs/reviews/rsi_round2_20261028.md).
 
+`missing_evidence` is now rendered verbatim as the model's **input gaps**.
+`remaining_unknown` stays in a separate host section; they are never merged into
+a claim that scientific material does not exist. Optional
+`--evidence-status ABSOLUTE_JSON` snapshots a host-only availability record:
+schema 1, `case_id`, `observed_at`, and bounded `records` with `item`, `status`,
+`details`, `evidence_ids` and hash-checked `references`. Status is one of
+`provided` (listed input IDs), `withheld` (host has it, model did not receive it),
+`not_found` (retention unknown within the stated search), or `not_generated`
+(explicit control-flow/production evidence required). These are host assertions,
+not model discoveries; reference identity checks alone do not prove their
+scientific meaning. Large original logs remain local and can be linked through
+a small checked collection receipt; no size or native permission limit is
+relaxed. Blocked reports also show registered availability separately.
+
+### Evaluation-only direct-question control
+
+`python -m scripts.ts_strategy_engine.diagnosis_comparison --help` exposes only
+the direct-question A arm of a small evaluation. It uses the same guarded runner,
+file authentication, frozen-context contract and output schema. Its prompt
+changes only the first two instruction paragraphs and version; all evidence,
+remaining basic constraints and budget fields are retained. B uses the ordinary
+`learning diagnose` entry, whose default prompt and semantics are unchanged.
+The private prompt transform is not exposed by the production CLI.
+
+Freeze the cases, selection/exposure record, prompt versions/hashes, shared
+constraints and run order before any turn. Use independent sessions and a
+write-once reservation for each case/arm; retain its first answer or failure,
+without repair or selection retries. Distinguish report/input preparation and
+human review burden from model wall time. This comparison isolates prompting on
+shared prepared evidence; it does not establish an advantage over unaided human
+chat preparation. Human scientific review remains necessary, and two cases
+cannot establish generalization or RSI self-improvement. See
+[the round-three initial screen](../../docs/reviews/rsi_round3_20261028.md).
+
 ## Read-only next-review advice (Phase 3B)
 
 Use saved, structurally valid schema-2 public cases and diagnosis answers to produce

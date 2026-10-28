@@ -22,6 +22,58 @@ def _texts(values: list):
         raise ValueError("report context requires bounded nonempty text entries")
 
 
+AVAILABILITY = {
+    "provided": "宿主已有且已提供给模型",
+    "withheld": "宿主已有但尚未提供给模型",
+    "not_found": "尚未找到，留存情况未知",
+    "not_generated": "有依据确认未生成",
+}
+
+
+def load_evidence_status(path: Path | None, loaded: dict) -> tuple[dict | None, dict | None]:
+    """Host assertions with checked references, never inferred from model gaps."""
+    if path is None:
+        return None, None
+    path = safe_file(path.absolute(), path.absolute().parent)
+    document = load_json_object(path)
+    exact_keys(document, {"schema_version", "case_id", "observed_at", "records"})
+    if type(document["schema_version"]) is not int or document["schema_version"] != 1 \
+            or document["case_id"] != loaded["case"]["case_id"]:
+        raise ValueError("evidence status version/case mismatch")
+    _texts([document["observed_at"]])
+    rows = document["records"]
+    if not isinstance(rows, list) or not 1 <= len(rows) <= 30:
+        raise ValueError("bounded evidence status records required")
+    for row in rows:
+        exact_keys(row, {"item", "status", "details", "evidence_ids", "references"})
+        _texts([row["item"], row["details"]])
+        if row["status"] not in AVAILABILITY:
+            raise ValueError("unsupported evidence availability status")
+        ids, refs = row["evidence_ids"], row["references"]
+        _texts(ids)
+        if len(ids) != len(set(ids)) or not set(ids) <= loaded["sources"].keys() \
+                or (row["status"] == "provided" and not ids) or (row["status"] != "provided" and ids):
+            raise ValueError("evidence availability/input mapping mismatch")
+        if not isinstance(refs, list) or not 1 <= len(refs) <= 8:
+            raise ValueError("availability assertions require checked source/search/control-flow references")
+        for reference in refs:
+            _reference(reference)
+    return document, {"path": str(path), "sha256": sha256_file(path)}
+
+
+def _evidence_status_sections(status: dict | None) -> list[str]:
+    lines = ["", "## 宿主核查的材料状态（独立于模型回答）", ""]
+    if status is None:
+        return lines + ["未登记宿主材料状态；模型列出的输入缺口不能据此解释为科研材料不存在。"]
+    lines += [f"宿主核查时间：{status['observed_at']}；以下为有来源的宿主登记，不是模型自行核查。", "",
+              "|材料|核查状态|范围与依据|", "|---|---|---|"]
+    for row in status["records"]:
+        sources = "；".join(f"[来源 {i}](<{ref['path']}>)" for i, ref in enumerate(row["references"], 1))
+        cells = [row["item"], AVAILABILITY[row["status"]], row["details"] + "；" + sources]
+        lines.append("|" + "|".join(v.replace("|", "\\|").replace("\n", " ") for v in cells) + "|")
+    return lines
+
+
 def load_review_context(path: Path | None, loaded: dict) -> tuple[dict | None, dict | None]:
     """Host-only follow-up notes; never included in model instructions or evidence."""
     if path is None:
@@ -133,7 +185,8 @@ def _all_citations(value) -> set[str]:
     return set()
 
 
-def render_report(receipt: dict, loaded: dict, recommendation: dict | None, context: dict | None = None) -> str:
+def render_report(receipt: dict, loaded: dict, recommendation: dict | None, context: dict | None = None,
+                  evidence_status: dict | None = None) -> str:
     case = loaded["case"]
     lines = [f"# RSI 现场诊断：{case['case_id']}", "",
              f"材料冻结/复核截至时间：{receipt['checkpoint']}；用途：{receipt['case_usage']}（本次不作盲测评分）。",
@@ -162,8 +215,11 @@ def render_report(receipt: dict, loaded: dict, recommendation: dict | None, cont
             lines += [f"- 条件：{row['if']}", f"  对应判断：{row['then']}"]
         lines += _model_sections(model)
         lines += _context_sections(context)
-        unknown = list(dict.fromkeys(model["missing_evidence"] + (context["remaining_unknown"] if context else [])))
-        lines += ["", "## 仍然未知", ""] + [f"- {text}" for text in unknown]
+        lines += ["", "## 模型列出的输入缺口（原话，未推断材料不存在）", ""]
+        lines += [f"- {text}" for text in model["missing_evidence"]]
+        if context:
+            lines += ["", "## 宿主复核的未确认项（与模型缺口分开）", ""]
+            lines += [f"- {text}" for text in context["remaining_unknown"]]
         cost = model["cost"]
         quantity = "未知（未测量）" if cost["status"] == "unknown" else f"{cost['status']}；{cost['value']} {cost['unit']}"
         lines += ["", f"成本：{quantity}。依据：{cost['basis']}",
@@ -180,6 +236,7 @@ def render_report(receipt: dict, loaded: dict, recommendation: dict | None, cont
             lines.append(f"- [{label}](<{source['path']}>) = `{value}`；SHA256 `{source['sha256'][:12]}…`。")
     if recommendation is not None:
         lines += ["", "</details>"]
+    lines += _evidence_status_sections(evidence_status)
     lines += ["", "本次没有执行或批准任何 GPU/VASP/NEB/DIMER 作业，也没有确认 TS、能垒、节省核时或泛化收益。",
               "完整输入、原始模型回答（若有）与逐阶段记录见本目录。", ""]
     return "\n".join(lines)

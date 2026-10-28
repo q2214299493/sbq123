@@ -534,3 +534,78 @@ def test_invalid_host_review_context_rejected_before_model(frozen, tmp_path, mod
     write_json(path, value)
     with pytest.raises(ValueError):
         load_review_context(path, frozen)
+
+
+def availability_notes(frozen, tmp_path):
+    source = tmp_path / "host-status-source.json"
+    write_json(source, {"host_only": "HOST_STATUS_NOT_MODEL_INPUT", "scope": "synthetic software fixture"})
+    reference = {"path": str(source), "sha256": sha256_file(source)}
+    rows = [{"item": name, "status": name, "details": "HOST_STATUS_NOT_MODEL_INPUT",
+             "evidence_ids": ["distance"] if name == "provided" else [], "references": [reference]}
+            for name in ("provided", "withheld", "not_found", "not_generated")]
+    value = {"schema_version": 1, "case_id": frozen["case"]["case_id"],
+             "observed_at": "2026-10-28T14:00:00Z", "records": rows}
+    path = tmp_path / "availability.json"
+    write_json(path, value)
+    return path, value
+
+
+def test_availability_is_host_only_and_separate_from_model_gaps(frozen, tmp_path):
+    path, status = availability_notes(frozen, tmp_path)
+    context_path, _ = host_review_context(frozen, tmp_path)
+    run = runner.DiagnosisRun(frozen, tmp_path / "status-report", "synthetic-model", "medium", "2026-10-28T14:00:00Z",
+                              30, 4, evidence_access="frozen-context", review_context=context_path, evidence_status=path)
+    assert "HOST_STATUS_NOT_MODEL_INPUT" not in json.dumps(run.prompt)
+    assert Path(run.evidence_status_ref["path"]).read_bytes() == path.read_bytes()
+    run.drive(FrozenContextPeer(run), synthetic=True)
+    receipt = run.finish()
+    assert receipt["evidence_status"]["scope"] == "HOST_REPORT_ONLY_NOT_MODEL_INPUT"
+    text = (run.output / "review.md").read_text(encoding="utf-8")
+    from scripts.ts_strategy_engine.advice_report import AVAILABILITY
+    for label in AVAILABILITY.values():
+        assert label in text
+    assert "Matched neighboring frame coordinates" in text
+    assert "模型列出的输入缺口（原话" in text
+    assert "宿主复核的未确认项（与模型缺口分开）" in text
+    assert text.index("Matched neighboring frame coordinates") < text.index("宿主复核的未确认项")
+    assert status["records"][1]["details"] in text
+
+
+@pytest.mark.parametrize("mode", ["wrong_case", "no_source", "unknown_status", "unknown_id", "withheld_id", "stale_source"])
+def test_availability_requires_bounded_checked_host_assertions(frozen, tmp_path, mode):
+    from scripts.ts_strategy_engine.advice_report import load_evidence_status
+    path, status = availability_notes(frozen, tmp_path)
+    if mode == "wrong_case":
+        status["case_id"] = "other"
+    elif mode == "no_source":
+        status["records"][3]["references"] = []
+    elif mode == "unknown_status":
+        status["records"][0]["status"] = "probably_missing"
+    elif mode == "unknown_id":
+        status["records"][0]["evidence_ids"] = ["unknown"]
+    elif mode == "withheld_id":
+        status["records"][1]["evidence_ids"] = ["distance"]
+    else:
+        Path(status["records"][0]["references"][0]["path"]).write_text("changed")
+    write_json(path, status)
+    with pytest.raises(ValueError):
+        load_evidence_status(path, frozen)
+
+
+def test_direct_baseline_preserves_shared_evidence_constraints_schema_and_budget(frozen, tmp_path):
+    from scripts.ts_strategy_engine.diagnosis_comparison import DIRECT_PROMPT_VERSION, direct_prompt
+    structured = runner.DiagnosisRun(frozen, tmp_path / "structured-profile", "synthetic-model", "medium",
+                                    "2026-10-28T14:00:00Z", 30, 4, evidence_access="frozen-context")
+    original = deepcopy(structured.prompt)
+    direct = runner.DiagnosisRun(frozen, tmp_path / "direct-profile", "synthetic-model", "medium",
+                               "2026-10-28T14:00:00Z", 30, 4, evidence_access="frozen-context", _prompt_transform=direct_prompt)
+    assert structured.prompt == original and structured.prompt["prompt_version"] == runner.PROMPT_VERSION
+    assert direct.prompt["prompt_version"] == DIRECT_PROMPT_VERSION
+    for key in original.keys() - {"instructions", "prompt_version"}:
+        assert direct.prompt[key] == original[key]
+    assert direct.prompt["instructions"][2:] == original["instructions"][2:]
+    direct.drive(FrozenContextPeer(direct), synthetic=True)
+    receipt = direct.finish()
+    assert receipt["prompt_version"] == DIRECT_PROMPT_VERSION and receipt["actual_tool_calls"] == 0
+    with pytest.raises(ValueError, match="frozen-context"):
+        direct_prompt({**original, "evidence_access": "host-tools"})

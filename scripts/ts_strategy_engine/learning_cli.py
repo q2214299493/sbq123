@@ -106,6 +106,8 @@ def parser() -> argparse.ArgumentParser:
                            help="Explicit contract: require host tool reads, or generate from source-verified public context with zero tools. Never a silent fallback.")
     diagnosis.add_argument("--review-context", type=Path,
                            help="Hash-bound host-only follow-up notes, metric definitions and historical comparison; never forwarded to the model.")
+    diagnosis.add_argument("--evidence-status", type=Path,
+                           help="Host-only availability records: provided/withheld/not_found/not_generated, with checked references.")
     diagnosis.add_argument("--codex", help="Actual local codex.exe, with no installation or upgrade.")
     diagnosis.add_argument("--timeout-seconds", type=float, default=180)
     diagnosis.add_argument("--max-tool-calls", type=int, default=4)
@@ -216,7 +218,8 @@ def _diagnose(args: argparse.Namespace):
     return run_diagnosis(args.bundle, args.case_id, args.output_dir, model=args.model, effort=args.effort,
                          checkpoint=args.checkpoint, auth_home=args.auth_home, codex=args.codex,
                          timeout=args.timeout_seconds, max_tool_calls=args.max_tool_calls, probe_live=args.probe_live,
-                         credential_store=args.credential_store, evidence_access=args.evidence_access, review_context=args.review_context)
+                         credential_store=args.credential_store, evidence_access=args.evidence_access, review_context=args.review_context,
+                         evidence_status=args.evidence_status)
 
 
 if __name__ == "__main__":

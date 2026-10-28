@@ -12,7 +12,7 @@ import uuid
 from jsonschema import ValidationError
 
 from scripts.artifact_io import load_json_object, sha256_file, sha256_json, write_json_exclusive
-from .advice_report import load_review_context, render_report
+from .advice_report import load_evidence_status, load_review_context, render_report
 from .diagnostic_advice import DiagnosticEvidence, backend_output_schema, load_case, output_schema, validate_output
 from .review_app_server import executable, redacted, start_session
 from .review_evidence import _no_links, new_output, safe_file
@@ -38,7 +38,7 @@ def producer_identity() -> dict:
 class DiagnosisRun:
     def __init__(self, loaded: dict, output: Path, model: str, effort: str, checkpoint: str,
                  timeout: float, max_tool_calls: int, credential_store: str = "keyring", evidence_access: str = "host-tools",
-                 review_context: Path | None = None):
+                 review_context: Path | None = None, evidence_status: Path | None = None, *, _prompt_transform=None):
         if not model.strip() or effort not in {"minimal", "low", "medium", "high", "xhigh"}:
             raise ValueError("explicit supported model and effort required")
         if credential_store not in CREDENTIAL_STORES:
@@ -64,6 +64,16 @@ class DiagnosisRun:
                 raise ValueError("report context changed while freezing")
             self.review_context_ref = {"path": str(snapshot), "sha256": sha256_file(snapshot), "original": original_ref,
                                        "scope": "HOST_REPORT_ONLY_NOT_MODEL_INPUT"}
+        self.evidence_status, self.evidence_status_ref = load_evidence_status(evidence_status, loaded)
+        if self.evidence_status_ref is not None:
+            original_ref = self.evidence_status_ref
+            snapshot = self.output / "evidence_status.snapshot.json"
+            with snapshot.open("xb") as handle:
+                handle.write(Path(original_ref["path"]).read_bytes())
+            if sha256_file(snapshot) != original_ref["sha256"]:
+                raise ValueError("evidence status changed while freezing")
+            self.evidence_status_ref = {"path": str(snapshot), "sha256": sha256_file(snapshot), "original": original_ref,
+                                        "scope": "HOST_REPORT_ONLY_NOT_MODEL_INPUT"}
         self.tools = DiagnosticEvidence(loaded)
         self.model, self.effort = model, effort
         self.credential_store = credential_store
@@ -103,6 +113,8 @@ class DiagnosisRun:
                 "No job actions, delegation, strategy acceptance, reference answers or subsequent repair conclusions are available.",
             ], "max_tool_calls": max_tool_calls,
         }
+        if _prompt_transform is not None:
+            self.prompt = _prompt_transform(self.prompt)
         write_json_exclusive(self.output / "workspace" / "model_input.json", self.prompt)
         write_json_exclusive(self.output / "public.json", loaded["public"])
         self.record("prepared", {"producer": self.versions, "prompt_sha256": sha256_json(self.prompt),
@@ -279,6 +291,7 @@ class DiagnosisRun:
                    "checkpoint": self.checkpoint, "recommendation": model_output,
                    "evidence_access": self.evidence_access,
                    "review_context": self.review_context_ref,
+                   "evidence_status": self.evidence_status_ref,
                    "source_references": self.loaded["sources"], "causal_claims_scientifically_validated": False,
                    "execution_authorized": False, "scientific_success": "NOT_EVALUATED"}
         payload["recommendation_id"] = sha256_json(payload)
@@ -296,13 +309,14 @@ class DiagnosisRun:
             "model": self.model, "effort": self.effort, "checkpoint": self.checkpoint,
             "case_usage": self.review_context["review_kind"] if self.review_context else "calibration",
             "review_context": self.review_context_ref,
+            "evidence_status": self.evidence_status_ref,
             "credential_store": self.credential_store,
             "evidence_access": self.evidence_access,
             "bundle_provenance": self.loaded["provenance"],
             "case_id": self.loaded["case"]["case_id"], "task_id": self.loaded["case"]["group_id"],
             "input_sha256": self.loaded["case"]["input_sha256"], "public_sha256": self.loaded["public_sha256"],
             "bundle_public_sha256": self.loaded["bundle_public_sha256"], "producer": self.versions,
-            "prompt_version": PROMPT_VERSION, "prompt_sha256": sha256_json(self.prompt), "retrieval": "NOT_USED",
+            "prompt_version": self.prompt["prompt_version"], "prompt_sha256": sha256_json(self.prompt), "retrieval": "NOT_USED",
             "backend_output_schema_sha256": sha256_json(backend_output_schema()),
             "thread_id": self.thread_id, "session_id": self.session_id, "turn_id": self.turn_id,
             "turn_start_attempts": self.turn_start_attempts, "model_turns_started": self.model_turns_started,
@@ -323,16 +337,18 @@ class DiagnosisRun:
             if item["exit_code"] not in {None, 0}), self.exit_code)
         write_json_exclusive(self.output / "run_receipt.json", receipt)
         with (self.output / "review.md").open("x", encoding="utf-8") as handle:
-            handle.write(render_report(receipt, self.loaded, self.recommendation, self.review_context))
+            handle.write(render_report(receipt, self.loaded, self.recommendation, self.review_context, self.evidence_status))
         return receipt
 
 
 def run_diagnosis(bundle: Path, case_id: str, output: Path, *, model: str, effort: str, checkpoint: str,
                   auth_home: Path, codex: str | None = None, timeout: float = 180,
                   max_tool_calls: int = 4, probe_live: bool = False, credential_store: str = "keyring",
-                  evidence_access: str = "host-tools", review_context: Path | None = None) -> dict:
+                  evidence_access: str = "host-tools", review_context: Path | None = None,
+                  evidence_status: Path | None = None, _prompt_transform=None) -> dict:
     loaded = load_case(bundle, case_id)
-    run = DiagnosisRun(loaded, output, model, effort, checkpoint, timeout, max_tool_calls, credential_store, evidence_access, review_context)
+    run = DiagnosisRun(loaded, output, model, effort, checkpoint, timeout, max_tool_calls, credential_store, evidence_access,
+                       review_context, evidence_status, _prompt_transform=_prompt_transform)
     transport = None
     try:
         run.tools.verify()
