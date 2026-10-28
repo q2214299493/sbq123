@@ -49,6 +49,50 @@ backends:
       producer_exit_record_is_scheduler_authority: false
       admin_resolution: enable Slurm accounting storage and job accounting on MZ73
     direct_execution_exceptions:
+      fe110_scratch512_speed2_20261028:
+        scope:
+          remote_root: /home/sbq/sbq/fe110_scratch512_speed2_20261028_v2
+          gpu_index: 1
+          gpu_uuid: GPU-450609b3-d1fd-ac33-d03a-79891be402da
+          max_wall_seconds: 600
+          CPU_count: 4
+          memory_GB: 32
+          allocator_limit_MiB: 16384
+          models:
+            nequip:
+              path: /home/sbq/sbq/fe110_scratch512_20261028_v1/nequip_v2/output/best.ckpt
+              sha256: a444a7e3747296a06cdd6dfc953e510f08200d533948e2c50804b9556b53bb17
+              backend: nequip
+              status: normal_exit_development_selected
+            finetune:
+              path: /home/sbq/sbq/fe110_scratch512_20261028_v1/finetune/control/output/direct-fe110-scratch512-finetune20-20261028-v1/checkpoints/2026-10-28-20-56-32/best_checkpoint.pt
+              sha256: cdd391d39ed19fc1ef3516d41b1af53bd81351d8ad73f25e537be232fd8c0dc0
+              backend: aqcat25
+              status: budget_stopped_partial_development_selected_snapshot
+          model_pythons:
+            nequip: /home/sbq/sbq/fe110_scratch512_env_20261028_v4/venv/bin/python
+            finetune: /home/sbq/sbq/ml_ts_acceleration/venv/bin/python
+          cases:
+          - name: 10_A
+            composition: C2H3
+            seed_path: geometry/10_A/POSCAR
+            seed_sha256: 04990eb8ae6dc84d9626dd0480220201664499f79c389d1c6070081325497d4b
+          - name: C3_05
+            composition: C3H2O
+            seed_path: geometry/C3_05/POSCAR
+            seed_sha256: 6ed0169ab43c93e3b53092ea2bc76a5179f833752e9f1ccb0eabc61b76a63868
+          limits:
+            seed_max_steps: 80
+            fmax_eV_per_A: 0.1
+            LBFGS_maxstep_A: 0.2
+        authorizing_user_request: 从完全相同的C₂/C₃起点出发，各自进行ML优化，再交给相同设置的VASP，比较达到同一终态和0.02 eV/Å标准所需的离子步、SCF次数及核时。
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        automatic_retries: 0
+        VASP_submission_authority: false
+        budget_confirmation: CONFIRMED_HUMAN_FOUR_ML_TEN_GPU_MINUTES
+        authorized_by: explicit_user_20261028_four_ML_tenGPUminutes
+        budget_authorization: 启动4次ML优化，合计≤10 GPU分钟（推荐）
+        authorization_evidence_sha256: b10e6d81fa4944b563f2d59efee0d72ea4c7d94feb87db08efb3c35390a4710d
       fe110_force_training512_comparison20_20261028:
         authorized_by: user_explicit_20261028_two_arm_oneGPUhour
         authorizing_user_request: 启动两项训练，总计≤1 GPU小时（推荐）
