@@ -81,6 +81,6 @@ NequIP本地CPU和MZ73原生CPU均对两个共同起点完成固定结构力计�
 
 授权脚本首次执行后的导入重导出清理未改动执行包；初次执行脚本原字节保存在authorize_speed_executed.py，activation_source_postcheck.json保存原哈希核对，未原地改写原授权回执。执行输入、授权和结果另有新的哈希绑定。
 
-下一步优先准备C₂的同起点三臂DFT验收输入（原始直接DFT、NequIP后DFT、微调后DFT）；C₃保留解离诊断用途，不能作为完整C₃优化成功。DFT输入尚未准备或提交，实际DFT力、收敛步数、磁性分支、同一局部极小点及加速仍未验证。
+用户随后明确要求准备C₂同起点三臂DFT验收输入，现已完成原始直接DFT、NequIP后DFT和微调后DFT三套生产输入，统一0.02 eV/Å、32核/300步，尚未上传或提交；详见[三臂输入审核](../fe110_c2_three_arm_dft_20261028/README.md)。C₃保留解离诊断用途。实际DFT力、收敛步数、磁性分支、同一局部极小点及加速仍未验证。
 
 结束时repo-state sync --safe-only仍因既有sbq_catalyst_agent_workflow.egg-info/PKG-INFO分类后变化退出2；未改动该无关文件，不声称managed任务视图已同步。
