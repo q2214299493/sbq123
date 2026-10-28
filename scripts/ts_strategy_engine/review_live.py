@@ -17,6 +17,7 @@ from .review_evidence import _no_links
 MODEL_PROFILE = "review-model"
 CLIENT_PROFILE = "review-client"
 ACCOUNT_PROVIDER = "review-chatgpt-account"
+CREDENTIAL_STORES = {"keyring", "file"}
 
 
 @contextmanager
@@ -31,11 +32,13 @@ def admission_stage(record, name: str):
     record("admission_stage", {"stage": name, "state": "PASSED"})
 
 
-def settings(home: Path, workspace: Path, evidence_paths: list[Path]) -> dict:
+def settings(home: Path, workspace: Path, evidence_paths: list[Path], *, credential_store: str = "keyring") -> dict:
+    if credential_store not in CREDENTIAL_STORES:
+        raise ValueError("credential store must be explicitly keyring or file")
     common = {":root": "deny", ":minimal": "read", workspace.as_posix(): "read",
               **{p.as_posix(): "read" for p in evidence_paths}}
     return {"default_permissions": MODEL_PROFILE, "approval_policy": "never", "web_search": "disabled",
-            "cli_auth_credentials_store": "keyring", "windows": {"sandbox": "mxc"},
+            "cli_auth_credentials_store": credential_store, "windows": {"sandbox": "mxc"},
             "features": {**{k: False for k in DISABLED_FEATURES}, "unbounded_connection_retries": False},
             "model_provider": ACCOUNT_PROVIDER,
             "model_providers": {ACCOUNT_PROVIDER: {"name": "Existing managed ChatGPT account", "wire_api": "responses", "requires_openai_auth": True,
@@ -59,16 +62,16 @@ def _toml(document: dict, prefix: str = "") -> str:
     return "\n".join(lines) + "\n"
 
 
-def configure(home: Path, workspace: Path, evidence_paths: list[Path]) -> dict:
+def configure(home: Path, workspace: Path, evidence_paths: list[Path], *, credential_store: str = "keyring") -> dict:
     _no_links(home.absolute(), missing_ok=True)
     if home.resolve().is_relative_to(workspace.resolve()):
         raise ValueError("authentication home cannot be model workspace")
     home.mkdir(parents=True, exist_ok=True)
-    expected = settings(home.resolve(), workspace.resolve(), [p.resolve() for p in evidence_paths])
+    expected = settings(home.resolve(), workspace.resolve(), [p.resolve() for p in evidence_paths], credential_store=credential_store)
     path = home / "config.toml"
     if path.exists():
         existing = tomllib.loads(path.read_text(encoding="utf-8"))
-        if existing == {"cli_auth_credentials_store": "keyring"}:
+        if existing == {"cli_auth_credentials_store": credential_store}:
             # Promote only the isolated login bootstrap, never personal or arbitrary config.
             path.write_text(_toml(expected), encoding="utf-8")
         elif existing != expected:
@@ -133,11 +136,41 @@ def native_probe(binary: Path, home: Path, workspace: Path, directory: Path, tim
     return result
 
 
+def auth_visibility_probe(binary: Path, home: Path, workspace: Path, directory: Path, timeout: float) -> dict:
+    """Read auth mode only; do not read/copy credentials, log out, log in or alter permissions."""
+    base = [str(binary), "login", "status"]
+    commands = [("host", base), ("native_client", [str(binary), "sandbox", "--include-managed-config",
+        "--permission-profile", CLIENT_PROFILE, "-C", str(workspace), "--", *base])]
+    records = []
+    deadline = time.monotonic() + timeout
+    for surface, command in commands:
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            records.append({"surface": surface, "exit_code": None, "error": "auth visibility budget exhausted"})
+            break
+        try:
+            completed = subprocess.run(command, env=child_environment(home), cwd=workspace, capture_output=True,
+                timeout=remaining, creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0)
+            records.append({"surface": surface, "argv": command, "exit_code": completed.returncode,
+                "stdout": redacted(completed.stdout.decode("utf-8", errors="replace")), "stderr": stderr_capture(completed.stderr)})
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            records.append({"surface": surface, "exit_code": None, "error": redacted(str(exc))})
+            break
+    codes = {row["surface"]: row["exit_code"] for row in records}
+    status = "AUTH_VISIBILITY_UNRESOLVED"
+    if codes.get("host") == 0 and codes.get("native_client") is not None:
+        status = "CLI_AUTH_VISIBLE_BUT_ACCOUNT_RPC_EMPTY" if codes["native_client"] == 0 else "HOST_LOGIN_NOT_VISIBLE_TO_NATIVE_CLIENT"
+    result = {"status": status, "records": records, "model_turns_started": 0,
+              "config_sha256": sha256_file(home / "config.toml"), "permissions_changed": False}
+    write_json_exclusive(directory / "auth-visibility-probe.json", result)
+    return result
+
+
 class LiveStdio(Stdio):
     """Admission requires real local configuration, OS probes and managed ChatGPT auth."""
 
     def __init__(self, binary: Path, directory: Path, timeout: float, record, home: Path, evidence_paths: list[Path],
-                 *, workspace: Path | None = None):
+                 *, workspace: Path | None = None, credential_store: str = "keyring"):
         if os.name != "nt":
             raise ValueError("this live backend requires validated native Windows MXC; other platforms are unverified")
         self.admitted = False
@@ -146,7 +179,7 @@ class LiveStdio(Stdio):
         with admission_stage(record, "local_protocol"):
             compatibility = verify_protocol(binary, directory / "protocol", min(timeout, 30), auth_home=home)
         with admission_stage(record, "isolated_configuration"):
-            expected = configure(home, workspace, evidence_paths)
+            expected = configure(home, workspace, evidence_paths, credential_store=credential_store)
         self.model_profile = MODEL_PROFILE
         self.account_provider = ACCOUNT_PROVIDER
         self.evidence = {**compatibility, "config_sha256": sha256_file(home / "config.toml"), "settings": expected,
@@ -183,7 +216,12 @@ class LiveStdio(Stdio):
                 self.evidence["effective_permissions_sha256"] = sha256_json(matched[0]["config"]["permissions"])
                 record("preflight", self.evidence)
                 if account.get("type") != "chatgpt" or not auth.get("requiresOpenaiAuth"):
-                    raise ValueError(f"official ChatGPT login required in isolated auth home: {home}")
+                    if not account:
+                        proof = auth_visibility_probe(binary, home, workspace, directory, max(0.01, min(30, deadline - time.monotonic())))
+                        self.evidence["auth_visibility"] = proof
+                        record("auth_visibility", proof)
+                        raise ValueError(f"isolated account unavailable: {proof['status']}; see auth-visibility-probe.json")
+                    raise ValueError("admission requires managed ChatGPT authentication, not another auth type")
             self.admitted = True
         except BaseException:
             self.close()

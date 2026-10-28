@@ -79,3 +79,12 @@ Tasks are ordered by priority and should be handled one per Codex thread.
 Classify/characterize editable-build metadata and package resources before any cleanup.
 The existing `sbq_catalyst_agent_workflow.egg-info/PKG-INFO` mismatch remains unresolved;
 no deletion, reclassification event or state-transaction change is authorized by this note.
+
+## RSI model-side evidence callbacks — follow-up, 2026-10-28
+
+- Validate `host-tools` callback delivery under the current guarded Codex
+  backend. Typed eager declarations were checked, but no real host callback
+  completion was observed; retain the failed trials and diagnose this separately.
+  Do not weaken native permissions or relabel frozen-context turns as tool runs.
+  The explicit frozen-context diagnosis entry is usable independently; this item
+  does not authorize scientific jobs, main integration or SPC changes.

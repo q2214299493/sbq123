@@ -30,7 +30,7 @@ def output_schema() -> dict:
         "failure_class": {"enum": list(policy()["failure_routes"])},
         "causal_claim": {"anyOf": [TEXT, {"type": "null"}]},
         "causal_status": {"enum": ["unknown", "hypothesis", "confirmed"]},
-        "causal_evidence_ids": IDS, "next_review": TEXT, "evidence_ids": IDS,
+        "causal_evidence_ids": IDS, "next_review": {"enum": list(policy()["failure_routes"].values())}, "evidence_ids": IDS,
     })
     return object_schema({
         "diagnosis": diagnosis,
@@ -45,9 +45,23 @@ def output_schema() -> dict:
                                "value": {"type": ["number", "null"], "minimum": 0},
                                "unit": {"type": ["string", "null"]}, "basis": TEXT, "evidence_ids": IDS}),
         # First round has no retrieval. A model cannot invent a retrieved source.
-        "method_sources": {"type": "array", "maxItems": 0},
+        "method_sources": {"type": "array", "items": TEXT, "maxItems": 0},
         "scientific_scope": TEXT,
     })
+
+
+def backend_output_schema() -> dict:
+    """Portable structural hint; the host still enforces every stronger constraint."""
+    unsupported = {"uniqueItems", "minItems", "maxItems", "minLength", "maxLength", "minimum", "maximum"}
+
+    def project(value):
+        if isinstance(value, dict):
+            return {key: project(item) for key, item in value.items() if key not in unsupported}
+        if isinstance(value, list):
+            return [project(item) for item in value]
+        return value
+
+    return project(output_schema())
 
 
 def load_case(bundle: Path, case_id: str) -> dict:
@@ -86,7 +100,8 @@ class DiagnosticEvidence:
             observe([{key: value for key, value in item.items() if key != "evidence_id"}])
 
     def specs(self) -> list:
-        return [{"name": self.NAME, "description": "Reverify and read selected frozen scalar evidence. No paths, commands, writes or acceptance.",
+        return [{"type": "function", "deferLoading": False, "name": self.NAME,
+                 "description": "Reverify and read selected frozen scalar evidence. No paths, commands, writes or acceptance.",
                  "inputSchema": object_schema({"evidence_ids": {**IDS, "minItems": 1,
                      "maxItems": len(self.loaded["sources"]),
                      "items": {"type": "string", "enum": sorted(self.loaded["sources"])}}})}]

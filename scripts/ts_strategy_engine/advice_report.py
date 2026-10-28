@@ -4,12 +4,25 @@ from __future__ import annotations
 import json
 
 
+def _blocked_next(receipt: dict) -> str:
+    visibility = (receipt.get("permission_evidence") or {}).get("auth_visibility", {}).get("status")
+    if visibility == "HOST_LOGIN_NOT_VISIBLE_TO_NATIVE_CLIENT":
+        return "宿主已登录，但原生客户端无法读取认证存储；先审查 auth-visibility-probe.json 中的存储访问错误，不要重复要求登录或放宽权限。"
+    if visibility == "CLI_AUTH_VISIBLE_BUT_ACCOUNT_RPC_EMPTY":
+        return "宿主与原生 CLI 均能读取登录，但账户 RPC 为空；检查 App Server 的认证加载差异，不要假定用户未登录。"
+    if receipt["first_failure_stage"] == "chatgpt_authentication":
+        return "核对既有隔离目录的官方登录状态及认证可见性证据，再处理具体阻断。"
+    return "按 run_receipt.json 和 journal.jsonl 核对首个失败阶段的 stderr/退出码，再处理该具体阻断。"
+
+
 def render_report(receipt: dict, loaded: dict, recommendation: dict | None) -> str:
     case = loaded["case"]
     lines = [f"# RSI 现场诊断：{case['case_id']}", "",
              f"冻结检查点：{receipt['checkpoint']}；用途：{receipt['case_usage']}（本次不作盲测评分）。",
              f"运行状态：{receipt['status']}；真实模型回合：{receipt['model_turns_started']}；"
              f"完成的证据读取：{receipt['actual_tool_calls']}。", ""]
+    if receipt.get("evidence_access") == "frozen-context":
+        lines += ["证据方式：冻结上下文；原文件和值由宿主在模型调用前后核对，模型工具调用数为 0。", ""]
     cited = set()
     if receipt["status"].endswith("ADMITTED_NO_TURN"):
         lines += ["仅完成 live 预检；未发送 turn/start，未生成新诊断。", "",
@@ -17,9 +30,7 @@ def render_report(receipt: dict, loaded: dict, recommendation: dict | None) -> s
     elif recommendation is None:
         lines += ["**未生成新诊断。** 下列仅是冻结材料中的原始观察，不是模型建议。", "",
                   f"首个阻断阶段：`{receipt['first_failure_stage']}`。{receipt['problem'] or ''}",
-                  "下一项软件检查：" + ("在既有隔离认证目录完成官方 ChatGPT 登录，再用新输出目录运行诊断。"
-                    if receipt["first_failure_stage"] == "chatgpt_authentication" else
-                    "按 run_receipt.json 和 journal.jsonl 核对首个失败阶段的 stderr/退出码，再处理该具体阻断。"),
+                  "下一项软件检查：" + _blocked_next(receipt),
                   "当前没有可采用的模型科学检查建议。", "",
                   "冻结材料（节选）："]
         cited = {e["evidence_id"] for e in case["evidence"][:8]}

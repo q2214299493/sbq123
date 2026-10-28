@@ -100,6 +100,10 @@ def parser() -> argparse.ArgumentParser:
     diagnosis.add_argument("--model", required=True)
     diagnosis.add_argument("--effort", choices=["minimal", "low", "medium", "high", "xhigh"], required=True)
     diagnosis.add_argument("--auth-home", type=Path, required=True, help="Existing isolated managed ChatGPT login, never personal config or copied credentials.")
+    diagnosis.add_argument("--credential-store", choices=["keyring", "file"], default="keyring",
+                           help="Explicit task-owned auth storage. Default keyring; never silently migrate existing credentials or config.")
+    diagnosis.add_argument("--evidence-access", choices=["host-tools", "frozen-context"], default="host-tools",
+                           help="Explicit contract: require host tool reads, or generate from source-verified public context with zero tools. Never a silent fallback.")
     diagnosis.add_argument("--codex", help="Actual local codex.exe, with no installation or upgrade.")
     diagnosis.add_argument("--timeout-seconds", type=float, default=180)
     diagnosis.add_argument("--max-tool-calls", type=int, default=4)
@@ -209,7 +213,8 @@ def main(argv: list[str] | None = None) -> None:
 def _diagnose(args: argparse.Namespace):
     return run_diagnosis(args.bundle, args.case_id, args.output_dir, model=args.model, effort=args.effort,
                          checkpoint=args.checkpoint, auth_home=args.auth_home, codex=args.codex,
-                         timeout=args.timeout_seconds, max_tool_calls=args.max_tool_calls, probe_live=args.probe_live)
+                         timeout=args.timeout_seconds, max_tool_calls=args.max_tool_calls, probe_live=args.probe_live,
+                         credential_store=args.credential_store, evidence_access=args.evidence_access)
 
 
 if __name__ == "__main__":

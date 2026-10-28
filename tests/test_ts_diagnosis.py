@@ -11,7 +11,7 @@ import pytest
 
 from scripts.artifact_io import load_json_object, sha256_file, write_json
 from scripts.ts_strategy_engine import diagnosis_runner as runner, learning_cli, review_app_server, review_live
-from scripts.ts_strategy_engine.diagnostic_advice import DiagnosticEvidence, load_case, validate_output
+from scripts.ts_strategy_engine.diagnostic_advice import DiagnosticEvidence, backend_output_schema, load_case, output_schema, validate_output
 from scripts.ts_strategy_engine.learning_cases import build_cases
 from scripts.ts_strategy_engine.next_review import recommend_next_reviews
 
@@ -57,11 +57,14 @@ class SyntheticPeer:
             return {}
         if method == "thread/start":
             assert len(params["dynamicTools"]) == 1
+            tool = params["dynamicTools"][0]
+            assert tool["type"] == "function" and tool["deferLoading"] is False
             assert "SECRET_FUTURE" not in json.dumps(params)
             return {"model": params["model"], "reasoningEffort": "medium", "approvalPolicy": "never",
                     "sandbox": {"type": "readOnly"}, "thread": {"id": "thread", "sessionId": "session",
                     "turns": [], "ephemeral": True}}
         assert method == "turn/start"
+        assert params["outputSchema"]["properties"]["diagnosis"]["properties"]["next_review"]["enum"]
         assert "SECRET_FUTURE" not in json.dumps(params)
         self.messages = [{"id": "rpc", "method": "item/tool/call", "params": {
             "threadId": "thread", "turnId": "turn", "callId": "call", "tool": "read_frozen_evidence",
@@ -273,3 +276,180 @@ def test_probe_report_does_not_call_a_synthetic_fixture_real(frozen, tmp_path):
     receipt = run.finish(probe_live=True)
     assert receipt["status"] == "OFFLINE_TEST_ADMITTED_NO_TURN" and receipt["model_turns_started"] == 0
     assert "未发送 turn/start" in (run.output / "review.md").read_text(encoding="utf-8")
+
+
+def test_explicit_file_store_preserves_all_permissions_and_rejects_silent_migration(tmp_path):
+    home, workspace = tmp_path / "auth", tmp_path / "workspace"
+    home.mkdir()
+    workspace.mkdir()
+    keyring = review_live.configure(home, workspace, [])
+    original = (home / "config.toml").read_bytes()
+    file_config = review_live.settings(home.resolve(), workspace.resolve(), [], credential_store="file")
+    assert file_config == {**keyring, "cli_auth_credentials_store": "file"}
+    with pytest.raises(ValueError, match="different configuration"):
+        review_live.configure(home, workspace, [], credential_store="file")
+    assert (home / "config.toml").read_bytes() == original
+
+
+def test_file_bootstrap_requires_explicit_matching_store(tmp_path):
+    home, workspace = tmp_path / "auth", tmp_path / "workspace"
+    home.mkdir()
+    workspace.mkdir()
+    (home / "config.toml").write_text('cli_auth_credentials_store="file"\n')
+    with pytest.raises(ValueError, match="different configuration"):
+        review_live.configure(home, workspace, [])
+    configured = review_live.configure(home, workspace, [], credential_store="file")
+    assert configured["cli_auth_credentials_store"] == "file"
+    assert configured["permissions"][review_live.MODEL_PROFILE]["filesystem"][home.as_posix()] == "deny"
+
+
+@pytest.mark.parametrize("client_code,expected", [(1, "HOST_LOGIN_NOT_VISIBLE_TO_NATIVE_CLIENT"),
+                                                 (0, "CLI_AUTH_VISIBLE_BUT_ACCOUNT_RPC_EMPTY")])
+def test_auth_probe_distinguishes_logged_in_host_from_rpc_empty(tmp_path, monkeypatch, client_code, expected):
+    home, workspace = tmp_path / "auth", tmp_path / "workspace"
+    home.mkdir()
+    workspace.mkdir()
+    (home / "config.toml").write_text('cli_auth_credentials_store="keyring"\n')
+    calls = []
+    def status(command, **kwargs):
+        calls.append(command)
+        code = client_code if "sandbox" in command else 0
+        return SimpleNamespace(returncode=code, stdout=b"", stderr=b"Windows error code 5" if code else b"Logged in using ChatGPT")
+    monkeypatch.setattr(review_live.subprocess, "run", status)
+    proof = review_live.auth_visibility_probe(Path("synthetic-codex"), home, workspace, tmp_path, 10)
+    assert proof["status"] == expected and not proof["permissions_changed"]
+    assert proof["model_turns_started"] == 0 and len(calls) == 2
+    assert all(command[-2:] == ["login", "status"] for command in calls)
+    assert load_json_object(tmp_path / "auth-visibility-probe.json") == proof
+
+
+def test_blocked_report_does_not_ask_logged_in_user_to_log_in_again(frozen, tmp_path):
+    run = new_run(frozen, tmp_path / "visibility-report")
+    run.first_failure_stage = "chatgpt_authentication"
+    run.problem = "Synthetic native-client keyring access denial"
+    run.permission_evidence = {"auth_visibility": {"status": "HOST_LOGIN_NOT_VISIBLE_TO_NATIVE_CLIENT"}}
+    receipt = run.finish()
+    assert receipt["model_turns_started"] == 0
+    report = (run.output / "review.md").read_text(encoding="utf-8")
+    assert "宿主已登录" in report and "不要重复要求登录" in report
+
+
+def test_cli_defaults_to_keyring_without_file_store_fallback():
+    args = learning_cli.parser().parse_args(["diagnose", "--bundle", "bundle", "--case-id", "id", "--checkpoint",
+        "2026-09-02T10:19:58Z", "--output-dir", "out", "--model", "synthetic-model", "--effort", "medium", "--auth-home", "auth"])
+    assert args.credential_store == "keyring"
+
+
+def test_nonexecuting_startup_status_does_not_enable_capabilities(frozen, tmp_path):
+    run = new_run(frozen, tmp_path / "metadata-notifications")
+    run.thread_id = "thread"
+    run._notification("remoteControl/status/changed", {"status": "disabled"})
+    run._notification("warning", {"threadId": "thread", "message": "Code Mode is unavailable because code-mode host is disabled."})
+    assert len(run.backend_warnings) == 1 and not run.calls and not run.turn_completed
+    with pytest.raises(ValueError, match="remote-control"):
+        run._notification("remoteControl/status/changed", {"status": "connected"})
+    with pytest.raises(ValueError, match="mismatch"):
+        run._notification("warning", {"threadId": "other", "message": "wrong thread"})
+
+
+def test_user_input_echo_is_data_and_must_match_reserved_prompt(frozen, tmp_path):
+    run = new_run(frozen, tmp_path / "echo")
+    item = {"type": "userMessage", "id": "input", "content": [{"type": "text",
+            "text": json.dumps(run.prompt, ensure_ascii=False), "text_elements": []}]}
+    run._item_event("item/started", item)
+    run._item_event("item/completed", item)
+    assert not run.messages and not run.calls
+    item["content"][0]["text"] = "unreserved extra instructions"
+    with pytest.raises(ValueError, match="reserved frozen input"):
+        run._item_event("item/started", item)
+
+
+def test_commentary_is_retained_and_only_declared_final_answer_is_parsed(frozen, tmp_path):
+    run = new_run(frozen, tmp_path / "phases")
+    peer = SyntheticPeer(run)
+    original = peer.rpc
+    def rpc(method, params):
+        result = original(method, params)
+        if method == "turn/start":
+            peer.messages.insert(0, {"method": "item/completed", "params": {"threadId": "thread", "turnId": "turn",
+                "item": {"type": "agentMessage", "id": "commentary", "phase": "commentary", "text": "Synthetic progress text"}}})
+            peer.messages[-2]["params"]["item"]["phase"] = "final_answer"
+        return result
+    peer.rpc = rpc
+    run.drive(peer, synthetic=True)
+    receipt = run.finish()
+    assert receipt["status"] == "OFFLINE_TEST_GENERATED" and receipt["model_messages_received"] == 2
+    assert "Synthetic progress text" in (run.output / "model-response.txt").read_text()
+    assert json.loads((run.output / "model-final.txt").read_text()) == generated()
+
+
+def test_turn_metadata_is_observed_without_granting_actions(frozen, tmp_path):
+    run = new_run(frozen, tmp_path / "turn-metadata")
+    run.thread_id, run.turn_id = "thread", "turn"
+    run._notification("turn/moderationMetadata", {"threadId": "thread", "turnId": "turn", "metadata": {}})
+    assert not run.turn_completed and not run.calls
+    with pytest.raises(ValueError, match="mismatch"):
+        run._notification("turn/moderationMetadata", {"threadId": "thread", "turnId": "other", "metadata": {}})
+
+
+def test_data_only_read_view_stays_stable_when_prompt_presentation_changes(frozen, tmp_path):
+    first, second = new_run(frozen, tmp_path / "first-view"), new_run(frozen, tmp_path / "second-view")
+    second.prompt["instructions"].append("Synthetic presentation-only change")
+    first.bind_workspace(tmp_path / "auth")
+    second.bind_workspace(tmp_path / "auth")
+    assert first.workspace == second.workspace
+    view = load_json_object(first.workspace / "model_input.json")
+    assert set(view) == {"checkpoint", "public"}
+    assert view["public"] == frozen["public"] and "SECRET_FUTURE" not in json.dumps(view)
+
+
+def test_portable_backend_hint_keeps_full_host_validation(frozen):
+    host = output_schema()
+    hint = backend_output_schema()
+    assert host["properties"]["diagnosis"]["properties"]["evidence_ids"]["uniqueItems"]
+    assert "uniqueItems" not in hint["properties"]["diagnosis"]["properties"]["evidence_ids"]
+    assert hint["properties"]["diagnosis"]["properties"]["next_review"] == host["properties"]["diagnosis"]["properties"]["next_review"]
+    document = generated()
+    document["next_check"]["evidence_ids"] = ["distance", "distance"]
+    with pytest.raises(runner.ValidationError):
+        validate_output(document, frozen, {"distance"})
+
+
+class FrozenContextPeer(SyntheticPeer):
+    def rpc(self, method, params):
+        self.sent.append((method, deepcopy(params)))
+        if method == "initialize":
+            return {}
+        if method == "thread/start":
+            assert params["dynamicTools"] == []
+            return {"model": params["model"], "reasoningEffort": "medium", "approvalPolicy": "never",
+                    "sandbox": {"type": "readOnly"}, "thread": {"id": "thread", "sessionId": "session",
+                    "turns": [], "ephemeral": True}}
+        assert method == "turn/start"
+        self.messages = [
+            {"method": "item/completed", "params": {"threadId": "thread", "turnId": "turn", "item": {
+                "type": "agentMessage", "id": "final", "phase": "final_answer", "text": json.dumps(generated())}}},
+            {"method": "turn/completed", "params": {"threadId": "thread", "turn": {"id": "turn", "status": "completed"}}}]
+        return {"turn": {"id": "turn"}}
+
+
+def test_explicit_context_contract_uses_zero_tools_and_keeps_truthful_receipt(frozen, tmp_path):
+    run = runner.DiagnosisRun(frozen, tmp_path / "context", "synthetic-model", "medium", "2026-09-02T10:19:58Z",
+                              30, 4, evidence_access="frozen-context")
+    run.drive(FrozenContextPeer(run), synthetic=True)
+    receipt = run.finish()
+    assert receipt["evidence_access"] == "frozen-context" and receipt["actual_tool_calls"] == 0
+    assert receipt["status"] == "OFFLINE_TEST_GENERATED" and not receipt["new_diagnosis_generated"]
+    assert receipt["source_references_reverified"]
+    assert "模型工具调用数为 0" in (run.output / "review.md").read_text(encoding="utf-8")
+    with pytest.raises(ValueError, match="outside"):
+        run._tool({})
+
+
+def test_context_contract_still_rejects_changed_original_source(frozen, tmp_path):
+    run = runner.DiagnosisRun(frozen, tmp_path / "changed-context", "synthetic-model", "medium", "2026-09-02T10:19:58Z",
+                              30, 4, evidence_access="frozen-context")
+    Path(frozen["sources"]["distance"]["path"]).write_text('{"observed": 4}')
+    with pytest.raises(ValueError, match="changed"):
+        run.drive(FrozenContextPeer(run), synthetic=True)
+    assert not (run.output / "answers.json").exists()
