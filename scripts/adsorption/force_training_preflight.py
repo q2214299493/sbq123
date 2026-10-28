@@ -16,9 +16,17 @@ from scripts.adsorption.force_role_data import role_metadata
 def check_budget(request, config):
     limits = request["training_limits"]
     steps = request["split_counts"]["train"]  # this reviewed experiment is batch size one
-    expected = {"epochs": 2, "learning_rate": 1e-5, "seed": 42, "batch_size": 1,
+    epochs = 2
+    if request.get("preparation_contract") == "fe110_scratch512_comparison_v1":
+        if request["split_counts"] != {"train": 512, "development": 78, "heldout": 53}:
+            raise ValueError("scratch comparison split scope changed")
+        manifest = next((r for r in request["artifacts"] if r["path"] == "training_manifest.json"), None)
+        if not manifest or manifest["sha256"] != "ebf30df5cb009ac24293ca2b59e384b9158e796d4ec53301bf537b224dcfe4ee":
+            raise ValueError("scratch comparison source manifest changed")
+        epochs = 20
+    expected = {"epochs": epochs, "learning_rate": 1e-5, "seed": 42, "batch_size": 1,
                 "GPU_count": 1, "CPU_count": 4, "memory_GB": 32, "walltime_minutes": 30,
-                "unattended_retries": 0, "max_optimizer_steps": steps * 2}
+                "unattended_retries": 0, "max_optimizer_steps": steps * epochs}
     if any(limits.get(key) != value for key, value in expected.items()):
         raise ValueError("bounded comparison budget changed")
     if config["optim"].get("eval_every") != steps or config["optim"].get("checkpoint_every") != steps:

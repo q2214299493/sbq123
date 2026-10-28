@@ -149,3 +149,8 @@ no deletion, reclassification event or state-transaction change is authorized by
 - Supplement evidence:docs/reviews/fe110_10b_lowforce_20261023/README.md.
 - Local follow-up evidence:calculations/fe110_reico_pilot300_20261022/status_lowforce_check_20261023_v1/checkpoint_summary.json.
 - Evidence:docs/reviews/fe110_reico_label_qc_20261023/README.md.
+
+## Fe110 512-frame scratch/fine-tune trial — 2026-10-28
+
+- Preparation andnativeCPU preflights complete;590export replays/48tests PASS,noGPUtraining orDFT.NewNequIP random model and20epochAQCat25 control requests frozen;512/78/53+16isolation andmagneticgrades unchanged.
+- Human confirmed exacttwoarms/<=1GPUhour;currentcanonical bindings/nativepreflight passed andsequencePID1363554started once.NequiP1363559actualCUDAonGPU1;FT20epochpendingsequentialfreshgate.Next:on-demand checkpoint then terminalartifact/devmetric/budgetreview.No automaticretry,promotion,heldoutinference orfutureDFTbenchmark authorization. Near-equilibrium C3coverage andmovableFe diagnosis remain unresolved;do not infer them solved by changing architecture. Evidence:docs/reviews/fe110_scratch512_20261028/README.md.

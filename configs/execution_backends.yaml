@@ -49,6 +49,46 @@ backends:
       producer_exit_record_is_scheduler_authority: false
       admin_resolution: enable Slurm accounting storage and job accounting on MZ73
     direct_execution_exceptions:
+      fe110_force_training512_comparison20_20261028:
+        authorized_by: user_explicit_20261028_two_arm_oneGPUhour
+        authorizing_user_request: 启动两项训练，总计≤1 GPU小时（推荐）
+        scope: one_twenty_epoch_force_only512_control
+        arms:
+        - control
+        remote_root: /home/sbq/sbq/fe110_scratch512_20261028_v1/finetune
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        gpu_index: 1
+        gpu_uuid: GPU-450609b3-d1fd-ac33-d03a-79891be402da
+        execution_mode: direct_no_scheduler
+        executor: scripts/adsorption/direct_force_training.py
+        model_backend: aqcat25_role_force_training
+        arm_request_sha256:
+          control: 87a20cb4ae75a09dd423e296d28c5559fec97aeadeb4a05a15148d21deb3c272
+        max_wall_seconds: 1800
+        per_arm_wall_seconds: 1800
+        max_epochs: 20
+        max_optimizer_steps_per_arm: 10240
+        CPU_count: 4
+        memory_GB: 32
+        parallel_arms: 1
+        automatic_retries: 0
+        explicit_authorization_required: true
+        producer_exit_record_required: true
+        scheduler_job_id: null
+        slurm_id_emulation: forbidden
+        model_promotion_or_vasp_execution: forbidden
+        alter_shared_services_or_other_users_jobs: forbidden
+        original_comparison_sha256: d8ea2bde80fce89985f4b7082f7e11aff271efda17e17de273537d10820ab9ae
+      fe110_nequip_scratch512_20261028:
+        authorized_by: user_explicit_20261028_two_arm_oneGPUhour
+        request_sha256: cd0fadb4d199094fcfeb9f1b0e736207bf92fe60664183b83f58ff16f14a0469
+        remote_root: /home/sbq/sbq/fe110_scratch512_20261028_v1/nequip_v2
+        gpu_index: 1
+        gpu_uuid: GPU-450609b3-d1fd-ac33-d03a-79891be402da
+        max_wall_seconds: 1800
+        model_backend: nequip_force_scratch
+        scope: Fe110_only_force_model_training_not_general_backend_permission
+        authorizing_user_request: 启动两项训练，总计≤1 GPU小时（推荐）
       fe110_paired_relaxation2_20261027:
         scope:
           remote_root: /home/sbq/sbq/fe110_paired_relaxation2_20261027_v2
