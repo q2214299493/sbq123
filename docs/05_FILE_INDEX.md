@@ -362,3 +362,7 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `docs/reviews/fe110_pair2_submission_20261027/`:exact4jobhumanauthorization,jobIDs/initialPEND snapshot,32rank80step/0.02scope,88metadataregister/readback andsource-bound checkpoint;no scientificacceptance.
 - `archive/fe110_pair2_submission_20261027/`, `tests/test_pair2_submission_20261027.py`:fourcanonicalgate/executor adapter,transientreadonlySSH recovery,batched scheduler evidence andmetadata-onlyregistry plan/readback;153primary/136publicationtests.
 - `calculations/fe110_reico_pilot300_20261022/paired_submission4_20261027_v1/`:frozen24inputcopies/nativeauth/gates/reservations/receipts for9925060/62/63/65,initialscheduler snapshot,POTCARmetadata,registryplan/approval/receipt/readback andintegrity/tests;runtime/licensecontent remain outsideGit.
+
+- `docs/reviews/fe110_pair2_cost_comparison_20261028/`:same-coordinate ML/DFT handoff table,remaining ionic/SCF/corehour cost,negative convergence outcome and PNG/PDF curves;running C3 prefix explicitly bounded.
+- `archive/fe110_pair2_cost_comparison_20261028/`, `tests/test_pair2_cost_comparison_20261028.py`:read-only compact recovery,per-frame ownerSCF/magnetic association,raw handoff verification,threshold/cost audit andscientific figure.
+- `calculations/fe110_reico_pilot300_20261022/paired_cost_comparison_20261028_v5/`:current source-bound four-job snapshots,analysis/independentverification/figures;v1-v4 partial/failed transport evidence preserved. No raw logs,labels,structures orweights published.
