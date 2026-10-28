@@ -367,9 +367,10 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `archive/fe110_pair2_cost_comparison_20261028/`, `tests/test_pair2_cost_comparison_20261028.py`:read-only compact recovery,per-frame ownerSCF/magnetic association,raw handoff verification,threshold/cost audit andscientific figure.
 - `calculations/fe110_reico_pilot300_20261022/paired_cost_comparison_20261028_v5/`:current source-bound four-job snapshots,analysis/independentverification/figures;v1-v4 partial/failed transport evidence preserved. No raw logs,labels,structures orweights published.
 
-- `docs/reviews/fe110_scratch512_20261028/README.md`:reviewable existing-data scratch/fine-tune scope,budget,nativeCPU results andlimitations;GPU notstarted.
+- `docs/reviews/fe110_scratch512_20261028/README.md`:frozen512 scratch/fine-tune scope andterminalreview;NequiPnormalexit,FTbudgetstop,23returnedfiles/devmetric/budget/deviceaudit;no independentaccuracy orspeedupclaim.
 - `scripts/adsorption/nequip_force_data.py`, `nequip_force_runtime.py`, `nequip_force_job.py`:lossless force/mask export,original graph/role loss adapter andexplicitlyauthorized bounded native execution;force_training_preflight.py adds only frozen512 twenty-epoch preparation scope.
 - `archive/fe110_scratch512_20261028/`, `tests/test_nequip_force_trial.py`:package preparation,isolated native environment,CPU preflight/postcheck andmask/gradient/path/budget/authorization regressions.
 - `calculations/fe110_reico_pilot300_20261022/scratch512_20261028_v1/`:current package/nequip_v2 andpackage/finetune/control,review_receipt/native_cpu_v2/export_verification_v2/reviewed_requests_v2,immutable failures andtestXML;rawlabels/weights/environments/wheels remain outofGit.
 
 - `archive/fe110_scratch512_20261028/authorize.py`, `sequence_driver.py`, `transport.py`, `status.py`:currenthuman budgetbinding,exclusive2013file transport,nativepreflight,sequential GPUlock/RSS/wallguard/canonicalFTlaunch andcompactread-only checkpoints.
+- `archive/fe110_scratch512_20261028/collect_results.py`, `review_results.py`, `tests/test_scratch512_collection.py`:CPU-only terminalcheckpoint recovery,immutablefailedattempts/hashchecked extraction,partialFTclassification/frozeninput/device/budget/metricreview;8transport regressions.No inference orrestart.
