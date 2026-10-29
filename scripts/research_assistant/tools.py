@@ -26,6 +26,7 @@ from scripts.scientific_validation import validate_finite_tree
 from .catalog import Catalog
 from .vasp_tools import inspect_vasp
 from . import structure_tools
+from .cache_state import dependency_proof, dependencies_match, stamp
 
 
 SPECS = {
@@ -88,6 +89,10 @@ class ToolRegistry:
             self.catalog.resolve(identity)
         fingerprint = self.fingerprint(request)
         identity = f"E{len(self.actions) + 1:03d}"
+        proof = dependency_proof(self, request, refresh=True)
+        invalidated = fingerprint in self.cache and not dependencies_match(self.cache[fingerprint], proof)
+        if invalidated:
+            del self.cache[fingerprint]
         if fingerprint in self.cache:
             self.catalog.verify()
             cached = self.cache[fingerprint]
@@ -104,6 +109,7 @@ class ToolRegistry:
                 result = {"evidence_id": identity, "tool": request["tool"], "status": "ERROR", "host_executed": True,
                           "error": f"{type(exc).__name__}: {exc}", "sources": sources,
                           "availability": "unknown", "scientific_acceptance": False}
+            result["cache_dependencies"] = stamp(proof, dependency_proof(self, request), sources)
             self.cache[fingerprint] = result
         path = self.output / "tools" / (identity + ".json")
         path.parent.mkdir(exist_ok=True)
@@ -111,6 +117,7 @@ class ToolRegistry:
         action = {"evidence_id": identity, "request": request, "result_path": str(path), "result_sha256": sha256_file(path),
                   "status": result["status"], "executed": result["host_executed"], "reused_from": result.get("reused_from")}
         action.update({"implementation_sha256": self.implementation_sha256, "reused_from_parent": result.get("reused_from_parent")})
+        action["cache_invalidated"] = invalidated
         self.actions.append(action)
         self.results[identity] = result
         return result

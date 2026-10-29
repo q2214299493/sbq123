@@ -185,6 +185,35 @@ and consistency. `OFFLINE_PROPOSAL_VALIDATED` means that validation only; SPC
 materialization, independent approval and Plan/Execution Gates remain required.
 No second diagnosis or scientific validation implementation is introduced.
 
+Optional `selected_option_ids` selects existing branches for one bounded SPC
+review artifact. A strict subset requires a nonempty `selection_rationale`.
+Every alternative and its original conditions, risks, acceptance conditions and
+gaps remains in `spc_mapping.json`; selecting a staging artifact does not select
+the scientific program or approve a calculation.
+
+## Continuation cache dependencies
+
+Reuse binds the current tool implementation, exact source hashes and the inputs
+actually examined. VASP directory actions bind the presence of their expected
+input/output components, including absent optional files. Directory/global
+searches additionally bind the current scope roots, bounded catalogue coverage
+and directory membership. A newly persisted file, new material or wider search
+coverage invalidates the affected result. Explicit immutable-file reads and
+file-targeted searches do not inherit unrelated directory changes.
+
+On every resume, reusable leaf bytes are frozen into the current run. Derived
+search corpus receipts and geometry review drafts are rewritten into that run
+with current snapshot paths and retained parent hashes/lineage. A legacy receipt
+that points outside its immediate parent is recomputed conservatively. Three
+rounds of reuse are covered by offline tests, including no-match searches.
+Directory signatures are bounded; an incomplete signature disables reuse.
+Changing the tool implementation also causes conservative re-execution.
+
+The continuation output schema enumerates valid single `previous_ref` values;
+combined or invented old judgment IDs remain invalid. Original failures are
+retained, not repaired in place. Source-version or scope changes require a new
+input/run record, not relabelling the previous attempt as unchanged input.
+
 Current offline/live acceptance and remaining limitations are recorded in the
 task implementation reports. Lifecycle status remains in the module map.
 
@@ -193,3 +222,6 @@ Implementation, concrete local entry, real tool traces and acceptance limitation
 
 Continuation, concrete review drafts, current SPC boundary and environment failure:
 [`docs/reviews/research_continuation_20261029.md`](../../docs/reviews/research_continuation_20261029.md).
+
+Cache continuity, C3 reaction choice sheet and real source-bound SPC review plan:
+[`docs/reviews/research_c3_plan_20261029.md`](../../docs/reviews/research_c3_plan_20261029.md).

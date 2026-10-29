@@ -5,6 +5,7 @@ import importlib.util
 import os
 from pathlib import Path
 import sys
+from copy import deepcopy
 
 import pytest
 
@@ -40,6 +41,19 @@ def test_spc_mapping_requires_exact_result_and_cannot_replace_rsi_branch():
         candidate_fragments(result, "a" * 64, binding)
 
 
+def test_explicit_spc_selection_retains_alternatives_and_requires_reason():
+    result = minimal_result()
+    alternative = deepcopy(result["answer"]["options"][0])
+    alternative["id"] = "branch-b"
+    result["answer"]["options"].append(alternative)
+    binding = {"schema_version": 1, "research_result_sha256": "a" * 64, "selected_option_ids": ["branch-a"]}
+    with pytest.raises(ValueError, match="recorded rationale"):
+        candidate_fragments(result, "a" * 64, binding)
+    binding["selection_rationale"] = "Produce one read-only review plan; retain branch-b as an unresolved alternative"
+    rows = candidate_fragments(result, "a" * 64, binding)
+    assert len(rows) == 2 and [row["selected_for_spc"] for row in rows] == [True, False]
+
+
 @pytest.mark.parametrize("fabricated_reference", [False, True])
 def test_current_spc_owner_validates_mapped_mock_fixture_offline(tmp_path, fabricated_reference):
     location = os.environ.get("RSI_TEST_SPC_ROOT")
@@ -63,6 +77,11 @@ def test_current_spc_owner_validates_mapped_mock_fixture_offline(tmp_path, fabri
     evidence = ["fabricated-evidence"] if fabricated_reference else original["evidence_refs"]
     binding = {"schema_version": 1, "research_result_sha256": "a" * 64, "evidence_map": {"E001": evidence},
                "branches": [{"option_id": option["id"], "spc_fields": {key: value for key, value in original.items() if key not in basic}}]}
+    alternative = deepcopy(option)
+    alternative["id"] = "retained-unselected"
+    alternative["cost"].update({"basis": "not measured", "evidence_ids": []})
+    result["answer"]["options"].append(alternative)
+    binding.update({"selected_option_ids": [option["id"]], "selection_rationale": "Only materialize one fixture; retain the alternative"})
     rows = candidate_fragments(result, "a" * 64, binding)
     drafts = [models.CandidatePlanDraft.model_validate(rows[0]["candidate_fragment"])]
     mapped, report = _ground(models, result, drafts, planning_input)
@@ -93,4 +112,5 @@ def test_current_spc_owner_validates_mapped_mock_fixture_offline(tmp_path, fabri
     write_json_exclusive(binding_path, binding)
     document = export(folder, root, tmp_path / "mapped", binding_path=binding_path, planning_input_path=planning_path)
     assert document["status"] == ("BLOCKED_SPC_GROUNDING" if fabricated_reference else "OFFLINE_PROPOSAL_VALIDATED")
+    assert len(document["branches"]) == 2 and not document["branches"][1]["selected_for_spc"]
     assert not document["runnable"] and not document["approval_granted"] and not document["spc_state_modified"]

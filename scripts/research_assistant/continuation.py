@@ -9,6 +9,7 @@ from scripts.artifact_io import load_json_object, sha256_file, sha256_json, writ
 from scripts.ts_strategy_engine.review_evidence import _no_links
 
 from .catalog import blocked
+from .cache_state import dependency_proof, dependencies_match, rebind_result
 
 
 def previous_header(folder):
@@ -74,6 +75,37 @@ def _snapshots_intact(refs, parent):
     return True
 
 
+def _prepare_cache(action, parent, registry, bound, output, memo, scopes_match):
+    path = Path(action["result_path"])
+    if not path.resolve().is_relative_to((parent / "tools").resolve()) or sha256_file(path) != action["result_sha256"]:
+        raise ValueError("previous host action differs from its binding")
+    bound.append(_snapshot(path, parent, output))
+    old = load_json_object(path)["result"]
+    issue = None
+    try:
+        refs = _sources(old, parent, bound, output)
+        states = [_freshness(reference, registry.catalog, memo) for reference in refs]
+    except (OSError, ValueError, KeyError) as exc:
+        refs, states, issue = [], [], str(exc)
+    implementation_matches = action.get("implementation_sha256") == registry.implementation_sha256
+    proof = dependency_proof(registry, action["request"], refresh=True)
+    dependency_matches = dependencies_match(old, proof)
+    eligible = bool(refs) and scopes_match and implementation_matches and dependency_matches \
+        and _snapshots_intact(refs, parent) and old["status"] in {"OK", "PARTIAL"} \
+        and all(row["current_state"] == "unchanged" for row in states)
+    if eligible:
+        try:
+            current = rebind_result(old, refs, registry, parent)
+            origin = {"run": str(parent), "evidence_id": old["evidence_id"], "result_sha256": action["result_sha256"]}
+            current.update({"reused_from_parent": origin, "cache_lineage": [*old.get("cache_lineage", []), origin]})
+            registry.cache[registry.fingerprint(action["request"])] = current
+        except (OSError, ValueError, KeyError) as exc:
+            eligible, issue = False, str(exc)
+    return {"previous_evidence_id": action["evidence_id"], "tool": action["request"]["tool"],
+            "implementation_compatible": implementation_matches, "dependencies_compatible": dependency_matches,
+            "sources": states, "source_binding_issue": issue, "reuse_eligible": eligible, "needs_revalidation": not eligible}
+
+
 def load_continuation(parent, registry, output, update):
     parent = parent.absolute()
     receipt, inventory = previous_header(parent)
@@ -93,26 +125,7 @@ def load_continuation(parent, registry, output, update):
     rows, memo = [], {}
     scopes_match = inventory["scopes"] == [str(p) for p in registry.catalog.scopes[:len(inventory["scopes"])]]
     for action in result["evidence_actions"]:
-        path = Path(action["result_path"])
-        if not path.resolve().is_relative_to((parent / "tools").resolve()) or sha256_file(path) != action["result_sha256"]:
-            raise ValueError("previous host action differs from its binding")
-        bound.append(_snapshot(path, parent, output))
-        old = load_json_object(path)["result"]
-        refs = _sources(old, parent, bound, output)
-        source_states = [_freshness(reference, registry.catalog, memo) for reference in refs]
-        implementation_matches = action.get("implementation_sha256") == registry.implementation_sha256
-        eligible = bool(refs) and scopes_match and implementation_matches and _snapshots_intact(refs, parent) and old["status"] in {"OK", "PARTIAL"} \
-            and all(row["current_state"] == "unchanged" for row in source_states)
-        if eligible:
-            for reference in refs:
-                _, current = registry.catalog.freeze(Path(reference["path"]))
-                if current["sha256"] != reference["sha256"]:
-                    raise ValueError("source changed between parent verification and cache binding")
-            registry.cache[registry.fingerprint(action["request"])] = {
-                **old, "reused_from_parent": {"run": str(parent), "evidence_id": old["evidence_id"], "result_sha256": action["result_sha256"]}}
-        rows.append({"previous_evidence_id": action["evidence_id"], "tool": action["request"]["tool"],
-                     "implementation_compatible": implementation_matches, "sources": source_states,
-                     "reuse_eligible": eligible, "needs_revalidation": not eligible})
+        rows.append(_prepare_cache(action, parent, registry, bound, output, memo, scopes_match))
     answer = result["answer"]
     claims = [{"ref": f"F{i + 1:03d}", **row} for i, row in enumerate(answer["facts"])]
     claims += [{"ref": "option:" + row["id"], "statement": row["proposal"], "evidence_ids": row["evidence_ids"]} for row in answer["options"]]

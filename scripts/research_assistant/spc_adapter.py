@@ -45,6 +45,14 @@ def candidate_fragments(result, result_hash, binding):
     if binding and (binding.get("schema_version") != 1 or binding.get("research_result_sha256") != result_hash):
         raise ValueError("SPC binding must name the exact RSI research_result bytes")
     options = result["answer"]["options"]
+    selected = binding.get("selected_option_ids", [row["id"] for row in options]) if binding else [row["id"] for row in options]
+    known_options = {row["id"] for row in options}
+    if not isinstance(selected, list) or not selected or any(not isinstance(v, str) for v in selected) \
+            or len(set(selected)) != len(selected) or not set(selected) <= known_options:
+        raise ValueError("SPC selection must explicitly name existing unique options")
+    rationale = binding.get("selection_rationale")
+    if set(selected) != known_options and (not isinstance(rationale, str) or not rationale.strip()):
+        raise ValueError("partial SPC selection requires a recorded rationale; alternatives remain in the mapping")
     by_option = {row["option_id"]: row["spc_fields"] for row in binding.get("branches", [])} if binding else {}
     if set(by_option) - {row["id"] for row in options}:
         raise ValueError("SPC mapping contains a branch not proposed by RSI")
@@ -67,6 +75,7 @@ def candidate_fragments(result, result_hash, binding):
         if not missing:
             fragment["evidence_refs"] = list(dict.fromkeys(span for identity in option["evidence_ids"] for span in mapping[identity]))
         rows.append({"option_id": option["id"], "rsi_proposal": option["proposal"],
+                     "selected_for_spc": option["id"] in selected,
                      "rsi_acceptance_conditions": option["acceptance_conditions"],
                      "branch_blocking_gaps": option.get("blocking_gaps", []), "missing_evidence_bindings": missing,
                      "candidate_fragment": fragment})
@@ -120,13 +129,14 @@ def export(run, spc_root, output, *, binding_path=None, planning_input_path=None
             candidate = models.CandidatePlanDraft.model_validate(row["candidate_fragment"])
             row["shape_valid"] = True
             row["validation_issues"] = []
-            drafts.append(candidate)
+            if row["selected_for_spc"]:
+                drafts.append(candidate)
         except ValidationError as exc:
             row["shape_valid"] = False
             row["validation_issues"] = [{"field": ".".join(str(x) for x in issue["loc"]), "type": issue["type"], "message": issue["msg"]}
                                         for issue in exc.errors(include_input=False, include_url=False)]
     status, owner_validation = "BLOCKED_BINDINGS_REQUIRED", None
-    if drafts and len(drafts) == len(rows):
+    if drafts and len(drafts) == sum(row["selected_for_spc"] for row in rows):
         status = "SHAPE_VALIDATED_PENDING_GROUNDING"
         if planning_input_path:
             from spc.serialization import load_model
@@ -141,10 +151,13 @@ def export(run, spc_root, output, *, binding_path=None, planning_input_path=None
         raise ValueError("SPC contract changed during offline validation")
     document = {"schema_version": 1, "status": status, "rsi_result": {"path": str(result_path), "sha256": digest},
                 "rsi_run_mode": receipt["run_mode"],
+                "selection_rationale": binding.get("selection_rationale"),
+                "unselected_alternatives_retained": True,
                 "spc_contract": contract, "branches": rows, "spc_owner_validation": owner_validation,
-                "required_before_spc_use": ["explicit source-evidence/claim/capability bindings to a valid ScientificPlanningInput",
+                "required_before_spc_use": (["SPC deterministic materialization and independent review/gates"]
+                    if status == "OFFLINE_PROPOSAL_VALIDATED" else ["explicit source-evidence/claim/capability bindings to a valid ScientificPlanningInput",
                     "missing hypothesis/model/observable/baseline/falsification/task fields from reviewed scientific owners",
-                    "SPC deterministic materialization and independent review/gates"],
+                    "SPC deterministic materialization and independent review/gates"]),
                 "scientific_acceptance": False, "approval_granted": False, "runnable": False, "spc_state_modified": False}
     write_json_exclusive(output / "spc_mapping.json", document)
     return document

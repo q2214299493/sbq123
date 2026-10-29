@@ -184,3 +184,11 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
   offline owner validation; never scientific approval or execution authority.
 - `docs/reviews/research_continuation_20261029.md`: real C3 continuation, human
   review packets, first environment failure, validation and unresolved boundaries.
+- `scripts/research_assistant/cache_state.py`: presence/coverage dependencies and
+  current-round source, search-corpus and review-draft rebinding.
+- `tests/test_research_resume_cache.py`: targeted invalidation, immutable reuse,
+  three-round provenance and single-reference schema checks.
+- `docs/reviews/research_c3_plan_20261029.md`: actual C3 reaction choices, supplied
+  later geometry, live failure/success records and real unapproved SPC plan.
+- `archive/research_assistant/20261029_c3_plan/materialize_review.py`: one-off
+  real-source plan materialization through the existing SPC owners.

@@ -144,10 +144,15 @@ class ResearchRun(ReviewEvents):
             "catalog_sha256": sha256_file(self.workspace / "model_input.json")})
 
     def prompt_for(self, number):
+        schema = response_schema()
+        if self.continuation:
+            progress = schema["properties"]["answer"]["anyOf"][0]["properties"]["progress"]["anyOf"][0]
+            progress["properties"]["changes"]["items"]["properties"]["previous_ref"] = {
+                "enum": [row["ref"] for row in self.continuation["previous_claims"]]}
         return {"protocol_version": VERSION, "goal": self.goal, "intent": self.intent,
             "mode": self.catalog.mode, "catalog": self.catalog.snapshot(), "registered_tools": SPECS,
             "turn": number, "turn_budget": self.max_turns, "host_actions_remaining": self.max_actions - len(self.tools.actions),
-            "history": self.transcript, "response_schema": response_schema(), "continuation": self.continuation,
+            "history": self.transcript, "response_schema": schema, "continuation": self.continuation,
             "instructions": [
                 "用中文推进用户的研究目标；不要强行使用failure_class。先按问题选择登记工具取证，收到结果后更新判断并请求更多证据或给最终建议。",
                 "这不是原生工具回调。返回kind=request和requests数组，由宿主执行；每个请求必须有tool、target_ids、query、limit四字段。目录ID用于vasp.inspect/terminal.align，文件ID用于读取/结构/contract；ID必须来自目录，不要编造路径或ID。",
@@ -177,7 +182,7 @@ class ResearchRun(ReviewEvents):
         self.turn_start_attempts += 1
         self.record("turn_reservation", {"number": number, "prompt_sha256": sha256_json(self.prompt)})
         turn = transport.rpc("turn/start", {"threadId": self.thread_id, "model": self.model, "effort": self.effort,
-            "approvalPolicy": "never", "environments": [], "outputSchema": portable_schema(response_schema()),
+            "approvalPolicy": "never", "environments": [], "outputSchema": portable_schema(self.prompt["response_schema"]),
             **({"sandboxPolicy": {"type": "readOnly", "networkAccess": False}} if synthetic else {"permissions": transport.model_profile}),
             "input": [{"type": "text", "text": json.dumps(self.prompt, ensure_ascii=False)}]})
         self.turn_id = turn["turn"]["id"]

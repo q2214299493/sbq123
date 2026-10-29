@@ -132,3 +132,25 @@ no deletion, reclassification event or state-transaction change is authorized by
   auth/permissions; old records remain. Diagnose later path/version failures,
   never weaken admission or silently choose another authentication route.
   See `docs/reviews/research_continuation_20261029.md`.
+
+## C3 practical use follow-up — 2026-10-29
+
+- Completed the resume presence/coverage invalidation and three-round source/
+  corpus/draft binding fixes. The later C05/C07 geometry and original reaction
+  definitions were supplied to a successful new model continuation. Keep all
+  graph/reaction branches; choosing a minimum C07 review artifact does not select
+  the scientific program. Review the real source-bound SPC plan and provide
+  adoption/priority/time feedback when known. See
+  `docs/reviews/research_c3_plan_20261029.md`.
+- Actual source bindings and owner materialization now exist for that one local
+  unapproved C07 review plan. Independent scientific review/approval/execution
+  gates remain pending. Do not generalize this to complete C3 readiness or SPC
+  production integration.
+- Bounded initial catalogue display hid newly added scopes in the first live
+  attempt; explicit verified source-ID handoff was needed. Improve discoverability
+  in a later scoped task; do not claim autonomous navigation was validated here.
+- Track SPC's nested-FrozenDict task-input serialization limitation with its
+  owner. This artifact uses semantically equivalent flat source path/hash/status
+  fields. Do not mix a separate dirty SPC source repair into this task.
+- Keep the existing state-sync failure independent of these software/scientific
+  results. No science job, threshold change or main merge is authorized here.
