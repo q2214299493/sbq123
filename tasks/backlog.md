@@ -15,6 +15,14 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 Tasks are ordered by priority and should be handled one per Codex thread.
 
+## C2 adsorption final-acceptance follow-up —2026-10-30
+
+- Recover authoritative DONE evidence for the original15 closed06-10 sources
+  and paired9910783 before further formal acceptance. Main rows65-67 now contain
+  three accepted representatives; three paired duplicates are retained.
+  E0/reference derivation and full matched-benchmark accounting remain deferred;
+  no new calculation or protocol exception is authorized by this backlog item.
+
 ## Infrastructure
 
 1. **P1 - Populate and validate the calculation registry with active true Fe(110) jobs**

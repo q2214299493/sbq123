@@ -15,6 +15,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 This is a navigation index, not a duplicate file listing. Use `git ls-files` for the complete tracked inventory.
 
+## C2 final acceptance and main-table completion —2026-10-30
+
+- `docs/reviews/fe110_c2_final_acceptance_table_20261030.md`:three accepted main rows65-67,three duplicate sources and preserved scheduler/reference blockers.
+- `outputs/adsorption_acceptance_20261029_v1/`:local original workbook,full-source checks,exact registry/Excel receipts and independent saved-file verification.
+- `archive/fe110_adsorption_acceptance_20261029/`:bounded collection,review,registration,publication and preservation checks.
+
 Strategy improvement: `modules/transition_state_search/LEARNING.md` documents
 warm-start capture, reference BA-Sella selection, immutable failure history,
 the submission retry check, and the complete local CLI. Its policy is
