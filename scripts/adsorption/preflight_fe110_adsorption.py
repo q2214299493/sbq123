@@ -89,6 +89,10 @@ def preflight(workdir: Path, *, profile_path: Path = DEFAULT_PROFILE, cores: int
     allowed_compositions = {
         (("Fe", "C", "H"), (45, 1, 1)),
         (("Fe", "C", "H"), (45, 1, 2)),
+        (("Fe", "C", "H"), (45, 2, 3)),
+        (("Fe", "C", "H"), (45, 2, 4)),
+        (("Fe", "C", "O", "H"), (45, 2, 1, 3)),
+        (("Fe", "O", "C", "H"), (45, 1, 2, 3)),
         (("Fe", "C", "O", "H"), (45, 2, 1, 2)),
         (("Fe", "C", "O", "H"), (45, 3, 1, 2)),
     }

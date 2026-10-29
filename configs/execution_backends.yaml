@@ -49,6 +49,93 @@ backends:
       producer_exit_record_is_scheduler_authority: false
       admin_resolution: enable Slurm accounting storage and job accounting on MZ73
     direct_execution_exceptions:
+      fe110_c2_11_15_ft512_20261029:
+        scope:
+          gpu_index: 1
+          gpu_uuid: GPU-450609b3-d1fd-ac33-d03a-79891be402da
+          max_wall_seconds: 600
+          CPU_count: 4
+          memory_GB: 32
+          allocator_limit_MiB: 16384
+          limits:
+            seed_max_steps: 80
+            fmax_eV_per_A: 0.1
+            LBFGS_maxstep_A: 0.2
+          remote_root: /home/sbq/sbq/fe110_c2_11_15_ft512_20261029_v1
+          models:
+            finetune:
+              path: /home/sbq/sbq/fe110_scratch512_20261028_v1/finetune/control/output/direct-fe110-scratch512-finetune20-20261028-v1/checkpoints/2026-10-28-20-56-32/best_checkpoint.pt
+              sha256: cdd391d39ed19fc1ef3516d41b1af53bd81351d8ad73f25e537be232fd8c0dc0
+              backend: aqcat25
+              status: budget_stopped_partial_development_selected_snapshot
+          cases:
+          - name: 11_A
+            composition: C2H3
+            seed_path: geometry/11_A/POSCAR
+            seed_sha256: daddb6f7e9b33d116a3d461affca3b6a682001bb6a8eb2cb185e6ee9b0604562
+          - name: 11_B
+            composition: C2H3
+            seed_path: geometry/11_B/POSCAR
+            seed_sha256: e996b6eb9f99f83d66300c4dc4e4babf21062a5fc5dfee64781ed9acb6b2a9ce
+          - name: 11_C
+            composition: C2H3
+            seed_path: geometry/11_C/POSCAR
+            seed_sha256: 67eaf572196f405211cb3335d5c1c0f2379dad0c393e076346d1fd25c38b945d
+          - name: 12_A
+            composition: C2H3O
+            seed_path: geometry/12_A/POSCAR
+            seed_sha256: cacf28fb88bacfee22a7a39e52cbe047cb692e5fa081752b088e543ef4fb4c2d
+          - name: 12_B
+            composition: C2H3O
+            seed_path: geometry/12_B/POSCAR
+            seed_sha256: a50e10fc1b38fb87c094839776fe3213168b5b414299116300003697c1de82c1
+          - name: 12_C
+            composition: C2H3O
+            seed_path: geometry/12_C/POSCAR
+            seed_sha256: 1b7bfe1e12eb62368abf6a29d2d0c3962febc1a357bcf418d2beafcf3ac94003
+          - name: 13_A
+            composition: C2H3O
+            seed_path: geometry/13_A/POSCAR
+            seed_sha256: 0127f164894671be3d2a54e3380bd9ecf5037ca852b765f82bca6c136af12f59
+          - name: 13_B
+            composition: C2H3O
+            seed_path: geometry/13_B/POSCAR
+            seed_sha256: 5483cb4083133346148fc3d41be7fcb2077eb631120d4c7188e5c0b6faf3ca21
+          - name: 13_C
+            composition: C2H3O
+            seed_path: geometry/13_C/POSCAR
+            seed_sha256: c3d7932da9dfd7ecb6239d12268e7ebe9b6572c7d12cfc4867b437532e255506
+          - name: 14_A
+            composition: C2H3O
+            seed_path: geometry/14_A/POSCAR
+            seed_sha256: 3e7d212f16899985a9247328f51dfcb72ee7438fdf29323a38c48fd05fded207
+          - name: 14_B
+            composition: C2H3O
+            seed_path: geometry/14_B/POSCAR
+            seed_sha256: 9f5c96d2ed2b2b2a7f108caeb9ac7951ff8111d873fbef6dbeb081075a7d5f07
+          - name: 14_C
+            composition: C2H3O
+            seed_path: geometry/14_C/POSCAR
+            seed_sha256: cdc8ce43a6e6885558bd9cbc300f9939bcf237fa494e450ceb2684f50d365e42
+          - name: 15_A
+            composition: C2H4
+            seed_path: geometry/15_A/POSCAR
+            seed_sha256: db6a750c2357d99033acede38aea824f8fa76659e9c734f3634e1b877a202910
+          - name: 15_B
+            composition: C2H4
+            seed_path: geometry/15_B/POSCAR
+            seed_sha256: 1b0c4d73277c312e0fdcd056be28f5c445565f84754d966ed5a996056188a57b
+          - name: 15_C
+            composition: C2H4
+            seed_path: geometry/15_C/POSCAR
+            seed_sha256: 72c51ad48b1ec176613e6bd34ac252bc98cbe71eecdc209edb13924ab0cb167f
+        authorizing_user_request: 利用新微调的AQCat25 gpu加速 然后提交dft
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        automatic_retries: 0
+        VASP_submission_authority: false
+        authorization_interpretation: Explicit current user requests these fifteen GPU starts
+          followed by work-reviewed DFT. Conservative 600s GPU cap selected by agent; not
+          a claimed user-specified budget.
       fe110_scratch512_speed2_20261028:
         scope:
           remote_root: /home/sbq/sbq/fe110_scratch512_speed2_20261028_v2

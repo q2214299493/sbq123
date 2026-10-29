@@ -4,6 +4,7 @@ import argparse
 import csv
 import json
 from collections import Counter
+from itertools import permutations
 from pathlib import Path
 
 import numpy as np
@@ -16,6 +17,7 @@ from scripts.workflow_geometry import minimum_image_delta_xy, pbc_xy_distance
 
 from .build_fe110_adsorption import (
     Poscar,
+    anchor_cartesian_position,
     center_score,
     expanded_symbols,
     fe110_anchor_site_distances,
@@ -30,6 +32,130 @@ RADII = {"H": 0.31, "C": 0.76, "O": 0.66}
 SITE_CODES = {"top": "t", "short_bridge": "sb", "long_bridge": "lb", "hollow": "h"}
 SUPERSCRIPT = str.maketrans("0123456789", "⁰¹²³⁴⁵⁶⁷⁸⁹")
 ASCII_SITE_LABEL = str.maketrans({"η": "eta", "⁰": "0", "¹": "1", "²": "2", "³": "3", "⁴": "4", "⁵": "5", "⁶": "6", "⁷": "7", "⁸": "8", "⁹": "9"})
+
+
+def care_source_pose(raw: dict) -> tuple[Poscar, list[int]]:
+    """Group an ASE CARE pose without assigning interleaved coordinates to wrong elements.
+
+    The returned permutation maps POSCAR indices to the original ASE indices.
+    Original Fe48 constraints never replace the accepted target Fe45 constraints.
+    """
+    data = raw["ase"]["data"]
+    elements = {26: "Fe", 6: "C", 8: "O", 1: "H"}
+    atoms = [elements[number] for number in data["numbers"]]
+    if atoms[:48] != ["Fe"] * 48 or atoms.count("Fe") != 48:
+        raise ValueError("CARE source must contain the original leading Fe48 slab")
+    cell = np.asarray(data["cell"], dtype=float)
+    cart = np.asarray(data["positions"], dtype=float)
+    if cell.shape != (3, 3) or cart.shape != (len(atoms), 3):
+        raise ValueError("invalid CARE lattice/position dimensions")
+    if not np.isfinite(cell).all() or not np.isfinite(cart).all() or abs(np.linalg.det(cell)) < 1:
+        raise ValueError("nonfinite or singular CARE geometry")
+    species = list(dict.fromkeys(atoms))
+    order = [index for symbol in species for index, atom in enumerate(atoms) if atom == symbol]
+    return Poscar(
+        "Local CARE Fe48 predicted pose; not a DFT result",
+        cell, species, [atoms.count(symbol) for symbol in species],
+        cart[order] @ np.linalg.inv(cell), [("T", "T", "T")] * len(atoms),
+    ), order
+
+
+def surface_pose_symmetries(slab: Poscar) -> list[tuple[np.ndarray, np.ndarray]]:
+    """Use only actual clean-slab symmetries that retain the adsorbing face."""
+    import spglib
+
+    if slab.symbols != ["Fe"] or slab.counts != [45]:
+        raise ValueError("pose comparison requires the clean Fe45 reference")
+    data = spglib.get_symmetry((slab.cell, slab.frac, [26] * 45), symprec=0.01)
+    if data is None:
+        raise ValueError("clean-slab symmetry identification failed")
+    operations = [
+        (rotation, translation)
+        for rotation, translation in zip(data["rotations"], data["translations"], strict=True)
+        if np.array_equal(rotation[2], [0, 0, 1])
+        and np.array_equal(rotation[:, 2], [0, 0, 1])
+        and abs(translation[2] - round(translation[2])) < 1e-8
+    ]
+    if not operations:
+        raise ValueError("no face-preserving slab symmetry operations")
+    return operations
+
+
+def equivalent_pose_rmsd(
+    first: Poscar, second: Poscar, operations: list, *, remove_height_shift: bool = True,
+) -> float:
+    """Seed-only near-duplicate audit, with H permutations and no arbitrary rotation.
+
+    Uniform height removal prevents padding an initial set by lifting the same
+    pose. This metric cannot establish duplicate relaxed minima or stability.
+    """
+    symbols = expanded_symbols(first)[45:]
+    if symbols != expanded_symbols(second)[45:] or not np.allclose(first.cell, second.cell):
+        raise ValueError("pose comparison requires compatible cells and atom maps")
+    hydrogens = [index for index, symbol in enumerate(symbols) if symbol == "H"]
+    best = float("inf")
+    for rotation, translation in operations:
+        mapped = second.frac[45:] @ rotation.T + translation
+        for order in permutations(hydrogens):
+            indices = list(range(len(symbols)))
+            for first_h, second_h in zip(hydrogens, order, strict=True):
+                indices[first_h] = second_h
+            delta = minimum_image_delta_xy(mapped[indices] - first.frac[45:]) @ first.cell
+            if remove_height_shift:
+                delta[:, 2] -= delta[:, 2].mean()
+            best = min(best, float(np.sqrt(np.mean(np.sum(delta**2, axis=1)))))
+    if not np.isfinite(best):
+        raise ValueError("empty or nonfinite pose comparison")
+    return best
+
+
+def _pose_axis_frame(axis: np.ndarray) -> np.ndarray:
+    axis = np.asarray(axis, dtype=float)
+    if np.linalg.norm(axis) < 1e-8:
+        raise ValueError("zero template orientation axis")
+    x = axis / np.linalg.norm(axis)
+    z = np.array([0., 0., 1.]) - x * x[2]
+    if np.linalg.norm(z) < 1e-8:
+        z = np.array([1., 0., 0.]) - x * x[0]
+    z /= np.linalg.norm(z)
+    return np.column_stack((x, np.cross(z, x), z))
+
+
+def rigid_reanchor_pose(
+    source: Poscar, slab: Poscar, site, *, anchor: int, axis_to: int,
+    azimuth_deg: float, tilt_deg: float, binding_distance_A: float,
+) -> Poscar:
+    """Construct an exploratory rigid pose, preserving all template internal bonds."""
+    # Unwrap along bonds: direct per-atom MIC to the anchor can split a long
+    # C-O-C-H branch even though every individual source bond is intact.
+    ads = list(range(45, sum(source.counts)))
+    neighbors = {index: [] for index in ads}
+    for first, second in connectivity(source, ads):
+        neighbors[ads[first]].append(ads[second])
+        neighbors[ads[second]].append(ads[first])
+    relative = np.full((len(ads), 3), np.nan)
+    relative[anchor - 45] = 0.
+    pending = [anchor]
+    for current in pending:
+        for neighbor in neighbors[current]:
+            if np.isfinite(relative[neighbor - 45]).all():
+                continue
+            delta = minimum_image_delta_xy(source.frac[neighbor] - source.frac[current]) @ source.cell
+            relative[neighbor - 45] = relative[current - 45] + delta
+            pending.append(neighbor)
+    if not np.isfinite(relative).all():
+        raise ValueError("cannot reanchor a disconnected molecular template")
+    azimuth, tilt = np.radians([azimuth_deg, tilt_deg])
+    axis = np.array([np.cos(tilt) * np.cos(azimuth), np.cos(tilt) * np.sin(azimuth), np.sin(tilt)])
+    rotation = _pose_axis_frame(axis) @ _pose_axis_frame(relative[axis_to - 45]).T
+    target = anchor_cartesian_position(slab, site, binding_distance_A)
+    mapped = (relative @ rotation.T + target) @ np.linalg.inv(slab.cell)
+    mapped[:, :2] %= 1.0
+    return Poscar(
+        "User-authorized exploratory rigid reanchor; not a stable-state claim",
+        slab.cell.copy(), source.symbols.copy(), source.counts.copy(),
+        np.vstack((slab.frac, mapped)), [*slab.flags, *source.flags[45:]],
+    )
 
 
 def selected_rows(care_root: Path) -> list[dict[str, str]]:
@@ -284,27 +410,6 @@ def main() -> None:
     for item in manifest["candidates"]:
         review_data = item["geometry_review"]
         print(f"{item['name']} {review_data['verdict']}")
-
-
-def surface_pose_symmetries(slab: Poscar) -> list[tuple[np.ndarray, np.ndarray]]:
-    """Use only actual clean-slab symmetries that retain the adsorbing face."""
-    import spglib
-
-    if slab.symbols != ["Fe"] or slab.counts != [45]:
-        raise ValueError("pose comparison requires the clean Fe45 reference")
-    data = spglib.get_symmetry((slab.cell, slab.frac, [26] * 45), symprec=0.01)
-    if data is None:
-        raise ValueError("clean-slab symmetry identification failed")
-    operations = [
-        (rotation, translation)
-        for rotation, translation in zip(data["rotations"], data["translations"], strict=True)
-        if np.array_equal(rotation[2], [0, 0, 1])
-        and np.array_equal(rotation[:, 2], [0, 0, 1])
-        and abs(translation[2] - round(translation[2])) < 1e-8
-    ]
-    if not operations:
-        raise ValueError("no face-preserving slab symmetry operations")
-    return operations
 
 
 if __name__ == "__main__":

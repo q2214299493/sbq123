@@ -381,3 +381,9 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `archive/fe110_scratch512_20261028/prepare_c2_dft.py`, `review_c2_dft.py`, `tests/test_scratch512_c2_dft.py`:reusecanonicalbuilder/INCARcustodian/submissionpreflight,three-armsourcefilter/methodidentityand18-inputindependentreplay;actualplan/input_verificationincalculations/.../c2_three_arm_dft300_v1/.
 - `docs/reviews/fe110_c2_three_arm_submission_20261028/README.md`, `user_authorization.md`:exacthuman提交,actual9926805/9926806/9926807receiptsandinitialPEND,remotePOTCAR/quota/gates/66metadataregistration;no scientificacceptance.
 - `archive/fe110_scratch512_20261028/submit_c2_dft.py`, `register_c2_dft.py`, `tests/test_c2_three_arm_submission.py`:scoped3jobcanonicalVASPsubmissionandLSFevidence,append-onlymetadata plan/review/apply/readback;outputsunder calculations/.../c2_three_arm_submission_20261028_v1/.
+
+## Fe11011–15 FT512 GPU and DFT (2026-10-29)
+
+- `docs/reviews/fe110_c2_11_15_ft512_20261029/`:scope,15actualjobIDs,input/evidence ZIP and verification.
+- `archive/fe110_11_15_gpu_20261029/`:bounded GPU adapter/transport,frame review,canonical DFT handoff and metadata-only registration.
+- `calculations/fe110_c2_adsorption_11_15_20261020/ft512_gpu_20261029_v1/`:frozen request/runtime,returned15trajectories,DFT inputs/gates/receipts and registry batch.

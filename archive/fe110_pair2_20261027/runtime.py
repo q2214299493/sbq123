@@ -28,6 +28,10 @@ def check_scope(request, approval, exception, digest):
         raise ValueError("exact paired-relaxation human authorization missing")
     if request["scope"] != exception["scope"]:
         raise ValueError("paired relaxation scope changed")
+    if request.get("document_kind") == "fe110_c2_11_15_ft512_relaxation":
+        from archive.fe110_11_15_gpu_20261029.adapter import check_scope as check_adsorption_scope
+        check_adsorption_scope(request)
+        return
     if request.get("document_kind") == "fe110_scratch512_paired_relaxation":
         from archive.fe110_scratch512_20261028.relaxation_adapter import check_scope as check_scratch_scope
         check_scratch_scope(request)
@@ -177,6 +181,6 @@ if __name__ == "__main__":
             raise ValueError("optimizer default changed")
         for case in scope["cases"]:
             load_atoms(root / case["seed_path"])
-        print({"status": "PASS_NATIVE_PAIRED_OPTIMIZATION_PREFLIGHT", "relaxations": 4, "CUDA_initialized": False}, flush=True)
+        print({"status": "PASS_NATIVE_PAIRED_OPTIMIZATION_PREFLIGHT", "relaxations": len(scope["models"])*len(scope["cases"]), "CUDA_initialized": False}, flush=True)
     else:
         {"worker": worker, "controller": controller, "launch": launch}[args.action](args.request)
