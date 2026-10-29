@@ -13,6 +13,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## Adsorption workbook format correction —2026-10-30
+
+- `docs/reviews/fe110_adsorption_table_format_20261030.md`:consistent main-table formatting and empty missing-energy cells,with all existing numbers preserved.
+- `outputs/adsorption_table_format_20261030_v1/`:local original backup,previews,value/type/style readback and the format-only publication receipt.
+- `archive/fe110_adsorption_table_format_20261030/`:bounded Artifact Tool formatter and independent readback/atomic publication.
+
 This is a navigation index, not a duplicate file listing. Use `git ls-files` for the complete tracked inventory.
 
 ## C2 final acceptance and main-table completion —2026-10-30
