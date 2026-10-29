@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 from datetime import datetime, timezone
 import json
+import math
 import sys
 from pathlib import Path
 import uuid
@@ -14,13 +15,15 @@ from scripts.ts_strategy_engine.review_evidence import _no_links
 from .runner import ResearchRun, run_research
 from .tools import SPECS
 from .catalog import blocked
+from .continuation import previous_header
 
 
 def feedback(run: Path, request: Path):
     receipt = load_json_object(run / "run_receipt.json")
     value = load_json_object(request)
     required = {"adopted", "evidence_effectiveness", "repeated_checks", "followup_notes", "scientific_result_reference"}
-    if set(value) != required or (value["adopted"] is not None and type(value["adopted"]) is not bool):
+    if not required <= set(value) or set(value) - required - {"human_review_seconds", "adopted_option_ids"} \
+            or (value["adopted"] is not None and type(value["adopted"]) is not bool):
         raise ValueError("feedback requires separate adoption/evidence/repetition/followup/scientific-reference fields")
     if not isinstance(value["evidence_effectiveness"], list) or not isinstance(value["repeated_checks"], list) \
             or not isinstance(value["followup_notes"], str):
@@ -38,6 +41,13 @@ def feedback(run: Path, request: Path):
         raise ValueError("scientific result reference must be a real separately checked owner artifact")
     if result is not None:
         _no_links(Path(result["path"]).absolute())
+    seconds = value.get("human_review_seconds")
+    if seconds is not None and (type(seconds) not in {int, float} or not math.isfinite(seconds) or seconds < 0):
+        raise ValueError("human review seconds must be explicitly measured or unknown")
+    selected = value.get("adopted_option_ids", [])
+    options = {row["id"] for row in load_json_object(run / "research_result.json")["answer"]["options"]} if selected else set()
+    if not isinstance(selected, list) or any(not isinstance(v, str) or v not in options for v in selected) or (selected and value["adopted"] is not True):
+        raise ValueError("adopted branches require explicit adoption of existing option IDs")
     folder = run / "feedback"
     folder.mkdir(exist_ok=True)
     payload = {"schema_version": 1, "recorded_at": datetime.now(timezone.utc).isoformat(),
@@ -49,15 +59,11 @@ def feedback(run: Path, request: Path):
     return {"path": str(path), "sha256": sha256_file(path)}
 
 
-def main():
-    if hasattr(sys.stdout, "reconfigure"):
-        sys.stdout.reconfigure(encoding="utf-8")
-    root = argparse.ArgumentParser(description=__doc__)
-    sub = root.add_subparsers(dest="command", required=True)
-    run = sub.add_parser("run")
-    run.add_argument("--goal", required=True)
-    run.add_argument("--intent", choices=["auto", "diagnose", "compare", "plan"], default="auto")
-    run.add_argument("--workdir", type=Path, required=True)
+def _run_options(sub, command):
+    run = sub.add_parser(command)
+    run.add_argument("--goal", required=command == "run")
+    run.add_argument("--intent", choices=["auto", "diagnose", "compare", "plan"], default="auto" if command == "run" else None)
+    run.add_argument("--workdir", type=Path, required=command == "run")
     run.add_argument("--project-root", type=Path)
     run.add_argument("--profile", type=Path, help="Task-local existing codex/auth/model configuration; never credentials.")
     run.add_argument("--scope", type=Path, action="append", default=[])
@@ -71,11 +77,29 @@ def main():
     run.add_argument("--max-turns", type=int, default=3)
     run.add_argument("--max-actions", type=int, default=10)
     run.add_argument("--timeout-seconds", type=float, default=360)
+    if command == "resume":
+        run.add_argument("--from-run", type=Path, required=True)
+        run.add_argument("--update", required=True, help="New evidence or task clarification within the same research question.")
+
+
+def main():
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
+    root = argparse.ArgumentParser(description=__doc__)
+    sub = root.add_subparsers(dest="command", required=True)
+    _run_options(sub, "run")
+    _run_options(sub, "resume")
     tools = sub.add_parser("tools", help="Inspect registered host operations; no model or scientific job.")
     tools.set_defaults(tool_listing=True)
     use = sub.add_parser("feedback")
     use.add_argument("--run", type=Path, required=True)
     use.add_argument("--request", type=Path, required=True)
+    spc = sub.add_parser("spc-export", help="Offline non-authoritative SPC staging; never changes SPC state or approvals.")
+    spc.add_argument("--run", type=Path, required=True)
+    spc.add_argument("--spc-root", type=Path, required=True)
+    spc.add_argument("--output-dir", type=Path, required=True)
+    spc.add_argument("--binding", type=Path)
+    spc.add_argument("--planning-input", type=Path)
     args = root.parse_args()
     if args.command == "tools":
         print(json.dumps(SPECS, ensure_ascii=False, indent=2))
@@ -83,6 +107,21 @@ def main():
     if args.command == "feedback":
         print(json.dumps(feedback(args.run, args.request), ensure_ascii=False))
         return
+    if args.command == "spc-export":
+        from .spc_adapter import export
+        value = export(args.run, args.spc_root, args.output_dir, binding_path=args.binding, planning_input_path=args.planning_input)
+        print(json.dumps({"status": value["status"], "path": str(args.output_dir / "spc_mapping.json")}, ensure_ascii=False))
+        return
+    old_scopes = []
+    if args.command == "resume":
+        prior, inventory = previous_header(args.from_run)
+        if args.goal and args.goal != prior["goal"]:
+            raise ValueError("resume preserves the original goal; pass --update for new context")
+        args.goal, args.intent = prior["goal"], args.intent or prior["intent"]
+        old_scopes = [Path(path) for path in inventory["scopes"] if Path(path).is_dir()]
+        args.workdir = args.workdir or (old_scopes[0] if old_scopes else None)
+        if args.workdir is None:
+            raise ValueError("previous scopes are missing; supply a current --workdir")
     if args.profile and blocked(args.profile.absolute()):
         raise ValueError("use a task-local nonsecret profile, not personal authentication/configuration")
     profile = load_json_object(args.profile) if args.profile else {}
@@ -96,13 +135,15 @@ def main():
         raise ValueError("set one task-local profile with existing project_root/auth_home/codex, or provide them explicitly")
     output_root = Path(profile["output_root"]) if profile.get("output_root") else project.parent / (project.name + "_research_runs")
     output = args.output_dir or output_root / (datetime.now().strftime("%Y%m%d_%H%M%S_") + uuid.uuid4().hex[:8])
-    scopes = [args.workdir, *args.scope]
-    if args.mode == "daily":
+    scopes = list(dict.fromkeys([*old_scopes, args.workdir, *args.scope]))
+    if args.mode == "daily" and not old_scopes:
         scopes += [project / name for name in ("docs", "configs", "modules") if (project / name).is_dir()]
     run = ResearchRun(args.goal, args.intent, scopes, project, output, mode=args.mode,
                       manifest=args.evaluation_manifest, model=args.model or profile.get("model", "gpt-6.1-sol"),
                       effort=args.effort or profile.get("effort", "medium"),
-                      max_turns=args.max_turns, max_actions=args.max_actions, timeout=args.timeout_seconds)
+                      max_turns=args.max_turns, max_actions=args.max_actions, timeout=args.timeout_seconds,
+                      previous_run=args.from_run if args.command == "resume" else None,
+                      update=args.update if args.command == "resume" else "")
     print(json.dumps(run_research(run, home, codex), ensure_ascii=False))
 
 

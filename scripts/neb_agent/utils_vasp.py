@@ -6,6 +6,7 @@ from pathlib import Path
 import numpy as np
 
 from scripts.scientific_validation import finite_number, integer_number
+from .outcar_blocks import read_force_blocks
 
 
 FATAL_PATTERN = re.compile(r"BRMIX|ZBRENT|VERY BAD NEWS|EDDDAV|segmentation|forrtl|M_divide|internal error", re.I)
@@ -234,20 +235,7 @@ def trailing_threshold_count(values: list[int], threshold: int | None) -> int:
 
 
 def last_positions(path: Path, count: int) -> np.ndarray:
-    latest = None
-    with path.open(encoding="utf-8", errors="replace") as handle:
-        for line in handle:
-            if "TOTAL-FORCE (eV/Angst)" not in line:
-                continue
-            next(handle, None)
-            rows = []
-            for _ in range(count):
-                fields = next(handle, "").split()
-                if len(fields) < 6:
-                    break
-                rows.append([float(x) for x in fields[:3]])
-            if len(rows) == count:
-                latest = np.asarray(rows)
-    if latest is None:
+    selected = read_force_blocks(path, count)["selected"]
+    if selected is None:
         raise ValueError(f"No complete position/force block: {path}")
-    return latest
+    return np.asarray(selected["positions_A"])

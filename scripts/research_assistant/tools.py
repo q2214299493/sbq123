@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import json
+from importlib.metadata import PackageNotFoundError, version
+import sys
 from collections import deque
 from pathlib import Path
 import sqlite3
@@ -9,23 +11,21 @@ import sqlite3
 import numpy as np
 import yaml
 
-from scripts.aqcat25_calibration import parse_final_outcar
 from scripts.artifact_io import load_json_object, sha256_file, sha256_json, write_json_exclusive
 from scripts.catalysis_retrieval.ranking import bm25_scores
 from scripts.catalysis_retrieval.workflow import search_records
 from scripts.neb_agent.utils_structure import compatible, read_poscar
-from scripts.neb_agent.utils_vasp import parse_oszicar, parse_outcar
-from scripts.neb_agent.utils_vasp import last_positions
 from scripts.ts_strategy_engine.contract import load_contract
 from scripts.ts_strategy_engine.fingerprint import build_fingerprint, rank_templates
 from scripts.ts_strategy_engine.learning_store import read_events
 from scripts.ts_strategy_engine.learning_cases import PRIVATE_POINTER_TOKENS
 from scripts.ts_strategy_engine.strategy import compose_strategy
 from scripts.ts_strategy_engine.templates import load_templates
-from scripts.vasp_result_gate import final_scf_state, read_incar_values
 from scripts.scientific_validation import validate_finite_tree
 
 from .catalog import Catalog
+from .vasp_tools import inspect_vasp
+from . import structure_tools
 
 
 SPECS = {
@@ -33,12 +33,32 @@ SPECS = {
     "evidence.read": "定向读取文件；query必须为JSON pointer、文件内实际子串或@tail(最后80行)，空串读开头；不要把读取意图当检索字串。",
     "vasp.inspect": "target_ids为一个计算目录。复用VASP/SCF/力解析，分别列电子、离子标志、进程页脚；无调度器断言。",
     "structures.measure": "target_ids为1至3个POSCAR/CONTCAR。原子顺序、约束、MIC距离/位移；只测量不接受结构。",
+    "structures.compare": "定向比较1至3个结构。query为JSON对象，可含pairs_zero_based(原子对列表)、adsorbate_zero_based、surface_zero_based。逐对距离、最近选定表面原子、同序目标RMSD；默认非Fe为吸附物，所有Fe为比较集合，不推断顶层或重排映射。",
     "terminal.align": "target_ids为一个计算目录。比较OUTCAR最后完整位置/力块与CONTCAR，结合OSZICAR末态证据。",
     "history.search": "检索范围内已有复核、尝试、策略和反馈；可给稳定的SQLite快照ID，生产数据库不写入。",
     "strategy.candidates": "target_ids顺序：反应contract、端点POSCAR，可选历史数据库快照。调用现有fingerprint/rank/compose，不授予执行权。",
     "methods.search": "query为方法关键词；target_ids可空(项目文档)，也可指定方法文档/目录。给白名单JSONL及已审核查询向量时调用现有混合检索。",
     "workflow.draft": "与strategy.candidates相同输入，保存现有策略组合器生成的候选草案；缺少contract/端点时拒绝，不生成虚构输入。",
+    "workflow.review": "吸附结构可审阅草案：两个结构ID(参考目标、待评候选)，query必须为JSON对象{option_id:方案分支ID,adsorbate_zero_based:原子列表}。复用已有adsmind连接性规则，不生成计算参数/成本，不接受结构，不执行。",
 }
+
+
+def _implementation_identity():
+    root = Path(__file__).parents[1]
+    names = ["neb_agent/outcar_blocks.py", "neb_agent/utils_vasp.py", "neb_agent/utils_structure.py",
+             "adsmind_lite/relaxed_analysis.py", "adsmind_lite/adsmind_common.py", "adsmind_lite/candidate_generation.py",
+             "vasp_result_gate.py", "scientific_validation.py", "catalysis_retrieval/ranking.py", "catalysis_retrieval/workflow.py",
+             "ts_strategy_engine/contract.py", "ts_strategy_engine/fingerprint.py", "ts_strategy_engine/strategy.py",
+             "ts_strategy_engine/templates.py", "ts_strategy_engine/learning_store.py"]
+    files = [*Path(__file__).parent.glob("*.py"), *[root / name for name in names]]
+    dependencies = {}
+    for package in ("numpy", "ase", "PyYAML", "jsonschema"):
+        try:
+            dependencies[package] = version(package)
+        except PackageNotFoundError:
+            dependencies[package] = "not installed"
+    return {"sources": {str(p.relative_to(root)): sha256_file(p) for p in files},
+            "python": sys.version, "dependencies": dependencies}
 
 
 class ToolRegistry:
@@ -47,6 +67,15 @@ class ToolRegistry:
         self.actions = []
         self.cache = {}
         self.results = {}
+        self.implementation = _implementation_identity()
+        self.implementation_sha256 = sha256_json(self.implementation)
+
+    @staticmethod
+    def fingerprint(request):
+        effective = dict(request)
+        if request["tool"] in {"vasp.inspect", "terminal.align", "structures.measure", "strategy.candidates", "workflow.draft"}:
+            effective["query"], effective["limit"] = "", 5
+        return sha256_json(effective)
 
     def execute(self, request: dict) -> dict:
         if set(request) != {"tool", "target_ids", "query", "limit"} or request["tool"] not in SPECS:
@@ -57,10 +86,7 @@ class ToolRegistry:
             raise ValueError("invalid bounded host request")
         for identity in ids:
             self.catalog.resolve(identity)
-        effective = dict(request)
-        if request["tool"] in {"vasp.inspect", "terminal.align", "structures.measure", "strategy.candidates", "workflow.draft"}:
-            effective["query"], effective["limit"] = "", 5
-        fingerprint = sha256_json(effective)
+        fingerprint = self.fingerprint(request)
         identity = f"E{len(self.actions) + 1:03d}"
         if fingerprint in self.cache:
             self.catalog.verify()
@@ -72,7 +98,7 @@ class ToolRegistry:
                 value = self.dispatch(request["tool"], ids, query, limit, sources)
                 self.catalog.verify()
                 validate_finite_tree(value, "host tool result")
-                result = {"evidence_id": identity, "tool": request["tool"], "status": "OK", "host_executed": True,
+                result = {"evidence_id": identity, "tool": request["tool"], "status": "PARTIAL" if isinstance(value, dict) and value.get("component_errors") else "OK", "host_executed": True,
                           "data": value, "sources": sources, "scientific_acceptance": False}
             except (OSError, ValueError, KeyError, TypeError, IndexError, ImportError, SystemExit, sqlite3.Error) as exc:
                 result = {"evidence_id": identity, "tool": request["tool"], "status": "ERROR", "host_executed": True,
@@ -84,6 +110,7 @@ class ToolRegistry:
         write_json_exclusive(path, {"request": request, "result": result})
         action = {"evidence_id": identity, "request": request, "result_path": str(path), "result_sha256": sha256_file(path),
                   "status": result["status"], "executed": result["host_executed"], "reused_from": result.get("reused_from")}
+        action.update({"implementation_sha256": self.implementation_sha256, "reused_from_parent": result.get("reused_from_parent")})
         self.actions.append(action)
         self.results[identity] = result
         return result
@@ -99,6 +126,12 @@ class ToolRegistry:
             return self.vasp(ids[0], sources, align=tool == "terminal.align")
         if tool == "structures.measure":
             return self.structures(ids, sources)
+        if tool == "structures.compare":
+            if not ids:
+                raise ValueError("structure IDs required")
+            return structure_tools.compare([self.frozen(identity, sources) for identity in ids], ids, query)
+        if tool == "workflow.review":
+            return structure_tools.review(self, ids, query, sources)
         if tool in {"methods.search", "history.search"}:
             return self.search(tool, ids, query, min(limit, 5), sources)
         return self.strategy(ids, sources, draft=tool == "workflow.draft")
@@ -145,52 +178,7 @@ class ToolRegistry:
 
     def vasp(self, identity, sources, *, align):
         directory = self.catalog.resolve(identity, directory=True)
-        files, availability = {}, []
-        for name in ("INCAR", "OSZICAR", "OUTCAR", "POSCAR", "CONTCAR", "vasp.out"):
-            path, reference = self.catalog.file(directory, name)
-            availability.append(reference)
-            if path:
-                files[name] = path
-                sources.append(reference)
-        result = {"availability": availability, "scheduler": "not queried; process files are not scheduler accounting"}
-        parsed = parse_oszicar(files["OSZICAR"]) if "OSZICAR" in files else {}
-        out = parse_outcar(files["OUTCAR"]) if "OUTCAR" in files else {}
-        result["oszicar"] = {k: v for k, v in parsed.items() if k != "electronic_cycles"}
-        result["outcar"] = {k: v for k, v in out.items() if k != "electronic_cycles"}
-        if "INCAR" in files and parsed:
-            incar = read_incar_values(files["INCAR"])
-            result["incar"] = incar
-            try:
-                result["owner_scf_oszicar_only"] = final_scf_state(parsed, incar)
-                result["owner_scf_combined"] = final_scf_state(parsed, incar, out) if out else None
-            except ValueError as exc:
-                result["owner_scf_problem"] = str(exc)
-            result["scf_scope"] = "Existing final_scf_state outputs. Disagreement/alignment failure stays visible; neither view alone accepts science."
-        if "OUTCAR" in files:
-            try:
-                force = parse_final_outcar(files["OUTCAR"])
-            except ValueError as exc:
-                result["force_block_unavailable"] = {"availability": "not_found", "scope": "provided OUTCAR only", "problem": str(exc)}
-                return result
-            norms = np.linalg.norm(force["forces_eV_per_A"], axis=1)
-            result["last_complete_force_block"] = {"rows": len(norms), "maximum_all_atoms_eV_per_A": float(norms.max()),
-                                                    "scope": "latest readable complete force block, not automatically the saved final structure"}
-            if "CONTCAR" in files:
-                structure = read_poscar(files["CONTCAR"])
-                if structure.atom_count != len(norms):
-                    raise ValueError("force/structure atom count mismatch")
-                movable = [i for i, flags in enumerate(structure.flags) if not flags or any(v == "T" for v in flags)]
-                result["last_complete_force_block"]["maximum_movable_eV_per_A"] = float(norms[movable].max()) if movable else None
-                if align:
-                    positions = last_positions(files["OUTCAR"], structure.atom_count)
-                    from ase.geometry import find_mic
-                    delta, _ = find_mic(structure.frac @ structure.cell - positions, structure.cell, pbc=True)
-                    result["last_block_to_saved_structure"] = {"maximum_MIC_mismatch_A": float(np.linalg.norm(delta, axis=1).max()),
-                        "metric": "same-index position mismatch; not a force-convergence criterion", "index_base": 0}
-        if "vasp.out" in files:
-            text = files["vasp.out"].read_text(encoding="utf-8", errors="replace")
-            result["stdout_tail"] = text[-3000:]
-        return result
+        return inspect_vasp(self.catalog, directory, sources, align=align)
 
     def structures(self, ids, sources):
         if not ids:

@@ -27,7 +27,8 @@ def final_answer(intent, identity="E001", observed="synthetic observation"):
         "options": [], "evidence_and_calculation_plan": [], "recommended_next": {"action": "Review the measured source.",
         "rationale": "The actual observation is available.", "evidence_ids": [identity],
         "outcomes": [{"if": "source corresponds", "then": "request owning scientific review"}]},
-        "new_information": [fact], "draft_evidence_ids": [], "scientific_limits": "Synthetic software fixture; not scientific acceptance."}}
+        "new_information": [fact], "draft_evidence_ids": [], "progress": None,
+        "scientific_limits": "Synthetic software fixture; not scientific acceptance."}}
 
 
 @pytest.fixture
@@ -129,6 +130,10 @@ class Peer:
             else:
                 observed = str(self.run.tools.results["E001"]["data"][0]["value"])
                 value = final_answer(self.run.intent, observed=observed)
+                if self.run.continuation:
+                    value["answer"]["progress"] = {"changes": [{"previous_ref": "F001", "assessment": "unchanged",
+                        "statement": observed, "evidence_ids": ["E001"]}], "completed_checks": [], "remaining_checks": [],
+                        "next_product": "Synthetic independent owner review"}
             self.messages = [
                 {"method": "item/completed", "params": {"threadId": "thread", "turnId": turn,
                     "item": {"id": turn + "-answer", "type": "agentMessage", "phase": "final_answer", "text": json.dumps(value)}}},
@@ -183,7 +188,7 @@ def test_final_cannot_cite_unread_evidence_or_fabricate_cost():
         validate_response(value, {"E001": {"data": []}}, "compare")
     value["answer"]["draft_evidence_ids"] = []
     value["answer"]["options"] = [{"id": "candidate", "proposal": "hypothetical option", "evidence_ids": ["E001"],
-        "conditions": ["independent owner review"], "risks": [], "acceptance_conditions": ["owning gates"],
+        "conditions": ["independent owner review"], "risks": [], "acceptance_conditions": ["owning gates"], "blocking_gaps": [],
         "cost": {"status": "unknown", "value": 0, "unit": "hours", "basis": "not measured", "evidence_ids": []}}]
     with pytest.raises(ValueError, match="unknown cost"):
         validate_response(value, {"E001": {}}, "compare")
@@ -381,3 +386,106 @@ def test_methods_search_accepts_a_document_id_instead_of_misreading_jsonl(setup)
     result = tools.execute(request("methods.search", [catalog.listed(path)], "force convergence"))
     assert result["status"] == "OK" and result["data"]["matches"], result
     assert "Force convergence" in result["data"]["matches"][0]["excerpt"]
+
+
+@pytest.mark.parametrize("change", ["none", "source", "implementation", "snapshot"])
+def test_continuation_revalidates_sources_versions_and_reuses_only_safe_results(setup, tmp_path, change):
+    scope, _, _, _, _ = setup
+    parent = ResearchRun("synthetic goal", "compare", [scope], scope, tmp_path / "parent")
+    parent.bind_workspace(tmp_path / "auth")
+    parent.drive(Peer(parent), synthetic=True)
+    parent.finish()
+    original = sha256_file(parent.output / "research_result.json")
+    if change == "source":
+        (scope / "measurement.json").write_text('{"value": 3.0}', encoding="utf-8")
+    if change == "snapshot":
+        next((parent.output / "sources").glob("*/measurement.json")).write_text("tampered")
+    run = ResearchRun("synthetic goal", "compare", [scope], scope, tmp_path / "child", previous_run=parent.output, update="recheck")
+    if change == "implementation":
+        run.tools.implementation_sha256 = "different implementation"
+    run.bind_workspace(tmp_path / "auth")
+    run.drive(Peer(run), synthetic=True)
+    receipt = run.finish()
+    assert run.question_id == parent.question_id
+    assert receipt["host_actions_reused_from_parent"] == (1 if change == "none" else 0)
+    assert receipt["host_tool_executions"] == (0 if change == "none" else 1)
+    assert run.answer["facts"][0]["statement"] == ("3.0" if change == "source" else "2.75")
+    assert sha256_file(parent.output / "research_result.json") == original
+    assert (run.output / "continuation.json").is_file()
+    if change == "source":
+        assert run.continuation["source_revalidation"][0]["sources"][0]["current_state"] == "changed"
+
+
+def test_continuation_missing_source_remains_unknown_and_old_evidence_cannot_be_cited(setup, tmp_path):
+    scope, _, _, _, _ = setup
+    parent = ResearchRun("goal", "diagnose", [scope], scope, tmp_path / "parent")
+    parent.bind_workspace(tmp_path / "auth")
+    parent.drive(Peer(parent), synthetic=True)
+    parent.finish()
+    (scope / "measurement.json").unlink()
+    run = ResearchRun("goal", "diagnose", [scope], scope, tmp_path / "child", previous_run=parent.output, update="new evidence")
+    run.prepare_continuation()
+    assert run.continuation["source_revalidation"][0]["sources"][0]["current_state"] == "missing_in_current_location"
+    assert not run.tools.cache and not run.tools.results
+    with pytest.raises(ValueError, match="never obtained"):
+        validate_response(final_answer("diagnose"), run.tools.results, "diagnose")
+
+
+def test_legacy_research_contract_is_explicitly_loadable():
+    value = final_answer("plan")
+    value["answer"].pop("progress")
+    validate_response(value, {"E001": {}}, "plan", version="project_research_assistant_v1")
+
+
+def test_usage_feedback_does_not_invent_human_time_or_adoption(setup, tmp_path):
+    scope, _, _, _, _ = setup
+    run = ResearchRun("goal", "plan", [scope], scope, tmp_path / "parent")
+    run.bind_workspace(tmp_path / "auth")
+    run.drive(Peer(run), synthetic=True)
+    run.finish()
+    data = {"adopted": None, "evidence_effectiveness": [], "repeated_checks": [], "followup_notes": "not measured",
+            "scientific_result_reference": None, "human_review_seconds": None, "adopted_option_ids": []}
+    path = tmp_path / "unknown-feedback.json"
+    write_json_exclusive(path, data)
+    value = json.loads(Path(feedback(run.output, path)["path"]).read_text(encoding="utf-8"))
+    assert value["usage_feedback"]["human_review_seconds"] is None
+    data["human_review_seconds"] = -1
+    invalid = tmp_path / "invalid-time.json"
+    write_json_exclusive(invalid, data)
+    with pytest.raises(ValueError, match="measured or unknown"):
+        feedback(run.output, invalid)
+
+
+def test_directed_pairs_surface_and_target_comparison(tmp_path):
+    scope, output = tmp_path / "scope", tmp_path / "out"
+    scope.mkdir()
+    output.mkdir()
+    (scope / "POSCAR").write_text(poscar_text(1.0))
+    (scope / "CONTCAR").write_text(poscar_text(2.0))
+    catalog = Catalog([scope], output)
+    tools = ToolRegistry(catalog, scope, output)
+    ids = [catalog.listed(scope / name) for name in ("POSCAR", "CONTCAR")]
+    query = json.dumps({"pairs_zero_based": [[0, 1]], "adsorbate_zero_based": [1], "surface_zero_based": [0]})
+    result = tools.execute(request("structures.compare", ids, query))
+    assert result["status"] == "OK"
+    assert [row["directed_pairs"][0]["MIC_A"] for row in result["data"]["structures"]] == [1.0, 2.0]
+    assert result["data"]["structures"][1]["nearest_selected_surface_contacts"][0]["surface_atom_one_based"] == 1
+    assert result["data"]["comparisons"][0]["adsorbate_same_index_RMS_MIC_A"] == 1.0
+
+
+def test_geometry_review_draft_reuses_owner_rules_without_parameters_or_execution(tmp_path):
+    scope, output = tmp_path / "scope", tmp_path / "out"
+    scope.mkdir()
+    output.mkdir()
+    for name in ("POSCAR", "CONTCAR"):
+        (scope / name).write_text(poscar_text(1.0))
+    project = Path(__file__).resolve().parents[1]
+    catalog = Catalog([scope, project / "configs"], output)
+    tools = ToolRegistry(catalog, project, output)
+    ids = [catalog.listed(scope / name) for name in ("POSCAR", "CONTCAR")]
+    result = tools.execute(request("workflow.review", ids, json.dumps({"option_id": "branch-a", "adsorbate_zero_based": [1]})))
+    assert result["status"] == "OK", result
+    document = json.loads(Path(result["data"]["draft"]["path"]).read_text(encoding="utf-8"))
+    assert document["option_id"] == "branch-a" and document["owner"] == "adsmind_lite.relaxed_analysis"
+    assert document["cost"] is None and not document["parameters_generated"] and not document["runnable"]
+    assert document["owner_connectivity_observations"]["chemical_event"] == "none"

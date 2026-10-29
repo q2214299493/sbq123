@@ -103,6 +103,15 @@ is hash-bound and uses this sequence:
    accepts `DONE`. It then requires OUTCAR normal completion,
    the final electronic step meets `EDIFF` before `NELM`, atom order matches,
    and a complete force block exists;
+
+   Shared position/force parsing is owned by `scripts/neb_agent/outcar_blocks.py`.
+   Coordinates, finite forces, completeness, atom-count basis and source line
+   span bind the same table. The latest attempted table remains separate from
+   the last valid table, including incomplete tails or complete coordinates with
+   invalid forces. `aqcat25_calibration.parse_final_outcar` and the compatibility
+   position reader delegate to it. This parser observation alone is not final
+   ionic/structure/energy correspondence or scientific acceptance.
+
 4. prepare a hash-bound work-to-MZ73 prediction request and compare AQCat25 and
    VASP forces on the exact same structure/checkpoint;
 5. treat that comparison only as a local fine-tuning trigger, never as TS-domain

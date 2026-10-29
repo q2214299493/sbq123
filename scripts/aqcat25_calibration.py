@@ -13,6 +13,7 @@ from typing import Any
 from scripts.artifact_io import load_json_object, sha256_file, sha256_text
 from scripts.execution_backends import load_execution_backends
 from scripts.neb_agent.utils_vasp import parse_outcar
+from scripts.neb_agent.outcar_blocks import block_metadata, read_force_blocks
 
 def parse_poscar_symbols(path: Path) -> list[str]:
     lines = path.read_text(encoding="utf-8").splitlines()
@@ -24,46 +25,23 @@ def parse_poscar_symbols(path: Path) -> list[str]:
 
 
 def parse_final_outcar(path: Path) -> dict[str, Any]:
-    latest_forces: list[list[float]] | None = None
-    latest_toten: float | None = None
-    with path.open("r", encoding="utf-8", errors="replace") as handle:
-        iterator = iter(handle)
-        for line in iterator:
-            if "free  energy   TOTEN" in line:
-                fields = line.split()
-                try:
-                    latest_toten = float(fields[4])
-                except (IndexError, ValueError):
-                    pass
-            if "TOTAL-FORCE (eV/Angst)" not in line:
-                continue
-            next(iterator, None)
-            block: list[list[float]] = []
-            for force_line in iterator:
-                stripped = force_line.strip()
-                if not stripped or set(stripped) == {"-"}:
-                    if block:
-                        break
-                    continue
-                fields = stripped.split()
-                if len(fields) < 6:
-                    break
-                try:
-                    block.append([float(value) for value in fields[3:6]])
-                except ValueError:
-                    break
-            if block:
-                latest_forces = block
-    if latest_forces is None:
-        raise ValueError(f"{path}: no TOTAL-FORCE block")
-    if latest_toten is None:
+    blocks = read_force_blocks(path)
+    selected = blocks["selected"]
+    if selected is None:
+        raise ValueError(f"{path}: no complete finite position/TOTAL-FORCE block")
+    if blocks["latest_toten_eV"] is None:
         raise ValueError(f"{path}: no TOTEN value")
     state = parse_outcar(path)
     return {
         "ionic_converged": state["reached_required_accuracy"],
         "normal_completion": state["normal_completion"],
-        "final_toten_eV": latest_toten,
-        "forces_eV_per_A": latest_forces,
+        "final_toten_eV": blocks["latest_toten_eV"],
+        "forces_eV_per_A": selected["forces_eV_per_A"],
+        "positions_A": selected["positions_A"],
+        "force_block": block_metadata(selected),
+        "latest_force_block_attempt": block_metadata(blocks["latest_attempt"]),
+        "selected_force_block_is_latest_attempt": blocks["selected_is_latest_attempt"],
+        "energy_scope": blocks["energy_scope"],
     }
 
 

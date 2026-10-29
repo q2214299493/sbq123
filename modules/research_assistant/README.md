@@ -25,6 +25,31 @@ Outputs default to a new directory outside the input project tree. No existing
 result is overwritten. This task's concrete local wrapper/profile are recorded
 in its implementation/acceptance report; credentials are never copied there.
 
+## Continue the same research question
+
+```powershell
+python -m scripts.research_assistant.cli resume --from-run PREVIOUS_RUN --update "New evidence or context" --profile TASK_LOCAL_PROFILE
+```
+
+The original goal and question ID persist. The parent goal, candidate options,
+unfinished checks and separate usage feedback are bound to immutable snapshots.
+Additional `--scope` directories expose new material without replacing the old
+scope. Prior model judgments are historical context, not current E evidence.
+`continuation.json` records per-source current availability and SHA-256 checks.
+Changed/missing sources or changed tool/dependency versions require rechecking.
+An intact previous snapshot, unchanged source bytes, compatible scope and exact
+tool implementation identity permit reuse only through a recorded host request;
+reused results are not independent corroboration. Source hashes are still read.
+
+New outputs use protocol v2; v1 research artifacts remain usable as explicit
+parents. The v2 result binds gaps and required artifacts to each option, and
+`progress` explains changes against parent judgment IDs, checks completed with
+current evidence, remaining checks and the next concrete product. These are
+model judgments for owner review, not scientific acceptance. A failed run keeps
+its journal, inputs, source versions and `research_state.json`; if it has no
+final `research_result.json`, choose the latest completed parent explicitly.
+No failed model call is automatically repeated.
+
 ## Registered host tools
 
 | Tool | Existing owner reused | Role |
@@ -33,10 +58,12 @@ in its implementation/acceptance report; credentials are never copied there.
 | `vasp.inspect` | `vasp_result_gate`, `neb_agent.utils_vasp`, `aqcat25_calibration` | Existing SCF and complete-force parsing; conflicting views remain visible |
 | `terminal.align` | existing last complete position-block parser and ASE MIC | Match the saved structure against actual OUTCAR coordinates |
 | `structures.measure` | existing POSCAR/mapping checks and ASE geometry | Atom order, cells/constraints, explicit zero/one indices, distances/displacements |
+| `structures.compare` | same POSCAR/MIC owners | Explicit atom pairs, adsorbate/selected-surface contacts and same-index target comparison; no inferred atom permutation |
 | `history.search` | existing strategy event reader; local source search | Provenanced past attempts, reviews and feedback; immutable DB snapshot/copy only |
 | `strategy.candidates` | existing contract/fingerprint/template ranking/strategy composition | Conditional candidates; no strategy or scientific acceptance |
 | `methods.search` | existing BM25 ranker and catalysis-retrieval workflow | Local method/history text; approved record/vector retrieval when supplied |
 | `workflow.draft` | same existing strategy composer | Source-bound unapproved strategy draft in a fresh output directory |
+| `workflow.review` | `adsmind_lite.relaxed_analysis` with existing analysis rules | Branch-bound geometry review draft; reference/candidate connectivity, sources and unresolved owner checks |
 
 Local text search is explicitly lexical/BM25, not semantic or production
 structure retrieval. Whitelist JSONL plus reviewed precomputed query vectors
@@ -46,6 +73,26 @@ uncontrolled web fallback, or claim that online database connectors are wired.
 The existing whitelist, transferability and scientific gates remain required.
 Missing inputs or optional dependencies produce explicit tool errors/gaps;
 no guessed parameters or replacement acceptance criteria are created.
+
+The shared OUTCAR owner `neb_agent.outcar_blocks` selects coordinates and forces
+from one finite complete table, with block index, iteration labels, line span,
+atom-count basis and completeness. The latest attempted table is retained
+separately, including a partial tail or complete coordinates with invalid forces.
+`aqcat25_calibration.parse_final_outcar` and the compatibility position reader
+delegate to it. A last complete table is not automatically the last ionic state;
+latest file TOTEN remains explicitly separate from the force-table binding.
+VASP collection isolates source/INCAR/SCF/force/structure/stdout component errors,
+retains successful observations and reports PARTIAL without hiding local errors.
+
+For `structures.compare`, query is a JSON object with optional
+`pairs_zero_based`, `adsorbate_zero_based`, `surface_zero_based` lists. By default
+non-Fe atoms are the adsorbate and all Fe atoms are the comparison set; this does
+not establish which Fe layer is exposed. Same-index compatibility is not proof
+that atoms in different isomers have a chemically meaningful correspondence.
+`workflow.review` requires two structure IDs and
+`{"option_id":"BRANCH","adsorbate_zero_based":[...]}`. It generates a review
+record with existing owner connectivity rules; it does not invent target identity,
+INCAR parameters, cost, complete input packages or execution authority.
 
 ## Explicit request/result protocol
 
@@ -94,7 +141,7 @@ authenticate past availability. Evaluation restrictions do not govern daily use.
 
 ## Output, drafts and feedback
 
-`research_result.json` schema 1 binds the original research goal and stabilizes
+`research_result.json` schema 1 (protocol v2) binds the original research goal and stabilizes
 facts, uncertainties/availability, hypotheses, candidate options, conditions,
 unknown/measured cost, risks, evidence/calculation plan, acceptance conditions,
 new tool information and one recommended next step. Facts and options must cite
@@ -110,14 +157,39 @@ scientific acceptance. No threshold or calculation is changed.
 `feedback --run RUN --request JSON` records adoption (including unknown), actual
 tool effectiveness, repeated checks and later notes. A separate optional
 hash-bound owner result reference preserves the scientific outcome boundary.
+Optional `human_review_seconds` must be measured or null; optional
+`adopted_option_ids` require explicit adoption of actual candidate IDs. Automated
+runtime does not become human effort, and preparation/review time is unknown
+when it was not measured.
 Feedback never promotes a scientific result or approves a strategy. These
 records can inform later tool selection/candidate ranking; automatic learning
 or a ranking policy change is not claimed here.
 
-SPC integration is deferred. A future thin adapter consumes this versioned
-goal/evidence/hypothesis/options/acceptance contract; it must not copy diagnosis
-logic. Current offline/live acceptance and remaining limitations are recorded
-in the task's implementation report. Lifecycle status remains in the module map.
+## Thin SPC staging boundary
+
+`spc-export --run RUN --spc-root SPC_SOURCE --output-dir NEW_DIRECTORY` reads the
+actual SPC `CandidatePlanDraft` / `PlanningLLMResponse` contract and snapshots
+its source hashes and dirty/head identity. It never writes SPC source or state.
+With no reviewed bindings, it exports branch-specific fragments and actual SPC
+schema errors for missing hypotheses, model, observables, falsification criteria,
+tasks and trusted IDs. It does not pad those fields or label them accepted.
+
+Optional `--binding JSON --planning-input FILE` supplies reviewed fields and
+evidence mapping to an existing hash-bound `ScientificPlanningInput`. Binding
+schema 1 includes `research_result_sha256`, `planning_input_sha256`,
+`evidence_map` (RSI E ID to SPC evidence-ID list), and `branches` containing an
+actual `option_id` plus reviewed missing `spc_fields`. It cannot override RSI
+branch content or insert trusted evidence directly. The existing SPC proposal
+builder and grounding validator check allowlists, claims, capabilities, gaps
+and consistency. `OFFLINE_PROPOSAL_VALIDATED` means that validation only; SPC
+materialization, independent approval and Plan/Execution Gates remain required.
+No second diagnosis or scientific validation implementation is introduced.
+
+Current offline/live acceptance and remaining limitations are recorded in the
+task implementation reports. Lifecycle status remains in the module map.
 
 Implementation, concrete local entry, real tool traces and acceptance limitations:
 [`docs/reviews/research_assistant_20261029.md`](../../docs/reviews/research_assistant_20261029.md).
+
+Continuation, concrete review drafts, current SPC boundary and environment failure:
+[`docs/reviews/research_continuation_20261029.md`](../../docs/reviews/research_continuation_20261029.md).

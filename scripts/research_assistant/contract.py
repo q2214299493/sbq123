@@ -8,20 +8,24 @@ from scripts.ts_strategy_engine.diagnostic_advice import array_schema, object_sc
 from .tools import SPECS
 
 
-VERSION = "project_research_assistant_v1"
+VERSION = "project_research_assistant_v2"
+LEGACY_VERSION = "project_research_assistant_v1"
 TEXT = {"type": "string", "minLength": 1, "maxLength": 2400}
 IDS = {"type": "array", "items": {"type": "string"}, "uniqueItems": True, "maxItems": 16}
 ITEM = object_schema({"statement": TEXT, "evidence_ids": IDS})
 
 
-def answer_schema():
+def answer_schema(version=VERSION):
     cost = object_schema({"status": {"enum": ["unknown", "estimate", "known"]},
                           "value": {"type": ["number", "null"], "minimum": 0},
                           "unit": {"type": ["string", "null"]}, "basis": TEXT, "evidence_ids": IDS})
     option = object_schema({"id": TEXT, "proposal": TEXT, "evidence_ids": IDS,
                             "conditions": array_schema(TEXT, 1, 5), "cost": cost,
                             "risks": array_schema(TEXT, 0, 5), "acceptance_conditions": array_schema(TEXT, 1, 5)})
-    return object_schema({
+    if version != LEGACY_VERSION:
+        option["properties"]["blocking_gaps"] = array_schema(object_schema({"question": TEXT, "needed_artifact": TEXT, "evidence_ids": IDS}), 0, 6)
+        option["required"].append("blocking_gaps")
+    value = object_schema({
         "intent": {"enum": ["diagnose", "compare", "plan"]}, "goal": TEXT,
         "facts": array_schema(ITEM, 1, 8),
         "uncertainties": array_schema(object_schema({"question": TEXT,
@@ -39,16 +43,25 @@ def answer_schema():
         "new_information": array_schema(ITEM, 1, 8),
         "draft_evidence_ids": IDS, "scientific_limits": TEXT,
     })
+    if version != LEGACY_VERSION:
+        progress = object_schema({
+            "changes": array_schema(object_schema({"previous_ref": TEXT,
+                "assessment": {"enum": ["strengthened", "weakened", "unchanged", "invalidated", "pending_revalidation"]},
+                "statement": TEXT, "evidence_ids": IDS}), 1, 8),
+            "completed_checks": array_schema(ITEM, 0, 8), "remaining_checks": array_schema(ITEM, 0, 8), "next_product": TEXT})
+        value["properties"]["progress"] = {"anyOf": [progress, {"type": "null"}]}
+        value["required"].append("progress")
+    return value
 
 
-def response_schema():
+def response_schema(version=VERSION):
     request = object_schema({"tool": {"enum": list(SPECS)},
                              "target_ids": {"type": "array", "items": {"type": "string"}, "maxItems": 3},
                              "query": {"type": "string", "maxLength": 2000},
                              "limit": {"type": "integer", "minimum": 1, "maximum": 40}})
     return object_schema({"kind": {"enum": ["request", "final"]},
                           "requests": array_schema(request, 0, 4),
-                          "answer": {"anyOf": [answer_schema(), {"type": "null"}]}})
+                          "answer": {"anyOf": [answer_schema(version), {"type": "null"}]}})
 
 
 def portable_schema(value):
@@ -78,8 +91,8 @@ def _validate_non_generation(uncertainties, results):
             raise ValueError("non-generation requires an explicit host production-state observation")
 
 
-def validate_response(value, results, expected_intent):
-    Draft202012Validator(response_schema()).validate(value)
+def validate_response(value, results, expected_intent, *, version=VERSION):
+    Draft202012Validator(response_schema(version)).validate(value)
     if value["kind"] == "request":
         if value["answer"] is not None or not value["requests"]:
             raise ValueError("request requires host actions and no answer")
@@ -105,5 +118,8 @@ def validate_response(value, results, expected_intent):
             raise ValueError("measured/estimated cost requires quantity/unit/source")
     for identity in answer["draft_evidence_ids"]:
         data = results[identity].get("data")
-        if not isinstance(data, dict) or data.get("draft", {}).get("status") != "UNAPPROVED_CANDIDATE_NOT_EXECUTABLE":
+        if not isinstance(data, dict) or data.get("draft", {}).get("status") not in {"UNAPPROVED_CANDIDATE_NOT_EXECUTABLE", "UNAPPROVED_REVIEW_DRAFT"}:
             raise ValueError("draft not produced by registered workflow")
+        branch = data["draft"].get("option_id")
+        if branch and branch not in {row["id"] for row in answer["options"]}:
+            raise ValueError("review draft must bind an actual candidate branch")

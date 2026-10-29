@@ -173,3 +173,14 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
   and geometry checks used by local Sella and active-learning handoff.
 - `modules/transition_state_search/SELLA_LOCAL_PEAK.md`: exact request/review
   fields, deployment, bounded execution, return and validation limitations.
+
+## Continued research and review proposals
+
+- `modules/research_assistant/README.md`: new-question/resume entries, source
+  revalidation, branch-bound review drafts, feedback and SPC staging contract.
+- `scripts/neb_agent/outcar_blocks.py`: shared same-table coordinate/finite-force
+  binding, completeness, atom-count basis and source line provenance.
+- `scripts/research_assistant/spc_adapter.py`: actual SPC proposal contract and
+  offline owner validation; never scientific approval or execution authority.
+- `docs/reviews/research_continuation_20261029.md`: real C3 continuation, human
+  review packets, first environment failure, validation and unresolved boundaries.

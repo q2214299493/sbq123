@@ -24,11 +24,12 @@ from .contract import VERSION, portable_schema, response_schema, validate_respon
 from .report import render
 from .presentation import present
 from .tools import SPECS, ToolRegistry
+from .continuation import load_continuation, validate_progress
 
 
 class ResearchRun(ReviewEvents):
     def __init__(self, goal, intent, scopes, project, output, *, mode="daily", manifest=None,
-                 model="gpt-6.1-sol", effort="medium", max_turns=3, max_actions=10, timeout=360):
+                 model="gpt-6.1-sol", effort="medium", max_turns=3, max_actions=10, timeout=360, previous_run=None, update=""):
         if not isinstance(goal, str) or not 1 <= len(goal.strip()) <= 8000 or intent not in {"auto", "diagnose", "compare", "plan"}:
             raise ValueError("a bounded natural-language goal and valid intent required")
         if type(max_turns) is not int or not 1 <= max_turns <= 6 or type(max_actions) is not int or not 1 <= max_actions <= 20:
@@ -37,6 +38,9 @@ class ResearchRun(ReviewEvents):
             raise ValueError("explicit model/effort and bounded timeout required")
         self.goal, self.intent, self.model, self.effort = goal, intent, model, effort
         self.max_turns, self.max_actions = max_turns, max_actions
+        self.previous_run, self.update, self.continuation = previous_run, update, None
+        if previous_run is not None and output.absolute().is_relative_to(previous_run.absolute()):
+            raise ValueError("continuation outputs must be outside the original run")
         self.started = time.monotonic()
         self.deadline = self.started + timeout
         self.output = new_output(output, scopes)
@@ -53,11 +57,23 @@ class ResearchRun(ReviewEvents):
         self.transcript = []
         self.run_mode = "NOT_RUN"
         self.exit_code = None
+        self.running_before_close = None
         self.workspace = None
         self.source_versions = {p.name: sha256_file(p) for p in Path(__file__).parent.glob("*.py")}
         self.producer = producer_identity()
+        self.question_id = sha256_json({"goal": goal, "origin": str(self.output)})
         self.lock = threading.Lock()
         self.record("prepared", {"goal": goal, "intent": intent, "mode": mode, "source_sha256": self.source_versions})
+
+    def prepare_continuation(self):
+        if self.previous_run is not None and self.continuation is None:
+            self.stage = "continuation_collection"
+            self.continuation = load_continuation(self.previous_run, self.tools, self.output, self.update)
+            if self.goal != self.continuation["original_goal"]:
+                raise ValueError("continuation must preserve the research goal; use update for new evidence/context")
+            self.question_id = self.continuation["question_id"]
+            self.record("continuation_collected", {"path": str(self.output / "continuation.json"),
+                                                   "sha256": sha256_file(self.output / "continuation.json")})
 
     def record(self, kind, data):
         if kind == "admission_stage":
@@ -131,7 +147,7 @@ class ResearchRun(ReviewEvents):
         return {"protocol_version": VERSION, "goal": self.goal, "intent": self.intent,
             "mode": self.catalog.mode, "catalog": self.catalog.snapshot(), "registered_tools": SPECS,
             "turn": number, "turn_budget": self.max_turns, "host_actions_remaining": self.max_actions - len(self.tools.actions),
-            "history": self.transcript, "response_schema": response_schema(),
+            "history": self.transcript, "response_schema": response_schema(), "continuation": self.continuation,
             "instructions": [
                 "用中文推进用户的研究目标；不要强行使用failure_class。先按问题选择登记工具取证，收到结果后更新判断并请求更多证据或给最终建议。",
                 "这不是原生工具回调。返回kind=request和requests数组，由宿主执行；每个请求必须有tool、target_ids、query、limit四字段。目录ID用于vasp.inspect/terminal.align，文件ID用于读取/结构/contract；ID必须来自目录，不要编造路径或ID。",
@@ -144,7 +160,9 @@ class ResearchRun(ReviewEvents):
                 "分别判断电子收敛、离子/力、几何、进程收尾、调度器和科学验收。结构配对数字注明零基/一基、单位和比较对象。已有解析器或审查意见相冲突时保留冲突，不自动覆盖。",
                 "采集时间不等于计算观察时间。状态文档和历史解释不覆盖原始计算文件；外部资料的能量不导入本项目结果或注册表。",
                 "可行选择比较来源、条件、代价和风险；计算计划列前置证据、产物及所属模块验收条件。所有方案均待所属模块审查；不提交、停止或重启作业，不改变科学阈值，不接受TS、能垒、结果或策略。",
-                "可审核草案必须由workflow.draft实际产生并引用该E证据。在线连接未接通/检索为词法诊断时明确说明；项目文档/BM25定位不是已通过外部混合检索或科学转移门。",
+                "可审核草案必须由workflow.draft或workflow.review实际产生并引用该E证据。在线连接未接通/检索为词法诊断时明确说明；项目文档/BM25定位不是已通过外部混合检索或科学转移门。",
+                "方案的blocking_gaps绑定本分支的判别问题与所需产物，不能把所有未知不加区别抄到每个方案。workflow.review可用现有吸附连接性模块生成分支绑定的几何评阅草案，仍无执行权。",
+                "若continuation非空，带入上次目标、方案、待查事项和反馈；previous_claims不是本轮证据。按来源与工具版本核验状态重新取证；可复用项仍通过工具请求取得，宿主会返回缓存回执。progress需说明previous_ref判断变化、完成/未完检查和下一步具体产物。新问题progress=null。未重新核验的旧判断标pending_revalidation。",
                 "严格返回一个符合response_schema的JSON对象，无Markdown围栏；不进行自评分或宣称RSI改进已成立。",
             ]}
 
@@ -187,6 +205,8 @@ class ResearchRun(ReviewEvents):
             raise ValueError("one unmodified final response required; no repair turn")
         value = json.loads(finals[0], parse_constant=lambda token: (_ for _ in ()).throw(ValueError(token)))
         validate_response(value, self.tools.results, self.intent)
+        if value["kind"] == "final":
+            validate_progress(value["answer"], self.continuation)
         write_json_exclusive(folder / "response.validated.json", value)
         self.record("turn_validated", {"number": number, "kind": value["kind"], "tokens": self.token_usage})
         return value
@@ -198,6 +218,7 @@ class ResearchRun(ReviewEvents):
         super()._item_event(method, item)
 
     def drive(self, transport, *, synthetic=False):
+        self.prepare_continuation()
         if not synthetic and (not isinstance(transport, LiveStdio) or not transport.admitted):
             raise ValueError("existing admitted ChatGPT transport required")
         self.run_mode = "OFFLINE_TEST_TRANSPORT" if synthetic else "real_codex"
@@ -239,9 +260,14 @@ class ResearchRun(ReviewEvents):
             "host_tool_requests": len(self.tools.actions), "host_tool_executions": sum(a["executed"] for a in self.tools.actions),
             "repeated_requests_reused": sum(not a["executed"] for a in self.tools.actions),
             "native_tool_calls": self.native_tool_calls, "native_tool_attempts": self.native_tool_attempts,
+            "host_actions_reused_from_parent": sum(bool(a.get("reused_from_parent")) for a in self.tools.actions),
+            "question_id": self.question_id,
+            "continuation": {"path": str(self.output / "continuation.json"), "sha256": sha256_file(self.output / "continuation.json")} if self.continuation else None,
             "first_failure_stage": self.first_failure_stage, "problem": self.problem,
             "permission_evidence": self.permission_evidence, "backend_warnings": self.backend_warnings,
             "app_server_exit_code": self.exit_code, "tokens": self.token_usage,
+            "app_server_running_before_host_close": self.running_before_close,
+            "host_tool_implementation": {"sha256": self.tools.implementation_sha256, **self.tools.implementation},
             "elapsed_seconds": time.monotonic() - self.started, "source_versions": self.source_versions, "producer": self.producer,
             "scientific_acceptance": False, "execution_authorized": False, "human_review_seconds": None,
             "journal_sha256": sha256_file(self.output / "journal.jsonl")}
@@ -249,6 +275,9 @@ class ResearchRun(ReviewEvents):
             write_json_exclusive(self.output / "research_result.json", {"schema_version": 1, "research_goal": self.goal,
                 "answer": self.answer, "evidence_actions": self.tools.actions, "scientific_acceptance": False, "execution_authorized": False})
         write_json_exclusive(self.output / "run_receipt.json", receipt)
+        write_json_exclusive(self.output / "research_state.json", {"schema_version": 1, "question_id": self.question_id,
+            "goal": self.goal, "answer": self.answer, "evidence_actions": self.tools.actions,
+            "status": status, "scientific_acceptance": False})
         self.catalog.save(self.output / "catalog.final.json")
         with (self.output / "review.md").open("x", encoding="utf-8") as handle:
             handle.write(render(receipt, self.answer, self.tools))
@@ -258,6 +287,7 @@ class ResearchRun(ReviewEvents):
 def run_research(run, auth_home, codex):
     transport = None
     try:
+        run.prepare_continuation()
         run.bind_workspace(auth_home)
         run.stage = "task_scope_binding"
         run.bind_existing_task_scope(auth_home)
@@ -272,5 +302,7 @@ def run_research(run, auth_home, codex):
         run.record("blocked", {"stage": run.first_failure_stage, "error": run.problem, "retry": False})
     finally:
         if transport is not None:
+            run.running_before_close = transport.process.poll() is None
+            run.record("host_close_requested", {"app_server_running": run.running_before_close})
             transport.close()
     return run.finish()

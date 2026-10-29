@@ -109,9 +109,26 @@ no deletion, reclassification event or state-transaction change is authorized by
 - Wire bounded remote/scheduler collection, online method connectors or complete
   workflow input packages only through their existing owners when needed. Native
   callbacks remain a separate unaccepted capability; do not widen permissions.
-- Keep usage feedback distinct from scientific outcomes. Stabilize the current
-  goal/evidence/hypothesis/options/acceptance contract before a thin SPC consumer
-  or any reviewed tool-selection/candidate-ranking change; none is implemented.
+- Keep usage feedback distinct from scientific outcomes. Protocol v2 now supports
+  continuation, branch-specific gaps and review drafts. A thin SPC staging adapter
+  is offline-validated against its current contract; real C3 trusted bindings,
+  formal materialization and independent approval remain pending. No automatic
+  tool-selection/candidate-ranking policy change is implemented.
 - Retain the existing state-sync source-history failure separately; no unrelated
   state repair or reopening of job 1508 root-cause work is authorized here.
   See `docs/reviews/research_assistant_20261029.md` for completed scope and limits.
+
+## Continued research review — 2026-10-29
+
+- Review the target isomer/claim and the actual C05/C07 branch packets before any
+  scientific input/execution decision. Post-model host geometry observations are
+  separate; uptake, human preparation/review time and scientific result remain
+  unknown. Do not reopen job 1508 as a prerequisite.
+- For SPC use, obtain explicit source-evidence/claim/capability bindings and
+  reviewed missing plan fields against an actual ScientificPlanningInput; schema
+  or mock-fixture validation is not C3 grounding or independent approval.
+- First admission failed because the pinned desktop binary path disappeared.
+  The current installed binary passed the same admission under unchanged file
+  auth/permissions; old records remain. Diagnose later path/version failures,
+  never weaken admission or silently choose another authentication route.
+  See `docs/reviews/research_continuation_20261029.md`.

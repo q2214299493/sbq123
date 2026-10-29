@@ -12,6 +12,9 @@ def render(receipt, answer, tools):
              f"状态：{receipt['status']}；模式：{receipt['mode']}；协议：显式结构化请求→宿主执行→结果回传。",
              f"模型回合启动 {receipt['model_turns_started']}；宿主动作请求 {len(tools.actions)}；"
              f"宿主实际执行 {receipt['host_tool_executions']}；原生模型工具调用 {receipt['native_tool_calls']}。", ""]
+    if receipt.get("continuation"):
+        lines += [f"接续来源、版本及逐项原始来源核验：[接续记录](<{receipt['continuation']['path']}>)。",
+                  f"本轮复用上轮且重新核验来源的工具结果 {receipt.get('host_actions_reused_from_parent', 0)} 项；哈希核验仍实际执行。", ""]
     if answer is None:
         lines += ["**尚未取得通过校验的最终模型建议。**", f"首个失败/停止阶段：{receipt['first_failure_stage']}；{receipt['problem']}",
                   "已执行工具得到的资料仍保留；工具回执不冒充模型完成验收。", ""]
@@ -40,12 +43,15 @@ def render(receipt, answer, tools):
                       "适用条件：" + "；".join(row["conditions"]), "依据：" + ", ".join(row["evidence_ids"]),
                       "代价：" + quantity + "；依据：" + cost["basis"], "风险：" + "；".join(row["risks"]),
                       "验收条件：" + "；".join(row["acceptance_conditions"])]
+            for gap in row.get("blocking_gaps", []):
+                lines += ["本分支缺口：" + gap["question"] + "；所需产物：" + gap["needed_artifact"] + "；依据：" + ", ".join(gap["evidence_ids"])]
         lines += ["", "## 证据与计算计划（待所属模块审查）", ""]
         for row in answer["evidence_and_calculation_plan"]:
             lines += ["- " + row["step"], "  前置：" + "；".join(row["prerequisites"]),
                       "  所需产物：" + "；".join(row["outputs_needed"]),
                       "  验收条件：" + "；".join(row["acceptance_conditions"])]
         lines += ["", "科学与使用限制：" + answer["scientific_limits"]]
+        lines += _progress_and_drafts(answer, tools)
     lines += ["", "## 实际宿主工具动作与来源", "", "|证据ID|工具|状态|实际执行|完整回执|模型实际收到的摘要|", "|---|---|---|---|---|---|"]
     for action in tools.actions:
         supplied = f"[提供记录](<{action['presented_path']}>)" if action.get("presented_path") else "见该回合输入"
@@ -56,3 +62,25 @@ def render(receipt, answer, tools):
               "本次没有提交、停止、重启科学作业，没有修改科学阈值，也没有自动批准策略。",
               "使用反馈与后续科学结果分开记录；实际人工耗时未知时保留未知。", ""]
     return "\n".join(lines)
+
+
+def _progress_and_drafts(answer, tools):
+    lines = []
+    progress = answer.get("progress")
+    if progress is not None:
+        lines += ["", "## 相对上次推进了什么", ""]
+        for row in progress["changes"]:
+            lines += ["- " + row["previous_ref"] + "：" + row["assessment"] + "；" + row["statement"] + "（" + ", ".join(row["evidence_ids"]) + "）"]
+        for key, label in (("completed_checks", "本轮完成检查"), ("remaining_checks", "尚未完成")):
+            lines += ["", label + "：", ""]
+            lines += ["- " + row["statement"] + "（" + ", ".join(row["evidence_ids"]) + "）" for row in progress[key]]
+        lines += ["", "下一步产物：" + progress["next_product"]]
+    generated = [key for key, result in tools.results.items() if isinstance(result.get("data"), dict) and result["data"].get("draft")]
+    identities = list(dict.fromkeys([*answer["draft_evidence_ids"], *generated]))
+    if identities:
+        lines += ["", "## 已实际生成的待审草案", ""]
+        for identity in identities:
+            draft = tools.results[identity]["data"]["draft"]
+            use = "本轮建议引用" if identity in answer["draft_evidence_ids"] else "已生成，未列入模型最终草案引用"
+            lines += [f"- {identity}：[{draft['status']}](<{draft['path']}>)；分支：{draft.get('option_id', '见策略草案')}；{use}。"]
+    return lines
