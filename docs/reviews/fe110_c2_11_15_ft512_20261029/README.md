@@ -1,5 +1,7 @@
 # Fe(110) 11–15: FT512 GPU and DFT submission, 2026-10-29
 
+Current override:the user subsequently requested NSW300 for all15 tasks. See [NSW300 update](nsw300_update.md). The initial80-step submission record below is retained provenance.
+
 15/15 reviewed v5 seeds completed native AQCat25 CUDA pre-relaxation on MZ73 GPU1.
 Producer span: 81.131697 seconds. Model SHA256:
 `cdd391d39ed19fc1ef3516d41b1af53bd81351d8ad73f25e537be232fd8c0dc0`. This is the newest development-selected

@@ -387,3 +387,6 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `docs/reviews/fe110_c2_11_15_ft512_20261029/`:scope,15actualjobIDs,input/evidence ZIP and verification.
 - `archive/fe110_11_15_gpu_20261029/`:bounded GPU adapter/transport,frame review,canonical DFT handoff and metadata-only registration.
 - `calculations/fe110_c2_adsorption_11_15_20261020/ft512_gpu_20261029_v1/`:frozen request/runtime,returned15trajectories,DFT inputs/gates/receipts and registry batch.
+
+- `docs/reviews/fe110_c2_11_15_ft512_20261029/nsw300_update.md`:current300-step job mapping,graceful restart and exact-byte amendments.
+- `archive/fe110_11_15_gpu_20261029/adjust_nsw300.py` and `record_nsw300.py`:current-work authority adapter and reviewed metadata registration.
