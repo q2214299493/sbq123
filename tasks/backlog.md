@@ -154,3 +154,19 @@ no deletion, reclassification event or state-transaction change is authorized by
   fields. Do not mix a separate dirty SPC source repair into this task.
 - Keep the existing state-sync failure independent of these software/scientific
   results. No science job, threshold change or main merge is authorized here.
+
+## C07 actual research review — 2026-10-30
+
+- Completed the original CARE graph/H/source review. R004388 retained reverse
+  direction incorporates the additional C through O (C–O bonding), not C–C
+  backbone extension. The local Fe45 single-C source was recovered and bound;
+  the existing C07 preparation matches the revised input bytes. Preserve C05,
+  08 and fragments, and distinguish single-C3 coverage from a C4 research choice.
+- Matched Fe45 C+C07 and exact-C4 endpoints remain unready. Next prepare a
+  reviewed common-Fe45/52-atom endpoint construction specification and source/
+  compatibility evidence; no calculation submission or automatic mainline
+  selection follows from this review. Human adoption/time remain unknown.
+- Current SPC plan and original sources are unchanged, with actual task findings
+  and eight supplemental source bindings in the local research-review sidecar.
+  Formal approval/revision and scientific acceptance were not fabricated.
+  See `docs/reviews/research_c07_review_20261030.md`.

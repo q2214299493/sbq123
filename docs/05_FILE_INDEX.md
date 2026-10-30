@@ -192,3 +192,9 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
   later geometry, live failure/success records and real unapproved SPC plan.
 - `archive/research_assistant/20261029_c3_plan/materialize_review.py`: one-off
   real-source plan materialization through the existing SPC owners.
+- `docs/reviews/research_c07_review_20261030.md`: original CARE C07/H/reaction
+  roles, actual single-C source recovery and explicit matched-endpoint gaps.
+- `archive/research_assistant/20261030_c07_review/collect_sources.py`: original
+  network/geometry source inspection using installed CARE/adsorption owners.
+- `archive/research_assistant/20261030_c07_review/bind_review.py`: actual research
+  findings and supplemental evidence bound to the unchanged SPC plan.
