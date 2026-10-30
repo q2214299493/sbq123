@@ -1,0 +1,176 @@
+{
+  "status": "REVIEWED_NEQUIP_NORMAL_EXIT_FT_BUDGET_STOP_NO_PROMOTION",
+  "files_verified": 23,
+  "sequence_sha256": "dde58bdc7d1eae203b7a9ca1f7dd002ed2348e67b2c7b69e4387bfca6fc67c79",
+  "source_manifest_sha256": "ebf30df5cb009ac24293ca2b59e384b9158e796d4ec53301bf537b224dcfe4ee",
+  "candidates": {
+    "nequip_best": {
+      "path": "nequip_v2/output/best.ckpt",
+      "sha256": "a444a7e3747296a06cdd6dfc953e510f08200d533948e2c50804b9556b53bb17",
+      "kind": "normal_exit_development_selected",
+      "saved_metadata": {
+        "epoch": 33,
+        "global_step": 4352
+      }
+    },
+    "nequip_last": {
+      "path": "nequip_v2/output/last.ckpt",
+      "sha256": "69cec51669b1a97daf493cb7bd96f78cf8cdc33fd4840d3f16fd31e084e7180f",
+      "kind": "normal_exit_last_state",
+      "saved_metadata": {
+        "epoch": 33,
+        "global_step": 4352
+      }
+    },
+    "finetune_best": {
+      "path": "finetune/control/output/direct-fe110-scratch512-finetune20-20261028-v1/checkpoints/2026-10-28-20-56-32/best_checkpoint.pt",
+      "sha256": "cdd391d39ed19fc1ef3516d41b1af53bd81351d8ad73f25e537be232fd8c0dc0",
+      "kind": "budget_stopped_partial_development_selected_snapshot",
+      "saved_metadata": {
+        "val_metrics": {
+          "energy_mae": {
+            "total": 30008.203186035156,
+            "numel": 78,
+            "metric": 384.7205536671174
+          },
+          "forces_mae": {
+            "total": 118.72707150876522,
+            "numel": 7455,
+            "metric": 0.015925831188298486
+          },
+          "forces_cosine_similarity": {
+            "total": 1460.4657431840897,
+            "numel": 2485,
+            "metric": 0.5877125727098952
+          },
+          "forces_magnitude_error": {
+            "total": 47.4844204261899,
+            "numel": 2485,
+            "metric": 0.019108418682571387
+          },
+          "energy_forces_within_threshold": {
+            "total": 0,
+            "numel": 78,
+            "metric": 0.0
+          },
+          "forces_role_vector_mae": {
+            "total": 4.340414949692786,
+            "numel": 78,
+            "metric": 0.05564634550888187
+          },
+          "forces_adsorbate_C_vector_mae": {
+            "total": 14.60295333340764,
+            "numel": 161,
+            "metric": 0.09070157349942634
+          },
+          "forces_adsorbate_O_vector_mae": {
+            "total": 6.413093945942819,
+            "numel": 75,
+            "metric": 0.08550791927923759
+          },
+          "forces_adsorbate_H_vector_mae": {
+            "total": 4.304454589262605,
+            "numel": 143,
+            "metric": 0.03010108104379444
+          },
+          "forces_near_Fe_vector_mae": {
+            "total": 20.973975899629295,
+            "numel": 410,
+            "metric": 0.05115603877958365
+          },
+          "forces_other_Fe_vector_mae": {
+            "total": 33.41832214221358,
+            "numel": 1696,
+            "metric": 0.01970419937630518
+          },
+          "loss": {
+            "total": 1.5032691686647013,
+            "numel": 78,
+            "metric": 0.019272681649547454
+          },
+          "forces_replay_vector_mae": {
+            "total": 1.1314462721347809,
+            "numel": 120,
+            "metric": 0.009428718934456508
+          }
+        }
+      }
+    }
+  },
+  "development_role_weighted_force_vector_MAE_eV_A": {
+    "nequip": 0.31907776910299446,
+    "finetune_partial": 0.05564634550888187
+  },
+  "finetune_last_saved_metadata_not_final_iteration": {
+    "epoch": 9.0,
+    "step": 4608,
+    "best_val_metric": 0.05564634550888187,
+    "primary_metric": "forces_role_vector_mae",
+    "val_metrics": null
+  },
+  "recorded_seconds": {
+    "nequip_producer": 902.185132,
+    "finetune_controller": 1802.071767,
+    "sequence_wall": 2711.264202
+  },
+  "finetune_elapsed_over_1800_seconds_including_teardown": 2.071766999999909,
+  "nequip_final_epoch_and_stop_reason": "Not established by best/last snapshots or terminal log;do not equate normal exit with100epochs",
+  "development_only_comparison": true,
+  "independent_accuracy_or_acceleration_proved": false,
+  "new_inference_or_training": false,
+  "model_promotion": false,
+  "source_files": [
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\archive\\fe110_scratch512_20261028\\review_results.py",
+      "sha256": "f4efab17937dba56e58a459bb081e5564dca613622e14f80f8a21b3135482695"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\scratch512_20261028_v1\\terminal_recovery_20261028_v3\\collection.json",
+      "sha256": "26182346f3ce00f1a46065ff2eb8b7ba29e90549412a93f0f2648fed1392021e"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\scratch512_20261028_v1\\terminal_recovery_20261028_v3\\manifest.json",
+      "sha256": "240438fe16be3554bf49968a0a8f4ec671fb984da52bfd3eb8558c13d014f8fc"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\scratch512_20261028_v1\\terminal_recovery_20261028_v3\\returned\\finetune\\control\\config.yml",
+      "sha256": "8effd913b543d06b5353b8580cbb57f7f5e485b102bc510190deee21bd3760a6"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\scratch512_20261028_v1\\terminal_recovery_20261028_v3\\returned\\finetune\\control\\training_request.json",
+      "sha256": "87a20cb4ae75a09dd423e296d28c5559fec97aeadeb4a05a15148d21deb3c272"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\scratch512_20261028_v1\\terminal_recovery_20261028_v3\\returned\\finetune\\direct_batch_exit_record.json",
+      "sha256": "15d57c75e820025890045df0c507c016948b4f0393e820d446aeb36b4346a969"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\scratch512_20261028_v1\\terminal_recovery_20261028_v3\\returned\\finetune\\direct_request.json",
+      "sha256": "4d4fdadab5e181a1b204d09e4a397c8a42c845d5064100393955db68bf984acf"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\scratch512_20261028_v1\\terminal_recovery_20261028_v3\\returned\\nequip_v2\\config_reviewed.yaml",
+      "sha256": "533bd0000490d10222d364f7ba5c96fec237461deb9a5985c12af711f20693e7"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\scratch512_20261028_v1\\terminal_recovery_20261028_v3\\returned\\nequip_v2\\producer_exit_record.json",
+      "sha256": "6294d46c3d8785c9873e8bfa391819bc35462084c1d12cfcac421246d82925f1"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\scratch512_20261028_v1\\terminal_recovery_20261028_v3\\returned\\nequip_v2\\training_request.json",
+      "sha256": "cd0fadb4d199094fcfeb9f1b0e736207bf92fe60664183b83f58ff16f14a0469"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\scratch512_20261028_v1\\terminal_recovery_20261028_v3\\returned\\sequence_authorization.json",
+      "sha256": "4657997774cc117cff866a7f0d18be5a87170e8c1678d4fdd632b447de1ca279"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\scratch512_20261028_v1\\terminal_recovery_20261028_v3\\returned\\sequence_exit.json",
+      "sha256": "3de052763787dd7066d09edb5dbaa672bfd6a9eae4693dd5f29f0e1385101b5c"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_reico_pilot300_20261022\\scratch512_20261028_v1\\terminal_recovery_20261028_v3\\returned\\sequence_request.json",
+      "sha256": "dde58bdc7d1eae203b7a9ca1f7dd002ed2348e67b2c7b69e4387bfca6fc67c79"
+    }
+  ]
+}
