@@ -33,6 +33,11 @@ completed calculation or a deployment observation.
 
 ## Implemented software and registry scope
 
+CURRENT_CODE_STATE (2026-10-31): the local RSI dashboard projects existing
+bound runs and refreshes after run/resume, feedback and policy review. Offline
+display/hooks pass; real browser visual checks and research benefit remain
+unestablished. See [dashboard acceptance](reviews/rsi_dashboard_20261031.md).
+
 CURRENT_CODE_STATE (2026-10-30): the research-assistant branch adds current
 project behavioral policies, independently reviewed candidates and hash-bound
 usage records. Four bounded task-level trials establish input/behavior wiring,

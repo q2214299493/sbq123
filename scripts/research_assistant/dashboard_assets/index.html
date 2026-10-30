@@ -1,0 +1,23 @@
+<!-- rsi-dashboard:1 -->
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>RSI 日常使用看板</title>
+<style>__CSS__</style>
+</head>
+<body>
+<header class="brand"><div><strong>RSI</strong><span>科研助手 · 本地使用记录</span></div><span class="local">离线页面 · 无模型调用</span></header>
+<div class="layout">
+<div class="toolbar"><label for="run-select">选择已登记运行<select id="run-select" aria-label="选择运行"></select></label><div class="updated" id="updated"></div><button id="reload" class="quiet" type="button">刷新浏览器</button></div>
+<section id="run-header" class="run-header"></section>
+<nav class="tabs" role="tablist" aria-label="RSI 看板页签"><button role="tab" id="tab-usage" aria-controls="content" data-tab="usage">本次使用</button><button role="tab" id="tab-changes" aria-controls="content" data-tab="changes">变化与成本</button><button role="tab" id="tab-feedback" aria-controls="content" data-tab="feedback">经验与反馈</button></nav>
+<main id="content" role="tabpanel" tabindex="-1"></main>
+<footer>展示接入成功 ≠ 科研收益成立。页面来自已登记记录；更新后刷新浏览器查看。科研判断和执行仍由所属模块负责。</footer>
+</div>
+<script type="application/json" id="dashboard-data">__DATA__</script>
+<script>__JS__</script>
+</body>
+</html>

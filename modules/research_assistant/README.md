@@ -265,6 +265,66 @@ the command returns the original feedback reference plus an explicit pending
 reconciliation record; inspect it and re-index that exact saved record with
 `PolicyStore.index_feedback`, without repeating the research/model task.
 
+## Local RSI dashboard
+
+Run/resume completion, saved feedback (including index-pending feedback), and
+successful independent policy review now refresh derived local pages by default.
+The research function return values and stdout JSON remain unchanged; display
+paths/errors go to stderr. `--no-dashboard` on run, resume, feedback or policies
+review skips display generation. No browser is forced open, model call added,
+policy accepted or scientific gate changed by generation.
+
+```powershell
+python -m scripts.research_assistant.cli dashboard --run RUN_DIRECTORY --open
+python -m scripts.research_assistant.cli dashboard --runs-root REGISTERED_RUNS_ROOT --open
+```
+
+Run these module commands from this source checkout. The scope flags are mutually
+exclusive. Root import reads only immediate run directories, with a 200-entry
+bound; it never recursively searches scientific directories or the computer.
+Runs in one import must share one project/store. An optional `--output-dir`
+selects a manually rebuilt project-index directory; automatic updates keep using
+the default store dashboard. The default outputs are:
+
+- `RUN/views/rsi_view.json` and `rsi_view.html`: one self-contained run view.
+- `STORE/dashboard/index.json` and `index.html`: the project selector/view.
+- `STORE/dashboard/registrations/RECEIPT_SHA.json`: separate immutable display
+  registrations containing actual receipt paths/hashes, not policy definitions.
+- `STORE/dashboard/render_receipt.json`: measured HTML render time, separately
+  from the original run's `elapsed_seconds`.
+
+Shared strict usage/feedback/comparison readers are in `usage_sources.py`.
+`usage` remains strict. The dashboard isolates per-source errors while preserving
+other validated records. Missing/changed original bindings are never shown as a
+verified prior result. A missing freeze means unknown, not confirmed zero policies.
+Current policy status is read through `PolicyStore.read()` and shown alongside the
+original frozen status. Explicit current trial/accepted-only notes do not invent
+historical non-selection reasons. Registration/rebuilds are serialized; immutable
+registrations survive a failed display build. A failed view cannot change a
+GENERATED research receipt or start a model retry.
+
+The three tabs show actual policy/input/action/output correspondence, changes and
+costs, and policy/feedback history. Ordinary runs have no invented baseline.
+Continuation compares bound parent snapshots and source revalidation/cache reuse,
+with a non-control label. The first paired format supported is the actual
+`paired_review.json` produced by the prior acceptance script: each referenced
+receipt/result/application/input is checked before use. Other formats retain their
+references with an unsupported-format label. Neither a pair file nor a different
+answer establishes controlled benefit. Unknown costs stay unknown; only the
+recognized receipt `tokens.total.totalTokens` is displayed as a token total.
+Original source models, results, receipts and applications are never rewritten.
+
+The feedback form exports a request JSON and explicitly says it is not saved.
+It offers real option/action/output IDs, keeps adoption/help/policy acceptance
+separate, and leaves unmeasured human times null. Save the downloaded request with
+the existing `feedback --run RUN --request JSON` validator; success refreshes the
+page. Index-pending saved feedback is shown without requiring a research retry.
+No server, credentials, external CDN, or browser filesystem write is needed.
+
+Local Python/PowerShell entries, actual four-run display acceptance, DOM-only
+checks, immutable-source verification and the uncompleted browser visual check:
+[`docs/reviews/rsi_dashboard_20261031.md`](../../docs/reviews/rsi_dashboard_20261031.md).
+
 ## Thin SPC staging boundary
 
 `spc-export --run RUN --spc-root SPC_SOURCE --output-dir NEW_DIRECTORY` reads the

@@ -4,60 +4,32 @@ from __future__ import annotations
 import argparse
 from datetime import datetime, timezone
 import json
-import math
 import sys
 from pathlib import Path
 import uuid
 
 from scripts.artifact_io import load_json_object, sha256_file, sha256_json, write_json_exclusive
-from scripts.ts_strategy_engine.review_evidence import _no_links
 
+from .usage_sources import validate_feedback_request
 from .runner import ResearchRun, run_research
 from .tools import SPECS
 from .catalog import blocked
 from .continuation import previous_header
 from .policies import PolicyStore
-from .policy_cli import add_commands, policy_command, usage_command, validate_usage_feedback, feedback_index_error, config_from_args
+from .dashboard_cli import add_command as add_dashboard_command, execute as dashboard_command, automatic as refresh_dashboard
+from .policy_cli import add_commands, policy_command, usage_command, feedback_index_error, config_from_args
 
 
-def feedback(run: Path, request: Path):
+def feedback(run: Path, request: Path, *, no_dashboard=False):
     receipt = load_json_object(run / "run_receipt.json")
     value = load_json_object(request)
-    required = {"adopted", "evidence_effectiveness", "repeated_checks", "followup_notes", "scientific_result_reference"}
-    if not required <= set(value) or set(value) - required - {"human_review_seconds", "adopted_option_ids", "rsi_feedback", "human_preparation_seconds", "human_correction_seconds"} \
-            or (value["adopted"] is not None and type(value["adopted"]) is not bool):
-        raise ValueError("feedback requires separate adoption/evidence/repetition/followup/scientific-reference fields")
-    if not isinstance(value["evidence_effectiveness"], list) or not isinstance(value["repeated_checks"], list) \
-            or not isinstance(value["followup_notes"], str):
-        raise ValueError("invalid usage feedback types")
-    known = {p.stem for p in (run / "tools").glob("E[0-9][0-9][0-9].json")}
-    for item in value["evidence_effectiveness"]:
-        if set(item) != {"evidence_id", "effective", "reason"} or item["evidence_id"] not in known \
-                or (item["effective"] is not None and type(item["effective"]) is not bool) or not isinstance(item["reason"], str):
-            raise ValueError("feedback must refer to actual host actions and explicit unknown/boolean effectiveness")
-    if not set(value["repeated_checks"]) <= known:
-        raise ValueError("unrecorded repeated check")
-    result = value["scientific_result_reference"]
-    if result is not None and (not isinstance(result, dict) or set(result) != {"path", "sha256"}
-                               or blocked(Path(result["path"])) or sha256_file(Path(result["path"])) != result["sha256"]):
-        raise ValueError("scientific result reference must be a real separately checked owner artifact")
-    if result is not None:
-        _no_links(Path(result["path"]).absolute())
-    for key in ("human_review_seconds", "human_preparation_seconds", "human_correction_seconds"):
-        seconds = value.get(key)
-        if seconds is not None and (type(seconds) not in {int, float} or not math.isfinite(seconds) or seconds < 0):
-            raise ValueError("human time must be explicitly measured or unknown")
-    selected = value.get("adopted_option_ids", [])
-    options = {row["id"] for row in load_json_object(run / "research_result.json")["answer"]["options"]} if selected else set()
-    if not isinstance(selected, list) or any(not isinstance(v, str) or v not in options for v in selected) or (selected and value["adopted"] is not True):
-        raise ValueError("adopted branches require explicit adoption of existing option IDs")
-    validate_usage_feedback(run, value, receipt)
+    validate_feedback_request(run, value, receipt)
     folder = run / "feedback"
     folder.mkdir(exist_ok=True)
     payload = {"schema_version": 1, "recorded_at": datetime.now(timezone.utc).isoformat(),
                "run_receipt_sha256": sha256_file(run / "run_receipt.json"), "goal": receipt["goal"],
                "usage_feedback": {k: v for k, v in value.items() if k != "scientific_result_reference"},
-               "scientific_result_reference": result, "promotes_scientific_result": False, "strategy_approved": False}
+               "scientific_result_reference": value["scientific_result_reference"], "promotes_scientific_result": False, "strategy_approved": False}
     path = folder / (sha256_json(payload) + ".json")
     write_json_exclusive(path, payload)
     reference = {"path": str(path), "sha256": sha256_file(path)}
@@ -67,7 +39,8 @@ def feedback(run: Path, request: Path):
             project = load_json_object(Path(receipt["rsi_application"]["path"]))["selection"]["task"]["project"]
             PolicyStore(config["store"], project).index_feedback(reference, receipt)
         except (OSError, ValueError, KeyError) as exc:
-            return {**reference, "rsi_index_error": feedback_index_error(run, reference, exc)}
+            reference = {**reference, "rsi_index_error": feedback_index_error(run, reference, exc)}
+    refresh_dashboard(run=run, disabled=no_dashboard)
     return reference
 
 
@@ -89,6 +62,7 @@ def _run_options(sub, command):
     run.add_argument("--max-turns", type=int, default=3)
     run.add_argument("--max-actions", type=int, default=10)
     run.add_argument("--timeout-seconds", type=float, default=360)
+    run.add_argument("--no-dashboard", action="store_true", help="Skip derived display generation; research records are unchanged.")
     run.add_argument("--rsi-store", type=Path, help="Stable project-owned policy/feedback store, separate from run outputs.")
     run.add_argument("--rsi-mode", choices=["accepted", "off"])
     run.add_argument("--rsi-exclude-policy", action="append", default=[], help="Explicit experimental exclusion; never changes scientific requirements.")
@@ -106,11 +80,13 @@ def main():
     _run_options(sub, "run")
     _run_options(sub, "resume")
     add_commands(sub)
+    add_dashboard_command(sub)
     tools = sub.add_parser("tools", help="Inspect registered host operations; no model or scientific job.")
     tools.set_defaults(tool_listing=True)
     use = sub.add_parser("feedback")
     use.add_argument("--run", type=Path, required=True)
     use.add_argument("--request", type=Path, required=True)
+    use.add_argument("--no-dashboard", action="store_true")
     spc = sub.add_parser("spc-export", help="Offline non-authoritative SPC staging; never changes SPC state or approvals.")
     spc.add_argument("--run", type=Path, required=True)
     spc.add_argument("--spc-root", type=Path, required=True)
@@ -118,6 +94,9 @@ def main():
     spc.add_argument("--binding", type=Path)
     spc.add_argument("--planning-input", type=Path)
     args = root.parse_args()
+    if args.command == "dashboard":
+        print(json.dumps(dashboard_command(args), ensure_ascii=False))
+        return
     if args.command == "policies":
         print(json.dumps(policy_command(args), ensure_ascii=False, indent=2))
         return
@@ -128,7 +107,7 @@ def main():
         print(json.dumps(SPECS, ensure_ascii=False, indent=2))
         return
     if args.command == "feedback":
-        print(json.dumps(feedback(args.run, args.request), ensure_ascii=False))
+        print(json.dumps(feedback(args.run, args.request, no_dashboard=args.no_dashboard), ensure_ascii=False))
         return
     if args.command == "spc-export":
         from .spc_adapter import export
@@ -169,6 +148,7 @@ def main():
                       previous_run=args.from_run if args.command == "resume" else None,
                       update=args.update if args.command == "resume" else "", rsi=rsi)
     print(json.dumps(run_research(run, home, codex), ensure_ascii=False))
+    refresh_dashboard(run=run.output, disabled=args.no_dashboard)
 
 
 if __name__ == "__main__":

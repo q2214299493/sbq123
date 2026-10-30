@@ -207,3 +207,14 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `archive/rsi_runtime_policy_20261030/`: source-only one-off acceptance setup,
   fixed four-run execution, condition review and nonsecret local entry creation;
   runtime inputs, credentials and private calculation material are not published.
+- `scripts/research_assistant/dashboard_data.py`, `dashboard_sources.py`,
+  `dashboard_comparison.py`: bound read-only display data, isolated source errors,
+  actual paired/continuation comparisons and unknown-cost handling.
+- `scripts/research_assistant/dashboard_registry.py`, `dashboard_render.py`,
+  `dashboard_cli.py`, `dashboard_assets/`: immutable display registration,
+  atomic static pages and local CLI/end-of-command refresh hooks.
+- `scripts/research_assistant/usage_sources.py`: shared original feedback and
+  usage binding validation; the original strict usage command remains strict.
+- `docs/reviews/rsi_dashboard_20261031.md`: real-record offline backfill, hook/DOM
+  checks, original-integrity result, local opening commands and actual limits.
+- `archive/rsi_dashboard_20261030/`: local-entry generators only; no runtime data.

@@ -6,6 +6,7 @@ from scripts.artifact_io import load_json_object, sha256_file, sha256_json
 
 from .policies import PolicyStore, checked_reference
 from .rsi_application import pointer, usage_lines
+from .usage_sources import application_source, feedback_source, comparison_source, later_feedback
 
 
 def add_commands(sub):
@@ -15,6 +16,7 @@ def add_commands(sub):
     policy.add_argument("--store", type=Path, required=True)
     policy.add_argument("--request", type=Path)
     policy.add_argument("--candidate-id", help="Bind a reviewed declarative proposal to an archived model candidate.")
+    policy.add_argument("--no-dashboard", action="store_true", help="Skip the current policy display refresh.")
     usage = sub.add_parser("usage", help="Read frozen RSI application plus separately recorded later user feedback.")
     usage.add_argument("--run", type=Path, required=True)
 
@@ -40,7 +42,12 @@ def policy_command(args):
     reference = {"path": str(args.request.absolute()), "sha256": sha256_file(args.request)}
     checked_reference(reference)
     request = load_json_object(args.request)
-    return store.propose(request, args.candidate_id) if args.action == "propose" else store.review(request, reference)
+    if args.action == "propose":
+        return store.propose(request, args.candidate_id)
+    result = store.review(request, reference)
+    from .dashboard_cli import automatic
+    automatic(store=args.store, disabled=getattr(args, "no_dashboard", False))
+    return result
 
 
 def validate_usage_feedback(run, value, receipt):
@@ -75,27 +82,16 @@ def validate_usage_feedback(run, value, receipt):
 
 def usage_record(run):
     receipt = load_json_object(run / "run_receipt.json")
-    reference = receipt.get("rsi_application")
-    if not reference:
-        return {"status": "LEGACY_RUN_NO_RSI_RECORD"}
-    checked_reference(reference)
-    record = load_json_object(Path(reference["path"]))
+    record = application_source(run, receipt)
+    if record.get("status") == "LEGACY_RUN_NO_RSI_RECORD":
+        return record
     feedback = []
     for path in sorted((run / "feedback").glob("*.json")):
-        value = load_json_object(path)
-        if value["run_receipt_sha256"] != sha256_file(run / "run_receipt.json"):
-            raise ValueError("usage feedback receipt binding differs")
-        for item in value["usage_feedback"].get("rsi_feedback", []):
-            feedback.append({"feedback_ref": {"path": str(path), "sha256": sha256_file(path)},
-                             "recorded_at": value["recorded_at"], "user_report": item})
+        feedback.extend(later_feedback(path, feedback_source(run, path)))
     record["later_user_feedback"] = feedback
     comparisons = []
     for path in sorted((run / "comparisons").glob("*.json")):
-        binding = load_json_object(path)
-        if binding.get("run_receipt_sha256") != sha256_file(run / "run_receipt.json"):
-            raise ValueError("comparison belongs to a different immutable run receipt")
-        checked_reference(binding["comparison_reference"])
-        comparisons.append(binding["comparison_reference"])
+        comparisons.append(comparison_source(run, path))
     if "value" in record:
         record["value"]["user_feedback_refs"] = [row["feedback_ref"] for row in feedback]
         record["value"]["paired_comparison_refs"] = comparisons

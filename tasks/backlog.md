@@ -182,3 +182,13 @@ no deletion, reclassification event or state-transaction change is authorized by
   do not weaken the scope, erase failures or retry the completed experiment.
 - Existing scientific tasks and state-history reconciliation remain separate.
   See `docs/reviews/rsi_runtime_policy_20261030.md`.
+
+## 2026-10-31 - Local dashboard follow-up
+
+- Open the delivered local page manually and inspect desktop/320px layout.
+  Browser tool file-URL rejection prevented real visual acceptance; no model
+  or scientific task needs rerunning for this check.
+- Existing SPC package guard and state-history synchronization remain separate
+  owner tasks. No broader fix or policy/security change is authorized here.
+- Source-bound display/hooks are verified offline; scientific benefit and
+  actual user help remain unestablished. See `docs/reviews/rsi_dashboard_20261031.md`.

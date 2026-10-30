@@ -1446,3 +1446,18 @@ governance: docs/DOCUMENT_GOVERNANCE.md
   remain unknown; timing/token/action counts do not prove scientific value.
 - Preserve all failed host operations and the existing state-sync blocker.
   See `docs/reviews/rsi_runtime_policy_20261030.md` for scope and evidence.
+
+## 2026-10-31 - Keep RSI dashboard a local, derived display layer
+
+- Display reads existing immutable run/usage artifacts and current policy reviews;
+  no extra model turn, scientific parser, acceptance criterion or strategy store.
+- Run/resume completion, saved feedback and policy review refresh pages; display
+  failures remain separate from research status, with no model retry. Browser
+  feedback exports remain unsaved requests until the existing validator saves them.
+- Distinguish unpaired tasks, continuation and explicitly registered pairs.
+  Frozen trial status and current status stay separate; matching actions and
+  cost differences do not establish scientific benefit or autonomous improvement.
+- Browser file-URL security rejection leaves real visual acceptance uncompleted.
+  Preserve this limit, the existing SPC packaging guard failure and state-sync
+  failure rather than changing unrelated security/history/scientific systems.
+- See `docs/reviews/rsi_dashboard_20261031.md` for concrete local entries and evidence.
