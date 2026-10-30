@@ -74,7 +74,7 @@ def _feedback(state, task, config):
         return []
     selected, used = [], 0
     for row in sorted(state["feedback"], key=lambda v: v["recorded_at"], reverse=True):
-        if row["candidate_ids"] or row["intent"] not in {task["intent"], "auto"}:
+        if row["candidate_ids"] or (task["intent"] != "auto" and row["intent"] not in {task["intent"], "auto"}):
             continue
         checked_reference(row["reference"])
         value = load_json_object(Path(row["reference"]["path"]))
@@ -92,7 +92,7 @@ def _observations(state, task, config):
     selected, used = [], 0
     for row in reversed(state["observations"]):
         if row["status"] not in {"observation", "deferred_observation"} or row.get("candidate_ids") \
-                or row.get("intent") not in {task["intent"], "auto"}:
+                or (task["intent"] != "auto" and row.get("intent") not in {task["intent"], "auto"}):
             continue
         checked_reference(row["raw_ref"])
         entry = {"source_id": row["source_id"], "reference": row["raw_ref"],

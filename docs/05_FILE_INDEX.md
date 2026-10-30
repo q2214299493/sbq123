@@ -198,3 +198,12 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
   network/geometry source inspection using installed CARE/adsorption owners.
 - `archive/research_assistant/20261030_c07_review/bind_review.py`: actual research
   findings and supplemental evidence bound to the unchanged SPC plan.
+- `scripts/research_assistant/policies.py`, `policy_selection.py`: project-local
+  provenance/review store and shared current-state run/resume selection.
+- `scripts/research_assistant/rsi_candidates.py`, `rsi_application.py`: bounded
+  candidate archival and independently checked input/action/output records.
+- `docs/reviews/rsi_runtime_policy_20261030.md`: software checks, four real
+  task-level trials, separate value layers and unchanged state-sync failure.
+- `archive/rsi_runtime_policy_20261030/`: source-only one-off acceptance setup,
+  fixed four-run execution, condition review and nonsecret local entry creation;
+  runtime inputs, credentials and private calculation material are not published.

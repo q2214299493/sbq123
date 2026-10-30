@@ -61,9 +61,9 @@ def review(environment, definition, record, status, evidence=None):
     return store.review(request, ref(path))
 
 
-def run_for(environment, name, *, goal="prepare structure for an unseen synthetic question", parent=None, **config):
+def run_for(environment, name, *, goal="prepare structure for an unseen synthetic question", parent=None, intent="plan", **config):
     tmp, project, store, _ = environment
-    return ResearchRun(goal, "plan", [project], project, tmp / name,
+    return ResearchRun(goal, intent, [project], project, tmp / name,
                        previous_run=parent.output if parent else None, update="synthetic follow-up" if parent else "",
                        max_turns=3, rsi={"store": str(store.root), **config})
 
@@ -208,6 +208,7 @@ def test_all_observations_preserved_one_new_candidate_and_exact_duplicates_add_s
     assert state["candidates"][0]["occurrences"][0]["bound_sources"]
     context = run_for(environment, "pending").prompt_for(1)["rsi_context"]
     assert len(context["pending_observations"]) == 2
+    assert len(run_for(environment, "pending-auto", intent="auto").prompt_for(1)["rsi_context"]["pending_observations"]) == 2
 
 
 def test_experimental_baseline_does_not_receive_excluded_rule_or_feedback(environment):
@@ -264,6 +265,7 @@ def test_feedback_indexes_next_normal_run_without_backfilling_or_policy_acceptan
     assert not early.prompt_for(1)["rsi_context"]["pending_feedback"]
     context = run_for(environment, "next-question").prompt_for(1)["rsi_context"]
     assert len(context["pending_feedback"]) == 1 and not context["selected_policies"]
+    assert len(run_for(environment, "next-auto", intent="auto").prompt_for(1)["rsi_context"]["pending_feedback"]) == 1
     assert environment[2].read()["policies"][0]["status"] == "candidate"
     assert sha256_file(parent.output / "turn-001/model_input.json") == input_hash
     assert not run_for(environment, "control", include_pending_feedback=False).prompt_for(1)["rsi_context"]["pending_feedback"]

@@ -170,3 +170,15 @@ no deletion, reclassification event or state-transaction change is authorized by
   and eight supplemental source bindings in the local research-review sidecar.
   Formal approval/revision and scientific acceptance were not fabricated.
   See `docs/reviews/research_c07_review_20261030.md`.
+
+## 2026-10-30 - RSI runtime follow-up after bounded integration acceptance
+
+- Initial externally proposed source-check policy remains `trial`. In a new
+  normal research task, collect the researcher's concrete use/correction feedback
+  and measured preparation/review/correction time before deciding permanent
+  adoption or claiming benefit. Four controlled trials establish wiring only.
+- Five retained runtime observations include frozen-scope JSON-pointer and
+  workflow-source errors. A later candidate may improve request preparation;
+  do not weaken the scope, erase failures or retry the completed experiment.
+- Existing scientific tasks and state-history reconciliation remain separate.
+  See `docs/reviews/rsi_runtime_policy_20261030.md`.

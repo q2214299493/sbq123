@@ -1430,3 +1430,19 @@ governance: docs/DOCUMENT_GOVERNANCE.md
   execution gate. Remote GPU/VASP submission, fine-tuning, NEB/Dimer/frequency
   execution, and final scientific acceptance remain explicit authorized
   actions.
+
+## 2026-10-30 - Separate reusable behavioral advice from scientific and value authority
+
+- Research-assistant v3 loads current project policies for both new runs and
+  continuations, freezing exact versions, sources and submitted input references.
+  Scientific protocols and execution gates remain mandatory and independent.
+- Candidate generation, source/feedback indexing and user-visible application
+  records are connected. Candidate business failures are retained without a
+  scientific-task/model retry; research adoption never accepts a policy.
+- The initial source-check policy is externally proposed and independently
+  recorded as a bounded trial, not autonomous learning or permanent adoption.
+- Four predeclared task-level runs at `3d955207` verify input/behavior wiring and
+  non-trigger isolation. User-confirmed help and controlled research benefit
+  remain unknown; timing/token/action counts do not prove scientific value.
+- Preserve all failed host operations and the existing state-sync blocker.
+  See `docs/reviews/rsi_runtime_policy_20261030.md` for scope and evidence.

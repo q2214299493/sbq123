@@ -33,6 +33,12 @@ completed calculation or a deployment observation.
 
 ## Implemented software and registry scope
 
+CURRENT_CODE_STATE (2026-10-30): the research-assistant branch adds current
+project behavioral policies, independently reviewed candidates and hash-bound
+usage records. Four bounded task-level trials establish input/behavior wiring,
+not user-confirmed help or research benefit; see
+[RSI runtime acceptance](reviews/rsi_runtime_policy_20261030.md).
+
 CURRENT_CODE_STATE: B1-B5 implementations and 1054 passing software tests at B5
 are recorded in the [B5 report](../reports/refactor_audit/B5_completion_report.md).
 Execution gates, VASP/contract parsing, evidence/data gates and registry lifecycle
