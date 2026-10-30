@@ -1,13 +1,15 @@
 """Render research progress and evidence coverage without scientific promotion."""
 from __future__ import annotations
 
+from .rsi_application import usage_lines
+
 
 AVAILABILITY = {"provided": "已有且已提供相关观察", "withheld": "宿主已有，相关内容尚未完整提供",
                 "not_found": "已查范围未找到，留存情况未知", "not_generated": "有生产证据确认未生成",
                 "unknown": "尚未核实可用性"}
 
 
-def render(receipt, answer, tools):
+def render(receipt, answer, tools, rsi_record=None):
     lines = ["# 项目科研诊断与方案", "", "研究目标：" + receipt["goal"],
              f"状态：{receipt['status']}；模式：{receipt['mode']}；协议：显式结构化请求→宿主执行→结果回传。",
              f"模型回合启动 {receipt['model_turns_started']}；宿主动作请求 {len(tools.actions)}；"
@@ -52,6 +54,8 @@ def render(receipt, answer, tools):
                       "  验收条件：" + "；".join(row["acceptance_conditions"])]
         lines += ["", "科学与使用限制：" + answer["scientific_limits"]]
         lines += _progress_and_drafts(answer, tools)
+    if rsi_record is not None and receipt.get("rsi_config", {}).get("show_usage", True):
+        lines += usage_lines(rsi_record)
     lines += ["", "## 实际宿主工具动作与来源", "", "|证据ID|工具|状态|实际执行|完整回执|模型实际收到的摘要|", "|---|---|---|---|---|---|"]
     for action in tools.actions:
         supplied = f"[提供记录](<{action['presented_path']}>)" if action.get("presented_path") else "见该回合输入"

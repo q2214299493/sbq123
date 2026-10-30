@@ -16,13 +16,15 @@ from .runner import ResearchRun, run_research
 from .tools import SPECS
 from .catalog import blocked
 from .continuation import previous_header
+from .policies import PolicyStore
+from .policy_cli import add_commands, policy_command, usage_command, validate_usage_feedback, feedback_index_error, config_from_args
 
 
 def feedback(run: Path, request: Path):
     receipt = load_json_object(run / "run_receipt.json")
     value = load_json_object(request)
     required = {"adopted", "evidence_effectiveness", "repeated_checks", "followup_notes", "scientific_result_reference"}
-    if not required <= set(value) or set(value) - required - {"human_review_seconds", "adopted_option_ids"} \
+    if not required <= set(value) or set(value) - required - {"human_review_seconds", "adopted_option_ids", "rsi_feedback", "human_preparation_seconds", "human_correction_seconds"} \
             or (value["adopted"] is not None and type(value["adopted"]) is not bool):
         raise ValueError("feedback requires separate adoption/evidence/repetition/followup/scientific-reference fields")
     if not isinstance(value["evidence_effectiveness"], list) or not isinstance(value["repeated_checks"], list) \
@@ -41,13 +43,15 @@ def feedback(run: Path, request: Path):
         raise ValueError("scientific result reference must be a real separately checked owner artifact")
     if result is not None:
         _no_links(Path(result["path"]).absolute())
-    seconds = value.get("human_review_seconds")
-    if seconds is not None and (type(seconds) not in {int, float} or not math.isfinite(seconds) or seconds < 0):
-        raise ValueError("human review seconds must be explicitly measured or unknown")
+    for key in ("human_review_seconds", "human_preparation_seconds", "human_correction_seconds"):
+        seconds = value.get(key)
+        if seconds is not None and (type(seconds) not in {int, float} or not math.isfinite(seconds) or seconds < 0):
+            raise ValueError("human time must be explicitly measured or unknown")
     selected = value.get("adopted_option_ids", [])
     options = {row["id"] for row in load_json_object(run / "research_result.json")["answer"]["options"]} if selected else set()
     if not isinstance(selected, list) or any(not isinstance(v, str) or v not in options for v in selected) or (selected and value["adopted"] is not True):
         raise ValueError("adopted branches require explicit adoption of existing option IDs")
+    validate_usage_feedback(run, value, receipt)
     folder = run / "feedback"
     folder.mkdir(exist_ok=True)
     payload = {"schema_version": 1, "recorded_at": datetime.now(timezone.utc).isoformat(),
@@ -56,7 +60,15 @@ def feedback(run: Path, request: Path):
                "scientific_result_reference": result, "promotes_scientific_result": False, "strategy_approved": False}
     path = folder / (sha256_json(payload) + ".json")
     write_json_exclusive(path, payload)
-    return {"path": str(path), "sha256": sha256_file(path)}
+    reference = {"path": str(path), "sha256": sha256_file(path)}
+    config = receipt.get("rsi_config")
+    if config:
+        try:
+            project = load_json_object(Path(receipt["rsi_application"]["path"]))["selection"]["task"]["project"]
+            PolicyStore(config["store"], project).index_feedback(reference, receipt)
+        except (OSError, ValueError, KeyError) as exc:
+            return {**reference, "rsi_index_error": feedback_index_error(run, reference, exc)}
+    return reference
 
 
 def _run_options(sub, command):
@@ -77,6 +89,10 @@ def _run_options(sub, command):
     run.add_argument("--max-turns", type=int, default=3)
     run.add_argument("--max-actions", type=int, default=10)
     run.add_argument("--timeout-seconds", type=float, default=360)
+    run.add_argument("--rsi-store", type=Path, help="Stable project-owned policy/feedback store, separate from run outputs.")
+    run.add_argument("--rsi-mode", choices=["accepted", "off"])
+    run.add_argument("--rsi-exclude-policy", action="append", default=[], help="Explicit experimental exclusion; never changes scientific requirements.")
+    run.add_argument("--rsi-trial-policy", action="append", default=[], help="Explicitly load an independently reviewed trial policy.")
     if command == "resume":
         run.add_argument("--from-run", type=Path, required=True)
         run.add_argument("--update", required=True, help="New evidence or task clarification within the same research question.")
@@ -89,6 +105,7 @@ def main():
     sub = root.add_subparsers(dest="command", required=True)
     _run_options(sub, "run")
     _run_options(sub, "resume")
+    add_commands(sub)
     tools = sub.add_parser("tools", help="Inspect registered host operations; no model or scientific job.")
     tools.set_defaults(tool_listing=True)
     use = sub.add_parser("feedback")
@@ -101,6 +118,12 @@ def main():
     spc.add_argument("--binding", type=Path)
     spc.add_argument("--planning-input", type=Path)
     args = root.parse_args()
+    if args.command == "policies":
+        print(json.dumps(policy_command(args), ensure_ascii=False, indent=2))
+        return
+    if args.command == "usage":
+        print(usage_command(args.run))
+        return
     if args.command == "tools":
         print(json.dumps(SPECS, ensure_ascii=False, indent=2))
         return
@@ -125,7 +148,7 @@ def main():
     if args.profile and blocked(args.profile.absolute()):
         raise ValueError("use a task-local nonsecret profile, not personal authentication/configuration")
     profile = load_json_object(args.profile) if args.profile else {}
-    if set(profile) - {"project_root", "auth_home", "codex", "output_root", "model", "effort"}:
+    if set(profile) - {"project_root", "auth_home", "codex", "output_root", "model", "effort", "rsi"}:
         raise ValueError("profile contains unsupported settings; native permissions are not configurable here")
     project = args.project_root or (Path(profile["project_root"]) if profile.get("project_root") else next(
         (p for p in [args.workdir.absolute(), *args.workdir.absolute().parents] if (p / "configs/execution_backends.yaml").is_file()), None))
@@ -133,6 +156,7 @@ def main():
     codex = args.codex or profile.get("codex")
     if project is None or home is None or not codex:
         raise ValueError("set one task-local profile with existing project_root/auth_home/codex, or provide them explicitly")
+    rsi = config_from_args(project, profile, args)
     output_root = Path(profile["output_root"]) if profile.get("output_root") else project.parent / (project.name + "_research_runs")
     output = args.output_dir or output_root / (datetime.now().strftime("%Y%m%d_%H%M%S_") + uuid.uuid4().hex[:8])
     scopes = list(dict.fromkeys([*old_scopes, args.workdir, *args.scope]))
@@ -143,7 +167,7 @@ def main():
                       effort=args.effort or profile.get("effort", "medium"),
                       max_turns=args.max_turns, max_actions=args.max_actions, timeout=args.timeout_seconds,
                       previous_run=args.from_run if args.command == "resume" else None,
-                      update=args.update if args.command == "resume" else "")
+                      update=args.update if args.command == "resume" else "", rsi=rsi)
     print(json.dumps(run_research(run, home, codex), ensure_ascii=False))
 
 

@@ -41,7 +41,7 @@ An intact previous snapshot, unchanged source bytes, compatible scope and exact
 tool implementation identity permit reuse only through a recorded host request;
 reused results are not independent corroboration. Source hashes are still read.
 
-New outputs use protocol v2; v1 research artifacts remain usable as explicit
+New outputs use protocol v3; v1/v2 research artifacts remain usable as explicit
 parents. The v2 result binds gaps and required artifacts to each option, and
 `progress` explains changes against parent judgment IDs, checks completed with
 current evidence, remaining checks and the next concrete product. These are
@@ -141,7 +141,7 @@ authenticate past availability. Evaluation restrictions do not govern daily use.
 
 ## Output, drafts and feedback
 
-`research_result.json` schema 1 (protocol v2) binds the original research goal and stabilizes
+`research_result.json` schema 1 (protocol v3) binds the original research goal and stabilizes
 facts, uncertainties/availability, hypotheses, candidate options, conditions,
 unknown/measured cost, risks, evidence/calculation plan, acceptance conditions,
 new tool information and one recommended next step. Facts and options must cite
@@ -162,8 +162,108 @@ Optional `human_review_seconds` must be measured or null; optional
 runtime does not become human effort, and preparation/review time is unknown
 when it was not measured.
 Feedback never promotes a scientific result or approves a strategy. These
-records can inform later tool selection/candidate ranking; automatic learning
-or a ranking policy change is not claimed here.
+records enter the bounded project feedback index for the next normal run.
+Candidate generation does not automatically adopt a behavioral policy or change
+scientific ranking/acceptance rules.
+
+## Cross-task behavioral policies (RSI)
+
+New runs and continuations share current project policy selection. A stable
+local store is configured independently of temporary run outputs. Old profiles
+remain valid; their default store is `PROJECT/data/research_assistant_rsi/`, which
+is ignored by Git. Use an explicit external store in a task-local profile when
+the project source is an isolated release checkout:
+
+```json
+"rsi": {
+  "store": "ABSOLUTE_PROJECT_POLICY_DIRECTORY",
+  "mode": "accepted",
+  "max_active_policies": 2,
+  "max_policy_chars": 10000,
+  "max_presented_candidates": 1,
+  "candidate_sources": ["correction", "repeated_work", "confirmed_success", "unmet_goal"],
+  "show_usage": true
+}
+```
+
+The `rsi` object is a member of the existing JSON profile, not a standalone
+profile. CLI `--rsi-store` and `--rsi-mode accepted|off` override those settings.
+Policy budgets do not limit mandatory scientific checks or tool permissions.
+`max_pending_feedback` (default 4) and `max_feedback_chars` (default 5000) bound
+the combined pending feedback/observation context. Oversized observations stay
+in the store. `include_pending_feedback=false` excludes both streams for trials.
+
+Definitions follow `rsi_contract.DEFINITION`. Policy text is declarative data,
+never Python or execution authority. A definition records provenance, proposer,
+scope, literal task triggers, exclusions, behavior change, limitations, burden,
+validation plan and optional explicit equivalence/conflict/replacement IDs.
+Literal matches are selection evidence, not proof of scientific applicability.
+Unresolved explicit conflicts load neither rule. Semantic equivalence/conflict
+is not inferred. A newer candidate does not displace an accepted version;
+a disabled current version does not fall back to an older version on resume.
+
+```powershell
+python -m scripts.research_assistant.cli policies propose --project-root PROJECT --store STORE --request DEFINITION.json
+python -m scripts.research_assistant.cli policies review --project-root PROJECT --store STORE --request REVIEW.json
+python -m scripts.research_assistant.cli policies show --project-root PROJECT --store STORE
+```
+
+`propose` always creates `candidate`. `review` requires `policy_id`, `version`,
+`content_sha256`, `status` (`trial`, `accepted`, `disabled`), `reviewer`,
+`validation_scope`, `validation_refs` (path/SHA-256 list) and `reason` in a
+separate immutable request. Trial/acceptance requires validation evidence.
+These are explicit operator review records; software does not authenticate a
+human identity or make scientific judgments. For a generated candidate, pass
+`policies propose --candidate-id ACTUAL_ID` with its reviewed definition and
+raw proposal source; review then updates its linked lifecycle status.
+Ordinary research `feedback.adopted` never accepts a policy.
+
+Normal runs load only accepted, applicable current versions. The explicit
+`--rsi-trial-policy ID` admits a separately reviewed trial for a bounded
+experiment. `--rsi-exclude-policy ID` withholds only that policy. For pairs,
+keep trial admission, model, code, facts, tools and budgets fixed; change only
+the target exclusion. Exclusion IDs, disabled definitions and other unselected
+rules remain host-only so a baseline is not primed by the withheld rule name.
+No prior candidate-group answer or later feedback belongs in a baseline.
+History search remains forbidden in frozen evaluation; declared required
+capabilities are checked against that restriction.
+
+Protocol v3 adds a separate `rsi` envelope (`applications`, `observations`,
+`improvement_candidates`). The original four-key tool requests and scientific
+answer schema remain intact. V1/v2 replay validation is explicit/compatible;
+live v3 outputs must contain the new envelope. Observations and proposals are
+archived with raw model records and bound source artifacts. Candidate business
+failures are isolated; no full research rerun or automatic acceptance follows.
+At most one new complete candidate is surfaced per run. Other observations are
+retained for subsequent runs, and exact duplicates add source occurrences.
+Similar proposals can retain explicit relations without automatic merging.
+
+`rsi_selection.json` freezes current state before effective model input;
+`rsi_application.json` binds submitted input paths/hashes, policy versions,
+model claims, real action receipts/order, output pointers and a limited host
+verdict. `run_receipt.json` binds the application file path/hash. Reading a
+policy file or selecting it alone is never an application verdict. Mechanical
+correspondence does not prove scientific correctness, search completeness,
+usefulness or causation. Unsupported claims remain rejected or need content
+review. The report displays four separate levels: provided, observed behavior,
+specific user-reported help, and controlled benefit (unknown until established).
+
+Optional feedback `rsi_feedback` entries use `policy_id`, `helpful`
+(boolean/null), `reason`, actual `action_refs` and answer JSON-pointer
+`output_refs`. Concrete help needs a reason and actual references. Preparation
+and correction time have separate optional `human_preparation_seconds` and
+`human_correction_seconds`; `human_review_seconds` retains its original meaning.
+Later feedback is additive and cannot change original model inputs/receipts:
+
+```powershell
+python -m scripts.research_assistant.cli usage --run RUN
+```
+
+The project index is locked and atomically replaced. A lock rejects concurrent
+writes without overwriting feedback. If indexing fails after feedback is saved,
+the command returns the original feedback reference plus an explicit pending
+reconciliation record; inspect it and re-index that exact saved record with
+`PolicyStore.index_feedback`, without repeating the research/model task.
 
 ## Thin SPC staging boundary
 

@@ -6,9 +6,11 @@ from jsonschema import Draft202012Validator
 from scripts.ts_strategy_engine.diagnostic_advice import array_schema, object_schema
 
 from .tools import SPECS
+from .rsi_contract import response_fields
 
 
-VERSION = "project_research_assistant_v2"
+VERSION = "project_research_assistant_v3"
+PREVIOUS_VERSION = "project_research_assistant_v2"
 LEGACY_VERSION = "project_research_assistant_v1"
 TEXT = {"type": "string", "minLength": 1, "maxLength": 2400}
 IDS = {"type": "array", "items": {"type": "string"}, "uniqueItems": True, "maxItems": 16}
@@ -55,13 +57,19 @@ def answer_schema(version=VERSION):
 
 
 def response_schema(version=VERSION):
+    if version not in {VERSION, PREVIOUS_VERSION, LEGACY_VERSION}:
+        raise ValueError("unsupported research response protocol")
     request = object_schema({"tool": {"enum": list(SPECS)},
                              "target_ids": {"type": "array", "items": {"type": "string"}, "maxItems": 3},
                              "query": {"type": "string", "maxLength": 2000},
                              "limit": {"type": "integer", "minimum": 1, "maximum": 40}})
-    return object_schema({"kind": {"enum": ["request", "final"]},
+    value = object_schema({"kind": {"enum": ["request", "final"]},
                           "requests": array_schema(request, 0, 4),
                           "answer": {"anyOf": [answer_schema(version), {"type": "null"}]}})
+    if version == VERSION:
+        value["properties"]["rsi"] = response_fields()
+        value["required"].append("rsi")
+    return value
 
 
 def portable_schema(value):
@@ -91,7 +99,8 @@ def _validate_non_generation(uncertainties, results):
             raise ValueError("non-generation requires an explicit host production-state observation")
 
 
-def validate_response(value, results, expected_intent, *, version=VERSION):
+def validate_response(value, results, expected_intent, *, version=None):
+    version = version or (VERSION if "rsi" in value else PREVIOUS_VERSION)
     Draft202012Validator(response_schema(version)).validate(value)
     if value["kind"] == "request":
         if value["answer"] is not None or not value["requests"]:

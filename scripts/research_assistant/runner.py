@@ -25,11 +25,15 @@ from .report import render
 from .presentation import present
 from .tools import SPECS, ToolRegistry
 from .continuation import load_continuation, validate_progress
+from .policy_selection import settings as rsi_settings, select_policies, model_context
+from .policies import PolicyStore, write_record
+from .rsi_candidates import archive_contributions
+from .rsi_application import application_record
 
 
 class ResearchRun(ReviewEvents):
     def __init__(self, goal, intent, scopes, project, output, *, mode="daily", manifest=None,
-                 model="gpt-6.1-sol", effort="medium", max_turns=3, max_actions=10, timeout=360, previous_run=None, update=""):
+                 model="gpt-6.1-sol", effort="medium", max_turns=3, max_actions=10, timeout=360, previous_run=None, update="", rsi=None):
         if not isinstance(goal, str) or not 1 <= len(goal.strip()) <= 8000 or intent not in {"auto", "diagnose", "compare", "plan"}:
             raise ValueError("a bounded natural-language goal and valid intent required")
         if type(max_turns) is not int or not 1 <= max_turns <= 6 or type(max_actions) is not int or not 1 <= max_actions <= 20:
@@ -37,6 +41,11 @@ class ResearchRun(ReviewEvents):
         if not model.strip() or effort not in {"minimal", "low", "medium", "high", "xhigh"} or not 0 < timeout <= 1800:
             raise ValueError("explicit model/effort and bounded timeout required")
         self.goal, self.intent, self.model, self.effort = goal, intent, model, effort
+        self.rsi_config = rsi_settings(project, rsi)
+        self.policy_store = PolicyStore(self.rsi_config["store"], project)
+        if output.absolute().is_relative_to(self.policy_store.root) or self.policy_store.root.is_relative_to(output.absolute()):
+            raise ValueError("RSI store and temporary run output must be separate")
+        self.rsi_context, self.rsi_selection, self.rsi_contributions, self.rsi_input_refs = None, None, [], []
         self.max_turns, self.max_actions = max_turns, max_actions
         self.previous_run, self.update, self.continuation = previous_run, update, None
         if previous_run is not None and output.absolute().is_relative_to(previous_run.absolute()):
@@ -44,7 +53,7 @@ class ResearchRun(ReviewEvents):
         self.started = time.monotonic()
         self.deadline = self.started + timeout
         self.output = new_output(output, scopes)
-        self.catalog = Catalog(scopes, self.output, mode=mode, manifest=manifest)
+        self.catalog = Catalog(scopes, self.output, mode=mode, manifest=manifest, excluded_roots=[self.policy_store.root])
         self.catalog.save(self.output / "catalog.initial.json")
         self.tools = ToolRegistry(self.catalog, project, self.output)
         self.stage, self.first_failure_stage, self.problem = "prepare", None, None
@@ -74,6 +83,16 @@ class ResearchRun(ReviewEvents):
             self.question_id = self.continuation["question_id"]
             self.record("continuation_collected", {"path": str(self.output / "continuation.json"),
                                                    "sha256": sha256_file(self.output / "continuation.json")})
+
+    def prepare_rsi(self):
+        if self.rsi_context is None:
+            task = {"project": self.policy_store.project, "goal": self.goal, "intent": self.intent, "update": self.update,
+                    "mode": self.catalog.mode, "available_tools": [name for name in SPECS if self.catalog.mode != "evaluation" or name != "history.search"],
+                    "scopes": [str(p) for p in self.catalog.scopes]}
+            self.rsi_selection = select_policies(task, self.policy_store, self.rsi_config)
+            self.rsi_context = model_context(self.rsi_selection)
+            reference = write_record(self.output, "rsi_selection.json", self.rsi_selection)
+            self.record("rsi_frozen", reference)
 
     def record(self, kind, data):
         if kind == "admission_stage":
@@ -144,6 +163,7 @@ class ResearchRun(ReviewEvents):
             "catalog_sha256": sha256_file(self.workspace / "model_input.json")})
 
     def prompt_for(self, number):
+        self.prepare_rsi()
         schema = response_schema()
         if self.continuation:
             progress = schema["properties"]["answer"]["anyOf"][0]["properties"]["progress"]["anyOf"][0]
@@ -152,7 +172,7 @@ class ResearchRun(ReviewEvents):
         return {"protocol_version": VERSION, "goal": self.goal, "intent": self.intent,
             "mode": self.catalog.mode, "catalog": self.catalog.snapshot(), "registered_tools": SPECS,
             "turn": number, "turn_budget": self.max_turns, "host_actions_remaining": self.max_actions - len(self.tools.actions),
-            "history": self.transcript, "response_schema": schema, "continuation": self.continuation,
+            "history": self.transcript, "response_schema": schema, "continuation": self.continuation, "rsi_context": self.rsi_context,
             "instructions": [
                 "用中文推进用户的研究目标；不要强行使用failure_class。先按问题选择登记工具取证，收到结果后更新判断并请求更多证据或给最终建议。",
                 "这不是原生工具回调。返回kind=request和requests数组，由宿主执行；每个请求必须有tool、target_ids、query、limit四字段。目录ID用于vasp.inspect/terminal.align，文件ID用于读取/结构/contract；ID必须来自目录，不要编造路径或ID。",
@@ -169,6 +189,10 @@ class ResearchRun(ReviewEvents):
                 "方案的blocking_gaps绑定本分支的判别问题与所需产物，不能把所有未知不加区别抄到每个方案。workflow.review可用现有吸附连接性模块生成分支绑定的几何评阅草案，仍无执行权。",
                 "若continuation非空，带入上次目标、方案、待查事项和反馈；previous_claims不是本轮证据。按来源与工具版本核验状态重新取证；可复用项仍通过工具请求取得，宿主会返回缓存回执。progress需说明previous_ref判断变化、完成/未完检查和下一步具体产物。新问题progress=null。未重新核验的旧判断标pending_revalidation。",
                 "严格返回一个符合response_schema的JSON对象，无Markdown围栏；不进行自评分或宣称RSI改进已成立。",
+                "rsi_context是本轮冻结的可选行为建议，不能改变科学协议、来源要求、权限或预算；父运行策略不是当前策略。按适用条件参考已选策略，实际应用关联放在响应信封rsi.applications，不向工具四字段请求添加policy_id。",
+                "rsi.applications填写实际policy_id/version/content_sha256、应用意图、已发生的E动作引用、最终answer内JSON pointer输出引用（例如/recommended_next）。动作按发生顺序排列；未执行/未对应时留空，不自报效果。宿主只验证有限对应，科学正确性与因果仍需评阅。",
+                "rsi.observations保留错误/重复工作/有帮助做法/能力缺口的来源观察；rsi.improvement_candidates是独立的助手行为改进，不能当科研options。允许全空；最多优先展开一个新的完整候选，其他发现保留为观察。",
+                "候选source_refs只能用本轮已返回E编号或rsi_context.pending_feedback/pending_observations中的source_id。说明旧做法、具体改变、适用/限制、帮助/负担、新任务验证和评价；existing_candidate_id仅在完全等价已知候选时使用，语义相似只列related_ids。后补反馈是现在才可见的解释，不倒填为过去已知，也不自动采纳策略。",
             ]}
 
     def model_turn(self, transport, number, *, synthetic=False):
@@ -186,6 +210,8 @@ class ResearchRun(ReviewEvents):
             **({"sandboxPolicy": {"type": "readOnly", "networkAccess": False}} if synthetic else {"permissions": transport.model_profile}),
             "input": [{"type": "text", "text": json.dumps(self.prompt, ensure_ascii=False)}]})
         self.turn_id = turn["turn"]["id"]
+        self.rsi_input_refs.append({"path": str(folder / "model_input.json"), "sha256": sha256_file(folder / "model_input.json"),
+                                   "server_turn_id": self.turn_id, "synthetic": synthetic})
         self.model_turns_started += 0 if synthetic else 1
         self.record("turn_started", {"number": number, "turn": turn})
         self.stage = "model_turn"
@@ -209,7 +235,10 @@ class ResearchRun(ReviewEvents):
         if len(finals) != 1:
             raise ValueError("one unmodified final response required; no repair turn")
         value = json.loads(finals[0], parse_constant=lambda token: (_ for _ in ()).throw(ValueError(token)))
-        validate_response(value, self.tools.results, self.intent)
+        validate_response(value, self.tools.results, self.intent, version=None if synthetic else VERSION)
+        if "rsi" in value:
+            self.rsi_contributions.append({"rsi": value["rsi"], "raw_ref": {"path": str(folder / "model-response.txt"),
+                "sha256": sha256_file(folder / "model-response.txt")}, "available_action_refs": list(self.tools.results)})
         if value["kind"] == "final":
             validate_progress(value["answer"], self.continuation)
         write_json_exclusive(folder / "response.validated.json", value)
@@ -224,6 +253,7 @@ class ResearchRun(ReviewEvents):
 
     def drive(self, transport, *, synthetic=False):
         self.prepare_continuation()
+        self.prepare_rsi()
         if not synthetic and (not isinstance(transport, LiveStdio) or not transport.admitted):
             raise ValueError("existing admitted ChatGPT transport required")
         self.run_mode = "OFFLINE_TEST_TRANSPORT" if synthetic else "real_codex"
@@ -258,6 +288,10 @@ class ResearchRun(ReviewEvents):
         status = "GENERATED" if self.answer is not None else "BLOCKED"
         if self.run_mode == "OFFLINE_TEST_TRANSPORT":
             status = "OFFLINE_TEST_" + status
+        if self.answer is not None:
+            write_json_exclusive(self.output / "research_result.json", {"schema_version": 1, "research_goal": self.goal,
+                "answer": self.answer, "evidence_actions": self.tools.actions, "scientific_acceptance": False, "execution_authorized": False})
+        rsi_record, rsi_reference = self.finish_rsi()
         receipt = {"schema_version": 1, "status": status, "protocol_version": VERSION, "goal": self.goal, "intent": self.intent,
             "mode": self.catalog.mode, "run_mode": self.run_mode, "model": self.model, "effort": self.effort,
             "credential_store": "file", "evidence_access": "frozen-context-with-explicit-host-messages",
@@ -267,6 +301,7 @@ class ResearchRun(ReviewEvents):
             "native_tool_calls": self.native_tool_calls, "native_tool_attempts": self.native_tool_attempts,
             "host_actions_reused_from_parent": sum(bool(a.get("reused_from_parent")) for a in self.tools.actions),
             "question_id": self.question_id,
+            "rsi_config": self.rsi_config, "rsi_application": rsi_reference,
             "continuation": {"path": str(self.output / "continuation.json"), "sha256": sha256_file(self.output / "continuation.json")} if self.continuation else None,
             "first_failure_stage": self.first_failure_stage, "problem": self.problem,
             "permission_evidence": self.permission_evidence, "backend_warnings": self.backend_warnings,
@@ -276,23 +311,37 @@ class ResearchRun(ReviewEvents):
             "elapsed_seconds": time.monotonic() - self.started, "source_versions": self.source_versions, "producer": self.producer,
             "scientific_acceptance": False, "execution_authorized": False, "human_review_seconds": None,
             "journal_sha256": sha256_file(self.output / "journal.jsonl")}
-        if self.answer is not None:
-            write_json_exclusive(self.output / "research_result.json", {"schema_version": 1, "research_goal": self.goal,
-                "answer": self.answer, "evidence_actions": self.tools.actions, "scientific_acceptance": False, "execution_authorized": False})
         write_json_exclusive(self.output / "run_receipt.json", receipt)
         write_json_exclusive(self.output / "research_state.json", {"schema_version": 1, "question_id": self.question_id,
             "goal": self.goal, "answer": self.answer, "evidence_actions": self.tools.actions,
             "status": status, "scientific_acceptance": False})
         self.catalog.save(self.output / "catalog.final.json")
         with (self.output / "review.md").open("x", encoding="utf-8") as handle:
-            handle.write(render(receipt, self.answer, self.tools))
+            handle.write(render(receipt, self.answer, self.tools, rsi_record))
         return receipt
+
+    def finish_rsi(self):
+        candidates = []
+        if self.rsi_context is not None:
+            try:
+                if any(c["rsi"]["observations"] or c["rsi"]["improvement_candidates"] for c in self.rsi_contributions):
+                    candidates = archive_contributions(self.policy_store, self.rsi_contributions, self.rsi_selection,
+                                                      self.tools.actions, self.rsi_config)
+                value = application_record(self.output, self.rsi_selection, self.rsi_contributions,
+                                           self.tools.actions, self.answer, candidates, self.rsi_input_refs)
+            except (OSError, ValueError, TypeError, KeyError) as exc:
+                value = {"schema_version": 1, "status": "RSI_RECORD_BLOCKED", "error": str(exc),
+                         "selected_policies": [], "applications": [], "candidate_records": candidates}
+        else:
+            value = {"schema_version": 1, "status": "RSI_NOT_FROZEN", "selected_policies": [], "applications": [], "candidate_records": []}
+        return value, write_record(self.output, "rsi_application.json", value)
 
 
 def run_research(run, auth_home, codex):
     transport = None
     try:
         run.prepare_continuation()
+        run.prepare_rsi()
         run.bind_workspace(auth_home)
         run.stage = "task_scope_binding"
         run.bind_existing_task_scope(auth_home)

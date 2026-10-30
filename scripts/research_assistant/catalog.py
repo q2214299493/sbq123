@@ -25,10 +25,11 @@ def blocked(path: Path) -> bool:
 
 
 class Catalog:
-    def __init__(self, scopes: list[Path], output: Path, *, mode: str = "daily", manifest: Path | None = None):
+    def __init__(self, scopes: list[Path], output: Path, *, mode: str = "daily", manifest: Path | None = None, excluded_roots=()):
         if mode not in {"daily", "evaluation"} or not scopes:
             raise ValueError("explicit task scope and daily/evaluation mode required")
         self.output, self.mode = output, mode
+        self.excluded_roots = [Path(path).resolve() for path in excluded_roots]
         self.scopes = []
         for scope in scopes:
             _no_links(scope.absolute())
@@ -66,6 +67,8 @@ class Catalog:
 
     def check(self, path: Path) -> Path:
         path = path.absolute()
+        if any(path.is_relative_to(root) for root in self.excluded_roots):
+            raise ValueError("RSI runtime store is not a scientific evidence scope")
         if ".." in path.parts or blocked(path) or not any(path.is_relative_to(r) for r in self.scopes):
             raise ValueError("source outside task scope or excluded")
         _no_links(path)
@@ -112,7 +115,7 @@ class Catalog:
                 if len(self.entries) >= 2000 or added >= 120:
                     self.scan_truncated = True
                     return
-                if blocked(path):
+                if blocked(path) or any(path.absolute().is_relative_to(root) for root in self.excluded_roots):
                     continue
                 if path.is_dir() and path.name.lower() in {"archive", "archives", "backup", "backups", ".cache"}:
                     continue
