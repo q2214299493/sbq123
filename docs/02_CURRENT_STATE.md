@@ -13,6 +13,14 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Current State
 
+## C2 adsorption table checkpoint — 2026-10-30
+
+The canonical work checkout accepted jobs9910781/9910785/9926807 and verified
+main-table rows65-67; three paired sources are retained as duplicates.
+Original06-10 and paired9910783 still lack required scheduler DONE evidence;
+E0/Eads gaps remain explicit. See
+[the bounded review](reviews/fe110_c2_final_acceptance_table_20261030.md).
+
 ## Authority and scope
 
 This is a source/publication entry point, not a live monitoring report. Governance
