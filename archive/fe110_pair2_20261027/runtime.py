@@ -28,6 +28,10 @@ def check_scope(request, approval, exception, digest):
         raise ValueError("exact paired-relaxation human authorization missing")
     if request["scope"] != exception["scope"]:
         raise ValueError("paired relaxation scope changed")
+    if request.get("document_kind") == "fe110_c2_16_19_ft512_relaxation":
+        from archive.fe110_c2_16_19_gpu_20261102.adapter import check_scope as check_new_adsorption_scope
+        check_new_adsorption_scope(request)
+        return
     if request.get("document_kind") == "fe110_c2_11_15_ft512_relaxation":
         from archive.fe110_11_15_gpu_20261029.adapter import check_scope as check_adsorption_scope
         check_adsorption_scope(request)
@@ -63,6 +67,9 @@ def verify(path, remote=False):
     for case in scope["cases"]:
         if sha256_file(local_path(root, case["seed_path"])) != case["seed_sha256"]:
             raise ValueError("same-start geometry changed")
+    if request.get("document_kind") == "fe110_c2_16_19_ft512_relaxation":
+        from archive.fe110_c2_16_19_gpu_20261102.adapter import verify_handoffs
+        verify_handoffs(root, scope)
     frozen = load_json_object(root / "evidence/frozen_force_comparison.json")
     for name, model in scope["models"].items():
         if model["sha256"] != frozen["model_checkpoint_sha256"][name]:

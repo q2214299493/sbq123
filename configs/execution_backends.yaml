@@ -49,6 +49,53 @@ backends:
       producer_exit_record_is_scheduler_authority: false
       admin_resolution: enable Slurm accounting storage and job accounting on MZ73
     direct_execution_exceptions:
+      fe110_c2_16_19_ft512_20261102:
+        scope:
+          gpu_index: 0
+          gpu_uuid: GPU-483c224e-cc19-13e2-24ad-c83efd14fa75
+          max_wall_seconds: 600
+          CPU_count: 4
+          memory_GB: 32
+          allocator_limit_MiB: 16384
+          gpu_sharing:
+            mode: resident_service_allowlist
+            max_training_memory_MiB: 16384
+            allowed_processes:
+              - {pid: 755831, uid: 1007, start_ticks: 25755244, script: wsgi_recommender.py}
+              - {pid: 755832, uid: 1007, start_ticks: 25755244, script: wsgi_recommender.py}
+              - {pid: 755833, uid: 1007, start_ticks: 25755244, script: wsgi_recommender.py}
+              - {pid: 755834, uid: 1007, start_ticks: 25755244, script: wsgi_recommender.py}
+              - {pid: 2068650, uid: 1007, start_ticks: 33232802, script: wsgi_recommender.py}
+              - {pid: 2068651, uid: 1007, start_ticks: 33232802, script: wsgi_recommender.py}
+              - {pid: 2068649, uid: 1007, start_ticks: 33232801, script: wsgi_recommender.py}
+              - {pid: 2068648, uid: 1007, start_ticks: 33232801, script: wsgi_recommender.py}
+          limits: {seed_max_steps: 80, fmax_eV_per_A: 0.1, LBFGS_maxstep_A: 0.2}
+          remote_root: /home/sbq/sbq/fe110_c2_16_19_ft512_20261102_v1
+          models:
+            finetune:
+              path: /home/sbq/sbq/fe110_scratch512_20261028_v1/finetune/control/output/direct-fe110-scratch512-finetune20-20261028-v1/checkpoints/2026-10-28-20-56-32/best_checkpoint.pt
+              sha256: cdd391d39ed19fc1ef3516d41b1af53bd81351d8ad73f25e537be232fd8c0dc0
+              backend: aqcat25
+              status: budget_stopped_partial_development_selected_snapshot
+          cases:
+            - {name: 16_A, composition: C2H4O, seed_path: geometry/16_A/POSCAR, seed_sha256: 0d5311717e9a5a773e080655c69eb4b5cca7b7e30cb0b6bcd39d7f0bbc219e27}
+            - {name: 16_B, composition: C2H4O, seed_path: geometry/16_B/POSCAR, seed_sha256: 8a66b9cc97504db1a88e83ffeb1b4473b3c55b9cbf7095226ba6e4bc260aaa3e}
+            - {name: 16_C, composition: C2H4O, seed_path: geometry/16_C/POSCAR, seed_sha256: 2306eac5fcbec5af456906b4df16af2a9a08b4d7ba0f44ac0dc9dcbf478e08f4}
+            - {name: 17_A, composition: C2H4O, seed_path: geometry/17_A/POSCAR, seed_sha256: e6a5cdc7108f46cf7c77474d561f502d0f857d8de58adf2f907adb2735dba5b7}
+            - {name: 17_B, composition: C2H4O, seed_path: geometry/17_B/POSCAR, seed_sha256: 78cbf019886cd06ed7a9474cc201b22c5fce9dea7dd81fde3b15d4fdd5c5fddd}
+            - {name: 17_C, composition: C2H4O, seed_path: geometry/17_C/POSCAR, seed_sha256: 3cdc911b11dfc9b765d0973db989bc9e291144bbe5ae7c1f400f0fad0b4b02e2}
+            - {name: 18_A, composition: C2H4O, seed_path: geometry/18_A/POSCAR, seed_sha256: c2fdb709be00b676645a1ca9d39a0c0e7f54f409b49e7f490770f91ef504fd59}
+            - {name: 18_B, composition: C2H4O, seed_path: geometry/18_B/POSCAR, seed_sha256: cefd8ae0a7e4c87f7e342953671e4288544a4930a8b3abaa4ceedf593751d110}
+            - {name: 18_C, composition: C2H4O, seed_path: geometry/18_C/POSCAR, seed_sha256: 4a0afcca0fe130e2b35a8c8164ea7a73544505fb8d1f71fb4393c25f65dc0621}
+            - {name: 19_A, composition: C2H6, seed_path: geometry/19_A/POSCAR, seed_sha256: edc5617c129899f2a335b09f45c6560e6be86bc92b33f0aa2764dc07ce6d09c4}
+            - {name: 19_B, composition: C2H6, seed_path: geometry/19_B/POSCAR, seed_sha256: 39a1af03f81685fa3837230eac13bee4517bfd7842ec47565e7e4ca136f326e3}
+            - {name: 19_C, composition: C2H6, seed_path: geometry/19_C/POSCAR, seed_sha256: 1ed8076277003673dec4556429de211f8fd5478afe254b05604ce91001647d48}
+        authorizing_user_request: 对证据齐全的构型进行正式登记审核， 然后录入吸附表中 然后提交16-19
+        sharing_authorization: 允许GPU0受限共享运行
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        automatic_retries: 0
+        VASP_submission_authority: false
+        domain_use: uncalibrated_candidate_pre_relaxation_only_no_ranking
       fe110_c2_11_15_ft512_20261029:
         scope:
           gpu_index: 1

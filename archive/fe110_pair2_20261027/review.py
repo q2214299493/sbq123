@@ -53,7 +53,7 @@ def post_relaxation_geometry(seed, final, audit, rules):
         "maximum_slab_displacement_A": slab_max, "fragment_formulas_from_connectivity": fragment_formulas(symbols, audit["final_graph"]),
         "intact_original_target_retained": audit["final_graph_preserved"],
         "initial_CARE_placement_height_threshold_applied_as_final_gate": False,
-        "interpretation": "C3 fragmentation is a diagnostic product candidate;not an intact C3 success" if not audit["final_graph_preserved"] else "intact ML candidate;DFT acceptance pending"}
+        "interpretation": "fragmentation is a diagnostic product candidate;not an intact-target success" if not audit["final_graph_preserved"] else "intact ML candidate;DFT acceptance pending"}
 
 
 def audit_frames(seed, frames, final):
