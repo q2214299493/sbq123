@@ -69,6 +69,15 @@ backends:
       - registry_energy_promotion
       - external_evidence_gate_bypass
 
+  buct2_gpu:
+    role: candidate_acceleration_only
+    display_name: BUCT2
+    ssh:
+      alias: buct2-gpu
+    remote_write_boundary: /home/sbq/sbq
+    # Verify the host, scheduler, environment, and task paths before execution.
+    execution_admission: task_specific_preflight_required
+
   vasp:
     role: authoritative_first_principles_calculation
     ssh_alias: sunboquan-codex

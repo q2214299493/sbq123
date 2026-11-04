@@ -20,6 +20,13 @@ is defined in [DOCUMENT_GOVERNANCE.md](DOCUMENT_GOVERNANCE.md). The development
 checkout is `C:/Users/86177/Desktop/work`; this branch is an isolated publication
 worktree based on B5. No scheduler or production database was queried in B6.
 
+## GPU resource selection
+
+Use `python -m scripts.gpu_resources` to compare `BUCT(sbq)` and `BUCT2` before
+binding a task. Both servers keep task files under their own `/home/sbq/sbq/`.
+BUCT2's SSH host key was verified on 2026-11-04, but its automation key was
+rejected. Its GPU, directory, and runtime checks are pending.
+
 ## Active Scientific Branch
 
 The selected protocol is the corrected true Fe(110) five-layer branch,

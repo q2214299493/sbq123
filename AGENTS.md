@@ -51,8 +51,12 @@ force convergence, geometry validity, and scientific validity.
   transition-state candidate acceleration, and force-model fine-tuning. Connect as
   `sbq@10sx4jr711576.vicp.fun:36039` with
   `C:\Users\86177\.ssh\id_ed25519_fe_agent`, `IdentitiesOnly=yes`; never read,
-  display, copy, or modify the private-key contents. Remote writes are limited
-  to `/home/sbq/sbq/`.
+  display, copy, or modify the private-key contents.
+- Before choosing a GPU host, run `python -m scripts.gpu_resources` to check
+  `BUCT(sbq)` and `BUCT2` (`backends.buct2_gpu`). Use a fresh GPU, scheduler
+  (when present), and task-specific environment check before binding a job to
+  a host. Keep all GPU task files under that server's `/home/sbq/sbq/`, including
+  staged inputs, logs, temporary files, checkpoints, and outputs.
 - Use only `sunboquan-codex` for VASP/VTST calculations; active calculation
   paths are in `docs/02_CURRENT_STATE.md`.
 - `work` is the orchestration, evidence-gate, review, and registry authority.

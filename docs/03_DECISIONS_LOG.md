@@ -13,6 +13,13 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Decisions Log
 
+## 2026-11-04 — Add BUCT2 to GPU resource selection
+
+- Check both configured GPU servers before selecting a host. Keep all GPU
+  task files under the selected host's `/home/sbq/sbq/` directory.
+- BUCT2 requires successful SSH and task-specific runtime preflight before
+  execution. The resource check is read-only and does not transfer job authority.
+
 ## 2026-09-05 - Add Sella to the current MatRIS candidate loop
 
 - User requested Sella integration and comparison with the current workflow.

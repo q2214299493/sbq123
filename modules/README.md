@@ -13,6 +13,16 @@ The canonical workflow order and stage boundaries are in `docs/12_WORKFLOW_ARCHI
 `sunboquan-codex` alone runs VASP/VTST. All transfers return through `work` for
 the owning module's gates.
 
+Before choosing a GPU server, run `python -m scripts.gpu_resources` from the
+repository. It checks `BUCT(sbq)` and `BUCT2` in parallel and reports GPU memory,
+utilization, compute-process GPU UUIDs, Slurm allocation when available, and the
+configured work directory. An incomplete check leaves availability unknown.
+BUCT2 connects through the local OpenSSH alias `buct2-gpu`.
+Both servers keep GPU run files under their own `/home/sbq/sbq/`. Before the
+first BUCT2 run, verify the task's CUDA environment, model hashes, scheduler or
+execution mode, and canonical paths for all task writes. Host-bound job
+authorizations require a new binding when changing hosts.
+
 `calculation_registry`, `kinetic_data`, and `incar_custodian` are cross-cutting
 modules. `state_handoff` owns repository task/history lifecycle events and
 managed views; `git_versioning`, `memory_migration`, and project state files
