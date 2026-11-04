@@ -17,6 +17,7 @@ Only unresolved problems belong here. Resolved detail through 2026-06-27 is pres
 
 | ID | Open problem | Impact | Next action / owner |
 |---|---|---|---|
+| `E-20261104-GPU-NVML` | Both GPU SSH probes reported an NVML initialization error on 2026-11-04 | Slurm allocation is visible, while per-GPU memory and actual utilization are unknown from SSH | Verify CUDA and device access in the authorized runtime for the selected task |
 | `E-20260905-ROOT-LAYOUT` | `test_root_contains_no_executable_or_download_clutter` rejects the existing `.codex_tmp` and `scientific-problem-compiler` root directories | Strategy-learning regression run: 170 passed, one repository-layout failure; feature and scientific-gate tests passed | Review directory ownership and intended project placement before moving files or changing the layout contract; no cleanup or allowlist relaxation was performed |
 | `E-003` | Historical policy required missing compatible true Fe(110) adsorbed final statics | Superseded on 2026-08-07: formal Fe(110) surface energies now use compatible converged `SIGMA=0.20 eV` final `OUTCAR` `TOTEN`; existing `SIGMA=0.10 eV` statics are optional evidence | Do not submit replacement statics solely for energy promotion; instead verify and register each converged relaxation/DIMER output under `fe110_converged_toten_sigma0p20_v1` |
 | `E-006` | CatApp and OC20NEB/CatTSunami machine access remain unverified | Whitelist retrieval has incomplete production connectors | Confirm official access methods in `catalysis_data_retrieval` |

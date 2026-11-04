@@ -24,8 +24,10 @@ worktree based on B5. No scheduler or production database was queried in B6.
 
 Use `python -m scripts.gpu_resources` to compare `BUCT(sbq)` and `BUCT2` before
 binding a task. Both servers keep task files under their own `/home/sbq/sbq/`.
-BUCT2's SSH host key was verified on 2026-11-04, but its automation key was
-rejected. Its GPU, directory, and runtime checks are pending.
+On 2026-11-04, BUCT2 accepted key-based SSH, its configured directory was
+writable, and its Slurm node query succeeded. NVML could not report device
+memory or utilization from either SSH session. BUCT2 still requires
+task-specific runtime preflight.
 
 ## Active Scientific Branch
 
