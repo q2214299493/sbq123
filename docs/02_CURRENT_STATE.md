@@ -13,6 +13,13 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Current State
 
+## C2 supplement GPU submission — 2026-11-06
+
+All12 user-retained C2 supplement seeds submitted as native MZ73 Slurm11396;
+18:59 CST evidence is PENDING(Resources),start N/A,producer not started.
+FrozenFT512;no VASP/training/promotion. Return site/connectivity review before
+any DFT decision: `docs/reviews/fe110_c2_supplement_gpu_20261106.md`.
+
 ## C2 adsorption table checkpoint — 2026-10-30
 
 The canonical work checkout accepted jobs9910781/9910785/9926807 and verified

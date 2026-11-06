@@ -15,6 +15,16 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 Tasks are ordered by priority and should be handled one per Codex thread.
 
+## C2 supplement GPU return review (2026-11-06)
+
+- User retained all12 review_v1 seeds;MZ73 Slurm11396 submitted,PENDING(Resources)
+  at18:59 CST. No VASP,training,retry or model promotion authorized.
+- After terminal evidence,collect outputs and review original/final site,Fe
+  coordination,connectivity,H assignment and duplicates in work before asking
+  which candidates should enter VASP. Preserve all original modes.
+- Exact request/receipt/next step: `docs/reviews/fe110_c2_supplement_gpu_20261106.md`.
+  Existing six-pair VASP benchmark remains separate;do not cancel or resubmit it.
+
 ## C2 adsorption final-acceptance follow-up —2026-10-30
 
 - Recover authoritative DONE evidence for the original15 closed06-10 sources

@@ -13,6 +13,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## C2 supplement12 GPU submission —2026-11-06
+
+- `docs/reviews/fe110_c2_supplement_gpu_20261106.md`:native Slurm11396,exact12 seeds,resource/domain boundaries and return-review step.
+- `calculations/fe110_c2_site_supplement_20261106/gpu_slurm_ft512_20261106_v1/`:frozen input/request/authorization,native preflight/submission/scheduler evidence and62-row metadata registration receipts.
+- `archive/fe110_c2_supplement_gpu_20261106/`:bounded Slurm-only producer/transport/provenance scripts and6 non-model guard tests.
+
 This is a navigation index, not a duplicate file listing. Use `git ls-files` for the complete tracked inventory.
 
 ## C2 final acceptance and main-table completion —2026-10-30
