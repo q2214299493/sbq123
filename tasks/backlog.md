@@ -15,6 +15,17 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 Tasks are ordered by priority and should be handled one per Codex thread.
 
+## C2 supplement independent-completion clarification —2026-11-06
+
+- MZ73 Slurm11396 andBUCT2 Slurm1355 both pending,same12 frozen seeds/model/budget.
+- User clarified both hosts may run/use first eligible completed result;local
+  first-ready arbiter35984 stopped,no remote cancellation. BUCT2 environment and
+  native CPU imports passed,zero actual GPU result or VASP submission.
+- Obtain explicit approval before replacing current queued wrappers:11396 has
+  direct-only attestation risk;1355 retains obsolete model-before-permit wait.
+  Do not edit hash-bound inputs in place or fabricate a peer-terminal permit.
+- Review: `docs/reviews/fe110_c2_dual_gpu_20261106.md`. Existing VASP jobs unchanged.
+
 ## C2 supplement GPU return review (2026-11-06)
 
 - User retained all12 review_v1 seeds;MZ73 Slurm11396 submitted,PENDING(Resources)

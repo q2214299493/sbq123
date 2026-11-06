@@ -13,6 +13,18 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Error Log
 
+## GPU execution clarification —2026-11-06
+
+- `E-20261104-GPU-NVML`:both hosts deny login NVIDIA device opens withEPERM via
+  `user-1024.slice DevicePolicy=closed`,from`90-slurm-login-guard.conf`;driver/NVML
+  versions match. No administrator setting was changed;use legitimate allocation.
+- `E-20261106-SLURM-DEVICE-PROOF`:queued11396 reused direct-only CUDA proof,which
+  requires UUID visibility and emits non-scheduler metadata.BUCT2 1355 has corrected
+  numeric-Slurm proof but obsolete permit wait.User clarified independent completion;
+  local arbiter stopped,no remote job stopped.Approval needed to replace queued
+  wrappers;do not mutate bound inputs or forge a permit.No optimization failure
+  or model/structure accuracy conclusion is established by this static finding.
+
 Only unresolved problems belong here. Resolved detail through 2026-06-27 is preserved in `archive/state_history/ERROR_LOG_through_20260627.md` and Git history.
 
 | ID | Open problem | Impact | Next action / owner |

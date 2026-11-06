@@ -13,6 +13,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## C2 supplement BUCT2 replica and completion-policy clarification —2026-11-06
+
+- `docs/reviews/fe110_c2_dual_gpu_20261106.md`:native Slurm1355,byte-bound environment migration,14 guards,74 metadata rows+2 policy files;latest independent-completion preference awaits wrapper replacement approval.
+- `calculations/fe110_c2_site_supplement_20261106/gpu_buct2_ft512_20261106_v1/`:preservedv1-v3 packages,native preflight/submission/registry receipts and stopped-arbiter evidence.
+- `archive/fe110_c2_dual_gpu_20261106/`:bounded migration,native Slurm device proof,registration and inactive first-ready guard.
+
 ## C2 supplement12 GPU submission —2026-11-06
 
 - `docs/reviews/fe110_c2_supplement_gpu_20261106.md`:native Slurm11396,exact12 seeds,resource/domain boundaries and return-review step.

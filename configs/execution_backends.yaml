@@ -10,6 +10,14 @@ authority:
   automatic_remote_submission: forbidden
 
 backends:
+  buct2_gpu:
+    role: candidate_acceleration_only
+    display_name: BUCT2
+    ssh:
+      alias: buct2-gpu
+    remote_write_boundary: /home/sbq/sbq
+    execution_admission: task_specific_preflight_required
+
   work:
     role: orchestration_and_scientific_gates
     repository_root: C:/Users/86177/Desktop/work
