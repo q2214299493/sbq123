@@ -13,6 +13,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## C2 GPU physical-device repair and independent replacements —2026-11-07
+
+- `docs/reviews/fe110_c2_gpu_device_repair_20261107.md`:11721/1357,native old failure/cancellation,allocated CUDA test and unchanged scientific scope.
+- `archive/fe110_c2_gpu_repair_20261107/`:physical PCI/UUID admission,native CUDA proof,independent producer,exact-once submission,registry provenance and8 tests.
+- `calculations/fe110_c2_site_supplement_20261106/gpu_independent_repair_20261107_v1/`:two immutable packages,preflight/submission/status evidence and181-row registry receipts;zero scientific results.
+
 ## C2 supplement BUCT2 replica and completion-policy clarification —2026-11-06
 
 - `docs/reviews/fe110_c2_dual_gpu_20261106.md`:native Slurm1355,byte-bound environment migration,14 guards,74 metadata rows+2 policy files;latest independent-completion preference awaits wrapper replacement approval.

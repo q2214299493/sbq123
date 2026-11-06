@@ -13,16 +13,16 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Current State
 
-## C2 supplement dual-server checkpoint — 2026-11-06
+## C2 supplement independent GPU repair — 2026-11-07
 
-Canonical work queued identical12 FT512 seeds onMZ73 Slurm11396 andBUCT2 Slurm1355;
-both latest native observations are PENDING/Unknown start,no GPU optimization.
-BUCT2 archive/native CPU preflight passed,74 submission metadata rows+2 policy
-files read back,zero scientific/Excel results. User clarified independent
-completion,not first-start cancellation:local arbiter35984 stopped,no remote
-cancellation or permit. Explicit approval is pending before replacing both
-queued wrappers to fix11396 direct-only proof and remove1355 permit wait.
-See `docs/reviews/fe110_c2_dual_gpu_20261106.md`.
+Canonical work independently queued the same12 FT512 seeds as MZ73 Slurm11721
+and BUCT2 Slurm1357;latest native observations PENDING(Resources),no new model
+optimization. Old11396 failed in GPU precheck;obsolete1355 confirmed CANCELLED,
+all files retained. New wrappers use actual CUDA0 physical PCI/UUID and native
+model proof,no first-start permit. MZ73 allocated CUDA test11720 and both native
+CPU/input preflights passed;BUCT2 actual CUDA/model execution still unverified.
+Registry181 provenance rows+2 terminal workflow changes verified,zero scientific
+results. No VASP/training/promotion. See `docs/reviews/fe110_c2_gpu_device_repair_20261107.md`.
 
 ## C2 supplement GPU submission — 2026-11-06
 
