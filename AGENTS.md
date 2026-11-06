@@ -44,6 +44,14 @@ force convergence, geometry validity, and scientific validity.
 
 ## Scientific Boundaries
 
+- User instruction (2026-11-06): future adsorption screening must first review
+  three chemically plausible, non-equivalent adsorption-site/binding modes per
+  species. Height, tilt or azimuth changes at one unchanged anchoring site do
+  not satisfy this requirement. Report a shortfall before any partial batch;
+  never pad with implausible sites or call three starting modes three stable
+  minima. Track motif identity before and after ML; ML migration/dissociation
+  cannot by itself remove a required original motif from DFT review. This does
+  not authorize new jobs or reruns of already covered historical modes.
 - Backend roles and handoffs are authoritative only in
   `configs/execution_backends.yaml`.
 - Use `BUCT(sbq)` / host `MZ73` only for AQCat25 GPU inference, adsorption

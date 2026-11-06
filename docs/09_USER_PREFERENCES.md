@@ -81,6 +81,26 @@ Batch `MM-001` completed on 2026-06-23. Current project files remain authoritati
 | `UP-038` | Automatic registry completion | When a VASP adsorption or coadsorption relaxation reaches normal termination and passes electronic convergence, ionic/force convergence, compatibility, and chemistry-aware final-geometry review, register its scheduler evidence, final structure/output files, compatible final `OUTCAR` `TOTEN`, final movable-atom force, and acceptance review in `data/project_registry.sqlite3` during the same completion workflow. This append-only, idempotent registration needs no separate user reminder or approval. Failed, incomplete, incompatible, duplicate, or unreviewed states must retain their truthful status and must not be registered as accepted results. Absolute adsorption energy and Excel promotion remain separate reference-completeness gates. | User instruction, 2026-08-26 | Active |
 | `UP-039` | GPU TS failure routing | After a GPU TS/path failure, present both the active-learning diagnostic route and the direct VASP path/refinement route before selecting the next method. When a hash-bound, geometry-valid last-valid/failure-boundary pair satisfies the active-learning entry gate, prefer exact-structure MatRIS/AQCat25/VASP error diagnosis before VASP micro-NEB or Dimer. If MatRIS exceeds the registered VASP-error ceilings, prepare replay fine-tuning and a new-checkpoint full-path rerun; if it passes, retain the checkpoint and choose path repair or local VASP micro-NEB. This preference does not authorize automatic GPU, VASP, fine-tuning, rerun, or Dimer submission. | User instruction, 2026-09-01 | Active |
 
+### UP-040 — Adsorption site diversity (2026-11-06)
+
+- Status: `Active`; source: explicit user instruction in this chat; migration
+  batch: not applicable (new instruction); last verified: 2026-11-06.
+- Scope: future adsorption candidate preparation and pre-submission review.
+  Review three chemically plausible, non-equivalent adsorption-site/binding
+  modes per exact species/isomer. Same-site height, tilt or azimuth variants
+  do not count as three modes. Record binding atoms, denticity, clean-surface
+  site/contact pattern and surface-symmetry equivalence, not just A/B/C labels.
+- If fewer than three justified modes can be found, report the missing coverage
+  and obtain direction before a partial submission; do not silently submit a
+  one-site batch, invent stability, or pad with chemically implausible placements.
+  Whitelist-first provenance and reviewed exploratory-candidate rules remain.
+- ML convergence to one site, or predicted dissociation, is not DFT evidence
+  that the original required mode is unstable. Preserve original-mode coverage
+  for review; do not automatically submit duplicated ML endpoints.
+- This supersedes counting orientation-only variants as the requested three
+  adsorption modes. It does not alter DFT settings, require three distinct final
+  minima, invalidate historical accepted results, or authorize extra calculations.
+
 ## Required Record Format
 
 Each accepted preference must include:

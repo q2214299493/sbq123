@@ -13,6 +13,19 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Decisions Log
 
+## 2026-11-06 — Three distinct adsorption modes before future submissions
+
+- User explicitly requires three different adsorption-site/binding modes per
+  species, not three orientations/heights at one anchoring site. Apply this at
+  future candidate review and before submission; track original and post-ML
+  modes separately and suppress duplicate endpoints, not untested original modes.
+- If evidence/chemical feasibility cannot justify three, report the shortfall
+  before submitting a smaller set. No implausible fixed-site sweep, fabricated
+  stable-state count, automatic jobs or blanket historical reruns are authorized.
+- Durable preference: `UP-040` in `docs/09_USER_PREFERENCES.md`; startup rule in
+  `AGENTS.md`. This is a workflow-review requirement, not a new scientific
+  acceptance threshold or a claim of an implemented automatic submission gate.
+
 ## 2026-09-05 - Add Sella to the current MatRIS candidate loop
 
 - User requested Sella integration and comparison with the current workflow.
