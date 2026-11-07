@@ -89,6 +89,8 @@ def test_preflight_accepts_c2ho_h_endpoint_composition(tmp_path: Path) -> None:
 
 
 @pytest.mark.parametrize("symbols,counts", [
+    ("Fe C O H", "45 2 1 1"),
+    ("Fe O C H", "45 1 2 1"),
     ("Fe C O H", "45 2 1 4"),
     ("Fe C H", "45 2 6"),
     ("Fe C H", "45 2 3"),

@@ -13,16 +13,17 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Current State
 
-## C2 supplement independent GPU repair — 2026-11-07
+## C2 supplement VASP10 submission — 2026-11-07
 
-Canonical work independently queued the same12 FT512 seeds as MZ73 Slurm11721
-and BUCT2 Slurm1357;latest native observations PENDING(Resources),no new model
-optimization. Old11396 failed in GPU precheck;obsolete1355 confirmed CANCELLED,
-all files retained. New wrappers use actual CUDA0 physical PCI/UUID and native
-model proof,no first-start permit. MZ73 allocated CUDA test11720 and both native
-CPU/input preflights passed;BUCT2 actual CUDA/model execution still unverified.
-Registry181 provenance rows+2 terminal workflow changes verified,zero scientific
-results. No VASP/training/promotion. See `docs/reviews/fe110_c2_gpu_device_repair_20261107.md`.
+MZ73 GPU11721 completed;11 ML force thresholds reached but06_S1/09_S1 fragmented,
+06_S2 reached80 steps. Work reviewed all12 trajectories and schema-v2 returns.
+Latest user scope submitted9 intact ML starts+06_S2 original as9963756–9963765;
+11:59 CST native checkpoint4RUN/6PEND,32MPI/32pernode/NSW300,unchanged production.
+06_S1/09_S1 explicitly omitted,all originals/outputs retained;their modes not
+DFT-covered. Registry120 input+160 submission metadata rows and10 workflow changes
+read back,zero scientific/Excel results. No newGPU/training/pilot/retry;BUCT2 not
+modified. Next:check these10 native VASP sources,not equate ML or queue state
+with DFT convergence. See `docs/reviews/fe110_c2_supplement_vasp_20261107.md`.
 
 ## C2 supplement GPU submission — 2026-11-06
 

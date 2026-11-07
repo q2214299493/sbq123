@@ -13,6 +13,13 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## C2 supplement VASP10 submission —2026-11-07
+
+- `docs/reviews/fe110_c2_supplement_vasp_20261107.md`:nine intact ML starts+06_S2 original,native9963756–9963765,4RUN/6PEND,registry280 metadata rows;zero energy results.
+- `docs/reviews/fe110_c2_supplement_vasp_20261107_user_authorization.md`:latest ten-job scope,explicit06_S1/09_S1 omission and frozen budget.
+- `calculations/fe110_c2_site_supplement_20261106/vasp_handoff_20261107_v1/`:53 raw GPU artifacts,12 returns,selection reviews,10 input/gate/submission bundles and registry receipts.
+- `archive/fe110_c2_supplement_vasp_20261107/`:bounded collection/review,canonical builder/executor adapter,registration and scope tests.
+
 ## C2 GPU physical-device repair and independent replacements —2026-11-07
 
 - `docs/reviews/fe110_c2_gpu_device_repair_20261107.md`:11721/1357,native old failure/cancellation,allocated CUDA test and unchanged scientific scope.

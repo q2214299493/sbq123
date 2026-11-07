@@ -87,6 +87,8 @@ def preflight(workdir: Path, *, profile_path: Path = DEFAULT_PROFILE, cores: int
     errors.extend(stage_errors)
     structure = read_poscar(workdir / "POSCAR")
     allowed_compositions = {
+        (("Fe", "C", "O", "H"), (45, 2, 1, 1)),
+        (("Fe", "O", "C", "H"), (45, 1, 2, 1)),
         (("Fe", "C", "O", "H"), (45, 2, 1, 4)),
         (("Fe", "C", "H"), (45, 2, 6)),
         (("Fe", "C", "H"), (45, 1, 1)),

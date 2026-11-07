@@ -18,12 +18,14 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 - `E-20261104-GPU-NVML`:both hosts deny login NVIDIA device opens withEPERM via
   `user-1024.slice DevicePolicy=closed`,from`90-slurm-login-guard.conf`;driver/NVML
   versions match. No administrator setting was changed;use legitimate allocation.
-- `E-20261106-SLURM-DEVICE-PROOF`:2026-11-07 replacements11721/1357 use CUDA physical
-  PCI/UUID and native model proof,no obsolete permit. Old11396 failed in precheck,
-  1355 confirmed CANCELLED. MZ73 actual CUDA test passed;both production jobs queued,
-  so model execution and BUCT2 CUDA remain unverified. Follow native new jobs;
-  no structure/model accuracy conclusion follows from waiting or precheck failure.
-  See `docs/reviews/fe110_c2_gpu_device_repair_20261107.md`.
+- `E-20261106-SLURM-DEVICE-PROOF`:MZ73 replacement11721 completed on actual CUDA
+  with exit0;BUCT2 CUDA completion was not reviewed in this turn. MZ73 startup
+  repair is verified by model execution,not only the short test;this proves no
+  model accuracy or BUCT2 completion. See `docs/reviews/fe110_c2_supplement_vasp_20261107.md`.
+- `E-20261107-C2-SUPPLEMENT-ML-CHEMISTRY`:06_S1/09_S1 force convergence accompanied
+  unintended fragmentation;06_S2 fragmented and hit80 steps. Latest user omitted
+  06_S1/09_S1;06_S2 VASP uses exact original. Monitor authorized10 only;do not
+  auto-train/retry/add omitted modes or infer their original-mode DFT coverage.
 
 Only unresolved problems belong here. Resolved detail through 2026-06-27 is preserved in `archive/state_history/ERROR_LOG_through_20260627.md` and Git history.
 

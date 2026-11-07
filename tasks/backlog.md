@@ -15,17 +15,17 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 Tasks are ordered by priority and should be handled one per Codex thread.
 
-## C2 supplement independent GPU return review —2026-11-07
+## C2 supplement VASP10 checkpoint —2026-11-07
 
-- Same12 seeds/model/budgets queued independently as MZ73 Slurm11721 and BUCT2
-  Slurm1357,PENDING(Resources). Old11396 failed before optimization;obsolete1355
-  confirmed CANCELLED,files retained. No VASP/training/promotion.
-- Physical-device repair and both native CPU preflights passed;MZ73 allocated
-  CUDA test passed,BUCT2 CUDA/model execution remains unverified. No winner permit
-  or first-start cancellation;use first eligible completed result.
-- Return outputs to work for site/Fe coordination/connectivity/H assignment and
-  duplicate review before any VASP decision. Existing VASP jobs unchanged.
-- Review: `docs/reviews/fe110_c2_gpu_device_repair_20261107.md`.
+- Work-reviewed GPU11721 selected9 intact ML starts+06_S2 exact original.
+  Latest user omitted dissociated06_S1/09_S1;preserve inputs/predictions and
+  unresolved original-mode coverage,do not silently count them as DFT-reviewed.
+- VASP9963756–9963765 submitted;11:59 CST4RUN/6PEND;32MPI/32pernode/NSW300,
+  unchanged SIGMA0.20/ALGO Fast/EDIFFG-0.02. No pilot,newGPU,training or retry.
+- Next:check these10 electronic/ionic/geometry sources separately from queue
+  status. Qualified values still require owning registry/Excel gates.
+- Review: `docs/reviews/fe110_c2_supplement_vasp_20261107.md`. Existing paired
+  benchmark and BUCT2 replica were not stopped or changed by this submission.
 
 ## C2 supplement GPU return review (2026-11-06)
 
