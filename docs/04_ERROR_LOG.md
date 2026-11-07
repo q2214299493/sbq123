@@ -23,9 +23,10 @@ governance: docs/DOCUMENT_GOVERNANCE.md
   repair is verified by model execution,not only the short test;this proves no
   model accuracy or BUCT2 completion. See `docs/reviews/fe110_c2_supplement_vasp_20261107.md`.
 - `E-20261107-C2-SUPPLEMENT-ML-CHEMISTRY`:06_S1/09_S1 force convergence accompanied
-  unintended fragmentation;06_S2 fragmented and hit80 steps. Latest user omitted
-  06_S1/09_S1;06_S2 VASP uses exact original. Monitor authorized10 only;do not
-  auto-train/retry/add omitted modes or infer their original-mode DFT coverage.
+  unintended fragmentation and were omitted.06_S2 original-seed VASP also developed
+  C-O breaking trend and was user-stopped as9963758 EXIT/TERM_OWNER. All files
+  retained,no accepted intact/product minimum. Monitor other9 only;no automatic
+  restart/training/added modes. See `docs/reviews/fe110_06_S2_stopped_20261107.md`.
 
 Only unresolved problems belong here. Resolved detail through 2026-06-27 is preserved in `archive/state_history/ERROR_LOG_through_20260627.md` and Git history.
 

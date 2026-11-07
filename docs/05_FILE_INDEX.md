@@ -13,6 +13,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## 06_S2 explicit user stop —2026-11-07
+
+- `docs/reviews/fe110_06_S2_stop_authorization_20261107.md`:immutable single-job authorization,9963758 only.
+- `docs/reviews/fe110_06_S2_stopped_20261107.md`:native EXIT/TERM_OWNER,data retention,other9 untouched,no accepted energy or retry.
+- `calculations/fe110_c2_site_supplement_20261106/vasp_handoff_20261107_v1/stop_06_S2_20261107_v1/`:canonical decision/receipt,wide-format owner query,terminal proof,preserved structures/trajectory and registry receipts.
+
 ## C2 supplement VASP10 submission —2026-11-07
 
 - `docs/reviews/fe110_c2_supplement_vasp_20261107.md`:nine intact ML starts+06_S2 original,native9963756–9963765,4RUN/6PEND,registry280 metadata rows;zero energy results.

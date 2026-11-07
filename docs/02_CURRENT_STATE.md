@@ -17,13 +17,15 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 MZ73 GPU11721 completed;11 ML force thresholds reached but06_S1/09_S1 fragmented,
 06_S2 reached80 steps. Work reviewed all12 trajectories and schema-v2 returns.
-Latest user scope submitted9 intact ML starts+06_S2 original as9963756–9963765;
-11:59 CST native checkpoint4RUN/6PEND,32MPI/32pernode/NSW300,unchanged production.
+Batch submitted9 intact ML starts+06_S2 original as9963756–9963765. User then
+stopped06_S2/9963758;native EXIT/TERM_OWNER confirmed,all inputs/outputs retained,
+not a converged intact/product result. Other9 jobs4RUN/5PEND at stop check,
+32MPI/32pernode/NSW300,unchanged production,no other job modified.
 06_S1/09_S1 explicitly omitted,all originals/outputs retained;their modes not
 DFT-covered. Registry120 input+160 submission metadata rows and10 workflow changes
 read back,zero scientific/Excel results. No newGPU/training/pilot/retry;BUCT2 not
-modified. Next:check these10 native VASP sources,not equate ML or queue state
-with DFT convergence. See `docs/reviews/fe110_c2_supplement_vasp_20261107.md`.
+modified. Next:check remaining9;no automatic06_S2 continuation/retry/training.
+See `docs/reviews/fe110_06_S2_stopped_20261107.md`.
 
 ## C2 supplement GPU submission — 2026-11-06
 

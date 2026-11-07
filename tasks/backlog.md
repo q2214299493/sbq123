@@ -22,9 +22,11 @@ Tasks are ordered by priority and should be handled one per Codex thread.
   unresolved original-mode coverage,do not silently count them as DFT-reviewed.
 - VASP9963756–9963765 submitted;11:59 CST4RUN/6PEND;32MPI/32pernode/NSW300,
   unchanged SIGMA0.20/ALGO Fast/EDIFFG-0.02. No pilot,newGPU,training or retry.
-- Next:check these10 electronic/ionic/geometry sources separately from queue
-  status. Qualified values still require owning registry/Excel gates.
-- Review: `docs/reviews/fe110_c2_supplement_vasp_20261107.md`. Existing paired
+- User stopped06_S2/9963758 for C-O breaking trend;native EXIT/TERM_OWNER,
+  all files retained,not an accepted intact/product minimum. Other9 jobs4RUN/5PEND.
+- Next:check remaining9 electronic/ionic/geometry sources;no automatic06_S2
+  continuation/retry/training. Qualified values still require registry/Excel gates.
+- Review: `docs/reviews/fe110_06_S2_stopped_20261107.md`. Existing paired
   benchmark and BUCT2 replica were not stopped or changed by this submission.
 
 ## C2 supplement GPU return review (2026-11-06)
