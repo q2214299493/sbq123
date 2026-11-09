@@ -15,6 +15,22 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 Tasks are ordered by priority and should be handled one per Codex thread.
 
+## CH* + CO* to CH-C-O* TS preparation (2026-11-09)
+
+- Current user request: C-C coupling/CO insertion, not H transfer or another C2HO isomer.
+- Reuse accepted CH+CO IS9839757 and intact CH-C-O FS9842136; both full source
+  hashes and SIGMA0.20 compatibility verified. No new endpoint relaxation.
+- Seven-frame candidate (five internal) prepared in
+  calculations/fe110_ch_co_to_chco_ts_20261109/review_ready_v2/;
+  full-slab symmetry mapping, C-C alignment waypoint and segmented IDPP.
+- Numeric geometry PASS and VTST dist/movie reviewed; human path review remains
+  pending. Midpath ~1.68A Fe-C contacts and CO coordination/2.03A displacement
+  warnings retained. No barrier, TS acceptance, GPU/VASP submission or training.
+- Next: user reviews docs/reviews/fe110_ch_co_ts_path_preparation_20261109.md
+  and separately authorizes a hash-bound GPU path request; resources/model
+  fingerprints must be freshly checked before binding.
+- Existing adsorption jobs and the unrelated paired benchmark are untouched.
+
 ## C2 supplement VASP10 checkpoint —2026-11-07
 
 - Work-reviewed GPU11721 selected9 intact ML starts+06_S2 exact original.

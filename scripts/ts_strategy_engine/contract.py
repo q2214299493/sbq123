@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 from typing import Any
 
@@ -48,7 +49,11 @@ REQUIRED_FIELDS = (
 def load_contract(path: Path) -> dict[str, Any]:
     if not path.is_file():
         raise ValueError(f"reaction contract not found: {path}")
-    payload = yaml.safe_load(path.read_text(encoding="utf-8"))
+    text = path.read_text(encoding="utf-8")
+    try:
+        payload = json.loads(text)
+    except json.JSONDecodeError:
+        payload = yaml.safe_load(text)
     if not isinstance(payload, dict):
         raise ValueError("reaction contract must be a JSON/YAML object")
     return normalize_contract(payload)
@@ -178,7 +183,10 @@ def _normalize_compatibility(value: Any) -> dict[str, Any]:
     missing_compatibility = [field for field in COMPATIBILITY_FIELDS if field not in value]
     if missing_compatibility:
         raise ValueError("missing compatibility fields: " + ", ".join(missing_compatibility))
-    normalized = {field: value[field] for field in COMPATIBILITY_FIELDS}
+    # Registry fingerprints bind the complete compatibility record. Dropping
+    # slab/source/DFT metadata here makes identical registered endpoints fail
+    # the evidence gate and hides changes to those extra scientific fields.
+    normalized = dict(value)
     if not isinstance(value["kmesh"], (list, tuple)):
         raise ValueError("compatibility.kmesh must be a three-integer sequence")
     normalized["kmesh"] = [integer_number(item, "compatibility.kmesh", positive=True) for item in value["kmesh"]]
@@ -186,7 +194,10 @@ def _normalize_compatibility(value: Any) -> dict[str, Any]:
         raise ValueError("compatibility.kmesh must contain three integers")
     normalized["encut_ev"] = finite_number(value["encut_ev"], "compatibility.encut_ev", positive=True)
     for field in set(COMPATIBILITY_FIELDS) - {"encut_ev", "kmesh"}:
-        normalized[field] = _nonempty_text(normalized[field], f"compatibility.{field}").lower()
+        text = _nonempty_text(normalized[field], f"compatibility.{field}")
+        # These are registered scientific labels (including element symbols),
+        # not case-insensitive method keywords. Preserve their revision identity.
+        normalized[field] = text if field in {"coverage", "magnetic_state"} else text.lower()
     present = set(FINAL_ENERGY_COMPATIBILITY_FIELDS) & set(value)
     if present and present != set(FINAL_ENERGY_COMPATIBILITY_FIELDS):
         missing = sorted(set(FINAL_ENERGY_COMPATIBILITY_FIELDS) - present)
