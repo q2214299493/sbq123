@@ -1679,3 +1679,9 @@ Human latest提交 authorizesexactprepared3C2relaxations,32ranks/max300steps/0.0
 ### 2026-10-29 C2 two-control cancellation and three-structure comparison
 
 User explicitly cancelled only9926805direct and9926806NequiP,then requested all3laststructures andconformationcomparison.Two current hash-bound STOP_JOBgates andnativeexecutor receipts,LSFEXIT/EXITconfirmed;9926807FTremainsDONE.Alloutputsretained,norestart/resubmit/delete,otherjobsuntouched.Direct75steps/1497completeSCF+16interrupted/fmax0.401579;NequiP93/1212+6/0.061108;FT69/586/0.0183064.ThreeoriginalCONTCARreturned/hashverified,bothstoppedcoordinate-forcechecksPASS;allC2H3connectivityandmainFebindingneighborsretained.36cleanslabsymmetries+sameelementpermutations:FT-relativeadsRMSDdirect0.244716/NequiP0.209133A;movableFe0.119203/0.012686A.Geometrydiffersbutdifferentconvergedminimanotestablished;2stoppedcontrolsarecensored,notfinalconvergedbenchmarks.Registryexactplan3e1b1d9e...reviewed/applied23INSERT+3workflowchanges,allreadbacks/0scientificresults.EXITmaps toexistingworkflowfailedwith explicitUSER_REQUESTED_CANCELLATIONnotes,notSCFfailure.Nofulltrajectoryacceptanceormodelpromotion.Evidence:docs/reviews/fe110_c2_three_arm_stop_20261029/README.md.
+
+
+## 2026-11-09 - C3 low-force dataset admission
+
+- Under the explicit user request for a separate admission decision, all 24 job 9924387 low-force candidates are approved for the next training partition only; prospective 536/78/53 plus 16 observed-heldout quarantine. Preserve family_0099 lineage and mark step 15 as an early process frame. No assembly, training, model promotion or formal adsorption acceptance. Original 512 and candidate packages remain frozen.
+- Bound evidence and decision: calculations/fe110_reico_pilot300_20261022/c3_lowforce_admission_20261109_v1/; rationale: docs/reviews/fe110_c3_lowforce_admission_20261109/README.md.
