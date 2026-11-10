@@ -522,7 +522,8 @@ def _load_calculator(backend: str, checkpoint: Path, device: str):
         from fairchem.core.models.equiformer_v2 import equiformer_v2_film  # noqa: F401
 
         return patched_calc(
-            checkpoint_path=str(checkpoint), is_spin_off=False, is_low_fi=False
+            checkpoint_path=str(checkpoint), is_spin_off=False, is_low_fi=False,
+            cpu=device == "cpu",
         )
     if backend == "matris":
         import torch

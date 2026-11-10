@@ -15,35 +15,36 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 Tasks are ordered by priority and should be handled one per Codex thread.
 
-## CH* + CO* to CH-C-O* TS preparation (2026-11-09)
+## CH* + CO* to CH-C-O* ordinary NEB (2026-11-10)
 
 - Current user request: C-C coupling/CO insertion, not H transfer or another C2HO isomer.
 - Reuse accepted CH+CO IS9839757 and intact CH-C-O FS9842136; both full source
   hashes and SIGMA0.20 compatibility verified. No new endpoint relaxation.
-- Seven-frame candidate (five internal) prepared in
-  calculations/fe110_ch_co_to_chco_ts_20261109/review_ready_v2/;
-  full-slab symmetry mapping, C-C alignment waypoint and segmented IDPP.
-- Numeric geometry PASS and VTST dist/movie reviewed; human path review remains
-  pending. Midpath ~1.68A Fe-C contacts and CO coordination/2.03A displacement
-  warnings retained. No barrier, TS acceptance, GPU/VASP submission or training.
-- Next: user reviews docs/reviews/fe110_ch_co_ts_path_preparation_20261109.md
-  and separately authorizes a hash-bound GPU path request; resources/model
-  fingerprints must be freshly checked before binding.
+- GPU12405 MatRIS primary converged60steps;AQCat audit stopped at device guard.
+  Explicit CPU/CUDA flag fixed;12406 exact seven-image CUDA audit completed17s,
+  zero optimization/training steps.Both native job outcomes remain distinct.
+- Returned path reviewed in work;one local full-atom IDPP point fills the C-C
+  sampling gap.Eight total/six internal images;geometry/VTST views reviewed.
+- Canonical ordinary NEB9994246 submitted96MPI/32pernode,no pilot,unchanged
+  SIGMA0.20/ALGO Fast.Initial native PEND,no ionic result or accepted TS/barrier.
+- Next:requested9994246 checkpoint;no CI/Dimer/frequency/retry authority.
+  Review:docs/reviews/fe110_c2_closeout_chco_submission_20261110.md.
 - Existing adsorption jobs and the unrelated paired benchmark are untouched.
 
-## C2 supplement VASP10 checkpoint —2026-11-07
+## C2 supplement VASP10 closed review —2026-11-10
 
 - Work-reviewed GPU11721 selected9 intact ML starts+06_S2 exact original.
   Latest user omitted dissociated06_S1/09_S1;preserve inputs/predictions and
   unresolved original-mode coverage,do not silently count them as DFT-reviewed.
-- VASP9963756–9963765 submitted;11:59 CST4RUN/6PEND;32MPI/32pernode/NSW300,
-  unchanged SIGMA0.20/ALGO Fast/EDIFFG-0.02. No pilot,newGPU,training or retry.
-- User stopped06_S2/9963758 for C-O breaking trend;native EXIT/TERM_OWNER,
-  all files retained,not an accepted intact/product minimum. Other9 jobs4RUN/5PEND.
-- Next:check remaining9 electronic/ionic/geometry sources;no automatic06_S2
-  continuation/retry/training. Qualified values still require registry/Excel gates.
-- Review: `docs/reviews/fe110_06_S2_stopped_20261107.md`. Existing paired
-  benchmark and BUCT2 replica were not stopped or changed by this submission.
+- All ten sources hash-checked;five unique accepted/three duplicates,06_S2
+  user-stopped and18_S1 NSW300/fmax0.07720 with surface dehydrogenation.
+- Explicit user exception accepts05_S2/07_S1/12_S1 from complete VASP evidence;
+  expired scheduler history remains UNKNOWN,not fabricated DONE.
+- Five compatible TOTEN rows76-80 published;Eads references remain missing.
+  Three duplicates/two ineligible sources retained as nonnumeric status rows.
+  Registry and saved workbook readback passed.No rerun/training authorized.
+- Review:`docs/reviews/fe110_c2_closeout_chco_submission_20261110.md`.
+  Paired benchmark and BUCT2 replica unchanged.
 
 ## C2 supplement GPU return review (2026-11-06)
 

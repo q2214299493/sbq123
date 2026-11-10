@@ -13,19 +13,24 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Current State
 
-## C2 supplement VASP10 submission — 2026-11-07
+## C2 supplement closeout and CH+CO NEB — 2026-11-10
 
-MZ73 GPU11721 completed;11 ML force thresholds reached but06_S1/09_S1 fragmented,
-06_S2 reached80 steps. Work reviewed all12 trajectories and schema-v2 returns.
-Batch submitted9 intact ML starts+06_S2 original as9963756–9963765. User then
-stopped06_S2/9963758;native EXIT/TERM_OWNER confirmed,all inputs/outputs retained,
-not a converged intact/product result. Other9 jobs4RUN/5PEND at stop check,
-32MPI/32pernode/NSW300,unchanged production,no other job modified.
-06_S1/09_S1 explicitly omitted,all originals/outputs retained;their modes not
-DFT-covered. Registry120 input+160 submission metadata rows and10 workflow changes
-read back,zero scientific/Excel results. No newGPU/training/pilot/retry;BUCT2 not
-modified. Next:check remaining9;no automatic06_S2 continuation/retry/training.
-See `docs/reviews/fe110_06_S2_stopped_20261107.md`.
+LAST_RECORDED_OBSERVATION from the canonical work checkout:ten adsorption sources
+reviewed,five unique accepted/three duplicates/06_S2 user-stopped/18_S1 unfinished
+surface-H product.Five compatible TOTEN rows76-80 published;numeric Eads remains
+unavailable.Three expired LSF histories retain UNKNOWN under exact user exception.
+166 scientific registry rows/12 workflow changes and780 pre-existing workbook
+cells independently checked;no adsorption rerun or model promotion.
+
+CH+CO GPU12405 primary MatRIS path converged60steps;secondary device guard failed.
+Explicit AQCat CPU/CUDA selector fixed;12406 same-seven-image CUDA audit completed
+17s,zero optimization/training steps.Work reviewed returned path and inserted
+one local full-atom IDPP point in C-C gap.VASP ordinary NEB9994246 submitted,
+six internal images,96MPI/32pernode,no pilot;initial native PEND,no ionic results
+or accepted TS/barrier.Three actual jobs recorded as60 metadata rows and read back.
+BUCT2 and the paired benchmark were not changed.Next:requested9994246 checkpoint;
+no automatic retry/CI/Dimer/frequency.
+See `docs/reviews/fe110_c2_closeout_chco_submission_20261110.md`.
 
 ## C2 supplement GPU submission — 2026-11-06
 

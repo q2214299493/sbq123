@@ -24,9 +24,13 @@ governance: docs/DOCUMENT_GOVERNANCE.md
   model accuracy or BUCT2 completion. See `docs/reviews/fe110_c2_supplement_vasp_20261107.md`.
 - `E-20261107-C2-SUPPLEMENT-ML-CHEMISTRY`:06_S1/09_S1 force convergence accompanied
   unintended fragmentation and were omitted.06_S2 original-seed VASP also developed
-  C-O breaking trend and was user-stopped as9963758 EXIT/TERM_OWNER. All files
-  retained,no accepted intact/product minimum. Monitor other9 only;no automatic
-  restart/training/added modes. See `docs/reviews/fe110_06_S2_stopped_20261107.md`.
+  C-O breaking trend and was user-stopped as9963758 EXIT/TERM_OWNER. Ten-job
+  review is now complete:five unique/three duplicate;18_S1 also changed chemistry
+  and remained0.07720eV/A after300steps.No automatic restart/training/added modes.
+  See `docs/reviews/fe110_c2_closeout_chco_submission_20261110.md`.
+- `E-20261110-C2-LSF-HISTORY`:05_S2/07_S1/12_S1 terminal history unavailable after
+  bjobs/bhist/bacct;user accepted complete hash-checked VASP evidence while queue
+  remains UNKNOWN.Missing exit/accounting history is not fabricated or a rerun reason.
 
 Only unresolved problems belong here. Resolved detail through 2026-06-27 is preserved in `archive/state_history/ERROR_LOG_through_20260627.md` and Git history.
 
@@ -67,6 +71,8 @@ Update this table in place. Move resolved items to historical results or Git his
 ## 2026-10-22 - repo-state sync classification hash conflict
 
 - Command: repo-state sync --safe-only; actual exit code1. Error: repository item changed after classification: sbq_catalyst_agent_workflow.egg-info/PKG-INFO.
+- 2026-11-10 canonical-work closeout:same classification conflict recurred on the
+  single final safe-only sync;no unchanged retry or managed-event bypass.
 - Scope: existing repository classification/source-byte mismatch; not a Fe110 geometry or scientific-validation failure. No classification event or generated package metadata was rewritten to bypass the guard.
 - Impact: managed repository-state synchronization remains incomplete. Task-owned CPU geometry files and their explicit checks are retained; source publication is reported separately.
 

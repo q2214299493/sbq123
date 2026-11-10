@@ -13,6 +13,14 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## C2 supplement closeout and CH+CO ordinary NEB —2026-11-10
+
+- `docs/reviews/fe110_c2_closeout_chco_submission_20261110.md`:five accepted/three duplicate/two ineligible adsorption results,18_S1 surface-H diagnosis,three UNKNOWN exceptions,actual GPU12405/12406 and VASP9994246.
+- `calculations/fe110_c2_site_supplement_20261106/final_review_20261110_v1/`:100 hash-checked sources,27-reference deduplication,geometry/scientific reviews and canonical registration receipts (canonical work checkout only).
+- `outputs/fe110_c2_completion_20261110_v1/`:workbook backup,five promotion receipts and saved-file verification;no numeric Eads inferred (runtime data not published).
+- `calculations/fe110_ch_co_to_chco_ts_20261109/vasp_ordinary_neb_20261110_v1/`:reviewed six-internal-image inputs,current gate and exact-once9994246 receipt (canonical work checkout).
+- `archive/fe110_c2_final_review_20261110/` and `archive/fe110_ch_co_gpu_20261110/`:bounded collection,review,publication and execution source adapters;no runtime files published.
+
 ## 06_S2 explicit user stop —2026-11-07
 
 - `docs/reviews/fe110_06_S2_stop_authorization_20261107.md`:immutable single-job authorization,9963758 only.
