@@ -13,6 +13,11 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## RSI startup-path repair —2026-11-10
+
+- `docs/reviews/rsi_startup_path_repair_20261110.md`:one-key external profile repair,old fallback rejection,current native offline protocol PASS and no-live-research boundary.
+- External runtime `C:/Users/86177/Desktop/fe110_rsi_experiments/rsi_runtime_policy_20261030/startup_preflight_20261110_v2/`:five protocol command receipts,generated schemas,entry help and exact profile-delta verification;runtime data not published.
+
 ## C2 supplement closeout and CH+CO ordinary NEB —2026-11-10
 
 - `docs/reviews/fe110_c2_closeout_chco_submission_20261110.md`:five accepted/three duplicate/two ineligible adsorption results,18_S1 surface-H diagnosis,three UNKNOWN exceptions,actual GPU12405/12406 and VASP9994246.

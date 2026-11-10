@@ -13,6 +13,15 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Current State
 
+## RSI Startup — 2026-11-10
+
+LAST_RECORDED_OBSERVATION from canonical work:external daily_profile codex path
+repaired to installed native0.167.0-alpha.3.2;only that key changed,backup retained.
+Five owner offline protocol checks and entry help passed;zero research/model or
+scientific runs,auth/permissions unchanged.Live admission/inference untested;
+application updates require revalidation.See
+`docs/reviews/rsi_startup_path_repair_20261110.md`.
+
 ## C2 supplement closeout and CH+CO NEB — 2026-11-10
 
 LAST_RECORDED_OBSERVATION from the canonical work checkout:ten adsorption sources
