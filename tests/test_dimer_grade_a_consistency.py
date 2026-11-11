@@ -98,3 +98,65 @@ def test_dimer_single_mode_review_cannot_waive_required_evidence(tmp_path, damag
     assert_not_accepted(case)
     _, decision = claim_gate(case["vfa"] / "vfa_analysis.json")
     assert "APPROVE_TS_CANDIDATE" not in decision["ALLOWED_ACTIONS"]
+
+
+@pytest.mark.parametrize("policy", [
+    {},
+    {"meaningful_imaginary_frequency_min_cm1": None, "additional_soft_mode_abs_max_cm1": None},
+])
+def test_reviewed_single_dimer_mode_allows_both_frequency_thresholds_unset(tmp_path, policy):
+    case = bound_case(tmp_path / "science")
+    payload = analyze_vfa(case["vfa"], case["contract"], case["vfa"] / "vfa_review.json", policy)
+    assert payload["grade"] == "A"
+    assert payload["kinetic_eligible"] is True
+    assert evaluate_case(case)["status"] == "TS_ACCEPTED"
+
+
+@pytest.mark.parametrize("policy", [
+    pytest.param({"meaningful_imaginary_frequency_min_cm1": 600.0}, id="meaningful_only"),
+    pytest.param({"additional_soft_mode_abs_max_cm1": 30.0}, id="soft_only"),
+    pytest.param(
+        {"meaningful_imaginary_frequency_min_cm1": 600.0, "additional_soft_mode_abs_max_cm1": None}, id="soft_null",
+    ),
+    pytest.param(
+        {"meaningful_imaginary_frequency_min_cm1": None, "additional_soft_mode_abs_max_cm1": 30.0}, id="meaningful_null",
+    ),
+    pytest.param(
+        {"meaningful_imaginary_frequency_min_cm1": 0, "additional_soft_mode_abs_max_cm1": 30.0}, id="zero",
+    ),
+    pytest.param(
+        {"meaningful_imaginary_frequency_min_cm1": 600.0, "additional_soft_mode_abs_max_cm1": -1}, id="negative",
+    ),
+    pytest.param(
+        {"meaningful_imaginary_frequency_min_cm1": True, "additional_soft_mode_abs_max_cm1": 30.0}, id="boolean_meaningful",
+    ),
+    pytest.param(
+        {"meaningful_imaginary_frequency_min_cm1": 600.0, "additional_soft_mode_abs_max_cm1": False}, id="boolean_soft",
+    ),
+    pytest.param(
+        {"meaningful_imaginary_frequency_min_cm1": "600", "additional_soft_mode_abs_max_cm1": 30.0}, id="string_meaningful",
+    ),
+    pytest.param(
+        {"meaningful_imaginary_frequency_min_cm1": 600.0, "additional_soft_mode_abs_max_cm1": "30"}, id="string_soft",
+    ),
+    pytest.param(
+        {"meaningful_imaginary_frequency_min_cm1": float("inf"), "additional_soft_mode_abs_max_cm1": 30.0}, id="infinite",
+    ),
+    pytest.param(
+        {"meaningful_imaginary_frequency_min_cm1": 600.0, "additional_soft_mode_abs_max_cm1": float("nan")}, id="nan",
+    ),
+    pytest.param(
+        {"meaningful_imaginary_frequency_min_cm1": 10**400, "additional_soft_mode_abs_max_cm1": 30.0}, id="overflowing_integer",
+    ),
+])
+def test_invalid_frequency_thresholds_cannot_reuse_reviewed_dimer_acceptance(tmp_path, policy):
+    case = bound_case(tmp_path / "science")
+    with pytest.raises(ValueError, match="frequency thresholds"):
+        analyze_vfa(case["vfa"], case["contract"], case["vfa"] / "vfa_review.json", policy, write_output=False)
+    analysis_path = case["vfa"] / "vfa_analysis.json"
+    previous = load_json_object(analysis_path)
+    assert previous["grade"] == "A"
+    write_json(analysis_path, {**previous, "frequency_policy": policy, "frequency_policy_is_default": False})
+    assert_not_accepted(case)
+    _, decision = claim_gate(analysis_path)
+    assert "APPROVE_TS_CANDIDATE" not in decision["ALLOWED_ACTIONS"]

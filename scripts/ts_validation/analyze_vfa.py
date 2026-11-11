@@ -24,11 +24,19 @@ DEFAULT_PROFILE = resource_path('configs/true_fe110_production.yaml')
 
 
 def _frequency_policy(override: dict[str, Any] | None) -> dict[str, Any]:
-    if override is not None:
-        validate_finite_tree(override, "frequency policy")
-        return override
-    profile = yaml.safe_load(DEFAULT_PROFILE.read_text(encoding="utf-8"))
-    policy = profile["transition_state"]["vfa"]["validation"]
+    policy = override
+    if policy is None:
+        profile = yaml.safe_load(DEFAULT_PROFILE.read_text(encoding="utf-8"))
+        policy = profile["transition_state"]["vfa"]["validation"]
+    thresholds = (
+        policy.get("meaningful_imaginary_frequency_min_cm1"),
+        policy.get("additional_soft_mode_abs_max_cm1"),
+    )
+    if any(value is not None for value in thresholds):
+        if any(type(value) not in (int, float) for value in thresholds):
+            raise ValueError("frequency thresholds must both be unset or finite positive numbers")
+        for value in thresholds:
+            finite_number(value, "frequency thresholds", positive=True)
     validate_finite_tree(policy, "frequency policy")
     return policy
 

@@ -76,6 +76,10 @@ thresholds are unset, the analyzer applies the reviewed single-mode rule;
 it does not invent cutoffs or resolve additional imaginary modes. Barrier
 registration still requires its separate compatible IS/TS/FS energy checks.
 
+The reviewed single-mode fallback applies only when both frequency thresholds
+are unset. Otherwise both thresholds must be finite positive numbers; partial
+or invalid settings raise a configuration error and cannot authorize a TS.
+
 The machine-readable stage policy is `configs/ts_validation_pipeline.yaml`.
 The evaluator is resumable and reports one `status` and one `next_action`; file
 existence alone cannot advance a stage.
