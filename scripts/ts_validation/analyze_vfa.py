@@ -24,11 +24,19 @@ DEFAULT_PROFILE = resource_path('configs/true_fe110_production.yaml')
 
 
 def _frequency_policy(override: dict[str, Any] | None) -> dict[str, Any]:
-    if override is not None:
-        validate_finite_tree(override, "frequency policy")
-        return override
-    profile = yaml.safe_load(DEFAULT_PROFILE.read_text(encoding="utf-8"))
-    policy = profile["transition_state"]["vfa"]["validation"]
+    policy = override
+    if policy is None:
+        profile = yaml.safe_load(DEFAULT_PROFILE.read_text(encoding="utf-8"))
+        policy = profile["transition_state"]["vfa"]["validation"]
+    thresholds = (
+        policy.get("meaningful_imaginary_frequency_min_cm1"),
+        policy.get("additional_soft_mode_abs_max_cm1"),
+    )
+    if any(value is not None for value in thresholds):
+        if any(type(value) not in (int, float) for value in thresholds):
+            raise ValueError("frequency thresholds must both be unset or finite positive numbers")
+        for value in thresholds:
+            finite_number(value, "frequency thresholds", positive=True)
     validate_finite_tree(policy, "frequency policy")
     return policy
 
@@ -378,7 +386,16 @@ def analyze_vfa(
             or handoff.get("_dimer_technical_acceptance") is True
         )
     )
-    common_evidence = bool(review_evidence and thresholds_configured and principal_meaningful)
+    reviewed_single_dimer_mode = bool(
+        source_method == "dimer"
+        and not thresholds_configured
+        and review_evidence
+        and len(imaginary) == 1
+        and review.get("status") == "accepted"
+    )
+    common_evidence = bool(
+        review_evidence and ((thresholds_configured and principal_meaningful) or reviewed_single_dimer_mode)
+    )
     connectivity_evidence = bool(
         connectivity.get("status") == "PASS"
         and connectivity.get("grade_a_connectivity_eligible") is True
@@ -413,10 +430,12 @@ def analyze_vfa(
     )
     if not text or not modes or not normal_completion:
         grade = "Ungraded"
-    elif not thresholds_configured:
+    elif not thresholds_configured and not reviewed_single_dimer_mode:
         grade = "Ungraded"
     elif review and review.get("status") == "rejected":
         grade = "C"
+    elif reviewed_single_dimer_mode and grade_a_review:
+        grade = "A"
     elif len(significant_imaginary) == 0 and not unresolved_imaginary:
         grade = "C"
     elif len(significant_imaginary) > 1:
@@ -605,6 +624,8 @@ def validate_dimer_vfa_binding(
         raise ValueError("VFA review identity, scientific scope or acceptance is incomplete")
     if current_vfa != {key: value for key, value in vfa.items() if key != "barrier_claim"}:
         raise ValueError("VFA summary differs from its current frequency/review evidence")
+    if current_vfa["grade"] != "A" or current_vfa["kinetic_eligible"] is not True:
+        raise ValueError("current DIMER/VFA scientific evidence is not Grade A")
     sources = [Path(item["path"]) for payload in (dimer, vfa) for item in payload["source_files"]]
     return contract, [*sources, handoff_path, dimer_path, final]
 

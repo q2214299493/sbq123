@@ -90,7 +90,8 @@ def test_pipeline_accepts_current_matching_chain_without_optional_topology(tmp_p
     assert result["status"] == "TS_ACCEPTED"
     assert result["scientifically_validated_ts"] is True
     assert result["connectivity_required"] is False
-    assert result["optional_vfa_grade"] == "NOT_EVALUATED"
+    assert result["optional_vfa_grade"] == "A"
+    assert result["kinetic_eligible"] is True
 
 
 def test_pipeline_cannot_combine_independently_valid_dimer_and_vfa(tmp_path):

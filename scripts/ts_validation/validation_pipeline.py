@@ -91,7 +91,7 @@ def evaluate_validation_pipeline(
             status, next_action, [*reasons, *gate_reasons], source_paths, output
         )
     if not thresholds_configured:
-        reasons.append("FREQUENCY_THRESHOLDS_UNSET_OPTIONAL_CLASSIFICATION_NOT_RUN")
+        reasons.append("FREQUENCY_THRESHOLDS_UNSET_REVIEWED_SINGLE_MODE_RULE")
     if not _dimer_final_validation_eligible(dimer, dimer_review):
         return _result(
             "DIMER_FREQUENCY_COMPLETE_SOFT_REVIEW_REQUIRED",
@@ -130,6 +130,8 @@ def evaluate_validation_pipeline(
         output,
         scientifically_validated_ts=True,
         frequency_validation_passed=True,
+        vfa_grade=vfa["grade"],
+        kinetic_eligible=vfa["kinetic_eligible"],
     )
 
 
@@ -347,6 +349,8 @@ def _result(
     *,
     scientifically_validated_ts: bool = False,
     frequency_validation_passed: bool = False,
+    vfa_grade: str | None = None,
+    kinetic_eligible: bool = False,
 ) -> dict[str, Any]:
     payload = {
         "schema_version": 1,
@@ -360,8 +364,9 @@ def _result(
         "validation_basis": "DIMER_CONVERGENCE_AND_VIBRATIONAL_FREQUENCY",
         "scientifically_validated_ts": scientifically_validated_ts,
         "frequency_validation_passed": frequency_validation_passed,
-        "final_grade_requires_vfa_analyzer": False,
-        "optional_vfa_grade": "NOT_EVALUATED",
+        "final_grade_requires_vfa_analyzer": True,
+        "optional_vfa_grade": vfa_grade or "NOT_EVALUATED",
+        "kinetic_eligible": kinetic_eligible,
         "submission_executor": "scripts.neb_agent.submission",
     }
     if output:
