@@ -31,7 +31,9 @@ Determine whether a NEB/CI-NEB/DIMER candidate is a first-order saddle for the i
 5. Assign the principal mode to the intended bond-breaking/forming motion.
 6. For DIMER-derived candidates, accept the TS after DIMER convergence and one
    accepted target imaginary mode. Bidirectional downhill connectivity and
-   A/B/C grading are not DIMER acceptance requirements.
+   a separate manual A/B/C classification stage are not DIMER acceptance
+   requirements. The analyzer derives Grade A from the reviewed single-mode
+   evidence for registration under `docs/10_TS_VALIDATION_PROTOCOL.md`.
 7. Register the validation evidence, then compute a barrier only from
    compatible accepted IS/TS/FS final `OUTCAR` `TOTEN` records. For the active
    Fe(110) branch these use `ISMEAR=1`, `SIGMA=0.20 eV`; no extra single-point
@@ -55,8 +57,9 @@ existing execution gate and `scripts.neb_agent.submission` executor:
 3. require a complete VFA with exactly one raw imaginary mode, an identified
    principal mode, reaction-atom overlap, accepted mode assignment, and passed
    TS geometry review;
-4. record the accepted TS result. Optional classification output may remain
-   `NOT_EVALUATED`; it does not block DIMER TS acceptance.
+4. record the accepted TS result only after the current VFA analyzer returns
+   Grade A and kinetic eligibility. The pipeline reports the same grade and
+   eligibility; no extra manual classification is required.
 
 Two distinct rules must not be conflated:
 
@@ -68,8 +71,10 @@ Two distinct rules must not be conflated:
   correct local reaction definition.
 
 A complete DIMER/frequency result with an accepted target mode is recorded as
-`TS_ACCEPTED`. Numerical frequency thresholds are not invented and optional
-classification remains `NOT_EVALUATED` when they are unset.
+`TS_ACCEPTED` with Grade A and kinetic eligibility. When numerical frequency
+thresholds are unset, the analyzer applies the reviewed single-mode rule;
+it does not invent cutoffs or resolve additional imaginary modes. Barrier
+registration still requires its separate compatible IS/TS/FS energy checks.
 
 The machine-readable stage policy is `configs/ts_validation_pipeline.yaml`.
 The evaluator is resumable and reports one `status` and one `next_action`; file

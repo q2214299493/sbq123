@@ -165,7 +165,8 @@ def test_frequency_thresholds_do_not_block_dimer_ts_acceptance(
     assert result["connectivity_validated"] is False
     assert result["scientifically_validated_ts"] is True
     assert result["next_action"] == "RECORD_TS_RESULT"
-    assert result["optional_vfa_grade"] == "NOT_EVALUATED"
+    assert result["optional_vfa_grade"] == "A"
+    assert result["kinetic_eligible"] is True
 
 
 def test_multiple_ts_candidates_require_a_converged_intermediate(tmp_path: Path) -> None:

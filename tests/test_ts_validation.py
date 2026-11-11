@@ -629,7 +629,7 @@ def test_dimer_vfa_grade_a_does_not_require_bidirectional_connectivity(tmp_path:
         "meaningful_imaginary_frequency_min_cm1": 50.0,
         "additional_soft_mode_abs_max_cm1": 30.0,
     }
-    assert analyze_vfa(tmp_path, contract, review)["grade"] == "Ungraded"
+    assert analyze_vfa(tmp_path, contract, review)["grade"] == "A"
     analysis = analyze_vfa(tmp_path, contract, review, frequency_policy)
     assert analysis["grade"] == "A"
     assert analysis["connectivity_required"] is False
