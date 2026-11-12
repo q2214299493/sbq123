@@ -13,14 +13,13 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Current State
 
-## RSI Startup — 2026-11-10
+## RSI Startup — 2026-11-12
 
-LAST_RECORDED_OBSERVATION from canonical work:external daily_profile codex path
-repaired to installed native0.167.0-alpha.3.2;only that key changed,backup retained.
-Five owner offline protocol checks and entry help passed;zero research/model or
-scientific runs,auth/permissions unchanged.Live admission/inference untested;
-application updates require revalidation.See
-`docs/reviews/rsi_startup_path_repair_20261110.md`.
+LAST_RECORDED_OBSERVATION from canonical work:Nov10 offline preflight passed,
+but today's real local-triad review cannot find the configured native binary;
+BLOCKED at admission,0model turns/actions.No retry/profile/auth/permission change.
+Local scientific review is independent;separate path/resolver repair if requested.
+See `docs/reviews/chco_local_triad_review_20261112.md`.
 
 ## C2 supplement closeout and CH+CO NEB — 2026-11-10
 
@@ -31,15 +30,14 @@ unavailable.Three expired LSF histories retain UNKNOWN under exact user exceptio
 166 scientific registry rows/12 workflow changes and780 pre-existing workbook
 cells independently checked;no adsorption rerun or model promotion.
 
-CH+CO GPU12405 primary MatRIS path converged60steps;secondary device guard failed.
-Explicit AQCat CPU/CUDA selector fixed;12406 same-seven-image CUDA audit completed
-17s,zero optimization/training steps.Work reviewed returned path and inserted
-one local full-atom IDPP point in C-C gap.VASP ordinary NEB9994246 submitted,
-six internal images,96MPI/32pernode,no pilot;initial native PEND,no ionic results
-or accepted TS/barrier.Three actual jobs recorded as60 metadata rows and read back.
-BUCT2 and the paired benchmark were not changed.Next:requested9994246 checkpoint;
-no automatic retry/CI/Dimer/frequency.
-See `docs/reviews/fe110_c2_closeout_chco_submission_20261110.md`.
+CH+CO NEB9994246 DONE207steps,all six VASP required-accuracy markers;max atom
+0.048347eV/A,perp REAL0.086524.35 raw files hash-checked;periodic-equivalent
+review copy geometry PASS.Local04-05-06 hard checks PASS,05 strict peak,but
+04-05 CC gap0.62833A persists.Current bound gate only allows REBUILD_PATH,
+not direct CI/Dimer/submission.No TS/barrier accepted.Next:local density
+candidates for review,preserving existing data;no new computation authorized.
+BUCT2 and paired benchmark unchanged.See
+`docs/reviews/chco_local_triad_review_20261112.md`.
 
 ## C2 supplement GPU submission — 2026-11-06
 

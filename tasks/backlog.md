@@ -15,7 +15,7 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 Tasks are ordered by priority and should be handled one per Codex thread.
 
-## CH* + CO* to CH-C-O* ordinary NEB (2026-11-10)
+## CH* + CO* to CH-C-O* local peak review (2026-11-12)
 
 - Current user request: C-C coupling/CO insertion, not H transfer or another C2HO isomer.
 - Reuse accepted CH+CO IS9839757 and intact CH-C-O FS9842136; both full source
@@ -25,10 +25,15 @@ Tasks are ordered by priority and should be handled one per Codex thread.
   zero optimization/training steps.Both native job outcomes remain distinct.
 - Returned path reviewed in work;one local full-atom IDPP point fills the C-C
   sampling gap.Eight total/six internal images;geometry/VTST views reviewed.
-- Canonical ordinary NEB9994246 submitted96MPI/32pernode,no pilot,unchanged
-  SIGMA0.20/ALGO Fast.Initial native PEND,no ionic result or accepted TS/barrier.
-- Next:requested9994246 checkpoint;no CI/Dimer/frequency/retry authority.
-  Review:docs/reviews/fe110_c2_closeout_chco_submission_20261110.md.
+- Ordinary NEB9994246 DONE207steps,all VASP precision markers;96MPI/32pernode,
+  no pilot,unchanged SIGMA0.20/ALGO Fast.Local04-05-06 output/SCF/geometry PASS,
+  image05 strict peak,CH/CO retained;periodic-equivalent review snapshot preserved.
+- Persistent04-05 CC gap0.62833A triggers current gate:only REBUILD_PATH allowed,
+  not direct CI/Dimer/remote execution.No TS/barrier accepted.
+- Next:local density candidates for review,retaining full IS/FS binding and
+  current data;no automatic calculation or full-path rerun.
+- Review:docs/reviews/chco_local_triad_review_20261112.md.RSI single invocation
+  BLOCKED/admission/0turns on missing configured binary;no retry/profile edit.
 - Existing adsorption jobs and the unrelated paired benchmark are untouched.
 
 ## C2 supplement VASP10 closed review —2026-11-10

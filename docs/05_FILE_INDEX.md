@@ -13,6 +13,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## CH+CO completed local-triad review —2026-11-12
+
+- `docs/reviews/chco_local_triad_review_20261112.md`:04-05-06 chemistry/geometry/energy/force review,current resolution blocker and no-compute boundary.
+- `calculations/fe110_ch_co_to_chco_ts_20261109/local_triplet_review_20261112_v1/`:canonical-work runtime evidence only;35 raw files,periodic-equivalent review,coordinate annotation,VTST views,current gate and verification.Not source-published.
+- `archive/fe110_ch_co_local_review_20261112/review.py`:bounded collection,owner analysis,review/gate and one-shot RSI adapter;not a submission executor.
+
 ## RSI startup-path repair —2026-11-10
 
 - `docs/reviews/rsi_startup_path_repair_20261110.md`:one-key external profile repair,old fallback rejection,current native offline protocol PASS and no-live-research boundary.
