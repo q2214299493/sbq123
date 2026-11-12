@@ -773,3 +773,11 @@ and actual geometry/image review. Remote request bytes are preserved; a local
 hash mapping resolves the returned artifacts. The original initial request
 only supplies the unchanged reaction and geometry controls. Reusing its old
 checkpoint or its first-candidate review cannot authorize a later candidate.
+
+`archive/chco_paper_aqcat25_20261112/paper_training_job.py` prepares and submits
+the one permitted latest-label training job only after the owner state requests
+training. It binds the real budget/reply and all input bytes, reserves the case
+locally and the fixed remote directory exclusively, and limits Slurm to one GPU,
+four CPUs, 16 GB and ten minutes. Unknown submission outcomes retain both
+reservations; training completion still requires native scheduler evidence and
+independently checked 100-update output before state registration.
