@@ -1,0 +1,127 @@
+checkpoint: /data/user/hd42809/apps/fairchem/src/ev2-in%2BmidFiLM-AQCat25%2BOC20-20M_20251008_223220.pt
+dataset:
+  train:
+    a2g_args:
+      r_data_keys:
+      - is_spin_off
+      - is_low_fi
+      - adsorption_energy
+      r_energy: false
+      r_forces: true
+    format: lmdb
+    key_mapping:
+      adsorption_energy: energy
+    seed: 1
+    src: /home/sbq/sbq/aqcat25/demo_single/flowopt_work/training_iterative.aselmdb
+    transforms:
+      normalizer:
+        energy:
+          mean: -0.7554450631141663
+          stdev: 2.887317180633545
+        forces:
+          mean: 0
+          stdev: 2.887317180633545
+evaluation_metrics:
+  metrics:
+    energy:
+    - mae
+    forces:
+    - mae
+    - cosine_similarity
+    - magnitude_error
+    misc:
+    - energy_forces_within_threshold
+  primary_metric: forces_mae
+hide_eval_progressbar: false
+loss_functions:
+- energy:
+    coefficient: 0.0
+    fn: mae
+- forces:
+    coefficient: 1
+    fn: l2mae
+model:
+  backbone:
+    alpha_drop: 0.1
+    attn_activation: silu
+    attn_alpha_channels: 64
+    attn_hidden_channels: 64
+    attn_value_channels: 16
+    aux_embedding_dim: 16
+    aux_mlp_hidden: 128
+    distance_function: gaussian
+    drop_path_rate: 0.1
+    edge_channels: 128
+    ffn_activation: silu
+    ffn_hidden_channels: 128
+    film_every_k: 1
+    film_input: true
+    film_last_n: 0
+    film_mlp_dropout_p: 0.1
+    grid_resolution: 18
+    inter_embed_dim: 2
+    lmax_list:
+    - 4
+    max_neighbors: 20
+    max_num_elements: 90
+    max_radius: 12.0
+    mmax_list:
+    - 2
+    model: aqformer_backbone_film
+    norm_type: layer_norm_sh
+    num_distance_basis: 512
+    num_heads: 8
+    num_layers: 8
+    num_sphere_samples: 128
+    otf_graph: true
+    proj_drop: 0.0
+    regress_forces: true
+    sphere_channels: 128
+    use_atom_edge_embedding: true
+    use_aux_interaction_bit: false
+    use_gate_act: false
+    use_grid_mlp: true
+    use_pbc: true
+    use_s2_act_attn: false
+    weight_init: uniform
+  heads:
+    energy:
+      module: equiformer_v2_energy_head
+    forces:
+      module: equiformer_v2_force_head
+  name: hydra
+optim:
+  batch_size: 1
+  clip_grad_norm: 100
+  ema_decay: 0.999
+  eval_batch_size: 1
+  eval_every: 1
+  grad_accumulation_steps: 1
+  load_balancing: atoms
+  load_best: false
+  lr_initial: 1.0e-04
+  max_epochs: 2
+  num_workers: 0
+  optimizer: AdamW
+  optimizer_params:
+    weight_decay: 0.001
+  scheduler: LambdaLR
+  scheduler_params:
+    epochs: 2
+    lambda_type: cosine
+    lr: 1.0e-04
+    lr_min_factor: 0.01
+    warmup_epochs: 1
+    warmup_factor: 0.1
+outputs:
+  energy:
+    level: system
+    property: energy
+    shape: 1
+  forces:
+    eval_on_free_atoms: true
+    irrep_dim: 1
+    level: atom
+    property: forces
+    train_on_free_atoms: true
+trainer: equiformerv2_forces

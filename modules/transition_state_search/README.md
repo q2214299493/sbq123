@@ -713,3 +713,44 @@ Generic database connections now belong to `scripts/registry_connection.py`; the
 TS registry module is a compatibility facade. Matched final-energy barriers share
 `scripts/ts_validation/barrier_values.py` with Excel promotion. DIMER/VFA grading,
 source binding, finite-number requirements and nonnegative barriers are unchanged.
+
+## Scoped paper sequential experiment
+
+`paper_sequential.py` plans the single-label sequential protocol from
+Cheula, Andersen and Kitchin, DOI `10.1038/s41524-026-02228-1`. Each round uses
+only its latest accepted DFT label and reloads the experiment's frozen initial
+checkpoint with fresh optimizer, scheduler, EMA and AMP state. There is no
+replay or validation-based epoch selection. The candidate target is movable-atom
+DFT maximum force strictly below `0.05 eV/A`; this does not accept a TS.
+The paper's 250-label ceiling is a protocol limit, not execution permission.
+
+The explicit CH+CO experiment substitutes the user's frozen AQCat25 FT512
+checkpoint and the project's locked Fe(110) PBE/PAW protocol on GPU VASP 6.4.2.
+It is a method adaptation, not an unchanged eSEN/QE/BEEF-vdW reproduction.
+AQCat-specific force normalization, free-atom masking and optimizer details
+are recorded separately. Initial search and latest-label training workers live
+under `archive/chco_paper_aqcat25_20261112/`; runtime outputs and POTCAR files
+must not be published with those source files.
+
+`configs/execution_backends.yaml` explicitly scopes `mz73_paper_vasp` to the
+two reviewed `r000_label`/`r001_label` scientific workdir names and
+`diagnostic_static` only. The separately named
+`r000_launch_recovery01_label` permits one explicitly reviewed infrastructure
+launch recovery after native job 13901 failed before VASP started. The old
+reservation and input directory remain frozen; recovery binds the original
+failure, identical scientific inputs, a new gate and a new reservation. It
+does not add a scientific round or grant general retry permission. Its canonical submission entry remains `scripts.neb_agent.submission`.
+Each job needs a current exact-input execution-gate decision, source-bound
+scientific evidence, matched POTCAR hash and submission reservation. Resources
+are limited to one MPI rank, one GPU, four CPUs, 16 GB and 30 minutes with no
+requeue or automatic retry. NPAR/NCORE/KPAR are one for this GPU runtime.
+The explicit learning database must also be supplied when executing from an
+isolated checkout; its path and history token remain bound across fresh checks.
+
+`scripts/slurm_force_label.py` validates native Slurm raw and live job evidence.
+Only matching `COMPLETED` and `ExitCode=0:0` qualify as scheduler completion;
+normal VASP completion, electronic convergence, exact evaluated structure,
+complete forces and magnetic evidence still require owning-module validation.
+Producer exit records cannot replace scheduler evidence. New checkpoints remain
+experiment candidates, and final TS, vibration and compatible-energy acceptance
+remain separate gates.

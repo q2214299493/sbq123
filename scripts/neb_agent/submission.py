@@ -17,7 +17,8 @@ from scripts.artifact_io import (
     write_json_exclusive,
 )
 from scripts.convergence.common import EXTERNAL_COMMAND_TIMEOUT_SECONDS
-from scripts.execution_backends import load_execution_backends, require_vasp_backend
+from scripts.execution_backends import SchedulerBackend, load_execution_backends, require_vasp_backend
+from scripts.neb_agent import mz73_static
 from scripts.neb_agent.pilot_validation import validate_pilot_result
 from scripts.neb_agent.utils_structure import numbered_image_dirs, read_poscar
 from scripts.ts_strategy_engine.dimer_gate import validate_modecar_bundle
@@ -27,7 +28,7 @@ from scripts.ts_strategy_engine.execution_path_rules import (
     require_job_id, require_local_input, require_relative_input_path, require_remote_path,
 )
 from scripts.ts_strategy_engine.learning_evidence import vasp_input_hashes
-from scripts.ts_strategy_engine.learning_store import DEFAULT_DATABASE as LEARNING_DATABASE
+from scripts.ts_strategy_engine.learning_store import DEFAULT_DATABASE as LEARNING_DATABASE, history_token
 from scripts.ts_strategy_engine.strategy_learning import retry_assessment
 from scripts.ts_validation.dimer_frequency_gate import evaluate_dimer_frequency_gate
 from scripts.vasp_result_gate import read_incar_values
@@ -61,7 +62,13 @@ class InputBundle:
         if kind not in EXPECTED_ACTION or not report.get("passed"):
             raise ValueError("submission bundle changed or preflight did not pass")
         files = report["files"]
-        if not isinstance(files, dict) or not set(_required_files(kind)) <= set(files):
+        experimental = report.get("experimental_backend")
+        if experimental not in (None, mz73_static.BACKEND_ID):
+            raise ValueError("unregistered experimental submission backend")
+        launcher = mz73_static.LAUNCHER if experimental else "script.lsf"
+        if experimental and kind != "diagnostic_static":
+            raise ValueError("MZ73 backend permits diagnostic_static only")
+        if not isinstance(files, dict) or not set(_required_files(kind, launcher=launcher)) <= set(files):
             raise ValueError("input bundle manifest is incomplete")
         validated = tuple(sorted(
             (require_relative_input_path(name), require_sha256(digest, label=name))
@@ -123,14 +130,19 @@ def submission_status(workdir: Path) -> dict[str, Any]:
 
 def preflight(
     workdir: Path, kind: str, *, learning_database: Path = LEARNING_DATABASE,
-    write_report: bool = True,
+    write_report: bool = True, host: str | None = None,
 ) -> dict[str, Any]:
-    required = _required_files(kind)
+    experimental = _experimental_preflight_backend(workdir, kind, host)
+    launcher = mz73_static.LAUNCHER if experimental else "script.lsf"
+    required = _required_files(kind, launcher=launcher)
     missing = [name for name in required if not (workdir / name).is_file()]
-    core_ready = all((workdir / name).is_file() for name in ("INCAR", "KPOINTS", "POTCAR.spec", "script.lsf"))
+    core_ready = all((workdir / name).is_file() for name in ("INCAR", "KPOINTS", "POTCAR.spec", launcher))
     incar = read_incar_values(workdir / "INCAR") if core_ready else {}
-    cores = _script_cores(workdir / "script.lsf") if core_ready else None
+    cores = (1 if experimental else _script_cores(workdir / launcher)) if core_ready else None
     errors = [f"missing:{name}" for name in missing]
+    paper_dft_request: dict[str, Any] = {}
+    if experimental and core_ready:
+        paper_dft_request = _check_mz73_static(workdir, experimental, incar, errors)
     dimer_gate: dict[str, Any] = {}
     vfa_gate: dict[str, Any] = {}
     connectivity_gate: dict[str, Any] = {}
@@ -167,6 +179,23 @@ def preflight(
         "bundle_sha256": sha256_json({"kind": kind, "files": manifest}),
         "strategy_retry_check": learning_check,
     }
+    if learning_database != LEARNING_DATABASE:
+        payload["learning_database"] = {
+            "path": str(learning_database.resolve(strict=True)),
+            "strategy_history_sha256": history_token(learning_database),
+        }
+    if experimental:
+        payload.update({
+            "experimental_backend": mz73_static.BACKEND_ID,
+            "local_workdir_identity": workdir_identity(workdir),
+            "backend_config_sha256": experimental["config_sha256"],
+            "remote_root": experimental["remote_root"], "scheduler": "Slurm",
+            "gpu_parallel_overrides": experimental["gpu_parallel_overrides"],
+            "paper_dft_request": paper_dft_request,
+            "resources": {key: experimental[key] for key in (
+                "partition", "node", "mpi_ranks", "gpus", "cpus_per_task", "memory", "time_limit", "requeue",
+            )},
+        })
     if kind == "dimer":
         payload["dimer_hard_gate_passed"] = bool(dimer_gate.get("hard_gate_passed"))
         payload["dimer_hard_gate"] = dimer_gate
@@ -182,8 +211,40 @@ def preflight(
     return payload
 
 
-def _required_files(kind: str) -> list[str]:
-    required = ["INCAR", "KPOINTS", "POTCAR.spec", "script.lsf"]
+def _experimental_preflight_backend(workdir: Path, kind: str, host: str | None) -> dict[str, Any] | None:
+    if host == mz73_static.BACKEND_ID:
+        return mz73_static.load_mz73_static_backend(workdir.name, kind)
+    if host is not None:
+        configured = load_execution_backends().vasp
+        require_vasp_backend(host, configured.name)
+    return None
+
+
+def _check_mz73_static(workdir: Path, backend: dict[str, Any], incar: dict[str, str], errors: list[str]) -> dict[str, Any]:
+    try:
+        mz73_static.validate_launcher(backend, workdir / mz73_static.LAUNCHER)
+    except (OSError, UnicodeError, ValueError) as error:
+        errors.append(f"invalid_mz73_launcher:{error}")
+    for key, required in backend["gpu_parallel_overrides"].items():
+        try:
+            actual = float(incar.get(key, "nan"))
+        except (TypeError, ValueError):
+            actual = None
+        if actual != required:
+            errors.append(f"mz73_static_requires_{key}_{required}")
+    if "IMAGES" in incar or "ICHAIN" in incar or incar.get("LCLIMB", "").upper() in {"T", "TRUE", ".TRUE."}:
+        errors.append("mz73_static_forbids_NEB_and_DIMER_controls")
+    try:
+        return mz73_static.validate_paper_dft_request(workdir, backend=backend)
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        errors.append(f"invalid_paper_DFT_request:{error}")
+        return {}
+
+
+def _required_files(kind: str, *, launcher: str = "script.lsf") -> list[str]:
+    required = ["INCAR", "KPOINTS", "POTCAR.spec", launcher]
+    if launcher == mz73_static.LAUNCHER:
+        required.append(mz73_static.PAPER_REQUEST)
     if kind in {"diagnostic_static", "dimer", "vfa", "connectivity_relax"}:
         required.append("POSCAR")
         if kind == "dimer":
@@ -381,9 +442,16 @@ def submit(
     potcar_sha256: str,
     action: str,
     reuse_uploaded: bool = False,
+    *,
+    learning_database: Path = LEARNING_DATABASE,
 ) -> dict[str, Any]:
-    configured = load_execution_backends().vasp
-    backend = require_vasp_backend(host, configured.name)
+    experimental = (mz73_static.load_mz73_static_backend(workdir.name)
+                    if host == mz73_static.BACKEND_ID else None)
+    if experimental:
+        backend = SchedulerBackend(name="Slurm", server_alias=host)
+    else:
+        configured = load_execution_backends().vasp
+        backend = require_vasp_backend(host, configured.name)
     workdir = workdir.resolve(strict=True)
     attempt_path = workdir / SUBMISSION_ATTEMPT_FILE
     record_path = workdir / SUBMISSION_RECORD_FILE
@@ -394,14 +462,22 @@ def submit(
             f"submission retry refused: {UNKNOWN}; inspect {attempt_path} and follow "
             "SUBMISSION_RECOVERY.md"
         )
-    require_remote_path(remote_dir)
-    require_remote_path(potcar_source)
+    if experimental:
+        mz73_static.require_remote_target(experimental, remote_dir, workdir.name)
+        mz73_static.require_mz73_path(experimental, potcar_source)
+    else:
+        require_remote_path(remote_dir)
+        require_remote_path(potcar_source)
     potcar_sha256 = require_sha256(potcar_sha256, label="POTCAR")
     parent, name = remote_dir.rsplit("/", 1)
     if workdir.name != name:
         raise ValueError("local and remote calculation directory names must match")
     report = load_json_object(workdir / "submission_preflight.json")
+    if report.get("experimental_backend") != (mz73_static.BACKEND_ID if experimental else None):
+        raise ValueError("submission host does not match the preflight backend")
     bundle = InputBundle.from_preflight(report)
+    if experimental and bundle.kind != "diagnostic_static":
+        raise ValueError("MZ73 backend permits diagnostic_static only")
     bundle.verify(workdir)
     if EXPECTED_ACTION[bundle.kind] != action:
         raise ValueError(f"{bundle.kind} submission requires action {EXPECTED_ACTION[bundle.kind]}")
@@ -410,6 +486,7 @@ def submit(
     _verify_submission_binding(
         workdir, decision_path, decision_digest, decision, report, bundle,
         host, remote_dir, action, potcar_source, potcar_sha256,
+        learning_database=learning_database,
     )
     reservation = SubmissionReservation(
         uuid4().hex, datetime.now(timezone.utc).isoformat(), workdir_identity(workdir),
@@ -427,46 +504,49 @@ def submit(
         _verify_submission_binding(
             workdir, decision_path, decision_digest, decision, report, bundle,
             host, remote_dir, action, potcar_source, potcar_sha256,
+            learning_database=learning_database,
         )
         # Also reserve the remote target, so different local checkouts cannot
         # submit the same uploaded directory. Remote reservations are never removed.
         remote_lock = remote_dir + ".submission-reservation"
         setup = [
-            *_remote_path_checks(parent, allow_root=True),
+            *_remote_path_checks(parent, allow_root=True, experimental=experimental),
             f"mkdir -p {parent}",
-            *_remote_path_checks(remote_dir),
+            *_remote_path_checks(remote_dir, experimental=experimental),
             f"mkdir {remote_lock}",
             f"printf '%s\n' {reservation.reservation_id} > {remote_lock}/reservation_id",
         ]
         if not reuse_uploaded:
             setup.append(f"test ! -e {remote_dir}")
-        _run(["ssh", host, _remote_shell(setup)])
+        _run(_submission_ssh(host, _remote_shell(setup), experimental))
         if not reuse_uploaded:
-            _upload_manifest_files(host, parent, workdir, dict(bundle.files))
+            if experimental:
+                _upload_manifest_files(host, parent, workdir, dict(bundle.files), experimental=experimental)
+            else:
+                _upload_manifest_files(host, parent, workdir, dict(bundle.files))
         _verify_submission_binding(
             workdir, decision_path, decision_digest, decision, report, bundle,
             host, remote_dir, action, potcar_source, potcar_sha256,
+            learning_database=learning_database,
         )
         # Full verification and bsub share one command for BOTH upload modes.
         # POTCAR is copied first, then included in the complete final manifest.
         remote_check = _remote_shell([
-            *_remote_path_checks(remote_lock + "/reservation_id"),
+            *_remote_path_checks(remote_lock + "/reservation_id", experimental=experimental),
             f'test "$(cat {remote_lock}/reservation_id)" = {reservation.reservation_id}',
-            *_remote_path_checks(potcar_source),
-            *_remote_path_checks(remote_dir + "/POTCAR"),
+            *_remote_path_checks(potcar_source, experimental=experimental),
+            *_remote_path_checks(remote_dir + "/POTCAR", experimental=experimental),
             f"test -f {potcar_source}",
             f"test \"$(sha256sum {potcar_source} | awk '{{print $1}}')\" = {potcar_sha256}",
             f"if test ! -e {remote_dir}/POTCAR; then cp {potcar_source} {remote_dir}/POTCAR; fi",
-            *_remote_bundle_checks(remote_dir, {**dict(bundle.files), "POTCAR": potcar_sha256}),
+            *_remote_bundle_checks(remote_dir, {**dict(bundle.files), "POTCAR": potcar_sha256}, experimental=experimental),
             f"cd {remote_dir}",
-            "bsub script.lsf",
+            mz73_static.sbatch_command(experimental, remote_dir) if experimental else "bsub script.lsf",
         ])
-        completed = _run(["ssh", host, remote_check])
-        matches = JOB_ID.findall(completed.stdout)
-        if len(matches) != 1:
-            raise RuntimeError(f"could not parse one LSF job ID: {completed.stdout.strip()}")
+        completed = _run(_submission_ssh(host, remote_check, experimental))
+        job_id = _submitted_job_id(completed.stdout, experimental)
         result = SubmissionResult(
-            reservation.reservation_id, "SUBMITTED", require_job_id(matches[0]),
+            reservation.reservation_id, "SUBMITTED", job_id,
             completed.stdout.strip(),
         )
         payload = {
@@ -493,6 +573,7 @@ def _verify_submission_binding(
     workdir: Path, decision_path: Path, decision_digest: str, decision: dict[str, Any],
     report: dict[str, Any], bundle: InputBundle, host: str, remote_dir: str,
     action: str, potcar_source: str, potcar_sha256: str,
+    *, learning_database: Path = LEARNING_DATABASE,
 ) -> None:
     if sha256_file(decision_path) != decision_digest:
         raise ValueError("gate decision changed after validation")
@@ -508,9 +589,16 @@ def _verify_submission_binding(
     ):
         raise ValueError("execution authorization does not bind this target, workdir, bundle or POTCAR")
     bundle.verify(workdir)
-    current = preflight(workdir, bundle.kind, write_report=False)
+    current = preflight(
+        workdir, bundle.kind, write_report=False,
+        **({"host": mz73_static.BACKEND_ID} if report.get("experimental_backend") else {}),
+        **({"learning_database": learning_database} if learning_database != LEARNING_DATABASE else {}),
+    )
     if current != report or validated["EVIDENCE"].get("preflight") != report:
         raise ValueError("preflight or strategy retry evidence changed; regenerate the execution gate decision")
+    recovery = current.get("paper_dft_request", {}).get("launch_recovery")
+    if recovery and recovery["potcar_sha256"] != potcar_sha256:
+        raise ValueError("launch recovery must use the original submitted POTCAR")
 
 
 def stop_job(decision_path: Path, host: str, job_id: str, output: Path) -> dict[str, Any]:
@@ -571,6 +659,19 @@ def _script_cores(path: Path) -> int | None:
     return int(match.group(1)) if match else None
 
 
+def _submission_ssh(host: str, command: str, experimental: dict[str, Any] | None) -> list[str]:
+    return mz73_static.ssh_argv(experimental, command) if experimental else ["ssh", host, command]
+
+
+def _submitted_job_id(stdout: str, experimental: dict[str, Any] | None) -> str:
+    if experimental:
+        return mz73_static.parse_sbatch_job_id(stdout)
+    matches = JOB_ID.findall(stdout)
+    if len(matches) != 1:
+        raise RuntimeError(f"could not parse one LSF job ID: {stdout.strip()}")
+    return require_job_id(matches[0])
+
+
 def _run(argv: list[str]) -> subprocess.CompletedProcess[str]:
     try:
         completed = subprocess.run(
@@ -600,7 +701,11 @@ def _remote_shell(checks: list[str]) -> str:
     return "bash -c " + shlex.quote("set -euo pipefail; " + " && ".join(checks))
 
 
-def _remote_path_checks(path: str, *, allow_root: bool = False) -> list[str]:
+def _remote_path_checks(
+    path: str, *, allow_root: bool = False, experimental: dict[str, Any] | None = None,
+) -> list[str]:
+    if experimental:
+        return mz73_static.remote_path_checks(experimental, path, allow_root=allow_root)
     require_remote_path(path, allow_root=allow_root)
     parts = path.split("/")
     return [
@@ -609,19 +714,24 @@ def _remote_path_checks(path: str, *, allow_root: bool = False) -> list[str]:
     ]
 
 
-def _remote_bundle_checks(remote_dir: str, files: dict[str, str]) -> list[str]:
-    require_remote_path(remote_dir)
+def _remote_bundle_checks(
+    remote_dir: str, files: dict[str, str], *, experimental: dict[str, Any] | None = None,
+) -> list[str]:
+    if experimental:
+        mz73_static.require_mz73_path(experimental, remote_dir)
+    else:
+        require_remote_path(remote_dir)
     if not files:
         raise ValueError("remote manifest must not be empty")
     validated = [
         (require_relative_input_path(name), require_sha256(digest, label=name))
         for name, digest in files.items()
     ]
-    checks = [*_remote_path_checks(remote_dir), f"test -d {remote_dir}"]
+    checks = [*_remote_path_checks(remote_dir, experimental=experimental), f"test -d {remote_dir}"]
     for name, digest in validated:
         path = f"{remote_dir}/{name}"
         checks.extend([
-            *_remote_path_checks(path), f"test -f {path}",
+            *_remote_path_checks(path, experimental=experimental), f"test -f {path}",
             f"test \"$(sha256sum {path} | awk '{{print $1}}')\" = {digest}",
         ])
     # Reused directories must not carry unbound restart files or symlinks.
@@ -633,10 +743,13 @@ def _remote_bundle_checks(remote_dir: str, files: dict[str, str]) -> list[str]:
 
 
 def _upload_manifest_files(
-    host: str, remote_parent: str, workdir: Path, files: dict[str, str]
+    host: str, remote_parent: str, workdir: Path, files: dict[str, str], *, experimental: dict[str, Any] | None = None,
 ) -> None:
     """Upload only hash-bound preflight files, preserving their relative paths."""
-    require_remote_path(remote_parent, allow_root=True)
+    if experimental:
+        mz73_static.require_mz73_path(experimental, remote_parent, allow_root=True)
+    else:
+        require_remote_path(remote_parent, allow_root=True)
     require_relative_input_path(workdir.name)
     validated = {
         require_relative_input_path(name): require_sha256(digest, label=name)
@@ -651,7 +764,10 @@ def _upload_manifest_files(
             shutil.copy2(source, target)
             if sha256_file(target) != digest:
                 raise ValueError(f"staged submission bundle changed: {relative}")
-        _run(["scp", "-r", str(staged), f"{host}:{remote_parent}/"])
+        argv = mz73_static.scp_argv(experimental, str(staged), remote_parent) if experimental else [
+            "scp", "-r", str(staged), f"{host}:{remote_parent}/",
+        ]
+        _run(argv)
 
 
 def main() -> None:
@@ -661,6 +777,8 @@ def main() -> None:
     check = commands.add_parser("preflight")
     check.add_argument("--workdir", type=Path, required=True)
     check.add_argument("--kind", choices=tuple(EXPECTED_ACTION), required=True)
+    check.add_argument("--host", default=vasp_backend.server_alias)
+    check.add_argument("--learning-database", type=Path, default=LEARNING_DATABASE)
     launch = commands.add_parser("submit")
     launch.add_argument("--workdir", type=Path, required=True)
     launch.add_argument("--decision", type=Path, required=True)
@@ -670,6 +788,7 @@ def main() -> None:
     launch.add_argument("--potcar-sha256", required=True)
     launch.add_argument("--action", choices=tuple(EXPECTED_ACTION.values()), required=True)
     launch.add_argument("--reuse-uploaded", action="store_true")
+    launch.add_argument("--learning-database", type=Path, default=LEARNING_DATABASE)
     stop = commands.add_parser("stop")
     stop.add_argument("--decision", type=Path, required=True)
     stop.add_argument("--host", default=vasp_backend.server_alias)
@@ -679,7 +798,7 @@ def main() -> None:
     status.add_argument("--workdir", type=Path, required=True)
     args = parser.parse_args()
     if args.command == "preflight":
-        result = preflight(args.workdir, args.kind)
+        result = preflight(args.workdir, args.kind, host=args.host, learning_database=args.learning_database)
     elif args.command == "submit":
         result = submit(
             args.workdir,
@@ -690,6 +809,7 @@ def main() -> None:
             args.potcar_sha256,
             args.action,
             args.reuse_uploaded,
+            learning_database=args.learning_database,
         )
     elif args.command == "stop":
         result = stop_job(args.decision, args.host, args.job_id, args.output)

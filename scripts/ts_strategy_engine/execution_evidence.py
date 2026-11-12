@@ -98,6 +98,11 @@ def require_execution_authorization(evidence: dict[str, Any]) -> ExecutionAuthor
     preflight = evidence.get("preflight", {})
     if preflight and binding.bundle_sha256 != preflight.get("bundle_sha256"):
         raise ValueError("execution authorization bundle mismatch")
+    if preflight.get("experimental_backend") == "mz73_paper_vasp" and (
+        preflight.get("kind") != "diagnostic_static"
+        or preflight.get("local_workdir_identity") != binding.workdir_identity
+    ):
+        raise ValueError("MZ73 authorization and static preflight workdir identity mismatch")
     required = tuple(
         name for name in ("geometry", "analysis", "thresholds", "path_quality",
                           "preflight", "validation", "scheduler", "authorization")
@@ -173,6 +178,14 @@ def source_bindings_valid(
                 validate_stored_lsf_evidence(current)
             except ValueError:
                 return False
+        if name in {"geometry", "analysis"} and current.get("document_kind") in {
+            "mz73_static_candidate_geometry_diagnosis", "mz73_static_output_analysis",
+        }:
+            from scripts.neb_agent.mz73_static import validate_static_evidence
+
+            if not validate_static_evidence(current, evidence.get("preflight", {}), name=name):
+                return False
+            continue
         expected = TRUSTED_ARTIFACTS.get(name)
         if expected and (
             current.get("document_kind") != expected[0]

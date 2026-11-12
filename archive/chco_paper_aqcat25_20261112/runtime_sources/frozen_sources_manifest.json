@@ -1,0 +1,41 @@
+{
+  "document_kind": "paper_aqcat25_frozen_code_template_manifest",
+  "scope": "reviewed source code and training template only; no calculation data or model weights",
+  "source_request": {
+    "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\paper_aqcat25_ft512_20261112_v1\\initial_search\\request.json",
+    "sha256": "2c77453defb0129f491762fe2d8a0d54bf0d71ea2e5141d00c7cf25ea1f71f72"
+  },
+  "files": [
+    {
+      "path": "aqcat_ts_pilot.py",
+      "sha256": "e668cf65bc82e0f6b92368f403dd0df0d9ea28cd6a2b47017c3858a9a14517ef",
+      "role": "executed_initial_search_dependency",
+      "source_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\paper_aqcat25_ft512_20261112_v1\\initial_search\\aqcat_ts_pilot.py"
+    },
+    {
+      "path": "mlip_same_structure_benchmark.py",
+      "sha256": "d57202b8e6590e36e2dace48a2543e26ada03364e3914e8500c2d143c753e290",
+      "role": "executed_initial_search_dependency",
+      "source_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\paper_aqcat25_ft512_20261112_v1\\initial_search\\mlip_same_structure_benchmark.py"
+    },
+    {
+      "path": "artifact_io.py",
+      "sha256": "5c3f4762413a164ea7adb6d5d89ab9bc9aeb09ec024259b7a7fec02cb942ac53",
+      "role": "executed_initial_search_dependency",
+      "source_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\paper_aqcat25_ft512_20261112_v1\\initial_search\\artifact_io.py"
+    },
+    {
+      "path": "force_only_config.yml",
+      "sha256": "979062fea494a8ea3facce2d4af83e0677d370d0a15e57b2f69f0695b91c9ed4",
+      "role": "reviewed_force_only_training_template",
+      "source_path": "C:\\Users\\86177\\Desktop\\机器学习\\aqcat25_ts_pilot\\force_only_config.yml"
+    }
+  ],
+  "external_arkimede_calculations": {
+    "path": "/home/sbq/sbq/ml_ts_acceleration/src/arkimede/arkimede/workflow/calculations.py",
+    "sha256": "dea0689cd58eb7726dac7fdc00206a5156fb8929a82f4d01bfd43fd950265139"
+  },
+  "deployment": "Put these Python modules on PYTHONPATH or stage them beside the unchanged initial_candidate.py; existing AQCat25/FairChem, PyTorch, ASE and Sella environment remains required.",
+  "production_sources_modified": false,
+  "scientific_acceptance": false
+}

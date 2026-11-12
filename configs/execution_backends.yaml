@@ -86,6 +86,51 @@ backends:
       - unreviewed_gpu_candidate_submission
       - acceptance_without_owning_module_validation
 
+  mz73_paper_vasp:
+    role: scoped_gpu_vasp_force_label_experiment
+    scheduler: Slurm
+    ssh_backend_ref: aqcat_gpu
+    allowed_kind: diagnostic_static
+    remote_write_boundary: /home/sbq/sbq
+    canonical_write_boundary: /home/ubuntu/hdd/sbq/sbq
+    remote_root: /home/sbq/sbq/chco_paper_aqcat25_ft512_20261112_v1/labels
+    allowed_workdir_names:
+      - paper_chco_aqcat25_ft512_20261112_r000_label
+      - paper_chco_aqcat25_ft512_20261112_r001_label
+      - paper_chco_aqcat25_ft512_20261112_r000_launch_recovery01_label
+    launch_recovery:
+      workdir_name: paper_chco_aqcat25_ft512_20261112_r000_launch_recovery01_label
+      failed_workdir_name: paper_chco_aqcat25_ft512_20261112_r000_label
+      failed_job_id: '13901'
+      probe_job_id: '13902'
+      maximum_attempts: 1
+      consumes_new_scientific_round: false
+    reviewed_contract:
+      contract_sha256: f27ec856f3df3d57c44b643980059b4e9de76a81e659415bd97d086c1f2847c6
+      compatibility_sha256: 52b8afbf5a2902cbe115001d2554440b59421d61e1819f5921ddc373da5839de
+      atom_map_sha256: f3fe5452e4794fbaedca86991a7e936e55a730530a793bc1df0e899814cdabe5
+    partition: gpu
+    node: MZ73
+    mpi_ranks: 1
+    gpus: 1
+    cpus_per_task: 4
+    memory: 16G
+    time_limit: '00:30:00'
+    requeue: false
+    automatic_retries: 0
+    mpi_executable: /opt/nvidia/hpc_sdk/Linux_x86_64/25.7/comm_libs/12.9/hpcx/hpcx-2.22.1/ompi/bin/mpirun
+    vasp_executable: /opt/vasp/gpu/vasp.6.4.2/bin/vasp_std
+    library_paths:
+      - /opt/nvidia/hpc_sdk/Linux_x86_64/25.7/cuda/lib64
+      - /opt/nvidia/hpc_sdk/Linux_x86_64/25.7/compilers/extras/qd/lib
+      - /opt/nvidia/hpc_sdk/Linux_x86_64/25.7/compilers/lib
+      - /opt/nvidia/hpc_sdk/Linux_x86_64/25.7/math_libs/lib64
+      - /opt/nvidia/hpc_sdk/Linux_x86_64/25.7/comm_libs/nccl/lib
+      - /opt/nvidia/hpc_sdk/Linux_x86_64/25.7/comm_libs/nvshmem/lib
+    gpu_parallel_overrides: {NPAR: 1, NCORE: 1, KPAR: 1}
+    automatic_remote_submission: false
+    final_energy_or_ts_acceptance: false
+
 aqcat25_contract:
   schema_version: 2
   schema: configs/aqcat25_handoff.schema.json
