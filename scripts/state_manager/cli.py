@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any, Sequence
 
 from .audit import audit_repository
+from .application_log import require_unlocked_application
 from .baseline import build_baseline_event
 from .checkpoints import derive_task_completion_event
 from .lifecycle import build_task_transition_event, effective_phase
@@ -262,8 +263,10 @@ def _sync(
 ) -> int:
     store = _store(root, schema, events)
     proposal_store = ProposalStore(root, policy)
+    require_unlocked_application(proposal_store.cache_dir)
     applied: list[str] = []
     pending: list[dict[str, Any]] = []
+    deferred_repository_items: list[dict[str, str]] = []
     candidates = {
         event.event_id: event
         for event in (
@@ -275,6 +278,17 @@ def _sync(
         key=lambda event: (event.payload["recorded_at"], event.event_id),
     )
     for event in effective:
+        if event.event_type == "repository_item_classified":
+            # Cleanup is a one-time operation, not a managed-view projection.
+            # Rebuilding an old approved deletion can target regenerated files.
+            deferred_repository_items.append(
+                {
+                    "event_id": event.event_id,
+                    "event_sha256": event.digest,
+                    "reason": "One-time repository operations require explicit reviewed apply.",
+                }
+            )
+            continue
         proposal = build_proposal(event, project_root=root, policy_path=policy)
         if not proposal["actions"]:
             continue
@@ -332,7 +346,10 @@ def _sync(
                 safe_only=args.safe_only,
             )
         )
-    print(json.dumps({"applied": sorted(set(applied)), "pending_review": pending}, indent=2, ensure_ascii=False))
+    summary: dict[str, Any] = {"applied": sorted(set(applied)), "pending_review": pending}
+    if deferred_repository_items:
+        summary["deferred_repository_items"] = deferred_repository_items
+    print(json.dumps(summary, indent=2, ensure_ascii=False))
     return 1 if pending else 0
 
 

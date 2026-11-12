@@ -1588,6 +1588,7 @@ def test_read_only_audit_detects_known_repository_drift(tmp_path: Path) -> None:
     subprocess.run(["git", "init", "-q"], cwd=tmp_path, check=True)
     (tmp_path / ".codex_tmp").mkdir()
     (tmp_path / ".codex_tmp/cache.txt").write_text("cache\n", encoding="utf-8")
+    (tmp_path / "scratch").mkdir()
 
     report = audit_repository(project_root=tmp_path, policy_path=policy)
     codes = {finding["code"] for finding in report["findings"]}

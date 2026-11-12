@@ -9,6 +9,15 @@ from .models import utc_now
 from .store import _write_immutable_json
 
 
+APPLICATION_LOCK_ERROR = "state apply locked or UNKNOWN_NEEDS_RECONCILIATION; never automatically retry"
+
+
+def require_unlocked_application(cache):
+    """Reject an existing reservation without clearing or interpreting it."""
+    if os.path.lexists(cache / "application.lock"):
+        raise RuntimeError(APPLICATION_LOCK_ERROR)
+
+
 class ReconciliationRequired(RuntimeError):
     """A partial application could not be rolled back; preserve its reservation."""
 
@@ -20,7 +29,7 @@ def reserved_application(cache, proposal):
     try:
         descriptor = os.open(lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
     except FileExistsError as exc:
-        raise RuntimeError("state apply locked or UNKNOWN_NEEDS_RECONCILIATION; never automatically retry") from exc
+        raise RuntimeError(APPLICATION_LOCK_ERROR) from exc
     digest = sha256_json({key: proposal[key] for key in ("proposal_id", "event_sha256", "actions", "review_required")})
     receipt_path = cache / "applications" / (proposal["proposal_id"] + ".json")
     preserve_lock = False

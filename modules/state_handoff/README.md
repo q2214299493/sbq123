@@ -24,6 +24,10 @@ It is repository governance only. Scheduler output, calculation files, final
 structures, scientific modules, and the calculation registry keep their
 existing authority.
 
+The canonical root-directory policy is `configs/state_handoff.yaml`; retaining
+the authorized `.codex_tmp` and `tmp` caches does not validate their contents
+or authorize scientific actions or cleanup.
+
 ## Inputs
 
 - immutable JSON events under `events/`;
@@ -55,6 +59,17 @@ effective until a different accepted event supersedes it.
 keeps only pending events that directly supersede the current approved source;
 older unreviewed drafts remain searchable immutable history but no longer fill
 the active review queue.
+
+`sync`, with or without `--safe-only`, does not rebuild or apply `repository_item_classified`
+events. These are one-time file operations rather than managed-view projections;
+replaying an old approved cleanup could delete a newly regenerated file.
+The command lists their exact event IDs and hashes under
+`deferred_repository_items` and continues managed-view projections. Cleanup still
+requires an explicit current proposal, user review, and `repo-state apply`;
+existing review, evidence-hash, and unknown-application checks remain in force.
+Deferred cleanup alone does not make synchronization fail. An existing
+application lock still blocks synchronization, including cleanup-only runs;
+the lock is never automatically cleared.
 
 For `scientific_result_registration`, `sync` may reuse an existing review only
 for deterministic current-task or module-map projection. Reuse requires an
