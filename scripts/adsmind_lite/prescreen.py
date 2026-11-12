@@ -5,6 +5,7 @@ from typing import Any
 from .adsmind_common import load_yaml_schema
 from .fts_prescreen import assert_fts_surface, plan_calibrated_fts_species, plan_feature_based_fts_species
 from .evidence_gate import validate_external_plan
+from .motif_coverage import review_initial_motif_coverage
 
 
 def load_prescreen_rules(path: str) -> dict[str, Any]:
@@ -38,10 +39,16 @@ def plan_species(
                 surface_name=surface_name,
             )
             if fts_plan is not None:
-                return {**fts_plan, "plan_source": "reviewed_local_fts_rule", "evidence_priority_rank": 2}
+                return review_initial_motif_coverage(
+                    {**fts_plan, "plan_source": "reviewed_local_fts_rule", "evidence_priority_rank": 2},
+                    rules, surface_name=surface_name,
+                )
         if external_plans and species_name in external_plans:
             external = validate_external_plan(external_plans[species_name], species=species_name, surface=surface_name)
-            return {**external, "plan_source": "external_evidence_gate", "evidence_priority_rank": 3}
+            return review_initial_motif_coverage(
+                {**external, "plan_source": "external_evidence_gate", "evidence_priority_rank": 3},
+                rules, surface_name=surface_name,
+            )
         if fts_rules is not None and species_features and species_name in species_features:
             hypothesis_plan = plan_feature_based_fts_species(
                 species_name,
@@ -50,7 +57,7 @@ def plan_species(
                 surface_name=surface_name,
             )
             hypotheses = hypothesis_plan["candidates"]
-            return {
+            return review_initial_motif_coverage({
                 **hypothesis_plan,
                 "candidate_count": 0,
                 "candidates": [],
@@ -58,8 +65,8 @@ def plan_species(
                 "search_hypotheses": hypotheses,
                 "plan_source": "feature_based_retrieval_hypotheses",
                 "evidence_priority_rank": 4,
-            }
-        return {
+            }, rules, surface_name=surface_name)
+        return review_initial_motif_coverage({
             "species": species_name,
             "decision": "NEEDS_WHITELIST",
             "reason_code": "no_accepted_local_or_external_adsorption_motif",
@@ -68,7 +75,7 @@ def plan_species(
             "candidate_count": 0,
             "candidates": [],
             "search_metadata_available": species_name in (adsorbate_catalog or {}),
-        }
+        }, rules, surface_name=surface_name)
 
     candidates = sorted(species_rules.get("candidates", []), key=lambda item: int(item.get("priority", 999)))
     planned: list[dict[str, Any]] = []
@@ -86,7 +93,7 @@ def plan_species(
         planned.append(item)
 
     decision = "READY" if planned and blocked == 0 else "BLOCKED" if blocked == len(planned) else "PARTIAL"
-    return {
+    return review_initial_motif_coverage({
         "species": species_name,
         "surface": species_rules.get("surface"),
         "plan_source": "reviewed_local_species_rule",
@@ -97,7 +104,7 @@ def plan_species(
         "candidate_count": len(planned),
         "candidates": planned,
         "suppressed": species_rules.get("suppress", []),
-    }
+    }, rules, surface_name=surface_name)
 
 
 def plan_batch(
@@ -143,5 +150,8 @@ def plan_batch(
             "needs_retrieval_species": sum(plan["decision"] == "NEEDS_RETRIEVAL" for plan in plans),
             "needs_whitelist_species": sum(plan["decision"] == "NEEDS_WHITELIST" for plan in plans),
             "needs_literature_species": sum(plan["decision"] == "NEEDS_LITERATURE" for plan in plans),
+            "initial_motif_shortfall_species": sum(
+                plan["initial_motif_coverage"]["shortfall_count"] > 0 for plan in plans
+            ),
         },
     }

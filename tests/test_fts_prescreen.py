@@ -10,10 +10,12 @@ from scripts.adsmind_lite.fts_prescreen import (
     plan_feature_based_fts_species,
     rank_carbon_sites,
 )
+from scripts.adsmind_lite.prescreen import load_prescreen_rules, plan_species
 
 
 ROOT = Path(__file__).resolve().parents[1]
 RULES_PATH = ROOT / "configs" / "adsmind_lite" / "iron_fts_prescreen.yaml"
+PRESCREEN_RULES_PATH = ROOT / "configs" / "adsmind_lite" / "prescreen_rules.yaml"
 
 
 def test_coordination_demand_changes_preferred_fe110_coordination() -> None:
@@ -49,6 +51,50 @@ def test_reviewed_profiles_have_an_exact_non_budget_dependent_count() -> None:
         "CH2O_eta2_CO_side_on",
         "CH2O_O_top_tilted",
     }
+
+
+@pytest.mark.parametrize("species,configuration_count,mode_count,decision", [
+    ("CH2O", 2, 2, "NEEDS_REVIEW"),
+    ("COH", 2, 2, "NEEDS_REVIEW"),
+    ("CHOH", 3, 2, "NEEDS_REVIEW"),
+    ("CH2OH", 3, 3, "READY"),
+])
+def test_calibrated_fts_plan_requires_distinct_initial_modes(
+    species: str, configuration_count: int, mode_count: int, decision: str
+) -> None:
+    fts_rules = load_fts_rules(str(RULES_PATH))
+    raw = plan_calibrated_fts_species(species, fts_rules)
+    assert raw is not None
+    available = {item["motif_id"] for item in raw["candidates"]}
+
+    plan = plan_species(
+        species,
+        load_prescreen_rules(str(PRESCREEN_RULES_PATH)),
+        fts_rules=fts_rules,
+        available_templates=available,
+    )
+
+    assert plan["plan_source"] == "reviewed_local_fts_rule"
+    assert plan["candidate_count"] == configuration_count
+    assert plan["initial_motif_coverage"]["distinct_count"] == mode_count
+    assert plan["initial_motif_coverage"]["shortfall_count"] == 3 - mode_count
+    assert plan["decision"] == decision
+    assert plan["evidence_decision"] == "READY"
+    assert plan["final_stable_minima_count"] is None
+
+
+def test_three_initial_fts_modes_do_not_bypass_reviewed_template_requirement() -> None:
+    plan = plan_species(
+        "CH2OH",
+        load_prescreen_rules(str(PRESCREEN_RULES_PATH)),
+        fts_rules=load_fts_rules(str(RULES_PATH)),
+    )
+
+    assert plan["initial_motif_coverage"]["status"] == "PASS"
+    assert plan["decision"] == "PARTIAL"
+    blocked = [candidate for candidate in plan["candidates"] if not candidate["build_ready"]]
+    assert [candidate["motif_id"] for candidate in blocked] == ["CH2OH_eta2_CO"]
+    assert blocked[0]["reason_code"] == "reviewed_structure_template_required"
 
 
 def test_hydroxylated_radicals_do_not_default_to_o_only() -> None:

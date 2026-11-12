@@ -14,8 +14,13 @@ from scripts.adsorption.build_fe110_adsorption import (
     write_poscar,
 )
 from scripts.workflow_geometry import expand_symbols
+from scripts.scientific_validation import finite_number
 
 from .adsmind_common import load_yaml, read_json, require_ase_structure, write_json, write_jsonl
+from .motif_coverage import (
+    SITE_PATTERN_ALIASES, generation_coverage_rules, initial_motif_identity,
+    review_initial_motif_coverage, validate_generation_plan,
+)
 
 
 def site_from_record(record: dict[str, Any], slab: Poscar) -> Site:
@@ -45,30 +50,18 @@ def generate_candidates(
     surface_name = str(site_payload["surface_name"])
     records: list[dict[str, Any]] = []
     site_records = list(site_payload.get("sites", []))
+    if plan.get("surface_name", surface_name) != surface_name:
+        raise ValueError("candidate plan surface does not match the site manifest")
+    prepared = _prepare_generation_batch(adsorbates, planned, rules, surface_name, site_records)
+    pending = []
     for adsorbate in adsorbates:
-        if adsorbate not in rules:
-            records.append(generation_failure(surface_name, site_payload, adsorbate, "invalid_binding_atom"))
-            continue
-        species_plan = planned.get(adsorbate)
-        if species_plan is None:
-            records.append(generation_failure(surface_name, site_payload, adsorbate, "missing_evidence_gated_plan"))
-            continue
         rule = rules[adsorbate]
-        selected, rejected = select_planned_sites(species_plan, site_records)
-        for motif, reason in rejected:
-            failure = generation_failure(surface_name, site_payload, adsorbate, reason)
-            failure["motif_id"] = motif.get("motif_id")
-            records.append(failure)
-        if not selected and not rejected:
-            records.append(generation_failure(surface_name, site_payload, adsorbate, "no_build_ready_supported_motif"))
-            continue
-        for serial, (motif, site_record) in enumerate(selected, start=1):
+        for serial, (motif, site_record) in enumerate(prepared[adsorbate], start=1):
             site = site_from_record(site_record, slab)
             structure, index_map = compose_candidate_structure(slab, site, adsorbate, rule, motif)
             candidate_id = f"{surface_name}_{motif['motif_id']}_{serial:04d}"
             folder = output_root / surface_name / adsorbate / candidate_id
             structure_path = folder / "POSCAR"
-            write_poscar(structure_path, structure)
             metadata = candidate_metadata(
                 candidate_id,
                 surface_name,
@@ -83,22 +76,52 @@ def generate_candidates(
                 index_map,
                 motif,
             )
-            write_json(folder / "metadata.json", metadata)
-            records.append(metadata)
+            pending.append((structure_path, structure, metadata))
+    # Resolve every pose/metadata error before publishing the first structure.
+    for structure_path, structure, metadata in pending:
+        write_poscar(structure_path, structure)
+        write_json(structure_path.with_name("metadata.json"), metadata)
+        records.append(metadata)
     write_jsonl(output_root / "candidates.jsonl", records)
     return records
+
+
+def _prepare_generation_batch(adsorbates: list[str], planned: dict, rules: dict, surface: str, site_records: list) -> dict:
+    """Check the whole requested batch before publishing any candidate POSCAR."""
+    coverage_rules = generation_coverage_rules()
+    prepared = {}
+    for species in adsorbates:
+        if species not in rules:
+            raise ValueError(f"{species}: invalid_binding_atom; no candidates generated")
+        if species not in planned:
+            raise ValueError(f"{species}: missing_evidence_gated_plan; no candidates generated")
+        reviewed = validate_generation_plan(planned[species], species, surface, coverage_rules)
+        if any(item.get("build_ready") is not True for item in reviewed["candidates"]):
+            raise ValueError(f"{species}: reviewed_structure_template_required; no candidates generated")
+        for motif in reviewed["candidates"]:
+            motif_id = motif.get("motif_id")
+            if not isinstance(motif_id, str) or not motif_id.strip() or any(char in motif_id for char in ("/", "\\", ":", "\0")):
+                raise ValueError(f"{species}: invalid motif_id; no candidates generated")
+            finite_number(motif.get("orientation_degrees", 0.0), "orientation_degrees")
+            identity = initial_motif_identity(motif)
+            if identity["binding_mode"] != "monodentate" or identity["binding_atoms"] != [rules[species]["anchor_atom"]]:
+                raise ValueError(f"{species}: binding_mode_not_supported_by_generator; review the template before generation")
+        selected, rejected = select_planned_sites(reviewed, site_records)
+        if rejected:
+            raise ValueError(f"{species}: {rejected[0][1]}; no candidates generated")
+        selected_plan = review_initial_motif_coverage(
+            {**reviewed, "candidates": [motif for motif, _ in selected]}, coverage_rules, surface_name=surface,
+        )
+        if selected_plan["initial_motif_coverage"]["status"] != "PASS":
+            raise ValueError(f"{species}: initial_motif_coverage shortfall after site selection; no candidates generated")
+        prepared[species] = selected
+    return prepared
 
 
 def select_planned_sites(
     species_plan: dict[str, Any], site_records: list[dict[str, Any]]
 ) -> tuple[list[tuple[dict[str, Any], dict[str, Any]]], list[tuple[dict[str, Any], str]]]:
     """Match build-ready motif identities to generated site records without collapsing orientations."""
-    aliases = {
-        "top": "top_Fe",
-        "short_bridge": "bridge_FeFe_short",
-        "long_bridge": "bridge_FeFe_long",
-        "hollow": "hollow_FeFeFe",
-    }
     by_class = {str(site["site_class"]): site for site in site_records}
     selected: list[tuple[dict[str, Any], dict[str, Any]]] = []
     rejected: list[tuple[dict[str, Any], str]] = []
@@ -106,7 +129,8 @@ def select_planned_sites(
     for motif in sorted(species_plan.get("candidates", []), key=lambda item: int(item.get("priority", 999))):
         if not motif.get("build_ready"):
             continue
-        site_class = str(motif.get("generator_site_class") or aliases.get(str(motif.get("site_pattern")), motif.get("site_pattern")))
+        pattern = str(motif.get("generator_site_class") or motif.get("site_pattern"))
+        site_class = SITE_PATTERN_ALIASES.get(pattern.strip().casefold(), pattern)
         if site_class not in by_class:
             rejected.append((motif, "planned_site_not_supported_by_generator"))
             continue
@@ -240,6 +264,7 @@ def candidate_metadata(
         "surface_family": sites["surface_family"],
         "adsorbate": adsorbate,
         "motif_id": motif["motif_id"],
+        "initial_motif": initial_motif_identity(motif),
         "configuration_id": motif.get("configuration_id", motif["motif_id"]),
         "orientation_degrees": float(motif.get("orientation_degrees", 0.0)),
         "planned_site_id": site["site_id"],

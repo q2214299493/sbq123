@@ -59,7 +59,8 @@ pre_calculation_adsorption_motif_gate:
   no_whitelist_match_fallback: authoritative_journals_only_after_NO_WHITELIST_MATCH
   evidence_rules: configs/adsmind_lite/evidence_gate.yaml
   required_before_structure_generation: true
-  candidate_count_rule: accepted_unique_stable_motifs
+  candidate_count_rule: reviewed_initial_configurations_not_stable_minima
+  initial_motif_coverage_rules: configs/adsmind_lite/prescreen_rules.yaml
   fixed_site_sweep: forbidden
   external_evidence_use: structure_selection_stability_order_and_initial_geometry_only
   external_energy_import: forbidden

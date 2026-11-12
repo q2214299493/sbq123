@@ -109,7 +109,12 @@ def main() -> None:
     )
     for species_plan in plan["species_plans"]:
         motifs = ",".join(item["motif_id"] for item in species_plan["candidates"]) or "-"
-        print(f"{species_plan['species']} {species_plan['decision']} {motifs}")
+        coverage = species_plan["initial_motif_coverage"]
+        print(
+            f"{species_plan['species']} {species_plan['decision']} {motifs} "
+            f"initial_motifs={coverage['distinct_count']}/{coverage['required_count']} "
+            f"shortfall={coverage['shortfall_count']}"
+        )
 
 
 if __name__ == "__main__":

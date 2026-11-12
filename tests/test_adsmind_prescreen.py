@@ -14,11 +14,15 @@ FTS_RULES = ROOT / "configs" / "adsmind_lite" / "iron_fts_prescreen.yaml"
 FEATURES = ROOT / "tests" / "fixtures" / "unseen_fts_species_features.yaml"
 
 
-def test_water_suppresses_redundant_four_site_sweep() -> None:
+def test_water_orientation_variants_report_initial_mode_shortfall() -> None:
     rules = load_prescreen_rules(str(RULES))
     plan = plan_species("H2O", rules)
 
-    assert plan["decision"] == "READY"
+    assert plan["decision"] == "NEEDS_REVIEW"
+    assert plan["candidate_count"] == 2
+    assert plan["initial_motif_coverage"]["distinct_count"] == 1
+    assert plan["initial_motif_coverage"]["shortfall_count"] == 2
+    assert plan["final_stable_minima_count"] is None
     assert [candidate["site_pattern"] for candidate in plan["candidates"]] == ["top", "top"]
     suppressed = {pattern for item in plan["suppressed"] for pattern in item["site_patterns"]}
     assert {"short_bridge", "long_bridge", "hollow"} <= suppressed
@@ -27,7 +31,7 @@ def test_water_suppresses_redundant_four_site_sweep() -> None:
 def test_cho_multidentate_plan_requires_reviewed_template() -> None:
     rules = load_prescreen_rules(str(RULES))
     blocked = plan_species("CHO_formyl", rules)
-    ready = plan_species(
+    templates_available = plan_species(
         "CHO_formyl",
         rules,
         available_templates={"CHO_eta2_CO_h_lb_h", "CHO_eta2_CO_h_lb_h_symmetry_partner"},
@@ -35,7 +39,10 @@ def test_cho_multidentate_plan_requires_reviewed_template() -> None:
 
     assert blocked["decision"] == "BLOCKED"
     assert all(candidate["binding_mode"] == "bidentate" for candidate in blocked["candidates"])
-    assert ready["decision"] == "READY"
+    assert templates_available["decision"] == "NEEDS_REVIEW"
+    assert templates_available["evidence_decision"] == "READY"
+    assert templates_available["initial_motif_coverage"]["distinct_count"] == 1
+    assert all(candidate["build_ready"] for candidate in templates_available["candidates"])
 
 
 def test_unknown_species_does_not_trigger_blind_candidates() -> None:
@@ -110,6 +117,9 @@ def test_external_plan_is_used_only_after_local_rules_miss(tmp_path) -> None:
     assert plan["plan_source"] == "external_evidence_gate"
     assert plan["evidence_priority_rank"] == 3
     assert plan["candidates"] == external_plan["candidates"]
+    assert plan["evidence_decision"] == "READY"
+    assert plan["decision"] == "NEEDS_REVIEW"
+    assert plan["initial_motif_coverage"]["distinct_count"] == 1
 
 
 def test_feature_based_fts_is_exposed_only_as_retrieval_hypotheses() -> None:

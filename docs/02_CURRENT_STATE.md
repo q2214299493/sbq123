@@ -44,6 +44,13 @@ statements and counts are preserved in the chronology, not a deployment claim.
 
 ## Latest recorded scientific/workflow gate
 
+Software update 2026-11-12: adsorption planning and generation now separately
+check initial mode coverage under `configs/adsmind_lite/prescreen_rules.yaml`.
+The H2O local prior retains two configurations but covers one of three required
+site/binding modes, so it reports `NEEDS_REVIEW` and a shortfall of two.
+Initial coverage is not a stable-minimum count. Historical notes do not certify
+coverage or authorize reruns; no scientific calculation was changed.
+
 LAST_RECORDED_OBSERVATION: the B5 module map records Dimer `9746548` after
 ordinary NEB `9745217` review. Last recorded scheduler status: PEND;
 observed_at: 2026-09-07T11:15:50Z; source: [module map](06_MODULE_MAP.md).
