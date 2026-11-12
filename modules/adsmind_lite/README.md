@@ -86,6 +86,25 @@ coverage counts and cached policy values cannot bypass this check. Every
 candidate retains `initial_motif` separately from its relaxed site so that ML
 migration/dissociation cannot rewrite the original mode identity.
 
+When a motif supplies `reviewed_structure_template`, the generator consumes
+its coordinates rather than the configured default molecule. The descriptor
+contains exactly `path` and `sha256`. The implemented format is an unwrapped,
+adsorbate-only POSCAR with positive scale, Direct/Cartesian coordinates and
+the exact `atom_symbols` order from `adsorbate_rules.yaml`. All template atom
+flags must be unconstrained. Hashing and parsing use the same bytes.
+The configured anchor is translated to the selected site using the existing
+Fe-anchor distance rule; template internal geometry and tilt are retained,
+then the planned azimuth is applied. Slab cell, atom mapping and constraints
+remain governed by the existing builder. Output `geometry_source` records the
+consumed path/hash, format and units separately from `initial_motif`.
+
+Full slab/adsorbate templates, multi-anchor modes, a different binding atom,
+unmapped atom order, constrained template atoms and invalid or stale templates
+are blocked before any batch output. There is no fallback to default geometry
+when a supplied/required template cannot be consumed. `--available-template`
+motif IDs alone do not provide geometry or authorize generation. Configured
+geometry remains the source for local-prior motifs that require no template.
+
 For iron Fischer-Tropsch C/H/O intermediates, the planner first loads
 `configs/adsmind_lite/iron_fts_prescreen.yaml`. It distinguishes carbon
 coordination demand, radical localization, carbonyl/hydroxyl/alkoxy O roles,
@@ -93,8 +112,8 @@ steric accessibility, and symmetry-inequivalent directions along/across Fe
 rows. Formula-only or element-only ranking is not accepted.
 For C2 species it also separates di-sigma long/short directions, eta2(C,C),
 pi-top, terminal-radical anchoring, carbonyl modes, and chain-orientation
-variants. Multi-center output stays review-blocked until a structure template
-passes geometry checks.
+variants. The generic builder does not implement multi-center placement;
+a reviewed template alone cannot enable an unsupported binding mode.
 
 For an uncalibrated species, `--species-features FEATURES.yaml` activates the
 feature-based FTS planner as a retrieval-query helper. Its output is stored
