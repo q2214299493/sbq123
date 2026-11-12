@@ -6,6 +6,52 @@ from pathlib import Path
 import sys
 
 
+def candidate_inputs(args, case, digest):
+    """Require explicit reviewed continuation sources for the only next round."""
+    if args.round not in (0, 1) or (args.launch_recovery and args.timebudget_restart):
+        raise ValueError('only rounds zero/one and one recovery mode are supported')
+    if (args.launch_recovery or args.timebudget_restart) and args.round != 0:
+        raise ValueError('a restart belongs only to the unchanged first candidate')
+    explicit = (args.search_binding, args.search_binding_sha256, args.candidate_review,
+                args.geometry_evidence, args.review_image)
+    if args.round == 1:
+        if not all(explicit):
+            raise ValueError('round one requires its new search binding, review, geometry evidence and image')
+        request = args.search_binding.resolve(strict=True)
+        if digest(request) != args.search_binding_sha256:
+            raise ValueError('continuation binding raw bytes changed')
+        return dict(search_request_path=request, search_request_sha256=args.search_binding_sha256,
+                    review_path=args.candidate_review.resolve(strict=True),
+                    geometry_evidence_path=args.geometry_evidence.resolve(strict=True),
+                    review_image_path=args.review_image.resolve(strict=True))
+    if any(explicit):
+        raise ValueError('the first round keeps its original reviewed search sources')
+    request = case / 'initial_search/request.json'
+    return dict(search_request_path=request, search_request_sha256=digest(request),
+                review_path=case / 'candidate_work_review.json', geometry_evidence_path=case / 'work_geometry_evidence.json',
+                review_image_path=case / 'candidate_geometry_review.png')
+
+
+def external_execution_source(args, label, backend):
+    """Use the same actual raw user reply as the typed budget; never invent one."""
+    from scripts.artifact_io import load_json_object, sha256_file
+    from scripts.neb_agent.mz73_timebudget import require_budget_execution_source, validate_budget_authorization
+
+    needed = args.round == 1 or args.timebudget_restart or backend.get('requires_budget_authorization')
+    if not needed:
+        if args.execution_source or args.execution_source_sha256:
+            raise ValueError('external budget source is only accepted by the explicitly bounded new leaves')
+        return None
+    if not args.execution_source or not args.execution_source_sha256:
+        raise ValueError('a new bounded job requires its actual external execution source and raw SHA')
+    source = args.execution_source.resolve(strict=True)
+    if sha256_file(source) != args.execution_source_sha256:
+        raise ValueError('external execution source raw bytes changed')
+    budget = validate_budget_authorization(label, load_json_object(label / 'paper_DFT_request.json'), backend)
+    require_budget_execution_source({'path': str(source), 'sha256': args.execution_source_sha256}, budget)
+    return source
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--repository-root', type=Path, required=True)
@@ -15,6 +61,14 @@ def main():
     parser.add_argument('--revision', type=int, default=1)
     parser.add_argument('--launch-recovery', action='store_true',
                         help='use the single explicitly reviewed r000 MPI launch-recovery directory')
+    parser.add_argument('--timebudget-restart', action='store_true', help='use only the fixed r000 TIMEOUT cold-restart leaf')
+    parser.add_argument('--search-binding', type=Path)
+    parser.add_argument('--search-binding-sha256')
+    parser.add_argument('--candidate-review', type=Path)
+    parser.add_argument('--geometry-evidence', type=Path)
+    parser.add_argument('--review-image', type=Path)
+    parser.add_argument('--execution-source', type=Path)
+    parser.add_argument('--execution-source-sha256')
     args = parser.parse_args()
     repository = args.repository_root.resolve(strict=True)
     sys.path.insert(0, str(repository))
@@ -28,33 +82,29 @@ def main():
     case = args.case_root.resolve(strict=True)
     label = case / 'labels' / f'paper_chco_aqcat25_ft512_20261112_r{args.round:03d}_label'
     if args.launch_recovery:
-        if args.round != 0:
-            raise ValueError('the launch recovery belongs only to the unchanged first candidate')
         label = case / 'labels/paper_chco_aqcat25_ft512_20261112_r000_launch_recovery01_label'
+    if args.timebudget_restart:
+        label = case / 'labels/paper_chco_aqcat25_ft512_20261112_r000_timebudget_restart01_label'
+    inputs = candidate_inputs(args, case, sha256_file)
+    backend = mz73_static.load_mz73_static_backend(label.name)
+    source = external_execution_source(args, label, backend)
     if args.revision < 1:
         raise ValueError('binding revision must be positive')
     suffix = '' if args.revision == 1 else f'.binding_v{args.revision}'
     def artifact(stem, extension='json'):
         return label / f'{stem}{suffix}.{extension}'
-    if args.round != 0:
-        raise ValueError('later rounds need their own actual candidate review and search-source binding')
     if any((label / name).exists() for name in ('submission_record.json', 'submission_attempt.json')) or artifact('submission_decision').exists():
         raise FileExistsError('an execution or decision already exists; inspect before generating another binding')
     geometry = mz73_static.diagnose_static_candidate_geometry(
         label, initial_structure_path=case / 'initial_search/IS.vasp',
-        search_request_path=case / 'initial_search/request.json',
-        search_request_sha256=sha256_file(case / 'initial_search/request.json'),
         contract_path=case.parent / 'review_ready_v2/reaction_contract.json',
-        review_path=case / 'candidate_work_review.json',
-        geometry_evidence_path=case / 'work_geometry_evidence.json',
-        review_image_path=case / 'candidate_geometry_review.png',
+        **inputs,
     )
     analysis = mz73_static.analyze_static_candidate_outputs(label)
     if geometry['status'] != 'PASS' or analysis['status'] != 'NO_OUTPUT':
         raise ValueError('actual static input geometry or output-presence review did not pass')
     write_json(artifact('static_candidate_geometry'), geometry)
     write_json(artifact('static_output_presence'), analysis)
-    backend = mz73_static.load_mz73_static_backend(label.name)
     rendered = mz73_static.render_launcher(backend).encode('ascii')
     launcher = label / mz73_static.LAUNCHER
     if launcher.exists() and launcher.read_bytes() != rendered:
@@ -79,8 +129,9 @@ def main():
     bindings = {name: {'path': str(path), 'sha256': sha256_file(path)} for name, path in paths.items()}
     base = decide_execution(geometry, analysis, thresholds, climb=False, path_reviewed=True,
                             preflight=report, source_bindings=bindings)
-    source = artifact('user_request_scope', 'txt')
-    source.write_text(
+    if source is None:
+        source = artifact('user_request_scope', 'txt')
+        source.write_text(
         'Original user request: 我现在要测试一下进行文献这个流程 这个完全采用文献的方法去执行 完全使用在GPUvasp上的这个服务器\n'
         'User identified the server as BUCT / MZ73.\n'
         'User DFT choice: 沿用项目已验证的 Fe(110) VASP 设置，按论文执行 eSEN+BA-Sella 主动学习流程\n'

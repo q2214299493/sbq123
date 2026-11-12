@@ -754,3 +754,22 @@ complete forces and magnetic evidence still require owning-module validation.
 Producer exit records cannot replace scheduler evidence. New checkpoints remain
 experiment candidates, and final TS, vibration and compatible-energy acceptance
 remain separate gates.
+
+The optional time-budget extension keeps the original jobs at 30 minutes and
+requires a new, raw-bound `user_execution_budget_authorization` before either
+the fixed `r000_timebudget_restart01_label` or `r001_label` may use 60 minutes.
+Its maximum is two additional DFT jobs and one 100-epoch training job; a budget
+document alone is not an execution gate. The canonical submitter also checks
+that its fresh execution authorization refers to the same actual user reply.
+The explicitly reviewed TIMEOUT branch preserves all previous attempts and
+requires native TIMEOUT, actual unconverged VASP evidence, identical scientific
+inputs and a separate submission reservation. It cannot use the MPI-prelaunch
+recovery branch. With `LWAVE=False` and `LCHARG=False`, this is a fresh SCF run,
+not continuation from the interrupted electronic iteration.
+
+Subsequent candidates require their own continuation provenance binding,
+training request/result, new checkpoint identity, previous geometry/trajectory,
+and actual geometry/image review. Remote request bytes are preserved; a local
+hash mapping resolves the returned artifacts. The original initial request
+only supplies the unchanged reaction and geometry controls. Reusing its old
+checkpoint or its first-candidate review cannot authorize a later candidate.

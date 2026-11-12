@@ -98,6 +98,18 @@ backends:
       - paper_chco_aqcat25_ft512_20261112_r000_label
       - paper_chco_aqcat25_ft512_20261112_r001_label
       - paper_chco_aqcat25_ft512_20261112_r000_launch_recovery01_label
+      - paper_chco_aqcat25_ft512_20261112_r000_timebudget_restart01_label
+    time_budget_extension:
+      allowed_workdir_names:
+        - paper_chco_aqcat25_ft512_20261112_r000_timebudget_restart01_label
+        - paper_chco_aqcat25_ft512_20261112_r001_label
+      time_limit: '01:00:00'
+      failed_job_id: '13907'
+      failed_workdir_name: paper_chco_aqcat25_ft512_20261112_r000_launch_recovery01_label
+      maximum_dft_jobs: 2
+      maximum_training_jobs: 1
+      training_epochs: 100
+      automatic_retries: 0
     launch_recovery:
       workdir_name: paper_chco_aqcat25_ft512_20261112_r000_launch_recovery01_label
       failed_workdir_name: paper_chco_aqcat25_ft512_20261112_r000_label

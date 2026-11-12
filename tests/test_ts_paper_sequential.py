@@ -15,6 +15,7 @@ from scripts.ts_strategy_engine.paper_sequential import (
     record_execution,
     record_failure,
     recover_prelaunch_failure,
+    recover_timeout_failure,
     register_training_result,
     training_request,
     validate_state,
@@ -557,3 +558,180 @@ def test_original_failed_job_cannot_be_reused_in_a_later_scientific_round():
     state = prepare_dft_evaluation(state, candidate_structure_sha256=NEXT_STRUCTURE, search_checkpoint_sha256=TRAINED)
     with pytest.raises(ValueError, match="already recorded"):
         record_execution(state, job_id="100", bundle_sha256="8" * 64, gate_sha256="9" * 64)
+
+
+def timeout_material(failed=None, *, evidence_changes=None, authorization_changes=None):
+    """Synthetic mechanism evidence only; never creates a real budget approval."""
+    failed = failed or record_failure(recovered_execution(), "VASP SCF walltime expired", stage="dft_timeout")
+    raw_state = json.dumps(failed, indent=3).encode()
+    current = failed["evaluations"][0]
+    common = {"protocol_sha256": failed["protocol_sha256"], "evaluation_index": 1,
+              "candidate_structure_sha256": current["request"]["candidate_structure_sha256"],
+              "search_checkpoint_sha256": current["request"]["search_checkpoint_sha256"],
+              "failed_execution": copy.deepcopy(current["execution"]), "failure_stage": "dft_timeout",
+              "failed_state_artifact_sha256": sha256_bytes(raw_state)}
+    evidence = {**common, "document_kind": "paper_timebudget_failure_evidence", "scheduler_state": "TIMEOUT",
+                "vasp_started": True, "electronically_converged": False, "accepted_label_count": 0,
+                "dft_label_created": False, "training_performed": False,
+                "scheduler_evidence_sha256": "4" * 64, "launcher_log_sha256": "5" * 64}
+    evidence.update(evidence_changes or {})
+    raw_evidence = json.dumps(evidence, indent=2).encode()
+    authorization = {**common, "document_kind": "paper_timeout_recovery_authorization",
+                     "decision": "approved_one_timeout_continuation", "automatic_retry": False,
+                     "maximum_timeout_recoveries": 1, "failure_evidence_artifact_sha256": sha256_bytes(raw_evidence),
+                     "budget_authorization_artifact_sha256": "0" * 64,
+                     "reviewer": "synthetic unit-test review only", "reviewed_at": "2026-11-12T00:00:00Z",
+                     "recovery_bundle_sha256": "8" * 64, "recovery_gate_sha256": "9" * 64}
+    authorization.update(authorization_changes or {})
+    raw_authorization = json.dumps(authorization, indent=4).encode()
+    return {"raw_failed_state": raw_state, "expected_failed_state_sha256": sha256_bytes(raw_state),
+            "raw_failure_evidence": raw_evidence, "expected_failure_evidence_sha256": sha256_bytes(raw_evidence),
+            "raw_reviewed_authorization": raw_authorization,
+            "expected_reviewed_authorization_sha256": sha256_bytes(raw_authorization)}
+
+
+def timeout_recovered(**changes):
+    return recover_timeout_failure(**timeout_material(**changes))
+
+
+def timeout_execution(**changes):
+    return record_execution(timeout_recovered(**changes), job_id="102", bundle_sha256="8" * 64, gate_sha256="9" * 64)
+
+
+def test_timeout_event_keeps_prelaunch_approval_and_first_two_attempts_immutable():
+    failed = record_failure(recovered_execution(), "synthetic VASP TIMEOUT", stage="dft_timeout")
+    snapshot = copy.deepcopy(failed)
+    material = timeout_material(failed)
+    resumed = recover_timeout_failure(**material)
+    assert failed == snapshot and resumed["status"] == "awaiting_execution_receipt"
+    assert resumed["reserved_dft_slots"] == 1 and resumed["executed_dft_jobs"] == 2
+    assert resumed["completed_label_count"] == 0 and resumed["latest_label"] is None
+    old_row = snapshot["evaluations"][0]
+    new_row = resumed["evaluations"][0]
+    assert new_row["prelaunch_recovery"] == old_row["prelaunch_recovery"]
+    assert new_row["execution_history"] == old_row["execution_history"]
+    assert base64.b64decode(new_row["timeout_recovery"]["failed_state"]["raw_base64"]) == material["raw_failed_state"]
+    third = record_execution(resumed, job_id="102", bundle_sha256="8" * 64, gate_sha256="9" * 64)
+    row = third["evaluations"][0]
+    assert third["reserved_dft_slots"] == len(third["evaluations"]) == 1
+    assert third["executed_dft_jobs"] == 3 and third["completed_label_count"] == 0
+    assert [item["job_id"] for item in row["execution_history"]] == ["100", "101", "102"]
+    assert row["execution_history"][:2] == old_row["execution_history"] and row["execution"] == row["execution_history"][2]
+    assert row["request"] == old_row["request"] and row["prelaunch_recovery"] == old_row["prelaunch_recovery"]
+    assert third["protocol"] == snapshot["protocol"] and not any(third["restrictions"].values())
+    validate_state(third)
+
+
+def test_timeout_without_prelaunch_history_appends_one_job_only():
+    failed = record_failure(executed_state(), "synthetic VASP TIMEOUT", stage="dft_timeout")
+    resumed = timeout_recovered(failed=failed)
+    assert resumed["executed_dft_jobs"] == 1
+    state = record_execution(resumed, job_id="101", bundle_sha256="8" * 64, gate_sha256="9" * 64)
+    assert state["executed_dft_jobs"] == 2 and "prelaunch_recovery" not in state["evaluations"][0]
+    validate_state(state)
+
+
+def test_timeout_result_uses_only_third_job_label_and_retains_normal_training_chain():
+    state = timeout_execution()
+    for job in ("100", "101"):
+        with pytest.raises(ValueError):
+            accept(state, changes={"scheduler_evidence": {"job_id": job}})
+    completed = accept(state)
+    assert completed["completed_label_count"] == 1 and completed["executed_dft_jobs"] == 3
+    trained = advance_training(completed)
+    next_round = prepare_dft_evaluation(trained, candidate_structure_sha256=NEXT_STRUCTURE, search_checkpoint_sha256=TRAINED)
+    assert next_round["evaluations"][1]["request"]["evaluation_index"] == 2
+    assert next_round["executed_dft_jobs"] == 3
+    validate_state(next_round)
+
+
+@pytest.mark.parametrize("change", [
+    {"scheduler_state": "FAILED"}, {"failure_stage": "mpi_prelaunch"}, {"vasp_started": False},
+    {"electronically_converged": True}, {"accepted_label_count": 1}, {"accepted_label_count": False},
+    {"dft_label_created": True}, {"training_performed": True}, {"candidate_structure_sha256": NEXT_STRUCTURE},
+    {"search_checkpoint_sha256": TRAINED}, {"evaluation_index": 2}, {"scheduler_evidence_sha256": "invalid"},
+    {"document_kind": "paper_prelaunch_failure_evidence"}, {"failed_state_artifact_sha256": "0" * 64},
+    {"budget_authorization_artifact_sha256": "1" * 64},
+])
+def test_timeout_rejects_mpi_fake_native_state_started_status_label_and_identity(change):
+    with pytest.raises(ValueError):
+        timeout_recovered(evidence_changes=change)
+
+
+@pytest.mark.parametrize("change", [
+    {"document_kind": "paper_prelaunch_recovery_authorization"}, {"decision": "automatic"},
+    {"automatic_retry": True}, {"maximum_timeout_recoveries": 2}, {"maximum_timeout_recoveries": True},
+    {"budget_authorization_artifact_sha256": None}, {"budget_authorization_artifact_sha256": "invalid"},
+    {"failure_evidence_artifact_sha256": "0" * 64}, {"reviewer": ""}, {"reviewed_at": ""},
+    {"recovery_gate_sha256": "invalid"}, {"candidate_structure_sha256": NEXT_STRUCTURE},
+])
+def test_timeout_needs_one_separate_budget_bound_review(change):
+    with pytest.raises(ValueError):
+        timeout_recovered(authorization_changes=change)
+
+
+@pytest.mark.parametrize("failed", [
+    lambda: record_failure(executed_state(), "untyped SCF failure"),
+    lambda: record_failure(executed_state(), "MPI prelaunch", stage="mpi_prelaunch"),
+    lambda: record_failure(accept(executed_state()), "already has a label"),
+    lambda: record_failure(advance_training(accept(executed_state())), "already trained"),
+])
+def test_timeout_origin_is_neither_generic_failure_nor_mpi_or_completed_data(failed):
+    with pytest.raises(ValueError):
+        timeout_recovered(failed=failed())
+
+
+def test_timeout_stage_cannot_be_recorded_without_an_actual_submission():
+    prepared = prepare_dft_evaluation(initialize_state(protocol()), candidate_structure_sha256=STRUCTURE,
+                                      search_checkpoint_sha256=BASE)
+    with pytest.raises(ValueError):
+        record_failure(prepared, "no submitted job", stage="dft_timeout")
+
+
+def test_no_second_timeout_recovery_or_fourth_actual_attempt():
+    failed = record_failure(timeout_execution(), "second synthetic TIMEOUT", stage="dft_timeout")
+    with pytest.raises(ValueError, match="only one"):
+        recover_timeout_failure(**timeout_material(failed))
+    with pytest.raises(ValueError):
+        recovered_state(failed=failed)
+
+
+@pytest.mark.parametrize("field,value", [("job_id", "100"), ("job_id", "101"),
+                                         ("bundle_sha256", "6" * 64), ("gate_sha256", "7" * 64)])
+def test_third_attempt_cannot_reuse_jobs_or_the_old_prelaunch_scope(field, value):
+    arguments = {"job_id": "102", "bundle_sha256": "8" * 64, "gate_sha256": "9" * 64}
+    arguments[field] = value
+    with pytest.raises(ValueError):
+        record_execution(timeout_recovered(), **arguments)
+
+
+@pytest.mark.parametrize("change", ["prelaunch_gate", "old_prefix", "missing_prelaunch", "fourth_job", "latest", "counter", "candidate"])
+def test_outer_reseal_cannot_rewrite_the_two_recovery_stages_or_counters(change):
+    state = timeout_execution()
+    row = state["evaluations"][0]
+    if change == "prelaunch_gate":
+        row["execution_history"][1]["gate_sha256"] = row["execution_history"][2]["gate_sha256"]
+    elif change == "old_prefix":
+        row["execution_history"][0]["job_id"] = "999"
+    elif change == "missing_prelaunch":
+        del row["prelaunch_recovery"]
+    elif change == "fourth_job":
+        row["execution_history"].append({"job_id": "103", "bundle_sha256": "8" * 64, "gate_sha256": "9" * 64})
+    elif change == "latest":
+        row["execution"]["job_id"] = "999"
+    elif change == "counter":
+        state["executed_dft_jobs"] = 2
+    else:
+        row["request"]["candidate_structure_sha256"] = NEXT_STRUCTURE
+        row["request_sha256"] = sha256_json(row["request"])
+    with pytest.raises(ValueError):
+        validate_state(reseal(state))
+
+
+@pytest.mark.parametrize("artifact", ["failed_state", "failure_evidence", "reviewed_authorization"])
+def test_timeout_original_artifact_bytes_cannot_be_changed_with_only_an_outer_reseal(artifact):
+    state = timeout_execution()
+    reference = state["evaluations"][0]["timeout_recovery"][artifact]
+    reference["raw_base64"] = base64.b64encode(base64.b64decode(reference["raw_base64"]) + b"\n").decode()
+    with pytest.raises(ValueError, match="original bytes hash mismatch"):
+        validate_state(reseal(state))

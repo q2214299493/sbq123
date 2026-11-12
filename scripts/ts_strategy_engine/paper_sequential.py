@@ -286,23 +286,95 @@ def _validate_prelaunch_recovery(state: dict[str, Any], row: dict[str, Any], ind
     return authorization
 
 
+def _timeout_origin(event: dict[str, Any]) -> dict[str, Any]:
+    if not isinstance(event, dict) or set(event) != {"failed_state", "failure_evidence", "reviewed_authorization"}:
+        raise ValueError("incomplete TIMEOUT recovery artifact bindings")
+    failed = _read_recovery_document(event["failed_state"], "TIMEOUT failed state")
+    rows = failed.get("evaluations")
+    if not isinstance(rows, list) or len(rows) != 1 or any(
+        not isinstance(row, dict) or "timeout_recovery" in row for row in rows
+    ):
+        raise ValueError("only one first-evaluation TIMEOUT recovery is permitted")
+    validate_state(failed)
+    if (failed["status"] != "failed_needs_review_no_automatic_retry" or failed.get("failure_stage") != "dft_timeout"
+            or failed["completed_label_count"] != 0 or failed["executed_dft_jobs"] not in {1, 2}
+            or rows[0].get("execution") is None or rows[0].get("accepted_label") is not None
+            or rows[0].get("training_result") is not None):
+        raise ValueError("TIMEOUT recovery requires a submitted VASP failure with zero labels or training")
+    return failed
+
+
+def _validate_timeout_recovery(state: dict[str, Any], row: dict[str, Any], index: int) -> tuple[dict[str, Any], int]:
+    if index != 1:
+        raise ValueError("TIMEOUT recovery is restricted to the first evaluation")
+    event = row["timeout_recovery"]
+    failed = _timeout_origin(event)
+    previous = failed["evaluations"][0]
+    original_history = previous.get("execution_history", [previous["execution"]])
+    if (state["protocol_sha256"] != failed["protocol_sha256"] or row["request"] != previous["request"]
+            or row["request_sha256"] != previous["request_sha256"]
+            or row.get("prelaunch_recovery") != previous.get("prelaunch_recovery")
+            or not isinstance(row.get("execution_history"), list)
+            or row["execution_history"][:len(original_history)] != original_history):
+        raise ValueError("TIMEOUT recovery changed its candidate, protocol, or immutable submission prefix")
+    evidence = _read_recovery_document(event["failure_evidence"], "TIMEOUT failure evidence")
+    authorization = _read_recovery_document(event["reviewed_authorization"], "reviewed TIMEOUT authorization")
+    common = {"protocol_sha256": state["protocol_sha256"], "evaluation_index": index,
+              "candidate_structure_sha256": row["request"]["candidate_structure_sha256"],
+              "search_checkpoint_sha256": row["request"]["search_checkpoint_sha256"],
+              "failed_execution": previous["execution"], "failure_stage": "dft_timeout",
+              "failed_state_artifact_sha256": event["failed_state"]["artifact_sha256"]}
+    if any(evidence.get(key) != value or authorization.get(key) != value for key, value in common.items()):
+        raise ValueError("TIMEOUT recovery documents do not bind the same original VASP attempt")
+    facts = {"document_kind": "paper_timebudget_failure_evidence", "scheduler_state": "TIMEOUT",
+             "vasp_started": True, "electronically_converged": False, "accepted_label_count": 0,
+             "dft_label_created": False, "training_performed": False}
+    if any(type(evidence.get(key)) is not type(value) or evidence.get(key) != value for key, value in facts.items()):
+        raise ValueError("TIMEOUT evidence must confirm started, unconverged VASP with no label or training")
+    for key in ("scheduler_evidence_sha256", "launcher_log_sha256"):
+        require_sha256(evidence.get(key), label=key)
+    _validate_timeout_authorization(authorization, event)
+    if ("budget_authorization_artifact_sha256" in evidence
+            and evidence["budget_authorization_artifact_sha256"] != authorization["budget_authorization_artifact_sha256"]):
+        raise ValueError("TIMEOUT evidence and recovery review refer to different user budget approvals")
+    return authorization, len(original_history)
+
+
+def _validate_timeout_authorization(authorization: dict[str, Any], event: dict[str, Any]) -> None:
+    expected = {"document_kind": "paper_timeout_recovery_authorization", "decision": "approved_one_timeout_continuation",
+                "automatic_retry": False, "maximum_timeout_recoveries": 1,
+                "failure_evidence_artifact_sha256": event["failure_evidence"]["artifact_sha256"]}
+    if any(type(authorization.get(key)) is not type(value) or authorization.get(key) != value for key, value in expected.items()):
+        raise ValueError("one explicitly reviewed TIMEOUT continuation is required")
+    _text(authorization.get("reviewer"), "TIMEOUT reviewer")
+    _text(authorization.get("reviewed_at"), "TIMEOUT review time")
+    for key in ("recovery_bundle_sha256", "recovery_gate_sha256", "budget_authorization_artifact_sha256"):
+        require_sha256(authorization.get(key), label=key)
+
+
 def _execution_count(state: dict[str, Any], row: dict[str, Any], index: int, jobs: set[str]) -> int:
-    if "prelaunch_recovery" not in row and "execution_history" not in row:
+    if not any(key in row for key in ("prelaunch_recovery", "timeout_recovery", "execution_history")):
         if row.get("execution") is None:
             return 0
         _validate_execution_receipt(row["execution"], jobs)
         return 1
-    authorization = _validate_prelaunch_recovery(state, row, index)
+    prelaunch = _validate_prelaunch_recovery(state, row, index) if "prelaunch_recovery" in row else None
+    timeout, original_count = (_validate_timeout_recovery(state, row, index)
+                               if "timeout_recovery" in row else (None, 1))
+    if prelaunch is None and timeout is None:
+        raise ValueError("execution history requires its reviewed recovery event")
     history = row["execution_history"]
-    expected_count = 1 if row.get("execution") is None else 2
-    if len(history) != expected_count or (expected_count == 2 and row["execution"] != history[-1]):
-        raise ValueError("prelaunch recovery history must append one actual submission only")
+    expected_count = original_count if row.get("execution") is None else original_count + 1
+    if len(history) != expected_count or len(history) > 3 or (row.get("execution") is not None and row["execution"] != history[-1]):
+        raise ValueError("recovery history must append one actual submission only, at most three jobs")
     for execution in history:
         _validate_execution_receipt(execution, jobs)
-    if expected_count == 2 and any(history[-1][field] != authorization[key] for field, key in (
-        ("bundle_sha256", "recovery_bundle_sha256"), ("gate_sha256", "recovery_gate_sha256"),
-    )):
-        raise ValueError("recovery submission differs from its reviewed bundle or gate")
+    for execution, authorization in ((history[1] if len(history) > 1 else None, prelaunch),
+                                     (history[-1] if len(history) > original_count else None, timeout)):
+        if execution is not None and authorization is not None and any(execution[field] != authorization[key] for field, key in (
+            ("bundle_sha256", "recovery_bundle_sha256"), ("gate_sha256", "recovery_gate_sha256"),
+        )):
+            raise ValueError("recovery submission differs from its reviewed bundle or gate")
     return len(history)
 
 
@@ -390,10 +462,10 @@ def _label_phase(maximum: float, used: int, budget: int) -> str:
 
 def _validate_failure_stage(state: dict[str, Any], chain: dict[str, Any]) -> None:
     if "failure_stage" in state and (
-        state["status"] != "failed_needs_review_no_automatic_retry" or state["failure_stage"] != "mpi_prelaunch"
+        state["status"] != "failed_needs_review_no_automatic_retry" or state["failure_stage"] not in {"mpi_prelaunch", "dft_timeout"}
         or chain["phase"] != "awaiting_accepted_label" or chain["completed"] != 0
     ):
-        raise ValueError("typed prelaunch failure must precede any accepted DFT label")
+        raise ValueError("typed recovery failure must precede any accepted DFT label")
 
 
 def validate_state(state: dict[str, Any]) -> None:
@@ -599,7 +671,7 @@ def register_training_result(
 def record_failure(state: dict[str, Any], reason: str, *, stage: str | None = None) -> dict[str, Any]:
     """Stop after a failed stage; preserve counters and require external review."""
     validate_state(state)
-    if stage is not None and (stage != "mpi_prelaunch" or state["status"] != "awaiting_accepted_label"
+    if stage is not None and (stage not in {"mpi_prelaunch", "dft_timeout"} or state["status"] != "awaiting_accepted_label"
                               or state["completed_label_count"] != 0):
         raise ValueError("typed prelaunch failure requires a submitted job and zero accepted labels")
     updated = copy.deepcopy(state)
@@ -640,6 +712,35 @@ def recover_prelaunch_failure(
     row["prelaunch_recovery"] = {"failed_state": failed_reference, "failure_evidence": failure_reference,
                                 "reviewed_authorization": review_reference}
     row["execution_history"] = [copy.deepcopy(row.get("execution"))]
+    row["execution"] = None
+    updated["status"] = "awaiting_execution_receipt"
+    updated.pop("failure_reason", None)
+    updated.pop("failure_stage", None)
+    updated = _seal(updated)
+    validate_state(updated)
+    return updated
+
+
+def recover_timeout_failure(
+    raw_failed_state: bytes, *, expected_failed_state_sha256: str, raw_failure_evidence: bytes,
+    expected_failure_evidence_sha256: str, raw_reviewed_authorization: bytes,
+    expected_reviewed_authorization_sha256: str,
+) -> dict[str, Any]:
+    """Plan one separately budget-approved TIMEOUT continuation; never execute it."""
+    failed_reference, _ = _recovery_document(raw_failed_state, expected_failed_state_sha256, "TIMEOUT failed state")
+    evidence_reference, _ = _recovery_document(
+        raw_failure_evidence, expected_failure_evidence_sha256, "TIMEOUT failure evidence",
+    )
+    review_reference, _ = _recovery_document(
+        raw_reviewed_authorization, expected_reviewed_authorization_sha256, "reviewed TIMEOUT authorization",
+    )
+    event = {"failed_state": failed_reference, "failure_evidence": evidence_reference,
+             "reviewed_authorization": review_reference}
+    failed = _timeout_origin(event)
+    updated = copy.deepcopy(failed)
+    row = updated["evaluations"][0]
+    row["timeout_recovery"] = event
+    row["execution_history"] = copy.deepcopy(row.get("execution_history", [row["execution"]]))
     row["execution"] = None
     updated["status"] = "awaiting_execution_receipt"
     updated.pop("failure_reason", None)

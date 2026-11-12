@@ -66,6 +66,8 @@ def require_remote_target(backend: dict[str, Any], remote_dir: str, workdir_name
 
 
 def _validate_fixed_scope(backend: dict[str, Any]) -> None:
+    from scripts.neb_agent.mz73_timebudget import validate_budget_scope
+
     fixed = {
         "role": "scoped_gpu_vasp_force_label_experiment", "scheduler": "Slurm", "ssh_backend_ref": "aqcat_gpu",
         "allowed_kind": "diagnostic_static", "remote_write_boundary": _BOUNDARY,
@@ -92,6 +94,7 @@ def _validate_fixed_scope(backend: dict[str, Any]) -> None:
         raise ValueError("MZ73 launch recovery must retain the explicitly reviewed once-only scope")
     if _RECOVERY_LEAF in names and recovery != _RECOVERY_SCOPE:
         raise ValueError("MZ73 launch recovery is not explicitly registered")
+    validate_budget_scope(backend)
     caps = backend.get("reviewed_contract")
     if not isinstance(caps, dict) or set(caps) != {"contract_sha256", "compatibility_sha256", "atom_map_sha256"}:
         raise ValueError("MZ73 experiment requires its exact reviewed contract identities")
@@ -132,6 +135,10 @@ def load_mz73_static_backend(
     for directory in libraries:
         _safe_absolute_path(directory)
     backend.update({"id": BACKEND_ID, "ssh": copy.deepcopy(ssh), "config_sha256": sha256_file(config_path)})
+    extension = backend.get("time_budget_extension")
+    if extension and workdir_name in extension["allowed_workdir_names"]:
+        backend["time_limit"] = extension["time_limit"]
+        backend["requires_budget_authorization"] = True
     return backend
 
 
@@ -243,6 +250,16 @@ def validate_paper_dft_request(workdir: Path, *, backend: dict[str, Any] | None 
         result["launch_recovery"] = _validate_launch_recovery(workdir, request, backend)
     elif "launch_recovery" in request:
         raise ValueError("launch recovery cannot consume or overwrite a scientific-round leaf")
+    from scripts.neb_agent.mz73_timebudget import TIMEOUT_LEAF, validate_budget_authorization, validate_timebudget_restart
+
+    if backend.get("requires_budget_authorization"):
+        result["execution_budget_authorization"] = validate_budget_authorization(workdir, request, backend)
+    elif "execution_budget_authorization" in request:
+        raise ValueError("extended budget metadata is outside its exact two-leaf scope")
+    if workdir.name == TIMEOUT_LEAF:
+        result["timebudget_restart"] = validate_timebudget_restart(workdir, request, backend)
+    elif "timebudget_restart" in request:
+        raise ValueError("TIMEOUT restart metadata is forbidden outside its one fixed leaf")
     return result
 
 
@@ -411,12 +428,26 @@ def load_reviewed_case_contract(
 
 def _bound_search_inputs(
     initial_structure_path: Path, search_request_path: Path, request_sha256: str, contract_path: Path, backend: dict,
+    *, continuation: bool = False, candidate_path: Path | None = None, protocol_sha256: str | None = None,
 ):
 
     if sha256_file(search_request_path) != require_sha256(request_sha256, label="ML search request"):
         raise ValueError("ML search request raw source hash mismatch")
     # Read the bound JSON directly: YAML would turn JSON's 1e-05 into text.
     request, contract = load_json_object(search_request_path), _load_reviewed_contract(contract_path, backend)
+    dependencies, binding = [], None
+    from scripts.neb_agent.paper_candidate_source import BINDING_KIND, resolve_continuation_source
+
+    if continuation:
+        if request.get("document_kind") != BINDING_KIND:
+            raise ValueError("the next scientific round requires its explicit continuation source binding")
+        resolved = resolve_continuation_source(
+            search_request_path, binding_sha256=request_sha256, candidate_path=candidate_path,
+            initial_structure_path=initial_structure_path, expected_protocol_sha256=protocol_sha256, contract=contract,
+        )
+        request, dependencies, binding = resolved["effective_request"], resolved["dependency_paths"], resolved["source_binding"]
+    elif request.get("document_kind") == BINDING_KIND:
+        raise ValueError("a continuation source binding cannot replace the original first-round request")
     if sha256_file(initial_structure_path) != request.get("initial", {}).get("sha256"):
         raise ValueError("original IS raw source hash mismatch")
     for key in ("contract_sha256", "compatibility_sha256", "atom_map_sha256"):
@@ -438,7 +469,7 @@ def _bound_search_inputs(
                 for row in guards["preserved_bonds"]]
     if geometry["preserved_bonds"] != expected:
         raise ValueError("preserved-bond bounds differ from their reviewed guard source")
-    return request, contract, source
+    return request, contract, [source, *dependencies], binding
 
 
 def _static_reference_identity(initial_structure_path: Path, candidate: Path, request: dict, contract: dict, candidate_sha: str):
@@ -516,8 +547,11 @@ def diagnose_static_candidate_geometry(
     }.items()}
     candidate = workdir / "POSCAR"
     paper = validate_paper_dft_request(workdir, backend=backend)
-    request, contract, guard_source = _bound_search_inputs(
+    from scripts.neb_agent.mz73_timebudget import NEXT_LEAF
+
+    request, contract, search_sources, continuation_binding = _bound_search_inputs(
         paths["initial_structure_path"], paths["search_request_path"], search_request_sha256, paths["contract_path"], backend,
+        continuation=workdir.name == NEXT_LEAF, candidate_path=candidate, protocol_sha256=paper["protocol_sha256"],
     )
     if any(paper[key] != contract[key] for key in ("contract_sha256", "compatibility_sha256")):
         raise ValueError("paper DFT request and static candidate contract differ")
@@ -541,7 +575,8 @@ def diagnose_static_candidate_geometry(
         "schema_version": 1, "document_kind": STATIC_GEOMETRY_KIND, "producer": STATIC_PRODUCER,
         "diagnosis_inputs": {"workdir": str(workdir), **{key: str(value) for key, value in paths.items()},
                              "search_request_sha256": search_request_sha256},
-        "source_files": source_file_manifest([candidate, workdir / PAPER_REQUEST, *paths.values(), guard_source,
+        **({"continuation_source_binding": continuation_binding} if continuation_binding else {}),
+        "source_files": source_file_manifest([candidate, workdir / PAPER_REQUEST, *paths.values(), *search_sources,
                                              Path(__file__), Path(aqcat25_ml_neb.__file__),
                                              Path(ml_candidate_source.__file__), Path(contract_owner.__file__)]),
         "status": "FAIL" if errors else "PASS", "hard_errors": errors, "warnings": warnings,

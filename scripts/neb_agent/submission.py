@@ -596,9 +596,15 @@ def _verify_submission_binding(
     )
     if current != report or validated["EVIDENCE"].get("preflight") != report:
         raise ValueError("preflight or strategy retry evidence changed; regenerate the execution gate decision")
-    recovery = current.get("paper_dft_request", {}).get("launch_recovery")
+    paper = current.get("paper_dft_request", {})
+    recovery = paper.get("launch_recovery") or paper.get("timebudget_restart")
     if recovery and recovery["potcar_sha256"] != potcar_sha256:
         raise ValueError("launch recovery must use the original submitted POTCAR")
+    budget = paper.get("execution_budget_authorization")
+    if budget:
+        from scripts.neb_agent.mz73_timebudget import require_budget_execution_source
+
+        require_budget_execution_source(auth.get("source"), budget)
 
 
 def stop_job(decision_path: Path, host: str, job_id: str, output: Path) -> dict[str, Any]:

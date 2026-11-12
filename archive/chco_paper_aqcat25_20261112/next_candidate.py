@@ -20,6 +20,13 @@ def require(passed: bool, message: str) -> None:
         raise ValueError(message)
 
 
+def write_candidate_output(candidate, output, common):
+    path = output / "predicted_candidate.vasp"
+    common.write(path, candidate, format="vasp", direct=True, sort=False)
+    # ASE closes a path-owned VASP handle before write() returns.
+    return {"path": str(path), "sha256": common.digest(path)}
+
+
 def load_common():
     spec = importlib.util.spec_from_file_location("paper_initial_common", Path(__file__).with_name("initial_candidate.py"))
     module = importlib.util.module_from_spec(spec)
@@ -117,7 +124,7 @@ def execute(request, output, report, common):
                   candidate_geometry=common.geometry(candidate, initial, original))
     forces = candidate.get_forces()
     report["predicted_movable_fmax_eV_per_A"] = float(np.linalg.norm(forces, axis=1).max())
-    common.write(output / "predicted_candidate.vasp", candidate, format="vasp", direct=True, sort=False)
+    report["output_candidate"] = write_candidate_output(candidate, output, common)
     report["optimizer_converged"] = candidate.info.get("status") == "finished" and report["predicted_movable_fmax_eV_per_A"] <= 0.01
     require(not calculator.failure and report["optimizer_converged"], calculator.failure or "BA-Sella unfinished or budget exhausted")
     for ref in refs + [request[key] for key in ("initial_request", "training_request", "training_result")]:

@@ -10,6 +10,7 @@ import numpy as np
 import pytest
 from ase import Atoms
 from ase.constraints import FixAtoms
+from ase.io import read, write
 
 from scripts.artifact_io import sha256_file
 
@@ -49,6 +50,24 @@ def bindings(tmp_path):
 def test_training_result_has_one_matching_latest_label(bindings):
     original = worker.training_bindings(bindings.request, bindings.common)
     assert original["checkpoint"]["sha256"] == worker.FT512
+
+
+def test_actual_candidate_output_is_readable_and_hash_bound_after_ase_write(tmp_path):
+    atoms = Atoms('FeCH', positions=[[0, 0, 0], [1, 1, 1], [1, 1, 2]], cell=np.eye(3) * 10, pbc=True)
+    atoms.set_constraint(FixAtoms(indices=[0]))
+    digested = []
+
+    def digest(path):
+        parsed = read(path, format='vasp')  # Read final bytes after the real writer returned.
+        assert parsed.get_chemical_symbols() == atoms.get_chemical_symbols()
+        assert np.allclose(parsed.positions, atoms.positions)
+        digested.append(path)
+        return sha256_file(path)
+
+    result = worker.write_candidate_output(atoms, tmp_path, SimpleNamespace(write=write, digest=digest))
+    expected = tmp_path / 'predicted_candidate.vasp'
+    assert digested == [expected]
+    assert result == {'path': str(expected), 'sha256': sha256_file(expected)}
 
 
 @pytest.mark.parametrize("change", ["wrong_base", "epochs", "missing_update", "protocol", "wrong_label", "training_raw_bytes", "result_raw_bytes"])

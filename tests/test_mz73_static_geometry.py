@@ -386,7 +386,22 @@ def test_real_static_geometry_controls_canonical_gate_even_with_explicit_authori
     assert not decision["TS_CLAIM_ALLOWED"]
 
 
-def test_other_leaf_no_output_cannot_replace_current_leaf_with_real_outcar(scope):
+def test_other_leaf_no_output_cannot_replace_current_leaf_with_real_outcar(scope, monkeypatch):
+    import yaml
+    from scripts.neb_agent.mz73_timebudget import TIMEOUT_LEAF
+
+    # Preserve this original same-bytes/different-directory regression under
+    # its historical 30-minute config. New r001 budget requirements have their
+    # own tests; no production validation or authorization is bypassed here.
+    historical = yaml.safe_load(static.DEFAULT_CONFIG.read_text(encoding="utf-8"))
+    configured = historical["backends"][static.BACKEND_ID]
+    configured.pop("time_budget_extension")
+    configured["allowed_workdir_names"].remove(TIMEOUT_LEAF)
+    config_path = scope["workdir"].parent / "historical_30min_backend.yaml"
+    config_path.write_text(yaml.safe_dump(historical), encoding="utf-8")
+    real_loader = static.load_mz73_static_backend
+    monkeypatch.setattr(static, "load_mz73_static_backend",
+                        lambda *a, **k: real_loader(*a, **{**k, "config_path": config_path}))
     other = scope["workdir"].with_name(LEAF.replace("r000", "r001"))
     other.mkdir()
     for name in ("POSCAR", "INCAR", static.PAPER_REQUEST):
