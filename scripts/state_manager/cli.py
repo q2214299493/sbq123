@@ -254,6 +254,32 @@ def _reviewed_preview(
     return 1 if proposal["review_required"] else 0
 
 
+def _select_projection_events(
+    store: EventStore,
+    events: list[StateEvent],
+) -> tuple[list[StateEvent], list[dict[str, str]]]:
+    """Use the current-task authority for the shared current-task projection."""
+    source = store.latest_by_entity().get(("task", "task-current"))
+    if source is None:
+        source = store.current_task_source()
+    task_key = source.entity_key if source is not None else None
+    if source is not None and source.event_type == "baseline_adopted":
+        task_key = ("task", "task-current")
+    selected: list[StateEvent] = []
+    deferred: list[dict[str, str]] = []
+    for event in events:
+        reason = None
+        if event.entity_key[0] == "task" and task_key is not None and event.entity_key != task_key:
+            reason = "Non-current task entity; preserve history and use explicit reviewed reconciliation."
+        elif event.event_type == "baseline_adopted" and source is not None and source.event_type != "baseline_adopted":
+            reason = "Baseline adoption can rewrite the existing current task; explicit reconciliation required."
+        if reason is None:
+            selected.append(event)
+        else:
+            deferred.append({"event_id": event.event_id, "event_sha256": event.digest, "reason": reason})
+    return selected, deferred
+
+
 def _sync(
     args: argparse.Namespace,
     root: Path,
@@ -277,6 +303,7 @@ def _sync(
         candidates.values(),
         key=lambda event: (event.payload["recorded_at"], event.event_id),
     )
+    effective, deferred_projection_events = _select_projection_events(store, effective)
     for event in effective:
         if event.event_type == "repository_item_classified":
             # Cleanup is a one-time operation, not a managed-view projection.
@@ -349,6 +376,8 @@ def _sync(
     summary: dict[str, Any] = {"applied": sorted(set(applied)), "pending_review": pending}
     if deferred_repository_items:
         summary["deferred_repository_items"] = deferred_repository_items
+    if deferred_projection_events:
+        summary["deferred_projection_events"] = deferred_projection_events
     print(json.dumps(summary, indent=2, ensure_ascii=False))
     return 1 if pending else 0
 
@@ -366,7 +395,8 @@ def _actionable_reviews(
 ) -> list[dict[str, Any]]:
     reviews: list[dict[str, Any]] = []
     proposal_policy = ProposalStore(root, policy).policy
-    for event in store.actionable_pending_review_events():
+    events, _ = _select_projection_events(store, store.actionable_pending_review_events())
+    for event in events:
         proposal = build_proposal(event, project_root=root, policy_path=policy)
         if not proposal["actions"]:
             continue

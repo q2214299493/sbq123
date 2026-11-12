@@ -71,6 +71,16 @@ Deferred cleanup alone does not make synchronization fail. An existing
 application lock still blocks synchronization, including cleanup-only runs;
 the lock is never automatically cleared.
 
+Synchronization and the actionable review queue use the same current-task
+authority as task status. The canonical `task-current` entity, including its
+completed state, takes priority over other task entities. Without it, the
+existing single-active-task/baseline rules apply; ambiguous active tasks fail
+before projection. Other task entities and baseline adoption that could
+overwrite an established task are listed in `deferred_projection_events`.
+They remain immutable history, including any completion handoff, rather than
+being replayed into the shared current-task view. Pending successors of the
+selected entity retain their normal evidence and review requirements.
+
 For `scientific_result_registration`, `sync` may reuse an existing review only
 for deterministic current-task or module-map projection. Reuse requires an
 accepted Grade-A, kinetic-eligible registry barrier, a trusted reviewer, a
