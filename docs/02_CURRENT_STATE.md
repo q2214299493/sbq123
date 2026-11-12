@@ -50,6 +50,9 @@ The H2O local prior retains two configurations but covers one of three required
 site/binding modes, so it reports `NEEDS_REVIEW` and a shortfall of two.
 Initial coverage is not a stable-minimum count. Historical notes do not certify
 coverage or authorize reruns; no scientific calculation was changed.
+Reviewed adsorbate-only templates now supply candidate coordinates and
+hash-bound geometry provenance. Unsupported template/binding modes block
+generation rather than falling back to configured molecular coordinates.
 
 LAST_RECORDED_OBSERVATION: the B5 module map records Dimer `9746548` after
 ordinary NEB `9745217` review. Last recorded scheduler status: PEND;

@@ -153,7 +153,7 @@ def external_plan(tmp_path):
     from scripts.adsmind_lite.adsmind_common import load_yaml
 
     template = tmp_path / "reviewed_template.vasp"
-    template.write_bytes(SLAB.read_bytes())
+    template.write_text("Synthetic C template\n1\n5 0 0\n0 5 0\n0 0 5\nC\n1\nDirect\n0 0 0\n", encoding="utf-8")
     motifs = [
         {"motif_id": f"C_{site}", "site_pattern": site, "binding_mode": "monodentate", "binding_atoms": ["C"],
          "geometry_summary": "Synthetic reviewed initial motif", "stability_rank": index,
