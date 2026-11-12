@@ -15,10 +15,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 ## CH+CO local refinement review and RSI —2026-11-12
 
-- `E-20261112-CHCO-RESOLUTION`:NEB9994246 normally ended207steps,but04-05 CC
-  gap0.62833A persists across5frames.Local triad hard checks pass;current gate
-  only allows REBUILD_PATH.No SCF failure,collision or accepted TS.Review local
-  density candidates before another refinement gate;no automatic rerun.
+- `E-20261112-CHCO-RESOLUTION`:NEB9994246 normally ended207steps;04-05 CC gap
+  0.62833A persists,but local triad hard checks pass.Sampling warning retained,
+  not SCF failure or atomic jump.Old default REBUILD_PATH decision preserved;
+  explicit user Dimer choice and fresh mode/preflight-bound gates allowed
+  9998592.Check Dimer convergence/curvature;no general threshold changes or
+  TS/barrier acceptance.See `docs/reviews/chco_dimer_submission_20261112.md`.
 - `E-20261112-RSI-BINARY`:one local-triad RSI invocation cannot find the
   configured WindowsApps Codex executable;BLOCKED/admission/0turns.Local
   scientific review remains independently complete.Separate resolver repair

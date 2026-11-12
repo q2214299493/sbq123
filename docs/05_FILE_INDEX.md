@@ -13,6 +13,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## CH+CO explicit image05 Dimer submission —2026-11-12
+
+- `docs/reviews/chco_dimer_submission_20261112.md`:user-selected refinement,mode/INCAR checks,actual9998592 and acceptance boundaries.
+- `calculations/fe110_ch_co_to_chco_ts_20261109/dimer_image05_20261112_v1/`:canonical-work runtime only;49-row MODECAR,new gates,immutable submission receipts and job-only registration.Not source-published.
+- `archive/chco_dimer_20261112/`:explicit user scope,staged canonical handoff/executor and registration adapter;no automatic retry or acceptance.
+
 ## CH+CO completed local-triad review —2026-11-12
 
 - `docs/reviews/chco_local_triad_review_20261112.md`:04-05-06 chemistry/geometry/energy/force review,current resolution blocker and no-compute boundary.

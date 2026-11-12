@@ -32,12 +32,14 @@ cells independently checked;no adsorption rerun or model promotion.
 
 CH+CO NEB9994246 DONE207steps,all six VASP required-accuracy markers;max atom
 0.048347eV/A,perp REAL0.086524.35 raw files hash-checked;periodic-equivalent
-review copy geometry PASS.Local04-05-06 hard checks PASS,05 strict peak,but
-04-05 CC gap0.62833A persists.Current bound gate only allows REBUILD_PATH,
-not direct CI/Dimer/submission.No TS/barrier accepted.Next:local density
-candidates for review,preserving existing data;no new computation authorized.
-BUCT2 and paired benchmark unchanged.See
-`docs/reviews/chco_local_triad_review_20261112.md`.
+review copy geometry PASS.Local04-05-06 hard checks PASS,05 strict peak.
+CC gap0.62833A retained as sampling warning.User explicitly chose Dimer;
+existing explicit-preparation branch,new mode/preflight and START_DIMER gates
+PASS.No protocol/DFT changes.Dimer9998592 submitted32MPI/32pernode,initial
+PEND,then native RUN on gknew0522.No Dimer convergence,TS or barrier accepted.
+Next:inspect this Dimer's SCF,force/curvature and geometry;no additional job
+authorized.BUCT2 and paired benchmark unchanged.See
+`docs/reviews/chco_dimer_submission_20261112.md`.
 
 ## C2 supplement GPU submission — 2026-11-06
 

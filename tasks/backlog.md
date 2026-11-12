@@ -28,12 +28,15 @@ Tasks are ordered by priority and should be handled one per Codex thread.
 - Ordinary NEB9994246 DONE207steps,all VASP precision markers;96MPI/32pernode,
   no pilot,unchanged SIGMA0.20/ALGO Fast.Local04-05-06 output/SCF/geometry PASS,
   image05 strict peak,CH/CO retained;periodic-equivalent review snapshot preserved.
-- Persistent04-05 CC gap0.62833A triggers current gate:only REBUILD_PATH allowed,
-  not direct CI/Dimer/remote execution.No TS/barrier accepted.
-- Next:local density candidates for review,retaining full IS/FS binding and
-  current data;no automatic calculation or full-path rerun.
+- Persistent04-05 CC gap0.62833A remains a sampling warning.Old default
+  REBUILD_PATH decision preserved.User explicitly chose image05 Dimer;existing
+  explicit-preparation branch,new mode/preflight and START_DIMER gates PASS.
+- Dimer9998592 submitted32MPI/32pernode,initial PEND then native RUN,gknew0522.
+  No extra NEB,pilot,GPU,training or DFT change.No TS/barrier accepted.
+- Next:inspect this Dimer's SCF,force/curvature and geometry;no new job authorized.
 - Review:docs/reviews/chco_local_triad_review_20261112.md.RSI single invocation
   BLOCKED/admission/0turns on missing configured binary;no retry/profile edit.
+  Execution:docs/reviews/chco_dimer_submission_20261112.md.
 - Existing adsorption jobs and the unrelated paired benchmark are untouched.
 
 ## C2 supplement VASP10 closed review —2026-11-10
