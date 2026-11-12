@@ -39,10 +39,13 @@ Angewandte Chemie, Chemical Science, and Journal of Catalysis without treating
 that example list as exhaustive. Verify DOI and publisher provenance, exact
 surface/facet and adsorbate identity, reported stable geometry, and direct
 stability evidence. Non-exact facets and review speculation are not build-ready
-evidence. Candidate count equals the number of unique stable motifs supported
-by the accepted evidence: use two when two are supported and four only when
-four are supported. Never pad the calculation set to the four geometric site
-classes. Existing accepted local structures may still be reused directly.
+evidence. Before any partial batch, review the distinct initial site/binding
+modes required by `configs/adsmind_lite/prescreen_rules.yaml`. Count these
+separately from initial configurations and final stable minima. Height, tilt
+and azimuth changes at an unchanged anchoring mode do not increase coverage.
+Report a shortfall instead of padding the calculation set. Review historical
+provenance before reusing coverage; this rule does not authorize historical
+reruns or make ML migration/dissociation a reason to drop an original DFT mode.
 
 External adsorption evidence is a compute-saving structure prior only. Use it
 to select and rank motifs and to initialize reviewed sites, binding atoms, bond

@@ -9,6 +9,13 @@ from ase.build import bcc100, bcc111
 from ase.io import read as ase_read
 from ase.io import write as ase_write
 
+from scripts.adsorption.build_fe110_adsorption import read_poscar, write_poscar
+from scripts.adsmind_lite.candidate_generation import (
+    candidate_metadata,
+    compose_candidate_structure,
+    select_planned_sites,
+    site_from_record,
+)
 from scripts.adsmind_lite.core import (
     analyze_relaxed_tree,
     deduplicate_records,
@@ -27,23 +34,76 @@ SLAB = ROOT / "calculations" / "true_fe110_clean_20260629" / "POSCAR"
 CONFIG = ROOT / "configs" / "adsmind_lite"
 
 
-def write_site_plan(path: Path, adsorbates: list[str], sites: dict) -> Path:
+def fixture_site_motifs(adsorbate: str, sites: dict, rule: dict) -> list[dict]:
+    """Describe synthetic single-anchor geometry inputs using the configured anchor."""
     site_classes = [site["site_class"] for site in sites.get("sites", [])]
+    return [
+        {
+            "motif_id": f"{adsorbate}_{site_class}",
+            "site_pattern": site_class,
+            "generator_site_class": site_class,
+            "binding_mode": "monodentate",
+            "binding_atoms": [rule["anchor_atom"]],
+            "priority": index,
+            "build_ready": True,
+        }
+        for index, site_class in enumerate(site_classes, start=1)
+    ]
+
+
+def write_site_plan(path: Path, adsorbates: list[str], sites: dict) -> Path:
+    """Build complete synthetic plans for generator contract tests only."""
+    rules = load_yaml(CONFIG / "adsorbate_rules.yaml")["adsorbates"]
     plans = []
     for adsorbate in adsorbates:
-        candidates = [
-            {
-                "motif_id": f"{adsorbate}_{site_class}",
-                "site_pattern": site_class,
-                "generator_site_class": site_class,
-                "priority": index,
-                "build_ready": True,
-            }
-            for index, site_class in enumerate(site_classes, start=1)
-        ]
-        plans.append({"species": adsorbate, "decision": "READY", "candidate_count": len(candidates), "candidates": candidates})
-    write_json(path, {"species_plans": plans})
+        candidates = fixture_site_motifs(adsorbate, sites, rules[adsorbate])
+        plans.append({"species": adsorbate, "surface": sites["surface_name"], "decision": "READY",
+                      "candidate_count": len(candidates), "candidates": candidates})
+    write_json(path, {"surface_name": sites["surface_name"], "species_plans": plans})
     return path
+
+
+def write_geometry_fixtures(
+    surface_path: Path,
+    sites: dict,
+    adsorbates: list[str],
+    output_root: Path,
+    *,
+    motifs_by_species: dict[str, list[dict]] | None = None,
+) -> list[dict]:
+    """Write toy geometry/metadata for unit tests, without workflow admission.
+
+    These fixtures exercise geometry, labels and export behavior. They neither
+    assert reviewed adsorption coverage nor create a production READY plan.
+    """
+    slab = read_poscar(surface_path)
+    rules = load_yaml(CONFIG / "adsorbate_rules.yaml")["adsorbates"]
+    records = []
+    surface_name = sites["surface_name"]
+    for adsorbate in adsorbates:
+        rule = rules[adsorbate]
+        motifs = (motifs_by_species or {}).get(adsorbate)
+        if motifs is None:
+            motifs = fixture_site_motifs(adsorbate, sites, rule)
+        motifs = [{"binding_mode": "monodentate", "binding_atoms": [rule["anchor_atom"]], **motif}
+                  for motif in motifs]
+        selected, rejected = select_planned_sites({"candidates": motifs}, sites["sites"])
+        assert not rejected, rejected
+        for serial, (motif, site_record) in enumerate(selected, start=1):
+            structure, index_map = compose_candidate_structure(
+                slab, site_from_record(site_record, slab), adsorbate, rule, motif
+            )
+            candidate_id = f"toy_{surface_name}_{motif['motif_id']}_{serial:04d}"
+            structure_path = output_root / surface_name / adsorbate / candidate_id / "POSCAR"
+            write_poscar(structure_path, structure)
+            metadata = candidate_metadata(
+                candidate_id, surface_name, sites, adsorbate, rule, site_record,
+                surface_path, structure_path, sum(slab.counts), "no_relax", index_map, motif,
+            )
+            metadata["fixture_scope"] = "synthetic_geometry_not_workflow_admission"
+            write_json(structure_path.parent / "metadata.json", metadata)
+            records.append(metadata)
+    return records
 
 
 def prepare_candidates(tmp_path: Path, adsorbates: list[str]) -> tuple[Path, Path, list[dict]]:
@@ -111,17 +171,17 @@ def test_candidate_generation_uses_only_evidence_planned_sites(tmp_path: Path) -
     sites = detect_surface_sites(SLAB, "Fe110", "metallic_fe", CONFIG / "surfaces.yaml", CONFIG / "site_rules.yaml")
     sites_path = tmp_path / "sites.json"
     write_json(sites_path, sites)
-    selected = [site for site in sites["sites"] if site["site_class"] in {"top_Fe", "hollow_FeFeFe"}]
-    plan_path = write_site_plan(tmp_path / "two_site_plan.json", ["C"], {"sites": selected})
+    selected = [site for site in sites["sites"] if site["site_class"] in {"top_Fe", "bridge_FeFe_short", "hollow_FeFeFe"}]
+    plan_path = write_site_plan(tmp_path / "three_site_plan.json", ["C"], {**sites, "sites": selected})
     records = generate_candidates(
         SLAB,
         sites_path,
         ["C"],
         CONFIG / "adsorbate_rules.yaml",
-        tmp_path / "two_candidates",
+        tmp_path / "three_candidates",
         plan_path,
     )
-    assert [record["planned_site_class"] for record in records] == ["top_Fe", "hollow_FeFeFe"]
+    assert [record["planned_site_class"] for record in records] == ["top_Fe", "bridge_FeFe_short", "hollow_FeFeFe"]
 
 
 def test_carbide_and_oxide_are_gated_without_explicit_labels() -> None:
@@ -226,15 +286,7 @@ def test_carbide_manifest_preserves_lattice_adsorbate_identity_and_export_gate(t
     sites_path = tmp_path / "carbide_sites.json"
     write_json(sites_path, sites)
     candidate_root = tmp_path / "carbide_candidates"
-    plan_path = write_site_plan(tmp_path / "carbide_plan.json", ["CO", "C", "CH"], sites)
-    generated = generate_candidates(
-        surface,
-        sites_path,
-        ["CO", "C", "CH"],
-        CONFIG / "adsorbate_rules.yaml",
-        candidate_root,
-        plan_path,
-    )
+    generated = write_geometry_fixtures(surface, sites, ["CO", "C", "CH"], candidate_root)
     assert len(generated) == 6
     assert all(record["confidence_level"] == "medium" for record in generated)
     assert all(
@@ -286,8 +338,7 @@ def test_carbide_missing_lattice_carbon_label_is_low_confidence(tmp_path: Path) 
     sites_path = tmp_path / "ambiguous_sites.json"
     write_json(sites_path, sites)
     candidate_root = tmp_path / "ambiguous_candidates"
-    plan_path = write_site_plan(tmp_path / "ambiguous_plan.json", ["C"], sites)
-    generate_candidates(surface, sites_path, ["C"], CONFIG / "adsorbate_rules.yaml", candidate_root, plan_path)
+    write_geometry_fixtures(surface, sites, ["C"], candidate_root)
     [result] = validate_candidates(
         candidate_root,
         CONFIG / "surfaces.yaml",
@@ -416,15 +467,7 @@ def test_oxide_h2o_dissociation_stays_review_only(tmp_path: Path) -> None:
     sites_path = tmp_path / "oxide_h2o_sites.json"
     write_json(sites_path, sites)
     candidate_root = tmp_path / "oxide_h2o_candidates"
-    plan_path = write_site_plan(tmp_path / "oxide_h2o_plan.json", ["H2O"], sites)
-    [generated] = generate_candidates(
-        surface,
-        sites_path,
-        ["H2O"],
-        CONFIG / "adsorbate_rules.yaml",
-        candidate_root,
-        plan_path,
-    )
+    [generated] = write_geometry_fixtures(surface, sites, ["H2O"], candidate_root)
     validated = validate_candidates(
         candidate_root,
         CONFIG / "surfaces.yaml",

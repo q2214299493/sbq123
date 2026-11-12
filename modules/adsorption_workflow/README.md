@@ -55,12 +55,15 @@ transition-state/path domain.
 ## Workflow
 
 1. Run `modules/catalysis_data_retrieval/` when external candidates are needed, then register the clean slab, gas/reference, and candidate structure provenance.
-2. Run the chemistry-aware candidate pre-screen, then generate exactly the
-   unique stable motifs supported by accepted evidence. Surface site classes
-   are a geometric dictionary, not a mandatory sweep. Choose binding
-   atoms/denticity, orientation, intact versus dissociative state, and only then
-   the needed projection. Two supported motifs produce two candidates; four are
-   generated only when four stable motifs are supported.
+2. Run the chemistry-aware candidate pre-screen and review the distinct initial
+   site/binding modes required by `configs/adsmind_lite/prescreen_rules.yaml`
+   before generating any partial batch. Count initial mode coverage separately
+   from configurations and final stable minima. Changes of height, tilt or
+   azimuth at an unchanged anchoring mode do not increase coverage. Report a
+   shortfall without padding implausible sites or automatically rerunning
+   historical modes; review their existing provenance first. Surface site
+   classes remain a geometric dictionary, not a mandatory sweep. Choose binding
+   atoms/denticity, intact versus dissociative state, then the needed projection.
    Use external stability order to prioritize candidates and use reported bond
    lengths, angles, heights, and orientations only as reviewed initial-geometry
    references. Never treat reported external energies as local results.

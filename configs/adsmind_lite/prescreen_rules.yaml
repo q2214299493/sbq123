@@ -3,7 +3,8 @@ version: 1
 # This file selects chemical adsorption motifs.  It does not redefine the
 # geometric Fe(110) top/bridge/hollow site dictionary.
 policy:
-  candidate_count_rule: all_unique_stable_motifs_supported_by_accepted_evidence
+  candidate_count_rule: reviewed_initial_configurations_not_stable_minima
+  minimum_distinct_initial_motifs: 3
   fixed_site_sweep: forbidden
   evidence_priority:
     - reviewed_local_relaxation

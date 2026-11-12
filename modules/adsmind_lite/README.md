@@ -52,15 +52,26 @@ generation. `configs/adsmind_lite/prescreen_rules.yaml` stores species-specific
 motifs and reviewed suppression evidence without duplicating the Fe(110)
 geometric site detector.
 
-- Candidate count: exactly the unique stable motifs supported by accepted
-  local, whitelist, or fallback literature evidence.
+- Review the minimum number of chemically plausible, non-equivalent initial
+  site/binding modes required by `prescreen_rules.yaml` before any partial batch.
+  `candidate_count` counts initial configurations; `initial_motif_coverage`
+  separately reports distinct modes, the requirement and any shortfall.
+  Height, tilt, azimuth and configuration-ID changes at one unchanged anchoring
+  mode do not increase coverage. A shortfall downgrades `READY` to `NEEDS_REVIEW`;
+  retrieval and template blockers retain their existing status.
+- Initial modes are hypotheses, not accepted stable minima. The plan keeps
+  `final_stable_minima_count: null`; local DFT result validation owns that count.
+  Do not pad missing modes or infer historical coverage from notes, suppression,
+  or final sites. Review existing provenance before deciding whether work is
+  missing; the planning gate never authorizes a historical rerun.
 - External evidence only selects and ranks motifs and supplies reviewed initial
   geometry references. External energies remain relative-order provenance and
   cannot enter local result tables or Excel.
 - Unknown species: `NEEDS_WHITELIST`; `NO_WHITELIST_MATCH` then requires the
   authoritative-journal stage, never an automatic site sweep.
-- H2O on the active Fe(110) branch: top-like O-bound molecular starts only;
-  retain at most two symmetry-inequivalent orientations.
+- H2O's two retained O-top orientation variants cover one initial mode. The
+  current local prior reports a coverage shortfall; it does not automatically
+  add bridge/hollow structures or repeat historical calculations.
 - CHO/formyl: prioritize side-on C/O dual-center `h-lb-h`; require a reviewed
   multi-anchor template before construction.
 - Screening relaxations stop at `NSW=80` for review. Only plausible,
@@ -68,6 +79,12 @@ geometric site detector.
 
 The pre-screen is a decision gate, not a claim that chemical intuition proves a
 global minimum. New relaxed evidence must update the compact memory and rules.
+
+Generation rechecks current coverage and source-bound external evidence for
+the entire requested batch before writing any POSCAR. Cached `READY`, cached
+coverage counts and cached policy values cannot bypass this check. Every
+candidate retains `initial_motif` separately from its relaxed site so that ML
+migration/dissociation cannot rewrite the original mode identity.
 
 For iron Fischer-Tropsch C/H/O intermediates, the planner first loads
 `configs/adsmind_lite/iron_fts_prescreen.yaml`. It distinguishes carbon
@@ -135,6 +152,7 @@ Relaxed-state analysis, deduplication, and export are handled by the correspondi
 - `adsmind_common.py`: JSON/YAML contracts, ASE loading, and compact output.
 - `site_detection.py`: automatic and manifest-gated surface sites.
 - `candidate_generation.py`: adsorbate placement and candidate metadata.
+- `motif_coverage.py`: initial-mode identity, coverage and generation preflight.
 - `evidence_gate.py`: whitelist-stop and authoritative-literature fallback decision.
 - `relaxed_analysis.py`: geometry, connectivity, and plausibility analysis.
 - `state_deduplication.py`: RMSD/energy duplicate grouping.

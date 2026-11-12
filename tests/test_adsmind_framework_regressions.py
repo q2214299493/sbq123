@@ -6,8 +6,9 @@ import numpy as np
 import yaml
 from ase.io import read as ase_read
 
-from scripts.adsmind_lite.core import detect_surface_sites, generate_candidates, read_json, validate_candidates, write_json
+from scripts.adsmind_lite.core import detect_surface_sites, read_json, validate_candidates
 from scripts.adsmind_lite.relaxed_analysis import connectivity_change, hard_contact_distance, is_hard_contact
+from tests.test_adsmind_lite import write_geometry_fixtures
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -17,48 +18,27 @@ CONFIG = ROOT / "configs" / "adsmind_lite"
 
 def test_same_site_distinct_orientations_survive_initial_validation(tmp_path: Path) -> None:
     sites = detect_surface_sites(SLAB, "Fe110", "metallic_fe", CONFIG / "surfaces.yaml", CONFIG / "site_rules.yaml")
-    sites_path = tmp_path / "sites.json"
-    write_json(sites_path, sites)
-    plan_path = tmp_path / "plan.json"
-    write_json(
-        plan_path,
-        {
-            "species_plans": [
-                {
-                    "species": "H2O",
-                    "decision": "READY",
-                    "candidate_count": 2,
-                    "candidates": [
-                        {
-                            "motif_id": "H2O_top_a",
-                            "configuration_id": "orientation_a",
-                            "site_pattern": "top",
-                            "priority": 1,
-                            "orientation_degrees": 0.0,
-                            "build_ready": True,
-                        },
-                        {
-                            "motif_id": "H2O_top_b",
-                            "configuration_id": "orientation_b",
-                            "site_pattern": "top",
-                            "priority": 2,
-                            "orientation_degrees": 90.0,
-                            "build_ready": True,
-                        },
-                    ],
-                }
-            ]
-        },
-    )
     candidate_root = tmp_path / "candidates"
-
-    generated = generate_candidates(
-        SLAB,
-        sites_path,
-        ["H2O"],
-        CONFIG / "adsorbate_rules.yaml",
-        candidate_root,
-        plan_path,
+    generated = write_geometry_fixtures(
+        SLAB, sites, ["H2O"], candidate_root,
+        motifs_by_species={"H2O": [
+            {
+                "motif_id": "H2O_top_a",
+                "configuration_id": "orientation_a",
+                "site_pattern": "top",
+                "priority": 1,
+                "orientation_degrees": 0.0,
+                "build_ready": True,
+            },
+            {
+                "motif_id": "H2O_top_b",
+                "configuration_id": "orientation_b",
+                "site_pattern": "top",
+                "priority": 2,
+                "orientation_degrees": 90.0,
+                "build_ready": True,
+            },
+        ]},
     )
     validated = validate_candidates(
         candidate_root,
@@ -103,39 +83,16 @@ def test_hard_contact_cutoff_has_explicit_angstrom_unit_and_strict_boundary() ->
 
 def test_generated_metadata_records_configuration_identity(tmp_path: Path) -> None:
     sites = detect_surface_sites(SLAB, "Fe110", "metallic_fe", CONFIG / "surfaces.yaml", CONFIG / "site_rules.yaml")
-    sites_path = tmp_path / "sites.json"
-    write_json(sites_path, sites)
-    plan_path = tmp_path / "plan.json"
-    write_json(
-        plan_path,
-        {
-            "species_plans": [
-                {
-                    "species": "H2O",
-                    "decision": "READY",
-                    "candidate_count": 1,
-                    "candidates": [
-                        {
-                            "motif_id": "H2O_top_a",
-                            "configuration_id": "orientation_a",
-                            "site_pattern": "top",
-                            "orientation_degrees": 30.0,
-                            "priority": 1,
-                            "build_ready": True,
-                        }
-                    ],
-                }
-            ]
-        },
-    )
-
-    [record] = generate_candidates(
-        SLAB,
-        sites_path,
-        ["H2O"],
-        CONFIG / "adsorbate_rules.yaml",
-        tmp_path / "candidates",
-        plan_path,
+    [record] = write_geometry_fixtures(
+        SLAB, sites, ["H2O"], tmp_path / "candidates",
+        motifs_by_species={"H2O": [{
+            "motif_id": "H2O_top_a",
+            "configuration_id": "orientation_a",
+            "site_pattern": "top",
+            "orientation_degrees": 30.0,
+            "priority": 1,
+            "build_ready": True,
+        }]},
     )
 
     stored = read_json(Path(record["initial_structure"]).with_name("metadata.json"))
