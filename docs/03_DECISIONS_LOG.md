@@ -1473,3 +1473,19 @@ governance: docs/DOCUMENT_GOVERNANCE.md
   verified. A separate native amendment retains the job ID, input/gate bytes,
   GPU/CPU counts and 60-minute limit. This case receipt grants no standing
   permission to modify other queued or running calculations.
+
+## 2026-11-13 - Accept CH+CO r001 Force Label and Exhaust External Budget
+
+- MZ73 job 14307 completed natively with exit 0 in 47m15s. Byte-preserved output
+  return and owning-module review verified normal completion, 74-step electronic
+  convergence, exact inputs, evaluated geometry, magnetic records and all 49 raw
+  force vectors. The owner accepted label SHA
+  `fca758bb1a552345d811d45e16f8e5766470bf6427687a6133b8e8b4ae9fe28b`.
+- Movable-atom fmax changed from 0.1467082641 to 0.1098241639 eV/angstrom and
+  remains above 0.05. The scientific state awaits another training request;
+  force convergence, frequency/connectivity acceptance and a final TS/barrier
+  have not been established. Do not promote the checkpoint or label energy.
+- The two additional DFT slots, 14003 and 14307, are consumed. Preserve the
+  completed 100-epoch recovery and cancelled BUCT2 copy; infer no further retry
+  or execution permission. A separate unapproved, bounded next-cycle proposal
+  and latest-label-only request are prepared in the case, with no new jobs.

@@ -173,3 +173,18 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
   and geometry checks used by local Sella and active-learning handoff.
 - `modules/transition_state_search/SELLA_LOCAL_PEAK.md`: exact request/review
   fields, deployment, bounded execution, return and validation limitations.
+
+## CH+CO paper-style AQCat25 / GPU VASP experiment
+
+- `archive/chco_paper_aqcat25_20261112/README.md`: case-scoped parser,
+  singleton-metadata recovery, verified 100-epoch fit, BA-Sella continuation
+  and accepted DFT labels; includes scientific and external-budget boundaries.
+- Local-only case root:
+  `calculations/fe110_ch_co_to_chco_ts_20261109/paper_aqcat25_ft512_20261112_v1/`.
+  `paper_state.v2.after_label14307.json` is the immutable second-label state;
+  its corresponding `labels/paper_chco_aqcat25_ft512_20261112_r001_label/force_label_review_v1/paper_force_label.json`
+  binds the raw force, input, scheduler and scientific review evidence.
+- `proposals/r002_budget_after_label14307/` under that local case contains the
+  unapproved bounded next-cycle proposal and canonical latest-label-only
+  training request. These files grant no execution permission; large/licensed
+  outputs and checkpoint weights remain outside Git.

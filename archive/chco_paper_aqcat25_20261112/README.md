@@ -56,10 +56,11 @@ Job 14279 started after the memory reduction and failed after 9 seconds during
 dataset/sampler initialization: `UnsupportedDatasetError` because the newly
 built singleton database lacked integer `natoms` metadata. It did not reach
 the training loop. Job 2280 remained queued at this checkpoint; its identical
-worker has the same missing-metadata problem. No trained model, next candidate
-or second DFT label exists. Preserve both submissions and prepare a reviewed
-correction before any new execution. Runtime receipts and private artifacts
-stay in the local case and the servers' `/home/sbq/sbq/` directories.
+worker has the same missing-metadata problem. At that checkpoint there was no
+trained model, next candidate or second DFT label. Both submissions were
+preserved for the separately reviewed correction below. Runtime receipts and
+private artifacts stay in the local case and the servers' `/home/sbq/sbq/`
+directories.
 
 ## Prepared metadata correction
 
@@ -106,10 +107,42 @@ were checked in work. No candidate overlaps the 513 protected geometries.
 `prepare_next_label.py` reuses the first accepted label's exact INCAR, KPOINTS
 and POTCAR family/bytes for the new POSCAR. The independently recomputed geometry
 and exact-input execution gate allowed only `SUBMIT_DIAGNOSTIC_VASP`.
-Canonical job 14307 is the second and final DFT job in the approved extension;
-it has entered SCF on MZ73. Its queued RAM request was reduced from 16 to 15 GiB
+Canonical job 14307 is the second and final DFT job in the approved extension.
+Its queued RAM request was reduced from 16 to 15 GiB
 with native before/after evidence, retaining every scientific input and the
 60-minute limit. The identical first VASP setup actually peaked at 4.394 GiB.
 `monitor_static_label.py` records queue and electronic progress separately;
 only final owning-module ingestion may accept a DFT force label. No additional
 training, DFT job, vibration, barrier or model/TS promotion is authorized here.
+
+## Accepted r001 label and external budget boundary
+
+Job 14307 reached native Slurm COMPLETED / 0:0 in 47 minutes 15 seconds.
+Original outputs returned byte-for-byte; all input and returned output hashes
+matched MZ73 and remained unchanged after copying. The owning ingestion checked
+normal completion, electronic convergence in 74 steps at EDIFF=1e-6, 49 finite
+raw force vectors, the 18-fixed/31-free mask, paired evaluated coordinates and
+finite total/atomic magnetic moments. Maximum coordinate difference was
+7.8752161e-6 A, below the 1e-5 A tolerance. Total magnetization was
+105.4270285 muB, a change of -0.1991487 muB from the prior label; this is not a
+magnetic-ground-state determination.
+
+The accepted movable-atom DFT fmax is **0.1098241639 eV/angstrom**, compared with
+0.1467082641 before training. It remains above the strict 0.05 stopping target.
+The raw paper label SHA is
+`fca758bb1a552345d811d45e16f8e5766470bf6427687a6133b8e8b4ae9fe28b`;
+the immutable `paper_state.v2.after_label14307.json` SHA is
+`6d13b33b213a40904fb0ee5f32548625979b03597c075a755ab091790db2ce7c`.
+The owner state is `awaiting_training_request`, with two accepted labels and
+no force-converged candidate, validated TS, final energy difference or barrier.
+
+The external user budget has consumed its two additional DFT jobs, 14003 and
+14307. The original training failed before epochs; the separately authorized
+recovery completed one logical 100-epoch fit and BUCT2 copy 2280 was cancelled.
+No further calculation is authorized. A non-executing review proposal and the
+owning module's latest-label-only training request are saved in the private
+case at `proposals/r002_budget_after_label14307/`. The proposal requests one
+100-epoch fit (10 minutes), one BA-Sella continuation (10 minutes) and one
+reviewed GPU VASP single point (60 minutes), each at 1 GPU / 4 CPU / 15 GiB on
+MZ73, with no retries or replicas. It is explicitly unapproved and requires
+fresh resource checks, candidate review and an execution gate before any job.

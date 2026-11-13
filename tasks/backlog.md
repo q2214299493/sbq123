@@ -79,3 +79,14 @@ Tasks are ordered by priority and should be handled one per Codex thread.
 Classify/characterize editable-build metadata and package resources before any cleanup.
 The existing `sbq_catalyst_agent_workflow.egg-info/PKG-INFO` mismatch remains unresolved;
 no deletion, reclassification event or state-transaction change is authorized by this note.
+
+## CH+CO paper-style AL continuation (needs new budget)
+
+MZ73 job 14307 produced the second accepted DFT label; movable fmax is
+0.1098241639 eV/angstrom, above the strict 0.05 target. Both approved additional
+DFT slots are consumed. The private case
+`calculations/fe110_ch_co_to_chco_ts_20261109/paper_aqcat25_ft512_20261112_v1/proposals/r002_budget_after_label14307/`
+contains an unapproved next-cycle proposal and the canonical latest-label-only
+training request. Further 100-epoch fitting, BA-Sella continuation and DFT need
+new user budget approval and the existing resource, review and execution gates.
+No extra job, retry, replica, vibration or TS/barrier acceptance is authorized.
