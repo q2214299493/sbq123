@@ -559,11 +559,13 @@ def diagnose_static_candidate_geometry(
     }.items()}
     candidate = workdir / "POSCAR"
     paper = validate_paper_dft_request(workdir, backend=backend)
+    from scripts.neb_agent.mz73_continuation import NAMES
     from scripts.neb_agent.mz73_timebudget import NEXT_LEAF
 
     request, contract, search_sources, continuation_binding = _bound_search_inputs(
         paths["initial_structure_path"], paths["search_request_path"], search_request_sha256, paths["contract_path"], backend,
-        continuation=workdir.name == NEXT_LEAF, candidate_path=candidate, protocol_sha256=paper["protocol_sha256"],
+        continuation=workdir.name == NEXT_LEAF or workdir.name in NAMES,
+        candidate_path=candidate, protocol_sha256=paper["protocol_sha256"],
     )
     if any(paper[key] != contract[key] for key in ("contract_sha256", "compatibility_sha256")):
         raise ValueError("paper DFT request and static candidate contract differ")

@@ -91,7 +91,9 @@ retains the earlier unapproved proposal under `proposals/r002_budget_after_label
 state are `continuation_force003_20261113/authorization.json` and
 `paper_state.v3.json` under that case. MZ73 training job 14347 passed its
 100-update/CUDA/checkpoint review; continuation 14362 returned a reviewed r002
-predicted candidate. Prepare its fresh exact-input DFT gate next.
+predicted candidate. Its fresh exact-input gate passed and canonical DFT job
+14377 is submitted; wait for and ingest the actual force label. The same
+pending job's RAM request was reduced to 7 GiB with an independent receipt.
 Continue verified latest-label-only 100-epoch fits, reviewed BA-Sella candidates
 and exact gated DFT points until raw movable fmax is strictly below 0.03, or
 the existing 250-label ceiling/failure boundary is reached. No automatic failure

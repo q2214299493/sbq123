@@ -254,23 +254,24 @@ def gate_args(**updates):
     return SimpleNamespace(**{**result, **updates})
 
 
-def test_round_one_does_not_default_to_round_zero_review(chain):
-    with pytest.raises(ValueError, match='round one requires'):
-        gate.candidate_inputs(gate_args(round=1), chain.root, sha256_file)
-    inputs = gate.candidate_inputs(gate_args(round=1, search_binding=chain.root / 'binding.json',
+@pytest.mark.parametrize('round_index', [1, 2, 249])
+def test_continuation_does_not_default_to_round_zero_review(chain, round_index):
+    with pytest.raises(ValueError, match='continuation requires'):
+        gate.candidate_inputs(gate_args(round=round_index), chain.root, sha256_file)
+    inputs = gate.candidate_inputs(gate_args(round=round_index, search_binding=chain.root / 'binding.json',
         search_binding_sha256=chain.seal()['binding_sha256'], candidate_review=chain.root / 'report.json',
         geometry_evidence=chain.root / 'result.json', review_image=chain.root / 'candidate.vasp'), chain.root, sha256_file)
     assert inputs['search_request_path'] == chain.root / 'binding.json'
 
 
-@pytest.mark.parametrize('updates', [{'round': 2}, {'round': 1, 'launch_recovery': True},
+@pytest.mark.parametrize('updates', [{'round': 250}, {'round': 1, 'launch_recovery': True},
                                     {'launch_recovery': True, 'timebudget_restart': True}, {'round': 1, 'timebudget_restart': True}])
 def test_unsupported_round_or_recovery_combination_refuses(chain, updates):
     with pytest.raises(ValueError):
         gate.candidate_inputs(gate_args(**updates), chain.root, sha256_file)
 
 
-@pytest.mark.parametrize('new_leaf', ['next', 'timeout'])
+@pytest.mark.parametrize('new_leaf', ['next', 'timeout', 'continuous'])
 def test_new_leaves_require_same_actual_external_budget_reply(chain, monkeypatch, new_leaf):
     label = chain.root
     (label / 'paper_DFT_request.json').write_text('{}')
@@ -279,14 +280,19 @@ def test_new_leaves_require_same_actual_external_budget_reply(chain, monkeypatch
     unrelated.write_bytes(reply.read_bytes())  # Same text/hash is insufficient when another artifact is named.
     monkeypatch.setattr(mz73_timebudget, 'validate_budget_authorization', lambda *args: {
         'source': {'path': str(reply), 'sha256': sha256_file(reply)}})
-    args = gate_args(round=int(new_leaf == 'next'), timebudget_restart=new_leaf == 'timeout')
+    from scripts.neb_agent import mz73_continuation
+
+    monkeypatch.setattr(mz73_continuation, 'validate_request', lambda *args: {
+        'source': {'path': str(reply), 'sha256': sha256_file(reply)}})
+    args = gate_args(round=2 if new_leaf == 'continuous' else int(new_leaf == 'next'), timebudget_restart=new_leaf == 'timeout')
+    backend = {'requires_continuation_authorization': True} if new_leaf == 'continuous' else {'requires_budget_authorization': True}
     with pytest.raises(ValueError, match='actual external execution source'):
-        gate.external_execution_source(args, label, {'requires_budget_authorization': True})
+        gate.external_execution_source(args, label, backend)
     args.execution_source, args.execution_source_sha256 = unrelated, sha256_file(unrelated)
     with pytest.raises(ValueError, match='actual new budget reply source'):
-        gate.external_execution_source(args, label, {'requires_budget_authorization': True})
+        gate.external_execution_source(args, label, backend)
     args.execution_source = reply
-    assert gate.external_execution_source(args, label, {'requires_budget_authorization': True}) == reply
+    assert gate.external_execution_source(args, label, backend) == reply
 
 
 def test_old_first_round_keeps_original_scope_without_new_budget(chain):
@@ -350,6 +356,23 @@ def test_next_round_static_owner_refuses_original_request_fallback(continuation_
     scope = continuation_static
     original = chain.root / 'initial.json'
     scope['arguments'].update(search_request_path=original, search_request_sha256=sha256_file(original))
+    with pytest.raises(ValueError, match='explicit continuation source binding'):
+        static.diagnose_static_candidate_geometry(**scope['arguments'])
+
+
+def test_r002_static_owner_keeps_the_continuation_source_gate(continuation_static, chain, monkeypatch):
+    scope = continuation_static
+    old = scope['workdir']
+    new = old.with_name('paper_chco_aqcat25_ft512_20261112_r002_label')
+    old.rename(new)
+    scope['arguments']['workdir'] = new
+    # This test isolates source selection; real continuation approval/state
+    # validation is covered by its own owner tests and real case preflight.
+    monkeypatch.setattr(static, 'validate_paper_dft_request', lambda *args, **kwargs: scope['paper'])
+    geometry = static.diagnose_static_candidate_geometry(**scope['arguments'])
+    assert geometry['status'] == 'PASS' and 'continuation_source_binding' in geometry
+    scope['arguments'].update(search_request_path=chain.root / 'initial.json',
+                              search_request_sha256=sha256_file(chain.root / 'initial.json'))
     with pytest.raises(ValueError, match='explicit continuation source binding'):
         static.diagnose_static_candidate_geometry(**scope['arguments'])
 

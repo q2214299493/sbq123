@@ -1507,3 +1507,18 @@ governance: docs/DOCUMENT_GOVERNANCE.md
   remainder. Read-only full-checkpoint CPU inspection peaked at 0.877 GiB;
   it did not measure actual training peak. The same resource-queued job was
   amended from 15 to 7 GiB with unchanged scientific inputs and then ran.
+
+## 2026-11-13 - Preserve r002 VASP Sources and Correct Pending RAM
+
+- Require the explicit continuation source binding for all authorized r002-r249
+  diagnostic candidates. Never fall back to the initial IDPP/model review.
+  The exact r002 source/geometry/preflight gate passed after 510 related checks;
+  canonical job 14377 is submitted and awaits its separate DFT force label.
+- Native pending evidence found a legacy fixed 16-GiB launcher header versus
+  the active 15-GiB cap. Before VASP started, reduce this exact job to 7 GiB
+  using bound identical-parameter/cell/species/mask evidence and the accepted
+  reference's measured 4.394-GiB peak (at least 1.5-fold headroom). Preserve the
+  submitted script, gate and separate native adjustment; do not resubmit.
+- Freeze sources already bound to actual ML/VASP runs. Correct future launcher
+  rendering in another source version, with a regression tying its header to
+  the approved backend memory value.

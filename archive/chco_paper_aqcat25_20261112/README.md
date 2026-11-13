@@ -193,3 +193,22 @@ completion and before/after transfer hashes. Continuation and local review/
 preparation helpers now select distinct per-round namespaces. Sources bound
 to already executed ML manifests must remain frozen; a later VASP-owner
 correction must use a separate source checkout rather than change those bytes.
+
+The r002 VASP owner now treats every registered continuation leaf as a
+continuation source, retaining the explicit new checkpoint/report/trajectory
+binding instead of falling back to the original IDPP request. The gate wrapper
+accepts subsequent rounds only with their actual reviewed candidate and the
+same raw-bound continuation instruction. The 510 related checks and actual
+r002 geometry/preflight/execution gate passed. Canonical DFT job 14377 was
+submitted for candidate SHA
+`1bc847b93979348b6d19f845fbb4e9380c58c28f3de2b3e694f9f1efe6810199`.
+
+Native inspection caught a legacy launcher defect while 14377 was still
+resource queued: its header requested 16 GiB although the active backend cap
+was 15 GiB. `continuation_static_memory.py` bound the exact unchanged inputs,
+cell/species/mask and the accepted reference OUTCAR's measured 4.394-GiB peak,
+then reduced this same pending job to 7 GiB with a 1.5-fold observed-peak margin.
+No VASP rerun, new job or scientific input change occurred. The historical
+launcher and gate remain frozen with a separate native amendment receipt.
+The subsequent launcher fix must use a new source version; this checkout's
+actual gate and amendment source bytes must remain available unchanged.

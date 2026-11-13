@@ -202,3 +202,7 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 
 - `archive/chco_paper_aqcat25_20261112/return_candidate.py`: native-success
   guarded byte-preserving return of candidate POSCAR, trajectory and report.
+
+- `archive/chco_paper_aqcat25_20261112/continuation_static_memory.py`: one
+  native pending-only RAM reduction, bound to the submitted bundle/gate and
+  identical-setup measured VASP peak; never restarts or resubmits a job.

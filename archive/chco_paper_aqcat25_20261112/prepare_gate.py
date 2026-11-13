@@ -8,15 +8,15 @@ import sys
 
 def candidate_inputs(args, case, digest):
     """Require explicit reviewed continuation sources for the only next round."""
-    if args.round not in (0, 1) or (args.launch_recovery and args.timebudget_restart):
-        raise ValueError('only rounds zero/one and one recovery mode are supported')
+    if not 0 <= args.round <= 249 or (args.launch_recovery and args.timebudget_restart):
+        raise ValueError('round must remain within the 250-label ceiling and use one recovery mode')
     if (args.launch_recovery or args.timebudget_restart) and args.round != 0:
         raise ValueError('a restart belongs only to the unchanged first candidate')
     explicit = (args.search_binding, args.search_binding_sha256, args.candidate_review,
                 args.geometry_evidence, args.review_image)
-    if args.round == 1:
+    if args.round >= 1:
         if not all(explicit):
-            raise ValueError('round one requires its new search binding, review, geometry evidence and image')
+            raise ValueError('continuation requires its new search binding, review, geometry evidence and image')
         request = args.search_binding.resolve(strict=True)
         if digest(request) != args.search_binding_sha256:
             raise ValueError('continuation binding raw bytes changed')
@@ -37,7 +37,7 @@ def external_execution_source(args, label, backend):
     from scripts.artifact_io import load_json_object, sha256_file
     from scripts.neb_agent.mz73_timebudget import require_budget_execution_source, validate_budget_authorization
 
-    needed = args.round == 1 or args.timebudget_restart or backend.get('requires_budget_authorization')
+    needed = args.round >= 1 or args.timebudget_restart or backend.get('requires_budget_authorization') or backend.get('requires_continuation_authorization')
     if not needed:
         if args.execution_source or args.execution_source_sha256:
             raise ValueError('external budget source is only accepted by the explicitly bounded new leaves')
@@ -47,7 +47,13 @@ def external_execution_source(args, label, backend):
     source = args.execution_source.resolve(strict=True)
     if sha256_file(source) != args.execution_source_sha256:
         raise ValueError('external execution source raw bytes changed')
-    budget = validate_budget_authorization(label, load_json_object(label / 'paper_DFT_request.json'), backend)
+    request = load_json_object(label / 'paper_DFT_request.json')
+    if backend.get('requires_continuation_authorization'):
+        from scripts.neb_agent.mz73_continuation import validate_request
+
+        budget = validate_request(label, request, backend)
+    else:
+        budget = validate_budget_authorization(label, request, backend)
     require_budget_execution_source({'path': str(source), 'sha256': args.execution_source_sha256}, budget)
     return source
 
