@@ -160,3 +160,7 @@ no deletion, reclassification event or state-transaction change is authorized by
 
 - Explicit separate user instruction completed: independently assemble the approved512+24 labels. The existing six-job benchmark in current_task.md is preserved. New package:calculations/fe110_reico_pilot300_20261022/combined_force_package_20261113_v1/. Source683/database614 rows and24rawforce tables verified;78/53/16 protected,original512/candidate packages unchanged. No training,newDFT,modelpromotion or adsorption-result acceptance.
 - Next on separate authorization:review the536-frame training configuration,phase weighting and budget. Evidence:docs/reviews/fe110_force_package_20261113/README.md and package independent_verification.json.
+
+## IndependentC2/C3 near-stable acceptance sources after536 review (2026-11-13)
+
+- Separate536 configuration audit completed;existing six-job current_task.md remains unchanged. Next on user request:read-only inventory compatible near-stable C2H3/intactC3H2O labels outside training families to establish an independent acceptance-source plan. Do not reuse family_0099 training frames or CO+C2H2diagnostics as independent intactC3acceptance;do not repartition78/53/16,submitDFT or train. Review:docs/reviews/fe110_force536_training_review_20261113/README.md.

@@ -389,3 +389,8 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `calculations/fe110_reico_pilot300_20261022/combined_force_package_20261113_v1/`:536 train/78 development/53 heldout plus16 quarantine; exact 512+24 admission, raw-source snapshots, source bindings and database verification. No training or new DFT.
 - `archive/fe110_force_package_20261113/`, `configs/fe110_reico_pilot/combined_force_package_20261113_v1.json`, `tests/test_force_package_20261113.py`:exclusive assembly, immutable-input and protected-partition guards, independent replay and inventory seal.
 - `docs/reviews/fe110_force_package_20261113/README.md`:scope, lineage, sampler, magnetic limits and reproducible entries.
+
+## Fe110536 training configuration audit (2026-11-13)
+
+- `archive/fe110_force536_training_review_20261113/audit.py`:read-only train/dev force-bin,weight-mass and native budget probes;no executable request or training.
+- `docs/reviews/fe110_force536_training_review_20261113/README.md` and `calculations/fe110_reico_pilot300_20261022/force536_training_review_20261113_v1/`:bound configuration review,proposed budget,validation gaps and frozen-package checks.

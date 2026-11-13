@@ -78,3 +78,7 @@ Update this table in place. Move resolved items to historical results or Git his
 ## 2026-10-26 - Grouped static9922612 withheld at NELM boundary
 
 family_0021_step004/C2HO finished normally but reached200/NELM200; lastSCFdeltaE=-9.8411e-5eV anddeltaeps=-2.1269e-5eV vsEDIFF1e-6eV. The generic marker summary can sayconverged; the established strict static validator rejects the NELM boundary. Exclude from training candidates; retain rawoutputs and source identity. No retry authorized or submitted. Evidence: calculations/fe110_reico_pilot300_20261022/grouped_qc_20261026_v2/independent_verification.json. Resolution pending any separately authorized recovery decision.
+
+## 2026-11-13 - RSI admission blocked during536 configuration review
+
+- One configured use_research invocation returnedBLOCKED/NOT_RUN before model startup because the configured oldWindowsApps Codex executable was missing.0modelturns/0actions/0selectedorappliedpolicies;no retry or external configuration repair. Module evidence review completed without claiming RSI advice. Receipt:force536_training_review_20261113_v1/rsi_entry_receipt.json and the matching RSI run_receipt.json.

@@ -1685,3 +1685,8 @@ User explicitly cancelled only9926805direct and9926806NequiP,then requested all3
 
 - Under the explicit user request for a separate admission decision, all 24 job 9924387 low-force candidates are approved for the next training partition only; prospective 536/78/53 plus 16 observed-heldout quarantine. Preserve family_0099 lineage and mark step 15 as an early process frame. No assembly, training, model promotion or formal adsorption acceptance. Original 512 and candidate packages remain frozen.
 - Bound evidence and decision: calculations/fe110_reico_pilot300_20261022/c3_lowforce_admission_20261109_v1/; rationale: docs/reviews/fe110_c3_lowforce_admission_20261109/README.md.
+
+## 2026-11-13 - Separate536 configuration review, no execution
+
+- Recommend preparing one uniform536 two-epoch feasibility configuration from originalAQCat25,lr1e-5/seed42/batch1,1072nativeiterations and proposed0.5GPUhour cap. This is not training authorization. Defer2x/4xstage weighting and unfreezing:C2H3dev1high-force/C3H2Odev9high-force lack near-stable acceptance coverage. Preserve536/512/checkpoints/78/53/16.
+- Evidence:docs/reviews/fe110_force536_training_review_20261113/README.md and calculations/fe110_reico_pilot300_20261022/force536_training_review_20261113_v1/. Next:read-only independent near-stable acceptance-source inventory;no repartition or newDFT.
