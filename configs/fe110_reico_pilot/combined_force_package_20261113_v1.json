@@ -1,0 +1,37 @@
+{
+  "document_kind": "force_package_assembly_scope",
+  "output": "calculations/fe110_reico_pilot300_20261022/combined_force_package_20261113_v1",
+  "expected_split_counts": {"train": 536, "development": 78, "heldout": 53},
+  "observed_heldout_count": 16,
+  "training_authorized": false,
+  "inputs": {
+    "prior_manifest": {
+      "path": "calculations/fe110_reico_pilot300_20261022/combined_force_package_20261027_v3/training_manifest.json",
+      "sha256": "ebf30df5cb009ac24293ca2b59e384b9158e796d4ec53301bf537b224dcfe4ee"
+    },
+    "prior_inventory": {
+      "path": "calculations/fe110_reico_pilot300_20261022/combined_force_package_20261027_v3/package_inventory.json",
+      "sha256": "d38be6556261bf7785332c0305d5345530793a598846d2a19e8abb676c12436e"
+    },
+    "candidate_manifest": {
+      "path": "calculations/fe110_reico_pilot300_20261022/c3_lowforce_candidates_20261109_v1/candidate_manifest.json",
+      "sha256": "0e4eec5a48c5ed084bfdc230852226ac2f0b2ca55489c39d389fd58b18704c6a"
+    },
+    "candidate_inventory": {
+      "path": "calculations/fe110_reico_pilot300_20261022/c3_lowforce_candidates_20261109_v1/package_inventory.json",
+      "sha256": "299fd58f7f685bc2bc6fed92b868ae3d49193f8c7cbd583255f804ce48b31431"
+    },
+    "admission_decision": {
+      "path": "calculations/fe110_reico_pilot300_20261022/c3_lowforce_admission_20261109_v1/admission_decision.json",
+      "sha256": "0789e4512f60f18882aa5fbda3c36b459e16f89f41289ba30c07ff0a8d8b6d96"
+    },
+    "admission_evidence": {
+      "path": "calculations/fe110_reico_pilot300_20261022/c3_lowforce_admission_20261109_v1/admission_evidence.json",
+      "sha256": "0722c3fbb2eba40088b4a211928902b68be7d053c654ebc2f7166c6d1fa827ef"
+    },
+    "admission_verification": {
+      "path": "calculations/fe110_reico_pilot300_20261022/c3_lowforce_admission_20261109_v1/decision_verification.json",
+      "sha256": "988392661bb55f53e2d384ea8a9c77573b2d3554b5378eca1860a41ab579db93"
+    }
+  }
+}

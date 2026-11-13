@@ -383,3 +383,9 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `archive/fe110_scratch512_20261028/submit_c2_dft.py`, `register_c2_dft.py`, `tests/test_c2_three_arm_submission.py`:scoped3jobcanonicalVASPsubmissionandLSFevidence,append-onlymetadata plan/review/apply/readback;outputsunder calculations/.../c2_three_arm_submission_20261028_v1/.
 
 - `docs/reviews/fe110_c2_three_arm_stop_20261029/README.md`, `user_authorization.md`:two explicit user cancellations via canonical STOP_JOB;LSFEXIT/EXIT/DONE,stopped-frameQC,3originalCONTCAR+36-symmetry/element-permutationcomparison;local structure_comparison/containsJSON/PNG/ZIP;23metadataINSERT+3workflowchanges/allreadbacks/0scientificresults.
+
+## Fe110 536-frame independent force package (2026-11-13)
+
+- `calculations/fe110_reico_pilot300_20261022/combined_force_package_20261113_v1/`:536 train/78 development/53 heldout plus16 quarantine; exact 512+24 admission, raw-source snapshots, source bindings and database verification. No training or new DFT.
+- `archive/fe110_force_package_20261113/`, `configs/fe110_reico_pilot/combined_force_package_20261113_v1.json`, `tests/test_force_package_20261113.py`:exclusive assembly, immutable-input and protected-partition guards, independent replay and inventory seal.
+- `docs/reviews/fe110_force_package_20261113/README.md`:scope, lineage, sampler, magnetic limits and reproducible entries.
