@@ -27,6 +27,10 @@ def prepared(tmp_path, monkeypatch):
     original, target = labels / budget.FAILED_LEAF, labels / budget.TIMEOUT_LEAF
     config = yaml.safe_load(CONFIG.read_text(encoding="utf-8"))
     old_config = config["backends"][HOST]
+    from scripts.neb_agent.mz73_continuation import NAMES
+
+    old_config.pop("continuous_active_learning", None)
+    old_config["allowed_workdir_names"] = [name for name in old_config["allowed_workdir_names"] if name not in NAMES]
     old_config.pop("time_budget_extension")
     old_config["allowed_workdir_names"].remove(budget.TIMEOUT_LEAF)
     snapshot = case / "backend_at_job13907.yaml"

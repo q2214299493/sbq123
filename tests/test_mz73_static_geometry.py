@@ -395,6 +395,10 @@ def test_other_leaf_no_output_cannot_replace_current_leaf_with_real_outcar(scope
     # own tests; no production validation or authorization is bypassed here.
     historical = yaml.safe_load(static.DEFAULT_CONFIG.read_text(encoding="utf-8"))
     configured = historical["backends"][static.BACKEND_ID]
+    from scripts.neb_agent.mz73_continuation import NAMES
+
+    configured.pop("continuous_active_learning", None)
+    configured["allowed_workdir_names"] = [name for name in configured["allowed_workdir_names"] if name not in NAMES]
     configured.pop("time_budget_extension")
     configured["allowed_workdir_names"].remove(TIMEOUT_LEAF)
     config_path = scope["workdir"].parent / "historical_30min_backend.yaml"

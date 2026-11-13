@@ -188,3 +188,14 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
   unapproved bounded next-cycle proposal and canonical latest-label-only
   training request. These files grant no execution permission; large/licensed
   outputs and checkpoint weights remain outside Git.
+
+- `scripts/ts_strategy_engine/paper_stopping.py`: raw-bound stricter stopping
+  revision, preserving the original protocol/history and strict comparison.
+- `scripts/neb_agent/mz73_continuation.py`: exact authorization, sequential
+  state, host, resource and r002-r249 scope checks for the force-0.03 campaign.
+- `archive/chco_paper_aqcat25_20261112/continuous_training.py` and
+  `continuous_training_memory.py`: one exclusively reserved latest-label fit
+  and its separately evidenced pending resource amendment.
+- Local-only `continuation_force003_20261113/authorization.json`,
+  `state.after_target_revision.json` and `paper_state.v3.json` under the case
+  identify the new approval, immutable starting state and active continuation.

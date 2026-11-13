@@ -17,6 +17,7 @@ from typing import Any
 
 from scripts.artifact_io import require_sha256, sha256_bytes, sha256_json
 from scripts.scientific_validation import finite_array, integer_number, validate_finite_tree
+from scripts.ts_strategy_engine.paper_stopping import effective_force_target, validate_stopping_revision
 
 
 PAPER_SOURCE = "https://arxiv.org/abs/2603.24482"
@@ -442,7 +443,7 @@ def _evaluation_chain(state: dict[str, Any]) -> dict[str, Any]:
             continue
         latest, maximum = _validate_accepted_record(protocol, row)
         completed += 1
-        phase = _label_phase(maximum, index, protocol["maximum_dft_evaluations"])
+        phase = _label_phase(maximum, index, protocol["maximum_dft_evaluations"], effective_force_target(state, index))
         if row.get("training_result") is not None:
             if phase != "awaiting_training_request":
                 raise ValueError("training follows convergence or budget exhaustion")
@@ -452,8 +453,8 @@ def _evaluation_chain(state: dict[str, Any]) -> dict[str, Any]:
             "executed": executed, "completed": completed}
 
 
-def _label_phase(maximum: float, used: int, budget: int) -> str:
-    if maximum < FORCE_TARGET_EV_PER_A:
+def _label_phase(maximum: float, used: int, budget: int, target: float = FORCE_TARGET_EV_PER_A) -> str:
+    if maximum < target:
         return "force_converged_candidate_only"
     if used >= budget:
         return "budget_exhausted_not_converged"
@@ -475,6 +476,7 @@ def validate_state(state: dict[str, Any]) -> None:
     if state.get("protocol_sha256") != sha256_json(state["protocol"]):
         raise ValueError("frozen protocol hash mismatch")
     _validate_protocol(state["protocol"])
+    validate_stopping_revision(state)
     if state.get("restrictions") != _RESTRICTIONS or state["protocol"].get("restrictions") != _RESTRICTIONS:
         raise ValueError("a planning state cannot grant execution or scientific authority")
     rows = state["evaluations"]
@@ -632,8 +634,9 @@ def accept_force_label(state: dict[str, Any], raw_label: bytes, *, expected_sha2
     updated["evaluations"][-1]["label_sha256"] = accepted["artifact_sha256"]
     updated["completed_label_count"] += 1
     updated["DFT_movable_fmax_eV_per_A"] = maximum
-    updated["force_converged_candidate"] = maximum < FORCE_TARGET_EV_PER_A
-    updated["status"] = _label_phase(maximum, updated["reserved_dft_slots"], protocol["maximum_dft_evaluations"])
+    target = effective_force_target(state, updated["reserved_dft_slots"])
+    updated["force_converged_candidate"] = maximum < target
+    updated["status"] = _label_phase(maximum, updated["reserved_dft_slots"], protocol["maximum_dft_evaluations"], target)
     return _seal(updated)
 
 

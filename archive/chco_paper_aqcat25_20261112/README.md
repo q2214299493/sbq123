@@ -139,10 +139,39 @@ no force-converged candidate, validated TS, final energy difference or barrier.
 The external user budget has consumed its two additional DFT jobs, 14003 and
 14307. The original training failed before epochs; the separately authorized
 recovery completed one logical 100-epoch fit and BUCT2 copy 2280 was cancelled.
-No further calculation is authorized. A non-executing review proposal and the
+At that checkpoint no further calculation was authorized. A non-executing review proposal and the
 owning module's latest-label-only training request are saved in the private
 case at `proposals/r002_budget_after_label14307/`. The proposal requests one
 100-epoch fit (10 minutes), one BA-Sella continuation (10 minutes) and one
 reviewed GPU VASP single point (60 minutes), each at 1 GPU / 4 CPU / 15 GiB on
 MZ73, with no retries or replicas. It is explicitly unapproved and requires
 fresh resource checks, candidate review and an execution gate before any job.
+
+## User-authorized continuation with a 0.03 force target
+
+The user subsequently requested continuing until convergence and tightened the
+stopping condition to raw movable-atom DFT fmax **strictly below 0.03 eV/A**.
+`scripts/ts_strategy_engine/paper_stopping.py` attaches the raw-bound approval
+and original accepted state without rewriting its protocol, requests or labels.
+The paper baseline remains 0.05; the current case's reviewed revision is 0.03.
+Legacy states retain their original behavior. Tests explicitly require 0.04 to
+continue and exactly 0.03 to remain unconverged.
+
+The new case authority is `paper_state.v3.json`; the original v2 state and all
+old outputs remain frozen. Approval SHA
+`f3f660dba3bf4782641e718fb92d16c014a3f4fb614ee33043eb3ef48dacfebd`
+binds the actual instruction, the two-label origin, MZ73, 100-epoch resets,
+latest-label-only fitting, per-job caps and the existing 250-label ceiling.
+It permits subsequent sequential rounds until the new target or that ceiling,
+with no automatic failure retries or final TS/barrier promotion.
+`mz73_continuation.py` validates the exact r002-r249 leaves and prepared owner
+state. Every candidate still returns to work for review and a new VASP gate.
+
+`continuous_training.py` prepared the next fit from the accepted 14307 label
+and submitted MZ73 job 14347. The initial 15-GiB request was resource queued:
+native AllocMem established that only 7.48 GiB remained allocatable. A read-only
+full checkpoint/optimizer/database inspection measured 0.877 GiB peak CPU RSS;
+this is not an actual training-peak measurement. The separate
+`continuous_training_memory.py` amendment lowered the same pending job to
+7 GiB, preserving 1 GPU, 4 CPUs, 100 epochs, all inputs and the 10-minute limit.
+Native evidence then showed RUNNING. No replacement job was submitted.

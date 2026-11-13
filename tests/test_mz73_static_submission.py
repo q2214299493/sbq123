@@ -187,7 +187,7 @@ def test_mz73_backend_configuration_cannot_expand_resource_scope(tmp_path, key, 
         mz73_static.load_mz73_static_backend(NAME, config_path=changed)
 
 
-@pytest.mark.parametrize("name", ["job", "paper_chco_aqcat25_ft512_20261112_r002_label"])
+@pytest.mark.parametrize("name", ["job", "paper_chco_aqcat25_ft512_20261112_r250_label"])
 def test_wrong_experiment_scope_rejected_before_files_or_network(tmp_path, monkeypatch, name):
     monkeypatch.setattr(submission, "_run", lambda argv: pytest.fail("network must not run"))
     with pytest.raises(ValueError, match="scoped"):

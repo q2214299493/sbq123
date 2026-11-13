@@ -1489,3 +1489,21 @@ governance: docs/DOCUMENT_GOVERNANCE.md
   completed 100-epoch recovery and cancelled BUCT2 copy; infer no further retry
   or execution permission. A separate unapproved, bounded next-cycle proposal
   and latest-label-only request are prepared in the case, with no new jobs.
+
+## 2026-11-13 - User Tightens CH+CO Force Target and Authorizes Continuation
+
+- The user explicitly requested continued fine-tuning until convergence and
+  changed the raw movable-atom DFT fmax target from 0.05 to strictly below
+  0.03 eV/A. Record this as a reviewed stopping revision, preserving the frozen
+  original protocol and accepted label bytes. Do not mistake 0.04 or exactly
+  0.03 for convergence in the active case. Old states retain 0.05 behavior.
+- The new continuation approval is raw-bound to the actual user instruction,
+  the accepted two-label origin and MZ73. Retain 100-epoch resets from the
+  original AQCat25 base, latest-label-only data, separate work-side reviews,
+  exact-input VASP gates, 10-minute ML / 60-minute DFT caps, no failure retry
+  and the pre-existing 250-label method ceiling. This supersedes the prior
+  need for a new-round budget reply; it does not approve a final TS or barrier.
+- Job 14347 is the next fit. Native AllocMem established a 7.48-GiB scheduling
+  remainder. Read-only full-checkpoint CPU inspection peaked at 0.877 GiB;
+  it did not measure actual training peak. The same resource-queued job was
+  amended from 15 to 7 GiB with unchanged scientific inputs and then ran.

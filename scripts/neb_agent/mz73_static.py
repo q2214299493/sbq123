@@ -66,6 +66,7 @@ def require_remote_target(backend: dict[str, Any], remote_dir: str, workdir_name
 
 
 def _validate_fixed_scope(backend: dict[str, Any]) -> None:
+    from scripts.neb_agent.mz73_continuation import validate_scope
     from scripts.neb_agent.mz73_timebudget import validate_budget_scope
 
     fixed = {
@@ -95,6 +96,7 @@ def _validate_fixed_scope(backend: dict[str, Any]) -> None:
     if _RECOVERY_LEAF in names and recovery != _RECOVERY_SCOPE:
         raise ValueError("MZ73 launch recovery is not explicitly registered")
     validate_budget_scope(backend)
+    validate_scope(backend)
     caps = backend.get("reviewed_contract")
     if not isinstance(caps, dict) or set(caps) != {"contract_sha256", "compatibility_sha256", "atom_map_sha256"}:
         raise ValueError("MZ73 experiment requires its exact reviewed contract identities")
@@ -139,6 +141,12 @@ def load_mz73_static_backend(
     if extension and workdir_name in extension["allowed_workdir_names"]:
         backend["time_limit"] = extension["time_limit"]
         backend["requires_budget_authorization"] = True
+    from scripts.neb_agent.mz73_continuation import NAMES
+
+    if workdir_name in NAMES:
+        backend["time_limit"] = backend["continuous_active_learning"]["time_limit"]
+        backend["memory"] = backend["continuous_active_learning"]["memory"]
+        backend["requires_continuation_authorization"] = True
     return backend
 
 
@@ -252,7 +260,11 @@ def validate_paper_dft_request(workdir: Path, *, backend: dict[str, Any] | None 
         raise ValueError("launch recovery cannot consume or overwrite a scientific-round leaf")
     from scripts.neb_agent.mz73_timebudget import TIMEOUT_LEAF, validate_budget_authorization, validate_timebudget_restart
 
-    if backend.get("requires_budget_authorization"):
+    if backend.get("requires_continuation_authorization"):
+        from scripts.neb_agent.mz73_continuation import validate_request
+
+        result["execution_budget_authorization"] = validate_request(workdir, request, backend)
+    elif backend.get("requires_budget_authorization"):
         result["execution_budget_authorization"] = validate_budget_authorization(workdir, request, backend)
     elif "execution_budget_authorization" in request:
         raise ValueError("extended budget metadata is outside its exact two-leaf scope")

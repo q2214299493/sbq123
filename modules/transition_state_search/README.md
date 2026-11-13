@@ -781,3 +781,15 @@ locally and the fixed remote directory exclusively, and limits Slurm to one GPU,
 four CPUs, 16 GB and ten minutes. Unknown submission outcomes retain both
 reservations; training completion still requires native scheduler evidence and
 independently checked 100-update output before state registration.
+
+For the user's subsequent CH+CO force-0.03 continuation, `paper_stopping.py`
+binds one explicit stricter stopping revision to the original accepted state
+and raw user instruction. It preserves historical 0.05 protocol/input/label
+bytes and applies the new strict 0.03 target to the resumed label and later
+rounds. This remains candidate force convergence only. The exact
+`mz73_continuation.py` scope authorizes sequential r002-r249 points under the
+existing 250-label method ceiling, per-job resource caps and no failure retry.
+Every new point still requires latest-label-only 100-epoch reset training,
+verified native completion, candidate/source/geometry review and a fresh
+`SUBMIT_DIAGNOSTIC_VASP` decision. There is no general GPU VASP authority,
+automatic server-side chaining, checkpoint promotion or TS/barrier acceptance.

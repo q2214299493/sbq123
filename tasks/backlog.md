@@ -80,13 +80,17 @@ Classify/characterize editable-build metadata and package resources before any c
 The existing `sbq_catalyst_agent_workflow.egg-info/PKG-INFO` mismatch remains unresolved;
 no deletion, reclassification event or state-transaction change is authorized by this note.
 
-## CH+CO paper-style AL continuation (needs new budget)
+## CH+CO paper-style AL continuation (authorized strict 0.03 target)
 
 MZ73 job 14307 produced the second accepted DFT label; movable fmax is
-0.1098241639 eV/angstrom, above the strict 0.05 target. Both approved additional
-DFT slots are consumed. The private case
-`calculations/fe110_ch_co_to_chco_ts_20261109/paper_aqcat25_ft512_20261112_v1/proposals/r002_budget_after_label14307/`
-contains an unapproved next-cycle proposal and the canonical latest-label-only
-training request. Further 100-epoch fitting, BA-Sella continuation and DFT need
-new user budget approval and the existing resource, review and execution gates.
-No extra job, retry, replica, vibration or TS/barrier acceptance is authorized.
+0.1098241639 eV/angstrom. The original two-slot extension is consumed. The user
+subsequently authorized continuing until convergence at a stricter 0.03 target.
+The private case
+`calculations/fe110_ch_co_to_chco_ts_20261109/paper_aqcat25_ft512_20261112_v1/`
+retains the earlier unapproved proposal under `proposals/r002_budget_after_label14307/` as history. The new approval and active
+state are `continuation_force003_20261113/authorization.json` and
+`paper_state.v3.json` under that case. MZ73 training job 14347 is running.
+Continue verified latest-label-only 100-epoch fits, reviewed BA-Sella candidates
+and exact gated DFT points until raw movable fmax is strictly below 0.03, or
+the existing 250-label ceiling/failure boundary is reached. No automatic failure
+retry, vibration, model promotion or final TS/barrier acceptance is authorized.
