@@ -182,6 +182,13 @@ Relaxed-state analysis, deduplication, and export are handled by the correspondi
 Fe(110) site and anchor geometry remains owned only by
 `scripts/adsorption/build_fe110_adsorption.py`.
 
+The global `surface-adsorption-builder` skill is an installed copy of the
+repository skill. Deploy its `SKILL.md`, `agents/openai.yaml` and CO compatibility
+launcher from `skills/surface-adsorption-builder/` together. The launcher requires
+an explicit repository, site JSON and reviewed plan; it runs the repository
+module and contains no separate Fe-pair or placement algorithm. Legacy
+height/bond-length overrides and no-plan fixed-site sweeps are rejected.
+
 ## Compact Output Contract
 
 Detailed records are JSON/JSONL. Stdout is limited to short counts or this table:
