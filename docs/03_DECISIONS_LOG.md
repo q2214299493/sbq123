@@ -1455,8 +1455,21 @@ governance: docs/DOCUMENT_GOVERNANCE.md
   singleton database; do not disable the sampler or change the force-only
   objective. The installed MZ73 CPU dataset/sampler/batch preflight reproduced
   the original failure and passed with the sidecar, without training a model.
-- Preserve job 14279, its failed output, the queued broken copy and the original
-  source worktree. Prepare one separate recovery package with no execution
-  permission; require a new exact user approval for the extra training job
-  and retirement of the pending BUCT2 copy. The remaining previously approved
-  DFT slot is unchanged and still requires a newly reviewed candidate and gate.
+- Preserve job 14279, its failed output and the original source worktree. The
+  user approved one exact recovery and retirement of the pending broken copy;
+  job 14292 was submitted and copy 2280 was natively cancelled without deleting
+  data. This does not grant further retries. The remaining previously approved
+  DFT slot is unchanged and still requires an actually completed checkpoint,
+  newly reviewed candidate and fresh gate. A failed observation connection
+  grants no authority to infer completion or submit a replacement.
+
+- The recovery checkpoint passed separate native zero-exit, 100 actual updates,
+  CUDA-only execution, raw-label/database and finite-checkpoint checks. It is
+  registered only as the next search candidate. The next BA-Sella search keeps
+  the prior geometry/mode and does no IDPP; new candidate geometry/source review
+  and a fresh exact-input gate precede the remaining DFT single point.
+- For this authorized r001 job, queued RAM was reduced from 16 to 15 GiB inside
+  its approved ceiling after the identical first setup's 4.394 GiB peak was
+  verified. A separate native amendment retains the job ID, input/gate bytes,
+  GPU/CPU counts and 60-minute limit. This case receipt grants no standing
+  permission to modify other queued or running calculations.

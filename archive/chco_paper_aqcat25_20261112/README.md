@@ -81,3 +81,35 @@ including retirement of the still-pending broken BUCT2 copy. The original
 approved budget has `max_training_jobs=1` and `automatic_retries=0`; no recovery
 or extra DFT execution is inferred from the previous submission permission.
 Failed inputs/outputs and the original source worktree remain frozen.
+
+The user approved that exact package. Recovery job 14292 completed 100 epochs
+and 100 observed optimizer updates on CUDA/RTX 4090 in 518.807 scheduler seconds;
+old copy 2280 is natively CANCELLED. A temporary Oray access restriction cleared.
+Native controller zero-exit events were recovered after the terminal enum had
+expired. Independent CPU inspection verified the real checkpoint (4493 finite
+model tensors), singleton database, 18-fixed/31-free mask and original raw
+forces. The frozen base is unchanged; the new candidate checkpoint SHA is
+`209e7a50ce10beb515e19b945fbf12b25591f9ff89077acae6432ba3e16b9406`.
+`collect_training_native_exit.py` and `inspect_trained_checkpoint.py` establish
+these separate native-exit and checkpoint facts, without model promotion.
+
+## Next candidate and exact DFT validation
+
+`paper_continuation_job.py` reuses the previous trajectory's final geometry and
+mode with the newly verified checkpoint; it performs no IDPP, training or VASP.
+Job 14304 completed natively with exit 0. Its candidate movable fmax is
+0.0093971436 eV/angstrom, C-C is 1.752437 A, and CH/CO remain intact. The 24-frame
+trajectory has a maximum 0.05 A adjacent displacement and no fixed-atom drift.
+Raw worker JSON/code/structure mappings and an actual top/side geometry review
+were checked in work. No candidate overlaps the 513 protected geometries.
+
+`prepare_next_label.py` reuses the first accepted label's exact INCAR, KPOINTS
+and POTCAR family/bytes for the new POSCAR. The independently recomputed geometry
+and exact-input execution gate allowed only `SUBMIT_DIAGNOSTIC_VASP`.
+Canonical job 14307 is the second and final DFT job in the approved extension;
+it has entered SCF on MZ73. Its queued RAM request was reduced from 16 to 15 GiB
+with native before/after evidence, retaining every scientific input and the
+60-minute limit. The identical first VASP setup actually peaked at 4.394 GiB.
+`monitor_static_label.py` records queue and electronic progress separately;
+only final owning-module ingestion may accept a DFT force label. No additional
+training, DFT job, vibration, barrier or model/TS promotion is authorized here.

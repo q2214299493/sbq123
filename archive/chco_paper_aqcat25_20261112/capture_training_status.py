@@ -56,7 +56,13 @@ def capture(case, replica=False, record_path=None):
     else:
         backend = primary.remote.load_mz73_static_backend(primary.budget_owner.TIMEOUT_LEAF)
         argv = primary.remote.ssh_argv(backend, command)
-    result = subprocess.run(argv, capture_output=True, timeout=25, check=True)
+    result = subprocess.run(argv, capture_output=True, timeout=25, check=False)
+    if result.returncode != 0:
+        failure = case / ('training_transport_error_' + datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ') + '.json')
+        write_json_exclusive(failure, {'document_kind': 'training_observation_transport_error', 'argv': argv,
+            'returncode': result.returncode, 'stderr': result.stderr.decode(errors='replace')[:16000],
+            'job_id': record['job_id'], 'scheduler_state_established': False, 'calculation_changed': False})
+        raise RuntimeError('SSH observation failed: ' + result.stderr.decode(errors='replace')[:2000])
     primary.require(not result.stderr and len(result.stdout) <= 400000, 'unexpected capture response')
     data = json.loads(result.stdout)
     directory = case / ('training_capture_' + packet['hostname'] + '_' + datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ'))
