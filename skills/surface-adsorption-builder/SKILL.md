@@ -42,10 +42,17 @@ The module READMEs own command details and the distinction between site
 dictionaries, initial-mode coverage, configurations and final stable minima.
 
 The legacy `scripts/place_fe_co_candidates.py` path is a CO-only compatibility
-launcher. It requires `--repo-root`, `--sites` (the repository site JSON),
-`--plan` and `--outdir`; it delegates to the repository generator. Old site-name
-lists and height/bond-length overrides are not supported. A missing plan or
-repository blocks generation rather than running the retired fixed-site sweep.
+launcher: `python scripts/place_fe_co_candidates.py PATH_TO_POSCAR`. It finds
+the unique project above the current directory or POSCAR, asks the repository
+to detect fresh sites, and uses `plan.json` or `prescreen_plan.json` beside the
+POSCAR. Without a sidecar, the repository planner prepares a draft; missing
+evidence or review still blocks candidate generation and retains the inputs.
+Output defaults to a new numbered directory under
+`modules/adsmind_lite/data/candidates/co_candidates`; existing results are
+never overwritten. `--repo-root`, `--sites`, `--plan` and `--outdir` remain
+optional explicit selections. Ambiguous projects/plans require a selection.
+Old site-name lists, height/bond-length overrides and fixed-site sweeps remain
+unsupported. No draft is automatically approved.
 
 ## Handoff
 

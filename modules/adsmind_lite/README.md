@@ -184,10 +184,19 @@ Fe(110) site and anchor geometry remains owned only by
 
 The global `surface-adsorption-builder` skill is an installed copy of the
 repository skill. Deploy its `SKILL.md`, `agents/openai.yaml` and CO compatibility
-launcher from `skills/surface-adsorption-builder/` together. The launcher requires
-an explicit repository, site JSON and reviewed plan; it runs the repository
-module and contains no separate Fe-pair or placement algorithm. Legacy
-height/bond-length overrides and no-plan fixed-site sweeps are rejected.
+launcher from `skills/surface-adsorption-builder/` together. The launcher accepts
+just the slab POSCAR: it finds a unique project above cwd or the slab and runs
+this module with `--prepare-missing` (CO, `no_relax` only). Missing sites are
+detected afresh. A unique `plan.json` or `prescreen_plan.json` beside the slab is
+reused without rewriting; otherwise the canonical planner writes a draft.
+Missing evidence/review blocks generation and retains preparation artifacts in
+`_inputs/`. Default output is a fresh numbered directory under
+`modules/adsmind_lite/data/candidates/co_candidates`. An explicit output must
+not exist. All four launcher path options remain available; ambiguous project
+or sidecar choices require an explicit selection. Ordinary generator calls
+still require `--sites`, `--plan` and `--output`. The launcher contains no
+separate placement algorithm or automatic approval. Legacy height/bond-length
+overrides and fixed-site sweeps are rejected.
 
 ## Compact Output Contract
 
