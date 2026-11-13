@@ -4,8 +4,12 @@ import hashlib
 import json
 import os
 import tempfile
+import time
 from pathlib import Path
 from typing import Any
+
+
+_WINDOWS_REPLACE_RETRY_DELAYS = (0.01, 0.02, 0.04, 0.08, 0.16, 0.32, 0.32)
 
 
 def sha256_file(path: Path) -> str:
@@ -67,6 +71,20 @@ def write_json(path: Path, payload: Any, *, ensure_ascii: bool = False) -> Path:
     return write_json_atomic(path, payload, ensure_ascii=ensure_ascii)
 
 
+def _replace_with_windows_retry(source: Path, destination: Path) -> None:
+    """Keep atomic replacement; bound native Windows contention retries to 0.95s of backoff."""
+    for attempt in range(len(_WINDOWS_REPLACE_RETRY_DELAYS) + 1):
+        try:
+            os.replace(source, destination)
+            return
+        except OSError as exc:
+            # Access denied can be transient on Windows, but may also be permanent.
+            # Unrelated/POSIX errors fail immediately; persistent errors still escape.
+            if getattr(exc, "winerror", None) not in {5, 32, 33} or attempt == len(_WINDOWS_REPLACE_RETRY_DELAYS):
+                raise
+            time.sleep(_WINDOWS_REPLACE_RETRY_DELAYS[attempt])
+
+
 def write_json_atomic(path: Path, payload: Any, *, ensure_ascii: bool = False) -> Path:
     path.parent.mkdir(parents=True, exist_ok=True)
     descriptor, temporary_name = tempfile.mkstemp(
@@ -81,7 +99,7 @@ def write_json_atomic(path: Path, payload: Any, *, ensure_ascii: bool = False) -
             handle.write("\n")
             handle.flush()
             os.fsync(handle.fileno())
-        os.replace(temporary, path)
+        _replace_with_windows_retry(temporary, path)
     except BaseException:
         temporary.unlink(missing_ok=True)
         raise
