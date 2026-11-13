@@ -17,6 +17,11 @@ from .models import ROOT, StateEvent
 DEFAULT_POLICY = resource_path('configs/state_handoff.yaml')
 START_MARKER = "<!-- state-handoff:start {block_id} -->"
 END_MARKER = "<!-- state-handoff:end {block_id} -->"
+APPEND_EVENT_VIEWS = {
+    "backlog_item_added": "backlog", "backlog_item_closed": "backlog",
+    "error_opened": "error_log", "error_resolved": "error_log",
+    "decision_recorded": "decisions_log", "history_recorded": "historical_results",
+}
 EXECUTION_BACKEND_CONSTRAINT = (
     "Execution backend roles and handoffs remain governed by "
     "`configs/execution_backends.yaml`."
@@ -201,6 +206,21 @@ def _module_row(text: str, module: str, payload: dict[str, Any]) -> str:
         f"{payload['current_gate']} |"
     )
     return pattern.sub(row, text, count=1)
+
+
+def log_entry_text(text: str, event: StateEvent) -> str:
+    """Extract one exact source-event entry; surrounding Markdown is not owned."""
+    if event.event_type not in APPEND_EVENT_VIEWS:
+        raise ValueError("event does not own an append-only log entry")
+    marker = f"<!-- state-handoff:event {event.event_id} -->"
+    markdown = str(event.payload["payload"].get("markdown", "")).strip()
+    expected = f"{marker}\n{markdown}\n"
+    position = text.find(marker)
+    if (not markdown or text.count(marker) != 1 or position < 0
+            or (position > 0 and text[position - 1] != "\n")
+            or text[position:position + len(expected)] != expected):
+        raise ValueError("managed log entry is missing, duplicated or changed")
+    return expected
 
 
 def _append_reviewed_event(text: str, event: StateEvent) -> str:
@@ -649,6 +669,7 @@ def _append_actions(
             requires_review=True,
             reason_codes=reasons,
             new_content=new_content,
+            managed_unit={"kind": "event_entry", "id": event.event_id},
         )
     ]
 
@@ -929,16 +950,8 @@ def build_projection_actions(
         return _state_actions(event, root=root, views=views)
     if event.event_type == "module_gate_changed":
         return _module_actions(event, root=root, views=views)
-    append_targets = {
-        "backlog_item_added": "backlog",
-        "backlog_item_closed": "backlog",
-        "error_opened": "error_log",
-        "error_resolved": "error_log",
-        "decision_recorded": "decisions_log",
-        "history_recorded": "historical_results",
-    }
-    if event.event_type in append_targets:
-        return _append_actions(event, root=root, views=views, view_name=append_targets[event.event_type])
+    if event.event_type in APPEND_EVENT_VIEWS:
+        return _append_actions(event, root=root, views=views, view_name=APPEND_EVENT_VIEWS[event.event_type])
     if event.event_type == "repository_item_classified":
         return _repository_actions(event, root=root, policy=policy)
     if event.event_type in {"repository_item_archived", "repository_item_deleted", "review_decision"}:

@@ -18,6 +18,7 @@ from .projections import (
     START_MARKER,
     build_projection_actions,
     load_policy,
+    log_entry_text,
     module_row_text,
 )
 from .store import EventStore, _write_immutable_json
@@ -157,12 +158,19 @@ def _manifest_action(
             if match:
                 record["managed_block_sha256"] = sha256_bytes(match.group(0).encode("utf-8"))
         if managed_unit:
-            if managed_unit.get("kind") != "module_row":
+            kind = managed_unit.get("kind")
+            if kind == "module_row":
+                unit = module_row_text(action["new_content"], str(managed_unit["id"]))
+                manifest["projections"].pop(action["target_path"], None)
+            elif kind == "event_entry" and managed_unit.get("id") == event.event_id:
+                unit = log_entry_text(action["new_content"], event)
+                legacy = manifest["projections"].get(action["target_path"], {})
+                if legacy.get("source_event_id") == event.event_id:
+                    manifest["projections"].pop(action["target_path"], None)
+            else:
                 raise ValueError(f"unsupported managed projection unit: {managed_unit}")
-            row = module_row_text(action["new_content"], str(managed_unit["id"]))
             record["managed_unit"] = managed_unit
-            record["managed_unit_sha256"] = sha256_bytes(row.encode("utf-8"))
-            manifest["projections"].pop(action["target_path"], None)
+            record["managed_unit_sha256"] = sha256_bytes(unit.encode("utf-8"))
         manifest["projections"][key] = record
     content = json.dumps(manifest, indent=2, ensure_ascii=False) + "\n"
     return {
