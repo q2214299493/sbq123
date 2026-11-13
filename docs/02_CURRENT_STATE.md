@@ -54,6 +54,11 @@ Reviewed adsorbate-only templates now supply candidate coordinates and
 hash-bound geometry provenance. Unsupported template/binding modes block
 generation rather than falling back to configured molecular coordinates.
 
+Software update 2026-11-13: the global surface builder routes to repository
+AdsMind. Its legacy CO entry now discovers project context and prepares missing
+site/plan/output inputs; scientific review still gates generation. It no longer
+implements independent site geometry or overwrites existing output directories.
+
 LAST_RECORDED_OBSERVATION: the B5 module map records Dimer `9746548` after
 ordinary NEB `9745217` review. Last recorded scheduler status: PEND;
 observed_at: 2026-09-07T11:15:50Z; source: [module map](06_MODULE_MAP.md).
