@@ -175,3 +175,21 @@ this is not an actual training-peak measurement. The separate
 `continuous_training_memory.py` amendment lowered the same pending job to
 7 GiB, preserving 1 GPU, 4 CPUs, 100 epochs, all inputs and the 10-minute limit.
 Native evidence then showed RUNNING. No replacement job was submitted.
+
+Job 14347 subsequently completed natively with exit 0. Independent CPU
+inspection verified 100 actual optimizer updates, 4493 finite model tensors,
+the unchanged original base, the latest raw force/structure pair and CUDA-only
+execution on one RTX 4090. The registered candidate checkpoint SHA is
+`e8faead9421a5bed186085a338c73f18ddf6abc4186663b61b1c2cd232f6b90f`.
+The next continuation, job 14362, also completed natively. Its returned r002
+candidate has predicted movable fmax 0.0074618535 eV/A, C-C 1.7174854 A and
+intact CH/CO. All 36 frames preserve the fixed layer; maximum adjacent raw/MIC
+displacement is 0.05 A. Its top/side image and numerical/source evidence were
+actually reviewed for exact-structure DFT force diagnosis only. The 513
+protected geometries remain excluded. A new DFT result is still required.
+
+`return_candidate.py` preserves remote output bytes and verifies native
+completion and before/after transfer hashes. Continuation and local review/
+preparation helpers now select distinct per-round namespaces. Sources bound
+to already executed ML manifests must remain frozen; a later VASP-owner
+correction must use a separate source checkout rather than change those bytes.

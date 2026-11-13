@@ -52,13 +52,13 @@ def electronic_rows(text):
     return rows
 
 
-def checkpoint(case):
+def checkpoint(case, leaf=NEXT_LEAF):
     import base64
 
-    directory = case / 'labels' / NEXT_LEAF
+    directory = case / 'labels' / leaf
     record = load_json_object(directory / 'submission_record.json')
     primary.require(record['status'] == 'SUBMITTED', 'no known next DFT job')
-    native = query_slurm_force_label(record['job_id'], record['remote_dir'], NEXT_LEAF)
+    native = query_slurm_force_label(record['job_id'], record['remote_dir'], leaf)
     timestamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
     destination = directory / 'monitor'
     destination.mkdir(exist_ok=True)
@@ -67,7 +67,7 @@ def checkpoint(case):
         terminal = directory / ('slurm_' + record['job_id'] + '.terminal.json')
         if not terminal.exists():
             write_json_exclusive(terminal, native)
-    backend = primary.remote.load_mz73_static_backend(NEXT_LEAF)
+    backend = primary.remote.load_mz73_static_backend(leaf)
     program = REMOTE.replace('__ROOT__', repr(record['remote_dir']))
     result = primary.run(primary.remote.ssh_argv(backend, shlex.join(['python3', '-B', '-c', program])))
     packet = json.loads(result.stdout)
@@ -89,8 +89,9 @@ def checkpoint(case):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--case-root', type=Path, required=True)
+    parser.add_argument('--workdir-name', default=NEXT_LEAF)
     args = parser.parse_args()
-    print(json.dumps(checkpoint(args.case_root.resolve(strict=True))))
+    print(json.dumps(checkpoint(args.case_root.resolve(strict=True), args.workdir_name)))
 
 
 if __name__ == '__main__':

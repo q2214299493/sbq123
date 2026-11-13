@@ -51,7 +51,7 @@ def prepared(tmp_path, monkeypatch):
     previous, trajectory = case / 'MOCK_previous.vasp', case / 'MOCK_previous.traj'
     previous.write_text('MOCK previous pose')
     trajectory.write_text('MOCK previous trajectory')
-    state = {'protocol_sha256': 'a' * 64, 'search_checkpoint': {'path': '/home/sbq/sbq/MOCK/checkpoint.pt', 'sha256': 'b' * 64}}
+    state = {'completed_label_count': 1, 'protocol_sha256': 'a' * 64, 'search_checkpoint': {'path': '/home/sbq/sbq/MOCK/checkpoint.pt', 'sha256': 'b' * 64}}
     monkeypatch.setattr(job, 'context', lambda *_: (state, binding, original, previous, trajectory))
     backend = {'remote_root': '/home/sbq/sbq/MOCK_CASE/labels', 'remote_write_boundary': '/home/sbq/sbq',
                'canonical_write_boundary': '/home/ubuntu/hdd/sbq/sbq'}
@@ -63,6 +63,25 @@ def prepared(tmp_path, monkeypatch):
     args = SimpleNamespace(case_root=case, state=state_path, state_sha256=sha256_file(state_path), execution_source=reply)
     generated = job.prepare(args)
     return SimpleNamespace(case=case, path=Path(generated['path']), digest=generated['sha256'], args=args)
+
+
+def test_second_continuation_has_independent_namespace_and_smaller_memory(prepared, monkeypatch):
+    state, binding, _, _, _ = job.context(prepared.case, prepared.args.state, prepared.args.state_sha256)
+    state['completed_label_count'] = 2
+    binding['training_request'] = job.ref(prepared.case / 'training_r000_metadata_recovery01/request.json')
+    write_json_exclusive(prepared.case / 'training_r001_force003_checkpoint_binding.json', binding)
+    authority = prepared.case / 'continuation_force003_20261113'
+    authority.mkdir()
+    (authority / 'authorization.json').write_text('{"TEST_ONLY":true}')
+    monkeypatch.setattr(job, 'continuation_authorization', lambda *_: ({'source': job.ref(prepared.args.execution_source)}, None))
+    generated = job.prepare(prepared.args)
+    path = Path(generated['path'])
+    manifest, _ = job.verify(path, generated['sha256'])
+    assert path.parent.name == 'continuation_r002'
+    assert manifest['remote_dir'].endswith('/continuation_r002')
+    assert manifest['resources']['memory'] == '7G'
+    assert manifest['checkpoint_binding'] == job.ref(prepared.case / 'training_r001_force003_checkpoint_binding.json')
+    assert (prepared.case / 'continuation_r001/manifest.json').is_file()
 
 
 def test_only_previous_geometry_and_new_registered_checkpoint_are_bound(prepared):

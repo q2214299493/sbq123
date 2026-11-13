@@ -199,3 +199,6 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - Local-only `continuation_force003_20261113/authorization.json`,
   `state.after_target_revision.json` and `paper_state.v3.json` under the case
   identify the new approval, immutable starting state and active continuation.
+
+- `archive/chco_paper_aqcat25_20261112/return_candidate.py`: native-success
+  guarded byte-preserving return of candidate POSCAR, trajectory and report.

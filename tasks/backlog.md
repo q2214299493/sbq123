@@ -89,7 +89,9 @@ The private case
 `calculations/fe110_ch_co_to_chco_ts_20261109/paper_aqcat25_ft512_20261112_v1/`
 retains the earlier unapproved proposal under `proposals/r002_budget_after_label14307/` as history. The new approval and active
 state are `continuation_force003_20261113/authorization.json` and
-`paper_state.v3.json` under that case. MZ73 training job 14347 is running.
+`paper_state.v3.json` under that case. MZ73 training job 14347 passed its
+100-update/CUDA/checkpoint review; continuation 14362 returned a reviewed r002
+predicted candidate. Prepare its fresh exact-input DFT gate next.
 Continue verified latest-label-only 100-epoch fits, reviewed BA-Sella candidates
 and exact gated DFT points until raw movable fmax is strictly below 0.03, or
 the existing 250-label ceiling/failure boundary is reached. No automatic failure
