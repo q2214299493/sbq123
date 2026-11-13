@@ -181,6 +181,20 @@ is validation-only and cannot change or mix with production automatically.
 Compatible adsorption states and gas/reference records remain **Needs
 confirmation** until promoted through the current adsorption gate.
 
+## Completion review cache
+
+`scripts/adsorption/review_completed_batch.py` caches parsed completion evidence,
+not acceptance. Cache version 2 binds the actual candidate-manifest path/bytes,
+collection location/bytes, checked collected files, clean slab, analysis policy,
+imported parser bytecode/source owners, Python and ASE/NumPy/PyYAML versions. Unchanged
+inputs reuse the result; a changed or missing dependency cannot reuse an old
+conclusion. Legacy/damaged cache bytes are preserved and ignored. Input changes
+during parsing block cache/output publication. Duplicate marking reruns for the
+current batch; cache data cannot carry scientific acceptance or prior-batch
+duplicate decisions. Outputs report cache hits/misses and the analysis binding.
+The published read-only reviewer includes the existing molecular-identity and
+face-preserving clean-slab symmetry helpers used by the workspace reviewer.
+
 ## Boundary
 
 An adsorption state may be a NEB endpoint, but a tilted or stretched intermediate is not automatically a stable endpoint. Adsorption convergence does not prove a transition state.
