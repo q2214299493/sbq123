@@ -60,3 +60,24 @@ worker has the same missing-metadata problem. No trained model, next candidate
 or second DFT label exists. Preserve both submissions and prepare a reviewed
 correction before any new execution. Runtime receipts and private artifacts
 stay in the local case and the servers' `/home/sbq/sbq/` directories.
+
+## Prepared metadata correction
+
+The corrected worker writes one integer `natoms=[49]` row to a fresh
+`metadata.npz`, sets its explicit dataset path, and binds its SHA in the input
+record. All original raw labels, 18 fixed / 31 free atoms, normalization,
+zero energy-loss weight, optimizer, reset policy and 100 epochs remain the same.
+
+`preflight_single_label_dataset.py` reproduced the missing-metadata error in
+the actual MZ73 FairChem installation and then passed the repaired sampler and
+batched-target checks on CPU. It used the exact original singleton database,
+request and raw forces. It constructed no trainer or model and did no training.
+
+`paper_training_metadata_recovery.py` prepares a separate fresh job directory.
+It binds the failed native capture, original request and installed preflight.
+Preparation carries no execution permission. Submission requires a new exact
+user approval for one 1 GPU / 4 CPU / 15 GiB / 10-minute, 100-epoch recovery,
+including retirement of the still-pending broken BUCT2 copy. The original
+approved budget has `max_training_jobs=1` and `automatic_retries=0`; no recovery
+or extra DFT execution is inferred from the previous submission permission.
+Failed inputs/outputs and the original source worktree remain frozen.

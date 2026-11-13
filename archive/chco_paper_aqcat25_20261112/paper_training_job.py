@@ -22,7 +22,7 @@ from scripts.ts_strategy_engine import paper_sequential as paper
 
 BASE = 'cdd391d39ed19fc1ef3516d41b1af53bd81351d8ad73f25e537be232fd8c0dc0'
 TEMPLATE = '979062fea494a8ea3facce2d4af83e0677d370d0a15e57b2f69f0695b91c9ed4'
-WORKER = 'a88d47bc518a406556bf6ea070bdbed5514dea4930a0a1b3b0df96cc438108c8'
+WORKER = '143efce9e8cda362e487414a6e61873675c0cb01662ef3d13ea8305d8420aa71'
 PYTHON = '/home/sbq/sbq/ml_ts_acceleration/venv/bin/python'
 PYTHONPATH = '/home/sbq/sbq/aqcat25/python_pkgs:/home/sbq/sbq/aqcat25/vendor'
 LEAF = 'training_r000'

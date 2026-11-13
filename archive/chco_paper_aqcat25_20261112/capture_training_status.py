@@ -43,8 +43,11 @@ print(json.dumps(r))
 '''
 
 
-def capture(case, replica=False):
-    record = load_json_object(case / ('training_replica_submission_record.json' if replica else 'training_submission_record.json'))
+def capture(case, replica=False, record_path=None):
+    if record_path is None:
+        record_path = case / ('training_replica_submission_record.json' if replica else 'training_submission_record.json')
+    primary.require(record_path.resolve(strict=True).parent == case, 'submission receipt is outside this case')
+    record = load_json_object(record_path)
     primary.require(record['status'] == 'SUBMITTED', 'no known native training job')
     packet = {'job_id': record['job_id'], 'remote_dir': record['remote_dir'], 'hostname': 'pc-G7466-M6' if replica else 'MZ73'}
     command = shlex.join(['python3', '-c', REMOTE.replace('__PACKET__', repr(json.dumps(packet)))])
@@ -83,9 +86,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--case-root', type=Path, required=True)
     parser.add_argument('--both', action='store_true')
+    parser.add_argument('--record', type=Path, help='explicit MZ73 recovery submission receipt in this case')
     args = parser.parse_args()
+    if args.both and args.record:
+        parser.error('--record and --both are mutually exclusive')
     with ThreadPoolExecutor(max_workers=2) as executor:
-        results = list(executor.map(lambda replica: capture(args.case_root.resolve(strict=True), replica), [False, True] if args.both else [False]))
+        results = list(executor.map(lambda replica: capture(args.case_root.resolve(strict=True), replica, args.record), [False, True] if args.both else [False]))
     print(json.dumps(results))
 
 

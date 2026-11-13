@@ -1448,3 +1448,15 @@ governance: docs/DOCUMENT_GOVERNANCE.md
   sampler metadata. Do not accept its partial output or silently retry it.
   The case artifacts and `archive/chco_paper_aqcat25_20261112/README.md` record
   exact receipts and the remaining preparation boundary.
+
+## 2026-11-13 - Preserve Failed Training and Prepare Metadata Recovery
+
+- Write a one-row integer atom-count metadata sidecar and bind it to the exact
+  singleton database; do not disable the sampler or change the force-only
+  objective. The installed MZ73 CPU dataset/sampler/batch preflight reproduced
+  the original failure and passed with the sidecar, without training a model.
+- Preserve job 14279, its failed output, the queued broken copy and the original
+  source worktree. Prepare one separate recovery package with no execution
+  permission; require a new exact user approval for the extra training job
+  and retirement of the pending BUCT2 copy. The remaining previously approved
+  DFT slot is unchanged and still requires a newly reviewed candidate and gate.

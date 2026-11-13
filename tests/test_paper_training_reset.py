@@ -140,6 +140,30 @@ def test_isolated_config_retains_normalization_and_excludes_validation_without_m
     assert result["optim"]["max_epochs"] == result["optim"]["scheduler_params"]["epochs"] == 100
     assert result["optim"]["load_best"] is False and result["optim"]["checkpoint_every"] == -1
     assert result["optim"]["scheduler_params"]["warmup_epochs"] == 1
+    assert result["dataset"]["train"]["metadata_path"] == str((Path("training.db").parent / "metadata.npz").resolve())
+
+
+def test_single_label_metadata_is_integer_exact_length_and_never_overwrites(tmp_path):
+    import numpy as np
+
+    path = tmp_path / 'metadata.npz'
+    result = runner.write_single_label_metadata(path, 49)
+    with np.load(path, allow_pickle=False) as data:
+        assert data.files == ['natoms'] and data['natoms'].tolist() == [49]
+        assert data['natoms'].shape == (1,) and np.issubdtype(data['natoms'].dtype, np.integer)
+    assert result['sha256'] == runner.sha256_file(path) and result['sample_count'] == 1
+    before = path.read_bytes()
+    with pytest.raises(FileExistsError):
+        runner.write_single_label_metadata(path, 49)
+    assert path.read_bytes() == before
+
+
+@pytest.mark.parametrize('count', [0, -1, 49.0, True])
+def test_invalid_atom_count_cannot_create_metadata(tmp_path, count):
+    path = tmp_path / 'metadata.npz'
+    with pytest.raises(ValueError, match='positive integer'):
+        runner.write_single_label_metadata(path, count)
+    assert not path.exists()
 
 
 @pytest.mark.parametrize("escape", [False, True])

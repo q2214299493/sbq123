@@ -127,7 +127,8 @@ def isolated_config(template: dict[str, Any], database: Path) -> dict[str, Any]:
     require(config["outputs"]["forces"]["train_on_free_atoms"] is True, "AQCat free-atom force mask required")
     train = config["dataset"]["train"]
     require(train["a2g_args"]["r_energy"] is False and train["a2g_args"]["r_forces"] is True, "force-only graph labels required")
-    train.update(format="ase_db", src=str(database.resolve()))
+    train.update(format="ase_db", src=str(database.resolve()),
+                 metadata_path=str((database.parent / "metadata.npz").resolve()))
     config["dataset"] = {"train": train}
     for key in ("val_dataset", "test_dataset", "relax_dataset"):
         config.pop(key, None)
@@ -207,6 +208,19 @@ def write_json(path: Path, payload: dict[str, Any]) -> None:
         json.dump(payload, stream, indent=2, allow_nan=False)
 
 
+def write_single_label_metadata(path: Path, atom_count: int) -> dict[str, Any]:
+    """Provide FairChem's exact one-row integer atom-count sampler metadata."""
+    import numpy as np
+
+    require(type(atom_count) is int and atom_count > 0, "metadata needs a positive integer atom count")
+    with path.open("xb") as stream:
+        np.savez(stream, natoms=np.asarray([atom_count], dtype=np.int64))
+    with np.load(path, allow_pickle=False) as metadata:
+        require(metadata.files == ["natoms"] and metadata["natoms"].tolist() == [atom_count]
+                and np.issubdtype(metadata["natoms"].dtype, np.integer), "invalid singleton metadata")
+    return {"path": str(path), "sha256": sha256_file(path), "sample_count": 1, "natoms": [atom_count]}
+
+
 def execute(args: argparse.Namespace) -> dict[str, Any]:
     import yaml
     from ase.calculators.singlepoint import SinglePointCalculator
@@ -241,6 +255,7 @@ def execute(args: argparse.Namespace) -> dict[str, Any]:
                                        "is_low_fi": False, "adsorption_energy": label["dft_toten_eV_force_label_only"],
                                        "reportable_final_energy": False, "source_label_sha256": request["training_samples"][0]["artifact_sha256"]})
             require(database.count() == 1, "training database must contain exactly one label")
+        metadata = write_single_label_metadata(args.output_root / "metadata.npz", len(atoms))
         config_path = args.output_root / "config.yml"
         with config_path.open("x", encoding="utf-8") as stream:
             yaml.safe_dump(config, stream, sort_keys=False)
@@ -250,6 +265,7 @@ def execute(args: argparse.Namespace) -> dict[str, Any]:
             "label_sha256": request["training_samples"][0]["artifact_sha256"],
             "runner_sha256": sha256_file(Path(__file__)), "config_sha256": sha256_file(config_path),
             "database_sha256": sha256_file(args.output_root / "training.db"),
+            "dataset_metadata": metadata,
             "model_recipe_adaptation": "AQCat25 existing masked normalized L2MAE/AdamW/cosine, not original eSEN",
         })
         checkpoint, evidence = train_round(config_path, base["path"], args.output_root)
