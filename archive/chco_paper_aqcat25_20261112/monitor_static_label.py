@@ -36,7 +36,10 @@ print(json.dumps(r))
 
 def electronic_rows(text):
     rows = []
-    for line in text.splitlines():
+    for line in text.splitlines(keepends=True):
+        # A live write can stop before an exponent or the rest of a row.
+        if not line.endswith('\n'):
+            continue
         parts = line.split()
         if len(parts) >= 5 and parts[0] in ('DAV:', 'RMM:', 'CG:') and parts[1].isdigit():
             try:

@@ -223,3 +223,18 @@ contained later continuation/time-budget approvals. Correcting only that
 fixture to its actual historical scope made all 40 rerun cases pass. Production
 authorization guards remain unchanged. Native job 14377 is now RUNNING under
 the recorded 7-GiB amendment; the future renderer fix does not alter that job.
+
+A later live r003 checkpoint exposed a read-only monitoring bug: an OSZICAR
+buffer ended at `-0.21215`, before its exponent was written. Splitting the tail
+without retaining line endings incorrectly treated that partial token as a
+complete electronic row. The monitor now accepts only newline-terminated rows
+and retains the previous complete row while the next one is still buffered.
+Complete LF/CRLF rows, Fortran exponents and explicit nonfinite diagnostics
+retain their existing behavior. Native queue state and final force-label
+acceptance remain separate authorities.
+
+The real buffered snapshot was preserved unchanged and replayed locally. Two
+of three incomplete-line regressions reproduced the old defect; all 25 monitor
+and force-label-ingestion checks passed after the correction, along with Ruff
+and syntax checks. This correction uses a separate source checkout; the runtime
+checkout bound to training 14398, search 14400 and DFT 14401 remains unchanged.

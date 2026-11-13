@@ -1535,3 +1535,15 @@ governance: docs/DOCUMENT_GOVERNANCE.md
   later approval scopes from that fixture only. No production guard changed.
 - Job 14377 is RUNNING. Its raw DFT force, force convergence below the strict
   0.03-eV/angstrom target, and final TS validity remain separate unverified gates.
+
+## 2026-11-13 - Ignore Incomplete Live Electronic Rows
+
+- Preserve the actual r003 OSZICAR snapshot ending partway through a floating
+  exponent. A partial numeric token is not a complete electronic observation.
+  Read-only progress parsing must retain only newline-terminated rows.
+- Fix the monitor in a separate source checkout, keeping the runtime source
+  bound to actual training/search/VASP jobs unchanged. This changes progress
+  display only; final SCF, forces, coordinates and magnetic evidence continue
+  through the existing complete-output label owner.
+- The real snapshot replay and all 25 monitor/label-ingestion checks passed.
+  Do not infer force convergence or TS acceptance from a monitoring update.
