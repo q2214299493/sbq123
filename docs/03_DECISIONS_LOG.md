@@ -13,6 +13,13 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Decisions Log
 
+## 2026-11-14 — Fe(110) C2–C6 multi-reaction force-model research scope
+
+- Explicit user goal: broaden the force-model reaction coverage to C2/C3/C4 and C5/C6 while retaining the C2/C3 optimization-acceleration objective. Include C4–C6 in the current source inventory and candidate-pool design; this is a target, not validated model capability.
+- Record both total carbon count and largest connected carbon skeleton, reaction event, surface local environment and path region. Keep coadsorbed fragments distinct from a connected longer chain.
+- Preserve original512/536 data/checkpoints and78/53/16 roles. The10–20DFT proposal remains a first-round budget; no per-carbon allocation or broad-domain accuracy is pre-approved. No new training, inference, DFT, relaxation, NEB/DIMER, model promotion or protocol/domain-gate change is authorized by this scope clarification.
+- Scope and next deliverable: docs/reviews/fe110_c2_c6_reaction_scope_20261114/README.md. Existing six-job current_task pointer is preserved.
+
 ## 2026-09-05 - Add Sella to the current MatRIS candidate loop
 
 - User requested Sella integration and comparison with the current workflow.
