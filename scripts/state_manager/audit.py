@@ -11,10 +11,12 @@ from scripts.artifact_io import sha256_file, sha256_text
 
 from .models import ROOT, utc_now
 from .projections import (
+    APPEND_EVENT_VIEWS,
     DEFAULT_POLICY,
     END_MARKER,
     START_MARKER,
     load_policy,
+    log_entry_text,
     module_row_text,
 )
 from .store import EventStore
@@ -290,7 +292,38 @@ def _audit_status_conflicts(root: Path, policy: dict[str, Any]) -> list[Finding]
     return findings
 
 
-def _audit_projection_manifest(root: Path, policy: dict[str, Any]) -> list[Finding]:
+def _bound_log_entry(root: Path, policy: dict[str, Any], target: Path, record: dict, store: EventStore) -> str:
+    event = store.get(str(record["source_event_id"]))
+    view = APPEND_EVENT_VIEWS.get(event.event_type)
+    if (not view or root / policy["managed_views"][view] != target
+            or event.digest != record.get("source_event_sha256")
+            or (event.review_required and store.event_decision(event.event_id) != "approve")
+            or record.get("managed_unit", {}).get("id", event.event_id) != event.event_id):
+        raise ValueError("manifest does not bind an approved source event and its log target")
+    return log_entry_text(target.read_text(encoding="utf-8"), event)
+
+
+def _managed_unit_hash(root: Path, policy: dict, target: Path, record: dict, store: EventStore) -> str | None:
+    try:
+        unit = record["managed_unit"]
+        if unit["kind"] == "module_row":
+            text = module_row_text(target.read_text(encoding="utf-8"), str(unit["id"]))
+        else:
+            text = _bound_log_entry(root, policy, target, record, store)
+        return sha256_text(text)
+    except (KeyError, ValueError, OSError):
+        return None
+
+
+def _legacy_log_entry_intact(root: Path, policy: dict, target: Path, record: dict, store: EventStore) -> bool:
+    try:
+        _bound_log_entry(root, policy, target, record, store)
+    except (KeyError, ValueError, OSError):
+        return False
+    return True
+
+
+def _audit_projection_manifest(root: Path, policy: dict[str, Any], store: EventStore) -> list[Finding]:
     path = root / policy["paths"]["projection_manifest"]
     if not path.is_file():
         return [Finding("projection_manifest_missing", "warning", "Projection manifest is missing.", (_relative(path, root),))]
@@ -304,7 +337,7 @@ def _audit_projection_manifest(root: Path, policy: dict[str, Any]) -> list[Findi
             continue
         managed_unit = record.get("managed_unit")
         if managed_unit:
-            if managed_unit.get("kind") != "module_row":
+            if managed_unit.get("kind") not in {"module_row", "event_entry"} or not record.get("managed_unit_sha256"):
                 findings.append(
                     Finding(
                         "projection_manifest_invalid",
@@ -315,15 +348,7 @@ def _audit_projection_manifest(root: Path, policy: dict[str, Any]) -> list[Findi
                     )
                 )
                 continue
-            try:
-                row = module_row_text(
-                    target.read_text(encoding="utf-8"),
-                    str(managed_unit["id"]),
-                )
-            except (KeyError, ValueError):
-                actual = None
-            else:
-                actual = sha256_text(row)
+            actual = _managed_unit_hash(root, policy, target, record, store)
             expected = record.get("managed_unit_sha256")
         elif block_id and record.get("managed_block_sha256"):
             block = _managed_block(target.read_text(encoding="utf-8"), block_id)
@@ -332,7 +357,8 @@ def _audit_projection_manifest(root: Path, policy: dict[str, Any]) -> list[Findi
         else:
             actual = sha256_file(target)
             expected = record.get("target_sha256_after")
-        if expected and actual != expected:
+        if (expected and actual != expected and not (
+                not managed_unit and not block_id and _legacy_log_entry_intact(root, policy, target, record, store))):
             findings.append(
                 Finding(
                     "managed_projection_drift",
@@ -467,7 +493,7 @@ def audit_repository(
     findings.extend(_audit_current_state(root, policy))
     findings.extend(_audit_module_gate(root, policy))
     findings.extend(_audit_status_conflicts(root, policy))
-    findings.extend(_audit_projection_manifest(root, policy))
+    findings.extend(_audit_projection_manifest(root, policy, store))
     findings.extend(_audit_repository_items(root, policy))
     findings.sort(key=lambda item: (item.severity != "error", item.code, item.paths))
     review_findings = [finding for finding in findings if finding.review_required]

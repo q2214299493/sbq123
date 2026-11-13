@@ -139,6 +139,13 @@ normal user review; registry or workbook data are never changed by this rule.
   its projection-source event is out of sync.
 - Module-map proposals retain a whole-file pre-apply hash for concurrency
   safety, while post-apply drift audits hash only the event-owned module row.
+- Append-only log projections likewise retain the whole-file pre-apply guard,
+  while post-apply audits bind each source event's exact marker and Markdown.
+  Separate unmanaged entries do not change the owned entry. Entry edits,
+  missing/duplicated markers, wrong source hashes or targets remain drift.
+  Legacy whole-file log records may use this scoped check only after matching
+  the immutable source event/hash, its required approval and the complete entry;
+  audits never rewrite the log or rehash a changed file to clear a warning.
 - Scientific acceptance and cross-module changes require review.
 - Moves, archives, and deletions always require review.
 - External roots are audit-only in version 1.
