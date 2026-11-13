@@ -140,6 +140,10 @@ def verify_slurm_force_label_live(
     """Recheck the same bound job live before accepting cached terminal evidence."""
     arguments = {"job_id": job_id, "remote_dir": remote_dir,
                  "workdir_name": workdir_name, "config_path": config_path}
+    if evidence.get("document_kind") == "slurm_native_controller_exit_events":
+        from scripts.slurm_controller_events import verify_controller_events_live
+
+        return verify_controller_events_live(evidence, **arguments)
     validate_stored_slurm_force_label(evidence, **arguments)
     live = query_slurm_force_label(**arguments)
     validate_stored_slurm_force_label(live, **arguments)

@@ -23,12 +23,55 @@ def parse_poscar_symbols(path: Path) -> list[str]:
     return [symbol for symbol, count in zip(symbols, counts, strict=True) for _ in range(count)]
 
 
-def parse_final_outcar(path: Path) -> dict[str, Any]:
+def _force_rows(iterator) -> list[list[float]]:
+    next(iterator, None)
+    rows = []
+    for line in iterator:
+        stripped = line.strip()
+        if not stripped or set(stripped) == {"-"}:
+            if rows:
+                break
+            continue
+        fields = stripped.split()
+        if len(fields) < 6:
+            break
+        try:
+            rows.append([float(value) for value in fields[:6]])
+        except ValueError:
+            break
+    return rows
+
+
+def _geometry_header(line, iterator, geometry):
+    if "direct lattice vectors" in line:
+        geometry["cell_A"] = [[float(value) for value in next(iterator).split()[:3]] for _ in range(3)]
+    elif "ions per type =" in line:
+        geometry["counts"] = [int(value) for value in line.split("=", 1)[1].split()]
+    elif line.lstrip().startswith("TITEL") and "=" in line:
+        geometry.setdefault("species", []).append(line.split("=", 1)[1].split()[1].split("_")[0])
+
+
+def _final_geometry(path, geometry, positions):
+    species, counts = geometry.get("species", []), geometry.get("counts", [])
+    cell = geometry.get("cell_A", [])
+    if (not species or len(species) != len(counts) or any(count <= 0 for count in counts)
+            or len(cell) != 3 or any(len(row) != 3 for row in cell)
+            or positions is None or len(positions) != sum(counts)):
+        raise ValueError(f"{path}: incomplete final force-coordinate/header geometry")
+    return {"cell_A": cell, "positions_A": positions,
+            "symbols": [symbol for symbol, count in zip(species, counts, strict=True) for _ in range(count)]}
+
+
+def parse_final_outcar(path: Path, *, include_geometry: bool = False) -> dict[str, Any]:
     latest_forces: list[list[float]] | None = None
+    latest_positions = None
+    geometry = {}
     latest_toten: float | None = None
     with path.open("r", encoding="utf-8", errors="replace") as handle:
         iterator = iter(handle)
         for line in iterator:
+            if include_geometry:
+                _geometry_header(line, iterator, geometry)
             if "free  energy   TOTEN" in line:
                 fields = line.split()
                 try:
@@ -37,34 +80,26 @@ def parse_final_outcar(path: Path) -> dict[str, Any]:
                     pass
             if "TOTAL-FORCE (eV/Angst)" not in line:
                 continue
-            next(iterator, None)
-            block: list[list[float]] = []
-            for force_line in iterator:
-                stripped = force_line.strip()
-                if not stripped or set(stripped) == {"-"}:
-                    if block:
-                        break
-                    continue
-                fields = stripped.split()
-                if len(fields) < 6:
-                    break
-                try:
-                    block.append([float(value) for value in fields[3:6]])
-                except ValueError:
-                    break
-            if block:
-                latest_forces = block
+            rows = _force_rows(iterator)
+            if rows:
+                latest_forces = [row[3:] for row in rows]
+                latest_positions = [row[:3] for row in rows]
+            elif include_geometry:
+                latest_positions = None
     if latest_forces is None:
         raise ValueError(f"{path}: no TOTAL-FORCE block")
     if latest_toten is None:
         raise ValueError(f"{path}: no TOTEN value")
     state = parse_outcar(path)
-    return {
+    result = {
         "ionic_converged": state["reached_required_accuracy"],
         "normal_completion": state["normal_completion"],
         "final_toten_eV": latest_toten,
         "forces_eV_per_A": latest_forces,
     }
+    if include_geometry:
+        result.update(_final_geometry(path, geometry, latest_positions))
+    return result
 
 
 def extract_labels(samples: list[list[str]], fixed_count: int) -> dict[str, Any]:

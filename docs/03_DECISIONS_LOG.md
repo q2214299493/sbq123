@@ -1430,3 +1430,21 @@ governance: docs/DOCUMENT_GOVERNANCE.md
   execution gate. Remote GPU/VASP submission, fine-tuning, NEB/Dimer/frequency
   execution, and final scientific acceptance remain explicit authorized
   actions.
+
+## 2026-11-13 - CH+CO GPU Label Compatibility and One Queued Training Copy
+
+- The GPU VASP final-energy/EDIFF ordering is handled in the canonical parser;
+  label geometry is checked against its paired force table and CONTCAR.
+  Force-label EDIFF is the exact approved stage value (1e-6); endpoint-contract
+  EDIFF remains 1e-5 and these label energies are not reportable final energies.
+- A purged job may use its exact daemon-owned controller submit/allocation/
+  zero-exit/done events plus its earlier native submission binding. This does
+  not reconstruct a native terminal enum or replace scientific label review.
+- The user explicitly selected MZ73 + BUCT2 for a same-round queued copy and
+  first valid result. Keep identical request/model/label/recipe bytes, one
+  logical training round and no additional AL labels. Scheduler memory may be
+  reduced below the approved cap only with a separately recorded amendment.
+- Job 14279 failed before training because the singleton database lacked
+  sampler metadata. Do not accept its partial output or silently retry it.
+  The case artifacts and `archive/chco_paper_aqcat25_20261112/README.md` record
+  exact receipts and the remaining preparation boundary.

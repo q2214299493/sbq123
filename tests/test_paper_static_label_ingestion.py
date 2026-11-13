@@ -33,7 +33,7 @@ def mocked_case(tmp_path, monkeypatch):
 
     directory = tmp_path / "paper_chco_aqcat25_ft512_20261112_r000_label"
     directory.mkdir()
-    for name in ("POSCAR", "INCAR", "KPOINTS", "POTCAR", "POTCAR.spec", "OUTCAR", "OSZICAR", "script.sbatch"):
+    for name in ("POSCAR", "INCAR", "KPOINTS", "POTCAR", "POTCAR.spec", "OUTCAR", "OSZICAR", "CONTCAR", "script.sbatch"):
         (directory / name).write_text("MOCK ONLY: " + name)
     structure = Poscar("mock", np.eye(3) * 20, ["Fe", "C", "O", "H"], [45, 2, 1, 1],
                        np.arange(147, dtype=float).reshape(49, 3) / 1000, True,
@@ -78,14 +78,16 @@ def mocked_case(tmp_path, monkeypatch):
     monkeypatch.setitem(sys.modules, "scripts.neb_agent.mz73_static", contract_bridge)
     monkeypatch.setattr(utils_structure, "read_poscar", lambda path: structure)
     monkeypatch.setattr(vasp_result_gate, "read_incar_values", lambda path: {
-        "NSW": "0", "IBRION": "-1", "ISPIN": "2", "ENCUT": "400", "EDIFF": "1e-5", "ISMEAR": "1", "SIGMA": ".2"})
+        "NSW": "0", "IBRION": "-1", "ISPIN": "2", "ENCUT": "400", "EDIFF": "1e-6", "ISMEAR": "1", "SIGMA": ".2"})
     monkeypatch.setattr(Kpoints, "from_file", classmethod(lambda cls, path: SimpleNamespace(kpts=[(5, 5, 1)], style="Gamma", kpts_shift=(0, 0, 0))))
-    parsed = {"normal_completion": True, "final_toten_eV": -50.0, "forces_eV_per_A": [[0.2, 0.0, 0.0]] * 49}
+    parsed = {"normal_completion": True, "final_toten_eV": -50.0, "forces_eV_per_A": [[0.2, 0.0, 0.0]] * 49,
+              "positions_A": (structure.frac @ structure.cell).tolist(), "cell_A": structure.cell.tolist(),
+              "symbols": structure.labels}
     scf = {"electronically_converged": True, "last_electronic_iteration": 10, "nelm": 100,
-           "last_delta_e_eV": 1e-7, "ediff_eV": 1e-5, "electronic_convergence_source": "OSZICAR_DELTA_E"}
+           "last_delta_e_eV": 1e-7, "ediff_eV": 1e-6, "electronic_convergence_source": "OSZICAR_DELTA_E"}
     magnetic = {"normal_completion": True, "fatal_keywords": [], "run_index": 1,
                 "local_magnetization_last_muB": [2.0] * 45 + [0.0] * 4, "total_magnetization_history_muB": [90.0]}
-    monkeypatch.setattr(aqcat25_calibration, "parse_final_outcar", lambda path: parsed)
+    monkeypatch.setattr(aqcat25_calibration, "parse_final_outcar", lambda path, **kwargs: parsed)
     monkeypatch.setattr(vasp_result_gate, "final_scf_status", lambda *paths: scf)
     monkeypatch.setattr(utils_vasp, "parse_outcar", lambda path: magnetic)
     output = SimpleNamespace(cell=structure.cell.copy(), positions=structure.frac @ structure.cell,
@@ -183,3 +185,14 @@ def test_execution_receipt_must_exist_before_ingestion(mocked_case):
     with pytest.raises(ValueError, match="record_execution"):
         glue.review(case.args)
     assert not case.live_calls
+
+
+@pytest.mark.parametrize('ediff', ['1e-5', '1e-7', '0', 'nan'])
+def test_only_approved_force_label_stage_precision_can_enter_training(mocked_case, monkeypatch, ediff):
+    from scripts import vasp_result_gate
+
+    original = vasp_result_gate.read_incar_values
+    monkeypatch.setattr(vasp_result_gate, 'read_incar_values', lambda path: {**original(path), 'EDIFF': ediff})
+    with pytest.raises(ValueError, match='compatibility mismatch'):
+        glue.review(mocked_case.args)
+    assert not mocked_case.live_calls

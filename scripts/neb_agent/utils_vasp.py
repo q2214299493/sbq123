@@ -113,7 +113,10 @@ def _advance_outcar_cycle(line: str, cycles: list[dict], active: dict | None, en
         cycles.append(active)
         started = True
     if "aborting loop because EDIFF is reached" in line:
-        if active is None or active["complete"]:
+        # VASP prints an energy summary during each electronic iteration.
+        # Its termination marker belongs to that same target, even when an
+        # earlier energy(sigma->0) line already marked it complete.
+        if active is None:
             active = _cycle(len(cycles) + 1)
             cycles.append(active)
         active["explicit_convergence"] = True

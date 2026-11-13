@@ -20,6 +20,7 @@ def require(passed: bool, message: str) -> None:
 
 def review(args: argparse.Namespace) -> tuple[dict[str, Any], dict[str, Any]]:
     import numpy as np
+    import yaml
     from ase.geometry import find_mic
     from ase.io import read
     from pymatgen.io.vasp.inputs import Kpoints
@@ -34,12 +35,14 @@ def review(args: argparse.Namespace) -> tuple[dict[str, Any], dict[str, Any]]:
     from scripts.slurm_force_label import verify_slurm_force_label_live
     from scripts.ts_strategy_engine.paper_sequential import validate_state
     from scripts.vasp_result_gate import final_scf_status, read_incar_values
+    from scripts.vasp_inputs import DEFAULT_PROFILE
 
     directory = args.directory.resolve(strict=True)
     paths = {name: directory / name for name in (
-        "POSCAR", "INCAR", "KPOINTS", "POTCAR", "POTCAR.spec", "OUTCAR", "OSZICAR",
+        "POSCAR", "INCAR", "KPOINTS", "POTCAR", "POTCAR.spec", "OUTCAR", "OSZICAR", "CONTCAR",
         "submission_preflight.json", "submission_record.json")}
-    paths.update(state=args.state, contract=args.contract, scheduler=args.scheduler_evidence, backend_config=args.backend_config)
+    paths.update(state=args.state, contract=args.contract, scheduler=args.scheduler_evidence, backend_config=args.backend_config,
+                 force_profile=args.backend_config.parent / "true_fe110_production.yaml")
     sources = {name: {"path": str(path.resolve(strict=True)), "sha256": sha256_file(path)} for name, path in paths.items()}
     require(sources["state"]["sha256"] == args.state_sha256, "reviewed paper state bytes changed")
     state = load_json_object(args.state)
@@ -69,8 +72,13 @@ def review(args: argparse.Namespace) -> tuple[dict[str, Any], dict[str, Any]]:
     require(sources["POTCAR"]["sha256"] == receipt["potcar_sha256"] == compatibility["potcar_bundle_sha256"], "POTCAR bundle mismatch")
     require(sources["POTCAR.spec"]["sha256"] == dict(bundle.files)["POTCAR.spec"], "POTCAR spec mismatch")
     values = read_incar_values(paths["INCAR"])
+    require(sha256_file(paths["force_profile"]) == sha256_file(DEFAULT_PROFILE), "force-label profile is not the approved repository profile")
+    profile = yaml.safe_load(paths["force_profile"].read_text(encoding="utf-8"))
+    stage = profile["transition_state"]["active_learning_force_label"]
+    force_ediff = float(profile[stage["base_profile"]]["incar"]["EDIFF"])
+    require(0 < force_ediff <= float(compatibility["ediff_ev"]), "force-label precision is looser than its reaction branch")
     expected_values = {"NSW": 0, "IBRION": -1, "ISPIN": 2, "ENCUT": compatibility["encut_ev"],
-                       "EDIFF": compatibility["ediff_ev"], "ISMEAR": compatibility["ismear"], "SIGMA": compatibility["sigma_ev"]}
+                       "EDIFF": force_ediff, "ISMEAR": compatibility["ismear"], "SIGMA": compatibility["sigma_ev"]}
     require(all(float(values.get(key, "nan")) == value for key, value in expected_values.items()), "static magnetic/DFT compatibility mismatch")
     kpoints = Kpoints.from_file(paths["KPOINTS"])
     require(kpoints.kpts == [tuple(compatibility["kmesh"])] and str(kpoints.style) == "Gamma"
@@ -84,7 +92,7 @@ def review(args: argparse.Namespace) -> tuple[dict[str, Any], dict[str, Any]]:
     geometry = geometry_fingerprint(structure)
     require(sources["POSCAR"]["sha256"] not in protocol["held_out_structure_sha256"] and
             geometry not in protocol["held_out_geometry_sha256"], "protected structure/geometry cannot become a training label")
-    parsed = parse_final_outcar(paths["OUTCAR"])
+    parsed = parse_final_outcar(paths["OUTCAR"], include_geometry=True)
     scf = final_scf_status(paths["OSZICAR"], paths["INCAR"], paths["OUTCAR"])
     magnetic = parse_outcar(paths["OUTCAR"])
     require(parsed["normal_completion"] and magnetic["normal_completion"] and not magnetic["fatal_keywords"]
@@ -95,15 +103,24 @@ def review(args: argparse.Namespace) -> tuple[dict[str, Any], dict[str, Any]]:
     totals = magnetic["total_magnetization_history_muB"]
     require(forces.shape == (49, 3) and np.isfinite(forces).all() and np.isfinite(parsed["final_toten_eV"]), "incomplete/nonfinite raw force or energy label")
     require(moments.shape == (49,) and np.isfinite(moments).all() and totals and np.isfinite(totals[-1]), "missing/nonfinite total or atomic magnetic moments")
-    output = read(paths["OUTCAR"], index=-1, format="vasp-out")
-    require(output.get_chemical_symbols() == structure.labels and np.allclose(output.cell, structure.cell, atol=1e-5, rtol=0), "output order/cell mismatch")
-    _, movement = find_mic(output.positions - structure.frac @ structure.cell, structure.cell, pbc=[True, True, False])
+    output = read(paths["CONTCAR"], format="vasp")
+    require(parsed["symbols"] == output.get_chemical_symbols() == structure.labels
+            and np.allclose(parsed["cell_A"], structure.cell, atol=1e-5, rtol=0)
+            and np.allclose(output.cell, structure.cell, atol=1e-5, rtol=0), "output order/cell mismatch")
+    positions = np.asarray(parsed["positions_A"], dtype=float)
+    require(positions.shape == (49, 3) and np.isfinite(positions).all(), "incomplete/nonfinite evaluated coordinates")
+    _, movement = find_mic(positions - structure.frac @ structure.cell, structure.cell, pbc=[True, True, False])
     require(np.isfinite(movement).all() and float(np.max(movement)) <= 1e-5, "evaluated OUTCAR coordinates differ from POSCAR")
-    require(np.array_equal(output.get_forces(apply_constraint=False), forces), "canonical and ASE raw force parsers disagree")
+    _, final_difference = find_mic(output.positions - positions, structure.cell, pbc=[True, True, False])
+    require(np.isfinite(final_difference).all() and float(np.max(final_difference)) <= 1e-5,
+            "CONTCAR differs from the evaluated force-coordinate table")
     live = verify_slurm_force_label_live(load_json_object(args.scheduler_evidence), job_id=execution["job_id"],
                                        remote_dir=receipt["remote_dir"], workdir_name=directory.name, config_path=args.backend_config)
     require(all(sha256_file(path) == sources[name]["sha256"] for name, path in paths.items()), "source changed during scientific/live review")
     evidence = {**load_json_object(args.scheduler_evidence), **sources["scheduler"], "live_recheck": live,
+                "force_stage_precision": {"profile": sources["force_profile"],
+                "stage": "transition_state.active_learning_force_label", "label_ediff_eV": force_ediff,
+                "reaction_contract_ediff_eV": compatibility["ediff_ev"], "reportable_final_energy": False},
                 "source_files": sources, "magnetic_evidence": {"total_magnetic_moment_muB": totals[-1],
                 "atom_resolved_magnetic_moments_muB": moments.tolist(), "magnetic_ground_state_verified": False},
                 "geometry_review": {"maximum_coordinate_difference_A": float(np.max(movement)), "tolerance_A": 1e-5}}
