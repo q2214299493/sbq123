@@ -67,7 +67,14 @@ Current executable code lives only under `scripts/` or a repository-backed skill
   parameter profile, without a second INCAR/KPOINTS configuration.
 - `vasp_lsf.py` and `templates/sunboquan_vasp.lsf`: render the one shared
   Sunboquan LSF launcher; input builders do not embed scheduler shell code.
-- `artifact_io.py`: shared atomic JSON and chunked SHA-256 helpers.
+- `artifact_io.py`: shared atomic JSON and chunked SHA-256 helpers. Atomic JSON
+  replacement retries only native Windows errors 5/32/33, at most eight attempts
+  with 0.95 seconds total backoff, reusing the same flushed temporary file.
+  Persistent/unrelated failures remain errors; the old destination is never
+  deleted as a fallback. Concurrent writers retain last-completed-replacement
+  semantics, not read/modify/write transactions. Write-once reservations keep
+  their existing exclusive-create and interrupted-marker rules.
+  See [Windows sharing modes](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilew).
 - `state_manager/`: immutable repository-state events, read-only freshness and
   obsolete-item audit, hash-bound proposals, Codex/user review records, and
   deterministic managed-view projection. Use the `repo-state` entry point;
