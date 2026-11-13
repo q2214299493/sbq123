@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import shlex
 
 import pytest
 import yaml
@@ -18,6 +19,24 @@ def test_exact_boundary_rounds_keep_single_GPU_and_60minute_limit(name):
     assert backend["cpus_per_task"] == 4 and backend["automatic_retries"] == 0
     assert not backend["automatic_remote_submission"]
     assert not backend["final_energy_or_ts_acceptance"]
+
+
+@pytest.mark.parametrize("name", [continuation.PREFIX + "000_label", continuation.PREFIX + "001_label",
+                                 continuation.NAMES[0], continuation.NAMES[-1]])
+def test_actual_launcher_and_submit_command_use_the_approved_memory_cap(name):
+    backend = static.load_mz73_static_backend(name)
+    expected = backend['memory']
+    assert f'#SBATCH --mem={expected}\n' in static.render_launcher(backend)
+    command = shlex.split(static.sbatch_command(backend, backend['remote_root'] + '/' + name))
+    assert [arg for arg in command if arg.startswith('--mem=')] == ['--mem=' + expected]
+
+
+def test_a_stale_16GiB_header_cannot_pass_a_15GiB_continuation_preflight(tmp_path):
+    backend = static.load_mz73_static_backend(continuation.NAMES[0])
+    path = tmp_path / 'script.sbatch'
+    path.write_text(static.render_launcher(backend).replace('#SBATCH --mem=15G', '#SBATCH --mem=16G'))
+    with pytest.raises(ValueError, match='launcher'):
+        static.validate_launcher(backend, path)
 
 
 @pytest.mark.parametrize("name", ["paper_chco_aqcat25_ft512_20261112_r250_label", "other_r002_label"])

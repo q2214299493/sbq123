@@ -31,6 +31,14 @@ def recovery(tmp_path, monkeypatch):
     original, target = labels / NAME, labels / RECOVERY
     config = yaml.safe_load(CONFIG.read_text(encoding="utf-8"))
     backend_config = config["backends"][HOST]
+    from scripts.neb_agent.mz73_continuation import NAMES
+    from scripts.neb_agent.mz73_timebudget import TIMEOUT_LEAF
+
+    # This snapshot predates the later timeout and continuous-round approvals.
+    backend_config.pop("continuous_active_learning", None)
+    backend_config.pop("time_budget_extension", None)
+    backend_config["allowed_workdir_names"] = [name for name in backend_config["allowed_workdir_names"]
+                                              if name not in NAMES and name != TIMEOUT_LEAF]
     backend_config.pop("launch_recovery")
     backend_config["allowed_workdir_names"].remove(RECOVERY)
     snapshot = case / "backend_at_job13901.yaml"

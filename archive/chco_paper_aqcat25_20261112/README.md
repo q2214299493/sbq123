@@ -210,5 +210,16 @@ cell/species/mask and the accepted reference OUTCAR's measured 4.394-GiB peak,
 then reduced this same pending job to 7 GiB with a 1.5-fold observed-peak margin.
 No VASP rerun, new job or scientific input change occurred. The historical
 launcher and gate remain frozen with a separate native amendment receipt.
-The subsequent launcher fix must use a new source version; this checkout's
-actual gate and amendment source bytes must remain available unchanged.
+The gate-bound execution checkout remains frozen at commit `8701b928`; its
+actual gate and amendment source bytes remain available unchanged. A separate
+runtime checkout fixes both the future script header and the actual `sbatch`
+argument to use the approved backend memory value. The boundary-round tests
+cover the original leaves, r002 and r249, and reject a stale 16-GiB script under
+the 15-GiB continuation cap.
+
+The related 168-case validation first passed 128 cases and exposed 40 setup
+errors in an old launch-recovery fixture: its historical backend snapshot still
+contained later continuation/time-budget approvals. Correcting only that
+fixture to its actual historical scope made all 40 rerun cases pass. Production
+authorization guards remain unchanged. Native job 14377 is now RUNNING under
+the recorded 7-GiB amendment; the future renderer fix does not alter that job.

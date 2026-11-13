@@ -1522,3 +1522,16 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 - Freeze sources already bound to actual ML/VASP runs. Correct future launcher
   rendering in another source version, with a regression tying its header to
   the approved backend memory value.
+
+## 2026-11-13 - Bind Future Static RAM to the Approved Backend
+
+- Resolve `E-20261113-CONT-RAM` in a separate runtime source version: both the
+  rendered script header and actual `sbatch` memory argument now use the
+  approved backend value. Preserve the already submitted 14377 source/gate
+  checkout and its separate native 7-GiB amendment unchanged.
+- Validate original and boundary continuation leaves and reject stale 16-GiB
+  scripts under the 15-GiB cap. The related run passed 128 cases before 40
+  historical-fixture setup errors; all 40 rerun cases passed after removing
+  later approval scopes from that fixture only. No production guard changed.
+- Job 14377 is RUNNING. Its raw DFT force, force convergence below the strict
+  0.03-eV/angstrom target, and final TS validity remain separate unverified gates.

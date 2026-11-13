@@ -189,7 +189,7 @@ def render_launcher(backend: dict[str, Any]) -> str:
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --gres=gpu:1
-#SBATCH --mem=16G
+#SBATCH --mem={backend["memory"]}
 #SBATCH --time={backend["time_limit"]}
 #SBATCH --no-requeue
 set -euo pipefail
@@ -223,7 +223,7 @@ def sbatch_command(backend: dict[str, Any], remote_dir: str) -> str:
     require_mz73_path(backend, remote_dir)
     return shlex.join([
         "sbatch", "--parsable", "--partition=gpu", "--nodelist=MZ73", "--nodes=1", "--ntasks=1",
-        "--cpus-per-task=4", "--gres=gpu:1", "--mem=16G", "--time=" + backend["time_limit"], "--no-requeue",
+        "--cpus-per-task=4", "--gres=gpu:1", "--mem=" + backend["memory"], "--time=" + backend["time_limit"], "--no-requeue",
         "--chdir=" + remote_dir, "--output=" + remote_dir + "/slurm-%j.out",
         "--error=" + remote_dir + "/slurm-%j.err", LAUNCHER,
     ])
