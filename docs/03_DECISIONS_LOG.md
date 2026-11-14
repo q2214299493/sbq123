@@ -13,6 +13,13 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Decisions Log
 
+## 2026-11-14 - Prioritize C2-C4 paths and optimization; representative C5/C6 coverage
+
+- User clarified the scope: C2/C3/C4 reaction paths and structural optimization are the main objective. C5 and C6 should each include some representative reactions/local environments, without requiring comprehensive coverage.
+- Prioritize candidate selection, new-label budget and detailed optimization/path validation for C2-C4. Keep C5 and C6 as separate small extension cohorts; select exact cases after source and label review, without fixed per-carbon quotas or weaker scientific checks.
+- This refines the preceding C2-C6 scope statement. Preserve512/536,78/53/16,checkpoints,current_task and locked protocols; no new calculation is authorized by this clarification.
+- Updated scope: docs/reviews/fe110_c2_c6_reaction_scope_20261114/README.md.
+
 ## 2026-11-14 — Fe(110) C2–C6 multi-reaction force-model research scope
 
 - Explicit user goal: broaden the force-model reaction coverage to C2/C3/C4 and C5/C6 while retaining the C2/C3 optimization-acceleration objective. Include C4–C6 in the current source inventory and candidate-pool design; this is a target, not validated model capability.
