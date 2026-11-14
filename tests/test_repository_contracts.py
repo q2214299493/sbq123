@@ -241,9 +241,9 @@ def test_execution_backend_contract_keeps_source_specific_connectivity_policy() 
     assert rules["dimer_bidirectional_connectivity_role"] == (
         "optional_diagnostic_not_ts_acceptance_gate"
     )
-    assert rules["neb_ci_neb_bidirectional_connectivity_policy"] == (
-        "required_unchanged"
-    )
+    assert rules["neb_bidirectional_connectivity_policy"] == "required_unchanged"
+    assert rules["ci_neb_grade_a_requires_bidirectional_connectivity"] is False
+    assert rules["ci_neb_bidirectional_connectivity_role"] == "optional_diagnostic_not_ts_acceptance_gate"
     assert rules["active_learning_force_label_energy_may_enter_final_energy_tables"] is False
     assert rules["active_learning_convergence_implies_valid_transition_state"] is False
     assert rules["final_ts_result_requires_completed_converged_vasp_refinement"] is True
@@ -484,5 +484,5 @@ def test_true_fe110_ts_policy_locks_basis_and_registry_promotion() -> None:
         "validated_bidirectional_connectivity"
     ]
     assert promotion["source_method_validation"]["ci_neb"] == [
-        "validated_bidirectional_connectivity"
+        "ci_neb_technical_acceptance", "validated_vibrational_mode"
     ]

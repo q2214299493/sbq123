@@ -79,3 +79,11 @@ Tasks are ordered by priority and should be handled one per Codex thread.
 Classify/characterize editable-build metadata and package resources before any cleanup.
 The existing `sbq_catalyst_agent_workflow.egg-info/PKG-INFO` mismatch remains unresolved;
 no deletion, reclassification event or state-transaction change is authorized by this note.
+
+## Adsorption/TS remaining audit (2026-11-14)
+
+- Current-workspace code review only; preserve tasks/current_task.md and all calculation/data evidence.
+- Fixed planner choices to follow the installed DIMER parent policy; aligned CI-NEB optional-connectivity configuration/contracts while keeping ordinary NEB connectivity required.
+- Unified adsorption OUTCAR parsing and byte hashing, with mandatory final verification before publishing caches/review output. Synthetic cold/warm read-count checks are 2/1.
+- Remaining: global retrieval/frequency/TS skills lag approved rules; source-release lacks the workspace reviewed-GPU-path DIMER runtime; generic generation lacks reviewed multi-anchor template support; legacy DIMER metadata still implies mandatory connectivity.
+- Details and validation: docs/reviews/adsorption_ts_remaining_audit_20261114.md. No job submission, rerun, result acceptance, registry or Excel changes authorized by this review.

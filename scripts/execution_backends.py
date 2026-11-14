@@ -69,10 +69,12 @@ def load_execution_backends(path: Path = DEFAULT_CONFIG) -> ExecutionBackends:
         "optional_diagnostic_not_ts_acceptance_gate"
     ):
         raise ValueError("DIMER bidirectional connectivity must remain optional diagnostic evidence")
-    if scientific_rules.get("neb_ci_neb_bidirectional_connectivity_policy") != (
-        "required_unchanged"
-    ):
-        raise ValueError("NEB/CI-NEB connectivity policy changed without approval")
+    if scientific_rules.get("neb_bidirectional_connectivity_policy") != "required_unchanged":
+        raise ValueError("ordinary NEB must retain required bidirectional connectivity")
+    if scientific_rules.get("ci_neb_grade_a_requires_bidirectional_connectivity") is not False:
+        raise ValueError("CI-NEB Grade A must not require bidirectional connectivity")
+    if scientific_rules.get("ci_neb_bidirectional_connectivity_role") != "optional_diagnostic_not_ts_acceptance_gate":
+        raise ValueError("CI-NEB connectivity must remain optional diagnostic evidence")
 
     backends = _mapping(contract.get("backends"), "execution backends")
     vasp = _mapping(backends.get("vasp"), "VASP backend")

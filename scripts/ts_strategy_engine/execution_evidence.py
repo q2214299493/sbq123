@@ -216,7 +216,7 @@ def validated_ts(validation: dict[str, Any]) -> bool:
         and validation.get("source_saddle_sha256")
         == validation.get("frequency_poscar_sha256")
     )
-    connectivity_valid = source_method == "dimer" or validation.get(
+    connectivity_valid = source_method in {"dimer", "ci_neb"} or validation.get(
         "bidirectional_connectivity_valid"
     ) or (
         validation.get("connectivity_status") == "PASS"
@@ -227,11 +227,16 @@ def validated_ts(validation: dict[str, Any]) -> bool:
         source_method != "dimer"
         or validation.get("dimer_technical_acceptance") is True
     )
+    ci_acceptance_valid = (
+        source_method != "ci_neb"
+        or validation.get("ci_neb_technical_acceptance") is True
+    )
     return bool(
         validation.get("frequency_grade", validation.get("grade")) == "A"
         and frequency_hash_valid
         and connectivity_valid
         and dimer_acceptance_valid
+        and ci_acceptance_valid
     )
 
 

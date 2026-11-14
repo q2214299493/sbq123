@@ -24,41 +24,17 @@ def parse_poscar_symbols(path: Path) -> list[str]:
 
 
 def parse_final_outcar(path: Path) -> dict[str, Any]:
-    latest_forces: list[list[float]] | None = None
-    latest_toten: float | None = None
-    with path.open("r", encoding="utf-8", errors="replace") as handle:
-        iterator = iter(handle)
-        for line in iterator:
-            if "free  energy   TOTEN" in line:
-                fields = line.split()
-                try:
-                    latest_toten = float(fields[4])
-                except (IndexError, ValueError):
-                    pass
-            if "TOTAL-FORCE (eV/Angst)" not in line:
-                continue
-            next(iterator, None)
-            block: list[list[float]] = []
-            for force_line in iterator:
-                stripped = force_line.strip()
-                if not stripped or set(stripped) == {"-"}:
-                    if block:
-                        break
-                    continue
-                fields = stripped.split()
-                if len(fields) < 6:
-                    break
-                try:
-                    block.append([float(value) for value in fields[3:6]])
-                except ValueError:
-                    break
-            if block:
-                latest_forces = block
+    return _final_outcar_values(parse_outcar(path, include_final_forces=True), path)
+
+
+def _final_outcar_values(state: dict, path: Path) -> dict[str, Any]:
+    """Extract the force-label view of one already parsed OUTCAR stream."""
+    latest_forces = state.get("forces_eV_per_A")
+    latest_toten = state.get("final_toten_eV")
     if latest_forces is None:
         raise ValueError(f"{path}: no TOTAL-FORCE block")
     if latest_toten is None:
         raise ValueError(f"{path}: no TOTEN value")
-    state = parse_outcar(path)
     return {
         "ionic_converged": state["reached_required_accuracy"],
         "normal_completion": state["normal_completion"],

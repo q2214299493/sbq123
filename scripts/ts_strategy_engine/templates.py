@@ -94,7 +94,7 @@ def _evidence_valid(item: dict[str, Any]) -> bool:
     expected = compatibility_fingerprint(item.get("fingerprint", {}).get("compatibility", {}))
     source_method = str(item.get("validation_source_method", "")).lower()
     method_evidence_valid = (
-        source_method == "dimer"
+        source_method in {"dimer", "ci_neb"}
         or (
             item.get("connects_to_is") == 1
             and item.get("connects_to_fs") == 1
