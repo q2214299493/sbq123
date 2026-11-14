@@ -282,7 +282,9 @@ scientific_rules:
   grade_a_requires_validated_vibrational_mode: true
   dimer_grade_a_requires_bidirectional_connectivity: false
   dimer_bidirectional_connectivity_role: optional_diagnostic_not_ts_acceptance_gate
-  neb_ci_neb_bidirectional_connectivity_policy: required_unchanged
+  neb_bidirectional_connectivity_policy: required_unchanged
+  ci_neb_grade_a_requires_bidirectional_connectivity: false
+  ci_neb_bidirectional_connectivity_role: optional_diagnostic_not_ts_acceptance_gate
   active_learning_force_label_energy_may_enter_final_energy_tables: false
   active_learning_convergence_implies_valid_transition_state: false
   final_ts_result_requires_completed_converged_vasp_refinement: true

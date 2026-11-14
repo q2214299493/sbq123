@@ -198,7 +198,7 @@ transition_state:
       source_method_validation:
         dimer: [dimer_technical_acceptance, validated_vibrational_mode]
         neb: [validated_bidirectional_connectivity]
-        ci_neb: [validated_bidirectional_connectivity]
+        ci_neb: [ci_neb_technical_acceptance, validated_vibrational_mode]
       final_energy_profile: final_energy_policy
       final_energy_convention: fe110_converged_toten_sigma0p20_v1
       final_energy_source: final_OUTCAR_TOTEN

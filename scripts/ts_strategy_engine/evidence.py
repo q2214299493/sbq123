@@ -226,7 +226,7 @@ def _validate_ts_payload(payload: dict[str, Any]) -> None:
     source_method = str(payload.get("source_method", "")).lower()
     required = (
         VALIDATION_REQUIRED
-        if source_method == "dimer"
+        if source_method in {"dimer", "ci_neb"}
         else (*VALIDATION_REQUIRED, *CONNECTIVITY_REQUIRED)
     )
     missing = [
@@ -239,6 +239,8 @@ def _validate_ts_payload(payload: dict[str, Any]) -> None:
     method_evidence_complete = bool(
         payload.get("dimer_technical_acceptance") is True
         if source_method == "dimer"
+        else payload.get("ci_neb_technical_acceptance") is True
+        if source_method == "ci_neb"
         else (
             payload.get("connects_to_is") is True
             and payload.get("connects_to_fs") is True
@@ -273,7 +275,7 @@ def record_ts_validation(
     _validate_ts_payload(payload)
     source_method = str(payload.get("source_method", "")).lower()
     connectivity_report = (
-        None if source_method == "dimer" else load_connectivity_report(payload)
+        None if source_method in {"dimer", "ci_neb"} else load_connectivity_report(payload)
     )
     values = {
         "ts_validation_id": ts_validation_id,

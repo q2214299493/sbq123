@@ -95,7 +95,7 @@ def test_imported_parser_object_change_invalidates_cache(batch, monkeypatch):
     def changed_parser(path):
         return {"changed parser": str(path)}
 
-    monkeypatch.setattr(review, "parse_final_outcar", changed_parser)
+    monkeypatch.setattr(review, "parse_outcar", changed_parser)
     assert batch.run()["cache_misses"] == 1
     assert len(batch.calls) == 2
 
@@ -106,7 +106,7 @@ def test_parser_source_bytes_change_without_reimport_invalidates_cache(batch, tm
     path.write_text(text, encoding="utf-8")
     namespace = {"__name__": "cache_test_parser"}
     exec(compile(text, str(path), "exec"), namespace)
-    monkeypatch.setattr(review, "parse_final_outcar", namespace["parser"])
+    monkeypatch.setattr(review, "parse_outcar", namespace["parser"])
     batch.run()
     path.write_text(text.replace("return 1", "return 2"), encoding="utf-8")
     assert batch.run()["cache_misses"] == 1
@@ -201,7 +201,7 @@ def test_parser_change_during_batch_review_blocks_output(batch, monkeypatch):
         return {"another parser": str(path)}
 
     def mark(records, slab, rules):
-        monkeypatch.setattr(review, "parse_final_outcar", changed)
+        monkeypatch.setattr(review, "parse_outcar", changed)
         return []
 
     monkeypatch.setattr(review, "mark_duplicates", mark)

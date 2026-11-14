@@ -125,7 +125,14 @@ def validate_vasp_relaxation(directory: Path) -> dict[str, Any]:
     if missing:
         raise ValueError("VASP relaxation files missing or empty: " + ", ".join(missing))
     outcar = parse_outcar(directory / "OUTCAR")
-    scf = final_scf_state(parse_oszicar(directory / "OSZICAR"), read_incar_values(directory / "INCAR"), outcar)
+    return _validate_relaxation_state(
+        read_incar_values(directory / "INCAR"), parse_oszicar(directory / "OSZICAR"), outcar,
+    )
+
+
+def _validate_relaxation_state(incar: dict, oszicar: dict, outcar: dict) -> dict[str, Any]:
+    """Apply the owning relaxation gate to a single raw-file parsing snapshot."""
+    scf = final_scf_state(oszicar, incar, outcar)
     errors: list[str] = []
     if not outcar.get("normal_completion"):
         errors.append("normal_completion_missing")

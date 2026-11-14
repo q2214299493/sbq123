@@ -8,16 +8,22 @@ description: Retrieve catalyst structures through a whitelist-first evidence gat
 Use this skill as the only external structure/path retrieval owner for the project.
 Ownership and rule-source precedence are defined by `configs/skill_routing.yaml`;
 this skill implements that route and does not override its owning configs.
+Resolve all repository paths below from the current verified project root,
+including resources under `skills/catalysis-data-retrieval/`. Use
+`modules/catalysis_data_retrieval/README.md` and the repository's installed
+environment; separate scripts or source lists in the global skill directory
+are not the project's authority. If the project root is unknown, establish it
+before applying project-specific retrieval rules.
 
 ## Workflow
 
-1. Read `references/sources.yaml`. Reject structure/path records outside its host and path scopes.
+1. For the whitelist stage, read `skills/catalysis-data-retrieval/references/sources.yaml` and reject records outside its host and path scopes. The controlled journal fallback below has its own evidence gate.
 2. Define an English retrieval query containing material/composition, surface/facet, adsorbate or reaction, state/path type, and calculation stage. Preserve formulas and Miller indices exactly.
-3. For an input image, inspect it with the available image viewer. Separate directly visible features from interpretations, never infer elements from color alone, and create JSON matching `references/image_query_schema.json`. Ask for confirmation only when uncertainty changes the search materially.
-4. Normalize source records to `references/record_schema.json`. Preserve the original record ID, source URL, artifact URL, retrieval timestamp, units, license/access note, and any missing fields.
-5. Run `scripts/validate_records.py` before ranking.
-6. Run `scripts/hybrid_search.py` with a real sentence-embedding backend or source-bound precomputed embeddings. Production retrieval must combine BM25 and semantic ranks; never label TF-IDF or lexical-only output as semantic.
-7. Return no more than five results. Include source, URL, matched system/reaction, available structure/path data, BM25 score, semantic score, hybrid score, and transferability cautions.
+3. For an input image, inspect it with the available image viewer. Separate directly visible features from interpretations, never infer elements from color alone, and create JSON matching `skills/catalysis-data-retrieval/references/image_query_schema.json`. Ask for confirmation only when uncertainty changes the search materially.
+4. Normalize whitelist records to `skills/catalysis-data-retrieval/references/record_schema.json`. Preserve the original record ID, source URL, artifact URL, retrieval timestamp, units, license/access note, and any missing fields.
+5. Run `python -m scripts.catalysis_retrieval.validate_cli` before ranking.
+6. Run `python -m scripts.catalysis_retrieval.cli` with a real sentence-embedding backend or source-bound precomputed embeddings. Production retrieval must combine BM25 and semantic ranks; never label TF-IDF or lexical-only output as semantic.
+7. Return at most five ranked whitelist records. Include source, URL, matched system/reaction, available structure/path data, BM25 score, semantic score, hybrid score, and transferability cautions.
 8. If a usable whitelist motif exists, stop; do not run literature retrieval.
 9. For adsorption-site tasks only, if and only if the result is
    `NO_WHITELIST_MATCH`, apply
@@ -31,7 +37,8 @@ this skill implements that route and does not override its owning configs.
     speculation and non-exact facet transfer as build-ready evidence.
 11. Return every unique stable motif supported by the accepted evidence—two if
     two are supported, four only if four are supported. Never pad to a fixed
-    top/bridge/hollow list.
+    top/bridge/hollow list. The owning planner checks initial motif coverage;
+    a shortfall does not authorize padding, a partial submission, or historical reruns.
 12. Rank motifs by reported stability and extract only structure-selection
     guidance: site, binding atoms, bond lengths, bond angles, surface heights,
     and orientation. Label external energies as relative-order references only;
@@ -45,19 +52,30 @@ this skill implements that route and does not override its owning configs.
 - Send accepted candidates to the owning module for its normal convergence, geometry, endpoint, path, or TS checks.
 - Require a reviewed structure template before generation. Distinct stable
   configurations at the same nominal site remain distinct motifs.
-- Require compatible local relaxation and final statics for every reportable
-  energy. External values may guide ordering but cannot validate local energy.
+- Report energies only from compatible, converged local outputs under
+  `docs/01_METHOD_PROTOCOL.md`. The active Fe(110) surface-state convention is
+  `fe110_converged_toten_sigma0p20_v1`, using final `OUTCAR` `TOTEN` from the
+  compatible `ISMEAR=1`, `SIGMA=0.20 eV` production branch; no extra single-point
+  is required. Keep molecular-reference and legacy-static conventions separate
+  as the protocol requires. External values cannot validate local energies.
+
+For phase-aware iron-FT computation, competing mechanistic models, and
+cross-paper visual maps with source-figure references, consult
+`skills/catalysis-data-retrieval/references/iron-fts-computational-methodology.md`
+when that optional resource exists in the verified repository. It is a literature
+synthesis only: it does not override the whitelist-first gate, locked local
+method protocols, or local validation requirements.
 
 ## Access
 
-Use direct official APIs/downloads where available. No MCP server is required by this skill. Materials Project may require `MP_API_KEY`; other credentials and unverified endpoints remain `Needs confirmation`. Read `references/sources.yaml` for current connector status.
+Use direct official APIs/downloads where available. No MCP server is required by this skill. Materials Project may require `MP_API_KEY`; other credentials and unverified endpoints remain `Needs confirmation`. Read the repository's `skills/catalysis-data-retrieval/references/sources.yaml` for current connector status.
 
 ## Commands
 
 ```bash
 python -m pip install ".[retrieval]"
-python scripts/validate_records.py records.jsonl
-python scripts/hybrid_search.py records.jsonl --query "Fe(110) CO dissociation transition path" --output retrieval_top5.json
+python -m scripts.catalysis_retrieval.validate_cli records.jsonl
+python -m scripts.catalysis_retrieval.cli records.jsonl --query "Fe(110) CO dissociation transition path" --output retrieval_top5.json
 ```
 
 Use `--query-vector` only for provenance-bound precomputed semantic vectors. The record and query need matching model identities, generation timestamps, dimensions and content hashes; see the owning module README. Vector availability or similarity never establishes review or scientific acceptance. `--lexical-only` is diagnostic and cannot satisfy the project production gate.

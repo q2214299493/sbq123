@@ -64,9 +64,9 @@ def test_runtime_backend_contract_keeps_dimer_connectivity_diagnostic(
     assert rules["dimer_bidirectional_connectivity_role"] == (
         "optional_diagnostic_not_ts_acceptance_gate"
     )
-    assert rules["neb_ci_neb_bidirectional_connectivity_policy"] == (
-        "required_unchanged"
-    )
+    assert rules["neb_bidirectional_connectivity_policy"] == "required_unchanged"
+    assert rules["ci_neb_grade_a_requires_bidirectional_connectivity"] is False
+    assert rules["ci_neb_bidirectional_connectivity_role"] == "optional_diagnostic_not_ts_acceptance_gate"
 
     rules["dimer_grade_a_requires_bidirectional_connectivity"] = True
     changed = tmp_path / "execution_backends.yaml"

@@ -4,6 +4,7 @@ from typing import Any
 
 from .execution_gate import decide_execution
 from .fingerprint import family_event_matches
+from .dimer_gate_common import load_policy as load_dimer_policy
 from scripts.scientific_validation import finite_number, integer_number, validate_finite_tree
 from .strategy_learning import reference_methods
 
@@ -51,7 +52,7 @@ def compose_strategy(
         family = template["reaction_family"]
         waypoints = template["waypoint_strategy"]
         interpolation = template["interpolation_strategy"]
-        neb = template["neb_settings"]
+        neb = dict(template["neb_settings"])
         dimer = template["dimer_usage"]
         template_match = {
             "template_id": accepted["template_id"],
@@ -67,16 +68,21 @@ def compose_strategy(
         waypoints = rule.get("waypoint_strategy", ["reactant", "reviewed_reaction_waypoint", "product"])
         interpolation = rule.get("interpolation_strategy", "segmented_idpp")
         neb = {
-            "candidate_methods": rule.get(
-                "vasp_candidate_methods",
-                ["ordinary_neb", "ci_neb", "gpu_ml_neb_vasp_validated_triad"],
-            ),
             "initial_images": integer_number(rule.get("initial_images", 3), "initial_images", positive=True),
             "image_policy": "start_minimal_then_add_only_at_large_displacement_or_high_curvature",
             "selection_policy": "choose_from_reviewed_path_evidence_not_a_fixed_sequence",
         }
         dimer = {"policy": rule.get("dimer_usage", "conditional_refinement")}
         template_match = None
+    # Candidate choices follow the installed gate policy, including old templates.
+    # This is planning metadata; execution still requires a current gate decision.
+    methods = load_dimer_policy()["eligibility"]["parent_methods"]
+    if not isinstance(methods, list) or not methods or any(not isinstance(item, str) or not item.strip() for item in methods):
+        raise ValueError("DIMER policy parent_methods must be a nonempty list of methods")
+    preferred = neb.get("candidate_methods", [])
+    neb["candidate_methods"] = list(dict.fromkeys(
+        [item for item in preferred if item in methods] + methods
+    ))
     return {
         "version": 5,
         "status": (

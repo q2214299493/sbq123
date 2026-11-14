@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+import hashlib
+import io
 import re
+from contextlib import contextmanager
 from pathlib import Path
 
 from scripts.scientific_validation import finite_number, integer_number
@@ -113,7 +116,9 @@ def _advance_outcar_cycle(line: str, cycles: list[dict], active: dict | None, en
         cycles.append(active)
         started = True
     if "aborting loop because EDIFF is reached" in line:
-        if active is None or active["complete"]:
+        # VASP prints energy(sigma->0) inside the numbered electronic loop.
+        # Its later EDIFF marker belongs to that same target, not a new cycle.
+        if active is None or (active["complete"] and active["iteration"] is None):
             active = _cycle(len(cycles) + 1)
             cycles.append(active)
         active["explicit_convergence"] = True
@@ -132,7 +137,63 @@ def _advance_outcar_cycle(line: str, cycles: list[dict], active: dict | None, en
     return active, started
 
 
-def parse_outcar(path: Path) -> dict:
+class _HashingReader(io.RawIOBase):
+    """Hash the original bytes while the text layer handles universal newlines."""
+
+    def __init__(self, raw, digest):
+        self.raw = raw
+        self.digest = digest
+
+    def readable(self):
+        return True
+
+    def readinto(self, buffer):
+        count = self.raw.readinto(buffer)
+        if count:
+            self.digest.update(memoryview(buffer)[:count])
+        return count
+
+
+@contextmanager
+def _outcar_stream(path, digest):
+    if digest is None:
+        with path.open("r", encoding="utf-8", errors="replace") as handle:
+            yield handle
+    else:
+        with path.open("rb") as raw:
+            with io.TextIOWrapper(io.BufferedReader(_HashingReader(raw, digest)),
+                                  encoding="utf-8", errors="replace") as handle:
+                yield handle
+
+
+def _advance_final_outcar_values(line: str, state: dict) -> None:
+    if "free  energy   TOTEN" in line:
+        try:
+            state["final_toten_eV"] = float(line.split()[4])
+        except (IndexError, ValueError):
+            pass
+    if "TOTAL-FORCE (eV/Angst)" in line:
+        state.update(block=[], skip_header=True)
+    elif state["skip_header"]:
+        state["skip_header"] = False
+    elif state["block"] is not None:
+        stripped = line.strip()
+        if not stripped or set(stripped) == {"-"}:
+            if state["block"]:
+                state.update(forces_eV_per_A=state["block"], block=None)
+        else:
+            try:
+                fields = stripped.split()
+                if len(fields) < 6:
+                    raise ValueError("end of force block")
+                state["block"].append([float(value) for value in fields[3:6]])
+            except ValueError:
+                if state["block"]:
+                    state["forces_eV_per_A"] = state["block"]
+                state["block"] = None
+
+
+def parse_outcar(path: Path, *, include_final_forces: bool = False, include_sha256: bool = False) -> dict:
     if not path.is_file():
         return {
             "exists": False,
@@ -153,8 +214,12 @@ def parse_outcar(path: Path) -> dict:
     reached_required_accuracy = False
     normal_completion = False
     collecting_local_magnetization = False
-    with path.open("r", encoding="utf-8", errors="replace") as handle:
+    digest = hashlib.sha256() if include_sha256 else None
+    labels = {"final_toten_eV": None, "forces_eV_per_A": None, "block": None, "skip_header": False}
+    with _outcar_stream(path, digest) as handle:
         for line in handle:
+            if include_final_forces:
+                _advance_final_outcar_values(line, labels)
             if re.match(r"\s*vasp\.\d", line):
                 run_index += 1
                 cycles = []
@@ -188,7 +253,7 @@ def parse_outcar(path: Path) -> dict:
                     local_magnetization.append(float(match.group(2)))
                 elif local_magnetization:
                     collecting_local_magnetization = False
-    return {
+    result = {
         "exists": True,
         "atomic_force_history": atomic,
         "atomic_force_rms_history": atomic_rms,
@@ -204,6 +269,12 @@ def parse_outcar(path: Path) -> dict:
         "local_magnetization_last_muB": local_magnetization,
         "fatal_keywords": sorted(fatal_keywords),
     }
+    if include_final_forces:
+        result.update(final_toten_eV=labels["final_toten_eV"],
+                      forces_eV_per_A=labels["block"] or labels["forces_eV_per_A"])
+    if digest is not None:
+        result["source_sha256"] = digest.hexdigest()
+    return result
 
 
 def classify_force_trend(values: list[float], window: int = 10) -> str:

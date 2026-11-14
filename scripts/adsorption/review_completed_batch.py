@@ -6,6 +6,7 @@ before preparing a separate append-only registration plan.
 from __future__ import annotations
 
 import argparse
+import copy
 from importlib.metadata import version
 import inspect
 import itertools
@@ -23,12 +24,12 @@ from scripts.adsmind_lite import adsmind_common
 from scripts.adsmind_lite.relaxed_analysis import (
     connectivity_change, connectivity_edges, maximum_slab_displacement, minimum_cross_distance,
 )
-from scripts.aqcat25_calibration import parse_final_outcar
+from scripts.aqcat25_calibration import _final_outcar_values
 from scripts.artifact_io import load_json_object, sha256_file, sha256_json, source_file_manifest, write_json_atomic
 from scripts.neb_agent import utils_vasp
-from scripts.neb_agent.utils_vasp import parse_oszicar
+from scripts.neb_agent.utils_vasp import parse_oszicar, parse_outcar
 from scripts import vasp_result_gate
-from scripts.vasp_result_gate import read_incar_values, validate_vasp_relaxation
+from scripts.vasp_result_gate import _validate_relaxation_state, read_incar_values
 from scripts.workflow_geometry import minimum_image_delta_xy
 from .build_fe110_adsorption import expanded_symbols, fe110_anchor_site_distances, read_poscar
 from .build_fe110_care_batch import molecular_signature
@@ -99,9 +100,14 @@ def analyze_one(directory: Path, slab, analysis: dict) -> dict:
     submission = receipt["submission"]
     manifest_path = Path(submission["workdir"]) / "candidate_manifest.json"
     manifest = load_json_object(manifest_path)
-    for name in ("INCAR", "POSCAR", "CONTCAR", "OUTCAR", "OSZICAR", "KPOINTS"):
+    for name in ("INCAR", "POSCAR", "CONTCAR", "OSZICAR", "KPOINTS"):
         if sha256_file(directory / name) != receipt["remote"]["files"][name]["sha256"]:
             raise ValueError(f"collection hash changed: {directory.name}/{name}")
+    outcar = parse_outcar(directory / "OUTCAR", include_final_forces=True, include_sha256=True)
+    if outcar.get("source_sha256") != receipt["remote"]["files"]["OUTCAR"]["sha256"]:
+        raise ValueError(f"collection hash changed: {directory.name}/OUTCAR")
+    incar = read_incar_values(directory / "INCAR")
+    oszicar = parse_oszicar(directory / "OSZICAR")
     initial, final = [read_poscar(directory / name) for name in ("POSCAR", "CONTCAR")]
     atoms_initial, atoms = [read(directory / name, format="vasp") for name in ("POSCAR", "CONTCAR")]
     atoms_initial.pbc = atoms.pbc = [True, True, False]
@@ -117,16 +123,16 @@ def analyze_one(directory: Path, slab, analysis: dict) -> dict:
         pass
     errors = []
     try:
-        convergence = validate_vasp_relaxation(directory)
+        convergence = _validate_relaxation_state(incar, oszicar, outcar)
     except ValueError as exc:
         convergence = {"passed": False, "reason": str(exc)}
         errors.append("convergence")
-    parsed = parse_final_outcar(directory / "OUTCAR")
+    parsed = _final_outcar_values(outcar, directory / "OUTCAR")
     forces = np.asarray(parsed["forces_eV_per_A"], dtype=float)
     if forces.shape != (len(atoms), 3) or not np.isfinite(forces).all():
         raise ValueError("nonfinite/incomplete force block")
     fmax = float(np.linalg.norm(forces[18:], axis=1).max())
-    force_limit = -float(read_incar_values(directory / "INCAR")["EDIFFG"])
+    force_limit = -float(incar["EDIFFG"])
     checks = compatibility_checks(directory, initial, final, slab, manifest, receipt)
     if not all(checks.values()):
         errors.append("compatibility")
@@ -158,7 +164,7 @@ def analyze_one(directory: Path, slab, analysis: dict) -> dict:
             "target_graph": submission["connectivity"], "formula": submission["formula"],
             "directory": str(directory.resolve()), "collection_sha256": sha256_file(directory / "collection.json"),
             "candidate_manifest_sha256": sha256_file(manifest_path), "convergence": convergence,
-            "ionic_steps": parse_oszicar(directory / "OSZICAR")["ionic_steps"],
+            "ionic_steps": oszicar["ionic_steps"],
             "final_toten_eV": parsed["final_toten_eV"], "fmax_movable_eV_A": fmax,
             "force_limit_eV_A": force_limit, "compatibility_checks": checks,
             "chemistry": chemistry, "signature_match": signature_match,
@@ -212,9 +218,11 @@ def _code_version(code: CodeType) -> str:
 def analysis_binding(slab: Path, policy: Path) -> dict:
     """Bind cached evidence to actual imported Python code and its source owners."""
     functions = (
-        analyze_one, compatibility_checks, parse_final_outcar, parse_oszicar, read_incar_values,
+        analyze_one, compatibility_checks, _final_outcar_values, parse_outcar, parse_oszicar, read_incar_values,
         load_json_object, yaml.safe_load,
-        validate_vasp_relaxation, utils_vasp.parse_outcar, vasp_result_gate.final_scf_state,
+        _validate_relaxation_state, utils_vasp.parse_outcar, vasp_result_gate.final_scf_state,
+        utils_vasp._advance_final_outcar_values, utils_vasp._outcar_stream,
+        utils_vasp._HashingReader.readinto,
         scientific_validation.finite_number, scientific_validation.integer_number,
         read_poscar, expanded_symbols, fe110_anchor_site_distances, molecular_signature,
         adsorbate_indices, connectivity, connectivity_change, connectivity_edges,
@@ -235,7 +243,8 @@ def analysis_binding(slab: Path, policy: Path) -> dict:
             "slab": {"path": str(slab.resolve()), "sha256": sha256_file(slab)}}
 
 
-def candidate_binding(collection: Path, shared: dict) -> dict:
+def candidate_binding(collection: Path, shared: dict, *, verify_outcar: bool = True) -> dict:
+    """A tentative lookup may defer OUTCAR verification until before publication."""
     digest = sha256_file(collection)
     receipt = load_json_object(collection)
     if sha256_file(collection) != digest:
@@ -245,7 +254,8 @@ def candidate_binding(collection: Path, shared: dict) -> dict:
     for name, item in receipt["remote"]["files"].items():
         if name == "POTCAR":
             continue
-        files[name] = sha256_file(collection.parent / name)
+        files[name] = (item["sha256"] if name == "OUTCAR" and not verify_outcar
+                       else sha256_file(collection.parent / name))
         if files[name] != item["sha256"]:
             raise ValueError("collected source changed")
     return {"cache_version": 2, "analysis": shared,
@@ -289,8 +299,9 @@ def main() -> None:
     # Each record binds the candidate manifest and the imported parser versions.
     hits = 0
     candidates = []
+    pending_caches = []
     for path in sorted(args.sources.glob("*/collection.json")):
-        binding = candidate_binding(path, shared)
+        binding = candidate_binding(path, shared, verify_outcar=False)
         candidates.append((path, binding))
         key = sha256_json(binding)
         cache = args.sources.parent / "parsed" / (path.parent.name + "_" + key + ".json")
@@ -298,12 +309,13 @@ def main() -> None:
         if record is None:
             record = analyze_one(path.parent, slab, analysis)
             current = analysis_binding(args.slab, policy)
-            if (candidate_binding(path, shared) != binding or current != shared):
+            if (candidate_binding(path, shared, verify_outcar=False) != binding or current != shared):
                 changed = [key for key in shared if shared[key] != current[key]]
                 raise ValueError("analysis inputs or parser code changed while reading; cache not written; " + ",".join(changed))
             # Preserve old/invalid cache bytes for diagnosis rather than overwrite them.
             if not cache.exists():
-                write_json_atomic(cache, {"binding": binding, "record": record, "record_sha256": sha256_json(record)}, ensure_ascii=True)
+                pending_caches.append((cache, {"binding": binding, "record": copy.deepcopy(record),
+                                               "record_sha256": sha256_json(record)}))
         else:
             hits += 1
         records.append(record)
@@ -313,6 +325,10 @@ def main() -> None:
         raise ValueError("candidate evidence changed during batch review; output not written")
     if analysis_binding(args.slab, policy) != shared:
         raise ValueError("analysis inputs or parser code changed; output not written")
+    # A cache hit is tentative too: verify raw evidence before writing any artifact.
+    for cache, payload in pending_caches:
+        if not cache.exists():
+            write_json_atomic(cache, payload, ensure_ascii=True)
     write_json_atomic(args.output, {"records": records, "comparisons": comparisons,
                       "cache_hits": hits, "cache_misses": len(records) - hits, "cache_analysis_binding": shared,
                       "analysis_policy": {"path": str(policy), "sha256": sha256_file(policy)},

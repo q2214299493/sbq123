@@ -136,7 +136,7 @@ def test_scientific_claim_application_delegates_and_gate_remains_thin():
     assert 'require_execution_authorization' not in application
 
 
-@pytest.mark.parametrize('method', ['neb', 'ci_neb'])
+@pytest.mark.parametrize('method', ['neb'])
 def test_neb_claim_keeps_current_connectivity_requirement(tmp_path, method):
     from tests.scientific_claim_fixtures import neb_vfa_case
     from test_ts_strategy_engine import contract

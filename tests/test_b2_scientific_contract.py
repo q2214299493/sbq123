@@ -233,15 +233,16 @@ def test_missing_element_evidence_and_different_endpoint_identity_cannot_reuse()
     assert not result["strategy_transferable"]
 
 
-@pytest.mark.parametrize("method", ["neb", "dimer"])
+@pytest.mark.parametrize("method", ["neb", "dimer", "ci_neb"])
 def test_ts_acceptance_requirements_preserved(method):
     evidence = {"source_method": method, "frequency_grade": "A", "source_saddle_sha256": "a" * 64,
                 "frequency_poscar_sha256": "a" * 64, "bidirectional_connectivity_valid": True,
-                "dimer_technical_acceptance": True}
+                "dimer_technical_acceptance": True, "ci_neb_technical_acceptance": True}
     assert validated_ts(evidence)
     for change in ({"frequency_grade": "B"}, {"frequency_poscar_sha256": "b" * 64},
-                   {"dimer_technical_acceptance": False} if method == "dimer" else {"bidirectional_connectivity_valid": False}):
+                   {method + "_technical_acceptance": False} if method in {"dimer", "ci_neb"} else {"bidirectional_connectivity_valid": False}):
         assert not validated_ts({**evidence, **change})
+    assert validated_ts({**evidence, "bidirectional_connectivity_valid": False}) is (method != "neb")
 
 
 def test_remote_audit_uses_same_parser_without_remote_dependencies(tmp_path):
