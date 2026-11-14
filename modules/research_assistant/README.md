@@ -21,6 +21,18 @@ and optional `output_root`. Native permissions and credentials cannot be supplie
 through this profile. Explicit CLI values take precedence. The optional installed
 console entry is `research-assist`; no install is needed for the module entry.
 
+For the Windows desktop installation, use the stable
+`%LOCALAPPDATA%/OpenAI/Codex/cli/codex.cmd` entry rather than a version-specific
+WindowsApps executable in the operational profile. The host resolves this entry
+to its declared native `CODEX_CLI_PATH` on every launch, with only the shim's
+unversioned `bin/codex.exe` fallback. It never invokes a shell or chooses a
+retained version directory for this modern launcher. Changed/unknown modern
+launcher layouts fail explicitly. Legacy shims retain their prior ambiguity
+guard. `LiveStdio` still runs the existing local protocol/feature/schema checks
+before admission for every resolved binary; this change does not weaken
+permissions or authorize inference. Offline proof can call `verify_protocol`
+alone; a passed proof does not establish login or model access.
+
 Outputs default to a new directory outside the input project tree. No existing
 result is overwritten. This task's concrete local wrapper/profile are recorded
 in its implementation/acceptance report; credentials are never copied there.

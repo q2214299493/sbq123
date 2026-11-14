@@ -13,6 +13,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Decisions Log
 
+## 2026-11-14 — Stable RSI launcher with unchanged offline admission
+
+- User authorized stable codex.cmd and offline protocol preflight only;no model call,failed-study retry,scientific job,auth or permission change.
+- Modern launcher follows its declared CODEX_CLI_PATH on every call,then its exact unversioned fallback;never select retained version subdirectories for this launcher.Unknown layouts and incompatible protocols fail explicitly.
+- Only operational profile.codex changed;exact backup/one-key verification and five offline commands passed.Live login/model/full admission is not established.See docs/reviews/rsi_stable_entry_repair_20261114.md.
+
 ## 2026-09-05 - Add Sella to the current MatRIS candidate loop
 
 - User requested Sella integration and comparison with the current workflow.

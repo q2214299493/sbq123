@@ -36,14 +36,52 @@ def child_environment(home: Path) -> dict:
     return environment
 
 
+def _windows_launcher_executable(launcher: Path) -> Path:
+    """Follow the installed shim's declared target without executing a shell.
+
+    The modern launcher follows CODEX_CLI_PATH, then its unversioned fallback.
+    Do not pick a retained version-directory merely because it is present.
+    Resolve again on every call so application updates cannot leave a cache.
+    """
+    if launcher.stat().st_size > 65536:
+        raise ValueError("Codex launcher is unexpectedly large")
+    text = launcher.read_text(encoding="utf-8-sig")
+    if "CODEX_CLI_PATH" in text:
+        required = (
+            'set "CODEX_CONFIG=%USERPROFILE%\\.codex\\config.toml"',
+            'set "CODEX_REAL=%~dp0..\\bin\\codex.exe"',
+            '"%CODEX_REAL%" %*',
+        )
+        if not all(marker in text for marker in required):
+            raise ValueError("Codex launcher layout changed; review it before launching RSI")
+        profile = Path(os.environ.get("USERPROFILE") or Path.home())
+        config = profile / ".codex" / "config.toml"
+        if config.is_file():
+            # Read only this nonsecret path setting, never parse/copy auth data.
+            with config.open(encoding="utf-8-sig") as stream:
+                for line in stream:
+                    if line.startswith("CODEX_CLI_PATH = '"):
+                        target = Path(line.split("'", 2)[1])
+                        if not target.is_absolute() or target.name.lower() != "codex.exe":
+                            raise ValueError("CODEX_CLI_PATH must name an absolute native codex.exe")
+                        if target.is_file():
+                            return target
+                        break
+        fallback = launcher.parent.parent / "bin" / "codex.exe"
+        if fallback.is_file():
+            return fallback
+        raise FileNotFoundError("Codex stable launcher has no current target; reopen the Codex app")
+    # Preserve the existing older-launcher contract, including ambiguity refusal.
+    candidates = list((launcher.parent.parent / "bin").glob("*/codex.exe"))
+    if len(candidates) != 1:
+        raise ValueError("supply --codex with the actual codex.exe path")
+    return candidates[0]
+
+
 def executable(value: str | None) -> Path:
     found = Path(value) if value else Path(shutil.which("codex") or "missing-codex")
     if found.suffix.lower() in {".cmd", ".bat"}:
-        # The bundled Windows shim points to a versioned executable; never use shell=True.
-        candidates = list((found.parent.parent / "bin").glob("*/codex.exe"))
-        if len(candidates) != 1:
-            raise ValueError("supply --codex with the actual codex.exe path")
-        found = candidates[0]
+        found = _windows_launcher_executable(found)
     found = found.resolve(strict=True)
     if not found.is_file():
         raise ValueError("Codex executable required")

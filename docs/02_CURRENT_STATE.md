@@ -13,6 +13,16 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Current State
 
+## RSI stable-entry startup —2026-11-14
+
+LAST_RECORDED_OBSERVATION from canonical work:authorized repair changed only
+daily_profile.codex to stable codex.cmd.Actual RSI resolver follows the current
+CODEX_CLI_PATH on every call;protocol/feature/schema admission remains required.
+Five offline commands and exact one-key profile/backup verification PASS,
+CLI0.167.0-alpha.4.1.No model/auth RPC,scientific job or failed-run retry.
+Live login/model/native-permission admission remains untested;old BLOCKED
+receipts preserved.See `docs/reviews/rsi_stable_entry_repair_20261114.md`.
+
 ## Authority and scope
 
 This is a source/publication entry point, not a live monitoring report. Governance

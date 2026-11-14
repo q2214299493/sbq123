@@ -13,6 +13,13 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## RSI stable-entry repair —2026-11-14
+
+- `docs/reviews/rsi_stable_entry_repair_20261114.md`:actual-runtime repair,five offline checks and no-inference boundary.
+- `scripts/ts_strategy_engine/review_app_server.py` and `tests/test_rsi_stable_executable.py`:native resolution and update/failure regressions.
+- `archive/rsi_stable_entry_20261114/preflight.py`:offline protocol and exact installed-profile/backup verification;no model launch.
+- External `C:/Users/86177/Desktop/fe110_rsi_experiments/rsi_runtime_policy_20261030/startup_preflight_stable_20261114_v1/`:command/schema evidence;runtime profile,backup,credentials and generated artifacts are not source-published.
+
 This is a navigation index, not a duplicate file listing. Use `git ls-files` for the complete tracked inventory.
 
 Strategy improvement: `modules/transition_state_search/LEARNING.md` documents
