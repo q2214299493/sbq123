@@ -13,13 +13,13 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Current State
 
-## RSI Startup — 2026-11-12
+## RSI Runtime — 2026-11-15
 
-LAST_RECORDED_OBSERVATION from canonical work:Nov10 offline preflight passed,
-but today's real local-triad review cannot find the configured native binary;
-BLOCKED at admission,0model turns/actions.No retry/profile/auth/permission change.
-Local scientific review is independent;separate path/resolver repair if requested.
-See `docs/reviews/chco_local_triad_review_20261112.md`.
+LAST_RECORDED_OBSERVATION from canonical work:Nov15 stable entry followed
+CLI0.169.0-alpha.11.1 and passed protocol admission;model turn1 then BLOCKED
+with unexpected notification/turn mismatch.0host actions/selected policies,
+no usable opinion or retry;not the old missing-binary failure.Local scientific
+review remains independent.See `docs/reviews/chco_mode12_review_20261115.md`.
 
 ## C2 supplement closeout and CH+CO NEB — 2026-11-10
 
@@ -38,11 +38,14 @@ existing explicit-preparation branch,new mode/preflight and START_DIMER gates
 PASS.Dimer9998592 now DONE49translations,max atom0.015198eV/A,latest complete
 curvature-5.751eV/A2;final mode/geometry reviewed,CC1.739964A,CH/CO intact.
 User accepted DIMCAR Force0.06316/Torque0.20789 for diagnostic frequency only.
-VFA2260 submitted32MPI/32pernode,first native PEND;active C45/C46/O47/H48,
-partial Hessian,existing VFA SIGMA0.10 profile,not an energy-chain source.
-Registry48metadata rows+1workflow change verified.No frequencies,accepted TS
-or barrier.Next:inspect VFA completion/target mode;no other job authorized.
-BUCT2 and paired benchmark unchanged.See `docs/reviews/chco_vfa_submission_20261115.md`.
+VFA2260 DONE/normal25force evaluations;12modes,one imaginary318.644011cm^-1,
+mode12.Target CC opening/closing quantitatively/visually reviewed;CC/CO derivative
+ratio14.38,same-active-set Dimer cosine0.934.11raw hashes verified.Partial
+C45/C46/O47/H48 Hessian,VFA SIGMA0.10,not an energy-chain source.Owner
+NEEDS_REVIEW/Ungraded,kinetic=false:diagnostic-only residual approval and null
+frequency grading thresholds still block formal TS/barrier promotion.Next:formal
+acceptance review;no new job/registry write this turn.BUCT2 and paired benchmark
+unchanged.See `docs/reviews/chco_mode12_review_20261115.md`.
 
 ## C2 supplement GPU submission — 2026-11-06
 

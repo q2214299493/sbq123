@@ -13,6 +13,13 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## CH+CO target mode12 review —2026-11-15
+
+- `docs/reviews/chco_mode12_review_20261115.md`:CC-mode assignment,eigenvector mass conversion,actual visual review and diagnostic-only acceptance boundary.
+- `calculations/fe110_ch_co_to_chco_ts_20261109/vfa_mode12_review_20261115_v1/`:11 verified raw files,full49-row mode metrics,three-frame plot,hash-bound review,owner diagnostic and verification.
+- `archive/chco_mode12_20261115/review.py` and `tests/test_chco_mode12_review_20261115.py`:bounded collection/measurement/diagnostic review and parser regressions;no submission or formal acceptance.
+- External RSI receipt:`C:/Users/86177/Desktop/fe110_rsi_experiments/rsi_runtime_policy_20261030/runs/chco_mode12_assignment_20261115_v1/run_receipt.json`;model-turn mismatch,no retry or usable research opinion.
+
 ## CH+CO Dimer completion and local VFA —2026-11-15
 
 - `docs/reviews/chco_vfa_submission_20261115.md`:source convergence,conditional diagnostic-only residual approval,actual VFA2260 and no-TS boundary.

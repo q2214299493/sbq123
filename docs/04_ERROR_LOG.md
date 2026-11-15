@@ -20,11 +20,19 @@ governance: docs/DOCUMENT_GOVERNANCE.md
   not SCF failure or atomic jump.Old default REBUILD_PATH decision preserved;
   explicit user Dimer choice and fresh mode/preflight-bound gates allowed
   9998592.Dimer now DONE and hard force/curvature checks pass;final mode/geometry
-  reviewed,VFA2260 submitted.No general threshold changes or TS/barrier acceptance.
-  See `docs/reviews/chco_vfa_submission_20261115.md`.
+  reviewed,VFA2260 mode12 target CC motion now reviewed.No general threshold
+  changes or TS/barrier acceptance;parent warning alone does not authorize repair
+  jobs.See `docs/reviews/chco_mode12_review_20261115.md`.
 - `E-20261115-CHCO-DIMER-SOFT`:latest full DIMCAR Force0.06316/Torque0.20789
   miss soft targets;terminal49 is force-only.User accepted exact residuals for
-  diagnostic frequency only;formal TS eligibility remains false under that review.
+  diagnostic frequency only;mode12 review passed but owner remains
+  NEEDS_REVIEW/Ungraded.Formal TS residual approval and frequency policy review
+  still needed;do not silently upgrade diagnostic acceptance.
+- `E-20261115-RSI-MODEL-TURN`:stable entry followed CLI0.169.0-alpha.11.1,
+  protocol admission passed;CHCO advisory turn1 failed with unexpected
+  notification or turn mismatch.BLOCKED,0host actions/selected policies,no usable
+  opinion.Keep chco_mode12_assignment_20261115_v1/run_receipt.json;separate
+  software diagnosis if requested,no auto retry.Not a missing-executable failure.
 - `E-20261112-RSI-BINARY`:one local-triad RSI invocation cannot find the
   configured WindowsApps Codex executable;BLOCKED/admission/0turns.Local
   scientific review remains independently complete.Separate resolver repair

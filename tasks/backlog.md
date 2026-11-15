@@ -34,13 +34,20 @@ Tasks are ordered by priority and should be handled one per Codex thread.
 - Dimer9998592 DONE49translations,max atom0.015198eV/A,latest complete curvature
   -5.751eV/A2;final mode/geometry reviewed,CC1.739964A,CH/CO intact.User accepts
   DIMCAR Force0.06316/Torque0.20789 only for diagnostic local frequency.
-- VFA2260 submitted32MPI/32pernode,first PEND;active C45/C46/O47/H48,partial
-  Hessian,existing VFA SIGMA0.10 profile.No frequencies,TS/barrier accepted.
-- Next:inspect VFA completion/target mode;no other calculation authorized.
+- VFA2260 DONE/normal25force evaluations;12modes,one imaginary318.644011cm^-1,
+  mode12.Target CC opening/closing reviewed,CC/CO derivative ratio14.38,
+  same-active-set Dimer cosine0.934.11raw hashes verified;partial C45/C46/O47/H48
+  Hessian,existing SIGMA0.10 profile,not final-energy chain.
+- Owner NEEDS_REVIEW/Ungraded/kinetic=false:diagnostic-only residual acceptance
+  and null frequency grading thresholds still block formal TS/barrier promotion.
+- Next:formal TS acceptance review;no other calculation authorized.
 - Review:docs/reviews/chco_local_triad_review_20261112.md.RSI single invocation
   BLOCKED/admission/0turns on missing configured binary;no retry/profile edit.
   Execution:docs/reviews/chco_dimer_submission_20261112.md.
   Current frequency handoff:docs/reviews/chco_vfa_submission_20261115.md.
+  Target-mode review:docs/reviews/chco_mode12_review_20261115.md.Nov15 RSI entry
+  followed new CLI but model turn1 protocol mismatch;0actions/selected policies,
+  no usable RSI opinion or retry;separate software diagnosis remains unrequested.
 - Existing adsorption jobs and the unrelated paired benchmark are untouched.
 
 ## C2 supplement VASP10 closed review —2026-11-10
