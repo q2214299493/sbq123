@@ -13,6 +13,13 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## CH+CO formal TS acceptance —2026-11-16
+
+- `docs/reviews/chco_formal_ts_acceptance_20261116.md`:registered Grade-A local-Hessian TS,retained residual warnings,reviewed-single-mode correction and separate barrier boundary.
+- `calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/`:new formal review copy,current gate,registry plan/approval/receipts and readback verification;old raw/diagnostic evidence unchanged.
+- `archive/chco_ts_acceptance_20261115/`:current user scope and canonical review/registration adapter;no scientific submission.
+- `scripts/ts_strategy_engine/scientific_claims.py` and `tests/test_scientific_claim_dimer_soft_review.py`:forward only the handoff-bound residual review to the existing pipeline;diagnostic-only/stale/missing review rejection retained.
+
 ## CH+CO target mode12 review —2026-11-15
 
 - `docs/reviews/chco_mode12_review_20261115.md`:CC-mode assignment,eigenvector mass conversion,actual visual review and diagnostic-only acceptance boundary.

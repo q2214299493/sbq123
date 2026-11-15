@@ -25,9 +25,14 @@ def _verify_scientific_owner(validation: dict[str, Any], path: Path) -> None:
         analysis_path = Path(handoff["saddle_analysis_source"])
         if not analysis_path.is_absolute():
             analysis_path = handoff_path.parent / analysis_path
+        review_value = (handoff.get("dimer_frequency_gate") or {}).get("manual_review_path")
+        soft_review_path = Path(review_value) if review_value else None
+        if soft_review_path is not None and not soft_review_path.is_absolute():
+            soft_review_path = handoff_path.parent / soft_review_path
         result = evaluate_validation_pipeline(
             dimer_analysis_path=analysis_path, vfa_analysis_path=path,
             vfa_workdir=Path(validation["workdir"]),
+            dimer_soft_review_path=soft_review_path,
         )
         if not result["scientifically_validated_ts"]:
             raise ValueError("current DIMER/VFA is not accepted: " + result["status"])

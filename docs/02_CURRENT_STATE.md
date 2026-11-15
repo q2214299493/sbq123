@@ -37,15 +37,18 @@ CC gap0.62833A retained as sampling warning.User explicitly chose Dimer;
 existing explicit-preparation branch,new mode/preflight and START_DIMER gates
 PASS.Dimer9998592 now DONE49translations,max atom0.015198eV/A,latest complete
 curvature-5.751eV/A2;final mode/geometry reviewed,CC1.739964A,CH/CO intact.
-User accepted DIMCAR Force0.06316/Torque0.20789 for diagnostic frequency only.
+Original diagnostic-only DIMCAR approval retained;new formal review accepts exact
+Force0.06316/Torque0.20789 warnings for TS validation.
 VFA2260 DONE/normal25force evaluations;12modes,one imaginary318.644011cm^-1,
 mode12.Target CC opening/closing quantitatively/visually reviewed;CC/CO derivative
 ratio14.38,same-active-set Dimer cosine0.934.11raw hashes verified.Partial
 C45/C46/O47/H48 Hessian,VFA SIGMA0.10,not an energy-chain source.Owner
-NEEDS_REVIEW/Ungraded,kinetic=false:diagnostic-only residual approval and null
-frequency grading thresholds still block formal TS/barrier promotion.Next:formal
-acceptance review;no new job/registry write this turn.BUCT2 and paired benchmark
-unchanged.See `docs/reviews/chco_mode12_review_20261115.md`.
+VALIDATED/Grade A,pipeline TS_ACCEPTED,current gate permits APPROVE_TS_CANDIDATE.
+One formal TS record registered and readback verified;reviewed-single-mode branch
+applies with unset thresholds,no cutoff change.26metadata rows+1workflow change
+verified;SQLite integrity PASS.No new job,barrier/thermal/Excel/template result.
+Next:compatible IS/TS/FS TOTEN review.BUCT2 and paired benchmark unchanged.
+See `docs/reviews/chco_formal_ts_acceptance_20261116.md`.
 
 ## C2 supplement GPU submission — 2026-11-06
 

@@ -15,19 +15,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 ## CH+CO local refinement review and RSI —2026-11-12
 
-- `E-20261112-CHCO-RESOLUTION`:NEB9994246 normally ended207steps;04-05 CC gap
-  0.62833A persists,but local triad hard checks pass.Sampling warning retained,
-  not SCF failure or atomic jump.Old default REBUILD_PATH decision preserved;
-  explicit user Dimer choice and fresh mode/preflight-bound gates allowed
-  9998592.Dimer now DONE and hard force/curvature checks pass;final mode/geometry
-  reviewed,VFA2260 mode12 target CC motion now reviewed.No general threshold
-  changes or TS/barrier acceptance;parent warning alone does not authorize repair
-  jobs.See `docs/reviews/chco_mode12_review_20261115.md`.
-- `E-20261115-CHCO-DIMER-SOFT`:latest full DIMCAR Force0.06316/Torque0.20789
-  miss soft targets;terminal49 is force-only.User accepted exact residuals for
-  diagnostic frequency only;mode12 review passed but owner remains
-  NEEDS_REVIEW/Ungraded.Formal TS residual approval and frequency policy review
-  still needed;do not silently upgrade diagnostic acceptance.
+Resolved CHCO sampling/soft-review handoff details now live in
+`docs/reviews/chco_formal_ts_acceptance_20261116.md`. The local-Hessian TS is
+formally registered Grade A;raw parent sampling and DIMCAR warnings remain
+provenance,not an automatic rebuild trigger. Unset thresholds still prevent
+automatic multi-mode classification,but not the existing reviewed-single-mode
+Dimer/CI-NEB branch;no new cutoff was configured.
 - `E-20261115-RSI-MODEL-TURN`:stable entry followed CLI0.169.0-alpha.11.1,
   protocol admission passed;CHCO advisory turn1 failed with unexpected
   notification or turn mismatch.BLOCKED,0host actions/selected policies,no usable

@@ -33,14 +33,17 @@ Tasks are ordered by priority and should be handled one per Codex thread.
   explicit-preparation branch,new mode/preflight and START_DIMER gates PASS.
 - Dimer9998592 DONE49translations,max atom0.015198eV/A,latest complete curvature
   -5.751eV/A2;final mode/geometry reviewed,CC1.739964A,CH/CO intact.User accepts
-  DIMCAR Force0.06316/Torque0.20789 only for diagnostic local frequency.
+  original diagnostic-only DIMCAR approval remains preserved separately.
 - VFA2260 DONE/normal25force evaluations;12modes,one imaginary318.644011cm^-1,
   mode12.Target CC opening/closing reviewed,CC/CO derivative ratio14.38,
   same-active-set Dimer cosine0.934.11raw hashes verified;partial C45/C46/O47/H48
   Hessian,existing SIGMA0.10 profile,not final-energy chain.
-- Owner NEEDS_REVIEW/Ungraded/kinetic=false:diagnostic-only residual acceptance
-  and null frequency grading thresholds still block formal TS/barrier promotion.
-- Next:formal TS acceptance review;no other calculation authorized.
+- Formal review now accepts exact Force0.06316/Torque0.20789 residuals for TS
+  validation;owner VALIDATED/Grade A,pipeline TS_ACCEPTED,current execution gate
+  permits APPROVE_TS_CANDIDATE.One TS record plus26metadata/1workflow change
+  registered and verified;SQLite integrity passes.No numeric threshold change.
+- Next:compatible IS/TS/FS final-TOTEN review;no new calculation authorized.
+  Formal review:docs/reviews/chco_formal_ts_acceptance_20261116.md.
 - Review:docs/reviews/chco_local_triad_review_20261112.md.RSI single invocation
   BLOCKED/admission/0turns on missing configured binary;no retry/profile edit.
   Execution:docs/reviews/chco_dimer_submission_20261112.md.
