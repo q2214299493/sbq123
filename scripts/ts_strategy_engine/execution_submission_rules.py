@@ -1,18 +1,14 @@
 """Existing gate decision rules for submission and progress; no transport."""
 from __future__ import annotations
 
-from .gpu_dimer_parent import PARENT_METHOD, validate_reviewed_gpu_parent
-
 from typing import Any
 
 from .dimer_gate import coarse_neb_peak_stall_evidence
-from .execution_decision import (
-    decision_from_quality as _decision_from_quality,
-    make_decision as _make_decision,
-)
+from .execution_decision import decision_from_quality as _decision_from_quality, make_decision as _make_decision
 from .execution_evidence import (
     authorized_actions, diagnostic_actions, source_bindings_valid, warning_reason_codes,
 )
+from .execution_gpu_rules import reviewed_gpu_decision
 from .execution_path_rules import INITIAL_SUBMISSIONS
 from .scientific_claims import scientific_claim_decision
 
@@ -266,19 +262,8 @@ def progress_decision(
     climb: bool,
     path_reviewed: bool,
 ) -> dict[str, Any]:
-    if analysis.get("parent_neb_method") == PARENT_METHOD:
-        reviewed = validate_reviewed_gpu_parent(analysis)
-        if not reviewed["passed"] or not path_reviewed:
-            return _make_decision(
-                "DIMER_HARD_GATE_FAILED", reviewed["errors"] or ["GPU_PATH_REVIEW_MISSING"],
-                evidence, (), "REVIEW_GPU_PATH_AND_BIND_SOURCE",
-            )
-        if preflight.get("kind") == "dimer":
-            return dimer_progress_decision(analysis, quality, preflight, evidence, climb, path_reviewed)
-        return _make_decision(
-            "READY_TO_PREPARE_DIMER_HANDOFF", ["GPU_PREDICTED_STARTING_CANDIDATE_ONLY"],
-            evidence, ("PREPARE_DIMER_HANDOFF",), "BUILD_REVIEW_AND_PREFLIGHT_DIMER_INPUT",
-        )
+    if gpu_decision := reviewed_gpu_decision(analysis, quality, preflight, evidence, climb, path_reviewed, dimer_progress_decision):
+        return gpu_decision
     if analysis.get("status") != "NO_OUTPUT" and "path_binding_valid" not in analysis:
         return _make_decision(
             "NEEDS_PATH_BINDING_EVIDENCE",

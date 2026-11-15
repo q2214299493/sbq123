@@ -100,6 +100,6 @@ no deletion, reclassification event or state-transaction change is authorized by
 
 - Prepared an isolated source-release branch from sbq123/main f729e0c4 with the existing reviewed-GPU-path adapter, parent validator, DIMER/MODECAR/source-binding gates and fourth parent-method policy.
 - Kept unrelated adsorption, SCF-chain, blocking-rule and LSF changes out. Existing resource resolver now locates preparation policy files in source and installed distributions.
-- Synthetic end-to-end generation leaves MODECAR review pending and cannot start DIMER; changed source/review/mode is rejected.83related regressions passed.
+- Synthetic end-to-end generation leaves MODECAR review pending and cannot start DIMER; changed source/review/mode is rejected.94related and structure regressions passed; GPU preparation rules are isolated while preserving the400-line module limit.
 - This closes the previously identified missing runtime in the prepared branch; no real server deployment, new calculation, automatic acceptance or historical evidence refresh.
 - Review: docs/reviews/gpu_reviewed_dimer_release_20261115.md. Multi-anchor generation and legacy DIMER output metadata remain separate.
