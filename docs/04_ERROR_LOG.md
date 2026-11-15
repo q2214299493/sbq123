@@ -19,8 +19,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
   0.62833A persists,but local triad hard checks pass.Sampling warning retained,
   not SCF failure or atomic jump.Old default REBUILD_PATH decision preserved;
   explicit user Dimer choice and fresh mode/preflight-bound gates allowed
-  9998592.Check Dimer convergence/curvature;no general threshold changes or
-  TS/barrier acceptance.See `docs/reviews/chco_dimer_submission_20261112.md`.
+  9998592.Dimer now DONE and hard force/curvature checks pass;final mode/geometry
+  reviewed,VFA2260 submitted.No general threshold changes or TS/barrier acceptance.
+  See `docs/reviews/chco_vfa_submission_20261115.md`.
+- `E-20261115-CHCO-DIMER-SOFT`:latest full DIMCAR Force0.06316/Torque0.20789
+  miss soft targets;terminal49 is force-only.User accepted exact residuals for
+  diagnostic frequency only;formal TS eligibility remains false under that review.
 - `E-20261112-RSI-BINARY`:one local-triad RSI invocation cannot find the
   configured WindowsApps Codex executable;BLOCKED/admission/0turns.Local
   scientific review remains independently complete.Separate resolver repair

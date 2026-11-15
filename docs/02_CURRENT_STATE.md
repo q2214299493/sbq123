@@ -35,11 +35,14 @@ CH+CO NEB9994246 DONE207steps,all six VASP required-accuracy markers;max atom
 review copy geometry PASS.Local04-05-06 hard checks PASS,05 strict peak.
 CC gap0.62833A retained as sampling warning.User explicitly chose Dimer;
 existing explicit-preparation branch,new mode/preflight and START_DIMER gates
-PASS.No protocol/DFT changes.Dimer9998592 submitted32MPI/32pernode,initial
-PEND,then native RUN on gknew0522.No Dimer convergence,TS or barrier accepted.
-Next:inspect this Dimer's SCF,force/curvature and geometry;no additional job
-authorized.BUCT2 and paired benchmark unchanged.See
-`docs/reviews/chco_dimer_submission_20261112.md`.
+PASS.Dimer9998592 now DONE49translations,max atom0.015198eV/A,latest complete
+curvature-5.751eV/A2;final mode/geometry reviewed,CC1.739964A,CH/CO intact.
+User accepted DIMCAR Force0.06316/Torque0.20789 for diagnostic frequency only.
+VFA2260 submitted32MPI/32pernode,first native PEND;active C45/C46/O47/H48,
+partial Hessian,existing VFA SIGMA0.10 profile,not an energy-chain source.
+Registry48metadata rows+1workflow change verified.No frequencies,accepted TS
+or barrier.Next:inspect VFA completion/target mode;no other job authorized.
+BUCT2 and paired benchmark unchanged.See `docs/reviews/chco_vfa_submission_20261115.md`.
 
 ## C2 supplement GPU submission — 2026-11-06
 

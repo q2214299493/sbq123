@@ -13,6 +13,13 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## CH+CO Dimer completion and local VFA —2026-11-15
+
+- `docs/reviews/chco_vfa_submission_20261115.md`:source convergence,conditional diagnostic-only residual approval,actual VFA2260 and no-TS boundary.
+- `calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/`:canonical-work runtime only;16hash-verified files,final mode/geometry and Dimer analysis.
+- `calculations/fe110_ch_co_to_chco_ts_20261109/vfa_dimer9998592_20261115_v1/`:canonical-work runtime only;four-atom Hessian inputs,START_VFA gate,immutable submission/registration receipts.
+- `archive/chco_vfa_20261115/`:bounded source/review/submission and registry adapters,explicit user scope;no automatic retry or acceptance.
+
 ## CH+CO explicit image05 Dimer submission —2026-11-12
 
 - `docs/reviews/chco_dimer_submission_20261112.md`:user-selected refinement,mode/INCAR checks,actual9998592 and acceptance boundaries.

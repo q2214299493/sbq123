@@ -31,12 +31,16 @@ Tasks are ordered by priority and should be handled one per Codex thread.
 - Persistent04-05 CC gap0.62833A remains a sampling warning.Old default
   REBUILD_PATH decision preserved.User explicitly chose image05 Dimer;existing
   explicit-preparation branch,new mode/preflight and START_DIMER gates PASS.
-- Dimer9998592 submitted32MPI/32pernode,initial PEND then native RUN,gknew0522.
-  No extra NEB,pilot,GPU,training or DFT change.No TS/barrier accepted.
-- Next:inspect this Dimer's SCF,force/curvature and geometry;no new job authorized.
+- Dimer9998592 DONE49translations,max atom0.015198eV/A,latest complete curvature
+  -5.751eV/A2;final mode/geometry reviewed,CC1.739964A,CH/CO intact.User accepts
+  DIMCAR Force0.06316/Torque0.20789 only for diagnostic local frequency.
+- VFA2260 submitted32MPI/32pernode,first PEND;active C45/C46/O47/H48,partial
+  Hessian,existing VFA SIGMA0.10 profile.No frequencies,TS/barrier accepted.
+- Next:inspect VFA completion/target mode;no other calculation authorized.
 - Review:docs/reviews/chco_local_triad_review_20261112.md.RSI single invocation
   BLOCKED/admission/0turns on missing configured binary;no retry/profile edit.
   Execution:docs/reviews/chco_dimer_submission_20261112.md.
+  Current frequency handoff:docs/reviews/chco_vfa_submission_20261115.md.
 - Existing adsorption jobs and the unrelated paired benchmark are untouched.
 
 ## C2 supplement VASP10 closed review —2026-11-10
