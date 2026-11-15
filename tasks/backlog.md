@@ -95,3 +95,11 @@ no deletion, reclassification event or state-transaction change is authorized by
 - Twelve skill-format checks and73existing owner regressions passed; verified repository CLI help and source paths.
 - Closes the global-skill and mandatory-static wording findings in the adsorption/TS audit. Multi-anchor generation, the complete reviewed-GPU-path DIMER source release, and legacy DIMER output metadata remain separate work.
 - Review: docs/reviews/global_skill_rule_alignment_20261114.md.
+
+## Reviewed GPU path to DIMER source release (2026-11-15)
+
+- Prepared an isolated source-release branch from sbq123/main f729e0c4 with the existing reviewed-GPU-path adapter, parent validator, DIMER/MODECAR/source-binding gates and fourth parent-method policy.
+- Kept unrelated adsorption, SCF-chain, blocking-rule and LSF changes out. Existing resource resolver now locates preparation policy files in source and installed distributions.
+- Synthetic end-to-end generation leaves MODECAR review pending and cannot start DIMER; changed source/review/mode is rejected.83related regressions passed.
+- This closes the previously identified missing runtime in the prepared branch; no real server deployment, new calculation, automatic acceptance or historical evidence refresh.
+- Review: docs/reviews/gpu_reviewed_dimer_release_20261115.md. Multi-anchor generation and legacy DIMER output metadata remain separate.
