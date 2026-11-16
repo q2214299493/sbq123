@@ -5,6 +5,7 @@ eligibility:
     - ordinary_neb
     - ci_neb
     - gpu_ml_neb_vasp_validated_triad
+    - gpu_ml_neb_reviewed_path
   lclimb_required: false
   allowed_refinement_intents:
     - refine_single_peak_from_expensive_parent_path
@@ -38,3 +39,14 @@ gpu_ml_neb_parent:
     role: local_dimer_parent_validation_only_not_ts_domain_calibration
 recommended_gate:
   force_reduction_fraction_max: 0.5
+gpu_reviewed_path:
+  review_document_kind: gpu_dimer_path_review
+  accepted_status: accepted_for_direct_dimer_candidate
+  required_reviews:
+    - geometry_continuity
+    - periodic_mapping
+    - reaction_coordinate_resolution
+    - elementary_step_assignment
+    - candidate_selection
+  role: predicted_starting_candidate_only
+  vasp_triad_required: false
