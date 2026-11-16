@@ -13,6 +13,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## RSI configuration-warning protocol repair —2026-11-16
+
+- Actual runtime `C:/Users/86177/Desktop/rsi-usage-dashboard-20261030/scripts/ts_strategy_engine/review_events.py` and `tests/test_review_events_config_warning.py`:typed configWarning handling plus unknown-method/identity diagnostics;unknown events still rejected and tool/permission boundaries unchanged.
+- `archive/rsi_event_protocol_20261116/check.py`:original-trace replay,current native offline protocol proof,and separately authorized one-turn fixed-JSON smoke;no research retry or scientific execution.
+- External evidence `C:/Users/86177/Desktop/fe110_rsi_experiments/rsi_runtime_policy_20261030/event_protocol_repair_20261116_v1/`:offline_preflight.json and live/receipt.json/events.json.163 related regressions and one real completed turn PASS;old failures/profile/permissions preserved.Full research-loop live verification remains unperformed.
+
 ## RSI stable-entry repair —2026-11-14
 
 - `docs/reviews/rsi_stable_entry_repair_20261114.md`:actual-runtime repair,five offline checks and no-inference boundary.

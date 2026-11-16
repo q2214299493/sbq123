@@ -33,6 +33,18 @@ before admission for every resolved binary; this change does not weaken
 permissions or authorize inference. Offline proof can call `verify_protocol`
 alone; a passed proof does not establish login or model access.
 
+Startup `configWarning` is a recoverable server notification,not a turn event.
+The shared event owner validates its summary/details and retains them as
+backend warnings without granting tool or execution authority. All other
+unknown notifications and actual thread/turn mismatches still fail closed,
+with distinct errors naming an unknown method. A deprecation notice must not
+be "fixed" by enabling agents or widening permissions.
+
+The 2026-11-16 repair replays the original six startup notifications,verifies
+the current binary's local schema,and separately completes one fixed-JSON
+protocol-only turn. That smoke test is not a replay or validation of an old
+research result. Historical BLOCKED receipts and journals remain unchanged.
+
 Outputs default to a new directory outside the input project tree. No existing
 result is overwritten. This task's concrete local wrapper/profile are recorded
 in its implementation/acceptance report; credentials are never copied there.

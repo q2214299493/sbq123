@@ -13,6 +13,18 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Current State
 
+## RSI configuration-warning repair —2026-11-16
+
+LAST_RECORDED_OBSERVATION from canonical work/runtime:the actual startup
+configWarning was missing from RSI's shared event adapter,not a turn mismatch.
+Typed recoverable warnings are now retained;unknown methods,native activity and
+wrong thread/turn still reject.163 regressions,original6-notification replay and
+current CLI0.169 offline protocol checks PASS.One real fixed-JSON turn completed;
+profile/native permissions unchanged,no tools/scientific jobs or old research
+retry.Historical BLOCKED evidence preserved.Full research-loop live rerun not
+performed.See modules/research_assistant/README.md and the external runtime
+event_protocol_repair_20261116_v1/{offline_preflight.json,live/receipt.json}.
+
 ## RSI stable-entry startup —2026-11-14
 
 LAST_RECORDED_OBSERVATION from canonical work:authorized repair changed only

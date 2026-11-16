@@ -6,10 +6,27 @@ import json
 from .review_app_server import redacted
 
 
+def _configuration_warning(params: dict) -> str:
+    summary, details = params.get("summary"), params.get("details")
+    if not isinstance(summary, str) or (details is not None and not isinstance(details, str)):
+        raise ValueError("configuration warning payload mismatch")
+    return summary + ("\n" + details if details else "")
+
+
+def _validate_turn_notification(method, params, allowed, thread_id, turn_id):
+    if method not in allowed:
+        raise ValueError(f"unexpected notification method: {method!r}")
+    if params.get("threadId") != thread_id or params.get("turn", {}).get("id", params.get("turnId")) != turn_id:
+        raise ValueError("notification thread/turn mismatch")
+
+
 class ReviewEvents:
     """Requires current thread/turn/prompt and message/token state on the runner."""
 
     def _notification(self, method: str, params: dict):
+        if method == "configWarning":
+            self.backend_warnings.append(_configuration_warning(params))
+            return
         if method == "remoteControl/status/changed":
             if params.get("status") != "disabled":
                 raise ValueError("unexpected active remote-control surface")
@@ -32,9 +49,7 @@ class ReviewEvents:
         allowed = {"turn/completed", "turn/started", "item/started", "item/completed", "item/agentMessage/delta",
                    "item/reasoning/summaryTextDelta", "item/reasoning/summaryPartAdded", "item/reasoning/textDelta",
                    "turn/moderationMetadata"}
-        if method not in allowed or params.get("threadId") != self.thread_id \
-                or params.get("turn", {}).get("id", params.get("turnId")) != self.turn_id:
-            raise ValueError("unexpected notification or turn mismatch")
+        _validate_turn_notification(method, params, allowed, self.thread_id, self.turn_id)
         if method.startswith("item/"):
             self._item_event(method, params.get("item", {}))
         if method == "turn/completed":
