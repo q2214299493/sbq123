@@ -13,6 +13,24 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Backlog
 
+## C1-C2 kinetic-network inventory (2026-11-16)
+
+- User requested an elementary-step/structure/evidence/gap table,not calculations.
+- Read-only registry snapshot:14 review rows (13 candidate reactions and one
+  state-pool alignment),four accepted electronic barriers,six Grade-A records.
+  Not a site-balanced approved network or executable CATKINAS input.
+- Proposed first phase:reversible CH+CO pair9839757/9842136,local transient or
+  conditional-activity model;no invented product sink or overall steady TOF.
+  Hydrogenation competition/O-H extension needs shared-pool/site-reference review.
+- Priority:review existing R05/R07 TOTEN chains,L01 cross-step state alignment
+  and R06 IS-A-to-INT06 later archives before deciding any new calculation.
+  Same C2HO formula does not merge FS9842136/IS-A9725473/MID9737143.
+- Output:outputs/c1_c2_mkm_inventory_20261116/C1-C2微观动力学反应与缺口.xlsx.
+  Saved/reimported four linked barriers and two missing-value blanks verified;
+  energy identities and two sheet renders checked.No registry write or MKM run.
+- RSI single call reached model turn1 then protocol mismatch;zero host actions
+  or selected policies,no usable opinion or retry;receipt retained externally.
+
 Tasks are ordered by priority and should be handled one per Codex thread.
 
 ## CH* + CO* to CH-C-O* local peak review (2026-11-12)

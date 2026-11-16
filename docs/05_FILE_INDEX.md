@@ -13,6 +13,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## C1-C2 microkinetic-network intake —2026-11-16
+
+- `outputs/c1_c2_mkm_inventory_20261116/C1-C2微观动力学反应与缺口.xlsx`:14-row review table and four registered electronic-barrier sources;not an executable kinetic model.
+- `outputs/c1_c2_mkm_inventory_20261116/inventory.json`:read-only registry snapshot,selected structures,gaps,conditional model boundary and RSI outcome;verification files distinguish arithmetic/workbook checks from unapproved site/network assumptions.
+- `archive/c1_c2_mkm_inventory_20261116/export.py` and `build.mjs`:bounded registry export and artifact-tool workbook authoring;no scientific execution or registry mutation.
+
 ## CH+CO formal TS acceptance —2026-11-16
 
 - `docs/reviews/chco_formal_ts_acceptance_20261116.md`:registered Grade-A local-Hessian TS,retained residual warnings,reviewed-single-mode correction and separate barrier boundary.
