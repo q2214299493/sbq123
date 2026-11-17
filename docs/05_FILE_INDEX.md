@@ -13,6 +13,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## C1–C2 kinetic inventory refresh —2026-11-17
+
+- `docs/reviews/c1_c2_mkm_gap_review_20261117.md`:four registered barriers,two validated-but-unregistered barrier gaps,9833429 archive and conditional/full-feed model boundaries.
+- `outputs/c1_c2_mkm_inventory_20261117_v1/`:14-row Chinese review table,source-bound inventory and arithmetic/hash checks;not executable kinetic inputs.
+- `archive/c1_c2_mkm_inventory_20261117/review.py`:read-only refresh,refuses output overwrite;no scientific submission or acceptance authority.
+
 ## C1-C2 microkinetic-network intake —2026-11-16
 
 - `outputs/c1_c2_mkm_inventory_20261116/C1-C2微观动力学反应与缺口.xlsx`:14-row review table and four registered electronic-barrier sources;not an executable kinetic model.

@@ -13,13 +13,22 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Current State
 
-## RSI Runtime — 2026-11-15
+## C1–C2 kinetic intake —2026-11-17
 
-LAST_RECORDED_OBSERVATION from canonical work:Nov15 stable entry followed
-CLI0.169.0-alpha.11.1 and passed protocol admission;model turn1 then BLOCKED
-with unexpected notification/turn mismatch.0host actions/selected policies,
-no usable opinion or retry;not the old missing-binary failure.Local scientific
-review remains independent.See `docs/reviews/chco_mode12_review_20261115.md`.
+LAST_RECORDED_OBSERVATION from canonical work:read-only schema9 inventory has
+4 accepted electronic barrier sets,6 Grade-A validations and14 draft rows.
+All12 registered energy source hashes and barrier arithmetic/conventions pass.
+CH+CO9998592 and INT06→MID9796856 have Grade-A TSs but no registered compatible
+barrier sets.Located9833429 H-migration archive:max atom0.015998eV/A;final-mode
+review remains needs_review,no linked Grade-A found.9573951 final-geometry link
+needs recovery;registered energy hash passes,no rerun inferred.
+Next:prepare existing-output compatible-energy review packages for the two
+validated but unregistered barriers.No thermal correction,site/network approval,
+MKM run,DFT/GPU job or registry mutation.
+The separately repaired canonical RSI runtime explicitly resumed the old C1–C2
+question:GENERATED,3 turns/5 host actions,one provided trial policy.Bounded
+excerpts prevent independent full-table validation;local source checks own the
+inventory conclusions.See docs/reviews/c1_c2_mkm_gap_review_20261117.md.
 
 ## C2 supplement closeout and CH+CO NEB — 2026-11-10
 
