@@ -28,3 +28,16 @@ def test_another_native_directory_cannot_qualify_as_this_candidate():
               'stdout': 'JobId=123 JobState=COMPLETED ExitCode=0:0 WorkDir=/other Command=/other/job.sh'}}
     with pytest.raises(ValueError, match='identity'):
         returned.validate_native(packet, {'job_id': '123', 'remote_dir': '/home/sbq/sbq/test-only'})
+
+
+@pytest.mark.parametrize('observed', ['ubuntu-R5350-G6', 'MZ73'])
+def test_candidate_return_checks_the_selected_host(observed):
+    root = '/home/sbq/sbq/test-only'
+    packet = {'hostname': observed, 'native_scontrol': {'returncode': 0,
+              'stdout': f'JobId=433 JobState=COMPLETED ExitCode=0:0 WorkDir={root} Command={root}/job.sh'}}
+    record = {'job_id': '433', 'remote_dir': root}
+    if observed == 'ubuntu-R5350-G6':
+        returned.validate_native(packet, record, 'ubuntu-R5350-G6')
+    else:
+        with pytest.raises(ValueError, match='identity'):
+            returned.validate_native(packet, record, 'ubuntu-R5350-G6')

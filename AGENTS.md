@@ -46,13 +46,21 @@ force convergence, geometry validity, and scientific validity.
 
 - Backend roles and handoffs are authoritative only in
   `configs/execution_backends.yaml`.
-- Use `BUCT(sbq)` / host `MZ73` only for AQCat25 GPU inference, adsorption
+- For every new compute task, consider the shared pool: `BUCT(sbq)` / `MZ73`,
+  `BUCT2`, `BUCT3` (GPU), and `sunboquan-codex` (CPU). First run
+  `python -m scripts.gpu_resources --include-cpu`, then check the task-specific
+  runtime, scheduler allocation, hashes, paths, and existing execution authority.
+  Pool membership is not proof of installed software or permission to submit,
+  duplicate, cancel, or move a useful calculation. Prefer an eligible available
+  host; a host change requires a fresh host-bound preflight and authorization.
+- Use `BUCT(sbq)` / host `MZ73`, `BUCT2`, and `BUCT3` for AQCat25 GPU inference, adsorption
   candidate pre-relaxation/ranking, endpoint ML relaxation, IDPP/BA-Sella
-  transition-state candidate acceleration, and force-model fine-tuning. Connect as
-  `sbq@10sx4jr711576.vicp.fun:36039` with
-  `C:\Users\86177\.ssh\id_ed25519_fe_agent`, `IdentitiesOnly=yes`; never read,
-  display, copy, or modify the private-key contents. Remote writes are limited
-  to `/home/sbq/sbq/`.
+  transition-state candidate acceleration, and force-model fine-tuning. Use the
+  SSH endpoints in `configs/execution_backends.yaml`; never read, display, copy,
+  or modify private-key contents. Keep all GPU task files under that server's
+  `/home/sbq/sbq/`, including staged inputs, logs, temporary files, checkpoints,
+  and outputs. Login-session NVML failures can reflect Slurm device isolation;
+  require GPU UUID and CUDA validation inside an allocation before model use.
 - Use only `sunboquan-codex` for VASP/VTST calculations; active calculation
   paths are in `docs/02_CURRENT_STATE.md`.
 - `work` is the orchestration, evidence-gate, review, and registry authority.

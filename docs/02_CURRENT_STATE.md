@@ -87,3 +87,13 @@ latest observation. Its scientific claims are not revalidated in B6.
 
 Next action: Prepare and review a revised preconditioning or resampling design that preserves at least three O-H interval images; require new explicit authorization before any rerun.
 <!-- state-handoff:end active-fe-110-co-dissociation-test-current-gate -->
+
+
+## Shared compute pool (2026-11-17)
+
+New compute tasks consider MZ73, BUCT2, BUCT3 and CPU sunboquan-codex via
+`python -m scripts.gpu_resources --include-cpu`. BUCT2/BUCT3 reference ML
+runtimes and model files are deployed; controlled CUDA passed on BUCT3,
+while BUCT2 allocation was busy and CUDA remains unverified. A fresh scoped
+BUCT3 BA-Sella binding is available; existing DFT authority is unchanged.
+See `docs/COMPUTE_POOL.md`. No environment archives or weights are in Git.

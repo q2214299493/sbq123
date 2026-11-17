@@ -50,8 +50,18 @@ def capture(case, replica=False, record_path=None):
     record = load_json_object(record_path)
     primary.require(record['status'] == 'SUBMITTED', 'no known native training job')
     packet = {'job_id': record['job_id'], 'remote_dir': record['remote_dir'], 'hostname': 'pc-G7466-M6' if replica else 'MZ73'}
+    third = record.get('backend_role') == 'buct3_gpu'
+    if third:
+        packet['hostname'] = 'ubuntu-R5350-G6'
     command = shlex.join(['python3', '-c', REMOTE.replace('__PACKET__', repr(json.dumps(packet)))])
-    if replica:
+    if third:
+        spec = importlib.util.spec_from_file_location('capture_continuation', Path(__file__).with_name('paper_continuation_job.py'))
+        continuation = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(continuation)
+        manifest = load_json_object(continuation.bound(record['manifest']))
+        primary.require(manifest['backend_role'] == 'buct3_gpu' and manifest['remote_dir'] == record['remote_dir'], 'capture host binding mismatch')
+        argv = primary.remote.ssh_argv(continuation.backend(case, 'buct3_gpu'), command)
+    elif replica:
         argv = ['ssh', '-T', '-o', 'BatchMode=yes', '-o', 'IdentitiesOnly=yes', '-o', 'StrictHostKeyChecking=yes', 'buct2-gpu', command]
     else:
         backend = primary.remote.load_mz73_static_backend(primary.budget_owner.TIMEOUT_LEAF)

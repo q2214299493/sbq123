@@ -46,14 +46,51 @@ def resources_for(state):
     return {**RESOURCES, 'memory': '7G'} if state['completed_label_count'] > 1 else RESOURCES
 
 
-def backend(case):
+def backend(case, role="aqcat_gpu"):
     result = primary.remote.load_mz73_static_backend(primary.budget_owner.TIMEOUT_LEAF)
     configured = yaml.safe_load(Path(primary.remote.DEFAULT_CONFIG).read_text(encoding='utf-8'))['backends']['aqcat_gpu']
     require('ba_sella_candidate_search' in configured['allowed'] and configured['observed_hostname'] == 'MZ73', 'BA-Sella GPU role unavailable')
     require((case.name, PurePosixPath(result['remote_root']).parent.name) ==
             ('paper_aqcat25_ft512_20261112_v1', 'chco_paper_aqcat25_ft512_20261112_v1'),
             'continuation belongs to another case')
-    return result
+    if role == 'aqcat_gpu':
+        return result
+    require(role == 'buct3_gpu', 'unsupported continuation GPU backend')
+    third = yaml.safe_load(Path(primary.remote.DEFAULT_CONFIG).read_text(encoding='utf-8'))['backends'][role]
+    runtime = third['ba_sella_runtime']
+    require(third['role'] == 'candidate_acceleration_only' and 'ba_sella_candidate_search' in third['allowed']
+            and third['remote_write_boundary'] == '/home/sbq/sbq'
+            and runtime['hostname'] == 'ubuntu-R5350-G6' and runtime['partition'] == 'compute', 'BUCT3 candidate role unavailable')
+    require(third['ssh']['port'] == 57396 and third['ssh']['user'] == 'sbq'
+            and third['ssh']['identities_only'] is True, 'BUCT3 SSH identity changed')
+    for name in ('python', 'author_calculations_path'):
+        primary.remote.require_mz73_path({'remote_write_boundary': '/home/sbq/sbq'}, runtime[name])
+    return {'ssh': third['ssh'], 'remote_root': result['remote_root'],
+            'remote_write_boundary': '/home/sbq/sbq', 'canonical_write_boundary': '/home/sbq/sbq',
+            'node': runtime['hostname'], 'partition': runtime['partition'],
+            'python': runtime['python'], 'pythonpath': '',
+            'author_calculations_path': runtime['author_calculations_path'],
+            'python_launcher_sha256': runtime['python_launcher_sha256']}
+
+
+def host_preflight(reference, state, resolved):
+    evidence = load_json_object(bound(reference))
+    require(evidence['document_kind'] == 'paper_buct3_candidate_host_preflight'
+            and evidence['hostname'] == resolved['node'] and evidence['candidate_only'] is True
+            and evidence['checkpoint'] == state['search_checkpoint']
+            and evidence['state']['sha256'] == sha256_file(bound(evidence['state']))
+            and load_json_object(bound(evidence['state'])) == state,
+            'BUCT3 host/state/checkpoint binding mismatch')
+    readiness = load_json_object(bound(evidence['controlled_cuda_check']))
+    ready = json.loads(readiness['stdout'])
+    require(readiness['rc'] == 0 and ready['cuda_in_allocation_validated'] is True
+            and ready['assigned_job_id'] == '433', 'BUCT3 lacks controlled CUDA evidence')
+    imported = load_json_object(bound(evidence['checkpoint_import']))
+    require(imported['sha256'] == state['search_checkpoint']['sha256']
+            and imported['path'] == state['search_checkpoint']['path'] and imported['hostname'] == resolved['node'],
+            'BUCT3 checkpoint import mismatch')
+    bound(evidence['user_host_authority'])
+    return evidence
 
 
 def context(case, state_path, state_sha256):
@@ -107,6 +144,8 @@ def launcher(target, request_sha256, resolved):
     q = shlex.quote
     checks = '\n'.join(check for suffix in ('', '/tmp', '/cache', '/output')
                        for check in primary.remote.remote_path_checks(resolved, target + suffix))
+    if 'python_launcher_sha256' in resolved:
+        checks += '\n' + f'test "$(sha256sum {q(resolved["python"])} | cut -d\' \' -f1)" = {resolved["python_launcher_sha256"]}'
     return f'''#!/bin/bash
 set -euo pipefail
 record_exit() {{
@@ -117,7 +156,7 @@ record_exit() {{
   exit "$code"
 }}
 trap record_exit EXIT
-test "$(hostname -s)" = MZ73
+test "$(hostname -s)" = {q(resolved["node"])}
 test -n "${{SLURM_JOB_ID:-}}"
 test "${{SLURM_NTASKS:-0}}" = 1
 case "${{CUDA_VISIBLE_DEVICES:-}}" in ''|*,*) exit 2 ;; esac
@@ -125,20 +164,24 @@ case "${{CUDA_VISIBLE_DEVICES:-}}" in ''|*,*) exit 2 ;; esac
 test "$(pwd -P)" = "$(realpath -e {q(target)})"
 test ! -e {q(target + '/output')}
 export PYTHONDONTWRITEBYTECODE=1 CUDA_CACHE_DISABLE=1 OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4
-export PYTHONPATH={q(target + ':' + primary.PYTHONPATH)}
+export PYTHONPATH={q(target + ':' + resolved.get('pythonpath', primary.PYTHONPATH))}
 export TMPDIR={q(target + '/tmp')} XDG_CACHE_HOME={q(target + '/cache')} TORCH_HOME={q(target + '/cache/torch')}
 export HF_HOME={q(target + '/cache/huggingface')} MPLCONFIGDIR={q(target + '/cache/matplotlib')}
 export TORCH_EXTENSIONS_DIR={q(target + '/cache/extensions')} TRITON_CACHE_DIR={q(target + '/cache/triton')} NUMBA_CACHE_DIR={q(target + '/cache/numba')}
 export HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 WANDB_MODE=disabled
 mkdir -p "$TMPDIR" "$XDG_CACHE_HOME"
-{q(primary.PYTHON)} -B {q(target + '/next_candidate.py')} --request {q(target + '/request.json')} --request-sha256 {request_sha256} --output {q(target + '/output')}
+{q(resolved.get('python', primary.PYTHON))} -B {q(target + '/next_candidate.py')} --request {q(target + '/request.json')} --request-sha256 {request_sha256} --output {q(target + '/output')}
 '''.encode('ascii')
 
 
 def prepare(args):
     case = args.case_root.resolve(strict=True)
     state, binding, original, previous, trajectory = context(case, args.state, args.state_sha256)
-    resolved = backend(case)
+    role = getattr(args, 'backend', 'aqcat_gpu')
+    resolved = backend(case, role)
+    preflight = ref(args.host_preflight) if role == 'buct3_gpu' else None
+    if preflight:
+        host_preflight(preflight, state, resolved)
     leaf = leaf_for(state)
     target = str(PurePosixPath(resolved['remote_root']).parent / leaf)
     worker = Path(__file__).with_name('next_candidate.py')
@@ -166,7 +209,8 @@ def prepare(args):
     require(sha256_file(author) == old_sources['calculations.py']['sha256'], 'author implementation mismatch')
     source_files = [{'path': target + '/' + name, 'sha256': sha256_file(directory / name)}
                     for name in ('next_candidate.py', 'initial_candidate.py', 'aqcat_ts_pilot.py', 'mlip_same_structure_benchmark.py', 'artifact_io.py')]
-    source_files.append(old_sources['calculations.py'])
+    author_remote = resolved.get('author_calculations_path', old_sources['calculations.py']['path'])
+    source_files.append({'path': author_remote, 'sha256': old_sources['calculations.py']['sha256']})
     request = {'document_kind': 'paper_sequential_candidate_continuation_request', 'protocol_sha256': state['protocol_sha256'],
                'source_files': source_files, 'checkpoint': state['search_checkpoint'],
                **{key: {'path': target + '/' + name, 'sha256': sha256_file(directory / name)} for key, name in {
@@ -176,14 +220,14 @@ def prepare(args):
     write_json_exclusive(directory / 'request.json', request)
     (directory / 'job.sh').write_bytes(launcher(target, sha256_file(directory / 'request.json'), resolved))
     mapping = [{'source_path': target + '/' + name, **ref(directory / name)} for name in copied]
-    mapping += [{'source_path': old_sources['calculations.py']['path'], **ref(author)},
+    mapping += [{'source_path': author_remote, **ref(author)},
                 {'source_path': original['initial']['path'], **ref(case / 'initial_search/IS.vasp')},
                 {'source_path': original['geometry_guard_source']['path'], **ref(original['geometry_guard_source']['path'])}]
     write_json_exclusive(directory / 'source_map_seed.json', {'source_map': mapping})
     manifest = {'document_kind': 'paper_one_BA_Sella_continuation_job', 'state': ref(args.state),
                 'checkpoint_binding': ref(binding_path(case, state)),
                 'backend_config': ref(primary.remote.DEFAULT_CONFIG), 'implementation': ref(__file__),
-                'execution_source': execution_source, 'resources': resources_for(state), 'backend_role': 'aqcat_gpu',
+                'execution_source': execution_source, 'resources': resources_for(state), 'backend_role': role, 'host_preflight': preflight,
                 'remote_dir': target, 'checkpoint': state['search_checkpoint'], 'author_source': ref(author),
                 'automatic_retries': 0, 'DFT_submission_allowed': False,
                 'files': {p.name: sha256_file(p) for p in directory.iterdir() if p.is_file()}}
@@ -196,7 +240,9 @@ def verify(path, digest):
     manifest = load_json_object(bound({'path': str(path.resolve(strict=True)), 'sha256': digest}))
     case = path.parent.parent
     state, _, original, _, _ = context(case, bound(manifest['state']), manifest['state']['sha256'])
-    resolved = backend(case)
+    resolved = backend(case, manifest['backend_role'])
+    if manifest['backend_role'] == 'buct3_gpu':
+        host_preflight(manifest['host_preflight'], state, resolved)
     require(manifest['document_kind'] == 'paper_one_BA_Sella_continuation_job' and manifest['implementation'] == ref(__file__)
         and manifest['backend_config'] == ref(primary.remote.DEFAULT_CONFIG) and manifest['resources'] == resources_for(state)
         and manifest['automatic_retries'] == 0 and manifest['DFT_submission_allowed'] is False
@@ -246,13 +292,14 @@ def submit(path, digest):
             checks += primary.remote.remote_path_checks(resolved, descriptor['path'])
             checks.append(f'test "$(sha256sum {shlex.quote(descriptor["path"])} | cut -d\' \' -f1)" = {descriptor["sha256"]}')
         checks += ['test ! -e ' + shlex.quote(target + '/output'), 'bash -n ' + shlex.quote(target + '/job.sh')]
-        argv = ['sbatch', '--parsable', '--no-requeue', '--partition=gpu', '--nodelist=MZ73', '--nodes=1', '--ntasks=1',
+        argv = ['sbatch', '--parsable', '--no-requeue', '--partition=' + resolved['partition'], '--nodelist=' + resolved['node'], '--nodes=1', '--ntasks=1',
                 '--cpus-per-task=4', '--gres=gpu:1', '--mem=' + manifest['resources']['memory'], '--time=00:10:00', '--job-name=chco-paper-' + leaf,
                 '--chdir=' + target, '--output=' + target + '/slurm-%j.out', '--error=' + target + '/slurm-%j.err', target + '/job.sh']
         result = primary.run(primary.remote.ssh_argv(resolved, 'set -eu; ' + ' && '.join([*checks, shlex.join(argv)])))
         record = {'status': 'SUBMITTED', 'job_id': primary.remote.parse_sbatch_job_id(result.stdout), 'scheduler': 'Slurm',
                   'remote_dir': target, 'manifest': ref(path), 'DFT_submitted': False, 'training_performed': False,
-                  'submit_stdout': result.stdout, 'submit_stderr': result.stderr}
+                  'submit_stdout': result.stdout, 'submit_stderr': result.stderr,
+                  'backend_role': manifest['backend_role'], 'observed_hostname': resolved['node']}
         write_json_exclusive(receipt, record)
         return record
     except BaseException:
@@ -268,6 +315,8 @@ def main():
     for name in ('case-root', 'state', 'execution-source'):
         prep.add_argument('--' + name, type=Path, required=True)
     prep.add_argument('--state-sha256', required=True)
+    prep.add_argument('--backend', choices=('aqcat_gpu', 'buct3_gpu'), default='aqcat_gpu')
+    prep.add_argument('--host-preflight', type=Path)
     execute = commands.add_parser('submit')
     execute.add_argument('--manifest', type=Path, required=True)
     execute.add_argument('--manifest-sha256', required=True)

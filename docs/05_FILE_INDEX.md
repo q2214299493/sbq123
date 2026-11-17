@@ -206,3 +206,9 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 - `archive/chco_paper_aqcat25_20261112/continuation_static_memory.py`: one
   native pending-only RAM reduction, bound to the submitted bundle/gate and
   identical-setup measured VASP peak; never restarts or resubmits a job.
+
+
+## Shared compute pool (2026-11-17)
+
+- `docs/COMPUTE_POOL.md`:three GPU servers plus the CPU/LSF server, SSH/runtime boundaries, common check and admission rules.
+- `scripts/gpu_resources.py`, `tests/test_gpu_resources.py`:read-only three-GPU snapshot and optional CPU/LSF snapshot; per-host failure isolation.

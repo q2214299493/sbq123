@@ -1535,3 +1535,10 @@ governance: docs/DOCUMENT_GOVERNANCE.md
   later approval scopes from that fixture only. No production guard changed.
 - Job 14377 is RUNNING. Its raw DFT force, force convergence below the strict
   0.03-eV/angstrom target, and final TS validity remain separate unverified gates.
+
+
+## 2026-11-17 - Shared three-GPU and one-CPU resource pool
+
+- User requested that every future compute task consider BUCT/MZ73, BUCT2, BUCT3 and CPU server sunboquan-codex. Use `python -m scripts.gpu_resources --include-cpu` for a fresh read-only snapshot, followed by task-specific runtime and allocation checks.
+- Pool registration does not grant scientific submission, duplicate execution, cancellation, model promotion or transfer of a host-bound authorization. Preserve general CPU VASP authority and explicitly scoped GPU-VASP exceptions.
+- Configuration and verification details: `docs/COMPUTE_POOL.md`.

@@ -19,12 +19,12 @@ spec.loader.exec_module(job)
 OUTPUTS = ('predicted_candidate.vasp', 'aqcat25_ba_sella.traj', 'candidate_report.json')
 
 
-def validate_native(packet, record):
+def validate_native(packet, record, expected_hostname="MZ73"):
     native = packet['native_scontrol']
     if native['returncode'] != 0:
         raise ValueError('no native candidate completion query')
     parsed = parse_scontrol_job(native['stdout'], record['job_id'])
-    if (packet['hostname'].split('.')[0] != 'MZ73' or parsed['job_state'] != 'COMPLETED'
+    if (packet['hostname'].split('.')[0] != expected_hostname or parsed['job_state'] != 'COMPLETED'
             or parsed['exit_code'] != '0:0' or parsed['remote_dir'] != record['remote_dir']
             or parsed['command'] != record['remote_dir'] + '/job.sh'):
         raise ValueError('candidate job requires exact native COMPLETED / 0:0 identity')
@@ -40,14 +40,14 @@ def main():
     record = load_json_object(args.record)
     job.require(record['status'] == 'SUBMITTED' and record['scheduler'] == 'Slurm', 'not a known submitted candidate')
     packet = load_json_object(args.native_capture)
-    validate_native(packet, record)
+    manifest, backend = job.verify(job.bound(record['manifest']), record['manifest']['sha256'])
+    validate_native(packet, record, backend['node'])
     receipt = load_json_object(args.native_capture.parent / 'capture_receipt.json')
     job.require(receipt['stdout_sha256'] == sha256_file(args.native_capture), 'raw native packet changed')
-    manifest, backend = job.verify(job.bound(record['manifest']), record['manifest']['sha256'])
     job.require(manifest['remote_dir'] == record['remote_dir'], 'returned directory differs from reviewed manifest')
     program = '''from pathlib import Path
 import hashlib,json,socket
-assert socket.gethostname().split('.')[0]=='MZ73'
+assert socket.gethostname().split('.')[0]==__HOST__
 root=Path(__ROOT__)
 assert root.resolve().is_relative_to(Path('/home/sbq/sbq').resolve(strict=True))
 names=__NAMES__
@@ -59,7 +59,7 @@ for name in names:
  assert 0<size<20*1024*1024
  result[name]={'bytes':size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}
 print(json.dumps(result))
-'''.replace('__ROOT__', repr(record['remote_dir'])).replace('__NAMES__', repr(OUTPUTS))
+'''.replace('__HOST__', repr(backend['node'])).replace('__ROOT__', repr(record['remote_dir'])).replace('__NAMES__', repr(OUTPUTS))
     argv = job.primary.remote.ssh_argv(backend, shlex.join(['python3', '-B', '-c', program]))
     before = job.primary.run(argv)
     expected = json.loads(before.stdout)

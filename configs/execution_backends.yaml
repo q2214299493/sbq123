@@ -69,8 +69,39 @@ backends:
       - registry_energy_promotion
       - external_evidence_gate_bypass
 
+  buct2_gpu:
+    role: candidate_acceleration_only
+    display_name: BUCT2
+    ssh:
+      alias: buct2-gpu
+    remote_write_boundary: /home/sbq/sbq
+    # Verify the host, scheduler, environment, and task paths before execution.
+    execution_admission: task_specific_preflight_required
+
+  buct3_gpu:
+    role: candidate_acceleration_only
+    display_name: BUCT3
+    allowed:
+      - ba_sella_candidate_search
+    ba_sella_runtime:
+      hostname: ubuntu-R5350-G6
+      partition: compute
+      python: /home/sbq/sbq/compute_pool_20261117/deployed/runtime/python
+      python_launcher_sha256: 67d372f4548c1411fb41b282d6d093ed7677b1edef9dc80663c86a525d9b2b4f
+      author_calculations_path: /home/sbq/sbq/compute_pool_20261117/deployed/runtime/src/arkimede/arkimede/workflow/calculations.py
+    ssh:
+      host: 10sx4jr711576.vicp.fun
+      port: 57396
+      user: sbq
+      identity_file: C:/Users/86177/.ssh/id_ed25519_fe_agent
+      identities_only: true
+    remote_write_boundary: /home/sbq/sbq
+    execution_admission: task_specific_preflight_required
+
   vasp:
     role: authoritative_first_principles_calculation
+    display_name: sunboquan-codex (CPU)
+    remote_write_boundary: /home_gkn/users/nsgkn_chengdj3
     ssh_alias: sunboquan-codex
     scheduler: LSF
     allowed:

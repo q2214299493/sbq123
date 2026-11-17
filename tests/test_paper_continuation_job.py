@@ -54,7 +54,7 @@ def prepared(tmp_path, monkeypatch):
     state = {'completed_label_count': 1, 'protocol_sha256': 'a' * 64, 'search_checkpoint': {'path': '/home/sbq/sbq/MOCK/checkpoint.pt', 'sha256': 'b' * 64}}
     monkeypatch.setattr(job, 'context', lambda *_: (state, binding, original, previous, trajectory))
     backend = {'remote_root': '/home/sbq/sbq/MOCK_CASE/labels', 'remote_write_boundary': '/home/sbq/sbq',
-               'canonical_write_boundary': '/home/ubuntu/hdd/sbq/sbq'}
+               'canonical_write_boundary': '/home/ubuntu/hdd/sbq/sbq', 'node': 'MZ73', 'partition': 'gpu'}
     monkeypatch.setattr(job, 'backend', lambda *_: backend)
     monkeypatch.setattr(job.primary.remote, 'ssh_argv', lambda _b, command: ['MOCK_SSH', command])
     monkeypatch.setattr(job.primary.remote, 'scp_argv', lambda *_: ['MOCK_SCP', 'copy'])
@@ -138,3 +138,17 @@ def test_transport_failure_remains_unknown_and_forbids_retry(prepared, monkeypat
     with pytest.raises(ValueError, match='already has'):
         job.submit(prepared.path, prepared.digest)
     assert len(calls) == 1
+
+
+def test_buct3_binding_is_candidate_only_and_has_its_own_runtime(tmp_path):
+    resolved = job.backend(tmp_path / 'paper_aqcat25_ft512_20261112_v1', 'buct3_gpu')
+    assert resolved['node'] == 'ubuntu-R5350-G6'
+    assert resolved['partition'] == 'compute'
+    assert resolved['canonical_write_boundary'] == '/home/sbq/sbq'
+    assert 'vasp_executable' not in resolved and 'mpi_executable' not in resolved
+    script = job.launcher('/home/sbq/sbq/test-only', 'a' * 64, resolved).decode()
+    assert 'hostname -s)" = ubuntu-R5350-G6' in script
+    assert resolved['python'] in script and resolved['python_launcher_sha256'] in script
+    assert '/home/ubuntu/hdd' not in script
+    with pytest.raises(ValueError, match='unsupported'):
+        job.backend(tmp_path / 'paper_aqcat25_ft512_20261112_v1', 'buct2_gpu')

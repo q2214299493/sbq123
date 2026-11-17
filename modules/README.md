@@ -8,10 +8,26 @@ procedures but cannot override those configs; skills only route into modules.
 
 The canonical workflow order and stage boundaries are in `docs/12_WORKFLOW_ARCHITECTURE.md`.
 
-`configs/execution_backends.yaml` separates execution authority. AQCat25 on
-`BUCT(sbq)` accelerates both adsorption screening and TS-candidate work;
-`sunboquan-codex` alone runs VASP/VTST. All transfers return through `work` for
-the owning module's gates.
+`configs/execution_backends.yaml` owns execution authority. The shared compute
+pool contains three GPU servers (`BUCT(sbq)` / `MZ73`, `BUCT2`, `BUCT3`) and one
+CPU server (`sunboquan-codex`, LSF). For every new compute task run
+`python -m scripts.gpu_resources --include-cpu` before host selection; the
+existing command without that option checks the three GPU servers only.
+Prepared runtime paths and verification limits are in `docs/COMPUTE_POOL.md`.
+The probe is read-only and reports SSH/work-directory checks, GPU/NVML and
+Slurm resources where available, plus compact LSF host states and queues.
+A failed or incomplete check leaves availability unknown; a snapshot does not
+verify task software or reserve resources.
+
+GPU files stay under each server's `/home/sbq/sbq/`. CPU files stay under the
+configured account boundary or an existing reviewed task path. Before any job,
+verify the task's software, model/input hashes, canonical write paths, scheduler
+allocation, CUDA/GPU UUID inside that allocation, and host-bound execution gate.
+Pool membership does not migrate a host-specific authorization or permit
+submission, duplication, cancellation, or a change in scientific protocol.
+General VASP/VTST remains on `sunboquan-codex`; explicitly authorized GPU-VASP
+cases retain their own scoped backend. All results return through `work` and
+the owning scientific gates.
 
 `calculation_registry`, `kinetic_data`, and `incar_custodian` are cross-cutting
 modules. `state_handoff` owns repository task/history lifecycle events and
