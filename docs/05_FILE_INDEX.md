@@ -13,6 +13,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## RSI failed-run recovery and real research-loop validation —2026-11-17
+
+- `docs/reviews/rsi_blocked_resume_repair_20261117.md`:connection failure versus recovery-code gap,193 passing regressions and one real original-question resume.
+- `scripts/research_assistant/continuation.py`, `runner.py` and `tests/test_research_blocked_resume.py`:bound BLOCKED-parent recovery without fabricated prior answers or enlarged budgets.
+- External evidence `C:/Users/86177/Desktop/fe110_rsi_experiments/rsi_runtime_policy_20261030/runs/rsi_recovery_20261117_v1/`:GENERATED receipt,research result,continuation/source bindings and per-run view;original failure untouched.
+
 ## RSI configuration-warning protocol repair —2026-11-16
 
 - Actual runtime `C:/Users/86177/Desktop/rsi-usage-dashboard-20261030/scripts/ts_strategy_engine/review_events.py` and `tests/test_review_events_config_warning.py`:typed configWarning handling plus unknown-method/identity diagnostics;unknown events still rejected and tool/permission boundaries unchanged.

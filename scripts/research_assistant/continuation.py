@@ -106,14 +106,38 @@ def _prepare_cache(action, parent, registry, bound, output, memo, scopes_match):
             "sources": states, "source_binding_issue": issue, "reuse_eligible": eligible, "needs_revalidation": not eligible}
 
 
+def _parent_result(parent, receipt):
+    result_path = parent / "research_result.json"
+    if result_path.is_file():
+        result = load_json_object(result_path)
+        if not isinstance(result.get("answer"), dict):
+            raise ValueError("completed parent research answer is missing")
+        return result, ["research_result.json"]
+    if receipt.get("status") != "BLOCKED":
+        raise ValueError("completed parent result is missing;not a failed parent recovery")
+    state_path = parent / "research_state.json"
+    _no_links(state_path.absolute())
+    if state_path.stat().st_size > 8 * 1024 * 1024:
+        raise ValueError("oversized failed parent state")
+    state = load_json_object(state_path)
+    if (state.get("status") != "BLOCKED" or state.get("answer") is not None
+            or state.get("goal") != receipt.get("goal") or not receipt.get("question_id")
+            or state.get("question_id") != receipt["question_id"]
+            or not isinstance(state.get("evidence_actions"), list)
+            or len(state["evidence_actions"]) != receipt.get("host_tool_requests")
+            or sha256_file(parent / "journal.jsonl") != receipt.get("journal_sha256")):
+        raise ValueError("failed parent receipt/state/journal binding mismatch")
+    return {"answer": None, "evidence_actions": state["evidence_actions"]}, ["research_state.json", "journal.jsonl"]
+
+
 def load_continuation(parent, registry, output, update):
     parent = parent.absolute()
     receipt, inventory = previous_header(parent)
     if registry.catalog.mode != "daily" or receipt["mode"] != "daily":
         raise ValueError("continuation is daily use, not a frozen blind evaluation")
-    result = load_json_object(parent / "research_result.json")
+    result, parent_files = _parent_result(parent, receipt)
     bound = []
-    for name in ("run_receipt.json", "catalog.initial.json", "research_result.json"):
+    for name in ("run_receipt.json", "catalog.initial.json", *parent_files):
         bound.append(_snapshot(parent / name, parent, output))
     feedback = []
     for path in sorted((parent / "feedback").glob("*.json"))[:20]:
@@ -126,14 +150,16 @@ def load_continuation(parent, registry, output, update):
     scopes_match = inventory["scopes"] == [str(p) for p in registry.catalog.scopes[:len(inventory["scopes"])]]
     for action in result["evidence_actions"]:
         rows.append(_prepare_cache(action, parent, registry, bound, output, memo, scopes_match))
-    answer = result["answer"]
-    claims = [{"ref": f"F{i + 1:03d}", **row} for i, row in enumerate(answer["facts"])]
-    claims += [{"ref": "option:" + row["id"], "statement": row["proposal"], "evidence_ids": row["evidence_ids"]} for row in answer["options"]]
+    answer = result["answer"] or {}
+    claims = [{"ref": f"F{i + 1:03d}", **row} for i, row in enumerate(answer.get("facts", []))]
+    claims += [{"ref": "option:" + row["id"], "statement": row["proposal"], "evidence_ids": row["evidence_ids"]} for row in answer.get("options", [])]
     context = {"question_id": receipt.get("question_id", sha256_json({"goal": receipt["goal"], "origin": str(parent)})),
                "parent_run": str(parent), "original_goal": receipt["goal"], "update": update,
-               "previous_claims": claims, "previous_options": answer["options"],
-               "previous_uncompleted_checks": {"recommended_next": answer["recommended_next"],
-                    "uncertainties": answer["uncertainties"], "plan": answer["evidence_and_calculation_plan"]},
+               "parent_had_answer": result["answer"] is not None,
+               "previous_failure": {"stage": receipt.get("first_failure_stage"), "problem": receipt.get("problem")} if result["answer"] is None else None,
+               "previous_claims": claims, "previous_options": answer.get("options", []),
+               "previous_uncompleted_checks": {"recommended_next": answer.get("recommended_next"),
+                    "uncertainties": answer.get("uncertainties", []), "plan": answer.get("evidence_and_calculation_plan", [])},
                "feedback": feedback, "source_revalidation": rows, "unique_source_hash_checks": len(memo),
                "checked_at": datetime.now(timezone.utc).isoformat(),
                "authority": "previous model synthesis, not new evidence; current E citations require host results, including explicitly revalidated cache returns"}
@@ -144,6 +170,10 @@ def load_continuation(parent, registry, output, update):
 
 def validate_progress(answer, context):
     progress = answer.get("progress")
+    if context is not None and context.get("parent_had_answer") is False:
+        if progress is not None:
+            raise ValueError("unanswered parent cannot supply prior research judgments;progress must be null")
+        return
     if context is None:
         if progress is not None:
             raise ValueError("progress cannot invent a previous research round")

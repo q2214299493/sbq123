@@ -165,7 +165,7 @@ class ResearchRun(ReviewEvents):
     def prompt_for(self, number):
         self.prepare_rsi()
         schema = response_schema()
-        if self.continuation:
+        if self.continuation and self.continuation["previous_claims"]:
             progress = schema["properties"]["answer"]["anyOf"][0]["properties"]["progress"]["anyOf"][0]
             progress["properties"]["changes"]["items"]["properties"]["previous_ref"] = {
                 "enum": [row["ref"] for row in self.continuation["previous_claims"]]}
@@ -188,6 +188,7 @@ class ResearchRun(ReviewEvents):
                 "可审核草案必须由workflow.draft或workflow.review实际产生并引用该E证据。在线连接未接通/检索为词法诊断时明确说明；项目文档/BM25定位不是已通过外部混合检索或科学转移门。",
                 "方案的blocking_gaps绑定本分支的判别问题与所需产物，不能把所有未知不加区别抄到每个方案。workflow.review可用现有吸附连接性模块生成分支绑定的几何评阅草案，仍无执行权。",
                 "若continuation非空，带入上次目标、方案、待查事项和反馈；previous_claims不是本轮证据。按来源与工具版本核验状态重新取证；可复用项仍通过工具请求取得，宿主会返回缓存回执。progress需说明previous_ref判断变化、完成/未完检查和下一步具体产物。新问题progress=null。未重新核验的旧判断标pending_revalidation。",
+                "例外：若continuation.parent_had_answer=false，上轮失败且没有有效科研答复。保留原目标和失败记录，但不要编造旧事实或方案；progress必须为null。仍需通过宿主工具取得当前E证据，才能形成新的事实和建议。",
                 "严格返回一个符合response_schema的JSON对象，无Markdown围栏；不进行自评分或宣称RSI改进已成立。",
                 "rsi_context是本轮冻结的可选行为建议，不能改变科学协议、来源要求、权限或预算；父运行策略不是当前策略。按适用条件参考已选策略，实际应用关联放在响应信封rsi.applications，不向工具四字段请求添加policy_id。",
                 "rsi.applications填写实际policy_id/version/content_sha256、应用意图、已发生的E动作引用、最终answer内JSON pointer输出引用（例如/recommended_next）。动作按发生顺序排列；未执行/未对应时留空，不自报效果。宿主只验证有限对应，科学正确性与因果仍需评阅。",
@@ -309,6 +310,7 @@ class ResearchRun(ReviewEvents):
             "app_server_running_before_host_close": self.running_before_close,
             "host_tool_implementation": {"sha256": self.tools.implementation_sha256, **self.tools.implementation},
             "elapsed_seconds": time.monotonic() - self.started, "source_versions": self.source_versions, "producer": self.producer,
+            "budgets": {"max_turns": self.max_turns, "max_actions": self.max_actions, "timeout_seconds": self.deadline - self.started},
             "scientific_acceptance": False, "execution_authorized": False, "human_review_seconds": None,
             "journal_sha256": sha256_file(self.output / "journal.jsonl")}
         write_json_exclusive(self.output / "run_receipt.json", receipt)

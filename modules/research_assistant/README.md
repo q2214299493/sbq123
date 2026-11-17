@@ -70,9 +70,14 @@ parents. The v2 result binds gaps and required artifacts to each option, and
 `progress` explains changes against parent judgment IDs, checks completed with
 current evidence, remaining checks and the next concrete product. These are
 model judgments for owner review, not scientific acceptance. A failed run keeps
-its journal, inputs, source versions and `research_state.json`; if it has no
-final `research_result.json`, choose the latest completed parent explicitly.
-No failed model call is automatically repeated.
+its journal, inputs, source versions and `research_state.json`. Explicit resume
+also accepts a `BLOCKED` parent without `research_result.json` when its state,
+question, action count and journal match the receipt. Completed host actions
+still require source/dependency revalidation. An unanswered parent supplies no
+prior claims or options, and `progress` must be null; failure is never converted
+into a fabricated research answer. Parent files remain unchanged, and the new
+receipt records the actual turn/action/time budgets. No failed model call is
+automatically repeated or granted a larger budget.
 
 ## Registered host tools
 

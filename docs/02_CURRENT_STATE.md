@@ -13,17 +13,20 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Current State
 
-## RSI configuration-warning repair —2026-11-16
+## RSI failed-run recovery —2026-11-17
 
-LAST_RECORDED_OBSERVATION from canonical work/runtime:the actual startup
-configWarning was missing from RSI's shared event adapter,not a turn mismatch.
-Typed recoverable warnings are now retained;unknown methods,native activity and
-wrong thread/turn still reject.163 regressions,original6-notification replay and
-current CLI0.169 offline protocol checks PASS.One real fixed-JSON turn completed;
-profile/native permissions unchanged,no tools/scientific jobs or old research
-retry.Historical BLOCKED evidence preserved.Full research-loop live rerun not
-performed.See modules/research_assistant/README.md and the external runtime
-event_protocol_repair_20261116_v1/{offline_preflight.json,live/receipt.json}.
+LAST_RECORDED_OBSERVATION from canonical work/runtime:the stable launcher and
+typed configWarning repair remain installed.Nov16 subsequently completed a real
+research loop(3 turns/7 host actions).The later Nov17 failure was upstream
+httpConnectionFailed without an HTTP status,not a notification error.Current
+public connectivity checks pass;the transient cause remains unproven.
+Explicit resume now accepts a bound BLOCKED parent without research_result.json,
+preserving its question,journal and revalidated evidence without invented claims.
+193 regressions PASS,2 SKIP.One real original-question recovery:GENERATED,
+3 turns/5 read-only host actions,89.30 s,0 applicable policies,0 native tools,
+unchanged 3-turn/10-action/360-s budget.Parent files remain hash-identical.
+No proxy/auth/permission change,automatic retry,scientific computation or
+scientific acceptance.See docs/reviews/rsi_blocked_resume_repair_20261117.md.
 
 ## RSI stable-entry startup —2026-11-14
 
