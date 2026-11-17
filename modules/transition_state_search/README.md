@@ -751,7 +751,13 @@ isolated checkout; its path and history token remain bound across fresh checks.
 Only matching `COMPLETED` and `ExitCode=0:0` qualify as scheduler completion;
 normal VASP completion, electronic convergence, exact evaluated structure,
 complete forces and magnetic evidence still require owning-module validation.
-Producer exit records cannot replace scheduler evidence. New checkpoints remain
+Producer exit records cannot replace scheduler evidence. Purged jobs may use
+protected native controller zero-exit/done events while retaining an unknown
+scheduler terminal enum. Both the ordinary `sched: Allocate` and observed
+`sched/backfill: _start_job` formats are recognized. Backfill must additionally
+bind a saved native RUNNING snapshot with matching host, partition, CPU/GPU,
+memory, time limit, no-requeue setting and exact controller/native start time.
+Pending snapshots cannot supply missing backfill allocation evidence. New checkpoints remain
 experiment candidates, and final TS, vibration and compatible-energy acceptance
 remain separate gates.
 

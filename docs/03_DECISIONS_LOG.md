@@ -1542,3 +1542,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 - User requested that every future compute task consider BUCT/MZ73, BUCT2, BUCT3 and CPU server sunboquan-codex. Use `python -m scripts.gpu_resources --include-cpu` for a fresh read-only snapshot, followed by task-specific runtime and allocation checks.
 - Pool registration does not grant scientific submission, duplicate execution, cancellation, model promotion or transfer of a host-bound authorization. Preserve general CPU VASP authority and explicitly scoped GPU-VASP exceptions.
 - Configuration and verification details: `docs/COMPUTE_POOL.md`.
+
+
+## 2026-11-17 - Backfill native controller evidence for CHCO15970
+
+Accept the observed backfill start format only with the original hash-bound
+RUNNING allocation proving host/partition/CPU/GPU/memory/time/no-requeue/start
+identity. Preserve protected-daemon zero-exit/done checks and keep the purged
+terminal enum unknown. Force target remains strict0.03. Details:
+`docs/reviews/chco15970_backfill_20261117.md`.

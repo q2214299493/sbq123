@@ -212,3 +212,9 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 
 - `docs/COMPUTE_POOL.md`:three GPU servers plus the CPU/LSF server, SSH/runtime boundaries, common check and admission rules.
 - `scripts/gpu_resources.py`, `tests/test_gpu_resources.py`:read-only three-GPU snapshot and optional CPU/LSF snapshot; per-host failure isolation.
+
+
+## CHCO15970 backfill compatibility (2026-11-17)
+
+- `scripts/slurm_controller_events.py`, `tests/test_slurm_controller_events.py`:strict backfill admission with saved native RUNNING allocation evidence.
+- `docs/reviews/chco15970_backfill_20261117.md`:validated raw event and force-label scope; no scheduler enum or TS acceptance fabricated.

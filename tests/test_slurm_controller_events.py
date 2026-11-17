@@ -142,3 +142,55 @@ def test_resealed_raw_query_cannot_change_the_link_to_the_initial_source(case):
     altered['initial_native_evidence']['sha256'] = '0' * 64
     with pytest.raises(ValueError):
         events.validate_controller_events(altered, **case[0])
+
+
+@pytest.fixture
+def backfill_case(case):
+    args, path, packet, _ = case
+    backend = load_mz73_static_backend(LEAF, config_path=args['config_path'])
+    initial = json.loads(path.read_bytes())
+    raw = initial['query']['stdout'].strip().replace('JobState=PENDING', 'JobState=RUNNING')
+    raw += (f' NodeList=MZ73 BatchHost=MZ73 Partition=gpu NumCPUs=4 NumNodes=1 NumTasks=1 CPUs/Task=4'
+            f' TresPerNode=gres/gpu:1 MinMemoryNode={backend["memory"]} TimeLimit={backend["time_limit"]}'
+            ' Requeue=0 StartTime=2026-11-12T12:01:00\n')
+    initial.update(native.parse_scontrol_job(raw, JOB))
+    initial['query'].update(stdout=raw, stdout_sha256=hashlib.sha256(raw.encode()).hexdigest())
+    path.write_text(json.dumps(initial))
+    start = RAW.splitlines()[1]
+    backfill = '[2026-11-12T12:01:00.001] sched/backfill: _start_job: Started JobId=13880 in gpu on MZ73'
+    packet['log'].update(**encoded(RAW.replace(start, backfill)))
+    return case
+
+
+def test_backfill_uses_running_native_allocation_without_fabricating_terminal_state(backfill_case):
+    evidence = collect(backfill_case)
+    assert evidence['controller_exit_status'] == 0 and evidence['scheduler_terminal_state'] is None
+    assert events.verify_controller_events_live(evidence, **backfill_case[0])['elapsed_seconds'] == 60.0
+
+
+@pytest.mark.parametrize(('old', 'new'), [
+    ('JobState=RUNNING', 'JobState=PENDING'), ('NodeList=MZ73', 'NodeList=other'),
+    ('BatchHost=MZ73', 'BatchHost=other'), ('Partition=gpu', 'Partition=cpu'),
+    ('NumCPUs=4', 'NumCPUs=8'), ('NumNodes=1', 'NumNodes=2'),
+    ('NumTasks=1', 'NumTasks=2'), ('CPUs/Task=4', 'CPUs/Task=2'),
+    ('TresPerNode=gres/gpu:1', 'TresPerNode=gres/gpu:2'),
+    ('MinMemoryNode=16G', 'MinMemoryNode=32G'), ('TimeLimit=00:30:00', 'TimeLimit=01:00:00'),
+    ('Requeue=0', 'Requeue=1'), ('StartTime=2026-11-12T12:01:00', 'StartTime=2026-11-12T12:01:01'),
+])
+def test_backfill_rejects_inconsistent_native_allocation(backfill_case, old, new):
+    initial = json.loads(backfill_case[1].read_bytes())
+    assert old in initial['query']['stdout']
+    raw = initial['query']['stdout'].replace(old, new)
+    initial.update(native.parse_scontrol_job(raw, JOB))
+    initial['query'].update(stdout=raw, stdout_sha256=hashlib.sha256(raw.encode()).hexdigest())
+    backfill_case[1].write_text(json.dumps(initial))
+    with pytest.raises(ValueError):
+        collect(backfill_case)
+
+
+def test_backfill_without_running_native_resource_record_is_rejected(case):
+    start = RAW.splitlines()[1]
+    backfill = '[2026-11-12T12:01:00.001] sched/backfill: _start_job: Started JobId=13880 in gpu on MZ73'
+    case[2]['log'].update(**encoded(RAW.replace(start, backfill)))
+    with pytest.raises(ValueError, match='RUNNING'):
+        collect(case)

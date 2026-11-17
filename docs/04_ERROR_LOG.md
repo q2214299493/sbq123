@@ -50,3 +50,12 @@ Update this table in place. Move resolved items to historical results or Git his
 ## Managed Open Errors
 
 <!-- state-handoff:end task_error_events -->
+
+
+## 2026-11-17 - Resolved CHCO15970 backfill parser incompatibility
+
+The original allocation regex rejected the actual `sched/backfill` start.
+The isolated parser fix now binds the saved native RUNNING resource/time
+snapshot and passed synthetic plus actual-job review. VASP was not rerun;
+label acceptance and further execution still use their owning gates.
+See `docs/reviews/chco15970_backfill_20261117.md`.

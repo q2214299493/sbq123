@@ -67,10 +67,26 @@ def _initial(reference, arguments):
     validate_stored_slurm_force_label(evidence, **arguments, require_completed=False)
     match = re.search(r'(?:^|\s)SubmitTime=(\S+)', evidence['query']['stdout'])
     _require(match is not None, 'initial native evidence has no submission time')
-    return match.group(1)
+    return match.group(1), evidence
 
 
-def _events(packet, job_id, submit_time, backend):
+def _backfill_allocation(initial, backend, started_at):
+    """Backfill logs omit resource counts; require an actual running snapshot."""
+    _require(initial is not None and initial['job_state'] == 'RUNNING',
+             'backfill requires a recorded native RUNNING allocation')
+    fields = dict(part.split('=', 1) for part in initial['query']['stdout'].split() if '=' in part)
+    expected = {'NodeList': backend['node'], 'BatchHost': backend['node'],
+                'Partition': backend['partition'], 'NumCPUs': str(backend['cpus_per_task']),
+                'NumNodes': '1', 'NumTasks': '1', 'CPUs/Task': str(backend['cpus_per_task']),
+                'TresPerNode': 'gres/gpu:1', 'MinMemoryNode': backend['memory'],
+                'TimeLimit': backend['time_limit'], 'Requeue': '0'}
+    _require(all(fields.get(key) == value for key, value in expected.items()),
+             'backfill native allocation does not match the authorized host/resources')
+    _require(fields.get('StartTime') == started_at.isoformat(timespec='seconds'),
+             'backfill start time differs from native RUNNING allocation')
+
+
+def _events(packet, job_id, submit_time, backend, initial=None):
     native = packet['job_query']
     _require(native['returncode'] == 1 and native['stdout'] == ''
              and 'Invalid job id specified' in native['stderr'], 'job is not confirmed purged from scontrol')
@@ -97,9 +113,13 @@ def _events(packet, job_id, submit_time, backend):
     job = re.escape(job_id)
     _require(re.search(r'_slurm_rpc_submit_batch_job: JobId=' + job + r'\b', bodies[0]) is not None
              and stamps[0].isoformat().startswith(submit_time), 'controller submit event belongs to another job lifetime')
-    _require(re.fullmatch(r'sched: Allocate JobId=' + job + r' NodeList=' + re.escape(backend['node'])
-                         + r' #CPUs=' + str(backend['cpus_per_task']) + r' Partition=' + re.escape(backend['partition']), bodies[1]) is not None,
-             'controller allocation does not match the authorized host/resources')
+    allocated = re.fullmatch(r'sched: Allocate JobId=' + job + r' NodeList=' + re.escape(backend['node'])
+                            + r' #CPUs=' + str(backend['cpus_per_task']) + r' Partition=' + re.escape(backend['partition']), bodies[1])
+    if allocated is None:
+        backfilled = re.fullmatch(r'sched/backfill: _start_job: Started JobId=' + job
+                                 + r' in ' + re.escape(backend['partition']) + r' on ' + re.escape(backend['node']), bodies[1])
+        _require(backfilled is not None, 'controller allocation does not match the authorized host/resources')
+        _backfill_allocation(initial, backend, stamps[1])
     _require(re.fullmatch(r'_job_complete: JobId=' + job + r' WEXITSTATUS 0', bodies[2]) is not None
              and re.fullmatch(r'_job_complete: JobId=' + job + r' done', bodies[3]) is not None,
              'missing native controller zero-exit/done events')
@@ -116,13 +136,13 @@ def collect_controller_events(job_id: str, remote_dir: str, workdir_name: str, *
     job_id, backend, _ = _target(job_id, remote_dir, workdir_name, config_path)
     arguments = dict(job_id=job_id, remote_dir=remote_dir, workdir_name=workdir_name, config_path=config_path)
     initial = {'path': str(initial_evidence.resolve(strict=True)), 'sha256': sha256_file(initial_evidence)}
-    submit_time = _initial(initial, arguments)
+    submit_time, initial_native = _initial(initial, arguments)
     argv = _argv(backend, job_id)
     result = subprocess.run(argv, capture_output=True, timeout=30, check=False)
     _require(result.returncode == 0 and not result.stderr and len(result.stdout) <= 65536,
              'native controller event query failed')
     packet = json.loads(result.stdout)
-    summary = _events(packet, job_id, submit_time, backend)
+    summary = _events(packet, job_id, submit_time, backend, initial_native)
     return {'schema_version': 1, 'document_kind': DOCUMENT_KIND, 'scheduler': 'Slurm', 'backend_id': BACKEND_ID,
             'backend_config_sha256': backend['config_sha256'], 'result_class': 'native_controller_exit_events_only',
             'job_id': job_id, 'remote_dir': remote_dir, 'workdir_name': workdir_name,
@@ -144,7 +164,8 @@ def validate_controller_events(evidence, *, job_id, remote_dir, workdir_name, co
     raw = base64.b64decode(query['stdout_base64'], validate=True)
     _require(query['argv'] == _argv(backend, job_id) and query['returncode'] == 0
              and hashlib.sha256(raw).hexdigest() == query['stdout_sha256'], 'controller query source changed')
-    summary = _events(json.loads(raw), job_id, _initial(evidence['initial_native_evidence'], arguments), backend)
+    submit_time, initial_native = _initial(evidence['initial_native_evidence'], arguments)
+    summary = _events(json.loads(raw), job_id, submit_time, backend, initial_native)
     _require(all(evidence.get(key) == value for key, value in summary.items()), 'controller summary differs from raw native events')
     return summary
 
