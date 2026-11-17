@@ -144,6 +144,9 @@ def test_buct3_binding_is_candidate_only_and_has_its_own_runtime(tmp_path):
     resolved = job.backend(tmp_path / 'paper_aqcat25_ft512_20261112_v1', 'buct3_gpu')
     assert resolved['node'] == 'ubuntu-R5350-G6'
     assert resolved['partition'] == 'compute'
+    resources = job.resources_for({'completed_label_count': 11}, 'buct3_gpu')
+    assert resources['node'] == resolved['node'] and resources['partition'] == resolved['partition']
+    assert resources['gpus'] == 1 and resources['cpus'] == 4 and resources['memory'] == '7G'
     assert resolved['canonical_write_boundary'] == '/home/sbq/sbq'
     assert 'vasp_executable' not in resolved and 'mpi_executable' not in resolved
     script = job.launcher('/home/sbq/sbq/test-only', 'a' * 64, resolved).decode()

@@ -103,3 +103,11 @@ iteration resources. A separate exact-state host preflight binds the actual
 user request, controlled CUDA receipt and byte-verified checkpoint import.
 Capture/return checks require the selected hostname and exact native job
 identity. No BUCT3 VASP authority is added; DFT gates retain the MZ73 owner.
+
+
+The first BUCT3 continuation (435) executed successfully on the configured
+BUCT3/compute backend, but inherited legacy MZ73/gpu labels in the non-operative
+resources summary. Its immutable source, submission and native evidence are
+preserved. Subsequent preparations now set the summary node/partition from
+the selected backend; the actual solver, resource caps and DFT authority are
+unchanged. The regression checks require metadata and selected backend to agree.

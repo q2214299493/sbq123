@@ -42,8 +42,11 @@ def binding_path(case, state):
     return case / f"training_r{state['completed_label_count'] - 1:03d}_force003_checkpoint_binding.json"
 
 
-def resources_for(state):
-    return {**RESOURCES, 'memory': '7G'} if state['completed_label_count'] > 1 else RESOURCES
+def resources_for(state, role='aqcat_gpu'):
+    result = {**RESOURCES, 'memory': '7G'} if state['completed_label_count'] > 1 else dict(RESOURCES)
+    if role == 'buct3_gpu':
+        result.update(node='ubuntu-R5350-G6', partition='compute')
+    return result
 
 
 def backend(case, role="aqcat_gpu"):
@@ -227,7 +230,7 @@ def prepare(args):
     manifest = {'document_kind': 'paper_one_BA_Sella_continuation_job', 'state': ref(args.state),
                 'checkpoint_binding': ref(binding_path(case, state)),
                 'backend_config': ref(primary.remote.DEFAULT_CONFIG), 'implementation': ref(__file__),
-                'execution_source': execution_source, 'resources': resources_for(state), 'backend_role': role, 'host_preflight': preflight,
+                'execution_source': execution_source, 'resources': resources_for(state, role), 'backend_role': role, 'host_preflight': preflight,
                 'remote_dir': target, 'checkpoint': state['search_checkpoint'], 'author_source': ref(author),
                 'automatic_retries': 0, 'DFT_submission_allowed': False,
                 'files': {p.name: sha256_file(p) for p in directory.iterdir() if p.is_file()}}
@@ -244,7 +247,7 @@ def verify(path, digest):
     if manifest['backend_role'] == 'buct3_gpu':
         host_preflight(manifest['host_preflight'], state, resolved)
     require(manifest['document_kind'] == 'paper_one_BA_Sella_continuation_job' and manifest['implementation'] == ref(__file__)
-        and manifest['backend_config'] == ref(primary.remote.DEFAULT_CONFIG) and manifest['resources'] == resources_for(state)
+        and manifest['backend_config'] == ref(primary.remote.DEFAULT_CONFIG) and manifest['resources'] == resources_for(state, manifest['backend_role'])
         and manifest['automatic_retries'] == 0 and manifest['DFT_submission_allowed'] is False
         and manifest['checkpoint'] == state['search_checkpoint'], 'continuation scope/source changed')
     require(manifest['checkpoint_binding'] == ref(binding_path(case, state)), 'continuation checkpoint binding changed')
