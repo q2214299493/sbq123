@@ -12,6 +12,7 @@ from scripts.artifact_io import load_json_object, write_json
 from .evidence_gate import resolve_external_evidence
 from .fts_prescreen import load_fts_rules
 from .prescreen import load_prescreen_rules, plan_batch
+from .reviewed_template_plan import resolve_reviewed_template_plan
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -27,6 +28,8 @@ def parse_args() -> argparse.Namespace:
         default=resource_path('configs/adsmind_lite/prescreen_rules.yaml'),
     )
     parser.add_argument("--available-template", action="append", default=[], help="Motif ID with a reviewed structure template.")
+    parser.add_argument("--reviewed-templates", action="append", type=Path, default=[],
+                        help="Hash-bound reviewed local full-pose bundle JSON for an exact species.")
     parser.add_argument(
         "--fts-rules",
         type=Path,
@@ -83,6 +86,13 @@ def main() -> None:
             raise SystemExit("species features must be a mapping of species names to feature mappings")
         species_features = {str(key): value for key, value in raw_features.items()}
     try:
+        template_plans = {}
+        for path in args.reviewed_templates:
+            template_plan = resolve_reviewed_template_plan(load_json_object(path))
+            species = template_plan["species"]
+            if species not in names or species in template_plans:
+                raise ValueError(f"unexpected or duplicate reviewed template bundle for {species}")
+            template_plans[species] = template_plan
         plan = plan_batch(
             names,
             rules,
@@ -92,12 +102,13 @@ def main() -> None:
             external_plans=external_plans,
             species_features=species_features,
             surface_name=args.surface_name,
+            reviewed_template_plans=template_plans,
         )
     except ValueError as exc:
         raise SystemExit(str(exc)) from None
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
-    write_json(args.output, plan)
+        write_json(args.output, plan)
     summary = plan["summary"]
     print(
         f"species={summary['species']} candidates={summary['candidate_count']} "

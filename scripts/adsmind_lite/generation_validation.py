@@ -86,7 +86,7 @@ def binding_geometry(pose, record, slab, rule, sites, analysis, centers):
     return atoms, ads, classes, anchor_sites
 
 
-def same_binding_mode(first, second, slab, operations, tolerance):
+def same_binding_mode(first, second, slab, operations, tolerance, *, interchangeable_pair=False):
     """Compare only mapped anchors in x/y under actual slab symmetries."""
     anchors, primary_class = first
     other_anchors, other_primary_class = second
@@ -98,10 +98,12 @@ def same_binding_mode(first, second, slab, operations, tolerance):
     first_xy = np.array([anchors[index] for index in indices])
     other_xy = np.array([other_anchors[index] for index in indices])
     for rotation, translation in operations:
-        delta = minimum_image_delta_xy(other_xy @ rotation.T + translation - first_xy)
-        delta[:, 2] = 0.0
-        if np.max(np.linalg.norm(delta @ slab.cell, axis=1)) <= tolerance:
-            return True
+        mapped = other_xy @ rotation.T + translation
+        for positions in (mapped, mapped[::-1]) if interchangeable_pair else (mapped,):
+            delta = minimum_image_delta_xy(positions - first_xy)
+            delta[:, 2] = 0.0
+            if np.max(np.linalg.norm(delta @ slab.cell, axis=1)) <= tolerance:
+                return True
     return False
 
 
@@ -134,9 +136,10 @@ def validate_generated_batch(pending, slab, sites, rules):
         except ValueError as exc:
             raise ValueError(f"{record['candidate_id']}: {exc}; no candidates generated") from exc
         candidate = (anchor_sites, record["planned_site_class"])
+        interchangeable_pair = len(ads) == len(anchor_sites) == 2 and atoms[ads[0]].symbol == atoms[ads[1]].symbol
         representatives = groups.setdefault(species, [])
         match = next((item for item in representatives if same_binding_mode(
-            candidate, item[0], slab, operations, tolerance,
+            candidate, item[0], slab, operations, tolerance, interchangeable_pair=interchangeable_pair,
         )), None)
         if match is not None:
             match[1].setdefault("omitted_same_site_variants", []).append(record["candidate_id"])

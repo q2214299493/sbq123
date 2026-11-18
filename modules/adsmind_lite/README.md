@@ -149,6 +149,39 @@ outputs remain low-confidence and review-required. Relaxation analysis compares
 the initial and relaxed site class of every mapped anchor, so a secondary
 anchor's site-class change is reported even when the primary anchor stays put.
 
+To import already reviewed local full poses, pass
+`--reviewed-templates BUNDLE.json` to `plan_adsorption_candidates` and keep
+the resulting plan for generation and `validate_candidates --plan PLAN.json`.
+The import is scoped to the exact species and clean Fe(110) slab in the bundle.
+It can use a reviewed molecular reference for a species absent from the shared
+catalog. Where a catalog entry exists, its identity and binding constraints apply.
+
+The bundle has six fields:
+
+- `species` and `surface`: the exact species label and `Fe110`.
+- `slab_sha256`: the SHA256 of the actual clean slab input bytes.
+- `molecular_reference`: `atom_symbols` and unwrapped
+  `relative_cartesian_angstrom` in the reviewed adsorbate atom order.
+- `motifs`: `motif_id`, `site_pattern`, `binding_mode`, `binding_atoms`,
+  `generator_site_class`, `binding_atom_indices_zero_based`,
+  `reviewed_structure_template` (path and SHA256), and `geometry_origin`.
+  The origin is `archived_local`, `literature_guided`, or `local_construction`.
+  Use absolute template paths so the same plan resolves from any directory.
+- `evidence`: the existing claim, snapshot, review and transfer record for
+  `candidate_guidance` in `surface_adsorption`. The claim's
+  `record_sha256` is the owning `evidence_lifecycle.record_subject` digest
+  of the bundle. The review and transfer follow that module's existing hash
+  bindings. Compatibility binds `species`, `surface` and `slab_sha256`.
+
+For a locally constructed pose, record the geometry rationale in the source
+snapshot, including the anchor assignments and any assumptions. Accept the
+exact pose and mapping through the existing candidate review before including
+it in an approved bundle. A published image or distance can guide a draft.
+It does not supply reviewed coordinates on the local slab. Generation checks
+the source binding again, including the slab and each template hash. It only
+writes a complete batch after the initial geometry and actual site coverage
+checks pass.
+
 Unmapped atom order, incompatible slabs, constrained adsorbate atoms, a different
 single binding atom and invalid or stale templates are blocked before any
 batch output. There is no fallback to default geometry when a supplied/required

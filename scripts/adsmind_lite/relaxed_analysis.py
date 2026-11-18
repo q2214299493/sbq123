@@ -10,9 +10,12 @@ from ase import Atoms
 from ase.data import covalent_radii
 
 from scripts.adsorption.build_fe110_adsorption import Poscar, classify_fe110_anchor_site
+from scripts.artifact_io import sha256_file
 from scripts.workflow_geometry import inplane_pbc_vector, minimum_image_delta_xy, relative_positions_xy
 
 from .adsmind_common import SITE_CLASS_MAP, load_yaml, ordered_unique, read_json, require_ase_structure
+from .motif_coverage import generation_coverage_rules, validate_generation_plan
+from .reviewed_template_plan import reviewed_template_rule
 
 
 def connectivity_edges(atoms: Atoms, indices: list[int], scale: float, minimum: float) -> list[tuple[int, int]]:
@@ -136,9 +139,12 @@ def validate_candidates(
     surfaces_config: Path,
     adsorbate_config: Path,
     analysis_config: Path,
+    *,
+    plan_path: Path | None = None,
 ) -> list[dict[str, Any]]:
     family_config = load_yaml(surfaces_config)["surface_families"]
     adsorbates = load_yaml(adsorbate_config)["adsorbates"]
+    reviewed_plans = _reviewed_validation_plans(plan_path)
     analysis = load_yaml(analysis_config)
     minimum = float(analysis["connectivity"]["minimum_bond_distance_angstrom"])
     scale = float(analysis["connectivity"]["covalent_radius_scale"])
@@ -148,7 +154,16 @@ def validate_candidates(
     for metadata_path in sorted(candidate_root.rglob("metadata.json")):
         metadata = read_json(metadata_path)
         result = dict(metadata)
-        reason = validate_one_candidate(result, family_config, adsorbates, minimum, scale, hard_contact, seen)
+        species = result["adsorbate"]
+        if "reviewed_template_subject_sha256" in result:
+            plan = reviewed_plans.get(species)
+            if _matches_reviewed_plan(result, plan):
+                rule = reviewed_template_rule(plan, adsorbates.get(species))
+                reason = validate_one_candidate(result, family_config, {species: rule}, minimum, scale, hard_contact, seen)
+            else:
+                reason = "reviewed_template_plan_required_or_mismatched"
+        else:
+            reason = validate_one_candidate(result, family_config, adsorbates, minimum, scale, hard_contact, seen)
         result["validation_passed"] = reason == "accepted"
         result["recommend_for_vasp"] = (
             reason == "accepted" and result.get("confidence_level") in {"high", "medium"} and not result.get("needs_review", False)
@@ -156,6 +171,36 @@ def validate_candidates(
         result["reason_code"] = reason
         results.append(result)
     return results
+
+
+def _reviewed_validation_plans(path: Path | None) -> dict:
+    if path is None:
+        return {}
+    rules = generation_coverage_rules()
+    plans = [
+        validate_generation_plan(plan, plan["species"], plan["surface"], rules)
+        for plan in read_json(path)["species_plans"]
+        if "reviewed_template_bundle" in plan and plan["decision"] == "READY"
+    ]
+    return {plan["species"]: plan for plan in plans}
+
+
+def _matches_reviewed_plan(record: dict, plan: dict | None) -> bool:
+    if plan is None or record["surface_name"] != plan["surface"]:
+        return False
+    bundle = plan["reviewed_template_bundle"]
+    if record["reviewed_template_subject_sha256"] != bundle["evidence"]["review"]["subject_sha256"]:
+        return False
+    if sha256_file(Path(record["surface_structure"])) != bundle["slab_sha256"]:
+        return False
+    return any(
+        motif["motif_id"] == record.get("motif_id")
+        and motif["binding_atom_indices_zero_based"] == record.get("binding_atom_indices_adsorbate_0based")
+        and motif["geometry_origin"] == record.get("geometry_origin")
+        and record["geometry_source"].get("sha256") == motif["reviewed_structure_template"]["sha256"]
+        and Path(record["geometry_source"]["path"]) == Path(motif["reviewed_structure_template"]["path"])
+        for motif in plan["candidates"]
+    )
 
 
 def validate_one_candidate(

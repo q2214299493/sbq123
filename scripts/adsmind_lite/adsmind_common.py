@@ -20,6 +20,7 @@ SITE_CLASS_MAP = {
     "long_bridge": "bridge_FeFe_long",
     "hollow": "hollow_FeFeFe",
 }
+SINGLE_ANCHOR_MODES = {"c_centered", "o_centered", "terminal_c_centered"}
 COMPACT_COLUMNS = (
     "adsorbate",
     "planned_site_class",
