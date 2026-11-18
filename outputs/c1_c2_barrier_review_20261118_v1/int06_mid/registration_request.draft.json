@@ -1,0 +1,201 @@
+{
+  "document_kind": "non_executable_barrier_registration_review_request",
+  "schema_version": 1,
+  "status": "DRAFT_NOT_APPROVED",
+  "reaction_id": "fe110_c2ho_h_migration_INT06_9748648_to_MID9737143",
+  "barrier_set_id_proposal": "fe110_int06_mid_sigma0p20_review_20261118",
+  "ts_validation_id": "fe110_int06_mid_ci9796856_vfa9798421_grade_a",
+  "source_calculation_id": "fe110_int06_mid_ci_neb_9796856",
+  "initial_result_id": "fe110_h_migration1357_valley06_relax_9748648_final_toten",
+  "ts_result_proposal": {
+    "result_id": "fe110_int06_mid_ci_neb_9796856_final_toten_sigma0p20_eV",
+    "calculation_id": "fe110_int06_mid_ci_neb_9796856",
+    "result_name": "final_toten",
+    "numeric_value": -388.33832003,
+    "unit": "eV",
+    "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+    "source": {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\04\\OUTCAR",
+      "sha256": "e83b626123ca726199407959796a3bd1369c82d55acc4d6638f4a9d76516c622"
+    },
+    "intended_validation_status_after_owner_acceptance": "accepted_compatible_final_energy",
+    "accepted_in_registry": false
+  },
+  "final_result_id": "result_fe110_ads_c2ho_h_c2h2o_9737143_final_toten",
+  "ts_structure_file_proposal": {
+    "file_id": "fe110_int06_mid_ci_neb_9796856_barrier_review_20261118_ts_structure",
+    "role": "ts_structure",
+    "source": {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\04\\CONTCAR",
+      "sha256": "3c6a1e5377b2183afb8768a4c6903298a32f757729069afa0ffd6f5c3a7b72e8",
+      "symbols": [
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "Fe",
+        "C",
+        "C",
+        "O",
+        "H",
+        "H"
+      ],
+      "cell_A": [
+        [
+          8.4808451022,
+          0.0,
+          0.0
+        ],
+        [
+          4.2404225511,
+          5.996863081958,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          22.995817442611
+        ]
+      ],
+      "composition": {
+        "Fe": 45,
+        "C": 2,
+        "O": 1,
+        "H": 2
+      },
+      "fixed_indices_zero_based": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    }
+  },
+  "compatibility_proposal": {
+    "document": {
+      "material": "fe",
+      "surface": "fe110",
+      "branch": "true_fe110_5layer_5x5x1",
+      "slab_model": "fe45_bottom18_fixed",
+      "xc": "pbe",
+      "potcar_family": "paw_pbe",
+      "encut_ev": 400.0,
+      "kmesh": [
+        5,
+        5,
+        1
+      ],
+      "magnetic_state": "ispin2_ferromagnetic_fe_2p2_seed",
+      "coverage": "3x3_single_c2ho_plus_single_h_to_c2h2o",
+      "ismear": 1,
+      "sigma_ev": 0.2,
+      "vacuum_thickness_angstrom": 15.0,
+      "fixed_atom_indices_zero_based": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "ldipol": false,
+      "final_energy_convention": "fe110_converged_toten_sigma0p20_v1"
+    },
+    "sha256": "4ef0c782834fd07afca2621a5235bb67c2ea913bd650b93123c21538c35c165d",
+    "calculation_id": "fe110_int06_mid_ci_neb_9796856",
+    "approved_for_database_write": false
+  },
+  "draft_barrier_values_eV": {
+    "forward_barrier_ev": 0.1673234099999945,
+    "reverse_barrier_ev": 0.0996418500000118,
+    "reaction_energy_ev": 0.06768155999998271
+  },
+  "mandatory_atomic_learning_record": {
+    "required": true,
+    "ready_for_registration": false,
+    "restriction": "Method strategy only;no transferable indices,coordinates,MODECAR,images,job IDs,energies or barriers"
+  },
+  "preconditions": [
+    "Refresh/review stale analysis bindings without overwriting originals",
+    "Obtain a fresh claim-bound TS gate",
+    "Review/register TS final energy,compatibility,source/status/TS-structure dependencies",
+    "Recheck the complete chain with matched_static_rows/matched_static_convention",
+    "Atomically register barrier and strategy-only Grade-A learning record via record-barrier"
+  ],
+  "current_gate": {
+    "path": "C:\\Users\\86177\\Desktop\\work\\outputs\\c1_c2_barrier_review_20261118_v1\\int06_mid\\current_ts_gate.json",
+    "sha256": "b36cbd0a6c5dd330b441c6101192258921b183316506690133e6c5b7309288e5",
+    "decision": "NEEDS_CURRENT_TS_VALIDATION_EVIDENCE",
+    "allowed_actions": [],
+    "explanation": "VFA scientific sources are missing or stale"
+  },
+  "approval": null,
+  "registry_apply_manifest": null,
+  "database_write_performed": false
+}

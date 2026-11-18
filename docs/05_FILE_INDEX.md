@@ -13,6 +13,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## Two C1–C2 barrier registration review packets —2026-11-18
+
+- `outputs/c1_c2_barrier_review_20261118_v1/审核摘要.md`:two pending electronic-energy chains,current-gate blockers and dependency/approval boundaries;no database write.
+- `ch_co/` and `int06_mid/` below that root:source-bound review packets,non-executable registration drafts,current gates and targeted metadata/config diagnostics.
+- `archive/c1_c2_barrier_review_20261118/prepare.py`:existing-output parser/packet builder;query-only registry access,no submission/acceptance authority.
+
 ## C1–C2 kinetic inventory refresh —2026-11-17
 
 - `docs/reviews/c1_c2_mkm_gap_review_20261117.md`:four registered barriers,two validated-but-unregistered barrier gaps,9833429 archive and conditional/full-feed model boundaries.

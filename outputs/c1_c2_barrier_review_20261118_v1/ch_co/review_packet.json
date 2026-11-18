@@ -1,0 +1,972 @@
+{
+  "status": "PREPARED_WITH_BLOCKERS_NOT_APPROVED",
+  "reaction_id": "fe110_ch_co_to_chco_20261109",
+  "energy_convention": "fe110_converged_toten_sigma0p20_v1",
+  "source_method": "dimer",
+  "registered_grade_a_validation": {
+    "ts_validation_id": "fe110_ch_co_dimer9998592_vfa2260_grade_a_20261115",
+    "calculation_id": "fe110_ch_co_vfa_20261115_job2260",
+    "source_method": "dimer",
+    "source_job_record_id": "job_fe110_ch_co_dimer_20261112_job9998592",
+    "imaginary_frequency_count": 1,
+    "imaginary_frequencies_cm1": "[318.644011]",
+    "principal_mode_assignment": "accepted",
+    "soft_mode_assessment": "Needs confirmation",
+    "geometry_status": "pass",
+    "connects_to_is": null,
+    "connects_to_fs": null,
+    "grade": "A",
+    "kinetic_eligible": 1,
+    "reviewed_at": "2026-11-15T16:00:03.439254+00:00",
+    "reviewer": "Codex formal evidence review under explicit user request 2026-11-15",
+    "notes": "Mode12 is predominantly C45-C46 opening/closing;CO/CH remain intact. Printed mass-weighted eigenvector converted using actual OUTCAR masses;physical common-active-set cosine with Dimer0.934. Three frames are visualizations,not connectivity evidence.",
+    "source_saddle_calculation_id": "fe110_ch_co_dimer_20261112_job9998592",
+    "frequency_output_file_id": "chco_vfa2260_formal_20261115_OUTCAR",
+    "positive_displacement_file_id": null,
+    "negative_displacement_file_id": null,
+    "contract_sha256": "06b6b3ee62b6a93cff4631fbcf443bebd8cb1b1144f803186cf48eacf798939b",
+    "atom_map_sha256": "f3fe5452e4794fbaedca86991a7e936e55a730530a793bc1df0e899814cdabe5",
+    "compatibility_fingerprint": "52b8afbf5a2902cbe115001d2554440b59421d61e1819f5921ddc373da5839de",
+    "connectivity_report_file_id": null,
+    "positive_connectivity_job_record_id": null,
+    "negative_connectivity_job_record_id": null,
+    "connectivity_report_sha256": null
+  },
+  "original_analysis": {
+    "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\ts_acceptance_20261115_v1\\vfa\\vfa_analysis.json",
+    "sha256": "e5c326c7c096bfae0174457c077ae415140f9089165bff1c1cdb1a8a920ae7fc"
+  },
+  "handoff": {
+    "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\ts_acceptance_20261115_v1\\vfa\\vfa_handoff.json",
+    "sha256": "dd34a2266f375553a335defde41fd6b02d424d5468c8d9bbd68bb841bd05b025"
+  },
+  "source_members": {
+    "initial": {
+      "registered_result": {
+        "result_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_final_toten",
+        "calculation_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021",
+        "result_name": "final_toten",
+        "numeric_value": -385.14767079,
+        "text_value": null,
+        "unit": "eV",
+        "temperature_k": null,
+        "pressure_pa": null,
+        "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+        "source_file_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_OUTCAR",
+        "source_locator": "final free energy TOTEN",
+        "extraction_method": "canonical adsorption review and exact hash-bound VASP evidence",
+        "validation_status": "accepted_compatible_final_energy",
+        "uncertainty_text": null,
+        "created_at": "2026-10-21T15:51:34.369055+00:00",
+        "notes": "Accept actual CH*+CO* state; preserve original intact-target rejection. No adsorption-energy reference tuple or thermal correction inferred."
+      },
+      "registered_energy_file": {
+        "file_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_OUTCAR",
+        "calculation_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021",
+        "job_record_id": "lsf_9839757",
+        "role": "completion_evidence",
+        "filename": "OUTCAR",
+        "local_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\sources\\03_cfg0_direct_vasp\\OUTCAR",
+        "remote_path": "/home_gkn/users/nsgkn_chengdj3/sbq/Fe110/adsorption/fe110_five_c2_20261006/03_cfg0_direct_vasp/OUTCAR",
+        "storage_mode": "local_and_remote",
+        "byte_size": 89871223,
+        "modified_at": "2026-10-11T22:02:08+00:00",
+        "sha256": "e3f5ad8b0aa2a9afc6749785e5dc872d64b6de4165169578510c7a0c5d167d78",
+        "existence_status": "confirmed",
+        "license_or_sensitivity": null,
+        "source_file_id": null,
+        "notes": "Existing original-byte collection reused."
+      },
+      "registered_structure_file": {
+        "file_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_CONTCAR",
+        "calculation_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021",
+        "job_record_id": "lsf_9839757",
+        "role": "completion_evidence",
+        "filename": "CONTCAR",
+        "local_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\sources\\03_cfg0_direct_vasp\\CONTCAR",
+        "remote_path": "/home_gkn/users/nsgkn_chengdj3/sbq/Fe110/adsorption/fe110_five_c2_20261006/03_cfg0_direct_vasp/CONTCAR",
+        "storage_mode": "local_and_remote",
+        "byte_size": 6322,
+        "modified_at": "2026-10-11T22:02:08+00:00",
+        "sha256": "f8bc627180b430b3b64f748c05830a0372bc93a3750780cf7fe6c5eb0601762d",
+        "existence_status": "confirmed",
+        "license_or_sensitivity": null,
+        "source_file_id": null,
+        "notes": "Existing original-byte collection reused."
+      },
+      "outcar": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\sources\\03_cfg0_direct_vasp\\OUTCAR",
+        "sha256": "e3f5ad8b0aa2a9afc6749785e5dc872d64b6de4165169578510c7a0c5d167d78"
+      },
+      "structure": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\sources\\03_cfg0_direct_vasp\\CONTCAR",
+        "sha256": "f8bc627180b430b3b64f748c05830a0372bc93a3750780cf7fe6c5eb0601762d",
+        "symbols": [
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "C",
+          "C",
+          "O",
+          "H"
+        ],
+        "cell_A": [
+          [
+            8.4808451022,
+            0.0,
+            0.0
+          ],
+          [
+            4.2404225511,
+            5.996863081958339,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            22.995817442611116
+          ]
+        ],
+        "composition": {
+          "Fe": 45,
+          "C": 2,
+          "O": 1,
+          "H": 1
+        },
+        "fixed_indices_zero_based": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ]
+      },
+      "incar": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\sources\\03_cfg0_direct_vasp\\INCAR",
+        "sha256": "1f5f02e9b02e1e13bcaf6d460f04c5e11895c30b6b51c2385b0ccabf100a7bfd",
+        "values": {
+          "PREC": "Accurate",
+          "EDIFF": "1e-05",
+          "EDIFFG": "-0.02",
+          "ISPIN": "2",
+          "ISMEAR": "1",
+          "SIGMA": "0.2",
+          "ALGO": "Fast",
+          "LREAL": ".FALSE.",
+          "LASPH": ".TRUE.",
+          "NELM": "200",
+          "NELMIN": "5",
+          "IBRION": "2",
+          "POTIM": "0.2",
+          "ISIF": "2",
+          "NSW": "300",
+          "ISYM": "0",
+          "LDIPOL": ".FALSE.",
+          "LCHARG": ".FALSE.",
+          "LWAVE": ".FALSE.",
+          "GGA": "PE",
+          "ENCUT": "400",
+          "MAGMOM": "45*2.2 2*0.0 1*0.0 1*0.0"
+        }
+      },
+      "final_toten_eV": -385.14767079,
+      "normal_completion": true,
+      "scf": {
+        "last_electronic_iteration": 5,
+        "last_delta_e_eV": -3.3034e-06,
+        "last_delta_eps_eV": -4.0051e-07,
+        "ediff_eV": 1e-05,
+        "nelm": 200,
+        "electronically_converged": true,
+        "electronic_convergence_source": "OUTCAR_EDIFF_TERMINATION",
+        "latest_started_electronic_cycle": {
+          "cycle": 295,
+          "ionic_step": 295,
+          "iteration": 5,
+          "delta_e_eV": -3.3034e-06,
+          "delta_eps_eV": -4.0051e-07,
+          "complete": true,
+          "explicit_convergence": false,
+          "malformed": false
+        },
+        "latest_completed_electronic_cycle": {
+          "cycle": 295,
+          "ionic_step": 295,
+          "iteration": 5,
+          "delta_e_eV": -3.3034e-06,
+          "delta_eps_eV": -4.0051e-07,
+          "complete": true,
+          "explicit_convergence": false,
+          "malformed": false
+        },
+        "final_target_step": {
+          "cycle": 295,
+          "ionic_step": 295,
+          "iteration": 5,
+          "delta_e_eV": -3.3034e-06,
+          "delta_eps_eV": -4.0051e-07,
+          "complete": true,
+          "explicit_convergence": false,
+          "malformed": false
+        },
+        "final_target_complete": true,
+        "final_target_explicit_convergence": true,
+        "incomplete": false,
+        "status": "PASS"
+      },
+      "last_FORCES_max_atom_eVA": 0.018119,
+      "final_force_vectors_max_eVA": 0.08033977038179783,
+      "force_threshold_eVA": 0.02,
+      "final_output_hash_matches": true
+    },
+    "final": {
+      "registered_result": {
+        "result_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_final_toten",
+        "calculation_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1",
+        "result_name": "final_toten",
+        "numeric_value": -384.48836276,
+        "text_value": null,
+        "unit": "eV",
+        "temperature_k": null,
+        "pressure_pa": null,
+        "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+        "source_file_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_OUTCAR",
+        "source_locator": "final free energy TOTEN",
+        "extraction_method": "scripts.aqcat25_calibration.parse_final_outcar with reviewed VASP relaxation evidence",
+        "validation_status": "accepted_compatible_final_energy",
+        "uncertainty_text": null,
+        "created_at": "2026-10-12T14:00:44.114627+00:00",
+        "notes": "Adsorption reference tuple and thermal corrections not inferred."
+      },
+      "registered_energy_file": {
+        "file_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_OUTCAR",
+        "calculation_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1",
+        "job_record_id": "lsf_9842136",
+        "role": "completion_evidence",
+        "filename": "OUTCAR",
+        "local_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\sources\\03_extra2_repair_v1\\OUTCAR",
+        "remote_path": "/home_gkn/users/nsgkn_chengdj3/sbq/Fe110/adsorption/fe110_chco_repair_20261008/03_extra2_repair_v1/OUTCAR",
+        "storage_mode": "local_and_remote",
+        "byte_size": 41092832,
+        "modified_at": "2026-10-12T08:59:01+00:00",
+        "sha256": "e88d99ab9ba74274fd8af45e4e69b9f59feb90bbe1101f7e794c1c317bb82edc",
+        "existence_status": "confirmed",
+        "license_or_sensitivity": null,
+        "source_file_id": null,
+        "notes": null
+      },
+      "registered_structure_file": {
+        "file_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_CONTCAR",
+        "calculation_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1",
+        "job_record_id": "lsf_9842136",
+        "role": "completion_evidence",
+        "filename": "CONTCAR",
+        "local_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\sources\\03_extra2_repair_v1\\CONTCAR",
+        "remote_path": "/home_gkn/users/nsgkn_chengdj3/sbq/Fe110/adsorption/fe110_chco_repair_20261008/03_extra2_repair_v1/CONTCAR",
+        "storage_mode": "local_and_remote",
+        "byte_size": 6322,
+        "modified_at": "2026-10-12T08:59:01+00:00",
+        "sha256": "11dab1631a99f1e444d4c7ab9ca242609e07c912f656874005696e6498f15ab2",
+        "existence_status": "confirmed",
+        "license_or_sensitivity": null,
+        "source_file_id": null,
+        "notes": null
+      },
+      "outcar": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\sources\\03_extra2_repair_v1\\OUTCAR",
+        "sha256": "e88d99ab9ba74274fd8af45e4e69b9f59feb90bbe1101f7e794c1c317bb82edc"
+      },
+      "structure": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\sources\\03_extra2_repair_v1\\CONTCAR",
+        "sha256": "11dab1631a99f1e444d4c7ab9ca242609e07c912f656874005696e6498f15ab2",
+        "symbols": [
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "C",
+          "C",
+          "O",
+          "H"
+        ],
+        "cell_A": [
+          [
+            8.4808451022,
+            0.0,
+            0.0
+          ],
+          [
+            4.2404225511,
+            5.996863081958339,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            22.995817442611116
+          ]
+        ],
+        "composition": {
+          "Fe": 45,
+          "C": 2,
+          "O": 1,
+          "H": 1
+        },
+        "fixed_indices_zero_based": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ]
+      },
+      "incar": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_five_c2_adsorption_20261006\\final_review_20261012\\sources\\03_extra2_repair_v1\\INCAR",
+        "sha256": "1f5f02e9b02e1e13bcaf6d460f04c5e11895c30b6b51c2385b0ccabf100a7bfd",
+        "values": {
+          "PREC": "Accurate",
+          "EDIFF": "1e-05",
+          "EDIFFG": "-0.02",
+          "ISPIN": "2",
+          "ISMEAR": "1",
+          "SIGMA": "0.2",
+          "ALGO": "Fast",
+          "LREAL": ".FALSE.",
+          "LASPH": ".TRUE.",
+          "NELM": "200",
+          "NELMIN": "5",
+          "IBRION": "2",
+          "POTIM": "0.2",
+          "ISIF": "2",
+          "NSW": "300",
+          "ISYM": "0",
+          "LDIPOL": ".FALSE.",
+          "LCHARG": ".FALSE.",
+          "LWAVE": ".FALSE.",
+          "GGA": "PE",
+          "ENCUT": "400",
+          "MAGMOM": "45*2.2 2*0.0 1*0.0 1*0.0"
+        }
+      },
+      "final_toten_eV": -384.48836276,
+      "normal_completion": true,
+      "scf": {
+        "last_electronic_iteration": 6,
+        "last_delta_e_eV": -4.3177e-06,
+        "last_delta_eps_eV": -9.0129e-07,
+        "ediff_eV": 1e-05,
+        "nelm": 200,
+        "electronically_converged": true,
+        "electronic_convergence_source": "OUTCAR_EDIFF_TERMINATION",
+        "latest_started_electronic_cycle": {
+          "cycle": 131,
+          "ionic_step": 131,
+          "iteration": 6,
+          "delta_e_eV": -4.3177e-06,
+          "delta_eps_eV": -9.0129e-07,
+          "complete": true,
+          "explicit_convergence": false,
+          "malformed": false
+        },
+        "latest_completed_electronic_cycle": {
+          "cycle": 131,
+          "ionic_step": 131,
+          "iteration": 6,
+          "delta_e_eV": -4.3177e-06,
+          "delta_eps_eV": -9.0129e-07,
+          "complete": true,
+          "explicit_convergence": false,
+          "malformed": false
+        },
+        "final_target_step": {
+          "cycle": 131,
+          "ionic_step": 131,
+          "iteration": 6,
+          "delta_e_eV": -4.3177e-06,
+          "delta_eps_eV": -9.0129e-07,
+          "complete": true,
+          "explicit_convergence": false,
+          "malformed": false
+        },
+        "final_target_complete": true,
+        "final_target_explicit_convergence": true,
+        "incomplete": false,
+        "status": "PASS"
+      },
+      "last_FORCES_max_atom_eVA": 0.011573,
+      "final_force_vectors_max_eVA": 0.034733661785075295,
+      "force_threshold_eVA": 0.02,
+      "final_output_hash_matches": true
+    },
+    "ts": {
+      "outcar": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\OUTCAR",
+        "sha256": "391f84167e6372dcaf770ed1efa471d1abba6d4640803876899b120ac797dd02"
+      },
+      "structure": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\CONTCAR",
+        "sha256": "0157a418cd1fba1be886426361d494ffbdce9a15d1a9132b996a3481ffcc1a6a",
+        "symbols": [
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "C",
+          "C",
+          "O",
+          "H"
+        ],
+        "cell_A": [
+          [
+            8.4808451022,
+            0.0,
+            0.0
+          ],
+          [
+            4.2404225511,
+            5.996863081958,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            22.995817442611
+          ]
+        ],
+        "composition": {
+          "Fe": 45,
+          "C": 2,
+          "O": 1,
+          "H": 1
+        },
+        "fixed_indices_zero_based": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ]
+      },
+      "incar": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\INCAR",
+        "sha256": "09a9077e90f96a2fe5c5516d2823ebb20e47f9ba1760a950d6ec7e7ec81a67ae",
+        "values": {
+          "PREC": "Accurate",
+          "EDIFF": "1e-07",
+          "EDIFFG": "-0.02",
+          "ISPIN": "2",
+          "ISMEAR": "1",
+          "SIGMA": "0.2",
+          "ALGO": "Fast",
+          "LREAL": ".FALSE.",
+          "LASPH": ".TRUE.",
+          "NELM": "200",
+          "NELMIN": "5",
+          "IBRION": "3",
+          "POTIM": "0",
+          "ISIF": "2",
+          "NSW": "300",
+          "ISYM": "0",
+          "LDIPOL": ".FALSE.",
+          "LCHARG": ".FALSE.",
+          "LWAVE": ".FALSE.",
+          "ICHAIN": "2",
+          "IOPT": "2",
+          "DDR": "0.005",
+          "DROTMAX": "1",
+          "DFNMIN": "0.01",
+          "DFNMAX": "1.0",
+          "GGA": "PE",
+          "ENCUT": "400",
+          "MAGMOM": "45*2.2 2*0.0 1*0.0 1*0.0"
+        }
+      },
+      "final_toten_eV": -384.17406905,
+      "normal_completion": true,
+      "scf": {
+        "last_electronic_iteration": 15,
+        "last_delta_e_eV": -5.9797e-08,
+        "last_delta_eps_eV": -7.2916e-09,
+        "ediff_eV": 1e-07,
+        "nelm": 200,
+        "electronically_converged": true,
+        "electronic_convergence_source": "OUTCAR_EDIFF_TERMINATION",
+        "latest_started_electronic_cycle": {
+          "cycle": 193,
+          "ionic_step": 193,
+          "iteration": 15,
+          "delta_e_eV": -5.9797e-08,
+          "delta_eps_eV": -7.2916e-09,
+          "complete": true,
+          "explicit_convergence": false,
+          "malformed": false
+        },
+        "latest_completed_electronic_cycle": {
+          "cycle": 193,
+          "ionic_step": 193,
+          "iteration": 15,
+          "delta_e_eV": -5.9797e-08,
+          "delta_eps_eV": -7.2916e-09,
+          "complete": true,
+          "explicit_convergence": false,
+          "malformed": false
+        },
+        "final_target_step": {
+          "cycle": 193,
+          "ionic_step": 193,
+          "iteration": 15,
+          "delta_e_eV": -5.9797e-08,
+          "delta_eps_eV": -7.2916e-09,
+          "complete": true,
+          "explicit_convergence": false,
+          "malformed": false
+        },
+        "final_target_complete": true,
+        "final_target_explicit_convergence": true,
+        "incomplete": false,
+        "status": "PASS"
+      },
+      "last_FORCES_max_atom_eVA": 0.015198,
+      "final_force_vectors_max_eVA": 0.04406139847984855,
+      "force_threshold_eVA": 0.02,
+      "final_output_hash_matches": true
+    }
+  },
+  "geometry_checks": {
+    "atom_identity_order": true,
+    "cell": true,
+    "fixed_mask": true
+  },
+  "endpoint_registry_check": {
+    "status": "PASS",
+    "errors": [],
+    "endpoints": {
+      "initial": {
+        "result_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_final_toten",
+        "calculation_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021",
+        "numeric_value": -385.14767079,
+        "unit": "eV",
+        "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+        "validation_status": "accepted_compatible_final_energy",
+        "source_file_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_OUTCAR",
+        "structure_file_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_CONTCAR",
+        "structure_calculation_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021",
+        "existence_status": "confirmed",
+        "structure_sha256": "f8bc627180b430b3b64f748c05830a0372bc93a3750780cf7fe6c5eb0601762d",
+        "compatibility_fingerprint": "52b8afbf5a2902cbe115001d2554440b59421d61e1819f5921ddc373da5839de",
+        "source_calculation_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021",
+        "source_existence_status": "confirmed",
+        "source_sha256": "e3f5ad8b0aa2a9afc6749785e5dc872d64b6de4165169578510c7a0c5d167d78"
+      },
+      "final": {
+        "result_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_final_toten",
+        "calculation_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1",
+        "numeric_value": -384.48836276,
+        "unit": "eV",
+        "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+        "validation_status": "accepted_compatible_final_energy",
+        "source_file_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_OUTCAR",
+        "structure_file_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_CONTCAR",
+        "structure_calculation_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1",
+        "existence_status": "confirmed",
+        "structure_sha256": "11dab1631a99f1e444d4c7ab9ca242609e07c912f656874005696e6498f15ab2",
+        "compatibility_fingerprint": "52b8afbf5a2902cbe115001d2554440b59421d61e1819f5921ddc373da5839de",
+        "source_calculation_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1",
+        "source_existence_status": "confirmed",
+        "source_sha256": "e88d99ab9ba74274fd8af45e4e69b9f59feb90bbe1101f7e794c1c317bb82edc"
+      }
+    }
+  },
+  "compatibility_proposal": {
+    "document": {
+      "branch": "true_fe110_5layer_5x5x1",
+      "cell_angstrom": [
+        [
+          8.4808451022,
+          0.0,
+          0.0
+        ],
+        [
+          4.2404225511,
+          5.996863081958339,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          22.995817442611116
+        ]
+      ],
+      "clean_slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+      "coverage": "3x3_one_C2HO",
+      "ediff_ev": 1e-05,
+      "encut_ev": 400.0,
+      "final_energy_convention": "fe110_converged_toten_sigma0p20_v1",
+      "fixed_atom_indices_zero_based": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "force_threshold_ev_per_A": 0.02,
+      "ismear": 1,
+      "kmesh": [
+        5,
+        5,
+        1
+      ],
+      "ldipol": false,
+      "magnetic_state": "ispin2_Fe2p2_adsorbate0_seed",
+      "material": "fe",
+      "potcar_bundle_sha256": "e3bc41a37d795bfcf1b1dc9a2a9ddfb5ef86aa5dc9aa0ac5a3583471a0982f85",
+      "potcar_family": "paw_pbe",
+      "sigma_ev": 0.2,
+      "slab_layers": 5,
+      "slab_model": "fe45_bottom18_fixed",
+      "surface": "fe110",
+      "vacuum_thickness_angstrom": 14.981751034348626,
+      "xc": "pbe"
+    },
+    "sha256": "52b8afbf5a2902cbe115001d2554440b59421d61e1819f5921ddc373da5839de",
+    "calculation_id": "fe110_ch_co_dimer_20261112_job9998592",
+    "approved_for_database_write": false
+  },
+  "draft_electronic_barrier_eV": {
+    "forward_barrier_ev": 0.9736017399999923,
+    "reverse_barrier_ev": 0.31429370999995854,
+    "reaction_energy_ev": 0.6593080300000338
+  },
+  "draft_value_scope": "arithmetic review only;not a registered or report-authorized barrier",
+  "current_ts_gate": {
+    "path": "C:\\Users\\86177\\Desktop\\work\\outputs\\c1_c2_barrier_review_20261118_v1\\ch_co\\current_ts_gate.json",
+    "sha256": "8e54da56ddf56c9b4068ecad8fbb2426762624b1542435c48995ae2a5581e971",
+    "decision": "NEEDS_CURRENT_TS_VALIDATION_EVIDENCE",
+    "allowed_actions": [],
+    "explanation": "current DIMER/VFA is not accepted: BLOCKED_SCIENTIFIC_EVIDENCE_BINDING"
+  },
+  "old_validation_source_checks": [
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\CONTCAR",
+      "sha256": "0157a418cd1fba1be886426361d494ffbdce9a15d1a9132b996a3481ffcc1a6a",
+      "expected_sha256": "0157a418cd1fba1be886426361d494ffbdce9a15d1a9132b996a3481ffcc1a6a",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\DIMCAR",
+      "sha256": "205d7ae825af2cdeaa700ad2bf363d588e4f2be614897efb4eee6fe54e5041ed",
+      "expected_sha256": "205d7ae825af2cdeaa700ad2bf363d588e4f2be614897efb4eee6fe54e5041ed",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\INCAR",
+      "sha256": "09a9077e90f96a2fe5c5516d2823ebb20e47f9ba1760a950d6ec7e7ec81a67ae",
+      "expected_sha256": "09a9077e90f96a2fe5c5516d2823ebb20e47f9ba1760a950d6ec7e7ec81a67ae",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\MODECAR",
+      "sha256": "80e803c404bf2030524b614a8605a1e5560529e6a443531463e117824f8d213d",
+      "expected_sha256": "80e803c404bf2030524b614a8605a1e5560529e6a443531463e117824f8d213d",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\NEWMODECAR",
+      "sha256": "23e6af49461434f695388f5b8db6b7be6d2720134035cacb477faa09ef2856b2",
+      "expected_sha256": "23e6af49461434f695388f5b8db6b7be6d2720134035cacb477faa09ef2856b2",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\OSZICAR",
+      "sha256": "b74e45befd2aebbb602b299c4131ee79c8e67a550c7fef51dfe3bfe53d4fa81f",
+      "expected_sha256": "b74e45befd2aebbb602b299c4131ee79c8e67a550c7fef51dfe3bfe53d4fa81f",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\OUTCAR",
+      "sha256": "391f84167e6372dcaf770ed1efa471d1abba6d4640803876899b120ac797dd02",
+      "expected_sha256": "391f84167e6372dcaf770ed1efa471d1abba6d4640803876899b120ac797dd02",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\POSCAR",
+      "sha256": "2536a53d2178fe94c6013a52a4bef4d6c20a19317b8b81231729f92e5d086e88",
+      "expected_sha256": "2536a53d2178fe94c6013a52a4bef4d6c20a19317b8b81231729f92e5d086e88",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\dimer_analysis.json",
+      "sha256": "cb68572cc0f3ce9bef17da218538ef0b11e438602efccfb3c8534ab6f3dc2527",
+      "expected_sha256": "cb68572cc0f3ce9bef17da218538ef0b11e438602efccfb3c8534ab6f3dc2527",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\dimer_handoff.json",
+      "sha256": "b9ad863aa9b43cb6fad460af7a2e7cc1858a85b450fdc3fde3e9b8a4687be5cd",
+      "expected_sha256": "b9ad863aa9b43cb6fad460af7a2e7cc1858a85b450fdc3fde3e9b8a4687be5cd",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\final_mode_review.json",
+      "sha256": "e0637a575ff982a02c38de08227e86b5df77416664938de570c43403c4351fa3",
+      "expected_sha256": "e0637a575ff982a02c38de08227e86b5df77416664938de570c43403c4351fa3",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\mode_review.json",
+      "sha256": "389b8416081fe15883c44f3c5c98f854376639c2f0f6e9cd68305d8b1618cca1",
+      "expected_sha256": "389b8416081fe15883c44f3c5c98f854376639c2f0f6e9cd68305d8b1618cca1",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\scheduler_evidence.json",
+      "sha256": "6fbed00415acfdeca3d3c2cdbf329f973f63a84a1d5e920438b99c6d61a57e43",
+      "expected_sha256": "6fbed00415acfdeca3d3c2cdbf329f973f63a84a1d5e920438b99c6d61a57e43",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\ts_acceptance_20261115_v1\\dimer_soft_gate_review.json",
+      "sha256": "466c7cc0b470eb7ba7290a44de3b129b81b75f78bcf5e71dce7836227645f4e3",
+      "expected_sha256": "466c7cc0b470eb7ba7290a44de3b129b81b75f78bcf5e71dce7836227645f4e3",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\ts_acceptance_20261115_v1\\vfa\\OUTCAR",
+      "sha256": "d707a332f1af5d0835e1935d351d9a28b011bd4672e4de3b00833fb93f62f9a9",
+      "expected_sha256": "d707a332f1af5d0835e1935d351d9a28b011bd4672e4de3b00833fb93f62f9a9",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\ts_acceptance_20261115_v1\\vfa\\POSCAR",
+      "sha256": "c1b035d47a15cf8211d23dd25d4216a46c82a33b3b5c0957b03b86e7a49ade8d",
+      "expected_sha256": "c1b035d47a15cf8211d23dd25d4216a46c82a33b3b5c0957b03b86e7a49ade8d",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\ts_acceptance_20261115_v1\\vfa\\vfa_handoff.json",
+      "sha256": "dd34a2266f375553a335defde41fd6b02d424d5468c8d9bbd68bb841bd05b025",
+      "expected_sha256": "dd34a2266f375553a335defde41fd6b02d424d5468c8d9bbd68bb841bd05b025",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\ts_acceptance_20261115_v1\\vfa\\vfa_review.json",
+      "sha256": "53938169f0884fb021c9e2cbb68933b537ad82bed018a14bb53e64e6cb79895d",
+      "expected_sha256": "53938169f0884fb021c9e2cbb68933b537ad82bed018a14bb53e64e6cb79895d",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\ts_acceptance_20261115_v1\\vfa\\vfa_scope_review.json",
+      "sha256": "a1697c65cb058f9906c23f18ef713a90a99a630d374cd2d0a45aaccc81851217",
+      "expected_sha256": "a1697c65cb058f9906c23f18ef713a90a99a630d374cd2d0a45aaccc81851217",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\configs\\true_fe110_production.yaml",
+      "sha256": "d64423eba9d40f864246d14689806a27b490715f2ade92bd7c6691403d93b82a",
+      "expected_sha256": "d64423eba9d40f864246d14689806a27b490715f2ade92bd7c6691403d93b82a",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\configs\\ts_validation_pipeline.yaml",
+      "sha256": "5f59dd300977b7ad8115b2490bbf8015a392a3b3bd1ff2deb149da4991c672ea",
+      "expected_sha256": "5f59dd300977b7ad8115b2490bbf8015a392a3b3bd1ff2deb149da4991c672ea",
+      "matches": true
+    }
+  ],
+  "existing_ts_registry_dependencies": {
+    "results": [],
+    "calculation_compatibility": []
+  },
+  "registration_sequence_after_review": [
+    "Refresh/review stale analysis bindings without overwriting originals",
+    "Obtain a fresh claim-bound TS gate",
+    "Review/register TS final energy,compatibility,source/status/TS-structure dependencies",
+    "Recheck the complete chain with matched_static_rows/matched_static_convention",
+    "Atomically register barrier and strategy-only Grade-A learning record via record-barrier"
+  ],
+  "learning_record_scope": {
+    "required": true,
+    "ready_for_registration": false,
+    "restriction": "Method strategy only;no transferable indices,coordinates,MODECAR,images,job IDs,energies or barriers"
+  },
+  "approval": null,
+  "scientific_execution_authorized": false,
+  "registry_write_authorized": false,
+  "zpe_entropy_free_energy_included": false
+}

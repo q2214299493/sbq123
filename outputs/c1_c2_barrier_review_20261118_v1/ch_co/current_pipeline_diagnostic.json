@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "document_kind": "ts_validation_pipeline_status",
+  "status": "BLOCKED_SCIENTIFIC_EVIDENCE_BINDING",
+  "reason_codes": [
+    "DIMER_SOFT_WARNING_ACCEPTED_FOR_TS_VALIDATION",
+    "FREQUENCY_THRESHOLDS_UNSET_REVIEWED_SINGLE_MODE_RULE",
+    "DIMER summary differs from its current scientific evidence"
+  ],
+  "next_action": "REVIEW_AND_REGENERATE_BOUND_ANALYSES",
+  "source_files": [
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\dimer_analysis.json",
+      "sha256": "cb68572cc0f3ce9bef17da218538ef0b11e438602efccfb3c8534ab6f3dc2527"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\ts_acceptance_20261115_v1\\dimer_soft_gate_review.json",
+      "sha256": "466c7cc0b470eb7ba7290a44de3b129b81b75f78bcf5e71dce7836227645f4e3"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\ts_acceptance_20261115_v1\\vfa\\vfa_analysis.json",
+      "sha256": "e5c326c7c096bfae0174457c077ae415140f9089165bff1c1cdb1a8a920ae7fc"
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\configs\\ts_validation_pipeline.yaml",
+      "sha256": "5f59dd300977b7ad8115b2490bbf8015a392a3b3bd1ff2deb149da4991c672ea"
+    }
+  ],
+  "connectivity_required": false,
+  "connectivity_validated": false,
+  "validation_basis": "DIMER_CONVERGENCE_AND_VIBRATIONAL_FREQUENCY",
+  "scientifically_validated_ts": false,
+  "frequency_validation_passed": false,
+  "final_grade_requires_vfa_analyzer": true,
+  "optional_vfa_grade": "NOT_EVALUATED",
+  "kinetic_eligible": false,
+  "submission_executor": "scripts.neb_agent.submission"
+}

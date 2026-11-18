@@ -1,0 +1,1013 @@
+{
+  "status": "PREPARED_WITH_BLOCKERS_NOT_APPROVED",
+  "reaction_id": "fe110_c2ho_h_migration_INT06_9748648_to_MID9737143",
+  "energy_convention": "fe110_converged_toten_sigma0p20_v1",
+  "source_method": "ci_neb",
+  "registered_grade_a_validation": {
+    "ts_validation_id": "fe110_int06_mid_ci9796856_vfa9798421_grade_a",
+    "calculation_id": "fe110_int06_mid_vfa_ci9796856_9798421",
+    "source_method": "ci_neb",
+    "source_job_record_id": "job_9796856",
+    "imaginary_frequency_count": 1,
+    "imaginary_frequencies_cm1": "[386.611701]",
+    "principal_mode_assignment": "accepted",
+    "soft_mode_assessment": "Needs confirmation",
+    "geometry_status": "pass",
+    "connects_to_is": null,
+    "connects_to_fs": null,
+    "grade": "A",
+    "kinetic_eligible": 1,
+    "reviewed_at": "2026-09-26T02:40:01Z",
+    "reviewer": "Codex scientific review under user's explicit Grade-A acceptance and CI-NEB connectivity-waiver instruction",
+    "notes": "Accept INT06-to-MID H49 surface-migration TS with actual converged CI-NEB 9796856 image04 and local VFA 9798421. Exactly one imaginary mode15 386.611701 cm-1, dominated by H49 (amplitude about 0.994), aligned with global H migration and local 03-to-05 displacement (absolute cosine about 0.999 and 0.998). Downhill connectivity deliberately not performed, NOT claimed PASS. Numeric soft-mode thresholds remain unset; use explicit reviewed single target-mode classification, not an invented cutoff. Local Fe37-40/H49 partial Hessian is not size-converged and does not provide thermochemistry/free-energy/complete kinetics. Historical generic handoff source_method neb is preserved; actual climbing source is reparsed and verified.",
+    "source_saddle_calculation_id": "fe110_int06_mid_ci_neb_9796856",
+    "frequency_output_file_id": "fe110_int06_mid_vfa_9798421_OUTCAR_frequency",
+    "positive_displacement_file_id": null,
+    "negative_displacement_file_id": null,
+    "contract_sha256": "7317d2a7e2af4271f6f694aa3ec0b4a2b2bad6fd59bd2e0ac7f7b678e84acfa8",
+    "atom_map_sha256": "ef5b3d3d64884fde2a673dd35bef48a2a965c026edb6a8dd1c4eb22b100ae157",
+    "compatibility_fingerprint": "4ef0c782834fd07afca2621a5235bb67c2ea913bd650b93123c21538c35c165d",
+    "connectivity_report_file_id": null,
+    "positive_connectivity_job_record_id": null,
+    "negative_connectivity_job_record_id": null,
+    "connectivity_report_sha256": null
+  },
+  "original_analysis": {
+    "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\vfa_ci9796856_image04_local_h_fe_20260925\\vfa_analysis.json",
+    "sha256": "68497e7eba59e5af01959fdfef64366a7d39d440fae7420a9b59ccbc92c6e9f4"
+  },
+  "handoff": {
+    "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\vfa_ci9796856_image04_local_h_fe_20260925\\vfa_handoff.json",
+    "sha256": "336e830ace408323fffa84289ab0c27f166208b145e77c28f43db0b926f2d35b"
+  },
+  "source_members": {
+    "initial": {
+      "registered_result": {
+        "result_id": "fe110_h_migration1357_valley06_relax_9748648_final_toten",
+        "calculation_id": "fe110_h_migration1357_valley06_relax_9748648",
+        "result_name": "final_toten",
+        "numeric_value": -388.50564344,
+        "text_value": null,
+        "unit": "eV",
+        "temperature_k": null,
+        "pressure_pa": null,
+        "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+        "source_file_id": "fe110_h_migration1357_valley06_relax_9748648_OUTCAR_final",
+        "source_locator": "final free energy TOTEN",
+        "extraction_method": "VASP relaxation owning gate and final OUTCAR parser",
+        "validation_status": "accepted_compatible_final_energy",
+        "uncertainty_text": "No ZPE/entropy/Hessian verification or global-minimum claim.",
+        "created_at": "2026-09-10T06:42:21.673729+00:00",
+        "notes": "INT06: intact C2HO* plus separate H50 on Fe38/40/41; accepted mapped migration endpoint, not a TS."
+      },
+      "registered_energy_file": {
+        "file_id": "fe110_h_migration1357_valley06_relax_9748648_OUTCAR_final",
+        "calculation_id": "fe110_h_migration1357_valley06_relax_9748648",
+        "job_record_id": "lsf_sunboquan_9748648",
+        "role": "output",
+        "filename": "OUTCAR",
+        "local_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration1357_valley06_relax_20260909\\completed_review_20260910\\OUTCAR",
+        "remote_path": "~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_migration1357_valley06_relax_20260909/OUTCAR",
+        "storage_mode": "local_and_remote",
+        "byte_size": 23910306,
+        "modified_at": null,
+        "sha256": "4e4b20745948681bcc9bc1e3057d2b95e64a2bb2fc0d30b65d68d1450853ce2c",
+        "existence_status": "confirmed",
+        "license_or_sensitivity": null,
+        "source_file_id": null,
+        "notes": "Hash-bound completion evidence; original inputs and immutable submission records preserved."
+      },
+      "registered_structure_file": {
+        "file_id": "fe110_h_migration1357_valley06_relax_9748648_CONTCAR_final",
+        "calculation_id": "fe110_h_migration1357_valley06_relax_9748648",
+        "job_record_id": "lsf_sunboquan_9748648",
+        "role": "output",
+        "filename": "CONTCAR",
+        "local_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration1357_valley06_relax_20260909\\completed_review_20260910\\CONTCAR",
+        "remote_path": "~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/h_migration1357_valley06_relax_20260909/CONTCAR",
+        "storage_mode": "local_and_remote",
+        "byte_size": 6444,
+        "modified_at": null,
+        "sha256": "2b53dedc909c678c2e8f7f1e4fc9643c6f87e78e26c8a818b8d9c8dfa7c73029",
+        "existence_status": "confirmed",
+        "license_or_sensitivity": null,
+        "source_file_id": null,
+        "notes": "Hash-bound completion evidence; original inputs and immutable submission records preserved."
+      },
+      "outcar": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration1357_valley06_relax_20260909\\completed_review_20260910\\OUTCAR",
+        "sha256": "4e4b20745948681bcc9bc1e3057d2b95e64a2bb2fc0d30b65d68d1450853ce2c"
+      },
+      "structure": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration1357_valley06_relax_20260909\\completed_review_20260910\\CONTCAR",
+        "sha256": "2b53dedc909c678c2e8f7f1e4fc9643c6f87e78e26c8a818b8d9c8dfa7c73029",
+        "symbols": [
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "C",
+          "C",
+          "O",
+          "H",
+          "H"
+        ],
+        "cell_A": [
+          [
+            8.4808451022,
+            0.0,
+            0.0
+          ],
+          [
+            4.2404225511,
+            5.996863081958,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            22.995817442611
+          ]
+        ],
+        "composition": {
+          "Fe": 45,
+          "C": 2,
+          "O": 1,
+          "H": 2
+        },
+        "fixed_indices_zero_based": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ]
+      },
+      "incar": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration1357_valley06_relax_20260909\\completed_review_20260910\\INCAR",
+        "sha256": "1bcea31e85158a676f068843db280a382a8a3d500254e2bacf0cf7ef08849005",
+        "values": {
+          "PREC": "Accurate",
+          "EDIFF": "1e-05",
+          "EDIFFG": "-0.02",
+          "ISPIN": "2",
+          "ISMEAR": "1",
+          "SIGMA": "0.2",
+          "ALGO": "Fast",
+          "LREAL": ".FALSE.",
+          "LASPH": ".TRUE.",
+          "NELM": "200",
+          "NELMIN": "5",
+          "IBRION": "2",
+          "POTIM": "0.2",
+          "ISIF": "2",
+          "NSW": "300",
+          "ISYM": "0",
+          "LDIPOL": ".FALSE.",
+          "LCHARG": ".FALSE.",
+          "LWAVE": ".FALSE.",
+          "GGA": "PE",
+          "ENCUT": "400",
+          "MAGMOM": "45*2.2 2*0.0 1*0.0 2*0.0"
+        }
+      },
+      "final_toten_eV": -388.50564344,
+      "normal_completion": true,
+      "scf": {
+        "last_electronic_iteration": 6,
+        "last_delta_e_eV": 4.5436e-07,
+        "last_delta_eps_eV": -7.2223e-07,
+        "ediff_eV": 1e-05,
+        "nelm": 200,
+        "electronically_converged": true,
+        "electronic_convergence_source": "OUTCAR_EDIFF_TERMINATION",
+        "latest_started_electronic_cycle": {
+          "cycle": 79,
+          "ionic_step": 79,
+          "iteration": 6,
+          "delta_e_eV": 4.5436e-07,
+          "delta_eps_eV": -7.2223e-07,
+          "complete": true,
+          "explicit_convergence": false,
+          "malformed": false
+        },
+        "latest_completed_electronic_cycle": {
+          "cycle": 79,
+          "ionic_step": 79,
+          "iteration": 6,
+          "delta_e_eV": 4.5436e-07,
+          "delta_eps_eV": -7.2223e-07,
+          "complete": true,
+          "explicit_convergence": false,
+          "malformed": false
+        },
+        "final_target_step": {
+          "cycle": 79,
+          "ionic_step": 79,
+          "iteration": 6,
+          "delta_e_eV": 4.5436e-07,
+          "delta_eps_eV": -7.2223e-07,
+          "complete": true,
+          "explicit_convergence": false,
+          "malformed": false
+        },
+        "final_target_complete": true,
+        "final_target_explicit_convergence": true,
+        "incomplete": false,
+        "status": "PASS"
+      },
+      "last_FORCES_max_atom_eVA": 0.017727,
+      "final_force_vectors_max_eVA": 0.038156963532230914,
+      "force_threshold_eVA": 0.02,
+      "final_output_hash_matches": true
+    },
+    "final": {
+      "registered_result": {
+        "result_id": "result_fe110_ads_c2ho_h_c2h2o_9737143_final_toten",
+        "calculation_id": "fe110_ads_c2ho_h_c2h2o_9737143",
+        "result_name": "final_TOTEN",
+        "numeric_value": -388.43796188,
+        "text_value": null,
+        "unit": "eV",
+        "temperature_k": null,
+        "pressure_pa": null,
+        "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+        "source_file_id": "file_fe110_ads_c2ho_h_c2h2o_9737143_OUTCAR_final",
+        "source_locator": "last free energy TOTEN in final OUTCAR",
+        "extraction_method": "regex_last_final_OUTCAR_TOTEN",
+        "validation_status": "accepted_compatible_final_energy",
+        "uncertainty_text": "Electronic energy only; no ZPE, entropy, or free-energy correction.",
+        "created_at": "2026-09-01T15:52:07.2238054+08:00",
+        "notes": "C2HO*+H* coadsorption local-minimum candidate; not a TS or barrier."
+      },
+      "registered_energy_file": {
+        "file_id": "file_fe110_ads_c2ho_h_c2h2o_9737143_OUTCAR_final",
+        "calculation_id": "fe110_ads_c2ho_h_c2h2o_9737143",
+        "job_record_id": "job_fe110_ads_c2ho_h_c2h2o_9737143",
+        "role": "final_output",
+        "filename": "OUTCAR",
+        "local_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\intermediate_image02_relax_20260901\\OUTCAR",
+        "remote_path": "~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260829/image02_candidate_intermediate_relax_20260901/OUTCAR",
+        "storage_mode": "repository",
+        "byte_size": 24565674,
+        "modified_at": "2026-09-01T07:49:23.537634+00:00",
+        "sha256": "fba371023b541484deeff5e4535b8774049cdf258697eae2677ea1394ceaab2e",
+        "existence_status": "confirmed",
+        "license_or_sensitivity": "project_internal",
+        "source_file_id": null,
+        "notes": null
+      },
+      "registered_structure_file": {
+        "file_id": "file_fe110_ads_c2ho_h_c2h2o_9737143_CONTCAR_final",
+        "calculation_id": "fe110_ads_c2ho_h_c2h2o_9737143",
+        "job_record_id": "job_fe110_ads_c2ho_h_c2h2o_9737143",
+        "role": "final_structure",
+        "filename": "CONTCAR",
+        "local_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\intermediate_image02_relax_20260901\\CONTCAR",
+        "remote_path": "~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260829/image02_candidate_intermediate_relax_20260901/CONTCAR",
+        "storage_mode": "repository",
+        "byte_size": 6444,
+        "modified_at": "2026-09-01T07:49:25.544515+00:00",
+        "sha256": "ab7f0a6221073c140675a57f2e73a776c5da2d8bfe0bfc4a5d5b9756f4e790ce",
+        "existence_status": "confirmed",
+        "license_or_sensitivity": "project_internal",
+        "source_file_id": null,
+        "notes": null
+      },
+      "outcar": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\intermediate_image02_relax_20260901\\OUTCAR",
+        "sha256": "fba371023b541484deeff5e4535b8774049cdf258697eae2677ea1394ceaab2e"
+      },
+      "structure": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\intermediate_image02_relax_20260901\\CONTCAR",
+        "sha256": "ab7f0a6221073c140675a57f2e73a776c5da2d8bfe0bfc4a5d5b9756f4e790ce",
+        "symbols": [
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "C",
+          "C",
+          "O",
+          "H",
+          "H"
+        ],
+        "cell_A": [
+          [
+            8.4808451022,
+            0.0,
+            0.0
+          ],
+          [
+            4.2404225511,
+            5.996863081958,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            22.995817442611
+          ]
+        ],
+        "composition": {
+          "Fe": 45,
+          "C": 2,
+          "O": 1,
+          "H": 2
+        },
+        "fixed_indices_zero_based": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ]
+      },
+      "incar": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\intermediate_image02_relax_20260901\\INCAR",
+        "sha256": "1bcea31e85158a676f068843db280a382a8a3d500254e2bacf0cf7ef08849005",
+        "values": {
+          "PREC": "Accurate",
+          "EDIFF": "1e-05",
+          "EDIFFG": "-0.02",
+          "ISPIN": "2",
+          "ISMEAR": "1",
+          "SIGMA": "0.2",
+          "ALGO": "Fast",
+          "LREAL": ".FALSE.",
+          "LASPH": ".TRUE.",
+          "NELM": "200",
+          "NELMIN": "5",
+          "IBRION": "2",
+          "POTIM": "0.2",
+          "ISIF": "2",
+          "NSW": "300",
+          "ISYM": "0",
+          "LDIPOL": ".FALSE.",
+          "LCHARG": ".FALSE.",
+          "LWAVE": ".FALSE.",
+          "GGA": "PE",
+          "ENCUT": "400",
+          "MAGMOM": "45*2.2 2*0.0 1*0.0 2*0.0"
+        }
+      },
+      "final_toten_eV": -388.43796188,
+      "normal_completion": true,
+      "scf": {
+        "last_electronic_iteration": 7,
+        "last_delta_e_eV": 8.3011e-06,
+        "last_delta_eps_eV": -1.04e-06,
+        "ediff_eV": 1e-05,
+        "nelm": 200,
+        "electronically_converged": true,
+        "electronic_convergence_source": "OUTCAR_EDIFF_TERMINATION",
+        "latest_started_electronic_cycle": {
+          "cycle": 82,
+          "ionic_step": 82,
+          "iteration": 7,
+          "delta_e_eV": 8.3011e-06,
+          "delta_eps_eV": -1.04e-06,
+          "complete": true,
+          "explicit_convergence": false,
+          "malformed": false
+        },
+        "latest_completed_electronic_cycle": {
+          "cycle": 82,
+          "ionic_step": 82,
+          "iteration": 7,
+          "delta_e_eV": 8.3011e-06,
+          "delta_eps_eV": -1.04e-06,
+          "complete": true,
+          "explicit_convergence": false,
+          "malformed": false
+        },
+        "final_target_step": {
+          "cycle": 82,
+          "ionic_step": 82,
+          "iteration": 7,
+          "delta_e_eV": 8.3011e-06,
+          "delta_eps_eV": -1.04e-06,
+          "complete": true,
+          "explicit_convergence": false,
+          "malformed": false
+        },
+        "final_target_complete": true,
+        "final_target_explicit_convergence": true,
+        "incomplete": false,
+        "status": "PASS"
+      },
+      "last_FORCES_max_atom_eVA": 0.019289,
+      "final_force_vectors_max_eVA": 0.04039105555689279,
+      "force_threshold_eVA": 0.02,
+      "final_output_hash_matches": true
+    },
+    "ts": {
+      "outcar": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\04\\OUTCAR",
+        "sha256": "e83b626123ca726199407959796a3bd1369c82d55acc4d6638f4a9d76516c622"
+      },
+      "structure": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\04\\CONTCAR",
+        "sha256": "3c6a1e5377b2183afb8768a4c6903298a32f757729069afa0ffd6f5c3a7b72e8",
+        "symbols": [
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "C",
+          "C",
+          "O",
+          "H",
+          "H"
+        ],
+        "cell_A": [
+          [
+            8.4808451022,
+            0.0,
+            0.0
+          ],
+          [
+            4.2404225511,
+            5.996863081958,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            22.995817442611
+          ]
+        ],
+        "composition": {
+          "Fe": 45,
+          "C": 2,
+          "O": 1,
+          "H": 2
+        },
+        "fixed_indices_zero_based": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ]
+      },
+      "incar": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\INCAR",
+        "sha256": "d554d0606139567cafa3234d97c159860bea2a1babaa09b7fa5142679746ecd9",
+        "values": {
+          "PREC": "Accurate",
+          "EDIFF": "1e-05",
+          "EDIFFG": "-0.02",
+          "ISPIN": "2",
+          "ISMEAR": "1",
+          "SIGMA": "0.2",
+          "ALGO": "Fast",
+          "LREAL": ".FALSE.",
+          "LASPH": ".TRUE.",
+          "NELM": "200",
+          "NELMIN": "5",
+          "IBRION": "3",
+          "POTIM": "0",
+          "ISIF": "2",
+          "NSW": "300",
+          "ISYM": "0",
+          "LDIPOL": ".FALSE.",
+          "LCHARG": ".FALSE.",
+          "LWAVE": ".FALSE.",
+          "ICHAIN": "0",
+          "IOPT": "1",
+          "SPRING": "-5",
+          "LCLIMB": ".TRUE.",
+          "NPAR": "4",
+          "GGA": "PE",
+          "ENCUT": "400",
+          "IMAGES": "5",
+          "MAGMOM": "45*2.2 2*0.0 1*0.0 2*0.0"
+        }
+      },
+      "final_toten_eV": -388.33832003,
+      "normal_completion": true,
+      "scf": {
+        "last_electronic_iteration": 8,
+        "last_delta_e_eV": -2.0737e-06,
+        "last_delta_eps_eV": -1.7055e-06,
+        "ediff_eV": 1e-05,
+        "nelm": 200,
+        "electronically_converged": true,
+        "electronic_convergence_source": "OUTCAR_EDIFF_TERMINATION",
+        "latest_started_electronic_cycle": {
+          "cycle": 43,
+          "ionic_step": 43,
+          "iteration": 8,
+          "delta_e_eV": -2.0737e-06,
+          "delta_eps_eV": -1.7055e-06,
+          "complete": true,
+          "explicit_convergence": false,
+          "malformed": false
+        },
+        "latest_completed_electronic_cycle": {
+          "cycle": 43,
+          "ionic_step": 43,
+          "iteration": 8,
+          "delta_e_eV": -2.0737e-06,
+          "delta_eps_eV": -1.7055e-06,
+          "complete": true,
+          "explicit_convergence": false,
+          "malformed": false
+        },
+        "final_target_step": {
+          "cycle": 43,
+          "ionic_step": 43,
+          "iteration": 8,
+          "delta_e_eV": -2.0737e-06,
+          "delta_eps_eV": -1.7055e-06,
+          "complete": true,
+          "explicit_convergence": false,
+          "malformed": false
+        },
+        "final_target_complete": true,
+        "final_target_explicit_convergence": true,
+        "incomplete": false,
+        "status": "PASS"
+      },
+      "last_FORCES_max_atom_eVA": 0.009604,
+      "final_force_vectors_max_eVA": 0.03398435847562817,
+      "force_threshold_eVA": 0.02,
+      "final_output_hash_matches": true
+    }
+  },
+  "geometry_checks": {
+    "atom_identity_order": true,
+    "cell": true,
+    "fixed_mask": true
+  },
+  "endpoint_registry_check": {
+    "status": "PASS",
+    "errors": [],
+    "endpoints": {
+      "initial": {
+        "result_id": "fe110_h_migration1357_valley06_relax_9748648_final_toten",
+        "calculation_id": "fe110_h_migration1357_valley06_relax_9748648",
+        "numeric_value": -388.50564344,
+        "unit": "eV",
+        "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+        "validation_status": "accepted_compatible_final_energy",
+        "source_file_id": "fe110_h_migration1357_valley06_relax_9748648_OUTCAR_final",
+        "structure_file_id": "fe110_h_migration1357_valley06_relax_9748648_CONTCAR_final",
+        "structure_calculation_id": "fe110_h_migration1357_valley06_relax_9748648",
+        "existence_status": "confirmed",
+        "structure_sha256": "2b53dedc909c678c2e8f7f1e4fc9643c6f87e78e26c8a818b8d9c8dfa7c73029",
+        "compatibility_fingerprint": "4ef0c782834fd07afca2621a5235bb67c2ea913bd650b93123c21538c35c165d",
+        "source_calculation_id": "fe110_h_migration1357_valley06_relax_9748648",
+        "source_existence_status": "confirmed",
+        "source_sha256": "4e4b20745948681bcc9bc1e3057d2b95e64a2bb2fc0d30b65d68d1450853ce2c"
+      },
+      "final": {
+        "result_id": "result_fe110_ads_c2ho_h_c2h2o_9737143_final_toten",
+        "calculation_id": "fe110_ads_c2ho_h_c2h2o_9737143",
+        "numeric_value": -388.43796188,
+        "unit": "eV",
+        "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+        "validation_status": "accepted_compatible_final_energy",
+        "source_file_id": "file_fe110_ads_c2ho_h_c2h2o_9737143_OUTCAR_final",
+        "structure_file_id": "file_fe110_ads_c2ho_h_c2h2o_9737143_CONTCAR_final",
+        "structure_calculation_id": "fe110_ads_c2ho_h_c2h2o_9737143",
+        "existence_status": "confirmed",
+        "structure_sha256": "ab7f0a6221073c140675a57f2e73a776c5da2d8bfe0bfc4a5d5b9756f4e790ce",
+        "compatibility_fingerprint": "4ef0c782834fd07afca2621a5235bb67c2ea913bd650b93123c21538c35c165d",
+        "source_calculation_id": "fe110_ads_c2ho_h_c2h2o_9737143",
+        "source_existence_status": "confirmed",
+        "source_sha256": "fba371023b541484deeff5e4535b8774049cdf258697eae2677ea1394ceaab2e"
+      }
+    }
+  },
+  "compatibility_proposal": {
+    "document": {
+      "material": "fe",
+      "surface": "fe110",
+      "branch": "true_fe110_5layer_5x5x1",
+      "slab_model": "fe45_bottom18_fixed",
+      "xc": "pbe",
+      "potcar_family": "paw_pbe",
+      "encut_ev": 400.0,
+      "kmesh": [
+        5,
+        5,
+        1
+      ],
+      "magnetic_state": "ispin2_ferromagnetic_fe_2p2_seed",
+      "coverage": "3x3_single_c2ho_plus_single_h_to_c2h2o",
+      "ismear": 1,
+      "sigma_ev": 0.2,
+      "vacuum_thickness_angstrom": 15.0,
+      "fixed_atom_indices_zero_based": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "ldipol": false,
+      "final_energy_convention": "fe110_converged_toten_sigma0p20_v1"
+    },
+    "sha256": "4ef0c782834fd07afca2621a5235bb67c2ea913bd650b93123c21538c35c165d",
+    "calculation_id": "fe110_int06_mid_ci_neb_9796856",
+    "approved_for_database_write": false
+  },
+  "draft_electronic_barrier_eV": {
+    "forward_barrier_ev": 0.1673234099999945,
+    "reverse_barrier_ev": 0.0996418500000118,
+    "reaction_energy_ev": 0.06768155999998271
+  },
+  "draft_value_scope": "arithmetic review only;not a registered or report-authorized barrier",
+  "current_ts_gate": {
+    "path": "C:\\Users\\86177\\Desktop\\work\\outputs\\c1_c2_barrier_review_20261118_v1\\int06_mid\\current_ts_gate.json",
+    "sha256": "b36cbd0a6c5dd330b441c6101192258921b183316506690133e6c5b7309288e5",
+    "decision": "NEEDS_CURRENT_TS_VALIDATION_EVIDENCE",
+    "allowed_actions": [],
+    "explanation": "VFA scientific sources are missing or stale"
+  },
+  "old_validation_source_checks": [
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\00\\CONTCAR",
+      "sha256": "bb0abed1064d5881bdf65409b9b0bfa945fd55e321f60e33cf1b7a3badf66c27",
+      "expected_sha256": "bb0abed1064d5881bdf65409b9b0bfa945fd55e321f60e33cf1b7a3badf66c27",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\00\\OUTCAR",
+      "sha256": "4e4b20745948681bcc9bc1e3057d2b95e64a2bb2fc0d30b65d68d1450853ce2c",
+      "expected_sha256": "4e4b20745948681bcc9bc1e3057d2b95e64a2bb2fc0d30b65d68d1450853ce2c",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\01\\CONTCAR",
+      "sha256": "c238754f01247767f2c6eea4216a58f88867df2a8d6c570ace150207b34f0574",
+      "expected_sha256": "c238754f01247767f2c6eea4216a58f88867df2a8d6c570ace150207b34f0574",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\01\\OSZICAR",
+      "sha256": "e4957fd3daa4cfba79d6c8d34e89ed2b4e256b2251f4b38ccd35ef21464236c0",
+      "expected_sha256": "e4957fd3daa4cfba79d6c8d34e89ed2b4e256b2251f4b38ccd35ef21464236c0",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\01\\OUTCAR",
+      "sha256": "47b33c80b906344a94d63da9f1ad574bc9ca091bc9258b6b83a516e190a9d893",
+      "expected_sha256": "47b33c80b906344a94d63da9f1ad574bc9ca091bc9258b6b83a516e190a9d893",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\02\\CONTCAR",
+      "sha256": "a97621aaeaa5b31f03ad6e5be6419504fa749665c2284fa7e8e23181a6ba7fe6",
+      "expected_sha256": "a97621aaeaa5b31f03ad6e5be6419504fa749665c2284fa7e8e23181a6ba7fe6",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\02\\OSZICAR",
+      "sha256": "fbbf0bc63f350db4ee74556a560b2222b97607654c077044b1341b7ef636b64a",
+      "expected_sha256": "fbbf0bc63f350db4ee74556a560b2222b97607654c077044b1341b7ef636b64a",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\02\\OUTCAR",
+      "sha256": "3cfe258ee9dc0ce93a9d1a99c207d277dbfaaa8b3b80e10e01b650d1685dfc86",
+      "expected_sha256": "3cfe258ee9dc0ce93a9d1a99c207d277dbfaaa8b3b80e10e01b650d1685dfc86",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\03\\CONTCAR",
+      "sha256": "78fd4e81fab629e9e3f8480cb95c8fdccd49fe84edfa9540aa749daa6da5f69b",
+      "expected_sha256": "78fd4e81fab629e9e3f8480cb95c8fdccd49fe84edfa9540aa749daa6da5f69b",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\03\\OSZICAR",
+      "sha256": "e2d3b6400e4ffd67373705e6ce4be1df4f9851e850d5309e0476be96a2cb90de",
+      "expected_sha256": "e2d3b6400e4ffd67373705e6ce4be1df4f9851e850d5309e0476be96a2cb90de",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\03\\OUTCAR",
+      "sha256": "2989ad5c527b3ac574f2fa0890800e0dd9e0dd81383806124251e1c7e3487426",
+      "expected_sha256": "2989ad5c527b3ac574f2fa0890800e0dd9e0dd81383806124251e1c7e3487426",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\04\\CONTCAR",
+      "sha256": "3c6a1e5377b2183afb8768a4c6903298a32f757729069afa0ffd6f5c3a7b72e8",
+      "expected_sha256": "3c6a1e5377b2183afb8768a4c6903298a32f757729069afa0ffd6f5c3a7b72e8",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\04\\OSZICAR",
+      "sha256": "ae70d13a2ef3bc13b35579f8fdd27b301b0e1f5e6a541ce2aa421c362259970c",
+      "expected_sha256": "ae70d13a2ef3bc13b35579f8fdd27b301b0e1f5e6a541ce2aa421c362259970c",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\04\\OUTCAR",
+      "sha256": "e83b626123ca726199407959796a3bd1369c82d55acc4d6638f4a9d76516c622",
+      "expected_sha256": "e83b626123ca726199407959796a3bd1369c82d55acc4d6638f4a9d76516c622",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\05\\CONTCAR",
+      "sha256": "c0d042f3b956584eb4985a2fd30f98bd5ddeab3d64e318643582f971a5d75f73",
+      "expected_sha256": "c0d042f3b956584eb4985a2fd30f98bd5ddeab3d64e318643582f971a5d75f73",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\05\\OSZICAR",
+      "sha256": "c07119699366293be6a1e5a3ff62594371038e09e16497fe296e04fe5b609751",
+      "expected_sha256": "c07119699366293be6a1e5a3ff62594371038e09e16497fe296e04fe5b609751",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\05\\OUTCAR",
+      "sha256": "95f862d800f2fc844745866181515c7c094d2641aae669f6ac762e1d7f6125b6",
+      "expected_sha256": "95f862d800f2fc844745866181515c7c094d2641aae669f6ac762e1d7f6125b6",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\06\\CONTCAR",
+      "sha256": "a508a50b0851832089b5bbbbef252a4232b2a2ebb2d6788f97c92a94c2a00158",
+      "expected_sha256": "a508a50b0851832089b5bbbbef252a4232b2a2ebb2d6788f97c92a94c2a00158",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\06\\OUTCAR",
+      "sha256": "fba371023b541484deeff5e4535b8774049cdf258697eae2677ea1394ceaab2e",
+      "expected_sha256": "fba371023b541484deeff5e4535b8774049cdf258697eae2677ea1394ceaab2e",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\INCAR",
+      "sha256": "d554d0606139567cafa3234d97c159860bea2a1babaa09b7fa5142679746ecd9",
+      "expected_sha256": "d554d0606139567cafa3234d97c159860bea2a1babaa09b7fa5142679746ecd9",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\neb_analysis.json",
+      "sha256": "ff41ef596722191c474e060e44755108e90b980e2254eacfda94734b9bc71bf3",
+      "expected_sha256": "ff41ef596722191c474e060e44755108e90b980e2254eacfda94734b9bc71bf3",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\path_generation_report.json",
+      "sha256": "7fe7c5d19d7dc7aaeb269546a4807448d5c35d6dd4f553bbd3737bd0ccf47826",
+      "expected_sha256": "7fe7c5d19d7dc7aaeb269546a4807448d5c35d6dd4f553bbd3737bd0ccf47826",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\path_review.json",
+      "sha256": "9653c30cbf5deb83f642fcab23f3c252e4262c9fcaf11009b5ebd8b3b9898167",
+      "expected_sha256": "9653c30cbf5deb83f642fcab23f3c252e4262c9fcaf11009b5ebd8b3b9898167",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration_int06_mid_vasp_bowed_20260921\\ci_completed_review_20260925\\reaction_contract.normalized.json",
+      "sha256": "4de3946f4e7b4e2625e9683f798dd5a03b6b56629031da51e7304bb2d9eb9bcb",
+      "expected_sha256": "4de3946f4e7b4e2625e9683f798dd5a03b6b56629031da51e7304bb2d9eb9bcb",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\vfa_ci9796856_image04_local_h_fe_20260925\\OUTCAR",
+      "sha256": "fc9368d2292e5f8fcbbec996e1830293b204cb59f52d06247828da845a38b792",
+      "expected_sha256": "fc9368d2292e5f8fcbbec996e1830293b204cb59f52d06247828da845a38b792",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\vfa_ci9796856_image04_local_h_fe_20260925\\POSCAR",
+      "sha256": "5e5aafaabb84c2d3f8aa6005bcf0ea7e0b01a33aee4cdaeb5dcd7b910889be9e",
+      "expected_sha256": "5e5aafaabb84c2d3f8aa6005bcf0ea7e0b01a33aee4cdaeb5dcd7b910889be9e",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\vfa_ci9796856_image04_local_h_fe_20260925\\vfa_handoff.json",
+      "sha256": "336e830ace408323fffa84289ab0c27f166208b145e77c28f43db0b926f2d35b",
+      "expected_sha256": "336e830ace408323fffa84289ab0c27f166208b145e77c28f43db0b926f2d35b",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\vfa_ci9796856_image04_local_h_fe_20260925\\vfa_review.json",
+      "sha256": "8e5482dbb8817da18bcdf99faf229d3070276b4525fbff747f92d715d32b89aa",
+      "expected_sha256": "8e5482dbb8817da18bcdf99faf229d3070276b4525fbff747f92d715d32b89aa",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\vfa_ci9796856_image04_local_h_fe_20260925\\vfa_scope_review.json",
+      "sha256": "4bf7e579292c9970d98202228e45a076d24f5f703cdf3f5ec59e155d3e17f258",
+      "expected_sha256": "4bf7e579292c9970d98202228e45a076d24f5f703cdf3f5ec59e155d3e17f258",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\configs\\neb_agent\\default_thresholds.yaml",
+      "sha256": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c",
+      "expected_sha256": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c",
+      "matches": true
+    },
+    {
+      "path": "C:\\Users\\86177\\Desktop\\work\\configs\\true_fe110_production.yaml",
+      "sha256": "d64423eba9d40f864246d14689806a27b490715f2ade92bd7c6691403d93b82a",
+      "expected_sha256": "fbad642502134ca1123741f0bdf3194d2914e230981d38aab90debd4b965bcd3",
+      "matches": false
+    }
+  ],
+  "existing_ts_registry_dependencies": {
+    "results": [],
+    "calculation_compatibility": []
+  },
+  "registration_sequence_after_review": [
+    "Refresh/review stale analysis bindings without overwriting originals",
+    "Obtain a fresh claim-bound TS gate",
+    "Review/register TS final energy,compatibility,source/status/TS-structure dependencies",
+    "Recheck the complete chain with matched_static_rows/matched_static_convention",
+    "Atomically register barrier and strategy-only Grade-A learning record via record-barrier"
+  ],
+  "learning_record_scope": {
+    "required": true,
+    "ready_for_registration": false,
+    "restriction": "Method strategy only;no transferable indices,coordinates,MODECAR,images,job IDs,energies or barriers"
+  },
+  "approval": null,
+  "scientific_execution_authorized": false,
+  "registry_write_authorized": false,
+  "zpe_entropy_free_energy_included": false
+}

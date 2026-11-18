@@ -1,0 +1,3128 @@
+{
+  "schema_version": 2,
+  "gate": "AUTHORITATIVE_NEB_EXECUTION_GATE",
+  "generated_at_utc": "2026-11-18T10:15:26.517050+00:00",
+  "state_sha256": "2acd5200bda3c1738fd0c372c42b04bf88567b5412a591c30557154db2d5a322",
+  "DECISION": "NEEDS_CURRENT_TS_VALIDATION_EVIDENCE",
+  "REASON_CODES": [
+    "CURRENT_TS_VALIDATION_EVIDENCE_INVALID"
+  ],
+  "EVIDENCE": {
+    "geometry": {
+      "schema_version": 1,
+      "document_kind": "neb_path_geometry_diagnosis",
+      "producer": "scripts.neb_agent.diagnose_path_geometry",
+      "source_files": [
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\00\\POSCAR",
+          "sha256": "31373d976dcdd66c4888c4bb55305400debd7df16131bd8d1112185760a9c350"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\01\\CONTCAR",
+          "sha256": "e096942d3ce1f33dd7e3129a44fcd3aba09e98038147efd4d409d445a37162e0"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\02\\CONTCAR",
+          "sha256": "869a883e5f465e97d2143279970a7e4c5cee4a75dee5bc055174955cac6478aa"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\03\\CONTCAR",
+          "sha256": "4cbe34e58e0c8f38024e24c633dafced211ba54a2930d39589a3df4401c4038b"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\04\\CONTCAR",
+          "sha256": "04e08fedd274e03b6251baa6cb9de74aa9824a669e51825ffa5bbb1c62431ba2"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\05\\CONTCAR",
+          "sha256": "2536a53d2178fe94c6013a52a4bef4d6c20a19317b8b81231729f92e5d086e88"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\06\\CONTCAR",
+          "sha256": "790049e46c5e82057352e65b2bf2690bf14d5943785814411d555d3cb39deaed"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\07\\POSCAR",
+          "sha256": "78baead215e4362c586a3c2d0e9596645441aa44f67be6b57cb71841c24a3d0c"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\INCAR",
+          "sha256": "ba86d09a76afb78354a95ca078d43d676a97a70679d8100aa91e7fe22e084e5a"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\configs\\neb_agent\\default_thresholds.yaml",
+          "sha256": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c"
+        }
+      ],
+      "status": "PASS",
+      "errors": [],
+      "warnings": [
+        "nebmovie.pl visual review remains required"
+      ],
+      "thresholds": {
+        "min_distance_factor": 0.55,
+        "absolute_min_distance_A": 1.0,
+        "image_jump_warning_A": 1.0,
+        "fixed_position_tolerance_A": 0.0001,
+        "internal_minimum_warning_eV": 0.2,
+        "barrierless_force_threshold_eVA": 0.2,
+        "high_force_warning_threshold_eVA": 1.5,
+        "min_ionic_steps_for_force_warning": 5,
+        "persistent_high_force_failure_min_ionic_steps": 10,
+        "scf_consecutive_exhaustion_hard_min": 3,
+        "surface_penetration_warning_A": 0.2,
+        "desorption_height_change_warning_A": 2.0,
+        "reaction_coordinate_backtrack_warning_A": 0.25,
+        "magnetic_continuity_warning_threshold_muB": 2.0
+      },
+      "reaction_atom_indices_zero_based": [
+        45,
+        46,
+        47,
+        48
+      ],
+      "reaction_pairs_zero_based": [
+        [
+          45,
+          46
+        ]
+      ],
+      "fixed_atom_indices_zero_based": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "images": [
+        {
+          "image": "00",
+          "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\00\\POSCAR",
+          "minimum_pair_distance_A": 1.1038846422644324,
+          "minimum_pair_zero_based": [
+            46,
+            47
+          ],
+          "collision_threshold_A": 0.781,
+          "max_step_from_previous_A": 0.0,
+          "max_raw_fractional_step_from_previous": 0.0,
+          "periodic_branch_shift_atom_indices_zero_based": [],
+          "max_fixed_displacement_from_initial_A": 0.0,
+          "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+          "reaction_distances": [
+            {
+              "atoms_zero_based": [
+                45,
+                46
+              ],
+              "labels": [
+                "C",
+                "C"
+              ],
+              "distance_A": 2.7871656066811097
+            }
+          ]
+        },
+        {
+          "image": "01",
+          "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\01\\CONTCAR",
+          "minimum_pair_distance_A": 1.104083338881785,
+          "minimum_pair_zero_based": [
+            46,
+            47
+          ],
+          "collision_threshold_A": 0.781,
+          "max_step_from_previous_A": 0.43490309680262373,
+          "max_raw_fractional_step_from_previous": 0.06963697760600002,
+          "periodic_branch_shift_atom_indices_zero_based": [],
+          "max_fixed_displacement_from_initial_A": 1.6477351626298375e-15,
+          "max_fixed_raw_fractional_displacement_from_initial": 1.942890293094024e-16,
+          "reaction_distances": [
+            {
+              "atoms_zero_based": [
+                45,
+                46
+              ],
+              "labels": [
+                "C",
+                "C"
+              ],
+              "distance_A": 2.7678207179885055
+            }
+          ]
+        },
+        {
+          "image": "02",
+          "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\02\\CONTCAR",
+          "minimum_pair_distance_A": 1.1039795403391468,
+          "minimum_pair_zero_based": [
+            46,
+            47
+          ],
+          "collision_threshold_A": 0.781,
+          "max_step_from_previous_A": 0.4515162015526573,
+          "max_raw_fractional_step_from_previous": 0.06161331788399993,
+          "periodic_branch_shift_atom_indices_zero_based": [],
+          "max_fixed_displacement_from_initial_A": 1.6477351626298375e-15,
+          "max_fixed_raw_fractional_displacement_from_initial": 1.942890293094024e-16,
+          "reaction_distances": [
+            {
+              "atoms_zero_based": [
+                45,
+                46
+              ],
+              "labels": [
+                "C",
+                "C"
+              ],
+              "distance_A": 2.6455630541881994
+            }
+          ]
+        },
+        {
+          "image": "03",
+          "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\03\\CONTCAR",
+          "minimum_pair_distance_A": 1.1040999206418014,
+          "minimum_pair_zero_based": [
+            46,
+            47
+          ],
+          "collision_threshold_A": 0.781,
+          "max_step_from_previous_A": 0.45237170462053533,
+          "max_raw_fractional_step_from_previous": 0.06493242991100001,
+          "periodic_branch_shift_atom_indices_zero_based": [],
+          "max_fixed_displacement_from_initial_A": 1.6477351626298375e-15,
+          "max_fixed_raw_fractional_displacement_from_initial": 1.942890293094024e-16,
+          "reaction_distances": [
+            {
+              "atoms_zero_based": [
+                45,
+                46
+              ],
+              "labels": [
+                "C",
+                "C"
+              ],
+              "distance_A": 2.496532118327866
+            }
+          ]
+        },
+        {
+          "image": "04",
+          "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\04\\CONTCAR",
+          "minimum_pair_distance_A": 1.100673796717274,
+          "minimum_pair_zero_based": [
+            46,
+            47
+          ],
+          "collision_threshold_A": 0.781,
+          "max_step_from_previous_A": 0.38579815756168084,
+          "max_raw_fractional_step_from_previous": 0.051558400441999996,
+          "periodic_branch_shift_atom_indices_zero_based": [],
+          "max_fixed_displacement_from_initial_A": 1.6477351626298375e-15,
+          "max_fixed_raw_fractional_displacement_from_initial": 1.942890293094024e-16,
+          "reaction_distances": [
+            {
+              "atoms_zero_based": [
+                45,
+                46
+              ],
+              "labels": [
+                "C",
+                "C"
+              ],
+              "distance_A": 2.1096169438102597
+            }
+          ]
+        },
+        {
+          "image": "05",
+          "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\05\\CONTCAR",
+          "minimum_pair_distance_A": 1.1028380173228245,
+          "minimum_pair_zero_based": [
+            46,
+            47
+          ],
+          "collision_threshold_A": 0.781,
+          "max_step_from_previous_A": 0.38732760252130966,
+          "max_raw_fractional_step_from_previous": 0.04489406186100009,
+          "periodic_branch_shift_atom_indices_zero_based": [],
+          "max_fixed_displacement_from_initial_A": 1.6477351626298375e-15,
+          "max_fixed_raw_fractional_displacement_from_initial": 1.942890293094024e-16,
+          "reaction_distances": [
+            {
+              "atoms_zero_based": [
+                45,
+                46
+              ],
+              "labels": [
+                "C",
+                "C"
+              ],
+              "distance_A": 1.4812862729640335
+            }
+          ]
+        },
+        {
+          "image": "06",
+          "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\06\\CONTCAR",
+          "minimum_pair_distance_A": 1.1019056654222317,
+          "minimum_pair_zero_based": [
+            46,
+            47
+          ],
+          "collision_threshold_A": 0.781,
+          "max_step_from_previous_A": 0.4609977033780635,
+          "max_raw_fractional_step_from_previous": 0.04637196392999998,
+          "periodic_branch_shift_atom_indices_zero_based": [],
+          "max_fixed_displacement_from_initial_A": 1.6477351626298375e-15,
+          "max_fixed_raw_fractional_displacement_from_initial": 1.942890293094024e-16,
+          "reaction_distances": [
+            {
+              "atoms_zero_based": [
+                45,
+                46
+              ],
+              "labels": [
+                "C",
+                "C"
+              ],
+              "distance_A": 1.4214479917265168
+            }
+          ]
+        },
+        {
+          "image": "07",
+          "source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\07\\POSCAR",
+          "minimum_pair_distance_A": 1.1007427802714218,
+          "minimum_pair_zero_based": [
+            46,
+            47
+          ],
+          "collision_threshold_A": 0.781,
+          "max_step_from_previous_A": 0.3672486078010663,
+          "max_raw_fractional_step_from_previous": 0.05489904840899995,
+          "periodic_branch_shift_atom_indices_zero_based": [],
+          "max_fixed_displacement_from_initial_A": 0.0,
+          "max_fixed_raw_fractional_displacement_from_initial": 0.0,
+          "reaction_distances": [
+            {
+              "atoms_zero_based": [
+                45,
+                46
+              ],
+              "labels": [
+                "C",
+                "C"
+              ],
+              "distance_A": 1.413291367778063
+            }
+          ]
+        }
+      ],
+      "requires_visual_review": true
+    },
+    "analysis": {
+      "schema_version": 1,
+      "document_kind": "neb_output_analysis",
+      "producer": "scripts.neb_agent.analyze_neb_outputs",
+      "analysis_inputs": {
+        "workdir": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path",
+        "thresholds_path": "C:\\Users\\86177\\Desktop\\work\\configs\\neb_agent\\default_thresholds.yaml",
+        "reaction_indices": [
+          45,
+          46,
+          47,
+          48
+        ]
+      },
+      "source_files": [
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\00\\OUTCAR",
+          "sha256": "e3f5ad8b0aa2a9afc6749785e5dc872d64b6de4165169578510c7a0c5d167d78"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\01\\OSZICAR",
+          "sha256": "f5e58519590b89e1105c25ee0f7497961831a67ced64cbaefe5484da5c21a4ce"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\01\\OUTCAR",
+          "sha256": "9052f430e488a34775082c67bbb29ad242bd05e096a6e055718ac7e4e4bdceab"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\02\\OSZICAR",
+          "sha256": "271581f59e374f40565f178a88df7b040f983a0a7e259305a9c18f11b6e93d10"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\02\\OUTCAR",
+          "sha256": "43e68bf8a77f202a8ccb54f95b7830edd7f9ebb77ed752209f8145e371365342"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\03\\OSZICAR",
+          "sha256": "bf2e55fcdee17f38ff1c02ab2a4c419432c8eaa4d0c87faa7e6e5bfbedceb59e"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\03\\OUTCAR",
+          "sha256": "e55ec40a48362b78457da0a95255d0e72211ae082879dfb8adeb07b6523cb44b"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\04\\OSZICAR",
+          "sha256": "965b8fe8b20092e0ce4ea315312e9f4d1287ac5bb4747be297ba23c47b6d88f2"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\04\\OUTCAR",
+          "sha256": "0486dd464ec725b743f3309a7d0005777b496fbf58e13de8e9253ab2986f40e0"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\05\\OSZICAR",
+          "sha256": "d72701db05329f4f094a9373f2bd072ef27ac24bc05a3aa8711121e42f872aae"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\05\\OUTCAR",
+          "sha256": "04b03ded7ec02675ae2e7d0c3128cd7ad869f4b51e21acd97d4d3b3da0fedd7a"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\06\\OSZICAR",
+          "sha256": "ae527c5fde4e761e8961625744a3fe312871768f3e5854b0a81212c57d4a9050"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\06\\OUTCAR",
+          "sha256": "a323667aa6bfc07a62e75a227a4700c28d6aac4014a15aaae7dde9d9bd6822b1"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\07\\OUTCAR",
+          "sha256": "e88d99ab9ba74274fd8af45e4e69b9f59feb90bbe1101f7e794c1c317bb82edc"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\INCAR",
+          "sha256": "ba86d09a76afb78354a95ca078d43d676a97a70679d8100aa91e7fe22e084e5a"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\configs\\neb_agent\\default_thresholds.yaml",
+          "sha256": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c"
+        }
+      ],
+      "status": "ANALYZED",
+      "images": [
+        {
+          "image": "00",
+          "ionic_steps": 295,
+          "final_energy_eV": -385.1346883,
+          "final_neb_force_eVA": null,
+          "final_atomic_force_eVA": 0.018119,
+          "energy_history_last10_eV": [
+            -385.13469897,
+            -385.13467956,
+            -385.13468393,
+            -385.13468393,
+            -385.13470412,
+            -385.13525335,
+            -385.13466573,
+            -385.13469158,
+            -385.1346883,
+            -385.1346883
+          ],
+          "neb_force_history_last10_eVA": [],
+          "atomic_force_history_last10_eVA": [
+            0.071751,
+            0.041175,
+            0.058201,
+            0.05442,
+            0.049942,
+            0.036564,
+            0.065504,
+            0.036774,
+            0.020261,
+            0.018119
+          ],
+          "neb_force_trend": "insufficient_data",
+          "atomic_force_trend": "decreasing",
+          "scf_iterations_last_ionic_step": null,
+          "scf_iterations_last10": [],
+          "reached_required_accuracy": true,
+          "electronically_converged": false,
+          "electronic_final_state": {
+            "last_electronic_iteration": null,
+            "last_delta_e_eV": null,
+            "last_delta_eps_eV": null,
+            "ediff_eV": 1e-05,
+            "nelm": 200,
+            "electronically_converged": false,
+            "electronic_convergence_source": "OSZICAR_DELTA_E",
+            "latest_started_electronic_cycle": null,
+            "latest_completed_electronic_cycle": null,
+            "final_target_step": null,
+            "final_target_complete": false,
+            "final_target_explicit_convergence": false,
+            "incomplete": true,
+            "status": "INCOMPLETE"
+          },
+          "normal_completion": true,
+          "final_total_magnetization_muB": 105.4051742,
+          "reaction_atom_local_magnetization_muB": {},
+          "fatal_keywords": [],
+          "has_output": true,
+          "relative_energy_eV": 0.0
+        },
+        {
+          "image": "01",
+          "ionic_steps": 207,
+          "final_energy_eV": -385.10684485,
+          "final_neb_force_eVA": 0.021895,
+          "final_atomic_force_eVA": 0.010651,
+          "energy_history_last10_eV": [
+            -385.10685398,
+            -385.10684773,
+            -385.10685536,
+            -385.10685536,
+            -385.10683964,
+            -385.10686981,
+            -385.10683748,
+            -385.10685821,
+            -385.10684485,
+            -385.10684485
+          ],
+          "neb_force_history_last10_eVA": [
+            0.023919,
+            0.024496,
+            0.026667,
+            0.029671,
+            0.022889,
+            0.022654,
+            0.02255,
+            0.022351,
+            0.022227,
+            0.021895
+          ],
+          "atomic_force_history_last10_eVA": [
+            0.011127,
+            0.011802,
+            0.016444,
+            0.01945,
+            0.010959,
+            0.01085,
+            0.010848,
+            0.010831,
+            0.010815,
+            0.010651
+          ],
+          "neb_force_trend": "oscillating",
+          "atomic_force_trend": "oscillating",
+          "scf_iterations_last_ionic_step": 5,
+          "scf_iterations_last10": [
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5
+          ],
+          "reached_required_accuracy": true,
+          "electronically_converged": true,
+          "electronic_final_state": {
+            "last_electronic_iteration": 5,
+            "last_delta_e_eV": 4.7197e-06,
+            "last_delta_eps_eV": -1.0401e-07,
+            "ediff_eV": 1e-05,
+            "nelm": 200,
+            "electronically_converged": true,
+            "electronic_convergence_source": "OUTCAR_EDIFF_TERMINATION",
+            "latest_started_electronic_cycle": {
+              "cycle": 207,
+              "ionic_step": 207,
+              "iteration": 5,
+              "delta_e_eV": 4.7197e-06,
+              "delta_eps_eV": -1.0401e-07,
+              "complete": true,
+              "explicit_convergence": false,
+              "malformed": false
+            },
+            "latest_completed_electronic_cycle": {
+              "cycle": 207,
+              "ionic_step": 207,
+              "iteration": 5,
+              "delta_e_eV": 4.7197e-06,
+              "delta_eps_eV": -1.0401e-07,
+              "complete": true,
+              "explicit_convergence": false,
+              "malformed": false
+            },
+            "final_target_step": {
+              "cycle": 207,
+              "ionic_step": 207,
+              "iteration": 5,
+              "delta_e_eV": 4.7197e-06,
+              "delta_eps_eV": -1.0401e-07,
+              "complete": true,
+              "explicit_convergence": false,
+              "malformed": false
+            },
+            "final_target_complete": true,
+            "final_target_explicit_convergence": true,
+            "incomplete": false,
+            "status": "PASS"
+          },
+          "normal_completion": true,
+          "final_total_magnetization_muB": 105.4267301,
+          "reaction_atom_local_magnetization_muB": {},
+          "fatal_keywords": [],
+          "has_output": true,
+          "relative_energy_eV": 0.027843449999977565
+        },
+        {
+          "image": "02",
+          "ionic_steps": 207,
+          "final_energy_eV": -385.01417816,
+          "final_neb_force_eVA": 0.039095,
+          "final_atomic_force_eVA": 0.022671,
+          "energy_history_last10_eV": [
+            -385.01421935,
+            -385.0142087,
+            -385.01422565,
+            -385.01422565,
+            -385.01416697,
+            -385.0141753,
+            -385.01419375,
+            -385.01415798,
+            -385.01417816,
+            -385.01417816
+          ],
+          "neb_force_history_last10_eVA": [
+            0.036778,
+            0.042412,
+            0.043946,
+            0.0355,
+            0.034973,
+            0.034831,
+            0.034745,
+            0.034726,
+            0.035557,
+            0.039095
+          ],
+          "atomic_force_history_last10_eVA": [
+            0.02305,
+            0.025352,
+            0.028342,
+            0.02309,
+            0.023031,
+            0.022947,
+            0.022863,
+            0.022778,
+            0.022673,
+            0.022671
+          ],
+          "neb_force_trend": "oscillating",
+          "atomic_force_trend": "oscillating",
+          "scf_iterations_last_ionic_step": 5,
+          "scf_iterations_last10": [
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5
+          ],
+          "reached_required_accuracy": true,
+          "electronically_converged": true,
+          "electronic_final_state": {
+            "last_electronic_iteration": 5,
+            "last_delta_e_eV": 9.3333e-06,
+            "last_delta_eps_eV": -3.2835e-07,
+            "ediff_eV": 1e-05,
+            "nelm": 200,
+            "electronically_converged": true,
+            "electronic_convergence_source": "OUTCAR_EDIFF_TERMINATION",
+            "latest_started_electronic_cycle": {
+              "cycle": 207,
+              "ionic_step": 207,
+              "iteration": 5,
+              "delta_e_eV": 9.3333e-06,
+              "delta_eps_eV": -3.2835e-07,
+              "complete": true,
+              "explicit_convergence": false,
+              "malformed": false
+            },
+            "latest_completed_electronic_cycle": {
+              "cycle": 207,
+              "ionic_step": 207,
+              "iteration": 5,
+              "delta_e_eV": 9.3333e-06,
+              "delta_eps_eV": -3.2835e-07,
+              "complete": true,
+              "explicit_convergence": false,
+              "malformed": false
+            },
+            "final_target_step": {
+              "cycle": 207,
+              "ionic_step": 207,
+              "iteration": 5,
+              "delta_e_eV": 9.3333e-06,
+              "delta_eps_eV": -3.2835e-07,
+              "complete": true,
+              "explicit_convergence": false,
+              "malformed": false
+            },
+            "final_target_complete": true,
+            "final_target_explicit_convergence": true,
+            "incomplete": false,
+            "status": "PASS"
+          },
+          "normal_completion": true,
+          "final_total_magnetization_muB": 105.4029986,
+          "reaction_atom_local_magnetization_muB": {},
+          "fatal_keywords": [],
+          "has_output": true,
+          "relative_energy_eV": 0.12051014000002169
+        },
+        {
+          "image": "03",
+          "ionic_steps": 207,
+          "final_energy_eV": -384.88191534,
+          "final_neb_force_eVA": 0.059172,
+          "final_atomic_force_eVA": 0.035782,
+          "energy_history_last10_eV": [
+            -384.88193019,
+            -384.88192501,
+            -384.88192501,
+            -384.88190245,
+            -384.88193973,
+            -384.88190266,
+            -384.88198365,
+            -384.88191679,
+            -384.88191534,
+            -384.88191534
+          ],
+          "neb_force_history_last10_eVA": [
+            0.060538,
+            0.064829,
+            0.086349,
+            0.060719,
+            0.059297,
+            0.059892,
+            0.060281,
+            0.060114,
+            0.059454,
+            0.059172
+          ],
+          "atomic_force_history_last10_eVA": [
+            0.036593,
+            0.036325,
+            0.057548,
+            0.03632,
+            0.036562,
+            0.036805,
+            0.036963,
+            0.036722,
+            0.03622,
+            0.035782
+          ],
+          "neb_force_trend": "oscillating",
+          "atomic_force_trend": "oscillating",
+          "scf_iterations_last_ionic_step": 6,
+          "scf_iterations_last10": [
+            6,
+            6,
+            6,
+            5,
+            5,
+            5,
+            5,
+            6,
+            6,
+            6
+          ],
+          "reached_required_accuracy": true,
+          "electronically_converged": true,
+          "electronic_final_state": {
+            "last_electronic_iteration": 6,
+            "last_delta_e_eV": -1.2582e-06,
+            "last_delta_eps_eV": -1.2925e-07,
+            "ediff_eV": 1e-05,
+            "nelm": 200,
+            "electronically_converged": true,
+            "electronic_convergence_source": "OUTCAR_EDIFF_TERMINATION",
+            "latest_started_electronic_cycle": {
+              "cycle": 207,
+              "ionic_step": 207,
+              "iteration": 6,
+              "delta_e_eV": -1.2582e-06,
+              "delta_eps_eV": -1.2925e-07,
+              "complete": true,
+              "explicit_convergence": false,
+              "malformed": false
+            },
+            "latest_completed_electronic_cycle": {
+              "cycle": 207,
+              "ionic_step": 207,
+              "iteration": 6,
+              "delta_e_eV": -1.2582e-06,
+              "delta_eps_eV": -1.2925e-07,
+              "complete": true,
+              "explicit_convergence": false,
+              "malformed": false
+            },
+            "final_target_step": {
+              "cycle": 207,
+              "ionic_step": 207,
+              "iteration": 6,
+              "delta_e_eV": -1.2582e-06,
+              "delta_eps_eV": -1.2925e-07,
+              "complete": true,
+              "explicit_convergence": false,
+              "malformed": false
+            },
+            "final_target_complete": true,
+            "final_target_explicit_convergence": true,
+            "incomplete": false,
+            "status": "PASS"
+          },
+          "normal_completion": true,
+          "final_total_magnetization_muB": 105.3256413,
+          "reaction_atom_local_magnetization_muB": {},
+          "fatal_keywords": [],
+          "has_output": true,
+          "relative_energy_eV": 0.2527729600000157
+        },
+        {
+          "image": "04",
+          "ionic_steps": 207,
+          "final_energy_eV": -384.44236816,
+          "final_neb_force_eVA": 0.086524,
+          "final_atomic_force_eVA": 0.048347,
+          "energy_history_last10_eV": [
+            -384.44220241,
+            -384.44220134,
+            -384.44221419,
+            -384.44221419,
+            -384.44235005,
+            -384.44238427,
+            -384.44233792,
+            -384.4423732,
+            -384.44236816,
+            -384.44236816
+          ],
+          "neb_force_history_last10_eVA": [
+            0.09795,
+            0.098311,
+            0.095759,
+            0.091887,
+            0.089591,
+            0.088675,
+            0.116939,
+            0.105738,
+            0.090305,
+            0.086524
+          ],
+          "atomic_force_history_last10_eVA": [
+            0.05642,
+            0.05575,
+            0.055072,
+            0.052961,
+            0.05044,
+            0.055253,
+            0.075142,
+            0.072348,
+            0.05696,
+            0.048347
+          ],
+          "neb_force_trend": "oscillating",
+          "atomic_force_trend": "oscillating",
+          "scf_iterations_last_ionic_step": 5,
+          "scf_iterations_last10": [
+            5,
+            6,
+            6,
+            5,
+            6,
+            6,
+            6,
+            5,
+            5,
+            5
+          ],
+          "reached_required_accuracy": true,
+          "electronically_converged": true,
+          "electronic_final_state": {
+            "last_electronic_iteration": 5,
+            "last_delta_e_eV": 1.6429e-06,
+            "last_delta_eps_eV": -1.6183e-07,
+            "ediff_eV": 1e-05,
+            "nelm": 200,
+            "electronically_converged": true,
+            "electronic_convergence_source": "OUTCAR_EDIFF_TERMINATION",
+            "latest_started_electronic_cycle": {
+              "cycle": 207,
+              "ionic_step": 207,
+              "iteration": 5,
+              "delta_e_eV": 1.6429e-06,
+              "delta_eps_eV": -1.6183e-07,
+              "complete": true,
+              "explicit_convergence": false,
+              "malformed": false
+            },
+            "latest_completed_electronic_cycle": {
+              "cycle": 207,
+              "ionic_step": 207,
+              "iteration": 5,
+              "delta_e_eV": 1.6429e-06,
+              "delta_eps_eV": -1.6183e-07,
+              "complete": true,
+              "explicit_convergence": false,
+              "malformed": false
+            },
+            "final_target_step": {
+              "cycle": 207,
+              "ionic_step": 207,
+              "iteration": 5,
+              "delta_e_eV": 1.6429e-06,
+              "delta_eps_eV": -1.6183e-07,
+              "complete": true,
+              "explicit_convergence": false,
+              "malformed": false
+            },
+            "final_target_complete": true,
+            "final_target_explicit_convergence": true,
+            "incomplete": false,
+            "status": "PASS"
+          },
+          "normal_completion": true,
+          "final_total_magnetization_muB": 105.5142081,
+          "reaction_atom_local_magnetization_muB": {},
+          "fatal_keywords": [],
+          "has_output": true,
+          "relative_energy_eV": 0.6923201399999925
+        },
+        {
+          "image": "05",
+          "ionic_steps": 207,
+          "final_energy_eV": -384.19874421,
+          "final_neb_force_eVA": 0.062142,
+          "final_atomic_force_eVA": 0.037915,
+          "energy_history_last10_eV": [
+            -384.19874751,
+            -384.19876395,
+            -384.19875402,
+            -384.19875402,
+            -384.19871362,
+            -384.19879107,
+            -384.19873919,
+            -384.19876225,
+            -384.19874421,
+            -384.19874421
+          ],
+          "neb_force_history_last10_eVA": [
+            0.069435,
+            0.082915,
+            0.061961,
+            0.061261,
+            0.061976,
+            0.06268,
+            0.06279,
+            0.062177,
+            0.062794,
+            0.062142
+          ],
+          "atomic_force_history_last10_eVA": [
+            0.041956,
+            0.054958,
+            0.036532,
+            0.036531,
+            0.037081,
+            0.03784,
+            0.037796,
+            0.03741,
+            0.037564,
+            0.037915
+          ],
+          "neb_force_trend": "oscillating",
+          "atomic_force_trend": "oscillating",
+          "scf_iterations_last_ionic_step": 5,
+          "scf_iterations_last10": [
+            5,
+            6,
+            5,
+            5,
+            5,
+            6,
+            6,
+            5,
+            6,
+            5
+          ],
+          "reached_required_accuracy": true,
+          "electronically_converged": true,
+          "electronic_final_state": {
+            "last_electronic_iteration": 5,
+            "last_delta_e_eV": 7.328e-06,
+            "last_delta_eps_eV": -7.7703e-07,
+            "ediff_eV": 1e-05,
+            "nelm": 200,
+            "electronically_converged": true,
+            "electronic_convergence_source": "OUTCAR_EDIFF_TERMINATION",
+            "latest_started_electronic_cycle": {
+              "cycle": 207,
+              "ionic_step": 207,
+              "iteration": 5,
+              "delta_e_eV": 7.328e-06,
+              "delta_eps_eV": -7.7703e-07,
+              "complete": true,
+              "explicit_convergence": false,
+              "malformed": false
+            },
+            "latest_completed_electronic_cycle": {
+              "cycle": 207,
+              "ionic_step": 207,
+              "iteration": 5,
+              "delta_e_eV": 7.328e-06,
+              "delta_eps_eV": -7.7703e-07,
+              "complete": true,
+              "explicit_convergence": false,
+              "malformed": false
+            },
+            "final_target_step": {
+              "cycle": 207,
+              "ionic_step": 207,
+              "iteration": 5,
+              "delta_e_eV": 7.328e-06,
+              "delta_eps_eV": -7.7703e-07,
+              "complete": true,
+              "explicit_convergence": false,
+              "malformed": false
+            },
+            "final_target_complete": true,
+            "final_target_explicit_convergence": true,
+            "incomplete": false,
+            "status": "PASS"
+          },
+          "normal_completion": true,
+          "final_total_magnetization_muB": 105.7961172,
+          "reaction_atom_local_magnetization_muB": {},
+          "fatal_keywords": [],
+          "has_output": true,
+          "relative_energy_eV": 0.9359440900000209
+        },
+        {
+          "image": "06",
+          "ionic_steps": 207,
+          "final_energy_eV": -384.39990014,
+          "final_neb_force_eVA": 0.033763,
+          "final_atomic_force_eVA": 0.018995,
+          "energy_history_last10_eV": [
+            -384.39996563,
+            -384.3999397,
+            -384.39995348,
+            -384.39995348,
+            -384.3998939,
+            -384.39997218,
+            -384.39988799,
+            -384.39992735,
+            -384.39990014,
+            -384.39990014
+          ],
+          "neb_force_history_last10_eVA": [
+            0.034877,
+            0.036308,
+            0.043903,
+            0.037435,
+            0.033345,
+            0.033118,
+            0.033305,
+            0.033348,
+            0.033433,
+            0.033763
+          ],
+          "atomic_force_history_last10_eVA": [
+            0.019682,
+            0.019495,
+            0.028029,
+            0.022304,
+            0.017299,
+            0.017455,
+            0.017907,
+            0.018113,
+            0.018454,
+            0.018995
+          ],
+          "neb_force_trend": "oscillating",
+          "atomic_force_trend": "oscillating",
+          "scf_iterations_last_ionic_step": 5,
+          "scf_iterations_last10": [
+            6,
+            5,
+            6,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5
+          ],
+          "reached_required_accuracy": true,
+          "electronically_converged": true,
+          "electronic_final_state": {
+            "last_electronic_iteration": 5,
+            "last_delta_e_eV": 7.7581e-06,
+            "last_delta_eps_eV": -3.6919e-07,
+            "ediff_eV": 1e-05,
+            "nelm": 200,
+            "electronically_converged": true,
+            "electronic_convergence_source": "OUTCAR_EDIFF_TERMINATION",
+            "latest_started_electronic_cycle": {
+              "cycle": 207,
+              "ionic_step": 207,
+              "iteration": 5,
+              "delta_e_eV": 7.7581e-06,
+              "delta_eps_eV": -3.6919e-07,
+              "complete": true,
+              "explicit_convergence": false,
+              "malformed": false
+            },
+            "latest_completed_electronic_cycle": {
+              "cycle": 207,
+              "ionic_step": 207,
+              "iteration": 5,
+              "delta_e_eV": 7.7581e-06,
+              "delta_eps_eV": -3.6919e-07,
+              "complete": true,
+              "explicit_convergence": false,
+              "malformed": false
+            },
+            "final_target_step": {
+              "cycle": 207,
+              "ionic_step": 207,
+              "iteration": 5,
+              "delta_e_eV": 7.7581e-06,
+              "delta_eps_eV": -3.6919e-07,
+              "complete": true,
+              "explicit_convergence": false,
+              "malformed": false
+            },
+            "final_target_complete": true,
+            "final_target_explicit_convergence": true,
+            "incomplete": false,
+            "status": "PASS"
+          },
+          "normal_completion": true,
+          "final_total_magnetization_muB": 105.9876829,
+          "reaction_atom_local_magnetization_muB": {},
+          "fatal_keywords": [],
+          "has_output": true,
+          "relative_energy_eV": 0.7347881599999937
+        },
+        {
+          "image": "07",
+          "ionic_steps": 131,
+          "final_energy_eV": -384.474899,
+          "final_neb_force_eVA": null,
+          "final_atomic_force_eVA": 0.011573,
+          "energy_history_last10_eV": [
+            -384.47485733,
+            -384.47483779,
+            -384.47483779,
+            -384.47474941,
+            -384.47493948,
+            -384.47549351,
+            -384.47489718,
+            -384.47487753,
+            -384.474899,
+            -384.474899
+          ],
+          "neb_force_history_last10_eVA": [],
+          "atomic_force_history_last10_eVA": [
+            0.062504,
+            0.03804,
+            0.084882,
+            0.068227,
+            0.045916,
+            0.054131,
+            0.021267,
+            0.033648,
+            0.026761,
+            0.011573
+          ],
+          "neb_force_trend": "insufficient_data",
+          "atomic_force_trend": "decreasing",
+          "scf_iterations_last_ionic_step": null,
+          "scf_iterations_last10": [],
+          "reached_required_accuracy": true,
+          "electronically_converged": false,
+          "electronic_final_state": {
+            "last_electronic_iteration": null,
+            "last_delta_e_eV": null,
+            "last_delta_eps_eV": null,
+            "ediff_eV": 1e-05,
+            "nelm": 200,
+            "electronically_converged": false,
+            "electronic_convergence_source": "OSZICAR_DELTA_E",
+            "latest_started_electronic_cycle": null,
+            "latest_completed_electronic_cycle": null,
+            "final_target_step": null,
+            "final_target_complete": false,
+            "final_target_explicit_convergence": false,
+            "incomplete": true,
+            "status": "INCOMPLETE"
+          },
+          "normal_completion": true,
+          "final_total_magnetization_muB": 105.8995257,
+          "reaction_atom_local_magnetization_muB": {},
+          "fatal_keywords": [],
+          "has_output": true,
+          "relative_energy_eV": 0.6597892999999999
+        }
+      ],
+      "complete_energy_profile": true,
+      "maximum_image": "05",
+      "internal_maximum": true,
+      "internal_minimum_warning": false,
+      "internal_minimum_images": [],
+      "monotonic_energy_profile": false,
+      "fatal_keywords": [],
+      "configured_nelm": 200,
+      "configured_nsw": 300,
+      "configured_images": 6,
+      "configured_ediffg_eVA": -0.05,
+      "parent_neb_method": "ordinary_neb",
+      "image_sequence_complete": true,
+      "scf_exhausted_images": [],
+      "scf_persistent_failure_images": [],
+      "scf_warning": false,
+      "scf_failure": false,
+      "force_warning_policy": {
+        "threshold_eVA": 1.5,
+        "startup_window_ionic_steps": 5,
+        "persistent_failure_minimum_ionic_steps": 10,
+        "requires_non_decreasing_trend": true,
+        "early_high_force_is_failure": false,
+        "warning_is_hard_failure": false,
+        "high_force_with_independent_geometry_periodic_or_magnetic_anomaly_is_failure": true
+      },
+      "high_force_observations": [],
+      "high_force_warnings": [],
+      "persistent_high_force_failure_images": [],
+      "nsw_stopped_without_convergence_images": [],
+      "technically_converged": false,
+      "geometry_validated": true,
+      "path_reviewed": true,
+      "scientifically_valid": false,
+      "magnetic_continuity": {
+        "rule": "MAGNETIC_CONTINUITY_RULE",
+        "severity": "SOFT_WARNING",
+        "warning_threshold_muB": 2.0,
+        "warnings": [],
+        "action": "CHECK_MAGNETIC_STATE_CONTINUITY",
+        "stops_current_job": false,
+        "blocks_ordinary_no_climb_neb": false,
+        "proves_magnetic_state_switch": false
+      },
+      "barrierless_candidate": false,
+      "energy_profile_status": "interim_neb_only_not_reportable_barrier",
+      "contract_sha256": "06b6b3ee62b6a93cff4631fbcf443bebd8cb1b1144f803186cf48eacf798939b",
+      "atom_map_sha256": "f3fe5452e4794fbaedca86991a7e936e55a730530a793bc1df0e899814cdabe5",
+      "compatibility_sha256": "52b8afbf5a2902cbe115001d2554440b59421d61e1819f5921ddc373da5839de",
+      "path_binding": {
+        "valid": true,
+        "errors": [],
+        "report": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\path_generation_report.json",
+        "report_sha256": "8d0b8353017058d32bc7a149a25251fd9d8fdb3a423d73ed33ca5674276fffbb",
+        "contract_sha256": "06b6b3ee62b6a93cff4631fbcf443bebd8cb1b1144f803186cf48eacf798939b",
+        "atom_map_sha256": "f3fe5452e4794fbaedca86991a7e936e55a730530a793bc1df0e899814cdabe5",
+        "compatibility_sha256": "52b8afbf5a2902cbe115001d2554440b59421d61e1819f5921ddc373da5839de",
+        "fingerprint_id": "e4caf9c1af5f80c94f04ee01112ce289b82c6d0239a5443ba622d90106d99616"
+      },
+      "path_binding_valid": true,
+      "transition_state_validated": false,
+      "path_review": {
+        "status": "accepted",
+        "reviewer": "Codex work-side chemical and visual review explicitly requested by user",
+        "reviewed_at": "2026-11-12T08:17:41.315059+00:00",
+        "dist_file": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\dist_final.json",
+        "dist_sha256": "9ffb3da9181454b8312f0c2315512b8bd6c7047c6a7983ce14ea66e6f21f18b9",
+        "nebmovie_file": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\movie",
+        "nebmovie_sha256": "c06f7100e1abaa5059b9481b9c1e20b3c8301b213227c66da2f7196ed6be3324",
+        "path_generation_sha256": "8d0b8353017058d32bc7a149a25251fd9d8fdb3a423d73ed33ca5674276fffbb",
+        "review_scope": "Visual chemistry,identity,periodic equivalence and geometric continuity;resolution evidence remains a separate gate",
+        "notes": "04-05-06 plot actually viewed;CH and CO retained,CC forms;no collision/fixed-layer drift/chemical switching. Persistent04-05 CC sampling gap retained,not waived.",
+        "no_execution_authorization": true
+      },
+      "path_review_source": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\path_review.json"
+    },
+    "thresholds": {
+      "min_distance_factor": 0.55,
+      "absolute_min_distance_A": 1.0,
+      "image_jump_warning_A": 1.0,
+      "fixed_position_tolerance_A": 0.0001,
+      "internal_minimum_warning_eV": 0.2,
+      "barrierless_force_threshold_eVA": 0.2,
+      "high_force_warning_threshold_eVA": 1.5,
+      "min_ionic_steps_for_force_warning": 5,
+      "persistent_high_force_failure_min_ionic_steps": 10,
+      "scf_consecutive_exhaustion_hard_min": 3,
+      "surface_penetration_warning_A": 0.2,
+      "desorption_height_change_warning_A": 2.0,
+      "reaction_coordinate_backtrack_warning_A": 0.25,
+      "magnetic_continuity_warning_threshold_muB": 2.0
+    },
+    "path_quality": {
+      "schema_version": 2,
+      "PATH_QUALITY_STATUS": "UNDERRESOLVED_REACTION_COORDINATE",
+      "REASON_CODES": [
+        "B_large_reaction_coordinate_gap",
+        "C_gap_persistent_or_increasing"
+      ],
+      "CRITICAL_IMAGES": [
+        "04",
+        "05"
+      ],
+      "EVIDENCE": {
+        "reaction_coordinate_A": {
+          "00": 2.7871656066811097,
+          "01": 2.7678207248975757,
+          "02": 2.645563013975445,
+          "03": 2.4965321859968914,
+          "04": 2.1096169072653073,
+          "05": 1.481286327367043,
+          "06": 1.4214480127835631,
+          "07": 1.413291367778063
+        },
+        "critical_gap_history_A": [
+          0.627654333329015,
+          0.6282586535494259,
+          0.6282100564021513,
+          0.6283305798982644,
+          0.6283305798982644
+        ],
+        "critical_pair_displacement": {
+          "max_displacement_A": 0.38732760252130966,
+          "rms_displacement_A": 0.08230141577246182,
+          "largest_moves": [
+            {
+              "atom_index_zero_based": 46,
+              "element": "C",
+              "displacement_A": 0.38732760252130966
+            },
+            {
+              "atom_index_zero_based": 45,
+              "element": "C",
+              "displacement_A": 0.34299016367718843
+            },
+            {
+              "atom_index_zero_based": 41,
+              "element": "Fe",
+              "displacement_A": 0.13780067044994282
+            }
+          ]
+        },
+        "electronic_failure_images": [],
+        "conditions": {
+          "A_abnormal_adjacent_displacement": false,
+          "B_large_reaction_coordinate_gap": true,
+          "C_gap_persistent_or_increasing": true,
+          "E_important_interval_unsampled": false,
+          "F_sharp_energy_corner": false,
+          "G_neighbouring_images_in_separate_basins": false,
+          "H_force_drop_from_product_basin_motion": false,
+          "I_unstable_highest_image": false,
+          "J_image_ordering_or_collapse": false
+        },
+        "condition_families": {
+          "discontinuity": true,
+          "persistence": true,
+          "basin_separation": false,
+          "energy_shape": false,
+          "ordering": false
+        },
+        "independent_evidence_families": [
+          "discontinuity",
+          "persistence"
+        ],
+        "monitor_warnings": []
+      },
+      "CHEMICAL_INTERPRETATION": "reactant-side image remains bonded while its neighbour moves deeper into the product basin",
+      "FILES_SAVED": [],
+      "NEXT_REQUIRED_EVIDENCE_CHECK": "REVIEW_DENSIFIED_FULL_IS_FS_PATH_REQUIREMENT",
+      "execution_authority": "scripts.ts_strategy_engine.execution_gate.decide_execution",
+      "COMPUTE_COST_ASSESSMENT": "rebuilding is cheaper and more reliable than converging an underresolved path",
+      "document_kind": "neb_path_quality_evidence",
+      "producer": "scripts.neb_agent.path_quality_control",
+      "source_files": [
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\00\\OUTCAR",
+          "sha256": "e3f5ad8b0aa2a9afc6749785e5dc872d64b6de4165169578510c7a0c5d167d78"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\00\\POSCAR",
+          "sha256": "31373d976dcdd66c4888c4bb55305400debd7df16131bd8d1112185760a9c350"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\01\\CONTCAR",
+          "sha256": "e096942d3ce1f33dd7e3129a44fcd3aba09e98038147efd4d409d445a37162e0"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\01\\OSZICAR",
+          "sha256": "f5e58519590b89e1105c25ee0f7497961831a67ced64cbaefe5484da5c21a4ce"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\01\\OUTCAR",
+          "sha256": "9052f430e488a34775082c67bbb29ad242bd05e096a6e055718ac7e4e4bdceab"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\01\\POSCAR",
+          "sha256": "e639f9f01e8d437f006d4dbc9a0fb0702f06b61b071fcdf17f26660380571de0"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\01\\XDATCAR",
+          "sha256": "4b9478c730f0f8a0e48666da242312ed41943dfd58631df98dd9e77bf19dbfc7"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\02\\CONTCAR",
+          "sha256": "869a883e5f465e97d2143279970a7e4c5cee4a75dee5bc055174955cac6478aa"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\02\\OSZICAR",
+          "sha256": "271581f59e374f40565f178a88df7b040f983a0a7e259305a9c18f11b6e93d10"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\02\\OUTCAR",
+          "sha256": "43e68bf8a77f202a8ccb54f95b7830edd7f9ebb77ed752209f8145e371365342"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\02\\POSCAR",
+          "sha256": "5c7fd031dbef7865f2ea4ab92f0b0c218e1e27518cac18435bf8c4a65882264c"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\02\\XDATCAR",
+          "sha256": "2047eb9902c46e0d7b670deca6d4aeba6d3c573502cb3b657c5938dd49a51d28"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\03\\CONTCAR",
+          "sha256": "4cbe34e58e0c8f38024e24c633dafced211ba54a2930d39589a3df4401c4038b"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\03\\OSZICAR",
+          "sha256": "bf2e55fcdee17f38ff1c02ab2a4c419432c8eaa4d0c87faa7e6e5bfbedceb59e"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\03\\OUTCAR",
+          "sha256": "e55ec40a48362b78457da0a95255d0e72211ae082879dfb8adeb07b6523cb44b"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\03\\POSCAR",
+          "sha256": "3060653375ff94f0c836f69bdca0599f62faae6eb23bd70fc1677578b2e82b9a"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\03\\XDATCAR",
+          "sha256": "302f6929a34d01520fdba14247a1b605cab128b6b8fbaf30e457e619e17e888c"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\04\\CONTCAR",
+          "sha256": "04e08fedd274e03b6251baa6cb9de74aa9824a669e51825ffa5bbb1c62431ba2"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\04\\OSZICAR",
+          "sha256": "965b8fe8b20092e0ce4ea315312e9f4d1287ac5bb4747be297ba23c47b6d88f2"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\04\\OUTCAR",
+          "sha256": "0486dd464ec725b743f3309a7d0005777b496fbf58e13de8e9253ab2986f40e0"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\04\\POSCAR",
+          "sha256": "29484b56c8e24f96bf37bd05ba445635239576caed6453cd3fa7c93ad965c9e1"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\04\\XDATCAR",
+          "sha256": "f3a880c30da5be9200e5d5e8a11bd59d2e16e8f28cf9a5c44c5996d99c54a6f1"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\05\\CONTCAR",
+          "sha256": "2536a53d2178fe94c6013a52a4bef4d6c20a19317b8b81231729f92e5d086e88"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\05\\OSZICAR",
+          "sha256": "d72701db05329f4f094a9373f2bd072ef27ac24bc05a3aa8711121e42f872aae"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\05\\OUTCAR",
+          "sha256": "04b03ded7ec02675ae2e7d0c3128cd7ad869f4b51e21acd97d4d3b3da0fedd7a"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\05\\POSCAR",
+          "sha256": "842bee183fef21aa99ffcb61f8179bc21df1d4206d6a99d2416af81d76f2c04d"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\05\\XDATCAR",
+          "sha256": "65601dd361bf584d1593362d7360803b34b03c2b6fe516a2cb52be09b6d1be9b"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\06\\CONTCAR",
+          "sha256": "790049e46c5e82057352e65b2bf2690bf14d5943785814411d555d3cb39deaed"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\06\\OSZICAR",
+          "sha256": "ae527c5fde4e761e8961625744a3fe312871768f3e5854b0a81212c57d4a9050"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\06\\OUTCAR",
+          "sha256": "a323667aa6bfc07a62e75a227a4700c28d6aac4014a15aaae7dde9d9bd6822b1"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\06\\POSCAR",
+          "sha256": "2db7d8760ccaac5af0c4dc89a21c0b0b5be22c3e642c4a376baa8d9ecb040f7d"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\06\\XDATCAR",
+          "sha256": "a44dc7f41702ec30dc3e499021dd4fd2d8122667cd5cdb86a37b2baa24da33c3"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\07\\OUTCAR",
+          "sha256": "e88d99ab9ba74274fd8af45e4e69b9f59feb90bbe1101f7e794c1c317bb82edc"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\07\\POSCAR",
+          "sha256": "78baead215e4362c586a3c2d0e9596645441aa44f67be6b57cb71841c24a3d0c"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\configs\\neb_agent\\default_thresholds.yaml",
+          "sha256": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\configs\\neb_path_quality_control_v2.yaml",
+          "sha256": "db2c5d32e3b5f732f7b733df8fbcb62360177a0164de0cb7e1a51848475f0b92"
+        }
+      ]
+    },
+    "preflight": {
+      "schema_version": 1,
+      "kind": "dimer",
+      "passed": true,
+      "errors": [],
+      "cores": 32,
+      "images": null,
+      "files": {
+        "INCAR": "09a9077e90f96a2fe5c5516d2823ebb20e47f9ba1760a950d6ec7e7ec81a67ae",
+        "KPOINTS": "0d7e291117433dac5393f29520b635e92f06e6c8e91aa941137c86b1d39162ae",
+        "POTCAR.spec": "9528f5cac58de3cc83a576c828915ce9c2ab72d4ec3be5e409f7476042f7e1bb",
+        "script.lsf": "cd33ce86388d6f34a05348efc4e64508b7d0e7d5d24a3ce5226cc4f9a6a1d9a0",
+        "POSCAR": "2536a53d2178fe94c6013a52a4bef4d6c20a19317b8b81231729f92e5d086e88",
+        "PREVIOUS_POSCAR": "04e08fedd274e03b6251baa6cb9de74aa9824a669e51825ffa5bbb1c62431ba2",
+        "NEXT_POSCAR": "790049e46c5e82057352e65b2bf2690bf14d5943785814411d555d3cb39deaed",
+        "MODECAR": "80e803c404bf2030524b614a8605a1e5560529e6a443531463e117824f8d213d",
+        "dimer_handoff.json": "b9ad863aa9b43cb6fad460af7a2e7cc1858a85b450fdc3fde3e9b8a4687be5cd",
+        "mode_review.json": "389b8416081fe15883c44f3c5c98f854376639c2f0f6e9cd68305d8b1618cca1"
+      },
+      "bundle_sha256": "bb145b092dbc859998b246ab700d56a8f14b4c66ee6bf44c466d35280a539726",
+      "strategy_retry_check": {
+        "input_key": "7ae59b734ef7b57b54dd637aad929a9c7e9e87b71d0fc1b36c16a198889daa4c",
+        "blocked_attempts": [],
+        "review_attempts": [],
+        "status": "NO_KNOWN_FAILURE"
+      },
+      "dimer_hard_gate_passed": true,
+      "dimer_hard_gate": {
+        "hard_gate_passed": true,
+        "hard_gate_errors": [],
+        "hard_checks": {
+          "candidate_triad_hard_gate_bound": true,
+          "modecar_atom_count_and_order_bound": true,
+          "triad_structure_contract_preserved": true,
+          "fixed_mode_components_zero": true,
+          "modecar_finite": true,
+          "modecar_nonzero": true,
+          "modecar_normalized": true,
+          "mode_main_components_match_reaction_center": true,
+          "chemical_continuity_and_mode_review_accepted": true
+        },
+        "mode_norm": 0.9999999999996299,
+        "reaction_atom_mode_fraction": 0.9392061832667101,
+        "compatibility_errors": [],
+        "recommended_checks": {
+          "parent_neb_technically_converged": false,
+          "strict_local_energy_maximum": true,
+          "triad_forces_clearly_reduced": false,
+          "coarse_neb_other_images_stable_peak_stalled": false,
+          "single_target_process_without_stable_intermediate": true,
+          "candidate_between_is_and_fs": null,
+          "mode_provenance_hash_bound": true
+        }
+      },
+      "dimer_recommended_gate": {
+        "parent_neb_technically_converged": false,
+        "strict_local_energy_maximum": true,
+        "triad_forces_clearly_reduced": false,
+        "coarse_neb_other_images_stable_peak_stalled": false,
+        "single_target_process_without_stable_intermediate": true,
+        "candidate_between_is_and_fs": null,
+        "mode_provenance_hash_bound": true
+      }
+    },
+    "validation": {
+      "scientific_review_bound": true,
+      "workdir": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\ts_acceptance_20261115_v1\\vfa",
+      "review_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\ts_acceptance_20261115_v1\\vfa\\vfa_review.json",
+      "reaction_contract": {
+        "version": 1,
+        "reaction_id": "fe110_ch_co_to_chco_20261109",
+        "reaction_family": "co_insertion",
+        "reactant_id": "ch_star_plus_co_star/fe110_fe45",
+        "product_id": "ch_c_o_star/fe110_fe45",
+        "index_base": 0,
+        "atom_map": [
+          {
+            "is": 0,
+            "fs": 0
+          },
+          {
+            "is": 1,
+            "fs": 1
+          },
+          {
+            "is": 2,
+            "fs": 2
+          },
+          {
+            "is": 3,
+            "fs": 3
+          },
+          {
+            "is": 4,
+            "fs": 4
+          },
+          {
+            "is": 5,
+            "fs": 5
+          },
+          {
+            "is": 6,
+            "fs": 6
+          },
+          {
+            "is": 7,
+            "fs": 7
+          },
+          {
+            "is": 8,
+            "fs": 8
+          },
+          {
+            "is": 9,
+            "fs": 9
+          },
+          {
+            "is": 10,
+            "fs": 10
+          },
+          {
+            "is": 11,
+            "fs": 11
+          },
+          {
+            "is": 12,
+            "fs": 12
+          },
+          {
+            "is": 13,
+            "fs": 13
+          },
+          {
+            "is": 14,
+            "fs": 14
+          },
+          {
+            "is": 15,
+            "fs": 15
+          },
+          {
+            "is": 16,
+            "fs": 16
+          },
+          {
+            "is": 17,
+            "fs": 17
+          },
+          {
+            "is": 18,
+            "fs": 18
+          },
+          {
+            "is": 19,
+            "fs": 19
+          },
+          {
+            "is": 20,
+            "fs": 20
+          },
+          {
+            "is": 21,
+            "fs": 21
+          },
+          {
+            "is": 22,
+            "fs": 22
+          },
+          {
+            "is": 23,
+            "fs": 23
+          },
+          {
+            "is": 24,
+            "fs": 24
+          },
+          {
+            "is": 25,
+            "fs": 25
+          },
+          {
+            "is": 26,
+            "fs": 26
+          },
+          {
+            "is": 27,
+            "fs": 27
+          },
+          {
+            "is": 28,
+            "fs": 28
+          },
+          {
+            "is": 29,
+            "fs": 29
+          },
+          {
+            "is": 30,
+            "fs": 30
+          },
+          {
+            "is": 31,
+            "fs": 31
+          },
+          {
+            "is": 32,
+            "fs": 32
+          },
+          {
+            "is": 33,
+            "fs": 33
+          },
+          {
+            "is": 34,
+            "fs": 34
+          },
+          {
+            "is": 35,
+            "fs": 35
+          },
+          {
+            "is": 36,
+            "fs": 36
+          },
+          {
+            "is": 37,
+            "fs": 37
+          },
+          {
+            "is": 38,
+            "fs": 38
+          },
+          {
+            "is": 39,
+            "fs": 39
+          },
+          {
+            "is": 40,
+            "fs": 40
+          },
+          {
+            "is": 41,
+            "fs": 41
+          },
+          {
+            "is": 42,
+            "fs": 42
+          },
+          {
+            "is": 43,
+            "fs": 43
+          },
+          {
+            "is": 44,
+            "fs": 44
+          },
+          {
+            "is": 45,
+            "fs": 45
+          },
+          {
+            "is": 46,
+            "fs": 46
+          },
+          {
+            "is": 47,
+            "fs": 47
+          },
+          {
+            "is": 48,
+            "fs": 48
+          }
+        ],
+        "reaction_atoms": [
+          45,
+          46,
+          47,
+          48
+        ],
+        "broken_bonds": [],
+        "formed_bonds": [
+          [
+            45,
+            46
+          ]
+        ],
+        "reaction_coordinates": [
+          {
+            "name": "C45_C46_formation",
+            "kind": "distance",
+            "atoms": [
+              45,
+              46
+            ],
+            "important_interval_A": [
+              1.42,
+              2.11
+            ],
+            "role": "primary"
+          }
+        ],
+        "site_changes": [],
+        "compatibility": {
+          "branch": "true_fe110_5layer_5x5x1",
+          "cell_angstrom": [
+            [
+              8.4808451022,
+              0.0,
+              0.0
+            ],
+            [
+              4.2404225511,
+              5.996863081958339,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              22.995817442611116
+            ]
+          ],
+          "clean_slab_sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d",
+          "coverage": "3x3_one_C2HO",
+          "ediff_ev": 1e-05,
+          "encut_ev": 400.0,
+          "final_energy_convention": "fe110_converged_toten_sigma0p20_v1",
+          "fixed_atom_indices_zero_based": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17
+          ],
+          "force_threshold_ev_per_A": 0.02,
+          "ismear": 1,
+          "kmesh": [
+            5,
+            5,
+            1
+          ],
+          "ldipol": false,
+          "magnetic_state": "ispin2_Fe2p2_adsorbate0_seed",
+          "material": "fe",
+          "potcar_bundle_sha256": "e3bc41a37d795bfcf1b1dc9a2a9ddfb5ef86aa5dc9aa0ac5a3583471a0982f85",
+          "potcar_family": "paw_pbe",
+          "sigma_ev": 0.2,
+          "slab_layers": 5,
+          "slab_model": "fe45_bottom18_fixed",
+          "surface": "fe110",
+          "vacuum_thickness_angstrom": 14.981751034348626,
+          "xc": "pbe"
+        },
+        "endpoints": {
+          "initial": {
+            "calculation_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021",
+            "structure_file_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_CONTCAR",
+            "static_result_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_final_toten"
+          },
+          "final": {
+            "calculation_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1",
+            "structure_file_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_CONTCAR",
+            "static_result_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_final_toten"
+          }
+        },
+        "waypoint_files": [
+          "endpoints\\waypoint.vasp"
+        ],
+        "retrieval_constraints": null,
+        "atom_symbols": [
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "Fe",
+          "C",
+          "C",
+          "O",
+          "H"
+        ],
+        "atom_map_sha256": "f3fe5452e4794fbaedca86991a7e936e55a730530a793bc1df0e899814cdabe5",
+        "compatibility_sha256": "52b8afbf5a2902cbe115001d2554440b59421d61e1819f5921ddc373da5839de",
+        "contract_sha256": "06b6b3ee62b6a93cff4631fbcf443bebd8cb1b1144f803186cf48eacf798939b"
+      },
+      "frequency_policy": {
+        "status": "needs_confirmation",
+        "meaningful_imaginary_frequency_min_cm1": null,
+        "additional_soft_mode_abs_max_cm1": null,
+        "rule": "Grade A/B remains blocked until both project thresholds are explicitly reviewed and configured."
+      },
+      "frequency_policy_is_default": true,
+      "source_files": [
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\CONTCAR",
+          "sha256": "0157a418cd1fba1be886426361d494ffbdce9a15d1a9132b996a3481ffcc1a6a"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\DIMCAR",
+          "sha256": "205d7ae825af2cdeaa700ad2bf363d588e4f2be614897efb4eee6fe54e5041ed"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\INCAR",
+          "sha256": "09a9077e90f96a2fe5c5516d2823ebb20e47f9ba1760a950d6ec7e7ec81a67ae"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\MODECAR",
+          "sha256": "80e803c404bf2030524b614a8605a1e5560529e6a443531463e117824f8d213d"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\NEWMODECAR",
+          "sha256": "23e6af49461434f695388f5b8db6b7be6d2720134035cacb477faa09ef2856b2"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\OSZICAR",
+          "sha256": "b74e45befd2aebbb602b299c4131ee79c8e67a550c7fef51dfe3bfe53d4fa81f"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\OUTCAR",
+          "sha256": "391f84167e6372dcaf770ed1efa471d1abba6d4640803876899b120ac797dd02"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\POSCAR",
+          "sha256": "2536a53d2178fe94c6013a52a4bef4d6c20a19317b8b81231729f92e5d086e88"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\dimer_analysis.json",
+          "sha256": "cb68572cc0f3ce9bef17da218538ef0b11e438602efccfb3c8534ab6f3dc2527"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\dimer_handoff.json",
+          "sha256": "b9ad863aa9b43cb6fad460af7a2e7cc1858a85b450fdc3fde3e9b8a4687be5cd"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\final_mode_review.json",
+          "sha256": "e0637a575ff982a02c38de08227e86b5df77416664938de570c43403c4351fa3"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\mode_review.json",
+          "sha256": "389b8416081fe15883c44f3c5c98f854376639c2f0f6e9cd68305d8b1618cca1"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\scheduler_evidence.json",
+          "sha256": "6fbed00415acfdeca3d3c2cdbf329f973f63a84a1d5e920438b99c6d61a57e43"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\ts_acceptance_20261115_v1\\dimer_soft_gate_review.json",
+          "sha256": "466c7cc0b470eb7ba7290a44de3b129b81b75f78bcf5e71dce7836227645f4e3"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\ts_acceptance_20261115_v1\\vfa\\OUTCAR",
+          "sha256": "d707a332f1af5d0835e1935d351d9a28b011bd4672e4de3b00833fb93f62f9a9"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\ts_acceptance_20261115_v1\\vfa\\POSCAR",
+          "sha256": "c1b035d47a15cf8211d23dd25d4216a46c82a33b3b5c0957b03b86e7a49ade8d"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\ts_acceptance_20261115_v1\\vfa\\vfa_handoff.json",
+          "sha256": "dd34a2266f375553a335defde41fd6b02d424d5468c8d9bbd68bb841bd05b025"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\ts_acceptance_20261115_v1\\vfa\\vfa_review.json",
+          "sha256": "53938169f0884fb021c9e2cbb68933b537ad82bed018a14bb53e64e6cb79895d"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\ts_acceptance_20261115_v1\\vfa\\vfa_scope_review.json",
+          "sha256": "a1697c65cb058f9906c23f18ef713a90a99a630d374cd2d0a45aaccc81851217"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\configs\\true_fe110_production.yaml",
+          "sha256": "d64423eba9d40f864246d14689806a27b490715f2ade92bd7c6691403d93b82a"
+        },
+        {
+          "path": "C:\\Users\\86177\\Desktop\\work\\configs\\ts_validation_pipeline.yaml",
+          "sha256": "5f59dd300977b7ad8115b2490bbf8015a392a3b3bd1ff2deb149da4991c672ea"
+        }
+      ],
+      "status": "VALIDATED",
+      "source_method": "dimer",
+      "validation_basis": "DIMER_CONVERGENCE_AND_VIBRATIONAL_FREQUENCY",
+      "connectivity_required": false,
+      "ci_neb_technical_acceptance": false,
+      "reviewed_single_ci_mode": false,
+      "validation_calculation_id": "fe110_ch_co_vfa_20261115_job2260",
+      "source_saddle_calculation_id": "fe110_ch_co_dimer_20261112_job9998592",
+      "source_job_record_id": "job_fe110_ch_co_dimer_20261112_job9998592",
+      "frequency_output_file_id": "chco_vfa2260_formal_20261115_OUTCAR",
+      "positive_displacement_file_id": null,
+      "negative_displacement_file_id": null,
+      "contract_sha256": "06b6b3ee62b6a93cff4631fbcf443bebd8cb1b1144f803186cf48eacf798939b",
+      "atom_map_sha256": "f3fe5452e4794fbaedca86991a7e936e55a730530a793bc1df0e899814cdabe5",
+      "compatibility_sha256": "52b8afbf5a2902cbe115001d2554440b59421d61e1819f5921ddc373da5839de",
+      "normal_completion": true,
+      "modes": [
+        {
+          "mode_index": 1,
+          "imaginary": false,
+          "frequency_cm1": 3012.556969,
+          "dominant_atoms": [
+            {
+              "atom_index_zero_based": 48,
+              "dx": -0.189106,
+              "dy": -0.186752,
+              "dz": 0.923346,
+              "amplitude": 0.9608356906651626
+            },
+            {
+              "atom_index_zero_based": 45,
+              "dx": 0.057289,
+              "dy": 0.055119,
+              "dz": -0.265466,
+              "amplitude": 0.27711429201324134
+            },
+            {
+              "atom_index_zero_based": 47,
+              "dx": -0.000843,
+              "dy": -0.000651,
+              "dz": 7.1e-05,
+              "amplitude": 0.0010674694375016082
+            },
+            {
+              "atom_index_zero_based": 46,
+              "dx": 0.000675,
+              "dy": 0.000302,
+              "dz": -0.000763,
+              "amplitude": 0.0010625431755933498
+            },
+            {
+              "atom_index_zero_based": 0,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 1,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 2,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 3,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 4,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 5,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            }
+          ]
+        },
+        {
+          "mode_index": 2,
+          "imaginary": false,
+          "frequency_cm1": 1562.135791,
+          "dominant_atoms": [
+            {
+              "atom_index_zero_based": 46,
+              "dx": -0.264642,
+              "dy": -0.142767,
+              "dz": -0.687902,
+              "amplitude": 0.7507509347693149
+            },
+            {
+              "atom_index_zero_based": 47,
+              "dx": 0.233154,
+              "dy": 0.14293,
+              "dz": 0.599785,
+              "amplitude": 0.659190275141404
+            },
+            {
+              "atom_index_zero_based": 45,
+              "dx": -0.029396,
+              "dy": -0.028218,
+              "dz": -0.01158,
+              "amplitude": 0.0423612646175725
+            },
+            {
+              "atom_index_zero_based": 48,
+              "dx": 0.004738,
+              "dy": 0.004551,
+              "dz": 0.002009,
+              "amplitude": 0.00686995822403601
+            },
+            {
+              "atom_index_zero_based": 0,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 1,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 2,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 3,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 4,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 5,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            }
+          ]
+        },
+        {
+          "mode_index": 3,
+          "imaginary": false,
+          "frequency_cm1": 909.495523,
+          "dominant_atoms": [
+            {
+              "atom_index_zero_based": 48,
+              "dx": -0.643195,
+              "dy": -0.631625,
+              "dz": -0.189491,
+              "amplitude": 0.9211714214688816
+            },
+            {
+              "atom_index_zero_based": 46,
+              "dx": 0.173727,
+              "dy": 0.151027,
+              "dz": -0.156441,
+              "amplitude": 0.2783235738111308
+            },
+            {
+              "atom_index_zero_based": 45,
+              "dx": 0.026214,
+              "dy": 0.046407,
+              "dz": 0.260003,
+              "amplitude": 0.26540976518206705
+            },
+            {
+              "atom_index_zero_based": 47,
+              "dx": -0.042389,
+              "dy": -0.03475,
+              "dz": -0.023067,
+              "amplitude": 0.0594682798641427
+            },
+            {
+              "atom_index_zero_based": 0,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 1,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 2,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 3,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 4,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 5,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            }
+          ]
+        },
+        {
+          "mode_index": 4,
+          "imaginary": false,
+          "frequency_cm1": 693.170928,
+          "dominant_atoms": [
+            {
+              "atom_index_zero_based": 48,
+              "dx": 0.625075,
+              "dy": -0.685451,
+              "dz": -0.033372,
+              "amplitude": 0.9282647894916624
+            },
+            {
+              "atom_index_zero_based": 45,
+              "dx": -0.264919,
+              "dy": 0.22415,
+              "dz": -0.090075,
+              "amplitude": 0.358523088079415
+            },
+            {
+              "atom_index_zero_based": 46,
+              "dx": 0.014501,
+              "dy": -0.079722,
+              "dz": 0.035252,
+              "amplitude": 0.08836616880345102
+            },
+            {
+              "atom_index_zero_based": 47,
+              "dx": 0.013912,
+              "dy": 0.041302,
+              "dz": 0.0088,
+              "amplitude": 0.04446165705414048
+            },
+            {
+              "atom_index_zero_based": 0,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 1,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 2,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 3,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 4,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 5,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            }
+          ]
+        },
+        {
+          "mode_index": 5,
+          "imaginary": false,
+          "frequency_cm1": 563.698151,
+          "dominant_atoms": [
+            {
+              "atom_index_zero_based": 45,
+              "dx": 0.084738,
+              "dy": 0.003031,
+              "dz": 0.797118,
+              "amplitude": 0.8016151330464015
+            },
+            {
+              "atom_index_zero_based": 48,
+              "dx": 0.304246,
+              "dy": 0.083622,
+              "dz": 0.302343,
+              "amplitude": 0.4370006373553704
+            },
+            {
+              "atom_index_zero_based": 46,
+              "dx": 0.109074,
+              "dy": 0.145184,
+              "dz": -0.254298,
+              "amplitude": 0.31247880589889615
+            },
+            {
+              "atom_index_zero_based": 47,
+              "dx": -0.183371,
+              "dy": -0.168755,
+              "dz": -0.081843,
+              "amplitude": 0.2623003055945608
+            },
+            {
+              "atom_index_zero_based": 0,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 1,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 2,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 3,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 4,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 5,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            }
+          ]
+        },
+        {
+          "mode_index": 6,
+          "imaginary": false,
+          "frequency_cm1": 468.200164,
+          "dominant_atoms": [
+            {
+              "atom_index_zero_based": 45,
+              "dx": -0.814736,
+              "dy": -0.085761,
+              "dz": 0.30338,
+              "amplitude": 0.873606961520454
+            },
+            {
+              "atom_index_zero_based": 46,
+              "dx": -0.048046,
+              "dy": -0.066882,
+              "dz": 0.283534,
+              "amplitude": 0.29525099355633
+            },
+            {
+              "atom_index_zero_based": 47,
+              "dx": 0.203434,
+              "dy": 0.169033,
+              "dz": 0.130817,
+              "amplitude": 0.2950773372084003
+            },
+            {
+              "atom_index_zero_based": 48,
+              "dx": -0.185844,
+              "dy": 0.108637,
+              "dz": 0.127389,
+              "amplitude": 0.25013585793724175
+            },
+            {
+              "atom_index_zero_based": 0,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 1,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 2,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 3,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 4,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 5,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            }
+          ]
+        },
+        {
+          "mode_index": 7,
+          "imaginary": false,
+          "frequency_cm1": 355.601179,
+          "dominant_atoms": [
+            {
+              "atom_index_zero_based": 45,
+              "dx": 0.443314,
+              "dy": -0.394709,
+              "dz": 0.230741,
+              "amplitude": 0.636838995632334
+            },
+            {
+              "atom_index_zero_based": 47,
+              "dx": 0.313157,
+              "dy": 0.23519,
+              "dz": 0.400096,
+              "amplitude": 0.5598736035615539
+            },
+            {
+              "atom_index_zero_based": 46,
+              "dx": 0.055656,
+              "dy": -0.020587,
+              "dz": 0.479653,
+              "amplitude": 0.4833098543522571
+            },
+            {
+              "atom_index_zero_based": 48,
+              "dx": 0.099865,
+              "dy": -0.18798,
+              "dz": 0.045612,
+              "amplitude": 0.21769233603643467
+            },
+            {
+              "atom_index_zero_based": 0,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 1,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 2,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 3,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 4,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 5,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            }
+          ]
+        },
+        {
+          "mode_index": 8,
+          "imaginary": false,
+          "frequency_cm1": 248.117609,
+          "dominant_atoms": [
+            {
+              "atom_index_zero_based": 46,
+              "dx": 0.745374,
+              "dy": -0.165581,
+              "dz": 0.03385,
+              "amplitude": 0.7642939813559962
+            },
+            {
+              "atom_index_zero_based": 45,
+              "dx": 0.032288,
+              "dy": 0.494654,
+              "dz": -0.015656,
+              "amplitude": 0.49595383353292066
+            },
+            {
+              "atom_index_zero_based": 47,
+              "dx": -0.029853,
+              "dy": 0.174194,
+              "dz": 0.321659,
+              "amplitude": 0.36701398273907765
+            },
+            {
+              "atom_index_zero_based": 48,
+              "dx": -0.016912,
+              "dy": 0.186803,
+              "dz": -0.002106,
+              "amplitude": 0.18757881487257563
+            },
+            {
+              "atom_index_zero_based": 0,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 1,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 2,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 3,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 4,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 5,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            }
+          ]
+        },
+        {
+          "mode_index": 9,
+          "imaginary": false,
+          "frequency_cm1": 219.859855,
+          "dominant_atoms": [
+            {
+              "atom_index_zero_based": 47,
+              "dx": 0.095938,
+              "dy": -0.51085,
+              "dz": 0.412957,
+              "amplitude": 0.6638563897357621
+            },
+            {
+              "atom_index_zero_based": 46,
+              "dx": -0.248686,
+              "dy": 0.498176,
+              "dz": 0.261314,
+              "amplitude": 0.615068337803207
+            },
+            {
+              "atom_index_zero_based": 45,
+              "dx": 0.008346,
+              "dy": 0.421685,
+              "dz": -0.00857,
+              "amplitude": 0.42185464302411085
+            },
+            {
+              "atom_index_zero_based": 48,
+              "dx": -0.018865,
+              "dy": 0.046403,
+              "dz": -0.022702,
+              "amplitude": 0.054995521981339536
+            },
+            {
+              "atom_index_zero_based": 0,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 1,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 2,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 3,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 4,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 5,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            }
+          ]
+        },
+        {
+          "mode_index": 10,
+          "imaginary": false,
+          "frequency_cm1": 143.010697,
+          "dominant_atoms": [
+            {
+              "atom_index_zero_based": 47,
+              "dx": 0.846768,
+              "dy": -0.283782,
+              "dz": -0.333743,
+              "amplitude": 0.9533795987942053
+            },
+            {
+              "atom_index_zero_based": 46,
+              "dx": 0.245828,
+              "dy": 0.024503,
+              "dz": -0.162674,
+              "amplitude": 0.29579491690865817
+            },
+            {
+              "atom_index_zero_based": 48,
+              "dx": 0.045949,
+              "dy": 0.029605,
+              "dz": 0.009957,
+              "amplitude": 0.055559953878670555
+            },
+            {
+              "atom_index_zero_based": 45,
+              "dx": 0.014461,
+              "dy": 0.005965,
+              "dz": -0.01553,
+              "amplitude": 0.022042745881581994
+            },
+            {
+              "atom_index_zero_based": 0,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 1,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 2,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 3,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 4,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 5,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            }
+          ]
+        },
+        {
+          "mode_index": 11,
+          "imaginary": false,
+          "frequency_cm1": 116.365467,
+          "dominant_atoms": [
+            {
+              "atom_index_zero_based": 47,
+              "dx": 0.161623,
+              "dy": 0.699692,
+              "dz": -0.211687,
+              "amplitude": 0.748666998713046
+            },
+            {
+              "atom_index_zero_based": 46,
+              "dx": -0.153783,
+              "dy": 0.558806,
+              "dz": -0.056572,
+              "amplitude": 0.5823347387104775
+            },
+            {
+              "atom_index_zero_based": 45,
+              "dx": 0.078006,
+              "dy": 0.296285,
+              "dz": 0.032601,
+              "amplitude": 0.30811128259445486
+            },
+            {
+              "atom_index_zero_based": 48,
+              "dx": 0.034309,
+              "dy": 0.064943,
+              "dz": 0.007548,
+              "amplitude": 0.07383544564773752
+            },
+            {
+              "atom_index_zero_based": 0,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 1,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 2,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 3,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 4,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 5,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            }
+          ]
+        },
+        {
+          "mode_index": 12,
+          "imaginary": true,
+          "frequency_cm1": 318.644011,
+          "dominant_atoms": [
+            {
+              "atom_index_zero_based": 46,
+              "dx": 0.425161,
+              "dy": 0.579669,
+              "dz": -0.163871,
+              "amplitude": 0.7373138613392536
+            },
+            {
+              "atom_index_zero_based": 45,
+              "dx": -0.223777,
+              "dy": -0.519893,
+              "dz": -0.267168,
+              "amplitude": 0.6258942541691848
+            },
+            {
+              "atom_index_zero_based": 47,
+              "dx": -0.131675,
+              "dy": -0.053665,
+              "dz": 0.159898,
+              "amplitude": 0.21397571884211536
+            },
+            {
+              "atom_index_zero_based": 48,
+              "dx": 0.137078,
+              "dy": 0.006049,
+              "dz": -0.003401,
+              "amplitude": 0.137253543801244
+            },
+            {
+              "atom_index_zero_based": 0,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 1,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 2,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 3,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 4,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            },
+            {
+              "atom_index_zero_based": 5,
+              "dx": 0.0,
+              "dy": 0.0,
+              "dz": 0.0,
+              "amplitude": 0.0
+            }
+          ]
+        }
+      ],
+      "imaginary_frequency_count": 1,
+      "imaginary_frequencies_cm1": [
+        318.644011
+      ],
+      "significant_imaginary_mode_indices": [],
+      "small_soft_mode_indices": [],
+      "unresolved_imaginary_mode_indices": [],
+      "principal_mode_index": 12,
+      "principal_mode_reaction_atom_overlap": [
+        45,
+        46,
+        47,
+        48
+      ],
+      "frequency_threshold_status": "needs_confirmation",
+      "meaningful_imaginary_frequency_min_cm1": null,
+      "additional_soft_mode_abs_max_cm1": null,
+      "principal_mode_is_meaningful": false,
+      "additional_soft_modes_within_threshold": false,
+      "principal_mode_assignment": "accepted",
+      "soft_mode_assessment": "Needs confirmation",
+      "repeat_required": false,
+      "geometry_status": "pass",
+      "connectivity_report": null,
+      "connectivity_report_sha256": null,
+      "connectivity_report_file_id": null,
+      "vfa_handoff": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\ts_acceptance_20261115_v1\\vfa\\vfa_handoff.json",
+      "vfa_handoff_sha256": "dd34a2266f375553a335defde41fd6b02d424d5468c8d9bbd68bb841bd05b025",
+      "source_saddle_sha256": "0157a418cd1fba1be886426361d494ffbdce9a15d1a9132b996a3481ffcc1a6a",
+      "saddle_analysis_sha256": "cb68572cc0f3ce9bef17da218538ef0b11e438602efccfb3c8534ab6f3dc2527",
+      "dimer_technical_acceptance": true,
+      "dimer_frequency_handoff_acceptance": true,
+      "dimer_soft_gate_review_decision": "accept_for_ts_validation",
+      "frequency_poscar_sha256": "c1b035d47a15cf8211d23dd25d4216a46c82a33b3b5c0957b03b86e7a49ade8d",
+      "positive_connectivity_job_record_id": null,
+      "negative_connectivity_job_record_id": null,
+      "connectivity_status": "Needs confirmation",
+      "connectivity_job_ids": [],
+      "connects_to_is": null,
+      "connects_to_fs": null,
+      "positive_displacement_file": null,
+      "negative_displacement_file": null,
+      "displacement_files_exist": false,
+      "grade": "A",
+      "kinetic_eligible": true,
+      "reviewer": "Codex formal evidence review under explicit user request 2026-11-15",
+      "reviewed_at": "2026-11-15T16:00:03.439254+00:00",
+      "notes": "Mode12 is predominantly C45-C46 opening/closing;CO/CH remain intact. Printed mass-weighted eigenvector converted using actual OUTCAR masses;physical common-active-set cosine with Dimer0.934. Three frames are visualizations,not connectivity evidence."
+    },
+    "scheduler": {
+      "schema_version": 1,
+      "document_kind": "scheduler_job_evidence",
+      "stage": "dimer",
+      "scheduler": "LSF",
+      "server_alias": "sunboquan-codex",
+      "job_id": "9998592",
+      "status": "DONE",
+      "checked_at": "2026-11-15T06:44:13Z",
+      "source_command": "ssh sunboquan-codex bjobs -a 9998592",
+      "query": {
+        "argv": [
+          "ssh",
+          "sunboquan-codex",
+          "bjobs",
+          "-a",
+          "9998592"
+        ],
+        "returncode": 0,
+        "stdout": "JOBID   USER    STAT  QUEUE      FROM_HOST   EXEC_HOST   JOB_NAME   SUBMIT_TIME\n9998592 nsgkn_c DONE  Gkn_normal ycn03       32*gknew052 script.lsf Nov 12 16:43\n",
+        "stderr": "",
+        "stdout_sha256": "0dd5bc4fedaf14a41ac7d3954cf91f4e30682ce3799df0d820268cf8d2315e84"
+      }
+    },
+    "authorization": {},
+    "source_bindings": {
+      "geometry": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\path_geometry_diagnosis.json",
+        "sha256": "b4eb136f2581705e4c32c97bc763cb8105722ede9528c0aa190b9b28675ab6a6"
+      },
+      "analysis": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\neb_analysis.json",
+        "sha256": "563607c12120b9ca9e8b23901b602f895fbd80157fa8e401d23348c34c085733"
+      },
+      "thresholds": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\configs\\neb_agent\\default_thresholds.yaml",
+        "sha256": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c"
+      },
+      "path_quality": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\local_triplet_review_20261112_v1\\path\\neb_path_quality.json",
+        "sha256": "49441bafb7918c84e7c0b29871b2e7e669befa8342f9b9f87cad8fa05e431cf5"
+      },
+      "preflight": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_image05_20261112_v1\\submission_preflight.json",
+        "sha256": "a6885b3fb9373bfd0c96651aa897dc3557dbddbef77d12ba8acadb5dd6fa98fe"
+      },
+      "validation": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\ts_acceptance_20261115_v1\\vfa\\vfa_analysis.json",
+        "sha256": "e5c326c7c096bfae0174457c077ae415140f9089165bff1c1cdb1a8a920ae7fc"
+      },
+      "scheduler": {
+        "path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_ch_co_to_chco_ts_20261109\\dimer_completion_20261115_v1\\source\\scheduler_evidence.json",
+        "sha256": "6fbed00415acfdeca3d3c2cdbf329f973f63a84a1d5e920438b99c6d61a57e43"
+      }
+    },
+    "climb": false,
+    "path_reviewed": true
+  },
+  "CRITICAL_IMAGES": [],
+  "CHEMICAL_INTERPRETATION": "current DIMER/VFA is not accepted: BLOCKED_SCIENTIFIC_EVIDENCE_BINDING",
+  "FILES_SAVED": [],
+  "ALLOWED_ACTIONS": [],
+  "FORBIDDEN_ACTIONS": [
+    "CONTINUE_JOB",
+    "STOP_JOB",
+    "REBUILD_PATH",
+    "SUBMIT_DIAGNOSTIC_VASP",
+    "SUBMIT_VASP",
+    "ENABLE_CI_NEB",
+    "PREPARE_DIMER_HANDOFF",
+    "START_DIMER",
+    "START_VFA",
+    "APPROVE_TS_CANDIDATE",
+    "REPORT_FINAL_BARRIER"
+  ],
+  "NEXT_REQUIRED_CHECK": "REVIEW_AND_REGENERATE_BOUND_TS_VALIDATION",
+  "SUBMISSION_ALLOWED": false,
+  "CI_NEB_ALLOWED": false,
+  "DIMER_ALLOWED": false,
+  "VFA_ALLOWED": false,
+  "TS_CLAIM_ALLOWED": false,
+  "COMPUTE_COST_ASSESSMENT": null,
+  "scientific_readiness": {
+    "decision": "NEEDS_CURRENT_TS_VALIDATION_EVIDENCE",
+    "reason_codes": [
+      "CURRENT_TS_VALIDATION_EVIDENCE_INVALID"
+    ],
+    "eligible_actions": []
+  },
+  "execution_authorization_error": "explicit execution authorization is missing or invalid",
+  "execution_authorization": null,
+  "evidence_binding": null
+}
