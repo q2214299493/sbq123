@@ -166,6 +166,18 @@ def connectivity(poscar: Poscar, indices: list[int]) -> list[tuple[int, int]]:
     return edges
 
 
+def initial_contact_checks(symbols: list[str], nearest: list[float]) -> dict[str, bool]:
+    """Existing CARE seed contact bounds in Å, shared with initial generation."""
+    return {
+        "no_hard_heavy_fe_contact": all(distance >= 1.65 for symbol, distance in zip(symbols, nearest, strict=True) if symbol != "H"),
+        "no_hard_h_fe_contact": all(distance >= 1.35 for symbol, distance in zip(symbols, nearest, strict=True) if symbol == "H"),
+    }
+
+
+def initial_binding_contact(distance: float) -> bool:
+    return distance <= 2.65
+
+
 def review(source: Poscar, structure: Poscar, source_ads: list[int]) -> dict[str, object]:
     symbols = expanded_symbols(structure)
     ads = list(range(45, len(symbols)))
@@ -197,7 +209,7 @@ def review(source: Poscar, structure: Poscar, source_ads: list[int]) -> dict[str
         distances = fe110_anchor_site_distances(structure, structure.frac[index])
         site, lateral = min(distances.items(), key=lambda item: item[1])
         site_details.append({"atom": atom_label, "nearest_fe_angstrom": distance, "site": site, "lateral_offset_angstrom": lateral})
-        if distance <= 2.65 and lateral <= 0.80:
+        if initial_binding_contact(distance) and lateral <= 0.80:
             binding_symbols.append(symbol)
             binding_sites.append(SITE_CODES[site])
     fixed_fe = sum(all(flag.upper() == "F" for flag in structure.flags[index]) for index in fe)
@@ -217,8 +229,7 @@ def review(source: Poscar, structure: Poscar, source_ads: list[int]) -> dict[str
         "connectivity_preserved": source_edges == target_edges,
         "internal_geometry_preserved": max_bond_delta <= 0.01,
         "adsorbate_above_surface": minimum_height >= 1.35,
-        "no_hard_heavy_fe_contact": min(heavy_nearest) >= 1.65,
-        "no_hard_h_fe_contact": not hydrogen_nearest or min(hydrogen_nearest) >= 1.35,
+        **initial_contact_checks([symbols[index] for index in ads], nearest),
     }
     return {
         "verdict": "pass" if all(checks.values()) else "block",

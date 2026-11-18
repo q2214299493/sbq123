@@ -1,11 +1,13 @@
 """Synthetic pose contracts only; these are not physical adsorption minima."""
 from copy import deepcopy
+from dataclasses import replace
 from pathlib import Path
 
 import numpy as np
 import pytest
 
-from scripts.adsorption.build_fe110_adsorption import Poscar, read_poscar, write_poscar
+from scripts.adsorption.build_fe110_adsorption import Poscar, anchor_cartesian_position, classify_fe110_anchor_site, read_poscar, write_poscar
+from scripts.workflow_geometry import minimum_image_delta_xy
 from scripts.adsmind_lite import candidate_generation as builder
 from scripts.adsmind_lite.adsmind_common import load_yaml, read_json, write_json
 from scripts.adsmind_lite.motif_coverage import initial_motif_identity, review_initial_motif_coverage
@@ -18,12 +20,14 @@ from tests.test_reviewed_template_generation import bundle, generate, template
 from tests.evidence_fixtures import bound_evidence
 
 
-def full_template(tmp_path, site_record, *, symbols=("C", "O"), serial="pose"):
+def full_template(tmp_path, site_record, *, symbols=("C", "O"), serial="pose", site_records=None):
     slab = read_poscar(SLAB)
     # Deliberately unwrapped coordinates and a height unrelated to default rules.
     first = np.array([*site_record["fractional_xy"], max(slab.frac[:, 2]) + 0.12])
     first[0] += 1.0
     tail = np.array([first, first + np.array([0.7, 0.2, 0.3]) @ np.linalg.inv(slab.cell)])
+    if site_records is not None:
+        tail = plausible_co_pose(slab, site_record, site_records)
     pose = Poscar("Synthetic full adsorption pose", slab.cell.copy(), [*slab.symbols, *dict.fromkeys(symbols)],
                   [*slab.counts, *[symbols.count(symbol) for symbol in dict.fromkeys(symbols)]],
                   np.vstack([slab.frac, tail]), [*slab.flags, ("T", "T", "T"), ("T", "T", "T")])
@@ -32,12 +36,32 @@ def full_template(tmp_path, site_record, *, symbols=("C", "O"), serial="pose"):
     return {"path": str(path), "sha256": sha256_file(path)}, tail
 
 
+def plausible_co_pose(slab, primary, sites):
+    """Synthetic side-on CO with both anchors at finite, nonoverlapping contacts."""
+    first = anchor_cartesian_position(slab, builder.site_from_record(primary, slab), 1.95)
+    inverse = np.linalg.inv(slab.cell)
+    for site in sites:
+        if site["site_class"] == primary["site_class"]:
+            continue
+        target = builder.site_from_record(site, slab)
+        delta = minimum_image_delta_xy(target.frac - first @ inverse) @ slab.cell
+        trial = first.copy()
+        trial[:2] += delta[:2] * 1.05 / np.linalg.norm(delta[:2])
+        second = anchor_cartesian_position(slab, replace(target, frac=trial @ inverse), 1.95)
+        site_name, _ = classify_fe110_anchor_site(slab, second @ inverse)
+        if 1.15 / 1.25 <= np.linalg.norm(second - first) <= 1.15 * 1.25 and site_name != "unknown":
+            tail = np.array([first, second]) @ inverse
+            tail[:, 0] += 1.0
+            return tail
+    raise AssertionError("no plausible synthetic two-anchor pose")
+
+
 def multi_bundle(tmp_path):
     sites, sites_path, plan_path = bundle(tmp_path, template(tmp_path))
     plan = read_json(plan_path)
     for serial, motif in enumerate(plan["species_plans"][0]["candidates"]):
         site = next(site for site in sites["sites"] if site["site_class"] == motif["generator_site_class"])
-        descriptor, _ = full_template(tmp_path, site, serial=str(serial))
+        descriptor, _ = full_template(tmp_path, site, serial=str(serial), site_records=sites["sites"])
         motif.update(binding_mode="bidentate", binding_atoms=["C", "O"], orientation_degrees=0.0,
                      binding_atom_indices_zero_based={"C": 0, "O": 1}, reviewed_structure_template=descriptor)
     write_json(plan_path, plan)

@@ -79,6 +79,9 @@ def generate_candidates(
                 motif,
             )
             pending.append((structure_path, structure, metadata))
+    from .generation_validation import validate_generated_batch
+
+    pending = validate_generated_batch(pending, slab, site_payload, rules)
     # Resolve every pose/metadata error before publishing the first structure.
     for structure_path, structure, metadata in pending:
         write_poscar(structure_path, structure)

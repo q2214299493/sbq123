@@ -86,6 +86,29 @@ coverage counts and cached policy values cannot bypass this check. Every
 candidate retains `initial_motif` separately from its relaxed site so that ML
 migration/dissociation cannot rewrite the original mode identity.
 
+Initial generation must produce chemically plausible, distinct adsorption-site
+structures; it does not require a lowest-energy or DFT-converged structure.
+Before writing the first POSCAR, generation now runs the existing candidate
+validator in memory and checks internal connectivity against the configured
+molecule, internal overlap, compressed bonds (shorter than the configured
+reference length divided by the existing connectivity scale), buried atoms,
+and surface/anchor contacts. Multidentate poses use the existing CARE seed
+contact bounds, without inheriting a single-anchor height or distance range.
+The molecular reference must be present in the species rule. These are initial
+geometry screens; they do not grade stability or establish an accepted result.
+
+Diversity is checked from actual mapped anchors, independently of motif labels.
+A single unchanged binding atom/site counts once even if molecular azimuth,
+tilt or height changes. Multiple anchors are compared by their x/y positions;
+Fe45 uses the existing clean-slab, face-preserving symmetries, with the owning
+site-classification tolerance. Renaming anchors or site patterns does not add
+a physical mode. One representative is emitted per actual mode, with omitted
+same-site variant IDs recorded in its metadata. Fewer than the required
+number of actual modes blocks the whole batch before output. Each emitted
+record reports `initial_geometry_validation: PASS`, actual anchor site classes,
+and `scientific_stability: NOT_ASSESSED` separately. Existing source-review,
+scientific-acceptance and execution gates retain their roles.
+
 When a motif supplies `reviewed_structure_template`, the generator consumes
 its coordinates rather than the configured default molecule. The descriptor
 contains exactly `path` and `sha256`. The implemented format is an unwrapped,

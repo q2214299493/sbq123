@@ -167,6 +167,9 @@ def validate_one_candidate(
     scale: float,
     hard_contact: float,
     seen: set[tuple[Any, ...]],
+    *,
+    atoms: Atoms | None = None,
+    surface_atoms: Atoms | None = None,
 ) -> str:
     family = record["surface_family"]
     adsorbate = record["adsorbate"]
@@ -184,9 +187,9 @@ def validate_one_candidate(
     if family != "metallic_fe" and record.get("site_label_source") != "explicit_manifest":
         record["needs_review"] = True
         return "explicit_site_label_required"
-    atoms = require_ase_structure(Path(record["initial_structure"]))
+    atoms = require_ase_structure(Path(record["initial_structure"])) if atoms is None else atoms
     slab_indices, adsorbate_indices = structure_indices(record, len(atoms))
-    surface_atoms = require_ase_structure(Path(record["surface_structure"]))
+    surface_atoms = require_ase_structure(Path(record["surface_structure"])) if surface_atoms is None else surface_atoms
     role_reason = lattice_role_reason(record, surface_atoms, rule)
     if role_reason is not None:
         record["needs_review"] = True
