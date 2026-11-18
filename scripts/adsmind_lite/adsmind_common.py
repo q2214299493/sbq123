@@ -42,6 +42,10 @@ def load_yaml(path: str | Path) -> dict[str, Any]:
     return payload
 
 
+def ordered_unique(values: list[str]) -> list[str]:
+    return list(dict.fromkeys(values))
+
+
 def load_yaml_schema(path: str | Path, required_keys: Iterable[str], error: str) -> dict[str, Any]:
     payload = load_yaml(path)
     if not set(required_keys) <= payload.keys():

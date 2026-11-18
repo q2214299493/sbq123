@@ -17,7 +17,8 @@ from scripts.adsorption.build_fe110_adsorption import (
 from scripts.workflow_geometry import expand_symbols
 from scripts.scientific_validation import finite_number
 
-from .adsmind_common import load_yaml, read_json, require_ase_structure, write_json, write_jsonl
+from .adsmind_common import load_yaml, ordered_unique, read_json, require_ase_structure, write_json, write_jsonl
+from .generation_validation import validate_generated_batch
 from .reviewed_templates import full_pose_geometry, multi_anchor_mapping, read_reviewed_template
 from .motif_coverage import (
     SITE_PATTERN_ALIASES, generation_coverage_rules, initial_motif_identity,
@@ -79,8 +80,6 @@ def generate_candidates(
                 motif,
             )
             pending.append((structure_path, structure, metadata))
-    from .generation_validation import validate_generated_batch
-
     pending = validate_generated_batch(pending, slab, site_payload, rules)
     # Resolve every pose/metadata error before publishing the first structure.
     for structure_path, structure, metadata in pending:
@@ -268,10 +267,6 @@ def rotate_relative_geometry(relative: np.ndarray, angle_degrees: float) -> np.n
     angle = np.deg2rad(angle_degrees)
     rotation = np.array([[np.cos(angle), -np.sin(angle), 0.0], [np.sin(angle), np.cos(angle), 0.0], [0.0, 0.0, 1.0]])
     return relative @ rotation.T
-
-
-def ordered_unique(values: list[str]) -> list[str]:
-    return list(dict.fromkeys(values))
 
 
 def generation_failure(surface_name: str, sites: dict[str, Any], adsorbate: str, reason: str) -> dict[str, Any]:

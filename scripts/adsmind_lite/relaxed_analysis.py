@@ -12,8 +12,7 @@ from ase.data import covalent_radii
 from scripts.adsorption.build_fe110_adsorption import Poscar, classify_fe110_anchor_site
 from scripts.workflow_geometry import inplane_pbc_vector, minimum_image_delta_xy, relative_positions_xy
 
-from .adsmind_common import SITE_CLASS_MAP, load_yaml, read_json, require_ase_structure
-from .candidate_generation import ordered_unique
+from .adsmind_common import SITE_CLASS_MAP, load_yaml, ordered_unique, read_json, require_ase_structure
 
 
 def connectivity_edges(atoms: Atoms, indices: list[int], scale: float, minimum: float) -> list[tuple[int, int]]:
