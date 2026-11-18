@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 from pathlib import Path
 from typing import Any
 
@@ -10,7 +11,7 @@ from scripts.adsorption.build_fe110_adsorption import (
     Site,
     anchor_cartesian_position,
     classify_fe110_anchor_site,
-    read_poscar,
+    parse_poscar_text,
     validate_adsorbate,
     write_poscar,
 )
@@ -20,6 +21,7 @@ from scripts.scientific_validation import finite_number
 from .adsmind_common import load_yaml, ordered_unique, read_json, require_ase_structure, write_json, write_jsonl
 from .generation_validation import validate_generated_batch
 from .reviewed_templates import full_pose_geometry, multi_anchor_mapping, read_reviewed_template
+from .reviewed_template_plan import PLAN_SOURCE, reviewed_template_rule
 from .motif_coverage import (
     SITE_PATTERN_ALIASES, generation_coverage_rules, initial_motif_identity,
     review_initial_motif_coverage, validate_generation_plan,
@@ -44,18 +46,20 @@ def generate_candidates(
     backend_mode: str = "no_relax",
 ) -> list[dict[str, Any]]:
     require_ase_structure(surface_path)
-    slab = read_poscar(surface_path)
     site_payload = read_json(sites_path)
     config = load_yaml(adsorbate_config_path)
     rules = config["adsorbates"]
     plan = read_json(plan_path)
     planned = {str(item["species"]): item for item in plan.get("species_plans", [])}
+    slab_bytes = surface_path.read_bytes()
+    slab = parse_poscar_text(slab_bytes.decode("utf-8"), str(surface_path))
+    slab_digest = hashlib.sha256(slab_bytes).hexdigest()
     surface_name = str(site_payload["surface_name"])
     records: list[dict[str, Any]] = []
     site_records = list(site_payload.get("sites", []))
     if plan.get("surface_name", surface_name) != surface_name:
         raise ValueError("candidate plan surface does not match the site manifest")
-    prepared = _prepare_generation_batch(adsorbates, planned, rules, surface_name, site_records)
+    prepared = _prepare_generation_batch(adsorbates, planned, rules, surface_name, site_records, slab_digest)
     pending = []
     for adsorbate in adsorbates:
         rule = rules[adsorbate]
@@ -79,6 +83,10 @@ def generate_candidates(
                 index_map,
                 motif,
             )
+            if "reviewed_template_bundle" in planned[adsorbate]:
+                evidence = planned[adsorbate]["reviewed_template_bundle"]["evidence"]
+                metadata["reviewed_template_subject_sha256"] = evidence["review"]["subject_sha256"]
+                metadata["geometry_origin"] = motif["geometry_origin"]
             pending.append((structure_path, structure, metadata))
     pending = validate_generated_batch(pending, slab, site_payload, rules)
     # Resolve every pose/metadata error before publishing the first structure.
@@ -90,16 +98,24 @@ def generate_candidates(
     return records
 
 
-def _prepare_generation_batch(adsorbates: list[str], planned: dict, rules: dict, surface: str, site_records: list) -> dict:
+def _prepare_generation_batch(
+    adsorbates: list[str], planned: dict, rules: dict, surface: str, site_records: list, slab_digest: str,
+) -> dict:
     """Check the whole requested batch before publishing any candidate POSCAR."""
     coverage_rules = generation_coverage_rules()
     prepared = {}
     for species in adsorbates:
-        if species not in rules:
+        source_plan = planned.get(species, {})
+        imported = source_plan.get("plan_source") == PLAN_SOURCE or "reviewed_template_bundle" in source_plan
+        if species not in rules and not imported:
             raise ValueError(f"{species}: invalid_binding_atom; no candidates generated")
         if species not in planned:
             raise ValueError(f"{species}: missing_evidence_gated_plan; no candidates generated")
         reviewed = validate_generation_plan(planned[species], species, surface, coverage_rules)
+        if imported:
+            if reviewed["reviewed_template_bundle"]["slab_sha256"] != slab_digest:
+                raise ValueError(f"{species}: reviewed bundle clean slab SHA256 mismatch")
+            rules[species] = reviewed_template_rule(reviewed, rules.get(species))
         if any(item.get("build_ready") is not True for item in reviewed["candidates"]):
             raise ValueError(f"{species}: reviewed_structure_template_required; no candidates generated")
         for motif in reviewed["candidates"]:

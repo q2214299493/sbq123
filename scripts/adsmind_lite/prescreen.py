@@ -117,12 +117,15 @@ def plan_batch(
     external_plans: dict[str, dict[str, Any]] | None = None,
     species_features: dict[str, dict[str, Any]] | None = None,
     surface_name: str = "Fe110",
+    reviewed_template_plans: dict[str, dict] | None = None,
 ) -> dict[str, Any]:
     """Plan a batch without turning feature-based retrieval hypotheses into candidates."""
     if fts_rules is not None:
         assert_fts_surface(surface_name, fts_rules)
+    reviewed_template_plans = reviewed_template_plans or {}
     plans = [
-        plan_species(
+        review_initial_motif_coverage(reviewed_template_plans[name], rules, surface_name=surface_name)
+        if name in reviewed_template_plans else plan_species(
             name,
             rules,
             available_templates=available_templates,

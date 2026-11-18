@@ -122,3 +122,11 @@ no deletion, reclassification event or state-transaction change is authorized by
 - CI found a static import cycle introduced by the earlier validation handoff. Moved the existing ordered-unique helper to the shared module and removed the reverse generator dependency. The 22 architecture checks passed; 105 final release regressions and 35 current-workspace generation regressions passed after the import fix.
 - No scientific calculation, model inference, live-job change, registry acceptance or claim of stable/global-minimum structures. Test structures and plans remain explicitly synthetic.
 - Release review reproduced three labels and small lateral offsets resolving to the same physical top/short-bridge pair. Multi-anchor deduplication now compares canonical site centers under the existing surface symmetries. An exact regression confirms a 1/3 shortfall with no output. 189 related tests and 36 final generation tests passed locally.
+
+## Reviewed adsorption template import (2026-11-18)
+
+- Added a species-independent Fe(110) full-pose import. The existing candidate review binds each template, atom mapping, molecular reference, species, and clean-slab hash. Planner, generator, and readback share the original plan. No catalog entry is needed for a fully reviewed bundle. Existing catalog constraints apply where defined.
+- Local construction and literature-guided geometry can be recorded as candidate origins. Actual site coverage and initial geometry must pass before batch output. Identical atoms in a diatomic can exchange under surface symmetry without adding a site.
+- The original two C2 templates were normalized to a pending input bundle outside the repository. The published third mode C2-3 still lacks a verified coordinate template on the local slab. No review or scientific calculation was created for that pose.
+- 152 related regressions, 67 final targeted checks, and seven current-workspace tests passed. Syntax and targeted Ruff passed.
+- Merge review found that editing an emitted POSCAR after generation could still pass readback. Readback now compares the actual adjacent POSCAR, atom mapping, and selective flags to the reviewed template in output order. The regression covers changed coordinates, constraints and anchor indices. 102 related tests and 56 final tests passed.

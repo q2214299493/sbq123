@@ -5,12 +5,12 @@ from typing import Any
 
 from scripts.runtime_resources import resource_path
 
-from .adsmind_common import SITE_CLASS_MAP, load_yaml_schema
+from .adsmind_common import SINGLE_ANCHOR_MODES, SITE_CLASS_MAP, load_yaml_schema
+from .reviewed_template_plan import PLAN_SOURCE, resolve_reviewed_template_plan
 
 
 SITE_PATTERN_ALIASES = {name.casefold(): value for name, value in SITE_CLASS_MAP.items()}
 SITE_PATTERN_ALIASES.update({value.casefold(): value for value in SITE_CLASS_MAP.values()})
-SINGLE_ANCHOR_MODES = {"c_centered", "o_centered", "terminal_c_centered"}
 PLANNING_FIELDS = {
     "plan_source", "evidence_priority_rank", "evidence_decision",
     "initial_motif_coverage", "final_stable_minima_count",
@@ -97,7 +97,15 @@ def validate_generation_plan(plan: dict[str, Any], species: str, surface: str, r
         or plan.get("plan_source") == "external_evidence_gate"
         or evidence.get("type") in {"whitelist", "authoritative_literature"}
     )
-    if external:
+    if plan.get("plan_source") == PLAN_SOURCE or "reviewed_template_bundle" in plan:
+        source = resolve_reviewed_template_plan(plan.get("reviewed_template_bundle"))
+        if (source["species"] != species or source["surface"] != surface
+                or source["candidates"] != plan.get("candidates") or plan.get("plan_source") != PLAN_SOURCE):
+            raise ValueError("reviewed template plan differs from the source bundle")
+        if plan["decision"] != "READY":
+            source["decision"] = plan["decision"]
+        plan = source
+    elif external:
         source = {key: value for key, value in plan.items() if key not in PLANNING_FIELDS}
         source["decision"] = plan.get("evidence_decision", plan["decision"])
         source = validate_external_plan(source, species=species, surface=surface)
