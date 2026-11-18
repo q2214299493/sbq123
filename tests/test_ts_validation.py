@@ -114,6 +114,10 @@ def test_dimer_analysis_requires_negative_curvature_and_force(tmp_path: Path) ->
     assert payload["vasp_force_convergence_source"] == "OUTCAR:last_complete_FORCES_max_atom"
     assert payload["torque_converged"] is True
     assert payload["scientifically_valid"] is False
+    assert payload["requires_frequency_validation"] is True
+    assert payload["requires_connectivity_validation"] is False
+    assert payload["connectivity_role"] == "optional_diagnostic_not_ts_acceptance_gate"
+    assert "requires_frequency_and_connectivity_validation" not in payload
     (tmp_path / "DIMCAR").write_text(
         "Step Force Torque Energy Curvature Angle\n1 0.01 0.02 -10.1 -0.5 0.1\n",
         encoding="ascii",

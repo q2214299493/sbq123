@@ -291,7 +291,9 @@ def analyze_dimer(workdir: Path, *, write_output: bool = True) -> dict[str, Any]
         )]),
         "final_mode": final_mode,
         "scientifically_valid": False,
-        "requires_frequency_and_connectivity_validation": True,
+        "requires_frequency_validation": True,
+        "requires_connectivity_validation": False,
+        "connectivity_role": "optional_diagnostic_not_ts_acceptance_gate",
     }
     if write_output:
         write_json(workdir / "dimer_analysis.json", payload)

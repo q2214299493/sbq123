@@ -29,6 +29,11 @@ def initial_motif_identity(motif: dict[str, Any]) -> dict[str, Any] | None:
     if len(set(atoms)) != len(atoms):
         return None
     mode = mode.strip().casefold()
+    if mode != "monodentate" and mode not in SINGLE_ANCHOR_MODES:
+        # The primary generator site cannot replace a complete multi-site mode.
+        site = motif.get("site_pattern")
+        if not isinstance(site, str) or not site.strip():
+            return None
     return {
         "site_pattern": SITE_PATTERN_ALIASES.get(site.strip().casefold(), site.strip().casefold()),
         "binding_mode": "monodentate" if mode in SINGLE_ANCHOR_MODES else mode,

@@ -31,7 +31,7 @@ from scripts.neb_agent.utils_vasp import parse_oszicar, parse_outcar
 from scripts import vasp_result_gate
 from scripts.vasp_result_gate import _validate_relaxation_state, read_incar_values
 from scripts.workflow_geometry import minimum_image_delta_xy
-from .build_fe110_adsorption import expanded_symbols, fe110_anchor_site_distances, read_poscar
+from .build_fe110_adsorption import expanded_symbols, fe110_anchor_site_distances, fe110_site_centers, nearest_fe110_site_centers, read_poscar
 from .build_fe110_care_batch import molecular_signature
 from .build_fe110_care_isomers import adsorbate_indices, connectivity, surface_pose_symmetries
 
@@ -224,7 +224,7 @@ def analysis_binding(slab: Path, policy: Path) -> dict:
         utils_vasp._advance_final_outcar_values, utils_vasp._outcar_stream,
         utils_vasp._HashingReader.readinto,
         scientific_validation.finite_number, scientific_validation.integer_number,
-        read_poscar, expanded_symbols, fe110_anchor_site_distances, molecular_signature,
+        read_poscar, expanded_symbols, fe110_anchor_site_distances, fe110_site_centers, nearest_fe110_site_centers, molecular_signature,
         adsorbate_indices, connectivity, connectivity_change, connectivity_edges,
         maximum_slab_displacement, minimum_cross_distance, minimum_image_delta_xy,
         read, ase_vasp.read_vasp,

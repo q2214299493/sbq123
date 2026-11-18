@@ -267,6 +267,26 @@ def fe110_anchor_site_distances(
     pair_tolerance: float | None = None,
     hollow_deduplication_tolerance: float | None = None,
 ) -> dict[str, float]:
+    centers = fe110_site_centers(
+        poscar,
+        z_tolerance=z_tolerance,
+        pair_tolerance=pair_tolerance,
+        hollow_deduplication_tolerance=hollow_deduplication_tolerance,
+    )
+    return {
+        name: distance
+        for name, (_, distance) in nearest_fe110_site_centers(poscar, anchor_frac, centers).items()
+    }
+
+
+def fe110_site_centers(
+    poscar: Poscar,
+    *,
+    z_tolerance: float | None = None,
+    pair_tolerance: float | None = None,
+    hollow_deduplication_tolerance: float | None = None,
+) -> dict[str, list[np.ndarray]]:
+    """Return fractional centers of all canonical sites on the exposed face."""
     defaults = fe110_rule_defaults()
     z_tolerance = defaults["z_tolerance"] if z_tolerance is None else z_tolerance
     pair_tolerance = defaults["pair_tolerance"] if pair_tolerance is None else pair_tolerance
@@ -280,14 +300,13 @@ def fe110_anchor_site_distances(
         raise ValueError("fewer than two top-layer Fe-Fe distance classes were found")
     short_distance = float(np.mean([item.distance for item in groups[0]]))
     long_distance = float(np.mean([item.distance for item in groups[1]]))
-    top_distance = min(inplane_fractional_distance(poscar.cell, anchor_frac, poscar.frac[index]) for index in top_indices)
-    distances = {"top": top_distance}
+    centers = {"top": [poscar.frac[index] for index in top_indices]}
     for name, target in (("short_bridge", short_distance), ("long_bridge", long_distance)):
-        distances[name] = min(
-            inplane_fractional_distance(poscar.cell, anchor_frac, candidate.midpoint)
+        centers[name] = [
+            candidate.midpoint
             for candidate in candidates
             if abs(candidate.distance - target) <= pair_tolerance
-        )
+        ]
     hollow_centers = triangle_hollow_candidates(
         poscar,
         top_indices,
@@ -298,8 +317,21 @@ def fe110_anchor_site_distances(
         [candidate.midpoint for candidate in candidates],
     )
     if hollow_centers:
-        distances["hollow"] = min(inplane_fractional_distance(poscar.cell, anchor_frac, center) for center in hollow_centers)
-    return distances
+        centers["hollow"] = hollow_centers
+    return centers
+
+
+def nearest_fe110_site_centers(
+    poscar: Poscar, anchor_frac: np.ndarray, centers: dict[str, list[np.ndarray]],
+) -> dict[str, tuple[np.ndarray, float]]:
+    """Resolve the nearest fractional center and lateral distance in Å per site class."""
+    return {
+        name: min(
+            ((center, inplane_fractional_distance(poscar.cell, anchor_frac, center)) for center in points),
+            key=lambda value: value[1],
+        )
+        for name, points in centers.items()
+    }
 
 
 def validate_site_set(

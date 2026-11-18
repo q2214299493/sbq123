@@ -12,8 +12,7 @@ from ase.data import covalent_radii
 from scripts.adsorption.build_fe110_adsorption import Poscar, classify_fe110_anchor_site
 from scripts.workflow_geometry import inplane_pbc_vector, minimum_image_delta_xy, relative_positions_xy
 
-from .adsmind_common import SITE_CLASS_MAP, load_yaml, read_json, require_ase_structure
-from .candidate_generation import ordered_unique
+from .adsmind_common import SITE_CLASS_MAP, load_yaml, ordered_unique, read_json, require_ase_structure
 
 
 def connectivity_edges(atoms: Atoms, indices: list[int], scale: float, minimum: float) -> list[tuple[int, int]]:
@@ -167,6 +166,9 @@ def validate_one_candidate(
     scale: float,
     hard_contact: float,
     seen: set[tuple[Any, ...]],
+    *,
+    atoms: Atoms | None = None,
+    surface_atoms: Atoms | None = None,
 ) -> str:
     family = record["surface_family"]
     adsorbate = record["adsorbate"]
@@ -184,9 +186,9 @@ def validate_one_candidate(
     if family != "metallic_fe" and record.get("site_label_source") != "explicit_manifest":
         record["needs_review"] = True
         return "explicit_site_label_required"
-    atoms = require_ase_structure(Path(record["initial_structure"]))
+    atoms = require_ase_structure(Path(record["initial_structure"])) if atoms is None else atoms
     slab_indices, adsorbate_indices = structure_indices(record, len(atoms))
-    surface_atoms = require_ase_structure(Path(record["surface_structure"]))
+    surface_atoms = require_ase_structure(Path(record["surface_structure"])) if surface_atoms is None else surface_atoms
     role_reason = lattice_role_reason(record, surface_atoms, rule)
     if role_reason is not None:
         record["needs_review"] = True
@@ -376,10 +378,26 @@ def analyze_relaxed_candidate(
     else:
         relaxed_site = classify_manifest_site(relaxed, anchor_index, sites_payload, analysis)
     slip = relaxed_site != metadata["planned_site_class"]
+    binding_sites = {}
+    binding_indices = metadata.get("binding_atom_indices_structure_0based", {})
+    if binding_indices:
+        if (any(type(index) is not int or index not in adsorbate_indices for index in binding_indices.values())
+                or len(set(binding_indices.values())) != len(binding_indices)):
+            raise ValueError("invalid binding atom structure indices")
+        def classify(atoms, index):
+            if metadata["surface_family"] == "metallic_fe":
+                return classify_relaxed_site(initial, atoms, index, analysis)
+            return classify_manifest_site(atoms, index, sites_payload, analysis)
+        initial_sites = {label: classify(initial, index) for label, index in binding_indices.items()}
+        relaxed_sites = {label: classify(relaxed, index) for label, index in binding_indices.items()}
+        slip = slip or initial_sites != relaxed_sites
+        binding_sites = {"initial_binding_site_classes": initial_sites, "relaxed_binding_site_classes": relaxed_sites}
     reconstructed = maximum_slab_displacement(initial, relaxed, slab_indices) > float(
         analysis["surface_reconstruction"]["maximum_slab_displacement_angstrom"]
     )
     unknown = relaxed_site == "unknown"
+    if binding_sites:
+        unknown = unknown or "unknown" in binding_sites["relaxed_binding_site_classes"].values()
     confidence = confidence_for_analysis(metadata, slip, bool(connectivity["connectivity_changed"]), unknown, reconstructed)
     intended = bool(metadata.get("target_dissociative", False))
     reason = analysis_reason(
@@ -394,6 +412,7 @@ def analyze_relaxed_candidate(
     recommend = reason in {"accepted", "slipped_to_new_site"} and confidence in {"high", "medium"} and not needs_review
     return {
         **metadata,
+        **binding_sites,
         "relaxed_site_class": relaxed_site,
         "chemical_slip": slip,
         "dissociated": dissociated,

@@ -86,6 +86,30 @@ coverage counts and cached policy values cannot bypass this check. Every
 candidate retains `initial_motif` separately from its relaxed site so that ML
 migration/dissociation cannot rewrite the original mode identity.
 
+Initial generation must produce chemically plausible, distinct adsorption-site
+structures; it does not require a lowest-energy or DFT-converged structure.
+Before writing the first POSCAR, generation now runs the existing candidate
+validator in memory and checks internal connectivity against the configured
+molecule, internal overlap, compressed bonds (shorter than the configured
+reference length divided by the existing connectivity scale), buried atoms,
+and surface/anchor contacts. Multidentate poses use the existing CARE seed
+contact bounds, without inheriting a single-anchor height or distance range.
+The molecular reference must be present in the species rule. These are initial
+geometry screens; they do not grade stability or establish an accepted result.
+
+Diversity is checked from actual mapped anchors, independently of motif labels.
+A single unchanged binding atom/site counts once even if molecular azimuth,
+tilt or height changes. Fe(110) resolves each anchor to a canonical site center
+before comparing multiple anchors. Fe45 uses the existing clean-slab,
+face-preserving symmetries and the site deduplication tolerance. Coordinate
+offsets within the same resolved site and edits to labels count as one mode.
+One representative is emitted per actual mode, with omitted
+same-site variant IDs recorded in its metadata. Fewer than the required
+number of actual modes blocks the whole batch before output. Each emitted
+record reports `initial_geometry_validation: PASS`, actual anchor site classes,
+and `scientific_stability: NOT_ASSESSED` separately. Existing source-review,
+scientific-acceptance and execution gates retain their roles.
+
 When a motif supplies `reviewed_structure_template`, the generator consumes
 its coordinates rather than the configured default molecule. The descriptor
 contains exactly `path` and `sha256`. The implemented format is an unwrapped,
@@ -98,12 +122,41 @@ then the planned azimuth is applied. Slab cell, atom mapping and constraints
 remain governed by the existing builder. Output `geometry_source` records the
 consumed path/hash, format and units separately from `initial_motif`.
 
-Full slab/adsorbate templates, multi-anchor modes, a different binding atom,
-unmapped atom order, constrained template atoms and invalid or stale templates
-are blocked before any batch output. There is no fallback to default geometry
-when a supplied/required template cannot be consumed. `--available-template`
-motif IDs alone do not provide geometry or authorize generation. Configured
-geometry remains the source for local-prior motifs that require no template.
+Multi-anchor modes consume a full slab/adsorbate POSCAR in the current slab
+frame. The atom order must be the complete original slab followed by the
+configured adsorbate `atom_symbols`; the cell, slab coordinates and slab flags
+must match the input slab (absolute numeric tolerance 1e-8, no relative tolerance).
+Adsorbate flags must be unconstrained. These poses retain every adsorbate
+coordinate, including unwrapped x/y coordinates: no configured height,
+translation or azimuth is applied. `orientation_degrees` must be zero.
+
+The motif must supply the same hash-bound descriptor plus
+`binding_atom_indices_zero_based`, a complete mapping from its distinct
+`binding_atoms` labels to distinct, actual integer adsorbate-local indices.
+Repeated elements such as `C1` and `C2` require explicit indices; element names
+are never used to guess an atom. The first entry of `binding_atoms` selects
+the primary anchor and must be a preferred, non-forbidden binding element.
+All mapped anchors must be non-forbidden. `generator_site_class` selects its
+primary canonical Fe(110) site, checked against the full pose by the existing
+site classifier. The full `site_pattern` remains the initial-mode identity;
+it is not replaced by the primary site. For example, a reviewed two-carbon
+motif may carry the mapping `{"C1": 0, "C2": 1}` with
+`binding_atoms: [C1, C2]`; this example supplies no physical geometry or approval.
+
+Output records both adsorbate-local and structure-level binding atom indices,
+together with `geometry_source.format: slab_adsorbate_POSCAR`. Multi-anchor
+outputs remain low-confidence and review-required. Relaxation analysis compares
+the initial and relaxed site class of every mapped anchor, so a secondary
+anchor's site-class change is reported even when the primary anchor stays put.
+
+Unmapped atom order, incompatible slabs, constrained adsorbate atoms, a different
+single binding atom and invalid or stale templates are blocked before any
+batch output. There is no fallback to default geometry when a supplied/required
+template cannot be consumed. `--available-template` motif IDs alone do not
+provide geometry or authorize generation. Configured geometry remains the
+source for local-prior motifs that require no template. The three distinct
+reviewed starting modes and source-evidence gates still apply; this support
+does not supply missing scientific templates or authorize any calculation.
 
 For iron Fischer-Tropsch C/H/O intermediates, the planner first loads
 `configs/adsmind_lite/iron_fts_prescreen.yaml`. It distinguishes carbon
@@ -112,8 +165,8 @@ steric accessibility, and symmetry-inequivalent directions along/across Fe
 rows. Formula-only or element-only ranking is not accepted.
 For C2 species it also separates di-sigma long/short directions, eta2(C,C),
 pi-top, terminal-radical anchoring, carbonyl modes, and chain-orientation
-variants. The generic builder does not implement multi-center placement;
-a reviewed template alone cannot enable an unsupported binding mode.
+variants. Multi-center construction uses the mapped full-pose template contract
+above; it never synthesizes extra anchors from the single-anchor defaults.
 
 For an uncalibrated species, `--species-features FEATURES.yaml` activates the
 feature-based FTS planner as a retrieval-query helper. Its output is stored

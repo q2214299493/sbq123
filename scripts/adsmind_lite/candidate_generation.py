@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import hashlib
 from pathlib import Path
 from typing import Any
 
@@ -10,7 +9,7 @@ from scripts.adsorption.build_fe110_adsorption import (
     Poscar,
     Site,
     anchor_cartesian_position,
-    parse_poscar_text,
+    classify_fe110_anchor_site,
     read_poscar,
     validate_adsorbate,
     write_poscar,
@@ -18,7 +17,9 @@ from scripts.adsorption.build_fe110_adsorption import (
 from scripts.workflow_geometry import expand_symbols
 from scripts.scientific_validation import finite_number
 
-from .adsmind_common import load_yaml, read_json, require_ase_structure, write_json, write_jsonl
+from .adsmind_common import load_yaml, ordered_unique, read_json, require_ase_structure, write_json, write_jsonl
+from .generation_validation import validate_generated_batch
+from .reviewed_templates import full_pose_geometry, multi_anchor_mapping, read_reviewed_template
 from .motif_coverage import (
     SITE_PATTERN_ALIASES, generation_coverage_rules, initial_motif_identity,
     review_initial_motif_coverage, validate_generation_plan,
@@ -79,6 +80,7 @@ def generate_candidates(
                 motif,
             )
             pending.append((structure_path, structure, metadata))
+    pending = validate_generated_batch(pending, slab, site_payload, rules)
     # Resolve every pose/metadata error before publishing the first structure.
     for structure_path, structure, metadata in pending:
         write_poscar(structure_path, structure)
@@ -147,20 +149,24 @@ def select_planned_sites(
     return selected, rejected
 
 
-def _require_supported_binding(name: str, rule: dict[str, Any], motif: dict[str, Any] | None) -> None:
+def _require_supported_binding(name: str, rule: dict[str, Any], motif: dict[str, Any] | None) -> dict[str, int]:
     identity = initial_motif_identity(motif) if motif is not None else None
+    if identity is not None and identity["binding_mode"] != "monodentate":
+        mapping = multi_anchor_mapping(name, rule, motif)
+        if "reviewed_structure_template" not in motif:
+            raise ValueError(f"{name}: reviewed_structure_template_required")
+        return mapping
     if rule.get("anchor_mode", "atom") != "atom" or (motif is not None and (
-        identity is None or identity["binding_mode"] != "monodentate"
-        or identity["binding_atoms"] != [rule["anchor_atom"]]
+        identity is None or identity["binding_atoms"] != [rule["anchor_atom"]]
     )):
-        raise ValueError(f"{name}: binding_mode_not_supported_by_generator; only the configured single-atom anchor is implemented")
+        raise ValueError(f"{name}: binding_mode_not_supported_by_generator; require configured single anchor or mapped full pose")
+    return {}
 
 
 def _candidate_geometry(
     name: str, rule: dict[str, Any], motif: dict[str, Any] | None,
 ) -> tuple[list[str], np.ndarray, int | None, float, dict[str, Any]]:
     """Consume the same reviewed bytes whose hash is recorded in provenance."""
-    _require_supported_binding(name, rule, motif)
     motif = motif or {}
     geometry_source = {"type": "configured_adsorbate_geometry", "coordinate_units": "angstrom"}
     if "reviewed_structure_template" not in motif:
@@ -168,45 +174,15 @@ def _candidate_geometry(
             raise ValueError(f"{name}: reviewed_structure_template_required; a motif ID is not a geometry template")
         effective_rule = rule
     else:
-        descriptor = motif["reviewed_structure_template"]
-        if (not isinstance(descriptor, dict) or set(descriptor) != {"path", "sha256"}
-                or not isinstance(descriptor["path"], str) or not descriptor["path"]
-                or not isinstance(descriptor["sha256"], str)):
-            raise ValueError(f"{name}: unsupported_reviewed_template_descriptor; require only path and sha256")
-        path = Path(descriptor["path"])
-        try:
-            content = path.read_bytes()
-        except OSError as exc:
-            raise ValueError(f"{name}: reviewed_template_unreadable: {path}") from exc
-        digest = hashlib.sha256(content).hexdigest()
-        if digest != descriptor["sha256"]:
-            raise ValueError(f"{name}: reviewed_template_sha256_mismatch: {path}")
-        try:
-            text = content.decode("utf-8")
-            lines = text.splitlines()
-            mode = 8 if lines[7].strip().lower().startswith("s") else 7
-            if lines[mode].strip().lower()[:1] not in {"d", "c"}:
-                raise ValueError("template coordinates must be Direct or Cartesian")
-            template = parse_poscar_text(text, str(path))
-            if any(count <= 0 for count in template.counts):
-                raise ValueError("template requires positive species counts")
-            if (not np.isfinite(template.cell).all() or np.linalg.det(template.cell) == 0.0
-                    or not np.isfinite(template.frac).all()):
-                raise ValueError("template coordinates and cell must be finite and nonsingular")
-            if expanded_poscar_symbols(template) != list(rule["atom_symbols"]):
-                raise ValueError("require adsorbate-only POSCAR in configured atom order; slab templates need explicit mapping")
-            if any(tuple(value.upper() for value in flag) != ("T", "T", "T") for flag in template.flags):
-                raise ValueError("template atom constraints are not supported")
-            coordinates = template.frac @ template.cell
-            anchor_index = int(rule["anchor_index"])
-            relative = coordinates - coordinates[anchor_index]
-            effective_rule = {**rule, "relative_cartesian_angstrom": relative.tolist()}
-        except (UnicodeError, ValueError, IndexError, np.linalg.LinAlgError) as exc:
-            raise ValueError(f"{name}: unsupported_reviewed_template_geometry: {exc}") from exc
-        geometry_source = {
-            "type": "reviewed_structure_template", "path": str(path), "sha256": digest,
-            "format": "adsorbate_only_POSCAR", "coordinate_units": "angstrom",
-        }
+        template, geometry_source = read_reviewed_template(name, motif["reviewed_structure_template"])
+        if expanded_poscar_symbols(template) != list(rule["atom_symbols"]):
+            raise ValueError(f"{name}: unsupported_reviewed_template_geometry; require adsorbate-only POSCAR in configured atom order")
+        if any(tuple(value.upper() for value in flag) != ("T", "T", "T") for flag in template.flags):
+            raise ValueError(f"{name}: unsupported_reviewed_template_geometry; template atom constraints are not supported")
+        coordinates = template.frac @ template.cell
+        relative = coordinates - coordinates[int(rule["anchor_index"])]
+        effective_rule = {**rule, "relative_cartesian_angstrom": relative.tolist()}
+        geometry_source["format"] = "adsorbate_only_POSCAR"
     atom_symbols, relative, anchor_local, target = validate_adsorbate(name, effective_rule)
     if not np.isfinite(relative).all():
         raise ValueError(f"{name}: adsorbate coordinates must be finite")
@@ -221,11 +197,20 @@ def compose_candidate_structure(
     motif: dict[str, Any] | None = None,
 ) -> tuple[Poscar, dict[str, Any]]:
     """Place one motif using Cartesian Å offsets and return explicit 0-based structure indices."""
-    atom_symbols, relative, anchor_local, target, geometry_source = _candidate_geometry(adsorbate, rule, motif)
-    relative = rotate_relative_geometry(relative, finite_number((motif or {}).get("orientation_degrees", 0.0), "orientation_degrees"))
-    anchor = anchor_cartesian_position(slab, site, target)
-    adsorbate_frac = (anchor + relative) @ np.linalg.inv(slab.cell)
-    adsorbate_frac[:, :2] %= 1.0
+    binding_indices = _require_supported_binding(adsorbate, rule, motif)
+    if binding_indices:
+        anchor_local = next(iter(binding_indices.values()))
+        atom_symbols = list(rule["atom_symbols"])
+        adsorbate_frac, geometry_source = full_pose_geometry(adsorbate, slab, rule, motif)
+        primary_site, _ = classify_fe110_anchor_site(slab, adsorbate_frac[anchor_local])
+        if primary_site != site.name:
+            raise ValueError(f"{adsorbate}: reviewed_template_primary_site_mismatch")
+    else:
+        atom_symbols, relative, anchor_local, target, geometry_source = _candidate_geometry(adsorbate, rule, motif)
+        relative = rotate_relative_geometry(relative, finite_number((motif or {}).get("orientation_degrees", 0.0), "orientation_degrees"))
+        anchor = anchor_cartesian_position(slab, site, target)
+        adsorbate_frac = (anchor + relative) @ np.linalg.inv(slab.cell)
+        adsorbate_frac[:, :2] %= 1.0
     slab_symbols = expanded_poscar_symbols(slab)
     species_order = ordered_unique([*slab.symbols, *rule["species_order"]])
     new_frac: list[np.ndarray] = []
@@ -262,6 +247,9 @@ def compose_candidate_structure(
     )
     return structure, {
         "geometry_source": geometry_source,
+        "anchor_index_adsorbate_0based": anchor_local,
+        "binding_atom_indices_adsorbate_0based": binding_indices,
+        "binding_atom_indices_structure_0based": {label: adsorbate_indices[index] for label, index in binding_indices.items()},
         "slab_indices_structure_0based": slab_indices,
         "adsorbate_indices_structure_0based": adsorbate_indices,
         "anchor_index_structure_0based": adsorbate_indices[anchor_local],
@@ -279,10 +267,6 @@ def rotate_relative_geometry(relative: np.ndarray, angle_degrees: float) -> np.n
     angle = np.deg2rad(angle_degrees)
     rotation = np.array([[np.cos(angle), -np.sin(angle), 0.0], [np.sin(angle), np.cos(angle), 0.0], [0.0, 0.0, 1.0]])
     return relative @ rotation.T
-
-
-def ordered_unique(values: list[str]) -> list[str]:
-    return list(dict.fromkeys(values))
 
 
 def generation_failure(surface_name: str, sites: dict[str, Any], adsorbate: str, reason: str) -> dict[str, Any]:
@@ -313,9 +297,10 @@ def candidate_metadata(
     motif: dict[str, Any],
 ) -> dict[str, Any]:
     """Create the candidate contract with Å geometry provenance and 0-based atom-index mappings."""
-    rule_confidence = str(rule.get("default_confidence", "low"))
+    multi_anchor = bool(index_map.get("binding_atom_indices_structure_0based"))
+    rule_confidence = "low" if multi_anchor else str(rule.get("default_confidence", "low"))
     if (
-        sites["surface_family"] == "metallic_fe"
+        not multi_anchor and sites["surface_family"] == "metallic_fe"
         and rule.get("class") in {"simple", "C1_oxygenate"}
         and not rule.get("isomer_sensitive", False)
     ):
@@ -338,8 +323,10 @@ def candidate_metadata(
         "planned_site_id": site["site_id"],
         "planned_site_class": site["site_class"],
         "planned_site_fractional_xy": site["fractional_xy"],
-        "planned_binding_atom": rule["anchor_atom"],
-        "anchor_index_adsorbate_0based": int(rule["anchor_index"]),
+        "planned_binding_atom": rule["atom_symbols"][index_map["anchor_index_adsorbate_0based"]],
+        "anchor_index_adsorbate_0based": index_map["anchor_index_adsorbate_0based"],
+        "binding_atom_indices_adsorbate_0based": index_map["binding_atom_indices_adsorbate_0based"],
+        "binding_atom_indices_structure_0based": index_map["binding_atom_indices_structure_0based"],
         "anchor_index_structure_0based": index_map["anchor_index_structure_0based"],
         "slab_atom_count": slab_atom_count,
         "slab_indices_structure_0based": index_map["slab_indices_structure_0based"],
@@ -359,7 +346,7 @@ def candidate_metadata(
         "initial_structure": str(structure_path),
         "surface_structure": str(surface_path),
         "confidence_level": confidence,
-        "needs_review": bool(sites.get("needs_review", False) or site.get("needs_review", False)),
+        "needs_review": bool(multi_anchor or sites.get("needs_review", False) or site.get("needs_review", False)),
         "reason_code": site.get("reason_code", "generated"),
     }
 
