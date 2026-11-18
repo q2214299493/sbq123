@@ -13,6 +13,12 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # File Index
 
+## Two C1–C2 barrier/strategy registrations —2026-11-18
+
+- `docs/reviews/c1_c2_barrier_registration_20261118.md`:accepted energy values,source and strategy identities,evidence preservation,readback verification.
+- `outputs/c1_c2_barrier_registration_20261118_v1/`:canonical local analysis chains,plans,receipts and verification. Raw frequency files remain local.
+- `scripts/ts_validation/saddle_energy.py`:TS-owner final-TOTEN intake distinct from adsorption relaxation.
+
 ## Two C1–C2 barrier registration review packets —2026-11-18
 
 - `outputs/c1_c2_barrier_review_20261118_v1/审核摘要.md`:two pending electronic-energy chains,current-gate blockers and dependency/approval boundaries;no database write.

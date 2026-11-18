@@ -38,7 +38,12 @@ def validate_result_acceptance(connection, row, provenance):
     claim = evidence["claim"]
     if claim.get("result_sha256") != sha256_json(row) or claim.get("validation_sha256") != sha256_json(validation):
         raise ValueError("review must bind the exact result and scientific validation")
-    _validate_relaxation_value(connection, row, validation, target)
+    if validation.get("owner") == "ts_saddle_final_energy":
+        from scripts.ts_validation.saddle_energy import validate_saddle_energy
+
+        validate_saddle_energy(connection, row, validation, target)
+    else:
+        _validate_relaxation_value(connection, row, validation, target)
 
 
 def _validate_relaxation_value(connection, row, validation, target):

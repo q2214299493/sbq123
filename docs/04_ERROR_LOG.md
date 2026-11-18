@@ -13,15 +13,6 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Error Log
 
-## C1–C2 barrier evidence bindings —2026-11-18
-
-Fresh canonical gates reject CH+CO's old Dimer summary(differences limited to
-four connectivity-description fields) and INT06→MID's VFA old production-profile
-hash(unchanged frequency-validation sub-policy).6 energy outputs/endpoints pass;
-no formal registration/current claim authority. Prepare new analysis/reference
-review copies and new claim-bound gates;retain original evidence,do not infer
-new VASP or substitute hashes. See outputs/c1_c2_barrier_review_20261118_v1/审核摘要.md.
-
 ## CH+CO local refinement review and RSI —2026-11-12
 
 Resolved CHCO sampling/soft-review handoff details now live in

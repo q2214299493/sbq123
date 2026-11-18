@@ -22,15 +22,13 @@ CH+CO9998592 and INT06→MID9796856 have Grade-A TSs but no registered compatibl
 barrier sets.Located9833429 H-migration archive:max atom0.015998eV/A;final-mode
 review remains needs_review,no linked Grade-A found.9573951 final-geometry link
 needs recovery;registered energy hash passes,no rerun inferred.
-Nov18:two existing-output review packets prepared.6 normal/electronically
-converged outputs,source hashes,endpoints and cell/order/fixed masks pass.
-Draft forward barriers0.97360174eV(CH+CO),0.16732341eV(INT06→MID),not registered.
-Current gates both block:CH+CO Dimer connectivity-description fields changed;
-INT06 VFA binds an old production-profile hash(same frequency sub-policy).
-TS final-energy/compatibility metadata remain missing;original evidence intact.
-Next:prepare fresh analysis/reference review copies,then current claim gates and
-owner registration.No new computation,automatic approval or database mutation.
-See outputs/c1_c2_barrier_review_20261118_v1/审核摘要.md.
+Nov18:both analysis chains refreshed with historical Grade-A records and raw
+outputs unchanged. Current claim-bound gates pass. CH+CO9998592 and
+INT06→MID9796856 accepted electronic barriers are registered with two Grade-A
+strategies. Forward/reverse in eV:0.97360174/0.31429371 and 0.16732341/0.09964185.
+Append-only plan and registry readback/integrity pass. No new VASP,thermal
+correction,MKM or spreadsheet write. Next:consistent IS/TS/FS thermochemistry.
+See docs/reviews/c1_c2_barrier_registration_20261118.md.
 The separately repaired canonical RSI runtime explicitly resumed the old C1–C2
 question:GENERATED,3 turns/5 host actions,one provided trial policy.Bounded
 excerpts prevent independent full-table validation;local source checks own the

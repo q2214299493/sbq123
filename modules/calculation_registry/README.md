@@ -198,8 +198,13 @@ Predictions stay outside accepted result tables. New candidates require evidence
 accepted results require B3 transferable calculated-result evidence bound to the
 exact result, compatibility and current scientific sources. The generic accepted
 result adapter supports reviewed VASP relaxation `final_toten` in eV via existing
-owners. Other scientific result kinds use their existing owning workflow; a bare
-accepted status is not authority. Full provenance is preserved in `batch_applied`.
+owners. The `ts_saddle_final_energy` owner can additionally bind a DIMER or
+CI-NEB final TOTEN to the exact current barrier claim, registered Grade-A
+validation, compatibility and source OUTCAR. Frequency-job energies and
+nonconverged outputs are not eligible. This dependency registration is not a
+barrier claim: the separate barrier-and-strategy transaction still applies.
+Other result kinds use their own workflows; a bare accepted status is not
+authority. Full provenance is preserved in `batch_applied`.
 Published results retain the separate Excel promotion gate. Excel apply rechecks
 the database under lock, records a publication event and restores workbook/receipt
 on ordinary transaction failure. An interrupted attempt remains explicitly pending
