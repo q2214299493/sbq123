@@ -9,6 +9,7 @@ from scripts.adsorption.build_fe110_adsorption import read_poscar, write_poscar
 from scripts.adsmind_lite.adsmind_common import read_json, write_json
 from scripts.artifact_io import sha256_file
 from tests.test_multi_anchor_templates import multi_bundle
+from tests.test_adsmind_lite import SLAB
 from tests.test_reviewed_template_generation import bundle, generate, template
 
 
@@ -63,6 +64,31 @@ def test_distinct_labels_cannot_pad_one_actual_multi_anchor_pose(tmp_path, renam
             motif["binding_atoms"] = [f"C_label_{number}", f"O_label_{number}"]
             motif["binding_atom_indices_zero_based"] = dict(zip(motif["binding_atoms"], [0, 1]))
         motifs.append(motif)
+    plan["species_plans"][0]["candidates"] = motifs
+    write_json(plan_path, plan)
+    with pytest.raises(ValueError, match="actual_initial_site_coverage 1/3"):
+        generate(tmp_path, sites_path, plan_path)
+    assert not (tmp_path / "output").exists()
+
+
+def test_lateral_offsets_cannot_pad_the_same_top_and_short_bridge_mode(tmp_path):
+    _, sites_path, plan_path = multi_bundle(tmp_path)
+    plan = read_json(plan_path)
+    base = plan["species_plans"][0]["candidates"][0]
+    source = read_poscar(Path(base["reviewed_structure_template"]["path"]))
+    inverse = np.linalg.inv(read_poscar(SLAB).cell)
+    motifs = []
+    for number, shift in enumerate(((0.32, 0, 0), (-0.32, 0, 0), (0, 0.32, 0))):
+        pose = deepcopy(source)
+        pose.frac[-2:] += np.asarray(shift) @ inverse
+        path = tmp_path / f"offset_{number}.vasp"
+        write_poscar(path, pose)
+        motifs.append({
+            **base,
+            "motif_id": f"offset_{number}",
+            "site_pattern": f"claimed_pattern_{number}",
+            "reviewed_structure_template": {"path": str(path), "sha256": sha256_file(path)},
+        })
     plan["species_plans"][0]["candidates"] = motifs
     write_json(plan_path, plan)
     with pytest.raises(ValueError, match="actual_initial_site_coverage 1/3"):

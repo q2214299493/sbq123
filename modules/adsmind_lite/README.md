@@ -99,10 +99,11 @@ geometry screens; they do not grade stability or establish an accepted result.
 
 Diversity is checked from actual mapped anchors, independently of motif labels.
 A single unchanged binding atom/site counts once even if molecular azimuth,
-tilt or height changes. Multiple anchors are compared by their x/y positions;
-Fe45 uses the existing clean-slab, face-preserving symmetries, with the owning
-site-classification tolerance. Renaming anchors or site patterns does not add
-a physical mode. One representative is emitted per actual mode, with omitted
+tilt or height changes. Fe(110) resolves each anchor to a canonical site center
+before comparing multiple anchors. Fe45 uses the existing clean-slab,
+face-preserving symmetries and the site deduplication tolerance. Coordinate
+offsets within the same resolved site and edits to labels count as one mode.
+One representative is emitted per actual mode, with omitted
 same-site variant IDs recorded in its metadata. Fewer than the required
 number of actual modes blocks the whole batch before output. Each emitted
 record reports `initial_geometry_validation: PASS`, actual anchor site classes,
