@@ -132,6 +132,7 @@ def preflight(
     incar = read_incar_values(workdir / "INCAR") if core_ready else {}
     cores = _script_cores(workdir / "script.lsf") if core_ready else None
     errors = [f"missing:{name}" for name in missing]
+    resource_fields = _resource_preflight(workdir / "script.lsf", errors, kind=kind, cores=cores)
     dimer_gate: dict[str, Any] = {}
     vfa_gate: dict[str, Any] = {}
     connectivity_gate: dict[str, Any] = {}
@@ -173,6 +174,7 @@ def preflight(
         "files": manifest,
         "bundle_sha256": sha256_json({"kind": kind, "files": manifest}),
         "strategy_retry_check": learning_check,
+        **resource_fields,
     }
     if kind == "dimer":
         payload["dimer_hard_gate_passed"] = bool(dimer_gate.get("hard_gate_passed"))
@@ -190,6 +192,56 @@ def preflight(
     if write_report:
         write_json(workdir / "submission_preflight.json", payload)
     return payload
+
+
+def _resource_preflight(
+    path: Path, errors: list[str], *, kind: str, cores: int | None,
+) -> dict[str, Any]:
+    if not path.is_file():
+        return {}
+    try:
+        directives = _script_lsf_directives(path)
+        if "-W" in directives:
+            if kind != "diagnostic_static":
+                raise ValueError("#BSUB -W is supported only for diagnostic_static")
+            if cores is None or cores <= 0:
+                raise ValueError("#BSUB -W requires a positive NP rank count")
+    except ValueError as exc:
+        errors.append(f"invalid_lsf_directive:{exc}")
+        return {}
+    fields: dict[str, Any] = {}
+    if "-R" in directives:
+        fields["resource_requirement"] = directives["-R"]
+    if "-W" in directives:
+        fields["wall_limit_minutes"] = int(directives["-W"])
+    return fields
+
+
+def _script_lsf_directives(path: Path) -> dict[str, str]:
+    """Read the explicitly supported scheduling options from the bound script."""
+    directives: dict[str, str] = {}
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not re.match(r"^\s*#BSUB(?:\s|$)", line):
+            continue
+        tokens = shlex.split(line.strip()[5:])
+        if len(tokens) != 2 or tokens[0] not in {"-R", "-W"} or not tokens[1].strip():
+            raise ValueError("only #BSUB -R and diagnostic-static -W are supported")
+        option, value = tokens
+        if option in directives:
+            raise ValueError(f"duplicate #BSUB {option} directive")
+        if option == "-W" and re.fullmatch(r"[1-9][0-9]{0,5}", value) is None:
+            raise ValueError("#BSUB -W requires a positive integer minute count")
+        directives[option] = value
+    return directives
+
+
+def _bsub_command(report: dict[str, Any]) -> str:
+    args = ["bsub"]
+    if report.get("resource_requirement") is not None:
+        args.extend(["-R", report["resource_requirement"]])
+    if "wall_limit_minutes" in report:
+        args.extend(["-n", str(report["cores"]), "-W", str(report["wall_limit_minutes"])])
+    return shlex.join([*args, "script.lsf"])
 
 
 def _required_files(kind: str) -> list[str]:
@@ -471,7 +523,7 @@ def submit(
             f"if test ! -e {remote_dir}/POTCAR; then cp {potcar_source} {remote_dir}/POTCAR; fi",
             *_remote_bundle_checks(remote_dir, {**dict(bundle.files), "POTCAR": potcar_sha256}),
             f"cd {remote_dir}",
-            "bsub script.lsf",
+            _bsub_command(report),
         ])
         completed = _run(["ssh", host, remote_check])
         matches = JOB_ID.findall(completed.stdout)

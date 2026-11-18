@@ -625,6 +625,17 @@ recomputes the bundle hash, verifies MPI-rank divisibility and the remote
 POTCAR hash, and rejects unlisted actions. Specialized numerical helpers remain
 under `scripts/neb_agent/`; they are evidence backends, not workflow authority.
 
+For LSF node restrictions, the hash-bound `script.lsf` may contain one
+`#BSUB -R 'select[hname!=gknew0440]'` directive. Preflight records it and the
+executor passes it explicitly as a quoted `bsub -R` argument, because submission
+by script filename does not itself apply BSUB comments. A `diagnostic_static`
+script may also contain one `#BSUB -W 90` directive with a positive integer
+minute count. The preflight binds it and the executor passes both `-W` and
+`-n` using the script's validated `NP` value. Duplicate, malformed, or
+unsupported BSUB directives fail preflight. Changing the script requires a new gate.
+The sunboquan site hook cannot preserve double quotes inside this expression;
+use the shown unquoted hostname form and verify the scheduler's recorded request.
+
 ## Code Architecture
 
 - Main-worktree RSI integration is opt-in at `cli_commands._plan_command`, before
