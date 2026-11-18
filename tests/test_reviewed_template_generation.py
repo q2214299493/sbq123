@@ -8,6 +8,7 @@ import pytest
 
 from scripts.adsorption.build_fe110_adsorption import read_poscar
 from scripts.adsmind_lite import candidate_generation as builder
+from scripts.adsmind_lite import reviewed_templates
 from scripts.adsmind_lite.core import detect_surface_sites, load_yaml, read_json, write_json
 from scripts.adsmind_lite.evidence_gate import resolve_external_evidence
 from scripts.adsmind_lite.prescreen import load_prescreen_rules, plan_species
@@ -169,7 +170,7 @@ def test_direct_composer_rejects_unsupported_binding_even_with_valid_template(tm
     rule = load_yaml(CONFIG / "adsorbate_rules.yaml")["adsorbates"]["CO"]
     motif = {"site_pattern": "top", "binding_mode": "bidentate", "binding_atoms": ["C", "O"],
              "reviewed_structure_template": template(tmp_path)}
-    with pytest.raises(ValueError, match="binding_mode_not_supported_by_generator"):
+    with pytest.raises(ValueError, match="explicit_multi_anchor_mapping_required"):
         builder.compose_candidate_structure(slab, builder.site_from_record(sites["sites"][0], slab), "CO", rule, motif)
 
 
@@ -190,13 +191,13 @@ def test_template_geometry_does_not_depend_on_default_coordinates(tmp_path):
 def test_template_parsing_uses_the_same_bytes_that_were_hashed(tmp_path, monkeypatch):
     descriptor = template(tmp_path)
     sites, _, _ = bundle(tmp_path, descriptor)
-    parse = builder.parse_poscar_text
+    parse = reviewed_templates.parse_poscar_text
 
     def change_after_read(text, source):
         Path(descriptor["path"]).write_text("changed after reviewed bytes were read", encoding="utf-8")
         return parse(text, source)
 
-    monkeypatch.setattr(builder, "parse_poscar_text", change_after_read)
+    monkeypatch.setattr(reviewed_templates, "parse_poscar_text", change_after_read)
     rule = load_yaml(CONFIG / "adsorbate_rules.yaml")["adsorbates"]["CO"]
     motif = {"site_pattern": "top", "binding_mode": "monodentate", "binding_atoms": ["C"],
              "reviewed_structure_template": descriptor}

@@ -103,3 +103,11 @@ no deletion, reclassification event or state-transaction change is authorized by
 - Synthetic end-to-end generation leaves MODECAR review pending and cannot start DIMER; changed source/review/mode is rejected.94related and structure regressions passed; GPU preparation rules are isolated while preserving the400-line module limit.
 - This closes the previously identified missing runtime in the prepared branch; no real server deployment, new calculation, automatic acceptance or historical evidence refresh.
 - Review: docs/reviews/gpu_reviewed_dimer_release_20261115.md. Multi-anchor generation and legacy DIMER output metadata remain separate.
+
+## Remaining adsorption/TS code repairs (2026-11-18)
+
+- Added hash-bound full slab/adsorbate templates for explicitly mapped multi-anchor poses. The original slab frame/constraints are checked; no single-anchor placement defaults are applied to a full pose. Repeated element labels require actual integer atom indices.
+- Kept the complete multi-site pattern for initial coverage and tracked each mapped anchor's initial/relaxed site class. Outputs remain low-confidence and review-required; source-bound mapping changes, invalid templates and incomplete coverage fail before batch output.
+- Replaced the legacy DIMER compound validation flag with explicit required-frequency and optional-connectivity metadata. Scientific acceptance, execution authority and historical evidence are unchanged.
+- Validation: syntax/import checks and changed-file Ruff passed; 287 related regressions passed, followed by 123 final targeted regressions after flag-case handling and validation reuse were finalized. Another 119 owner regressions passed in the updated current workspace. Safe state sync applied nothing and requested no review; the end audit had zero errors (66 existing inventory warnings plus two additional external-worktree inventory warnings). Synthetic fixtures only; no physical template, model inference, remote deployment or scientific calculation was generated/run.
+- These close the two remaining code findings recorded in the 2026-11-14 audit. Real species still need their own reviewed, compatible templates and three distinct initial modes; no missing scientific evidence has been fabricated.

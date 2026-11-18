@@ -112,12 +112,15 @@ authoritative-journal stage; failure there remains `NEEDS_REVIEW`. Chemical
 heuristics may form search terms but cannot generate candidates. Multidentate
 and same-site orientation variants require reviewed templates.
 
-AdsMind's single-anchor builder consumes reviewed adsorbate-only POSCAR
-coordinates, verifies their hash at consumption and records `geometry_source`.
-Its exact supported format and failure boundary are documented in
-`modules/adsmind_lite/README.md`. Full slab templates and unsupported binding
-modes require explicit mapping/support; they cannot silently use default
-molecular geometry. Structure generation does not establish geometry acceptance.
+AdsMind consumes hash-bound adsorbate-only templates for configured single
+anchors and full slab/adsorbate templates for explicitly mapped multiple
+anchors. Full poses must match the current slab, retain all reviewed anchor
+coordinates, and remain low-confidence and review-required. The exact formats,
+index mapping and failure boundaries are documented in
+`modules/adsmind_lite/README.md`. Invalid templates cannot silently use default
+geometry. Initial coverage uses the complete binding-mode pattern; relaxation
+analysis tracks all mapped anchors. Structure generation does not establish
+geometry acceptance or authorize calculations.
 
 For Fischer-Tropsch intermediates, use the coordination-demand ladder and
 oxygen-role rules in `configs/adsmind_lite/iron_fts_prescreen.yaml`. Require

@@ -376,10 +376,26 @@ def analyze_relaxed_candidate(
     else:
         relaxed_site = classify_manifest_site(relaxed, anchor_index, sites_payload, analysis)
     slip = relaxed_site != metadata["planned_site_class"]
+    binding_sites = {}
+    binding_indices = metadata.get("binding_atom_indices_structure_0based", {})
+    if binding_indices:
+        if (any(type(index) is not int or index not in adsorbate_indices for index in binding_indices.values())
+                or len(set(binding_indices.values())) != len(binding_indices)):
+            raise ValueError("invalid binding atom structure indices")
+        def classify(atoms, index):
+            if metadata["surface_family"] == "metallic_fe":
+                return classify_relaxed_site(initial, atoms, index, analysis)
+            return classify_manifest_site(atoms, index, sites_payload, analysis)
+        initial_sites = {label: classify(initial, index) for label, index in binding_indices.items()}
+        relaxed_sites = {label: classify(relaxed, index) for label, index in binding_indices.items()}
+        slip = slip or initial_sites != relaxed_sites
+        binding_sites = {"initial_binding_site_classes": initial_sites, "relaxed_binding_site_classes": relaxed_sites}
     reconstructed = maximum_slab_displacement(initial, relaxed, slab_indices) > float(
         analysis["surface_reconstruction"]["maximum_slab_displacement_angstrom"]
     )
     unknown = relaxed_site == "unknown"
+    if binding_sites:
+        unknown = unknown or "unknown" in binding_sites["relaxed_binding_site_classes"].values()
     confidence = confidence_for_analysis(metadata, slip, bool(connectivity["connectivity_changed"]), unknown, reconstructed)
     intended = bool(metadata.get("target_dissociative", False))
     reason = analysis_reason(
@@ -394,6 +410,7 @@ def analyze_relaxed_candidate(
     recommend = reason in {"accepted", "slipped_to_new_site"} and confidence in {"high", "medium"} and not needs_review
     return {
         **metadata,
+        **binding_sites,
         "relaxed_site_class": relaxed_site,
         "chemical_slip": slip,
         "dissociated": dissociated,
