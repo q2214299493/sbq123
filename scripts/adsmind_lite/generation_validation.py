@@ -6,20 +6,15 @@ from ase import Atoms
 
 from scripts.adsorption.build_fe110_adsorption import fe110_rule_defaults, fe110_site_centers, nearest_fe110_site_centers
 from scripts.runtime_resources import resource_path
-from scripts.workflow_geometry import expand_symbols, minimum_image_delta_xy
+from scripts.workflow_geometry import minimum_image_delta_xy
 
-from .adsmind_common import SITE_CLASS_MAP, load_yaml
+from .adsmind_common import SITE_CLASS_MAP, load_yaml, pose_atoms
 from .motif_coverage import generation_coverage_rules
 from .relaxed_analysis import (
     classify_manifest_site, connectivity_edges, hard_contact_distance,
     structure_indices, validate_one_candidate,
 )
 from .site_detection import metallic_orientation
-
-
-def pose_atoms(pose):
-    return Atoms(expand_symbols(pose.symbols, pose.counts), scaled_positions=pose.frac,
-                 cell=pose.cell, pbc=(True, True, False))
 
 
 def molecular_geometry(atoms, indices, rule, analysis):

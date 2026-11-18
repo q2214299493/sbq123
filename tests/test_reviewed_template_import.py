@@ -6,7 +6,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from scripts.adsorption.build_fe110_adsorption import read_poscar
+from scripts.adsorption.build_fe110_adsorption import read_poscar, write_poscar
 from scripts.adsmind_lite.candidate_generation import generate_candidates
 from scripts.adsmind_lite.adsmind_common import read_json, write_json
 from scripts.adsmind_lite.generation_validation import same_binding_mode
@@ -72,6 +72,27 @@ def test_swapping_equivalent_diatomic_anchors_keeps_one_site_pair():
     operations = [(np.eye(3), np.zeros(3))]
     assert same_binding_mode(pose, swapped, slab, operations, 0.1, interchangeable_pair=True)
     assert not same_binding_mode(pose, swapped, slab, operations, 0.1)
+
+
+def test_readback_uses_actual_reviewed_pose_and_mapping(tmp_path):
+    bundle, sites, plan, _ = reviewed_bundle(tmp_path)
+    out = tmp_path / "generated"
+    records = generate_candidates(SLAB, sites, [bundle["species"]], CONFIG / "adsorbate_rules.yaml", out, plan)
+    paths = [Path(record["initial_structure"]) for record in records]
+    wrong_height = read_poscar(paths[0])
+    wrong_height.frac[records[0]["adsorbate_indices_structure_0based"], 2] += 0.015
+    write_poscar(paths[0], wrong_height)
+    wrong_constraints = read_poscar(paths[1])
+    wrong_constraints.flags[-1] = ("F", "F", "F")
+    write_poscar(paths[1], wrong_constraints)
+    metadata = read_json(paths[2].with_name("metadata.json"))
+    metadata["binding_atom_indices_structure_0based"]["C"] = metadata["binding_atom_indices_structure_0based"]["O"]
+    write_json(paths[2].with_name("metadata.json"), metadata)
+    result = validate_candidates(
+        out, CONFIG / "surfaces.yaml", CONFIG / "adsorbate_rules.yaml", CONFIG / "analysis_rules.yaml", plan_path=plan,
+    )
+    assert len(result) == 3
+    assert all(row["reason_code"] == "reviewed_template_output_mismatch" and not row["validation_passed"] for row in result)
 
 
 @pytest.mark.parametrize("change", ["slab", "mapping", "source", "file", "shortfall"])

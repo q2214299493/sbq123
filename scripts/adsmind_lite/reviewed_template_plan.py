@@ -6,7 +6,10 @@ import re
 import numpy as np
 from ase.data import atomic_numbers
 
-from .adsmind_common import SINGLE_ANCHOR_MODES
+from scripts.adsorption.build_fe110_adsorption import Poscar
+from scripts.workflow_geometry import expand_symbols
+
+from .adsmind_common import SINGLE_ANCHOR_MODES, SITE_CLASS_MAP, ordered_unique
 from .evidence_lifecycle import record_subject, require_transferable
 from .reviewed_templates import multi_anchor_mapping, read_reviewed_template
 
@@ -99,3 +102,37 @@ def reviewed_template_rule(plan: dict, configured: dict | None) -> dict:
     if configured["atom_symbols"] != rule["atom_symbols"]:
         raise ValueError("reviewed reference and configured species atom order differ")
     return {**rule, **configured}
+
+
+def reviewed_pose_matches_output(output: Poscar, record: dict, motif: dict, rule: dict) -> bool:
+    """Compare the parsed output with the reviewed pose in POSCAR order."""
+    template, _ = read_reviewed_template(record["adsorbate"], motif["reviewed_structure_template"])
+    symbols = expand_symbols(template.symbols, template.counts)
+    slab_count = len(symbols) - len(rule["atom_symbols"])
+    order = ordered_unique(symbols[:slab_count] + rule["species_order"])
+    permutation = [index for symbol in order for index, value in enumerate(symbols) if value == symbol]
+    if (
+        expand_symbols(output.symbols, output.counts) != [symbols[index] for index in permutation]
+        or not np.allclose(output.cell, template.cell, atol=1e-8, rtol=0)
+        or not np.allclose(output.frac, template.frac[permutation], atol=1e-8, rtol=0)
+        or [tuple(flag.upper() for flag in flags) for flags in output.flags]
+        != [tuple(flag.upper() for flag in template.flags[index]) for index in permutation]
+    ):
+        return False
+    output_indices = {original: index for index, original in enumerate(permutation)}
+    anchors = motif["binding_atom_indices_zero_based"]
+    primary = anchors[motif["binding_atoms"][0]]
+    declared_site = motif["generator_site_class"].strip().casefold()
+    expected_site = SITE_CLASS_MAP.get(declared_site, declared_site)
+    return (
+        record.get("slab_atom_count") == slab_count
+        and record.get("slab_indices_structure_0based")
+        == [index for index, original in enumerate(permutation) if original < slab_count]
+        and record.get("adsorbate_indices_structure_0based")
+        == [output_indices[index] for index in range(slab_count, len(symbols))]
+        and record.get("binding_atom_indices_structure_0based")
+        == {label: output_indices[slab_count + index] for label, index in anchors.items()}
+        and record.get("anchor_index_adsorbate_0based") == primary
+        and record.get("anchor_index_structure_0based") == output_indices[slab_count + primary]
+        and str(record.get("planned_site_class")).casefold() == expected_site.casefold()
+    )

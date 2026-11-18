@@ -180,7 +180,8 @@ it in an approved bundle. A published image or distance can guide a draft.
 It does not supply reviewed coordinates on the local slab. Generation checks
 the source binding again, including the slab and each template hash. It only
 writes a complete batch after the initial geometry and actual site coverage
-checks pass.
+checks pass. Readback checks the POSCAR beside each candidate's metadata against
+the reviewed coordinates, constraints and atom mapping in output order.
 
 Unmapped atom order, incompatible slabs, constrained adsorbate atoms, a different
 single binding atom and invalid or stale templates are blocked before any

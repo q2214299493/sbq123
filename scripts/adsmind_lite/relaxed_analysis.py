@@ -9,13 +9,13 @@ import numpy as np
 from ase import Atoms
 from ase.data import covalent_radii
 
-from scripts.adsorption.build_fe110_adsorption import Poscar, classify_fe110_anchor_site
+from scripts.adsorption.build_fe110_adsorption import Poscar, classify_fe110_anchor_site, read_poscar
 from scripts.artifact_io import sha256_file
 from scripts.workflow_geometry import inplane_pbc_vector, minimum_image_delta_xy, relative_positions_xy
 
-from .adsmind_common import SITE_CLASS_MAP, load_yaml, ordered_unique, read_json, require_ase_structure
+from .adsmind_common import SITE_CLASS_MAP, load_yaml, ordered_unique, pose_atoms, read_json, require_ase_structure
 from .motif_coverage import generation_coverage_rules, validate_generation_plan
-from .reviewed_template_plan import reviewed_template_rule
+from .reviewed_template_plan import reviewed_pose_matches_output, reviewed_template_rule
 
 
 def connectivity_edges(atoms: Atoms, indices: list[int], scale: float, minimum: float) -> list[tuple[int, int]]:
@@ -157,11 +157,8 @@ def validate_candidates(
         species = result["adsorbate"]
         if "reviewed_template_subject_sha256" in result:
             plan = reviewed_plans.get(species)
-            if _matches_reviewed_plan(result, plan):
-                rule = reviewed_template_rule(plan, adsorbates.get(species))
-                reason = validate_one_candidate(result, family_config, {species: rule}, minimum, scale, hard_contact, seen)
-            else:
-                reason = "reviewed_template_plan_required_or_mismatched"
+            result["initial_structure"] = str(metadata_path.with_name("POSCAR"))
+            reason = _validate_reviewed_candidate(result, plan, family_config, adsorbates, minimum, scale, hard_contact, seen)
         else:
             reason = validate_one_candidate(result, family_config, adsorbates, minimum, scale, hard_contact, seen)
         result["validation_passed"] = reason == "accepted"
@@ -185,22 +182,38 @@ def _reviewed_validation_plans(path: Path | None) -> dict:
     return {plan["species"]: plan for plan in plans}
 
 
-def _matches_reviewed_plan(record: dict, plan: dict | None) -> bool:
+def _reviewed_plan_motif(record: dict, plan: dict | None) -> dict | None:
     if plan is None or record["surface_name"] != plan["surface"]:
-        return False
+        return None
     bundle = plan["reviewed_template_bundle"]
     if record["reviewed_template_subject_sha256"] != bundle["evidence"]["review"]["subject_sha256"]:
-        return False
+        return None
     if sha256_file(Path(record["surface_structure"])) != bundle["slab_sha256"]:
-        return False
-    return any(
-        motif["motif_id"] == record.get("motif_id")
-        and motif["binding_atom_indices_zero_based"] == record.get("binding_atom_indices_adsorbate_0based")
-        and motif["geometry_origin"] == record.get("geometry_origin")
-        and record["geometry_source"].get("sha256") == motif["reviewed_structure_template"]["sha256"]
-        and Path(record["geometry_source"]["path"]) == Path(motif["reviewed_structure_template"]["path"])
-        for motif in plan["candidates"]
+        return None
+    return next(
+        (motif for motif in plan["candidates"]
+         if motif["motif_id"] == record.get("motif_id")
+         and motif["binding_atom_indices_zero_based"] == record.get("binding_atom_indices_adsorbate_0based")
+         and motif["geometry_origin"] == record.get("geometry_origin")
+         and record["geometry_source"].get("sha256") == motif["reviewed_structure_template"]["sha256"]
+         and Path(record["geometry_source"]["path"]) == Path(motif["reviewed_structure_template"]["path"])),
+        None,
     )
+
+
+def _validate_reviewed_candidate(record, plan, families, adsorbates, minimum, scale, hard_contact, seen):
+    species = record["adsorbate"]
+    try:
+        motif = _reviewed_plan_motif(record, plan)
+        if motif is None:
+            return "reviewed_template_plan_required_or_mismatched"
+        rule = reviewed_template_rule(plan, adsorbates.get(species))
+        output = read_poscar(Path(record["initial_structure"]))
+        if not reviewed_pose_matches_output(output, record, motif, rule):
+            return "reviewed_template_output_mismatch"
+    except (OSError, ValueError, IndexError, KeyError, TypeError):
+        return "reviewed_template_output_unreadable"
+    return validate_one_candidate(record, families, {species: rule}, minimum, scale, hard_contact, seen, atoms=pose_atoms(output))
 
 
 def validate_one_candidate(

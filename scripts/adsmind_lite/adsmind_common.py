@@ -10,9 +10,16 @@ from scripts.optional_dependencies import require_optional
 from scripts.artifact_io import load_json_object as _load_json_object
 from scripts.artifact_io import write_json as _write_json
 from scripts.jsonl_io import read_jsonl_objects
+from scripts.workflow_geometry import expand_symbols
 
 Atoms = require_optional("ase", "AdsMind geometry").Atoms
 ase_read = require_optional("ase.io", "AdsMind geometry").read
+
+
+def pose_atoms(pose):
+    """Convert parsed POSCAR coordinates using only the slab's in-plane periodicity."""
+    return Atoms(expand_symbols(pose.symbols, pose.counts), scaled_positions=pose.frac,
+                 cell=pose.cell, pbc=(True, True, False))
 
 SITE_CLASS_MAP = {
     "top": "top_Fe",
