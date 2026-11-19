@@ -17,6 +17,8 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 Translate validated DFT and thermochemistry outputs into machine-readable species, energy, reaction, barrier, rate, and coverage-dependence records.
 
+For versioned catalyst and kinetics records, use the [multiphase JSON contracts and offline validator](multiphase_contracts.md).
+
 ## Required Inputs
 
 - registered and validated adsorption states

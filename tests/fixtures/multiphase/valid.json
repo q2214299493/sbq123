@@ -1,0 +1,571 @@
+{
+  "schema_version": "1.0.0",
+  "projects": [
+    {
+      "schema_version": "1.0.0",
+      "project_id": "demo",
+      "name": "Synthetic interface contract example",
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      }
+    }
+  ],
+  "materials": [
+    {
+      "schema_version": "1.0.0",
+      "material_id": "Ni",
+      "project_id": "demo",
+      "name": "Ni",
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "material_id": "Cu",
+      "project_id": "demo",
+      "name": "Cu",
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      }
+    }
+  ],
+  "phases": [
+    {
+      "schema_version": "1.0.0",
+      "phase_id": "fcc-Ni",
+      "material_id": "Ni",
+      "name": "fcc",
+      "composition": {
+        "Ni": 1
+      },
+      "structure_id": "bulk-Ni",
+      "structural_provenance": {
+        "path": "synthetic/bulk-Ni.xyz",
+        "sha256": "abababababababababababababababababababababababababababababababab"
+      },
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "phase_id": "fcc-Cu",
+      "material_id": "Cu",
+      "name": "fcc",
+      "composition": {
+        "Cu": 1
+      },
+      "structure_id": "bulk-Cu",
+      "structural_provenance": {
+        "path": "synthetic/bulk-Cu.xyz",
+        "sha256": "abababababababababababababababababababababababababababababababab"
+      },
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      }
+    }
+  ],
+  "surfaces": [
+    {
+      "schema_version": "1.0.0",
+      "surface_id": "facet-Ni",
+      "phase_id": "fcc-Ni",
+      "miller_indices": [
+        1,
+        1,
+        1
+      ],
+      "termination": "metal",
+      "defects": [],
+      "structure_id": "facet-Ni",
+      "structural_provenance": {
+        "path": "synthetic/facet-Ni.xyz",
+        "sha256": "abababababababababababababababababababababababababababababababab"
+      },
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "surface_id": "facet-Cu",
+      "phase_id": "fcc-Cu",
+      "miller_indices": [
+        1,
+        1,
+        1
+      ],
+      "termination": "metal",
+      "defects": [
+        {
+          "kind": "vacancy",
+          "description": "synthetic surface vacancy"
+        }
+      ],
+      "structure_id": "facet-Cu",
+      "structural_provenance": {
+        "path": "synthetic/facet-Cu.xyz",
+        "sha256": "abababababababababababababababababababababababababababababababab"
+      },
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      }
+    }
+  ],
+  "sites": [
+    {
+      "schema_version": "1.0.0",
+      "site_id": "top-Ni",
+      "surface_id": "facet-Ni",
+      "site_type": "atop",
+      "local_geometry": "single metal atom",
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "site_id": "bridge-Cu",
+      "surface_id": "facet-Cu",
+      "site_type": "bridge",
+      "local_geometry": "two neighbouring copper atoms",
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      }
+    }
+  ],
+  "interfaces": [
+    {
+      "schema_version": "1.0.0",
+      "interface_id": "junction",
+      "surface_ids": [
+        "facet-Ni",
+        "facet-Cu"
+      ],
+      "structure_id": "junction",
+      "structural_provenance": {
+        "path": "synthetic/junction.xyz",
+        "sha256": "abababababababababababababababababababababababababababababababab"
+      },
+      "geometry": "two adjacent facets",
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      }
+    }
+  ],
+  "species": [
+    {
+      "schema_version": "1.0.0",
+      "species_id": "H2-g",
+      "phase": "gas",
+      "material_ids": [],
+      "surface_ids": [],
+      "interface_id": null,
+      "composition": {
+        "H": 2
+      },
+      "charge": 0,
+      "site_occupancy": {},
+      "adsorption_geometry": null,
+      "structure_id": "H2-g",
+      "structural_provenance": {
+        "path": "synthetic/H2-g.xyz",
+        "sha256": "abababababababababababababababababababababababababababababababab"
+      },
+      "thermochemistry_status": "missing",
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "species_id": "H2-bridge",
+      "phase": "surface",
+      "material_ids": [
+        "Ni",
+        "Cu"
+      ],
+      "surface_ids": [
+        "facet-Ni",
+        "facet-Cu"
+      ],
+      "interface_id": "junction",
+      "composition": {
+        "H": 2
+      },
+      "charge": 0,
+      "site_occupancy": {
+        "top-Ni": 1,
+        "bridge-Cu": 1
+      },
+      "adsorption_geometry": "H-H axis spanning both sites",
+      "structure_id": "H2-bridge",
+      "structural_provenance": {
+        "path": "synthetic/H2-bridge.xyz",
+        "sha256": "abababababababababababababababababababababababababababababababab"
+      },
+      "thermochemistry_status": "missing",
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "species_id": "H2-top",
+      "phase": "surface",
+      "material_ids": [
+        "Ni"
+      ],
+      "surface_ids": [
+        "facet-Ni"
+      ],
+      "interface_id": null,
+      "composition": {
+        "H": 2
+      },
+      "charge": 0,
+      "site_occupancy": {
+        "top-Ni": 1
+      },
+      "adsorption_geometry": "end-on at a single site",
+      "structure_id": "H2-top",
+      "structural_provenance": {
+        "path": "synthetic/H2-top.xyz",
+        "sha256": "abababababababababababababababababababababababababababababababab"
+      },
+      "thermochemistry_status": "missing",
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      }
+    }
+  ],
+  "reactions": [
+    {
+      "schema_version": "1.0.0",
+      "reaction_id": "ads",
+      "reaction_type": "interfacial",
+      "reversible": true,
+      "reactants": {
+        "H2-g": 1
+      },
+      "products": {
+        "H2-bridge": 1
+      },
+      "phase_ids": [
+        "fcc-Ni",
+        "fcc-Cu"
+      ],
+      "surface_ids": [
+        "facet-Ni",
+        "facet-Cu"
+      ],
+      "interface_id": "junction",
+      "required_sites": {
+        "top-Ni": 1,
+        "bridge-Cu": 1
+      },
+      "sites_consumed": {
+        "top-Ni": 1,
+        "bridge-Cu": 1
+      },
+      "sites_released": {},
+      "initial_structure_id": "is-demo",
+      "final_structure_id": "fs-demo",
+      "ts_treatment": "located",
+      "ts_id": "ts-demo",
+      "energy_reference_id": "demo-ref",
+      "electronic_energies": {
+        "reaction": {
+          "value": -0.2,
+          "unit": "eV",
+          "reference_id": "demo-ref",
+          "source": {
+            "calculation_id": "synthetic-demo",
+            "kind": "synthetic",
+            "artifact": {
+              "path": "synthetic/values.json",
+              "sha256": "abababababababababababababababababababababababababababababababab"
+            }
+          }
+        },
+        "forward": {
+          "value": 0.3,
+          "unit": "eV",
+          "reference_id": "demo-ref",
+          "source": {
+            "calculation_id": "synthetic-demo",
+            "kind": "synthetic",
+            "artifact": {
+              "path": "synthetic/values.json",
+              "sha256": "abababababababababababababababababababababababababababababababab"
+            }
+          }
+        },
+        "reverse": {
+          "value": 0.5,
+          "unit": "eV",
+          "reference_id": "demo-ref",
+          "source": {
+            "calculation_id": "synthetic-demo",
+            "kind": "synthetic",
+            "artifact": {
+              "path": "synthetic/values.json",
+              "sha256": "abababababababababababababababababababababababababababababababab"
+            }
+          }
+        }
+      },
+      "free_energies": {
+        "temperature_K": 400,
+        "standard_state_id": "demo-standard",
+        "values": {
+          "reaction": {
+            "value": -0.1,
+            "unit": "eV",
+            "reference_id": "demo-ref",
+            "source": {
+              "calculation_id": "synthetic-demo",
+              "kind": "synthetic",
+              "artifact": {
+                "path": "synthetic/values.json",
+                "sha256": "abababababababababababababababababababababababababababababababab"
+              }
+            }
+          },
+          "forward": {
+            "value": 0.4,
+            "unit": "eV",
+            "reference_id": "demo-ref",
+            "source": {
+              "calculation_id": "synthetic-demo",
+              "kind": "synthetic",
+              "artifact": {
+                "path": "synthetic/values.json",
+                "sha256": "abababababababababababababababababababababababababababababababab"
+              }
+            }
+          },
+          "reverse": {
+            "value": 0.5,
+            "unit": "eV",
+            "reference_id": "demo-ref",
+            "source": {
+              "calculation_id": "synthetic-demo",
+              "kind": "synthetic",
+              "artifact": {
+                "path": "synthetic/values.json",
+                "sha256": "abababababababababababababababababababababababababababababababab"
+              }
+            }
+          }
+        }
+      },
+      "rate_law_id": "mass-action",
+      "provenance": [
+        {
+          "calculation_id": "synthetic-demo",
+          "kind": "synthetic",
+          "artifact": {
+            "path": "synthetic/values.json",
+            "sha256": "abababababababababababababababababababababababababababababababab"
+          }
+        }
+      ],
+      "eligibility": "draft",
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      }
+    }
+  ],
+  "parameter_sets": [
+    {
+      "schema_version": "1.0.0",
+      "parameter_set_id": "params",
+      "reaction_id": "ads",
+      "rate_law_id": "mass-action",
+      "temperature_K": 400,
+      "pressure_Pa": 100000,
+      "energy_basis": "gibbs",
+      "energy_reference_id": "demo-ref",
+      "standard_state_id": "demo-standard",
+      "standard_states": {
+        "gas_pressure_Pa": 100000,
+        "solute_concentration_mol_m3": 1000,
+        "surface_activity_convention": "fractional site occupation"
+      },
+      "forward": {
+        "prefactor": 1000000000000,
+        "prefactor_unit": "s^-1",
+        "temperature_exponent": 0,
+        "activation_energy": {
+          "value": 0.4,
+          "unit": "eV",
+          "reference_id": "demo-ref",
+          "source": {
+            "calculation_id": "synthetic-demo",
+            "kind": "synthetic",
+            "artifact": {
+              "path": "synthetic/values.json",
+              "sha256": "abababababababababababababababababababababababababababababababab"
+            }
+          }
+        },
+        "expression": "k(T) = A exp(-Ea / (kB T))"
+      },
+      "reverse": {
+        "prefactor": 1000000000000,
+        "prefactor_unit": "s^-1",
+        "temperature_exponent": 0,
+        "activation_energy": {
+          "value": 0.5,
+          "unit": "eV",
+          "reference_id": "demo-ref",
+          "source": {
+            "calculation_id": "synthetic-demo",
+            "kind": "synthetic",
+            "artifact": {
+              "path": "synthetic/values.json",
+              "sha256": "abababababababababababababababababababababababababababababababab"
+            }
+          }
+        },
+        "expression": "k(T) = A exp(-Ea / (kB T))"
+      },
+      "degeneracy": 1,
+      "coverage_terms": [],
+      "validity_range": {
+        "min_temperature_K": 390,
+        "max_temperature_K": 410,
+        "min_pressure_Pa": 90000,
+        "max_pressure_Pa": 110000
+      },
+      "uncertainty": null,
+      "sources": [
+        {
+          "calculation_id": "synthetic-demo",
+          "kind": "synthetic",
+          "artifact": {
+            "path": "synthetic/values.json",
+            "sha256": "abababababababababababababababababababababababababababababababab"
+          }
+        }
+      ],
+      "eligibility": "draft",
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      }
+    }
+  ],
+  "runs": [
+    {
+      "schema_version": "1.0.0",
+      "run_id": "plan-CATKINAS",
+      "engine": "CATKINAS",
+      "engine_version": "fixture",
+      "parameter_set_ids": [
+        "params"
+      ],
+      "inputs": {
+        "matlab_input": {
+          "path": "synthetic/INPUT_demo.m",
+          "sha256": "abababababababababababababababababababababababababababababababab"
+        },
+        "thermodynamics_data": null
+      },
+      "outputs": [],
+      "execution_status": "planned",
+      "numerical_convergence": "unassessed",
+      "scientific_validity": {
+        "status": "unreviewed",
+        "review": null
+      },
+      "approval_status": "pending",
+      "approval_receipt": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "run_id": "plan-Zacros",
+      "engine": "Zacros",
+      "engine_version": "fixture",
+      "parameter_set_ids": [
+        "params"
+      ],
+      "inputs": {
+        "simulation_input": {
+          "path": "synthetic/simulation_input.dat",
+          "sha256": "abababababababababababababababababababababababababababababababab"
+        },
+        "lattice_input": {
+          "path": "synthetic/lattice_input.dat",
+          "sha256": "abababababababababababababababababababababababababababababababab"
+        },
+        "mechanism_input": {
+          "path": "synthetic/mechanism_input.dat",
+          "sha256": "abababababababababababababababababababababababababababababababab"
+        },
+        "energetics_input": {
+          "path": "synthetic/energetics_input.dat",
+          "sha256": "abababababababababababababababababababababababababababababababab"
+        },
+        "state_input": null
+      },
+      "outputs": [],
+      "execution_status": "planned",
+      "numerical_convergence": "unassessed",
+      "scientific_validity": {
+        "status": "unreviewed",
+        "review": null
+      },
+      "approval_status": "pending",
+      "approval_receipt": null
+    },
+    {
+      "schema_version": "1.0.0",
+      "run_id": "plan-reactor",
+      "engine": "reactor",
+      "engine_version": "fixture",
+      "parameter_set_ids": [
+        "params"
+      ],
+      "inputs": {
+        "model_definition": {
+          "path": "synthetic/batch.json",
+          "sha256": "abababababababababababababababababababababababababababababababab"
+        },
+        "rate_provider": {
+          "path": "synthetic/rates.json",
+          "sha256": "abababababababababababababababababababababababababababababababab"
+        },
+        "operating_conditions": {
+          "path": "synthetic/conditions.json",
+          "sha256": "abababababababababababababababababababababababababababababababab"
+        }
+      },
+      "outputs": [],
+      "execution_status": "planned",
+      "numerical_convergence": "unassessed",
+      "scientific_validity": {
+        "status": "unreviewed",
+        "review": null
+      },
+      "approval_status": "pending",
+      "approval_receipt": null
+    }
+  ]
+}

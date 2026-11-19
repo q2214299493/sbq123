@@ -1,0 +1,251 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json",
+  "title": "common v1.0.0",
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$", "not": {"pattern": "\\s"}},
+    "text": {"type": "string", "minLength": 1, "pattern": "\\S"},
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"},
+        "sha256": {"type": "string", "maxLength": 64, "pattern": "^[a-f0-9]{64}$"}
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["calculation_id", "kind", "artifact"],
+      "properties": {
+        "calculation_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+        "kind": {
+          "enum": ["electronic_structure", "thermal_correction", "experiment", "model_prediction", "synthetic"]
+        },
+        "artifact": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"}
+      }
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "review"],
+      "properties": {
+        "status": {"enum": ["unreviewed", "in_review", "accepted", "rejected"]},
+        "review": {
+          "anyOf": [
+            {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"},
+            {"type": "null"}
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {"status": {"const": "accepted"}}
+          },
+          "then": {
+            "properties": {
+              "review": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"}
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {"status": {"const": "rejected"}}
+          },
+          "then": {
+            "properties": {
+              "review": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"}
+            }
+          }
+        }
+      ]
+    },
+    "composition": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "enum": [
+          "H",
+          "He",
+          "Li",
+          "Be",
+          "B",
+          "C",
+          "N",
+          "O",
+          "F",
+          "Ne",
+          "Na",
+          "Mg",
+          "Al",
+          "Si",
+          "P",
+          "S",
+          "Cl",
+          "Ar",
+          "K",
+          "Ca",
+          "Sc",
+          "Ti",
+          "V",
+          "Cr",
+          "Mn",
+          "Fe",
+          "Co",
+          "Ni",
+          "Cu",
+          "Zn",
+          "Ga",
+          "Ge",
+          "As",
+          "Se",
+          "Br",
+          "Kr",
+          "Rb",
+          "Sr",
+          "Y",
+          "Zr",
+          "Nb",
+          "Mo",
+          "Tc",
+          "Ru",
+          "Rh",
+          "Pd",
+          "Ag",
+          "Cd",
+          "In",
+          "Sn",
+          "Sb",
+          "Te",
+          "I",
+          "Xe",
+          "Cs",
+          "Ba",
+          "La",
+          "Ce",
+          "Pr",
+          "Nd",
+          "Pm",
+          "Sm",
+          "Eu",
+          "Gd",
+          "Tb",
+          "Dy",
+          "Ho",
+          "Er",
+          "Tm",
+          "Yb",
+          "Lu",
+          "Hf",
+          "Ta",
+          "W",
+          "Re",
+          "Os",
+          "Ir",
+          "Pt",
+          "Au",
+          "Hg",
+          "Tl",
+          "Pb",
+          "Bi",
+          "Po",
+          "At",
+          "Rn",
+          "Fr",
+          "Ra",
+          "Ac",
+          "Th",
+          "Pa",
+          "U",
+          "Np",
+          "Pu",
+          "Am",
+          "Cm",
+          "Bk",
+          "Cf",
+          "Es",
+          "Fm",
+          "Md",
+          "No",
+          "Lr",
+          "Rf",
+          "Db",
+          "Sg",
+          "Bh",
+          "Hs",
+          "Mt",
+          "Ds",
+          "Rg",
+          "Cn",
+          "Nh",
+          "Fl",
+          "Mc",
+          "Lv",
+          "Ts",
+          "Og"
+        ]
+      },
+      "additionalProperties": {"type": "integer", "minimum": 1},
+      "minProperties": 1
+    },
+    "sites": {
+      "type": "object",
+      "propertyNames": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+      "additionalProperties": {"type": "integer", "minimum": 1},
+      "minProperties": 0
+    },
+    "energy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "unit", "reference_id", "source"],
+      "properties": {
+        "value": {"type": "number"},
+        "unit": {"const": "eV"},
+        "reference_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+        "source": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/evidence"}
+      }
+    },
+    "energy_triple": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reaction", "forward", "reverse"],
+      "properties": {
+        "reaction": {
+          "anyOf": [
+            {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/energy"},
+            {"type": "null"}
+          ]
+        },
+        "forward": {
+          "anyOf": [
+            {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/energy"},
+            {"type": "null"}
+          ]
+        },
+        "reverse": {
+          "anyOf": [
+            {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/energy"},
+            {"type": "null"}
+          ]
+        }
+      }
+    },
+    "rate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["prefactor", "prefactor_unit", "temperature_exponent", "activation_energy", "expression"],
+      "properties": {
+        "prefactor": {"type": "number", "exclusiveMinimum": 0},
+        "prefactor_unit": {
+          "description": "Per-site rates with dimensionless activities, or explicit pressure/concentration factors.",
+          "enum": ["s^-1", "Pa^-1 s^-1", "Pa^-2 s^-1", "m^3 mol^-1 s^-1", "m^6 mol^-2 s^-1"]
+        },
+        "temperature_exponent": {"type": "number"},
+        "activation_energy": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/energy"},
+        "expression": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"}
+      }
+    }
+  }
+}

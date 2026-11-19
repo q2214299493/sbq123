@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.sbq123.invalid/multiphase/1.0.0/catalyst_material.schema.json",
+  "title": "catalyst material v1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "material_id", "project_id", "name", "validation"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "material_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "project_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "name": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"},
+    "validation": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/validation"}
+  }
+}

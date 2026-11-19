@@ -1,0 +1,316 @@
+"""Offline validation of version 1.0.0 multiphase exchange records. No writes or execution."""
+from __future__ import annotations
+
+import argparse
+import json
+import math
+from collections import Counter
+from functools import lru_cache
+from pathlib import Path
+
+from jsonschema import Draft202012Validator
+from jsonschema.exceptions import best_match
+from referencing import Registry, Resource
+
+from scripts.runtime_resources import resource_path
+from scripts.scientific_validation import finite_number
+
+
+# Collection, record schema name, primary key.
+COLLECTIONS = (
+    ("projects", "catalyst_project", "project_id"),
+    ("materials", "catalyst_material", "material_id"),
+    ("phases", "phase", "phase_id"),
+    ("surfaces", "surface", "surface_id"),
+    ("sites", "active_site", "site_id"),
+    ("interfaces", "interface", "interface_id"),
+    ("species", "species", "species_id"),
+    ("reactions", "reaction", "reaction_id"),
+    ("parameter_sets", "kinetic_parameter", "parameter_set_id"),
+    ("runs", "simulation_run", "run_id"),
+)
+# Rounding allowance for an identity between serialized eV quantities, per elementary event.
+ENERGY_ATOL_EV = 1e-8
+
+
+def _unique_keys(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"duplicate JSON property {key!r}")
+        result[key] = value
+    return result
+
+
+def _check_finite(value, path="$"):
+    if isinstance(value, dict):
+        for key, child in value.items():
+            _check_finite(child, f"{path}.{key}")
+    elif isinstance(value, list):
+        for i, child in enumerate(value):
+            _check_finite(child, f"{path}[{i}]")
+    elif isinstance(value, (int, float)) and not isinstance(value, bool):
+        finite_number(value, path)
+
+
+@lru_cache(maxsize=1)
+def _bundle_validator():
+    schemas = {}
+    for folder, names in (
+        ("catalysis", ["common", *(item[1] for item in COLLECTIONS[:6])]),
+        ("kinetics", ["bundle", *(item[1] for item in COLLECTIONS[6:])]),
+    ):
+        for name in names:
+            path = resource_path(f"configs/{folder}/{name}.schema.json")
+            schemas[name] = json.loads(path.read_text(encoding="utf-8"))
+    registry = Registry().with_resources(
+        (schema["$id"], Resource.from_contents(schema)) for schema in schemas.values()
+    )
+    return Draft202012Validator(schemas["bundle"], registry=registry)
+
+
+def _get(index, collection, key):
+    try:
+        return index[collection][key]
+    except KeyError as exc:
+        raise ValueError(f"unknown {collection} reference {key!r}") from exc
+
+
+def _project_for_surface(index, surface_id):
+    surface = _get(index, "surfaces", surface_id)
+    phase = _get(index, "phases", surface["phase_id"])
+    return _get(index, "materials", phase["material_id"])["project_id"]
+
+
+def _check_context(record, index):
+    surfaces = set(record["surface_ids"])
+    projects = {_project_for_surface(index, key) for key in surfaces}
+    if len(projects) > 1:
+        raise ValueError("surface context crosses catalyst projects")
+    interface_id = record["interface_id"]
+    if interface_id is not None:
+        interface = _get(index, "interfaces", interface_id)
+        if set(interface["surface_ids"]) != surfaces:
+            raise ValueError("interface and surface context disagree")
+    elif len(surfaces) > 1:
+        raise ValueError("multi-surface context needs an interface")
+    return {_get(index, "surfaces", key)["phase_id"] for key in surfaces}
+
+
+def _check_catalog(index):
+    for collection, field, parent in (
+        ("materials", "project_id", "projects"), ("phases", "material_id", "materials"),
+        ("surfaces", "phase_id", "phases"), ("sites", "surface_id", "surfaces"),
+    ):
+        for record in index[collection].values():
+            _get(index, parent, record[field])
+    for interface in index["interfaces"].values():
+        if len({_project_for_surface(index, key) for key in interface["surface_ids"]}) != 1:
+            raise ValueError(f"{interface['interface_id']}: interface crosses projects")
+    for surface in index["surfaces"].values():
+        indices = surface["miller_indices"]
+        if len(indices) == 4 and sum(indices[:3]) != 0:
+            raise ValueError(f"{surface['surface_id']}: inconsistent Miller-Bravais indices")
+    for species in index["species"].values():
+        phases = _check_context(species, index)
+        materials = {_get(index, "phases", key)["material_id"] for key in phases}
+        if set(species["material_ids"]) != materials:
+            raise ValueError(f"{species['species_id']}: material/surface identity mismatch")
+        occupied = {_get(index, "sites", key)["surface_id"] for key in species["site_occupancy"]}
+        if occupied != set(species["surface_ids"]):
+            raise ValueError(f"{species['species_id']}: occupied sites disagree with surface identity")
+
+
+def _side(stoichiometry, free_sites, reaction, index):
+    elements, sites = Counter(), Counter(free_sites)
+    charge = 0
+    for key, coefficient in stoichiometry.items():
+        species = _get(index, "species", key)
+        if not set(species["surface_ids"]).issubset(reaction["surface_ids"]):
+            raise ValueError(f"{key}: species is outside reaction surface context")
+        if species["interface_id"] is not None and species["interface_id"] != reaction["interface_id"]:
+            raise ValueError(f"{key}: species belongs to a different interface")
+        if reaction["eligibility"] == "eligible" and (
+            species["validation"]["status"] != "accepted" or species["thermochemistry_status"] != "reviewed"
+        ):
+            raise ValueError(f"{key}: eligible reaction requires reviewed species")
+        elements.update({k: coefficient * n for k, n in species["composition"].items()})
+        sites.update({k: coefficient * n for k, n in species["site_occupancy"].items()})
+        charge += coefficient * species["charge"]
+    return elements, charge, sites
+
+
+def _check_balance(reaction, index):
+    left = _side(reaction["reactants"], reaction["sites_consumed"], reaction, index)
+    right = _side(reaction["products"], reaction["sites_released"], reaction, index)
+    for label, lhs, rhs in zip(("element", "charge", "site"), left, right, strict=True):
+        if lhs != rhs:
+            raise ValueError(f"{label} conservation failed: {lhs} != {rhs}")
+    for site in reaction["required_sites"]:
+        if _get(index, "sites", site)["surface_id"] not in reaction["surface_ids"]:
+            raise ValueError(f"{site}: required site outside reaction context")
+    if not left[2] <= Counter(reaction["required_sites"]):
+        raise ValueError("required sites do not cover the reaction footprint")
+
+
+def _energy_check(energy, record, sources):
+    if energy["reference_id"] != record["energy_reference_id"]:
+        raise ValueError("incompatible energy reference")
+    if energy["source"] not in sources:
+        raise ValueError("energy source absent from record provenance")
+    if record["eligibility"] == "eligible" and energy["source"]["kind"] in {"model_prediction", "synthetic"}:
+        raise ValueError("eligible records require scientific evidence")
+
+
+def _check_triple(values, reaction, *, thermal):
+    eligible = reaction["eligibility"] == "eligible"
+    for name, energy in values.items():
+        if energy is not None:
+            _energy_check(energy, reaction, reaction["provenance"])
+            if thermal and eligible and energy["source"]["kind"] not in {"thermal_correction", "experiment"}:
+                raise ValueError("eligible Gibbs values require thermochemical evidence")
+        elif thermal and eligible and (name != "reverse" or reaction["reversible"]):
+            raise ValueError(f"eligible reaction missing {name} free energy")
+    if all(v is not None for v in values.values()):
+        difference = values["forward"]["value"] - values["reverse"]["value"]
+        if not math.isclose(difference, values["reaction"]["value"], rel_tol=0, abs_tol=ENERGY_ATOL_EV):
+            raise ValueError("forward minus reverse barrier disagrees with reaction energy")
+
+
+def _require_reviewed_context(reaction, index):
+    records = [_get(index, "sites", key) for key in reaction["required_sites"]]
+    if reaction["interface_id"] is not None:
+        records.append(_get(index, "interfaces", reaction["interface_id"]))
+    for key in reaction["surface_ids"]:
+        surface = _get(index, "surfaces", key)
+        phase = _get(index, "phases", surface["phase_id"])
+        material = _get(index, "materials", phase["material_id"])
+        records.extend((surface, phase, material, _get(index, "projects", material["project_id"])))
+    if any(row["validation"]["status"] != "accepted" for row in records):
+        raise ValueError("eligible reaction requires reviewed catalyst context")
+
+
+def _check_reaction(reaction, index):
+    if reaction["reaction_type"] == "interfacial" and reaction["interface_id"] is None:
+        raise ValueError("interfacial reaction requires an interface")
+    if _check_context(reaction, index) != set(reaction["phase_ids"]):
+        raise ValueError("phase/surface context mismatch")
+    _check_balance(reaction, index)
+    _check_triple(reaction["electronic_energies"], reaction, thermal=False)
+    free = reaction["free_energies"]
+    if free is not None:
+        _check_triple(free["values"], reaction, thermal=True)
+    if reaction["eligibility"] == "eligible":
+        _require_reviewed_context(reaction, index)
+        if any(entry["kind"] in {"synthetic", "model_prediction"} for entry in reaction["provenance"]):
+            raise ValueError("eligible reaction contains exploratory provenance")
+
+
+def _check_rate(rate, name, energies, parameter):
+    energy = rate["activation_energy"]
+    eligible = parameter["eligibility"] == "eligible"
+    _energy_check(energy, parameter, parameter["sources"])
+    barrier = energies[name] if energies is not None else None
+    if barrier is None:
+        if eligible:
+            raise ValueError(f"eligible {name} rate lacks source barrier")
+    elif not math.isclose(energy["value"], barrier["value"], rel_tol=0, abs_tol=ENERGY_ATOL_EV):
+        raise ValueError(f"{name} rate barrier differs from source reaction")
+    elif eligible and energy["source"] != barrier["source"]:
+        raise ValueError(f"eligible {name} rate must cite the reaction barrier's source")
+
+
+def _check_parameter(parameter, index):
+    reaction = _get(index, "reactions", parameter["reaction_id"])
+    eligible = parameter["eligibility"] == "eligible"
+    if eligible and (reaction["eligibility"] != "eligible" or any(
+        source["kind"] in {"model_prediction", "synthetic"} for source in parameter["sources"]
+    )):
+        raise ValueError("eligible parameter needs an eligible reaction and scientific sources")
+    if (parameter["energy_reference_id"], parameter["rate_law_id"]) != (reaction["energy_reference_id"], reaction["rate_law_id"]):
+        raise ValueError("parameter reference or rate law disagrees with reaction")
+    if parameter["reverse"] is not None and not reaction["reversible"]:
+        raise ValueError("irreversible rate law has a reverse rate")
+    if eligible and reaction["reversible"] and parameter["reverse"] is None:
+        raise ValueError("eligible reversible parameter set needs reverse rate")
+    for field in ("temperature_K", "pressure_Pa"):
+        valid = parameter["validity_range"]
+        if not valid["min_" + field] <= parameter[field] <= valid["max_" + field]:
+            raise ValueError(f"{field} is outside parameter validity range")
+    energies = reaction["electronic_energies"]
+    if parameter["energy_basis"] == "gibbs":
+        free = reaction["free_energies"]
+        if free and (free["temperature_K"], free["standard_state_id"]) != (parameter["temperature_K"], parameter["standard_state_id"]):
+            raise ValueError("Gibbs temperature or standard state disagrees")
+        energies = free["values"] if free else None
+    for name in ("forward", "reverse"):
+        if parameter[name] is not None:
+            _check_rate(parameter[name], name, energies, parameter)
+    for term in parameter["coverage_terms"]:
+        species = _get(index, "species", term["species_id"])
+        if species["phase"] != "surface" or not set(species["surface_ids"]).issubset(reaction["surface_ids"]):
+            raise ValueError("coverage term needs a species on the reaction surface")
+        if term["min_fraction"] > term["max_fraction"]:
+            raise ValueError("reversed coverage validity interval")
+        _energy_check(term["coefficient"], parameter, parameter["sources"])
+
+
+def _check_run(run, index):
+    for key in run["parameter_set_ids"]:
+        _get(index, "parameter_sets", key)
+    if run["scientific_validity"]["status"] == "accepted" and (
+        run["execution_status"] != "succeeded"
+        or run["numerical_convergence"] not in {"converged", "inapplicable"}
+        or not run["outputs"]
+        or any(index["parameter_sets"][key]["eligibility"] != "eligible" for key in run["parameter_set_ids"])
+    ):
+        raise ValueError(f"{run['run_id']}: accepted run lacks completed, reviewed result context")
+
+
+def validate_bundle(bundle: dict) -> None:
+    """Raise ValueError at the first invalid record. Success grants no downstream authority."""
+    _check_finite(bundle)
+    error = next(_bundle_validator().iter_errors(bundle), None)
+    if error:
+        error = best_match([error])
+        raise ValueError(f"{error.json_path}: {error.message}")
+    index = {}
+    for collection, _, primary_key in COLLECTIONS:
+        records = {}
+        for record in bundle[collection]:
+            key = record[primary_key]
+            if key in records:
+                raise ValueError(f"{collection}: duplicate ID {key!r}")
+            records[key] = record
+        index[collection] = records
+    _check_catalog(index)
+    for collection, check in (("reactions", _check_reaction), ("parameter_sets", _check_parameter)):
+        for key, record in index[collection].items():
+            try:
+                check(record, index)
+            except ValueError as exc:
+                raise ValueError(f"{collection}.{key}: {exc}") from exc
+    standard_states = {}
+    for parameter in bundle["parameter_sets"]:
+        key, states = parameter["standard_state_id"], parameter["standard_states"]
+        if standard_states.setdefault(key, states) != states:
+            raise ValueError(f"{key}: conflicting standard-state definitions")
+    for run in bundle["runs"]:
+        _check_run(run, index)
+
+
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("bundle", type=Path, help="path to a versioned JSON bundle")
+    args = parser.parse_args(argv)
+    try:
+        bundle = json.loads(args.bundle.read_text(encoding="utf-8-sig"), object_pairs_hook=_unique_keys)
+        validate_bundle(bundle)
+    except (OSError, ValueError) as exc:
+        parser.exit(1, f"Invalid multiphase bundle: {exc}\n")
+    print("Multiphase bundle conforms to 1.0.0")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

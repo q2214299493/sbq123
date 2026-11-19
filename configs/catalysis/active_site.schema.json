@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.sbq123.invalid/multiphase/1.0.0/active_site.schema.json",
+  "title": "active site v1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "site_id", "surface_id", "site_type", "local_geometry", "validation"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "site_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "surface_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "site_type": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "local_geometry": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"},
+    "validation": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/validation"}
+  }
+}

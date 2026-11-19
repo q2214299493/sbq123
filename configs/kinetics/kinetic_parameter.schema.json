@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.sbq123.invalid/multiphase/1.0.0/kinetic_parameter.schema.json",
+  "title": "kinetic parameter v1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "parameter_set_id",
+    "reaction_id",
+    "rate_law_id",
+    "temperature_K",
+    "pressure_Pa",
+    "energy_basis",
+    "energy_reference_id",
+    "standard_state_id",
+    "standard_states",
+    "forward",
+    "reverse",
+    "degeneracy",
+    "coverage_terms",
+    "validity_range",
+    "uncertainty",
+    "sources",
+    "eligibility",
+    "validation"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "parameter_set_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "reaction_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "rate_law_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "temperature_K": {"type": "number", "exclusiveMinimum": 0},
+    "pressure_Pa": {"type": "number", "minimum": 0},
+    "energy_basis": {"enum": ["electronic", "gibbs"]},
+    "energy_reference_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "standard_state_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "standard_states": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gas_pressure_Pa", "solute_concentration_mol_m3", "surface_activity_convention"],
+      "properties": {
+        "gas_pressure_Pa": {"type": "number", "exclusiveMinimum": 0},
+        "solute_concentration_mol_m3": {"type": "number", "exclusiveMinimum": 0},
+        "surface_activity_convention": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"}
+      }
+    },
+    "forward": {
+      "anyOf": [
+        {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/rate"},
+        {"type": "null"}
+      ]
+    },
+    "reverse": {
+      "anyOf": [
+        {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/rate"},
+        {"type": "null"}
+      ]
+    },
+    "degeneracy": {"type": "integer", "minimum": 1},
+    "coverage_terms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["species_id", "coefficient", "expression", "already_in_barrier", "min_fraction", "max_fraction"],
+        "properties": {
+          "species_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+          "coefficient": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/energy"},
+          "expression": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"},
+          "already_in_barrier": {"type": "boolean"},
+          "min_fraction": {"type": "number", "minimum": 0, "maximum": 1},
+          "max_fraction": {"type": "number", "minimum": 0, "maximum": 1}
+        }
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "validity_range": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["min_temperature_K", "max_temperature_K", "min_pressure_Pa", "max_pressure_Pa"],
+      "properties": {
+        "min_temperature_K": {"type": "number", "exclusiveMinimum": 0},
+        "max_temperature_K": {"type": "number", "exclusiveMinimum": 0},
+        "min_pressure_Pa": {"type": "number", "minimum": 0},
+        "max_pressure_Pa": {"type": "number", "minimum": 0}
+      }
+    },
+    "uncertainty": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["quantity", "value", "unit", "method"],
+          "properties": {
+            "quantity": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"},
+            "value": {"type": "number", "minimum": 0},
+            "unit": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"},
+            "method": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"}
+          }
+        },
+        {"type": "null"}
+      ]
+    },
+    "sources": {
+      "type": "array",
+      "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/evidence"},
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "eligibility": {"enum": ["draft", "blocked", "eligible"]},
+    "validation": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/validation"}
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"eligibility": {"const": "eligible"}}
+      },
+      "then": {
+        "properties": {
+          "validation": {
+            "properties": {"status": {"const": "accepted"}}
+          },
+          "forward": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/rate"}
+        }
+      }
+    }
+  ]
+}

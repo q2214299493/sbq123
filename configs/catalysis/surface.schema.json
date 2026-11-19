@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.sbq123.invalid/multiphase/1.0.0/surface.schema.json",
+  "title": "surface v1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "surface_id",
+    "phase_id",
+    "miller_indices",
+    "termination",
+    "defects",
+    "structure_id",
+    "structural_provenance",
+    "validation"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "surface_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "phase_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "miller_indices": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 4,
+      "items": {"type": "integer"},
+      "contains": {"type": "integer", "not": {"const": 0}}
+    },
+    "termination": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"},
+    "defects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "description"],
+        "properties": {
+          "kind": {"enum": ["vacancy", "substitution", "interstitial", "step", "other"]},
+          "description": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"}
+        }
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "structure_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "structural_provenance": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"},
+    "validation": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/validation"}
+  }
+}
