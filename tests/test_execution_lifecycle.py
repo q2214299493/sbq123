@@ -3,6 +3,7 @@ from __future__ import annotations
 import os
 import shutil
 import subprocess
+import tarfile
 import threading
 from concurrent.futures import ThreadPoolExecutor
 from functools import partial
@@ -155,6 +156,25 @@ def test_potcar_identity_cannot_be_substituted(tmp_path, monkeypatch):
         launch(workdir, decision, potcar_source="~/sbq/other/POTCAR")
 
 
+def receive_mock_upload(workdir, argv, stdin):
+    """Receive the fixture files without requiring SSH or Bash in lifecycle-only tests."""
+    target = workdir.parent / "mock-upload"
+    expected = load_json_object(workdir / "submission_preflight.json")["files"]
+    if argv[0] == "scp":
+        shutil.copytree(argv[2], target)
+    else:
+        assert argv[:2] == ["ssh", HOST]
+        with tarfile.open(fileobj=stdin, mode="r:") as archive:
+            assert sorted(archive.getnames()) == sorted(f"{workdir.name}/{name}" for name in expected)
+            for name in expected:
+                output = target / name
+                output.parent.mkdir(parents=True, exist_ok=True)
+                with archive.extractfile(f"{workdir.name}/{name}") as source, output.open("xb") as dest:
+                    shutil.copyfileobj(source, dest)
+    assert {name: sha256_file(target / name) for name in expected} == expected
+    return subprocess.CompletedProcess(argv, 0, "", "")
+
+
 def test_concurrent_submitters_have_one_reservation_and_one_submit(tmp_path, monkeypatch):
     workdir, decision, _ = prepare_submission(tmp_path, monkeypatch)
     barrier = threading.Barrier(2)
@@ -166,7 +186,9 @@ def test_concurrent_submitters_have_one_reservation_and_one_submit(tmp_path, mon
             barrier.wait(timeout=10)
         return real_write(path, payload)
 
-    def remote(argv):
+    def remote(argv, *, stdin=None):
+        if stdin is not None or argv[0] == "scp":
+            return receive_mock_upload(workdir, argv, stdin)
         if "bsub script.lsf" in argv[-1]:
             receipts.append("submitted")
         return subprocess.CompletedProcess(argv, 0, "Job <123> is submitted", "")
@@ -193,7 +215,9 @@ def test_crash_after_submit_is_unknown_and_never_retried(tmp_path, monkeypatch):
             raise OSError("simulated process loss before receipt")
         return real_write(path, payload)
 
-    def remote(argv):
+    def remote(argv, *, stdin=None):
+        if stdin is not None or argv[0] == "scp":
+            return receive_mock_upload(workdir, argv, stdin)
         if "bsub script.lsf" in argv[-1]:
             calls.append("submitted")
         return subprocess.CompletedProcess(argv, 0, "Job <123> is submitted", "")
@@ -214,10 +238,12 @@ def test_stale_evidence_after_upload_prevents_bsub(tmp_path, monkeypatch):
     workdir, decision, _ = prepare_submission(tmp_path, monkeypatch)
     calls = []
 
-    def remote(argv):
+    def remote(argv, *, stdin=None):
         calls.append(argv)
-        if argv[0] == "scp":
+        if stdin is not None or argv[0] == "scp":
+            uploaded = receive_mock_upload(workdir, argv, stdin)
             (workdir / "analysis.json").write_text("{}", encoding="ascii")
+            return uploaded
         return subprocess.CompletedProcess(argv, 0, "", "")
 
     monkeypatch.setattr(submission, "_run", remote)
@@ -260,14 +286,14 @@ class RemoteSandbox:
         value = path.resolve().as_posix()
         return "/" + value[0].lower() + value[2:] if os.name == "nt" else value
 
-    def run(self, argv):
+    def run(self, argv, *, stdin=None):
         if argv[0] == "scp":
             target = self.home / argv[3].split(":~/", 1)[1]
             shutil.copytree(Path(argv[2]), target / Path(argv[2]).name)
             return subprocess.CompletedProcess(argv, 0, "", "")
         assert argv[:2] == ["ssh", HOST]
         command = 'export PATH="' + self.posix(self.home / "bin") + ':$PATH"; ' + argv[2]
-        completed = subprocess.run([self.bash, "-c", command], env=self.env,
+        completed = subprocess.run([self.bash, "-c", command], env=self.env, stdin=stdin,
                                    text=True, encoding="utf-8", errors="replace",
                                    capture_output=True, timeout=15)
         if completed.returncode:
@@ -301,14 +327,14 @@ def test_full_remote_manifest_verified_immediately_before_bsub(tmp_path, monkeyp
         for name in report["files"]:
             shutil.copy2(workdir / name, remote_dir / name)
 
-    def corrupt_then_run(argv):
+    def corrupt_then_run(argv, *, stdin=None):
         if "bsub script.lsf" in argv[-1] and corruption:
             target = (
                 potcar if corruption == "source_POTCAR"
                 else remote_dir / ("WAVECAR" if corruption == "extra" else corruption)
             )
             target.write_text("corrupted", encoding="ascii")
-        return sandbox.run(argv)
+        return sandbox.run(argv, stdin=stdin)
 
     monkeypatch.setattr(submission, "_run", corrupt_then_run)
     if corruption:
@@ -405,9 +431,13 @@ import os, sys, subprocess
 from functools import partial
 from pathlib import Path
 from scripts.neb_agent import submission
-workdir, decision, database = map(Path, sys.argv[1:])
+sys.path.insert(0, sys.argv[4])
+from test_execution_lifecycle import receive_mock_upload
+workdir, decision, database = map(Path, sys.argv[1:4])
 submission.preflight = partial(submission.preflight, learning_database=database)
-def remote(argv):
+def remote(argv, *, stdin=None):
+    if stdin is not None or argv[0] == "scp":
+        return receive_mock_upload(workdir, argv, stdin)
     if 'bsub script.lsf' in argv[-1]:
         (workdir / 'mock_scheduler_accepted').write_text('123')
         os._exit(91)
@@ -416,7 +446,7 @@ submission._run = remote
 submission.submit(workdir, decision, 'sunboquan-codex', '~/sbq/job', '~/sbq/POTCAR', 'a'*64, 'SUBMIT_DIAGNOSTIC_VASP')
 """
     process = subprocess.run([sys.executable, "-B", "-c", script, str(workdir), str(decision),
-                              str(tmp_path / "learning.sqlite3")], capture_output=True, text=True, timeout=30)
+                              str(tmp_path / "learning.sqlite3"), str(Path(__file__).resolve().parent)], capture_output=True, text=True, timeout=30)
     assert process.returncode == 91, process.stderr
     assert (workdir / "mock_scheduler_accepted").read_text() == "123"
     assert not (workdir / submission.SUBMISSION_RECORD_FILE).exists()
