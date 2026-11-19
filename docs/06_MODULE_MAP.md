@@ -36,7 +36,7 @@ Allowed statuses: `Planned`, `Active`, `Blocked`, `Completed`.
 | `calculation_registry` | Active | state handoff | SUPPORTED_CODE_SCHEMA: 9 (`scripts/registry_schema.py`, B5 base); production_schema_version: NOT_VERIFIED_IN_B6. HISTORICAL_SCHEMA v8 retained in past observations; scientific result acceptance remains with the owning validation modules |
 | `incar_custodian` | Active | owning scientific module | Recommendations remain review-only |
 | `kinetic_data` | Planned | registry, validated DFT/TS data | Define production schema and CATKINAS/Zacros exports |
-| `thermochemistry` | Blocked | Grade A TS and stable-state frequencies | Missing validated frequency inputs and conditions |
+| `thermochemistry` | Active | reviewed compatible state evidence, TS assignment and conditions | Reviewed local subspaces and documented state-specific scales can differ under a common physical basis. Precomputed TS corrections need Grade A and bound exclusion/ZPE conventions. Fe110 electronic barriers and TS local ZPE are unchanged. Obtain compatible endpoint evidence and conditions for reaction free energies. |
 | `reaction_network` | Blocked | validated species, TSs, thermochemistry | Missing complete balanced mechanism |
 | `baseline_mkm` | Blocked | kinetic data, reaction network | Missing validated CATKINAS-ready dataset |
 | `coverage_mkm` | Blocked | baseline MKM, interaction model | Missing coverage-dependent parameters |
