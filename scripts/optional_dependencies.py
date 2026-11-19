@@ -2,7 +2,7 @@
 from importlib import import_module
 
 EXTRAS = {"ase": "neb", "sella": "sella", "pymatgen": "vasp",
-          "matplotlib": "visualization", "sentence_transformers": "retrieval"}
+          "matplotlib": "visualization", "sentence_transformers": "retrieval", "scipy": "catkinas"}
 
 
 def require_optional(module: str, capability: str):

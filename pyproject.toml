@@ -25,6 +25,7 @@ catalysis-search = "scripts.catalysis_retrieval.cli:main"
 catalysis-validate = "scripts.catalysis_retrieval.validate_cli:main"
 
 [project.optional-dependencies]
+catkinas = ["scipy>=1.11,<2"]
 vasp = ["pymatgen>=2024.5,<2027"]
 release = ["build>=1.2,<2", "wheel>=0.45,<1"]
 adsmind = [

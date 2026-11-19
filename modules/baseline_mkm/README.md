@@ -52,3 +52,5 @@ Phase 2.5 assembles a fixed-temperature CATKINAS single point with frozen gas pa
 The [Phase 2.5.1 compatibility record](../../reports/multiphase/phase2_5_1/catkinas_compatibility.json) distinguishes the expired installation from the authorized November distribution. The newer P-code read the exact archived reaction and sites. Its equation generator reported no overall reaction and stopped in a symbolic assignment before returning either coefficient. See the [bounded target attempt](../../reports/multiphase/phase2_5_1/catkinas_target_attempt.json).
 
 Mass/site balances close and the CATKINAS inputs, solver settings, rates, coverages, selectivity, and DRC outputs are reproducible and traceable.
+
+Phase 2.5.2 verified the same adsorption equation within a closed, four-step synthetic turnover at 400 K. The native MAT file contains separate directional coefficients and fluxes. Install the `catkinas` extra for the single-point result reader. The [completion report](../../reports/multiphase/phase2_5_2/catkinas_closed_cycle_completion.md) contains the CLI workflow, balance checks, capability matrix and limits on standalone use.

@@ -1,0 +1,25 @@
+Reaction :  1 : H2(gas) + 2 NO(gas) <-> 2 HNO(gas)
+                 + R1 + R2 + 2 R3 + 2 R4
+z1 = (Q1_H*Q2_H)/(P_H2*Q1_v*Q2_v*Keq(1))
+r(1) = -P_H2*Q1_v*Q2_v*kf(1)*(z1 - 1)
+T = 400;
+P_H2_FROZ = 1;
+P_HNO_FROZ = 0.10000000000000001;
+P_NO_FROZ = 0.5;
+[ y(1), Q1_H  ]
+[ y(2), Q1_HNO]
+[ y(3), Q1_v  ]
+[ y(4), Q2_H  ]
+[ y(5), Q2_v  ]
+[ x(1), P_H2 ]
+[ x(2), P_HNO]
+[ x(3), P_NO ]
+Reaction :  1 : H2(gas) + 2 NO(gas) <-> 2 HNO(gas)
+Run the sample 1 now ...
+Reaction :  1 : H2(gas) + 2 NO(gas) <-> 2 HNO(gas)
+dG =  -0.160 eV :  + R1 + R2 + 2 R3 + 2 R4
+[19-Nov 23:29:37]; Elapsed time: 00:00:00.043. Converged, return with the residue |dy/dt| ~= 10^-1001, |dlog(y)/dt| ~= 10^-1001. Succeed!!
+[19-Nov 23:29:38]; Elapsed time: 00:00:00.019. Converged, return with the residue |dy/dt| ~= 10^-1001, |dlog(y)/dt| ~= 10^-1001. Succeed!!
+Species   	 H2(gas)                  	 HNO(gas)                 	 NO(gas)
+Rate : 	   -8.1512770161647694e+01	    1.6302554032329539e+02	   -1.6302554032329539e+02
+CATKINAS is finished now ...

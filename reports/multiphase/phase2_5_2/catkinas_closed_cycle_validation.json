@@ -1,0 +1,249 @@
+{
+  "date": "2026-11-19",
+  "scope": "Synthetic constant-temperature mean-field benchmark, no physical catalyst acceptance",
+  "baseline": "fd3f9c4977565ac8abcac0fe15cff91b3163d746",
+  "environment": {
+    "authorized_binary_path": "D:/CATKINAS.p",
+    "sha256": "2b70a3511a19065f843b65d8601874700dd792e8d31d620046ef3805df399ff0",
+    "distribution_label": "20261106",
+    "download_host_and_referrer": "www.catkinas.com",
+    "reported_version": "20230524",
+    "compiled": "07-Nov-2026 11:57:47",
+    "matlab": "25.2.0.2998904 (R2025b)",
+    "matlab_sha256": "6dc32276086121e44edf4846f033066ba5b0fae9bad002d8917a411e0a59afa9",
+    "prior_vendor_control_receipt_sha256": "61e9b3608725f48d0b53625253a11d498e736dfbbcf1ba6a644c9e7386848bac"
+  },
+  "standalone": {
+    "exit_code": 1,
+    "timed_out": false,
+    "elapsed_s": 116.41850559999875,
+    "limit_s": 210,
+    "source_sha256": "1934e11eb1536aa4cd76023f8d8aaa6140b20ab28eb7caabab8ebc95e7a5d8f9",
+    "binary_sha256": "2b70a3511a19065f843b65d8601874700dd792e8d31d620046ef3805df399ff0",
+    "input_echo_sha256": "1934e11eb1536aa4cd76023f8d8aaa6140b20ab28eb7caabab8ebc95e7a5d8f9",
+    "raw_local_directory": "archive/phase2_5_2_native_observations_20261119/standalone",
+    "result_sha256": {
+      "console.log": "50b96575af6f0ed66a1a2ea89c5e6e9555b0a2ea363739a4c4c7397b8381c32a",
+      "invocation.json": "c585db17b2a37953a7d4f80f3d514fc7aa27edae38ef5ea5f8225ce1ea20e85b",
+      "result_phase25/Input_phase25_1": "1934e11eb1536aa4cd76023f8d8aaa6140b20ab28eb7caabab8ebc95e7a5d8f9",
+      "result_phase25/log1": "cf0643f1ce361f677ae3119cfcfb79e79c01ad21889f41fe076a7dbcfe150287",
+      "result_phase25/log1.err": "00a3b398926157ea104e7ae5819a538b32c3711d60502457a9d717117eebdaa6"
+    },
+    "input_read": true,
+    "rate_equations_built": false,
+    "numerical_result": null,
+    "warnings": [
+      "No total reaction found",
+      "Find off-line reaction: < 1 >"
+    ],
+    "error": "sym/privsubsasgn line 1175; assignment size mismatch. Same failure stage as Phase 2.5.1."
+  },
+  "closed_cycle": {
+    "exit_code": 0,
+    "timed_out": false,
+    "elapsed_s": 20.105222899997898,
+    "limit_s": 210,
+    "source_sha256": "b793e6f37f2262e4a006f912d18950c17581ccc014aa9779008741a4e31890f8",
+    "binary_sha256": "2b70a3511a19065f843b65d8601874700dd792e8d31d620046ef3805df399ff0",
+    "input_echo_sha256": "b793e6f37f2262e4a006f912d18950c17581ccc014aa9779008741a4e31890f8",
+    "raw_local_directory": "archive/phase2_5_2_native_observations_20261119/closed_cycle",
+    "result_sha256": {
+      "console.log": "01132fd6473346db7fec02f84e6a6d98e89908a5bed26749bd87b6a73c635612",
+      "invocation.json": "47b9f63e7974d24df39648f9259ceea4d55323162824d8be9473a80ba6982e94",
+      "result_closed_cycle/data1.mat": "20ebda963c5d5b57e9a47144831a3fd3d416f864d0211db1a4e03020938ff655",
+      "result_closed_cycle/Input_closed_cycle_1": "b793e6f37f2262e4a006f912d18950c17581ccc014aa9779008741a4e31890f8",
+      "result_closed_cycle/log1": "10c0b85dd1fc054207f678e69719826dca9f126f101969b254dc504d1e3f74fb",
+      "result_closed_cycle/log1.err": "a293007771e111e1c821beec0a56d522c35c6b9763474ac818cbbbaf69509316",
+      "result_closed_cycle/log1_finished": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result_closed_cycle/ORG1.mat": "398f67242174b32e76e8e23e6990919f4197032a1f2c74b37fe9c2bfc91a14ac"
+    },
+    "input_read": true,
+    "rate_equations_built": true,
+    "solver_converged": true,
+    "physical_catalyst_validated": false,
+    "reported_overall_reaction": "H2(g) + 2 NO(g) <-> 2 HNO(g)",
+    "first_step_unchanged": true,
+    "multiplicities_per_turnover": [
+      1,
+      1,
+      2,
+      2
+    ],
+    "adsorption_path_degeneracy": 1,
+    "gas_orders_first_step": {
+      "forward": {
+        "H2": 1
+      },
+      "reverse": {}
+    },
+    "site_activity_factors_first_step": {
+      "forward": [
+        "Q1_v",
+        "Q2_v"
+      ],
+      "reverse": [
+        "Q1_H",
+        "Q2_H"
+      ]
+    },
+    "warnings": [
+      "Biograph unavailable; plotting fallback",
+      "Site tokens #1/#2 assigned zero mass by conservation",
+      "HNO thermal database entry unavailable; native default used for ancillary thermodynamic listing. ThermoMode=0; applied Ea and G0 in data1.mat verified against supplied fixed-T inputs."
+    ]
+  },
+  "native_single_point": {
+    "reactions": [
+      {
+        "index": 1,
+        "kf": 1062.5334512545078,
+        "kr": 58.39820737222975,
+        "forward_flux": 94.00713283583823,
+        "reverse_flux": 12.494362674190553,
+        "net_flux": 81.5127701616477,
+        "applied_forward_barrier_eV": 0.7853168271366968,
+        "applied_reaction_energy_eV": -0.1
+      },
+      {
+        "index": 2,
+        "kf": 2214.7271375269625,
+        "kr": 3956.4788303965233,
+        "forward_flux": 450.0592041087896,
+        "reverse_flux": 368.5464339471419,
+        "net_flux": 81.5127701616477,
+        "applied_forward_barrier_eV": 0.76,
+        "applied_reaction_energy_eV": 0.02
+      },
+      {
+        "index": 3,
+        "kf": 1239.7428380039596,
+        "kr": 68.13786357174203,
+        "forward_flux": 190.36328304231006,
+        "reverse_flux": 27.337742719014678,
+        "net_flux": 163.0255403232954,
+        "applied_forward_barrier_eV": 0.78,
+        "applied_reaction_energy_eV": -0.1
+      },
+      {
+        "index": 4,
+        "kf": 693.9736630934748,
+        "kr": 3956.4788303965233,
+        "forward_flux": 278.43070593850365,
+        "reverse_flux": 115.40516561520829,
+        "net_flux": 163.0255403232954,
+        "applied_forward_barrier_eV": 0.8,
+        "applied_reaction_energy_eV": 0.06
+      }
+    ],
+    "coverages": {
+      "Q1_H": 0.30710124262351585,
+      "Q1_HNO": 0.401212208396157,
+      "Q1_v": 0.29168654898032714,
+      "Q2_H": 0.6966794790111535,
+      "Q2_v": 0.3033205209888465
+    },
+    "partial_pressures_bar": {
+      "P_H2": 1.0,
+      "P_HNO": 0.1,
+      "P_NO": 0.5
+    },
+    "net_gas_flux_per_reference_site_s": {
+      "H2": -81.5127701616477,
+      "HNO": 163.0255403232954,
+      "NO": -163.0255403232954
+    }
+  },
+  "flux_unit": "events per reference site per second, with one inventory unit of each type per reference pair",
+  "independent_comparison": [
+    {
+      "reaction_id": "ads",
+      "native_index": 1,
+      "unit_kf": "bar^-1 s^-1",
+      "unit_kr": "s^-1",
+      "reference_kf": 1062.50433251047,
+      "reference_kr": 58.39641191059782,
+      "relative_error_kf": 2.740576499005165e-05,
+      "relative_error_kr": 3.074609506281689e-05,
+      "reference_forward_flux": 94.00449383972078,
+      "reference_reverse_flux": 12.493971484265321,
+      "reference_net_flux": 81.51052235545546,
+      "reference_K_dimensionless": 18.194685216912205,
+      "native_K_at_standard_activity": 18.19462444252659
+    },
+    {
+      "reaction_id": "transfer",
+      "native_index": 2,
+      "unit_kf": "s^-1",
+      "unit_kr": "s^-1",
+      "reference_kf": 2214.6683157124403,
+      "reference_kr": 3956.3763917523693,
+      "relative_error_kf": 2.6560101169526007e-05,
+      "relative_error_kr": 2.589203705882781e-05,
+      "reference_forward_flux": 450.0470910822279,
+      "reference_reverse_flux": 368.53656872677243,
+      "reference_net_flux": 81.51052235545546,
+      "reference_K_dimensionless": 0.5597718964073368,
+      "native_K_at_standard_activity": 0.5597722703611685
+    },
+    {
+      "reaction_id": "hydrogenate",
+      "native_index": 3,
+      "unit_kf": "bar^-1 s^-1",
+      "unit_kr": "s^-1",
+      "reference_kf": 1239.7090829995939,
+      "reference_kr": 68.13578076345435,
+      "relative_error_kf": 2.7228165727422038e-05,
+      "relative_error_kr": 3.0568495206884094e-05,
+      "reference_forward_flux": 190.35797450653985,
+      "reference_reverse_flux": 27.336929795628933,
+      "reference_net_flux": 163.02104471091093,
+      "reference_K_dimensionless": 18.194685216912205,
+      "native_K_at_standard_activity": 18.19462444252659
+    },
+    {
+      "reaction_id": "desorb",
+      "native_index": 4,
+      "unit_kf": "s^-1",
+      "unit_kr": "bar^-1 s^-1",
+      "reference_kf": 693.9543043840827,
+      "reference_kr": 3956.376391752362,
+      "relative_error_kf": 2.789623073140568e-05,
+      "relative_error_kr": 2.5892037060604167e-05,
+      "reference_forward_flux": 278.4231704364256,
+      "reference_reverse_flux": 115.40212572551474,
+      "reference_net_flux": 163.02104471091087,
+      "reference_K_dimensionless": 0.17540148754065227,
+      "native_K_at_standard_activity": 0.1754018390701016
+    }
+  ],
+  "checks": {
+    "T_K": 400,
+    "standard_pressure_bar": 1,
+    "independent_steady_state": {
+      "Q1_H": 0.30710104026333446,
+      "Q1_HNO": 0.401212541917352,
+      "Q2_H": 0.6966795450248672
+    },
+    "max_relative_error_k": 3.074609506281689e-05,
+    "max_relative_error_net_flux": 2.7576883662394636e-05,
+    "site1_sum": 1.0,
+    "site2_sum": 1.0,
+    "max_abs_residual_from_native_net_flux_s^-1": 0.0,
+    "max_abs_residual_from_mass_action_s^-1": 5.684341886080802e-14,
+    "net_atom_flux_H_N_O_per_site_s": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "overall_standard_G_eV": -0.16,
+    "max_relative_error_mass_action_directional_flux": 2.220446049250313e-16,
+    "native_residual_report": "approximately 10^-1001 in the arbitrary-precision log; double-precision balance checks are listed independently"
+  },
+  "source_sha256": {
+    "closed_cycle_reference.json": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91",
+    "cycle_dataset.json": "0ac30eec437cebf321339d6c4dde26a0e2146229d8c27fb9fa9f3926adf6d778",
+    "cycle_configuration.json": "324a0967e97c1b59e6efd318c587f783ff6f7475d67de329401ddf8aa43cc9e6",
+    "native_log_extract.txt": "92ff2ff57db830681342b841dec3b395559437ee35c0c985cfa4c8b401a5fd60",
+    "data1.mat": "20ebda963c5d5b57e9a47144831a3fd3d416f864d0211db1a4e03020938ff655"
+  }
+}

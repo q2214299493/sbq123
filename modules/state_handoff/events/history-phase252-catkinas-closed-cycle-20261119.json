@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "event_id": "history-phase252-catkinas-closed-cycle-20261119",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-phase252-catkinas-closed-cycle-20261119",
+    "module": "baseline_mkm"
+  },
+  "occurred_at": "2026-11-19T15:39:36.801987+00:00",
+  "recorded_at": "2026-11-19T15:39:36.801987+00:00",
+  "summary": "Record native CATKINAS closed-cycle convergence, independently validated rates and reproduced standalone failure.",
+  "payload": {
+    "markdown": "- Phase 2.5.2: the authorized CATKINAS distribution solved a synthetic four-step two-site turnover at 400 K. Eight coefficients, directional fluxes, site and atomic balances and the steady-state residual were independently checked. The same first step alone reproduced the symbolic construction failure. Both worktrees passed 475 tests. Fe(110) remains blocked. See reports/multiphase/phase2_5_2/catkinas_closed_cycle_completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "pyproject.toml",
+      "sha256": "688a81b33c08d67fff667697de0e2740127e762887f9a826ff0b3807a16f4168",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T15:39:36.801987+00:00"
+    },
+    {
+      "locator": "scripts/optional_dependencies.py",
+      "sha256": "a92d26066d7d80fb5ed16af664df09707eadae8a78e1dcb304537b91ae77b5ca",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T15:39:36.801987+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/results.py",
+      "sha256": "a813c2f941428b48fb89888dc537ccb3f290459b26aee660cc4d7b762de77f4e",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T15:39:36.801987+00:00"
+    },
+    {
+      "locator": "tests/fixtures/multiphase/closed_cycle_reference.json",
+      "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T15:39:36.801987+00:00"
+    },
+    {
+      "locator": "tests/test_catkinas_closed_cycle.py",
+      "sha256": "3ffe1d62dfa6d7a7350eed60d8fef27274fcceb3f0c0f94dde549b3f89ae2db1",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T15:39:36.801987+00:00"
+    },
+    {
+      "locator": "modules/baseline_mkm/README.md",
+      "sha256": "355194221ce30ae0df518581aa90cedb0aab29bf355b06d13e425f91575b9eb7",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T15:39:36.801987+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_2/.gitattributes",
+      "sha256": "4f8331629bb5c427f372524f51dfe9d165bcb5faa25167ac3f30259df48ba993",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T15:39:36.801987+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_2/catkinas_closed_cycle_completion.md",
+      "sha256": "358eb98d391cab2881b8a22e0bfe4d4157344f9c46ca38bbac82792cda5de775",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T15:39:36.801987+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_2/catkinas_closed_cycle_input.m",
+      "sha256": "b793e6f37f2262e4a006f912d18950c17581ccc014aa9779008741a4e31890f8",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T15:39:36.801987+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_2/catkinas_closed_cycle_validation.json",
+      "sha256": "bb7b6d5c9c1b921d8bd1ba5c498a3eb8dbf1fb056ce2b13de7354e027755910b",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T15:39:36.801987+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_2/catkinas_standalone_step_assessment.md",
+      "sha256": "e08b48a7a6204e1e52e45543c3b6906a60b348853587e63d181cd4d9b76afca3",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T15:39:36.801987+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_2/cycle_configuration.json",
+      "sha256": "324a0967e97c1b59e6efd318c587f783ff6f7475d67de329401ddf8aa43cc9e6",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T15:39:36.801987+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_2/cycle_dataset.json",
+      "sha256": "0ac30eec437cebf321339d6c4dde26a0e2146229d8c27fb9fa9f3926adf6d778",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T15:39:36.801987+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_2/data1.mat",
+      "sha256": "20ebda963c5d5b57e9a47144831a3fd3d416f864d0211db1a4e03020938ff655",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T15:39:36.801987+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_2/native_log_extract.txt",
+      "sha256": "92ff2ff57db830681342b841dec3b395559437ee35c0c985cfa4c8b401a5fd60",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T15:39:36.801987+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}
