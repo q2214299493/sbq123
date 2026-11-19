@@ -1,0 +1,169 @@
+{
+  "format": "mkm-single-point-result/1",
+  "reactions": [
+    {
+      "index": 1,
+      "kf": 1062.5334512545078,
+      "kr": 58.39820737222975,
+      "forward_flux": 94.00713283583823,
+      "reverse_flux": 12.494362674190553,
+      "net_flux": 81.5127701616477,
+      "applied_forward_barrier_eV": 0.7853168271366968,
+      "applied_reaction_energy_eV": -0.1,
+      "reaction_id": "ads",
+      "forward_unit": "bar^-1 s^-1",
+      "reverse_unit": "s^-1"
+    },
+    {
+      "index": 2,
+      "kf": 2214.7271375269625,
+      "kr": 3956.4788303965233,
+      "forward_flux": 450.0592041087896,
+      "reverse_flux": 368.5464339471419,
+      "net_flux": 81.5127701616477,
+      "applied_forward_barrier_eV": 0.76,
+      "applied_reaction_energy_eV": 0.02,
+      "reaction_id": "transfer",
+      "forward_unit": "s^-1",
+      "reverse_unit": "s^-1"
+    },
+    {
+      "index": 3,
+      "kf": 1239.7428380039596,
+      "kr": 68.13786357174203,
+      "forward_flux": 190.36328304231006,
+      "reverse_flux": 27.337742719014678,
+      "net_flux": 163.0255403232954,
+      "applied_forward_barrier_eV": 0.78,
+      "applied_reaction_energy_eV": -0.1,
+      "reaction_id": "hydrogenate",
+      "forward_unit": "bar^-1 s^-1",
+      "reverse_unit": "s^-1"
+    },
+    {
+      "index": 4,
+      "kf": 693.9736630934748,
+      "kr": 3956.4788303965233,
+      "forward_flux": 278.43070593850365,
+      "reverse_flux": 115.40516561520829,
+      "net_flux": 163.0255403232954,
+      "applied_forward_barrier_eV": 0.8,
+      "applied_reaction_energy_eV": 0.06,
+      "reaction_id": "desorb",
+      "forward_unit": "s^-1",
+      "reverse_unit": "bar^-1 s^-1"
+    }
+  ],
+  "species": [
+    {
+      "species_id": "H2-g",
+      "phase": "gas",
+      "site_occupancy": {},
+      "site_types": [],
+      "coverage": null,
+      "pressure_bar": 1.0
+    },
+    {
+      "species_id": "H2-bridge",
+      "phase": "surface",
+      "site_occupancy": {
+        "bridge-Cu": 1
+      },
+      "site_types": [
+        "bridge"
+      ],
+      "coverage": 0.6966794790111535,
+      "pressure_bar": null
+    },
+    {
+      "species_id": "H2-top",
+      "phase": "surface",
+      "site_occupancy": {
+        "top-Ni": 1
+      },
+      "site_types": [
+        "atop"
+      ],
+      "coverage": 0.30710124262351585,
+      "pressure_bar": null
+    },
+    {
+      "species_id": "NO-g",
+      "phase": "gas",
+      "site_occupancy": {},
+      "site_types": [],
+      "coverage": null,
+      "pressure_bar": 0.5
+    },
+    {
+      "species_id": "HNO-g",
+      "phase": "gas",
+      "site_occupancy": {},
+      "site_types": [],
+      "coverage": null,
+      "pressure_bar": 0.1
+    },
+    {
+      "species_id": "HNO-top",
+      "phase": "surface",
+      "site_occupancy": {
+        "top-Ni": 1
+      },
+      "site_types": [
+        "atop"
+      ],
+      "coverage": 0.401212208396157,
+      "pressure_bar": null
+    }
+  ],
+  "sites": [
+    {
+      "site_id": "top-Ni",
+      "inventory": 1,
+      "occupied_fraction": 0.7083134510196729,
+      "vacancy_fraction": 0.29168654898032714,
+      "balance_residual": 0.0
+    },
+    {
+      "site_id": "bridge-Cu",
+      "inventory": 1,
+      "occupied_fraction": 0.6966794790111535,
+      "vacancy_fraction": 0.3033205209888465,
+      "balance_residual": 0.0
+    }
+  ],
+  "total_reaction": {
+    "H2-g": -1,
+    "NO-g": -2,
+    "HNO-g": 2
+  },
+  "overall_rate": 81.5127701616477,
+  "tof_s_inverse": 81.5127701616477,
+  "turnover_basis": "one_event_per_reference_site",
+  "gas_net_production": {
+    "H2-g": -81.5127701616477,
+    "NO-g": -163.0255403232954,
+    "HNO-g": 163.0255403232954
+  },
+  "molar_selectivity": {
+    "HNO-g": 1.0
+  },
+  "numerical_convergence": "converged",
+  "flux_unit": "events per reference site per second",
+  "steady_state_residual": 5.684341886080802e-14,
+  "validation": {
+    "status": "passed",
+    "max_relative_coefficient_error": 3.074609506259485e-05,
+    "steady_state_absolute_tolerance": 1.630255403232954e-05
+  },
+  "run_id": "run",
+  "question_id": "3874914af5cb16b38385b930ca5cff658d9093ef5f52ba00a6652a434d30e41c",
+  "scope": "synthetic_benchmark",
+  "plan_sha256": "7a964de15b3a4fa6dcf53ae9ea6a06597b9cdc68ecdb064abcd85fd047419241",
+  "output_hashes": {
+    "runtime/result_phase25/data1.mat": "a010f66603a85035cdcbbc2e81e5ea712c4833a979b7d595df4dcdb386db308d",
+    "runtime/result_phase25/log1": "af4e3165f7ee01e8bb75458a06b0663b273e91382f84bf26bdefc5526a5c0111",
+    "runtime/result_phase25/Input_phase25_1": "b793e6f37f2262e4a006f912d18950c17581ccc014aa9779008741a4e31890f8",
+    "runtime/console.log": "143430a11e9aea5cc7428285ab9f9721d662118d30bc7ab58088c2bd6cf56bd4"
+  }
+}

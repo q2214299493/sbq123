@@ -22,9 +22,9 @@ OUT = ROOT / "reports/multiphase/phase2_5_2"
 REFERENCE = FIX / "closed_cycle_reference.json"
 
 
-def cycle_model():
+def cycle_model(system="interface", *, with_network=False):
     ref = json.loads(REFERENCE.read_bytes())
-    n, adsorption = case(gas="dissociative")
+    n, adsorption = case(system=system, gas="dissociative")
     species = n["species"]
     templates = {s["species_id"]: s for s in species}
     for sid, template, composition in (("NO-g", "H2-g", {"N": 1, "O": 1}), ("HNO-g", "H2-g", {"H": 1, "N": 1, "O": 1}),
@@ -92,7 +92,7 @@ def cycle_model():
     c = {"dataset_version": d["dataset_version"], "partial_pressure_bar": ref["partial_pressure_bar"],
          "catkinas": {"aliases": {"H2-g": "H2", "NO-g": "NO", "HNO-g": "HNO", "H2-top": "H", "H2-bridge": "H", "HNO-top": "HNO"},
                       "initial_coverages": {"H2-top": 0, "H2-bridge": 0, "HNO-top": 0}, "MaxTime": 3, "MaxOdeTime": 3}}
-    return d, c
+    return (network, d, c) if with_network else (d, c)
 
 
 def test_closed_cycle_replays_unchanged_adsorption_equation():

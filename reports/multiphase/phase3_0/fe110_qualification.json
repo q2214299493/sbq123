@@ -1,0 +1,56 @@
+{
+  "ticket_id": "3874914af5cb16b38385b930",
+  "question_id": "3874914af5cb16b38385b930ca5cff658d9093ef5f52ba00a6652a434d30e41c",
+  "run_id": "fe110_draft",
+  "catalyst_project_id": "sbq123",
+  "network_version_id": "2a80b67c31201600a1858780bbe6c176b03f489fe24383441fca4f195b395483",
+  "kinetic_dataset_version": "a4191054a20d601a73afadd410d3cf69d3df524b14278f0edff92c7a33870b72",
+  "input_hashes": {
+    "network": "56e42d4147637acae090911a82715a10d9883fefa03e7e6dc19fcc0c0f3b25ca",
+    "dataset": "dd2cdba9cfa6d45bfbf0f4e659ca80c1f81a80b3681e99633bdc19b1a98ff461",
+    "configuration": "aa57c9ffb4f6a9118a3e70570370c987ab55f22e8a53513569a485fb0b5996fa"
+  },
+  "stages": [
+    "CREATED",
+    "QUALIFICATION",
+    "REJECTED"
+  ],
+  "execution": "not_started",
+  "approval": "not_requested",
+  "convergence": "unknown",
+  "scientific_validity": "unqualified",
+  "stage": "REJECTED",
+  "timestamp": "2026-11-19T16:00:07.583165+00:00",
+  "failure_stage": "QUALIFICATION",
+  "missing_data": {
+    "fe110_ch_co_to_chco_20261109": [
+      "Unknown charge balance",
+      "Unknown site balance",
+      "Catalyst phase unconfirmed",
+      "Missing compatible free energies",
+      "Missing kinetic parameters or rate law",
+      "Reversibility unconfirmed",
+      "IS: compatible Gibbs correction missing",
+      "FS: compatible Gibbs correction missing",
+      "Kinetic parameter set with units, standard states, validity range and sources missing",
+      "Rate law, scoped parameter review and applicability not supplied",
+      "Reviewed site occupancies and vacant-site counts required"
+    ]
+  },
+  "artifacts": [
+    "CREATED.json",
+    "QUALIFICATION.json",
+    "REJECTED.json"
+  ],
+  "conditions": {
+    "dataset_version": "a4191054a20d601a73afadd410d3cf69d3df524b14278f0edff92c7a33870b72",
+    "temperature_K": null,
+    "total_pressure_bar": null,
+    "partial_pressure_bar": null
+  },
+  "ticket_handoff": {
+    "ticket_id": "3874914af5cb16b38385b930",
+    "status": "WAITING_FOR_HUMAN",
+    "note": "{\"run\": \"fe110_draft\", \"stage\": \"REJECTED\", \"project\": \"sbq123\", \"network\": \"2a80b67c31201600a1858780bbe6c176b03f489fe24383441fca4f195b395483\", \"T_K\": null, \"P_bar\": null, \"convergence\": \"unknown\", \"validation\": \"unqualified\", \"TOF_s^-1\": null} Evidence reports/multiphase/phase3_0/fe110_qualification.json"
+  }
+}

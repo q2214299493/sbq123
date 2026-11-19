@@ -5,6 +5,8 @@ from typing import Any
 
 from scripts.artifact_io import load_json_object, require_sha256, sha256_json
 
+from scripts.execution_permission import require_bound_action
+
 from .execution_decision import ACTIONS, GATE_NAME
 from .execution_evidence import bind_execution as _bind_execution
 from .execution_path_rules import INITIAL_SUBMISSIONS
@@ -87,13 +89,7 @@ def require_action(
     require_sha256(current_state_sha256, label="current execution state")
     decision = load_json_object(decision_path)
     validate_decision(decision)
-    if decision.get("state_sha256") != current_state_sha256:
-        raise ValueError("execution decision is stale for the current calculation state")
-    if action not in ACTIONS:
-        raise ValueError(f"unknown NEB action: {action}")
-    if action not in decision.get("ALLOWED_ACTIONS", []):
-        raise PermissionError(f"{action} is not authorized by {decision.get('DECISION')}")
-    return decision
+    return require_bound_action(decision, action, current_state_sha256, ACTIONS)
 
 
 def validate_decision(decision: dict[str, Any]) -> None:
