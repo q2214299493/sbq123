@@ -130,3 +130,16 @@ no deletion, reclassification event or state-transaction change is authorized by
 - The original two C2 templates were normalized to a pending input bundle outside the repository. The published third mode C2-3 still lacks a verified coordinate template on the local slab. No review or scientific calculation was created for that pose.
 - 152 related regressions, 67 final targeted checks, and seven current-workspace tests passed. Syntax and targeted Ruff passed.
 - Merge review found that editing an emitted POSCAR after generation could still pass readback. Readback now compares the actual adjacent POSCAR, atom mapping, and selective flags to the reviewed template in output order. The regression covers changed coordinates, constraints and anchor indices. 102 related tests and 56 final tests passed.
+
+## Open NEB regression debt (2026-11-20)
+
+Track independently of Phase 3.1. The Phase 3.0 multiphase suite passed all 506 tests in both worktrees. At release ca13b069 the additional NEB governance group passed 88/88 in the release worktree and 78/88 in development. The development uploader streams the upload through the keyword-only binary stdin argument. The older simulated remotes accept argv alone. A representative failure reproduced with the pre-Phase-3.0 gate. This evidence covers the test interface. Live SSH transport was not tested.
+
+- Reproduce locally with `python -m pytest tests/test_execution_lifecycle.py::test_stale_evidence_after_upload_prevents_bsub`. In a separate test-maintenance change, teach the simulated SSH transport and its wrappers to consume the supplied binary stream and reproduce the remote files. Preserve the existing argv-only and reuse-upload paths.
+- Close after the ten failures and the full 88-test governance group pass in development. Exercise corrupted and unexpected files, stale evidence, concurrent submissions and uncertain process termination. These tests must still detect an invalid upload and prevent duplicate submission. See the [Phase 3.0 test record](../reports/multiphase/phase3_0/completion.md).
+
+## CATKINAS runtime planning before DRC or condition scans (2026-11-20)
+
+The same four-step synthetic input has two recorded whole-process times, [20.11 s](../reports/multiphase/phase2_5_2/catkinas_closed_cycle_validation.json) and [192.29 s](../reports/multiphase/phase3_0/benchmark_manifest.json). The latter leaves 17.71 s of the 210 s single-point allowance. Neither observation separates startup costs from solver time.
+
+For a separately authorized scan, first time a small representative pilot, separating MATLAB startup, native initialization, solution and collection where observable. Use the measurements to choose batch size, concurrency, per-point timeout and total wall-time budget. Track each base point or DRC perturbation by its exact model, settings and tool hashes. Reuse verified completed outputs on resume. Retain timed-out evidence and reconcile it before a bounded retry decision. A paired DRC estimate requires both validated perturbations. This planning item authorizes no batch execution.
