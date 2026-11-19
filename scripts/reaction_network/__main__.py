@@ -38,6 +38,9 @@ def main():
     parser.add_argument("--evidence", type=Path, action="append", default=[], help="Verify an existing review/source artifact")
     parser.add_argument("--decision", type=Path, action="append", default=[], help="Existing review bound to a reaction subject digest")
     parser.add_argument("--ts-review", type=Path, action="append", default=[], help="Grade A assignment with reaction ID and TS identity")
+    parser.add_argument("--site-proposal", type=Path, help="Site projections and mapping options bound to the parent version")
+    parser.add_argument("--site-confirmation", type=Path, help="Researcher decision bound to the original site proposal")
+    parser.add_argument("--site-catalog", type=Path, help="Project-specific allowed site types, keyed by surface ID")
     parser.add_argument("--output-dir", type=Path, help="Write a content-addressed version; otherwise print the snapshot")
     args = parser.parse_args()
     sources = []
@@ -55,8 +58,11 @@ def main():
         digest = sha256_file(path)
         sources.append({"role": "verified_evidence", "file": path.name, "sha256": digest})
         verified.add(digest)
+    site_inputs = {key: json.loads(path.read_bytes(), object_pairs_hook=_unique_keys)
+                   for key, path in (("site_proposal", args.site_proposal), ("site_confirmation", args.site_confirmation),
+                                     ("site_catalog", args.site_catalog)) if path}
     network = build_network(definition, intakes=intakes, thermochemistry=[d.get("calculation", d) for d in thermal],
-                            sources=sources, verified_hashes=verified, decisions=decisions, ts_reviews=ts_reviews)
+                            sources=sources, verified_hashes=verified, decisions=decisions, ts_reviews=ts_reviews, **site_inputs)
     if args.output_dir:
         print(publish(network, args.output_dir))
     else:

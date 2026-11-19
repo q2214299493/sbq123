@@ -10,6 +10,7 @@ from scripts.scientific_validation import finite_number, validate_finite_tree
 from scripts.thermochemistry.engine import ts_binding
 from scripts.reaction_network.catalog import catalog, check_context, register_species, site_counts, site_mapping
 from scripts.reaction_network.thermodynamics import check_cycles, thermal_evidence
+from scripts.reaction_network.site_review import apply_review, domain_balance
 
 LEVELS = ("DRAFT", "STRUCTURALLY_VALID", "THERMODYNAMICALLY_VALID", "SCIENTIFICALLY_ACCEPTED", "KINETICALLY_ELIGIBLE")
 TYPES = {"adsorption", "desorption", "dissociation", "hydrogenation", "dehydrogenation", "c_c_coupling",
@@ -378,8 +379,38 @@ def bind_ts_review(result, review):
                            "assignment": binding["assignment"], "review_reference": binding["review_reference"]}
 
 
-def build_network(definition, *, intakes=(), thermochemistry=(), sources=(), verified_hashes=(), decisions=(), ts_reviews=()):
+def build_network(definition, *, intakes=(), thermochemistry=(), sources=(), verified_hashes=(), decisions=(), ts_reviews=(),
+                  site_proposal=None, site_confirmation=None, site_catalog=None):
     """Build a snapshot in memory. Only an imported validated Phase 1 bundle can convey kinetic eligibility."""
+    if site_proposal is None and (site_confirmation is not None or site_catalog is not None):
+        raise ValueError("A site confirmation or catalog needs its original proposal")
+    inputs = dict(intakes=intakes, thermochemistry=thermochemistry, sources=sources,
+                  verified_hashes=verified_hashes, decisions=decisions, ts_reviews=ts_reviews)
+    if site_proposal is not None:
+        if decisions:
+            raise ValueError("Review the rebuilt scientific subject separately")
+        parent = _assemble_network(definition, None, None, None, **inputs)
+        if (site_proposal.get("format") != "site-mapping-proposal/1"
+                or site_proposal.get("parent_network_version") != parent["network_version"]
+                or site_proposal.get("reaction_id") not in parent["validation_report"]["levels"]):
+            raise ValueError("Site proposal does not match the parent network or reaction")
+    return _assemble_network(definition, site_proposal, site_confirmation, site_catalog, **inputs)
+
+
+def _review_sites(index, proposal, confirmation, configuration):
+    if proposal is None:
+        return None, set()
+    review = apply_review(index, proposal, confirmation, configuration)
+    if confirmation is None:
+        return review, set()
+    validate_confirmation(index["reactions"][proposal["reaction_id"]])
+    zero_species = {sid for sid, v in confirmation["mapping"]["occupancies"].items()
+                    if v is not None and not any(v.values())}
+    return review, zero_species
+
+
+def _assemble_network(definition, site_proposal, site_confirmation, site_catalog, *, intakes, thermochemistry, sources,
+                      verified_hashes, decisions, ts_reviews):
     data = deepcopy(definition)
     strict = data.get("format") != "network-definition/1"
     if strict:
@@ -391,8 +422,9 @@ def build_network(definition, *, intakes=(), thermochemistry=(), sources=(), ver
     for record in index["reactions"].values():
         validate_confirmation(record)
     mappings = apply_intakes(intakes, index)
+    review, zero_species = _review_sites(index, site_proposal, site_confirmation, site_catalog)
     strict_unchanged = strict and data == definition
-    fingerprints = register_species(index)
+    fingerprints = register_species(index, zero_species)
     reviews = by_reaction(decisions, index, "network review")
     thermal = by_reaction(thermochemistry, index, "thermochemistry")
     ts = by_reaction(ts_reviews, index, "TS review")
@@ -405,6 +437,9 @@ def build_network(definition, *, intakes=(), thermochemistry=(), sources=(), ver
             raise ValueError("Duplicate elementary reaction")
         seen.update(keys)
         result = inspect_reaction(record, index, thermal.get(key), mappings.get(key))
+        if review and key == site_proposal["reaction_id"]:
+            result["site_review"] = review
+            result["site_balance_by_domain"] = domain_balance(record, index)
         if key in ts:
             bind_ts_review(result, ts[key])
         apply_decision(result, reviews.get(key), index, strict_unchanged, set(verified_hashes))
@@ -437,4 +472,6 @@ def build_network(definition, *, intakes=(), thermochemistry=(), sources=(), ver
                "acceptance_record": {r["definition"]["reaction_id"]: {"scientific_review": r["scientific_review"],
                                       "user_confirmation": r["user_confirmation"], "network_review": r["network_review"]} for r in results},
                "validation_report": summary}
+    if review:
+        payload["site_mapping_version"] = sha256_json([payload["site_mapping_version"], review])
     return {"network_version": sha256_json(payload), **payload}

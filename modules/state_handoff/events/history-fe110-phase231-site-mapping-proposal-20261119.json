@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "event_id": "history-fe110-phase231-site-mapping-proposal-20261119",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-fe110-phase231-site-mapping-proposal-20261119",
+    "module": "reaction_network"
+  },
+  "occurred_at": "2026-11-19T11:30:24.769383+00:00",
+  "recorded_at": "2026-11-19T11:30:24.769383+00:00",
+  "summary": "Record the phase 2.3.1 site projection and pending review.",
+  "payload": {
+    "markdown": "- Fe(110) CH* + CO* to CHCO*: reproduced endpoint projections and bound the three source structures. The pending draft 2a80b67c preserves unknown site occupancy, vacancies and kinetic reversibility. Researcher confirmation, charge and formal phase evidence are outstanding. See reports/multiphase/phase2_3_1_completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "modules/reaction_network/README.md",
+      "sha256": "850e4266653b646dc2492af4d314228ad7b62aec2f6ee5dcb8b10fedc66a2cc3",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T11:30:24.769383+00:00"
+    },
+    {
+      "locator": "scripts/reaction_network/builder.py",
+      "sha256": "e7188bb95d1528f751808b1c9f0fac37f56007f0ffd306bc2e0291c81529436e",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T11:30:24.769383+00:00"
+    },
+    {
+      "locator": "scripts/reaction_network/catalog.py",
+      "sha256": "002b9106440365c9b45fc83f5111aa2d85a72059b87d67f5a9cacb6ebe3362b8",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T11:30:24.769383+00:00"
+    },
+    {
+      "locator": "scripts/reaction_network/__main__.py",
+      "sha256": "fcf07406bbf13a35c52972a284c0c319d500f5d986155605195fce96e9eb3b1d",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T11:30:24.769383+00:00"
+    },
+    {
+      "locator": "scripts/reaction_network/site_review.py",
+      "sha256": "c382a8c4482402434ed72420dd923b45658cb9493ffb57370e86272ff4768ef0",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T11:30:24.769383+00:00"
+    },
+    {
+      "locator": "tests/test_reaction_site_review.py",
+      "sha256": "2f42586640c51bb9876cf61ba1b19f5198da2d99166cc752367ad05d0a0cd29e",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T11:30:24.769383+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_3_1_site_review.md",
+      "sha256": "1aa373580f104c4b5be74aba0c876a2bd685485493b03d8cda2e00e303c0e952",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T11:30:24.769383+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_3_1_site_proposal.json",
+      "sha256": "0d6468795bd47ab4691353db35c3457251ea5063e3041aaca9c8132af13a5258",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T11:30:24.769383+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_3_1_confirmation_template.json",
+      "sha256": "326dc4b677c2fc3f6d687e4d671eb48b9d4e55c2f5c49c52065a25588404f9e8",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T11:30:24.769383+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_3_1_site_balance.json",
+      "sha256": "3520ef17e26ccdb437cf6e185c0b9fb06b9a26a58edc94ccfbd0d5755e40331e",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T11:30:24.769383+00:00"
+    },
+    {
+      "locator": "reports/multiphase/networks/network-2a80b67c31201600a1858780bbe6c176b03f489fe24383441fca4f195b395483.json",
+      "sha256": "56e42d4147637acae090911a82715a10d9883fefa03e7e6dc19fcc0c0f3b25ca",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T11:30:24.769383+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_3_1_completion.md",
+      "sha256": "cde1079fc4dbd86deb376e219e1ddab98a1793c996cda95b5a9a0e775ce34d0d",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T11:30:24.769383+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "historical_result_record"
+    ],
+    "status": "pending"
+  }
+}

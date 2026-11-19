@@ -1,0 +1,651 @@
+{
+  "format": "site-mapping-proposal/1",
+  "parent_network_version": "e9dc0c890a7a1dc15efe1ec8a500c3ad558b367d92de96a4ae3ffbaff5cceb72",
+  "reaction_id": "fe110_ch_co_to_chco_20261109",
+  "status": "awaiting_researcher",
+  "evidence": {
+    "site_reference": {
+      "path": "calculations/true_fe110_clean_20260629/results/job_9557161/CONTCAR",
+      "sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d"
+    },
+    "registry_mapping": {
+      "path": "reports/multiphase/ch_co_registry_mapping_20261119.json",
+      "sha256": "5d8d7f3a4ebd90b5666bee4215b517f2f520f33e3adc2524c50f8d931e41dfbf"
+    },
+    "parent": {
+      "path": "reports/multiphase/networks/network-e9dc0c890a7a1dc15efe1ec8a500c3ad558b367d92de96a4ae3ffbaff5cceb72.json",
+      "sha256": "67464382937825db13945cb5a23561dc82f59de54b19baf640d4c3377144e2df"
+    },
+    "site_definitions": {
+      "path": "scripts/adsorption/build_fe110_adsorption.py",
+      "sha256": "58fa806503de39c8eb4a74e83eb7e6f21f8fd31dbce37b93a372384916affb82"
+    },
+    "site_rules": {
+      "path": "configs/adsmind_lite/site_rules.yaml",
+      "sha256": "6c754578a42f539d332ab35c23e792996d190b90da5408d778ef3e0132305f71"
+    },
+    "analysis_rules": {
+      "path": "configs/adsmind_lite/analysis_rules.yaml",
+      "sha256": "45bab93237e78f37287f36ec1626b0d38b38fe0c17f913a9062fdc7d65bcceed"
+    },
+    "IS_contact_review": {
+      "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/parsed/03_cfg0_direct_vasp_ecc926d23f24ad0bb400b42297076fb40da689c903504451475bda3306732aa5.json",
+      "sha256": "f15ac5915800fa227ee7bc67c60c51266f7e34b8a1524875cac0f353cfa4b5a8"
+    },
+    "FS_contact_review": {
+      "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/parsed/03_extra2_repair_v1_2aea1569c59e6c86ab1179e976db722be0a55baf77708219c0b8e4bcc9ece541.json",
+      "sha256": "89783add4a58f28da7f933e0c52b07bcaf259d480c195128b7157032d96dadeb"
+    }
+  },
+  "state_structures": {
+    "IS": {
+      "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_cfg0_direct_vasp/CONTCAR",
+      "sha256": "f8bc627180b430b3b64f748c05830a0372bc93a3750780cf7fe6c5eb0601762d",
+      "cell_angstrom": [
+        [
+          8.4808451022,
+          0.0,
+          0.0
+        ],
+        [
+          4.2404225511,
+          5.996863081958339,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          22.995817442611116
+        ]
+      ]
+    },
+    "TS": {
+      "path": "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/CONTCAR",
+      "sha256": "0157a418cd1fba1be886426361d494ffbdce9a15d1a9132b996a3481ffcc1a6a",
+      "cell_angstrom": [
+        [
+          8.4808451022,
+          0.0,
+          0.0
+        ],
+        [
+          4.2404225511,
+          5.996863081958,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          22.995817442611
+        ]
+      ]
+    },
+    "FS": {
+      "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_extra2_repair_v1/CONTCAR",
+      "sha256": "11dab1631a99f1e444d4c7ab9ca242609e07c912f656874005696e6498f15ab2",
+      "cell_angstrom": [
+        [
+          8.4808451022,
+          0.0,
+          0.0
+        ],
+        [
+          4.2404225511,
+          5.996863081958339,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          22.995817442611116
+        ]
+      ]
+    }
+  },
+  "coordinate_convention": "Zero-based atom indices; direct lattice coordinates and Cartesian angstrom. Centers on clean Fe(110), periodic in-plane. A center identifier locates geometry only. Nearby Fe are not occupancy multiplicities.",
+  "projections": {
+    "IS": {
+      "45": {
+        "atom_index": 45,
+        "element": "C",
+        "fractional": [
+          0.4990197032984429,
+          0.3319216946233264,
+          0.7240121301014852
+        ],
+        "cartesian_angstrom": [
+          5.639597045699977,
+          1.9904889565876758,
+          16.649250770049765
+        ],
+        "candidate_site_id": "fe110.long_bridge.40-41",
+        "candidate_type": "long_bridge",
+        "center_fractional_xy": [
+          0.5000006,
+          0.333333
+        ],
+        "offset_angstrom": 0.01661946725281658,
+        "off_symmetry": false,
+        "reference_fe_indices": [
+          41,
+          40
+        ],
+        "nearest_Fe_contacts_angstrom": [
+          [
+            1.8755720250421153,
+            40
+          ],
+          [
+            1.8758816658525392,
+            41
+          ],
+          [
+            2.166803788002604,
+            38
+          ]
+        ]
+      },
+      "46": {
+        "atom_index": 46,
+        "element": "C",
+        "fractional": [
+          0.8192441487638923,
+          0.3456630812842699,
+          0.7351996425796045
+        ],
+        "cartesian_angstrom": [
+          8.413640251510795,
+          2.0728941709496027,
+          16.906516764633526
+        ],
+        "candidate_site_id": "fe110.long_bridge.39-41",
+        "candidate_type": "long_bridge",
+        "center_fractional_xy": [
+          0.8333347,
+          0.3333274
+        ],
+        "offset_angstrom": 0.09993507802002367,
+        "off_symmetry": false,
+        "reference_fe_indices": [
+          39,
+          41
+        ],
+        "nearest_Fe_contacts_angstrom": [
+          [
+            1.856432169589718,
+            41
+          ],
+          [
+            2.0635059176868276,
+            39
+          ],
+          [
+            2.363357016673399,
+            44
+          ]
+        ]
+      },
+      "47": {
+        "atom_index": 47,
+        "element": "O",
+        "fractional": [
+          0.8522985152355711,
+          0.3484374643898689,
+          0.785944267585849
+        ],
+        "cartesian_angstrom": [
+          8.70573377019483,
+          2.089531766570778,
+          18.073430897470885
+        ],
+        "candidate_site_id": "fe110.long_bridge.39-41",
+        "candidate_type": "long_bridge",
+        "center_fractional_xy": [
+          0.8333347,
+          0.3333274
+        ],
+        "offset_angstrom": 0.24247051384924007,
+        "off_symmetry": false,
+        "reference_fe_indices": [
+          39,
+          41
+        ],
+        "nearest_Fe_contacts_angstrom": [
+          [
+            2.8482892997091183,
+            39
+          ],
+          [
+            2.9685035384032874,
+            41
+          ],
+          [
+            3.171408535090988,
+            44
+          ]
+        ]
+      },
+      "48": {
+        "atom_index": 48,
+        "element": "H",
+        "fractional": [
+          0.4927980866150805,
+          0.3331544932870206,
+          0.7719702355199933
+        ],
+        "cartesian_angstrom": [
+          5.592060065577613,
+          1.9978818813814714,
+          17.752086607147273
+        ],
+        "candidate_site_id": "fe110.long_bridge.40-41",
+        "candidate_type": "long_bridge",
+        "center_fractional_xy": [
+          0.5000006,
+          0.333333
+        ],
+        "offset_angstrom": 0.06184933831539259,
+        "off_symmetry": false,
+        "reference_fe_indices": [
+          41,
+          40
+        ],
+        "nearest_Fe_contacts_angstrom": [
+          [
+            2.6667834484625597,
+            40
+          ],
+          [
+            2.7055612136110283,
+            41
+          ],
+          [
+            2.8725981293992007,
+            38
+          ]
+        ]
+      }
+    },
+    "TS": {
+      "45": {
+        "atom_index": 45,
+        "element": "C",
+        "fractional": [
+          0.4857180550044438,
+          0.36684195247901,
+          0.7274046451358094
+        ],
+        "cartesian_angstrom": [
+          5.674864475816097,
+          2.199900961734766,
+          16.727264426450308
+        ],
+        "candidate_site_id": "fe110.long_bridge.40-41",
+        "candidate_type": "long_bridge",
+        "center_fractional_xy": [
+          0.5000006,
+          0.333333
+        ],
+        "offset_angstrom": 0.202039273920779,
+        "off_symmetry": false,
+        "reference_fe_indices": [
+          41,
+          40
+        ]
+      },
+      "46": {
+        "atom_index": 46,
+        "element": "C",
+        "fractional": [
+          0.541176473726831,
+          0.5594353223443695,
+          0.7357867303768438
+        ],
+        "cartesian_angstrom": [
+          6.961876003383024,
+          3.354857031310223,
+          16.920017328441542
+        ],
+        "candidate_site_id": "fe110.hollow.41-43-44",
+        "candidate_type": "hollow",
+        "center_fractional_xy": [
+          0.5555565,
+          0.5555513
+        ],
+        "offset_angstrom": 0.1080257695328409,
+        "off_symmetry": false,
+        "reference_fe_indices": [
+          41,
+          44,
+          43
+        ]
+      },
+      "47": {
+        "atom_index": 47,
+        "element": "O",
+        "fractional": [
+          0.5721021588646897,
+          0.6081641959615626,
+          0.7834678143308991
+        ],
+        "cartesian_angstrom": [
+          7.4307829632926605,
+          3.647077414530565,
+          18.016482830514803
+        ],
+        "candidate_site_id": "fe110.hollow.41-43-44",
+        "candidate_type": "hollow",
+        "center_fractional_xy": [
+          0.5555565,
+          0.5555513
+        ],
+        "offset_angstrom": 0.4812728858522907,
+        "off_symmetry": true,
+        "reference_fe_indices": [
+          41,
+          44,
+          43
+        ]
+      },
+      "48": {
+        "atom_index": 48,
+        "element": "H",
+        "fractional": [
+          0.4777670502142217,
+          0.3305418373032439,
+          0.7733308821185912
+        ],
+        "cartesian_angstrom": [
+          5.453505408784526,
+          1.9822141411663907,
+          17.78337578793245
+        ],
+        "candidate_site_id": "fe110.long_bridge.40-41",
+        "candidate_type": "long_bridge",
+        "center_fractional_xy": [
+          0.5000006,
+          0.333333
+        ],
+        "offset_angstrom": 0.20109255184497724,
+        "off_symmetry": false,
+        "reference_fe_indices": [
+          41,
+          40
+        ]
+      }
+    },
+    "FS": {
+      "45": {
+        "atom_index": 45,
+        "element": "C",
+        "fractional": [
+          0.7773312629300798,
+          0.4249698628654685,
+          0.736383783829615
+        ],
+        "cartesian_angstrom": [
+          8.394477824040115,
+          2.5484860815628263,
+          16.933747060645036
+        ],
+        "candidate_site_id": "fe110.hollow.39-41-44",
+        "candidate_type": "hollow",
+        "center_fractional_xy": [
+          0.7777803,
+          0.4444364
+        ],
+        "offset_angstrom": 0.1452061092200237,
+        "off_symmetry": false,
+        "reference_fe_indices": [
+          44,
+          39,
+          41
+        ],
+        "nearest_Fe_contacts_angstrom": [
+          [
+            2.0606553553693123,
+            39
+          ],
+          [
+            2.0670976111762296,
+            41
+          ],
+          [
+            2.0697940935590182,
+            44
+          ]
+        ]
+      },
+      "46": {
+        "atom_index": 46,
+        "element": "C",
+        "fractional": [
+          0.5733705764371406,
+          0.5574158694037511,
+          0.7344339855446484
+        ],
+        "cartesian_angstrom": [
+          7.226345867883193,
+          3.3427466485250656,
+          16.888909855234026
+        ],
+        "candidate_site_id": "fe110.hollow.41-43-44",
+        "candidate_type": "hollow",
+        "center_fractional_xy": [
+          0.5555565,
+          0.5555513
+        ],
+        "offset_angstrom": 0.15937771391578753,
+        "off_symmetry": false,
+        "reference_fe_indices": [
+          41,
+          44,
+          43
+        ],
+        "nearest_Fe_contacts_angstrom": [
+          [
+            2.0098729740771066,
+            44
+          ],
+          [
+            2.022698175251025,
+            41
+          ],
+          [
+            2.083029812118324,
+            43
+          ]
+        ]
+      },
+      "47": {
+        "atom_index": 47,
+        "element": "O",
+        "fractional": [
+          0.4186329273563709,
+          0.6450393238598298,
+          0.7653857850642589
+        ],
+        "cartesian_angstrom": [
+          6.285600306831445,
+          3.868212507666382,
+          17.600671786507288
+        ],
+        "candidate_site_id": "fe110.top.43",
+        "candidate_type": "top",
+        "center_fractional_xy": [
+          0.3333276,
+          0.6666787
+        ],
+        "offset_angstrom": 0.6448920243205576,
+        "off_symmetry": true,
+        "reference_fe_indices": [
+          43
+        ],
+        "nearest_Fe_contacts_angstrom": [
+          [
+            2.0394055788452867,
+            43
+          ],
+          [
+            3.005437123176161,
+            41
+          ],
+          [
+            3.060066014581128,
+            44
+          ]
+        ]
+      },
+      "48": {
+        "atom_index": 48,
+        "element": "H",
+        "fractional": [
+          0.8557326751246488,
+          0.3723334980357247,
+          0.7780236980475216
+        ],
+        "cartesian_angstrom": [
+          8.836187628224016,
+          2.2328330085468453,
+          17.891290926326
+        ],
+        "candidate_site_id": "fe110.long_bridge.39-41",
+        "candidate_type": "long_bridge",
+        "center_fractional_xy": [
+          0.8333347,
+          0.3333274
+        ],
+        "offset_angstrom": 0.4254341570200959,
+        "off_symmetry": false,
+        "reference_fe_indices": [
+          39,
+          41
+        ],
+        "nearest_Fe_contacts_angstrom": [
+          [
+            2.5350719191306412,
+            39
+          ],
+          [
+            3.0101330858985382,
+            41
+          ],
+          [
+            3.0164514447724002,
+            44
+          ]
+        ]
+      }
+    }
+  },
+  "candidates": [
+    {
+      "species_id": "fe110_ch_co_to_chco_20261109.CH.IS",
+      "state": "IS",
+      "fragment_zero_based": [
+        45,
+        48
+      ],
+      "structure_sha256": "f8bc627180b430b3b64f748c05830a0372bc93a3750780cf7fe6c5eb0601762d",
+      "candidate_centers": [
+        "fe110.long_bridge.40-41"
+      ],
+      "proposed_occupancy": null,
+      "confidence": "Projection reproduced; independent site occupancy undetermined.",
+      "alternatives": [
+        "One long-bridge ensemble centered on the carbon, if confirmed as an independent site."
+      ]
+    },
+    {
+      "species_id": "fe110_ch_co_to_chco_20261109.CO.IS",
+      "state": "IS",
+      "fragment_zero_based": [
+        46,
+        47
+      ],
+      "structure_sha256": "f8bc627180b430b3b64f748c05830a0372bc93a3750780cf7fe6c5eb0601762d",
+      "candidate_centers": [
+        "fe110.long_bridge.39-41"
+      ],
+      "proposed_occupancy": null,
+      "confidence": "Projection reproduced; independent site occupancy undetermined.",
+      "alternatives": [
+        "One long-bridge ensemble centered on the carbon, if confirmed as an independent site."
+      ]
+    },
+    {
+      "species_id": "fe110_ch_co_to_chco_20261109.CHCO.FS",
+      "state": "FS",
+      "fragment_zero_based": [
+        45,
+        46,
+        47,
+        48
+      ],
+      "structure_sha256": "11dab1631a99f1e444d4c7ab9ca242609e07c912f656874005696e6498f15ab2",
+      "candidate_centers": [
+        "fe110.hollow.39-41-44",
+        "fe110.hollow.41-43-44",
+        "fe110.top.43"
+      ],
+      "proposed_occupancy": null,
+      "confidence": "Projection reproduced; independent site occupancy undetermined.",
+      "alternatives": [
+        "One composite molecular ensemble.",
+        "Two distinct carbon-associated hollow centers.",
+        "A different or overlapping ensemble; assess the off-symmetry O contact separately."
+      ]
+    }
+  ],
+  "reversibility_evidence": {
+    "reverse_electronic_barrier_ev": 0.31429370999995854,
+    "kinetic_direction_evidence": null
+  },
+  "proposed_mapping": {
+    "surface_ids": [
+      "fe110"
+    ],
+    "interface_id": null,
+    "site_definitions": [
+      {
+        "site_id": "fe110.long_bridge.40-41",
+        "site_type": "long_bridge",
+        "surface_id": "fe110",
+        "local_geometry": "Reference fractional xy [0.5000006, 0.333333]; nearby top-layer Fe (zero-based) [40, 41]."
+      },
+      {
+        "site_id": "fe110.long_bridge.39-41",
+        "site_type": "long_bridge",
+        "surface_id": "fe110",
+        "local_geometry": "Reference fractional xy [0.8333347, 0.3333274]; nearby top-layer Fe (zero-based) [39, 41]."
+      },
+      {
+        "site_id": "fe110.hollow.39-41-44",
+        "site_type": "hollow",
+        "surface_id": "fe110",
+        "local_geometry": "Reference fractional xy [0.7777803, 0.4444364]; nearby top-layer Fe (zero-based) [39, 41, 44]."
+      },
+      {
+        "site_id": "fe110.hollow.41-43-44",
+        "site_type": "hollow",
+        "surface_id": "fe110",
+        "local_geometry": "Reference fractional xy [0.5555565, 0.5555513]; nearby top-layer Fe (zero-based) [41, 43, 44]."
+      },
+      {
+        "site_id": "fe110.top.43",
+        "site_type": "top",
+        "surface_id": "fe110",
+        "local_geometry": "Reference fractional xy [0.3333276, 0.6666787]; nearby top-layer Fe (zero-based) [43]."
+      }
+    ],
+    "occupancies": {
+      "fe110_ch_co_to_chco_20261109.CH.IS": null,
+      "fe110_ch_co_to_chco_20261109.CO.IS": null,
+      "fe110_ch_co_to_chco_20261109.CHCO.FS": null
+    },
+    "sites_consumed": null,
+    "sites_released": null,
+    "reaction_type": "association",
+    "reversible": null
+  }
+}

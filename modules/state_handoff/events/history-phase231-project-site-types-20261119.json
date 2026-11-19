@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "event_id": "history-phase231-project-site-types-20261119",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-fe110-phase231-site-mapping-proposal-20261119",
+    "module": "reaction_network"
+  },
+  "occurred_at": "2026-11-19T11:34:39.764280+00:00",
+  "recorded_at": "2026-11-19T11:34:39.764280+00:00",
+  "summary": "Record project-owned surface site catalogs and the independent oxide benchmark alongside the pending Fe(110) mapping.",
+  "payload": {
+    "markdown": "- Fe(110) CH* + CO* to CHCO*: reproduced endpoint projections and bound the three source structures. The pending draft 2a80b67c preserves unknown site occupancy, vacancies and kinetic reversibility. Researcher confirmation, charge and formal phase evidence are outstanding. See reports/multiphase/phase2_3_1_completion.md. The project-scoped type catalog also passes an unrelated synthetic oxide with a different lattice and acid/base site inventory. Both worktrees passed 365 tests. Site occupancy is pending; the researcher has not selected a counting model."
+  },
+  "evidence": [
+    {
+      "locator": "modules/reaction_network/README.md",
+      "sha256": "bcdaac4d895b40dcddc5ffb51a72586617a3087253ff4b019d1f2162c36dc51e",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T11:34:39.764280+00:00"
+    },
+    {
+      "locator": "scripts/reaction_network/builder.py",
+      "sha256": "abc2abd6bc1d5c24b0000eecb4b8919528d2aae2158671b671e47b2c77809cc2",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T11:34:39.764280+00:00"
+    },
+    {
+      "locator": "scripts/reaction_network/catalog.py",
+      "sha256": "ce217d75e6a14e09c09b19094899a3326a8aa8f4b4358a1913775b476369515b",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T11:34:39.764280+00:00"
+    },
+    {
+      "locator": "scripts/reaction_network/__main__.py",
+      "sha256": "1113305163924a3eafb5874a896fb71c81502032a233765f5adefd2e357ecc88",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T11:34:39.764280+00:00"
+    },
+    {
+      "locator": "scripts/reaction_network/site_review.py",
+      "sha256": "5de9a751eab0aef4d73d00bd77449ccd61d0a0ca1e5ec5c990bad87456798303",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T11:34:39.764280+00:00"
+    },
+    {
+      "locator": "tests/test_reaction_site_review.py",
+      "sha256": "e7f9876d1e8bb59fc745306f15f635b2c6bb63e461cf668f7e0927f1d8ab2e29",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T11:34:39.764280+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_3_1_site_review.md",
+      "sha256": "7a9e9426a98da5b58cf84dde802b78d6ba5a38868e8b7c69443ceaa52864710e",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T11:34:39.764280+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_3_1_site_proposal.json",
+      "sha256": "0d6468795bd47ab4691353db35c3457251ea5063e3041aaca9c8132af13a5258",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T11:34:39.764280+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_3_1_confirmation_template.json",
+      "sha256": "6784e5d2fd02964170db9e316b7ed87008d1c864b1fd2b391ae45bdea27e240e",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T11:34:39.764280+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_3_1_site_balance.json",
+      "sha256": "3520ef17e26ccdb437cf6e185c0b9fb06b9a26a58edc94ccfbd0d5755e40331e",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T11:34:39.764280+00:00"
+    },
+    {
+      "locator": "reports/multiphase/networks/network-2a80b67c31201600a1858780bbe6c176b03f489fe24383441fca4f195b395483.json",
+      "sha256": "56e42d4147637acae090911a82715a10d9883fefa03e7e6dc19fcc0c0f3b25ca",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T11:34:39.764280+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_3_1_completion.md",
+      "sha256": "bbfb3e130c4c681d5fd81240ac8afd9c48a2f8d40cae190b07ed64101ed7d274",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T11:34:39.764280+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_3_1_fe110_site_types.json",
+      "sha256": "f1141ffd24b06cc140c500121299f120ee1d72e4043781035cf5654f8e1b4548",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T11:34:39.764280+00:00"
+    },
+    {
+      "locator": "tests/fixtures/multiphase/synthetic_oxide_site_network.json",
+      "sha256": "24d5c34d33ec332a131e5f957dcb83ff4816e29c5d4c6ba05c47c854d87c6aa2",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T11:34:39.764280+00:00"
+    }
+  ],
+  "supersedes": [
+    "history-fe110-phase231-site-mapping-proposal-20261119"
+  ],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "historical_result_record"
+    ],
+    "status": "pending"
+  }
+}

@@ -37,7 +37,23 @@ def catalog(data):
         ids = interface["surface_ids"]
         if len(set(ids)) != len(ids) or len(ids) < 2 or set(ids) - index["surfaces"].keys():
             raise ValueError("Invalid interface surface domains")
+    for surface in index["surfaces"].values():
+        if "site_types" in surface:
+            validate_site_types(surface["site_types"])
+    for site in index["sites"].values():
+        surface = index["surfaces"][site["surface_id"]]
+        if "site_types" in surface and site["site_type"] not in surface["site_types"]:
+            raise ValueError("Site type is outside the configured surface catalog")
     return index
+
+
+def validate_site_types(types):
+    if not isinstance(types, list):
+        raise ValueError("Surface site_types must be a list")
+    for label in types:
+        check_common(label, "id")
+    if len(types) != len(set(types)):
+        raise ValueError("Duplicate configured site type")
 
 
 def check_context(row, index):
@@ -60,7 +76,7 @@ def site_counts(counts, index, surfaces):
             raise ValueError(f"Site {site} is outside the surface domain")
 
 
-def register_species(index):
+def register_species(index, confirmed_zero=()):
     fingerprints = {}
     seen = {}
     for key, row in index["species"].items():
@@ -78,7 +94,8 @@ def register_species(index):
             raise ValueError(f"{key}: invalid charge")
         occupied = row.get("site_occupancy")
         site_counts(occupied, index, surfaces)
-        if occupied is not None and {index["sites"][s]["surface_id"] for s in occupied} != set(surfaces):
+        if (occupied is not None and not (occupied == {} and key in confirmed_zero)
+                and {index["sites"][s]["surface_id"] for s in occupied} != set(surfaces)):
             raise ValueError(f"{key}: occupancy does not cover species domains")
         physical = {f: row.get(f) for f in ("phase", "composition", "charge", "interface_id", "site_occupancy",
                                             "adsorption_geometry", "source_atom_indices_zero_based", "configuration_id")}
