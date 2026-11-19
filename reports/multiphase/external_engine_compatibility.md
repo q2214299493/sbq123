@@ -2,6 +2,8 @@
 
 Inspected the paths in `configs/postprocessing_software.yaml`, the deployed guides, the startup scripts and existing example outputs. No engine or solver was started.
 
+**CATKINAS status on 2026-11-19.** The supplied single, curve and map runs each contain a readable `data1.mat`. The separate local `quickstart/result_single/log1` starts on 2026-06-26 at 20:04:22 and identifies MATLAB R2025b. That folder contains `log1.err` with an atom-symbol warning and lacks `data1.mat`. Local quickstart completion is unconfirmed (完成未确认). The Fe(110) project model still lacks a validated CATKINAS input and result.
+
 | Interface | CATKINAS | Zacros |
 |---|---|---|
 | Installed runtime | `C:/Users/86177/Desktop/app/CATKINAS/CATKINAS.p` (MATLAB p-code). MATLAB launcher resolved on PATH at `D:/BaiduNetdiskDownload/bin/matlab.exe`, file product version 25.2.0.2978516. Historical quickstart log reports MATLAB 25.2.0.2998904 (R2025b). An independent CATKINAS release number needs confirmation. | `D:/Zacros4.0/bin/Zacros.exe`. Installed manual and existing run header both identify 4.0. The manual is the 101-page User Guide dated 19 July 2024. |

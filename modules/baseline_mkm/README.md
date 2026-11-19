@@ -20,7 +20,7 @@ Solve the non-coverage-self-consistent mean-field mechanism for coverages, rates
 ## Primary Software
 
 - CATKINAS is the preferred local mean-field MKM tool; its verified path, runtime, and I/O contract are in `configs/postprocessing_software.yaml`.
-- The quickstart proves software execution only, not project-specific scientific validity.
+- As of 2026-11-19 the supplied single, curve and map examples have result files. The local quickstart log dated 2026-06-26 confirms startup. Completion is unconfirmed (完成未确认). The Fe(110) model still needs a validated input and result. See the [installed-file assessment](../../reports/multiphase/external_engine_compatibility.md).
 
 ## Entry Gate
 

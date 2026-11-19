@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "event_id": "module-kinetic-data-coverage-registry-case-20261119",
+  "event_type": "module_gate_changed",
+  "entity": {
+    "kind": "module",
+    "id": "kinetic_data",
+    "module": "kinetic_data"
+  },
+  "occurred_at": "2026-11-19T09:18:18.267240+00:00",
+  "recorded_at": "2026-11-19T09:18:18.267240+00:00",
+  "summary": "Bind the coverage validation fix, corrected CATKINAS status and read-only Fe(110) CH + CO field mapping.",
+  "payload": {
+    "module": "kinetic_data",
+    "status": "Active",
+    "depends_on": "registry, validated DFT/TS data",
+    "current_gate": "Phase 1 coverage-context checks and a read-only CH + CO registry mapping are verified. Electronic energies can be used within their reviewed scope. For Phase 2, check matching IS/FS frequencies against the TS active set before free-energy handoff."
+  },
+  "evidence": [
+    {
+      "locator": "scripts/multiphase_contracts.py",
+      "sha256": "7f9a33ef114b2b66f1b7668d52c40f465a5a8e9b3069f96195d854d435eb9d28",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T09:18:18.267240+00:00"
+    },
+    {
+      "locator": "tests/test_multiphase_contracts.py",
+      "sha256": "ba679fa673084ce90543ecdfd15f46199f5a00f4d9d682513572e9f8c970356d",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T09:18:18.267240+00:00"
+    },
+    {
+      "locator": "configs/postprocessing_software.yaml",
+      "sha256": "c0a62b96d8ab566ced05f41c40852c8ef4b0bd47a9c6586f901d953c3a6d2472",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T09:18:18.267240+00:00"
+    },
+    {
+      "locator": "modules/baseline_mkm/README.md",
+      "sha256": "24f2a642c4234c34d652a110709bb73dcba9836db29a45b7ab05a755930c259e",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T09:18:18.267240+00:00"
+    },
+    {
+      "locator": "modules/kinetic_data/multiphase_contracts.md",
+      "sha256": "8d08bf8d34e45d6d50935d4207c60bec5a7cf59c84db2695df17c09cbf055d14",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T09:18:18.267240+00:00"
+    },
+    {
+      "locator": "reports/multiphase/external_engine_compatibility.md",
+      "sha256": "aa95048953b0bad9b174ad0acdbc67548b88ea2a6e1c7d5bec53f193f6be183a",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T09:18:18.267240+00:00"
+    },
+    {
+      "locator": "reports/multiphase/ch_co_registry_mapping_20261119.md",
+      "sha256": "f025a0bd9e3403524a1a29931701cb5e83fbb7681b8a0c1f643acbac77956a97",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T09:18:18.267240+00:00"
+    },
+    {
+      "locator": "reports/multiphase/ch_co_registry_mapping_20261119.json",
+      "sha256": "5d8d7f3a4ebd90b5666bee4215b517f2f520f33e3adc2524c50f8d931e41dfbf",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T09:18:18.267240+00:00"
+    }
+  ],
+  "supersedes": [
+    "module-kinetic-data-multiphase-contracts-v1-20261119"
+  ],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "cross_module_change"
+    ],
+    "status": "pending"
+  }
+}

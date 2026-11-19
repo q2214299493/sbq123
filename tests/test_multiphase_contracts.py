@@ -200,6 +200,47 @@ def test_eligibility_and_reversibility(bundle):
         validate_bundle(bundle)
 
 
+@pytest.fixture
+def coverage_spectator(bundle):
+    _, parameter = reviewed_example(bundle)
+    spectator = deepcopy(bundle["species"][1])
+    spectator.update(species_id="spectator", structure_id="spectator-pose", thermochemistry_status="missing")
+    bundle["species"].append(spectator)
+    parameter["coverage_terms"] = [{
+        "species_id": spectator["species_id"], "coefficient": parameter["forward"]["activation_energy"],
+        "expression": "theta", "already_in_barrier": False, "min_fraction": 0, "max_fraction": 1,
+    }]
+    return spectator
+
+
+@pytest.mark.parametrize("eligibility", ["draft", "eligible"])
+def test_coverage_species_requires_same_interface(bundle, coverage_spectator, eligibility):
+    bundle["parameter_sets"][0]["eligibility"] = eligibility
+    other = dict(bundle["interfaces"][0], interface_id="other-junction", structure_id="other-junction-structure")
+    bundle["interfaces"].append(other)
+    coverage_spectator["interface_id"] = other["interface_id"]
+    with pytest.raises(ValueError, match="different interface"):
+        validate_bundle(bundle)
+
+
+@pytest.mark.parametrize("status", ["unreviewed", "in_review", "rejected"])
+def test_eligible_coverage_species_requires_acceptance(bundle, coverage_spectator, status):
+    coverage_spectator["validation"]["status"] = status
+    with pytest.raises(ValueError, match="accepted coverage species"):
+        validate_bundle(bundle)
+
+
+def test_reviewed_coverage_species_with_explicit_coefficient(bundle, coverage_spectator):
+    assert coverage_spectator["thermochemistry_status"] == "missing"
+    validate_bundle(bundle)
+
+
+def test_draft_coverage_accepts_pending_review(bundle, coverage_spectator):
+    bundle["parameter_sets"][0]["eligibility"] = "draft"
+    coverage_spectator["validation"] = {"status": "unreviewed", "review": None}
+    validate_bundle(bundle)
+
+
 def test_prediction_cannot_supply_reviewed_energies(bundle):
     rx, _ = reviewed_example(bundle)
     rx["provenance"][0]["kind"] = "model_prediction"

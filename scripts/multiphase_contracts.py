@@ -121,15 +121,20 @@ def _check_catalog(index):
             raise ValueError(f"{species['species_id']}: occupied sites disagree with surface identity")
 
 
+def _check_species_context(species, reaction):
+    key = species["species_id"]
+    if not set(species["surface_ids"]).issubset(reaction["surface_ids"]):
+        raise ValueError(f"{key}: species is outside reaction surface context")
+    if species["interface_id"] is not None and species["interface_id"] != reaction["interface_id"]:
+        raise ValueError(f"{key}: species belongs to a different interface")
+
+
 def _side(stoichiometry, free_sites, reaction, index):
     elements, sites = Counter(), Counter(free_sites)
     charge = 0
     for key, coefficient in stoichiometry.items():
         species = _get(index, "species", key)
-        if not set(species["surface_ids"]).issubset(reaction["surface_ids"]):
-            raise ValueError(f"{key}: species is outside reaction surface context")
-        if species["interface_id"] is not None and species["interface_id"] != reaction["interface_id"]:
-            raise ValueError(f"{key}: species belongs to a different interface")
+        _check_species_context(species, reaction)
         if reaction["eligibility"] == "eligible" and (
             species["validation"]["status"] != "accepted" or species["thermochemistry_status"] != "reviewed"
         ):
@@ -248,8 +253,11 @@ def _check_parameter(parameter, index):
             _check_rate(parameter[name], name, energies, parameter)
     for term in parameter["coverage_terms"]:
         species = _get(index, "species", term["species_id"])
-        if species["phase"] != "surface" or not set(species["surface_ids"]).issubset(reaction["surface_ids"]):
+        if species["phase"] != "surface":
             raise ValueError("coverage term needs a species on the reaction surface")
+        _check_species_context(species, reaction)
+        if eligible and species["validation"]["status"] != "accepted":
+            raise ValueError(f"{species['species_id']}: eligible parameter set requires an accepted coverage species")
         if term["min_fraction"] > term["max_fraction"]:
             raise ValueError("reversed coverage validity interval")
         _energy_check(term["coefficient"], parameter, parameter["sources"])

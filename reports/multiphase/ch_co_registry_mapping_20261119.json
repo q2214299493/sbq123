@@ -1,0 +1,359 @@
+{
+  "record_kind": "partial_phase1_field_mapping",
+  "target_contract_version": "1.0.0",
+  "as_of": "2026-11-19",
+  "registry": {
+    "path": "data/project_registry.sqlite3",
+    "sha256": "23d4accaf16f2d992d3df7a6545320b8fe0c550b7f4e98ae26f61bdab84e724e",
+    "schema_version": "9",
+    "table": "ts_barriers",
+    "barrier_set_id": "fe110_ch_co_sigma0p20_review_20261118",
+    "validation_status": "accepted",
+    "created_at": "2026-11-18T12:09:08.887194+00:00"
+  },
+  "surface_context": {
+    "material": "fe",
+    "surface": "fe110",
+    "branch": "true_fe110_5layer_5x5x1",
+    "slab_model": "fe45_bottom18_fixed",
+    "slab_layers": 5,
+    "kmesh": [
+      5,
+      5,
+      1
+    ],
+    "xc": "pbe",
+    "encut_ev": 400.0,
+    "ismear": 1,
+    "sigma_ev": 0.2,
+    "coverage": "3x3_one_C2HO"
+  },
+  "species_mapping": [
+    {
+      "species_id": "fe110_ch_co_to_chco_20261109.CH.IS",
+      "source_atom_indices_zero_based": [
+        45,
+        48
+      ],
+      "phase": "surface",
+      "material_ids": [
+        "fe"
+      ],
+      "surface_ids": [
+        "fe110"
+      ],
+      "interface_id": null,
+      "composition": {
+        "C": 1,
+        "H": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "adsorption_geometry": {
+        "45": "long_bridge",
+        "48": "long_bridge"
+      },
+      "structure_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_CONTCAR",
+      "structural_provenance": {
+        "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_cfg0_direct_vasp/CONTCAR",
+        "sha256": "f8bc627180b430b3b64f748c05830a0372bc93a3750780cf7fe6c5eb0601762d"
+      },
+      "thermochemistry_status": "missing",
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      },
+      "endpoint_review_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_review"
+    },
+    {
+      "species_id": "fe110_ch_co_to_chco_20261109.CO.IS",
+      "source_atom_indices_zero_based": [
+        46,
+        47
+      ],
+      "phase": "surface",
+      "material_ids": [
+        "fe"
+      ],
+      "surface_ids": [
+        "fe110"
+      ],
+      "interface_id": null,
+      "composition": {
+        "C": 1,
+        "O": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "adsorption_geometry": {
+        "46": "long_bridge",
+        "47": "long_bridge"
+      },
+      "structure_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_CONTCAR",
+      "structural_provenance": {
+        "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_cfg0_direct_vasp/CONTCAR",
+        "sha256": "f8bc627180b430b3b64f748c05830a0372bc93a3750780cf7fe6c5eb0601762d"
+      },
+      "thermochemistry_status": "missing",
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      },
+      "endpoint_review_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_review"
+    },
+    {
+      "species_id": "fe110_ch_co_to_chco_20261109.CHCO.FS",
+      "source_atom_indices_zero_based": [
+        45,
+        46,
+        47,
+        48
+      ],
+      "phase": "surface",
+      "material_ids": [
+        "fe"
+      ],
+      "surface_ids": [
+        "fe110"
+      ],
+      "interface_id": null,
+      "composition": {
+        "C": 2,
+        "H": 1,
+        "O": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "adsorption_geometry": {
+        "45": "hollow",
+        "46": "hollow",
+        "47": "top",
+        "48": "long_bridge"
+      },
+      "structure_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_CONTCAR",
+      "structural_provenance": {
+        "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_extra2_repair_v1/CONTCAR",
+        "sha256": "11dab1631a99f1e444d4c7ab9ca242609e07c912f656874005696e6498f15ab2"
+      },
+      "thermochemistry_status": "missing",
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      },
+      "endpoint_review_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_review"
+    }
+  ],
+  "energy_convention": "fe110_converged_toten_sigma0p20_v1",
+  "reaction_mapping": {
+    "schema_version": "1.0.0",
+    "reaction_id": "fe110_ch_co_to_chco_20261109",
+    "reaction_type": "association",
+    "reactants": {
+      "fe110_ch_co_to_chco_20261109.CH.IS": 1,
+      "fe110_ch_co_to_chco_20261109.CO.IS": 1
+    },
+    "products": {
+      "fe110_ch_co_to_chco_20261109.CHCO.FS": 1
+    },
+    "surface_ids": [
+      "fe110"
+    ],
+    "interface_id": null,
+    "required_sites": null,
+    "sites_consumed": null,
+    "sites_released": null,
+    "reversible": null,
+    "initial_structure_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_CONTCAR",
+    "final_structure_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_CONTCAR",
+    "ts_treatment": "located",
+    "ts_id": "fe110_ch_co_dimer_20261112_job9998592",
+    "energy_reference_id": "52b8afbf5a2902cbe115001d2554440b59421d61e1819f5921ddc373da5839de",
+    "electronic_energies": {
+      "reaction": {
+        "value": 0.6593080300000338,
+        "unit": "eV",
+        "reference_id": "52b8afbf5a2902cbe115001d2554440b59421d61e1819f5921ddc373da5839de",
+        "source": {
+          "calculation_id": "fe110_ch_co_dimer_20261112_job9998592",
+          "kind": "electronic_structure",
+          "artifact": {
+            "path": "outputs/c1_c2_barrier_registration_20261118_v1/ch_co/barrier_registration_receipt.json",
+            "sha256": "bd9273b25a81abacf8013bd23c7bbc1a68c9a3f2de86fbc62e242b6868dc5890"
+          }
+        }
+      },
+      "forward": {
+        "value": 0.9736017399999923,
+        "unit": "eV",
+        "reference_id": "52b8afbf5a2902cbe115001d2554440b59421d61e1819f5921ddc373da5839de",
+        "source": {
+          "calculation_id": "fe110_ch_co_dimer_20261112_job9998592",
+          "kind": "electronic_structure",
+          "artifact": {
+            "path": "outputs/c1_c2_barrier_registration_20261118_v1/ch_co/barrier_registration_receipt.json",
+            "sha256": "bd9273b25a81abacf8013bd23c7bbc1a68c9a3f2de86fbc62e242b6868dc5890"
+          }
+        }
+      },
+      "reverse": {
+        "value": 0.31429370999995854,
+        "unit": "eV",
+        "reference_id": "52b8afbf5a2902cbe115001d2554440b59421d61e1819f5921ddc373da5839de",
+        "source": {
+          "calculation_id": "fe110_ch_co_dimer_20261112_job9998592",
+          "kind": "electronic_structure",
+          "artifact": {
+            "path": "outputs/c1_c2_barrier_registration_20261118_v1/ch_co/barrier_registration_receipt.json",
+            "sha256": "bd9273b25a81abacf8013bd23c7bbc1a68c9a3f2de86fbc62e242b6868dc5890"
+          }
+        }
+      }
+    },
+    "free_energies": null,
+    "rate_law_id": null,
+    "eligibility": "blocked",
+    "validation": {
+      "status": "unreviewed",
+      "review": null
+    },
+    "provenance": [
+      {
+        "calculation_id": "fe110_ch_co_dimer_20261112_job9998592",
+        "kind": "electronic_structure",
+        "artifact": {
+          "path": "outputs/c1_c2_barrier_registration_20261118_v1/ch_co/barrier_registration_receipt.json",
+          "sha256": "bd9273b25a81abacf8013bd23c7bbc1a68c9a3f2de86fbc62e242b6868dc5890"
+        }
+      }
+    ]
+  },
+  "source_states": {
+    "IS": {
+      "result_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_final_toten",
+      "calculation_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021",
+      "numeric_value": -385.14767079,
+      "unit": "eV",
+      "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+      "source_file_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_OUTCAR",
+      "validation_status": "accepted_compatible_final_energy",
+      "outcar": {
+        "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_cfg0_direct_vasp/OUTCAR",
+        "sha256": "e3f5ad8b0aa2a9afc6749785e5dc872d64b6de4165169578510c7a0c5d167d78"
+      },
+      "structure_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_CONTCAR",
+      "structure": {
+        "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_cfg0_direct_vasp/CONTCAR",
+        "sha256": "f8bc627180b430b3b64f748c05830a0372bc93a3750780cf7fe6c5eb0601762d"
+      }
+    },
+    "TS": {
+      "result_id": "fe110_ch_co_dimer_20261112_job9998592_final_toten_sigma0p20_eV",
+      "calculation_id": "fe110_ch_co_dimer_20261112_job9998592",
+      "numeric_value": -384.17406905,
+      "unit": "eV",
+      "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+      "source_file_id": "fe110_ch_co_dimer_20261112_job9998592__vfa20261115_011",
+      "validation_status": "accepted_compatible_final_energy",
+      "outcar": {
+        "path": "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/OUTCAR",
+        "sha256": "391f84167e6372dcaf770ed1efa471d1abba6d4640803876899b120ac797dd02"
+      },
+      "structure_id": "fe110_ch_co_dimer_20261112_job9998592_barrier_energy_review_20261118_structure",
+      "structure": {
+        "path": "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/CONTCAR",
+        "sha256": "0157a418cd1fba1be886426361d494ffbdce9a15d1a9132b996a3481ffcc1a6a"
+      }
+    },
+    "FS": {
+      "result_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_final_toten",
+      "calculation_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1",
+      "numeric_value": -384.48836276,
+      "unit": "eV",
+      "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+      "source_file_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_OUTCAR",
+      "validation_status": "accepted_compatible_final_energy",
+      "outcar": {
+        "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_extra2_repair_v1/OUTCAR",
+        "sha256": "e88d99ab9ba74274fd8af45e4e69b9f59feb90bbe1101f7e794c1c317bb82edc"
+      },
+      "structure_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_CONTCAR",
+      "structure": {
+        "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_extra2_repair_v1/CONTCAR",
+        "sha256": "11dab1631a99f1e444d4c7ab9ca242609e07c912f656874005696e6498f15ab2"
+      }
+    }
+  },
+  "scientific_reviews": {
+    "IS": {
+      "review_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_review",
+      "decision": "accept",
+      "reviewed_at": "2026-10-21T15:51:34.369055+00:00",
+      "artifact": {
+        "path": "calculations/fe110_c2_adsorption_06_10_20261012/coadsorption_registration_20261021_v1/scientific_reviews/03_CH_CO.json",
+        "sha256": "7610f38563e57a436d4a1a15360669ae6b671a236244cf977499d31970498b82"
+      }
+    },
+    "FS": {
+      "review_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_review",
+      "decision": "accept",
+      "reviewed_at": "2026-10-12T14:00:44.114627+00:00",
+      "artifact": {
+        "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/registration_v2/scientific_reviews/03_extra2_repair_v1.json",
+        "sha256": "bc050f7a398170e6b1ca4eadd7e8c1a6d6cc3cbb01e21fb04668a426fe3da773"
+      }
+    },
+    "TS": {
+      "ts_validation_id": "fe110_ch_co_dimer9998592_vfa2260_grade_a_20261115",
+      "calculation_id": "fe110_ch_co_vfa_20261115_job2260",
+      "source_method": "dimer",
+      "grade": "A",
+      "geometry_status": "pass",
+      "kinetic_eligible": 1,
+      "reviewed_at": "2026-11-15T16:00:03.439254+00:00",
+      "contract_sha256": "06b6b3ee62b6a93cff4631fbcf443bebd8cb1b1144f803186cf48eacf798939b",
+      "atom_map_sha256": "f3fe5452e4794fbaedca86991a7e936e55a730530a793bc1df0e899814cdabe5",
+      "frequency_output_file_id": "chco_vfa2260_formal_20261115_OUTCAR"
+    },
+    "ts_frequency_outcar": {
+      "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/OUTCAR",
+      "sha256": "d707a332f1af5d0835e1935d351d9a28b011bd4672e4de3b00833fb93f62f9a9"
+    },
+    "ts_imaginary_frequencies_cm1": [
+      318.644011
+    ],
+    "ts_active_atoms_zero_based": [
+      45,
+      46,
+      47,
+      48
+    ],
+    "ts_scope_review": {
+      "path": "outputs/c1_c2_barrier_registration_20261118_v1/ch_co/vfa_scope_review.json",
+      "sha256": "ffb123b6840d3b8b9f009cbafcbae55d7c88a1371e0cec7303fc6d99bcd9bd89"
+    },
+    "ts_handoff": {
+      "path": "outputs/c1_c2_barrier_registration_20261118_v1/ch_co/vfa_handoff.json",
+      "sha256": "f4057683dd0fa0d9df069dfe31af83379d484c6975e745b055d9a66d4cb71924"
+    },
+    "endpoint_contract": {
+      "path": "calculations/fe110_ch_co_to_chco_ts_20261109/reaction_contract.json",
+      "sha256": "bdd0c022aa518e84d697d27b7172443159988550ca01e5e9c10e78355f5ec08b"
+    },
+    "endpoint_atom_roles": {
+      "path": "calculations/fe110_ch_co_to_chco_ts_20261109/endpoint_provenance.json",
+      "sha256": "1ec61cf82784f4c441ed464dfdff7b5567732946a28f7b8c5da4ed1aff7f8d8b"
+    }
+  },
+  "unbound_inputs": {
+    "matched_IS_frequencies": null,
+    "matched_FS_frequencies": null,
+    "consistent_IS_TS_FS_thermal_corrections": null,
+    "temperature_K": null,
+    "pressure_Pa": null,
+    "standard_state_id": null,
+    "phase_id": null,
+    "reviewed_site_inventory": null,
+    "forward_rate_parameters": null,
+    "reverse_rate_parameters": null
+  }
+}
