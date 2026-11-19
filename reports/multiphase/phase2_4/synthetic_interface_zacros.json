@@ -1,0 +1,133 @@
+{
+  "format": "zacros-event-rate-table/1",
+  "dataset_version": "f276dfd869676e2d21385a05a96b594babff17070a1fe4ba89ff209f6a4bb65a",
+  "normalization": "per matching event at listed conditions; distinct directed steps",
+  "events": [
+    {
+      "reaction_id": "ads",
+      "provenance": {
+        "parameter_set_id": "params",
+        "sources": [
+          {
+            "kind": "synthetic",
+            "reference": "kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          }
+        ],
+        "review_subject": "3e6f6e715756cb80282b42e96e65e70aefd1ba0c80f27f00baae7748b2c5162b",
+        "use_scope": "synthetic_benchmark"
+      },
+      "direction": "forward",
+      "rate_kind": "kmc_event_coefficient",
+      "T_K": 400,
+      "pressure_bar": 1.0,
+      "site_ids": [
+        "top-Ni",
+        "bridge-Cu"
+      ],
+      "neighbors_zero_based": [
+        [
+          0,
+          1
+        ]
+      ],
+      "initial": [
+        null,
+        null
+      ],
+      "final": [
+        [
+          "H2-top",
+          1
+        ],
+        [
+          "H2-bridge",
+          2
+        ]
+      ],
+      "reaction": {
+        "reactants": {
+          "H2-g": 1
+        },
+        "products": {
+          "H2-top": 1,
+          "H2-bridge": 1
+        },
+        "sites_consumed": {
+          "top-Ni": 1,
+          "bridge-Cu": 1
+        },
+        "sites_released": {}
+      },
+      "pre_expon": 531.2521662552351,
+      "activ_eng_eV": 0.0,
+      "unit": "bar^-1 s^-1",
+      "gas_partial_pressure_orders": {
+        "H2-g": 1
+      },
+      "coverage_fractions": {}
+    },
+    {
+      "reaction_id": "ads",
+      "provenance": {
+        "parameter_set_id": "params",
+        "sources": [
+          {
+            "kind": "synthetic",
+            "reference": "kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          }
+        ],
+        "review_subject": "3e6f6e715756cb80282b42e96e65e70aefd1ba0c80f27f00baae7748b2c5162b",
+        "use_scope": "synthetic_benchmark"
+      },
+      "direction": "reverse",
+      "rate_kind": "kmc_event_coefficient",
+      "T_K": 400,
+      "pressure_bar": 1.0,
+      "site_ids": [
+        "top-Ni",
+        "bridge-Cu"
+      ],
+      "neighbors_zero_based": [
+        [
+          0,
+          1
+        ]
+      ],
+      "initial": [
+        [
+          "H2-top",
+          1
+        ],
+        [
+          "H2-bridge",
+          2
+        ]
+      ],
+      "final": [
+        null,
+        null
+      ],
+      "reaction": {
+        "reactants": {
+          "H2-top": 1,
+          "H2-bridge": 1
+        },
+        "products": {
+          "H2-g": 1
+        },
+        "sites_consumed": {},
+        "sites_released": {
+          "top-Ni": 1,
+          "bridge-Cu": 1
+        }
+      },
+      "pre_expon": 29.198205955298917,
+      "activ_eng_eV": 0.0,
+      "unit": "s^-1",
+      "gas_partial_pressure_orders": {},
+      "coverage_fractions": {}
+    }
+  ]
+}

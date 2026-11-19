@@ -49,3 +49,7 @@ CATKINAS and Zacros 4.0 consume only validated records from this module and the 
 ## Done Criteria
 
 Machine-readable tables, units, references, confidence/review fields, validators, and CATKINAS/Zacros export contracts exist.
+
+## Condition-specific kinetic parameters
+
+The offline parameter engine consumes a content-addressed reaction network and a reviewed choice of rate law. It reuses the Phase 1 parameter schema, including units, validity range, uncertainty and coverage terms. [Rate laws, review contract and export commands](kinetic_parameters.md)

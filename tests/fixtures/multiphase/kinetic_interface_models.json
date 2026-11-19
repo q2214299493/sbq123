@@ -1,0 +1,69 @@
+{
+  "network_version": "6325fa922394c6aa225e29105882c5be0be0853d12f5b7f75cb618b1ae79d302",
+  "models": [
+    {
+      "reaction_id": "ads",
+      "parameter_set_id": "params",
+      "use_scope": "synthetic_benchmark",
+      "standard_states": {
+        "gas_pressure_Pa": 100000,
+        "solute_concentration_mol_m3": 1000,
+        "surface_activity_convention": "fractional site occupation"
+      },
+      "forward": {
+        "method": "dissociative_adsorption",
+        "gas_species_id": "H2-g",
+        "mass_u": 2,
+        "capture_area_m2": 5e-20,
+        "sticking": 0.25
+      },
+      "reverse": {
+        "method": "from_equilibrium"
+      },
+      "sources": [
+        {
+          "kind": "synthetic",
+          "reference": "kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      ],
+      "local_event": {
+        "site_ids": [
+          "top-Ni",
+          "bridge-Cu"
+        ],
+        "initial": [
+          null,
+          null
+        ],
+        "final": [
+          [
+            "H2-top",
+            1
+          ],
+          [
+            "H2-bridge",
+            2
+          ]
+        ],
+        "neighbors_zero_based": [
+          [
+            0,
+            1
+          ]
+        ],
+        "patterns_per_reference_site": {
+          "forward": 2,
+          "reverse": 2
+        }
+      },
+      "scientific_review": {
+        "status": "validated",
+        "reviewer": "synthetic analyst",
+        "method": "fixture analytical comparison",
+        "reviewed_at": "2026-11-19T01:00:00Z",
+        "subject_sha256": "3e6f6e715756cb80282b42e96e65e70aefd1ba0c80f27f00baae7748b2c5162b"
+      }
+    }
+  ]
+}

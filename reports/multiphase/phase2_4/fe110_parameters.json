@@ -1,0 +1,246 @@
+{
+  "dataset_version": "a4191054a20d601a73afadd410d3cf69d3df524b14278f0edff92c7a33870b72",
+  "format": "kinetic-dataset/1",
+  "network_version": "2a80b67c31201600a1858780bbe6c176b03f489fe24383441fca4f195b395483",
+  "project_id": "sbq123",
+  "catalog": {
+    "projects": [
+      {
+        "project_id": "sbq123"
+      }
+    ],
+    "materials": [
+      {
+        "project_id": "sbq123",
+        "material_id": "fe"
+      }
+    ],
+    "phases": [],
+    "surfaces": [
+      {
+        "surface_id": "fe110",
+        "phase_id": null,
+        "source_context": {
+          "material": "fe",
+          "surface": "fe110",
+          "branch": "true_fe110_5layer_5x5x1",
+          "slab_model": "fe45_bottom18_fixed",
+          "slab_layers": 5,
+          "kmesh": [
+            5,
+            5,
+            1
+          ],
+          "xc": "pbe",
+          "encut_ev": 400.0,
+          "ismear": 1,
+          "sigma_ev": 0.2,
+          "coverage": "3x3_one_C2HO"
+        }
+      }
+    ],
+    "sites": [],
+    "interfaces": []
+  },
+  "species": [
+    {
+      "species_id": "fe110_ch_co_to_chco_20261109.CH.IS",
+      "source_atom_indices_zero_based": [
+        45,
+        48
+      ],
+      "phase": "surface",
+      "material_ids": [
+        "fe"
+      ],
+      "surface_ids": [
+        "fe110"
+      ],
+      "interface_id": null,
+      "composition": {
+        "C": 1,
+        "H": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "adsorption_geometry": {
+        "45": "long_bridge",
+        "48": "long_bridge"
+      },
+      "structure_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_CONTCAR",
+      "structural_provenance": {
+        "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_cfg0_direct_vasp/CONTCAR",
+        "sha256": "f8bc627180b430b3b64f748c05830a0372bc93a3750780cf7fe6c5eb0601762d"
+      },
+      "thermochemistry_status": "missing",
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      },
+      "endpoint_review_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_review"
+    },
+    {
+      "species_id": "fe110_ch_co_to_chco_20261109.CO.IS",
+      "source_atom_indices_zero_based": [
+        46,
+        47
+      ],
+      "phase": "surface",
+      "material_ids": [
+        "fe"
+      ],
+      "surface_ids": [
+        "fe110"
+      ],
+      "interface_id": null,
+      "composition": {
+        "C": 1,
+        "O": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "adsorption_geometry": {
+        "46": "long_bridge",
+        "47": "long_bridge"
+      },
+      "structure_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_CONTCAR",
+      "structural_provenance": {
+        "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_cfg0_direct_vasp/CONTCAR",
+        "sha256": "f8bc627180b430b3b64f748c05830a0372bc93a3750780cf7fe6c5eb0601762d"
+      },
+      "thermochemistry_status": "missing",
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      },
+      "endpoint_review_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_review"
+    },
+    {
+      "species_id": "fe110_ch_co_to_chco_20261109.CHCO.FS",
+      "source_atom_indices_zero_based": [
+        45,
+        46,
+        47,
+        48
+      ],
+      "phase": "surface",
+      "material_ids": [
+        "fe"
+      ],
+      "surface_ids": [
+        "fe110"
+      ],
+      "interface_id": null,
+      "composition": {
+        "C": 2,
+        "H": 1,
+        "O": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "adsorption_geometry": {
+        "45": "hollow",
+        "46": "hollow",
+        "47": "top",
+        "48": "long_bridge"
+      },
+      "structure_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_CONTCAR",
+      "structural_provenance": {
+        "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_extra2_repair_v1/CONTCAR",
+        "sha256": "11dab1631a99f1e444d4c7ab9ca242609e07c912f656874005696e6498f15ab2"
+      },
+      "thermochemistry_status": "missing",
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      },
+      "endpoint_review_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_review"
+    }
+  ],
+  "source_artifacts": [
+    {
+      "role": "definition",
+      "file": "ch_co_registry_mapping_20261119.json",
+      "sha256": "5d8d7f3a4ebd90b5666bee4215b517f2f520f33e3adc2524c50f8d931e41dfbf"
+    },
+    {
+      "role": "intake",
+      "file": "ch_co_intake_20261119.json",
+      "sha256": "8c2b7561a9eeaa40ef3bd24d8b6ce69de58e416ef111b5bc4590a5e8d7caf8ef"
+    },
+    {
+      "role": "thermochemistry",
+      "file": "phase2_2_chco_validation.json",
+      "sha256": "3cb1440526b0e6386294100bbfe9a6e31c8d0c999850571f56ce99b322aa1789"
+    }
+  ],
+  "reactions": [
+    {
+      "reaction_id": "fe110_ch_co_to_chco_20261109",
+      "network_level": "DRAFT",
+      "direction": {
+        "status": "unknown",
+        "forward": {
+          "reactants": {
+            "fe110_ch_co_to_chco_20261109.CH.IS": 1,
+            "fe110_ch_co_to_chco_20261109.CO.IS": 1
+          },
+          "products": {
+            "fe110_ch_co_to_chco_20261109.CHCO.FS": 1
+          },
+          "sites_consumed": null,
+          "sites_released": null
+        },
+        "reverse": null
+      },
+      "site_balance": null,
+      "surface_ids": [
+        "fe110"
+      ],
+      "interface_id": null,
+      "energies": {
+        "electronic_ev": {
+          "forward": 0.9736017399999923,
+          "reverse": 0.31429370999995854,
+          "reaction": 0.6593080300000338
+        },
+        "gibbs_ev": {
+          "forward": null,
+          "reverse": null,
+          "reaction": null
+        },
+        "temperature_k": null,
+        "standard_state": null,
+        "thermal_basis": null
+      },
+      "ts_local_zpe_ev": 0.5140516496724512,
+      "parameter_set": null,
+      "model": null,
+      "rates": {
+        "forward": null,
+        "reverse": null
+      },
+      "equilibrium": null,
+      "local_event_missing": [
+        "Local event pattern, neighbor graph and occurrence normalization"
+      ],
+      "scientifically_validated": false,
+      "export_eligible": false,
+      "missing": [
+        "Unknown charge balance",
+        "Unknown site balance",
+        "Catalyst phase unconfirmed",
+        "Missing compatible free energies",
+        "Missing kinetic parameters or rate law",
+        "Reversibility unconfirmed",
+        "IS: compatible Gibbs correction missing",
+        "FS: compatible Gibbs correction missing",
+        "Kinetic parameter set with units, standard states, validity range and sources missing",
+        "Rate law, scoped parameter review and applicability not supplied",
+        "Reviewed site occupancies and vacant-site counts required"
+      ]
+    }
+  ],
+  "export_eligible": false,
+  "execution_authorized": false
+}

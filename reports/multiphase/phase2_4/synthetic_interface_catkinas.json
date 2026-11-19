@@ -1,0 +1,211 @@
+{
+  "format": "catkinas-parameter-table/1",
+  "dataset_version": "f276dfd869676e2d21385a05a96b594babff17070a1fe4ba89ff209f6a4bb65a",
+  "normalization": "mean-field per reference site; gas partial pressures in bar",
+  "species": [
+    {
+      "schema_version": "1.0.0",
+      "species_id": "H2-g",
+      "phase": "gas",
+      "material_ids": [],
+      "surface_ids": [],
+      "interface_id": null,
+      "composition": {
+        "H": 2
+      },
+      "charge": 0,
+      "site_occupancy": {},
+      "adsorption_geometry": null,
+      "structure_id": "H2-g",
+      "structural_provenance": {
+        "path": "tests/fixtures/multiphase/kinetic_reference.json",
+        "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+      },
+      "thermochemistry_status": "reviewed",
+      "validation": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "species_id": "H2-bridge",
+      "phase": "surface",
+      "material_ids": [
+        "Cu"
+      ],
+      "surface_ids": [
+        "facet-Cu"
+      ],
+      "interface_id": null,
+      "composition": {
+        "H": 1
+      },
+      "charge": 0,
+      "site_occupancy": {
+        "bridge-Cu": 1
+      },
+      "adsorption_geometry": "H-H axis spanning both sites",
+      "structure_id": "H2-bridge",
+      "structural_provenance": {
+        "path": "tests/fixtures/multiphase/kinetic_reference.json",
+        "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+      },
+      "thermochemistry_status": "reviewed",
+      "validation": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "species_id": "H2-top",
+      "phase": "surface",
+      "material_ids": [
+        "Ni"
+      ],
+      "surface_ids": [
+        "facet-Ni"
+      ],
+      "interface_id": null,
+      "composition": {
+        "H": 1
+      },
+      "charge": 0,
+      "site_occupancy": {
+        "top-Ni": 1
+      },
+      "adsorption_geometry": "end-on at a single site",
+      "structure_id": "H2-top",
+      "structural_provenance": {
+        "path": "tests/fixtures/multiphase/kinetic_reference.json",
+        "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+      },
+      "thermochemistry_status": "reviewed",
+      "validation": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      }
+    }
+  ],
+  "sites": [
+    {
+      "schema_version": "1.0.0",
+      "site_id": "top-Ni",
+      "surface_id": "facet-Ni",
+      "site_type": "atop",
+      "local_geometry": "single metal atom",
+      "validation": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "site_id": "bridge-Cu",
+      "surface_id": "facet-Cu",
+      "site_type": "bridge",
+      "local_geometry": "two neighbouring copper atoms",
+      "validation": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      }
+    }
+  ],
+  "rows": [
+    {
+      "reaction_id": "ads",
+      "provenance": {
+        "parameter_set_id": "params",
+        "sources": [
+          {
+            "kind": "synthetic",
+            "reference": "kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          }
+        ],
+        "review_subject": "3e6f6e715756cb80282b42e96e65e70aefd1ba0c80f27f00baae7748b2c5162b",
+        "use_scope": "synthetic_benchmark"
+      },
+      "T_K": 400,
+      "P_bar": 1.0,
+      "forward": {
+        "coefficient": 1062.5043325104702,
+        "unit": "bar^-1 s^-1",
+        "gas_partial_pressure_orders": {
+          "H2-g": 1
+        }
+      },
+      "reverse": {
+        "coefficient": 58.396411910597834,
+        "unit": "s^-1",
+        "gas_partial_pressure_orders": {}
+      },
+      "fixed_T_energy_input": {
+        "Ea_eV": 0.7853168271366968,
+        "G0_eV": -0.1,
+        "ThermoMode": 0,
+        "BarrierMode": -2,
+        "ConsMode": 0
+      },
+      "directions": {
+        "status": "reversible",
+        "forward": {
+          "reactants": {
+            "H2-g": 1
+          },
+          "products": {
+            "H2-top": 1,
+            "H2-bridge": 1
+          },
+          "sites_consumed": {
+            "top-Ni": 1,
+            "bridge-Cu": 1
+          },
+          "sites_released": {}
+        },
+        "reverse": {
+          "reactants": {
+            "H2-top": 1,
+            "H2-bridge": 1
+          },
+          "products": {
+            "H2-g": 1
+          },
+          "sites_consumed": {},
+          "sites_released": {
+            "top-Ni": 1,
+            "bridge-Cu": 1
+          }
+        }
+      },
+      "standard_states": {
+        "gas_pressure_Pa": 100000,
+        "solute_concentration_mol_m3": 1000,
+        "surface_activity_convention": "fractional site occupation"
+      },
+      "site_balance": {
+        "top-Ni": 1,
+        "bridge-Cu": 1
+      },
+      "delta_G_standard_eV": -0.1,
+      "delta_G_forward_eV": 0.4,
+      "coverage_fractions": {}
+    }
+  ]
+}

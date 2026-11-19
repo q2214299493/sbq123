@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "event_id": "history-phase24-multiphase-kinetic-parameters-20261119",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-phase24-multiphase-kinetic-parameters-20261119",
+    "module": "kinetic_data"
+  },
+  "occurred_at": "2026-11-19T12:38:45.571828+00:00",
+  "recorded_at": "2026-11-19T12:38:45.571828+00:00",
+  "summary": "Record Phase 2.4 kinetic parameter generation, synthetic benchmarks and blocked Fe(110) inputs.",
+  "payload": {
+    "markdown": "- Phase 2.4: both trees passed 400 related tests and isolated wheels reproduced five artifacts. Reviewed multiphase inputs yield condition-specific kinetic and engine parameter tables. Real Fe(110) CH + CO remains draft with missing endpoint Gibbs and site evidence; no engine execution. See reports/multiphase/phase2_4_completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "scripts/kinetic_parameters/__init__.py",
+      "sha256": "4a3ce58d0932e926ca1abe385f4e39b3c28cad3106e5404356e4512f37e70423",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T12:38:45.571828+00:00"
+    },
+    {
+      "locator": "scripts/kinetic_parameters/__main__.py",
+      "sha256": "6434bc070c480461ad6600e4ce955129be576641d3a141b41c1d03a659b353c7",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T12:38:45.571828+00:00"
+    },
+    {
+      "locator": "scripts/kinetic_parameters/engine.py",
+      "sha256": "26fb578036f86faed1eadb22ae8ea2b969c17e06921aa038380751c8c861c5d9",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T12:38:45.571828+00:00"
+    },
+    {
+      "locator": "scripts/kinetic_parameters/export.py",
+      "sha256": "e273c3af1ab723544a58af2070e07e71c7eed336047dadf6b1f3fac4fb88e573",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T12:38:45.571828+00:00"
+    },
+    {
+      "locator": "scripts/kinetic_parameters/laws.py",
+      "sha256": "f46b8d8edb10cb24ec7aa60b20e1e8bf0ce8e2b4c5e23325d8954c7e3e0e396d",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T12:38:45.571828+00:00"
+    },
+    {
+      "locator": "modules/kinetic_data/README.md",
+      "sha256": "172eaa992e40c75ea3c641e29ece99bca8f6e8a2bde8f533e2a4b5c16bd80463",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T12:38:45.571828+00:00"
+    },
+    {
+      "locator": "modules/kinetic_data/kinetic_parameters.md",
+      "sha256": "fa2354f1698908ca543ef02357c7a454d3893cecddc5fb954f39cf31ad13ca61",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T12:38:45.571828+00:00"
+    },
+    {
+      "locator": "tests/test_kinetic_parameters.py",
+      "sha256": "7e67e69d0d3524c52ea2769e8177a06ee3a6706f3beff3814e406bef9c819a30",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T12:38:45.571828+00:00"
+    },
+    {
+      "locator": "tests/fixtures/multiphase/kinetic_reference.json",
+      "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T12:38:45.571828+00:00"
+    },
+    {
+      "locator": "tests/fixtures/multiphase/kinetic_interface_models.json",
+      "sha256": "ace85837df197588d2d4b7833a68f26057f98e0501438bfbf68902c15153f8b6",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T12:38:45.571828+00:00"
+    },
+    {
+      "locator": "tests/fixtures/multiphase/kinetic_interface_network.json",
+      "sha256": "a31cbde920aa19f80a602da27becf21f3ee10fb6576295a6f39898021ea77929",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T12:38:45.571828+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_4/fe110_parameters.json",
+      "sha256": "dd2cdba9cfa6d45bfbf0f4e659ca80c1f81a80b3681e99633bdc19b1a98ff461",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T12:38:45.571828+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_4/fe110_missing.json",
+      "sha256": "571151800c88128e63e7e3aa4e0396a556f5779a97e90218a42f90920d14fcca",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T12:38:45.571828+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_4/synthetic_interface_dataset.json",
+      "sha256": "cedd36bfa73a2aeeb4dfe83a58f35951669fab9049441a8629c6840489dbdcaa",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T12:38:45.571828+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_4/synthetic_interface_catkinas.json",
+      "sha256": "13ab41d5f6dc19637628106e20f54a8fc313fc49ec9f316eeab1fa6c94c90aa4",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T12:38:45.571828+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_4/synthetic_interface_zacros.json",
+      "sha256": "93c957af96dbacd058fe45312fa535994fc3bf42f6e75bb0ff3af4c255bb5d39",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T12:38:45.571828+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_4_completion.md",
+      "sha256": "cee63e28f90bdefee7917567c2212f9f90923440cc96f2a64e4de388d87edf5f",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T12:38:45.571828+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "historical_result_record"
+    ],
+    "status": "pending"
+  }
+}
