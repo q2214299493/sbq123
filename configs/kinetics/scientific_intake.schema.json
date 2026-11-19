@@ -655,6 +655,9 @@
         },
         "value": {
           "type": "object"
+        },
+        "thermal_model": {
+          "$ref": "#/$defs/thermal_model"
         }
       },
       "required": [
@@ -929,6 +932,68 @@
           }
         }
       ]
+    },
+    "thermal_model": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "phase": {
+          "enum": [
+            "adsorbate",
+            "gas"
+          ]
+        },
+        "frequency_scale": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "scaling_reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "independent_mode_sigma_cm1": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "electronic_sigma_ev": {
+          "type": "number",
+          "minimum": 0
+        },
+        "gibbs_sigma_ev": {
+          "type": "number",
+          "minimum": 0
+        },
+        "zpe_sigma_ev": {
+          "type": "number",
+          "minimum": 0
+        },
+        "mass_amu": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "moments_amu_angstrom2": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          }
+        },
+        "symmetry_number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "electronic_degeneracy": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "pressure_pa": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
     }
   }
 }

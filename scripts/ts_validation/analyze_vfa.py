@@ -19,7 +19,7 @@ from scripts.neb_agent.utils_structure import read_poscar
 from scripts.ts_validation.dimer_frequency_gate import evaluate_dimer_frequency_gate
 
 
-FREQUENCY_PATTERN = re.compile(r"^\s*(\d+)\s+f(/i)?\s*=.*?([-+0-9.]+)\s+cm-1", re.I)
+FREQUENCY_PATTERN = re.compile(r"^\s*(\d+)\s+f(/i)?\s*=(?:.*\s)?([-+\d.]+(?:[eEdD][-+]?\d+)?)\s+cm-1", re.I)
 DEFAULT_PROFILE = resource_path('configs/true_fe110_production.yaml')
 
 
@@ -41,14 +41,23 @@ def _frequency_policy(override: dict[str, Any] | None) -> dict[str, Any]:
     return policy
 
 
+def frequency_header(line: str) -> dict[str, Any] | None:
+    if "cm-1" in line:
+        validate_finite_tree(line.split(), "frequency row")
+    match = FREQUENCY_PATTERN.match(line)
+    if not match:
+        return None
+    value = match.group(3).upper().replace("D", "E")
+    return {"mode_index": int(match.group(1)), "imaginary": bool(match.group(2)),
+            "frequency_cm1": finite_number(value, "frequency cm-1")}
+
+
 def _frequency_modes(text: str) -> list[dict[str, Any]]:
     lines = text.splitlines()
     modes: list[dict[str, Any]] = []
     for position, line in enumerate(lines):
-        if "cm-1" in line:
-            validate_finite_tree(line.split(), "frequency row")
-        match = FREQUENCY_PATTERN.search(line)
-        if not match:
+        header = frequency_header(line)
+        if header is None:
             continue
         vectors: list[dict[str, float | int]] = []
         for candidate in lines[position + 1 :]:
@@ -85,9 +94,7 @@ def _frequency_modes(text: str) -> list[dict[str, Any]]:
                 break
         modes.append(
             {
-                "mode_index": int(match.group(1)),
-                "imaginary": bool(match.group(2)),
-                "frequency_cm1": finite_number(match.group(3), "frequency cm-1"),
+                **header,
                 "dominant_atoms": sorted(vectors, key=lambda item: float(item["amplitude"]), reverse=True)[:10],
             }
         )

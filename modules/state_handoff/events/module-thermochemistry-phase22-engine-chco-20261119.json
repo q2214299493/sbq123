@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "event_id": "module-thermochemistry-phase22-engine-chco-20261119",
+  "event_type": "module_gate_changed",
+  "entity": {
+    "kind": "module",
+    "id": "thermochemistry",
+    "module": "thermochemistry"
+  },
+  "occurred_at": "2026-11-19T10:07:53.741519+00:00",
+  "recorded_at": "2026-11-19T10:07:53.741519+00:00",
+  "summary": "Record the tested Phase 2.2 engine and Fe110 TS partial-Hessian ZPE; endpoint free-energy evidence remains open.",
+  "payload": {
+    "module": "thermochemistry",
+    "status": "Active",
+    "depends_on": "reviewed compatible state evidence, TS assignment and conditions",
+    "current_gate": "Engine validated on synthetic and mixed-source fixtures. Fe110 CH+CO: electronic barriers and the reviewed TS local ZPE are available; intake matched IS/FS corrections and target conditions before reaction free energies."
+  },
+  "evidence": [
+    {
+      "locator": "configs/kinetics/scientific_intake.schema.json",
+      "sha256": "feabcbe76179d3624cead8d6469fcdd6a4796ba8e11c1dbaee30944487f5acab",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T10:07:53.741519+00:00"
+    },
+    {
+      "locator": "modules/thermochemistry/README.md",
+      "sha256": "2d027e68b9dc4f477d3323721b9ac7a8e5af70041215b105dec291951c4a42e1",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T10:07:53.741519+00:00"
+    },
+    {
+      "locator": "scripts/ts_validation/analyze_vfa.py",
+      "sha256": "46294d654cccf6a090491f4a209ee488a355dd557b5e21729958680038f1e19f",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T10:07:53.741519+00:00"
+    },
+    {
+      "locator": "scripts/thermochemistry/__init__.py",
+      "sha256": "cbd17d73744dee483014899c6b45cb408649f439219e7b4cd3d652479b5ce882",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T10:07:53.741519+00:00"
+    },
+    {
+      "locator": "scripts/thermochemistry/__main__.py",
+      "sha256": "d2e0787c1444fbff076461d9928f4ca5c5005ec24974bb4e66eded65e6a750b2",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T10:07:53.741519+00:00"
+    },
+    {
+      "locator": "scripts/thermochemistry/frequencies.py",
+      "sha256": "2b021940fbe44a5ab36ab04bc0c6e71d732c30c90c90011d0f718491e9ed036a",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T10:07:53.741519+00:00"
+    },
+    {
+      "locator": "scripts/thermochemistry/harmonic.py",
+      "sha256": "ac50f348d46aae6f29de4e0d21a56faec7f2db707001d66fe037838440c28d5e",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T10:07:53.741519+00:00"
+    },
+    {
+      "locator": "scripts/thermochemistry/engine.py",
+      "sha256": "0e1cb85c44bc5a2428f1c71d45900cede1d41f831238dd5837bd0fd79400d944",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T10:07:53.741519+00:00"
+    },
+    {
+      "locator": "tests/test_thermochemistry.py",
+      "sha256": "9196896f0d02b63f0e2fc3e33538dfc7c345cec98808f4ec9fd33a8d355cab64",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T10:07:53.741519+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_2_completion.md",
+      "sha256": "2ceda9e69cb09f9c495def344ea4b4b93cecb30e99ebdd2ffac76597986953cd",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T10:07:53.741519+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_2_chco_validation.json",
+      "sha256": "3cb1440526b0e6386294100bbfe9a6e31c8d0c999850571f56ce99b322aa1789",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T10:07:53.741519+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "cross_module_change"
+    ],
+    "status": "pending"
+  }
+}
