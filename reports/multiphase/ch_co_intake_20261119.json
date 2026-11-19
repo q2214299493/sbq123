@@ -1,0 +1,266 @@
+{
+  "schema_version": 1,
+  "reaction_id": "fe110_ch_co_to_chco_20261109",
+  "records": [
+    {
+      "id": "IS-structure",
+      "state": "IS",
+      "kind": "structure",
+      "value": {
+        "identity": "f8bc627180b430b3b64f748c05830a0372bc93a3750780cf7fe6c5eb0601762d",
+        "reference": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_cfg0_direct_vasp/CONTCAR"
+      },
+      "mode": "FULL_VALIDATION",
+      "provenance": {
+        "source_type": "local_calculation",
+        "source_reference": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_cfg0_direct_vasp/CONTCAR",
+        "source_artifact_hash": "f8bc627180b430b3b64f748c05830a0372bc93a3750780cf7fe6c5eb0601762d",
+        "original_calculation_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021"
+      },
+      "validation": {
+        "validation_status": "validated",
+        "validated_properties": [
+          "structure"
+        ],
+        "validation_method": "Endpoint contract and TS source structure binding",
+        "compatibility_status": "compatible",
+        "limitations": []
+      },
+      "acceptance": {
+        "acceptance_status": "pending"
+      }
+    },
+    {
+      "id": "IS-electronic_energy",
+      "state": "IS",
+      "kind": "electronic_energy",
+      "value": {
+        "value_ev": -385.14767079,
+        "energy_reference": "fe110_converged_toten_sigma0p20_v1",
+        "structure_identity": "f8bc627180b430b3b64f748c05830a0372bc93a3750780cf7fe6c5eb0601762d"
+      },
+      "mode": "FULL_VALIDATION",
+      "provenance": {
+        "source_type": "local_calculation",
+        "source_reference": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_cfg0_direct_vasp/OUTCAR",
+        "source_artifact_hash": "e3f5ad8b0aa2a9afc6749785e5dc872d64b6de4165169578510c7a0c5d167d78",
+        "original_calculation_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021"
+      },
+      "validation": {
+        "validation_status": "validated",
+        "validated_properties": [
+          "electronic_energy"
+        ],
+        "validation_method": "accepted_compatible_final_energy",
+        "compatibility_status": "compatible",
+        "limitations": [
+          "Electronic energy only"
+        ]
+      },
+      "acceptance": {
+        "acceptance_status": "pending"
+      }
+    },
+    {
+      "id": "TS-structure",
+      "state": "TS",
+      "kind": "structure",
+      "value": {
+        "identity": "0157a418cd1fba1be886426361d494ffbdce9a15d1a9132b996a3481ffcc1a6a",
+        "reference": "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/CONTCAR"
+      },
+      "mode": "FULL_VALIDATION",
+      "provenance": {
+        "source_type": "local_calculation",
+        "source_reference": "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/CONTCAR",
+        "source_artifact_hash": "0157a418cd1fba1be886426361d494ffbdce9a15d1a9132b996a3481ffcc1a6a",
+        "original_calculation_id": "fe110_ch_co_dimer_20261112_job9998592"
+      },
+      "validation": {
+        "validation_status": "validated",
+        "validated_properties": [
+          "structure"
+        ],
+        "validation_method": "Endpoint contract and TS source structure binding",
+        "compatibility_status": "compatible",
+        "limitations": []
+      },
+      "acceptance": {
+        "acceptance_status": "pending"
+      }
+    },
+    {
+      "id": "TS-electronic_energy",
+      "state": "TS",
+      "kind": "electronic_energy",
+      "value": {
+        "value_ev": -384.17406905,
+        "energy_reference": "fe110_converged_toten_sigma0p20_v1",
+        "structure_identity": "0157a418cd1fba1be886426361d494ffbdce9a15d1a9132b996a3481ffcc1a6a"
+      },
+      "mode": "FULL_VALIDATION",
+      "provenance": {
+        "source_type": "local_calculation",
+        "source_reference": "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/OUTCAR",
+        "source_artifact_hash": "391f84167e6372dcaf770ed1efa471d1abba6d4640803876899b120ac797dd02",
+        "original_calculation_id": "fe110_ch_co_dimer_20261112_job9998592"
+      },
+      "validation": {
+        "validation_status": "validated",
+        "validated_properties": [
+          "electronic_energy"
+        ],
+        "validation_method": "accepted_compatible_final_energy",
+        "compatibility_status": "compatible",
+        "limitations": [
+          "Electronic energy only"
+        ]
+      },
+      "acceptance": {
+        "acceptance_status": "pending"
+      }
+    },
+    {
+      "id": "FS-structure",
+      "state": "FS",
+      "kind": "structure",
+      "value": {
+        "identity": "11dab1631a99f1e444d4c7ab9ca242609e07c912f656874005696e6498f15ab2",
+        "reference": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_extra2_repair_v1/CONTCAR"
+      },
+      "mode": "FULL_VALIDATION",
+      "provenance": {
+        "source_type": "local_calculation",
+        "source_reference": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_extra2_repair_v1/CONTCAR",
+        "source_artifact_hash": "11dab1631a99f1e444d4c7ab9ca242609e07c912f656874005696e6498f15ab2",
+        "original_calculation_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1"
+      },
+      "validation": {
+        "validation_status": "validated",
+        "validated_properties": [
+          "structure"
+        ],
+        "validation_method": "Endpoint contract and TS source structure binding",
+        "compatibility_status": "compatible",
+        "limitations": []
+      },
+      "acceptance": {
+        "acceptance_status": "pending"
+      }
+    },
+    {
+      "id": "FS-electronic_energy",
+      "state": "FS",
+      "kind": "electronic_energy",
+      "value": {
+        "value_ev": -384.48836276,
+        "energy_reference": "fe110_converged_toten_sigma0p20_v1",
+        "structure_identity": "11dab1631a99f1e444d4c7ab9ca242609e07c912f656874005696e6498f15ab2"
+      },
+      "mode": "FULL_VALIDATION",
+      "provenance": {
+        "source_type": "local_calculation",
+        "source_reference": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_extra2_repair_v1/OUTCAR",
+        "source_artifact_hash": "e88d99ab9ba74274fd8af45e4e69b9f59feb90bbe1101f7e794c1c317bb82edc",
+        "original_calculation_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1"
+      },
+      "validation": {
+        "validation_status": "validated",
+        "validated_properties": [
+          "electronic_energy"
+        ],
+        "validation_method": "accepted_compatible_final_energy",
+        "compatibility_status": "compatible",
+        "limitations": [
+          "Electronic energy only"
+        ]
+      },
+      "acceptance": {
+        "acceptance_status": "pending"
+      }
+    },
+    {
+      "id": "TS-spectrum",
+      "state": "TS",
+      "kind": "spectrum",
+      "value": {
+        "structure_identity": "0157a418cd1fba1be886426361d494ffbdce9a15d1a9132b996a3481ffcc1a6a",
+        "atom_map": [
+          45,
+          46,
+          47,
+          48
+        ],
+        "constraints": "All Fe fixed; all Cartesian components of C45 C46 O47 H48 mobile",
+        "method": "Local Cartesian finite differences; see frequency audit for INCAR and k mesh",
+        "thermal_basis": "Fe110-C45-C46-O47-H48-local-harmonic",
+        "expected_modes": 12,
+        "frequencies_cm1": [
+          3012.556969,
+          1562.135791,
+          909.495523,
+          693.170928,
+          563.698151,
+          468.200164,
+          355.601179,
+          248.117609,
+          219.859855,
+          143.010697,
+          116.365467,
+          -318.644011
+        ]
+      },
+      "mode": "FULL_VALIDATION",
+      "provenance": {
+        "source_type": "local_calculation",
+        "source_reference": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/OUTCAR",
+        "source_artifact_hash": "d707a332f1af5d0835e1935d351d9a28b011bd4672e4de3b00833fb93f62f9a9",
+        "original_calculation_id": "fe110_ch_co_vfa_20261115_job2260"
+      },
+      "validation": {
+        "validation_status": "validated",
+        "validated_properties": [
+          "spectrum"
+        ],
+        "validation_method": "fe110_ch_co_dimer9998592_vfa2260_grade_a_20261115",
+        "compatibility_status": "compatible",
+        "limitations": [
+          "Partial Hessian; assigned TS reaction coordinate excluded from stable-mode partition function"
+        ]
+      },
+      "acceptance": {
+        "acceptance_status": "pending"
+      }
+    },
+    {
+      "id": "reaction-site_inference",
+      "state": "reaction",
+      "kind": "site_inference",
+      "value": {
+        "projection": "IS: C45 and C46 project to long_bridge; FS: C45 and C46 project to hollow, O47 to off-symmetry top."
+      },
+      "mode": "FULL_VALIDATION",
+      "provenance": {
+        "source_type": "local_calculation",
+        "source_reference": "reports/multiphase/ch_co_registry_mapping_20261119.json",
+        "source_artifact_hash": "5d8d7f3a4ebd90b5666bee4215b517f2f520f33e3adc2524c50f8d931e41dfbf"
+      },
+      "validation": {
+        "validation_status": "validated",
+        "validated_properties": [
+          "site_inference"
+        ],
+        "validation_method": "Endpoint adsorption review projections",
+        "compatibility_status": "compatible",
+        "limitations": [
+          "Independent activities and occupancy not established"
+        ]
+      },
+      "acceptance": {
+        "acceptance_status": "pending"
+      }
+    }
+  ],
+  "reversible": null,
+  "pressure_dependent": false
+}

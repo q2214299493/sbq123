@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "event_id": "module-kinetic-data-flexible-intake-frequency-audit-20261119",
+  "event_type": "module_gate_changed",
+  "entity": {
+    "kind": "module",
+    "id": "kinetic_data",
+    "module": "kinetic_data"
+  },
+  "occurred_at": "2026-11-19T09:48:42.838836+00:00",
+  "recorded_at": "2026-11-19T09:48:42.838836+00:00",
+  "summary": "Record flexible reaction evidence intake and the read-only Fe(110) endpoint audit.",
+  "payload": {
+    "module": "kinetic_data",
+    "status": "Active",
+    "depends_on": "registry, validated DFT/TS data",
+    "current_gate": "Three electronic energies and the reviewed TS spectrum are available. Intake compatible IS/FS spectra or scoped precomputed corrections; kinetic site, condition and rate evidence is incomplete. MKM remains blocked."
+  },
+  "evidence": [
+    {
+      "locator": "scripts/scientific_intake.py",
+      "sha256": "528bf51dfdad665eec632a04cc17f6544584f1dda1cdac595fe26c5506753dae",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T09:48:42.838836+00:00"
+    },
+    {
+      "locator": "configs/kinetics/scientific_intake.schema.json",
+      "sha256": "cac5550c382a2bafcf2a20c4f7f90b46331de6fbe9f701ca35cf32200151baf4",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T09:48:42.838836+00:00"
+    },
+    {
+      "locator": "modules/kinetic_data/scientific_intake.md",
+      "sha256": "0f583dc4de11d1f8b09e8d12d6b88b0931350ee0c0f2cc065b3f90dca280053b",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T09:48:42.838836+00:00"
+    },
+    {
+      "locator": "tests/test_scientific_intake.py",
+      "sha256": "f162a4ea7d95e835112b84699f2af21dcab248acdf0ef03bb67fa8ace5d2cb96",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T09:48:42.838836+00:00"
+    },
+    {
+      "locator": "reports/multiphase/ch_co_frequency_audit_20261119.json",
+      "sha256": "3c262bb9f0414fd758fbc8918cb2736070c3101e7d193c65e8314d3fcea6e77f",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T09:48:42.838836+00:00"
+    },
+    {
+      "locator": "reports/multiphase/ch_co_frequency_audit_20261119.md",
+      "sha256": "c086ddf0273bba908eaaa3e498b74bc75da05088fd690acc6d591b9b0d7b94b9",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T09:48:42.838836+00:00"
+    },
+    {
+      "locator": "reports/multiphase/ch_co_intake_20261119.json",
+      "sha256": "8c2b7561a9eeaa40ef3bd24d8b6ce69de58e416ef111b5bc4590a5e8d7caf8ef",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T09:48:42.838836+00:00"
+    },
+    {
+      "locator": "reports/multiphase/ch_co_missing_data_20261119.json",
+      "sha256": "14cdfb9c92e6216109c5b0d1c809bf6a9b2ac59f2e4738abfae4a0b86496f815",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T09:48:42.838836+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_1_completion.md",
+      "sha256": "96112ea6501922b62ed65bf9594a731e5488316e950b66cdb2f9a3aa0267de7a",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T09:48:42.838836+00:00"
+    }
+  ],
+  "supersedes": [
+    "module-kinetic-data-multiphase-contracts-v1-20261119",
+    "module-kinetic-data-coverage-registry-case-20261119"
+  ],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "cross_module_change"
+    ],
+    "status": "pending"
+  }
+}

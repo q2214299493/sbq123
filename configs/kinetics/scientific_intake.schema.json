@@ -1,0 +1,934 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Reaction scientific evidence intake v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "enum": [
+        1
+      ]
+    },
+    "reaction_id": {
+      "type": "string",
+      "pattern": "\\S"
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/record"
+      }
+    },
+    "reversible": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "pressure_dependent": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "reaction_id",
+    "records"
+  ],
+  "$defs": {
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source_type": {
+          "enum": [
+            "local_calculation",
+            "external_platform",
+            "literature",
+            "database",
+            "user_supplied",
+            "assumption",
+            null
+          ]
+        },
+        "source_reference": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "\\S"
+        },
+        "original_calculation_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "\\S"
+        },
+        "source_artifact_hash": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "supplied_by": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "\\S"
+        },
+        "source_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        }
+      },
+      "required": []
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "validation_status": {
+          "enum": [
+            "unreviewed",
+            "partial",
+            "validated",
+            "rejected"
+          ]
+        },
+        "validated_properties": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "uniqueItems": true
+        },
+        "validation_method": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "compatibility_status": {
+          "enum": [
+            "unknown",
+            "compatible",
+            "incompatible"
+          ]
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "validation_status",
+        "validated_properties",
+        "compatibility_status",
+        "limitations"
+      ]
+    },
+    "acceptance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "acceptance_status": {
+          "enum": [
+            "pending",
+            "accepted",
+            "rejected"
+          ]
+        },
+        "accepted_by": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "acceptance_scope": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "electronic",
+              "zpe",
+              "thermochemistry",
+              "site_mapping",
+              "kinetic_handoff"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "acceptance_reason": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "acceptance_timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "acceptance_status"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "acceptance_status": {
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "accepted_by",
+              "acceptance_scope",
+              "acceptance_reason",
+              "acceptance_timestamp"
+            ]
+          }
+        }
+      ]
+    },
+    "structure": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "identity": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "\\S"
+        },
+        "reference": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "\\S"
+        }
+      },
+      "required": []
+    },
+    "electronic_energy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value_ev": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "energy_reference": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "\\S"
+        },
+        "structure_identity": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "\\S"
+        }
+      },
+      "required": []
+    },
+    "spectrum": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "frequencies_cm1": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "number"
+          },
+          "minItems": 1
+        },
+        "atom_map": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "structure_identity": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "\\S"
+        },
+        "constraints": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "\\S"
+        },
+        "method": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "\\S"
+        },
+        "thermal_basis": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "\\S"
+        },
+        "expected_modes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        }
+      },
+      "required": []
+    },
+    "corrections": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "zpe_ev": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "thermal_enthalpy_ev": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "entropy_ev_per_k": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "gibbs_correction_ev": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "temperature_k": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "standard_state": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "\\S"
+        },
+        "structure_identity": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "\\S"
+        },
+        "thermal_basis": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "\\S"
+        }
+      },
+      "required": []
+    },
+    "temperature": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kelvin": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": []
+    },
+    "pressure": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pascal": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": []
+    },
+    "standard_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "convention": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "\\S"
+        }
+      },
+      "required": []
+    },
+    "site_inference": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "projection": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "\\S"
+        }
+      },
+      "required": []
+    },
+    "site_mapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "occupancies": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "species": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "site_type": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "multiplicity": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "required": [
+              "species",
+              "site_type",
+              "multiplicity"
+            ]
+          },
+          "minItems": 1
+        },
+        "sites_consumed": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "site_type": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "required": [
+              "site_type",
+              "count"
+            ]
+          }
+        },
+        "sites_released": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "site_type": {
+                "type": "string",
+                "pattern": "\\S"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "required": [
+              "site_type",
+              "count"
+            ]
+          }
+        },
+        "interface_assignment": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "\\S"
+        },
+        "reaction_classification": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "\\S"
+        }
+      },
+      "required": []
+    },
+    "forward_rate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "rate_law": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "\\S"
+        },
+        "value": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "unit": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "\\S"
+        },
+        "conditions": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "\\S"
+        }
+      },
+      "required": []
+    },
+    "reverse_rate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "rate_law": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "\\S"
+        },
+        "value": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "unit": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "\\S"
+        },
+        "conditions": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "\\S"
+        }
+      },
+      "required": []
+    },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "state": {
+          "enum": [
+            "IS",
+            "TS",
+            "FS",
+            "reaction"
+          ]
+        },
+        "kind": {
+          "enum": [
+            "structure",
+            "electronic_energy",
+            "spectrum",
+            "corrections",
+            "temperature",
+            "pressure",
+            "standard_state",
+            "site_inference",
+            "site_mapping",
+            "forward_rate",
+            "reverse_rate"
+          ]
+        },
+        "mode": {
+          "enum": [
+            "FULL_VALIDATION",
+            "USER_PROVIDED",
+            "LITERATURE_EXTERNAL",
+            "USER_APPROVED_ASSUMPTION"
+          ]
+        },
+        "provenance": {
+          "$ref": "#/$defs/provenance"
+        },
+        "validation": {
+          "$ref": "#/$defs/validation"
+        },
+        "acceptance": {
+          "$ref": "#/$defs/acceptance"
+        },
+        "uncertainty": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "\\S"
+        },
+        "value": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "state",
+        "kind",
+        "mode",
+        "validation",
+        "acceptance",
+        "value"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "structure"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/structure"
+              },
+              "state": {
+                "enum": [
+                  "IS",
+                  "TS",
+                  "FS"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "electronic_energy"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/electronic_energy"
+              },
+              "state": {
+                "enum": [
+                  "IS",
+                  "TS",
+                  "FS"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "spectrum"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/spectrum"
+              },
+              "state": {
+                "enum": [
+                  "IS",
+                  "TS",
+                  "FS"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "corrections"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/corrections"
+              },
+              "state": {
+                "enum": [
+                  "IS",
+                  "TS",
+                  "FS"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "temperature"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/temperature"
+              },
+              "state": {
+                "enum": [
+                  "reaction"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "pressure"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/pressure"
+              },
+              "state": {
+                "enum": [
+                  "reaction"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "standard_state"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/standard_state"
+              },
+              "state": {
+                "enum": [
+                  "reaction"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "site_inference"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/site_inference"
+              },
+              "state": {
+                "enum": [
+                  "reaction"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "site_mapping"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/site_mapping"
+              },
+              "state": {
+                "enum": [
+                  "reaction"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "forward_rate"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/forward_rate"
+              },
+              "state": {
+                "enum": [
+                  "reaction"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "reverse_rate"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/reverse_rate"
+              },
+              "state": {
+                "enum": [
+                  "reaction"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

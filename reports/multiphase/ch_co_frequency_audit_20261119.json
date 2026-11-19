@@ -1,0 +1,293 @@
+{
+  "as_of": "2026-11-19",
+  "reaction_id": "fe110_ch_co_to_chco_20261109",
+  "mapping": {
+    "path": "reports/multiphase/ch_co_registry_mapping_20261119.json",
+    "sha256": "5d8d7f3a4ebd90b5666bee4215b517f2f520f33e3adc2524c50f8d931e41dfbf"
+  },
+  "states": {
+    "IS": {
+      "source_calculation": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021",
+      "structure": {
+        "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_cfg0_direct_vasp/CONTCAR",
+        "sha256": "f8bc627180b430b3b64f748c05830a0372bc93a3750780cf7fe6c5eb0601762d"
+      },
+      "canonical_geometry_sha256": "030a4e84dac6b3c01a9fa8de625d4b3b573984e4ae594835c70affc406fb9ac2",
+      "atom_order": "Fe0-44 C45 C46 O47 H48",
+      "source_constraints": "18 fixed Fe; 31 atoms mobile",
+      "frequency_calculation_id": null,
+      "frequency_structure_match": null,
+      "frequency_atom_map": null,
+      "frequency_active_atoms": null,
+      "frequency_constraints": null,
+      "frequency_output": null,
+      "hessian_settings": null,
+      "imaginary_modes_cm1": null,
+      "validation_status": "No matched endpoint spectrum; stability unassessed"
+    },
+    "TS": {
+      "source_calculation": "fe110_ch_co_dimer_20261112_job9998592",
+      "structure": {
+        "path": "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/CONTCAR",
+        "sha256": "0157a418cd1fba1be886426361d494ffbdce9a15d1a9132b996a3481ffcc1a6a"
+      },
+      "canonical_geometry_sha256": "098087b36ea14b2b4f04394ca75f3b6aa48837550dc0a3b45aeab3aedfca9fe3",
+      "atom_order": "Fe0-44 C45 C46 O47 H48",
+      "source_constraints": "18 fixed Fe; 31 atoms mobile",
+      "frequency_calculation_id": "fe110_ch_co_vfa_20261115_job2260",
+      "frequency_structure_match": "Different POSCAR bytes; same labelled periodic fingerprint, ordered coordinates and cell",
+      "frequency_atom_map": "Fe0-44 C45 C46 O47 H48",
+      "frequency_active_atoms": [
+        45,
+        46,
+        47,
+        48
+      ],
+      "frequency_constraints": "All Fe fixed; all Cartesian components of C45 C46 O47 H48 mobile",
+      "frequency_output": {
+        "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/OUTCAR",
+        "sha256": "d707a332f1af5d0835e1935d351d9a28b011bd4672e4de3b00833fb93f62f9a9"
+      },
+      "hessian_settings": {
+        "IBRION": 5,
+        "NFREE": 2,
+        "POTIM": 0.015,
+        "ISYM": 0,
+        "NSW": 1,
+        "EDIFF": 1e-07,
+        "ENCUT": 400,
+        "ISMEAR": 1,
+        "SIGMA": 0.1,
+        "kmesh": [
+          5,
+          5,
+          1
+        ]
+      },
+      "imaginary_modes_cm1": [
+        -318.644011
+      ],
+      "validation_status": "Grade A within reviewed Dimer active-subspace scope"
+    },
+    "FS": {
+      "source_calculation": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1",
+      "structure": {
+        "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_extra2_repair_v1/CONTCAR",
+        "sha256": "11dab1631a99f1e444d4c7ab9ca242609e07c912f656874005696e6498f15ab2"
+      },
+      "canonical_geometry_sha256": "673fff97445e0d50e50f53b04ccd231971f40ab178ab73eba86202f954ed58d8",
+      "atom_order": "Fe0-44 C45 C46 O47 H48",
+      "source_constraints": "18 fixed Fe; 31 atoms mobile",
+      "frequency_calculation_id": null,
+      "frequency_structure_match": null,
+      "frequency_atom_map": null,
+      "frequency_active_atoms": null,
+      "frequency_constraints": null,
+      "frequency_output": null,
+      "hessian_settings": null,
+      "imaginary_modes_cm1": null,
+      "validation_status": "No matched endpoint spectrum; stability unassessed"
+    }
+  },
+  "ts_files": {
+    "INCAR": {
+      "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/INCAR",
+      "sha256": "40b8ac1952abd7ec7e1f7c5a6b908f92c9266408e129edc84e004b8ab4c2c0f5"
+    },
+    "KPOINTS": {
+      "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/KPOINTS",
+      "sha256": "0d7e291117433dac5393f29520b635e92f06e6c8e91aa941137c86b1d39162ae"
+    },
+    "POSCAR": {
+      "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/POSCAR",
+      "sha256": "c1b035d47a15cf8211d23dd25d4216a46c82a33b3b5c0957b03b86e7a49ade8d"
+    },
+    "OUTCAR": {
+      "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/OUTCAR",
+      "sha256": "d707a332f1af5d0835e1935d351d9a28b011bd4672e4de3b00833fb93f62f9a9"
+    },
+    "vfa_analysis.json": {
+      "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/vfa_analysis.json",
+      "sha256": "e5c326c7c096bfae0174457c077ae415140f9089165bff1c1cdb1a8a920ae7fc"
+    },
+    "vfa_review.json": {
+      "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/vfa_review.json",
+      "sha256": "53938169f0884fb021c9e2cbb68933b537ad82bed018a14bb53e64e6cb79895d"
+    },
+    "vfa_scope_review.json": {
+      "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/vfa_scope_review.json",
+      "sha256": "a1697c65cb058f9906c23f18ef713a90a99a630d374cd2d0a45aaccc81851217"
+    },
+    "vfa_handoff.json": {
+      "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/vfa_handoff.json",
+      "sha256": "dd34a2266f375553a335defde41fd6b02d424d5468c8d9bbd68bb841bd05b025"
+    }
+  },
+  "scientific_review_sources": {
+    "IS": {
+      "review_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_review",
+      "decision": "accept",
+      "reviewed_at": "2026-10-21T15:51:34.369055+00:00",
+      "artifact": {
+        "path": "calculations/fe110_c2_adsorption_06_10_20261012/coadsorption_registration_20261021_v1/scientific_reviews/03_CH_CO.json",
+        "sha256": "7610f38563e57a436d4a1a15360669ae6b671a236244cf977499d31970498b82"
+      }
+    },
+    "FS": {
+      "review_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_review",
+      "decision": "accept",
+      "reviewed_at": "2026-10-12T14:00:44.114627+00:00",
+      "artifact": {
+        "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/registration_v2/scientific_reviews/03_extra2_repair_v1.json",
+        "sha256": "bc050f7a398170e6b1ca4eadd7e8c1a6d6cc3cbb01e21fb04668a426fe3da773"
+      }
+    },
+    "TS": {
+      "ts_validation_id": "fe110_ch_co_dimer9998592_vfa2260_grade_a_20261115",
+      "calculation_id": "fe110_ch_co_vfa_20261115_job2260",
+      "source_method": "dimer",
+      "grade": "A",
+      "geometry_status": "pass",
+      "kinetic_eligible": 1,
+      "reviewed_at": "2026-11-15T16:00:03.439254+00:00",
+      "contract_sha256": "06b6b3ee62b6a93cff4631fbcf443bebd8cb1b1144f803186cf48eacf798939b",
+      "atom_map_sha256": "f3fe5452e4794fbaedca86991a7e936e55a730530a793bc1df0e899814cdabe5",
+      "frequency_output_file_id": "chco_vfa2260_formal_20261115_OUTCAR"
+    },
+    "ts_frequency_outcar": {
+      "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/OUTCAR",
+      "sha256": "d707a332f1af5d0835e1935d351d9a28b011bd4672e4de3b00833fb93f62f9a9"
+    },
+    "ts_imaginary_frequencies_cm1": [
+      318.644011
+    ],
+    "ts_active_atoms_zero_based": [
+      45,
+      46,
+      47,
+      48
+    ],
+    "ts_scope_review": {
+      "path": "outputs/c1_c2_barrier_registration_20261118_v1/ch_co/vfa_scope_review.json",
+      "sha256": "ffb123b6840d3b8b9f009cbafcbae55d7c88a1371e0cec7303fc6d99bcd9bd89"
+    },
+    "ts_handoff": {
+      "path": "outputs/c1_c2_barrier_registration_20261118_v1/ch_co/vfa_handoff.json",
+      "sha256": "f4057683dd0fa0d9df069dfe31af83379d484c6975e745b055d9a66d4cb71924"
+    },
+    "endpoint_contract": {
+      "path": "calculations/fe110_ch_co_to_chco_ts_20261109/reaction_contract.json",
+      "sha256": "bdd0c022aa518e84d697d27b7172443159988550ca01e5e9c10e78355f5ec08b"
+    },
+    "endpoint_atom_roles": {
+      "path": "calculations/fe110_ch_co_to_chco_ts_20261109/endpoint_provenance.json",
+      "sha256": "1ec61cf82784f4c441ed464dfdff7b5567732946a28f7b8c5da4ed1aff7f8d8b"
+    }
+  },
+  "signed_modes_cm1": [
+    3012.556969,
+    1562.135791,
+    909.495523,
+    693.170928,
+    563.698151,
+    468.200164,
+    355.601179,
+    248.117609,
+    219.859855,
+    143.010697,
+    116.365467,
+    -318.644011
+  ],
+  "ts_mode_review": {
+    "index": 12,
+    "assignment": "C45-C46 opening/closing",
+    "dimer_mode_cosine": 0.934,
+    "discarded_low_modes": [],
+    "soft_mode_assessment": "Needs confirmation",
+    "grade": "A"
+  },
+  "search": {
+    "local_counts": {
+      "INCAR-like": 1328,
+      "OUTCAR-like": 700,
+      "frequency JSON": 95
+    },
+    "registry_calculations": 658,
+    "registry_file_rows_examined": 2075,
+    "registry_validation_rows": [
+      {
+        "ts_validation_id": "fe110_co_dissociation_dimer9656664_mode6_grade_a_20260807",
+        "calculation_id": "fe110_co_dissociation_vfa_job9694935",
+        "frequency_output_file_id": "vfa_job9694935_outcar",
+        "grade": "A"
+      },
+      {
+        "ts_validation_id": "tsv_fe110_ch_h_to_ch2_vfa_9710404_diagnostic",
+        "calculation_id": "fe110_ts_ch_h_to_ch2_vfa_9710404",
+        "frequency_output_file_id": "file_fe110_ts_ch_h_to_ch2_vfa_9710404_OUTCAR",
+        "grade": "Ungraded"
+      },
+      {
+        "ts_validation_id": "fe110_ch_h_to_ch2_dimer9709074_mode24_grade_a_20260816",
+        "calculation_id": "fe110_ts_ch_h_to_ch2_vfa_9710404",
+        "frequency_output_file_id": "file_fe110_ts_ch_h_to_ch2_vfa_9710404_OUTCAR",
+        "grade": "A"
+      },
+      {
+        "ts_validation_id": "fe110_c_h_to_ch_dimer9720181_mode21_grade_a_20260822",
+        "calculation_id": "fe110_c_h_to_ch_vfa_9721851",
+        "frequency_output_file_id": "fe110_c_h_to_ch_vfa_9721851-OUTCAR-done",
+        "grade": "A"
+      },
+      {
+        "ts_validation_id": "fe110_c2ho_oh_dimer9746548_vfa9747902_accepted_20260910",
+        "calculation_id": "fe110_c2ho_h_local_frequency_9747902",
+        "frequency_output_file_id": "file_vfa9747902_OUTCAR_formal_frequency",
+        "grade": "A"
+      },
+      {
+        "ts_validation_id": "fe110_int06_mid_ci9796856_vfa9798421_grade_a",
+        "calculation_id": "fe110_int06_mid_vfa_ci9796856_9798421",
+        "frequency_output_file_id": "fe110_int06_mid_vfa_9798421_OUTCAR_frequency",
+        "grade": "A"
+      },
+      {
+        "ts_validation_id": "fe110_ch_co_dimer9998592_vfa2260_grade_a_20261115",
+        "calculation_id": "fe110_ch_co_vfa_20261115_job2260",
+        "frequency_output_file_id": "chco_vfa2260_formal_20261115_OUTCAR",
+        "grade": "A"
+      }
+    ],
+    "candidates_by_geometry": {
+      "other composition": 18,
+      "TS": 4
+    },
+    "frequency_artifact_structure_hash_hits": 7,
+    "remote_scope": "sunboquan-codex:~/sbq/Fe110",
+    "remote_incar_count": 606,
+    "remote_hessian_candidates": 6,
+    "remote_orphan_outcars": 102,
+    "remote_orphan_spectra": []
+  },
+  "thermochemistry": {
+    "zpe": null,
+    "thermal_enthalpy": null,
+    "vibrational_entropy": null,
+    "gibbs_corrections": null,
+    "free_energy_differences": null,
+    "temperature_k": null,
+    "pressure_pa": null,
+    "standard_state": null,
+    "gas_stoichiometry": "No gas species in this elementary surface step"
+  },
+  "site_review": {
+    "projections": "IS: C45 and C46 project to long_bridge; FS: C45 and C46 project to hollow, O47 to off-symmetry top.",
+    "confirmed_occupancies": null,
+    "sites_consumed": null,
+    "sites_released": null,
+    "independent_activities": null
+  },
+  "kinetic_handoff": "blocked",
+  "new_calculation_required": "undetermined; external or supplied evidence may fill endpoint gaps",
+  "next_action": "Intake compatible IS and FS spectra or documented matched thermal corrections for the target conditions."
+}

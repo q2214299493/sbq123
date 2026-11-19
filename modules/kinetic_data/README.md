@@ -41,6 +41,9 @@ No ambiguous free-text energy may feed kinetics.
 
 ## Post-Processing Handoff Rule
 
+For partial local, external, literature and user-supplied evidence, use the
+[scientific intake and scoped acceptance contract](scientific_intake.md).
+
 CATKINAS and Zacros 4.0 consume only validated records from this module and the reaction-network module. They must not receive hand-entered energies or barriers unless each value has units, reference convention, source file, and review status.
 
 ## Done Criteria
