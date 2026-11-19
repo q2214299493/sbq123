@@ -46,9 +46,33 @@ python -m scripts.thermochemistry calculate base.json upload.json --operation zp
 
 The parser records both hashes, the actual OUTCAR settings, all signed modes and the POSCAR's Cartesian activity flags. With a reaction and state it emits an unreviewed intake draft. Compare the expected Cartesian dimension with the parsed count and review the mapping to the electronic structure. Gas internal-mode projection can have a different dimension. Records from external software can supply the same signed cm⁻¹ array, expected count, mapped atoms, constraint description, structure identity, method and thermal basis. A partial Hessian describes just the selected degrees of freedom. Use zero-based atom numbers and one-based mode numbers.
 
-The existing intake selects evidence by operation, structure, common basis and energy reference. Source metadata, scientific review, uncertainty and scoped human acceptance travel with the result. A usable but unverified input yields a scoped estimate. The calculator also compares active maps, constraints and scales across raw spectra. Use the same basis identifier on mixed raw/precomputed routes only after verifying the definitions, treatments and active subspace. Document any correspondence before normalizing equivalent labels or atom order.
+The existing intake selects evidence by operation, structure, common thermal basis and energy reference. Source metadata, scientific review, uncertainty and scoped human acceptance travel with the result. A usable but unverified input yields a scoped estimate.
+
+### Comparing different species and sites
+
+Atom indices belong to the selected state structure. Its spectrum must cite that structure identity, have a unique active map and contain the declared number of modes. Across IS, TS and FS, species can have different atom counts, numbering, mobile axes and Hessian dimensions. The shared `thermal_basis` names a reviewed definition applicable to all three states, for example *all adsorbate Cartesian components with the substrate fixed*. For mixed phases, review which phase-specific translational, rotational and vibrational contributions belong to the chosen standard states. A common label requires this physical correspondence. The established Fe(110) comparison still calls for the reviewed local reactive group at both endpoints. Temperature, standard-state and electronic-reference checks continue to apply.
+
+Supply `thermal_model.hessian_cartesian_flags` on a **structure** record to bind a Hessian scope to its numbering. Give one three-axis string per atom, including fixed atoms, in structure order. For example, `["FFF","TTF"]` means atom 1 supplies two modes for a Cartesian surface Hessian. These flags describe the frequency calculation; the relaxation can have different constraints. The parser's existing `Cartesian flags by atom: ...` format also supplies this information. When both forms exist they must agree. For molecular gas internal modes the full molecule is mobile and the translational/rotational projection removes five or six degrees of freedom.
+
+A reviewed spectrum upload can carry the same flags for an existing immutable structure. Every supplied flag list must agree within that state. Independent external mapping review can also document `structure_identity`, `atom_map` and `hessian_dimension` in the spectrum's `validated_properties`, with validated status and a named method. The raw TS Grade A binding already supplies its own mapping review. Existing reviewed, uniform-scope spectra retain their intake route. When raw subspaces differ, each needs state-specific mapping evidence. A missing comparative review leaves the individual usable results visible and the combined result pending.
+
+Non-unit scaling needs a state-specific source or calibration rationale. If factors differ across spectra, give a nonblank `scaling_reference` for each, including a reason for retaining unscaled frequencies where appropriate. Each spectrum is scaled once. The common thermal basis must support that combination.
 
 For an endpoint, include every positive mode of the selected subspace. An imaginary mode or a zero harmonic quantum raises a diagnostic. For a TS, pass its existing Grade A mode review. The CHCO audit is accepted directly. An external review JSON can carry `grade`, `review_reference`, `structure_identity`, and `assignment`; for a raw TS spectrum also supply `mode_index`, `frequencies_cm1`, `atom_map`, `constraints` and the matching `source_artifact_hash` when known. These fields describe a completed owning-module or equivalent reviewed assignment. The engine consumes that decision. For precomputed TS data the scientific review of the corrections must cover the exclusion convention and common basis. Full calculations require temperature and standard state. A surface ZPE needs neither.
+
+### Reviewing a precomputed TS correction
+
+Provide a separate review JSON via `--ts-review`. Include the existing Grade A (or equivalent review documented on the Grade A scale), structure identity and assigned reaction coordinate. Add a top-level `correction_review` object in this file, including when using a copy of an existing audit as its envelope. Keep the original audit immutable. A raw-spectrum grade alone cannot establish how a separate provider assembled a Gibbs correction.
+
+| Field in correction_review | Reviewed evidence |
+|---|---|
+| record_id, value_sha256 | ID of the supplied TS correction and the digest of its exact `value` object from `scripts.artifact_io.sha256_json(record["value"])` |
+| model_description, model_phase, thermal_basis | Documented treatment, phase (`adsorbate` or `gas`) and the basis named in the supplied correction |
+| reaction_coordinate_treatment, imaginary_mode_excluded | `excluded_from_partition_function` and JSON `true`, confirming exclusion in the supplied values |
+| gibbs_includes_zpe, enthalpy_increment_excludes_zpe | Both JSON `true` for a Gibbs calculation. ZPE occurs once in Gibbs; the finite-temperature enthalpy increment excludes it. |
+| temperature_k, standard_state | Match the supplied correction's temperature and convention for a Gibbs calculation |
+
+Only the first three rows apply to a ZPE-only operation. The adapter consumes the reviewed numbers as supplied and checks the component sum. It applies no second subtraction for ZPE or the reaction coordinate. Missing Gibbs conventions can leave a separately supported ZPE usable.
 
 ## Components and conventions
 

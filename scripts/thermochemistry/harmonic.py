@@ -26,7 +26,7 @@ def oscillator(quantum, temperature):
 def harmonic(frequencies, *, temperature=None, scale=1.0, scaling_reference=None,
              excluded_mode=None, mode_sigma_cm1=None):
     scale = finite_number(scale, "frequency scale", positive=True)
-    if scale != 1.0 and not scaling_reference:
+    if scale != 1.0 and not (isinstance(scaling_reference, str) and scaling_reference.strip()):
         raise ValueError("Frequency scaling requires a reference")
     if temperature is not None:
         temperature = finite_number(temperature, "temperature", positive=True)

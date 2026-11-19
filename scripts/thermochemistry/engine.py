@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import math
 
+from scripts.artifact_io import sha256_json
 from scripts.scientific_intake import AVAILABLE, STATES, report
 from scripts.scientific_validation import validate_finite_tree
 from scripts.thermochemistry.harmonic import add_ideal_gas, harmonic
@@ -23,15 +24,37 @@ def ts_binding(review):
             "structure_identity": state["structure"]["sha256"], "assignment": mode["assignment"],
             "mode_index": mode["index"], "frequencies_cm1": review["signed_modes_cm1"],
             "atom_map": state["frequency_active_atoms"], "constraints": state["frequency_constraints"],
-            "source_artifact_hash": state["frequency_output"]["sha256"]}
+            "source_artifact_hash": state["frequency_output"]["sha256"],
+            "correction_review": review.get("correction_review")}
 
 
-def reviewed_mode(record, binding):
+def check_ts_correction(record, review, operation):
+    value = record["value"]
+    if not isinstance(review, dict) or review.get("record_id") != record["id"]:
+        raise ValueError("Missing TS correction review for this record")
+    if review.get("value_sha256") != sha256_json(value) or review.get("thermal_basis") != value["thermal_basis"]:
+        raise ValueError("TS correction values or thermal basis differ from the review")
+    description = review.get("model_description")
+    if review.get("model_phase") not in ("adsorbate", "gas") or not isinstance(description, str) or not description.strip():
+        raise ValueError("TS correction review needs the model and its phase scope")
+    if (review.get("reaction_coordinate_treatment") != "excluded_from_partition_function"
+            or review.get("imaginary_mode_excluded") is not True):
+        raise ValueError("TS correction review must confirm exclusion of the assigned imaginary mode")
+    if operation == "zpe":
+        return
+    if review.get("gibbs_includes_zpe") is not True or review.get("enthalpy_increment_excludes_zpe") is not True:
+        raise ValueError("TS correction review must confirm Gibbs includes ZPE once and thermal enthalpy excludes ZPE")
+    if review.get("temperature_k") != value["temperature_k"] or review.get("standard_state") != value["standard_state"]:
+        raise ValueError("TS correction temperature or standard state differs from the review")
+
+
+def reviewed_mode(record, binding, operation="thermochemistry"):
     v = record["value"]
     if (binding.get("grade") != "A" or not binding.get("review_reference") or not binding.get("assignment")
             or binding.get("structure_identity") != v["structure_identity"]):
         raise ValueError("Missing matching Grade A TS structure and assigned reaction-coordinate review")
     if record["kind"] == "corrections":
+        check_ts_correction(record, binding.get("correction_review"), operation)
         return None
     digest = record.get("provenance", {}).get("source_artifact_hash")
     if digest and binding.get("source_artifact_hash") != digest:
@@ -76,12 +99,18 @@ def state_correction(record, binding, operation, conditions, default_phase):
     value = record["value"]
     model = record.get("thermal_model", {})
     phase = model.get("phase", default_phase)
-    index = reviewed_mode(record, binding) if record["state"] == "TS" else None
+    index = reviewed_mode(record, binding, operation) if record["state"] == "TS" else None
     temp, standard, pressure = conditions
     if record["kind"] == "corrections":
         if model.get("pressure_pa") is not None and pressure is not None and model["pressure_pa"] != pressure:
             raise ValueError("Precomputed correction pressure differs from the requested pressure")
         result = precomputed(record, operation)
+        if record["state"] == "TS":
+            review = binding["correction_review"]
+            if phase and phase != review["model_phase"]:
+                raise ValueError("TS correction model phase differs from the review")
+            phase = review["model_phase"]
+            result["correction_review"] = review
     else:
         result = harmonic(value["frequencies_cm1"], temperature=temp if operation != "zpe" else None,
                           scale=model.get("frequency_scale", 1), scaling_reference=model.get("scaling_reference"),
@@ -115,10 +144,57 @@ def differences(values):
             "reaction": values["FS"] - values["IS"]}
 
 
+def validate_subspace(record, structure, phase):
+    """Check the spectrum against this geometry's Hessian, in its own atom numbering."""
+    v = record["value"]
+    model = record.get("thermal_model", {})
+    if v["structure_identity"] != structure["value"]["identity"]:
+        raise ValueError("Hessian and selected structure identity differ")
+    indices = v["atom_map"]
+    dimension = v["expected_modes"]
+    if dimension != len(v["frequencies_cm1"]) or dimension > 3 * len(indices):
+        raise ValueError("Spectrum dimension disagrees with its Hessian active degrees of freedom")
+    supplied_flags = [f for f in (structure.get("thermal_model", {}).get("hessian_cartesian_flags"),
+                                  model.get("hessian_cartesian_flags")) if f is not None]
+    prefix = "Cartesian flags by atom: "
+    if v["constraints"].startswith(prefix):
+        supplied_flags.append(v["constraints"][len(prefix):].split())
+    if not supplied_flags:
+        validation = record["validation"]
+        return (validation["validation_status"] == "validated" and bool(validation.get("validation_method"))
+                and {"atom_map", "hessian_dimension", "structure_identity"} <= set(validation["validated_properties"]))
+    flags = supplied_flags[0]
+    if any(other != flags for other in supplied_flags[1:]):
+        raise ValueError("Spectrum Cartesian constraints disagree with the structure's Hessian flags")
+    if any(len(row) != 3 or set(row) - {"T", "F"} for row in flags):
+        raise ValueError("Invalid Hessian Cartesian flags")
+    if sorted(indices) != [i for i, row in enumerate(flags) if "T" in row]:
+        raise ValueError("State active atom map disagrees with its structure's Hessian flags")
+    expected = sum(row.count("T") for row in flags)
+    if model.get("phase", phase) == "gas":
+        if any(row != "TTT" for row in flags):
+            raise ValueError("Gas internal-mode projection requires the full molecule")
+        # Geometry fixes the 5/6 projected coordinates. Moments may be absent for ZPE-only data.
+        moments = model.get("moments_amu_angstrom2")
+        reductions = {5, 6} if moments is None else {5 if len(moments) == 1 else 6}
+        if expected - dimension not in reductions:
+            raise ValueError("Gas spectrum dimension disagrees with the internal-mode projection")
+    elif dimension != expected:
+        raise ValueError("Spectrum dimension disagrees with the structure's active Cartesian degrees of freedom")
+    return True
+
+
 def compare_subspaces(corrections):
-    raw = [r for r in corrections.values() if r is not None and r["route"] == "spectrum"]
-    if len({(tuple(r["atom_map"]), r["constraints"], r["scale"]) for r in raw}) > 1:
-        return "Raw states use different active maps, constraints or frequency scales"
+    raw = [r for r in corrections.values() if r and r["route"] == "spectrum"]
+    if len({r["scale"] for r in raw}) > 1:
+        undocumented = [r["record_id"] for r in raw if not (r["scaling_reference"] or "").strip()]
+        if undocumented:
+            return "Different frequency scales need a rationale for each state: " + ", ".join(undocumented)
+    scopes = {(tuple(r["atom_map"]), r["constraints"], len(r["frequencies_cm1"])) for r in raw}
+    if len(scopes) > 1:
+        missing = [r["record_id"] for r in raw if not r["subspace_verified"]]
+        if missing:
+            return "Differing active maps or subspaces need state-specific mapping evidence for " + ", ".join(missing)
     return None
 
 
@@ -135,6 +211,28 @@ def reaction_result(energies, corrections, energy_sigmas, independent):
         sigmas[label] = math.hypot(*errors) if independent and None not in errors else None
     return {"electronic_ev": elec, "thermal_ev": thermal, "free_energy_ev": free, "closure_residual_ev": residual,
             "free_energy_sigma_ev": sigmas, "assume_independent_energy_errors": independent}
+
+
+def assess_state(record, structure, binding, operation, conditions, phase):
+    raw = record["kind"] == "spectrum"
+    try:
+        verified = validate_subspace(record, structure, phase) if raw else False
+    except ValueError as error:
+        return None, str(error)
+    issue = None
+    try:
+        result = state_correction(record, binding, operation, conditions, phase)
+    except ValueError as error:
+        issue = str(error)
+        if operation == "zpe":
+            return None, issue
+        try:
+            result = state_correction(record, binding, "zpe", conditions, phase)
+        except ValueError:
+            return None, issue
+    if raw:
+        result["subspace_verified"] = verified or record["state"] == "TS"
+    return result, issue
 
 
 def calculate(documents, *, operation="thermochemistry", ts_review=None, phase=None, independent_errors=False):
@@ -162,15 +260,10 @@ def calculate(documents, *, operation="thermochemistry", ts_review=None, phase=N
         if not route or not fields[f"{state}.structure"]["usable"]:
             continue
         record = by_id[fields[route]["selected"]]
-        try:
-            corrections[state] = state_correction(record, binding, operation, conditions, phase)
-        except ValueError as error:
-            problems.append(f"{state}: {error}")
-            if operation == "thermochemistry":
-                try:
-                    corrections[state] = state_correction(record, binding, "zpe", conditions, phase)
-                except ValueError:
-                    pass  # The original diagnostic also applies to this narrower operation.
+        structure = by_id[fields[f"{state}.structure"]["selected"]]
+        corrections[state], issue = assess_state(record, structure, binding, operation, conditions, phase)
+        if issue:
+            problems.append(f"{state}: {issue}")
     mismatch = compare_subspaces(corrections)
     if mismatch:
         problems.append(mismatch)

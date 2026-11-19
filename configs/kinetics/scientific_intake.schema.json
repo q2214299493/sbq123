@@ -937,6 +937,11 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
+        "hessian_cartesian_flags": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "pattern": "^[TF]{3}$"}
+        },
         "phase": {
           "enum": [
             "adsorbate",

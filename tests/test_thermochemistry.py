@@ -6,7 +6,8 @@ from pathlib import Path
 import pytest
 
 from scripts.thermochemistry.engine import calculate
-from scripts.scientific_intake import validator
+from scripts.artifact_io import sha256_json
+from scripts.scientific_intake import report, validator
 from scripts.thermochemistry.frequencies import draft_intake, parse_outcar
 from scripts.thermochemistry.harmonic import CM1_EV, KB, add_ideal_gas, harmonic
 
@@ -39,6 +40,15 @@ def synthetic_upload(doc, states=("IS", "FS")):
                                structure_identity=identity, thermal_basis=basis)
         records.append(record)
     return {"schema_version": 1, "reaction_id": doc["reaction_id"], "records": records}
+
+
+def correction_review(record):
+    value = record["value"]
+    return {"record_id": record["id"], "value_sha256": sha256_json(value), "thermal_basis": value["thermal_basis"],
+            "model_phase": "adsorbate", "model_description": "Synthetic local harmonic active-subspace correction",
+            "reaction_coordinate_treatment": "excluded_from_partition_function", "imaginary_mode_excluded": True,
+            "gibbs_includes_zpe": True, "enthalpy_increment_excludes_zpe": True,
+            "temperature_k": value.get("temperature_k"), "standard_state": value.get("standard_state")}
 
 
 def test_exact_si_and_analytical_partition_function():
@@ -197,10 +207,15 @@ def test_only_precomputed_with_independent_uncertainty():
             r["thermal_model"] = {"electronic_sigma_ev": 0.02}
     for r in up["records"]:
         r["thermal_model"] = {"gibbs_sigma_ev": 0.01}
-    r = calculate([doc, up], ts_review=review(), independent_errors=True)
+    ts = up["records"][1]
+    ts_review = {"grade": "A", "review_reference": "synthetic external Grade A review",
+                 "structure_identity": ts["value"]["structure_identity"], "assignment": "fixture reaction coordinate",
+                 "correction_review": correction_review(ts)}
+    r = calculate([doc, up], ts_review=ts_review, independent_errors=True)
     assert r["status"] == "complete"
     assert r["reaction"]["free_energy_sigma_ev"]["forward"] == pytest.approx(math.sqrt(0.001))
     assert all(s["route"] == "corrections" for s in r["states"].values())
+    assert r["states"]["TS"]["gibbs_correction_ev"] == ts["value"]["gibbs_correction_ev"]
 
 
 def test_zpe_only_and_raw_subspace_mismatch():
@@ -218,3 +233,173 @@ def test_zpe_only_and_raw_subspace_mismatch():
     r = calculate([doc, {"schema_version": 1, "reaction_id": doc["reaction_id"], "records": up["records"][1:]}],
                   operation="zpe", ts_review=review())
     assert any("active maps" in item for item in r["issues"])
+
+
+def multispecies_fixture():
+    # Local numbering and constrained Cartesian axes intentionally differ per state.
+    states = {"IS": (["FFF", "TTF"], [1], [160, 220], 0.98),
+              "TS": (["TTT", "FTF"], [0, 1], [300, 350, 400, -230], 0.96),
+              "FS": (["TFF", "FTF", "FFT"], [0, 1, 2], [210, 310, 410], 1)}
+    records = []
+    for state, (flags, indices, modes, scale) in states.items():
+        identity = f"synthetic-structure-{state}"
+        values = {"structure": {"identity": identity, "reference": identity},
+                  "spectrum": dict(structure_identity=identity, method="fixture Hessian", atom_map=indices,
+                                   expected_modes=len(modes), constraints="species-local active coordinates",
+                                   frequencies_cm1=modes, thermal_basis="fixture-common-local-harmonic"),
+                  "electronic_energy": dict(structure_identity=identity, value_ev=1.0, energy_reference="fixture")}
+        for kind, value in values.items():
+            record = {"id": f"{state}-{kind}", "state": state, "kind": kind, "value": value,
+                      "mode": "USER_PROVIDED", "acceptance": {"acceptance_status": "pending"},
+                      "validation": dict(validation_status="validated", validated_properties=[kind],
+                                         validation_method="numerical fixture", compatibility_status="compatible",
+                                         limitations=[])}
+            if kind == "structure":
+                record["thermal_model"] = {"hessian_cartesian_flags": flags}
+            elif kind == "spectrum":
+                record["thermal_model"] = {"frequency_scale": scale, "scaling_reference": f"{state} calibration"}
+            records.append(record)
+    for kind, value in (("temperature", {"kelvin": 325}), ("standard_state", {"convention": "fixture-surface"})):
+        record = copy.deepcopy(records[-1])
+        record.update(id=kind, kind=kind, state="reaction", value=value)
+        record["validation"]["validated_properties"] = [kind]
+        records.append(record)
+    doc = {"schema_version": 1, "reaction_id": "synthetic-multispecies", "records": records}
+    ts = next(r for r in records if r["id"] == "TS-spectrum")["value"]
+    binding = dict(grade="A", assignment="synthetic reaction coordinate", review_reference="fixture TS decision",
+                   mode_index=4, **{k: ts[k] for k in ("structure_identity", "frequencies_cm1", "constraints", "atom_map")})
+    return doc, binding
+
+
+def test_multispecies_maps_counts_constraints_and_scaling():
+    doc, binding = multispecies_fixture()
+    # A reviewed spectrum upload can carry the flags for an existing immutable structure.
+    records = {r["id"]: r for r in doc["records"]}
+    records["FS-spectrum"]["thermal_model"].update(records["FS-structure"].pop("thermal_model"))
+    r = calculate([doc], ts_review=binding, phase="adsorbate")
+    assert r["status"] == "complete" and abs(r["reaction"]["closure_residual_ev"]) < 1e-12
+    for state, count, scale in (("IS", 2, 0.98), ("TS", 3, 0.96), ("FS", 3, 1)):
+        result = r["states"][state]
+        assert len(result["included_modes_one_based"]) == count
+        assert result["subspace_verified"] and result["scale"] == scale
+        assert result["scaling_reference"] == f"{state} calibration"
+        expected = 0.5 * CM1_EV * scale * sum(v for v in result["frequencies_cm1"] if v > 0)
+        assert result["zpe_ev"] == pytest.approx(expected)
+
+
+@pytest.mark.parametrize("fault", ["structure", "out_of_range", "wrong_axes", "wrong_dimension", "basis",
+                                   "scale_reference", "blank_reference", "unit_scale_reference", "energy_reference"])
+def test_invalid_local_evidence_or_common_reference(fault):
+    doc, binding = multispecies_fixture()
+    records = {r["id"]: r for r in doc["records"]}
+    r = records["IS-spectrum"]
+    if fault == "structure":
+        r["value"]["structure_identity"] = "some other structure"
+    elif fault == "out_of_range":
+        r["value"]["atom_map"] = [10]
+    elif fault == "wrong_axes":
+        r["value"]["constraints"] = "Cartesian flags by atom: FFF FTT"
+    elif fault == "wrong_dimension":
+        r["value"].update(expected_modes=1, frequencies_cm1=[160])
+    elif fault == "basis":
+        r["value"]["thermal_basis"] = "incompatible-full-slab"
+    elif fault == "energy_reference":
+        records["FS-electronic_energy"]["value"]["energy_reference"] = "incompatible functional"
+    elif fault == "scale_reference":
+        del r["thermal_model"]["scaling_reference"]
+    elif fault == "unit_scale_reference":
+        del records["FS-spectrum"]["thermal_model"]["scaling_reference"]
+    else:
+        r["thermal_model"]["scaling_reference"] = "  "
+    result = calculate([doc], ts_review=binding, phase="adsorbate")
+    assert result["status"] == "partial" and result["reaction"] is None
+
+
+def test_external_reviewed_map_without_cartesian_flags():
+    doc, binding = multispecies_fixture()
+    for record in doc["records"]:
+        if record["kind"] == "structure":
+            del record["thermal_model"]
+        if record["kind"] == "spectrum":
+            record["validation"]["validated_properties"] += ["structure_identity", "atom_map", "hessian_dimension"]
+    assert calculate([doc], ts_review=binding, phase="adsorbate")["status"] == "complete"
+
+
+@pytest.mark.parametrize("fault", ["absent", "treatment", "imaginary", "enthalpy", "gibbs", "model", "basis",
+                                   "temperature", "standard", "digest", "wrong_record", "grade", "phase"])
+def test_precomputed_ts_requires_scoped_processing_review(fault):
+    doc = case()
+    up = synthetic_upload(doc, ("IS", "TS", "FS"))
+    doc["records"].remove(spectrum(doc))
+    details = correction_review(up["records"][1])
+    binding = dict(review(), correction_review=details)
+    changes = {"treatment": ("reaction_coordinate_treatment", "take absolute frequency"),
+               "imaginary": ("imaginary_mode_excluded", False), "enthalpy": ("enthalpy_increment_excludes_zpe", False),
+               "gibbs": ("gibbs_includes_zpe", False), "model": ("model_description", ""),
+               "basis": ("thermal_basis", "another basis"), "temperature": ("temperature_k", 310),
+               "standard": ("standard_state", "another standard"), "digest": ("value_sha256", "0" * 64),
+               "wrong_record": ("record_id", "unrelated"), "phase": ("model_phase", "gas")}
+    if fault == "absent":
+        del binding["correction_review"]
+    elif fault == "grade":
+        binding["scientific_review_sources"]["TS"]["grade"] = binding["ts_mode_review"]["grade"] = "B"
+    else:
+        key, value = changes[fault]
+        details[key] = value
+    result = calculate([doc, up], ts_review=binding, phase="adsorbate")
+    assert result["reaction"] is None and result["status"] == "partial"
+    assert any("TS:" in problem for problem in result["issues"])
+
+
+def test_precomputed_ts_zpe_only_needs_only_applicable_conventions():
+    doc = case()
+    up = synthetic_upload(doc, ("IS", "TS", "FS"))
+    doc["records"].remove(spectrum(doc))
+    ts = up["records"][1]
+    ts["value"] = {k: ts["value"][k] for k in ("zpe_ev", "structure_identity", "thermal_basis")}
+    detail = correction_review(ts)
+    for key in ("temperature_k", "standard_state", "gibbs_includes_zpe", "enthalpy_increment_excludes_zpe"):
+        del detail[key]
+    result = calculate([doc, up], ts_review=dict(review(), correction_review=detail), operation="zpe")
+    assert result["status"] == "complete" and result["states"]["TS"]["zpe_ev"] == ts["value"]["zpe_ev"]
+    assert result["states"]["TS"]["gibbs_correction_ev"] is None
+
+
+def test_chco_against_archived_phase22_validation():
+    archived = json.loads((REPORTS / "phase2_2_chco_validation.json").read_bytes())["calculation"]
+    doc = case()
+    current = calculate([doc], phase="adsorbate", ts_review=review())
+    assert current["electronic_sources"] == archived["electronic_sources"]
+    assert current["electronic_ev"] == archived["electronic_ev"]
+    ts = current["states"]["TS"]
+    assert ts["zpe_ev"] == archived["states"]["TS"]["zpe_ev"] == pytest.approx(0.51405165)
+    assert ts["excluded_reaction_coordinate_one_based"] == 12
+    assert ts["ts_review_reference"] == archived["states"]["TS"]["ts_review_reference"]
+    assert current["states"]["IS"] is current["states"]["FS"] is current["reaction"] is None
+    assert report([doc], "kinetic_handoff")["mkm_status"] == "blocked"
+
+
+def test_cartesian_flags_and_gas_internal_projection_for_zpe():
+    doc, binding = multispecies_fixture()
+    records = {r["id"]: r for r in doc["records"]}
+    structure = records["IS-structure"]
+    del structure["thermal_model"]
+    r = records["IS-spectrum"]
+    r["thermal_model"].update(phase="gas", moments_amu_angstrom2=[1.2])
+    r["value"].update(atom_map=[0, 1], expected_modes=1, frequencies_cm1=[160],
+                      constraints="Cartesian flags by atom: TTT TTT")
+    assert calculate([doc], ts_review=binding, operation="zpe")["status"] == "complete"
+    r["value"]["constraints"] = "Cartesian flags by atom: TTF TTT"
+    result = calculate([doc], ts_review=binding, operation="zpe")
+    assert result["states"]["IS"] is None and any("full molecule" in i for i in result["issues"])
+
+
+def test_missing_gibbs_convention_preserves_separately_reviewed_zpe():
+    doc = case()
+    up = synthetic_upload(doc, ("IS", "TS", "FS"))
+    doc["records"].remove(spectrum(doc))
+    detail = correction_review(up["records"][1])
+    del detail["enthalpy_increment_excludes_zpe"]
+    r = calculate([doc, up], ts_review=dict(review(), correction_review=detail))
+    assert r["reaction"] is None and r["states"]["TS"]["gibbs_correction_ev"] is None
+    assert r["states"]["TS"]["zpe_ev"] == up["records"][1]["value"]["zpe_ev"]

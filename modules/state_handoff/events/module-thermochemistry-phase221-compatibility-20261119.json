@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "event_id": "module-thermochemistry-phase221-compatibility-20261119",
+  "event_type": "module_gate_changed",
+  "entity": {
+    "kind": "module",
+    "id": "thermochemistry",
+    "module": "thermochemistry"
+  },
+  "occurred_at": "2026-11-19T10:32:05.741730+00:00",
+  "recorded_at": "2026-11-19T10:32:05.741730+00:00",
+  "summary": "Validate state-specific Hessian compatibility and require correction-bound TS processing review.",
+  "payload": {
+    "module": "thermochemistry",
+    "status": "Active",
+    "depends_on": "reviewed compatible state evidence, TS assignment and conditions",
+    "current_gate": "Reviewed local subspaces and documented state-specific scales can differ under a common physical basis. Precomputed TS corrections need Grade A and bound exclusion/ZPE conventions. Fe110 electronic barriers and TS local ZPE are unchanged. Obtain compatible endpoint evidence and conditions for reaction free energies."
+  },
+  "evidence": [
+    {
+      "locator": "scripts/thermochemistry/engine.py",
+      "sha256": "d094bd0f456647dd05d000bdddcc92ece39cb43d9a4dbb9e00136e54c87d9fbb",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T10:32:05.741730+00:00"
+    },
+    {
+      "locator": "scripts/thermochemistry/harmonic.py",
+      "sha256": "bcba78738e51ba8b6035f728657c8ff65a3dc6527669af14dbc16f744f01e7c5",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T10:32:05.741730+00:00"
+    },
+    {
+      "locator": "configs/kinetics/scientific_intake.schema.json",
+      "sha256": "45dc70815b0e9ec072909f32bb634859b2c9d50c4dc2f556fed0437d9193e9ec",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T10:32:05.741730+00:00"
+    },
+    {
+      "locator": "tests/test_thermochemistry.py",
+      "sha256": "94446e87fbf9471ace7516dd5c2b6f17fbb6e87f65e112166ec0c4b4a1e5ad0e",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T10:32:05.741730+00:00"
+    },
+    {
+      "locator": "modules/thermochemistry/README.md",
+      "sha256": "56a1eb0ed7c3c0cb87ba86913cacbe5bf0fbda7b0be2be0976a10866e0426c68",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T10:32:05.741730+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_2_1_completion.md",
+      "sha256": "bbf28e954d8fac9c5ad3a04c430abc5395859b2d77356ac61490b3e93e7ad90a",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T10:32:05.741730+00:00"
+    }
+  ],
+  "supersedes": [
+    "module-thermochemistry-phase22-engine-chco-20261119"
+  ],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "cross_module_change"
+    ],
+    "status": "pending"
+  }
+}
