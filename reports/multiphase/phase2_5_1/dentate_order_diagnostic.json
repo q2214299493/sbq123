@@ -1,0 +1,18 @@
+{
+  "purpose": "Phase 2.5 native counterexample for typed bidentate leg order, synthetic only. Phase 2.5.1 rejects this input before staging.",
+  "case": "same dent dataset as dent.zip, reversed seed indices [2,1]",
+  "baseline": "c6b646879876f89bea1c39dcaa4aff1e50c96268",
+  "executable_sha256": "84a8f88d6df633eeea9eeac8aa9227237cdf2564a4dc72e0cab8a18c4ce119d2",
+  "input_hashes": {
+    "energetics_input.dat": "a9034d0d147ea36298101727ef62ecede67ac7f15306e3eb58794b7e43c5f288",
+    "lattice_input.dat": "041747579adc213be762c4945862a71396c90465c4059660ac6d773c9d848362",
+    "mechanism_input.dat": "4990838be52ff20a446271c9f25180b16011b77a72821f264a58e00e75236a1f",
+    "simulation_input.dat": "7441a648b4526d796f2b5995bbb50a3e5c4b550c269b55d9309f74c15b2ecbc9",
+    "state_input.dat": "f15a8dd2be64486873997ff0473f36f704bed3b9d85159eb3ff3d5ea02f25f40"
+  },
+  "general_output_sha256": "3a56c2ff3a2c478c35b6edf305d47d842315a675404f4a71ec90b0d54b101ee5",
+  "native_initial_matches": 15,
+  "normal_termination": true,
+  "expected_with_reviewed_leg_order": 16,
+  "consequence": "15 vacant-pair adsorption placements survived. The one reverse desorption for the seeded molecule was lost."
+}

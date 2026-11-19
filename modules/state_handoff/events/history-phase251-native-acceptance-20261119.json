@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "event_id": "history-phase251-native-acceptance-20261119",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-phase251-native-acceptance-20261119",
+    "module": "baseline_mkm"
+  },
+  "occurred_at": "2026-11-19T14:55:33.818087+00:00",
+  "recorded_at": "2026-11-19T14:55:33.818087+00:00",
+  "summary": "Record the authorized November CATKINAS target and control outcomes and advanced Zacros 4.0 validation.",
+  "payload": {
+    "markdown": "- Phase 2.5.1: the authorized November CATKINAS P-code read the archived two-site equation and failed during symbolic rate-law construction. Its independent vendor control reproduced all ten reference coefficients. Zacros 4.0 validated seeded states, pair energetics and exact checkpoint continuation on synthetic lattices. Both worktrees passed 462 tests and isolated-wheel CLI checks. Real Fe(110) remains blocked. See reports/multiphase/phase2_5_1_completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "reports/multiphase/phase2_5_1_completion.md",
+      "sha256": "d9e71a64916899d140257a89f4aeb02c6a5834920c5da538419d70369907d1a1",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T14:55:33.818087+00:00"
+    },
+    {
+      "locator": "configs/postprocessing_software.yaml",
+      "sha256": "fb4854bcece0abab5e83c6d9aa44824fc9d93c722f66cb67c18c93734c182529",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T14:55:33.818087+00:00"
+    },
+    {
+      "locator": "modules/surface_kmc/README.md",
+      "sha256": "cb7a6b8388f2d589d250723146c2722aca0f7be86a203e5818da9704d9a51ee3",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T14:55:33.818087+00:00"
+    },
+    {
+      "locator": "modules/baseline_mkm/README.md",
+      "sha256": "07dc3092eb2232ec7557d301a28a016b189cc9a433c491fc52a19916dc9caada",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T14:55:33.818087+00:00"
+    },
+    {
+      "locator": "scripts/surface_kmc/native.py",
+      "sha256": "66e6dfa1156b206462c9758df17058af91f2082b01ff913066bc9b7930b17140",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T14:55:33.818087+00:00"
+    },
+    {
+      "locator": "scripts/native_model.py",
+      "sha256": "ba27347021d5621bff22cb3940df88d0a7840efcc8115bc3caff81af5d606783",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T14:55:33.818087+00:00"
+    },
+    {
+      "locator": "tests/test_native_advanced.py",
+      "sha256": "b5d11f69b4c3e49b63d38fdfb809cdc12348d06f76e9a738ef6061e4e0aef338",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T14:55:33.818087+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_1/benchmarks/.gitignore",
+      "sha256": "a5dc9e8fe51bbe6f68dace37f995364f8748b187dc7b364b9b807aa5a13d85d8",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T14:55:33.818087+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_1/benchmarks/attractive.zip",
+      "sha256": "29028e0369f6b98f1214457d643a2bec38ac3a24df3bc2cf0af7a1b466975ad7",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T14:55:33.818087+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_1/benchmarks/continuous.zip",
+      "sha256": "6cb042ef80a8cf5c7ed32d1142581f99a9ed733c41f72887f94f759f4fc852c5",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T14:55:33.818087+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_1/benchmarks/dent.zip",
+      "sha256": "ec21a9ee721954d21a04956c6291833b571a888a76ee1fa4c783fbce8331b1a1",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T14:55:33.818087+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_1/benchmarks/full.zip",
+      "sha256": "21b8444d6f8b92e013bed75c7f03d8b270066811ffbba6052d0389d890873649",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T14:55:33.818087+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_1/benchmarks/interacting.zip",
+      "sha256": "c0b78aa900b9c907b13e0ba2fab018b77fa64b60e128606922821ebcaa6c6652",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T14:55:33.818087+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_1/benchmarks/mono.zip",
+      "sha256": "a2593f79f35fb9158b29299078653b6c8c0ecc8c450b65be9d79a50c40f92776",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T14:55:33.818087+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_1/benchmarks/resume.zip",
+      "sha256": "6613c61f8aed7656d6b7295c01847c0c1c6e163c54ea2667240759e5fe9a46d7",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T14:55:33.818087+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_1/benchmarks/split.zip",
+      "sha256": "1cf32a9222b492fdc7f1b08123d88484d88c23906f727907d64e194952b8ac69",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T14:55:33.818087+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_1/capabilities.md",
+      "sha256": "563497dcc693b98735e8697ac8482ceeda0b72b2131710141b7742586186f2fd",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T14:55:33.818087+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_1/catkinas_compatibility.json",
+      "sha256": "63e9757fce5f8c2ee91914225b9ec86b3278b3ebb26fa1358a50ee5e1d5ccf6c",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T14:55:33.818087+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_1/catkinas_environment_control.json",
+      "sha256": "61e9b3608725f48d0b53625253a11d498e736dfbbcf1ba6a644c9e7386848bac",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T14:55:33.818087+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_1/catkinas_target_attempt.json",
+      "sha256": "b654b1074cffff7fd695ba75ef6e66e5d4df1d728f38cb5ae63bbe9691bf483e",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T14:55:33.818087+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_1/catkinas_target_console.txt",
+      "sha256": "76909976fca6032977c7097940999403687421896c77e061226cf5d1eb46f6f9",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T14:55:33.818087+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_1/dentate_order_diagnostic.json",
+      "sha256": "90484fc9b688fd8a2476b77f5e8e7c5c2f7e288bd7d4229ea4c8228fcfba7366",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T14:55:33.818087+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_1/zacros_validation.json",
+      "sha256": "cd729ced9cdf93ed2a8bb0a92fab556aee8345cea520356dfe9d95e0cc778359",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T14:55:33.818087+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

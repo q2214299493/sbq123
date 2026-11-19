@@ -146,8 +146,23 @@ def energetics(c, dataset, species, names, nodes, graph):
     return lines+["end_energetics"]
 
 
-def state_input(c, species, names, nodes, graph):
+def event_leg_orders(events):
+    """Zacros numbers a molecule's legs in local-pattern order on each side."""
+    orders = defaultdict(set)
+    for event in events:
+        for side in ("initial", "final"):
+            entities = defaultdict(list)
+            for site, slot in zip(event["site_ids"], event[side], strict=True):
+                if slot:
+                    entities[tuple(slot)].append(site)
+            for (sid, _), labels in entities.items():
+                orders[sid].add(tuple(labels))
+    return orders
+
+
+def state_input(c, species, names, nodes, graph, events):
     lines, occupied = ["initial_state"], set()
+    orders = event_leg_orders(events)
     # Zacros numbers basis sites consecutively inside each replicated cell.
     ordered = sorted(nodes)
     for sid, indices in c["seeds"]:
@@ -156,6 +171,8 @@ def state_input(c, species, names, nodes, graph):
         sites = [ordered[i-1] for i in indices]
         if len(set(sites)) != len(sites) or occupied.intersection(sites) or Counter(nodes[s] for s in sites) != species[sid]["site_occupancy"]:
             raise ValueError("Overlapping seed or incorrect footprint")
+        if orders[sid] and tuple(nodes[s] for s in sites) not in orders[sid]:
+            raise ValueError("Seed dentate order differs from the reviewed local event patterns")
         connected = {sites[0]}
         for _ in sites:
             connected |= {s for s in sites if graph[s] & connected}
@@ -177,7 +194,7 @@ def render(table, config, dataset):
              "lattice_input.dat": lat, "mechanism_input.dat": mech,
              "energetics_input.dat": energetics(c, dataset, species, names, nodes, graph)}
     if c["seeds"]:
-        files["state_input.dat"] = state_input(c, species, names, nodes, graph)
+        files["state_input.dat"] = state_input(c, species, names, nodes, graph, events)
     return {name: "\n".join(lines)+"\n" for name, lines in files.items()}, {"species_names": names, "site_count": len(nodes),
             "gas_indices": {s: i for i, s in enumerate(sorted(c["gas"]), 1)},
             "surface_indices": {s: i for i, s in enumerate(sorted(c["surface_aliases"]), 1)},

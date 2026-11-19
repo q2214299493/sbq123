@@ -1,0 +1,60 @@
+{
+  "scope": "Exact Phase 2.5 two-site input; bounded unsuccessful numerical attempt",
+  "software": {
+    "source": "D:/CATKINAS.p supplied by researcher after authenticated vendor download; Zone.Identifier HostUrl and ReferrerUrl both www.catkinas.com. Original old installation preserved.",
+    "sha256": "2b70a3511a19065f843b65d8601874700dd792e8d31d620046ef3805df399ff0",
+    "size_bytes": 112182,
+    "self_reported_CATKINAS_version": "20230524",
+    "self_reported_compiler_time": "07-Nov-2026 11:57:47",
+    "matlab_runtime": "25.2.0.2998904 (R2025b)",
+    "isolated_copy_verified": true
+  },
+  "native_input_sha256": "1934e11eb1536aa4cd76023f8d8aaa6140b20ab28eb7caabab8ebc95e7a5d8f9",
+  "native_echo_sha256": "1934e11eb1536aa4cd76023f8d8aaa6140b20ab28eb7caabab8ebc95e7a5d8f9",
+  "wall_time_s": 85.45986500000436,
+  "outer_timeout_s": 240,
+  "exit_code": 1,
+  "timed_out": false,
+  "native_read": {
+    "started": true,
+    "echoed_exact_input": true,
+    "reversible_equations_read": 1,
+    "species_tokens": [
+      "H",
+      "H2"
+    ],
+    "site_tokens": [
+      "#1",
+      "#2"
+    ],
+    "equation": "H2 + #1 + #2 <-> H#1 + H#2",
+    "echoed_Ea_G0_eV": [
+      0.7853168271366968,
+      -0.1
+    ],
+    "forward_reverse_rate_laws_constructed": false,
+    "temperature_pressure_used_by_solver": null,
+    "native_result_Ea_G0_eV": null,
+    "native_kf_bar^-1_s^-1": null,
+    "native_kr_s^-1": null
+  },
+  "expected_kf_bar^-1_s^-1": 1062.5043325104702,
+  "expected_kr_s^-1": 58.396411910597834,
+  "first_warnings": [
+    "No total reaction found",
+    "Find off-line reaction: < 1 >"
+  ],
+  "terminal_error": "sym/privsubsasgn line 1175, assignment has a different number of elements on its two sides",
+  "source_of_failure": "Rate equation generation after parsing the isolated adsorption/desorption step. A single step stores H on the two inventories; at steady coverage its net flux must vanish. Vendor cause of the dimension mismatch remains unconfirmed.",
+  "native_output_hashes": {
+    "native_console.log": "85a2408958b2f91efea1de39973604d332993bf1efc7e32d155ad68dd2143d9e",
+    "invocation.json": "1c27ebcdaa37de73e123419ec965b331fafcc1eab974acce32ed4a334eb462ea",
+    "result_phase25/Input_phase25_1": "1934e11eb1536aa4cd76023f8d8aaa6140b20ab28eb7caabab8ebc95e7a5d8f9",
+    "result_phase25/log1": "53557d0d3aaa7acc7b014fcde08598acbb31e4dd3ceecc729e642f8ec96fefbc",
+    "result_phase25/log1.err": "00a3b398926157ea104e7ae5819a538b32c3711d60502457a9d717117eebdaa6"
+  },
+  "output_mat_files": [],
+  "local_full_byte_records": "archive/phase2_5_1_native_observations_20261119/target",
+  "published_console": "catkinas_target_console.txt (console text transcoded from GB18030; local directory redacted)",
+  "public_console_sha256": "76909976fca6032977c7097940999403687421896c77e061226cf5d1eb46f6f9"
+}

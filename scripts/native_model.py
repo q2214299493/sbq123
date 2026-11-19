@@ -78,6 +78,9 @@ def with_checkpoint(files, manifest, raw, receipt):
     if (not raw or receipt.get("model_sha256") != sha256_json(manifest)
             or receipt.get("checkpoint_sha256") != sha256_bytes(raw)):
         raise ValueError("Checkpoint receipt differs from requested model or bytes")
+    actual = {name: sha256_bytes(content.encode() if isinstance(content, str) else content) for name, content in files.items()}
+    if manifest["files"] != actual:
+        raise ValueError("Input files differ from the checkpoint-producing model")
     return dict(files, **{"restart.inf": raw}), dict(manifest, restart_receipt=receipt,
             files={**manifest["files"], "restart.inf": sha256_bytes(raw)})
 

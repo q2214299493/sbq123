@@ -50,4 +50,6 @@ Phase 2.5 builds a periodic lattice and translates approved directed rates and m
 
 ## Done Criteria
 
+Phase 2.5.1 validated seeded mono- and bidentate lattices, pair interaction energies, and exact fixed-seed checkpoint continuation on the installed Zacros 4.0 build. Seed indices must follow a reviewed local-event leg order when the event model distinguishes site types. The repulsive rate-response test also exposed native activation-energy warning 804010. See the [per-feature matrix and benchmark outputs](../../reports/multiphase/phase2_5_1/capabilities.md).
+
 The lattice/event model is traceable, detailed balance is checked, outputs are reproducible, and matched-condition comparison with baseline MKM exists.

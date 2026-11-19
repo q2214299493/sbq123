@@ -1,0 +1,398 @@
+{
+  "engine": "Zacros 4.0",
+  "executable_sha256": "84a8f88d6df633eeea9eeac8aa9227237cdf2564a4dc72e0cab8a18c4ce119d2",
+  "manual_sha256": "cc64e35121f1637d3a371330882d2a53816bb15f0c3ee4d9b3b6fd4bd557f846",
+  "outer_timeout_s": 30,
+  "native_wall_time_limit_s": 15,
+  "temperature_K": 400,
+  "seed": 13201,
+  "physical_catalyst_validated": false,
+  "cases": {
+    "mono": {
+      "archive": "benchmarks/mono.zip",
+      "archive_sha256": "a2593f79f35fb9158b29299078653b6c8c0ecc8c450b65be9d79a50c40f92776",
+      "native_args": [],
+      "exit_code": 0,
+      "input_generated": true,
+      "static_input_validation": true,
+      "native_read": [
+        "simulation",
+        "lattice",
+        "energetics",
+        "mechanism",
+        "initial state"
+      ],
+      "native_smoke_passed": true,
+      "native_events_reported": 20,
+      "native_initial_matches": 16,
+      "native_warning_codes": [
+        "4008"
+      ],
+      "first_record_event": 0,
+      "first_record_energy_eV": 0.0,
+      "first_record_species_counts": [
+        0,
+        1,
+        0
+      ],
+      "second_record_energy_eV": 0.0,
+      "second_record_time_s": 0.00021949199493676805,
+      "last_sample_event": 19,
+      "last_sample_energy_eV": 0.0,
+      "last_sample_species_counts": [
+        7,
+        8,
+        -7
+      ],
+      "input_manifest_sha256": "52a8d5fa615843239c4e5680853dfb86f216918cb6b97037ee06deccbbd04482",
+      "outputs_sha256": {
+        "console.log": "b20cdbcf5875ae3984a04a3a404ac1ad51dbad9ca62eab673591044be6ac0b97",
+        "general_output.txt": "b54b0dcdfce775ad25d78ac881174e30742fbee2a07e17b849cce29159a8a7c6",
+        "lattice_output.txt": "dccacd609c865b8739d17d5ca64c7eef5c1e9f6135328fd7660516b3c0a4728b",
+        "procstat_output.txt": "377359703b714bfd99a13fbed3a1c8ab275b17b8c44844bb0dfff290733e73fa",
+        "specnum_output.txt": "6d25d021a0f329ca8ec419b3f5e21f58641eebdf9ec225346550c152785ff27d"
+      }
+    },
+    "dent": {
+      "archive": "benchmarks/dent.zip",
+      "archive_sha256": "ec21a9ee721954d21a04956c6291833b571a888a76ee1fa4c783fbce8331b1a1",
+      "native_args": [],
+      "exit_code": 0,
+      "input_generated": true,
+      "static_input_validation": true,
+      "native_read": [
+        "simulation",
+        "lattice",
+        "energetics",
+        "mechanism",
+        "initial state"
+      ],
+      "native_smoke_passed": true,
+      "native_events_reported": 20,
+      "native_initial_matches": 16,
+      "native_warning_codes": [
+        "4008"
+      ],
+      "first_record_event": 0,
+      "first_record_energy_eV": 0.0,
+      "first_record_species_counts": [
+        1,
+        0,
+        0
+      ],
+      "second_record_energy_eV": 0.0,
+      "second_record_time_s": 0.00021949199493676805,
+      "last_sample_event": 19,
+      "last_sample_energy_eV": 0.0,
+      "last_sample_species_counts": [
+        8,
+        0,
+        -7
+      ],
+      "input_manifest_sha256": "fd153b0d8577a05c0fb6268fe37c04174168bff9ecbcf6c4d8f48deb417ba942",
+      "outputs_sha256": {
+        "console.log": "b20cdbcf5875ae3984a04a3a404ac1ad51dbad9ca62eab673591044be6ac0b97",
+        "general_output.txt": "1a3e34c8e41e5a8e379e235e37a7676b673eb6584aa804d0618fc1feb38726bf",
+        "lattice_output.txt": "dccacd609c865b8739d17d5ca64c7eef5c1e9f6135328fd7660516b3c0a4728b",
+        "procstat_output.txt": "a5c776e7473959c16ef1de9ae75e3f4571940e6730557559b499895a2ba36099",
+        "specnum_output.txt": "1d572977aa727aeced63772800bf70e016079d8648a60a6da944ec90aecfa4f1"
+      }
+    },
+    "full": {
+      "archive": "benchmarks/full.zip",
+      "archive_sha256": "21b8444d6f8b92e013bed75c7f03d8b270066811ffbba6052d0389d890873649",
+      "native_args": [],
+      "exit_code": 0,
+      "input_generated": true,
+      "static_input_validation": true,
+      "native_read": [
+        "simulation",
+        "lattice",
+        "energetics",
+        "mechanism",
+        "initial state"
+      ],
+      "native_smoke_passed": true,
+      "native_events_reported": 20,
+      "native_initial_matches": 18,
+      "native_warning_codes": [
+        "4008"
+      ],
+      "first_record_event": 0,
+      "first_record_energy_eV": 0.0,
+      "first_record_species_counts": [
+        9,
+        9,
+        0
+      ],
+      "second_record_energy_eV": 0.0,
+      "second_record_time_s": 0.0004450291388010103,
+      "last_sample_event": 19,
+      "last_sample_energy_eV": 0.0,
+      "last_sample_species_counts": [
+        6,
+        6,
+        3
+      ],
+      "input_manifest_sha256": "bddb0625aff43c0f94dfc33f98677cf3ca54129f4dc8c589cc8f51d3149fa341",
+      "outputs_sha256": {
+        "console.log": "b20cdbcf5875ae3984a04a3a404ac1ad51dbad9ca62eab673591044be6ac0b97",
+        "general_output.txt": "580dc86b7c4fd92f94ad4010deb9f25d98c655f5487440b4641ffe51cd1fb160",
+        "lattice_output.txt": "dccacd609c865b8739d17d5ca64c7eef5c1e9f6135328fd7660516b3c0a4728b",
+        "procstat_output.txt": "0f73bc055a9384b4a407f9295e7abd5c767315a9ac083d2c028dec94c1f93c04",
+        "specnum_output.txt": "cc7d4ca3a8f0f6d36d7263bd55f99fe812a28c43314e63dce7389a5f3616f079"
+      }
+    },
+    "interacting": {
+      "archive": "benchmarks/interacting.zip",
+      "archive_sha256": "c0b78aa900b9c907b13e0ba2fab018b77fa64b60e128606922821ebcaa6c6652",
+      "native_args": [],
+      "exit_code": 0,
+      "input_generated": true,
+      "static_input_validation": true,
+      "native_read": [
+        "simulation",
+        "lattice",
+        "energetics",
+        "mechanism",
+        "initial state"
+      ],
+      "native_smoke_passed": true,
+      "native_events_reported": 20,
+      "native_initial_matches": 18,
+      "native_warning_codes": [
+        "4008",
+        "804010"
+      ],
+      "first_record_event": 0,
+      "first_record_energy_eV": 0.7200000000000001,
+      "first_record_species_counts": [
+        9,
+        9,
+        0
+      ],
+      "second_record_energy_eV": 0.6,
+      "second_record_time_s": 7.805891751203463e-05,
+      "last_sample_event": 19,
+      "last_sample_energy_eV": 0.32,
+      "last_sample_species_counts": [
+        6,
+        6,
+        3
+      ],
+      "input_manifest_sha256": "e37b3f5912ff7594b6aa6578ea33f03a02eb7a0cbe08cd906b9cfe7e4787db90",
+      "outputs_sha256": {
+        "console.log": "b20cdbcf5875ae3984a04a3a404ac1ad51dbad9ca62eab673591044be6ac0b97",
+        "general_output.txt": "de8c8c332843894fa69858369bd2705aeeecc263c65dbf220c237f341b6c28b5",
+        "lattice_output.txt": "dccacd609c865b8739d17d5ca64c7eef5c1e9f6135328fd7660516b3c0a4728b",
+        "procstat_output.txt": "586074f706d6c37fa862565503665dd993ae492cd50ead68820697447e3c7cc4",
+        "specnum_output.txt": "47a4630d4dce0e0bb6688fbf5940680eceda95da9cabfbb27d42566b9dabeeb1"
+      }
+    },
+    "attractive": {
+      "archive": "benchmarks/attractive.zip",
+      "archive_sha256": "29028e0369f6b98f1214457d643a2bec38ac3a24df3bc2cf0af7a1b466975ad7",
+      "native_args": [],
+      "exit_code": 0,
+      "input_generated": true,
+      "static_input_validation": true,
+      "native_read": [
+        "simulation",
+        "lattice",
+        "energetics",
+        "mechanism",
+        "initial state"
+      ],
+      "native_smoke_passed": true,
+      "native_events_reported": 9,
+      "native_initial_matches": 15,
+      "native_warning_codes": [
+        "4008",
+        "801002"
+      ],
+      "first_record_event": 0,
+      "first_record_energy_eV": -0.04,
+      "first_record_species_counts": [
+        1,
+        1,
+        0
+      ],
+      "second_record_energy_eV": -0.12,
+      "second_record_time_s": 0.00021949199493676805,
+      "last_sample_event": 8,
+      "last_sample_energy_eV": -0.7200000000000001,
+      "last_sample_species_counts": [
+        9,
+        9,
+        -8
+      ],
+      "input_manifest_sha256": "cf0c8aee229982fd3e3cff6e3b63ead87d00b8f41a85fdbc57236076dd46a82c",
+      "outputs_sha256": {
+        "console.log": "f826e0dc3ba09ad293f93b2e1c7f4206204dd942cf27d1c43990f4784007c3b9",
+        "general_output.txt": "c22cca41fd94247529e29722f0e287e813a0b52d47e2de052f611077050587e4",
+        "lattice_output.txt": "dccacd609c865b8739d17d5ca64c7eef5c1e9f6135328fd7660516b3c0a4728b",
+        "procstat_output.txt": "be4e2fbe40bbe63005c3e3356b2b960ca7ae19e73f496a02eceb59413bcdd4e9",
+        "specnum_output.txt": "c0ed7b2b22a1a328109e98759d2ffc481e10f76a70886a5944bb3ec8f21a8018"
+      }
+    },
+    "continuous": {
+      "archive": "benchmarks/continuous.zip",
+      "archive_sha256": "6cb042ef80a8cf5c7ed32d1142581f99a9ed733c41f72887f94f759f4fc852c5",
+      "native_args": [],
+      "exit_code": 0,
+      "input_generated": true,
+      "static_input_validation": true,
+      "native_read": [
+        "simulation",
+        "lattice",
+        "energetics",
+        "mechanism"
+      ],
+      "native_smoke_passed": true,
+      "native_events_reported": 20,
+      "native_initial_matches": 18,
+      "native_warning_codes": [
+        "4008"
+      ],
+      "first_record_event": 0,
+      "first_record_energy_eV": 0.0,
+      "first_record_species_counts": [
+        0,
+        0,
+        0
+      ],
+      "second_record_energy_eV": 0.0,
+      "second_record_time_s": 2.4459293111998978e-05,
+      "last_sample_event": 19,
+      "last_sample_energy_eV": 0.0,
+      "last_sample_species_counts": [
+        7,
+        7,
+        -7
+      ],
+      "input_manifest_sha256": "a07e5a97893f5e9ddb81037ec68af1d733a488c0bd17092d7ad81138949d6d33",
+      "outputs_sha256": {
+        "console.log": "b20cdbcf5875ae3984a04a3a404ac1ad51dbad9ca62eab673591044be6ac0b97",
+        "general_output.txt": "a786b937df1bb791f2fd9949fd4824907368739b060d99e479d7c23883dd2cd0",
+        "lattice_output.txt": "dccacd609c865b8739d17d5ca64c7eef5c1e9f6135328fd7660516b3c0a4728b",
+        "procstat_output.txt": "7a023873a4907c36d5424d8b3201cc1cfd43ca16b18c945ec9f2e30626e9abc4",
+        "restart.inf": "d0d23de4b3a70924f0a3dddf2aadbd5a3fa23c622c6cac1c573d159baa6f9608",
+        "specnum_output.txt": "8cc1504a5effb445f347d489e6e8c780de4f0134b5e9ceedf81996e88027719b"
+      }
+    },
+    "split": {
+      "archive": "benchmarks/split.zip",
+      "archive_sha256": "1cf32a9222b492fdc7f1b08123d88484d88c23906f727907d64e194952b8ac69",
+      "native_args": [
+        "--max_steps=8"
+      ],
+      "exit_code": 0,
+      "input_generated": true,
+      "static_input_validation": true,
+      "native_read": [
+        "simulation",
+        "lattice",
+        "energetics",
+        "mechanism"
+      ],
+      "native_smoke_passed": true,
+      "native_events_reported": 8,
+      "native_initial_matches": 18,
+      "native_warning_codes": [
+        "4008"
+      ],
+      "first_record_event": 0,
+      "first_record_energy_eV": 0.0,
+      "first_record_species_counts": [
+        0,
+        0,
+        0
+      ],
+      "second_record_energy_eV": 0.0,
+      "second_record_time_s": 2.4459293111998978e-05,
+      "last_sample_event": 7,
+      "last_sample_energy_eV": 0.0,
+      "last_sample_species_counts": [
+        5,
+        5,
+        -5
+      ],
+      "input_manifest_sha256": "a07e5a97893f5e9ddb81037ec68af1d733a488c0bd17092d7ad81138949d6d33",
+      "outputs_sha256": {
+        "console.log": "72085622bbd1a37307d60f42ad6b6b2f1147d95ffa2d51152dea4fcd82fe58d3",
+        "general_output.txt": "78866980b1c98e930b6744a3942642b7ac9c19ff66cac7254154ad592d705b62",
+        "lattice_output.txt": "dccacd609c865b8739d17d5ca64c7eef5c1e9f6135328fd7660516b3c0a4728b",
+        "procstat_output.txt": "95977d1079ddbc15e198ac34e88cbf61bc41e9870413a59da1af731adae4b4ee",
+        "restart.inf": "859db961c4505422bc6f80e3acc0d003edea0adf7c35a92b75652b54c2859972",
+        "specnum_output.txt": "d4efb5b9548578501d514997fd49ac1da20e6592987f5475cd3988b92f242940"
+      }
+    },
+    "resume": {
+      "archive": "benchmarks/resume.zip",
+      "archive_sha256": "6613c61f8aed7656d6b7295c01847c0c1c6e163c54ea2667240759e5fe9a46d7",
+      "native_args": [
+        "--max_steps=20"
+      ],
+      "exit_code": 0,
+      "input_generated": true,
+      "static_input_validation": true,
+      "native_read": [
+        "restart.inf"
+      ],
+      "native_smoke_passed": true,
+      "native_events_reported": 20,
+      "native_initial_matches": null,
+      "native_warning_codes": [],
+      "first_record_event": 8,
+      "first_record_energy_eV": 0.0,
+      "first_record_species_counts": [
+        6,
+        6,
+        -6
+      ],
+      "second_record_energy_eV": 0.0,
+      "second_record_time_s": 0.002722053418090349,
+      "last_sample_event": 19,
+      "last_sample_energy_eV": 0.0,
+      "last_sample_species_counts": [
+        7,
+        7,
+        -7
+      ],
+      "input_manifest_sha256": "de2b1da55d0b595963955961781e2ecc4791faa3d58dc71fc8317269dafe6d67",
+      "outputs_sha256": {
+        "console.log": "711186f0a78c02f8e90ba1bfaf2676c5a0574d3eef369bacad8ea95a695c7d12",
+        "general_output.txt": "c6acc3e54e349c063d6e80680e503bdda1006ee013135c1ddd7c2484a9981288",
+        "procstat_output.txt": "c1ca9aca4d809d902787247f8b9d5eb55534a0c7b77aeb3762758d78cbcccb37",
+        "restart.inf": "3c86a876f63e477b4c04311d99bb056107def8d645b71ed5d724667fc5bb1e0f",
+        "specnum_output.txt": "6e3331596897a6554799eb000f1f6bc9f467da2b977e2aa6e0ebd78a0aae3342"
+      }
+    }
+  },
+  "paired_first_desorption": {
+    "ideal_control": "full",
+    "interacting": "interacting",
+    "isolated_pair_energy_eV": 0.04,
+    "lost_three_pairs_eV": 0.12,
+    "extra_energy_change_eV": -0.08,
+    "reverse_proximity_factor": 0.75,
+    "expected_rate_ratio": 5.7012059248828715,
+    "observed_same_seed_waiting_time_ratio": 5.701195366082274,
+    "rate_ratio_relative_error": 1.8520293314505665e-06,
+    "limitation": "4008 and 804010: the fully occupied repulsive stress case has a negative apparent local barrier under the approved fixed-T irreversible representation. This validates numerical response only."
+  },
+  "checkpoint": {
+    "writer_case": "split",
+    "reader_case": "resume",
+    "continuous_control": "continuous",
+    "restart_model_sha256": "8c21267508d3eca8ccfd8b19aaef9e6e1d61328faaba4336f39879c8ca9e5195",
+    "restart_input_sha256": "859db961c4505422bc6f80e3acc0d003edea0adf7c35a92b75652b54c2859972",
+    "resume_start_step": 8,
+    "resume_end_step": 20,
+    "trajectory_equal": {
+      "specnum_output.txt": true,
+      "procstat_output.txt": true
+    }
+  },
+  "attractive_termination": "An absorbing fully occupied lattice reached after eight physical adsorptions. At the next event request Zacros emits 801002 and an effectively infinite clock sentinel. Compare the last physical sample (event 8)."
+}

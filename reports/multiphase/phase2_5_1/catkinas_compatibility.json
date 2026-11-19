@@ -1,0 +1,66 @@
+{
+  "date": "2026-11-19",
+  "scope": "CATKINAS native acceptance, immutable supplement to Phase 2.5",
+  "status": "authorized_newer_distribution_started; equation read; native rate-law construction failed",
+  "previous_receipt": "reports/multiphase/phase2_5/native_validation.json",
+  "previous_receipt_sha256": "9549fc9737b816b5daadd486b45b67a85af0e95f437d831e88d741798e2ed235",
+  "matched_previous_console_sha256": "0b35112f552d8a2d52ca040e4d3bc8fab5428f9faede5e492542a90d8630041b",
+  "matlab_version": "MATLAB 25.2.0.2998904 R2025b",
+  "matlab_executable_sha256": "6dc32276086121e44edf4846f033066ba5b0fae9bad002d8917a411e0a59afa9",
+  "local_candidates": {
+    "D:\\CATKINAS (1).p": "40cf8854167d1c60b93ed722bf7a2af8baf7400de817640ddba2f520cced1382",
+    "C:\\Users\\86177\\Desktop\\app\\CATKINAS\\CATKINAS.p": "40cf8854167d1c60b93ed722bf7a2af8baf7400de817640ddba2f520cced1382",
+    "C:\\Users\\86177\\Desktop\\app\\CATKINAS\\quickstart\\CATKINAS.p": "40cf8854167d1c60b93ed722bf7a2af8baf7400de817640ddba2f520cced1382",
+    "C:\\Users\\86177\\Desktop\\app\\CATKINAS-download\\CATKINAS.p": "40cf8854167d1c60b93ed722bf7a2af8baf7400de817640ddba2f520cced1382"
+  },
+  "vendor_download_origin": "Windows Zone.Identifier on D drive download and CATKINAS-download records www.catkinas.com as host and referrer. All four local copies match the P-code already diagnosed.",
+  "vendor_download_page": "https://www.catkinas.com/downloads/",
+  "vendor_listed_build_label": "20261106 (authenticated download page shown by researcher)",
+  "vendor_access": "academic/noncommercial download requires an authorized personal login or contacting the vendor with institutional and group information",
+  "verified_archive": {
+    "input_sha256": "1934e11eb1536aa4cd76023f8d8aaa6140b20ab28eb7caabab8ebc95e7a5d8f9",
+    "manifest_sha256": "5c71179a32d9db6b4e972435a2f3b856fa0e0758de1935670136b83ba1c3c3f4",
+    "readback": {
+      "equation_count": 1,
+      "correction_switches": [
+        0,
+        -2,
+        0
+      ],
+      "coefficients_round_trip": true
+    },
+    "temperature_K": 400,
+    "P_H2_bar": 1,
+    "expected_forward_bar^-1_s^-1": 1062.5043325104702,
+    "expected_reverse_s^-1": 58.396411910597834
+  },
+  "diagnosis": {
+    "observed": "The P-code itself printed its version and explicit expiry message before a batch input prompt failed. The prior MATLAB process exited 1.",
+    "matlab": "The current R2025b runtime completed the independent five-step vendor control with exact agreement for all ten rates. The archived target stops during symbolic equation construction.",
+    "integrity": "Installed and downloaded bytes agree. No independent vendor signature or published digest was established.",
+    "license": "Newer user-supplied distribution passed the former startup expiry point. No license bypass or expiry override was used.",
+    "search_scope": "Configured installation, quickstart and download staging, user Downloads, Desktop and D-drive download roots. Evidence describes these locations only."
+  },
+  "new_runtime_attempts": 2,
+  "native_parser_accepted": false,
+  "numerical_smoke_passed": false,
+  "result_artifacts": [
+    "catkinas_target_attempt.json",
+    "catkinas_target_console.txt",
+    "catkinas_environment_control.json"
+  ],
+  "scientific_benchmark_validated": false,
+  "previously_expired_version_banner": "20230524",
+  "previously_expired_compiler_timestamp": "05-Jun-2026 17:04:51",
+  "authorized_build": {
+    "source": "D:/CATKINAS.p supplied by researcher after authenticated vendor download; Zone.Identifier HostUrl and ReferrerUrl both www.catkinas.com. Original old installation preserved.",
+    "sha256": "2b70a3511a19065f843b65d8601874700dd792e8d31d620046ef3805df399ff0",
+    "size_bytes": 112182,
+    "self_reported_CATKINAS_version": "20230524",
+    "self_reported_compiler_time": "07-Nov-2026 11:57:47",
+    "matlab_runtime": "25.2.0.2998904 (R2025b)",
+    "isolated_copy_verified": true
+  },
+  "target_attempts": 1,
+  "environment_control_attempts": 1
+}
