@@ -218,3 +218,11 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
 
 - `scripts/slurm_controller_events.py`, `tests/test_slurm_controller_events.py`:strict backfill admission with saved native RUNNING allocation evidence.
 - `docs/reviews/chco15970_backfill_20261117.md`:validated raw event and force-label scope; no scheduler enum or TS acceptance fabricated.
+
+
+## CHCO force coverage comparison (2026-11-19)
+
+- `archive/chco_force_coverage_20261119/`: isolated comparison worker, stage
+  helper and independent result verifier.
+- `docs/reviews/chco_force_coverage_20261119.md`: protocol, validated holdout
+  errors and scope.

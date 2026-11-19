@@ -83,6 +83,16 @@ backends:
     display_name: BUCT3
     allowed:
       - ba_sella_candidate_search
+    scoped_force_training:
+      chco_force_coverage_20261119_lr_matched:
+        scope: one_single_vs_joint_AQCat25_force_fit_comparison
+        partition: compute
+        gpus: 1
+        cpus_per_task: 4
+        memory: 15G
+        time_limit: '00:22:00'
+        updates_per_arm: 100
+        automatic_retries: 0
     ba_sella_runtime:
       hostname: ubuntu-R5350-G6
       partition: compute

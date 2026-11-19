@@ -1551,3 +1551,11 @@ RUNNING allocation proving host/partition/CPU/GPU/memory/time/no-requeue/start
 identity. Preserve protected-daemon zero-exit/done checks and keep the purged
 terminal enum unknown. Force target remains strict0.03. Details:
 `docs/reviews/chco15970_backfill_20261117.md`.
+
+
+## 2026-11-19 - CHCO force coverage comparison
+
+Separate same-budget AQCat25 control and four-point fit used DFT points 7/8 for
+post-fit validation. Worst held-out vector force error decreased from 0.17789 to
+0.04395 eV/A, with a small regression at point 8. No DFT submission or model
+promotion. Details: `docs/reviews/chco_force_coverage_20261119.md`.
