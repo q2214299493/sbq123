@@ -1,0 +1,19 @@
+(1): H2 + #1 + #2 <-> H#1 + H#2 [0.78531682713669682 -0.10000000000000001]
+T = 400;
+CalMode = 0;
+CalcDRC = 0;
+Istart = 0;
+npar = 0;
+ThermoMode = 0;
+BarrierMode = -2;
+ConsMode = 0;
+TimeMode = 0;
+PlotMode = 0;
+PlotType = 0;
+MaxTime = 3;
+MaxOdeTime = 3;
+P_H2_FROZ = 1;
+Q1_H_INIT = 0;
+Q2_H_INIT = 0;
+Q1_v_INIT = 1;
+Q2_v_INIT = 1;

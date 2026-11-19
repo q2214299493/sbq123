@@ -59,7 +59,11 @@ def case(system="interface", temperature=400, barrier=0.4, gas=False, reversible
         r["products"] = {"H2-top": 1, "H2-bridge": 1}
         for s in d["species"][1:]:
             s["composition"] = {"H": 1}
-        d["species"][1].update(site_occupancy={"bridge-Cu": 1}, surface_ids=["facet-Cu"], material_ids=["Cu"], interface_id=None)
+        d["species"][1].update(site_occupancy={"bridge-Cu": 1})
+        surface_id = next(site["surface_id"] for site in d["sites"] if site["site_id"] == "bridge-Cu")
+        phase_id = next(s["phase_id"] for s in d["surfaces"] if s["surface_id"] == surface_id)
+        material_id = next(p["material_id"] for p in d["phases"] if p["phase_id"] == phase_id)
+        d["species"][1].update(surface_ids=[surface_id], material_ids=[material_id], interface_id=None)
     r["reversible"] = reversible
     if not reversible:
         p["reverse"] = None

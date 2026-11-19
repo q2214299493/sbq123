@@ -1,0 +1,59 @@
+{
+  "engine": "zacros",
+  "dataset_version": "f276dfd869676e2d21385a05a96b594babff17070a1fe4ba89ff209f6a4bb65a",
+  "table_sha256": "67174a6a021e663c92f2340c9837ec1616b7f519fc23fa2f897e3afec7258511",
+  "configuration_sha256": "31bd7bcb35a5ae02804063e2172fb3ce39ad2fd94904ef1166b7530b72c6b0e8",
+  "files": {
+    "simulation_input.dat": "7dbe831c71480a0fcf65fd59ae5e1b48bf4acc734a283d083f0dbff7f9fec1d4",
+    "lattice_input.dat": "041747579adc213be762c4945862a71396c90465c4059660ac6d773c9d848362",
+    "mechanism_input.dat": "f542d07489e339964039d2012d3bbb4ee7831d5871124388a33c8440132f4ca0",
+    "energetics_input.dat": "a9034d0d147ea36298101727ef62ecede67ac7f15306e3eb58794b7e43c5f288"
+  },
+  "validation": {
+    "species_names": {
+      "H2-g": "H2",
+      "H2-top": "HNi*",
+      "H2-bridge": "HCu*"
+    },
+    "site_count": 18,
+    "gas_indices": {
+      "H2-g": 1
+    },
+    "surface_indices": {
+      "H2-bridge": 1,
+      "H2-top": 2
+    },
+    "site_aliases": {
+      "top-Ni": "Ni",
+      "bridge-Cu": "Cu"
+    },
+    "partial_pressure_bar": {
+      "H2-g": 1
+    },
+    "event_checks": [
+      {
+        "native_step": "r1_forward",
+        "reaction_id": "ads",
+        "matching_events": 18,
+        "reference_sites": 9.0,
+        "patterns_per_reference_site": 2.0,
+        "coefficient": 531.2521662552351
+      },
+      {
+        "native_step": "r2_reverse",
+        "reaction_id": "ads",
+        "matching_events": 18,
+        "reference_sites": 9.0,
+        "patterns_per_reference_site": 2.0,
+        "coefficient": 29.198205955298917
+      }
+    ],
+    "initial_state": "empty",
+    "native_text_readback": {
+      "step_count": 2,
+      "species_and_dentates_round_trip": true,
+      "coefficients_round_trip": true
+    }
+  },
+  "execution_authorized": false
+}

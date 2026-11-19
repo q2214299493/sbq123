@@ -1,0 +1,62 @@
+{
+  "network_version": "2a80b67c31201600a1858780bbe6c176b03f489fe24383441fca4f195b395483",
+  "dataset_version": "a4191054a20d601a73afadd410d3cf69d3df524b14278f0edff92c7a33870b72",
+  "export_eligible": false,
+  "reactions": [
+    {
+      "reaction_id": "fe110_ch_co_to_chco_20261109",
+      "network_level": "DRAFT",
+      "energies": {
+        "electronic_ev": {
+          "forward": 0.9736017399999923,
+          "reverse": 0.31429370999995854,
+          "reaction": 0.6593080300000338
+        },
+        "gibbs_ev": {
+          "forward": null,
+          "reverse": null,
+          "reaction": null
+        },
+        "temperature_k": null,
+        "standard_state": null,
+        "thermal_basis": null
+      },
+      "ts_local_zpe_ev": 0.5140516496724512,
+      "rates": {
+        "forward": null,
+        "reverse": null
+      },
+      "missing": [
+        "Unknown charge balance",
+        "Unknown site balance",
+        "Catalyst phase unconfirmed",
+        "Missing compatible free energies",
+        "Missing kinetic parameters or rate law",
+        "Reversibility unconfirmed",
+        "IS: compatible Gibbs correction missing",
+        "FS: compatible Gibbs correction missing",
+        "Kinetic parameter set with units, standard states, validity range and sources missing",
+        "Rate law, scoped parameter review and applicability not supplied",
+        "Reviewed site occupancies and vacant-site counts required"
+      ],
+      "local_event_missing": [
+        "Local event pattern, neighbor graph and occurrence normalization"
+      ]
+    }
+  ],
+  "source": "reports/multiphase/phase2_4/fe110_parameters.json",
+  "source_sha256": "dd2cdba9cfa6d45bfbf0f4e659ca80c1f81a80b3681e99633bdc19b1a98ff461",
+  "dataset_unchanged": true,
+  "engine_gate": {
+    "catkinas": {
+      "error": "Kinetic dataset is blocked for export",
+      "input_generated": false,
+      "execution_authorized": false
+    },
+    "zacros": {
+      "error": "Kinetic dataset is blocked for export",
+      "input_generated": false,
+      "execution_authorized": false
+    }
+  }
+}

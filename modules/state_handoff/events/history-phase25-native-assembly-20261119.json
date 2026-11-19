@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "event_id": "history-phase25-native-assembly-20261119",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-phase25-native-assembly-20261119",
+    "module": "baseline_mkm"
+  },
+  "occurred_at": "2026-11-19T13:53:03.216752+00:00",
+  "recorded_at": "2026-11-19T13:53:03.216752+00:00",
+  "summary": "Record native model assembly, synthetic Zacros read and smoke pass, CATKINAS build expiry, and Fe(110) export block.",
+  "payload": {
+    "markdown": "- Phase 2.5: both worktrees reproduced native inputs and passed 431 tests. Installed Zacros 4.0 read four files and completed 20 synthetic events. CATKINAS 20230524 reported expired P-code before model acceptance. Real Fe(110) remains blocked. See reports/multiphase/phase2_5_completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "scripts/native_model.py",
+      "sha256": "7b1240dc518c09735c1bc98a743a7e61d48ede1e8eae16178a40f8279e31a7d1",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T13:53:03.216752+00:00"
+    },
+    {
+      "locator": "scripts/native_validation.py",
+      "sha256": "b02f4c49a9f1b38235a75ceb433bd926c9392a649e27f3d89dc045af844f880a",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T13:53:03.216752+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/__init__.py",
+      "sha256": "d0e48968b013dd859711dbfbd99d920ceebf0e6ed3c599822a20e761ce8db83b",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T13:53:03.216752+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/native.py",
+      "sha256": "f9deb4609f53f653a1e5468a9e05277bfb1f00c53cabc26f8431ebe77fe6e177",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T13:53:03.216752+00:00"
+    },
+    {
+      "locator": "scripts/surface_kmc/__init__.py",
+      "sha256": "6dfe407f6e774025d85d760bbeda9b71623878f13e1fbcb96d414019bbcff724",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T13:53:03.216752+00:00"
+    },
+    {
+      "locator": "scripts/surface_kmc/native.py",
+      "sha256": "761bf6952acf2525c1ea5a6339744c67e93a95fae82fe3263407e9201cdb14ee",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T13:53:03.216752+00:00"
+    },
+    {
+      "locator": "scripts/surface_kmc/lattice.py",
+      "sha256": "5eecd2e794cf98f716a2a1f3363abe73bc32ce981c67a6c742b914cb94984f75",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T13:53:03.216752+00:00"
+    },
+    {
+      "locator": "tests/test_kinetic_parameters.py",
+      "sha256": "3ea3ac359223eaf051a4537f291592aea03c57c71cf3b4de00938cd9c5e7e8db",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T13:53:03.216752+00:00"
+    },
+    {
+      "locator": "tests/test_native_model.py",
+      "sha256": "1187de343e2fd5eef37d1ee33796c6faf0edcf5d479baf31082c274d84d4e2c2",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T13:53:03.216752+00:00"
+    },
+    {
+      "locator": "tests/fixtures/multiphase/native_interface_config.json",
+      "sha256": "058750dab7f02a36a37d4013306e414b250c0fd20b39e9546f42d4abe2f14c9e",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T13:53:03.216752+00:00"
+    },
+    {
+      "locator": "modules/baseline_mkm/README.md",
+      "sha256": "f42c63319c73c978b005b3b651e5b5a1021eebd28f5817c159560eed4723d16c",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T13:53:03.216752+00:00"
+    },
+    {
+      "locator": "modules/surface_kmc/README.md",
+      "sha256": "820386d0b4867bf8120e49bcd9fdd4f6fb0af741a77bb90f97733c2b08924b00",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T13:53:03.216752+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_native_contracts.md",
+      "sha256": "9013557adf706cb2581e55bfbbdf112eee346203652423878417959e19350203",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T13:53:03.216752+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5/.gitattributes",
+      "sha256": "f4bb2c5b71176bfa5ac8ffd58bbc67c0aa11abd8d72f7053ad2d9026c4b86526",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T13:53:03.216752+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5/fe110_blocked.json",
+      "sha256": "384c9500b6100abcf3d89bbbd9343854c6aa687712829d168a88910801311b5b",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T13:53:03.216752+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5/native_validation.json",
+      "sha256": "9549fc9737b816b5daadd486b45b67a85af0e95f437d831e88d741798e2ed235",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T13:53:03.216752+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5/catkinas/INPUT_phase25.m",
+      "sha256": "1934e11eb1536aa4cd76023f8d8aaa6140b20ab28eb7caabab8ebc95e7a5d8f9",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T13:53:03.216752+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5/catkinas/manifest.json",
+      "sha256": "5c71179a32d9db6b4e972435a2f3b856fa0e0758de1935670136b83ba1c3c3f4",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T13:53:03.216752+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5/zacros/simulation_input.dat",
+      "sha256": "7dbe831c71480a0fcf65fd59ae5e1b48bf4acc734a283d083f0dbff7f9fec1d4",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T13:53:03.216752+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5/zacros/lattice_input.dat",
+      "sha256": "041747579adc213be762c4945862a71396c90465c4059660ac6d773c9d848362",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T13:53:03.216752+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5/zacros/energetics_input.dat",
+      "sha256": "a9034d0d147ea36298101727ef62ecede67ac7f15306e3eb58794b7e43c5f288",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T13:53:03.216752+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5/zacros/mechanism_input.dat",
+      "sha256": "f542d07489e339964039d2012d3bbb4ee7831d5871124388a33c8440132f4ca0",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T13:53:03.216752+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5/zacros/manifest.json",
+      "sha256": "afc110a668acc2ac5fb02cb37e0dfc9938dd9e09ce76c583f28af62fc7817eef",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T13:53:03.216752+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_5_completion.md",
+      "sha256": "f199220979d6bd0dcdbf4112cf90376e54e64c531a1d319f6a76fce819ea7223",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T13:53:03.216752+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "historical_result_record"
+    ],
+    "status": "pending"
+  }
+}

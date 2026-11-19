@@ -40,6 +40,8 @@ Solve the non-coverage-self-consistent mean-field mechanism for coverages, rates
 
 ## Outputs
 
+Phase 2.5 assembles a fixed-temperature CATKINAS single point with frozen gas partial pressures. It consumes an eligible Phase 2.4 dataset, verifies the supplied parameter table, and publishes a byte-hashed input directory. Independent text readback checks stoichiometry, indices, correction switches and both rate coefficients. The installed 20230524 P-code reported expiry before accepting the synthetic model on 2026-11-19. Native reading and numerical completion remain unconfirmed. See the [field contract and assembly command](../../reports/multiphase/phase2_5_native_contracts.md) and [validation receipt](../../reports/multiphase/phase2_5/native_validation.json).
+
 - steady-state solution and site/mass-balance residuals
 - TOF, selectivity, coverage, and DRC tables
 - reproducible solver settings and provenance

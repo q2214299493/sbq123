@@ -46,6 +46,8 @@ Model site heterogeneity, diffusion, lateral interactions, and spatial correlati
 
 Surface-reaction KMC is distinct from GCMC adsorption loading.
 
+Phase 2.5 builds a periodic lattice and translates approved directed rates and molecular footprints into Zacros 4.0 inputs. The project configuration supplies basis sites, physical cell vectors, neighbor translations, initial state and reference-site density per cell. A typed graph check compares the number of distinct matching transitions with the reviewed event normalization. Zacros 4.0 read all four inputs and completed 20 synthetic Ni/Cu events. See the [field contract and assembly command](../../reports/multiphase/phase2_5_native_contracts.md) and [validation receipt](../../reports/multiphase/phase2_5/native_validation.json).
+
 ## Done Criteria
 
 The lattice/event model is traceable, detailed balance is checked, outputs are reproducible, and matched-condition comparison with baseline MKM exists.

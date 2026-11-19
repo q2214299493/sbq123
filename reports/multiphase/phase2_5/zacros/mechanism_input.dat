@@ -1,0 +1,30 @@
+mechanism
+step r1_forward
+sites 2
+site_types Ni Cu
+neighboring 1-2
+gas_reacs_prods H2 -1
+initial
+1 * 1
+2 * 1
+final
+1 HNi* 1
+2 HCu* 1
+pre_expon 5.31252166255235124e+02
+activ_eng 0.00000000000000000e+00
+end_step
+step r2_reverse
+sites 2
+site_types Ni Cu
+neighboring 1-2
+gas_reacs_prods H2 1
+initial
+1 HNi* 1
+2 HCu* 1
+final
+1 * 1
+2 * 1
+pre_expon 2.91982059552989170e+01
+activ_eng 0.00000000000000000e+00
+end_step
+end_mechanism

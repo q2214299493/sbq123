@@ -1,0 +1,118 @@
+{
+  "scope": "Synthetic two-site interface only, 400 K, 1 bar H2, initially vacant. No physical catalyst benchmark.",
+  "input_provenance": "Native input bytes from each isolated process working directory matched all distributed input hashes. Preflight regenerated Phase 2.4 tables and read back native text before invocation.",
+  "catkinas": {
+    "adapter_implemented": true,
+    "native_input_generated": true,
+    "static_validation_passed": true,
+    "native_parser_accepted": null,
+    "numerical_smoke_passed": false,
+    "scientific_benchmark_validated": false,
+    "runtime": "MATLAB 25.2.0.2998904 R2025b",
+    "installed_version": "20230524",
+    "compiler_time": "05-Jun-2026 17:04:51",
+    "executable_sha256": "40cf8854167d1c60b93ed722bf7a2af8baf7400de817640ddba2f520cced1382",
+    "manual_sha256": "6ae7a97357aedc55217a5b2e49ed2d45e83f6ace304586d2fba0def1e0826b93",
+    "command": "CATKINAS('INPUT_phase25')",
+    "wall_limits_s": [
+      90,
+      160
+    ],
+    "attempts": [
+      "Cold invocation timed out.",
+      "Fresh isolated MATLAB batch invocation reported expired P-code and exited with status 1 before input acceptance."
+    ],
+    "native_message": "CATKINAS.p is expired",
+    "console_sha256": "0b35112f552d8a2d52ca040e4d3bc8fab5428f9faede5e492542a90d8630041b",
+    "result_directory_created": false,
+    "fixed_T_energy_input": {
+      "Ea_eV": 0.7853168271366968,
+      "G0_eV": -0.1,
+      "ThermoMode": 0,
+      "BarrierMode": -2,
+      "ConsMode": 0
+    },
+    "forward": {
+      "coefficient": 1062.5043325104702,
+      "unit": "bar^-1 s^-1",
+      "gas_partial_pressure_orders": {
+        "H2-g": 1
+      }
+    },
+    "reverse": {
+      "coefficient": 58.396411910597834,
+      "unit": "s^-1",
+      "gas_partial_pressure_orders": {}
+    },
+    "historical_example_only": {
+      "source": "examples/Examples-Run/Examples/result_single/data1.mat",
+      "sha256": "c123344ab1f0ad3ea7c940d1887225b20ea8d027c23a7621ab36c2082473e7fc",
+      "comparison": "Ean, G0n at 673 K versus stored kf, kr for five steps",
+      "max_relative_error_forward_reverse": [
+        4.656236647171408e-05,
+        4.339940947117871e-05
+      ]
+    },
+    "local_quickstart": "2026-06-26 startup; completion unconfirmed"
+  },
+  "zacros": {
+    "adapter_implemented": true,
+    "native_input_generated": true,
+    "static_validation_passed": true,
+    "native_parser_accepted": true,
+    "numerical_smoke_passed": true,
+    "scientific_benchmark_validated": false,
+    "installed_version": "4.0",
+    "executable_sha256": "84a8f88d6df633eeea9eeac8aa9227237cdf2564a4dc72e0cab8a18c4ce119d2",
+    "manual_sha256": "cc64e35121f1637d3a371330882d2a53816bb15f0c3ee4d9b3b6fd4bd557f846",
+    "native_input_sections_read": [
+      "simulation",
+      "lattice",
+      "energetics",
+      "mechanism"
+    ],
+    "outer_timeout_s": 30,
+    "native_wall_limit_s": 15,
+    "seed": 13201,
+    "basis_sites": 2,
+    "repeat_cell": [
+      3,
+      3
+    ],
+    "all_18_lattice_site_types_and_neighbor_lists_match_native_output": true,
+    "initial_native_event_count": 18,
+    "events_occurred": 20,
+    "kmc_time_s": 0.0353727341,
+    "normal_termination": true,
+    "native_nk_Tini_rounded": [
+      531.25,
+      29.198
+    ],
+    "warning_4008": "Forward and reverse are encoded as distinct directed native events. Their approved rate ratio at the benchmark conditions was checked upstream.",
+    "resolved_parser_findings": [
+      "1002: native real-valued temperature requires a decimal or exponent.",
+      "3001: native energetics requires a nonempty expansion; ideal fixture uses explicit zero-energy vacancy clusters."
+    ],
+    "evidence_sha256": {
+      "general_output.txt": "4a0aa5889e805face9e1af3c24bf2bb90eb14123f73410dfbfae40a5edf0e456",
+      "lattice_output.txt": "dccacd609c865b8739d17d5ca64c7eef5c1e9f6135328fd7660516b3c0a4728b",
+      "procstat_output.txt": "7a023873a4907c36d5424d8b3201cc1cfd43ca16b18c945ec9f2e30626e9abc4",
+      "specnum_output.txt": "8cc1504a5effb445f347d489e6e8c780de4f0134b5e9ceedf81996e88027719b",
+      "native_console.log": "b20cdbcf5875ae3984a04a3a404ac1ad51dbad9ca62eab673591044be6ac0b97"
+    }
+  },
+  "initial_expected_event_flux": {
+    "pressure_bar": 1,
+    "vacant_fractions": [
+      1,
+      1
+    ],
+    "mean_field_reference_sites": 9,
+    "mean_field_coefficient_bar^-1_s^-1": 1062.5043325104702,
+    "kmc_coefficient_per_match_bar^-1_s^-1": 531.2521662552351,
+    "kmc_matches": 18,
+    "mean_field_total_s^-1": 9562.538992594233,
+    "kmc_total_s^-1": 9562.538992594233,
+    "interpretation": "instantaneous initial propensity, distinct from observed trajectory-average frequency"
+  }
+}
