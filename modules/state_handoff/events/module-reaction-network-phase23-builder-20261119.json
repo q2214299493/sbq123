@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "event_id": "module-reaction-network-phase23-builder-20261119",
+  "event_type": "module_gate_changed",
+  "entity": {
+    "kind": "module",
+    "id": "reaction_network",
+    "module": "reaction_network"
+  },
+  "occurred_at": "2026-11-19T10:56:14.946830+00:00",
+  "recorded_at": "2026-11-19T10:56:14.946830+00:00",
+  "summary": "Build versioned elementary reaction networks from reviewed or partial multiphase evidence.",
+  "payload": {
+    "module": "reaction_network",
+    "status": "Active",
+    "depends_on": "species and site identities, compatible thermochemistry, scoped scientific review",
+    "current_gate": "Network drafts and evidence-bound validation are available. Fe(110) CH* + CO* to CHCO* remains draft with missing site occupancy and endpoint thermochemistry; MKM is blocked."
+  },
+  "evidence": [
+    {
+      "locator": "modules/reaction_network/README.md",
+      "sha256": "2aa9e3148fd1d52bbf89bc73bfe8427fad68279172a4d797f0a3d2b9a44d51c3",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T10:56:14.946830+00:00"
+    },
+    {
+      "locator": "scripts/reaction_network/__init__.py",
+      "sha256": "59356824aaa9a1f832c410a4d639af2b4a909ef8e8d94256de901a436cdcf179",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T10:56:14.946830+00:00"
+    },
+    {
+      "locator": "scripts/reaction_network/__main__.py",
+      "sha256": "ddb80011a7f9e16f94f59f59444082a08e93f66eaed239b6a6adbe8c17e3003e",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T10:56:14.946830+00:00"
+    },
+    {
+      "locator": "scripts/reaction_network/builder.py",
+      "sha256": "ddd8a9996a700d9ae96e7f1b0815fa68d3b5b95730de1d19f3b2e426a79742aa",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T10:56:14.946830+00:00"
+    },
+    {
+      "locator": "scripts/reaction_network/catalog.py",
+      "sha256": "a7182334ac96a6f36e3f0589e0695f87cbca4bdce4ac84af15297040ffb3ea7f",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T10:56:14.946830+00:00"
+    },
+    {
+      "locator": "scripts/reaction_network/thermodynamics.py",
+      "sha256": "1c2bc4b0b948a3d11cc8b284b001fb34c01492f04040ef114d2e7c88b2855563",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T10:56:14.946830+00:00"
+    },
+    {
+      "locator": "tests/test_reaction_network.py",
+      "sha256": "b0c44abb1dddb88fcb918ee1da5342af06968c49fa84dcab4a97f49b5c7c84d0",
+      "authority": "module_validation",
+      "observed_at": "2026-11-19T10:56:14.946830+00:00"
+    },
+    {
+      "locator": "reports/multiphase/networks/network-e9dc0c890a7a1dc15efe1ec8a500c3ad558b367d92de96a4ae3ffbaff5cceb72.json",
+      "sha256": "67464382937825db13945cb5a23561dc82f59de54b19baf640d4c3377144e2df",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T10:56:14.946830+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_3_chco_network_validation.json",
+      "sha256": "7c98f4a3bae4d5d719d91825405de2fde40e733dd11fa4217420097d5fdd9315",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T10:56:14.946830+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase2_3_completion.md",
+      "sha256": "f166b2a72ccf34211ab5908e0e60e38fb14b767da8915166bb8c9408ad18a0f6",
+      "authority": "repository_document",
+      "observed_at": "2026-11-19T10:56:14.946830+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "reason_codes": [
+      "cross_module_change"
+    ],
+    "status": "pending"
+  }
+}

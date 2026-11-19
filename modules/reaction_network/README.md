@@ -33,3 +33,40 @@ Assemble validated states and transition states into atom- and site-balanced ele
 ## Done Criteria
 
 Every elementary step balances atoms and sites, links source states/TSs, and passes forward/reverse thermodynamic consistency checks.
+
+## Build and inspect a version
+
+Run from a checkout or installed wheel. Omitting `--output-dir` prints the network. Supplying a directory writes `network-<content SHA-256>.json` once. Replaying identical inputs returns the same artifact. A conflicting or interrupted file is preserved for inspection.
+
+```text
+python -m scripts.reaction_network tests/fixtures/multiphase/valid.json
+python -m scripts.reaction_network reports/multiphase/ch_co_registry_mapping_20261119.json --project-id sbq123 --intake reports/multiphase/ch_co_intake_20261119.json --thermochemistry reports/multiphase/phase2_2_chco_validation.json --output-dir reports/multiphase/networks
+```
+
+The first input can be a complete Phase 1 bundle, the partial Phase 1 registry field mapping, or a JSON definition with `format: network-definition/1`. Native definitions use the Phase 1 collection and field names. Supply one project, its materials, phases, surfaces, sites and interfaces, plus species and elementary reactions. Empty collections can be omitted. Preserve unknown charge, occupancy, vacant sites, phase identity, energy or reversibility as null. Empty site dictionaries mean a known zero. A complete Phase 1 bundle still passes through its own schema and semantic validator. [Phase 1 fields](../kinetic_data/multiphase_contracts.md)
+
+In a native definition, supply explicit `reactants` and `products` with positive integer counts, or use `endpoint_candidates`. Each candidate has a reaction ID, surface/interface context and `initial` and `final` objects containing `structure_id` and an array of assigned `species_ids`. Repetition counts molecules. The builder emits a draft with the original assignments. Supported classifications include adsorption, desorption, dissociation, association, hydrogenation, dehydrogenation, C–C coupling (`c_c_coupling`), C–O cleavage (`c_o_cleavage`), diffusion, multi-site, surface and interfacial reactions. Classification is supplied or left as `other`; assigning fragments from coordinates and identifying a mechanism still need scientific review.
+
+## Species, sites and evidence
+
+Species IDs index an in-memory catalog. Physical fingerprints include catalyst project, material, catalyst phase and facet, molecular phase, interface, composition, charge, site counts/types, geometry/configuration, structure identity and fragment indices when supplied. Duplicate IDs and physical aliases are reported. Use distinct configuration IDs or structure evidence to distinguish actual isomers. Site IDs resolve in a surface domain. Multi-site occupancy is counted per molecule. On each site ID, occupied reactant sites plus consumed vacancies must equal occupied product sites plus released vacancies, including multiplicities. A supplied required-site footprint must cover those counts.
+
+Repeat `--intake` to attach Phase 2.1 documents for the corresponding reaction. Structures and electronic state energies are bound by identity and reference. Only available differences are derived, and TS barriers need a located TS. A scoped site-mapping decision can attach occupancies by species ID and site ID, or an unambiguous site type on the relevant domain. The original geometric projections, decision and effective mapping are retained separately. Conflicting mappings for the same species require reconciliation. Literature, user and external records retain their source metadata and may omit local calculation IDs. [Intake and decisions](../kinetic_data/scientific_intake.md)
+
+Use `--thermochemistry` for the matching Phase 2.2 result or its validation envelope. Where electronic registry IDs differ from thermochemistry geometry digests, supply `state_identities` keyed by IS, TS and FS, and `electronic_reference_convention` if the network reference is a compatibility fingerprint. Binding checks cover each structure, state energy, correction basis, temperature and standard state. Electronic and Gibbs closure are checked separately. Across steps the validator checks dependencies in the stoichiometric matrix within each common energy convention and condition. Unknown site accounting is excluded from cycle counts. An unknown direction has no reverse reaction definition; an independently sourced reverse barrier can remain in the evidence.
+
+## Validation levels and reviews
+
+| Level | Meaning in the artifact |
+|---|---|
+| DRAFT | Traceable candidate with identified missing structural evidence. Contradictory known balances or dangling references raise an error. |
+| STRUCTURALLY_VALID | Endpoints, species/context and applicable element, charge and site accounting are traceable and internally consistent. |
+| THERMODYNAMICALLY_VALID | The step also has compatible, internally consistent Gibbs quantities for the required directions. An exploratory fixture can test this arithmetic. |
+| SCIENTIFICALLY_ACCEPTED | An explicit network decision binds the current reaction subject. Relevant source and review artifact digests and accepted upstream records also pass the checks. |
+| KINETICALLY_ELIGIBLE | The accepted step additionally carries eligible reaction and parameter records from an unchanged, validated Phase 1 bundle, including coverage dependencies. Execution remains under downstream gates. |
+
+Each reaction reports its origin, user confirmation, scientific review, bound network review, validation level and MKM status separately. A user decision on a supplied definition uses `user_confirmation` with `definition_sha256` over the reaction without that decision, acceptance status, reviewer (`accepted_by`), reason, scope containing `reaction_definition`, and timezone-aware acceptance timestamp. A site-mapping decision has its original narrower scope. To import a scientific network review, first inspect the candidate's `subject_sha256`. Pass an independently reviewed JSON file using `--decision` with `reaction_id`, that digest, `decision` (accepted or rejected), `reviewer`, `reviewed_at` with time zone, and `reason`. Repeat `--evidence` for the actual review and source artifacts. Changing the reviewed subject invalidates that decision. The reviewer remains responsible for scientific authority and provenance.
+
+For a located TS, attach the owning Grade A assignment with `--ts-review` when preparing a subject for scientific or kinetic review. The file carries the reaction ID, review reference, assigned coordinate and matching TS structure identity. The existing Phase 2 audit envelope is also supported. The builder consumes the decision and verifies its binding. A supplied site confirmation or a successful energy check alone cannot promote a candidate.
+
+The immutable version includes the complete catalog, supplied parameters and coverage terms, file digests, site-mapping and thermochemistry versions, validation results and acceptance records. No operation opens the production database or dispatches a job. [Fe(110) validation report](../../reports/multiphase/phase2_3_chco_network_validation.json)
