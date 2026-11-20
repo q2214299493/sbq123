@@ -52,7 +52,6 @@ review are under `outputs/matris_sella_smoke_20260905/`.
 | `docs/11_DATA_PROVENANCE_PROTOCOL.md` | registry and traceability rules | calculation/result registration |
 | `docs/12_WORKFLOW_ARCHITECTURE.md` | end-to-end stage order and boundaries | cross-module planning |
 | `docs/13_WORK_HANDOFF.md` | current Fe(110) handoff, blockers, conflicts, and takeover sequence | task transfer or new operator onboarding |
-| `skills/fe110-adsorbate-pilot-builder/` | true Fe(110) adsorption pilot-building rules | preparing small Fe(110) adsorbate tests |
 | `skills/chemical-plausibility-gate/` | final chemical identity, reaction-event, and plausibility gate | before result promotion, endpoint reuse, or Excel insertion |
 | `skills/dataset-compatibility-gate/` | result comparison, deduplication, registry, and Excel promotion gate | before comparing or promoting calculated results |
 
@@ -162,8 +161,6 @@ Embedded commands in these locations are non-authoritative unless `tasks/current
   Fischer-Tropsch motif ranking and reviewed calibration profiles.
 - `scripts/adsmind_lite/fts_prescreen.py`: exact-profile and feature-based FTS
   candidate ranking helpers; never submits calculations.
-- `skills/fe110-adsorbate-pilot-builder/references/iron-fts-prescreen.md`:
-  concise human-readable coordination-demand decision rules.
 
 ## Reviewed local Sella search
 

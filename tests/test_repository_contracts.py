@@ -136,7 +136,6 @@ def test_skill_routing_is_the_single_owner_and_rule_source_map() -> None:
         "skills/vasp-catalysis-workflow/SKILL.md",
         "skills/surface-adsorption-builder/SKILL.md",
         "skills/catalysis-data-retrieval/SKILL.md",
-        "skills/fe110-adsorbate-pilot-builder/SKILL.md",
         "skills/chemical-plausibility-gate/SKILL.md",
     ):
         assert "configs/skill_routing.yaml" in (ROOT / relative).read_text(encoding="utf-8")
@@ -361,6 +360,8 @@ def test_one_precalculation_retrieval_owner() -> None:
     assert owner not in routing["calculation_consumers"]
     assert routing["pre_calculation_external_data"]["general_literature_fallback"] is False
     adsorption_gate = routing["pre_calculation_adsorption_motif_gate"]
+    assert adsorption_gate["planner"] == "scripts.adsmind_lite.plan_adsorption_candidates"
+    assert adsorption_gate["structure_generation_owner"] == "surface-adsorption-builder"
     assert adsorption_gate["no_whitelist_match_fallback"] == "authoritative_journals_only_after_NO_WHITELIST_MATCH"
     assert adsorption_gate["evidence_rules"] == "configs/adsmind_lite/evidence_gate.yaml"
     assert adsorption_gate["external_evidence_use"] == "structure_selection_stability_order_and_initial_geometry_only"

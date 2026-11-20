@@ -1,16 +1,9 @@
+"""Fe(110) geometry helpers shared by adsorption review and AdsMind."""
 from __future__ import annotations
 
-import argparse
-import csv
-import json
 from collections import Counter
-from pathlib import Path
 
 import numpy as np
-
-from scripts.artifact_io import sha256_file, write_json
-from scripts.prediction_provenance import validate_prediction
-from scripts.scientific_validation import finite_number
 
 from scripts.workflow_geometry import minimum_image_delta_xy, pbc_xy_distance
 
@@ -21,8 +14,6 @@ from .build_fe110_adsorption import (
     fe110_anchor_site_distances,
     fe110_rule_defaults,
     identify_top_layer,
-    read_poscar,
-    write_poscar,
 )
 
 
@@ -51,25 +42,6 @@ def surface_pose_symmetries(slab: Poscar) -> list[tuple[np.ndarray, np.ndarray]]
     if not operations:
         raise ValueError("no face-preserving slab symmetry operations")
     return operations
-
-
-def selected_rows(care_root: Path) -> list[dict[str, str]]:
-    manifest = care_root / "fe48_adsorption_candidate_manifest.csv"
-    with manifest.open(encoding="utf-8-sig", newline="") as handle:
-        rows = [row for row in csv.DictReader(handle) if row["vasp_candidate_priority"] == "RELAX_FIRST"]
-    rows.sort(key=lambda row: (row["formula"], row["code"]))
-    if len(rows) != 8 or Counter(row["formula"] for row in rows) != {"C2H2O": 4, "C3H2O": 4}:
-        raise ValueError("CARE manifest must contain exactly four C2H2O and four C3H2O RELAX_FIRST rows")
-    if len({row["code"] for row in rows}) != 8:
-        raise ValueError("CARE RELAX_FIRST rows must represent eight unique molecular graphs")
-    if any(row["geometry_gate"] != "PASS_EXPORT_CANDIDATE" for row in rows):
-        raise ValueError("every selected CARE structure must pass its source export geometry gate")
-    for row in rows:
-        provenance = validate_prediction(json.loads(row.get("prediction_provenance") or "{}"))
-        if provenance["input_fingerprint"] != sha256_file(Path(row["poscar_path"])):
-            raise ValueError("CARE prediction input binding mismatch")
-        finite_number(row["care_mu"], "CARE predicted energy")
-    return rows
 
 
 def surface_basis(poscar: Poscar, top: np.ndarray) -> np.ndarray:
@@ -250,73 +222,8 @@ def review(source: Poscar, structure: Poscar, source_ads: list[int]) -> dict[str
     }
 
 
-def build(slab_path: Path, care_root: Path, output: Path) -> dict[str, object]:
-    slab = read_poscar(slab_path)
-    if slab.symbols != ["Fe"] or slab.counts != [45]:
-        raise ValueError("builder requires the verified clean Fe45 Fe(110) slab")
-    if sum(all(flag.upper() == "F" for flag in slab.flags[index]) for index in range(45)) != 18:
-        raise ValueError("Fe45 slab must keep exactly the bottom 18 Fe atoms fixed")
-    records = []
-    for number, row in enumerate(selected_rows(care_root), start=1):
-        source_path = Path(row["poscar_path"])
-        source = read_poscar(source_path)
-        if source.counts[0] != 48 or source.symbols[0] != "Fe":
-            raise ValueError(f"{source_path}: expected a CARE Fe48 adsorption structure")
-        structure, source_ads = transfer_pose(source, slab)
-        geometry = review(source, structure, source_ads)
-        if geometry["verdict"] != "pass":
-            raise ValueError(f"{row['code']}: transferred geometry failed review: {geometry['checks']}")
-        short_code = row["code"].split("-", 1)[0][:8]
-        name = f"{number:02d}_{row['formula']}_{short_code}_cfg{row['care_config_id']}"
-        ascii_site = str(geometry["site_label"]).translate(ASCII_SITE_LABEL)
-        structure = Poscar(f"Fe45 {row['formula']} {row['smiles']} {ascii_site}", structure.cell, structure.symbols, structure.counts, structure.frac, structure.flags)
-        write_poscar(output / name / "POSCAR", structure)
-        records.append(
-            {
-                "name": name,
-                "formula": row["formula"],
-                "exact_smiles": row["smiles"],
-                "care_code": row["code"],
-                "care_level": int(row["care_level_loaded"]),
-                "care_config_id": int(row["care_config_id"]),
-                "source_selection": "RELAX_FIRST",
-                "care_mu_relative_order_only_ev": finite_number(row["care_mu"], "CARE predicted energy"),
-                "prediction_provenance": json.loads(row["prediction_provenance"]),
-                "care_energy_imported_as_local_result": False,
-                "source_poscar": str(source_path),
-                "source_poscar_sha256": sha256_file(source_path),
-                "poscar": f"{name}/POSCAR",
-                "geometry_review": geometry,
-            }
-        )
-    manifest = {
-        "version": 1,
-        "surface": "true Fe(110), Fe45, five layers, bottom 18 Fe fixed",
-        "source_slab": str(slab_path),
-        "source_slab_sha256": sha256_file(slab_path),
-        "selection_rule": "one CARE RELAX_FIRST pose per exact molecular graph; no fixed site sweep",
-        "transfer_method": "map the CARE Fe48 local Fe(110) surface basis onto Fe45; preserve height, orientation, connectivity, and atom order",
-        "local_relaxation_required_before_stability_claim": True,
-        "submitted": False,
-        "candidates": records,
-    }
-    output.mkdir(parents=True, exist_ok=True)
-    write_json(output / "candidate_manifest.json", manifest)
-    return manifest
-
-
-def main() -> None:
-    parser = argparse.ArgumentParser(description="Transfer eight CARE Fe48 RELAX_FIRST isomer poses to the verified Fe45 Fe(110) slab.")
-    parser.add_argument("--slab", required=True, type=Path)
-    parser.add_argument("--care-root", required=True, type=Path)
-    parser.add_argument("--output", required=True, type=Path)
-    args = parser.parse_args()
-    manifest = build(args.slab, args.care_root, args.output)
-    print(f"generated={len(manifest['candidates'])} submitted=0")
-    for item in manifest["candidates"]:
-        review_data = item["geometry_review"]
-        print(f"{item['name']} {review_data['verdict']}")
-
-
 if __name__ == "__main__":
-    main()
+    raise SystemExit(
+        "The CARE isomer entry is retired. Use the evidence-gated AdsMind workflow "
+        "in modules/adsorption_workflow/README.md."
+    )

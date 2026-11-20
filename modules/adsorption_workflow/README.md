@@ -98,7 +98,8 @@ transition-state/path domain.
 
 ### Chemistry-aware pre-screen and staged relaxation
 
-Use `configs/adsmind_lite/prescreen_rules.yaml` through:
+Start all new adsorption candidate work, including Fe(110) pilots and work
+based on archived calculations, with the AdsMind planner:
 
 ```bash
 python -m scripts.adsmind_lite.plan_adsorption_candidates \
