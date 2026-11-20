@@ -33,6 +33,10 @@ def summarize(result):
     )
 
 
+def project_tolerance(fine):
+    return max(0.002, 0.05 * abs(fine))
+
+
 def validation(coarse, fine, reference_sha256):
     if (coarse["delta_eV"], fine["delta_eV"]) != (DELTA_EV, HALF_STEP_EV):
         raise ValueError("Expected distinct 0.01 and 0.005 eV pairs")
@@ -43,7 +47,7 @@ def validation(coarse, fine, reference_sha256):
         raise ValueError("Step sizes require identical accepted baseline evidence")
     first, second = summarize(coarse), summarize(fine)
     difference = abs(second["central"] - first["central"])
-    tolerance = max(0.002, 0.05 * abs(second["central"]))
+    tolerance = project_tolerance(second["central"])
     passed = difference <= tolerance
     return dict(
         coarse=first,

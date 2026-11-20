@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "event_id": "history-phase322-sensitivity-preflight-20261120",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-phase322-sensitivity-preflight-20261120",
+    "module": "baseline_mkm"
+  },
+  "occurred_at": "2026-11-20T10:17:38.071586+00:00",
+  "recorded_at": "2026-11-20T10:17:38.071586+00:00",
+  "summary": "Record sensitivity software preflight, scientific eligibility and pressure-constraint decision needed.",
+  "payload": {
+    "markdown": "- Phase 3.2.2 preflight: HNO-top has a reviewed synthetic formation Gibbs energy of -0.140 eV, with hydrogenate and desorb affected at fixed TS. The 1.600 bar baseline lies at the maximum reviewed pressure for all four reactions. Symmetric fixed-other-pressure NO orders are ineligible at this point. Four intermediate plans are staged. No native sensitivity results have been accepted at this checkpoint. Both phase suites passed 702 tests; full suite retained exactly five historical failures."
+  },
+  "evidence": [
+    {
+      "locator": "configs/kinetics/mkm_sensitivity_plan.schema.json",
+      "authority": "module_validation",
+      "sha256": "2256e7968e9a26233acbac1a8911f690bb837cc9fd5a432263d0c66ce72ccabe",
+      "observed_at": "2026-11-20T10:17:38.071586+00:00"
+    },
+    {
+      "locator": "configs/kinetics/mkm_sensitivity_result.schema.json",
+      "authority": "module_validation",
+      "sha256": "d055c5fe7f7459d1b61d8467f0686a3f2d49929aa93462aef587fff560d3e1e7",
+      "observed_at": "2026-11-20T10:17:38.071586+00:00"
+    },
+    {
+      "locator": "modules/baseline_mkm/README.md",
+      "authority": "repository_document",
+      "sha256": "c9e865d0c3564f879422da605fa54d70ae036e0acbe8f35eb2e3666a7b0873c8",
+      "observed_at": "2026-11-20T10:17:38.071586+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/.gitattributes",
+      "authority": "repository_document",
+      "sha256": "da292e303e2eded639c91032ae328bc25209619297dd0abfa562e213404e5370",
+      "observed_at": "2026-11-20T10:17:38.071586+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/eligibility.json",
+      "authority": "module_validation",
+      "sha256": "8c487200739b200b19d7207313bf2a84dbb226e6537677cca11ddb6c0af72cc9",
+      "observed_at": "2026-11-20T10:17:38.071586+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-coarse/minus/plan.json",
+      "authority": "module_validation",
+      "sha256": "b415a9cd59a24b8f59f896611b503ed14bf45c6b5be36d4427f218d0262985b7",
+      "observed_at": "2026-11-20T10:17:38.071586+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-coarse/pair.json",
+      "authority": "module_validation",
+      "sha256": "bc038121159ed12bad6e69492241a59af44cbe1c26b668cd63bba515646a71a6",
+      "observed_at": "2026-11-20T10:17:38.071586+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-coarse/plus/plan.json",
+      "authority": "module_validation",
+      "sha256": "77b70b466c57395f8b553dafa4bf67939ce2740f4a049d0ac65bbfeb7ea572f3",
+      "observed_at": "2026-11-20T10:17:38.071586+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-fine/minus/plan.json",
+      "authority": "module_validation",
+      "sha256": "0101aebecf045e5958dd49eeeeb3d56d3a2810778692489bad449e4839df8ac8",
+      "observed_at": "2026-11-20T10:17:38.071586+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-fine/pair.json",
+      "authority": "module_validation",
+      "sha256": "15d3cf0f4bd41b304efcc99a7a16eeff7bd1445b7b21c5d3cd7957bd00874b71",
+      "observed_at": "2026-11-20T10:17:38.071586+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-fine/plus/plan.json",
+      "authority": "module_validation",
+      "sha256": "e2b16293d026f80a2bb7fd2bb520e79077892b397b32ceb83bd816dd1ec2a0c7",
+      "observed_at": "2026-11-20T10:17:38.071586+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/regression/development.txt.gz",
+      "authority": "module_validation",
+      "sha256": "a1348b7d774b3b45d67687d7d25cbb959a24c3cce56d5ebc0bae0f7450d4d29e",
+      "observed_at": "2026-11-20T10:17:38.071586+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/regression/full.txt.gz",
+      "authority": "module_validation",
+      "sha256": "e60827b4ae357bc9fcfe29a7edab8c28a6e313dafcca9046eaa49b9559376715",
+      "observed_at": "2026-11-20T10:17:38.071586+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/regression/release.txt.gz",
+      "authority": "module_validation",
+      "sha256": "6b3476678e743e84639f77bf9ce415ed4cb1010e9f230ad8ff8c9d10c41120f6",
+      "observed_at": "2026-11-20T10:17:38.071586+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/scientific_basis.md",
+      "authority": "repository_document",
+      "sha256": "f91f5c902865ea9a614c0b5c06b255c19b687846f161ee89c3b6cdde76f6e4a3",
+      "observed_at": "2026-11-20T10:17:38.071586+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/test_report.md",
+      "authority": "repository_document",
+      "sha256": "530844464c5651fec207ac8165d795e50815a52eed3991a6138bd8e5305bd3fd",
+      "observed_at": "2026-11-20T10:17:38.071586+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/analysis.py",
+      "authority": "module_validation",
+      "sha256": "ffe0ecd067bf8c13f7373bf8c40bc2986453f52dab3125bdc2434c6d80660761",
+      "observed_at": "2026-11-20T10:17:38.071586+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/drc_cross_reaction.py",
+      "authority": "module_validation",
+      "sha256": "13a0bfa97813b2c279f16363bc3cc206f4c76819fd600dac306a52c9163f0b39",
+      "observed_at": "2026-11-20T10:17:38.071586+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/drc_pair.py",
+      "authority": "module_validation",
+      "sha256": "8212628841c3de3e2ae751e13e329613f38027ceeb66a829ad44915b2fdb364f",
+      "observed_at": "2026-11-20T10:17:38.071586+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/drc_step_size.py",
+      "authority": "module_validation",
+      "sha256": "5891504e9f65d2459f0c6b9591b90ccf115b0cb1895c6169001befc4ca536c60",
+      "observed_at": "2026-11-20T10:17:38.071586+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/sensitivity_inputs.py",
+      "authority": "module_validation",
+      "sha256": "49a4f82c11018c4e46c5df80e8f39dd075154d4670a0ace1085489385f532e94",
+      "observed_at": "2026-11-20T10:17:38.071586+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/sensitivity_report.py",
+      "authority": "module_validation",
+      "sha256": "194ac80fdc3fa73d2b07dcb660b80771150016d8a0b22fc2d73f9229a01323c3",
+      "observed_at": "2026-11-20T10:17:38.071586+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/sensitivity_study.py",
+      "authority": "module_validation",
+      "sha256": "fcad40421a6fd2cff99a53cd3151c20f762b21581fc34269ab36549d592c69b7",
+      "observed_at": "2026-11-20T10:17:38.071586+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/single_point.py",
+      "authority": "module_validation",
+      "sha256": "6e6eaa2252ad5464c689cdfb0e2c826673f47d6b3bbddd7da7b6cbfcbfeb0d3f",
+      "observed_at": "2026-11-20T10:17:38.071586+00:00"
+    },
+    {
+      "locator": "tests/test_mkm_sensitivity.py",
+      "authority": "module_validation",
+      "sha256": "bbbf2f459edf392e5394fc6900f5d62d54ddf41741f5cd8202d9f7a330bf4698",
+      "observed_at": "2026-11-20T10:17:38.071586+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

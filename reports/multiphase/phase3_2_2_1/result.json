@@ -1,0 +1,1548 @@
+{
+  "format": "mkm-composition-order/1",
+  "observable": "NO constrained-composition reaction order",
+  "complete": true,
+  "pairs": {
+    "coarse": {
+      "cases": {
+        "plus": {
+          "run_id": "plus-ac2566001e7b488f",
+          "run_receipt_sha256": "7f532aff758594233065adcf5e19d76e5a9004c645a456d88e4146b498629321",
+          "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+          "dataset_version": "ac2566001e7b488f948558d2dc2966476c693dcc8d9a8f501fa198abbcf209dc",
+          "source_hashes": {
+            "network": "6a4717c44a6c5a76191baf88e419621e461886c96989a6cdb86402df70c58b40",
+            "dataset": "5955f112fc8b33941c5daeda50758cdca743aa7dbf1209a75219297a9ed0abe1",
+            "configuration": "201f06bd2a5b5a0363d07fc2ab998f3ed422a004ce33de64483369eab9770bbb",
+            "result": "6d1aa5bc1951e4e5c2cee9328936ee8a560b7b4a428147b743e1716b35bd7697",
+            "plan": "1efff771800f688ee2ceb7bfe6e40b31f005310c371f87eee4415a89262931e1",
+            "approval": "65a6bed2396046b25419476e5b89a8fba91075050011ee1c8d3575504b289cd8"
+          },
+          "native_hashes": {
+            "runtime/result_phase25/data1.mat": "152afc645be25d0732b56b374abd7e5f526b6cc2ea83fb71f8d2780250d41d8d",
+            "runtime/result_phase25/log1": "6d75ca8003dfa2a25082429dcdb144e5345eb979f4326d2f480ac24eb9b8b3ca",
+            "runtime/result_phase25/Input_phase25_1": "6f9c4862e4cf6248be42ad30bf316cefeb1b76c1fbd908d9c7f7d13ea7f7e39b",
+            "runtime/console.log": "0e4c7f3facfab31cb23dbdedb2a67c7c025279a05c472bb34e74e4d8fcf28f76"
+          },
+          "perturbation": null,
+          "convergence": "converged",
+          "scientific_validation": "validated_within_scope",
+          "validation": {
+            "status": "passed",
+            "max_relative_coefficient_error": 3.074609506259485e-05,
+            "steady_state_absolute_tolerance": 1.6624969362674764e-05
+          },
+          "steady_state_residual": 8.526512829121202e-14,
+          "runtime_s": 85.539821,
+          "net_tof_per_site_pair_s": 83.12484681337382,
+          "product_based_tof_per_site_pair_s": 83.12484681337382,
+          "rates": {
+            "ads": {
+              "kf": 1062.5334512545078,
+              "kr": 58.39820737222975,
+              "forward_unit": "bar^-1 s^-1",
+              "reverse_unit": "s^-1",
+              "forward_flux": 95.2358997675539,
+              "reverse_flux": 12.111052954180074,
+              "net_flux": 83.12484681337382,
+              "flux_unit": "events per reference site per second",
+              "reaction_free_energy_eV": -0.1,
+              "forward_activation_free_energy_eV": 0.4,
+              "reverse_activation_free_energy_eV": 0.5,
+              "native_log_balance_residual": -3.3402329515652696e-06
+            },
+            "transfer": {
+              "kf": 2214.7271375269625,
+              "kr": 3956.4788303965233,
+              "forward_unit": "s^-1",
+              "reverse_unit": "s^-1",
+              "forward_flux": 451.0683455732454,
+              "reverse_flux": 367.94349875987155,
+              "net_flux": 83.12484681337382,
+              "flux_unit": "events per reference site per second",
+              "reaction_free_energy_eV": 0.019999999999999997,
+              "forward_activation_free_energy_eV": 0.76,
+              "reverse_activation_free_energy_eV": 0.74,
+              "native_log_balance_residual": 6.680465912678457e-07
+            },
+            "hydrogenate": {
+              "kf": 1239.7428380039596,
+              "kr": 68.13786357174203,
+              "forward_unit": "bar^-1 s^-1",
+              "reverse_unit": "s^-1",
+              "forward_flux": 193.81946505200213,
+              "reverse_flux": 27.569771425254466,
+              "net_flux": 166.24969362674764,
+              "flux_unit": "events per reference site per second",
+              "reaction_free_energy_eV": -0.1,
+              "forward_activation_free_energy_eV": 0.78,
+              "reverse_activation_free_energy_eV": 0.88,
+              "native_log_balance_residual": -3.3402329515652696e-06
+            },
+            "desorb": {
+              "kf": 693.9736630934748,
+              "kr": 3956.4788303965233,
+              "forward_unit": "s^-1",
+              "reverse_unit": "bar^-1 s^-1",
+              "forward_flux": 280.7938826330962,
+              "reverse_flux": 114.54418900634852,
+              "net_flux": 166.24969362674764,
+              "flux_unit": "events per reference site per second",
+              "reaction_free_energy_eV": 0.06000000000000001,
+              "forward_activation_free_energy_eV": 0.8,
+              "reverse_activation_free_energy_eV": 0.74,
+              "native_log_balance_residual": 2.0041397716941134e-06
+            }
+          },
+          "coverage": {
+            "HNO-top": 0.4046174913633208,
+            "H2-top": 0.3003851266777493,
+            "H2-bridge": 0.6904050540964789
+          },
+          "vacancies": {
+            "top-Ni": 0.2949973819589299,
+            "bridge-Cu": 0.3095949459035211
+          },
+          "site_residuals": {
+            "top-Ni": 0.0,
+            "bridge-Cu": 0.0
+          },
+          "element_balance": {
+            "H": {
+              "produced": 166.24969362674764,
+              "consumed": 166.24969362674764,
+              "residual": 0.0
+            },
+            "N": {
+              "produced": 166.24969362674764,
+              "consumed": 166.24969362674764,
+              "residual": 0.0
+            },
+            "O": {
+              "produced": 166.24969362674764,
+              "consumed": 166.24969362674764,
+              "residual": 0.0
+            }
+          },
+          "actual_pressures_bar": {
+            "H2-g": 0.9814,
+            "HNO-g": 0.09814,
+            "NO-g": 0.52046
+          },
+          "actual_log_step": 0.04010493749630468,
+          "total_bar": 1.6,
+          "H2_HNO_ratio": 10.0,
+          "pressure_residuals_bar": {
+            "H2-g": 0.0,
+            "HNO-g": 0.0,
+            "NO-g": 0.0
+          },
+          "directions": {
+            "ads": {
+              "native_index": 1,
+              "fixed_T_energy_input": {
+                "Ea_eV": 0.7853168271366968,
+                "G0_eV": -0.1,
+                "ThermoMode": 0,
+                "BarrierMode": -2,
+                "ConsMode": 0
+              },
+              "forward": {
+                "gas_orders": {
+                  "H2-g": 1
+                },
+                "surface_orders": {},
+                "vacant_site_orders": {
+                  "top-Ni": 1,
+                  "bridge-Cu": 1
+                },
+                "gas_pressure_factor": 0.9814,
+                "adsorbate_factor": 1,
+                "vacancy_factor": 0.09132969850925525,
+                "coefficient_unit": "bar^-1 s^-1",
+                "expected_coefficient": 1062.5043325104702,
+                "native_coefficient": 1062.5334512545078,
+                "reconstructed_flux": 95.2358997675539,
+                "native_flux": 95.2358997675539
+              },
+              "reverse": {
+                "gas_orders": {},
+                "surface_orders": {
+                  "H2-top": 1,
+                  "H2-bridge": 1
+                },
+                "vacant_site_orders": {},
+                "gas_pressure_factor": 1,
+                "adsorbate_factor": 0.20738740963372918,
+                "vacancy_factor": 1,
+                "coefficient_unit": "s^-1",
+                "expected_coefficient": 58.396411910597834,
+                "native_coefficient": 58.39820737222975,
+                "reconstructed_flux": 12.111052954180074,
+                "native_flux": 12.111052954180074
+              }
+            },
+            "transfer": {
+              "native_index": 2,
+              "fixed_T_energy_input": {
+                "Ea_eV": 0.76,
+                "G0_eV": 0.02000000000000003,
+                "ThermoMode": 0,
+                "BarrierMode": -2,
+                "ConsMode": 0
+              },
+              "forward": {
+                "gas_orders": {},
+                "surface_orders": {
+                  "H2-bridge": 1
+                },
+                "vacant_site_orders": {
+                  "top-Ni": 1
+                },
+                "gas_pressure_factor": 1,
+                "adsorbate_factor": 0.6904050540964789,
+                "vacancy_factor": 0.2949973819589299,
+                "coefficient_unit": "s^-1",
+                "expected_coefficient": 2214.668315712438,
+                "native_coefficient": 2214.7271375269625,
+                "reconstructed_flux": 451.0683455732454,
+                "native_flux": 451.0683455732454
+              },
+              "reverse": {
+                "gas_orders": {},
+                "surface_orders": {
+                  "H2-top": 1
+                },
+                "vacant_site_orders": {
+                  "bridge-Cu": 1
+                },
+                "gas_pressure_factor": 1,
+                "adsorbate_factor": 0.3003851266777493,
+                "vacancy_factor": 0.3095949459035211,
+                "coefficient_unit": "s^-1",
+                "expected_coefficient": 3956.3763917523693,
+                "native_coefficient": 3956.4788303965233,
+                "reconstructed_flux": 367.94349875987155,
+                "native_flux": 367.94349875987155
+              }
+            },
+            "hydrogenate": {
+              "native_index": 3,
+              "fixed_T_energy_input": {
+                "Ea_eV": 0.78,
+                "G0_eV": -0.09999999999999992,
+                "ThermoMode": 0,
+                "BarrierMode": -2,
+                "ConsMode": 0
+              },
+              "forward": {
+                "gas_orders": {
+                  "NO-g": 1
+                },
+                "surface_orders": {
+                  "H2-top": 1
+                },
+                "vacant_site_orders": {},
+                "gas_pressure_factor": 0.52046,
+                "adsorbate_factor": 0.3003851266777493,
+                "vacancy_factor": 1,
+                "coefficient_unit": "bar^-1 s^-1",
+                "expected_coefficient": 1239.709082999593,
+                "native_coefficient": 1239.7428380039596,
+                "reconstructed_flux": 193.81946505200213,
+                "native_flux": 193.81946505200213
+              },
+              "reverse": {
+                "gas_orders": {},
+                "surface_orders": {
+                  "HNO-top": 1
+                },
+                "vacant_site_orders": {},
+                "gas_pressure_factor": 1,
+                "adsorbate_factor": 0.4046174913633208,
+                "vacancy_factor": 1,
+                "coefficient_unit": "s^-1",
+                "expected_coefficient": 68.13578076345448,
+                "native_coefficient": 68.13786357174203,
+                "reconstructed_flux": 27.569771425254462,
+                "native_flux": 27.569771425254466
+              }
+            },
+            "desorb": {
+              "native_index": 4,
+              "fixed_T_energy_input": {
+                "Ea_eV": 0.8,
+                "G0_eV": 0.0600000000000001,
+                "ThermoMode": 0,
+                "BarrierMode": -2,
+                "ConsMode": 0
+              },
+              "forward": {
+                "gas_orders": {},
+                "surface_orders": {
+                  "HNO-top": 1
+                },
+                "vacant_site_orders": {},
+                "gas_pressure_factor": 1,
+                "adsorbate_factor": 0.4046174913633208,
+                "vacancy_factor": 1,
+                "coefficient_unit": "s^-1",
+                "expected_coefficient": 693.954304384082,
+                "native_coefficient": 693.9736630934748,
+                "reconstructed_flux": 280.79388263309613,
+                "native_flux": 280.7938826330962
+              },
+              "reverse": {
+                "gas_orders": {
+                  "HNO-g": 1
+                },
+                "surface_orders": {},
+                "vacant_site_orders": {
+                  "top-Ni": 1
+                },
+                "gas_pressure_factor": 0.09814,
+                "adsorbate_factor": 1,
+                "vacancy_factor": 0.2949973819589299,
+                "coefficient_unit": "bar^-1 s^-1",
+                "expected_coefficient": 3956.3763917523693,
+                "native_coefficient": 3956.4788303965233,
+                "reconstructed_flux": 114.54418900634855,
+                "native_flux": 114.54418900634852
+              }
+            }
+          },
+          "response": {
+            "coverage": {
+              "HNO-top": 0.003405282967163803,
+              "H2-top": -0.006716115945766543,
+              "H2-bridge": -0.006274424914674559
+            },
+            "vacancy": {
+              "top-Ni": 0.00331083297860274,
+              "bridge-Cu": 0.0062744249146746145
+            },
+            "flux": {
+              "ads": {
+                "forward_flux": 1.2287669317156684,
+                "reverse_flux": -0.38330972001047847,
+                "net_flux": 1.6120766517261274
+              },
+              "transfer": {
+                "forward_flux": 1.0091414644558085,
+                "reverse_flux": -0.6029351872703614,
+                "net_flux": 1.6120766517261274
+              },
+              "hydrogenate": {
+                "forward_flux": 3.4561820096920712,
+                "reverse_flux": 0.2320287062397881,
+                "net_flux": 3.2241533034522547
+              },
+              "desorb": {
+                "forward_flux": 2.363176694592539,
+                "reverse_flux": -0.8609766088597723,
+                "net_flux": 3.2241533034522547
+              }
+            }
+          }
+        },
+        "minus": {
+          "run_id": "minus-7a130cb1425ce766",
+          "run_receipt_sha256": "dacc1453976dab90ba76e4b213bfc876d8eb532a67207f30558e0f7942305e85",
+          "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+          "dataset_version": "7a130cb1425ce7662f0da7566298f00dba06e000dddbbc35faeedb4564c45596",
+          "source_hashes": {
+            "network": "6a4717c44a6c5a76191baf88e419621e461886c96989a6cdb86402df70c58b40",
+            "dataset": "4c396925fe85adf1945cc41d1bd29585733d6fa28ba875335415846bb08d8a86",
+            "configuration": "80d3ba85a72c115ac03875f37fdb472eb77196ee7dbc17c1244feae256521d40",
+            "result": "876a3093d60da69c98ad89f1621a9ee8d766978fe808e554f9c0fa09a9daebeb",
+            "plan": "a9d580f8b06f951ae9251fedb313c3139e62a3a0fef16e9085243e4d2d8eb0db",
+            "approval": "a6cbef2724ab0d06d080845b588d82f3d32b2b5c465bc40228467cdb5bac1821"
+          },
+          "native_hashes": {
+            "runtime/result_phase25/data1.mat": "f90db88e81505bf68f67a98f6f33462104e4b24e6fe1cc123ecb275c05e4d4b2",
+            "runtime/result_phase25/log1": "c39957f05da88fe0324d16cb7f116a27646a21da59338d06d0b6c681ce878cc6",
+            "runtime/result_phase25/Input_phase25_1": "0d6f90bf2f51c63d8e98efa72fc74958dd4726d13c1244a73a3ed8007a060daa",
+            "runtime/console.log": "712c903ff2c21a6073e984063691c22466adfe2aacb53cbfe01bf1f5abe20579"
+          },
+          "perturbation": null,
+          "convergence": "converged",
+          "scientific_validation": "validated_within_scope",
+          "validation": {
+            "status": "passed",
+            "max_relative_coefficient_error": 3.074609506259485e-05,
+            "steady_state_absolute_tolerance": 1.5979370906502523e-05
+          },
+          "steady_state_residual": 5.684341886080802e-14,
+          "runtime_s": 45.899125,
+          "net_tof_per_site_pair_s": 79.89685453251262,
+          "product_based_tof_per_site_pair_s": 79.89685453251262,
+          "rates": {
+            "ads": {
+              "kf": 1062.5334512545078,
+              "kr": 58.39820737222975,
+              "forward_unit": "bar^-1 s^-1",
+              "reverse_unit": "s^-1",
+              "forward_flux": 92.77316340597979,
+              "reverse_flux": 12.876308873467169,
+              "net_flux": 79.89685453251262,
+              "flux_unit": "events per reference site per second",
+              "reaction_free_energy_eV": -0.1,
+              "forward_activation_free_energy_eV": 0.4,
+              "reverse_activation_free_energy_eV": 0.5,
+              "native_log_balance_residual": -3.3402329515652696e-06
+            },
+            "transfer": {
+              "kf": 2214.7271375269625,
+              "kr": 3956.4788303965233,
+              "forward_unit": "s^-1",
+              "reverse_unit": "s^-1",
+              "forward_flux": 449.02060047552686,
+              "reverse_flux": 369.1237459430143,
+              "net_flux": 79.89685453251262,
+              "flux_unit": "events per reference site per second",
+              "reaction_free_energy_eV": 0.019999999999999997,
+              "forward_activation_free_energy_eV": 0.76,
+              "reverse_activation_free_energy_eV": 0.74,
+              "native_log_balance_residual": 6.680465912678457e-07
+            },
+            "hydrogenate": {
+              "kf": 1239.7428380039596,
+              "kr": 68.13786357174203,
+              "forward_unit": "bar^-1 s^-1",
+              "reverse_unit": "s^-1",
+              "forward_flux": 186.89099344483265,
+              "reverse_flux": 27.09728437980742,
+              "net_flux": 159.79370906502524,
+              "flux_unit": "events per reference site per second",
+              "reaction_free_energy_eV": -0.1,
+              "forward_activation_free_energy_eV": 0.78,
+              "reverse_activation_free_energy_eV": 0.88,
+              "native_log_balance_residual": -3.3402329515652696e-06
+            },
+            "desorb": {
+              "kf": 693.9736630934748,
+              "kr": 3956.4788303965233,
+              "forward_unit": "s^-1",
+              "reverse_unit": "bar^-1 s^-1",
+              "forward_flux": 275.9816747283405,
+              "reverse_flux": 116.1879656633153,
+              "net_flux": 159.79370906502524,
+              "flux_unit": "events per reference site per second",
+              "reaction_free_energy_eV": 0.06000000000000001,
+              "forward_activation_free_energy_eV": 0.8,
+              "reverse_activation_free_energy_eV": 0.74,
+              "native_log_balance_residual": 2.0041397716941134e-06
+            }
+          },
+          "coverage": {
+            "HNO-top": 0.39768321105748816,
+            "H2-top": 0.3137875336333394,
+            "H2-bridge": 0.7026777213485407
+          },
+          "vacancies": {
+            "top-Ni": 0.28852925530917245,
+            "bridge-Cu": 0.2973222786514593
+          },
+          "site_residuals": {
+            "top-Ni": 0.0,
+            "bridge-Cu": 0.0
+          },
+          "element_balance": {
+            "H": {
+              "produced": 159.79370906502524,
+              "consumed": 159.79370906502524,
+              "residual": 0.0
+            },
+            "N": {
+              "produced": 159.79370906502524,
+              "consumed": 159.79370906502524,
+              "residual": 0.0
+            },
+            "O": {
+              "produced": 159.79370906502524,
+              "consumed": 159.79370906502524,
+              "residual": 0.0
+            }
+          },
+          "actual_pressures_bar": {
+            "H2-g": 1.0178,
+            "HNO-g": 0.10178,
+            "NO-g": 0.48042
+          },
+          "actual_log_step": -0.03994737710959425,
+          "total_bar": 1.6,
+          "H2_HNO_ratio": 10.0,
+          "pressure_residuals_bar": {
+            "H2-g": 0.0,
+            "HNO-g": 0.0,
+            "NO-g": 0.0
+          },
+          "directions": {
+            "ads": {
+              "native_index": 1,
+              "fixed_T_energy_input": {
+                "Ea_eV": 0.7853168271366968,
+                "G0_eV": -0.1,
+                "ThermoMode": 0,
+                "BarrierMode": -2,
+                "ConsMode": 0
+              },
+              "forward": {
+                "gas_orders": {
+                  "H2-g": 1
+                },
+                "surface_orders": {},
+                "vacant_site_orders": {
+                  "top-Ni": 1,
+                  "bridge-Cu": 1
+                },
+                "gas_pressure_factor": 1.0178,
+                "adsorbate_factor": 1,
+                "vacancy_factor": 0.08578617564613182,
+                "coefficient_unit": "bar^-1 s^-1",
+                "expected_coefficient": 1062.5043325104702,
+                "native_coefficient": 1062.5334512545078,
+                "reconstructed_flux": 92.77316340597979,
+                "native_flux": 92.77316340597979
+              },
+              "reverse": {
+                "gas_orders": {},
+                "surface_orders": {
+                  "H2-top": 1,
+                  "H2-bridge": 1
+                },
+                "vacant_site_orders": {},
+                "gas_pressure_factor": 1,
+                "adsorbate_factor": 0.2204915091210535,
+                "vacancy_factor": 1,
+                "coefficient_unit": "s^-1",
+                "expected_coefficient": 58.396411910597834,
+                "native_coefficient": 58.39820737222975,
+                "reconstructed_flux": 12.876308873467169,
+                "native_flux": 12.876308873467169
+              }
+            },
+            "transfer": {
+              "native_index": 2,
+              "fixed_T_energy_input": {
+                "Ea_eV": 0.76,
+                "G0_eV": 0.02000000000000003,
+                "ThermoMode": 0,
+                "BarrierMode": -2,
+                "ConsMode": 0
+              },
+              "forward": {
+                "gas_orders": {},
+                "surface_orders": {
+                  "H2-bridge": 1
+                },
+                "vacant_site_orders": {
+                  "top-Ni": 1
+                },
+                "gas_pressure_factor": 1,
+                "adsorbate_factor": 0.7026777213485407,
+                "vacancy_factor": 0.28852925530917245,
+                "coefficient_unit": "s^-1",
+                "expected_coefficient": 2214.668315712438,
+                "native_coefficient": 2214.7271375269625,
+                "reconstructed_flux": 449.0206004755269,
+                "native_flux": 449.02060047552686
+              },
+              "reverse": {
+                "gas_orders": {},
+                "surface_orders": {
+                  "H2-top": 1
+                },
+                "vacant_site_orders": {
+                  "bridge-Cu": 1
+                },
+                "gas_pressure_factor": 1,
+                "adsorbate_factor": 0.3137875336333394,
+                "vacancy_factor": 0.2973222786514593,
+                "coefficient_unit": "s^-1",
+                "expected_coefficient": 3956.3763917523693,
+                "native_coefficient": 3956.4788303965233,
+                "reconstructed_flux": 369.1237459430143,
+                "native_flux": 369.1237459430143
+              }
+            },
+            "hydrogenate": {
+              "native_index": 3,
+              "fixed_T_energy_input": {
+                "Ea_eV": 0.78,
+                "G0_eV": -0.09999999999999992,
+                "ThermoMode": 0,
+                "BarrierMode": -2,
+                "ConsMode": 0
+              },
+              "forward": {
+                "gas_orders": {
+                  "NO-g": 1
+                },
+                "surface_orders": {
+                  "H2-top": 1
+                },
+                "vacant_site_orders": {},
+                "gas_pressure_factor": 0.48042,
+                "adsorbate_factor": 0.3137875336333394,
+                "vacancy_factor": 1,
+                "coefficient_unit": "bar^-1 s^-1",
+                "expected_coefficient": 1239.709082999593,
+                "native_coefficient": 1239.7428380039596,
+                "reconstructed_flux": 186.89099344483265,
+                "native_flux": 186.89099344483265
+              },
+              "reverse": {
+                "gas_orders": {},
+                "surface_orders": {
+                  "HNO-top": 1
+                },
+                "vacant_site_orders": {},
+                "gas_pressure_factor": 1,
+                "adsorbate_factor": 0.39768321105748816,
+                "vacancy_factor": 1,
+                "coefficient_unit": "s^-1",
+                "expected_coefficient": 68.13578076345448,
+                "native_coefficient": 68.13786357174203,
+                "reconstructed_flux": 27.09728437980742,
+                "native_flux": 27.09728437980742
+              }
+            },
+            "desorb": {
+              "native_index": 4,
+              "fixed_T_energy_input": {
+                "Ea_eV": 0.8,
+                "G0_eV": 0.0600000000000001,
+                "ThermoMode": 0,
+                "BarrierMode": -2,
+                "ConsMode": 0
+              },
+              "forward": {
+                "gas_orders": {},
+                "surface_orders": {
+                  "HNO-top": 1
+                },
+                "vacant_site_orders": {},
+                "gas_pressure_factor": 1,
+                "adsorbate_factor": 0.39768321105748816,
+                "vacancy_factor": 1,
+                "coefficient_unit": "s^-1",
+                "expected_coefficient": 693.954304384082,
+                "native_coefficient": 693.9736630934748,
+                "reconstructed_flux": 275.9816747283405,
+                "native_flux": 275.9816747283405
+              },
+              "reverse": {
+                "gas_orders": {
+                  "HNO-g": 1
+                },
+                "surface_orders": {},
+                "vacant_site_orders": {
+                  "top-Ni": 1
+                },
+                "gas_pressure_factor": 0.10178,
+                "adsorbate_factor": 1,
+                "vacancy_factor": 0.28852925530917245,
+                "coefficient_unit": "bar^-1 s^-1",
+                "expected_coefficient": 3956.3763917523693,
+                "native_coefficient": 3956.4788303965233,
+                "reconstructed_flux": 116.1879656633153,
+                "native_flux": 116.1879656633153
+              }
+            }
+          },
+          "response": {
+            "coverage": {
+              "HNO-top": -0.003528997338668849,
+              "H2-top": 0.006686291009823542,
+              "H2-bridge": 0.005998242337387216
+            },
+            "vacancy": {
+              "top-Ni": -0.003157293671154693,
+              "bridge-Cu": -0.005998242337387161
+            },
+            "flux": {
+              "ads": {
+                "forward_flux": -1.2339694298584476,
+                "reverse_flux": 0.38194619927661577,
+                "net_flux": -1.615915629135074
+              },
+              "transfer": {
+                "forward_flux": -1.03860363326271,
+                "reverse_flux": 0.5773119958723782,
+                "net_flux": -1.615915629135074
+              },
+              "hydrogenate": {
+                "forward_flux": -3.4722895974774133,
+                "reverse_flux": -0.24045833920725812,
+                "net_flux": -3.231831258270148
+              },
+              "desorb": {
+                "forward_flux": -2.4490312101631275,
+                "reverse_flux": 0.7828000481070063,
+                "net_flux": -3.231831258270148
+              }
+            }
+          }
+        }
+      },
+      "stages": {
+        "plus": "ACCEPTED",
+        "minus": "ACCEPTED"
+      },
+      "estimates": {
+        "x_minus": -0.03994737710959425,
+        "x_plus": 0.04010493749630468,
+        "negative_side": 0.5012397327896665,
+        "positive_side": 0.48831790492530797,
+        "secant": 0.4947661023719906,
+        "quadratic_at_zero": 0.4947915353429838
+      },
+      "independent": {
+        "x_minus": -0.03994737710959425,
+        "x_plus": 0.04010493749630468,
+        "negative_side": 0.5012397327896665,
+        "positive_side": 0.48831790492530797,
+        "secant": 0.4947661023719906,
+        "quadratic_at_zero": 0.4947915353429838
+      }
+    },
+    "fine": {
+      "cases": {
+        "plus": {
+          "run_id": "plus-e24f1ffa1302b1a4",
+          "run_receipt_sha256": "3453f4f6cfc05022db822dcb4158fda1c6d6d6af2fb0eba62b454fa7438a1a84",
+          "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+          "dataset_version": "e24f1ffa1302b1a4ba80583235bd8698f56007ab1377de6c6ac5c6072003e93b",
+          "source_hashes": {
+            "network": "6a4717c44a6c5a76191baf88e419621e461886c96989a6cdb86402df70c58b40",
+            "dataset": "c3964357e01ac9092290b12c7b2cc79ee2b40080c14f965649765584396d4582",
+            "configuration": "43653abfd688f2e330c8c39bd0ec68120736f087e9bac632571115857dad86f0",
+            "result": "1af27fa1c8dacf900f3c9604bd78adf4b72a8ee22d0789f7b6768be924bc016e",
+            "plan": "9c44bdb825ccbf25b2c10576df1ab9e2814ce1c259de8474189fd3fc9e3bcc2c",
+            "approval": "c94cb6db029928a6b57f73cfe71faa3fe51d2c029c724eca22d7e8d42e41d662"
+          },
+          "native_hashes": {
+            "runtime/result_phase25/data1.mat": "b923fe17ba82e824f9e07637d1e7dc10471d3705fd52ddb1d1ed1bf8378cc540",
+            "runtime/result_phase25/log1": "e2d2a37b46ea23df6f4da7caf2b55c52cc5ecd73128462cc1e2663d5200f8bcf",
+            "runtime/result_phase25/Input_phase25_1": "17919b263363a063117f358ad2a18608f3f6563fa1fe6f52724fc42213470b5e",
+            "runtime/console.log": "c18c4dacfccf86478e6409ea8c5395ee91505450517aa843e8b2cbfc4a4fd09c"
+          },
+          "perturbation": null,
+          "convergence": "converged",
+          "scientific_validation": "validated_within_scope",
+          "validation": {
+            "status": "passed",
+            "max_relative_coefficient_error": 3.074609506259485e-05,
+            "steady_state_absolute_tolerance": 1.6463940726700322e-05
+          },
+          "steady_state_residual": 5.684341886080802e-14,
+          "runtime_s": 75.988302,
+          "net_tof_per_site_pair_s": 82.31970363350162,
+          "product_based_tof_per_site_pair_s": 82.31970363350162,
+          "rates": {
+            "ads": {
+              "kf": 1062.5334512545078,
+              "kr": 58.39820737222975,
+              "forward_unit": "bar^-1 s^-1",
+              "reverse_unit": "s^-1",
+              "forward_flux": 94.62253090749554,
+              "reverse_flux": 12.302827273993934,
+              "net_flux": 82.31970363350162,
+              "flux_unit": "events per reference site per second",
+              "reaction_free_energy_eV": -0.1,
+              "forward_activation_free_energy_eV": 0.4,
+              "reverse_activation_free_energy_eV": 0.5,
+              "native_log_balance_residual": -3.3402329515652696e-06
+            },
+            "transfer": {
+              "kf": 2214.7271375269625,
+              "kr": 3956.4788303965233,
+              "forward_unit": "s^-1",
+              "reverse_unit": "s^-1",
+              "forward_flux": 450.56769406748145,
+              "reverse_flux": 368.2479904339798,
+              "net_flux": 82.31970363350162,
+              "flux_unit": "events per reference site per second",
+              "reaction_free_energy_eV": 0.019999999999999997,
+              "forward_activation_free_energy_eV": 0.76,
+              "reverse_activation_free_energy_eV": 0.74,
+              "native_log_balance_residual": 6.680465912678457e-07
+            },
+            "hydrogenate": {
+              "kf": 1239.7428380039596,
+              "kr": 68.13786357174203,
+              "forward_unit": "bar^-1 s^-1",
+              "reverse_unit": "s^-1",
+              "forward_flux": 192.0943179296791,
+              "reverse_flux": 27.454910662675868,
+              "net_flux": 164.63940726700324,
+              "flux_unit": "events per reference site per second",
+              "reaction_free_energy_eV": -0.1,
+              "forward_activation_free_energy_eV": 0.78,
+              "reverse_activation_free_energy_eV": 0.88,
+              "native_log_balance_residual": -3.3402329515652696e-06
+            },
+            "desorb": {
+              "kf": 693.9736630934748,
+              "kr": 3956.4788303965233,
+              "forward_unit": "s^-1",
+              "reverse_unit": "bar^-1 s^-1",
+              "forward_flux": 279.6240434280784,
+              "reverse_flux": 114.98463616107513,
+              "net_flux": 164.63940726700324,
+              "flux_unit": "events per reference site per second",
+              "reaction_free_energy_eV": 0.06000000000000001,
+              "forward_activation_free_energy_eV": 0.8,
+              "reverse_activation_free_energy_eV": 0.74,
+              "native_log_balance_residual": 2.0041397716941134e-06
+            }
+          },
+          "coverage": {
+            "HNO-top": 0.4029317801220568,
+            "H2-top": 0.303745994594413,
+            "H2-bridge": 0.6935772686087415
+          },
+          "vacancies": {
+            "top-Ni": 0.29332222528353014,
+            "bridge-Cu": 0.3064227313912586
+          },
+          "site_residuals": {
+            "top-Ni": 0.0,
+            "bridge-Cu": 0.0
+          },
+          "element_balance": {
+            "H": {
+              "produced": 164.63940726700324,
+              "consumed": 164.63940726700324,
+              "residual": 0.0
+            },
+            "N": {
+              "produced": 164.63940726700324,
+              "consumed": 164.63940726700324,
+              "residual": 0.0
+            },
+            "O": {
+              "produced": 164.63940726700324,
+              "consumed": 164.63940726700324,
+              "residual": 0.0
+            }
+          },
+          "actual_pressures_bar": {
+            "H2-g": 0.9908,
+            "HNO-g": 0.09908,
+            "NO-g": 0.51012
+          },
+          "actual_log_step": 0.020037893736507363,
+          "total_bar": 1.6,
+          "H2_HNO_ratio": 10.0,
+          "pressure_residuals_bar": {
+            "H2-g": 0.0,
+            "HNO-g": 0.0,
+            "NO-g": 0.0
+          },
+          "directions": {
+            "ads": {
+              "native_index": 1,
+              "fixed_T_energy_input": {
+                "Ea_eV": 0.7853168271366968,
+                "G0_eV": -0.1,
+                "ThermoMode": 0,
+                "BarrierMode": -2,
+                "ConsMode": 0
+              },
+              "forward": {
+                "gas_orders": {
+                  "H2-g": 1
+                },
+                "surface_orders": {},
+                "vacant_site_orders": {
+                  "top-Ni": 1,
+                  "bridge-Cu": 1
+                },
+                "gas_pressure_factor": 0.9908,
+                "adsorbate_factor": 1,
+                "vacancy_factor": 0.0898805974491414,
+                "coefficient_unit": "bar^-1 s^-1",
+                "expected_coefficient": 1062.5043325104702,
+                "native_coefficient": 1062.5334512545078,
+                "reconstructed_flux": 94.62253090749554,
+                "native_flux": 94.62253090749554
+              },
+              "reverse": {
+                "gas_orders": {},
+                "surface_orders": {
+                  "H2-top": 1,
+                  "H2-bridge": 1
+                },
+                "vacant_site_orders": {},
+                "gas_pressure_factor": 1,
+                "adsorbate_factor": 0.21067131728163851,
+                "vacancy_factor": 1,
+                "coefficient_unit": "s^-1",
+                "expected_coefficient": 58.396411910597834,
+                "native_coefficient": 58.39820737222975,
+                "reconstructed_flux": 12.302827273993934,
+                "native_flux": 12.302827273993934
+              }
+            },
+            "transfer": {
+              "native_index": 2,
+              "fixed_T_energy_input": {
+                "Ea_eV": 0.76,
+                "G0_eV": 0.02000000000000003,
+                "ThermoMode": 0,
+                "BarrierMode": -2,
+                "ConsMode": 0
+              },
+              "forward": {
+                "gas_orders": {},
+                "surface_orders": {
+                  "H2-bridge": 1
+                },
+                "vacant_site_orders": {
+                  "top-Ni": 1
+                },
+                "gas_pressure_factor": 1,
+                "adsorbate_factor": 0.6935772686087415,
+                "vacancy_factor": 0.29332222528353014,
+                "coefficient_unit": "s^-1",
+                "expected_coefficient": 2214.668315712438,
+                "native_coefficient": 2214.7271375269625,
+                "reconstructed_flux": 450.56769406748145,
+                "native_flux": 450.56769406748145
+              },
+              "reverse": {
+                "gas_orders": {},
+                "surface_orders": {
+                  "H2-top": 1
+                },
+                "vacant_site_orders": {
+                  "bridge-Cu": 1
+                },
+                "gas_pressure_factor": 1,
+                "adsorbate_factor": 0.303745994594413,
+                "vacancy_factor": 0.3064227313912586,
+                "coefficient_unit": "s^-1",
+                "expected_coefficient": 3956.3763917523693,
+                "native_coefficient": 3956.4788303965233,
+                "reconstructed_flux": 368.2479904339798,
+                "native_flux": 368.2479904339798
+              }
+            },
+            "hydrogenate": {
+              "native_index": 3,
+              "fixed_T_energy_input": {
+                "Ea_eV": 0.78,
+                "G0_eV": -0.09999999999999992,
+                "ThermoMode": 0,
+                "BarrierMode": -2,
+                "ConsMode": 0
+              },
+              "forward": {
+                "gas_orders": {
+                  "NO-g": 1
+                },
+                "surface_orders": {
+                  "H2-top": 1
+                },
+                "vacant_site_orders": {},
+                "gas_pressure_factor": 0.51012,
+                "adsorbate_factor": 0.303745994594413,
+                "vacancy_factor": 1,
+                "coefficient_unit": "bar^-1 s^-1",
+                "expected_coefficient": 1239.709082999593,
+                "native_coefficient": 1239.7428380039596,
+                "reconstructed_flux": 192.0943179296791,
+                "native_flux": 192.0943179296791
+              },
+              "reverse": {
+                "gas_orders": {},
+                "surface_orders": {
+                  "HNO-top": 1
+                },
+                "vacant_site_orders": {},
+                "gas_pressure_factor": 1,
+                "adsorbate_factor": 0.4029317801220568,
+                "vacancy_factor": 1,
+                "coefficient_unit": "s^-1",
+                "expected_coefficient": 68.13578076345448,
+                "native_coefficient": 68.13786357174203,
+                "reconstructed_flux": 27.454910662675864,
+                "native_flux": 27.454910662675868
+              }
+            },
+            "desorb": {
+              "native_index": 4,
+              "fixed_T_energy_input": {
+                "Ea_eV": 0.8,
+                "G0_eV": 0.0600000000000001,
+                "ThermoMode": 0,
+                "BarrierMode": -2,
+                "ConsMode": 0
+              },
+              "forward": {
+                "gas_orders": {},
+                "surface_orders": {
+                  "HNO-top": 1
+                },
+                "vacant_site_orders": {},
+                "gas_pressure_factor": 1,
+                "adsorbate_factor": 0.4029317801220568,
+                "vacancy_factor": 1,
+                "coefficient_unit": "s^-1",
+                "expected_coefficient": 693.954304384082,
+                "native_coefficient": 693.9736630934748,
+                "reconstructed_flux": 279.6240434280783,
+                "native_flux": 279.6240434280784
+              },
+              "reverse": {
+                "gas_orders": {
+                  "HNO-g": 1
+                },
+                "surface_orders": {},
+                "vacant_site_orders": {
+                  "top-Ni": 1
+                },
+                "gas_pressure_factor": 0.09908,
+                "adsorbate_factor": 1,
+                "vacancy_factor": 0.29332222528353014,
+                "coefficient_unit": "bar^-1 s^-1",
+                "expected_coefficient": 3956.3763917523693,
+                "native_coefficient": 3956.4788303965233,
+                "reconstructed_flux": 114.98463616107513,
+                "native_flux": 114.98463616107513
+              }
+            }
+          },
+          "response": {
+            "coverage": {
+              "HNO-top": 0.0017195717258998156,
+              "H2-top": -0.003355248029102864,
+              "H2-bridge": -0.0031022104024119868
+            },
+            "vacancy": {
+              "top-Ni": 0.001635676303202993,
+              "bridge-Cu": 0.0031022104024120978
+            },
+            "flux": {
+              "ads": {
+                "forward_flux": 0.6153980716573102,
+                "reverse_flux": -0.19153540019661897,
+                "net_flux": 0.8069334718539238
+              },
+              "transfer": {
+                "forward_flux": 0.5084899586918823,
+                "reverse_flux": -0.2984435131621126,
+                "net_flux": 0.8069334718539238
+              },
+              "hydrogenate": {
+                "forward_flux": 1.7310348873690486,
+                "reverse_flux": 0.11716794366119032,
+                "net_flux": 1.6138669437078477
+              },
+              "desorb": {
+                "forward_flux": 1.1933374895747306,
+                "reverse_flux": -0.4205294541331597,
+                "net_flux": 1.6138669437078477
+              }
+            }
+          }
+        },
+        "minus": {
+          "run_id": "minus-3e11f4c6adc57fee",
+          "run_receipt_sha256": "bafc40740a44ad7b73e9cc73710585a203d17e3a05c789d0f8209cd2538083f2",
+          "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+          "dataset_version": "3e11f4c6adc57fee452a46f0cd8822eb8cb171d47dc0aff56ec31c57ff4ea319",
+          "source_hashes": {
+            "network": "6a4717c44a6c5a76191baf88e419621e461886c96989a6cdb86402df70c58b40",
+            "dataset": "2544d477b8a10303d8659dfc32bb927f1f5d2d1eab15a2b8f3658593bfce9244",
+            "configuration": "dded93e517d45091ca1ea5b5d2f2eb6c3d73825769e198c05003712af859b065",
+            "result": "b8f835f18489d9ac2b84e09bd4b4ceeefa1ff16e402c22cf3e883d0e541ecb1d",
+            "plan": "282a724fda7a00c119cbf9435eb36980ee75587b0762fb41df029d14ec5c6192",
+            "approval": "f93c84d7ae7e390f0230985039415e96f29a91aaddd17768bd2611c8c7371804"
+          },
+          "native_hashes": {
+            "runtime/result_phase25/data1.mat": "7b3d8c9ad8f68800701b80740aa6bca4ae93879aa31d1f613e0d8c7d723b59dc",
+            "runtime/result_phase25/log1": "4279c9715334b63b695dede22fc94994b5938382c0ade90b247015d48ee04c97",
+            "runtime/result_phase25/Input_phase25_1": "c6e9aeb21ced37ff0b42b26fb5d5c007a2f4bce977970e2a9191f5a97c278cbd",
+            "runtime/console.log": "2eb4734c01d3eedc73eba5706b748729b230335c78e77359a2d4c442f6c7d3a2"
+          },
+          "perturbation": null,
+          "convergence": "converged",
+          "scientific_validation": "validated_within_scope",
+          "validation": {
+            "status": "passed",
+            "max_relative_coefficient_error": 3.074609506259485e-05,
+            "steady_state_absolute_tolerance": 1.6140975215865098e-05
+          },
+          "steady_state_residual": 4.263256414560601e-14,
+          "runtime_s": 75.32252,
+          "net_tof_per_site_pair_s": 80.7048760793255,
+          "product_based_tof_per_site_pair_s": 80.7048760793255,
+          "rates": {
+            "ads": {
+              "kf": 1062.5334512545078,
+              "kr": 58.39820737222975,
+              "forward_unit": "bar^-1 s^-1",
+              "reverse_unit": "s^-1",
+              "forward_flux": 93.39043500426953,
+              "reverse_flux": 12.685558924944031,
+              "net_flux": 80.7048760793255,
+              "flux_unit": "events per reference site per second",
+              "reaction_free_energy_eV": -0.1,
+              "forward_activation_free_energy_eV": 0.4,
+              "reverse_activation_free_energy_eV": 0.5,
+              "native_log_balance_residual": -3.3402329515652696e-06
+            },
+            "transfer": {
+              "kf": 2214.7271375269625,
+              "kr": 3956.4788303965233,
+              "forward_unit": "s^-1",
+              "reverse_unit": "s^-1",
+              "forward_flux": 449.5433457598157,
+              "reverse_flux": 368.83846968049016,
+              "net_flux": 80.7048760793255,
+              "flux_unit": "events per reference site per second",
+              "reaction_free_energy_eV": 0.019999999999999997,
+              "forward_activation_free_energy_eV": 0.76,
+              "reverse_activation_free_energy_eV": 0.74,
+              "native_log_balance_residual": 6.680465912678457e-07
+            },
+            "hydrogenate": {
+              "kf": 1239.7428380039596,
+              "kr": 68.13786357174203,
+              "forward_unit": "bar^-1 s^-1",
+              "reverse_unit": "s^-1",
+              "forward_flux": 188.62821922264703,
+              "reverse_flux": 27.21846706399603,
+              "net_flux": 161.409752158651,
+              "flux_unit": "events per reference site per second",
+              "reaction_free_energy_eV": -0.1,
+              "forward_activation_free_energy_eV": 0.78,
+              "reverse_activation_free_energy_eV": 0.88,
+              "native_log_balance_residual": -3.3402329515652696e-06
+            },
+            "desorb": {
+              "kf": 693.9736630934748,
+              "kr": 3956.4788303965233,
+              "forward_unit": "s^-1",
+              "reverse_unit": "bar^-1 s^-1",
+              "forward_flux": 277.2159017328506,
+              "reverse_flux": 115.80614957419962,
+              "net_flux": 161.409752158651,
+              "flux_unit": "events per reference site per second",
+              "reaction_free_energy_eV": 0.06000000000000001,
+              "forward_activation_free_energy_eV": 0.8,
+              "reverse_activation_free_energy_eV": 0.74,
+              "native_log_balance_residual": 2.0041397716941134e-06
+            }
+          },
+          "coverage": {
+            "HNO-top": 0.3994617036288177,
+            "H2-top": 0.3104490635545657,
+            "H2-bridge": 0.6997126682512745
+          },
+          "vacancies": {
+            "top-Ni": 0.29008923281661664,
+            "bridge-Cu": 0.30028733174872546
+          },
+          "site_residuals": {
+            "top-Ni": 0.0,
+            "bridge-Cu": 0.0
+          },
+          "element_balance": {
+            "H": {
+              "produced": 161.409752158651,
+              "consumed": 161.409752158651,
+              "residual": 0.0
+            },
+            "N": {
+              "produced": 161.409752158651,
+              "consumed": 161.409752158651,
+              "residual": 0.0
+            },
+            "O": {
+              "produced": 161.409752158651,
+              "consumed": 161.409752158651,
+              "residual": 0.0
+            }
+          },
+          "actual_pressures_bar": {
+            "H2-g": 1.009,
+            "HNO-g": 0.1009,
+            "NO-g": 0.4901
+          },
+          "actual_log_step": -0.01999864650668997,
+          "total_bar": 1.6,
+          "H2_HNO_ratio": 9.999999999999998,
+          "pressure_residuals_bar": {
+            "H2-g": 0.0,
+            "HNO-g": 0.0,
+            "NO-g": 0.0
+          },
+          "directions": {
+            "ads": {
+              "native_index": 1,
+              "fixed_T_energy_input": {
+                "Ea_eV": 0.7853168271366968,
+                "G0_eV": -0.1,
+                "ThermoMode": 0,
+                "BarrierMode": -2,
+                "ConsMode": 0
+              },
+              "forward": {
+                "gas_orders": {
+                  "H2-g": 1
+                },
+                "surface_orders": {},
+                "vacant_site_orders": {
+                  "top-Ni": 1,
+                  "bridge-Cu": 1
+                },
+                "gas_pressure_factor": 1.009,
+                "adsorbate_factor": 1,
+                "vacancy_factor": 0.08711012169153662,
+                "coefficient_unit": "bar^-1 s^-1",
+                "expected_coefficient": 1062.5043325104702,
+                "native_coefficient": 1062.5334512545078,
+                "reconstructed_flux": 93.39043500426953,
+                "native_flux": 93.39043500426953
+              },
+              "reverse": {
+                "gas_orders": {},
+                "surface_orders": {
+                  "H2-top": 1,
+                  "H2-bridge": 1
+                },
+                "vacant_site_orders": {},
+                "gas_pressure_factor": 1,
+                "adsorbate_factor": 0.21722514261587467,
+                "vacancy_factor": 1,
+                "coefficient_unit": "s^-1",
+                "expected_coefficient": 58.396411910597834,
+                "native_coefficient": 58.39820737222975,
+                "reconstructed_flux": 12.685558924944031,
+                "native_flux": 12.685558924944031
+              }
+            },
+            "transfer": {
+              "native_index": 2,
+              "fixed_T_energy_input": {
+                "Ea_eV": 0.76,
+                "G0_eV": 0.02000000000000003,
+                "ThermoMode": 0,
+                "BarrierMode": -2,
+                "ConsMode": 0
+              },
+              "forward": {
+                "gas_orders": {},
+                "surface_orders": {
+                  "H2-bridge": 1
+                },
+                "vacant_site_orders": {
+                  "top-Ni": 1
+                },
+                "gas_pressure_factor": 1,
+                "adsorbate_factor": 0.6997126682512745,
+                "vacancy_factor": 0.29008923281661664,
+                "coefficient_unit": "s^-1",
+                "expected_coefficient": 2214.668315712438,
+                "native_coefficient": 2214.7271375269625,
+                "reconstructed_flux": 449.5433457598157,
+                "native_flux": 449.5433457598157
+              },
+              "reverse": {
+                "gas_orders": {},
+                "surface_orders": {
+                  "H2-top": 1
+                },
+                "vacant_site_orders": {
+                  "bridge-Cu": 1
+                },
+                "gas_pressure_factor": 1,
+                "adsorbate_factor": 0.3104490635545657,
+                "vacancy_factor": 0.30028733174872546,
+                "coefficient_unit": "s^-1",
+                "expected_coefficient": 3956.3763917523693,
+                "native_coefficient": 3956.4788303965233,
+                "reconstructed_flux": 368.8384696804902,
+                "native_flux": 368.83846968049016
+              }
+            },
+            "hydrogenate": {
+              "native_index": 3,
+              "fixed_T_energy_input": {
+                "Ea_eV": 0.78,
+                "G0_eV": -0.09999999999999992,
+                "ThermoMode": 0,
+                "BarrierMode": -2,
+                "ConsMode": 0
+              },
+              "forward": {
+                "gas_orders": {
+                  "NO-g": 1
+                },
+                "surface_orders": {
+                  "H2-top": 1
+                },
+                "vacant_site_orders": {},
+                "gas_pressure_factor": 0.4901,
+                "adsorbate_factor": 0.3104490635545657,
+                "vacancy_factor": 1,
+                "coefficient_unit": "bar^-1 s^-1",
+                "expected_coefficient": 1239.709082999593,
+                "native_coefficient": 1239.7428380039596,
+                "reconstructed_flux": 188.62821922264703,
+                "native_flux": 188.62821922264703
+              },
+              "reverse": {
+                "gas_orders": {},
+                "surface_orders": {
+                  "HNO-top": 1
+                },
+                "vacant_site_orders": {},
+                "gas_pressure_factor": 1,
+                "adsorbate_factor": 0.3994617036288177,
+                "vacancy_factor": 1,
+                "coefficient_unit": "s^-1",
+                "expected_coefficient": 68.13578076345448,
+                "native_coefficient": 68.13786357174203,
+                "reconstructed_flux": 27.21846706399603,
+                "native_flux": 27.21846706399603
+              }
+            },
+            "desorb": {
+              "native_index": 4,
+              "fixed_T_energy_input": {
+                "Ea_eV": 0.8,
+                "G0_eV": 0.0600000000000001,
+                "ThermoMode": 0,
+                "BarrierMode": -2,
+                "ConsMode": 0
+              },
+              "forward": {
+                "gas_orders": {},
+                "surface_orders": {
+                  "HNO-top": 1
+                },
+                "vacant_site_orders": {},
+                "gas_pressure_factor": 1,
+                "adsorbate_factor": 0.3994617036288177,
+                "vacancy_factor": 1,
+                "coefficient_unit": "s^-1",
+                "expected_coefficient": 693.954304384082,
+                "native_coefficient": 693.9736630934748,
+                "reconstructed_flux": 277.2159017328506,
+                "native_flux": 277.2159017328506
+              },
+              "reverse": {
+                "gas_orders": {
+                  "HNO-g": 1
+                },
+                "surface_orders": {},
+                "vacant_site_orders": {
+                  "top-Ni": 1
+                },
+                "gas_pressure_factor": 0.1009,
+                "adsorbate_factor": 1,
+                "vacancy_factor": 0.29008923281661664,
+                "coefficient_unit": "bar^-1 s^-1",
+                "expected_coefficient": 3956.3763917523693,
+                "native_coefficient": 3956.4788303965233,
+                "reconstructed_flux": 115.80614957419964,
+                "native_flux": 115.80614957419962
+              }
+            }
+          },
+          "response": {
+            "coverage": {
+              "HNO-top": -0.0017505047673392893,
+              "H2-top": 0.0033478209310498497,
+              "H2-bridge": 0.0030331892401210814
+            },
+            "vacancy": {
+              "top-Ni": -0.0015973161637105049,
+              "bridge-Cu": -0.003033189240121026
+            },
+            "flux": {
+              "ads": {
+                "forward_flux": -0.6166978315687004,
+                "reverse_flux": 0.19119625075347813,
+                "net_flux": -0.8078940823221927
+              },
+              "transfer": {
+                "forward_flux": -0.515858348973893,
+                "reverse_flux": 0.29203573334825705,
+                "net_flux": -0.8078940823221927
+              },
+              "hydrogenate": {
+                "forward_flux": -1.7350638196630257,
+                "reverse_flux": -0.11927565501864734,
+                "net_flux": -1.6157881646443855
+              },
+              "desorb": {
+                "forward_flux": -1.2148042056530244,
+                "reverse_flux": 0.40098395899133266,
+                "net_flux": -1.6157881646443855
+              }
+            }
+          }
+        }
+      },
+      "stages": {
+        "plus": "ACCEPTED",
+        "minus": "ACCEPTED"
+      },
+      "estimates": {
+        "x_minus": -0.01999864650668997,
+        "x_plus": 0.020037893736507363,
+        "negative_side": 0.49806877290307056,
+        "positive_side": 0.49160826983077066,
+        "secant": 0.4948353547989895,
+        "quadratic_at_zero": 0.4948416879348518
+      },
+      "independent": {
+        "x_minus": -0.01999864650668997,
+        "x_plus": 0.020037893736507363,
+        "negative_side": 0.49806877290307056,
+        "positive_side": 0.49160826983077066,
+        "secant": 0.4948353547989895,
+        "quadratic_at_zero": 0.4948416879348518
+      }
+    }
+  },
+  "baseline": {
+    "run_id": "run",
+    "run_receipt_sha256": "44f26413991f51a21a9123355bd98ff3f2c80a20d8f70f9a0a4b987c5ea9dbaa",
+    "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+    "dataset_version": "417cf1dc3236175476441c4c4e7b4bd5771bc4a7062aa5e34eff69070483d11b",
+    "source_hashes": {
+      "network": "6a4717c44a6c5a76191baf88e419621e461886c96989a6cdb86402df70c58b40",
+      "dataset": "0ac30eec437cebf321339d6c4dde26a0e2146229d8c27fb9fa9f3926adf6d778",
+      "configuration": "7687b9fe2495aa010c7faa79da17ada934cf1673dd910b49fa4605461dea6f53",
+      "result": "6c09b2d304b0829e8912baa670fd274425c4e49a0376f4a4e710db981e4692f7",
+      "plan": "7a964de15b3a4fa6dcf53ae9ea6a06597b9cdc68ecdb064abcd85fd047419241",
+      "approval": "1f0c1f0bdb0c0d33ee05e7e6e13a574a9239b4134538868303b0a8183172ef26"
+    },
+    "native_hashes": {
+      "runtime/result_phase25/data1.mat": "a010f66603a85035cdcbbc2e81e5ea712c4833a979b7d595df4dcdb386db308d",
+      "runtime/result_phase25/log1": "af4e3165f7ee01e8bb75458a06b0663b273e91382f84bf26bdefc5526a5c0111",
+      "runtime/result_phase25/Input_phase25_1": "b793e6f37f2262e4a006f912d18950c17581ccc014aa9779008741a4e31890f8",
+      "runtime/console.log": "143430a11e9aea5cc7428285ab9f9721d662118d30bc7ab58088c2bd6cf56bd4"
+    },
+    "perturbation": null,
+    "convergence": "converged",
+    "scientific_validation": "validated_within_scope",
+    "validation": {
+      "status": "passed",
+      "max_relative_coefficient_error": 3.074609506259485e-05,
+      "steady_state_absolute_tolerance": 1.630255403232954e-05
+    },
+    "steady_state_residual": 5.684341886080802e-14,
+    "runtime_s": 192.292314,
+    "net_tof_per_site_pair_s": 81.5127701616477,
+    "product_based_tof_per_site_pair_s": 81.5127701616477,
+    "rates": {
+      "ads": {
+        "kf": 1062.5334512545078,
+        "kr": 58.39820737222975,
+        "forward_unit": "bar^-1 s^-1",
+        "reverse_unit": "s^-1",
+        "forward_flux": 94.00713283583823,
+        "reverse_flux": 12.494362674190553,
+        "net_flux": 81.5127701616477,
+        "flux_unit": "events per reference site per second",
+        "reaction_free_energy_eV": -0.1,
+        "forward_activation_free_energy_eV": 0.4,
+        "reverse_activation_free_energy_eV": 0.5,
+        "native_log_balance_residual": -3.3402329515652696e-06
+      },
+      "transfer": {
+        "kf": 2214.7271375269625,
+        "kr": 3956.4788303965233,
+        "forward_unit": "s^-1",
+        "reverse_unit": "s^-1",
+        "forward_flux": 450.0592041087896,
+        "reverse_flux": 368.5464339471419,
+        "net_flux": 81.5127701616477,
+        "flux_unit": "events per reference site per second",
+        "reaction_free_energy_eV": 0.019999999999999997,
+        "forward_activation_free_energy_eV": 0.76,
+        "reverse_activation_free_energy_eV": 0.74,
+        "native_log_balance_residual": 6.680465912678457e-07
+      },
+      "hydrogenate": {
+        "kf": 1239.7428380039596,
+        "kr": 68.13786357174203,
+        "forward_unit": "bar^-1 s^-1",
+        "reverse_unit": "s^-1",
+        "forward_flux": 190.36328304231006,
+        "reverse_flux": 27.337742719014678,
+        "net_flux": 163.0255403232954,
+        "flux_unit": "events per reference site per second",
+        "reaction_free_energy_eV": -0.1,
+        "forward_activation_free_energy_eV": 0.78,
+        "reverse_activation_free_energy_eV": 0.88,
+        "native_log_balance_residual": -3.3402329515652696e-06
+      },
+      "desorb": {
+        "kf": 693.9736630934748,
+        "kr": 3956.4788303965233,
+        "forward_unit": "s^-1",
+        "reverse_unit": "bar^-1 s^-1",
+        "forward_flux": 278.43070593850365,
+        "reverse_flux": 115.40516561520829,
+        "net_flux": 163.0255403232954,
+        "flux_unit": "events per reference site per second",
+        "reaction_free_energy_eV": 0.06000000000000001,
+        "forward_activation_free_energy_eV": 0.8,
+        "reverse_activation_free_energy_eV": 0.74,
+        "native_log_balance_residual": 2.0041397716941134e-06
+      }
+    },
+    "coverage": {
+      "HNO-top": 0.401212208396157,
+      "H2-top": 0.30710124262351585,
+      "H2-bridge": 0.6966794790111535
+    },
+    "vacancies": {
+      "top-Ni": 0.29168654898032714,
+      "bridge-Cu": 0.3033205209888465
+    },
+    "site_residuals": {
+      "top-Ni": 0.0,
+      "bridge-Cu": 0.0
+    },
+    "element_balance": {
+      "H": {
+        "produced": 163.0255403232954,
+        "consumed": 163.0255403232954,
+        "residual": 0.0
+      },
+      "N": {
+        "produced": 163.0255403232954,
+        "consumed": 163.0255403232954,
+        "residual": 0.0
+      },
+      "O": {
+        "produced": 163.0255403232954,
+        "consumed": 163.0255403232954,
+        "residual": 0.0
+      }
+    }
+  },
+  "baseline_actual_bar": {
+    "H2-g": 1.0,
+    "HNO-g": 0.1,
+    "NO-g": 0.5
+  },
+  "step_comparison": {
+    "status": "stable",
+    "absolute_change": 5.0152591867969054e-05,
+    "tolerance": 0.02474208439674259
+  },
+  "study_sha256": "67e1b65c61c6faf27250a0edb029baab7ecdc0364092a11642249c9518eea59a",
+  "native_s": 282.749768,
+  "wall_s": 284.14642404502956
+}

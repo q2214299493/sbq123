@@ -17,7 +17,7 @@ from scripts.artifact_io import load_json_object as read, sha256_file, sha256_js
 from scripts.baseline_mkm.results import read_single_point
 from scripts.baseline_mkm.single_point_result import validate_result
 from scripts.execution_permission import require_bound_action
-from scripts.baseline_mkm.ts_perturbation import reproduce
+from scripts.baseline_mkm.sensitivity_inputs import baseline_config, configuration as sensitivity_configuration, reproduce
 from scripts.kinetic_parameters.engine import check_version
 from scripts.native_model import assemble, publish
 from scripts.runtime_resources import resource_path
@@ -75,6 +75,8 @@ def qualify(network, dataset, config):
     rebuilt = reproduce(network, dataset)
     if rebuilt != dataset:
         raise ValueError("Dataset differs from network, source verification or reviewed rates")
+    if "sensitivity_perturbation" in dataset and config != sensitivity_configuration(baseline_config(), rebuilt):
+        raise ValueError("Feed or conditions differ from the sensitivity derivative")
     missing = {r["reaction_id"]: r["missing"] for r in dataset["reactions"] if not r["export_eligible"]}
     if missing:
         raise IncompleteKinetics(missing)
@@ -160,6 +162,16 @@ def prepare(run, network, dataset, configuration, tickets, ticket_id, matlab):
             use_scope=d["reactions"][0]["model"].get("use_scope", "project"),
             runtime=runtime,
         )
+        perturbation = d.get("sensitivity_perturbation", {})
+        spec = perturbation.get("spec", {})
+        if "composition_grid" in spec:
+            manifest["composition_review"] = dict(
+                **spec["review_basis"],
+                original_target_bar=perturbation["original_target_bar"],
+                predicted_native_bar=perturbation["feed_bar"],
+                intended_log_step=perturbation["intended_log_step"],
+                direction="plus" if perturbation["sign"] == 1 else "minus",
+            )
         save(run / "plan.json", manifest)
         event(run, "INPUT_GENERATED")
         event(run, "AWAITING_APPROVAL", state_sha256=sha256_json(manifest))
@@ -232,7 +244,7 @@ def preflight(run, decision_path):
 def execute(run, decision_path, *, deadline=None):
     run = run.resolve()
     plan, decision, dataset, config, files, adapter, rt = preflight(run, decision_path)
-    if "ts_perturbation" in dataset and deadline is None:
+    if ("ts_perturbation" in dataset or "sensitivity_perturbation" in dataset) and deadline is None:
         raise ValueError("Use the bounded DRC pair executor for a TS derivative")
     # Atomic execution claim. A stopped supervisor cannot silently relaunch the same point.
     event(run, "READY", approval_reference=sha256_json(decision))

@@ -1,0 +1,560 @@
+{
+  "schema_version": 1,
+  "event_id": "history-phase322-native-checkpoint-20261120",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-phase322-native-checkpoint-20261120",
+    "module": "baseline_mkm"
+  },
+  "occurred_at": "2026-11-20T10:56:10.082251+00:00",
+  "recorded_at": "2026-11-20T10:56:10.082251+00:00",
+  "summary": "Record four accepted HNO-top perturbations and the first rejected isobaric NO feed in the stopped pilot.",
+  "payload": {
+    "markdown": "- Phase 3.2.2 stopped at the first failed validation: four individually approved 400 K synthetic Ni/Cu HNO-top perturbations passed. Fine sensitivity 0.401377874, stable by project tolerance. Fifth native run converged but its effective feed totaled 1.600005 bar, exceeding the reviewed 1.600000 bar limit. No gas order is available. Three approved runs did not start. Five historical full-suite failures persist. See reports/multiphase/phase3_2_2/completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "configs/kinetics/mkm_sensitivity_plan.schema.json",
+      "authority": "module_validation",
+      "sha256": "2256e7968e9a26233acbac1a8911f690bb837cc9fd5a432263d0c66ce72ccabe",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "configs/kinetics/mkm_sensitivity_result.schema.json",
+      "authority": "module_validation",
+      "sha256": "d055c5fe7f7459d1b61d8467f0686a3f2d49929aa93462aef587fff560d3e1e7",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "modules/baseline_mkm/README.md",
+      "authority": "repository_document",
+      "sha256": "c9e865d0c3564f879422da605fa54d70ae036e0acbe8f35eb2e3666a7b0873c8",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "modules/state_handoff/events/history-phase322-sensitivity-preflight-20261120.json",
+      "authority": "module_validation",
+      "sha256": "b52a6c1a4fc8f3641f13070275b589dac157c860ca8ffb000bd95bae671bb047",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/.gitattributes",
+      "authority": "repository_document",
+      "sha256": "da292e303e2eded639c91032ae328bc25209619297dd0abfa562e213404e5370",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/approval_plan.md",
+      "authority": "repository_document",
+      "sha256": "da2ebdaf88403bd5608fdf96eb560f920cfc9a89113c94dcc0283c94a0f5097b",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/approvals.json",
+      "authority": "module_validation",
+      "sha256": "45c323b728d8a5d93dc5271de98aa42bf59792c7ccefef05766ffdd5a02f642c",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/comparison.md",
+      "authority": "repository_document",
+      "sha256": "34988d0a51f4f7f26538e27a7c97ab48cfa6e8c4b107ef9bfbdac8ba7189eea5",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/completion.md",
+      "authority": "repository_document",
+      "sha256": "8eeedc43e656b9a12db628aef505245bf7b509e727cd1b6d9024d1be2bd68145",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/eligibility.json",
+      "authority": "module_validation",
+      "sha256": "8c487200739b200b19d7207313bf2a84dbb226e6537677cca11ddb6c0af72cc9",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/feed_decision.json",
+      "authority": "module_validation",
+      "sha256": "5f7793180089fe3c6339713610743ca34224b86b1d8fda9f5b471d13d1b54cf9",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/gas_order-coarse/failed.json",
+      "authority": "module_validation",
+      "sha256": "20953427cdd143aec849c8c2f07cbf0c6e9baec9b2ba383d2fdfd5752a5b03d3",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/gas_order-coarse/minus/approval.json",
+      "authority": "module_validation",
+      "sha256": "0f68c4b5713c977cfa45b93df1dde258fe623cb487a33440e09f1604307b120a",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/gas_order-coarse/minus/plan.json",
+      "authority": "module_validation",
+      "sha256": "336b2e1b109391a24e8207bbe48b31619d27df8c2e86ab65c6e076e139bed2d4",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/gas_order-coarse/minus/user-reply.json",
+      "authority": "module_validation",
+      "sha256": "6e04bb6ae9d5a28186fcacc449373ae200a821781ef31a3634a7cf5d552db2af",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/gas_order-coarse/pair.json",
+      "authority": "module_validation",
+      "sha256": "23c34a363d1930f434bf221bd1431aa6d37fa5c6a28efb70d5110e3281881ca2",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/gas_order-coarse/plus/COLLECTING.json",
+      "authority": "module_validation",
+      "sha256": "1a5526835c6f2291ef21add111efbca3c1b765cde5d963ecbf5a2e531f65a119",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/gas_order-coarse/plus/RUNNING.json",
+      "authority": "module_validation",
+      "sha256": "dde7e1e5c7f93a3ec99b8e8edacab170790d7fe255b4226ccafbbc6ae930289d",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/gas_order-coarse/plus/applied_input.txt",
+      "authority": "module_validation",
+      "sha256": "7108128d2c0306f7612d8f533ebddd96b76c9cb70a606028f054d91e1d4b054c",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/gas_order-coarse/plus/approval.json",
+      "authority": "module_validation",
+      "sha256": "4d64b4c28a79b3037b5964984b90fe2e1191bcf794e54ef672442dad2910606d",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/gas_order-coarse/plus/data1.mat",
+      "authority": "module_validation",
+      "sha256": "c80e896837ebb3049cc5208f8c31606b5b16df03ad8dad3d35b60ac15d3e77f1",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/gas_order-coarse/plus/native_log_extract.txt",
+      "authority": "module_validation",
+      "sha256": "64b876d697f460bd9ff1e06542d5ec3900334dc0ef11fa7d5b6db0d1599afc6f",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/gas_order-coarse/plus/plan.json",
+      "authority": "module_validation",
+      "sha256": "8c13c6934d6710d01798f7fb88185bb154e77db4405ea7ba454db15dedb80005",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/gas_order-coarse/plus/pressure_diagnostic.json",
+      "authority": "module_validation",
+      "sha256": "1e6ed26011c0fbac37b6f4803d76da5e3cb6c75484d6bf2dbfb7d0bd2da7b98d",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/gas_order-coarse/plus/rejected.json",
+      "authority": "module_validation",
+      "sha256": "6e8c5181e12f40b6e445c4e392f4f55e87b1b7ce52f63560e8ffb2a57013cd16",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/gas_order-coarse/plus/user-reply.json",
+      "authority": "module_validation",
+      "sha256": "8660347fc869f1a0739bb20c99e9b65b6588953f6b2c62d5d57e391020bfe6a7",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/gas_order-coarse/started.json",
+      "authority": "module_validation",
+      "sha256": "776062c7610e54be9c7a53a45c83b9f223b6a6f2dbcfd1e301ce3fed2c36621e",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/gas_order-fine/minus/approval.json",
+      "authority": "module_validation",
+      "sha256": "1ca7531551c2715fd76afc2f5e69da1501ab315acd474e9eb24254d1ad075ecb",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/gas_order-fine/minus/plan.json",
+      "authority": "module_validation",
+      "sha256": "1f4f668e757b93c54b2ef2cf7e4d31fb91db5da866861ed7c48a93c6b2ca90ea",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/gas_order-fine/minus/user-reply.json",
+      "authority": "module_validation",
+      "sha256": "8e24410e5231887953becec97403da8299ba3a9639cec7835b71d83fecb99987",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/gas_order-fine/pair.json",
+      "authority": "module_validation",
+      "sha256": "9155f879a1c3f78d5af3b9f362edf4162ad2aa379c8c15b20bfecfc9d6f9296c",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/gas_order-fine/plus/approval.json",
+      "authority": "module_validation",
+      "sha256": "ce9b0aca3e79ee7df8f2e71ae0f51fe7bff2bf5073e4212434ece8d9f2740ceb",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/gas_order-fine/plus/plan.json",
+      "authority": "module_validation",
+      "sha256": "218aab322a3d8713efa4b25b082d9ce07aea1f32f8e1c157426c545570337e64",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/gas_order-fine/plus/user-reply.json",
+      "authority": "module_validation",
+      "sha256": "564af4eff62ef989edf393d71b6918f5969b948230d9e57b42275eb066d22e1d",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-coarse/finished.json",
+      "authority": "module_validation",
+      "sha256": "5f5596b74b27003737f3067179bc955d3f3185e60081811b986dc824b8d42ea1",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-coarse/minus/COLLECTING.json",
+      "authority": "module_validation",
+      "sha256": "db0f748db51212a2058b6c3a0b2d1d7b792fca09c1b6eb4d4f679942304d58e2",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-coarse/minus/RUNNING.json",
+      "authority": "module_validation",
+      "sha256": "a8634cdc2301fa66fa188766f733bb50f475cfe0321d414a3bda40bfaa7098f0",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-coarse/minus/accepted.json",
+      "authority": "module_validation",
+      "sha256": "0a4342144b7d057ee3eb1055fd5c287b1ef71ca41907420b100f10c5bd6fc83f",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-coarse/minus/approval.json",
+      "authority": "module_validation",
+      "sha256": "67030f432297ee5880256b71cc67f10af9278290887c0c83a2b6b6aedcef5745",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-coarse/minus/data1.mat",
+      "authority": "module_validation",
+      "sha256": "98a43659401eedfa5b26d5535a6da7be3e9efd609dd79976ce2608b0569cc47b",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-coarse/minus/native_log_extract.txt",
+      "authority": "module_validation",
+      "sha256": "be59f91f2e5e63be36644fc7ecad50495c4931b00ea502ef6a51d39e1c7323bd",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-coarse/minus/plan.json",
+      "authority": "module_validation",
+      "sha256": "b415a9cd59a24b8f59f896611b503ed14bf45c6b5be36d4427f218d0262985b7",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-coarse/minus/user-reply.json",
+      "authority": "module_validation",
+      "sha256": "f6cccc773e6f7bcfd6a01107ed0567e2b05032e81cf0d651966285160a546483",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-coarse/pair.json",
+      "authority": "module_validation",
+      "sha256": "bc038121159ed12bad6e69492241a59af44cbe1c26b668cd63bba515646a71a6",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-coarse/plus/COLLECTING.json",
+      "authority": "module_validation",
+      "sha256": "aad4810653ee6e5b564a24ba6668af7770b523bf8ecd2acefb962b94ef241d23",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-coarse/plus/RUNNING.json",
+      "authority": "module_validation",
+      "sha256": "b1ce29f8fff73096585b5125ba905fd4ceea606c7a20b59fd08653ee4b313762",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-coarse/plus/accepted.json",
+      "authority": "module_validation",
+      "sha256": "352a413dca8628847e1a499ec331f9bd50f9c8064fcb8bf7d69baaba1899dd7a",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-coarse/plus/approval.json",
+      "authority": "module_validation",
+      "sha256": "abe791a4e7eda78f0c317a25a132fe5005f8bc7ef05ba31335e717eb006515ac",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-coarse/plus/data1.mat",
+      "authority": "module_validation",
+      "sha256": "06cbac01b0bd02a378f645d8226fd3b596dfb07f0f23ecd857a192a02a822e1b",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-coarse/plus/native_log_extract.txt",
+      "authority": "module_validation",
+      "sha256": "73dd462ce4cccf49b2595d469254c0cbbb5da131c1ee906d262b7d8fef387df8",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-coarse/plus/plan.json",
+      "authority": "module_validation",
+      "sha256": "77b70b466c57395f8b553dafa4bf67939ce2740f4a049d0ac65bbfeb7ea572f3",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-coarse/plus/user-reply.json",
+      "authority": "module_validation",
+      "sha256": "5c18ddba43b11aced950480bc4b43639b1970d8f9c2132059e5dd200f6b6ba8c",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-coarse/started.json",
+      "authority": "module_validation",
+      "sha256": "3df08d31b3b223f96ff59ca8fbf0cae63e2abcd777e721108371b2a70ed73d33",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-fine/finished.json",
+      "authority": "module_validation",
+      "sha256": "9a445d581b9f7ba0b38bce3b6fe3c18afa0fd7b572c0535d616e04328790541f",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-fine/minus/COLLECTING.json",
+      "authority": "module_validation",
+      "sha256": "093369d8eb2ece80244380f84f14028fb4112c22c88a37349de06bc174c6de8f",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-fine/minus/RUNNING.json",
+      "authority": "module_validation",
+      "sha256": "0672148a020af7bb6b3a1973230cf194035c3c771f5332f2eef86b2d56793601",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-fine/minus/accepted.json",
+      "authority": "module_validation",
+      "sha256": "9c8ad3f5591382a72d5b604ab4a132888fac29d12953dadf64e82a2ad7f3fbb2",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-fine/minus/approval.json",
+      "authority": "module_validation",
+      "sha256": "1fc4300bb0d601902c2ba0df1cbf3d9042c5d917dc360878d06343ff38230d34",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-fine/minus/data1.mat",
+      "authority": "module_validation",
+      "sha256": "e53fc695b826f8a81d2ff5a6e7963d41fb05780d0c1d04a992927e9da8aaffe3",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-fine/minus/native_log_extract.txt",
+      "authority": "module_validation",
+      "sha256": "d734ce12da3ce8b56bac41ea0a4508d1caf035160032fc2d19625e2888fc09cf",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-fine/minus/plan.json",
+      "authority": "module_validation",
+      "sha256": "0101aebecf045e5958dd49eeeeb3d56d3a2810778692489bad449e4839df8ac8",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-fine/minus/user-reply.json",
+      "authority": "module_validation",
+      "sha256": "166324174878b118780014a974f973e3dfa23589663d2f340de0b9ca6fdf3ef4",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-fine/pair.json",
+      "authority": "module_validation",
+      "sha256": "15d3cf0f4bd41b304efcc99a7a16eeff7bd1445b7b21c5d3cd7957bd00874b71",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-fine/plus/COLLECTING.json",
+      "authority": "module_validation",
+      "sha256": "06dbc536fe249ed7ca44a65cad34b73f624daa5caafecf68dedf099117a3f7d4",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-fine/plus/RUNNING.json",
+      "authority": "module_validation",
+      "sha256": "da53ca015e18bfec9ee0c20928f73ebcc151c0f2e1d0a6642b5dc47fc162b3a4",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-fine/plus/accepted.json",
+      "authority": "module_validation",
+      "sha256": "8d04d0a0ee819bbda738fd81402b7dfd552568436c7af499a40036b203d3e569",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-fine/plus/approval.json",
+      "authority": "module_validation",
+      "sha256": "78b36bb4b74587d3be44bb940c832d8c5de41590fe3e9b9909bc8af74b6306db",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-fine/plus/data1.mat",
+      "authority": "module_validation",
+      "sha256": "aeec9b81ac0298bf46ccea30af50b07c16a5784c7ed4b76b9c99578d66bb58a2",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-fine/plus/native_log_extract.txt",
+      "authority": "module_validation",
+      "sha256": "ee1717467fe00cfbc5b71f020c6fd4a74f11ec01524f27010f227476497ca169",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-fine/plus/plan.json",
+      "authority": "module_validation",
+      "sha256": "e2b16293d026f80a2bb7fd2bb520e79077892b397b32ceb83bd816dd1ec2a0c7",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-fine/plus/user-reply.json",
+      "authority": "module_validation",
+      "sha256": "5c47e6a1f1bd33a5069622e8cbb8851ebb06300b4fd5de541d822b1ae83c00a1",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/intermediate_G-fine/started.json",
+      "authority": "module_validation",
+      "sha256": "664c8f0a1d34ab3bc4a8b90dff5c8608166c7092323309745acedfe93f9f0b14",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/regression/development.txt.gz",
+      "authority": "module_validation",
+      "sha256": "a1348b7d774b3b45d67687d7d25cbb959a24c3cce56d5ebc0bae0f7450d4d29e",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/regression/full.txt.gz",
+      "authority": "module_validation",
+      "sha256": "e60827b4ae357bc9fcfe29a7edab8c28a6e313dafcca9046eaa49b9559376715",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/regression/release.txt.gz",
+      "authority": "module_validation",
+      "sha256": "6b3476678e743e84639f77bf9ce415ed4cb1010e9f230ad8ff8c9d10c41120f6",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/result.json",
+      "authority": "module_validation",
+      "sha256": "1ca90a7c2061109e6b03609ab69791f4bd45922b454b3f07ed1c422c7421e439",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/scientific_basis.md",
+      "authority": "repository_document",
+      "sha256": "f91f5c902865ea9a614c0b5c06b255c19b687846f161ee89c3b6cdde76f6e4a3",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/started.json",
+      "authority": "module_validation",
+      "sha256": "411f773c4c04f5da295f33b5b4389dedfa19ffa73813562310205a7bc0de3c4d",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/study.json",
+      "authority": "module_validation",
+      "sha256": "ecf10d8f8ee1f7f47e513ac606728ec6dd513528bcabc7c8ffa9fd4b19d673d1",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2/test_report.md",
+      "authority": "repository_document",
+      "sha256": "530844464c5651fec207ac8165d795e50815a52eed3991a6138bd8e5305bd3fd",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/analysis.py",
+      "authority": "module_validation",
+      "sha256": "ffe0ecd067bf8c13f7373bf8c40bc2986453f52dab3125bdc2434c6d80660761",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/drc_cross_reaction.py",
+      "authority": "module_validation",
+      "sha256": "13a0bfa97813b2c279f16363bc3cc206f4c76819fd600dac306a52c9163f0b39",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/drc_pair.py",
+      "authority": "module_validation",
+      "sha256": "8212628841c3de3e2ae751e13e329613f38027ceeb66a829ad44915b2fdb364f",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/drc_step_size.py",
+      "authority": "module_validation",
+      "sha256": "5891504e9f65d2459f0c6b9591b90ccf115b0cb1895c6169001befc4ca536c60",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/sensitivity_inputs.py",
+      "authority": "module_validation",
+      "sha256": "49a4f82c11018c4e46c5df80e8f39dd075154d4670a0ace1085489385f532e94",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/sensitivity_report.py",
+      "authority": "module_validation",
+      "sha256": "194ac80fdc3fa73d2b07dcb660b80771150016d8a0b22fc2d73f9229a01323c3",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/sensitivity_study.py",
+      "authority": "module_validation",
+      "sha256": "fcad40421a6fd2cff99a53cd3151c20f762b21581fc34269ab36549d592c69b7",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/single_point.py",
+      "authority": "module_validation",
+      "sha256": "6e6eaa2252ad5464c689cdfb0e2c826673f47d6b3bbddd7da7b6cbfcbfeb0d3f",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    },
+    {
+      "locator": "tests/test_mkm_sensitivity.py",
+      "authority": "module_validation",
+      "sha256": "bbbf2f459edf392e5394fc6900f5d62d54ddf41741f5cd8202d9f7a330bf4698",
+      "observed_at": "2026-11-20T10:56:10.082251+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

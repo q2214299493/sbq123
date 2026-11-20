@@ -8,6 +8,7 @@ from time import monotonic
 from scripts.artifact_io import load_json_object as read, sha256_file, sha256_json, write_json_exclusive as save
 from scripts.baseline_mkm import analysis, single_point as point
 from scripts.baseline_mkm.ts_perturbation import DELTA_EV, HALF_STEP_EV, PARENT, REACTION, derivative
+from scripts.baseline_mkm.sensitivity_inputs import derive
 from scripts.execution_permission import require_bound_action
 from scripts.scientific_validation import finite_number
 
@@ -82,9 +83,21 @@ def prepare(root, base, delta_eV=DELTA_EV, reaction_id=REACTION):
         raise ValueError("Pair directory already belongs to a different step size")
     if (root / "pair.json").exists() and read(root / "pair.json").get("reaction_id", REACTION) != reaction_id:
         raise ValueError("Pair directory already belongs to a different reaction")
+    return prepare_members(root, base, parent, {"reaction_id": reaction_id, "delta_eV": delta_eV})
+
+
+def planned_inputs(base, sign, selection):
+    if "sensitivity" in selection:
+        inputs = (read(base / (key + ".json")) for key in ("network", "dataset", "configuration"))
+        return derive(*inputs, selection["sensitivity"], sign)
+    return expected(base, sign, selection["delta_eV"], selection.get("reaction_id", REACTION))
+
+
+def prepare_members(root, base, parent, selection):
+    root.mkdir(parents=True, exist_ok=True)
     members = {}
     for label, sign in SIGNS:
-        d, c = expected(base, sign, delta_eV, reaction_id)
+        d, c = planned_inputs(base, sign, selection)
         name = label + "-" + d["dataset_version"][:16]
         child, config = root / (name + ".json"), root / (name + "-configuration.json")
         put(child, d)
@@ -105,10 +118,9 @@ def prepare(root, base, delta_eV=DELTA_EV, reaction_id=REACTION):
             raise ValueError(f"{label}: {state['stage']}: {state.get('missing_data', state.get('reason'))}")
         members[label] = {"run_id": name, "plan_sha256": sha256_json(read(run / "plan.json"))}
     manifest = dict(
-        format="drc-pair-plan/1",
+        format="sensitivity-pair-plan/1" if "sensitivity" in selection else "drc-pair-plan/1",
         baseline_result_sha256=parent["result_sha256"],
-        reaction_id=reaction_id,
-        delta_eV=delta_eV,
+        **selection,
         members=members,
         per_run_timeout_s=point.LIMIT,
         total_budget_s=BUDGET,
@@ -121,7 +133,7 @@ def prepare(root, base, delta_eV=DELTA_EV, reaction_id=REACTION):
 
 def check_member(root, base, label, sign):
     pair = read(root / "pair.json")
-    child, config = expected(base, sign, pair["delta_eV"], pair.get("reaction_id", REACTION))
+    child, config = planned_inputs(base, sign, pair)
     run = root / (label + "-" + child["dataset_version"][:16])
     plan = read(run / "plan.json")
     member = pair["members"][label]
@@ -130,6 +142,8 @@ def check_member(root, base, label, sign):
     if read(run / "dataset.json") != child or read(run / "configuration.json") != config:
         raise ValueError("Changed perturbation dataset or conditions")
     original = read(base / "plan.json")
+    if "sensitivity" in pair and pair["sensitivity"]["kind"] == "gas_order":
+        original = dict(original, partial_pressures_bar=config["partial_pressure_bar"], total_pressure_bar=config["total_pressure_bar"])
     for key in (
         "question_id",
         "ticket_id",
@@ -190,6 +204,8 @@ def pair_deadline(root, manifest, runs):
 def run_pair(root, base, decisions, *, campaign_deadline=None):
     parent, _ = baseline(base)
     manifest = read(root / "pair.json")
+    if "sensitivity" in manifest and campaign_deadline is None:
+        raise ValueError("Sensitivity execution requires a bounded study")
     if manifest["baseline_result_sha256"] != parent["result_sha256"]:
         raise ValueError("Stale baseline binding")
     runs = {label: check_member(root, base, label, sign) for label, sign in SIGNS}

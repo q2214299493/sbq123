@@ -1,0 +1,312 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NO constrained-composition reaction order at fixed total pressure",
+  "type": "object",
+  "required": [
+    "format",
+    "observable",
+    "pairs",
+    "complete",
+    "baseline",
+    "baseline_actual_bar",
+    "step_comparison",
+    "study_sha256",
+    "native_s",
+    "wall_s"
+  ],
+  "properties": {
+    "format": {
+      "const": "mkm-composition-order/1"
+    },
+    "observable": {
+      "const": "NO constrained-composition reaction order"
+    },
+    "complete": {
+      "type": "boolean"
+    },
+    "pairs": {
+      "type": "object",
+      "required": [
+        "coarse",
+        "fine"
+      ],
+      "properties": {
+        "coarse": {
+          "type": "object",
+          "required": [
+            "cases",
+            "stages",
+            "estimates",
+            "independent"
+          ],
+          "properties": {
+            "estimates": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "x_minus",
+                    "x_plus",
+                    "negative_side",
+                    "positive_side",
+                    "secant",
+                    "quadratic_at_zero"
+                  ],
+                  "properties": {
+                    "x_minus": {
+                      "type": "number",
+                      "exclusiveMaximum": 0
+                    },
+                    "x_plus": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "negative_side": {
+                      "type": "number"
+                    },
+                    "positive_side": {
+                      "type": "number"
+                    },
+                    "secant": {
+                      "type": "number"
+                    },
+                    "quadratic_at_zero": {
+                      "type": "number"
+                    }
+                  }
+                }
+              ]
+            },
+            "independent": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "x_minus",
+                    "x_plus",
+                    "negative_side",
+                    "positive_side",
+                    "secant",
+                    "quadratic_at_zero"
+                  ],
+                  "properties": {
+                    "x_minus": {
+                      "type": "number",
+                      "exclusiveMaximum": 0
+                    },
+                    "x_plus": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "negative_side": {
+                      "type": "number"
+                    },
+                    "positive_side": {
+                      "type": "number"
+                    },
+                    "secant": {
+                      "type": "number"
+                    },
+                    "quadratic_at_zero": {
+                      "type": "number"
+                    }
+                  }
+                }
+              ]
+            },
+            "stages": {
+              "type": "object",
+              "required": [
+                "minus",
+                "plus"
+              ]
+            },
+            "cases": {
+              "type": "object"
+            }
+          }
+        },
+        "fine": {
+          "type": "object",
+          "required": [
+            "cases",
+            "stages",
+            "estimates",
+            "independent"
+          ],
+          "properties": {
+            "estimates": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "x_minus",
+                    "x_plus",
+                    "negative_side",
+                    "positive_side",
+                    "secant",
+                    "quadratic_at_zero"
+                  ],
+                  "properties": {
+                    "x_minus": {
+                      "type": "number",
+                      "exclusiveMaximum": 0
+                    },
+                    "x_plus": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "negative_side": {
+                      "type": "number"
+                    },
+                    "positive_side": {
+                      "type": "number"
+                    },
+                    "secant": {
+                      "type": "number"
+                    },
+                    "quadratic_at_zero": {
+                      "type": "number"
+                    }
+                  }
+                }
+              ]
+            },
+            "independent": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "x_minus",
+                    "x_plus",
+                    "negative_side",
+                    "positive_side",
+                    "secant",
+                    "quadratic_at_zero"
+                  ],
+                  "properties": {
+                    "x_minus": {
+                      "type": "number",
+                      "exclusiveMaximum": 0
+                    },
+                    "x_plus": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "negative_side": {
+                      "type": "number"
+                    },
+                    "positive_side": {
+                      "type": "number"
+                    },
+                    "secant": {
+                      "type": "number"
+                    },
+                    "quadratic_at_zero": {
+                      "type": "number"
+                    }
+                  }
+                }
+              ]
+            },
+            "stages": {
+              "type": "object",
+              "required": [
+                "minus",
+                "plus"
+              ]
+            },
+            "cases": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "baseline_actual_bar": {
+      "type": "object",
+      "required": [
+        "H2-g",
+        "HNO-g",
+        "NO-g"
+      ]
+    },
+    "study_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "native_s": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 840
+    },
+    "wall_s": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 960
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "complete": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "wall_s": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "pairs": {
+            "additionalProperties": {
+              "properties": {
+                "estimates": {
+                  "type": "object"
+                },
+                "independent": {
+                  "type": "object"
+                },
+                "cases": {
+                  "required": [
+                    "plus",
+                    "minus"
+                  ]
+                },
+                "stages": {
+                  "properties": {
+                    "plus": {
+                      "const": "ACCEPTED"
+                    },
+                    "minus": {
+                      "const": "ACCEPTED"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

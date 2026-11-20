@@ -263,3 +263,54 @@ Write each partial report to a fresh output directory. A signed pair supplies ce
 but ranking additionally requires accepted step-size stability evidence. The one-sided gap measures finite-step
 asymmetry. A statistical error bar remains unavailable without suitable additional evidence.
 [Batch approval plan](../../reports/multiphase/phase3_2_1/batch-plan.json) · [Result contract](../../configs/kinetics/mkm_batch_drc.schema.json)
+
+### Intermediate sensitivity and gas orders
+
+Select a registered surface species with reviewed formation Gibbs energy, TS evidence and an accepted
+site mapping. An energy shift changes the energy of each side by the species stoichiometric count
+times the shift. At fixed absolute TS energy the two barrier changes are minus the initial- and
+final-state shifts respectively. The central derivative of log net TOF with respect to G/kBT
+has a positive kBT prefactor. New datasets record the full formation-energy table and every affected
+reaction. The Ni/Cu fixture supplies reviewed synthetic formation energies directly.
+
+Gas experiments select a registered gas by ID. The `fixed_other_partial_pressures` constraint
+changes only that gas and updates the declared total. The `fixed_total_proportional_remainder`
+constraint preserves total pressure and the ratios among all other partial pressures. Each signed
+feed must sum to its declared total and pass every parameter set's pressure validity range.
+The composition derivative includes changes in the other gas activities. Both definitions use
+the central derivative of log overall TOF with respect to the selected log partial pressure.
+
+```text
+python -m scripts.baseline_mkm.sensitivity_study prepare STUDY ACCEPTED_BASELINE EXPERIMENTS.json
+python -m scripts.baseline_mkm.sensitivity_study execute STUDY ACCEPTED_BASELINE APPROVALS.json
+python -m scripts.baseline_mkm.sensitivity_study report STUDY ACCEPTED_BASELINE OUTPUT
+```
+
+The experiments object accepts one `intermediate_G` and one `gas_order` entry, each with
+`species_id`, `coarse` and `fine`. Gas experiments also require an explicit `constraint`.
+Energy steps are in eV and pressure steps are natural-log increments. Each study member
+requires independent single-point approval. The index binds `plan_sha256` to `decisions`
+keyed by pair directory and sign. At most eight runs can execute serially within 1680 native
+seconds and 1920 wall seconds. Existing accepted members are reused. Read a partial study into
+a fresh report directory; incomplete pairs have null estimates. The project step-size tolerance is
+the larger of 0.002 and 5% of the absolute fine derivative. An unstable estimate requires separately
+authorized follow-up. [Eligibility and missing evidence](../../reports/multiphase/phase3_2_2/eligibility.json)
+
+### Explicit composition grid on a pressure boundary
+
+The Ni/Cu recovery uses the four archived NO grid points with fixed total pressure and proportional
+redistribution among the remaining gases. Before accepting each sample, the single-point validator
+checks the actual MAT vector against the signed grid, the exact decimal total and the remainder ratios.
+The recovery coordinator uses four individually approved runs and stops at the first failure.
+
+```text
+python -m scripts.baseline_mkm.reaction_order prepare STUDY ACCEPTED_BASELINE
+python -m scripts.baseline_mkm.reaction_order execute STUDY ACCEPTED_BASELINE APPROVALS.json
+python -m scripts.baseline_mkm.composition_report STUDY ACCEPTED_BASELINE OUTPUT
+```
+
+The approval index binds `study_sha256` to separate coarse and fine decisions for each sign.
+Calculate the derivative of log net turnover at the baseline using a quadratic through the three
+actual log-pressure coordinates. Report both one-sided slopes and the endpoint secant alongside
+the quadratic slope. The fixed-total result applies along the specified feed path.
+[Native validation and limits](../../reports/multiphase/phase3_2_2_1/completion.md)

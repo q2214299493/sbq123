@@ -1,0 +1,303 @@
+{
+  "network": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+  "dataset": "417cf1dc3236175476441c4c4e7b4bd5771bc4a7062aa5e34eff69070483d11b",
+  "thermochemistry_source": "closed_cycle_reference.json",
+  "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91",
+  "species": {
+    "H2-g": {
+      "species_id": "H2-g",
+      "structure_id": "H2-g",
+      "phase": "gas",
+      "surfaces": [],
+      "site_inventory": {},
+      "accepted_formation_G_eV": 0,
+      "temperature_K": 400,
+      "standard_state_ids": [
+        "demo-standard"
+      ],
+      "reference_ids": [
+        "demo-ref"
+      ],
+      "connected_reactions": [
+        "ads"
+      ],
+      "species_review": "accepted",
+      "thermochemistry": "reviewed",
+      "intermediate_eligible": false,
+      "reason": "Registered gas",
+      "baseline_partial_bar": 1.0,
+      "elementary_gas_orders": {
+        "ads": {
+          "forward": 1,
+          "reverse": 0
+        },
+        "transfer": {
+          "forward": 0,
+          "reverse": 0
+        },
+        "hydrogenate": {
+          "forward": 0,
+          "reverse": 0
+        },
+        "desorb": {
+          "forward": 0,
+          "reverse": 0
+        }
+      }
+    },
+    "H2-bridge": {
+      "species_id": "H2-bridge",
+      "structure_id": "H2-bridge",
+      "phase": "surface",
+      "surfaces": [
+        "facet-Cu"
+      ],
+      "site_inventory": {
+        "bridge-Cu": 1
+      },
+      "accepted_formation_G_eV": -0.06,
+      "temperature_K": 400,
+      "standard_state_ids": [
+        "demo-standard"
+      ],
+      "reference_ids": [
+        "demo-ref"
+      ],
+      "connected_reactions": [
+        "ads",
+        "transfer"
+      ],
+      "species_review": "accepted",
+      "thermochemistry": "reviewed",
+      "intermediate_eligible": true,
+      "identity": {
+        "species_id": "H2-bridge",
+        "structure_id": "H2-bridge",
+        "surface_ids": [
+          "facet-Cu"
+        ],
+        "phase_ids": [
+          "fcc-Cu"
+        ],
+        "site_occupancy": {
+          "bridge-Cu": 1
+        },
+        "formation_G_eV": -0.06,
+        "reference": "demo-ref",
+        "standard_state": "demo-standard",
+        "temperature_K": 400,
+        "connected": [
+          "ads",
+          "transfer"
+        ]
+      }
+    },
+    "H2-top": {
+      "species_id": "H2-top",
+      "structure_id": "H2-top",
+      "phase": "surface",
+      "surfaces": [
+        "facet-Ni"
+      ],
+      "site_inventory": {
+        "top-Ni": 1
+      },
+      "accepted_formation_G_eV": -0.04,
+      "temperature_K": 400,
+      "standard_state_ids": [
+        "demo-standard"
+      ],
+      "reference_ids": [
+        "demo-ref"
+      ],
+      "connected_reactions": [
+        "ads",
+        "transfer",
+        "hydrogenate"
+      ],
+      "species_review": "accepted",
+      "thermochemistry": "reviewed",
+      "intermediate_eligible": true,
+      "identity": {
+        "species_id": "H2-top",
+        "structure_id": "H2-top",
+        "surface_ids": [
+          "facet-Ni"
+        ],
+        "phase_ids": [
+          "fcc-Ni"
+        ],
+        "site_occupancy": {
+          "top-Ni": 1
+        },
+        "formation_G_eV": -0.04,
+        "reference": "demo-ref",
+        "standard_state": "demo-standard",
+        "temperature_K": 400,
+        "connected": [
+          "ads",
+          "transfer",
+          "hydrogenate"
+        ]
+      }
+    },
+    "NO-g": {
+      "species_id": "NO-g",
+      "structure_id": "NO-g",
+      "phase": "gas",
+      "surfaces": [],
+      "site_inventory": {},
+      "accepted_formation_G_eV": 0,
+      "temperature_K": 400,
+      "standard_state_ids": [
+        "demo-standard"
+      ],
+      "reference_ids": [
+        "demo-ref"
+      ],
+      "connected_reactions": [
+        "hydrogenate"
+      ],
+      "species_review": "accepted",
+      "thermochemistry": "reviewed",
+      "intermediate_eligible": false,
+      "reason": "Registered gas",
+      "baseline_partial_bar": 0.5,
+      "elementary_gas_orders": {
+        "ads": {
+          "forward": 0,
+          "reverse": 0
+        },
+        "transfer": {
+          "forward": 0,
+          "reverse": 0
+        },
+        "hydrogenate": {
+          "forward": 1,
+          "reverse": 0
+        },
+        "desorb": {
+          "forward": 0,
+          "reverse": 0
+        }
+      }
+    },
+    "HNO-g": {
+      "species_id": "HNO-g",
+      "structure_id": "HNO-g",
+      "phase": "gas",
+      "surfaces": [],
+      "site_inventory": {},
+      "accepted_formation_G_eV": -0.08,
+      "temperature_K": 400,
+      "standard_state_ids": [
+        "demo-standard"
+      ],
+      "reference_ids": [
+        "demo-ref"
+      ],
+      "connected_reactions": [
+        "desorb"
+      ],
+      "species_review": "accepted",
+      "thermochemistry": "reviewed",
+      "intermediate_eligible": false,
+      "reason": "Registered gas",
+      "baseline_partial_bar": 0.1,
+      "elementary_gas_orders": {
+        "ads": {
+          "forward": 0,
+          "reverse": 0
+        },
+        "transfer": {
+          "forward": 0,
+          "reverse": 0
+        },
+        "hydrogenate": {
+          "forward": 0,
+          "reverse": 0
+        },
+        "desorb": {
+          "forward": 0,
+          "reverse": 1
+        }
+      }
+    },
+    "HNO-top": {
+      "species_id": "HNO-top",
+      "structure_id": "HNO-top",
+      "phase": "surface",
+      "surfaces": [
+        "facet-Ni"
+      ],
+      "site_inventory": {
+        "top-Ni": 1
+      },
+      "accepted_formation_G_eV": -0.14,
+      "temperature_K": 400,
+      "standard_state_ids": [
+        "demo-standard"
+      ],
+      "reference_ids": [
+        "demo-ref"
+      ],
+      "connected_reactions": [
+        "hydrogenate",
+        "desorb"
+      ],
+      "species_review": "accepted",
+      "thermochemistry": "reviewed",
+      "intermediate_eligible": true,
+      "identity": {
+        "species_id": "HNO-top",
+        "structure_id": "HNO-top",
+        "surface_ids": [
+          "facet-Ni"
+        ],
+        "phase_ids": [
+          "fcc-Ni"
+        ],
+        "site_occupancy": {
+          "top-Ni": 1
+        },
+        "formation_G_eV": -0.14,
+        "reference": "demo-ref",
+        "standard_state": "demo-standard",
+        "temperature_K": 400,
+        "connected": [
+          "hydrogenate",
+          "desorb"
+        ]
+      }
+    }
+  },
+  "energy_kind": "Reviewed synthetic formation Gibbs energies; separate vibrational corrections are not reported",
+  "vacancy_energy": "Zero reference per inventory; excluded from surface-intermediate selection",
+  "valid_total_pressure_bar": [
+    0.9,
+    1.6
+  ],
+  "fixed_other_pressure_symmetric_pilot": "blocked at upper pressure limit",
+  "fe110": {
+    "network": "2a80b67c31201600a1858780bbe6c176b03f489fe24383441fca4f195b395483",
+    "missing": {
+      "fe110_ch_co_to_chco_20261109": [
+        "Unknown charge balance",
+        "Unknown site balance",
+        "Catalyst phase unconfirmed",
+        "Missing compatible free energies",
+        "Missing kinetic parameters or rate law",
+        "Reversibility unconfirmed",
+        "IS: compatible Gibbs correction missing",
+        "FS: compatible Gibbs correction missing",
+        "Kinetic parameter set with units, standard states, validity range and sources missing",
+        "Rate law, scoped parameter review and applicability not supplied",
+        "Reviewed site occupancies and vacant-site counts required"
+      ]
+    },
+    "intermediate_sensitivity": null,
+    "gas_order": null,
+    "planned_runs": 0,
+    "source_sha256": "54e4b09f9298cabba02acf026e78274f5acccca37a6c985312023c4782c858cb"
+  }
+}

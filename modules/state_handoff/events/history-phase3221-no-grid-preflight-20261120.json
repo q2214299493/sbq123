@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "event_id": "history-phase3221-no-grid-preflight-20261120",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-phase3221-no-grid-preflight-20261120",
+    "module": "baseline_mkm"
+  },
+  "occurred_at": "2026-11-20T11:10:05.875075+00:00",
+  "recorded_at": "2026-11-20T11:10:05.875075+00:00",
+  "summary": "Record four immutable pressure-grid plans and measured MATLAB round-trip evidence before native approval.",
+  "payload": {
+    "markdown": "- Phase 3.2.2.1 preparation: the 76 prior checkpoint artifacts retain their hashes. MATLAB R2025b reproduced the rejected feed and all four new vectors at 1.600000 bar. Four hash-bound replacement plans require individual human decisions. NO order unavailable pending accepted native pairs. Scoped regressions in both worktrees: 707 passed, eight optional Zacros cases skipped and one live baseline deselected."
+  },
+  "evidence": [
+    {
+      "locator": "scripts/baseline_mkm/pressure_perturbation.py",
+      "authority": "module_validation",
+      "sha256": "8769a6ca877e80e14b35cde87de8433f9ff280c6679cc96b1a4f843ebcf1755c",
+      "observed_at": "2026-11-20T11:10:05.875075+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/reaction_order.py",
+      "authority": "module_validation",
+      "sha256": "bc1c1620d3828147a8932f0f5018059970551e410e5ee85cff816f0c834a4ebf",
+      "observed_at": "2026-11-20T11:10:05.875075+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/sensitivity_inputs.py",
+      "authority": "module_validation",
+      "sha256": "f42f4953f86632fda0687327656598be9dd9c9d1c7993c9c6ece667eefce69cd",
+      "observed_at": "2026-11-20T11:10:05.875075+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/single_point_result.py",
+      "authority": "module_validation",
+      "sha256": "de7c790da7672aca0de5d7d1f04715346703428293ca70b46cf2337eaf289dd9",
+      "observed_at": "2026-11-20T11:10:05.875075+00:00"
+    },
+    {
+      "locator": "tests/test_mkm_composition_order.py",
+      "authority": "module_validation",
+      "sha256": "7abdb08d074ae4c1ad2c66d0eff6dca2871a04c742b46dbb98d71baf69d5667a",
+      "observed_at": "2026-11-20T11:10:05.875075+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/single_point.py",
+      "authority": "module_validation",
+      "sha256": "491d98bcc1fe7c43724e67c2b93412a5aa399ce0c1c22a3df92083524792f4bd",
+      "observed_at": "2026-11-20T11:10:05.875075+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/composition_report.py",
+      "authority": "module_validation",
+      "sha256": "12162998c926a1dacbca03e3cbd1677a639348a71685da56860237892f30e3c6",
+      "observed_at": "2026-11-20T11:10:05.875075+00:00"
+    },
+    {
+      "locator": "configs/kinetics/mkm_composition_order.schema.json",
+      "authority": "module_validation",
+      "sha256": "535286f5993f4d5641c7a857f74feccbec0caae0da8fcc7e0d74b9f8246278cb",
+      "observed_at": "2026-11-20T11:10:05.875075+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2_1/.gitattributes",
+      "authority": "module_validation",
+      "sha256": "c9e02c1dfde0e9a9a9d178daad23c9858b5a90a495b9016537c1342fafc4db4c",
+      "observed_at": "2026-11-20T11:10:05.875075+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2_1/coarse/minus/INPUT_phase25.m",
+      "authority": "module_validation",
+      "sha256": "0d6f90bf2f51c63d8e98efa72fc74958dd4726d13c1244a73a3ed8007a060daa",
+      "observed_at": "2026-11-20T11:10:05.875075+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2_1/coarse/minus/plan.json",
+      "authority": "module_validation",
+      "sha256": "611b6ca7d65497a14ef87a31aeb637dd9cb2d600b28fcad56afd0b45d63a468b",
+      "observed_at": "2026-11-20T11:10:05.875075+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2_1/coarse/plus/INPUT_phase25.m",
+      "authority": "module_validation",
+      "sha256": "6f9c4862e4cf6248be42ad30bf316cefeb1b76c1fbd908d9c7f7d13ea7f7e39b",
+      "observed_at": "2026-11-20T11:10:05.875075+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2_1/coarse/plus/plan.json",
+      "authority": "module_validation",
+      "sha256": "339d90c6ce182599a2ff350fb1f1f3e4edbf2da4398928eb734883fb5b662b5c",
+      "observed_at": "2026-11-20T11:10:05.875075+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2_1/fine/minus/INPUT_phase25.m",
+      "authority": "module_validation",
+      "sha256": "c6e9aeb21ced37ff0b42b26fb5d5c007a2f4bce977970e2a9191f5a97c278cbd",
+      "observed_at": "2026-11-20T11:10:05.875075+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2_1/fine/minus/plan.json",
+      "authority": "module_validation",
+      "sha256": "7cab0f54b7dad7da101fec442c8f4ac766b8c38cf6cee896460b3827f28b01be",
+      "observed_at": "2026-11-20T11:10:05.875075+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2_1/fine/plus/INPUT_phase25.m",
+      "authority": "module_validation",
+      "sha256": "17919b263363a063117f358ad2a18608f3f6563fa1fe6f52724fc42213470b5e",
+      "observed_at": "2026-11-20T11:10:05.875075+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2_1/fine/plus/plan.json",
+      "authority": "module_validation",
+      "sha256": "a0d2e908334d62da13666bf2e1561967b56802c5ca6a924f7befe52f3255b0b2",
+      "observed_at": "2026-11-20T11:10:05.875075+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2_1/pressure_probe.mat",
+      "authority": "module_validation",
+      "sha256": "63ba27bfc8a8e8ec7d07fb011698831bd76b4f799364091af67297a1c539a3e4",
+      "observed_at": "2026-11-20T11:10:05.875075+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2_1/probe_feed.m",
+      "authority": "module_validation",
+      "sha256": "dc4f8374136a5f4f37c2b997e8d2f5077c149635c11a8ef380905b750f1f0012",
+      "observed_at": "2026-11-20T11:10:05.875075+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2_1/regression/development.txt.gz",
+      "authority": "module_validation",
+      "sha256": "bb7466247d47416b324042b3b47e4a6092069b75536fd6c78f2e79f442f3faef",
+      "observed_at": "2026-11-20T11:10:05.875075+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2_1/regression/release.txt.gz",
+      "authority": "module_validation",
+      "sha256": "a85c91eab1ff9f45ae01ce35352aa895bd876e7769e03a228897432cf1f6a242",
+      "observed_at": "2026-11-20T11:10:05.875075+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2_1/review.md",
+      "authority": "repository_document",
+      "sha256": "30334d086122d254e184b865696a89220e03d70978e41a12cb2651da165b222a",
+      "observed_at": "2026-11-20T11:10:05.875075+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2_1/serialization.json",
+      "authority": "module_validation",
+      "sha256": "f1b2a6b08e99851ca53dde6a90b694dc6a4f11795f2886e926e332de1ecea43c",
+      "observed_at": "2026-11-20T11:10:05.875075+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_2_1/study.json",
+      "authority": "module_validation",
+      "sha256": "2aaec4e7584816326514c4f5ff044959d8932e9e38afeeec0adcc3765abe5b2b",
+      "observed_at": "2026-11-20T11:10:05.875075+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

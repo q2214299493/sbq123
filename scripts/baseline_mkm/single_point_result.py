@@ -4,6 +4,7 @@ import math
 import re
 
 from scripts.baseline_mkm.native import site_token
+from scripts.baseline_mkm.pressure_perturbation import checked_feed
 from scripts.kinetic_parameters.export import catkinas
 from scripts.thermochemistry.harmonic import KB
 
@@ -194,6 +195,12 @@ def validate_result(dataset, config, mapping, native, log, input_text):
     by_id, sites, vacancy, activities, gas_rates, species_rows, site_rows = species_and_sites(
         table, mapping, native, config
     )
+    perturbation = dataset.get("sensitivity_perturbation", {})
+    if "composition_grid" in perturbation.get("spec", {}):
+        actual = {s["species_id"]: s["pressure_bar"] for s in species_rows if s["pressure_bar"] is not None}
+        checked_feed(perturbation["parent_feed_bar"], actual, perturbation["spec"]["species_id"], perturbation["total_bar"])
+        if actual != perturbation["feed_bar"]:
+            raise ValueError("Actual MAT pressure differs from the explicit composition grid")
     source, reactions, coefficient_errors = reconstruct(
         table, mapping, native, temperature, by_id, sites, vacancy, activities
     )

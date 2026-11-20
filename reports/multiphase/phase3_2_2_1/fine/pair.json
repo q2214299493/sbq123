@@ -1,0 +1,59 @@
+{
+  "format": "sensitivity-pair-plan/1",
+  "baseline_result_sha256": "6c09b2d304b0829e8912baa670fd274425c4e49a0376f4a4e710db981e4692f7",
+  "sensitivity": {
+    "kind": "gas_order",
+    "species_id": "NO-g",
+    "constraint": "fixed_total_proportional_remainder",
+    "step": 0.02,
+    "composition_grid": {
+      "plus": {
+        "H2-g": 0.9908,
+        "HNO-g": 0.09908,
+        "NO-g": 0.51012
+      },
+      "minus": {
+        "H2-g": 1.009,
+        "HNO-g": 0.1009,
+        "NO-g": 0.4901
+      }
+    },
+    "review_basis": {
+      "observable": "NO constrained-composition reaction order",
+      "size": "fine",
+      "baseline_run_id": "run",
+      "baseline_result_sha256": "6c09b2d304b0829e8912baa670fd274425c4e49a0376f4a4e710db981e4692f7",
+      "parent_input_hashes": {
+        "network": "6a4717c44a6c5a76191baf88e419621e461886c96989a6cdb86402df70c58b40",
+        "dataset": "0ac30eec437cebf321339d6c4dde26a0e2146229d8c27fb9fa9f3926adf6d778",
+        "configuration": "7687b9fe2495aa010c7faa79da17ada934cf1673dd910b49fa4605461dea6f53"
+      },
+      "archived_candidates_sha256": "8eeedc43e656b9a12db628aef505245bf7b509e727cd1b6d9024d1be2bd68145",
+      "remaining_H2_HNO_ratio": 10,
+      "fixed_total_bar": 1.6,
+      "expected_validation": "Positive MAT components exactly match grid, exact fixed total and proportional remainder",
+      "budget": {
+        "max_runs": 4,
+        "per_run_s": 210,
+        "native_s": 840,
+        "wall_s": 960,
+        "max_parallel": 1,
+        "max_retries": 0
+      }
+    }
+  },
+  "members": {
+    "plus": {
+      "run_id": "plus-e24f1ffa1302b1a4",
+      "plan_sha256": "9c44bdb825ccbf25b2c10576df1ab9e2814ce1c259de8474189fd3fc9e3bcc2c"
+    },
+    "minus": {
+      "run_id": "minus-3e11f4c6adc57fee",
+      "plan_sha256": "282a724fda7a00c119cbf9435eb36980ee75587b0762fb41df029d14ec5c6192"
+    }
+  },
+  "per_run_timeout_s": 210,
+  "total_budget_s": 480,
+  "max_retries": 0,
+  "max_parallel": 1
+}

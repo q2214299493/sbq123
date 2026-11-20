@@ -19,6 +19,10 @@ def verify_pair(directory, base, reaction_id, step, baseline_hash, decisions, *,
         reaction_id, step, baseline_hash
     ):
         raise ValueError("Mismatched reaction, step or baseline")
+    return verify_members(directory, base, plan, decisions, finished=finished)
+
+
+def verify_members(directory, base, plan, decisions, *, finished):
     if (directory / "failed.json").exists():
         raise ValueError(f"{directory.name} pair previously failed")
     for label, sign in pair.SIGNS:

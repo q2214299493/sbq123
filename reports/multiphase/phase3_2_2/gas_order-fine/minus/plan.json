@@ -1,0 +1,93 @@
+{
+  "format": "mkm-single-point-plan/1",
+  "run_id": "minus-b172b8e942c479e8",
+  "run_directory": "C:\\Users\\86177\\Desktop\\work\\archive\\phase3_2_2_sensitivity\\gas_order-fine\\minus-b172b8e942c479e8",
+  "ticket_id": "3874914af5cb16b38385b930",
+  "question_id": "3874914af5cb16b38385b930ca5cff658d9093ef5f52ba00a6652a434d30e41c",
+  "ticket_database": "C:\\Users\\86177\\Desktop\\work\\archive\\phase3_0_native\\validated\\synthetic-ticket.sqlite",
+  "catalyst_project_id": "demo",
+  "phase_id": [
+    "fcc-Ni",
+    "fcc-Cu"
+  ],
+  "surface_id": [
+    "facet-Ni",
+    "facet-Cu"
+  ],
+  "network_version_id": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+  "kinetic_dataset_version": "b172b8e942c479e8cdd63993b9f42899666827523b608f0fa46c8029c81bec1e",
+  "input_hashes": {
+    "network": "6a4717c44a6c5a76191baf88e419621e461886c96989a6cdb86402df70c58b40",
+    "dataset": "3e469ec1a98ce644cb1110e5c397407343bf1df59d785aa6f43112e4645f63ce",
+    "configuration": "6e02dbff1b265a2efa1ed6d0e40354b8a71df50d2bd7b5b15aa934afd0b70c99"
+  },
+  "native_input_hashes": {
+    "INPUT_phase25.m": "e2a20200d34519b1d42ae7e2521eeda98b381c03f40e16de2310938f0366fdb6"
+  },
+  "configuration_hash": "761e74eaff4f3c8237d5b0cd64b919089534d7817c7b8794316a4f0ebe157ad4",
+  "temperature_K": 400,
+  "partial_pressures_bar": {
+    "H2-g": 1.009000603042384,
+    "NO-g": 0.4900993366533776,
+    "HNO-g": 0.1009000603042384
+  },
+  "total_pressure_bar": 1.6,
+  "standard_states": {
+    "gas_pressure_Pa": 100000,
+    "solute_concentration_mol_m3": 1000,
+    "surface_activity_convention": "fractional site occupation"
+  },
+  "initial_coverages": {
+    "H2-top": 0,
+    "H2-bridge": 0,
+    "HNO-top": 0
+  },
+  "site_inventory": [
+    {
+      "schema_version": "1.0.0",
+      "site_id": "top-Ni",
+      "surface_id": "facet-Ni",
+      "site_type": "atop",
+      "local_geometry": "single metal atom",
+      "validation": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "site_id": "bridge-Cu",
+      "surface_id": "facet-Cu",
+      "site_type": "bridge",
+      "local_geometry": "two neighbouring copper atoms",
+      "validation": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      }
+    }
+  ],
+  "solver_settings": {
+    "mode": "single_point",
+    "timeout_s": 210,
+    "MaxTime": 3,
+    "MaxOdeTime": 3
+  },
+  "use_scope": "synthetic_benchmark",
+  "runtime": {
+    "catkinas": {
+      "source_path": "D:/CATKINAS.p",
+      "download_label": "20261106",
+      "sha256": "2b70a3511a19065f843b65d8601874700dd792e8d31d620046ef3805df399ff0",
+      "receipt": "reports/multiphase/phase2_5_1/catkinas_target_attempt.json"
+    },
+    "matlab_path": "D:\\BaiduNetdiskDownload\\bin\\matlab.exe",
+    "matlab_sha256": "6dc32276086121e44edf4846f033066ba5b0fae9bad002d8917a411e0a59afa9",
+    "matlab_version": "MATLAB 25.2.0.2998904 R2025b"
+  }
+}

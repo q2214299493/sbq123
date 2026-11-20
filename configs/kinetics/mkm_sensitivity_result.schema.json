@@ -1,0 +1,270 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Intermediate thermodynamic sensitivity and gas order",
+  "type": "object",
+  "required": [
+    "format",
+    "complete",
+    "scope",
+    "study_sha256",
+    "baseline",
+    "pairs",
+    "normalization",
+    "step_comparison",
+    "attempted_runs",
+    "native_s",
+    "wall_s"
+  ],
+  "properties": {
+    "format": {
+      "const": "mkm-sensitivity-result/1"
+    },
+    "complete": {
+      "type": "boolean"
+    },
+    "scope": {
+      "const": "synthetic_benchmark"
+    },
+    "study_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "pairs": {
+      "type": "object",
+      "minProperties": 2,
+      "maxProperties": 4,
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "spec",
+          "stages",
+          "estimates"
+        ],
+        "properties": {
+          "spec": {
+            "type": "object",
+            "required": [
+              "kind",
+              "step",
+              "species_id"
+            ],
+            "properties": {
+              "kind": {
+                "enum": [
+                  "intermediate_G",
+                  "gas_order"
+                ]
+              },
+              "step": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "species_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "constraint": {
+                "enum": [
+                  "fixed_other_partial_pressures",
+                  "fixed_total_proportional_remainder"
+                ]
+              }
+            },
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "kind": {
+                      "const": "gas_order"
+                    }
+                  }
+                },
+                "then": {
+                  "required": [
+                    "constraint"
+                  ]
+                },
+                "else": {
+                  "not": {
+                    "required": [
+                      "constraint"
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          "estimates": {
+            "anyOf": [
+              {
+                "type": "object",
+                "required": [
+                  "central",
+                  "positive_side",
+                  "negative_side"
+                ],
+                "properties": {
+                  "central": {
+                    "type": "number"
+                  },
+                  "positive_side": {
+                    "type": "number"
+                  },
+                  "negative_side": {
+                    "type": "number"
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "cases": {
+            "type": "object",
+            "required": [
+              "plus",
+              "minus"
+            ],
+            "properties": {
+              "plus": {
+                "type": "object",
+                "required": [
+                  "perturbation",
+                  "native_hashes",
+                  "run_receipt_sha256",
+                  "coverage",
+                  "rates",
+                  "scientific_validation",
+                  "site_residuals",
+                  "element_balance",
+                  "partial_pressures_bar",
+                  "elementary_rate_laws",
+                  "net_tof_per_site_pair_s",
+                  "product_based_tof_per_site_pair_s"
+                ],
+                "properties": {
+                  "run_receipt_sha256": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  },
+                  "net_tof_per_site_pair_s": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "product_based_tof_per_site_pair_s": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  }
+                }
+              },
+              "minus": {
+                "type": "object",
+                "required": [
+                  "perturbation",
+                  "native_hashes",
+                  "run_receipt_sha256",
+                  "coverage",
+                  "rates",
+                  "scientific_validation",
+                  "site_residuals",
+                  "element_balance",
+                  "partial_pressures_bar",
+                  "elementary_rate_laws",
+                  "net_tof_per_site_pair_s",
+                  "product_based_tof_per_site_pair_s"
+                ],
+                "properties": {
+                  "run_receipt_sha256": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  },
+                  "net_tof_per_site_pair_s": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "product_based_tof_per_site_pair_s": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "estimates": {
+                  "type": "object"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "cases",
+                "product_based_estimates",
+                "response_matrix",
+                "budget"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "step_comparison": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "status",
+          "absolute_change",
+          "tolerance"
+        ],
+        "properties": {
+          "status": {
+            "enum": [
+              "stable",
+              "unstable",
+              "unavailable"
+            ]
+          },
+          "absolute_change": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "tolerance": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "attempted_runs": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8
+    },
+    "native_s": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1680
+    },
+    "wall_s": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1920
+    }
+  }
+}
