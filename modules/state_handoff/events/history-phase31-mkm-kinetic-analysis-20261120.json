@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "event_id": "history-phase31-mkm-kinetic-analysis-20261120",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-phase31-mkm-kinetic-analysis-20261120",
+    "module": "baseline_mkm"
+  },
+  "occurred_at": "2026-11-20T02:54:22.514871+00:00",
+  "recorded_at": "2026-11-20T02:54:22.514871+00:00",
+  "summary": "Record offline MKM kinetic analysis and multiphase pathway inspection against the accepted synthetic point.",
+  "payload": {
+    "markdown": "- Phase 3.1: offline analysis reproduced the four-step synthetic cycle at 400 K, with 81.51277016 turnovers per reference site pair per second and unit HNO molar selectivity. Per-site inventories, directional kinetics, gas production and structural pathways are reported separately. Real Fe(110) has only a structural graph and missing evidence. Both worktrees passed 535 tests. See reports/multiphase/phase3_1/completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "scripts/baseline_mkm/analysis.py",
+      "sha256": "8ba017709785fc598302056ce4fa5e41e03bd9fdb1e320b960c1714213d6a482",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T02:54:22.514871+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/analysis_report.py",
+      "sha256": "153609e1a896e2fb6d771aef47fdacdb94b48bb8aea53d57fb3c87b68f720c41",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T02:54:22.514871+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/kinetic_analysis.py",
+      "sha256": "de06124229b397006806d5fdb34add874b5469a44a9b49c48203d82a34c148b5",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T02:54:22.514871+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/pathway_analysis.py",
+      "sha256": "ba6ca39404c255a2164870634a85a68ad9ff77a5f29109f11037888a4dda411e",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T02:54:22.514871+00:00"
+    },
+    {
+      "locator": "tests/test_mkm_analysis.py",
+      "sha256": "f237d65682d4291200bdb7070556cc115ae68ecad7ba0018a28713ebbb079dd4",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T02:54:22.514871+00:00"
+    },
+    {
+      "locator": "configs/kinetics/mkm_analysis.schema.json",
+      "sha256": "dcd14ce6c44ffb97495ad05431889830dddde5ee26aa99c4171c4657f7b18fe8",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T02:54:22.514871+00:00"
+    },
+    {
+      "locator": "modules/baseline_mkm/README.md",
+      "sha256": "d436075d6c97dbdd60efe80466c393f4d405fa5a3ee16bc581640e32468452b0",
+      "authority": "repository_document",
+      "observed_at": "2026-11-20T02:54:22.514871+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_1/.gitattributes",
+      "sha256": "3f142fa4d164c2efd7c4a473db4bd894756df2063a4a721687383359130579de",
+      "authority": "repository_document",
+      "observed_at": "2026-11-20T02:54:22.514871+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_1/benchmark_normalization.json",
+      "sha256": "3084884fe35b71413ee95f1cb09dd5bbf1bfc40354bfc5454e909d513c4d2401",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T02:54:22.514871+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_1/closed_cycle/analysis.json",
+      "sha256": "76633f244d9a381f0fcfa458eb6f2ca6490337d9bfd78b295fedf82067524151",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T02:54:22.514871+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_1/closed_cycle/pathways.md",
+      "sha256": "e911c2e79bb28db7a015ca823211f4a81d5ae39b15564bc8c7f66ab70da28efb",
+      "authority": "repository_document",
+      "observed_at": "2026-11-20T02:54:22.514871+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_1/closed_cycle/report.md",
+      "sha256": "39a2622a0b60bcf885e5c8445285e8c5dc500e36a456e3ddc512b0ff8173142c",
+      "authority": "repository_document",
+      "observed_at": "2026-11-20T02:54:22.514871+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_1/closed_cycle/ticket_handoff.json",
+      "sha256": "83a8f0fb36b2ff32d5621a9d46d025db090cf0f4f6b8f4f5b724799d22541094",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T02:54:22.514871+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_1/completion.md",
+      "sha256": "9e060214f7eb2f100e4b13f70a9799ce23310953fb7f4004b7752b291dc953ea",
+      "authority": "repository_document",
+      "observed_at": "2026-11-20T02:54:22.514871+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_1/fe110/analysis.json",
+      "sha256": "7ce661c4944f7ac7983d8bcbae8f7c27fb0a6b93a0fa438038fec1f509f9d2a4",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T02:54:22.514871+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_1/fe110/pathways.md",
+      "sha256": "bd376b01a95098fc459f00ecad0011aa2e75307d33f13e6d23743f7e585c6e87",
+      "authority": "repository_document",
+      "observed_at": "2026-11-20T02:54:22.514871+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_1/fe110/report.md",
+      "sha256": "dc216e58455a3fc4e7cec573ba13ef0d6425fc858a5cd974c29248a8a0c6122e",
+      "authority": "repository_document",
+      "observed_at": "2026-11-20T02:54:22.514871+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

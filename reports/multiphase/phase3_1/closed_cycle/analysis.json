@@ -1,0 +1,985 @@
+{
+  "format": "mkm-kinetic-analysis/1",
+  "status": "analyzed",
+  "scope": "synthetic_benchmark",
+  "run_id": "run",
+  "question_id": "3874914af5cb16b38385b930ca5cff658d9093ef5f52ba00a6652a434d30e41c",
+  "ticket_id": "3874914af5cb16b38385b930",
+  "project_id": "demo",
+  "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+  "dataset_version": "417cf1dc3236175476441c4c4e7b4bd5771bc4a7062aa5e34eff69070483d11b",
+  "temperature_K": 400,
+  "partial_pressures_bar": {
+    "H2-g": 1.0,
+    "NO-g": 0.5,
+    "HNO-g": 0.1
+  },
+  "source_hashes": {
+    "network": "6a4717c44a6c5a76191baf88e419621e461886c96989a6cdb86402df70c58b40",
+    "dataset": "0ac30eec437cebf321339d6c4dde26a0e2146229d8c27fb9fa9f3926adf6d778",
+    "configuration": "7687b9fe2495aa010c7faa79da17ada934cf1673dd910b49fa4605461dea6f53",
+    "result": "6c09b2d304b0829e8912baa670fd274425c4e49a0376f4a4e710db981e4692f7",
+    "plan": "7a964de15b3a4fa6dcf53ae9ea6a06597b9cdc68ecdb064abcd85fd047419241",
+    "approval": "1f0c1f0bdb0c0d33ee05e7e6e13a574a9239b4134538868303b0a8183172ef26"
+  },
+  "normalization": {
+    "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+    "reference_basis": "reference_site_pair",
+    "sites_per_reference": {
+      "top-Ni": 1,
+      "bridge-Cu": 1
+    },
+    "source": {
+      "path": "../../../tests/fixtures/multiphase/closed_cycle_reference.json",
+      "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+    }
+  },
+  "coverage": [
+    {
+      "species_id": "HNO-top",
+      "phase_id": "fcc-Ni",
+      "surface_id": "facet-Ni",
+      "site_id": "top-Ni",
+      "site_type": "atop",
+      "occupancy_multiplicity": 1,
+      "species_coverage": 0.401212208396157,
+      "occupied_fraction": 0.401212208396157,
+      "fraction_of_all_sites": 0.2006061041980785,
+      "concentration_mol_per_surface_m2": null,
+      "vacancy_fraction": 0.29168654898032714,
+      "validation": "balanced"
+    },
+    {
+      "species_id": "H2-top",
+      "phase_id": "fcc-Ni",
+      "surface_id": "facet-Ni",
+      "site_id": "top-Ni",
+      "site_type": "atop",
+      "occupancy_multiplicity": 1,
+      "species_coverage": 0.30710124262351585,
+      "occupied_fraction": 0.30710124262351585,
+      "fraction_of_all_sites": 0.15355062131175792,
+      "concentration_mol_per_surface_m2": null,
+      "vacancy_fraction": 0.29168654898032714,
+      "validation": "balanced"
+    },
+    {
+      "species_id": "H2-bridge",
+      "phase_id": "fcc-Cu",
+      "surface_id": "facet-Cu",
+      "site_id": "bridge-Cu",
+      "site_type": "bridge",
+      "occupancy_multiplicity": 1,
+      "species_coverage": 0.6966794790111535,
+      "occupied_fraction": 0.6966794790111535,
+      "fraction_of_all_sites": 0.34833973950557673,
+      "concentration_mol_per_surface_m2": null,
+      "vacancy_fraction": 0.3033205209888465,
+      "validation": "balanced"
+    }
+  ],
+  "utilization": {
+    "top-Ni": {
+      "phase_id": "fcc-Ni",
+      "surface_id": "facet-Ni",
+      "site_type": "atop",
+      "occupied_fraction": 0.7083134510196729,
+      "vacancy_fraction": 0.29168654898032714,
+      "balance_residual": 0.0,
+      "coverage_ranking": [
+        "HNO-top",
+        "H2-top"
+      ],
+      "dominant_adsorbates": [
+        "HNO-top"
+      ],
+      "competitors": [
+        "HNO-top",
+        "H2-top"
+      ],
+      "activity": [
+        {
+          "reaction_id": "ads",
+          "required_sites": 1,
+          "forward_flux": 94.00713283583823,
+          "reverse_flux": 12.494362674190553,
+          "net_flux": 81.5127701616477,
+          "forward_vacancy_factor": 0.29168654898032714,
+          "forward_fraction_blocked_by_vacancy_requirement": 0.7083134510196729,
+          "reverse_vacancy_factor": 1.0
+        },
+        {
+          "reaction_id": "transfer",
+          "required_sites": 1,
+          "forward_flux": 450.0592041087896,
+          "reverse_flux": 368.5464339471419,
+          "net_flux": 81.5127701616477,
+          "forward_vacancy_factor": 0.29168654898032714,
+          "forward_fraction_blocked_by_vacancy_requirement": 0.7083134510196729,
+          "reverse_vacancy_factor": 1.0
+        },
+        {
+          "reaction_id": "hydrogenate",
+          "required_sites": 1,
+          "forward_flux": 190.36328304231006,
+          "reverse_flux": 27.337742719014678,
+          "net_flux": 163.0255403232954,
+          "forward_vacancy_factor": 1.0,
+          "forward_fraction_blocked_by_vacancy_requirement": 0.0,
+          "reverse_vacancy_factor": 1.0
+        },
+        {
+          "reaction_id": "desorb",
+          "required_sites": 1,
+          "forward_flux": 278.43070593850365,
+          "reverse_flux": 115.40516561520829,
+          "net_flux": 163.0255403232954,
+          "forward_vacancy_factor": 1.0,
+          "forward_fraction_blocked_by_vacancy_requirement": 0.0,
+          "reverse_vacancy_factor": 0.29168654898032714
+        }
+      ],
+      "blocking_evidence": "fraction unavailable to a vacant-site requirement"
+    },
+    "bridge-Cu": {
+      "phase_id": "fcc-Cu",
+      "surface_id": "facet-Cu",
+      "site_type": "bridge",
+      "occupied_fraction": 0.6966794790111535,
+      "vacancy_fraction": 0.3033205209888465,
+      "balance_residual": 0.0,
+      "coverage_ranking": [
+        "H2-bridge"
+      ],
+      "dominant_adsorbates": [
+        "H2-bridge"
+      ],
+      "competitors": [
+        "H2-bridge"
+      ],
+      "activity": [
+        {
+          "reaction_id": "ads",
+          "required_sites": 1,
+          "forward_flux": 94.00713283583823,
+          "reverse_flux": 12.494362674190553,
+          "net_flux": 81.5127701616477,
+          "forward_vacancy_factor": 0.3033205209888465,
+          "forward_fraction_blocked_by_vacancy_requirement": 0.6966794790111535,
+          "reverse_vacancy_factor": 1.0
+        },
+        {
+          "reaction_id": "transfer",
+          "required_sites": 1,
+          "forward_flux": 450.0592041087896,
+          "reverse_flux": 368.5464339471419,
+          "net_flux": 81.5127701616477,
+          "forward_vacancy_factor": 1.0,
+          "forward_fraction_blocked_by_vacancy_requirement": 0.0,
+          "reverse_vacancy_factor": 0.3033205209888465
+        }
+      ],
+      "blocking_evidence": "fraction unavailable to a vacant-site requirement"
+    }
+  },
+  "phase_comparison": {
+    "fcc-Ni": {
+      "inventories": [
+        {
+          "site_id": "top-Ni",
+          "occupied_fraction": 0.7083134510196729,
+          "vacancy_fraction": 0.29168654898032714
+        }
+      ],
+      "occupied_fraction": 0.7083134510196729,
+      "vacancy_fraction": 0.2916865489803271
+    },
+    "fcc-Cu": {
+      "inventories": [
+        {
+          "site_id": "bridge-Cu",
+          "occupied_fraction": 0.6966794790111535,
+          "vacancy_fraction": 0.3033205209888465
+        }
+      ],
+      "occupied_fraction": 0.6966794790111535,
+      "vacancy_fraction": 0.30332052098884654
+    }
+  },
+  "rates": {
+    "reactions": [
+      {
+        "index": 1,
+        "kf": 1062.5334512545078,
+        "kr": 58.39820737222975,
+        "forward_flux": 94.00713283583823,
+        "reverse_flux": 12.494362674190553,
+        "net_flux": 81.5127701616477,
+        "applied_forward_barrier_eV": 0.7853168271366968,
+        "applied_reaction_energy_eV": -0.1,
+        "reaction_id": "ads",
+        "forward_unit": "bar^-1 s^-1",
+        "reverse_unit": "s^-1",
+        "reversible": true,
+        "activity_factors": {
+          "forward": {
+            "gas_orders": {
+              "H2-g": 1
+            },
+            "surface_orders": {},
+            "vacant_site_orders": {
+              "top-Ni": 1,
+              "bridge-Cu": 1
+            },
+            "gas_pressure_factor": 1.0,
+            "adsorbate_factor": 1,
+            "vacancy_factor": 0.08847451600215152
+          },
+          "reverse": {
+            "gas_orders": {},
+            "surface_orders": {
+              "H2-top": 1,
+              "H2-bridge": 1
+            },
+            "vacant_site_orders": {},
+            "gas_pressure_factor": 1,
+            "adsorbate_factor": 0.21395113371462884,
+            "vacancy_factor": 1
+          }
+        },
+        "reaction_free_energy_eV": -0.1,
+        "forward_activation_free_energy_eV": 0.4,
+        "reverse_activation_free_energy_eV": 0.5,
+        "gas_contribution": {
+          "H2-g": -81.5127701616477
+        },
+        "flux_unit": "events per reference site per second",
+        "fractional_directional_imbalance": 0.765367376028743,
+        "near_equilibrium": false
+      },
+      {
+        "index": 2,
+        "kf": 2214.7271375269625,
+        "kr": 3956.4788303965233,
+        "forward_flux": 450.0592041087896,
+        "reverse_flux": 368.5464339471419,
+        "net_flux": 81.5127701616477,
+        "applied_forward_barrier_eV": 0.76,
+        "applied_reaction_energy_eV": 0.02,
+        "reaction_id": "transfer",
+        "forward_unit": "s^-1",
+        "reverse_unit": "s^-1",
+        "reversible": true,
+        "activity_factors": {
+          "forward": {
+            "gas_orders": {},
+            "surface_orders": {
+              "H2-bridge": 1
+            },
+            "vacant_site_orders": {
+              "top-Ni": 1
+            },
+            "gas_pressure_factor": 1,
+            "adsorbate_factor": 0.6966794790111535,
+            "vacancy_factor": 0.29168654898032714
+          },
+          "reverse": {
+            "gas_orders": {},
+            "surface_orders": {
+              "H2-top": 1
+            },
+            "vacant_site_orders": {
+              "bridge-Cu": 1
+            },
+            "gas_pressure_factor": 1,
+            "adsorbate_factor": 0.30710124262351585,
+            "vacancy_factor": 0.3033205209888465
+          }
+        },
+        "reaction_free_energy_eV": 0.019999999999999997,
+        "forward_activation_free_energy_eV": 0.76,
+        "reverse_activation_free_energy_eV": 0.74,
+        "gas_contribution": {},
+        "flux_unit": "events per reference site per second",
+        "fractional_directional_imbalance": 0.09957513895852048,
+        "near_equilibrium": false
+      },
+      {
+        "index": 3,
+        "kf": 1239.7428380039596,
+        "kr": 68.13786357174203,
+        "forward_flux": 190.36328304231006,
+        "reverse_flux": 27.337742719014678,
+        "net_flux": 163.0255403232954,
+        "applied_forward_barrier_eV": 0.78,
+        "applied_reaction_energy_eV": -0.1,
+        "reaction_id": "hydrogenate",
+        "forward_unit": "bar^-1 s^-1",
+        "reverse_unit": "s^-1",
+        "reversible": true,
+        "activity_factors": {
+          "forward": {
+            "gas_orders": {
+              "NO-g": 1
+            },
+            "surface_orders": {
+              "H2-top": 1
+            },
+            "vacant_site_orders": {},
+            "gas_pressure_factor": 0.5,
+            "adsorbate_factor": 0.30710124262351585,
+            "vacancy_factor": 1
+          },
+          "reverse": {
+            "gas_orders": {},
+            "surface_orders": {
+              "HNO-top": 1
+            },
+            "vacant_site_orders": {},
+            "gas_pressure_factor": 1,
+            "adsorbate_factor": 0.401212208396157,
+            "vacancy_factor": 1
+          }
+        },
+        "reaction_free_energy_eV": -0.1,
+        "forward_activation_free_energy_eV": 0.78,
+        "reverse_activation_free_energy_eV": 0.88,
+        "gas_contribution": {
+          "NO-g": -163.0255403232954
+        },
+        "flux_unit": "events per reference site per second",
+        "fractional_directional_imbalance": 0.7488505842045389,
+        "near_equilibrium": false
+      },
+      {
+        "index": 4,
+        "kf": 693.9736630934748,
+        "kr": 3956.4788303965233,
+        "forward_flux": 278.43070593850365,
+        "reverse_flux": 115.40516561520829,
+        "net_flux": 163.0255403232954,
+        "applied_forward_barrier_eV": 0.8,
+        "applied_reaction_energy_eV": 0.06,
+        "reaction_id": "desorb",
+        "forward_unit": "s^-1",
+        "reverse_unit": "bar^-1 s^-1",
+        "reversible": true,
+        "activity_factors": {
+          "forward": {
+            "gas_orders": {},
+            "surface_orders": {
+              "HNO-top": 1
+            },
+            "vacant_site_orders": {},
+            "gas_pressure_factor": 1,
+            "adsorbate_factor": 0.401212208396157,
+            "vacancy_factor": 1
+          },
+          "reverse": {
+            "gas_orders": {
+              "HNO-g": 1
+            },
+            "surface_orders": {},
+            "vacant_site_orders": {
+              "top-Ni": 1
+            },
+            "gas_pressure_factor": 0.1,
+            "adsorbate_factor": 1,
+            "vacancy_factor": 0.29168654898032714
+          }
+        },
+        "reaction_free_energy_eV": 0.06000000000000001,
+        "forward_activation_free_energy_eV": 0.8,
+        "reverse_activation_free_energy_eV": 0.74,
+        "gas_contribution": {
+          "HNO-g": 163.0255403232954
+        },
+        "flux_unit": "events per reference site per second",
+        "fractional_directional_imbalance": 0.4139428429415214,
+        "near_equilibrium": false
+      }
+    ],
+    "descending_absolute_flux": {
+      "forward_flux": [
+        "transfer",
+        "desorb",
+        "hydrogenate",
+        "ads"
+      ],
+      "reverse_flux": [
+        "transfer",
+        "desorb",
+        "hydrogenate",
+        "ads"
+      ],
+      "net_flux": [
+        "desorb",
+        "hydrogenate",
+        "ads",
+        "transfer"
+      ]
+    },
+    "relative_activity_extremes": {
+      "forward_flux": {
+        "highest": [
+          "transfer"
+        ],
+        "lowest": [
+          "ads"
+        ]
+      },
+      "reverse_flux": {
+        "highest": [
+          "transfer"
+        ],
+        "lowest": [
+          "ads"
+        ]
+      },
+      "net_flux": {
+        "highest": [
+          "desorb",
+          "hydrogenate"
+        ],
+        "lowest": [
+          "ads",
+          "transfer"
+        ]
+      }
+    },
+    "near_equilibrium_definition": "absolute net / gross directional flux <= 0.05; inactive undefined",
+    "steady_state_residual": 0.0,
+    "gas_net_production": {
+      "H2-g": -81.5127701616477,
+      "HNO-g": 163.0255403232954,
+      "NO-g": -163.0255403232954
+    },
+    "tolerance": 1.630255403232954e-05
+  },
+  "tof": {
+    "overall_stoichiometry": {
+      "H2-g": -1,
+      "NO-g": -2,
+      "HNO-g": 2
+    },
+    "extent_per_reference_s": 81.5127701616477,
+    "reference_basis": "reference_site_pair",
+    "overall": {
+      "per_reference_s": 81.5127701616477,
+      "per_site_pair_s": 81.5127701616477,
+      "per_site_s": 40.75638508082385,
+      "mol_per_m2_s": null,
+      "mol_per_kg_s": null,
+      "mol_per_m3_reactor_s": null
+    },
+    "products": {
+      "HNO-g": {
+        "per_reference_s": 163.0255403232954,
+        "per_site_pair_s": 163.0255403232954,
+        "per_site_s": 81.5127701616477,
+        "mol_per_m2_s": null,
+        "mol_per_kg_s": null,
+        "mol_per_m3_reactor_s": null
+      }
+    }
+  },
+  "selectivity": {
+    "molar": {
+      "HNO-g": 1.0
+    },
+    "element_selectivity": {
+      "C": null,
+      "H": {
+        "HNO-g": 1.0
+      },
+      "N": {
+        "HNO-g": 1.0
+      },
+      "O": {
+        "HNO-g": 1.0
+      }
+    },
+    "element_balance": {
+      "H": {
+        "produced": 163.0255403232954,
+        "consumed": 163.0255403232954,
+        "residual": 0.0
+      },
+      "N": {
+        "produced": 163.0255403232954,
+        "consumed": 163.0255403232954,
+        "residual": 0.0
+      },
+      "O": {
+        "produced": 163.0255403232954,
+        "consumed": 163.0255403232954,
+        "residual": 0.0
+      }
+    },
+    "product_set": [
+      "HNO-g"
+    ],
+    "production": {
+      "H2-g": 0,
+      "HNO-g": 163.0255403232954,
+      "NO-g": 0
+    },
+    "consumption": {
+      "H2-g": 81.5127701616477,
+      "HNO-g": 0,
+      "NO-g": 163.0255403232954
+    },
+    "byproduct_production": null,
+    "unlisted_production": {},
+    "unconverted_feed_outlet_per_reference_s": null
+  },
+  "pathways": {
+    "nodes": {
+      "H2-g": {
+        "phase": "gas",
+        "surface_ids": [],
+        "interface_id": null,
+        "composition": {
+          "H": 2
+        },
+        "phase_ids": []
+      },
+      "H2-bridge": {
+        "phase": "surface",
+        "surface_ids": [
+          "facet-Cu"
+        ],
+        "interface_id": null,
+        "composition": {
+          "H": 1
+        },
+        "phase_ids": [
+          "fcc-Cu"
+        ]
+      },
+      "H2-top": {
+        "phase": "surface",
+        "surface_ids": [
+          "facet-Ni"
+        ],
+        "interface_id": null,
+        "composition": {
+          "H": 1
+        },
+        "phase_ids": [
+          "fcc-Ni"
+        ]
+      },
+      "NO-g": {
+        "phase": "gas",
+        "surface_ids": [],
+        "interface_id": null,
+        "composition": {
+          "N": 1,
+          "O": 1
+        },
+        "phase_ids": []
+      },
+      "HNO-g": {
+        "phase": "gas",
+        "surface_ids": [],
+        "interface_id": null,
+        "composition": {
+          "H": 1,
+          "N": 1,
+          "O": 1
+        },
+        "phase_ids": []
+      },
+      "HNO-top": {
+        "phase": "surface",
+        "surface_ids": [
+          "facet-Ni"
+        ],
+        "interface_id": null,
+        "composition": {
+          "H": 1,
+          "N": 1,
+          "O": 1
+        },
+        "phase_ids": [
+          "fcc-Ni"
+        ]
+      }
+    },
+    "reactions": [
+      {
+        "reaction_id": "ads",
+        "phase_ids": [
+          "fcc-Ni",
+          "fcc-Cu"
+        ],
+        "surface_ids": [
+          "facet-Ni",
+          "facet-Cu"
+        ],
+        "interface_id": "junction",
+        "required_sites": {
+          "top-Ni": 1,
+          "bridge-Cu": 1
+        },
+        "reversible": true,
+        "direction": {
+          "status": "reversible",
+          "forward": {
+            "reactants": {
+              "H2-g": 1
+            },
+            "products": {
+              "H2-top": 1,
+              "H2-bridge": 1
+            },
+            "sites_consumed": {
+              "top-Ni": 1,
+              "bridge-Cu": 1
+            },
+            "sites_released": {}
+          },
+          "reverse": {
+            "reactants": {
+              "H2-top": 1,
+              "H2-bridge": 1
+            },
+            "products": {
+              "H2-g": 1
+            },
+            "sites_consumed": {},
+            "sites_released": {
+              "top-Ni": 1,
+              "bridge-Cu": 1
+            }
+          }
+        },
+        "reaction_free_energy_eV": -0.1,
+        "net_flux": 81.5127701616477,
+        "forward_flux": 94.00713283583823,
+        "reverse_flux": 12.494362674190553,
+        "participating_phase_ids": [
+          "fcc-Cu",
+          "fcc-Ni"
+        ]
+      },
+      {
+        "reaction_id": "transfer",
+        "phase_ids": [
+          "fcc-Ni",
+          "fcc-Cu"
+        ],
+        "surface_ids": [
+          "facet-Ni",
+          "facet-Cu"
+        ],
+        "interface_id": "junction",
+        "required_sites": {
+          "top-Ni": 1,
+          "bridge-Cu": 1
+        },
+        "reversible": true,
+        "direction": {
+          "status": "reversible",
+          "forward": {
+            "reactants": {
+              "H2-bridge": 1
+            },
+            "products": {
+              "H2-top": 1
+            },
+            "sites_consumed": {
+              "top-Ni": 1
+            },
+            "sites_released": {
+              "bridge-Cu": 1
+            }
+          },
+          "reverse": {
+            "reactants": {
+              "H2-top": 1
+            },
+            "products": {
+              "H2-bridge": 1
+            },
+            "sites_consumed": {
+              "bridge-Cu": 1
+            },
+            "sites_released": {
+              "top-Ni": 1
+            }
+          }
+        },
+        "reaction_free_energy_eV": 0.019999999999999997,
+        "net_flux": 81.5127701616477,
+        "forward_flux": 450.0592041087896,
+        "reverse_flux": 368.5464339471419,
+        "participating_phase_ids": [
+          "fcc-Cu",
+          "fcc-Ni"
+        ]
+      },
+      {
+        "reaction_id": "hydrogenate",
+        "phase_ids": [
+          "fcc-Ni",
+          "fcc-Cu"
+        ],
+        "surface_ids": [
+          "facet-Ni",
+          "facet-Cu"
+        ],
+        "interface_id": "junction",
+        "required_sites": {
+          "top-Ni": 1
+        },
+        "reversible": true,
+        "direction": {
+          "status": "reversible",
+          "forward": {
+            "reactants": {
+              "H2-top": 1,
+              "NO-g": 1
+            },
+            "products": {
+              "HNO-top": 1
+            },
+            "sites_consumed": {},
+            "sites_released": {}
+          },
+          "reverse": {
+            "reactants": {
+              "HNO-top": 1
+            },
+            "products": {
+              "H2-top": 1,
+              "NO-g": 1
+            },
+            "sites_consumed": {},
+            "sites_released": {}
+          }
+        },
+        "reaction_free_energy_eV": -0.1,
+        "net_flux": 163.0255403232954,
+        "forward_flux": 190.36328304231006,
+        "reverse_flux": 27.337742719014678,
+        "participating_phase_ids": [
+          "fcc-Ni"
+        ]
+      },
+      {
+        "reaction_id": "desorb",
+        "phase_ids": [
+          "fcc-Ni",
+          "fcc-Cu"
+        ],
+        "surface_ids": [
+          "facet-Ni",
+          "facet-Cu"
+        ],
+        "interface_id": "junction",
+        "required_sites": {
+          "top-Ni": 1
+        },
+        "reversible": true,
+        "direction": {
+          "status": "reversible",
+          "forward": {
+            "reactants": {
+              "HNO-top": 1
+            },
+            "products": {
+              "HNO-g": 1
+            },
+            "sites_consumed": {},
+            "sites_released": {
+              "top-Ni": 1
+            }
+          },
+          "reverse": {
+            "reactants": {
+              "HNO-g": 1
+            },
+            "products": {
+              "HNO-top": 1
+            },
+            "sites_consumed": {
+              "top-Ni": 1
+            },
+            "sites_released": {}
+          }
+        },
+        "reaction_free_energy_eV": 0.06000000000000001,
+        "net_flux": 163.0255403232954,
+        "forward_flux": 278.43070593850365,
+        "reverse_flux": 115.40516561520829,
+        "participating_phase_ids": [
+          "fcc-Ni"
+        ]
+      }
+    ],
+    "feed_to_product": [
+      {
+        "feed": "H2-g",
+        "product": "HNO-g",
+        "paths": [
+          {
+            "species": [
+              "H2-g",
+              "H2-top",
+              "HNO-top",
+              "HNO-g"
+            ],
+            "steps": [
+              {
+                "reaction_id": "ads",
+                "direction": "forward"
+              },
+              {
+                "reaction_id": "hydrogenate",
+                "direction": "forward"
+              },
+              {
+                "reaction_id": "desorb",
+                "direction": "forward"
+              }
+            ]
+          },
+          {
+            "species": [
+              "H2-g",
+              "H2-bridge",
+              "H2-top",
+              "HNO-top",
+              "HNO-g"
+            ],
+            "steps": [
+              {
+                "reaction_id": "ads",
+                "direction": "forward"
+              },
+              {
+                "reaction_id": "transfer",
+                "direction": "forward"
+              },
+              {
+                "reaction_id": "hydrogenate",
+                "direction": "forward"
+              },
+              {
+                "reaction_id": "desorb",
+                "direction": "forward"
+              }
+            ]
+          }
+        ],
+        "enumeration_limited": false,
+        "competing_paths": true
+      },
+      {
+        "feed": "NO-g",
+        "product": "HNO-g",
+        "paths": [
+          {
+            "species": [
+              "NO-g",
+              "HNO-top",
+              "HNO-g"
+            ],
+            "steps": [
+              {
+                "reaction_id": "hydrogenate",
+                "direction": "forward"
+              },
+              {
+                "reaction_id": "desorb",
+                "direction": "forward"
+              }
+            ]
+          }
+        ],
+        "enumeration_limited": false,
+        "competing_paths": false
+      }
+    ],
+    "intermediates": [
+      "H2-bridge",
+      "H2-top",
+      "HNO-top"
+    ],
+    "dead_ends": [],
+    "branching": {
+      "H2-bridge": [
+        "ads",
+        "transfer"
+      ],
+      "H2-top": [
+        "ads",
+        "hydrogenate",
+        "transfer"
+      ],
+      "HNO-top": [
+        "desorb",
+        "hydrogenate"
+      ]
+    },
+    "reversible_reactions": [
+      "ads",
+      "transfer",
+      "hydrogenate",
+      "desorb"
+    ],
+    "cyclic_species_components": [
+      [
+        "H2-bridge",
+        "H2-g",
+        "H2-top",
+        "HNO-g",
+        "HNO-top",
+        "NO-g"
+      ]
+    ],
+    "multistep_cycle_witnesses": [],
+    "cross_phase_reactions": [
+      "ads",
+      "transfer"
+    ],
+    "feed_reachable_with_all_coreactants": [
+      "H2-bridge",
+      "H2-g",
+      "H2-top",
+      "HNO-g",
+      "HNO-top",
+      "NO-g"
+    ],
+    "pathway_percentages": null,
+    "algorithm": "Directed species projection of stoichiometric hyperedges; simple species and reaction paths, 32 witnesses / 4096 expansions per feed-product pair. Components indicate mutual reachability. Feed closure requires all co-reactants, assumes site availability, and ignores flux magnitude. No atom tracing or flux decomposition.",
+    "net_events_per_overall_turnover": {
+      "ads": 1.0,
+      "transfer": 1.0,
+      "hydrogenate": 2.0,
+      "desorb": 2.0
+    }
+  },
+  "validation": {
+    "status": "passed",
+    "checks": [
+      "source identities and eligibility",
+      "directional and net flux",
+      "gas source terms and elemental balance",
+      "surface steady state",
+      "separate site balances",
+      "overall extent"
+    ],
+    "rate_control_assessed": false,
+    "missing_normalization": [
+      "site_density_mol_per_surface_m2",
+      "reference_mol_per_catalyst_m2",
+      "reference_mol_per_kg",
+      "reference_mol_per_reactor_m3",
+      "feed_inlet_per_reference_s"
+    ],
+    "physical_concentration_available": false
+  }
+}

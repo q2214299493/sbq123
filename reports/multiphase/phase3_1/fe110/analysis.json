@@ -1,0 +1,121 @@
+{
+  "format": "mkm-kinetic-analysis/1",
+  "status": "structural_inspection_only",
+  "project_id": "sbq123",
+  "network_version": "2a80b67c31201600a1858780bbe6c176b03f489fe24383441fca4f195b395483",
+  "dataset_version": "a4191054a20d601a73afadd410d3cf69d3df524b14278f0edff92c7a33870b72",
+  "source_hashes": {
+    "network": "56e42d4147637acae090911a82715a10d9883fefa03e7e6dc19fcc0c0f3b25ca",
+    "dataset": "dd2cdba9cfa6d45bfbf0f4e659ca80c1f81a80b3681e99633bdc19b1a98ff461"
+  },
+  "missing": {
+    "reactions": {
+      "fe110_ch_co_to_chco_20261109": [
+        "Unknown charge balance",
+        "Unknown site balance",
+        "Catalyst phase unconfirmed",
+        "Missing compatible free energies",
+        "Missing kinetic parameters or rate law",
+        "Reversibility unconfirmed",
+        "IS: compatible Gibbs correction missing",
+        "FS: compatible Gibbs correction missing",
+        "Kinetic parameter set with units, standard states, validity range and sources missing",
+        "Rate law, scoped parameter review and applicability not supplied",
+        "Reviewed site occupancies and vacant-site counts required"
+      ]
+    },
+    "result": "Accepted single-point result and matching receipt required"
+  },
+  "coverage": null,
+  "rates": null,
+  "tof": null,
+  "selectivity": null,
+  "utilization": null,
+  "pathways": {
+    "nodes": {
+      "fe110_ch_co_to_chco_20261109.CH.IS": {
+        "phase": "surface",
+        "surface_ids": [
+          "fe110"
+        ],
+        "interface_id": null,
+        "composition": {
+          "C": 1,
+          "H": 1
+        },
+        "phase_ids": []
+      },
+      "fe110_ch_co_to_chco_20261109.CO.IS": {
+        "phase": "surface",
+        "surface_ids": [
+          "fe110"
+        ],
+        "interface_id": null,
+        "composition": {
+          "C": 1,
+          "O": 1
+        },
+        "phase_ids": []
+      },
+      "fe110_ch_co_to_chco_20261109.CHCO.FS": {
+        "phase": "surface",
+        "surface_ids": [
+          "fe110"
+        ],
+        "interface_id": null,
+        "composition": {
+          "C": 2,
+          "H": 1,
+          "O": 1
+        },
+        "phase_ids": []
+      }
+    },
+    "reactions": [
+      {
+        "reaction_id": "fe110_ch_co_to_chco_20261109",
+        "phase_ids": null,
+        "surface_ids": [
+          "fe110"
+        ],
+        "interface_id": null,
+        "required_sites": null,
+        "reversible": null,
+        "direction": {
+          "status": "unknown",
+          "forward": {
+            "reactants": {
+              "fe110_ch_co_to_chco_20261109.CH.IS": 1,
+              "fe110_ch_co_to_chco_20261109.CO.IS": 1
+            },
+            "products": {
+              "fe110_ch_co_to_chco_20261109.CHCO.FS": 1
+            },
+            "sites_consumed": null,
+            "sites_released": null
+          },
+          "reverse": null
+        },
+        "reaction_free_energy_eV": null,
+        "net_flux": null,
+        "forward_flux": null,
+        "reverse_flux": null,
+        "participating_phase_ids": []
+      }
+    ],
+    "feed_to_product": [],
+    "intermediates": [],
+    "dead_ends": null,
+    "branching": {},
+    "reversible_reactions": [],
+    "cyclic_species_components": [],
+    "multistep_cycle_witnesses": [],
+    "cross_phase_reactions": [],
+    "feed_reachable_with_all_coreactants": [],
+    "pathway_percentages": null,
+    "algorithm": "Directed species projection of stoichiometric hyperedges; simple species and reaction paths, 32 witnesses / 4096 expansions per feed-product pair. Components indicate mutual reachability. Feed closure requires all co-reactants, assumes site availability, and ignores flux magnitude. No atom tracing or flux decomposition."
+  },
+  "validation": {
+    "status": "kinetic_analysis_blocked"
+  }
+}

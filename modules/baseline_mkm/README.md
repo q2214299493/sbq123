@@ -87,3 +87,42 @@ Execution rechecks the ticket and the plan, snapshots, tool hashes and native by
 For a declared turnover, supply signed integer `overall_stoichiometry` keyed by gas species ID. The validated gas rates must agree with one reaction extent. `turnover_basis="one_event_per_reference_site"` enables a TOF for that normalization. `selectivity_products` declares the molar product set. Undefined quantities remain null. Coefficient units follow gas order. Fluxes are events per reference site per second.
 
 Registry registration uses the existing plan, reviewed approval and apply sequence. The derived scalar rows are candidates with source-bound normalized evidence. Benchmark registration belongs in an isolated database. See the [Phase 3.0 report](../../reports/multiphase/phase3_0/completion.md) for the verified example and its limits.
+
+
+## Phase 3.1 kinetic analysis
+
+Use `python -m scripts.baseline_mkm.analysis run RUN OUTPUT` for a completed single-point run. The read-only entry point verifies the terminal acceptance, normalized result, ticket, question, plan, network, dataset and configuration bindings. It reconstructs the gas source terms from the versioned stoichiometry and the signed elementary fluxes, checks directional mass action, and verifies the declared overall extent. A trusted portable Phase 3.0 receipt can also be used with the following commands from the repository root.
+
+```powershell
+$p = "reports/multiphase/phase3_0"
+$d = "reports/multiphase/phase2_5_2/cycle_dataset.json"
+$o = "reports/multiphase/phase3_1/benchmark_normalization.json"
+python -m scripts.baseline_mkm.analysis analyze "$p/closed_cycle_network.json" $d "$p/workflow_configuration.json" "$p/result.json" "$p/benchmark_manifest.json" --options $o OUTPUT
+python -m scripts.baseline_mkm.analysis inspect NETWORK.json DATASET.json DRAFT_OUTPUT
+```
+
+The accepted output bundle contains `analysis.json`, `report.md` and an H7 manual handoff body. The draft bundle contains a structural graph and missing inputs. Repeating a command verifies existing output content. For a registered accepted point, `--registry-reviewer REVIEWER` prepares a separate derived-file batch linked to the existing calculation. Use the existing `registry_write plan` and reviewed apply interface. Analysis and H7 handoff generation do not change ticket or registry state. [Analysis schema](../../configs/kinetics/mkm_analysis.schema.json)
+
+### Analysis options and denominators
+
+The optional JSON supplies the exact network_version plus a source with path (relative to the options file) and sha256. The researcher establishes that the source supports the supplied conversion and scope. The analyzer verifies the file digest. One options record can cite an evidence summary documenting multiple measurements.
+
+| Optional field | Interpretation |
+| --- | --- |
+| reference_basis, sites_per_reference | Explicit physical reference_site or reference_site_pair; counts of each distinct inventory per common reference. Counts enable a weighted all-site fraction. A pair contains two sites. A run with an unspecified physical basis still has a rate in model-reference units. |
+| site_density_mol_per_surface_m2 | Mapping from site ID to mol of that site per m² of its own surface. Molecular coverage times this density gives local surface concentration. |
+| reference_mol_per_catalyst_m2, reference_mol_per_kg, reference_mol_per_reactor_m3 | Moles of model reference units per total catalyst surface area, catalyst mass or reactor volume. Multiplication yields a dimensional production rate. |
+| catalyst_m2_per_kg, catalyst_kg_per_reactor_m3 | Specific catalyst area and volumetric loading. When the upstream conversion is available, these convert area-normalized rates to mass and then volume rates. Redundant direct and derived factors must agree. |
+| target_products, feed_inlet_per_reference_s | Target subset of the configured product set, and supplied inlet flows in molecules per model reference per second. Outlet is inlet plus signed gas production on this same basis. Frozen pressure alone provides no inlet flow. |
+
+### Current kinetic analysis capability matrix
+
+| Output | Verified scope | Interpretation limit |
+| --- | --- | --- |
+| Coverage and site utilization | Local species coverage, footprint-weighted occupancy, vacancy, competition rankings, phase-specific inventories and reaction vacancy factors | Absolute concentrations require site density. Fraction blocked quantifies the vacancy requirement under mean-field activities. A poisoning or rate-control diagnosis needs separate evidence. |
+| Elementary rates | Pressure-based coefficients and units, evaluated activity factors, directional/net fluxes, Gibbs energies and gas source contributions | The 5% near-equilibrium flag uses absolute net divided by gross flux. Relative activity extrema are local to the point. The native runner's forward-only constraint still applies. |
+| Turnover and products | Independent extent, overall and product rates, documented physical conversions, molar and elemental selectivity within the declared product set | Empty denominators remain null. Physical conversions apply to the supplied reference; unequal physical densities do not change the accepted steady state. |
+| Pathways | Directed stoichiometric reaction edges, candidate feed-to-product paths, branching, dangling surface species, reversible steps, cyclic components, cross-phase site participation | Projected paths describe connectivity. Co-reactant closure is reported separately. Bounded enumeration gives witnesses; signed net event counts per turnover do not uniquely apportion cyclic pathways. |
+| Real Fe(110) | Draft structural inspection and explicit evidence gaps | Kinetic quantities require an independently accepted point. |
+
+[Benchmark report](../../reports/multiphase/phase3_1/closed_cycle/report.md) · [Fe(110) inspection](../../reports/multiphase/phase3_1/fe110/report.md)
