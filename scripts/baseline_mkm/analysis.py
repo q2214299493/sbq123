@@ -12,13 +12,14 @@ from scripts.baseline_mkm.single_point import status
 from scripts.baseline_mkm.single_point_result import check_close
 from scripts.kinetic_parameters.engine import check_version, generate
 from scripts.kinetic_parameters.export import validate_export
+from scripts.multiphase_contracts import _unique_keys
 from scripts.registry_write import validate_registry_batch
 from scripts.scientific_validation import finite_number, validate_finite_tree
 
 
 def read_bound(path):
     raw = path.read_bytes()
-    data = json.loads(raw)
+    data = json.loads(raw, object_pairs_hook=_unique_keys)
     validate_finite_tree(data)
     return data, sha256_bytes(raw)
 
@@ -148,7 +149,7 @@ def analyze(network, dataset, configuration, result, receipt, options=None):
         else None
     )
     report = dict(
-        format="mkm-kinetic-analysis/1",
+        format="mkm-kinetic-analysis/2" if "format" in coverage else "mkm-kinetic-analysis/1",
         status="analyzed",
         scope=point["scope"],
         run_id=receipt["run_id"],
@@ -193,11 +194,32 @@ def analyze(network, dataset, configuration, result, receipt, options=None):
                 if k not in opt
             ],
             physical_concentration_available=any(
-                x["concentration_mol_per_surface_m2"] is not None for x in coverage["species"]
+                x.get("concentration_mol_per_surface_m2") is not None for x in coverage["species"]
             ),
         ),
     )
+    if "format" in coverage:
+        report["validation"]["coverage_status"] = coverage_status(coverage)
+        if report["validation"]["coverage_status"] == "partial":
+            report["validation"]["checks"].remove("separate site balances")
     return report
+
+
+def coverage_status(coverage):
+    return "partial" if any(row["missing"] for row in coverage["species"]) else "complete"
+
+
+def analyze_observations(network, observations):
+    n, nh = read_bound(network)
+    data, dh = read_bound(observations)
+    check_version(n, "network_version")
+    if data.get("format") != "mkm-coverage-observations/1" or data.get("network_version") != n["network_version"]:
+        raise ValueError("Coverage observations require the matching versioned network")
+    if not isinstance(data.get("source"), str) or not data["source"].strip():
+        raise ValueError("Coverage observations require a source")
+    analysis = coverage_analysis(n, data, {})
+    return dict(**analysis, status=coverage_status(analysis), network_version=n["network_version"],
+                source=data["source"], source_hashes={"network": nh, "observations": dh})
 
 
 def inspect_draft(network, dataset):
@@ -300,6 +322,9 @@ def publish(out, report, registry_reviewer=None, timestamp=None):
 def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__)
     commands = p.add_subparsers(dest="command", required=True)
+    coverage = commands.add_parser("coverage", help="Analyze bound coverage observations offline")
+    for name in ("network", "observations", "output"):
+        coverage.add_argument(name, type=Path)
     for cmd in ("analyze", "run", "inspect"):
         sub = commands.add_parser(cmd)
         if cmd == "run":
@@ -315,6 +340,13 @@ def main(argv=None):
             sub.add_argument("--registry-reviewer")
         sub.add_argument("output", type=Path)
     a = p.parse_args(argv)
+    if a.command == "coverage":
+        from scripts.artifact_io import write_json_exclusive
+
+        report = analyze_observations(a.network, a.observations)
+        write_json_exclusive(a.output, report)
+        print(f"{report['status']} {a.output}")
+        return
     m = {}
     if a.command == "inspect":
         report = inspect_draft(a.network, a.dataset)

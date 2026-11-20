@@ -42,33 +42,46 @@ def markdown(a):
             "",
         ]
     )
-    lines += table(
-        [
-            "Species",
-            "Phase",
-            "Surface",
-            "Site / type",
-            "Multiplicity",
-            "Species fraction",
-            "Occupied fraction",
-            "Fraction of all sites",
-            "mol/m² of surface",
-        ],
-        [
-            (
-                r["species_id"],
-                r["phase_id"],
-                r["surface_id"],
-                r["site_id"] + " / " + r["site_type"],
-                r["occupancy_multiplicity"],
-                r["species_coverage"],
-                r["occupied_fraction"],
-                r["fraction_of_all_sites"],
-                r["concentration_mol_per_surface_m2"],
-            )
-            for r in a["coverage"]
-        ],
-    )
+    if a["format"] == "mkm-kinetic-analysis/2":
+        lines += table(
+            ["Species", "Molecules per reference", "Reference", "Site multiplicities", "Missing evidence"],
+            [(r["species_id"], r["molecular_coverage"], r["molecular_reference"], r["site_occupancy"], r["missing"])
+             for r in a["coverage"]],
+        )
+        lines += ["", "### Species contributions by inventory", ""]
+        lines += table(
+            ["Inventory", "Species", "Sites per molecule", "Occupied fraction"],
+            [(site, sid, c["multiplicity"], c["occupied_fraction"])
+             for site, item in a["utilization"].items() for sid, c in item["contributions"].items()],
+        )
+    else:
+        lines += table(
+            [
+                "Species",
+                "Phase",
+                "Surface",
+                "Site / type",
+                "Multiplicity",
+                "Species fraction",
+                "Occupied fraction",
+                "Fraction of all sites",
+                "mol/m² of surface",
+            ],
+            [
+                (
+                    r["species_id"],
+                    r["phase_id"],
+                    r["surface_id"],
+                    r["site_id"] + " / " + r["site_type"],
+                    r["occupancy_multiplicity"],
+                    r["species_coverage"],
+                    r["occupied_fraction"],
+                    r["fraction_of_all_sites"],
+                    r["concentration_mol_per_surface_m2"],
+                )
+                for r in a["coverage"]
+            ],
+        )
     lines += ["", "## Site utilization", ""]
     lines += table(
         [

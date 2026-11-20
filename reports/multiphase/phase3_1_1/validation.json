@@ -1,0 +1,165 @@
+{
+  "format": "mkm-molecular-coverage/1",
+  "species": [
+    {
+      "species_id": "H2-bridge",
+      "surface_ids": [
+        "facet-Ni",
+        "facet-Cu"
+      ],
+      "interface_id": "junction",
+      "site_occupancy": {
+        "top-Ni": 1,
+        "bridge-Cu": 1
+      },
+      "molecular_reference": {
+        "kind": "declared",
+        "id": "interface-repeat"
+      },
+      "molecular_coverage": 0.3,
+      "missing": [],
+      "phase_ids": [
+        "fcc-Ni",
+        "fcc-Cu"
+      ]
+    },
+    {
+      "species_id": "H2-top",
+      "surface_ids": [
+        "facet-Ni"
+      ],
+      "interface_id": null,
+      "site_occupancy": {
+        "top-Ni": 1
+      },
+      "molecular_reference": {
+        "kind": "inventory_site",
+        "id": "top-Ni"
+      },
+      "molecular_coverage": 0.25,
+      "missing": [],
+      "phase_ids": [
+        "fcc-Ni"
+      ]
+    }
+  ],
+  "sites": {
+    "top-Ni": {
+      "phase_id": "fcc-Ni",
+      "surface_id": "facet-Ni",
+      "site_type": "atop",
+      "occupied_fraction": 0.4,
+      "vacancy_fraction": 0.6,
+      "contributions": {
+        "H2-bridge": {
+          "multiplicity": 1,
+          "occupied_fraction": 0.15
+        },
+        "H2-top": {
+          "multiplicity": 1,
+          "occupied_fraction": 0.25
+        }
+      },
+      "balance_residual": 0.0,
+      "balance_status": "balanced",
+      "vacancy_source": "measured",
+      "competitors": [
+        "H2-bridge",
+        "H2-top"
+      ],
+      "unresolved_membership": [],
+      "coverage_ranking": [
+        "H2-top",
+        "H2-bridge"
+      ],
+      "dominant_adsorbates": [
+        "H2-top"
+      ],
+      "activity": [
+        {
+          "reaction_id": "ads",
+          "direction": "forward",
+          "vacant_site_order": 1,
+          "mean_field_vacancy_factor": 0.6
+        },
+        {
+          "reaction_id": "ads",
+          "direction": "reverse",
+          "vacant_site_order": 0,
+          "mean_field_vacancy_factor": 1.0
+        }
+      ]
+    },
+    "bridge-Cu": {
+      "phase_id": "fcc-Cu",
+      "surface_id": "facet-Cu",
+      "site_type": "bridge",
+      "occupied_fraction": 0.30000000000000004,
+      "vacancy_fraction": 0.7,
+      "contributions": {
+        "H2-bridge": {
+          "multiplicity": 1,
+          "occupied_fraction": 0.3
+        }
+      },
+      "balance_residual": 0.0,
+      "balance_status": "balanced",
+      "vacancy_source": "measured",
+      "competitors": [
+        "H2-bridge"
+      ],
+      "unresolved_membership": [],
+      "coverage_ranking": [
+        "H2-bridge"
+      ],
+      "dominant_adsorbates": [
+        "H2-bridge"
+      ],
+      "activity": [
+        {
+          "reaction_id": "ads",
+          "direction": "forward",
+          "vacant_site_order": 1,
+          "mean_field_vacancy_factor": 0.7
+        },
+        {
+          "reaction_id": "ads",
+          "direction": "reverse",
+          "vacant_site_order": 0,
+          "mean_field_vacancy_factor": 1.0
+        }
+      ]
+    }
+  },
+  "phase_comparison": {
+    "fcc-Ni": {
+      "inventories": [
+        {
+          "site_id": "top-Ni",
+          "occupied_fraction": 0.4,
+          "vacancy_fraction": 0.6
+        }
+      ],
+      "occupied_fraction": 0.4,
+      "vacancy_fraction": 0.6
+    },
+    "fcc-Cu": {
+      "inventories": [
+        {
+          "site_id": "bridge-Cu",
+          "occupied_fraction": 0.30000000000000004,
+          "vacancy_fraction": 0.7
+        }
+      ],
+      "occupied_fraction": 0.30000000000000004,
+      "vacancy_fraction": 0.7
+    }
+  },
+  "status": "complete",
+  "network_version": "ccee8d834cb47dd351476361d5ef2339b178398046de7a78924bd1e0f4a41127",
+  "source": "Synthetic coverage benchmark on tests/fixtures/multiphase/valid.json. The declared repeat has two top-Ni sites and one bridge-Cu site. Amounts and independently specified vacancy fractions are fixture inputs.",
+  "source_hashes": {
+    "network": "e59b9bec86ab0d31a2e50d68df3a134d77004e466880c2a6797110842ee3b785",
+    "observations": "ed8efa9cb2a3bb6c7ad9fe4888fa211ac535d23b119bccf2cb9796ea3a96f3db"
+  }
+}

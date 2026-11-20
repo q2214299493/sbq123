@@ -126,3 +126,45 @@ The optional JSON supplies the exact network_version plus a source with path (re
 | Real Fe(110) | Draft structural inspection and explicit evidence gaps | Kinetic quantities require an independently accepted point. |
 
 [Benchmark report](../../reports/multiphase/phase3_1/closed_cycle/report.md) · [Fe(110) inspection](../../reports/multiphase/phase3_1/fe110/report.md)
+
+### Molecular coverage across site inventories (Phase 3.1.1)
+
+Run the coverage-only analysis from the repository root with a new output filename.
+
+```shell
+python -m scripts.baseline_mkm.analysis coverage reports/multiphase/phase3_1_1/network.json reports/multiphase/phase3_1_1/observations.json coverage.json
+```
+
+The observation document binds its source description and network version. Its species array uses
+the network species IDs. Site multiplicities, surface IDs, interface membership and catalyst phases
+come from the network. A repeated occupancy mapping on an observation must agree with that network.
+The output records both input file hashes and one molecular row per adsorbate.
+
+For a named reference R, declare the number of molecules per R as the species observation's
+`coverage`, name R in `molecular_reference`, and list each independent site population in
+`sites_per_molecular_reference[R]`. For species s occupying n sites of inventory i, its occupied
+fraction is (molecules of s per R) times n divided by (sites of i per R). An amount per repeat
+can exceed one. The same molecule can occupy several sites across an interface. Its molecular
+amount appears once. Each inventory lists its own occupied shares, competitors and vacancy fraction.
+For an adsorbate confined to one inventory, an omitted reference retains the Phase 3.0 convention
+of molecules per site of that inventory. An explicitly null reference marks an unknown basis.
+
+An absent molecular reference, measurement or inventory size leaves the affected conversion null
+and is identified on the molecular row. Unknown footprints affect their possible surface domains.
+An empty confirmed footprint consumes zero sites. An independent measurement of total occupancy
+or vacancy can still be reported while species attribution is incomplete. Complete inventories
+check their summed species contributions against the measured balance. Without a measured vacancy,
+a complete footprint balance can supply it. Each directional vacancy factor uses the local vacancy
+fraction raised to the number of vacancies consumed. Pair adjacency, correlated site availability,
+molecular activity and kinetic flux require separate evidence. Coverage observations alone produce
+no kinetic result, pathway percentage, or native acceptance.
+
+Existing single-site accepted reports use kinetic analysis v1. A bound accepted result with a
+cross-inventory footprint or explicit molecular reference uses v2 molecule and inventory rows.
+Checking directional flux on that route requires an explicit dimensionless `surface_activity`
+for each reactant with a nonlocal or explicitly specified reference. The graph continues to
+report projected connectivity, all-coreactant closure and bounded path witnesses independently.
+
+[Observation example](../../reports/multiphase/phase3_1_1/observations.json) |
+[Coverage schema](../../configs/kinetics/mkm_coverage.schema.json) |
+[Validated inventory report](../../reports/multiphase/phase3_1_1/validation.json)

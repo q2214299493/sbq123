@@ -1,0 +1,587 @@
+{
+  "network_version": "ccee8d834cb47dd351476361d5ef2339b178398046de7a78924bd1e0f4a41127",
+  "format": "reaction-network/1",
+  "project_id": "demo",
+  "catalog": {
+    "projects": [
+      {
+        "schema_version": "1.0.0",
+        "project_id": "demo",
+        "name": "Synthetic interface contract example",
+        "validation": {
+          "status": "unreviewed",
+          "review": null
+        }
+      }
+    ],
+    "materials": [
+      {
+        "schema_version": "1.0.0",
+        "material_id": "Ni",
+        "project_id": "demo",
+        "name": "Ni",
+        "validation": {
+          "status": "unreviewed",
+          "review": null
+        }
+      },
+      {
+        "schema_version": "1.0.0",
+        "material_id": "Cu",
+        "project_id": "demo",
+        "name": "Cu",
+        "validation": {
+          "status": "unreviewed",
+          "review": null
+        }
+      }
+    ],
+    "phases": [
+      {
+        "schema_version": "1.0.0",
+        "phase_id": "fcc-Ni",
+        "material_id": "Ni",
+        "name": "fcc",
+        "composition": {
+          "Ni": 1
+        },
+        "structure_id": "bulk-Ni",
+        "structural_provenance": {
+          "path": "synthetic/bulk-Ni.xyz",
+          "sha256": "abababababababababababababababababababababababababababababababab"
+        },
+        "validation": {
+          "status": "unreviewed",
+          "review": null
+        }
+      },
+      {
+        "schema_version": "1.0.0",
+        "phase_id": "fcc-Cu",
+        "material_id": "Cu",
+        "name": "fcc",
+        "composition": {
+          "Cu": 1
+        },
+        "structure_id": "bulk-Cu",
+        "structural_provenance": {
+          "path": "synthetic/bulk-Cu.xyz",
+          "sha256": "abababababababababababababababababababababababababababababababab"
+        },
+        "validation": {
+          "status": "unreviewed",
+          "review": null
+        }
+      }
+    ],
+    "surfaces": [
+      {
+        "schema_version": "1.0.0",
+        "surface_id": "facet-Ni",
+        "phase_id": "fcc-Ni",
+        "miller_indices": [
+          1,
+          1,
+          1
+        ],
+        "termination": "metal",
+        "defects": [],
+        "structure_id": "facet-Ni",
+        "structural_provenance": {
+          "path": "synthetic/facet-Ni.xyz",
+          "sha256": "abababababababababababababababababababababababababababababababab"
+        },
+        "validation": {
+          "status": "unreviewed",
+          "review": null
+        }
+      },
+      {
+        "schema_version": "1.0.0",
+        "surface_id": "facet-Cu",
+        "phase_id": "fcc-Cu",
+        "miller_indices": [
+          1,
+          1,
+          1
+        ],
+        "termination": "metal",
+        "defects": [
+          {
+            "kind": "vacancy",
+            "description": "synthetic surface vacancy"
+          }
+        ],
+        "structure_id": "facet-Cu",
+        "structural_provenance": {
+          "path": "synthetic/facet-Cu.xyz",
+          "sha256": "abababababababababababababababababababababababababababababababab"
+        },
+        "validation": {
+          "status": "unreviewed",
+          "review": null
+        }
+      }
+    ],
+    "sites": [
+      {
+        "schema_version": "1.0.0",
+        "site_id": "top-Ni",
+        "surface_id": "facet-Ni",
+        "site_type": "atop",
+        "local_geometry": "single metal atom",
+        "validation": {
+          "status": "unreviewed",
+          "review": null
+        }
+      },
+      {
+        "schema_version": "1.0.0",
+        "site_id": "bridge-Cu",
+        "surface_id": "facet-Cu",
+        "site_type": "bridge",
+        "local_geometry": "two neighbouring copper atoms",
+        "validation": {
+          "status": "unreviewed",
+          "review": null
+        }
+      }
+    ],
+    "interfaces": [
+      {
+        "schema_version": "1.0.0",
+        "interface_id": "junction",
+        "surface_ids": [
+          "facet-Ni",
+          "facet-Cu"
+        ],
+        "structure_id": "junction",
+        "structural_provenance": {
+          "path": "synthetic/junction.xyz",
+          "sha256": "abababababababababababababababababababababababababababababababab"
+        },
+        "geometry": "two adjacent facets",
+        "validation": {
+          "status": "unreviewed",
+          "review": null
+        }
+      }
+    ]
+  },
+  "species": [
+    {
+      "schema_version": "1.0.0",
+      "species_id": "H2-g",
+      "phase": "gas",
+      "material_ids": [],
+      "surface_ids": [],
+      "interface_id": null,
+      "composition": {
+        "H": 2
+      },
+      "charge": 0,
+      "site_occupancy": {},
+      "adsorption_geometry": null,
+      "structure_id": "H2-g",
+      "structural_provenance": {
+        "path": "synthetic/H2-g.xyz",
+        "sha256": "abababababababababababababababababababababababababababababababab"
+      },
+      "thermochemistry_status": "missing",
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "species_id": "H2-bridge",
+      "phase": "surface",
+      "material_ids": [
+        "Ni",
+        "Cu"
+      ],
+      "surface_ids": [
+        "facet-Ni",
+        "facet-Cu"
+      ],
+      "interface_id": "junction",
+      "composition": {
+        "H": 2
+      },
+      "charge": 0,
+      "site_occupancy": {
+        "top-Ni": 1,
+        "bridge-Cu": 1
+      },
+      "adsorption_geometry": "H-H axis spanning both sites",
+      "structure_id": "H2-bridge",
+      "structural_provenance": {
+        "path": "synthetic/H2-bridge.xyz",
+        "sha256": "abababababababababababababababababababababababababababababababab"
+      },
+      "thermochemistry_status": "missing",
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "species_id": "H2-top",
+      "phase": "surface",
+      "material_ids": [
+        "Ni"
+      ],
+      "surface_ids": [
+        "facet-Ni"
+      ],
+      "interface_id": null,
+      "composition": {
+        "H": 2
+      },
+      "charge": 0,
+      "site_occupancy": {
+        "top-Ni": 1
+      },
+      "adsorption_geometry": "end-on at a single site",
+      "structure_id": "H2-top",
+      "structural_provenance": {
+        "path": "synthetic/H2-top.xyz",
+        "sha256": "abababababababababababababababababababababababababababababababab"
+      },
+      "thermochemistry_status": "missing",
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      }
+    }
+  ],
+  "species_fingerprints": {
+    "H2-g": "7df3de6f1e225e66bc557a64e71c25dee229c831184b7f804c055d6c25280030",
+    "H2-bridge": "248988919b3d9aa3021b6484d95bc13189eca874d33060fb610eb27ac964fbca",
+    "H2-top": "e75243033a17993e715acf5af764a8eaa1b0681c02c34995908f1d5063986c11"
+  },
+  "reactions": [
+    {
+      "definition": {
+        "schema_version": "1.0.0",
+        "reaction_id": "ads",
+        "reaction_type": "interfacial",
+        "reversible": true,
+        "reactants": {
+          "H2-g": 1
+        },
+        "products": {
+          "H2-bridge": 1
+        },
+        "phase_ids": [
+          "fcc-Ni",
+          "fcc-Cu"
+        ],
+        "surface_ids": [
+          "facet-Ni",
+          "facet-Cu"
+        ],
+        "interface_id": "junction",
+        "required_sites": {
+          "top-Ni": 1,
+          "bridge-Cu": 1
+        },
+        "sites_consumed": {
+          "top-Ni": 1,
+          "bridge-Cu": 1
+        },
+        "sites_released": {},
+        "initial_structure_id": "is-demo",
+        "final_structure_id": "fs-demo",
+        "ts_treatment": "located",
+        "ts_id": "ts-demo",
+        "energy_reference_id": "demo-ref",
+        "electronic_energies": {
+          "reaction": {
+            "value": -0.2,
+            "unit": "eV",
+            "reference_id": "demo-ref",
+            "source": {
+              "calculation_id": "synthetic-demo",
+              "kind": "synthetic",
+              "artifact": {
+                "path": "synthetic/values.json",
+                "sha256": "abababababababababababababababababababababababababababababababab"
+              }
+            }
+          },
+          "forward": {
+            "value": 0.3,
+            "unit": "eV",
+            "reference_id": "demo-ref",
+            "source": {
+              "calculation_id": "synthetic-demo",
+              "kind": "synthetic",
+              "artifact": {
+                "path": "synthetic/values.json",
+                "sha256": "abababababababababababababababababababababababababababababababab"
+              }
+            }
+          },
+          "reverse": {
+            "value": 0.5,
+            "unit": "eV",
+            "reference_id": "demo-ref",
+            "source": {
+              "calculation_id": "synthetic-demo",
+              "kind": "synthetic",
+              "artifact": {
+                "path": "synthetic/values.json",
+                "sha256": "abababababababababababababababababababababababababababababababab"
+              }
+            }
+          }
+        },
+        "free_energies": {
+          "temperature_K": 400,
+          "standard_state_id": "demo-standard",
+          "values": {
+            "reaction": {
+              "value": -0.1,
+              "unit": "eV",
+              "reference_id": "demo-ref",
+              "source": {
+                "calculation_id": "synthetic-demo",
+                "kind": "synthetic",
+                "artifact": {
+                  "path": "synthetic/values.json",
+                  "sha256": "abababababababababababababababababababababababababababababababab"
+                }
+              }
+            },
+            "forward": {
+              "value": 0.4,
+              "unit": "eV",
+              "reference_id": "demo-ref",
+              "source": {
+                "calculation_id": "synthetic-demo",
+                "kind": "synthetic",
+                "artifact": {
+                  "path": "synthetic/values.json",
+                  "sha256": "abababababababababababababababababababababababababababababababab"
+                }
+              }
+            },
+            "reverse": {
+              "value": 0.5,
+              "unit": "eV",
+              "reference_id": "demo-ref",
+              "source": {
+                "calculation_id": "synthetic-demo",
+                "kind": "synthetic",
+                "artifact": {
+                  "path": "synthetic/values.json",
+                  "sha256": "abababababababababababababababababababababababababababababababab"
+                }
+              }
+            }
+          }
+        },
+        "rate_law_id": "mass-action",
+        "provenance": [
+          {
+            "calculation_id": "synthetic-demo",
+            "kind": "synthetic",
+            "artifact": {
+              "path": "synthetic/values.json",
+              "sha256": "abababababababababababababababababababababababababababababababab"
+            }
+          }
+        ],
+        "eligibility": "draft",
+        "validation": {
+          "status": "unreviewed",
+          "review": null
+        }
+      },
+      "direction": {
+        "status": "reversible",
+        "forward": {
+          "reactants": {
+            "H2-g": 1
+          },
+          "products": {
+            "H2-bridge": 1
+          },
+          "sites_consumed": {
+            "top-Ni": 1,
+            "bridge-Cu": 1
+          },
+          "sites_released": {}
+        },
+        "reverse": {
+          "reactants": {
+            "H2-bridge": 1
+          },
+          "products": {
+            "H2-g": 1
+          },
+          "sites_consumed": {},
+          "sites_released": {
+            "top-Ni": 1,
+            "bridge-Cu": 1
+          }
+        }
+      },
+      "net_stoichiometry": {
+        "site:bridge-Cu": -1,
+        "site:top-Ni": -1,
+        "species:H2-bridge": 1,
+        "species:H2-g": -1
+      },
+      "site_balance": {
+        "top-Ni": 1,
+        "bridge-Cu": 1
+      },
+      "energies": {
+        "electronic_ev": {
+          "forward": 0.3,
+          "reverse": 0.5,
+          "reaction": -0.2
+        },
+        "gibbs_ev": {
+          "forward": 0.4,
+          "reverse": 0.5,
+          "reaction": -0.1
+        },
+        "temperature_k": 400,
+        "standard_state": "demo-standard",
+        "thermal_basis": null
+      },
+      "thermochemistry": null,
+      "level": "THERMODYNAMICALLY_VALID",
+      "origin": "supplied_definition",
+      "site_mapping": null,
+      "user_confirmation": null,
+      "scientific_review": {
+        "status": "unreviewed",
+        "review": null
+      },
+      "parameter_set_ids": [
+        "params"
+      ],
+      "gaps": [],
+      "mkm_status": "blocked",
+      "subject_sha256": "602feb3afac9559a4c37138493cb571805278de29313e6693c544507ca5a48a7",
+      "network_review": null
+    }
+  ],
+  "parameter_sets": [
+    {
+      "schema_version": "1.0.0",
+      "parameter_set_id": "params",
+      "reaction_id": "ads",
+      "rate_law_id": "mass-action",
+      "temperature_K": 400,
+      "pressure_Pa": 100000,
+      "energy_basis": "gibbs",
+      "energy_reference_id": "demo-ref",
+      "standard_state_id": "demo-standard",
+      "standard_states": {
+        "gas_pressure_Pa": 100000,
+        "solute_concentration_mol_m3": 1000,
+        "surface_activity_convention": "fractional site occupation"
+      },
+      "forward": {
+        "prefactor": 1000000000000,
+        "prefactor_unit": "s^-1",
+        "temperature_exponent": 0,
+        "activation_energy": {
+          "value": 0.4,
+          "unit": "eV",
+          "reference_id": "demo-ref",
+          "source": {
+            "calculation_id": "synthetic-demo",
+            "kind": "synthetic",
+            "artifact": {
+              "path": "synthetic/values.json",
+              "sha256": "abababababababababababababababababababababababababababababababab"
+            }
+          }
+        },
+        "expression": "k(T) = A exp(-Ea / (kB T))"
+      },
+      "reverse": {
+        "prefactor": 1000000000000,
+        "prefactor_unit": "s^-1",
+        "temperature_exponent": 0,
+        "activation_energy": {
+          "value": 0.5,
+          "unit": "eV",
+          "reference_id": "demo-ref",
+          "source": {
+            "calculation_id": "synthetic-demo",
+            "kind": "synthetic",
+            "artifact": {
+              "path": "synthetic/values.json",
+              "sha256": "abababababababababababababababababababababababababababababababab"
+            }
+          }
+        },
+        "expression": "k(T) = A exp(-Ea / (kB T))"
+      },
+      "degeneracy": 1,
+      "coverage_terms": [],
+      "validity_range": {
+        "min_temperature_K": 390,
+        "max_temperature_K": 410,
+        "min_pressure_Pa": 90000,
+        "max_pressure_Pa": 110000
+      },
+      "uncertainty": null,
+      "sources": [
+        {
+          "calculation_id": "synthetic-demo",
+          "kind": "synthetic",
+          "artifact": {
+            "path": "synthetic/values.json",
+            "sha256": "abababababababababababababababababababababababababababababababab"
+          }
+        }
+      ],
+      "eligibility": "draft",
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      }
+    }
+  ],
+  "source_artifacts": [
+    {
+      "role": "definition",
+      "file": "valid.json",
+      "sha256": "33983934e7e51f27b223b973c7df370203c0b83d37d677640840b55323ff1184"
+    }
+  ],
+  "definition_sha256": "6b6dc652e8d29d267aeb5cc1db74215491cff6ab77a65bc4500357490c8f72cf",
+  "site_mapping_version": "3a2e618aeb13fd9fe0ec3c6f7f4b37019019a545c4399a734b311add725167b9",
+  "thermochemistry_version": "51e6df785c7292a51f342d8d5d7c31df4a6a11f42daa2cba1619111cda0d8521",
+  "acceptance_record": {
+    "ads": {
+      "scientific_review": {
+        "status": "unreviewed",
+        "review": null
+      },
+      "user_confirmation": null,
+      "network_review": null
+    }
+  },
+  "validation_report": {
+    "levels": {
+      "ads": "THERMODYNAMICALLY_VALID"
+    },
+    "independent_cycles_checked": 0,
+    "reactions": {
+      "ads": []
+    },
+    "mkm_status": "blocked",
+    "execution_authorized": false
+  }
+}

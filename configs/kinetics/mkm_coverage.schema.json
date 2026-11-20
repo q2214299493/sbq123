@@ -1,0 +1,317 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Molecular coverage on independent site inventories",
+  "$defs": {
+    "molecule": {
+      "type": "object",
+      "required": [
+        "species_id",
+        "surface_ids",
+        "phase_ids",
+        "interface_id",
+        "site_occupancy",
+        "molecular_reference",
+        "molecular_coverage",
+        "missing"
+      ],
+      "properties": {
+        "species_id": {
+          "type": "string"
+        },
+        "surface_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "phase_ids": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "interface_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "site_occupancy": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "molecular_reference": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "required": [
+                "kind",
+                "id"
+              ],
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "declared",
+                    "inventory_site"
+                  ]
+                },
+                "id": {
+                  "type": "string"
+                }
+              }
+            }
+          ]
+        },
+        "molecular_coverage": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "missing": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "inventory": {
+      "type": "object",
+      "required": [
+        "surface_id",
+        "phase_id",
+        "site_type",
+        "contributions",
+        "occupied_fraction",
+        "vacancy_fraction",
+        "balance_residual",
+        "balance_status",
+        "vacancy_source",
+        "competitors",
+        "coverage_ranking",
+        "dominant_adsorbates",
+        "activity",
+        "unresolved_membership"
+      ],
+      "properties": {
+        "surface_id": {
+          "type": "string"
+        },
+        "phase_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "site_type": {
+          "type": "string"
+        },
+        "contributions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": [
+              "multiplicity",
+              "occupied_fraction"
+            ],
+            "properties": {
+              "multiplicity": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "occupied_fraction": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          }
+        },
+        "occupied_fraction": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "vacancy_fraction": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "balance_residual": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "balance_status": {
+          "enum": [
+            "balanced",
+            "incomplete_attribution"
+          ]
+        },
+        "vacancy_source": {
+          "enum": [
+            "measured",
+            "site_balance",
+            null
+          ]
+        },
+        "competitors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "coverage_ranking": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "dominant_adsorbates": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "activity": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "reaction_id",
+              "direction",
+              "vacant_site_order",
+              "mean_field_vacancy_factor"
+            ],
+            "properties": {
+              "reaction_id": {
+                "type": "string"
+              },
+              "direction": {
+                "enum": [
+                  "forward",
+                  "reverse"
+                ]
+              },
+              "vacant_site_order": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "mean_field_vacancy_factor": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          }
+        },
+        "unresolved_membership": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "required": [
+    "format",
+    "status",
+    "network_version",
+    "source",
+    "source_hashes",
+    "species",
+    "sites",
+    "phase_comparison"
+  ],
+  "properties": {
+    "format": {
+      "const": "mkm-molecular-coverage/1"
+    },
+    "status": {
+      "enum": [
+        "partial",
+        "complete"
+      ]
+    },
+    "network_version": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "source": {
+      "type": "string"
+    },
+    "source_hashes": {
+      "type": "object",
+      "required": [
+        "network",
+        "observations"
+      ],
+      "properties": {
+        "network": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "observations": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "species": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/molecule"
+      }
+    },
+    "sites": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/inventory"
+      }
+    },
+    "phase_comparison": {
+      "type": "object"
+    }
+  }
+}

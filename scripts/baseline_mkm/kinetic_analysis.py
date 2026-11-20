@@ -2,6 +2,7 @@
 
 from math import prod
 
+from scripts.baseline_mkm.molecular_coverage import molecular_analysis
 from scripts.baseline_mkm.single_point_result import check_close, check_steady_state, normalize_overall
 from scripts.scientific_validation import finite_number
 
@@ -22,12 +23,20 @@ def fraction(value):
 
 def activity_factors(side, gas_orders, observed, vacancies):
     surface_orders = {s: n for s, n in side["reactants"].items() if observed[s]["phase"] == "surface"}
+    adsorbate_factor = 1
+    for sid, order in surface_orders.items():
+        row = observed[sid]
+        if len(row["site_occupancy"] or {}) != 1 or "molecular_reference" in row:
+            activity = finite_number(row.get("surface_activity"), f"{sid} surface_activity", nonnegative=True)
+        else:
+            activity = row["coverage"]
+        adsorbate_factor *= activity**order
     return dict(
         gas_orders=gas_orders,
         surface_orders=surface_orders,
         vacant_site_orders=side["sites_consumed"],
         gas_pressure_factor=prod(observed[s]["pressure_bar"] ** n for s, n in gas_orders.items()),
-        adsorbate_factor=prod(observed[s]["coverage"] ** n for s, n in surface_orders.items()),
+        adsorbate_factor=adsorbate_factor,
         vacancy_factor=prod(vacancies[s]["vacancy_fraction"] ** n for s, n in side["sites_consumed"].items()),
     )
 
@@ -128,18 +137,34 @@ def rate_analysis(network, dataset, result):
     )
 
 
-def coverage_analysis(network, result, options, rates):
+def coverage_analysis(network, result, options, rates=None):
     inventory = indexed(network["catalog"]["sites"], "site_id")
     surfaces = indexed(network["catalog"]["surfaces"], "surface_id")
     species = indexed(network["species"], "species_id")
     observed = indexed(result["species"], "species_id")
     measured = indexed(result["sites"], "site_id")
-    if measured.keys() != inventory.keys() or observed.keys() != species.keys():
-        raise ValueError("Incomplete site or species inventory")
     counts = options.get("sites_per_reference")
     densities = options.get("site_density_mol_per_surface_m2", {})
     if (counts is not None and counts.keys() != inventory.keys()) or densities.keys() - inventory.keys():
         raise ValueError("Normalization site inventory differs")
+    if rates is not None and (measured.keys() != inventory.keys() or observed.keys() != species.keys()):
+        raise ValueError("Incomplete site or species inventory")
+    if rates is None or "sites_per_molecular_reference" in result or any(
+        len(s["site_occupancy"] or {}) != 1 or "molecular_reference" in observed.get(sid, {})
+        for sid, s in species.items() if s["phase"] == "surface"
+    ):
+        molecules, sites = molecular_analysis(network, result, observed, measured, inventory, surfaces)
+        phases = {}
+        for site, item in sites.items():
+            if item["phase_id"] is not None:
+                phases.setdefault(item["phase_id"], []).append(dict(
+                    site_id=site, occupied_fraction=item["occupied_fraction"],
+                    vacancy_fraction=item["vacancy_fraction"],
+                ))
+        return dict(
+            format="mkm-molecular-coverage/1", species=molecules, sites=sites,
+            phase_comparison={phase: phase_utilization(items, counts) for phase, items in phases.items()},
+        )
     rows, sites, phase_report = [], {}, {}
     for site, desc in inventory.items():
         native = measured[site]
@@ -153,8 +178,6 @@ def coverage_analysis(network, result, options, rates):
                 continue
             if observed[sid]["site_occupancy"] != footprint or s["phase"] != "surface":
                 raise ValueError("Inconsistent site assignment")
-            if len(footprint) != 1:
-                raise ValueError("Cross-inventory molecular coverage requires a declared molecular basis")
             theta = fraction(observed[sid]["coverage"])
             occupied = fraction(theta * footprint[site])
             row = dict(
@@ -229,7 +252,7 @@ def coverage_analysis(network, result, options, rates):
 def phase_utilization(items, counts):
     if len(items) == 1:
         average = items[0]["occupied_fraction"]
-    elif counts:
+    elif counts and all(item["occupied_fraction"] is not None for item in items):
         total = sum(counts[item["site_id"]] for item in items)
         average = sum(counts[item["site_id"]] * item["occupied_fraction"] for item in items) / total
     else:

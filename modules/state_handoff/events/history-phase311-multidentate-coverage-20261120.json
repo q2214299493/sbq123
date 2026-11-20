@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "event_id": "history-phase311-multidentate-coverage-20261120",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-phase311-multidentate-coverage-20261120",
+    "module": "baseline_mkm"
+  },
+  "occurred_at": "2026-11-20T03:14:51.210192+00:00",
+  "recorded_at": "2026-11-20T03:14:51.210192+00:00",
+  "summary": "Record offline molecular coverage and independent site inventory validation on the synthetic interface.",
+  "payload": {
+    "markdown": "- Phase 3.1.1: one cross-interface molecular population of 0.30 per declared repeat occupies 0.15 of the top-Ni inventory and 0.30 of bridge-Cu. Both site inventories balance. Partial evidence retains independent quantities. Development and release worktrees each passed 565 tests without a live CATKINAS run. See reports/multiphase/phase3_1_1/completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "scripts/baseline_mkm/analysis.py",
+      "sha256": "612303be32b21807b6d7f2ad21807b00840ede3c1686929e42ffa50e015faf4e",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T03:14:51.210192+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/analysis_report.py",
+      "sha256": "4549254383a86cce180ed807d989184bd7f6c47ef8da3b8447613d4f72b2c264",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T03:14:51.210192+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/kinetic_analysis.py",
+      "sha256": "fb03b37f2cd4564f8df6bc79393305fdbef63fc44bc5766c49831e9db986b172",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T03:14:51.210192+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/molecular_coverage.py",
+      "sha256": "58aafa1cbda652113e7ca296f52ef88f4baf8461d9bf421d6487fc7de3afb73a",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T03:14:51.210192+00:00"
+    },
+    {
+      "locator": "configs/kinetics/mkm_analysis.schema.json",
+      "sha256": "e66bdaa472d7db333995f1bd09f33d5c60981d366e0c7600fba8f0a195ca0bdc",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T03:14:51.210192+00:00"
+    },
+    {
+      "locator": "configs/kinetics/mkm_coverage.schema.json",
+      "sha256": "6cf3718d6e0fbee1b075badda497b73658c5fc69efc710ad974a7a9fe11269ac",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T03:14:51.210192+00:00"
+    },
+    {
+      "locator": "modules/baseline_mkm/README.md",
+      "sha256": "9da434c2fee9d16d08fa8d11e8b685a683ffa2768dac267a39101ca705aad80a",
+      "authority": "repository_document",
+      "observed_at": "2026-11-20T03:14:51.210192+00:00"
+    },
+    {
+      "locator": "tests/test_multidentate_coverage.py",
+      "sha256": "4359a1e91f9aacf850830d4e17e9b66a5b08a57888affc13373f4a6d86cdd4d1",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T03:14:51.210192+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_1_1/.gitattributes",
+      "sha256": "3f142fa4d164c2efd7c4a473db4bd894756df2063a4a721687383359130579de",
+      "authority": "repository_document",
+      "observed_at": "2026-11-20T03:14:51.210192+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_1_1/network.json",
+      "sha256": "e59b9bec86ab0d31a2e50d68df3a134d77004e466880c2a6797110842ee3b785",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T03:14:51.210192+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_1_1/observations.json",
+      "sha256": "ed8efa9cb2a3bb6c7ad9fe4888fa211ac535d23b119bccf2cb9796ea3a96f3db",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T03:14:51.210192+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_1_1/validation.json",
+      "sha256": "84ccf1c2e52ab12894c82e93f245b89785dd17b7f46fd50fc32ac2dac3b45a76",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T03:14:51.210192+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_1_1/completion.md",
+      "sha256": "85b9f66041fff982291d8c71de122618a0ce5b0a2e571003ebc3a9e4f7c42b96",
+      "authority": "repository_document",
+      "observed_at": "2026-11-20T03:14:51.210192+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

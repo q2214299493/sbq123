@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "MKM kinetic analysis v1",
+  "title": "MKM kinetic analysis",
   "type": "object",
   "required": [
     "format",
@@ -13,7 +13,10 @@
   ],
   "properties": {
     "format": {
-      "const": "mkm-kinetic-analysis/1"
+      "enum": [
+        "mkm-kinetic-analysis/1",
+        "mkm-kinetic-analysis/2"
+      ]
     },
     "status": {
       "enum": [
@@ -228,12 +231,6 @@
       "partial_pressures_bar": {
         "type": "object"
       },
-      "coverage": {
-        "type": "array",
-        "items": {
-          "$ref": "#/$defs/coverage"
-        }
-      },
       "utilization": {
         "type": "object"
       },
@@ -328,7 +325,58 @@
           }
         }
       }
-    }
+    },
+    "allOf": [
+      {
+        "if": {
+          "properties": {
+            "format": {
+              "const": "mkm-kinetic-analysis/2"
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "coverage": {
+              "type": "array",
+              "items": {
+                "$ref": "mkm_coverage.schema.json#/$defs/molecule"
+              }
+            },
+            "utilization": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "mkm_coverage.schema.json#/$defs/inventory"
+              }
+            },
+            "validation": {
+              "type": "object",
+              "required": [
+                "coverage_status"
+              ],
+              "properties": {
+                "coverage_status": {
+                  "enum": [
+                    "partial",
+                    "complete"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "else": {
+          "properties": {
+            "coverage": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/coverage"
+              }
+            }
+          }
+        }
+      }
+    ]
   },
   "else": {
     "type": "object",
@@ -370,6 +418,9 @@
             "const": "kinetic_analysis_blocked"
           }
         }
+      },
+      "format": {
+        "const": "mkm-kinetic-analysis/1"
       }
     }
   }
