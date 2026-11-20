@@ -1,0 +1,529 @@
+{
+  "format": "mkm-ts-drc/1",
+  "scope": "synthetic_benchmark",
+  "reaction_id": "transfer",
+  "temperature_K": 400,
+  "partial_pressures_bar": {
+    "H2-g": 1.0,
+    "NO-g": 0.5,
+    "HNO-g": 0.1
+  },
+  "delta_eV": 0.01,
+  "kBT_eV": 0.034469333048580714,
+  "convention": "-kBT * (ln(net_TOF_plus) - ln(net_TOF_minus)) / (2 * delta_eV), fixed endpoints and prefactors",
+  "observable": "positive net overall turnovers per reference site pair per second",
+  "normalization": {
+    "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+    "reference_basis": "reference_site_pair",
+    "sites_per_reference": {
+      "top-Ni": 1,
+      "bridge-Cu": 1
+    },
+    "source": {
+      "path": "../../../tests/fixtures/multiphase/closed_cycle_reference.json",
+      "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+    }
+  },
+  "drc": 0.04113190545130943,
+  "dimensionless": true,
+  "independent_product_drc": 0.04113190545130839,
+  "outside_zero_to_one": false,
+  "cases": {
+    "baseline": {
+      "run_id": "run",
+      "run_receipt_sha256": "44f26413991f51a21a9123355bd98ff3f2c80a20d8f70f9a0a4b987c5ea9dbaa",
+      "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+      "dataset_version": "417cf1dc3236175476441c4c4e7b4bd5771bc4a7062aa5e34eff69070483d11b",
+      "source_hashes": {
+        "network": "6a4717c44a6c5a76191baf88e419621e461886c96989a6cdb86402df70c58b40",
+        "dataset": "0ac30eec437cebf321339d6c4dde26a0e2146229d8c27fb9fa9f3926adf6d778",
+        "configuration": "7687b9fe2495aa010c7faa79da17ada934cf1673dd910b49fa4605461dea6f53",
+        "result": "6c09b2d304b0829e8912baa670fd274425c4e49a0376f4a4e710db981e4692f7",
+        "plan": "7a964de15b3a4fa6dcf53ae9ea6a06597b9cdc68ecdb064abcd85fd047419241",
+        "approval": "1f0c1f0bdb0c0d33ee05e7e6e13a574a9239b4134538868303b0a8183172ef26"
+      },
+      "native_hashes": {
+        "runtime/result_phase25/data1.mat": "a010f66603a85035cdcbbc2e81e5ea712c4833a979b7d595df4dcdb386db308d",
+        "runtime/result_phase25/log1": "af4e3165f7ee01e8bb75458a06b0663b273e91382f84bf26bdefc5526a5c0111",
+        "runtime/result_phase25/Input_phase25_1": "b793e6f37f2262e4a006f912d18950c17581ccc014aa9779008741a4e31890f8",
+        "runtime/console.log": "143430a11e9aea5cc7428285ab9f9721d662118d30bc7ab58088c2bd6cf56bd4"
+      },
+      "perturbation": null,
+      "convergence": "converged",
+      "scientific_validation": "validated_within_scope",
+      "validation": {
+        "status": "passed",
+        "max_relative_coefficient_error": 3.074609506259485e-05,
+        "steady_state_absolute_tolerance": 1.630255403232954e-05
+      },
+      "steady_state_residual": 5.684341886080802e-14,
+      "runtime_s": 192.292314,
+      "net_tof_per_site_pair_s": 81.5127701616477,
+      "product_based_tof_per_site_pair_s": 81.5127701616477,
+      "rates": {
+        "ads": {
+          "kf": 1062.5334512545078,
+          "kr": 58.39820737222975,
+          "forward_unit": "bar^-1 s^-1",
+          "reverse_unit": "s^-1",
+          "forward_flux": 94.00713283583823,
+          "reverse_flux": 12.494362674190553,
+          "net_flux": 81.5127701616477,
+          "flux_unit": "events per reference site per second",
+          "reaction_free_energy_eV": -0.1,
+          "forward_activation_free_energy_eV": 0.4,
+          "reverse_activation_free_energy_eV": 0.5,
+          "native_log_balance_residual": -3.3402329515652696e-06
+        },
+        "transfer": {
+          "kf": 2214.7271375269625,
+          "kr": 3956.4788303965233,
+          "forward_unit": "s^-1",
+          "reverse_unit": "s^-1",
+          "forward_flux": 450.0592041087896,
+          "reverse_flux": 368.5464339471419,
+          "net_flux": 81.5127701616477,
+          "flux_unit": "events per reference site per second",
+          "reaction_free_energy_eV": 0.019999999999999997,
+          "forward_activation_free_energy_eV": 0.76,
+          "reverse_activation_free_energy_eV": 0.74,
+          "native_log_balance_residual": 6.680465912678457e-07
+        },
+        "hydrogenate": {
+          "kf": 1239.7428380039596,
+          "kr": 68.13786357174203,
+          "forward_unit": "bar^-1 s^-1",
+          "reverse_unit": "s^-1",
+          "forward_flux": 190.36328304231006,
+          "reverse_flux": 27.337742719014678,
+          "net_flux": 163.0255403232954,
+          "flux_unit": "events per reference site per second",
+          "reaction_free_energy_eV": -0.1,
+          "forward_activation_free_energy_eV": 0.78,
+          "reverse_activation_free_energy_eV": 0.88,
+          "native_log_balance_residual": -3.3402329515652696e-06
+        },
+        "desorb": {
+          "kf": 693.9736630934748,
+          "kr": 3956.4788303965233,
+          "forward_unit": "s^-1",
+          "reverse_unit": "bar^-1 s^-1",
+          "forward_flux": 278.43070593850365,
+          "reverse_flux": 115.40516561520829,
+          "net_flux": 163.0255403232954,
+          "flux_unit": "events per reference site per second",
+          "reaction_free_energy_eV": 0.06000000000000001,
+          "forward_activation_free_energy_eV": 0.8,
+          "reverse_activation_free_energy_eV": 0.74,
+          "native_log_balance_residual": 2.0041397716941134e-06
+        }
+      },
+      "coverage": {
+        "HNO-top": 0.401212208396157,
+        "H2-top": 0.30710124262351585,
+        "H2-bridge": 0.6966794790111535
+      },
+      "vacancies": {
+        "top-Ni": 0.29168654898032714,
+        "bridge-Cu": 0.3033205209888465
+      },
+      "site_residuals": {
+        "top-Ni": 0.0,
+        "bridge-Cu": 0.0
+      },
+      "element_balance": {
+        "H": {
+          "produced": 163.0255403232954,
+          "consumed": 163.0255403232954,
+          "residual": 0.0
+        },
+        "N": {
+          "produced": 163.0255403232954,
+          "consumed": 163.0255403232954,
+          "residual": 0.0
+        },
+        "O": {
+          "produced": 163.0255403232954,
+          "consumed": 163.0255403232954,
+          "residual": 0.0
+        }
+      }
+    },
+    "plus": {
+      "run_id": "plus-112ab13ed690268d",
+      "run_receipt_sha256": "d4a2ddce22ee5060ed5f5243e39ec208f883992dcf3f6773228890c6245c1dbc",
+      "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+      "dataset_version": "112ab13ed690268d83c79463192efe8fa1c6abc754510cb4ee4ececb66a8c1d8",
+      "source_hashes": {
+        "network": "6a4717c44a6c5a76191baf88e419621e461886c96989a6cdb86402df70c58b40",
+        "dataset": "e953a0796fa2ead45c69a51df96af17c2f5d5a44d0c937f9b87ddd81db43c226",
+        "configuration": "3cbb95a043ac31d65d8f9323e88930795eaf9ee6902b698861744732bfc1241c",
+        "result": "bc96b84eb62defbbb35638cbd6e97332b8dffb0a179cd4120de8cc52c0e5a1ee",
+        "plan": "be823954170664212c707e81ca7f7c6c24a1630b219363eb4953309dcf0dc05e",
+        "approval": "6ed5a9e9c704d10725318817612cfb6bb4353e2ff308ead26afd52b2d817f9d8"
+      },
+      "native_hashes": {
+        "runtime/result_phase25/data1.mat": "4d8c38f95d2e7b86e4c373dd21b7ba79c0a6026a3adf3e27097be3e56b5b9bf4",
+        "runtime/result_phase25/log1": "ea6ecf043ba03893200ecbe9636e8f4ca58290bf6da7aed71e7f41795efa8cf6",
+        "runtime/result_phase25/Input_phase25_1": "8eabcf9431e306f6e5d72cb0bbc474412c62b8dfb1ba2d7181584c8819c2d2de",
+        "runtime/console.log": "9cf39cba70b1e3c5c66f88160c9c802bbec5ebbbe1cf864aeb08c803298b546e"
+      },
+      "perturbation": {
+        "format": "synthetic-ts-displacement/1",
+        "parent_dataset_sha256": "417cf1dc3236175476441c4c4e7b4bd5771bc4a7062aa5e34eff69070483d11b",
+        "parent_network_sha256": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+        "reaction_id": "transfer",
+        "sign": 1,
+        "delta_eV": 0.01,
+        "temperature_K": 400,
+        "parent_gibbs_eV": {
+          "forward": 0.76,
+          "reverse": 0.74,
+          "reaction": 0.019999999999999997
+        },
+        "derived_gibbs_eV": {
+          "forward": 0.77,
+          "reverse": 0.75,
+          "reaction": 0.019999999999999997
+        },
+        "parent_parameter_sha256": "e8e9681d6163c3dac378e19e129e709b215c03b250b5d960adf127e1f8c2a453",
+        "method": "Shift absolute TS Gibbs energy at fixed endpoints and prefactors; review and sources refer to parent."
+      },
+      "convergence": "converged",
+      "scientific_validation": "validated_within_scope",
+      "validation": {
+        "status": "passed",
+        "max_relative_coefficient_error": 3.074609506259485e-05,
+        "steady_state_absolute_tolerance": 1.6081169876222593e-05
+      },
+      "steady_state_residual": 5.684341886080802e-14,
+      "runtime_s": 169.041422,
+      "net_tof_per_site_pair_s": 80.40584938111297,
+      "product_based_tof_per_site_pair_s": 80.40584938111297,
+      "rates": {
+        "ads": {
+          "kf": 1062.5334512545078,
+          "kr": 58.39820737222975,
+          "forward_unit": "bar^-1 s^-1",
+          "reverse_unit": "s^-1",
+          "forward_flux": 92.89357044421602,
+          "reverse_flux": 12.487721063103054,
+          "net_flux": 80.40584938111297,
+          "flux_unit": "events per reference site per second",
+          "reaction_free_energy_eV": -0.1,
+          "forward_activation_free_energy_eV": 0.4,
+          "reverse_activation_free_energy_eV": 0.5,
+          "native_log_balance_residual": -3.3402329515652696e-06
+        },
+        "transfer": {
+          "kf": 1657.0130074571116,
+          "kr": 2960.1555761023974,
+          "forward_unit": "s^-1",
+          "reverse_unit": "s^-1",
+          "forward_flux": 345.6793039277656,
+          "reverse_flux": 265.27345454665266,
+          "net_flux": 80.40584938111297,
+          "flux_unit": "events per reference site per second",
+          "reaction_free_energy_eV": 0.019999999999999997,
+          "forward_activation_free_energy_eV": 0.77,
+          "reverse_activation_free_energy_eV": 0.75,
+          "native_log_balance_residual": 6.680465903796673e-07
+        },
+        "hydrogenate": {
+          "kf": 1239.7428380039596,
+          "kr": 68.13786357174203,
+          "forward_unit": "bar^-1 s^-1",
+          "reverse_unit": "s^-1",
+          "forward_flux": 188.10128644377224,
+          "reverse_flux": 27.28958768154631,
+          "net_flux": 160.81169876222594,
+          "flux_unit": "events per reference site per second",
+          "reaction_free_energy_eV": -0.1,
+          "forward_activation_free_energy_eV": 0.78,
+          "reverse_activation_free_energy_eV": 0.88,
+          "native_log_balance_residual": -3.3402329515652696e-06
+        },
+        "desorb": {
+          "kf": 693.9736630934748,
+          "kr": 3956.4788303965233,
+          "forward_unit": "s^-1",
+          "reverse_unit": "bar^-1 s^-1",
+          "forward_flux": 277.9402542865651,
+          "reverse_flux": 117.12855552433915,
+          "net_flux": 160.81169876222594,
+          "flux_unit": "events per reference site per second",
+          "reaction_free_energy_eV": 0.06000000000000001,
+          "forward_activation_free_energy_eV": 0.8,
+          "reverse_activation_free_energy_eV": 0.74,
+          "native_log_balance_residual": 2.0041397716941134e-06
+        }
+      },
+      "coverage": {
+        "HNO-top": 0.4005054789076742,
+        "H2-top": 0.3034521042228783,
+        "H2-bridge": 0.7046825546126643
+      },
+      "vacancies": {
+        "top-Ni": 0.2960424168694475,
+        "bridge-Cu": 0.29531744538733573
+      },
+      "site_residuals": {
+        "top-Ni": 0.0,
+        "bridge-Cu": 0.0
+      },
+      "element_balance": {
+        "H": {
+          "produced": 160.81169876222594,
+          "consumed": 160.81169876222594,
+          "residual": 0.0
+        },
+        "N": {
+          "produced": 160.81169876222594,
+          "consumed": 160.81169876222594,
+          "residual": 0.0
+        },
+        "O": {
+          "produced": 160.81169876222594,
+          "consumed": 160.81169876222594,
+          "residual": 0.0
+        }
+      }
+    },
+    "minus": {
+      "run_id": "minus-55e0be212b18d211",
+      "run_receipt_sha256": "65c9bbc5f28e35f50fd2209dfda47bdd02643cbc19e3fd252a09a2774d93dce7",
+      "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+      "dataset_version": "55e0be212b18d2117a6354968db2a8da0bc623001d96d822c9f92a9abe442c6e",
+      "source_hashes": {
+        "network": "6a4717c44a6c5a76191baf88e419621e461886c96989a6cdb86402df70c58b40",
+        "dataset": "fe917699f0f5c89317e411059f8d7244d3f3884661d80fbc121ef7a5148ec266",
+        "configuration": "a7f5f0cf844251efee934956b6f1b9ab4cc3b64a798e21f5bc2c1ace197e9d0c",
+        "result": "e2feef1328078fa7c82f1f49161ea2b68a216941653f50c993400ca6168a1a8a",
+        "plan": "9f68902e64770415cd57e8cb7b94111b5570c90c6909305df9012e2f427fb758",
+        "approval": "8edbbd06ead5d709430ba1ca7236dcca3498013aadf7842f261fc55ca6827d65"
+      },
+      "native_hashes": {
+        "runtime/result_phase25/data1.mat": "9ace3b1df28d0307d1733cacad2f513634b73dfb9f1c6de4aabe7a7559b6c15f",
+        "runtime/result_phase25/log1": "3435f7e23b4e62f57bb0c1f87f6ce5f7991d6831789fd963f52bda2b8116d2f8",
+        "runtime/result_phase25/Input_phase25_1": "47528c6519d5bd570202ffdaf6bfa78c1e5f7e4ffb2ce4c20a72a121e9583e70",
+        "runtime/console.log": "1af2e2812537a7dabac19600bbb5d98fda3e1e9c81cd1a90e53cb3b2957771a6"
+      },
+      "perturbation": {
+        "format": "synthetic-ts-displacement/1",
+        "parent_dataset_sha256": "417cf1dc3236175476441c4c4e7b4bd5771bc4a7062aa5e34eff69070483d11b",
+        "parent_network_sha256": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+        "reaction_id": "transfer",
+        "sign": -1,
+        "delta_eV": 0.01,
+        "temperature_K": 400,
+        "parent_gibbs_eV": {
+          "forward": 0.76,
+          "reverse": 0.74,
+          "reaction": 0.019999999999999997
+        },
+        "derived_gibbs_eV": {
+          "forward": 0.75,
+          "reverse": 0.73,
+          "reaction": 0.019999999999999997
+        },
+        "parent_parameter_sha256": "e8e9681d6163c3dac378e19e129e709b215c03b250b5d960adf127e1f8c2a453",
+        "method": "Shift absolute TS Gibbs energy at fixed endpoints and prefactors; review and sources refer to parent."
+      },
+      "convergence": "converged",
+      "scientific_validation": "validated_within_scope",
+      "validation": {
+        "status": "passed",
+        "max_relative_coefficient_error": 3.074609506259485e-05,
+        "steady_state_absolute_tolerance": 1.6469576191515047e-05
+      },
+      "steady_state_residual": 5.684341886080802e-14,
+      "runtime_s": 28.171196,
+      "net_tof_per_site_pair_s": 82.34788095757524,
+      "product_based_tof_per_site_pair_s": 82.34788095757524,
+      "rates": {
+        "ads": {
+          "kf": 1062.5334512545078,
+          "kr": 58.39820737222975,
+          "forward_unit": "bar^-1 s^-1",
+          "reverse_unit": "s^-1",
+          "forward_flux": 94.84238914494239,
+          "reverse_flux": 12.494508187367149,
+          "net_flux": 82.34788095757524,
+          "flux_unit": "events per reference site per second",
+          "reaction_free_energy_eV": -0.1,
+          "forward_activation_free_energy_eV": 0.4,
+          "reverse_activation_free_energy_eV": 0.5,
+          "native_log_balance_residual": -3.3402329515652696e-06
+        },
+        "transfer": {
+          "kf": 2960.1555761023974,
+          "kr": 5288.142576609746,
+          "forward_unit": "s^-1",
+          "reverse_unit": "s^-1",
+          "forward_flux": 589.4844093060154,
+          "reverse_flux": 507.1365283484402,
+          "net_flux": 82.34788095757524,
+          "flux_unit": "events per reference site per second",
+          "reaction_free_energy_eV": 0.019999999999999997,
+          "forward_activation_free_energy_eV": 0.75,
+          "reverse_activation_free_energy_eV": 0.73,
+          "native_log_balance_residual": 6.680465894914889e-07
+        },
+        "hydrogenate": {
+          "kf": 1239.7428380039596,
+          "kr": 68.13786357174203,
+          "forward_unit": "bar^-1 s^-1",
+          "reverse_unit": "s^-1",
+          "forward_flux": 192.06983495913087,
+          "reverse_flux": 27.374073043980392,
+          "net_flux": 164.69576191515048,
+          "flux_unit": "events per reference site per second",
+          "reaction_free_energy_eV": -0.1,
+          "forward_activation_free_energy_eV": 0.78,
+          "reverse_activation_free_energy_eV": 0.88,
+          "native_log_balance_residual": -3.3402329515652696e-06
+        },
+        "desorb": {
+          "kf": 693.9736630934748,
+          "kr": 3956.4788303965233,
+          "forward_unit": "s^-1",
+          "reverse_unit": "bar^-1 s^-1",
+          "forward_flux": 278.8007247118585,
+          "reverse_flux": 114.10496279670801,
+          "net_flux": 164.69576191515048,
+          "flux_unit": "events per reference site per second",
+          "reaction_free_energy_eV": 0.06000000000000001,
+          "forward_activation_free_energy_eV": 0.8,
+          "reverse_activation_free_energy_eV": 0.74,
+          "native_log_balance_residual": 2.0041397716941134e-06
+        }
+      },
+      "coverage": {
+        "HNO-top": 0.40174539689167627,
+        "H2-top": 0.30985431667162805,
+        "H2-bridge": 0.690497482021002
+      },
+      "vacancies": {
+        "top-Ni": 0.2884002864366957,
+        "bridge-Cu": 0.3095025179789979
+      },
+      "site_residuals": {
+        "top-Ni": 0.0,
+        "bridge-Cu": 0.0
+      },
+      "element_balance": {
+        "H": {
+          "produced": 164.69576191515048,
+          "consumed": 164.69576191515048,
+          "residual": 0.0
+        },
+        "N": {
+          "produced": 164.69576191515048,
+          "consumed": 164.69576191515048,
+          "residual": 0.0
+        },
+        "O": {
+          "produced": 164.69576191515048,
+          "consumed": 164.69576191515048,
+          "residual": 0.0
+        }
+      }
+    }
+  },
+  "changes_from_baseline": {
+    "plus": {
+      "coverage": {
+        "HNO-top": -0.0007067294884828268,
+        "H2-top": -0.0036491384006375194,
+        "H2-bridge": 0.008003075601510812
+      },
+      "vacancies": {
+        "top-Ni": 0.004355867889120346,
+        "bridge-Cu": -0.008003075601510756
+      },
+      "flux": {
+        "ads": {
+          "forward_flux": -1.1135623916222102,
+          "reverse_flux": -0.006641611087498944,
+          "net_flux": -1.1069207805347219
+        },
+        "transfer": {
+          "forward_flux": -104.37990018102397,
+          "reverse_flux": -103.27297940048925,
+          "net_flux": -1.1069207805347219
+        },
+        "hydrogenate": {
+          "forward_flux": -2.26199659853782,
+          "reverse_flux": -0.048155037468369244,
+          "net_flux": -2.2138415610694437
+        },
+        "desorb": {
+          "forward_flux": -0.49045165193854245,
+          "reverse_flux": 1.7233899091308587,
+          "net_flux": -2.2138415610694437
+        }
+      }
+    },
+    "minus": {
+      "coverage": {
+        "HNO-top": 0.0005331884955192545,
+        "H2-top": 0.002753074048112203,
+        "H2-bridge": -0.006181996990151428
+      },
+      "vacancies": {
+        "top-Ni": -0.0032862625436314574,
+        "bridge-Cu": 0.006181996990151428
+      },
+      "flux": {
+        "ads": {
+          "forward_flux": 0.8352563091041532,
+          "reverse_flux": 0.00014551317659616814,
+          "net_flux": 0.8351107959275481
+        },
+        "transfer": {
+          "forward_flux": 139.42520519722586,
+          "reverse_flux": 138.5900944012983,
+          "net_flux": 0.8351107959275481
+        },
+        "hydrogenate": {
+          "forward_flux": 1.706551916820814,
+          "reverse_flux": 0.03633032496571431,
+          "net_flux": 1.6702215918550962
+        },
+        "desorb": {
+          "forward_flux": 0.37001877335484323,
+          "reverse_flux": -1.3002028185002814,
+          "net_flux": 1.6702215918550962
+        }
+      }
+    }
+  },
+  "budget": {
+    "elapsed_s": 197.83484403031298,
+    "remaining_s": 282.165155969687,
+    "pair_sha256": "7e08a3ce6b16c391743485b4d019f2c3d476e5133a72c5ad8d7a8addc1c7fedb",
+    "per_run_s": 210,
+    "total_s": 480,
+    "max_retries": 0,
+    "max_parallel": 1
+  },
+  "fe110": {
+    "drc": null,
+    "qualification_source": "reports/multiphase/phase3_0/fe110_qualification.json",
+    "gaps": {
+      "fe110_ch_co_to_chco_20261109": [
+        "Unknown charge balance",
+        "Unknown site balance",
+        "Catalyst phase unconfirmed",
+        "Missing compatible free energies",
+        "Missing kinetic parameters or rate law",
+        "Reversibility unconfirmed",
+        "IS: compatible Gibbs correction missing",
+        "FS: compatible Gibbs correction missing",
+        "Kinetic parameter set with units, standard states, validity range and sources missing",
+        "Rate law, scoped parameter review and applicability not supplied",
+        "Reviewed site occupancies and vacant-site counts required"
+      ]
+    }
+  }
+}

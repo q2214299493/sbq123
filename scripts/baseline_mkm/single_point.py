@@ -9,6 +9,7 @@ import re
 import shutil
 import sqlite3
 import subprocess
+from time import monotonic
 
 import yaml
 
@@ -16,7 +17,8 @@ from scripts.artifact_io import load_json_object as read, sha256_file, sha256_js
 from scripts.baseline_mkm.results import read_single_point
 from scripts.baseline_mkm.single_point_result import validate_result
 from scripts.execution_permission import require_bound_action
-from scripts.kinetic_parameters.engine import check_version, generate
+from scripts.baseline_mkm.ts_perturbation import reproduce
+from scripts.kinetic_parameters.engine import check_version
 from scripts.native_model import assemble, publish
 from scripts.runtime_resources import resource_path
 
@@ -70,8 +72,7 @@ def qualify(network, dataset, config):
     check_version(dataset, "dataset_version")
     if dataset["network_version"] != network["network_version"]:
         raise ValueError("Network version differs from dataset")
-    models = [r["model"] for r in dataset["reactions"] if r["model"]]
-    rebuilt = generate(network, {"network_version": network["network_version"], "models": models})
+    rebuilt = reproduce(network, dataset)
     if rebuilt != dataset:
         raise ValueError("Dataset differs from network, source verification or reviewed rates")
     missing = {r["reaction_id"]: r["missing"] for r in dataset["reactions"] if not r["export_eligible"]}
@@ -176,7 +177,7 @@ def prepare(run, network, dataset, configuration, tickets, ticket_id, matlab):
     return status(run)
 
 
-def launch(directory, executable):
+def launch(directory, executable, timeout=LIMIT):
     command = [
         executable,
         "-sd",
@@ -187,7 +188,7 @@ def launch(directory, executable):
     with (directory / "console.log").open("xb") as output:
         proc = subprocess.Popen(command, cwd=directory, stdout=output, stderr=subprocess.STDOUT)
         try:
-            return proc.wait(timeout=LIMIT)
+            return proc.wait(timeout=min(LIMIT, timeout))
         except subprocess.TimeoutExpired:
             subprocess.run(["taskkill", "/PID", str(proc.pid), "/T", "/F"], capture_output=True, check=False)
             proc.kill()
@@ -228,9 +229,11 @@ def preflight(run, decision_path):
     return plan, decision, dataset, config, files, adapter, rt
 
 
-def execute(run, decision_path):
+def execute(run, decision_path, *, deadline=None):
     run = run.resolve()
     plan, decision, dataset, config, files, adapter, rt = preflight(run, decision_path)
+    if "ts_perturbation" in dataset and deadline is None:
+        raise ValueError("Use the bounded DRC pair executor for a TS derivative")
     # Atomic execution claim. A stopped supervisor cannot silently relaunch the same point.
     event(run, "READY", approval_reference=sha256_json(decision))
     stage, execution, convergence = "READY", "not_started", "unknown"
@@ -248,7 +251,13 @@ def execute(run, decision_path):
         stage = "RUNNING"
         event(run, stage)
         execution = "running"
-        code = launch(directory, rt["matlab_path"])
+        if deadline is None:
+            code = launch(directory, rt["matlab_path"])
+        else:
+            remaining = min(LIMIT, deadline - monotonic())
+            if remaining <= 0:
+                raise subprocess.TimeoutExpired("CATKINAS pair budget", 0)
+            code = launch(directory, rt["matlab_path"], timeout=remaining)
         execution = "exited_successfully" if code == 0 else "failed"
         if code != 0:
             raise ValueError(f"MATLAB exit code {code}")

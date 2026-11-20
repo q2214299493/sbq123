@@ -168,3 +168,36 @@ report projected connectivity, all-coreactant closure and bounded path witnesses
 [Observation example](../../reports/multiphase/phase3_1_1/observations.json) |
 [Coverage schema](../../configs/kinetics/mkm_coverage.schema.json) |
 [Validated inventory report](../../reports/multiphase/phase3_1_1/validation.json)
+
+### Phase 3.2.0 paired transition-state sensitivity
+
+The pilot accepts the original approved four-reaction synthetic dataset and the transfer TS.
+It replays the parent single-point receipt and Phase 3.1 normalization, then produces two
+content-addressed derivative datasets on the identical network. The displaced TS changes both
+activation Gibbs energies by the same signed increment. The endpoint reaction energy and
+kinetic prefactors stay fixed. Source and scientific review fields describe the parent.
+The derivative records the signed operation, parent digests and pre/post energies.
+
+```shell
+python -m scripts.baseline_mkm.drc_pair prepare PAIR_DIR ACCEPTED_BASELINE_RUN
+python -m scripts.baseline_mkm.drc_pair execute PAIR_DIR ACCEPTED_BASELINE_RUN PLUS_DECISION.json MINUS_DECISION.json
+python -m scripts.baseline_mkm.drc_pair report PAIR_DIR ACCEPTED_BASELINE_RUN OUTPUT_DIR
+```
+
+Use the same pair directory on repeat calls. Preparation is offline. Both decisions use the
+single-point approval format above and bind their respective plan hashes. The executor checks
+both plans before timing the native pair, runs positive then negative, and limits each invocation
+to the smaller of 210 s and the remaining 480 s budget. The clock persists across interruptions.
+An accepted member can be reused after its result, approval, raw files and conditions verify.
+A claimed, unfinished or failed member cannot be retried. Keep run directories for diagnosis.
+
+The observable is net overall turnovers per declared reference site pair per second.
+The dimensionless central estimate uses `-kBT * (ln(r_plus) - ln(r_minus)) / (2 * delta_eV)`.
+The sign labels refer to energy. At 400 K the benchmark uses one step size of 0.01 eV.
+The product flux supplies an independent overall extent. Rates and directional/net fluxes
+are tabulated separately. The fixed step samples the local response over a finite interval.
+This pilot supplies neither a mechanism-wide ranking nor an infinitesimal-step convergence study.
+
+[Signed case data and validation](../../reports/multiphase/phase3_2_0/result.json) |
+[Native comparison](../../reports/multiphase/phase3_2_0/comparison.md) |
+[Result schema](../../configs/kinetics/mkm_drc.schema.json)

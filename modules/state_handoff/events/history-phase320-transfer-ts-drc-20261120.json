@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "event_id": "history-phase320-transfer-ts-drc-20261120",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-phase320-transfer-ts-drc-20261120",
+    "module": "baseline_mkm"
+  },
+  "occurred_at": "2026-11-20T03:37:22.224065+00:00",
+  "recorded_at": "2026-11-20T03:37:22.224065+00:00",
+  "summary": "Record the bounded, native positive and negative transfer TS perturbation benchmark and its independently reproduced DRC.",
+  "payload": {
+    "markdown": "- Phase 3.2.0: accepted synthetic Ni/Cu transfer TS perturbations of +/-0.01 eV yielded 80.40584938 and 82.34788096 net turnovers per reference site pair per second at 400 K. The archived baseline was reused. DRC 0.04113190545 was independently reproduced from native product rates. The two new runs took 197.83 s together. Fe(110) remains unqualified. Both worktrees passed 598 tests. See reports/multiphase/phase3_2_0/completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "scripts/baseline_mkm/analysis.py",
+      "sha256": "a75df03beed17038d5f8528d5efa5bade6d58e38dcc5663bd0fbf517f922f87a",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T03:37:22.224065+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/single_point.py",
+      "sha256": "9ad1bf863dbf5db06be9fbd53c605ee0df3a8ee56c36d5942aee8418215cc424",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T03:37:22.224065+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/drc_pair.py",
+      "sha256": "b9c080f105bcf291c2b8e89aa236c5a5e4b34660ac3fd20e5a21b55382b0e370",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T03:37:22.224065+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/drc_report.py",
+      "sha256": "6bb84d2ee677bf148cb6328f73f9e4dd6738ffef8d9ceae9bad32933aaa2e19b",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T03:37:22.224065+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/ts_perturbation.py",
+      "sha256": "2054b96c31ff08bb83fbd997c3b94e052f17cb3557ad5fe1c2b03587b76c05d2",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T03:37:22.224065+00:00"
+    },
+    {
+      "locator": "tests/test_mkm_drc.py",
+      "sha256": "1a11bdd7443f0414f82531f490c52b4554da7befbde56bf9239ccd7072a5554c",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T03:37:22.224065+00:00"
+    },
+    {
+      "locator": "configs/kinetics/mkm_drc.schema.json",
+      "sha256": "f7205e1dfaabe11246540e6f81ca06bbccfb96baf095590455e22b1bbd1257fc",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T03:37:22.224065+00:00"
+    },
+    {
+      "locator": "modules/baseline_mkm/README.md",
+      "sha256": "74fd2fcce8ff1e616056dbd16c6341d167daf2602e3d6dfe7b121009f11e8379",
+      "authority": "repository_document",
+      "observed_at": "2026-11-20T03:37:22.224065+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0/.gitattributes",
+      "sha256": "da292e303e2eded639c91032ae328bc25209619297dd0abfa562e213404e5370",
+      "authority": "repository_document",
+      "observed_at": "2026-11-20T03:37:22.224065+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0/comparison.md",
+      "sha256": "1d653a93633318d74139a9c94f0d1236562342af039c49d439d7a382eb60b9f2",
+      "authority": "repository_document",
+      "observed_at": "2026-11-20T03:37:22.224065+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0/result.json",
+      "sha256": "1ad803f0503bb8f317bd1362e75df94d900bcaff966393e103f211d0abe7e4d0",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T03:37:22.224065+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0/plus/data1.mat",
+      "sha256": "4d8c38f95d2e7b86e4c373dd21b7ba79c0a6026a3adf3e27097be3e56b5b9bf4",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T03:37:22.224065+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0/plus/native_log_extract.txt",
+      "sha256": "2059652c14e88b8c42234cdd1ca0deb6be4c04fe9970b77e11da699399818af2",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T03:37:22.224065+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0/plus/accepted.json",
+      "sha256": "d4a2ddce22ee5060ed5f5243e39ec208f883992dcf3f6773228890c6245c1dbc",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T03:37:22.224065+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0/minus/data1.mat",
+      "sha256": "9ace3b1df28d0307d1733cacad2f513634b73dfb9f1c6de4aabe7a7559b6c15f",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T03:37:22.224065+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0/minus/native_log_extract.txt",
+      "sha256": "406aff4a09b94f989290777361a5561ca363b93e61a6a5355ba65cf9ad429de7",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T03:37:22.224065+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0/minus/accepted.json",
+      "sha256": "65c9bbc5f28e35f50fd2209dfda47bdd02643cbc19e3fd252a09a2774d93dce7",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T03:37:22.224065+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0/completion.md",
+      "sha256": "16a6d292f7dfaec90193c2f3d865d6e306350589e76ac7c3034bebf555fba779",
+      "authority": "repository_document",
+      "observed_at": "2026-11-20T03:37:22.224065+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

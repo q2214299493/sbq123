@@ -10,7 +10,8 @@ from scripts.baseline_mkm.kinetic_analysis import coverage_analysis, indexed, pr
 from scripts.baseline_mkm.pathway_analysis import pathway_graph
 from scripts.baseline_mkm.single_point import status
 from scripts.baseline_mkm.single_point_result import check_close
-from scripts.kinetic_parameters.engine import check_version, generate
+from scripts.baseline_mkm.ts_perturbation import reproduce
+from scripts.kinetic_parameters.engine import check_version
 from scripts.kinetic_parameters.export import validate_export
 from scripts.multiphase_contracts import _unique_keys
 from scripts.registry_write import validate_registry_batch
@@ -31,8 +32,7 @@ def load_inputs(network, dataset):
     check_version(d, "dataset_version")
     if d["network_version"] != n["network_version"]:
         raise ValueError("Network version mismatch")
-    models = [r["model"] for r in d["reactions"] if r["model"]]
-    if generate(n, {"network_version": n["network_version"], "models": models}) != d:
+    if reproduce(n, d) != d:
         raise ValueError("Dataset does not reproduce from reviewed network")
     return n, d, {"network": nh, "dataset": dh}
 
