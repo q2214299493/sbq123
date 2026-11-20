@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "event_id": "history-phase3231-endpoint-audit-20261120",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-phase3231-endpoint-audit-20261120",
+    "module": "thermochemistry"
+  },
+  "occurred_at": "2026-11-20T13:20:51.769603+00:00",
+  "recorded_at": "2026-11-20T13:20:51.769603+00:00",
+  "summary": "Audit Fe(110) CH+CO and CHCO endpoint thermal evidence independently.",
+  "payload": {
+    "markdown": "- Phase 3.2.3.1: exact IS/FS structures and electronic energies verified; neither endpoint has a compatible spectrum or reviewed correction in the audited sources. Six native Hessian candidates were checked on the VASP host. The sole composition match is the Grade A TS, with mode 12 excluded and local ZPE 0.51405165 eV. Literature reaction differences do not supply absolute endpoint corrections. MKM remains blocked. See reports/multiphase/phase3_2_3_1/completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "reports/multiphase/phase3_2_3_1/candidates.json",
+      "authority": "module_validation",
+      "sha256": "b7434939fe8464556a490eb4d160415c6061053774a9e993f9913b58975c82d9",
+      "observed_at": "2026-11-20T13:20:51.769603+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_3_1/completion.md",
+      "authority": "repository_document",
+      "sha256": "f80d741f294170ce6b1c372415d715cccb8ee73dbb1c9ccfe4a69c8787936adc",
+      "observed_at": "2026-11-20T13:20:51.769603+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_3_1/endpoint_evidence.json",
+      "authority": "module_validation",
+      "sha256": "baebd879673299b6bb15896466700db08247c47c19212a9e3a1e34207e789ab3",
+      "observed_at": "2026-11-20T13:20:51.769603+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_3_1/missing_data.md",
+      "authority": "repository_document",
+      "sha256": "6361619e35ed89b3f82f40539fa02b4554e2c74410db10c70b96e9426ab61fb6",
+      "observed_at": "2026-11-20T13:20:51.769603+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

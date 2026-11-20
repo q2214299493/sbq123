@@ -1,0 +1,1540 @@
+{
+  "reaction": "fe110_ch_co_to_chco_20261109",
+  "classification_scope": "Each class concerns reuse as a local endpoint thermal input. An exact electronic structure may still lack any thermal property.",
+  "search": {
+    "roots": [
+      "calculations",
+      "outputs",
+      "data",
+      "artifacts",
+      "reports",
+      "archive/chco_dimer_20261112",
+      "archive/chco_mode12_20261115",
+      "archive/chco_paper_aqcat25_20261112",
+      "archive/chco_ts_acceptance_20261115",
+      "archive/chco_vfa_20261115",
+      "archive/fe110_ch_co_gpu_20261110",
+      "archive/fe110_ch_co_local_review_20261112",
+      "archive/fe110_ch_co_ts_20261109",
+      "archive/fe110_five_c2_adsorption_20261006"
+    ],
+    "excluded": "site-packages and Python caches; bounded file patterns, targeted archives, public search and accessible project sources only",
+    "incar_like": 2148,
+    "outcar_like": 795,
+    "incar_hessian_hits": 9,
+    "outcar_hessian_hits": 24,
+    "vasprun_dynmat": [
+      "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/vasprun.xml",
+      "calculations/fe110_co_dissociation_neb_20260718/diagnostics/vfa_diagnostic_from_dimer9656664_co_only_20260805/vasprun.xml",
+      "calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/vasprun.xml"
+    ],
+    "structured_search": {
+      "formats": "JSON/JSONL/CSV/YAML/YML/TSV/TXT",
+      "identity_terms": "endpoint hash prefixes, parent aliases, reaction ID, CHCO",
+      "thermal_terms": "ZPE, zero point, Gibbs, enthalpy, entropy, frequencies_cm1, cm-1 or Hessian",
+      "identity_hits": 1006,
+      "thermal_hits": 572,
+      "intersections": 137,
+      "scoped_intake_thermal_record_ids": [
+        "TS-spectrum"
+      ]
+    },
+    "workbooks": [
+      {
+        "path": "outputs/fe110_c2_ts_excel_closeout_20261120_v1/before_promotion.xlsx",
+        "sha256": "ff8769738bb08b1a34e6ef2e6b3bab8ef93a68042b1d32699b46ee65557ede7d",
+        "matches": []
+      },
+      {
+        "path": "outputs/c1_c2_mkm_inventory_20261116/C1-C2\u5fae\u89c2\u52a8\u529b\u5b66\u53cd\u5e94\u4e0e\u7f3a\u53e3.xlsx",
+        "sha256": "96dd5cac30bd44a2f06c9c8af2c01c32ffbb91546eefabdb6e1a27fa67b7ab8e",
+        "matches": [
+          {
+            "sheet": "\u53cd\u5e94\u4e0e\u7f3a\u53e3",
+            "row": 11,
+            "cells": [
+              "R05",
+              "\u5c40\u90e8\u6838\u5fc3",
+              "CH* + CO* \u21c4 [CH]\u2013[C]\u2013[O]*",
+              "IS9839757\u91cd\u5206\u7c7b\u5171\u5438\u9644\uff1bTS9998592\uff1bFS9842136",
+              "Grade A\uff1bVFA2260\uff1b\u6b63\u5f0f\u80fd\u5792\u672a\u767b\u8bb0",
+              "\u517c\u5bb9IS/TS/FS\u6700\u7ec8TOTEN\u767b\u8bb0\uff1bIS/FS\u5c40\u90e8\u9891\u7387\u4e0e\u0394G\u2021",
+              "\u9996\u5148\u5b8c\u6210\u73b0\u6709\u6570\u636e\u7684\u517c\u5bb9\u7535\u5b50\u80fd\u5792\u6838\u5bf9\uff0c\u4e0d\u91cd\u8dd1TS"
+            ]
+          },
+          {
+            "sheet": "\u53cd\u5e94\u4e0e\u7f3a\u53e3",
+            "row": 12,
+            "cells": [
+              "L01",
+              "\u72b6\u6001\u8fde\u63a5",
+              "\u5076\u8054\u4ea7\u7269 + H* \u4e0e\u52a0\u6c22\u53cd\u5e94\u6c60\u5bf9\u9f50",
+              "FS9842136\uff1b\u52a0\u6c22IS-A9725473\uff1b\u6700\u4f4e\u53c2\u8003IS-B\u5f85\u6838",
+              "\u975e\u57fa\u5143\u53cd\u5e94\uff0c\u4e0d\u8d4b\u4e88\u901f\u7387\u5e38\u6570",
+              "\u6784\u578b/\u4f4d\u70b9\u3001H\u5f15\u5165\u3001\u65c1\u89c2\u7269\u548c\u5171\u5438\u9644\u80fd\u53c2\u8003\u5bf9\u9f50",
+              "\u4e0d\u80fd\u51edC\u2082HO\u5206\u5b50\u5f0f\u76f8\u540c\u628a\u4e24\u5957\u72b6\u6001\u76f4\u63a5\u5408\u5e76"
+            ]
+          }
+        ]
+      }
+    ],
+    "registry": {
+      "counts": {
+        "calculations": 694,
+        "files": 13512,
+        "results": 1647,
+        "ts_validations": 7
+      },
+      "thermally_named_results": [
+        [
+          "target imaginary frequency magnitude",
+          1
+        ]
+      ],
+      "exact_structure_matches": {
+        "0157a418cd1fba1be886426361d494ffbdce9a15d1a9132b996a3481ffcc1a6a": [
+          {
+            "calculation_id": "fe110_ch_co_dimer_20261112_job9998592",
+            "module": "transition_state_search",
+            "purpose": "CH+CO C-C coupling Dimer;32MPI/32pernode;reviewed image05 and local04/06 tangent",
+            "role": "reviewed_source_or_frequency_job_provenance",
+            "results": [
+              {
+                "result_id": "fe110_ch_co_dimer_20261112_job9998592_final_toten_sigma0p20_eV",
+                "result_name": "final_toten",
+                "unit": "eV",
+                "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+                "validation_status": "accepted_compatible_final_energy"
+              }
+            ]
+          },
+          {
+            "calculation_id": "fe110_ch_co_dimer_20261112_job9998592",
+            "module": "transition_state_search",
+            "purpose": "CH+CO C-C coupling Dimer;32MPI/32pernode;reviewed image05 and local04/06 tangent",
+            "role": "ts_structure",
+            "results": [
+              {
+                "result_id": "fe110_ch_co_dimer_20261112_job9998592_final_toten_sigma0p20_eV",
+                "result_name": "final_toten",
+                "unit": "eV",
+                "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+                "validation_status": "accepted_compatible_final_energy"
+              }
+            ]
+          }
+        ],
+        "11dab1631a99f1e444d4c7ab9ca242609e07c912f656874005696e6498f15ab2": [
+          {
+            "calculation_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1",
+            "module": "adsorption_workflow",
+            "purpose": "connectivity_specific_adsorption_relaxation",
+            "role": "completion_evidence",
+            "results": [
+              {
+                "result_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_final_max_movable_force",
+                "result_name": "final_max_movable_force",
+                "unit": "eV/angstrom",
+                "reference_convention": "movable_atoms_vector_norm",
+                "validation_status": "reviewed"
+              },
+              {
+                "result_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_final_toten",
+                "result_name": "final_toten",
+                "unit": "eV",
+                "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+                "validation_status": "accepted_compatible_final_energy"
+              }
+            ]
+          }
+        ],
+        "f8bc627180b430b3b64f748c05830a0372bc93a3750780cf7fe6c5eb0601762d": [
+          {
+            "calculation_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp",
+            "module": "adsorption_workflow",
+            "purpose": "connectivity_specific_adsorption_relaxation",
+            "role": "completion_evidence",
+            "results": []
+          },
+          {
+            "calculation_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021",
+            "module": "adsorption_workflow",
+            "purpose": "reviewed_coadsorption_reclassification_of_existing_calculation_not_new_VASP",
+            "role": "completion_evidence",
+            "results": [
+              {
+                "result_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_final_max_movable_force",
+                "result_name": "final_max_movable_force",
+                "unit": "eV/angstrom",
+                "reference_convention": "reviewed_final_geometry_or_movable_force",
+                "validation_status": "reviewed"
+              },
+              {
+                "result_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_final_state_identity",
+                "result_name": "final_state_identity",
+                "unit": null,
+                "reference_convention": "reviewed_final_geometry_or_movable_force",
+                "validation_status": "reviewed"
+              },
+              {
+                "result_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_final_toten",
+                "result_name": "final_toten",
+                "unit": "eV",
+                "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+                "validation_status": "accepted_compatible_final_energy"
+              }
+            ]
+          }
+        ]
+      },
+      "ts_validation": "fe110_ch_co_dimer9998592_vfa2260_grade_a_20261115"
+    },
+    "remote": {
+      "host": "sunboquan-codex",
+      "path": "~/sbq/Fe110",
+      "incars": 646,
+      "outcars": 709,
+      "orphan_outcars": 97,
+      "orphan_outcars_with_hessian_headers": [],
+      "additional_named_thermal_files": []
+    }
+  },
+  "local_hessian_candidates": [
+    {
+      "directory": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/formal_ts_validation_20260910/vfa",
+      "poscar_sha256": "787d11a0000e2aa72607e3aa05a885f3f9d6eb36191443b7af15820976193322",
+      "outcar_sha256": "272d49251e6be55f2221a32606e7d21acb9d1e6ef278d444c1aa8c64b37b6460",
+      "composition": {
+        "Fe": 45,
+        "C": 2,
+        "O": 1,
+        "H": 2
+      },
+      "active_axes": {
+        "47": "TTT",
+        "49": "TTT"
+      },
+      "modes": 6,
+      "imaginary_modes_cm1": [
+        -1407.654162
+      ],
+      "dimension_match": true,
+      "structure_comparison": {
+        "IS": {
+          "ordered_species_and_cell": false,
+          "max_ordered_pbc_displacement_angstrom": null
+        },
+        "TS": {
+          "ordered_species_and_cell": false,
+          "max_ordered_pbc_displacement_angstrom": null
+        },
+        "FS": {
+          "ordered_species_and_cell": false,
+          "max_ordered_pbc_displacement_angstrom": null
+        }
+      },
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Different composition.",
+      "hessian_settings": {
+        "NIONS": "50",
+        "ENCUT": "400.0",
+        "EDIFF": "0.1E-06",
+        "IBRION": "5",
+        "NFREE": "2",
+        "ISYM": "0",
+        "POTIM": "1.500000000000000E-002",
+        "ISMEAR": "1",
+        "SIGMA": "0.20"
+      },
+      "signed_modes_cm1": [
+        1304.15182,
+        818.751827,
+        520.559357,
+        287.598185,
+        189.729631,
+        -1407.654162
+      ],
+      "standard_state": null,
+      "temperature_k": null
+    },
+    {
+      "directory": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_ci9796856_image04_local_h_fe_20260925",
+      "poscar_sha256": "5e5aafaabb84c2d3f8aa6005bcf0ea7e0b01a33aee4cdaeb5dcd7b910889be9e",
+      "outcar_sha256": "fc9368d2292e5f8fcbbec996e1830293b204cb59f52d06247828da845a38b792",
+      "composition": {
+        "Fe": 45,
+        "C": 2,
+        "O": 1,
+        "H": 2
+      },
+      "active_axes": {
+        "37": "TTT",
+        "38": "TTT",
+        "39": "TTT",
+        "40": "TTT",
+        "49": "TTT"
+      },
+      "modes": 15,
+      "imaginary_modes_cm1": [
+        -386.611701
+      ],
+      "dimension_match": true,
+      "structure_comparison": {
+        "IS": {
+          "ordered_species_and_cell": false,
+          "max_ordered_pbc_displacement_angstrom": null
+        },
+        "TS": {
+          "ordered_species_and_cell": false,
+          "max_ordered_pbc_displacement_angstrom": null
+        },
+        "FS": {
+          "ordered_species_and_cell": false,
+          "max_ordered_pbc_displacement_angstrom": null
+        }
+      },
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Different composition.",
+      "hessian_settings": {
+        "NIONS": "50",
+        "ENCUT": "400.0",
+        "EDIFF": "0.1E-06",
+        "IBRION": "5",
+        "NFREE": "2",
+        "ISYM": "0",
+        "POTIM": "1.500000000000000E-002",
+        "ISMEAR": "1",
+        "SIGMA": "0.20"
+      },
+      "signed_modes_cm1": [
+        1344.826306,
+        1153.409989,
+        249.708886,
+        244.019108,
+        233.703351,
+        226.789777,
+        223.502057,
+        188.957304,
+        180.011081,
+        172.156628,
+        162.94271,
+        160.040483,
+        156.713229,
+        151.451725,
+        -386.611701
+      ],
+      "standard_state": null,
+      "temperature_k": null
+    },
+    {
+      "directory": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_dimer9746548_local_oh_20260909",
+      "poscar_sha256": "787d11a0000e2aa72607e3aa05a885f3f9d6eb36191443b7af15820976193322",
+      "outcar_sha256": "272d49251e6be55f2221a32606e7d21acb9d1e6ef278d444c1aa8c64b37b6460",
+      "composition": {
+        "Fe": 45,
+        "C": 2,
+        "O": 1,
+        "H": 2
+      },
+      "active_axes": {
+        "47": "TTT",
+        "49": "TTT"
+      },
+      "modes": 6,
+      "imaginary_modes_cm1": [
+        -1407.654162
+      ],
+      "dimension_match": true,
+      "structure_comparison": {
+        "IS": {
+          "ordered_species_and_cell": false,
+          "max_ordered_pbc_displacement_angstrom": null
+        },
+        "TS": {
+          "ordered_species_and_cell": false,
+          "max_ordered_pbc_displacement_angstrom": null
+        },
+        "FS": {
+          "ordered_species_and_cell": false,
+          "max_ordered_pbc_displacement_angstrom": null
+        }
+      },
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Different composition.",
+      "hessian_settings": {
+        "NIONS": "50",
+        "ENCUT": "400.0",
+        "EDIFF": "0.1E-06",
+        "IBRION": "5",
+        "NFREE": "2",
+        "ISYM": "0",
+        "POTIM": "1.500000000000000E-002",
+        "ISMEAR": "1",
+        "SIGMA": "0.20"
+      },
+      "signed_modes_cm1": [
+        1304.15182,
+        818.751827,
+        520.559357,
+        287.598185,
+        189.729631,
+        -1407.654162
+      ],
+      "standard_state": null,
+      "temperature_k": null
+    },
+    {
+      "directory": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821",
+      "poscar_sha256": "98fc8738e261facb192ccbe201dad7157918744586b23e221a12fe556e4afc11",
+      "outcar_sha256": "c9ed60495487c58e50789fe46f2f05cd3eb0a110148d6f484db58751cfc92e11",
+      "composition": {
+        "Fe": 45,
+        "C": 1,
+        "H": 1
+      },
+      "active_axes": {
+        "32": "TTT",
+        "37": "TTT",
+        "41": "TTT",
+        "43": "TTT",
+        "44": "TTT",
+        "45": "TTT",
+        "46": "TTT"
+      },
+      "modes": 21,
+      "imaginary_modes_cm1": [
+        -842.194583
+      ],
+      "dimension_match": true,
+      "structure_comparison": {
+        "IS": {
+          "ordered_species_and_cell": false,
+          "max_ordered_pbc_displacement_angstrom": null
+        },
+        "TS": {
+          "ordered_species_and_cell": false,
+          "max_ordered_pbc_displacement_angstrom": null
+        },
+        "FS": {
+          "ordered_species_and_cell": false,
+          "max_ordered_pbc_displacement_angstrom": null
+        }
+      },
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Different composition.",
+      "hessian_settings": {
+        "NIONS": "47",
+        "ENCUT": "400.0",
+        "EDIFF": "0.1E-06",
+        "IBRION": "5",
+        "NFREE": "2",
+        "ISYM": "0",
+        "POTIM": "1.500000000000000E-002",
+        "ISMEAR": "1",
+        "SIGMA": "0.10"
+      },
+      "signed_modes_cm1": [
+        1389.100855,
+        818.922519,
+        685.06951,
+        501.009558,
+        452.904712,
+        245.944405,
+        243.140165,
+        230.033672,
+        226.893077,
+        225.02346,
+        222.285431,
+        206.705049,
+        179.483009,
+        165.858178,
+        161.846532,
+        156.615,
+        152.868207,
+        149.049605,
+        144.716945,
+        143.30016,
+        -842.194583
+      ],
+      "standard_state": null,
+      "temperature_k": null
+    },
+    {
+      "directory": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa",
+      "poscar_sha256": "c1b035d47a15cf8211d23dd25d4216a46c82a33b3b5c0957b03b86e7a49ade8d",
+      "outcar_sha256": "d707a332f1af5d0835e1935d351d9a28b011bd4672e4de3b00833fb93f62f9a9",
+      "composition": {
+        "Fe": 45,
+        "C": 2,
+        "O": 1,
+        "H": 1
+      },
+      "active_axes": {
+        "45": "TTT",
+        "46": "TTT",
+        "47": "TTT",
+        "48": "TTT"
+      },
+      "modes": 12,
+      "imaginary_modes_cm1": [
+        -318.644011
+      ],
+      "dimension_match": true,
+      "structure_comparison": {
+        "IS": {
+          "ordered_species_and_cell": true,
+          "max_ordered_pbc_displacement_angstrom": 2.0136263525853293
+        },
+        "TS": {
+          "ordered_species_and_cell": true,
+          "max_ordered_pbc_displacement_angstrom": 1.1852677683399598e-11
+        },
+        "FS": {
+          "ordered_species_and_cell": true,
+          "max_ordered_pbc_displacement_angstrom": 3.393669767598488
+        }
+      },
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Ordered TS geometry; saddle belongs only to TS.",
+      "hessian_settings": {
+        "NIONS": "49",
+        "ENCUT": "400.0",
+        "EDIFF": "0.1E-06",
+        "IBRION": "5",
+        "NFREE": "2",
+        "ISYM": "0",
+        "POTIM": "1.500000000000000E-002",
+        "ISMEAR": "1",
+        "SIGMA": "0.10"
+      },
+      "signed_modes_cm1": [
+        3012.556969,
+        1562.135791,
+        909.495523,
+        693.170928,
+        563.698151,
+        468.200164,
+        355.601179,
+        248.117609,
+        219.859855,
+        143.010697,
+        116.365467,
+        -318.644011
+      ],
+      "standard_state": null,
+      "temperature_k": null
+    },
+    {
+      "directory": "calculations/fe110_ch_co_to_chco_ts_20261109/vfa_dimer9998592_20261115_v1",
+      "poscar_sha256": "c1b035d47a15cf8211d23dd25d4216a46c82a33b3b5c0957b03b86e7a49ade8d",
+      "outcar_sha256": null,
+      "composition": {
+        "Fe": 45,
+        "C": 2,
+        "O": 1,
+        "H": 1
+      },
+      "active_axes": {
+        "45": "TTT",
+        "46": "TTT",
+        "47": "TTT",
+        "48": "TTT"
+      },
+      "structure_comparison": {
+        "IS": {
+          "ordered_species_and_cell": true,
+          "max_ordered_pbc_displacement_angstrom": 2.0136263525853293
+        },
+        "TS": {
+          "ordered_species_and_cell": true,
+          "max_ordered_pbc_displacement_angstrom": 1.1852677683399598e-11
+        },
+        "FS": {
+          "ordered_species_and_cell": true,
+          "max_ordered_pbc_displacement_angstrom": 3.393669767598488
+        }
+      },
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Ordered TS geometry; saddle belongs only to TS.",
+      "standard_state": null,
+      "temperature_k": null
+    },
+    {
+      "directory": "calculations/fe110_ch_co_to_chco_ts_20261109/vfa_mode12_review_20261115_v1/raw",
+      "poscar_sha256": "c1b035d47a15cf8211d23dd25d4216a46c82a33b3b5c0957b03b86e7a49ade8d",
+      "outcar_sha256": "d707a332f1af5d0835e1935d351d9a28b011bd4672e4de3b00833fb93f62f9a9",
+      "composition": {
+        "Fe": 45,
+        "C": 2,
+        "O": 1,
+        "H": 1
+      },
+      "active_axes": {
+        "45": "TTT",
+        "46": "TTT",
+        "47": "TTT",
+        "48": "TTT"
+      },
+      "modes": 12,
+      "imaginary_modes_cm1": [
+        -318.644011
+      ],
+      "dimension_match": true,
+      "structure_comparison": {
+        "IS": {
+          "ordered_species_and_cell": true,
+          "max_ordered_pbc_displacement_angstrom": 2.0136263525853293
+        },
+        "TS": {
+          "ordered_species_and_cell": true,
+          "max_ordered_pbc_displacement_angstrom": 1.1852677683399598e-11
+        },
+        "FS": {
+          "ordered_species_and_cell": true,
+          "max_ordered_pbc_displacement_angstrom": 3.393669767598488
+        }
+      },
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Ordered TS geometry; saddle belongs only to TS.",
+      "hessian_settings": {
+        "NIONS": "49",
+        "ENCUT": "400.0",
+        "EDIFF": "0.1E-06",
+        "IBRION": "5",
+        "NFREE": "2",
+        "ISYM": "0",
+        "POTIM": "1.500000000000000E-002",
+        "ISMEAR": "1",
+        "SIGMA": "0.10"
+      },
+      "signed_modes_cm1": [
+        3012.556969,
+        1562.135791,
+        909.495523,
+        693.170928,
+        563.698151,
+        468.200164,
+        355.601179,
+        248.117609,
+        219.859855,
+        143.010697,
+        116.365467,
+        -318.644011
+      ],
+      "standard_state": null,
+      "temperature_k": null
+    },
+    {
+      "directory": "calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814",
+      "poscar_sha256": "986b3e7de16dd97de33ec6d2c04bc04f15fefa3b90b82994f6a6f69a7e97d426",
+      "outcar_sha256": "4fe2b23a444ae5b6c4e0ed3ccbe6d6e03407a5aadc6d5f15999b2e2d697027ac",
+      "composition": {
+        "Fe": 45,
+        "C": 1,
+        "H": 2
+      },
+      "active_axes": {
+        "37": "TTT",
+        "40": "TTT",
+        "41": "TTT",
+        "43": "TTT",
+        "44": "TTT",
+        "45": "TTT",
+        "46": "TTT",
+        "47": "TTT"
+      },
+      "modes": 24,
+      "imaginary_modes_cm1": [
+        -809.141
+      ],
+      "dimension_match": true,
+      "structure_comparison": {
+        "IS": {
+          "ordered_species_and_cell": false,
+          "max_ordered_pbc_displacement_angstrom": null
+        },
+        "TS": {
+          "ordered_species_and_cell": false,
+          "max_ordered_pbc_displacement_angstrom": null
+        },
+        "FS": {
+          "ordered_species_and_cell": false,
+          "max_ordered_pbc_displacement_angstrom": null
+        }
+      },
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Different composition.",
+      "hessian_settings": {
+        "NIONS": "48",
+        "ENCUT": "400.0",
+        "EDIFF": "0.1E-06",
+        "IBRION": "5",
+        "NFREE": "2",
+        "ISYM": "0",
+        "POTIM": "1.500000000000000E-002",
+        "ISMEAR": "1",
+        "SIGMA": "0.10"
+      },
+      "signed_modes_cm1": [
+        2996.852132,
+        1521.764406,
+        937.285942,
+        741.93206,
+        602.373898,
+        573.405796,
+        511.469305,
+        257.047392,
+        248.973585,
+        236.922473,
+        226.513083,
+        211.251476,
+        198.81657,
+        196.631942,
+        182.555119,
+        168.851129,
+        164.085366,
+        161.60825,
+        158.467071,
+        153.214407,
+        151.734068,
+        137.125472,
+        107.187966,
+        -809.141
+      ],
+      "standard_state": null,
+      "temperature_k": null
+    },
+    {
+      "directory": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806",
+      "poscar_sha256": "fa1e2224a768f73849847aa5e64d233d816e1b794b1542feabb0f2ab777d69b3",
+      "outcar_sha256": "c3b12bc0b11dcd225ce162950511aa6e23d2b54169b4d754fa7be661a8959210",
+      "composition": {
+        "Fe": 45,
+        "C": 1,
+        "O": 1
+      },
+      "active_axes": {
+        "45": "TTT",
+        "46": "TTT"
+      },
+      "modes": 6,
+      "imaginary_modes_cm1": [
+        -537.451689
+      ],
+      "dimension_match": true,
+      "structure_comparison": {
+        "IS": {
+          "ordered_species_and_cell": false,
+          "max_ordered_pbc_displacement_angstrom": null
+        },
+        "TS": {
+          "ordered_species_and_cell": false,
+          "max_ordered_pbc_displacement_angstrom": null
+        },
+        "FS": {
+          "ordered_species_and_cell": false,
+          "max_ordered_pbc_displacement_angstrom": null
+        }
+      },
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Different composition.",
+      "hessian_settings": {
+        "NIONS": "47",
+        "ENCUT": "400.0",
+        "EDIFF": "0.1E-06",
+        "IBRION": "5",
+        "NFREE": "2",
+        "ISYM": "0",
+        "POTIM": "1.500000000000000E-002",
+        "ISMEAR": "1",
+        "SIGMA": "0.10"
+      },
+      "signed_modes_cm1": [
+        659.668045,
+        466.800219,
+        353.097064,
+        327.583714,
+        303.286969,
+        -537.451689
+      ],
+      "standard_state": null,
+      "temperature_k": null
+    },
+    {
+      "directory": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/vfa_diagnostic_from_dimer9656664_co_only_20260805",
+      "poscar_sha256": "fa1e2224a768f73849847aa5e64d233d816e1b794b1542feabb0f2ab777d69b3",
+      "outcar_sha256": "c3b12bc0b11dcd225ce162950511aa6e23d2b54169b4d754fa7be661a8959210",
+      "composition": {
+        "Fe": 45,
+        "C": 1,
+        "O": 1
+      },
+      "active_axes": {
+        "45": "TTT",
+        "46": "TTT"
+      },
+      "modes": 6,
+      "imaginary_modes_cm1": [
+        -537.451689
+      ],
+      "dimension_match": true,
+      "structure_comparison": {
+        "IS": {
+          "ordered_species_and_cell": false,
+          "max_ordered_pbc_displacement_angstrom": null
+        },
+        "TS": {
+          "ordered_species_and_cell": false,
+          "max_ordered_pbc_displacement_angstrom": null
+        },
+        "FS": {
+          "ordered_species_and_cell": false,
+          "max_ordered_pbc_displacement_angstrom": null
+        }
+      },
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Different composition.",
+      "hessian_settings": {
+        "NIONS": "47",
+        "ENCUT": "400.0",
+        "EDIFF": "0.1E-06",
+        "IBRION": "5",
+        "NFREE": "2",
+        "ISYM": "0",
+        "POTIM": "1.500000000000000E-002",
+        "ISMEAR": "1",
+        "SIGMA": "0.10"
+      },
+      "signed_modes_cm1": [
+        659.668045,
+        466.800219,
+        353.097064,
+        327.583714,
+        303.286969,
+        -537.451689
+      ],
+      "standard_state": null,
+      "temperature_k": null
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/architecture/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "structure_comparison": {},
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Test fixture. No endpoint provenance.",
+      "standard_state": null,
+      "temperature_k": null
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/architecture_full/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "structure_comparison": {},
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Test fixture. No endpoint provenance.",
+      "standard_state": null,
+      "temperature_k": null
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/pytest/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "structure_comparison": {},
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Test fixture. No endpoint provenance.",
+      "standard_state": null,
+      "temperature_k": null
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/pytest_after_evidence/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "structure_comparison": {},
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Test fixture. No endpoint provenance.",
+      "standard_state": null,
+      "temperature_k": null
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/pytest_contract_binding/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "structure_comparison": {},
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Test fixture. No endpoint provenance.",
+      "standard_state": null,
+      "temperature_k": null
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/pytest_final_targeted/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "structure_comparison": {},
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Test fixture. No endpoint provenance.",
+      "standard_state": null,
+      "temperature_k": null
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/pytest_final_targeted_2/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "structure_comparison": {},
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Test fixture. No endpoint provenance.",
+      "standard_state": null,
+      "temperature_k": null
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/pytest_final_targeted_3/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "structure_comparison": {},
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Test fixture. No endpoint provenance.",
+      "standard_state": null,
+      "temperature_k": null
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/pytest_full/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "structure_comparison": {},
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Test fixture. No endpoint provenance.",
+      "standard_state": null,
+      "temperature_k": null
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/pytest_full_final/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "structure_comparison": {},
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Test fixture. No endpoint provenance.",
+      "standard_state": null,
+      "temperature_k": null
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/pytest_mode_hash/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "structure_comparison": {},
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Test fixture. No endpoint provenance.",
+      "standard_state": null,
+      "temperature_k": null
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/pytest_mode_hash_2/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "structure_comparison": {},
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Test fixture. No endpoint provenance.",
+      "standard_state": null,
+      "temperature_k": null
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/workflow_split/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "structure_comparison": {},
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Test fixture. No endpoint provenance.",
+      "standard_state": null,
+      "temperature_k": null
+    },
+    {
+      "directory": "outputs/c1_c2_barrier_registration_20261118_v1/ch_co",
+      "poscar_sha256": "c1b035d47a15cf8211d23dd25d4216a46c82a33b3b5c0957b03b86e7a49ade8d",
+      "outcar_sha256": "d707a332f1af5d0835e1935d351d9a28b011bd4672e4de3b00833fb93f62f9a9",
+      "composition": {
+        "Fe": 45,
+        "C": 2,
+        "O": 1,
+        "H": 1
+      },
+      "active_axes": {
+        "45": "TTT",
+        "46": "TTT",
+        "47": "TTT",
+        "48": "TTT"
+      },
+      "modes": 12,
+      "imaginary_modes_cm1": [
+        -318.644011
+      ],
+      "dimension_match": true,
+      "structure_comparison": {
+        "IS": {
+          "ordered_species_and_cell": true,
+          "max_ordered_pbc_displacement_angstrom": 2.0136263525853293
+        },
+        "TS": {
+          "ordered_species_and_cell": true,
+          "max_ordered_pbc_displacement_angstrom": 1.1852677683399598e-11
+        },
+        "FS": {
+          "ordered_species_and_cell": true,
+          "max_ordered_pbc_displacement_angstrom": 3.393669767598488
+        }
+      },
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Ordered TS geometry; saddle belongs only to TS.",
+      "hessian_settings": {
+        "NIONS": "49",
+        "ENCUT": "400.0",
+        "EDIFF": "0.1E-06",
+        "IBRION": "5",
+        "NFREE": "2",
+        "ISYM": "0",
+        "POTIM": "1.500000000000000E-002",
+        "ISMEAR": "1",
+        "SIGMA": "0.10"
+      },
+      "signed_modes_cm1": [
+        3012.556969,
+        1562.135791,
+        909.495523,
+        693.170928,
+        563.698151,
+        468.200164,
+        355.601179,
+        248.117609,
+        219.859855,
+        143.010697,
+        116.365467,
+        -318.644011
+      ],
+      "standard_state": null,
+      "temperature_k": null
+    },
+    {
+      "directory": "outputs/c1_c2_barrier_registration_20261118_v1/int06_mid",
+      "poscar_sha256": "5e5aafaabb84c2d3f8aa6005bcf0ea7e0b01a33aee4cdaeb5dcd7b910889be9e",
+      "outcar_sha256": "fc9368d2292e5f8fcbbec996e1830293b204cb59f52d06247828da845a38b792",
+      "composition": {
+        "Fe": 45,
+        "C": 2,
+        "O": 1,
+        "H": 2
+      },
+      "active_axes": {
+        "37": "TTT",
+        "38": "TTT",
+        "39": "TTT",
+        "40": "TTT",
+        "49": "TTT"
+      },
+      "modes": 15,
+      "imaginary_modes_cm1": [
+        -386.611701
+      ],
+      "dimension_match": true,
+      "structure_comparison": {
+        "IS": {
+          "ordered_species_and_cell": false,
+          "max_ordered_pbc_displacement_angstrom": null
+        },
+        "TS": {
+          "ordered_species_and_cell": false,
+          "max_ordered_pbc_displacement_angstrom": null
+        },
+        "FS": {
+          "ordered_species_and_cell": false,
+          "max_ordered_pbc_displacement_angstrom": null
+        }
+      },
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Different composition.",
+      "hessian_settings": {
+        "NIONS": "50",
+        "ENCUT": "400.0",
+        "EDIFF": "0.1E-06",
+        "IBRION": "5",
+        "NFREE": "2",
+        "ISYM": "0",
+        "POTIM": "1.500000000000000E-002",
+        "ISMEAR": "1",
+        "SIGMA": "0.20"
+      },
+      "signed_modes_cm1": [
+        1344.826306,
+        1153.409989,
+        249.708886,
+        244.019108,
+        233.703351,
+        226.789777,
+        223.502057,
+        188.957304,
+        180.011081,
+        172.156628,
+        162.94271,
+        160.040483,
+        156.713229,
+        151.451725,
+        -386.611701
+      ],
+      "standard_state": null,
+      "temperature_k": null
+    }
+  ],
+  "remote_hessian_candidates": [
+    {
+      "path": "ts/c2ho_h_to_c2h2o_20260904/vfa_ci9796856_image04_local_h_fe_20260925",
+      "has_outcar": true,
+      "poscar_sha256": "5e5aafaabb84c2d3f8aa6005bcf0ea7e0b01a33aee4cdaeb5dcd7b910889be9e",
+      "composition_header": [
+        "  Fe  C  O  H",
+        "  45  2  1  2"
+      ],
+      "local_structure_evidence": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_ci9796856_image04_local_h_fe_20260925",
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Different composition."
+    },
+    {
+      "path": "ts/c2ho_h_to_c2h2o_20260904/vfa_dimer9746548_local_oh_20260909",
+      "has_outcar": true,
+      "poscar_sha256": "787d11a0000e2aa72607e3aa05a885f3f9d6eb36191443b7af15820976193322",
+      "composition_header": [
+        "  Fe  C  O  H",
+        "  45  2  1  2"
+      ],
+      "local_structure_evidence": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/formal_ts_validation_20260910/vfa",
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Different composition."
+    },
+    {
+      "path": "ts/c_h_to_ch_20260818/vfa_local_ch_fe5_from_dimer9720181_20260821",
+      "has_outcar": true,
+      "poscar_sha256": "98fc8738e261facb192ccbe201dad7157918744586b23e221a12fe556e4afc11",
+      "composition_header": [
+        "  Fe  C  H",
+        "  45  1  1"
+      ],
+      "local_structure_evidence": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821",
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Different composition."
+    },
+    {
+      "path": "ts/ch_co_to_chco_20261110/vfa_dimer9998592_20261115_v1",
+      "has_outcar": true,
+      "poscar_sha256": "c1b035d47a15cf8211d23dd25d4216a46c82a33b3b5c0957b03b86e7a49ade8d",
+      "composition_header": [
+        "  Fe  C  O  H",
+        "  45  2  1  1"
+      ],
+      "local_structure_evidence": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa",
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Ordered TS geometry; saddle belongs only to TS."
+    },
+    {
+      "path": "ts/ch_h_to_ch2_20260810/vfa_local_ch_fe5_from_dimer9709074_20260814",
+      "has_outcar": true,
+      "poscar_sha256": "986b3e7de16dd97de33ec6d2c04bc04f15fefa3b90b82994f6a6f69a7e97d426",
+      "composition_header": [
+        "  Fe  C  H",
+        "  45  1  2"
+      ],
+      "local_structure_evidence": "calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814",
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Different composition."
+    },
+    {
+      "path": "ts/co_dissociation_topic1_20260718/vfa_diagnostic_from_dimer9656664_co_only_20260805",
+      "has_outcar": true,
+      "poscar_sha256": "fa1e2224a768f73849847aa5e64d233d816e1b794b1542feabb0f2ab777d69b3",
+      "composition_header": [
+        "  Fe  C  O",
+        "  45  1  1"
+      ],
+      "local_structure_evidence": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806",
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Different composition."
+    }
+  ],
+  "archive_members": {
+    "calculations/fe110_ch_co_to_chco_ts_20261109/vfa_mode12_review_20261115_v1/frequency_source.tar.gz": [
+      {
+        "name": "INCAR",
+        "sha256": "40b8ac1952abd7ec7e1f7c5a6b908f92c9266408e129edc84e004b8ab4c2c0f5"
+      },
+      {
+        "name": "POSCAR",
+        "sha256": "c1b035d47a15cf8211d23dd25d4216a46c82a33b3b5c0957b03b86e7a49ade8d"
+      },
+      {
+        "name": "OUTCAR",
+        "sha256": "d707a332f1af5d0835e1935d351d9a28b011bd4672e4de3b00833fb93f62f9a9"
+      }
+    ],
+    "calculations/fe110_ch_co_to_chco_ts_20261109/local_triplet_review_20261112_v1/remote_source.tar.gz": [
+      {
+        "name": "INCAR",
+        "sha256": "ba86d09a76afb78354a95ca078d43d676a97a70679d8100aa91e7fe22e084e5a"
+      },
+      {
+        "name": "00/POSCAR",
+        "sha256": "31373d976dcdd66c4888c4bb55305400debd7df16131bd8d1112185760a9c350"
+      },
+      {
+        "name": "01/POSCAR",
+        "sha256": "e639f9f01e8d437f006d4dbc9a0fb0702f06b61b071fcdf17f26660380571de0"
+      },
+      {
+        "name": "02/POSCAR",
+        "sha256": "5c7fd031dbef7865f2ea4ab92f0b0c218e1e27518cac18435bf8c4a65882264c"
+      },
+      {
+        "name": "03/POSCAR",
+        "sha256": "3060653375ff94f0c836f69bdca0599f62faae6eb23bd70fc1677578b2e82b9a"
+      },
+      {
+        "name": "04/POSCAR",
+        "sha256": "29484b56c8e24f96bf37bd05ba445635239576caed6453cd3fa7c93ad965c9e1"
+      },
+      {
+        "name": "05/POSCAR",
+        "sha256": "842bee183fef21aa99ffcb61f8179bc21df1d4206d6a99d2416af81d76f2c04d"
+      },
+      {
+        "name": "06/POSCAR",
+        "sha256": "2db7d8760ccaac5af0c4dc89a21c0b0b5be22c3e642c4a376baa8d9ecb040f7d"
+      },
+      {
+        "name": "07/POSCAR",
+        "sha256": "78baead215e4362c586a3c2d0e9596645441aa44f67be6b57cb71841c24a3d0c"
+      },
+      {
+        "name": "01/OUTCAR",
+        "sha256": "9052f430e488a34775082c67bbb29ad242bd05e096a6e055718ac7e4e4bdceab"
+      },
+      {
+        "name": "02/OUTCAR",
+        "sha256": "43e68bf8a77f202a8ccb54f95b7830edd7f9ebb77ed752209f8145e371365342"
+      },
+      {
+        "name": "03/OUTCAR",
+        "sha256": "e55ec40a48362b78457da0a95255d0e72211ae082879dfb8adeb07b6523cb44b"
+      },
+      {
+        "name": "04/OUTCAR",
+        "sha256": "0486dd464ec725b743f3309a7d0005777b496fbf58e13de8e9253ab2986f40e0"
+      },
+      {
+        "name": "05/OUTCAR",
+        "sha256": "04b03ded7ec02675ae2e7d0c3128cd7ad869f4b51e21acd97d4d3b3da0fedd7a"
+      },
+      {
+        "name": "06/OUTCAR",
+        "sha256": "a323667aa6bfc07a62e75a227a4700c28d6aac4014a15aaae7dde9d9bd6822b1"
+      }
+    ],
+    "calculations/fe110_ch_co_to_chco_ts_20261109/gpu_fixed_path_audit_20261110_v2/return_12406/return.tar.gz": [
+      {
+        "name": "output/images/00/POSCAR",
+        "sha256": "31373d976dcdd66c4888c4bb55305400debd7df16131bd8d1112185760a9c350"
+      },
+      {
+        "name": "output/images/01/POSCAR",
+        "sha256": "e639f9f01e8d437f006d4dbc9a0fb0702f06b61b071fcdf17f26660380571de0"
+      },
+      {
+        "name": "output/images/02/POSCAR",
+        "sha256": "5c7fd031dbef7865f2ea4ab92f0b0c218e1e27518cac18435bf8c4a65882264c"
+      },
+      {
+        "name": "output/images/03/POSCAR",
+        "sha256": "3060653375ff94f0c836f69bdca0599f62faae6eb23bd70fc1677578b2e82b9a"
+      },
+      {
+        "name": "output/images/04/POSCAR",
+        "sha256": "842bee183fef21aa99ffcb61f8179bc21df1d4206d6a99d2416af81d76f2c04d"
+      },
+      {
+        "name": "output/images/05/POSCAR",
+        "sha256": "2db7d8760ccaac5af0c4dc89a21c0b0b5be22c3e642c4a376baa8d9ecb040f7d"
+      },
+      {
+        "name": "output/images/06/POSCAR",
+        "sha256": "78baead215e4362c586a3c2d0e9596645441aa44f67be6b57cb71841c24a3d0c"
+      },
+      {
+        "name": "output/ordinary/images/00/POSCAR",
+        "sha256": "31373d976dcdd66c4888c4bb55305400debd7df16131bd8d1112185760a9c350"
+      },
+      {
+        "name": "output/ordinary/images/01/POSCAR",
+        "sha256": "e639f9f01e8d437f006d4dbc9a0fb0702f06b61b071fcdf17f26660380571de0"
+      },
+      {
+        "name": "output/ordinary/images/02/POSCAR",
+        "sha256": "5c7fd031dbef7865f2ea4ab92f0b0c218e1e27518cac18435bf8c4a65882264c"
+      },
+      {
+        "name": "output/ordinary/images/03/POSCAR",
+        "sha256": "3060653375ff94f0c836f69bdca0599f62faae6eb23bd70fc1677578b2e82b9a"
+      },
+      {
+        "name": "output/ordinary/images/04/POSCAR",
+        "sha256": "842bee183fef21aa99ffcb61f8179bc21df1d4206d6a99d2416af81d76f2c04d"
+      },
+      {
+        "name": "output/ordinary/images/05/POSCAR",
+        "sha256": "2db7d8760ccaac5af0c4dc89a21c0b0b5be22c3e642c4a376baa8d9ecb040f7d"
+      },
+      {
+        "name": "output/ordinary/images/06/POSCAR",
+        "sha256": "78baead215e4362c586a3c2d0e9596645441aa44f67be6b57cb71841c24a3d0c"
+      },
+      {
+        "name": "output/restart/00/POSCAR",
+        "sha256": "31373d976dcdd66c4888c4bb55305400debd7df16131bd8d1112185760a9c350"
+      },
+      {
+        "name": "output/restart/01/POSCAR",
+        "sha256": "e639f9f01e8d437f006d4dbc9a0fb0702f06b61b071fcdf17f26660380571de0"
+      },
+      {
+        "name": "output/restart/02/POSCAR",
+        "sha256": "5c7fd031dbef7865f2ea4ab92f0b0c218e1e27518cac18435bf8c4a65882264c"
+      },
+      {
+        "name": "output/restart/03/POSCAR",
+        "sha256": "3060653375ff94f0c836f69bdca0599f62faae6eb23bd70fc1677578b2e82b9a"
+      },
+      {
+        "name": "output/restart/04/POSCAR",
+        "sha256": "842bee183fef21aa99ffcb61f8179bc21df1d4206d6a99d2416af81d76f2c04d"
+      },
+      {
+        "name": "output/restart/05/POSCAR",
+        "sha256": "2db7d8760ccaac5af0c4dc89a21c0b0b5be22c3e642c4a376baa8d9ecb040f7d"
+      },
+      {
+        "name": "output/restart/06/POSCAR",
+        "sha256": "78baead215e4362c586a3c2d0e9596645441aa44f67be6b57cb71841c24a3d0c"
+      },
+      {
+        "name": "output/stage_snapshots/unrestrained_seed_validated/images/00/POSCAR",
+        "sha256": "31373d976dcdd66c4888c4bb55305400debd7df16131bd8d1112185760a9c350"
+      },
+      {
+        "name": "output/stage_snapshots/unrestrained_seed_validated/images/01/POSCAR",
+        "sha256": "e639f9f01e8d437f006d4dbc9a0fb0702f06b61b071fcdf17f26660380571de0"
+      },
+      {
+        "name": "output/stage_snapshots/unrestrained_seed_validated/images/02/POSCAR",
+        "sha256": "5c7fd031dbef7865f2ea4ab92f0b0c218e1e27518cac18435bf8c4a65882264c"
+      },
+      {
+        "name": "output/stage_snapshots/unrestrained_seed_validated/images/03/POSCAR",
+        "sha256": "3060653375ff94f0c836f69bdca0599f62faae6eb23bd70fc1677578b2e82b9a"
+      },
+      {
+        "name": "output/stage_snapshots/unrestrained_seed_validated/images/04/POSCAR",
+        "sha256": "842bee183fef21aa99ffcb61f8179bc21df1d4206d6a99d2416af81d76f2c04d"
+      },
+      {
+        "name": "output/stage_snapshots/unrestrained_seed_validated/images/05/POSCAR",
+        "sha256": "2db7d8760ccaac5af0c4dc89a21c0b0b5be22c3e642c4a376baa8d9ecb040f7d"
+      },
+      {
+        "name": "output/stage_snapshots/unrestrained_seed_validated/images/06/POSCAR",
+        "sha256": "78baead215e4362c586a3c2d0e9596645441aa44f67be6b57cb71841c24a3d0c"
+      }
+    ],
+    "calculations/fe110_ch_co_to_chco_ts_20261109/gpu_fixed_path_audit_20261110_v2/package.tar.gz": [],
+    "calculations/fe110_ch_co_to_chco_ts_20261109/gpu_20261110_v1/return_12405/return.tar.gz": [
+      {
+        "name": "output/images/00/POSCAR",
+        "sha256": "2c80db8eadd8c31380eb5aa643cbdc9529048d23e6016deed8bc5a48d89ef34d"
+      },
+      {
+        "name": "output/images/01/POSCAR",
+        "sha256": "3d12d16614a3b415d97b1be5d8fc5153e3a0cbd2d9665c7ab5dc3de4555f4ed7"
+      },
+      {
+        "name": "output/images/02/POSCAR",
+        "sha256": "b0bda2447f1c4beb0bed9c66f523140dd413724aadff0264d2afc4e49970889a"
+      },
+      {
+        "name": "output/images/03/POSCAR",
+        "sha256": "65bb90ec25aaea7cad12ebc11bcbe39ff09f096a59d67890a37adc7f2ea8ab4a"
+      },
+      {
+        "name": "output/images/04/POSCAR",
+        "sha256": "a625c41319e5e55bf4e6280543929bcd03ce6be453e0b8e2c1b71c047d26d903"
+      },
+      {
+        "name": "output/images/05/POSCAR",
+        "sha256": "2206f9d7d9008cb463bdbdbf2b8fde70aab282bebb6e949585ebcf47a3482ffb"
+      },
+      {
+        "name": "output/images/06/POSCAR",
+        "sha256": "9c561151d5207829c9005b39841a536a1dffd48e599078a700665d56947237af"
+      },
+      {
+        "name": "output/ordinary/images/00/POSCAR",
+        "sha256": "2c80db8eadd8c31380eb5aa643cbdc9529048d23e6016deed8bc5a48d89ef34d"
+      },
+      {
+        "name": "output/ordinary/images/01/POSCAR",
+        "sha256": "3d12d16614a3b415d97b1be5d8fc5153e3a0cbd2d9665c7ab5dc3de4555f4ed7"
+      },
+      {
+        "name": "output/ordinary/images/02/POSCAR",
+        "sha256": "b0bda2447f1c4beb0bed9c66f523140dd413724aadff0264d2afc4e49970889a"
+      },
+      {
+        "name": "output/ordinary/images/03/POSCAR",
+        "sha256": "65bb90ec25aaea7cad12ebc11bcbe39ff09f096a59d67890a37adc7f2ea8ab4a"
+      },
+      {
+        "name": "output/ordinary/images/04/POSCAR",
+        "sha256": "a625c41319e5e55bf4e6280543929bcd03ce6be453e0b8e2c1b71c047d26d903"
+      },
+      {
+        "name": "output/ordinary/images/05/POSCAR",
+        "sha256": "2206f9d7d9008cb463bdbdbf2b8fde70aab282bebb6e949585ebcf47a3482ffb"
+      },
+      {
+        "name": "output/ordinary/images/06/POSCAR",
+        "sha256": "9c561151d5207829c9005b39841a536a1dffd48e599078a700665d56947237af"
+      },
+      {
+        "name": "output/restart/00/POSCAR",
+        "sha256": "2c80db8eadd8c31380eb5aa643cbdc9529048d23e6016deed8bc5a48d89ef34d"
+      },
+      {
+        "name": "output/restart/01/POSCAR",
+        "sha256": "3d12d16614a3b415d97b1be5d8fc5153e3a0cbd2d9665c7ab5dc3de4555f4ed7"
+      },
+      {
+        "name": "output/restart/02/POSCAR",
+        "sha256": "b0bda2447f1c4beb0bed9c66f523140dd413724aadff0264d2afc4e49970889a"
+      },
+      {
+        "name": "output/restart/03/POSCAR",
+        "sha256": "65bb90ec25aaea7cad12ebc11bcbe39ff09f096a59d67890a37adc7f2ea8ab4a"
+      },
+      {
+        "name": "output/restart/04/POSCAR",
+        "sha256": "a625c41319e5e55bf4e6280543929bcd03ce6be453e0b8e2c1b71c047d26d903"
+      },
+      {
+        "name": "output/restart/05/POSCAR",
+        "sha256": "2206f9d7d9008cb463bdbdbf2b8fde70aab282bebb6e949585ebcf47a3482ffb"
+      },
+      {
+        "name": "output/restart/06/POSCAR",
+        "sha256": "9c561151d5207829c9005b39841a536a1dffd48e599078a700665d56947237af"
+      },
+      {
+        "name": "output/stage_snapshots/unrestrained_seed_validated/images/00/POSCAR",
+        "sha256": "2c80db8eadd8c31380eb5aa643cbdc9529048d23e6016deed8bc5a48d89ef34d"
+      },
+      {
+        "name": "output/stage_snapshots/unrestrained_seed_validated/images/01/POSCAR",
+        "sha256": "f558e400a44a89f22c58e70567ebdf2c49ab2a847b2e2c56fe9d9c4fd1aa35e3"
+      },
+      {
+        "name": "output/stage_snapshots/unrestrained_seed_validated/images/02/POSCAR",
+        "sha256": "5073cc3599e8df6337904f9eab023d68a0a3fd81e8625a21c934ff8a7e07e6a6"
+      },
+      {
+        "name": "output/stage_snapshots/unrestrained_seed_validated/images/03/POSCAR",
+        "sha256": "5b0ae95d17b87b5fae6cf2c59b04998d369a2bd79a6d3512a989f4a41b4bac39"
+      },
+      {
+        "name": "output/stage_snapshots/unrestrained_seed_validated/images/04/POSCAR",
+        "sha256": "98b4312a5e51fcef6598a2bbb4ade6ae069f2822631f9205759490fa20dfd1f4"
+      },
+      {
+        "name": "output/stage_snapshots/unrestrained_seed_validated/images/05/POSCAR",
+        "sha256": "e233b777046266bd32f30dd66d9af414d4306bdd4f10fa139b9597c2dc53b375"
+      },
+      {
+        "name": "output/stage_snapshots/unrestrained_seed_validated/images/06/POSCAR",
+        "sha256": "9c561151d5207829c9005b39841a536a1dffd48e599078a700665d56947237af"
+      }
+    ],
+    "calculations/fe110_ch_co_to_chco_ts_20261109/gpu_20261110_v1/package.tar.gz": [],
+    "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/dimer_source.tar.gz": [
+      {
+        "name": "INCAR",
+        "sha256": "09a9077e90f96a2fe5c5516d2823ebb20e47f9ba1760a950d6ec7e7ec81a67ae"
+      },
+      {
+        "name": "POSCAR",
+        "sha256": "2536a53d2178fe94c6013a52a4bef4d6c20a19317b8b81231729f92e5d086e88"
+      },
+      {
+        "name": "PREVIOUS_POSCAR"
+      },
+      {
+        "name": "NEXT_POSCAR"
+      },
+      {
+        "name": "OUTCAR",
+        "sha256": "391f84167e6372dcaf770ed1efa471d1abba6d4640803876899b120ac797dd02"
+      }
+    ]
+  },
+  "external": [
+    {
+      "url": "https://doi.org/10.1021/acs.jpcc.8b10310.s001",
+      "paper": "https://doi.org/10.1021/acs.jpcc.8b10310",
+      "location": "Table S1, reaction 15a, pages S1-S2; structure illustration S17",
+      "file": "archive/fe110_five_c2_adsorption_20261006/jp8b10310_si_001.pdf",
+      "sha256": "c5f9a6d23f7d1a16ca40945b071e53dba6bb9304807fa4ca792be23734c40d17",
+      "target_direction_in_paper": "CHCO* to CH* + CO*",
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "p(5x5) Fe(110) instead of the project 3x3 surface. Differences between states and saddles; neither absolute endpoint correction nor a target structure mapping.",
+      "barrier_zpe_shift_ev": -0.05,
+      "reaction_zpe_shift_ev": -0.03
+    },
+    {
+      "url": "https://doi.org/10.1021/acs.jpcc.8b04265",
+      "scope": "Stepped Fe(710) CO and CHx coupling",
+      "IS_class": "INCOMPATIBLE",
+      "FS_class": "INCOMPATIBLE",
+      "reason": "Different facet and site environment. No target state mapping."
+    }
+  ],
+  "metadata_policy": "Each POSCAR is compared independently to IS and FS by ordered species/cell and maximum wrapped Cartesian displacement. Composition, coordinates, or explicit test provenance already exclude all Hessian leads. Absent endpoint scaling, thermal conditions, component conventions, source and validation for these rejected spectra are unavailable as endpoint evidence."
+}
