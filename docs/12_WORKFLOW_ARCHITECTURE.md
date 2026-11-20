@@ -121,3 +121,11 @@ Repository lifecycle authority belongs to immutable events under
 projections of reviewed events. Scheduler output, calculation files, final
 structures, owning scientific modules, and the calculation registry retain
 their existing evidence authority; state-handoff events cannot override them.
+
+## Scientific priority recommendations
+
+After kinetic analysis, the sensitivity and uncertainty module joins observable-specific derivatives to
+reaction parameters and scoped model validation. An evidence search precedes operation selection.
+The module emits immutable proposals for human review. Approved proposals route to the owning atomistic
+or model workflow for a fresh preflight. The compiler, Research Ticket, registry and execution gates
+retain their established responsibilities. [Inputs, scoring and handoff](../modules/sensitivity_uncertainty/README.md)

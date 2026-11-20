@@ -1,0 +1,679 @@
+{
+  "label": "Synthetic fixtures for software verification only. Toy structures, model errors, calibration, objective weights and costs are not atomistic evidence.",
+  "sources": {
+    "network": {
+      "path": "reports/multiphase/phase3_0/closed_cycle_network.json",
+      "sha256": "6a4717c44a6c5a76191baf88e419621e461886c96989a6cdb86402df70c58b40"
+    },
+    "baseline": {
+      "path": "reports/multiphase/phase3_0/benchmark_manifest.json",
+      "sha256": "0773bdbbf0d3a2f7b8907ed271fdc1f0f725150c5e8c16ae77d10c37d389822d"
+    },
+    "analysis": {
+      "path": "reports/multiphase/phase3_1/closed_cycle/analysis.json",
+      "sha256": "76633f244d9a381f0fcfa458eb6f2ca6490337d9bfd78b295fedf82067524151"
+    },
+    "transfer": {
+      "path": "reports/multiphase/phase3_2_0_1/result.json",
+      "sha256": "363825f3513de03d6aa6e36f2b965965d73596bee7ad0f36088f83f4bba9172b"
+    },
+    "hydrogenate": {
+      "path": "reports/multiphase/phase3_2_0_2/result.json",
+      "sha256": "0cd26cb088db9272c76bb8e7c4ea6d8d290da338b14040ed9255aae03530ff96"
+    },
+    "batch": {
+      "path": "reports/multiphase/phase3_2_1/result.json",
+      "sha256": "8c085b8d91213724006b292584e667e84b0787ec143e06bd75d1c2c6951643b0"
+    },
+    "intermediate": {
+      "path": "reports/multiphase/phase3_2_2/result.json",
+      "sha256": "1ca90a7c2061109e6b03609ab69791f4bd45922b454b3f07ed1c422c7421e439"
+    },
+    "gas": {
+      "path": "reports/multiphase/phase3_2_2_1/result.json",
+      "sha256": "b90ea7e29f92053c9556b3f11fab2e9cd9d648c5705cd4e24e2361fd4dbf0512"
+    },
+    "ticket": {
+      "path": "reports/multiphase/phase3_0/benchmark_ticket_fixture.json",
+      "sha256": "68d8e0272fd186bef30310d0e4024194da96a9502c59ea04776a95cec281d060"
+    }
+  },
+  "policies": {
+    "activity": {
+      "kind": "overall_activity",
+      "weights": {
+        "kinetic_importance": 0.82,
+        "reliability_gap": 0.08,
+        "cost": 0.1
+      }
+    },
+    "interface": {
+      "kind": "interface_importance",
+      "weights": {
+        "interface_site_types": 0.8,
+        "kinetic_importance": 0.15,
+        "cost": 0.05
+      }
+    }
+  },
+  "scales": {
+    "kinetic_importance": 0.5,
+    "reliability_gap": 0.1,
+    "cost": 8.0,
+    "interface_site_types": 2
+  },
+  "protocol": "synthetic atomistic refinement vs demo-ref, model-v1",
+  "model": "mock-ensemble-v1",
+  "candidates": [
+    {
+      "id": "transfer",
+      "reactions": [
+        "transfer"
+      ],
+      "need": "electronic_energy",
+      "state": "TS",
+      "cost": 12,
+      "validation_rmse_eV": 0.07,
+      "ensemble_sd_eV": 0.018,
+      "novelty": 0.1,
+      "calibration": {
+        "distribution": "normal_eV",
+        "prior_sd_eV": 0.03,
+        "reference": "synthetic Gaussian prior for transfer"
+      }
+    },
+    {
+      "id": "hydrogenate",
+      "reactions": [
+        "hydrogenate"
+      ],
+      "need": "electronic_energy",
+      "state": "TS",
+      "cost": 8,
+      "validation_rmse_eV": 0.035,
+      "ensemble_sd_eV": 0.012,
+      "novelty": 0.2,
+      "calibration": null
+    },
+    {
+      "id": "HNO-top",
+      "reactions": [
+        "hydrogenate",
+        "desorb"
+      ],
+      "need": "vibrations",
+      "state": "species",
+      "cost": 5,
+      "validation_rmse_eV": 0.03,
+      "ensemble_sd_eV": 0.025,
+      "novelty": 0.30000000000000004,
+      "calibration": null
+    }
+  ],
+  "structures": {
+    "transfer/IS": {
+      "kind": "synthetic coordinate fixture, not a calculated state",
+      "symbols": [
+        "Ni",
+        "Cu",
+        "H"
+      ],
+      "positions_angstrom": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          2.4,
+          0,
+          0
+        ],
+        [
+          0.5,
+          0.0,
+          1.7
+        ]
+      ],
+      "cell_angstrom": [
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          0,
+          12
+        ]
+      ],
+      "pbc": [
+        true,
+        true,
+        false
+      ]
+    },
+    "transfer/TS": {
+      "kind": "synthetic coordinate fixture, not a calculated state",
+      "symbols": [
+        "Ni",
+        "Cu",
+        "H"
+      ],
+      "positions_angstrom": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          2.4,
+          0,
+          0
+        ],
+        [
+          0.5,
+          0.3,
+          1.7
+        ]
+      ],
+      "cell_angstrom": [
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          0,
+          12
+        ]
+      ],
+      "pbc": [
+        true,
+        true,
+        false
+      ]
+    },
+    "transfer/FS": {
+      "kind": "synthetic coordinate fixture, not a calculated state",
+      "symbols": [
+        "Ni",
+        "Cu",
+        "H"
+      ],
+      "positions_angstrom": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          2.4,
+          0,
+          0
+        ],
+        [
+          0.5,
+          0.6,
+          1.7
+        ]
+      ],
+      "cell_angstrom": [
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          0,
+          12
+        ]
+      ],
+      "pbc": [
+        true,
+        true,
+        false
+      ]
+    },
+    "transfer/species": {
+      "kind": "synthetic coordinate fixture, not a calculated state",
+      "symbols": [
+        "Ni",
+        "Cu",
+        "H"
+      ],
+      "positions_angstrom": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          2.4,
+          0,
+          0
+        ],
+        [
+          0.5,
+          0.8999999999999999,
+          1.7
+        ]
+      ],
+      "cell_angstrom": [
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          0,
+          12
+        ]
+      ],
+      "pbc": [
+        true,
+        true,
+        false
+      ]
+    },
+    "hydrogenate/IS": {
+      "kind": "synthetic coordinate fixture, not a calculated state",
+      "symbols": [
+        "Ni",
+        "Cu",
+        "H"
+      ],
+      "positions_angstrom": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          2.4,
+          0,
+          0
+        ],
+        [
+          0.6,
+          0.0,
+          1.7
+        ]
+      ],
+      "cell_angstrom": [
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          0,
+          12
+        ]
+      ],
+      "pbc": [
+        true,
+        true,
+        false
+      ]
+    },
+    "hydrogenate/TS": {
+      "kind": "synthetic coordinate fixture, not a calculated state",
+      "symbols": [
+        "Ni",
+        "Cu",
+        "H"
+      ],
+      "positions_angstrom": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          2.4,
+          0,
+          0
+        ],
+        [
+          0.6,
+          0.3,
+          1.7
+        ]
+      ],
+      "cell_angstrom": [
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          0,
+          12
+        ]
+      ],
+      "pbc": [
+        true,
+        true,
+        false
+      ]
+    },
+    "hydrogenate/FS": {
+      "kind": "synthetic coordinate fixture, not a calculated state",
+      "symbols": [
+        "Ni",
+        "Cu",
+        "H"
+      ],
+      "positions_angstrom": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          2.4,
+          0,
+          0
+        ],
+        [
+          0.6,
+          0.6,
+          1.7
+        ]
+      ],
+      "cell_angstrom": [
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          0,
+          12
+        ]
+      ],
+      "pbc": [
+        true,
+        true,
+        false
+      ]
+    },
+    "hydrogenate/species": {
+      "kind": "synthetic coordinate fixture, not a calculated state",
+      "symbols": [
+        "Ni",
+        "Cu",
+        "H"
+      ],
+      "positions_angstrom": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          2.4,
+          0,
+          0
+        ],
+        [
+          0.6,
+          0.8999999999999999,
+          1.7
+        ]
+      ],
+      "cell_angstrom": [
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          0,
+          12
+        ]
+      ],
+      "pbc": [
+        true,
+        true,
+        false
+      ]
+    },
+    "HNO-top/IS": {
+      "kind": "synthetic coordinate fixture, not a calculated state",
+      "symbols": [
+        "Ni",
+        "Cu",
+        "H"
+      ],
+      "positions_angstrom": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          2.4,
+          0,
+          0
+        ],
+        [
+          0.7,
+          0.0,
+          1.7
+        ]
+      ],
+      "cell_angstrom": [
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          0,
+          12
+        ]
+      ],
+      "pbc": [
+        true,
+        true,
+        false
+      ]
+    },
+    "HNO-top/TS": {
+      "kind": "synthetic coordinate fixture, not a calculated state",
+      "symbols": [
+        "Ni",
+        "Cu",
+        "H"
+      ],
+      "positions_angstrom": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          2.4,
+          0,
+          0
+        ],
+        [
+          0.7,
+          0.3,
+          1.7
+        ]
+      ],
+      "cell_angstrom": [
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          0,
+          12
+        ]
+      ],
+      "pbc": [
+        true,
+        true,
+        false
+      ]
+    },
+    "HNO-top/FS": {
+      "kind": "synthetic coordinate fixture, not a calculated state",
+      "symbols": [
+        "Ni",
+        "Cu",
+        "H"
+      ],
+      "positions_angstrom": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          2.4,
+          0,
+          0
+        ],
+        [
+          0.7,
+          0.6,
+          1.7
+        ]
+      ],
+      "cell_angstrom": [
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          0,
+          12
+        ]
+      ],
+      "pbc": [
+        true,
+        true,
+        false
+      ]
+    },
+    "HNO-top/species": {
+      "kind": "synthetic coordinate fixture, not a calculated state",
+      "symbols": [
+        "Ni",
+        "Cu",
+        "H"
+      ],
+      "positions_angstrom": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          2.4,
+          0,
+          0
+        ],
+        [
+          0.7,
+          0.8999999999999999,
+          1.7
+        ]
+      ],
+      "cell_angstrom": [
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          0,
+          12
+        ]
+      ],
+      "pbc": [
+        true,
+        true,
+        false
+      ]
+    }
+  }
+}

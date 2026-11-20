@@ -1,0 +1,1098 @@
+{
+  "format": "scientific-priority/1",
+  "objective": {
+    "id": "activity",
+    "observable": "positive net overall turnovers per reference site pair per second",
+    "scope": {
+      "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+      "dataset_version": "417cf1dc3236175476441c4c4e7b4bd5771bc4a7062aa5e34eff69070483d11b",
+      "baseline_result_sha256": "6c09b2d304b0829e8912baa670fd274425c4e49a0376f4a4e710db981e4692f7",
+      "normalization": {
+        "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+        "reference_basis": "reference_site_pair",
+        "sites_per_reference": {
+          "top-Ni": 1,
+          "bridge-Cu": 1
+        },
+        "source": {
+          "path": "../../../tests/fixtures/multiphase/closed_cycle_reference.json",
+          "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+        }
+      },
+      "temperature_K": 400,
+      "feed_bar": {
+        "H2-g": 1.0,
+        "NO-g": 0.5,
+        "HNO-g": 0.1
+      }
+    },
+    "scales": {
+      "kinetic_importance": 0.5,
+      "reliability_gap": 0.1,
+      "cost": 8.0,
+      "interface_site_types": 2
+    },
+    "cost_unit": "core_hour",
+    "reliability_metric": "relative_energy_rmse_eV",
+    "kind": "overall_activity",
+    "weights": {
+      "kinetic_importance": 0.82,
+      "reliability_gap": 0.08,
+      "cost": 0.1
+    }
+  },
+  "provenance": {
+    "network": {
+      "path": "reports/multiphase/phase3_0/closed_cycle_network.json",
+      "sha256": "6a4717c44a6c5a76191baf88e419621e461886c96989a6cdb86402df70c58b40"
+    },
+    "baseline": {
+      "path": "reports/multiphase/phase3_0/benchmark_manifest.json",
+      "sha256": "0773bdbbf0d3a2f7b8907ed271fdc1f0f725150c5e8c16ae77d10c37d389822d"
+    },
+    "analysis": {
+      "path": "reports/multiphase/phase3_1/closed_cycle/analysis.json",
+      "sha256": "76633f244d9a381f0fcfa458eb6f2ca6490337d9bfd78b295fedf82067524151"
+    },
+    "transfer": {
+      "path": "reports/multiphase/phase3_2_0_1/result.json",
+      "sha256": "363825f3513de03d6aa6e36f2b965965d73596bee7ad0f36088f83f4bba9172b"
+    },
+    "hydrogenate": {
+      "path": "reports/multiphase/phase3_2_0_2/result.json",
+      "sha256": "0cd26cb088db9272c76bb8e7c4ea6d8d290da338b14040ed9255aae03530ff96"
+    },
+    "batch": {
+      "path": "reports/multiphase/phase3_2_1/result.json",
+      "sha256": "8c085b8d91213724006b292584e667e84b0787ec143e06bd75d1c2c6951643b0"
+    },
+    "intermediate": {
+      "path": "reports/multiphase/phase3_2_2/result.json",
+      "sha256": "1ca90a7c2061109e6b03609ab69791f4bd45922b454b3f07ed1c422c7421e439"
+    },
+    "gas": {
+      "path": "reports/multiphase/phase3_2_2_1/result.json",
+      "sha256": "b90ea7e29f92053c9556b3f11fab2e9cd9d648c5705cd4e24e2361fd4dbf0512"
+    },
+    "ticket": {
+      "path": "reports/multiphase/phase3_0/benchmark_ticket_fixture.json",
+      "sha256": "68d8e0272fd186bef30310d0e4024194da96a9502c59ea04776a95cec281d060"
+    },
+    "fixture": {
+      "path": "tests/fixtures/multiphase/priority_benchmark.json",
+      "sha256": "358c8037a4ecb3c5e0fffd137a4d7068e26c0e81c38c9584be3fbbf7cb0eb8ca"
+    }
+  },
+  "inventory_source": "fixture",
+  "context_evidence": [
+    {
+      "kind": "gas_order",
+      "source": "gas",
+      "observable": "NO constrained-composition reaction order",
+      "scope": {
+        "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+        "dataset_version": "417cf1dc3236175476441c4c4e7b4bd5771bc4a7062aa5e34eff69070483d11b",
+        "baseline_result_sha256": "6c09b2d304b0829e8912baa670fd274425c4e49a0376f4a4e710db981e4692f7",
+        "normalization": {
+          "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+          "reference_basis": "reference_site_pair",
+          "sites_per_reference": {
+            "top-Ni": 1,
+            "bridge-Cu": 1
+          },
+          "source": {
+            "path": "../../../tests/fixtures/multiphase/closed_cycle_reference.json",
+            "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+          }
+        },
+        "temperature_K": 400,
+        "feed_bar": {
+          "H2-g": 1.0,
+          "NO-g": 0.5,
+          "HNO-g": 0.1
+        }
+      },
+      "value": 0.4948416879348518,
+      "constraint": "fixed_total_proportional_remainder",
+      "parameter": "NO-g"
+    },
+    {
+      "kind": "network_connectivity",
+      "source": "analysis",
+      "feed_to_product": [
+        {
+          "feed": "H2-g",
+          "product": "HNO-g",
+          "paths": [
+            {
+              "species": [
+                "H2-g",
+                "H2-top",
+                "HNO-top",
+                "HNO-g"
+              ],
+              "steps": [
+                {
+                  "reaction_id": "ads",
+                  "direction": "forward"
+                },
+                {
+                  "reaction_id": "hydrogenate",
+                  "direction": "forward"
+                },
+                {
+                  "reaction_id": "desorb",
+                  "direction": "forward"
+                }
+              ]
+            },
+            {
+              "species": [
+                "H2-g",
+                "H2-bridge",
+                "H2-top",
+                "HNO-top",
+                "HNO-g"
+              ],
+              "steps": [
+                {
+                  "reaction_id": "ads",
+                  "direction": "forward"
+                },
+                {
+                  "reaction_id": "transfer",
+                  "direction": "forward"
+                },
+                {
+                  "reaction_id": "hydrogenate",
+                  "direction": "forward"
+                },
+                {
+                  "reaction_id": "desorb",
+                  "direction": "forward"
+                }
+              ]
+            }
+          ],
+          "enumeration_limited": false,
+          "competing_paths": true
+        },
+        {
+          "feed": "NO-g",
+          "product": "HNO-g",
+          "paths": [
+            {
+              "species": [
+                "NO-g",
+                "HNO-top",
+                "HNO-g"
+              ],
+              "steps": [
+                {
+                  "reaction_id": "hydrogenate",
+                  "direction": "forward"
+                },
+                {
+                  "reaction_id": "desorb",
+                  "direction": "forward"
+                }
+              ]
+            }
+          ],
+          "enumeration_limited": false,
+          "competing_paths": false
+        }
+      ],
+      "pathway_percentages": null
+    }
+  ],
+  "ranked": [
+    {
+      "candidate": {
+        "id": "hydrogenate",
+        "reaction_ids": [
+          "hydrogenate"
+        ],
+        "parameter": "hydrogenate",
+        "parameter_type": "transition_state",
+        "species_ids": [
+          "H2-top",
+          "HNO-top",
+          "NO-g"
+        ],
+        "structures": {
+          "IS": {
+            "id": "fixture-is-hydrogenate",
+            "mock_structure_sha256": "e16912997125860f255ce2fab9f9e738eb7b41240c683fb9b4b4239162f5ec51"
+          },
+          "TS": {
+            "id": "fixture-ts-hydrogenate",
+            "mock_structure_sha256": "4a9970813eebdde992f0e3c82c4f219d3e64ddd6332a800820d09f44420438e4"
+          },
+          "FS": {
+            "id": "fixture-fs-hydrogenate",
+            "mock_structure_sha256": "c9263845f15b95a611d418b2e52861d5bb5092650b0db2c96458c2a3b15354fb"
+          }
+        },
+        "reaction_family": "association",
+        "phase_ids": [
+          "fcc-Ni",
+          "fcc-Cu"
+        ],
+        "surface_ids": [
+          "facet-Ni",
+          "facet-Cu"
+        ],
+        "interface_id": "junction",
+        "site_context": {
+          "top-Ni": 1
+        },
+        "targets": {
+          "TS": "4a9970813eebdde992f0e3c82c4f219d3e64ddd6332a800820d09f44420438e4"
+        },
+        "protocol": "synthetic atomistic refinement vs demo-ref, model-v1",
+        "need": "electronic_energy",
+        "model_version": "mock-ensemble-v1",
+        "error_metric": "relative_energy_rmse_eV",
+        "scope": {
+          "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+          "dataset_version": "417cf1dc3236175476441c4c4e7b4bd5771bc4a7062aa5e34eff69070483d11b",
+          "baseline_result_sha256": "6c09b2d304b0829e8912baa670fd274425c4e49a0376f4a4e710db981e4692f7",
+          "normalization": {
+            "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+            "reference_basis": "reference_site_pair",
+            "sites_per_reference": {
+              "top-Ni": 1,
+              "bridge-Cu": 1
+            },
+            "source": {
+              "path": "../../../tests/fixtures/multiphase/closed_cycle_reference.json",
+              "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+            }
+          },
+          "temperature_K": 400,
+          "feed_bar": {
+            "H2-g": 1.0,
+            "NO-g": 0.5,
+            "HNO-g": 0.1
+          }
+        },
+        "absolute_net_flux": 163.0255403232954,
+        "cost": {
+          "value": 8,
+          "unit": "core_hour",
+          "source": "fixture"
+        },
+        "parent_run_id": "run",
+        "ticket": {
+          "scope": "synthetic integration fixture",
+          "title": "Verify the Phase 2.5.2 four-step closed cycle in the single-point workflow",
+          "question_id": "3874914af5cb16b38385b930ca5cff658d9093ef5f52ba00a6652a434d30e41c",
+          "ticket_id": "3874914af5cb16b38385b930"
+        },
+        "scope_label": "synthetic_benchmark",
+        "blockers": [],
+        "reaction_structures": {
+          "hydrogenate": {
+            "IS": "fixture-is-hydrogenate",
+            "TS": "fixture-ts-hydrogenate",
+            "FS": "fixture-fs-hydrogenate"
+          }
+        }
+      },
+      "status": "ranked",
+      "matching_evidence": [],
+      "covered_requirements": {
+        "electronic_energy": []
+      },
+      "registry_evidence": {
+        "4a9970813eebdde992f0e3c82c4f219d3e64ddd6332a800820d09f44420438e4": []
+      },
+      "related_records": [
+        {
+          "id": "mock-verified-geometry/hydrogenate",
+          "protocol": "synthetic atomistic refinement vs demo-ref, model-v1",
+          "review": "accepted",
+          "targets": {
+            "TS": "4a9970813eebdde992f0e3c82c4f219d3e64ddd6332a800820d09f44420438e4"
+          },
+          "need": "minimum_geometry",
+          "source": "fixture"
+        }
+      ],
+      "recommendation": "DFT single-point energy",
+      "sensitivity": {
+        "parameter": "hydrogenate",
+        "kind": "ts_drc",
+        "observable_kind": "overall_activity",
+        "parameter_type": "transition_state",
+        "scope": {
+          "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+          "dataset_version": "417cf1dc3236175476441c4c4e7b4bd5771bc4a7062aa5e34eff69070483d11b",
+          "baseline_result_sha256": "6c09b2d304b0829e8912baa670fd274425c4e49a0376f4a4e710db981e4692f7",
+          "normalization": {
+            "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+            "reference_basis": "reference_site_pair",
+            "sites_per_reference": {
+              "top-Ni": 1,
+              "bridge-Cu": 1
+            },
+            "source": {
+              "path": "../../../tests/fixtures/multiphase/closed_cycle_reference.json",
+              "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+            }
+          },
+          "temperature_K": 400,
+          "feed_bar": {
+            "H2-g": 1.0,
+            "NO-g": 0.5,
+            "HNO-g": 0.1
+          }
+        },
+        "observable": "positive net overall turnovers per reference site pair per second",
+        "coordinate": "G_over_kBT",
+        "value": 0.45025755212448043,
+        "value_path": [
+          "reactions",
+          "hydrogenate",
+          "drc"
+        ],
+        "source": "batch",
+        "status": "accepted"
+      },
+      "reliability": {
+        "model_version": "mock-ensemble-v1",
+        "source": "fixture",
+        "validation_errors": {
+          "relative_energy_rmse_eV": 0.035,
+          "component_rmse_eV_per_A": null,
+          "barrier_rmse_eV": null,
+          "vector_rmse_eV_per_A": null
+        },
+        "calibration": null,
+        "calibration_status": "uncalibrated",
+        "ensemble_sd_eV": 0.012,
+        "extrapolation_grade": "mock_interpolation",
+        "coverage": {
+          "training_set": "mock disjoint validation split",
+          "composition": "represented",
+          "phase": "represented",
+          "facet": "represented",
+          "site": "represented",
+          "reaction_coordinate": "partial"
+        },
+        "structural_distance": 0.2,
+        "distance_definition": "mock descriptor distance"
+      },
+      "cost": {
+        "value": 8,
+        "unit": "core_hour",
+        "source": "fixture"
+      },
+      "expected_information_value": null,
+      "raw_metrics": {
+        "kinetic_importance": 0.45025755212448043,
+        "product_relevance": null,
+        "downstream_impact": null,
+        "reliability_gap": 0.035,
+        "novelty": null,
+        "evidence_deficiency": 1,
+        "information_value": null,
+        "cost": 8,
+        "flux": 163.0255403232954,
+        "interface_site_types": 1
+      },
+      "normalized_scores": {
+        "kinetic_importance": 0.9005151042489609,
+        "reliability_gap": 0.35000000000000003,
+        "cost": 0.5
+      },
+      "missing_dimensions": [],
+      "score_bounds": [
+        0.8164223854841478,
+        0.8164223854841478
+      ],
+      "ranking_uncertainty": "Bounds span unknown normalized dimensions at fixed weights; model/weight confidence interval unavailable",
+      "score": 0.8164223854841478,
+      "reasons": [],
+      "rationale": "Acquire electronic_energy for hydrogenate",
+      "weighted_contributions": {
+        "kinetic_importance": 0.7384223854841478,
+        "reliability_gap": 0.028000000000000004,
+        "cost": 0.05
+      },
+      "pareto_front": 1
+    },
+    {
+      "candidate": {
+        "id": "HNO-top",
+        "reaction_ids": [
+          "hydrogenate",
+          "desorb"
+        ],
+        "parameter": "HNO-top",
+        "parameter_type": "intermediate",
+        "species_ids": [
+          "H2-top",
+          "HNO-g",
+          "HNO-top",
+          "NO-g"
+        ],
+        "structures": {
+          "species": {
+            "id": "HNO-top",
+            "mock_structure_sha256": "24200688b4b863313e4a7cd169537e199aedbb7c215e4d1e2e03a5d13327c96d"
+          }
+        },
+        "reaction_family": "association",
+        "phase_ids": [
+          "fcc-Ni",
+          "fcc-Cu"
+        ],
+        "surface_ids": [
+          "facet-Ni",
+          "facet-Cu"
+        ],
+        "interface_id": "junction",
+        "site_context": {
+          "top-Ni": 1
+        },
+        "targets": {
+          "species": "24200688b4b863313e4a7cd169537e199aedbb7c215e4d1e2e03a5d13327c96d"
+        },
+        "protocol": "synthetic atomistic refinement vs demo-ref, model-v1",
+        "need": "vibrations",
+        "model_version": "mock-ensemble-v1",
+        "error_metric": "relative_energy_rmse_eV",
+        "scope": {
+          "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+          "dataset_version": "417cf1dc3236175476441c4c4e7b4bd5771bc4a7062aa5e34eff69070483d11b",
+          "baseline_result_sha256": "6c09b2d304b0829e8912baa670fd274425c4e49a0376f4a4e710db981e4692f7",
+          "normalization": {
+            "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+            "reference_basis": "reference_site_pair",
+            "sites_per_reference": {
+              "top-Ni": 1,
+              "bridge-Cu": 1
+            },
+            "source": {
+              "path": "../../../tests/fixtures/multiphase/closed_cycle_reference.json",
+              "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+            }
+          },
+          "temperature_K": 400,
+          "feed_bar": {
+            "H2-g": 1.0,
+            "NO-g": 0.5,
+            "HNO-g": 0.1
+          }
+        },
+        "absolute_net_flux": null,
+        "cost": {
+          "value": 5,
+          "unit": "core_hour",
+          "source": "fixture"
+        },
+        "parent_run_id": "run",
+        "ticket": {
+          "scope": "synthetic integration fixture",
+          "title": "Verify the Phase 2.5.2 four-step closed cycle in the single-point workflow",
+          "question_id": "3874914af5cb16b38385b930ca5cff658d9093ef5f52ba00a6652a434d30e41c",
+          "ticket_id": "3874914af5cb16b38385b930"
+        },
+        "scope_label": "synthetic_benchmark",
+        "blockers": [],
+        "reaction_structures": {
+          "hydrogenate": {
+            "IS": "fixture-is-hydrogenate",
+            "TS": "fixture-ts-hydrogenate",
+            "FS": "fixture-fs-hydrogenate"
+          },
+          "desorb": {
+            "IS": "fixture-is-desorb",
+            "TS": "fixture-ts-desorb",
+            "FS": "fixture-fs-desorb"
+          }
+        }
+      },
+      "status": "ranked",
+      "matching_evidence": [],
+      "covered_requirements": {
+        "vibrations": []
+      },
+      "registry_evidence": {
+        "24200688b4b863313e4a7cd169537e199aedbb7c215e4d1e2e03a5d13327c96d": []
+      },
+      "related_records": [
+        {
+          "id": "mock-verified-geometry/HNO-top",
+          "protocol": "synthetic atomistic refinement vs demo-ref, model-v1",
+          "review": "accepted",
+          "targets": {
+            "species": "24200688b4b863313e4a7cd169537e199aedbb7c215e4d1e2e03a5d13327c96d"
+          },
+          "need": "minimum_geometry",
+          "source": "fixture"
+        }
+      ],
+      "recommendation": "DFT frequency calculation",
+      "sensitivity": {
+        "parameter": "HNO-top",
+        "kind": "intermediate_G",
+        "observable_kind": "overall_activity",
+        "parameter_type": "intermediate",
+        "scope": {
+          "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+          "dataset_version": "417cf1dc3236175476441c4c4e7b4bd5771bc4a7062aa5e34eff69070483d11b",
+          "baseline_result_sha256": "6c09b2d304b0829e8912baa670fd274425c4e49a0376f4a4e710db981e4692f7",
+          "normalization": {
+            "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+            "reference_basis": "reference_site_pair",
+            "sites_per_reference": {
+              "top-Ni": 1,
+              "bridge-Cu": 1
+            },
+            "source": {
+              "path": "../../../tests/fixtures/multiphase/closed_cycle_reference.json",
+              "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+            }
+          },
+          "temperature_K": 400,
+          "feed_bar": {
+            "H2-g": 1.0,
+            "NO-g": 0.5,
+            "HNO-g": 0.1
+          }
+        },
+        "observable": "positive net overall turnovers per reference site pair per second",
+        "coordinate": "G_over_kBT",
+        "value": 0.4013778742808645,
+        "value_path": [
+          "pairs",
+          "intermediate_G-fine",
+          "estimates",
+          "central"
+        ],
+        "source": "intermediate",
+        "status": "accepted"
+      },
+      "reliability": {
+        "model_version": "mock-ensemble-v1",
+        "source": "fixture",
+        "validation_errors": {
+          "relative_energy_rmse_eV": 0.03,
+          "component_rmse_eV_per_A": null,
+          "barrier_rmse_eV": null,
+          "vector_rmse_eV_per_A": null
+        },
+        "calibration": null,
+        "calibration_status": "uncalibrated",
+        "ensemble_sd_eV": 0.025,
+        "extrapolation_grade": "mock_interpolation",
+        "coverage": {
+          "training_set": "mock disjoint validation split",
+          "composition": "represented",
+          "phase": "represented",
+          "facet": "represented",
+          "site": "represented",
+          "reaction_coordinate": "partial"
+        },
+        "structural_distance": 0.30000000000000004,
+        "distance_definition": "mock descriptor distance"
+      },
+      "cost": {
+        "value": 5,
+        "unit": "core_hour",
+        "source": "fixture"
+      },
+      "expected_information_value": null,
+      "raw_metrics": {
+        "kinetic_importance": 0.4013778742808645,
+        "product_relevance": null,
+        "downstream_impact": null,
+        "reliability_gap": 0.03,
+        "novelty": null,
+        "evidence_deficiency": 1,
+        "information_value": null,
+        "cost": 5,
+        "flux": null,
+        "interface_site_types": 1
+      },
+      "normalized_scores": {
+        "kinetic_importance": 0.802755748561729,
+        "reliability_gap": 0.3,
+        "cost": 0.6153846153846154
+      },
+      "missing_dimensions": [],
+      "score_bounds": [
+        0.7437981753590793,
+        0.7437981753590793
+      ],
+      "ranking_uncertainty": "Bounds span unknown normalized dimensions at fixed weights; model/weight confidence interval unavailable",
+      "score": 0.7437981753590793,
+      "reasons": [],
+      "rationale": "Acquire vibrations for HNO-top",
+      "weighted_contributions": {
+        "kinetic_importance": 0.6582597138206178,
+        "reliability_gap": 0.024,
+        "cost": 0.06153846153846154
+      },
+      "pareto_front": 1
+    },
+    {
+      "candidate": {
+        "id": "transfer",
+        "reaction_ids": [
+          "transfer"
+        ],
+        "parameter": "transfer",
+        "parameter_type": "transition_state",
+        "species_ids": [
+          "H2-bridge",
+          "H2-top"
+        ],
+        "structures": {
+          "IS": {
+            "id": "fixture-is-transfer",
+            "mock_structure_sha256": "021f037877a1442cc7fd495a4c8e2a796d23c0e85242b94841509fae8c84c88e"
+          },
+          "TS": {
+            "id": "fixture-ts-transfer",
+            "mock_structure_sha256": "9e7f204bfb661319c969152f758ecb50d80b6b6e5fb1f7588d00322e2a9bf1c2"
+          },
+          "FS": {
+            "id": "fixture-fs-transfer",
+            "mock_structure_sha256": "399d3364b81b732be3fe83148d8c6943523733af75484ac06b1f550923796c1a"
+          }
+        },
+        "reaction_family": "diffusion",
+        "phase_ids": [
+          "fcc-Ni",
+          "fcc-Cu"
+        ],
+        "surface_ids": [
+          "facet-Ni",
+          "facet-Cu"
+        ],
+        "interface_id": "junction",
+        "site_context": {
+          "top-Ni": 1,
+          "bridge-Cu": 1
+        },
+        "targets": {
+          "TS": "9e7f204bfb661319c969152f758ecb50d80b6b6e5fb1f7588d00322e2a9bf1c2"
+        },
+        "protocol": "synthetic atomistic refinement vs demo-ref, model-v1",
+        "need": "electronic_energy",
+        "model_version": "mock-ensemble-v1",
+        "error_metric": "relative_energy_rmse_eV",
+        "scope": {
+          "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+          "dataset_version": "417cf1dc3236175476441c4c4e7b4bd5771bc4a7062aa5e34eff69070483d11b",
+          "baseline_result_sha256": "6c09b2d304b0829e8912baa670fd274425c4e49a0376f4a4e710db981e4692f7",
+          "normalization": {
+            "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+            "reference_basis": "reference_site_pair",
+            "sites_per_reference": {
+              "top-Ni": 1,
+              "bridge-Cu": 1
+            },
+            "source": {
+              "path": "../../../tests/fixtures/multiphase/closed_cycle_reference.json",
+              "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+            }
+          },
+          "temperature_K": 400,
+          "feed_bar": {
+            "H2-g": 1.0,
+            "NO-g": 0.5,
+            "HNO-g": 0.1
+          }
+        },
+        "absolute_net_flux": 81.5127701616477,
+        "cost": {
+          "value": 12,
+          "unit": "core_hour",
+          "source": "fixture"
+        },
+        "parent_run_id": "run",
+        "ticket": {
+          "scope": "synthetic integration fixture",
+          "title": "Verify the Phase 2.5.2 four-step closed cycle in the single-point workflow",
+          "question_id": "3874914af5cb16b38385b930ca5cff658d9093ef5f52ba00a6652a434d30e41c",
+          "ticket_id": "3874914af5cb16b38385b930"
+        },
+        "scope_label": "synthetic_benchmark",
+        "blockers": [],
+        "reaction_structures": {
+          "transfer": {
+            "IS": "fixture-is-transfer",
+            "TS": "fixture-ts-transfer",
+            "FS": "fixture-fs-transfer"
+          }
+        },
+        "information_model": {
+          "loss": "squared_log_observable",
+          "expected_posterior_variance_eV2": 0.0001,
+          "reference": "fixture"
+        }
+      },
+      "status": "ranked",
+      "matching_evidence": [],
+      "covered_requirements": {
+        "electronic_energy": []
+      },
+      "registry_evidence": {
+        "9e7f204bfb661319c969152f758ecb50d80b6b6e5fb1f7588d00322e2a9bf1c2": []
+      },
+      "related_records": [
+        {
+          "id": "mock-verified-geometry/transfer",
+          "protocol": "synthetic atomistic refinement vs demo-ref, model-v1",
+          "review": "accepted",
+          "targets": {
+            "TS": "9e7f204bfb661319c969152f758ecb50d80b6b6e5fb1f7588d00322e2a9bf1c2"
+          },
+          "need": "minimum_geometry",
+          "source": "fixture"
+        }
+      ],
+      "recommendation": "DFT single-point energy",
+      "sensitivity": {
+        "parameter": "transfer",
+        "kind": "ts_drc",
+        "observable_kind": "overall_activity",
+        "parameter_type": "transition_state",
+        "scope": {
+          "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+          "dataset_version": "417cf1dc3236175476441c4c4e7b4bd5771bc4a7062aa5e34eff69070483d11b",
+          "baseline_result_sha256": "6c09b2d304b0829e8912baa670fd274425c4e49a0376f4a4e710db981e4692f7",
+          "normalization": {
+            "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+            "reference_basis": "reference_site_pair",
+            "sites_per_reference": {
+              "top-Ni": 1,
+              "bridge-Cu": 1
+            },
+            "source": {
+              "path": "../../../tests/fixtures/multiphase/closed_cycle_reference.json",
+              "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+            }
+          },
+          "temperature_K": 400,
+          "feed_bar": {
+            "H2-g": 1.0,
+            "NO-g": 0.5,
+            "HNO-g": 0.1
+          }
+        },
+        "observable": "positive net overall turnovers per reference site pair per second",
+        "coordinate": "G_over_kBT",
+        "value": 0.040690451158404334,
+        "value_path": [
+          "reactions",
+          "transfer",
+          "drc"
+        ],
+        "source": "batch",
+        "status": "accepted"
+      },
+      "reliability": {
+        "model_version": "mock-ensemble-v1",
+        "source": "fixture",
+        "validation_errors": {
+          "relative_energy_rmse_eV": 0.07,
+          "component_rmse_eV_per_A": null,
+          "barrier_rmse_eV": null,
+          "vector_rmse_eV_per_A": null
+        },
+        "calibration": {
+          "distribution": "normal_eV",
+          "prior_sd_eV": 0.03,
+          "reference": "synthetic Gaussian prior for transfer"
+        },
+        "calibration_status": "calibrated",
+        "ensemble_sd_eV": 0.018,
+        "extrapolation_grade": "mock_interpolation",
+        "coverage": {
+          "training_set": "mock disjoint validation split",
+          "composition": "represented",
+          "phase": "represented",
+          "facet": "represented",
+          "site": "represented",
+          "reaction_coordinate": "partial"
+        },
+        "structural_distance": 0.1,
+        "distance_definition": "mock descriptor distance"
+      },
+      "cost": {
+        "value": 12,
+        "unit": "core_hour",
+        "source": "fixture"
+      },
+      "expected_information_value": 0.0011148315138083322,
+      "raw_metrics": {
+        "kinetic_importance": 0.040690451158404334,
+        "product_relevance": null,
+        "downstream_impact": null,
+        "reliability_gap": 0.07,
+        "novelty": null,
+        "evidence_deficiency": 1,
+        "information_value": 0.0011148315138083322,
+        "cost": 12,
+        "flux": 81.5127701616477,
+        "interface_site_types": 2
+      },
+      "normalized_scores": {
+        "kinetic_importance": 0.08138090231680867,
+        "reliability_gap": 0.7000000000000001,
+        "cost": 0.4
+      },
+      "missing_dimensions": [],
+      "score_bounds": [
+        0.1627323398997831,
+        0.1627323398997831
+      ],
+      "ranking_uncertainty": "Bounds span unknown normalized dimensions at fixed weights; model/weight confidence interval unavailable",
+      "score": 0.1627323398997831,
+      "reasons": [],
+      "rationale": "Acquire electronic_energy for transfer",
+      "weighted_contributions": {
+        "kinetic_importance": 0.0667323398997831,
+        "reliability_gap": 0.05600000000000001,
+        "cost": 0.04000000000000001
+      },
+      "pareto_front": 1
+    }
+  ],
+  "deferred": [
+    {
+      "candidate": {
+        "id": "reuse-transfer-geometry",
+        "reaction_ids": [
+          "transfer"
+        ],
+        "parameter": "transfer",
+        "parameter_type": "transition_state",
+        "species_ids": [
+          "H2-bridge",
+          "H2-top"
+        ],
+        "structures": {
+          "IS": {
+            "id": "fixture-is-transfer",
+            "mock_structure_sha256": "021f037877a1442cc7fd495a4c8e2a796d23c0e85242b94841509fae8c84c88e"
+          },
+          "TS": {
+            "id": "fixture-ts-transfer",
+            "mock_structure_sha256": "9e7f204bfb661319c969152f758ecb50d80b6b6e5fb1f7588d00322e2a9bf1c2"
+          },
+          "FS": {
+            "id": "fixture-fs-transfer",
+            "mock_structure_sha256": "399d3364b81b732be3fe83148d8c6943523733af75484ac06b1f550923796c1a"
+          }
+        },
+        "reaction_family": "diffusion",
+        "phase_ids": [
+          "fcc-Ni",
+          "fcc-Cu"
+        ],
+        "surface_ids": [
+          "facet-Ni",
+          "facet-Cu"
+        ],
+        "interface_id": "junction",
+        "site_context": {
+          "top-Ni": 1,
+          "bridge-Cu": 1
+        },
+        "targets": {
+          "TS": "9e7f204bfb661319c969152f758ecb50d80b6b6e5fb1f7588d00322e2a9bf1c2"
+        },
+        "protocol": "synthetic atomistic refinement vs demo-ref, model-v1",
+        "need": "minimum_geometry",
+        "model_version": "mock-ensemble-v1",
+        "error_metric": "relative_energy_rmse_eV",
+        "scope": {
+          "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+          "dataset_version": "417cf1dc3236175476441c4c4e7b4bd5771bc4a7062aa5e34eff69070483d11b",
+          "baseline_result_sha256": "6c09b2d304b0829e8912baa670fd274425c4e49a0376f4a4e710db981e4692f7",
+          "normalization": {
+            "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+            "reference_basis": "reference_site_pair",
+            "sites_per_reference": {
+              "top-Ni": 1,
+              "bridge-Cu": 1
+            },
+            "source": {
+              "path": "../../../tests/fixtures/multiphase/closed_cycle_reference.json",
+              "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+            }
+          },
+          "temperature_K": 400,
+          "feed_bar": {
+            "H2-g": 1.0,
+            "NO-g": 0.5,
+            "HNO-g": 0.1
+          }
+        },
+        "absolute_net_flux": 81.5127701616477,
+        "cost": {
+          "value": 12,
+          "unit": "core_hour",
+          "source": "fixture"
+        },
+        "parent_run_id": "run",
+        "ticket": {
+          "scope": "synthetic integration fixture",
+          "title": "Verify the Phase 2.5.2 four-step closed cycle in the single-point workflow",
+          "question_id": "3874914af5cb16b38385b930ca5cff658d9093ef5f52ba00a6652a434d30e41c",
+          "ticket_id": "3874914af5cb16b38385b930"
+        },
+        "scope_label": "synthetic_benchmark",
+        "blockers": [],
+        "reaction_structures": {
+          "transfer": {
+            "IS": "fixture-is-transfer",
+            "TS": "fixture-ts-transfer",
+            "FS": "fixture-fs-transfer"
+          }
+        },
+        "information_model": {
+          "loss": "squared_log_observable",
+          "expected_posterior_variance_eV2": 0.0001,
+          "reference": "fixture"
+        }
+      },
+      "status": "reuse",
+      "matching_evidence": [
+        "mock-verified-geometry/transfer"
+      ],
+      "covered_requirements": {
+        "minimum_geometry": [
+          "mock-verified-geometry/transfer"
+        ]
+      },
+      "registry_evidence": {
+        "9e7f204bfb661319c969152f758ecb50d80b6b6e5fb1f7588d00322e2a9bf1c2": []
+      },
+      "related_records": [
+        {
+          "id": "mock-verified-geometry/transfer",
+          "protocol": "synthetic atomistic refinement vs demo-ref, model-v1",
+          "review": "accepted",
+          "targets": {
+            "TS": "9e7f204bfb661319c969152f758ecb50d80b6b6e5fb1f7588d00322e2a9bf1c2"
+          },
+          "need": "minimum_geometry",
+          "source": "fixture"
+        }
+      ],
+      "recommendation": "reuse",
+      "sensitivity": {
+        "parameter": "transfer",
+        "kind": "ts_drc",
+        "observable_kind": "overall_activity",
+        "parameter_type": "transition_state",
+        "scope": {
+          "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+          "dataset_version": "417cf1dc3236175476441c4c4e7b4bd5771bc4a7062aa5e34eff69070483d11b",
+          "baseline_result_sha256": "6c09b2d304b0829e8912baa670fd274425c4e49a0376f4a4e710db981e4692f7",
+          "normalization": {
+            "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+            "reference_basis": "reference_site_pair",
+            "sites_per_reference": {
+              "top-Ni": 1,
+              "bridge-Cu": 1
+            },
+            "source": {
+              "path": "../../../tests/fixtures/multiphase/closed_cycle_reference.json",
+              "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+            }
+          },
+          "temperature_K": 400,
+          "feed_bar": {
+            "H2-g": 1.0,
+            "NO-g": 0.5,
+            "HNO-g": 0.1
+          }
+        },
+        "observable": "positive net overall turnovers per reference site pair per second",
+        "coordinate": "G_over_kBT",
+        "value": 0.040690451158404334,
+        "value_path": [
+          "reactions",
+          "transfer",
+          "drc"
+        ],
+        "source": "batch",
+        "status": "accepted"
+      },
+      "reliability": {
+        "model_version": "mock-ensemble-v1",
+        "source": "fixture",
+        "validation_errors": {
+          "relative_energy_rmse_eV": 0.07,
+          "component_rmse_eV_per_A": null,
+          "barrier_rmse_eV": null,
+          "vector_rmse_eV_per_A": null
+        },
+        "calibration": {
+          "distribution": "normal_eV",
+          "prior_sd_eV": 0.03,
+          "reference": "synthetic Gaussian prior for transfer"
+        },
+        "calibration_status": "calibrated",
+        "ensemble_sd_eV": 0.018,
+        "extrapolation_grade": "mock_interpolation",
+        "coverage": {
+          "training_set": "mock disjoint validation split",
+          "composition": "represented",
+          "phase": "represented",
+          "facet": "represented",
+          "site": "represented",
+          "reaction_coordinate": "partial"
+        },
+        "structural_distance": 0.1,
+        "distance_definition": "mock descriptor distance"
+      },
+      "cost": {
+        "value": 12,
+        "unit": "core_hour",
+        "source": "fixture"
+      },
+      "expected_information_value": 0.0011148315138083322,
+      "raw_metrics": {
+        "kinetic_importance": 0.040690451158404334,
+        "product_relevance": null,
+        "downstream_impact": null,
+        "reliability_gap": 0.07,
+        "novelty": null,
+        "evidence_deficiency": 0,
+        "information_value": 0.0011148315138083322,
+        "cost": 12,
+        "flux": 81.5127701616477,
+        "interface_site_types": 2
+      },
+      "normalized_scores": {
+        "kinetic_importance": 0.08138090231680867,
+        "reliability_gap": 0.7000000000000001,
+        "cost": 0.4
+      },
+      "missing_dimensions": [],
+      "score_bounds": [
+        0.1627323398997831,
+        0.1627323398997831
+      ],
+      "ranking_uncertainty": "Bounds span unknown normalized dimensions at fixed weights; model/weight confidence interval unavailable",
+      "score": null,
+      "reasons": [],
+      "rationale": "Reviewed evidence covers minimum_geometry",
+      "weighted_contributions": {
+        "kinetic_importance": 0.0667323398997831,
+        "reliability_gap": 0.05600000000000001,
+        "cost": 0.04000000000000001
+      }
+    }
+  ]
+}

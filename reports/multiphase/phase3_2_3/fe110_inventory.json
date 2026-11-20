@@ -1,0 +1,180 @@
+{
+  "format": "priority-evidence-inventory/1",
+  "reaction_id": "fe110_ch_co_to_chco_20261109",
+  "status": "blocked",
+  "sources": {
+    "ch_co_registry_mapping_20261119.json": "5d8d7f3a4ebd90b5666bee4215b517f2f520f33e3adc2524c50f8d931e41dfbf",
+    "ch_co_intake_20261119.json": "8c2b7561a9eeaa40ef3bd24d8b6ce69de58e416ef111b5bc4590a5e8d7caf8ef",
+    "phase3_2_2/eligibility.json": "8c487200739b200b19d7207313bf2a84dbb226e6537677cca11ddb6c0af72cc9",
+    "phase2_2_chco_validation.json": "3cb1440526b0e6386294100bbfe9a6e31c8d0c999850571f56ce99b322aa1789"
+  },
+  "registry_barrier_set": "fe110_ch_co_sigma0p20_review_20261118",
+  "structures": {
+    "IS": {
+      "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_cfg0_direct_vasp/CONTCAR",
+      "sha256": "f8bc627180b430b3b64f748c05830a0372bc93a3750780cf7fe6c5eb0601762d"
+    },
+    "TS": {
+      "path": "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/CONTCAR",
+      "sha256": "0157a418cd1fba1be886426361d494ffbdce9a15d1a9132b996a3481ffcc1a6a"
+    },
+    "FS": {
+      "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_extra2_repair_v1/CONTCAR",
+      "sha256": "11dab1631a99f1e444d4c7ab9ca242609e07c912f656874005696e6498f15ab2"
+    }
+  },
+  "registry_exact_matches": {
+    "0157a418cd1fba1be886426361d494ffbdce9a15d1a9132b996a3481ffcc1a6a": [
+      {
+        "calculation_id": "fe110_ch_co_dimer_20261112_job9998592",
+        "module": "transition_state_search",
+        "purpose": "CH+CO C-C coupling Dimer;32MPI/32pernode;reviewed image05 and local04/06 tangent",
+        "role": "reviewed_source_or_frequency_job_provenance",
+        "results": [
+          {
+            "result_id": "fe110_ch_co_dimer_20261112_job9998592_final_toten_sigma0p20_eV",
+            "result_name": "final_toten",
+            "unit": "eV",
+            "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+            "validation_status": "accepted_compatible_final_energy"
+          }
+        ]
+      },
+      {
+        "calculation_id": "fe110_ch_co_dimer_20261112_job9998592",
+        "module": "transition_state_search",
+        "purpose": "CH+CO C-C coupling Dimer;32MPI/32pernode;reviewed image05 and local04/06 tangent",
+        "role": "ts_structure",
+        "results": [
+          {
+            "result_id": "fe110_ch_co_dimer_20261112_job9998592_final_toten_sigma0p20_eV",
+            "result_name": "final_toten",
+            "unit": "eV",
+            "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+            "validation_status": "accepted_compatible_final_energy"
+          }
+        ]
+      }
+    ],
+    "11dab1631a99f1e444d4c7ab9ca242609e07c912f656874005696e6498f15ab2": [
+      {
+        "calculation_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1",
+        "module": "adsorption_workflow",
+        "purpose": "connectivity_specific_adsorption_relaxation",
+        "role": "completion_evidence",
+        "results": [
+          {
+            "result_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_final_max_movable_force",
+            "result_name": "final_max_movable_force",
+            "unit": "eV/angstrom",
+            "reference_convention": "movable_atoms_vector_norm",
+            "validation_status": "reviewed"
+          },
+          {
+            "result_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_final_toten",
+            "result_name": "final_toten",
+            "unit": "eV",
+            "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+            "validation_status": "accepted_compatible_final_energy"
+          }
+        ]
+      }
+    ],
+    "f8bc627180b430b3b64f748c05830a0372bc93a3750780cf7fe6c5eb0601762d": [
+      {
+        "calculation_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp",
+        "module": "adsorption_workflow",
+        "purpose": "connectivity_specific_adsorption_relaxation",
+        "role": "completion_evidence",
+        "results": []
+      },
+      {
+        "calculation_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021",
+        "module": "adsorption_workflow",
+        "purpose": "reviewed_coadsorption_reclassification_of_existing_calculation_not_new_VASP",
+        "role": "completion_evidence",
+        "results": [
+          {
+            "result_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_final_max_movable_force",
+            "result_name": "final_max_movable_force",
+            "unit": "eV/angstrom",
+            "reference_convention": "reviewed_final_geometry_or_movable_force",
+            "validation_status": "reviewed"
+          },
+          {
+            "result_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_final_state_identity",
+            "result_name": "final_state_identity",
+            "unit": null,
+            "reference_convention": "reviewed_final_geometry_or_movable_force",
+            "validation_status": "reviewed"
+          },
+          {
+            "result_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_final_toten",
+            "result_name": "final_toten",
+            "unit": "eV",
+            "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+            "validation_status": "accepted_compatible_final_energy"
+          }
+        ]
+      }
+    ]
+  },
+  "surface": {
+    "material": "fe",
+    "surface": "fe110",
+    "branch": "true_fe110_5layer_5x5x1",
+    "slab_model": "fe45_bottom18_fixed",
+    "slab_layers": 5,
+    "kmesh": [
+      5,
+      5,
+      1
+    ],
+    "xc": "pbe",
+    "encut_ev": 400.0,
+    "ismear": 1,
+    "sigma_ev": 0.2,
+    "coverage": "3x3_one_C2HO"
+  },
+  "thermal_routes": {
+    "IS": null,
+    "TS": "TS.spectrum",
+    "FS": null
+  },
+  "missing": [
+    "Unknown charge balance",
+    "Unknown site balance",
+    "Catalyst phase unconfirmed",
+    "Missing compatible free energies",
+    "Missing kinetic parameters or rate law",
+    "Reversibility unconfirmed",
+    "IS: compatible Gibbs correction missing",
+    "FS: compatible Gibbs correction missing",
+    "Kinetic parameter set with units, standard states, validity range and sources missing",
+    "Rate law, scoped parameter review and applicability not supplied",
+    "Reviewed site occupancies and vacant-site counts required"
+  ],
+  "unresolved_intake": [
+    "FS.corrections",
+    "FS.spectrum",
+    "IS.corrections",
+    "IS.spectrum",
+    "reaction.forward_rate",
+    "reaction.pressure",
+    "reaction.reverse_rate",
+    "reaction.reversible",
+    "reaction.site_mapping",
+    "reaction.standard_state",
+    "reaction.temperature"
+  ],
+  "scientific_importance": null,
+  "model_uncertainty": null,
+  "drc": null,
+  "intermediate_sensitivity": null,
+  "gas_order": null,
+  "free_energy_barriers": null,
+  "rate_constants": null,
+  "score": null,
+  "next_action": "Review IS and FS for compatible thermal corrections or matched frequencies; confirm site inventory and kinetic parameters.",
+  "proposed_native_runs": 0
+}

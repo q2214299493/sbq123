@@ -1,0 +1,105 @@
+{
+  "format": "scientific-calculation-proposal/1",
+  "objective": {
+    "id": "interface",
+    "observable": "positive net overall turnovers per reference site pair per second",
+    "scope": {
+      "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+      "dataset_version": "417cf1dc3236175476441c4c4e7b4bd5771bc4a7062aa5e34eff69070483d11b",
+      "baseline_result_sha256": "6c09b2d304b0829e8912baa670fd274425c4e49a0376f4a4e710db981e4692f7",
+      "normalization": {
+        "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+        "reference_basis": "reference_site_pair",
+        "sites_per_reference": {
+          "top-Ni": 1,
+          "bridge-Cu": 1
+        },
+        "source": {
+          "path": "../../../tests/fixtures/multiphase/closed_cycle_reference.json",
+          "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+        }
+      },
+      "temperature_K": 400,
+      "feed_bar": {
+        "H2-g": 1.0,
+        "NO-g": 0.5,
+        "HNO-g": 0.1
+      }
+    },
+    "scales": {
+      "kinetic_importance": 0.5,
+      "reliability_gap": 0.1,
+      "cost": 8.0,
+      "interface_site_types": 2
+    },
+    "cost_unit": "core_hour",
+    "reliability_metric": "relative_energy_rmse_eV",
+    "kind": "interface_importance",
+    "weights": {
+      "interface_site_types": 0.8,
+      "kinetic_importance": 0.15,
+      "cost": 0.05
+    }
+  },
+  "parent_run_id": "run",
+  "report_sha256": "1ead1348ef65787e43393b0250f643c149513ebbb9f6767aedacc0223a8eaa25",
+  "candidate_id": "transfer",
+  "reaction_ids": [
+    "transfer"
+  ],
+  "scope_label": "synthetic_benchmark",
+  "model_version": "mock-ensemble-v1",
+  "structures": {
+    "IS": {
+      "id": "fixture-is-transfer",
+      "mock_structure_sha256": "021f037877a1442cc7fd495a4c8e2a796d23c0e85242b94841509fae8c84c88e"
+    },
+    "TS": {
+      "id": "fixture-ts-transfer",
+      "mock_structure_sha256": "9e7f204bfb661319c969152f758ecb50d80b6b6e5fb1f7588d00322e2a9bf1c2"
+    },
+    "FS": {
+      "id": "fixture-fs-transfer",
+      "mock_structure_sha256": "399d3364b81b732be3fe83148d8c6943523733af75484ac06b1f550923796c1a"
+    }
+  },
+  "targets": {
+    "TS": "9e7f204bfb661319c969152f758ecb50d80b6b6e5fb1f7588d00322e2a9bf1c2"
+  },
+  "reaction_structures": {
+    "transfer": {
+      "IS": "fixture-is-transfer",
+      "TS": "fixture-ts-transfer",
+      "FS": "fixture-fs-transfer"
+    }
+  },
+  "protocol": "synthetic atomistic refinement vs demo-ref, model-v1",
+  "calculation": "DFT single-point energy",
+  "cost": {
+    "value": 12,
+    "unit": "core_hour",
+    "source": "fixture"
+  },
+  "score": 0.8322071353475213,
+  "evidence_requirements": [
+    "electronic_energy",
+    "Confirm target geometry, compatibility and operation-specific validation with owner"
+  ],
+  "rationale": "Acquire electronic_energy for transfer",
+  "contributions": {
+    "interface_site_types": 0.8,
+    "kinetic_importance": 0.012207135347521299,
+    "cost": 0.020000000000000004
+  },
+  "ticket": {
+    "scope": "synthetic integration fixture",
+    "title": "Verify the Phase 2.5.2 four-step closed cycle in the single-point workflow",
+    "question_id": "3874914af5cb16b38385b930ca5cff658d9093ef5f52ba00a6652a434d30e41c",
+    "ticket_id": "3874914af5cb16b38385b930"
+  },
+  "spc_reference": null,
+  "review_required": true,
+  "runnable": false,
+  "execution_authorized": false,
+  "proposal_id": "f8ab3037216b258c46785dd0b06d48bc4c661853446b75201dd2c260f2d570e1"
+}
