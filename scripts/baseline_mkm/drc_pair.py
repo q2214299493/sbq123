@@ -7,7 +7,7 @@ from time import monotonic
 
 from scripts.artifact_io import load_json_object as read, sha256_file, sha256_json, write_json_exclusive as save
 from scripts.baseline_mkm import analysis, single_point as point
-from scripts.baseline_mkm.ts_perturbation import DELTA_EV, PARENT, REACTION, derivative
+from scripts.baseline_mkm.ts_perturbation import DELTA_EV, HALF_STEP_EV, PARENT, REACTION, derivative
 from scripts.execution_permission import require_bound_action
 from scripts.scientific_validation import finite_number
 
@@ -61,9 +61,9 @@ def baseline(run):
     return receipt, report
 
 
-def expected(base, sign):
+def expected(base, sign, delta_eV=DELTA_EV):
     n, d, c = (read(base / (k + ".json")) for k in ("network", "dataset", "configuration"))
-    child = derivative(n, d, sign)
+    child = derivative(n, d, sign, delta_eV)
     return child, dict(c, dataset_version=child["dataset_version"])
 
 
@@ -75,12 +75,14 @@ def put(path, data):
         save(path, data)
 
 
-def prepare(root, base):
+def prepare(root, base, delta_eV=DELTA_EV):
     parent, _ = baseline(base)
     root.mkdir(parents=True, exist_ok=True)
+    if (root / "pair.json").exists() and read(root / "pair.json")["delta_eV"] != delta_eV:
+        raise ValueError("Pair directory already belongs to a different step size")
     members = {}
     for label, sign in SIGNS:
-        d, c = expected(base, sign)
+        d, c = expected(base, sign, delta_eV)
         name = label + "-" + d["dataset_version"][:16]
         child, config = root / (name + ".json"), root / (name + "-configuration.json")
         put(child, d)
@@ -104,7 +106,7 @@ def prepare(root, base):
         format="drc-pair-plan/1",
         baseline_result_sha256=parent["result_sha256"],
         reaction_id=REACTION,
-        delta_eV=DELTA_EV,
+        delta_eV=delta_eV,
         members=members,
         per_run_timeout_s=point.LIMIT,
         total_budget_s=BUDGET,
@@ -116,10 +118,11 @@ def prepare(root, base):
 
 
 def check_member(root, base, label, sign):
-    child, config = expected(base, sign)
+    pair = read(root / "pair.json")
+    child, config = expected(base, sign, pair["delta_eV"])
     run = root / (label + "-" + child["dataset_version"][:16])
     plan = read(run / "plan.json")
-    member = read(root / "pair.json")["members"][label]
+    member = pair["members"][label]
     if member != {"run_id": run.name, "plan_sha256": sha256_json(plan)}:
         raise ValueError("Changed perturbation plan identity")
     if read(run / "dataset.json") != child or read(run / "configuration.json") != config:
@@ -232,20 +235,23 @@ def main():
         cmd = sub.add_parser(name)
         cmd.add_argument("root", type=Path)
         cmd.add_argument("baseline", type=Path)
+        if name == "prepare":
+            cmd.add_argument("--delta-eV", type=float, choices=(DELTA_EV, HALF_STEP_EV), default=DELTA_EV)
         if name == "execute":
             for label, _ in SIGNS:
                 cmd.add_argument(label + "_approval", type=Path)
         if name == "report":
+            cmd.add_argument("--reference-pair", type=Path)
             cmd.add_argument("output", type=Path)
     a = p.parse_args()
     if a.action == "prepare":
-        print(prepare(a.root.resolve(), a.baseline.resolve()))
+        print(prepare(a.root.resolve(), a.baseline.resolve(), a.delta_eV))
     elif a.action == "execute":
         print(run_pair(a.root.resolve(), a.baseline.resolve(), {"plus": a.plus_approval, "minus": a.minus_approval}))
     else:
         from scripts.baseline_mkm.drc_report import publish
 
-        publish(a.root.resolve(), a.baseline.resolve(), a.output)
+        publish(a.root.resolve(), a.baseline.resolve(), a.output, reference_pair=a.reference_pair)
 
 
 if __name__ == "__main__":

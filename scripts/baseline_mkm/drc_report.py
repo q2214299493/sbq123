@@ -6,9 +6,10 @@ import re
 
 from scripts.artifact_io import load_json_object as read, sha256_file
 from scripts.baseline_mkm.drc_pair import BUDGET, SIGNS, REPORTS, accepted, baseline, check_member, put, verified_finish
+from scripts.baseline_mkm.drc_step_size import comparison_lines, validation
 from scripts.baseline_mkm.results import read_single_point
 from scripts.baseline_mkm.single_point_result import check_close
-from scripts.baseline_mkm.ts_perturbation import DELTA_EV, REACTION, central_difference
+from scripts.baseline_mkm.ts_perturbation import HALF_STEP_EV, REACTION, central_difference
 from scripts.thermochemistry.harmonic import KB
 
 
@@ -95,12 +96,10 @@ def compare(root, base):
         changes[label] = diff
     rates = [case["net_tof_per_site_pair_s"] for case in cases.values()]
     t = a["temperature_K"]
-    value = central_difference(*rates, t, DELTA_EV)
+    delta = pair["delta_eV"]
+    value = central_difference(*rates, t, delta)
     independent = (
-        KB
-        * t
-        * log(cases["minus"]["product_based_tof_per_site_pair_s"] / cases["plus"]["product_based_tof_per_site_pair_s"])
-        / (2 * DELTA_EV)
+        KB * t * log(cases["minus"]["product_based_tof_per_site_pair_s"] / cases["plus"]["product_based_tof_per_site_pair_s"]) / (2 * delta)
     )
     check_close(value, independent, "independent DRC")
     return dict(
@@ -109,7 +108,7 @@ def compare(root, base):
         reaction_id=REACTION,
         temperature_K=t,
         partial_pressures_bar=a["partial_pressures_bar"],
-        delta_eV=DELTA_EV,
+        delta_eV=delta,
         kBT_eV=KB * t,
         convention="-kBT * (ln(net_TOF_plus) - ln(net_TOF_minus)) / (2 * delta_eV), fixed endpoints and prefactors",
         observable="positive net overall turnovers per reference site pair per second",
@@ -136,7 +135,7 @@ def render(result):
         "",
         "The symmetric displacement holds both endpoints, prefactors, pressures and normalization fixed.",
         "",
-        "| Observable | Baseline | +0.01 eV | -0.01 eV |",
+        f"| Observable | Baseline | +{result['delta_eV']:g} eV | -{result['delta_eV']:g} eV |",
         "|---|---:|---:|---:|",
     ]
 
@@ -164,7 +163,11 @@ def render(result):
             f"Independent product-based estimate = {result['independent_product_drc']:.10g}.",
             f"Pair elapsed {result['budget']['elapsed_s']:.2f} s of {BUDGET} s.",
             "",
-            "A finite displacement samples curvature. The local infinitesimal derivative and step-size convergence remain unmeasured.",
+            (
+                "A finite displacement samples curvature; the estimates use a symmetric energy interval."
+                if "step_size_validation" in result
+                else "A finite displacement samples curvature. The local infinitesimal derivative and step-size convergence remain unmeasured."
+            ),
         ]
     )
     if result["outside_zero_to_one"]:
@@ -180,11 +183,21 @@ def render(result):
                 "coverage/flux changes above when interpreting inhibition or amplification.",
             ]
         )
+    if "step_size_validation" in result:
+        lines.extend(comparison_lines(result["step_size_validation"]))
     return "\n".join(lines) + "\n"
 
 
-def publish(root, base, output):
+def publish(root, base, output, *, reference_pair=None):
     result = compare(root, base)
+    if result["delta_eV"] == HALF_STEP_EV:
+        if reference_pair is None:
+            raise ValueError("The convergence report requires the original accepted pair directory")
+        coarse = compare(reference_pair, base)
+        original = REPORTS / "phase3_2_0/result.json"
+        if coarse != read(original):
+            raise ValueError("Reconstructed reference differs from the accepted Phase 3.2.0 result")
+        result["step_size_validation"] = validation(coarse, result, sha256_file(original))
     output.mkdir(exist_ok=True, parents=True)
     put(output / "result.json", result)
     write_once(output / "comparison.md", render(result).encode())

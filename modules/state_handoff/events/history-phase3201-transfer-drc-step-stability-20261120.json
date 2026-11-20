@@ -1,0 +1,224 @@
+{
+  "schema_version": 1,
+  "event_id": "history-phase3201-transfer-drc-step-stability-20261120",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-phase3201-transfer-drc-step-stability-20261120",
+    "module": "baseline_mkm"
+  },
+  "occurred_at": "2026-11-20T08:05:51.012661+00:00",
+  "recorded_at": "2026-11-20T08:05:51.012661+00:00",
+  "summary": "Record accepted transfer TS half-step convergence and the five reproduced historical regression failures.",
+  "payload": {
+    "markdown": "- Phase 3.2.0.1: at 400 K the transfer TS central DRC is 0.04069045116 at +/-0.005 eV versus 0.04113190545 at +/-0.01 eV. The absolute difference 0.0004414543 meets the project tolerance 0.0020345226. Both approved native runs converged within 44.17 s total. Both DRC regression suites passed 609 tests. The clean checkpoint full suite retains five failures independently reproduced on the original release baseline and development tree. See reports/multiphase/phase3_2_0_1/test_report.md and historical_regression_debt.md. Batch DRC remains unqualified."
+  },
+  "evidence": [
+    {
+      "locator": "configs/kinetics/mkm_drc.schema.json",
+      "sha256": "92ce73eb85aca776d13cf40b2fd184984d2cb8db8b1543ce0fa4a456461517b7",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "modules/baseline_mkm/README.md",
+      "sha256": "9301da760f0129776c6beea19e090159af3e555e1a543f19b97f608a52bf2e9e",
+      "authority": "repository_document",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/drc_pair.py",
+      "sha256": "ebdfc6b351ed963d7200b9d90b72b94f55519493115b0a592a2031c495be0a4b",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/drc_report.py",
+      "sha256": "2eeff135c0fe9795e4c6d2ad6721b907e0d3697917eae7c728138c30d7b6e4cf",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/drc_step_size.py",
+      "sha256": "66e90d0d0bad1e47e787bfc1122f143bddf79b2947f61f349141b951c7dfbff2",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "scripts/baseline_mkm/ts_perturbation.py",
+      "sha256": "6a24e2eeb14d792f078a51eb7a8d9c9d9c12a39e72f3e15df2807d62e69cc3b0",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "tests/test_mkm_drc.py",
+      "sha256": "8ef3a776399d65d6dd2ebc8a9ce8ff739379f632e3eccae6ebb73f4d4d67fe6f",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/.gitattributes",
+      "sha256": "da292e303e2eded639c91032ae328bc25209619297dd0abfa562e213404e5370",
+      "authority": "repository_document",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/comparison.md",
+      "sha256": "126002a57d513739932e8d8d7f0777f777b1c53ae0d304715b159231feb72298",
+      "authority": "repository_document",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/completion.md",
+      "sha256": "0423831a311aeeb9487fc6318f13dda625b3e3247883f3c64ce8e3fd43c89d90",
+      "authority": "repository_document",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/historical_regression_debt.md",
+      "sha256": "af0a4d4b85b2c1956207600a17efe7dbf26ba84475e4f671356dd106f183d040",
+      "authority": "repository_document",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/minus/accepted.json",
+      "sha256": "1fe888682b22652c6bba211eeeeb59de82d6b3c238b3b1779e5e4feeba9297cc",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/minus/approval.json",
+      "sha256": "323171953a69ae13341e4d66499d25b67f2510b14f3227a9fca5b63168129389",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/minus/data1.mat",
+      "sha256": "2bc10084be173a22a917f758e600bbdcdf64c8b489d9618425dd275228a7ad85",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/minus/native_log_extract.txt",
+      "sha256": "29370250a4308827a09552832bf5a4ab447bdf30eb4204807515a2f95bb47570",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/minus/user-reply.json",
+      "sha256": "8a22bc6b74ccbefc7c1a13d8908f3ca53a5c71020268eada8a80e964e050fc9f",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/plus/accepted.json",
+      "sha256": "4c19f6f6aeb12f02bdfd26e9064f91d0a9cb1aa873359bab1437f3c0f69a91bf",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/plus/approval.json",
+      "sha256": "2d54a1a0cbc7c75984c7f9efdd5653a58bad4835ccf6b4dc57ad4bb995e572f8",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/plus/data1.mat",
+      "sha256": "53d8c3aa35ecb9686402c69cf064b8e1e4a9448ea2e2fe8dbc582a1d1de9cc98",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/plus/native_log_extract.txt",
+      "sha256": "25aa17b0e4b0004fca267b38fa80b103be3ea6055785cf1014e6864176c29f03",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/plus/user-reply.json",
+      "sha256": "c9e7c7edb5af6a4d662a8b8cf98da4c21e545554a4db1bb14d998c6bf2130cd2",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/regression/archive-location-diagnostic.txt.gz",
+      "sha256": "42b1d5f642560f89968329a67693d01da9552f0530a7c60f093c7b03484d7eeb",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/regression/baseline-debt.txt.gz",
+      "sha256": "dbc8e1e34bbfe4eef317d6b8ba7908c668ea40629897aed1ced060ec38a4ef7f",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/regression/baseline-root-layout.txt.gz",
+      "sha256": "988a96dca401e1e44cb3bd71173421fa81f4ca49d77a861c14e3196baee0b4e2",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/regression/checkpoint-root-layout.txt.gz",
+      "sha256": "d476ff0920a19de70e33c750a155fa464dc84dd9b8dc743b8138368a54dd384d",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/regression/clean-checkpoint-full.txt.gz",
+      "sha256": "d4141b8ecf9cc16bc49314fa8582b42b12176b540f4bc78778acac6357344047",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/regression/development-debt.txt.gz",
+      "sha256": "59095cc74ef8c7018961a05784b7b41556a6d990ff2850ee42269d250e1d0669",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/regression/development-phase-regression.txt.gz",
+      "sha256": "a6c107f614bcf8aa2b444cd14ae490c18c24ec22b0e6bc49ee118a29cf9d84e4",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/regression/release-debt.txt.gz",
+      "sha256": "2c063953a39c06a9cb4890d97e01f5eadd635b265ec27462eaca16f95ad6a61b",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/regression/release-phase-regression.txt.gz",
+      "sha256": "4892646f69f8bcc16d41da2517705dcccb9a898be11133ee88a51407222b2a92",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/regression/release-root-layout.txt.gz",
+      "sha256": "e8cc0e7e919b49aa6730e6bb309ee20ca76a2d8e97f3d93545b8009760c7ca55",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/result.json",
+      "sha256": "363825f3513de03d6aa6e36f2b965965d73596bee7ad0f36088f83f4bba9172b",
+      "authority": "module_validation",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    },
+    {
+      "locator": "reports/multiphase/phase3_2_0_1/test_report.md",
+      "sha256": "4052bac07bd71ea42ac5faa4aa56e14617963ba4de66e026658691d5a01b64cf",
+      "authority": "repository_document",
+      "observed_at": "2026-11-20T08:05:51.012661+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

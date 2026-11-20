@@ -12,6 +12,7 @@ from scripts.thermochemistry.harmonic import KB
 PARENT = "417cf1dc3236175476441c4c4e7b4bd5771bc4a7062aa5e34eff69070483d11b"
 REACTION = "transfer"
 DELTA_EV = 0.01
+HALF_STEP_EV = 0.005
 
 
 def central_difference(baseline, plus, minus, temperature_K, delta_eV):
@@ -22,7 +23,9 @@ def central_difference(baseline, plus, minus, temperature_K, delta_eV):
     return -KB * t * (log(rates[0]) - log(rates[1])) / (2 * step)
 
 
-def derivative(network, parent, sign):
+def derivative(network, parent, sign, delta_eV=DELTA_EV):
+    if delta_eV not in (DELTA_EV, HALF_STEP_EV):
+        raise ValueError("Unsupported transfer TS benchmark step size")
     check_version(network, "network_version")
     validate_export(parent)
     if (
@@ -39,7 +42,7 @@ def derivative(network, parent, sign):
     param = row["parameter_set"]
     before = g.copy()
     for direction in ("forward", "reverse"):
-        g[direction] += sign * DELTA_EV
+        g[direction] += sign * delta_eV
         param[direction]["activation_energy"]["value"] = g[direction]
     rates, equilibrium, shift = calculate(
         dict(entry, energies=row["energies"]), param, row["model"], {s["species_id"]: s for s in network["species"]}
@@ -53,7 +56,7 @@ def derivative(network, parent, sign):
         parent_network_sha256=network["network_version"],
         reaction_id=REACTION,
         sign=sign,
-        delta_eV=DELTA_EV,
+        delta_eV=delta_eV,
         temperature_K=param["temperature_K"],
         parent_gibbs_eV=before,
         derived_gibbs_eV=g.copy(),
@@ -68,5 +71,6 @@ def reproduce(network, dataset):
     models = [r["model"] for r in dataset["reactions"] if r["model"]]
     parent = generate(network, {"network_version": network["network_version"], "models": models})
     if "ts_perturbation" in dataset:
-        return derivative(network, parent, dataset["ts_perturbation"]["sign"])
+        displacement = dataset["ts_perturbation"]
+        return derivative(network, parent, displacement["sign"], displacement["delta_eV"])
     return parent

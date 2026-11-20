@@ -185,7 +185,7 @@ def test_duplicate_plan_or_changed_conditions(parents, tmp_path):
     member.mkdir()
     plan = {"test": "fixture"}
     save(member / "plan.json", plan)
-    save(tmp_path / "pair.json", {"members": {"plus": {"run_id": label, "plan_sha256": sha256_json(plan)}}})
+    save(tmp_path / "pair.json", {"delta_eV": 0.01, "members": {"plus": {"run_id": label, "plan_sha256": sha256_json(plan)}}})
     save(member / "dataset.json", child)
     config["partial_pressure_bar"]["H2-g"] = 2
     save(member / "configuration.json", config)
@@ -218,19 +218,20 @@ def test_launch_timeout_is_bounded(tmp_path, monkeypatch):
 
 
 @pytest.mark.parametrize("label,sign", [("plus", 1), ("minus", -1)])
-def test_offline_raw_native_replay(parents, label, sign, tmp_path):
+@pytest.mark.parametrize("phase,step", [("phase3_2_0", 0.01), ("phase3_2_0_1", 0.005)])
+def test_offline_raw_native_replay(parents, label, sign, phase, step, tmp_path):
     from scripts.baseline_mkm.results import read_single_point
     from scripts.baseline_mkm.single_point_result import validate_result
 
     n, parent = parents
-    output = REPORTS / "phase3_2_0"
+    output = REPORTS / phase
     member = output / label
     receipt = read(member / "accepted.json")
     report = read(output / "result.json")
     case = report["cases"][label]
     assert sha256_file(member / "accepted.json") == case["run_receipt_sha256"]
     assert sha256_file(member / "data1.mat") == receipt["output_hashes"]["runtime/result_phase25/data1.mat"]
-    dataset = derivative(n, parent, sign)
+    dataset = derivative(n, parent, sign, step)
     config = dict(read(BASE / "workflow_configuration.json"), dataset_version=dataset["dataset_version"])
     files, adapter = point.qualify(n, dataset, config)
     assert sha256_file(save(tmp_path / "dataset.json", dataset)) == case["source_hashes"]["dataset"]
@@ -253,10 +254,11 @@ def test_offline_raw_native_replay(parents, label, sign, tmp_path):
     assert receipt["convergence"] == "converged" and receipt["scientific_validity"] == "validated_within_scope"
 
 
-def test_published_contract_and_independent_drc():
+@pytest.mark.parametrize("phase", ["phase3_2_0", "phase3_2_0_1"])
+def test_published_contract_and_independent_drc(phase):
     from jsonschema import Draft202012Validator
 
-    output = REPORTS / "phase3_2_0"
+    output = REPORTS / phase
     report = read(output / "result.json")
     schema = read(REPORTS.parents[1] / "configs/kinetics/mkm_drc.schema.json")
     Draft202012Validator.check_schema(schema)
@@ -312,3 +314,74 @@ def test_out_of_range_diagnostic_retains_signed_result():
     r.update(drc=-1, independent_product_drc=-1, outside_zero_to_one=True)
     text = drc_report.render(r)
     assert "DRC = -1" in text and "One-sided slopes are -1" in text
+
+
+def test_half_step_changes_only_selected_gibbs_barriers_and_rates(parents):
+    n, parent = parents
+    for sign in (1, -1):
+        child = derivative(n, parent, sign, 0.005)
+        assert child == reproduce(n, child)
+        for old, new in zip(parent["reactions"], child["reactions"], strict=True):
+            if old["reaction_id"] != REACTION:
+                assert old == new
+                continue
+            assert new["energies"]["electronic_ev"] == old["energies"]["electronic_ev"]
+            for side in ("forward", "reverse"):
+                assert new["energies"]["gibbs_ev"][side] - old["energies"]["gibbs_ev"][side] == pytest.approx(sign * 0.005)
+                assert new["rates"][side]["prefactor_at_unit_activity_s^-1"] == old["rates"][side]["prefactor_at_unit_activity_s^-1"]
+            assert old["energies"]["gibbs_ev"]["reaction"] == new["energies"]["gibbs_ev"]["reaction"]
+            assert abs(new["equilibrium"]["log_ratio_residual"]) < 1e-12
+    with pytest.raises(ValueError, match="step size"):
+        derivative(n, parent, 1, 0.0025)
+
+
+def step_reports():
+    return [read(REPORTS / phase / "result.json") for phase in ("phase3_2_0", "phase3_2_0_1")]
+
+
+def test_project_step_stability_and_one_sided_signs():
+    from scripts.baseline_mkm.drc_step_size import validation
+
+    coarse, fine = step_reports()
+    v = validation(coarse, fine, sha256_file(REPORTS / "phase3_2_0/result.json"))
+    assert v == fine["step_size_validation"]
+    assert v["passed"] and v["next_pair_proposal"] is None
+    assert v["absolute_difference"] == pytest.approx(0.00044145429)
+    assert v["tolerance"] == pytest.approx(0.00203452256)
+    for label, expected in (("coarse", (0.04712913, 0.03513468)), ("fine", (0.04367290, 0.03770800))):
+        assert (v[label]["positive_side"], v[label]["negative_side"]) == pytest.approx(expected, abs=5e-8)
+
+
+@pytest.mark.parametrize("field", ["baseline", "normalization", "temperature_K", "delta_eV"])
+def test_incompatible_step_comparison_rejected(field):
+    from scripts.baseline_mkm.drc_step_size import validation
+
+    coarse, fine = step_reports()
+    if field == "baseline":
+        fine["cases"]["baseline"]["run_id"] = "unrelated"
+    else:
+        fine[field] = coarse["delta_eV"] if field == "delta_eV" else None
+    with pytest.raises(ValueError):
+        validation(coarse, fine, "a" * 64)
+
+
+def test_failed_step_criterion_only_proposes_quarter_step():
+    from scripts.baseline_mkm.drc_step_size import validation
+
+    coarse, fine = step_reports()
+    b = fine["cases"]["baseline"]["net_tof_per_site_pair_s"]
+    for label in ("plus", "minus"):
+        fine["cases"][label]["net_tof_per_site_pair_s"] = b
+    fine.update(drc=0, independent_product_drc=0)
+    v = validation(coarse, fine, "a" * 64)
+    assert not v["passed"] and v["tolerance"] == 0.002
+    assert v["next_pair_proposal"]["delta_eV"] == 0.0025
+    assert v["next_pair_proposal"]["execution"] == "not_started"
+
+
+def test_existing_pair_rejects_new_step_before_preparation(tmp_path, monkeypatch):
+    save(tmp_path / "pair.json", {"delta_eV": 0.01})
+    monkeypatch.setattr(pair, "baseline", lambda _: ({}, {}))
+    with pytest.raises(ValueError, match="different step size"):
+        pair.prepare(tmp_path, tmp_path, 0.005)
+    assert list(tmp_path.iterdir()) == [tmp_path / "pair.json"]

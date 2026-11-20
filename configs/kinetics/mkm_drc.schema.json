@@ -98,7 +98,10 @@
           ]
         },
         "delta_eV": {
-          "const": 0.01
+          "enum": [
+            0.01,
+            0.005
+          ]
         },
         "temperature_K": {
           "type": "number",
@@ -318,6 +321,56 @@
           }
         }
       }
+    },
+    "step_summary": {
+      "type": "object",
+      "required": [
+        "delta_eV",
+        "central",
+        "positive_side",
+        "negative_side",
+        "changes_from_baseline",
+        "residuals"
+      ],
+      "properties": {
+        "delta_eV": {
+          "enum": [
+            0.01,
+            0.005
+          ]
+        },
+        "central": {
+          "type": "number"
+        },
+        "positive_side": {
+          "type": "number"
+        },
+        "negative_side": {
+          "type": "number"
+        },
+        "changes_from_baseline": {
+          "type": "object",
+          "required": [
+            "plus",
+            "minus"
+          ],
+          "properties": {
+            "plus": {
+              "$ref": "#/$defs/changes"
+            },
+            "minus": {
+              "$ref": "#/$defs/changes"
+            }
+          }
+        },
+        "residuals": {
+          "type": "object",
+          "required": [
+            "plus",
+            "minus"
+          ]
+        }
+      }
     }
   },
   "type": "object",
@@ -364,7 +417,10 @@
       }
     },
     "delta_eV": {
-      "const": 0.01
+      "enum": [
+        0.01,
+        0.005
+      ]
     },
     "kBT_eV": {
       "type": "number",
@@ -543,6 +599,134 @@
           "type": "object"
         }
       }
+    },
+    "step_size_validation": {
+      "type": "object",
+      "required": [
+        "coarse",
+        "fine",
+        "reference_result_sha256",
+        "absolute_difference",
+        "tolerance",
+        "passed",
+        "criterion",
+        "next_pair_proposal"
+      ],
+      "properties": {
+        "coarse": {
+          "$ref": "#/$defs/step_summary"
+        },
+        "fine": {
+          "$ref": "#/$defs/step_summary"
+        },
+        "reference_result_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "absolute_difference": {
+          "type": "number",
+          "minimum": 0
+        },
+        "tolerance": {
+          "type": "number",
+          "minimum": 0.002
+        },
+        "passed": {
+          "type": "boolean"
+        },
+        "criterion": {
+          "type": "string"
+        },
+        "next_pair_proposal": {
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "delta_eV": {
+            "const": 0.01
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "cases": {
+            "properties": {
+              "plus": {
+                "properties": {
+                  "perturbation": {
+                    "properties": {
+                      "delta_eV": {
+                        "const": 0.01
+                      }
+                    }
+                  }
+                }
+              },
+              "minus": {
+                "properties": {
+                  "perturbation": {
+                    "properties": {
+                      "delta_eV": {
+                        "const": 0.01
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "delta_eV": {
+            "const": 0.005
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "cases": {
+            "properties": {
+              "plus": {
+                "properties": {
+                  "perturbation": {
+                    "properties": {
+                      "delta_eV": {
+                        "const": 0.005
+                      }
+                    }
+                  }
+                }
+              },
+              "minus": {
+                "properties": {
+                  "perturbation": {
+                    "properties": {
+                      "delta_eV": {
+                        "const": 0.005
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "step_size_validation"
+        ]
+      }
+    }
+  ]
 }

@@ -201,3 +201,20 @@ This pilot supplies neither a mechanism-wide ranking nor an infinitesimal-step c
 [Signed case data and validation](../../reports/multiphase/phase3_2_0/result.json) |
 [Native comparison](../../reports/multiphase/phase3_2_0/comparison.md) |
 [Result schema](../../configs/kinetics/mkm_drc.schema.json)
+
+### Transfer DRC step-size validation
+
+Prepare the half-step pair in a new directory with `prepare PAIR BASELINE --delta-eV 0.005`.
+Supply the two separately approved plans to the same sequential executor. To reproduce the
+comparison, use `report PAIR BASELINE OUTPUT --reference-pair ORIGINAL_PAIR`. The report
+rechecks both native pairs and their common accepted baseline. Signed one-sided estimates
+use kBT ln(baseline/plus)/delta and kBT ln(minus/baseline)/delta.
+
+| DRC capability | Validated scope | Evidence or boundary |
+| --- | --- | --- |
+| Central and one-sided TS sensitivities | Synthetic transfer reaction at 400 K, fixed pressures and prefactors | Both signed displacements use independent approvals and shift both activation energies. |
+| Step-size stability | 0.01 and 0.005 eV, same positive net turnover per reference site pair | Absolute change 0.0004414543 within project tolerance 0.002034523. |
+| Batch DRC | Single-reaction pilot only | Other transition states and aggregate batch scheduling still require validation. |
+
+[Step-size comparison](../../reports/multiphase/phase3_2_0_1/comparison.md) |
+[Machine-readable evidence](../../reports/multiphase/phase3_2_0_1/result.json)
