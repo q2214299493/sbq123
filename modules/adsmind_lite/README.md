@@ -98,6 +98,9 @@ The molecular reference must be present in the species rule. These are initial
 geometry screens; they do not grade stability or establish an accepted result.
 
 Diversity is checked from actual mapped anchors, independently of motif labels.
+When the request specifies different site classes, use the generator's
+`--require-distinct-site-classes` option. It applies the same configured
+minimum to the realized primary site classes before writing any POSCAR.
 A single unchanged binding atom/site counts once even if molecular azimuth,
 tilt or height changes. Fe(110) resolves each anchor to a canonical site center
 before comparing multiple anchors. Fe45 uses the existing clean-slab,

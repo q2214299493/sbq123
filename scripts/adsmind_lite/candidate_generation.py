@@ -44,6 +44,8 @@ def generate_candidates(
     output_root: Path,
     plan_path: Path,
     backend_mode: str = "no_relax",
+    *,
+    require_distinct_site_classes: bool = False,
 ) -> list[dict[str, Any]]:
     require_ase_structure(surface_path)
     site_payload = read_json(sites_path)
@@ -88,7 +90,9 @@ def generate_candidates(
                 metadata["reviewed_template_subject_sha256"] = evidence["review"]["subject_sha256"]
                 metadata["geometry_origin"] = motif["geometry_origin"]
             pending.append((structure_path, structure, metadata))
-    pending = validate_generated_batch(pending, slab, site_payload, rules)
+    pending = validate_generated_batch(
+        pending, slab, site_payload, rules, require_distinct_site_classes=require_distinct_site_classes,
+    )
     # Resolve every pose/metadata error before publishing the first structure.
     for structure_path, structure, metadata in pending:
         write_poscar(structure_path, structure)

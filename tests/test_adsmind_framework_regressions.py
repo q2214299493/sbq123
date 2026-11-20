@@ -3,11 +3,14 @@ from __future__ import annotations
 from pathlib import Path
 
 import numpy as np
+import pytest
 import yaml
 from ase.io import read as ase_read
 
+from scripts.adsmind_lite import generation_validation as validation
 from scripts.adsmind_lite.core import detect_surface_sites, read_json, validate_candidates
 from scripts.adsmind_lite.relaxed_analysis import connectivity_change, hard_contact_distance, is_hard_contact
+from scripts.adsorption.build_fe110_adsorption import read_poscar
 from tests.test_adsmind_lite import write_geometry_fixtures
 
 
@@ -99,3 +102,40 @@ def test_generated_metadata_records_configuration_identity(tmp_path: Path) -> No
     assert stored["motif_id"] == "H2O_top_a"
     assert stored["configuration_id"] == "orientation_a"
     assert stored["orientation_degrees"] == 30.0
+
+
+def test_distinct_site_classes_are_independent_of_anchor_identity(tmp_path, monkeypatch):
+    slab = read_poscar(SLAB)
+    sites = {"surface_family": "metallic_fe", "surface_name": "Fe110"}
+    rules = {"C3H2O": {}}
+
+    def reviewed_binding(pose, record, slab, rule, sites, analysis, centers):
+        index = record["anchor_index_structure_0based"]
+        site_class = record["planned_site_class"]
+        return None, list(range(45, 51)), {f"C{index}": site_class}, {index: np.zeros(3)}
+
+    monkeypatch.setattr(validation, "binding_geometry", reviewed_binding)
+    monkeypatch.setattr(validation, "validate_one_candidate", lambda *args, **kwargs: "accepted")
+    monkeypatch.setattr(validation, "molecular_geometry", lambda *args: None)
+
+    def candidates(classes):
+        return [(tmp_path / str(index) / "POSCAR", slab, {
+            "candidate_id": f"candidate_{index}",
+            "adsorbate": "C3H2O",
+            "anchor_index_structure_0based": index,
+            "planned_site_class": site_class,
+        }) for index, site_class in enumerate(classes, 45)]
+
+    two_sites = ("short_bridge", "short_bridge", "long_bridge")
+    assert len(validation.validate_generated_batch(candidates(two_sites), slab, sites, rules)) == 3
+
+    with pytest.raises(ValueError, match=r"actual_initial_site_classes 2/3"):
+        validation.validate_generated_batch(
+            candidates(two_sites), slab, sites, rules, require_distinct_site_classes=True,
+        )
+
+    three_sites = ("short_bridge", "long_bridge", "top")
+    generated = validation.validate_generated_batch(
+        candidates(three_sites), slab, sites, rules, require_distinct_site_classes=True,
+    )
+    assert {r["planned_site_class"] for _, _, r in generated} == set(three_sites)

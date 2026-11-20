@@ -1,6 +1,6 @@
 ---
 name: surface-adsorption-builder
-description: Generate and screen reviewable slab-adsorbate starting structures from verified local structures and candidates accepted by the whitelist-first adsorption evidence gate.
+description: Build reviewed slab-adsorbate starting structures when the user asks for new configurations, different adsorption sites, or a missing adsorbed transition-state endpoint. Start with the repository adsorption evidence gate before constructing coordinates or pre-relaxing them with MACE or another model.
 ---
 
 # Surface Adsorption Builder
@@ -20,6 +20,14 @@ do not fall back to a standalone placement algorithm in the global skill.
 - Do not perform an independent literature or web search.
 
 ## Build and Review
+
+Requests to add missing adsorption poses or to find three different sites use
+the AdsMind plan even when the user names a particular pre-relaxation model.
+If the task specifies distinct site classes, pass
+`--require-distinct-site-classes` to the generator. Escalate any verified site
+shortfall before construction or pre-relaxation. Route new work based on
+historical structures through the same plan. Keep test fixtures and archived
+exploratory scripts out of routine scientific intake.
 
 Run the evidence-gated AdsMind plan, generate only its build-ready candidates,
 apply the geometry checks from the owning config, and hand results to the

@@ -44,6 +44,27 @@ force convergence, geometry validity, and scientific validity.
 
 ## Scientific Boundaries
 
+- User instruction (2026-11-20): Treat requests to add adsorption structures,
+  find different adsorption sites, or supply a missing adsorbed TS endpoint as
+  adsorption tasks at intake. Route through `catalysis-data-retrieval` first
+  and the evidence-gated AdsMind planner second. Record the exact connectivity,
+  facet, source-backed sites, and any evidence shortfall before construction.
+  On a whitelist miss, review primary papers before choosing sites. Build only
+  from the reviewed plan, then verify the generated coordinates before any
+  pre-relaxation, including with a user-selected ML model.
+- Use the existing formal adsorption workflow for all new scientific inputs,
+  including work based on historical structures. Keep archive scripts for
+  provenance and reproduction. Use pytest for code verification, and use test
+  fixtures or exploratory runners for a scientific diagnostic only when the
+  user explicitly requests it. Diagnostic outputs cannot enter pre-relaxation,
+  DFT, TS, or registration without the formal workflow's review.
+- When the request calls for three different adsorption **sites**, run
+  `scripts.adsmind_lite.generate_adsorption_candidates` with
+  `--require-distinct-site-classes`. Different anchor atoms at one site class
+  count as one site class for this request. For a TS product, select one
+  endpoint only after DFT convergence, connectivity and duplicate review.
+  Check compatibility with the mapped coadsorbed initial state and the
+  intended reaction event before constructing the TS path.
 - Backend roles and handoffs are authoritative only in
   `configs/execution_backends.yaml`.
 - Use `BUCT(sbq)` / host `MZ73` only for AQCat25 GPU inference, adsorption

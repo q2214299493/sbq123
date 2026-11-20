@@ -22,6 +22,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--adsorbates", required=True, help="Comma-separated adsorbate names.")
     parser.add_argument("--output", type=Path)
     parser.add_argument("--plan", type=Path, help="Evidence-gated candidate plan JSON.")
+    parser.add_argument(
+        "--require-distinct-site-classes", action="store_true",
+        help="Apply the minimum coverage requirement to realized primary site classes.",
+    )
     parser.add_argument("--prepare-missing", action="store_true", help="CO compatibility mode: prepare missing inputs without bypassing review.")
     parser.add_argument("--backend", choices=("no_relax", "ase_mlff_relax", "vasp_low_cost_relax"), default="no_relax")
     parser.add_argument(
@@ -106,7 +110,10 @@ def main() -> None:
     try:
         if args.prepare_missing:
             prepare_missing_inputs(args, names)
-        records = generate_candidates(args.surface, args.sites, names, args.adsorbate_rules, args.output, args.plan, args.backend)
+        records = generate_candidates(
+            args.surface, args.sites, names, args.adsorbate_rules, args.output, args.plan, args.backend,
+            require_distinct_site_classes=args.require_distinct_site_classes,
+        )
     except (ValueError, OSError) as exc:
         raise SystemExit(str(exc)) from None
     failed = sum(not record.get("initial_structure") for record in records)

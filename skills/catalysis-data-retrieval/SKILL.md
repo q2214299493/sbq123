@@ -1,6 +1,6 @@
 ---
 name: catalysis-data-retrieval
-description: Retrieve catalyst structures through a whitelist-first evidence gate. For adsorption motifs only, use authoritative-journal literature fallback after NO_WHITELIST_MATCH. Use before new adsorption, coadsorption, endpoint, NEB, DIMER, frequency, reaction-network, or kinetics inputs.
+description: Find source-backed adsorption sites and structures before construction, including requests for more adsorption configurations or a missing adsorbed transition-state endpoint. Search the whitelist first and review primary journal literature on an adsorption motif miss. Also use before new coadsorption, endpoint, NEB, DIMER, frequency, reaction-network, or kinetics inputs.
 ---
 
 # Catalysis Data Retrieval
@@ -16,6 +16,8 @@ are not the project's authority. If the project root is unknown, establish it
 before applying project-specific retrieval rules.
 
 ## Workflow
+
+Start this workflow when the user asks for “补齐吸附结构”, “三个不同吸附位点”, or a missing adsorbed TS endpoint, even if they only name the ML model for pre-relaxation. Return the reviewed evidence or the explicit shortfall before sending the task to the structure builder.
 
 1. For the whitelist stage, read `skills/catalysis-data-retrieval/references/sources.yaml` and reject records outside its host and path scopes. The controlled journal fallback below has its own evidence gate.
 2. Define an English retrieval query containing material/composition, surface/facet, adsorbate or reaction, state/path type, and calculation stage. Preserve formulas and Miller indices exactly.

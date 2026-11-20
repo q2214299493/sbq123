@@ -102,7 +102,7 @@ def same_binding_mode(first, second, slab, operations, tolerance, *, interchange
     return False
 
 
-def validate_generated_batch(pending, slab, sites, rules):
+def validate_generated_batch(pending, slab, sites, rules, *, require_distinct_site_classes=False):
     """Publish one plausible representative per actual initial binding-site mode."""
     analysis = load_yaml(resource_path("configs/adsmind_lite/analysis_rules.yaml"))
     families = load_yaml(resource_path("configs/adsmind_lite/surfaces.yaml"))["surface_families"]
@@ -148,4 +148,11 @@ def validate_generated_batch(pending, slab, sites, rules):
     for species, representatives in groups.items():
         if len(representatives) < required:
             raise ValueError(f"{species}: actual_initial_site_coverage {len(representatives)}/{required}; no candidates generated")
+        if require_distinct_site_classes:
+            # binding_geometry already verified that each primary anchor realizes this class.
+            realized_classes = {record["planned_site_class"] for _, record in representatives}
+            if len(realized_classes) < required:
+                raise ValueError(
+                    f"{species}: actual_initial_site_classes {len(realized_classes)}/{required}; no candidates generated"
+                )
     return retained

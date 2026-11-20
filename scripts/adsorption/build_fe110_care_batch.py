@@ -19,3 +19,10 @@ def molecular_signature(structure: Poscar) -> list:
         else:
             signature.append([symbol, neighbors.count("H"), sorted(s for s in neighbors if s != "H")])
     return sorted(signature)
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        "The CARE batch entry is retired. Use the evidence-gated AdsMind workflow "
+        "in modules/adsorption_workflow/README.md."
+    )
