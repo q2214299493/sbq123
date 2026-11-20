@@ -1,0 +1,1265 @@
+{
+  "scope": "metallic Fe(110) selected C1-C2 pilot",
+  "registry_sha256": "4da73dbbc09fc697933cb6fa191493f78e0fbddb8863eadc66af082700fbe881",
+  "conditions": {
+    "path": "reports/multiphase/phase3_2_3_2/operating_conditions.json",
+    "sha256": "eb4a052e2576c639505ce6f6aaadddcbcd47ff37d66177e0ebd0b32d08757ca5"
+  },
+  "previous_inventory": {
+    "path": "outputs/c1_c2_mkm_inventory_20261117_v1/inventory.json",
+    "sha256": "b26b8dc9e9709de1f1f03d0fc6e4dacfdcdc33005171b95020fd05792abf46cd"
+  },
+  "reactions": {
+    "R1": {
+      "barrier_set": "fe110_co_dissociation_9558184_9656664_9622455_sigma0p20",
+      "states": {
+        "IS": {
+          "result_id": "fe110_co_dissociation_is_job9558184_final_toten_sigma0p20_ev",
+          "calculation_id": "fe110_ads_co_top_step12a_job9558184",
+          "electronic_eV": -372.01291708,
+          "reference": "fe110_converged_toten_sigma0p20_v1",
+          "energy_review": "accepted_compatible_final_energy",
+          "structure": {
+            "file_id": "fe110_co_dissociation_is_job9558184_contcar",
+            "path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/IS_job9558184/CONTCAR",
+            "sha256": "6ed0dcc7bc57e30bce0eca23a94e6b8823dfc543a6bc943dccffcda531daadbf"
+          },
+          "energy_source": {
+            "file_id": "fe110_co_dissociation_is_job9558184_outcar",
+            "path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/IS_job9558184/OUTCAR",
+            "sha256": "9ca16866cddebb793c7d790c07b55c2017e43b8fe86a7268c8b711a57eb57b94"
+          }
+        },
+        "TS": {
+          "result_id": "fe110_co_dissociation_dimer_job9656664_final_toten_sigma0p20_ev",
+          "calculation_id": "fe110_co_dissociation_dimer_job9656664",
+          "electronic_eV": -370.66270803,
+          "reference": "fe110_converged_toten_sigma0p20_v1",
+          "energy_review": "accepted_compatible_final_energy",
+          "structure": {
+            "file_id": "dimer_job9656664_contcar",
+            "path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/TS_dimer_job9656664/CONTCAR",
+            "sha256": "bc2d62ba76177adaaee688d13e3d10b6305b79b7fe87258bdbc353f494a3e348"
+          },
+          "energy_source": {
+            "file_id": "dimer_job9656664_outcar",
+            "path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/TS_dimer_job9656664/OUTCAR",
+            "sha256": "dc545323bb8de2dd149406fa77f346101c60fee1c9aa0df0e508bbef6e05da82"
+          }
+        },
+        "FS": {
+          "result_id": "fe110_co_dissociation_fs_job9622455_final_toten_sigma0p20_ev",
+          "calculation_id": "fe110_ads_cpluso_hadj_20260714",
+          "electronic_eV": -372.71928137,
+          "reference": "fe110_converged_toten_sigma0p20_v1",
+          "energy_review": "accepted_compatible_final_energy",
+          "structure": {
+            "file_id": "fe110_ads_cpluso_hadj_20260714_contcar",
+            "path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/FS_job9622455/CONTCAR",
+            "sha256": "08ab46f9210e7f2e810eacaa0481c8e1ad3bbf64fc729f21fd66f5ef6ef88d6a"
+          },
+          "energy_source": {
+            "file_id": "fe110_ads_cpluso_hadj_20260714_outcar",
+            "path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/FS_job9622455/OUTCAR",
+            "sha256": "df5025b3118302d5ad6ae4d4cc465aab173f1e3870995ef5a8f6622a2af10462"
+          }
+        }
+      },
+      "energies_eV": {
+        "forward_barrier_ev": 1.3502090500000463,
+        "reverse_barrier_ev": 2.05657334,
+        "reaction_energy_ev": -0.7063642899999536
+      },
+      "ts_grade": "A",
+      "ts_method": "dimer",
+      "review": "fe110_co_dissociation_dimer9656664_mode6_grade_a_20260807",
+      "frequency": {
+        "source": {
+          "file_id": "vfa_job9694935_outcar",
+          "path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806/OUTCAR",
+          "sha256": "c3b12bc0b11dcd225ce162950511aa6e23d2b54169b4d754fa7be661a8959210"
+        },
+        "input_structure": {
+          "path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806/POSCAR",
+          "sha256": "fa1e2224a768f73849847aa5e64d233d816e1b794b1542feabb0f2ab777d69b3"
+        },
+        "maximum_ordered_displacement_A": 1.1585015525339517e-11,
+        "active_atoms_zero_based": [
+          45,
+          46
+        ],
+        "cartesian_flags": [
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "TTT",
+          "TTT"
+        ],
+        "mode_count": 6,
+        "signed_cm_inverse": [
+          659.668045,
+          466.800219,
+          353.097064,
+          327.583714,
+          303.286969,
+          -537.451689
+        ],
+        "imaginary_modes_one_based": [
+          6
+        ],
+        "settings": {
+          "NIONS": "47",
+          "ENCUT": "400.0",
+          "EDIFF": "0.1E-06",
+          "IBRION": "5",
+          "NFREE": "2",
+          "ISYM": "0",
+          "POTIM": "1.500000000000000E-002",
+          "ISMEAR": "1",
+          "SIGMA": "0.10"
+        }
+      },
+      "connectivity": {
+        "geometry_status": "pass",
+        "connects_to_is": null,
+        "connects_to_fs": null,
+        "positive_displacement_file_id": null,
+        "negative_displacement_file_id": null,
+        "connectivity_report_file_id": null
+      },
+      "equation": "CO* + * -> C* + O*",
+      "declared_vacancy_symbols": {
+        "consumed": 1,
+        "released": 0,
+        "scope": "as written; independent site types and counts unconfirmed"
+      },
+      "reviewed_footprints": null,
+      "reviewed_vacancy_stoichiometry": null,
+      "charge_balance": null,
+      "reversible": null,
+      "MLIP": "No MLIP energy used for this Dimer barrier.",
+      "evidence": [
+        {
+          "path": "docs/FE110_CO_DISSOCIATION_HANDOFF_20260807.md",
+          "sha256": "42ada3bd74bff75e9b98934f7ee30303a854ea2bad4992dbc4db5ad15ecdfec9"
+        },
+        {
+          "path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/formal_barrier_manifest.json",
+          "sha256": "9fa49b0b3dffc481154b13d835502e77a3f27e64a4d7d43f9ca3ee0e530753c2"
+        },
+        {
+          "path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/dimer_parent_triad_job9640399_images03_05_20260803/neb_path_quality.json",
+          "sha256": "2253bff7bb1d95ee1bd98265c4404d4870ea09d08c1dce562173d58871709109"
+        },
+        {
+          "path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806/vfa_review.json",
+          "sha256": "8a010d7d368762575105b9c580d5acb7f9bdd98dfb72b7e12ecaa408c6057be3"
+        },
+        {
+          "path": "docs/history/active_fe110_co_dissociation_history_through_20260803.md",
+          "sha256": "aa83733b8bf74c4f503bc4f90343882d6ecf4ad8f37b6a9681111c464f6a6a0b"
+        }
+      ],
+      "scientific_eligibility": "BLOCKED_FOR_MKM",
+      "kinetics": {
+        "forward_G_barrier_eV": null,
+        "reverse_G_barrier_eV": null,
+        "reaction_G_eV": null,
+        "forward_rate": null,
+        "reverse_rate": null,
+        "pressure_orders": null,
+        "surface_activity_terms": null,
+        "prefactors": null,
+        "detailed_balance_residual": null
+      },
+      "thermochemistry": {
+        "IS": null,
+        "TS": null,
+        "FS": null,
+        "temperature_K": 523,
+        "endpoint_thermal_basis_confirmed": null,
+        "scale": null
+      }
+    },
+    "R2": {
+      "barrier_set": "fe110_c_h_to_ch_9715450_9720181_9573951_sigma0p20",
+      "states": {
+        "IS": {
+          "result_id": "result_fe110_ads_c_h_coads_9715450_final_toten",
+          "calculation_id": "fe110_ads_c_h_coads_9715450",
+          "electronic_eV": -368.60093793,
+          "reference": "fe110_converged_toten_sigma0p20_v1",
+          "energy_review": "accepted_compatible_final_energy",
+          "structure": {
+            "file_id": "file_fe110_ads_c_h_coads_9715450_CONTCAR_checkpoint_20260818",
+            "path": "calculations/fe110_c_h_coadsorption_20260817/results/A_adjacent_hollow_reactive/CONTCAR",
+            "sha256": "121ace35043c79f968ecd14ef2a100b2531c4904b8671e71bf506751f06c5396"
+          },
+          "energy_source": {
+            "file_id": "file_fe110_ads_c_h_coads_9715450_OUTCAR_checkpoint_20260818",
+            "path": "calculations/fe110_c_h_coadsorption_20260817/results/A_adjacent_hollow_reactive/OUTCAR",
+            "sha256": "042b18bcbdf242dd4fa8f98d23cd81f656f557e369182ca7593743565d1aa0cf"
+          }
+        },
+        "TS": {
+          "result_id": "fe110_c_h_to_ch_dimer_job9720181_final_toten_sigma0p20_eV",
+          "calculation_id": "fe110_c_h_to_ch_dimer_9720181",
+          "electronic_eV": -367.71324606,
+          "reference": "fe110_converged_toten_sigma0p20_v1",
+          "energy_review": "accepted_compatible_final_energy",
+          "structure": {
+            "file_id": "fe110_c_h_to_ch_dimer_9720181-CONTCAR-done",
+            "path": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/CONTCAR",
+            "sha256": "8fd9cb6818e11d851a39f723c53e52dfe3a3bfe8e32a164a5b03b3b0c7b6d364"
+          },
+          "energy_source": {
+            "file_id": "fe110_c_h_to_ch_dimer_9720181-OUTCAR-done",
+            "path": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/OUTCAR",
+            "sha256": "1823bddcdcc36bd115350be8bf732086c9ae9f4bd9f187b212d2831819aaa79a"
+          }
+        },
+        "FS": {
+          "result_id": "fe110_c_h_to_ch_fs_job9573951_final_toten_sigma0p20_eV",
+          "calculation_id": "fe110_ads_9573951",
+          "electronic_eV": -368.45471297,
+          "reference": "fe110_converged_toten_sigma0p20_v1",
+          "energy_review": "accepted_compatible_final_energy",
+          "structure": {
+            "file_id": "fe110_c_h_to_ch_fs_job9573951-endpoint-structure",
+            "path": "calculations/fe110_c_h_to_ch_ts_20260818/endpoints/FS_CH_long_bridge_job9573951/POSCAR",
+            "sha256": "ffeccf7353ea82d8b5c5d3e13762a3e34fcae41ec7b1f0ff7adbae5b2bf9e4a5"
+          },
+          "energy_source": {
+            "file_id": "fe110_c_h_to_ch_fs_job9573951-OUTCAR-sigma0p20-bound",
+            "path": "calculations/fe110_c_h_to_ch_ts_20260818/endpoints/FS_CH_long_bridge_job9573951/OUTCAR",
+            "sha256": "d3b03c16d2f5eb43c5225189d35d150c735fd9f4815b34f5556ae8fff60601c1"
+          }
+        }
+      },
+      "energies_eV": {
+        "forward_barrier_ev": 0.8876918699999692,
+        "reverse_barrier_ev": 0.7414669099999855,
+        "reaction_energy_ev": 0.14622495999998364
+      },
+      "ts_grade": "A",
+      "ts_method": "dimer",
+      "review": "fe110_c_h_to_ch_dimer9720181_mode21_grade_a_20260822",
+      "frequency": {
+        "source": {
+          "file_id": "fe110_c_h_to_ch_vfa_9721851-OUTCAR-done",
+          "path": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/OUTCAR",
+          "sha256": "c9ed60495487c58e50789fe46f2f05cd3eb0a110148d6f484db58751cfc92e11"
+        },
+        "input_structure": {
+          "path": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/POSCAR",
+          "sha256": "98fc8738e261facb192ccbe201dad7157918744586b23e221a12fe556e4afc11"
+        },
+        "maximum_ordered_displacement_A": 1.10084207063187e-11,
+        "active_atoms_zero_based": [
+          32,
+          37,
+          41,
+          43,
+          44,
+          45,
+          46
+        ],
+        "cartesian_flags": [
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "TTT",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "TTT",
+          "FFF",
+          "FFF",
+          "FFF",
+          "TTT",
+          "FFF",
+          "TTT",
+          "TTT",
+          "TTT",
+          "TTT"
+        ],
+        "mode_count": 21,
+        "signed_cm_inverse": [
+          1389.100855,
+          818.922519,
+          685.06951,
+          501.009558,
+          452.904712,
+          245.944405,
+          243.140165,
+          230.033672,
+          226.893077,
+          225.02346,
+          222.285431,
+          206.705049,
+          179.483009,
+          165.858178,
+          161.846532,
+          156.615,
+          152.868207,
+          149.049605,
+          144.716945,
+          143.30016,
+          -842.194583
+        ],
+        "imaginary_modes_one_based": [
+          21
+        ],
+        "settings": {
+          "NIONS": "47",
+          "ENCUT": "400.0",
+          "EDIFF": "0.1E-06",
+          "IBRION": "5",
+          "NFREE": "2",
+          "ISYM": "0",
+          "POTIM": "1.500000000000000E-002",
+          "ISMEAR": "1",
+          "SIGMA": "0.10"
+        }
+      },
+      "connectivity": {
+        "geometry_status": "pass",
+        "connects_to_is": null,
+        "connects_to_fs": null,
+        "positive_displacement_file_id": null,
+        "negative_displacement_file_id": null,
+        "connectivity_report_file_id": null
+      },
+      "equation": "C* + H* -> CH* + *",
+      "declared_vacancy_symbols": {
+        "consumed": 0,
+        "released": 1,
+        "scope": "as written; independent site types and counts unconfirmed"
+      },
+      "reviewed_footprints": null,
+      "reviewed_vacancy_stoichiometry": null,
+      "charge_balance": null,
+      "reversible": null,
+      "MLIP": "Local AQCat force calibration reviewed on its C-H domain. DFT geometry selects A; C remains the separation reference.",
+      "evidence": [
+        {
+          "path": "calculations/fe110_c_h_coadsorption_20260817/provenance/termination_and_endpoint_review_20260818.json",
+          "sha256": "d79bc4cf6190307c726bb6c961a49ec622ec1963e8b65ef823e368ac19c81261"
+        },
+        {
+          "path": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/diagnostics/formal_barrier_sigma0p20_20260822/formal_barrier_manifest.json",
+          "sha256": "15d3822f1e75fb8657addb95a72095d1765c71b970975267eba76c1dd896bb6e"
+        },
+        {
+          "path": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/active_learning_sigma0p20/ts_domain_calibration_review.json",
+          "sha256": "9369f91909668d70c18636e3e64e401a51525046a30e46972f2dc0c923bb741e"
+        }
+      ],
+      "scientific_eligibility": "BLOCKED_FOR_MKM",
+      "kinetics": {
+        "forward_G_barrier_eV": null,
+        "reverse_G_barrier_eV": null,
+        "reaction_G_eV": null,
+        "forward_rate": null,
+        "reverse_rate": null,
+        "pressure_orders": null,
+        "surface_activity_terms": null,
+        "prefactors": null,
+        "detailed_balance_residual": null
+      },
+      "thermochemistry": {
+        "IS": null,
+        "TS": null,
+        "FS": null,
+        "temperature_K": 523,
+        "endpoint_thermal_basis_confirmed": null,
+        "scale": null
+      },
+      "terminal_structure_check": {
+        "original_review_product": {
+          "path": "calculations/fe110_c_h_coadsorption_20260817/sources/CH_long_bridge_representative_job9573951_CONTCAR",
+          "sha256": "ffeccf7353ea82d8b5c5d3e13762a3e34fcae41ec7b1f0ff7adbae5b2bf9e4a5"
+        },
+        "max_ordered_periodic_deviation_vs_last_OUTCAR_position_A": 7.875437165970396e-06,
+        "reviewed_selection": {
+          "A_minus_C_TOTEN_eV": -0.00114342,
+          "duplicate_verdict": "DISTINCT_RELATIVE_SEPARATION_MOTIFS",
+          "energy_interpretation": "Near-degenerate; energy alone does not distinguish the reactive IS. Geometry selects A for the direct hydrogenation path.",
+          "selected_primary_IS": "A/job9715450",
+          "retained_reference": "C/job9715455",
+          "ts_readiness": "STRUCTURALLY_READY_FOR_REVIEWED_PATH_CONSTRUCTION_ONLY",
+          "ts_path_requirement": "Use the accepted A CONTCAR and compatible CH long-bridge product with identical Fe45,C,H mapping; construct a chemically guided path with a C-H-forming waypoint and review periodic branches before any NEB submission."
+        }
+      }
+    },
+    "R3": {
+      "barrier_set": "fe110_ch_co_sigma0p20_review_20261118",
+      "states": {
+        "IS": {
+          "result_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_final_toten",
+          "calculation_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021",
+          "electronic_eV": -385.14767079,
+          "reference": "fe110_converged_toten_sigma0p20_v1",
+          "energy_review": "accepted_compatible_final_energy",
+          "structure": {
+            "file_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_CONTCAR",
+            "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_cfg0_direct_vasp/CONTCAR",
+            "sha256": "f8bc627180b430b3b64f748c05830a0372bc93a3750780cf7fe6c5eb0601762d"
+          },
+          "energy_source": {
+            "file_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_OUTCAR",
+            "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_cfg0_direct_vasp/OUTCAR",
+            "sha256": "e3f5ad8b0aa2a9afc6749785e5dc872d64b6de4165169578510c7a0c5d167d78"
+          }
+        },
+        "TS": {
+          "result_id": "fe110_ch_co_dimer_20261112_job9998592_final_toten_sigma0p20_eV",
+          "calculation_id": "fe110_ch_co_dimer_20261112_job9998592",
+          "electronic_eV": -384.17406905,
+          "reference": "fe110_converged_toten_sigma0p20_v1",
+          "energy_review": "accepted_compatible_final_energy",
+          "structure": {
+            "file_id": "fe110_ch_co_dimer_20261112_job9998592__vfa20261115_010",
+            "path": "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/CONTCAR",
+            "sha256": "0157a418cd1fba1be886426361d494ffbdce9a15d1a9132b996a3481ffcc1a6a"
+          },
+          "energy_source": {
+            "file_id": "fe110_ch_co_dimer_20261112_job9998592__vfa20261115_011",
+            "path": "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/OUTCAR",
+            "sha256": "391f84167e6372dcaf770ed1efa471d1abba6d4640803876899b120ac797dd02"
+          }
+        },
+        "FS": {
+          "result_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_final_toten",
+          "calculation_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1",
+          "electronic_eV": -384.48836276,
+          "reference": "fe110_converged_toten_sigma0p20_v1",
+          "energy_review": "accepted_compatible_final_energy",
+          "structure": {
+            "file_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_CONTCAR",
+            "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_extra2_repair_v1/CONTCAR",
+            "sha256": "11dab1631a99f1e444d4c7ab9ca242609e07c912f656874005696e6498f15ab2"
+          },
+          "energy_source": {
+            "file_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_OUTCAR",
+            "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_extra2_repair_v1/OUTCAR",
+            "sha256": "e88d99ab9ba74274fd8af45e4e69b9f59feb90bbe1101f7e794c1c317bb82edc"
+          }
+        }
+      },
+      "energies_eV": {
+        "forward_barrier_ev": 0.9736017399999923,
+        "reverse_barrier_ev": 0.31429370999995854,
+        "reaction_energy_ev": 0.6593080300000338
+      },
+      "ts_grade": "A",
+      "ts_method": "dimer",
+      "review": "fe110_ch_co_dimer9998592_vfa2260_grade_a_20261115",
+      "frequency": {
+        "source": {
+          "file_id": "chco_vfa2260_formal_20261115_OUTCAR",
+          "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/OUTCAR",
+          "sha256": "d707a332f1af5d0835e1935d351d9a28b011bd4672e4de3b00833fb93f62f9a9"
+        },
+        "input_structure": {
+          "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/POSCAR",
+          "sha256": "c1b035d47a15cf8211d23dd25d4216a46c82a33b3b5c0957b03b86e7a49ade8d"
+        },
+        "maximum_ordered_displacement_A": 1.1852677683399598e-11,
+        "active_atoms_zero_based": [
+          45,
+          46,
+          47,
+          48
+        ],
+        "cartesian_flags": [
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "FFF",
+          "TTT",
+          "TTT",
+          "TTT",
+          "TTT"
+        ],
+        "mode_count": 12,
+        "signed_cm_inverse": [
+          3012.556969,
+          1562.135791,
+          909.495523,
+          693.170928,
+          563.698151,
+          468.200164,
+          355.601179,
+          248.117609,
+          219.859855,
+          143.010697,
+          116.365467,
+          -318.644011
+        ],
+        "imaginary_modes_one_based": [
+          12
+        ],
+        "settings": {
+          "NIONS": "49",
+          "ENCUT": "400.0",
+          "EDIFF": "0.1E-06",
+          "IBRION": "5",
+          "NFREE": "2",
+          "ISYM": "0",
+          "POTIM": "1.500000000000000E-002",
+          "ISMEAR": "1",
+          "SIGMA": "0.10"
+        }
+      },
+      "connectivity": {
+        "geometry_status": "pass",
+        "connects_to_is": null,
+        "connects_to_fs": null,
+        "positive_displacement_file_id": null,
+        "negative_displacement_file_id": null,
+        "connectivity_report_file_id": null
+      },
+      "equation": "CH* + CO* -> CHCO*",
+      "declared_vacancy_symbols": {
+        "consumed": 0,
+        "released": 0,
+        "scope": "as written; independent site types and counts unconfirmed"
+      },
+      "reviewed_footprints": null,
+      "reviewed_vacancy_stoichiometry": null,
+      "charge_balance": null,
+      "reversible": null,
+      "MLIP": "Reviewed ML-assisted path and local DFT triplet informed the Dimer seed.",
+      "evidence": [
+        {
+          "path": "reports/multiphase/phase3_2_3_1/endpoint_evidence.json",
+          "sha256": "baebd879673299b6bb15896466700db08247c47c19212a9e3a1e34207e789ab3"
+        },
+        {
+          "path": "reports/multiphase/phase3_2_3_2/thermochemistry_reference.json",
+          "sha256": "3d0e2a8988686223e1564457622fd309b04f22eaa129353ce5c5ce14947e8e59"
+        },
+        {
+          "path": "calculations/fe110_ch_co_to_chco_ts_20261109/local_triplet_review_20261112_v1/path/path_review.json",
+          "sha256": "cde040b17894f4306eb5b9d736228d32174792400ad96817d2222a3eb9fdbd7d"
+        }
+      ],
+      "scientific_eligibility": "BLOCKED_FOR_MKM",
+      "kinetics": {
+        "forward_G_barrier_eV": null,
+        "reverse_G_barrier_eV": null,
+        "reaction_G_eV": null,
+        "forward_rate": null,
+        "reverse_rate": null,
+        "pressure_orders": null,
+        "surface_activity_terms": null,
+        "prefactors": null,
+        "detailed_balance_residual": null
+      },
+      "thermochemistry": {
+        "IS": null,
+        "TS": {
+          "zpe_ev": 0.5140516496724512,
+          "thermal_enthalpy_ev": 0.23455413109363132,
+          "entropy_ev_per_k": 0.0008969835053748137,
+          "gibbs_correction_ev": 0.27948340745505496
+        },
+        "FS": null,
+        "temperature_K": 523,
+        "endpoint_thermal_basis_confirmed": null,
+        "scale": null,
+        "TS_scale": 1.0,
+        "thermal_scope": "Fe110-C45-C46-O47-H48-local-harmonic"
+      }
+    },
+    "R4": {
+      "states": {
+        "IS": {
+          "result_id": "result_fe110_ads_c2ho_h_c2h2o_9725473_final_toten",
+          "calculation_id": "fe110_ads_c2ho_h_c2h2o_9725473",
+          "electronic_eV": -388.48862614,
+          "reference": "fe110_converged_toten_sigma0p20_v1",
+          "energy_review": "accepted_compatible_final_energy",
+          "structure": {
+            "file_id": "file_fe110_ads_c2ho_h_c2h2o_9725473_CONTCAR_final",
+            "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_nonduplicate_relaxations/IS_A_C2HO_H_adjacent_long_bridge/CONTCAR",
+            "sha256": "6800e98e36e32c09bc7c2514f52998e641416dca4d3b62a4aa0acc95ad50a2ed"
+          },
+          "energy_source": {
+            "file_id": "file_fe110_ads_c2ho_h_c2h2o_9725473_OUTCAR_final",
+            "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_nonduplicate_relaxations/IS_A_C2HO_H_adjacent_long_bridge/OUTCAR",
+            "sha256": "5bf9f758eeedb99fcc48df6a0ae0e42e2328345ebcc8e5b67166531f381c31bf"
+          }
+        },
+        "TS": null,
+        "FS": {
+          "result_id": "result_fe110_ads_c2ho_h_c2h2o_9725471_final_toten",
+          "calculation_id": "fe110_ads_c2ho_h_c2h2o_9725471",
+          "electronic_eV": -388.04695175,
+          "reference": "fe110_converged_toten_sigma0p20_v1",
+          "energy_review": "accepted_compatible_final_energy",
+          "structure": {
+            "file_id": "file_fe110_ads_c2ho_h_c2h2o_9725471_CONTCAR_final",
+            "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_nonduplicate_relaxations/FS_A_C2H2O_eta3_C1_C2_O_CARE03/CONTCAR",
+            "sha256": "525ebe73dfbbb231b5c1bf37a6bc691a1a0913f403afa3d8ea7c9d0d90296878"
+          },
+          "energy_source": {
+            "file_id": "file_fe110_ads_c2ho_h_c2h2o_9725471_OUTCAR_final",
+            "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_nonduplicate_relaxations/FS_A_C2H2O_eta3_C1_C2_O_CARE03/OUTCAR",
+            "sha256": "51c3758bd775c85569a4cd7d59586ca5e0a2958ed24de67abe7e8d067a6dcc30"
+          }
+        }
+      },
+      "ts_grade": null,
+      "barrier_set": null,
+      "energies_eV": {
+        "forward_barrier_ev": null,
+        "reverse_barrier_ev": null,
+        "reaction_energy_ev": 0.44167439
+      },
+      "energy_scope": "Endpoint difference on the matched reactive IS-A and FS-A branch. No single accepted overall elementary saddle.",
+      "endpoint_contract": {
+        "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/contract/reaction.yaml",
+        "sha256": "ba5ba361bc959237516947f0d2af1ed16befb98052fd6408ea2d8bd0b17d8773"
+      },
+      "five_vasp_endpoints": [
+        {
+          "motif": "FS_A_C2H2O_eta3_C1_C2_O_CARE03",
+          "job": "9725471",
+          "result_id": "result_fe110_ads_c2ho_h_c2h2o_9725471_final_toten",
+          "calculation_id": "fe110_ads_c2ho_h_c2h2o_9725471",
+          "electronic_eV": -388.04695175,
+          "reference": "fe110_converged_toten_sigma0p20_v1",
+          "energy_review": "accepted_compatible_final_energy",
+          "structure": {
+            "file_id": "file_fe110_ads_c2ho_h_c2h2o_9725471_CONTCAR_final",
+            "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_nonduplicate_relaxations/FS_A_C2H2O_eta3_C1_C2_O_CARE03/CONTCAR",
+            "sha256": "525ebe73dfbbb231b5c1bf37a6bc691a1a0913f403afa3d8ea7c9d0d90296878"
+          },
+          "energy_source": {
+            "file_id": "file_fe110_ads_c2ho_h_c2h2o_9725471_OUTCAR_final",
+            "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_nonduplicate_relaxations/FS_A_C2H2O_eta3_C1_C2_O_CARE03/OUTCAR",
+            "sha256": "51c3758bd775c85569a4cd7d59586ca5e0a2958ed24de67abe7e8d067a6dcc30"
+          }
+        },
+        {
+          "motif": "FS_C_C2H2O_kappa_C1_tilted",
+          "job": "9725472",
+          "result_id": "result_fe110_ads_c2ho_h_c2h2o_9725472_final_toten",
+          "calculation_id": "fe110_ads_c2ho_h_c2h2o_9725472",
+          "electronic_eV": -387.92882863,
+          "reference": "fe110_converged_toten_sigma0p20_v1",
+          "energy_review": "accepted_compatible_final_energy",
+          "structure": {
+            "file_id": "file_fe110_ads_c2ho_h_c2h2o_9725472_CONTCAR_final",
+            "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_nonduplicate_relaxations/FS_C_C2H2O_kappa_C1_tilted/CONTCAR",
+            "sha256": "a1e312c0be5a7bf2a75eff5eca52b16da44e9bb32b6c7522c58a10f8bfdfde5f"
+          },
+          "energy_source": {
+            "file_id": "file_fe110_ads_c2ho_h_c2h2o_9725472_OUTCAR_final",
+            "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_nonduplicate_relaxations/FS_C_C2H2O_kappa_C1_tilted/OUTCAR",
+            "sha256": "db5b2c1edcab8c152514d939a930244bc953b5346f6fc6ef69a7c2bbf64fdf47"
+          }
+        },
+        {
+          "motif": "IS_A_C2HO_H_adjacent_long_bridge",
+          "job": "9725473",
+          "result_id": "result_fe110_ads_c2ho_h_c2h2o_9725473_final_toten",
+          "calculation_id": "fe110_ads_c2ho_h_c2h2o_9725473",
+          "electronic_eV": -388.48862614,
+          "reference": "fe110_converged_toten_sigma0p20_v1",
+          "energy_review": "accepted_compatible_final_energy",
+          "structure": {
+            "file_id": "file_fe110_ads_c2ho_h_c2h2o_9725473_CONTCAR_final",
+            "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_nonduplicate_relaxations/IS_A_C2HO_H_adjacent_long_bridge/CONTCAR",
+            "sha256": "6800e98e36e32c09bc7c2514f52998e641416dca4d3b62a4aa0acc95ad50a2ed"
+          },
+          "energy_source": {
+            "file_id": "file_fe110_ads_c2ho_h_c2h2o_9725473_OUTCAR_final",
+            "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_nonduplicate_relaxations/IS_A_C2HO_H_adjacent_long_bridge/OUTCAR",
+            "sha256": "5bf9f758eeedb99fcc48df6a0ae0e42e2328345ebcc8e5b67166531f381c31bf"
+          }
+        },
+        {
+          "motif": "IS_B_C2HO_H_adjacent_hollow",
+          "job": "9725474",
+          "result_id": "result_fe110_ads_c2ho_h_c2h2o_9725474_final_toten",
+          "calculation_id": "fe110_ads_c2ho_h_c2h2o_9725474",
+          "electronic_eV": -388.51959629,
+          "reference": "fe110_converged_toten_sigma0p20_v1",
+          "energy_review": "accepted_compatible_final_energy",
+          "structure": {
+            "file_id": "file_fe110_ads_c2ho_h_c2h2o_9725474_CONTCAR_final",
+            "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_nonduplicate_relaxations/IS_B_C2HO_H_adjacent_hollow/CONTCAR",
+            "sha256": "62f0a8deb118a573b4bcd4bd94475006870a207f1bb7bf96d836c84f80ce9656"
+          },
+          "energy_source": {
+            "file_id": "file_fe110_ads_c2ho_h_c2h2o_9725474_OUTCAR_final",
+            "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_nonduplicate_relaxations/IS_B_C2HO_H_adjacent_hollow/OUTCAR",
+            "sha256": "3afd875f146115996ecf8c9bb4b8a5baf03a756b3fda18f33156e41039cf9339"
+          }
+        },
+        {
+          "motif": "IS_C_C2HO_H_far_long_bridge",
+          "job": "9725475",
+          "result_id": "result_fe110_ads_c2ho_h_c2h2o_9725475_final_toten",
+          "calculation_id": "fe110_ads_c2ho_h_c2h2o_9725475",
+          "electronic_eV": -388.42934597,
+          "reference": "fe110_converged_toten_sigma0p20_v1",
+          "energy_review": "accepted_compatible_final_energy",
+          "structure": {
+            "file_id": "file_fe110_ads_c2ho_h_c2h2o_9725475_CONTCAR_final",
+            "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_nonduplicate_relaxations/IS_C_C2HO_H_far_long_bridge/CONTCAR",
+            "sha256": "b99de28699b489a778df8fddac3b9a9e8cf0270dc8a07601721cd472a90bd393"
+          },
+          "energy_source": {
+            "file_id": "file_fe110_ads_c2ho_h_c2h2o_9725475_OUTCAR_final",
+            "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_nonduplicate_relaxations/IS_C_C2HO_H_far_long_bridge/OUTCAR",
+            "sha256": "14c30745d535864d988c8f8b00bad76177e74112b7f64642d6c66997797aebd3"
+          }
+        }
+      ],
+      "endpoint_review": {
+        "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/provenance/vasp_nonduplicate_result_review.json",
+        "sha256": "5ca40b88c9d7b031305ad5a752bf6dc30b5e69f7e55e70358317112b7088963a"
+      },
+      "ranking": {
+        "IS": [
+          "IS_B_C2HO_H_adjacent_hollow",
+          "IS_A_C2HO_H_adjacent_long_bridge",
+          "IS_C_C2HO_H_far_long_bridge"
+        ],
+        "FS": [
+          "FS_A_C2H2O_eta3_C1_C2_O_CARE03",
+          "FS_C_C2H2O_kappa_C1_tilted"
+        ]
+      },
+      "segments": {
+        "IS_A_to_INT06": {
+          "calculation": "fe110_is_a_int06_dimer_9833429",
+          "status": "needs_review",
+          "candidate_structure": {
+            "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/CONTCAR",
+            "sha256": "1797b34dbce3c5c9374595dfb3590cdc32f22a240e321f59cde572be3b770b34"
+          },
+          "max_force_eV_per_A": 0.015998,
+          "review": {
+            "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/final_mode_review.json",
+            "sha256": "7ae4cb0071fcf76b951a895805c90b495ae99ec289b9dc96e46b15d04d7d2e1c"
+          },
+          "grade": null,
+          "barriers_eV": null
+        },
+        "INT06_to_MID": {
+          "barrier_set": "fe110_int06_mid_sigma0p20_review_20261118",
+          "states": {
+            "IS": {
+              "result_id": "fe110_h_migration1357_valley06_relax_9748648_final_toten",
+              "calculation_id": "fe110_h_migration1357_valley06_relax_9748648",
+              "electronic_eV": -388.50564344,
+              "reference": "fe110_converged_toten_sigma0p20_v1",
+              "energy_review": "accepted_compatible_final_energy",
+              "structure": {
+                "file_id": "fe110_h_migration1357_valley06_relax_9748648_CONTCAR_final",
+                "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration1357_valley06_relax_20260909/completed_review_20260910/CONTCAR",
+                "sha256": "2b53dedc909c678c2e8f7f1e4fc9643c6f87e78e26c8a818b8d9c8dfa7c73029"
+              },
+              "energy_source": {
+                "file_id": "fe110_h_migration1357_valley06_relax_9748648_OUTCAR_final",
+                "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration1357_valley06_relax_20260909/completed_review_20260910/OUTCAR",
+                "sha256": "4e4b20745948681bcc9bc1e3057d2b95e64a2bb2fc0d30b65d68d1450853ce2c"
+              }
+            },
+            "TS": {
+              "result_id": "fe110_int06_mid_ci_neb_9796856_final_toten_sigma0p20_eV",
+              "calculation_id": "fe110_int06_mid_ci_neb_9796856",
+              "electronic_eV": -388.33832003,
+              "reference": "fe110_converged_toten_sigma0p20_v1",
+              "energy_review": "accepted_compatible_final_energy",
+              "structure": {
+                "file_id": "fe110_int06_mid_ci_neb_9796856_barrier_energy_review_20261118_structure",
+                "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ci_completed_review_20260925/04/CONTCAR",
+                "sha256": "3c6a1e5377b2183afb8768a4c6903298a32f757729069afa0ffd6f5c3a7b72e8"
+              },
+              "energy_source": {
+                "file_id": "fe110_int06_mid_ci_neb_9796856_barrier_energy_review_20261118_OUTCAR",
+                "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ci_completed_review_20260925/04/OUTCAR",
+                "sha256": "e83b626123ca726199407959796a3bd1369c82d55acc4d6638f4a9d76516c622"
+              }
+            },
+            "FS": {
+              "result_id": "result_fe110_ads_c2ho_h_c2h2o_9737143_final_toten",
+              "calculation_id": "fe110_ads_c2ho_h_c2h2o_9737143",
+              "electronic_eV": -388.43796188,
+              "reference": "fe110_converged_toten_sigma0p20_v1",
+              "energy_review": "accepted_compatible_final_energy",
+              "structure": {
+                "file_id": "file_fe110_ads_c2ho_h_c2h2o_9737143_CONTCAR_final",
+                "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/intermediate_image02_relax_20260901/CONTCAR",
+                "sha256": "ab7f0a6221073c140675a57f2e73a776c5da2d8bfe0bfc4a5d5b9756f4e790ce"
+              },
+              "energy_source": {
+                "file_id": "file_fe110_ads_c2ho_h_c2h2o_9737143_OUTCAR_final",
+                "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/intermediate_image02_relax_20260901/OUTCAR",
+                "sha256": "fba371023b541484deeff5e4535b8774049cdf258697eae2677ea1394ceaab2e"
+              }
+            }
+          },
+          "energies_eV": {
+            "forward_barrier_ev": 0.1673234099999945,
+            "reverse_barrier_ev": 0.0996418500000118,
+            "reaction_energy_ev": 0.06768155999998271
+          },
+          "ts_grade": "A",
+          "ts_method": "ci_neb",
+          "review": "fe110_int06_mid_ci9796856_vfa9798421_grade_a",
+          "frequency": {
+            "source": {
+              "file_id": "fe110_int06_mid_vfa_9798421_OUTCAR_frequency",
+              "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_ci9796856_image04_local_h_fe_20260925/OUTCAR",
+              "sha256": "fc9368d2292e5f8fcbbec996e1830293b204cb59f52d06247828da845a38b792"
+            },
+            "input_structure": {
+              "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_ci9796856_image04_local_h_fe_20260925/POSCAR",
+              "sha256": "5e5aafaabb84c2d3f8aa6005bcf0ea7e0b01a33aee4cdaeb5dcd7b910889be9e"
+            },
+            "maximum_ordered_displacement_A": 0.0,
+            "active_atoms_zero_based": [
+              37,
+              38,
+              39,
+              40,
+              49
+            ],
+            "cartesian_flags": [
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "TTT",
+              "TTT",
+              "TTT",
+              "TTT",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "TTT"
+            ],
+            "mode_count": 15,
+            "signed_cm_inverse": [
+              1344.826306,
+              1153.409989,
+              249.708886,
+              244.019108,
+              233.703351,
+              226.789777,
+              223.502057,
+              188.957304,
+              180.011081,
+              172.156628,
+              162.94271,
+              160.040483,
+              156.713229,
+              151.451725,
+              -386.611701
+            ],
+            "imaginary_modes_one_based": [
+              15
+            ],
+            "settings": {
+              "NIONS": "50",
+              "ENCUT": "400.0",
+              "EDIFF": "0.1E-06",
+              "IBRION": "5",
+              "NFREE": "2",
+              "ISYM": "0",
+              "POTIM": "1.500000000000000E-002",
+              "ISMEAR": "1",
+              "SIGMA": "0.20"
+            }
+          },
+          "connectivity": {
+            "geometry_status": "pass",
+            "connects_to_is": null,
+            "connects_to_fs": null,
+            "positive_displacement_file_id": null,
+            "negative_displacement_file_id": null,
+            "connectivity_report_file_id": null
+          }
+        },
+        "MID_to_FS_A": {
+          "barrier_set": "fe110_c2ho_oh_mid9737143_ts9746548_fs9725471_sigma0p20",
+          "states": {
+            "IS": {
+              "result_id": "result_fe110_ads_c2ho_h_c2h2o_9737143_final_toten",
+              "calculation_id": "fe110_ads_c2ho_h_c2h2o_9737143",
+              "electronic_eV": -388.43796188,
+              "reference": "fe110_converged_toten_sigma0p20_v1",
+              "energy_review": "accepted_compatible_final_energy",
+              "structure": {
+                "file_id": "file_fe110_ads_c2ho_h_c2h2o_9737143_CONTCAR_final",
+                "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/intermediate_image02_relax_20260901/CONTCAR",
+                "sha256": "ab7f0a6221073c140675a57f2e73a776c5da2d8bfe0bfc4a5d5b9756f4e790ce"
+              },
+              "energy_source": {
+                "file_id": "file_fe110_ads_c2ho_h_c2h2o_9737143_OUTCAR_final",
+                "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/intermediate_image02_relax_20260901/OUTCAR",
+                "sha256": "fba371023b541484deeff5e4535b8774049cdf258697eae2677ea1394ceaab2e"
+              }
+            },
+            "TS": {
+              "result_id": "result_dimer9746548_final_toten_sigma0p20",
+              "calculation_id": "fe110_c2ho_h_dimer_9746548",
+              "electronic_eV": -387.1521347,
+              "reference": "fe110_converged_toten_sigma0p20_v1",
+              "energy_review": "accepted_compatible_final_energy",
+              "structure": {
+                "file_id": "fe110_c2ho_h_dimer_9746548_CONTCAR",
+                "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/dimer_job9745217_image02_20260907/CONTCAR",
+                "sha256": "cbd87b5f0cb55d2d8c6405b67e784c1e4ded8b368751356703665b6fea0325d7"
+              },
+              "energy_source": {
+                "file_id": "fe110_c2ho_h_dimer_9746548_OUTCAR",
+                "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/dimer_job9745217_image02_20260907/OUTCAR",
+                "sha256": "696d0fb4bdcdf4d5ccc2409d723a8b21d6ff116e872efac64c54afebced4195c"
+              }
+            },
+            "FS": {
+              "result_id": "result_fe110_ads_c2ho_h_c2h2o_9725471_final_toten",
+              "calculation_id": "fe110_ads_c2ho_h_c2h2o_9725471",
+              "electronic_eV": -388.04695175,
+              "reference": "fe110_converged_toten_sigma0p20_v1",
+              "energy_review": "accepted_compatible_final_energy",
+              "structure": {
+                "file_id": "file_fe110_ads_c2ho_h_c2h2o_9725471_CONTCAR_final",
+                "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_nonduplicate_relaxations/FS_A_C2H2O_eta3_C1_C2_O_CARE03/CONTCAR",
+                "sha256": "525ebe73dfbbb231b5c1bf37a6bc691a1a0913f403afa3d8ea7c9d0d90296878"
+              },
+              "energy_source": {
+                "file_id": "file_fe110_ads_c2ho_h_c2h2o_9725471_OUTCAR_final",
+                "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_nonduplicate_relaxations/FS_A_C2H2O_eta3_C1_C2_O_CARE03/OUTCAR",
+                "sha256": "51c3758bd775c85569a4cd7d59586ca5e0a2958ed24de67abe7e8d067a6dcc30"
+              }
+            }
+          },
+          "energies_eV": {
+            "forward_barrier_ev": 1.2858271800000125,
+            "reverse_barrier_ev": 0.8948170500000288,
+            "reaction_energy_ev": 0.39101012999998375
+          },
+          "ts_grade": "A",
+          "ts_method": "dimer",
+          "review": "fe110_c2ho_oh_dimer9746548_vfa9747902_accepted_20260910",
+          "frequency": {
+            "source": {
+              "file_id": "file_vfa9747902_OUTCAR_formal_frequency",
+              "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/formal_ts_validation_20260910/vfa/OUTCAR",
+              "sha256": "272d49251e6be55f2221a32606e7d21acb9d1e6ef278d444c1aa8c64b37b6460"
+            },
+            "input_structure": {
+              "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/formal_ts_validation_20260910/vfa/POSCAR",
+              "sha256": "787d11a0000e2aa72607e3aa05a885f3f9d6eb36191443b7af15820976193322"
+            },
+            "maximum_ordered_displacement_A": 1.171624163571381e-11,
+            "active_atoms_zero_based": [
+              47,
+              49
+            ],
+            "cartesian_flags": [
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "FFF",
+              "TTT",
+              "FFF",
+              "TTT"
+            ],
+            "mode_count": 6,
+            "signed_cm_inverse": [
+              1304.15182,
+              818.751827,
+              520.559357,
+              287.598185,
+              189.729631,
+              -1407.654162
+            ],
+            "imaginary_modes_one_based": [
+              6
+            ],
+            "settings": {
+              "NIONS": "50",
+              "ENCUT": "400.0",
+              "EDIFF": "0.1E-06",
+              "IBRION": "5",
+              "NFREE": "2",
+              "ISYM": "0",
+              "POTIM": "1.500000000000000E-002",
+              "ISMEAR": "1",
+              "SIGMA": "0.20"
+            }
+          },
+          "connectivity": {
+            "geometry_status": "pass",
+            "connects_to_is": null,
+            "connects_to_fs": null,
+            "positive_displacement_file_id": null,
+            "negative_displacement_file_id": null,
+            "connectivity_report_file_id": null
+          }
+        }
+      },
+      "equation": "CHCO* + H* -> C2H2O* + *",
+      "declared_vacancy_symbols": {
+        "consumed": 0,
+        "released": 1,
+        "scope": "as written; independent site types and counts unconfirmed"
+      },
+      "reviewed_footprints": null,
+      "reviewed_vacancy_stoichiometry": null,
+      "charge_balance": null,
+      "reversible": null,
+      "MLIP": "Six ML endpoint candidates screened; five distinct DFT relaxations and the reaction contract govern endpoint selection.",
+      "evidence": [
+        {
+          "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/provenance/vasp_nonduplicate_result_review.json",
+          "sha256": "5ca40b88c9d7b031305ad5a752bf6dc30b5e69f7e55e70358317112b7088963a"
+        },
+        {
+          "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/contract/reaction.yaml",
+          "sha256": "ba5ba361bc959237516947f0d2af1ed16befb98052fd6408ea2d8bd0b17d8773"
+        },
+        {
+          "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_pre_relaxation/six_candidate_review.json",
+          "sha256": "bc3604bd4214fa8575bbb2e9bced6b22a7babb67f4ebfa749c60caf0714626b7"
+        },
+        {
+          "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_micro_neb_job9742743_local_oh_densified_5internal_20260906/final_evidence/closeout_report.json",
+          "sha256": "b4387770df2225879c5b51897516d4aad181420a468affac5622d3459fc7f5f6"
+        },
+        {
+          "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/formal_ts_validation_20260910/formal_barrier_manifest.json",
+          "sha256": "9053d24537df70737b956929461b9d2c752dc9f5cb96e5ee1f1479a0ddc6683d"
+        },
+        {
+          "path": "outputs/c1_c2_barrier_registration_20261118_v1/int06_mid/current_gate_decision.json",
+          "sha256": "6c44c76d79a7c6d5d9ea8b20d029e9d851e07964db03f970d058ecaed4cca5a4"
+        }
+      ],
+      "scientific_eligibility": "BLOCKED_FOR_MKM",
+      "kinetics": {
+        "forward_G_barrier_eV": null,
+        "reverse_G_barrier_eV": null,
+        "reaction_G_eV": null,
+        "forward_rate": null,
+        "reverse_rate": null,
+        "pressure_orders": null,
+        "surface_activity_terms": null,
+        "prefactors": null,
+        "detailed_balance_residual": null
+      },
+      "thermochemistry": {
+        "IS": null,
+        "TS": null,
+        "FS": null,
+        "temperature_K": 523,
+        "endpoint_thermal_basis_confirmed": null,
+        "scale": null
+      }
+    }
+  }
+}

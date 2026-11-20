@@ -1,0 +1,286 @@
+{
+  "status": "BLOCKED",
+  "native_input_generated": false,
+  "native_execution_receipt": null,
+  "approval_requested": false,
+  "gate": "scripts.baseline_mkm.single_point.qualify",
+  "gate_result": "IncompleteKinetics",
+  "configuration_checked_for_units": {
+    "temperature_K": 523,
+    "total_pressure_bar": 25,
+    "partial_pressure_bar": {
+      "CO": 8.3,
+      "H2": 16.7
+    }
+  },
+  "condition_status": "LITERATURE_GROUNDED_PROVISIONAL",
+  "gate_missing": {
+    "fe110_co_dissociation_topic1_9558184_to_9622455": [
+      "Unknown charge balance",
+      "Unknown site balance",
+      "Missing species structure association",
+      "Missing compatible free energies",
+      "Missing kinetic parameters or rate law",
+      "Reversibility unconfirmed",
+      "Kinetic parameter set with units, standard states, validity range and sources missing",
+      "Rate law, scoped parameter review and applicability not supplied",
+      "Reviewed site occupancies and vacant-site counts required"
+    ],
+    "fe110_c_h_to_ch_A9715450_to_9573951": [
+      "Unknown charge balance",
+      "Unknown site balance",
+      "Missing species structure association",
+      "Missing compatible free energies",
+      "Missing kinetic parameters or rate law",
+      "Reversibility unconfirmed",
+      "Kinetic parameter set with units, standard states, validity range and sources missing",
+      "Rate law, scoped parameter review and applicability not supplied",
+      "Reviewed site occupancies and vacant-site counts required"
+    ],
+    "fe110_ch_co_to_chco_20261109": [
+      "Unknown charge balance",
+      "Unknown site balance",
+      "Missing species structure association",
+      "Missing compatible free energies",
+      "Missing kinetic parameters or rate law",
+      "Reversibility unconfirmed",
+      "IS: compatible Gibbs correction missing",
+      "FS: compatible Gibbs correction missing",
+      "Kinetic parameter set with units, standard states, validity range and sources missing",
+      "Rate law, scoped parameter review and applicability not supplied",
+      "Reviewed site occupancies and vacant-site counts required"
+    ],
+    "fe110_c2ho_h_to_c2h2o_ISA9725473_to_FSA9725471": [
+      "Unknown charge balance",
+      "Unknown site balance",
+      "Missing species structure association",
+      "Missing compatible free energies",
+      "Missing kinetic parameters or rate law",
+      "Reversibility unconfirmed",
+      "Kinetic parameter set with units, standard states, validity range and sources missing",
+      "Rate law, scoped parameter review and applicability not supplied",
+      "Reviewed site occupancies and vacant-site counts required"
+    ]
+  },
+  "ticket": {
+    "source": "ResearchSupervisor default H7 ticket store, read-only",
+    "tickets_found": 0,
+    "ticket_id": null,
+    "question_id": null,
+    "handoff_status": "WAITING_FOR_HUMAN",
+    "note": "Review missing evidence for the Fe(110) four-step pathway. No native execution request."
+  },
+  "closure": {
+    "species_order": [
+      "CO",
+      "C",
+      "O",
+      "H",
+      "CH",
+      "CHCO",
+      "C2H2O"
+    ],
+    "reaction_order": [
+      "R1",
+      "R2",
+      "R3",
+      "R4"
+    ],
+    "stoichiometric_matrix": [
+      [
+        -1,
+        0,
+        -1,
+        0
+      ],
+      [
+        1,
+        -1,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        -1,
+        0,
+        -1
+      ],
+      [
+        0,
+        1,
+        -1,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        -1
+      ],
+      [
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    "element_order": [
+      "C",
+      "H",
+      "O"
+    ],
+    "element_residual_matrix": [
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "rank": 4,
+    "nullity": 0,
+    "net_one_pass": {
+      "CO": -2,
+      "C": 0,
+      "O": 1,
+      "H": -2,
+      "CH": 0,
+      "CHCO": 0,
+      "C2H2O": 1
+    },
+    "reviewed_site_balance": null,
+    "charge_balance": null
+  },
+  "supporting_evidence": [
+    {
+      "step_id": "R01",
+      "scope": "进料扩展",
+      "chemical_change": "CO(g) ⇄ CO*",
+      "selected_structures": "CO气相9733110；CO/top9558184",
+      "evidence": "参考态已登记",
+      "missing_parameters": "吸附自由能、碰撞/黏附及脱附速率、位点定义",
+      "next_action": "先查现有参考和热校正，不默认新TS",
+      "forward_electronic_barrier_ev": null,
+      "barrier_set_id": null,
+      "status": "draft_for_network_review",
+      "site_balance_status": "needs_site_footprint_review",
+      "formal_kinetics_input": false,
+      "evidence_status": "PARAMETERS_OR_STATE_INTERFACE_NEED_REVIEW"
+    },
+    {
+      "step_id": "R02",
+      "scope": "进料扩展",
+      "chemical_change": "H₂(g) ⇄ 2H*",
+      "selected_structures": "H₂气相9573527；H*及H+H端点待选",
+      "evidence": "本次已接受能垒表未检出此步",
+      "missing_parameters": "H₂解离/复合速率、双位点占用；检索历史结果",
+      "next_action": "不能用一个H*吸附能替代解离能垒",
+      "forward_electronic_barrier_ev": null,
+      "barrier_set_id": null,
+      "status": "draft_for_network_review",
+      "site_balance_status": "needs_site_footprint_review",
+      "formal_kinetics_input": false,
+      "evidence_status": "PARAMETERS_OR_STATE_INTERFACE_NEED_REVIEW"
+    },
+    {
+      "step_id": "L01",
+      "scope": "状态连接",
+      "chemical_change": "偶联产物 + H* 与加氢反应池对齐",
+      "selected_structures": "FS9842136；加氢IS-A9725473；最低参考IS-B待核",
+      "evidence": "非基元反应，不赋予速率常数",
+      "missing_parameters": "构型/位点、H引入、旁观物和共吸附能参考对齐",
+      "next_action": "不能凭C₂HO分子式相同把两套状态直接合并",
+      "forward_electronic_barrier_ev": null,
+      "barrier_set_id": null,
+      "status": "draft_for_network_review",
+      "site_balance_status": "needs_site_footprint_review",
+      "formal_kinetics_input": false,
+      "evidence_status": "PARAMETERS_OR_STATE_INTERFACE_NEED_REVIEW"
+    },
+    {
+      "step_id": "R10",
+      "scope": "排氧扩展",
+      "chemical_change": "O* + H* ⇄ OH*",
+      "selected_structures": "O/OH/H已有吸附记录；匹配共吸附IS/FS待核",
+      "evidence": "未检出本步已接受能垒",
+      "missing_parameters": "共吸附端点、TS及自由能；先查已有结构",
+      "next_action": "完整进料模型需要排氧通道，局部模型不冒称闭合",
+      "forward_electronic_barrier_ev": null,
+      "barrier_set_id": null,
+      "status": "draft_for_network_review",
+      "site_balance_status": "needs_site_footprint_review",
+      "formal_kinetics_input": false,
+      "evidence_status": "PARAMETERS_OR_STATE_INTERFACE_NEED_REVIEW"
+    },
+    {
+      "step_id": "R11",
+      "scope": "排氧扩展",
+      "chemical_change": "OH* + H* ⇄ H₂O*",
+      "selected_structures": "OH/H/H₂O参考存在；反应端点待核",
+      "evidence": "未检出本步已接受能垒",
+      "missing_parameters": "反应就位端点、TS或有依据的动力学处理、自由能",
+      "next_action": "不得用H₂O吸附能代替水生成能垒",
+      "forward_electronic_barrier_ev": null,
+      "barrier_set_id": null,
+      "status": "draft_for_network_review",
+      "site_balance_status": "needs_site_footprint_review",
+      "formal_kinetics_input": false,
+      "evidence_status": "PARAMETERS_OR_STATE_INTERFACE_NEED_REVIEW"
+    },
+    {
+      "step_id": "R12",
+      "scope": "排氧扩展",
+      "chemical_change": "H₂O* ⇄ H₂O(g)",
+      "selected_structures": "已有H₂O吸附/气相参考；选用位点待核",
+      "evidence": "参考记录，不等于脱附动力学已具备",
+      "missing_parameters": "气相化学势、脱附/再吸附模型、标准态",
+      "next_action": "若有无垒吸附依据可不另算TS；仍需可逆速率模型",
+      "forward_electronic_barrier_ev": null,
+      "barrier_set_id": null,
+      "status": "draft_for_network_review",
+      "site_balance_status": "needs_site_footprint_review",
+      "formal_kinetics_input": false,
+      "evidence_status": "PARAMETERS_OR_STATE_INTERFACE_NEED_REVIEW"
+    },
+    {
+      "step_id": "R13",
+      "scope": "产物边界",
+      "chemical_change": "[CH]–[C]–OH* ⇄ 同连接气相C₂H₂O",
+      "selected_structures": "FS-A9725471；对应气相异构体待核",
+      "evidence": "不能把吸附态形成当成气相产物生成",
+      "missing_parameters": "气相异构体/稳定性、脱附或后续转化、逆过程",
+      "next_action": "不得添加任意不可逆产物汇来制造稳态TOF",
+      "forward_electronic_barrier_ev": null,
+      "barrier_set_id": null,
+      "status": "draft_for_network_review",
+      "site_balance_status": "needs_site_footprint_review",
+      "formal_kinetics_input": false,
+      "evidence_status": "PARAMETERS_OR_STATE_INTERFACE_NEED_REVIEW"
+    }
+  ],
+  "added_supporting_steps": [],
+  "overall_TOF": null,
+  "coverages": null,
+  "vacancy_fraction": null,
+  "directional_fluxes": null,
+  "product_rate": null,
+  "DRC": null
+}

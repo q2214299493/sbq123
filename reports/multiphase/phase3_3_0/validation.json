@@ -1,0 +1,89 @@
+{
+  "scope": "Fe(110) C1-C2 pilot: independent source checks and molecular balance",
+  "registry_sha256": "4da73dbbc09fc697933cb6fa191493f78e0fbddb8863eadc66af082700fbe881",
+  "unique_bound_structures": 18,
+  "last_TOTEN_eV_by_verified_OUTCAR": {
+    "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/IS_job9558184/OUTCAR": -372.01291708,
+    "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/TS_dimer_job9656664/OUTCAR": -370.66270803,
+    "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/FS_job9622455/OUTCAR": -372.71928137,
+    "calculations/fe110_c_h_coadsorption_20260817/results/A_adjacent_hollow_reactive/OUTCAR": -368.60093793,
+    "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/OUTCAR": -367.71324606,
+    "calculations/fe110_c_h_to_ch_ts_20260818/endpoints/FS_CH_long_bridge_job9573951/OUTCAR": -368.45471297,
+    "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_cfg0_direct_vasp/OUTCAR": -385.14767079,
+    "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/OUTCAR": -384.17406905,
+    "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_extra2_repair_v1/OUTCAR": -384.48836276,
+    "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration1357_valley06_relax_20260909/completed_review_20260910/OUTCAR": -388.50564344,
+    "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_mid_vasp_bowed_20260921/ci_completed_review_20260925/04/OUTCAR": -388.33832003,
+    "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/intermediate_image02_relax_20260901/OUTCAR": -388.43796188,
+    "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/dimer_job9745217_image02_20260907/OUTCAR": -387.1521347,
+    "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_nonduplicate_relaxations/FS_A_C2H2O_eta3_C1_C2_O_CARE03/OUTCAR": -388.04695175,
+    "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_nonduplicate_relaxations/FS_C_C2H2O_kappa_C1_tilted/OUTCAR": -387.92882863,
+    "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_nonduplicate_relaxations/IS_A_C2HO_H_adjacent_long_bridge/OUTCAR": -388.48862614,
+    "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_nonduplicate_relaxations/IS_B_C2HO_H_adjacent_hollow/OUTCAR": -388.51959629,
+    "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_nonduplicate_relaxations/IS_C_C2HO_H_far_long_bridge/OUTCAR": -388.42934597
+  },
+  "verified_forward_reverse_and_reaction_energy_sets": [
+    "R1",
+    "R2",
+    "R3",
+    "INT06_to_MID",
+    "MID_to_FS_A"
+  ],
+  "verified_VFA_sources": {
+    "R1": "c3b12bc0b11dcd225ce162950511aa6e23d2b54169b4d754fa7be661a8959210",
+    "R2": "c9ed60495487c58e50789fe46f2f05cd3eb0a110148d6f484db58751cfc92e11",
+    "R3": "d707a332f1af5d0835e1935d351d9a28b011bd4672e4de3b00833fb93f62f9a9",
+    "INT06_to_MID": "fc9368d2292e5f8fcbbec996e1830293b204cb59f52d06247828da845a38b792",
+    "MID_to_FS_A": "272d49251e6be55f2221a32606e7d21acb9d1e6ef278d444c1aa8c64b37b6460"
+  },
+  "historical_reviews": [
+    {
+      "path": "modules/state_handoff/events/task-fe110-co-connectivity-needs-review-20260806.json",
+      "sha256": "6b6483bd5905f39ad7cfb13a71ce0ee73d277a51f4b788fbb8f9b4d2240f6f87"
+    },
+    {
+      "path": "modules/state_handoff/events/task-fe110-c2ho-h-to-c2h2o-gpu-ml-neb-1308-submitted-20260825.json",
+      "sha256": "68c6e5d38c4980d64bc24574518af52f02c790b66479b9ba2adaa89ced9ebcf7"
+    }
+  ],
+  "element_order": [
+    "C",
+    "H",
+    "O"
+  ],
+  "element_residuals": [
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "stoichiometric_rank": 4,
+  "steady_state_nullity": 0,
+  "kinetically_qualified_reactions": 0,
+  "native_execution": false,
+  "regression": {
+    "development": {
+      "passed": 162,
+      "deselected": 1
+    },
+    "independent_release_worktree": {
+      "passed": 162,
+      "deselected": 1
+    },
+    "deselected_test": "test_live_closed_cycle (native execution outside scope)"
+  }
+}

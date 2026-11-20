@@ -1,0 +1,406 @@
+{
+  "format": "network-definition/1",
+  "projects": [
+    {
+      "project_id": "fe110-c1-c2-pilot"
+    }
+  ],
+  "materials": [
+    {
+      "material_id": "Fe",
+      "project_id": "fe110-c1-c2-pilot"
+    }
+  ],
+  "phases": [
+    {
+      "phase_id": "metallic-Fe",
+      "material_id": "Fe"
+    }
+  ],
+  "surfaces": [
+    {
+      "surface_id": "Fe110",
+      "phase_id": "metallic-Fe",
+      "miller_indices": [
+        1,
+        1,
+        0
+      ]
+    }
+  ],
+  "species": [
+    {
+      "species_id": "CO",
+      "phase": "surface",
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "material_ids": [
+        "Fe"
+      ],
+      "composition": {
+        "C": 1,
+        "O": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "structure_id": null
+    },
+    {
+      "species_id": "C",
+      "phase": "surface",
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "material_ids": [
+        "Fe"
+      ],
+      "composition": {
+        "C": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "structure_id": null
+    },
+    {
+      "species_id": "O",
+      "phase": "surface",
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "material_ids": [
+        "Fe"
+      ],
+      "composition": {
+        "O": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "structure_id": null
+    },
+    {
+      "species_id": "H",
+      "phase": "surface",
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "material_ids": [
+        "Fe"
+      ],
+      "composition": {
+        "H": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "structure_id": null
+    },
+    {
+      "species_id": "CH",
+      "phase": "surface",
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "material_ids": [
+        "Fe"
+      ],
+      "composition": {
+        "C": 1,
+        "H": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "structure_id": null
+    },
+    {
+      "species_id": "CHCO",
+      "phase": "surface",
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "material_ids": [
+        "Fe"
+      ],
+      "composition": {
+        "C": 2,
+        "H": 1,
+        "O": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "structure_id": null
+    },
+    {
+      "species_id": "C2H2O",
+      "phase": "surface",
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "material_ids": [
+        "Fe"
+      ],
+      "composition": {
+        "C": 2,
+        "H": 2,
+        "O": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "structure_id": null
+    }
+  ],
+  "reactions": [
+    {
+      "reaction_id": "fe110_co_dissociation_topic1_9558184_to_9622455",
+      "pilot_id": "R1",
+      "selected_equation": "CO* + * -> C* + O*",
+      "reaction_type": "dissociation",
+      "reactants": {
+        "CO": 1
+      },
+      "products": {
+        "C": 1,
+        "O": 1
+      },
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "initial_structure_id": "6ed0dcc7bc57e30bce0eca23a94e6b8823dfc543a6bc943dccffcda531daadbf",
+      "final_structure_id": "08ab46f9210e7f2e810eacaa0481c8e1ad3bbf64fc729f21fd66f5ef6ef88d6a",
+      "ts_id": "bc2d62ba76177adaaee688d13e3d10b6305b79b7fe87258bdbc353f494a3e348",
+      "ts_treatment": "located",
+      "sites_consumed": null,
+      "sites_released": null,
+      "required_sites": null,
+      "reversible": null,
+      "energy_reference_id": "fe110_converged_toten_sigma0p20_v1",
+      "electronic_reference_convention": "fe110_converged_toten_sigma0p20_v1",
+      "electronic_energies": {
+        "forward": {
+          "value": 1.3502090500000463,
+          "unit": "eV",
+          "reference_id": "fe110_converged_toten_sigma0p20_v1",
+          "source": {
+            "kind": "local_calculation",
+            "reference": "fe110_co_dissociation_9558184_9656664_9622455_sigma0p20",
+            "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+          }
+        },
+        "reverse": {
+          "value": 2.05657334,
+          "unit": "eV",
+          "reference_id": "fe110_converged_toten_sigma0p20_v1",
+          "source": {
+            "kind": "local_calculation",
+            "reference": "fe110_co_dissociation_9558184_9656664_9622455_sigma0p20",
+            "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+          }
+        },
+        "reaction": {
+          "value": -0.7063642899999536,
+          "unit": "eV",
+          "reference_id": "fe110_converged_toten_sigma0p20_v1",
+          "source": {
+            "kind": "local_calculation",
+            "reference": "fe110_co_dissociation_9558184_9656664_9622455_sigma0p20",
+            "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+          }
+        }
+      },
+      "provenance": [
+        {
+          "kind": "local_calculation",
+          "reference": "fe110_co_dissociation_9558184_9656664_9622455_sigma0p20",
+          "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+        }
+      ]
+    },
+    {
+      "reaction_id": "fe110_c_h_to_ch_A9715450_to_9573951",
+      "pilot_id": "R2",
+      "selected_equation": "C* + H* -> CH* + *",
+      "reaction_type": "hydrogenation",
+      "reactants": {
+        "C": 1,
+        "H": 1
+      },
+      "products": {
+        "CH": 1
+      },
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "initial_structure_id": "121ace35043c79f968ecd14ef2a100b2531c4904b8671e71bf506751f06c5396",
+      "final_structure_id": "ffeccf7353ea82d8b5c5d3e13762a3e34fcae41ec7b1f0ff7adbae5b2bf9e4a5",
+      "ts_id": "8fd9cb6818e11d851a39f723c53e52dfe3a3bfe8e32a164a5b03b3b0c7b6d364",
+      "ts_treatment": "located",
+      "sites_consumed": null,
+      "sites_released": null,
+      "required_sites": null,
+      "reversible": null,
+      "energy_reference_id": "fe110_converged_toten_sigma0p20_v1",
+      "electronic_reference_convention": "fe110_converged_toten_sigma0p20_v1",
+      "electronic_energies": {
+        "forward": {
+          "value": 0.8876918699999692,
+          "unit": "eV",
+          "reference_id": "fe110_converged_toten_sigma0p20_v1",
+          "source": {
+            "kind": "local_calculation",
+            "reference": "fe110_c_h_to_ch_9715450_9720181_9573951_sigma0p20",
+            "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+          }
+        },
+        "reverse": {
+          "value": 0.7414669099999855,
+          "unit": "eV",
+          "reference_id": "fe110_converged_toten_sigma0p20_v1",
+          "source": {
+            "kind": "local_calculation",
+            "reference": "fe110_c_h_to_ch_9715450_9720181_9573951_sigma0p20",
+            "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+          }
+        },
+        "reaction": {
+          "value": 0.14622495999998364,
+          "unit": "eV",
+          "reference_id": "fe110_converged_toten_sigma0p20_v1",
+          "source": {
+            "kind": "local_calculation",
+            "reference": "fe110_c_h_to_ch_9715450_9720181_9573951_sigma0p20",
+            "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+          }
+        }
+      },
+      "provenance": [
+        {
+          "kind": "local_calculation",
+          "reference": "fe110_c_h_to_ch_9715450_9720181_9573951_sigma0p20",
+          "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+        }
+      ]
+    },
+    {
+      "reaction_id": "fe110_ch_co_to_chco_20261109",
+      "pilot_id": "R3",
+      "selected_equation": "CH* + CO* -> CHCO*",
+      "reaction_type": "c_c_coupling",
+      "reactants": {
+        "CH": 1,
+        "CO": 1
+      },
+      "products": {
+        "CHCO": 1
+      },
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "initial_structure_id": "f8bc627180b430b3b64f748c05830a0372bc93a3750780cf7fe6c5eb0601762d",
+      "final_structure_id": "11dab1631a99f1e444d4c7ab9ca242609e07c912f656874005696e6498f15ab2",
+      "ts_id": "0157a418cd1fba1be886426361d494ffbdce9a15d1a9132b996a3481ffcc1a6a",
+      "ts_treatment": "located",
+      "sites_consumed": null,
+      "sites_released": null,
+      "required_sites": null,
+      "reversible": null,
+      "energy_reference_id": "fe110_converged_toten_sigma0p20_v1",
+      "electronic_reference_convention": "fe110_converged_toten_sigma0p20_v1",
+      "electronic_energies": {
+        "forward": {
+          "value": 0.9736017399999923,
+          "unit": "eV",
+          "reference_id": "fe110_converged_toten_sigma0p20_v1",
+          "source": {
+            "kind": "local_calculation",
+            "reference": "fe110_ch_co_sigma0p20_review_20261118",
+            "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+          }
+        },
+        "reverse": {
+          "value": 0.31429370999995854,
+          "unit": "eV",
+          "reference_id": "fe110_converged_toten_sigma0p20_v1",
+          "source": {
+            "kind": "local_calculation",
+            "reference": "fe110_ch_co_sigma0p20_review_20261118",
+            "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+          }
+        },
+        "reaction": {
+          "value": 0.6593080300000338,
+          "unit": "eV",
+          "reference_id": "fe110_converged_toten_sigma0p20_v1",
+          "source": {
+            "kind": "local_calculation",
+            "reference": "fe110_ch_co_sigma0p20_review_20261118",
+            "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+          }
+        }
+      },
+      "provenance": [
+        {
+          "kind": "local_calculation",
+          "reference": "fe110_ch_co_sigma0p20_review_20261118",
+          "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+        }
+      ]
+    },
+    {
+      "reaction_id": "fe110_c2ho_h_to_c2h2o_ISA9725473_to_FSA9725471",
+      "pilot_id": "R4",
+      "selected_equation": "CHCO* + H* -> C2H2O* + *",
+      "reaction_type": "hydrogenation",
+      "reactants": {
+        "CHCO": 1,
+        "H": 1
+      },
+      "products": {
+        "C2H2O": 1
+      },
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "initial_structure_id": "6800e98e36e32c09bc7c2514f52998e641416dca4d3b62a4aa0acc95ad50a2ed",
+      "final_structure_id": "525ebe73dfbbb231b5c1bf37a6bc691a1a0913f403afa3d8ea7c9d0d90296878",
+      "ts_id": null,
+      "ts_treatment": null,
+      "sites_consumed": null,
+      "sites_released": null,
+      "required_sites": null,
+      "reversible": null,
+      "energy_reference_id": "fe110_converged_toten_sigma0p20_v1",
+      "electronic_reference_convention": "fe110_converged_toten_sigma0p20_v1",
+      "electronic_energies": {
+        "forward": null,
+        "reverse": null,
+        "reaction": {
+          "value": 0.44167439,
+          "unit": "eV",
+          "reference_id": "fe110_converged_toten_sigma0p20_v1",
+          "source": {
+            "kind": "local_calculation",
+            "reference": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/contract/reaction.yaml",
+            "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+          }
+        }
+      },
+      "provenance": [
+        {
+          "kind": "local_calculation",
+          "reference": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/contract/reaction.yaml",
+          "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+        }
+      ]
+    }
+  ]
+}

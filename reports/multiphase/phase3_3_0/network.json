@@ -1,0 +1,1104 @@
+{
+  "network_version": "5be003e334c9d26b232841f703248cc23b885f081ca35f15c8e8602e9d608421",
+  "format": "reaction-network/1",
+  "project_id": "fe110-c1-c2-pilot",
+  "catalog": {
+    "projects": [
+      {
+        "project_id": "fe110-c1-c2-pilot"
+      }
+    ],
+    "materials": [
+      {
+        "material_id": "Fe",
+        "project_id": "fe110-c1-c2-pilot"
+      }
+    ],
+    "phases": [
+      {
+        "phase_id": "metallic-Fe",
+        "material_id": "Fe"
+      }
+    ],
+    "surfaces": [
+      {
+        "surface_id": "Fe110",
+        "phase_id": "metallic-Fe",
+        "miller_indices": [
+          1,
+          1,
+          0
+        ]
+      }
+    ],
+    "sites": [],
+    "interfaces": []
+  },
+  "species": [
+    {
+      "species_id": "CO",
+      "phase": "surface",
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "material_ids": [
+        "Fe"
+      ],
+      "composition": {
+        "C": 1,
+        "O": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "structure_id": null
+    },
+    {
+      "species_id": "C",
+      "phase": "surface",
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "material_ids": [
+        "Fe"
+      ],
+      "composition": {
+        "C": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "structure_id": null
+    },
+    {
+      "species_id": "O",
+      "phase": "surface",
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "material_ids": [
+        "Fe"
+      ],
+      "composition": {
+        "O": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "structure_id": null
+    },
+    {
+      "species_id": "H",
+      "phase": "surface",
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "material_ids": [
+        "Fe"
+      ],
+      "composition": {
+        "H": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "structure_id": null
+    },
+    {
+      "species_id": "CH",
+      "phase": "surface",
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "material_ids": [
+        "Fe"
+      ],
+      "composition": {
+        "C": 1,
+        "H": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "structure_id": null
+    },
+    {
+      "species_id": "CHCO",
+      "phase": "surface",
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "material_ids": [
+        "Fe"
+      ],
+      "composition": {
+        "C": 2,
+        "H": 1,
+        "O": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "structure_id": null
+    },
+    {
+      "species_id": "C2H2O",
+      "phase": "surface",
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "material_ids": [
+        "Fe"
+      ],
+      "composition": {
+        "C": 2,
+        "H": 2,
+        "O": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "structure_id": null
+    }
+  ],
+  "species_fingerprints": {
+    "CO": "35140e0d250788448ad2be07320f83d6225cf8ecfba0ea03a8588335689eb52c",
+    "C": "034103e687944658e4adabaa512e7aa8a7e18022b47bdd3b7e7210cc324c0b16",
+    "O": "38022cd7717f5e73dfd73e89f7c79797b35f66da2d5dc1d71785eadeb5630821",
+    "H": "02dde1a9389bef0d4d1d022b0bb8b2072a74e17cc210ffa1147c6bf75c39c888",
+    "CH": "7b0695f042afaeb43b651f0004f48bb87210ad8b6e2521a71c38866aa00e87d9",
+    "CHCO": "267537d77632ba9b1908da80ab8bf63a32ab74e3557b9a1a7019f96072f29233",
+    "C2H2O": "64ae8f3c280ffa7f61d836e68e06b7ecc15d155796917aab2a5103ea499dc73a"
+  },
+  "reactions": [
+    {
+      "definition": {
+        "reaction_id": "fe110_co_dissociation_topic1_9558184_to_9622455",
+        "pilot_id": "R1",
+        "selected_equation": "CO* + * -> C* + O*",
+        "reaction_type": "dissociation",
+        "reactants": {
+          "CO": 1
+        },
+        "products": {
+          "C": 1,
+          "O": 1
+        },
+        "surface_ids": [
+          "Fe110"
+        ],
+        "interface_id": null,
+        "initial_structure_id": "6ed0dcc7bc57e30bce0eca23a94e6b8823dfc543a6bc943dccffcda531daadbf",
+        "final_structure_id": "08ab46f9210e7f2e810eacaa0481c8e1ad3bbf64fc729f21fd66f5ef6ef88d6a",
+        "ts_id": "bc2d62ba76177adaaee688d13e3d10b6305b79b7fe87258bdbc353f494a3e348",
+        "ts_treatment": "located",
+        "sites_consumed": null,
+        "sites_released": null,
+        "required_sites": null,
+        "reversible": null,
+        "energy_reference_id": "fe110_converged_toten_sigma0p20_v1",
+        "electronic_reference_convention": "fe110_converged_toten_sigma0p20_v1",
+        "electronic_energies": {
+          "forward": {
+            "value": 1.3502090500000463,
+            "unit": "eV",
+            "reference_id": "fe110_converged_toten_sigma0p20_v1",
+            "source": {
+              "kind": "local_calculation",
+              "reference": "fe110_co_dissociation_9558184_9656664_9622455_sigma0p20",
+              "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+            }
+          },
+          "reverse": {
+            "value": 2.05657334,
+            "unit": "eV",
+            "reference_id": "fe110_converged_toten_sigma0p20_v1",
+            "source": {
+              "kind": "local_calculation",
+              "reference": "fe110_co_dissociation_9558184_9656664_9622455_sigma0p20",
+              "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+            }
+          },
+          "reaction": {
+            "value": -0.7063642899999536,
+            "unit": "eV",
+            "reference_id": "fe110_converged_toten_sigma0p20_v1",
+            "source": {
+              "kind": "local_calculation",
+              "reference": "fe110_co_dissociation_9558184_9656664_9622455_sigma0p20",
+              "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+            }
+          }
+        },
+        "provenance": [
+          {
+            "kind": "local_calculation",
+            "reference": "fe110_co_dissociation_9558184_9656664_9622455_sigma0p20",
+            "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+          }
+        ]
+      },
+      "direction": {
+        "status": "unknown",
+        "forward": {
+          "reactants": {
+            "CO": 1
+          },
+          "products": {
+            "C": 1,
+            "O": 1
+          },
+          "sites_consumed": null,
+          "sites_released": null
+        },
+        "reverse": null
+      },
+      "net_stoichiometry": {
+        "species:C": 1,
+        "species:CO": -1,
+        "species:O": 1
+      },
+      "site_balance": null,
+      "energies": {
+        "electronic_ev": {
+          "forward": 1.3502090500000463,
+          "reverse": 2.05657334,
+          "reaction": -0.7063642899999536
+        },
+        "gibbs_ev": {
+          "forward": null,
+          "reverse": null,
+          "reaction": null
+        },
+        "temperature_k": null,
+        "standard_state": null,
+        "thermal_basis": null
+      },
+      "thermochemistry": null,
+      "level": "DRAFT",
+      "origin": "supplied_definition",
+      "site_mapping": null,
+      "user_confirmation": null,
+      "scientific_review": null,
+      "parameter_set_ids": [],
+      "gaps": [
+        "Unknown charge balance",
+        "Unknown site balance",
+        "Missing species structure association",
+        "Missing compatible free energies",
+        "Missing kinetic parameters or rate law",
+        "Reversibility unconfirmed"
+      ],
+      "mkm_status": "blocked",
+      "subject_sha256": "3813ee746892c6ae1e8f3291fb2fdc9fbbd62baaa881e7e3ed1f5a91a0eb8471",
+      "network_review": null
+    },
+    {
+      "definition": {
+        "reaction_id": "fe110_c_h_to_ch_A9715450_to_9573951",
+        "pilot_id": "R2",
+        "selected_equation": "C* + H* -> CH* + *",
+        "reaction_type": "hydrogenation",
+        "reactants": {
+          "C": 1,
+          "H": 1
+        },
+        "products": {
+          "CH": 1
+        },
+        "surface_ids": [
+          "Fe110"
+        ],
+        "interface_id": null,
+        "initial_structure_id": "121ace35043c79f968ecd14ef2a100b2531c4904b8671e71bf506751f06c5396",
+        "final_structure_id": "ffeccf7353ea82d8b5c5d3e13762a3e34fcae41ec7b1f0ff7adbae5b2bf9e4a5",
+        "ts_id": "8fd9cb6818e11d851a39f723c53e52dfe3a3bfe8e32a164a5b03b3b0c7b6d364",
+        "ts_treatment": "located",
+        "sites_consumed": null,
+        "sites_released": null,
+        "required_sites": null,
+        "reversible": null,
+        "energy_reference_id": "fe110_converged_toten_sigma0p20_v1",
+        "electronic_reference_convention": "fe110_converged_toten_sigma0p20_v1",
+        "electronic_energies": {
+          "forward": {
+            "value": 0.8876918699999692,
+            "unit": "eV",
+            "reference_id": "fe110_converged_toten_sigma0p20_v1",
+            "source": {
+              "kind": "local_calculation",
+              "reference": "fe110_c_h_to_ch_9715450_9720181_9573951_sigma0p20",
+              "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+            }
+          },
+          "reverse": {
+            "value": 0.7414669099999855,
+            "unit": "eV",
+            "reference_id": "fe110_converged_toten_sigma0p20_v1",
+            "source": {
+              "kind": "local_calculation",
+              "reference": "fe110_c_h_to_ch_9715450_9720181_9573951_sigma0p20",
+              "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+            }
+          },
+          "reaction": {
+            "value": 0.14622495999998364,
+            "unit": "eV",
+            "reference_id": "fe110_converged_toten_sigma0p20_v1",
+            "source": {
+              "kind": "local_calculation",
+              "reference": "fe110_c_h_to_ch_9715450_9720181_9573951_sigma0p20",
+              "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+            }
+          }
+        },
+        "provenance": [
+          {
+            "kind": "local_calculation",
+            "reference": "fe110_c_h_to_ch_9715450_9720181_9573951_sigma0p20",
+            "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+          }
+        ]
+      },
+      "direction": {
+        "status": "unknown",
+        "forward": {
+          "reactants": {
+            "C": 1,
+            "H": 1
+          },
+          "products": {
+            "CH": 1
+          },
+          "sites_consumed": null,
+          "sites_released": null
+        },
+        "reverse": null
+      },
+      "net_stoichiometry": {
+        "species:C": -1,
+        "species:CH": 1,
+        "species:H": -1
+      },
+      "site_balance": null,
+      "energies": {
+        "electronic_ev": {
+          "forward": 0.8876918699999692,
+          "reverse": 0.7414669099999855,
+          "reaction": 0.14622495999998364
+        },
+        "gibbs_ev": {
+          "forward": null,
+          "reverse": null,
+          "reaction": null
+        },
+        "temperature_k": null,
+        "standard_state": null,
+        "thermal_basis": null
+      },
+      "thermochemistry": null,
+      "level": "DRAFT",
+      "origin": "supplied_definition",
+      "site_mapping": null,
+      "user_confirmation": null,
+      "scientific_review": null,
+      "parameter_set_ids": [],
+      "gaps": [
+        "Unknown charge balance",
+        "Unknown site balance",
+        "Missing species structure association",
+        "Missing compatible free energies",
+        "Missing kinetic parameters or rate law",
+        "Reversibility unconfirmed"
+      ],
+      "mkm_status": "blocked",
+      "subject_sha256": "9527486eaacf4145ff5cf6aedbc3cdffc1e3bfd599bf4c66c9e5870ac1e11ff7",
+      "network_review": null
+    },
+    {
+      "definition": {
+        "reaction_id": "fe110_ch_co_to_chco_20261109",
+        "pilot_id": "R3",
+        "selected_equation": "CH* + CO* -> CHCO*",
+        "reaction_type": "c_c_coupling",
+        "reactants": {
+          "CH": 1,
+          "CO": 1
+        },
+        "products": {
+          "CHCO": 1
+        },
+        "surface_ids": [
+          "Fe110"
+        ],
+        "interface_id": null,
+        "initial_structure_id": "f8bc627180b430b3b64f748c05830a0372bc93a3750780cf7fe6c5eb0601762d",
+        "final_structure_id": "11dab1631a99f1e444d4c7ab9ca242609e07c912f656874005696e6498f15ab2",
+        "ts_id": "0157a418cd1fba1be886426361d494ffbdce9a15d1a9132b996a3481ffcc1a6a",
+        "ts_treatment": "located",
+        "sites_consumed": null,
+        "sites_released": null,
+        "required_sites": null,
+        "reversible": null,
+        "energy_reference_id": "fe110_converged_toten_sigma0p20_v1",
+        "electronic_reference_convention": "fe110_converged_toten_sigma0p20_v1",
+        "electronic_energies": {
+          "forward": {
+            "value": 0.9736017399999923,
+            "unit": "eV",
+            "reference_id": "fe110_converged_toten_sigma0p20_v1",
+            "source": {
+              "kind": "local_calculation",
+              "reference": "fe110_ch_co_sigma0p20_review_20261118",
+              "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+            }
+          },
+          "reverse": {
+            "value": 0.31429370999995854,
+            "unit": "eV",
+            "reference_id": "fe110_converged_toten_sigma0p20_v1",
+            "source": {
+              "kind": "local_calculation",
+              "reference": "fe110_ch_co_sigma0p20_review_20261118",
+              "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+            }
+          },
+          "reaction": {
+            "value": 0.6593080300000338,
+            "unit": "eV",
+            "reference_id": "fe110_converged_toten_sigma0p20_v1",
+            "source": {
+              "kind": "local_calculation",
+              "reference": "fe110_ch_co_sigma0p20_review_20261118",
+              "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+            }
+          }
+        },
+        "provenance": [
+          {
+            "kind": "local_calculation",
+            "reference": "fe110_ch_co_sigma0p20_review_20261118",
+            "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+          }
+        ]
+      },
+      "direction": {
+        "status": "unknown",
+        "forward": {
+          "reactants": {
+            "CH": 1,
+            "CO": 1
+          },
+          "products": {
+            "CHCO": 1
+          },
+          "sites_consumed": null,
+          "sites_released": null
+        },
+        "reverse": null
+      },
+      "net_stoichiometry": {
+        "species:CH": -1,
+        "species:CHCO": 1,
+        "species:CO": -1
+      },
+      "site_balance": null,
+      "energies": {
+        "electronic_ev": {
+          "forward": 0.9736017399999923,
+          "reverse": 0.31429370999995854,
+          "reaction": 0.6593080300000338
+        },
+        "gibbs_ev": {
+          "forward": null,
+          "reverse": null,
+          "reaction": null
+        },
+        "temperature_k": null,
+        "standard_state": null,
+        "thermal_basis": null
+      },
+      "thermochemistry": {
+        "reaction_id": "fe110_ch_co_to_chco_20261109",
+        "operation": "thermochemistry",
+        "electronic_ev": {
+          "forward": 0.9736017399999923,
+          "reverse": 0.31429370999995854,
+          "reaction": 0.6593080300000338
+        },
+        "electronic_sources": {
+          "IS": {
+            "id": "IS-electronic_energy",
+            "value": {
+              "value_ev": -385.14767079,
+              "energy_reference": "fe110_converged_toten_sigma0p20_v1",
+              "structure_identity": "f8bc627180b430b3b64f748c05830a0372bc93a3750780cf7fe6c5eb0601762d"
+            },
+            "provenance": {
+              "source_type": "local_calculation",
+              "source_reference": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_cfg0_direct_vasp/OUTCAR",
+              "source_artifact_hash": "e3f5ad8b0aa2a9afc6749785e5dc872d64b6de4165169578510c7a0c5d167d78",
+              "original_calculation_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021"
+            },
+            "uncertainty": null,
+            "validation": {
+              "validation_status": "validated",
+              "validated_properties": [
+                "electronic_energy"
+              ],
+              "validation_method": "accepted_compatible_final_energy",
+              "compatibility_status": "compatible",
+              "limitations": [
+                "Electronic energy only"
+              ]
+            },
+            "acceptance": {
+              "acceptance_status": "pending"
+            }
+          },
+          "TS": {
+            "id": "TS-electronic_energy",
+            "value": {
+              "value_ev": -384.17406905,
+              "energy_reference": "fe110_converged_toten_sigma0p20_v1",
+              "structure_identity": "0157a418cd1fba1be886426361d494ffbdce9a15d1a9132b996a3481ffcc1a6a"
+            },
+            "provenance": {
+              "source_type": "local_calculation",
+              "source_reference": "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/OUTCAR",
+              "source_artifact_hash": "391f84167e6372dcaf770ed1efa471d1abba6d4640803876899b120ac797dd02",
+              "original_calculation_id": "fe110_ch_co_dimer_20261112_job9998592"
+            },
+            "uncertainty": null,
+            "validation": {
+              "validation_status": "validated",
+              "validated_properties": [
+                "electronic_energy"
+              ],
+              "validation_method": "accepted_compatible_final_energy",
+              "compatibility_status": "compatible",
+              "limitations": [
+                "Electronic energy only"
+              ]
+            },
+            "acceptance": {
+              "acceptance_status": "pending"
+            }
+          },
+          "FS": {
+            "id": "FS-electronic_energy",
+            "value": {
+              "value_ev": -384.48836276,
+              "energy_reference": "fe110_converged_toten_sigma0p20_v1",
+              "structure_identity": "11dab1631a99f1e444d4c7ab9ca242609e07c912f656874005696e6498f15ab2"
+            },
+            "provenance": {
+              "source_type": "local_calculation",
+              "source_reference": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_extra2_repair_v1/OUTCAR",
+              "source_artifact_hash": "e88d99ab9ba74274fd8af45e4e69b9f59feb90bbe1101f7e794c1c317bb82edc",
+              "original_calculation_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1"
+            },
+            "uncertainty": null,
+            "validation": {
+              "validation_status": "validated",
+              "validated_properties": [
+                "electronic_energy"
+              ],
+              "validation_method": "accepted_compatible_final_energy",
+              "compatibility_status": "compatible",
+              "limitations": [
+                "Electronic energy only"
+              ]
+            },
+            "acceptance": {
+              "acceptance_status": "pending"
+            }
+          }
+        },
+        "states": {
+          "IS": null,
+          "TS": {
+            "zpe_ev": 0.5140516496724512,
+            "thermal_enthalpy_ev": null,
+            "entropy_ev_per_k": null,
+            "gibbs_correction_ev": null,
+            "temperature_k": null,
+            "frequencies_cm1": [
+              3012.556969,
+              1562.135791,
+              909.495523,
+              693.170928,
+              563.698151,
+              468.200164,
+              355.601179,
+              248.117609,
+              219.859855,
+              143.010697,
+              116.365467,
+              -318.644011
+            ],
+            "included_modes_one_based": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11
+            ],
+            "excluded_reaction_coordinate_one_based": 12,
+            "scale": 1.0,
+            "scaling_reference": null,
+            "zpe_sigma_ev": null,
+            "gibbs_sigma_ev": null,
+            "atom_map": [
+              45,
+              46,
+              47,
+              48
+            ],
+            "constraints": "All Fe fixed; all Cartesian components of C45 C46 O47 H48 mobile",
+            "method": "Local Cartesian finite differences; see frequency audit for INCAR and k mesh",
+            "record_id": "TS-spectrum",
+            "route": "spectrum",
+            "thermal_basis": "Fe110-C45-C46-O47-H48-local-harmonic",
+            "structure_identity": "0157a418cd1fba1be886426361d494ffbdce9a15d1a9132b996a3481ffcc1a6a",
+            "phase": "adsorbate",
+            "standard_state": null,
+            "provenance": {
+              "source_type": "local_calculation",
+              "source_reference": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/OUTCAR",
+              "source_artifact_hash": "d707a332f1af5d0835e1935d351d9a28b011bd4672e4de3b00833fb93f62f9a9",
+              "original_calculation_id": "fe110_ch_co_vfa_20261115_job2260"
+            },
+            "uncertainty": null,
+            "validation": {
+              "validation_status": "validated",
+              "validated_properties": [
+                "spectrum"
+              ],
+              "validation_method": "fe110_ch_co_dimer9998592_vfa2260_grade_a_20261115",
+              "compatibility_status": "compatible",
+              "limitations": [
+                "Partial Hessian; assigned TS reaction coordinate excluded from stable-mode partition function"
+              ]
+            },
+            "acceptance": {
+              "acceptance_status": "pending"
+            },
+            "ts_review_reference": "fe110_ch_co_dimer9998592_vfa2260_grade_a_20261115"
+          },
+          "FS": null
+        },
+        "state_free_energy_ev": {
+          "IS": null,
+          "TS": null,
+          "FS": null
+        },
+        "reaction": null,
+        "issues": [
+          "FS.corrections",
+          "FS.spectrum",
+          "IS.corrections",
+          "IS.spectrum",
+          "reaction.standard_state",
+          "reaction.temperature"
+        ],
+        "unresolved_one_of": [
+          [
+            "IS.corrections",
+            "IS.spectrum"
+          ],
+          [
+            "FS.corrections",
+            "FS.spectrum"
+          ]
+        ],
+        "intake_diagnostics": {
+          "FS.corrections": {
+            "evidence_status": "MISSING",
+            "usable": false,
+            "selected": null,
+            "reasons": [
+              "No evidence supplied"
+            ],
+            "candidates": [],
+            "status": "MISSING"
+          },
+          "FS.spectrum": {
+            "evidence_status": "MISSING",
+            "usable": false,
+            "selected": null,
+            "reasons": [
+              "No evidence supplied"
+            ],
+            "candidates": [],
+            "status": "MISSING"
+          },
+          "IS.corrections": {
+            "evidence_status": "MISSING",
+            "usable": false,
+            "selected": null,
+            "reasons": [
+              "No evidence supplied"
+            ],
+            "candidates": [],
+            "status": "MISSING"
+          },
+          "IS.spectrum": {
+            "evidence_status": "MISSING",
+            "usable": false,
+            "selected": null,
+            "reasons": [
+              "No evidence supplied"
+            ],
+            "candidates": [],
+            "status": "MISSING"
+          },
+          "reaction.standard_state": {
+            "evidence_status": "MISSING",
+            "usable": false,
+            "selected": null,
+            "reasons": [
+              "No evidence supplied"
+            ],
+            "candidates": [],
+            "status": "MISSING"
+          },
+          "reaction.temperature": {
+            "evidence_status": "MISSING",
+            "usable": false,
+            "selected": null,
+            "reasons": [
+              "No evidence supplied"
+            ],
+            "candidates": [],
+            "status": "MISSING"
+          }
+        },
+        "intake_warnings": [
+          {
+            "record_id": "IS-structure",
+            "missing_provenance": [
+              "supplied_by",
+              "source_date"
+            ]
+          },
+          {
+            "record_id": "IS-structure",
+            "missing_metadata": [
+              "uncertainty"
+            ]
+          },
+          {
+            "record_id": "IS-electronic_energy",
+            "missing_provenance": [
+              "supplied_by",
+              "source_date"
+            ]
+          },
+          {
+            "record_id": "IS-electronic_energy",
+            "missing_metadata": [
+              "uncertainty"
+            ]
+          },
+          {
+            "record_id": "TS-structure",
+            "missing_provenance": [
+              "supplied_by",
+              "source_date"
+            ]
+          },
+          {
+            "record_id": "TS-structure",
+            "missing_metadata": [
+              "uncertainty"
+            ]
+          },
+          {
+            "record_id": "TS-electronic_energy",
+            "missing_provenance": [
+              "supplied_by",
+              "source_date"
+            ]
+          },
+          {
+            "record_id": "TS-electronic_energy",
+            "missing_metadata": [
+              "uncertainty"
+            ]
+          },
+          {
+            "record_id": "FS-structure",
+            "missing_provenance": [
+              "supplied_by",
+              "source_date"
+            ]
+          },
+          {
+            "record_id": "FS-structure",
+            "missing_metadata": [
+              "uncertainty"
+            ]
+          },
+          {
+            "record_id": "FS-electronic_energy",
+            "missing_provenance": [
+              "supplied_by",
+              "source_date"
+            ]
+          },
+          {
+            "record_id": "FS-electronic_energy",
+            "missing_metadata": [
+              "uncertainty"
+            ]
+          },
+          {
+            "record_id": "TS-spectrum",
+            "missing_provenance": [
+              "supplied_by",
+              "source_date"
+            ]
+          },
+          {
+            "record_id": "TS-spectrum",
+            "missing_metadata": [
+              "uncertainty"
+            ]
+          },
+          {
+            "record_id": "reaction-site_inference",
+            "missing_provenance": [
+              "supplied_by",
+              "source_date"
+            ]
+          },
+          {
+            "record_id": "reaction-site_inference",
+            "missing_metadata": [
+              "uncertainty"
+            ]
+          }
+        ],
+        "condition_values": {
+          "temperature_k": null,
+          "standard_state": null,
+          "pressure_pa": null
+        },
+        "scoped_unverified_inputs": [],
+        "status": "partial",
+        "execution_authorized": false
+      },
+      "level": "DRAFT",
+      "origin": "supplied_definition",
+      "site_mapping": null,
+      "user_confirmation": null,
+      "scientific_review": null,
+      "parameter_set_ids": [],
+      "gaps": [
+        "Unknown charge balance",
+        "Unknown site balance",
+        "Missing species structure association",
+        "Missing compatible free energies",
+        "Missing kinetic parameters or rate law",
+        "Reversibility unconfirmed"
+      ],
+      "mkm_status": "blocked",
+      "subject_sha256": "0fde5eaf75dc8860e404d889d09cdd0bc616be231ffba3ba22c01f81124b2bb2",
+      "network_review": null
+    },
+    {
+      "definition": {
+        "reaction_id": "fe110_c2ho_h_to_c2h2o_ISA9725473_to_FSA9725471",
+        "pilot_id": "R4",
+        "selected_equation": "CHCO* + H* -> C2H2O* + *",
+        "reaction_type": "hydrogenation",
+        "reactants": {
+          "CHCO": 1,
+          "H": 1
+        },
+        "products": {
+          "C2H2O": 1
+        },
+        "surface_ids": [
+          "Fe110"
+        ],
+        "interface_id": null,
+        "initial_structure_id": "6800e98e36e32c09bc7c2514f52998e641416dca4d3b62a4aa0acc95ad50a2ed",
+        "final_structure_id": "525ebe73dfbbb231b5c1bf37a6bc691a1a0913f403afa3d8ea7c9d0d90296878",
+        "ts_id": null,
+        "ts_treatment": null,
+        "sites_consumed": null,
+        "sites_released": null,
+        "required_sites": null,
+        "reversible": null,
+        "energy_reference_id": "fe110_converged_toten_sigma0p20_v1",
+        "electronic_reference_convention": "fe110_converged_toten_sigma0p20_v1",
+        "electronic_energies": {
+          "forward": null,
+          "reverse": null,
+          "reaction": {
+            "value": 0.44167439,
+            "unit": "eV",
+            "reference_id": "fe110_converged_toten_sigma0p20_v1",
+            "source": {
+              "kind": "local_calculation",
+              "reference": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/contract/reaction.yaml",
+              "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+            }
+          }
+        },
+        "provenance": [
+          {
+            "kind": "local_calculation",
+            "reference": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/contract/reaction.yaml",
+            "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+          }
+        ]
+      },
+      "direction": {
+        "status": "unknown",
+        "forward": {
+          "reactants": {
+            "CHCO": 1,
+            "H": 1
+          },
+          "products": {
+            "C2H2O": 1
+          },
+          "sites_consumed": null,
+          "sites_released": null
+        },
+        "reverse": null
+      },
+      "net_stoichiometry": {
+        "species:C2H2O": 1,
+        "species:CHCO": -1,
+        "species:H": -1
+      },
+      "site_balance": null,
+      "energies": {
+        "electronic_ev": {
+          "forward": null,
+          "reverse": null,
+          "reaction": 0.44167439
+        },
+        "gibbs_ev": {
+          "forward": null,
+          "reverse": null,
+          "reaction": null
+        },
+        "temperature_k": null,
+        "standard_state": null,
+        "thermal_basis": null
+      },
+      "thermochemistry": null,
+      "level": "DRAFT",
+      "origin": "supplied_definition",
+      "site_mapping": null,
+      "user_confirmation": null,
+      "scientific_review": null,
+      "parameter_set_ids": [],
+      "gaps": [
+        "Unknown charge balance",
+        "Unknown site balance",
+        "Missing species structure association",
+        "Missing compatible free energies",
+        "Missing kinetic parameters or rate law",
+        "Reversibility unconfirmed"
+      ],
+      "mkm_status": "blocked",
+      "subject_sha256": "31a490e87f60a9d8d061dd8ab4102f0bb91656eaeee7d2f9e43332cd343bd2b6",
+      "network_review": null
+    }
+  ],
+  "parameter_sets": [],
+  "source_artifacts": [
+    {
+      "role": "verified_evidence",
+      "file": "evidence_matrix.json",
+      "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+    },
+    {
+      "role": "thermochemistry",
+      "file": "phase2_2_chco_validation.json",
+      "sha256": "3cb1440526b0e6386294100bbfe9a6e31c8d0c999850571f56ce99b322aa1789"
+    }
+  ],
+  "definition_sha256": "a1b7417793eae08eb0411c64005abd20323bd0f62768c1dfa2cfaaa10a8f059d",
+  "site_mapping_version": "ec637861345d94a1992245baf20c8feced626e478dde08b1cf0cd5741e50e0cd",
+  "thermochemistry_version": "a6e7fd88cbc30eb3c9c4a2a8c4abb803175a20e68357aca93bac231450504a7f",
+  "acceptance_record": {
+    "fe110_co_dissociation_topic1_9558184_to_9622455": {
+      "scientific_review": null,
+      "user_confirmation": null,
+      "network_review": null
+    },
+    "fe110_c_h_to_ch_A9715450_to_9573951": {
+      "scientific_review": null,
+      "user_confirmation": null,
+      "network_review": null
+    },
+    "fe110_ch_co_to_chco_20261109": {
+      "scientific_review": null,
+      "user_confirmation": null,
+      "network_review": null
+    },
+    "fe110_c2ho_h_to_c2h2o_ISA9725473_to_FSA9725471": {
+      "scientific_review": null,
+      "user_confirmation": null,
+      "network_review": null
+    }
+  },
+  "validation_report": {
+    "levels": {
+      "fe110_co_dissociation_topic1_9558184_to_9622455": "DRAFT",
+      "fe110_c_h_to_ch_A9715450_to_9573951": "DRAFT",
+      "fe110_ch_co_to_chco_20261109": "DRAFT",
+      "fe110_c2ho_h_to_c2h2o_ISA9725473_to_FSA9725471": "DRAFT"
+    },
+    "independent_cycles_checked": 0,
+    "reactions": {
+      "fe110_co_dissociation_topic1_9558184_to_9622455": [
+        "Unknown charge balance",
+        "Unknown site balance",
+        "Missing species structure association",
+        "Missing compatible free energies",
+        "Missing kinetic parameters or rate law",
+        "Reversibility unconfirmed"
+      ],
+      "fe110_c_h_to_ch_A9715450_to_9573951": [
+        "Unknown charge balance",
+        "Unknown site balance",
+        "Missing species structure association",
+        "Missing compatible free energies",
+        "Missing kinetic parameters or rate law",
+        "Reversibility unconfirmed"
+      ],
+      "fe110_ch_co_to_chco_20261109": [
+        "Unknown charge balance",
+        "Unknown site balance",
+        "Missing species structure association",
+        "Missing compatible free energies",
+        "Missing kinetic parameters or rate law",
+        "Reversibility unconfirmed"
+      ],
+      "fe110_c2ho_h_to_c2h2o_ISA9725473_to_FSA9725471": [
+        "Unknown charge balance",
+        "Unknown site balance",
+        "Missing species structure association",
+        "Missing compatible free energies",
+        "Missing kinetic parameters or rate law",
+        "Reversibility unconfirmed"
+      ]
+    },
+    "mkm_status": "blocked",
+    "execution_authorized": false
+  }
+}

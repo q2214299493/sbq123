@@ -1,0 +1,435 @@
+{
+  "dataset_version": "d76e4946756d535900984779a0da40c0d75a3188bd4b303dc8e3d40145956672",
+  "format": "kinetic-dataset/1",
+  "network_version": "5be003e334c9d26b232841f703248cc23b885f081ca35f15c8e8602e9d608421",
+  "project_id": "fe110-c1-c2-pilot",
+  "catalog": {
+    "projects": [
+      {
+        "project_id": "fe110-c1-c2-pilot"
+      }
+    ],
+    "materials": [
+      {
+        "material_id": "Fe",
+        "project_id": "fe110-c1-c2-pilot"
+      }
+    ],
+    "phases": [
+      {
+        "phase_id": "metallic-Fe",
+        "material_id": "Fe"
+      }
+    ],
+    "surfaces": [
+      {
+        "surface_id": "Fe110",
+        "phase_id": "metallic-Fe",
+        "miller_indices": [
+          1,
+          1,
+          0
+        ]
+      }
+    ],
+    "sites": [],
+    "interfaces": []
+  },
+  "species": [
+    {
+      "species_id": "CO",
+      "phase": "surface",
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "material_ids": [
+        "Fe"
+      ],
+      "composition": {
+        "C": 1,
+        "O": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "structure_id": null
+    },
+    {
+      "species_id": "C",
+      "phase": "surface",
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "material_ids": [
+        "Fe"
+      ],
+      "composition": {
+        "C": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "structure_id": null
+    },
+    {
+      "species_id": "O",
+      "phase": "surface",
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "material_ids": [
+        "Fe"
+      ],
+      "composition": {
+        "O": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "structure_id": null
+    },
+    {
+      "species_id": "H",
+      "phase": "surface",
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "material_ids": [
+        "Fe"
+      ],
+      "composition": {
+        "H": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "structure_id": null
+    },
+    {
+      "species_id": "CH",
+      "phase": "surface",
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "material_ids": [
+        "Fe"
+      ],
+      "composition": {
+        "C": 1,
+        "H": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "structure_id": null
+    },
+    {
+      "species_id": "CHCO",
+      "phase": "surface",
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "material_ids": [
+        "Fe"
+      ],
+      "composition": {
+        "C": 2,
+        "H": 1,
+        "O": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "structure_id": null
+    },
+    {
+      "species_id": "C2H2O",
+      "phase": "surface",
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "material_ids": [
+        "Fe"
+      ],
+      "composition": {
+        "C": 2,
+        "H": 2,
+        "O": 1
+      },
+      "charge": null,
+      "site_occupancy": null,
+      "structure_id": null
+    }
+  ],
+  "source_artifacts": [
+    {
+      "role": "verified_evidence",
+      "file": "evidence_matrix.json",
+      "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+    },
+    {
+      "role": "thermochemistry",
+      "file": "phase2_2_chco_validation.json",
+      "sha256": "3cb1440526b0e6386294100bbfe9a6e31c8d0c999850571f56ce99b322aa1789"
+    }
+  ],
+  "reactions": [
+    {
+      "reaction_id": "fe110_co_dissociation_topic1_9558184_to_9622455",
+      "network_level": "DRAFT",
+      "direction": {
+        "status": "unknown",
+        "forward": {
+          "reactants": {
+            "CO": 1
+          },
+          "products": {
+            "C": 1,
+            "O": 1
+          },
+          "sites_consumed": null,
+          "sites_released": null
+        },
+        "reverse": null
+      },
+      "site_balance": null,
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "energies": {
+        "electronic_ev": {
+          "forward": 1.3502090500000463,
+          "reverse": 2.05657334,
+          "reaction": -0.7063642899999536
+        },
+        "gibbs_ev": {
+          "forward": null,
+          "reverse": null,
+          "reaction": null
+        },
+        "temperature_k": null,
+        "standard_state": null,
+        "thermal_basis": null
+      },
+      "ts_local_zpe_ev": null,
+      "parameter_set": null,
+      "model": null,
+      "rates": {
+        "forward": null,
+        "reverse": null
+      },
+      "equilibrium": null,
+      "local_event_missing": [
+        "Local event pattern, neighbor graph and occurrence normalization"
+      ],
+      "scientifically_validated": false,
+      "export_eligible": false,
+      "missing": [
+        "Unknown charge balance",
+        "Unknown site balance",
+        "Missing species structure association",
+        "Missing compatible free energies",
+        "Missing kinetic parameters or rate law",
+        "Reversibility unconfirmed",
+        "Kinetic parameter set with units, standard states, validity range and sources missing",
+        "Rate law, scoped parameter review and applicability not supplied",
+        "Reviewed site occupancies and vacant-site counts required"
+      ]
+    },
+    {
+      "reaction_id": "fe110_c_h_to_ch_A9715450_to_9573951",
+      "network_level": "DRAFT",
+      "direction": {
+        "status": "unknown",
+        "forward": {
+          "reactants": {
+            "C": 1,
+            "H": 1
+          },
+          "products": {
+            "CH": 1
+          },
+          "sites_consumed": null,
+          "sites_released": null
+        },
+        "reverse": null
+      },
+      "site_balance": null,
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "energies": {
+        "electronic_ev": {
+          "forward": 0.8876918699999692,
+          "reverse": 0.7414669099999855,
+          "reaction": 0.14622495999998364
+        },
+        "gibbs_ev": {
+          "forward": null,
+          "reverse": null,
+          "reaction": null
+        },
+        "temperature_k": null,
+        "standard_state": null,
+        "thermal_basis": null
+      },
+      "ts_local_zpe_ev": null,
+      "parameter_set": null,
+      "model": null,
+      "rates": {
+        "forward": null,
+        "reverse": null
+      },
+      "equilibrium": null,
+      "local_event_missing": [
+        "Local event pattern, neighbor graph and occurrence normalization"
+      ],
+      "scientifically_validated": false,
+      "export_eligible": false,
+      "missing": [
+        "Unknown charge balance",
+        "Unknown site balance",
+        "Missing species structure association",
+        "Missing compatible free energies",
+        "Missing kinetic parameters or rate law",
+        "Reversibility unconfirmed",
+        "Kinetic parameter set with units, standard states, validity range and sources missing",
+        "Rate law, scoped parameter review and applicability not supplied",
+        "Reviewed site occupancies and vacant-site counts required"
+      ]
+    },
+    {
+      "reaction_id": "fe110_ch_co_to_chco_20261109",
+      "network_level": "DRAFT",
+      "direction": {
+        "status": "unknown",
+        "forward": {
+          "reactants": {
+            "CH": 1,
+            "CO": 1
+          },
+          "products": {
+            "CHCO": 1
+          },
+          "sites_consumed": null,
+          "sites_released": null
+        },
+        "reverse": null
+      },
+      "site_balance": null,
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "energies": {
+        "electronic_ev": {
+          "forward": 0.9736017399999923,
+          "reverse": 0.31429370999995854,
+          "reaction": 0.6593080300000338
+        },
+        "gibbs_ev": {
+          "forward": null,
+          "reverse": null,
+          "reaction": null
+        },
+        "temperature_k": null,
+        "standard_state": null,
+        "thermal_basis": null
+      },
+      "ts_local_zpe_ev": 0.5140516496724512,
+      "parameter_set": null,
+      "model": null,
+      "rates": {
+        "forward": null,
+        "reverse": null
+      },
+      "equilibrium": null,
+      "local_event_missing": [
+        "Local event pattern, neighbor graph and occurrence normalization"
+      ],
+      "scientifically_validated": false,
+      "export_eligible": false,
+      "missing": [
+        "Unknown charge balance",
+        "Unknown site balance",
+        "Missing species structure association",
+        "Missing compatible free energies",
+        "Missing kinetic parameters or rate law",
+        "Reversibility unconfirmed",
+        "IS: compatible Gibbs correction missing",
+        "FS: compatible Gibbs correction missing",
+        "Kinetic parameter set with units, standard states, validity range and sources missing",
+        "Rate law, scoped parameter review and applicability not supplied",
+        "Reviewed site occupancies and vacant-site counts required"
+      ]
+    },
+    {
+      "reaction_id": "fe110_c2ho_h_to_c2h2o_ISA9725473_to_FSA9725471",
+      "network_level": "DRAFT",
+      "direction": {
+        "status": "unknown",
+        "forward": {
+          "reactants": {
+            "CHCO": 1,
+            "H": 1
+          },
+          "products": {
+            "C2H2O": 1
+          },
+          "sites_consumed": null,
+          "sites_released": null
+        },
+        "reverse": null
+      },
+      "site_balance": null,
+      "surface_ids": [
+        "Fe110"
+      ],
+      "interface_id": null,
+      "energies": {
+        "electronic_ev": {
+          "forward": null,
+          "reverse": null,
+          "reaction": 0.44167439
+        },
+        "gibbs_ev": {
+          "forward": null,
+          "reverse": null,
+          "reaction": null
+        },
+        "temperature_k": null,
+        "standard_state": null,
+        "thermal_basis": null
+      },
+      "ts_local_zpe_ev": null,
+      "parameter_set": null,
+      "model": null,
+      "rates": {
+        "forward": null,
+        "reverse": null
+      },
+      "equilibrium": null,
+      "local_event_missing": [
+        "Local event pattern, neighbor graph and occurrence normalization"
+      ],
+      "scientifically_validated": false,
+      "export_eligible": false,
+      "missing": [
+        "Unknown charge balance",
+        "Unknown site balance",
+        "Missing species structure association",
+        "Missing compatible free energies",
+        "Missing kinetic parameters or rate law",
+        "Reversibility unconfirmed",
+        "Kinetic parameter set with units, standard states, validity range and sources missing",
+        "Rate law, scoped parameter review and applicability not supplied",
+        "Reviewed site occupancies and vacant-site counts required"
+      ]
+    }
+  ],
+  "export_eligible": false,
+  "execution_authorized": false
+}
