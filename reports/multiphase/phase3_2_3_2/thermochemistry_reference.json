@@ -1,0 +1,180 @@
+{
+  "status": "LITERATURE_GROUNDED_PROVISIONAL",
+  "operating_profile": "operating_conditions.json",
+  "rules": {
+    "temperature": {
+      "value": 523,
+      "unit": "K",
+      "source": "10.1039/D3SC02054A",
+      "source_location": "Section 2.4, free-energy conditions",
+      "source_catalyst_phase": "Iron carbides; microkinetic benchmark on chi-Fe5C2(510)",
+      "origin": "project_reference_choice",
+      "applicability": "Adopted from the carbide simulation solely as a provisional Fe-FT comparison condition."
+    },
+    "gas_standard_pressure": {
+      "value": 1,
+      "unit": "bar",
+      "source": "https://goldbook.iupac.org/terms/view/S05921",
+      "source_location": "IUPAC Gold Book S05921, recommended standard pressure",
+      "source_catalyst_phase": "Phase-independent gas reference",
+      "origin": "project_reference_choice",
+      "applicability": "Reference for gas activities, separate from the reactor pressure."
+    },
+    "gas_activity": {
+      "value": "f_i / p_standard",
+      "unit": "1",
+      "source": "https://goldbook.iupac.org/terms/view/S05925",
+      "source_location": "Ideal-gas standard state; Phase 3.2.3.2 gas reference",
+      "source_catalyst_phase": "Gas phase",
+      "origin": "project_reference_choice",
+      "applicability": "Use p_i/p_standard for a declared ideal-gas scenario. Nonideal gas requires a documented fugacity model. Apply the operating-pressure term to the standard chemical potential only once."
+    },
+    "adsorbate_activity": {
+      "value": "molecular coverage relative to a declared site-based standard coverage",
+      "unit": "1",
+      "source": "modules/baseline_mkm/README.md",
+      "source_location": "Molecular coverage across site inventories",
+      "source_catalyst_phase": "Adsorbates on individually declared inventories",
+      "origin": "project_reference_choice",
+      "applicability": "Provisional ideal surface convention. A validated nonideal activity model may supersede it."
+    },
+    "vacancy_activity": {
+      "value": "vacant sites / total sites in each inventory",
+      "unit": "1",
+      "source": "modules/baseline_mkm/README.md",
+      "source_location": "Molecular coverage across site inventories",
+      "source_catalyst_phase": "Project surface model; phase and domain must be supplied for a specific system.",
+      "origin": "project_reference_choice",
+      "applicability": "Independent inventory and domain required. Unknown occupancy prevents inference of the vacancy fraction unless independently measured."
+    },
+    "multidentate_activity": {
+      "value": "one molecular activity per species on its declared reference and footprint",
+      "unit": "1",
+      "source": "modules/baseline_mkm/README.md",
+      "source_location": "Molecular coverage across site inventories",
+      "source_catalyst_phase": "Project surface model; phase and domain must be supplied for a specific system.",
+      "origin": "project_reference_choice",
+      "applicability": "A molecule contributes its multiplicity to each occupied inventory. Require an explicit surface activity for cross-inventory rate evaluation. No independent product of coverages or vacancy fractions establishes ensemble availability."
+    },
+    "vibration_model": {
+      "value": "local harmonic adsorbate vibrations",
+      "unit": "model",
+      "source": "modules/thermochemistry/README.md",
+      "source_location": "Components and conventions",
+      "source_catalyst_phase": "Project surface model; phase and domain must be supplied for a specific system.",
+      "origin": "project_reference_choice",
+      "applicability": "Use a state-specific, structure-bound spectrum and comparable thermal basis, or a reviewed precomputed correction. Record an alternative treatment and its source before use."
+    },
+    "gibbs_correction": {
+      "value": "ZPE + thermal_enthalpy_increment - T * entropy",
+      "unit": "eV/state",
+      "source": "modules/thermochemistry/README.md",
+      "source_location": "Components and conventions",
+      "source_catalyst_phase": "Project surface model; phase and domain must be supplied for a specific system.",
+      "origin": "project_reference_choice",
+      "applicability": "Use the increment excluding ZPE in eV/state and entropy in eV/K/state. Surface p-delta-V is neglected under the fixed-slab approximation."
+    },
+    "low_frequency_cutoff": {
+      "value": null,
+      "unit": "cm^-1",
+      "source": "modules/thermochemistry/README.md",
+      "source_location": "Components and conventions",
+      "source_catalyst_phase": "Project surface model; phase and domain must be supplied for a specific system.",
+      "origin": "project_reference_choice",
+      "applicability": "No cutoff or floor is prescribed. A modification needs rationale, source, affected modes and scope."
+    },
+    "frequency_scale": {
+      "value": null,
+      "unit": "1",
+      "source": "modules/thermochemistry/README.md",
+      "source_location": "Comparing different species and sites",
+      "source_catalyst_phase": "Project surface model; phase and domain must be supplied for a specific system.",
+      "origin": "project_reference_choice",
+      "applicability": "No common factor assigned. Record each selected factor, including unity, and its basis."
+    },
+    "site_density": {
+      "value": null,
+      "unit": "mol of sites/m^2 of the specified surface",
+      "source": "modules/baseline_mkm/README.md",
+      "source_location": "Site density and phase-specific inventories",
+      "source_catalyst_phase": "Project surface model; phase and domain must be supplied for a specific system.",
+      "origin": "project_reference_choice",
+      "applicability": "Absolute normalization requires an independently supported site count and area."
+    }
+  },
+  "Fe110_TS_illustration": {
+    "source_hashes": {
+      "reports/multiphase/phase3_2_3_1/endpoint_evidence.json": "baebd879673299b6bb15896466700db08247c47c19212a9e3a1e34207e789ab3",
+      "reports/multiphase/ch_co_frequency_audit_20261119.json": "3c262bb9f0414fd758fbc8918cb2736070c3101e7d193c65e8314d3fcea6e77f",
+      "reports/multiphase/ch_co_intake_20261119.json": "8c2b7561a9eeaa40ef3bd24d8b6ce69de58e416ef111b5bc4590a5e8d7caf8ef"
+    },
+    "structure_hash": "0157a418cd1fba1be886426361d494ffbdce9a15d1a9132b996a3481ffcc1a6a",
+    "review": "fe110_ch_co_dimer9998592_vfa2260_grade_a_20261115",
+    "basis": "Fe110-C45-C46-O47-H48-local-harmonic",
+    "scale": {
+      "value": 1.0,
+      "unit": "1",
+      "source": "reports/multiphase/phase3_2_3_1/endpoint_evidence.json",
+      "source_location": "reviewed_TS.thermal_state.scale",
+      "source_catalyst_phase": "Metallic Fe(110), CH* + CO* -> CHCO* benchmark only.",
+      "origin": "inherited_reviewed_benchmark_convention",
+      "applicability": "Applies only to this local spectrum; no endpoint calibration is inferred."
+    },
+    "excluded_mode_one_based": 12,
+    "included_modes_one_based": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "result": {
+      "zpe_ev": {
+        "value": 0.5140516496724512,
+        "unit": "eV/state",
+        "source": "reports/multiphase/phase3_2_3_1/endpoint_evidence.json",
+        "source_location": "reviewed_TS.thermal_state; harmonic evaluation at operating_conditions.json project.reference_temperature",
+        "source_catalyst_phase": "Metallic Fe(110), CH* + CO* -> CHCO* benchmark only.",
+        "origin": "conditional_project_derivation",
+        "applicability": "Local vibrational contribution only; excludes the reviewed imaginary mode. This scenario has no endpoint or reaction free energy."
+      },
+      "thermal_enthalpy_ev": {
+        "value": 0.23455413109363132,
+        "unit": "eV/state",
+        "source": "reports/multiphase/phase3_2_3_1/endpoint_evidence.json",
+        "source_location": "reviewed_TS.thermal_state; harmonic evaluation at operating_conditions.json project.reference_temperature",
+        "source_catalyst_phase": "Metallic Fe(110), CH* + CO* -> CHCO* benchmark only.",
+        "origin": "conditional_project_derivation",
+        "applicability": "Local vibrational contribution only; excludes the reviewed imaginary mode. This scenario has no endpoint or reaction free energy."
+      },
+      "entropy_ev_per_k": {
+        "value": 0.0008969835053748137,
+        "unit": "eV/K/state",
+        "source": "reports/multiphase/phase3_2_3_1/endpoint_evidence.json",
+        "source_location": "reviewed_TS.thermal_state; harmonic evaluation at operating_conditions.json project.reference_temperature",
+        "source_catalyst_phase": "Metallic Fe(110), CH* + CO* -> CHCO* benchmark only.",
+        "origin": "conditional_project_derivation",
+        "applicability": "Local vibrational contribution only; excludes the reviewed imaginary mode. This scenario has no endpoint or reaction free energy."
+      },
+      "gibbs_correction_ev": {
+        "value": 0.27948340745505496,
+        "unit": "eV/state",
+        "source": "reports/multiphase/phase3_2_3_1/endpoint_evidence.json",
+        "source_location": "reviewed_TS.thermal_state; harmonic evaluation at operating_conditions.json project.reference_temperature",
+        "source_catalyst_phase": "Metallic Fe(110), CH* + CO* -> CHCO* benchmark only.",
+        "origin": "conditional_project_derivation",
+        "applicability": "Local vibrational contribution only; excludes the reviewed imaginary mode. This scenario has no endpoint or reaction free energy."
+      }
+    }
+  },
+  "IS_correction_eV": null,
+  "FS_correction_eV": null,
+  "forward_free_energy_barrier_eV": null,
+  "reverse_free_energy_barrier_eV": null
+}
