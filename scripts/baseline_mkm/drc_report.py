@@ -266,6 +266,10 @@ def publish(root, base, output, *, reference_pair=None, reference_result=None):
     output.mkdir(exist_ok=True, parents=True)
     put(output / "result.json", result)
     write_once(output / "comparison.md", render(result).encode())
+    archive_members(root, base, output, result["reaction_id"])
+
+
+def archive_members(root, base, output, reaction_id):
     for label, sign in SIGNS:
         run = check_member(root, base, label, sign)
         target = output / label
@@ -273,7 +277,7 @@ def publish(root, base, output, *, reference_pair=None, reference_result=None):
         native = run / "runtime/result_phase25"
         write_once(target / "data1.mat", (native / "data1.mat").read_bytes())
         write_once(target / "accepted.json", (run / "ACCEPTED.json").read_bytes())
-        if result["reaction_id"] != REACTION:
+        if reaction_id != REACTION:
             for name in ("plan.json", "approval.json"):
                 write_once(target / name, (run / name).read_bytes())
             source = Path(read(run / "approval.json")["source"]["path"])

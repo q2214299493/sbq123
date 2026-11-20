@@ -215,7 +215,7 @@ use kBT ln(baseline/plus)/delta and kBT ln(minus/baseline)/delta.
 | Central and one-sided TS sensitivities | Synthetic transfer reaction at 400 K, fixed pressures and prefactors | Both signed displacements use independent approvals and shift both activation energies. |
 | Step-size stability | 0.01 and 0.005 eV, same positive net turnover per reference site pair | Absolute change 0.0004414543 within project tolerance 0.002034523. |
 | Pressure-dependent TS sensitivity | Synthetic hydrogenate association, first order in NO forward and zero gas order reverse | Central DRC 0.45025755 at 0.005 eV. Step change 0.00018316 within tolerance 0.02251288. |
-| Batch DRC | Ready for development of a bounded synthetic pilot | Four sign-specific approvals, one process, no retries and a shared clock exercised. Mechanism-wide execution and real Fe kinetics remain unvalidated. |
+| Batch DRC | Four-step synthetic Ni/Cu network at 400 K | Two accepted fine-step pairs reused and two new signed pairs verified. Four measured reactions, two step-size-stable ranking entries. Real Fe kinetics remain blocked. |
 
 [Step-size comparison](../../reports/multiphase/phase3_2_0_1/comparison.md) |
 [Machine-readable evidence](../../reports/multiphase/phase3_2_0_1/result.json)
@@ -236,3 +236,30 @@ The pressure audit records per-direction units, orders, gas/surface/vacancy fact
 applied energy parameters and independently reconstructed flux. DRC still uses net overall turnovers per reference site pair.
 See the [pressure audit](../../reports/multiphase/phase3_2_0_2/pressure_order.md) and
 [cross-reaction comparison](../../reports/multiphase/phase3_2_0_2/result.json).
+
+### Bounded batch DRC pilot
+
+The planner scans all reactions in an immutable network and its matching kinetic dataset.
+It records TS identity and grade, reversibility, Gibbs barriers, rate-law units and gas orders per reaction.
+Missing estimates are null. A blocked reaction can be inspected without constructing any native input.
+The native executor retains the accepted synthetic benchmark scope of the single-point gate.
+
+```text
+python -m scripts.baseline_mkm.drc_batch prepare BATCH BASELINE SOURCES.json
+python -m scripts.baseline_mkm.drc_batch execute BATCH BASELINE APPROVALS.json
+python -m scripts.baseline_mkm.drc_batch report BATCH BASELINE OUTPUT
+```
+
+The sources object maps each previously studied reaction ID to `coarse` and `fine` objects.
+Each object specifies the accepted native `pair` directory, published `report` path and reviewed file `sha256`.
+The planner replays both pairs and checks their signed results, conditions, baseline and normalization.
+The global plan contains the remaining reactions and each signed plan hash.
+The approvals index binds `batch_plan_sha256` to a `decisions` map whose reaction entries contain
+`plus` and `minus` paths to independent, human-approved single-point decisions.
+
+The maximum is four new runs, 210 s per run, 840 s total native time, 960 s wall time, one process and zero retries.
+Resume against the same batch directory. A verified accepted member is reused and a failed member stops the batch.
+Write each partial report to a fresh output directory. A signed pair supplies central and one-sided estimates,
+but ranking additionally requires accepted step-size stability evidence. The one-sided gap measures finite-step
+asymmetry. A statistical error bar remains unavailable without suitable additional evidence.
+[Batch approval plan](../../reports/multiphase/phase3_2_1/batch-plan.json) · [Result contract](../../configs/kinetics/mkm_batch_drc.schema.json)

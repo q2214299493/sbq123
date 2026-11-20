@@ -1,0 +1,885 @@
+{
+  "format": "bounded-drc-batch/1",
+  "complete": true,
+  "plan_sha256": "3d524ac8ec197637e808831d013cd94bb874509dcd81110391ae607423a3d70b",
+  "reactions": {
+    "ads": {
+      "status": "READY",
+      "missing": [
+        "Independent step-size stability confirmation required"
+      ],
+      "drc": 0.23027551470604282,
+      "stability": "untested",
+      "reaction_type": "interfacial",
+      "equation": {
+        "reactants": {
+          "H2-g": 1
+        },
+        "products": {
+          "H2-top": 1,
+          "H2-bridge": 1
+        },
+        "sites_consumed": {
+          "top-Ni": 1,
+          "bridge-Cu": 1
+        },
+        "sites_released": {}
+      },
+      "reversibility": "reversible",
+      "ts_id": "fixture-ts-ads",
+      "ts_review": {
+        "review_sha256": "478b306a68b78e86a72154e06a2340547c8f4bbad9a836aac9c4e245c96393ed",
+        "grade": "A",
+        "structure_identity": "fixture-ts-ads",
+        "assignment": "synthetic fixture",
+        "review_reference": "closed_cycle_reference.json"
+      },
+      "energies": {
+        "electronic_ev": {
+          "forward": 0.3,
+          "reverse": 0.5,
+          "reaction": -0.2
+        },
+        "gibbs_ev": {
+          "forward": 0.4,
+          "reverse": 0.5,
+          "reaction": -0.1
+        },
+        "temperature_k": 400,
+        "standard_state": "demo-standard",
+        "thermal_basis": null
+      },
+      "energy_reference_id": "demo-ref",
+      "rate_law_id": "mass-action",
+      "gas_orders": {
+        "forward": {
+          "H2-g": 1
+        },
+        "reverse": {}
+      },
+      "coefficient_units": {
+        "forward": "bar^-1 s^-1",
+        "reverse": "s^-1"
+      },
+      "parameter_set_id": "parameters-ads",
+      "origin": "new",
+      "positive_side": 0.23906821902370914,
+      "negative_side": 0.2214828103883722,
+      "delta_eV": 0.005,
+      "numerical_uncertainty": {
+        "standard_error": null,
+        "reason": "No repeated independent numerical estimates",
+        "one_sided_gap": 0.017585408635336947,
+        "observed_step_change": null
+      },
+      "coarse_drc": null,
+      "tolerance": null,
+      "tof": {
+        "baseline": 81.5127701616477,
+        "plus": 78.73448981464871,
+        "minus": 84.17409496450297
+      },
+      "scientific_validation": {
+        "plus": {
+          "steady_state": 8.526512829121202e-14,
+          "site_balance": {
+            "top-Ni": 0.0,
+            "bridge-Cu": 0.0
+          },
+          "element_balance": {
+            "H": 0.0,
+            "N": 0.0,
+            "O": 0.0
+          },
+          "detailed_balance": {
+            "ads": -3.340232952453448e-06,
+            "transfer": 6.680465912678457e-07,
+            "hydrogenate": -3.3402329515652696e-06,
+            "desorb": 2.0041397716941134e-06
+          }
+        },
+        "minus": {
+          "steady_state": 8.526512829121202e-14,
+          "site_balance": {
+            "top-Ni": 0.0,
+            "bridge-Cu": 0.0
+          },
+          "element_balance": {
+            "H": 0.0,
+            "N": 0.0,
+            "O": 0.0
+          },
+          "detailed_balance": {
+            "ads": -3.3402329515652696e-06,
+            "transfer": 6.680465912678457e-07,
+            "hydrogenate": -3.3402329515652696e-06,
+            "desorb": 2.0041397716941134e-06
+          }
+        }
+      },
+      "diagnostics": null
+    },
+    "transfer": {
+      "status": "ALREADY_VALIDATED",
+      "missing": [],
+      "drc": 0.040690451158404334,
+      "stability": "stable",
+      "reaction_type": "diffusion",
+      "equation": {
+        "reactants": {
+          "H2-bridge": 1
+        },
+        "products": {
+          "H2-top": 1
+        },
+        "sites_consumed": {
+          "top-Ni": 1
+        },
+        "sites_released": {
+          "bridge-Cu": 1
+        }
+      },
+      "reversibility": "reversible",
+      "ts_id": "fixture-ts-transfer",
+      "ts_review": {
+        "review_sha256": "5c8153e2ef212247bb7acaee506c6c5a719cea597d0234799f27d5b984ab996d",
+        "grade": "A",
+        "structure_identity": "fixture-ts-transfer",
+        "assignment": "synthetic fixture",
+        "review_reference": "closed_cycle_reference.json"
+      },
+      "energies": {
+        "electronic_ev": {
+          "forward": 0.76,
+          "reverse": 0.74,
+          "reaction": 0.019999999999999997
+        },
+        "gibbs_ev": {
+          "forward": 0.76,
+          "reverse": 0.74,
+          "reaction": 0.019999999999999997
+        },
+        "temperature_k": 400,
+        "standard_state": "demo-standard",
+        "thermal_basis": null
+      },
+      "energy_reference_id": "demo-ref",
+      "rate_law_id": "mass-action",
+      "gas_orders": {
+        "forward": {},
+        "reverse": {}
+      },
+      "coefficient_units": {
+        "forward": "s^-1",
+        "reverse": "s^-1"
+      },
+      "parameter_set_id": "parameters-transfer",
+      "origin": "reused",
+      "positive_side": 0.04367290219050906,
+      "negative_side": 0.03770800012629882,
+      "delta_eV": 0.005,
+      "numerical_uncertainty": {
+        "standard_error": null,
+        "reason": "No repeated independent numerical estimates",
+        "one_sided_gap": 0.005964902064210242,
+        "observed_step_change": 0.00044145429290509686
+      },
+      "coarse_drc": 0.04113190545130943,
+      "tolerance": 0.002034522557920217,
+      "tof": {
+        "baseline": 81.5127701616477,
+        "plus": 80.99801593648975,
+        "minus": 81.9598494672017
+      },
+      "scientific_validation": {
+        "plus": {
+          "steady_state": 8.526512829121202e-14,
+          "site_balance": {
+            "top-Ni": 0.0,
+            "bridge-Cu": 0.0
+          },
+          "element_balance": {
+            "H": 0.0,
+            "N": 0.0,
+            "O": 0.0
+          },
+          "detailed_balance": {
+            "ads": -3.3402329515652696e-06,
+            "transfer": 6.680465903796673e-07,
+            "hydrogenate": -3.3402329515652696e-06,
+            "desorb": 2.0041397716941134e-06
+          }
+        },
+        "minus": {
+          "steady_state": 5.684341886080802e-14,
+          "site_balance": {
+            "top-Ni": 0.0,
+            "bridge-Cu": 0.0
+          },
+          "element_balance": {
+            "H": 0.0,
+            "N": 0.0,
+            "O": 0.0
+          },
+          "detailed_balance": {
+            "ads": -3.3402329515652696e-06,
+            "transfer": 6.680465912678457e-07,
+            "hydrogenate": -3.3402329515652696e-06,
+            "desorb": 2.0041397716941134e-06
+          }
+        }
+      },
+      "diagnostics": null
+    },
+    "hydrogenate": {
+      "status": "ALREADY_VALIDATED",
+      "missing": [],
+      "drc": 0.45025755212448043,
+      "stability": "stable",
+      "reaction_type": "association",
+      "equation": {
+        "reactants": {
+          "H2-top": 1,
+          "NO-g": 1
+        },
+        "products": {
+          "HNO-top": 1
+        },
+        "sites_consumed": {},
+        "sites_released": {}
+      },
+      "reversibility": "reversible",
+      "ts_id": "fixture-ts-hydrogenate",
+      "ts_review": {
+        "review_sha256": "4830d0dd9ac0a93295cf4f86eda7c1ed0adfbffbcb895ce62a7052a073f02457",
+        "grade": "A",
+        "structure_identity": "fixture-ts-hydrogenate",
+        "assignment": "synthetic fixture",
+        "review_reference": "closed_cycle_reference.json"
+      },
+      "energies": {
+        "electronic_ev": {
+          "forward": 0.78,
+          "reverse": 0.88,
+          "reaction": -0.1
+        },
+        "gibbs_ev": {
+          "forward": 0.78,
+          "reverse": 0.88,
+          "reaction": -0.1
+        },
+        "temperature_k": 400,
+        "standard_state": "demo-standard",
+        "thermal_basis": null
+      },
+      "energy_reference_id": "demo-ref",
+      "rate_law_id": "mass-action",
+      "gas_orders": {
+        "forward": {
+          "NO-g": 1
+        },
+        "reverse": {}
+      },
+      "coefficient_units": {
+        "forward": "bar^-1 s^-1",
+        "reverse": "s^-1"
+      },
+      "parameter_set_id": "parameters-hydrogenate",
+      "origin": "reused",
+      "positive_side": 0.46510730761327673,
+      "negative_side": 0.4354077966356792,
+      "delta_eV": 0.005,
+      "numerical_uncertainty": {
+        "standard_error": null,
+        "reason": "No repeated independent numerical estimates",
+        "one_sided_gap": 0.029699510977597543,
+        "observed_step_change": 0.00018316109027866068
+      },
+      "coarse_drc": 0.4504407132147591,
+      "tolerance": 0.022512877606224023,
+      "tof": {
+        "baseline": 81.5127701616477,
+        "plus": 76.19477340286174,
+        "minus": 86.8270681328554
+      },
+      "scientific_validation": {
+        "plus": {
+          "steady_state": 5.684341886080802e-14,
+          "site_balance": {
+            "top-Ni": 0.0,
+            "bridge-Cu": 0.0
+          },
+          "element_balance": {
+            "H": 0.0,
+            "N": 0.0,
+            "O": 0.0
+          },
+          "detailed_balance": {
+            "ads": -3.3402329515652696e-06,
+            "transfer": 6.680465912678457e-07,
+            "hydrogenate": -3.340232952453448e-06,
+            "desorb": 2.0041397716941134e-06
+          }
+        },
+        "minus": {
+          "steady_state": 5.684341886080802e-14,
+          "site_balance": {
+            "top-Ni": 0.0,
+            "bridge-Cu": 0.0
+          },
+          "element_balance": {
+            "H": 0.0,
+            "N": 0.0,
+            "O": 0.0
+          },
+          "detailed_balance": {
+            "ads": -3.3402329515652696e-06,
+            "transfer": 6.680465912678457e-07,
+            "hydrogenate": -3.340232952453448e-06,
+            "desorb": 2.0041397716941134e-06
+          }
+        }
+      },
+      "diagnostics": null
+    },
+    "desorb": {
+      "status": "READY",
+      "missing": [
+        "Independent step-size stability confirmation required"
+      ],
+      "drc": 0.27942665942544054,
+      "stability": "untested",
+      "reaction_type": "desorption",
+      "equation": {
+        "reactants": {
+          "HNO-top": 1
+        },
+        "products": {
+          "HNO-g": 1
+        },
+        "sites_consumed": {},
+        "sites_released": {
+          "top-Ni": 1
+        }
+      },
+      "reversibility": "reversible",
+      "ts_id": "fixture-ts-desorb",
+      "ts_review": {
+        "review_sha256": "87bd9a647955dcd1a73abdb40cd44c7e7e34f588623a1acf104c1e48ba7045fd",
+        "grade": "A",
+        "structure_identity": "fixture-ts-desorb",
+        "assignment": "synthetic fixture",
+        "review_reference": "closed_cycle_reference.json"
+      },
+      "energies": {
+        "electronic_ev": {
+          "forward": 0.8,
+          "reverse": 0.74,
+          "reaction": 0.06000000000000001
+        },
+        "gibbs_ev": {
+          "forward": 0.8,
+          "reverse": 0.74,
+          "reaction": 0.06000000000000001
+        },
+        "temperature_k": 400,
+        "standard_state": "demo-standard",
+        "thermal_basis": null
+      },
+      "energy_reference_id": "demo-ref",
+      "rate_law_id": "mass-action",
+      "gas_orders": {
+        "forward": {},
+        "reverse": {
+          "HNO-g": 1
+        }
+      },
+      "coefficient_units": {
+        "forward": "s^-1",
+        "reverse": "bar^-1 s^-1"
+      },
+      "parameter_set_id": "parameters-desorb",
+      "origin": "new",
+      "positive_side": 0.29398487342300567,
+      "negative_side": 0.2648684454278762,
+      "delta_eV": 0.005,
+      "numerical_uncertainty": {
+        "standard_error": null,
+        "reason": "No repeated independent numerical estimates",
+        "one_sided_gap": 0.02911642799512948,
+        "observed_step_change": null
+      },
+      "coarse_drc": null,
+      "tolerance": null,
+      "tof": {
+        "baseline": 81.5127701616477,
+        "plus": 78.10978110182705,
+        "minus": 84.7055038873483
+      },
+      "scientific_validation": {
+        "plus": {
+          "steady_state": 5.684341886080802e-14,
+          "site_balance": {
+            "top-Ni": 0.0,
+            "bridge-Cu": 0.0
+          },
+          "element_balance": {
+            "H": 0.0,
+            "N": 0.0,
+            "O": 0.0
+          },
+          "detailed_balance": {
+            "ads": -3.3402329515652696e-06,
+            "transfer": 6.680465912678457e-07,
+            "hydrogenate": -3.3402329515652696e-06,
+            "desorb": 2.0041397716941134e-06
+          }
+        },
+        "minus": {
+          "steady_state": 2.842170943040401e-14,
+          "site_balance": {
+            "top-Ni": 0.0,
+            "bridge-Cu": 0.0
+          },
+          "element_balance": {
+            "H": 0.0,
+            "N": 0.0,
+            "O": 0.0
+          },
+          "detailed_balance": {
+            "ads": -3.3402329515652696e-06,
+            "transfer": 6.680465912678457e-07,
+            "hydrogenate": -3.3402329515652696e-06,
+            "desorb": 2.004139772582292e-06
+          }
+        }
+      },
+      "diagnostics": null
+    }
+  },
+  "ranking": [
+    {
+      "reaction_id": "hydrogenate",
+      "drc": 0.45025755212448043
+    },
+    {
+      "reaction_id": "transfer",
+      "drc": 0.040690451158404334
+    }
+  ],
+  "unavailable": [],
+  "blocked": [],
+  "coverage_response": {
+    "ads": {
+      "plus": {
+        "coverage": {
+          "HNO-top": -0.0017738330357732757,
+          "H2-top": -0.009159038009091347,
+          "H2-bridge": -0.01657027669991451
+        },
+        "vacancies": {
+          "top-Ni": 0.010932871044864623,
+          "bridge-Cu": 0.016570276699914566
+        },
+        "occupied": {
+          "top-Ni": -0.010932871044864623,
+          "bridge-Cu": -0.016570276699914566
+        }
+      },
+      "minus": {
+        "coverage": {
+          "HNO-top": 0.0016991610869387386,
+          "H2-top": 0.008773475668219899,
+          "H2-bridge": 0.015673172878245656
+        },
+        "vacancies": {
+          "top-Ni": -0.010472636755158637,
+          "bridge-Cu": -0.015673172878245656
+        },
+        "occupied": {
+          "top-Ni": 0.010472636755158637,
+          "bridge-Cu": 0.015673172878245656
+        }
+      }
+    },
+    "transfer": {
+      "plus": {
+        "coverage": {
+          "HNO-top": -0.0003286522365805733,
+          "H2-top": -0.0016969682410396536,
+          "H2-bridge": 0.0037483356866113704
+        },
+        "vacancies": {
+          "top-Ni": 0.002025620477620227,
+          "bridge-Cu": -0.003748335686611315
+        },
+        "occupied": {
+          "top-Ni": -0.002025620477620227,
+          "bridge-Cu": 0.003748335686611315
+        }
+      },
+      "minus": {
+        "coverage": {
+          "HNO-top": 0.00028544421107784546,
+          "H2-top": 0.0014738672276433662,
+          "H2-bridge": -0.0032938435295342128
+        },
+        "vacancies": {
+          "top-Ni": -0.0017593114387212117,
+          "bridge-Cu": 0.003293843529534324
+        },
+        "occupied": {
+          "top-Ni": 0.0017593114387212117,
+          "bridge-Cu": -0.003293843529534324
+        }
+      }
+    },
+    "hydrogenate": {
+      "plus": {
+        "coverage": {
+          "HNO-top": -0.016795369860575782,
+          "H2-top": 0.019372284514456106,
+          "H2-bridge": 0.01133879733948362
+        },
+        "vacancies": {
+          "top-Ni": -0.0025769146538803245,
+          "bridge-Cu": -0.011338797339483564
+        },
+        "occupied": {
+          "top-Ni": 0.0025769146538803245,
+          "bridge-Cu": 0.011338797339483564
+        }
+      },
+      "minus": {
+        "coverage": {
+          "HNO-top": 0.016601024416845356,
+          "H2-top": -0.018855750959025808,
+          "H2-bridge": -0.011606926293551756
+        },
+        "vacancies": {
+          "top-Ni": 0.002254726542180452,
+          "bridge-Cu": 0.011606926293551811
+        },
+        "occupied": {
+          "top-Ni": -0.002254726542180452,
+          "bridge-Cu": -0.011606926293551811
+        }
+      }
+    },
+    "desorb": {
+      "plus": {
+        "coverage": {
+          "HNO-top": 0.019349103152479896,
+          "H2-top": -0.008852757847163328,
+          "H2-bridge": 0.0012027970017829404
+        },
+        "vacancies": {
+          "top-Ni": -0.010496345305316568,
+          "bridge-Cu": -0.0012027970017828293
+        },
+        "occupied": {
+          "top-Ni": 0.010496345305316568,
+          "bridge-Cu": 0.0012027970017828293
+        }
+      },
+      "minus": {
+        "coverage": {
+          "HNO-top": -0.01814928164682794,
+          "H2-top": 0.008306261616182198,
+          "H2-bridge": -0.0010577881813028656
+        },
+        "vacancies": {
+          "top-Ni": 0.009843020030645744,
+          "bridge-Cu": 0.0010577881813028656
+        },
+        "occupied": {
+          "top-Ni": -0.009843020030645744,
+          "bridge-Cu": -0.0010577881813028656
+        }
+      }
+    }
+  },
+  "flux_response": {
+    "ads": {
+      "plus": {
+        "ads": {
+          "forward_flux": -5.037049297651535,
+          "reverse_flux": -2.258768950652563,
+          "net_flux": -2.778280346998983
+        },
+        "transfer": {
+          "forward_flux": 5.763205876574659,
+          "reverse_flux": 8.5414862235736,
+          "net_flux": -2.778280346998983
+        },
+        "hydrogenate": {
+          "forward_flux": -5.6774258873885515,
+          "reverse_flux": -0.12086519339056778,
+          "net_flux": -5.556560693997966
+        },
+        "desorb": {
+          "forward_flux": -1.2309934095517292,
+          "reverse_flux": 4.325567284446194,
+          "net_flux": -5.556560693997966
+        }
+      },
+      "minus": {
+        "ads": {
+          "forward_flux": 5.358669411708874,
+          "reverse_flux": 2.6973446088535855,
+          "net_flux": 2.661324802855276
+        },
+        "transfer": {
+          "forward_flux": -6.397365258123443,
+          "reverse_flux": -9.058690060978734,
+          "net_flux": 2.661324802855276
+        },
+        "hydrogenate": {
+          "forward_flux": 5.438426812038784,
+          "reverse_flux": 0.1157772063282465,
+          "net_flux": 5.322649605710552
+        },
+        "desorb": {
+          "forward_flux": 1.1791730436888201,
+          "reverse_flux": -4.14347656202176,
+          "net_flux": 5.322649605710552
+        }
+      }
+    },
+    "transfer": {
+      "plus": {
+        "ads": {
+          "forward_flux": -0.5169432941988816,
+          "reverse_flux": -0.002189069040957392,
+          "net_flux": -0.5147542251579438
+        },
+        "transfer": {
+          "forward_flux": -55.957423050129535,
+          "reverse_flux": -55.44266882497158,
+          "net_flux": -0.5147542251579438
+        },
+        "hydrogenate": {
+          "forward_flux": -1.0519021115745488,
+          "reverse_flux": -0.022393661258671926,
+          "net_flux": -1.0295084503158876
+        },
+        "desorb": {
+          "forward_flux": -0.22807599650366228,
+          "reverse_flux": 0.8014324538122111,
+          "net_flux": -1.0295084503158876
+        }
+      },
+      "minus": {
+        "ads": {
+          "forward_flux": 0.4476875184062834,
+          "reverse_flux": 0.0006082128522510999,
+          "net_flux": 0.44707930555401276
+        },
+        "transfer": {
+          "forward_flux": 64.67288058331599,
+          "reverse_flux": 64.22580127776195,
+          "net_flux": 0.44707930555401276
+        },
+        "hydrogenate": {
+          "forward_flux": 0.9136081698198097,
+          "reverse_flux": 0.019449558711766457,
+          "net_flux": 0.8941586111080255
+        },
+        "desorb": {
+          "forward_flux": 0.19809076477054077,
+          "reverse_flux": -0.696067846337499,
+          "net_flux": 0.8941586111080255
+        }
+      }
+    },
+    "hydrogenate": {
+      "plus": {
+        "ads": {
+          "forward_flux": -4.313659118327379,
+          "reverse_flux": 1.0043376404585551,
+          "net_flux": -5.317996758785952
+        },
+        "transfer": {
+          "forward_flux": 3.2841568465865976,
+          "reverse_flux": 8.602153605372507,
+          "net_flux": -5.317996758785952
+        },
+        "hydrogenate": {
+          "forward_flux": -15.317187205075783,
+          "reverse_flux": -4.681193687503882,
+          "net_flux": -10.635993517571904
+        },
+        "desorb": {
+          "forward_flux": -11.655544345153487,
+          "reverse_flux": -1.019550827581611,
+          "net_flux": -10.635993517571904
+        }
+      },
+      "minus": {
+        "ads": {
+          "forward_flux": 4.351775275851594,
+          "reverse_flux": -0.9625226953561263,
+          "net_flux": 5.314297971207708
+        },
+        "transfer": {
+          "forward_flux": -4.077164288758183,
+          "reverse_flux": -9.39146225996592,
+          "net_flux": 5.314297971207708
+        },
+        "hydrogenate": {
+          "forward_flux": 16.203882630349113,
+          "reverse_flux": 5.575286687933712,
+          "net_flux": 10.628595942415416
+        },
+        "desorb": {
+          "forward_flux": 11.520673725662448,
+          "reverse_flux": 0.8920777832470037,
+          "net_flux": 10.628595942415416
+        }
+      }
+    },
+    "desorb": {
+      "plus": {
+        "ads": {
+          "forward_flux": -3.7422127035437427,
+          "reverse_flux": -0.3392236437231162,
+          "net_flux": -3.4029890598206407
+        },
+        "transfer": {
+          "forward_flux": -15.446334578652909,
+          "reverse_flux": -12.043345518832325,
+          "net_flux": -3.4029890598206407
+        },
+        "hydrogenate": {
+          "forward_flux": -5.487571568802025,
+          "reverse_flux": 1.3184065508392386,
+          "net_flux": -6.805978119641281
+        },
+        "desorb": {
+          "forward_flux": -25.980835283257647,
+          "reverse_flux": -19.174857163616394,
+          "net_flux": -6.805978119641281
+        }
+      },
+      "minus": {
+        "ads": {
+          "forward_flux": 3.511188943005564,
+          "reverse_flux": 0.3184552173049422,
+          "net_flux": 3.192733725700606
+        },
+        "transfer": {
+          "forward_flux": 14.480939465503695,
+          "reverse_flux": 11.288205739803061,
+          "net_flux": 3.192733725700606
+        },
+        "hydrogenate": {
+          "forward_flux": 5.148814174624562,
+          "reverse_flux": -1.2366532767766856,
+          "net_flux": 6.385467451401212
+        },
+        "desorb": {
+          "forward_flux": 28.90305190922487,
+          "reverse_flux": 22.517584457823602,
+          "net_flux": 6.385467451401212
+        }
+      }
+    }
+  },
+  "budget": {
+    "limits": {
+      "max_runs": 4,
+      "per_run_s": 210,
+      "native_s": 840,
+      "wall_s": 960,
+      "max_parallel": 1,
+      "max_retries": 0
+    },
+    "members": {
+      "ads": {
+        "plus": {
+          "run_id": "plus-c3c96f178f0bf4ed",
+          "stage": "ACCEPTED",
+          "invoked": true,
+          "native_s": 138.713837
+        },
+        "minus": {
+          "run_id": "minus-f1019a89a85ba7df",
+          "stage": "ACCEPTED",
+          "invoked": true,
+          "native_s": 29.70362
+        }
+      },
+      "desorb": {
+        "plus": {
+          "run_id": "plus-3dd3951968f7af5a",
+          "stage": "ACCEPTED",
+          "invoked": true,
+          "native_s": 148.449537
+        },
+        "minus": {
+          "run_id": "minus-ce3d2031cc1ebec3",
+          "stage": "ACCEPTED",
+          "invoked": true,
+          "native_s": 91.672092
+        }
+      }
+    },
+    "actual_native_runs": 4,
+    "native_s": 408.539086,
+    "wall_s": 409.56429649845813
+  },
+  "provenance": {
+    "ads": {
+      "pair_result_sha256": "66f5ad3948ac78c5a9627b307117ccd5083b3def3847451196b1ff6c22b3e055",
+      "members": {
+        "plus": {
+          "run_id": "plus-c3c96f178f0bf4ed",
+          "plan_sha256": "54a3267854cc87a0fd7401ccca8d7448a4c7f33c662ac83d99fb0e2a8b0aac1a"
+        },
+        "minus": {
+          "run_id": "minus-f1019a89a85ba7df",
+          "plan_sha256": "f882f1693190f9b01f7f2f5025fdf31b2f2516251ae3101c3ff6a0abb10d50f5"
+        }
+      },
+      "result_path": "pair-1/pair-result.json"
+    },
+    "transfer": {
+      "coarse": {
+        "pair": "C:\\Users\\86177\\Desktop\\work\\archive\\phase3_2_0_transfer_pair",
+        "report": "C:\\Users\\86177\\Desktop\\work\\reports\\multiphase\\phase3_2_0\\result.json",
+        "sha256": "1ad803f0503bb8f317bd1362e75df94d900bcaff966393e103f211d0abe7e4d0"
+      },
+      "fine": {
+        "pair": "C:\\Users\\86177\\Desktop\\work\\archive\\phase3_2_0_1_transfer_pair",
+        "report": "C:\\Users\\86177\\Desktop\\work\\reports\\multiphase\\phase3_2_0_1\\result.json",
+        "sha256": "363825f3513de03d6aa6e36f2b965965d73596bee7ad0f36088f83f4bba9172b"
+      }
+    },
+    "hydrogenate": {
+      "coarse": {
+        "pair": "C:\\Users\\86177\\Desktop\\work\\archive\\phase3_2_0_2_hydrogenate\\coarse",
+        "report": "C:\\Users\\86177\\Desktop\\work\\reports\\multiphase\\phase3_2_0_2\\coarse\\result.json",
+        "sha256": "7f207b2d19d97c510952086b93264d5054d5ba735f945c16c545729c89db3b1b"
+      },
+      "fine": {
+        "pair": "C:\\Users\\86177\\Desktop\\work\\archive\\phase3_2_0_2_hydrogenate\\fine",
+        "report": "C:\\Users\\86177\\Desktop\\work\\reports\\multiphase\\phase3_2_0_2\\fine\\result.json",
+        "sha256": "99fc8929ea2430575b2a44fe86a1d1755efd402f3b29c9cdd25135b6f0209498"
+      }
+    },
+    "desorb": {
+      "pair_result_sha256": "cda84d9da879ad7facfb3244406188cf907f3402b3109b8e14ce4e228628c94f",
+      "members": {
+        "plus": {
+          "run_id": "plus-3dd3951968f7af5a",
+          "plan_sha256": "2359227137e0adc57c888a9550a0abf8105b1861b69754abeead2528df90e466"
+        },
+        "minus": {
+          "run_id": "minus-ce3d2031cc1ebec3",
+          "plan_sha256": "c9fc3cbab432e9e677be584ce396b1b0d4cae22d5e06e9ac24b3155fea61aabe"
+        }
+      },
+      "result_path": "pair-2/pair-result.json"
+    }
+  }
+}

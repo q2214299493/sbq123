@@ -1,0 +1,252 @@
+{
+  "batch_plan_sha256": "3d524ac8ec197637e808831d013cd94bb874509dcd81110391ae607423a3d70b",
+  "baseline_dataset_sha256": "0ac30eec437cebf321339d6c4dde26a0e2146229d8c27fb9fa9f3926adf6d778",
+  "reactions": {
+    "ads": {
+      "reaction_id": "ads",
+      "model": {
+        "forward": {
+          "method": "dissociative_adsorption",
+          "gas_species_id": "H2-g",
+          "mass_u": 2,
+          "capture_area_m2": 5e-20,
+          "sticking": 0.25
+        },
+        "reverse": {
+          "method": "from_equilibrium"
+        }
+      },
+      "parameter_set_sha256": "951c83027fb608cc1230e080a88f890a434c093f8648d40a5200d1d220a6a048",
+      "native_baseline": {
+        "Ea_eV": 0.7853168271366968,
+        "G0_eV": -0.1,
+        "ThermoMode": 0,
+        "BarrierMode": -2,
+        "ConsMode": 0
+      },
+      "coefficients": {
+        "forward": {
+          "coefficient": 1062.5043325104702,
+          "unit": "bar^-1 s^-1",
+          "gas_partial_pressure_orders": {
+            "H2-g": 1
+          }
+        },
+        "reverse": {
+          "coefficient": 58.396411910597834,
+          "unit": "s^-1",
+          "gas_partial_pressure_orders": {}
+        }
+      },
+      "signed_inputs": {
+        "plus": {
+          "dataset_sha256": "3fb3d5c65437f5abc7550181b743bcfd5386f28399212ff38c75fb75f1061127",
+          "native_input_sha256": {
+            "INPUT_phase25.m": "f73e3ecf05e9270b500755ebc08aff80862a4761e9444636e3212a35d70145bd"
+          },
+          "fixed_T_energy_input": {
+            "Ea_eV": 0.7903168271366968,
+            "G0_eV": -0.1,
+            "ThermoMode": 0,
+            "BarrierMode": -2,
+            "ConsMode": 0
+          },
+          "coefficients": {
+            "forward": {
+              "coefficient": 919.0380286135667,
+              "unit": "bar^-1 s^-1",
+              "gas_partial_pressure_orders": {
+                "H2-g": 1
+              }
+            },
+            "reverse": {
+              "coefficient": 50.5113453548132,
+              "unit": "s^-1",
+              "gas_partial_pressure_orders": {}
+            }
+          }
+        },
+        "minus": {
+          "dataset_sha256": "eb350b14c7313a2b31fad83fe53238d2d19e6b91da73b4a6ac2339bc2be43166",
+          "native_input_sha256": {
+            "INPUT_phase25.m": "a8bf92f17274f9be8ab1e40d325e19400a8f979afe5d5577602b07631cc77291"
+          },
+          "fixed_T_energy_input": {
+            "Ea_eV": 0.7803168271366967,
+            "G0_eV": -0.1,
+            "ThermoMode": 0,
+            "BarrierMode": -2,
+            "ConsMode": 0
+          },
+          "coefficients": {
+            "forward": {
+              "coefficient": 1228.3664238644947,
+              "unit": "bar^-1 s^-1",
+              "gas_partial_pressure_orders": {
+                "H2-g": 1
+              }
+            },
+            "reverse": {
+              "coefficient": 67.51237568664895,
+              "unit": "s^-1",
+              "gas_partial_pressure_orders": {}
+            }
+          }
+        }
+      }
+    },
+    "transfer": {
+      "reaction_id": "transfer",
+      "model": {
+        "forward": {
+          "method": "prefactor"
+        },
+        "reverse": {
+          "method": "prefactor"
+        }
+      },
+      "parameter_set_sha256": "e8e9681d6163c3dac378e19e129e709b215c03b250b5d960adf127e1f8c2a453",
+      "native_baseline": {
+        "Ea_eV": 0.76,
+        "G0_eV": 0.02000000000000003,
+        "ThermoMode": 0,
+        "BarrierMode": -2,
+        "ConsMode": 0
+      },
+      "coefficients": {
+        "forward": {
+          "coefficient": 2214.668315712438,
+          "unit": "s^-1",
+          "gas_partial_pressure_orders": {}
+        },
+        "reverse": {
+          "coefficient": 3956.3763917523693,
+          "unit": "s^-1",
+          "gas_partial_pressure_orders": {}
+        }
+      }
+    },
+    "hydrogenate": {
+      "reaction_id": "hydrogenate",
+      "model": {
+        "forward": {
+          "method": "prefactor"
+        },
+        "reverse": {
+          "method": "prefactor"
+        }
+      },
+      "parameter_set_sha256": "323e24b036e0b0f1bce738bf9e4ee3a4f782944b0897430254e89a3815cbe39f",
+      "native_baseline": {
+        "Ea_eV": 0.78,
+        "G0_eV": -0.09999999999999992,
+        "ThermoMode": 0,
+        "BarrierMode": -2,
+        "ConsMode": 0
+      },
+      "coefficients": {
+        "forward": {
+          "coefficient": 1239.709082999593,
+          "unit": "bar^-1 s^-1",
+          "gas_partial_pressure_orders": {
+            "NO-g": 1
+          }
+        },
+        "reverse": {
+          "coefficient": 68.13578076345448,
+          "unit": "s^-1",
+          "gas_partial_pressure_orders": {}
+        }
+      }
+    },
+    "desorb": {
+      "reaction_id": "desorb",
+      "model": {
+        "forward": {
+          "method": "prefactor"
+        },
+        "reverse": {
+          "method": "prefactor"
+        }
+      },
+      "parameter_set_sha256": "492bac2a247888354c633033a3df53cc35f9e99f3c58cc0da5438d080d1db680",
+      "native_baseline": {
+        "Ea_eV": 0.8,
+        "G0_eV": 0.0600000000000001,
+        "ThermoMode": 0,
+        "BarrierMode": -2,
+        "ConsMode": 0
+      },
+      "coefficients": {
+        "forward": {
+          "coefficient": 693.954304384082,
+          "unit": "s^-1",
+          "gas_partial_pressure_orders": {}
+        },
+        "reverse": {
+          "coefficient": 3956.3763917523693,
+          "unit": "bar^-1 s^-1",
+          "gas_partial_pressure_orders": {
+            "HNO-g": 1
+          }
+        }
+      },
+      "signed_inputs": {
+        "plus": {
+          "dataset_sha256": "c0f870650889393b31b7cfc781bcd34e8670aa0ed1ef99ae572c073faa9452a4",
+          "native_input_sha256": {
+            "INPUT_phase25.m": "9078e2431c9074bbbc07ad852814129265bf7b57ebe4fe54cc83c14dd7a12c9b"
+          },
+          "fixed_T_energy_input": {
+            "Ea_eV": 0.805,
+            "G0_eV": 0.0600000000000001,
+            "ThermoMode": 0,
+            "BarrierMode": -2,
+            "ConsMode": 0
+          },
+          "coefficients": {
+            "forward": {
+              "coefficient": 600.2520425889754,
+              "unit": "s^-1",
+              "gas_partial_pressure_orders": {}
+            },
+            "reverse": {
+              "coefficient": 3422.160501631199,
+              "unit": "bar^-1 s^-1",
+              "gas_partial_pressure_orders": {
+                "HNO-g": 1
+              }
+            }
+          }
+        },
+        "minus": {
+          "dataset_sha256": "7eeefa2d12080319f9d61bab6a65c047fb658f706a96643b51ce9d96d3211640",
+          "native_input_sha256": {
+            "INPUT_phase25.m": "c9b3b2cf76564d0b60656c492dbe4d0060b585c665398faaa35c37ecdafb9b12"
+          },
+          "fixed_T_energy_input": {
+            "Ea_eV": 0.795,
+            "G0_eV": 0.05999999999999998,
+            "ThermoMode": 0,
+            "BarrierMode": -2,
+            "ConsMode": 0
+          },
+          "coefficients": {
+            "forward": {
+              "coefficient": 802.283944751114,
+              "unit": "s^-1",
+              "gas_partial_pressure_orders": {}
+            },
+            "reverse": {
+              "coefficient": 4573.985979253285,
+              "unit": "bar^-1 s^-1",
+              "gas_partial_pressure_orders": {
+                "HNO-g": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

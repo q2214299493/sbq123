@@ -13,36 +13,43 @@ STEPS = (("coarse", DELTA_EV), ("fine", HALF_STEP_EV))
 TOTAL = 2 * pair.BUDGET
 
 
+def verify_pair(directory, base, reaction_id, step, baseline_hash, decisions, *, finished):
+    plan = read(directory / "pair.json")
+    if (plan["reaction_id"], plan["delta_eV"], plan["baseline_result_sha256"]) != (
+        reaction_id, step, baseline_hash
+    ):
+        raise ValueError("Mismatched reaction, step or baseline")
+    if (directory / "failed.json").exists():
+        raise ValueError(f"{directory.name} pair previously failed")
+    for label, sign in pair.SIGNS:
+        member = pair.check_member(directory, base, label, sign)
+        state = pair.point.status(member)["stage"]
+        if state == "AWAITING_APPROVAL" and not finished:
+            pair.point.preflight(member, decisions[label])
+        elif state == "ACCEPTED":
+            pair.accepted(member)
+        else:
+            raise ValueError(f"{directory.name}/{label}: retained {state}; no retry")
+    return sha256_json(plan)
+
+
 def verified_plans(root, base, reaction_id, decisions):
     parent, _ = pair.baseline(base)
-    manifest = {}
-    for name, step in STEPS:
-        directory = root / name
-        plan = read(directory / "pair.json")
-        if (plan["reaction_id"], plan["delta_eV"], plan["baseline_result_sha256"]) != (
-            reaction_id, step, parent["result_sha256"]
-        ):
-            raise ValueError("Mismatched reaction, step or baseline")
-        if (directory / "failed.json").exists():
-            raise ValueError(f"{name} pair previously failed")
-        for label, sign in pair.SIGNS:
-            member = pair.check_member(directory, base, label, sign)
-            state = pair.point.status(member)["stage"]
-            if state == "AWAITING_APPROVAL" and not (root / "finished.json").exists():
-                pair.point.preflight(member, decisions[name][label])
-            elif state == "ACCEPTED":
-                pair.accepted(member)
-            else:
-                raise ValueError(f"{name}/{label}: retained {state}; no retry")
-        manifest[name] = sha256_json(plan)
+    manifest = {name: verify_pair(root / name, base, reaction_id, step, parent["result_sha256"],
+                                  decisions[name], finished=(root / "finished.json").exists())
+                for name, step in STEPS}
     return sha256_json(manifest)
 
 
 def run(root, base, reaction_id, decisions):
     digest = verified_plans(root, base, reaction_id, decisions)
+    return run_verified(root, base, digest, [name for name, _ in STEPS], decisions, TOTAL)
+
+
+def run_verified(root, base, digest, directories, decisions, total):
     start = root / "started.json"
     if not start.exists():
-        if any((root / name / "started.json").exists() for name, _ in STEPS):
+        if any((root / name / "started.json").exists() for name in directories):
             raise ValueError("Existing pair lacks its cross-reaction budget clock")
         save(start, {"pairs_sha256": digest, "utc_epoch_s": pair.clock()})
     record = read(start)
@@ -52,20 +59,20 @@ def run(root, base, reaction_id, decisions):
     finish = root / "finished.json"
     if finish.exists():
         result = read(finish)
-        if result["pairs_sha256"] != digest or not 0 < result["elapsed_s"] <= TOTAL:
+        if result["pairs_sha256"] != digest or not 0 < result["elapsed_s"] <= total:
             raise ValueError("Invalid cross-reaction finish receipt")
-        for name, _ in STEPS:
+        for name in directories:
             pair.verified_finish(root / name, read(root / name / "pair.json"))
         return result
-    deadline = monotonic() + TOTAL - elapsed
-    for name, _ in STEPS:
+    deadline = monotonic() + total - elapsed
+    for name in directories:
         if monotonic() >= deadline:
             raise TimeoutError("Cross-reaction budget exhausted")
         pair.run_pair(root / name, base, decisions[name], campaign_deadline=deadline)
-    elapsed = TOTAL - (deadline - monotonic())
-    if elapsed > TOTAL:
+    elapsed = total - (deadline - monotonic())
+    if elapsed > total:
         raise TimeoutError("Cross-reaction budget exceeded")
-    result = dict(pairs_sha256=digest, elapsed_s=elapsed, total_budget_s=TOTAL)
+    result = dict(pairs_sha256=digest, elapsed_s=elapsed, total_budget_s=total)
     save(finish, result)
     return result
 
