@@ -9,6 +9,7 @@ import yaml
 
 from scripts.artifact_io import require_sha256, sha256_file
 from scripts.execution_backends import DEFAULT_CONFIG
+from scripts.scientific_validation import finite_number
 
 
 ROLES = ("adsorption_prerelaxation", "ts_path_search", "active_learning")
@@ -33,7 +34,7 @@ def select_model(role: str, *, authority: Path = DEFAULT_CONFIG) -> dict:
     digest = require_sha256(model["sha256"], label="Fe(110) ML checkpoint")
     if sha256_file(Path(model["path"])) != digest:
         raise ValueError("Selected Fe(110) ML checkpoint hash mismatch; no model fallback")
-    return {
+    selected = {
         "role": role,
         "family": config["family"],
         "model": dict(model),
@@ -41,6 +42,11 @@ def select_model(role: str, *, authority: Path = DEFAULT_CONFIG) -> dict:
         "remote_gpu": config["remote_gpu"],
         "training": config["training"],
     }
+    if role == "adsorption_prerelaxation" and role in config:
+        selected["fmax_eV_per_A"] = finite_number(
+            config[role]["fmax_eV_per_A"], "MACE adsorption pre-relaxation force threshold", positive=True,
+        )
+    return selected
 
 
 def main() -> None:

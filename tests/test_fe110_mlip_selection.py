@@ -14,6 +14,7 @@ def binding(tmp_path):
     authority.write_text(yaml.safe_dump({"fe110_mlip_default": {
         "roles": list(ROLES),
         "family": "mace",
+        "adsorption_prerelaxation": {"fmax_eV_per_A": 0.02},
         "model": {
             "path": str(checkpoint),
             "sha256": sha256(checkpoint.read_bytes()).hexdigest(),
@@ -37,6 +38,10 @@ def test_new_tasks_select_mace_without_inheriting_calibration(binding, role):
     assert selected["calibration"] == "uncalibrated"
     assert selected["remote_gpu"] == "not_validated"
     assert selected["training"] == "not_connected"
+    if role == "adsorption_prerelaxation":
+        assert selected["fmax_eV_per_A"] == 0.02
+    else:
+        assert "fmax_eV_per_A" not in selected
 
 
 def test_modified_checkpoint_fails_closed(binding):

@@ -54,6 +54,9 @@ force convergence, geometry validity, and scientific validity.
   not authorize new jobs or reruns of already covered historical modes.
 - Backend roles and handoffs are authoritative only in
   `configs/execution_backends.yaml`.
+- For new Fe(110) MACE adsorption pre-relaxations, bind the force threshold
+  from `python -m scripts.fe110_mlip_selection adsorption_prerelaxation` into
+  the handoff. Use the task-specific threshold if the user sets one.
 - Use `BUCT(sbq)` / host `MZ73` only for AQCat25 GPU inference, adsorption
   candidate pre-relaxation/ranking, endpoint ML relaxation, IDPP/BA-Sella
   transition-state candidate acceleration, and force-model fine-tuning. Connect as

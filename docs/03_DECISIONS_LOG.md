@@ -15,6 +15,7 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 ## 2026-11-20 — Use the supplied Fe–C–O MACE for new Fe(110) ML tasks
 
+- The user set the maximum movable-atom force threshold for new MACE adsorption pre-relaxations to 0.02 eV/Å. The model selector reads it from `configs/execution_backends.yaml` for the adsorption handoff.
 - The user selected the exact `fe-c-o-mace.model` as the default for new adsorption pre-relaxation, TS path prediction, and active-learning inference. Its digest and head are bound by `configs/execution_backends.yaml`; the CO comparison and CPU pilot are documented in `docs/reviews/fe110_mace_surface_pilot_20261120.md`.
 - Selection does not establish domain calibration, remote runtime readiness, or a MACE training executor. Block unresolved execution; do not substitute AQCat25/MatRIS or reuse their calibrations. Preserve frozen jobs, checkpoints, and results; VASP parameters and result gates are unchanged.
 

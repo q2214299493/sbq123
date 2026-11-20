@@ -35,6 +35,9 @@ Generate, relax, validate, and compare adsorption/coadsorption states and provid
 For **new, unbound Fe(110) ML tasks**, resolve the selected model with
 `python -m scripts.fe110_mlip_selection adsorption_prerelaxation`. The
 user-selected MACE is the default; its remote execution is not yet validated.
+For new MACE adsorption pre-relaxations, bind the selector's
+`fmax_eV_per_A` in the work-to-GPU handoff. The default maximum force on a
+movable atom is 0.02 eV/Å. Use a task-specific value if explicitly set.
 Do not silently fall back to an AQCat25/MatRIS executor. The AQCat25 route
 below remains available for already frozen or separately authorized jobs.
 
