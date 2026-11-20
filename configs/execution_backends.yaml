@@ -9,6 +9,21 @@ authority:
   direct_gpu_to_vasp_handoff: forbidden
   automatic_remote_submission: forbidden
 
+# New, unbound Fe(110) ML tasks only. Frozen requests keep their exact model.
+fe110_mlip_default:
+  roles: [adsorption_prerelaxation, ts_path_search, active_learning]
+  family: mace
+  model:
+    path: D:/fe-c-o-mace.model
+    sha256: fc8d2de14b3a4be337e947b5dc013eef89ea8c38a3fb8319abe14f7c1da639e8
+    head: Default
+    dtype: float64
+    required_atomic_numbers: [1, 6, 8, 26]
+    provenance: user_provided_checkpoint_training_domain_unverified
+  calibration: uncalibrated
+  remote_gpu: not_validated
+  training: not_connected
+
 backends:
   buct2_gpu:
     role: candidate_acceleration_only

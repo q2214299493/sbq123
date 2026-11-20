@@ -17,6 +17,7 @@ from scripts.aqcat25_ml_neb import (RunSettings, _adjacent_rmsd, _evaluate_path,
     _key_bond_distances, _label_candidates, _minimum_pair_distance, _optimizer_stage,
     _periodic_branch_continuous, _unwrap_path, _write_vasp_atomic)
 from scripts.artifact_io import load_json_object, sha256_file, write_json_exclusive
+from scripts.fe110_mlip_selection import select_model
 from scripts.ts_strategy_engine.path_evidence import validate_path_binding, validate_path_review
 
 
@@ -240,6 +241,8 @@ def active_learning_review(config, path, calculator, output):
 def run(output, config_path):
     config = yaml.safe_load(config_path.read_text(encoding="utf-8"))
     validate_config(config)
+    if config_path == CONFIG.resolve() and select_model("ts_path_search")["model"] != config["model"]:
+        raise ValueError("Default pilot must match the selected Fe(110) model")
     output.mkdir(parents=True, exist_ok=False)
     calculator, elements = load_calculator(config["model"])
     settings = RunSettings(ordinary_max_steps=config["steps"]["ordinary_neb"], ml_ci="off",

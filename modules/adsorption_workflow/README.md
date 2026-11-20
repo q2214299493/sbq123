@@ -32,6 +32,12 @@ Generate, relax, validate, and compare adsorption/coadsorption states and provid
 ## Execution Backends
 
 `configs/execution_backends.yaml` is the machine-readable backend contract.
+For **new, unbound Fe(110) ML tasks**, resolve the selected model with
+`python -m scripts.fe110_mlip_selection adsorption_prerelaxation`. The
+user-selected MACE is the default; its remote execution is not yet validated.
+Do not silently fall back to an AQCat25/MatRIS executor. The AQCat25 route
+below remains available for already frozen or separately authorized jobs.
+
 Every transfer must validate against `configs/aqcat25_handoff.schema.json` with
 `scripts/aqcat25_handoff.py` before leaving `work`, before GPU execution, before
 GPU return, and after return. Adsorbate atoms, anchors, internal-bond or
@@ -64,8 +70,8 @@ transition-state/path domain.
    Use external stability order to prioritize candidates and use reported bond
    lengths, angles, heights, and orientations only as reviewed initial-geometry
    references. Never treat reported external energies as local results.
-3. Send the evidence-accepted candidates to AQCat25 on `BUCT(sbq)` for ML
-   pre-relaxation and ranking. Return every result to `work` with structure,
+3. Use the resolved model for ML pre-relaxation only after its runtime and
+   job-specific handoff are verified. Return every result to `work` with structure,
    model/checkpoint, optimizer, unit, compatibility, and domain-status hashes.
    Do not remove an evidence-required motif solely from the ML prediction.
 4. Review predicted final chemistry, contacts, site, duplicate class, and

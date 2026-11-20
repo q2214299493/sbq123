@@ -65,6 +65,14 @@ see `MIGRATION_REVISION_BACKLOG.md`.
 ## Execution Backends
 
 `configs/execution_backends.yaml` is the machine-readable backend contract.
+For new, unbound Fe(110) tasks, resolve the MACE default using
+`python -m scripts.fe110_mlip_selection ts_path_search` or
+`python -m scripts.fe110_mlip_selection active_learning`. This selects the
+prediction checkpoint, not a submission or training authority. The remote
+MACE path and MACE fine-tuning are not verified or connected, respectively.
+No legacy force calibration, learning threshold, or accepted GPU path is
+inherited. The existing AQCat25/MatRIS routes retain their frozen bindings.
+
 The local `work` repository owns contracts, review, handoff, registry, and
 acceptance. `BUCT(sbq)` / `MZ73` may run AQCat25 inference, endpoint ML
 relaxation, IDPP, ASE ML-NEB/ML-CI-NEB path optimization, BA-Sella candidate

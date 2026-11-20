@@ -33,6 +33,10 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 Tasks are ordered by priority and should be handled one per Codex thread.
 
+## Fe(110) MACE remote preflight (2026-11-20)
+
+- Default selection is set in `configs/execution_backends.yaml`. Before a new remote MACE task, bind the actual checkpoint and runtime to an eligible allocation, confirm GPU UUID/CUDA and check the owning handoff. No upload, run, training, or automatic substitution is authorized by model selection alone.
+
 ## CH* + CO* to CH-C-O* local peak review (2026-11-12)
 
 - Current user request: C-C coupling/CO insertion, not H transfer or another C2HO isomer.
