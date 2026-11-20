@@ -61,9 +61,9 @@ def baseline(run):
     return receipt, report
 
 
-def expected(base, sign, delta_eV=DELTA_EV):
+def expected(base, sign, delta_eV=DELTA_EV, reaction_id=REACTION):
     n, d, c = (read(base / (k + ".json")) for k in ("network", "dataset", "configuration"))
-    child = derivative(n, d, sign, delta_eV)
+    child = derivative(n, d, sign, delta_eV, reaction_id)
     return child, dict(c, dataset_version=child["dataset_version"])
 
 
@@ -75,14 +75,16 @@ def put(path, data):
         save(path, data)
 
 
-def prepare(root, base, delta_eV=DELTA_EV):
+def prepare(root, base, delta_eV=DELTA_EV, reaction_id=REACTION):
     parent, _ = baseline(base)
     root.mkdir(parents=True, exist_ok=True)
     if (root / "pair.json").exists() and read(root / "pair.json")["delta_eV"] != delta_eV:
         raise ValueError("Pair directory already belongs to a different step size")
+    if (root / "pair.json").exists() and read(root / "pair.json").get("reaction_id", REACTION) != reaction_id:
+        raise ValueError("Pair directory already belongs to a different reaction")
     members = {}
     for label, sign in SIGNS:
-        d, c = expected(base, sign, delta_eV)
+        d, c = expected(base, sign, delta_eV, reaction_id)
         name = label + "-" + d["dataset_version"][:16]
         child, config = root / (name + ".json"), root / (name + "-configuration.json")
         put(child, d)
@@ -105,7 +107,7 @@ def prepare(root, base, delta_eV=DELTA_EV):
     manifest = dict(
         format="drc-pair-plan/1",
         baseline_result_sha256=parent["result_sha256"],
-        reaction_id=REACTION,
+        reaction_id=reaction_id,
         delta_eV=delta_eV,
         members=members,
         per_run_timeout_s=point.LIMIT,
@@ -119,7 +121,7 @@ def prepare(root, base, delta_eV=DELTA_EV):
 
 def check_member(root, base, label, sign):
     pair = read(root / "pair.json")
-    child, config = expected(base, sign, pair["delta_eV"])
+    child, config = expected(base, sign, pair["delta_eV"], pair.get("reaction_id", REACTION))
     run = root / (label + "-" + child["dataset_version"][:16])
     plan = read(run / "plan.json")
     member = pair["members"][label]
@@ -185,7 +187,7 @@ def pair_deadline(root, manifest, runs):
     return started_at, monotonic() + BUDGET - elapsed
 
 
-def run_pair(root, base, decisions):
+def run_pair(root, base, decisions, *, campaign_deadline=None):
     parent, _ = baseline(base)
     manifest = read(root / "pair.json")
     if manifest["baseline_result_sha256"] != parent["result_sha256"]:
@@ -209,18 +211,19 @@ def run_pair(root, base, decisions):
         else:
             raise ValueError(f"{label}: retained {stage}; no retry")
     started_at, deadline = pair_deadline(root, manifest, runs)
+    execution_deadline = deadline if campaign_deadline is None else min(deadline, campaign_deadline)
     for label, run in runs.items():
-        if monotonic() >= deadline:
+        if monotonic() >= execution_deadline:
             record_failure(failure, label, "total budget exhausted", clock() - started_at)
             raise TimeoutError("Total pair budget exhausted")
         if point.status(run)["stage"] == "AWAITING_APPROVAL":
-            state = point.execute(run, decisions[label], deadline=deadline)
+            state = point.execute(run, decisions[label], deadline=execution_deadline)
             if state["stage"] != "ACCEPTED":
                 record_failure(failure, label, state.get("reason", state["stage"]), clock() - started_at)
                 raise ValueError(f"{label} failed: {read(failure)['reason']}")
         accepted(run)
     elapsed = BUDGET - (deadline - monotonic())
-    if elapsed > BUDGET:
+    if elapsed > BUDGET or (campaign_deadline is not None and monotonic() > campaign_deadline):
         record_failure(failure, "minus", "total budget exceeded", elapsed)
         raise TimeoutError("Total pair budget exceeded")
     completion = dict(elapsed_s=elapsed, remaining_s=BUDGET - elapsed, pair_sha256=sha256_json(manifest))
@@ -236,22 +239,24 @@ def main():
         cmd.add_argument("root", type=Path)
         cmd.add_argument("baseline", type=Path)
         if name == "prepare":
+            cmd.add_argument("--reaction-id", default=REACTION)
             cmd.add_argument("--delta-eV", type=float, choices=(DELTA_EV, HALF_STEP_EV), default=DELTA_EV)
         if name == "execute":
             for label, _ in SIGNS:
                 cmd.add_argument(label + "_approval", type=Path)
         if name == "report":
             cmd.add_argument("--reference-pair", type=Path)
+            cmd.add_argument("--reference-result", type=Path)
             cmd.add_argument("output", type=Path)
     a = p.parse_args()
     if a.action == "prepare":
-        print(prepare(a.root.resolve(), a.baseline.resolve(), a.delta_eV))
+        print(prepare(a.root.resolve(), a.baseline.resolve(), a.delta_eV, a.reaction_id))
     elif a.action == "execute":
         print(run_pair(a.root.resolve(), a.baseline.resolve(), {"plus": a.plus_approval, "minus": a.minus_approval}))
     else:
         from scripts.baseline_mkm.drc_report import publish
 
-        publish(a.root.resolve(), a.baseline.resolve(), a.output, reference_pair=a.reference_pair)
+        publish(a.root.resolve(), a.baseline.resolve(), a.output, reference_pair=a.reference_pair, reference_result=a.reference_result)
 
 
 if __name__ == "__main__":

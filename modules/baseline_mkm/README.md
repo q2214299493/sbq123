@@ -214,7 +214,25 @@ use kBT ln(baseline/plus)/delta and kBT ln(minus/baseline)/delta.
 | --- | --- | --- |
 | Central and one-sided TS sensitivities | Synthetic transfer reaction at 400 K, fixed pressures and prefactors | Both signed displacements use independent approvals and shift both activation energies. |
 | Step-size stability | 0.01 and 0.005 eV, same positive net turnover per reference site pair | Absolute change 0.0004414543 within project tolerance 0.002034523. |
-| Batch DRC | Single-reaction pilot only | Other transition states and aggregate batch scheduling still require validation. |
+| Pressure-dependent TS sensitivity | Synthetic hydrogenate association, first order in NO forward and zero gas order reverse | Central DRC 0.45025755 at 0.005 eV. Step change 0.00018316 within tolerance 0.02251288. |
+| Batch DRC | Ready for development of a bounded synthetic pilot | Four sign-specific approvals, one process, no retries and a shared clock exercised. Mechanism-wide execution and real Fe kinetics remain unvalidated. |
 
 [Step-size comparison](../../reports/multiphase/phase3_2_0_1/comparison.md) |
 [Machine-readable evidence](../../reports/multiphase/phase3_2_0_1/result.json)
+
+### Cross-reaction DRC validation
+
+Select the reviewed elementary step with `drc_pair prepare PAIR BASELINE --reaction-id hydrogenate --delta-eV 0.01`.
+Repeat for the 0.005 eV pair. Use directories named `coarse` and `fine` under a new common root.
+The default reaction remains `transfer`. The selected parameter set and both Gibbs barriers
+must match the reviewed immutable network and its located TS. Sign-specific plans bind the dataset,
+native input, runtime, conditions and original H7 question. Execute the two pairs through
+`python -m scripts.baseline_mkm.drc_cross_reaction ROOT BASELINE hydrogenate A_PLUS A_MINUS B_PLUS B_MINUS`
+with four approved decision paths. Budgets are 210 s per invocation, 480 s per pair and 960 s total.
+A failed member ends the campaign. A previously accepted member is verified before reuse.
+
+Generate the coarse report first. For the fine report pass `--reference-pair COARSE_PAIR --reference-result COARSE_OUTPUT/result.json`.
+The pressure audit records per-direction units, orders, gas/surface/vacancy factors, the native equation index,
+applied energy parameters and independently reconstructed flux. DRC still uses net overall turnovers per reference site pair.
+See the [pressure audit](../../reports/multiphase/phase3_2_0_2/pressure_order.md) and
+[cross-reaction comparison](../../reports/multiphase/phase3_2_0_2/result.json).
