@@ -109,9 +109,13 @@ python -m scripts.adsmind_lite.plan_adsorption_candidates \
 The planner applies accepted local outcomes directly. Otherwise it requires the
 whitelist-first `modules/catalysis_data_retrieval/` gate. A usable whitelist
 match stops retrieval. `NO_WHITELIST_MATCH` triggers the controlled
-authoritative-journal stage; failure there remains `NEEDS_REVIEW`. Chemical
-heuristics may form search terms but cannot generate candidates. Multidentate
-and same-site orientation variants require reviewed templates.
+authoritative-journal stage. If exact evidence falls short, retain the
+supported motifs and use credible references, compatible local evidence, and
+chemical reasoning to propose only the missing non-equivalent starting poses.
+Use AdsMind's existing reviewed-template route. Record which poses are
+hypotheses, the anchor geometry and its rationale, and the remaining
+stability evidence. A blind site sweep remains forbidden. Multidentate and
+same-site orientation variants require reviewed templates.
 
 Generation must pass initial geometry checks and yield different actual
 adsorption-site/binding modes before any POSCAR is written. It keeps one

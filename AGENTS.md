@@ -49,9 +49,13 @@ force convergence, geometry validity, and scientific validity.
   adsorption tasks at intake. Route through `catalysis-data-retrieval` first
   and the evidence-gated AdsMind planner second. Record the exact connectivity,
   facet, source-backed sites, and any evidence shortfall before construction.
-  On a whitelist miss, review primary papers before choosing sites. Build only
-  from the reviewed plan, then verify the generated coordinates before any
-  pre-relaxation, including with a user-selected ML model.
+  On a whitelist miss, check authoritative references through the retrieval
+  module. Cross-check exact chemistry, surface geometry, and stability or
+  convergence against independent sources and compatible local evidence.
+  If confirmed motifs fall short, keep them and fill only the remaining
+  coverage with chemically plausible, non-equivalent starting hypotheses
+  through the existing reviewed-template route. Report the two counts
+  separately. Verify the generated coordinates before any pre-relaxation.
 - Use the existing formal adsorption workflow for all new scientific inputs,
   including work based on historical structures. Keep archive scripts for
   provenance and reproduction. Use pytest for code verification, and use test

@@ -16,7 +16,9 @@ do not fall back to a standalone placement algorithm in the global skill.
 ## Evidence Gate
 
 - Use verified local slabs and endpoints first.
-- When external site/orientation data are needed, consume only accepted `catalysis-data-retrieval` records.
+- Use accepted `catalysis-data-retrieval` records for confirmed motifs. Use the
+  retrieval review's supporting references to justify local hypotheses when
+  confirmed coverage is short.
 - Do not perform an independent literature or web search.
 
 ## Build and Review
@@ -24,8 +26,9 @@ do not fall back to a standalone placement algorithm in the global skill.
 Requests to add missing adsorption poses or to find three different sites use
 the AdsMind plan even when the user names a particular pre-relaxation model.
 If the task specifies distinct site classes, pass
-`--require-distinct-site-classes` to the generator. Escalate any verified site
-shortfall before construction or pre-relaxation. Route new work based on
+`--require-distinct-site-classes` to the generator. Report a source-evidence
+shortfall and review any proposed local starting hypotheses through the
+existing template bundle before pre-relaxation. Route new work based on
 historical structures through the same plan. Keep test fixtures and archived
 exploratory scripts out of routine scientific intake.
 

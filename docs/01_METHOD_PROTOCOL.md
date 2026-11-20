@@ -32,19 +32,22 @@ usable matching adsorption motif exists, stop external retrieval and do not run
 literature search. Only a recorded `NO_WHITELIST_MATCH` opens the controlled
 authoritative-journal fallback owned by `catalysis-data-retrieval`.
 
-The fallback accepts peer-reviewed primary research from authoritative
-chemistry, materials, and catalysis journals, prioritizing Nature-family,
+For direct motif evidence the fallback accepts peer-reviewed primary research
+from authoritative chemistry, materials, and catalysis journals, prioritizing Nature-family,
 JACS/ACS Catalysis and other directly relevant ACS journals, Science-family,
 Angewandte Chemie, Chemical Science, and Journal of Catalysis without treating
 that example list as exhaustive. Verify DOI and publisher provenance, exact
 surface/facet and adsorbate identity, reported stable geometry, and direct
-stability evidence. Non-exact facets and review speculation are not build-ready
-evidence. Before any partial batch, review the distinct initial site/binding
-modes required by `configs/adsmind_lite/prescreen_rules.yaml`. Count these
+stability evidence. Authoritative reviews, publisher supplements, and public
+institutional data can cross-check chemistry, geometry, and stability and
+inform starting hypotheses. Before any partial batch, review the distinct
+initial site/binding modes required by `configs/adsmind_lite/prescreen_rules.yaml`. Count these
 separately from initial configurations and final stable minima. Height, tilt
 and azimuth changes at an unchanged anchoring mode do not increase coverage.
-Report a shortfall instead of padding the calculation set. Review historical
-provenance before reusing coverage; this rule does not authorize historical
+Report confirmed coverage and any shortfall. Fill only the missing coverage
+with chemically plausible, non-equivalent starting hypotheses through
+AdsMind's reviewed-template route and mark them as needing local validation.
+Review historical provenance before reusing coverage. This rule does not authorize historical
 reruns or make ML migration/dissociation a reason to drop an original DFT mode.
 
 External adsorption evidence is a compute-saving structure prior only. Use it
@@ -65,10 +68,10 @@ is the centroid of an adjacent three-Fe triangle and must not coincide with any
 Fe-Fe midpoint. Adsorbate-specific behavior belongs only in evidence-gated
 motif plans and reviewed structure templates.
 
-After the evidence and initial-structure gates pass, AQCat25 on `BUCT(sbq)` may
-pre-relax and rank the accepted adsorption candidates. It is a compute-saving
-screen only: predicted energy/force values cannot enter adsorption-energy
-tables, and one AQCat result cannot remove an evidence-required motif, prove a
+After the evidence and initial-structure gates pass, the task-selected model
+may pre-relax and rank candidates on an eligible backend. Predicted energy
+and force values cannot enter adsorption-energy tables, and one model
+result cannot remove an evidence-required motif, prove a
 final site or global minimum, or replace compatible VASP relaxation/final
 statics. Each GPU result must return through `work` with the source plan,
 structure, compatibility, model/checkpoint, unit, optimizer, and domain-status

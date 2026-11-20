@@ -46,7 +46,12 @@ For adsorption motifs only, this module may invoke chemistry literature
 retrieval at that second stage. The article must be primary research in an authoritative peer-reviewed
 chemistry/materials/catalysis journal with verified DOI and publisher URL,
 exact surface and adsorbate matching, direct stable-structure evidence, and a
-reviewed transferable geometry. Other scholarly work remains explicit-only.
+reviewed transferable geometry. The broader reference review may include
+authoritative reviews, publisher supplements, and public data from research
+institutions. Use them to trace claims back to their data and to cross-check
+the chemical connectivity, facet and site assignments, and relaxation or
+experimental evidence. Label related systems and model predictions as
+supporting context when they do not establish the exact motif.
 
 ## Gate
 
@@ -60,8 +65,11 @@ reviewed transferable geometry. Other scholarly work remains explicit-only.
 8. For an adsorption-site task with no usable motif, record
    `NO_WHITELIST_MATCH`, then search only authoritative journals under
    `configs/adsmind_lite/evidence_gate.yaml`. Other task types remain blocked.
-9. Deduplicate by stable motif, not nominal site name. Return all and only the
-   supported stable configurations; never pad to a fixed site sweep.
+9. Deduplicate stable motifs by geometry and binding. Report how many exact
+   motifs are supported and what evidence is missing. When coverage falls
+   short, the adsorption module may propose reviewed local starting
+   hypotheses from the combined evidence. Their count stays separate from
+   the confirmed motifs.
 10. Rank the accepted motifs and extract only structure references needed to
     reduce local computation: sites, binding atoms, bond lengths, angles,
     surface heights, and orientations. Mark every reported external energy as

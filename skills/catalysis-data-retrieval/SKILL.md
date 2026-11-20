@@ -37,10 +37,12 @@ Start this workflow when the user asks for “补齐吸附结构”, “三个�
 10. Verify DOI, publisher URL, journal authority, exact surface and adsorbate,
     stable-site geometry, and direct stability evidence. Reject review-only
     speculation and non-exact facet transfer as build-ready evidence.
-11. Return every unique stable motif supported by the accepted evidence—two if
-    two are supported, four only if four are supported. Never pad to a fixed
-    top/bridge/hollow list. The owning planner checks initial motif coverage;
-    a shortfall does not authorize padding, a partial submission, or historical reruns.
+11. Return every unique stable motif supported by the accepted evidence. Use
+    authoritative reviews, publisher supplements, and public institutional
+    data as supporting references. Cross-check exact chemistry, facet and
+    geometry, and stability. When exact evidence falls short, report the
+    shortfall and hand the supporting references to AdsMind for reviewed
+    local construction of the missing starting hypotheses.
 12. Rank motifs by reported stability and extract only structure-selection
     guidance: site, binding atoms, bond lengths, bond angles, surface heights,
     and orientation. Label external energies as relative-order references only;
