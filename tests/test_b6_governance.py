@@ -4,6 +4,7 @@ import hashlib
 import json
 import re
 import shutil
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -18,9 +19,12 @@ from scripts.registry_schema import CURRENT_VERSION
 ROOT = Path(__file__).resolve().parents[1]
 
 
+B6_STATE = ROOT / "tests/fixtures/document_governance/b6_publication_current_state.md"
+
+
 def fixture_root(tmp_path):
     payload = build_readiness(ROOT)
-    for relative in payload["source_sha256"]:
+    for relative in [*payload["source_sha256"], payload["module_map_projection"]["manifest"]]:
         destination = tmp_path / relative
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / relative, destination)
@@ -31,14 +35,25 @@ def test_supported_schema_and_production_are_separate():
     payload = build_readiness(ROOT)
     assert payload["supported_code_schema"] == CURRENT_VERSION == 9
     assert payload["production_schema_version"] == "NOT_VERIFIED_IN_B6"
-    for name in ("README.md", "docs/02_CURRENT_STATE.md", "docs/06_MODULE_MAP.md", "docs/PUBLIC_RELEASE.md"):
-        _, text = read_document(ROOT / name)
-        assert "NOT_VERIFIED_IN_B6" in text
-        assert not wording_findings(read_document(ROOT / name)[0], text)
+    governance, _ = read_document(ROOT / "docs/DOCUMENT_GOVERNANCE.md")
+    assert governance["owners"]["production_schema"] == payload["production_schema_version"]
+    for name in public_documents():
+        meta, text = read_document(ROOT / name)
+        if "production_schema_version" in meta:
+            assert meta["production_schema_version"] == payload["production_schema_version"]
+        assert not wording_findings(meta, text)
+
+
+def public_documents():
+    names = ["README.md", "docs/02_CURRENT_STATE.md", "docs/06_MODULE_MAP.md"]
+    # Publication checkouts also have a release mapping linked from their README.
+    if (ROOT / "docs/PUBLIC_RELEASE.md").is_file():
+        names.append("docs/PUBLIC_RELEASE.md")
+    return names
 
 
 def test_recorded_scheduler_observation_is_explicit():
-    _, text = read_document(ROOT / "docs/02_CURRENT_STATE.md")
+    _, text = read_document(B6_STATE)
     assert "Last recorded scheduler status: PEND" in text
     assert "observed_at: 2026-09-07T11:15:50Z" in text
     assert "LAST_RECORDED_OBSERVATION" in text
@@ -60,7 +75,12 @@ def test_one_authority_model_and_classification_for_root_reports():
             models.append(path.name)
     assert models == ["DOCUMENT_GOVERNANCE.md"]
     assert is_current_authority(ROOT, "docs/06_MODULE_MAP.md")
-    for path in ROOT.glob("*.md"):
+    # Classify the versioned repository documents; local untracked drafts are review inputs.
+    tracked = subprocess.check_output(["git", "ls-files", "-z", "--", ":(top,glob)*.md"], cwd=ROOT)
+    model, _ = read_document(ROOT / "docs/DOCUMENT_GOVERNANCE.md")
+    names = set(tracked.decode("utf-8").strip("\0").split("\0")) | set(model["preserved_historical_documents"])
+    for name in names:
+        path = ROOT / name
         metadata, _ = read_document(path)
         assert metadata["document_class"] != "UNKNOWN_REVIEW_REQUIRED", path
 
@@ -82,18 +102,84 @@ def test_tests_and_status_do_not_invent_maturity_or_science():
         if not row["evidence"]:
             assert row["implementation"] == "unknown"
             assert row["tests"] == ["unknown"]
-    expected = {"kinetic_data": "Planned", **{name: "Blocked" for name in (
-        "thermochemistry", "reaction_network", "baseline_mkm", "coverage_mkm", "surface_kmc",
-        "reactor_simulation", "sensitivity_uncertainty")}}
+    governance, _ = read_document(ROOT / "docs/DOCUMENT_GOVERNANCE.md")
+    _, text = read_document(ROOT / governance["owners"]["module_status"])
+    expected = dict(re.findall(r"(?m)^\| `([^`]+)` \| (\w+) \|", text))
     statuses = {row["module"]: row["module_status"] for row in payload["modules"]}
-    assert {name: statuses[name] for name in expected} == expected
+    assert statuses == expected
+
+
+def test_historical_b6_status_belongs_to_its_recorded_sources():
+    snapshot = ROOT / "reports/multiphase/stage_a2_4/history/publication/capability_readiness.json"
+    data = snapshot.read_bytes()
+    assert hashlib.sha256(data).hexdigest() == "21c83a36f9fb2c94995a9dd61cc73aa46cc1276cc1511224c1a2f116e2c4be9b"
+    historical = json.loads(data)
+    assert historical["source_version"] == "3a1bb3f461147a7dc9b5df5efca89de621d27f38"
+    statuses = {row["module"]: row["module_status"] for row in historical["modules"]}
+    assert statuses["thermochemistry"] == "Blocked"
+    assert statuses["kinetic_data"] == "Planned"
+
+
+def test_missing_project_evidence_blocks_execution_even_for_implemented_modules(tmp_path):
+    from scripts.baseline_mkm.single_point import IncompleteKinetics, qualify
+
+    root = fixture_root(tmp_path)
+    path = root / "docs/06_MODULE_MAP.md"
+    meta, _ = read_document(path)
+    _, header, _ = path.read_text("utf8").split("---\n", 2)
+    assert meta["document_class"] == "CURRENT_AUTHORITY"
+    # Fixed synthetic lifecycle and evidence, independent of any current project.
+    path.write_text("---\n" + header + "---\n"
+                    "| `baseline_mkm` | Active | inputs | execution gate |\n"
+                    "| `ts_library` | Completed | inputs | software only |\n"
+                    "```capability-evidence\nts_library:\n  implementation: 'yes'\n  tests: [unit]\n"
+                    "  evidence: [scripts/registry_schema.py]\n```\n", encoding="utf8")
+    manifest = root / build_readiness(ROOT)["module_map_projection"]["manifest"]
+    manifest.write_text('{"projections": {}}', encoding="utf8")
+    report = build_readiness(root)
+    mkm, ts = report["modules"]
+    assert mkm["module_status"] == "Active" and ts["implementation"] == "yes"
+    assert ts["module_status"] == "Completed" and ts["scientific_validation"] == "unknown"
+    assert report["project_execution_eligibility"] == "not_assessed"
+    assert all(row["production_readiness"] == "unverified" for row in (mkm, ts))
+    directory = ROOT / "reports/multiphase"
+    dataset = json.loads((directory / "phase2_4/fe110_parameters.json").read_bytes())
+    network = json.loads((directory / "networks" / f"network-{dataset['network_version']}.json").read_bytes())
+    with pytest.raises(IncompleteKinetics) as exc:
+        qualify(network, dataset, {})
+    assert exc.value.missing == {r["reaction_id"]: r["missing"] for r in dataset["reactions"] if not r["export_eligible"]}
+
+
+def test_managed_row_drift_is_reported_without_changing_the_binding(tmp_path):
+    root = fixture_root(tmp_path)
+    original = build_readiness(root)
+    projection = original["module_map_projection"]
+    name = next(iter(projection["rows"]))
+    path = root / original["module_status_source"]
+    lines = path.read_text("utf8").splitlines()
+    index = next(i for i, line in enumerate(lines) if line.startswith(f"| `{name}` |"))
+    lines[index] = lines[index].rstrip("|") + " fixture edit |"
+    path.write_text("\n".join(lines) + "\n", encoding="utf8")
+    manifest = root / projection["manifest"]
+    before = manifest.read_bytes()
+    changed = build_readiness(root)
+    row = changed["module_map_projection"]["rows"][name]
+    assert row["state"] == "review_required"
+    assert row["expected_sha256"] == projection["rows"][name]["expected_sha256"] != row["observed_sha256"]
+    assert changed["input_sha256"] != original["input_sha256"]
+    assert manifest.read_bytes() == before
 
 
 def test_scientific_validation_cannot_be_inferred_from_test_annotations(tmp_path):
     root = fixture_root(tmp_path)
     path = root / "docs/06_MODULE_MAP.md"
-    text = path.read_text(encoding="utf-8").replace("scientific_validation: unknown", "scientific_validation: validated", 1)
-    path.write_text(text, encoding="utf-8")
+    text = path.read_text(encoding="utf-8")
+    annotation = {"implementation": "yes", "tests": ["unit", "integration"],
+                  "evidence": ["scripts/registry_schema.py"], "scientific_validation": "validated"}
+    start, rest = text.split("```capability-evidence\n", 1)
+    _, end = rest.split("```", 1)
+    path.write_text(start + "```capability-evidence\n" + yaml.safe_dump({"baseline_mkm": annotation}) + "```" + end,
+                    encoding="utf-8")
     with pytest.raises(ValueError, match="scientific evidence"):
         build_readiness(root)
 
@@ -158,7 +244,7 @@ def test_generation_cannot_touch_production_or_calculation_paths(tmp_path, monke
     outcar.parent.mkdir(parents=True)
     outcar.write_bytes(b"preserved raw evidence\r\n")
     database = root / "data/project_registry.sqlite3"
-    database.parent.mkdir()
+    database.parent.mkdir(exist_ok=True)
     database.write_bytes(b"do not open")
     def forbidden(*args, **kwargs):
         raise AssertionError("no database/remote/process access is allowed")
@@ -174,7 +260,7 @@ def test_generation_cannot_touch_production_or_calculation_paths(tmp_path, monke
 
 def test_chronology_preserved_and_managed_gate_not_rewritten():
     metadata, history = read_document(ROOT / "docs/history/current_state_chronology_before_B6_20260909.md")
-    _, current = read_document(ROOT / "docs/02_CURRENT_STATE.md")
+    _, current = read_document(B6_STATE)
     gate = re.search(r"<!-- state-handoff:start.*?<!-- state-handoff:end.*?-->", current, re.S).group()
     original = history.removeprefix("\n").replace("<!-- B6_MANAGED_GATE_RETAINED_IN_CURRENT_STATE -->", gate)
     assert hashlib.sha256(original.encode()).hexdigest() == metadata["original_current_state_sha256_lf"]
@@ -182,8 +268,7 @@ def test_chronology_preserved_and_managed_gate_not_rewritten():
 
 
 def test_current_and_new_historical_links_resolve():
-    for name in ["README.md", "docs/DOCUMENT_GOVERNANCE.md", "docs/02_CURRENT_STATE.md", "docs/06_MODULE_MAP.md",
-                 "docs/PUBLIC_RELEASE.md", "reports/capability_readiness.md",
+    for name in [*public_documents(), "docs/DOCUMENT_GOVERNANCE.md", "reports/capability_readiness.md",
                  "docs/history/current_state_chronology_before_B6_20260909.md"]:
         assert broken_links(ROOT, name) == [], name
 

@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "event_id": "history-stage-a2-4-readiness-governance-20261121",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-stage-a2-4-readiness-governance-20261121",
+    "module": "state_handoff"
+  },
+  "occurred_at": "2026-11-21T07:23:47.531611+00:00",
+  "recorded_at": "2026-11-21T07:23:47.531611+00:00",
+  "summary": "Reconcile source-bound software readiness with per-worktree module lifecycle and managed row evidence.",
+  "payload": {
+    "markdown": "- Stage A.2.4 regenerated each readiness view from its authoritative module map, preserving B6 snapshots. Project eligibility remains a separate scientific decision. Both worktrees passed 84 focused checks. Source conflicts remain under review. See reports/multiphase/stage_a2_4/completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "reports/multiphase/stage_a2_4/completion.md",
+      "authority": "repository_document",
+      "sha256": "cc49896f1d180a4b3eae29c3ae4d26a2b081b5f1ca1f5d4dccc9c6deeb693b89",
+      "observed_at": "2026-11-21T07:23:47.531611+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_a2_4/state_conflicts.json",
+      "authority": "repository_document",
+      "sha256": "a153cd9ffd48187365f9f58eff53827ec9a9ffc1f4d1a56bb33e1a23a6365de8",
+      "observed_at": "2026-11-21T07:23:47.531611+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

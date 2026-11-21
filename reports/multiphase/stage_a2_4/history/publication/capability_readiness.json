@@ -1,0 +1,297 @@
+{
+  "document_class": "GENERATED_CURRENT_REPORT",
+  "authority": "DERIVED_NOT_AUTHORITATIVE",
+  "as_of": "2026-09-09T00:00:00+08:00",
+  "source_scope": "B6 governance of the B5 publication baseline; no live scientific sources",
+  "source_branch": "codex/b6-documentation-data-governance",
+  "source_version": "3a1bb3f461147a7dc9b5df5efca89de621d27f38",
+  "evidence_kind": "CURRENT_CODE_STATE",
+  "supported_code_schema": 9,
+  "production_schema_version": "NOT_VERIFIED_IN_B6",
+  "source_hash_convention": "UTF-8 text with LF newlines; not scientific file hashes",
+  "source_sha256": {
+    "docs/06_MODULE_MAP.md": "1d17bcd54ced01b77737126ae4596f955a1a0acb5b146d2a50e8715fb900a139",
+    "docs/DOCUMENT_GOVERNANCE.md": "9456c4e452c12131524d77ab3ca3118a0698c448750bb8e9ced6d88aefb37d31",
+    "reports/refactor_audit/B5_completion_report.md": "648283f4dfb41c1fd0d00f38621d293ad5ea09a8f1cac1e5756ed959c42400a4",
+    "scripts/adsmind_lite/candidate_generation.py": "b4a0b10a49bcc101c70ab6ca1f6c69d14f2e6fb2deb09856b4803be05db4d035",
+    "scripts/catalysis_retrieval/ranking.py": "cdf27f3cbf117b6d98249fc7f0799afd4a387bcbe023081dfc739a434648df6e",
+    "scripts/document_governance.py": "0436140b07c78517d77cb45966c5bd7b413e78f6906a742182d154d9588009df",
+    "scripts/generate_capability_readiness.py": "0558f769b2f7b92db8661ed5e76205b151750a24bc528d3622aaa4da1feea86b",
+    "scripts/registry_mutations.py": "17eaa6d0c1526d5a622b6c98dc7ba4306ff35dcb377df5d5914da1cfdb8293b4",
+    "scripts/registry_schema.py": "3341ace97bf0abbf6513fb81f7e4c0294f7ca1989dd2fe9ff877ea4f7523bdc2",
+    "scripts/state_manager/store.py": "480fac4a51fb70bb1ad03b5714693c2b4d0328d6df628b33246cae4204a8464b",
+    "scripts/ts_strategy_engine/workflow.py": "23329b3379a248dfc7350500f01902dbf7d1a09b38999b6184b785fb3746f474",
+    "tests/test_adsmind_lite.py": "b57f2192d792cdd5aa811c7efd2d307d9e024b5d9cf9efc6145a953acaa53a64",
+    "tests/test_b4_registry_governance.py": "f783af4ba87409a2acddcd36e300495724b3c2e32f80cd10e773bfff6e931843",
+    "tests/test_catalysis_retrieval.py": "8a4158752a4374210d5c83bbbd3df33d0676e68a13550feb27fdea70d685ed4e",
+    "tests/test_state_manager.py": "cf7c8d6fc3a0c0d64a9a3c8b6391f093b143179d904f2fb5e6de4bf1ece1974e",
+    "tests/test_ts_strategy_engine.py": "8ccc8e93bcd485187674c7da242cecbd9497df65ac18738385df82d5a45dcd67"
+  },
+  "modules": [
+    {
+      "module": "state_handoff",
+      "module_status": "Active",
+      "implementation": "partial",
+      "tests": [
+        "unit",
+        "integration"
+      ],
+      "scientific_validation": "not_applicable",
+      "production_readiness": "unverified",
+      "evidence": [
+        "scripts/state_manager/store.py",
+        "tests/test_state_manager.py",
+        "reports/refactor_audit/B5_completion_report.md"
+      ],
+      "scope": "tested implemented subset; no scientific acceptance or production verification inferred"
+    },
+    {
+      "module": "catalysis_data_retrieval",
+      "module_status": "Active",
+      "implementation": "partial",
+      "tests": [
+        "unit",
+        "integration"
+      ],
+      "scientific_validation": "not_applicable",
+      "production_readiness": "unverified",
+      "evidence": [
+        "scripts/catalysis_retrieval/ranking.py",
+        "tests/test_catalysis_retrieval.py",
+        "reports/refactor_audit/B5_completion_report.md"
+      ],
+      "scope": "tested implemented subset; no scientific acceptance or production verification inferred"
+    },
+    {
+      "module": "convergence_workflow",
+      "module_status": "Active",
+      "implementation": "unknown",
+      "tests": [
+        "unknown"
+      ],
+      "scientific_validation": "unknown",
+      "production_readiness": "unverified",
+      "evidence": [],
+      "scope": "No explicit maturity evidence; do not infer from status or file existence."
+    },
+    {
+      "module": "adsorption_workflow",
+      "module_status": "Active",
+      "implementation": "unknown",
+      "tests": [
+        "unknown"
+      ],
+      "scientific_validation": "unknown",
+      "production_readiness": "unverified",
+      "evidence": [],
+      "scope": "No explicit maturity evidence; do not infer from status or file existence."
+    },
+    {
+      "module": "adsmind_lite",
+      "module_status": "Active",
+      "implementation": "partial",
+      "tests": [
+        "unit",
+        "integration"
+      ],
+      "scientific_validation": "unknown",
+      "production_readiness": "unverified",
+      "evidence": [
+        "scripts/adsmind_lite/candidate_generation.py",
+        "tests/test_adsmind_lite.py",
+        "reports/refactor_audit/B5_completion_report.md"
+      ],
+      "scope": "tested implemented subset; no scientific acceptance or production verification inferred"
+    },
+    {
+      "module": "fe_convergence_baseline",
+      "module_status": "Active",
+      "implementation": "unknown",
+      "tests": [
+        "unknown"
+      ],
+      "scientific_validation": "unknown",
+      "production_readiness": "unverified",
+      "evidence": [],
+      "scope": "No explicit maturity evidence; do not infer from status or file existence."
+    },
+    {
+      "module": "transition_state_search",
+      "module_status": "Active",
+      "implementation": "partial",
+      "tests": [
+        "unit",
+        "integration"
+      ],
+      "scientific_validation": "unknown",
+      "production_readiness": "unverified",
+      "evidence": [
+        "scripts/ts_strategy_engine/workflow.py",
+        "tests/test_ts_strategy_engine.py",
+        "reports/refactor_audit/B5_completion_report.md"
+      ],
+      "scope": "tested implemented subset; no scientific acceptance or production verification inferred"
+    },
+    {
+      "module": "ts_vibrational_validation",
+      "module_status": "Active",
+      "implementation": "unknown",
+      "tests": [
+        "unknown"
+      ],
+      "scientific_validation": "unknown",
+      "production_readiness": "unverified",
+      "evidence": [],
+      "scope": "No explicit maturity evidence; do not infer from status or file existence."
+    },
+    {
+      "module": "memory_migration",
+      "module_status": "Completed",
+      "implementation": "unknown",
+      "tests": [
+        "unknown"
+      ],
+      "scientific_validation": "unknown",
+      "production_readiness": "unverified",
+      "evidence": [],
+      "scope": "No explicit maturity evidence; do not infer from status or file existence."
+    },
+    {
+      "module": "git_versioning",
+      "module_status": "Active",
+      "implementation": "unknown",
+      "tests": [
+        "unknown"
+      ],
+      "scientific_validation": "unknown",
+      "production_readiness": "unverified",
+      "evidence": [],
+      "scope": "No explicit maturity evidence; do not infer from status or file existence."
+    },
+    {
+      "module": "calculation_registry",
+      "module_status": "Active",
+      "implementation": "partial",
+      "tests": [
+        "unit",
+        "integration"
+      ],
+      "scientific_validation": "not_applicable",
+      "production_readiness": "unverified",
+      "evidence": [
+        "scripts/registry_mutations.py",
+        "tests/test_b4_registry_governance.py",
+        "reports/refactor_audit/B5_completion_report.md"
+      ],
+      "scope": "tested implemented subset; no scientific acceptance or production verification inferred"
+    },
+    {
+      "module": "incar_custodian",
+      "module_status": "Active",
+      "implementation": "unknown",
+      "tests": [
+        "unknown"
+      ],
+      "scientific_validation": "unknown",
+      "production_readiness": "unverified",
+      "evidence": [],
+      "scope": "No explicit maturity evidence; do not infer from status or file existence."
+    },
+    {
+      "module": "kinetic_data",
+      "module_status": "Planned",
+      "implementation": "unknown",
+      "tests": [
+        "unknown"
+      ],
+      "scientific_validation": "unknown",
+      "production_readiness": "unverified",
+      "evidence": [],
+      "scope": "No explicit maturity evidence; do not infer from status or file existence."
+    },
+    {
+      "module": "thermochemistry",
+      "module_status": "Blocked",
+      "implementation": "unknown",
+      "tests": [
+        "unknown"
+      ],
+      "scientific_validation": "unknown",
+      "production_readiness": "blocked",
+      "evidence": [],
+      "scope": "No explicit maturity evidence; do not infer from status or file existence."
+    },
+    {
+      "module": "reaction_network",
+      "module_status": "Blocked",
+      "implementation": "unknown",
+      "tests": [
+        "unknown"
+      ],
+      "scientific_validation": "unknown",
+      "production_readiness": "blocked",
+      "evidence": [],
+      "scope": "No explicit maturity evidence; do not infer from status or file existence."
+    },
+    {
+      "module": "baseline_mkm",
+      "module_status": "Blocked",
+      "implementation": "unknown",
+      "tests": [
+        "unknown"
+      ],
+      "scientific_validation": "unknown",
+      "production_readiness": "blocked",
+      "evidence": [],
+      "scope": "No explicit maturity evidence; do not infer from status or file existence."
+    },
+    {
+      "module": "coverage_mkm",
+      "module_status": "Blocked",
+      "implementation": "unknown",
+      "tests": [
+        "unknown"
+      ],
+      "scientific_validation": "unknown",
+      "production_readiness": "blocked",
+      "evidence": [],
+      "scope": "No explicit maturity evidence; do not infer from status or file existence."
+    },
+    {
+      "module": "surface_kmc",
+      "module_status": "Blocked",
+      "implementation": "unknown",
+      "tests": [
+        "unknown"
+      ],
+      "scientific_validation": "unknown",
+      "production_readiness": "blocked",
+      "evidence": [],
+      "scope": "No explicit maturity evidence; do not infer from status or file existence."
+    },
+    {
+      "module": "reactor_simulation",
+      "module_status": "Blocked",
+      "implementation": "unknown",
+      "tests": [
+        "unknown"
+      ],
+      "scientific_validation": "unknown",
+      "production_readiness": "blocked",
+      "evidence": [],
+      "scope": "No explicit maturity evidence; do not infer from status or file existence."
+    },
+    {
+      "module": "sensitivity_uncertainty",
+      "module_status": "Blocked",
+      "implementation": "unknown",
+      "tests": [
+        "unknown"
+      ],
+      "scientific_validation": "unknown",
+      "production_readiness": "blocked",
+      "evidence": [],
+      "scope": "No explicit maturity evidence; do not infer from status or file existence."
+    }
+  ]
+}

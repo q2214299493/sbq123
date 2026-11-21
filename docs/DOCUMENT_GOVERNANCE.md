@@ -112,6 +112,19 @@ software behavior, never scientific validation. No second manually maintained st
 table is allowed. Generation is deterministic, performs no registry/remote queries,
 and writes only `reports/capability_readiness.{json,md}` under a chosen repository root.
 
+Module lifecycle comes from the module map in the selected worktree. Its maturity annotations
+supply implementation, software-test and scientific-review fields. An absent deployment
+annotation yields `unverified` for every lifecycle status, including Blocked. This supersedes
+the B6-derived default. Project execution eligibility requires the owning scientific gate
+and its project-specific evidence. This summary grants no execution authority.
+
+The report retains each source document’s recorded branch, version, date and scope.
+The input digest identifies the current text hashes and the relevant State Handoff row
+bindings. A differing row is displayed as `review_required` alongside its observed lifecycle.
+The reviewer can accept a sourced replacement event or restore the recorded projection.
+An unbound row has no recorded row digest. Historical outputs retain their original inputs
+and observation dates.
+
 ## Checks and recovery
 
 `scripts.document_governance` checks classification-aware wording and affected local
