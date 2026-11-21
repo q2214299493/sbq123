@@ -1,0 +1,171 @@
+{
+  "development": [
+    {
+      "event": "module-kinetic-data-flexible-intake-frequency-audit-20261119",
+      "event_file_sha256": "6fa0ecbc93c5d177350cef44b761811c263f3374253ef9e1502b4cca320b0a9b",
+      "sources": [
+        {
+          "current": "45dc70815b0e9ec072909f32bb634859b2c9d50c4dc2f556fed0437d9193e9ec",
+          "expected": "cac5550c382a2bafcf2a20c4f7f90b46331de6fbe9f701ca35cf32200151baf4",
+          "source": "configs/kinetics/scientific_intake.schema.json"
+        }
+      ],
+      "target": "docs/06_MODULE_MAP.md#module_row:kinetic_data",
+      "type": "module_evidence_precondition"
+    },
+    {
+      "event": "module-reaction-network-phase23-builder-20261119",
+      "event_file_sha256": "3406de6cb7ec5f8640d9c2bcc5eaf56b6f76f1c0e527afd4f16bd24541adb3aa",
+      "sources": [
+        {
+          "current": "bcdaac4d895b40dcddc5ffb51a72586617a3087253ff4b019d1f2162c36dc51e",
+          "expected": "2aa9e3148fd1d52bbf89bc73bfe8427fad68279172a4d797f0a3d2b9a44d51c3",
+          "source": "modules/reaction_network/README.md"
+        },
+        {
+          "current": "1113305163924a3eafb5874a896fb71c81502032a233765f5adefd2e357ecc88",
+          "expected": "ddb80011a7f9e16f94f59f59444082a08e93f66eaed239b6a6adbe8c17e3003e",
+          "source": "scripts/reaction_network/__main__.py"
+        },
+        {
+          "current": "abc2abd6bc1d5c24b0000eecb4b8919528d2aae2158671b671e47b2c77809cc2",
+          "expected": "ddd8a9996a700d9ae96e7f1b0815fa68d3b5b95730de1d19f3b2e426a79742aa",
+          "source": "scripts/reaction_network/builder.py"
+        },
+        {
+          "current": "ce217d75e6a14e09c09b19094899a3326a8aa8f4b4358a1913775b476369515b",
+          "expected": "a7182334ac96a6f36e3f0589e0695f87cbca4bdce4ac84af15297040ffb3ea7f",
+          "source": "scripts/reaction_network/catalog.py"
+        }
+      ],
+      "target": "docs/06_MODULE_MAP.md#module_row:reaction_network",
+      "type": "module_evidence_precondition"
+    }
+  ],
+  "publication": [
+    {
+      "current": "8e98d61bb3f91afe73c2a4b6527abff15c26c6aa372f68aa4d3e9a109d73512c",
+      "event": "module-gate-transition-state-search-dimer9746548-submitted-20260907",
+      "expected": "f3f03bb7b41b2fddcc5883521c5c10dda58baea3fef97c3455e773cc50905fd0",
+      "manifest_sha256": "900fe29e89c84c45b7d3eb828f93cb0cedbfda596ed4e44e1868d5a0f35b241d",
+      "target": "docs/06_MODULE_MAP.md#module_row:transition_state_search",
+      "type": "managed_row_drift"
+    },
+    {
+      "event": "state-history-compacted-7ca5604cfc573d419007f891",
+      "event_file_sha256": "a3697f8b24db20d4b17817a895049331204e569ff841fdcd87b4b2d8097e6d33",
+      "sources": [
+        {
+          "current": "17e5c1dd75605115aece7583cd3bce05425e04145f328f65442d092c117f2b7a",
+          "expected": "f6eee7315643818ddd25c238bc18db07598db7ef48227fda1fdb2f603f8b71ed",
+          "source": "docs/02_CURRENT_STATE.md"
+        }
+      ],
+      "target": [
+        "docs/02_CURRENT_STATE.md",
+        "docs/history/active_fe110_co_dissociation_history_through_20260803.md"
+      ],
+      "type": "compaction_precondition"
+    },
+    {
+      "event": "module-gate-transition-state-search-dimer9746548-submitted-20260907",
+      "event_file_sha256": "f9495f261162e0084a65ebfa413afd4645e808700d937577ac920d32bf89c42c",
+      "sources": [
+        {
+          "current": null,
+          "expected": "ee6a6511b2d3c035722b0b3e316423a504ff6fb39969f0577f7f77eaa0fa26ab",
+          "source": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/dimer_job9745217_image02_20260907/submission_record.json"
+        },
+        {
+          "current": null,
+          "expected": "1fd29f4d36bd373e770546055409d9a401def8968c32019fa5400c6af06e4f25",
+          "source": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/dimer_job9745217_image02_20260907/submission_preflight.json"
+        }
+      ],
+      "target": "docs/06_MODULE_MAP.md#module_row:transition_state_search",
+      "type": "module_evidence_precondition"
+    },
+    {
+      "event": "module-kinetic-data-multiphase-contracts-v1-20261119",
+      "event_file_sha256": "6b52c4083ace16fc3d66f9c6a51a67d7bdaad1dbe06d2ffd284a5497baa49a9c",
+      "sources": [
+        {
+          "current": "0c4cd315aa99782fba648f342bbe171eae45bf6a98936f5fe019541e4ca6547b",
+          "expected": "bcd39abb10eb440c3a57f96941c7f86be0766891894799ccd3b061a82d7566b0",
+          "source": "scripts/multiphase_contracts.py"
+        },
+        {
+          "current": "ba679fa673084ce90543ecdfd15f46199f5a00f4d9d682513572e9f8c970356d",
+          "expected": "8f6b518dbabb8072ebfcd00f86304888497d07d1d8840fcfb46771b0d3d2fb53",
+          "source": "tests/test_multiphase_contracts.py"
+        }
+      ],
+      "target": "docs/06_MODULE_MAP.md#module_row:kinetic_data",
+      "type": "module_evidence_precondition"
+    },
+    {
+      "event": "module-kinetic-data-coverage-registry-case-20261119",
+      "event_file_sha256": "b11438fed740d53f6e2f8feec5ac1dbc67712a7ed6543e8efcfe0b00dcef745f",
+      "sources": [
+        {
+          "current": "0c4cd315aa99782fba648f342bbe171eae45bf6a98936f5fe019541e4ca6547b",
+          "expected": "7f9a33ef114b2b66f1b7668d52c40f465a5a8e9b3069f96195d854d435eb9d28",
+          "source": "scripts/multiphase_contracts.py"
+        },
+        {
+          "current": "fb4854bcece0abab5e83c6d9aa44824fc9d93c722f66cb67c18c93734c182529",
+          "expected": "c0a62b96d8ab566ced05f41c40852c8ef4b0bd47a9c6586f901d953c3a6d2472",
+          "source": "configs/postprocessing_software.yaml"
+        },
+        {
+          "current": "eb40702cdfa67a559b9e060ee2166b0eb987bb047239e10ae3cc28757a4d86d6",
+          "expected": "24f2a642c4234c34d652a110709bb73dcba9836db29a45b7ab05a755930c259e",
+          "source": "modules/baseline_mkm/README.md"
+        }
+      ],
+      "target": "docs/06_MODULE_MAP.md#module_row:kinetic_data",
+      "type": "module_evidence_precondition"
+    },
+    {
+      "event": "module-kinetic-data-flexible-intake-frequency-audit-20261119",
+      "event_file_sha256": "6fa0ecbc93c5d177350cef44b761811c263f3374253ef9e1502b4cca320b0a9b",
+      "sources": [
+        {
+          "current": "45dc70815b0e9ec072909f32bb634859b2c9d50c4dc2f556fed0437d9193e9ec",
+          "expected": "cac5550c382a2bafcf2a20c4f7f90b46331de6fbe9f701ca35cf32200151baf4",
+          "source": "configs/kinetics/scientific_intake.schema.json"
+        }
+      ],
+      "target": "docs/06_MODULE_MAP.md#module_row:kinetic_data",
+      "type": "module_evidence_precondition"
+    },
+    {
+      "event": "module-reaction-network-phase23-builder-20261119",
+      "event_file_sha256": "3406de6cb7ec5f8640d9c2bcc5eaf56b6f76f1c0e527afd4f16bd24541adb3aa",
+      "sources": [
+        {
+          "current": "bcdaac4d895b40dcddc5ffb51a72586617a3087253ff4b019d1f2162c36dc51e",
+          "expected": "2aa9e3148fd1d52bbf89bc73bfe8427fad68279172a4d797f0a3d2b9a44d51c3",
+          "source": "modules/reaction_network/README.md"
+        },
+        {
+          "current": "1113305163924a3eafb5874a896fb71c81502032a233765f5adefd2e357ecc88",
+          "expected": "ddb80011a7f9e16f94f59f59444082a08e93f66eaed239b6a6adbe8c17e3003e",
+          "source": "scripts/reaction_network/__main__.py"
+        },
+        {
+          "current": "abc2abd6bc1d5c24b0000eecb4b8919528d2aae2158671b671e47b2c77809cc2",
+          "expected": "ddd8a9996a700d9ae96e7f1b0815fa68d3b5b95730de1d19f3b2e426a79742aa",
+          "source": "scripts/reaction_network/builder.py"
+        },
+        {
+          "current": "ce217d75e6a14e09c09b19094899a3326a8aa8f4b4358a1913775b476369515b",
+          "expected": "a7182334ac96a6f36e3f0589e0695f87cbca4bdce4ac84af15297040ffb3ea7f",
+          "source": "scripts/reaction_network/catalog.py"
+        }
+      ],
+      "target": "docs/06_MODULE_MAP.md#module_row:reaction_network",
+      "type": "module_evidence_precondition"
+    }
+  ]
+}

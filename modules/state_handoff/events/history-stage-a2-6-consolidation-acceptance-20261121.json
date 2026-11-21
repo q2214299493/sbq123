@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "event_id": "history-stage-a2-6-consolidation-acceptance-20261121",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-stage-a2-6-consolidation-acceptance-20261121",
+    "module": "state_handoff"
+  },
+  "occurred_at": "2026-11-21T09:38:08.284451+00:00",
+  "recorded_at": "2026-11-21T09:38:08.284451+00:00",
+  "summary": "Record the combined P1-P5 architecture audit, offline evidence replay and worktree-specific regression debt.",
+  "payload": {
+    "markdown": "- Stage A.2.6 verified P1-P5 together. The maintained import graphs have zero cycles. Full Windows pytest found 13 development failures and one publication layout failure. Their controls and archived scientific replay are in reports/multiphase/stage_a2_6/completion.md. Stage B is proposed for researcher review."
+  },
+  "evidence": [
+    {
+      "locator": "reports/multiphase/stage_a2_6/completion.md",
+      "authority": "repository_document",
+      "sha256": "b3b3a3833a23c6593f73d4c7966ec2949fbe250203d4ca7752dfb2fd14c77a75",
+      "observed_at": "2026-11-21T09:38:08.284451+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_a2_6/dependency_graph.json.gz",
+      "authority": "repository_document",
+      "sha256": "5a4a7dfb6f6888b6839a6bf76f164e83205e332b967fa08d1a916dfdf6787141",
+      "observed_at": "2026-11-21T09:38:08.284451+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_a2_6/governance.json",
+      "authority": "repository_document",
+      "sha256": "a4e50069eda20a486d0dc0d93e1fd91bc1ca248be5218d33e72a22d1b270c9b1",
+      "observed_at": "2026-11-21T09:38:08.284451+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_a2_6/regression.json.gz",
+      "authority": "repository_document",
+      "sha256": "5c688f369490ed67fc608d3d7d591f506913c60b7dd5d65cd68e6f70afd28a93",
+      "observed_at": "2026-11-21T09:38:08.284451+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_a2_6/regression.md",
+      "authority": "repository_document",
+      "sha256": "070e6338e02581720b8b774b65a86c7ab5c34b1a3c76e60302ecccb3953e4f44",
+      "observed_at": "2026-11-21T09:38:08.284451+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_a2_6/scientific_replay.json",
+      "authority": "repository_document",
+      "sha256": "8acffc1771cd0bbd446f7ef133a12a309fed48f30a36754aa77a36d834ad2ce8",
+      "observed_at": "2026-11-21T09:38:08.284451+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_a2_6/stage_b_plan.md",
+      "authority": "repository_document",
+      "sha256": "c791fd9d6d6513eab14af9b05ef622b656e7ac94d2aa06a9b4b67532f0024203",
+      "observed_at": "2026-11-21T09:38:08.284451+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}
