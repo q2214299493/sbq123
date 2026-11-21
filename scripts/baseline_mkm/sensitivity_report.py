@@ -4,10 +4,10 @@ from datetime import datetime
 from math import log
 
 from scripts.artifact_io import load_json_object as read, sha256_json
-from scripts.baseline_mkm import drc_pair as pair
+from scripts.baseline_mkm import drc_pair_records as pair
 from scripts.baseline_mkm.drc_report import archive_members, directional_audit, evidence, write_once
 from scripts.baseline_mkm.drc_step_size import project_tolerance
-from scripts.baseline_mkm.sensitivity_study import LIMITS, specifications
+from scripts.baseline_mkm.sensitivity_plan import LIMITS, specifications
 from scripts.baseline_mkm.single_point_result import check_close
 from scripts.scientific_validation import finite_number
 from scripts.thermochemistry.harmonic import KB

@@ -220,3 +220,10 @@ def test_entire_study_preflight_and_first_failure(tmp_path, monkeypatch, fault):
             study.execute(tmp_path, tmp_path, approvals)
         assert invoked == (["intermediate_G-coarse"] if fault == "first pair fails" else [])
         assert not (tmp_path / "finished.json").exists()
+
+
+def test_study_legacy_specifications_share_plan_owner():
+    from scripts.baseline_mkm import sensitivity_plan
+
+    assert LIMITS is sensitivity_plan.LIMITS
+    assert specifications is sensitivity_plan.specifications
