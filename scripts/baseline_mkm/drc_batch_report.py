@@ -3,8 +3,8 @@
 from datetime import datetime
 
 from scripts.artifact_io import load_json_object as read, sha256_file, sha256_json
-from scripts.baseline_mkm import drc_pair as pair
-from scripts.baseline_mkm.drc_batch import LIMITS, reuse, scan
+from scripts.baseline_mkm import drc_pair_records as pair
+from scripts.baseline_mkm.drc_batch_plan import LIMITS, reuse, scan
 from scripts.baseline_mkm.drc_report import archive_members, compare, write_once
 from scripts.baseline_mkm.drc_step_size import summarize
 from scripts.baseline_mkm.single_point_result import check_close

@@ -339,3 +339,10 @@ def test_retrieval_application_preserves_diagnostic_and_fail_closed_outputs(tmp_
     result = search_records(source, query="Fe CO", lexical_only=True)
     assert result["status"] == "STOP"
     assert "source_url_not_allowed" in result["validation_failures"][0]["errors"]
+
+
+def test_batch_planning_reporting_and_execution_do_not_import_batch_cli():
+    trees = maintained_trees()
+    for name in ("drc_batch_plan", "drc_batch_execution", "drc_batch_report"):
+        path = f"scripts/baseline_mkm/{name}.py"
+        assert "scripts.baseline_mkm.drc_batch" not in imported_modules(path, trees[path])

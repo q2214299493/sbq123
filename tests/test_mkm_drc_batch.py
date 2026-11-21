@@ -7,6 +7,7 @@ import pytest
 
 from scripts.artifact_io import load_json_object as read, sha256_file, sha256_json, write_json_exclusive as save
 from scripts.baseline_mkm import drc_batch as batch, drc_batch_execution as executor
+from scripts.baseline_mkm import drc_batch_plan as planning
 from scripts.baseline_mkm import drc_cross_reaction as campaign
 from scripts.baseline_mkm.drc_batch_report import describe, ranking
 from scripts.baseline_mkm.drc_pair import REPORTS
@@ -78,7 +79,7 @@ def test_reuse_reconstructs_both_pairs_and_rejects_tampering(tmp_path, monkeypat
         result.pop("step_size_validation", None)
         return result
 
-    monkeypatch.setattr(batch, "compare", compare)
+    monkeypatch.setattr(planning, "compare", compare)
     assert batch.reuse(tmp_path, "transfer", src)["step_size_validation"]["passed"]
     with pytest.raises(ValueError, match="Wrong reaction"):
         batch.reuse(tmp_path, "ads", src)
@@ -196,3 +197,8 @@ def test_pilot_plan_is_reproducible_without_native_execution(parents):
         phase = (REPORTS / "phase3_2_0_1" if rid == "transfer" else REPORTS / "phase3_2_0_2/fine") / "result.json"
         assert sha256_file(phase) == ref["fine"]["sha256"]
         assert manifest["candidates"][rid]["drc"] == read(phase)["drc"]
+
+
+def test_batch_cli_preserves_plan_imports():
+    for name in ("eligibility", "scan", "reuse", "prepare", "LIMITS", "compare"):
+        assert getattr(batch, name) is getattr(planning, name)

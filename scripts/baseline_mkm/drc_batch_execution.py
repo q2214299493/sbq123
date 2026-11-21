@@ -4,7 +4,7 @@ from pathlib import Path
 
 from scripts.artifact_io import load_json_object as read, sha256_json
 from scripts.baseline_mkm import drc_pair as pair
-from scripts.baseline_mkm.drc_batch import LIMITS, prepare
+from scripts.baseline_mkm.drc_batch_plan import LIMITS, prepare
 from scripts.baseline_mkm.drc_cross_reaction import run_verified, verify_pair
 from scripts.baseline_mkm.ts_perturbation import HALF_STEP_EV
 
