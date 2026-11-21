@@ -1,0 +1,1148 @@
+{
+  "attractive": {
+    "absorbing_clock_sentinel": true,
+    "checkpoint": null,
+    "event_counts": {
+      "r1_forward": 8
+    },
+    "event_definitions": {
+      "ads": {
+        "coefficient_basis": "isolated_reactants",
+        "energetics_sha256": "07088ec95c97653149387e18c4db9c247cdb3a3f3ed6bce40a094dad808a3d70",
+        "final": [
+          [
+            "H2-top",
+            1
+          ],
+          [
+            "H2-bridge",
+            2
+          ]
+        ],
+        "forward_proximity_factor": 0.0,
+        "initial": [
+          null,
+          null
+        ],
+        "neighbors_zero_based": [
+          [
+            0,
+            1
+          ]
+        ],
+        "patterns_per_reference_site": {
+          "forward": 2,
+          "reverse": 2
+        },
+        "site_ids": [
+          "top-Ni",
+          "bridge-Cu"
+        ]
+      }
+    },
+    "executable_sha256": "84a8f88d6df633eeea9eeac8aa9227237cdf2564a4dc72e0cab8a18c4ce119d2",
+    "first_sample_counts": {
+      "H2-bridge": 1,
+      "H2-g": 0,
+      "H2-top": 1
+    },
+    "initial_matches": 15,
+    "last_sample_counts": {
+      "H2-bridge": 9,
+      "H2-g": -8,
+      "H2-top": 9
+    },
+    "lattice": {
+      "path": "reports/multiphase/phase2_5_1/benchmarks/attractive.zip!/lattice_input.dat",
+      "sha256": "041747579adc213be762c4945862a71396c90465c4059660ac6d773c9d848362"
+    },
+    "lattice_site_count": 18,
+    "manifest": {
+      "path": "reports/multiphase/phase2_5_1/benchmarks/attractive.zip!/manifest.json",
+      "sha256": "cf0c8aee229982fd3e3cff6e3b63ead87d00b8f41a85fdbc57236076dd46a82c"
+    },
+    "matching_multiplicity": [
+      {
+        "coefficient": 531.2521662552351,
+        "matching_events": 18,
+        "native_step": "r1_forward",
+        "patterns_per_reference_site": 2.0,
+        "reaction_id": "ads",
+        "reference_sites": 9.0
+      }
+    ],
+    "missing_rate_evidence": null,
+    "native_outputs": {
+      "console.log": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/attractive.zip!/console.log",
+        "sha256": "f826e0dc3ba09ad293f93b2e1c7f4206204dd942cf27d1c43990f4784007c3b9"
+      },
+      "general_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/attractive.zip!/general_output.txt",
+        "sha256": "c22cca41fd94247529e29722f0e287e813a0b52d47e2de052f611077050587e4"
+      },
+      "lattice_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/attractive.zip!/lattice_output.txt",
+        "sha256": "dccacd609c865b8739d17d5ca64c7eef5c1e9f6135328fd7660516b3c0a4728b"
+      },
+      "procstat_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/attractive.zip!/procstat_output.txt",
+        "sha256": "be4e2fbe40bbe63005c3e3356b2b960ca7ae19e73f496a02eceb59413bcdd4e9"
+      },
+      "specnum_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/attractive.zip!/specnum_output.txt",
+        "sha256": "c0ed7b2b22a1a328109e98759d2ffc481e10f76a70886a5944bb3ec8f21a8018"
+      }
+    },
+    "native_warning_codes": [
+      "4008",
+      "801002"
+    ],
+    "net_species_changes": {
+      "H2-bridge": 8,
+      "H2-g": -8,
+      "H2-top": 8
+    },
+    "population_convention": "Surface columns count molecules; gas columns count cumulative exchange.",
+    "population_window": {
+      "duration_s": 0.006173982441899926,
+      "end_s": 0.006173982441899926,
+      "first_event": 0,
+      "last_event": 8,
+      "start_s": 0.0
+    },
+    "process_window": {
+      "duration_s": 0.006173982441899926,
+      "end_s": 0.006173982441899926,
+      "first_event": 0,
+      "last_event": 8,
+      "start_s": 0.0
+    },
+    "rate_qualification": "observed finite-window mean",
+    "receipt": {
+      "path": "reports/multiphase/phase2_5_1/zacros_validation.json",
+      "sha256": "cd729ced9cdf93ed2a8bb0a92fab556aee8345cea520356dfe9d95e0cc778359"
+    },
+    "repeat_cell": [
+      3,
+      3
+    ],
+    "seed": 13201,
+    "statistical_limitation": "Single short trajectory. No reviewed stationary window or independent replicate ensemble.",
+    "statistical_uncertainty": null,
+    "steady_state": null,
+    "terminal_event_counter": 9,
+    "terminal_physical_time_s": null,
+    "termination": "normal"
+  },
+  "continuous": {
+    "absorbing_clock_sentinel": false,
+    "checkpoint": null,
+    "event_counts": {
+      "r1_forward": 13,
+      "r2_reverse": 6
+    },
+    "event_definitions": {
+      "ads": {
+        "final": [
+          [
+            "H2-top",
+            1
+          ],
+          [
+            "H2-bridge",
+            2
+          ]
+        ],
+        "initial": [
+          null,
+          null
+        ],
+        "neighbors_zero_based": [
+          [
+            0,
+            1
+          ]
+        ],
+        "patterns_per_reference_site": {
+          "forward": 2,
+          "reverse": 2
+        },
+        "site_ids": [
+          "top-Ni",
+          "bridge-Cu"
+        ]
+      }
+    },
+    "executable_sha256": "84a8f88d6df633eeea9eeac8aa9227237cdf2564a4dc72e0cab8a18c4ce119d2",
+    "first_sample_counts": {
+      "H2-bridge": 0,
+      "H2-g": 0,
+      "H2-top": 0
+    },
+    "initial_matches": 18,
+    "last_sample_counts": {
+      "H2-bridge": 7,
+      "H2-g": -7,
+      "H2-top": 7
+    },
+    "lattice": {
+      "path": "reports/multiphase/phase2_5_1/benchmarks/continuous.zip!/lattice_input.dat",
+      "sha256": "041747579adc213be762c4945862a71396c90465c4059660ac6d773c9d848362"
+    },
+    "lattice_site_count": 18,
+    "manifest": {
+      "path": "reports/multiphase/phase2_5_1/benchmarks/continuous.zip!/manifest.json",
+      "sha256": "a07e5a97893f5e9ddb81037ec68af1d733a488c0bd17092d7ad81138949d6d33"
+    },
+    "matching_multiplicity": [
+      {
+        "coefficient": 531.2521662552351,
+        "matching_events": 18,
+        "native_step": "r1_forward",
+        "patterns_per_reference_site": 2.0,
+        "reaction_id": "ads",
+        "reference_sites": 9.0
+      },
+      {
+        "coefficient": 29.198205955298917,
+        "matching_events": 18,
+        "native_step": "r2_reverse",
+        "patterns_per_reference_site": 2.0,
+        "reaction_id": "ads",
+        "reference_sites": 9.0
+      }
+    ],
+    "missing_rate_evidence": null,
+    "native_outputs": {
+      "console.log": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/continuous.zip!/console.log",
+        "sha256": "b20cdbcf5875ae3984a04a3a404ac1ad51dbad9ca62eab673591044be6ac0b97"
+      },
+      "general_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/continuous.zip!/general_output.txt",
+        "sha256": "a786b937df1bb791f2fd9949fd4824907368739b060d99e479d7c23883dd2cd0"
+      },
+      "lattice_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/continuous.zip!/lattice_output.txt",
+        "sha256": "dccacd609c865b8739d17d5ca64c7eef5c1e9f6135328fd7660516b3c0a4728b"
+      },
+      "procstat_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/continuous.zip!/procstat_output.txt",
+        "sha256": "7a023873a4907c36d5424d8b3201cc1cfd43ca16b18c945ec9f2e30626e9abc4"
+      },
+      "restart.inf": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/continuous.zip!/restart.inf",
+        "sha256": "d0d23de4b3a70924f0a3dddf2aadbd5a3fa23c622c6cac1c573d159baa6f9608"
+      },
+      "specnum_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/continuous.zip!/specnum_output.txt",
+        "sha256": "8cc1504a5effb445f347d489e6e8c780de4f0134b5e9ceedf81996e88027719b"
+      }
+    },
+    "native_warning_codes": [
+      "4008"
+    ],
+    "net_species_changes": {
+      "H2-bridge": 7,
+      "H2-g": -7,
+      "H2-top": 7
+    },
+    "population_convention": "Surface columns count molecules; gas columns count cumulative exchange.",
+    "population_window": {
+      "duration_s": 0.03311331418725626,
+      "end_s": 0.03311331418725626,
+      "first_event": 0,
+      "last_event": 19,
+      "start_s": 0.0
+    },
+    "process_window": {
+      "duration_s": 0.03311331418725626,
+      "end_s": 0.03311331418725626,
+      "first_event": 0,
+      "last_event": 19,
+      "start_s": 0.0
+    },
+    "rate_qualification": "observed finite-window mean",
+    "receipt": {
+      "path": "reports/multiphase/phase2_5_1/zacros_validation.json",
+      "sha256": "cd729ced9cdf93ed2a8bb0a92fab556aee8345cea520356dfe9d95e0cc778359"
+    },
+    "repeat_cell": [
+      3,
+      3
+    ],
+    "seed": 13201,
+    "statistical_limitation": "Single short trajectory. No reviewed stationary window or independent replicate ensemble.",
+    "statistical_uncertainty": null,
+    "steady_state": null,
+    "terminal_event_counter": 20,
+    "terminal_physical_time_s": 0.0353727341,
+    "termination": "normal"
+  },
+  "dent": {
+    "absorbing_clock_sentinel": false,
+    "checkpoint": null,
+    "event_counts": {
+      "r1_forward": 13,
+      "r2_reverse": 6
+    },
+    "event_definitions": {
+      "ads": {
+        "final": [
+          [
+            "H2-bridge",
+            1
+          ],
+          [
+            "H2-bridge",
+            1
+          ]
+        ],
+        "initial": [
+          null,
+          null
+        ],
+        "neighbors_zero_based": [
+          [
+            0,
+            1
+          ]
+        ],
+        "patterns_per_reference_site": {
+          "forward": 2,
+          "reverse": 2
+        },
+        "site_ids": [
+          "top-Ni",
+          "bridge-Cu"
+        ]
+      }
+    },
+    "executable_sha256": "84a8f88d6df633eeea9eeac8aa9227237cdf2564a4dc72e0cab8a18c4ce119d2",
+    "first_sample_counts": {
+      "H2-bridge": 1,
+      "H2-g": 0,
+      "H2-top": 0
+    },
+    "initial_matches": 16,
+    "last_sample_counts": {
+      "H2-bridge": 8,
+      "H2-g": -7,
+      "H2-top": 0
+    },
+    "lattice": {
+      "path": "reports/multiphase/phase2_5_1/benchmarks/dent.zip!/lattice_input.dat",
+      "sha256": "041747579adc213be762c4945862a71396c90465c4059660ac6d773c9d848362"
+    },
+    "lattice_site_count": 18,
+    "manifest": {
+      "path": "reports/multiphase/phase2_5_1/benchmarks/dent.zip!/manifest.json",
+      "sha256": "fd153b0d8577a05c0fb6268fe37c04174168bff9ecbcf6c4d8f48deb417ba942"
+    },
+    "matching_multiplicity": [
+      {
+        "coefficient": 531.2521662552351,
+        "matching_events": 18,
+        "native_step": "r1_forward",
+        "patterns_per_reference_site": 2.0,
+        "reaction_id": "ads",
+        "reference_sites": 9.0
+      },
+      {
+        "coefficient": 29.198205955298917,
+        "matching_events": 18,
+        "native_step": "r2_reverse",
+        "patterns_per_reference_site": 2.0,
+        "reaction_id": "ads",
+        "reference_sites": 9.0
+      }
+    ],
+    "missing_rate_evidence": null,
+    "native_outputs": {
+      "console.log": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/dent.zip!/console.log",
+        "sha256": "b20cdbcf5875ae3984a04a3a404ac1ad51dbad9ca62eab673591044be6ac0b97"
+      },
+      "general_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/dent.zip!/general_output.txt",
+        "sha256": "1a3e34c8e41e5a8e379e235e37a7676b673eb6584aa804d0618fc1feb38726bf"
+      },
+      "lattice_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/dent.zip!/lattice_output.txt",
+        "sha256": "dccacd609c865b8739d17d5ca64c7eef5c1e9f6135328fd7660516b3c0a4728b"
+      },
+      "procstat_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/dent.zip!/procstat_output.txt",
+        "sha256": "a5c776e7473959c16ef1de9ae75e3f4571940e6730557559b499895a2ba36099"
+      },
+      "specnum_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/dent.zip!/specnum_output.txt",
+        "sha256": "1d572977aa727aeced63772800bf70e016079d8648a60a6da944ec90aecfa4f1"
+      }
+    },
+    "native_warning_codes": [
+      "4008"
+    ],
+    "net_species_changes": {
+      "H2-bridge": 7,
+      "H2-g": -7,
+      "H2-top": 0
+    },
+    "population_convention": "Surface columns count molecules; gas columns count cumulative exchange.",
+    "population_window": {
+      "duration_s": 0.020951458831958522,
+      "end_s": 0.020951458831958522,
+      "first_event": 0,
+      "last_event": 19,
+      "start_s": 0.0
+    },
+    "process_window": {
+      "duration_s": 0.020951458831958522,
+      "end_s": 0.020951458831958522,
+      "first_event": 0,
+      "last_event": 19,
+      "start_s": 0.0
+    },
+    "rate_qualification": "observed finite-window mean",
+    "receipt": {
+      "path": "reports/multiphase/phase2_5_1/zacros_validation.json",
+      "sha256": "cd729ced9cdf93ed2a8bb0a92fab556aee8345cea520356dfe9d95e0cc778359"
+    },
+    "repeat_cell": [
+      3,
+      3
+    ],
+    "seed": 13201,
+    "statistical_limitation": "Single short trajectory. No reviewed stationary window or independent replicate ensemble.",
+    "statistical_uncertainty": null,
+    "steady_state": null,
+    "terminal_event_counter": 20,
+    "terminal_physical_time_s": 0.0250334907,
+    "termination": "normal"
+  },
+  "full": {
+    "absorbing_clock_sentinel": false,
+    "checkpoint": null,
+    "event_counts": {
+      "r1_forward": 8,
+      "r2_reverse": 11
+    },
+    "event_definitions": {
+      "ads": {
+        "final": [
+          [
+            "H2-top",
+            1
+          ],
+          [
+            "H2-bridge",
+            2
+          ]
+        ],
+        "initial": [
+          null,
+          null
+        ],
+        "neighbors_zero_based": [
+          [
+            0,
+            1
+          ]
+        ],
+        "patterns_per_reference_site": {
+          "forward": 2,
+          "reverse": 2
+        },
+        "site_ids": [
+          "top-Ni",
+          "bridge-Cu"
+        ]
+      }
+    },
+    "executable_sha256": "84a8f88d6df633eeea9eeac8aa9227237cdf2564a4dc72e0cab8a18c4ce119d2",
+    "first_sample_counts": {
+      "H2-bridge": 9,
+      "H2-g": 0,
+      "H2-top": 9
+    },
+    "initial_matches": 18,
+    "last_sample_counts": {
+      "H2-bridge": 6,
+      "H2-g": 3,
+      "H2-top": 6
+    },
+    "lattice": {
+      "path": "reports/multiphase/phase2_5_1/benchmarks/full.zip!/lattice_input.dat",
+      "sha256": "041747579adc213be762c4945862a71396c90465c4059660ac6d773c9d848362"
+    },
+    "lattice_site_count": 18,
+    "manifest": {
+      "path": "reports/multiphase/phase2_5_1/benchmarks/full.zip!/manifest.json",
+      "sha256": "bddb0625aff43c0f94dfc33f98677cf3ca54129f4dc8c589cc8f51d3149fa341"
+    },
+    "matching_multiplicity": [
+      {
+        "coefficient": 531.2521662552351,
+        "matching_events": 18,
+        "native_step": "r1_forward",
+        "patterns_per_reference_site": 2.0,
+        "reaction_id": "ads",
+        "reference_sites": 9.0
+      },
+      {
+        "coefficient": 29.198205955298917,
+        "matching_events": 18,
+        "native_step": "r2_reverse",
+        "patterns_per_reference_site": 2.0,
+        "reaction_id": "ads",
+        "reference_sites": 9.0
+      }
+    ],
+    "missing_rate_evidence": null,
+    "native_outputs": {
+      "console.log": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/full.zip!/console.log",
+        "sha256": "b20cdbcf5875ae3984a04a3a404ac1ad51dbad9ca62eab673591044be6ac0b97"
+      },
+      "general_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/full.zip!/general_output.txt",
+        "sha256": "580dc86b7c4fd92f94ad4010deb9f25d98c655f5487440b4641ffe51cd1fb160"
+      },
+      "lattice_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/full.zip!/lattice_output.txt",
+        "sha256": "dccacd609c865b8739d17d5ca64c7eef5c1e9f6135328fd7660516b3c0a4728b"
+      },
+      "procstat_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/full.zip!/procstat_output.txt",
+        "sha256": "0f73bc055a9384b4a407f9295e7abd5c767315a9ac083d2c028dec94c1f93c04"
+      },
+      "specnum_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/full.zip!/specnum_output.txt",
+        "sha256": "cc7d4ca3a8f0f6d36d7263bd55f99fe812a28c43314e63dce7389a5f3616f079"
+      }
+    },
+    "native_warning_codes": [
+      "4008"
+    ],
+    "net_species_changes": {
+      "H2-bridge": -3,
+      "H2-g": 3,
+      "H2-top": -3
+    },
+    "population_convention": "Surface columns count molecules; gas columns count cumulative exchange.",
+    "population_window": {
+      "duration_s": 0.02329105040479559,
+      "end_s": 0.02329105040479559,
+      "first_event": 0,
+      "last_event": 19,
+      "start_s": 0.0
+    },
+    "process_window": {
+      "duration_s": 0.02329105040479559,
+      "end_s": 0.02329105040479559,
+      "first_event": 0,
+      "last_event": 19,
+      "start_s": 0.0
+    },
+    "rate_qualification": "observed finite-window mean",
+    "receipt": {
+      "path": "reports/multiphase/phase2_5_1/zacros_validation.json",
+      "sha256": "cd729ced9cdf93ed2a8bb0a92fab556aee8345cea520356dfe9d95e0cc778359"
+    },
+    "repeat_cell": [
+      3,
+      3
+    ],
+    "seed": 13201,
+    "statistical_limitation": "Single short trajectory. No reviewed stationary window or independent replicate ensemble.",
+    "statistical_uncertainty": null,
+    "steady_state": null,
+    "terminal_event_counter": 20,
+    "terminal_physical_time_s": 0.0241562333,
+    "termination": "normal"
+  },
+  "interacting": {
+    "absorbing_clock_sentinel": false,
+    "checkpoint": null,
+    "event_counts": {
+      "r1_forward": 8,
+      "r2_reverse": 11
+    },
+    "event_definitions": {
+      "ads": {
+        "coefficient_basis": "isolated_reactants",
+        "energetics_sha256": "d7191641caea6f137fef849b3ca78bbd8ba97369d58b6c2448b23da9393eb6ad",
+        "final": [
+          [
+            "H2-top",
+            1
+          ],
+          [
+            "H2-bridge",
+            2
+          ]
+        ],
+        "forward_proximity_factor": 0.25,
+        "initial": [
+          null,
+          null
+        ],
+        "neighbors_zero_based": [
+          [
+            0,
+            1
+          ]
+        ],
+        "patterns_per_reference_site": {
+          "forward": 2,
+          "reverse": 2
+        },
+        "site_ids": [
+          "top-Ni",
+          "bridge-Cu"
+        ]
+      }
+    },
+    "executable_sha256": "84a8f88d6df633eeea9eeac8aa9227237cdf2564a4dc72e0cab8a18c4ce119d2",
+    "first_sample_counts": {
+      "H2-bridge": 9,
+      "H2-g": 0,
+      "H2-top": 9
+    },
+    "initial_matches": 18,
+    "last_sample_counts": {
+      "H2-bridge": 6,
+      "H2-g": 3,
+      "H2-top": 6
+    },
+    "lattice": {
+      "path": "reports/multiphase/phase2_5_1/benchmarks/interacting.zip!/lattice_input.dat",
+      "sha256": "041747579adc213be762c4945862a71396c90465c4059660ac6d773c9d848362"
+    },
+    "lattice_site_count": 18,
+    "manifest": {
+      "path": "reports/multiphase/phase2_5_1/benchmarks/interacting.zip!/manifest.json",
+      "sha256": "e37b3f5912ff7594b6aa6578ea33f03a02eb7a0cbe08cd906b9cfe7e4787db90"
+    },
+    "matching_multiplicity": [
+      {
+        "coefficient": 531.2521662552351,
+        "matching_events": 18,
+        "native_step": "r1_forward",
+        "patterns_per_reference_site": 2.0,
+        "reaction_id": "ads",
+        "reference_sites": 9.0
+      },
+      {
+        "coefficient": 29.198205955298917,
+        "matching_events": 18,
+        "native_step": "r2_reverse",
+        "patterns_per_reference_site": 2.0,
+        "reaction_id": "ads",
+        "reference_sites": 9.0
+      }
+    ],
+    "missing_rate_evidence": null,
+    "native_outputs": {
+      "console.log": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/interacting.zip!/console.log",
+        "sha256": "b20cdbcf5875ae3984a04a3a404ac1ad51dbad9ca62eab673591044be6ac0b97"
+      },
+      "general_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/interacting.zip!/general_output.txt",
+        "sha256": "de8c8c332843894fa69858369bd2705aeeecc263c65dbf220c237f341b6c28b5"
+      },
+      "lattice_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/interacting.zip!/lattice_output.txt",
+        "sha256": "dccacd609c865b8739d17d5ca64c7eef5c1e9f6135328fd7660516b3c0a4728b"
+      },
+      "procstat_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/interacting.zip!/procstat_output.txt",
+        "sha256": "586074f706d6c37fa862565503665dd993ae492cd50ead68820697447e3c7cc4"
+      },
+      "specnum_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/interacting.zip!/specnum_output.txt",
+        "sha256": "47a4630d4dce0e0bb6688fbf5940680eceda95da9cabfbb27d42566b9dabeeb1"
+      }
+    },
+    "native_warning_codes": [
+      "4008",
+      "804010"
+    ],
+    "net_species_changes": {
+      "H2-bridge": -3,
+      "H2-g": 3,
+      "H2-top": -3
+    },
+    "population_convention": "Surface columns count molecules; gas columns count cumulative exchange.",
+    "population_window": {
+      "duration_s": 0.007824063310430944,
+      "end_s": 0.007824063310430944,
+      "first_event": 0,
+      "last_event": 19,
+      "start_s": 0.0
+    },
+    "process_window": {
+      "duration_s": 0.007824063310430944,
+      "end_s": 0.007824063310430944,
+      "first_event": 0,
+      "last_event": 19,
+      "start_s": 0.0
+    },
+    "rate_qualification": "observed finite-window mean",
+    "receipt": {
+      "path": "reports/multiphase/phase2_5_1/zacros_validation.json",
+      "sha256": "cd729ced9cdf93ed2a8bb0a92fab556aee8345cea520356dfe9d95e0cc778359"
+    },
+    "repeat_cell": [
+      3,
+      3
+    ],
+    "seed": 13201,
+    "statistical_limitation": "Single short trajectory. No reviewed stationary window or independent replicate ensemble.",
+    "statistical_uncertainty": null,
+    "steady_state": null,
+    "terminal_event_counter": 20,
+    "terminal_physical_time_s": 0.00856216345,
+    "termination": "normal"
+  },
+  "mono": {
+    "absorbing_clock_sentinel": false,
+    "checkpoint": null,
+    "event_counts": {
+      "r1_forward": 13,
+      "r2_reverse": 6
+    },
+    "event_definitions": {
+      "ads": {
+        "final": [
+          [
+            "H2-top",
+            1
+          ],
+          [
+            "H2-bridge",
+            2
+          ]
+        ],
+        "initial": [
+          null,
+          null
+        ],
+        "neighbors_zero_based": [
+          [
+            0,
+            1
+          ]
+        ],
+        "patterns_per_reference_site": {
+          "forward": 2,
+          "reverse": 2
+        },
+        "site_ids": [
+          "top-Ni",
+          "bridge-Cu"
+        ]
+      }
+    },
+    "executable_sha256": "84a8f88d6df633eeea9eeac8aa9227237cdf2564a4dc72e0cab8a18c4ce119d2",
+    "first_sample_counts": {
+      "H2-bridge": 0,
+      "H2-g": 0,
+      "H2-top": 1
+    },
+    "initial_matches": 16,
+    "last_sample_counts": {
+      "H2-bridge": 7,
+      "H2-g": -7,
+      "H2-top": 8
+    },
+    "lattice": {
+      "path": "reports/multiphase/phase2_5_1/benchmarks/mono.zip!/lattice_input.dat",
+      "sha256": "041747579adc213be762c4945862a71396c90465c4059660ac6d773c9d848362"
+    },
+    "lattice_site_count": 18,
+    "manifest": {
+      "path": "reports/multiphase/phase2_5_1/benchmarks/mono.zip!/manifest.json",
+      "sha256": "52a8d5fa615843239c4e5680853dfb86f216918cb6b97037ee06deccbbd04482"
+    },
+    "matching_multiplicity": [
+      {
+        "coefficient": 531.2521662552351,
+        "matching_events": 18,
+        "native_step": "r1_forward",
+        "patterns_per_reference_site": 2.0,
+        "reaction_id": "ads",
+        "reference_sites": 9.0
+      },
+      {
+        "coefficient": 29.198205955298917,
+        "matching_events": 18,
+        "native_step": "r2_reverse",
+        "patterns_per_reference_site": 2.0,
+        "reaction_id": "ads",
+        "reference_sites": 9.0
+      }
+    ],
+    "missing_rate_evidence": null,
+    "native_outputs": {
+      "console.log": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/mono.zip!/console.log",
+        "sha256": "b20cdbcf5875ae3984a04a3a404ac1ad51dbad9ca62eab673591044be6ac0b97"
+      },
+      "general_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/mono.zip!/general_output.txt",
+        "sha256": "b54b0dcdfce775ad25d78ac881174e30742fbee2a07e17b849cce29159a8a7c6"
+      },
+      "lattice_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/mono.zip!/lattice_output.txt",
+        "sha256": "dccacd609c865b8739d17d5ca64c7eef5c1e9f6135328fd7660516b3c0a4728b"
+      },
+      "procstat_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/mono.zip!/procstat_output.txt",
+        "sha256": "377359703b714bfd99a13fbed3a1c8ab275b17b8c44844bb0dfff290733e73fa"
+      },
+      "specnum_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/mono.zip!/specnum_output.txt",
+        "sha256": "6d25d021a0f329ca8ec419b3f5e21f58641eebdf9ec225346550c152785ff27d"
+      }
+    },
+    "native_warning_codes": [
+      "4008"
+    ],
+    "net_species_changes": {
+      "H2-bridge": 7,
+      "H2-g": -7,
+      "H2-top": 7
+    },
+    "population_convention": "Surface columns count molecules; gas columns count cumulative exchange.",
+    "population_window": {
+      "duration_s": 0.013246533391464766,
+      "end_s": 0.013246533391464766,
+      "first_event": 0,
+      "last_event": 19,
+      "start_s": 0.0
+    },
+    "process_window": {
+      "duration_s": 0.013246533391464766,
+      "end_s": 0.013246533391464766,
+      "first_event": 0,
+      "last_event": 19,
+      "start_s": 0.0
+    },
+    "rate_qualification": "observed finite-window mean",
+    "receipt": {
+      "path": "reports/multiphase/phase2_5_1/zacros_validation.json",
+      "sha256": "cd729ced9cdf93ed2a8bb0a92fab556aee8345cea520356dfe9d95e0cc778359"
+    },
+    "repeat_cell": [
+      3,
+      3
+    ],
+    "seed": 13201,
+    "statistical_limitation": "Single short trajectory. No reviewed stationary window or independent replicate ensemble.",
+    "statistical_uncertainty": null,
+    "steady_state": null,
+    "terminal_event_counter": 20,
+    "terminal_physical_time_s": 0.0159949511,
+    "termination": "normal"
+  },
+  "resume": {
+    "absorbing_clock_sentinel": false,
+    "checkpoint": {
+      "continuous_control": "continuous",
+      "reader_case": "resume",
+      "restart_input_sha256": "859db961c4505422bc6f80e3acc0d003edea0adf7c35a92b75652b54c2859972",
+      "restart_model_sha256": "8c21267508d3eca8ccfd8b19aaef9e6e1d61328faaba4336f39879c8ca9e5195",
+      "resume_end_step": 20,
+      "resume_start_step": 8,
+      "trajectory_equal": {
+        "procstat_output.txt": true,
+        "specnum_output.txt": true
+      },
+      "writer_archive_sha256": "1cf32a9222b492fdc7f1b08123d88484d88c23906f727907d64e194952b8ac69",
+      "writer_case": "split"
+    },
+    "event_counts": {
+      "r1_forward": 6,
+      "r2_reverse": 5
+    },
+    "event_definitions": {
+      "ads": {
+        "final": [
+          [
+            "H2-top",
+            1
+          ],
+          [
+            "H2-bridge",
+            2
+          ]
+        ],
+        "initial": [
+          null,
+          null
+        ],
+        "neighbors_zero_based": [
+          [
+            0,
+            1
+          ]
+        ],
+        "patterns_per_reference_site": {
+          "forward": 2,
+          "reverse": 2
+        },
+        "site_ids": [
+          "top-Ni",
+          "bridge-Cu"
+        ]
+      }
+    },
+    "executable_sha256": "84a8f88d6df633eeea9eeac8aa9227237cdf2564a4dc72e0cab8a18c4ce119d2",
+    "first_sample_counts": {
+      "H2-bridge": 6,
+      "H2-g": -6,
+      "H2-top": 6
+    },
+    "initial_matches": null,
+    "last_sample_counts": {
+      "H2-bridge": 7,
+      "H2-g": -7,
+      "H2-top": 7
+    },
+    "lattice": {
+      "path": "reports/multiphase/phase2_5_1/benchmarks/resume.zip!/lattice_input.dat",
+      "sha256": "041747579adc213be762c4945862a71396c90465c4059660ac6d773c9d848362"
+    },
+    "lattice_site_count": 18,
+    "manifest": {
+      "path": "reports/multiphase/phase2_5_1/benchmarks/resume.zip!/manifest.json",
+      "sha256": "de2b1da55d0b595963955961781e2ecc4791faa3d58dc71fc8317269dafe6d67"
+    },
+    "matching_multiplicity": [
+      {
+        "coefficient": 531.2521662552351,
+        "matching_events": 18,
+        "native_step": "r1_forward",
+        "patterns_per_reference_site": 2.0,
+        "reaction_id": "ads",
+        "reference_sites": 9.0
+      },
+      {
+        "coefficient": 29.198205955298917,
+        "matching_events": 18,
+        "native_step": "r2_reverse",
+        "patterns_per_reference_site": 2.0,
+        "reaction_id": "ads",
+        "reference_sites": 9.0
+      }
+    ],
+    "missing_rate_evidence": null,
+    "native_outputs": {
+      "console.log": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/resume.zip!/console.log",
+        "sha256": "711186f0a78c02f8e90ba1bfaf2676c5a0574d3eef369bacad8ea95a695c7d12"
+      },
+      "general_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/resume.zip!/general_output.txt",
+        "sha256": "c6acc3e54e349c063d6e80680e503bdda1006ee013135c1ddd7c2484a9981288"
+      },
+      "procstat_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/resume.zip!/procstat_output.txt",
+        "sha256": "c1ca9aca4d809d902787247f8b9d5eb55534a0c7b77aeb3762758d78cbcccb37"
+      },
+      "restart.inf": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/resume.zip!/restart.inf",
+        "sha256": "3c86a876f63e477b4c04311d99bb056107def8d645b71ed5d724667fc5bb1e0f"
+      },
+      "specnum_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/resume.zip!/specnum_output.txt",
+        "sha256": "6e3331596897a6554799eb000f1f6bc9f467da2b977e2aa6e0ebd78a0aae3342"
+      }
+    },
+    "native_warning_codes": [],
+    "net_species_changes": {
+      "H2-bridge": 1,
+      "H2-g": -1,
+      "H2-top": 1
+    },
+    "population_convention": "Surface columns count molecules; gas columns count cumulative exchange.",
+    "population_window": {
+      "duration_s": 0.030997608517878604,
+      "end_s": 0.03311331418725626,
+      "first_event": 8,
+      "last_event": 19,
+      "start_s": 0.0021157056693776517
+    },
+    "process_window": {
+      "duration_s": 0.030997608517878604,
+      "end_s": 0.03311331418725626,
+      "first_event": 8,
+      "last_event": 19,
+      "start_s": 0.0021157056693776517
+    },
+    "rate_qualification": "observed finite-window mean",
+    "receipt": {
+      "path": "reports/multiphase/phase2_5_1/zacros_validation.json",
+      "sha256": "cd729ced9cdf93ed2a8bb0a92fab556aee8345cea520356dfe9d95e0cc778359"
+    },
+    "repeat_cell": [
+      3,
+      3
+    ],
+    "seed": 13201,
+    "statistical_limitation": "Single short trajectory. No reviewed stationary window or independent replicate ensemble.",
+    "statistical_uncertainty": null,
+    "steady_state": null,
+    "terminal_event_counter": 20,
+    "terminal_physical_time_s": 0.0353727341,
+    "termination": "normal"
+  },
+  "split": {
+    "absorbing_clock_sentinel": false,
+    "checkpoint": null,
+    "event_counts": {
+      "r1_forward": 6,
+      "r2_reverse": 1
+    },
+    "event_definitions": {
+      "ads": {
+        "final": [
+          [
+            "H2-top",
+            1
+          ],
+          [
+            "H2-bridge",
+            2
+          ]
+        ],
+        "initial": [
+          null,
+          null
+        ],
+        "neighbors_zero_based": [
+          [
+            0,
+            1
+          ]
+        ],
+        "patterns_per_reference_site": {
+          "forward": 2,
+          "reverse": 2
+        },
+        "site_ids": [
+          "top-Ni",
+          "bridge-Cu"
+        ]
+      }
+    },
+    "executable_sha256": "84a8f88d6df633eeea9eeac8aa9227237cdf2564a4dc72e0cab8a18c4ce119d2",
+    "first_sample_counts": {
+      "H2-bridge": 0,
+      "H2-g": 0,
+      "H2-top": 0
+    },
+    "initial_matches": 18,
+    "last_sample_counts": {
+      "H2-bridge": 5,
+      "H2-g": -5,
+      "H2-top": 5
+    },
+    "lattice": {
+      "path": "reports/multiphase/phase2_5_1/benchmarks/split.zip!/lattice_input.dat",
+      "sha256": "041747579adc213be762c4945862a71396c90465c4059660ac6d773c9d848362"
+    },
+    "lattice_site_count": 18,
+    "manifest": {
+      "path": "reports/multiphase/phase2_5_1/benchmarks/split.zip!/manifest.json",
+      "sha256": "a07e5a97893f5e9ddb81037ec68af1d733a488c0bd17092d7ad81138949d6d33"
+    },
+    "matching_multiplicity": [
+      {
+        "coefficient": 531.2521662552351,
+        "matching_events": 18,
+        "native_step": "r1_forward",
+        "patterns_per_reference_site": 2.0,
+        "reaction_id": "ads",
+        "reference_sites": 9.0
+      },
+      {
+        "coefficient": 29.198205955298917,
+        "matching_events": 18,
+        "native_step": "r2_reverse",
+        "patterns_per_reference_site": 2.0,
+        "reaction_id": "ads",
+        "reference_sites": 9.0
+      }
+    ],
+    "missing_rate_evidence": null,
+    "native_outputs": {
+      "console.log": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/split.zip!/console.log",
+        "sha256": "72085622bbd1a37307d60f42ad6b6b2f1147d95ffa2d51152dea4fcd82fe58d3"
+      },
+      "general_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/split.zip!/general_output.txt",
+        "sha256": "78866980b1c98e930b6744a3942642b7ac9c19ff66cac7254154ad592d705b62"
+      },
+      "lattice_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/split.zip!/lattice_output.txt",
+        "sha256": "dccacd609c865b8739d17d5ca64c7eef5c1e9f6135328fd7660516b3c0a4728b"
+      },
+      "procstat_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/split.zip!/procstat_output.txt",
+        "sha256": "95977d1079ddbc15e198ac34e88cbf61bc41e9870413a59da1af731adae4b4ee"
+      },
+      "restart.inf": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/split.zip!/restart.inf",
+        "sha256": "859db961c4505422bc6f80e3acc0d003edea0adf7c35a92b75652b54c2859972"
+      },
+      "specnum_output.txt": {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/split.zip!/specnum_output.txt",
+        "sha256": "d4efb5b9548578501d514997fd49ac1da20e6592987f5475cd3988b92f242940"
+      }
+    },
+    "native_warning_codes": [
+      "4008"
+    ],
+    "net_species_changes": {
+      "H2-bridge": 5,
+      "H2-g": -5,
+      "H2-top": 5
+    },
+    "population_convention": "Surface columns count molecules; gas columns count cumulative exchange.",
+    "population_window": {
+      "duration_s": 0.001508419300538638,
+      "end_s": 0.001508419300538638,
+      "first_event": 0,
+      "last_event": 7,
+      "start_s": 0.0
+    },
+    "process_window": {
+      "duration_s": 0.001508419300538638,
+      "end_s": 0.001508419300538638,
+      "first_event": 0,
+      "last_event": 7,
+      "start_s": 0.0
+    },
+    "rate_qualification": "observed finite-window mean",
+    "receipt": {
+      "path": "reports/multiphase/phase2_5_1/zacros_validation.json",
+      "sha256": "cd729ced9cdf93ed2a8bb0a92fab556aee8345cea520356dfe9d95e0cc778359"
+    },
+    "repeat_cell": [
+      3,
+      3
+    ],
+    "seed": 13201,
+    "statistical_limitation": "Single short trajectory. No reviewed stationary window or independent replicate ensemble.",
+    "statistical_uncertainty": null,
+    "steady_state": null,
+    "terminal_event_counter": 8,
+    "terminal_physical_time_s": 0.00211570575,
+    "termination": "normal"
+  }
+}

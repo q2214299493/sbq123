@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "event_id": "history-stage-b1-4-native-rate-adapters-20261121",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-stage-b1-4-native-rate-adapters-20261121",
+    "module": "kinetic_data"
+  },
+  "occurred_at": "2026-11-21T15:39:59.354941+00:00",
+  "recorded_at": "2026-11-21T15:39:59.354941+00:00",
+  "summary": "Record two CATKINAS and eight Zacros native-result archive projections to kinetic rate output V2.",
+  "payload": {
+    "markdown": "- Stage B.1.4 replayed two CATKINAS closed cycles and eight Zacros sampling windows using independent read-only adapters. Both Windows checkouts passed 502 focused tests. KMC stationarity and statistical uncertainty remain unverified. See reports/multiphase/stage_b1_4/completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "reports/multiphase/stage_b1_4/completion.md",
+      "authority": "repository_document",
+      "sha256": "d668eca0bde81d87e90e7cd1c024e72fafceb1b6b46b24853357148ad7913e8b",
+      "observed_at": "2026-11-21T15:39:59.354941+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b1_4/catkinas_qualification.json",
+      "authority": "repository_document",
+      "sha256": "9b8bb716277180587c32eb5cd0f4b90c3dfc32ce638a458d4a1717db18bac65d",
+      "observed_at": "2026-11-21T15:39:59.354941+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b1_4/zacros_qualification.json",
+      "authority": "repository_document",
+      "sha256": "fa1577a131e850937cf5822cf8c2fc3f40bd5909c21ddb317cf990b4b20c70f5",
+      "observed_at": "2026-11-21T15:39:59.354941+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b1_4/evidence_inventory.json",
+      "authority": "repository_document",
+      "sha256": "aed5f7ea882bafedc6a7272f4ead332916aca4fecb4afd28aaefd17f729b3657",
+      "observed_at": "2026-11-21T15:39:59.354941+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

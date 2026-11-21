@@ -134,6 +134,8 @@ The shared kinetic-data implementation projects qualified net progress on the
 parent basis. It also provides independent conservation residuals and labeled
 uncertainty propagation. [Source mathematics and API](stoichiometric_sources.md)
 
+For archived native observations, use the independent [CATKINAS and Zacros result adapters](native_result_adapters.md).
+
 [Output schema](../../configs/kinetics/rate_output_v2.schema.json) ·
 [Source-term schema](../../configs/kinetics/rate_source_terms_v2.schema.json) ·
 [Synthetic two-inventory example](../../tests/fixtures/multiphase/rate_output_v2.json)

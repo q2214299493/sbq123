@@ -1,0 +1,121 @@
+{
+  "conditions": {
+    "partial_pressures": [
+      {
+        "pressure_Pa": 100000.0,
+        "species_id": "H2-g"
+      }
+    ],
+    "pressure_Pa": 100000.0,
+    "temperature_K": 400
+  },
+  "dataset_version": "e8ecac6c7eabe15f2347d823fc516cd40d651aa9ee8bcc25b29980dfcc64634e",
+  "engine": {
+    "name": "Zacros",
+    "version": "4.0"
+  },
+  "format": "kinetic-rate-output/2",
+  "native_normalization": {
+    "basis_kind": "simulation_cell",
+    "definition": "One complete simulated periodic lattice, including all repeated primitive cells.",
+    "denominator_unit": "simulation cell",
+    "denominator_value": 1,
+    "extent_unit": "event",
+    "reference_id": "lattice-041747579adc213be762c4945862a71396c90465c4059660ac6d773c9d848362",
+    "reference_scope": {
+      "network_version": "b5e01bff54d729e68adcf34e89d0c2334e1c2b6938d87191e8d23046db6911a7",
+      "project_id": "demo"
+    },
+    "time_unit": "s"
+  },
+  "network_version": "b5e01bff54d729e68adcf34e89d0c2334e1c2b6938d87191e8d23046db6911a7",
+  "output_binding": {
+    "dataset_id": "rates-2102f7c979b386895d58d7402b41c5e29ac4f96c500f204331e70eb8e0b540d3",
+    "native_inputs": [
+      {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/dent.zip!/energetics_input.dat",
+        "sha256": "a9034d0d147ea36298101727ef62ecede67ac7f15306e3eb58794b7e43c5f288"
+      },
+      {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/dent.zip!/lattice_input.dat",
+        "sha256": "041747579adc213be762c4945862a71396c90465c4059660ac6d773c9d848362"
+      },
+      {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/dent.zip!/mechanism_input.dat",
+        "sha256": "4990838be52ff20a446271c9f25180b16011b77a72821f264a58e00e75236a1f"
+      },
+      {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/dent.zip!/simulation_input.dat",
+        "sha256": "7441a648b4526d796f2b5995bbb50a3e5c4b550c269b55d9309f74c15b2ecbc9"
+      },
+      {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/dent.zip!/state_input.dat",
+        "sha256": "ff0fc80cdd1bda7977846cd18536bf079003fa0a727ee74191f06b57f1949980"
+      }
+    ],
+    "run_id": "dent"
+  },
+  "project_id": "demo",
+  "provenance": {
+    "dataset": {
+      "path": "reports/multiphase/phase2_5_1/benchmarks/dent.zip!/dataset.json",
+      "sha256": "3397c6ee0aad6c8d7e580618dd99632e24ea1358a523f86cd8e5169e36736ac2"
+    },
+    "native_output": {
+      "path": "reports/multiphase/phase2_5_1/benchmarks/dent.zip",
+      "sha256": "ec21a9ee721954d21a04956c6291833b571a888a76ee1fa4c783fbce8331b1a1"
+    },
+    "network": {
+      "path": "reports/multiphase/stage_b1_4/networks/dent.json",
+      "sha256": "1bf6d38fb0dc0d1eb6e152a9a81ea826991eb12ec0f4c9dddae353d534376f3a"
+    }
+  },
+  "reaction_rates": [
+    {
+      "forward": 620.48185304263,
+      "net": 334.1056131768008,
+      "parameter_set_id": "params",
+      "products": {
+        "H2-bridge": 1
+      },
+      "reactants": {
+        "H2-g": 1
+      },
+      "reaction_id": "ads",
+      "reverse": 286.37623986582923,
+      "sites_consumed": {
+        "bridge-Cu": 1,
+        "top-Ni": 1
+      },
+      "sites_released": {}
+    }
+  ],
+  "schema_version": "2.1.0",
+  "source_terms": {
+    "site_inventories": [
+      {
+        "net_vacancy_rate": -334.1056131768008,
+        "site_id": "bridge-Cu"
+      },
+      {
+        "net_vacancy_rate": -334.1056131768008,
+        "site_id": "top-Ni"
+      }
+    ],
+    "species": [
+      {
+        "net_production_rate": 334.1056131768008,
+        "species_id": "H2-bridge"
+      },
+      {
+        "net_production_rate": -334.1056131768008,
+        "species_id": "H2-g"
+      }
+    ]
+  },
+  "validation": {
+    "review": null,
+    "status": "unreviewed"
+  },
+  "validity_range": null
+}

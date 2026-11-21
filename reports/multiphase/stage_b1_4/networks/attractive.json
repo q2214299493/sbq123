@@ -1,0 +1,645 @@
+{
+  "acceptance_record": {
+    "ads": {
+      "network_review": {
+        "decision": "accepted",
+        "reaction_id": "ads",
+        "reason": "fixture only",
+        "reviewed_at": "2026-11-19T01:00:00Z",
+        "reviewer": "synthetic reviewer",
+        "subject_sha256": "e98f308d5988f660dc5b6b509ed9d7ce660b97a2861800553be1560a929cf78e"
+      },
+      "scientific_review": {
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        },
+        "status": "accepted"
+      },
+      "user_confirmation": null
+    }
+  },
+  "catalog": {
+    "interfaces": [
+      {
+        "geometry": "two adjacent facets",
+        "interface_id": "junction",
+        "schema_version": "1.0.0",
+        "structural_provenance": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        },
+        "structure_id": "junction",
+        "surface_ids": [
+          "facet-Ni",
+          "facet-Cu"
+        ],
+        "validation": {
+          "review": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          },
+          "status": "accepted"
+        }
+      }
+    ],
+    "materials": [
+      {
+        "material_id": "Ni",
+        "name": "Ni",
+        "project_id": "demo",
+        "schema_version": "1.0.0",
+        "validation": {
+          "review": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          },
+          "status": "accepted"
+        }
+      },
+      {
+        "material_id": "Cu",
+        "name": "Cu",
+        "project_id": "demo",
+        "schema_version": "1.0.0",
+        "validation": {
+          "review": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          },
+          "status": "accepted"
+        }
+      }
+    ],
+    "phases": [
+      {
+        "composition": {
+          "Ni": 1
+        },
+        "material_id": "Ni",
+        "name": "fcc",
+        "phase_id": "fcc-Ni",
+        "schema_version": "1.0.0",
+        "structural_provenance": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        },
+        "structure_id": "bulk-Ni",
+        "validation": {
+          "review": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          },
+          "status": "accepted"
+        }
+      },
+      {
+        "composition": {
+          "Cu": 1
+        },
+        "material_id": "Cu",
+        "name": "fcc",
+        "phase_id": "fcc-Cu",
+        "schema_version": "1.0.0",
+        "structural_provenance": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        },
+        "structure_id": "bulk-Cu",
+        "validation": {
+          "review": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          },
+          "status": "accepted"
+        }
+      }
+    ],
+    "projects": [
+      {
+        "name": "Synthetic interface contract example",
+        "project_id": "demo",
+        "schema_version": "1.0.0",
+        "validation": {
+          "review": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          },
+          "status": "accepted"
+        }
+      }
+    ],
+    "sites": [
+      {
+        "local_geometry": "single metal atom",
+        "schema_version": "1.0.0",
+        "site_id": "top-Ni",
+        "site_type": "atop",
+        "surface_id": "facet-Ni",
+        "validation": {
+          "review": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          },
+          "status": "accepted"
+        }
+      },
+      {
+        "local_geometry": "two neighbouring copper atoms",
+        "schema_version": "1.0.0",
+        "site_id": "bridge-Cu",
+        "site_type": "bridge",
+        "surface_id": "facet-Cu",
+        "validation": {
+          "review": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          },
+          "status": "accepted"
+        }
+      }
+    ],
+    "surfaces": [
+      {
+        "defects": [],
+        "miller_indices": [
+          1,
+          1,
+          1
+        ],
+        "phase_id": "fcc-Ni",
+        "schema_version": "1.0.0",
+        "structural_provenance": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        },
+        "structure_id": "facet-Ni",
+        "surface_id": "facet-Ni",
+        "termination": "metal",
+        "validation": {
+          "review": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          },
+          "status": "accepted"
+        }
+      },
+      {
+        "defects": [
+          {
+            "description": "synthetic surface vacancy",
+            "kind": "vacancy"
+          }
+        ],
+        "miller_indices": [
+          1,
+          1,
+          1
+        ],
+        "phase_id": "fcc-Cu",
+        "schema_version": "1.0.0",
+        "structural_provenance": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        },
+        "structure_id": "facet-Cu",
+        "surface_id": "facet-Cu",
+        "termination": "metal",
+        "validation": {
+          "review": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          },
+          "status": "accepted"
+        }
+      }
+    ]
+  },
+  "definition_sha256": "e77e097b2629c5a06730e4e3926db18e69f5fc56fe99a115efac9f3b9d7d38af",
+  "format": "reaction-network/1",
+  "network_version": "0fe3389edefeee07cf9cb74c0dd408b2d6468ba95cdd322689345639e9de39d1",
+  "parameter_sets": [
+    {
+      "coverage_terms": [],
+      "degeneracy": 1,
+      "eligibility": "eligible",
+      "energy_basis": "gibbs",
+      "energy_reference_id": "demo-ref",
+      "forward": {
+        "activation_energy": {
+          "reference_id": "demo-ref",
+          "source": {
+            "artifact": {
+              "path": "tests/fixtures/multiphase/kinetic_reference.json",
+              "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+            },
+            "calculation_id": "thermal-fixture",
+            "kind": "thermal_correction"
+          },
+          "unit": "eV",
+          "value": 0.4
+        },
+        "expression": "k(T) = A exp(-Ea / (kB T))",
+        "prefactor": 1000000000000,
+        "prefactor_unit": "s^-1",
+        "temperature_exponent": 0
+      },
+      "parameter_set_id": "params",
+      "pressure_Pa": 100000,
+      "rate_law_id": "mass-action",
+      "reaction_id": "ads",
+      "reverse": null,
+      "schema_version": "1.0.0",
+      "sources": [
+        {
+          "artifact": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          },
+          "calculation_id": "synthetic-demo",
+          "kind": "electronic_structure"
+        },
+        {
+          "artifact": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          },
+          "calculation_id": "thermal-fixture",
+          "kind": "thermal_correction"
+        }
+      ],
+      "standard_state_id": "demo-standard",
+      "standard_states": {
+        "gas_pressure_Pa": 100000,
+        "solute_concentration_mol_m3": 1000,
+        "surface_activity_convention": "fractional site occupation"
+      },
+      "temperature_K": 400,
+      "uncertainty": null,
+      "validation": {
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        },
+        "status": "accepted"
+      },
+      "validity_range": {
+        "max_pressure_Pa": 110000,
+        "max_temperature_K": 700,
+        "min_pressure_Pa": 90000,
+        "min_temperature_K": 300
+      }
+    }
+  ],
+  "project_id": "demo",
+  "reactions": [
+    {
+      "definition": {
+        "electronic_energies": {
+          "forward": {
+            "reference_id": "demo-ref",
+            "source": {
+              "artifact": {
+                "path": "tests/fixtures/multiphase/kinetic_reference.json",
+                "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+              },
+              "calculation_id": "synthetic-demo",
+              "kind": "electronic_structure"
+            },
+            "unit": "eV",
+            "value": 0.3
+          },
+          "reaction": {
+            "reference_id": "demo-ref",
+            "source": {
+              "artifact": {
+                "path": "tests/fixtures/multiphase/kinetic_reference.json",
+                "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+              },
+              "calculation_id": "synthetic-demo",
+              "kind": "electronic_structure"
+            },
+            "unit": "eV",
+            "value": -0.2
+          },
+          "reverse": {
+            "reference_id": "demo-ref",
+            "source": {
+              "artifact": {
+                "path": "tests/fixtures/multiphase/kinetic_reference.json",
+                "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+              },
+              "calculation_id": "synthetic-demo",
+              "kind": "electronic_structure"
+            },
+            "unit": "eV",
+            "value": 0.5
+          }
+        },
+        "eligibility": "eligible",
+        "energy_reference_id": "demo-ref",
+        "final_structure_id": "fs-demo",
+        "free_energies": {
+          "standard_state_id": "demo-standard",
+          "temperature_K": 400,
+          "values": {
+            "forward": {
+              "reference_id": "demo-ref",
+              "source": {
+                "artifact": {
+                  "path": "tests/fixtures/multiphase/kinetic_reference.json",
+                  "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+                },
+                "calculation_id": "thermal-fixture",
+                "kind": "thermal_correction"
+              },
+              "unit": "eV",
+              "value": 0.4
+            },
+            "reaction": {
+              "reference_id": "demo-ref",
+              "source": {
+                "artifact": {
+                  "path": "tests/fixtures/multiphase/kinetic_reference.json",
+                  "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+                },
+                "calculation_id": "thermal-fixture",
+                "kind": "thermal_correction"
+              },
+              "unit": "eV",
+              "value": -0.1
+            },
+            "reverse": {
+              "reference_id": "demo-ref",
+              "source": {
+                "artifact": {
+                  "path": "tests/fixtures/multiphase/kinetic_reference.json",
+                  "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+                },
+                "calculation_id": "thermal-fixture",
+                "kind": "thermal_correction"
+              },
+              "unit": "eV",
+              "value": 0.5
+            }
+          }
+        },
+        "initial_structure_id": "is-demo",
+        "interface_id": "junction",
+        "phase_ids": [
+          "fcc-Ni",
+          "fcc-Cu"
+        ],
+        "products": {
+          "H2-bridge": 1,
+          "H2-top": 1
+        },
+        "provenance": [
+          {
+            "artifact": {
+              "path": "tests/fixtures/multiphase/kinetic_reference.json",
+              "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+            },
+            "calculation_id": "synthetic-demo",
+            "kind": "electronic_structure"
+          },
+          {
+            "artifact": {
+              "path": "tests/fixtures/multiphase/kinetic_reference.json",
+              "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+            },
+            "calculation_id": "thermal-fixture",
+            "kind": "thermal_correction"
+          }
+        ],
+        "rate_law_id": "mass-action",
+        "reactants": {
+          "H2-g": 1
+        },
+        "reaction_id": "ads",
+        "reaction_type": "interfacial",
+        "required_sites": {
+          "bridge-Cu": 1,
+          "top-Ni": 1
+        },
+        "reversible": false,
+        "schema_version": "1.0.0",
+        "sites_consumed": {
+          "bridge-Cu": 1,
+          "top-Ni": 1
+        },
+        "sites_released": {},
+        "surface_ids": [
+          "facet-Ni",
+          "facet-Cu"
+        ],
+        "ts_id": "ts-demo",
+        "ts_treatment": "located",
+        "validation": {
+          "review": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          },
+          "status": "accepted"
+        }
+      },
+      "direction": {
+        "forward": {
+          "products": {
+            "H2-bridge": 1,
+            "H2-top": 1
+          },
+          "reactants": {
+            "H2-g": 1
+          },
+          "sites_consumed": {
+            "bridge-Cu": 1,
+            "top-Ni": 1
+          },
+          "sites_released": {}
+        },
+        "reverse": null,
+        "status": "irreversible"
+      },
+      "energies": {
+        "electronic_ev": {
+          "forward": 0.3,
+          "reaction": -0.2,
+          "reverse": 0.5
+        },
+        "gibbs_ev": {
+          "forward": 0.4,
+          "reaction": -0.1,
+          "reverse": 0.5
+        },
+        "standard_state": "demo-standard",
+        "temperature_k": 400,
+        "thermal_basis": null
+      },
+      "gaps": [],
+      "level": "KINETICALLY_ELIGIBLE",
+      "mkm_status": "eligible",
+      "net_stoichiometry": {
+        "site:bridge-Cu": -1,
+        "site:top-Ni": -1,
+        "species:H2-bridge": 1,
+        "species:H2-g": -1,
+        "species:H2-top": 1
+      },
+      "network_review": {
+        "decision": "accepted",
+        "reaction_id": "ads",
+        "reason": "fixture only",
+        "reviewed_at": "2026-11-19T01:00:00Z",
+        "reviewer": "synthetic reviewer",
+        "subject_sha256": "e98f308d5988f660dc5b6b509ed9d7ce660b97a2861800553be1560a929cf78e"
+      },
+      "origin": "supplied_definition",
+      "parameter_set_ids": [
+        "params"
+      ],
+      "scientific_review": {
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        },
+        "status": "accepted"
+      },
+      "site_balance": {
+        "bridge-Cu": 1,
+        "top-Ni": 1
+      },
+      "site_mapping": null,
+      "subject_sha256": "e98f308d5988f660dc5b6b509ed9d7ce660b97a2861800553be1560a929cf78e",
+      "thermochemistry": null,
+      "ts_review": {
+        "assignment": "synthetic mode",
+        "grade": "A",
+        "review_reference": "synthetic assignment",
+        "review_sha256": "c6569f80053b2296fa109c840bdd24ec50f8bf4d04549991b3cb7a5237beccb8",
+        "structure_identity": "ts-demo"
+      },
+      "user_confirmation": null
+    }
+  ],
+  "site_mapping_version": "d193b5d7f466afece5e32b14ec3158387a7791bebab748fd17bdc7821a6bf1b6",
+  "source_artifacts": [
+    {
+      "file": "kinetic_reference.json",
+      "role": "verified_evidence",
+      "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+    }
+  ],
+  "species": [
+    {
+      "adsorption_geometry": null,
+      "charge": 0,
+      "composition": {
+        "H": 2
+      },
+      "interface_id": null,
+      "material_ids": [],
+      "phase": "gas",
+      "schema_version": "1.0.0",
+      "site_occupancy": {},
+      "species_id": "H2-g",
+      "structural_provenance": {
+        "path": "tests/fixtures/multiphase/kinetic_reference.json",
+        "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+      },
+      "structure_id": "H2-g",
+      "surface_ids": [],
+      "thermochemistry_status": "reviewed",
+      "validation": {
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        },
+        "status": "accepted"
+      }
+    },
+    {
+      "adsorption_geometry": "H-H axis spanning both sites",
+      "charge": 0,
+      "composition": {
+        "H": 1
+      },
+      "interface_id": null,
+      "material_ids": [
+        "Cu"
+      ],
+      "phase": "surface",
+      "schema_version": "1.0.0",
+      "site_occupancy": {
+        "bridge-Cu": 1
+      },
+      "species_id": "H2-bridge",
+      "structural_provenance": {
+        "path": "tests/fixtures/multiphase/kinetic_reference.json",
+        "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+      },
+      "structure_id": "H2-bridge",
+      "surface_ids": [
+        "facet-Cu"
+      ],
+      "thermochemistry_status": "reviewed",
+      "validation": {
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        },
+        "status": "accepted"
+      }
+    },
+    {
+      "adsorption_geometry": "end-on at a single site",
+      "charge": 0,
+      "composition": {
+        "H": 1
+      },
+      "interface_id": null,
+      "material_ids": [
+        "Ni"
+      ],
+      "phase": "surface",
+      "schema_version": "1.0.0",
+      "site_occupancy": {
+        "top-Ni": 1
+      },
+      "species_id": "H2-top",
+      "structural_provenance": {
+        "path": "tests/fixtures/multiphase/kinetic_reference.json",
+        "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+      },
+      "structure_id": "H2-top",
+      "surface_ids": [
+        "facet-Ni"
+      ],
+      "thermochemistry_status": "reviewed",
+      "validation": {
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        },
+        "status": "accepted"
+      }
+    }
+  ],
+  "species_fingerprints": {
+    "H2-bridge": "35f9f8c7d47663fcea754b2be4733fe3363de0088204ccde2cd564bd08e28a9c",
+    "H2-g": "354432fc942c62c25d2f041819294b6e1cdcbec1f12cea39275788315b333cb7",
+    "H2-top": "fef1d19abafbe0f53f90eb495d2116816fb041390aecba885cc1c4c7126e2211"
+  },
+  "thermochemistry_version": "51e6df785c7292a51f342d8d5d7c31df4a6a11f42daa2cba1619111cda0d8521",
+  "validation_report": {
+    "execution_authorized": false,
+    "independent_cycles_checked": 0,
+    "levels": {
+      "ads": "KINETICALLY_ELIGIBLE"
+    },
+    "mkm_status": "eligible",
+    "reactions": {
+      "ads": []
+    }
+  }
+}

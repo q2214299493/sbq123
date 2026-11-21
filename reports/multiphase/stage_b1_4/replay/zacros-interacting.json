@@ -1,0 +1,126 @@
+{
+  "conditions": {
+    "partial_pressures": [
+      {
+        "pressure_Pa": 100000.0,
+        "species_id": "H2-g"
+      }
+    ],
+    "pressure_Pa": 100000.0,
+    "temperature_K": 400
+  },
+  "dataset_version": "ba6e46c0e1b2eee0c2772b33f6828123f3edc5ccb3b4dcb29717aa46bc5f0083",
+  "engine": {
+    "name": "Zacros",
+    "version": "4.0"
+  },
+  "format": "kinetic-rate-output/2",
+  "native_normalization": {
+    "basis_kind": "simulation_cell",
+    "definition": "One complete simulated periodic lattice, including all repeated primitive cells.",
+    "denominator_unit": "simulation cell",
+    "denominator_value": 1,
+    "extent_unit": "event",
+    "reference_id": "lattice-041747579adc213be762c4945862a71396c90465c4059660ac6d773c9d848362",
+    "reference_scope": {
+      "network_version": "6325fa922394c6aa225e29105882c5be0be0853d12f5b7f75cb618b1ae79d302",
+      "project_id": "demo"
+    },
+    "time_unit": "s"
+  },
+  "network_version": "6325fa922394c6aa225e29105882c5be0be0853d12f5b7f75cb618b1ae79d302",
+  "output_binding": {
+    "dataset_id": "rates-f6940f17f8b6843904402fc39287d0d217439b43c8d7cfc424dc1354b3ea0caf",
+    "native_inputs": [
+      {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/interacting.zip!/energetics_input.dat",
+        "sha256": "a46d087165e8ae8eda8986c44d69d9145e8356e8fa09464642a09ab28c08b8c4"
+      },
+      {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/interacting.zip!/lattice_input.dat",
+        "sha256": "041747579adc213be762c4945862a71396c90465c4059660ac6d773c9d848362"
+      },
+      {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/interacting.zip!/mechanism_input.dat",
+        "sha256": "ac619290342374026ff926a0f3b87ffae121a3d8a728d2cc0242eb624477650e"
+      },
+      {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/interacting.zip!/simulation_input.dat",
+        "sha256": "7dbe831c71480a0fcf65fd59ae5e1b48bf4acc734a283d083f0dbff7f9fec1d4"
+      },
+      {
+        "path": "reports/multiphase/phase2_5_1/benchmarks/interacting.zip!/state_input.dat",
+        "sha256": "8b274e68981c1b26cd5242efea0b3128f148865a55f15efbae336fcff6e6365c"
+      }
+    ],
+    "run_id": "interacting"
+  },
+  "project_id": "demo",
+  "provenance": {
+    "dataset": {
+      "path": "reports/multiphase/phase2_5_1/benchmarks/interacting.zip!/dataset.json",
+      "sha256": "0b81ab9f9def06344bed8319efa6e8fb0aa3b7488cb11b3edb95c4f7d98159d0"
+    },
+    "native_output": {
+      "path": "reports/multiphase/phase2_5_1/benchmarks/interacting.zip",
+      "sha256": "c0b78aa900b9c907b13e0ba2fab018b77fa64b60e128606922821ebcaa6c6652"
+    },
+    "network": {
+      "path": "tests/fixtures/multiphase/kinetic_interface_network.json",
+      "sha256": "a31cbde920aa19f80a602da27becf21f3ee10fb6576295a6f39898021ea77929"
+    }
+  },
+  "reaction_rates": [
+    {
+      "forward": 1022.4866137438457,
+      "net": -383.43248015394215,
+      "parameter_set_id": "params",
+      "products": {
+        "H2-bridge": 1,
+        "H2-top": 1
+      },
+      "reactants": {
+        "H2-g": 1
+      },
+      "reaction_id": "ads",
+      "reverse": 1405.919093897788,
+      "sites_consumed": {
+        "bridge-Cu": 1,
+        "top-Ni": 1
+      },
+      "sites_released": {}
+    }
+  ],
+  "schema_version": "2.1.0",
+  "source_terms": {
+    "site_inventories": [
+      {
+        "net_vacancy_rate": 383.43248015394215,
+        "site_id": "bridge-Cu"
+      },
+      {
+        "net_vacancy_rate": 383.43248015394215,
+        "site_id": "top-Ni"
+      }
+    ],
+    "species": [
+      {
+        "net_production_rate": -383.43248015394215,
+        "species_id": "H2-bridge"
+      },
+      {
+        "net_production_rate": 383.43248015394215,
+        "species_id": "H2-g"
+      },
+      {
+        "net_production_rate": -383.43248015394215,
+        "species_id": "H2-top"
+      }
+    ]
+  },
+  "validation": {
+    "review": null,
+    "status": "unreviewed"
+  },
+  "validity_range": null
+}
