@@ -124,6 +124,36 @@ def test_vasp_observations(tmp_path):
         parse_outcar(out, pos)
 
 
+@pytest.mark.parametrize("numbers", [[], [2], [1, 1], [1, 3]])
+def test_frequency_reader_rejects_ambiguous_numbering(tmp_path, numbers):
+    structure = tmp_path / "POSCAR"
+    structure.write_text("toy\n1\n5 0 0\n0 5 0\n0 0 5\nH\n1\nDirect\n0 0 0\n")
+    outcar = tmp_path / "OUTCAR"
+    outcar.write_text("".join(f" {n} f = 11.0 cm-1\n" for n in numbers))
+    with pytest.raises(ValueError, match="Missing, repeated or incomplete mode numbering"):
+        parse_outcar(outcar, structure)
+
+
+def test_contiguous_partial_spectrum_preserves_flags_and_source_bytes(tmp_path):
+    from hashlib import sha256
+
+    structure = tmp_path / "POSCAR"
+    structure.write_bytes(b"toy\n1\n5 0 0\n0 5 0\n0 0 5\nH\n3\nSelective dynamics\nDirect\n"
+                          b"0 0 0 T F F\n.2 .2 .2 F F F\n.5 .5 .5 F T T\n")
+    outcar = tmp_path / "OUTCAR"
+    outcar.write_bytes(b" NIONS = 3\r\n 1 f/i= 2.5D+1 cm-1\r\n")
+    obs = parse_outcar(outcar, structure)
+    assert obs["constraints"] == ["TFF", "FFF", "FTT"]
+    assert obs["atom_map"] == [0, 2]
+    assert obs["frequencies_cm1"] == [-25.0]
+    assert obs["imaginary_indices_one_based"] == [1]
+    assert (obs["mode_count"], obs["expected_cartesian_modes"]) == (1, 3)
+    assert obs["cartesian_count_matches"] is False
+    assert obs["validation_status"] == "unreviewed"
+    assert obs["source_artifact_hash"] == sha256(outcar.read_bytes()).hexdigest()
+    assert obs["frequency_structure_sha256"] == sha256(structure.read_bytes()).hexdigest()
+
+
 def test_fe110_published_evidence_only():
     doc = case()
     r = calculate([doc], ts_review=review(), phase="adsorbate")

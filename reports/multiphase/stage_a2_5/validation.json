@@ -1,0 +1,652 @@
+{
+  "release_baseline": "327b30fea9e071770806da03b852051104bb1403",
+  "development_head": "233d5a6c589560094a0e942b6d48708b1fd5a847",
+  "hash_conventions": {
+    "files": "SHA-256 of original bytes",
+    "result": "SHA-256 of ASCII JSON with sorted keys, compact separators and no NaN",
+    "cli": "SHA-256 of Windows subprocess stdout bytes, with identical absolute OUTCAR and POSCAR paths",
+    "sources": "Calculation files and NEB thresholds are from the development evidence tree. reports/ refers to each checkout. publication-tree/ identifies VFA defaults resolved from the publication checkout."
+  },
+  "frequency_cli_stdout": {
+    "bytes": 1662,
+    "sha256": "b32c5df51ec3d246552f7d516c33ce1bc5085980a82f435a7429ae210f888e2a"
+  },
+  "worktrees": {
+    "development": {
+      "scientific_replay_before_sha256": "8e8aef47520c70d96e1d15ed021fc4333a73c4881d2f6a46c428ff7f318c0a5c",
+      "scientific_replay_after_sha256": "8e8aef47520c70d96e1d15ed021fc4333a73c4881d2f6a46c428ff7f318c0a5c",
+      "verified_source_count": 45,
+      "replay_before_equals_after": true,
+      "replay": {
+        "neb": {
+          "archived_field_differences": [
+            "atom_map_sha256",
+            "compatibility_sha256",
+            "contract_sha256",
+            "geometry_validated",
+            "path_binding",
+            "path_binding_valid",
+            "path_review",
+            "path_review_source",
+            "path_reviewed",
+            "transition_state_validated"
+          ],
+          "image_count": 8,
+          "image_rows_equal_archive": true,
+          "maximum_image": "05",
+          "payload_sha256": "5e37df2a3f0cda84e68c9cfb728044997d1a3996cba6247c118e69681a753c70",
+          "source_manifest_equal_archive": true
+        },
+        "spectrum": {
+          "archived_field_differences": [],
+          "atom_map": [
+            45,
+            46,
+            47,
+            48
+          ],
+          "imaginary_indices_one_based": [
+            12
+          ],
+          "mode_count": 12,
+          "payload_sha256": "1136eb1aca0ee30b70819a4059d7ec7db19c1653ee4a0ab033619b483166ab44",
+          "signed_imaginary_cm1": [
+            -318.644011
+          ]
+        },
+        "thermochemistry": {
+          "TS_zpe_ev": 0.5140516496724512,
+          "archived_field_differences": [
+            "states"
+          ],
+          "electronic_ev": {
+            "forward": 0.9736017399999923,
+            "reaction": 0.6593080300000338,
+            "reverse": 0.31429370999995854
+          },
+          "excluded_mode": 12,
+          "mkm_status": "blocked",
+          "payload_sha256": "052002e07645fcde18421db4bea2f4cd3705714acbb6da60025b95327953eb16"
+        },
+        "vfa": {
+          "archive_grade": "A",
+          "archived_field_differences": [],
+          "grade": "A",
+          "modes_equal_archive": true,
+          "payload_sha256": "626b821089c353ba638704bac50eb81f4c852ffc3c42cd9858cac33aa913d382",
+          "principal_mode_index": 12,
+          "source_manifest_equal_archive": true
+        }
+      },
+      "graph_before": {
+        "cycles": [],
+        "direct_imports": {
+          "scripts.neb_agent.analyze_neb_outputs": [
+            "scripts.artifact_io",
+            "scripts.neb_agent.cli_common",
+            "scripts.neb_agent.magnetic_continuity",
+            "scripts.neb_agent.utils_report",
+            "scripts.neb_agent.utils_structure",
+            "scripts.neb_agent.utils_vasp",
+            "scripts.runtime_resources",
+            "scripts.scientific_validation",
+            "scripts.vasp_result_gate"
+          ],
+          "scripts.neb_agent.utils_vasp": [
+            "scripts.scientific_validation"
+          ],
+          "scripts.thermochemistry.__main__": [
+            "scripts.thermochemistry.engine",
+            "scripts.thermochemistry.frequencies"
+          ],
+          "scripts.thermochemistry.frequencies": [
+            "scripts.artifact_io",
+            "scripts.neb_agent.utils_structure",
+            "scripts.ts_validation.analyze_vfa"
+          ],
+          "scripts.ts_validation.analyze_vfa": [
+            "scripts.artifact_io",
+            "scripts.neb_agent.analyze_neb_outputs",
+            "scripts.neb_agent.diagnose_path_geometry",
+            "scripts.neb_agent.utils_report",
+            "scripts.neb_agent.utils_structure",
+            "scripts.neb_agent.utils_vasp",
+            "scripts.runtime_resources",
+            "scripts.scientific_validation",
+            "scripts.ts_strategy_engine.contract",
+            "scripts.ts_strategy_engine.dimer_analysis",
+            "scripts.ts_strategy_engine.path_evidence",
+            "scripts.ts_validation.connectivity",
+            "scripts.ts_validation.dimer_frequency_gate"
+          ],
+          "scripts.vasp_result_gate": [
+            "scripts.execution_backends",
+            "scripts.neb_agent.utils_vasp",
+            "scripts.scientific_validation"
+          ]
+        },
+        "edges": 1163,
+        "modules": 332
+      },
+      "graph_after": {
+        "cycles": [],
+        "direct_imports": {
+          "scripts.neb_agent.analyze_neb_outputs": [
+            "scripts.artifact_io",
+            "scripts.neb_agent.cli_common",
+            "scripts.neb_agent.magnetic_continuity",
+            "scripts.neb_agent.utils_report",
+            "scripts.neb_agent.utils_structure",
+            "scripts.neb_agent.utils_vasp",
+            "scripts.runtime_resources",
+            "scripts.scientific_validation",
+            "scripts.vasp_result_gate"
+          ],
+          "scripts.neb_agent.utils_vasp": [
+            "scripts.scientific_validation"
+          ],
+          "scripts.thermochemistry.__main__": [
+            "scripts.thermochemistry.engine",
+            "scripts.thermochemistry.frequencies",
+            "scripts.vasp_vibrations"
+          ],
+          "scripts.thermochemistry.frequencies": [
+            "scripts.vasp_vibrations"
+          ],
+          "scripts.ts_validation.analyze_vfa": [
+            "scripts.artifact_io",
+            "scripts.neb_agent.analyze_neb_outputs",
+            "scripts.neb_agent.diagnose_path_geometry",
+            "scripts.neb_agent.utils_report",
+            "scripts.neb_agent.utils_structure",
+            "scripts.neb_agent.utils_vasp",
+            "scripts.runtime_resources",
+            "scripts.scientific_validation",
+            "scripts.ts_strategy_engine.contract",
+            "scripts.ts_strategy_engine.dimer_analysis",
+            "scripts.ts_strategy_engine.path_evidence",
+            "scripts.ts_validation.connectivity",
+            "scripts.ts_validation.dimer_frequency_gate",
+            "scripts.vasp_vibrations"
+          ],
+          "scripts.vasp_result_gate": [
+            "scripts.execution_backends",
+            "scripts.neb_agent.utils_vasp",
+            "scripts.scientific_validation"
+          ],
+          "scripts.vasp_vibrations": [
+            "scripts.artifact_io",
+            "scripts.neb_agent.utils_structure",
+            "scripts.scientific_validation"
+          ]
+        },
+        "edges": 1166,
+        "modules": 333
+      },
+      "pytest": {
+        "baseline": {
+          "passed": 187,
+          "failed": [
+            "tests/test_code_structure.py::test_ts_engine_layers_do_not_recombine",
+            "tests/test_code_structure.py::test_scientific_parsing_and_contract_validation_have_single_owners"
+          ],
+          "collected_by_file": {
+            "tests/test_b5_architecture_boundaries.py": 26,
+            "tests/test_b6_governance.py": 29,
+            "tests/test_ci_neb_acceptance_policy.py": 8,
+            "tests/test_code_structure.py": 11,
+            "tests/test_dimer_grade_a_consistency.py": 24,
+            "tests/test_neb_pilot_validation.py": 2,
+            "tests/test_neb_remote_monitor.py": 6,
+            "tests/test_thermochemistry.py": 54,
+            "tests/test_ts_validation.py": 14,
+            "tests/test_ts_validation_pipeline.py": 11,
+            "tests/test_vasp_output_streaming.py": 3,
+            "tests/test_vasp_result_gate.py": 1
+          }
+        },
+        "final": {
+          "passed": 194,
+          "failed": [
+            "tests/test_code_structure.py::test_ts_engine_layers_do_not_recombine"
+          ],
+          "collected_by_file": {
+            "tests/test_b5_architecture_boundaries.py": 26,
+            "tests/test_b6_governance.py": 29,
+            "tests/test_ci_neb_acceptance_policy.py": 8,
+            "tests/test_code_structure.py": 12,
+            "tests/test_dimer_grade_a_consistency.py": 24,
+            "tests/test_neb_pilot_validation.py": 2,
+            "tests/test_neb_remote_monitor.py": 6,
+            "tests/test_thermochemistry.py": 59,
+            "tests/test_ts_validation.py": 14,
+            "tests/test_ts_validation_pipeline.py": 11,
+            "tests/test_vasp_output_streaming.py": 3,
+            "tests/test_vasp_result_gate.py": 1
+          }
+        },
+        "extra": {
+          "passed": 170,
+          "failed": [],
+          "collected_by_file": {
+            "tests/test_b21_scientific_acceptance.py": 53,
+            "tests/test_b2_scientific_contract.py": 84,
+            "tests/test_outcar_numbered_ediff.py": 1,
+            "tests/test_outcar_review_stream.py": 11,
+            "tests/test_residual_parser_ownership.py": 21
+          }
+        }
+      }
+    },
+    "publication": {
+      "scientific_replay_before_sha256": "24bd7927660c485fadfe343f55163b433a6f2f3a1ec2dbb5d6e07c98d5e1eaca",
+      "scientific_replay_after_sha256": "24bd7927660c485fadfe343f55163b433a6f2f3a1ec2dbb5d6e07c98d5e1eaca",
+      "verified_source_count": 45,
+      "replay_before_equals_after": true,
+      "replay": {
+        "neb": {
+          "archived_field_differences": [
+            "atom_map_sha256",
+            "compatibility_sha256",
+            "contract_sha256",
+            "geometry_validated",
+            "path_binding",
+            "path_binding_valid",
+            "path_review",
+            "path_review_source",
+            "path_reviewed",
+            "transition_state_validated"
+          ],
+          "image_count": 8,
+          "image_rows_equal_archive": true,
+          "maximum_image": "05",
+          "payload_sha256": "5e37df2a3f0cda84e68c9cfb728044997d1a3996cba6247c118e69681a753c70",
+          "source_manifest_equal_archive": true
+        },
+        "spectrum": {
+          "archived_field_differences": [],
+          "atom_map": [
+            45,
+            46,
+            47,
+            48
+          ],
+          "imaginary_indices_one_based": [
+            12
+          ],
+          "mode_count": 12,
+          "payload_sha256": "1136eb1aca0ee30b70819a4059d7ec7db19c1653ee4a0ab033619b483166ab44",
+          "signed_imaginary_cm1": [
+            -318.644011
+          ]
+        },
+        "thermochemistry": {
+          "TS_zpe_ev": 0.5140516496724512,
+          "archived_field_differences": [
+            "states"
+          ],
+          "electronic_ev": {
+            "forward": 0.9736017399999923,
+            "reaction": 0.6593080300000338,
+            "reverse": 0.31429370999995854
+          },
+          "excluded_mode": 12,
+          "mkm_status": "blocked",
+          "payload_sha256": "052002e07645fcde18421db4bea2f4cd3705714acbb6da60025b95327953eb16"
+        },
+        "vfa": {
+          "archive_grade": "A",
+          "archived_field_differences": [
+            "source_files"
+          ],
+          "grade": "A",
+          "modes_equal_archive": true,
+          "payload_sha256": "43ff394df7020d254d7e66f14a72adb51a5ea649e49d14a5e5b03f2e7a8cb681",
+          "principal_mode_index": 12,
+          "source_manifest_equal_archive": false
+        }
+      },
+      "graph_before": {
+        "cycles": [],
+        "direct_imports": {
+          "scripts.neb_agent.analyze_neb_outputs": [
+            "scripts.artifact_io",
+            "scripts.neb_agent.cli_common",
+            "scripts.neb_agent.magnetic_continuity",
+            "scripts.neb_agent.utils_report",
+            "scripts.neb_agent.utils_structure",
+            "scripts.neb_agent.utils_vasp",
+            "scripts.runtime_resources",
+            "scripts.scientific_validation",
+            "scripts.vasp_result_gate"
+          ],
+          "scripts.neb_agent.utils_vasp": [
+            "scripts.scientific_validation"
+          ],
+          "scripts.thermochemistry.__main__": [
+            "scripts.thermochemistry.engine",
+            "scripts.thermochemistry.frequencies"
+          ],
+          "scripts.thermochemistry.frequencies": [
+            "scripts.artifact_io",
+            "scripts.neb_agent.utils_structure",
+            "scripts.ts_validation.analyze_vfa"
+          ],
+          "scripts.ts_validation.analyze_vfa": [
+            "scripts.artifact_io",
+            "scripts.neb_agent.analyze_neb_outputs",
+            "scripts.neb_agent.diagnose_path_geometry",
+            "scripts.neb_agent.utils_report",
+            "scripts.neb_agent.utils_structure",
+            "scripts.neb_agent.utils_vasp",
+            "scripts.runtime_resources",
+            "scripts.scientific_validation",
+            "scripts.ts_strategy_engine.contract",
+            "scripts.ts_strategy_engine.dimer_analysis",
+            "scripts.ts_strategy_engine.path_evidence",
+            "scripts.ts_validation.connectivity",
+            "scripts.ts_validation.dimer_frequency_gate"
+          ],
+          "scripts.vasp_result_gate": [
+            "scripts.execution_backends",
+            "scripts.neb_agent.utils_vasp",
+            "scripts.scientific_validation"
+          ]
+        },
+        "edges": 1059,
+        "modules": 291
+      },
+      "graph_after": {
+        "cycles": [],
+        "direct_imports": {
+          "scripts.neb_agent.analyze_neb_outputs": [
+            "scripts.artifact_io",
+            "scripts.neb_agent.cli_common",
+            "scripts.neb_agent.magnetic_continuity",
+            "scripts.neb_agent.utils_report",
+            "scripts.neb_agent.utils_structure",
+            "scripts.neb_agent.utils_vasp",
+            "scripts.runtime_resources",
+            "scripts.scientific_validation",
+            "scripts.vasp_result_gate"
+          ],
+          "scripts.neb_agent.utils_vasp": [
+            "scripts.scientific_validation"
+          ],
+          "scripts.thermochemistry.__main__": [
+            "scripts.thermochemistry.engine",
+            "scripts.thermochemistry.frequencies",
+            "scripts.vasp_vibrations"
+          ],
+          "scripts.thermochemistry.frequencies": [
+            "scripts.vasp_vibrations"
+          ],
+          "scripts.ts_validation.analyze_vfa": [
+            "scripts.artifact_io",
+            "scripts.neb_agent.analyze_neb_outputs",
+            "scripts.neb_agent.diagnose_path_geometry",
+            "scripts.neb_agent.utils_report",
+            "scripts.neb_agent.utils_structure",
+            "scripts.neb_agent.utils_vasp",
+            "scripts.runtime_resources",
+            "scripts.scientific_validation",
+            "scripts.ts_strategy_engine.contract",
+            "scripts.ts_strategy_engine.dimer_analysis",
+            "scripts.ts_strategy_engine.path_evidence",
+            "scripts.ts_validation.connectivity",
+            "scripts.ts_validation.dimer_frequency_gate",
+            "scripts.vasp_vibrations"
+          ],
+          "scripts.vasp_result_gate": [
+            "scripts.execution_backends",
+            "scripts.neb_agent.utils_vasp",
+            "scripts.scientific_validation"
+          ],
+          "scripts.vasp_vibrations": [
+            "scripts.artifact_io",
+            "scripts.neb_agent.utils_structure",
+            "scripts.scientific_validation"
+          ]
+        },
+        "edges": 1062,
+        "modules": 292
+      },
+      "pytest": {
+        "baseline": {
+          "passed": 188,
+          "failed": [
+            "tests/test_code_structure.py::test_scientific_parsing_and_contract_validation_have_single_owners"
+          ],
+          "collected_by_file": {
+            "tests/test_b5_architecture_boundaries.py": 26,
+            "tests/test_b6_governance.py": 29,
+            "tests/test_ci_neb_acceptance_policy.py": 8,
+            "tests/test_code_structure.py": 11,
+            "tests/test_dimer_grade_a_consistency.py": 24,
+            "tests/test_neb_pilot_validation.py": 2,
+            "tests/test_neb_remote_monitor.py": 6,
+            "tests/test_thermochemistry.py": 54,
+            "tests/test_ts_validation.py": 14,
+            "tests/test_ts_validation_pipeline.py": 11,
+            "tests/test_vasp_output_streaming.py": 3,
+            "tests/test_vasp_result_gate.py": 1
+          }
+        },
+        "final": {
+          "passed": 195,
+          "failed": [],
+          "collected_by_file": {
+            "tests/test_b5_architecture_boundaries.py": 26,
+            "tests/test_b6_governance.py": 29,
+            "tests/test_ci_neb_acceptance_policy.py": 8,
+            "tests/test_code_structure.py": 12,
+            "tests/test_dimer_grade_a_consistency.py": 24,
+            "tests/test_neb_pilot_validation.py": 2,
+            "tests/test_neb_remote_monitor.py": 6,
+            "tests/test_thermochemistry.py": 59,
+            "tests/test_ts_validation.py": 14,
+            "tests/test_ts_validation_pipeline.py": 11,
+            "tests/test_vasp_output_streaming.py": 3,
+            "tests/test_vasp_result_gate.py": 1
+          }
+        },
+        "extra": {
+          "passed": 169,
+          "failed": [],
+          "collected_by_file": {
+            "tests/test_b21_scientific_acceptance.py": 53,
+            "tests/test_b2_scientific_contract.py": 84,
+            "tests/test_outcar_review_stream.py": 11,
+            "tests/test_residual_parser_ownership.py": 21
+          }
+        }
+      }
+    }
+  },
+  "source_file_sha256_before_equals_after": {
+    "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/CONTCAR": {
+      "development": "0157a418cd1fba1be886426361d494ffbdce9a15d1a9132b996a3481ffcc1a6a",
+      "publication": "0157a418cd1fba1be886426361d494ffbdce9a15d1a9132b996a3481ffcc1a6a"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/DIMCAR": {
+      "development": "205d7ae825af2cdeaa700ad2bf363d588e4f2be614897efb4eee6fe54e5041ed",
+      "publication": "205d7ae825af2cdeaa700ad2bf363d588e4f2be614897efb4eee6fe54e5041ed"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/INCAR": {
+      "development": "09a9077e90f96a2fe5c5516d2823ebb20e47f9ba1760a950d6ec7e7ec81a67ae",
+      "publication": "09a9077e90f96a2fe5c5516d2823ebb20e47f9ba1760a950d6ec7e7ec81a67ae"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/MODECAR": {
+      "development": "80e803c404bf2030524b614a8605a1e5560529e6a443531463e117824f8d213d",
+      "publication": "80e803c404bf2030524b614a8605a1e5560529e6a443531463e117824f8d213d"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/NEWMODECAR": {
+      "development": "23e6af49461434f695388f5b8db6b7be6d2720134035cacb477faa09ef2856b2",
+      "publication": "23e6af49461434f695388f5b8db6b7be6d2720134035cacb477faa09ef2856b2"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/OSZICAR": {
+      "development": "b74e45befd2aebbb602b299c4131ee79c8e67a550c7fef51dfe3bfe53d4fa81f",
+      "publication": "b74e45befd2aebbb602b299c4131ee79c8e67a550c7fef51dfe3bfe53d4fa81f"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/OUTCAR": {
+      "development": "391f84167e6372dcaf770ed1efa471d1abba6d4640803876899b120ac797dd02",
+      "publication": "391f84167e6372dcaf770ed1efa471d1abba6d4640803876899b120ac797dd02"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/POSCAR": {
+      "development": "2536a53d2178fe94c6013a52a4bef4d6c20a19317b8b81231729f92e5d086e88",
+      "publication": "2536a53d2178fe94c6013a52a4bef4d6c20a19317b8b81231729f92e5d086e88"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/dimer_analysis.json": {
+      "development": "cb68572cc0f3ce9bef17da218538ef0b11e438602efccfb3c8534ab6f3dc2527",
+      "publication": "cb68572cc0f3ce9bef17da218538ef0b11e438602efccfb3c8534ab6f3dc2527"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/dimer_handoff.json": {
+      "development": "b9ad863aa9b43cb6fad460af7a2e7cc1858a85b450fdc3fde3e9b8a4687be5cd",
+      "publication": "b9ad863aa9b43cb6fad460af7a2e7cc1858a85b450fdc3fde3e9b8a4687be5cd"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/final_mode_review.json": {
+      "development": "e0637a575ff982a02c38de08227e86b5df77416664938de570c43403c4351fa3",
+      "publication": "e0637a575ff982a02c38de08227e86b5df77416664938de570c43403c4351fa3"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/mode_review.json": {
+      "development": "389b8416081fe15883c44f3c5c98f854376639c2f0f6e9cd68305d8b1618cca1",
+      "publication": "389b8416081fe15883c44f3c5c98f854376639c2f0f6e9cd68305d8b1618cca1"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/scheduler_evidence.json": {
+      "development": "6fbed00415acfdeca3d3c2cdbf329f973f63a84a1d5e920438b99c6d61a57e43",
+      "publication": "6fbed00415acfdeca3d3c2cdbf329f973f63a84a1d5e920438b99c6d61a57e43"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/local_triplet_review_20261112_v1/path/00/OUTCAR": {
+      "development": "e3f5ad8b0aa2a9afc6749785e5dc872d64b6de4165169578510c7a0c5d167d78",
+      "publication": "e3f5ad8b0aa2a9afc6749785e5dc872d64b6de4165169578510c7a0c5d167d78"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/local_triplet_review_20261112_v1/path/01/OSZICAR": {
+      "development": "f5e58519590b89e1105c25ee0f7497961831a67ced64cbaefe5484da5c21a4ce",
+      "publication": "f5e58519590b89e1105c25ee0f7497961831a67ced64cbaefe5484da5c21a4ce"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/local_triplet_review_20261112_v1/path/01/OUTCAR": {
+      "development": "9052f430e488a34775082c67bbb29ad242bd05e096a6e055718ac7e4e4bdceab",
+      "publication": "9052f430e488a34775082c67bbb29ad242bd05e096a6e055718ac7e4e4bdceab"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/local_triplet_review_20261112_v1/path/02/OSZICAR": {
+      "development": "271581f59e374f40565f178a88df7b040f983a0a7e259305a9c18f11b6e93d10",
+      "publication": "271581f59e374f40565f178a88df7b040f983a0a7e259305a9c18f11b6e93d10"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/local_triplet_review_20261112_v1/path/02/OUTCAR": {
+      "development": "43e68bf8a77f202a8ccb54f95b7830edd7f9ebb77ed752209f8145e371365342",
+      "publication": "43e68bf8a77f202a8ccb54f95b7830edd7f9ebb77ed752209f8145e371365342"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/local_triplet_review_20261112_v1/path/03/OSZICAR": {
+      "development": "bf2e55fcdee17f38ff1c02ab2a4c419432c8eaa4d0c87faa7e6e5bfbedceb59e",
+      "publication": "bf2e55fcdee17f38ff1c02ab2a4c419432c8eaa4d0c87faa7e6e5bfbedceb59e"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/local_triplet_review_20261112_v1/path/03/OUTCAR": {
+      "development": "e55ec40a48362b78457da0a95255d0e72211ae082879dfb8adeb07b6523cb44b",
+      "publication": "e55ec40a48362b78457da0a95255d0e72211ae082879dfb8adeb07b6523cb44b"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/local_triplet_review_20261112_v1/path/04/OSZICAR": {
+      "development": "965b8fe8b20092e0ce4ea315312e9f4d1287ac5bb4747be297ba23c47b6d88f2",
+      "publication": "965b8fe8b20092e0ce4ea315312e9f4d1287ac5bb4747be297ba23c47b6d88f2"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/local_triplet_review_20261112_v1/path/04/OUTCAR": {
+      "development": "0486dd464ec725b743f3309a7d0005777b496fbf58e13de8e9253ab2986f40e0",
+      "publication": "0486dd464ec725b743f3309a7d0005777b496fbf58e13de8e9253ab2986f40e0"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/local_triplet_review_20261112_v1/path/05/OSZICAR": {
+      "development": "d72701db05329f4f094a9373f2bd072ef27ac24bc05a3aa8711121e42f872aae",
+      "publication": "d72701db05329f4f094a9373f2bd072ef27ac24bc05a3aa8711121e42f872aae"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/local_triplet_review_20261112_v1/path/05/OUTCAR": {
+      "development": "04b03ded7ec02675ae2e7d0c3128cd7ad869f4b51e21acd97d4d3b3da0fedd7a",
+      "publication": "04b03ded7ec02675ae2e7d0c3128cd7ad869f4b51e21acd97d4d3b3da0fedd7a"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/local_triplet_review_20261112_v1/path/06/OSZICAR": {
+      "development": "ae527c5fde4e761e8961625744a3fe312871768f3e5854b0a81212c57d4a9050",
+      "publication": "ae527c5fde4e761e8961625744a3fe312871768f3e5854b0a81212c57d4a9050"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/local_triplet_review_20261112_v1/path/06/OUTCAR": {
+      "development": "a323667aa6bfc07a62e75a227a4700c28d6aac4014a15aaae7dde9d9bd6822b1",
+      "publication": "a323667aa6bfc07a62e75a227a4700c28d6aac4014a15aaae7dde9d9bd6822b1"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/local_triplet_review_20261112_v1/path/07/OUTCAR": {
+      "development": "e88d99ab9ba74274fd8af45e4e69b9f59feb90bbe1101f7e794c1c317bb82edc",
+      "publication": "e88d99ab9ba74274fd8af45e4e69b9f59feb90bbe1101f7e794c1c317bb82edc"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/local_triplet_review_20261112_v1/path/INCAR": {
+      "development": "ba86d09a76afb78354a95ca078d43d676a97a70679d8100aa91e7fe22e084e5a",
+      "publication": "ba86d09a76afb78354a95ca078d43d676a97a70679d8100aa91e7fe22e084e5a"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/local_triplet_review_20261112_v1/path/neb_analysis.json": {
+      "development": "563607c12120b9ca9e8b23901b602f895fbd80157fa8e401d23348c34c085733",
+      "publication": "563607c12120b9ca9e8b23901b602f895fbd80157fa8e401d23348c34c085733"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/dimer_soft_gate_review.json": {
+      "development": "466c7cc0b470eb7ba7290a44de3b129b81b75f78bcf5e71dce7836227645f4e3",
+      "publication": "466c7cc0b470eb7ba7290a44de3b129b81b75f78bcf5e71dce7836227645f4e3"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/INCAR": {
+      "development": "40b8ac1952abd7ec7e1f7c5a6b908f92c9266408e129edc84e004b8ab4c2c0f5",
+      "publication": "40b8ac1952abd7ec7e1f7c5a6b908f92c9266408e129edc84e004b8ab4c2c0f5"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/KPOINTS": {
+      "development": "0d7e291117433dac5393f29520b635e92f06e6c8e91aa941137c86b1d39162ae",
+      "publication": "0d7e291117433dac5393f29520b635e92f06e6c8e91aa941137c86b1d39162ae"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/OUTCAR": {
+      "development": "d707a332f1af5d0835e1935d351d9a28b011bd4672e4de3b00833fb93f62f9a9",
+      "publication": "d707a332f1af5d0835e1935d351d9a28b011bd4672e4de3b00833fb93f62f9a9"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/POSCAR": {
+      "development": "c1b035d47a15cf8211d23dd25d4216a46c82a33b3b5c0957b03b86e7a49ade8d",
+      "publication": "c1b035d47a15cf8211d23dd25d4216a46c82a33b3b5c0957b03b86e7a49ade8d"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/vfa_analysis.json": {
+      "development": "e5c326c7c096bfae0174457c077ae415140f9089165bff1c1cdb1a8a920ae7fc",
+      "publication": "e5c326c7c096bfae0174457c077ae415140f9089165bff1c1cdb1a8a920ae7fc"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/vfa_handoff.json": {
+      "development": "dd34a2266f375553a335defde41fd6b02d424d5468c8d9bbd68bb841bd05b025",
+      "publication": "dd34a2266f375553a335defde41fd6b02d424d5468c8d9bbd68bb841bd05b025"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/vfa_review.json": {
+      "development": "53938169f0884fb021c9e2cbb68933b537ad82bed018a14bb53e64e6cb79895d",
+      "publication": "53938169f0884fb021c9e2cbb68933b537ad82bed018a14bb53e64e6cb79895d"
+    },
+    "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/vfa_scope_review.json": {
+      "development": "a1697c65cb058f9906c23f18ef713a90a99a630d374cd2d0a45aaccc81851217",
+      "publication": "a1697c65cb058f9906c23f18ef713a90a99a630d374cd2d0a45aaccc81851217"
+    },
+    "configs/neb_agent/default_thresholds.yaml": {
+      "development": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c",
+      "publication": "de0725b23c87cc38e27a2761dc41a6dd4ea683afd9c59b4cea05384b5989ec7c"
+    },
+    "configs/true_fe110_production.yaml": {
+      "development": "d64423eba9d40f864246d14689806a27b490715f2ade92bd7c6691403d93b82a"
+    },
+    "configs/ts_validation_pipeline.yaml": {
+      "development": "5f59dd300977b7ad8115b2490bbf8015a392a3b3bd1ff2deb149da4991c672ea"
+    },
+    "publication-tree/configs/true_fe110_production.yaml": {
+      "publication": "8101665d28ec2fa7663c371eceb2ce57b13f77a6b373b534729fee263be893af"
+    },
+    "publication-tree/configs/ts_validation_pipeline.yaml": {
+      "publication": "5f59dd300977b7ad8115b2490bbf8015a392a3b3bd1ff2deb149da4991c672ea"
+    },
+    "reports/multiphase/ch_co_frequency_audit_20261119.json": {
+      "development": "3c262bb9f0414fd758fbc8918cb2736070c3101e7d193c65e8314d3fcea6e77f",
+      "publication": "3c262bb9f0414fd758fbc8918cb2736070c3101e7d193c65e8314d3fcea6e77f"
+    },
+    "reports/multiphase/ch_co_intake_20261119.json": {
+      "development": "8c2b7561a9eeaa40ef3bd24d8b6ce69de58e416ef111b5bc4590a5e8d7caf8ef",
+      "publication": "8c2b7561a9eeaa40ef3bd24d8b6ce69de58e416ef111b5bc4590a5e8d7caf8ef"
+    },
+    "reports/multiphase/ch_co_registry_mapping_20261119.json": {
+      "development": "5d8d7f3a4ebd90b5666bee4215b517f2f520f33e3adc2524c50f8d931e41dfbf",
+      "publication": "5d8d7f3a4ebd90b5666bee4215b517f2f520f33e3adc2524c50f8d931e41dfbf"
+    },
+    "reports/multiphase/phase2_2_chco_validation.json": {
+      "development": "3cb1440526b0e6386294100bbfe9a6e31c8d0c999850571f56ce99b322aa1789",
+      "publication": "3cb1440526b0e6386294100bbfe9a6e31c8d0c999850571f56ce99b322aa1789"
+    }
+  }
+}

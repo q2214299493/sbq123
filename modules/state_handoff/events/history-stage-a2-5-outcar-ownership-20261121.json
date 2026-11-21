@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "event_id": "history-stage-a2-5-outcar-ownership-20261121",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-stage-a2-5-outcar-ownership-20261121",
+    "module": "thermochemistry"
+  },
+  "occurred_at": "2026-11-21T08:18:41.349934+00:00",
+  "recorded_at": "2026-11-21T08:18:41.349934+00:00",
+  "summary": "Establish ownership of VASP vibrational observations and replay historical spectrum, TS and NEB outputs.",
+  "payload": {
+    "markdown": "- Stage A.2.5/P5 established a shared VASP vibrational observation reader. Both Windows checkouts preserved their historical replay results. Development had 364 focused passes and one pre-existing unrelated architecture failure. Publication had 364 passes. See reports/multiphase/stage_a2_5/completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "reports/multiphase/stage_a2_5/completion.md",
+      "authority": "repository_document",
+      "sha256": "97f292b5ef854d09d9e9864e43384e6e4500b64d91045141204226f889d22949",
+      "observed_at": "2026-11-21T08:18:41.349934+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_a2_5/validation.json",
+      "authority": "repository_document",
+      "sha256": "d4786d6d42c4791f506b3cd0a38a542d6045d0a65728a6600a3789cd07c24b36",
+      "observed_at": "2026-11-21T08:18:41.349934+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

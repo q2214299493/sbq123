@@ -4,7 +4,6 @@ from scripts.runtime_resources import resource_path
 
 import argparse
 import math
-import re
 from pathlib import Path
 
 from scripts.scientific_validation import finite_number, validate_finite_tree
@@ -17,9 +16,9 @@ from scripts.neb_agent.utils_report import write_json
 from scripts.neb_agent.utils_vasp import parse_outcar
 from scripts.neb_agent.utils_structure import read_poscar
 from scripts.ts_validation.dimer_frequency_gate import evaluate_dimer_frequency_gate
+from scripts.vasp_vibrations import FREQUENCY_PATTERN, frequency_header
 
 
-FREQUENCY_PATTERN = re.compile(r"^\s*(\d+)\s+f(/i)?\s*=(?:.*\s)?([-+\d.]+(?:[eEdD][-+]?\d+)?)\s+cm-1", re.I)
 DEFAULT_PROFILE = resource_path('configs/true_fe110_production.yaml')
 
 
@@ -39,17 +38,6 @@ def _frequency_policy(override: dict[str, Any] | None) -> dict[str, Any]:
             finite_number(value, "frequency thresholds", positive=True)
     validate_finite_tree(policy, "frequency policy")
     return policy
-
-
-def frequency_header(line: str) -> dict[str, Any] | None:
-    if "cm-1" in line:
-        validate_finite_tree(line.split(), "frequency row")
-    match = FREQUENCY_PATTERN.match(line)
-    if not match:
-        return None
-    value = match.group(3).upper().replace("D", "E")
-    return {"mode_index": int(match.group(1)), "imaginary": bool(match.group(2)),
-            "frequency_cm1": finite_number(value, "frequency cm-1")}
 
 
 def _frequency_modes(text: str) -> list[dict[str, Any]]:

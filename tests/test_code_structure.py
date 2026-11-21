@@ -203,6 +203,8 @@ def test_neb_authorization_application_and_submission_have_single_owners() -> No
 def test_scientific_parsing_and_contract_validation_have_single_owners() -> None:
     expected = {
         "read_incar_values": "scripts/vasp_result_gate.py",
+        "frequency_header": "scripts/vasp_vibrations.py",
+        "parse_frequency_outcar": "scripts/vasp_vibrations.py",
         "parse_oszicar": "scripts/neb_agent/utils_vasp.py",
         "parse_outcar": "scripts/neb_agent/utils_vasp.py",
         "final_scf_state": "scripts/vasp_result_gate.py",
@@ -235,6 +237,22 @@ def test_scientific_parsing_and_contract_validation_have_single_owners() -> None
     assert {name: sorted(paths) for name, paths in owners.items()} == {
         name: sorted(paths) for name, paths in expected_owners.items()
     }
+
+
+def test_vibrational_observations_are_shared_without_importing_the_review_layers() -> None:
+    from scripts import vasp_vibrations
+    from scripts.neb_agent import utils_vasp
+    from scripts.thermochemistry import __main__ as thermo_cli
+    from scripts.thermochemistry import frequencies
+    from scripts.ts_validation import analyze_vfa
+
+    assert thermo_cli.parse_outcar is frequencies.parse_outcar is vasp_vibrations.parse_frequency_outcar
+    assert frequencies.frequency_header is analyze_vfa.frequency_header is vasp_vibrations.frequency_header
+    assert analyze_vfa.parse_outcar is utils_vasp.parse_outcar
+    tree = ast.parse(Path(vasp_vibrations.__file__).read_text(encoding="utf-8"))
+    imports = [n.module or "" for n in ast.walk(tree) if isinstance(n, ast.ImportFrom)]
+    imports.extend(a.name for n in ast.walk(tree) if isinstance(n, ast.Import) for a in n.names)
+    assert not any(name.startswith(("scripts.ts_validation", "scripts.thermochemistry")) for name in imports)
 
 
 def test_legacy_incar_readers_are_direct_aliases() -> None:

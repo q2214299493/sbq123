@@ -4,7 +4,8 @@ import json
 from pathlib import Path
 
 from scripts.thermochemistry.engine import calculate
-from scripts.thermochemistry.frequencies import draft_intake, parse_outcar
+from scripts.thermochemistry.frequencies import draft_intake
+from scripts.vasp_vibrations import parse_frequency_outcar as parse_outcar
 
 
 def main():
