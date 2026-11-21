@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "event_id": "history-stage-a2-1-registry-boundary-20261121",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-stage-a2-1-registry-boundary-20261121",
+    "module": "baseline_mkm"
+  },
+  "occurred_at": "2026-11-21T04:22:39.309496+00:00",
+  "recorded_at": "2026-11-21T04:22:39.309496+00:00",
+  "summary": "Repair the P1 Registry CLI dependency boundary in MKM analysis and registration.",
+  "payload": {
+    "markdown": "- Stage A.2.1 switched both MKM consumers to the existing registry_mutations validator. Targeted regressions passed in development (113) and release (109). CLI probes retained exit codes and import graph checks found only the two intended edge replacements. See reports/multiphase/stage_a2_1/completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "reports/multiphase/stage_a2_1/completion.md",
+      "authority": "repository_document",
+      "sha256": "befb6662aeed88c3c808855ad2ffbbe8f5de1a35deca06b734fcf9cde1cbaf84",
+      "observed_at": "2026-11-21T04:22:39.309496+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

@@ -5,7 +5,7 @@ from pathlib import Path
 
 from scripts.artifact_io import load_json_object as read, sha256_file, sha256_json, write_json_exclusive
 from scripts.baseline_mkm.single_point import status
-from scripts.registry_write import validate_registry_batch
+from scripts.registry_mutations import validate_registry_batch
 
 
 def registry_batch(run, reviewer):

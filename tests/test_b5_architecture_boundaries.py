@@ -140,6 +140,14 @@ def test_domain_cannot_import_cli_or_skill_implementations():
         assert not any(name.startswith("skills.") for name in dependencies), path
 
 
+def test_mkm_and_registry_cli_share_the_domain_batch_validator():
+    from scripts import registry_mutations, registry_write
+    from scripts.baseline_mkm import analysis, registration
+
+    for consumer in (analysis, registration, registry_write):
+        assert consumer.validate_registry_batch is registry_mutations.validate_registry_batch
+
+
 def test_authoritative_capabilities_have_one_implementation():
     import ast
 
