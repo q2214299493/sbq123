@@ -1,0 +1,120 @@
+{
+  "phase": "3.3.0",
+  "reaction": "R4",
+  "segment": "IS-A 9725473 to INT06 9748648",
+  "source_dimer_job": "9833429",
+  "final_structure_sha256": "1797b34dbce3c5c9374595dfb3590cdc32f22a240e321f59cde572be3b770b34",
+  "final_direction_sha256": "4fc3bd2edf44f90614a23dfba1ded9083e59a0959b93ea53c9f64532929911b3",
+  "researcher_decision": "allow_frequency_handoff",
+  "acknowledged_residuals": {
+    "final_force_eVA": 0.05255,
+    "force_target_eVA": 0.02,
+    "final_torque_eVA": 0.29241,
+    "torque_target_eVA": 0.01,
+    "final_curvature_eVA2": -0.63616
+  },
+  "frequency_job": "13422",
+  "lsf_checkpoint": {
+    "status": "RUN",
+    "checked_at": "2026-11-21T03:38:23Z"
+  },
+  "active_atoms_zero_based": [
+    36,
+    37,
+    39,
+    40,
+    42,
+    43,
+    49
+  ],
+  "bundle_sha256": "a643c385449637b102afc6cd7b3ca4c8647512eedb82cf83dd64b280247f5077",
+  "verified_inputs": {
+    "INCAR": "9089de9ab3a82c70de687acc2bd793693f7bc5826705ee2fd957dc1f39bf7d5a",
+    "KPOINTS": "0d7e291117433dac5393f29520b635e92f06e6c8e91aa941137c86b1d39162ae",
+    "POTCAR.spec": "9528f5cac58de3cc83a576c828915ce9c2ab72d4ec3be5e409f7476042f7e1bb",
+    "script.lsf": "cd33ce86388d6f34a05348efc4e64508b7d0e7d5d24a3ce5226cc4f9a6a1d9a0",
+    "POSCAR": "e141b632153475e6db156f21772d22bbd624385bbeff691f63cf749c8872469d",
+    "vfa_handoff.json": "1cbcaa9e4f44b8a44944416f761f465fc43f84f0636ecfbc6ed4c7bd9d047143",
+    "vfa_scope_review.json": "9d62a9cf88ff8799c96e132636aaa9b74e2d047f1ea1ee690c4f07b889257d80"
+  },
+  "authorization_scope": "One VFA submission only; zero TS/thermochemistry/MKM acceptance.",
+  "frequency_result": null,
+  "imaginary_mode_assignment": null,
+  "kinetic_reactions_eligible": 0,
+  "kinetics_status": "blocked",
+  "outstanding": "Review completed partial Hessian and target H migration mode. Endpoint/free energy, site and vacancy, boundary steps, reversibility and rate evidence remain incomplete.",
+  "source_evidence": [
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/review_dimer9833429_frequency_20261121/researcher_request.json",
+      "sha256": "16e8b097752a596a0a1d7bece780f2c1fce6981c5977fdcccc5e2baada496ec5"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/review_dimer9833429_frequency_20261121/final_mode_review.json",
+      "sha256": "341bbae9494dc97624f84842c816a29d8d104a48d2ab585783e6cef642bebdf4"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/review_dimer9833429_frequency_20261121/dimer_analysis.json",
+      "sha256": "452c1775e95996bac4981ea67ea6f4642dc47d1297d2bed65513eaa12af05dbb"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/review_dimer9833429_frequency_20261121/dimer_soft_gate_review.json",
+      "sha256": "94cdc11f837baa7099125a937d35f324c0e0b223a55a0112ec80f36d48b86556"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_dimer9833429_is_a_int06_local_h_fe_20261121/vfa_scope_review.json",
+      "sha256": "9d62a9cf88ff8799c96e132636aaa9b74e2d047f1ea1ee690c4f07b889257d80"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_dimer9833429_is_a_int06_local_h_fe_20261121/vfa_handoff.json",
+      "sha256": "1cbcaa9e4f44b8a44944416f761f465fc43f84f0636ecfbc6ed4c7bd9d047143"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_dimer9833429_is_a_int06_local_h_fe_20261121/input_review.json",
+      "sha256": "27b7c8907bcbcbcb71cdf9cb29f0664a2909187224b6446ac32da9dcee971c01"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_dimer9833429_is_a_int06_local_h_fe_20261121/submission_preflight.json",
+      "sha256": "3c69c2d61c9498d2d115794b56821039c80f6b6205c05c3abe6d3c4f3c1d205a"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_dimer9833429_is_a_int06_local_h_fe_20261121/user_execution_authorization.json",
+      "sha256": "6f0383c6af55e7ffc22dbbe1b0e0fcc0477a7d43c0c317a3cfbf999d9c1cfc39"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_dimer9833429_is_a_int06_local_h_fe_20261121/execution_gate_request.json",
+      "sha256": "7380e3e580e791b8550d175c17e3f46ed313660e94a09253ca53d81f05f88a97"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_dimer9833429_is_a_int06_local_h_fe_20261121/execution_gate_decision.json",
+      "sha256": "304b5146ff0d54203c7e9f3819b0bcee130ecdab4879fe33a32da5aacc59efc6"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_dimer9833429_is_a_int06_local_h_fe_20261121/submission_record.json",
+      "sha256": "37be5be236f2233832759e94b27420185a39ab4d8d52256117517e7715396499"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_dimer9833429_is_a_int06_local_h_fe_20261121/scheduler_checkpoint_submission.json",
+      "sha256": "c8dea57f9ab4e4d9380edec38477b273e595eddac5d31902f5f5ea8b3506d542"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_dimer9833429_is_a_int06_local_h_fe_20261121/INCAR",
+      "sha256": "9089de9ab3a82c70de687acc2bd793693f7bc5826705ee2fd957dc1f39bf7d5a"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_dimer9833429_is_a_int06_local_h_fe_20261121/KPOINTS",
+      "sha256": "0d7e291117433dac5393f29520b635e92f06e6c8e91aa941137c86b1d39162ae"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_dimer9833429_is_a_int06_local_h_fe_20261121/POSCAR",
+      "sha256": "e141b632153475e6db156f21772d22bbd624385bbeff691f63cf749c8872469d"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_dimer9833429_is_a_int06_local_h_fe_20261121/POTCAR.spec",
+      "sha256": "9528f5cac58de3cc83a576c828915ce9c2ab72d4ec3be5e409f7476042f7e1bb"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_dimer9833429_is_a_int06_local_h_fe_20261121/script.lsf",
+      "sha256": "cd33ce86388d6f34a05348efc4e64508b7d0e7d5d24a3ce5226cc4f9a6a1d9a0"
+    }
+  ]
+}

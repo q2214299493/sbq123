@@ -1,0 +1,25 @@
+{
+  "status": "accepted_for_diagnostic_frequency",
+  "frequency_method": "finite_difference_partial_hessian",
+  "active_set_policy": "contract_defined_local",
+  "active_indices_source": "explicit_reaction_contract_review",
+  "full_hessian_required": false,
+  "active_atom_indices_zero_based": [
+    36,
+    37,
+    39,
+    40,
+    42,
+    43,
+    49
+  ],
+  "reaction_atom_indices_zero_based": [
+    49
+  ],
+  "scope_convergence_status": "local_migration_center_reviewed_not_size_converged",
+  "frequency_poscar_sha256": "e141b632153475e6db156f21772d22bbd624385bbeff691f63cf749c8872469d",
+  "vfa_handoff_sha256": "1cbcaa9e4f44b8a44944416f761f465fc43f84f0636ecfbc6ed4c7bd9d047143",
+  "reviewer": "Codex structural review under researcher instruction",
+  "reviewed_at": "2026-11-21T03:36:31.444530+00:00",
+  "notes": "H49 plus Fe36/37/39/40/42/43 (zero-based) span initial, bridge and final coordination from the segment contract. At the saddle Fe40/42 are 1.681/1.695 A from H49. All other coordinates are fixed for this 21-DOF diagnostic Hessian; thermochemistry not assessed."
+}

@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "event_id": "history-r4-dimer9833429-vfa13422-submitted-20261121",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-r4-dimer9833429-vfa13422-submitted-20261121",
+    "module": "ts_vibrational_validation"
+  },
+  "occurred_at": "2026-11-21T03:38:36.747121+00:00",
+  "recorded_at": "2026-11-21T03:38:36.747121+00:00",
+  "summary": "Accept the final direction and both DIMCAR warnings only for frequency handoff; submit one IS-A to INT06 VFA, LSF job 13422.",
+  "payload": {
+    "markdown": "- R4 first-segment Dimer 9833429 received frequency-only approval. Local Fe/H VFA 13422 was submitted and observed RUN. No frequency result or TS acceptance at this checkpoint; all four pilot steps remain kinetically blocked. See reports/multiphase/phase3_3_0/r4_9833429_frequency_submission.json."
+  },
+  "evidence": [
+    {
+      "locator": "reports/multiphase/phase3_3_0/r4_9833429_frequency_submission.json",
+      "authority": "repository_document",
+      "observed_at": "2026-11-21T03:38:36.747121+00:00",
+      "sha256": "e886ba9d8ce1313fef1eaed4fdb6f4a3db0b6b797c423d08ff12aca354ff24fa"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_dimer9833429_is_a_int06_local_h_fe_20261121/scheduler_checkpoint_submission.json",
+      "authority": "scheduler",
+      "observed_at": "2026-11-21T03:38:36.747121+00:00",
+      "sha256": "c8dea57f9ab4e4d9380edec38477b273e595eddac5d31902f5f5ea8b3506d542"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/review_dimer9833429_frequency_20261121/dimer_soft_gate_review.json",
+      "authority": "module_validation",
+      "observed_at": "2026-11-21T03:38:36.747121+00:00",
+      "sha256": "94cdc11f837baa7099125a937d35f324c0e0b223a55a0112ec80f36d48b86556"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/review_dimer9833429_frequency_20261121/researcher_request.json",
+      "authority": "user_authorization",
+      "observed_at": "2026-11-21T03:38:36.747121+00:00",
+      "sha256": "16e8b097752a596a0a1d7bece780f2c1fce6981c5977fdcccc5e2baada496ec5"
+    },
+    {
+      "locator": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_dimer9833429_is_a_int06_local_h_fe_20261121/submission_record.json",
+      "authority": "repository_document",
+      "observed_at": "2026-11-21T03:38:36.747121+00:00",
+      "sha256": "37be5be236f2233832759e94b27420185a39ab4d8d52256117517e7715396499"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "vfa",
+  "passed": true,
+  "errors": [],
+  "cores": 32,
+  "images": null,
+  "files": {
+    "INCAR": "9089de9ab3a82c70de687acc2bd793693f7bc5826705ee2fd957dc1f39bf7d5a",
+    "KPOINTS": "0d7e291117433dac5393f29520b635e92f06e6c8e91aa941137c86b1d39162ae",
+    "POTCAR.spec": "9528f5cac58de3cc83a576c828915ce9c2ab72d4ec3be5e409f7476042f7e1bb",
+    "script.lsf": "cd33ce86388d6f34a05348efc4e64508b7d0e7d5d24a3ce5226cc4f9a6a1d9a0",
+    "POSCAR": "e141b632153475e6db156f21772d22bbd624385bbeff691f63cf749c8872469d",
+    "vfa_handoff.json": "1cbcaa9e4f44b8a44944416f761f465fc43f84f0636ecfbc6ed4c7bd9d047143",
+    "vfa_scope_review.json": "9d62a9cf88ff8799c96e132636aaa9b74e2d047f1ea1ee690c4f07b889257d80"
+  },
+  "bundle_sha256": "a643c385449637b102afc6cd7b3ca4c8647512eedb82cf83dd64b280247f5077",
+  "strategy_retry_check": {
+    "input_key": "d1e91c61536fda319ae86fbda2472019fd4929a01fe2bb4888f7e5f5a0b28b2a",
+    "blocked_attempts": [],
+    "review_attempts": [],
+    "status": "NO_KNOWN_FAILURE"
+  },
+  "vfa_hard_gate_passed": true,
+  "vfa_hard_gate": {
+    "checks": {
+      "frequency_structure_bound": true,
+      "active_set_matches_selective_dynamics": true,
+      "reaction_atoms_active": true,
+      "partial_hessian_policy_bound": true,
+      "scope_review_accepted": true,
+      "scope_review_identity": true,
+      "scope_review_structure_bound": true,
+      "scope_review_handoff_bound": true,
+      "scope_review_active_set": true,
+      "dimer_saddle_analysis_bound": true,
+      "dimer_source_structure_bound": true,
+      "dimer_frequency_gate_passed": true
+    },
+    "errors": []
+  }
+}
