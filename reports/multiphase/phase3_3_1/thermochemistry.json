@@ -1,0 +1,624 @@
+{
+  "scope": "R1-R3 all nine selected state structures, plus R4 readiness at the last bound submission checkpoint",
+  "temperature_K": 523,
+  "condition_status": "LITERATURE_GROUNDED_PROVISIONAL",
+  "condition_source": {
+    "path": "reports/multiphase/phase3_2_3_2/operating_conditions.json",
+    "sha256": "eb4a052e2576c639505ce6f6aaadddcbcd47ff37d66177e0ebd0b32d08757ca5"
+  },
+  "surface_reference": "Dimensionless adsorbed-state/site activity and explicit vacancy fraction on a declared footprint/inventory. Gas standard pressure 1 bar. Site and vacancy assignments remain separately reviewable.",
+  "electronic_reference": "fe110_converged_toten_sigma0p20_v1",
+  "units": {
+    "electronic_energy_ev": "eV/state",
+    "zpe_ev": "eV/state",
+    "thermal_enthalpy_ev": "eV/state, excluding ZPE",
+    "entropy_ev_per_k": "eV/(K state)",
+    "gibbs_correction_ev": "eV/state, equal to ZPE + thermal enthalpy increment - T S"
+  },
+  "method": "Fixed-slab local vibrational harmonic contribution using a per-structure validated subspace. A common physical thermal basis is required across reacting states; atomic indices can differ across structures. No implied frequency scale, cutoff, entropy floor, or gas translation/rotation for adsorbed states.",
+  "search": {
+    "registry_mode": "SQLite URI mode=ro",
+    "registry": {
+      "path": "data/project_registry.sqlite3",
+      "sha256": "4da73dbbc09fc697933cb6fa191493f78e0fbddb8863eadc66af082700fbe881"
+    },
+    "registry_results_matching_temperature_or_correction_labels": 0,
+    "minimum_output_identity_check": "Each of nine structure and electronic output files hashed against the matrix and registered file ID. The three TS Grade A records link by directory-independent OUTCAR SHA-256 and source saddle ID to the locally reparsed full signed spectrum.",
+    "source_folders": [
+      "calculations/fe110_c_h_coadsorption_20260817",
+      "calculations/fe110_c_h_to_ch_ts_20260818",
+      "calculations/fe110_ch_co_to_chco_ts_20261109",
+      "calculations/fe110_co_dissociation_neb_20260718",
+      "calculations/fe110_five_c2_adsorption_20261006",
+      "outputs/c1_c2_barrier_registration_20261118_v1"
+    ],
+    "local_hessian_inputs": [
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/formal_ts_validation_20260910/vfa/POSCAR",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_ci9796856_image04_local_h_fe_20260925/POSCAR",
+      "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_dimer9746548_local_oh_20260909/POSCAR",
+      "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/POSCAR",
+      "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/POSCAR",
+      "calculations/fe110_ch_co_to_chco_ts_20261109/vfa_dimer9998592_20261115_v1/POSCAR",
+      "calculations/fe110_ch_co_to_chco_ts_20261109/vfa_mode12_review_20261115_v1/raw/POSCAR",
+      "calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814/POSCAR",
+      "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806/POSCAR",
+      "calculations/fe110_co_dissociation_neb_20260718/diagnostics/vfa_diagnostic_from_dimer9656664_co_only_20260805/POSCAR",
+      "outputs/c1_c2_barrier_registration_20261118_v1/ch_co/POSCAR",
+      "outputs/c1_c2_barrier_registration_20261118_v1/int06_mid/POSCAR"
+    ],
+    "endpoint_geometry_matches": 0,
+    "endpoint_match_tolerance_A": 1e-06,
+    "endpoint_identity_test": "Ordered element labels, same cell (1e-8 A) and largest minimum-image atom displacement <= 1e-6 A; equality of formula or relaxed adsorption-site label alone carries no equivalence.",
+    "local_numeric_correction_or_scale_JSON_matches": [],
+    "local_JSON_scope": "Keys containing ZPE/enthalpy/entropy/Gibbs/thermal_corr/frequency_scale with numeric or value-object payload; case-insensitive JSON scan <=8 MiB in the listed scientific source folders. Additional R3 intake and project condition/thermochemistry reports explicitly examined.",
+    "prior_candidate_and_external_intake_inventory": {
+      "path": "reports/multiphase/phase3_2_3_1/candidates.json",
+      "sha256": "b7434939fe8464556a490eb4d160415c6061053774a9e993f9913b58975c82d9"
+    },
+    "previous_matrix": {
+      "path": "reports/multiphase/phase3_3_0/evidence_matrix.json",
+      "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+    },
+    "previous_hessian_search": {
+      "path": "reports/multiphase/phase3_3_0/thermochemistry_search.json",
+      "sha256": "a2e7433a18a07d5dd421054653b5cbd8a3101f7b21231f22ba7d180be09c869d"
+    },
+    "external_evidence_scope": "Available R3 external literature candidates and stored Scientific Intake were reviewed. No reviewed state-specific external correction for one of the six target endpoints was found in the available evidence. Unregistered evidence held elsewhere remains open for intake.",
+    "remote_server": "sunboquan-codex",
+    "remote_search_base": "~/sbq/Fe110",
+    "remote_read_only_INCAR_scan": {
+      "counts": {
+        "ts/co_dissociation_topic1_20260718": 3,
+        "ts/c_h_to_ch_20260818": 2,
+        "ts/ch_co_to_chco_20261110": 3,
+        "adsorption/step12A/CO": 4,
+        "adsorption/pilot_c_c2_o_20260714": 5,
+        "adsorption/c_h_coadsorption_20260817": 3,
+        "adsorption/pilot_h2_chx_20260704/CH": 4,
+        "adsorption/fe110_five_c2_20261006": 10,
+        "adsorption/fe110_chco_repair_20261008": 1
+      },
+      "frequency_inputs": [
+        "ts/c_h_to_ch_20260818/vfa_local_ch_fe5_from_dimer9720181_20260821",
+        "ts/ch_co_to_chco_20261110/vfa_dimer9998592_20261115_v1",
+        "ts/co_dissociation_topic1_20260718/vfa_diagnostic_from_dimer9656664_co_only_20260805"
+      ]
+    },
+    "remote_IBRION_filter": [
+      5,
+      6,
+      7,
+      8
+    ],
+    "remote_input_count": 35
+  },
+  "reactions": {
+    "R1": {
+      "IS": {
+        "electronic_result_id": "fe110_co_dissociation_is_job9558184_final_toten_sigma0p20_ev",
+        "electronic_reference_id": "fe110_converged_toten_sigma0p20_v1",
+        "electronic_energy_ev": -372.01291708,
+        "structure": {
+          "file_id": "fe110_co_dissociation_is_job9558184_contcar",
+          "path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/IS_job9558184/CONTCAR",
+          "sha256": "6ed0dcc7bc57e30bce0eca23a94e6b8823dfc543a6bc943dccffcda531daadbf"
+        },
+        "electronic_source": {
+          "file_id": "fe110_co_dissociation_is_job9558184_outcar",
+          "path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/IS_job9558184/OUTCAR",
+          "sha256": "9ca16866cddebb793c7d790c07b55c2017e43b8fe86a7268c8b711a57eb57b94"
+        },
+        "grade_A_TS_review_id": null,
+        "raw_spectrum": null,
+        "declared_scale": null,
+        "components_at_523_K": {
+          "zpe_ev": null,
+          "thermal_enthalpy_ev": null,
+          "entropy_ev_per_k": null,
+          "gibbs_correction_ev": null
+        },
+        "reviewed_precomputed_source": null,
+        "status": "MISSING_ENDPOINT_THERMOCHEMISTRY",
+        "matched_frequency_inputs": [],
+        "closest_same_order_cell_candidate": {
+          "path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806/POSCAR",
+          "maximum_ordered_periodic_displacement_A": 1.9869886105262604
+        },
+        "missing": [
+          "A target-structure-bound reviewed stable minimum spectrum with mapped active axes, expected Hessian dimension and imaginary-mode check, or a compatible reviewed precomputed state correction.",
+          "Source-specific 523 K components, correction convention, surface standard state, common thermal basis, scale/low-frequency provenance and scientific review."
+        ],
+        "next": "Request compatible existing user/external evidence; if it cannot be supplied, one local partial Hessian at this exact endpoint after reviewing the active scope."
+      },
+      "TS": {
+        "electronic_result_id": "fe110_co_dissociation_dimer_job9656664_final_toten_sigma0p20_ev",
+        "electronic_reference_id": "fe110_converged_toten_sigma0p20_v1",
+        "electronic_energy_ev": -370.66270803,
+        "structure": {
+          "file_id": "dimer_job9656664_contcar",
+          "path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/TS_dimer_job9656664/CONTCAR",
+          "sha256": "bc2d62ba76177adaaee688d13e3d10b6305b79b7fe87258bdbc353f494a3e348"
+        },
+        "electronic_source": {
+          "file_id": "dimer_job9656664_outcar",
+          "path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/TS_dimer_job9656664/OUTCAR",
+          "sha256": "dc545323bb8de2dd149406fa77f346101c60fee1c9aa0df0e508bbef6e05da82"
+        },
+        "grade_A_TS_review_id": "fe110_co_dissociation_dimer9656664_mode6_grade_a_20260807",
+        "raw_spectrum": {
+          "outcar": {
+            "file_id": "vfa_job9694935_outcar",
+            "path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806/OUTCAR",
+            "sha256": "c3b12bc0b11dcd225ce162950511aa6e23d2b54169b4d754fa7be661a8959210"
+          },
+          "frequency_structure": {
+            "path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806/POSCAR",
+            "sha256": "fa1e2224a768f73849847aa5e64d233d816e1b794b1542feabb0f2ab777d69b3"
+          },
+          "maximum_ordered_periodic_displacement_A": 1.1585015525339517e-11,
+          "active_atoms_zero_based": [
+            45,
+            46
+          ],
+          "movable_axes": [
+            "TTT",
+            "TTT"
+          ],
+          "other_axes": "FFF",
+          "mode_count": 6,
+          "assigned_imaginary_mode_one_based": 6,
+          "signed_imaginary_cm_inverse": -537.451689,
+          "range_of_retained_modes_cm_inverse": [
+            303.286969,
+            659.668045
+          ],
+          "vasp_settings": {
+            "NIONS": "47",
+            "ENCUT": "400.0",
+            "EDIFF": "0.1E-06",
+            "IBRION": "5",
+            "NFREE": "2",
+            "ISYM": "0",
+            "POTIM": "1.500000000000000E-002",
+            "ISMEAR": "1",
+            "SIGMA": "0.10"
+          }
+        },
+        "declared_scale": null,
+        "components_at_523_K": {
+          "zpe_ev": null,
+          "thermal_enthalpy_ev": null,
+          "entropy_ev_per_k": null,
+          "gibbs_correction_ev": null
+        },
+        "reviewed_precomputed_source": null,
+        "status": "REUSABLE_TS_SPECTRUM_MODEL_REVIEW_REQUIRED",
+        "missing": [
+          "State-specific frequency scale and provenance, including an explicit unscaled choice if adopted.",
+          "Thermochemical review of retained low-frequency modes, selected local basis and applicability at 523 K, including use of a 0.10 eV-smearing frequency diagnostic with the separate 0.20 eV electronic-energy branch.",
+          "Reviewed commensurate endpoint models before any barrier or reaction Gibbs energy."
+        ],
+        "next": "Review this spectrum and model choices. A repeat TS frequency job is not currently justified."
+      },
+      "FS": {
+        "electronic_result_id": "fe110_co_dissociation_fs_job9622455_final_toten_sigma0p20_ev",
+        "electronic_reference_id": "fe110_converged_toten_sigma0p20_v1",
+        "electronic_energy_ev": -372.71928137,
+        "structure": {
+          "file_id": "fe110_ads_cpluso_hadj_20260714_contcar",
+          "path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/FS_job9622455/CONTCAR",
+          "sha256": "08ab46f9210e7f2e810eacaa0481c8e1ad3bbf64fc729f21fd66f5ef6ef88d6a"
+        },
+        "electronic_source": {
+          "file_id": "fe110_ads_cpluso_hadj_20260714_outcar",
+          "path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/FS_job9622455/OUTCAR",
+          "sha256": "df5025b3118302d5ad6ae4d4cc465aab173f1e3870995ef5a8f6622a2af10462"
+        },
+        "grade_A_TS_review_id": null,
+        "raw_spectrum": null,
+        "declared_scale": null,
+        "components_at_523_K": {
+          "zpe_ev": null,
+          "thermal_enthalpy_ev": null,
+          "entropy_ev_per_k": null,
+          "gibbs_correction_ev": null
+        },
+        "reviewed_precomputed_source": null,
+        "status": "MISSING_ENDPOINT_THERMOCHEMISTRY",
+        "matched_frequency_inputs": [],
+        "closest_same_order_cell_candidate": {
+          "path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806/POSCAR",
+          "maximum_ordered_periodic_displacement_A": 3.737244691477733
+        },
+        "missing": [
+          "A target-structure-bound reviewed stable minimum spectrum with mapped active axes, expected Hessian dimension and imaginary-mode check, or a compatible reviewed precomputed state correction.",
+          "Source-specific 523 K components, correction convention, surface standard state, common thermal basis, scale/low-frequency provenance and scientific review."
+        ],
+        "next": "Request compatible existing user/external evidence; if it cannot be supplied, one local partial Hessian at this exact endpoint after reviewing the active scope."
+      }
+    },
+    "R2": {
+      "IS": {
+        "electronic_result_id": "result_fe110_ads_c_h_coads_9715450_final_toten",
+        "electronic_reference_id": "fe110_converged_toten_sigma0p20_v1",
+        "electronic_energy_ev": -368.60093793,
+        "structure": {
+          "file_id": "file_fe110_ads_c_h_coads_9715450_CONTCAR_checkpoint_20260818",
+          "path": "calculations/fe110_c_h_coadsorption_20260817/results/A_adjacent_hollow_reactive/CONTCAR",
+          "sha256": "121ace35043c79f968ecd14ef2a100b2531c4904b8671e71bf506751f06c5396"
+        },
+        "electronic_source": {
+          "file_id": "file_fe110_ads_c_h_coads_9715450_OUTCAR_checkpoint_20260818",
+          "path": "calculations/fe110_c_h_coadsorption_20260817/results/A_adjacent_hollow_reactive/OUTCAR",
+          "sha256": "042b18bcbdf242dd4fa8f98d23cd81f656f557e369182ca7593743565d1aa0cf"
+        },
+        "grade_A_TS_review_id": null,
+        "raw_spectrum": null,
+        "declared_scale": null,
+        "components_at_523_K": {
+          "zpe_ev": null,
+          "thermal_enthalpy_ev": null,
+          "entropy_ev_per_k": null,
+          "gibbs_correction_ev": null
+        },
+        "reviewed_precomputed_source": null,
+        "status": "MISSING_ENDPOINT_THERMOCHEMISTRY",
+        "matched_frequency_inputs": [],
+        "closest_same_order_cell_candidate": {
+          "path": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/POSCAR",
+          "maximum_ordered_periodic_displacement_A": 1.7330302337544168
+        },
+        "missing": [
+          "A target-structure-bound reviewed stable minimum spectrum with mapped active axes, expected Hessian dimension and imaginary-mode check, or a compatible reviewed precomputed state correction.",
+          "Source-specific 523 K components, correction convention, surface standard state, common thermal basis, scale/low-frequency provenance and scientific review."
+        ],
+        "next": "Request compatible existing user/external evidence; if it cannot be supplied, one local partial Hessian at this exact endpoint after reviewing the active scope."
+      },
+      "TS": {
+        "electronic_result_id": "fe110_c_h_to_ch_dimer_job9720181_final_toten_sigma0p20_eV",
+        "electronic_reference_id": "fe110_converged_toten_sigma0p20_v1",
+        "electronic_energy_ev": -367.71324606,
+        "structure": {
+          "file_id": "fe110_c_h_to_ch_dimer_9720181-CONTCAR-done",
+          "path": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/CONTCAR",
+          "sha256": "8fd9cb6818e11d851a39f723c53e52dfe3a3bfe8e32a164a5b03b3b0c7b6d364"
+        },
+        "electronic_source": {
+          "file_id": "fe110_c_h_to_ch_dimer_9720181-OUTCAR-done",
+          "path": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/dimer/dimer_image04_gpu_vasp_triad_20260820/OUTCAR",
+          "sha256": "1823bddcdcc36bd115350be8bf732086c9ae9f4bd9f187b212d2831819aaa79a"
+        },
+        "grade_A_TS_review_id": "fe110_c_h_to_ch_dimer9720181_mode21_grade_a_20260822",
+        "raw_spectrum": {
+          "outcar": {
+            "file_id": "fe110_c_h_to_ch_vfa_9721851-OUTCAR-done",
+            "path": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/OUTCAR",
+            "sha256": "c9ed60495487c58e50789fe46f2f05cd3eb0a110148d6f484db58751cfc92e11"
+          },
+          "frequency_structure": {
+            "path": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/POSCAR",
+            "sha256": "98fc8738e261facb192ccbe201dad7157918744586b23e221a12fe556e4afc11"
+          },
+          "maximum_ordered_periodic_displacement_A": 1.10084207063187e-11,
+          "active_atoms_zero_based": [
+            32,
+            37,
+            41,
+            43,
+            44,
+            45,
+            46
+          ],
+          "movable_axes": [
+            "TTT",
+            "TTT",
+            "TTT",
+            "TTT",
+            "TTT",
+            "TTT",
+            "TTT"
+          ],
+          "other_axes": "FFF",
+          "mode_count": 21,
+          "assigned_imaginary_mode_one_based": 21,
+          "signed_imaginary_cm_inverse": -842.194583,
+          "range_of_retained_modes_cm_inverse": [
+            143.30016,
+            1389.100855
+          ],
+          "vasp_settings": {
+            "NIONS": "47",
+            "ENCUT": "400.0",
+            "EDIFF": "0.1E-06",
+            "IBRION": "5",
+            "NFREE": "2",
+            "ISYM": "0",
+            "POTIM": "1.500000000000000E-002",
+            "ISMEAR": "1",
+            "SIGMA": "0.10"
+          }
+        },
+        "declared_scale": null,
+        "components_at_523_K": {
+          "zpe_ev": null,
+          "thermal_enthalpy_ev": null,
+          "entropy_ev_per_k": null,
+          "gibbs_correction_ev": null
+        },
+        "reviewed_precomputed_source": null,
+        "status": "REUSABLE_TS_SPECTRUM_MODEL_REVIEW_REQUIRED",
+        "missing": [
+          "State-specific frequency scale and provenance, including an explicit unscaled choice if adopted.",
+          "Thermochemical review of retained low-frequency modes, selected local basis and applicability at 523 K, including use of a 0.10 eV-smearing frequency diagnostic with the separate 0.20 eV electronic-energy branch.",
+          "Reviewed commensurate endpoint models before any barrier or reaction Gibbs energy."
+        ],
+        "next": "Review this spectrum and model choices. A repeat TS frequency job is not currently justified."
+      },
+      "FS": {
+        "electronic_result_id": "fe110_c_h_to_ch_fs_job9573951_final_toten_sigma0p20_eV",
+        "electronic_reference_id": "fe110_converged_toten_sigma0p20_v1",
+        "electronic_energy_ev": -368.45471297,
+        "structure": {
+          "file_id": "fe110_c_h_to_ch_fs_job9573951-endpoint-structure",
+          "path": "calculations/fe110_c_h_to_ch_ts_20260818/endpoints/FS_CH_long_bridge_job9573951/POSCAR",
+          "sha256": "ffeccf7353ea82d8b5c5d3e13762a3e34fcae41ec7b1f0ff7adbae5b2bf9e4a5"
+        },
+        "electronic_source": {
+          "file_id": "fe110_c_h_to_ch_fs_job9573951-OUTCAR-sigma0p20-bound",
+          "path": "calculations/fe110_c_h_to_ch_ts_20260818/endpoints/FS_CH_long_bridge_job9573951/OUTCAR",
+          "sha256": "d3b03c16d2f5eb43c5225189d35d150c735fd9f4815b34f5556ae8fff60601c1"
+        },
+        "grade_A_TS_review_id": null,
+        "raw_spectrum": null,
+        "declared_scale": null,
+        "components_at_523_K": {
+          "zpe_ev": null,
+          "thermal_enthalpy_ev": null,
+          "entropy_ev_per_k": null,
+          "gibbs_correction_ev": null
+        },
+        "reviewed_precomputed_source": null,
+        "status": "MISSING_ENDPOINT_THERMOCHEMISTRY",
+        "matched_frequency_inputs": [],
+        "closest_same_order_cell_candidate": {
+          "path": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821/POSCAR",
+          "maximum_ordered_periodic_displacement_A": 1.606517036329623
+        },
+        "missing": [
+          "A target-structure-bound reviewed stable minimum spectrum with mapped active axes, expected Hessian dimension and imaginary-mode check, or a compatible reviewed precomputed state correction.",
+          "Source-specific 523 K components, correction convention, surface standard state, common thermal basis, scale/low-frequency provenance and scientific review."
+        ],
+        "next": "Request compatible existing user/external evidence; if it cannot be supplied, one local partial Hessian at this exact endpoint after reviewing the active scope."
+      }
+    },
+    "R3": {
+      "IS": {
+        "electronic_result_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_final_toten",
+        "electronic_reference_id": "fe110_converged_toten_sigma0p20_v1",
+        "electronic_energy_ev": -385.14767079,
+        "structure": {
+          "file_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_CONTCAR",
+          "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_cfg0_direct_vasp/CONTCAR",
+          "sha256": "f8bc627180b430b3b64f748c05830a0372bc93a3750780cf7fe6c5eb0601762d"
+        },
+        "electronic_source": {
+          "file_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_OUTCAR",
+          "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_cfg0_direct_vasp/OUTCAR",
+          "sha256": "e3f5ad8b0aa2a9afc6749785e5dc872d64b6de4165169578510c7a0c5d167d78"
+        },
+        "grade_A_TS_review_id": null,
+        "raw_spectrum": null,
+        "declared_scale": null,
+        "components_at_523_K": {
+          "zpe_ev": null,
+          "thermal_enthalpy_ev": null,
+          "entropy_ev_per_k": null,
+          "gibbs_correction_ev": null
+        },
+        "reviewed_precomputed_source": null,
+        "status": "MISSING_ENDPOINT_THERMOCHEMISTRY",
+        "matched_frequency_inputs": [],
+        "closest_same_order_cell_candidate": {
+          "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/POSCAR",
+          "maximum_ordered_periodic_displacement_A": 2.0136263525853293
+        },
+        "missing": [
+          "A target-structure-bound reviewed stable minimum spectrum with mapped active axes, expected Hessian dimension and imaginary-mode check, or a compatible reviewed precomputed state correction.",
+          "Source-specific 523 K components, correction convention, surface standard state, common thermal basis, scale/low-frequency provenance and scientific review."
+        ],
+        "next": "Request compatible existing user/external evidence; if it cannot be supplied, one local partial Hessian at this exact endpoint after reviewing the active scope."
+      },
+      "TS": {
+        "electronic_result_id": "fe110_ch_co_dimer_20261112_job9998592_final_toten_sigma0p20_eV",
+        "electronic_reference_id": "fe110_converged_toten_sigma0p20_v1",
+        "electronic_energy_ev": -384.17406905,
+        "structure": {
+          "file_id": "fe110_ch_co_dimer_20261112_job9998592__vfa20261115_010",
+          "path": "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/CONTCAR",
+          "sha256": "0157a418cd1fba1be886426361d494ffbdce9a15d1a9132b996a3481ffcc1a6a"
+        },
+        "electronic_source": {
+          "file_id": "fe110_ch_co_dimer_20261112_job9998592__vfa20261115_011",
+          "path": "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/OUTCAR",
+          "sha256": "391f84167e6372dcaf770ed1efa471d1abba6d4640803876899b120ac797dd02"
+        },
+        "grade_A_TS_review_id": "fe110_ch_co_dimer9998592_vfa2260_grade_a_20261115",
+        "raw_spectrum": {
+          "outcar": {
+            "file_id": "chco_vfa2260_formal_20261115_OUTCAR",
+            "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/OUTCAR",
+            "sha256": "d707a332f1af5d0835e1935d351d9a28b011bd4672e4de3b00833fb93f62f9a9"
+          },
+          "frequency_structure": {
+            "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/POSCAR",
+            "sha256": "c1b035d47a15cf8211d23dd25d4216a46c82a33b3b5c0957b03b86e7a49ade8d"
+          },
+          "maximum_ordered_periodic_displacement_A": 1.1852677683399598e-11,
+          "active_atoms_zero_based": [
+            45,
+            46,
+            47,
+            48
+          ],
+          "movable_axes": [
+            "TTT",
+            "TTT",
+            "TTT",
+            "TTT"
+          ],
+          "other_axes": "FFF",
+          "mode_count": 12,
+          "assigned_imaginary_mode_one_based": 12,
+          "signed_imaginary_cm_inverse": -318.644011,
+          "range_of_retained_modes_cm_inverse": [
+            116.365467,
+            3012.556969
+          ],
+          "vasp_settings": {
+            "NIONS": "49",
+            "ENCUT": "400.0",
+            "EDIFF": "0.1E-06",
+            "IBRION": "5",
+            "NFREE": "2",
+            "ISYM": "0",
+            "POTIM": "1.500000000000000E-002",
+            "ISMEAR": "1",
+            "SIGMA": "0.10"
+          }
+        },
+        "declared_scale": 1.0,
+        "components_at_523_K": {
+          "zpe_ev": 0.5140516496724512,
+          "thermal_enthalpy_ev": 0.23455413109363132,
+          "entropy_ev_per_k": 0.0008969835053748137,
+          "gibbs_correction_ev": 0.27948340745505496
+        },
+        "reviewed_precomputed_source": null,
+        "status": "CONDITIONAL_LOCAL_523K_CORRECTION_AVAILABLE",
+        "missing": [
+          "Matched endpoint thermochemistry and review of its state-specific scope/standard state for the reaction comparison."
+        ],
+        "next": "Reuse the documented benchmark local harmonic components within their scope. No new TS Hessian requested.",
+        "model": "Fe110-C45-C46-O47-H48-local-harmonic",
+        "scale_and_component_source": {
+          "path": "reports/multiphase/phase3_2_3_2/thermochemistry_reference.json",
+          "sha256": "3d0e2a8988686223e1564457622fd309b04f22eaa129353ce5c5ce14947e8e59"
+        }
+      },
+      "FS": {
+        "electronic_result_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_final_toten",
+        "electronic_reference_id": "fe110_converged_toten_sigma0p20_v1",
+        "electronic_energy_ev": -384.48836276,
+        "structure": {
+          "file_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_CONTCAR",
+          "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_extra2_repair_v1/CONTCAR",
+          "sha256": "11dab1631a99f1e444d4c7ab9ca242609e07c912f656874005696e6498f15ab2"
+        },
+        "electronic_source": {
+          "file_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_OUTCAR",
+          "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_extra2_repair_v1/OUTCAR",
+          "sha256": "e88d99ab9ba74274fd8af45e4e69b9f59feb90bbe1101f7e794c1c317bb82edc"
+        },
+        "grade_A_TS_review_id": null,
+        "raw_spectrum": null,
+        "declared_scale": null,
+        "components_at_523_K": {
+          "zpe_ev": null,
+          "thermal_enthalpy_ev": null,
+          "entropy_ev_per_k": null,
+          "gibbs_correction_ev": null
+        },
+        "reviewed_precomputed_source": null,
+        "status": "MISSING_ENDPOINT_THERMOCHEMISTRY",
+        "matched_frequency_inputs": [],
+        "closest_same_order_cell_candidate": {
+          "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/POSCAR",
+          "maximum_ordered_periodic_displacement_A": 3.393669767598488
+        },
+        "missing": [
+          "A target-structure-bound reviewed stable minimum spectrum with mapped active axes, expected Hessian dimension and imaginary-mode check, or a compatible reviewed precomputed state correction.",
+          "Source-specific 523 K components, correction convention, surface standard state, common thermal basis, scale/low-frequency provenance and scientific review."
+        ],
+        "next": "Request compatible existing user/external evidence; if it cannot be supplied, one local partial Hessian at this exact endpoint after reviewing the active scope."
+      }
+    }
+  },
+  "reaction_gibbs_at_523_K": {
+    "R1": {
+      "forward_activation_ev": null,
+      "reverse_activation_ev": null,
+      "reaction_ev": null
+    },
+    "R2": {
+      "forward_activation_ev": null,
+      "reverse_activation_ev": null,
+      "reaction_ev": null
+    },
+    "R3": {
+      "forward_activation_ev": null,
+      "reverse_activation_ev": null,
+      "reaction_ev": null
+    }
+  },
+  "minimum_additional_work": {
+    "independent_of_R4": [
+      "For R1/R2 reuse and review the mapped TS raw spectra, scale and thermal convention; no duplicate TS VFA indicated.",
+      "For the six endpoints first solicit and intake equivalent existing evidence. External records may omit local job IDs but must bind the target structure, source, reviewer, units, T, standard state, electronic reference and correction convention.",
+      "Confirm the selected subspace separately at each endpoint: R1 C/O, R2 C/H and corresponding neighboring Fe motions, R3 CH/CO/CHCO reactive group. Numbering and actual movable axes require independent validation with each relaxed geometry."
+    ],
+    "minimum_definitely_required_new_electronic_or_frequency_jobs": 0,
+    "conditional_new_frequency_jobs_if_no_compatible_endpoint_evidence": 6,
+    "conditional_new_frequency_job_targets": [
+      "R1.IS",
+      "R1.FS",
+      "R2.IS",
+      "R2.FS",
+      "R3.IS",
+      "R3.FS"
+    ],
+    "qualification": "Zero new jobs is possible only if reviewed equivalent corrections or matching spectra cover all six endpoints. Each supplied equivalent removes one conditional job. Six independent endpoint states currently need evidence. No blanket endpoint/TS transfer, duplicate TS frequency run, or new static DFT is recommended by this audit.",
+    "partial_evidence": "A ZPE-only upload can advance ZPE bookkeeping while 523 K activation/reaction Gibbs energies remain null."
+  },
+  "R4": {
+    "first_segment": "IS-A to INT06",
+    "source_job": "9833429",
+    "frequency_job": "13422",
+    "handoff": "allow_frequency_handoff",
+    "as_of_submission_checkpoint": {
+      "status": "RUN",
+      "checked_at": "2026-11-21T03:38:23Z"
+    },
+    "checkpoint_source": {
+      "path": "reports/multiphase/phase3_3_0/r4_9833429_frequency_submission.json",
+      "sha256": "e886ba9d8ce1313fef1eaed4fdb6f4a3db0b6b797c423d08ff12aca354ff24fa"
+    },
+    "frequency_result_at_that_checkpoint": null,
+    "other_segment_TS": [
+      {
+        "segment": "INT06_to_MID",
+        "review": "fe110_int06_mid_ci9796856_vfa9798421_grade_a",
+        "modes": 15,
+        "imaginary_mode_one_based": 15,
+        "source": {
+          "file_id": "fe110_int06_mid_vfa_9798421_OUTCAR_frequency",
+          "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_ci9796856_image04_local_h_fe_20260925/OUTCAR",
+          "sha256": "fc9368d2292e5f8fcbbec996e1830293b204cb59f52d06247828da845a38b792"
+        }
+      },
+      {
+        "segment": "MID_to_FS_A",
+        "review": "fe110_c2ho_oh_dimer9746548_vfa9747902_accepted_20260910",
+        "modes": 6,
+        "imaginary_mode_one_based": 6,
+        "source": {
+          "file_id": "file_vfa9747902_OUTCAR_formal_frequency",
+          "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/formal_ts_validation_20260910/vfa/OUTCAR",
+          "sha256": "272d49251e6be55f2221a32606e7d21acb9d1e6ef278d444c1aa8c64b37b6460"
+        }
+      }
+    ],
+    "missing": "IS-A, INT06, MID and FS-A need state-specific reviewed 523 K corrections or equivalent input; the two onward raw TS spectra need thermochemical scale/basis/convention review. The first-segment TS needs its own reviewed frequency result and correction. Reuse shared INT06/MID only after verifying state identity and common thermal reference between segments.",
+    "reaction_gibbs": null,
+    "aggregate_activation_gibbs": null
+  }
+}

@@ -1,0 +1,550 @@
+{
+  "scope": "Metallic Fe(110) C1–C2 pilot, provisional 523 K. Read-only inventory dated 2026-11-21.",
+  "status": "Six supporting reaction classes reviewed; zero qualified for rate export.",
+  "steps": [
+    {
+      "id": "CO_exchange",
+      "chemistry": "CO(g) ⇄ CO*",
+      "roles": [
+        "CO_g",
+        "clean",
+        "CO_top",
+        "CO_Eads"
+      ],
+      "existing": "The electronic adsorption energy on the registered R1 CO/top branch is −1.92056280 eV. Verified against adsorbate, slab and gas energies. R1 CO bond cleavage is a different event.",
+      "missing": [
+        "Reviewed CO(top) footprint and gas-to-surface activity normalization",
+        "523 K adsorption free energy at the adopted 1 bar standard state",
+        "Compatible sticking probability/incident flux or other reviewed kinetic law, site density when required and a thermodynamically consistent reverse law"
+      ],
+      "minimum": "Reuse the three electronic references. First qualify a measured or calculated sticking/rate model. A new adsorption NEB is conditional on evidence for an activated entrance process.",
+      "eligible_for_network_kinetics": false,
+      "rate_constant": null,
+      "activation_gibbs_523K_eV": null,
+      "reversible_status": null,
+      "depends_on_R4_frequency_for_evidence_review": false
+    },
+    {
+      "id": "H2_dissociation",
+      "chemistry": "H2(g) ⇄ 2 H*",
+      "roles": [
+        "H2_g",
+        "clean",
+        "H_hollow"
+      ],
+      "existing": "The four deposited H2/Fe45 relaxations begin near 0.751 Å H–H. Three end with separated adsorbed H atoms and normal force termination. The intact long-bridge start ends far from Fe. These are candidate pair geometries; optimization trajectories do not give an activation barrier or prove barrierless sticking.",
+      "missing": [
+        "Review the specific two-H ensemble, molecular entrance or gas boundary and vacancy multiplicity",
+        "Pair-state compatibility, occupations, 523 K chemical potentials",
+        "Reviewed dissociative sticking or activation kinetics and detailed-balance treatment for recombination"
+      ],
+      "minimum": "Select a compatible separated-H pair from the three existing relaxed candidates before requesting any pair-state relaxation. Only propose a path or incidence calculation if a reviewed kinetic description remains unavailable.",
+      "eligible_for_network_kinetics": false,
+      "rate_constant": null,
+      "activation_gibbs_523K_eV": null,
+      "reversible_status": null,
+      "depends_on_R4_frequency_for_evidence_review": false
+    },
+    {
+      "id": "O_hydrogenation",
+      "chemistry": "O* + H* ⇄ OH*",
+      "roles": [
+        "O_hollow",
+        "H_hollow",
+        "OH_hollow"
+      ],
+      "existing": "Step12A has individually relaxed H, O and OH states. Hollow records are source-checked examples; several site classes are available. Coupled C2HO H-transfer saddles bind a different reaction contract. R1 leaves C* as well as O*, so coverage/spectator treatment matters.",
+      "missing": [
+        "Same-slab O+H pair and OH endpoint at reviewed loading, or reviewed coverage/activity approximation connecting that pair to separate surface pools",
+        "Compatible reaction-coordinate TS or independent scoped rate law, 523 K free energies, site accounting and reverse decision"
+      ],
+      "minimum": "Identify the encounter pair on the chosen motif. If compatible external parameters and archived coadsorbed/path evidence cannot be supplied, propose that missing coadsorbed relaxation and segment-specific pathway. Reuse a compatible OH endpoint.",
+      "eligible_for_network_kinetics": false,
+      "rate_constant": null,
+      "activation_gibbs_523K_eV": null,
+      "reversible_status": null,
+      "depends_on_R4_frequency_for_evidence_review": false
+    },
+    {
+      "id": "OH_hydrogenation",
+      "chemistry": "OH* + H* ⇄ H2O*",
+      "roles": [
+        "OH_hollow",
+        "H_hollow",
+        "H2O_top"
+      ],
+      "existing": "Existing single-adsorbate OH, H and relaxed water yield endpoint candidates. No reviewed same-cell OH+H encounter or target saddle was identified. Water formation and R4 terminal O–H formation have different atom inventories.",
+      "missing": [
+        "Same-slab OH+H geometry at defined coverage; compatible H2O endpoint and vacancy bookkeeping",
+        "Reviewed elementary rate model or validated saddle and 523 K thermodynamic terms"
+      ],
+      "minimum": "Reuse existing H2O and OH reference structures and check whether a compatible pair or external rate exists. Propose a pair relaxation and dedicated pathway only if required.",
+      "eligible_for_network_kinetics": false,
+      "rate_constant": null,
+      "activation_gibbs_523K_eV": null,
+      "reversible_status": null,
+      "depends_on_R4_frequency_for_evidence_review": false
+    },
+    {
+      "id": "water_release",
+      "chemistry": "H2O* ⇄ H2O(g)",
+      "roles": [
+        "H2O_top",
+        "clean",
+        "H2O_g",
+        "H2O_Eads"
+      ],
+      "existing": "Registered top-water adsorption energy −0.32231988 eV gives an electronic desorption energy difference of +0.32231988 eV for these endpoints only. Three starts that migrated to top-like structures are provenance-only duplicates.",
+      "missing": [
+        "523 K desorption free energy, product activity and pressure independently from syngas, reviewed vacancy regeneration per inventory",
+        "Reviewed desorption or adsorption law and prefactor/sticking basis, or TS if an activated path applies"
+      ],
+      "minimum": "Use the existing clean slab, adsorbed water and gas references. Determine thermal and rate inputs, including reverse adsorption where supported; a new NEB is not established as necessary.",
+      "eligible_for_network_kinetics": false,
+      "rate_constant": null,
+      "activation_gibbs_523K_eV": null,
+      "reversible_status": null,
+      "depends_on_R4_frequency_for_evidence_review": false
+    },
+    {
+      "id": "C2_release_or_conversion",
+      "chemistry": "FS-A [CH]–[C]–OH* → specified C2 product boundary or subsequent conversion",
+      "roles": [
+        "R4_FS_A"
+      ],
+      "existing": "Selected surface FS-A is traceable to 9725471. A newer C3 branch explicitly reuses its C2 fragment for C_alpha(H)-C_beta(OH)-C_new candidate adsorption structures. The raw C3 input/receipt is evidence of endpoint investigation; no C addition path, rate or C2 product release follows from it. No matching C2H2O gas-isomer reference found in the audited gas catalogue.",
+      "missing": [
+        "Researcher choice of desorption vs conversion, product connectivity/spin/phase and reservoir; for C addition also establish C donor and coverage",
+        "Isomer-specific gas reference and desorbed site balance, or selected matched product and reactant geometries for conversion",
+        "Reviewed boundary kinetics or conversion path, thermal terms, reverse treatment, supply to and outlet from any added pool"
+      ],
+      "minimum": "Choose the chemically explicit boundary first. Reuse current FS-A and check the reviewed matching-isomer gas record if supplied. For conversion inspect existing C3 adsorption candidates before proposing a new endpoint or pathway. Do not add C3 to the selected four-step pilot automatically.",
+      "eligible_for_network_kinetics": false,
+      "rate_constant": null,
+      "activation_gibbs_523K_eV": null,
+      "reversible_status": null,
+      "depends_on_R4_frequency_for_evidence_review": false
+    }
+  ],
+  "electronic_records": {
+    "clean": {
+      "calculation_id": "fe110_clean_relax_job9557161_sigma0p20",
+      "result_id": "fe110_clean_relax_job9557161_sigma0p20_final_toten_sigma0p20_eV",
+      "result_name": "final_toten",
+      "value": -355.28228943,
+      "unit": "eV",
+      "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+      "validation_status": "accepted_compatible_final_energy",
+      "source_file_id": "file_fe110_clean_relax_job9557161_sigma0p20_OUTCAR",
+      "remote_path": "~/sbq/Fe110/fe110/OUTCAR",
+      "registered_sha256": "a1746da51a6faa0a87e272ab760f2dab135fadcdc288850b51a5528e82453849",
+      "local_path": "calculations/true_fe110_clean_20260629/results/job_9557161/OUTCAR",
+      "observed_OUTCAR_sha256": "a1746da51a6faa0a87e272ab760f2dab135fadcdc288850b51a5528e82453849"
+    },
+    "CO_g": {
+      "calculation_id": "fe110_gas_CO_9733110",
+      "result_id": "fe110_gas_CO_9733110-final-toten",
+      "result_name": "final_toten",
+      "value": -14.81006485,
+      "unit": "eV",
+      "reference_convention": "fe110_gas_pbe_20A_gamma_species_spin_v1",
+      "validation_status": "accepted_compatible_final_energy",
+      "source_file_id": "file_fe110_gas_CO_9733110_OUTCAR_final",
+      "remote_path": "~/sbq/Fe110/gas/CO/relax/OUTCAR",
+      "registered_sha256": "678de013d90d983cfc638cb63cbe7fddba330630c63c7cc44ac907dbd2870fc7",
+      "local_path": "calculations/fe110_step12a_gas_references_20260828/results/CO/OUTCAR",
+      "observed_OUTCAR_sha256": "678de013d90d983cfc638cb63cbe7fddba330630c63c7cc44ac907dbd2870fc7"
+    },
+    "H2_g": {
+      "calculation_id": "fe110_gas_H2_9573527",
+      "result_id": "fe110_gas_H2_9573527_total_energy_eV",
+      "result_name": "total_energy_eV",
+      "value": -6.76018924,
+      "unit": "eV",
+      "reference_convention": "true_fe110_5layer_5x5x1 accepted reference chain",
+      "validation_status": "accepted_reference",
+      "source_file_id": "fe110_gas_H2_9573527_OUTCAR",
+      "remote_path": "~/sbq/Fe110/gas/H2/relax/OUTCAR",
+      "registered_sha256": null,
+      "observed_OUTCAR_sha256": "5c7590edd1328e11ab71b714f37f93a634a589370c4cd8d900e0b036142cb453"
+    },
+    "H2O_g": {
+      "calculation_id": "fe110_gas_H2O_9558015",
+      "result_id": "fe110_gas_H2O_9558015-final-toten",
+      "result_name": "final_toten",
+      "value": -14.230189,
+      "unit": "eV",
+      "reference_convention": "fe110_gas_pbe_20A_gamma_species_spin_v1",
+      "validation_status": "accepted_compatible_final_energy",
+      "source_file_id": "file_fe110_gas_H2O_9558015_OUTCAR",
+      "remote_path": "~/sbq/Fe110/gas/H2O/relax/OUTCAR",
+      "registered_sha256": "e90a6082b7b4837882d2068cf771b99e40292cf6bc0b8b8f7576372517e7b080",
+      "local_path": "calculations/fe110_step12a_gas_references_20260828/results/H2O/OUTCAR",
+      "observed_OUTCAR_sha256": "e90a6082b7b4837882d2068cf771b99e40292cf6bc0b8b8f7576372517e7b080"
+    },
+    "CO_top": {
+      "calculation_id": "fe110_ads_co_top_step12a_job9558184",
+      "result_id": "fe110_co_dissociation_is_job9558184_final_toten_sigma0p20_ev",
+      "result_name": "final_toten",
+      "value": -372.01291708,
+      "unit": "eV",
+      "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+      "validation_status": "accepted_compatible_final_energy",
+      "source_file_id": "fe110_co_dissociation_is_job9558184_outcar",
+      "remote_path": "~/sbq/Fe110/adsorption/step12A/CO/top/OUTCAR",
+      "registered_sha256": "9ca16866cddebb793c7d790c07b55c2017e43b8fe86a7268c8b711a57eb57b94",
+      "local_path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/IS_job9558184/OUTCAR",
+      "observed_OUTCAR_sha256": "9ca16866cddebb793c7d790c07b55c2017e43b8fe86a7268c8b711a57eb57b94"
+    },
+    "CO_Eads": {
+      "calculation_id": "fe110_ads_co_top_step12a_job9558184",
+      "result_id": "fe110_ads_co_top_step12a_job9558184-adsorption-energy-direct-gas-v1",
+      "result_name": "adsorption_energy",
+      "value": -1.920562800000031,
+      "unit": "eV",
+      "reference_convention": "Eads=E(CO*)-E(clean)-E(CO_gas); surface=fe110_converged_toten_sigma0p20_v1; gas=fe110_gas_pbe_20A_gamma_species_spin_v1",
+      "validation_status": "accepted_compatible_adsorption_energy",
+      "source_file_id": "fe110_co_dissociation_is_job9558184_outcar",
+      "remote_path": "~/sbq/Fe110/adsorption/step12A/CO/top/OUTCAR",
+      "registered_sha256": "9ca16866cddebb793c7d790c07b55c2017e43b8fe86a7268c8b711a57eb57b94",
+      "local_path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/IS_job9558184/OUTCAR",
+      "observed_OUTCAR_sha256": "9ca16866cddebb793c7d790c07b55c2017e43b8fe86a7268c8b711a57eb57b94"
+    },
+    "H2O_top": {
+      "calculation_id": "fe110_ads_step12a_h2o_top_historical_20260828",
+      "result_id": "fe110_ads_step12a_h2o_top_historical_20260828-final-toten",
+      "result_name": "final_toten",
+      "value": -369.83479831,
+      "unit": "eV",
+      "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+      "validation_status": "accepted_compatible_final_energy",
+      "source_file_id": "fe110_ads_step12a_h2o_top_historical_20260828-outcar",
+      "remote_path": "/home_gkn/users/nsgkn_chengdj3/sbq/Fe110/adsorption/step12A/H2O/top/OUTCAR",
+      "registered_sha256": "2827f2e08b4fc3fa188880d55f0b0b67a562b09f273821b4a0ceba389ce2222e",
+      "observed_OUTCAR_sha256": "2827f2e08b4fc3fa188880d55f0b0b67a562b09f273821b4a0ceba389ce2222e"
+    },
+    "H2O_Eads": {
+      "calculation_id": "fe110_ads_step12a_h2o_top_historical_20260828",
+      "result_id": "fe110_ads_step12a_h2o_top_historical_20260828-adsorption-energy-direct-gas-v1",
+      "result_name": "adsorption_energy",
+      "value": -0.32231988000000555,
+      "unit": "eV",
+      "reference_convention": "Eads=E(H2O*)-E(clean)-E(H2O_gas); surface=fe110_converged_toten_sigma0p20_v1; gas=fe110_gas_pbe_20A_gamma_species_spin_v1",
+      "validation_status": "accepted_compatible_adsorption_energy",
+      "source_file_id": "fe110_ads_step12a_h2o_top_historical_20260828-outcar",
+      "remote_path": "/home_gkn/users/nsgkn_chengdj3/sbq/Fe110/adsorption/step12A/H2O/top/OUTCAR",
+      "registered_sha256": "2827f2e08b4fc3fa188880d55f0b0b67a562b09f273821b4a0ceba389ce2222e",
+      "observed_OUTCAR_sha256": "2827f2e08b4fc3fa188880d55f0b0b67a562b09f273821b4a0ceba389ce2222e"
+    },
+    "R4_FS_A": {
+      "calculation_id": "fe110_ads_c2ho_h_c2h2o_9725471",
+      "result_id": "result_fe110_ads_c2ho_h_c2h2o_9725471_final_toten",
+      "result_name": "final_TOTEN",
+      "value": -388.04695175,
+      "unit": "eV",
+      "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+      "validation_status": "accepted_compatible_final_energy",
+      "source_file_id": "file_fe110_ads_c2ho_h_c2h2o_9725471_OUTCAR_final",
+      "remote_path": "~/sbq/Fe110/adsorption/c2ho_h_c2h2o_nonduplicate_20260823/FS_A_C2H2O_eta3_C1_C2_O_CARE03/OUTCAR",
+      "registered_sha256": "51c3758bd775c85569a4cd7d59586ca5e0a2958ed24de67abe7e8d067a6dcc30",
+      "local_path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_nonduplicate_relaxations/FS_A_C2H2O_eta3_C1_C2_O_CARE03/OUTCAR",
+      "observed_OUTCAR_sha256": "51c3758bd775c85569a4cd7d59586ca5e0a2958ed24de67abe7e8d067a6dcc30"
+    },
+    "H_hollow": {
+      "calculation_id": "fe110_ads_step12a_h_hollow_historical_20260828",
+      "result_id": "fe110_ads_step12a_h_hollow_historical_20260828-final-toten",
+      "result_name": "final_toten",
+      "value": -359.36757394,
+      "unit": "eV",
+      "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+      "validation_status": "accepted_compatible_final_energy",
+      "source_file_id": "fe110_ads_step12a_h_hollow_historical_20260828-outcar",
+      "remote_path": "/home_gkn/users/nsgkn_chengdj3/sbq/Fe110/adsorption/step12A/H/hollow/OUTCAR",
+      "registered_sha256": "c6199bea92d31031ccb464563412472f2f51603502776b37d8da3b3b18f9ea26",
+      "observed_OUTCAR_sha256": "c6199bea92d31031ccb464563412472f2f51603502776b37d8da3b3b18f9ea26"
+    },
+    "O_hollow": {
+      "calculation_id": "fe110_ads_step12a_o_hollow_historical_20260828",
+      "result_id": "fe110_ads_step12a_o_hollow_historical_20260828-final-toten",
+      "result_name": "final_toten",
+      "value": -363.58668576,
+      "unit": "eV",
+      "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+      "validation_status": "accepted_compatible_final_energy",
+      "source_file_id": "fe110_ads_step12a_o_hollow_historical_20260828-outcar",
+      "remote_path": "/home_gkn/users/nsgkn_chengdj3/sbq/Fe110/adsorption/step12A/O/hollow/OUTCAR",
+      "registered_sha256": "ba1803d7339fcd4a9065ddd49323e4dff8b8712011c287a5baaba4fa2482ff52",
+      "observed_OUTCAR_sha256": "ba1803d7339fcd4a9065ddd49323e4dff8b8712011c287a5baaba4fa2482ff52"
+    },
+    "OH_hollow": {
+      "calculation_id": "fe110_ads_step12a_oh_hollow_historical_20260828",
+      "result_id": "fe110_ads_step12a_oh_hollow_historical_20260828-final-toten",
+      "result_name": "final_toten",
+      "value": -366.97068168,
+      "unit": "eV",
+      "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+      "validation_status": "accepted_compatible_final_energy",
+      "source_file_id": "fe110_ads_step12a_oh_hollow_historical_20260828-outcar",
+      "remote_path": "/home_gkn/users/nsgkn_chengdj3/sbq/Fe110/adsorption/step12A/OH/hollow/OUTCAR",
+      "registered_sha256": "d98b434368a223d0e74ffe8fa86eed76f0e1330310e110e0bcc28b45e9af66ac",
+      "observed_OUTCAR_sha256": "d98b434368a223d0e74ffe8fa86eed76f0e1330310e110e0bcc28b45e9af66ac"
+    }
+  },
+  "H2_relaxation_evidence": {
+    "top": {
+      "path": "/home_gkn/users/nsgkn_chengdj3/sbq/Fe110/adsorption/pilot_h2_chx_20260704/H2/top",
+      "initial": {
+        "sha256": "bcfa13711d53cb5acdfa1e8794b2fb45c70991073377c3512b9c6af796256bbd",
+        "H_H_A": 0.7505949,
+        "nearest_Fe_A": [
+          2.330418,
+          2.330418
+        ]
+      },
+      "final": {
+        "sha256": "8cd15cc0fc5f577776d0abdbb786c0e94fc9ad9f3c050f6cc6f14dc865c62d63",
+        "H_H_A": 2.8513266,
+        "nearest_Fe_A": [
+          1.7330461,
+          1.7330687
+        ]
+      },
+      "output": {
+        "OUTCAR_sha256": "97ec497890a0878bacf4b43688339315a6f46892ce4e9a37978e3ac701b3e6df",
+        "final_TOTEN_eV": -363.37388139,
+        "normal_timing": true,
+        "reached_required_accuracy": true
+      }
+    },
+    "short_bridge": {
+      "path": "/home_gkn/users/nsgkn_chengdj3/sbq/Fe110/adsorption/pilot_h2_chx_20260704/H2/short_bridge",
+      "initial": {
+        "sha256": "4d92279f5af5867d78d4d6e1e07fc3fd7cd65089755ced3c369f7beb51370613",
+        "H_H_A": 0.7505949,
+        "nearest_Fe_A": [
+          2.2137054,
+          2.2136811
+        ]
+      },
+      "final": {
+        "sha256": "a969e3b03027f7eeda2e2efd82c6ec19e72c99d27dc1bd73ab42288d9c075128",
+        "H_H_A": 2.0737626,
+        "nearest_Fe_A": [
+          1.7131659,
+          1.7131612
+        ]
+      },
+      "output": {
+        "OUTCAR_sha256": "ab9fe2d5fb846455eaf1c384303b4bbc6c95f67b6f3f7de91bd17f2363fd4107",
+        "final_TOTEN_eV": -363.2902759,
+        "normal_timing": true,
+        "reached_required_accuracy": true
+      }
+    },
+    "long_bridge": {
+      "path": "/home_gkn/users/nsgkn_chengdj3/sbq/Fe110/adsorption/pilot_h2_chx_20260704/H2/long_bridge",
+      "initial": {
+        "sha256": "cf43c4f2c2d6aae72f0b1c7d4a6d635f8055bdda14f19eef1c4f659e61b7f560",
+        "H_H_A": 0.7505949,
+        "nearest_Fe_A": [
+          2.0904323,
+          2.0904456
+        ]
+      },
+      "final": {
+        "sha256": "a0216f3a6a3cc662f52ff54e81647dc163e4f8277dcfea6e6d621f3489464f14",
+        "H_H_A": 0.7507377,
+        "nearest_Fe_A": [
+          4.2009945,
+          4.2007259
+        ]
+      },
+      "output": {
+        "OUTCAR_sha256": "5ee33fd0bda0e0f5019a190243d0f25d6f19d8e9b71c1861daa377fd761e771a",
+        "final_TOTEN_eV": -362.05009405,
+        "normal_timing": true,
+        "reached_required_accuracy": true
+      }
+    },
+    "hollow": {
+      "path": "/home_gkn/users/nsgkn_chengdj3/sbq/Fe110/adsorption/pilot_h2_chx_20260704/H2/hollow",
+      "initial": {
+        "sha256": "01f5da47cdd8615ca538bcc7a82cd0ef5d48639c7614b04c1e8df9b5bfee598b",
+        "H_H_A": 0.7505949,
+        "nearest_Fe_A": [
+          2.2440912,
+          2.2440661
+        ]
+      },
+      "final": {
+        "sha256": "7efbd424da7cbff0886688873466f1b10bb825cd335eb3a00525a2e09437d46b",
+        "H_H_A": 2.8200795,
+        "nearest_Fe_A": [
+          1.7731687,
+          1.773281
+        ]
+      },
+      "output": {
+        "OUTCAR_sha256": "5d88a6fba60f4ac988d280138adf0ed57b0204bf13345b7f3bd1b3b5e296e0e1",
+        "final_TOTEN_eV": -363.46989287,
+        "normal_timing": true,
+        "reached_required_accuracy": true
+      }
+    }
+  },
+  "H2_method": "Distances use all 27 neighboring fractional images after folding; input and output order Fe45 H2 checked. Nearest Fe distance computed separately for each H. Energy/termination flags extracted from OUTCAR; electronic SCF and formal acceptance of the H-pair configurations require individual review.",
+  "C3_followup": {
+    "fragment_manifest": "calculations/fe110_c_beta_c3h2o_20261120_v1/open_chain_v2/candidate_manifest.json",
+    "manifest_sha256": "d4152e28bf856e94c65ebf99899c5506c696cdb0e09d9cc05507e21d8a48e144",
+    "preserved_fragment_parent": {
+      "path": "calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\vasp_nonduplicate_relaxations\\FS_A_C2H2O_eta3_C1_C2_O_CARE03\\CONTCAR",
+      "sha256": "525ebe73dfbbb231b5c1bf37a6bc691a1a0913f403afa3d8ea7c9d0d90296878",
+      "scope": "isolated_adsorbed_C2H2O_fragment_only",
+      "atom_map_to_ordered_product_0based": {
+        "45": 45,
+        "46": 46,
+        "47": 48,
+        "48": 49,
+        "49": 50
+      }
+    },
+    "target_graph": "C,C,C,H,H,O|010001010001010",
+    "example_submissions": {
+      "calculations/fe110_c_beta_c3h2o_20261120_v1/adsmind_care_guided_v1/long_bridge_mace002_v1/vasp/c3_01_mace002/submission_record.json": {
+        "sha256": "813b8b6763f462295edda5373addaa2498d59eb1a70b56df9891e438c26701e8",
+        "job_id": "11232",
+        "event": "SUBMIT_VASP"
+      },
+      "calculations/fe110_c_beta_c3h2o_20261120_v1/adsmind_care_guided_v1/vasp_v1/c3_01/submission_record.json": {
+        "sha256": "33caecf54ed19ca7de3f33c0b20ed0b4687e6cb10df68d0709feb7067947dfd3",
+        "job_id": "11182",
+        "event": "SUBMIT_VASP"
+      },
+      "calculations/fe110_c_beta_c3h2o_20261120_v1/adsmind_care_guided_v1/vasp_v1/c3_02/submission_record.json": {
+        "sha256": "fedf85b6f355c4b42aa483d8c04da290cc9fa71597471ff7bf005b4efb736f2b",
+        "job_id": "11183",
+        "event": "SUBMIT_VASP"
+      },
+      "calculations/fe110_c_beta_c3h2o_20261120_v1/adsmind_care_guided_v1/vasp_v1/c3_03/submission_record.json": {
+        "sha256": "86a74e2d53f9199de4c908a25ceee61979b4e034094a21253d254a9e506eb02c",
+        "job_id": "11184",
+        "event": "SUBMIT_VASP"
+      }
+    },
+    "scope": "Adsorption-screening receipts; no claim of finished/validated C-addition pathway."
+  },
+  "audit": {
+    "registry_backend": "data/project_registry.sqlite3 opened mode=ro",
+    "registry_sha256": "4da73dbbc09fc697933cb6fa191493f78e0fbddb8863eadc66af082700fbe881",
+    "calculation_records": 694,
+    "comparison_barrier_records": [
+      {
+        "barrier_set_id": "fe110_c2ho_oh_mid9737143_ts9746548_fs9725471_sigma0p20",
+        "reaction_id": "fe110_c2ho_h_hydrogen_transfer_MID9737143_to_FSA9725471",
+        "ts_validation_id": "fe110_c2ho_oh_dimer9746548_vfa9747902_accepted_20260910"
+      },
+      {
+        "barrier_set_id": "fe110_int06_mid_sigma0p20_review_20261118",
+        "reaction_id": "fe110_c2ho_h_migration_INT06_9748648_to_MID9737143",
+        "ts_validation_id": "fe110_int06_mid_ci9796856_vfa9798421_grade_a"
+      },
+      {
+        "barrier_set_id": "fe110_c_h_to_ch_9715450_9720181_9573951_sigma0p20",
+        "reaction_id": "fe110_c_h_to_ch_A9715450_to_9573951",
+        "ts_validation_id": "fe110_c_h_to_ch_dimer9720181_mode21_grade_a_20260822"
+      },
+      {
+        "barrier_set_id": "fe110_ch_co_sigma0p20_review_20261118",
+        "reaction_id": "fe110_ch_co_to_chco_20261109",
+        "ts_validation_id": "fe110_ch_co_dimer9998592_vfa2260_grade_a_20261115"
+      },
+      {
+        "barrier_set_id": "fe110_ch_h_to_ch2_9701350_9709074_9622444_sigma0p20",
+        "reaction_id": "fe110_ch_h_to_ch2_A9701350_to_9622444",
+        "ts_validation_id": "fe110_ch_h_to_ch2_dimer9709074_mode24_grade_a_20260816"
+      },
+      {
+        "barrier_set_id": "fe110_co_dissociation_9558184_9656664_9622455_sigma0p20",
+        "reaction_id": "fe110_co_dissociation_topic1_9558184_to_9622455",
+        "ts_validation_id": "fe110_co_dissociation_dimer9656664_mode6_grade_a_20260807"
+      }
+    ],
+    "comparison_validation_records": [
+      {
+        "ts_validation_id": "fe110_c2ho_oh_dimer9746548_vfa9747902_accepted_20260910",
+        "source_saddle_calculation_id": "fe110_c2ho_h_dimer_9746548",
+        "grade": "A"
+      },
+      {
+        "ts_validation_id": "fe110_c_h_to_ch_dimer9720181_mode21_grade_a_20260822",
+        "source_saddle_calculation_id": "fe110_c_h_to_ch_dimer_9720181",
+        "grade": "A"
+      },
+      {
+        "ts_validation_id": "fe110_ch_co_dimer9998592_vfa2260_grade_a_20261115",
+        "source_saddle_calculation_id": "fe110_ch_co_dimer_20261112_job9998592",
+        "grade": "A"
+      },
+      {
+        "ts_validation_id": "fe110_ch_h_to_ch2_dimer9709074_mode24_grade_a_20260816",
+        "source_saddle_calculation_id": "fe110_ts_ch_h_to_ch2_dimer_9709074",
+        "grade": "A"
+      },
+      {
+        "ts_validation_id": "fe110_co_dissociation_dimer9656664_mode6_grade_a_20260807",
+        "source_saddle_calculation_id": "fe110_co_dissociation_dimer_job9656664",
+        "grade": "A"
+      },
+      {
+        "ts_validation_id": "fe110_int06_mid_ci9796856_vfa9798421_grade_a",
+        "source_saddle_calculation_id": "fe110_int06_mid_ci_neb_9796856",
+        "grade": "A"
+      },
+      {
+        "ts_validation_id": "tsv_fe110_ch_h_to_ch2_vfa_9710404_diagnostic",
+        "source_saddle_calculation_id": "fe110_ts_ch_h_to_ch2_dimer_9709074",
+        "grade": "Ungraded"
+      }
+    ],
+    "remote_host": "sunboquan-codex",
+    "TS_directory_catalog": [
+      "c2ho_h_to_c2h2o_20260827",
+      "c2ho_h_to_c2h2o_20260828",
+      "c2ho_h_to_c2h2o_20260829",
+      "c2ho_h_to_c2h2o_20260901",
+      "c2ho_h_to_c2h2o_20260902",
+      "c2ho_h_to_c2h2o_20260903",
+      "c2ho_h_to_c2h2o_20260904",
+      "c_h_to_ch_20260818",
+      "c_h_to_ch_20260819",
+      "c_h_to_ch_20260820",
+      "ch_co_to_chco_20261110",
+      "ch_h_to_ch2_20260810",
+      "co_dissociation_topic1_20260718"
+    ],
+    "gas_directory_catalog": [
+      "C",
+      "CH",
+      "CH2",
+      "CH2O",
+      "CH2OH",
+      "CH3",
+      "CH3O",
+      "CH4",
+      "CH4O",
+      "CHO",
+      "CHOH",
+      "CO",
+      "COH",
+      "H",
+      "H2",
+      "H2O",
+      "O",
+      "OH"
+    ],
+    "additional_search": "Checked names of current local Fe(110) calculation roots, registry calculation IDs/purposes/systems, gas references and barrier/validation tables, server Fe110/ts, gas and adsorption roots and O+H/OH+H directory-name variants (depth 3). Negative findings are scoped to inspected records. No search of private or unregistered external holdings.",
+    "comparison_inventory": "outputs/c1_c2_mkm_inventory_20261117_v1/inventory.json",
+    "comparison_inventory_sha256": "b26b8dc9e9709de1f1f03d0fc6e4dacfdcdc33005171b95020fd05792abf46cd",
+    "note": "Pressure profile does not supply dimensionful sticking coefficients, gas entropies or product chemical potentials. Any external data can qualify by identity, units, temperature, standard state, reaction/environment and review; local job IDs are optional."
+  }
+}

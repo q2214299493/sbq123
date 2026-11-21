@@ -1,0 +1,181 @@
+{
+  "verified_from": [
+    {
+      "path": "reports/multiphase/phase3_3_0/evidence_matrix.json",
+      "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+    },
+    {
+      "path": "reports/multiphase/phase3_3_0/network_definition.json",
+      "sha256": "6710082c669eada9a84d7b7b3964f3433d603a22464dc87a9daaf7053dd4801b"
+    },
+    {
+      "path": "reports/multiphase/phase3_3_0/network.json",
+      "sha256": "7a988356282756b5adf2e4846cd17063e2ea7d8da8318824201bbfb07021f44b"
+    },
+    {
+      "path": "reports/multiphase/phase3_3_0/kinetic_dataset.json",
+      "sha256": "f8570c64c1c802cbfd3f0250509f4a776601cff18d7dda26edd6333c3a88747e"
+    },
+    {
+      "path": "reports/multiphase/phase3_3_0/qualification.json",
+      "sha256": "b814608f8de011c326e736a00544cfc54191de63a0985b4a1cab95d20770df80"
+    }
+  ],
+  "scope": "Four original Fe(110) molecular columns only; no support or pseudo-sink appended.",
+  "network_version": "5be003e334c9d26b232841f703248cc23b885f081ca35f15c8e8602e9d608421",
+  "dataset_version": "d76e4946756d535900984779a0da40c0d75a3188bd4b303dc8e3d40145956672",
+  "molecular_stoichiometry": {
+    "row_species": [
+      "CO",
+      "C",
+      "O",
+      "H",
+      "CH",
+      "CHCO",
+      "C2H2O"
+    ],
+    "column_reactions": [
+      "R1",
+      "R2",
+      "R3",
+      "R4"
+    ],
+    "matrix": [
+      [
+        -1,
+        0,
+        -1,
+        0
+      ],
+      [
+        1,
+        -1,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        -1,
+        0,
+        -1
+      ],
+      [
+        0,
+        1,
+        -1,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        -1
+      ],
+      [
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    "elements": [
+      "C",
+      "H",
+      "O"
+    ],
+    "element_residuals": [
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "rank": 4,
+    "steady_state_nullity": 0,
+    "net_adsorbates_one_forward_event_per_step": {
+      "CO": -2,
+      "C": 0,
+      "O": 1,
+      "H": -2,
+      "CH": 0,
+      "CHCO": 0,
+      "C2H2O": 1
+    }
+  },
+  "closed_for_nonzero_turnover": false,
+  "isolated_network_reason": "S v = 0 implies v = 0 for the isolated adsorbate inventory. This is a constraint on net flux and does not imply known individual forward or reverse rates.",
+  "domain_site_balance": null,
+  "charge_balance": null,
+  "rate_qualified_reaction_count": 0,
+  "gate_blockers": {
+    "fe110_co_dissociation_topic1_9558184_to_9622455": [
+      "Unknown charge balance",
+      "Unknown site balance",
+      "Missing species structure association",
+      "Missing compatible free energies",
+      "Missing kinetic parameters or rate law",
+      "Reversibility unconfirmed",
+      "Kinetic parameter set with units, standard states, validity range and sources missing",
+      "Rate law, scoped parameter review and applicability not supplied",
+      "Reviewed site occupancies and vacant-site counts required"
+    ],
+    "fe110_c_h_to_ch_A9715450_to_9573951": [
+      "Unknown charge balance",
+      "Unknown site balance",
+      "Missing species structure association",
+      "Missing compatible free energies",
+      "Missing kinetic parameters or rate law",
+      "Reversibility unconfirmed",
+      "Kinetic parameter set with units, standard states, validity range and sources missing",
+      "Rate law, scoped parameter review and applicability not supplied",
+      "Reviewed site occupancies and vacant-site counts required"
+    ],
+    "fe110_ch_co_to_chco_20261109": [
+      "Unknown charge balance",
+      "Unknown site balance",
+      "Missing species structure association",
+      "Missing compatible free energies",
+      "Missing kinetic parameters or rate law",
+      "Reversibility unconfirmed",
+      "IS: compatible Gibbs correction missing",
+      "FS: compatible Gibbs correction missing",
+      "Kinetic parameter set with units, standard states, validity range and sources missing",
+      "Rate law, scoped parameter review and applicability not supplied",
+      "Reviewed site occupancies and vacant-site counts required"
+    ],
+    "fe110_c2ho_h_to_c2h2o_ISA9725473_to_FSA9725471": [
+      "Unknown charge balance",
+      "Unknown site balance",
+      "Missing species structure association",
+      "Missing compatible free energies",
+      "Missing kinetic parameters or rate law",
+      "Reversibility unconfirmed",
+      "Kinetic parameter set with units, standard states, validity range and sources missing",
+      "Rate law, scoped parameter review and applicability not supplied",
+      "Reviewed site occupancies and vacant-site counts required"
+    ]
+  },
+  "native_input_generated": false,
+  "native_execution": false,
+  "applied_boundary_steps": [],
+  "conditional_boundary_requirements": "Per unit chain throughput, replenish 2 CO* and 2 H*, remove O* and C2H2O* and account for the affected independent sites. If O* leaves via water, two additional H atoms per O are required. No specific closure route, rate or driving force is validated by that accounting."
+}

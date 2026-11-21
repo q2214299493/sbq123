@@ -1,0 +1,2171 @@
+{
+  "title": "Fe(110) site and vacancy evidence at the selected C1-C2 endpoints",
+  "status": "GEOMETRY_VERIFIED_SITE_MAPPING_AWAITING_RESEARCHER",
+  "scope": "One metallic Fe(110) benchmark surface. No interface is present in these states. Inventory IDs remain unassigned across all reactions. R4 internal minima are included for the H-migration sequence.",
+  "method": {
+    "coordinate_units": "angstrom",
+    "atom_indices": "zero-based within each bound structure; Fe36-44 exposed on the clean slab",
+    "geometry_projection": "Nearest clean reference center in the slab plane using the repository Fe(110) projector. The one, two or three nearest exposed reference Fe specify its identity, not its occupancy. Off-symmetry uses the recorded 0.45 A cutoff. Quantities rounded to six decimals.",
+    "structure_identity": "All ten endpoint/intermediate file hashes verified. Cells match the clean reference; the bottom 18 Fe coordinates match under in-plane periodic wrapping within 1e-6 A. R2 FS uses the geometry-verified archived POSCAR copy of its final CONTCAR.",
+    "fragment_basis": "Selected endpoint species and state-specific atom maps were checked against actual elements and all intralayer adsorbate-pair distances. Molecular identity does not determine occupancy. Projections use candidate C/O anchors or free atomic H. Bonded H and the O end of intact CO are retained in atom lists rather than treated as independent surface sites.",
+    "physical_contacts": "Four nearest relaxed Fe atoms per candidate anchor given as geometric distances (minimum image in x,y; no z wrap). No binding cutoff or charge partitioning is assumed. Center overlaps give only common indices on the clean reference lattice."
+  },
+  "project_site_type_catalog": {
+    "format": "surface-site-types/1",
+    "project_id": "sbq123",
+    "surface_site_types": {
+      "fe110": [
+        "top",
+        "short_bridge",
+        "long_bridge",
+        "hollow"
+      ]
+    }
+  },
+  "confirmed_geometry_and_unresolved_species_models": {
+    "CO": "R1 IS projects C onto top Fe41; R3 IS projects C onto long bridge Fe39/41. Site-specific CO configurations, diffusion/equilibration or distinct species may be needed; a universal CO footprint has no approval.",
+    "C": "In R1 FS and R2 IS the carbon projects onto long bridge Fe43/44, with different coadsorbates. The local C coordination shell includes additional Fe and does not define multidentate occupancy.",
+    "O": "R1 FS O46 projects onto hollow Fe40/42/43, sharing Fe43 with the neighboring C bridge. The exclusion rule for overlapping centers is unresolved.",
+    "H": "R2 IS and R4 IS/INT06/MID have free H at different hollow centers. R4 arrival produces an O-H group; covalently bound H atoms are not independently supplied H* molecules.",
+    "CH": "C45 projects onto a long bridge in R2 FS and R3 IS. H belongs to the molecule; evidenced CH configurations on two neighboring clean-reference Fe are candidates for one bridge ensemble, subject to researcher confirmation.",
+    "CHCO": "Two carbon projections land in separate hollows which share Fe. O has a nearby Fe contact; off-symmetry O projection is not an independent site count. Review one composite ensemble versus two coupled hollows and the role of O.",
+    "C2H2O": "R4 FS-A is the selected O-hydrogenated product, O47-H49 about 0.981 A. Two carbon projections share Fe38/41; O47 nearest Fe40 is 2.842 A and class unknown in the archived endpoint geometry review. A single composite ensemble and multiple coupled carbon centers are plausible model choices. No separate O or H site is established by projection."
+  },
+  "states": {
+    "R1.IS": {
+      "structure": {
+        "file_id": "fe110_co_dissociation_is_job9558184_contcar",
+        "path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/IS_job9558184/CONTCAR",
+        "sha256": "6ed0dcc7bc57e30bce0eca23a94e6b8823dfc543a6bc943dccffcda531daadbf"
+      },
+      "fragments": [
+        {
+          "species": "CO",
+          "atoms_zero_based": [
+            45,
+            46
+          ],
+          "geometry_candidates": [
+            {
+              "atom": 45,
+              "element": "C",
+              "cartesian_A": [
+                7.067147,
+                1.998893,
+                17.289664
+              ],
+              "projected_type": "top",
+              "center_fe_zero_based": [
+                41
+              ],
+              "center_fractional_xy": [
+                0.66667,
+                0.333321
+              ],
+              "lateral_offset_A": 0.000203,
+              "off_symmetry": false,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 41,
+                  "distance_A": 1.770602
+                },
+                {
+                  "index": 43,
+                  "distance_A": 2.991128
+                },
+                {
+                  "index": 38,
+                  "distance_A": 2.991143
+                },
+                {
+                  "index": 36,
+                  "distance_A": 2.9914
+                }
+              ]
+            }
+          ],
+          "accepted_inventory_site_ids": null,
+          "accepted_multiplicity": null,
+          "accepted_footprint": null,
+          "formal_adsorbate_charge_e": null
+        }
+      ],
+      "projected_center_overlaps": [],
+      "adsorbate_pair_distances": [
+        {
+          "atoms": [
+            45,
+            46
+          ],
+          "distance_A": 1.175632
+        }
+      ]
+    },
+    "R1.FS": {
+      "structure": {
+        "file_id": "fe110_ads_cpluso_hadj_20260714_contcar",
+        "path": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/formal_barrier_sigma0p20_20260807/FS_job9622455/CONTCAR",
+        "sha256": "08ab46f9210e7f2e810eacaa0481c8e1ad3bbf64fc729f21fd66f5ef6ef88d6a"
+      },
+      "fragments": [
+        {
+          "species": "C",
+          "atoms_zero_based": [
+            45
+          ],
+          "geometry_candidates": [
+            {
+              "atom": 45,
+              "element": "C",
+              "cartesian_A": [
+                7.08156,
+                4.009123,
+                15.904441
+              ],
+              "projected_type": "long_bridge",
+              "center_fe_zero_based": [
+                43,
+                44
+              ],
+              "center_fractional_xy": [
+                0.5,
+                0.666667
+              ],
+              "lateral_offset_A": 0.01809,
+              "off_symmetry": false,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 43,
+                  "distance_A": 1.776902
+                },
+                {
+                  "index": 44,
+                  "distance_A": 1.788894
+                },
+                {
+                  "index": 37,
+                  "distance_A": 1.9283
+                },
+                {
+                  "index": 41,
+                  "distance_A": 1.945519
+                }
+              ]
+            }
+          ],
+          "accepted_inventory_site_ids": null,
+          "accepted_multiplicity": null,
+          "accepted_footprint": null,
+          "formal_adsorbate_charge_e": null
+        },
+        {
+          "species": "O",
+          "atoms_zero_based": [
+            46
+          ],
+          "geometry_candidates": [
+            {
+              "atom": 46,
+              "element": "O",
+              "cartesian_A": [
+                4.049293,
+                3.255002,
+                16.749774
+              ],
+              "projected_type": "hollow",
+              "center_fe_zero_based": [
+                40,
+                42,
+                43
+              ],
+              "center_fractional_xy": [
+                0.22222,
+                0.555564
+              ],
+              "lateral_offset_A": 0.205935,
+              "off_symmetry": false,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 40,
+                  "distance_A": 1.838775
+                },
+                {
+                  "index": 43,
+                  "distance_A": 1.842126
+                },
+                {
+                  "index": 42,
+                  "distance_A": 1.857925
+                },
+                {
+                  "index": 36,
+                  "distance_A": 3.083492
+                }
+              ]
+            }
+          ],
+          "accepted_inventory_site_ids": null,
+          "accepted_multiplicity": null,
+          "accepted_footprint": null,
+          "formal_adsorbate_charge_e": null
+        }
+      ],
+      "projected_center_overlaps": [
+        {
+          "anchor_pair": [
+            45,
+            46
+          ],
+          "shared_fe": [
+            43
+          ],
+          "within_same_molecule": false
+        }
+      ],
+      "adsorbate_pair_distances": [
+        {
+          "atoms": [
+            45,
+            46
+          ],
+          "distance_A": 3.236964
+        }
+      ]
+    },
+    "R2.IS": {
+      "structure": {
+        "file_id": "file_fe110_ads_c_h_coads_9715450_CONTCAR_checkpoint_20260818",
+        "path": "calculations/fe110_c_h_coadsorption_20260817/results/A_adjacent_hollow_reactive/CONTCAR",
+        "sha256": "121ace35043c79f968ecd14ef2a100b2531c4904b8671e71bf506751f06c5396"
+      },
+      "fragments": [
+        {
+          "species": "C",
+          "atoms_zero_based": [
+            45
+          ],
+          "geometry_candidates": [
+            {
+              "atom": 45,
+              "element": "C",
+              "cartesian_A": [
+                7.06161,
+                3.955293,
+                15.943364
+              ],
+              "projected_type": "long_bridge",
+              "center_fe_zero_based": [
+                43,
+                44
+              ],
+              "center_fractional_xy": [
+                0.5,
+                0.666667
+              ],
+              "lateral_offset_A": 0.043002,
+              "off_symmetry": false,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 44,
+                  "distance_A": 1.790314
+                },
+                {
+                  "index": 43,
+                  "distance_A": 1.796014
+                },
+                {
+                  "index": 41,
+                  "distance_A": 1.927978
+                },
+                {
+                  "index": 37,
+                  "distance_A": 1.940515
+                }
+              ]
+            }
+          ],
+          "accepted_inventory_site_ids": null,
+          "accepted_multiplicity": null,
+          "accepted_footprint": null,
+          "formal_adsorbate_charge_e": null
+        },
+        {
+          "species": "H",
+          "atoms_zero_based": [
+            46
+          ],
+          "geometry_candidates": [
+            {
+              "atom": 46,
+              "element": "H",
+              "cartesian_A": [
+                1.392268,
+                0.498127,
+                16.53128
+              ],
+              "projected_type": "hollow",
+              "center_fe_zero_based": [
+                36,
+                37,
+                39
+              ],
+              "center_fractional_xy": [
+                0.11111,
+                0.111116
+              ],
+              "lateral_offset_A": 0.16955,
+              "off_symmetry": false,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 39,
+                  "distance_A": 1.740284
+                },
+                {
+                  "index": 37,
+                  "distance_A": 1.783322
+                },
+                {
+                  "index": 36,
+                  "distance_A": 1.792032
+                },
+                {
+                  "index": 43,
+                  "distance_A": 2.763577
+                }
+              ]
+            }
+          ],
+          "accepted_inventory_site_ids": null,
+          "accepted_multiplicity": null,
+          "accepted_footprint": null,
+          "formal_adsorbate_charge_e": null
+        }
+      ],
+      "projected_center_overlaps": [],
+      "adsorbate_pair_distances": [
+        {
+          "atoms": [
+            45,
+            46
+          ],
+          "distance_A": 2.972796
+        }
+      ],
+      "archived_coordination_review": {
+        "atoms": [
+          45,
+          46
+        ],
+        "shared_local_fe_zero_based": [
+          37
+        ],
+        "shared_reference_center_fe_zero_based": [],
+        "meaning": "The archived C/H coordination-shell review used one-based Fe38. Projected long-bridge/hollow center support sets do not overlap. Geometric neighbors and inventory exclusions have separate meanings."
+      }
+    },
+    "R2.FS": {
+      "structure": {
+        "file_id": "fe110_c_h_to_ch_fs_job9573951-endpoint-structure",
+        "path": "calculations/fe110_c_h_to_ch_ts_20260818/endpoints/FS_CH_long_bridge_job9573951/POSCAR",
+        "sha256": "ffeccf7353ea82d8b5c5d3e13762a3e34fcae41ec7b1f0ff7adbae5b2bf9e4a5"
+      },
+      "fragments": [
+        {
+          "species": "CH",
+          "atoms_zero_based": [
+            45,
+            46
+          ],
+          "geometry_candidates": [
+            {
+              "atom": 45,
+              "element": "C",
+              "cartesian_A": [
+                7.066917,
+                3.977964,
+                16.609247
+              ],
+              "projected_type": "long_bridge",
+              "center_fe_zero_based": [
+                43,
+                44
+              ],
+              "center_fractional_xy": [
+                0.5,
+                0.666667
+              ],
+              "lateral_offset_A": 0.01995,
+              "off_symmetry": false,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 43,
+                  "distance_A": 1.877367
+                },
+                {
+                  "index": 44,
+                  "distance_A": 1.878906
+                },
+                {
+                  "index": 41,
+                  "distance_A": 2.151728
+                },
+                {
+                  "index": 37,
+                  "distance_A": 2.155893
+                }
+              ]
+            }
+          ],
+          "accepted_inventory_site_ids": null,
+          "accepted_multiplicity": null,
+          "accepted_footprint": null,
+          "formal_adsorbate_charge_e": null
+        }
+      ],
+      "projected_center_overlaps": [],
+      "adsorbate_pair_distances": [
+        {
+          "atoms": [
+            45,
+            46
+          ],
+          "distance_A": 1.106264
+        }
+      ]
+    },
+    "R3.IS": {
+      "structure": {
+        "file_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_CONTCAR",
+        "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_cfg0_direct_vasp/CONTCAR",
+        "sha256": "f8bc627180b430b3b64f748c05830a0372bc93a3750780cf7fe6c5eb0601762d"
+      },
+      "fragments": [
+        {
+          "species": "CH",
+          "atoms_zero_based": [
+            45,
+            48
+          ],
+          "geometry_candidates": [
+            {
+              "atom": 45,
+              "element": "C",
+              "cartesian_A": [
+                5.639597,
+                1.990489,
+                16.649251
+              ],
+              "projected_type": "long_bridge",
+              "center_fe_zero_based": [
+                40,
+                41
+              ],
+              "center_fractional_xy": [
+                0.500001,
+                0.333333
+              ],
+              "lateral_offset_A": 0.016619,
+              "off_symmetry": false,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 40,
+                  "distance_A": 1.875572
+                },
+                {
+                  "index": 41,
+                  "distance_A": 1.875882
+                },
+                {
+                  "index": 38,
+                  "distance_A": 2.166804
+                },
+                {
+                  "index": 43,
+                  "distance_A": 2.191966
+                }
+              ]
+            }
+          ],
+          "accepted_inventory_site_ids": null,
+          "accepted_multiplicity": null,
+          "accepted_footprint": null,
+          "formal_adsorbate_charge_e": null
+        },
+        {
+          "species": "CO",
+          "atoms_zero_based": [
+            46,
+            47
+          ],
+          "geometry_candidates": [
+            {
+              "atom": 46,
+              "element": "C",
+              "cartesian_A": [
+                8.41364,
+                2.072894,
+                16.906517
+              ],
+              "projected_type": "long_bridge",
+              "center_fe_zero_based": [
+                39,
+                41
+              ],
+              "center_fractional_xy": [
+                0.833335,
+                0.333327
+              ],
+              "lateral_offset_A": 0.099935,
+              "off_symmetry": false,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 41,
+                  "distance_A": 1.856432
+                },
+                {
+                  "index": 39,
+                  "distance_A": 2.063506
+                },
+                {
+                  "index": 44,
+                  "distance_A": 2.363357
+                },
+                {
+                  "index": 36,
+                  "distance_A": 2.472151
+                }
+              ]
+            }
+          ],
+          "accepted_inventory_site_ids": null,
+          "accepted_multiplicity": null,
+          "accepted_footprint": null,
+          "formal_adsorbate_charge_e": null
+        }
+      ],
+      "projected_center_overlaps": [
+        {
+          "anchor_pair": [
+            45,
+            46
+          ],
+          "shared_fe": [
+            41
+          ],
+          "within_same_molecule": false
+        }
+      ],
+      "adsorbate_pair_distances": [
+        {
+          "atoms": [
+            45,
+            46
+          ],
+          "distance_A": 2.787166
+        },
+        {
+          "atoms": [
+            45,
+            47
+          ],
+          "distance_A": 3.382202
+        },
+        {
+          "atoms": [
+            45,
+            48
+          ],
+          "distance_A": 1.103885
+        },
+        {
+          "atoms": [
+            46,
+            47
+          ],
+          "distance_A": 1.203031
+        },
+        {
+          "atoms": [
+            46,
+            48
+          ],
+          "distance_A": 2.946511
+        },
+        {
+          "atoms": [
+            47,
+            48
+          ],
+          "distance_A": 3.131553
+        }
+      ]
+    },
+    "R3.FS": {
+      "structure": {
+        "file_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_CONTCAR",
+        "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_extra2_repair_v1/CONTCAR",
+        "sha256": "11dab1631a99f1e444d4c7ab9ca242609e07c912f656874005696e6498f15ab2"
+      },
+      "fragments": [
+        {
+          "species": "CHCO",
+          "atoms_zero_based": [
+            45,
+            46,
+            47,
+            48
+          ],
+          "geometry_candidates": [
+            {
+              "atom": 45,
+              "element": "C",
+              "cartesian_A": [
+                8.394478,
+                2.548486,
+                16.933747
+              ],
+              "projected_type": "hollow",
+              "center_fe_zero_based": [
+                39,
+                41,
+                44
+              ],
+              "center_fractional_xy": [
+                0.77778,
+                0.444436
+              ],
+              "lateral_offset_A": 0.145206,
+              "off_symmetry": false,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 39,
+                  "distance_A": 2.060655
+                },
+                {
+                  "index": 41,
+                  "distance_A": 2.067098
+                },
+                {
+                  "index": 44,
+                  "distance_A": 2.069794
+                },
+                {
+                  "index": 36,
+                  "distance_A": 2.932016
+                }
+              ]
+            },
+            {
+              "atom": 46,
+              "element": "C",
+              "cartesian_A": [
+                7.226346,
+                3.342747,
+                16.88891
+              ],
+              "projected_type": "hollow",
+              "center_fe_zero_based": [
+                41,
+                43,
+                44
+              ],
+              "center_fractional_xy": [
+                0.555556,
+                0.555551
+              ],
+              "lateral_offset_A": 0.159378,
+              "off_symmetry": false,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 44,
+                  "distance_A": 2.009873
+                },
+                {
+                  "index": 41,
+                  "distance_A": 2.022698
+                },
+                {
+                  "index": 43,
+                  "distance_A": 2.08303
+                },
+                {
+                  "index": 37,
+                  "distance_A": 2.992966
+                }
+              ]
+            },
+            {
+              "atom": 47,
+              "element": "O",
+              "cartesian_A": [
+                6.2856,
+                3.868213,
+                17.600672
+              ],
+              "projected_type": "top",
+              "center_fe_zero_based": [
+                43
+              ],
+              "center_fractional_xy": [
+                0.333328,
+                0.666679
+              ],
+              "lateral_offset_A": 0.644892,
+              "off_symmetry": true,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 43,
+                  "distance_A": 2.039406
+                },
+                {
+                  "index": 41,
+                  "distance_A": 3.005437
+                },
+                {
+                  "index": 44,
+                  "distance_A": 3.060066
+                },
+                {
+                  "index": 37,
+                  "distance_A": 3.069799
+                }
+              ]
+            }
+          ],
+          "accepted_inventory_site_ids": null,
+          "accepted_multiplicity": null,
+          "accepted_footprint": null,
+          "formal_adsorbate_charge_e": null
+        }
+      ],
+      "projected_center_overlaps": [
+        {
+          "anchor_pair": [
+            45,
+            46
+          ],
+          "shared_fe": [
+            41,
+            44
+          ],
+          "within_same_molecule": true
+        },
+        {
+          "anchor_pair": [
+            46,
+            47
+          ],
+          "shared_fe": [
+            43
+          ],
+          "within_same_molecule": true
+        }
+      ],
+      "adsorbate_pair_distances": [
+        {
+          "atoms": [
+            45,
+            46
+          ],
+          "distance_A": 1.413291
+        },
+        {
+          "atoms": [
+            45,
+            47
+          ],
+          "distance_A": 2.575622
+        },
+        {
+          "atoms": [
+            45,
+            48
+          ],
+          "distance_A": 1.100743
+        },
+        {
+          "atoms": [
+            46,
+            47
+          ],
+          "distance_A": 1.291403
+        },
+        {
+          "atoms": [
+            46,
+            48
+          ],
+          "distance_A": 2.197332
+        },
+        {
+          "atoms": [
+            47,
+            48
+          ],
+          "distance_A": 3.043751
+        }
+      ]
+    },
+    "R4.IS": {
+      "structure": {
+        "file_id": "file_fe110_ads_c2ho_h_c2h2o_9725473_CONTCAR_final",
+        "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_nonduplicate_relaxations/IS_A_C2HO_H_adjacent_long_bridge/CONTCAR",
+        "sha256": "6800e98e36e32c09bc7c2514f52998e641416dca4d3b62a4aa0acc95ad50a2ed"
+      },
+      "fragments": [
+        {
+          "species": "CHCO",
+          "atoms_zero_based": [
+            45,
+            46,
+            47,
+            48
+          ],
+          "geometry_candidates": [
+            {
+              "atom": 45,
+              "element": "C",
+              "cartesian_A": [
+                8.398445,
+                1.544673,
+                16.935196
+              ],
+              "projected_type": "hollow",
+              "center_fe_zero_based": [
+                36,
+                39,
+                41
+              ],
+              "center_fractional_xy": [
+                0.88889,
+                0.222218
+              ],
+              "lateral_offset_A": 0.227503,
+              "off_symmetry": false,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 39,
+                  "distance_A": 2.046521
+                },
+                {
+                  "index": 41,
+                  "distance_A": 2.059538
+                },
+                {
+                  "index": 36,
+                  "distance_A": 2.099708
+                },
+                {
+                  "index": 44,
+                  "distance_A": 2.830767
+                }
+              ]
+            },
+            {
+              "atom": 46,
+              "element": "C",
+              "cartesian_A": [
+                7.218789,
+                0.761813,
+                16.903372
+              ],
+              "projected_type": "hollow",
+              "center_fe_zero_based": [
+                36,
+                38,
+                41
+              ],
+              "center_fractional_xy": [
+                0.77778,
+                0.111103
+              ],
+              "lateral_offset_A": 0.179057,
+              "off_symmetry": false,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 41,
+                  "distance_A": 1.976198
+                },
+                {
+                  "index": 36,
+                  "distance_A": 2.023709
+                },
+                {
+                  "index": 38,
+                  "distance_A": 2.109346
+                },
+                {
+                  "index": 42,
+                  "distance_A": 3.107061
+                }
+              ]
+            },
+            {
+              "atom": 47,
+              "element": "O",
+              "cartesian_A": [
+                6.289127,
+                0.228978,
+                17.618412
+              ],
+              "projected_type": "top",
+              "center_fe_zero_based": [
+                38
+              ],
+              "center_fractional_xy": [
+                0.66667,
+                -1.3e-05
+              ],
+              "lateral_offset_A": 0.675294,
+              "off_symmetry": true,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 38,
+                  "distance_A": 2.044956
+                },
+                {
+                  "index": 41,
+                  "distance_A": 2.972648
+                },
+                {
+                  "index": 36,
+                  "distance_A": 3.036886
+                },
+                {
+                  "index": 42,
+                  "distance_A": 3.157824
+                }
+              ]
+            }
+          ],
+          "accepted_inventory_site_ids": null,
+          "accepted_multiplicity": null,
+          "accepted_footprint": null,
+          "formal_adsorbate_charge_e": null
+        },
+        {
+          "species": "H",
+          "atoms_zero_based": [
+            49
+          ],
+          "geometry_candidates": [
+            {
+              "atom": 49,
+              "element": "H",
+              "cartesian_A": [
+                4.2973,
+                4.461576,
+                16.47128
+              ],
+              "projected_type": "hollow",
+              "center_fe_zero_based": [
+                36,
+                42,
+                43
+              ],
+              "center_fractional_xy": [
+                0.111109,
+                0.777782
+              ],
+              "lateral_offset_A": 0.210505,
+              "off_symmetry": false,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 43,
+                  "distance_A": 1.746672
+                },
+                {
+                  "index": 36,
+                  "distance_A": 1.763035
+                },
+                {
+                  "index": 42,
+                  "distance_A": 1.813552
+                },
+                {
+                  "index": 40,
+                  "distance_A": 2.64367
+                }
+              ]
+            }
+          ],
+          "accepted_inventory_site_ids": null,
+          "accepted_multiplicity": null,
+          "accepted_footprint": null,
+          "formal_adsorbate_charge_e": null
+        }
+      ],
+      "projected_center_overlaps": [
+        {
+          "anchor_pair": [
+            45,
+            46
+          ],
+          "shared_fe": [
+            36,
+            41
+          ],
+          "within_same_molecule": true
+        },
+        {
+          "anchor_pair": [
+            45,
+            49
+          ],
+          "shared_fe": [
+            36
+          ],
+          "within_same_molecule": false
+        },
+        {
+          "anchor_pair": [
+            46,
+            47
+          ],
+          "shared_fe": [
+            38
+          ],
+          "within_same_molecule": true
+        },
+        {
+          "anchor_pair": [
+            46,
+            49
+          ],
+          "shared_fe": [
+            36
+          ],
+          "within_same_molecule": false
+        }
+      ],
+      "adsorbate_pair_distances": [
+        {
+          "atoms": [
+            45,
+            46
+          ],
+          "distance_A": 1.416146
+        },
+        {
+          "atoms": [
+            45,
+            47
+          ],
+          "distance_A": 2.578189
+        },
+        {
+          "atoms": [
+            45,
+            48
+          ],
+          "distance_A": 1.099861
+        },
+        {
+          "atoms": [
+            45,
+            49
+          ],
+          "distance_A": 3.117815
+        },
+        {
+          "atoms": [
+            46,
+            47
+          ],
+          "distance_A": 1.288203
+        },
+        {
+          "atoms": [
+            46,
+            48
+          ],
+          "distance_A": 2.190752
+        },
+        {
+          "atoms": [
+            46,
+            49
+          ],
+          "distance_A": 2.683832
+        },
+        {
+          "atoms": [
+            47,
+            48
+          ],
+          "distance_A": 3.035619
+        },
+        {
+          "atoms": [
+            47,
+            49
+          ],
+          "distance_A": 3.079728
+        },
+        {
+          "atoms": [
+            48,
+            49
+          ],
+          "distance_A": 3.70699
+        }
+      ],
+      "archived_geometry_review": {
+        "C1": {
+          "class": "hollow",
+          "lateral_offset_A": 0.22748452000101052
+        },
+        "C2": {
+          "class": "hollow",
+          "lateral_offset_A": 0.17901610656390704
+        },
+        "O": {
+          "class": "unknown",
+          "lateral_offset_A": 0.6752399337494075
+        },
+        "H_C1": {
+          "class": "long_bridge",
+          "lateral_offset_A": 0.36474714658052854
+        },
+        "H_transfer": {
+          "class": "hollow",
+          "lateral_offset_A": 0.21048177757988923
+        }
+      }
+    },
+    "R4.INT06": {
+      "structure": {
+        "file_id": "fe110_h_migration1357_valley06_relax_9748648_CONTCAR_final",
+        "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration1357_valley06_relax_20260909/completed_review_20260910/CONTCAR",
+        "sha256": "2b53dedc909c678c2e8f7f1e4fc9643c6f87e78e26c8a818b8d9c8dfa7c73029"
+      },
+      "fragments": [
+        {
+          "species": "CHCO",
+          "atoms_zero_based": [
+            45,
+            46,
+            47,
+            48
+          ],
+          "geometry_candidates": [
+            {
+              "atom": 45,
+              "element": "C",
+              "cartesian_A": [
+                8.390417,
+                1.44491,
+                16.947096
+              ],
+              "projected_type": "hollow",
+              "center_fe_zero_based": [
+                36,
+                39,
+                41
+              ],
+              "center_fractional_xy": [
+                0.88889,
+                0.222218
+              ],
+              "lateral_offset_A": 0.144174,
+              "off_symmetry": false,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 41,
+                  "distance_A": 2.058997
+                },
+                {
+                  "index": 39,
+                  "distance_A": 2.069006
+                },
+                {
+                  "index": 36,
+                  "distance_A": 2.081264
+                },
+                {
+                  "index": 44,
+                  "distance_A": 2.918478
+                }
+              ]
+            },
+            {
+              "atom": 46,
+              "element": "C",
+              "cartesian_A": [
+                7.235723,
+                0.635812,
+                16.89669
+              ],
+              "projected_type": "hollow",
+              "center_fe_zero_based": [
+                36,
+                38,
+                41
+              ],
+              "center_fractional_xy": [
+                0.77778,
+                0.111103
+              ],
+              "lateral_offset_A": 0.171102,
+              "off_symmetry": false,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 36,
+                  "distance_A": 2.013715
+                },
+                {
+                  "index": 41,
+                  "distance_A": 2.020399
+                },
+                {
+                  "index": 38,
+                  "distance_A": 2.087393
+                },
+                {
+                  "index": 42,
+                  "distance_A": 2.978403
+                }
+              ]
+            },
+            {
+              "atom": 47,
+              "element": "O",
+              "cartesian_A": [
+                6.311476,
+                0.072393,
+                17.601036
+              ],
+              "projected_type": "top",
+              "center_fe_zero_based": [
+                38
+              ],
+              "center_fractional_xy": [
+                0.66667,
+                -1.3e-05
+              ],
+              "lateral_offset_A": 0.66159,
+              "off_symmetry": true,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 38,
+                  "distance_A": 2.039263
+                },
+                {
+                  "index": 41,
+                  "distance_A": 3.017913
+                },
+                {
+                  "index": 42,
+                  "distance_A": 3.027584
+                },
+                {
+                  "index": 36,
+                  "distance_A": 3.04863
+                }
+              ]
+            }
+          ],
+          "accepted_inventory_site_ids": null,
+          "accepted_multiplicity": null,
+          "accepted_footprint": null,
+          "formal_adsorbate_charge_e": null
+        },
+        {
+          "species": "H",
+          "atoms_zero_based": [
+            49
+          ],
+          "geometry_candidates": [
+            {
+              "atom": 49,
+              "element": "H",
+              "cartesian_A": [
+                2.861019,
+                1.51607,
+                16.492752
+              ],
+              "projected_type": "hollow",
+              "center_fe_zero_based": [
+                37,
+                39,
+                40
+              ],
+              "center_fractional_xy": [
+                0.22222,
+                0.222231
+              ],
+              "lateral_offset_A": 0.186519,
+              "off_symmetry": false,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 40,
+                  "distance_A": 1.756982
+                },
+                {
+                  "index": 39,
+                  "distance_A": 1.78473
+                },
+                {
+                  "index": 37,
+                  "distance_A": 1.806773
+                },
+                {
+                  "index": 42,
+                  "distance_A": 2.639252
+                }
+              ]
+            }
+          ],
+          "accepted_inventory_site_ids": null,
+          "accepted_multiplicity": null,
+          "accepted_footprint": null,
+          "formal_adsorbate_charge_e": null
+        }
+      ],
+      "projected_center_overlaps": [
+        {
+          "anchor_pair": [
+            45,
+            46
+          ],
+          "shared_fe": [
+            36,
+            41
+          ],
+          "within_same_molecule": true
+        },
+        {
+          "anchor_pair": [
+            45,
+            49
+          ],
+          "shared_fe": [
+            39
+          ],
+          "within_same_molecule": false
+        },
+        {
+          "anchor_pair": [
+            46,
+            47
+          ],
+          "shared_fe": [
+            38
+          ],
+          "within_same_molecule": true
+        }
+      ],
+      "adsorbate_pair_distances": [
+        {
+          "atoms": [
+            45,
+            46
+          ],
+          "distance_A": 1.41085
+        },
+        {
+          "atoms": [
+            45,
+            47
+          ],
+          "distance_A": 2.575546
+        },
+        {
+          "atoms": [
+            45,
+            48
+          ],
+          "distance_A": 1.099076
+        },
+        {
+          "atoms": [
+            45,
+            49
+          ],
+          "distance_A": 2.987061
+        },
+        {
+          "atoms": [
+            46,
+            47
+          ],
+          "distance_A": 1.291424
+        },
+        {
+          "atoms": [
+            46,
+            48
+          ],
+          "distance_A": 2.189915
+        },
+        {
+          "atoms": [
+            46,
+            49
+          ],
+          "distance_A": 4.218817
+        },
+        {
+          "atoms": [
+            47,
+            48
+          ],
+          "distance_A": 3.03848
+        },
+        {
+          "atoms": [
+            47,
+            49
+          ],
+          "distance_A": 3.901045
+        },
+        {
+          "atoms": [
+            48,
+            49
+          ],
+          "distance_A": 2.900695
+        }
+      ]
+    },
+    "R4.MID": {
+      "structure": {
+        "file_id": "file_fe110_ads_c2ho_h_c2h2o_9737143_CONTCAR_final",
+        "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/intermediate_image02_relax_20260901/CONTCAR",
+        "sha256": "ab7f0a6221073c140675a57f2e73a776c5da2d8bfe0bfc4a5d5b9756f4e790ce"
+      },
+      "fragments": [
+        {
+          "species": "CHCO",
+          "atoms_zero_based": [
+            45,
+            46,
+            47,
+            48
+          ],
+          "geometry_candidates": [
+            {
+              "atom": 45,
+              "element": "C",
+              "cartesian_A": [
+                8.425249,
+                1.425495,
+                16.931723
+              ],
+              "projected_type": "hollow",
+              "center_fe_zero_based": [
+                36,
+                39,
+                41
+              ],
+              "center_fractional_xy": [
+                0.88889,
+                0.222218
+              ],
+              "lateral_offset_A": 0.108245,
+              "off_symmetry": false,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 39,
+                  "distance_A": 2.056485
+                },
+                {
+                  "index": 41,
+                  "distance_A": 2.06483
+                },
+                {
+                  "index": 36,
+                  "distance_A": 2.073529
+                },
+                {
+                  "index": 44,
+                  "distance_A": 2.92002
+                }
+              ]
+            },
+            {
+              "atom": 46,
+              "element": "C",
+              "cartesian_A": [
+                7.308428,
+                0.556894,
+                16.901324
+              ],
+              "projected_type": "hollow",
+              "center_fe_zero_based": [
+                36,
+                38,
+                41
+              ],
+              "center_fractional_xy": [
+                0.77778,
+                0.111103
+              ],
+              "lateral_offset_A": 0.264725,
+              "off_symmetry": false,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 36,
+                  "distance_A": 1.973013
+                },
+                {
+                  "index": 41,
+                  "distance_A": 2.066387
+                },
+                {
+                  "index": 38,
+                  "distance_A": 2.114092
+                },
+                {
+                  "index": 42,
+                  "distance_A": 2.897732
+                }
+              ]
+            },
+            {
+              "atom": 47,
+              "element": "O",
+              "cartesian_A": [
+                6.445878,
+                -0.059395,
+                17.626088
+              ],
+              "projected_type": "long_bridge",
+              "center_fe_zero_based": [
+                36,
+                38
+              ],
+              "center_fractional_xy": [
+                0.833335,
+                0.999994
+              ],
+              "lateral_offset_A": 0.624305,
+              "off_symmetry": true,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 38,
+                  "distance_A": 2.089854
+                },
+                {
+                  "index": 42,
+                  "distance_A": 2.899538
+                },
+                {
+                  "index": 36,
+                  "distance_A": 2.996834
+                },
+                {
+                  "index": 41,
+                  "distance_A": 3.070296
+                }
+              ]
+            }
+          ],
+          "accepted_inventory_site_ids": null,
+          "accepted_multiplicity": null,
+          "accepted_footprint": null,
+          "formal_adsorbate_charge_e": null
+        },
+        {
+          "species": "H",
+          "atoms_zero_based": [
+            49
+          ],
+          "geometry_candidates": [
+            {
+              "atom": 49,
+              "element": "H",
+              "cartesian_A": [
+                4.102256,
+                0.543349,
+                16.499372
+              ],
+              "projected_type": "hollow",
+              "center_fe_zero_based": [
+                37,
+                38,
+                40
+              ],
+              "center_fractional_xy": [
+                0.444444,
+                0.111115
+              ],
+              "lateral_offset_A": 0.184986,
+              "off_symmetry": false,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 37,
+                  "distance_A": 1.715682
+                },
+                {
+                  "index": 40,
+                  "distance_A": 1.776945
+                },
+                {
+                  "index": 38,
+                  "distance_A": 1.821733
+                },
+                {
+                  "index": 44,
+                  "distance_A": 2.71487
+                }
+              ]
+            }
+          ],
+          "accepted_inventory_site_ids": null,
+          "accepted_multiplicity": null,
+          "accepted_footprint": null,
+          "formal_adsorbate_charge_e": null
+        }
+      ],
+      "projected_center_overlaps": [
+        {
+          "anchor_pair": [
+            45,
+            46
+          ],
+          "shared_fe": [
+            36,
+            41
+          ],
+          "within_same_molecule": true
+        },
+        {
+          "anchor_pair": [
+            45,
+            47
+          ],
+          "shared_fe": [
+            36
+          ],
+          "within_same_molecule": true
+        },
+        {
+          "anchor_pair": [
+            46,
+            47
+          ],
+          "shared_fe": [
+            36,
+            38
+          ],
+          "within_same_molecule": true
+        },
+        {
+          "anchor_pair": [
+            46,
+            49
+          ],
+          "shared_fe": [
+            38
+          ],
+          "within_same_molecule": false
+        },
+        {
+          "anchor_pair": [
+            47,
+            49
+          ],
+          "shared_fe": [
+            38
+          ],
+          "within_same_molecule": false
+        }
+      ],
+      "adsorbate_pair_distances": [
+        {
+          "atoms": [
+            45,
+            46
+          ],
+          "distance_A": 1.415161
+        },
+        {
+          "atoms": [
+            45,
+            47
+          ],
+          "distance_A": 2.570009
+        },
+        {
+          "atoms": [
+            45,
+            48
+          ],
+          "distance_A": 1.100368
+        },
+        {
+          "atoms": [
+            45,
+            49
+          ],
+          "distance_A": 4.272334
+        },
+        {
+          "atoms": [
+            46,
+            47
+          ],
+          "distance_A": 1.284167
+        },
+        {
+          "atoms": [
+            46,
+            48
+          ],
+          "distance_A": 2.195068
+        },
+        {
+          "atoms": [
+            46,
+            49
+          ],
+          "distance_A": 3.231298
+        },
+        {
+          "atoms": [
+            47,
+            48
+          ],
+          "distance_A": 3.032761
+        },
+        {
+          "atoms": [
+            47,
+            49
+          ],
+          "distance_A": 2.669336
+        },
+        {
+          "atoms": [
+            48,
+            49
+          ],
+          "distance_A": 4.134714
+        }
+      ]
+    },
+    "R4.FS": {
+      "structure": {
+        "file_id": "file_fe110_ads_c2ho_h_c2h2o_9725471_CONTCAR_final",
+        "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vasp_nonduplicate_relaxations/FS_A_C2H2O_eta3_C1_C2_O_CARE03/CONTCAR",
+        "sha256": "525ebe73dfbbb231b5c1bf37a6bc691a1a0913f403afa3d8ea7c9d0d90296878"
+      },
+      "fragments": [
+        {
+          "species": "C2H2O",
+          "atoms_zero_based": [
+            45,
+            46,
+            47,
+            48,
+            49
+          ],
+          "geometry_candidates": [
+            {
+              "atom": 45,
+              "element": "C",
+              "cartesian_A": [
+                6.951413,
+                0.619612,
+                16.882858
+              ],
+              "projected_type": "hollow",
+              "center_fe_zero_based": [
+                36,
+                38,
+                41
+              ],
+              "center_fractional_xy": [
+                0.77778,
+                0.111103
+              ],
+              "lateral_offset_A": 0.124976,
+              "off_symmetry": false,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 41,
+                  "distance_A": 2.016365
+                },
+                {
+                  "index": 38,
+                  "distance_A": 2.022572
+                },
+                {
+                  "index": 36,
+                  "distance_A": 2.052131
+                },
+                {
+                  "index": 42,
+                  "distance_A": 2.982532
+                }
+              ]
+            },
+            {
+              "atom": 46,
+              "element": "C",
+              "cartesian_A": [
+                5.745148,
+                1.379783,
+                16.965471
+              ],
+              "projected_type": "hollow",
+              "center_fe_zero_based": [
+                38,
+                40,
+                41
+              ],
+              "center_fractional_xy": [
+                0.555557,
+                0.222218
+              ],
+              "lateral_offset_A": 0.102731,
+              "off_symmetry": false,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 38,
+                  "distance_A": 2.066399
+                },
+                {
+                  "index": 40,
+                  "distance_A": 2.080354
+                },
+                {
+                  "index": 41,
+                  "distance_A": 2.086334
+                },
+                {
+                  "index": 43,
+                  "distance_A": 3.034753
+                }
+              ]
+            },
+            {
+              "atom": 47,
+              "element": "O",
+              "cartesian_A": [
+                5.271865,
+                1.70643,
+                18.219821
+              ],
+              "projected_type": "long_bridge",
+              "center_fe_zero_based": [
+                40,
+                41
+              ],
+              "center_fractional_xy": [
+                0.500001,
+                0.333333
+              ],
+              "lateral_offset_A": 0.481165,
+              "off_symmetry": true,
+              "nearest_relaxed_fe": [
+                {
+                  "index": 40,
+                  "distance_A": 2.841652
+                },
+                {
+                  "index": 41,
+                  "distance_A": 3.268869
+                },
+                {
+                  "index": 38,
+                  "distance_A": 3.269525
+                },
+                {
+                  "index": 43,
+                  "distance_A": 3.585856
+                }
+              ]
+            }
+          ],
+          "accepted_inventory_site_ids": null,
+          "accepted_multiplicity": null,
+          "accepted_footprint": null,
+          "formal_adsorbate_charge_e": null
+        }
+      ],
+      "projected_center_overlaps": [
+        {
+          "anchor_pair": [
+            45,
+            46
+          ],
+          "shared_fe": [
+            38,
+            41
+          ],
+          "within_same_molecule": true
+        },
+        {
+          "anchor_pair": [
+            45,
+            47
+          ],
+          "shared_fe": [
+            41
+          ],
+          "within_same_molecule": true
+        },
+        {
+          "anchor_pair": [
+            46,
+            47
+          ],
+          "shared_fe": [
+            40,
+            41
+          ],
+          "within_same_molecule": true
+        }
+      ],
+      "adsorbate_pair_distances": [
+        {
+          "atoms": [
+            45,
+            46
+          ],
+          "distance_A": 1.428201
+        },
+        {
+          "atoms": [
+            45,
+            47
+          ],
+          "distance_A": 2.406142
+        },
+        {
+          "atoms": [
+            45,
+            48
+          ],
+          "distance_A": 1.102034
+        },
+        {
+          "atoms": [
+            45,
+            49
+          ],
+          "distance_A": 3.223728
+        },
+        {
+          "atoms": [
+            46,
+            47
+          ],
+          "distance_A": 1.379887
+        },
+        {
+          "atoms": [
+            46,
+            48
+          ],
+          "distance_A": 2.181432
+        },
+        {
+          "atoms": [
+            46,
+            49
+          ],
+          "distance_A": 1.93389
+        },
+        {
+          "atoms": [
+            47,
+            48
+          ],
+          "distance_A": 2.613339
+        },
+        {
+          "atoms": [
+            47,
+            49
+          ],
+          "distance_A": 0.98121
+        },
+        {
+          "atoms": [
+            48,
+            49
+          ],
+          "distance_A": 3.571083
+        }
+      ],
+      "archived_geometry_review": {
+        "C1": {
+          "class": "hollow",
+          "lateral_offset_A": 0.1250110404940936
+        },
+        "C2": {
+          "class": "hollow",
+          "lateral_offset_A": 0.10271164446317001
+        },
+        "O": {
+          "class": "unknown",
+          "lateral_offset_A": 0.48116390969349143
+        },
+        "H_C1": {
+          "class": "unknown",
+          "lateral_offset_A": 0.4778413806602537
+        },
+        "H_transfer": {
+          "class": "top",
+          "lateral_offset_A": 0.28943489409577383
+        }
+      }
+    }
+  },
+  "per_reaction_conservation": {
+    "R1": {
+      "equation_as_selected": "CO* + * -> C* + O*",
+      "reactant_coefficients": {
+        "CO": 1
+      },
+      "product_coefficients": {
+        "C": 1,
+        "O": 1
+      },
+      "equation_vacancy_symbols_only": {
+        "consumed": 1,
+        "released": 0,
+        "scope": "as written; independent site types and counts unconfirmed"
+      },
+      "reviewed_site_inventory_ids": null,
+      "reviewed_vacancies_consumed_by_inventory": null,
+      "reviewed_vacancies_released_by_inventory": null,
+      "site_residual_by_inventory": null,
+      "charge_residual_e": null,
+      "status": "awaiting_site_and_charge_model"
+    },
+    "R2": {
+      "equation_as_selected": "C* + H* -> CH* + *",
+      "reactant_coefficients": {
+        "C": 1,
+        "H": 1
+      },
+      "product_coefficients": {
+        "CH": 1
+      },
+      "equation_vacancy_symbols_only": {
+        "consumed": 0,
+        "released": 1,
+        "scope": "as written; independent site types and counts unconfirmed"
+      },
+      "reviewed_site_inventory_ids": null,
+      "reviewed_vacancies_consumed_by_inventory": null,
+      "reviewed_vacancies_released_by_inventory": null,
+      "site_residual_by_inventory": null,
+      "charge_residual_e": null,
+      "status": "awaiting_site_and_charge_model"
+    },
+    "R3": {
+      "equation_as_selected": "CH* + CO* -> CHCO*",
+      "reactant_coefficients": {
+        "CH": 1,
+        "CO": 1
+      },
+      "product_coefficients": {
+        "CHCO": 1
+      },
+      "equation_vacancy_symbols_only": {
+        "consumed": 0,
+        "released": 0,
+        "scope": "as written; independent site types and counts unconfirmed"
+      },
+      "reviewed_site_inventory_ids": null,
+      "reviewed_vacancies_consumed_by_inventory": null,
+      "reviewed_vacancies_released_by_inventory": null,
+      "site_residual_by_inventory": null,
+      "charge_residual_e": null,
+      "status": "awaiting_site_and_charge_model"
+    },
+    "R4": {
+      "equation_as_selected": "CHCO* + H* -> C2H2O* + *",
+      "reactant_coefficients": {
+        "CHCO": 1,
+        "H": 1
+      },
+      "product_coefficients": {
+        "C2H2O": 1
+      },
+      "equation_vacancy_symbols_only": {
+        "consumed": 0,
+        "released": 1,
+        "scope": "as written; independent site types and counts unconfirmed"
+      },
+      "reviewed_site_inventory_ids": null,
+      "reviewed_vacancies_consumed_by_inventory": null,
+      "reviewed_vacancies_released_by_inventory": null,
+      "site_residual_by_inventory": null,
+      "charge_residual_e": null,
+      "status": "awaiting_site_and_charge_model"
+    }
+  },
+  "inventory_rule": "For each confirmed physical inventory j, sum reactant molecular coefficients times footprint ij plus confirmed vacancy consumption equals sum product coefficients times footprint ij plus confirmed release. Confirm excluded neighboring ensembles separately if shared Fe makes them mutually exclusive. All residuals remain null until both sides and the inventory basis are specified.",
+  "charge_rule": "Species formal charges and any reservoir/electron convention are unknown in the selected network. A neutral periodic supercell and C/H/O atom balance cannot establish the per-species charge balance. Evidence can confirm neutral-species bookkeeping explicitly where appropriate.",
+  "review_requests": [
+    "Name the surface inventories and specify whether overlapping, neighboring or symmetry-equivalent projected centers are distinct, mutually exclusive, or pooled.",
+    "Choose per-configuration molecular footprints, including the composite CHCO and C2H2O alternatives, the oxygen contact and each shared-Fe exclusion rule. Resolve R1 top CO versus R3 bridge CO.",
+    "Provide vacancy consumption and release separately for each inventory and direction. Confirm genuine zero explicitly; equation asterisks have no inventory ID.",
+    "Provide the charge bookkeeping basis and any reservoir terms. The existing R3 confirmation template, or a scoped site-mapping decision with provenance, can carry the supported parts."
+  ],
+  "independence": "All ten reviewed structures and these researcher decisions are independent of the pending R4 frequency job. No new DFT, frequency or NEB is required to make this model choice; additional evidence may be needed to validate a chosen exclusion rule or a new physical configuration.",
+  "sources": [
+    {
+      "path": "reports/multiphase/phase2_3_1_site_proposal.json",
+      "sha256": "0d6468795bd47ab4691353db35c3457251ea5063e3041aaca9c8132af13a5258"
+    },
+    {
+      "path": "reports/multiphase/phase2_3_1_fe110_site_types.json",
+      "sha256": "f1141ffd24b06cc140c500121299f120ee1d72e4043781035cf5654f8e1b4548"
+    },
+    {
+      "path": "reports/multiphase/phase2_3_1_site_balance.json",
+      "sha256": "3520ef17e26ccdb437cf6e185c0b9fb06b9a26a58edc94ccfbd0d5755e40331e"
+    },
+    {
+      "path": "reports/multiphase/phase3_3_0/network_definition.json",
+      "sha256": "6710082c669eada9a84d7b7b3964f3433d603a22464dc87a9daaf7053dd4801b"
+    },
+    {
+      "path": "reports/multiphase/phase3_3_0/evidence_matrix.json",
+      "sha256": "9696684f2b8d27cbbfdcc68dde9ef2ae21158b615755f3aaf94555278fd46ee0"
+    },
+    {
+      "path": "calculations/true_fe110_clean_20260629/results/job_9557161/CONTCAR",
+      "sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d"
+    },
+    {
+      "path": "scripts/adsorption/build_fe110_adsorption.py",
+      "sha256": "58fa806503de39c8eb4a74e83eb7e6f21f8fd31dbce37b93a372384916affb82"
+    },
+    {
+      "path": "configs/adsmind_lite/site_rules.yaml",
+      "sha256": "6c754578a42f539d332ab35c23e792996d190b90da5408d778ef3e0132305f71"
+    },
+    {
+      "path": "configs/adsmind_lite/analysis_rules.yaml",
+      "sha256": "45bab93237e78f37287f36ec1626b0d38b38fe0c17f913a9062fdc7d65bcceed"
+    },
+    {
+      "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/parsed/03_cfg0_direct_vasp_ecc926d23f24ad0bb400b42297076fb40da689c903504451475bda3306732aa5.json",
+      "sha256": "f15ac5915800fa227ee7bc67c60c51266f7e34b8a1524875cac0f353cfa4b5a8"
+    },
+    {
+      "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/parsed/03_extra2_repair_v1_2aea1569c59e6c86ab1179e976db722be0a55baf77708219c0b8e4bcc9ece541.json",
+      "sha256": "89783add4a58f28da7f933e0c52b07bcaf259d480c195128b7157032d96dadeb"
+    },
+    {
+      "path": "calculations/fe110_c_h_coadsorption_20260817/provenance/termination_and_endpoint_review_20260818.json",
+      "sha256": "d79bc4cf6190307c726bb6c961a49ec622ec1963e8b65ef823e368ac19c81261"
+    },
+    {
+      "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/contract/reaction.yaml",
+      "sha256": "ba5ba361bc959237516947f0d2af1ed16befb98052fd6408ea2d8bd0b17d8773"
+    },
+    {
+      "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/provenance/vasp_nonduplicate_result_review.json",
+      "sha256": "5ca40b88c9d7b031305ad5a752bf6dc30b5e69f7e55e70358317112b7088963a"
+    }
+  ]
+}

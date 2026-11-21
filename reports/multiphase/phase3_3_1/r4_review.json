@@ -1,0 +1,456 @@
+{
+  "segment": "fe110_c2ho_h_migration_ISA9725473_to_INT06_9748648",
+  "endpoint_selection": {
+    "route": "IS-A 9725473 -> INT06 9748648 -> MID 9737143 -> FS-A 9725471",
+    "alternative": "IS-B 9725474 remains a separate lower-energy reference"
+  },
+  "control": {
+    "prior_submission": {
+      "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_dimer9833429_is_a_int06_local_h_fe_20261121/submission_record.json",
+      "sha256": "37be5be236f2233832759e94b27420185a39ab4d8d52256117517e7715396499"
+    },
+    "source_review": {
+      "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/review_dimer9833429_frequency_20261121/final_mode_review.json",
+      "sha256": "341bbae9494dc97624f84842c816a29d8d104a48d2ab585783e6cef642bebdf4"
+    },
+    "residual_decision": {
+      "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/review_dimer9833429_frequency_20261121/dimer_soft_gate_review.json",
+      "sha256": "94cdc11f837baa7099125a937d35f324c0e0b223a55a0112ec80f36d48b86556"
+    },
+    "new_submissions": 0
+  },
+  "endpoint_checks": [
+    {
+      "endpoint": "initial",
+      "calculation_id": "fe110_ads_c2ho_h_c2h2o_9725473",
+      "registry_file": {
+        "file_id": "file_fe110_ads_c2ho_h_c2h2o_9725473_CONTCAR_final",
+        "sha256": "6800e98e36e32c09bc7c2514f52998e641416dca4d3b62a4aa0acc95ad50a2ed",
+        "local_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\vasp_nonduplicate_relaxations\\IS_A_C2HO_H_adjacent_long_bridge\\CONTCAR"
+      },
+      "maximum_ordered_PBC_difference_A": 1.2008964124138703e-11
+    },
+    {
+      "endpoint": "final",
+      "calculation_id": "fe110_h_migration1357_valley06_relax_9748648",
+      "registry_file": {
+        "file_id": "fe110_h_migration1357_valley06_relax_9748648_CONTCAR_final",
+        "sha256": "2b53dedc909c678c2e8f7f1e4fc9643c6f87e78e26c8a818b8d9c8dfa7c73029",
+        "local_path": "C:\\Users\\86177\\Desktop\\work\\calculations\\fe110_c2ho_h_to_c2h2o_ts_20260822\\h_migration1357_valley06_relax_20260909\\completed_review_20260910\\CONTCAR"
+      },
+      "maximum_ordered_PBC_difference_A": 1.1939313544816637e-11
+    }
+  ],
+  "registered_first_segment_TS_validations": [],
+  "first_segment_frequency_handoff": "allow_frequency_handoff",
+  "first_segment_TS_validation_authorized_by_residual_review": false,
+  "source_structure": {
+    "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/CONTCAR",
+    "sha256": "1797b34dbce3c5c9374595dfb3590cdc32f22a240e321f59cde572be3b770b34"
+  },
+  "source_final_mode": {
+    "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_dimer_neb9808511_image05_32r_16pn_20261004/NEWMODECAR",
+    "sha256": "4fc3bd2edf44f90614a23dfba1ded9083e59a0959b93ea53c9f64532929911b3"
+  },
+  "direction": {
+    "all_atom_cosine_to_04_06": 0.9988435373621526,
+    "H50_cosine_to_04_06": 0.9991898256645205,
+    "H50_squared_norm_fraction": 0.96569889577862,
+    "fixed_Fe_max_component": 0.0,
+    "arriving_Fe38_distance_at_DIMER_A": 3.2865506781437492
+  },
+  "parent_job": "9808511",
+  "parent_neb_profile": [
+    {
+      "image": "00",
+      "structure": {
+        "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930/completed_review_20261002/00/POSCAR",
+        "sha256": "5d86ef906c002415a0e03030936f1cc32f2ca0782c0d5d9180f4ea42c01cf178"
+      },
+      "nearest_Fe_to_H50": [
+        {
+          "Fe_index_zero_based": 43,
+          "distance_A": 1.74667
+        },
+        {
+          "Fe_index_zero_based": 36,
+          "distance_A": 1.76303
+        },
+        {
+          "Fe_index_zero_based": 42,
+          "distance_A": 1.81355
+        }
+      ],
+      "H50_Fe38_shortest_A": 3.313119570528985,
+      "reported_TOTEN_eV": -388.48862614,
+      "skeleton_A": {
+        "CC": 1.416146433535634,
+        "CO": 1.2882029601662845,
+        "original_CH": 1.0998614787279508,
+        "OH": 3.079727940222681
+      }
+    },
+    {
+      "image": "01",
+      "structure": {
+        "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930/completed_review_20261002/01/CONTCAR",
+        "sha256": "5432d0b822491a595d2fbc826c6c5a4a1246fbb8443b349acdb7a6560dc176b3"
+      },
+      "nearest_Fe_to_H50": [
+        {
+          "Fe_index_zero_based": 43,
+          "distance_A": 1.72791
+        },
+        {
+          "Fe_index_zero_based": 42,
+          "distance_A": 1.75691
+        },
+        {
+          "Fe_index_zero_based": 36,
+          "distance_A": 2.00154
+        }
+      ],
+      "H50_Fe38_shortest_A": 3.501344328615214,
+      "reported_TOTEN_eV": -388.45492835,
+      "skeleton_A": {
+        "CC": 1.4138394183115273,
+        "CO": 1.2887197446181795,
+        "original_CH": 1.1004481775501698,
+        "OH": 3.262287874969793
+      }
+    },
+    {
+      "image": "02",
+      "structure": {
+        "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930/completed_review_20261002/02/CONTCAR",
+        "sha256": "302fd48be5429eef2c98cb77e70b3723c4fe347c6355a7d847da7fc2c5e58592"
+      },
+      "nearest_Fe_to_H50": [
+        {
+          "Fe_index_zero_based": 43,
+          "distance_A": 1.73761
+        },
+        {
+          "Fe_index_zero_based": 42,
+          "distance_A": 1.7532
+        },
+        {
+          "Fe_index_zero_based": 40,
+          "distance_A": 1.96271
+        }
+      ],
+      "H50_Fe38_shortest_A": 3.723199187529702,
+      "reported_TOTEN_eV": -388.47719961,
+      "skeleton_A": {
+        "CC": 1.4129807190631587,
+        "CO": 1.2896070508328539,
+        "original_CH": 1.1002923456127813,
+        "OH": 3.4673888049196693
+      }
+    },
+    {
+      "image": "03",
+      "structure": {
+        "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930/completed_review_20261002/03/CONTCAR",
+        "sha256": "8f140d37ec615e4d7a03ce12c9a51d2a66a6e149a3d095a6f70f4f21a60e16e9"
+      },
+      "nearest_Fe_to_H50": [
+        {
+          "Fe_index_zero_based": 40,
+          "distance_A": 1.76197
+        },
+        {
+          "Fe_index_zero_based": 42,
+          "distance_A": 1.78595
+        },
+        {
+          "Fe_index_zero_based": 43,
+          "distance_A": 1.80034
+        }
+      ],
+      "H50_Fe38_shortest_A": 3.860776799224826,
+      "reported_TOTEN_eV": -388.51814441,
+      "skeleton_A": {
+        "CC": 1.4135672956894105,
+        "CO": 1.2908443577891118,
+        "original_CH": 1.1003914408189615,
+        "OH": 3.6259386817540222
+      }
+    },
+    {
+      "image": "04",
+      "structure": {
+        "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930/completed_review_20261002/04/CONTCAR",
+        "sha256": "07dd57170700d8434324962d6457e63dffb3c7e4177f50493c718e7e5787ff9e"
+      },
+      "nearest_Fe_to_H50": [
+        {
+          "Fe_index_zero_based": 40,
+          "distance_A": 1.70197
+        },
+        {
+          "Fe_index_zero_based": 42,
+          "distance_A": 1.72401
+        },
+        {
+          "Fe_index_zero_based": 43,
+          "distance_A": 2.10564
+        }
+      ],
+      "H50_Fe38_shortest_A": 3.6280449584457295,
+      "reported_TOTEN_eV": -388.42878062,
+      "skeleton_A": {
+        "CC": 1.4136203493549633,
+        "CO": 1.2907306273729109,
+        "original_CH": 1.1002023632928493,
+        "OH": 3.588989355754437
+      }
+    },
+    {
+      "image": "05",
+      "structure": {
+        "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930/completed_review_20261002/05/CONTCAR",
+        "sha256": "16505620574318656d15c7e75f60d7d4b9d88f08516cc184f3124cc278fa69cd"
+      },
+      "nearest_Fe_to_H50": [
+        {
+          "Fe_index_zero_based": 40,
+          "distance_A": 1.67928
+        },
+        {
+          "Fe_index_zero_based": 42,
+          "distance_A": 1.69429
+        },
+        {
+          "Fe_index_zero_based": 43,
+          "distance_A": 2.49833
+        }
+      ],
+      "H50_Fe38_shortest_A": 3.3763664554566826,
+      "reported_TOTEN_eV": -388.34695654,
+      "skeleton_A": {
+        "CC": 1.4131546604226783,
+        "CO": 1.2906142488919436,
+        "original_CH": 1.1001902731837117,
+        "OH": 6.586237001122412
+      }
+    },
+    {
+      "image": "06",
+      "structure": {
+        "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930/completed_review_20261002/06/CONTCAR",
+        "sha256": "d1a401840696f839c4eb7a8699c0e20ae407536e5002480d62f036b8d2d3fc1d"
+      },
+      "nearest_Fe_to_H50": [
+        {
+          "Fe_index_zero_based": 40,
+          "distance_A": 1.68632
+        },
+        {
+          "Fe_index_zero_based": 42,
+          "distance_A": 1.69901
+        },
+        {
+          "Fe_index_zero_based": 39,
+          "distance_A": 2.36784
+        }
+      ],
+      "H50_Fe38_shortest_A": 3.1077265661580884,
+      "reported_TOTEN_eV": -388.36592584,
+      "skeleton_A": {
+        "CC": 1.412966602832061,
+        "CO": 1.2903108686613267,
+        "original_CH": 1.0997229719156698,
+        "OH": 6.21048686503207
+      }
+    },
+    {
+      "image": "07",
+      "structure": {
+        "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930/completed_review_20261002/07/CONTCAR",
+        "sha256": "07d787d422a37f5f8830b948f3f2fe20e42306c14a25cbc3ec5168b8f980fc4d"
+      },
+      "nearest_Fe_to_H50": [
+        {
+          "Fe_index_zero_based": 40,
+          "distance_A": 1.73296
+        },
+        {
+          "Fe_index_zero_based": 42,
+          "distance_A": 1.73968
+        },
+        {
+          "Fe_index_zero_based": 39,
+          "distance_A": 1.95906
+        }
+      ],
+      "H50_Fe38_shortest_A": 2.8404572838256015,
+      "reported_TOTEN_eV": -388.4797265,
+      "skeleton_A": {
+        "CC": 1.4123246846000788,
+        "CO": 1.2906419260857056,
+        "original_CH": 1.099209717342223,
+        "OH": 5.852709288352033
+      }
+    },
+    {
+      "image": "08",
+      "structure": {
+        "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930/completed_review_20261002/08/CONTCAR",
+        "sha256": "b42afd5407804bc5cbf41129becd0aba4f1ea559cbd5206ac512e8cc58dc143f"
+      },
+      "nearest_Fe_to_H50": [
+        {
+          "Fe_index_zero_based": 40,
+          "distance_A": 1.7531
+        },
+        {
+          "Fe_index_zero_based": 39,
+          "distance_A": 1.7619
+        },
+        {
+          "Fe_index_zero_based": 42,
+          "distance_A": 1.86424
+        }
+      ],
+      "H50_Fe38_shortest_A": 2.527475466806068,
+      "reported_TOTEN_eV": -388.51218163,
+      "skeleton_A": {
+        "CC": 1.4125394356435894,
+        "CO": 1.290304936285794,
+        "original_CH": 1.0987033639501025,
+        "OH": 5.608453473302429
+      }
+    },
+    {
+      "image": "09",
+      "structure": {
+        "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930/completed_review_20261002/09/CONTCAR",
+        "sha256": "89509c1eba7047d274429b0055adc003436dade6384a6866556f8a51d7553242"
+      },
+      "nearest_Fe_to_H50": [
+        {
+          "Fe_index_zero_based": 40,
+          "distance_A": 1.72997
+        },
+        {
+          "Fe_index_zero_based": 39,
+          "distance_A": 1.74883
+        },
+        {
+          "Fe_index_zero_based": 37,
+          "distance_A": 2.10636
+        }
+      ],
+      "H50_Fe38_shortest_A": 2.1063572475822556,
+      "reported_TOTEN_eV": -388.47221093,
+      "skeleton_A": {
+        "CC": 1.4118536804804032,
+        "CO": 1.290240227610122,
+        "original_CH": 1.0987976792648961,
+        "OH": 5.471413864165092
+      }
+    },
+    {
+      "image": "10",
+      "structure": {
+        "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930/completed_review_20261002/10/POSCAR",
+        "sha256": "b3db94166230f5c3888d70011d93f6d4b2ba72c1b2374f9686802b2ffd62fdff"
+      },
+      "nearest_Fe_to_H50": [
+        {
+          "Fe_index_zero_based": 40,
+          "distance_A": 1.75698
+        },
+        {
+          "Fe_index_zero_based": 39,
+          "distance_A": 1.78473
+        },
+        {
+          "Fe_index_zero_based": 37,
+          "distance_A": 1.80677
+        }
+      ],
+      "H50_Fe38_shortest_A": 1.8067732026151755,
+      "reported_TOTEN_eV": -388.50564344,
+      "skeleton_A": {
+        "CC": 1.4108502248310717,
+        "CO": 1.2914238434181855,
+        "original_CH": 1.0990756067577312,
+        "OH": 5.349513988323892
+      }
+    }
+  ],
+  "parent_central_strict_local_maxima": [
+    1,
+    5,
+    9
+  ],
+  "chemistry_source": {
+    "path": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_is_a_int06_gpu1802_neb_sbq123_108r_16pn_20260930/completed_review_20261002/parent_chemical_evidence.json",
+    "sha256": "9497bdccb5d97cc9939015dd1581dec24f747b8becbb725c16b6102f421831a2"
+  },
+  "connectivity": {
+    "geometric_evidence": "Ordered structure and atom map bind the parent endpoints. Local tangent and bridge coordination support H50 migration; parent has more than one peak.",
+    "forward_downhill_endpoint_confirmation": null,
+    "reverse_downhill_endpoint_confirmation": null,
+    "status": "No bound bidirectional downhill evidence located for this saddle. Optional diagnostic under DIMER protocol; local direction alone does not certify both basins.",
+    "higher_scope": "Testing H50 migration at peak05 addresses only the first segment, not the onward O-H formation or an aggregate R4 barrier."
+  },
+  "other_R4_segments": {
+    "INT06_to_MID": {
+      "grade": "A",
+      "barrier_set": "fe110_int06_mid_sigma0p20_review_20261118",
+      "energy_eV": {
+        "forward_barrier_ev": 0.1673234099999945,
+        "reverse_barrier_ev": 0.0996418500000118,
+        "reaction_energy_ev": 0.06768155999998271
+      }
+    },
+    "MID_to_FS_A": {
+      "grade": "A",
+      "barrier_set": "fe110_c2ho_oh_mid9737143_ts9746548_fs9725471_sigma0p20",
+      "energy_eV": {
+        "forward_barrier_ev": 1.2858271800000125,
+        "reverse_barrier_ev": 0.8948170500000288,
+        "reaction_energy_ev": 0.39101012999998375
+      }
+    }
+  },
+  "scheduler_checkpoint": {
+    "schema_version": 1,
+    "document_kind": "scheduler_job_evidence",
+    "stage": "vfa",
+    "scheduler": "LSF",
+    "server_alias": "sunboquan-codex",
+    "job_id": "13422",
+    "status": "RUN",
+    "checked_at": "2026-11-21T03:44:09Z",
+    "source_command": "ssh sunboquan-codex bjobs -a 13422",
+    "query": {
+      "argv": [
+        "ssh",
+        "sunboquan-codex",
+        "bjobs",
+        "-a",
+        "13422"
+      ],
+      "returncode": 0,
+      "stdout": "JOBID   USER    STAT  QUEUE      FROM_HOST   EXEC_HOST   JOB_NAME   SUBMIT_TIME\n13422   nsgkn_c RUN   Gkn_normal ycn03       32*gknew052 script.lsf Nov 21 11:39\n",
+      "stderr": "",
+      "stdout_sha256": "72a5cbc729f335d18e5a3e81196b642cb76296da31fbfcc340470cd473898391"
+    }
+  },
+  "remote_output_checkpoint": {
+    "source_directory": "~/sbq/Fe110/ts/c2ho_h_to_c2h2o_20260904/vfa_dimer9833429_is_a_int06_local_h_fe_20261121",
+    "observed_utc": "2026-11-21T03:44:10.164014+00:00",
+    "output": "DAV:   4    -0.437693521395E+03   -0.15653E+02   -0.15207E+02 18656   0.305E+01\nDAV:   5    -0.438077377972E+03   -0.38386E+00   -0.38321E+00 18496   0.426E+00    0.759E+01\nRMM:   6    -0.515509656017E+03   -0.77432E+02   -0.59484E+02 14987   0.816E+01    0.146E+02\nimaginary_records=0 mode_lines=0 timing_footer=0",
+    "interpretation": "An in-progress file snapshot is not a completed VFA. No frequencies or thermochemistry assigned."
+  },
+  "scientific_result": {
+    "first_segment_grade": null,
+    "frequency_cm_inverse": null,
+    "permitted_next_review": "When the current VFA completes, validate spectrum completeness, signed principal H50 migration mode and geometry. Distinct explicit authority required for TS acceptance when the residual decision is frequency-only.",
+    "aggregate_R4_barrier_eV": null
+  }
+}
