@@ -65,21 +65,41 @@ V2 commands each accept their own document format. The source-term schema
 describes the nested `source_terms` block of a V2 document.
 
 One document covers one operating point and one native normalization basis.
+`basis_kind` can distinguish reference_site, reference_site_pair, lattice_site,
+simulation_cell, surface_area, catalyst_mass, reactor_volume, other or unresolved.
+For the three site-based kinds, supply the distinct `inventory_ids` involved.
+A pair can use two occurrences of one inventory or one occurrence from each
+of two inventories. These identifiers do not specify a site density or an
+embedding count. When the kind is absent in an earlier V2 record or explicitly
+unresolved, preserve the original label and leave its physical conversion open.
 Record the original denominator value and unit, reference ID, definition,
 extent unit (event or mol) and time unit. For example, a rate per 100 lattice
 sites retains the 100. All reaction and source rows inherit that same basis.
 Use separate documents for incompatible denominators. An area, mass or volume
 conversion requires separate normalization evidence.
 
-The dataset and network versions are content identities. Each reaction binds
+The dataset and network versions identify the upstream kinetic parameters and network. Each reaction binds
 its parameter set within that dataset. The dataset, network and native output
 each have a source locator and file SHA-256. A file digest can differ from the
 canonical JSON version digest. Validation checks the declarations and
 arithmetic offline. Verification of the referenced bytes, scientific review
 and execution authorization remain with their respective owners.
 
-Supply nonnegative forward and reverse **reaction progress rates**, including
-an explicit zero where known. Net progress equals forward minus reverse.
+To identify a rate output independently of its parameter dataset, supply
+`output_binding` with a project-scoped `dataset_id`, `run_id` and nonempty
+`native_inputs` (unique paths with SHA-256). Earlier records without this block
+remain readable with unknown output/run identity. The parameter dataset hash
+alone cannot distinguish runs. The nested sources inherit the output binding,
+reaction set, numerator convention, time unit and denominator of their parent.
+
+`forward` and `reverse` carry event fluxes. A number is a reported value, including
+a known zero. Use JSON null for an unavailable flux. Use `"not_applicable"`
+only for a direction excluded by the bound reaction definition. An excluded
+direction contributes nothing to net progress. Where both contributions are
+known, net equals forward minus reverse. If a directional flux is unavailable,
+use null for net unless a separate numerical net observation has hash-bound
+`net_evidence`. That observation must respect any known directional bound.
+A rate coefficient has its own rate-law unit in the parameter evidence.
 The reaction rows project the existing reactant, product and vacancy
 stoichiometry. Use distinct site IDs for independent inventories. Species
 and parameter definitions remain in their bound artifacts.
@@ -98,7 +118,9 @@ basis. The validator checks every reported source against this projection.
   maps denote a known absence of vacancy exchange on that side.
 - Net and source checks use relative tolerance 1e-12 and no absolute floor.
   Supply rates at consistent precision. This tolerance applies to serialized
-  arithmetic.
+  arithmetic. A missing net makes precisely the source totals with a nonzero
+  coefficient for that reaction unavailable (null). Spectators retain a known
+  zero contribution even when event counts are unavailable.
 
 Temperature and pressure use K and Pa. Partial pressures may be a declared
 subset bounded by total pressure, a known empty list, or null when unspecified.

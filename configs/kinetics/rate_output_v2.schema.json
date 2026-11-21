@@ -2,6 +2,12 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://schemas.sbq123.invalid/multiphase/2.0.0/rate_output_v2.schema.json",
   "title": "Kinetic rate output 2.0.0",
+  "$defs": {
+    "directional_flux": {
+      "description": "Native event flux. Null means unavailable. not_applicable denotes a direction excluded by the bound reaction model.",
+      "anyOf": [{"type": "number", "minimum": 0}, {"type": "null"}, {"const": "not_applicable"}]
+    }
+  },
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -23,6 +29,16 @@
     "format": {"const": "kinetic-rate-output/2"},
     "schema_version": {"const": "2.0.0"},
     "dataset_version": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact/properties/sha256"},
+    "output_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dataset_id", "run_id", "native_inputs"],
+      "properties": {
+        "dataset_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+        "run_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+        "native_inputs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"}}
+      }
+    },
     "project_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
     "network_version": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact/properties/sha256"},
     "engine": {
@@ -92,6 +108,11 @@
         "definition"
       ],
       "properties": {
+        "basis_kind": {
+          "enum": ["reference_site", "reference_site_pair", "lattice_site", "simulation_cell",
+                   "surface_area", "catalyst_mass", "reactor_volume", "other", "unresolved"]
+        },
+        "inventory_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"}},
         "extent_unit": {
           "enum": [
             "event",
@@ -106,7 +127,18 @@
         "denominator_unit": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"},
         "reference_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
         "definition": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"}
-      }
+      },
+      "dependentRequired": {"inventory_ids": ["basis_kind"]},
+      "allOf": [
+        {
+          "if": {"required": ["basis_kind"], "properties": {"basis_kind": {"enum": ["reference_site", "reference_site_pair", "lattice_site"]}}},
+          "then": {"required": ["inventory_ids"]}
+        },
+        {
+          "if": {"required": ["basis_kind"], "properties": {"basis_kind": {"const": "reference_site_pair"}}},
+          "then": {"properties": {"inventory_ids": {"maxItems": 2}}}
+        }
+      ]
     },
     "reaction_rates": {
       "type": "array",
@@ -132,15 +164,10 @@
           "products": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/reaction.schema.json#/properties/products"},
           "sites_consumed": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/sites"},
           "sites_released": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/sites"},
-          "forward": {
-            "type": "number",
-            "minimum": 0
-          },
-          "reverse": {
-            "type": "number",
-            "minimum": 0
-          },
-          "net": {"type": "number"}
+          "forward": {"$ref": "#/$defs/directional_flux"},
+          "reverse": {"$ref": "#/$defs/directional_flux"},
+          "net": {"type": ["number", "null"]},
+          "net_evidence": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"}
         }
       }
     },

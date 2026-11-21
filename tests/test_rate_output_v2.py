@@ -166,3 +166,135 @@ def test_both_schema_resources_and_standalone_fragment(output):
         Draft202012Validator.check_schema(schema)
     with pytest.raises(ValueError):
         validate_rate_output_v2(output["source_terms"])
+
+
+def test_missing_flux_only_invalidates_nonzero_dependencies(output):
+    row, transfer = output["reaction_rates"]
+    row.update(reverse=None, net=None)
+    row["reactants"]["spectator"] = row["products"]["spectator"] = 1
+    row["sites_consumed"]["spectator-site"] = row["sites_released"]["spectator-site"] = 1
+    sources = generate_source_terms([row, transfer])
+    assert {s["species_id"]: s["net_production_rate"] for s in sources["species"]} == {
+        "H2-g": None, "H-alpha": None, "H-beta": -1, "spectator": 0,
+    }
+    assert {s["site_id"]: s["net_vacancy_rate"] for s in sources["site_inventories"]} == {
+        "alpha": None, "beta": 1, "spectator-site": 0,
+    }
+    output["source_terms"] = sources
+    validate_rate_output_v2(output)
+    for group, key in (("species", "net_production_rate"), ("site_inventories", "net_vacancy_rate")):
+        source = next(s for s in sources[group] if s[key] is None)
+        source[key] = 0
+        with pytest.raises(ValueError, match="inconsistent"):
+            validate_rate_output_v2(output)
+        source[key] = None
+
+
+@pytest.mark.parametrize("forward,reverse,net", [
+    (3, "not_applicable", 3), ("not_applicable", 4, -4), (0, 0, 0),
+    (None, None, None), (None, "not_applicable", None), ("not_applicable", None, None),
+])
+def test_unavailable_excluded_and_zero_direction(output, forward, reverse, net):
+    output["reaction_rates"][0].update(forward=forward, reverse=reverse, net=net)
+    output["source_terms"] = generate_source_terms(output["reaction_rates"])
+    validate_rate_output_v2(output)
+
+
+@pytest.mark.parametrize("forward,reverse,net", [(3, None, -1), (None, 2, 0), (None, None, 4)])
+def test_independently_observed_net_requires_provenance(output, forward, reverse, net):
+    row = output["reaction_rates"][0]
+    row.update(forward=forward, reverse=reverse, net=net)
+    output["source_terms"] = generate_source_terms(output["reaction_rates"])
+    with pytest.raises(ValueError, match="independent net_evidence"):
+        validate_rate_output_v2(output)
+    row["net_evidence"] = {"path": "synthetic/net-count.json", "sha256": "2" * 64}
+    validate_rate_output_v2(output)
+    del row["net_evidence"]["sha256"]
+    with pytest.raises(ValueError, match="sha256"):
+        validate_rate_output_v2(output)
+
+
+@pytest.mark.parametrize("forward,reverse,net", [
+    ("not_applicable", "not_applicable", 0), (3, None, 4), (None, 2, -3), (None, None, None),
+    ("not_applicable", None, 1), (None, "not_applicable", -1),
+])
+def test_net_evidence_cannot_override_direction_constraints(output, forward, reverse, net):
+    output["reaction_rates"][0].update(forward=forward, reverse=reverse, net=net,
+                                       net_evidence=output["provenance"]["native_output"])
+    output["source_terms"] = generate_source_terms(output["reaction_rates"])
+    with pytest.raises(ValueError):
+        validate_rate_output_v2(output)
+
+
+def test_one_molecule_can_exchange_two_independent_vacancies(output):
+    row = output["reaction_rates"][0]
+    row.update(reactants={"A-g": 1}, products={"A-interface": 1},
+               sites_consumed={"surface-left": 1, "interface-right": 1}, sites_released={})
+    output["reaction_rates"] = [row]
+    output["source_terms"] = generate_source_terms([row])
+    assert output["source_terms"] == {
+        "species": [{"species_id": "A-g", "net_production_rate": -2},
+                    {"species_id": "A-interface", "net_production_rate": 2}],
+        "site_inventories": [{"site_id": "interface-right", "net_vacancy_rate": -2},
+                             {"site_id": "surface-left", "net_vacancy_rate": -2}],
+    }
+    validate_rate_output_v2(output)
+
+
+@pytest.mark.parametrize("kind,ids", [
+    ("reference_site", ["alpha"]), ("reference_site_pair", ["alpha", "beta"]),
+    ("reference_site_pair", ["alpha"]), ("lattice_site", ["alpha", "beta"]),
+    ("simulation_cell", None), ("surface_area", None), ("catalyst_mass", None),
+    ("reactor_volume", None), ("other", None), ("unresolved", None),
+])
+def test_native_basis_never_converts_rates(output, kind, ids):
+    basis = output["native_normalization"]
+    basis.update(basis_kind=kind, denominator_value=100, denominator_unit="native unit",
+                 reference_id="native-reference", definition="Original reported denominator")
+    if ids:
+        basis["inventory_ids"] = ids
+    before = deepcopy(output)
+    validate_rate_output_v2(output)
+    assert before == output
+
+
+@pytest.mark.parametrize("fields", [
+    {"basis_kind": "reference_site_pair"}, {"basis_kind": "reference_site"},
+    {"basis_kind": "lattice_site", "inventory_ids": []}, {"inventory_ids": ["alpha"]},
+    {"basis_kind": "reference_site_pair", "inventory_ids": ["alpha", "alpha"]},
+    {"basis_kind": "reference_site_pair", "inventory_ids": ["alpha", "beta", "gamma"]},
+    {"basis_kind": "mystery"},
+])
+def test_typed_site_denominator_requires_inventory_identity(output, fields):
+    output["native_normalization"].update(fields)
+    with pytest.raises(ValueError):
+        validate_rate_output_v2(output)
+
+
+def test_distinct_output_and_input_versions_and_hash_bound_run(output):
+    binding = {"dataset_id": "rates-001", "run_id": "run-001", "native_inputs": [
+        {"path": "native/model.input", "sha256": "1" * 64}, {"path": "native/state.input", "sha256": "2" * 64},
+    ]}
+    output["output_binding"] = binding
+    validate_rate_output_v2(output)
+    second = deepcopy(output)
+    second["output_binding"].update(dataset_id="rates-002", run_id="run-002")
+    validate_rate_output_v2(second)
+    assert second["dataset_version"] == output["dataset_version"]
+    for key in ("dataset_id", "run_id", "native_inputs"):
+        output["output_binding"] = {k: v for k, v in binding.items() if k != key}
+        with pytest.raises(ValueError, match=key):
+            validate_rate_output_v2(output)
+    output["output_binding"] = binding
+    binding["native_inputs"][1]["path"] = "native/model.input"
+    with pytest.raises(ValueError, match="Duplicate path"):
+        validate_rate_output_v2(output)
+    for bad in ([], [{"path": "native/model.input"}], [{"path": "a", "sha256": "bad"}],
+                [{"path": "a", "sha256": "1" * 64, "alias": "b"}]):
+        binding["native_inputs"] = bad
+        with pytest.raises(ValueError):
+            validate_rate_output_v2(output)
+    binding["native_inputs"] = [output["provenance"]["native_output"]]
+    binding["unrecognized"] = 0
+    with pytest.raises(ValueError, match="unrecognized"):
+        validate_rate_output_v2(output)

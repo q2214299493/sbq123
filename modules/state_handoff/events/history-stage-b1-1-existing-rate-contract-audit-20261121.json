@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "event_id": "history-stage-b1-1-existing-rate-contract-audit-20261121",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-stage-b1-1-existing-rate-contract-audit-20261121",
+    "module": "kinetic_data"
+  },
+  "occurred_at": "2026-11-21T14:02:49.780950+00:00",
+  "recorded_at": "2026-11-21T14:02:49.780950+00:00",
+  "summary": "Record the existing B.1.1 rate contract audit and its offline hardening regressions.",
+  "payload": {
+    "markdown": "- Stage B.1.1 audit hardened the V2 native denominator, unknown and excluded fluxes, local propagation to signed sources and optional output/run/input bindings. Both Windows trees passed 268 focused tests and one archived Zacros parser test. Eight live Zacros cases were deselected. The synthetic Ni/Cu pair and mean-per-site interpretation is evidence-bound in reports/multiphase/stage_b1_1_audit/reference_site.md. Scientific qualification and execution gates remain with their owners."
+  },
+  "evidence": [
+    {
+      "locator": "reports/multiphase/stage_b1_1_audit/audit.md",
+      "authority": "repository_document",
+      "sha256": "216acac7ed4586adf1215c0390c0fde250589645c4a69691d74516714746eda5",
+      "observed_at": "2026-11-21T14:02:49.780950+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b1_1_audit/reference_site.md",
+      "authority": "repository_document",
+      "sha256": "481c196c3a57ea9fb2af8f3d70bcd22a7744c9dfa41106fa6c35c5a2a0bbaaee",
+      "observed_at": "2026-11-21T14:02:49.780950+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

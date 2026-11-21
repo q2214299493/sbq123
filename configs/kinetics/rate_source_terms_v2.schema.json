@@ -21,7 +21,7 @@
         ],
         "properties": {
           "species_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
-          "net_production_rate": {"type": "number"}
+          "net_production_rate": {"type": ["number", "null"]}
         }
       }
     },
@@ -37,7 +37,7 @@
         ],
         "properties": {
           "site_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
-          "net_vacancy_rate": {"type": "number"}
+          "net_vacancy_rate": {"type": ["number", "null"]}
         }
       }
     }

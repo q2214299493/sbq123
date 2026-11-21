@@ -35,6 +35,10 @@ def _sum(values):
     return total
 
 
+def _source_total(contributions):
+    return None if None in contributions else _sum(contributions)
+
+
 def generate_source_terms(reaction_rates):
     """Project schema-conforming progress rates onto species and vacant site inventories."""
     species = defaultdict(list)
@@ -44,11 +48,13 @@ def generate_source_terms(reaction_rates):
                                    (row["sites_consumed"], row["sites_released"], vacancies)):
             for identity in left.keys() | right.keys():
                 change = right.get(identity, 0) - left.get(identity, 0)
-                terms[identity].append(change * row["net"])
+                contributions = terms[identity]
+                if change:
+                    contributions.append(None if row["net"] is None else change * row["net"])
     return {
-        "species": [{"species_id": sid, "net_production_rate": _sum(species[sid])}
+        "species": [{"species_id": sid, "net_production_rate": _source_total(species[sid])}
                     for sid in sorted(species)],
-        "site_inventories": [{"site_id": site, "net_vacancy_rate": _sum(vacancies[site])}
+        "site_inventories": [{"site_id": site, "net_vacancy_rate": _source_total(vacancies[site])}
                              for site in sorted(vacancies)],
     }
 
@@ -62,7 +68,31 @@ def _index(rows, key):
 
 def _matches(value, expected):
     # Relative serialization tolerance only; preserve the distinction between zero and a small signal.
+    if value is None or expected is None:
+        return value is expected
     return math.isclose(value, expected, rel_tol=1e-12, abs_tol=0.0)
+
+
+def _check_progress(row):
+    # An excluded direction has no contribution. An unobserved direction has no known value.
+    forward, reverse = (row[key] for key in ("forward", "reverse"))
+    if forward == reverse == "not_applicable":
+        raise ValueError("At least one reaction direction must be applicable")
+    forward = 0 if forward == "not_applicable" else forward
+    reverse = 0 if reverse == "not_applicable" else reverse
+    net = row["net"]
+    if forward is not None and reverse is not None:
+        if net is None or not _matches(net, forward - reverse):
+            raise ValueError(f"{row['reaction_id']}: net must equal forward minus reverse")
+    elif net is not None:
+        if "net_evidence" not in row:
+            raise ValueError("A known net with unavailable directional flux requires independent net_evidence")
+        if forward is not None and net > forward and not _matches(net, forward):
+            raise ValueError("Independent net exceeds the known forward flux")
+        if reverse is not None and net < -reverse and not _matches(net, -reverse):
+            raise ValueError("Independent net contradicts the known reverse flux")
+    if net is None and "net_evidence" in row:
+        raise ValueError("net_evidence must bind a numerical net")
 
 
 def validate_rate_output_v2(payload):
@@ -71,6 +101,9 @@ def validate_rate_output_v2(payload):
     if error:
         raise ValueError(f"{error.json_path}: {error.message}")
     _check_finite(payload)
+
+    if "output_binding" in payload:
+        _index(payload["output_binding"]["native_inputs"], "path")
 
     conditions = payload["conditions"]
     partials = conditions["partial_pressures"]
@@ -89,8 +122,7 @@ def validate_rate_output_v2(payload):
     _index(rates, "reaction_id")
     _index(rates, "parameter_set_id")
     for row in rates:
-        if not _matches(row["net"], row["forward"] - row["reverse"]):
-            raise ValueError(f"{row['reaction_id']}: net must equal forward minus reverse")
+        _check_progress(row)
     expected = generate_source_terms(rates)
     for group, key, field in (("species", "species_id", "net_production_rate"),
                               ("site_inventories", "site_id", "net_vacancy_rate")):
