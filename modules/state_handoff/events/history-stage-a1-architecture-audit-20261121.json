@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "event_id": "history-stage-a1-architecture-audit-20261121",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-stage-a1-architecture-audit-20261121",
+    "module": "kinetic_data"
+  },
+  "occurred_at": "2026-11-21T04:15:01.457544+00:00",
+  "recorded_at": "2026-11-21T04:15:01.457544+00:00",
+  "summary": "Record Stage A.1 multiphase architecture audit and proposed implementation sequence for review.",
+  "payload": {
+    "markdown": "- Stage A.1 audited two distinct source trees. On each tree 215 domain tests and four site-boundary cases passed, and all five known architecture debts reproduced. Four static import cycles and a missing cross-scale rate contract remain. No scientific executions or Stage A.2 changes. See reports/multiphase/stage_a1/completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "reports/multiphase/stage_a1/architecture_map.md",
+      "authority": "repository_document",
+      "sha256": "549912dd7b6f9d1e92a235595d0b4a0fe684dac3ec0d3485e1c3372269f2eb7c",
+      "observed_at": "2026-11-21T04:15:01.457544+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_a1/benchmark_proposal.md",
+      "authority": "repository_document",
+      "sha256": "3118284c5b67a0012e0d2fbd02dbe30a0216df28576d90eddba60cb064d2fa7f",
+      "observed_at": "2026-11-21T04:15:01.457544+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_a1/circular_dependencies.md",
+      "authority": "repository_document",
+      "sha256": "f1231e63d265c8beed672132bc4584c6e83dcbfee8dda85d722e18fb2f5b3a69",
+      "observed_at": "2026-11-21T04:15:01.457544+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_a1/completion.md",
+      "authority": "repository_document",
+      "sha256": "ebafc1c48b1c4e79a5160fdf98e9b5880cd6f57123d219f0b68b05890d6034fe",
+      "observed_at": "2026-11-21T04:15:01.457544+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_a1/cross_scale_gaps.md",
+      "authority": "repository_document",
+      "sha256": "4d48b7118ab9c424de6cab0cf55c45205d7c4c3344a220b3e06e2c7862f76a7f",
+      "observed_at": "2026-11-21T04:15:01.457544+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_a1/debt_test_evidence.json",
+      "authority": "repository_document",
+      "sha256": "cc07c777511fc8cc7a73c3696b27a13d5731770e55277d843b7f9515034a772f",
+      "observed_at": "2026-11-21T04:15:01.457544+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_a1/dependency_graph.json",
+      "authority": "repository_document",
+      "sha256": "3fa845217bd9bc79c604f170d1a49ae59288e4b34ac3eab4316acdbf168ef72d",
+      "observed_at": "2026-11-21T04:15:01.457544+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_a1/dependency_graph.md",
+      "authority": "repository_document",
+      "sha256": "766527c54159d50398e159d2aba7061c4893962aa8524edd529bacecaddff15a",
+      "observed_at": "2026-11-21T04:15:01.457544+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_a1/duplicate_implementations.md",
+      "authority": "repository_document",
+      "sha256": "5d855c50c71c425a5a7ce043a0d3bf68902553ba3ea3e7c9ba3a3cfa205a051b",
+      "observed_at": "2026-11-21T04:15:01.457544+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_a1/historical_regression_debt.md",
+      "authority": "repository_document",
+      "sha256": "2b3839d10f26d0883b56f84736ce00835758bbb641a7c127a2722409ad67a2c8",
+      "observed_at": "2026-11-21T04:15:01.457544+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_a1/minimal_refactoring_plan.md",
+      "authority": "repository_document",
+      "sha256": "0ae6a8d68e26ec967d568aea01c05ac96c65ef69f6d517b7a04d4e12cd990200",
+      "observed_at": "2026-11-21T04:15:01.457544+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_a1/module_responsibilities.md",
+      "authority": "repository_document",
+      "sha256": "1e82e2aad01ebcc8aeadec3f02f7fafc27d00aed6eebde61371069ea304de962",
+      "observed_at": "2026-11-21T04:15:01.457544+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_a1/native_evidence.json",
+      "authority": "repository_document",
+      "sha256": "258a94c198e61a1d8a295a713053c512ee548579c18b51a0e8fa9209b62957c5",
+      "observed_at": "2026-11-21T04:15:01.457544+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_a1/scientific_contracts.md",
+      "authority": "repository_document",
+      "sha256": "de3c655069a1acd36e3c21969863d4b2f29554f6ed5255be21c25bddbfdee950",
+      "observed_at": "2026-11-21T04:15:01.457544+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

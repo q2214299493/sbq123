@@ -1,0 +1,2492 @@
+{
+  "development": {
+    "head": "233d5a6c589560094a0e942b6d48708b1fd5a847",
+    "scope": "tests.test_b5_architecture_boundaries maintained_trees and imported_modules; maintained local Python module imports including function-local dependencies; AST only",
+    "source_file_sha256": {
+      "scripts.__init__": "71b9df56996a3f9a811383a7539ecafc7eddb6237ffd1d103f4a0a1adc42ee41",
+      "scripts.adsmind_lite.__init__": "635d3eac51b43041bd2a03f187581e2b87104224f642aa84875dfbf9ba353435",
+      "scripts.adsmind_lite.adsmind_common": "681e483255401235f3c14b4c0fde142869dfe87d52f219f02188572dcf1b4fd0",
+      "scripts.adsmind_lite.analyze_relaxed_adsorption": "fa34b31108b3ceb9686fbe622cb45bb5969efa64d5439cf121b7c2bba0eb358a",
+      "scripts.adsmind_lite.audit_remote_fe110_batch": "f367d9bbf5c9874eef16b62e43d32355b1e86d6c74d889753bbf437fa49343ab",
+      "scripts.adsmind_lite.candidate_export": "658d3b21970f9862eb5babe32a953f939a67b14d6662a644ff0a745433c707c0",
+      "scripts.adsmind_lite.candidate_generation": "376dc21459ff0cdd60877552e9c0edf4eb8277096fdfc3b433d141cdc1b7986e",
+      "scripts.adsmind_lite.core": "3b2c7db9cbebf5006ed78241dca7d9592b8e384be1e3f1277a9d6cb21c5a50af",
+      "scripts.adsmind_lite.deduplicate_adsorption_states": "c63c074eb98b6dc1dc971ebc7d3627565b00606ae751473f800393afdcfeb359",
+      "scripts.adsmind_lite.detect_surface_sites": "27033e48908137a09e91080c79e48acea62841c2328d06536015e351da959cfe",
+      "scripts.adsmind_lite.evidence_gate": "60ee7499d075ebda15a8a79968563121ea6fc8bfd2566609f84463a51f69a479",
+      "scripts.adsmind_lite.evidence_lifecycle": "78f5c1e52289bdb3b67fd147a739c7f78916d2e5ac10e7ef7ae188cbab3128ea",
+      "scripts.adsmind_lite.export_vasp_ready": "c497b3412bb86a75747b9c64a5f0b799a0af8bb084b79939656606b8d4c15b86",
+      "scripts.adsmind_lite.fts_prescreen": "c55bbcc95ea8a67a49cd6cf985b3bae3f407179f5b8a0e01bbde53a23e2fca64",
+      "scripts.adsmind_lite.generate_adsorption_candidates": "f6c10859a78be6a5b75c382a355092293eac13d127bfd78eb95fe31ec225e112",
+      "scripts.adsmind_lite.generation_validation": "9ef5d9accabb66bec5f2b107abe307f0b278bac158aece3794952939d3e52016",
+      "scripts.adsmind_lite.motif_coverage": "7fe426c7ba487529f929b1e428ab29b8a5d35022296a5a77777e10b8d7494bb6",
+      "scripts.adsmind_lite.plan_adsorption_candidates": "37605bd4733a075ec63d2bfa573ed7c2048266b216eec4428489169e922a1eef",
+      "scripts.adsmind_lite.prescreen": "2783d32bc3f98b85e6550b12c2d619e9eb15bc993ccc768a12360915f997b427",
+      "scripts.adsmind_lite.relaxed_analysis": "972e48ea81fe7f8b901b1eae6142332abc0afcac21834e562a32b11c16f44272",
+      "scripts.adsmind_lite.reviewed_template_plan": "75e0757e69b469f3b8592ba29ab54c5f607afa47a19c0855ff28e26af7ff383b",
+      "scripts.adsmind_lite.reviewed_templates": "5c1cb1bf9c4d7e58bc6d28a7548942570f09d2145924b6d9ef9c175d375b65b7",
+      "scripts.adsmind_lite.site_detection": "6fa8f66c7560f7f61da74a1023a24942597fc0d07cb358b3aa613068fa07273f",
+      "scripts.adsmind_lite.state_deduplication": "7178af06f9e0c3054b2f92eafe6720c4670f4831cb1e2ff8cbc27a92e01c2a9e",
+      "scripts.adsmind_lite.validate_candidates": "4aca4cb28b44004254d71440ae28342ebdfe5019b20858af4fc725a4850099e7",
+      "scripts.adsorption.__init__": "724b134985cf66d30d3fe4e0cf29ac604b905b3936f6e1f85952164f99df2014",
+      "scripts.adsorption.acceleration_benchmark": "4135951912d183917a89c097531ec6a3baae75d34e2e5543ea352e205cf09933",
+      "scripts.adsorption.analyze_fe110_ch_h_relaxation": "bf9bd3e64bf4fdadd01967f1f0ce38224b2297dcf4efd94125a3b34d204a497a",
+      "scripts.adsorption.backfill_step12a_registry": "a7e1e138cadcf697bac375da8c6faa18ac0b4df3c810c89a93559772fb87325c",
+      "scripts.adsorption.build_fe110_adsorption": "58fa806503de39c8eb4a74e83eb7e6f21f8fd31dbce37b93a372384916affb82",
+      "scripts.adsorption.build_fe110_c2_coads": "d5fd6512c3e0edfdb4a06f8286d422564ca7fce9cfdb9efb83fd68d868498832",
+      "scripts.adsorption.build_fe110_care_batch": "ffd1ad40f7f42e40bcebb4127578ea9a007d1b678dd548e74e4c9bc54d67f5c8",
+      "scripts.adsorption.build_fe110_care_isomers": "8817cc9fb94ca1477e41674504b1874c5b5a586306dbc6cc7543baf96f07cfdb",
+      "scripts.adsorption.build_fe110_ch_h_coads": "442609bdde866fc60ee3f7d9bed2aad0297e1afd8eeb93f20baefccae05bb8ae",
+      "scripts.adsorption.build_gas_cho_chxo": "d124548df91f13297141a46377e49f64308ab1261f44476cb45d9c649c02a7a3",
+      "scripts.adsorption.build_gas_h2_chx": "1b22ff41b923866c3439f17cf2ffa4787ae5c8e5935ef39a9f3e228bbd4d5116",
+      "scripts.adsorption.build_gas_oxygenated_isomers": "a366fdbe30991f3a425fe8c115bb9ec1fee1ad7701a550b90d303dd0aeeb715d",
+      "scripts.adsorption.build_gas_step12a_references": "d23d1a9e7baf4499954bf62b2767f0593efb5d1f604f8c13ecf85688815b9c64",
+      "scripts.adsorption.c2_coads_catalog": "20c87739a3b344b72453e9e634c55468d9f8fe24edea31ed773fb63f6c7d84a4",
+      "scripts.adsorption.c2_coads_geometry": "69ee19763ee507ed503ca2046333cc7f7546e947355b9faaafd17293fd73a3f0",
+      "scripts.adsorption.collect_completed_batch": "b6d3cfa4a3f1b6633045ae3845ab8fecb105ee3449be88ddbff358d60bfec167",
+      "scripts.adsorption.direct_force_training": "2fe4e228a53c112c90ae702a98c52a952f9897d7030723b545ed44034d12a8cd",
+      "scripts.adsorption.direct_gpu_batch": "9ef6a91c689bca8925c089cc50bf3c97357ca2630f77271fd949a742cd8479a3",
+      "scripts.adsorption.direct_training_arm": "6ff5a9d362a23e18af80196e55f7b0108b2bd831f457d17ac8b7bf023f70b49b",
+      "scripts.adsorption.finalize_step12a_gas_references": "ce4cdeaa303605f22c70fe74206d5acba89f9cab7c0a5d0aaee51d6cdfbf7eb1",
+      "scripts.adsorption.fixed_force_comparison": "54eb5122518f9759f31f1ced473bdc2e547258be7e1d765949dc2080ec4dccb9",
+      "scripts.adsorption.force_finetune": "023ad75d95f8f96dbc4e820c3f50af62cc77fc888d04181d0a5cbca73d29b97e",
+      "scripts.adsorption.force_role_data": "cbafb4a378443f56fb813b4dc8fee989e46db3813c7e68cba6804360749a2800",
+      "scripts.adsorption.force_role_runtime": "ab2015d56b6a370765420f1ba26880074988cd864f02286fed7b90bc3d79dc5d",
+      "scripts.adsorption.force_training_preflight": "ba8346a43e3bf7236e922de3ed96347e16d566db497589c9492308cb3f2354fb",
+      "scripts.adsorption.gas_vasp_common": "1996a24bbb0426e1176a58333494b1deacd24d507fdd9385bfd73e0d845a18d1",
+      "scripts.adsorption.matris_adsorption_relax": "11d35bfb05af9ff1a592c13c5fb7c461ac07157027b6e24917d49a7df50d9a12",
+      "scripts.adsorption.nequip_force_data": "cee01d0660c36dcf07d8e19f960fe6bbf6ed974852cbad08278653bc0fc77ea2",
+      "scripts.adsorption.nequip_force_job": "d832f42a58d666904b5205cc754bba6bf418ca66eb87a07571ca413c74b83b8c",
+      "scripts.adsorption.nequip_force_runtime": "3a59572fc6323163c3c3595fe18033d9665fb0a2699c1fef4b1c6ac7ed54031f",
+      "scripts.adsorption.preflight_fe110_adsorption": "8b96035b647cbf0db58cff625da30eef7b4bffa5637ae8ea6a95c38ecf5b69dd",
+      "scripts.adsorption.preflight_gas_references": "b0fad0c3820054b3643498286b8ec6efeff5ea69da53053e4d770acfda5d636e",
+      "scripts.adsorption.prepare_completion_registration": "d44f8d3b01984ef2ffc6c72b1008bf2ebc7ce40c15f5693f50e3cd4207f6d797",
+      "scripts.adsorption.register_step12a_gas_reference_submission": "5875886d07a7234c484bb6be7662a97e9073568e7a1b5c09de7ca9d8d9d1540b",
+      "scripts.adsorption.register_step12a_oh_restart": "4f1da215aeb9ba8316b042a673c2f6d9b101e8cad613704c54aa4f30f7ab1021",
+      "scripts.adsorption.reico_anchor_coverage": "0d71fbddf099b729090cab024004aa472771528635bce9227cf8aec0efbc690f",
+      "scripts.adsorption.reico_chemical_environments": "729ff1e5b47e58b865edf9a6a6f692d35c2e93be37ddd9ba08a557bc02e92eba",
+      "scripts.adsorption.reico_dataset_audit": "a9ff7b17d4b70e55a8eda6f3a6d4a5fe521abc08ee348338f6833d5e52f7cd07",
+      "scripts.adsorption.reico_environment_audit": "6d0a8e4106e56248d4e70e33d3939ee40dc6d967b4842f63530c242d65c291a2",
+      "scripts.adsorption.reico_force_coverage": "3c3ddd0ef921ddbed5e6d1e3e6a827908ae84fa0db333f4a7e55ad88509b0069",
+      "scripts.adsorption.reico_joint_coverage": "e4decb1609f4e19282fcfcbd4d9ef1141733c96b28fd40b06d3bc5d578c90723",
+      "scripts.adsorption.reico_probe_batch": "9f1a78b84c55c03dc0c1375c45bd2201e3ca427933e446ceb01896fedff913ae",
+      "scripts.adsorption.reico_probe_review": "6bff634c7d757bdd07118ebae2701aa3ab5552700699e9a18ca911dedcd13ed7",
+      "scripts.adsorption.reico_random_geometry": "a2d2cab1723237786aae6ff4b9bc1f2fe6c2e9aa7ae91ee25e249fb59f214b55",
+      "scripts.adsorption.reico_sampling": "7e186d9fe2bcb282006a55516322b3e7c11af2f3199d0371a321a468f9cca8a9",
+      "scripts.adsorption.reico_selection": "e0647caaf442e673ce38218ae00565e1d5668a0a1413f5246967cd9e10dfcdb9",
+      "scripts.adsorption.reico_stratified_audit": "2711a9ef1ea39ccf44fc947399a5e06d1377c3bbc142f38440a71e4e0678beaa",
+      "scripts.adsorption.render_fe110_ch_h_candidates": "87e3c239b3f8d7f92e29d0217952c5c8432617f25b4ec597897240541d293504",
+      "scripts.adsorption.review_completed_batch": "b9aa31d8df402f91db314134055e31c905c820393a979fa1a342b60bbb1b55b9",
+      "scripts.adsorption.role_force_trainer": "af3019d8755bb3a91bf2c97dae5c491f60dc8d90bb4792773cb1fb6cb2e4a90e",
+      "scripts.aqcat25_calibration": "f5b4c83aefb7a6cbccd89e7c054330ac52f0cd6f861faf6fd50b8d69bf397e13",
+      "scripts.aqcat25_handoff": "ffc8eaca450517f5e6a4f156c924434f6d7b762972ddc246caa3b845961fb2ea",
+      "scripts.aqcat25_ml_neb": "7d7d81be3a1d6938cb2a0bc2f99d406c8b168f8f4e51f67febd1ecae4b0296e7",
+      "scripts.aqcat25_ml_path_committee": "aab4773b183dbc0c1fcc8319351b0fcc52b3ba91213e37c1ef05f500a1c95e50",
+      "scripts.aqcat25_ts_active_learning": "56fb8d9698996ce37518d523064e2acf20524d6e06d5a7b80e5effb44b6a0ad0",
+      "scripts.aqcat25_ts_checkpoint_validation": "9fafcd863349ec77f004aa6d734bcd2c02df0b376e3773334153872a12f2d574",
+      "scripts.aqcat25_ts_force_prediction": "938484895d38abd5701a89ca0d60fd6b1cbc26d57c65266fc0a7c218d4f046fb",
+      "scripts.aqcat25_ts_force_prediction_batch": "e7508de9c3ff5b110c54d83bb739b0463dc612b673bae49e2bce3ed446af2c76",
+      "scripts.aqcat25_ts_schema": "ef1a4f105cfe3004c8ba778809dc272a9e82595c6e4ef948e604557d5a4daab8",
+      "scripts.aqcat25_ts_training_data": "ce9b6687f258065b41eb16c8b9106ddc76487a845ee80676cedd96be645df258",
+      "scripts.artifact_io": "433576b16ded17e4979bf23c3efc1d825540abb9b9257ff73b17d7d202b1f2c5",
+      "scripts.assess_dual_model_ts_heldout_errors": "78e4b802b81fcae853ea47993d7a1b7267592aa1684f3688bd7df5bdd345534f",
+      "scripts.assess_dual_model_ts_vasp_errors": "f5e1d40cadf23fe004e90b14d8d91d46b7f977d32129c8bc89bbf0d3530505cf",
+      "scripts.baseline_mkm.__init__": "d0e48968b013dd859711dbfbd99d920ceebf0e6ed3c599822a20e761ce8db83b",
+      "scripts.baseline_mkm.analysis": "ffe0ecd067bf8c13f7373bf8c40bc2986453f52dab3125bdc2434c6d80660761",
+      "scripts.baseline_mkm.analysis_report": "4549254383a86cce180ed807d989184bd7f6c47ef8da3b8447613d4f72b2c264",
+      "scripts.baseline_mkm.composition_report": "12162998c926a1dacbca03e3cbd1677a639348a71685da56860237892f30e3c6",
+      "scripts.baseline_mkm.drc_batch": "6eba7a9a8049198f55b20ffe6401ce70be41b96dc521809321c105c07b71c3a6",
+      "scripts.baseline_mkm.drc_batch_execution": "1003a1809d39c3c2a095047740ff9f7e068448f34719615fdd7656607f1d8d43",
+      "scripts.baseline_mkm.drc_batch_report": "fb9898330bcd3db0bdc02ab99c40ea3d0057b39622bf3d7a8df1fc29f3e8886d",
+      "scripts.baseline_mkm.drc_cross_reaction": "13a0bfa97813b2c279f16363bc3cc206f4c76819fd600dac306a52c9163f0b39",
+      "scripts.baseline_mkm.drc_pair": "8212628841c3de3e2ae751e13e329613f38027ceeb66a829ad44915b2fdb364f",
+      "scripts.baseline_mkm.drc_report": "e71d801d3dcf3ab743c4e700b1ec917e47f9648a9c4603ff604bd6b781c520eb",
+      "scripts.baseline_mkm.drc_step_size": "5891504e9f65d2459f0c6b9591b90ccf115b0cb1895c6169001befc4ca536c60",
+      "scripts.baseline_mkm.kinetic_analysis": "fb03b37f2cd4564f8df6bc79393305fdbef63fc44bc5766c49831e9db986b172",
+      "scripts.baseline_mkm.molecular_coverage": "58aafa1cbda652113e7ca296f52ef88f4baf8461d9bf421d6487fc7de3afb73a",
+      "scripts.baseline_mkm.native": "f9deb4609f53f653a1e5468a9e05277bfb1f00c53cabc26f8431ebe77fe6e177",
+      "scripts.baseline_mkm.pathway_analysis": "ba6ca39404c255a2164870634a85a68ad9ff77a5f29109f11037888a4dda411e",
+      "scripts.baseline_mkm.pressure_perturbation": "8769a6ca877e80e14b35cde87de8433f9ff280c6679cc96b1a4f843ebcf1755c",
+      "scripts.baseline_mkm.reaction_order": "bc1c1620d3828147a8932f0f5018059970551e410e5ee85cff816f0c834a4ebf",
+      "scripts.baseline_mkm.registration": "a65098d886af2261b610807c237e6f499fdf2105ae53269f8f681738e166ad37",
+      "scripts.baseline_mkm.results": "a813c2f941428b48fb89888dc537ccb3f290459b26aee660cc4d7b762de77f4e",
+      "scripts.baseline_mkm.sensitivity_inputs": "f42f4953f86632fda0687327656598be9dd9c9d1c7993c9c6ece667eefce69cd",
+      "scripts.baseline_mkm.sensitivity_report": "194ac80fdc3fa73d2b07dcb660b80771150016d8a0b22fc2d73f9229a01323c3",
+      "scripts.baseline_mkm.sensitivity_study": "fcad40421a6fd2cff99a53cd3151c20f762b21581fc34269ab36549d592c69b7",
+      "scripts.baseline_mkm.single_point": "491d98bcc1fe7c43724e67c2b93412a5aa399ce0c1c22a3df92083524792f4bd",
+      "scripts.baseline_mkm.single_point_result": "de7c790da7672aca0de5d7d1f04715346703428293ca70b46cf2337eaf289dd9",
+      "scripts.baseline_mkm.ts_perturbation": "eac912e28bce6658220c07e54df1ded43d8c80458c3fbad5ce9b0fd5dcf02ddb",
+      "scripts.bind_reviewed_dimer_execution": "91bb3ab9d35701cc4869394a81681184b5d247c11ac2807f884bec3164ea55f9",
+      "scripts.catalysis_retrieval.__init__": "8229b8ce7a394acc0f6c6124d254e70e155ae2dcf9a508d746e553813413102c",
+      "scripts.catalysis_retrieval.cli": "b274baeb2b4390656ec352d898b0faac518808d73663ca4d8d3ab6075bd5e1d5",
+      "scripts.catalysis_retrieval.ranking": "cdf27f3cbf117b6d98249fc7f0799afd4a387bcbe023081dfc739a434648df6e",
+      "scripts.catalysis_retrieval.records": "26f75803aec7070888662a5fb7be333e45dcc5505206ff4aa1b36d88ad467f21",
+      "scripts.catalysis_retrieval.validate_cli": "e38795f3a83c163027c5f0b054f49c54f43a982dd4dee5ce027a0089335518f5",
+      "scripts.catalysis_retrieval.workflow": "1ad8ea540402eb05c65a3896f29fe461304006333417480681efbd64150016e5",
+      "scripts.collect_dual_model_ts_vasp_labels": "957efe137e06b6247a9ce3a3abf25f507e2b24cf7fdbb6b8cfbbea8cdf240296",
+      "scripts.convergence.common": "83ba5439d0d50ecee248ddacae0bc2f66d6d8eaf55119a3d774c57ef5f01d720",
+      "scripts.convergence.setup_alpha_fe_bulk_smearing": "c767cddec34ab05da7ac7bb317b1644e0aec8905513403e2928ab1470513fb26",
+      "scripts.convergence.setup_true_fe110_thickness_retest": "4f2f06361b85b922ea443ed11a462789a64e58e6fd81f5c12ac887289091c8cd",
+      "scripts.convergence.thickness_stage": "e74d1be3251dca6f4cebf9e385001dedcfe495bfeb55cd2cf4a2d19cdce0885e",
+      "scripts.document_governance": "0436140b07c78517d77cb45966c5bd7b413e78f6906a742182d154d9588009df",
+      "scripts.dual_model_ml_neb": "e08f8c984214177ffa2bb0afbe2dd1bbc5f6a1dd847a3ac6fa322c551e629c59",
+      "scripts.dual_model_ts_force_prediction_batch": "6107f0a2f0d5b9d25aca6446100c351320ca0250aa42487be53e434376d7b839",
+      "scripts.execution_backends": "d59761610fb67e5c8120650b283442466679d385d96f8e24f030cda99194d788",
+      "scripts.execution_permission": "e07a2424e80d4cc20f8d85500d7c82b9abf783bde32c41b428f0b8d6f6197dc2",
+      "scripts.fe110_mlip_selection": "c973e5e7bb3374b2c5ff0e8a25bb1f39e04d75ab9b8e31f784ce113991c55760",
+      "scripts.generate_capability_readiness": "0558f769b2f7b92db8661ed5e76205b151750a24bc528d3622aaa4da1feea86b",
+      "scripts.gpu_resources": "b8fc2f21c2672f813be616c3a1018c80cdc4e0aaa50b43f57d8871d77d56e899",
+      "scripts.init_registry": "3a4fda6082e99c11e67aea9315c3f9ca720ab4dfed19783e1677917fbb8ffe9f",
+      "scripts.jsonl_io": "f7ba74328c5928cddaa0dc885d84f9c610aac221569497e0dd909901433bf7cf",
+      "scripts.kinetic_parameters.__init__": "4a3ce58d0932e926ca1abe385f4e39b3c28cad3106e5404356e4512f37e70423",
+      "scripts.kinetic_parameters.__main__": "6434bc070c480461ad6600e4ce955129be576641d3a141b41c1d03a659b353c7",
+      "scripts.kinetic_parameters.engine": "26fb578036f86faed1eadb22ae8ea2b969c17e06921aa038380751c8c861c5d9",
+      "scripts.kinetic_parameters.export": "e273c3af1ab723544a58af2070e07e71c7eed336047dadf6b1f3fac4fb88e573",
+      "scripts.kinetic_parameters.laws": "f46b8d8edb10cb24ec7aa60b20e1e8bf0ce8e2b4c5e23325d8954c7e3e0e396d",
+      "scripts.mace_surface_pilot": "63accc1ad92fbd67ad91dd37d95808a0ada23593f1fb32a97432ce08edfb3714",
+      "scripts.matris_energy_force_finetune": "7515b65643b9fefe05f7749db2e7b99b2b83f142c6e99974a65881038c6e6a66",
+      "scripts.matris_finetune_speed_benchmark": "5e3cffd76ba6902f9965cf1b2f8fe288159fe825daba007ac57ed3269e391e26",
+      "scripts.matris_frozen_heldout_validate": "750f840491e8e8a3f90272112472b494f99b53c372cf6aef5363a68834508253",
+      "scripts.matris_sella_local_peak": "de0ce27cfc82f8e7338a704d4b01630dab6ca02312ea4941411eff0e9e330c7a",
+      "scripts.matris_sella_smoke": "cfa9539e9b8368e9a6b047c0f3ca31fb0fb41405744f19897b30e0a988a663f0",
+      "scripts.matris_training_data": "2b7b23b6545cb6bf8240fe4d34e1a4c36e5aa62d7bee9474578be577aaccefc2",
+      "scripts.matris_training_exclusions": "a2a21e25dca68f55f7235c6881db98f95d335fc7cfac262b5358a9c1dd979386",
+      "scripts.matris_ts_path_committee": "f5cc56dfad70579a41cd36b46255b8fdc20db625c68844b29820d3348baa0fa9",
+      "scripts.ml_candidate_source": "2ff11e01af82af60a9940a30e3e091c9afaf90096cf69b5c691e35f238247bca",
+      "scripts.ml_sella_candidate": "3f2e025a41f0cd910164bc9d4816ab1c5333a9fd38707d00a9c5dd5ef53378d9",
+      "scripts.mlip_same_structure_benchmark": "d57202b8e6590e36e2dace48a2543e26ada03364e3914e8500c2d143c753e290",
+      "scripts.multiphase_contracts": "7f9a33ef114b2b66f1b7668d52c40f465a5a8e9b3069f96195d854d435eb9d28",
+      "scripts.native_model": "ba27347021d5621bff22cb3940df88d0a7840efcc8115bc3caff81af5d606783",
+      "scripts.native_validation": "b02f4c49a9f1b38235a75ceb433bd926c9392a649e27f3d89dc045af844f880a",
+      "scripts.neb_agent.__init__": "a56bb95aa97736b67e8b4ad3a7a3efb713b9c0bf315b7164cf4c69b7c43c6c4b",
+      "scripts.neb_agent.analyze_neb_outputs": "e926f1b1c2cafa1b7b31237cf78aa730fa67769aa8b4b64c99e4d707d192e347",
+      "scripts.neb_agent.check_endpoints": "f074b88b38b6cfd5281187e07da6d9949de9685bea740c33b3f1cbb46c9a669a",
+      "scripts.neb_agent.cli_common": "31691e3161b3541276b4571d2ed4085bfb1ec7e02a75853ac2a29a9e874ff4b0",
+      "scripts.neb_agent.crop_neb_path": "134f570191d3286bf9ebe33bf77cc9c0492c24e645e351027a62e3723ac97224",
+      "scripts.neb_agent.diagnose_path_geometry": "86420a2695f7d5e84a6b620f7242cabbc266b53da210477ab60b5c560abc3d01",
+      "scripts.neb_agent.generate_path": "dd5787e38fc3307bf797c6125f1891ff0ef606befc5768b1a3cde3718170e664",
+      "scripts.neb_agent.magnetic_continuity": "decd80f807777fb3202989e6a344a07bdf96c0333ade820e53e78ecae9b07ebc",
+      "scripts.neb_agent.path_quality_cli": "2c942b42cbe0437fabfefa3469f2d5477bd22ba5fd9552a3017f54813ac66cb6",
+      "scripts.neb_agent.path_quality_control": "f2d1598fa2062072f33f2643b7f169beb300bea1e782fc782a7bd1178adfe513",
+      "scripts.neb_agent.path_quality_service": "bdc6a44e1bbd973a608532907e57c32396a79605703e86bd7d08cca51a6dc673",
+      "scripts.neb_agent.pilot_validation": "d38e38f028ea8d257c6b961c1a82a8570b103b7d2bdb76aa613cc98091f697f6",
+      "scripts.neb_agent.prepare_restart": "3cb984f441acebe2c86de38b4440c97e82508b19a84d0012607cfbc42e4777f6",
+      "scripts.neb_agent.remote_monitor": "ab75240303fdd81ae28914d82977d47f7461e3e867a5d91e0b08f395e876b979",
+      "scripts.neb_agent.retrieval_prior_adapter": "6206819bd951edef4951db718739a7f7e7e4f94569697a208133fc1c0cc1c8e1",
+      "scripts.neb_agent.scf_chain_bundle": "c664a71bbf8864634f6f864851d36caac871fb2de9cda4482aba2844401874c8",
+      "scripts.neb_agent.scf_chain_evidence": "0929d675363ba1e8d50425583f5327826781707e0b8f72e658348d44d9f68b04",
+      "scripts.neb_agent.scf_repair_chain": "766089e2851221a8b32695ecc615166d213661166b0129a45a8d876390177a77",
+      "scripts.neb_agent.split_by_intermediate": "f580bb690f888a95727e785e0a0d4596c239c0f0f895fc8f1b0a31788f87867c",
+      "scripts.neb_agent.submission": "39080e68474568c5bdd11ddd962980f5a381d21f29b2a62a7d628c2ea5e3e3ee",
+      "scripts.neb_agent.utils_report": "2b4777c8d4086962771e230c06a4813102bf8f04e8174f32311ebc7520fccd73",
+      "scripts.neb_agent.utils_retrieval": "5feee21461a83ba7fa716f6edba89631e6fbf54863e432153b97981700a526ee",
+      "scripts.neb_agent.utils_structure": "9f1501213d27eb0b59a59560fb5f6e23d5ba9215b71f4615292e81b564e8f59e",
+      "scripts.neb_agent.utils_vasp": "39b356c4c267b8544eb99ed0d99fe83fa09f77964c4674f9f2ab659dd5d38ac7",
+      "scripts.offline_mlip_fusion_feasibility": "b8cbc7401e72b61d3d6aae8ab1d193ed69d42b8d6d2300a1087186a397dacc95",
+      "scripts.optional_dependencies": "a92d26066d7d80fb5ed16af664df09707eadae8a78e1dcb304537b91ae77b5ca",
+      "scripts.prediction_provenance": "fce190e0c011af57516056edeeda64f00ce779f0119856b244826e3ce3516eb5",
+      "scripts.prepare_aqcat25_ml_neb_handoff": "6f23354aafa241821c01d395079c96c6aa241dfe27ee7caa2a1d22b23ef1a9c9",
+      "scripts.prepare_ci_seeded_ml_neb": "bf9ff4854cad7d1f7a08c8cb12eeba0e618fbe6900f2df57d20232a9f6b6979c",
+      "scripts.prepare_dual_model_ts_active_learning_round": "5f4949ff7793fb4a70218d747f00e3ca3fbc209f3e3471a8b398ca947746fc8e",
+      "scripts.prepare_dual_model_ts_heldout_candidates": "c20f457be207e2d59397839bf72013ace7d1169fb88c4527f103e2640dee096d",
+      "scripts.prepare_dual_model_ts_heldout_execution": "97fd78212598f8fa6fabf15af1962b2ac6e364c541ec2a6a0167da30ce2b51fc",
+      "scripts.prepare_gpu_path_dimer": "794bc033080e9ff1a3ec757f511aa39c9c1565bae07929de851c8620a24d6e77",
+      "scripts.prepare_matris_finetune_request": "0485119a2ae095a762f8b47a853cf5165afca3db6cf5602781ffb05a7e17f914",
+      "scripts.prepare_matris_remote_finetune_bundle": "2861cec2a57e528c391df6fbf1a2b0f094ff402f1dca526b0b7e68d5779c08e6",
+      "scripts.prepare_matris_replay_finetune_package": "778cc91729f6edbc8b4ceabac6523e171af0d1edebed756c8edbde81f2d365da",
+      "scripts.prepare_ml_candidate_active_learning": "49b61226446b4ac33f217f079713137b06ff4d48bbd8d4abf3b515cad58fcb54",
+      "scripts.prepare_ml_candidate_rerun": "cae9823f7fed62c092769c4f47c3de352404792fc01ba3218c02e021e0b84117",
+      "scripts.prepare_reviewed_neb_peak_dimer": "2cebf7637bcc13cf50d526e580cc0feebed97729ce2727d208d8899f5af09360",
+      "scripts.prepare_ts_heldout_aqcat_prediction_batch": "0c9284e05fb51e7d17cbc647fa74e9cfd9ddefdbfb7322ef9340a9243dae27b7",
+      "scripts.prepare_ts_heldout_validation_candidates": "8f75082d7768236ccb0e4d4bce1cc3b81388150215bfe4dfd2cf54d1afadb4b4",
+      "scripts.prepare_ts_heldout_vasp_label_batch": "c270c7fabb198290db0980e098838fe8654e1e5bcb51f23fcd057db348619501",
+      "scripts.provenance_fields": "d4a1f546c1294d9319ebe162f4548be0a862fb71e0efa3cab559b9df214e5256",
+      "scripts.reaction_network.__init__": "59356824aaa9a1f832c410a4d639af2b4a909ef8e8d94256de901a436cdcf179",
+      "scripts.reaction_network.__main__": "1113305163924a3eafb5874a896fb71c81502032a233765f5adefd2e357ecc88",
+      "scripts.reaction_network.builder": "abc2abd6bc1d5c24b0000eecb4b8919528d2aae2158671b671e47b2c77809cc2",
+      "scripts.reaction_network.catalog": "ce217d75e6a14e09c09b19094899a3326a8aa8f4b4358a1913775b476369515b",
+      "scripts.reaction_network.site_review": "5de9a751eab0aef4d73d00bd77449ccd61d0a0ca1e5ec5c990bad87456798303",
+      "scripts.reaction_network.thermodynamics": "1c2bc4b0b948a3d11cc8b284b001fb34c01492f04040ef114d2e7c88b2855563",
+      "scripts.registry_acceptance": "8fe8e0df8792bb3e5f077dec412d8f4db56acb95a041a61ad592627970006f34",
+      "scripts.registry_compatibility": "b015cb225b4341f92e17f8f71534a8c6fc0ca6dc3276a3fea4d5969f9257b13b",
+      "scripts.registry_connection": "cc8d7ae5516df2b4da6d646f0f068be8f4e8bb77319b6acf32040318e2dcf4e4",
+      "scripts.registry_excel_promotion": "d4746de26730b76df45ddcd7d5224bbec39d9bfe1fe69fb2fea1aecd222b5aec",
+      "scripts.registry_mutations": "17eaa6d0c1526d5a622b6c98dc7ba4306ff35dcb377df5d5914da1cfdb8293b4",
+      "scripts.registry_schema": "3341ace97bf0abbf6513fb81f7e4c0294f7ca1989dd2fe9ff877ea4f7523bdc2",
+      "scripts.registry_transactions": "accc70c3fc84eacbdb601535dcf4f25858cc3361578c9c0e621bb89d6fba2dcc",
+      "scripts.registry_write": "82af34c9771c9816d40532bf58aedc672f0ef35aa2bfd0f77622d5cc5680e587",
+      "scripts.release_build": "4f95404f9084462c292962535b325e88f875d540f4ba3f74aa387a166dc4f1c5",
+      "scripts.release_environment": "ac9845319ce6debe2bf80325e1ce68ea729845d7b6b88c240ba003ccb655eb4b",
+      "scripts.release_smoke": "0d6c956eb8c6eb24b40c12ef5d421e606335479b3b0fb1333a0172c030d0f2a8",
+      "scripts.review_completed_neb_parent": "f9b78fbde18e7630ef7015d3340d84667197e0423680a31c02fa86b7d6061f2f",
+      "scripts.runtime_resources": "66188f946b0a122cc92d6611e763c2d240c485099378aa0decbc8d341fe712d2",
+      "scripts.scheduler_evidence": "536487510c26f8b1c028b75d8d21f564361de6dae57cc1c72a80e3b7c9ffe221",
+      "scripts.scientific_intake": "528bf51dfdad665eec632a04cc17f6544584f1dda1cdac595fe26c5506753dae",
+      "scripts.scientific_priority.__init__": "edde1ff6178c0d0e124bc51322f95d6f005eb4d90a8b7997aa1b8c217dda5d95",
+      "scripts.scientific_priority.__main__": "6d14327cf7c9b50041e898d071e4f1d0928ffe7e90dfb9c5a87794bff26fa2d7",
+      "scripts.scientific_priority.benchmark": "a66bb02f827f5cdd42d45d132d3b04f673824afadba370752099b59a95bfaa5d",
+      "scripts.scientific_priority.engine": "a724efee65160eae5831bbc936da99252e0a87bba70d6db233b219476b22961b",
+      "scripts.scientific_priority.evidence": "1af10d5775a7c1389de809910fefd0e3ed18cdafdb499f030d825171a1222f8b",
+      "scripts.scientific_priority.proposals": "a2da9c3aacc946bf9085307778a2562cd3511cea9b02e599c24360ef58f4eda9",
+      "scripts.scientific_validation": "f38a1e7c16e8a4dfa212b435c4e09ed6df3d08dc231f49d06ff1c2369e85d7f9",
+      "scripts.select_dual_model_ts_vasp_labels": "991c22485053ed98e78d5f683824a00018b0fe4099d47a00058577c5d5b52bcf",
+      "scripts.state_manager.__init__": "345de3717be60a74893cdc3934c0a2e70bd89f8533f26d8a06a0e3d637a0d32a",
+      "scripts.state_manager.__main__": "0f7d54f3fbb1f79a85eb8110f11793db99da6f3c61ee979de5abe9a1b5f3fdb3",
+      "scripts.state_manager.application_log": "aa553f4f2696ef571ac8a13233bcf2afce2de7947eab706f7949bf94e5395bf3",
+      "scripts.state_manager.audit": "626baf2d27f2e4aa6494e92c657bd960be91432a45f4e0fe1883c98920c9e45c",
+      "scripts.state_manager.baseline": "f4aa41d983a976fe3bf5d66679de8e68b120761c23264df5c5cc8c0ff458af01",
+      "scripts.state_manager.checkpoints": "aa9ed9236284d40216c10c8af46488b0cd7a6609062b96362783631a3bec0d01",
+      "scripts.state_manager.cli": "6e39612949e34cc0c83ccf20cb4520322571d9b3d0319d214f279d1679390af5",
+      "scripts.state_manager.imports": "5522132cb406bdfdfbc73d00a3acbc4aaf872f062dfce5d8b064d73eb15e4891",
+      "scripts.state_manager.job_lifecycle": "638f616a8a27145ed6f65b738ef7416f678d58aa4c97bbcfbf331fc8149a5c01",
+      "scripts.state_manager.lifecycle": "b5554a6f36018595bd1b0c182fd8ddde25df8e3650df5b8393eed4273817d4e6",
+      "scripts.state_manager.lifecycle_views": "8b5119ff11545bb644abce9ab17a81b64572b0a5f57c67e74b9cf9011d3ecf49",
+      "scripts.state_manager.models": "ba7f7e05f0aeb14566cdd05c4ca681890609f8a4668fa1367cf499ec5d8d9d67",
+      "scripts.state_manager.projections": "192d6f06dee1d8fe3e02ab1e53e2ef789579e28ee3f59fbd468128c1181a7b63",
+      "scripts.state_manager.proposals": "5364cd990bb4ed9ff07e962f61b0290d8b5511b05a3e76c91d75d375c54e7544",
+      "scripts.state_manager.reconciliation": "e068a31685951ac3e83fbbe15dd9d1c6dfa852010adf52386d6c8078947913c8",
+      "scripts.state_manager.review_reuse": "5554af50422c2d2ee0a2e137dff56e0b642385df1199de97d936e552719ebf2e",
+      "scripts.state_manager.stale_items": "716c467c234f4f3e112ff5b6cfa87d9237059f534b5b9c9222ad8864810979ff",
+      "scripts.state_manager.state_compaction": "0268171d860d1ad6f45b158a25d52fc39377a4641130c59d3aee9871dc3d6a53",
+      "scripts.state_manager.store": "480fac4a51fb70bb1ad03b5714693c2b4d0328d6df628b33246cae4204a8464b",
+      "scripts.surface_kmc.__init__": "6dfe407f6e774025d85d760bbeda9b71623878f13e1fbcb96d414019bbcff724",
+      "scripts.surface_kmc.lattice": "5eecd2e794cf98f716a2a1f3363abe73bc32ce981c67a6c742b914cb94984f75",
+      "scripts.surface_kmc.native": "66e6dfa1156b206462c9758df17058af91f2082b01ff913066bc9b7930b17140",
+      "scripts.thermochemistry.__init__": "cbd17d73744dee483014899c6b45cb408649f439219e7b4cd3d652479b5ce882",
+      "scripts.thermochemistry.__main__": "d2e0787c1444fbff076461d9928f4ca5c5005ec24974bb4e66eded65e6a750b2",
+      "scripts.thermochemistry.engine": "d094bd0f456647dd05d000bdddcc92ece39cb43d9a4dbb9e00136e54c87d9fbb",
+      "scripts.thermochemistry.frequencies": "2b021940fbe44a5ab36ab04bc0c6e71d732c30c90c90011d0f718491e9ed036a",
+      "scripts.thermochemistry.harmonic": "bcba78738e51ba8b6035f728657c8ff65a3dc6527669af14dbc16f744f01e7c5",
+      "scripts.ts_endpoint.__init__": "d4efb420ce2249c69c0d9b8a89913965798c3f2bf8113a94db5f540cc80715f7",
+      "scripts.ts_endpoint.database": "38eae7d8e802108a354c74c887117f884f4cb92664a6612d13775615ca6fb79a",
+      "scripts.ts_endpoint.evidence": "4067fde85cdf2735eeebe517ab40e101c220892eb3a2079031ac9d37d3eefa56",
+      "scripts.ts_endpoint.generator": "8ac0c4eb1350fb5fa046457a4c9d8208ce1c067e3e113d25622d66a2aed64427",
+      "scripts.ts_endpoint.purpose": "74586cac44c8bc6e58865698f6ac60ca5409886e514c0fa01b6a1ae93c10a8c4",
+      "scripts.ts_endpoint.validator": "5a6516b3af7f8cb8a7fb1e801de0b7b489adb1d5ac30c264ec4081d0ebeb324e",
+      "scripts.ts_strategy_engine.__init__": "810f4a4e918c8cdc1dcf23474723f28486d53fb57da0559c719a4180ac7b4729",
+      "scripts.ts_strategy_engine.active_learning": "f99a8c01c2ae8087244fde8252562f9c99f2c04cc8ec366b797caa8397de57ef",
+      "scripts.ts_strategy_engine.active_learning_calibration": "8594461e4bca728c3e572218439eaa6a3a41868b0993590c37a5dcfe80dec59a",
+      "scripts.ts_strategy_engine.active_learning_cli": "6e6d0526c495b08dbcd92d2718ad98fb76222095db135d754f89de6880864fbd",
+      "scripts.ts_strategy_engine.active_learning_common": "1222e0b475a4add60847721b3f723d1d3c84e35ab0f39d746252a0897b51b2c7",
+      "scripts.ts_strategy_engine.active_learning_domain": "fb594d3ad2d8bdd2154a7fc0e78543de1a152c55c500123beb18dc9bdfd0a1f3",
+      "scripts.ts_strategy_engine.active_learning_handoff": "708266470f528628299a562af04d65c65665dda2e008b98f788c17b3f1829510",
+      "scripts.ts_strategy_engine.active_learning_label": "a7ef40694c7040ff0f03b57155e1f410c4b28b595111644fa5ae381a51735b68",
+      "scripts.ts_strategy_engine.active_learning_path": "6c5e46bdd0c988a281f5caaa95a1e7a2f76fee0522dd480840fe060d7f235586",
+      "scripts.ts_strategy_engine.active_learning_path_common": "859a0e4f5c85ee8f21856910d77fe2329c35c72d8d8515a9686d5e4f2dde2b77",
+      "scripts.ts_strategy_engine.active_learning_path_labels": "4693597fbacddaa4bb2525e23c16954431f2d121968024f6262d339ff8bd45c1",
+      "scripts.ts_strategy_engine.active_learning_path_predictions": "92280d489df7185144f414e49b6429854a91d77d136957268a775308e6be15b3",
+      "scripts.ts_strategy_engine.active_learning_path_rerun": "21e4a7e805ade5b2cb7f577f517d09a7904536e2d2906b5094cf3d81498125e1",
+      "scripts.ts_strategy_engine.active_learning_path_selection": "ad9b1d365bb506e9b85093ab2b48f1e5ffe027b1bdad8f50287b21b501fb47f2",
+      "scripts.ts_strategy_engine.active_learning_scheduler": "131f9d09f03b1597817615bc5bb258175dd9d7b0b8e98e2b878f5179a9053244",
+      "scripts.ts_strategy_engine.active_learning_state": "eb6d4d938786eff377af1c2c3cc6d68c048367583e3548011971db6ea1875ab0",
+      "scripts.ts_strategy_engine.active_learning_training": "8e72722ac24f3e55c4cde425c7a94d40816a94d3ffccdcabc3865c84b3cd970b",
+      "scripts.ts_strategy_engine.cli": "e7ee75b8d574021a1a1c7fa0fbcd24f941ad5310558461647f2c606eaa6fe9f3",
+      "scripts.ts_strategy_engine.cli_commands": "a90dfbdd13eac6533b605d6590192f0d7ebe2180e7e7e8e5ba9ad9b738fe9b09",
+      "scripts.ts_strategy_engine.connectivity_evidence": "6929680ab0de2b3690da492c176769dba76032ff05d73a2299813b2f83c25604",
+      "scripts.ts_strategy_engine.contract": "905489289221e70e6b48aad9c5bced4abb21c075290f5c94f87816c798c1bd40",
+      "scripts.ts_strategy_engine.dimer_analysis": "3844ebf8ec73d3f831ae9da984ba15a5fa6d84491865a6b9424e29a355678781",
+      "scripts.ts_strategy_engine.dimer_gate": "9e6c9b6fac690965af58b96f22b1e5061e8ced0c60bf0b82401abd14c000e807",
+      "scripts.ts_strategy_engine.dimer_gate_common": "f3e575e5d497e3377db758c14e13889dc18f48d2801ebd50e3c076796248e91a",
+      "scripts.ts_strategy_engine.dimer_path_gate": "c1c47e3f1310d233bd7fccdb73e5f06888c23a0428c2b7d88203a4aa06386f37",
+      "scripts.ts_strategy_engine.evidence": "85471f6ae7495952d5a48d1529fcabfaa0c5707c1f8fd91c5de38f88a32632fe",
+      "scripts.ts_strategy_engine.execution_blocking_rules": "3d426b8bae7951b642ee6b4d948930f0321a307e8a5566f8e0c64bfcb7f511ed",
+      "scripts.ts_strategy_engine.execution_decision": "09ead92fa9ce97e41e6b4dcbff3ce515b0c478d9105b71a84e5441e947b5b595",
+      "scripts.ts_strategy_engine.execution_evidence": "784a882a87f19c17738fa729a4ac6a9b6e3289578c4ea21d81490cdac3b54d86",
+      "scripts.ts_strategy_engine.execution_gate": "bbbc13e2572fa2e922af5642bd2a7ec67b1e97999ca8c9f3897a70d740bcfcbb",
+      "scripts.ts_strategy_engine.execution_gate_cli": "2fb11ce8b3108b2cae7399dc8472ab73a408c81acb6b3a5d068b2c358679c39a",
+      "scripts.ts_strategy_engine.execution_gpu_rules": "b73646807ce7e0f6075ed292ebce9919942800820da44a1503cfa0099701f4dd",
+      "scripts.ts_strategy_engine.execution_path_rules": "cfb02b4407acab3e722a0f8df601b9cf87de0e04aa494862f87a60149ae9babc",
+      "scripts.ts_strategy_engine.execution_submission_rules": "2d9baaf8ee3be8d59bcf4ebc6a46de8fce7ebf08dab992861ef478a3f5ebf601",
+      "scripts.ts_strategy_engine.fingerprint": "995445c7dc26b49e56c92e873f37b899fbffb713fa29f6b0fec2c51ca1d986a0",
+      "scripts.ts_strategy_engine.gpu_dimer_parent": "8c889c11d3b340132727d85ecc0bcb1453019f55d8c8d8e0f830257c875dd0e5",
+      "scripts.ts_strategy_engine.handoff": "82dc8ca4098bf3b0b34b8a6febd2f8dac4dc954d98297691c9040a706a68769c",
+      "scripts.ts_strategy_engine.learning_cases": "59ca89710d4da731d37b136fb7519fc3ecd218ebc041f5c0654f2e562ef959d8",
+      "scripts.ts_strategy_engine.learning_cli": "b47923d20cff4a09e8967edce82d6f96d8de362eb4fc027297dd77165ebc9d56",
+      "scripts.ts_strategy_engine.learning_evaluation": "c826de3e85dee37d904a1201ca707f56c74babbca82c9ae666bee28ba2793e96",
+      "scripts.ts_strategy_engine.learning_evidence": "72f9149833bba64f3beaa46f88b82a38db1f1147b95d920b3371224e5d90ecdc",
+      "scripts.ts_strategy_engine.learning_store": "4731a59c81333a8fe9b339adb6d2e54614110718789b60c45b62114b53e26cc3",
+      "scripts.ts_strategy_engine.matched_static_evidence": "aaee88f1931a19d4081500cbd9a9ab0a640b5972ff293bd7e2f0300d7bbabf3a",
+      "scripts.ts_strategy_engine.ml_neb_path": "c2304aa92afb1aca5f19d550f3a2bfdfdf74a4cf882a4f8e7754f1d2f4892748",
+      "scripts.ts_strategy_engine.paper_sequential": "a2567f2042e086f47840be378cbb5d3b50d3ef781800de3ae863fa7384e68412",
+      "scripts.ts_strategy_engine.path_evidence": "f1775f477dafa0a96f8efe92bc481aeab5154e49b451615daae546f6424356ec",
+      "scripts.ts_strategy_engine.registry": "d80934b5e9fccee254326135546b68a72d617dd2226a80460bfe2596eb037f7f",
+      "scripts.ts_strategy_engine.rsi_advice": "d804d0969d8225fd03e90280f4b6bd37c105fd645a941e24bec37ce449044d08",
+      "scripts.ts_strategy_engine.scf_chain_gate": "55399d63789d66e31cee984de51c7e2047099af9facf349dd2d03a5928ee53f0",
+      "scripts.ts_strategy_engine.scientific_claims": "d77f8873fda493cd5ebdc3c582c119ed8166872035f7decf80a561f5d296ecf9",
+      "scripts.ts_strategy_engine.strategy": "bf0e02bd4a0dd60ad4f4cd4797231355bb1b362cf0d8e7efbe5eb341e5c01d4f",
+      "scripts.ts_strategy_engine.strategy_learning": "999309b0efab32147f73e37c97e1fbbfd353cb30dae7c811b69880d7162eab55",
+      "scripts.ts_strategy_engine.templates": "875b6a53819985505846c44d071f417c545c8a49a3d3e649538dc9bd5ea43175",
+      "scripts.ts_strategy_engine.workflow": "23329b3379a248dfc7350500f01902dbf7d1a09b38999b6184b785fb3746f474",
+      "scripts.ts_validation.__init__": "3bafb896ebb498928646c7a5c452df76974db1dde8233ec5e89447a33e869552",
+      "scripts.ts_validation.analyze_vfa": "46294d654cccf6a090491f4a209ee488a355dd557b5e21729958680038f1e19f",
+      "scripts.ts_validation.barrier_values": "e2a18ff167371017dfb972a4d2aea3f89526e9b76692e36ef3b8d09e5c86523c",
+      "scripts.ts_validation.connectivity": "c9156f78ccfbdab2c2e5b4a1bb8f8a5491da52afa3e75d4bedaa0f8f355d86c9",
+      "scripts.ts_validation.dimer_frequency_gate": "942d0590bfd9ecb35b0e8a6b5bf0dcff0566ecc5b65b91569daf266a5acd7d6a",
+      "scripts.ts_validation.prepare_connectivity": "981a11cc1c50d665da188610b2d22e2424386f717d056ca5611398b50b3a5dd9",
+      "scripts.ts_validation.prepare_vfa_from_ts_image": "3f4772cf856347b0c5cd7e191be16de98707c24c974dffb674b4085c50051cfe",
+      "scripts.ts_validation.saddle_energy": "12cbab1d7ef754bfef221be016c19a417ea084c0f5834211d8f439b90d921301",
+      "scripts.ts_validation.validation_pipeline": "1f49dfb75b18f32eaf5dbbebf40f79da627bea6e19572a1ae4a4a45372ae39c2",
+      "scripts.validate_release": "3762254b339a2d44745bdfb36446b5bfc33e6175d378f350ab94535b75ac83a7",
+      "scripts.vasp_inputs": "08aa57e2823b81f27080a1ef49b1bf2d0a17a7b962918edf2ceeb0765cfa1192",
+      "scripts.vasp_lsf": "28e4b5d42aa55d9e8607659a16f26768e111f2499f3f9d1628bd3b4194737bda",
+      "scripts.vasp_result_gate": "f8e1aab72e622c685a8ada1e1bcc783d621dd0d07d1b56af0b4f4b99a1d8248b",
+      "scripts.workflow_geometry": "0eacfedbfca975fa990b4f4056a7a0daf3a99bfd876e182cbf116ff0b7f5f6f6"
+    },
+    "adjacency": {
+      "scripts.__init__": [],
+      "scripts.adsmind_lite.__init__": [],
+      "scripts.adsmind_lite.adsmind_common": [
+        "scripts.artifact_io",
+        "scripts.jsonl_io",
+        "scripts.optional_dependencies",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsmind_lite.analyze_relaxed_adsorption": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.relaxed_analysis",
+        "scripts.runtime_resources"
+      ],
+      "scripts.adsmind_lite.audit_remote_fe110_batch": [
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.execution_backends"
+      ],
+      "scripts.adsmind_lite.candidate_export": [
+        "scripts.adsmind_lite.adsmind_common"
+      ],
+      "scripts.adsmind_lite.candidate_generation": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.generation_validation",
+        "scripts.adsmind_lite.motif_coverage",
+        "scripts.adsmind_lite.reviewed_template_plan",
+        "scripts.adsmind_lite.reviewed_templates",
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.scientific_validation",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsmind_lite.core": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.candidate_export",
+        "scripts.adsmind_lite.candidate_generation",
+        "scripts.adsmind_lite.relaxed_analysis",
+        "scripts.adsmind_lite.site_detection",
+        "scripts.adsmind_lite.state_deduplication"
+      ],
+      "scripts.adsmind_lite.deduplicate_adsorption_states": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.state_deduplication",
+        "scripts.runtime_resources"
+      ],
+      "scripts.adsmind_lite.detect_surface_sites": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.site_detection",
+        "scripts.runtime_resources"
+      ],
+      "scripts.adsmind_lite.evidence_gate": [
+        "scripts.adsmind_lite.evidence_lifecycle",
+        "scripts.artifact_io",
+        "scripts.catalysis_retrieval.records",
+        "scripts.runtime_resources"
+      ],
+      "scripts.adsmind_lite.evidence_lifecycle": [
+        "scripts.artifact_io",
+        "scripts.prediction_provenance",
+        "scripts.provenance_fields",
+        "scripts.scientific_validation"
+      ],
+      "scripts.adsmind_lite.export_vasp_ready": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.candidate_export"
+      ],
+      "scripts.adsmind_lite.fts_prescreen": [
+        "scripts.adsmind_lite.adsmind_common"
+      ],
+      "scripts.adsmind_lite.generate_adsorption_candidates": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.candidate_generation",
+        "scripts.adsmind_lite.site_detection",
+        "scripts.runtime_resources"
+      ],
+      "scripts.adsmind_lite.generation_validation": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.motif_coverage",
+        "scripts.adsmind_lite.relaxed_analysis",
+        "scripts.adsmind_lite.site_detection",
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.adsorption.build_fe110_care_isomers",
+        "scripts.runtime_resources",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsmind_lite.motif_coverage": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.evidence_gate",
+        "scripts.adsmind_lite.reviewed_template_plan",
+        "scripts.runtime_resources"
+      ],
+      "scripts.adsmind_lite.plan_adsorption_candidates": [
+        "scripts.adsmind_lite.evidence_gate",
+        "scripts.adsmind_lite.fts_prescreen",
+        "scripts.adsmind_lite.prescreen",
+        "scripts.adsmind_lite.reviewed_template_plan",
+        "scripts.artifact_io",
+        "scripts.runtime_resources"
+      ],
+      "scripts.adsmind_lite.prescreen": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.evidence_gate",
+        "scripts.adsmind_lite.fts_prescreen",
+        "scripts.adsmind_lite.motif_coverage"
+      ],
+      "scripts.adsmind_lite.relaxed_analysis": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.motif_coverage",
+        "scripts.adsmind_lite.reviewed_template_plan",
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.artifact_io",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsmind_lite.reviewed_template_plan": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.evidence_lifecycle",
+        "scripts.adsmind_lite.reviewed_templates",
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsmind_lite.reviewed_templates": [
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.scientific_validation",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsmind_lite.site_detection": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsorption.build_fe110_adsorption"
+      ],
+      "scripts.adsmind_lite.state_deduplication": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.relaxed_analysis",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsmind_lite.validate_candidates": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.relaxed_analysis",
+        "scripts.runtime_resources"
+      ],
+      "scripts.adsorption.__init__": [],
+      "scripts.adsorption.acceleration_benchmark": [],
+      "scripts.adsorption.analyze_fe110_ch_h_relaxation": [
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_vasp",
+        "scripts.vasp_result_gate",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsorption.backfill_step12a_registry": [
+        "scripts.adsmind_lite.audit_remote_fe110_batch",
+        "scripts.artifact_io",
+        "scripts.execution_backends",
+        "scripts.neb_agent.utils_vasp",
+        "scripts.scientific_validation",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.adsorption.build_fe110_adsorption": [
+        "scripts.runtime_resources",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsorption.build_fe110_c2_coads": [
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.adsorption.c2_coads_catalog",
+        "scripts.adsorption.c2_coads_geometry",
+        "scripts.artifact_io",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsorption.build_fe110_care_batch": [
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.adsorption.build_fe110_care_isomers",
+        "scripts.artifact_io",
+        "scripts.runtime_resources",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsorption.build_fe110_care_isomers": [
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsorption.build_fe110_ch_h_coads": [
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.artifact_io",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsorption.build_gas_cho_chxo": [
+        "scripts.adsorption.gas_vasp_common"
+      ],
+      "scripts.adsorption.build_gas_h2_chx": [
+        "scripts.adsorption.gas_vasp_common"
+      ],
+      "scripts.adsorption.build_gas_oxygenated_isomers": [
+        "scripts.adsorption.gas_vasp_common"
+      ],
+      "scripts.adsorption.build_gas_step12a_references": [
+        "scripts.adsorption.gas_vasp_common"
+      ],
+      "scripts.adsorption.c2_coads_catalog": [
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.adsorption.c2_coads_geometry"
+      ],
+      "scripts.adsorption.c2_coads_geometry": [
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsorption.collect_completed_batch": [
+        "scripts.artifact_io",
+        "scripts.execution_backends"
+      ],
+      "scripts.adsorption.direct_force_training": [
+        "scripts.adsorption.direct_gpu_batch",
+        "scripts.artifact_io"
+      ],
+      "scripts.adsorption.direct_gpu_batch": [
+        "scripts.artifact_io"
+      ],
+      "scripts.adsorption.direct_training_arm": [
+        "scripts.adsorption.direct_force_training",
+        "scripts.adsorption.force_finetune",
+        "scripts.adsorption.force_training_preflight",
+        "scripts.adsorption.role_force_trainer",
+        "scripts.artifact_io"
+      ],
+      "scripts.adsorption.finalize_step12a_gas_references": [
+        "scripts.adsorption.build_gas_step12a_references",
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_vasp",
+        "scripts.registry_connection",
+        "scripts.registry_mutations",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.adsorption.fixed_force_comparison": [
+        "scripts.adsorption.direct_force_training",
+        "scripts.adsorption.direct_gpu_batch",
+        "scripts.adsorption.force_finetune",
+        "scripts.artifact_io"
+      ],
+      "scripts.adsorption.force_finetune": [
+        "scripts.adsorption.force_role_data"
+      ],
+      "scripts.adsorption.force_role_data": [],
+      "scripts.adsorption.force_role_runtime": [],
+      "scripts.adsorption.force_training_preflight": [
+        "scripts.adsorption.force_finetune",
+        "scripts.adsorption.force_role_data"
+      ],
+      "scripts.adsorption.gas_vasp_common": [],
+      "scripts.adsorption.matris_adsorption_relax": [
+        "scripts.adsorption.direct_gpu_batch",
+        "scripts.aqcat25_handoff",
+        "scripts.artifact_io",
+        "scripts.mlip_same_structure_benchmark"
+      ],
+      "scripts.adsorption.nequip_force_data": [
+        "scripts.adsorption.force_finetune",
+        "scripts.artifact_io"
+      ],
+      "scripts.adsorption.nequip_force_job": [
+        "scripts.adsorption.direct_gpu_batch",
+        "scripts.artifact_io"
+      ],
+      "scripts.adsorption.nequip_force_runtime": [
+        "scripts.artifact_io"
+      ],
+      "scripts.adsorption.preflight_fe110_adsorption": [
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.artifact_io",
+        "scripts.optional_dependencies",
+        "scripts.runtime_resources",
+        "scripts.vasp_lsf",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.adsorption.preflight_gas_references": [
+        "scripts.adsorption.build_gas_step12a_references",
+        "scripts.adsorption.gas_vasp_common",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.adsorption.prepare_completion_registration": [
+        "scripts.adsmind_lite.evidence_lifecycle",
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.artifact_io",
+        "scripts.registry_connection"
+      ],
+      "scripts.adsorption.register_step12a_gas_reference_submission": [
+        "scripts.artifact_io",
+        "scripts.registry_mutations",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.adsorption.register_step12a_oh_restart": [
+        "scripts.artifact_io",
+        "scripts.registry_mutations"
+      ],
+      "scripts.adsorption.reico_anchor_coverage": [
+        "scripts.adsorption.reico_environment_audit",
+        "scripts.artifact_io"
+      ],
+      "scripts.adsorption.reico_chemical_environments": [
+        "scripts.adsmind_lite.relaxed_analysis"
+      ],
+      "scripts.adsorption.reico_dataset_audit": [
+        "scripts.adsorption.force_finetune",
+        "scripts.adsorption.reico_environment_audit",
+        "scripts.adsorption.reico_selection",
+        "scripts.artifact_io"
+      ],
+      "scripts.adsorption.reico_environment_audit": [
+        "scripts.artifact_io"
+      ],
+      "scripts.adsorption.reico_force_coverage": [
+        "scripts.adsorption.reico_selection"
+      ],
+      "scripts.adsorption.reico_joint_coverage": [
+        "scripts.adsorption.reico_environment_audit",
+        "scripts.adsorption.reico_force_coverage"
+      ],
+      "scripts.adsorption.reico_probe_batch": [
+        "scripts.adsorption.reico_random_geometry",
+        "scripts.artifact_io",
+        "scripts.neb_agent.submission",
+        "scripts.vasp_inputs"
+      ],
+      "scripts.adsorption.reico_probe_review": [
+        "scripts.aqcat25_calibration",
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_vasp",
+        "scripts.scheduler_evidence",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.adsorption.reico_random_geometry": [
+        "scripts.artifact_io"
+      ],
+      "scripts.adsorption.reico_sampling": [],
+      "scripts.adsorption.reico_selection": [
+        "scripts.artifact_io"
+      ],
+      "scripts.adsorption.reico_stratified_audit": [
+        "scripts.adsmind_lite.relaxed_analysis",
+        "scripts.adsorption.reico_chemical_environments",
+        "scripts.adsorption.reico_dataset_audit",
+        "scripts.adsorption.reico_environment_audit",
+        "scripts.adsorption.reico_selection",
+        "scripts.artifact_io"
+      ],
+      "scripts.adsorption.render_fe110_ch_h_candidates": [
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsorption.review_completed_batch": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.relaxed_analysis",
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.adsorption.build_fe110_care_batch",
+        "scripts.adsorption.build_fe110_care_isomers",
+        "scripts.aqcat25_calibration",
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_vasp",
+        "scripts.scientific_validation",
+        "scripts.vasp_result_gate",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsorption.role_force_trainer": [
+        "scripts.adsorption.force_role_data",
+        "scripts.adsorption.force_role_runtime"
+      ],
+      "scripts.aqcat25_calibration": [
+        "scripts.artifact_io",
+        "scripts.execution_backends",
+        "scripts.neb_agent.utils_vasp"
+      ],
+      "scripts.aqcat25_handoff": [
+        "scripts.artifact_io",
+        "scripts.runtime_resources"
+      ],
+      "scripts.aqcat25_ml_neb": [
+        "scripts.aqcat25_handoff",
+        "scripts.artifact_io"
+      ],
+      "scripts.aqcat25_ml_path_committee": [
+        "scripts.aqcat25_handoff",
+        "scripts.aqcat25_ml_neb",
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.ml_neb_path"
+      ],
+      "scripts.aqcat25_ts_active_learning": [
+        "scripts.ts_strategy_engine.active_learning_cli"
+      ],
+      "scripts.aqcat25_ts_checkpoint_validation": [
+        "scripts.artifact_io"
+      ],
+      "scripts.aqcat25_ts_force_prediction": [
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io"
+      ],
+      "scripts.aqcat25_ts_force_prediction_batch": [
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io"
+      ],
+      "scripts.aqcat25_ts_schema": [
+        "scripts.artifact_io",
+        "scripts.runtime_resources"
+      ],
+      "scripts.aqcat25_ts_training_data": [
+        "scripts.artifact_io",
+        "scripts.matris_training_data",
+        "scripts.matris_training_exclusions",
+        "scripts.scientific_validation"
+      ],
+      "scripts.artifact_io": [],
+      "scripts.assess_dual_model_ts_heldout_errors": [
+        "scripts.artifact_io",
+        "scripts.assess_dual_model_ts_vasp_errors"
+      ],
+      "scripts.assess_dual_model_ts_vasp_errors": [
+        "scripts.artifact_io"
+      ],
+      "scripts.baseline_mkm.__init__": [],
+      "scripts.baseline_mkm.analysis": [
+        "scripts.artifact_io",
+        "scripts.baseline_mkm.analysis_report",
+        "scripts.baseline_mkm.kinetic_analysis",
+        "scripts.baseline_mkm.pathway_analysis",
+        "scripts.baseline_mkm.sensitivity_inputs",
+        "scripts.baseline_mkm.single_point",
+        "scripts.baseline_mkm.single_point_result",
+        "scripts.kinetic_parameters.engine",
+        "scripts.kinetic_parameters.export",
+        "scripts.multiphase_contracts",
+        "scripts.registry_write",
+        "scripts.scientific_validation"
+      ],
+      "scripts.baseline_mkm.analysis_report": [],
+      "scripts.baseline_mkm.composition_report": [
+        "scripts.artifact_io",
+        "scripts.baseline_mkm.drc_pair",
+        "scripts.baseline_mkm.drc_report",
+        "scripts.baseline_mkm.pressure_perturbation",
+        "scripts.baseline_mkm.reaction_order",
+        "scripts.baseline_mkm.results",
+        "scripts.baseline_mkm.sensitivity_report",
+        "scripts.baseline_mkm.single_point_result"
+      ],
+      "scripts.baseline_mkm.drc_batch": [
+        "scripts.artifact_io",
+        "scripts.baseline_mkm.drc_batch_execution",
+        "scripts.baseline_mkm.drc_batch_report",
+        "scripts.baseline_mkm.drc_pair",
+        "scripts.baseline_mkm.drc_report",
+        "scripts.baseline_mkm.drc_step_size",
+        "scripts.baseline_mkm.kinetic_analysis",
+        "scripts.baseline_mkm.ts_perturbation",
+        "scripts.kinetic_parameters.engine",
+        "scripts.kinetic_parameters.laws"
+      ],
+      "scripts.baseline_mkm.drc_batch_execution": [
+        "scripts.artifact_io",
+        "scripts.baseline_mkm.drc_batch",
+        "scripts.baseline_mkm.drc_cross_reaction",
+        "scripts.baseline_mkm.drc_pair",
+        "scripts.baseline_mkm.ts_perturbation"
+      ],
+      "scripts.baseline_mkm.drc_batch_report": [
+        "scripts.artifact_io",
+        "scripts.baseline_mkm.drc_batch",
+        "scripts.baseline_mkm.drc_pair",
+        "scripts.baseline_mkm.drc_report",
+        "scripts.baseline_mkm.drc_step_size",
+        "scripts.baseline_mkm.single_point_result",
+        "scripts.baseline_mkm.ts_perturbation"
+      ],
+      "scripts.baseline_mkm.drc_cross_reaction": [
+        "scripts.artifact_io",
+        "scripts.baseline_mkm.drc_pair",
+        "scripts.baseline_mkm.ts_perturbation",
+        "scripts.scientific_validation"
+      ],
+      "scripts.baseline_mkm.drc_pair": [
+        "scripts.artifact_io",
+        "scripts.baseline_mkm.analysis",
+        "scripts.baseline_mkm.drc_report",
+        "scripts.baseline_mkm.sensitivity_inputs",
+        "scripts.baseline_mkm.single_point",
+        "scripts.baseline_mkm.ts_perturbation",
+        "scripts.execution_permission",
+        "scripts.scientific_validation"
+      ],
+      "scripts.baseline_mkm.drc_report": [
+        "scripts.artifact_io",
+        "scripts.baseline_mkm.drc_pair",
+        "scripts.baseline_mkm.drc_step_size",
+        "scripts.baseline_mkm.results",
+        "scripts.baseline_mkm.single_point_result",
+        "scripts.baseline_mkm.ts_perturbation",
+        "scripts.kinetic_parameters.export",
+        "scripts.thermochemistry.harmonic"
+      ],
+      "scripts.baseline_mkm.drc_step_size": [
+        "scripts.baseline_mkm.single_point_result",
+        "scripts.baseline_mkm.ts_perturbation"
+      ],
+      "scripts.baseline_mkm.kinetic_analysis": [
+        "scripts.baseline_mkm.molecular_coverage",
+        "scripts.baseline_mkm.single_point_result",
+        "scripts.scientific_validation"
+      ],
+      "scripts.baseline_mkm.molecular_coverage": [
+        "scripts.baseline_mkm.single_point_result",
+        "scripts.reaction_network.site_review",
+        "scripts.scientific_validation"
+      ],
+      "scripts.baseline_mkm.native": [
+        "scripts.native_model",
+        "scripts.scientific_validation",
+        "scripts.thermochemistry.harmonic"
+      ],
+      "scripts.baseline_mkm.pathway_analysis": [],
+      "scripts.baseline_mkm.pressure_perturbation": [
+        "scripts.scientific_validation"
+      ],
+      "scripts.baseline_mkm.reaction_order": [
+        "scripts.artifact_io",
+        "scripts.baseline_mkm.drc_cross_reaction",
+        "scripts.baseline_mkm.drc_pair",
+        "scripts.baseline_mkm.pressure_perturbation",
+        "scripts.baseline_mkm.sensitivity_inputs"
+      ],
+      "scripts.baseline_mkm.registration": [
+        "scripts.artifact_io",
+        "scripts.baseline_mkm.single_point",
+        "scripts.registry_write"
+      ],
+      "scripts.baseline_mkm.results": [
+        "scripts.optional_dependencies"
+      ],
+      "scripts.baseline_mkm.sensitivity_inputs": [
+        "scripts.artifact_io",
+        "scripts.baseline_mkm.pressure_perturbation",
+        "scripts.baseline_mkm.ts_perturbation",
+        "scripts.kinetic_parameters.engine",
+        "scripts.kinetic_parameters.export",
+        "scripts.scientific_validation"
+      ],
+      "scripts.baseline_mkm.sensitivity_report": [
+        "scripts.artifact_io",
+        "scripts.baseline_mkm.drc_pair",
+        "scripts.baseline_mkm.drc_report",
+        "scripts.baseline_mkm.drc_step_size",
+        "scripts.baseline_mkm.sensitivity_study",
+        "scripts.baseline_mkm.single_point_result",
+        "scripts.scientific_validation",
+        "scripts.thermochemistry.harmonic"
+      ],
+      "scripts.baseline_mkm.sensitivity_study": [
+        "scripts.artifact_io",
+        "scripts.baseline_mkm.drc_cross_reaction",
+        "scripts.baseline_mkm.drc_pair",
+        "scripts.baseline_mkm.sensitivity_inputs",
+        "scripts.baseline_mkm.sensitivity_report",
+        "scripts.scientific_validation"
+      ],
+      "scripts.baseline_mkm.single_point": [
+        "scripts.artifact_io",
+        "scripts.baseline_mkm.results",
+        "scripts.baseline_mkm.sensitivity_inputs",
+        "scripts.baseline_mkm.single_point_result",
+        "scripts.execution_permission",
+        "scripts.kinetic_parameters.engine",
+        "scripts.native_model",
+        "scripts.runtime_resources"
+      ],
+      "scripts.baseline_mkm.single_point_result": [
+        "scripts.baseline_mkm.native",
+        "scripts.baseline_mkm.pressure_perturbation",
+        "scripts.kinetic_parameters.export",
+        "scripts.thermochemistry.harmonic"
+      ],
+      "scripts.baseline_mkm.ts_perturbation": [
+        "scripts.artifact_io",
+        "scripts.kinetic_parameters.engine",
+        "scripts.kinetic_parameters.export",
+        "scripts.scientific_validation",
+        "scripts.thermochemistry.harmonic"
+      ],
+      "scripts.bind_reviewed_dimer_execution": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.submission",
+        "scripts.ts_strategy_engine.execution_gate"
+      ],
+      "scripts.catalysis_retrieval.__init__": [],
+      "scripts.catalysis_retrieval.cli": [
+        "scripts.catalysis_retrieval.records",
+        "scripts.catalysis_retrieval.workflow"
+      ],
+      "scripts.catalysis_retrieval.ranking": [
+        "scripts.adsmind_lite.evidence_lifecycle",
+        "scripts.catalysis_retrieval.records",
+        "scripts.optional_dependencies",
+        "scripts.scientific_validation"
+      ],
+      "scripts.catalysis_retrieval.records": [
+        "scripts.adsmind_lite.evidence_lifecycle",
+        "scripts.jsonl_io",
+        "scripts.runtime_resources",
+        "scripts.scientific_validation"
+      ],
+      "scripts.catalysis_retrieval.validate_cli": [
+        "scripts.catalysis_retrieval.records"
+      ],
+      "scripts.catalysis_retrieval.workflow": [
+        "scripts.catalysis_retrieval.ranking",
+        "scripts.catalysis_retrieval.records",
+        "scripts.scientific_validation"
+      ],
+      "scripts.collect_dual_model_ts_vasp_labels": [
+        "scripts.aqcat25_calibration",
+        "scripts.artifact_io",
+        "scripts.execution_backends",
+        "scripts.neb_agent.utils_vasp",
+        "scripts.scheduler_evidence",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.convergence.common": [
+        "scripts.scientific_validation"
+      ],
+      "scripts.convergence.setup_alpha_fe_bulk_smearing": [
+        "scripts.artifact_io",
+        "scripts.convergence.common",
+        "scripts.neb_agent.submission",
+        "scripts.neb_agent.utils_vasp",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.convergence.setup_true_fe110_thickness_retest": [
+        "scripts.convergence.common",
+        "scripts.convergence.thickness_stage"
+      ],
+      "scripts.convergence.thickness_stage": [
+        "scripts.convergence.common",
+        "scripts.neb_agent.utils_structure",
+        "scripts.neb_agent.utils_vasp",
+        "scripts.scientific_validation",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.document_governance": [
+        "scripts.provenance_fields",
+        "scripts.registry_schema",
+        "scripts.runtime_resources"
+      ],
+      "scripts.dual_model_ml_neb": [
+        "scripts.aqcat25_ml_neb",
+        "scripts.artifact_io",
+        "scripts.ml_sella_candidate",
+        "scripts.mlip_same_structure_benchmark"
+      ],
+      "scripts.dual_model_ts_force_prediction_batch": [
+        "scripts.artifact_io",
+        "scripts.mlip_same_structure_benchmark"
+      ],
+      "scripts.execution_backends": [
+        "scripts.runtime_resources"
+      ],
+      "scripts.execution_permission": [
+        "scripts.artifact_io"
+      ],
+      "scripts.fe110_mlip_selection": [
+        "scripts.artifact_io",
+        "scripts.execution_backends",
+        "scripts.scientific_validation"
+      ],
+      "scripts.generate_capability_readiness": [
+        "scripts.artifact_io",
+        "scripts.document_governance",
+        "scripts.registry_schema",
+        "scripts.runtime_resources"
+      ],
+      "scripts.gpu_resources": [
+        "scripts.execution_backends"
+      ],
+      "scripts.init_registry": [
+        "scripts.registry_schema",
+        "scripts.runtime_resources"
+      ],
+      "scripts.jsonl_io": [],
+      "scripts.kinetic_parameters.__init__": [],
+      "scripts.kinetic_parameters.__main__": [
+        "scripts.artifact_io",
+        "scripts.kinetic_parameters.engine",
+        "scripts.kinetic_parameters.export",
+        "scripts.multiphase_contracts"
+      ],
+      "scripts.kinetic_parameters.engine": [
+        "scripts.artifact_io",
+        "scripts.kinetic_parameters.laws",
+        "scripts.multiphase_contracts",
+        "scripts.reaction_network.builder",
+        "scripts.reaction_network.thermodynamics",
+        "scripts.scientific_validation",
+        "scripts.thermochemistry.harmonic"
+      ],
+      "scripts.kinetic_parameters.export": [
+        "scripts.kinetic_parameters.engine",
+        "scripts.kinetic_parameters.laws",
+        "scripts.thermochemistry.harmonic"
+      ],
+      "scripts.kinetic_parameters.laws": [
+        "scripts.scientific_validation",
+        "scripts.thermochemistry.harmonic"
+      ],
+      "scripts.mace_surface_pilot": [
+        "scripts.aqcat25_ml_neb",
+        "scripts.artifact_io",
+        "scripts.fe110_mlip_selection",
+        "scripts.ts_strategy_engine.path_evidence"
+      ],
+      "scripts.matris_energy_force_finetune": [
+        "scripts.artifact_io",
+        "scripts.matris_finetune_speed_benchmark",
+        "scripts.matris_training_data",
+        "scripts.matris_training_exclusions",
+        "scripts.prediction_provenance",
+        "scripts.scientific_validation"
+      ],
+      "scripts.matris_finetune_speed_benchmark": [
+        "scripts.artifact_io",
+        "scripts.matris_training_exclusions",
+        "scripts.prediction_provenance",
+        "scripts.scientific_validation"
+      ],
+      "scripts.matris_frozen_heldout_validate": [
+        "scripts.artifact_io",
+        "scripts.matris_energy_force_finetune",
+        "scripts.matris_finetune_speed_benchmark"
+      ],
+      "scripts.matris_sella_local_peak": [
+        "scripts.aqcat25_ml_neb",
+        "scripts.artifact_io",
+        "scripts.dual_model_ml_neb",
+        "scripts.execution_backends",
+        "scripts.ml_candidate_source",
+        "scripts.ml_sella_candidate",
+        "scripts.mlip_same_structure_benchmark",
+        "scripts.prepare_dual_model_ts_active_learning_round"
+      ],
+      "scripts.matris_sella_smoke": [
+        "scripts.aqcat25_ml_neb",
+        "scripts.artifact_io",
+        "scripts.ml_sella_candidate",
+        "scripts.mlip_same_structure_benchmark"
+      ],
+      "scripts.matris_training_data": [
+        "scripts.artifact_io",
+        "scripts.matris_training_exclusions",
+        "scripts.neb_agent.utils_structure",
+        "scripts.provenance_fields",
+        "scripts.scheduler_evidence",
+        "scripts.scientific_validation",
+        "scripts.ts_strategy_engine.active_learning_common"
+      ],
+      "scripts.matris_training_exclusions": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_structure",
+        "scripts.provenance_fields",
+        "scripts.scientific_validation"
+      ],
+      "scripts.matris_ts_path_committee": [
+        "scripts.artifact_io",
+        "scripts.dual_model_ts_force_prediction_batch",
+        "scripts.mlip_same_structure_benchmark"
+      ],
+      "scripts.ml_candidate_source": [
+        "scripts.aqcat25_ml_neb",
+        "scripts.artifact_io",
+        "scripts.dual_model_ml_neb",
+        "scripts.prepare_dual_model_ts_active_learning_round"
+      ],
+      "scripts.ml_sella_candidate": [
+        "scripts.aqcat25_ml_neb",
+        "scripts.artifact_io"
+      ],
+      "scripts.mlip_same_structure_benchmark": [
+        "scripts.artifact_io"
+      ],
+      "scripts.multiphase_contracts": [
+        "scripts.runtime_resources",
+        "scripts.scientific_validation"
+      ],
+      "scripts.native_model": [
+        "scripts.artifact_io",
+        "scripts.baseline_mkm.native",
+        "scripts.kinetic_parameters.__main__",
+        "scripts.kinetic_parameters.export",
+        "scripts.native_validation",
+        "scripts.scientific_validation",
+        "scripts.surface_kmc.native"
+      ],
+      "scripts.native_validation": [
+        "scripts.thermochemistry.harmonic"
+      ],
+      "scripts.neb_agent.__init__": [],
+      "scripts.neb_agent.analyze_neb_outputs": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.cli_common",
+        "scripts.neb_agent.magnetic_continuity",
+        "scripts.neb_agent.utils_report",
+        "scripts.neb_agent.utils_structure",
+        "scripts.neb_agent.utils_vasp",
+        "scripts.runtime_resources",
+        "scripts.scientific_validation",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.neb_agent.check_endpoints": [
+        "scripts.neb_agent.utils_report",
+        "scripts.neb_agent.utils_structure",
+        "scripts.ts_strategy_engine.contract"
+      ],
+      "scripts.neb_agent.cli_common": [],
+      "scripts.neb_agent.crop_neb_path": [
+        "scripts.neb_agent.cli_common",
+        "scripts.neb_agent.utils_report",
+        "scripts.neb_agent.utils_structure"
+      ],
+      "scripts.neb_agent.diagnose_path_geometry": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.cli_common",
+        "scripts.neb_agent.utils_report",
+        "scripts.neb_agent.utils_structure",
+        "scripts.runtime_resources",
+        "scripts.scientific_validation",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.neb_agent.generate_path": [
+        "scripts.neb_agent.cli_common",
+        "scripts.neb_agent.utils_report",
+        "scripts.neb_agent.utils_structure",
+        "scripts.ts_strategy_engine.execution_gate"
+      ],
+      "scripts.neb_agent.magnetic_continuity": [],
+      "scripts.neb_agent.path_quality_cli": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.path_quality_service",
+        "scripts.runtime_resources"
+      ],
+      "scripts.neb_agent.path_quality_control": [
+        "scripts.neb_agent.utils_structure",
+        "scripts.neb_agent.utils_vasp",
+        "scripts.optional_dependencies",
+        "scripts.scientific_validation"
+      ],
+      "scripts.neb_agent.path_quality_service": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.path_quality_control",
+        "scripts.scientific_validation",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.neb_agent.pilot_validation": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.magnetic_continuity",
+        "scripts.neb_agent.path_quality_service",
+        "scripts.neb_agent.utils_structure",
+        "scripts.neb_agent.utils_vasp",
+        "scripts.runtime_resources",
+        "scripts.scheduler_evidence",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.neb_agent.prepare_restart": [
+        "scripts.neb_agent.cli_common",
+        "scripts.neb_agent.utils_report",
+        "scripts.neb_agent.utils_structure"
+      ],
+      "scripts.neb_agent.remote_monitor": [
+        "scripts.runtime_resources"
+      ],
+      "scripts.neb_agent.retrieval_prior_adapter": [
+        "scripts.neb_agent.cli_common",
+        "scripts.neb_agent.utils_report",
+        "scripts.neb_agent.utils_retrieval"
+      ],
+      "scripts.neb_agent.scf_chain_bundle": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.scf_repair_chain"
+      ],
+      "scripts.neb_agent.scf_chain_evidence": [
+        "scripts.neb_agent.utils_vasp",
+        "scripts.scientific_validation",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.neb_agent.scf_repair_chain": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.scf_chain_evidence",
+        "scripts.scientific_validation",
+        "scripts.ts_strategy_engine.scf_chain_gate",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.neb_agent.split_by_intermediate": [
+        "scripts.neb_agent.cli_common",
+        "scripts.neb_agent.utils_report",
+        "scripts.neb_agent.utils_structure"
+      ],
+      "scripts.neb_agent.submission": [
+        "scripts.adsorption.preflight_fe110_adsorption",
+        "scripts.artifact_io",
+        "scripts.convergence.common",
+        "scripts.execution_backends",
+        "scripts.neb_agent.pilot_validation",
+        "scripts.neb_agent.scf_chain_bundle",
+        "scripts.neb_agent.utils_structure",
+        "scripts.ts_strategy_engine.dimer_gate",
+        "scripts.ts_strategy_engine.execution_evidence",
+        "scripts.ts_strategy_engine.execution_gate",
+        "scripts.ts_strategy_engine.execution_path_rules",
+        "scripts.ts_strategy_engine.learning_evidence",
+        "scripts.ts_strategy_engine.learning_store",
+        "scripts.ts_strategy_engine.strategy_learning",
+        "scripts.ts_validation.dimer_frequency_gate",
+        "scripts.ts_validation.prepare_vfa_from_ts_image",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.neb_agent.utils_report": [
+        "scripts.artifact_io"
+      ],
+      "scripts.neb_agent.utils_retrieval": [],
+      "scripts.neb_agent.utils_structure": [
+        "scripts.workflow_geometry"
+      ],
+      "scripts.neb_agent.utils_vasp": [
+        "scripts.scientific_validation"
+      ],
+      "scripts.offline_mlip_fusion_feasibility": [
+        "scripts.artifact_io",
+        "scripts.runtime_resources"
+      ],
+      "scripts.optional_dependencies": [],
+      "scripts.prediction_provenance": [
+        "scripts.provenance_fields",
+        "scripts.scientific_validation"
+      ],
+      "scripts.prepare_aqcat25_ml_neb_handoff": [
+        "scripts.aqcat25_handoff",
+        "scripts.artifact_io",
+        "scripts.runtime_resources",
+        "scripts.ts_strategy_engine.contract"
+      ],
+      "scripts.prepare_ci_seeded_ml_neb": [],
+      "scripts.prepare_dual_model_ts_active_learning_round": [
+        "scripts.artifact_io",
+        "scripts.dual_model_ts_force_prediction_batch"
+      ],
+      "scripts.prepare_dual_model_ts_heldout_candidates": [
+        "scripts.artifact_io",
+        "scripts.matris_training_exclusions",
+        "scripts.neb_agent.utils_structure"
+      ],
+      "scripts.prepare_dual_model_ts_heldout_execution": [
+        "scripts.artifact_io",
+        "scripts.matris_training_exclusions",
+        "scripts.vasp_inputs"
+      ],
+      "scripts.prepare_gpu_path_dimer": [
+        "scripts.artifact_io",
+        "scripts.dual_model_ml_neb",
+        "scripts.ml_candidate_source",
+        "scripts.runtime_resources",
+        "scripts.ts_strategy_engine.contract",
+        "scripts.ts_strategy_engine.dimer_gate",
+        "scripts.ts_strategy_engine.execution_gate",
+        "scripts.ts_strategy_engine.gpu_dimer_parent",
+        "scripts.ts_strategy_engine.handoff",
+        "scripts.vasp_inputs"
+      ],
+      "scripts.prepare_matris_finetune_request": [
+        "scripts.artifact_io",
+        "scripts.matris_training_exclusions"
+      ],
+      "scripts.prepare_matris_remote_finetune_bundle": [
+        "scripts.artifact_io",
+        "scripts.matris_energy_force_finetune"
+      ],
+      "scripts.prepare_matris_replay_finetune_package": [
+        "scripts.artifact_io",
+        "scripts.matris_training_data",
+        "scripts.matris_training_exclusions",
+        "scripts.neb_agent.utils_structure",
+        "scripts.prepare_matris_finetune_request",
+        "scripts.scientific_validation"
+      ],
+      "scripts.prepare_ml_candidate_active_learning": [
+        "scripts.artifact_io",
+        "scripts.dual_model_ml_neb",
+        "scripts.dual_model_ts_force_prediction_batch",
+        "scripts.matris_sella_local_peak",
+        "scripts.ml_candidate_source",
+        "scripts.prepare_dual_model_ts_active_learning_round"
+      ],
+      "scripts.prepare_ml_candidate_rerun": [
+        "scripts.artifact_io",
+        "scripts.dual_model_ml_neb",
+        "scripts.execution_backends",
+        "scripts.matris_sella_local_peak",
+        "scripts.prepare_matris_finetune_request"
+      ],
+      "scripts.prepare_reviewed_neb_peak_dimer": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_structure",
+        "scripts.runtime_resources",
+        "scripts.scheduler_evidence",
+        "scripts.ts_strategy_engine.contract",
+        "scripts.ts_strategy_engine.dimer_gate",
+        "scripts.ts_strategy_engine.execution_gate",
+        "scripts.ts_strategy_engine.handoff",
+        "scripts.ts_strategy_engine.path_evidence",
+        "scripts.vasp_inputs"
+      ],
+      "scripts.prepare_ts_heldout_aqcat_prediction_batch": [
+        "scripts.aqcat25_calibration",
+        "scripts.aqcat25_handoff",
+        "scripts.aqcat25_ts_force_prediction_batch",
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io"
+      ],
+      "scripts.prepare_ts_heldout_validation_candidates": [
+        "scripts.artifact_io",
+        "scripts.matris_training_exclusions",
+        "scripts.neb_agent.utils_structure",
+        "scripts.ts_strategy_engine.active_learning_common",
+        "scripts.ts_strategy_engine.active_learning_domain"
+      ],
+      "scripts.prepare_ts_heldout_vasp_label_batch": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.submission",
+        "scripts.runtime_resources",
+        "scripts.vasp_inputs"
+      ],
+      "scripts.provenance_fields": [],
+      "scripts.reaction_network.__init__": [],
+      "scripts.reaction_network.__main__": [
+        "scripts.artifact_io",
+        "scripts.multiphase_contracts",
+        "scripts.reaction_network.builder"
+      ],
+      "scripts.reaction_network.builder": [
+        "scripts.artifact_io",
+        "scripts.multiphase_contracts",
+        "scripts.reaction_network.catalog",
+        "scripts.reaction_network.site_review",
+        "scripts.reaction_network.thermodynamics",
+        "scripts.scientific_intake",
+        "scripts.scientific_validation",
+        "scripts.thermochemistry.engine"
+      ],
+      "scripts.reaction_network.catalog": [
+        "scripts.artifact_io",
+        "scripts.multiphase_contracts"
+      ],
+      "scripts.reaction_network.site_review": [
+        "scripts.artifact_io",
+        "scripts.reaction_network.catalog"
+      ],
+      "scripts.reaction_network.thermodynamics": [
+        "scripts.multiphase_contracts",
+        "scripts.scientific_validation"
+      ],
+      "scripts.registry_acceptance": [
+        "scripts.adsmind_lite.evidence_lifecycle",
+        "scripts.aqcat25_calibration",
+        "scripts.artifact_io",
+        "scripts.scientific_validation",
+        "scripts.ts_validation.saddle_energy",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.registry_compatibility": [
+        "scripts.artifact_io",
+        "scripts.provenance_fields",
+        "scripts.registry_connection",
+        "scripts.registry_transactions",
+        "scripts.scientific_validation"
+      ],
+      "scripts.registry_connection": [
+        "scripts.registry_schema"
+      ],
+      "scripts.registry_excel_promotion": [
+        "scripts.artifact_io",
+        "scripts.registry_connection",
+        "scripts.registry_transactions",
+        "scripts.runtime_resources",
+        "scripts.scientific_validation",
+        "scripts.state_manager.store",
+        "scripts.ts_validation.barrier_values"
+      ],
+      "scripts.registry_mutations": [
+        "scripts.artifact_io",
+        "scripts.provenance_fields",
+        "scripts.registry_acceptance",
+        "scripts.registry_connection",
+        "scripts.registry_transactions",
+        "scripts.scientific_validation",
+        "scripts.state_manager.job_lifecycle"
+      ],
+      "scripts.registry_schema": [
+        "scripts.runtime_resources"
+      ],
+      "scripts.registry_transactions": [
+        "scripts.artifact_io",
+        "scripts.provenance_fields",
+        "scripts.registry_connection"
+      ],
+      "scripts.registry_write": [
+        "scripts.registry_mutations",
+        "scripts.runtime_resources"
+      ],
+      "scripts.release_build": [],
+      "scripts.release_environment": [
+        "scripts.release_smoke",
+        "scripts.runtime_resources"
+      ],
+      "scripts.release_smoke": [
+        "scripts.artifact_io",
+        "scripts.registry_mutations",
+        "scripts.registry_schema",
+        "scripts.registry_transactions",
+        "scripts.runtime_resources",
+        "scripts.ts_strategy_engine.contract"
+      ],
+      "scripts.review_completed_neb_parent": [
+        "scripts.aqcat25_calibration",
+        "scripts.artifact_io",
+        "scripts.neb_agent.analyze_neb_outputs",
+        "scripts.neb_agent.diagnose_path_geometry",
+        "scripts.neb_agent.utils_structure",
+        "scripts.runtime_resources",
+        "scripts.ts_strategy_engine.contract",
+        "scripts.ts_strategy_engine.path_evidence"
+      ],
+      "scripts.runtime_resources": [],
+      "scripts.scheduler_evidence": [
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io",
+        "scripts.execution_backends",
+        "scripts.ts_strategy_engine.execution_path_rules"
+      ],
+      "scripts.scientific_intake": [
+        "scripts.runtime_resources"
+      ],
+      "scripts.scientific_priority.__init__": [],
+      "scripts.scientific_priority.__main__": [
+        "scripts.artifact_io",
+        "scripts.baseline_mkm.single_point",
+        "scripts.kinetic_parameters.engine",
+        "scripts.scientific_priority.benchmark",
+        "scripts.scientific_priority.engine",
+        "scripts.scientific_priority.evidence",
+        "scripts.scientific_priority.proposals"
+      ],
+      "scripts.scientific_priority.benchmark": [
+        "scripts.artifact_io",
+        "scripts.scientific_intake",
+        "scripts.scientific_priority.evidence"
+      ],
+      "scripts.scientific_priority.engine": [
+        "scripts.artifact_io",
+        "scripts.scientific_priority.evidence",
+        "scripts.scientific_validation",
+        "scripts.thermochemistry.harmonic"
+      ],
+      "scripts.scientific_priority.evidence": [
+        "scripts.scientific_validation"
+      ],
+      "scripts.scientific_priority.proposals": [
+        "scripts.artifact_io",
+        "scripts.scientific_priority.evidence"
+      ],
+      "scripts.scientific_validation": [],
+      "scripts.select_dual_model_ts_vasp_labels": [
+        "scripts.artifact_io",
+        "scripts.runtime_resources",
+        "scripts.vasp_inputs"
+      ],
+      "scripts.state_manager.__init__": [
+        "scripts.state_manager.models",
+        "scripts.state_manager.store"
+      ],
+      "scripts.state_manager.__main__": [
+        "scripts.state_manager.cli"
+      ],
+      "scripts.state_manager.application_log": [
+        "scripts.artifact_io",
+        "scripts.state_manager.models",
+        "scripts.state_manager.store"
+      ],
+      "scripts.state_manager.audit": [
+        "scripts.artifact_io",
+        "scripts.state_manager.models",
+        "scripts.state_manager.projections",
+        "scripts.state_manager.store"
+      ],
+      "scripts.state_manager.baseline": [
+        "scripts.artifact_io",
+        "scripts.state_manager.models"
+      ],
+      "scripts.state_manager.checkpoints": [
+        "scripts.state_manager.models",
+        "scripts.state_manager.store"
+      ],
+      "scripts.state_manager.cli": [
+        "scripts.state_manager.application_log",
+        "scripts.state_manager.audit",
+        "scripts.state_manager.baseline",
+        "scripts.state_manager.checkpoints",
+        "scripts.state_manager.imports",
+        "scripts.state_manager.lifecycle",
+        "scripts.state_manager.lifecycle_views",
+        "scripts.state_manager.models",
+        "scripts.state_manager.proposals",
+        "scripts.state_manager.reconciliation",
+        "scripts.state_manager.review_reuse",
+        "scripts.state_manager.stale_items",
+        "scripts.state_manager.state_compaction",
+        "scripts.state_manager.store"
+      ],
+      "scripts.state_manager.imports": [
+        "scripts.artifact_io",
+        "scripts.state_manager.baseline",
+        "scripts.state_manager.models",
+        "scripts.state_manager.projections",
+        "scripts.state_manager.store"
+      ],
+      "scripts.state_manager.job_lifecycle": [
+        "scripts.provenance_fields"
+      ],
+      "scripts.state_manager.lifecycle": [
+        "scripts.artifact_io",
+        "scripts.state_manager.models",
+        "scripts.state_manager.projections",
+        "scripts.state_manager.store"
+      ],
+      "scripts.state_manager.lifecycle_views": [
+        "scripts.artifact_io",
+        "scripts.state_manager.models",
+        "scripts.state_manager.projections"
+      ],
+      "scripts.state_manager.models": [
+        "scripts.artifact_io",
+        "scripts.runtime_resources"
+      ],
+      "scripts.state_manager.projections": [
+        "scripts.artifact_io",
+        "scripts.runtime_resources",
+        "scripts.state_manager.models"
+      ],
+      "scripts.state_manager.proposals": [
+        "scripts.artifact_io",
+        "scripts.state_manager.application_log",
+        "scripts.state_manager.models",
+        "scripts.state_manager.projections",
+        "scripts.state_manager.store"
+      ],
+      "scripts.state_manager.reconciliation": [
+        "scripts.artifact_io",
+        "scripts.state_manager.models",
+        "scripts.state_manager.store"
+      ],
+      "scripts.state_manager.review_reuse": [
+        "scripts.artifact_io",
+        "scripts.state_manager.models"
+      ],
+      "scripts.state_manager.stale_items": [
+        "scripts.artifact_io",
+        "scripts.document_governance",
+        "scripts.runtime_resources",
+        "scripts.state_manager.models"
+      ],
+      "scripts.state_manager.state_compaction": [
+        "scripts.artifact_io",
+        "scripts.state_manager.models"
+      ],
+      "scripts.state_manager.store": [
+        "scripts.artifact_io",
+        "scripts.provenance_fields",
+        "scripts.state_manager.models"
+      ],
+      "scripts.surface_kmc.__init__": [],
+      "scripts.surface_kmc.lattice": [
+        "scripts.native_model",
+        "scripts.scientific_validation"
+      ],
+      "scripts.surface_kmc.native": [
+        "scripts.artifact_io",
+        "scripts.native_model",
+        "scripts.scientific_validation",
+        "scripts.surface_kmc.lattice"
+      ],
+      "scripts.thermochemistry.__init__": [],
+      "scripts.thermochemistry.__main__": [
+        "scripts.thermochemistry.engine",
+        "scripts.thermochemistry.frequencies"
+      ],
+      "scripts.thermochemistry.engine": [
+        "scripts.artifact_io",
+        "scripts.scientific_intake",
+        "scripts.scientific_validation",
+        "scripts.thermochemistry.harmonic"
+      ],
+      "scripts.thermochemistry.frequencies": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_structure",
+        "scripts.ts_validation.analyze_vfa"
+      ],
+      "scripts.thermochemistry.harmonic": [
+        "scripts.scientific_validation"
+      ],
+      "scripts.ts_endpoint.__init__": [],
+      "scripts.ts_endpoint.database": [
+        "scripts.registry_connection",
+        "scripts.runtime_resources"
+      ],
+      "scripts.ts_endpoint.evidence": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.relaxed_analysis",
+        "scripts.neb_agent.utils_structure"
+      ],
+      "scripts.ts_endpoint.generator": [
+        "scripts.ts_endpoint.validator"
+      ],
+      "scripts.ts_endpoint.purpose": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.artifact_io",
+        "scripts.runtime_resources",
+        "scripts.ts_endpoint.database",
+        "scripts.ts_endpoint.generator"
+      ],
+      "scripts.ts_endpoint.validator": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.neb_agent.utils_structure",
+        "scripts.optional_dependencies",
+        "scripts.runtime_resources",
+        "scripts.ts_endpoint.evidence"
+      ],
+      "scripts.ts_strategy_engine.__init__": [],
+      "scripts.ts_strategy_engine.active_learning": [
+        "scripts.ts_strategy_engine.active_learning_calibration",
+        "scripts.ts_strategy_engine.active_learning_common",
+        "scripts.ts_strategy_engine.active_learning_domain",
+        "scripts.ts_strategy_engine.active_learning_handoff",
+        "scripts.ts_strategy_engine.active_learning_label",
+        "scripts.ts_strategy_engine.active_learning_path",
+        "scripts.ts_strategy_engine.active_learning_state",
+        "scripts.ts_strategy_engine.active_learning_training"
+      ],
+      "scripts.ts_strategy_engine.active_learning_calibration": [
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.active_learning_common"
+      ],
+      "scripts.ts_strategy_engine.active_learning_cli": [
+        "scripts.runtime_resources",
+        "scripts.scheduler_evidence",
+        "scripts.ts_strategy_engine.active_learning",
+        "scripts.ts_strategy_engine.active_learning_common",
+        "scripts.ts_strategy_engine.active_learning_state"
+      ],
+      "scripts.ts_strategy_engine.active_learning_common": [
+        "scripts.aqcat25_handoff",
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io",
+        "scripts.execution_backends",
+        "scripts.ts_strategy_engine.contract",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.ts_strategy_engine.active_learning_domain": [
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_structure",
+        "scripts.ts_strategy_engine.active_learning_common"
+      ],
+      "scripts.ts_strategy_engine.active_learning_handoff": [
+        "scripts.aqcat25_calibration",
+        "scripts.aqcat25_handoff",
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io",
+        "scripts.execution_backends",
+        "scripts.ts_strategy_engine.active_learning_common"
+      ],
+      "scripts.ts_strategy_engine.active_learning_label": [
+        "scripts.aqcat25_calibration",
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io",
+        "scripts.execution_backends",
+        "scripts.neb_agent.utils_structure",
+        "scripts.scheduler_evidence",
+        "scripts.ts_strategy_engine.active_learning_common",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.ts_strategy_engine.active_learning_path": [
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.active_learning_common",
+        "scripts.ts_strategy_engine.active_learning_path_labels",
+        "scripts.ts_strategy_engine.active_learning_path_predictions",
+        "scripts.ts_strategy_engine.active_learning_path_rerun",
+        "scripts.ts_strategy_engine.active_learning_path_selection",
+        "scripts.ts_strategy_engine.contract"
+      ],
+      "scripts.ts_strategy_engine.active_learning_path_common": [
+        "scripts.aqcat25_handoff",
+        "scripts.artifact_io"
+      ],
+      "scripts.ts_strategy_engine.active_learning_path_labels": [
+        "scripts.aqcat25_calibration",
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_structure",
+        "scripts.runtime_resources",
+        "scripts.scheduler_evidence",
+        "scripts.ts_strategy_engine.active_learning_common",
+        "scripts.ts_strategy_engine.active_learning_path_common",
+        "scripts.ts_strategy_engine.ml_neb_path",
+        "scripts.vasp_inputs",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.ts_strategy_engine.active_learning_path_predictions": [
+        "scripts.aqcat25_calibration",
+        "scripts.aqcat25_handoff",
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io",
+        "scripts.execution_backends",
+        "scripts.ts_strategy_engine.active_learning_common",
+        "scripts.ts_strategy_engine.active_learning_path_common"
+      ],
+      "scripts.ts_strategy_engine.active_learning_path_rerun": [
+        "scripts.aqcat25_handoff",
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.active_learning_common",
+        "scripts.ts_strategy_engine.active_learning_path_common"
+      ],
+      "scripts.ts_strategy_engine.active_learning_path_selection": [
+        "scripts.aqcat25_calibration",
+        "scripts.aqcat25_handoff",
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.active_learning_common",
+        "scripts.ts_strategy_engine.active_learning_path_common",
+        "scripts.ts_strategy_engine.ml_neb_path"
+      ],
+      "scripts.ts_strategy_engine.active_learning_scheduler": [
+        "scripts.scheduler_evidence"
+      ],
+      "scripts.ts_strategy_engine.active_learning_state": [
+        "scripts.artifact_io",
+        "scripts.runtime_resources",
+        "scripts.ts_strategy_engine.active_learning_common",
+        "scripts.ts_strategy_engine.contract",
+        "scripts.vasp_inputs"
+      ],
+      "scripts.ts_strategy_engine.active_learning_training": [
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io",
+        "scripts.execution_backends",
+        "scripts.matris_training_data",
+        "scripts.matris_training_exclusions",
+        "scripts.neb_agent.utils_structure",
+        "scripts.ts_strategy_engine.active_learning_common"
+      ],
+      "scripts.ts_strategy_engine.cli": [
+        "scripts.optional_dependencies",
+        "scripts.runtime_resources",
+        "scripts.ts_strategy_engine.cli_commands"
+      ],
+      "scripts.ts_strategy_engine.cli_commands": [
+        "scripts.neb_agent.cli_common",
+        "scripts.ts_strategy_engine.active_learning_cli",
+        "scripts.ts_strategy_engine.contract",
+        "scripts.ts_strategy_engine.dimer_analysis",
+        "scripts.ts_strategy_engine.evidence",
+        "scripts.ts_strategy_engine.handoff",
+        "scripts.ts_strategy_engine.learning_cli",
+        "scripts.ts_strategy_engine.ml_neb_path",
+        "scripts.ts_strategy_engine.path_evidence",
+        "scripts.ts_strategy_engine.rsi_advice",
+        "scripts.ts_strategy_engine.templates",
+        "scripts.ts_strategy_engine.workflow",
+        "scripts.ts_validation.analyze_vfa",
+        "scripts.ts_validation.connectivity",
+        "scripts.ts_validation.prepare_connectivity",
+        "scripts.ts_validation.prepare_vfa_from_ts_image",
+        "scripts.ts_validation.validation_pipeline"
+      ],
+      "scripts.ts_strategy_engine.connectivity_evidence": [
+        "scripts.artifact_io",
+        "scripts.execution_backends"
+      ],
+      "scripts.ts_strategy_engine.contract": [
+        "scripts.artifact_io",
+        "scripts.optional_dependencies",
+        "scripts.scientific_validation"
+      ],
+      "scripts.ts_strategy_engine.dimer_analysis": [
+        "scripts.aqcat25_ts_schema",
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_report",
+        "scripts.neb_agent.utils_structure",
+        "scripts.neb_agent.utils_vasp",
+        "scripts.scientific_validation",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.ts_strategy_engine.dimer_gate": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_structure",
+        "scripts.runtime_resources",
+        "scripts.ts_strategy_engine.dimer_gate_common",
+        "scripts.ts_strategy_engine.dimer_path_gate",
+        "scripts.ts_strategy_engine.gpu_dimer_parent"
+      ],
+      "scripts.ts_strategy_engine.dimer_gate_common": [
+        "scripts.runtime_resources",
+        "scripts.scientific_validation"
+      ],
+      "scripts.ts_strategy_engine.dimer_path_gate": [
+        "scripts.artifact_io",
+        "scripts.runtime_resources",
+        "scripts.ts_strategy_engine.dimer_gate_common",
+        "scripts.ts_strategy_engine.ml_neb_path"
+      ],
+      "scripts.ts_strategy_engine.evidence": [
+        "scripts.artifact_io",
+        "scripts.registry_compatibility",
+        "scripts.ts_strategy_engine.connectivity_evidence",
+        "scripts.ts_strategy_engine.execution_gate",
+        "scripts.ts_strategy_engine.matched_static_evidence",
+        "scripts.ts_strategy_engine.registry",
+        "scripts.ts_strategy_engine.templates"
+      ],
+      "scripts.ts_strategy_engine.execution_blocking_rules": [
+        "scripts.ts_strategy_engine.execution_decision",
+        "scripts.ts_strategy_engine.execution_evidence"
+      ],
+      "scripts.ts_strategy_engine.execution_decision": [
+        "scripts.artifact_io"
+      ],
+      "scripts.ts_strategy_engine.execution_evidence": [
+        "scripts.artifact_io",
+        "scripts.scheduler_evidence",
+        "scripts.ts_strategy_engine.execution_decision",
+        "scripts.ts_strategy_engine.gpu_dimer_parent"
+      ],
+      "scripts.ts_strategy_engine.execution_gate": [
+        "scripts.artifact_io",
+        "scripts.execution_permission",
+        "scripts.ts_strategy_engine.execution_decision",
+        "scripts.ts_strategy_engine.execution_evidence",
+        "scripts.ts_strategy_engine.execution_path_rules",
+        "scripts.ts_strategy_engine.execution_submission_rules",
+        "scripts.ts_strategy_engine.scf_chain_gate"
+      ],
+      "scripts.ts_strategy_engine.execution_gate_cli": [
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.execution_evidence",
+        "scripts.ts_strategy_engine.execution_gate"
+      ],
+      "scripts.ts_strategy_engine.execution_gpu_rules": [
+        "scripts.ts_strategy_engine.execution_decision",
+        "scripts.ts_strategy_engine.gpu_dimer_parent"
+      ],
+      "scripts.ts_strategy_engine.execution_path_rules": [
+        "scripts.ts_strategy_engine.execution_decision"
+      ],
+      "scripts.ts_strategy_engine.execution_submission_rules": [
+        "scripts.ts_strategy_engine.dimer_gate",
+        "scripts.ts_strategy_engine.execution_blocking_rules",
+        "scripts.ts_strategy_engine.execution_decision",
+        "scripts.ts_strategy_engine.execution_evidence",
+        "scripts.ts_strategy_engine.execution_gpu_rules",
+        "scripts.ts_strategy_engine.execution_path_rules",
+        "scripts.ts_strategy_engine.scf_chain_gate",
+        "scripts.ts_strategy_engine.scientific_claims"
+      ],
+      "scripts.ts_strategy_engine.fingerprint": [
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.contract"
+      ],
+      "scripts.ts_strategy_engine.gpu_dimer_parent": [
+        "scripts.artifact_io",
+        "scripts.dual_model_ml_neb",
+        "scripts.ml_candidate_source",
+        "scripts.ts_strategy_engine.contract",
+        "scripts.ts_strategy_engine.dimer_gate_common"
+      ],
+      "scripts.ts_strategy_engine.handoff": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_report",
+        "scripts.neb_agent.utils_structure",
+        "scripts.ts_strategy_engine.contract",
+        "scripts.ts_strategy_engine.dimer_gate",
+        "scripts.ts_strategy_engine.execution_gate",
+        "scripts.ts_strategy_engine.path_evidence"
+      ],
+      "scripts.ts_strategy_engine.learning_cases": [
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.learning_evidence",
+        "scripts.ts_strategy_engine.strategy_learning"
+      ],
+      "scripts.ts_strategy_engine.learning_cli": [
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.learning_cases",
+        "scripts.ts_strategy_engine.learning_evaluation",
+        "scripts.ts_strategy_engine.learning_evidence",
+        "scripts.ts_strategy_engine.learning_store",
+        "scripts.ts_strategy_engine.strategy_learning",
+        "scripts.ts_strategy_engine.workflow"
+      ],
+      "scripts.ts_strategy_engine.learning_evaluation": [
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.learning_cases",
+        "scripts.ts_strategy_engine.learning_evidence",
+        "scripts.ts_strategy_engine.strategy_learning"
+      ],
+      "scripts.ts_strategy_engine.learning_evidence": [
+        "scripts.artifact_io",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.ts_strategy_engine.learning_store": [
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.registry"
+      ],
+      "scripts.ts_strategy_engine.matched_static_evidence": [
+        "scripts.execution_backends",
+        "scripts.scientific_validation",
+        "scripts.ts_strategy_engine.contract",
+        "scripts.ts_validation.barrier_values"
+      ],
+      "scripts.ts_strategy_engine.ml_neb_path": [
+        "scripts.artifact_io"
+      ],
+      "scripts.ts_strategy_engine.paper_sequential": [
+        "scripts.artifact_io",
+        "scripts.scientific_validation"
+      ],
+      "scripts.ts_strategy_engine.path_evidence": [
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.fingerprint"
+      ],
+      "scripts.ts_strategy_engine.registry": [
+        "scripts.registry_compatibility",
+        "scripts.registry_connection",
+        "scripts.registry_schema",
+        "scripts.ts_validation.barrier_values"
+      ],
+      "scripts.ts_strategy_engine.rsi_advice": [
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.contract",
+        "scripts.ts_strategy_engine.learning_evidence",
+        "scripts.ts_strategy_engine.path_evidence",
+        "scripts.ts_strategy_engine.strategy_learning"
+      ],
+      "scripts.ts_strategy_engine.scf_chain_gate": [
+        "scripts.artifact_io",
+        "scripts.scientific_validation"
+      ],
+      "scripts.ts_strategy_engine.scientific_claims": [
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.execution_decision",
+        "scripts.ts_strategy_engine.execution_evidence",
+        "scripts.ts_validation.analyze_vfa",
+        "scripts.ts_validation.validation_pipeline"
+      ],
+      "scripts.ts_strategy_engine.strategy": [
+        "scripts.scientific_validation",
+        "scripts.ts_strategy_engine.dimer_gate_common",
+        "scripts.ts_strategy_engine.execution_gate",
+        "scripts.ts_strategy_engine.fingerprint",
+        "scripts.ts_strategy_engine.strategy_learning"
+      ],
+      "scripts.ts_strategy_engine.strategy_learning": [
+        "scripts.artifact_io",
+        "scripts.runtime_resources",
+        "scripts.ts_strategy_engine.learning_evidence",
+        "scripts.ts_strategy_engine.learning_store",
+        "scripts.ts_strategy_engine.registry",
+        "scripts.ts_strategy_engine.templates",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.ts_strategy_engine.templates": [
+        "scripts.ts_strategy_engine.matched_static_evidence",
+        "scripts.ts_strategy_engine.registry"
+      ],
+      "scripts.ts_strategy_engine.workflow": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.analyze_neb_outputs",
+        "scripts.neb_agent.check_endpoints",
+        "scripts.neb_agent.diagnose_path_geometry",
+        "scripts.neb_agent.generate_path",
+        "scripts.neb_agent.path_quality_service",
+        "scripts.neb_agent.submission",
+        "scripts.neb_agent.utils_structure",
+        "scripts.runtime_resources",
+        "scripts.ts_strategy_engine.contract",
+        "scripts.ts_strategy_engine.evidence",
+        "scripts.ts_strategy_engine.fingerprint",
+        "scripts.ts_strategy_engine.learning_evidence",
+        "scripts.ts_strategy_engine.learning_store",
+        "scripts.ts_strategy_engine.path_evidence",
+        "scripts.ts_strategy_engine.rsi_advice",
+        "scripts.ts_strategy_engine.strategy",
+        "scripts.ts_strategy_engine.strategy_learning",
+        "scripts.ts_strategy_engine.templates",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.ts_validation.__init__": [],
+      "scripts.ts_validation.analyze_vfa": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.analyze_neb_outputs",
+        "scripts.neb_agent.diagnose_path_geometry",
+        "scripts.neb_agent.utils_report",
+        "scripts.neb_agent.utils_structure",
+        "scripts.neb_agent.utils_vasp",
+        "scripts.runtime_resources",
+        "scripts.scientific_validation",
+        "scripts.ts_strategy_engine.contract",
+        "scripts.ts_strategy_engine.dimer_analysis",
+        "scripts.ts_strategy_engine.path_evidence",
+        "scripts.ts_validation.connectivity",
+        "scripts.ts_validation.dimer_frequency_gate"
+      ],
+      "scripts.ts_validation.barrier_values": [
+        "scripts.scientific_validation"
+      ],
+      "scripts.ts_validation.connectivity": [
+        "scripts.adsmind_lite.adsmind_common",
+        "scripts.adsmind_lite.relaxed_analysis",
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_structure",
+        "scripts.runtime_resources",
+        "scripts.ts_strategy_engine.contract",
+        "scripts.ts_strategy_engine.path_evidence",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.ts_validation.dimer_frequency_gate": [
+        "scripts.artifact_io"
+      ],
+      "scripts.ts_validation.prepare_connectivity": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_structure"
+      ],
+      "scripts.ts_validation.prepare_vfa_from_ts_image": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.cli_common",
+        "scripts.neb_agent.utils_report",
+        "scripts.neb_agent.utils_structure",
+        "scripts.ts_strategy_engine.contract",
+        "scripts.ts_strategy_engine.handoff",
+        "scripts.ts_validation.analyze_vfa",
+        "scripts.ts_validation.dimer_frequency_gate"
+      ],
+      "scripts.ts_validation.saddle_energy": [
+        "scripts.artifact_io",
+        "scripts.neb_agent.utils_vasp",
+        "scripts.scientific_validation",
+        "scripts.ts_strategy_engine.execution_gate",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.ts_validation.validation_pipeline": [
+        "scripts.artifact_io",
+        "scripts.runtime_resources",
+        "scripts.ts_validation.analyze_vfa"
+      ],
+      "scripts.validate_release": [
+        "scripts.release_environment"
+      ],
+      "scripts.vasp_inputs": [
+        "scripts.aqcat25_calibration",
+        "scripts.artifact_io",
+        "scripts.runtime_resources",
+        "scripts.vasp_lsf"
+      ],
+      "scripts.vasp_lsf": [
+        "scripts.runtime_resources"
+      ],
+      "scripts.vasp_result_gate": [
+        "scripts.execution_backends",
+        "scripts.neb_agent.utils_vasp",
+        "scripts.scientific_validation"
+      ],
+      "scripts.workflow_geometry": []
+    },
+    "module_count": 328,
+    "edge_count": 1150,
+    "cyclic_components": [
+      [
+        "scripts.baseline_mkm.drc_batch",
+        "scripts.baseline_mkm.drc_batch_execution",
+        "scripts.baseline_mkm.drc_batch_report"
+      ],
+      [
+        "scripts.baseline_mkm.drc_pair",
+        "scripts.baseline_mkm.drc_report"
+      ],
+      [
+        "scripts.baseline_mkm.native",
+        "scripts.native_model",
+        "scripts.surface_kmc.lattice",
+        "scripts.surface_kmc.native"
+      ],
+      [
+        "scripts.baseline_mkm.sensitivity_report",
+        "scripts.baseline_mkm.sensitivity_study"
+      ]
+    ],
+    "top_level_clone_pairs_min_45_ast_nodes": [
+      [
+        "scripts/ts_strategy_engine/dimer_gate_common.py::_sha256",
+        "scripts/ts_strategy_engine/ml_neb_path.py::_sha256"
+      ]
+    ],
+    "fresh_imports": [
+      {
+        "order": [
+          "scripts.baseline_mkm.drc_batch",
+          "scripts.baseline_mkm.drc_batch_execution",
+          "scripts.baseline_mkm.drc_batch_report"
+        ],
+        "exit_code": 0,
+        "error": ""
+      },
+      {
+        "order": [
+          "scripts.baseline_mkm.drc_batch_report",
+          "scripts.baseline_mkm.drc_batch_execution",
+          "scripts.baseline_mkm.drc_batch"
+        ],
+        "exit_code": 0,
+        "error": ""
+      },
+      {
+        "order": [
+          "scripts.baseline_mkm.drc_pair",
+          "scripts.baseline_mkm.drc_report"
+        ],
+        "exit_code": 0,
+        "error": ""
+      },
+      {
+        "order": [
+          "scripts.baseline_mkm.drc_report",
+          "scripts.baseline_mkm.drc_pair"
+        ],
+        "exit_code": 0,
+        "error": ""
+      },
+      {
+        "order": [
+          "scripts.baseline_mkm.native",
+          "scripts.native_model",
+          "scripts.surface_kmc.lattice",
+          "scripts.surface_kmc.native"
+        ],
+        "exit_code": 0,
+        "error": ""
+      },
+      {
+        "order": [
+          "scripts.surface_kmc.native",
+          "scripts.surface_kmc.lattice",
+          "scripts.native_model",
+          "scripts.baseline_mkm.native"
+        ],
+        "exit_code": 0,
+        "error": ""
+      },
+      {
+        "order": [
+          "scripts.baseline_mkm.sensitivity_report",
+          "scripts.baseline_mkm.sensitivity_study"
+        ],
+        "exit_code": 0,
+        "error": ""
+      },
+      {
+        "order": [
+          "scripts.baseline_mkm.sensitivity_study",
+          "scripts.baseline_mkm.sensitivity_report"
+        ],
+        "exit_code": 0,
+        "error": ""
+      }
+    ]
+  },
+  "release": {
+    "head": "818c7fa41df647fd7b0c0267999172c7c4691c3e",
+    "scope": "tests.test_b5_architecture_boundaries maintained_trees and imported_modules; maintained local Python module imports including function-local dependencies; AST only",
+    "module_count": 287,
+    "edge_count": 1046,
+    "cyclic_components": [
+      [
+        "scripts.baseline_mkm.drc_batch",
+        "scripts.baseline_mkm.drc_batch_execution",
+        "scripts.baseline_mkm.drc_batch_report"
+      ],
+      [
+        "scripts.baseline_mkm.drc_pair",
+        "scripts.baseline_mkm.drc_report"
+      ],
+      [
+        "scripts.baseline_mkm.native",
+        "scripts.native_model",
+        "scripts.surface_kmc.lattice",
+        "scripts.surface_kmc.native"
+      ],
+      [
+        "scripts.baseline_mkm.sensitivity_report",
+        "scripts.baseline_mkm.sensitivity_study"
+      ]
+    ],
+    "top_level_clone_pairs_min_45_ast_nodes": [
+      [
+        "scripts/ts_strategy_engine/dimer_gate_common.py::_sha256",
+        "scripts/ts_strategy_engine/ml_neb_path.py::_sha256"
+      ]
+    ],
+    "fresh_imports": [
+      {
+        "order": [
+          "scripts.baseline_mkm.drc_batch",
+          "scripts.baseline_mkm.drc_batch_execution",
+          "scripts.baseline_mkm.drc_batch_report"
+        ],
+        "exit_code": 0,
+        "error": ""
+      },
+      {
+        "order": [
+          "scripts.baseline_mkm.drc_batch_report",
+          "scripts.baseline_mkm.drc_batch_execution",
+          "scripts.baseline_mkm.drc_batch"
+        ],
+        "exit_code": 0,
+        "error": ""
+      },
+      {
+        "order": [
+          "scripts.baseline_mkm.drc_pair",
+          "scripts.baseline_mkm.drc_report"
+        ],
+        "exit_code": 0,
+        "error": ""
+      },
+      {
+        "order": [
+          "scripts.baseline_mkm.drc_report",
+          "scripts.baseline_mkm.drc_pair"
+        ],
+        "exit_code": 0,
+        "error": ""
+      },
+      {
+        "order": [
+          "scripts.baseline_mkm.native",
+          "scripts.native_model",
+          "scripts.surface_kmc.lattice",
+          "scripts.surface_kmc.native"
+        ],
+        "exit_code": 0,
+        "error": ""
+      },
+      {
+        "order": [
+          "scripts.surface_kmc.native",
+          "scripts.surface_kmc.lattice",
+          "scripts.native_model",
+          "scripts.baseline_mkm.native"
+        ],
+        "exit_code": 0,
+        "error": ""
+      },
+      {
+        "order": [
+          "scripts.baseline_mkm.sensitivity_report",
+          "scripts.baseline_mkm.sensitivity_study"
+        ],
+        "exit_code": 0,
+        "error": ""
+      },
+      {
+        "order": [
+          "scripts.baseline_mkm.sensitivity_study",
+          "scripts.baseline_mkm.sensitivity_report"
+        ],
+        "exit_code": 0,
+        "error": ""
+      }
+    ],
+    "adjacency_difference_from_development": {
+      "scripts.adsorption.acceleration_benchmark": null,
+      "scripts.adsorption.build_fe110_care_batch": [
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.adsorption.build_fe110_care_isomers"
+      ],
+      "scripts.adsorption.build_fe110_care_isomers": [
+        "scripts.adsorption.build_fe110_adsorption",
+        "scripts.artifact_io",
+        "scripts.prediction_provenance",
+        "scripts.scientific_validation",
+        "scripts.workflow_geometry"
+      ],
+      "scripts.adsorption.collect_completed_batch": null,
+      "scripts.adsorption.direct_force_training": null,
+      "scripts.adsorption.direct_gpu_batch": null,
+      "scripts.adsorption.direct_training_arm": null,
+      "scripts.adsorption.fixed_force_comparison": null,
+      "scripts.adsorption.force_finetune": null,
+      "scripts.adsorption.force_role_data": null,
+      "scripts.adsorption.force_role_runtime": null,
+      "scripts.adsorption.force_training_preflight": null,
+      "scripts.adsorption.matris_adsorption_relax": null,
+      "scripts.adsorption.nequip_force_data": null,
+      "scripts.adsorption.nequip_force_job": null,
+      "scripts.adsorption.nequip_force_runtime": null,
+      "scripts.adsorption.prepare_completion_registration": null,
+      "scripts.adsorption.reico_anchor_coverage": null,
+      "scripts.adsorption.reico_chemical_environments": null,
+      "scripts.adsorption.reico_dataset_audit": null,
+      "scripts.adsorption.reico_environment_audit": null,
+      "scripts.adsorption.reico_force_coverage": null,
+      "scripts.adsorption.reico_joint_coverage": null,
+      "scripts.adsorption.reico_probe_batch": null,
+      "scripts.adsorption.reico_probe_review": null,
+      "scripts.adsorption.reico_random_geometry": null,
+      "scripts.adsorption.reico_sampling": null,
+      "scripts.adsorption.reico_selection": null,
+      "scripts.adsorption.reico_stratified_audit": null,
+      "scripts.adsorption.role_force_trainer": null,
+      "scripts.fe110_mlip_selection": null,
+      "scripts.gpu_resources": null,
+      "scripts.mace_surface_pilot": null,
+      "scripts.neb_agent.scf_chain_bundle": null,
+      "scripts.neb_agent.scf_chain_evidence": null,
+      "scripts.neb_agent.scf_repair_chain": null,
+      "scripts.neb_agent.submission": [
+        "scripts.artifact_io",
+        "scripts.convergence.common",
+        "scripts.execution_backends",
+        "scripts.neb_agent.pilot_validation",
+        "scripts.neb_agent.utils_structure",
+        "scripts.ts_strategy_engine.dimer_gate",
+        "scripts.ts_strategy_engine.execution_evidence",
+        "scripts.ts_strategy_engine.execution_gate",
+        "scripts.ts_strategy_engine.execution_path_rules",
+        "scripts.ts_strategy_engine.learning_evidence",
+        "scripts.ts_strategy_engine.learning_store",
+        "scripts.ts_strategy_engine.strategy_learning",
+        "scripts.ts_validation.dimer_frequency_gate",
+        "scripts.ts_validation.prepare_vfa_from_ts_image",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.prepare_ci_seeded_ml_neb": null,
+      "scripts.registry_acceptance": [
+        "scripts.adsmind_lite.evidence_lifecycle",
+        "scripts.aqcat25_calibration",
+        "scripts.artifact_io",
+        "scripts.scientific_validation",
+        "scripts.vasp_result_gate"
+      ],
+      "scripts.ts_strategy_engine.execution_blocking_rules": null,
+      "scripts.ts_strategy_engine.execution_gate": [
+        "scripts.artifact_io",
+        "scripts.execution_permission",
+        "scripts.ts_strategy_engine.execution_decision",
+        "scripts.ts_strategy_engine.execution_evidence",
+        "scripts.ts_strategy_engine.execution_path_rules",
+        "scripts.ts_strategy_engine.execution_submission_rules"
+      ],
+      "scripts.ts_strategy_engine.execution_submission_rules": [
+        "scripts.ts_strategy_engine.dimer_gate",
+        "scripts.ts_strategy_engine.execution_decision",
+        "scripts.ts_strategy_engine.execution_evidence",
+        "scripts.ts_strategy_engine.execution_gpu_rules",
+        "scripts.ts_strategy_engine.execution_path_rules",
+        "scripts.ts_strategy_engine.scientific_claims"
+      ],
+      "scripts.ts_strategy_engine.learning_cases": null,
+      "scripts.ts_strategy_engine.learning_cli": [
+        "scripts.artifact_io",
+        "scripts.ts_strategy_engine.learning_evidence",
+        "scripts.ts_strategy_engine.learning_store",
+        "scripts.ts_strategy_engine.strategy_learning",
+        "scripts.ts_strategy_engine.workflow"
+      ],
+      "scripts.ts_strategy_engine.learning_evaluation": null,
+      "scripts.ts_strategy_engine.paper_sequential": null,
+      "scripts.ts_strategy_engine.scf_chain_gate": null,
+      "scripts.ts_validation.saddle_energy": null
+    },
+    "hash_difference_from_development": {
+      "scripts.adsmind_lite.candidate_generation": "b4a0b10a49bcc101c70ab6ca1f6c69d14f2e6fb2deb09856b4803be05db4d035",
+      "scripts.adsmind_lite.evidence_lifecycle": "658d981a01a63178e677ade07970c197f891b5bb03c57a5cd8fef968f375fed8",
+      "scripts.adsmind_lite.generate_adsorption_candidates": "8457c0acb94fd308d522a1c48b822daa517a8e79298ad18396ce67c8ace9fc95",
+      "scripts.adsmind_lite.generation_validation": "73a5aff81c851f041c91f1854ef60b4a3cbdd03605b2ea3758467654b36165df",
+      "scripts.adsorption.acceleration_benchmark": null,
+      "scripts.adsorption.build_fe110_care_batch": "9bd05b703506156c88899b1a41619aeffcce98ee659dfc6d7171c3a3d035ac9a",
+      "scripts.adsorption.build_fe110_care_isomers": "3fca89e24deb65bb41ae945c64e5af7caa1cef4c59b1951a30afb253323cb3ae",
+      "scripts.adsorption.collect_completed_batch": null,
+      "scripts.adsorption.direct_force_training": null,
+      "scripts.adsorption.direct_gpu_batch": null,
+      "scripts.adsorption.direct_training_arm": null,
+      "scripts.adsorption.fixed_force_comparison": null,
+      "scripts.adsorption.force_finetune": null,
+      "scripts.adsorption.force_role_data": null,
+      "scripts.adsorption.force_role_runtime": null,
+      "scripts.adsorption.force_training_preflight": null,
+      "scripts.adsorption.matris_adsorption_relax": null,
+      "scripts.adsorption.nequip_force_data": null,
+      "scripts.adsorption.nequip_force_job": null,
+      "scripts.adsorption.nequip_force_runtime": null,
+      "scripts.adsorption.preflight_fe110_adsorption": "e57c10ab422f18fa9203d14c997d60b09b522c5b8d93f51e7bd517fdcbb3f07c",
+      "scripts.adsorption.prepare_completion_registration": null,
+      "scripts.adsorption.reico_anchor_coverage": null,
+      "scripts.adsorption.reico_chemical_environments": null,
+      "scripts.adsorption.reico_dataset_audit": null,
+      "scripts.adsorption.reico_environment_audit": null,
+      "scripts.adsorption.reico_force_coverage": null,
+      "scripts.adsorption.reico_joint_coverage": null,
+      "scripts.adsorption.reico_probe_batch": null,
+      "scripts.adsorption.reico_probe_review": null,
+      "scripts.adsorption.reico_random_geometry": null,
+      "scripts.adsorption.reico_sampling": null,
+      "scripts.adsorption.reico_selection": null,
+      "scripts.adsorption.reico_stratified_audit": null,
+      "scripts.adsorption.role_force_trainer": null,
+      "scripts.execution_backends": "5a90baec2e9d66405fe81711c1c2076b3120060417713da7253444d34bd5b6f1",
+      "scripts.fe110_mlip_selection": null,
+      "scripts.gpu_resources": null,
+      "scripts.mace_surface_pilot": null,
+      "scripts.matris_energy_force_finetune": "57c8872fb5822ab36774b565ffca76a54f2f17d2ee305457384f2852337ea384",
+      "scripts.matris_sella_smoke": "c55fe1b8af62e3e7f61a891056c6d39bd6f8109788c2204e984ad27d583c7496",
+      "scripts.matris_training_data": "7bdc5b55f6db349453513a932febaca198cf80788c88cdca75aeb7b5b7c88494",
+      "scripts.matris_training_exclusions": "bd4fb100f4a0f4a18a3b56779b8311d74bc4578a6dece1089aff5ffc157f29b8",
+      "scripts.ml_candidate_source": "7b4260c3b6c49faaa9b65b41099f8a20be8be2646d68f46cf1886e4e77943bd7",
+      "scripts.mlip_same_structure_benchmark": "7fbdb8a4b2a74f69faaa6e10eba7d1b7218ce86a2a1754c65a53551b5fab8655",
+      "scripts.neb_agent.scf_chain_bundle": null,
+      "scripts.neb_agent.scf_chain_evidence": null,
+      "scripts.neb_agent.scf_repair_chain": null,
+      "scripts.neb_agent.submission": "fe8f4095b23f571046c6615eb1b1b9ebb10be3d8669a53d76a62ab9437f64dbf",
+      "scripts.prediction_provenance": "7a45d56d936df2c5e462161483eb709bc7885d937b1604a0251646c835075c12",
+      "scripts.prepare_ci_seeded_ml_neb": null,
+      "scripts.prepare_matris_replay_finetune_package": "dc7880b6ae26d88e7c36a4684ac4875f501260af4f8967bc45503ed476ace20d",
+      "scripts.prepare_ml_candidate_active_learning": "876b6f7d1685549e93a43269b4eb239355136eb4e048e9e9af766a9deb8158fe",
+      "scripts.provenance_fields": "0126ae38a6a0a4f60cf6bfeab8c3eccac1031a7a6cc8d4317360385a04cfcf97",
+      "scripts.registry_acceptance": "74c1dee504e884a7ae024e542f137abad9550eedd0eb99454c456b05027f0d50",
+      "scripts.registry_excel_promotion": "2aafa73e224e315f13a1a09e00632e67d0bda9ae28ffe2ade4dd39cc46c0c498",
+      "scripts.registry_write": "274f3e55ceae93aff44fb055991e34c3eefbaf9eec6640ce3c1912e87fe3f871",
+      "scripts.state_manager.job_lifecycle": "13eaebed48a195276b5923ee744d2b39306b5e81746f417010646e75d11331a8",
+      "scripts.ts_strategy_engine.contract": "4f0ef1bd3d2511d68360433aae24a6975fdefd8e28cae1b1608d7f0401a60dde",
+      "scripts.ts_strategy_engine.dimer_analysis": "722c178d391c7155ad96979d10c6e8a6198fbb73cc18b81ec4a2962c37aa763e",
+      "scripts.ts_strategy_engine.execution_blocking_rules": null,
+      "scripts.ts_strategy_engine.execution_gate": "ac0f1edaf4b8817ecfc4d3806411cb47b40f56a9cb44d20809a46362ea029808",
+      "scripts.ts_strategy_engine.execution_submission_rules": "d1a9b9fe7b5755dc61d1ef897476e046f48177d8f56fcaac206973fa21343e75",
+      "scripts.ts_strategy_engine.learning_cases": null,
+      "scripts.ts_strategy_engine.learning_cli": "65f75c33598c943fe061f4666db3ad0310a62c1c6c778c020d1d9fa667731834",
+      "scripts.ts_strategy_engine.learning_evaluation": null,
+      "scripts.ts_strategy_engine.learning_evidence": "268c720e84c9673a4076b1e32ee700dc1d7fdb436372d544b4321bca5635bee7",
+      "scripts.ts_strategy_engine.paper_sequential": null,
+      "scripts.ts_strategy_engine.scf_chain_gate": null,
+      "scripts.ts_strategy_engine.scientific_claims": "6009aba7b3a4ca6082660eed16d3d4b09931d083c2e94e8e1797bf90f6571c77",
+      "scripts.ts_validation.saddle_energy": null,
+      "scripts.vasp_inputs": "a1cf91d4847fd2842a5e33def15d3b75adced686c8262ae85796deaca8fdbe10"
+    }
+  }
+}
