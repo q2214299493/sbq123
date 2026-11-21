@@ -1,0 +1,30 @@
+{
+  "format": "baseline-float-identity-diagnostic/1",
+  "baseline_commit": "046dd867f6e75a021263f9fa32f4bbd49ae81935",
+  "failing_test": "tests/test_mkm_drc_batch.py::test_pilot_plan_is_reproducible_without_native_execution",
+  "reaction_id": "desorb",
+  "sign": -1,
+  "delta_eV": 0.005,
+  "field": "reactions[reaction_id=desorb].rates.forward.activity_coefficient_s^-1",
+  "current_value": 802.2839447511138,
+  "archive_value_identified_by_hash": 802.283944751114,
+  "absolute_difference": 1.1368683772161603e-13,
+  "ulp": 1.1368683772161603e-13,
+  "current_dataset_version": "d37e15be163218ff4f52f1ce12cb67afafadaa08313054701d94b215d9aa409f",
+  "archived_dataset_version": "ce3d2031cc1ebec3eb366b6089f29e44e8093b7a78352e3ded5f603bf1445b06",
+  "diagnostic_dataset_version": "ce3d2031cc1ebec3eb366b6089f29e44e8093b7a78352e3ded5f603bf1445b06",
+  "archived_file_sha256": "7eeefa2d12080319f9d61bab6a65c047fb658f706a96643b51ce9d96d3211640",
+  "diagnostic_file_sha256": "7eeefa2d12080319f9d61bab6a65c047fb658f706a96643b51ce9d96d3211640",
+  "method": "Only an in-memory copy was shifted upward by one ULP to locate the sole field difference; both complete hashes then matched. No candidate was persisted as scientific data or accepted by a gate.",
+  "upstream_cause": "The field difference is proven; original runtime math-library rounding versus a historical generation implementation difference is not resolved.",
+  "environment": {
+    "python": "3.12.14",
+    "system": "Linux",
+    "libc": [
+      "glibc",
+      "2.41"
+    ]
+  },
+  "scientific_data_changed": false,
+  "assertions_or_tolerances_changed": false
+}

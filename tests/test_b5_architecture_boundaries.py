@@ -149,6 +149,21 @@ def test_native_input_dependencies_stay_below_assembly():
     assert "scripts.kinetic_parameters.__main__" not in imported_modules(path, trees[path])
 
 
+def test_drc_report_records_do_not_depend_on_pair_orchestration():
+    trees = maintained_trees()
+    modules = {path.removesuffix(".py").replace("/", "."): path for path in trees}
+    pending = ["scripts.baseline_mkm.drc_report", "scripts.baseline_mkm.drc_pair_records"]
+    seen = set()
+    while pending:
+        module = pending.pop()
+        assert module != "scripts.baseline_mkm.drc_pair", module
+        if module in seen:
+            continue
+        seen.add(module)
+        path = modules[module]
+        pending.extend(imported_modules(path, trees[path]) & modules.keys())
+
+
 def test_mkm_and_registry_cli_share_the_domain_batch_validator():
     from scripts import registry_mutations, registry_write
     from scripts.baseline_mkm import analysis, registration

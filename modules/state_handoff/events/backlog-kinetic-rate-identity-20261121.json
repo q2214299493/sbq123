@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "event_id": "backlog-kinetic-rate-identity-20261121",
+  "event_type": "backlog_item_added",
+  "entity": {
+    "kind": "backlog",
+    "id": "kinetic-derived-rate-identity",
+    "module": "kinetic_parameters"
+  },
+  "occurred_at": "2026-11-21T05:35:08.702746+00:00",
+  "recorded_at": "2026-11-21T05:35:08.702746+00:00",
+  "summary": "Investigate reproducibility of exact derived dataset identity across generation environments.",
+  "payload": {
+    "markdown": "- Open: independently resolve the desorb-minus 0.005 eV derived dataset identity mismatch observed at baseline 046dd867. The forward activity coefficient differs by one ULP; changing that single value only in a diagnostic memory copy restores both archived dataset and file hashes. Determine the original generation/runtime cause, preserve original approved inputs and design any changed generation/identity convention as a separately reviewed version. Do not round values, rewrite archived identities or relax approval hash checks to hide the failure. Evidence: reports/multiphase/stage_a2_3/baseline_float_identity.json. This task does not authorize scientific computation or a method change."
+  },
+  "evidence": [
+    {
+      "locator": "reports/multiphase/stage_a2_3/baseline_float_identity.json",
+      "authority": "repository_document",
+      "sha256": "da552dd7625d9ca680c6d9ca76c56183e8c25eceb5ed291303113c931698b11e",
+      "observed_at": "2026-11-21T05:35:08.702746+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "new_backlog_item"
+    ]
+  }
+}

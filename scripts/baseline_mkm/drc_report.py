@@ -6,7 +6,7 @@ from pathlib import Path
 import re
 
 from scripts.artifact_io import load_json_object as read, sha256_file
-from scripts.baseline_mkm.drc_pair import BUDGET, SIGNS, REPORTS, accepted, baseline, check_member, put, verified_finish
+from scripts.baseline_mkm.drc_pair_records import BUDGET, SIGNS, REPORTS, accepted, baseline, check_member, put, verified_finish
 from scripts.baseline_mkm.drc_step_size import comparison_lines, validation
 from scripts.baseline_mkm.results import read_single_point
 from scripts.baseline_mkm.single_point_result import check_close

@@ -8,7 +8,7 @@ import pytest
 
 from scripts.artifact_io import load_json_object as read, sha256_file, sha256_json, write_json_exclusive as save
 from scripts.baseline_mkm import drc_pair as pair, single_point as point
-from scripts.baseline_mkm import drc_report
+from scripts.baseline_mkm import drc_pair_records as records, drc_report
 from scripts.baseline_mkm.ts_perturbation import PARENT, REACTION, central_difference, derivative, reproduce
 from scripts.thermochemistry.harmonic import KB
 
@@ -285,7 +285,7 @@ def test_changed_budget_receipt(clocked):
 def test_baseline_must_match_accepted_receipt(monkeypatch):
     receipt = read(BASE / "benchmark_manifest.json")
     archived = read(REPORTS / "phase3_1/closed_cycle/analysis.json")
-    monkeypatch.setattr(pair, "accepted", lambda _: (receipt, archived))
+    monkeypatch.setattr(records, "accepted", lambda _: (receipt, archived))
     assert pair.baseline(Path("synthetic")) == (receipt, archived)
     receipt["approval_reference"] = "0" * 64
     with pytest.raises(ValueError, match="approval_reference"):
@@ -385,3 +385,25 @@ def test_existing_pair_rejects_new_step_before_preparation(tmp_path, monkeypatch
     with pytest.raises(ValueError, match="different step size"):
         pair.prepare(tmp_path, tmp_path, 0.005)
     assert list(tmp_path.iterdir()) == [tmp_path / "pair.json"]
+
+
+def test_pair_record_functions_keep_the_legacy_imports():
+    for name in ("accepted", "baseline", "expected", "planned_inputs", "check_member", "put", "verified_finish"):
+        assert getattr(pair, name) is getattr(records, name)
+    for name in ("accepted", "baseline", "check_member", "put", "verified_finish"):
+        assert getattr(drc_report, name) is getattr(records, name)
+    for name in ("REPORTS", "OPTIONS", "BUDGET", "SIGNS"):
+        assert getattr(pair, name) == getattr(records, name)
+
+
+def test_pair_record_publication_reuses_equal_json_without_rewriting(tmp_path):
+    path = tmp_path / "record.json"
+    pair.put(path, {"a": 1, "b": 2})
+    assert read(path) == {"a": 1, "b": 2}
+    path.write_bytes(b'{ "b": 2, "a": 1 }\r\n')
+    original = path.read_bytes()
+    pair.put(path, {"a": 1, "b": 2})
+    assert path.read_bytes() == original
+    with pytest.raises(ValueError, match="Conflicting immutable artifact"):
+        pair.put(path, {"a": 2, "b": 2})
+    assert path.read_bytes() == original

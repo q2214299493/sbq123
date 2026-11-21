@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "event_id": "history-stage-a2-3-drc-pair-boundary-20261121",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-stage-a2-3-drc-pair-boundary-20261121",
+    "module": "baseline_mkm"
+  },
+  "occurred_at": "2026-11-21T05:35:08.702746+00:00",
+  "recorded_at": "2026-11-21T05:35:08.702746+00:00",
+  "summary": "Prepare the P3 DRC pair/report dependency split while retaining an existing baseline failure.",
+  "payload": {
+    "markdown": "- Stage A.2.3 moved shared DRC pair records below orchestration and reporting. The native execution and reporting function implementations remain unchanged. In an independent Linux checkout, tests changed from 136 passed / 1 failed to 139 passed / the same 1 failed; no new failures were introduced. The existing desorb-minus floating-point identity mismatch is still open. Four archived report renderings, 21 behavior probes and 9 CLI probes match. Import SCCs decreased from three to two. Windows validation and GitHub publication were not performed. See reports/multiphase/stage_a2_3/completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "reports/multiphase/stage_a2_3/completion.md",
+      "authority": "repository_document",
+      "sha256": "4c47ac74e9addcdca6966fba2366a91167d4cc504a81783a560e83d330be9930",
+      "observed_at": "2026-11-21T05:35:08.702746+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_a2_3/validation.json",
+      "authority": "repository_document",
+      "sha256": "ed2874dd23dbd2ba99d05b7c3309fd7a0c7e7da261c2a6ee8d56c02a389d60c6",
+      "observed_at": "2026-11-21T05:35:08.702746+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

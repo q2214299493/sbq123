@@ -1,0 +1,389 @@
+{
+  "format": "stage-a2-3-validation/1",
+  "baseline_commit": "046dd867f6e75a021263f9fa32f4bbd49ae81935",
+  "scope": "Independent Linux source worktree; P3 first DRC pair/report SCC only. Windows development tree not accessed.",
+  "environment": {
+    "python": "3.12.14",
+    "system": "Linux",
+    "libc": [
+      "glibc",
+      "2.41"
+    ],
+    "pytest": "8.4.2",
+    "ruff": "0.17.6"
+  },
+  "source_sha256": {
+    "scripts/baseline_mkm/drc_pair.py": "04fe486e86e836626f4a1a350a512b7a9488cac3bdd31c8e6e1dbd44607952bd",
+    "scripts/baseline_mkm/drc_pair_records.py": "8fe946d152dd648b072625251c21096c2a4e6374dcef40218b067bc8a0b884e2",
+    "scripts/baseline_mkm/drc_report.py": "daeba43fd17d65b6399f956788705f26026de8b908261322e4a5276c87a9841d",
+    "tests/test_mkm_drc.py": "e8c728f1abc253a8aa88eabbfe9b2f49b1d766246c688f21b4eaa1fcf23b273a",
+    "tests/test_b5_architecture_boundaries.py": "ee0bb0f336d7dba6f961a71fb93041dfde5bc04ea70724cc32ae7049fbf2b246"
+  },
+  "pytest": {
+    "baseline": {
+      "total": 137,
+      "passed": 136,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "deselected": 0,
+      "by_file": {
+        "tests.test_mkm_drc": 44,
+        "tests.test_mkm_drc_batch": 26,
+        "tests.test_mkm_sensitivity": 43,
+        "tests.test_mkm_drc_cross_reaction": 24
+      },
+      "failed_tests": [
+        {
+          "node": "tests.test_mkm_drc_batch::test_pilot_plan_is_reproducible_without_native_execution",
+          "message": "AssertionError: assert 'minus-ce3d2031cc1ebec3' == 'minus-d37e15be163218ff'\n  \n  - minus-d37e15be163218ff\n  + minus-ce3d2031cc1ebec3"
+        }
+      ],
+      "junit_sha256": "121c9aa6967dd5f3e3017c47c00cdaaa8ccd1828e082d4cdd090bbf6254cb317"
+    },
+    "after": {
+      "total": 140,
+      "passed": 139,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "deselected": 0,
+      "by_file": {
+        "tests.test_mkm_drc": 46,
+        "tests.test_mkm_drc_batch": 26,
+        "tests.test_mkm_sensitivity": 43,
+        "tests.test_mkm_drc_cross_reaction": 24,
+        "tests.test_b5_architecture_boundaries": 1
+      },
+      "failed_tests": [
+        {
+          "node": "tests.test_mkm_drc_batch::test_pilot_plan_is_reproducible_without_native_execution",
+          "message": "AssertionError: assert 'minus-ce3d2031cc1ebec3' == 'minus-d37e15be163218ff'\n  \n  - minus-d37e15be163218ff\n  + minus-ce3d2031cc1ebec3"
+        }
+      ],
+      "junit_sha256": "67ae68deb0f819d8130b4ec4d77dbc06d2ca7c740e89f33fe7948c3a55fae695"
+    },
+    "same_failed_tests_and_messages": true,
+    "full_regression_passed": false,
+    "new_failures": []
+  },
+  "function_ast_comparison": {
+    "count": 22,
+    "equal": true,
+    "sha256": {
+      "accepted": "ca1fd9b9fa60025c4b4fb9cebb6038be6416dc2a9330116ca61081c37066643b",
+      "baseline": "67f60f75088fc92364de641a89ecbe1b7d4089887d3f76fcfed5fc2662ff29cf",
+      "expected": "54ebf87e0a4750d5a08633f10d2ccea80b942d9ad9b57857e54ea55c806a0d7d",
+      "put": "6932ca63a36c43311ef331fccd5334f54d54e4b1c102d838956de5990d3cb5f0",
+      "prepare": "c702ab0c8506a03a08e073aa821d318b84502656b2365ad6254a95cb43e5e928",
+      "planned_inputs": "a77c2ed0173f4976b10d54d69748e4324f43a2ca404eb8ff662ade3534b51f75",
+      "prepare_members": "19a9b0b0536722aca21a51a2ae4b709deff419cb6fd5023e84bbdcb4b231d8b8",
+      "check_member": "1d7b4ee1fcf59da64e528ff82181c093acb8bcad31135c5249f31d8a638ab339",
+      "clock": "93c8f89fb20fab5ba14e2f4b1d33fec4b94fdd557557a27965e1ce6a002c60c8",
+      "verified_finish": "817d28b3327c67b1841ff818ed2506d7a2f10210c080240ee5da7b26a1447b79",
+      "record_failure": "a34c716d9b6dc4145f81fe0440c5575657899f7b017b0911e5dd62bae796cf9a",
+      "pair_deadline": "f02fc8a979583d963d40318102429ebc458cef621bd102132b44c91305975b65",
+      "run_pair": "c393d517921a5f1b55a62ce2d8782c58c249cadbae7487fe77c190c8e1c5f4c1",
+      "main": "4d0ef4ac2ad0c98b0a58d7094bb971439c36b257daf07daeda8523799f15986f",
+      "report.directional_audit": "45560f4ea13254a7f22d8d077f0524e59568a2215d0722d4036c3a6a6e0f7a0e",
+      "report.evidence": "48352bae6710ab092e77ccdae299806303a3e136c2d4806726514aa00855af30",
+      "report.compare": "f8301286b9ad66ffa0b06a9eb7b6190958fdb377f0141b0cca744af18ce03d1c",
+      "report.cross_reaction_comparison": "8abb67f7d97f8ae5c0e2413df97967b4b8974bf7076821102ae38674b6df4481",
+      "report.render": "28598b6fae8e032ae373d6ed9e1fc65242ac6510ce761d071bafd51bf6b015a1",
+      "report.publish": "64b2049dda85b4d6e9699fbcb77c85f336ff9dd03d5f96940b71866f6069491e",
+      "report.archive_members": "87175df1f36b2af58e70aebb6ee5b404a39ab04fc2a48ef53c8c590f42f9eafa",
+      "report.write_once": "6c1e9346e7a7f5984275485bc2509f7c61783582fc8d0348fc95b96bd4f1de27"
+    }
+  },
+  "archived_report_comparison": {
+    "count": 4,
+    "equal": true,
+    "reports": {
+      "phase3_2_0": {
+        "size_bytes": 2822,
+        "sha256": "1d653a93633318d74139a9c94f0d1236562342af039c49d439d7a382eb60b9f2",
+        "archived_bytes_equal": true
+      },
+      "phase3_2_0_1": {
+        "size_bytes": 5752,
+        "sha256": "126002a57d513739932e8d8d7f0777f777b1c53ae0d304715b159231feb72298",
+        "archived_bytes_equal": true
+      },
+      "phase3_2_0_2/coarse": {
+        "size_bytes": 2822,
+        "sha256": "2280f4ec9be6cbd34830e76bfa9cf2e54b149a76076838b7ecdaa3b9a1fb138a",
+        "archived_bytes_equal": true
+      },
+      "phase3_2_0_2/fine": {
+        "size_bytes": 5690,
+        "sha256": "5184bdf45b92ac0bbd521ec67d274997461c0a8fd3d3daf5dde61759397d69ad",
+        "archived_bytes_equal": true
+      }
+    },
+    "scope": "Pure rendering from archived result JSON, not revalidation of original live run directories."
+  },
+  "behavior_comparison": {
+    "count": 21,
+    "equal": true,
+    "sha256": "fd75679c80dade753f3da4d4b98c90670388877d431100f7d02142521d759bdb",
+    "cases": [
+      "baseline/None",
+      "baseline/raw_plan_sha256",
+      "baseline/result_sha256",
+      "baseline/approval_reference",
+      "baseline/network_version_id",
+      "baseline/input_hashes",
+      "baseline/kinetic_dataset_version",
+      "baseline/run_id",
+      "baseline/output_hashes",
+      "baseline/report",
+      "finish/valid",
+      "finish/hash",
+      "finish/failed",
+      "finish/zero",
+      "finish/negative",
+      "finish/over_budget",
+      "finish/remaining",
+      "put/new",
+      "put/equivalent",
+      "put/conflict",
+      "accepted/rejected"
+    ],
+    "basis": "Return repr or exception type and message; temporary directory prefixes normalized. Synthetic fault injection used for baseline acceptance."
+  },
+  "cli_comparison": {
+    "count": 9,
+    "equal": true,
+    "cases": {
+      "help": {
+        "exit_code": 0,
+        "stdout_sha256": "02f7a6219e2b7d10fc11ec33675c4cf98b9c9b0bb494028016cfe2c6b58d0f05",
+        "stderr_last_line": ""
+      },
+      "prepare_help": {
+        "exit_code": 0,
+        "stdout_sha256": "a966527fb401e5624de8b323dd67e5c9164b93b8965cc774b78f0d4a4057453c",
+        "stderr_last_line": ""
+      },
+      "execute_help": {
+        "exit_code": 0,
+        "stdout_sha256": "c8ecf7d01f1dd5a6003b261b130dd36d32817c89f7cdea2cc689b54e0ec72d0a",
+        "stderr_last_line": ""
+      },
+      "report_help": {
+        "exit_code": 0,
+        "stdout_sha256": "c6ec47c0d17ff4ff13a60e8f56a8d2cf76c1869c6b42d6c5d2947f70bf9f43d6",
+        "stderr_last_line": ""
+      },
+      "missing": {
+        "exit_code": 2,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_last_line": "drc_pair.py: error: the following arguments are required: action"
+      },
+      "prepare_missing": {
+        "exit_code": 2,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_last_line": "drc_pair.py prepare: error: the following arguments are required: root, baseline"
+      },
+      "execute_missing": {
+        "exit_code": 2,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_last_line": "drc_pair.py execute: error: the following arguments are required: root, baseline, plus_approval, minus_approval"
+      },
+      "report_missing": {
+        "exit_code": 2,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_last_line": "drc_pair.py report: error: the following arguments are required: root, baseline, output"
+      },
+      "report_without_evidence": {
+        "exit_code": 1,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_last_line": "IndexError: list index out of range"
+      }
+    },
+    "basis": "Exit code, stdout and final stderr line; no real prepare/execute invocation. Missing-evidence report creates no output directory."
+  },
+  "import_graph": {
+    "baseline": {
+      "nodes": 288,
+      "edges": 1047,
+      "cycles": [
+        [
+          "scripts.baseline_mkm.drc_batch",
+          "scripts.baseline_mkm.drc_batch_execution",
+          "scripts.baseline_mkm.drc_batch_report"
+        ],
+        [
+          "scripts.baseline_mkm.drc_pair",
+          "scripts.baseline_mkm.drc_report"
+        ],
+        [
+          "scripts.baseline_mkm.sensitivity_report",
+          "scripts.baseline_mkm.sensitivity_study"
+        ]
+      ],
+      "sha256": "4b1ab9aa39e51fa57f31825b962e2b5c9bf519db520ff1043a8dab8a831dedda"
+    },
+    "after": {
+      "nodes": 289,
+      "edges": 1052,
+      "cycles": [
+        [
+          "scripts.baseline_mkm.drc_batch",
+          "scripts.baseline_mkm.drc_batch_execution",
+          "scripts.baseline_mkm.drc_batch_report"
+        ],
+        [
+          "scripts.baseline_mkm.sensitivity_report",
+          "scripts.baseline_mkm.sensitivity_study"
+        ]
+      ],
+      "sha256": "7c8815810b5e9c8c8896e707ce6b561fcbaf1981d03cd74e7d4688b88ca0de55"
+    },
+    "removed_edges": [
+      [
+        "scripts.baseline_mkm.drc_pair",
+        "scripts.baseline_mkm.analysis"
+      ],
+      [
+        "scripts.baseline_mkm.drc_pair",
+        "scripts.baseline_mkm.sensitivity_inputs"
+      ],
+      [
+        "scripts.baseline_mkm.drc_pair",
+        "scripts.execution_permission"
+      ],
+      [
+        "scripts.baseline_mkm.drc_report",
+        "scripts.baseline_mkm.drc_pair"
+      ]
+    ],
+    "added_edges": [
+      [
+        "scripts.baseline_mkm.drc_pair",
+        "scripts.baseline_mkm.drc_pair_records"
+      ],
+      [
+        "scripts.baseline_mkm.drc_pair_records",
+        "scripts.artifact_io"
+      ],
+      [
+        "scripts.baseline_mkm.drc_pair_records",
+        "scripts.baseline_mkm.analysis"
+      ],
+      [
+        "scripts.baseline_mkm.drc_pair_records",
+        "scripts.baseline_mkm.sensitivity_inputs"
+      ],
+      [
+        "scripts.baseline_mkm.drc_pair_records",
+        "scripts.baseline_mkm.single_point"
+      ],
+      [
+        "scripts.baseline_mkm.drc_pair_records",
+        "scripts.baseline_mkm.ts_perturbation"
+      ],
+      [
+        "scripts.baseline_mkm.drc_pair_records",
+        "scripts.execution_permission"
+      ],
+      [
+        "scripts.baseline_mkm.drc_pair_records",
+        "scripts.scientific_validation"
+      ],
+      [
+        "scripts.baseline_mkm.drc_report",
+        "scripts.baseline_mkm.drc_pair_records"
+      ]
+    ]
+  },
+  "checks": {
+    "ruff": "passed for all 5 changed Python files",
+    "py_compile": "passed for all 5 changed Python files",
+    "git_diff_check": "passed",
+    "independent_review": "22 function ASTs, old references, resource paths and transitive dependency boundaries independently checked; no new blocking code issue found."
+  },
+  "test_seam_change": "test_baseline_must_match_accepted_receipt patches records.accepted, the new owner; original success/failure assertions unchanged. Arbitrary old-module monkeypatch behavior is not promised.",
+  "state_audit_start": {
+    "schema_version": 1,
+    "phase": "start",
+    "generated_at": "2026-11-21T05:24:40Z",
+    "project_root": "/workspace/scratch/ae7a9e71f84a/stage_a2_3_work",
+    "counts": {
+      "error": 1,
+      "warning": 1,
+      "review_required": 2
+    },
+    "findings": [
+      {
+        "code": "managed_projection_drift",
+        "severity": "error",
+        "summary": "Managed projection changed outside the recorded event: docs/06_MODULE_MAP.md#module_row:transition_state_search",
+        "paths": [
+          "docs/06_MODULE_MAP.md"
+        ],
+        "review_required": true,
+        "suggested_action": "Import the manual change as a reviewed event or restore the projection.",
+        "details": {}
+      },
+      {
+        "code": "external_worktree_review",
+        "severity": "warning",
+        "summary": "Additional Git worktree requires ownership review: /workspace/scratch/ae7a9e71f84a/stage_a2_2_work",
+        "paths": [
+          "/workspace/scratch/ae7a9e71f84a/stage_a2_2_work"
+        ],
+        "review_required": true,
+        "suggested_action": "Audit only; version 1 never deletes external worktrees.",
+        "details": {}
+      }
+    ],
+    "review_requests": [
+      {
+        "finding_code": "managed_projection_drift",
+        "question": "Managed projection changed outside the recorded event: docs/06_MODULE_MAP.md#module_row:transition_state_search",
+        "options": [
+          {
+            "value": "review",
+            "label": "Review exact evidence"
+          },
+          {
+            "value": "preserve",
+            "label": "Preserve current state"
+          }
+        ],
+        "paths": [
+          "docs/06_MODULE_MAP.md"
+        ]
+      },
+      {
+        "finding_code": "external_worktree_review",
+        "question": "Additional Git worktree requires ownership review: /workspace/scratch/ae7a9e71f84a/stage_a2_2_work",
+        "options": [
+          {
+            "value": "review",
+            "label": "Review exact evidence"
+          },
+          {
+            "value": "preserve",
+            "label": "Preserve current state"
+          }
+        ],
+        "paths": [
+          "/workspace/scratch/ae7a9e71f84a/stage_a2_2_work"
+        ]
+      }
+    ]
+  },
+  "scientific_engine_execution": false,
+  "production_sqlite_writes": false,
+  "archived_scientific_data_changes": false,
+  "full_repository_pytest": false,
+  "windows_validation": false,
+  "remote_published": false,
+  "baseline_failure_diagnostic": {
+    "path": "reports/multiphase/stage_a2_3/baseline_float_identity.json",
+    "sha256": "da552dd7625d9ca680c6d9ca76c56183e8c25eceb5ed291303113c931698b11e",
+    "status": "Open; outside dependency refactor scope. Current recomputed data must not inherit archived approval identity."
+  }
+}
