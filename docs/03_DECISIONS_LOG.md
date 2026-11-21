@@ -13,6 +13,10 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 # Decisions Log
 
+## 2026-11-21 — Set the default MACE adsorption pre-relaxation force threshold
+
+- The user changed the maximum movable-atom force threshold for new Fe(110) MACE adsorption pre-relaxations to 0.05 eV/Å. New handoffs use the backend configuration or an explicitly requested task-specific value.
+
 ## 2026-11-20 — Use the supplied Fe–C–O MACE for new Fe(110) ML tasks
 
 - The user set the maximum movable-atom force threshold for new MACE adsorption pre-relaxations to 0.02 eV/Å. The model selector reads it from `configs/execution_backends.yaml` for the adsorption handoff.
