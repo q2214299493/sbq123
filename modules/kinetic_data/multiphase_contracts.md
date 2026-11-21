@@ -54,3 +54,58 @@ Input and result files are represented by path and SHA-256. Each engine has a cl
 ## Test fixtures
 
 `tests/fixtures/multiphase/valid.json` is an internally balanced, exploratory bundle. Paths and digest strings in the fixture are mock data. `invalid.json` contains a dangling project reference. The parameterized tests exercise additional single-field and cross-record failures. Neither fixture represents a measured or simulated kinetic dataset.
+
+## Kinetic rate output V2
+
+Validate a document offline with `python -m scripts.rate_output_v2 FILE.json`.
+The required discriminators are `"format": "kinetic-rate-output/2"` and
+`"schema_version": "2.0.0"`. Success exits 0. Duplicate keys, unknown record
+properties, incompatible versions and inconsistent rates exit 1. The V1 and
+V2 commands each accept their own document format. The source-term schema
+describes the nested `source_terms` block of a V2 document.
+
+One document covers one operating point and one native normalization basis.
+Record the original denominator value and unit, reference ID, definition,
+extent unit (event or mol) and time unit. For example, a rate per 100 lattice
+sites retains the 100. All reaction and source rows inherit that same basis.
+Use separate documents for incompatible denominators. An area, mass or volume
+conversion requires separate normalization evidence.
+
+The dataset and network versions are content identities. Each reaction binds
+its parameter set within that dataset. The dataset, network and native output
+each have a source locator and file SHA-256. A file digest can differ from the
+canonical JSON version digest. Validation checks the declarations and
+arithmetic offline. Verification of the referenced bytes, scientific review
+and execution authorization remain with their respective owners.
+
+Supply nonnegative forward and reverse **reaction progress rates**, including
+an explicit zero where known. Net progress equals forward minus reverse.
+The reaction rows project the existing reactant, product and vacancy
+stoichiometry. Use distinct site IDs for independent inventories. Species
+and parameter definitions remain in their bound artifacts.
+
+`generate_source_terms(reaction_rates)` returns signed sources on the native
+basis. The validator checks every reported source against this projection.
+
+- Species production is the sum over reactions of (product count minus
+  reactant count) times net progress. The numerator counts molecules for an
+  event extent and mol of species for a molar extent.
+- For each inventory, net vacancy production uses (sites released minus sites
+  consumed) times net progress. This counts vacant sites or mol of vacant
+  sites. Inventory capacity and occupancy fractions are separate quantities.
+- Every identity on either side has one source row, including cancellation
+  to zero. Unmentioned inventories have no reported value. Empty stoichiometry
+  maps denote a known absence of vacancy exchange on that side.
+- Net and source checks use relative tolerance 1e-12 and no absolute floor.
+  Supply rates at consistent precision. This tolerance applies to serialized
+  arithmetic.
+
+Temperature and pressure use K and Pa. Partial pressures may be a declared
+subset bounded by total pressure, a known empty list, or null when unspecified.
+A null validity range declares no extrapolation range. For declared bounds,
+the operating point must fall inside both inclusive intervals. A successful
+check preserves the supplied review status.
+
+[Output schema](../../configs/kinetics/rate_output_v2.schema.json) ·
+[Source-term schema](../../configs/kinetics/rate_source_terms_v2.schema.json) ·
+[Synthetic two-inventory example](../../tests/fixtures/multiphase/rate_output_v2.json)

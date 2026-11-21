@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.sbq123.invalid/multiphase/2.0.0/rate_source_terms_v2.schema.json",
+  "title": "Stoichiometric source terms on the parent native basis",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "species",
+    "site_inventories"
+  ],
+  "properties": {
+    "species": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "species_id",
+          "net_production_rate"
+        ],
+        "properties": {
+          "species_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+          "net_production_rate": {"type": "number"}
+        }
+      }
+    },
+    "site_inventories": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "site_id",
+          "net_vacancy_rate"
+        ],
+        "properties": {
+          "site_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+          "net_vacancy_rate": {"type": "number"}
+        }
+      }
+    }
+  }
+}

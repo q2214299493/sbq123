@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "event_id": "history-stage-b1-1-kinetic-rate-output-v2-20261121",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-stage-b1-1-kinetic-rate-output-v2-20261121",
+    "module": "kinetic_data"
+  },
+  "occurred_at": "2026-11-21T10:40:02.446434+00:00",
+  "recorded_at": "2026-11-21T10:40:02.446434+00:00",
+  "summary": "Record validation of the versioned native-basis kinetic rate output contract.",
+  "payload": {
+    "markdown": "- Stage B.1.1 added kinetic-rate-output/2 with a declared native denominator and stoichiometric species and vacancy sources. Both Windows worktrees passed 256 focused tests, including 56 V2 cases, and installed-wheel version isolation. See reports/multiphase/stage_b1_1/completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "reports/multiphase/stage_b1_1/completion.md",
+      "authority": "repository_document",
+      "sha256": "324671f4fa93b725d72cd70b9cdae086ab50f57a95af0db276ec03c00a351430",
+      "observed_at": "2026-11-21T10:40:02.446434+00:00"
+    },
+    {
+      "locator": "configs/kinetics/rate_output_v2.schema.json",
+      "authority": "repository_document",
+      "sha256": "15ecb15093bb54cfa176889fa8c5a14b6d5d36e7d6f71f79ecfe2182ac478bb3",
+      "observed_at": "2026-11-21T10:40:02.446434+00:00"
+    },
+    {
+      "locator": "configs/kinetics/rate_source_terms_v2.schema.json",
+      "authority": "repository_document",
+      "sha256": "1c79193399d01594dc935b9f44b9e800c92fc21163cb73de004a806da0c7c11e",
+      "observed_at": "2026-11-21T10:40:02.446434+00:00"
+    },
+    {
+      "locator": "scripts/rate_output_v2.py",
+      "authority": "repository_document",
+      "sha256": "56cf8d9bc5e8fd96500546d0f0b9bd8c5f412664db07d6efab5768243b384fc7",
+      "observed_at": "2026-11-21T10:40:02.446434+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}
