@@ -1,0 +1,33 @@
+{
+  "format": "mkm-coverage-observations/1",
+  "network_version": "ccee8d834cb47dd351476361d5ef2339b178398046de7a78924bd1e0f4a41127",
+  "source": "Synthetic coverage benchmark on tests/fixtures/multiphase/valid.json. The declared repeat has two top-Ni sites and one bridge-Cu site. Amounts and independently specified vacancy fractions are fixture inputs.",
+  "sites_per_molecular_reference": {
+    "interface-repeat": {
+      "top-Ni": 2,
+      "bridge-Cu": 1
+    }
+  },
+  "species": [
+    {
+      "species_id": "H2-bridge",
+      "coverage": 0.3,
+      "molecular_reference": "interface-repeat"
+    },
+    {
+      "species_id": "H2-top",
+      "coverage": 0.25
+    }
+  ],
+  "sites": [
+    {
+      "site_id": "top-Ni",
+      "vacancy_fraction": 0.6
+    },
+    {
+      "site_id": "bridge-Cu",
+      "vacancy_fraction": 0.7
+    }
+  ],
+  "inventory_reference": "interface-repeat"
+}

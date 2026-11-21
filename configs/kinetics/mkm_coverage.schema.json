@@ -74,6 +74,15 @@
             }
           ]
         },
+        "molecule_count": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["reference", "value"],
+          "properties": {
+            "reference": {"type": "string", "minLength": 1},
+            "value": {"type": ["number", "null"], "minimum": 0}
+          }
+        },
         "molecular_coverage": {
           "type": [
             "number",
@@ -120,6 +129,18 @@
         "site_type": {
           "type": "string"
         },
+        "site_counts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["reference", "capacity", "occupied", "vacant", "missing"],
+          "properties": {
+            "reference": {"type": "string", "minLength": 1},
+            "capacity": {"type": ["number", "null"], "exclusiveMinimum": 0},
+            "occupied": {"type": ["number", "null"], "minimum": 0},
+            "vacant": {"type": ["number", "null"], "minimum": 0},
+            "missing": {"type": "array", "items": {"type": "string"}}
+          }
+        },
         "contributions": {
           "type": "object",
           "additionalProperties": {
@@ -129,6 +150,7 @@
               "occupied_fraction"
             ],
             "properties": {
+              "occupied_sites": {"type": ["number", "null"], "minimum": 0},
               "multiplicity": {
                 "type": [
                   "integer",

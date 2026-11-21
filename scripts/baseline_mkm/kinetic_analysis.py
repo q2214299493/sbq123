@@ -151,7 +151,9 @@ def coverage_analysis(network, result, options, rates=None):
         raise ValueError("Normalization site inventory differs")
     if rates is not None and (measured.keys() != inventory.keys() or observed.keys() != species.keys()):
         raise ValueError("Incomplete site or species inventory")
-    if rates is None or "sites_per_molecular_reference" in result or any(
+    if rates is None or "sites_per_molecular_reference" in result or "inventory_reference" in result or any(
+        row.get("physical_site_ids") is not None for row in measured.values()
+    ) or any(
         len(s["site_occupancy"] or {}) != 1 or "molecular_reference" in observed.get(sid, {})
         for sid, s in species.items() if s["phase"] == "surface"
     ):

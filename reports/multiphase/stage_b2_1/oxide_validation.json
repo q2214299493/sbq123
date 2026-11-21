@@ -1,0 +1,140 @@
+{
+  "format": "mkm-molecular-coverage/1",
+  "species": [
+    {
+      "species_id": "co2-bound",
+      "surface_ids": [
+        "oxide-012"
+      ],
+      "interface_id": null,
+      "site_occupancy": {
+        "acid-A": 1,
+        "oxygen-B": 1
+      },
+      "molecular_reference": {
+        "kind": "declared",
+        "id": "oxide-counting-cell"
+      },
+      "molecular_coverage": 2.0,
+      "missing": [],
+      "molecule_count": {
+        "reference": "oxide-counting-cell",
+        "value": 2.0
+      },
+      "phase_ids": [
+        "oxide-alpha"
+      ]
+    }
+  ],
+  "sites": {
+    "acid-A": {
+      "phase_id": "oxide-alpha",
+      "surface_id": "oxide-012",
+      "site_type": "lewis-acid",
+      "occupied_fraction": 0.5,
+      "vacancy_fraction": 0.5,
+      "contributions": {
+        "co2-bound": {
+          "multiplicity": 1,
+          "occupied_sites": 2.0,
+          "occupied_fraction": 0.5
+        }
+      },
+      "balance_residual": 0.0,
+      "balance_status": "balanced",
+      "vacancy_source": "site_balance",
+      "competitors": [
+        "co2-bound"
+      ],
+      "unresolved_membership": [],
+      "coverage_ranking": [
+        "co2-bound"
+      ],
+      "dominant_adsorbates": [
+        "co2-bound"
+      ],
+      "activity": [
+        {
+          "reaction_id": "fixture-adsorption",
+          "direction": "forward",
+          "vacant_site_order": 1,
+          "mean_field_vacancy_factor": 0.5
+        }
+      ],
+      "site_counts": {
+        "reference": "oxide-counting-cell",
+        "capacity": 4,
+        "occupied": 2.0,
+        "vacant": 2.0,
+        "missing": []
+      }
+    },
+    "oxygen-B": {
+      "phase_id": "oxide-alpha",
+      "surface_id": "oxide-012",
+      "site_type": "basic-oxygen",
+      "occupied_fraction": 0.6666666666666666,
+      "vacancy_fraction": 0.33333333333333337,
+      "contributions": {
+        "co2-bound": {
+          "multiplicity": 1,
+          "occupied_sites": 2.0,
+          "occupied_fraction": 0.6666666666666666
+        }
+      },
+      "balance_residual": 0.0,
+      "balance_status": "balanced",
+      "vacancy_source": "site_balance",
+      "competitors": [
+        "co2-bound"
+      ],
+      "unresolved_membership": [],
+      "coverage_ranking": [
+        "co2-bound"
+      ],
+      "dominant_adsorbates": [
+        "co2-bound"
+      ],
+      "activity": [
+        {
+          "reaction_id": "fixture-adsorption",
+          "direction": "forward",
+          "vacant_site_order": 1,
+          "mean_field_vacancy_factor": 0.33333333333333337
+        }
+      ],
+      "site_counts": {
+        "reference": "oxide-counting-cell",
+        "capacity": 3,
+        "occupied": 2.0,
+        "vacant": 1.0,
+        "missing": []
+      }
+    }
+  },
+  "phase_comparison": {
+    "oxide-alpha": {
+      "inventories": [
+        {
+          "site_id": "acid-A",
+          "occupied_fraction": 0.5,
+          "vacancy_fraction": 0.5
+        },
+        {
+          "site_id": "oxygen-B",
+          "occupied_fraction": 0.6666666666666666,
+          "vacancy_fraction": 0.33333333333333337
+        }
+      ],
+      "occupied_fraction": null,
+      "vacancy_fraction": null
+    }
+  },
+  "status": "complete",
+  "network_version": "a35beac998f393b7ad16e954e74f5982523436605fdcad54934de042ce8e9bfa",
+  "source": "Synthetic counting exercise only. A declared finite sample contains four Lewis acid sites, three oxygen sites and two adsorbed CO2 molecules. The member IDs below enumerate this sample. Only the site types and molecular footprint come from synthetic_oxide_site_network.json.",
+  "source_hashes": {
+    "network": "3d9e4b1a08845ccd49ef2fe9d787748358637f995b354092fd40ee41d7c10b9b",
+    "observations": "49d84e1cddf511eeb232002dcb87833c312826a8165d02abf644469b47289d0b"
+  }
+}

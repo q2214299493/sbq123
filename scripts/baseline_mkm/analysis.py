@@ -206,7 +206,10 @@ def analyze(network, dataset, configuration, result, receipt, options=None):
 
 
 def coverage_status(coverage):
-    return "partial" if any(row["missing"] for row in coverage["species"]) else "complete"
+    missing = any(row["missing"] for row in coverage["species"]) or any(
+        site.get("site_counts", {}).get("missing") for site in coverage["sites"].values()
+    )
+    return "partial" if missing else "complete"
 
 
 def analyze_observations(network, observations):

@@ -160,6 +160,30 @@ fraction raised to the number of vacancies consumed. Pair adjacency, correlated 
 molecular activity and kinetic flux require separate evidence. Coverage observations alone produce
 no kinetic result, pathway percentage, or native acceptance.
 
+### Counts on a declared inventory reference
+
+The offline coverage command also accepts an optional `inventory_reference` in its observation file.
+For this reference the existing `sites_per_molecular_reference` gives each inventory's capacity.
+An observation site may instead supply an exhaustive, nonempty list of `physical_site_ids` in that
+finite sample. Its length supplies the capacity. Member IDs are unique within the whole named sample.
+Omit the list or use null for unknown membership. One canonical network site ID in competing species'
+footprints declares their shared inventory. List its capacity once. Separate IDs denote independent
+inventories even when their site type names match. When two IDs claim one physical member, the
+affected inventories carry a conflict pending a corrected shared mapping.
+
+Each adsorbate has one `molecule_count` on the named reference. Each inventory receives its own
+`occupied_sites` contributions and a `site_counts` record with the reference, capacity, occupied
+and vacant amounts. Counts per average repeat may be fractional. For a different declared
+reference, common inventories with explicit capacities must give a consistent conversion ratio.
+Site fractions use their own capacity. A missing capacity can leave the occupied count known while
+the vacancy count and derived fractions are unavailable. Independent total measurements can retain
+a balance even with incomplete molecular attribution. Input files without a requested count
+reference keep their existing output format and coverage behavior.
+
+The count reference is local to this observation. A catalytic turnover per reference site pair
+and a KMC event count per simulation cell retain their native denominators.
+[Two-system validation](../../reports/multiphase/stage_b2_1/completion.md)
+
 Existing single-site accepted reports use kinetic analysis v1. A bound accepted result with a
 cross-inventory footprint or explicit molecular reference uses v2 molecule and inventory rows.
 Checking directional flux on that route requires an explicit dimensionless `surface_activity`
