@@ -2,8 +2,6 @@
 from __future__ import annotations
 
 import argparse
-import math
-from collections import defaultdict
 from functools import lru_cache
 from pathlib import Path
 
@@ -11,6 +9,11 @@ from jsonschema import Draft202012Validator
 from referencing import Registry, Resource
 
 from scripts.artifact_io import sha256_file
+from scripts.kinetic_data.stoichiometric_sources import finite_sum as _sum
+from scripts.kinetic_data.stoichiometric_sources import generate_source_terms as generate_source_terms
+from scripts.kinetic_data.stoichiometric_sources import indexed as _index
+from scripts.kinetic_data.stoichiometric_sources import rate_matches as _matches
+from scripts.kinetic_data.stoichiometric_sources import source_residuals
 from scripts.kinetic_parameters.engine import check_version
 from scripts.kinetic_parameters.rate_normalization import basis_identity as basis_identity
 from scripts.kinetic_parameters.rate_normalization import convert_checked_rate, denominator_scale
@@ -30,54 +33,6 @@ def _validator(version="2.0.0"):
         (schema["$id"], Resource.from_contents(schema)) for schema in schemas
     )
     return Draft202012Validator(schemas[0], registry=registry)
-
-
-def _sum(values):
-    try:
-        total = math.fsum(values)
-    except (OverflowError, ValueError) as exc:
-        raise ValueError("Rate sum exceeds the finite numeric range") from exc
-    if not math.isfinite(total):
-        raise ValueError("Rate sum exceeds the finite numeric range")
-    return total
-
-
-def _source_total(contributions):
-    return None if None in contributions else _sum(contributions)
-
-
-def generate_source_terms(reaction_rates):
-    """Project schema-conforming progress rates onto species and vacant site inventories."""
-    species = defaultdict(list)
-    vacancies = defaultdict(list)
-    for row in reaction_rates:
-        for left, right, terms in ((row["reactants"], row["products"], species),
-                                   (row["sites_consumed"], row["sites_released"], vacancies)):
-            for identity in left.keys() | right.keys():
-                change = right.get(identity, 0) - left.get(identity, 0)
-                contributions = terms[identity]
-                if change:
-                    contributions.append(None if row["net"] is None else change * row["net"])
-    return {
-        "species": [{"species_id": sid, "net_production_rate": _source_total(species[sid])}
-                    for sid in sorted(species)],
-        "site_inventories": [{"site_id": site, "net_vacancy_rate": _source_total(vacancies[site])}
-                             for site in sorted(vacancies)],
-    }
-
-
-def _index(rows, key):
-    result = {row[key]: row for row in rows}
-    if len(result) != len(rows):
-        raise ValueError(f"Duplicate {key}")
-    return result
-
-
-def _matches(value, expected):
-    # Relative serialization tolerance only; preserve the distinction between zero and a small signal.
-    if value is None or expected is None:
-        return value is expected
-    return math.isclose(value, expected, rel_tol=1e-12, abs_tol=0.0)
 
 
 def _check_progress(row):
@@ -193,14 +148,10 @@ def validate_rate_output_v2(payload, *, network=None):
     for row in rates:
         _check_progress(row)
     expected = generate_source_terms(rates)
-    for group, key, field in (("species", "species_id", "net_production_rate"),
-                              ("site_inventories", "site_id", "net_vacancy_rate")):
-        reported = _index(payload["source_terms"][group], key)
-        if reported.keys() != {row[key] for row in expected[group]}:
-            raise ValueError(f"source_terms.{group}: identities differ from the reaction stoichiometry")
-        for row in expected[group]:
-            if not _matches(reported[row[key]][field], row[field]):
-                raise ValueError(f"source_terms.{group}.{row[key]}: inconsistent {field}")
+    for group, results in source_residuals(expected, payload["source_terms"]).items():
+        for identity, result in results.items():
+            if not result["consistent"]:
+                raise ValueError(f"source_terms.{group}.{identity}: inconsistent source rate")
 
 
 def main(argv=None):

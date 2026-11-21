@@ -5,6 +5,7 @@ import re
 
 from scripts.baseline_mkm.native import site_token
 from scripts.baseline_mkm.pressure_perturbation import checked_feed
+from scripts.kinetic_data.stoichiometric_sources import build_matrices, project_progress
 from scripts.kinetic_parameters.export import catkinas
 from scripts.thermochemistry.harmonic import KB
 
@@ -77,7 +78,8 @@ def species_and_sites(table, mapping, native, config):
 
 
 def reconstruct(table, mapping, native, temperature, by_id, sites, vacancy, activities):
-    source = dict.fromkeys(by_id, 0.0)
+    forward_rows = []
+    net_rates = {}
     reactions = []
     coefficient_errors = []
     element_keys = set().union(*(s["composition"] for s in by_id.values()))
@@ -108,8 +110,8 @@ def reconstruct(table, mapping, native, temperature, by_id, sites, vacancy, acti
             fluxes[direction] = flux
         net = fluxes["forward"] - fluxes["reverse"]
         check_close(net, obs["net_flux"], "reconstructed net flux", absolute=1e-10 * max(fluxes.values()))
-        for sid, count in nu.items():
-            source[sid] += count * net
+        forward_rows.append(dict(forward, reaction_id=rid))
+        net_rates[rid] = net
         for field, key in (("applied_forward_barrier_eV", "Ea_eV"), ("applied_reaction_energy_eV", "G0_eV")):
             check_close(obs[field], row["fixed_T_energy_input"][key], field)
         # Convert pressure-based coefficients back to dimensionless standard-state activities.
@@ -128,7 +130,8 @@ def reconstruct(table, mapping, native, temperature, by_id, sites, vacancy, acti
             dict(obs, reaction_id=rid, forward_unit=row["forward"]["unit"], reverse_unit=row["reverse"]["unit"])
         )
 
-    return source, reactions, coefficient_errors
+    projected, _ = project_progress(build_matrices(forward_rows), net_rates)
+    return dict.fromkeys(by_id, 0.0) | projected, reactions, coefficient_errors
 
 
 def check_steady_state(source, reactions, gas_rates, by_id):

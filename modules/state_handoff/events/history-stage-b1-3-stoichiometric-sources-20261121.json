@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "event_id": "history-stage-b1-3-stoichiometric-sources-20261121",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-stage-b1-3-stoichiometric-sources-20261121",
+    "module": "kinetic_data"
+  },
+  "occurred_at": "2026-11-21T14:58:29.210979+00:00",
+  "recorded_at": "2026-11-21T14:58:29.210979+00:00",
+  "summary": "Record independent native-basis stoichiometric source projection and archived Ni/Cu replay.",
+  "payload": {
+    "markdown": "- Stage B.1.3 established a shared stoichiometric source implementation, labeled conservation and optional net-progress covariance. The archived 400 K Ni/Cu cycle reproduced with both site inventories balanced. Both Windows checkouts passed 478 focused tests. See reports/multiphase/stage_b1_3/completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "reports/multiphase/stage_b1_3/completion.md",
+      "authority": "repository_document",
+      "sha256": "7e5fc43dabf6ddd1d91107196253d91e2083910aab04287f6275ec3b0e6acfbc",
+      "observed_at": "2026-11-21T14:58:29.210979+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b1_3/ni_cu_replay.json",
+      "authority": "repository_document",
+      "sha256": "6e30395d1619f25598767c8f946f53097edcafc75365f0c9fdb4dea5ae8c8d47",
+      "observed_at": "2026-11-21T14:58:29.210979+00:00"
+    },
+    {
+      "locator": "modules/kinetic_data/stoichiometric_sources.md",
+      "authority": "repository_document",
+      "sha256": "65e15e2a151220b218949c14a474d0a0a92142d33a5ca583f6fe046af5c2b3b7",
+      "observed_at": "2026-11-21T14:58:29.210979+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

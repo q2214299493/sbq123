@@ -4,6 +4,7 @@ from math import prod
 
 from scripts.baseline_mkm.molecular_coverage import molecular_analysis
 from scripts.baseline_mkm.single_point_result import check_close, check_steady_state, normalize_overall
+from scripts.kinetic_data.stoichiometric_sources import build_matrices, project_progress
 from scripts.scientific_validation import finite_number
 
 
@@ -52,7 +53,8 @@ def rate_analysis(network, dataset, result):
     vacancies = indexed(result["sites"], "site_id")
     rows = []
     gases = {s for s, v in species.items() if v["phase"] == "gas"}
-    sources = dict.fromkeys(species, 0.0)
+    forward_rows = []
+    net_rates = {}
     for rid, entry in definitions.items():
         r, m = records[rid], models[rid]
         f = entry["direction"]["forward"]
@@ -71,12 +73,10 @@ def rate_analysis(network, dataset, result):
             check_close(net, fw, "forward-only net flux")
         else:
             raise ValueError("Unknown reversibility precludes validated kinetic attribution")
-        contribution = {
-            s: net * (f["products"].get(s, 0) - f["reactants"].get(s, 0))
-            for s in sorted(set(f["products"]) | set(f["reactants"]))
-        }
-        for s, v in contribution.items():
-            sources[s] += v
+        forward = dict(f, reaction_id=rid)
+        forward_rows.append(forward)
+        net_rates[rid] = net
+        contribution, _ = project_progress(build_matrices([forward]), {rid: net})
         factors = {}
         for direction in ("forward", "reverse"):
             side = entry["direction"][direction]
@@ -113,6 +113,8 @@ def rate_analysis(network, dataset, result):
         )
     if set(result["gas_net_production"]) != gases:
         raise ValueError("Incomplete gas inventory")
+    projected, _ = project_progress(build_matrices(forward_rows), net_rates)
+    sources = dict.fromkeys(species, 0.0) | projected
     residual, tolerance = check_steady_state(sources, rows, result["gas_net_production"], species)
     gas = {s: sources[s] for s in sorted(gases)}
     ranking = {}
