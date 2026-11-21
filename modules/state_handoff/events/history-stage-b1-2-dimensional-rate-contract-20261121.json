@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "event_id": "history-stage-b1-2-dimensional-rate-contract-20261121",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-stage-b1-2-dimensional-rate-contract-20261121",
+    "module": "kinetic_data"
+  },
+  "occurred_at": "2026-11-21T14:40:18.567228+00:00",
+  "recorded_at": "2026-11-21T14:40:18.567228+00:00",
+  "summary": "Record dimension-aware coefficient units and explicit native rate normalization in V2 revision 2.1.0.",
+  "payload": {
+    "markdown": "- Stage B.1.2 added dimensional kinetic output validation, explicitly scoped conversion evidence and unavailable conversion reporting. V1 and V2 2.0.0 keep their existing meanings. Both Windows checkouts passed 398 focused tests and isolated wheel checks. No native engine was run. See reports/multiphase/stage_b1_2/completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "reports/multiphase/stage_b1_2/completion.md",
+      "authority": "repository_document",
+      "sha256": "373358f0430463659f431d34926a7d65a023124c349444ae9fb56def95a0d79a",
+      "observed_at": "2026-11-21T14:40:18.567228+00:00"
+    },
+    {
+      "locator": "configs/kinetics/rate_output_v2_1.schema.json",
+      "authority": "repository_document",
+      "sha256": "f4887fb08782912a0fe122d970d730fd6f0276be57d79345a56cea3f9f1fc150",
+      "observed_at": "2026-11-21T14:40:18.567228+00:00"
+    },
+    {
+      "locator": "modules/kinetic_data/rate_dimensions.md",
+      "authority": "repository_document",
+      "sha256": "247dfc7e808b91f742042da3b8a9e2314c56518645097af4d675a1150968dd98",
+      "observed_at": "2026-11-21T14:40:18.567228+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

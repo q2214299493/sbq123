@@ -58,8 +58,10 @@ Input and result files are represented by path and SHA-256. Each engine has a cl
 ## Kinetic rate output V2
 
 Validate a document offline with `python -m scripts.rate_output_v2 FILE.json`.
-The required discriminators are `"format": "kinetic-rate-output/2"` and
-`"schema_version": "2.0.0"`. Success exits 0. Duplicate keys, unknown record
+The required format is `kinetic-rate-output/2`. Select `schema_version` explicitly.
+The following describes the original `2.0.0` revision. The [2.1.0 dimensional
+contract](rate_dimensions.md) adds rate-law units and physically scoped conversions.
+Success exits 0. Duplicate keys, unknown record
 properties, incompatible versions and inconsistent rates exit 1. The V1 and
 V2 commands each accept their own document format. The source-term schema
 describes the nested `source_terms` block of a V2 document.

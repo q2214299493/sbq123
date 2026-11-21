@@ -10,14 +10,21 @@ from pathlib import Path
 from jsonschema import Draft202012Validator
 from referencing import Registry, Resource
 
+from scripts.artifact_io import sha256_file
+from scripts.kinetic_parameters.engine import check_version
+from scripts.kinetic_parameters.rate_normalization import basis_identity as basis_identity
+from scripts.kinetic_parameters.rate_normalization import convert_checked_rate, denominator_scale
+from scripts.kinetic_parameters.rate_units import convert_coefficient
 from scripts.multiphase_contracts import _check_finite, read_unique_json
 from scripts.runtime_resources import resource_path
 
 
-@lru_cache(maxsize=1)
-def _validator():
+@lru_cache(maxsize=2)
+def _validator(version="2.0.0"):
     names = ("kinetics/rate_output_v2", "kinetics/rate_source_terms_v2", "catalysis/common",
              "kinetics/reaction", "kinetics/kinetic_parameter", "kinetics/simulation_run")
+    if version == "2.1.0":
+        names = ("kinetics/rate_output_v2_1", *names)
     schemas = [read_unique_json(resource_path(f"configs/{name}.schema.json")) for name in names]
     registry = Registry().with_resources(
         (schema["$id"], Resource.from_contents(schema)) for schema in schemas
@@ -95,13 +102,75 @@ def _check_progress(row):
         raise ValueError("net_evidence must bind a numerical net")
 
 
-def validate_rate_output_v2(payload):
-    """Validate the declared V2 shape, bindings and arithmetic without resolving artifact paths."""
-    error = next(_validator().iter_errors(payload), None)
+def _check_schema(validator, payload):
+    error = next(validator.iter_errors(payload), None)
     if error:
         raise ValueError(f"{error.json_path}: {error.message}")
     _check_finite(payload)
 
+def _validate_dimensions(payload, network):
+    basis = payload["native_normalization"]
+    if any(basis["reference_scope"][field] != payload[field] for field in ("project_id", "network_version")):
+        raise ValueError("Native reference scope differs from the output project/network")
+    denominator_scale(basis)
+    if network is not None:
+        if (not isinstance(network, dict) or network.get("format") != "reaction-network/1"
+                or any(network.get(k) != v for k, v in basis["reference_scope"].items())):
+            raise ValueError("Supplied network does not match the physical reference scope")
+        check_version(network, "network_version")
+        catalog = network.get("catalog")
+        if not isinstance(catalog, dict) or not isinstance(catalog.get("sites"), list):
+            raise ValueError("Supplied network has no site catalog")
+        if not all(isinstance(site, dict) and isinstance(site.get("site_id"), str) for site in catalog["sites"]):
+            raise ValueError("Invalid site identity in the supplied network")
+        sites = _index(catalog["sites"], "site_id")
+        declared = set(basis.get("inventory_ids", []))
+        for row in payload["reaction_rates"]:
+            declared.update(row["sites_consumed"], row["sites_released"])
+        unknown = declared - sites.keys()
+        if unknown:
+            raise ValueError(f"Unknown site inventories in the supplied network: {sorted(unknown)}")
+    rates = _index(payload["reaction_rates"], "reaction_id")
+    coefficients = _index(payload.get("rate_coefficients", []), "reaction_id")
+    for rid, pair in coefficients.items():
+        if rid not in rates:
+            raise ValueError(f"Coefficient has no matching reaction: {rid}")
+        for direction in ("forward", "reverse"):
+            record = pair[direction]
+            flux = rates[rid][direction]
+            if isinstance(record, dict):
+                if flux == "not_applicable":
+                    raise ValueError("A coefficient was supplied for an excluded direction")
+                convert_coefficient(record["value"], record["unit"], record["unit"], record["activity_orders"])
+            elif record == "not_applicable" and flux not in (None, "not_applicable"):
+                raise ValueError("A directional flux was supplied for an excluded coefficient")
+
+
+def convert_native_rate(value, quantity_kind, source_basis, target_basis, *, evidence=None):
+    """Explicit 2.1 conversion. basis_identity produces the hash used by physical bridge evidence."""
+    validator = _validator("2.1.0")
+
+    def check_part(name, obj):
+        ref = validator.schema["$id"] + "#/$defs/" + name
+        _check_schema(validator.evolve(schema={"$ref": ref}), obj)
+
+    check_part("normalization", source_basis)
+    check_part("normalization", target_basis)
+    if evidence is not None:
+        check_part("conversion_evidence", evidence)
+    return convert_checked_rate(value, quantity_kind, source_basis, target_basis, evidence)
+
+
+def validate_rate_output_v2(payload, *, network=None):
+    """Validate the explicitly selected V2 revision without resolving artifact paths."""
+    version = payload.get("schema_version") if isinstance(payload, dict) else None
+    if version not in ("2.0.0", "2.1.0"):
+        raise ValueError("schema_version must explicitly select 2.0.0 or 2.1.0")
+    _check_schema(_validator(version), payload)
+    if version == "2.1.0":
+        _validate_dimensions(payload, network)
+    elif network is not None:
+        raise ValueError("Explicit network inventory validation requires 2.1.0")
     if "output_binding" in payload:
         _index(payload["output_binding"]["native_inputs"], "path")
 
@@ -137,12 +206,17 @@ def validate_rate_output_v2(payload):
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output", type=Path, help="path to a kinetic-rate-output/2 JSON document")
+    parser.add_argument("--network", type=Path, help="verify the declared 2.1 inventory against this network artifact")
     args = parser.parse_args(argv)
     try:
-        validate_rate_output_v2(read_unique_json(args.output))
-    except (ValueError, OSError) as exc:
+        payload = read_unique_json(args.output)
+        network = read_unique_json(args.network) if args.network else None
+        validate_rate_output_v2(payload, network=network)
+        if args.network and sha256_file(args.network) != payload["provenance"]["network"]["sha256"]:
+            raise ValueError("Network artifact SHA-256 differs from the rate output provenance")
+    except (ValueError, OSError, RuntimeError, OverflowError) as exc:
         parser.exit(1, f"Invalid V2 kinetic rate output: {exc}\n")
-    print("Kinetic rate output conforms to 2.0.0")
+    print(f"Kinetic rate output conforms to {payload['schema_version']}")
     return 0
 
 
