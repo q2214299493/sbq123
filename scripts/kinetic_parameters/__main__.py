@@ -6,11 +6,7 @@ from pathlib import Path
 from scripts.artifact_io import sha256_file, sha256_json, write_json_exclusive
 from scripts.kinetic_parameters.engine import generate
 from scripts.kinetic_parameters.export import catkinas, zacros
-from scripts.multiphase_contracts import _unique_keys
-
-
-def read(path):
-    return json.loads(path.read_bytes(), object_pairs_hook=_unique_keys)
+from scripts.multiphase_contracts import read_unique_json as read
 
 
 def main():

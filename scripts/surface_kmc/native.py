@@ -3,7 +3,7 @@ import math
 from collections import Counter, defaultdict
 
 from scripts.artifact_io import sha256_json
-from scripts.native_model import conditions, integer, token
+from scripts.native_inputs import conditions, integer, token
 from scripts.scientific_validation import finite_number
 from scripts.surface_kmc.lattice import embeddings, lattice
 

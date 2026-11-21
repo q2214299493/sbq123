@@ -42,6 +42,10 @@ def _unique_keys(pairs):
     return result
 
 
+def read_unique_json(path):
+    return json.loads(path.read_bytes(), object_pairs_hook=_unique_keys)
+
+
 def _check_finite(value, path="$"):
     if isinstance(value, dict):
         for key, child in value.items():

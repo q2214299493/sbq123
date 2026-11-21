@@ -140,6 +140,15 @@ def test_domain_cannot_import_cli_or_skill_implementations():
         assert not any(name.startswith("skills.") for name in dependencies), path
 
 
+def test_native_input_dependencies_stay_below_assembly():
+    trees = maintained_trees()
+    for path in ("scripts/baseline_mkm/native.py", "scripts/surface_kmc/native.py",
+                 "scripts/surface_kmc/lattice.py", "scripts/native_inputs.py"):
+        assert "scripts.native_model" not in imported_modules(path, trees[path]), path
+    path = "scripts/native_model.py"
+    assert "scripts.kinetic_parameters.__main__" not in imported_modules(path, trees[path])
+
+
 def test_mkm_and_registry_cli_share_the_domain_batch_validator():
     from scripts import registry_mutations, registry_write
     from scripts.baseline_mkm import analysis, registration

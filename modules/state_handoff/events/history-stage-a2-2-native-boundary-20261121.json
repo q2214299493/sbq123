@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "event_id": "history-stage-a2-2-native-boundary-20261121",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-stage-a2-2-native-boundary-20261121",
+    "module": "baseline_mkm"
+  },
+  "occurred_at": "2026-11-21T05:11:35.223478+00:00",
+  "recorded_at": "2026-11-21T05:11:35.223478+00:00",
+  "summary": "Remove the P2 native assembler and adapter import cycle.",
+  "payload": {
+    "markdown": "- Stage A.2.2 moved three shared input validators below the native adapters and decoupled the assembler from the kinetic parameter CLI. Both trees passed 124 offline tests; 53 files across ten models matched archived bytes. Three independent DRC and sensitivity cycles remain. See reports/multiphase/stage_a2_2/completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "reports/multiphase/stage_a2_2/completion.md",
+      "authority": "repository_document",
+      "sha256": "2572fe77f227d4844ff0dffbded3460e8ff128c86ea1aa901afb94a18228d69f",
+      "observed_at": "2026-11-21T05:11:35.223478+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

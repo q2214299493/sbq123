@@ -1,7 +1,7 @@
 """CATKINAS fixed-temperature INPUT_*.m contract from the installed ReadMe.m."""
 import math
 
-from scripts.native_model import conditions, integer, token
+from scripts.native_inputs import conditions, integer, token
 from scripts.scientific_validation import finite_number
 from scripts.thermochemistry.harmonic import H_J_S, KB, KB_J_K
 

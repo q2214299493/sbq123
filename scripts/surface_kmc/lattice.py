@@ -1,7 +1,7 @@
 """Validate and expand the periodic unit cell used by the Zacros input."""
 import math
 
-from scripts.native_model import integer, token
+from scripts.native_inputs import integer, token
 from scripts.scientific_validation import finite_number
 
 OFFSETS = {"self": (0, 0), "north": (0, 1), "east": (1, 0), "northeast": (1, 1), "southeast": (1, -1)}

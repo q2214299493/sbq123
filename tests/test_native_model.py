@@ -12,6 +12,22 @@ from scripts.native_validation import cat_readback, zac_readback
 from test_kinetic_parameters import FIX, ROOT, case, dataset
 
 
+def test_shared_input_helpers_keep_legacy_imports(tmp_path):
+    from scripts import native_inputs, native_model
+    from scripts.kinetic_parameters.__main__ import read as read_parameters
+
+    assert native_model.conditions is native_inputs.conditions
+    assert native_model.token is native_inputs.token
+    assert native_model.integer is native_inputs.integer
+    assert native_model.read is read_parameters
+    path = tmp_path / "config.json"
+    path.write_bytes('[1, 2.5]'.encode("utf-16"))
+    assert native_model.read(path) == [1, 2.5]
+    path.write_bytes(b'{"group": {"site": 1, "site": 2}}')
+    with pytest.raises(ValueError, match="^duplicate JSON property 'site'$"):
+        native_model.read(path)
+
+
 def model(system="interface", gas="dissociative", **options):
     d = dataset(*case(system=system, gas=gas, **options))
     c = json.loads((FIX / "native_interface_config.json").read_bytes())
