@@ -1,0 +1,806 @@
+{
+  "catkinas": {
+    "phase2_5_2": {
+      "mat_sha256": "20ebda963c5d5b57e9a47144831a3fd3d416f864d0211db1a4e03020938ff655",
+      "mean_per_site_s": 40.75638508082385,
+      "reactions": {
+        "ads": {
+          "forward_mass_action": 94.00713283583823,
+          "kf_Eyring": 1062.5043325104753,
+          "kf_from_flux": 1062.5334512545078,
+          "kr_Eyring": 58.39641191059811,
+          "kr_from_flux": 58.398207372229756,
+          "native_net": 81.5127701616477,
+          "net_from_difference": 81.51277016164768,
+          "reverse_mass_action": 12.494362674190551
+        },
+        "desorb": {
+          "forward_mass_action": 278.43070593850365,
+          "kf_Eyring": 693.9543043840827,
+          "kf_from_flux": 693.9736630934748,
+          "kr_Eyring": 3956.376391752374,
+          "kr_from_flux": 3956.478830396523,
+          "native_net": 163.0255403232954,
+          "net_from_difference": 163.02554032329533,
+          "reverse_mass_action": 115.4051656152083
+        },
+        "hydrogenate": {
+          "forward_mass_action": 190.36328304231006,
+          "kf_Eyring": 1239.7090829995939,
+          "kf_from_flux": 1239.7428380039596,
+          "kr_Eyring": 68.13578076345453,
+          "kr_from_flux": 68.13786357174203,
+          "native_net": 163.0255403232954,
+          "net_from_difference": 163.0255403232954,
+          "reverse_mass_action": 27.337742719014678
+        },
+        "transfer": {
+          "forward_mass_action": 450.0592041087896,
+          "kf_Eyring": 2214.6683157124485,
+          "kf_from_flux": 2214.7271375269625,
+          "kr_Eyring": 3956.3763917523875,
+          "kr_from_flux": 3956.4788303965233,
+          "native_net": 81.5127701616477,
+          "net_from_difference": 81.51277016164767,
+          "reverse_mass_action": 368.5464339471419
+        }
+      },
+      "species_per_pair_s": {
+        "H2-bridge": 0.0,
+        "H2-g": -81.5127701616477,
+        "H2-top": 0.0,
+        "HNO-g": 163.0255403232954,
+        "HNO-top": 0.0,
+        "NO-g": -163.0255403232954
+      },
+      "turnover_per_pair_s": 81.5127701616477,
+      "vacancies_per_pair_s": {
+        "bridge-Cu": 0.0,
+        "top-Ni": 0.0
+      }
+    },
+    "phase3_0": {
+      "mat_sha256": "a010f66603a85035cdcbbc2e81e5ea712c4833a979b7d595df4dcdb386db308d",
+      "mean_per_site_s": 40.75638508082385,
+      "reactions": {
+        "ads": {
+          "forward_mass_action": 94.00713283583823,
+          "kf_Eyring": 1062.5043325104753,
+          "kf_from_flux": 1062.5334512545078,
+          "kr_Eyring": 58.39641191059811,
+          "kr_from_flux": 58.398207372229756,
+          "native_net": 81.5127701616477,
+          "net_from_difference": 81.51277016164768,
+          "reverse_mass_action": 12.494362674190551
+        },
+        "desorb": {
+          "forward_mass_action": 278.43070593850365,
+          "kf_Eyring": 693.9543043840827,
+          "kf_from_flux": 693.9736630934748,
+          "kr_Eyring": 3956.376391752374,
+          "kr_from_flux": 3956.478830396523,
+          "native_net": 163.0255403232954,
+          "net_from_difference": 163.02554032329533,
+          "reverse_mass_action": 115.4051656152083
+        },
+        "hydrogenate": {
+          "forward_mass_action": 190.36328304231006,
+          "kf_Eyring": 1239.7090829995939,
+          "kf_from_flux": 1239.7428380039596,
+          "kr_Eyring": 68.13578076345453,
+          "kr_from_flux": 68.13786357174203,
+          "native_net": 163.0255403232954,
+          "net_from_difference": 163.0255403232954,
+          "reverse_mass_action": 27.337742719014678
+        },
+        "transfer": {
+          "forward_mass_action": 450.0592041087896,
+          "kf_Eyring": 2214.6683157124485,
+          "kf_from_flux": 2214.7271375269625,
+          "kr_Eyring": 3956.3763917523875,
+          "kr_from_flux": 3956.4788303965233,
+          "native_net": 81.5127701616477,
+          "net_from_difference": 81.51277016164767,
+          "reverse_mass_action": 368.5464339471419
+        }
+      },
+      "species_per_pair_s": {
+        "H2-bridge": 0.0,
+        "H2-g": -81.5127701616477,
+        "H2-top": 0.0,
+        "HNO-g": 163.0255403232954,
+        "HNO-top": 0.0,
+        "NO-g": -163.0255403232954
+      },
+      "turnover_per_pair_s": 81.5127701616477,
+      "vacancies_per_pair_s": {
+        "bridge-Cu": 0.0,
+        "top-Ni": 0.0
+      }
+    }
+  },
+  "replay": {
+    "catkinas": {
+      "qualification_file_sha256": "9b8bb716277180587c32eb5cd0f4b90c3dfc32ce638a458d4a1717db18bac65d",
+      "runs": [
+        {
+          "basis": "reference_site_pair",
+          "case": "phase2_5_2",
+          "dataset_id": "rates-d375a4cdefce637a90aa27c93497a278a445059a36f396e078288b73e29f0ba4",
+          "dataset_version": "417cf1dc3236175476441c4c4e7b4bd5771bc4a7062aa5e34eff69070483d11b",
+          "inputs": [
+            {
+              "path": "reports/multiphase/phase2_5_2/catkinas_closed_cycle_input.m",
+              "sha256": "b793e6f37f2262e4a006f912d18950c17581ccc014aa9779008741a4e31890f8"
+            }
+          ],
+          "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+          "output_sha256": "e1a71272fc19b0f8756e4fcb64ad7ef2e3b83eac9572290b27cef1005bc17e77",
+          "parent_receipt": {
+            "path": "reports/multiphase/phase2_5_2/catkinas_closed_cycle_validation.json",
+            "sha256": "bb7b6d5c9c1b921d8bd1ba5c498a3eb8dbf1fb056ce2b13de7354e027755910b"
+          },
+          "provenance": {
+            "dataset": {
+              "path": "reports/multiphase/phase2_5_2/cycle_dataset.json",
+              "sha256": "0ac30eec437cebf321339d6c4dde26a0e2146229d8c27fb9fa9f3926adf6d778"
+            },
+            "native_output": {
+              "path": "reports/multiphase/phase2_5_2/data1.mat",
+              "sha256": "20ebda963c5d5b57e9a47144831a3fd3d416f864d0211db1a4e03020938ff655"
+            },
+            "network": {
+              "path": "reports/multiphase/phase3_0/closed_cycle_network.json",
+              "sha256": "6a4717c44a6c5a76191baf88e419621e461886c96989a6cdb86402df70c58b40"
+            }
+          },
+          "qualification_sha256": "16e7307e5b219b8d936f2a888bd6a4c5b0941e16be60fb925ef332f4ebf1c749",
+          "run_id": "closed_cycle",
+          "schema": "2.1.0"
+        },
+        {
+          "basis": "reference_site_pair",
+          "case": "phase3_0",
+          "dataset_id": "rates-613d62bf1a671724573368e7083620462145857a64f2b8a54a258207f6052f51",
+          "dataset_version": "417cf1dc3236175476441c4c4e7b4bd5771bc4a7062aa5e34eff69070483d11b",
+          "inputs": [
+            {
+              "path": "reports/multiphase/phase2_5_2/catkinas_closed_cycle_input.m",
+              "sha256": "b793e6f37f2262e4a006f912d18950c17581ccc014aa9779008741a4e31890f8"
+            }
+          ],
+          "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+          "output_sha256": "eb73c3b756ad88316b792df4919c0e08cbe9e0967bcd4d6e2277a5eefcac2ec6",
+          "parent_receipt": {
+            "path": "reports/multiphase/phase3_0/benchmark_manifest.json",
+            "sha256": "0773bdbbf0d3a2f7b8907ed271fdc1f0f725150c5e8c16ae77d10c37d389822d"
+          },
+          "provenance": {
+            "dataset": {
+              "path": "reports/multiphase/phase2_5_2/cycle_dataset.json",
+              "sha256": "0ac30eec437cebf321339d6c4dde26a0e2146229d8c27fb9fa9f3926adf6d778"
+            },
+            "native_output": {
+              "path": "reports/multiphase/phase3_0/data1.mat",
+              "sha256": "a010f66603a85035cdcbbc2e81e5ea712c4833a979b7d595df4dcdb386db308d"
+            },
+            "network": {
+              "path": "reports/multiphase/phase3_0/closed_cycle_network.json",
+              "sha256": "6a4717c44a6c5a76191baf88e419621e461886c96989a6cdb86402df70c58b40"
+            }
+          },
+          "qualification_sha256": "caf0b3dbca2add941b9ce75831dabe82204257045be8a6109023c1519c845ca7",
+          "run_id": "run",
+          "schema": "2.1.0"
+        }
+      ]
+    },
+    "zacros": {
+      "qualification_file_sha256": "fa1577a131e850937cf5822cf8c2fc3f40bd5909c21ddb317cf990b4b20c70f5",
+      "runs": [
+        {
+          "basis": "simulation_cell",
+          "case": "mono",
+          "dataset_id": "rates-c3c24858a6e441c2c7ebcd95ac0eec38dfef9668e1c5beda8a439d5dbafae0ad",
+          "dataset_version": "f276dfd869676e2d21385a05a96b594babff17070a1fe4ba89ff209f6a4bb65a",
+          "inputs": [
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/mono.zip!/energetics_input.dat",
+              "sha256": "a9034d0d147ea36298101727ef62ecede67ac7f15306e3eb58794b7e43c5f288"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/mono.zip!/lattice_input.dat",
+              "sha256": "041747579adc213be762c4945862a71396c90465c4059660ac6d773c9d848362"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/mono.zip!/mechanism_input.dat",
+              "sha256": "f542d07489e339964039d2012d3bbb4ee7831d5871124388a33c8440132f4ca0"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/mono.zip!/simulation_input.dat",
+              "sha256": "7dbe831c71480a0fcf65fd59ae5e1b48bf4acc734a283d083f0dbff7f9fec1d4"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/mono.zip!/state_input.dat",
+              "sha256": "b675bf6f1aa0cf83ac0c97a74d8a4ad70632be64363dc58dd6fa5fdb72f3b3a3"
+            }
+          ],
+          "network_version": "6325fa922394c6aa225e29105882c5be0be0853d12f5b7f75cb618b1ae79d302",
+          "output_sha256": "5d96357c05c3f5782f23818f0071330dd199b09e82e79b82f5d05eedf7d99367",
+          "parent_receipt": {
+            "path": "reports/multiphase/phase2_5_1/zacros_validation.json",
+            "sha256": "cd729ced9cdf93ed2a8bb0a92fab556aee8345cea520356dfe9d95e0cc778359"
+          },
+          "provenance": {
+            "dataset": {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/mono.zip!/dataset.json",
+              "sha256": "fd0ac66dd8414c012e65fbd8069871e9abb3bc64fd774417547b5656a9ee8cd3"
+            },
+            "native_output": {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/mono.zip",
+              "sha256": "a2593f79f35fb9158b29299078653b6c8c0ecc8c450b65be9d79a50c40f92776"
+            },
+            "network": {
+              "path": "tests/fixtures/multiphase/kinetic_interface_network.json",
+              "sha256": "a31cbde920aa19f80a602da27becf21f3ee10fb6576295a6f39898021ea77929"
+            }
+          },
+          "qualification_sha256": "abda4dc4948d5ed9fcfae3afe730c76be4ff86747cb8b3c44146db3ce80aa710",
+          "run_id": "mono",
+          "schema": "2.1.0"
+        },
+        {
+          "basis": "simulation_cell",
+          "case": "dent",
+          "dataset_id": "rates-2102f7c979b386895d58d7402b41c5e29ac4f96c500f204331e70eb8e0b540d3",
+          "dataset_version": "e8ecac6c7eabe15f2347d823fc516cd40d651aa9ee8bcc25b29980dfcc64634e",
+          "inputs": [
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/dent.zip!/energetics_input.dat",
+              "sha256": "a9034d0d147ea36298101727ef62ecede67ac7f15306e3eb58794b7e43c5f288"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/dent.zip!/lattice_input.dat",
+              "sha256": "041747579adc213be762c4945862a71396c90465c4059660ac6d773c9d848362"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/dent.zip!/mechanism_input.dat",
+              "sha256": "4990838be52ff20a446271c9f25180b16011b77a72821f264a58e00e75236a1f"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/dent.zip!/simulation_input.dat",
+              "sha256": "7441a648b4526d796f2b5995bbb50a3e5c4b550c269b55d9309f74c15b2ecbc9"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/dent.zip!/state_input.dat",
+              "sha256": "ff0fc80cdd1bda7977846cd18536bf079003fa0a727ee74191f06b57f1949980"
+            }
+          ],
+          "network_version": "b5e01bff54d729e68adcf34e89d0c2334e1c2b6938d87191e8d23046db6911a7",
+          "output_sha256": "4fbd954adbfe88a1d65a8d40719ab56aca19db088029089b21f96e2720e1ecbf",
+          "parent_receipt": {
+            "path": "reports/multiphase/phase2_5_1/zacros_validation.json",
+            "sha256": "cd729ced9cdf93ed2a8bb0a92fab556aee8345cea520356dfe9d95e0cc778359"
+          },
+          "provenance": {
+            "dataset": {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/dent.zip!/dataset.json",
+              "sha256": "3397c6ee0aad6c8d7e580618dd99632e24ea1358a523f86cd8e5169e36736ac2"
+            },
+            "native_output": {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/dent.zip",
+              "sha256": "ec21a9ee721954d21a04956c6291833b571a888a76ee1fa4c783fbce8331b1a1"
+            },
+            "network": {
+              "path": "reports/multiphase/stage_b1_4/networks/dent.json",
+              "sha256": "1bf6d38fb0dc0d1eb6e152a9a81ea826991eb12ec0f4c9dddae353d534376f3a"
+            }
+          },
+          "qualification_sha256": "c0e1f4bf966a25417dbd98dffaad52a64264c6e0b6e67fe3d434b240202074bb",
+          "run_id": "dent",
+          "schema": "2.1.0"
+        },
+        {
+          "basis": "simulation_cell",
+          "case": "full",
+          "dataset_id": "rates-9efd2a72675d1971450d92e2e501687f4297bb16ab43e6711780b8ad4a6a5485",
+          "dataset_version": "f276dfd869676e2d21385a05a96b594babff17070a1fe4ba89ff209f6a4bb65a",
+          "inputs": [
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/full.zip!/energetics_input.dat",
+              "sha256": "a9034d0d147ea36298101727ef62ecede67ac7f15306e3eb58794b7e43c5f288"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/full.zip!/lattice_input.dat",
+              "sha256": "041747579adc213be762c4945862a71396c90465c4059660ac6d773c9d848362"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/full.zip!/mechanism_input.dat",
+              "sha256": "f542d07489e339964039d2012d3bbb4ee7831d5871124388a33c8440132f4ca0"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/full.zip!/simulation_input.dat",
+              "sha256": "7dbe831c71480a0fcf65fd59ae5e1b48bf4acc734a283d083f0dbff7f9fec1d4"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/full.zip!/state_input.dat",
+              "sha256": "8b274e68981c1b26cd5242efea0b3128f148865a55f15efbae336fcff6e6365c"
+            }
+          ],
+          "network_version": "6325fa922394c6aa225e29105882c5be0be0853d12f5b7f75cb618b1ae79d302",
+          "output_sha256": "dafa3b41d823c144b30be119690be1f1df50b9518958f5686e0f45c774ece404",
+          "parent_receipt": {
+            "path": "reports/multiphase/phase2_5_1/zacros_validation.json",
+            "sha256": "cd729ced9cdf93ed2a8bb0a92fab556aee8345cea520356dfe9d95e0cc778359"
+          },
+          "provenance": {
+            "dataset": {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/full.zip!/dataset.json",
+              "sha256": "fd0ac66dd8414c012e65fbd8069871e9abb3bc64fd774417547b5656a9ee8cd3"
+            },
+            "native_output": {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/full.zip",
+              "sha256": "21b8444d6f8b92e013bed75c7f03d8b270066811ffbba6052d0389d890873649"
+            },
+            "network": {
+              "path": "tests/fixtures/multiphase/kinetic_interface_network.json",
+              "sha256": "a31cbde920aa19f80a602da27becf21f3ee10fb6576295a6f39898021ea77929"
+            }
+          },
+          "qualification_sha256": "e27ce816b4dd2024fcc3d9cb334d54225b1323495a660a981a9a7f3b0e3881f8",
+          "run_id": "full",
+          "schema": "2.1.0"
+        },
+        {
+          "basis": "simulation_cell",
+          "case": "interacting",
+          "dataset_id": "rates-f6940f17f8b6843904402fc39287d0d217439b43c8d7cfc424dc1354b3ea0caf",
+          "dataset_version": "ba6e46c0e1b2eee0c2772b33f6828123f3edc5ccb3b4dcb29717aa46bc5f0083",
+          "inputs": [
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/interacting.zip!/energetics_input.dat",
+              "sha256": "a46d087165e8ae8eda8986c44d69d9145e8356e8fa09464642a09ab28c08b8c4"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/interacting.zip!/lattice_input.dat",
+              "sha256": "041747579adc213be762c4945862a71396c90465c4059660ac6d773c9d848362"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/interacting.zip!/mechanism_input.dat",
+              "sha256": "ac619290342374026ff926a0f3b87ffae121a3d8a728d2cc0242eb624477650e"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/interacting.zip!/simulation_input.dat",
+              "sha256": "7dbe831c71480a0fcf65fd59ae5e1b48bf4acc734a283d083f0dbff7f9fec1d4"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/interacting.zip!/state_input.dat",
+              "sha256": "8b274e68981c1b26cd5242efea0b3128f148865a55f15efbae336fcff6e6365c"
+            }
+          ],
+          "network_version": "6325fa922394c6aa225e29105882c5be0be0853d12f5b7f75cb618b1ae79d302",
+          "output_sha256": "73e1524fa096e0ffc6cef24c3e2638bdc497a195975e2b8dff67453be1fe075b",
+          "parent_receipt": {
+            "path": "reports/multiphase/phase2_5_1/zacros_validation.json",
+            "sha256": "cd729ced9cdf93ed2a8bb0a92fab556aee8345cea520356dfe9d95e0cc778359"
+          },
+          "provenance": {
+            "dataset": {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/interacting.zip!/dataset.json",
+              "sha256": "0b81ab9f9def06344bed8319efa6e8fb0aa3b7488cb11b3edb95c4f7d98159d0"
+            },
+            "native_output": {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/interacting.zip",
+              "sha256": "c0b78aa900b9c907b13e0ba2fab018b77fa64b60e128606922821ebcaa6c6652"
+            },
+            "network": {
+              "path": "tests/fixtures/multiphase/kinetic_interface_network.json",
+              "sha256": "a31cbde920aa19f80a602da27becf21f3ee10fb6576295a6f39898021ea77929"
+            }
+          },
+          "qualification_sha256": "28e0f0e974f9a021afba915d956ab41817d81d12fbb40bd4eb358fd9820b3d5d",
+          "run_id": "interacting",
+          "schema": "2.1.0"
+        },
+        {
+          "basis": "simulation_cell",
+          "case": "attractive",
+          "dataset_id": "rates-1f487d498df738ec6546277f29db09ff10c8858b46a63ecea6912a0b2de32ee2",
+          "dataset_version": "046d249dcace2c9ef940439d3a6e1ba4ded96bf0acd65b2f76ba548f3ea0dfd7",
+          "inputs": [
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/attractive.zip!/energetics_input.dat",
+              "sha256": "4e08c9f8ef00c6e3699238c4597c3c4a74774c0c1fb88e29511599856a18b8d8"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/attractive.zip!/lattice_input.dat",
+              "sha256": "041747579adc213be762c4945862a71396c90465c4059660ac6d773c9d848362"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/attractive.zip!/mechanism_input.dat",
+              "sha256": "0ccefac6c9dd136dc5aa4d23588300858ed86081cc463a03788e8d66877be2b9"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/attractive.zip!/simulation_input.dat",
+              "sha256": "7dbe831c71480a0fcf65fd59ae5e1b48bf4acc734a283d083f0dbff7f9fec1d4"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/attractive.zip!/state_input.dat",
+              "sha256": "fdb690014f8719d4ced7bc8ac4df315e7ef378a19d63135a4dedc539ddf33795"
+            }
+          ],
+          "network_version": "0fe3389edefeee07cf9cb74c0dd408b2d6468ba95cdd322689345639e9de39d1",
+          "output_sha256": "5e3d6a6708edb73208fe59cc3797b1d4bfbae6a044bbc8b4ae3ba0b0a9d08d44",
+          "parent_receipt": {
+            "path": "reports/multiphase/phase2_5_1/zacros_validation.json",
+            "sha256": "cd729ced9cdf93ed2a8bb0a92fab556aee8345cea520356dfe9d95e0cc778359"
+          },
+          "provenance": {
+            "dataset": {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/attractive.zip!/dataset.json",
+              "sha256": "b8b31162906ab4a4a26a85fddbb3cac3b42c63019d713dc3c1175a08667267ff"
+            },
+            "native_output": {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/attractive.zip",
+              "sha256": "29028e0369f6b98f1214457d643a2bec38ac3a24df3bc2cf0af7a1b466975ad7"
+            },
+            "network": {
+              "path": "reports/multiphase/stage_b1_4/networks/attractive.json",
+              "sha256": "715426ef1414b049982373be94f6137660831b2aef5612defc1cb26decb8a1a2"
+            }
+          },
+          "qualification_sha256": "9649bf78708d8c01bec4bba1ebfdb1ecd0aa7b8c0fdf3ec9174fbd63bf12a243",
+          "run_id": "attractive",
+          "schema": "2.1.0"
+        },
+        {
+          "basis": "simulation_cell",
+          "case": "continuous",
+          "dataset_id": "rates-304f4fc87fb65234ca1e4f80c1f80cea2806f80ec423caba71425e5ba6e172b6",
+          "dataset_version": "f276dfd869676e2d21385a05a96b594babff17070a1fe4ba89ff209f6a4bb65a",
+          "inputs": [
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/continuous.zip!/energetics_input.dat",
+              "sha256": "a9034d0d147ea36298101727ef62ecede67ac7f15306e3eb58794b7e43c5f288"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/continuous.zip!/lattice_input.dat",
+              "sha256": "041747579adc213be762c4945862a71396c90465c4059660ac6d773c9d848362"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/continuous.zip!/mechanism_input.dat",
+              "sha256": "f542d07489e339964039d2012d3bbb4ee7831d5871124388a33c8440132f4ca0"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/continuous.zip!/simulation_input.dat",
+              "sha256": "44ac678d99635ca86f71d31a8701f96b7831aef7526a51487226b21315b18f85"
+            }
+          ],
+          "network_version": "6325fa922394c6aa225e29105882c5be0be0853d12f5b7f75cb618b1ae79d302",
+          "output_sha256": "f24c5f8b7def7aa89a95ccd0efd36f312084b1da09c5060d94e35df31aeaf330",
+          "parent_receipt": {
+            "path": "reports/multiphase/phase2_5_1/zacros_validation.json",
+            "sha256": "cd729ced9cdf93ed2a8bb0a92fab556aee8345cea520356dfe9d95e0cc778359"
+          },
+          "provenance": {
+            "dataset": {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/continuous.zip!/dataset.json",
+              "sha256": "fd0ac66dd8414c012e65fbd8069871e9abb3bc64fd774417547b5656a9ee8cd3"
+            },
+            "native_output": {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/continuous.zip",
+              "sha256": "6cb042ef80a8cf5c7ed32d1142581f99a9ed733c41f72887f94f759f4fc852c5"
+            },
+            "network": {
+              "path": "tests/fixtures/multiphase/kinetic_interface_network.json",
+              "sha256": "a31cbde920aa19f80a602da27becf21f3ee10fb6576295a6f39898021ea77929"
+            }
+          },
+          "qualification_sha256": "d380ede3db0c633df9ef4a3551ecfc6881950a90284c1a6527e8c93b81c6d8d0",
+          "run_id": "continuous",
+          "schema": "2.1.0"
+        },
+        {
+          "basis": "simulation_cell",
+          "case": "split",
+          "dataset_id": "rates-73d89c6866655ed9acde91ef035d5b0962a5f6fa5ec94843b083c85e79c7fc75",
+          "dataset_version": "f276dfd869676e2d21385a05a96b594babff17070a1fe4ba89ff209f6a4bb65a",
+          "inputs": [
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/split.zip!/energetics_input.dat",
+              "sha256": "a9034d0d147ea36298101727ef62ecede67ac7f15306e3eb58794b7e43c5f288"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/split.zip!/lattice_input.dat",
+              "sha256": "041747579adc213be762c4945862a71396c90465c4059660ac6d773c9d848362"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/split.zip!/mechanism_input.dat",
+              "sha256": "f542d07489e339964039d2012d3bbb4ee7831d5871124388a33c8440132f4ca0"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/split.zip!/simulation_input.dat",
+              "sha256": "44ac678d99635ca86f71d31a8701f96b7831aef7526a51487226b21315b18f85"
+            }
+          ],
+          "network_version": "6325fa922394c6aa225e29105882c5be0be0853d12f5b7f75cb618b1ae79d302",
+          "output_sha256": "f0c85072c95cc5c6a6de46fbe93411001fc271b30bd6c89b91193e7785e68f82",
+          "parent_receipt": {
+            "path": "reports/multiphase/phase2_5_1/zacros_validation.json",
+            "sha256": "cd729ced9cdf93ed2a8bb0a92fab556aee8345cea520356dfe9d95e0cc778359"
+          },
+          "provenance": {
+            "dataset": {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/split.zip!/dataset.json",
+              "sha256": "fd0ac66dd8414c012e65fbd8069871e9abb3bc64fd774417547b5656a9ee8cd3"
+            },
+            "native_output": {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/split.zip",
+              "sha256": "1cf32a9222b492fdc7f1b08123d88484d88c23906f727907d64e194952b8ac69"
+            },
+            "network": {
+              "path": "tests/fixtures/multiphase/kinetic_interface_network.json",
+              "sha256": "a31cbde920aa19f80a602da27becf21f3ee10fb6576295a6f39898021ea77929"
+            }
+          },
+          "qualification_sha256": "18a2480b17b205ec3c775facbece0b18860cff5b72c9f72b7b152048e4e0642d",
+          "run_id": "split",
+          "schema": "2.1.0"
+        },
+        {
+          "basis": "simulation_cell",
+          "case": "resume",
+          "dataset_id": "rates-ee5087470ca02ae6670e706ec678ad57051691f5eb5445d655e9be809c12777f",
+          "dataset_version": "f276dfd869676e2d21385a05a96b594babff17070a1fe4ba89ff209f6a4bb65a",
+          "inputs": [
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/resume.zip!/energetics_input.dat",
+              "sha256": "a9034d0d147ea36298101727ef62ecede67ac7f15306e3eb58794b7e43c5f288"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/resume.zip!/lattice_input.dat",
+              "sha256": "041747579adc213be762c4945862a71396c90465c4059660ac6d773c9d848362"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/resume.zip!/mechanism_input.dat",
+              "sha256": "f542d07489e339964039d2012d3bbb4ee7831d5871124388a33c8440132f4ca0"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/resume.zip!/input-checkpoint.inf",
+              "sha256": "859db961c4505422bc6f80e3acc0d003edea0adf7c35a92b75652b54c2859972"
+            },
+            {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/resume.zip!/simulation_input.dat",
+              "sha256": "44ac678d99635ca86f71d31a8701f96b7831aef7526a51487226b21315b18f85"
+            }
+          ],
+          "network_version": "6325fa922394c6aa225e29105882c5be0be0853d12f5b7f75cb618b1ae79d302",
+          "output_sha256": "c210a6448ae8fac95aa29d00717e2f40824e76daf539ed12f378fd4331cd6981",
+          "parent_receipt": {
+            "path": "reports/multiphase/phase2_5_1/zacros_validation.json",
+            "sha256": "cd729ced9cdf93ed2a8bb0a92fab556aee8345cea520356dfe9d95e0cc778359"
+          },
+          "provenance": {
+            "dataset": {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/resume.zip!/dataset.json",
+              "sha256": "fd0ac66dd8414c012e65fbd8069871e9abb3bc64fd774417547b5656a9ee8cd3"
+            },
+            "native_output": {
+              "path": "reports/multiphase/phase2_5_1/benchmarks/resume.zip",
+              "sha256": "6613c61f8aed7656d6b7295c01847c0c1c6e163c54ea2667240759e5fe9a46d7"
+            },
+            "network": {
+              "path": "tests/fixtures/multiphase/kinetic_interface_network.json",
+              "sha256": "a31cbde920aa19f80a602da27becf21f3ee10fb6576295a6f39898021ea77929"
+            }
+          },
+          "qualification_sha256": "1332079c1d0c27c515fd2e4cccff198779cea0a31f46b57bc06d5feeb797921e",
+          "run_id": "resume",
+          "schema": "2.1.0"
+        }
+      ]
+    }
+  },
+  "zacros": {
+    "attractive": {
+      "archive_sha256": "29028e0369f6b98f1214457d643a2bec38ac3a24df3bc2cf0af7a1b466975ad7",
+      "duration_s": "0.0061739824418999261",
+      "end_s": "0.0061739824418999261",
+      "first_event": 0,
+      "first_species_counts": {
+        "H2-bridge": 1,
+        "H2-g": 0,
+        "H2-top": 1
+      },
+      "forward_count": 8,
+      "initial_matches": 15,
+      "last_event": 8,
+      "last_species_counts": {
+        "H2-bridge": 9,
+        "H2-g": -8,
+        "H2-top": 9
+      },
+      "net_per_simulation_cell_s": 1295.7600827802405,
+      "potential_matches_per_direction": 18,
+      "reverse_count": null,
+      "start_s": "0E-16",
+      "statistical_uncertainty": null,
+      "steady_state": null
+    },
+    "continuous": {
+      "archive_sha256": "6cb042ef80a8cf5c7ed32d1142581f99a9ed733c41f72887f94f759f4fc852c5",
+      "duration_s": "0.033113314187256257",
+      "end_s": "0.033113314187256257",
+      "first_event": 0,
+      "first_species_counts": {
+        "H2-bridge": 0,
+        "H2-g": 0,
+        "H2-top": 0
+      },
+      "forward_count": 13,
+      "initial_matches": 18,
+      "last_event": 19,
+      "last_species_counts": {
+        "H2-bridge": 7,
+        "H2-g": -7,
+        "H2-top": 7
+      },
+      "net_per_simulation_cell_s": 211.39533060372338,
+      "potential_matches_per_direction": 18,
+      "reverse_count": 6,
+      "start_s": "0E-16",
+      "statistical_uncertainty": null,
+      "steady_state": null
+    },
+    "dent": {
+      "archive_sha256": "ec21a9ee721954d21a04956c6291833b571a888a76ee1fa4c783fbce8331b1a1",
+      "duration_s": "0.020951458831958522",
+      "end_s": "0.020951458831958522",
+      "first_event": 0,
+      "first_species_counts": {
+        "H2-bridge": 1,
+        "H2-g": 0,
+        "H2-top": 0
+      },
+      "forward_count": 13,
+      "initial_matches": 16,
+      "last_event": 19,
+      "last_species_counts": {
+        "H2-bridge": 8,
+        "H2-g": -7,
+        "H2-top": 0
+      },
+      "net_per_simulation_cell_s": 334.1056131768008,
+      "potential_matches_per_direction": 18,
+      "reverse_count": 6,
+      "start_s": "0E-16",
+      "statistical_uncertainty": null,
+      "steady_state": null
+    },
+    "full": {
+      "archive_sha256": "21b8444d6f8b92e013bed75c7f03d8b270066811ffbba6052d0389d890873649",
+      "duration_s": "0.023291050404795590",
+      "end_s": "0.023291050404795590",
+      "first_event": 0,
+      "first_species_counts": {
+        "H2-bridge": 9,
+        "H2-g": 0,
+        "H2-top": 9
+      },
+      "forward_count": 8,
+      "initial_matches": 18,
+      "last_event": 19,
+      "last_species_counts": {
+        "H2-bridge": 6,
+        "H2-g": 3,
+        "H2-top": 6
+      },
+      "net_per_simulation_cell_s": -128.8048391060244,
+      "potential_matches_per_direction": 18,
+      "reverse_count": 11,
+      "start_s": "0E-16",
+      "statistical_uncertainty": null,
+      "steady_state": null
+    },
+    "interacting": {
+      "archive_sha256": "c0b78aa900b9c907b13e0ba2fab018b77fa64b60e128606922821ebcaa6c6652",
+      "duration_s": "0.0078240633104309440",
+      "end_s": "0.0078240633104309440",
+      "first_event": 0,
+      "first_species_counts": {
+        "H2-bridge": 9,
+        "H2-g": 0,
+        "H2-top": 9
+      },
+      "forward_count": 8,
+      "initial_matches": 18,
+      "last_event": 19,
+      "last_species_counts": {
+        "H2-bridge": 6,
+        "H2-g": 3,
+        "H2-top": 6
+      },
+      "net_per_simulation_cell_s": -383.43248015394215,
+      "potential_matches_per_direction": 18,
+      "reverse_count": 11,
+      "start_s": "0E-16",
+      "statistical_uncertainty": null,
+      "steady_state": null
+    },
+    "mono": {
+      "archive_sha256": "a2593f79f35fb9158b29299078653b6c8c0ecc8c450b65be9d79a50c40f92776",
+      "duration_s": "0.013246533391464766",
+      "end_s": "0.013246533391464766",
+      "first_event": 0,
+      "first_species_counts": {
+        "H2-bridge": 0,
+        "H2-g": 0,
+        "H2-top": 1
+      },
+      "forward_count": 13,
+      "initial_matches": 16,
+      "last_event": 19,
+      "last_species_counts": {
+        "H2-bridge": 7,
+        "H2-g": -7,
+        "H2-top": 8
+      },
+      "net_per_simulation_cell_s": 528.4401430271832,
+      "potential_matches_per_direction": 18,
+      "reverse_count": 6,
+      "start_s": "0E-16",
+      "statistical_uncertainty": null,
+      "steady_state": null
+    },
+    "resume": {
+      "archive_sha256": "6613c61f8aed7656d6b7295c01847c0c1c6e163c54ea2667240759e5fe9a46d7",
+      "duration_s": "0.0309976085178786053",
+      "end_s": "0.033113314187256257",
+      "first_event": 8,
+      "first_species_counts": {
+        "H2-bridge": 6,
+        "H2-g": -6,
+        "H2-top": 6
+      },
+      "forward_count": 6,
+      "initial_matches": null,
+      "last_event": 19,
+      "last_species_counts": {
+        "H2-bridge": 7,
+        "H2-g": -7,
+        "H2-top": 7
+      },
+      "net_per_simulation_cell_s": 32.260553243106685,
+      "potential_matches_per_direction": 18,
+      "reverse_count": 5,
+      "start_s": "0.0021157056693776517",
+      "statistical_uncertainty": null,
+      "steady_state": null
+    },
+    "split": {
+      "archive_sha256": "1cf32a9222b492fdc7f1b08123d88484d88c23906f727907d64e194952b8ac69",
+      "duration_s": "0.0015084193005386380",
+      "end_s": "0.0015084193005386380",
+      "first_event": 0,
+      "first_species_counts": {
+        "H2-bridge": 0,
+        "H2-g": 0,
+        "H2-top": 0
+      },
+      "forward_count": 6,
+      "initial_matches": 18,
+      "last_event": 7,
+      "last_species_counts": {
+        "H2-bridge": 5,
+        "H2-g": -5,
+        "H2-top": 5
+      },
+      "net_per_simulation_cell_s": 3314.728204693855,
+      "potential_matches_per_direction": 18,
+      "reverse_count": 1,
+      "start_s": "0E-16",
+      "statistical_uncertainty": null,
+      "steady_state": null
+    }
+  }
+}

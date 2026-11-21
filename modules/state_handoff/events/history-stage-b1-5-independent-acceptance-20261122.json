@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "event_id": "history-stage-b1-5-independent-acceptance-20261122",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-stage-b1-5-independent-acceptance-20261122",
+    "module": "kinetic_data"
+  },
+  "occurred_at": "2026-11-21T16:11:45.595369+00:00",
+  "recorded_at": "2026-11-21T16:11:45.595369+00:00",
+  "summary": "Record independent offline validation of the Stage B.1 rate contract on two MAT files and eight finite KMC windows.",
+  "payload": {
+    "markdown": "- Stage B.1 independently reproduced the two synthetic CATKINAS turnovers and eight transient Zacros observations, with ten byte-identical archived V2 outputs. Each Windows checkout passed 596 focused tests. Stationarity and statistical uncertainty of the KMC observations remain unknown. See reports/multiphase/stage_b1_5/completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "reports/multiphase/stage_b1_5/completion.md",
+      "authority": "repository_document",
+      "sha256": "83b42808297405733a57b4e641ade9bad77d1241d85a7e60bdd47980ea2f85f5",
+      "observed_at": "2026-11-21T16:11:45.595369+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b1_5/independent_replay.json",
+      "authority": "repository_document",
+      "sha256": "5eeb6ddcdcfdc7c0f87ff22c66916728122ad4427b0774c04be640d04ca4d5bb",
+      "observed_at": "2026-11-21T16:11:45.595369+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b1_5/comparability.md",
+      "authority": "repository_document",
+      "sha256": "e6e8dc6e4ae65c9ea5ef2dfd27f14362b5ead95780c7d66892982c889ec8a107",
+      "observed_at": "2026-11-21T16:11:45.595369+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b1_5/regression.md",
+      "authority": "repository_document",
+      "sha256": "7e2591e6f1085953c2f2af82b5a5b7451205d3cf6d4252c436cad2efb451860b",
+      "observed_at": "2026-11-21T16:11:45.595369+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b1_5/stage_b2_plan.md",
+      "authority": "repository_document",
+      "sha256": "99ac577bf2168f39f8dfbc5b44964f7057825980fe7bd45379d1b8c7eab436ac",
+      "observed_at": "2026-11-21T16:11:45.595369+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}
