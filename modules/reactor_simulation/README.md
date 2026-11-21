@@ -15,11 +15,11 @@ governance: docs/DOCUMENT_GOVERNANCE.md
 
 ## Purpose
 
-Convert validated intrinsic MKM or KMC rates into conversion, yield, selectivity, and reactor profiles.
+For reactor-scale objectives, use validated macroscopic species source terms to predict conversion, yield, selectivity and profiles. The initial design targets are isothermal CSTR and PFR. Existing qualified source terms can supply the model independently of a new MKM or KMC run. [Reactor architecture decision](../../docs/decisions/adaptive_mkm_kmc_optional_reactor.md)
 
 ## Entry Gate
 
-- validated intrinsic kinetic source
+- validated macroscopic kinetic source terms with explicit units, normalization, operating conditions and applicability to the requested reactor conditions
 - reactor type, feed, flow, temperature, pressure, catalyst loading, and site density
 - transport and heat/mass-transfer assumptions
 

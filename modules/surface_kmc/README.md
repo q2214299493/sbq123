@@ -41,7 +41,7 @@ Model site heterogeneity, diffusion, lateral interactions, and spatial correlati
 ## Outputs
 
 - event statistics, coverage evolution, spatial distributions, TOF, and uncertainty
-- comparison with baseline MKM under matched conditions
+- optional comparison of comparable observables when matched MKM results are available
 - Zacros `general_output.txt`, `specnum_output.txt`, `procstat_output.txt`, `history_output.txt`, `lattice_output.txt`, and restart metadata when present
 
 Surface-reaction KMC is distinct from GCMC adsorption loading.
@@ -52,4 +52,4 @@ Phase 2.5 builds a periodic lattice and translates approved directed rates and m
 
 Phase 2.5.1 validated seeded mono- and bidentate lattices, pair interaction energies, and exact fixed-seed checkpoint continuation on the installed Zacros 4.0 build. Seed indices must follow a reviewed local-event leg order when the event model distinguishes site types. The repulsive rate-response test also exposed native activation-energy warning 804010. See the [per-feature matrix and benchmark outputs](../../reports/multiphase/phase2_5_1/capabilities.md).
 
-The lattice/event model is traceable, detailed balance is checked, outputs are reproducible, and matched-condition comparison with baseline MKM exists.
+The lattice/event model is traceable, detailed balance is checked, and the KMC outputs are reproducible. A KMC-only study can meet these criteria independently. When the objective includes comparison with MKM, establish comparability for each observable before interpreting differences. [Engine selection and cross-validation](../../docs/decisions/adaptive_mkm_kmc_optional_reactor.md)

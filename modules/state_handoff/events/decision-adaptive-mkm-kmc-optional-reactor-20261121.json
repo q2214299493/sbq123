@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "event_id": "decision-adaptive-mkm-kmc-optional-reactor-20261121",
+  "event_type": "decision_recorded",
+  "entity": {
+    "kind": "decision",
+    "id": "decision-adaptive-mkm-kmc-optional-reactor-20261121",
+    "module": "kinetic_data"
+  },
+  "occurred_at": "2026-11-21T12:49:35.387070+00:00",
+  "recorded_at": "2026-11-21T12:49:35.387070+00:00",
+  "summary": "Record the accepted design for independent MKM and KMC engines, conditional cross-validation and optional reactor modeling.",
+  "payload": {
+    "markdown": "- On 2026-11-21 the researcher accepted independent, separately approved CATKINAS MKM and Zacros KMC routes selected by SPC. Cross-validation is conditional on observable comparability. Reactor modeling is optional and requires validated macroscopic species sources. B.1 native normalization, stoichiometric sources and strict version isolation apply. [Architecture decision](decisions/adaptive_mkm_kmc_optional_reactor.md)"
+  },
+  "evidence": [
+    {
+      "locator": "docs/decisions/adaptive_mkm_kmc_optional_reactor.md",
+      "authority": "repository_document",
+      "sha256": "3705a138e7b4a5e4d6f6a2fb2b69f46fcbd58ecff65d460d0d191998693f0bb5",
+      "observed_at": "2026-11-21T12:49:35.387070+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "durable_decision_handoff"
+    ]
+  }
+}

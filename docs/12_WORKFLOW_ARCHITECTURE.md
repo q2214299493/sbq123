@@ -36,11 +36,18 @@ Whitelist BM25+semantic retrieval (Top 5)
   -> source-method frequency, imaginary-mode and connectivity validation
   -> thermal and free-energy corrections
   -> balanced reaction network
-  -> baseline MKM with CATKINAS
-  -> coverage-dependent MKM with CATKINAS, or surface KMC with Zacros 4.0 when justified
-  -> reactor simulation
-  -> sensitivity and uncertainty analysis
+  -> validated kinetic data and operating conditions
+     -> CATKINAS MKM (baseline or justified coverage-dependent model)
+     -> Zacros surface KMC (qualified lattice and event model)
+
+Validated kinetic results -> sensitivity and uncertainty analysis when requested
+Validated macroscopic species source terms -> optional reactor-scale prediction
 ```
+
+SPC plans MKM only, KMC only, both in parallel, or a scientifically justified sequence.
+Each engine has a separate execution approval. Cross-validation is conditional on
+comparability, and reactor modeling is selected for reactor-scale objectives.
+[Accepted architecture decision](decisions/adaptive_mkm_kmc_optional_reactor.md)
 
 The calculation registry spans every stage and records jobs, files, results, provenance, and review decisions. It never replaces scientific judgment.
 
