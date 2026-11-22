@@ -13,3 +13,10 @@ for path in (
     ROOT / "skills" / "catalysis-data-retrieval" / "scripts",
 ):
     sys.path.insert(0, str(path))
+
+
+def pytest_addoption(parser):
+    parser.addoption(
+        "--catkinas-reviewed-run", nargs=2, metavar=("RUN", "DECISION"),
+        help="Run the native closed-cycle test on this prepared RUN using its external reviewed DECISION.",
+    )

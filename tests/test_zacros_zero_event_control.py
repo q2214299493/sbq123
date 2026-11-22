@@ -4,17 +4,20 @@ from decimal import Decimal
 import json
 import math
 from pathlib import Path
+import re
 import shutil
+import sys
 
 import pytest
 
 from scripts.artifact_io import sha256_file
-from scripts.surface_kmc.oxide_control import render
+from scripts.surface_kmc.oxide_control import main as render_cli, render
 from scripts.surface_kmc import zero_event_review as gate
 
 ROOT = Path(__file__).resolve().parents[1]
 STAGE = ROOT / "reports/multiphase/stage_b2_3_2_4"
 NATIVE = STAGE / "native"
+CORRECTED = ROOT / "reports/architecture_repair/stage_r2_3/native"
 PRIOR = ROOT / "reports/multiphase/stage_b2_3_2_3/native"
 PARAMS = STAGE / "control.json"
 REF = json.loads((STAGE / "numerical_reference.json").read_bytes())
@@ -31,14 +34,18 @@ def blocks(name, keyword):
 
 def test_rebuild_and_preserve_immutable_sources():
     files, manifest = render(PARAMS, ROOT)
-    assert manifest == json.loads((NATIVE / "input_manifest.json").read_bytes())
+    assert manifest == json.loads((CORRECTED / "input_manifest.json").read_bytes())
     assert set(files) == {base + "_input.dat" for base in ("simulation", "lattice", "energetics", "mechanism", "state")}
-    assert all((NATIVE / k).read_bytes() == v and b"@" not in v for k, v in files.items())
+    assert all((CORRECTED / k).read_bytes() == v and b"@" not in v for k, v in files.items())
     assert manifest["structural_manifest_sha256"] == sha256_file(PRIOR / "input_manifest.json")
     for name in ("lattice_input.dat", "state_input.dat"):
         assert files[name] == (PRIOR / name).read_bytes()
     plan = json.loads((STAGE / "execution_plan.json").read_bytes())
-    assert plan["input_files_sha256"] == manifest["files_sha256"]
+    assert plan["input_files_sha256"] == {name: sha256_file(NATIVE / name) for name in files}
+    assert manifest["files_sha256"] == {name: sha256_file(CORRECTED / name) for name in files}
+    assert {name for name in files if files[name] != (NATIVE / name).read_bytes()} == {
+        "simulation_input.dat", "mechanism_input.dat", "energetics_input.dat",
+    }
     assert plan["bound_artifacts_sha256"]["control.json"] == sha256_file(PARAMS)
     assert plan["bound_artifacts_sha256"]["numerical_reference.json"] == sha256_file(STAGE / "numerical_reference.json")
     assert plan["dynamic_execution"] is plan["production_eligible"] is False
@@ -121,7 +128,7 @@ def test_native_arrhenius_values_and_pressure_order(tmp_path):
     alternate.write_text(json.dumps(data))
     new, _ = render(alternate, ROOT)
     assert b"gas_molar_fracs 0.5\n" in new["simulation_input.dat"]
-    assert new["mechanism_input.dat"] == (NATIVE / "mechanism_input.dat").read_bytes()
+    assert new["mechanism_input.dat"] == (CORRECTED / "mechanism_input.dat").read_bytes()
 
 
 @pytest.mark.parametrize("field", ["unit", "pressure", "steps", "source", "mass", "energy", "fraction"])
@@ -151,9 +158,16 @@ def test_incompatible_control_does_not_render(tmp_path, field):
 def review(tmp_path, monkeypatch):
     stage = tmp_path / "stage"
     stage.mkdir()
-    shutil.copytree(NATIVE, stage / "native")
+    shutil.copytree(CORRECTED, stage / "native")
     for name in ("execution_plan.json", "numerical_reference.json", "control.json"):
         shutil.copyfile(STAGE / name, stage / name)
+    # Bind this temporary test plan to the revised input. Never reuse the consumed approval.
+    plan_file = stage / "execution_plan.json"
+    plan = json.loads(plan_file.read_bytes())
+    manifest = stage / "native/input_manifest.json"
+    plan["bound_artifacts_sha256"]["native/input_manifest.json"] = sha256_file(manifest)
+    plan["input_files_sha256"] = json.loads(manifest.read_bytes())["files_sha256"]
+    plan_file.write_text(json.dumps(plan), encoding="utf-8")
     # No distributed binary is required in CI. Only the executable hash probe is stubbed.
     exe = tmp_path / "offline-test-binary"
     expected = json.loads((stage / "execution_plan.json").read_bytes())["engine"]["sha256"]
@@ -164,7 +178,13 @@ def review(tmp_path, monkeypatch):
 def test_request_is_pending_and_state_handoff_cannot_authorize(review, tmp_path):
     stage, exe = review
     request = gate.prepare_request(stage, ROOT, exe)
-    assert request == json.loads((STAGE / "approval_request.json").read_bytes())
+    historical = json.loads((STAGE / "approval_request.json").read_bytes())
+    assert request["state_sha256"] != historical["state_sha256"]
+    assert request["input_files_sha256"] != historical["input_files_sha256"]
+    consumed = STAGE / "native_acceptance"
+    approval = json.loads((consumed / "execution_approval.json").read_bytes())
+    with pytest.raises(ValueError, match="stale"):
+        gate.check_reviewed_action(stage, ROOT, exe, approval, consumed / approval["source_file"])
     assert request["state_sha256"] == sha256_file(stage / "execution_plan.json")
     assert request["ALLOWED_ACTIONS"] == [] and request["DECISION"] == "pending"
     source = tmp_path / "mock-review.txt"
@@ -198,3 +218,74 @@ def test_changed_input_or_budget_prevents_request(review, changed, tmp_path):
             f.write(b" ")
     with pytest.raises(ValueError):
         gate.prepare_request(stage, ROOT, exe)
+
+
+# Emitted subset of Zacros 4.0 str_is_real: a decimal point or an exponent is required.
+REAL = re.compile(rb"[+-]?(?:[0-9]+\.[0-9]+(?:[eE][+-]?[0-9]+)?|[0-9]+[eE][+-]?[0-9]+)")
+REAL_FIELDS = {b"temperature", b"pressure", b"gas_energies", b"gas_molar_fracs", b"gas_molec_weights",
+               b"pre_expon", b"activ_eng", b"prox_factor", b"cluster_eng"}
+
+
+def test_only_eight_invalid_real_tokens_changed():
+    changed = Counter()
+    for path in CORRECTED.glob("*.dat"):
+        old = (NATIVE / path.name).read_bytes().splitlines()
+        for before, after in zip(old, path.read_bytes().splitlines(), strict=True):
+            key, *tokens = before.split()
+            if key not in REAL_FIELDS:
+                assert before == after
+                continue
+            field, *new = after.split()
+            assert field == key
+            for left, right in zip(tokens, new, strict=True):
+                assert REAL.fullmatch(right)
+                assert Decimal(left.decode()) == Decimal(right.decode())
+                if not REAL.fullmatch(left):
+                    changed[field] += 1
+                else:
+                    assert left == right
+    assert changed == {b"temperature": 1, b"pressure": 1, b"gas_energies": 1, b"gas_molar_fracs": 1,
+                       b"pre_expon": 2, b"cluster_eng": 2}
+
+
+@pytest.mark.parametrize("literal", ["400", "400.0", "400.000", "1e-5", "1e13", "2.5e22"])
+def test_real_token_round_trip(tmp_path, literal):
+    data = PARAMS.read_text().replace('"temperature_K": 400,', '"temperature_K": ' + literal + ',')
+    path = tmp_path / "control.json"
+    path.write_text(data, encoding="utf-8")
+    files, _ = render(path, ROOT)
+    token = fields(files["simulation_input.dat"].decode().splitlines())["temperature"][0]
+    assert REAL.fullmatch(token.encode()) and Decimal(token) == Decimal(literal)
+
+
+@pytest.mark.parametrize("value", ["400", "bad", True, None, [], float("nan"), float("inf"), -float("inf"), 2**53+1])
+def test_invalid_real_rejected(tmp_path, value):
+    data = json.loads(PARAMS.read_bytes())
+    data["conditions"]["temperature_K"] = value
+    path = tmp_path / "control.json"
+    path.write_text(json.dumps(data))
+    with pytest.raises(ValueError, match="temperature_K"):
+        render(path, ROOT)
+
+
+@pytest.mark.parametrize("section,key", [("execution", "max_steps"), ("execution", "random_seed"),
+                                         ("energetics", "graph_multiplicity"), ("adsorption", "CO2_gas_stoichiometry")])
+def test_integer_field_rejects_equal_float(tmp_path, section, key):
+    data = json.loads(PARAMS.read_bytes())
+    parent = data["events"][section] if section == "adsorption" else data[section]
+    parent[key] = float(parent[key])
+    path = tmp_path / "control.json"
+    path.write_text(json.dumps(data))
+    with pytest.raises(ValueError):
+        render(path, ROOT)
+
+
+def test_cli_cannot_replace_a_previous_bundle(tmp_path, monkeypatch):
+    destination = tmp_path / "new-inputs"
+    monkeypatch.setattr(sys, "argv", ["oxide_control", str(PARAMS), str(destination), "--root", str(ROOT)])
+    render_cli()
+    before = {p.name: sha256_file(p) for p in destination.iterdir()}
+    assert before == {p.name: sha256_file(p) for p in CORRECTED.iterdir()}
+    with pytest.raises(FileExistsError):
+        render_cli()
+    assert before == {p.name: sha256_file(p) for p in destination.iterdir()}

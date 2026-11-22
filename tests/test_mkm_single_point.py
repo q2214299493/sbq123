@@ -1,10 +1,10 @@
 """Routine tests replay a MAT fixture. Native execution is a separate explicit opt-in."""
 
-import os
 from pathlib import Path
 import shutil
 import sqlite3
 import subprocess
+import sys
 
 import pytest
 from scipy.io import loadmat, savemat
@@ -204,7 +204,7 @@ def test_rejected_run_retains_evidence(tmp_path, runtime, monkeypatch, defect, s
 
 
 @pytest.mark.parametrize(
-    "defect", ["denied", "state", "source", "question", "configuration", "directory", "ticket"]
+    "defect", ["denied", "state", "source", "question", "configuration", "directory", "ticket", "executable"]
 )
 def test_gate_does_not_dispatch(tmp_path, runtime, monkeypatch, defect):
     start(tmp_path, runtime)
@@ -220,6 +220,8 @@ def test_gate_does_not_dispatch(tmp_path, runtime, monkeypatch, defect):
         decision["question_id"] = "0" * 64
     elif defect == "configuration":
         (run / "configuration.json").write_bytes(b"{}")
+    elif defect == "executable":
+        (tmp_path / "fixture.p").write_bytes(b"changed identity")
     elif defect == "ticket":
         with sqlite3.connect(runtime[0]) as db:
             db.execute("update tickets set status='PAUSED'")
@@ -258,18 +260,12 @@ def test_inconsistent_rehashed_dataset(tmp_path, runtime):
     assert v["stage"] == "REJECTED" and "reviewed rates" in v["missing_data"]
 
 
-@pytest.mark.skipif(
-    not os.environ.get("SBQ_MKM_NATIVE_APPROVAL_SOURCE"),
-    reason="explicit native exact-benchmark approval required",
-)
-def test_live_closed_cycle(tmp_path):
-    root = Path(os.environ.get("SBQ_MKM_NATIVE_RUN_ROOT", tmp_path))
-    root.mkdir(parents=True, exist_ok=True)
-    source = Path(os.environ["SBQ_MKM_NATIVE_APPROVAL_SOURCE"])
-    ticket = fixture_ticket(root)
-    v = start(root, ticket)
-    assert v["stage"] == "AWAITING_APPROVAL", v
-    run = root / "run"
+@pytest.mark.native_execution
+def test_live_closed_cycle(pytestconfig):
+    # Environment and pytest addopts may be inherited by CI or a developer shell.
+    if "--catkinas-reviewed-run" not in pytestconfig.invocation_params.args:
+        pytest.skip("requires --catkinas-reviewed-run RUN DECISION on the command line")
+    run, decision = map(Path, pytestconfig.getoption("--catkinas-reviewed-run"))
     archived = flow.read(OUT / "catkinas_closed_cycle_validation.json")["closed_cycle"]
     assert (
         sha256_file(run / "input" / flow.INPUT)
@@ -277,10 +273,32 @@ def test_live_closed_cycle(tmp_path):
         == archived["source_sha256"]
     )
     assert sha256_file(OUT / "data1.mat") == archived["result_sha256"]["result_closed_cycle/data1.mat"]
-    v = flow.execute(run, save(root / "benchmark_decision.json", make_decision(run, source)))
+    v = flow.execute(run, decision)
     assert v["stage"] == "ACCEPTED", v.get("reason")
     assert v["tof_s_inverse"] == pytest.approx(81.51277016, rel=1e-4)
     assert v["validation"]["max_relative_coefficient_error"] < 1e-4
+
+
+def test_explicit_native_selection_requires_an_external_bound_decision(tmp_path, runtime):
+    run = tmp_path / "run"
+    view = flow.prepare(
+        run, PHASE / "closed_cycle_network.json", OUT / "cycle_dataset.json",
+        PHASE / "workflow_configuration.json", *runtime, tmp_path / "inert-matlab",
+    )
+    assert view["stage"] == "AWAITING_APPROVAL"
+    decision = make_decision(run, PHASE / "benchmark_ticket_fixture.json")
+    valid = save(tmp_path / "fixture-decision.json", decision)
+    # Exercise the owner's positive preflight with fixture identities, stopping before READY.
+    assert flow.preflight(run, valid)[1] == decision
+    denied = save(tmp_path / "denied.json", dict(decision, DECISION="reject", ALLOWED_ACTIONS=[]))
+    result = subprocess.run(
+        [sys.executable, "-m", "pytest", "-o", "addopts=", "-q", "--tb=short",
+         "--catkinas-reviewed-run", str(run), str(denied),
+         "tests/test_mkm_single_point.py::test_live_closed_cycle"],
+        cwd=Path(__file__).resolve().parents[1], capture_output=True, text=True, timeout=60,
+    )
+    assert result.returncode == 1 and "Explicit single-point approval required" in result.stdout
+    assert not (run / "READY.json").exists() and not (run / "runtime").exists()
 
 
 @pytest.mark.parametrize("key,value", [("temperature_K", 500), ("total_pressure_bar", 2)])

@@ -1,0 +1,32 @@
+mechanism
+step adsorption
+sites 2
+site_types acidA oxygenB
+neighboring 1-2
+gas_reacs_prods CO2 -1
+initial
+1 * 1
+2 * 1
+final
+1 CO2bridge* 1
+1 CO2bridge* 2
+pre_expon 100000.0
+activ_eng 0.1
+prox_factor 0.5
+end_step
+step desorption
+sites 2
+site_types acidA oxygenB
+neighboring 1-2
+gas_reacs_prods CO2 1
+initial
+1 CO2bridge* 1
+1 CO2bridge* 2
+final
+1 * 1
+2 * 1
+pre_expon 10000000000000.0
+activ_eng 0.5
+prox_factor 0.5
+end_step
+end_mechanism

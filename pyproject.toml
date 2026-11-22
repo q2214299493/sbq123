@@ -64,6 +64,7 @@ include = ["scripts", "scripts.*"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
+markers = ["native_execution: requires an explicit invocation and engine-owned approval"]
 
 [tool.ruff]
 target-version = "py311"

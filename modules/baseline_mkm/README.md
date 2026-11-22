@@ -68,6 +68,10 @@ python -m scripts.baseline_mkm.registration RUN REVIEWER BATCH.json
 python -m scripts.registry_write plan --db ISOLATED.sqlite --manifest BATCH.json --output REGISTRY_PLAN.json
 ```
 
+The optional closed-cycle pytest benchmark accepts `--catkinas-reviewed-run RUN DECISION`
+on the command line for a prepared run and an external reviewed decision. It calls
+the same single-point executor. Ordinary pytest runs use archived or mocked evidence.
+
 Use a fresh RUN path. The ticket reader opens the existing H7 database read-only and requires a bound question. The development benchmark uses a labelled synthetic H7 fixture. The status projection exposes the scientific quantities, stages, missing evidence and artifact paths. Its `ticket_handoff` body fits the Supervisor's manual `/api/tickets/handoff` interface. The authenticated viewer owns publication of the note. A qualified run waits for a separately supplied explicit decision. The reviewer checks `plan.json` and the generated model, and supplies the following fields.
 
 ```json

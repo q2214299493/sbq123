@@ -11,7 +11,7 @@ from zipfile import ZipFile
 import pytest
 
 from scripts.artifact_io import sha256_bytes, sha256_file, sha256_json
-from scripts.native_model import assemble, publish, with_checkpoint
+from scripts.native_model import assemble, with_checkpoint
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "reports/multiphase/phase2_5_1"
@@ -160,17 +160,26 @@ def test_restart_cli_preserves_checkpoint_and_rejects_wrong_receipt(tmp_path):
 
 
 @pytest.mark.parametrize("case", CASES)
-@pytest.mark.skipif(not os.environ.get("SBQ_ZACROS_BENCHMARK_EXE"), reason="native benchmark requires the authorized Zacros build")
-def test_native_zacros_replay(case, tmp_path):
-    executable = Path(os.environ["SBQ_ZACROS_BENCHMARK_EXE"]).resolve(strict=True)
-    assert sha256_file(executable) == MATRIX["executable_sha256"]
+def test_archived_zacros_event_count(case):
+    # These Ni/Cu dynamic runs have archived evidence, but no current execution plan.
     with archive(case) as src:
-        f, m = inputs(src)
-        if case == "resume":
-            f, m = restored(src, f, m)
-        directory = tmp_path / case
-        publish(directory, f, m)
-        subprocess.run([executable, *CASES[case]["native_args"]], cwd=directory, capture_output=True, timeout=30, check=True)
-        assert "> Normal termination <" in (directory/"general_output.txt").read_text()
-        for name in ("procstat_output.txt", "specnum_output.txt"):
-            assert (directory/name).read_bytes() == src.read(name)
+        general = src.read("general_output.txt")
+    count = int(re.search(rb"Events occurred:\s+(\d+)", general)[1])
+    assert count == CASES[case]["native_events_reported"]
+    assert CASES[case]["exit_code"] == 0 and b"> Normal termination <" in general
+
+
+def test_inherited_native_settings_cannot_dispatch(tmp_path):
+    # Use inert, non-executable sentinel paths, including flags injected from the environment.
+    sentinel = tmp_path / "unapproved"
+    env = dict(os.environ, SBQ_ZACROS_BENCHMARK_EXE=str(sentinel), SBQ_MKM_NATIVE_APPROVAL_SOURCE=str(sentinel),
+               SBQ_MKM_NATIVE_RUN_ROOT=str(sentinel), PYTEST_ADDOPTS="--catkinas-reviewed-run absent-run absent-decision")
+    result = subprocess.run(
+        [sys.executable, "-m", "pytest", "-o", "addopts=", "-q", "-rs",
+         "tests/test_mkm_single_point.py::test_live_closed_cycle",
+         "tests/test_native_advanced.py::test_archived_zacros_event_count"],
+        cwd=ROOT, env=env, capture_output=True, text=True, timeout=60,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert "8 passed, 1 skipped" in result.stdout and "on the command line" in result.stdout
+    assert not sentinel.exists()

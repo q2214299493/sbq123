@@ -13,8 +13,11 @@ def checked_number(values, key, **bounds):
     value = values[key]
     if type(value) not in (int, float):
         raise ValueError(f"{key} requires a JSON number")
-    finite_number(value, key, **bounds)
-    return value
+    # A Zacros R8 token needs a decimal point or an exponent; str(int) has neither.
+    number = finite_number(value, key, **bounds)
+    if number != value:
+        raise ValueError(f"{key} cannot be represented exactly as a native real")
+    return number
 
 
 def cluster_lines(graph, energies):
@@ -62,9 +65,10 @@ def render(control_path, root):
     if (c["dataset_id"] != "synthetic_oxide_zacros_control_v1" or c["eligible_for_production"] is not False
             or c["scope"] != "synthetic_software_control_only"):
         raise ValueError("Expected isolated synthetic oxide control v1")
-    if c["execution"] != {"random_seed": 23123, "max_steps": 0, "native_wall_seconds": 15,
-                          "external_timeout_seconds": 30, "maximum_processes": 1,
-                          "maximum_threads": 1, "retries": 0}:
+    execution = c["execution"]
+    expected = {"random_seed": 23123, "max_steps": 0, "native_wall_seconds": 15,
+                "external_timeout_seconds": 30, "maximum_processes": 1, "maximum_threads": 1, "retries": 0}
+    if execution != expected or any(type(value) is not int for value in execution.values()):
         raise ValueError("Runtime controls differ from the zero-event benchmark")
     prior = c["archived_structure"]
     graph, manifest, files = structural_members(prior, root)
@@ -87,7 +91,8 @@ def render(control_path, root):
     }
     for name, unit, coefficient in [("adsorption", "bar^-1 s^-1", -1), ("desorption", "s^-1", 1)]:
         event = c["events"][name]
-        if event["unit"] != unit or event["CO2_gas_stoichiometry"] != coefficient:
+        stoichiometry = event["CO2_gas_stoichiometry"]
+        if event["unit"] != unit or type(stoichiometry) is not int or stoichiometry != coefficient:
             raise ValueError(f"Invalid native gas order or prefactor unit for {name}")
         replacements[f"{name.upper()}_PRE_EXPON"] = checked_number(event, "pre_expon", positive=True)
         replacements[f"{name.upper()}_EA_EV"] = checked_number(event, "activation_energy_eV", nonnegative=True)

@@ -61,3 +61,8 @@ The [seven-node oxide example](../../reports/multiphase/stage_b2_3_2_2/completio
 The [Zacros 4.0 oxide preflight](../../reports/multiphase/stage_b2_3_2_3/completion.md) binds the native lattice and ordered seeds to their source bytes. Its simulation, energetics and two directed pattern templates await numerical inputs. The serial executable reads these inputs before its zero-event limit takes effect.
 
 The [synthetic oxide control](../../reports/multiphase/stage_b2_3_2_4/completion.md) binds the five inputs to a separate zero-event initialization request. Its analytical reference, directed catalogue and state ledger are software-test expectations. An actual native acceptance requires output from a separately approved execution.
+
+The [R.2.3 offline control bundle](../../reports/architecture_repair/stage_r2_3/native/input_manifest.json)
+corrects the real-number spelling on the archived control. Its new hashes require
+a separate plan and review before execution. Pytest replays the Ni/Cu archives
+offline. The oxide zero-event gate applies only to its bound initialization plan.
