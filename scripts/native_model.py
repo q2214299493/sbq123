@@ -11,6 +11,7 @@ from scripts.native_inputs import conditions as conditions, integer as integer, 
 
 
 def assemble(engine, dataset, config, table=None):
+    from scripts.baseline_mkm.mapping_scope import check_table_scope
     from scripts.baseline_mkm.native import render as render_cat
     from scripts.surface_kmc.native import render as render_zac
     from scripts.native_validation import cat_readback, zac_readback
@@ -18,8 +19,13 @@ def assemble(engine, dataset, config, table=None):
     expected = exporter(dataset)
     if table is not None and sha256_json(table) != sha256_json(expected):
         raise ValueError("Supplied table differs from approved Phase 2.4 export")
+    if engine == "catkinas":
+        check_table_scope(dataset, expected)
     files, details = render(expected, config, dataset)
-    details["native_text_readback"] = {"catkinas": cat_readback, "zacros": zac_readback}[engine](files, expected, details)
+    if engine == "catkinas":
+        details["native_text_readback"] = cat_readback(files, expected, details, initial_coverages=config["catkinas"]["initial_coverages"])
+    else:
+        details["native_text_readback"] = zac_readback(files, expected, details)
     manifest = {"engine": engine, "dataset_version": dataset["dataset_version"], "table_sha256": sha256_json(expected),
                 "configuration_sha256": sha256_json(config), "files": {k: sha256_bytes(v.encode()) for k, v in files.items()},
                 "validation": details, "execution_authorized": False}

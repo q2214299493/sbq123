@@ -17,6 +17,7 @@ from scripts.artifact_io import load_json_object as read, sha256_file, sha256_js
 from scripts.baseline_mkm.results import read_single_point
 from scripts.baseline_mkm.single_point_result import validate_result
 from scripts.execution_permission import require_bound_action
+from scripts.baseline_mkm.mapping_scope import MappingBlocked, check_configuration, topology
 from scripts.baseline_mkm.sensitivity_inputs import baseline_config, configuration as sensitivity_configuration, reproduce
 from scripts.kinetic_parameters.engine import check_version
 from scripts.native_model import assemble, publish
@@ -80,6 +81,13 @@ def qualify(network, dataset, config):
     missing = {r["reaction_id"]: r["missing"] for r in dataset["reactions"] if not r["export_eligible"]}
     if missing:
         raise IncompleteKinetics(missing)
+    if len(network["catalog"]["sites"]) > 1 or any(
+        len(r["definition"].get("phase_ids") or []) > 1 for r in network["reactions"]
+    ):
+        issues, _ = topology(network)
+        if issues:
+            raise MappingBlocked(issues)
+        check_configuration(config)
     files, adapter = assemble("catkinas", dataset, config)
     parameter = dataset["reactions"][0]["parameter_set"]
     for key, value in (

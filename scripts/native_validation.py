@@ -16,7 +16,21 @@ def cat_side(text):
     return terms
 
 
-def cat_readback(files, table, details):
+def check_initial_coverages(settings, details, coverages):
+    vacancies = {str(i) if len(details["site_indices"]) > 1 else "": 1.0 for i in details["site_indices"].values()}
+    expected = {}
+    for sid, value in coverages.items():
+        alias, site = details["species_tokens"][sid].rsplit("#", 1)
+        expected[f"Q{site}_{alias}_INIT"] = value
+        vacancies[site] -= value
+    expected.update({f"Q{site}_v_INIT": value for site, value in vacancies.items()})
+    parsed = {key: v for key, v in settings.items() if key.startswith("Q") and key.endswith("_INIT")}
+    if parsed.keys() != expected.keys() or any(not math.isclose(parsed[k], v, abs_tol=1e-15, rel_tol=0)
+                                               for k, v in expected.items()):
+        raise ValueError("Native initial coverage or independent vacancy fraction differs")
+
+
+def cat_readback(files, table, details, *, initial_coverages=None):
     rx, settings = [], {}
     for line in files["INPUT_phase25.m"].splitlines():
         if line.startswith("("):
@@ -31,6 +45,8 @@ def cat_readback(files, table, details):
             settings[m[1]] = float(m[2])
     if [settings[k] for k in ("ThermoMode", "BarrierMode", "ConsMode")] != [0, -2, 0]:
         raise ValueError("Native correction switches would alter point coefficients")
+    if initial_coverages is not None:
+        check_initial_coverages(settings, details, initial_coverages)
     idx = details["site_indices"]
     if any(settings.get(f"P_{details['species_tokens'][s]}_FROZ") != v for s, v in details["partial_pressure_bar"].items()):
         raise ValueError("Parsed frozen partial pressure differs")

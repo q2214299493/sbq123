@@ -339,3 +339,9 @@ Calculate the derivative of log net turnover at the baseline using a quadratic t
 actual log-pressure coordinates. Report both one-sided slopes and the endpoint secant alongside
 the quadratic slope. The fixed-total result applies along the specified feed path.
 [Native validation and limits](../../reports/multiphase/phase3_2_2_1/completion.md)
+
+## Map a multiphase network to CATKINAS offline
+
+`python -m scripts.baseline_mkm.network_mapping NETWORK --dataset DATASET --configuration POINT --normalization PROFILE --output-dir NEW_DIR` validates the versioned network and returns a native input and identity crosswalk. For a structural audit, omit the unavailable inputs and use `--report NEW.json`. A blocked mapping returns exit code 2 with the affected species, reaction or inventories and their evidence gaps. Passing this entry point grants no run approval.
+
+The verified multiphase boundary is a reversible, closed turnover with the molecular and vacancy roles observed in the archived two-inventory benchmark. Each reference pair has one member of each inventory. Separate molecules occupying separate sites and a single molecule occupying two sites have different native representability. The project, phase, surface and interface IDs travel with the native indices in the manifest. Consult the [mapping specification and CLI example](../../reports/multiphase/stage_b2_3_1/mapping.md) and [native capability matrix](../../reports/multiphase/stage_b2_3_1/capabilities.md).

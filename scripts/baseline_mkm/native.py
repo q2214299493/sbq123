@@ -25,7 +25,8 @@ def native_names(species, aliases, indices):
             name += site_token(next(iter(footprint)), indices)
         names[s["species_id"]] = name
     if len(set(names.values())) != len(names):
-        raise ValueError("Ambiguous CATKINAS alias within a site")
+        duplicates = {s: n for s, n in names.items() if list(names.values()).count(n) > 1}
+        raise ValueError(f"Ambiguous CATKINAS alias within a site or gas phase: {duplicates}")
     return names
 
 

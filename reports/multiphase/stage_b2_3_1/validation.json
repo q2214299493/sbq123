@@ -1,0 +1,1123 @@
+{
+  "archive_replay": {
+    "phase2_5_2": {
+      "convergence": "converged",
+      "distribution": "20261106",
+      "gas_HNO_per_reference_pair_s": 163.0255403232954,
+      "mat_sha256": "20ebda963c5d5b57e9a47144831a3fd3d416f864d0211db1a4e03020938ff655",
+      "receipt": "reports/multiphase/phase2_5_2/catkinas_closed_cycle_validation.json",
+      "receipt_sha256": "bb7b6d5c9c1b921d8bd1ba5c498a3eb8dbf1fb056ce2b13de7354e027755910b",
+      "runtime": {
+        "name": "CATKINAS",
+        "version": "20230524"
+      },
+      "turnover_events_per_reference_pair_s": 81.5127701616477,
+      "v2_payload_sha256": "e1a71272fc19b0f8756e4fcb64ad7ef2e3b83eac9572290b27cef1005bc17e77"
+    },
+    "phase3_0": {
+      "convergence": "converged",
+      "distribution": "20261106",
+      "gas_HNO_per_reference_pair_s": 163.0255403232954,
+      "mat_sha256": "a010f66603a85035cdcbbc2e81e5ea712c4833a979b7d595df4dcdb386db308d",
+      "receipt": "reports/multiphase/phase3_0/benchmark_manifest.json",
+      "receipt_sha256": "0773bdbbf0d3a2f7b8907ed271fdc1f0f725150c5e8c16ae77d10c37d389822d",
+      "runtime": {
+        "name": "CATKINAS",
+        "version": "20230524"
+      },
+      "turnover_events_per_reference_pair_s": 81.5127701616477,
+      "v2_payload_sha256": "eb73c3b756ad88316b792df4919c0e08cbe9e0967bcd4d6e2277a5eefcac2ec6"
+    }
+  },
+  "baseline": "910dcd2639c7b4974975b0d4b3a324ec7e473122",
+  "blocked_cases": {
+    "cross_phase_interface_product": {
+      "equation_forms": {
+        "combine": []
+      },
+      "issues": [
+        {
+          "entity": "species",
+          "id": "contact-product",
+          "reason": "No verified multidentate or empty native site token for footprint {'A-pool': 1, 'B-pool': 2}",
+          "status": "unsupported"
+        },
+        {
+          "entity": "species",
+          "id": "contact-product",
+          "reason": "Interface-bound resident on junction has no verified native identity",
+          "status": "unverified"
+        },
+        {
+          "entity": "reaction",
+          "id": "combine",
+          "reason": "No matching reversible native equation in the accepted cycle",
+          "status": "unverified"
+        },
+        {
+          "entity": "network",
+          "id": "0f1acd7ca7a613645df1b7babdf895fdd95d98af736000bee9512f59fa20f749",
+          "reason": "No verified closed turnover with these connected molecular and vacancy roles",
+          "status": "unverified"
+        },
+        {
+          "entity": "reaction",
+          "id": "combine",
+          "reason": "Missing kinetic parameter binding",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "network",
+          "id": "0f1acd7ca7a613645df1b7babdf895fdd95d98af736000bee9512f59fa20f749",
+          "reason": "Reviewed kinetic dataset required",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "network",
+          "id": "0f1acd7ca7a613645df1b7babdf895fdd95d98af736000bee9512f59fa20f749",
+          "reason": "Operating conditions and native configuration required",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "normalization",
+          "id": "0f1acd7ca7a613645df1b7babdf895fdd95d98af736000bee9512f59fa20f749",
+          "reason": "Missing verified reference-site-pair normalization",
+          "status": "missing_evidence"
+        }
+      ],
+      "native_input_hashes": {},
+      "network_version": "0f1acd7ca7a613645df1b7babdf895fdd95d98af736000bee9512f59fa20f749",
+      "status": "blocked"
+    },
+    "cross_phase_three_phase": {
+      "equation_forms": {
+        "combine": []
+      },
+      "issues": [
+        {
+          "entity": "species",
+          "id": "on-third",
+          "reason": "No verified multidentate or empty native site token for footprint {'C-pool': 2}",
+          "status": "unsupported"
+        },
+        {
+          "entity": "inventories",
+          "id": [
+            "A-pool",
+            "B-pool",
+            "C-pool"
+          ],
+          "reason": "Closed multiphase benchmark has two independent inventories",
+          "status": "unverified"
+        },
+        {
+          "entity": "surfaces",
+          "id": [
+            "face-A",
+            "face-B",
+            "face-C"
+          ],
+          "reason": "More than two inventory-bearing surfaces",
+          "status": "unverified"
+        },
+        {
+          "entity": "reaction",
+          "id": "combine",
+          "reason": "Reversibility unknown",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "reaction",
+          "id": "combine",
+          "reason": "Three-or-more-phase contact triple-junction",
+          "status": "unverified"
+        },
+        {
+          "entity": "reaction",
+          "id": "combine",
+          "reason": "No matching reversible native equation in the accepted cycle",
+          "status": "unverified"
+        },
+        {
+          "entity": "network",
+          "id": "bce7910168b1b5c0e3a5f50e632c15d23c07771f40c1d0324596b6e239aa4703",
+          "reason": "No verified closed turnover with these connected molecular and vacancy roles",
+          "status": "unverified"
+        },
+        {
+          "entity": "reaction",
+          "id": "combine",
+          "reason": "Missing kinetic parameter binding",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "network",
+          "id": "bce7910168b1b5c0e3a5f50e632c15d23c07771f40c1d0324596b6e239aa4703",
+          "reason": "Reviewed kinetic dataset required",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "network",
+          "id": "bce7910168b1b5c0e3a5f50e632c15d23c07771f40c1d0324596b6e239aa4703",
+          "reason": "Operating conditions and native configuration required",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "normalization",
+          "id": "bce7910168b1b5c0e3a5f50e632c15d23c07771f40c1d0324596b6e239aa4703",
+          "reason": "Missing verified reference-site-pair normalization",
+          "status": "missing_evidence"
+        }
+      ],
+      "native_input_hashes": {},
+      "network_version": "bce7910168b1b5c0e3a5f50e632c15d23c07771f40c1d0324596b6e239aa4703",
+      "status": "blocked"
+    },
+    "network-2a80b67c31201600a1858780bbe6c176b03f489fe24383441fca4f195b395483": {
+      "generic_network_sha256": "56e42d4147637acae090911a82715a10d9883fefa03e7e6dc19fcc0c0f3b25ca",
+      "issues": [
+        {
+          "entity": "species",
+          "id": "fe110_ch_co_to_chco_20261109.CH.IS",
+          "reason": "Unknown molecular footprint",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "species",
+          "id": "fe110_ch_co_to_chco_20261109.CO.IS",
+          "reason": "Unknown molecular footprint",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "species",
+          "id": "fe110_ch_co_to_chco_20261109.CHCO.FS",
+          "reason": "Unknown molecular footprint",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "reaction",
+          "id": "fe110_ch_co_to_chco_20261109",
+          "reason": "Unknown charge balance",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "reaction",
+          "id": "fe110_ch_co_to_chco_20261109",
+          "reason": "Unknown site balance",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "reaction",
+          "id": "fe110_ch_co_to_chco_20261109",
+          "reason": "Catalyst phase unconfirmed",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "reaction",
+          "id": "fe110_ch_co_to_chco_20261109",
+          "reason": "Reversibility unknown",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "reaction",
+          "id": "fe110_ch_co_to_chco_20261109",
+          "reason": "No matching reversible native equation in the accepted cycle",
+          "status": "unverified"
+        },
+        {
+          "entity": "network",
+          "id": "2a80b67c31201600a1858780bbe6c176b03f489fe24383441fca4f195b395483",
+          "reason": "No verified closed turnover with these connected molecular and vacancy roles",
+          "status": "unverified"
+        },
+        {
+          "entity": "reaction",
+          "id": "fe110_ch_co_to_chco_20261109",
+          "reason": "Missing kinetic parameter binding",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "reaction",
+          "id": "fe110_ch_co_to_chco_20261109",
+          "reason": "['Unknown charge balance', 'Unknown site balance', 'Catalyst phase unconfirmed', 'Missing compatible free energies', 'Missing kinetic parameters or rate law', 'Reversibility unconfirmed', 'IS: compatible Gibbs correction missing', 'FS: compatible Gibbs correction missing', 'Kinetic parameter set with units, standard states, validity range and sources missing', 'Rate law, scoped parameter review and applicability not supplied', 'Reviewed site occupancies and vacant-site counts required']",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "network",
+          "id": "2a80b67c31201600a1858780bbe6c176b03f489fe24383441fca4f195b395483",
+          "reason": "Operating conditions and native configuration required",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "normalization",
+          "id": "2a80b67c31201600a1858780bbe6c176b03f489fe24383441fca4f195b395483",
+          "reason": "Missing verified reference-site-pair normalization",
+          "status": "missing_evidence"
+        }
+      ],
+      "kinetic_dataset_version": "a4191054a20d601a73afadd410d3cf69d3df524b14278f0edff92c7a33870b72",
+      "status": "blocked"
+    },
+    "network-e9dc0c890a7a1dc15efe1ec8a500c3ad558b367d92de96a4ae3ffbaff5cceb72": {
+      "generic_network_sha256": "67464382937825db13945cb5a23561dc82f59de54b19baf640d4c3377144e2df",
+      "issues": [
+        {
+          "entity": "species",
+          "id": "fe110_ch_co_to_chco_20261109.CH.IS",
+          "reason": "Unknown molecular footprint",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "species",
+          "id": "fe110_ch_co_to_chco_20261109.CO.IS",
+          "reason": "Unknown molecular footprint",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "species",
+          "id": "fe110_ch_co_to_chco_20261109.CHCO.FS",
+          "reason": "Unknown molecular footprint",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "reaction",
+          "id": "fe110_ch_co_to_chco_20261109",
+          "reason": "Unknown charge balance",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "reaction",
+          "id": "fe110_ch_co_to_chco_20261109",
+          "reason": "Unknown site balance",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "reaction",
+          "id": "fe110_ch_co_to_chco_20261109",
+          "reason": "Catalyst phase unconfirmed",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "reaction",
+          "id": "fe110_ch_co_to_chco_20261109",
+          "reason": "Reversibility unknown",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "reaction",
+          "id": "fe110_ch_co_to_chco_20261109",
+          "reason": "No matching reversible native equation in the accepted cycle",
+          "status": "unverified"
+        },
+        {
+          "entity": "network",
+          "id": "e9dc0c890a7a1dc15efe1ec8a500c3ad558b367d92de96a4ae3ffbaff5cceb72",
+          "reason": "No verified closed turnover with these connected molecular and vacancy roles",
+          "status": "unverified"
+        },
+        {
+          "entity": "reaction",
+          "id": "fe110_ch_co_to_chco_20261109",
+          "reason": "Missing kinetic parameter binding",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "network",
+          "id": "e9dc0c890a7a1dc15efe1ec8a500c3ad558b367d92de96a4ae3ffbaff5cceb72",
+          "reason": "Reviewed kinetic dataset required",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "network",
+          "id": "e9dc0c890a7a1dc15efe1ec8a500c3ad558b367d92de96a4ae3ffbaff5cceb72",
+          "reason": "Operating conditions and native configuration required",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "normalization",
+          "id": "e9dc0c890a7a1dc15efe1ec8a500c3ad558b367d92de96a4ae3ffbaff5cceb72",
+          "reason": "Missing verified reference-site-pair normalization",
+          "status": "missing_evidence"
+        }
+      ],
+      "kinetic_dataset_version": null,
+      "status": "blocked"
+    },
+    "synthetic_interphase_transfer": {
+      "equation_forms": {
+        "move": [
+          "resident_transfer"
+        ]
+      },
+      "issues": [
+        {
+          "entity": "reaction",
+          "id": "move",
+          "reason": "Separate operating-condition profile has no verified native point binding",
+          "status": "unverified"
+        },
+        {
+          "entity": "network",
+          "id": "575733ee0dc6eb6c92729fda882b96d85a5d10a6a8253e587b772690ab31a979",
+          "reason": "No verified closed turnover with these connected molecular and vacancy roles",
+          "status": "unverified"
+        },
+        {
+          "entity": "reaction",
+          "id": "move",
+          "reason": "Missing kinetic parameter binding",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "network",
+          "id": "575733ee0dc6eb6c92729fda882b96d85a5d10a6a8253e587b772690ab31a979",
+          "reason": "Reviewed kinetic dataset required",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "network",
+          "id": "575733ee0dc6eb6c92729fda882b96d85a5d10a6a8253e587b772690ab31a979",
+          "reason": "Operating conditions and native configuration required",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "normalization",
+          "id": "575733ee0dc6eb6c92729fda882b96d85a5d10a6a8253e587b772690ab31a979",
+          "reason": "Missing verified reference-site-pair normalization",
+          "status": "missing_evidence"
+        }
+      ],
+      "native_input_hashes": {},
+      "network_version": "575733ee0dc6eb6c92729fda882b96d85a5d10a6a8253e587b772690ab31a979",
+      "status": "blocked"
+    },
+    "synthetic_oxide_site_network": {
+      "equation_forms": {
+        "fixture-adsorption": []
+      },
+      "issues": [
+        {
+          "entity": "species",
+          "id": "co2-bound",
+          "reason": "No verified multidentate or empty native site token for footprint {'acid-A': 1, 'oxygen-B': 1}",
+          "status": "unsupported"
+        },
+        {
+          "entity": "reaction",
+          "id": "fixture-adsorption",
+          "reason": "Required ensemble differs from sites in the native equation",
+          "status": "unverified"
+        },
+        {
+          "entity": "reaction",
+          "id": "fixture-adsorption",
+          "reason": "Reversibility unknown",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "reaction",
+          "id": "fixture-adsorption",
+          "reason": "No matching reversible native equation in the accepted cycle",
+          "status": "unverified"
+        },
+        {
+          "entity": "network",
+          "id": "3ba45a87758d7df44c0666dc7536607ea995ffcbad91a97db9210dcde1ba4e90",
+          "reason": "No verified closed turnover with these connected molecular and vacancy roles",
+          "status": "unverified"
+        },
+        {
+          "entity": "reaction",
+          "id": "fixture-adsorption",
+          "reason": "Missing kinetic parameter binding",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "network",
+          "id": "3ba45a87758d7df44c0666dc7536607ea995ffcbad91a97db9210dcde1ba4e90",
+          "reason": "Reviewed kinetic dataset required",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "network",
+          "id": "3ba45a87758d7df44c0666dc7536607ea995ffcbad91a97db9210dcde1ba4e90",
+          "reason": "Operating conditions and native configuration required",
+          "status": "missing_evidence"
+        },
+        {
+          "entity": "normalization",
+          "id": "3ba45a87758d7df44c0666dc7536607ea995ffcbad91a97db9210dcde1ba4e90",
+          "reason": "Missing verified reference-site-pair normalization",
+          "status": "missing_evidence"
+        }
+      ],
+      "native_input_hashes": {},
+      "network_version": "3ba45a87758d7df44c0666dc7536607ea995ffcbad91a97db9210dcde1ba4e90",
+      "status": "blocked"
+    }
+  },
+  "isolated_step": {
+    "exit_code": 1,
+    "native_input_sha256": "1934e11eb1536aa4cd76023f8d8aaa6140b20ab28eb7caabab8ebc95e7a5d8f9",
+    "native_read": {
+      "echoed_Ea_G0_eV": [
+        0.7853168271366968,
+        -0.1
+      ],
+      "echoed_exact_input": true,
+      "equation": "H2 + #1 + #2 <-> H#1 + H#2",
+      "forward_reverse_rate_laws_constructed": false,
+      "native_kf_bar^-1_s^-1": null,
+      "native_kr_s^-1": null,
+      "native_result_Ea_G0_eV": null,
+      "reversible_equations_read": 1,
+      "site_tokens": [
+        "#1",
+        "#2"
+      ],
+      "species_tokens": [
+        "H",
+        "H2"
+      ],
+      "started": true,
+      "temperature_pressure_used_by_solver": null
+    },
+    "output_mat_files": [],
+    "terminal_error": "sym/privsubsasgn line 1175, assignment has a different number of elements on its two sides"
+  },
+  "mapping": {
+    "capability_evidence": {
+      "distribution": "20261106",
+      "input_sha256": "b793e6f37f2262e4a006f912d18950c17581ccc014aa9779008741a4e31890f8",
+      "receipt": "reports/multiphase/phase3_0/benchmark_manifest.json",
+      "receipt_sha256": "0773bdbbf0d3a2f7b8907ed271fdc1f0f725150c5e8c16ae77d10c37d389822d",
+      "reported_version": "20230524"
+    },
+    "conditions": {
+      "MaxOdeTime": 3,
+      "MaxTime": 3,
+      "initial_coverages": {
+        "H2-bridge": 0,
+        "H2-top": 0,
+        "HNO-top": 0
+      },
+      "partial_pressure_bar": {
+        "H2-g": 1.0,
+        "HNO-g": 0.1,
+        "NO-g": 0.5
+      },
+      "pressure_bar": 1.6,
+      "temperature_K": 400
+    },
+    "configuration_sha256": "bfa0fd0cb6d2a62e9aa6764e14a5c304c7bcbb691bf6bf0380f0467da7a50089",
+    "dataset_version": "417cf1dc3236175476441c4c4e7b4bd5771bc4a7062aa5e34eff69070483d11b",
+    "equation_forms": {
+      "ads": [
+        "dissociative_adsorption"
+      ],
+      "desorb": [
+        "desorption"
+      ],
+      "hydrogenate": [
+        "gas_surface_association"
+      ],
+      "transfer": [
+        "resident_transfer"
+      ]
+    },
+    "execution_authorized": false,
+    "format": "catkinas-network-mapping/1",
+    "issues": [],
+    "mapping": {
+      "interfaces": {
+        "junction": {
+          "participating_phase_ids": [
+            "fcc-Cu",
+            "fcc-Ni"
+          ],
+          "phase_ids": null,
+          "surface_ids": [
+            "facet-Ni",
+            "facet-Cu"
+          ]
+        }
+      },
+      "phases": [
+        "fcc-Ni",
+        "fcc-Cu"
+      ],
+      "reactions": {
+        "ads": {
+          "direction": {
+            "forward": {
+              "products": {
+                "H2-bridge": 1,
+                "H2-top": 1
+              },
+              "reactants": {
+                "H2-g": 1
+              },
+              "sites_consumed": {
+                "bridge-Cu": 1,
+                "top-Ni": 1
+              },
+              "sites_released": {}
+            },
+            "reverse": {
+              "products": {
+                "H2-g": 1
+              },
+              "reactants": {
+                "H2-bridge": 1,
+                "H2-top": 1
+              },
+              "sites_consumed": {},
+              "sites_released": {
+                "bridge-Cu": 1,
+                "top-Ni": 1
+              }
+            },
+            "status": "reversible"
+          },
+          "fixed_T_energy_input": {
+            "BarrierMode": -2,
+            "ConsMode": 0,
+            "Ea_eV": 0.7853168271366968,
+            "G0_eV": -0.1,
+            "ThermoMode": 0
+          },
+          "forward": {
+            "coefficient": 1062.5043325104702,
+            "gas_partial_pressure_orders": {
+              "H2-g": 1
+            },
+            "unit": "bar^-1 s^-1"
+          },
+          "interface_id": "junction",
+          "native_index": 1,
+          "operating_conditions_ref": null,
+          "phase_ids": [
+            "fcc-Ni",
+            "fcc-Cu"
+          ],
+          "provenance": {
+            "parameter_set_id": "parameters-ads",
+            "review_subject": "23713a0a24a443eb660595bd17a4d8040b865131a288755cfb44087e523b5562",
+            "sources": [
+              {
+                "kind": "synthetic",
+                "reference": "kinetic_reference.json",
+                "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+              },
+              {
+                "kind": "synthetic",
+                "reference": "closed_cycle_reference.json",
+                "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+              }
+            ],
+            "use_scope": "synthetic_benchmark"
+          },
+          "reaction_type": "interfacial",
+          "required_sites": {
+            "bridge-Cu": 1,
+            "top-Ni": 1
+          },
+          "reverse": {
+            "coefficient": 58.396411910597834,
+            "gas_partial_pressure_orders": {},
+            "unit": "s^-1"
+          },
+          "standard_states": {
+            "gas_pressure_Pa": 100000,
+            "solute_concentration_mol_m3": 1000,
+            "surface_activity_convention": "fractional site occupation"
+          },
+          "surface_ids": [
+            "facet-Ni",
+            "facet-Cu"
+          ],
+          "ts_id": "fixture-ts-ads",
+          "ts_species_id": null
+        },
+        "desorb": {
+          "direction": {
+            "forward": {
+              "products": {
+                "HNO-g": 1
+              },
+              "reactants": {
+                "HNO-top": 1
+              },
+              "sites_consumed": {},
+              "sites_released": {
+                "top-Ni": 1
+              }
+            },
+            "reverse": {
+              "products": {
+                "HNO-top": 1
+              },
+              "reactants": {
+                "HNO-g": 1
+              },
+              "sites_consumed": {
+                "top-Ni": 1
+              },
+              "sites_released": {}
+            },
+            "status": "reversible"
+          },
+          "fixed_T_energy_input": {
+            "BarrierMode": -2,
+            "ConsMode": 0,
+            "Ea_eV": 0.8,
+            "G0_eV": 0.0600000000000001,
+            "ThermoMode": 0
+          },
+          "forward": {
+            "coefficient": 693.954304384082,
+            "gas_partial_pressure_orders": {},
+            "unit": "s^-1"
+          },
+          "interface_id": "junction",
+          "native_index": 4,
+          "operating_conditions_ref": null,
+          "phase_ids": [
+            "fcc-Ni",
+            "fcc-Cu"
+          ],
+          "provenance": {
+            "parameter_set_id": "parameters-desorb",
+            "review_subject": "3b8dc5ee17d65296ba2dc3fbd610b620181accd818fb643ab4b754cc641b9a53",
+            "sources": [
+              {
+                "kind": "synthetic",
+                "reference": "kinetic_reference.json",
+                "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+              },
+              {
+                "kind": "synthetic",
+                "reference": "closed_cycle_reference.json",
+                "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+              }
+            ],
+            "use_scope": "synthetic_benchmark"
+          },
+          "reaction_type": "desorption",
+          "required_sites": {
+            "top-Ni": 1
+          },
+          "reverse": {
+            "coefficient": 3956.3763917523693,
+            "gas_partial_pressure_orders": {
+              "HNO-g": 1
+            },
+            "unit": "bar^-1 s^-1"
+          },
+          "standard_states": {
+            "gas_pressure_Pa": 100000,
+            "solute_concentration_mol_m3": 1000,
+            "surface_activity_convention": "fractional site occupation"
+          },
+          "surface_ids": [
+            "facet-Ni",
+            "facet-Cu"
+          ],
+          "ts_id": "fixture-ts-desorb",
+          "ts_species_id": null
+        },
+        "hydrogenate": {
+          "direction": {
+            "forward": {
+              "products": {
+                "HNO-top": 1
+              },
+              "reactants": {
+                "H2-top": 1,
+                "NO-g": 1
+              },
+              "sites_consumed": {},
+              "sites_released": {}
+            },
+            "reverse": {
+              "products": {
+                "H2-top": 1,
+                "NO-g": 1
+              },
+              "reactants": {
+                "HNO-top": 1
+              },
+              "sites_consumed": {},
+              "sites_released": {}
+            },
+            "status": "reversible"
+          },
+          "fixed_T_energy_input": {
+            "BarrierMode": -2,
+            "ConsMode": 0,
+            "Ea_eV": 0.78,
+            "G0_eV": -0.09999999999999992,
+            "ThermoMode": 0
+          },
+          "forward": {
+            "coefficient": 1239.709082999593,
+            "gas_partial_pressure_orders": {
+              "NO-g": 1
+            },
+            "unit": "bar^-1 s^-1"
+          },
+          "interface_id": "junction",
+          "native_index": 3,
+          "operating_conditions_ref": null,
+          "phase_ids": [
+            "fcc-Ni",
+            "fcc-Cu"
+          ],
+          "provenance": {
+            "parameter_set_id": "parameters-hydrogenate",
+            "review_subject": "5afba807f5cad0d86ae93671103debd7a1eeab6007b7db886efd439e6452f9de",
+            "sources": [
+              {
+                "kind": "synthetic",
+                "reference": "kinetic_reference.json",
+                "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+              },
+              {
+                "kind": "synthetic",
+                "reference": "closed_cycle_reference.json",
+                "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+              }
+            ],
+            "use_scope": "synthetic_benchmark"
+          },
+          "reaction_type": "association",
+          "required_sites": {
+            "top-Ni": 1
+          },
+          "reverse": {
+            "coefficient": 68.13578076345448,
+            "gas_partial_pressure_orders": {},
+            "unit": "s^-1"
+          },
+          "standard_states": {
+            "gas_pressure_Pa": 100000,
+            "solute_concentration_mol_m3": 1000,
+            "surface_activity_convention": "fractional site occupation"
+          },
+          "surface_ids": [
+            "facet-Ni",
+            "facet-Cu"
+          ],
+          "ts_id": "fixture-ts-hydrogenate",
+          "ts_species_id": null
+        },
+        "transfer": {
+          "direction": {
+            "forward": {
+              "products": {
+                "H2-top": 1
+              },
+              "reactants": {
+                "H2-bridge": 1
+              },
+              "sites_consumed": {
+                "top-Ni": 1
+              },
+              "sites_released": {
+                "bridge-Cu": 1
+              }
+            },
+            "reverse": {
+              "products": {
+                "H2-bridge": 1
+              },
+              "reactants": {
+                "H2-top": 1
+              },
+              "sites_consumed": {
+                "bridge-Cu": 1
+              },
+              "sites_released": {
+                "top-Ni": 1
+              }
+            },
+            "status": "reversible"
+          },
+          "fixed_T_energy_input": {
+            "BarrierMode": -2,
+            "ConsMode": 0,
+            "Ea_eV": 0.76,
+            "G0_eV": 0.02000000000000003,
+            "ThermoMode": 0
+          },
+          "forward": {
+            "coefficient": 2214.668315712438,
+            "gas_partial_pressure_orders": {},
+            "unit": "s^-1"
+          },
+          "interface_id": "junction",
+          "native_index": 2,
+          "operating_conditions_ref": null,
+          "phase_ids": [
+            "fcc-Ni",
+            "fcc-Cu"
+          ],
+          "provenance": {
+            "parameter_set_id": "parameters-transfer",
+            "review_subject": "957827976ae53e15492efdb29f1ae62892bb69274ac8f9da43c103a94430e9fa",
+            "sources": [
+              {
+                "kind": "synthetic",
+                "reference": "kinetic_reference.json",
+                "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+              },
+              {
+                "kind": "synthetic",
+                "reference": "closed_cycle_reference.json",
+                "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+              }
+            ],
+            "use_scope": "synthetic_benchmark"
+          },
+          "reaction_type": "diffusion",
+          "required_sites": {
+            "bridge-Cu": 1,
+            "top-Ni": 1
+          },
+          "reverse": {
+            "coefficient": 3956.3763917523693,
+            "gas_partial_pressure_orders": {},
+            "unit": "s^-1"
+          },
+          "standard_states": {
+            "gas_pressure_Pa": 100000,
+            "solute_concentration_mol_m3": 1000,
+            "surface_activity_convention": "fractional site occupation"
+          },
+          "surface_ids": [
+            "facet-Ni",
+            "facet-Cu"
+          ],
+          "ts_id": "fixture-ts-transfer",
+          "ts_species_id": null
+        }
+      },
+      "sites": {
+        "bridge-Cu": {
+          "interface_id": null,
+          "native_index": 2,
+          "site_type": "bridge",
+          "surface_id": "facet-Cu"
+        },
+        "top-Ni": {
+          "interface_id": null,
+          "native_index": 1,
+          "site_type": "atop",
+          "surface_id": "facet-Ni"
+        }
+      },
+      "species": {
+        "H2-bridge": {
+          "charge": 0,
+          "composition": {
+            "H": 1
+          },
+          "interface_id": null,
+          "material_ids": [
+            "Cu"
+          ],
+          "native_token": "H#2",
+          "phase": "surface",
+          "site_occupancy": {
+            "bridge-Cu": 1
+          },
+          "structure_id": "H2-bridge",
+          "surface_ids": [
+            "facet-Cu"
+          ]
+        },
+        "H2-g": {
+          "charge": 0,
+          "composition": {
+            "H": 2
+          },
+          "interface_id": null,
+          "material_ids": [],
+          "native_token": "H2",
+          "phase": "gas",
+          "site_occupancy": {},
+          "structure_id": "H2-g",
+          "surface_ids": []
+        },
+        "H2-top": {
+          "charge": 0,
+          "composition": {
+            "H": 1
+          },
+          "interface_id": null,
+          "material_ids": [
+            "Ni"
+          ],
+          "native_token": "H#1",
+          "phase": "surface",
+          "site_occupancy": {
+            "top-Ni": 1
+          },
+          "structure_id": "H2-top",
+          "surface_ids": [
+            "facet-Ni"
+          ]
+        },
+        "HNO-g": {
+          "charge": 0,
+          "composition": {
+            "H": 1,
+            "N": 1,
+            "O": 1
+          },
+          "interface_id": null,
+          "material_ids": [],
+          "native_token": "HNO",
+          "phase": "gas",
+          "site_occupancy": {},
+          "structure_id": "HNO-g",
+          "surface_ids": []
+        },
+        "HNO-top": {
+          "charge": 0,
+          "composition": {
+            "H": 1,
+            "N": 1,
+            "O": 1
+          },
+          "interface_id": null,
+          "material_ids": [
+            "Ni"
+          ],
+          "native_token": "HNO#1",
+          "phase": "surface",
+          "site_occupancy": {
+            "top-Ni": 1
+          },
+          "structure_id": "HNO-top",
+          "surface_ids": [
+            "facet-Ni"
+          ]
+        },
+        "NO-g": {
+          "charge": 0,
+          "composition": {
+            "N": 1,
+            "O": 1
+          },
+          "interface_id": null,
+          "material_ids": [],
+          "native_token": "NO",
+          "phase": "gas",
+          "site_occupancy": {},
+          "structure_id": "NO-g",
+          "surface_ids": []
+        }
+      },
+      "surfaces": {
+        "facet-Cu": "fcc-Cu",
+        "facet-Ni": "fcc-Ni"
+      }
+    },
+    "native_execution_eligibility": "requires_separate_qualification_and_approval",
+    "native_input_bytes_match_archive": true,
+    "native_input_hashes": {
+      "INPUT_phase25.m": "b793e6f37f2262e4a006f912d18950c17581ccc014aa9779008741a4e31890f8"
+    },
+    "native_normalization": {
+      "denominator_unit": "reference site pair",
+      "denominator_value": 1,
+      "extent_unit": "event",
+      "profile_sha256": "3084884fe35b71413ee95f1cb09dd5bbf1bfc40354bfc5454e909d513c4d2401",
+      "reference_basis": "reference_site_pair",
+      "sites_per_reference": {
+        "bridge-Cu": 1,
+        "top-Ni": 1
+      },
+      "source": {
+        "path": "../../../tests/fixtures/multiphase/closed_cycle_reference.json",
+        "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+      },
+      "time_unit": "s"
+    },
+    "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+    "observables": {
+      "overall_stoichiometry": {
+        "H2-g": -1,
+        "HNO-g": 2,
+        "NO-g": -2
+      },
+      "selectivity_products": [
+        "HNO-g"
+      ],
+      "turnover_basis": "one_event_per_reference_site"
+    },
+    "project_id": "demo",
+    "readback": {
+      "coefficients_round_trip": true,
+      "correction_switches": [
+        0,
+        -2,
+        0
+      ],
+      "equation_count": 4
+    },
+    "sidecar_sha256": "3fc09536fff44cdf8520a8930bfc846c56aba66ce374536421a791be76be1fb6",
+    "status": "mapped_with_restrictions"
+  },
+  "native_runs_this_checkpoint": 0,
+  "operating_receipt": {
+    "approval": "approved",
+    "convergence": "converged",
+    "execution": "exited_successfully",
+    "input_hashes": {
+      "configuration": "7687b9fe2495aa010c7faa79da17ada934cf1673dd910b49fa4605461dea6f53",
+      "dataset": "0ac30eec437cebf321339d6c4dde26a0e2146229d8c27fb9fa9f3926adf6d778",
+      "network": "6a4717c44a6c5a76191baf88e419621e461886c96989a6cdb86402df70c58b40"
+    },
+    "native_input_hashes": {
+      "INPUT_phase25.m": "b793e6f37f2262e4a006f912d18950c17581ccc014aa9779008741a4e31890f8"
+    },
+    "use_scope": "synthetic_benchmark"
+  },
+  "scope": "Offline comparison to two archived synthetic CATKINAS runs",
+  "unchanged_source_sha256": {
+    "reports/multiphase/networks/network-2a80b67c31201600a1858780bbe6c176b03f489fe24383441fca4f195b395483.json": "56e42d4147637acae090911a82715a10d9883fefa03e7e6dc19fcc0c0f3b25ca",
+    "reports/multiphase/networks/network-e9dc0c890a7a1dc15efe1ec8a500c3ad558b367d92de96a4ae3ffbaff5cceb72.json": "67464382937825db13945cb5a23561dc82f59de54b19baf640d4c3377144e2df",
+    "reports/multiphase/phase2_4/fe110_parameters.json": "dd2cdba9cfa6d45bfbf0f4e659ca80c1f81a80b3681e99633bdc19b1a98ff461",
+    "reports/multiphase/phase2_5_1/catkinas_environment_control.json": "61e9b3608725f48d0b53625253a11d498e736dfbbcf1ba6a644c9e7386848bac",
+    "reports/multiphase/phase2_5_1/catkinas_target_attempt.json": "b654b1074cffff7fd695ba75ef6e66e5d4df1d728f38cb5ae63bbe9691bf483e",
+    "reports/multiphase/phase2_5_2/catkinas_closed_cycle_input.m": "b793e6f37f2262e4a006f912d18950c17581ccc014aa9779008741a4e31890f8",
+    "reports/multiphase/phase2_5_2/catkinas_closed_cycle_validation.json": "bb7b6d5c9c1b921d8bd1ba5c498a3eb8dbf1fb056ce2b13de7354e027755910b",
+    "reports/multiphase/phase2_5_2/catkinas_standalone_step_assessment.md": "e08b48a7a6204e1e52e45543c3b6906a60b348853587e63d181cd4d9b76afca3",
+    "reports/multiphase/phase2_5_2/cycle_configuration.json": "324a0967e97c1b59e6efd318c587f783ff6f7475d67de329401ddf8aa43cc9e6",
+    "reports/multiphase/phase2_5_2/cycle_dataset.json": "0ac30eec437cebf321339d6c4dde26a0e2146229d8c27fb9fa9f3926adf6d778",
+    "reports/multiphase/phase2_5_2/data1.mat": "20ebda963c5d5b57e9a47144831a3fd3d416f864d0211db1a4e03020938ff655",
+    "reports/multiphase/phase2_5_2/native_log_extract.txt": "92ff2ff57db830681342b841dec3b395559437ee35c0c985cfa4c8b401a5fd60",
+    "reports/multiphase/phase3_0/benchmark_manifest.json": "0773bdbbf0d3a2f7b8907ed271fdc1f0f725150c5e8c16ae77d10c37d389822d",
+    "reports/multiphase/phase3_0/closed_cycle_network.json": "6a4717c44a6c5a76191baf88e419621e461886c96989a6cdb86402df70c58b40",
+    "reports/multiphase/phase3_0/data1.mat": "a010f66603a85035cdcbbc2e81e5ea712c4833a979b7d595df4dcdb386db308d",
+    "reports/multiphase/phase3_0/native_log_extract.txt": "7c63865de15094407577cca2800b4cdf03196a57da974b374ae9efe451d82839",
+    "reports/multiphase/phase3_0/workflow_configuration.json": "7687b9fe2495aa010c7faa79da17ada934cf1673dd910b49fa4605461dea6f53",
+    "reports/multiphase/phase3_1/benchmark_normalization.json": "3084884fe35b71413ee95f1cb09dd5bbf1bfc40354bfc5454e909d513c4d2401",
+    "reports/multiphase/stage_b1_4/catkinas_qualification.json": "9b8bb716277180587c32eb5cd0f4b90c3dfc32ce638a458d4a1717db18bac65d",
+    "reports/multiphase/stage_b1_4/replay/catkinas-phase2_5_2.json": "e1a71272fc19b0f8756e4fcb64ad7ef2e3b83eac9572290b27cef1005bc17e77",
+    "reports/multiphase/stage_b1_4/replay/catkinas-phase3_0.json": "eb73c3b756ad88316b792df4919c0e08cbe9e0967bcd4d6e2277a5eefcac2ec6",
+    "reports/multiphase/stage_b2_1/interface_validation.json": "d50ff225f6f9c52361fca13920137720e4e5569bece453d7cd26fd6f4e8cbfe1",
+    "reports/multiphase/stage_b2_1/oxide_validation.json": "ab1c981802a6e01423c69656b1e6e2fef8e97b3bcb6d4ac3e673fe5181ed80ce",
+    "reports/multiphase/stage_b2_2_1/identity_validation.json": "b70350daaedea66a67b2b96cf4535f86aef6cea1ae3199e7cc8eebe215477f1e",
+    "reports/multiphase/stage_b2_2_2/transfer_validation.json": "dd80d789e0a679d3cf386f02550f76501658ef1510287cf0aff20ae05068dfbb",
+    "reports/multiphase/stage_b2_2_3/validation.json": "74ad49c72408f5a8113aab67f8076053c271e9330abf99eb8964675ea9e682c0",
+    "tests/fixtures/multiphase/closed_cycle_reference.json": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91",
+    "tests/fixtures/multiphase/cross_phase_interface_product.json": "2b366b265ad0189a0366ac60a7a73124909fca0ce9dc8a6e350b275a9d4362ec",
+    "tests/fixtures/multiphase/cross_phase_three_phase.json": "097eca7edaffba8f570b418b11fbe935248c9c5f1a863b4d03ccde14260e4e74",
+    "tests/fixtures/multiphase/kinetic_reference.json": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728",
+    "tests/fixtures/multiphase/synthetic_interphase_transfer.json": "d8d58db34a53476d51cfbb5ca1cb97374587dd2373b47d85d2fdc29e0f732042",
+    "tests/fixtures/multiphase/synthetic_oxide_site_network.json": "24d5c34d33ec332a131e5f957dcb83ff4816e29c5d4c6ba05c47c854d87c6aa2"
+  }
+}
