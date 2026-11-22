@@ -1,0 +1,388 @@
+{
+  "fe110": {
+    "ownership": {
+      "interfaces": {},
+      "network_version": "2a80b67c31201600a1858780bbe6c176b03f489fe24383441fca4f195b395483",
+      "phases": {},
+      "sites": {},
+      "surfaces": {
+        "fe110": {
+          "issues": [
+            "Unresolved phase_id: None",
+            "Missing structure_id",
+            "Missing structural_provenance"
+          ],
+          "phase_id": null,
+          "structural_provenance": null,
+          "structure_id": null,
+          "validation_status": null
+        }
+      }
+    },
+    "source": "reports/multiphase/networks/network-2a80b67c31201600a1858780bbe6c176b03f489fe24383441fca4f195b395483.json",
+    "source_sha256": "56e42d4147637acae090911a82715a10d9883fefa03e7e6dc19fcc0c0f3b25ca"
+  },
+  "generic": {
+    "ownership": {
+      "interfaces": {
+        "contact-a": {
+          "geometry": "Declared contact patch",
+          "issues": [
+            "Missing structure_id",
+            "Missing structural_provenance"
+          ],
+          "phase_ids": [
+            "disordered",
+            "ordered"
+          ],
+          "structural_provenance": null,
+          "structure_id": null,
+          "surface_ids": [
+            "outer",
+            "rough"
+          ],
+          "validation_status": null
+        },
+        "contact-b": {
+          "geometry": "Declared contact patch",
+          "issues": [
+            "Missing structure_id",
+            "Missing structural_provenance"
+          ],
+          "phase_ids": [
+            "disordered",
+            "ordered"
+          ],
+          "structural_provenance": null,
+          "structure_id": null,
+          "surface_ids": [
+            "outer",
+            "rough"
+          ],
+          "validation_status": null
+        },
+        "unlocated": {
+          "issues": [
+            "Missing structure_id",
+            "Missing structural_provenance",
+            "Surface assignment unknown for disordered",
+            "Surface assignment unknown for ordered",
+            "Surface assignment unknown for support-phase"
+          ],
+          "phase_ids": [
+            "disordered",
+            "ordered",
+            "support-phase"
+          ],
+          "structural_provenance": null,
+          "structure_id": null,
+          "surface_ids": null,
+          "validation_status": null
+        }
+      },
+      "phases": {
+        "disordered": {
+          "issues": [
+            "Missing structure_id",
+            "Missing structural_provenance"
+          ],
+          "material_id": "film",
+          "phase_category": "amorphous",
+          "structural_provenance": null,
+          "structure_id": null,
+          "validation_status": null
+        },
+        "ordered": {
+          "charge": 0,
+          "composition": {
+            "Si": 1
+          },
+          "description": "Oriented synthetic layer",
+          "issues": [
+            "Missing structure_id",
+            "Missing structural_provenance"
+          ],
+          "material_id": "film",
+          "phase_category": "crystalline",
+          "structural_provenance": null,
+          "structure_id": null,
+          "validation_status": null
+        },
+        "support-phase": {
+          "issues": [
+            "Missing structure_id",
+            "Missing structural_provenance"
+          ],
+          "material_id": "support",
+          "phase_category": "mixed solid",
+          "structural_provenance": null,
+          "structure_id": null,
+          "validation_status": null
+        }
+      },
+      "sites": {
+        "rim-a": {
+          "interface_id": "contact-a",
+          "issues": [],
+          "site_type": "anchor",
+          "surface_id": "outer"
+        },
+        "rim-b": {
+          "interface_id": "contact-b",
+          "issues": [],
+          "site_type": "anchor",
+          "surface_id": "outer"
+        },
+        "rough-pool": {
+          "interface_id": null,
+          "issues": [],
+          "site_type": "anchor",
+          "surface_id": "rough"
+        },
+        "shared": {
+          "interface_id": null,
+          "issues": [],
+          "site_type": "anchor",
+          "surface_id": "outer"
+        }
+      },
+      "surfaces": {
+        "inner": {
+          "issues": [
+            "Missing structure_id",
+            "Missing structural_provenance"
+          ],
+          "miller_indices": [
+            0,
+            1,
+            0
+          ],
+          "phase_id": "ordered",
+          "structural_provenance": null,
+          "structure_id": null,
+          "validation_status": null
+        },
+        "outer": {
+          "coordinate_convention": "Fractional in the two declared in-plane vectors",
+          "issues": [
+            "Missing structure_id",
+            "Missing structural_provenance"
+          ],
+          "lattice_vectors_angstrom": [
+            [
+              3,
+              0,
+              0
+            ],
+            [
+              1,
+              4,
+              0
+            ]
+          ],
+          "miller_indices": [
+            1,
+            0,
+            0
+          ],
+          "phase_id": "ordered",
+          "structural_provenance": null,
+          "structure_id": null,
+          "validation_status": null
+        },
+        "rough": {
+          "issues": [
+            "Missing structure_id",
+            "Missing structural_provenance"
+          ],
+          "phase_id": "disordered",
+          "structural_provenance": null,
+          "structure_id": null,
+          "surface_descriptor": "Disordered outer boundary",
+          "validation_status": null
+        },
+        "support-face": {
+          "issues": [
+            "Missing structure_id",
+            "Missing structural_provenance"
+          ],
+          "phase_id": "support-phase",
+          "structural_provenance": null,
+          "structure_id": null,
+          "surface_descriptor": "Porous wall",
+          "validation_status": null
+        }
+      }
+    },
+    "source": "tests/fixtures/multiphase/synthetic_identity_domains.json",
+    "source_sha256": "e2b23b33f92d67f51588e7d5b32aaeeb31a514c4ec2296545a38ca83be171ed9"
+  },
+  "ni_cu": {
+    "ownership": {
+      "interfaces": {
+        "junction": {
+          "geometry": "two adjacent facets",
+          "issues": [],
+          "phase_ids": [
+            "fcc-Cu",
+            "fcc-Ni"
+          ],
+          "structural_provenance": {
+            "path": "synthetic/junction.xyz",
+            "sha256": "abababababababababababababababababababababababababababababababab"
+          },
+          "structure_id": "junction",
+          "surface_ids": [
+            "facet-Cu",
+            "facet-Ni"
+          ],
+          "validation_status": "unreviewed"
+        }
+      },
+      "network_version": "ccee8d834cb47dd351476361d5ef2339b178398046de7a78924bd1e0f4a41127",
+      "phases": {
+        "fcc-Cu": {
+          "composition": {
+            "Cu": 1
+          },
+          "issues": [],
+          "material_id": "Cu",
+          "structural_provenance": {
+            "path": "synthetic/bulk-Cu.xyz",
+            "sha256": "abababababababababababababababababababababababababababababababab"
+          },
+          "structure_id": "bulk-Cu",
+          "validation_status": "unreviewed"
+        },
+        "fcc-Ni": {
+          "composition": {
+            "Ni": 1
+          },
+          "issues": [],
+          "material_id": "Ni",
+          "structural_provenance": {
+            "path": "synthetic/bulk-Ni.xyz",
+            "sha256": "abababababababababababababababababababababababababababababababab"
+          },
+          "structure_id": "bulk-Ni",
+          "validation_status": "unreviewed"
+        }
+      },
+      "sites": {
+        "bridge-Cu": {
+          "interface_id": null,
+          "issues": [],
+          "site_type": "bridge",
+          "surface_id": "facet-Cu"
+        },
+        "top-Ni": {
+          "interface_id": null,
+          "issues": [],
+          "site_type": "atop",
+          "surface_id": "facet-Ni"
+        }
+      },
+      "surfaces": {
+        "facet-Cu": {
+          "issues": [],
+          "miller_indices": [
+            1,
+            1,
+            1
+          ],
+          "phase_id": "fcc-Cu",
+          "structural_provenance": {
+            "path": "synthetic/facet-Cu.xyz",
+            "sha256": "abababababababababababababababababababababababababababababababab"
+          },
+          "structure_id": "facet-Cu",
+          "validation_status": "unreviewed"
+        },
+        "facet-Ni": {
+          "issues": [],
+          "miller_indices": [
+            1,
+            1,
+            1
+          ],
+          "phase_id": "fcc-Ni",
+          "structural_provenance": {
+            "path": "synthetic/facet-Ni.xyz",
+            "sha256": "abababababababababababababababababababababababababababababababab"
+          },
+          "structure_id": "facet-Ni",
+          "validation_status": "unreviewed"
+        }
+      }
+    },
+    "source": "reports/multiphase/phase3_1_1/network.json",
+    "source_sha256": "e59b9bec86ab0d31a2e50d68df3a134d77004e466880c2a6797110842ee3b785"
+  },
+  "oxide": {
+    "ownership": {
+      "interfaces": {},
+      "phases": {
+        "oxide-alpha": {
+          "issues": [
+            "Missing structure_id",
+            "Missing structural_provenance"
+          ],
+          "material_id": "oxide",
+          "structural_provenance": null,
+          "structure_id": null,
+          "validation_status": null
+        }
+      },
+      "sites": {
+        "acid-A": {
+          "interface_id": null,
+          "issues": [],
+          "site_type": "lewis-acid",
+          "surface_id": "oxide-012"
+        },
+        "oxygen-B": {
+          "interface_id": null,
+          "issues": [],
+          "site_type": "basic-oxygen",
+          "surface_id": "oxide-012"
+        }
+      },
+      "surfaces": {
+        "oxide-012": {
+          "issues": [
+            "Missing structure_id",
+            "Missing structural_provenance"
+          ],
+          "lattice_vectors_angstrom": [
+            [
+              6.1,
+              0,
+              0
+            ],
+            [
+              1.7,
+              5.2,
+              0
+            ],
+            [
+              0,
+              0,
+              21
+            ]
+          ],
+          "miller_indices": [
+            0,
+            1,
+            2
+          ],
+          "phase_id": "oxide-alpha",
+          "structural_provenance": null,
+          "structure_id": null,
+          "validation_status": null
+        }
+      }
+    },
+    "source": "tests/fixtures/multiphase/synthetic_oxide_site_network.json",
+    "source_sha256": "24d5c34d33ec332a131e5f957dcb83ff4816e29c5d4c6ba05c47c854d87c6aa2"
+  }
+}

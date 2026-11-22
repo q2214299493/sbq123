@@ -14,16 +14,20 @@ Pass your bundle path in place of the example. Success exits 0. Malformed JSON, 
 |---|---|---|
 | projects | catalysis/catalyst_project.schema.json | project_id |
 | materials | catalysis/catalyst_material.schema.json | material_id → project |
-| phases | catalysis/phase.schema.json | phase_id → material, crystal composition, structure and source |
-| surfaces | catalysis/surface.schema.json | surface_id → phase, Miller or Miller–Bravais indices, termination, explicit defects/vacancies |
-| sites | catalysis/active_site.schema.json | site_id → surface, site type and local geometry. Multiple instances/types can belong to one surface. |
-| interfaces | catalysis/interface.schema.json | interface_id → at least two distinct surfaces in one project, geometry and source structure |
+| phases | catalysis/phase.schema.json | phase_id → material, phase name, optional category, physical description and charge, structure and source |
+| surfaces | catalysis/surface.schema.json | surface_id → phase, Miller indices or surface descriptor, optional cell vectors in Å and coordinate convention |
+| sites | catalysis/active_site.schema.json | site_id → surface and optional exclusive interface_id, site type and local geometry |
+| interfaces | catalysis/interface.schema.json | interface_id → explicitly named phases or the owners of its legacy surface list, geometry and source structure |
 | species | kinetics/species.schema.json | species_id, phase, elements, net charge in elementary-charge units, occupied sites, geometry, structure, structural provenance and review |
 | reactions | kinetics/reaction.schema.json | reaction_id, stoichiometry, surface context, vacant site counts, IS/FS/TS references, energies and review |
 | parameter_sets | kinetics/kinetic_parameter.schema.json | parameter_set_id → reaction, rate law, basis, standard states, source quantities and applicable conditions |
 | runs | kinetics/simulation_run.schema.json | run_id, engine/version, parameter set IDs, per-engine input roles, output artifacts and separate status fields |
 
 `configs/kinetics/bundle.schema.json` defines the envelope. `configs/catalysis/common.schema.json` defines shared identifiers, evidence, review states and quantities. Every record and bundle carries schema_version. Record types are closed to unknown properties. IDs are unique within each collection. Use distinct species IDs for different occupancies, geometries, structures or charge states. The fixture distinguishes gas H₂, single-site H₂ and H₂ spanning a Ni atop site and a Cu bridge site. These entries are synthetic.
+
+A phase may declare an open-text `phase_category`, `description` and integer `charge` in elementary-charge units. Complete accepted phase records retain their composition requirement. Other phase records may omit unknown composition. A surface has one owning phase. `surface_descriptor` can identify a non-indexed boundary. `lattice_vectors_angstrom` contains two in-plane or three cell vectors, each with three Cartesian components. Supply `coordinate_convention` when the source specifies it.
+
+An explicit `interface_id` identifies one contact. Its optional `phase_ids` must name at least two distinct phases in the same project. `surface_ids` may be omitted until facets are assigned. Every named surface with a known owner must belong to a participant. A legacy surface-only interface retains its original requirement of two or more distinct surfaces, including possible same-phase boundaries. An interface-local species can occupy a subset of that contact's surfaces. Its site footprint must agree with the subset. An interface-exclusive inventory can only be used at its named contact. A shared physical pool uses the same canonical site ID in each participating footprint.
 
 Foreign keys resolve inside the bundle. Structure IDs, energy reference IDs, rate-law IDs, source calculation IDs and review receipts refer to external records. An energy reference ID denotes one reviewed compatibility branch, including method, energy convention and reference states. A review artifact has a path and lowercase SHA-256 digest. Consumers must resolve and verify those bytes and their authority before accepting science or execution. The validator never imports files named by a bundle or evaluates text expressions.
 

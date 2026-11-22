@@ -174,7 +174,7 @@ def coverage_analysis(network, result, options, rates=None):
         native = measured[site]
         vacant = fraction(native["vacancy_fraction"])
         surface = desc["surface_id"]
-        phase = surfaces[surface]["phase_id"]
+        phase = surfaces[surface].get("phase_id")
         members = []
         for sid, s in species.items():
             footprint = s["site_occupancy"]

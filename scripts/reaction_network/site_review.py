@@ -3,6 +3,7 @@ from collections import Counter
 from datetime import datetime
 
 from scripts.artifact_io import sha256_json
+from scripts.multiphase_contracts import check_site_interface
 from scripts.reaction_network.catalog import check_common, check_context, site_counts, validate_site_types
 
 
@@ -14,7 +15,7 @@ def agreed(row, field, value):
     row[field] = value
 
 
-def counts(value, index, domains):
+def counts(value, index, domains, interface_id=None):
     """Null is unknown. A supplied empty object or explicit integer zero is known."""
     if value is None:
         return None
@@ -23,7 +24,7 @@ def counts(value, index, domains):
     for site, n in value.items():
         if type(n) is not int or n < 0:
             raise ValueError("Site multiplicity must be a nonnegative integer")
-        site_counts({site: 1}, index, domains)
+        site_counts({site: 1}, index, domains, interface_id)
     return {site: n for site, n in value.items() if n}
 
 
@@ -57,13 +58,16 @@ def register_sites(index, reaction, definitions, allowed):
         geometry = row.get("local_geometry")
         if row["surface_id"] not in reaction["surface_ids"] or not isinstance(geometry, str) or not geometry.strip():
             raise ValueError("Unlocated site or site outside the reaction domain")
-        if site in seen or (site in sites and any(sites[site].get(k) != row[k]
-                             for k in ("surface_id", "site_type", "local_geometry"))):
+        check_site_interface(row, reaction.get("interface_id"))
+        if site in sites:
+            check_site_interface(sites[site], reaction.get("interface_id"))
+        fields = ("surface_id", "site_type", "local_geometry") + (("interface_id",) if "interface_id" in row else ())
+        if site in seen or (site in sites and any(sites[site].get(k) != row[k] for k in fields)):
             raise ValueError(f"Conflicting site identity {site}")
         if row["site_type"] not in allowed[row["surface_id"]]:
             raise ValueError("Site type is outside the configured surface catalog")
         seen.add(site)
-        sites.setdefault(site, {k: row[k] for k in ("site_id", "surface_id", "site_type", "local_geometry")})
+        sites.setdefault(site, {k: row[k] for k in ("site_id", *fields)})
 
 
 def apply_review(index, proposal, decision, configuration=None):
@@ -98,10 +102,10 @@ def apply_review(index, proposal, decision, configuration=None):
         raise ValueError("Identify every participating species; use null for unknown occupancy")
     for sid, values in mapping["occupancies"].items():
         species = index["species"][sid]
-        occupied = counts(values, index, species["surface_ids"])
+        occupied = counts(values, index, species["surface_ids"], species.get("interface_id"))
         agreed(species, "site_occupancy", occupied)
     for field in ("sites_consumed", "sites_released"):
-        agreed(reaction, field, counts(mapping[field], index, reaction["surface_ids"]))
+        agreed(reaction, field, counts(mapping[field], index, reaction["surface_ids"], reaction.get("interface_id")))
     if mapping["reaction_type"] is not None:
         reaction["reaction_type"] = mapping["reaction_type"]
     agreed(reaction, "reversible", mapping["reversible"])

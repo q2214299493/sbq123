@@ -6,6 +6,7 @@ from pathlib import Path
 from scripts.artifact_io import sha256_bytes, sha256_file, sha256_json, write_json_exclusive
 from scripts.multiphase_contracts import _unique_keys
 from scripts.reaction_network.builder import build_network, from_registry_mapping
+from scripts.reaction_network.catalog import check_network_version, ownership_report
 
 
 def read_source(path, role, sources):
@@ -15,9 +16,7 @@ def read_source(path, role, sources):
 
 
 def publish(snapshot, directory):
-    digest = sha256_json({k: v for k, v in snapshot.items() if k != "network_version"})
-    if snapshot["network_version"] != digest:
-        raise ValueError("Network version digest mismatch")
+    digest = check_network_version(snapshot)
     directory.mkdir(parents=True, exist_ok=True)
     path = directory / f"network-{digest}.json"
     try:
@@ -41,6 +40,7 @@ def main():
     parser.add_argument("--site-proposal", type=Path, help="Site projections and mapping options bound to the parent version")
     parser.add_argument("--site-confirmation", type=Path, help="Researcher decision bound to the original site proposal")
     parser.add_argument("--site-catalog", type=Path, help="Project-specific allowed site types, keyed by surface ID")
+    parser.add_argument("--identity-report", type=Path, help="Write structural ownership and unresolved links without building a reaction network")
     parser.add_argument("--output-dir", type=Path, help="Write a content-addressed version; otherwise print the snapshot")
     args = parser.parse_args()
     sources = []
@@ -49,6 +49,13 @@ def main():
         if not args.project_id:
             parser.error("--project-id is required for this mapping")
         definition = from_registry_mapping(definition, args.project_id)
+    if args.identity_report:
+        if any((args.intake, args.thermochemistry, args.evidence, args.decision, args.ts_review, args.site_proposal,
+                args.site_confirmation, args.site_catalog, args.output_dir)):
+            parser.error("--identity-report accepts the source definition only")
+        report = ownership_report(definition)
+        write_json_exclusive(args.identity_report, {"source": sources[0], **report})
+        return
     intakes = [read_source(p, "intake", sources) for p in args.intake]
     thermal = [read_source(p, "thermochemistry", sources) for p in args.thermochemistry]
     decisions = [read_source(p, "network_review", sources) for p in args.decision]

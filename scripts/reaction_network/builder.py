@@ -73,7 +73,7 @@ def side(stoich, vacant, reaction, index):
 
 def balance(reaction, index, gaps):
     for key in ("sites_consumed", "sites_released", "required_sites"):
-        site_counts(reaction.get(key), index, reaction["surface_ids"])
+        site_counts(reaction.get(key), index, reaction["surface_ids"], reaction.get("interface_id"))
     left = side(reaction["reactants"], reaction.get("sites_consumed"), reaction, index)
     right = side(reaction["products"], reaction.get("sites_released"), reaction, index)
     for label, a, b in zip(("element", "charge", "site"), left, right, strict=True):
@@ -162,12 +162,19 @@ def structural_gaps(r, index):
     phases = check_context(r, index)
     if r["reaction_type"] not in TYPES or (r["reaction_type"] == "interfacial" and not r.get("interface_id")):
         raise ValueError("Invalid reaction classification/interface")
-    if r.get("phase_ids") is not None and set(r["phase_ids"]) != phases:
+    interface = index["interfaces"].get(r.get("interface_id"), {})
+    participants = set(interface.get("phase_ids") or [])
+    declared = r.get("phase_ids")
+    if declared is not None and (set(declared) - index["phases"].keys() or not (phases - {None}) <= set(declared)
+                                 or (None not in phases and set(declared) - (phases | participants))
+                                 or (participants and set(declared) - participants)):
         raise ValueError("Reaction phases differ from surface domains")
     gaps = []
     site_balance = balance(r, index, gaps)
     if None in phases:
         gaps.append("Catalyst phase unconfirmed")
+    if participants - phases:
+        gaps.append("Interface surface assignment incomplete")
     if not all(r.get(k) for k in ("initial_structure_id", "final_structure_id")):
         gaps.append("Endpoint structure reference missing")
     participants = r["reactants"].keys() | r["products"].keys()

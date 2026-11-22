@@ -9,6 +9,7 @@
     "schema_version": {"const": "1.0.0"},
     "site_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
     "surface_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "interface_id": {"anyOf": [{"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"}, {"type": "null"}]},
     "site_type": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
     "local_geometry": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"},
     "validation": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/validation"}

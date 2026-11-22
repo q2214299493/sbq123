@@ -8,17 +8,23 @@
     "schema_version",
     "surface_id",
     "phase_id",
-    "miller_indices",
     "termination",
     "defects",
     "structure_id",
     "structural_provenance",
     "validation"
   ],
+  "anyOf": [{"required": ["miller_indices"]}, {"required": ["surface_descriptor"]}],
   "properties": {
     "schema_version": {"const": "1.0.0"},
     "surface_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
     "phase_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "surface_descriptor": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"},
+    "coordinate_convention": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"},
+    "lattice_vectors_angstrom": {
+      "type": "array", "minItems": 2, "maxItems": 3,
+      "items": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "number"}}
+    },
     "miller_indices": {
       "type": "array",
       "minItems": 3,

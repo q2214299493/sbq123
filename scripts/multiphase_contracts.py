@@ -86,6 +86,60 @@ def _project_for_surface(index, surface_id):
     return _get(index, "materials", phase["material_id"])["project_id"]
 
 
+def interface_phase_ids(interface, index):
+    """Resolve only explicitly declared phases or owners of the named surfaces."""
+    surfaces = interface.get("surface_ids")
+    if surfaces is None:
+        surfaces = []
+    declared = interface.get("phase_ids")
+    if (not isinstance(surfaces, list) or any(not isinstance(key, str) for key in surfaces)
+            or len(set(surfaces)) != len(surfaces) or (declared is None and len(surfaces) < 2)):
+        raise ValueError("Invalid interface surface domains")
+    owners = {_get(index, "surfaces", sid).get("phase_id") for sid in surfaces}
+    if declared is None:
+        phases = owners
+    else:
+        if (not isinstance(declared, list) or any(not isinstance(key, str) for key in declared)
+                or len(set(declared)) != len(declared) or len(declared) < 2):
+            raise ValueError("An explicit interface needs at least two distinct phase IDs")
+        phases = set(declared)
+        if not (owners - {None}) <= phases:
+            raise ValueError("Interface phases contradict surface ownership")
+    projects = {_get(index, "materials", _get(index, "phases", pid)["material_id"])["project_id"]
+                for pid in phases if pid is not None}
+    if len(projects) > 1:
+        raise ValueError(f"{interface['interface_id']}: interface crosses projects")
+    return phases
+
+
+def matches_interface_surfaces(row, interface, index):
+    """Reaction domains cover the contact. A located species may occupy one side."""
+    surfaces = set(row["surface_ids"])
+    assigned = set(interface.get("surface_ids") or [])
+    if not surfaces or not surfaces <= assigned:
+        return False
+    if surfaces == assigned:
+        return True
+    if "species_id" not in row:
+        return False
+    return all(_get(index, "sites", site)["surface_id"] in surfaces for site in row.get("site_occupancy") or {})
+
+
+def check_site_interface(site, interface_id):
+    if site.get("interface_id") is not None and site["interface_id"] != interface_id:
+        raise ValueError(f"{site['site_id']}: site belongs to a different interface")
+
+
+def check_interface_ownership(index):
+    for interface in index["interfaces"].values():
+        interface_phase_ids(interface, index)
+    for site in index["sites"].values():
+        if site.get("interface_id") is not None:
+            interface = _get(index, "interfaces", site["interface_id"])
+            if site["surface_id"] not in (interface.get("surface_ids") or []):
+                raise ValueError(f"{site['site_id']}: site surface is not assigned to its interface")
+
+
 def _check_context(record, index):
     surfaces = set(record["surface_ids"])
     projects = {_project_for_surface(index, key) for key in surfaces}
@@ -94,7 +148,9 @@ def _check_context(record, index):
     interface_id = record["interface_id"]
     if interface_id is not None:
         interface = _get(index, "interfaces", interface_id)
-        if set(interface["surface_ids"]) != surfaces:
+        located = {_get(index, "surfaces", key)["phase_id"] for key in surfaces}
+        if (not matches_interface_surfaces(record, interface, index)
+                or ("species_id" not in record and interface_phase_ids(interface, index) != located)):
             raise ValueError("interface and surface context disagree")
     elif len(surfaces) > 1:
         raise ValueError("multi-surface context needs an interface")
@@ -108,11 +164,9 @@ def _check_catalog(index):
     ):
         for record in index[collection].values():
             _get(index, parent, record[field])
-    for interface in index["interfaces"].values():
-        if len({_project_for_surface(index, key) for key in interface["surface_ids"]}) != 1:
-            raise ValueError(f"{interface['interface_id']}: interface crosses projects")
+    check_interface_ownership(index)
     for surface in index["surfaces"].values():
-        indices = surface["miller_indices"]
+        indices = surface.get("miller_indices", [])
         if len(indices) == 4 and sum(indices[:3]) != 0:
             raise ValueError(f"{surface['surface_id']}: inconsistent Miller-Bravais indices")
     for species in index["species"].values():
@@ -120,7 +174,10 @@ def _check_catalog(index):
         materials = {_get(index, "phases", key)["material_id"] for key in phases}
         if set(species["material_ids"]) != materials:
             raise ValueError(f"{species['species_id']}: material/surface identity mismatch")
-        occupied = {_get(index, "sites", key)["surface_id"] for key in species["site_occupancy"]}
+        sites = [_get(index, "sites", key) for key in species["site_occupancy"]]
+        for site in sites:
+            check_site_interface(site, species["interface_id"])
+        occupied = {site["surface_id"] for site in sites}
         if occupied != set(species["surface_ids"]):
             raise ValueError(f"{species['species_id']}: occupied sites disagree with surface identity")
 
@@ -155,8 +212,10 @@ def _check_balance(reaction, index):
     for label, lhs, rhs in zip(("element", "charge", "site"), left, right, strict=True):
         if lhs != rhs:
             raise ValueError(f"{label} conservation failed: {lhs} != {rhs}")
-    for site in reaction["required_sites"]:
-        if _get(index, "sites", site)["surface_id"] not in reaction["surface_ids"]:
+    for site in reaction["required_sites"].keys() | reaction["sites_consumed"].keys() | reaction["sites_released"].keys():
+        row = _get(index, "sites", site)
+        check_site_interface(row, reaction["interface_id"])
+        if row["surface_id"] not in reaction["surface_ids"]:
             raise ValueError(f"{site}: required site outside reaction context")
     if not left[2] <= Counter(reaction["required_sites"]):
         raise ValueError("required sites do not cover the reaction footprint")

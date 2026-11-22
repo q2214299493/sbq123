@@ -81,4 +81,12 @@ Confirm physical site identities or define a site inventory with a documented ge
 
 A native project surface can declare its allowed `site_types` alongside its phase, facet and optional lattice metadata. Older definitions establish their local vocabulary through their existing site records. For a partial or extended catalog, supply `--site-catalog FILE` with the site review. This JSON declares `format: surface-site-types/1`, the exact `project_id` and a `surface_site_types` object mapping surface IDs to allowed names. The confirmation binds the file using `site_catalog_sha256`, computed with `scripts.artifact_io.sha256_json` on the parsed JSON. Keep a new configuration version when introducing a new type. Each interface site component resolves on its own surface. Geometry classification belongs to the source project. The generic builder consumes identities and counts without deriving centers from any particular lattice.
 
+### Read-only identity audit
+
+Use `--identity-report FILE` to inspect catalyst ownership before a reaction exists. Supply a single-project Phase 1 bundle, a `network-definition/1` or an immutable `reaction-network/1` snapshot. The command checks a snapshot's content version and binds the source file's SHA-256. It writes a new report once. Unknown owners, unassigned surfaces and missing structural provenance appear on the affected rows. An invalid declaration in this review view has no scientific or execution authority. Complete exchange and network validation retain their own entry points.
+
+```console
+python -m scripts.reaction_network tests/fixtures/multiphase/synthetic_identity_domains.json --identity-report ownership.json
+```
+
 For the Fe confirmation template also pass `--site-catalog reports/multiphase/phase2_3_1_fe110_site_types.json`. For an independent example, run `python -m scripts.reaction_network tests/fixtures/multiphase/synthetic_oxide_site_network.json`. This synthetic oblique oxide surface declares Lewis-acid and basic-oxygen inventories and binds one molecule across both.

@@ -106,9 +106,9 @@ def footprint_evidence(species, observation, inventory, *, localize_conflicts):
     domains = species["surface_ids"]
     sid = species["species_id"]
     catalog = {"sites": inventory}
-    footprint = counts(species["site_occupancy"], catalog, domains)
+    footprint = counts(species["site_occupancy"], catalog, domains, species.get("interface_id"))
     if "site_occupancy" in observation:
-        repeated = counts(observation["site_occupancy"], catalog, domains)
+        repeated = counts(observation["site_occupancy"], catalog, domains, species.get("interface_id"))
         if repeated != footprint:
             if not localize_conflicts:
                 raise ValueError(f"{sid}: observed occupancy conflicts with network")
@@ -117,7 +117,8 @@ def footprint_evidence(species, observation, inventory, *, localize_conflicts):
                 agreed = {q: n for q, n in footprint.items() if q not in disputed}
                 return None, agreed, disputed, [f"{sid}: conflicting multiplicity on {sorted(disputed)}"]
     if footprint is None:
-        possible = {q for q, desc in inventory.items() if not domains or desc["surface_id"] in domains}
+        possible = {q for q, desc in inventory.items() if (not domains or desc["surface_id"] in domains)
+                    and desc.get("interface_id") in (None, species.get("interface_id"))}
         return None, {}, possible, [f"{sid}: site_occupancy on {domains}"]
     return footprint, footprint, set(), []
 
@@ -248,7 +249,8 @@ def vacancy_requirements(network, sites):
             # Unknown orders remain explicit even if a particular site has vacancies.
             relevant = set(reaction.get("required_sites") or {}) | set(orders or {})
             if orders is None:
-                relevant.update(s for s, v in sites.items() if v["surface_id"] in reaction["surface_ids"])
+                relevant.update(s for s, v in sites.items() if v["surface_id"] in reaction["surface_ids"]
+                                and v.get("interface_id") in (None, reaction.get("interface_id")))
             for site in sorted(relevant):
                 order = orders.get(site, 0) if orders is not None else None
                 vacant = sites[site]["vacancy_fraction"]
@@ -282,7 +284,7 @@ def molecular_analysis(network, result, observed, measured, inventory, surfaces)
         if obs.get("phase", "surface") != "surface":
             raise ValueError(f"{sid}: observed phase differs")
         molecule, shares = molecular_row(species, obs, references, inventory, count_reference=reference, conflicts=conflicts)
-        molecule["phase_ids"] = list(dict.fromkeys(surfaces[s]["phase_id"] for s in species["surface_ids"]))
+        molecule["phase_ids"] = list(dict.fromkeys(surfaces[s].get("phase_id") for s in species["surface_ids"]))
         molecules.append(molecule)
         for site, share in shares.items():
             contributions[site][sid] = share
@@ -290,12 +292,14 @@ def molecular_analysis(network, result, observed, measured, inventory, surfaces)
     for site, desc in inventory.items():
         surface = desc["surface_id"]
         sites[site] = dict(
-            phase_id=surfaces[surface]["phase_id"],
+            phase_id=surfaces[surface].get("phase_id"),
             surface_id=surface,
             site_type=desc["site_type"],
             **inventory_balance(site, contributions[site], {} if site in conflicts else measured.get(site, {}),
                                 conflicted=site in conflicts),
         )
+        if desc.get("interface_id") is not None:
+            sites[site]["interface_id"] = desc["interface_id"]
         if reference is not None:
             sites[site]["site_counts"] = inventory_amounts(
                 site, reference, capacities.get(site), contributions[site], measured.get(site, {}), conflicts.get(site)
