@@ -1,0 +1,229 @@
+{
+  "dataset_id": "synthetic_oxide_zacros_control_v1",
+  "plan_sha256": "2c0a012270fec9a6a11e52411c9993742fe6ffc3017db333857fbc4c2dd1b7d8",
+  "benchmark_scope": "synthetic_native_software_validation_only",
+  "native_initialization": "failed",
+  "launches": 1,
+  "retries": 0,
+  "approval_state": "consumed",
+  "version_banner": "ZACROS 4.0",
+  "reported_parallelism": "Serial run (no parallelism).",
+  "process_exit_code": 0,
+  "normal_termination": false,
+  "fatal": {
+    "code": 1002,
+    "module": "simulation_parser_module",
+    "file": "simulation_input.dat",
+    "line": 2,
+    "expression": "temperature 400",
+    "stage": "reading_simulation_input",
+    "evidence": "raw_native.zip!/native_run/general_output.txt"
+  },
+  "reader_acceptance": [
+    {
+      "reader": "simulation",
+      "status": "rejected",
+      "accepted": false,
+      "finished_reading_marker_observed": false
+    },
+    {
+      "reader": "lattice",
+      "status": "not_reached",
+      "accepted": null,
+      "finished_reading_marker_observed": false
+    },
+    {
+      "reader": "energetics",
+      "status": "not_reached",
+      "accepted": null,
+      "finished_reading_marker_observed": false
+    },
+    {
+      "reader": "mechanism",
+      "status": "not_reached",
+      "accepted": null,
+      "finished_reading_marker_observed": false
+    },
+    {
+      "reader": "initial state",
+      "status": "not_reached",
+      "accepted": null,
+      "finished_reading_marker_observed": false
+    }
+  ],
+  "propagation": {
+    "authorized_max_steps": 0,
+    "stdout_acknowledged_max_steps": 0,
+    "observed_final_event_count": null,
+    "event_loop_reached": false,
+    "any_event_propagated": false,
+    "basis": "Fatal simulation reader return before state setup, catalogue construction and event loop; native terminal event counter never written."
+  },
+  "initial_molecular_entities": {
+    "expected": 2,
+    "observed": null
+  },
+  "restart": {
+    "file": "restart.inf",
+    "produced": false,
+    "ledger_readable": null,
+    "bindings_by_site": [
+      {
+        "site": 1,
+        "expected_site_type": "acidA",
+        "expected_molecule": "bridge-1",
+        "expected_bound_leg": 1,
+        "native_entity_id": null,
+        "native_species_id": null,
+        "native_leg_id": null
+      },
+      {
+        "site": 2,
+        "expected_site_type": "acidA",
+        "expected_molecule": "bridge-2",
+        "expected_bound_leg": 1,
+        "native_entity_id": null,
+        "native_species_id": null,
+        "native_leg_id": null
+      },
+      {
+        "site": 3,
+        "expected_site_type": "acidA",
+        "expected_molecule": null,
+        "expected_bound_leg": null,
+        "native_entity_id": null,
+        "native_species_id": null,
+        "native_leg_id": null
+      },
+      {
+        "site": 4,
+        "expected_site_type": "acidA",
+        "expected_molecule": null,
+        "expected_bound_leg": null,
+        "native_entity_id": null,
+        "native_species_id": null,
+        "native_leg_id": null
+      },
+      {
+        "site": 5,
+        "expected_site_type": "oxygenB",
+        "expected_molecule": "bridge-1",
+        "expected_bound_leg": 2,
+        "native_entity_id": null,
+        "native_species_id": null,
+        "native_leg_id": null
+      },
+      {
+        "site": 6,
+        "expected_site_type": "oxygenB",
+        "expected_molecule": "bridge-2",
+        "expected_bound_leg": 2,
+        "native_entity_id": null,
+        "native_species_id": null,
+        "native_leg_id": null
+      },
+      {
+        "site": 7,
+        "expected_site_type": "oxygenB",
+        "expected_molecule": null,
+        "expected_bound_leg": null,
+        "native_entity_id": null,
+        "native_species_id": null,
+        "native_leg_id": null
+      }
+    ]
+  },
+  "initial_catalogue": {
+    "file": "process_debug.txt",
+    "produced": false,
+    "expected_adsorption": [
+      [
+        3,
+        7
+      ],
+      [
+        4,
+        7
+      ]
+    ],
+    "expected_desorption": [
+      [
+        1,
+        5
+      ],
+      [
+        2,
+        6
+      ]
+    ],
+    "observed_adsorption": null,
+    "observed_desorption": null,
+    "forbidden_match": [
+      2,
+      5
+    ],
+    "forbidden_match_absence_verified": null
+  },
+  "site_inventories": {
+    "reference": {
+      "ordered_seeds": [
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          6
+        ]
+      ],
+      "capacity": {
+        "acidA": 4,
+        "oxygenB": 3
+      },
+      "occupied": {
+        "acidA": 2,
+        "oxygenB": 2
+      },
+      "vacancies": {
+        "acidA": 2,
+        "oxygenB": 1
+      },
+      "occupied_fractions": {
+        "acidA": "2/4",
+        "oxygenB": "2/3"
+      },
+      "vacancy_fractions": {
+        "acidA": "2/4",
+        "oxygenB": "1/3"
+      },
+      "molecules": 2,
+      "lattice_energy_eV": -0.8
+    },
+    "observed": null
+  },
+  "numerical_agreement": {
+    "status": "not_evaluable",
+    "reference": "../numerical_reference.json",
+    "directions": {
+      "adsorption": {
+        "expected_propensity_per_match_s_inv": 5496.127439421695,
+        "expected_summed_propensity_s_inv": 10992.25487884339,
+        "native_propensity_per_match_s_inv": null,
+        "native_summed_propensity_s_inv": null,
+        "relative_error": null
+      },
+      "desorption": {
+        "expected_propensity_per_match_s_inv": 5015150.50841929,
+        "expected_summed_propensity_s_inv": 10030301.01683858,
+        "native_propensity_per_match_s_inv": null,
+        "native_summed_propensity_s_inv": null,
+        "relative_error": null
+      }
+    },
+    "expected_initial_energy_eV": -0.8,
+    "native_initial_energy_eV": null,
+    "absolute_energy_error_eV": null
+  },
+  "scientific_acceptance": "not_assessed",
+  "next_execution_authorized": false
+}

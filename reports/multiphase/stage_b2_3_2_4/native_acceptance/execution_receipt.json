@@ -1,0 +1,65 @@
+{
+  "dataset_id": "synthetic_oxide_zacros_control_v1",
+  "baseline": "335008915ebcb227cc5012054df105a2e0ac4404",
+  "branch": "codex/multiphase-phase0-integration",
+  "stage": "native_initialization",
+  "plan_sha256": "2c0a012270fec9a6a11e52411c9993742fe6ffc3017db333857fbc4c2dd1b7d8",
+  "approval_sha256": "8ab9ff958de76f25055bf6a6d40b98cc3aee385728b35770d04927010e0d6108",
+  "approval_source_sha256": "c74dc5411b0c7bd479036296e35eddcd90734563650552f14f77bee97adc2cd3",
+  "consumed_claim_sha256": "3e92050bcf94d08c999c6e0296b8e5bec11644426a069020eac4b3993287f699",
+  "gate_action": "allow_zacros_zero_event_initialization",
+  "gate_accepted": true,
+  "already_consumed_before_claim": false,
+  "output_directory_new_and_empty_before_staging": true,
+  "published_manifest_sha256": "023b40ad208b77a8028d9e03e2131fdc53bd34c2f88f09cdcf2fe19c39f0c285",
+  "staged_input_sha256": {
+    "energetics_input.dat": "5134423fd6b95f5df5abf69def11d00377299ed37ab2acfbcf8cc94b8cc16f53",
+    "lattice_input.dat": "cf3180a01f35ad18e0040b0923c49f4cd255e347b9251cca63809abb2354a734",
+    "mechanism_input.dat": "e28bef2b2005696572baab1f76c474a5b2d0005e57688364be735df4667a1bb6",
+    "simulation_input.dat": "4e2936fe930c1ed30b0b4301e515f5e5ee4155184776a649a28a03b48f447b27",
+    "state_input.dat": "b31141eaf314f5f9a6f64cf6d17d1f0ba426c2888b20ca45b05d53144fff7ff0"
+  },
+  "binary_sha256": "84a8f88d6df633eeea9eeac8aa9227237cdf2564a4dc72e0cab8a18c4ce119d2",
+  "command": [
+    "D:\\Zacros4.0\\bin\\Zacros.exe",
+    "--max_steps=0",
+    "--wall_time=15"
+  ],
+  "environment_overrides": {
+    "OMP_NUM_THREADS": "1"
+  },
+  "bound_limits": {
+    "max_steps": 0,
+    "native_wall_seconds": 15,
+    "external_timeout_seconds": 30,
+    "maximum_processes": 1,
+    "maximum_threads": 1,
+    "retries": 0
+  },
+  "cwd": "D:\\Zacros4.0\\work\\sbq123_zero_event\\2c0a012270fec9a6a11e52411c9993742fe6ffc3017db333857fbc4c2dd1b7d8\\native_run",
+  "started_utc": "2026-11-22T08:49:21.470453+00:00",
+  "pid": 31020,
+  "exit_code": 0,
+  "timed_out": false,
+  "launch_count": 1,
+  "retry_count": 0,
+  "runtime_seconds": 0.667833999999857,
+  "finished_utc": "2026-11-22T08:49:22.138951+00:00",
+  "input_files_intact_after_exit": true,
+  "output_files": {
+    "general_output.txt": {
+      "sha256": "ab01da2e1302218482cf83b2dc5c17e58b133a2fd3a97116abfc6f576fd348ec",
+      "size_bytes": 1366
+    }
+  },
+  "console_files": {
+    "stdout.log": {
+      "sha256": "1e3dca9f4022b7173e3f011626a4d246db0a7148b4d112b6c71b1934aee7bd61",
+      "size_bytes": 121
+    },
+    "stderr.log": {
+      "sha256": "a30d03ece140b0a11feecb2f6b128b5de1293705b7b51c3cab5764531140f521",
+      "size_bytes": 62
+    }
+  }
+}

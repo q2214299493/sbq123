@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "event_id": "history-stage-b2-3-2-4-oxide-native-init-failed-20261122",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-stage-b2-3-2-4-oxide-native-init-failed-20261122",
+    "module": "surface_kmc"
+  },
+  "occurred_at": "2026-11-22T08:53:23.362523+00:00",
+  "recorded_at": "2026-11-22T08:53:23.362523+00:00",
+  "summary": "Record the consumed one-use oxide initialization and native simulation-reader rejection.",
+  "payload": {
+    "markdown": "- Stage B.2.3.2.4 native attempt used the exact approved 4.0 input once. Zacros returned 0 but emitted fatal simulation parser error 1002 on line 2 (temperature 400). State loading, process catalogue and restart ledger were never reached. No propagation, retry or remaining execution authority. Raw output and both streams are preserved. Both worktrees passed 701 focused offline regressions (8 native replays excluded). See reports/multiphase/stage_b2_3_2_4/native_acceptance/native_acceptance.md."
+  },
+  "evidence": [
+    {
+      "locator": "reports/multiphase/stage_b2_3_2_4/native_acceptance/execution_approval.json",
+      "sha256": "8ab9ff958de76f25055bf6a6d40b98cc3aee385728b35770d04927010e0d6108",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T08:53:23.362523+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b2_3_2_4/native_acceptance/execution_receipt.json",
+      "sha256": "fdf1fa59f76a8e09c6ecea6aee48f1dadacf0ce513d979936e08f2fbb5a6ae16",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T08:53:23.362523+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b2_3_2_4/native_acceptance/consumed.json",
+      "sha256": "3e92050bcf94d08c999c6e0296b8e5bec11644426a069020eac4b3993287f699",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T08:53:23.362523+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b2_3_2_4/native_acceptance/io_manifest.json",
+      "sha256": "efa33abe18115fdd39b85c6483821943d26163612688b4297948ff89211780af",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T08:53:23.362523+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b2_3_2_4/native_acceptance/validation.json",
+      "sha256": "3f104f563db479c90f45f80b494b7b2abe348dc53cb6216d126591fe65b133ce",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T08:53:23.362523+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b2_3_2_4/native_acceptance/native_acceptance.md",
+      "sha256": "089e745784ddfd3bf6d0fdcca87ee4dd664a7b3e4bd2eeb64533660a49646142",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T08:53:23.362523+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b2_3_2_4/native_acceptance/regression.md",
+      "sha256": "01739797cb6212ce516358365c91c76f146996aa38c79ccb22474bf60973721d",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T08:53:23.362523+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}
