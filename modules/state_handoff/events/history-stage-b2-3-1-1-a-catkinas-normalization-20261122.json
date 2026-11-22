@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "event_id": "history-stage-b2-3-1-1-a-catkinas-normalization-20261122",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-stage-b2-3-1-1-a-catkinas-normalization-20261122",
+    "module": "baseline_mkm"
+  },
+  "occurred_at": "2026-11-22T07:09:12.525739+00:00",
+  "recorded_at": "2026-11-22T07:09:12.525739+00:00",
+  "summary": "Record the CATKINAS multidentate coverage denominator audit for unequal site capacities.",
+  "payload": {
+    "markdown": "- Stage B.2.3.1.1-A verified the vendor multisite notation and derived the 4:3 vacancy coefficients for one molecular population. The build-specific coverage denominator and both native vacancy balances for this bridge remain unverified. Native execution is blocked before input generation. Both Windows trees passed 54 offline regression tests each. See reports/multiphase/stage_b2_3_1_1_a/normalization_analysis.md."
+  },
+  "evidence": [
+    {
+      "locator": "reports/multiphase/stage_b2_3_1_1_a/normalization_analysis.md",
+      "sha256": "90b791ad12b162a715adfbb2ea1ed65b8165515be2b153092251bd5e751c4faa",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T07:09:12.525739+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b2_3_1_1_a/vendor_evidence.json",
+      "sha256": "5aab132a476910cecf8f4fa3921132fa124903cbba9a0314a8a96e4bdf350f34",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T07:09:12.525739+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b2_3_1_1_a/execution_readiness.json",
+      "sha256": "166b14c8c513b0e94afa994938e3a66b9eab89bdd46c71f7e40c3b2c2eea1c72",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T07:09:12.525739+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "stage": "B.2.3.1.1-A",
+  "source_baseline": "cc44dfe84fa32fa10e47e1854ffeed99cc38d572",
+  "case": "synthetic-oxide-CO2",
+  "target": "Q1x2_CO2",
+  "previous_review": {
+    "path": "reports/multiphase/stage_b2_3_1_1/execution_readiness.json",
+    "sha256": "4b607b15675287ada4e4f87c53880ec406e32cfc86d50c588f856439f86e72fb"
+  },
+  "classification": {
+    "vendor_multisite_symbol": "documented",
+    "vendor_single_population_unequal_capacity": "unverified",
+    "vendor_separate_vacancy_balances_for_target": "unverified",
+    "repository_adapter_representation": "unsupported",
+    "native_input_generation": "blocked_before_native_input",
+    "native_parser": "not_run",
+    "native_solver": "not_run",
+    "independent_native_agreement": "not_evaluable",
+    "scientific_acceptance": "not_assessed"
+  },
+  "structural_control": {
+    "reference": "oxide-counting-cell",
+    "species": "co2-bound",
+    "molecules_per_reference": 2,
+    "capacity": {
+      "acid-A": 4,
+      "oxygen-B": 3
+    },
+    "footprint_per_molecule": {
+      "acid-A": 1,
+      "oxygen-B": 1
+    },
+    "vacancy_fractions": {
+      "acid-A": "1/2",
+      "oxygen-B": "1/3"
+    },
+    "origin": "B.2.1 finite synthetic count observation; candidate snapshot only."
+  },
+  "coverage_mapping": {
+    "molecular_denominator": null,
+    "units": null,
+    "native_capacity_ratio_input": null,
+    "capacity_weighted_native_equations": null,
+    "eligible_pair_count": null,
+    "required": "A build-matched vendor definition or worked example identifying the bridge symbol, its molecular basis, how the input specifies unequal capacities, and how its one population enters each separate vacancy balance. Pair adjacency is needed only for an explicit pair-count model."
+  },
+  "operating_conditions": {
+    "temperature_K": null,
+    "CO2_partial_pressure_bar": null,
+    "vendor_gas_standard_pressure_bar": 1,
+    "required": "Supply the intended positive temperature and reservoir partial pressure or a defined gas feed/initial state. The manual uses P/P0 with P0 = 0.1 MPa. No oxide feed is specified."
+  },
+  "activities": {
+    "gas_activity": null,
+    "bound_activity_definition": null,
+    "vacancy_or_pair_activity_definition": null,
+    "surface_standard_state": null,
+    "required": "Specify gas activity at the selected conditions, molecular surface reference, vacancy or joint-pair activity and any configurational factors. State whether vacancy fractions factorize and where the pair multiplicity enters the rate law."
+  },
+  "kinetics": {
+    "k_forward": null,
+    "k_reverse": null,
+    "k_forward_units": null,
+    "k_reverse_units": null,
+    "rate_denominator": null,
+    "required": "Provide both coefficients on a common reaction-progress basis at the chosen temperature or a reviewed equivalent parameterization from which both can be derived. State time, pressure or dimensionless activity dependence, and extent per cell, site or pair. Include area or density only if the chosen parameterization needs it."
+  },
+  "detailed_balance": {
+    "source_reversibility": null,
+    "proposed_model": "reversible adsorption/desorption exchange for software validation",
+    "equilibrium_constant": null,
+    "standard_reaction_Gibbs_energy": null,
+    "residual": null,
+    "required": "Supply independent K°(T), standard reaction Gibbs energy, or equivalent equilibrium evidence on compatible activities and standard states. Convert directional coefficient units and any pair/configurational factors before comparing the ratio."
+  },
+  "initial_conditions": {
+    "native_Q1x2_CO2_INIT": null,
+    "native_Q1_v_and_Q2_v_confirmed": null,
+    "gas_boundary_mode": null,
+    "native_gas_initial_or_fixed_value": null,
+    "required": "Select the physical starting state and gas boundary condition. The offline oxide snapshot suggests vacancy fractions 1/2 and 1/3. Bind all native initial values to the documented coverage convention and native constraints; the template does not establish parser acceptance."
+  },
+  "execution": {
+    "status": "blocked_before_native_input",
+    "native_input_sha256": null,
+    "execution_plan": null,
+    "approval_request": null,
+    "execution_authorized": false,
+    "native_attempts": 0,
+    "new_outputs": [],
+    "further_dependency": "For a numerical trial, also verify that the native solver supports the proposed equilibrium exchange or supply an independently justified closed model. Any trial requires its own reviewed input and separate approval."
+  }
+}
