@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "event_id": "history-stage-r2-2-safe-only-20261122",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-stage-r2-2-safe-only-20261122",
+    "module": "state_handoff"
+  },
+  "occurred_at": "2026-11-22T09:33:00.146079+00:00",
+  "recorded_at": "2026-11-22T09:33:00.146079+00:00",
+  "summary": "Record R.2.2 read-only safe sync on the integrated R.2.1 history.",
+  "payload": {
+    "markdown": "- R.2.2 repaired R1-003 on production plus R.2.1. Flagged sync previews without caching, approving, reusing Registry/Excel receipts or applying. Separate explicit apply and authorized unflagged sync passed temporary-store tests. Development and publication each passed 694 focused offline tests. The historical compaction source mismatch and transition_state_search module-map drift remain open. See reports/architecture_repair/stage_r2_2/completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "reports/architecture_repair/stage_r2_2/completion.md",
+      "sha256": "6ade7e152acb870593d6c55ae698aa968c801b88ac35f9aa024ed58e0c8fe63b",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T09:33:00.146079+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}
