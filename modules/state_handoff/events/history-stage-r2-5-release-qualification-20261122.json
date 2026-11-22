@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "event_id": "history-stage-r2-5-release-qualification-20261122",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-stage-r2-5-release-qualification-20261122",
+    "module": "kinetic_data"
+  },
+  "occurred_at": "2026-11-22T10:22:44.635685+00:00",
+  "recorded_at": "2026-11-22T10:22:44.635685+00:00",
+  "summary": "Record the integrated R.2 repair qualification and its historical Linux exception.",
+  "payload": {
+    "markdown": "- R.2.5 qualified the integrated R.2.1–R.2.4 implementation at e944ee7f. The readiness report now binds the updated safe-only tests. Windows completed the full offline suite, and Linux reproduced its existing DRC pilot-plan identifier mismatch. All eight required groups passed their offline checks. Ten archived rate outputs and both qualification records matched byte-for-byte. See reports/architecture_repair/stage_r2_5/completion.md for counts, hashes and the failure matrix."
+  },
+  "evidence": [
+    {
+      "locator": "reports/architecture_repair/stage_r2_5/completion.md",
+      "sha256": "09b466ce16dabea2bc3c114dbf78b34cdd45a1a55903d9a6e33f8be1d11fbe8c",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T10:22:44.635685+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}
