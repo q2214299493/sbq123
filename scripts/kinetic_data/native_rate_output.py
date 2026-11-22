@@ -2,6 +2,7 @@
 from pathlib import Path
 
 from scripts.artifact_io import sha256_file, sha256_json
+from scripts.kinetic_data.network_binding import validate_bound_rows
 from scripts.kinetic_parameters.engine import check_version
 from scripts.kinetic_parameters.rate_units import convert_unit
 from scripts.rate_output_v2 import generate_source_terms, validate_rate_output_v2
@@ -31,8 +32,8 @@ def build_output(dataset, network, *, engine, run_id, conditions, basis, inputs,
         rid = model["reaction_id"]
         parameter = model["parameter_set"]["parameter_set_id"]
         entry = definitions[rid]
-        require(parameter in entry["parameter_set_ids"] and model["direction"] == entry["direction"],
-                f"Parameter or stoichiometry differs for {rid}")
+        require(model["direction"] == entry["direction"],
+                f"Model direction differs from network for {rid}")
         rows.append(dict(reaction_id=rid, parameter_set_id=parameter, **model["direction"]["forward"], **observations[rid]))
     require(set(observations) == {r["reaction_id"] for r in rows}, "Native and modeled reaction inventories differ")
     scope = {k: dataset[k] for k in ("project_id", "network_version")}
@@ -46,6 +47,7 @@ def build_output(dataset, network, *, engine, run_id, conditions, basis, inputs,
         output["rate_coefficients"] = coefficients
     output["output_binding"]["dataset_id"] = "rates-" + sha256_json(output)
     validate_rate_output_v2(output, network=network)
+    validate_bound_rows(output, network, reaction_ids=[r["reaction_id"] for r in dataset["reactions"]])
     return output
 
 

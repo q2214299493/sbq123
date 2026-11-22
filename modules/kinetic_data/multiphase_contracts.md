@@ -143,3 +143,25 @@ For archived native observations, use the independent [CATKINAS and Zacros resul
 [Output schema](../../configs/kinetics/rate_output_v2.schema.json) ·
 [Source-term schema](../../configs/kinetics/rate_source_terms_v2.schema.json) ·
 [Synthetic two-inventory example](../../tests/fixtures/multiphase/rate_output_v2.json)
+
+## V2.1 verification against a network artifact
+
+Use `python -m scripts.rate_output_v2 OUTPUT --qualified-network NETWORK` for the complete network.
+To validate a specific study subset, repeat `--reaction-id ID` for every expected reaction.
+Supply that selection from the study plan. The Python entry point is
+`validate_network_bound_rate_output(payload, network_path, reaction_ids=None)`.
+
+The validator compares the exact file digest and canonical network version, then checks the reaction
+definition, parameter ownership and direction, signed species and vacancy maps, and exact subset.
+Reaction type, phases and interface come from the identified definition. V2.1 carries one
+reaction ID and the forward-oriented maps in each row. The existing signed-progress rule
+checks the forward and reverse measurements on that orientation. Missing observations retain
+their null value and an excluded direction retains its explicit marker. Output binding must
+identify the run and dataset. The validator recomputes the native producer's `rates-` content ID
+when present. Other IDs are opaque and require a producer receipt to authenticate.
+Scientific acceptance and independent measurement verification remain with the result owner.
+
+For shape and arithmetic use `validate_rate_output_v2(payload)` or omit the CLI network options.
+The existing API keyword `network=` and CLI option `--network` retain their site-catalog
+semantics. The explicit CLI alias is `--catalog-network`. Catalog validation alone does
+not establish reaction membership. V2.0 remains available through the network-free entry point.

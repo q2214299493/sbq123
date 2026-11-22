@@ -43,8 +43,12 @@ def _unique_keys(pairs):
     return result
 
 
+def decode_unique_json(raw):
+    return json.loads(raw, object_pairs_hook=_unique_keys)
+
+
 def read_unique_json(path):
-    return json.loads(path.read_bytes(), object_pairs_hook=_unique_keys)
+    return decode_unique_json(path.read_bytes())
 
 
 def _check_finite(value, path="$"):

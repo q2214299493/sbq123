@@ -8,7 +8,8 @@ from pathlib import Path
 from jsonschema import Draft202012Validator
 from referencing import Registry, Resource
 
-from scripts.artifact_io import sha256_file
+from scripts.artifact_io import sha256_bytes, sha256_file, sha256_json
+from scripts.kinetic_data.network_binding import validate_bound_rows
 from scripts.kinetic_data.stoichiometric_sources import finite_sum as _sum
 from scripts.kinetic_data.stoichiometric_sources import generate_source_terms as generate_source_terms
 from scripts.kinetic_data.stoichiometric_sources import indexed as _index
@@ -18,7 +19,7 @@ from scripts.kinetic_parameters.engine import check_version
 from scripts.kinetic_parameters.rate_normalization import basis_identity as basis_identity
 from scripts.kinetic_parameters.rate_normalization import convert_checked_rate, denominator_scale
 from scripts.kinetic_parameters.rate_units import convert_coefficient
-from scripts.multiphase_contracts import _check_finite, read_unique_json
+from scripts.multiphase_contracts import _check_finite, decode_unique_json, read_unique_json
 from scripts.runtime_resources import resource_path
 
 
@@ -117,7 +118,7 @@ def convert_native_rate(value, quantity_kind, source_basis, target_basis, *, evi
 
 
 def validate_rate_output_v2(payload, *, network=None):
-    """Validate the explicitly selected V2 revision without resolving artifact paths."""
+    """Validate the explicitly selected V2 revision without resolving artifact paths. network is a legacy site catalog only."""
     version = payload.get("schema_version") if isinstance(payload, dict) else None
     if version not in ("2.0.0", "2.1.0"):
         raise ValueError("schema_version must explicitly select 2.0.0 or 2.1.0")
@@ -154,20 +155,51 @@ def validate_rate_output_v2(payload, *, network=None):
                 raise ValueError(f"source_terms.{group}.{identity}: inconsistent source rate")
 
 
+def validate_network_bound_rate_output(payload, network_path, *, reaction_ids=None):
+    """Qualify a V2.1 record against exact network bytes and an optional explicit subset."""
+    if not isinstance(payload, dict) or payload.get("schema_version") != "2.1.0" or network_path is None:
+        raise ValueError("Network qualification requires V2.1 and a network artifact")
+    raw = Path(network_path).read_bytes()
+    network = decode_unique_json(raw)
+    if not isinstance(network, dict):
+        raise ValueError("Expected a network object")
+    validate_rate_output_v2(payload, network=network)
+    if sha256_bytes(raw) != payload["provenance"]["network"]["sha256"]:
+        raise ValueError("Network artifact SHA-256 differs from the rate output provenance")
+    validate_bound_rows(payload, network, reaction_ids)
+    binding = payload.get("output_binding")
+    if not binding:
+        raise ValueError("Network qualification requires output dataset and run identity")
+    if binding["dataset_id"].startswith("rates-"):
+        unsigned = {key: value for key, value in binding.items() if key != "dataset_id"}
+        if binding["dataset_id"] != "rates-" + sha256_json(dict(payload, output_binding=unsigned)):
+            raise ValueError("Rate output dataset identity differs from its content")
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output", type=Path, help="path to a kinetic-rate-output/2 JSON document")
-    parser.add_argument("--network", type=Path, help="verify the declared 2.1 inventory against this network artifact")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--catalog-network", "--network", dest="network", type=Path, help="legacy 2.1 site-catalog check")
+    mode.add_argument("--qualified-network", type=Path, help="bind every rate row to this exact network artifact")
+    parser.add_argument("--reaction-id", action="append", help="expected reaction in a qualified subset (repeatable)")
     args = parser.parse_args(argv)
     try:
         payload = read_unique_json(args.output)
+        if args.reaction_id and not args.qualified_network:
+            parser.error("--reaction-id requires --qualified-network")
+        if args.qualified_network:
+            validate_network_bound_rate_output(payload, args.qualified_network, reaction_ids=args.reaction_id)
+            print("Network-qualified V2.1 rate output")
+            return 0
         network = read_unique_json(args.network) if args.network else None
         validate_rate_output_v2(payload, network=network)
         if args.network and sha256_file(args.network) != payload["provenance"]["network"]["sha256"]:
             raise ValueError("Network artifact SHA-256 differs from the rate output provenance")
     except (ValueError, OSError, RuntimeError, OverflowError) as exc:
         parser.exit(1, f"Invalid V2 kinetic rate output: {exc}\n")
-    print(f"Kinetic rate output conforms to {payload['schema_version']}")
+    scope = "site catalog" if args.network else "shape and arithmetic"
+    print(f"Kinetic rate output conforms to {payload['schema_version']} ({scope})")
     return 0
 
 
