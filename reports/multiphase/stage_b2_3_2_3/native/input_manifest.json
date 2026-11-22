@@ -1,0 +1,43 @@
+{
+  "format": "zacros-4.0-bridge-structural-candidate/1",
+  "native_run_eligible": false,
+  "graph_sha256": "77d0f2fe9ab30743eec527bf412c4f35ed0097dc66fb9514ae0bb541673d0fea",
+  "mapping_sha256": "bb0f706fefc969bdf67a5fa44b2c21f8f61ed2e09f1778a76d6b1b6d342e0971",
+  "sources": {
+    "definition": {
+      "path": "tests/fixtures/multiphase/synthetic_oxide_site_network.json",
+      "sha256": "24d5c34d33ec332a131e5f957dcb83ff4816e29c5d4c6ba05c47c854d87c6aa2"
+    },
+    "observation": {
+      "path": "reports/multiphase/stage_b2_1/oxide_observations.json",
+      "sha256": "49d84e1cddf511eeb232002dcb87833c312826a8165d02abf644469b47289d0b"
+    }
+  },
+  "source_reversible": null,
+  "ordered_seed_nodes_by_entity": {
+    "bridge-1": [
+      1,
+      5
+    ],
+    "bridge-2": [
+      2,
+      6
+    ]
+  },
+  "complete_native_members": [
+    "lattice_input.dat",
+    "state_input.dat"
+  ],
+  "templates_require_binding": [
+    "energetics_input.dat.in",
+    "mechanism_input.dat.in",
+    "simulation_input.dat.in"
+  ],
+  "files_sha256": {
+    "energetics_input.dat.in": "6b0ee910d937af9a3b96759f659708e3723152a113861f7d5261ed29ec7c5091",
+    "lattice_input.dat": "cf3180a01f35ad18e0040b0923c49f4cd255e347b9251cca63809abb2354a734",
+    "mechanism_input.dat.in": "b30181cd3374a1d7185cf46a18d3268254f30b394dd758fd88810a48320a24ee",
+    "simulation_input.dat.in": "5080cf96d9614bb78a022996f4bdcb810831f4a4e7183c6fc0cea88fb69ce4d1",
+    "state_input.dat": "b31141eaf314f5f9a6f64cf6d17d1f0ba426c2888b20ca45b05d53144fff7ff0"
+  }
+}

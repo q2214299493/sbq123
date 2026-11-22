@@ -1,0 +1,167 @@
+{
+  "stage": "B.2.3.2.3",
+  "baseline": "4620d43088504db4288bdf0bb09127ad8eaa8203",
+  "scope": "Synthetic oxide graph, serial Windows Zacros 4.0",
+  "structural_manifest": {
+    "path": "native/input_manifest.json",
+    "sha256": "01f93bb5ed6d6b1dc9e422a9ef90e554558e57862a1713b53469eae94ed3cdae"
+  },
+  "engine": {
+    "version": "4.0",
+    "path": "D:/Zacros4.0/bin/Zacros.exe",
+    "sha256": "84a8f88d6df633eeea9eeac8aa9227237cdf2564a4dc72e0cab8a18c4ce119d2"
+  },
+  "A": {
+    "action": "generate and read back native structural members and diagnostic templates",
+    "native_execution": false,
+    "status": "passed_offline",
+    "command": "python -m scripts.surface_kmc.bridge_input tests/fixtures/multiphase/synthetic_oxide_bridge_graph.json reports/multiphase/stage_b2_3_2_2/mapping.json NEW_DIRECTORY",
+    "acceptance": "Every generated member and the manifest must reproduce byte-for-byte. Compare graph, ordered seeds, maximum packing and both event patterns independently."
+  },
+  "common_native_controls": {
+    "eligibility": "blocked",
+    "binary_build_qualification": "Pinned binary matches the previously executed 4.0 archive. Source inspection describes expected behavior; target execution remains unverified.",
+    "missing_input_record": [
+      "temperature_K",
+      "total_pressure_bar and positive CO2 mole fraction (or equivalent CO2 partial pressure and total pressure)",
+      "CO2 gas molecular weight in native convention; vendor example 100 supplies 44.0096 for unlabeled CO2",
+      "adsorption pre_expon and activ_eng_eV, with units and pressure convention",
+      "desorption pre_expon and activ_eng_eV, with units",
+      "at least one complete, reviewed synthetic energetic cluster and cluster_eng_eV"
+    ],
+    "project_reversibility": null,
+    "diagnostic_pattern_policy": "Two separately named directed structural probes. Their presence does not assign physical reversibility. No equilibrium constant is needed to read these two directed step definitions.",
+    "gas_reference": "gas_energies omitted is a vendor warning/default, not a measured reference. Review and record the convention when binding the synthetic controls.",
+    "execution_gate": {
+      "qualification": "modules/surface_kmc/README.md#entry-gate",
+      "binding_primitive": "scripts.execution_permission.require_bound_action",
+      "authority": "Requires an independently approved stage-specific decision on the complete input and plan hashes. The binding primitive checks a module-validated decision; it does not issue one.",
+      "fixture_gate_scope": "Archived regression replay is restricted to its benchmark inputs. No general approved oxide execution action or stage-specific launch receipt was found."
+    },
+    "input_bundle_sha256": null,
+    "approval": null,
+    "stage_binding_required": [
+      "stage",
+      "binary_sha256",
+      "complete_input_file_hashes",
+      "command",
+      "serial_execution",
+      "limits",
+      "output_requirements"
+    ],
+    "run_directory": "new isolated directory without an input restart.inf",
+    "native_wall_s": 15,
+    "external_timeout_s": 30,
+    "max_processes": 1,
+    "max_retries": 0,
+    "max_events": 0,
+    "timeout_policy": "Stop the launched process at the outer deadline, keep partial outputs and exit status, withhold acceptance. No automatic retry.",
+    "provisional_argv": [
+      "Zacros.exe",
+      "--max_steps=0",
+      "--wall_time=15"
+    ],
+    "rng": "23123 is a deterministic harness seed, not a material parameter.",
+    "evidence_retention": "Hash all input and output bytes, preserve stdout/stderr, version banner, UTC times, exit status and wall duration. Review warnings individually."
+  },
+  "B": {
+    "action": "native parser acceptance",
+    "status": "blocked_missing_complete_inputs",
+    "native_approval_request": "After binding: approve only stage B on the exact input, binary and plan digests shown in the request?",
+    "approval_requested": false,
+    "expected_outputs": [
+      "console capture",
+      "general_output.txt",
+      "lattice_output.txt"
+    ],
+    "acceptance": [
+      "Normal termination, exit 0, Zacros 4.0 banner and zero executed events",
+      "All five Finished reading markers: simulation, lattice, energetics, mechanism and initial state",
+      "Native lattice types, reciprocal edges and node inventory exactly match the structural bundle; no fatal input error"
+    ],
+    "process_scope": "The stock binary also initializes the state and catalogues processes before it stops. Parser acceptance alone is the stage B verdict."
+  },
+  "C": {
+    "action": "verify native event-zero loading and ordered event catalogue",
+    "status": "blocked_missing_complete_inputs",
+    "native_approval_request": "If a new native process is needed, approve only stage C after review of its separately bound input, binary and plan hashes?",
+    "approval_requested": false,
+    "read_only_reuse": "If approved stage B outputs include all required raw files for the same bound model, inspect them offline and cite their originating receipt. A missing output never triggers an automatic run.",
+    "expected_outputs": [
+      "general_output.txt",
+      "lattice_output.txt",
+      "process_debug.txt",
+      "restart.inf",
+      "console capture"
+    ],
+    "acceptance": {
+      "integer_tolerance": 0,
+      "terminal_events": 0,
+      "seed_instructions_executed": 2,
+      "molecular_count": 2,
+      "restart_site_rows": 7,
+      "surf_species_index": 1,
+      "ordered_seed_locations": [
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          6
+        ]
+      ],
+      "native_entity_indices": "Labels may differ from graph IDs. Require one unique ID per ordered pair, same ID on both legs, and two distinct occupied IDs.",
+      "initial_catalogue": {
+        "adsorption": [
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            7
+          ]
+        ],
+        "desorption": [
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            6
+          ]
+        ],
+        "duplicates": 0,
+        "extra_patterns": 0
+      },
+      "source_of_event_matches": "Initialization block of process_debug.txt. Compare elementary step description and ordered local-to-global placement as a multiset.",
+      "inventories": {
+        "acid_sites": {
+          "capacity": 4,
+          "occupied": 2,
+          "vacant": 2
+        },
+        "oxygen_sites": {
+          "capacity": 3,
+          "occupied": 2,
+          "vacant": 1
+        }
+      }
+    },
+    "reject_if": "Any missing raw observation, reversed leg, joined distinct entity, different direction, unexpected pair, warning invalidating a measurement or event advancement."
+  },
+  "D": {
+    "action": "dynamic simulation",
+    "status": "blocked_missing_kinetics",
+    "execution_plan": null,
+    "approval": null,
+    "additional_requirements": [
+      "Selected scientific or synthetic rate model with defined units and gas/energy reference",
+      "Supported directionality and detailed-balance basis if reversible",
+      "Separate event/time horizon, sampling and restart protocol with independent execution approval"
+    ]
+  },
+  "scientific_acceptance": "not_assessed"
+}
