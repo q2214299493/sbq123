@@ -33,11 +33,22 @@ def adapt(receipt_path, *, network_path, dataset_path, config_path, input_path, 
     """Read the archived closed-cycle or single-point receipt. All supplied paths bind actual bytes."""
     receipt_path = Path(receipt_path)
     folder = receipt_path.parent
-    receipt = read_unique_json(receipt_path)
+    live = receipt_path.name == "ACCEPTED.json"
+    mat, log = folder / "data1.mat", folder / "native_log_extract.txt"
+    if live:
+        from scripts.baseline_mkm.single_point import accepted_receipt
+
+        receipt = accepted_receipt(folder)
+        mat, log = (folder / "runtime/result_phase25" / name for name in ("data1.mat", "log1"))
+        hashes = {p.name: receipt["output_hashes"][p.relative_to(folder).as_posix()] for p in (mat, log)}
+        hashes["result.json"] = receipt["result_sha256"]
+    else:
+        receipt = read_unique_json(receipt_path)
     phase3 = receipt.get("format") == "mkm-single-point-plan/1"
     if phase3:
         require(receipt["stage"] == "ACCEPTED", "Receipt lacks an accepted native result")
-        hashes = receipt["published_evidence_sha256"]
+        if not live:
+            hashes = receipt["published_evidence_sha256"]
         parents = receipt["input_hashes"]
         input_hash = receipt["native_input_hashes"]["INPUT_phase25.m"]
         version, run_id = receipt["catkinas_version"], receipt["run_id"]
@@ -54,8 +65,6 @@ def adapt(receipt_path, *, network_path, dataset_path, config_path, input_path, 
     dataset_ref = artifact(dataset_path, root, parents["dataset"])
     config_ref = artifact(config_path, root, parents["configuration"])
     input_ref = artifact(input_path, root, input_hash)
-    mat = folder / "data1.mat"
-    log = folder / "native_log_extract.txt"
     mat_ref = artifact(mat, root, hashes[mat.name])
     log_ref = artifact(log, root, hashes[log.name])
     dataset, network, config = map(read_unique_json, map(Path, (dataset_path, network_path, config_path)))
@@ -69,7 +78,11 @@ def adapt(receipt_path, *, network_path, dataset_path, config_path, input_path, 
         reviewed = read_unique_json(folder / "result.json")
         require(result_ref["sha256"] == hashes["result.json"] and reviewed["plan_sha256"] == receipt["raw_plan_sha256"]
                 and reviewed["output_hashes"] == receipt["output_hashes"], "Archived result provenance differs")
-        result = validate_result(dataset, config, mapping, native, log.read_text(encoding="ascii"), files["INPUT_phase25.m"])
+        if live:
+            from scripts.baseline_mkm.analysis import verify_receipt
+
+            verify_receipt(receipt, reviewed, result_ref["sha256"], parents, network, dataset, config)
+        result = validate_result(dataset, config, mapping, native, log.read_bytes().decode("ascii", errors="replace"), files["INPUT_phase25.m"])
         require(all(reviewed[k] == v for k, v in result.items()) and reviewed["run_id"] == run_id
                 and receipt["temperature_K"] == temperature and receipt["kinetic_dataset_version"] == dataset["dataset_version"]
                 and receipt["network_version_id"] == network["network_version"], "Native replay differs from run receipt")
@@ -114,7 +127,7 @@ def adapt(receipt_path, *, network_path, dataset_path, config_path, input_path, 
                            provenance=dict(network=network_ref, dataset=dataset_ref, native_output=mat_ref),
                            observations=obs, coefficients=_coefficients(dataset, rows))
     residual_lines = [s.split("return with the residue ", 1)[1].split(". Succeed!!")[0]
-                      for s in log.read_text(encoding="ascii").splitlines() if "return with the residue " in s]
+                      for s in log.read_bytes().decode("ascii", errors="replace").splitlines() if "return with the residue " in s]
     qualification = dict(native_residue_text=residual_lines,
                          executable_sha256=receipt["runtime"]["catkinas"]["sha256"] if phase3 else closed["binary_sha256"],
                          receipt=artifact(receipt_path, root), native_log=log_ref, configuration=config_ref,
@@ -125,7 +138,8 @@ def adapt(receipt_path, *, network_path, dataset_path, config_path, input_path, 
                          species=result["species"], site_inventories=result["sites"], sites_per_reference=sites,
                          overall_turnover_per_pair_s=extents[0], mean_turnover_per_individual_site_s=extents[0] / sum(sites.values()),
                          native_gas_rates=native["net_gas_flux_per_reference_site_s"], statistical_uncertainty=None,
-                         scope="Archived synthetic single point. Rate uncertainty was not measured.")
+                         scope=("Accepted single point. Rate uncertainty was not measured." if live else
+                                "Archived synthetic single point. Rate uncertainty was not measured."))
     return payload, qualification
 
 

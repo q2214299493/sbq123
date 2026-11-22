@@ -2,11 +2,10 @@
 
 from pathlib import Path
 
-from scripts.artifact_io import load_json_object as read, sha256_file, sha256_json, write_json_exclusive as save
+from scripts.artifact_io import load_json_object as read, sha256_json, write_json_exclusive as save
 from scripts.baseline_mkm import analysis, single_point as point
 from scripts.baseline_mkm.ts_perturbation import DELTA_EV, PARENT, REACTION, derivative
 from scripts.baseline_mkm.sensitivity_inputs import derive
-from scripts.execution_permission import require_bound_action
 from scripts.scientific_validation import finite_number
 
 REPORTS = Path(__file__).resolve().parents[2] / "reports/multiphase"
@@ -16,24 +15,7 @@ SIGNS = (("plus", 1), ("minus", -1))
 
 
 def accepted(run):
-    receipt = point.status(run)
-    if receipt["stage"] != "ACCEPTED":
-        raise ValueError(f"{run.name}: expected accepted point, found {receipt['stage']}")
-    plan = read(run / "plan.json")
-    decision = read(run / "approval.json")
-    receipt["raw_plan_sha256"] = sha256_json(plan)
-    require_bound_action(decision, point.ACTION, receipt["raw_plan_sha256"], {point.ACTION})
-    if (
-        decision["DECISION"] != "approve"
-        or decision["question_id"] != plan["question_id"]
-        or not decision["reviewer"]
-        or sha256_json(decision) != receipt["approval_reference"]
-        or sha256_file(Path(decision["source"]["path"])) != decision["source"]["sha256"]
-    ):
-        raise ValueError("Changed approval binding")
-    for path, digest in receipt["output_hashes"].items():
-        if sha256_file(run / path) != digest:
-            raise ValueError(f"Changed native evidence: {path}")
+    receipt = point.accepted_receipt(run)
     a = analysis.analyze(*(run / (k + ".json") for k in ("network", "dataset", "configuration", "result")), receipt, OPTIONS)
     finite_number(a["tof"]["overall"]["per_site_pair_s"], "positive overall net TOF per site pair", positive=True)
     return receipt, a

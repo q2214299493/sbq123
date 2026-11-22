@@ -52,7 +52,7 @@ def runtime(tmp_path, monkeypatch):
         flow,
         "tools_for_run",
         lambda p: dict(
-            catkinas=dict(source_path=str(binary), sha256=sha256_file(binary)),
+            catkinas=dict(source_path=str(binary), sha256=sha256_file(binary), download_label="offline-test-fixture"),
             matlab_version="MATLAB 25.2.0.2998904 R2025b",
             matlab_path=str(p),
         ),
@@ -197,6 +197,10 @@ def test_rejected_run_retains_evidence(tmp_path, runtime, monkeypatch, defect, s
     v = flow.execute(tmp_path / "run", approved(tmp_path))
     assert (v["stage"], v.get("failure_stage")) == ("REJECTED", stage), v
     assert not (tmp_path / "run/result.json").exists()
+    if defect == "exit":
+        assert v["exit_code"] == 7 and v["elapsed_process_seconds"] >= 0
+    if defect == "convergence":
+        assert "runtime/result_phase25/log1" in v["output_hashes"]
     if defect == "timeout":
         assert v["execution"] == "timed_out"
     if stage == "VALIDATING":
@@ -204,7 +208,7 @@ def test_rejected_run_retains_evidence(tmp_path, runtime, monkeypatch, defect, s
 
 
 @pytest.mark.parametrize(
-    "defect", ["denied", "state", "source", "question", "configuration", "directory", "ticket", "executable"]
+    "defect", ["denied", "state", "source", "question", "configuration", "directory", "ticket", "executable", "pending_state"]
 )
 def test_gate_does_not_dispatch(tmp_path, runtime, monkeypatch, defect):
     start(tmp_path, runtime)
@@ -222,6 +226,8 @@ def test_gate_does_not_dispatch(tmp_path, runtime, monkeypatch, defect):
         (run / "configuration.json").write_bytes(b"{}")
     elif defect == "executable":
         (tmp_path / "fixture.p").write_bytes(b"changed identity")
+    elif defect == "pending_state":
+        (run / "AWAITING_APPROVAL.json").write_text('{"state_sha256": "stale"}')
     elif defect == "ticket":
         with sqlite3.connect(runtime[0]) as db:
             db.execute("update tickets set status='PAUSED'")
@@ -334,3 +340,42 @@ def test_published_native_result_replays():
     assert sum(
         x["applied_reaction_energy_eV"] * weights[x["reaction_id"]] for x in r["reactions"]
     ) == pytest.approx(-0.16)
+
+
+def test_accepted_run_exports_bound_v21_rates(tmp_path, runtime, monkeypatch):
+    from scripts.baseline_mkm.rate_adapter import adapt
+    from scripts.rate_output_v2 import validate_network_bound_rate_output
+
+    run = tmp_path / "run"
+    view = start(tmp_path, runtime)
+    assert view["stage"] == "AWAITING_APPROVAL"
+    plan = flow.read(run / "plan.json")
+    assert view["state_sha256"] == sha256_json(plan)
+    assert plan["execution_limits"]["native_invocations"] == 1 and plan["acceptance_criteria"]
+    options = flow.read(PHASE.parent / "phase3_1/benchmark_normalization.json")
+    ref = options["source"]
+    shutil.copyfile(PHASE.parent / "phase3_1" / ref["path"], tmp_path / "reference.json")
+    ref["path"] = "reference.json"
+    args = dict(network_path=run / "network.json", dataset_path=run / "dataset.json",
+                config_path=run / "configuration.json", input_path=run / "input" / flow.INPUT,
+                normalization_path=save(tmp_path / "normalization.json", options), root=tmp_path)
+    with pytest.raises(ValueError, match="expected accepted"):
+        adapt(run / "ACCEPTED.json", **args)
+
+    def offline_replay(directory, executable):
+        (directory / "extra.log").write_bytes(b"additional native diagnostics")
+        return replay(directory)
+
+    monkeypatch.setattr(flow, "launch", offline_replay)
+    view = flow.execute(run, approved(tmp_path))
+    assert view["stage"] == "ACCEPTED" and view["exit_code"] == 0 and view["elapsed_process_seconds"] >= 0
+    assert set(plan["expected_native_outputs"]) <= view["output_hashes"].keys()
+    payload, qualification = adapt(run / "ACCEPTED.json", **args)
+    validate_network_bound_rate_output(payload, args["network_path"])
+    assert payload["output_binding"]["run_id"] == run.name
+    assert payload["provenance"]["native_output"]["sha256"] == sha256_file(OUT / "data1.mat")
+    assert qualification["overall_turnover_per_pair_s"] == pytest.approx(81.5127701616477)
+    assert qualification["sites_per_reference"] == {"top-Ni": 1, "bridge-Cu": 1}
+    (run / "runtime/extra.log").write_bytes(b"changed")
+    with pytest.raises(ValueError, match="Changed native evidence"):
+        adapt(run / "ACCEPTED.json", **args)

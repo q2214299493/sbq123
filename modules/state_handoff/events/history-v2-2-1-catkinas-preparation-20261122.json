@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "event_id": "history-v2-2-1-catkinas-preparation-20261122",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-v2-2-1-catkinas-preparation-20261122",
+    "module": "baseline_mkm"
+  },
+  "occurred_at": "2026-11-22T13:51:16.991898+00:00",
+  "recorded_at": "2026-11-22T13:51:16.991898+00:00",
+  "summary": "Record Ni/Cu CATKINAS single-point preparation pending independent human authorization.",
+  "payload": {
+    "markdown": "- V.2.2.1 reproduced the archived 400 K Ni/Cu input and archived native observations. The newly prepared single point nicu-v221-400k-001 awaits a separate plan-bound execution decision. Native results for this run are pending."
+  },
+  "evidence": [
+    {
+      "locator": "reports/workflow_development/stage_v2_2_1/plan.json",
+      "sha256": "ee1ad8dabb76fc0d68268ba0a2cd47469b4fc21216b10a688550dff4d4b9aaaa",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T13:51:16.991898+00:00"
+    },
+    {
+      "locator": "reports/workflow_development/stage_v2_2_1/approval_request.json",
+      "sha256": "9d550e46945109ba5b592a7fc3a34c964d761ef06ed8aab13353a14bb6fc87da",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T13:51:16.991898+00:00"
+    },
+    {
+      "locator": "reports/workflow_development/stage_v2_2_1/offline_verification.json",
+      "sha256": "4eabee2a3e75d6af75aea781774e6d9460c63b67ea990000d997a4e6e3d10181",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T13:51:16.991898+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

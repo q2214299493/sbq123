@@ -93,6 +93,14 @@ For a declared turnover, supply signed integer `overall_stoichiometry` keyed by 
 Registry registration uses the existing plan, reviewed approval and apply sequence. The derived scalar rows are candidates with source-bound normalized evidence. Benchmark registration belongs in an isolated database. See the [Phase 3.0 report](../../reports/multiphase/phase3_0/completion.md) for the verified example and its limits.
 
 
+For an accepted single point, the existing CATKINAS rate adapter also reads the run's
+`ACCEPTED.json` directly. Pass its network, dataset, configuration and generated input
+snapshots, the bound normalization file and their common evidence root to
+`python -m scripts.baseline_mkm.rate_adapter`. The adapter checks the run decision and
+native files, replays the MAT/log validation and emits the network-bound V2.1 payload.
+Use `--qualification` for the companion numerical and provenance report.
+[Ni/Cu plan, offline comparison and commands](../../reports/workflow_development/stage_v2_2_1/completion.md)
+
 ## Phase 3.1 kinetic analysis
 
 Use `python -m scripts.baseline_mkm.analysis run RUN OUTPUT` for a completed single-point run. The read-only entry point verifies the terminal acceptance, normalized result, ticket, question, plan, network, dataset and configuration bindings. It reconstructs the gas source terms from the versioned stoichiometry and the signed elementary fluxes, checks directional mass action, and verifies the declared overall extent. A trusted portable Phase 3.0 receipt can also be used with the following commands from the repository root.

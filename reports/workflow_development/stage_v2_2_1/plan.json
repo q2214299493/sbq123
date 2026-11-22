@@ -1,0 +1,111 @@
+{
+  "format": "mkm-single-point-plan/1",
+  "run_id": "nicu-v221-400k-001",
+  "run_directory": "C:\\Users\\86177\\.codex\\worktrees\\sbq123-v221\\work\\archive\\v221_catkinas\\nicu-v221-400k-001",
+  "ticket_id": "fa88441b9d3eac0c1513b3ee",
+  "question_id": "fa88441b9d3eac0c1513b3eed53b11f57b8c75a701dc41821fed1ce8cde2ee0a",
+  "ticket_database": "C:\\Users\\86177\\.codex\\worktrees\\sbq123-v221\\work\\archive\\v221_catkinas\\synthetic-ticket.sqlite",
+  "catalyst_project_id": "demo",
+  "phase_id": [
+    "fcc-Ni",
+    "fcc-Cu"
+  ],
+  "surface_id": [
+    "facet-Ni",
+    "facet-Cu"
+  ],
+  "network_version_id": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+  "kinetic_dataset_version": "417cf1dc3236175476441c4c4e7b4bd5771bc4a7062aa5e34eff69070483d11b",
+  "input_hashes": {
+    "network": "6a4717c44a6c5a76191baf88e419621e461886c96989a6cdb86402df70c58b40",
+    "dataset": "0ac30eec437cebf321339d6c4dde26a0e2146229d8c27fb9fa9f3926adf6d778",
+    "configuration": "7687b9fe2495aa010c7faa79da17ada934cf1673dd910b49fa4605461dea6f53"
+  },
+  "native_input_hashes": {
+    "INPUT_phase25.m": "b793e6f37f2262e4a006f912d18950c17581ccc014aa9779008741a4e31890f8"
+  },
+  "configuration_hash": "bfa0fd0cb6d2a62e9aa6764e14a5c304c7bcbb691bf6bf0380f0467da7a50089",
+  "temperature_K": 400,
+  "partial_pressures_bar": {
+    "H2-g": 1.0,
+    "NO-g": 0.5,
+    "HNO-g": 0.1
+  },
+  "total_pressure_bar": 1.6,
+  "standard_states": {
+    "gas_pressure_Pa": 100000,
+    "solute_concentration_mol_m3": 1000,
+    "surface_activity_convention": "fractional site occupation"
+  },
+  "initial_coverages": {
+    "H2-top": 0,
+    "H2-bridge": 0,
+    "HNO-top": 0
+  },
+  "site_inventory": [
+    {
+      "schema_version": "1.0.0",
+      "site_id": "top-Ni",
+      "surface_id": "facet-Ni",
+      "site_type": "atop",
+      "local_geometry": "single metal atom",
+      "validation": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "site_id": "bridge-Cu",
+      "surface_id": "facet-Cu",
+      "site_type": "bridge",
+      "local_geometry": "two neighbouring copper atoms",
+      "validation": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      }
+    }
+  ],
+  "solver_settings": {
+    "mode": "single_point",
+    "timeout_s": 210,
+    "MaxTime": 3,
+    "MaxOdeTime": 3
+  },
+  "use_scope": "synthetic_benchmark",
+  "runtime": {
+    "catkinas": {
+      "source_path": "D:/CATKINAS.p",
+      "download_label": "20261106",
+      "sha256": "2b70a3511a19065f843b65d8601874700dd792e8d31d620046ef3805df399ff0",
+      "receipt": "reports/multiphase/phase2_5_1/catkinas_target_attempt.json"
+    },
+    "matlab_path": "D:\\BaiduNetdiskDownload\\bin\\matlab.exe",
+    "matlab_sha256": "6dc32276086121e44edf4846f033066ba5b0fae9bad002d8917a411e0a59afa9",
+    "matlab_version": "MATLAB 25.2.0.2998904 R2025b"
+  },
+  "execution_limits": {
+    "single_points": 1,
+    "native_invocations": 1,
+    "automatic_retries": 0
+  },
+  "expected_native_outputs": [
+    "runtime/result_phase25/data1.mat",
+    "runtime/result_phase25/log1",
+    "runtime/result_phase25/Input_phase25_1",
+    "runtime/console.log"
+  ],
+  "acceptance_criteria": [
+    "Successful process exit within timeout and matching native input echo and runtime identity",
+    "Completed solver log with convergence and finite native coefficients, fluxes and coverages",
+    "Reviewed species, reaction order, temperature, feed, energies and directional coefficients",
+    "Independent mass action, site inventories, charge, element and steady-state balances",
+    "Common overall extent, declared turnover basis and selectivity within the configured product set"
+  ]
+}

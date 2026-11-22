@@ -1,0 +1,360 @@
+{
+  "scope": "V.2.1 input reconstruction and historical Ni/Cu output replay",
+  "readiness_report": {
+    "path": "reports/workflow_development/stage_v2_1/nicu.json",
+    "sha256": "7f41de567ca41b570994381d8a54771d4e551603a1e9365436d9c9af397228a8",
+    "regenerated_equal": true
+  },
+  "reaction_ids": [
+    "ads",
+    "transfer",
+    "hydrogenate",
+    "desorb"
+  ],
+  "species": [
+    "H2-g",
+    "H2-bridge",
+    "H2-top",
+    "NO-g",
+    "HNO-g",
+    "HNO-top"
+  ],
+  "parameters": {
+    "ads": {
+      "rates": {
+        "forward": {
+          "method": "dissociative_adsorption",
+          "activity_coefficient_s^-1": 1062.5043325104702,
+          "gas_orders": {
+            "H2-g": 1
+          },
+          "degeneracy": 1,
+          "prefactor_at_unit_activity_s^-1": 116441795.88608214,
+          "activation_free_energy_ev": 0.4,
+          "sigma_ln_k": null,
+          "rate_kind": "gas_activity_coefficient",
+          "activity_orders": {
+            "species": {
+              "H2-g": 1
+            },
+            "vacant_sites": {
+              "top-Ni": 1,
+              "bridge-Cu": 1
+            }
+          }
+        },
+        "reverse": {
+          "method": "from_equilibrium",
+          "gas_orders": {},
+          "sigma_ln_k": null,
+          "activity_coefficient_s^-1": 58.396411910597834,
+          "rate_kind": "surface_elementary_rate_constant",
+          "activity_orders": {
+            "species": {
+              "H2-top": 1,
+              "H2-bridge": 1
+            },
+            "vacant_sites": {}
+          }
+        }
+      },
+      "detailed_balance": {
+        "ln_K_standard": 2.9011295303875206,
+        "log_ratio_residual": 0.0
+      }
+    },
+    "transfer": {
+      "rates": {
+        "forward": {
+          "method": "prefactor",
+          "activity_coefficient_s^-1": 2214.668315712438,
+          "gas_orders": {},
+          "degeneracy": 1,
+          "prefactor_at_unit_activity_s^-1": 8334647649331.03,
+          "activation_free_energy_ev": 0.76,
+          "sigma_ln_k": null,
+          "rate_kind": "surface_elementary_rate_constant",
+          "activity_orders": {
+            "species": {
+              "H2-bridge": 1
+            },
+            "vacant_sites": {
+              "top-Ni": 1
+            }
+          }
+        },
+        "reverse": {
+          "method": "prefactor",
+          "activity_coefficient_s^-1": 3956.3763917523693,
+          "gas_orders": {},
+          "degeneracy": 1,
+          "prefactor_at_unit_activity_s^-1": 8334647649331.03,
+          "activation_free_energy_ev": 0.74,
+          "sigma_ln_k": null,
+          "rate_kind": "surface_elementary_rate_constant",
+          "activity_orders": {
+            "species": {
+              "H2-top": 1
+            },
+            "vacant_sites": {
+              "bridge-Cu": 1
+            }
+          }
+        }
+      },
+      "detailed_balance": {
+        "ln_K_standard": -0.580225906077504,
+        "log_ratio_residual": -9.992007221626409e-16
+      }
+    },
+    "hydrogenate": {
+      "rates": {
+        "forward": {
+          "method": "prefactor",
+          "activity_coefficient_s^-1": 1239.709082999593,
+          "gas_orders": {
+            "NO-g": 1
+          },
+          "degeneracy": 1,
+          "prefactor_at_unit_activity_s^-1": 8334647649331.03,
+          "activation_free_energy_ev": 0.78,
+          "sigma_ln_k": null,
+          "rate_kind": "gas_activity_coefficient",
+          "activity_orders": {
+            "species": {
+              "H2-top": 1,
+              "NO-g": 1
+            },
+            "vacant_sites": {}
+          }
+        },
+        "reverse": {
+          "method": "prefactor",
+          "activity_coefficient_s^-1": 68.13578076345448,
+          "gas_orders": {},
+          "degeneracy": 1,
+          "prefactor_at_unit_activity_s^-1": 8334647649331.03,
+          "activation_free_energy_ev": 0.88,
+          "sigma_ln_k": null,
+          "rate_kind": "surface_elementary_rate_constant",
+          "activity_orders": {
+            "species": {
+              "HNO-top": 1
+            },
+            "vacant_sites": {}
+          }
+        }
+      },
+      "detailed_balance": {
+        "ln_K_standard": 2.9011295303875206,
+        "log_ratio_residual": -2.6645352591003757e-15
+      }
+    },
+    "desorb": {
+      "rates": {
+        "forward": {
+          "method": "prefactor",
+          "activity_coefficient_s^-1": 693.954304384082,
+          "gas_orders": {},
+          "degeneracy": 1,
+          "prefactor_at_unit_activity_s^-1": 8334647649331.03,
+          "activation_free_energy_ev": 0.8,
+          "sigma_ln_k": null,
+          "rate_kind": "surface_elementary_rate_constant",
+          "activity_orders": {
+            "species": {
+              "HNO-top": 1
+            },
+            "vacant_sites": {}
+          }
+        },
+        "reverse": {
+          "method": "prefactor",
+          "activity_coefficient_s^-1": 3956.3763917523693,
+          "gas_orders": {
+            "HNO-g": 1
+          },
+          "degeneracy": 1,
+          "prefactor_at_unit_activity_s^-1": 8334647649331.03,
+          "activation_free_energy_ev": 0.74,
+          "sigma_ln_k": null,
+          "rate_kind": "gas_activity_coefficient",
+          "activity_orders": {
+            "species": {
+              "HNO-g": 1
+            },
+            "vacant_sites": {
+              "top-Ni": 1
+            }
+          }
+        }
+      },
+      "detailed_balance": {
+        "ln_K_standard": -1.7406777182325126,
+        "log_ratio_residual": -2.4424906541753444e-15
+      }
+    }
+  },
+  "hashes_match": {
+    "INPUT_phase25.m": "b793e6f37f2262e4a006f912d18950c17581ccc014aa9779008741a4e31890f8"
+  },
+  "source_hashes": {
+    "network": "6a4717c44a6c5a76191baf88e419621e461886c96989a6cdb86402df70c58b40",
+    "dataset": "0ac30eec437cebf321339d6c4dde26a0e2146229d8c27fb9fa9f3926adf6d778",
+    "configuration": "7687b9fe2495aa010c7faa79da17ada934cf1673dd910b49fa4605461dea6f53"
+  },
+  "archive": {
+    "receipt": {
+      "path": "reports/multiphase/phase3_0/benchmark_manifest.json",
+      "sha256": "0773bdbbf0d3a2f7b8907ed271fdc1f0f725150c5e8c16ae77d10c37d389822d"
+    },
+    "validated_rates": {
+      "path": "reports/multiphase/stage_b1_4/replay/catkinas-phase3_0.json",
+      "sha256": "eb73c3b756ad88316b792df4919c0e08cbe9e0967bcd4d6e2277a5eefcac2ec6"
+    },
+    "qualification": {
+      "native_residue_text": [
+        "|dy/dt| ~= 10^-1001, |dlog(y)/dt| ~= 10^-1001",
+        "|dy/dt| ~= 10^-1001, |dlog(y)/dt| ~= 10^-1001"
+      ],
+      "executable_sha256": "2b70a3511a19065f843b65d8601874700dd792e8d31d620046ef3805df399ff0",
+      "receipt": {
+        "path": "reports/multiphase/phase3_0/benchmark_manifest.json",
+        "sha256": "0773bdbbf0d3a2f7b8907ed271fdc1f0f725150c5e8c16ae77d10c37d389822d"
+      },
+      "native_log": {
+        "path": "reports/multiphase/phase3_0/native_log_extract.txt",
+        "sha256": "7c63865de15094407577cca2800b4cdf03196a57da974b374ae9efe451d82839"
+      },
+      "configuration": {
+        "path": "reports/multiphase/phase3_0/workflow_configuration.json",
+        "sha256": "7687b9fe2495aa010c7faa79da17ada934cf1673dd910b49fa4605461dea6f53"
+      },
+      "result_record": {
+        "path": "reports/multiphase/phase3_0/result.json",
+        "sha256": "6c09b2d304b0829e8912baa670fd274425c4e49a0376f4a4e710db981e4692f7"
+      },
+      "normalization": {
+        "path": "reports/multiphase/phase3_1/benchmark_normalization.json",
+        "sha256": "3084884fe35b71413ee95f1cb09dd5bbf1bfc40354bfc5454e909d513c4d2401"
+      },
+      "reference": {
+        "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+        "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+      },
+      "distribution_label": "20261106",
+      "native_convergence": "converged",
+      "residual_per_pair_s": 5.684341886080802e-14,
+      "residual_tolerance_per_pair_s": 1.630255403232954e-05,
+      "species": [
+        {
+          "species_id": "H2-g",
+          "phase": "gas",
+          "site_occupancy": {},
+          "site_types": [],
+          "coverage": null,
+          "pressure_bar": 1.0
+        },
+        {
+          "species_id": "H2-bridge",
+          "phase": "surface",
+          "site_occupancy": {
+            "bridge-Cu": 1
+          },
+          "site_types": [
+            "bridge"
+          ],
+          "coverage": 0.6966794790111535,
+          "pressure_bar": null
+        },
+        {
+          "species_id": "H2-top",
+          "phase": "surface",
+          "site_occupancy": {
+            "top-Ni": 1
+          },
+          "site_types": [
+            "atop"
+          ],
+          "coverage": 0.30710124262351585,
+          "pressure_bar": null
+        },
+        {
+          "species_id": "NO-g",
+          "phase": "gas",
+          "site_occupancy": {},
+          "site_types": [],
+          "coverage": null,
+          "pressure_bar": 0.5
+        },
+        {
+          "species_id": "HNO-g",
+          "phase": "gas",
+          "site_occupancy": {},
+          "site_types": [],
+          "coverage": null,
+          "pressure_bar": 0.1
+        },
+        {
+          "species_id": "HNO-top",
+          "phase": "surface",
+          "site_occupancy": {
+            "top-Ni": 1
+          },
+          "site_types": [
+            "atop"
+          ],
+          "coverage": 0.401212208396157,
+          "pressure_bar": null
+        }
+      ],
+      "site_inventories": [
+        {
+          "site_id": "top-Ni",
+          "inventory": 1,
+          "occupied_fraction": 0.7083134510196729,
+          "vacancy_fraction": 0.29168654898032714,
+          "balance_residual": 0.0
+        },
+        {
+          "site_id": "bridge-Cu",
+          "inventory": 1,
+          "occupied_fraction": 0.6966794790111535,
+          "vacancy_fraction": 0.3033205209888465,
+          "balance_residual": 0.0
+        }
+      ],
+      "sites_per_reference": {
+        "top-Ni": 1,
+        "bridge-Cu": 1
+      },
+      "overall_turnover_per_pair_s": 81.5127701616477,
+      "mean_turnover_per_individual_site_s": 40.75638508082385,
+      "native_gas_rates": {
+        "H2": -81.5127701616477,
+        "HNO": 163.0255403232954,
+        "NO": -163.0255403232954
+      },
+      "statistical_uncertainty": null,
+      "scope": "Archived synthetic single point. Rate uncertainty was not measured."
+    },
+    "gas_net_production": {
+      "H2-g": -81.5127701616477,
+      "NO-g": -163.0255403232954,
+      "HNO-g": 163.0255403232954
+    },
+    "molar_selectivity": {
+      "HNO-g": 1.0
+    },
+    "stable_drc": [
+      {
+        "reaction_id": "hydrogenate",
+        "drc": 0.45025755212448043
+      },
+      {
+        "reaction_id": "transfer",
+        "drc": 0.040690451158404334
+      }
+    ]
+  }
+}

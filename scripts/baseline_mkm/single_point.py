@@ -26,6 +26,8 @@ from scripts.runtime_resources import resource_path
 ACTION = "RUN_CATKINAS_SINGLE_POINT"
 LIMIT = 210
 INPUT = "INPUT_phase25.m"
+NATIVE_OUTPUTS = ("runtime/result_phase25/data1.mat", "runtime/result_phase25/log1",
+                  "runtime/result_phase25/Input_phase25_1", "runtime/console.log")
 
 
 def now():
@@ -169,6 +171,15 @@ def prepare(run, network, dataset, configuration, tickets, ticket_id, matlab):
             ),
             use_scope=d["reactions"][0]["model"].get("use_scope", "project"),
             runtime=runtime,
+            execution_limits={"single_points": 1, "native_invocations": 1, "automatic_retries": 0},
+            expected_native_outputs=list(NATIVE_OUTPUTS),
+            acceptance_criteria=[
+                "Successful process exit within timeout and matching native input echo and runtime identity",
+                "Completed solver log with convergence and finite native coefficients, fluxes and coverages",
+                "Reviewed species, reaction order, temperature, feed, energies and directional coefficients",
+                "Independent mass action, site inventories, charge, element and steady-state balances",
+                "Common overall extent, declared turnover basis and selectivity within the configured product set",
+            ],
         )
         perturbation = d.get("sensitivity_perturbation", {})
         spec = perturbation.get("spec", {})
@@ -220,6 +231,8 @@ def preflight(run, decision_path):
     plan = read(run / "plan.json")
     if not (run / "AWAITING_APPROVAL.json").exists() or (run / "REJECTED.json").exists():
         raise ValueError("Run is not awaiting execution")
+    if read(run / "AWAITING_APPROVAL.json")["state_sha256"] != sha256_json(plan):
+        raise ValueError("Prepared plan differs from the pending approval request")
     decision = read(decision_path)
     if (
         decision.get("format") != "mkm-execution-approval/1"
@@ -249,6 +262,19 @@ def preflight(run, decision_path):
     return plan, decision, dataset, config, files, adapter, rt
 
 
+def native_output_hashes(directory, required=()):
+    """Inventory native outputs, including partial output from a failed attempt."""
+    hashes = {
+        p.relative_to(directory.parent).as_posix(): sha256_file(p)
+        for p in sorted(directory.rglob("*"))
+        if p.is_file() and p not in (directory / INPUT, directory / "CATKINAS.p")
+    }
+    missing = set(required) - hashes.keys()
+    if missing:
+        raise ValueError("Missing native output: " + ", ".join(sorted(missing)))
+    return hashes
+
+
 def execute(run, decision_path, *, deadline=None):
     run = run.resolve()
     plan, decision, dataset, config, files, adapter, rt = preflight(run, decision_path)
@@ -257,6 +283,7 @@ def execute(run, decision_path, *, deadline=None):
     # Atomic execution claim. A stopped supervisor cannot silently relaunch the same point.
     event(run, "READY", approval_reference=sha256_json(decision))
     stage, execution, convergence = "READY", "not_started", "unknown"
+    process = {}
     try:
         save(run / "approval.json", decision)
         directory = run / "runtime"
@@ -271,13 +298,18 @@ def execute(run, decision_path, *, deadline=None):
         stage = "RUNNING"
         event(run, stage)
         execution = "running"
-        if deadline is None:
-            code = launch(directory, rt["matlab_path"])
-        else:
-            remaining = min(LIMIT, deadline - monotonic())
-            if remaining <= 0:
-                raise subprocess.TimeoutExpired("CATKINAS pair budget", 0)
-            code = launch(directory, rt["matlab_path"], timeout=remaining)
+        started = monotonic()
+        try:
+            if deadline is None:
+                code = launch(directory, rt["matlab_path"])
+            else:
+                remaining = min(LIMIT, deadline - started)
+                if remaining <= 0:
+                    raise subprocess.TimeoutExpired("CATKINAS pair budget", 0)
+                code = launch(directory, rt["matlab_path"], timeout=remaining)
+            process["exit_code"] = code
+        finally:
+            process["elapsed_process_seconds"] = monotonic() - started
         execution = "exited_successfully" if code == 0 else "failed"
         if code != 0:
             raise ValueError(f"MATLAB exit code {code}")
@@ -285,9 +317,7 @@ def execute(run, decision_path, *, deadline=None):
         event(run, stage, exit_code=code)
         out = directory / "result_phase25"
         mat, log, echo = out / "data1.mat", out / "log1", out / "Input_phase25_1"
-        hashes = {
-            p.relative_to(run).as_posix(): sha256_file(p) for p in (mat, log, echo, directory / "console.log")
-        }
+        hashes = native_output_hashes(directory, NATIVE_OUTPUTS)
         if hashes[echo.relative_to(run).as_posix()] != adapter["files"][INPUT]:
             raise ValueError("Native input echo differs from approved input")
         console = (directory / "console.log").read_bytes().decode("ascii", errors="replace")
@@ -324,6 +354,7 @@ def execute(run, decision_path, *, deadline=None):
             convergence=convergence,
             scientific_validity="validated_within_scope",
             approval="approved",
+            **process,
             catkinas_version=version[1],
             matlab_version=matlab[1],
             output_hashes=hashes,
@@ -336,10 +367,15 @@ def execute(run, decision_path, *, deadline=None):
             execution = "timed_out"
         elif execution == "running":
             execution = "failed"
+        try:
+            process["output_hashes"] = native_output_hashes(run / "runtime")
+        except OSError as collection_error:
+            process["output_inventory_error"] = str(collection_error)
         event(
             run,
             "REJECTED",
             failure_stage=stage,
+            **process,
             reason=str(exc),
             execution=execution,
             convergence=convergence,
@@ -397,6 +433,29 @@ def status(run):
             "note": (json.dumps(note, ensure_ascii=False)[: max(0, 1000 - len(pointer))] + pointer)[:1000],
         }
     return view
+
+
+def accepted_receipt(run):
+    """Verify the accepted result, decision and native bytes for downstream readers."""
+    receipt = status(run)
+    if receipt["stage"] != "ACCEPTED":
+        raise ValueError(f"{run.name}: expected accepted point, found {receipt['stage']}")
+    plan = read(run / "plan.json")
+    decision = read(run / "approval.json")
+    receipt["raw_plan_sha256"] = sha256_json(plan)
+    require_bound_action(decision, ACTION, receipt["raw_plan_sha256"], {ACTION})
+    if (
+        decision["DECISION"] != "approve"
+        or decision["question_id"] != plan["question_id"]
+        or not decision["reviewer"]
+        or sha256_json(decision) != receipt["approval_reference"]
+        or sha256_file(Path(decision["source"]["path"])) != decision["source"]["sha256"]
+    ):
+        raise ValueError("Changed approval binding")
+    for path, digest in receipt["output_hashes"].items():
+        if sha256_file(run / path) != digest:
+            raise ValueError(f"Changed native evidence: {path}")
+    return receipt
 
 
 def main():
