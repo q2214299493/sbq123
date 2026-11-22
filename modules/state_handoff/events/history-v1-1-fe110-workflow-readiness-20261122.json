@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "event_id": "history-v1-1-fe110-workflow-readiness-20261122",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-v1-1-fe110-workflow-readiness-20261122",
+    "module": "kinetic_data"
+  },
+  "occurred_at": "2026-11-22T10:55:34.197695+00:00",
+  "recorded_at": "2026-11-22T10:55:34.197695+00:00",
+  "summary": "Record V.1.1 offline Fe(110) C1–C2 workflow readiness.",
+  "payload": {
+    "markdown": "- V.1.1 verified six registered electronic barrier sets against 18 OUTCAR energy sources. For CH* + CO* → CHCO*, the reviewed TS spectrum and TS-only ZPE reproduce. Reaction Gibbs energies and native engine exports remain blocked. Endpoint thermal evidence is the first input needed. See reports/workflow_readiness/stage_v1_1/completion.md and its evidence inventory."
+  },
+  "evidence": [
+    {
+      "locator": "reports/workflow_readiness/stage_v1_1/completion.md",
+      "sha256": "c1b81a04d1a141d778a85b427ce3050779da823220d27630d34c123b1351c012",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T10:55:34.197695+00:00"
+    },
+    {
+      "locator": "reports/workflow_readiness/stage_v1_1/evidence_inventory.json",
+      "sha256": "522ba29d436db225f2f3290e5404d1a9fdf5d5dfed925f4ca272ff6d43959bae",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T10:55:34.197695+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}
