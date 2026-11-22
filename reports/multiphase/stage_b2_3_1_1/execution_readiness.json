@@ -1,0 +1,52 @@
+{
+  "status": "blocked_before_native_input",
+  "adapter_representation": "unsupported",
+  "vendor_multisite_notation": "documented in manual section 4.3",
+  "review_template": "oxide_CO2.m.in",
+  "review_template_is_executable": false,
+  "vendor_binary_capability": "unverified",
+  "native_input_generation": "blocked",
+  "native_parser_acceptance": "not_run",
+  "native_numerical_convergence": "not_run",
+  "independent_numerical_agreement": "not_evaluable",
+  "scientific_mechanism_acceptance": "not_assessed",
+  "input_manifest": null,
+  "native_input_sha256": null,
+  "execution_plan": null,
+  "execution_plan_sha256": null,
+  "approval_request": null,
+  "execution_authorized": false,
+  "native_attempts": 0,
+  "elapsed_runtime_s": null,
+  "exit_code": null,
+  "observed_outputs": [],
+  "blocking_requirements": [
+    "Verify the documented multisite token and coverage variable against the actual 4:3 inventory denominators, native balances and output symbols",
+    "Solver-supported equilibrium exchange or an independently sourced closed network",
+    "Reference for pressure and molecular activity, forward/reverse coefficients or equivalent reviewed energies and prefactors, units and valid conditions",
+    "Common extent normalization and numerical equilibrium reference reproducible independently",
+    "Native input and expected field mapping verified for this case before preparing a gated plan"
+  ],
+  "future_limits": {
+    "max_processes": 1,
+    "max_attempts": 1,
+    "wall_clock_timeout_s": 210,
+    "retries": 0,
+    "action": "RUN_CATKINAS_SINGLE_POINT",
+    "on_failure": "stop; preserve input, available MAT, logs, hashes and exit or timeout receipt"
+  },
+  "expected_output_requirements": [
+    "Original log with input echo and parser diagnostics",
+    "Native MAT with one independent bound population, both inventory balances, forward/reverse coefficients and fluxes, and convergence diagnostics",
+    "Exact input, executable and output hashes, runtime versions, elapsed time, exit or timeout, and separate execution approval receipt"
+  ],
+  "proposed_tolerances": {
+    "site_fraction_balance_abs": 1e-8,
+    "coefficient_relative": 0.0001,
+    "directional_flux_relative": 0.0001,
+    "steady_residual_relative_to_exchange": 1e-7,
+    "equilibrium_log_ratio_abs": 0.0002,
+    "coverage_comparison_absolute": 1e-8,
+    "coverage_comparison_relative": 0.0001
+  }
+}

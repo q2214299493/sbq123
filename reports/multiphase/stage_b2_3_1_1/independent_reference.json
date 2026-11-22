@@ -1,0 +1,102 @@
+{
+  "case": "synthetic-oxide-CO2",
+  "baseline": "03b47b74a7f1c44d96d228387e6d24a9ddd3e4be",
+  "network_version": "a35beac998f393b7ad16e954e74f5982523436605fdcad54934de042ce8e9bfa",
+  "inventory_reference": "oxide-counting-cell",
+  "use_scope": "finite structural counting example; candidate initial state for a hypothetical software test",
+  "species_id": "co2-bound",
+  "molecule_count": 2,
+  "inventory": {
+    "acid-A": {
+      "capacity": 4,
+      "occupied": 2,
+      "vacant": 2,
+      "occupied_fraction": "1/2",
+      "vacancy_fraction": "1/2"
+    },
+    "oxygen-B": {
+      "capacity": 3,
+      "occupied": 2,
+      "vacant": 1,
+      "occupied_fraction": "2/3",
+      "vacancy_fraction": "1/3"
+    }
+  },
+  "per_net_adsorption_event": {
+    "gas_molecules": {
+      "co2": -1
+    },
+    "bound_molecules": {
+      "co2-bound": 1
+    },
+    "occupied_sites": {
+      "acid-A": 1,
+      "oxygen-B": 1
+    },
+    "vacancies": {
+      "acid-A": -1,
+      "oxygen-B": -1
+    },
+    "occupied_fraction_change": {
+      "acid-A": "1/4",
+      "oxygen-B": "1/3"
+    },
+    "vacant_fraction_change": {
+      "acid-A": "-1/4",
+      "oxygen-B": "-1/3"
+    },
+    "residual": {
+      "elements": {
+        "C": 0,
+        "O": 0
+      },
+      "charge": 0,
+      "inventories": {
+        "acid-A": 0,
+        "oxygen-B": 0
+      }
+    }
+  },
+  "vacancy_fraction_product_if_mean_field_factorization": "1/6",
+  "actual_available_adjacent_pairs": null,
+  "source_reversibility": null,
+  "requested_hypothesis": "reversible adsorption/desorption exchange",
+  "temperature_K": null,
+  "CO2_partial_pressure_bar": null,
+  "native_documented_gas_standard_pressure_bar": 1,
+  "oxide_molecular_standard_state": null,
+  "native_rate_denominator": null,
+  "bound_molecular_activity": null,
+  "forward_coefficient": null,
+  "reverse_coefficient": null,
+  "reaction_standard_free_energy": null,
+  "initial_flux": {
+    "forward": null,
+    "reverse": null,
+    "net": null
+  },
+  "initial_source_rates": {
+    "species": {
+      "co2": null,
+      "co2-bound": null
+    },
+    "vacancies": {
+      "acid-A": null,
+      "oxygen-B": null
+    }
+  },
+  "detailed_balance_numeric_residual": null,
+  "computed_steady_state": null,
+  "required_equilibrium_residual": {
+    "forward_minus_reverse": 0,
+    "species": {
+      "co2": 0,
+      "co2-bound": 0
+    },
+    "vacancies": {
+      "acid-A": 0,
+      "oxygen-B": 0
+    }
+  },
+  "native_input_comparison": null
+}

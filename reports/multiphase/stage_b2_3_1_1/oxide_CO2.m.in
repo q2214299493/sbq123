@@ -1,0 +1,15 @@
+% REVIEW TEMPLATE. NOT A RUN INPUT. Fields in angle brackets need sourced values.
+% One CO2 molecule, #1 = acid-A, #2 = oxygen-B. Manual sections 4.1 and 4.3.
+(1): CO2 + #1 + #2 <-> CO2#1#2 [<effective_Ea_eV> <effective_G0_eV>]
+T = <temperature_K>;
+P_CO2_FROZ = <CO2_partial_pressure_bar>;
+Q1x2_CO2_INIT = <bridge_population_in_documented_native_units>;
+% Counting-cell vacancy fractions. Check both against the native normalization.
+Q1_v_INIT = 0.5;
+Q2_v_INIT = 0.33333333333333333;
+CalMode = 0;
+ThermoMode = 0;
+BarrierMode = -2;
+ConsMode = 0;
+Istart = 0;
+npar = 0;
