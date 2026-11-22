@@ -12,6 +12,7 @@ from jsonschema import Draft202012Validator
 from jsonschema.exceptions import best_match
 from referencing import Registry, Resource
 
+from scripts.kinetic_data.interphase_transfer import assess_transfer
 from scripts.runtime_resources import resource_path
 from scripts.scientific_validation import finite_number
 
@@ -152,7 +153,9 @@ def _check_context(record, index):
         if (not matches_interface_surfaces(record, interface, index)
                 or ("species_id" not in record and interface_phase_ids(interface, index) != located)):
             raise ValueError("interface and surface context disagree")
-    elif len(surfaces) > 1:
+    elif len(surfaces) > 1 and not (
+        record.get("reaction_type") == "interphase_transfer" and record["eligibility"] in ("draft", "blocked")
+    ):
         raise ValueError("multi-surface context needs an interface")
     return {_get(index, "surfaces", key)["phase_id"] for key in surfaces}
 
@@ -264,6 +267,8 @@ def _check_reaction(reaction, index):
     if _check_context(reaction, index) != set(reaction["phase_ids"]):
         raise ValueError("phase/surface context mismatch")
     _check_balance(reaction, index)
+    if reaction["reaction_type"] == "interphase_transfer":
+        assess_transfer(reaction, index)
     _check_triple(reaction["electronic_energies"], reaction, thermal=False)
     free = reaction["free_energies"]
     if free is not None:

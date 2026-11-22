@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "event_id": "history-stage-b2-2-2-interphase-transfer-20261122",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-stage-b2-2-2-interphase-transfer-20261122",
+    "module": "reaction_network"
+  },
+  "occurred_at": "2026-11-22T04:40:27.856623+00:00",
+  "recorded_at": "2026-11-22T04:40:27.856623+00:00",
+  "summary": "Record Stage B.2.2.2 offline interphase species transfer contract validation.",
+  "payload": {
+    "markdown": "- Stage B.2.2.2 validated an explicit interphase transfer contract. The synthetic finite cell conserved three molecules and both capacities (3 and 5). Each Windows worktree passed 779 focused tests. Fe(110) MKM remains blocked. See reports/multiphase/stage_b2_2_2/completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "reports/multiphase/stage_b2_2_2/completion.md",
+      "authority": "repository_document",
+      "sha256": "6d2fdc5b64c6c75c954ce8a2c4ca1343b1e5fa2115f4bb6e71c7c60c495af06f",
+      "observed_at": "2026-11-22T04:40:27.856623+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b2_2_2/regression.md",
+      "authority": "repository_document",
+      "sha256": "656dda69e6f914dbfac20c8c85325cfba12828f6cfca78a32d2140667ec60055",
+      "observed_at": "2026-11-22T04:40:27.856623+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b2_2_2/transfer_validation.json",
+      "authority": "repository_document",
+      "sha256": "dd80d789e0a679d3cf386f02550f76501658ef1510287cf0aff20ae05068dfbb",
+      "observed_at": "2026-11-22T04:40:27.856623+00:00"
+    },
+    {
+      "locator": "tests/fixtures/multiphase/synthetic_interphase_transfer.json",
+      "authority": "repository_document",
+      "sha256": "d8d58db34a53476d51cfbb5ca1cb97374587dd2373b47d85d2fdc29e0f732042",
+      "observed_at": "2026-11-22T04:40:27.856623+00:00"
+    },
+    {
+      "locator": "tests/fixtures/multiphase/synthetic_transfer_context.json",
+      "authority": "repository_document",
+      "sha256": "bd5787f87d8f2f8dfe216abc4314be4d24906758546e0852514d51b6f50b8d60",
+      "observed_at": "2026-11-22T04:40:27.856623+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

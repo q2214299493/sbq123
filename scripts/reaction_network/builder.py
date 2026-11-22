@@ -4,17 +4,18 @@ from copy import deepcopy
 from datetime import datetime
 
 from scripts.artifact_io import sha256_json
+from scripts.kinetic_data.interphase_transfer import assess_transfer
 from scripts.multiphase_contracts import COLLECTIONS, ENERGY_ATOL_EV, _check_species_context, validate_bundle
 from scripts.scientific_intake import report as intake_report
 from scripts.scientific_validation import finite_number, validate_finite_tree
 from scripts.thermochemistry.engine import ts_binding
-from scripts.reaction_network.catalog import catalog, check_context, register_species, site_counts, site_mapping
+from scripts.reaction_network.catalog import catalog, check_context, check_record_field, register_species, site_counts, site_mapping
 from scripts.reaction_network.thermodynamics import check_cycles, thermal_evidence
 from scripts.reaction_network.site_review import apply_review, domain_balance
 
 LEVELS = ("DRAFT", "STRUCTURALLY_VALID", "THERMODYNAMICALLY_VALID", "SCIENTIFICALLY_ACCEPTED", "KINETICALLY_ELIGIBLE")
 TYPES = {"adsorption", "desorption", "dissociation", "hydrogenation", "dehydrogenation", "c_c_coupling",
-         "c_o_cleavage", "diffusion", "association", "interfacial", "surface_reaction", "multi_site", "other"}
+         "c_o_cleavage", "diffusion", "association", "interfacial", "interphase_transfer", "surface_reaction", "multi_site", "other"}
 
 
 def from_registry_mapping(mapping, project_id):
@@ -170,6 +171,15 @@ def structural_gaps(r, index):
                                  or (participants and set(declared) - participants)):
         raise ValueError("Reaction phases differ from surface domains")
     gaps = []
+    if "operating_conditions_ref" in r:
+        if r["reaction_type"] != "interphase_transfer":
+            raise ValueError("operating_conditions_ref requires a declared interphase transfer")
+        check_record_field("reaction", "operating_conditions_ref", r["operating_conditions_ref"])
+    if r["reaction_type"] == "interphase_transfer":
+        if r.get("provenance") not in (None, []):
+            check_record_field("reaction", "provenance", r["provenance"])
+        if not r.get("interface_id"):
+            gaps.append("Transfer interface unconfirmed")
     site_balance = balance(r, index, gaps)
     if None in phases:
         gaps.append("Catalyst phase unconfirmed")
@@ -228,9 +238,12 @@ def inspect_reaction(r, index, calc, mapping):
     energies = thermal_evidence(r, calc)
     free = energies["gibbs_ev"]
     needed = ("forward", "reaction") if r.get("reversible") is False else ("forward", "reverse", "reaction")
+    missing_ts = r.get("ts_treatment") not in ("located", "barrierless")
     if any(free[k] is None for k in needed):
         gaps.append("Missing compatible free energies")
-    elif r.get("ts_treatment") not in ("located", "barrierless"):
+        if missing_ts and r["reaction_type"] == "interphase_transfer":
+            gaps.append("Unresolved transition-state treatment")
+    elif missing_ts:
         gaps.append("Unresolved transition-state treatment")
     elif level == LEVELS[1] and (calc is None or calc["status"] == "complete"):
         level = LEVELS[2]
@@ -242,7 +255,14 @@ def inspect_reaction(r, index, calc, mapping):
     net.subtract({"species:" + k: n for k, n in r["reactants"].items()})
     net.update({"site:" + k: n for k, n in (r.get("sites_released") or {}).items()})
     net.subtract({"site:" + k: n for k, n in (r.get("sites_consumed") or {}).items()})
-    return {"definition": r, "direction": direction, "net_stoichiometry": dict(sorted(net.items())),
+    attributes = {}
+    if r["reaction_type"] == "interphase_transfer":
+        transfer = assess_transfer(r, index)
+        attributes["interphase_transfer"] = transfer
+        for endpoint in (transfer["source"], transfer["destination"]):
+            for site, changes in endpoint["inventories"].items():
+                net["site:" + site] = changes["vacancy_change"]
+    return {**attributes, "definition": r, "direction": direction, "net_stoichiometry": dict(sorted(net.items())),
             "site_balance": site_balance, "energies": energies, "thermochemistry": calc, "level": level,
             "origin": r.get("origin", "supplied_definition"), "site_mapping": mapping,
             "user_confirmation": (mapping or {}).get("user_confirmation", r.get("user_confirmation")),

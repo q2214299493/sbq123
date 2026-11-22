@@ -197,7 +197,8 @@ def check_context(row, index):
     if surfaces - index["surfaces"].keys() or len(surfaces) != len(row["surface_ids"]):
         raise ValueError("Unknown or repeated surface")
     interface = row.get("interface_id")
-    if interface is not None or len(surfaces) > 1:
+    partial_transfer = "reaction_id" in row and row.get("reaction_type") == "interphase_transfer"
+    if interface is not None or (len(surfaces) > 1 and not partial_transfer):
         if interface not in index["interfaces"] or not matches_interface_surfaces(row, index["interfaces"][interface], index):
             raise ValueError("Interface and surface domains disagree")
     return {index["surfaces"][sid].get("phase_id") for sid in surfaces}

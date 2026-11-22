@@ -90,3 +90,13 @@ python -m scripts.reaction_network tests/fixtures/multiphase/synthetic_identity_
 ```
 
 For the Fe confirmation template also pass `--site-catalog reports/multiphase/phase2_3_1_fe110_site_types.json`. For an independent example, run `python -m scripts.reaction_network tests/fixtures/multiphase/synthetic_oxide_site_network.json`. This synthetic oblique oxide surface declares Lewis-acid and basic-oxygen inventories and binds one molecule across both.
+
+## Interphase species transfer
+
+Declare `reaction_type = interphase_transfer` in a Phase 1 bundle or a partial `network-definition/1`. Use one resident species ID per side and equal molecular coefficients. The two residents must have the same elemental composition and compatible declared charge. Their surface owners identify distinct phases. Their catalog records retain the individual structures, configurations and site footprints. Supply the reaction's contact ID when established. An unknown contact can be recorded in a partial or noneligible definition. An interface-private site still requires its own contact binding.
+
+For each molecule the forward event releases the source footprint and consumes the destination footprint. The network checks the gross counts against the corresponding species coefficient, site ID and owning surface. Its transfer assessment reports signed changes in occupied sites, vacancies and capacity for each affected inventory. Null means an operand is missing. An unknown footprint on one side leaves the other side's accounting available. The existing molecular coverage contract supplies absolute capacities on a declared counting reference. The stoichiometric coefficients describe changes per reaction event.
+
+Use `operating_conditions_ref` for a profile with a path and SHA-256 and `provenance` for the evidence bindings. The reaction definition and those bindings enter the reviewed subject. The usual `reversible` field controls construction of the reverse direction. A partial definition can keep it null. Structural validation creates no kinetic parameters or engine approval.
+
+Run `python -m scripts.reaction_network tests/fixtures/multiphase/synthetic_interphase_transfer.json` to inspect the offline example. The accompanying synthetic counting cell and conditions are arithmetic test inputs. [Validation and qualification](../../reports/multiphase/stage_b2_2_2/completion.md)
