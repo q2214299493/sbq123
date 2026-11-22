@@ -42,7 +42,7 @@ def _names(value, label):
     return value
 
 
-def _network(source, path, digest, project, version, reaction):
+def _network(source, path, digest, project, version, reaction, *, isolate=False):
     if source["format"] == "network-definition/1":
         snapshot = build_network(source, sources=[{"role": "definition", "file": path.name, "sha256": digest}])
     else:
@@ -59,8 +59,15 @@ def _network(source, path, digest, project, version, reaction):
     conservation = {}
     for definition in definitions:
         gaps = []
-        balance(definition, index, gaps)
-        conservation[definition["reaction_id"]] = {"unresolved": gaps}
+        result = conservation[definition["reaction_id"]] = {"unresolved": gaps}
+        try:
+            sites = balance(definition, index, gaps)
+            if isolate:
+                result["site_balance"] = sites
+        except (KeyError, ValueError, TypeError) as exc:
+            if not isolate:
+                raise
+            result["invalid"] = str(exc)
     return snapshot, {
         "version": snapshot["network_version"], "project_id": project,
         "ownership": ownership_report(snapshot), "species": [
@@ -219,7 +226,7 @@ def _observe(name, docs, paths, inventory, reaction_id, base):
         [] if validation["native_initialization"] == "passed" else ["Native initialization did not qualify"])
 
 
-def _engine(engine, requested, docs):
+def _engine(engine, requested, docs, *, include_inputs=False):
     result = {"requested": engine in requested, "execution_authorized": False, "status": "unassessed"}
     dataset = docs.get("dataset")
     if dataset is None:
@@ -236,27 +243,31 @@ def _engine(engine, requested, docs):
                 if engine == "mkm":
                     from scripts.baseline_mkm.single_point import qualify
 
-                    qualify(docs["network"], dataset, config)
+                    files, manifest = qualify(docs["network"], dataset, config)
                 else:
                     from scripts.native_model import assemble
 
-                    assemble("zacros", dataset, config)
+                    files, manifest = assemble("zacros", dataset, config)
                 result.update(status="input_eligible", missing=[])
+                if include_inputs:
+                    result.update(files=files, manifest=manifest)
             except DATA_ERRORS as exc:
                 result.update(status="blocked", missing=[str(exc)])
+                if include_inputs:
+                    result["configuration_rejected"] = True
     return result
 
 
 DATA_ERRORS = (ValueError, KeyError, TypeError, IndexError, AttributeError, ValidationError)
 
 
-def _bind_scientific_sources(docs, paths, inventory, project_id, version, reaction):
+def _bind_scientific_sources(docs, paths, inventory, project_id, version, reaction, *, isolate=False):
     network_view = None
     if "network" in docs:
         try:
             source = docs.pop("network")
             n, network_view = _network(source, paths["network"], inventory["network"]["actual_sha256"],
-                                       project_id, version, reaction)
+                                       project_id, version, reaction, isolate=isolate)
             docs.update(network=n, _definition=source)
         except DATA_ERRORS as exc:
             inventory["network"].update(status="invalid_reference", reason=str(exc))
@@ -306,7 +317,7 @@ def _catalog_view(docs, inventory, project_id, network_view):
         return None
 
 
-def _inspect_context(project, task, context, base):
+def _inspect_context(project, task, context, base, kinetic_readiness):
     project_id = project.get("catalyst_project_id", project["project_id"])
     version = context.get("network_version", task.get("network_version"))
     reaction = context.get("reaction_id", task.get("reaction_id"))
@@ -314,12 +325,34 @@ def _inspect_context(project, task, context, base):
     if context is not task:
         sources.append(context.get("sources", {}))
     inventory, docs, paths = resolve_sources(base, sources, project_id, version, reaction)
-    network_view = _bind_scientific_sources(docs, paths, inventory, project_id, version, reaction)
+    network_view = _bind_scientific_sources(docs, paths, inventory, project_id, version, reaction, isolate=kinetic_readiness)
     catalyst = _catalog_view(docs, inventory, project_id, network_view)
     names = _names(context.get("requested_observables", task.get("requested_observables", [])), "observables")
     engines = _names(context.get("engine_routes", task.get("engine_routes", [])), "engine routes")
     if set(engines) - {"mkm", "kmc"}:
         raise ValueError("Unknown requested engine route")
+    if kinetic_readiness:
+        defaults = ("native_rates", "tof", "stable_drc", "lattice", "native_initialization", "candidate_input")
+        names = names + [name for name in defaults if name not in names and all(k in inventory for k in REQUIRES[name])]
+    observables = _observables(names, docs, paths, inventory, reaction, base)
+    pipeline = {}
+    if kinetic_readiness:
+        rows, eligible = _kinetic_pipeline(docs, inventory, network_view, observables, reaction, engines, base,
+                                         context.get("thermal_phase", task.get("thermal_phase")))
+        pipeline["kinetic_readiness"] = rows
+    else:
+        eligible = {e: _engine(e, engines, docs) for e in ("mkm", "kmc")}
+    historical = observables.get("native_initialization", {})
+    if historical.get("value", {}) and historical["value"]["native_initialization"] == "failed":
+        eligible["kmc"].update(status="blocked", historical_initialization="failed")
+    conditions = _operating_conditions(docs, observables)
+    return {"reaction_id": reaction, "operating_point_id": context.get("operating_point_id", task.get("operating_point_id")),
+            "operating_conditions": conditions,
+            "network": network_view, "catalyst_ownership": catalyst, "evidence": inventory, "observables": observables,
+            "engines": eligible, **pipeline}
+
+
+def _observables(names, docs, paths, inventory, reaction, base):
     observables = {}
     for name in names:
         roles = REQUIRES.get(name, ())
@@ -345,15 +378,7 @@ def _inspect_context(project, task, context, base):
                 status, gaps = "invalid_reference", [str(exc)]
         observables[name] = {"status": status, "sources": list(roles), "value": value, "missing": gaps,
                              "blocker": gaps[0] if gaps else None}
-    eligible = {e: _engine(e, engines, docs) for e in ("mkm", "kmc")}
-    historical = observables.get("native_initialization", {})
-    if historical.get("value", {}) and historical["value"]["native_initialization"] == "failed":
-        eligible["kmc"].update(status="blocked", historical_initialization="failed")
-    conditions = _operating_conditions(docs, observables)
-    return {"reaction_id": reaction, "operating_point_id": context.get("operating_point_id", task.get("operating_point_id")),
-            "operating_conditions": conditions,
-            "network": network_view, "catalyst_ownership": catalyst, "evidence": inventory, "observables": observables,
-            "engines": eligible}
+    return observables
 
 
 def _operating_conditions(docs, observables):
@@ -372,7 +397,7 @@ def _operating_conditions(docs, observables):
     return conditions
 
 
-def inspect_project(project_path, task_path):
+def inspect_project(project_path, task_path, *, kinetic_readiness=False):
     project_path, task_path = Path(project_path), Path(task_path)
     project, task = manifest(project_path), manifest(task_path)
     if type(project.get("version")) is not int or project["version"] != 1:
@@ -395,9 +420,153 @@ def inspect_project(project_path, task_path):
             for c in contexts]
     if any(x is not None and not isinstance(x, str) for pair in keys for x in pair) or len(keys) != len(set(keys)):
         raise ValueError("Invalid or ambiguous reaction/operating-point scope")
-    inspected = [_inspect_context(project, task, c, base_path) for c in contexts]
+    inspected = [_inspect_context(project, task, c, base_path, kinetic_readiness) for c in contexts]
     return {"project_id": project["project_id"], "objective": project.get("objective"),
             "system": project.get("system"), "catalyst_project_id": project.get("catalyst_project_id", project["project_id"]),
             "task_id": task["task_id"], "evidence_base": base, "execution_authorized": False,
             "constraints": {k: task[k] for k in ("authorized_scope", "forbidden") if k in task},
             "contexts": inspected}
+
+
+def _pipeline_bindings(docs):
+    if "models" in docs:
+        return docs["models"]
+    if "dataset" in docs:
+        dataset = docs["dataset"]
+        return {"network_version": dataset["network_version"],
+                "models": [r["model"] for r in dataset["reactions"] if r["model"] is not None]}
+    return None
+
+
+def _pipeline_errors(docs, inventory, network, reaction, base):
+    ids = {row["definition"]["reaction_id"] for row in network["reactions"]}
+    errors = {rid: {} for rid in ids}
+    for role in ("dataset", "models", "intake", "ts_review", "catalog"):
+        ref = inventory.get(role)
+        if ref and ref["status"] != "verified":
+            target = reaction or (docs.get("intake", {}).get("reaction_id") if role in ("intake", "ts_review") else None)
+            for rid in ids if target is None or role in ("dataset", "models", "catalog") else [target]:
+                errors[rid][role] = f"{role}: {ref['status']}"
+    intake = docs.get("intake")
+    if intake:
+        rid = intake["reaction_id"]
+        if rid not in ids:
+            raise ValueError("Intake reaction outside the selected network")
+        try:
+            selected = {f.get("selected") for f in report([intake], "thermochemistry")["fields"].values() if f["usable"]}
+            refs = {rec["id"]: {"path": rec["provenance"]["source_reference"],
+                                "sha256": rec["provenance"]["source_artifact_hash"]}
+                    for rec in intake["records"] if rec["id"] in selected and rec["provenance"].get("source_artifact_hash")}
+            # Record IDs are arbitrary. Resolve each as opaque bytes, even if its ID is also a document role.
+            local, _, _ = resolve_sources(base, [{"record/" + k: v for k, v in refs.items()}], None, None, None)
+            damaged = [f"{k}: {v['status']}" for k, v in local.items()
+                       if v["status"] in ("invalid_reference", "hash_mismatch")]
+            if damaged:
+                errors[rid]["intake"] = ", ".join(damaged)
+        except DATA_ERRORS as exc:
+            errors[rid]["intake"] = str(exc)
+    return errors
+
+
+def _reaction_engine(engine, row, assembled, species, outputs):
+    kinetic = row["kinetics"]
+    issues = list(row["missing"])
+    if engine == "kmc" and kinetic:
+        from scripts.kinetic_parameters.export import verify_event
+
+        try:
+            verify_event(kinetic["local_event"], {"site_balance": row["conservation"]["site_balance"],
+                                                "direction": row["direction"]}, species)
+        except DATA_ERRORS as exc:
+            issues.append(str(exc))
+    if issues or row["status"] != "qualified":
+        status = "blocked"
+    elif assembled.get("configuration_rejected"):
+        status = "blocked"
+    elif assembled["status"] == "input_eligible":
+        status = "input_eligible"
+    else:
+        status = "parameters_qualified"
+    return {"status": status, "network_input_status": assembled["status"],
+            "missing": issues or assembled.get("missing", []), "usable_outputs": outputs}
+
+
+def _qualify_rows(docs, inventory, view, reaction, base, phase):
+    from scripts.kinetic_parameters.engine import qualify_network_rows
+
+    network = docs.get("network")
+    rows, dataset, problems = {}, None, []
+    if network:
+        try:
+            errors = _pipeline_errors(docs, inventory, network, reaction, base)
+            rows, dataset = qualify_network_rows(
+                network, _pipeline_bindings(docs), conservation=view["conservation"], intake=docs.get("intake"),
+                review=docs.get("ts_review"), phase=phase, input_errors=errors,
+                intake_bound=any(a["role"] == "intake" and a["sha256"] == inventory.get("intake", {}).get("actual_sha256")
+                                 for a in network["source_artifacts"]),
+                verified_hashes=[v["actual_sha256"] for v in inventory.values() if v["status"] == "verified"])
+            if "models" in docs and "dataset" in docs:
+                archived = {r["reaction_id"]: r["model"] for r in docs["dataset"]["reactions"]}
+                supplied = {r["reaction_id"]: r for r in docs["models"]["models"]}
+                for rid, row in rows.items():
+                    if archived[rid] != supplied.get(rid):
+                        row.update(status="invalid_input", kinetics=None)
+                        row["missing"].append("Selected model differs from archived kinetic dataset")
+                        dataset = None
+            if dataset and "dataset" in docs:
+                _equal(dataset, docs["dataset"], "Regenerated kinetic dataset")
+        except DATA_ERRORS as exc:
+            dataset = None
+            problems.append(str(exc))
+            for row in rows.values():
+                row.update(status="invalid_input", kinetics=None)
+                row["missing"].append(str(exc))
+    else:
+        problems.append(inventory.get("network", {}).get("reason", "Missing verified reaction network"))
+    return rows, dataset, problems
+
+
+def _kinetic_pipeline(docs, inventory, view, observables, reaction, engines, base, phase):
+    network = docs.get("network")
+    rows, dataset, problems = _qualify_rows(docs, inventory, view, reaction, base, phase)
+    working = dict(docs, dataset=dataset)
+    if dataset and dataset["export_eligible"] and any(row["status"] != "qualified" for row in rows.values()):
+        working["dataset"] = None
+    eligible = {e: _engine(e, engines, working, include_inputs=True) for e in ("mkm", "kmc")}
+    for result in eligible.values():
+        if result["status"] != "input_eligible":
+            result["status"] = "blocked"
+            if rows and not dataset:
+                result["missing"] = ["Complete network-bound kinetic dataset required for input assembly"]
+            result["missing"] = list(dict.fromkeys(problems + [
+                reason for row in rows.values() for reason in row["missing"]] + result.get("missing", [])))
+    usable = [name for name, result in observables.items() if result["status"] == "available"]
+    mkm = eligible["mkm"]
+    if "tof" in usable and "manifest" in mkm:
+        bound = mkm["manifest"]["files"] == docs["mkm_receipt"].get("native_input_hashes")
+        mkm["archived_input_hashes_match"] = bound
+        if not bound:
+            usable = [name for name in usable if name not in ("tof", "stable_drc", "native_rates")]
+            problems.append("Reconstructed input bytes differ from the archived MKM run")
+    if "tof" in usable and not mkm.get("archived_input_hashes_match"):
+        usable = [name for name in usable if name not in ("tof", "stable_drc")]
+    species = {r["species_id"]: r for r in (network or {}).get("species", [])}
+    native = observables.get("native_rates", {})
+    stable_drc = {r["reaction_id"] for r in observables["stable_drc"]["value"]} if "stable_drc" in usable else set()
+    for rid, row in rows.items():
+        row["evidence_roles"] = [k for k in ("network", "models", "dataset") if k in inventory]
+        if docs.get("intake", {}).get("reaction_id") == rid:
+            row["evidence_roles"].extend(k for k in ("intake", "ts_review") if k in inventory)
+        row["engines"] = {
+            e: _reaction_engine(e, row, result, species,
+                                [k for k in usable if k in (("tof", "stable_drc") if e == "mkm" else ("lattice",))
+                                 and (k != "stable_drc" or rid in stable_drc)])
+            for e, result in eligible.items()
+        }
+        row["native_normalization"] = None
+        if "native_rates" in usable and any(r["reaction_id"] == rid for r in native["value"]["reaction_rates"]):
+            row["native_normalization"] = native["value"]["native_normalization"]
+            row["native_coefficients"] = [r for r in native["value"]["rate_coefficients"] if r["reaction_id"] == rid]
+    selected = {k: v for k, v in rows.items() if reaction is None or k == reaction}
+    return {"reactions": selected, "issues": problems, "usable_outputs": usable,
+            "dataset_version": (dataset or {}).get("dataset_version"), "execution_authorized": False}, eligible

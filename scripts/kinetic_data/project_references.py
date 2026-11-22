@@ -41,7 +41,7 @@ FORMATS = {
 }
 JSON_ROLES = set(FORMATS) | {
     "intake", "configuration", "kmc_configuration", "graph", "kmc_validation",
-    "candidate_manifest", "original_manifest", "kmc_receipt", "qualification", "catalog",
+    "candidate_manifest", "original_manifest", "kmc_receipt", "qualification", "catalog", "ts_review", "models",
 }
 
 

@@ -53,3 +53,17 @@ Machine-readable tables, units, references, confidence/review fields, validators
 ## Condition-specific kinetic parameters
 
 The offline parameter engine consumes a content-addressed reaction network and a reviewed choice of rate law. It reuses the Phase 1 parameter schema, including units, validity range, uncertainty and coverage terms. [Rate laws, review contract and export commands](kinetic_parameters.md)
+
+## Reaction-to-model readiness
+
+Run `python -m scripts.scientific_intake --kinetic-readiness PROJECT.yaml TASK.yaml` for an offline JSON result.
+The project and task use the [existing Scientific Intake contract](scientific_intake.md). A task may supply
+a hash-pinned `models` document in the kinetic parameter engine's bindings format, or an existing
+`dataset`. Supply `intake` and `ts_review` to recalculate state corrections for the intake's reaction.
+An optional `thermal_phase` selects the thermochemistry owner's phase convention.
+
+For each context, `kinetic_readiness.reactions` contains conservation, state corrections, direction-specific
+rates, blockers and evidence roles. A reaction can retain qualified parameters when a different reaction
+prevents full-network assembly. The separate `engines.mkm` and `engines.kmc` entries contain native
+file contents and a manifest when their respective preparation checks pass. Execution requires the
+existing native execution gate. [Three offline examples](../../reports/workflow_development/stage_v2_1/completion.md)

@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "event_id": "history-v2-1-reaction-kinetic-readiness-20261122",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-v2-1-reaction-kinetic-readiness-20261122",
+    "module": "kinetic_data"
+  },
+  "occurred_at": "2026-11-22T13:33:52.697912+00:00",
+  "recorded_at": "2026-11-22T13:33:52.697912+00:00",
+  "summary": "Record offline reaction-to-model readiness and three reproducible evidence reports.",
+  "payload": {
+    "markdown": "- V.2.1 added per-reaction kinetic readiness to Scientific Intake. Four Ni/Cu benchmark steps reproduce the archived CATKINAS input. Fe(110) retains TS-local ZPE and blocked Gibbs and rate handoffs. The oxide fixture retains its seven-node mapping and failed native initialization."
+  },
+  "evidence": [
+    {
+      "locator": "reports/workflow_development/stage_v2_1/fe110.json",
+      "sha256": "dd2541ee99a4850981c285213b5290c75704b09b9b5bec6b9e5cf9d6bfd17e04",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T13:33:52.697912+00:00"
+    },
+    {
+      "locator": "reports/workflow_development/stage_v2_1/nicu.json",
+      "sha256": "7f41de567ca41b570994381d8a54771d4e551603a1e9365436d9c9af397228a8",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T13:33:52.697912+00:00"
+    },
+    {
+      "locator": "reports/workflow_development/stage_v2_1/oxide.json",
+      "sha256": "c200cd92555bad334753b6d803c5b39131e7da2c8429182d0bf494879c50415e",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T13:33:52.697912+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

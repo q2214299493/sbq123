@@ -30,16 +30,21 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("intakes", type=Path, nargs="*", help="Base reaction followed by optional evidence uploads")
     parser.add_argument("--operation", choices=OPERATIONS, default=None)
-    parser.add_argument("--inspect-project", nargs=2, type=Path, metavar=("PROJECT", "TASK"),
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument("--inspect-project", nargs=2, type=Path, metavar=("PROJECT", "TASK"),
                         help="Inspect a project and task YAML offline and print a JSON evidence report")
+    modes.add_argument("--kinetic-readiness", nargs=2, type=Path, metavar=("PROJECT", "TASK"),
+                        help="Qualify each network reaction and reconstruct eligible engine inputs offline")
     args = parser.parse_args()
-    if args.inspect_project:
+    if args.inspect_project or args.kinetic_readiness:
         if args.intakes or args.operation is not None:
-            parser.error("--inspect-project is separate from positional reaction intake and --operation")
+            mode = "--inspect-project" if args.inspect_project else "--kinetic-readiness"
+            parser.error(f"{mode} is separate from positional reaction intake and --operation")
         from scripts.kinetic_data.project_inspection import inspect_project
 
         try:
-            result = inspect_project(*args.inspect_project)
+            result = inspect_project(*(args.inspect_project or args.kinetic_readiness),
+                                     kinetic_readiness=bool(args.kinetic_readiness))
         except (ValueError, OSError) as exc:
             parser.error(str(exc))
         print(json.dumps(result, ensure_ascii=True, indent=2, allow_nan=False))

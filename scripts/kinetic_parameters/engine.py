@@ -191,7 +191,7 @@ def reaction_record(entry, parameters, model, species, version, verified):
     return row
 
 
-def generate(network, bindings=None, *, verified_hashes=()):
+def _bound_inputs(network, bindings, verified_hashes):
     check_version(network, "network_version")
     if network.get("format") != "reaction-network/1":
         raise ValueError("Expected a Phase 2.3 reaction network")
@@ -208,10 +208,118 @@ def generate(network, bindings=None, *, verified_hashes=()):
     parameters = {p["parameter_set_id"]: p for p in network["parameter_sets"]}
     verified = set(verified_hashes)
     verified.update(s["sha256"] for s in network["source_artifacts"] if s["role"] == "verified_evidence")
-    records = [reaction_record(r, parameters, models.get(r["definition"]["reaction_id"]), species, version, verified)
-               for r in network["reactions"]]
+    return models, parameters, species, verified
+
+
+def _dataset(network, records):
+    version = network["network_version"]
     payload = {"format": "kinetic-dataset/1", "network_version": version, "project_id": network["project_id"],
                "catalog": network["catalog"], "species": network["species"], "source_artifacts": network["source_artifacts"],
                "reactions": records, "export_eligible": bool(records) and all(r["export_eligible"] for r in records),
                "execution_authorized": False}
     return {"dataset_version": sha256_json(payload), **payload}
+
+
+def generate(network, bindings=None, *, verified_hashes=()):
+    models, parameters, species, verified = _bound_inputs(network, bindings, verified_hashes)
+    version = network["network_version"]
+    records = [reaction_record(r, parameters, models.get(r["definition"]["reaction_id"]), species, version, verified)
+               for r in network["reactions"]]
+    return _dataset(network, records)
+
+
+def _thermal_input(entry, intake, review, phase):
+    """Re-bind raw or precomputed state evidence using the thermochemistry and network owners."""
+    from scripts.reaction_network.thermodynamics import thermal_evidence
+    from scripts.thermochemistry.engine import calculate as calculate_thermochemistry, ts_binding
+
+    definition = entry["definition"]
+    calc = entry.get("thermochemistry")
+    route = "network_state_record" if calc else "network_energy_terms"
+    if intake is not None:
+        calc = calculate_thermochemistry([intake], ts_review=review, phase=phase)
+        route = "state_intake"
+    energies = thermal_evidence(definition, calc)
+    complete = all(v is not None for v in energies["gibbs_ev"].values())
+    return energies, calc, {
+        "route": route, "status": "available" if complete else "partial",
+        "energies": energies, "closure_checked": complete,
+        "states": (calc or {}).get("states"), "state_free_energy_ev": (calc or {}).get("state_free_energy_ev"),
+        "electronic_sources": (calc or {}).get("electronic_sources"),
+        "closure_residual_ev": ((calc or {}).get("reaction") or {}).get("closure_residual_ev"),
+        "issues": (calc or {}).get("issues", []),
+        "ts_review": ts_binding(review) if intake is not None and review is not None else entry.get("ts_review"),
+    }
+
+
+def qualify_network_rows(network, bindings, *, conservation, intake=None, review=None, phase=None,
+                         verified_hashes=(), input_errors=None, intake_bound=False):
+    """Qualify each row independently. Only a complete, unmodified network can yield an engine handoff."""
+    from jsonschema import ValidationError
+    from scripts.reaction_network.builder import directions
+
+    models, parameters, species, verified = _bound_inputs(network, bindings, verified_hashes)
+    version = network["network_version"]
+    rows, records = {}, []
+    for entry in network["reactions"]:
+        definition = entry["definition"]
+        rid = definition["reaction_id"]
+        state_ids = definition.get("state_identities") or {
+            "IS": definition.get("initial_structure_id"), "TS": definition.get("ts_id"),
+            "FS": definition.get("final_structure_id"),
+        }
+        errors = (input_errors or {}).get(rid, {})
+        row = rows[rid] = {
+            "network_version": version, "reaction_id": rid, "state_identities": state_ids,
+            "direction": entry["direction"], "phase_ids": definition.get("phase_ids"),
+            "surface_ids": definition.get("surface_ids"), "interface_id": definition.get("interface_id"),
+            "required_sites": definition.get("required_sites"), "conservation": conservation[rid],
+            "provenance": definition.get("provenance", []), "thermochemistry": None, "kinetics": None,
+            "status": "blocked", "missing": list(errors.values()),
+        }
+        if "invalid" in conservation[rid]:
+            row["status"] = "invalid_input"
+            row["missing"].append(conservation[rid]["invalid"])
+            continue
+        try:
+            if directions(definition) != entry["direction"]:
+                raise ValueError("Snapshot direction differs from reaction definition")
+            if "site_balance" in conservation[rid] and conservation[rid]["site_balance"] != entry["site_balance"]:
+                raise ValueError("Snapshot site balance differs from reaction inventories")
+            state_input = intake if intake and intake["reaction_id"] == rid else None
+            if not ({"intake", "ts_review"} & errors.keys()):
+                energies, calc, summary = _thermal_input(entry, state_input, review, phase)
+                row["thermochemistry"] = summary
+            if errors:
+                row["status"] = "blocked" if all(e.endswith(": missing_local_file") for e in errors.values()) else "invalid_input"
+                continue
+            archived_review = entry.get("ts_review")
+            review_changed = (state_input is not None and review is not None and archived_review is not None
+                              and archived_review["review_sha256"] != sha256_json(review))
+            changed_evidence = state_input is not None and (not intake_bound or review_changed or
+                               (entry["level"] == "KINETICALLY_ELIGIBLE" and calc != entry.get("thermochemistry")))
+            if energies != entry["energies"] or changed_evidence:
+                row["missing"].append("State evidence differs from this network version; bind a new snapshot and review")
+                continue
+            replay = dict(entry, energies=energies, thermochemistry=calc)
+            kinetic = reaction_record(replay, parameters, models.get(rid), species, version, verified)
+            records.append(kinetic)
+            row["kinetics"] = {k: kinetic[k] for k in ("rates", "equilibrium", "parameter_set", "export_eligible",
+                                                       "local_event_missing", "scientifically_validated")}
+            row["kinetics"]["detailed_balance_established"] = (kinetic["equilibrium"] or {}).get("log_ratio_residual") is not None
+            row["kinetics"]["directions"] = {
+                name: {"status": "available" if rate else
+                       "not_applicable" if name == "reverse" and definition["reversible"] is False else "unknown",
+                       "unit": "s^-1" if rate else None}
+                for name, rate in kinetic["rates"].items()
+            }
+            row["kinetics"]["local_event"] = (kinetic["model"] or {}).get("local_event")
+            row["kinetics"]["model_sources"] = (kinetic["model"] or {}).get("sources", [])
+            row["missing"] = list(dict.fromkeys(conservation[rid]["unresolved"] + summary["issues"] + kinetic["missing"]))
+            if kinetic["export_eligible"] and not row["missing"]:
+                row["status"] = "qualified"
+        except (ValueError, TypeError, KeyError, IndexError, ValidationError) as exc:
+            row["status"] = "invalid_input"
+            row["missing"].append(str(exc))
+    dataset = _dataset(network, records) if len(records) == len(rows) else None
+    return rows, dataset

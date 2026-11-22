@@ -1,0 +1,568 @@
+{
+  "project_id": "oxide-inspection",
+  "objective": "Inspect bridge occupancy and the qualification of the corrected input.",
+  "system": "Synthetic finite oxide software fixture",
+  "catalyst_project_id": "synthetic-oxide",
+  "task_id": "oxide-offline",
+  "evidence_base": "../../../..",
+  "execution_authorized": false,
+  "constraints": {
+    "forbidden": [
+      "native execution",
+      "scientific approval"
+    ]
+  },
+  "contexts": [
+    {
+      "reaction_id": "fixture-adsorption",
+      "operating_point_id": null,
+      "operating_conditions": {},
+      "network": {
+        "version": "a35beac998f393b7ad16e954e74f5982523436605fdcad54934de042ce8e9bfa",
+        "project_id": "synthetic-oxide",
+        "ownership": {
+          "phases": {
+            "oxide-alpha": {
+              "material_id": "oxide",
+              "issues": [
+                "Missing structure_id",
+                "Missing structural_provenance"
+              ],
+              "structure_id": null,
+              "structural_provenance": null,
+              "validation_status": null
+            }
+          },
+          "surfaces": {
+            "oxide-012": {
+              "phase_id": "oxide-alpha",
+              "issues": [
+                "Missing structure_id",
+                "Missing structural_provenance"
+              ],
+              "miller_indices": [
+                0,
+                1,
+                2
+              ],
+              "lattice_vectors_angstrom": [
+                [
+                  6.1,
+                  0,
+                  0
+                ],
+                [
+                  1.7,
+                  5.2,
+                  0
+                ],
+                [
+                  0,
+                  0,
+                  21
+                ]
+              ],
+              "structure_id": null,
+              "structural_provenance": null,
+              "validation_status": null
+            }
+          },
+          "interfaces": {},
+          "sites": {
+            "acid-A": {
+              "surface_id": "oxide-012",
+              "issues": [],
+              "site_type": "lewis-acid",
+              "interface_id": null
+            },
+            "oxygen-B": {
+              "surface_id": "oxide-012",
+              "issues": [],
+              "site_type": "basic-oxygen",
+              "interface_id": null
+            }
+          },
+          "network_version": "a35beac998f393b7ad16e954e74f5982523436605fdcad54934de042ce8e9bfa"
+        },
+        "species": [
+          {
+            "species_id": "co2",
+            "composition": {
+              "C": 1,
+              "O": 2
+            },
+            "charge": 0,
+            "site_occupancy": {},
+            "structure_id": "fixture-gas"
+          },
+          {
+            "species_id": "co2-bound",
+            "composition": {
+              "C": 1,
+              "O": 2
+            },
+            "charge": 0,
+            "site_occupancy": {
+              "acid-A": 1,
+              "oxygen-B": 1
+            },
+            "structure_id": "fixture-bound"
+          }
+        ],
+        "conservation": {
+          "fixture-adsorption": {
+            "unresolved": [],
+            "site_balance": {
+              "acid-A": 1,
+              "oxygen-B": 1
+            }
+          }
+        }
+      },
+      "catalyst_ownership": {
+        "phases": {
+          "oxide-alpha": {
+            "material_id": "oxide",
+            "issues": [
+              "Missing structure_id",
+              "Missing structural_provenance"
+            ],
+            "structure_id": null,
+            "structural_provenance": null,
+            "validation_status": null
+          }
+        },
+        "surfaces": {
+          "oxide-012": {
+            "phase_id": "oxide-alpha",
+            "issues": [
+              "Missing structure_id",
+              "Missing structural_provenance"
+            ],
+            "miller_indices": [
+              0,
+              1,
+              2
+            ],
+            "lattice_vectors_angstrom": [
+              [
+                6.1,
+                0,
+                0
+              ],
+              [
+                1.7,
+                5.2,
+                0
+              ],
+              [
+                0,
+                0,
+                21
+              ]
+            ],
+            "structure_id": null,
+            "structural_provenance": null,
+            "validation_status": null
+          }
+        },
+        "interfaces": {},
+        "sites": {
+          "acid-A": {
+            "surface_id": "oxide-012",
+            "issues": [],
+            "site_type": "lewis-acid",
+            "interface_id": null
+          },
+          "oxygen-B": {
+            "surface_id": "oxide-012",
+            "issues": [],
+            "site_type": "basic-oxygen",
+            "interface_id": null
+          }
+        },
+        "network_version": "a35beac998f393b7ad16e954e74f5982523436605fdcad54934de042ce8e9bfa"
+      },
+      "evidence": {
+        "network": {
+          "reference": {
+            "path": "tests/fixtures/multiphase/synthetic_oxide_site_network.json",
+            "sha256": "24d5c34d33ec332a131e5f957dcb83ff4816e29c5d4c6ba05c47c854d87c6aa2"
+          },
+          "status": "verified",
+          "actual_sha256": "24d5c34d33ec332a131e5f957dcb83ff4816e29c5d4c6ba05c47c854d87c6aa2"
+        },
+        "observation": {
+          "reference": {
+            "path": "reports/multiphase/stage_b2_1/oxide_observations.json",
+            "sha256": "49d84e1cddf511eeb232002dcb87833c312826a8165d02abf644469b47289d0b"
+          },
+          "status": "verified",
+          "actual_sha256": "49d84e1cddf511eeb232002dcb87833c312826a8165d02abf644469b47289d0b"
+        },
+        "graph": {
+          "reference": {
+            "path": "tests/fixtures/multiphase/synthetic_oxide_bridge_graph.json",
+            "sha256": "77d0f2fe9ab30743eec527bf412c4f35ed0097dc66fb9514ae0bb541673d0fea"
+          },
+          "status": "verified",
+          "actual_sha256": "77d0f2fe9ab30743eec527bf412c4f35ed0097dc66fb9514ae0bb541673d0fea"
+        },
+        "original_manifest": {
+          "reference": {
+            "path": "reports/multiphase/stage_b2_3_2_4/native/input_manifest.json",
+            "sha256": "023b40ad208b77a8028d9e03e2131fdc53bd34c2f88f09cdcf2fe19c39f0c285"
+          },
+          "status": "verified",
+          "actual_sha256": "023b40ad208b77a8028d9e03e2131fdc53bd34c2f88f09cdcf2fe19c39f0c285"
+        },
+        "kmc_plan": {
+          "reference": {
+            "path": "reports/multiphase/stage_b2_3_2_4/execution_plan.json",
+            "sha256": "2c0a012270fec9a6a11e52411c9993742fe6ffc3017db333857fbc4c2dd1b7d8"
+          },
+          "status": "verified",
+          "actual_sha256": "2c0a012270fec9a6a11e52411c9993742fe6ffc3017db333857fbc4c2dd1b7d8"
+        },
+        "kmc_receipt": {
+          "reference": {
+            "path": "reports/multiphase/stage_b2_3_2_4/native_acceptance/execution_receipt.json",
+            "sha256": "fdf1fa59f76a8e09c6ecea6aee48f1dadacf0ce513d979936e08f2fbb5a6ae16"
+          },
+          "status": "verified",
+          "actual_sha256": "fdf1fa59f76a8e09c6ecea6aee48f1dadacf0ce513d979936e08f2fbb5a6ae16"
+        },
+        "kmc_validation": {
+          "reference": {
+            "path": "reports/multiphase/stage_b2_3_2_4/native_acceptance/validation.json",
+            "sha256": "3f104f563db479c90f45f80b494b7b2abe348dc53cb6216d126591fe65b133ce"
+          },
+          "status": "verified",
+          "actual_sha256": "3f104f563db479c90f45f80b494b7b2abe348dc53cb6216d126591fe65b133ce"
+        },
+        "candidate_manifest": {
+          "reference": {
+            "path": "reports/architecture_repair/stage_r2_3/native/input_manifest.json",
+            "sha256": "f475a45a53d91ee3f6a9b5c2277ac0a364d8909381c53227e3ee8e04d721d3d6"
+          },
+          "status": "verified",
+          "actual_sha256": "f475a45a53d91ee3f6a9b5c2277ac0a364d8909381c53227e3ee8e04d721d3d6"
+        }
+      },
+      "observables": {
+        "lattice": {
+          "status": "available",
+          "sources": [
+            "network",
+            "observation",
+            "graph"
+          ],
+          "value": {
+            "classification": "synthetic_test_assumption",
+            "matrix_node_order": [
+              "acid-1",
+              "acid-2",
+              "acid-3",
+              "acid-4",
+              "oxygen-1",
+              "oxygen-2",
+              "oxygen-3"
+            ],
+            "initial_bridges": {
+              "bridge-1": [
+                1,
+                5
+              ],
+              "bridge-2": [
+                2,
+                6
+              ]
+            },
+            "inventories": {
+              "acid-A": {
+                "capacity": 4,
+                "occupied": 2,
+                "vacant": 2
+              },
+              "oxygen-B": {
+                "capacity": 3,
+                "occupied": 2,
+                "vacant": 1
+              }
+            },
+            "inventory_reference": "oxide-counting-cell",
+            "boundary": "finite_open"
+          },
+          "missing": [],
+          "blocker": null
+        },
+        "native_initialization": {
+          "status": "scientifically_blocked",
+          "sources": [
+            "network",
+            "graph",
+            "original_manifest",
+            "kmc_plan",
+            "kmc_receipt",
+            "kmc_validation"
+          ],
+          "value": {
+            "native_initialization": "failed",
+            "fatal": {
+              "code": 1002,
+              "module": "simulation_parser_module",
+              "file": "simulation_input.dat",
+              "line": 2,
+              "expression": "temperature 400",
+              "stage": "reading_simulation_input",
+              "evidence": "raw_native.zip!/native_run/general_output.txt"
+            },
+            "approval_state": "consumed",
+            "scientific_acceptance": "not_assessed"
+          },
+          "missing": [
+            "Native initialization did not qualify"
+          ],
+          "blocker": "Native initialization did not qualify"
+        },
+        "candidate_input": {
+          "status": "scientifically_blocked",
+          "sources": [
+            "network",
+            "graph",
+            "candidate_manifest"
+          ],
+          "value": {
+            "dataset_id": "synthetic_oxide_zacros_control_v1",
+            "scope": "synthetic_software_control_only",
+            "files": {
+              "energetics_input.dat": {
+                "reference": {
+                  "path": "energetics_input.dat",
+                  "sha256": "e1fb080c2dea34013c5d9ce8355037fb1fe143a06fcd9a7ad8614b653c9673c1"
+                },
+                "status": "verified",
+                "actual_sha256": "e1fb080c2dea34013c5d9ce8355037fb1fe143a06fcd9a7ad8614b653c9673c1"
+              },
+              "lattice_input.dat": {
+                "reference": {
+                  "path": "lattice_input.dat",
+                  "sha256": "cf3180a01f35ad18e0040b0923c49f4cd255e347b9251cca63809abb2354a734"
+                },
+                "status": "verified",
+                "actual_sha256": "cf3180a01f35ad18e0040b0923c49f4cd255e347b9251cca63809abb2354a734"
+              },
+              "mechanism_input.dat": {
+                "reference": {
+                  "path": "mechanism_input.dat",
+                  "sha256": "ff5b3bceeb55554eb9387eb46e89138225c6a22f99c3eae8c53e700c82d9442c"
+                },
+                "status": "verified",
+                "actual_sha256": "ff5b3bceeb55554eb9387eb46e89138225c6a22f99c3eae8c53e700c82d9442c"
+              },
+              "simulation_input.dat": {
+                "reference": {
+                  "path": "simulation_input.dat",
+                  "sha256": "dd9978438bb52098a808378df00ecf458788fba2cad4f5b1abe7c2a347af7689"
+                },
+                "status": "verified",
+                "actual_sha256": "dd9978438bb52098a808378df00ecf458788fba2cad4f5b1abe7c2a347af7689"
+              },
+              "state_input.dat": {
+                "reference": {
+                  "path": "state_input.dat",
+                  "sha256": "b31141eaf314f5f9a6f64cf6d17d1f0ba426c2888b20ca45b05d53144fff7ff0"
+                },
+                "status": "verified",
+                "actual_sha256": "b31141eaf314f5f9a6f64cf6d17d1f0ba426c2888b20ca45b05d53144fff7ff0"
+              }
+            },
+            "files_sha256": {
+              "energetics_input.dat": "e1fb080c2dea34013c5d9ce8355037fb1fe143a06fcd9a7ad8614b653c9673c1",
+              "lattice_input.dat": "cf3180a01f35ad18e0040b0923c49f4cd255e347b9251cca63809abb2354a734",
+              "mechanism_input.dat": "ff5b3bceeb55554eb9387eb46e89138225c6a22f99c3eae8c53e700c82d9442c",
+              "simulation_input.dat": "dd9978438bb52098a808378df00ecf458788fba2cad4f5b1abe7c2a347af7689",
+              "state_input.dat": "b31141eaf314f5f9a6f64cf6d17d1f0ba426c2888b20ca45b05d53144fff7ff0"
+            },
+            "native_qualified": null
+          },
+          "missing": [
+            "Successful native receipt bound to this candidate is unavailable"
+          ],
+          "blocker": "Successful native receipt bound to this candidate is unavailable"
+        }
+      },
+      "engines": {
+        "mkm": {
+          "requested": false,
+          "execution_authorized": false,
+          "status": "blocked",
+          "missing": [
+            "Missing compatible free energies",
+            "Missing kinetic parameters or rate law",
+            "Reversibility unconfirmed",
+            "Kinetic parameter set with units, standard states, validity range and sources missing",
+            "Rate law, scoped parameter review and applicability not supplied"
+          ]
+        },
+        "kmc": {
+          "requested": true,
+          "execution_authorized": false,
+          "status": "blocked",
+          "missing": [
+            "Missing compatible free energies",
+            "Missing kinetic parameters or rate law",
+            "Reversibility unconfirmed",
+            "Kinetic parameter set with units, standard states, validity range and sources missing",
+            "Rate law, scoped parameter review and applicability not supplied",
+            "Local event pattern, neighbor graph and occurrence normalization"
+          ],
+          "historical_initialization": "failed"
+        }
+      },
+      "kinetic_readiness": {
+        "reactions": {
+          "fixture-adsorption": {
+            "network_version": "a35beac998f393b7ad16e954e74f5982523436605fdcad54934de042ce8e9bfa",
+            "reaction_id": "fixture-adsorption",
+            "state_identities": {
+              "IS": "fixture-initial",
+              "TS": null,
+              "FS": "fixture-final"
+            },
+            "direction": {
+              "status": "unknown",
+              "forward": {
+                "reactants": {
+                  "co2": 1
+                },
+                "products": {
+                  "co2-bound": 1
+                },
+                "sites_consumed": {
+                  "acid-A": 1,
+                  "oxygen-B": 1
+                },
+                "sites_released": {}
+              },
+              "reverse": null
+            },
+            "phase_ids": null,
+            "surface_ids": [
+              "oxide-012"
+            ],
+            "interface_id": null,
+            "required_sites": null,
+            "conservation": {
+              "unresolved": [],
+              "site_balance": {
+                "acid-A": 1,
+                "oxygen-B": 1
+              }
+            },
+            "provenance": [],
+            "thermochemistry": {
+              "route": "network_energy_terms",
+              "status": "partial",
+              "energies": {
+                "electronic_ev": {
+                  "forward": null,
+                  "reverse": null,
+                  "reaction": null
+                },
+                "gibbs_ev": {
+                  "forward": null,
+                  "reverse": null,
+                  "reaction": null
+                },
+                "temperature_k": null,
+                "standard_state": null,
+                "thermal_basis": null
+              },
+              "closure_checked": false,
+              "states": null,
+              "state_free_energy_ev": null,
+              "electronic_sources": null,
+              "closure_residual_ev": null,
+              "issues": [],
+              "ts_review": null
+            },
+            "kinetics": {
+              "rates": {
+                "forward": null,
+                "reverse": null
+              },
+              "equilibrium": null,
+              "parameter_set": null,
+              "export_eligible": false,
+              "local_event_missing": [
+                "Local event pattern, neighbor graph and occurrence normalization"
+              ],
+              "scientifically_validated": false,
+              "detailed_balance_established": false,
+              "directions": {
+                "forward": {
+                  "status": "unknown",
+                  "unit": null
+                },
+                "reverse": {
+                  "status": "unknown",
+                  "unit": null
+                }
+              },
+              "local_event": null,
+              "model_sources": []
+            },
+            "status": "blocked",
+            "missing": [
+              "Missing compatible free energies",
+              "Missing kinetic parameters or rate law",
+              "Reversibility unconfirmed",
+              "Kinetic parameter set with units, standard states, validity range and sources missing",
+              "Rate law, scoped parameter review and applicability not supplied"
+            ],
+            "evidence_roles": [
+              "network"
+            ],
+            "engines": {
+              "mkm": {
+                "status": "blocked",
+                "network_input_status": "blocked",
+                "missing": [
+                  "Missing compatible free energies",
+                  "Missing kinetic parameters or rate law",
+                  "Reversibility unconfirmed",
+                  "Kinetic parameter set with units, standard states, validity range and sources missing",
+                  "Rate law, scoped parameter review and applicability not supplied"
+                ],
+                "usable_outputs": []
+              },
+              "kmc": {
+                "status": "blocked",
+                "network_input_status": "blocked",
+                "missing": [
+                  "Missing compatible free energies",
+                  "Missing kinetic parameters or rate law",
+                  "Reversibility unconfirmed",
+                  "Kinetic parameter set with units, standard states, validity range and sources missing",
+                  "Rate law, scoped parameter review and applicability not supplied",
+                  "Zacros requires reviewed local site pattern and event normalization"
+                ],
+                "usable_outputs": [
+                  "lattice"
+                ]
+              }
+            },
+            "native_normalization": null
+          }
+        },
+        "issues": [],
+        "usable_outputs": [
+          "lattice"
+        ],
+        "dataset_version": "0152236b0570e550ebbe16abbc1cf690a304a54dd4ec127c661645a5e3787fb1",
+        "execution_authorized": false
+      }
+    }
+  ]
+}
