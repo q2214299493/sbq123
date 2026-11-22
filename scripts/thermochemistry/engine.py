@@ -4,7 +4,7 @@ from __future__ import annotations
 import math
 
 from scripts.artifact_io import sha256_json
-from scripts.scientific_intake import AVAILABLE, STATES, report
+from scripts.kinetic_data.reaction_intake import AVAILABLE, STATES, report
 from scripts.scientific_validation import validate_finite_tree
 from scripts.thermochemistry.harmonic import add_ideal_gas, harmonic
 

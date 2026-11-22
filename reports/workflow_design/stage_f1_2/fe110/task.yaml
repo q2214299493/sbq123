@@ -1,0 +1,29 @@
+task_id: fe110-offline
+project_id: fe110-inspection
+forbidden:
+- native execution
+- scientific approval
+network_version: 2a80b67c31201600a1858780bbe6c176b03f489fe24383441fca4f195b395483
+requested_observables:
+- structures
+- electronic_energies
+- electronic_barriers
+- thermochemistry
+- kinetic_parameters
+engine_routes:
+- mkm
+- kmc
+sources:
+  network:
+    path: reports/multiphase/networks/network-2a80b67c31201600a1858780bbe6c176b03f489fe24383441fca4f195b395483.json
+    sha256: 56e42d4147637acae090911a82715a10d9883fefa03e7e6dc19fcc0c0f3b25ca
+  intake:
+    path: reports/multiphase/ch_co_intake_20261119.json
+    sha256: 8c2b7561a9eeaa40ef3bd24d8b6ce69de58e416ef111b5bc4590a5e8d7caf8ef
+  dataset:
+    path: reports/multiphase/phase2_4/fe110_parameters.json
+    sha256: dd2cdba9cfa6d45bfbf0f4e659ca80c1f81a80b3681e99633bdc19b1a98ff461
+  state_review:
+    path: reports/workflow_readiness/stage_v1_2_1/completion.md
+    sha256: 4d5947d8730ecb0347067d6ed24b572540cb158f641e89ee44bcf03a60a8f44f
+reaction_id: fe110_ch_co_to_chco_20261109

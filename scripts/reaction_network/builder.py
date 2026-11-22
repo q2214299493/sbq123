@@ -7,7 +7,7 @@ from scripts.artifact_io import sha256_json
 from scripts.kinetic_data.interphase_transfer import assess_transfer
 from scripts.kinetic_data.stoichiometric_sources import stoichiometric_totals
 from scripts.multiphase_contracts import COLLECTIONS, ENERGY_ATOL_EV, _check_species_context, check_cross_phase_scope, validate_bundle
-from scripts.scientific_intake import report as intake_report
+from scripts.kinetic_data.reaction_intake import report as intake_report
 from scripts.scientific_validation import finite_number, validate_finite_tree
 from scripts.thermochemistry.engine import ts_binding
 from scripts.reaction_network.catalog import catalog, check_context, check_record_field, register_species, site_counts, site_mapping

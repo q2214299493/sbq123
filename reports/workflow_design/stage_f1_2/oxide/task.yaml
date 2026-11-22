@@ -1,0 +1,38 @@
+task_id: oxide-offline
+project_id: oxide-inspection
+forbidden:
+- native execution
+- scientific approval
+network_version: a35beac998f393b7ad16e954e74f5982523436605fdcad54934de042ce8e9bfa
+requested_observables:
+- lattice
+- native_initialization
+- candidate_input
+engine_routes:
+- kmc
+sources:
+  network:
+    path: tests/fixtures/multiphase/synthetic_oxide_site_network.json
+    sha256: 24d5c34d33ec332a131e5f957dcb83ff4816e29c5d4c6ba05c47c854d87c6aa2
+  observation:
+    path: reports/multiphase/stage_b2_1/oxide_observations.json
+    sha256: 49d84e1cddf511eeb232002dcb87833c312826a8165d02abf644469b47289d0b
+  graph:
+    path: tests/fixtures/multiphase/synthetic_oxide_bridge_graph.json
+    sha256: 77d0f2fe9ab30743eec527bf412c4f35ed0097dc66fb9514ae0bb541673d0fea
+  original_manifest:
+    path: reports/multiphase/stage_b2_3_2_4/native/input_manifest.json
+    sha256: 023b40ad208b77a8028d9e03e2131fdc53bd34c2f88f09cdcf2fe19c39f0c285
+  kmc_plan:
+    path: reports/multiphase/stage_b2_3_2_4/execution_plan.json
+    sha256: 2c0a012270fec9a6a11e52411c9993742fe6ffc3017db333857fbc4c2dd1b7d8
+  kmc_receipt:
+    path: reports/multiphase/stage_b2_3_2_4/native_acceptance/execution_receipt.json
+    sha256: fdf1fa59f76a8e09c6ecea6aee48f1dadacf0ce513d979936e08f2fbb5a6ae16
+  kmc_validation:
+    path: reports/multiphase/stage_b2_3_2_4/native_acceptance/validation.json
+    sha256: 3f104f563db479c90f45f80b494b7b2abe348dc53cb6216d126591fe65b133ce
+  candidate_manifest:
+    path: reports/architecture_repair/stage_r2_3/native/input_manifest.json
+    sha256: f475a45a53d91ee3f6a9b5c2277ac0a364d8909381c53227e3ee8e04d721d3d6
+reaction_id: fixture-adsorption

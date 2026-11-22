@@ -49,3 +49,37 @@ Each field has an evidence status, candidates with reasons, scoped usability and
 Use a stable structure identity for each state (for example a hash or an external accession), and bind energies and thermal records to it. Raw inputs include signed frequencies in cm⁻¹, zero-based mapped atoms, constraint description, expected active-mode count, method and reviewed thermal basis. Endpoints require stable modes and TS requires one assigned imaginary mode under the owning review. Do not discard soft modes on import. Precomputed corrections use eV per state for ZPE, thermal enthalpy increment and Gibbs correction, eV/K per state for entropy, kelvin and the named standard state. Document whether the thermal enthalpy increment excludes ZPE and how Gibbs and the unstable mode were treated in the method. Use the same thermal basis identifier only after reviewing active subspaces, conventions and compatibility. Complete corrections can substitute for raw spectra, including for just one state.
 
 The generator inventories inputs. It performs no frequency integration, free-energy or rate calculation. `inputs_complete` means that the selected operation's input checklist is satisfied within its recorded review/acceptance scope. Executable MKM still requires the existing reviewed Phase 1 bundle, units, energy conventions, validated site and rate relationships and the owning execution gates. Intake cannot write the registry, launch VASP or authorize a submission.
+
+## Inspect a research project offline
+
+From the repository root, run the following with the project YAML first and the task YAML second. The command prints JSON to stdout. Source files, databases, project state and execution permissions are untouched.
+
+```powershell
+python -m scripts.scientific_intake --inspect-project reports/workflow_design/stage_f1_2/nicu/project.yaml reports/workflow_design/stage_f1_2/nicu/task.yaml
+```
+
+The [runnable project/task pairs](../../reports/workflow_design/stage_f1_2/completion.md) cover an electronic-energy study, an archived MKM result and a finite-lattice software fixture. The reaction CLI and its Python `report(documents, operation)` entry point retain their existing behavior.
+
+- **Project.** Use the existing `version: 1`, `project_id`, `objective` and `system`. When the catalyst catalog has a different ID, declare `catalyst_project_id`. Set `evidence_base` explicitly when supplying named sources. A relative base is resolved against the project YAML directory.
+- **Task.** Supply `task_id`. Optional `project_id` binds the task to its project. `requested_observables` and `engine_routes` are lists. Supported routes are `mkm` and `kmc`. Existing `authorized_scope` and `forbidden` entries are displayed as context. A project/task pair without evidence references still returns its context.
+- **References.** Put named `sources` on the project, task or individual context. Each entry contains `path` relative to the evidence base and the SHA-256 of the file bytes. Repeating a role across levels is ambiguous. No fallback search occurs. Domain JSON roles are parsed after byte verification. Other names can inventory opaque evidence such as MAT, OUTCAR or a written review.
+- **Several reactions or operating points.** Use a task `contexts` list with unique `(reaction_id, operating_point_id)` pairs. Each context can supply its own `network_version`, requested observables, routes and sources. Declare shared sources once. An operating-point label identifies the request; the bound dataset, configuration and run receipt establish its actual conditions.
+- **What to read.** Each context includes catalyst ownership, species, conservation findings, operating conditions, per-role integrity, per-observable source roles, value, missing requirements and blocker, and independent engine diagnostics. `available` describes the scoped archive evidence. `input_eligible` describes offline input preparation. Execution remains unauthorized. Missing bytes, changed bytes, unsupported versions and absent scientific evidence remain distinguishable.
+- **Historical provenance.** Paths and hashes quoted inside archived reviews retain their original meaning. The inspector checks the named evidence inventory, intake raw structure/energy references, and candidate input members. It checks cross-artifact identities for the requested result. Embedded remote job directories and external citations are historical metadata. A structure may have reviewed archived evidence while its raw CONTCAR is unavailable locally.
+- **Exit status.** A valid inspection returns zero even when a scientific observable is blocked. Read the individual statuses for automation. A malformed project/task pair or incompatible CLI modes produce a command-line error.
+
+| Requested observable | Primary source roles |
+| --- | --- |
+| `structures`, `electronic_energies` | `intake` and the bound `network` when supplied |
+| `electronic_barriers` | `network` |
+| `thermochemistry` | `network`, `intake` and the scoped thermochemistry already embedded in that network |
+| `kinetic_parameters` | `network`, `dataset` |
+| `native_rates` | `network`, `rates`. Optional named dataset and native output are checked against rate provenance |
+| `tof` | `network`, `dataset`, `configuration`, `result`, `mkm_receipt` |
+| `stable_drc` | TOF roles plus `drc_plan` and `drc` |
+| `rate_uncertainty` | TOF roles plus `rates` and the archived CATKINAS `qualification` |
+| `lattice` | Source network definition, `graph`, `observation` |
+| `native_initialization` | Network definition, `graph`, `original_manifest`, `kmc_plan`, `kmc_receipt`, `kmc_validation` |
+| `candidate_input` | Network definition, `graph`, `candidate_manifest` and its native input members |
+
+A standalone `catalog` can supply a V1 bundle or a partial network definition. MKM preparation uses `configuration`; KMC preparation uses `kmc_configuration`. The archived zero-event control is a separate evidence route. It does not authorize running a corrected candidate.
