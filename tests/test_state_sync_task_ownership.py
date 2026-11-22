@@ -42,7 +42,7 @@ def _managed_placeholder(root):
 
 
 def _sync(root, policy, schema, capsys):
-    code = main(["--root", str(root), "--policy", str(policy), "--schema", str(schema), "sync", "--safe-only"])
+    code = main(["--root", str(root), "--policy", str(policy), "--schema", str(schema), "sync"])
     captured = capsys.readouterr()
     return code, json.loads(captured.out) if captured.out else None, captured.err
 

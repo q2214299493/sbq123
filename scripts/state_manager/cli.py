@@ -92,7 +92,7 @@ def parser() -> argparse.ArgumentParser:
     reconcile_entity.add_argument("--record", action="store_true")
 
     sync = commands.add_parser("sync", help="Project effective events into managed views.")
-    sync.add_argument("--safe-only", action="store_true", default=False)
+    sync.add_argument("--safe-only", action="store_true", help="Preview projections without caching, reviewing or applying them.")
 
     status = commands.add_parser(
         "status",
@@ -290,6 +290,7 @@ def _sync(
     store = _store(root, schema, events)
     proposal_store = ProposalStore(root, policy)
     require_unlocked_application(proposal_store.cache_dir)
+    preview: list[dict[str, Any]] = []
     applied: list[str] = []
     pending: list[dict[str, Any]] = []
     deferred_repository_items: list[dict[str, str]] = []
@@ -319,20 +320,20 @@ def _sync(
         proposal = build_proposal(event, project_root=root, policy_path=policy)
         if not proposal["actions"]:
             continue
+        review_request = {
+            "proposal_id": proposal["proposal_id"],
+            "review_questions": proposal["review_questions"],
+        }
+        if args.safe_only:
+            store.verify_evidence(event)
+            preview.append(_proposal_summary(proposal))
+            if proposal["review_required"] and store.proposal_decision(proposal["proposal_id"]) != "approve":
+                pending.append(review_request)
+            continue
+
         proposal_store.save(proposal)
         if proposal["review_required"]:
             decision = store.event_decision(event.event_id)
-            if decision == "approve":
-                applied.extend(
-                    apply_proposal(
-                        proposal,
-                        event_store=store,
-                        project_root=root,
-                        policy_path=policy,
-                        safe_only=False,
-                    )
-                )
-                continue
             if decision is None and registry_excel_review_is_reusable(
                 event,
                 proposal["actions"],
@@ -347,33 +348,13 @@ def _sync(
                     reviewed_event_id=event.event_id,
                     reviewed_event_sha256=event.digest,
                 )
-                applied.extend(
-                    apply_proposal(
-                        proposal,
-                        event_store=store,
-                        project_root=root,
-                        policy_path=policy,
-                        safe_only=False,
-                    )
-                )
+            elif decision != "approve":
+                pending.append(review_request)
                 continue
-            pending.append(
-                {
-                    "proposal_id": proposal["proposal_id"],
-                    "review_questions": proposal["review_questions"],
-                }
-            )
-            continue
-        applied.extend(
-            apply_proposal(
-                proposal,
-                event_store=store,
-                project_root=root,
-                policy_path=policy,
-                safe_only=args.safe_only,
-            )
-        )
+        applied.extend(apply_proposal(proposal, event_store=store, project_root=root, policy_path=policy))
     summary: dict[str, Any] = {"applied": sorted(set(applied)), "pending_review": pending}
+    if preview:
+        summary["preview"] = preview
     if deferred_repository_items:
         summary["deferred_repository_items"] = deferred_repository_items
     if deferred_projection_events:

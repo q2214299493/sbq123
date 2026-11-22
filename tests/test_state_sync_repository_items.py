@@ -107,11 +107,17 @@ def test_legacy_cleanup_does_not_replay_or_block_later_projection(tmp_path, caps
         encoding="utf-8",
     )
     event_store.record(task)
+    before = current_task.read_bytes()
 
     result, output = _sync(tmp_path, policy, schema, capsys, safe_only=safe_only)
     assert result == 0
-    assert "tasks/current_task.md" in output["applied"]
-    assert task.payload["payload"]["objective"] in current_task.read_text(encoding="utf-8")
+    if safe_only:
+        assert output["applied"] == []
+        assert current_task.read_bytes() == before
+        assert [item["event_id"] for item in output["preview"]] == [task.event_id]
+    else:
+        assert "tasks/current_task.md" in output["applied"]
+        assert task.payload["payload"]["objective"] in current_task.read_text(encoding="utf-8")
     assert source.read_bytes() == regenerated
     assert output["pending_review"] == []
     assert [item["event_id"] for item in output["deferred_repository_items"]] == [cleanup.event_id]

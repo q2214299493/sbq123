@@ -121,7 +121,7 @@ For NEB and DIMER validation, follow the README of the owning module.
 
 - Keep `docs/02_CURRENT_STATE.md` compact and replace-in-place, not historical.
 - At the end of repository or calculation-state work, run
-  `repo-state sync --safe-only`. Apply only review-free managed projections.
+  `repo-state sync --safe-only` to preview managed projections without applying them.
   If it returns a review request, show the exact proposal ID and choices to the
   user; do not select an answer or edit an event in place.
 - Update state only when evidence, status, decision, blocker, path, or next

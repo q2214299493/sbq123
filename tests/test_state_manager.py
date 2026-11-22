@@ -422,10 +422,7 @@ def test_status_surfaces_repository_review_without_active_task(tmp_path: Path) -
     assert payload["actionable_reviews"][0]["event_id"] == event.event_id
 
 
-def test_sync_reuses_trusted_registry_excel_review_for_projection(
-    tmp_path: Path,
-    capsys: pytest.CaptureFixture[str],
-) -> None:
+def registered_projection(tmp_path: Path):
     policy, schema = init_repository(tmp_path)
     event_store = store(tmp_path, schema)
     base_evidence_path = tmp_path / "docs" / "base.txt"
@@ -508,8 +505,16 @@ def test_sync_reuses_trusted_registry_excel_review_for_projection(
     updated = StateEvent.from_mapping(updated_payload, schema_path=schema)
     event_store.record(updated)
 
+    return policy, schema, event_store, updated
+
+
+def test_sync_reuses_trusted_registry_excel_review_for_projection(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    policy, schema, event_store, updated = registered_projection(tmp_path)
     result = state_manager_main(
-        ["--root", str(tmp_path), "--policy", str(policy), "--schema", str(schema), "sync", "--safe-only"]
+        ["--root", str(tmp_path), "--policy", str(policy), "--schema", str(schema), "sync"]
     )
     output = json.loads(capsys.readouterr().out)
 
@@ -851,7 +856,6 @@ def test_end_checkpoint_closes_task_only_after_complete_acceptance(
             "--schema",
             str(schema),
             "sync",
-            "--safe-only",
         ]
     )
     sync_output = json.loads(capsys.readouterr().out)
@@ -1175,7 +1179,6 @@ def test_end_checkpoint_accepts_current_task_from_initial_baseline(
                 "--schema",
                 str(schema),
                 "sync",
-                "--safe-only",
             ]
         )
         == 0

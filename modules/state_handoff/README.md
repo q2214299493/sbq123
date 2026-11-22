@@ -45,9 +45,12 @@ or authorize scientific actions or cleanup.
    after inspecting the stable proposal ID. For later work, record a
    schema-valid event with evidence and supersession links.
 3. Generate a hash-bound proposal.
-4. Apply deterministic managed-view updates with `repo-state sync --safe-only`.
-5. If the proposal requires review, Codex asks the user and records the answer
-   with `repo-state review` before `repo-state apply`.
+4. Preview outstanding projections with `repo-state sync --safe-only`. To
+   cache a previewed plan, use `repo-state propose --event FILE` on its source
+   event and check that the proposal ID still matches.
+5. For review-required changes, record the user's decision with
+   `repo-state review`. Apply an approved or review-free plan with
+   `repo-state apply --proposal ID`.
 6. Preserve corrections as new superseding events; never edit an event file.
 
 A rejected proposal remains queryable history, but its hash-bound source event
@@ -81,7 +84,7 @@ They remain immutable history, including any completion handoff, rather than
 being replayed into the shared current-task view. Pending successors of the
 selected entity retain their normal evidence and review requirements.
 
-For `scientific_result_registration`, `sync` may reuse an existing review only
+For `scientific_result_registration`, unflagged `sync` may reuse an existing review only
 for deterministic current-task or module-map projection. Reuse requires an
 accepted Grade-A, kinetic-eligible registry barrier, a trusted reviewer, a
 matching Excel-promotion receipt, the workbook's exact post-write hash, and
@@ -107,8 +110,13 @@ normal user review; registry or workbook data are never changed by this rule.
   explicitly approved replacement to current local evidence hashes.
 - `repo-state propose --event FILE`: validate and record one event, then create
   its hash-bound proposal.
-- `repo-state sync --safe-only`: apply only deterministic review-free
-  projections from effective events and refresh the actionable review queue.
+- `repo-state sync --safe-only` previews changes in memory. The optional
+  `preview` list identifies plans with actions. `pending_review` lists those
+  requiring an exact proposal decision. Exit code 1 indicates pending review.
+  This mode leaves proposals, decisions, application logs and projections
+  untouched and skips Registry/Excel receipt lookup.
+- Unflagged `repo-state sync` applies eligible projections, including
+  policy-authorized Registry/Excel receipt reuse.
 - `repo-state status`: one operational view of the current task, its one
   executable step, active quality gate, acceptance criteria, history count,
   actionable review count, and audit health. Add `--format json` for tooling.
@@ -184,8 +192,8 @@ event ID and hash and provide:
 
 Accepted open risks require `requires_user_review: true`. The checkpoint then
 creates a review-required closure proposal and leaves the current task active
-until that exact proposal is approved. A review-free checkpoint is closed only
-by the normal end-of-task `sync --safe-only` projection.
+until that exact proposal is approved. To project a review-free closure, use
+`repo-state apply --proposal ID` with the ID returned by the checkpoint.
 
 On application, current-task closure and all non-empty handoff collections are
 written atomically to controlled blocks in `tasks/backlog.md`, the error log,
