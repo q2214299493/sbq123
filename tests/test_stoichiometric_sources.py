@@ -109,6 +109,33 @@ def test_missing_conservation_evidence_names_species_and_field(field):
         sources.conservation_residuals(sources.build_matrices([r]), catalog)
 
 
+def test_gross_side_totals_and_signed_residuals_have_distinct_bases():
+    from scripts.multiphase_contracts import _side
+    from scripts.reaction_network.builder import side
+
+    definition, catalog, sites = interfacial()
+    definition.update(reactants={"M-g": 2}, products={"M-interface": 2},
+                      sites_consumed={k: 2 * n for k, n in sites.items()},
+                      reaction_type="cross_phase_elementary", eligibility="draft",
+                      surface_ids=["a", "b"], interface_id="junction")
+    catalog[0].update(surface_ids=[], interface_id=None)
+    catalog[1].update(surface_ids=["a", "b"], interface_id="junction")
+    index = {"species": sources.indexed(catalog, "species_id")}
+    expected = ({"C": 2, "O": 2}, -2, {"phase-alpha/facet/top": 4, "phase-beta/facet/top": 2, "interface/edge": 2})
+    for gross in (_side, side):
+        assert gross(definition["reactants"], definition["sites_consumed"], definition, index) == expected
+        assert gross(definition["products"], {}, definition, index) == expected
+    matrices = sources.build_matrices([definition])
+    assert sources.conservation_residuals(matrices, catalog)["bind"] == {
+        "elements": {"C": 0, "O": 0}, "charge": 0, "inventories": dict.fromkeys(sites, 0)}
+    catalog[1]["composition"] = None
+    assert side(definition["products"], {}, definition, index) == (None, expected[1], expected[2])
+    with pytest.raises(ValueError, match="complete composition"):
+        _side(definition["products"], {}, definition, index)
+    with pytest.raises(ValueError, match="composition"):
+        sources.conservation_residuals(matrices, catalog)
+
+
 def test_source_residuals_identify_numeric_and_missing_data_disagreement():
     r, _, _ = interfacial()
     projected = generate_source_terms([dict(r, net=2)])

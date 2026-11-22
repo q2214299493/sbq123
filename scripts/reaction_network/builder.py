@@ -5,6 +5,7 @@ from datetime import datetime
 
 from scripts.artifact_io import sha256_json
 from scripts.kinetic_data.interphase_transfer import assess_transfer
+from scripts.kinetic_data.stoichiometric_sources import stoichiometric_totals
 from scripts.multiphase_contracts import COLLECTIONS, ENERGY_ATOL_EV, _check_species_context, check_cross_phase_scope, validate_bundle
 from scripts.scientific_intake import report as intake_report
 from scripts.scientific_validation import finite_number, validate_finite_tree
@@ -56,27 +57,17 @@ def endpoint_candidate(pair):
 def side(stoich, vacant, reaction, index):
     if not isinstance(stoich, dict) or not stoich:
         raise ValueError("Empty reaction side")
-    elements, occupied = Counter(), Counter(vacant)
-    charge = 0
-    missing_occupancy = vacant is None
-    missing_composition = False
+    terms = []
     for key, number in stoich.items():
         if type(number) is not int or number <= 0 or key not in index["species"]:
             raise ValueError(f"Invalid stoichiometry or unknown species {key}")
         species = index["species"][key]
         _check_species_context(species, reaction)
-        if species.get("composition") is None:
-            if reaction["reaction_type"] != "cross_phase_elementary":
-                raise ValueError(f"Missing species composition for {key}")
-            missing_composition = True
-        else:
-            elements.update({k: number * v for k, v in species["composition"].items()})
-        q = species.get("charge")
-        charge = None if q is None or charge is None else charge + number * q
-        counts = species.get("site_occupancy")
-        missing_occupancy |= counts is None
-        occupied.update({k: number * v for k, v in (counts or {}).items()})
-    return None if missing_composition else elements, charge, None if missing_occupancy else occupied
+        composition = species.get("composition")
+        if composition is None and reaction["reaction_type"] != "cross_phase_elementary":
+            raise ValueError(f"Missing species composition for {key}")
+        terms.append((number, composition, species.get("charge"), species.get("site_occupancy")))
+    return stoichiometric_totals(terms, vacant)
 
 
 def balance(reaction, index, gaps):

@@ -13,6 +13,7 @@ from jsonschema.exceptions import best_match
 from referencing import Registry, Resource
 
 from scripts.kinetic_data.interphase_transfer import assess_transfer
+from scripts.kinetic_data.stoichiometric_sources import stoichiometric_totals
 from scripts.runtime_resources import resource_path
 from scripts.scientific_validation import finite_number
 
@@ -198,8 +199,7 @@ def _check_species_context(species, reaction):
 
 
 def _side(stoichiometry, free_sites, reaction, index):
-    elements, sites = Counter(), Counter(free_sites)
-    charge = 0
+    terms = []
     for key, coefficient in stoichiometry.items():
         species = _get(index, "species", key)
         _check_species_context(species, reaction)
@@ -207,10 +207,11 @@ def _side(stoichiometry, free_sites, reaction, index):
             species["validation"]["status"] != "accepted" or species["thermochemistry_status"] != "reviewed"
         ):
             raise ValueError(f"{key}: eligible reaction requires reviewed species")
-        elements.update({k: coefficient * n for k, n in species["composition"].items()})
-        sites.update({k: coefficient * n for k, n in species["site_occupancy"].items()})
-        charge += coefficient * species["charge"]
-    return elements, charge, sites
+        terms.append((coefficient, species["composition"], species["charge"], species["site_occupancy"]))
+    totals = stoichiometric_totals(terms, free_sites)
+    if None in totals:
+        raise ValueError("Reaction balance requires complete composition, charge and site inventories")
+    return totals
 
 
 def check_cross_phase_scope(reaction, index, left, right):

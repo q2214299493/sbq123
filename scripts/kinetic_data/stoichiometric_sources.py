@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import math
+from collections import Counter
 from copy import deepcopy
 from dataclasses import dataclass
 
@@ -120,6 +121,28 @@ def source_residuals(expected, reported):
     return results
 
 
+def stoichiometric_totals(terms, vacancies):
+    """Sum elements, charge and occupied-plus-vacant sites for gross or signed coefficients.
+
+    Each term gives a molecular coefficient, composition, charge and per-molecule
+    site footprint. A missing operand leaves only its own total unknown.
+    """
+    elements = Counter()
+    charge = 0
+    sites = None if vacancies is None else Counter(vacancies)
+    for coefficient, composition, molecular_charge, footprint in terms:
+        if composition is None:
+            elements = None
+        elif elements is not None:
+            elements.update({key: coefficient * n for key, n in composition.items()})
+        charge = None if charge is None or molecular_charge is None else charge + coefficient * molecular_charge
+        if footprint is None:
+            sites = None
+        elif sites is not None:
+            sites.update({key: coefficient * n for key, n in footprint.items()})
+    return elements, charge, sites
+
+
 def conservation_residuals(matrices, species_records):
     """Exact per-reaction element, charge and occupied-plus-vacant site residuals."""
     catalog = indexed(species_records, "species_id")
@@ -140,12 +163,14 @@ def conservation_residuals(matrices, species_records):
     sites = sorted(set(matrices.vacancies).union(*(c.keys() for c in occupancy.values())))
     results = {}
     for rid in matrices.reaction_ids:
-        nu = {sid: matrices.species[sid][rid] for sid in composition if rid in matrices.species[sid]}
+        terms = ((matrices.species[sid][rid], composition[sid], charge[sid], occupancy[sid])
+                 for sid in composition if rid in matrices.species[sid])
+        vacancies = {site: row[rid] for site, row in matrices.vacancies.items() if rid in row}
+        element_total, charge_total, site_total = stoichiometric_totals(terms, vacancies)
         results[rid] = {
-            "elements": {e: sum(n * composition[s][e] for s, n in nu.items() if e in composition[s]) for e in elements},
-            "charge": sum(n * charge[s] for s, n in nu.items()),
-            "inventories": {q: matrices.vacancies.get(q, {}).get(rid, 0)
-                            + sum(n * occupancy[s].get(q, 0) for s, n in nu.items()) for q in sites},
+            "elements": {e: element_total[e] for e in elements},
+            "charge": charge_total,
+            "inventories": {q: site_total[q] for q in sites},
         }
     return results
 
