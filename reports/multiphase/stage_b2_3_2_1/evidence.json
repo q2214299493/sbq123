@@ -1,0 +1,263 @@
+{
+  "baseline": "abd47e9800335da0f57732d7493dce2b760fd18d",
+  "review_date": "2026-11-22",
+  "evidence_scope": "Offline inspection. Project archive, vendor-distributed output, and hypothetical graphs have distinct origins.",
+  "official_sources": {
+    "distribution": "https://zacros.org/software/obtain-zacros",
+    "lattice_tutorial": "https://zacros.org/resources/tutorials/11-lattice-input-for-a-fcc-100-surface?showall=1",
+    "entity_and_dentate_tutorial": "https://zacros.org/resources/tutorials/4-tutorial-1-ziff-gulari-barshad-model-in-zacros?start=3",
+    "guide": {
+      "version": "4.0",
+      "cover_date": "2024-07-19",
+      "installed_path": "D:/Zacros4.0/manual/ZacrosManual.pdf",
+      "member": "zacros_4.0/manual/ZacrosManual.pdf",
+      "sha256": "cc64e35121f1637d3a371330882d2a53816bb15f0c3ee4d9b3b6fd4bd557f846",
+      "page_count": 101,
+      "page_locators": {
+        "21": "surf_specs_dent",
+        "50-54": "periodic basis, repeated site types, translated edges, explicit finite lattice",
+        "60-68": "elementary graph, directions and rate parameters",
+        "69-71": "entity seeding and restart",
+        "81-84": "per-site snapshot, entity/leg indices, cumulative process counts and molecular population columns"
+      }
+    },
+    "vendor_archive": {
+      "path": "D:/zacros_4.0.zip",
+      "sha256": "55ae665d845ad1120241b98e0a72192bb3737ade801275ec13c06d81fae9abae"
+    }
+  },
+  "project_executable_sha256": "84a8f88d6df633eeea9eeac8aa9227237cdf2564a4dc72e0cab8a18c4ce119d2",
+  "vendor_examples": {
+    "102": {
+      "member_prefix": "zacros_4.0/examples/102/",
+      "member_sha256": {
+        "simulation_input.dat": "5b07cbc1780cf75f7ab02208ca058366b1446811c65c818dd3d3bf593dbe58e7",
+        "lattice_input.dat": "b3076e1fa37f32aebd860bc7a490656ab9a27519862556a6b9dadc12ca864173",
+        "mechanism_input.dat": "5eab493831f8ae7aefeadd0a71f7832061e5d2dd22c7b0b0f1f030ec37ba320f",
+        "energetics_input.dat": "98d6c4df4d6839115795096e03ac7b5f6b2ae5e76a1887a43a2b543d7a6c0337",
+        "general_output.txt": "033b4d66110e50f369c58ab5aecd229563c78c66c46a81923f5d2beb3bb536c0",
+        "lattice_output.txt": "d8f30eff28ab1edd156a6c14af521941ad3c0b2b2f95a0716b39d7add62edf0f",
+        "history_output.txt": "1aa7a7ab392d4bb422e147fe2763ececccdd99504870069b591a2fb91c43ede7",
+        "procstat_output.txt": "1870863bd7baa0413b19703f746cb5dbe61af80b844b8f5d1fe6aef33766b2a6",
+        "specnum_output.txt": "f7ec8e8a3c6c0f2a802bca1c163d08f4f7078fa66dc61437af032e1ead4b5f7e"
+      },
+      "native_version": "4.0",
+      "normal_termination": true,
+      "inventory_counts": {
+        "cn2": 3,
+        "cn4": 3,
+        "br42": 6,
+        "br44": 3
+      },
+      "final_sampled_process_event": 107895,
+      "CO3_final_entity_legs": [
+        {
+          "native_site": 1,
+          "entity": 1,
+          "leg": 3,
+          "site_type": "cn2"
+        },
+        {
+          "native_site": 2,
+          "entity": 1,
+          "leg": 2,
+          "site_type": "br42"
+        },
+        {
+          "native_site": 3,
+          "entity": 1,
+          "leg": 1,
+          "site_type": "cn4"
+        }
+      ],
+      "CO3_final_molecule_count": 1,
+      "CO3_formation_counts": {
+        "fwd": 1,
+        "rev": 0
+      }
+    },
+    "103": {
+      "member_prefix": "zacros_4.0/examples/103/",
+      "member_sha256": {
+        "simulation_input.dat": "995c41a31cb07e1fa6ff30364573d00e8f83921357bdf764ae412505fa92e815",
+        "lattice_input.dat": "259f2a35c757176b6b968484d3771d2dcce196194fd8f558b6edb524a40b7853",
+        "mechanism_input.dat": "7424414dbb80fc9290b2a62dadbb0ea6639da2193f98235fea2d40a935fe679c",
+        "energetics_input.dat": "df96387b99f949d36b611ff69eb5ce9d76d5bcc19d02c45c6b0baf7415099a63",
+        "general_output.txt": "9f1764d9e9837a6deb8967aa25ee97449c20d4c455e72cdc1b58ecb2fb75b3dd",
+        "lattice_output.txt": "28b7b8a993107234725814c0438e79302bebba0f8b74c13ae839d8974cf2cccd",
+        "history_output.txt": "06c99c479c0f415260d7b083fad53a0ad12d2c71a232655b4fd331bf8271df88",
+        "procstat_output.txt": "55351aac97f4b9717dbaa31f9a9c2d60dddf164c0a19bec2d2761f9da53cb139",
+        "specnum_output.txt": "70b84e08d7d1f30c352d50802427821901ceeb4648c82ee92c9002c59dee6887",
+        "state_input.dat": "5045eb7f9cdc2ad768f9756a0cac6edcc44c875343480df11cd0c98119602364"
+      },
+      "native_version": "4.0",
+      "normal_termination": true,
+      "inventory_counts": {
+        "topCu": 2163,
+        "fccCu": 1689,
+        "topPd": 237,
+        "fccPdCu": 711
+      },
+      "final_sampled_process_event": 43549,
+      "cross_type_H_diffusion_counts": {
+        "fwd": 14395,
+        "rev": 13506
+      }
+    }
+  },
+  "project_native_archives": {
+    "mono": {
+      "zip": "reports/multiphase/phase2_5_1/benchmarks/mono.zip",
+      "zip_sha256": "a2593f79f35fb9158b29299078653b6c8c0ecc8c450b65be9d79a50c40f92776",
+      "manifest_sha256": "52a8d5fa615843239c4e5680853dfb86f216918cb6b97037ee06deccbbd04482",
+      "native_initial_matches": 16,
+      "terminal_event": 20,
+      "native_warning_codes": [
+        "4008"
+      ],
+      "verified_input_files": 5,
+      "verified_output_members": 5
+    },
+    "dent": {
+      "zip": "reports/multiphase/phase2_5_1/benchmarks/dent.zip",
+      "zip_sha256": "ec21a9ee721954d21a04956c6291833b571a888a76ee1fa4c783fbce8331b1a1",
+      "manifest_sha256": "fd153b0d8577a05c0fb6268fe37c04174168bff9ecbcf6c4d8f48deb417ba942",
+      "native_initial_matches": 16,
+      "terminal_event": 20,
+      "native_warning_codes": [
+        "4008"
+      ],
+      "verified_input_files": 5,
+      "verified_output_members": 5,
+      "input_file_sha256": {
+        "simulation_input.dat": "7441a648b4526d796f2b5995bbb50a3e5c4b550c269b55d9309f74c15b2ecbc9",
+        "lattice_input.dat": "041747579adc213be762c4945862a71396c90465c4059660ac6d773c9d848362",
+        "mechanism_input.dat": "4990838be52ff20a446271c9f25180b16011b77a72821f264a58e00e75236a1f",
+        "energetics_input.dat": "a9034d0d147ea36298101727ef62ecede67ac7f15306e3eb58794b7e43c5f288",
+        "state_input.dat": "ff0fc80cdd1bda7977846cd18536bf079003fa0a727ee74191f06b57f1949980"
+      }
+    },
+    "full": {
+      "zip": "reports/multiphase/phase2_5_1/benchmarks/full.zip",
+      "zip_sha256": "21b8444d6f8b92e013bed75c7f03d8b270066811ffbba6052d0389d890873649",
+      "manifest_sha256": "bddb0625aff43c0f94dfc33f98677cf3ca54129f4dc8c589cc8f51d3149fa341",
+      "native_initial_matches": 18,
+      "terminal_event": 20,
+      "native_warning_codes": [
+        "4008"
+      ],
+      "verified_input_files": 5,
+      "verified_output_members": 5
+    },
+    "interacting": {
+      "zip": "reports/multiphase/phase2_5_1/benchmarks/interacting.zip",
+      "zip_sha256": "c0b78aa900b9c907b13e0ba2fab018b77fa64b60e128606922821ebcaa6c6652",
+      "manifest_sha256": "e37b3f5912ff7594b6aa6578ea33f03a02eb7a0cbe08cd906b9cfe7e4787db90",
+      "native_initial_matches": 18,
+      "terminal_event": 20,
+      "native_warning_codes": [
+        "4008",
+        "804010"
+      ],
+      "verified_input_files": 5,
+      "verified_output_members": 5
+    },
+    "attractive": {
+      "zip": "reports/multiphase/phase2_5_1/benchmarks/attractive.zip",
+      "zip_sha256": "29028e0369f6b98f1214457d643a2bec38ac3a24df3bc2cf0af7a1b466975ad7",
+      "manifest_sha256": "cf0c8aee229982fd3e3cff6e3b63ead87d00b8f41a85fdbc57236076dd46a82c",
+      "native_initial_matches": 15,
+      "terminal_event": 9,
+      "native_warning_codes": [
+        "4008",
+        "801002"
+      ],
+      "verified_input_files": 5,
+      "verified_output_members": 5
+    },
+    "continuous": {
+      "zip": "reports/multiphase/phase2_5_1/benchmarks/continuous.zip",
+      "zip_sha256": "6cb042ef80a8cf5c7ed32d1142581f99a9ed733c41f72887f94f759f4fc852c5",
+      "manifest_sha256": "a07e5a97893f5e9ddb81037ec68af1d733a488c0bd17092d7ad81138949d6d33",
+      "native_initial_matches": 18,
+      "terminal_event": 20,
+      "native_warning_codes": [
+        "4008"
+      ],
+      "verified_input_files": 4,
+      "verified_output_members": 6,
+      "sample_files_sha256": {
+        "procstat_output.txt": "7a023873a4907c36d5424d8b3201cc1cfd43ca16b18c945ec9f2e30626e9abc4",
+        "specnum_output.txt": "8cc1504a5effb445f347d489e6e8c780de4f0134b5e9ceedf81996e88027719b"
+      }
+    },
+    "split": {
+      "zip": "reports/multiphase/phase2_5_1/benchmarks/split.zip",
+      "zip_sha256": "1cf32a9222b492fdc7f1b08123d88484d88c23906f727907d64e194952b8ac69",
+      "manifest_sha256": "a07e5a97893f5e9ddb81037ec68af1d733a488c0bd17092d7ad81138949d6d33",
+      "native_initial_matches": 18,
+      "terminal_event": 8,
+      "native_warning_codes": [
+        "4008"
+      ],
+      "verified_input_files": 4,
+      "verified_output_members": 6
+    },
+    "resume": {
+      "zip": "reports/multiphase/phase2_5_1/benchmarks/resume.zip",
+      "zip_sha256": "6613c61f8aed7656d6b7295c01847c0c1c6e163c54ea2667240759e5fe9a46d7",
+      "manifest_sha256": "de2b1da55d0b595963955961781e2ecc4791faa3d58dc71fc8317269dafe6d67",
+      "native_initial_matches": null,
+      "terminal_event": 20,
+      "native_warning_codes": [],
+      "verified_input_files": 5,
+      "verified_output_members": 5,
+      "sample_files_sha256": {
+        "procstat_output.txt": "c1ca9aca4d809d902787247f8b9d5eb55534a0c7b77aeb3762758d78cbcccb37",
+        "specnum_output.txt": "6e3331596897a6554799eb000f1f6bc9f467da2b977e2aa6e0ebd78a0aae3342"
+      }
+    }
+  },
+  "project_bindings": {
+    "reports/multiphase/phase2_5_native_contracts.md": "9013557adf706cb2581e55bfbbdf112eee346203652423878417959e19350203",
+    "reports/multiphase/phase2_5/native_validation.json": "9549fc9737b816b5daadd486b45b67a85af0e95f437d831e88d741798e2ed235",
+    "reports/multiphase/phase2_5/zacros/manifest.json": "afc110a668acc2ac5fb02cb37e0dfc9938dd9e09ce76c583f28af62fc7817eef",
+    "reports/multiphase/phase2_5_1/capabilities.md": "563497dcc693b98735e8697ac8482ceeda0b72b2131710141b7742586186f2fd",
+    "reports/multiphase/phase2_5_1/zacros_validation.json": "cd729ced9cdf93ed2a8bb0a92fab556aee8345cea520356dfe9d95e0cc778359",
+    "reports/multiphase/phase2_5_1/dentate_order_diagnostic.json": "90484fc9b688fd8a2476b77f5e8e7c5c2f7e288bd7d4229ea4c8228fcfba7366",
+    "reports/multiphase/stage_b1_4/zacros_qualification.json": "fa1577a131e850937cf5822cf8c2fc3f40bd5909c21ddb317cf990b4b20c70f5",
+    "reports/multiphase/stage_b1_4/replay/zacros-dent.json": "4fbd954adbfe88a1d65a8d40719ab56aca19db088029089b21f96e2720e1ecbf",
+    "reports/multiphase/stage_b2_1/oxide_observations.json": "49d84e1cddf511eeb232002dcb87833c312826a8165d02abf644469b47289d0b",
+    "reports/multiphase/stage_b2_1/oxide_validation.json": "ab1c981802a6e01423c69656b1e6e2fef8e97b3bcb6d4ac3e673fe5181ed80ce",
+    "reports/multiphase/stage_b2_2_1/identity_validation.json": "b70350daaedea66a67b2b96cf4535f86aef6cea1ae3199e7cc8eebe215477f1e",
+    "reports/multiphase/stage_b2_2_2/transfer_validation.json": "dd80d789e0a679d3cf386f02550f76501658ef1510287cf0aff20ae05068dfbb",
+    "reports/multiphase/stage_b2_2_3/validation.json": "74ad49c72408f5a8113aab67f8076053c271e9330abf99eb8964675ea9e682c0",
+    "reports/multiphase/stage_b2_3_1/mapping.md": "85c70ff2a7ae74748218306ba406c6f6435208ae0046dc5dc099498a2f6ba094",
+    "reports/multiphase/stage_b2_3_1/capabilities.md": "9e016a4114034d323dff6b4167f3abc7783d3cc89b4e6ba0e8bfaba16ee61210",
+    "reports/multiphase/stage_b2_3_1_1_a/execution_readiness.json": "166b14c8c513b0e94afa994938e3a66b9eab89bdd46c71f7e40c3b2c2eea1c72",
+    "tests/fixtures/multiphase/synthetic_oxide_site_network.json": "24d5c34d33ec332a131e5f957dcb83ff4816e29c5d4c6ba05c47c854d87c6aa2",
+    "tests/fixtures/multiphase/synthetic_interphase_transfer.json": "d8d58db34a53476d51cfbb5ca1cb97374587dd2373b47d85d2fdc29e0f732042",
+    "tests/fixtures/multiphase/cross_phase_interface_product.json": "2b366b265ad0189a0366ac60a7a73124909fca0ce9dc8a6e350b275a9d4362ec",
+    "tests/fixtures/multiphase/cross_phase_three_phase.json": "097eca7edaffba8f570b418b11fbe935248c9c5f1a863b4d03ccde14260e4e74",
+    "docs/decisions/adaptive_mkm_kmc_optional_reactor.md": "3705a138e7b4a5e4d6f6a2fb2b69f46fcbd58ecff65d460d0d191998693f0bb5",
+    "scripts/surface_kmc/native.py": "d36c3136ec49fa74170f6b6663607077b5b05ef0f790000963b5f73de97d4e9f",
+    "scripts/surface_kmc/lattice.py": "19b87b8f788558b7b1938dc5efe2e0457424a766e103f8134ab1e1e9990b8136",
+    "scripts/surface_kmc/trajectory_statistics.py": "2d27a188dde40b7f2a2e62c3907f8aab89e11b6970b4bdf69b492c9283e2b511",
+    "scripts/surface_kmc/rate_adapter.py": "7ab5c66c062fed7d03d5fea629a996e69af4d202378663a4ca0d7996cfb74971",
+    "scripts/kinetic_data/interphase_transfer.py": "8384823d51811ad2eb04df6cae1b3c6dd7cbb1a26b725e019b57886703235259",
+    "scripts/reaction_network/cross_phase.py": "721cf778c3b357d658de87381d707256edb23115ed0a8fae5aab4e12c908b788",
+    "scripts/baseline_mkm/molecular_coverage.py": "74ce9e19515d645cdb925ba452b747fcc97f02765cac5d6ac83cc7980502ddbb",
+    "reports/multiphase/phase2_5/zacros/simulation_input.dat": "7dbe831c71480a0fcf65fd59ae5e1b48bf4acc734a283d083f0dbff7f9fec1d4",
+    "reports/multiphase/phase2_5/zacros/lattice_input.dat": "041747579adc213be762c4945862a71396c90465c4059660ac6d773c9d848362",
+    "reports/multiphase/phase2_5/zacros/mechanism_input.dat": "f542d07489e339964039d2012d3bbb4ee7831d5871124388a33c8440132f4ca0",
+    "reports/multiphase/phase2_5/zacros/energetics_input.dat": "a9034d0d147ea36298101727ef62ecede67ac7f15306e3eb58794b7e43c5f288",
+    "reports/multiphase/phase2_5_1/benchmarks/mono.zip": "a2593f79f35fb9158b29299078653b6c8c0ecc8c450b65be9d79a50c40f92776",
+    "reports/multiphase/phase2_5_1/benchmarks/dent.zip": "ec21a9ee721954d21a04956c6291833b571a888a76ee1fa4c783fbce8331b1a1",
+    "reports/multiphase/phase2_5_1/benchmarks/full.zip": "21b8444d6f8b92e013bed75c7f03d8b270066811ffbba6052d0389d890873649",
+    "reports/multiphase/phase2_5_1/benchmarks/interacting.zip": "c0b78aa900b9c907b13e0ba2fab018b77fa64b60e128606922821ebcaa6c6652",
+    "reports/multiphase/phase2_5_1/benchmarks/attractive.zip": "29028e0369f6b98f1214457d643a2bec38ac3a24df3bc2cf0af7a1b466975ad7",
+    "reports/multiphase/phase2_5_1/benchmarks/continuous.zip": "6cb042ef80a8cf5c7ed32d1142581f99a9ed733c41f72887f94f759f4fc852c5",
+    "reports/multiphase/phase2_5_1/benchmarks/split.zip": "1cf32a9222b492fdc7f1b08123d88484d88c23906f727907d64e194952b8ac69",
+    "reports/multiphase/phase2_5_1/benchmarks/resume.zip": "6613c61f8aed7656d6b7295c01847c0c1c6e163c54ea2667240759e5fe9a46d7"
+  }
+}
