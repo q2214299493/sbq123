@@ -6,7 +6,7 @@ source_scope: B6 governance of the B5 publication baseline; no live scientific s
 source_branch: codex/b6-documentation-data-governance
 source_version: 3a1bb3f461147a7dc9b5df5efca89de621d27f38
 evidence_kind: CURRENT_CODE_STATE
-input_sha256: c8080cbe986e58194b0b4abfd22c06c71c27185f68790ce253d4ebc29475f968
+input_sha256: 66655c95517e750ae609334d127e3384da2d717698079aa1ce0aa8358120d184
 ---
 
 # Capability Readiness (DERIVED)
