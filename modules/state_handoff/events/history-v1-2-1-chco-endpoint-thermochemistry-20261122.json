@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "event_id": "history-v1-2-1-chco-endpoint-thermochemistry-20261122",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-v1-2-1-chco-endpoint-thermochemistry-20261122",
+    "module": "thermochemistry"
+  },
+  "occurred_at": "2026-11-22T11:23:12.907875+00:00",
+  "recorded_at": "2026-11-22T11:23:12.907875+00:00",
+  "summary": "Record the Fe(110) CHCO three-state thermochemistry evidence qualification.",
+  "payload": {
+    "markdown": "- V.1.2.1 found no compatible IS or FS thermal package among the evidence searched. Job 2260 reproduces the reviewed TS local ZPE (0.51405165 eV). Gibbs differences and closure remain undetermined. Two endpoint-specific partial-Hessian specifications and the precomputed-evidence route are documented in reports/workflow_readiness/stage_v1_2_1/completion.md. No new calculation was submitted or scientifically accepted."
+  },
+  "evidence": [
+    {
+      "locator": "reports/workflow_readiness/stage_v1_2_1/completion.md",
+      "sha256": "4d5947d8730ecb0347067d6ed24b572540cb158f641e89ee44bcf03a60a8f44f",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T11:23:12.907875+00:00"
+    },
+    {
+      "locator": "reports/workflow_readiness/stage_v1_2_1/candidate_inventory.json",
+      "sha256": "809f690e217edb675e901d0f5483e19ddae010d24774c24f255849cc28eb8114",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T11:23:12.907875+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

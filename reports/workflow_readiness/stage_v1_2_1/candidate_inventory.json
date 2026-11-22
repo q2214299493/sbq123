@@ -1,0 +1,1188 @@
+{
+  "baseline": "629ada1264bb40796f2458ba7c5b948ccaa2e83c",
+  "reaction_id": "fe110_ch_co_to_chco_20261109",
+  "sources": {
+    "IS": {
+      "structure": {
+        "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_cfg0_direct_vasp/CONTCAR",
+        "sha256": "f8bc627180b430b3b64f748c05830a0372bc93a3750780cf7fe6c5eb0601762d"
+      },
+      "outcar": {
+        "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_cfg0_direct_vasp/OUTCAR",
+        "sha256": "e3f5ad8b0aa2a9afc6749785e5dc872d64b6de4165169578510c7a0c5d167d78"
+      },
+      "numeric_value": -385.14767079,
+      "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+      "calculation_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021",
+      "result_id": "fe110_five_c2_adsorption_20261006_03_cfg0_direct_vasp_CH_CO_reclassified_20261021_coads_review_20261021_final_toten"
+    },
+    "TS": {
+      "structure": {
+        "path": "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/CONTCAR",
+        "sha256": "0157a418cd1fba1be886426361d494ffbdce9a15d1a9132b996a3481ffcc1a6a"
+      },
+      "outcar": {
+        "path": "calculations/fe110_ch_co_to_chco_ts_20261109/dimer_completion_20261115_v1/source/OUTCAR",
+        "sha256": "391f84167e6372dcaf770ed1efa471d1abba6d4640803876899b120ac797dd02"
+      },
+      "numeric_value": -384.17406905,
+      "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+      "calculation_id": "fe110_ch_co_dimer_20261112_job9998592",
+      "result_id": "fe110_ch_co_dimer_20261112_job9998592_final_toten_sigma0p20_eV"
+    },
+    "FS": {
+      "structure": {
+        "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_extra2_repair_v1/CONTCAR",
+        "sha256": "11dab1631a99f1e444d4c7ab9ca242609e07c912f656874005696e6498f15ab2"
+      },
+      "outcar": {
+        "path": "calculations/fe110_five_c2_adsorption_20261006/final_review_20261012/sources/03_extra2_repair_v1/OUTCAR",
+        "sha256": "e88d99ab9ba74274fd8af45e4e69b9f59feb90bbe1101f7e794c1c317bb82edc"
+      },
+      "numeric_value": -384.48836276,
+      "reference_convention": "fe110_converged_toten_sigma0p20_v1",
+      "calculation_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1",
+      "result_id": "fe110_five_c2_adsorption_20261006_03_extra2_repair_v1_completion_20261012_final_toten"
+    }
+  },
+  "local_search": {
+    "INCAR_or_INCAR_dot_files": 1470,
+    "IBRION_5_to_8": 10,
+    "OUTCAR_named_files": 800,
+    "OUTCAR_with_frequency_rows": 24,
+    "candidate_directories": 26,
+    "historical_directory_set_equal": false,
+    "comparison": "For ordered composition and cell match, maximum same-index minimum-image displacement in angstrom. Null indicates ordered composition or cell differs."
+  },
+  "candidates": [
+    {
+      "directory": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/formal_ts_validation_20260910/vfa",
+      "poscar_sha256": "787d11a0000e2aa72607e3aa05a885f3f9d6eb36191443b7af15820976193322",
+      "outcar_sha256": "272d49251e6be55f2221a32606e7d21acb9d1e6ef278d444c1aa8c64b37b6460",
+      "composition": {
+        "Fe": 45,
+        "C": 2,
+        "O": 1,
+        "H": 2
+      },
+      "max_ordered_periodic_displacement_A": {
+        "IS": null,
+        "TS": null,
+        "FS": null
+      },
+      "active_axes": {
+        "47": "TTT",
+        "49": "TTT"
+      },
+      "incar_sha256": "7f659a7f1ed11ba2c384098234b99dc1cb2373880ff87dc48f04df062e56190e",
+      "settings": {
+        "NIONS": "50",
+        "ENCUT": "400.0",
+        "EDIFF": "0.1E-06",
+        "IBRION": "5",
+        "NFREE": "2",
+        "ISYM": "0",
+        "POTIM": "1.500000000000000E-002",
+        "ISMEAR": "1",
+        "SIGMA": "0.20"
+      },
+      "mode_count": 6,
+      "expected_cartesian_modes": 6,
+      "imaginary_modes_cm1": [
+        -1407.654162
+      ],
+      "normal_timing_footer": true,
+      "ediff_exit_count": 13,
+      "toten_count": 13,
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "Different atomic composition.",
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    },
+    {
+      "directory": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_ci9796856_image04_local_h_fe_20260925",
+      "poscar_sha256": "5e5aafaabb84c2d3f8aa6005bcf0ea7e0b01a33aee4cdaeb5dcd7b910889be9e",
+      "outcar_sha256": "fc9368d2292e5f8fcbbec996e1830293b204cb59f52d06247828da845a38b792",
+      "composition": {
+        "Fe": 45,
+        "C": 2,
+        "O": 1,
+        "H": 2
+      },
+      "max_ordered_periodic_displacement_A": {
+        "IS": null,
+        "TS": null,
+        "FS": null
+      },
+      "active_axes": {
+        "37": "TTT",
+        "38": "TTT",
+        "39": "TTT",
+        "40": "TTT",
+        "49": "TTT"
+      },
+      "incar_sha256": "f3b08af2eaad52a863f31a6d8fc4b891749c92afd3211f977b5cb4e625c3f383",
+      "settings": {
+        "NIONS": "50",
+        "ENCUT": "400.0",
+        "EDIFF": "0.1E-06",
+        "IBRION": "5",
+        "NFREE": "2",
+        "ISYM": "0",
+        "POTIM": "1.500000000000000E-002",
+        "ISMEAR": "1",
+        "SIGMA": "0.20"
+      },
+      "mode_count": 15,
+      "expected_cartesian_modes": 15,
+      "imaginary_modes_cm1": [
+        -386.611701
+      ],
+      "normal_timing_footer": true,
+      "ediff_exit_count": 31,
+      "toten_count": 31,
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "Different atomic composition.",
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    },
+    {
+      "directory": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_dimer9746548_local_oh_20260909",
+      "poscar_sha256": "787d11a0000e2aa72607e3aa05a885f3f9d6eb36191443b7af15820976193322",
+      "outcar_sha256": "272d49251e6be55f2221a32606e7d21acb9d1e6ef278d444c1aa8c64b37b6460",
+      "composition": {
+        "Fe": 45,
+        "C": 2,
+        "O": 1,
+        "H": 2
+      },
+      "max_ordered_periodic_displacement_A": {
+        "IS": null,
+        "TS": null,
+        "FS": null
+      },
+      "active_axes": {
+        "47": "TTT",
+        "49": "TTT"
+      },
+      "incar_sha256": "7f659a7f1ed11ba2c384098234b99dc1cb2373880ff87dc48f04df062e56190e",
+      "settings": {
+        "NIONS": "50",
+        "ENCUT": "400.0",
+        "EDIFF": "0.1E-06",
+        "IBRION": "5",
+        "NFREE": "2",
+        "ISYM": "0",
+        "POTIM": "1.500000000000000E-002",
+        "ISMEAR": "1",
+        "SIGMA": "0.20"
+      },
+      "mode_count": 6,
+      "expected_cartesian_modes": 6,
+      "imaginary_modes_cm1": [
+        -1407.654162
+      ],
+      "normal_timing_footer": true,
+      "ediff_exit_count": 13,
+      "toten_count": 13,
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "Different atomic composition.",
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    },
+    {
+      "directory": "calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/vfa_dimer9833429_is_a_int06_local_h_fe_20261121",
+      "poscar_sha256": "e141b632153475e6db156f21772d22bbd624385bbeff691f63cf749c8872469d",
+      "outcar_sha256": null,
+      "composition": {
+        "Fe": 45,
+        "C": 2,
+        "O": 1,
+        "H": 2
+      },
+      "max_ordered_periodic_displacement_A": {
+        "IS": null,
+        "TS": null,
+        "FS": null
+      },
+      "active_axes": {
+        "36": "TTT",
+        "37": "TTT",
+        "39": "TTT",
+        "40": "TTT",
+        "42": "TTT",
+        "43": "TTT",
+        "49": "TTT"
+      },
+      "incar_sha256": "9089de9ab3a82c70de687acc2bd793693f7bc5826705ee2fd957dc1f39bf7d5a",
+      "settings": null,
+      "mode_count": null,
+      "expected_cartesian_modes": null,
+      "imaginary_modes_cm1": null,
+      "normal_timing_footer": null,
+      "ediff_exit_count": null,
+      "toten_count": null,
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "Different atomic composition.",
+      "input_settings": {
+        "PREC": "Accurate",
+        "EDIFF": "1e-07",
+        "ISPIN": "2",
+        "ISMEAR": "1",
+        "SIGMA": "0.20",
+        "ALGO": "Fast",
+        "LREAL": ".FALSE.",
+        "LASPH": ".TRUE.",
+        "NELM": "200",
+        "NELMIN": "5",
+        "NSW": "1",
+        "IBRION": "5",
+        "ISYM": "0",
+        "LDIPOL": ".FALSE.",
+        "LCHARG": ".FALSE.",
+        "LWAVE": ".FALSE.",
+        "NFREE": "2",
+        "POTIM": "0.015",
+        "GGA": "PE",
+        "ENCUT": "400",
+        "MAGMOM": "45*2.2 2*0.0 1*0.0 2*0.0"
+      },
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    },
+    {
+      "directory": "calculations/fe110_c_h_to_ch_ts_20260818/gpu_ml_neb_production_20260819/frequency/vfa_local_ch_fe5_from_dimer9720181_20260821",
+      "poscar_sha256": "98fc8738e261facb192ccbe201dad7157918744586b23e221a12fe556e4afc11",
+      "outcar_sha256": "c9ed60495487c58e50789fe46f2f05cd3eb0a110148d6f484db58751cfc92e11",
+      "composition": {
+        "Fe": 45,
+        "C": 1,
+        "H": 1
+      },
+      "max_ordered_periodic_displacement_A": {
+        "IS": null,
+        "TS": null,
+        "FS": null
+      },
+      "active_axes": {
+        "32": "TTT",
+        "37": "TTT",
+        "41": "TTT",
+        "43": "TTT",
+        "44": "TTT",
+        "45": "TTT",
+        "46": "TTT"
+      },
+      "incar_sha256": "5604122a09a6099e9c3da12ed74a15103adb52fc81c3b3669ed8865844664c20",
+      "settings": {
+        "NIONS": "47",
+        "ENCUT": "400.0",
+        "EDIFF": "0.1E-06",
+        "IBRION": "5",
+        "NFREE": "2",
+        "ISYM": "0",
+        "POTIM": "1.500000000000000E-002",
+        "ISMEAR": "1",
+        "SIGMA": "0.10"
+      },
+      "mode_count": 21,
+      "expected_cartesian_modes": 21,
+      "imaginary_modes_cm1": [
+        -842.194583
+      ],
+      "normal_timing_footer": true,
+      "ediff_exit_count": 43,
+      "toten_count": 43,
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "Different atomic composition.",
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    },
+    {
+      "directory": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa",
+      "poscar_sha256": "c1b035d47a15cf8211d23dd25d4216a46c82a33b3b5c0957b03b86e7a49ade8d",
+      "outcar_sha256": "d707a332f1af5d0835e1935d351d9a28b011bd4672e4de3b00833fb93f62f9a9",
+      "composition": {
+        "Fe": 45,
+        "C": 2,
+        "O": 1,
+        "H": 1
+      },
+      "max_ordered_periodic_displacement_A": {
+        "IS": 2.0136263525853293,
+        "TS": 1.1852675851954518e-11,
+        "FS": 3.393669767598488
+      },
+      "active_axes": {
+        "45": "TTT",
+        "46": "TTT",
+        "47": "TTT",
+        "48": "TTT"
+      },
+      "incar_sha256": "40b8ac1952abd7ec7e1f7c5a6b908f92c9266408e129edc84e004b8ab4c2c0f5",
+      "settings": {
+        "NIONS": "49",
+        "ENCUT": "400.0",
+        "EDIFF": "0.1E-06",
+        "IBRION": "5",
+        "NFREE": "2",
+        "ISYM": "0",
+        "POTIM": "1.500000000000000E-002",
+        "ISMEAR": "1",
+        "SIGMA": "0.10"
+      },
+      "mode_count": 12,
+      "expected_cartesian_modes": 12,
+      "imaginary_modes_cm1": [
+        -318.644011
+      ],
+      "normal_timing_footer": true,
+      "ediff_exit_count": 25,
+      "toten_count": 25,
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "ordered TS geometry, TS source only",
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    },
+    {
+      "directory": "calculations/fe110_ch_co_to_chco_ts_20261109/vfa_dimer9998592_20261115_v1",
+      "poscar_sha256": "c1b035d47a15cf8211d23dd25d4216a46c82a33b3b5c0957b03b86e7a49ade8d",
+      "outcar_sha256": null,
+      "composition": {
+        "Fe": 45,
+        "C": 2,
+        "O": 1,
+        "H": 1
+      },
+      "max_ordered_periodic_displacement_A": {
+        "IS": 2.0136263525853293,
+        "TS": 1.1852675851954518e-11,
+        "FS": 3.393669767598488
+      },
+      "active_axes": {
+        "45": "TTT",
+        "46": "TTT",
+        "47": "TTT",
+        "48": "TTT"
+      },
+      "incar_sha256": "40b8ac1952abd7ec7e1f7c5a6b908f92c9266408e129edc84e004b8ab4c2c0f5",
+      "settings": null,
+      "mode_count": null,
+      "expected_cartesian_modes": null,
+      "imaginary_modes_cm1": null,
+      "normal_timing_footer": null,
+      "ediff_exit_count": null,
+      "toten_count": null,
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "ordered TS geometry, TS source only",
+      "input_settings": {
+        "PREC": "Accurate",
+        "EDIFF": "1e-07",
+        "ISPIN": "2",
+        "ISMEAR": "1",
+        "SIGMA": "0.1",
+        "ALGO": "Fast",
+        "LREAL": ".FALSE.",
+        "LASPH": ".TRUE.",
+        "NELM": "200",
+        "NELMIN": "5",
+        "NSW": "1",
+        "IBRION": "5",
+        "ISYM": "0",
+        "LDIPOL": ".FALSE.",
+        "LCHARG": ".FALSE.",
+        "LWAVE": ".FALSE.",
+        "NFREE": "2",
+        "POTIM": "0.015",
+        "GGA": "PE",
+        "ENCUT": "400",
+        "MAGMOM": "45*2.2 2*0.0 1*0.0 1*0.0"
+      },
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    },
+    {
+      "directory": "calculations/fe110_ch_co_to_chco_ts_20261109/vfa_mode12_review_20261115_v1/raw",
+      "poscar_sha256": "c1b035d47a15cf8211d23dd25d4216a46c82a33b3b5c0957b03b86e7a49ade8d",
+      "outcar_sha256": "d707a332f1af5d0835e1935d351d9a28b011bd4672e4de3b00833fb93f62f9a9",
+      "composition": {
+        "Fe": 45,
+        "C": 2,
+        "O": 1,
+        "H": 1
+      },
+      "max_ordered_periodic_displacement_A": {
+        "IS": 2.0136263525853293,
+        "TS": 1.1852675851954518e-11,
+        "FS": 3.393669767598488
+      },
+      "active_axes": {
+        "45": "TTT",
+        "46": "TTT",
+        "47": "TTT",
+        "48": "TTT"
+      },
+      "incar_sha256": "40b8ac1952abd7ec7e1f7c5a6b908f92c9266408e129edc84e004b8ab4c2c0f5",
+      "settings": {
+        "NIONS": "49",
+        "ENCUT": "400.0",
+        "EDIFF": "0.1E-06",
+        "IBRION": "5",
+        "NFREE": "2",
+        "ISYM": "0",
+        "POTIM": "1.500000000000000E-002",
+        "ISMEAR": "1",
+        "SIGMA": "0.10"
+      },
+      "mode_count": 12,
+      "expected_cartesian_modes": 12,
+      "imaginary_modes_cm1": [
+        -318.644011
+      ],
+      "normal_timing_footer": true,
+      "ediff_exit_count": 25,
+      "toten_count": 25,
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "ordered TS geometry, TS source only",
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    },
+    {
+      "directory": "calculations/fe110_ch_h_to_ch2_ts_20260810/frequency/vfa_local_ch_fe5_from_dimer9709074_20260814",
+      "poscar_sha256": "986b3e7de16dd97de33ec6d2c04bc04f15fefa3b90b82994f6a6f69a7e97d426",
+      "outcar_sha256": "4fe2b23a444ae5b6c4e0ed3ccbe6d6e03407a5aadc6d5f15999b2e2d697027ac",
+      "composition": {
+        "Fe": 45,
+        "C": 1,
+        "H": 2
+      },
+      "max_ordered_periodic_displacement_A": {
+        "IS": null,
+        "TS": null,
+        "FS": null
+      },
+      "active_axes": {
+        "37": "TTT",
+        "40": "TTT",
+        "41": "TTT",
+        "43": "TTT",
+        "44": "TTT",
+        "45": "TTT",
+        "46": "TTT",
+        "47": "TTT"
+      },
+      "incar_sha256": "42acfba3d5a0bdebe39aa4d4d8bf98e78bc76be8c4eab03670b25a5180d4314e",
+      "settings": {
+        "NIONS": "48",
+        "ENCUT": "400.0",
+        "EDIFF": "0.1E-06",
+        "IBRION": "5",
+        "NFREE": "2",
+        "ISYM": "0",
+        "POTIM": "1.500000000000000E-002",
+        "ISMEAR": "1",
+        "SIGMA": "0.10"
+      },
+      "mode_count": 24,
+      "expected_cartesian_modes": 24,
+      "imaginary_modes_cm1": [
+        -809.141
+      ],
+      "normal_timing_footer": true,
+      "ediff_exit_count": 49,
+      "toten_count": 49,
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "Different atomic composition.",
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    },
+    {
+      "directory": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/ts_validation_review_dimer9656664_mode6_20260806",
+      "poscar_sha256": "fa1e2224a768f73849847aa5e64d233d816e1b794b1542feabb0f2ab777d69b3",
+      "outcar_sha256": "c3b12bc0b11dcd225ce162950511aa6e23d2b54169b4d754fa7be661a8959210",
+      "composition": {
+        "Fe": 45,
+        "C": 1,
+        "O": 1
+      },
+      "max_ordered_periodic_displacement_A": {
+        "IS": null,
+        "TS": null,
+        "FS": null
+      },
+      "active_axes": {
+        "45": "TTT",
+        "46": "TTT"
+      },
+      "incar_sha256": null,
+      "settings": {
+        "NIONS": "47",
+        "ENCUT": "400.0",
+        "EDIFF": "0.1E-06",
+        "IBRION": "5",
+        "NFREE": "2",
+        "ISYM": "0",
+        "POTIM": "1.500000000000000E-002",
+        "ISMEAR": "1",
+        "SIGMA": "0.10"
+      },
+      "mode_count": 6,
+      "expected_cartesian_modes": 6,
+      "imaginary_modes_cm1": [
+        -537.451689
+      ],
+      "normal_timing_footer": true,
+      "ediff_exit_count": 13,
+      "toten_count": 13,
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "Different atomic composition.",
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    },
+    {
+      "directory": "calculations/fe110_co_dissociation_neb_20260718/diagnostics/vfa_diagnostic_from_dimer9656664_co_only_20260805",
+      "poscar_sha256": "fa1e2224a768f73849847aa5e64d233d816e1b794b1542feabb0f2ab777d69b3",
+      "outcar_sha256": "c3b12bc0b11dcd225ce162950511aa6e23d2b54169b4d754fa7be661a8959210",
+      "composition": {
+        "Fe": 45,
+        "C": 1,
+        "O": 1
+      },
+      "max_ordered_periodic_displacement_A": {
+        "IS": null,
+        "TS": null,
+        "FS": null
+      },
+      "active_axes": {
+        "45": "TTT",
+        "46": "TTT"
+      },
+      "incar_sha256": "5604122a09a6099e9c3da12ed74a15103adb52fc81c3b3669ed8865844664c20",
+      "settings": {
+        "NIONS": "47",
+        "ENCUT": "400.0",
+        "EDIFF": "0.1E-06",
+        "IBRION": "5",
+        "NFREE": "2",
+        "ISYM": "0",
+        "POTIM": "1.500000000000000E-002",
+        "ISMEAR": "1",
+        "SIGMA": "0.10"
+      },
+      "mode_count": 6,
+      "expected_cartesian_modes": 6,
+      "imaginary_modes_cm1": [
+        -537.451689
+      ],
+      "normal_timing_footer": true,
+      "ediff_exit_count": 13,
+      "toten_count": 13,
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "Different atomic composition.",
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/architecture/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "Test fixture without target structure provenance.",
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/architecture_full/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "Test fixture without target structure provenance.",
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/pytest/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "Test fixture without target structure provenance.",
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/pytest_after_evidence/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "Test fixture without target structure provenance.",
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/pytest_contract_binding/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "Test fixture without target structure provenance.",
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/pytest_final_targeted/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "Test fixture without target structure provenance.",
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/pytest_final_targeted_2/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "Test fixture without target structure provenance.",
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/pytest_final_targeted_3/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "Test fixture without target structure provenance.",
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/pytest_full/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "Test fixture without target structure provenance.",
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/pytest_full_final/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "Test fixture without target structure provenance.",
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/pytest_mode_hash/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "Test fixture without target structure provenance.",
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/pytest_mode_hash_2/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "Test fixture without target structure provenance.",
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    },
+    {
+      "directory": "outputs/_tmp_ts_implementation/workflow_split/test_vfa_grade_a_requires_mode0",
+      "poscar_sha256": null,
+      "outcar_sha256": "6759bb9d35c553b6f319290ca4b813905af055d4f765f70e39c14d7dcaf6ab23",
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "Test fixture without target structure provenance.",
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    },
+    {
+      "directory": "outputs/c1_c2_barrier_registration_20261118_v1/ch_co",
+      "poscar_sha256": "c1b035d47a15cf8211d23dd25d4216a46c82a33b3b5c0957b03b86e7a49ade8d",
+      "outcar_sha256": "d707a332f1af5d0835e1935d351d9a28b011bd4672e4de3b00833fb93f62f9a9",
+      "composition": {
+        "Fe": 45,
+        "C": 2,
+        "O": 1,
+        "H": 1
+      },
+      "max_ordered_periodic_displacement_A": {
+        "IS": 2.0136263525853293,
+        "TS": 1.1852675851954518e-11,
+        "FS": 3.393669767598488
+      },
+      "active_axes": {
+        "45": "TTT",
+        "46": "TTT",
+        "47": "TTT",
+        "48": "TTT"
+      },
+      "incar_sha256": null,
+      "settings": {
+        "NIONS": "49",
+        "ENCUT": "400.0",
+        "EDIFF": "0.1E-06",
+        "IBRION": "5",
+        "NFREE": "2",
+        "ISYM": "0",
+        "POTIM": "1.500000000000000E-002",
+        "ISMEAR": "1",
+        "SIGMA": "0.10"
+      },
+      "mode_count": 12,
+      "expected_cartesian_modes": 12,
+      "imaginary_modes_cm1": [
+        -318.644011
+      ],
+      "normal_timing_footer": true,
+      "ediff_exit_count": 25,
+      "toten_count": 25,
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "ordered TS geometry, TS source only",
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    },
+    {
+      "directory": "outputs/c1_c2_barrier_registration_20261118_v1/int06_mid",
+      "poscar_sha256": "5e5aafaabb84c2d3f8aa6005bcf0ea7e0b01a33aee4cdaeb5dcd7b910889be9e",
+      "outcar_sha256": "fc9368d2292e5f8fcbbec996e1830293b204cb59f52d06247828da845a38b792",
+      "composition": {
+        "Fe": 45,
+        "C": 2,
+        "O": 1,
+        "H": 2
+      },
+      "max_ordered_periodic_displacement_A": {
+        "IS": null,
+        "TS": null,
+        "FS": null
+      },
+      "active_axes": {
+        "37": "TTT",
+        "38": "TTT",
+        "39": "TTT",
+        "40": "TTT",
+        "49": "TTT"
+      },
+      "incar_sha256": null,
+      "settings": {
+        "NIONS": "50",
+        "ENCUT": "400.0",
+        "EDIFF": "0.1E-06",
+        "IBRION": "5",
+        "NFREE": "2",
+        "ISYM": "0",
+        "POTIM": "1.500000000000000E-002",
+        "ISMEAR": "1",
+        "SIGMA": "0.20"
+      },
+      "mode_count": 15,
+      "expected_cartesian_modes": 15,
+      "imaginary_modes_cm1": [
+        -386.611701
+      ],
+      "normal_timing_footer": true,
+      "ediff_exit_count": 31,
+      "toten_count": 31,
+      "endpoint_class": {
+        "IS": "incompatible",
+        "FS": "incompatible"
+      },
+      "reason": "Different atomic composition.",
+      "target_thermodynamic_conditions": {
+        "temperature_K": null,
+        "standard_state": null,
+        "endpoint_scale": null,
+        "endpoint_low_frequency_treatment": null
+      }
+    }
+  ],
+  "scientific_intake": {
+    "zpe": {
+      "inputs_complete": false,
+      "unresolved_fields": [
+        "FS.corrections",
+        "FS.spectrum",
+        "IS.corrections",
+        "IS.spectrum"
+      ],
+      "unresolved_one_of": [
+        [
+          "IS.corrections",
+          "IS.spectrum"
+        ],
+        [
+          "FS.corrections",
+          "FS.spectrum"
+        ]
+      ],
+      "mkm_status": "requires_existing_kinetic_contract"
+    },
+    "thermochemistry": {
+      "inputs_complete": false,
+      "unresolved_fields": [
+        "FS.corrections",
+        "FS.spectrum",
+        "IS.corrections",
+        "IS.spectrum",
+        "reaction.standard_state",
+        "reaction.temperature"
+      ],
+      "unresolved_one_of": [
+        [
+          "IS.corrections",
+          "IS.spectrum"
+        ],
+        [
+          "FS.corrections",
+          "FS.spectrum"
+        ]
+      ],
+      "mkm_status": "requires_existing_kinetic_contract"
+    },
+    "kinetic_handoff": {
+      "inputs_complete": false,
+      "unresolved_fields": [
+        "FS.corrections",
+        "FS.spectrum",
+        "IS.corrections",
+        "IS.spectrum",
+        "reaction.forward_rate",
+        "reaction.pressure",
+        "reaction.reverse_rate",
+        "reaction.reversible",
+        "reaction.site_mapping",
+        "reaction.standard_state",
+        "reaction.temperature"
+      ],
+      "unresolved_one_of": [
+        [
+          "IS.corrections",
+          "IS.spectrum"
+        ],
+        [
+          "FS.corrections",
+          "FS.spectrum"
+        ]
+      ],
+      "mkm_status": "blocked"
+    }
+  },
+  "thermal_qualification": {
+    "status": "partial",
+    "issues": [
+      "FS.corrections",
+      "FS.spectrum",
+      "IS.corrections",
+      "IS.spectrum",
+      "reaction.standard_state",
+      "reaction.temperature"
+    ],
+    "TS": {
+      "zpe_ev": 0.5140516496724512,
+      "scale": 1.0,
+      "scaling_reference": null,
+      "thermal_basis": "Fe110-C45-C46-O47-H48-local-harmonic",
+      "frequencies_cm1": [
+        3012.556969,
+        1562.135791,
+        909.495523,
+        693.170928,
+        563.698151,
+        468.200164,
+        355.601179,
+        248.117609,
+        219.859855,
+        143.010697,
+        116.365467,
+        -318.644011
+      ],
+      "included_modes_one_based": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "excluded_reaction_coordinate_one_based": 12,
+      "thermal_enthalpy_ev": null,
+      "entropy_ev_per_k": null,
+      "gibbs_correction_ev": null,
+      "standard_state": null,
+      "temperature_k": null
+    },
+    "reaction": null,
+    "Gibbs_closure_status": "not_evaluable",
+    "absolute_closure_tolerance_eV": 1e-09
+  },
+  "kinetic_dataset_version": "a4191054a20d601a73afadd410d3cf69d3df524b14278f0edff92c7a33870b72",
+  "export_eligible": false,
+  "reference": "Surface-local harmonic corrections per stated structure. No compatible endpoint correction was bound. Electronic reference fe110_converged_toten_sigma0p20_v1. VFA SIGMA=0.10 eV is distinct from electronic SIGMA=0.20 eV.",
+  "prior_inventory": {
+    "path": "reports/multiphase/phase3_2_3_1/candidates.json",
+    "sha256": "b7434939fe8464556a490eb4d160415c6061053774a9e993f9913b58975c82d9",
+    "remote_refresh_status": "SSH connection timeout; remote records are the November 20 inventory"
+  },
+  "structured_source_search": {
+    "scope": "calculations and outputs. JSON, CSV, YAML and Markdown; exact state digest or reaction ID and correction or spectrum text.",
+    "files": 38243,
+    "matches_with_identity": 282,
+    "files_with_identity_and_thermal_text": [
+      {
+        "path": "outputs/c1_c2_barrier_review_20261118_v1/ch_co/review_packet.json",
+        "sha256": "8257e0af13b4009ec362edde2926aafad6f5e5f042be2e65a55c120a5d8beca4"
+      },
+      {
+        "path": "outputs/c1_c2_barrier_review_20261118_v1/ch_co/current_ts_gate.json",
+        "sha256": "8e54da56ddf56c9b4068ecad8fbb2426762624b1542435c48995ae2a5581e971"
+      },
+      {
+        "path": "outputs/c1_c2_barrier_registration_20261118_v1/ch_co/vfa_analysis.json",
+        "sha256": "415fc8250077fba5b3ca61d5759b62e5f98294c568ee9e8f02ca5faa18281fd7"
+      },
+      {
+        "path": "outputs/c1_c2_barrier_registration_20261118_v1/ch_co/current_gate_decision.json",
+        "sha256": "217f93678cf3e12ec06f7c287431ea5e2c23d351412f25beffe965d3c9829c45"
+      },
+      {
+        "path": "outputs/c1_c2_mkm_inventory_20261117_v1/inventory.json",
+        "sha256": "b26b8dc9e9709de1f1f03d0fc6e4dacfdcdc33005171b95020fd05792abf46cd"
+      },
+      {
+        "path": "calculations/fe110_reico_pilot300_20261022/c2_c4_gap_inventory_20261114_v1/registry_snapshot.json",
+        "sha256": "11f9275b3944d5da2a8e4b7eb5cc1a0d1571c57e1324f2ae25dbfaaa16af9a71"
+      },
+      {
+        "path": "calculations/fe110_ch_co_to_chco_ts_20261109/vfa_mode12_review_20261115_v1/vfa_analysis.diagnostic.json",
+        "sha256": "ec8a5afc4551d6f840ee4a83f267b04ac04de02a78051cebd64ce17e30f6e40c"
+      },
+      {
+        "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/vfa_analysis.json",
+        "sha256": "e5c326c7c096bfae0174457c077ae415140f9089165bff1c1cdb1a8a920ae7fc"
+      },
+      {
+        "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/acceptance_decision.json",
+        "sha256": "f310b29e797f767124cc3ce71631e16885ed768243960025c60adefb4c84602c"
+      }
+    ]
+  },
+  "verified_TS_files": {
+    "INCAR": {
+      "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/INCAR",
+      "sha256": "40b8ac1952abd7ec7e1f7c5a6b908f92c9266408e129edc84e004b8ab4c2c0f5"
+    },
+    "KPOINTS": {
+      "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/KPOINTS",
+      "sha256": "0d7e291117433dac5393f29520b635e92f06e6c8e91aa941137c86b1d39162ae"
+    },
+    "POSCAR": {
+      "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/POSCAR",
+      "sha256": "c1b035d47a15cf8211d23dd25d4216a46c82a33b3b5c0957b03b86e7a49ade8d"
+    },
+    "OUTCAR": {
+      "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/OUTCAR",
+      "sha256": "d707a332f1af5d0835e1935d351d9a28b011bd4672e4de3b00833fb93f62f9a9"
+    },
+    "vfa_analysis.json": {
+      "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/vfa_analysis.json",
+      "sha256": "e5c326c7c096bfae0174457c077ae415140f9089165bff1c1cdb1a8a920ae7fc"
+    },
+    "vfa_review.json": {
+      "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/vfa_review.json",
+      "sha256": "53938169f0884fb021c9e2cbb68933b537ad82bed018a14bb53e64e6cb79895d"
+    },
+    "vfa_scope_review.json": {
+      "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/vfa_scope_review.json",
+      "sha256": "a1697c65cb058f9906c23f18ef713a90a99a630d374cd2d0a45aaccc81851217"
+    },
+    "vfa_handoff.json": {
+      "path": "calculations/fe110_ch_co_to_chco_ts_20261109/ts_acceptance_20261115_v1/vfa/vfa_handoff.json",
+      "sha256": "dd34a2266f375553a335defde41fd6b02d424d5468c8d9bbd68bb841bd05b025"
+    }
+  },
+  "remote_candidate_count_historical": 6
+}
