@@ -1,0 +1,33 @@
+{
+  "classification": "synthetic_test_assumption",
+  "description": "First hypothetical graph of B.2.3.2.1. Edges, open ends, ordered seed pairs and Cartesian drawing coordinates are declared for topology testing only. Coordinates are not oxide atomic positions or a criterion for adding edges.",
+  "sources": {
+    "definition": {"path": "tests/fixtures/multiphase/synthetic_oxide_site_network.json", "sha256": "24d5c34d33ec332a131e5f957dcb83ff4816e29c5d4c6ba05c47c854d87c6aa2"},
+    "observation": {"path": "reports/multiphase/stage_b2_1/oxide_observations.json", "sha256": "49d84e1cddf511eeb232002dcb87833c312826a8165d02abf644469b47289d0b"}
+  },
+  "boundary": "finite_open",
+  "reaction_id": "fixture-adsorption",
+  "gas_species_id": "co2",
+  "bridge_species_id": "co2-bound",
+  "gas_alias": "CO2",
+  "bridge_alias": "CO2bridge",
+  "leg_inventories": ["acid-A", "oxygen-B"],
+  "site_aliases": {"acid-A": "acidA", "oxygen-B": "oxygenB"},
+  "nodes": [
+    {"index": 1, "node_id": "acid-1", "inventory_id": "acid-A", "drawing_xy_angstrom": [0, 0]},
+    {"index": 2, "node_id": "acid-2", "inventory_id": "acid-A", "drawing_xy_angstrom": [2, 0]},
+    {"index": 3, "node_id": "acid-3", "inventory_id": "acid-A", "drawing_xy_angstrom": [4, 0]},
+    {"index": 4, "node_id": "acid-4", "inventory_id": "acid-A", "drawing_xy_angstrom": [6, 0]},
+    {"index": 5, "node_id": "oxygen-1", "inventory_id": "oxygen-B", "drawing_xy_angstrom": [1, 1]},
+    {"index": 6, "node_id": "oxygen-2", "inventory_id": "oxygen-B", "drawing_xy_angstrom": [3, 1]},
+    {"index": 7, "node_id": "oxygen-3", "inventory_id": "oxygen-B", "drawing_xy_angstrom": [5, 1]}
+  ],
+  "edges": [
+    ["acid-1", "oxygen-1"], ["acid-2", "oxygen-1"], ["acid-2", "oxygen-2"],
+    ["acid-3", "oxygen-2"], ["acid-3", "oxygen-3"], ["acid-4", "oxygen-3"]
+  ],
+  "initial_bridges": [
+    {"entity_id": "bridge-1", "leg_nodes": ["acid-1", "oxygen-1"]},
+    {"entity_id": "bridge-2", "leg_nodes": ["acid-2", "oxygen-2"]}
+  ]
+}

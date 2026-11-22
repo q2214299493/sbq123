@@ -1,0 +1,278 @@
+{
+  "classification": "synthetic_test_assumption",
+  "network_version": "a35beac998f393b7ad16e954e74f5982523436605fdcad54934de042ce8e9bfa",
+  "inventory_reference": "oxide-counting-cell",
+  "boundary": "finite_open",
+  "connected": true,
+  "matrix_node_order": [
+    "acid-1",
+    "acid-2",
+    "acid-3",
+    "acid-4",
+    "oxygen-1",
+    "oxygen-2",
+    "oxygen-3"
+  ],
+  "adjacency_matrix": [
+    [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
+    [
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0
+    ]
+  ],
+  "edges": [
+    {
+      "leg_nodes": [
+        1,
+        5
+      ],
+      "initial_entities": [
+        "bridge-1",
+        "bridge-1"
+      ],
+      "adsorption_match": false,
+      "desorption_match": true
+    },
+    {
+      "leg_nodes": [
+        2,
+        5
+      ],
+      "initial_entities": [
+        "bridge-2",
+        "bridge-1"
+      ],
+      "adsorption_match": false,
+      "desorption_match": false
+    },
+    {
+      "leg_nodes": [
+        2,
+        6
+      ],
+      "initial_entities": [
+        "bridge-2",
+        "bridge-2"
+      ],
+      "adsorption_match": false,
+      "desorption_match": true
+    },
+    {
+      "leg_nodes": [
+        3,
+        6
+      ],
+      "initial_entities": [
+        null,
+        "bridge-2"
+      ],
+      "adsorption_match": false,
+      "desorption_match": false
+    },
+    {
+      "leg_nodes": [
+        3,
+        7
+      ],
+      "initial_entities": [
+        null,
+        null
+      ],
+      "adsorption_match": true,
+      "desorption_match": false
+    },
+    {
+      "leg_nodes": [
+        4,
+        7
+      ],
+      "initial_entities": [
+        null,
+        null
+      ],
+      "adsorption_match": true,
+      "desorption_match": false
+    }
+  ],
+  "empty_lattice_matches": 6,
+  "available_adsorptions": 2,
+  "initial_bridges": {
+    "bridge-1": [
+      1,
+      5
+    ],
+    "bridge-2": [
+      2,
+      6
+    ]
+  },
+  "initial_desorption_patterns": 2,
+  "inventories": {
+    "acid-A": {
+      "capacity": 4,
+      "occupied": 2,
+      "vacant": 2
+    },
+    "oxygen-B": {
+      "capacity": 3,
+      "occupied": 2,
+      "vacant": 1
+    }
+  },
+  "maximum_simultaneous_bridges": 3,
+  "maximum_witness": [
+    [
+      1,
+      5
+    ],
+    [
+      2,
+      6
+    ],
+    [
+      3,
+      7
+    ]
+  ],
+  "additional_matching_with_seeds_fixed": [
+    [
+      3,
+      7
+    ]
+  ],
+  "zacros_candidate": {
+    "lattice_input_lines": [
+      "lattice explicit",
+      "n_sites 7",
+      "max_coord 2",
+      "n_site_types 2",
+      "site_type_names acidA oxygenB",
+      "lattice_structure",
+      "1 0.0 0.0 acidA 1 5",
+      "2 2.0 0.0 acidA 2 5 6",
+      "3 4.0 0.0 acidA 2 6 7",
+      "4 6.0 0.0 acidA 1 7",
+      "5 1.0 1.0 oxygenB 2 1 2",
+      "6 3.0 1.0 oxygenB 2 2 3",
+      "7 5.0 1.0 oxygenB 2 3 4",
+      "end_lattice_structure",
+      "end_lattice"
+    ],
+    "surface_species": {
+      "surf_specs_names": "CO2bridge*",
+      "surf_specs_dent": 2
+    },
+    "gas_species": "CO2",
+    "event_header": [
+      "sites 2",
+      "site_types acidA oxygenB",
+      "neighboring 1-2"
+    ],
+    "adsorption": {
+      "gas_reacs_prods": [
+        "CO2",
+        -1
+      ],
+      "initial": [
+        "1 * 1",
+        "2 * 1"
+      ],
+      "final": [
+        "1 CO2bridge* 1",
+        "1 CO2bridge* 2"
+      ]
+    },
+    "desorption_pattern": {
+      "gas_reacs_prods": [
+        "CO2",
+        1
+      ],
+      "initial": [
+        "1 CO2bridge* 1",
+        "1 CO2bridge* 2"
+      ],
+      "final": [
+        "1 * 1",
+        "2 * 1"
+      ]
+    },
+    "state_input_lines": [
+      "initial_state",
+      "seed_on_sites CO2bridge* 1 5",
+      "seed_on_sites CO2bridge* 2 6",
+      "end_initial_state"
+    ],
+    "source_reversible": null,
+    "execution_plan": null,
+    "native_acceptance": "unverified"
+  },
+  "graph_sha256": "77d0f2fe9ab30743eec527bf412c4f35ed0097dc66fb9514ae0bb541673d0fea",
+  "sources": {
+    "definition": {
+      "path": "tests/fixtures/multiphase/synthetic_oxide_site_network.json",
+      "sha256": "24d5c34d33ec332a131e5f957dcb83ff4816e29c5d4c6ba05c47c854d87c6aa2"
+    },
+    "observation": {
+      "path": "reports/multiphase/stage_b2_1/oxide_observations.json",
+      "sha256": "49d84e1cddf511eeb232002dcb87833c312826a8165d02abf644469b47289d0b"
+    }
+  }
+}

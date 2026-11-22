@@ -55,3 +55,5 @@ Phase 2.5.1 validated seeded mono- and bidentate lattices, pair interaction ener
 The lattice/event model is traceable, detailed balance is checked, and the KMC outputs are reproducible. A KMC-only study can meet these criteria independently. When the objective includes comparison with MKM, establish comparability for each observable before interpreting differences. [Engine selection and cross-validation](../../docs/decisions/adaptive_mkm_kmc_optional_reactor.md)
 
 For a generic network, consult the [Zacros 4.0 mapping audit](../../reports/multiphase/stage_b2_3_2_1/capabilities.md) and [oxide lattice requirements](../../reports/multiphase/stage_b2_3_2_1/oxide.md) before assigning typed edges, event multiplicity or per-inventory coverage.
+
+The [seven-node oxide example](../../reports/multiphase/stage_b2_3_2_2/completion.md) exercises finite, open graph matching with two ordered molecular seeds. Its offline entry point returns a candidate lattice and event fragments, with separate counts for initial matches and maximum simultaneous occupancy.
