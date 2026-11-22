@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "event_id": "history-stage-r2-1-network-rate-binding-20261122",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-stage-r2-1-network-rate-binding-20261122",
+    "module": "kinetic_data"
+  },
+  "occurred_at": "2026-11-22T09:22:09.860830+00:00",
+  "recorded_at": "2026-11-22T09:22:09.860830+00:00",
+  "summary": "Record Stage R.2.1 repair of V2.1 network-qualified rate validation.",
+  "payload": {
+    "markdown": "- Stage R.2.1 repaired R1-001. Qualified V2.1 validation binds each selected row to the exact network file, signed reaction definition and directional parameter membership. Shape-only and catalog-only readers remain compatible. The focused Windows run passed 509 tests and all ten archived CATKINAS/Zacros outputs replayed byte-for-byte. See reports/architecture_repair/stage_r2_1/completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "reports/architecture_repair/stage_r2_1/completion.md",
+      "sha256": "613983c0a77031468673cac0b3f3eaa952c3db504008a38714557d45bbc37ca7",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T09:22:09.860830+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}
