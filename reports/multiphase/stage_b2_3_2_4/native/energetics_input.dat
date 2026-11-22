@@ -1,0 +1,28 @@
+energetics
+cluster acid_vacancy
+sites 1
+site_types acidA
+lattice_state
+1 * 1
+graph_multiplicity 1
+cluster_eng 0
+end_cluster
+cluster oxygen_vacancy
+sites 1
+site_types oxygenB
+lattice_state
+1 * 1
+graph_multiplicity 1
+cluster_eng 0
+end_cluster
+cluster ordered_bridge
+sites 2
+site_types acidA oxygenB
+neighboring 1-2
+lattice_state
+1 CO2bridge* 1
+1 CO2bridge* 2
+graph_multiplicity 1
+cluster_eng -0.4
+end_cluster
+end_energetics

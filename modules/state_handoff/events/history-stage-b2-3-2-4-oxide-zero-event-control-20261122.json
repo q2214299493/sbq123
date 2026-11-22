@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "event_id": "history-stage-b2-3-2-4-oxide-zero-event-control-20261122",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-stage-b2-3-2-4-oxide-zero-event-control-20261122",
+    "module": "surface_kmc"
+  },
+  "occurred_at": "2026-11-22T08:35:56.762192+00:00",
+  "recorded_at": "2026-11-22T08:35:56.762192+00:00",
+  "summary": "Record the five synthetic oxide control inputs and pending zero-event execution request.",
+  "payload": {
+    "markdown": "- Stage B.2.3.2.4 prepared synthetic_oxide_zacros_control_v1 at 400 K, 1 bar CO2. Five exact inputs preserve the seven-node graph and ordered seeds. The 4.0 rate-law and independent initial propensities were checked. The zero-event execution request is pending and separate from State Handoff. No native run or physical qualification. Both trees passed 697 focused offline tests; eight native replays were deselected. See reports/multiphase/stage_b2_3_2_4/completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "reports/multiphase/stage_b2_3_2_4/control.json",
+      "sha256": "33276fd1f0ca9bc0edd908896572f612bb3e14c7dd2a1603aee0e99f96869e1e",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T08:35:56.762192+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b2_3_2_4/rate_law.md",
+      "sha256": "3a09a0abe6d6dfbd2fe5cb5263dd8261047f8c64596ea43ad241ad4e4eeed107",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T08:35:56.762192+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b2_3_2_4/native/input_manifest.json",
+      "sha256": "023b40ad208b77a8028d9e03e2131fdc53bd34c2f88f09cdcf2fe19c39f0c285",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T08:35:56.762192+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b2_3_2_4/numerical_reference.json",
+      "sha256": "1c71f343bfcfdfdc9efe1887beff2ea3387413ae30cd611daf813fe4c687695c",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T08:35:56.762192+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b2_3_2_4/execution_plan.json",
+      "sha256": "2c0a012270fec9a6a11e52411c9993742fe6ffc3017db333857fbc4c2dd1b7d8",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T08:35:56.762192+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b2_3_2_4/approval_request.json",
+      "sha256": "44b9608c577f70f16a15bba7ff43ee47b050ee6b7a8d87d0afdc662a18dacecc",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T08:35:56.762192+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b2_3_2_4/regression.md",
+      "sha256": "ac4f4c9e75c647e1df890b6190927210faed76c86fde00945fd052d1265d98b0",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T08:35:56.762192+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b2_3_2_4/completion.md",
+      "sha256": "4020bda107bb62189faec4b77ad406aa21fd33a20dd136b03e0357f198e6a2be",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T08:35:56.762192+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

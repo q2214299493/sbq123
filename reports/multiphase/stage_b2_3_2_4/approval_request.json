@@ -1,0 +1,38 @@
+{
+  "format": "zacros-zero-event-approval-request/1",
+  "question_id": "zacros-4.0-oxide-control-v1-zero-event",
+  "dataset_id": "synthetic_oxide_zacros_control_v1",
+  "requested_action": "allow_zacros_zero_event_initialization",
+  "question": "Approve one serial native initialization of this exact synthetic dataset at zero executed events?",
+  "choices": [
+    "approve",
+    "reject"
+  ],
+  "DECISION": "pending",
+  "ALLOWED_ACTIONS": [],
+  "state_sha256": "2c0a012270fec9a6a11e52411c9993742fe6ffc3017db333857fbc4c2dd1b7d8",
+  "digest_basis": "exact execution_plan.json bytes",
+  "engine": {
+    "name": "Zacros",
+    "version": "4.0",
+    "executable": "D:/Zacros4.0/bin/Zacros.exe",
+    "sha256": "84a8f88d6df633eeea9eeac8aa9227237cdf2564a4dc72e0cab8a18c4ce119d2"
+  },
+  "input_manifest_sha256": "023b40ad208b77a8028d9e03e2131fdc53bd34c2f88f09cdcf2fe19c39f0c285",
+  "input_files_sha256": {
+    "energetics_input.dat": "5134423fd6b95f5df5abf69def11d00377299ed37ab2acfbcf8cc94b8cc16f53",
+    "lattice_input.dat": "cf3180a01f35ad18e0040b0923c49f4cd255e347b9251cca63809abb2354a734",
+    "mechanism_input.dat": "e28bef2b2005696572baab1f76c474a5b2d0005e57688364be735df4667a1bb6",
+    "simulation_input.dat": "4e2936fe930c1ed30b0b4301e515f5e5ee4155184776a649a28a03b48f447b27",
+    "state_input.dat": "b31141eaf314f5f9a6f64cf6d17d1f0ba426c2888b20ca45b05d53144fff7ff0"
+  },
+  "limits": {
+    "max_steps": 0,
+    "native_wall_seconds": 15,
+    "external_timeout_seconds": 30,
+    "maximum_processes": 1,
+    "maximum_threads": 1,
+    "retries": 0
+  },
+  "approval_scope": "Native software test only. State Handoff review has separate authority."
+}

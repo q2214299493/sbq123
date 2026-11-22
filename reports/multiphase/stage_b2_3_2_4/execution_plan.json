@@ -1,0 +1,65 @@
+{
+  "format": "zacros-zero-event-execution-plan/1",
+  "dataset_id": "synthetic_oxide_zacros_control_v1",
+  "stage": "B.2.3.2.4",
+  "question_id": "zacros-4.0-oxide-control-v1-zero-event",
+  "action": "allow_zacros_zero_event_initialization",
+  "scope": "one synthetic native initialization",
+  "engine": {
+    "name": "Zacros",
+    "version": "4.0",
+    "executable": "D:/Zacros4.0/bin/Zacros.exe",
+    "sha256": "84a8f88d6df633eeea9eeac8aa9227237cdf2564a4dc72e0cab8a18c4ce119d2"
+  },
+  "input_files_sha256": {
+    "energetics_input.dat": "5134423fd6b95f5df5abf69def11d00377299ed37ab2acfbcf8cc94b8cc16f53",
+    "lattice_input.dat": "cf3180a01f35ad18e0040b0923c49f4cd255e347b9251cca63809abb2354a734",
+    "mechanism_input.dat": "e28bef2b2005696572baab1f76c474a5b2d0005e57688364be735df4667a1bb6",
+    "simulation_input.dat": "4e2936fe930c1ed30b0b4301e515f5e5ee4155184776a649a28a03b48f447b27",
+    "state_input.dat": "b31141eaf314f5f9a6f64cf6d17d1f0ba426c2888b20ca45b05d53144fff7ff0"
+  },
+  "bound_artifacts_sha256": {
+    "control.json": "33276fd1f0ca9bc0edd908896572f612bb3e14c7dd2a1603aee0e99f96869e1e",
+    "native/input_manifest.json": "023b40ad208b77a8028d9e03e2131fdc53bd34c2f88f09cdcf2fe19c39f0c285",
+    "numerical_reference.json": "1c71f343bfcfdfdc9efe1887beff2ea3387413ae30cd611daf813fe4c687695c"
+  },
+  "structural_manifest_sha256": "01f93bb5ed6d6b1dc9e422a9ef90e554558e57862a1713b53469eae94ed3cdae",
+  "arguments": [
+    "--max_steps=0",
+    "--wall_time=15"
+  ],
+  "environment": {
+    "OMP_NUM_THREADS": "1"
+  },
+  "limits": {
+    "max_steps": 0,
+    "native_wall_seconds": 15,
+    "external_timeout_seconds": 30,
+    "maximum_processes": 1,
+    "maximum_threads": 1,
+    "retries": 0
+  },
+  "isolation": "One fresh empty local directory per approval. Stage just the five listed .dat inputs; rehash staged bytes and executable. No pre-existing restart or output; serial foreground process. Never launch from a source or archive directory.",
+  "failure_policy": "Enforce the external deadline over startup and all I/O. Stop the launched process on timeout; retain original inputs, review, stdout, stderr, partial outputs, hashes, timestamps, runtime and exit code. Any failed check withholds acceptance. No retry or dynamic continuation.",
+  "expected_outputs": [
+    "general_output.txt",
+    "lattice_output.txt",
+    "process_debug.txt",
+    "restart.inf",
+    "captured stdout/stderr and execution receipt"
+  ],
+  "acceptance": {
+    "manifest_identity": "Exact input and executable byte hashes before execution; version 4.0 banner. Exit 0, normal termination and zero executed events. Review all warnings; 4008 is expected for two directed probes.",
+    "parser": "All five Finished reading markers for simulation, lattice, energetics, mechanism and initial state.",
+    "lattice_and_seeds": "Exactly 7 sites, 4 acid, 3 oxygen, six typed undirected edges and two explicit seeds executed. Read the seven per-site rows and entity-to-site table in restart.inf. Require acid leg 1 / oxygen leg 2, vacancy species 0, two distinct bridge IDs, the same ID on both legs. Cross-check by physical positions, not internal ID ordering.",
+    "catalogue": "Use only initialization entries in process_debug.txt. Match the multiset of (step name, ordered nodes) one-to-one against numerical_reference.json; each of the four expected entries occurs once. Reject missing, duplicate, extra or reversed matches. Cumulative event counts cannot establish this.",
+    "energy_and_rates": "Check initial energy and per-placement propensity against the numerical reference. Rate comparison uses values printed by process_debug; validate each direction separately before summing.",
+    "absolute_count_tolerance": 0,
+    "energy_abs_tolerance_eV": 0.000001,
+    "propensity_relative_tolerance": 0.00001,
+    "propensity_absolute_tolerance_s_inv": 1e-8
+  },
+  "dynamic_execution": false,
+  "production_eligible": false,
+  "human_approval_required": true
+}

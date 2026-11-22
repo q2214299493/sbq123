@@ -1,0 +1,92 @@
+{
+  "dataset_id": "synthetic_oxide_zacros_control_v1",
+  "scope": "independent_analytical_reference_not_native_output",
+  "gas_partial_pressure_bar": 1,
+  "temperature_K": 400,
+  "kB_release_eV_per_K": 0.00008617342430749591,
+  "initial": {
+    "ordered_seeds": [
+      [
+        1,
+        5
+      ],
+      [
+        2,
+        6
+      ]
+    ],
+    "capacity": {
+      "acidA": 4,
+      "oxygenB": 3
+    },
+    "occupied": {
+      "acidA": 2,
+      "oxygenB": 2
+    },
+    "vacancies": {
+      "acidA": 2,
+      "oxygenB": 1
+    },
+    "occupied_fractions": {
+      "acidA": "2/4",
+      "oxygenB": "2/3"
+    },
+    "vacancy_fractions": {
+      "acidA": "2/4",
+      "oxygenB": "1/3"
+    },
+    "molecules": 2,
+    "lattice_energy_eV": -0.8
+  },
+  "directions": {
+    "adsorption": {
+      "formula": "A_ads * (P_bar * x_CO2) * exp(-Ea_ads/(kB*T)) per ordered vacant pair",
+      "ordered_pairs": [
+        [
+          3,
+          7
+        ],
+        [
+          4,
+          7
+        ]
+      ],
+      "propensity_per_match_s_inv": 5496.127439421695,
+      "summed_propensity_s_inv": 10992.25487884339,
+      "gas_exchange_per_event": -1,
+      "after_one_event": {
+        "molecules": 3,
+        "vacant_acid": 1,
+        "vacant_oxygen": 0,
+        "lattice_energy_eV": -1.2
+      }
+    },
+    "desorption": {
+      "formula": "A_des * exp(-Ea_des/(kB*T)) per complete ordered molecule",
+      "ordered_pairs": [
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          6
+        ]
+      ],
+      "propensity_per_match_s_inv": 5015150.50841929,
+      "summed_propensity_s_inv": 10030301.01683858,
+      "gas_exchange_per_event": 1,
+      "after_one_event": {
+        "molecules": 1,
+        "vacant_acid": 3,
+        "vacant_oxygen": 2,
+        "lattice_energy_eV": -0.4
+      }
+    }
+  },
+  "combined_initial_propensity_s_inv": 10041293.271717424,
+  "maximum_simultaneous_bridges": 3,
+  "physical_equilibrium_constant": null,
+  "detailed_balance": "not_assessed",
+  "basis": "Ea_ads - Ea_des = -0.40 eV agrees with the chosen per-bridge energy. No independent standard Gibbs energies, entropic or reservoir equilibrium reference. Barriers alone do not certify thermodynamic detailed balance. Post-event rows are counterfactual inventory updates."
+}
