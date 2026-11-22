@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "event_id": "history-stage-r2-4-engine-conservation-20261122",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-stage-r2-4-engine-conservation-20261122",
+    "module": "kinetic_data"
+  },
+  "occurred_at": "2026-11-22T09:56:30.605510+00:00",
+  "recorded_at": "2026-11-22T09:56:30.605510+00:00",
+  "summary": "Record the R.2.4 native adapter import and conserved-quantity arithmetic repairs.",
+  "payload": {
+    "markdown": "- R.2.4 repaired R1-004 and R1-005 on the R.2.3 baseline. Each native assembly now loads only its selected engine package. Three callers reuse weighted element, charge and occupied-plus-vacant site totals with their own review, missing-data and sign policies. Ten archived output payloads and two qualification records match byte-for-byte. Development and publication each passed 935 focused tests with one live test skipped. See reports/architecture_repair/stage_r2_4/completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "reports/architecture_repair/stage_r2_4/completion.md",
+      "sha256": "3e91fef6b2e3fb0568a47f4dcbd7b1b3089040f7f65b696c7402edbd19642f5a",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T09:56:30.605510+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}
