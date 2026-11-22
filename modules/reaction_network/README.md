@@ -100,3 +100,15 @@ For each molecule the forward event releases the source footprint and consumes t
 Use `operating_conditions_ref` for a profile with a path and SHA-256 and `provenance` for the evidence bindings. The reaction definition and those bindings enter the reviewed subject. The usual `reversible` field controls construction of the reverse direction. A partial definition can keep it null. Structural validation creates no kinetic parameters or engine approval.
 
 Run `python -m scripts.reaction_network tests/fixtures/multiphase/synthetic_interphase_transfer.json` to inspect the offline example. The accompanying synthetic counting cell and conditions are arithmetic test inputs. [Validation and qualification](../../reports/multiphase/stage_b2_2_2/completion.md)
+
+## Cross-phase elementary reactions
+
+Declare `reaction_type = cross_phase_elementary`, the participating `phase_ids`, their `surface_ids` and one `interface_id`. A two-phase contact and a single explicitly catalogued three-phase junction use the same fields. A collection of pairwise contacts does not establish a triple junction. A partial definition can set the interface to null when its participants have independent surface bindings. Interface-private species and inventories still require the matching explicit contact.
+
+Reactant and product maps bind phase-resolved species and positive molecular coefficients. Molecule counts on opposite sides may differ. Association can produce an interface-bound species or a product on a third phase. Use `interphase_transfer` for an explicitly identified transfer of the same resident molecule. Formula equality alone selects neither class.
+
+An optional `ts_species_id` binds a located transition complex to a catalog species. Its surface, contact, structure identity, total reacting composition, charge and transient site footprint must agree with the event. The TS contributes no stable population to either endpoint. TS acceptance requires the existing independent review.
+
+Inspect `site_balance_by_inventory` for occupied and vacant counts on each side. A null operand leaves its balance open. The partial network path can also retain unknown participant composition or charge. Missing chemistry blocks structural promotion while independently known inventory proofs remain inspectable. The complete V1 exchange schema continues to require known species chemistry. Absolute physical capacities use the B.2.1 counting contract with one ID per shared inventory.
+
+`cross_phase_qualification` reports the contact, endpoint stoichiometry, electronic evidence, Gibbs evidence, parameters, review and individual engine readiness. The value `supplied` describes data availability. MKM and KMC need their own native qualification and execution approval. [Scope, synthetic examples and qualification matrix](../../reports/multiphase/stage_b2_2_3/completion.md)

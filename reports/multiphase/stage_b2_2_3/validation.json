@@ -1,0 +1,361 @@
+{
+  "baseline": "2058f84e6c0d746f02f1d7c2ef32e73a95514a14",
+  "cases": {
+    "cross_phase_interface_product": {
+      "counting_source": {
+        "path": "tests/fixtures/multiphase/cross_phase_counting_cell.json",
+        "sha256": "5f9708c38f006f03041a3cdea03667448ecc164ab96bb8cf8d277b1c4d534924"
+      },
+      "direction": {
+        "forward": {
+          "products": {
+            "contact-product": 1
+          },
+          "reactants": {
+            "left-H": 2,
+            "right-O": 1
+          },
+          "sites_consumed": {
+            "B-pool": 1
+          },
+          "sites_released": {
+            "A-pool": 1
+          }
+        },
+        "reverse": {
+          "products": {
+            "left-H": 2,
+            "right-O": 1
+          },
+          "reactants": {
+            "contact-product": 1
+          },
+          "sites_consumed": {
+            "A-pool": 1
+          },
+          "sites_released": {
+            "B-pool": 1
+          }
+        },
+        "status": "reversible"
+      },
+      "execution_authorized": false,
+      "finite_population": {
+        "after": {
+          "A-pool": {
+            "capacity": 3,
+            "missing": [],
+            "occupied": 1.0,
+            "reference": "counting-cell",
+            "vacant": 2.0
+          },
+          "B-pool": {
+            "capacity": 4,
+            "missing": [],
+            "occupied": 2.0,
+            "reference": "counting-cell",
+            "vacant": 2.0
+          }
+        },
+        "before": {
+          "A-pool": {
+            "capacity": 3,
+            "missing": [],
+            "occupied": 2.0,
+            "reference": "counting-cell",
+            "vacant": 1.0
+          },
+          "B-pool": {
+            "capacity": 4,
+            "missing": [],
+            "occupied": 1.0,
+            "reference": "counting-cell",
+            "vacant": 3.0
+          }
+        }
+      },
+      "fixture": "tests/fixtures/multiphase/cross_phase_interface_product.json",
+      "fixture_sha256": "2b366b265ad0189a0366ac60a7a73124909fca0ce9dc8a6e350b275a9d4362ec",
+      "gaps": [
+        "Missing compatible free energies",
+        "Unresolved transition-state treatment",
+        "Missing kinetic parameters or rate law"
+      ],
+      "interface_id": "junction",
+      "level": "STRUCTURALLY_VALID",
+      "network_file_sha256": "05320b2cad4a40d6575d9cd21e00ad74e79337563ea4d6218a6b9c9c7571e7e3",
+      "network_version": "60a93f9891aaa89747b4f4ba71c36fd67173f82c382ed2d025507feee229c9b6",
+      "per_inventory": {
+        "A-pool": {
+          "balanced": true,
+          "products": {
+            "occupied": {
+              "A-pool": 1
+            },
+            "total": {
+              "A-pool": 2
+            },
+            "vacant": {
+              "A-pool": 1
+            }
+          },
+          "reactants": {
+            "occupied": {
+              "A-pool": 2
+            },
+            "total": {
+              "A-pool": 2
+            },
+            "vacant": {}
+          }
+        },
+        "B-pool": {
+          "balanced": true,
+          "products": {
+            "occupied": {
+              "B-pool": 2
+            },
+            "total": {
+              "B-pool": 2
+            },
+            "vacant": {}
+          },
+          "reactants": {
+            "occupied": {
+              "B-pool": 1
+            },
+            "total": {
+              "B-pool": 2
+            },
+            "vacant": {
+              "B-pool": 1
+            }
+          }
+        }
+      },
+      "phases": [
+        "phase-A",
+        "phase-B"
+      ],
+      "qualification": {
+        "electronic_evidence": "missing",
+        "interface_scope_verified": true,
+        "kinetic_parameterization": "missing",
+        "kmc_eligibility": "blocked",
+        "mkm_eligibility": "blocked",
+        "scientific_review": "unaccepted",
+        "stoichiometrically_valid": true,
+        "structurally_represented": true,
+        "thermal_evidence": "missing"
+      },
+      "residuals": {
+        "charge": 0,
+        "elements": {
+          "H": 0,
+          "O": 0
+        },
+        "inventories": {
+          "A-pool": 0,
+          "B-pool": 0
+        }
+      },
+      "source_column": {
+        "species": {
+          "contact-product": 1.0,
+          "left-H": -2.0,
+          "right-O": -1.0
+        },
+        "vacancies": {
+          "A-pool": 1.0,
+          "B-pool": -1.0
+        }
+      },
+      "surfaces": [
+        "face-A",
+        "face-B"
+      ]
+    },
+    "cross_phase_three_phase": {
+      "direction": {
+        "forward": {
+          "products": {
+            "on-third": 1
+          },
+          "reactants": {
+            "left-He": 1,
+            "right-Ne": 1
+          },
+          "sites_consumed": {
+            "C-pool": 2
+          },
+          "sites_released": {
+            "A-pool": 1,
+            "B-pool": 1
+          }
+        },
+        "reverse": null,
+        "status": "unknown"
+      },
+      "execution_authorized": false,
+      "fixture": "tests/fixtures/multiphase/cross_phase_three_phase.json",
+      "fixture_sha256": "097eca7edaffba8f570b418b11fbe935248c9c5f1a863b4d03ccde14260e4e74",
+      "gaps": [
+        "Missing compatible free energies",
+        "Unresolved transition-state treatment",
+        "Missing kinetic parameters or rate law",
+        "Reversibility unconfirmed"
+      ],
+      "interface_id": "triple-junction",
+      "level": "STRUCTURALLY_VALID",
+      "network_file_sha256": "02502b860a2bcf33300c806735ad323d210f8c001312d11f872e64b6375277d2",
+      "network_version": "21d5b64c1bbb49f88fad2da47c4d25f90ab9d4dc4d87a0367662858abd54b210",
+      "per_inventory": {
+        "A-pool": {
+          "balanced": true,
+          "products": {
+            "occupied": {},
+            "total": {
+              "A-pool": 1
+            },
+            "vacant": {
+              "A-pool": 1
+            }
+          },
+          "reactants": {
+            "occupied": {
+              "A-pool": 1
+            },
+            "total": {
+              "A-pool": 1
+            },
+            "vacant": {}
+          }
+        },
+        "B-pool": {
+          "balanced": true,
+          "products": {
+            "occupied": {},
+            "total": {
+              "B-pool": 1
+            },
+            "vacant": {
+              "B-pool": 1
+            }
+          },
+          "reactants": {
+            "occupied": {
+              "B-pool": 1
+            },
+            "total": {
+              "B-pool": 1
+            },
+            "vacant": {}
+          }
+        },
+        "C-pool": {
+          "balanced": true,
+          "products": {
+            "occupied": {
+              "C-pool": 2
+            },
+            "total": {
+              "C-pool": 2
+            },
+            "vacant": {}
+          },
+          "reactants": {
+            "occupied": {},
+            "total": {
+              "C-pool": 2
+            },
+            "vacant": {
+              "C-pool": 2
+            }
+          }
+        }
+      },
+      "phases": [
+        "phase-A",
+        "phase-B",
+        "phase-C"
+      ],
+      "qualification": {
+        "electronic_evidence": "missing",
+        "interface_scope_verified": true,
+        "kinetic_parameterization": "missing",
+        "kmc_eligibility": "blocked",
+        "mkm_eligibility": "blocked",
+        "scientific_review": "unaccepted",
+        "stoichiometrically_valid": true,
+        "structurally_represented": true,
+        "thermal_evidence": "missing"
+      },
+      "residuals": {
+        "charge": 0,
+        "elements": {
+          "He": 0,
+          "Ne": 0
+        },
+        "inventories": {
+          "A-pool": 0,
+          "B-pool": 0,
+          "C-pool": 0
+        }
+      },
+      "source_column": {
+        "species": {
+          "left-He": -1.0,
+          "on-third": 1.0,
+          "right-Ne": -1.0
+        },
+        "vacancies": {
+          "A-pool": 1.0,
+          "B-pool": 1.0,
+          "C-pool": -2.0
+        }
+      },
+      "surfaces": [
+        "face-A",
+        "face-B",
+        "face-C"
+      ]
+    }
+  },
+  "fe110": {
+    "mkm_status": "blocked",
+    "version": "2a80b67c31201600a1858780bbe6c176b03f489fe24383441fca4f195b395483"
+  },
+  "legacy_transfer_file_sha256": "ae00afb986f289731019e5e871feed81a1536640acd57594d74b8b6e693e9865",
+  "legacy_transfer_version": "e50f1520e3d792d106ad98d232d141e6466ce1c754dbd59cea35a8290a69394c",
+  "scope": "Offline synthetic contract and archived structural replay only",
+  "unchanged_baseline_files": {
+    "configs/kinetics/bundle.schema.json": "20868b50f4297e8b9b3143508720e04407a04f1701a44227ffbadc9a1e57ef24",
+    "configs/kinetics/kinetic_parameter.schema.json": "78947f386875dc127165efaec35e8208be638b512f50e960553a54b7aec0f496",
+    "configs/kinetics/rate_output_v2.schema.json": "01b60a189d232a8b5b1a9161c56b63f14afc4de32f1d76699c5cf5f2e3f24df0",
+    "configs/kinetics/rate_output_v2_1.schema.json": "f4887fb08782912a0fe122d970d730fd6f0276be57d79345a56cea3f9f1fc150",
+    "configs/kinetics/rate_source_terms_v2.schema.json": "529480523fae932b313faf8887c3a6550d348bbbc1caff19e7b1db03e088a85e",
+    "reports/multiphase/networks/network-2a80b67c31201600a1858780bbe6c176b03f489fe24383441fca4f195b395483.json": "56e42d4147637acae090911a82715a10d9883fefa03e7e6dc19fcc0c0f3b25ca",
+    "reports/multiphase/phase3_1_1/network.json": "e59b9bec86ab0d31a2e50d68df3a134d77004e466880c2a6797110842ee3b785",
+    "reports/multiphase/stage_b1_4/replay/catkinas-phase2_5_2.json": "e1a71272fc19b0f8756e4fcb64ad7ef2e3b83eac9572290b27cef1005bc17e77",
+    "reports/multiphase/stage_b1_4/replay/catkinas-phase3_0.json": "eb73c3b756ad88316b792df4919c0e08cbe9e0967bcd4d6e2277a5eefcac2ec6",
+    "reports/multiphase/stage_b1_4/replay/zacros-attractive.json": "5e3d6a6708edb73208fe59cc3797b1d4bfbae6a044bbc8b4ae3ba0b0a9d08d44",
+    "reports/multiphase/stage_b1_4/replay/zacros-continuous.json": "f24c5f8b7def7aa89a95ccd0efd36f312084b1da09c5060d94e35df31aeaf330",
+    "reports/multiphase/stage_b1_4/replay/zacros-dent.json": "4fbd954adbfe88a1d65a8d40719ab56aca19db088029089b21f96e2720e1ecbf",
+    "reports/multiphase/stage_b1_4/replay/zacros-full.json": "dafa3b41d823c144b30be119690be1f1df50b9518958f5686e0f45c774ece404",
+    "reports/multiphase/stage_b1_4/replay/zacros-interacting.json": "73e1524fa096e0ffc6cef24c3e2638bdc497a195975e2b8dff67453be1fe075b",
+    "reports/multiphase/stage_b1_4/replay/zacros-mono.json": "5d96357c05c3f5782f23818f0071330dd199b09e82e79b82f5d05eedf7d99367",
+    "reports/multiphase/stage_b1_4/replay/zacros-resume.json": "c210a6448ae8fac95aa29d00717e2f40824e76daf539ed12f378fd4331cd6981",
+    "reports/multiphase/stage_b1_4/replay/zacros-split.json": "f0c85072c95cc5c6a6de46fbe93411001fc271b30bd6c89b91193e7785e68f82",
+    "reports/multiphase/stage_b1_5/independent_replay.json": "5eeb6ddcdcfdc7c0f87ff22c66916728122ad4427b0774c04be640d04ca4d5bb",
+    "reports/multiphase/stage_b2_1/interface_observations.json": "a12f440a1b331f11e3a9398750d0f26d17bba8d14d1132e2e073a5d4b2d9ec6f",
+    "reports/multiphase/stage_b2_1/interface_validation.json": "d50ff225f6f9c52361fca13920137720e4e5569bece453d7cd26fd6f4e8cbfe1",
+    "reports/multiphase/stage_b2_1/oxide_observations.json": "49d84e1cddf511eeb232002dcb87833c312826a8165d02abf644469b47289d0b",
+    "reports/multiphase/stage_b2_1/oxide_validation.json": "ab1c981802a6e01423c69656b1e6e2fef8e97b3bcb6d4ac3e673fe5181ed80ce",
+    "reports/multiphase/stage_b2_2_1/identity_validation.json": "b70350daaedea66a67b2b96cf4535f86aef6cea1ae3199e7cc8eebe215477f1e",
+    "reports/multiphase/stage_b2_2_2/transfer_validation.json": "dd80d789e0a679d3cf386f02550f76501658ef1510287cf0aff20ae05068dfbb",
+    "tests/fixtures/multiphase/synthetic_identity_domains.json": "e2b23b33f92d67f51588e7d5b32aaeeb31a514c4ec2296545a38ca83be171ed9",
+    "tests/fixtures/multiphase/synthetic_interphase_transfer.json": "d8d58db34a53476d51cfbb5ca1cb97374587dd2373b47d85d2fdc29e0f732042",
+    "tests/fixtures/multiphase/synthetic_oxide_site_network.json": "24d5c34d33ec332a131e5f957dcb83ff4816e29c5d4c6ba05c47c854d87c6aa2",
+    "tests/fixtures/multiphase/synthetic_transfer_context.json": "bd5787f87d8f2f8dfe216abc4314be4d24906758546e0852514d51b6f50b8d60"
+  }
+}

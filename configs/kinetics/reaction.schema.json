@@ -42,11 +42,16 @@
         "dissociation",
         "interfacial",
         "interphase_transfer",
+        "cross_phase_elementary",
         "other"
       ]
     },
+    "ts_species_id": {
+      "description": "Optional phase-resolved catalog species for the whole located transition complex.",
+      "$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"
+    },
     "operating_conditions_ref": {
-      "description": "Hash-bound operating condition profile for a declared transfer. Null means unknown.",
+      "description": "Hash-bound operating condition profile for a declared cross-phase event. Null means unknown.",
       "anyOf": [
         {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"},
         {"type": "null"}
@@ -149,7 +154,12 @@
         "phase_ids": {"minItems": 2}, "surface_ids": {"minItems": 2}
       }}
     },
-    {"if": {"required": ["operating_conditions_ref"]}, "then": {"properties": {"reaction_type": {"const": "interphase_transfer"}}}},
+    {"if": {"required": ["operating_conditions_ref"]}, "then": {"properties": {"reaction_type": {"enum": ["interphase_transfer", "cross_phase_elementary"]}}}},
+    {"if": {"required": ["ts_species_id"]}, "then": {"properties": {"reaction_type": {"const": "cross_phase_elementary"}, "ts_treatment": {"const": "located"}}}},
+    {
+      "if": {"properties": {"reaction_type": {"const": "cross_phase_elementary"}}},
+      "then": {"properties": {"phase_ids": {"minItems": 2}, "surface_ids": {"minItems": 2}}}
+    },
     {
       "if": {
         "properties": {"ts_treatment": {"const": "located"}}

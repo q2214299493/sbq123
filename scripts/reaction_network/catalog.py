@@ -197,8 +197,8 @@ def check_context(row, index):
     if surfaces - index["surfaces"].keys() or len(surfaces) != len(row["surface_ids"]):
         raise ValueError("Unknown or repeated surface")
     interface = row.get("interface_id")
-    partial_transfer = "reaction_id" in row and row.get("reaction_type") == "interphase_transfer"
-    if interface is not None or (len(surfaces) > 1 and not partial_transfer):
+    partial_scope = "reaction_id" in row and row.get("reaction_type") in ("interphase_transfer", "cross_phase_elementary")
+    if interface is not None or (len(surfaces) > 1 and not partial_scope):
         if interface not in index["interfaces"] or not matches_interface_surfaces(row, index["interfaces"][interface], index):
             raise ValueError("Interface and surface domains disagree")
     return {index["surfaces"][sid].get("phase_id") for sid in surfaces}
@@ -227,7 +227,12 @@ def register_species(index, confirmed_zero=()):
         if (materials - index["materials"].keys() or not known_materials <= materials
                 or (None not in phases and materials != known_materials)):
             raise ValueError(f"{key}: material/phase mismatch")
-        check_common(row["composition"], "composition")
+        if row.get("composition") is not None or not any(
+            r.get("reaction_type") == "cross_phase_elementary" and
+            (key in (r.get("reactants") or {}) or key in (r.get("products") or {}) or key == r.get("ts_species_id"))
+            for r in index["reactions"].values()
+        ):
+            check_common(row.get("composition"), "composition")
         if row.get("charge") is not None and type(row["charge"]) is not int:
             raise ValueError(f"{key}: invalid charge")
         occupied = row.get("site_occupancy")

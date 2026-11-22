@@ -112,10 +112,16 @@ def apply_review(index, proposal, decision, configuration=None):
     return record
 
 
-def domain_balance(reaction, index):
-    """Report both sides independently for each site inventory; preserve unknowns."""
+def domain_balance(reaction, index, *, by_inventory=False):
+    """Account for each side on a surface or an individual scoped inventory."""
     report = {}
-    for domain in reaction["surface_ids"]:
+    sites = index["sites"]
+    groups = {s: (s, None) for s in reaction["surface_ids"]}
+    if by_inventory:
+        groups = {s: (row["surface_id"], s) for s, row in sites.items()
+                  if row["surface_id"] in reaction["surface_ids"]
+                  and row.get("interface_id") in (None, reaction.get("interface_id"))}
+    for key, (domain, site) in groups.items():
         sides = []
         for participants, vacancies in (("reactants", "sites_consumed"), ("products", "sites_released")):
             occupied = Counter()
@@ -126,18 +132,23 @@ def domain_balance(reaction, index):
                     continue
                 footprint = species.get("site_occupancy")
                 if footprint is None:
-                    known = False
+                    if site is None or sites[site].get("interface_id") in (None, species.get("interface_id")):
+                        known = False
                 else:
                     occupied.update({s: coefficient * n for s, n in footprint.items()
-                                     if index["sites"][s]["surface_id"] == domain})
+                                     if sites[s]["surface_id"] == domain and (site is None or s == site)})
             vacant = reaction.get(vacancies)
             if vacant is not None:
-                vacant = {s: n for s, n in vacant.items() if index["sites"][s]["surface_id"] == domain}
+                vacant = {s: n for s, n in vacant.items()
+                          if sites[s]["surface_id"] == domain and (site is None or s == site)}
             total = dict(occupied + Counter(vacant)) if known and vacant is not None else None
             sides.append({"occupied": dict(occupied) if known else None, "vacant": vacant, "total": total})
+            if by_inventory and reaction.get("required_sites") is not None:
+                if occupied[site] + (vacant or {}).get(site, 0) > reaction["required_sites"].get(site, 0):
+                    raise ValueError(f"Insufficient required site footprint for inventory {site}")
         left, right = sides
         complete = left["total"] is not None and right["total"] is not None
         if complete and left["total"] != right["total"]:
-            raise ValueError(f"Site conservation failed in domain {domain}")
-        report[domain] = {"reactants": left, "products": right, "balanced": True if complete else None}
+            raise ValueError(f"Site conservation failed in domain {key}")
+        report[key] = {"reactants": left, "products": right, "balanced": True if complete else None}
     return report

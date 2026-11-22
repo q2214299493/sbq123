@@ -154,7 +154,7 @@ def _check_context(record, index):
                 or ("species_id" not in record and interface_phase_ids(interface, index) != located)):
             raise ValueError("interface and surface context disagree")
     elif len(surfaces) > 1 and not (
-        record.get("reaction_type") == "interphase_transfer" and record["eligibility"] in ("draft", "blocked")
+        record.get("reaction_type") in ("interphase_transfer", "cross_phase_elementary") and record["eligibility"] in ("draft", "blocked")
     ):
         raise ValueError("multi-surface context needs an interface")
     return {_get(index, "surfaces", key)["phase_id"] for key in surfaces}
@@ -209,12 +209,59 @@ def _side(stoichiometry, free_sites, reaction, index):
     return elements, charge, sites
 
 
+def check_cross_phase_scope(reaction, index, left, right):
+    """Check the declared contact against actual residents, required sites and optional located TS."""
+    surfaces = set(reaction["surface_ids"])
+    declared = set(reaction["phase_ids"])
+    owners = {_get(index, "surfaces", s).get("phase_id") for s in surfaces}
+    if len(declared) < 2 or len(surfaces) < 2 or (None not in owners and owners != declared):
+        raise ValueError("Cross-phase elementary reaction requires at least two participating phases and their surfaces")
+    contact_id = reaction["interface_id"]
+    if contact_id is not None:
+        contact = _get(index, "interfaces", contact_id)
+        if interface_phase_ids(contact, index) != declared:
+            raise ValueError("Declared phases differ from the participating interface")
+    residents = [_get(index, "species", sid) for sid in reaction["reactants"].keys() | reaction["products"].keys()]
+    gaps = []
+    if "ts_species_id" in reaction:
+        ts = _get(index, "species", reaction["ts_species_id"])
+        _check_species_context(ts, reaction)
+        identity = (reaction.get("state_identities") or {}).get("TS") or reaction.get("ts_id")
+        if (ts["phase"] != "surface" or reaction.get("ts_treatment") != "located" or not identity
+                or identity not in (ts.get("structure_id"), (ts.get("structural_provenance") or {}).get("sha256"))):
+            raise ValueError("TS species needs a matching located transition structure")
+        footprint = ts.get("site_occupancy")
+        if footprint is None:
+            gaps.append("Unknown TS site footprint")
+        elif reaction.get("required_sites") is not None and not Counter(footprint) <= Counter(reaction["required_sites"]):
+            raise ValueError("Required sites do not cover the TS species footprint")
+        if ts in residents:
+            raise ValueError("Transition complex must have its own species identity")
+        for field, lhs, rhs in zip(("composition", "charge"), left[:2], right[:2], strict=True):
+            known = [value for value in (lhs, rhs) if value is not None]
+            if ts.get(field) is None or not known:
+                gaps.append(f"Unknown TS {field} balance")
+            elif any(ts[field] != value for value in known):
+                raise ValueError(f"TS species {field} disagrees with reaction stoichiometry")
+        if reaction.get("eligibility") == "eligible" and (ts.get("validation") or {}).get("status") != "accepted":
+            raise ValueError("Eligible reaction requires a reviewed TS species")
+        residents.append(ts)
+    used = {s for row in residents for s in row["surface_ids"]}
+    for field in ("required_sites", "sites_consumed", "sites_released"):
+        used.update(_get(index, "sites", site)["surface_id"] for site in reaction.get(field) or {})
+    if surfaces != used:
+        raise ValueError("Cross-phase reaction has an unrelated or missing participating surface")
+    return gaps
+
+
 def _check_balance(reaction, index):
     left = _side(reaction["reactants"], reaction["sites_consumed"], reaction, index)
     right = _side(reaction["products"], reaction["sites_released"], reaction, index)
     for label, lhs, rhs in zip(("element", "charge", "site"), left, right, strict=True):
         if lhs != rhs:
             raise ValueError(f"{label} conservation failed: {lhs} != {rhs}")
+    if reaction["reaction_type"] == "cross_phase_elementary":
+        check_cross_phase_scope(reaction, index, left, right)
     for site in reaction["required_sites"].keys() | reaction["sites_consumed"].keys() | reaction["sites_released"].keys():
         row = _get(index, "sites", site)
         check_site_interface(row, reaction["interface_id"])

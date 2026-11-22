@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "event_id": "history-stage-b2-2-3-cross-phase-elementary-20261122",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-stage-b2-2-3-cross-phase-elementary-20261122",
+    "module": "reaction_network"
+  },
+  "occurred_at": "2026-11-22T05:35:05.831380+00:00",
+  "recorded_at": "2026-11-22T05:35:05.831380+00:00",
+  "summary": "Record Stage B.2.2.3 offline cross-phase elementary reaction contract validation.",
+  "payload": {
+    "markdown": "- Stage B.2.2.3 validated synthetic interface association and an explicitly declared three-phase reaction. Element, charge and per-inventory balances passed. Each Windows worktree passed 815 focused tests. Legacy interphase transfer replay matched the archived bytes. Fe(110) MKM remains blocked. See reports/multiphase/stage_b2_2_3/completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "reports/multiphase/stage_b2_2_3/completion.md",
+      "authority": "repository_document",
+      "sha256": "b85f0985caf09cfd121c3381c25b263f1240c8a351ec250236f0f219f607ca46",
+      "observed_at": "2026-11-22T05:35:05.831380+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b2_2_3/regression.md",
+      "authority": "repository_document",
+      "sha256": "e5e3ef8a0535af442683d587badd7db4530002e8d10120250b196d85ff08f681",
+      "observed_at": "2026-11-22T05:35:05.831380+00:00"
+    },
+    {
+      "locator": "reports/multiphase/stage_b2_2_3/validation.json",
+      "authority": "repository_document",
+      "sha256": "74ad49c72408f5a8113aab67f8076053c271e9330abf99eb8964675ea9e682c0",
+      "observed_at": "2026-11-22T05:35:05.831380+00:00"
+    },
+    {
+      "locator": "tests/fixtures/multiphase/cross_phase_interface_product.json",
+      "authority": "repository_document",
+      "sha256": "2b366b265ad0189a0366ac60a7a73124909fca0ce9dc8a6e350b275a9d4362ec",
+      "observed_at": "2026-11-22T05:35:05.831380+00:00"
+    },
+    {
+      "locator": "tests/fixtures/multiphase/cross_phase_three_phase.json",
+      "authority": "repository_document",
+      "sha256": "097eca7edaffba8f570b418b11fbe935248c9c5f1a863b4d03ccde14260e4e74",
+      "observed_at": "2026-11-22T05:35:05.831380+00:00"
+    },
+    {
+      "locator": "tests/fixtures/multiphase/cross_phase_counting_cell.json",
+      "authority": "repository_document",
+      "sha256": "5f9708c38f006f03041a3cdea03667448ecc164ab96bb8cf8d277b1c4d534924",
+      "observed_at": "2026-11-22T05:35:05.831380+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}

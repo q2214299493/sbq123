@@ -5,17 +5,18 @@ from datetime import datetime
 
 from scripts.artifact_io import sha256_json
 from scripts.kinetic_data.interphase_transfer import assess_transfer
-from scripts.multiphase_contracts import COLLECTIONS, ENERGY_ATOL_EV, _check_species_context, validate_bundle
+from scripts.multiphase_contracts import COLLECTIONS, ENERGY_ATOL_EV, _check_species_context, check_cross_phase_scope, validate_bundle
 from scripts.scientific_intake import report as intake_report
 from scripts.scientific_validation import finite_number, validate_finite_tree
 from scripts.thermochemistry.engine import ts_binding
 from scripts.reaction_network.catalog import catalog, check_context, check_record_field, register_species, site_counts, site_mapping
+from scripts.reaction_network.cross_phase import qualification, record_review_status, validate_scope_fields
 from scripts.reaction_network.thermodynamics import check_cycles, thermal_evidence
 from scripts.reaction_network.site_review import apply_review, domain_balance
 
 LEVELS = ("DRAFT", "STRUCTURALLY_VALID", "THERMODYNAMICALLY_VALID", "SCIENTIFICALLY_ACCEPTED", "KINETICALLY_ELIGIBLE")
 TYPES = {"adsorption", "desorption", "dissociation", "hydrogenation", "dehydrogenation", "c_c_coupling",
-         "c_o_cleavage", "diffusion", "association", "interfacial", "interphase_transfer", "surface_reaction", "multi_site", "other"}
+         "c_o_cleavage", "diffusion", "association", "interfacial", "interphase_transfer", "cross_phase_elementary", "surface_reaction", "multi_site", "other"}
 
 
 def from_registry_mapping(mapping, project_id):
@@ -58,18 +59,24 @@ def side(stoich, vacant, reaction, index):
     elements, occupied = Counter(), Counter(vacant)
     charge = 0
     missing_occupancy = vacant is None
+    missing_composition = False
     for key, number in stoich.items():
         if type(number) is not int or number <= 0 or key not in index["species"]:
             raise ValueError(f"Invalid stoichiometry or unknown species {key}")
         species = index["species"][key]
         _check_species_context(species, reaction)
-        elements.update({k: number * v for k, v in species["composition"].items()})
+        if species.get("composition") is None:
+            if reaction["reaction_type"] != "cross_phase_elementary":
+                raise ValueError(f"Missing species composition for {key}")
+            missing_composition = True
+        else:
+            elements.update({k: number * v for k, v in species["composition"].items()})
         q = species.get("charge")
         charge = None if q is None or charge is None else charge + number * q
         counts = species.get("site_occupancy")
         missing_occupancy |= counts is None
         occupied.update({k: number * v for k, v in (counts or {}).items()})
-    return elements, charge, None if missing_occupancy else occupied
+    return None if missing_composition else elements, charge, None if missing_occupancy else occupied
 
 
 def balance(reaction, index, gaps):
@@ -82,6 +89,8 @@ def balance(reaction, index, gaps):
             gaps.append(f"Unknown {label} balance")
         elif a != b:
             raise ValueError(f"{label} conservation failed for {reaction['reaction_id']}: {a} != {b}")
+    if reaction["reaction_type"] == "cross_phase_elementary":
+        gaps.extend(check_cross_phase_scope(reaction, index, left, right))
     footprint = reaction.get("required_sites")
     if footprint is not None and left[2] is not None and not left[2] <= Counter(footprint):
         raise ValueError("Insufficient required site footprint")
@@ -140,6 +149,8 @@ def reviewed(rows, verified):
 
 def scientific_level(reaction, index, verified, params, strict):
     species = [index["species"][s] for s in reaction["reactants"].keys() | reaction["products"].keys()]
+    if reaction.get("ts_species_id") is not None:
+        species.append(index["species"][reaction["ts_species_id"]])
     domains = [index["surfaces"][s] for s in reaction["surface_ids"]]
     phases = [index["phases"][s["phase_id"]] for s in domains]
     materials = [index["materials"][p["material_id"]] for p in phases]
@@ -172,14 +183,16 @@ def structural_gaps(r, index):
         raise ValueError("Reaction phases differ from surface domains")
     gaps = []
     if "operating_conditions_ref" in r:
-        if r["reaction_type"] != "interphase_transfer":
-            raise ValueError("operating_conditions_ref requires a declared interphase transfer")
+        if r["reaction_type"] not in ("interphase_transfer", "cross_phase_elementary"):
+            raise ValueError("operating_conditions_ref requires a declared cross-phase event")
         check_record_field("reaction", "operating_conditions_ref", r["operating_conditions_ref"])
-    if r["reaction_type"] == "interphase_transfer":
+    if r["reaction_type"] in ("interphase_transfer", "cross_phase_elementary"):
         if r.get("provenance") not in (None, []):
             check_record_field("reaction", "provenance", r["provenance"])
+        if r["reaction_type"] == "cross_phase_elementary" and r.get("required_sites") is None:
+            gaps.append("Required site footprint unconfirmed")
         if not r.get("interface_id"):
-            gaps.append("Transfer interface unconfirmed")
+            gaps.append("Transfer interface unconfirmed" if r["reaction_type"] == "interphase_transfer" else "Reaction interface unconfirmed")
     site_balance = balance(r, index, gaps)
     if None in phases:
         gaps.append("Catalyst phase unconfirmed")
@@ -241,14 +254,15 @@ def inspect_reaction(r, index, calc, mapping):
     missing_ts = r.get("ts_treatment") not in ("located", "barrierless")
     if any(free[k] is None for k in needed):
         gaps.append("Missing compatible free energies")
-        if missing_ts and r["reaction_type"] == "interphase_transfer":
+        if missing_ts and r["reaction_type"] in ("interphase_transfer", "cross_phase_elementary"):
             gaps.append("Unresolved transition-state treatment")
     elif missing_ts:
         gaps.append("Unresolved transition-state treatment")
     elif level == LEVELS[1] and (calc is None or calc["status"] == "complete"):
         level = LEVELS[2]
     params = [p for p in index["parameter_sets"].values() if p["reaction_id"] == r["reaction_id"]]
-    gaps.extend(rate_gaps(r, params, energies))
+    parameter_gaps = rate_gaps(r, params, energies)
+    gaps.extend(parameter_gaps)
     if r.get("reversible") is None:
         gaps.append("Reversibility unconfirmed")
     net = Counter({"species:" + k: n for k, n in r["products"].items()})
@@ -262,6 +276,13 @@ def inspect_reaction(r, index, calc, mapping):
         for endpoint in (transfer["source"], transfer["destination"]):
             for site, changes in endpoint["inventories"].items():
                 net["site:" + site] = changes["vacancy_change"]
+    if r["reaction_type"] == "cross_phase_elementary":
+        inventories = domain_balance(r, index, by_inventory=True)
+        if r.get("sites_released") is None or r.get("sites_consumed") is None:
+            for site in inventories:
+                net["site:" + site] = None
+        attributes["site_balance_by_inventory"] = inventories
+        attributes["cross_phase_qualification"] = qualification(r, index, site_balance, energies, needed, params, parameter_gaps)
     return {**attributes, "definition": r, "direction": direction, "net_stoichiometry": dict(sorted(net.items())),
             "site_balance": site_balance, "energies": energies, "thermochemistry": calc, "level": level,
             "origin": r.get("origin", "supplied_definition"), "site_mapping": mapping,
@@ -447,6 +468,7 @@ def _assemble_network(definition, site_proposal, site_confirmation, site_catalog
     validate_finite_tree(data)
     index = catalog(data)
     for record in index["reactions"].values():
+        validate_scope_fields(record)
         validate_confirmation(record)
     mappings = apply_intakes(intakes, index)
     review, zero_species = _review_sites(index, site_proposal, site_confirmation, site_catalog)
@@ -470,6 +492,7 @@ def _assemble_network(definition, site_proposal, site_confirmation, site_catalog
         if key in ts:
             bind_ts_review(result, ts[key])
         apply_decision(result, reviews.get(key), index, strict_unchanged, set(verified_hashes))
+        record_review_status(result, LEVELS[3:])
         results.append(result)
     for p in index["parameter_sets"].values():
         if p["reaction_id"] not in index["reactions"]:
