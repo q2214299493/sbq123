@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "event_id": "history-stage-r2-3-zacros-native-safety-20261122",
+  "event_type": "history_recorded",
+  "entity": {
+    "kind": "history",
+    "id": "history-stage-r2-3-zacros-native-safety-20261122",
+    "module": "surface_kmc"
+  },
+  "occurred_at": "2026-11-22T09:46:04.810767+00:00",
+  "recorded_at": "2026-11-22T09:46:04.810767+00:00",
+  "summary": "Record the offline R.2.3 Zacros serialization and native test authorization repair.",
+  "payload": {
+    "markdown": "- Stage R.2.3 corrected eight real-valued tokens in a separately hashed Zacros software control. Offline decimal and byte comparisons preserve its values and structure. Ni/Cu pytest replay reads archived evidence. The optional CATKINAS native test requires an explicit prepared run and external decision checked by the existing gate. The original failed receipt and consumed approval remain historical. Development and publication each passed 850 focused tests with one live test skipped. No engine execution or native acceptance of the revised inputs. See reports/architecture_repair/stage_r2_3/completion.md."
+  },
+  "evidence": [
+    {
+      "locator": "reports/architecture_repair/stage_r2_3/completion.md",
+      "sha256": "62fec5ce4737f80f28aa251f8731c038783e0ddbcd6771b7767291f7836743cd",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T09:46:04.810767+00:00"
+    },
+    {
+      "locator": "reports/architecture_repair/stage_r2_3/native/input_manifest.json",
+      "sha256": "f475a45a53d91ee3f6a9b5c2277ac0a364d8909381c53227e3ee8e04d721d3d6",
+      "authority": "repository_document",
+      "observed_at": "2026-11-22T09:46:04.810767+00:00"
+    }
+  ],
+  "supersedes": [],
+  "review": {
+    "required": true,
+    "status": "pending",
+    "reason_codes": [
+      "historical_result_record"
+    ]
+  }
+}
