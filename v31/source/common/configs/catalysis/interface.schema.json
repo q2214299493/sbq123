@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.sbq123.invalid/multiphase/1.0.0/interface.schema.json",
+  "title": "interface v1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "interface_id",
+    "structure_id",
+    "structural_provenance",
+    "geometry",
+    "validation"
+  ],
+  "anyOf": [
+    {"required": ["phase_ids"]},
+    {"required": ["surface_ids"], "properties": {"surface_ids": {"minItems": 2}}}
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "interface_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "phase_ids": {
+      "type": "array", "minItems": 2, "uniqueItems": true,
+      "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"}
+    },
+    "surface_ids": {
+      "type": "array",
+      "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+      "uniqueItems": true
+    },
+    "structure_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "structural_provenance": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"},
+    "geometry": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"},
+    "validation": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/validation"}
+  }
+}

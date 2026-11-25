@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.sbq123.invalid/multiphase/2.0.0/rate_output_v2.schema.json",
+  "title": "Kinetic rate output 2.0.0",
+  "$defs": {
+    "directional_flux": {
+      "description": "Native event flux. Null means unavailable. not_applicable denotes a direction excluded by the bound reaction model.",
+      "anyOf": [{"type": "number", "minimum": 0}, {"type": "null"}, {"const": "not_applicable"}]
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "schema_version",
+    "dataset_version",
+    "project_id",
+    "network_version",
+    "engine",
+    "conditions",
+    "native_normalization",
+    "reaction_rates",
+    "source_terms",
+    "validity_range",
+    "provenance",
+    "validation"
+  ],
+  "properties": {
+    "format": {"const": "kinetic-rate-output/2"},
+    "schema_version": {"const": "2.0.0"},
+    "dataset_version": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact/properties/sha256"},
+    "output_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dataset_id", "run_id", "native_inputs"],
+      "properties": {
+        "dataset_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+        "run_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+        "native_inputs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"}}
+      }
+    },
+    "project_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "network_version": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact/properties/sha256"},
+    "engine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "version"
+      ],
+      "properties": {
+        "name": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"},
+        "version": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/simulation_run.schema.json#/properties/engine_version"}
+      }
+    },
+    "conditions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "temperature_K",
+        "pressure_Pa",
+        "partial_pressures"
+      ],
+      "properties": {
+        "temperature_K": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "pressure_Pa": {
+          "type": "number",
+          "minimum": 0
+        },
+        "partial_pressures": {
+          "anyOf": [
+            {
+              "type": "array",
+              "minItems": 0,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "species_id",
+                  "pressure_Pa"
+                ],
+                "properties": {
+                  "species_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+                  "pressure_Pa": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                }
+              }
+            },
+            {"type": "null"}
+          ]
+        }
+      }
+    },
+    "native_normalization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "extent_unit",
+        "time_unit",
+        "denominator_value",
+        "denominator_unit",
+        "reference_id",
+        "definition"
+      ],
+      "properties": {
+        "basis_kind": {
+          "enum": ["reference_site", "reference_site_pair", "lattice_site", "simulation_cell",
+                   "surface_area", "catalyst_mass", "reactor_volume", "other", "unresolved"]
+        },
+        "inventory_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"}},
+        "extent_unit": {
+          "enum": [
+            "event",
+            "mol"
+          ]
+        },
+        "time_unit": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"},
+        "denominator_value": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "denominator_unit": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"},
+        "reference_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+        "definition": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"}
+      },
+      "dependentRequired": {"inventory_ids": ["basis_kind"]},
+      "allOf": [
+        {
+          "if": {"required": ["basis_kind"], "properties": {"basis_kind": {"enum": ["reference_site", "reference_site_pair", "lattice_site"]}}},
+          "then": {"required": ["inventory_ids"]}
+        },
+        {
+          "if": {"required": ["basis_kind"], "properties": {"basis_kind": {"const": "reference_site_pair"}}},
+          "then": {"properties": {"inventory_ids": {"maxItems": 2}}}
+        }
+      ]
+    },
+    "reaction_rates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "reaction_id",
+          "parameter_set_id",
+          "reactants",
+          "products",
+          "sites_consumed",
+          "sites_released",
+          "forward",
+          "reverse",
+          "net"
+        ],
+        "properties": {
+          "reaction_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+          "parameter_set_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+          "reactants": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/reaction.schema.json#/properties/reactants"},
+          "products": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/reaction.schema.json#/properties/products"},
+          "sites_consumed": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/sites"},
+          "sites_released": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/sites"},
+          "forward": {"$ref": "#/$defs/directional_flux"},
+          "reverse": {"$ref": "#/$defs/directional_flux"},
+          "net": {"type": ["number", "null"]},
+          "net_evidence": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"}
+        }
+      }
+    },
+    "source_terms": {"$ref": "https://schemas.sbq123.invalid/multiphase/2.0.0/rate_source_terms_v2.schema.json"},
+    "validity_range": {
+      "anyOf": [
+        {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/kinetic_parameter.schema.json#/properties/validity_range"},
+        {"type": "null"}
+      ]
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dataset",
+        "network",
+        "native_output"
+      ],
+      "properties": {
+        "dataset": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"},
+        "network": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"},
+        "native_output": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"}
+      }
+    },
+    "validation": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/validation"}
+  }
+}

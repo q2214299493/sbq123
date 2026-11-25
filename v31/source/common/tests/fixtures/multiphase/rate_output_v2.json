@@ -1,0 +1,117 @@
+{
+  "format": "kinetic-rate-output/2",
+  "schema_version": "2.0.0",
+  "project_id": "synthetic-interface",
+  "dataset_version": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "network_version": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "engine": {
+    "name": "synthetic",
+    "version": "1.0"
+  },
+  "conditions": {
+    "temperature_K": 400,
+    "pressure_Pa": 100000,
+    "partial_pressures": [
+      {
+        "species_id": "H2-g",
+        "pressure_Pa": 100000
+      }
+    ]
+  },
+  "native_normalization": {
+    "extent_unit": "event",
+    "time_unit": "s",
+    "denominator_value": 1,
+    "denominator_unit": "reference site pair",
+    "reference_id": "alpha-beta-pair",
+    "definition": "One declared reference pair of alpha and beta inventories."
+  },
+  "reaction_rates": [
+    {
+      "reaction_id": "dissociate",
+      "parameter_set_id": "p-dissociate",
+      "reactants": {
+        "H2-g": 1
+      },
+      "products": {
+        "H-alpha": 2
+      },
+      "sites_consumed": {
+        "alpha": 2
+      },
+      "sites_released": {},
+      "forward": 3,
+      "reverse": 1,
+      "net": 2
+    },
+    {
+      "reaction_id": "transfer",
+      "parameter_set_id": "p-transfer",
+      "reactants": {
+        "H-alpha": 1
+      },
+      "products": {
+        "H-beta": 1
+      },
+      "sites_consumed": {
+        "beta": 1
+      },
+      "sites_released": {
+        "alpha": 1
+      },
+      "forward": 1,
+      "reverse": 2,
+      "net": -1
+    }
+  ],
+  "source_terms": {
+    "species": [
+      {
+        "species_id": "H2-g",
+        "net_production_rate": -2
+      },
+      {
+        "species_id": "H-alpha",
+        "net_production_rate": 5
+      },
+      {
+        "species_id": "H-beta",
+        "net_production_rate": -1
+      }
+    ],
+    "site_inventories": [
+      {
+        "site_id": "alpha",
+        "net_vacancy_rate": -5
+      },
+      {
+        "site_id": "beta",
+        "net_vacancy_rate": 1
+      }
+    ]
+  },
+  "validity_range": {
+    "min_temperature_K": 400,
+    "max_temperature_K": 400,
+    "min_pressure_Pa": 100000,
+    "max_pressure_Pa": 100000
+  },
+  "provenance": {
+    "dataset": {
+      "path": "synthetic/parameters.json",
+      "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    "network": {
+      "path": "synthetic/network.json",
+      "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    },
+    "native_output": {
+      "path": "synthetic/output.json",
+      "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+    }
+  },
+  "validation": {
+    "status": "unreviewed",
+    "review": null
+  }
+}

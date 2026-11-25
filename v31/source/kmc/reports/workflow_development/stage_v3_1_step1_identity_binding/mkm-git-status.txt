@@ -1,0 +1,643 @@
+## codex/mkm-v244
+ M .gitattributes
+ M AGENTS.md
+ M MANIFEST.in
+ M configs/aqcat25_ts_active_learning.schema.json
+ M configs/execution_backends.yaml
+ M configs/kinetics/kinetic_parameter.schema.json
+ M configs/release_resources.json
+ M configs/skill_routing.yaml
+ M configs/state_handoff.yaml
+ M docs/01_METHOD_PROTOCOL.md
+ M docs/09_USER_PREFERENCES.md
+ M modules/README.md
+ M modules/adsmind_lite/README.md
+ M modules/adsorption_workflow/README.md
+ M modules/baseline_mkm/README.md
+ M modules/calculation_registry/README.md
+ M modules/catalysis_data_retrieval/README.md
+ M modules/coverage_mkm/README.md
+ M modules/state_handoff/README.md
+ M modules/transition_state_search/LEARNING.md
+ M modules/transition_state_search/README.md
+ M modules/ts_vibrational_validation/README.md
+ M scripts/adsmind_lite/candidate_generation.py
+ M scripts/adsmind_lite/generate_adsorption_candidates.py
+ M scripts/adsmind_lite/generation_validation.py
+ M scripts/adsorption/build_fe110_care_batch.py
+ M scripts/adsorption/build_fe110_care_isomers.py
+ M scripts/adsorption/preflight_fe110_adsorption.py
+ M scripts/baseline_mkm/analysis.py
+ M scripts/baseline_mkm/analysis_report.py
+ M scripts/baseline_mkm/drc_batch_report.py
+ M scripts/baseline_mkm/drc_pair.py
+ M scripts/baseline_mkm/drc_pair_records.py
+ M scripts/baseline_mkm/drc_report.py
+ M scripts/baseline_mkm/kinetic_analysis.py
+ M scripts/baseline_mkm/mapping_scope.py
+ M scripts/baseline_mkm/native.py
+ M scripts/baseline_mkm/network_mapping.py
+ M scripts/baseline_mkm/rate_adapter.py
+ M scripts/baseline_mkm/registration.py
+ M scripts/baseline_mkm/results.py
+ M scripts/baseline_mkm/sensitivity_inputs.py
+ M scripts/baseline_mkm/sensitivity_report.py
+ M scripts/baseline_mkm/single_point.py
+ M scripts/baseline_mkm/single_point_result.py
+ M scripts/execution_backends.py
+ M scripts/kinetic_data/native_rate_output.py
+ M scripts/kinetic_data/project_inspection.py
+ M scripts/kinetic_parameters/engine.py
+ M scripts/kinetic_parameters/export.py
+ M scripts/kinetic_parameters/laws.py
+ M scripts/mlip_same_structure_benchmark.py
+ M scripts/native_model.py
+ M scripts/native_validation.py
+ M scripts/neb_agent/submission.py
+ M scripts/registry_acceptance.py
+ M scripts/registry_excel_promotion.py
+ M scripts/registry_excel_writer.mjs
+ M scripts/registry_write.py
+ M scripts/state_manager/cli.py
+ M scripts/state_manager/models.py
+ M scripts/state_manager/projections.py
+ M scripts/state_manager/store.py
+ M scripts/ts_strategy_engine/contract.py
+ M scripts/ts_strategy_engine/execution_gate.py
+ M scripts/ts_strategy_engine/execution_submission_rules.py
+ M scripts/ts_strategy_engine/learning_cli.py
+ M scripts/ts_strategy_engine/learning_evidence.py
+ M scripts/ts_strategy_engine/scientific_claims.py
+ M scripts/vasp_inputs.py
+ M skills/README.md
+ M skills/catalysis-data-retrieval/SKILL.md
+ M skills/context_safe_shell.md
+ D skills/fe110-adsorbate-pilot-builder/SKILL.md
+ D skills/fe110-adsorbate-pilot-builder/agents/openai.yaml
+ D skills/fe110-adsorbate-pilot-builder/references/iron-fts-prescreen.md
+ M skills/surface-adsorption-builder/SKILL.md
+ M tests/test_adsmind_framework_regressions.py
+ M tests/test_catkinas_closed_cycle.py
+ M tests/test_execution_backends.py
+ M tests/test_fe110_adsorption_preflight.py
+ M tests/test_mkm_analysis.py
+ M tests/test_mkm_drc.py
+ M tests/test_mkm_single_point.py
+ M tests/test_multidentate_coverage.py
+ M tests/test_neb_submission.py
+ M tests/test_repository_contracts.py
+ M tests/test_state_manager.py
+ M tests/test_state_sync_repository_items.py
+ M tests/test_state_sync_safe_only.py
+ M tests/test_state_sync_task_ownership.py
+?? .mkm-v244-scratch/
+?? .mkm-v244-test-01/
+?? .mkm-v244-test-02/
+?? .mkm-v244-test-03/
+?? .mkm-v244-test-04/
+?? .mkm-v244-test-06/
+?? .mkm-v244-test-07/
+?? .mkm-v244-test-08/
+?? .mkm-v244-test-09/
+?? .mkm-v244-test-10/
+?? .mkm-v244-test-11/
+?? .mkm-v244-test-12/
+?? .mkm-v244-test-13/
+?? .mkm-v244-test-14/
+?? .mkm-v244-test-15/
+?? RSI_INTEGRATION_PLAN.md
+?? calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/h_migration_int06_to_mid_gpu_20260910/
+?? configs/adsmind_lite/fe110_c2_06_10_exploratory_20261012.json
+?? configs/adsmind_lite/fe110_c2_11_15_exploratory_20261020.json
+?? configs/adsmind_lite/fe110_c2_11_15_geometry_review_20261020.json
+?? configs/codex_compute_pool_instructions.md
+?? configs/fe110_reico_pilot/
+?? configs/kinetics/catkinas_condition_grid.schema.json
+?? configs/kinetics/catkinas_condition_result.schema.json
+?? configs/kinetics/mkm_energy_prediction.schema.json
+?? configs/kinetics/mkm_energy_prediction_result.schema.json
+?? configs/kinetics/mkm_steady_state_assessment.schema.json
+?? configs/mace_fe110_pilot.yaml
+?? docs/COMPUTE_POOL.md
+?? docs/SHARED_DEVELOPMENT_BASELINE.md
+?? docs/kinetics_test_artifacts.md
+?? docs/reviews/c1_c2_barrier_preparation_20261118.md
+?? docs/reviews/c1_c2_barrier_registration_20261118.md
+?? docs/reviews/c1_c2_mkm_gap_review_20261117.md
+?? docs/reviews/chco_dimer_submission_20261112.md
+?? docs/reviews/chco_formal_ts_acceptance_20261116.md
+?? docs/reviews/chco_local_triad_review_20261112.md
+?? docs/reviews/chco_mode12_review_20261115.md
+?? docs/reviews/chco_vfa_submission_20261115.md
+?? docs/reviews/ci_neb_acceptance_policy_20260926.md
+?? docs/reviews/fe110_06_S2_stop_authorization_20261107.md
+?? docs/reviews/fe110_06_S2_stopped_20261107.md
+?? docs/reviews/fe110_06abc_coads_registry_20261021.md
+?? docs/reviews/fe110_06c_boundary_force_comparison_20261019.md
+?? docs/reviews/fe110_06c_failure_boundary_labels_20261018.md
+?? docs/reviews/fe110_06c_static_submission_20261018.md
+?? docs/reviews/fe110_06c_submission_auth_failure_20261018.md
+?? docs/reviews/fe110_10b_lowforce_20261023/
+?? docs/reviews/fe110_adsorption_acceleration_adjustment_20261010.md
+?? docs/reviews/fe110_adsorption_calibration_20261018.md
+?? docs/reviews/fe110_adsorption_candidate_selection_20261020.md
+?? docs/reviews/fe110_adsorption_control_geometry3_20261020.md
+?? docs/reviews/fe110_adsorption_control_heldout46_20261020.md
+?? docs/reviews/fe110_adsorption_control_paired_vasp3_20261020.md
+?? docs/reviews/fe110_adsorption_control_paired_vasp3_submission_20261020.md
+?? docs/reviews/fe110_adsorption_direct_training_20261020.md
+?? docs/reviews/fe110_adsorption_finetune_package_20261010.md
+?? docs/reviews/fe110_adsorption_force24_2185_20261018.md
+?? docs/reviews/fe110_adsorption_pool_rebuild_20261019.md
+?? docs/reviews/fe110_adsorption_role_runtime_tests_20261019.md
+?? docs/reviews/fe110_adsorption_table_format_20261030.md
+?? docs/reviews/fe110_adsorption_table_sync_20261022.md
+?? docs/reviews/fe110_adsorption_training_comparison_20261019.md
+?? docs/reviews/fe110_adsorption_training_execution_precheck_20261019.md
+?? docs/reviews/fe110_adsorption_training_retry_20261020.md
+?? docs/reviews/fe110_adsorption_validation_2185_20261018.md
+?? docs/reviews/fe110_c2_01_05_completion_20261012.md
+?? docs/reviews/fe110_c2_06_10_dedup_20261021.md
+?? docs/reviews/fe110_c2_06_10_literature_20261012.md
+?? docs/reviews/fe110_c2_06_10_table_sync_20261022.md
+?? docs/reviews/fe110_c2_06_10_vasp_submission_20261013.md
+?? docs/reviews/fe110_c2_11_15_final_review_20261101.md
+?? docs/reviews/fe110_c2_11_15_ft512_20261029/
+?? docs/reviews/fe110_c2_11_15_geometry_review_20261020.md
+?? docs/reviews/fe110_c2_11_15_preparation_20261020.md
+?? docs/reviews/fe110_c2_16_19_preparation_20261101.md
+?? docs/reviews/fe110_c2_16_19_submission_20261102/
+?? docs/reviews/fe110_c2_c3_label_preflight_20261118/
+?? docs/reviews/fe110_c2_c3_lsf_bounds_20261118/
+?? docs/reviews/fe110_c2_c4_gap_inventory_20261114/
+?? docs/reviews/fe110_c2_c4_joint_candidates_20261114/
+?? docs/reviews/fe110_c2_c6_reaction_scope_20261114/
+?? docs/reviews/fe110_c2_chco_matris_comparison_20261010.md
+?? docs/reviews/fe110_c2_closeout_chco_submission_20261110.md
+?? docs/reviews/fe110_c2_completion_20261110_user_authorization.md
+?? docs/reviews/fe110_c2_cuda_completion_20261013.md
+?? docs/reviews/fe110_c2_cuda_restart_20261013.md
+?? docs/reviews/fe110_c2_direct_gpu_attempt_20261013.md
+?? docs/reviews/fe110_c2_dual_gpu_20261106.md
+?? docs/reviews/fe110_c2_final_acceptance_table_20261030.md
+?? docs/reviews/fe110_c2_gpu_device_repair_20261107.md
+?? docs/reviews/fe110_c2_path_reuse_20261118/
+?? docs/reviews/fe110_c2_prediction_reuse_20261118/
+?? docs/reviews/fe110_c2_registration_and_16_19_submission_20261102.md
+?? docs/reviews/fe110_c2_registration_gpu_20261013.md
+?? docs/reviews/fe110_c2_site_coverage_20261106.md
+?? docs/reviews/fe110_c2_site_supplement_20261106.md
+?? docs/reviews/fe110_c2_supplement_gpu_20261106.md
+?? docs/reviews/fe110_c2_supplement_vasp_20261107.md
+?? docs/reviews/fe110_c2_supplement_vasp_20261107_user_authorization.md
+?? docs/reviews/fe110_c2_three_arm_dft_20261028/
+?? docs/reviews/fe110_c2_three_arm_stop_20261029/
+?? docs/reviews/fe110_c2_three_arm_submission_20261028/
+?? docs/reviews/fe110_c2h2o_fsa_identity_site_review_20260925.md
+?? docs/reviews/fe110_c2h4o_candidates_20261029.md
+?? docs/reviews/fe110_c2h4o_literature_20261029.md
+?? docs/reviews/fe110_c3_continuation_20261027/
+?? docs/reviews/fe110_c3_independent_validation_proposal_20261113/
+?? docs/reviews/fe110_c3_lowforce_admission_20261109/
+?? docs/reviews/fe110_c3_lowforce_candidates_20261109/
+?? docs/reviews/fe110_c3_source_recovery_20261023/
+?? docs/reviews/fe110_c3_submission_20261027/
+?? docs/reviews/fe110_c3_targeted_relaxation_20261023/
+?? docs/reviews/fe110_ch_co_ts_path_preparation_20261109.md
+?? docs/reviews/fe110_combined_force_package_20261023/
+?? docs/reviews/fe110_completed_label_qc_20261024/
+?? docs/reviews/fe110_energy_reaction_sidecar_20261113/
+?? docs/reviews/fe110_final30_qc_20261025/
+?? docs/reviews/fe110_fixed53_comparison_20261027/
+?? docs/reviews/fe110_force536_545_execution_20261119/
+?? docs/reviews/fe110_force536_analysis_20261117/
+?? docs/reviews/fe110_force536_training_review_20261113/
+?? docs/reviews/fe110_force545_increment_20261119/
+?? docs/reviews/fe110_force545_package_20261119/
+?? docs/reviews/fe110_force_diagnosis536_20261114/
+?? docs/reviews/fe110_force_package_20261027/
+?? docs/reviews/fe110_force_package_20261113/
+?? docs/reviews/fe110_gpu2142_adsorption_review_20261007.md
+?? docs/reviews/fe110_grouped_inputs_20261025/
+?? docs/reviews/fe110_grouped_qc_20261026/
+?? docs/reviews/fe110_grouped_submission_20261025/
+?? docs/reviews/fe110_grouped_supplement_20261025/
+?? docs/reviews/fe110_independent_nearstable_20261113/
+?? docs/reviews/fe110_joint614_cpu_20261116/
+?? docs/reviews/fe110_joint_coverage_20261023/
+?? docs/reviews/fe110_joint_priority_20261117/
+?? docs/reviews/fe110_joint_update512_20261027/
+?? docs/reviews/fe110_joint_update_20261024/
+?? docs/reviews/fe110_joint_update_20261025/
+?? docs/reviews/fe110_mace_surface_pilot_20261120.md
+?? docs/reviews/fe110_matris_adsorption_trial_20261018.md
+?? docs/reviews/fe110_mkm_scope_intake_20260925.md
+?? docs/reviews/fe110_pair2_20261027/
+?? docs/reviews/fe110_pair2_cost_comparison_20261028/
+?? docs/reviews/fe110_pair2_submission_20261027/
+?? docs/reviews/fe110_reico_coverage_audit_20261023/
+?? docs/reviews/fe110_reico_followup_20261024/
+?? docs/reviews/fe110_reico_geometry_step1_20261022/
+?? docs/reviews/fe110_reico_label_qc_20261023/
+?? docs/reviews/fe110_reico_pilot300_20261021/
+?? docs/reviews/fe110_reico_probe6_20261022/
+?? docs/reviews/fe110_reico_remaining_20261024/
+?? docs/reviews/fe110_reico_sampling6_20261022/
+?? docs/reviews/fe110_reico_sampling93_20261022/
+?? docs/reviews/fe110_reico_stratified_audit_20261023/
+?? docs/reviews/fe110_scratch512_20261028/
+?? docs/reviews/fe110_scratch512_speed2_20261028/
+?? docs/reviews/fe110_targeted_shortlist_20261025/
+?? docs/reviews/fe110_train28_review_20261024/
+?? docs/reviews/fe110_train29_review_20261024/
+?? docs/reviews/fe110_train45_review_20261024/
+?? docs/reviews/fe110_training512_20261027/
+?? docs/reviews/fe110_training512_gpu0_20261027/
+?? docs/reviews/fe110_training512_submit_20261027/
+?? docs/reviews/fe110_training536_execution_20261114/
+?? docs/reviews/fe110_training536_smoke_20261113/
+?? docs/reviews/fe110_ts_handoff_20260910.md
+?? docs/reviews/gpu1517_direct_dimer9749920_20260910.md
+?? docs/reviews/h_migration1357_continue_20260909.md
+?? docs/reviews/int06_mid_all9790254_stopped_20260920.md
+?? docs/reviews/int06_mid_ci_grade_a_20260926.md
+?? docs/reviews/int06_mid_ci_neb_20260923.md
+?? docs/reviews/int06_mid_dimer9753172_normal_20260912.md
+?? docs/reviews/int06_mid_dimer9753172_stopped_20260912.md
+?? docs/reviews/int06_mid_dimer9795633_20260922.md
+?? docs/reviews/int06_mid_dimer9795943_lf_retry_20260923.md
+?? docs/reviews/int06_mid_dimer_gpu1635_20260916.md
+?? docs/reviews/int06_mid_direct_vasp9793467_20260921.md
+?? docs/reviews/int06_mid_fresh_gpu1635_20260916.md
+?? docs/reviews/int06_mid_fresh_seed_20260916.md
+?? docs/reviews/int06_mid_gpu1512_startup_failure_20260910.md
+?? docs/reviews/int06_mid_gpu1517_path_review_20260910.md
+?? docs/reviews/int06_mid_gpu1517_started_20260910.md
+?? docs/reviews/int06_mid_gpu1_attempts_20260910.md
+?? docs/reviews/int06_mid_gpu_prepared_20260910.md
+?? docs/reviews/int06_mid_path_prepared_20260910.md
+?? docs/reviews/int06_mid_scf9752745_20260912.md
+?? docs/reviews/int06_mid_scf9753658_save_state_20260912.md
+?? docs/reviews/int06_mid_scf9753825_dispatch_failure_20260913.md
+?? docs/reviews/int06_mid_scf9753825_no0440_20260913.md
+?? docs/reviews/int06_mid_scf9754110_mixing_control_20260913.md
+?? docs/reviews/int06_mid_scf_all9790254_submitted_20260919.md
+?? docs/reviews/int06_mid_scf_fast9791175_submitted_20260920.md
+?? docs/reviews/int06_mid_vasp_coarse_review_20260919.md
+?? docs/reviews/is_a_int06_gpu1793_bootstrap_failure_20260926.md
+?? docs/reviews/is_a_int06_gpu1802_retry1_submitted_20260926.md
+?? docs/reviews/is_a_int06_path_prepared_20260926.md
+?? docs/reviews/oh_ts_accepted_barrier_20260910.md
+?? docs/reviews/oh_ts_backfill_20260909.md
+?? docs/reviews/registry_v9_and_job9748648_20260909.md
+?? docs/reviews/rsi_blocked_resume_repair_20261117.md
+?? docs/reviews/rsi_stable_entry_repair_20261114.md
+?? docs/reviews/rsi_startup_path_repair_20261110.md
+?? docs/reviews/scf_chain_executor_20260915/
+?? docs/reviews/scf_chain_input_review_20260915/
+?? docs/reviews/scf_fixed_density_20260914/
+?? docs/reviews/scf_magnetic_recovery_20260913/
+?? docs/reviews/scf_mixing_control_20260913/
+?? docs/reviews/scf_near_linear_20260913/
+?? docs/reviews/valley9748648_accepted_20260910.md
+?? evidence/
+?? modules/state_handoff/events/.gitattributes
+?? modules/state_handoff/events/error-gpu1512-startup-memory-20260910.json
+?? modules/state_handoff/events/reconciled-task-updated-task-task-current-9fcd2113d1d1cd99bfd5.json
+?? modules/state_handoff/events/reconciled-task-updated-task-task-current-eeafbbeb5b875d05af4c.json
+?? modules/state_handoff/events/review-07fb02788bec696fe19f002b.json
+?? modules/state_handoff/events/review-08d1605f1edb902f82c3e322.json
+?? modules/state_handoff/events/review-0da66ca672427e51cc0f505a.json
+?? modules/state_handoff/events/review-1bc6b891b7379151655f5764.json
+?? modules/state_handoff/events/review-2477fe7e1d0df26080223521.json
+?? modules/state_handoff/events/review-28570e1f3946ce775c8dd298.json
+?? modules/state_handoff/events/review-33e6de6ea59fde942c6b3e12.json
+?? modules/state_handoff/events/review-390fae5cbd24607e25d416b5.json
+?? modules/state_handoff/events/review-3a20a9e08eedff4b2a37c4cf.json
+?? modules/state_handoff/events/review-48eb5209285f5a0fc70bbb2b.json
+?? modules/state_handoff/events/review-519fe7cdf635a113bedf78ff.json
+?? modules/state_handoff/events/review-53028a52fd626f15ffb02edd.json
+?? modules/state_handoff/events/review-5b39c7ce94edaec1d8f5cc15.json
+?? modules/state_handoff/events/review-66ba1489a335c78fee9b6969.json
+?? modules/state_handoff/events/review-6b4f774a342b3a331fa6fe79.json
+?? modules/state_handoff/events/review-6d2cee2183646a982bd28cee.json
+?? modules/state_handoff/events/review-71814940f0740bd288542f6b.json
+?? modules/state_handoff/events/review-a7b71b1149a50ebf0334ff96.json
+?? modules/state_handoff/events/review-d7b081ff445e2e0c839be2d2.json
+?? modules/state_handoff/events/state-dimer9749920-submitted-20260910.json
+?? modules/state_handoff/events/state-dimer9753172-stopped-20260912.json
+?? modules/state_handoff/events/state-dimer9753172-submitted-20260912.json
+?? modules/state_handoff/events/state-gpu1-startup-blocked-20260910.json
+?? modules/state_handoff/events/state-gpu1512-startup-failed-20260910.json
+?? modules/state_handoff/events/state-gpu1517-reviewed-20260910.json
+?? modules/state_handoff/events/state-gpu1517-running-20260910.json
+?? modules/state_handoff/events/state-int06-9748648-reviewed-20260910.json
+?? modules/state_handoff/events/state-int06-mid-gpu-prepared-20260910.json
+?? modules/state_handoff/events/state-int06-mid-inputs-prepared-20260910.json
+?? modules/state_handoff/events/state-scf9752745-submitted-20260912.json
+?? modules/state_handoff/events/state-scf9753658-submitted-20260912.json
+?? modules/state_handoff/events/state-scf9753825-dispatch-failure-20260913.json
+?? modules/state_handoff/events/state-scf9753825-submitted-20260913.json
+?? modules/state_handoff/events/task-dimer9749920-submitted-20260910.json
+?? modules/state_handoff/events/task-dimer9753172-stopped-20260912.json
+?? modules/state_handoff/events/task-dimer9753172-submitted-20260912.json
+?? modules/state_handoff/events/task-fe110-06c-boundary-force-compared-20261019.json
+?? modules/state_handoff/events/task-fe110-06c-boundary-labels-prepared-20261018.json
+?? modules/state_handoff/events/task-fe110-06c-static-submitted-20261018.json
+?? modules/state_handoff/events/task-fe110-06c-submission-auth-block-20261018.json
+?? modules/state_handoff/events/task-fe110-adsorption-2185-validated-mixed-20261018.json
+?? modules/state_handoff/events/task-fe110-adsorption-calibration-prepared-20261018.json
+?? modules/state_handoff/events/task-fe110-adsorption-calibration-ready-20261018.json
+?? modules/state_handoff/events/task-fe110-adsorption-control-candidate-review-20261020.json
+?? modules/state_handoff/events/task-fe110-adsorption-control-geometry3-reviewed-20261020.json
+?? modules/state_handoff/events/task-fe110-adsorption-control-heldout46-verified-20261020.json
+?? modules/state_handoff/events/task-fe110-adsorption-control-paired-vasp3-prepared-20261020.json
+?? modules/state_handoff/events/task-fe110-adsorption-control-paired-vasp3-submitted-20261020.json
+?? modules/state_handoff/events/task-fe110-adsorption-corrected-training-completed-20261020.json
+?? modules/state_handoff/events/task-fe110-adsorption-direct-training-ddp-failed-20261020.json
+?? modules/state_handoff/events/task-fe110-adsorption-force24-reviewed-20261018.json
+?? modules/state_handoff/events/task-fe110-adsorption-pool-prepared-20261019.json
+?? modules/state_handoff/events/task-fe110-adsorption-role-runtime-cpu-tested-20261019.json
+?? modules/state_handoff/events/task-fe110-adsorption-training-comparison-prepared-20261019.json
+?? modules/state_handoff/events/task-fe110-adsorption-training-live-precheck-blocked-20261019.json
+?? modules/state_handoff/events/task-fe110-c2-01-05-completion-review-20261012.json
+?? modules/state_handoff/events/task-fe110-c2-06-10-prepared-review-20261012.json
+?? modules/state_handoff/events/task-fe110-c2-0610-vasp-submitted-20261013.json
+?? modules/state_handoff/events/task-fe110-c2-11-15-prepared-20261020.json
+?? modules/state_handoff/events/task-fe110-c2-acceleration-adjustment-prepared-20261010.json
+?? modules/state_handoff/events/task-fe110-c2-adsorption-bootstrap-repaired-v4-20261010.json
+?? modules/state_handoff/events/task-fe110-c2-adsorption-finetune-review-ready-20261010.json
+?? modules/state_handoff/events/task-fe110-c2-adsorption-finetune2181-startup-failed-20261010.json
+?? modules/state_handoff/events/task-fe110-c2-adsorption-finetune2184-sampler-failed-20261010.json
+?? modules/state_handoff/events/task-fe110-c2-adsorption-finetune2185-running-20261010.json
+?? modules/state_handoff/events/task-fe110-c2-cuda-v3-return-review-20261013.json
+?? modules/state_handoff/events/task-fe110-c2-cuda-v3-running-20261013.json
+?? modules/state_handoff/events/task-fe110-c2-direct-cpu-binding-review-20261013.json
+?? modules/state_handoff/events/task-fe110-c2-force-gpu2177-assessed-20261008.json
+?? modules/state_handoff/events/task-fe110-c2-force-gpu2177-submitted-20261008.json
+?? modules/state_handoff/events/task-fe110-c2-matris2180-compared-20261010.json
+?? modules/state_handoff/events/task-fe110-c2-registration-gpu-blocked-20261013.json
+?? modules/state_handoff/events/task-fe110-c2ho-vfa9747902-submitted-20260909.json
+?? modules/state_handoff/events/task-fe110-chco-repair-vasp9842136-submitted-20261008.json
+?? modules/state_handoff/events/task-fe110-five-c2-adsorption-gpu2138-submitted-20261006.json
+?? modules/state_handoff/events/task-fe110-five-c2-adsorption-gpu2139-submitted-20261006.json
+?? modules/state_handoff/events/task-fe110-five-c2-adsorption-gpu2142-reviewed-repair-20261007.json
+?? modules/state_handoff/events/task-fe110-five-c2-adsorption-repair-gpu2176-submitted-20261008.json
+?? modules/state_handoff/events/task-fe110-five-c2-adsorption-review-20261006.json
+?? modules/state_handoff/events/task-fe110-five-c2-adsorption-supplement-gpu2142-submitted-20261006.json
+?? modules/state_handoff/events/task-fe110-five-c2-adsorption-supplement-reviewed-20261006.json
+?? modules/state_handoff/events/task-fe110-five-c2-adsorption-supplement-vasp9842105-20261008.json
+?? modules/state_handoff/events/task-fe110-five-c2-adsorption-vasp-submitted-20261006.json
+?? modules/state_handoff/events/task-fe110-matris-adsorption-trial-20261018.json
+?? modules/state_handoff/events/task-fixed-density9755394-submitted-20260914.json
+?? modules/state_handoff/events/task-gpu1-startup-blocked-20260910.json
+?? modules/state_handoff/events/task-gpu1512-startup-failed-20260910.json
+?? modules/state_handoff/events/task-gpu1517-reviewed-20260910.json
+?? modules/state_handoff/events/task-gpu1517-running-20260910.json
+?? modules/state_handoff/events/task-h-migration1357-open-20260909.json
+?? modules/state_handoff/events/task-int06-9748648-reviewed-20260910.json
+?? modules/state_handoff/events/task-int06-mid-all9790254-stopped-20260920.json
+?? modules/state_handoff/events/task-int06-mid-ci-grade-a-registered-20260926.json
+?? modules/state_handoff/events/task-int06-mid-ci-seeded-gpu1788-reviewed-20260926.json
+?? modules/state_handoff/events/task-int06-mid-ci9796856-submitted-20260923.json
+?? modules/state_handoff/events/task-int06-mid-dimer9781734-submitted-20260916.json
+?? modules/state_handoff/events/task-int06-mid-dimer9795633-submitted-20260922.json
+?? modules/state_handoff/events/task-int06-mid-dimer9795943-lf-retry-20260923.json
+?? modules/state_handoff/events/task-int06-mid-direct-vasp9793467-submitted-20260921.json
+?? modules/state_handoff/events/task-int06-mid-fresh-gpu1635-submitted-20260916.json
+?? modules/state_handoff/events/task-int06-mid-fresh-seed-20260916.json
+?? modules/state_handoff/events/task-int06-mid-gpu-prepared-20260910-v2.json
+?? modules/state_handoff/events/task-int06-mid-gpu-prepared-20260910.json
+?? modules/state_handoff/events/task-int06-mid-inputs-prepared-20260910.json
+?? modules/state_handoff/events/task-int06-mid-scf-all9790254-submitted-20260919.json
+?? modules/state_handoff/events/task-int06-mid-scf-fast9791175-submitted-20260920.json
+?? modules/state_handoff/events/task-int06-mid-vasp-coarse-review-prepared-20260919.json
+?? modules/state_handoff/events/task-int06-mid-vfa-diagnostic-gpu-screen-reviewed-20260926.json
+?? modules/state_handoff/events/task-int06-mid-vfa9798421-submitted-20260925.json
+?? modules/state_handoff/events/task-is-a-int06-ci9826728-20261002.json
+?? modules/state_handoff/events/task-is-a-int06-dimer9833429-20261004.json
+?? modules/state_handoff/events/task-is-a-int06-dimer9833429-recorded-pending-validation-20261006.json
+?? modules/state_handoff/events/task-is-a-int06-gpu1793-bootstrap-failed-20260926-v2.json
+?? modules/state_handoff/events/task-is-a-int06-gpu1802-retry1-submitted-20260926.json
+?? modules/state_handoff/events/task-is-a-int06-gpu1802-returned-20260926.json
+?? modules/state_handoff/events/task-is-a-int06-gpu1802-runtime-started-20260926.json
+?? modules/state_handoff/events/task-is-a-int06-gpu1802-vasp-prepared-ssh-blocked-20260926.json
+?? modules/state_handoff/events/task-is-a-int06-neb9802439-submission-checkpoint-20260928.json
+?? modules/state_handoff/events/task-is-a-int06-neb9806036-resource-reallocation-20260930.json
+?? modules/state_handoff/events/task-is-a-int06-neb9808511-sbq123-switch-20260930.json
+?? modules/state_handoff/events/task-is-a-int06-path-prepared-20260926.json
+?? modules/state_handoff/events/task-is-a-int06-temp-upload-blocked-20260927.json
+?? modules/state_handoff/events/task-is-a-int06-vasp-ssh-recheck-failed-20260926.json
+?? modules/state_handoff/events/task-migration9748648-open-20260909-v2.json
+?? modules/state_handoff/events/task-migration9748648-open-20260909.json
+?? modules/state_handoff/events/task-scf-chain-implementation-tested-20260915.json
+?? modules/state_handoff/events/task-scf-chain-inputs-prepared-20260915.json
+?? modules/state_handoff/events/task-scf-chain-submitted-20260915.json
+?? modules/state_handoff/events/task-scf9752745-submitted-20260912.json
+?? modules/state_handoff/events/task-scf9753658-submitted-20260912.json
+?? modules/state_handoff/events/task-scf9753825-dispatch-failure-20260913.json
+?? modules/state_handoff/events/task-scf9753825-submitted-20260913.json
+?? modules/state_handoff/events/task-scf9754110-mixing-control-submitted-20260913.json
+?? modules/state_handoff/events/task-scf9754301-near-linear-submitted-20260913.json
+?? modules/state_handoff/events/task-scf9754808-magnetic-seed-submitted-20260913.json
+?? "reports/Fe110_\346\226\260\346\250\241\345\236\213\350\256\255\347\273\203\344\270\216AQCat25\345\276\256\350\260\203\345\221\250\346\212\245_20261026-20261030.docx"
+?? "reports/Fe110_\346\250\241\345\236\213\350\256\255\347\273\203\345\221\250\346\212\245_20261019-20261023.docx"
+?? reports/agent_eval_phase2c/
+?? reports/workflow_development/stage_v2_2_1_normalization_followup/
+?? reports/workflow_development/stage_v2_2_1_remediation/
+?? reports/workflow_development/stage_v2_2_2/
+?? reports/workflow_development/stage_v2_3/
+?? reports/workflow_development/stage_v2_4_0_a/
+?? reports/workflow_development/stage_v2_4_0_a2/
+?? reports/workflow_development/stage_v2_4_0_a4/
+?? reports/workflow_development/stage_v2_4_1_step1/
+?? reports/workflow_development/stage_v2_4_1_step2/
+?? reports/workflow_development/stage_v2_4_1_step3/
+?? reports/workflow_development/stage_v2_4_1_step4/
+?? reports/workflow_development/stage_v2_4_2_step1/
+?? reports/workflow_development/stage_v2_4_2_step2/
+?? reports/workflow_development/stage_v2_4_2_step3/
+?? reports/workflow_development/stage_v2_4_2_step4/
+?? reports/workflow_development/stage_v2_4_3_step1/
+?? reports/workflow_development/stage_v2_4_3_step2/
+?? reports/workflow_development/stage_v2_4_4_bidentate_preparation/
+?? reports/workflow_development/stage_v2_4_4_final_regression_closure/
+?? reports/workflow_development/stage_v2_4_4_root_layout_final_review/
+?? reports/workflow_development/stage_v2_4_4_step2/
+?? reports/workflow_development/stage_v2_4_4_step2_corrective/
+?? reports/workflow_development/stage_v2_4_4_step2_final_review/
+?? reports/workflow_development/stage_v2_4_4_step2_independent_audit/
+?? reports/workflow_development/stage_v2_4_4_step3/
+?? reports/workflow_development/stage_v2_4_4_step3_topology_audit/
+?? "reports/\345\255\231\346\237\217\346\235\203 \345\221\250\346\212\245.docx"
+?? "reports/\345\255\231\346\237\217\346\235\203\345\221\250\346\212\245.docx"
+?? scripts/adsorption/acceleration_benchmark.py
+?? scripts/adsorption/adsorption_finetune_job.sh
+?? scripts/adsorption/collect_completed_batch.py
+?? scripts/adsorption/direct_force_training.py
+?? scripts/adsorption/direct_gpu_batch.py
+?? scripts/adsorption/direct_training_arm.py
+?? scripts/adsorption/fixed_force_comparison.py
+?? scripts/adsorption/force_finetune.py
+?? scripts/adsorption/force_role_data.py
+?? scripts/adsorption/force_role_runtime.py
+?? scripts/adsorption/force_training_preflight.py
+?? scripts/adsorption/matris_adsorption_gpu_job.sh
+?? scripts/adsorption/matris_adsorption_relax.py
+?? scripts/adsorption/nequip_force_data.py
+?? scripts/adsorption/nequip_force_job.py
+?? scripts/adsorption/nequip_force_runtime.py
+?? scripts/adsorption/prepare_completion_registration.py
+?? scripts/adsorption/reico_anchor_coverage.py
+?? scripts/adsorption/reico_chemical_environments.py
+?? scripts/adsorption/reico_dataset_audit.py
+?? scripts/adsorption/reico_environment_audit.py
+?? scripts/adsorption/reico_force_coverage.py
+?? scripts/adsorption/reico_joint_coverage.py
+?? scripts/adsorption/reico_probe_batch.py
+?? scripts/adsorption/reico_probe_review.py
+?? scripts/adsorption/reico_random_geometry.py
+?? scripts/adsorption/reico_sampling.py
+?? scripts/adsorption/reico_selection.py
+?? scripts/adsorption/reico_stratified_audit.py
+?? scripts/adsorption/role_force_trainer.py
+?? scripts/adsorption/role_training_job.sh
+?? scripts/baseline_mkm/bidentate_diagnostic.py
+?? scripts/baseline_mkm/condition_scan.py
+?? scripts/baseline_mkm/coverage_energy.py
+?? scripts/baseline_mkm/coverage_feedback.py
+?? scripts/baseline_mkm/coverage_study.py
+?? scripts/baseline_mkm/coverage_ts.py
+?? scripts/baseline_mkm/normalization.py
+?? scripts/baseline_mkm/result_binding.py
+?? scripts/baseline_mkm/steady_states.py
+?? scripts/fe110_mlip_selection.py
+?? scripts/gpu_resources.py
+?? scripts/kinetic_data/scientific_identity.py
+?? scripts/kinetic_parameters/prediction.py
+?? scripts/kinetic_parameters/training.py
+?? scripts/kinetics_test_artifacts.py
+?? scripts/mace_surface_pilot.py
+?? scripts/neb_agent/scf_chain_bundle.py
+?? scripts/neb_agent/scf_chain_evidence.py
+?? scripts/neb_agent/scf_repair_chain.py
+?? scripts/prepare_ci_seeded_ml_neb.py
+?? scripts/ts_strategy_engine/execution_blocking_rules.py
+?? scripts/ts_strategy_engine/learning_cases.py
+?? scripts/ts_strategy_engine/learning_evaluation.py
+?? scripts/ts_strategy_engine/paper_sequential.py
+?? scripts/ts_strategy_engine/scf_chain_gate.py
+?? scripts/ts_validation/saddle_energy.py
+?? skills/catalysis-data-retrieval/references/iron-fts-computational-methodology.md
+?? tests/fixtures/coverage_ts/
+?? tests/fixtures/mkm_energy_prediction/
+?? tests/test_10b_lowforce_review.py
+?? tests/test_adsorption_completion_review.py
+?? tests/test_adsorption_execution_adapter.py
+?? tests/test_adsorption_role_runtime.py
+?? tests/test_adsorption_scheduler_stage.py
+?? tests/test_c2_three_arm_submission.py
+?? tests/test_c3_continuation_20261027.py
+?? tests/test_c3_lowforce_admission_20261109.py
+?? tests/test_c3_lowforce_candidates_20261109.py
+?? tests/test_c3_submission_20261027.py
+?? tests/test_catkinas_result_quality.py
+?? tests/test_chco_local_review_20261112.py
+?? tests/test_chco_mode12_review_20261115.py
+?? tests/test_ci_neb_scheduler_stage.py
+?? tests/test_combined_force_package.py
+?? tests/test_completed_label_qc_20261024.py
+?? tests/test_coverage_iteration.py
+?? tests/test_coverage_ts.py
+?? tests/test_coverage_ts_native_probe.py
+?? tests/test_direct_gpu_batch.py
+?? tests/test_energy_reaction_sidecar_20261113.py
+?? tests/test_fe110_11_15_dft.py
+?? tests/test_fe110_11_15_gpu_scope.py
+?? tests/test_fe110_adsorption_screening.py
+?? tests/test_fe110_c2_06_10_preflight.py
+?? tests/test_fe110_c2_repair_gpu.py
+?? tests/test_fe110_c2_repair_vasp.py
+?? tests/test_fe110_c2_review_repair.py
+?? tests/test_fe110_c2_seed_chemistry.py
+?? tests/test_fe110_c2_supplement.py
+?? tests/test_fe110_c2_supplement_gpu.py
+?? tests/test_fe110_c2_supplement_vasp.py
+?? tests/test_fe110_c3_source_review.py
+?? tests/test_fe110_care_batch.py
+?? tests/test_fe110_care_requested_seeds.py
+?? tests/test_fe110_mlip_selection.py
+?? tests/test_fe110_nsw300.py
+?? tests/test_final30_qc_20261025.py
+?? tests/test_fixed53_comparison_20261027.py
+?? tests/test_fixed53_force_analysis.py
+?? tests/test_force_package_20261027.py
+?? tests/test_force_package_20261113.py
+?? tests/test_gpu_resources.py
+?? tests/test_grouped_inputs_20261025.py
+?? tests/test_grouped_qc_20261026.py
+?? tests/test_grouped_submission_20261025.py
+?? tests/test_grouped_supplement_20261025.py
+?? tests/test_int06_gpu_python_boundary.py
+?? tests/test_joint_update512_20261027.py
+?? tests/test_joint_update_20261024.py
+?? tests/test_joint_update_20261025.py
+?? tests/test_kinetics_artifact_lifecycle.py
+?? tests/test_lsf_diagnostic_wall_limit.py
+?? tests/test_mace_surface_pilot.py
+?? tests/test_matris_adsorption_relax.py
+?? tests/test_mkm_bidentate_diagnostic.py
+?? tests/test_mkm_conditions.py
+?? tests/test_mkm_energy_prediction.py
+?? tests/test_mkm_general_mapping.py
+?? tests/test_mkm_model_training.py
+?? tests/test_mkm_normalization.py
+?? tests/test_mkm_result_binding.py
+?? tests/test_mkm_steady_states.py
+?? tests/test_mlip_aqcat_device_selection.py
+?? tests/test_nequip_force_trial.py
+?? tests/test_outcar_numbered_ediff.py
+?? tests/test_pair2_20261027.py
+?? tests/test_pair2_cost_comparison_20261028.py
+?? tests/test_pair2_submission_20261027.py
+?? tests/test_paper_candidate_continuation.py
+?? tests/test_paper_static_label_ingestion.py
+?? tests/test_paper_training_reset.py
+?? tests/test_reconciled_boundaries.py
+?? tests/test_registry_excel_current_status.py
+?? tests/test_registry_write_cli.py
+?? tests/test_reico_environment_audit.py
+?? tests/test_reico_followup_20261024.py
+?? tests/test_reico_force_coverage.py
+?? tests/test_reico_joint_coverage.py
+?? tests/test_reico_labels280_review.py
+?? tests/test_reico_labels280_submission.py
+?? tests/test_reico_prepare_labels.py
+?? tests/test_reico_probe_batch.py
+?? tests/test_reico_probe_review.py
+?? tests/test_reico_random_geometry.py
+?? tests/test_reico_remaining_submission_20261024.py
+?? tests/test_reico_sampled_submission.py
+?? tests/test_reico_sampling.py
+?? tests/test_reico_selection.py
+?? tests/test_reico_stratified_audit.py
+?? tests/test_reico_unlabeled_sampling.py
+?? tests/test_scf_repair_chain.py
+?? tests/test_scientific_claim_dimer_soft_review.py
+?? tests/test_scientific_identity.py
+?? tests/test_scratch512_c2_dft.py
+?? tests/test_scratch512_collection.py
+?? tests/test_scratch512_speed.py
+?? tests/test_scratch512_speed_execution.py
+?? tests/test_targeted_shortlist_20261025.py
+?? tests/test_train28_review_20261024.py
+?? tests/test_train29_review_20261024.py
+?? tests/test_train45_review_20261024.py
+?? tests/test_training512_20261027.py
+?? tests/test_training512_gpu0_20261027.py
+?? tests/test_training512_submit_20261027.py
+?? tests/test_training536_slurm_20261113.py
+?? tests/test_ts_contract_full_compatibility.py
+?? tests/test_ts_learning_cases.py
+?? tests/test_ts_paper_sequential.py
+?? tests/test_ts_saddle_energy.py

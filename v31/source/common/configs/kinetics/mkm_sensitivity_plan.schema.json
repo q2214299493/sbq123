@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Bounded sensitivity study plan",
+  "type": "object",
+  "required": [
+    "format",
+    "limits",
+    "experiments",
+    "jobs",
+    "baseline_hashes",
+    "normalization",
+    "temperature_K",
+    "baseline_pressures_bar"
+  ],
+  "properties": {
+    "format": {
+      "const": "mkm-sensitivity-plan/1"
+    },
+    "limits": {
+      "type": "object",
+      "required": [
+        "max_runs",
+        "per_run_s",
+        "native_s",
+        "wall_s",
+        "max_parallel",
+        "max_retries"
+      ],
+      "properties": {
+        "max_runs": {
+          "const": 8
+        },
+        "per_run_s": {
+          "const": 210
+        },
+        "native_s": {
+          "const": 1680
+        },
+        "wall_s": {
+          "const": 1920
+        },
+        "max_parallel": {
+          "const": 1
+        },
+        "max_retries": {
+          "const": 0
+        }
+      }
+    },
+    "jobs": {
+      "type": "object",
+      "minProperties": 2,
+      "maxProperties": 4,
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "spec",
+          "pair_sha256",
+          "members"
+        ],
+        "properties": {
+          "spec": {
+            "type": "object",
+            "required": [
+              "kind",
+              "step",
+              "species_id"
+            ],
+            "properties": {
+              "kind": {
+                "enum": [
+                  "intermediate_G",
+                  "gas_order"
+                ]
+              },
+              "step": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "species_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "constraint": {
+                "enum": [
+                  "fixed_other_partial_pressures",
+                  "fixed_total_proportional_remainder"
+                ]
+              }
+            },
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "kind": {
+                      "const": "gas_order"
+                    }
+                  }
+                },
+                "then": {
+                  "required": [
+                    "constraint"
+                  ]
+                },
+                "else": {
+                  "not": {
+                    "required": [
+                      "constraint"
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          "pair_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "members": {
+            "type": "object",
+            "required": [
+              "plus",
+              "minus"
+            ],
+            "properties": {
+              "plus": {
+                "type": "object",
+                "required": [
+                  "run_id",
+                  "plan_sha256"
+                ],
+                "properties": {
+                  "run_id": {
+                    "type": "string"
+                  },
+                  "plan_sha256": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  }
+                }
+              },
+              "minus": {
+                "type": "object",
+                "required": [
+                  "run_id",
+                  "plan_sha256"
+                ],
+                "properties": {
+                  "run_id": {
+                    "type": "string"
+                  },
+                  "plan_sha256": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

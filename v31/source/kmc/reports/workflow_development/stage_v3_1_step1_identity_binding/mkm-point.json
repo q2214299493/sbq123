@@ -1,0 +1,122 @@
+{
+  "format": "mkm-point-binding/1",
+  "run_id": "nicu-400k-001",
+  "scope": "synthetic_benchmark",
+  "dataset": {
+    "file_sha256": "0ac30eec437cebf321339d6c4dde26a0e2146229d8c27fb9fa9f3926adf6d778",
+    "dataset_version": "417cf1dc3236175476441c4c4e7b4bd5771bc4a7062aa5e34eff69070483d11b",
+    "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+    "project_id": "demo",
+    "parameters": {
+      "ads": {
+        "parameter_set_id": "parameters-ads",
+        "reaction_row_sha256": "28f0aaff3031468117e3e3279ea0f2b047ae0f6721bec2364b97205ebc122d2c",
+        "energy_reference_id": "demo-ref",
+        "energy_basis": "gibbs",
+        "uncertainty": null
+      },
+      "transfer": {
+        "parameter_set_id": "parameters-transfer",
+        "reaction_row_sha256": "33fd4e3710566fcfc240511b6641bee80d7055b7601aa0860e63a9443b8a85d5",
+        "energy_reference_id": "demo-ref",
+        "energy_basis": "gibbs",
+        "uncertainty": null
+      },
+      "hydrogenate": {
+        "parameter_set_id": "parameters-hydrogenate",
+        "reaction_row_sha256": "6427625c4515adcfa620e2c84c372d01d1b30611ed2662619b07b8091be3dd8f",
+        "energy_reference_id": "demo-ref",
+        "energy_basis": "gibbs",
+        "uncertainty": null
+      },
+      "desorb": {
+        "parameter_set_id": "parameters-desorb",
+        "reaction_row_sha256": "4f142eaaf7dd2915b0e8c2e7a35c6de83478fd8ac0702e20e6494a3d3755e149",
+        "energy_reference_id": "demo-ref",
+        "energy_basis": "gibbs",
+        "uncertainty": null
+      }
+    }
+  },
+  "input_hashes": {
+    "network": "6a4717c44a6c5a76191baf88e419621e461886c96989a6cdb86402df70c58b40",
+    "dataset": "0ac30eec437cebf321339d6c4dde26a0e2146229d8c27fb9fa9f3926adf6d778",
+    "configuration": "7687b9fe2495aa010c7faa79da17ada934cf1673dd910b49fa4605461dea6f53"
+  },
+  "conditions": {
+    "temperature_K": 400,
+    "total_pressure_bar": 1.6,
+    "partial_pressures_bar": {
+      "H2-g": 1.0,
+      "NO-g": 0.5,
+      "HNO-g": 0.1
+    },
+    "standard_states": {
+      "gas_pressure_Pa": 100000,
+      "solute_concentration_mol_m3": 1000,
+      "surface_activity_convention": "fractional site occupation"
+    }
+  },
+  "execution": {
+    "plan_sha256": "67da35f0ce91b7ce016efa0a16ef6ee4b553bcd20451357d6bf16c787867b7ea",
+    "receipt_sha256": "ea599d0273ab186e2d447ae1812073c5ddbfd0367e2fbd5f7a8d9cfe29d28bd0",
+    "result_sha256": "8c8e9cc7a6213d33e631e323051ba0c1a40070b949a071bc48ad95386a1ecde7",
+    "native_input_sha256": "b793e6f37f2262e4a006f912d18950c17581ccc014aa9779008741a4e31890f8",
+    "mat_sha256": "816c5f426ce189be20905a5e1630bd5a3565d877ecbe5366cc0553f5021e9f12",
+    "log_sha256": "fc8855be3d498df9f43a19cd08d5e8da923fb3a41bd0782b4f2a84fb820189bd",
+    "runtime": [
+      "2b70a3511a19065f843b65d8601874700dd792e8d31d620046ef3805df399ff0",
+      "6dc32276086121e44edf4846f033066ba5b0fae9bad002d8917a411e0a59afa9",
+      "20230524",
+      "25.2.0.2998904 (R2025b)"
+    ]
+  },
+  "normalization": {
+    "denominator_unit": "reference site pair",
+    "denominator_value": 1,
+    "extent_unit": "event",
+    "inventory_ids": [
+      "bridge-Cu",
+      "top-Ni"
+    ],
+    "reference_basis": "reference_site_pair",
+    "reference_id": "reference_site_pair",
+    "sites_per_reference": {
+      "bridge-Cu": 1,
+      "top-Ni": 1
+    },
+    "time_unit": "s",
+    "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+    "evidence_sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+  },
+  "net_rate_unit": "events per reference site pair per second",
+  "normalization_profile_sha256": "3084884fe35b71413ee95f1cb09dd5bbf1bfc40354bfc5454e909d513c4d2401",
+  "profile_bound_by_plan": true,
+  "root": {
+    "coverage": {
+      "H2-bridge": 0.6966794790111535,
+      "H2-top": 0.30710124262351585,
+      "HNO-top": 0.401212208396157
+    },
+    "vacancy": {
+      "top-Ni": 0.29168654898032714,
+      "bridge-Cu": 0.3033205209888465
+    },
+    "native_initial": {
+      "Q1_H": 0.0,
+      "Q1_HNO": 0.0,
+      "Q1_v": 1.0,
+      "Q2_H": 0.0,
+      "Q2_v": 1.0
+    },
+    "initial_coverages": {
+      "H2-top": 0,
+      "H2-bridge": 0,
+      "HNO-top": 0
+    },
+    "single_point_residual": 5.684341886080802e-14,
+    "analysis_residual": 0.0
+  },
+  "root_state_sha256": "188e20e4ef7f243a737c300ab2e6682370e6f36e66e8d91db9645d493b6b67d5",
+  "binding_sha256": "7568c7f5076b392026735ed835e7f4322c8bbaea64d4b66cddcb17116be33d54"
+}

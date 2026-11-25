@@ -1,0 +1,455 @@
+diff --git a/scripts/kinetic_data/scientific_identity.py b/scripts/kinetic_data/scientific_identity.py
+new file mode 100644
+--- /dev/null
++++ b/scripts/kinetic_data/scientific_identity.py
+@@ -0,0 +1,106 @@
++"""Offline identity checks on existing kinetic-dataset records. No numerical rate comparison."""
++
++from scripts.artifact_io import sha256_bytes, sha256_json
++from scripts.kinetic_parameters.engine import check_version
++from scripts.kinetic_parameters.export import verify_event
++from scripts.multiphase_contracts import decode_unique_json
++from scripts.reaction_network.builder import directions, side as side_totals
++from scripts.reaction_network.catalog import catalog, check_context, register_species, site_counts
++
++
++def read_artifact(path):
++    raw = path.read_bytes()
++    return decode_unique_json(raw), sha256_bytes(raw)
++
++
++def dataset_reference(dataset, file_sha256):
++    check_version(dataset, "dataset_version")
++    if dataset["format"] != "kinetic-dataset/1":
++        raise ValueError("Expected kinetic-dataset/1")
++    parameters = {}
++    for row in dataset["reactions"]:
++        rid, record = row["reaction_id"], row["parameter_set"]
++        if rid in parameters or record["reaction_id"] != rid or (
++            row["model"]["parameter_set_id"] != record["parameter_set_id"]
++        ):
++            raise ValueError(f"Conflicting parameter identity for {rid}")
++        parameters[rid] = dict(parameter_set_id=record["parameter_set_id"], reaction_row_sha256=sha256_json(row),
++                               energy_reference_id=record["energy_reference_id"], energy_basis=record["energy_basis"],
++                               uncertainty=record["uncertainty"])
++    return dict(file_sha256=file_sha256, dataset_version=dataset["dataset_version"],
++                network_version=dataset["network_version"], project_id=dataset["project_id"], parameters=parameters)
++
++
++def _reaction(dataset, reaction_id):
++    check_version(dataset, "dataset_version")
++    index = catalog(dict(dataset["catalog"], species=dataset["species"], reactions=dataset["reactions"]))
++    if dataset["format"] != "kinetic-dataset/1" or dataset["project_id"] not in index["projects"]:
++        raise ValueError("Dataset format or project differs from catalog")
++    fingerprints = register_species(index)
++    if reaction_id not in index["reactions"]:
++        raise ValueError(f"Unknown reaction {reaction_id}")
++    row = index["reactions"][reaction_id]
++    check_context(row, index)
++    direction = row["direction"]
++    forward = direction["forward"]
++    for sid in forward["reactants"].keys() | forward["products"].keys():
++        if sid not in index["species"] or index["species"][sid].get("composition") is None:
++            raise ValueError(f"Missing molecular identity for {sid}")
++    before = side_totals(forward["reactants"], forward["sites_consumed"], row, index)
++    after = side_totals(forward["products"], forward["sites_released"], row, index)
++    if None in before or None in after or before != after or dict(before[2]) != row["site_balance"]:
++        raise ValueError(f"{reaction_id}: unbalanced molecular or site inventory")
++    status = direction["status"]
++    if status not in ("irreversible", "reversible") or direction != directions(
++        dict(forward, reversible=status == "reversible")
++    ):
++        raise ValueError(f"{reaction_id}: contradictory reaction direction")
++    molecules = {}
++    for side in ("reactants", "products"):
++        molecules[side] = {fingerprints[sid]: count for sid, count in forward[side].items()}
++
++    inventories = {k: forward[k] for k in ("sites_consumed", "sites_released")}
++    inventories["site_balance"] = row["site_balance"]
++    for counts in inventories.values():
++        if counts is None:
++            raise ValueError("Missing site inventory")
++        site_counts(counts, index, row["surface_ids"], row["interface_id"])
++    local = (row.get("model") or {}).get("local_event")
++    verify_event(local, row, index["species"])
++    sites = set(local["site_ids"])
++    geometry = {k: local[k] for k in ("site_ids", "neighbors_zero_based")}
++    for side in ("initial", "final"):
++        geometry[side] = [None if leg is None else [fingerprints[leg[0]], leg[1]] for leg in local[side]]
++    if "environment" in local:
++        env = local["environment"]
++        sites.update(env["site_ids"])
++        geometry["environment"] = dict(site_ids=env["site_ids"], neighbors_zero_based=env["neighbors_zero_based"],
++                                       state=[None if leg is None else [fingerprints[leg[0]], leg[1]]
++                                              for leg in env["state"]])
++    site_counts(dict.fromkeys(sites, 1), index, row["surface_ids"], row["interface_id"])
++    # Resolve inventory labels to their owning structures, including both ends of an interface.
++    domains = {"site": [index["sites"][k] for k in sorted(sites)]}
++    domains["surface"] = [index["surfaces"][k] for k in sorted(row["surface_ids"])]
++    domains["phase"] = [index["phases"][k] for k in sorted({s["phase_id"] for s in domains["surface"]})]
++    domains["material"] = [index["materials"][k] for k in sorted({p["material_id"] for p in domains["phase"]})]
++    domains["interface"] = [index["interfaces"][row["interface_id"]]] if row["interface_id"] else []
++    # Validation dates and review paths are provenance, not structural differences.
++    physical = {group: [{k: v for k, v in item.items() if k not in ("validation", "schema_version")}
++                        for item in rows] for group, rows in domains.items()}
++    return dict(project=dataset["project_id"], molecular_stoichiometry=molecules,
++                per_event_sites=inventories, inventory_owners=physical, direction=status, local_geometry=geometry)
++
++
++def require_reaction_identity(left, right, reaction_id):
++    """Verify this oriented elementary identity only. Conditions and parameters have separate bindings."""
++    a, b = (_reaction(d, reaction_id) for d in (left, right))
++    differences = [k for k in a if a[k] != b[k]]
++    if differences:
++        raise ValueError(f"{reaction_id}: incompatible " + ", ".join(differences))
++    return dict(reaction_id=reaction_id, **a)
++
++
++def check_binding(recorded, reconstructed):
++    """Only compare with evidence freshly reconstructed by the owning reader."""
++    if sha256_json(recorded) != sha256_json(reconstructed):
++        raise ValueError("Stored binding differs from reconstructed evidence")
+diff --git a/scripts/surface_kmc/result_binding.py b/scripts/surface_kmc/result_binding.py
+new file mode 100644
+--- /dev/null
++++ b/scripts/surface_kmc/result_binding.py
+@@ -0,0 +1,45 @@
++"""Reconstruct one physical-time window from approved Zacros evidence, entirely offline."""
++
++import argparse
++import json
++from pathlib import Path
++
++from scripts.artifact_io import sha256_json
++from scripts.kinetic_data.scientific_identity import check_binding, dataset_reference, read_artifact
++from scripts.multiphase_contracts import read_unique_json as read
++from scripts.surface_kmc.analysis import window_analysis
++from scripts.surface_kmc.study import replay
++
++
++def bind_window(dataset_path, configuration_path, run, start_s, end_s):
++    dataset, dataset_hash = read_artifact(Path(dataset_path))
++    config, config_hash = read_artifact(Path(configuration_path))
++    series = replay(dataset, config, run, bind_receipts=True)
++    observation = window_analysis(series["trajectory"], dataset, series["mapping"], start_s, end_s)
++    lineage = series["receipts"]
++    leaf = lineage[-1]
++    result = dict(plan_sha256=leaf["plan_sha256"], native_receipt_sha256=leaf["receipt_sha256"])
++    definition = dict(bounds_s=observation["window_s"], population_rule="left_held",
++                      event_interval="(start,end]", basis=observation["basis"], denominator=observation["denominator"])
++    parameters = dataset["reactions"][0]["parameter_set"]  # assemble has checked the common conditions.
++    conditions = dict(temperature_K=parameters["temperature_K"], pressure_Pa=parameters["pressure_Pa"],
++                      partial_pressure_bar=config["partial_pressure_bar"], standard_states=parameters["standard_states"])
++    payload = dict(format="kmc-window-binding/1", result=result, checkpoint_lineage=lineage,
++                   dataset=dataset_reference(dataset, dataset_hash), configuration_sha256=config_hash,
++                   seed=series["seed"], conditions=conditions, definition=definition,
++                   site_capacities=series["mapping"]["topology"]["capacities"], observation=observation)
++    return dict(payload, window_evidence_sha256=sha256_json(payload))
++
++
++if __name__ == "__main__":
++    parser = argparse.ArgumentParser(description=__doc__)
++    for label in ("dataset", "configuration", "run"):
++        parser.add_argument(label, type=Path)
++    parser.add_argument("start", type=float)
++    parser.add_argument("end", type=float)
++    parser.add_argument("--verify", type=Path)
++    args = parser.parse_args()
++    binding = bind_window(args.dataset, args.configuration, args.run, args.start, args.end)
++    if args.verify:
++        check_binding(read(args.verify), binding)
++    print(json.dumps(binding, indent=2, allow_nan=False))
+diff --git a/scripts/surface_kmc/study.py b/scripts/surface_kmc/study.py
+--- a/scripts/surface_kmc/study.py
++++ b/scripts/surface_kmc/study.py
+@@ -5,6 +5,8 @@
+ from pathlib import Path
+ 
+ from scripts.artifact_io import sha256_bytes, sha256_file, sha256_json
++from scripts.execution_permission import require_bound_action
++from scripts.kinetic_data.scientific_identity import read_artifact
+ from scripts.multiphase_contracts import read_unique_json as read
+ from scripts.native_model import assemble
+ from scripts.surface_kmc.analysis import seed_precision, seed_series, size_sensitivity, window_analysis
+@@ -35,14 +37,62 @@
+         raise ValueError("Spatial output differs from receipt")
+ 
+ 
+-def replay(dataset, config, run):
++def _receipt_binding(folder, claim, digest, result, receipt_hash, manifest, config):
++    plan = claim["plan"]
++    approval = claim["approval"]
++    parent = plan["lineage"]
++    action = "RESUME_ZACROS_4" if parent else "RUN_ZACROS_4"
++    if (plan["action"] != action or plan["seed"] != config["zacros"]["seed"] or result["exit_code"] != 0
++            or approval.get("format") != "zacros-4-single-call-approval/1" or not approval.get("reviewer")
++            or approval.get("DECISION") != "approve" or approval.get("ALLOWED_ACTIONS") != [action]
++            or sha256_json(approval) != claim["decision_sha256"]):
++        raise ValueError("Zacros execution or approval identity differs")
++    require_bound_action(approval, action, digest, {action})
++    source = approval["source"]
++    if sha256_file(Path(source["path"])) != source["sha256"]:
++        raise ValueError("Changed Zacros approval source")
++    expected = dict(manifest["files"])
++    if parent:
++        expected["restart.inf"] = plan["inputs"]["restart.inf"]
++    if plan["inputs"] != expected or any(sha256_file(folder / k) != v for k, v in manifest["files"].items()):
++        raise ValueError("Zacros staged inputs differ from reconstructed model")
++    for name, value in result["outputs"].items():
++        if Path(name).name != name or sha256_file(folder / name) != value:
++            raise ValueError(f"Changed Zacros output {name}")
++    return dict(run=str(folder), plan_sha256=digest, receipt_sha256=receipt_hash,
++                approval_sha256=claim["decision_sha256"], model_sha256=plan["model_sha256"],
++                parent_receipt_sha256=parent["receipt_sha256"] if parent else None,
++                checkpoint_input_sha256=expected.get("restart.inf"),
++                terminal_step=result["terminal_step"], terminal_time_s=result["terminal_time_s"])
++
++
++def _writer_boundary(plan, config):
++    lineage = plan["lineage"]
++    parent = Path(lineage["run"]).resolve()
++    writer, receipt_hash = read_artifact(parent / "result.json")
++    if (receipt_hash != lineage["receipt_sha256"]
++            or sha256_file(parent / "restart.inf") != plan["inputs"]["restart.inf"]):
++        raise ValueError("Changed writer or checkpoint")
++    if any(lineage[key] != writer[key] for key in ("terminal_step", "headers", "tail")):
++        raise ValueError("Checkpoint lineage differs from its writer")
++    if "snapshot_every_events" in config["zacros"]:
++        boundary = _spatial_boundary(writer, config["zacros"]["snapshot_every_events"])
++        if (any(lineage.get(k, v) != v for k, v in boundary.items())
++                or lineage["history_header"] != writer["history_header"]):
++            raise ValueError("Spatial lineage differs from checkpoint writer")
++        # Old plans omit the cursor. Only their hash-bound writer can supply it.
++        lineage = dict(lineage, **boundary)
++    return parent, lineage
++
++
++def replay(dataset, config, run, *, bind_receipts=False):
+     """Rebuild the model, check its receipt chain, and stitch cumulative streams exactly once."""
+     _, manifest = assemble("zacros", dataset, config)
+     mapping = dict(manifest["validation"])
+     if "topology" not in mapping:
+         mapping["topology"] = topology(config["zacros"], dataset["catalog"])[3]
+     events = event_table(dataset)["events"]
+-    chain, seen = [], set()
++    chain, seen, receipts = [], set(), []
+     folder = Path(run).resolve()
+     while True:
+         if folder in seen:
+@@ -51,7 +101,7 @@
+         claim = read(folder / "claim.json")
+         plan = claim["plan"]
+         digest = sha256_json(plan)
+-        result = read(folder / "result.json")
++        result, receipt_hash = read_artifact(folder / "result.json")
+         if (
+             read(folder.parent / f".zacros-{digest}.claim.json") != claim
+             or result["plan_sha256"] != digest
+@@ -61,28 +111,15 @@
+             or plan["model_sha256"] != sha256_json(manifest)
+         ):
+             raise ValueError("Run identity, approval claim, result or model differs")
++        if bind_receipts:
++            receipts.append(_receipt_binding(folder, claim, digest, result, receipt_hash, manifest, config))
+         outputs = {k: _output(folder / k, plan["max_output_bytes_per_file"]) for k in STREAMS}
+         if any(sha256_bytes(v) != result["outputs"][k] for k, v in outputs.items()):
+             raise ValueError("Changed trajectory output")
+         lineage = plan["lineage"]
+         if lineage:
+-            parent = Path(lineage["run"]).resolve()
+-            if (
+-                sha256_file(parent / "result.json") != lineage["receipt_sha256"]
+-                or sha256_file(parent / "restart.inf") != plan["inputs"]["restart.inf"]
+-            ):
+-                raise ValueError("Changed writer or checkpoint")
+-            if "snapshot_every_events" in config["zacros"]:
+-                writer = read(parent / "result.json")
+-                boundary = _spatial_boundary(writer, config["zacros"]["snapshot_every_events"])
+-                if (
+-                    any(lineage.get(k, v) != v for k, v in boundary.items())
+-                    or lineage["history_header"] != writer["history_header"]
+-                ):
+-                    raise ValueError("Spatial lineage differs from checkpoint writer")
+-                # Historical plans omitted the cursor. Reconstruct only from their hash-bound writer.
+-                lineage = dict(lineage, **boundary)
+-                plan = dict(plan, lineage=lineage)
++            parent, lineage = _writer_boundary(plan, config)
++            plan = dict(plan, lineage=lineage)
+         obs = read_trajectory(outputs, dataset, mapping, events, max_steps=plan["max_steps"], parent=lineage)
+         if (
+             obs["terminal_step"] != result["terminal_step"]
+@@ -100,7 +137,10 @@
+         for key in ("procstat", "specnum"):
+             part[key] = join_samples(trajectory[key], part[key])
+         trajectory = part
+-    return seed_series(config, dataset, trajectory, mapping)
++    series = seed_series(config, dataset, trajectory, mapping)
++    if bind_receipts:
++        series["receipts"] = list(reversed(receipts))
++    return series
+ 
+ 
+ def analyze(study_path):
+diff --git a/tests/test_scientific_identity.py b/tests/test_scientific_identity.py
+new file mode 100644
+--- /dev/null
++++ b/tests/test_scientific_identity.py
+@@ -0,0 +1,106 @@
++"""Synthetic kinetic datasets and the existing dissociative ads benchmark."""
++
++from copy import deepcopy
++import json
++from pathlib import Path
++
++import pytest
++
++from scripts.artifact_io import sha256_json
++from scripts.kinetic_data.scientific_identity import dataset_reference, read_artifact, require_reaction_identity
++from test_native_model import model
++
++
++def version(dataset):
++    dataset["dataset_version"] = sha256_json({k: v for k, v in dataset.items() if k != "dataset_version"})
++    return dataset
++
++
++def test_identity_uses_species_definitions_and_ignores_native_order():
++    left, _ = model(gas=True)
++    right = deepcopy(left)
++    right["species"].reverse()
++    for values in right["catalog"].values():
++        values.reverse()
++    rid = left["reactions"][0]["reaction_id"]
++    identity = require_reaction_identity(left, version(right), rid)
++    assert sum(identity["molecular_stoichiometry"]["products"].values()) == 1
++    assert identity["per_event_sites"]["sites_consumed"] == {"top-Ni": 1, "bridge-Cu": 1}
++
++
++def test_reviewed_ads_same_site_demand_different_molecular_products():
++    root = Path(__file__).resolve().parents[1]
++    mkm, _ = read_artifact(root / "archive/v221_catkinas/nicu-v221-400k-001/dataset.json")
++    kmc, _ = model(gas=True)
++    r = kmc["reactions"][0]
++    assert r["reaction_id"] == "ads"
++    a = next(row for row in mkm["reactions"] if row["reaction_id"] == "ads")
++    assert a["direction"]["forward"]["sites_consumed"] == r["direction"]["forward"]["sites_consumed"]
++    with pytest.raises(ValueError, match="molecular_stoichiometry") as exc:
++        require_reaction_identity(mkm, version(kmc), "ads")
++    assert "per_event_sites" not in str(exc.value)
++
++
++@pytest.mark.parametrize("mutation,reason", [
++    ("bytes", "digest"), ("direction", "direction"), ("gross", "inventory"),
++    ("owner", "inventory_owners"), ("vacancy", "per_event_sites"), ("unknown", "Unknown reaction"),
++])
++def test_incompatible_or_stale_identity(mutation, reason):
++    a, _ = model(gas=True)
++    b = json.loads(json.dumps(a))  # Independent forward/reverse mappings as stored on disk.
++    r = b["reactions"][0]
++    rid = r["reaction_id"]
++    if mutation == "direction":
++        r["direction"]["reverse"] = None
++    elif mutation == "gross":
++        r["site_balance"]["top-Ni"] += 1
++    elif mutation == "owner":
++        b["catalog"]["sites"][0]["local_geometry"] += " altered"
++    elif mutation == "vacancy":
++        for sense, side in (("forward", "sites_consumed"), ("forward", "sites_released"),
++                            ("reverse", "sites_consumed"), ("reverse", "sites_released")):
++            counts = r["direction"][sense][side]
++            counts["top-Ni"] = counts.get("top-Ni", 0) + 1
++        r["site_balance"]["top-Ni"] += 1
++        local = r["model"]["local_event"]
++        local["site_ids"].append("top-Ni")
++        for key in ("initial", "final"):
++            local[key].append(None)
++        local["neighbors_zero_based"].append([1, 2])
++    elif mutation == "unknown":
++        rid = "missing"
++    version(b)
++    if mutation == "bytes":
++        b["project_id"] += "x"
++    with pytest.raises(ValueError, match=reason):
++        require_reaction_identity(a, b, rid)
++
++
++def test_parameter_content_retains_reference_uncertainty_and_units():
++    a, _ = model(gas=True)
++    b = deepcopy(a)
++    r = b["reactions"][0]
++    r["parameter_set"]["energy_reference_id"] += "-different"
++    r["parameter_set"]["uncertainty"] = {"kind": "test-only"}
++    r["rates"]["forward"]["sigma_ln_k"] = 0.25
++    version(b)
++    rid = r["reaction_id"]
++    assert require_reaction_identity(a, b, rid)
++    old, new = (dataset_reference(d, "0" * 64)["parameters"][rid] for d in (a, b))
++    assert new["parameter_set_id"] == old["parameter_set_id"]
++    assert new["reaction_row_sha256"] != old["reaction_row_sha256"]
++    assert new["uncertainty"] == r["parameter_set"]["uncertainty"]
++    assert new["energy_reference_id"] == r["parameter_set"]["energy_reference_id"]
++
++def test_missing_local_pattern_or_changed_spectator():
++    left, _ = model(gas=True)
++    right = deepcopy(left)
++    row = right["reactions"][0]
++    rid = row["reaction_id"]
++    local = row["model"].pop("local_event")
++    with pytest.raises(ValueError, match="local site pattern"):
++        require_reaction_identity(left, version(right), rid)
++    row["model"]["local_event"] = local
++    local["environment"] = dict(site_ids=["top-Ni"], state=[None], neighbors_zero_based=[[1, 2]])
++    with pytest.raises(ValueError, match="local_geometry"):
++        require_reaction_identity(left, version(right), rid)
+diff --git a/tests/test_kmc_result_binding.py b/tests/test_kmc_result_binding.py
+new file mode 100644
+--- /dev/null
++++ b/tests/test_kmc_result_binding.py
+@@ -0,0 +1,47 @@
++"""Reconstruct window evidence with a subprocess double and native-format fixtures."""
++
++from copy import deepcopy
++import json
++
++import pytest
++
++from scripts.artifact_io import sha256_file
++from scripts.kinetic_data.scientific_identity import check_binding
++from scripts.surface_kmc.result_binding import bind_window
++from test_kmc_workflow import dispatch, spatial_segment  # noqa: F401
++
++
++def test_equal_windows_and_three_segment_lineage(spatial_segment, tmp_path):  # noqa: F811
++    parent = None
++    for name, end, frames in [("first", 5, [0, 4]), ("second", 7, None), ("third", 13, [8, 12])]:
++        args, receipt = spatial_segment(name, end, frames, parent)
++        assert receipt["status"] == "validated_output"
++        parent = args["run"]
++    d, c = tmp_path / "dataset.json", tmp_path / "configuration.json"
++    for target, key in ((d, "dataset"), (c, "config")):
++        target.write_text(json.dumps(args[key]))
++    def window(a, b):
++        return bind_window(d, c, parent, a, b)
++
++    first, second = window(0, 1e-12), window(1e-12, 2e-12)
++    for field in first["observation"].keys() - {"window_s"}:
++        assert first["observation"][field] == second["observation"][field]
++    assert first["result"] == second["result"]
++    assert first["window_evidence_sha256"] != second["window_evidence_sha256"]
++    check_binding(first, window(0, 1e-12))
++    segments = first["checkpoint_lineage"]
++    assert [s["terminal_step"] for s in segments] == [5, 7, 13]
++    for previous, following in zip(segments, segments[1:]):
++        assert previous["receipt_sha256"] == following["parent_receipt_sha256"]
++    assert first["result"]["native_receipt_sha256"] == sha256_file(parent / "result.json")
++    for field in ("result", "definition", "window_evidence_sha256", "checkpoint_lineage"):
++        forged = deepcopy(first)
++        forged[field] = None
++        with pytest.raises(ValueError, match="reconstructed"):
++            check_binding(forged, first)
++    with pytest.raises(ValueError, match="exceeds"):
++        window(0, 1e9)
++    with (tmp_path / "first" / "restart.inf").open("ab") as stream:
++        stream.write(b"changed")
++    with pytest.raises(ValueError, match="checkpoint|restart"):
++        window(0, 1e-12)

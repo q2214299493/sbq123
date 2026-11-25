@@ -1,0 +1,91 @@
+version: 1
+source_geometry:
+  H2: optimized gas CONTCAR from job 9573527
+  CH: optimized gas CONTCAR from job 9573528
+  CH2: optimized gas CONTCAR from job 9573529
+  CH3: optimized gas CONTCAR from job 9573530
+  CH4: optimized gas CONTCAR from job 9573531
+
+adsorbates:
+  H2:
+    atom_symbols: [H, H]
+    species_order: [H]
+    anchor_mode: reference_point
+    anchor_atom: molecular_center
+    internal_geometry: optimized H-H 0.750595 A
+    orientation_rule: molecular_axis_parallel
+    recommended_fe_anchor_distance_angstrom: 2.3
+    allowed_fe_anchor_distance_angstrom: [2.1, 2.6]
+    selected_sites: [top, short_bridge, long_bridge, hollow]
+    relative_cartesian_angstrom:
+      - [-0.375297459316, 0.0, 0.0]
+      - [0.375297459316, 0.0, 0.0]
+
+  CH:
+    atom_symbols: [C, H]
+    species_order: [C, H]
+    anchor_mode: atom
+    anchor_atom: C
+    anchor_index: 0
+    internal_geometry: optimized C-H 1.138746 A
+    orientation_rule: non_anchor_atoms_above
+    recommended_fe_anchor_distance_angstrom: 1.95
+    allowed_fe_anchor_distance_angstrom: [1.8, 2.1]
+    selected_sites: [top, short_bridge, long_bridge, hollow]
+    relative_cartesian_angstrom:
+      - [0.0, 0.0, 0.0]
+      - [0.0, 0.0, 1.138745511453]
+
+  CH2:
+    atom_symbols: [C, H, H]
+    species_order: [C, H]
+    anchor_mode: atom
+    anchor_atom: C
+    anchor_index: 0
+    internal_geometry: optimized C-H 1.085964 A; H-C-H 135.458 degrees
+    orientation_rule: non_anchor_atoms_above
+    recommended_fe_anchor_distance_angstrom: 1.95
+    allowed_fe_anchor_distance_angstrom: [1.8, 2.1]
+    selected_sites: [top, short_bridge, long_bridge, hollow]
+    relative_cartesian_angstrom:
+      - [0.0, 0.0, 0.0]
+      - [1.004951510570, 0.0, 0.411570314293]
+      - [-1.004951592416, 0.0, 0.411570351701]
+
+  CH3:
+    atom_symbols: [C, H, H, H]
+    species_order: [C, H]
+    anchor_mode: atom
+    anchor_atom: C
+    anchor_index: 0
+    internal_geometry: optimized planar CH3; C-H 1.08723 A
+    orientation_rule: non_anchor_atoms_above_or_coplanar
+    recommended_fe_anchor_distance_angstrom: 2.05
+    allowed_fe_anchor_distance_angstrom: [1.9, 2.3]
+    site_distance_overrides_angstrom:
+      short_bridge: 2.3
+      long_bridge: 2.3
+    selected_sites: [top, short_bridge, long_bridge, hollow]
+    relative_cartesian_angstrom:
+      - [0.0, 0.0, 0.0]
+      - [0.0, 1.087220612242, 0.0]
+      - [-0.941560577908, -0.543627735251, 0.0]
+      - [0.941560576128, -0.543627735196, 0.0]
+
+  CH4:
+    atom_symbols: [C, H, H, H, H]
+    species_order: [C, H]
+    anchor_mode: atom
+    anchor_atom: H
+    anchor_index: 1
+    internal_geometry: optimized tetrahedral CH4; C-H 1.096869 A; H-C-H 109.471 degrees
+    orientation_rule: anchor_below_other_atoms
+    recommended_fe_anchor_distance_angstrom: 2.2
+    allowed_fe_anchor_distance_angstrom: [2.0, 2.5]
+    selected_sites: [top, short_bridge, long_bridge, hollow]
+    relative_cartesian_angstrom:
+      - [0.0, 0.0, 1.096869]
+      - [0.0, 0.0, 0.0]
+      - [1.034138010631, 0.0, 1.462492]
+      - [-0.517069005316, 0.895589788226, 1.462492]
+      - [-0.517069005316, -0.895589788226, 1.462492]

@@ -1,0 +1,37 @@
+surface_families:
+  metal_fe:
+    ISPIN: 2
+    ISMEAR: 1
+    SIGMA: 0.20
+    magmom: {Fe: 2.2, C: 0.0, O: 0.0, H: 0.0, N: 0.0}
+  iron_carbide:
+    ISPIN: 2
+    ISMEAR: 1
+    SIGMA: 0.20
+    magmom: {Fe: 2.0, C: 0.0, O: 0.0, H: 0.0, N: 0.0}
+    warning: Phase-specific magnetic validation is required.
+  iron_oxide:
+    ISPIN: 2
+    requires_user_magmom: true
+    warning: Provide an approved magnetic pattern and DFT+U method; no value is inferred.
+  unknown:
+    ISPIN: 2
+    requires_user_confirmation: true
+
+materials:
+  Fe110:
+    surface_family: metal_fe
+    profile_source: configs/true_fe110_production.yaml
+    stage_map:
+      adsorption_GO: routine_production.incar
+      adsorption_static: final_static.incar
+      endpoint_GO: routine_production.incar
+      pre_NEB: ordinary_neb.incar
+      refine_NEB: transition_state.refine_neb.incar
+      CI_NEB: transition_state.ci_neb.incar
+      local_NEB: transition_state.refine_neb.incar
+      DIMER: transition_state.dimer.incar
+      VFA: transition_state.vfa.incar
+    kpoints_note: True Fe(110) active production mesh is Gamma 5 5 1 for the five-layer branch.
+    status_note: Geometry and endpoint gates must pass before adsorption or transition-state use.
+    source: docs/01_METHOD_PROTOCOL.md

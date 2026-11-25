@@ -1,0 +1,182 @@
+version: 1
+
+adsorbates:
+  CO:
+    class: simple
+    atom_symbols: [C, O]
+    species_order: [C, O]
+    preferred_binding_atoms: [C]
+    backup_binding_atoms: [O]
+    forbidden_binding_atoms: []
+    anchor_atom: C
+    anchor_index: 0
+    orientation_rule: non_anchor_atoms_above
+    relative_cartesian_angstrom:
+      - [0.0, 0.0, 0.0]
+      - [0.0, 0.0, 1.15]
+    recommended_fe_anchor_distance_angstrom: 1.95
+    allowed_fe_anchor_distance_angstrom: [1.8, 2.1]
+    dissociation_check: true
+    default_confidence: high
+
+  H:
+    class: simple
+    atom_symbols: [H]
+    species_order: [H]
+    preferred_binding_atoms: [H]
+    anchor_atom: H
+    anchor_index: 0
+    orientation_rule: anchor_only
+    relative_cartesian_angstrom: [[0.0, 0.0, 0.0]]
+    recommended_fe_anchor_distance_angstrom: 1.675
+    allowed_fe_anchor_distance_angstrom: [1.55, 1.8]
+    dissociation_check: false
+    default_confidence: high
+
+  O:
+    class: simple
+    atom_symbols: [O]
+    species_order: [O]
+    preferred_binding_atoms: [O]
+    anchor_atom: O
+    anchor_index: 0
+    orientation_rule: anchor_only
+    relative_cartesian_angstrom: [[0.0, 0.0, 0.0]]
+    recommended_fe_anchor_distance_angstrom: 1.95
+    allowed_fe_anchor_distance_angstrom: [1.8, 2.1]
+    dissociation_check: false
+    default_confidence: high
+
+  OH:
+    class: simple
+    atom_symbols: [O, H]
+    species_order: [O, H]
+    preferred_binding_atoms: [O]
+    forbidden_binding_atoms: [H]
+    anchor_atom: O
+    anchor_index: 0
+    orientation_rule: non_anchor_atoms_above
+    relative_cartesian_angstrom:
+      - [0.0, 0.0, 0.0]
+      - [0.0, 0.0, 0.97]
+    recommended_fe_anchor_distance_angstrom: 2.05
+    allowed_fe_anchor_distance_angstrom: [1.9, 2.2]
+    dissociation_check: true
+    default_confidence: high
+
+  H2O:
+    class: simple
+    atom_symbols: [O, H, H]
+    species_order: [O, H]
+    preferred_binding_atoms: [O]
+    forbidden_binding_atoms: [H]
+    anchor_atom: O
+    anchor_index: 0
+    orientation_rule: non_anchor_atoms_above
+    relative_cartesian_angstrom:
+      - [0.0, 0.0, 0.0]
+      - [-0.519109600879, -0.769088095361, 0.291356165248]
+      - [-0.519098307404, 0.769081961693, 0.291349824913]
+    recommended_fe_anchor_distance_angstrom: 2.30
+    allowed_fe_anchor_distance_angstrom: [2.1, 2.5]
+    dissociation_check: true
+    default_confidence: high
+
+  C:
+    class: simple
+    atom_symbols: [C]
+    species_order: [C]
+    preferred_binding_atoms: [C]
+    anchor_atom: C
+    anchor_index: 0
+    orientation_rule: anchor_only
+    relative_cartesian_angstrom: [[0.0, 0.0, 0.0]]
+    recommended_fe_anchor_distance_angstrom: 1.90
+    allowed_fe_anchor_distance_angstrom: [1.75, 2.05]
+    dissociation_check: false
+    default_confidence: high
+
+  CH:
+    class: C1_oxygenate
+    atom_symbols: [C, H]
+    species_order: [C, H]
+    preferred_binding_atoms: [C]
+    anchor_atom: C
+    anchor_index: 0
+    orientation_rule: non_anchor_atoms_above
+    relative_cartesian_angstrom: [[0.0, 0.0, 0.0], [0.0, 0.0, 1.10]]
+    recommended_fe_anchor_distance_angstrom: 1.95
+    allowed_fe_anchor_distance_angstrom: [1.75, 2.15]
+    dissociation_check: true
+    default_confidence: medium
+
+  CH2:
+    class: C1_oxygenate
+    atom_symbols: [C, H, H]
+    species_order: [C, H]
+    preferred_binding_atoms: [C]
+    anchor_atom: C
+    anchor_index: 0
+    orientation_rule: non_anchor_atoms_above
+    relative_cartesian_angstrom: [[0.0, 0.0, 0.0], [-0.75, 0.0, 0.80], [0.75, 0.0, 0.80]]
+    recommended_fe_anchor_distance_angstrom: 1.95
+    allowed_fe_anchor_distance_angstrom: [1.75, 2.15]
+    dissociation_check: true
+    default_confidence: medium
+
+  CH3:
+    class: C1_oxygenate
+    atom_symbols: [C, H, H, H]
+    species_order: [C, H]
+    preferred_binding_atoms: [C]
+    anchor_atom: C
+    anchor_index: 0
+    orientation_rule: non_anchor_atoms_above
+    relative_cartesian_angstrom:
+      - [0.0, 0.0, 0.0]
+      - [0.0, 0.0, 1.09]
+      - [-0.94, 0.0, 0.55]
+      - [0.47, 0.81, 0.55]
+    recommended_fe_anchor_distance_angstrom: 2.00
+    allowed_fe_anchor_distance_angstrom: [1.8, 2.2]
+    dissociation_check: true
+    default_confidence: medium
+
+  HCO:
+    class: C1_oxygenate
+    atom_symbols: [C, O, H]
+    species_order: [C, O, H]
+    preferred_binding_atoms: [C, O]
+    anchor_atom: C
+    anchor_index: 0
+    orientation_rule: non_anchor_atoms_above
+    relative_cartesian_angstrom: [[0.0, 0.0, 0.0], [0.0, 0.0, 1.20], [0.95, 0.0, 0.55]]
+    recommended_fe_anchor_distance_angstrom: 2.00
+    allowed_fe_anchor_distance_angstrom: [1.8, 2.2]
+    isomer_sensitive: true
+    dissociation_check: true
+    default_confidence: medium
+
+  COH:
+    class: C1_oxygenate
+    atom_symbols: [C, O, H]
+    species_order: [C, O, H]
+    preferred_binding_atoms: [C, O]
+    anchor_atom: C
+    anchor_index: 0
+    orientation_rule: non_anchor_atoms_above
+    relative_cartesian_angstrom: [[0.0, 0.0, 0.0], [0.0, 0.0, 1.30], [0.0, 0.75, 1.75]]
+    recommended_fe_anchor_distance_angstrom: 2.00
+    allowed_fe_anchor_distance_angstrom: [1.8, 2.2]
+    isomer_sensitive: true
+    dissociation_check: true
+    default_confidence: medium
+
+complex_defaults:
+  class: C2plus
+  allow_multiple_binding_atoms: true
+  require_connectivity_check: true
+  mark_complex_if_more_than_one_surface_bond: true
+  default_confidence: low
+  needs_review_if_multidentate: true
+  reason_code: needs_review_complex_adsorbate

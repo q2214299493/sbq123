@@ -1,0 +1,82 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sbq-catalyst-agent-workflow"
+version = "0.1.0"
+description = "Repository tooling for the Fe(110) computational-catalysis workflow"
+requires-python = ">=3.11"
+dependencies = [
+  "jsonschema>=4.25,<5",
+  "numpy>=1.26,<3",
+  "PyYAML>=6,<7",
+]
+
+[project.scripts]
+repo-state = "scripts.state_manager.cli:main"
+registry-promote = "scripts.registry_excel_promotion:main"
+registry-write = "scripts.registry_write:main"
+registry-init = "scripts.init_registry:main"
+ts-strategy = "scripts.ts_strategy_engine.cli:main"
+document-governance = "scripts.document_governance:main"
+capability-readiness = "scripts.generate_capability_readiness:main"
+catalysis-search = "scripts.catalysis_retrieval.cli:main"
+catalysis-validate = "scripts.catalysis_retrieval.validate_cli:main"
+
+[project.optional-dependencies]
+catkinas = ["scipy>=1.11,<2"]
+kmc-analysis = ["scipy>=1.11,<2"]
+rate-units = ["astropy>=6,<8"]
+vasp = ["pymatgen>=2024.5,<2027"]
+release = ["build>=1.2,<2", "wheel>=0.45,<1"]
+adsmind = [
+  "ase>=3.23,<4",
+  "spglib>=2,<3",
+]
+neb = [
+  "ase>=3.23,<4",
+]
+sella = [
+  "sella==2.6.0",
+]
+visualization = [
+  "matplotlib>=3.8,<4",
+]
+retrieval = [
+  "sentence-transformers==5.6.0",
+]
+dev = [
+  "astropy>=6,<8",
+  "pymatgen>=2024.5,<2027",
+  "pytest>=8,<9",
+  "ruff>=0.12,<1",
+]
+
+[tool.setuptools]
+include-package-data = false
+
+[tool.setuptools.cmdclass]
+build_py = "scripts.release_build.BuildPy"
+
+[tool.setuptools.packages.find]
+include = ["scripts", "scripts.*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+markers = ["native_execution: requires an explicit invocation and engine-owned approval"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 140
+extend-exclude = [
+  "archive",
+  "modules/memory_migration",
+]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "C90"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 15

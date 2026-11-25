@@ -1,0 +1,427 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MKM kinetic analysis",
+  "type": "object",
+  "required": [
+    "format",
+    "status",
+    "project_id",
+    "network_version",
+    "dataset_version",
+    "source_hashes",
+    "pathways"
+  ],
+  "properties": {
+    "format": {
+      "enum": [
+        "mkm-kinetic-analysis/1",
+        "mkm-kinetic-analysis/2"
+      ]
+    },
+    "status": {
+      "enum": [
+        "analyzed",
+        "structural_inspection_only"
+      ]
+    },
+    "project_id": {
+      "type": "string"
+    },
+    "network_version": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "dataset_version": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "source_hashes": {
+      "type": "object"
+    },
+    "pathways": {
+      "type": "object",
+      "required": [
+        "nodes",
+        "reactions",
+        "pathway_percentages",
+        "algorithm"
+      ],
+      "properties": {
+        "nodes": {
+          "type": "object"
+        },
+        "reactions": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "pathway_percentages": {
+          "type": "null"
+        },
+        "algorithm": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "coverage": {
+      "type": "object",
+      "required": [
+        "species_id",
+        "phase_id",
+        "surface_id",
+        "site_id",
+        "site_type",
+        "occupancy_multiplicity",
+        "species_coverage",
+        "occupied_fraction",
+        "fraction_of_all_sites",
+        "concentration_mol_per_surface_m2",
+        "vacancy_fraction",
+        "validation"
+      ],
+      "properties": {
+        "species_id": {
+          "type": "string"
+        },
+        "phase_id": {
+          "type": "string"
+        },
+        "surface_id": {
+          "type": "string"
+        },
+        "site_id": {
+          "type": "string"
+        },
+        "site_type": {
+          "type": "string"
+        },
+        "occupancy_multiplicity": {
+          "type": "integer"
+        },
+        "species_coverage": {
+          "type": "number"
+        },
+        "occupied_fraction": {
+          "type": "number"
+        },
+        "fraction_of_all_sites": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "concentration_mol_per_surface_m2": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "vacancy_fraction": {
+          "type": "number"
+        },
+        "validation": {
+          "const": "balanced"
+        }
+      }
+    },
+    "rate": {
+      "type": "object",
+      "required": [
+        "reaction_id",
+        "reversible",
+        "kf",
+        "kr",
+        "forward_flux",
+        "reverse_flux",
+        "net_flux",
+        "activity_factors",
+        "gas_contribution",
+        "forward_unit",
+        "reverse_unit"
+      ],
+      "properties": {
+        "reaction_id": {
+          "type": "string"
+        },
+        "reversible": {
+          "type": "boolean"
+        },
+        "kf": {
+          "type": "number"
+        },
+        "kr": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "forward_flux": {
+          "type": "number"
+        },
+        "reverse_flux": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "net_flux": {
+          "type": "number"
+        },
+        "activity_factors": {
+          "type": "object"
+        },
+        "gas_contribution": {
+          "type": "object"
+        },
+        "forward_unit": {
+          "type": "string"
+        },
+        "reverse_unit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  },
+  "if": {
+    "properties": {
+      "status": {
+        "const": "analyzed"
+      }
+    }
+  },
+  "then": {
+    "type": "object",
+    "required": [
+      "scope",
+      "question_id",
+      "ticket_id",
+      "run_id",
+      "temperature_K",
+      "partial_pressures_bar",
+      "coverage",
+      "utilization",
+      "phase_comparison",
+      "rates",
+      "tof",
+      "selectivity",
+      "validation"
+    ],
+    "properties": {
+      "scope": {
+        "type": "string"
+      },
+      "question_id": {
+        "type": "string"
+      },
+      "ticket_id": {
+        "type": "string"
+      },
+      "run_id": {
+        "type": "string"
+      },
+      "temperature_K": {
+        "type": "number"
+      },
+      "partial_pressures_bar": {
+        "type": "object"
+      },
+      "utilization": {
+        "type": "object"
+      },
+      "phase_comparison": {
+        "type": "object"
+      },
+      "rates": {
+        "type": "object",
+        "required": [
+          "reactions",
+          "gas_net_production",
+          "steady_state_residual"
+        ],
+        "properties": {
+          "reactions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/rate"
+            }
+          },
+          "gas_net_production": {
+            "type": "object"
+          },
+          "steady_state_residual": {
+            "type": "number"
+          }
+        }
+      },
+      "tof": {
+        "type": "object",
+        "required": [
+          "overall",
+          "products",
+          "extent_per_reference_s",
+          "overall_stoichiometry"
+        ],
+        "properties": {
+          "overall": {
+            "type": "object"
+          },
+          "products": {
+            "type": "object"
+          },
+          "extent_per_reference_s": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "overall_stoichiometry": {
+            "type": [
+              "object",
+              "null"
+            ]
+          }
+        }
+      },
+      "selectivity": {
+        "type": "object",
+        "required": [
+          "molar",
+          "element_selectivity",
+          "production",
+          "consumption"
+        ],
+        "properties": {
+          "molar": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "element_selectivity": {
+            "type": "object"
+          },
+          "production": {
+            "type": "object"
+          },
+          "consumption": {
+            "type": "object"
+          }
+        }
+      },
+      "validation": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "const": "passed"
+          }
+        }
+      }
+    },
+    "allOf": [
+      {
+        "if": {
+          "properties": {
+            "format": {
+              "const": "mkm-kinetic-analysis/2"
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "coverage": {
+              "type": "array",
+              "items": {
+                "$ref": "mkm_coverage.schema.json#/$defs/molecule"
+              }
+            },
+            "utilization": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "mkm_coverage.schema.json#/$defs/inventory"
+              }
+            },
+            "validation": {
+              "type": "object",
+              "required": [
+                "coverage_status"
+              ],
+              "properties": {
+                "coverage_status": {
+                  "enum": [
+                    "partial",
+                    "complete"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "else": {
+          "properties": {
+            "coverage": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/coverage"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "else": {
+    "type": "object",
+    "required": [
+      "coverage",
+      "rates",
+      "tof",
+      "selectivity",
+      "utilization",
+      "missing",
+      "validation"
+    ],
+    "properties": {
+      "coverage": {
+        "type": "null"
+      },
+      "rates": {
+        "type": "null"
+      },
+      "tof": {
+        "type": "null"
+      },
+      "selectivity": {
+        "type": "null"
+      },
+      "utilization": {
+        "type": "null"
+      },
+      "missing": {
+        "type": "object"
+      },
+      "validation": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "const": "kinetic_analysis_blocked"
+          }
+        }
+      },
+      "format": {
+        "const": "mkm-kinetic-analysis/1"
+      }
+    }
+  }
+}

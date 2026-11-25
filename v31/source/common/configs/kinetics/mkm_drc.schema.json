@@ -1,0 +1,732 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Paired transition-state DRC benchmark",
+  "$defs": {
+    "rate": {
+      "type": "object",
+      "required": [
+        "kf",
+        "kr",
+        "forward_unit",
+        "reverse_unit",
+        "net_flux",
+        "forward_flux",
+        "reverse_flux",
+        "flux_unit",
+        "reaction_free_energy_eV",
+        "forward_activation_free_energy_eV",
+        "reverse_activation_free_energy_eV",
+        "native_log_balance_residual"
+      ],
+      "properties": {
+        "kf": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "kr": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "forward_unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reverse_unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "net_flux": {
+          "type": "number"
+        },
+        "forward_flux": {
+          "type": "number",
+          "minimum": 0
+        },
+        "reverse_flux": {
+          "type": "number",
+          "minimum": 0
+        },
+        "flux_unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reaction_free_energy_eV": {
+          "type": "number"
+        },
+        "forward_activation_free_energy_eV": {
+          "type": "number"
+        },
+        "reverse_activation_free_energy_eV": {
+          "type": "number"
+        },
+        "native_log_balance_residual": {
+          "type": "number"
+        }
+      }
+    },
+    "perturbation": {
+      "type": "object",
+      "required": [
+        "parent_dataset_sha256",
+        "parent_network_sha256",
+        "reaction_id",
+        "sign",
+        "delta_eV",
+        "temperature_K",
+        "parent_gibbs_eV",
+        "derived_gibbs_eV",
+        "parent_parameter_sha256",
+        "method"
+      ],
+      "properties": {
+        "parent_dataset_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "parent_network_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "reaction_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sign": {
+          "enum": [
+            1,
+            -1
+          ]
+        },
+        "delta_eV": {
+          "enum": [
+            0.01,
+            0.005
+          ]
+        },
+        "temperature_K": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "parent_gibbs_eV": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "derived_gibbs_eV": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "parent_parameter_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "method": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "case": {
+      "type": "object",
+      "required": [
+        "run_id",
+        "run_receipt_sha256",
+        "network_version",
+        "dataset_version",
+        "source_hashes",
+        "native_hashes",
+        "perturbation",
+        "convergence",
+        "scientific_validation",
+        "validation",
+        "steady_state_residual",
+        "runtime_s",
+        "net_tof_per_site_pair_s",
+        "product_based_tof_per_site_pair_s",
+        "rates",
+        "coverage",
+        "vacancies",
+        "site_residuals",
+        "element_balance"
+      ],
+      "properties": {
+        "run_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "run_receipt_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "network_version": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "dataset_version": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "source_hashes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "native_hashes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "perturbation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/perturbation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "convergence": {
+          "const": "converged"
+        },
+        "scientific_validation": {
+          "const": "validated_within_scope"
+        },
+        "validation": {
+          "type": "object",
+          "required": [
+            "status"
+          ],
+          "properties": {
+            "status": {
+              "const": "passed"
+            }
+          }
+        },
+        "steady_state_residual": {
+          "type": "number",
+          "minimum": 0
+        },
+        "runtime_s": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "net_tof_per_site_pair_s": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "product_based_tof_per_site_pair_s": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "rates": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/rate"
+          }
+        },
+        "coverage": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "vacancies": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "site_residuals": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "element_balance": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": [
+              "produced",
+              "consumed",
+              "residual"
+            ],
+            "properties": {
+              "produced": {
+                "type": "number"
+              },
+              "consumed": {
+                "type": "number"
+              },
+              "residual": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    "changes": {
+      "type": "object",
+      "required": [
+        "coverage",
+        "vacancies",
+        "flux"
+      ],
+      "properties": {
+        "coverage": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "vacancies": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "flux": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": [
+              "forward_flux",
+              "reverse_flux",
+              "net_flux"
+            ],
+            "properties": {
+              "forward_flux": {
+                "type": "number"
+              },
+              "reverse_flux": {
+                "type": "number"
+              },
+              "net_flux": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    "step_summary": {
+      "type": "object",
+      "required": [
+        "delta_eV",
+        "central",
+        "positive_side",
+        "negative_side",
+        "changes_from_baseline",
+        "residuals"
+      ],
+      "properties": {
+        "delta_eV": {
+          "enum": [
+            0.01,
+            0.005
+          ]
+        },
+        "central": {
+          "type": "number"
+        },
+        "positive_side": {
+          "type": "number"
+        },
+        "negative_side": {
+          "type": "number"
+        },
+        "changes_from_baseline": {
+          "type": "object",
+          "required": [
+            "plus",
+            "minus"
+          ],
+          "properties": {
+            "plus": {
+              "$ref": "#/$defs/changes"
+            },
+            "minus": {
+              "$ref": "#/$defs/changes"
+            }
+          }
+        },
+        "residuals": {
+          "type": "object",
+          "required": [
+            "plus",
+            "minus"
+          ]
+        }
+      }
+    }
+  },
+  "type": "object",
+  "required": [
+    "format",
+    "scope",
+    "reaction_id",
+    "temperature_K",
+    "partial_pressures_bar",
+    "delta_eV",
+    "kBT_eV",
+    "convention",
+    "observable",
+    "normalization",
+    "drc",
+    "independent_product_drc",
+    "dimensionless",
+    "outside_zero_to_one",
+    "cases",
+    "changes_from_baseline",
+    "budget",
+    "fe110"
+  ],
+  "properties": {
+    "format": {
+      "const": "mkm-ts-drc/1"
+    },
+    "scope": {
+      "const": "synthetic_benchmark"
+    },
+    "reaction_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "temperature_K": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "partial_pressures_bar": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number",
+        "minimum": 0
+      }
+    },
+    "delta_eV": {
+      "enum": [
+        0.01,
+        0.005
+      ]
+    },
+    "kBT_eV": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "convention": {
+      "type": "string",
+      "minLength": 1
+    },
+    "observable": {
+      "type": "string",
+      "minLength": 1
+    },
+    "normalization": {
+      "type": "object",
+      "required": [
+        "reference_basis"
+      ],
+      "properties": {
+        "reference_basis": {
+          "const": "reference_site_pair"
+        }
+      }
+    },
+    "drc": {
+      "type": "number"
+    },
+    "independent_product_drc": {
+      "type": "number"
+    },
+    "dimensionless": {
+      "const": true
+    },
+    "outside_zero_to_one": {
+      "type": "boolean"
+    },
+    "cases": {
+      "type": "object",
+      "required": [
+        "baseline",
+        "plus",
+        "minus"
+      ],
+      "properties": {
+        "baseline": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/case"
+            },
+            {
+              "properties": {
+                "perturbation": {
+                  "type": "null"
+                }
+              }
+            }
+          ]
+        },
+        "plus": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/case"
+            },
+            {
+              "properties": {
+                "perturbation": {
+                  "type": "object",
+                  "required": [
+                    "sign"
+                  ],
+                  "properties": {
+                    "sign": {
+                      "const": 1
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "minus": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/case"
+            },
+            {
+              "properties": {
+                "perturbation": {
+                  "type": "object",
+                  "required": [
+                    "sign"
+                  ],
+                  "properties": {
+                    "sign": {
+                      "const": -1
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "changes_from_baseline": {
+      "type": "object",
+      "required": [
+        "plus",
+        "minus"
+      ],
+      "properties": {
+        "plus": {
+          "$ref": "#/$defs/changes"
+        },
+        "minus": {
+          "$ref": "#/$defs/changes"
+        }
+      }
+    },
+    "budget": {
+      "type": "object",
+      "required": [
+        "elapsed_s",
+        "remaining_s",
+        "pair_sha256",
+        "per_run_s",
+        "total_s",
+        "max_retries",
+        "max_parallel"
+      ],
+      "properties": {
+        "elapsed_s": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 480
+        },
+        "remaining_s": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 480
+        },
+        "pair_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "per_run_s": {
+          "const": 210
+        },
+        "total_s": {
+          "const": 480
+        },
+        "max_retries": {
+          "const": 0
+        },
+        "max_parallel": {
+          "const": 1
+        }
+      }
+    },
+    "fe110": {
+      "type": "object",
+      "required": [
+        "drc",
+        "qualification_source",
+        "gaps"
+      ],
+      "properties": {
+        "drc": {
+          "type": "null"
+        },
+        "qualification_source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "gaps": {
+          "type": "object"
+        }
+      }
+    },
+    "step_size_validation": {
+      "type": "object",
+      "required": [
+        "coarse",
+        "fine",
+        "reference_result_sha256",
+        "absolute_difference",
+        "tolerance",
+        "passed",
+        "criterion",
+        "next_pair_proposal"
+      ],
+      "properties": {
+        "coarse": {
+          "$ref": "#/$defs/step_summary"
+        },
+        "fine": {
+          "$ref": "#/$defs/step_summary"
+        },
+        "reference_result_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "absolute_difference": {
+          "type": "number",
+          "minimum": 0
+        },
+        "tolerance": {
+          "type": "number",
+          "minimum": 0.002
+        },
+        "passed": {
+          "type": "boolean"
+        },
+        "criterion": {
+          "type": "string"
+        },
+        "next_pair_proposal": {
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "delta_eV": {
+            "const": 0.01
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "cases": {
+            "properties": {
+              "plus": {
+                "properties": {
+                  "perturbation": {
+                    "properties": {
+                      "delta_eV": {
+                        "const": 0.01
+                      }
+                    }
+                  }
+                }
+              },
+              "minus": {
+                "properties": {
+                  "perturbation": {
+                    "properties": {
+                      "delta_eV": {
+                        "const": 0.01
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "delta_eV": {
+            "const": 0.005
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "cases": {
+            "properties": {
+              "plus": {
+                "properties": {
+                  "perturbation": {
+                    "properties": {
+                      "delta_eV": {
+                        "const": 0.005
+                      }
+                    }
+                  }
+                }
+              },
+              "minus": {
+                "properties": {
+                  "perturbation": {
+                    "properties": {
+                      "delta_eV": {
+                        "const": 0.005
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "step_size_validation"
+        ]
+      }
+    }
+  ]
+}

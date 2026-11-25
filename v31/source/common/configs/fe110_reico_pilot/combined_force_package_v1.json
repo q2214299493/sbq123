@@ -1,0 +1,66 @@
+{
+  "purpose": "LOCAL_FORCE_DATA_PACKAGE_ONLY_NO_TRAINING",
+  "inputs": {
+    "legacy_manifest": {
+      "path": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_comparison_20261019_v1/control/training_manifest.json",
+      "sha256": "b6372a96646eaf8df8918c776ff7677b9b9842dd7c6ef3ced1aa764dae6145b1"
+    },
+    "static_labels": {
+      "path": "calculations/fe110_reico_pilot300_20261022/force_label_qc_20261023_v1/all_label_qc_local_only.json",
+      "sha256": "bb1b6e9e8baf239060609c4c72328c42024f8e211158bf4a87729bf1aca83c94"
+    },
+    "incremental_labels": {
+      "path": "calculations/fe110_reico_pilot300_20261022/status_lowforce_check_20261023_v1/incremental_qc_local_only.json",
+      "sha256": "053c50a80c43c4c4e843044aeefdd812daf073597f2da29e7f8499f85e2b7348"
+    },
+    "static_review": {
+      "path": "calculations/fe110_reico_pilot300_20261022/force_label_qc_20261023_v1/review_summary.json",
+      "sha256": "f5c391f5a6c3ab5bc933b2bee1b782b7fe720297e0fb502874152cbfcedaa5ba"
+    },
+    "incremental_review": {
+      "path": "calculations/fe110_reico_pilot300_20261022/status_lowforce_check_20261023_v1/incremental_qc_summary.json",
+      "sha256": "8be1886d586804d41111f0c9fde102487e305cfe04b915c2370c6b1168b61abf"
+    },
+    "supplement": {
+      "path": "calculations/fe110_reico_pilot300_20261022/10b_lowforce_review_20261023_v1/force_supplement.json",
+      "sha256": "5d2de6126cd6fb228a5c826b022f4910e630f047bd0dffa5dee30797c7b46cb5"
+    },
+    "supplement_review": {
+      "path": "calculations/fe110_reico_pilot300_20261022/10b_lowforce_review_20261023_v1/review_summary.json",
+      "sha256": "2bab6a87ccdf72da75d65945255832d3292dc10eb746b0e9db9518d65f32ccb0"
+    },
+    "frozen_selection": {
+      "path": "calculations/fe110_reico_pilot300_20261022/sampling93_v1/selection/selected_frames.json",
+      "sha256": "022e46102437678a541c587bbd30aaa1e0db27992ea8fcedca3092343701cd34"
+    },
+    "reserved_config": {
+      "path": "configs/fe110_reico_pilot/coverage_audit_v1.json",
+      "sha256": "f301e11c0f1dd500a67359485da9966775bf7d4d560e111c71ab86bf944a9cf0"
+    },
+    "clean_slab": {
+      "path": "calculations/true_fe110_clean_20260629/results/job_9557161/CONTCAR",
+      "sha256": "3337ad4e89a2719551035fadbd5082a60c12cafcadc14748d8b48a198379109d"
+    }
+  },
+  "expected_source_counts": {
+    "legacy": {
+      "train": 248,
+      "development": 60,
+      "heldout": 46,
+      "observed_heldout": 16
+    },
+    "static": {
+      "train": 112,
+      "development": 18,
+      "heldout": 7
+    },
+    "10B_train": 6
+  },
+  "output": "calculations/fe110_reico_pilot300_20261022/combined_force_package_20261023_v2",
+  "isolation_A": 0.2,
+  "sampling": "uniform_frames_like_existing_control",
+  "training_target": "forces_only",
+  "energy_loss_coefficient": 0,
+  "training_authorized": false,
+  "new_DFT": false
+}

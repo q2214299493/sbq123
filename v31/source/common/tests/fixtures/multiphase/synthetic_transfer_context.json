@@ -1,0 +1,12 @@
+{
+  "scope": "Synthetic bookkeeping assumptions for a single declared test cell. These are model labels and integer counts.",
+  "conditions": {"temperature_K": 320, "pressure_Pa": 100000, "partial_pressures": null},
+  "reversibility_basis": "Both directions are defined for this synthetic test.",
+  "inventory_reference": "test-cell",
+  "sites": [
+    {"site_id": "pool-a", "physical_site_ids": ["a1", "a2", "a3"]},
+    {"site_id": "pool-b", "physical_site_ids": ["b1", "b2", "b3", "b4", "b5"]}
+  ],
+  "populations_before": {"x-a": 2, "x-b": 1},
+  "populations_after": {"x-a": 1, "x-b": 2}
+}
