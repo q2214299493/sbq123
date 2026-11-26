@@ -7,7 +7,14 @@ source_version: 3a1bb3f461147a7dc9b5df5efca89de621d27f38
 source_version_role: B6 base commit
 source_branch: codex/b6-documentation-data-governance
 evidence_kind: CURRENT_CODE_STATE
+readiness_baseline:
+  as_of: '2026-11-26T14:36:45+00:00'
+  source_version: 32142dbd506d8400e4394fd4e7d36b0bebeda734
+  source_tree: bc4bd6b70770994fa05a692b0cf873898092b89e
+  source_branch: codex/v31-final-architecture-closure
+  source_scope: Accepted V3.1 software baseline with B6 module observations retained at their recorded scope.
 owners:
+  software_architecture: SBQ123_SYSTEM_ARCHITECTURE.md
   scientific_method: docs/01_METHOD_PROTOCOL.md
   scientific_branch: configs/true_fe110_production.yaml
   current_state: docs/02_CURRENT_STATE.md
