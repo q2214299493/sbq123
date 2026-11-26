@@ -151,7 +151,7 @@ def render_review(dest, structures, names, rows, energies):
     for n, atoms in enumerate(structures):
         axis = ax.flat[n]
         cart = atoms.frac @ atoms.cell
-        for j, (symbol, pos) in enumerate(zip(atoms.labels, cart)):
+        for j, (symbol, pos) in enumerate(zip(atoms.labels, cart, strict=True)):
             if symbol == "Fe" and pos[2] < cart[:45, 2].max()-0.5:
                 continue
             axis.scatter(pos[0], pos[2], s=85 if symbol == "Fe" else 65, color=colors[symbol])

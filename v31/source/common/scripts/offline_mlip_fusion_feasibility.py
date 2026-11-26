@@ -627,7 +627,7 @@ def sample_metric_rows(
             reference = np.asarray([sample.vasp_energy for sample in group])
             predicted = np.asarray([predictions[sample.sample_id].energy for sample in group])
             errors = (predicted - np.min(predicted)) - (reference - np.min(reference))
-            for sample, error in zip(group, errors):
+            for sample, error in zip(group, errors, strict=True):
                 relative_errors[(model, sample.sample_id)] = float(error)
     rows = []
     for model in MODEL_ORDER:
@@ -800,13 +800,13 @@ def promotion_assessment(
         matris_energy, meta_energy, resamples=resamples, seed=seed + 1
     )
     force_p = exact_sign_flip_pvalue(
-        baseline - candidate for baseline, candidate in zip(matris_force, meta_force)
+        baseline - candidate for baseline, candidate in zip(matris_force, meta_force, strict=True)
     )
     energy_p = exact_sign_flip_pvalue(
-        baseline - candidate for baseline, candidate in zip(matris_energy, meta_energy)
+        baseline - candidate for baseline, candidate in zip(matris_energy, meta_energy, strict=True)
     )
-    force_wins = sum(candidate < baseline for baseline, candidate in zip(matris_force, meta_force))
-    energy_wins = sum(candidate < baseline for baseline, candidate in zip(matris_energy, meta_energy))
+    force_wins = sum(candidate < baseline for baseline, candidate in zip(matris_force, meta_force, strict=True))
+    energy_wins = sum(candidate < baseline for baseline, candidate in zip(matris_energy, meta_energy, strict=True))
     max_regressions = []
     for reaction in reactions:
         baseline_max = by_model["matris"][reaction]["force_vector_max_eV_per_A"]
@@ -896,7 +896,7 @@ def comparisons_against_matris(
             "force": {
                 "wins": sum(
                     candidate < baseline
-                    for baseline, candidate in zip(force_baseline, force_candidate)
+                    for baseline, candidate in zip(force_baseline, force_candidate, strict=True)
                 ),
                 "reaction_count": len(reactions),
                 "macro_relative_improvement": bootstrap_relative_improvement(
@@ -907,13 +907,13 @@ def comparisons_against_matris(
                 ),
                 "one_sided_exact_sign_flip_p": exact_sign_flip_pvalue(
                     baseline - candidate
-                    for baseline, candidate in zip(force_baseline, force_candidate)
+                    for baseline, candidate in zip(force_baseline, force_candidate, strict=True)
                 ),
             },
             "relative_energy": {
                 "wins": sum(
                     candidate < baseline
-                    for baseline, candidate in zip(energy_baseline, energy_candidate)
+                    for baseline, candidate in zip(energy_baseline, energy_candidate, strict=True)
                 ),
                 "reaction_count": len(energy_reactions),
                 "macro_relative_improvement": bootstrap_relative_improvement(
@@ -924,7 +924,7 @@ def comparisons_against_matris(
                 ),
                 "one_sided_exact_sign_flip_p": exact_sign_flip_pvalue(
                     baseline - candidate
-                    for baseline, candidate in zip(energy_baseline, energy_candidate)
+                    for baseline, candidate in zip(energy_baseline, energy_candidate, strict=True)
                 ),
             },
         }

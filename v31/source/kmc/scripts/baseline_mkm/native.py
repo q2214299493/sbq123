@@ -3,7 +3,7 @@ import math
 
 from scripts.native_inputs import conditions, integer, token
 from scripts.scientific_validation import finite_number
-from scripts.thermochemistry.harmonic import H_J_S, KB, KB_J_K
+from scripts.physical_constants import H_J_S, KB, KB_J_K
 
 
 def site_token(site, indices):

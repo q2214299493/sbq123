@@ -1,5 +1,6 @@
 """Resolve scientific analysis evidence against release-controlled review identities."""
 from pathlib import Path
+import zipfile
 
 from scripts.artifact_io import canonical_json, require_sha256, sha256_file, sha256_json
 from scripts.multiphase_contracts import read_artifact
@@ -27,20 +28,51 @@ def same_json_content(left, right):
         raise ValueError("Expected JSON content") from exc
 
 
+def _reviewed_runs():
+    replay, _ = read_artifact(resource_path(_REPLAY_PATH), expected_sha256=_REPLAY_SHA256)
+    return [(family, row) for family, engine in replay["replay"].items() for row in engine["runs"]]
+
+
+def reviewed_event(network_version, dataset_version, reaction_id):
+    """Read the local event from the unique reviewed dataset content for this model."""
+    refs = [row["provenance"]["dataset"] for _, row in _reviewed_runs()
+            if row["network_version"] == network_version and row["dataset_version"] == dataset_version]
+    if len({ref["sha256"] for ref in refs}) != 1:
+        raise ValueError("No unique reviewed source for local event geometry")
+    ref = refs[0]
+    path, separator, member = ref["path"].partition("!/")
+    source = resource_path(path)
+    if separator:
+        with zipfile.ZipFile(source) as archive:
+            if archive.namelist().count(member) != 1:
+                raise ValueError("Expected one reviewed dataset archive member")
+            dataset, _ = read_artifact(zipfile.Path(archive, member), expected_sha256=ref["sha256"])
+    else:
+        dataset, _ = read_artifact(source, expected_sha256=ref["sha256"])
+    if dataset["network_version"] != network_version or dataset["dataset_version"] != dataset_version:
+        raise ValueError("Reviewed local event belongs to another model")
+    events = [row["model"].get("local_event") for row in dataset["reactions"] if row["reaction_id"] == reaction_id]
+    if len(events) != 1:
+        raise ValueError("Expected one reviewed reaction model")
+    return events[0]
+
+
+def approved_replay_row(selector):
+    selector = require_sha256(selector, label="Rate digest")
+    matches = [(family, row) for family, row in _reviewed_runs() if row["output_sha256"] == selector]
+    if len(matches) != 1:
+        raise ValueError("Rate artifact has no unique independently reviewed replay")
+    return matches[0]
+
+
 def reviewed_rates(payload, reference):
     """The caller's digest selects a replay row; only the release pin authenticates it."""
-    replay, _ = read_artifact(resource_path(_REPLAY_PATH), expected_sha256=_REPLAY_SHA256)
     if not isinstance(reference, dict):
         raise ValueError("Missing rate dataset reference")
+    _, row = approved_replay_row(reference.get("sha256"))
     if "approval" in reference:
         path = _locator(reference["approval"], _REPLAY_SHA256)
         read_artifact(path, expected_sha256=_REPLAY_SHA256)
-    selector = require_sha256(reference.get("sha256"), label="Rate digest")
-    matches = [row for engine in replay["replay"].values() for row in engine["runs"]
-               if row["output_sha256"] == selector]
-    if len(matches) != 1:
-        raise ValueError("Rate artifact has no unique independently reviewed replay")
-    row, = matches
     path = _locator(reference, row["output_sha256"])
     rates, digest = read_artifact(path, expected_sha256=row["output_sha256"])
     if not same_json_content(rates, payload):

@@ -10,7 +10,7 @@ from scripts.baseline_mkm.drc_step_size import project_tolerance
 from scripts.baseline_mkm.sensitivity_plan import LIMITS, specifications
 from scripts.baseline_mkm.single_point_result import check_close
 from scripts.scientific_validation import finite_number
-from scripts.thermochemistry.harmonic import KB
+from scripts.physical_constants import KB
 
 
 def estimates(baseline, plus, minus, spec, temperature):

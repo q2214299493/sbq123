@@ -876,7 +876,7 @@ def force_metrics(
 
     component_errors: list[float] = []
     vector_errors: list[float] = []
-    for label, prediction, indices in zip(labels, predictions, movable_indices):
+    for label, prediction, indices in zip(labels, predictions, movable_indices, strict=True):
         reference = np.asarray(label, dtype=float)[indices]
         predicted = np.asarray(prediction, dtype=float)[indices]
         if reference.shape != predicted.shape or reference.ndim != 2 or reference.shape[1] != 3:
@@ -1128,7 +1128,7 @@ def assess_benchmark(args: argparse.Namespace) -> None:  # noqa: C901
                 for sample in samples
             ]
             predicted_relative = [value - min(prediction) for value in prediction]
-            errors = [pred - ref for pred, ref in zip(predicted_relative, vasp_relative)]
+            errors = [pred - ref for pred, ref in zip(predicted_relative, vasp_relative, strict=True)]
             group = {
                 "backend": backend,
                 "subset": subset,
@@ -1146,7 +1146,7 @@ def assess_benchmark(args: argparse.Namespace) -> None:  # noqa: C901
             }
             summary["relative_energy_groups"].append(group)
             for sample, reference, predicted, error in zip(
-                samples, vasp_relative, predicted_relative, errors
+                samples, vasp_relative, predicted_relative, errors, strict=True
             ):
                 energy_rows.append(
                     group

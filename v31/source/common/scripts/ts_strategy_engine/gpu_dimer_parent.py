@@ -74,7 +74,7 @@ def validate_reviewed_gpu_parent(analysis, *, image_paths=None, policy=None):
             checks["gpu_exact_reviewed_triad"] = bool(
                 len(image_paths) == 3 and all(
                     sha256_file(path) == row["sha256"]
-                    for path, row in zip(image_paths, selected)
+                    for path, row in zip(image_paths, selected, strict=True)
                 )
             )
         checks["gpu_live_policy_bound"] = (

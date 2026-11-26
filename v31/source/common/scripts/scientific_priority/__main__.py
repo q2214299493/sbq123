@@ -6,6 +6,7 @@ from pathlib import Path
 from scripts.artifact_io import load_json_object as read, sha256_json
 from .benchmark import fe_inventory, read_sources, synthetic
 from .engine import rank
+from .structure_binding import validate_structures
 from .proposals import proposals, publish, review
 from .evidence import registry_inventory
 from scripts.baseline_mkm.single_point import ticket_binding
@@ -77,6 +78,12 @@ def network_blockers(candidate, documents):
     if not candidate["reaction_ids"] or set(candidate["reaction_ids"]) - reactions.keys():
         return ["Candidate reaction absent from the parent network"]
     connected = [reactions[k] for k in candidate["reaction_ids"]]
+    try:
+        reason = validate_structures(candidate, network, fixture=documents.get("fixture", {}).get("structures", {}))
+    except ValueError as exc:
+        return [str(exc)]
+    if reason:
+        return [reason]
     for field in ("phase_ids", "surface_ids"):
         if set(candidate[field]) - {s for row in connected for s in row[field]}:
             return ["Candidate " + field + " differ from the bound reaction context"]
@@ -93,6 +100,13 @@ def network_blockers(candidate, documents):
 def import_packet(path, registry=None, tickets=None):
     data = read(path)
     documents = read_sources(path.resolve().parent, data["sources"])
+    # Keep the producer's selected inputs resolvable when ranking or reviewing from another cwd.
+    for name, document in documents.items():
+        if isinstance(document, dict) and document.get("format") == "reaction-network/1":
+            data["planning_network_source"] = name
+            data["sources"][name]["path"] = str((path.resolve().parent / data["sources"][name]["path"]).resolve())
+        if name == "fixture":
+            data["sources"][name]["path"] = str((path.resolve().parent / data["sources"][name]["path"]).resolve())
     verify_metric_values(data, documents)
     for c in data["candidates"]:
         c.setdefault("blockers", []).extend(network_blockers(c, documents))

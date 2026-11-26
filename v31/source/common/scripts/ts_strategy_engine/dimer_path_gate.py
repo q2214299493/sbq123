@@ -94,7 +94,7 @@ def _evaluate_gpu_ml_neb_parent(
     triad_hashes = [sha256_file(path) for path in image_paths]
     manifest_triad_bound = all(
         manifest_rows.get(name, {}).get("structure_sha256") == digest
-        for name, digest in zip(image_names, triad_hashes)
+        for name, digest in zip(image_names, triad_hashes, strict=True)
     )
     dft_fingerprints = [
         row.get("dft_fingerprint_sha256") if isinstance(row, dict) else None
@@ -106,7 +106,7 @@ def _evaluate_gpu_ml_neb_parent(
             and row.get("structure_sha256") == digest
             and row.get("force_source") == rule["vasp_force_source"]
             and row.get("scheduler_evidence_accepted") is True
-            for row, digest in zip(triad_rows, triad_hashes)
+            for row, digest in zip(triad_rows, triad_hashes, strict=True)
         )
     )
     compatible_dft = bool(

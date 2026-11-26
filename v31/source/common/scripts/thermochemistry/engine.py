@@ -284,7 +284,7 @@ def calculate(documents, *, operation="thermochemistry", ts_review=None, phase=N
               "electronic_sources": sources, "states": corrections, "state_free_energy_ev": state_g,
               "reaction": reaction, "issues": problems, "unresolved_one_of": intake["unresolved_one_of"],
               "intake_diagnostics": {key: fields[key] for key in intake["unresolved_fields"]},
-              "intake_warnings": intake["warnings"], "condition_values": dict(zip(("temperature_k", "standard_state", "pressure_pa"), conditions)),
+              "intake_warnings": intake["warnings"], "condition_values": dict(zip(("temperature_k", "standard_state", "pressure_pa"), conditions, strict=True)),
               "scoped_unverified_inputs": limited, "status": "partial" if problems else "scoped_estimate" if limited else "complete",
               "execution_authorized": False}
     validate_finite_tree(result, "reaction thermochemistry")

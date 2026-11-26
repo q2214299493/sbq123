@@ -41,7 +41,7 @@ def structure_equivalence_fingerprint(structure: Poscar) -> str:
     for index, label in enumerate(structure.labels):
         _, distances = find_mic((coordinates - coordinates[index]) @ cell, cell, pbc=True)
         rows.append((label, sorted((other, round(float(distance), 5))
-                                  for other, distance in zip(structure.labels, distances))))
+                                  for other, distance in zip(structure.labels, distances, strict=True))))
     return sha256_json({"volume": round(abs(float(np.linalg.det(cell))), 5), "neighborhoods": sorted(rows)})
 
 

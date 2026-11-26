@@ -3,7 +3,7 @@ import math
 import re
 from collections import Counter
 
-from scripts.thermochemistry.harmonic import H_J_S, KB, KB_J_K
+from scripts.physical_constants import H_J_S, KB, KB_J_K
 
 
 def cat_side(text):

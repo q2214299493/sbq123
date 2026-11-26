@@ -57,7 +57,7 @@ import pytest
 modules = json.loads((Path(__file__).resolve().parent / "acceptance" / (args.role + "-modules.json")).read_bytes())
 selection = args.ids or ["tests/" + name + ".py" for name in modules]
 if not args.ids:
-    selection.append("tests/test_v31_architecture.py")
+    selection.extend(["tests/test_v31_architecture.py", "tests/test_v31_closure.py"])
     if args.role == "mkm":
         selection.extend(["tests/test_mkm_drc.py", "tests/test_kinetics_artifact_lifecycle.py",
                           "tests/test_execution_backends.py", "tests/test_aqcat25_handoff.py",

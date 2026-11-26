@@ -117,7 +117,7 @@ def _transfer(evidence: dict, target: dict | None) -> None:
 def assess_evidence(evidence: dict, *, target: dict | None = None) -> dict:
     """Derive the highest supported stage; ignore all supplied stage/PASS flags."""
     state = "IMPORTED"
-    for next_state, check in zip(STATES[1:], (_schema, _source, _content, _review, _transfer)):
+    for next_state, check in zip(STATES[1:], (_schema, _source, _content, _review, _transfer), strict=True):
         try:
             check(evidence, target) if next_state == "TRANSFERABLE" else check(evidence)
         except (KeyError, TypeError, ValueError, AttributeError) as exc:

@@ -1,10 +1,13 @@
 """Objective-specific normalized scores and Pareto fronts for scientific proposals."""
 
+from copy import deepcopy
+
 from scripts.artifact_io import sha256_json
 from scripts.scientific_validation import finite_number
-from scripts.thermochemistry.harmonic import KB
+from scripts.physical_constants import KB
 
 from .evidence import OPERATIONS, digest, match_evidence, reliability
+from .structure_binding import qualified_ranking_candidate, ranking_structure_context
 
 DIMENSIONS = {
     "kinetic_importance",
@@ -202,14 +205,16 @@ def pareto(rows):
         front += 1
 
 
-def rank(data, objective):
+def rank(data, objective, *, observation_network=None):
     validate_objective(objective)
     for record in [*data["metrics"], *data["reliability"], *data["evidence"]]:
         if record.get("source") not in data["sources"]:
             raise ValueError("Unbound source for scientific evidence")
     if len({c["id"] for c in data["candidates"]}) != len(data["candidates"]):
         raise ValueError("Duplicate candidate identity")
-    rows = [evaluate(c, data, objective) for c in data["candidates"]]
+    network, fixture = (observation_network, None) if observation_network is not None else ranking_structure_context(data, objective)
+    checked = (qualified_ranking_candidate(c, network, fixture) for c in data["candidates"])
+    rows = [evaluate(c, data, objective) for c in checked]
     rows.sort(key=lambda r: (-(r["score"] or 0), r["candidate"]["id"]))
     seen = {}
     for row in rows:
@@ -230,7 +235,8 @@ def rank(data, objective):
     ranked = [r for r in rows if r["status"] == "ranked"]
     pareto(ranked)
     return dict(
-        format="scientific-priority/1",
+        format="scientific-priority/2",
+        ranking_inputs=deepcopy(data),
         objective=objective,
         provenance=data["sources"],
         inventory_source=data.get("inventory_source"),

@@ -86,8 +86,8 @@ def compare_states(current: dict, reference: dict) -> dict[str, float]:
         finite_number(value, "SCF state")
     return {
         "energy_eV": abs(current["energy"] - reference["energy"]),
-        "force_vector_eV_A": max(math.dist(a, b) for a, b in zip(cf, rf)),
-        "local_moment_muB": max(abs(a - b) for a, b in zip(cm, rm)),
+        "force_vector_eV_A": max(math.dist(a, b) for a, b in zip(cf, rf, strict=True)),
+        "local_moment_muB": max(abs(a - b) for a, b in zip(cm, rm, strict=True)),
         "total_moment_muB": abs(current["total_moment"] - reference["total_moment"]),
     }
 

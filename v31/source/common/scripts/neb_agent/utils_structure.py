@@ -20,7 +20,7 @@ class Poscar:
 
     @property
     def labels(self) -> list[str]:
-        return [symbol for symbol, count in zip(self.symbols, self.counts) for _ in range(count)]
+        return [symbol for symbol, count in zip(self.symbols, self.counts, strict=True) for _ in range(count)]
 
     @property
     def atom_count(self) -> int:
@@ -141,7 +141,7 @@ def write_xyz(path: Path, structures: list[Poscar], comments: list[str] | None =
         lines.append(str(structure.atom_count))
         lines.append(comments[image_index] if comments else f"image={image_index}")
         cart = structure.frac @ structure.cell
-        for label, position in zip(structure.labels, cart):
+        for label, position in zip(structure.labels, cart, strict=True):
             lines.append(f"{label:2s} {position[0]:16.9f} {position[1]:16.9f} {position[2]:16.9f}")
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n", encoding="ascii")

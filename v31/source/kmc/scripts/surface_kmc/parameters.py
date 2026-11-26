@@ -9,7 +9,7 @@ from scripts.kinetic_parameters.engine import reviewed
 from scripts.kinetic_parameters.laws import exp_rate
 from scripts.kinetic_parameters.prediction import covariance
 from scripts.scientific_validation import finite_number
-from scripts.thermochemistry.harmonic import KB
+from scripts.physical_constants import KB
 
 
 def _barrier(fit, row):

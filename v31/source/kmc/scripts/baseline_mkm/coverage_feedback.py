@@ -8,7 +8,7 @@ from scipy.linalg import orth
 
 from scripts.baseline_mkm import steady_states
 from scripts.kinetic_parameters.laws import mean_field_rate
-from scripts.thermochemistry.harmonic import KB
+from scripts.physical_constants import KB
 
 
 def fluxes(model, child, x, config):

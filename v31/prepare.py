@@ -1,5 +1,6 @@
 """Materialize a checked pair in a fresh external directory. Uses only the standard library."""
 import argparse
+from contextlib import ExitStack
 import hashlib
 import json
 from pathlib import Path
@@ -27,7 +28,10 @@ def install(destination):
         raise ValueError("Role manifest differs from release")
     entries = json.loads(raw)
     destination.mkdir(parents=True)
-    with ZipFile(BASE / "offline-data.zip") as evidence:
+    with ExitStack() as files:
+        evidence = files.enter_context(ZipFile(BASE / "offline-data.zip"))
+        bundled = BASE / "role-sources.zip"
+        sources = files.enter_context(ZipFile(bundled)) if bundled.is_file() else None
         for key, entry in entries.items():
             role, relative = key.split("/", 1)
             root = destination / role
@@ -38,7 +42,7 @@ def install(destination):
                 source = (BASE / entry["source"]).resolve()
                 if not source.is_relative_to(BASE):
                     raise ValueError(f"Invalid source {key}")
-                data = source.read_bytes()
+                data = sources.read(entry["source"]) if sources is not None else source.read_bytes()
             else:
                 data = evidence.read(entry["sha256"])
             if digest(data) != entry["sha256"]:
