@@ -8,7 +8,7 @@ from scripts.artifact_io import load_json_object as read, sha256_file, sha256_js
 from scripts.baseline_mkm.pressure_perturbation import checked_feed
 from scripts.baseline_mkm.ts_perturbation import PARENT, reproduce as reproduce_parent, reviewed_reaction
 from scripts.kinetic_parameters.engine import calculate, check_version, conditions
-from scripts.kinetic_parameters.export import validate_export
+from scripts.kinetic_parameters.export_contract import validate_export
 from scripts.scientific_validation import finite_number
 
 ROOT = Path(__file__).resolve().parents[2]

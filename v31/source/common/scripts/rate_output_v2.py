@@ -102,8 +102,8 @@ def _validate_dimensions(payload, network):
                 raise ValueError("A directional flux was supplied for an excluded coefficient")
 
 
-def convert_native_rate(value, quantity_kind, source_basis, target_basis, *, evidence=None):
-    """Explicit 2.1 conversion. basis_identity produces the hash used by physical bridge evidence."""
+def validate_conversion_bases(source_basis, target_basis, evidence=None):
+    """Validate the complete physical conversion request before applying it to rates."""
     validator = _validator("2.1.0")
 
     def check_part(name, obj):
@@ -114,6 +114,11 @@ def convert_native_rate(value, quantity_kind, source_basis, target_basis, *, evi
     check_part("normalization", target_basis)
     if evidence is not None:
         check_part("conversion_evidence", evidence)
+
+
+def convert_native_rate(value, quantity_kind, source_basis, target_basis, *, evidence=None):
+    """Explicit 2.1 conversion for one rate."""
+    validate_conversion_bases(source_basis, target_basis, evidence)
     return convert_checked_rate(value, quantity_kind, source_basis, target_basis, evidence)
 
 
@@ -155,25 +160,37 @@ def validate_rate_output_v2(payload, *, network=None):
                 raise ValueError(f"source_terms.{group}.{identity}: inconsistent source rate")
 
 
-def validate_network_bound_rate_output(payload, network_path, *, reaction_ids=None):
+class RateIdentityError(ValueError):
+    """A network-qualified rate record lacks a verifiable output identity."""
+
+
+def read_bound_rate_network(payload, network_path, *, reaction_ids=None, expected_network_sha256=None):
     """Qualify a V2.1 record against exact network bytes and an optional explicit subset."""
     if not isinstance(payload, dict) or payload.get("schema_version") != "2.1.0" or network_path is None:
         raise ValueError("Network qualification requires V2.1 and a network artifact")
     raw = Path(network_path).read_bytes()
+    digest = sha256_bytes(raw)
+    if expected_network_sha256 is not None and digest != expected_network_sha256:
+        raise ValueError("Network file differs from independent rate evidence")
     network = decode_unique_json(raw)
     if not isinstance(network, dict):
         raise ValueError("Expected a network object")
     validate_rate_output_v2(payload, network=network)
-    if sha256_bytes(raw) != payload["provenance"]["network"]["sha256"]:
+    if digest != payload["provenance"]["network"]["sha256"]:
         raise ValueError("Network artifact SHA-256 differs from the rate output provenance")
     validate_bound_rows(payload, network, reaction_ids)
     binding = payload.get("output_binding")
     if not binding:
-        raise ValueError("Network qualification requires output dataset and run identity")
+        raise RateIdentityError("Network qualification requires output dataset and run identity")
     if binding["dataset_id"].startswith("rates-"):
         unsigned = {key: value for key, value in binding.items() if key != "dataset_id"}
         if binding["dataset_id"] != "rates-" + sha256_json(dict(payload, output_binding=unsigned)):
-            raise ValueError("Rate output dataset identity differs from its content")
+            raise RateIdentityError("Rate output dataset identity differs from its content")
+    return network
+
+
+def validate_network_bound_rate_output(payload, network_path, *, reaction_ids=None):
+    read_bound_rate_network(payload, network_path, reaction_ids=reaction_ids)
 
 
 def main(argv=None):

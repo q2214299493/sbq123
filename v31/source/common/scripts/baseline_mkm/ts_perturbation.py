@@ -5,7 +5,7 @@ from math import log
 
 from scripts.artifact_io import sha256_json
 from scripts.kinetic_parameters.engine import calculate, check_version, generate
-from scripts.kinetic_parameters.export import validate_export
+from scripts.kinetic_parameters.export_contract import validate_export
 from scripts.scientific_validation import finite_number
 from scripts.thermochemistry.harmonic import KB
 

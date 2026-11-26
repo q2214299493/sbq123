@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 from scripts.artifact_io import load_json_object, sha256_file, write_json_atomic
+from scripts.execution_backends import load_execution_backends
 from scripts.matris_training_exclusions import write_heldout_exclusion_manifest
 from scripts.vasp_inputs import build_fe110_active_learning_force_label
 
@@ -44,6 +45,7 @@ def prepare(
     if source_prediction_batch.get("reaction_id") != plan.get("reaction_id"):
         raise ValueError("source prediction batch reaction mismatch")
 
+    vasp_backend = load_execution_backends().vasp.server_alias
     output.mkdir(parents=True, exist_ok=True)
     gpu_root = output / "gpu_prediction"
     gpu_structures = gpu_root / "structures"
@@ -101,7 +103,7 @@ def prepare(
                 role: source_prediction_batch["models"][role]["checkpoint_sha256"]
                 for role in ("primary", "secondary")
             },
-            "requested_backend": "sunboquan-codex",
+            "requested_backend": vasp_backend,
             "input_profile": input_profile,
             "required_outputs": [
                 "final_TOTEN_force_label_only",

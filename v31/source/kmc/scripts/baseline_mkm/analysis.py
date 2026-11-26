@@ -13,7 +13,7 @@ from scripts.baseline_mkm.single_point import status
 from scripts.baseline_mkm.single_point_result import check_close
 from scripts.baseline_mkm.sensitivity_inputs import reproduce
 from scripts.kinetic_parameters.engine import check_version
-from scripts.kinetic_parameters.export import validate_export
+from scripts.kinetic_parameters.export_contract import validate_export
 from scripts.multiphase_contracts import _unique_keys
 from scripts.registry_mutations import validate_registry_batch
 from scripts.scientific_validation import validate_finite_tree

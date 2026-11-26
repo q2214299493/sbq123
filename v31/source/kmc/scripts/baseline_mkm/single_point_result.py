@@ -7,7 +7,7 @@ from scripts.baseline_mkm.normalization import flux_unit, individual_rate, refer
 from scripts.baseline_mkm.native import site_token
 from scripts.baseline_mkm.pressure_perturbation import checked_feed
 from scripts.kinetic_data.stoichiometric_sources import build_matrices, project_progress
-from scripts.kinetic_parameters.export import catkinas
+from scripts.baseline_mkm.parameter_table import catkinas
 from scripts.thermochemistry.harmonic import KB
 
 

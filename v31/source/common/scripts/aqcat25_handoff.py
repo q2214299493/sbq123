@@ -13,7 +13,9 @@ from jsonschema import Draft202012Validator
 try:
     from scripts.runtime_resources import resource_path
     from scripts.artifact_io import load_json_object, sha256_file, sha256_text
-except ModuleNotFoundError:  # Standalone deployment on MZ73.
+except ModuleNotFoundError as exc:  # Standalone deployment with sibling resources.
+    if exc.name not in {"scripts", "scripts.runtime_resources", "scripts.artifact_io"}:
+        raise
     from artifact_io import load_json_object, sha256_file, sha256_text
     resource_path = None  # Existing standalone deployment uses explicit/sibling schema.
 

@@ -8,7 +8,7 @@ from scripts.baseline_mkm.normalization import individual_rate, read_profile, re
 from scripts.baseline_mkm.results import read_single_point, result_quality
 from scripts.baseline_mkm.single_point_result import check_steady_state, reconstruct, species_and_sites, validate_result
 from scripts.kinetic_data.native_rate_output import artifact, build_output, conditions_pa, require
-from scripts.kinetic_parameters.export import catkinas
+from scripts.baseline_mkm.parameter_table import catkinas
 from scripts.multiphase_contracts import read_unique_json
 from scripts.native_model import assemble
 

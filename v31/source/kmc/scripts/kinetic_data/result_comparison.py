@@ -12,6 +12,8 @@ from scripts.kinetic_data.comparison_observables import difference, measure
 from scripts.kinetic_data.native_rate_output import require
 from scripts.kinetic_data.scientific_identity import IncompatibleIdentity, read_artifact, require_common_identities
 from scripts.kinetic_parameters.engine import reviewed
+from role_integrity import verify_role
+from scripts.replay_evidence import evidence_path
 from scripts.runtime_resources import SOURCE_ROOT
 from scripts.surface_kmc.window_bridge import bridge
 
@@ -29,10 +31,14 @@ def _dataset(path, digest):
 
 
 def _point(request, directory, mkm_worktree):
-    run = (directory / request["run"]).resolve()
-    # The caller chooses the trusted MKM installation independently of the data manifest.
-    process = subprocess.run([sys.executable, "-B", "-m", "scripts.kinetic_data.comparison_point", str(run)],
-                             cwd=mkm_worktree, capture_output=True, text=True, timeout=120, check=False)
+    run = evidence_path(directory / request["run"]).resolve()
+    root = Path(mkm_worktree or SOURCE_ROOT.parent / "mkm").resolve()
+    versions = json.loads((SOURCE_ROOT / "release-identity.json").read_bytes())["versions"]
+    verify_role(root, versions["mkm"])
+    entry = root / "role_entry.py"
+    require(entry.is_file() and sha256_file(entry) == versions["mkm_entry"], "MKM replay failed: different entry")
+    process = subprocess.run([sys.executable, "-I", "-B", str(entry), str(run)],
+                             cwd=root, capture_output=True, text=True, timeout=120, check=False)
     if process.returncode:
         reason = process.stderr.strip().splitlines()
         raise ValueError("MKM replay failed: " + (reason[-1] if reason else str(process.returncode)))
@@ -202,6 +208,9 @@ def compare(request_path, request_sha256, *, mkm_worktree):
     request, digest = read_artifact(path)
     require(digest == request_sha256 and request["format"] == "mkm-kmc-comparison/1", "Unverified comparison request")
     require(isinstance(request["observables"], list) and request["observables"], "Missing observable requests")
+    identity = json.loads((SOURCE_ROOT / "release-identity.json").read_bytes())
+    require(identity["role"] == "kmc", "Expected KMC integration role")
+    verify_role(SOURCE_ROOT, identity["versions"]["kmc"])
     errors = []
     point = kmc = left = right = review = None
     try:
@@ -216,7 +225,7 @@ def compare(request_path, request_sha256, *, mkm_worktree):
     if not errors:
         try:
             _observed(point, kmc)
-            _common(point, kmc, left, right, left_root=mkm_worktree or SOURCE_ROOT)
+            _common(point, kmc, left, right, left_root=mkm_worktree or SOURCE_ROOT.parent / "mkm")
         except IncompatibleIdentity as exc:
             errors.append(str(exc))
             decision = "not_comparable"
@@ -227,7 +236,8 @@ def compare(request_path, request_sha256, *, mkm_worktree):
             review = _assessment(request["review"], path.parent, point, kmc, left, right)
         except (KeyError, OSError, ValueError, TypeError) as exc:
             errors.append("Comparison review: " + str(exc))
-    evidence = dict(mkm=_evidence(point, True), kmc=_evidence(kmc, False), request_sha256=digest,
+    versions = json.loads((SOURCE_ROOT / "release-identity.json").read_bytes())["versions"]
+    evidence = dict(source_roles=versions, mkm=_evidence(point, True), kmc=_evidence(kmc, False), request_sha256=digest,
                     requested_sources={k: request.get(k) for k in ("mkm", "kmc", "review")}, review=review)
     rows = _comparison_rows(request["observables"], point, kmc, left, right, review, decision, errors)
     result = dict(format="mkm-kmc-comparison-result/1", evidence=evidence, comparisons=rows,

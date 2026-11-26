@@ -7,7 +7,7 @@ import numpy as np
 from scripts.artifact_io import require_sha256, sha256_bytes, sha256_json
 from scripts.baseline_mkm.coverage_ts import displaced_gibbs, validate_record
 from scripts.kinetic_parameters.engine import calculate, generate
-from scripts.kinetic_parameters.export import validate_export
+from scripts.kinetic_parameters.export_contract import validate_export
 from scripts.multiphase_contracts import decode_unique_json
 from scripts.reaction_network.thermodynamics import check_cycles
 from scripts.scientific_validation import validate_finite_tree

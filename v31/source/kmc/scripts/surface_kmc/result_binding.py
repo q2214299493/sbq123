@@ -4,6 +4,7 @@ import argparse
 import json
 from pathlib import Path
 
+from scripts.replay_evidence import evidence_path
 from scripts.artifact_io import sha256_file, sha256_json
 from scripts.kinetic_data.scientific_identity import check_binding, dataset_reference, read_artifact
 from scripts.kinetic_parameters.engine import check_version
@@ -13,14 +14,14 @@ from scripts.surface_kmc.study import replay
 
 
 def _reader_plan(segment):
-    claim = read(Path(segment["run"]) / "claim.json")
+    claim = read(evidence_path(segment["run"]) / "claim.json")
     approval = claim["approval"]
     if sha256_json(approval) != segment["approval_sha256"]:
         raise ValueError("Changed segment approval")
     ref = approval.get("reader_bound_plan")
     if not ref:
         raise ValueError("Missing approved reader-bound plan")
-    path = Path(ref["path"])
+    path = evidence_path(ref["path"])
     reader, digest = read_artifact(path)
     if (digest != ref["sha256"] or reader["native_plan_sha256"] != segment["plan_sha256"]
             or sha256_json(reader["native_plan"]) != segment["plan_sha256"]):
@@ -34,7 +35,7 @@ def _approved_sources(lineage, dataset, dataset_hash, config_hash, legacy):
     network_identity = None
     for segment in lineage:
         reader, directory = _reader_plan(segment)
-        folder = Path(reader.get("frozen_artifact_directory", directory))
+        folder = evidence_path(reader.get("frozen_artifact_directory", directory))
         references = reader.get("reference_sha256", {})
         for name, supplied in (("dataset", dataset_hash), ("configuration", config_hash)):
             filename = name + ".json"

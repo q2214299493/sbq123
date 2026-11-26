@@ -3,6 +3,7 @@ import argparse
 import json
 from pathlib import Path
 
+from scripts.replay_evidence import evidence_path
 from scripts.artifact_io import sha256_file, sha256_json
 from scripts.kinetic_data.native_rate_output import build_output, conditions_pa, require
 from scripts.kinetic_data.scientific_identity import read_artifact
@@ -161,7 +162,7 @@ def _observables(dataset, network, window, intact_desorptions=None):
 
 def _native_sources(window, directory):
     leaf = window["checkpoint_lineage"][-1]
-    run = Path(leaf["run"])
+    run = evidence_path(leaf["run"])
     claim, _ = read_artifact(run / "claim.json")
     plan = claim["plan"]
     require(sha256_json(plan) == leaf["plan_sha256"], "Native plan changed")
@@ -173,7 +174,7 @@ def _native_sources(window, directory):
 
     native = []
     for name, digest in plan["inputs"].items():
-        folder = Path(plan["lineage"]["run"]) if name == "restart.inf" else run
+        folder = evidence_path(plan["lineage"]["run"]) if name == "restart.inf" else run
         native.append(ref(folder / name, digest))
     return native, ref(run / "result.json", leaf["receipt_sha256"]), plan["inputs"]["lattice_input.dat"]
 
@@ -206,7 +207,7 @@ def bridge(manifest_path, manifest_sha256, *, allow_partial_mapping=False):
                           ("dataset", window["dataset"]["file_sha256"]), ("configuration", window["configuration_sha256"])):
         require(refs[key]["sha256"] == expected, f"Manifest differs from bound {key}")
     require(raw == refs["network"]["sha256"], "Changed network bytes")
-    run = Path(window["checkpoint_lineage"][-1]["run"])
+    run = evidence_path(window["checkpoint_lineage"][-1]["run"])
     series = verified_window_series(window, paths["dataset"], paths["configuration"], run)
     dataset = series["dataset"]
     definition = window["definition"]

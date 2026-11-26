@@ -15,15 +15,15 @@ import yaml
 
 from scripts.artifact_io import load_json_object as read, sha256_file, sha256_json, write_json_exclusive as save
 from scripts.baseline_mkm import bidentate_diagnostic as bidentate
+from scripts.baseline_mkm.qualification import IncompleteKinetics as IncompleteKinetics, qualify as qualify
+from scripts.replay_evidence import evidence_path
 from scripts.baseline_mkm.results import read_single_point
 from scripts.baseline_mkm.single_point_result import validate_result
 from scripts.execution_permission import require_bound_action
-from scripts.baseline_mkm.mapping_scope import MappingBlocked, check_configuration, topology
+from scripts.baseline_mkm.mapping_scope import MappingBlocked as MappingBlocked
 from scripts.baseline_mkm.normalization import normalization
 from scripts.baseline_mkm.results import result_quality
-from scripts.baseline_mkm.sensitivity_inputs import baseline_config, configuration as sensitivity_configuration, reproduce
-from scripts.kinetic_parameters.engine import check_version
-from scripts.native_model import assemble, publish
+from scripts.native_model import publish
 from scripts.runtime_resources import resource_path
 
 ACTION = "RUN_CATKINAS_SINGLE_POINT"
@@ -65,45 +65,6 @@ STAGES = (
     "ACCEPTED",
     "REJECTED",
 )
-
-
-class IncompleteKinetics(ValueError):
-    def __init__(self, missing):
-        super().__init__("Incomplete kinetic dataset")
-        self.missing = missing
-
-
-def qualify(network, dataset, config, *, general=False):
-    check_version(network, "network_version")
-    check_version(dataset, "dataset_version")
-    if dataset["network_version"] != network["network_version"]:
-        raise ValueError("Network version differs from dataset")
-    rebuilt = reproduce(network, dataset)
-    if rebuilt != dataset:
-        raise ValueError("Dataset differs from network, source verification or reviewed rates")
-    if "sensitivity_perturbation" in dataset and config != sensitivity_configuration(baseline_config(), rebuilt):
-        raise ValueError("Feed or conditions differ from the sensitivity derivative")
-    missing = {r["reaction_id"]: r["missing"] for r in dataset["reactions"] if not r["export_eligible"]}
-    if missing:
-        raise IncompleteKinetics(missing)
-    if general:
-        check_configuration(config)
-    elif len(network["catalog"]["sites"]) > 1 or any(
-        len(r["definition"].get("phase_ids") or []) > 1 for r in network["reactions"]
-    ):
-        issues, _ = topology(network)
-        if issues:
-            raise MappingBlocked(issues)
-        check_configuration(config)
-    files, adapter = assemble("catkinas", dataset, config, general_network=network if general else None)
-    parameter = dataset["reactions"][0]["parameter_set"]
-    for key, value in (
-        ("temperature_K", parameter["temperature_K"]),
-        ("total_pressure_bar", parameter["pressure_Pa"] / 100000),
-    ):
-        if key in config and config[key] != value:
-            raise ValueError(f"Requested {key} differs from reviewed condition")
-    return files, adapter
 
 
 def tools_for_run(matlab):
@@ -492,7 +453,7 @@ def accepted_receipt(run, *, bidentate_diagnostic=False):
         or decision["question_id"] != plan["question_id"]
         or not decision["reviewer"]
         or sha256_json(decision) != receipt["approval_reference"]
-        or sha256_file(Path(decision["source"]["path"])) != decision["source"]["sha256"]
+        or sha256_file(evidence_path(decision["source"]["path"])) != decision["source"]["sha256"]
     ):
         raise ValueError("Changed approval binding")
     for path, digest in receipt["output_hashes"].items():

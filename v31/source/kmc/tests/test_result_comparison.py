@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 
+from scripts.replay_evidence import evidence_path
 from scripts.artifact_io import sha256_file, sha256_json
 from scripts.kinetic_data import result_comparison as comparison
 from scripts.kinetic_data.comparison_observables import difference, measure
@@ -156,7 +157,7 @@ def test_ineligible(control, fault, reason):
     elif fault == "review":
         review["kmc_record_sha256"] = "1" * 64
     elif fault == "species":
-        ds.update(read(Path(read(HIST/"ads-counterexample.json")["mkm"]["path"])))
+        ds.update(read(evidence_path(read(HIST/"ads-counterexample.json")["mkm"]["path"])))
     elif fault == "direction":
         q["direction"] = "gross"
     row, = run([q])["comparisons"]
@@ -200,10 +201,10 @@ def test_equal_values_different_windows(control):
 
 def test_historical_receipt_and_event_window_through_public_reader(tmp_path, monkeypatch):
     cases = read(HIST/"ads-counterexample.json")
-    original = [read(Path(cases[k]["path"])) for k in ("mkm", "kmc")]
+    original = [read(evidence_path(cases[k]["path"])) for k in ("mkm", "kmc")]
     with pytest.raises(ValueError, match="molecular_stoichiometry"):
         require_reaction_identity(*original, "ads")
-    run = Path(cases["mkm"]["path"]).parent
+    run = evidence_path(cases["mkm"]["path"]).parent
     install = next(d for d in run.parents if (d/"scripts/kinetic_data/comparison_point.py").exists())
     monkeypatch.setattr(study, "ENGINE", sha256_file(EXAMPLE/"inert-file"))
     m = dict(run=str(run), binding_sha256=read(HIST/"mkm-point.json")["binding_sha256"])
@@ -260,7 +261,7 @@ def test_turnover_selectivity_and_undefined_cases(control):
 
 def test_failed_replay_preserves_verified_counterpart(tmp_path, monkeypatch):
     monkeypatch.setattr(study, "ENGINE", sha256_file(EXAMPLE/"inert-file"))
-    install = Path(read(HIST/"ads-counterexample.json")["mkm"]["path"]).parents[4]
+    install = evidence_path(read(HIST/"ads-counterexample.json")["mkm"]["path"]).parents[4]
     request = dict(format="mkm-kmc-comparison/1", mkm=dict(run="absent", binding_sha256="0"*64),
                    kmc=ref(EXAMPLE/"manifest-0.25-5.25.json"), observables=[QUERIES[1]])
     f = write(tmp_path/"request.json", request)
@@ -363,7 +364,7 @@ def test_invalid_mapping_keeps_window_measurements(tmp_path, monkeypatch, entrie
     monkeypatch.setattr(study, "ENGINE", sha256_file(EXAMPLE / "inert-file"))
     with pytest.raises(ValueError, match="Molecular mapping"):
         bridge(kmc_ref["path"], kmc_ref["sha256"])
-    run = Path(read(HIST / "ads-counterexample.json")["mkm"]["path"]).parent
+    run = evidence_path(read(HIST / "ads-counterexample.json")["mkm"]["path"]).parent
     install = next(p for p in run.parents if (p / "scripts/kinetic_data/comparison_point.py").exists())
     req = write(tmp_path / "request.json", dict(format="mkm-kmc-comparison/1", observables=[QUERIES[1]],
                 mkm=dict(run=str(run), binding_sha256=read(HIST / "mkm-point.json")["binding_sha256"]), kmc=kmc_ref))
