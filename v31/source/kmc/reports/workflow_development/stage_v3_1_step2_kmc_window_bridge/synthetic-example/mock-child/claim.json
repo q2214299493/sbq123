@@ -1,0 +1,91 @@
+{
+  "plan": {
+    "format": "zacros-4-single-call/1",
+    "action": "RESUME_ZACROS_4",
+    "executable": "C:\\Users\\86177\\Desktop\\sbq123-kmc-v300\\reports\\workflow_development\\stage_v3_1_step2_kmc_window_bridge\\synthetic-example\\inert-file",
+    "engine_sha256": "b111cd29e6572500a729ab07ce50fc708771ed2b671a71958dc9ca8505eee040",
+    "run": "C:\\Users\\86177\\Desktop\\sbq123-kmc-v300\\reports\\workflow_development\\stage_v3_1_step2_kmc_window_bridge\\synthetic-example\\mock-child",
+    "model_sha256": "ca05a0d37a9c4833a3ce35d4bbd87663ff7d133a82a2f1e20ec61be7848fddfa",
+    "inputs": {
+      "simulation_input.dat": "2c57bfa5011b5cf7dbbd6c60f1830ab709cedfd9cb250377cb6b2fe84ab2f3c8",
+      "lattice_input.dat": "cd991edad5de2de93900b23e961dacf304894f71389cf1a177d87d7fac6bcd03",
+      "mechanism_input.dat": "4990838be52ff20a446271c9f25180b16011b77a72821f264a58e00e75236a1f",
+      "energetics_input.dat": "a9034d0d147ea36298101727ef62ecede67ac7f15306e3eb58794b7e43c5f288",
+      "restart.inf": "03fad620be08ca7e9ead1760a529b628d013c1ba3153ad205dba0f15b53c49eb"
+    },
+    "lineage": {
+      "run": "C:\\Users\\86177\\Desktop\\sbq123-kmc-v300\\reports\\workflow_development\\stage_v3_1_step2_kmc_window_bridge\\synthetic-example\\mock-writer",
+      "receipt_sha256": "62ccd8ec1f5c003cd29a15c12dab5bf197c88be8d63e35e89e1e120e525b84b7",
+      "terminal_step": 5,
+      "headers": {
+        "procstat": [
+          "Overall",
+          "r1_forward",
+          "r2_reverse"
+        ],
+        "specnum": [
+          "Entry",
+          "Nevents",
+          "Time",
+          "Temperature",
+          "Energy",
+          "HCu*",
+          "HNi*",
+          "H2"
+        ]
+      },
+      "tail": {
+        "procstat": [
+          4,
+          4.0,
+          {
+            "r1_forward": 2,
+            "r2_reverse": 2
+          }
+        ],
+        "specnum": [
+          4,
+          4.0,
+          {
+            "H2-bridge": 0,
+            "H2-top": 0,
+            "H2-g": 0
+          }
+        ]
+      },
+      "history_header": "Surface_Species: HCu* HNi*\r\n",
+      "last_snapshot_step": 4,
+      "terminal_time_s": 5.0
+    },
+    "seed": 13201,
+    "max_steps": 7,
+    "max_time_s": 0.1,
+    "native_wall_s": 15,
+    "timeout_s": 2,
+    "max_output_bytes_per_file": 1000000,
+    "threads": 1,
+    "retries": 0,
+    "arguments": [
+      "--max_steps=7",
+      "--wall_time=15"
+    ]
+  },
+  "decision_sha256": "b203ff4ff6fe54c22e81517d05ee2f358664f77b037045060b60528ffb6ce578",
+  "approval": {
+    "format": "zacros-4-single-call-approval/1",
+    "DECISION": "approve",
+    "ALLOWED_ACTIONS": [
+      "RESUME_ZACROS_4"
+    ],
+    "reviewer": "synthetic reviewer",
+    "state_sha256": "c80b68bc575d8c63dda16323ddba583104ccff2efd6ede93fa60580b503a3aab",
+    "source": {
+      "path": "C:\\Users\\86177\\Desktop\\sbq123-kmc-v300\\reports\\workflow_development\\stage_v3_1_step2_kmc_window_bridge\\synthetic-example\\mock-child-review.txt",
+      "sha256": "bb46f67a244930d97b58220782354ababf808a94b003c3f09ac4301d2437d269"
+    },
+    "reader_bound_plan": {
+      "path": "C:\\Users\\86177\\Desktop\\sbq123-kmc-v300\\reports\\workflow_development\\stage_v3_1_step2_kmc_window_bridge\\synthetic-example\\mock-child-frozen\\reader-bound-plan.json",
+      "sha256": "622b6b78182707a13bd8de34e0a76bfecc2adbd16271a3d99740acd4a0c15510"
+    }
+  }
+}

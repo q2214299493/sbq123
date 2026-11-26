@@ -1,0 +1,26 @@
+{
+  "format": "network-definition/1",
+  "projects": [{"project_id": "synthetic-oxide"}],
+  "materials": [{"material_id": "oxide", "project_id": "synthetic-oxide"}],
+  "phases": [{"phase_id": "oxide-alpha", "material_id": "oxide"}],
+  "surfaces": [{
+    "surface_id": "oxide-012", "phase_id": "oxide-alpha", "miller_indices": [0, 1, 2],
+    "lattice_vectors_angstrom": [[6.1, 0, 0], [1.7, 5.2, 0], [0, 0, 21]],
+    "site_types": ["lewis-acid", "basic-oxygen"]
+  }],
+  "sites": [
+    {"site_id": "acid-A", "surface_id": "oxide-012", "site_type": "lewis-acid", "local_geometry": "Fixture cation A"},
+    {"site_id": "oxygen-B", "surface_id": "oxide-012", "site_type": "basic-oxygen", "local_geometry": "Adjacent fixture lattice oxygen B"}
+  ],
+  "species": [
+    {"species_id": "co2", "phase": "gas", "material_ids": [], "surface_ids": [], "interface_id": null,
+     "composition": {"C": 1, "O": 2}, "charge": 0, "site_occupancy": {}, "structure_id": "fixture-gas"},
+    {"species_id": "co2-bound", "phase": "surface", "material_ids": ["oxide"], "surface_ids": ["oxide-012"], "interface_id": null,
+     "composition": {"C": 1, "O": 2}, "charge": 0, "site_occupancy": {"acid-A": 1, "oxygen-B": 1}, "structure_id": "fixture-bound"}
+  ],
+  "reactions": [{
+    "reaction_id": "fixture-adsorption", "reaction_type": "adsorption", "reactants": {"co2": 1}, "products": {"co2-bound": 1},
+    "surface_ids": ["oxide-012"], "interface_id": null, "sites_consumed": {"acid-A": 1, "oxygen-B": 1}, "sites_released": {},
+    "initial_structure_id": "fixture-initial", "final_structure_id": "fixture-final", "reversible": null
+  }]
+}

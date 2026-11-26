@@ -1,0 +1,221 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Two reaction types on a common synthetic DRC baseline",
+  "$defs": {
+    "rate_law": {
+      "type": "object",
+      "required": [
+        "gas_orders",
+        "surface_orders",
+        "vacant_site_orders",
+        "coefficient_unit"
+      ],
+      "properties": {
+        "gas_orders": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "surface_orders": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "vacant_site_orders": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "coefficient_unit": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "study": {
+      "type": "object",
+      "required": [
+        "coarse_result_sha256",
+        "fine_result_sha256",
+        "rate_law",
+        "estimates",
+        "step_stable",
+        "absolute_difference",
+        "tolerance"
+      ],
+      "properties": {
+        "coarse_result_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "fine_result_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "rate_law": {
+          "type": "object",
+          "required": [
+            "forward",
+            "reverse"
+          ],
+          "properties": {
+            "forward": {
+              "$ref": "#/$defs/rate_law"
+            },
+            "reverse": {
+              "$ref": "#/$defs/rate_law"
+            }
+          },
+          "additionalProperties": false
+        },
+        "estimates": {
+          "type": "object",
+          "required": [
+            "coarse",
+            "fine"
+          ],
+          "properties": {
+            "coarse": {
+              "type": "object",
+              "required": [
+                "delta_eV",
+                "central",
+                "positive_side",
+                "negative_side"
+              ],
+              "properties": {
+                "delta_eV": {
+                  "const": 0.01
+                },
+                "central": {
+                  "type": "number"
+                },
+                "positive_side": {
+                  "type": "number"
+                },
+                "negative_side": {
+                  "type": "number"
+                }
+              },
+              "additionalProperties": false
+            },
+            "fine": {
+              "type": "object",
+              "required": [
+                "delta_eV",
+                "central",
+                "positive_side",
+                "negative_side"
+              ],
+              "properties": {
+                "delta_eV": {
+                  "const": 0.005
+                },
+                "central": {
+                  "type": "number"
+                },
+                "positive_side": {
+                  "type": "number"
+                },
+                "negative_side": {
+                  "type": "number"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "step_stable": {
+          "type": "boolean"
+        },
+        "absolute_difference": {
+          "type": "number",
+          "minimum": 0
+        },
+        "tolerance": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "type": "object",
+  "required": [
+    "format",
+    "scope",
+    "common",
+    "reactions"
+  ],
+  "properties": {
+    "format": {
+      "const": "mkm-cross-reaction-drc/1"
+    },
+    "scope": {
+      "const": "synthetic_benchmark"
+    },
+    "common": {
+      "type": "object",
+      "required": [
+        "baseline",
+        "network",
+        "dataset",
+        "normalization",
+        "observable",
+        "temperature_K",
+        "partial_pressures_bar"
+      ],
+      "properties": {
+        "baseline": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "minProperties": 1
+        },
+        "network": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "dataset": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "normalization": {
+          "type": "object"
+        },
+        "observable": {
+          "type": "string",
+          "minLength": 1
+        },
+        "temperature_K": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "partial_pressures_bar": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "reactions": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/study"
+      },
+      "minProperties": 2,
+      "maxProperties": 2
+    }
+  },
+  "additionalProperties": false
+}

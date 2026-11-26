@@ -1,0 +1,93 @@
+{
+  "dataset_version": "f276dfd869676e2d21385a05a96b594babff17070a1fe4ba89ff209f6a4bb65a",
+  "purpose": "Synthetic interface: one reference site per cell, two unlike neighboring pairs per cell. Zero interaction energies and empty initial lattice are benchmark assumptions.",
+  "partial_pressure_bar": {
+    "H2-g": 1
+  },
+  "catkinas": {
+    "aliases": {
+      "H2-g": "H2",
+      "H2-top": "H",
+      "H2-bridge": "H"
+    },
+    "initial_coverages": {
+      "H2-top": 0,
+      "H2-bridge": 0
+    },
+    "MaxTime": 3,
+    "MaxOdeTime": 3
+  },
+  "zacros": {
+    "gas": {
+      "H2-g": {
+        "name": "H2",
+        "energy_eV": 0,
+        "mass_g_mol": 2
+      }
+    },
+    "surface_aliases": {
+      "H2-top": "HNi",
+      "H2-bridge": "HCu"
+    },
+    "site_aliases": {
+      "top-Ni": "Ni",
+      "bridge-Cu": "Cu"
+    },
+    "cell_vectors_A": [
+      [
+        3,
+        0
+      ],
+      [
+        0,
+        3
+      ]
+    ],
+    "repeat_cell": [
+      3,
+      3
+    ],
+    "cell_sites": [
+      [
+        "top-Ni",
+        0,
+        0
+      ],
+      [
+        "bridge-Cu",
+        0.5,
+        0
+      ]
+    ],
+    "links": [
+      [
+        1,
+        2,
+        "self"
+      ],
+      [
+        2,
+        1,
+        "east"
+      ],
+      [
+        1,
+        1,
+        "north"
+      ],
+      [
+        2,
+        2,
+        "north"
+      ]
+    ],
+    "reference_sites_per_cell": 1,
+    "clusters": [],
+    "seeds": [],
+    "seed": 13201,
+    "max_steps": 20,
+    "max_time_s": 0.1,
+    "wall_time_s": 15,
+    "write_restart": false
+  }
+}

@@ -1,0 +1,20 @@
+version: 1
+status: validation_only
+model:
+  path: D:/fe-c-o-mace.model
+  sha256: fc8d2de14b3a4be337e947b5dc013eef89ea8c38a3fb8319abe14f7c1da639e8
+  head: Default
+  dtype: float64
+  required_atomic_numbers: [1, 6, 8, 26]
+  provenance: user_provided_checkpoint_training_domain_unverified
+reference_review_root: outputs/c1_c2_barrier_review_20261118_v1
+path_review_root: calculations/fe110_ch_co_to_chco_ts_20261109/local_triplet_review_20261112_v1
+steps:
+  adsorption: 2
+  ordinary_neb: 2
+active_learning:
+  mode: single_model_coverage_and_exact_vasp_error
+  calibration_status: uncalibrated
+  new_vasp_labels_authorized: false
+  training_authorized: false
+  production_promotion_authorized: false

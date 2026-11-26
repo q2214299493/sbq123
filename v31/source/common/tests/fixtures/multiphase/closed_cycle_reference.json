@@ -1,0 +1,13 @@
+{
+  "scope": "Synthetic software benchmark only. Ideal gases at 1 bar standard state, fractional site activities, one reference pair with one site of each type. All listed species are neutral. Vacancies are the zero of each site inventory. Gas H2 and NO set the composition reference at 400 K.",
+  "temperature_K": 400,
+  "partial_pressure_bar": {"H2-g": 1.0, "NO-g": 0.5, "HNO-g": 0.1},
+  "formation_G_eV": {"H2-g": 0, "NO-g": 0, "HNO-g": -0.08, "H2-top": -0.04, "H2-bridge": -0.06, "HNO-top": -0.14},
+  "transition_state_G_eV": {"ads": 0.4, "transfer": 0.70, "hydrogenate": 0.74, "desorb": 0.66},
+  "turnover_stoichiometry": {"ads": 1, "transfer": 1, "hydrogenate": 2, "desorb": 2},
+  "adsorption_law": "Original Phase 2.4 synthetic H2 collision model, unchanged capture area, mass, sticking, kappa and reverse equilibrium convention. The three added steps use the kBT/h single-temperature prefactor at unit activity.",
+  "coefficient_relative_tolerance": 0.0001,
+  "flux_relative_tolerance": 0.0001,
+  "site_absolute_tolerance": 1e-8,
+  "steady_state_relative_tolerance": 1e-7
+}

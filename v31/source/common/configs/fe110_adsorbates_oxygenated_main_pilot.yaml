@@ -1,0 +1,108 @@
+version: 1
+source_geometry:
+  CHO_formyl: optimized gas CHO CONTCAR from job 9606863
+  CH2O_formaldehyde: optimized gas CH2O CONTCAR from job 9606864
+  CH3O_methoxy: optimized gas CH3O CONTCAR from job 9606865
+  CH4O_methanol: optimized gas CH4O CONTCAR from job 9606866
+
+adsorbates:
+  CHO_formyl_Cend:
+    display_formula: CHO*
+    specific_species: formyl / H-C=O
+    adsorption_orientation: C-end
+    atom_symbols: [C, O, H]
+    species_order: [C, O, H]
+    anchor_mode: atom
+    anchor_atom: C
+    anchor_index: 0
+    internal_geometry: optimized gas CHO; C-O 1.1884 A; C-H 1.1352 A
+    orientation_rule: non_anchor_atoms_above
+    recommended_fe_anchor_distance_angstrom: 1.95
+    allowed_fe_anchor_distance_angstrom: [1.8, 2.2]
+    selected_sites: [top, hollow]
+    relative_cartesian_angstrom:
+      - [0.0, 0.0, 0.0]
+      - [1.024398686509, 0.0, 0.602428170643]
+      - [-1.024398686509, 0.0, 0.489120365567]
+
+  CHO_formyl_Oend:
+    display_formula: CHO*
+    specific_species: formyl / H-C=O
+    adsorption_orientation: O-end
+    atom_symbols: [C, O, H]
+    species_order: [C, O, H]
+    anchor_mode: atom
+    anchor_atom: O
+    anchor_index: 1
+    internal_geometry: optimized gas CHO; C-O 1.1884 A; C-H 1.1352 A
+    orientation_rule: non_anchor_atoms_above
+    recommended_fe_anchor_distance_angstrom: 2.1
+    allowed_fe_anchor_distance_angstrom: [1.9, 2.4]
+    selected_sites: [top, hollow]
+    relative_cartesian_angstrom:
+      - [0.354365889389, 0.0, 1.134344386041]
+      - [0.0, 0.0, 0.0]
+      - [-0.354365889389, 0.0, 2.021097264066]
+
+  CH2O_formaldehyde_Oend:
+    display_formula: CH2O*
+    specific_species: formaldehyde / H2C=O
+    adsorption_orientation: carbonyl O-end
+    atom_symbols: [C, O, H, H]
+    species_order: [C, O, H]
+    anchor_mode: atom
+    anchor_atom: O
+    anchor_index: 1
+    internal_geometry: optimized gas CH2O; C-O 1.2143 A; C-H 1.1176 A
+    orientation_rule: non_anchor_atoms_above
+    recommended_fe_anchor_distance_angstrom: 2.25
+    allowed_fe_anchor_distance_angstrom: [2.0, 2.6]
+    selected_sites: [top, hollow]
+    relative_cartesian_angstrom:
+      - [0.000000050239, 0.0, 1.214340655225]
+      - [0.0, 0.0, 0.0]
+      - [-0.944889642180, 0.086892237924, 1.804886285025]
+      - [0.944889640014, -0.086892237924, 1.804886628237]
+
+  CH3O_methoxy_Oend:
+    display_formula: CH3O*
+    specific_species: methoxy / CH3-O
+    adsorption_orientation: O-end
+    atom_symbols: [C, O, H, H, H]
+    species_order: [C, O, H]
+    anchor_mode: atom
+    anchor_atom: O
+    anchor_index: 1
+    internal_geometry: optimized gas CH3O; C-O 1.3563 A; C-H 1.1157 A
+    orientation_rule: non_anchor_atoms_above
+    recommended_fe_anchor_distance_angstrom: 2.05
+    allowed_fe_anchor_distance_angstrom: [1.85, 2.35]
+    selected_sites: [top, hollow]
+    relative_cartesian_angstrom:
+      - [0.000016100294, 0.0, 1.356285508665]
+      - [0.0, 0.0, 0.0]
+      - [-0.969551240145, 0.369202694226, 1.766693736262]
+      - [0.165026439742, -1.024257150503, 1.766696669945]
+      - [0.804508699987, 0.655054456277, 1.766699435191]
+
+  CH4O_methanol_Oend:
+    display_formula: CH4O*
+    specific_species: methanol / CH3OH
+    adsorption_orientation: O-end
+    atom_symbols: [C, O, H, H, H, H]
+    species_order: [C, O, H]
+    anchor_mode: atom
+    anchor_atom: O
+    anchor_index: 1
+    internal_geometry: optimized gas CH4O; C-O 1.4344 A; O-H 0.9698 A
+    orientation_rule: non_anchor_atoms_above
+    recommended_fe_anchor_distance_angstrom: 2.35
+    allowed_fe_anchor_distance_angstrom: [2.1, 2.7]
+    selected_sites: [top, hollow]
+    relative_cartesian_angstrom:
+      - [0.908652707, 0.0, 1.10989805]
+      - [0.0, 0.0, 0.0]
+      - [0.386261641, -0.000000100, 2.07880464]
+      - [1.54989587, -0.895107643, 1.06201880]
+      - [1.54989573, 0.895107742, 1.06201892]
+      - [-0.908652707, 0.0, 0.339047053]

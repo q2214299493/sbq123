@@ -1,0 +1,324 @@
+{
+  "format": "kmc-window-integration/1",
+  "manifest_sha256": "395c7169e49cdec621f687b19f1f22aec24ca99f48394f914c76a3098b7cfc55",
+  "window": {
+    "format": "kmc-window-binding/2",
+    "result": {
+      "plan_sha256": "c80b68bc575d8c63dda16323ddba583104ccff2efd6ede93fa60580b503a3aab",
+      "native_receipt_sha256": "84178894eb0d73f9b45bd9ace1d3a9cb8ada8dc2660b4b803a21264f5b4e0812"
+    },
+    "checkpoint_lineage": [
+      {
+        "run": "C:\\Users\\86177\\Desktop\\sbq123-kmc-v300\\reports\\workflow_development\\stage_v3_1_step2_kmc_window_bridge\\synthetic-example\\mock-writer",
+        "plan_sha256": "5c2728dc0c392feb12f6f02e16807be521565b73262ed8e6be197893a9909341",
+        "receipt_sha256": "62ccd8ec1f5c003cd29a15c12dab5bf197c88be8d63e35e89e1e120e525b84b7",
+        "approval_sha256": "8e60e957db55647254c36b8a32b35fec550eca3777604886cb075e5bced96f54",
+        "model_sha256": "ca05a0d37a9c4833a3ce35d4bbd87663ff7d133a82a2f1e20ec61be7848fddfa",
+        "parent_receipt_sha256": null,
+        "checkpoint_input_sha256": null,
+        "terminal_step": 5,
+        "terminal_time_s": 5.0
+      },
+      {
+        "run": "C:\\Users\\86177\\Desktop\\sbq123-kmc-v300\\reports\\workflow_development\\stage_v3_1_step2_kmc_window_bridge\\synthetic-example\\mock-child",
+        "plan_sha256": "c80b68bc575d8c63dda16323ddba583104ccff2efd6ede93fa60580b503a3aab",
+        "receipt_sha256": "84178894eb0d73f9b45bd9ace1d3a9cb8ada8dc2660b4b803a21264f5b4e0812",
+        "approval_sha256": "b203ff4ff6fe54c22e81517d05ee2f358664f77b037045060b60528ffb6ce578",
+        "model_sha256": "ca05a0d37a9c4833a3ce35d4bbd87663ff7d133a82a2f1e20ec61be7848fddfa",
+        "parent_receipt_sha256": "62ccd8ec1f5c003cd29a15c12dab5bf197c88be8d63e35e89e1e120e525b84b7",
+        "checkpoint_input_sha256": "03fad620be08ca7e9ead1760a529b628d013c1ba3153ad205dba0f15b53c49eb",
+        "terminal_step": 7,
+        "terminal_time_s": 7.0
+      }
+    ],
+    "dataset": {
+      "file_sha256": "0155065bd635e916c8e07cf8d63c7977c57453e66cbf5731fce5a95802597a57",
+      "dataset_version": "e8ecac6c7eabe15f2347d823fc516cd40d651aa9ee8bcc25b29980dfcc64634e",
+      "network_version": "b5e01bff54d729e68adcf34e89d0c2334e1c2b6938d87191e8d23046db6911a7",
+      "project_id": "demo",
+      "parameters": {
+        "ads": {
+          "parameter_set_id": "params",
+          "reaction_row_sha256": "ef81978c649f77dfde4051dd4bb64547941b44cb486c0e1375e82a1a093e7a38",
+          "energy_reference_id": "demo-ref",
+          "energy_basis": "gibbs",
+          "uncertainty": null
+        }
+      }
+    },
+    "configuration_sha256": "993a8df54db30326e5ce15d01a7ad08a728f33312ce93c727a225153a64e99c9",
+    "seed": 13201,
+    "conditions": {
+      "temperature_K": 400,
+      "pressure_Pa": 100000,
+      "partial_pressure_bar": {
+        "H2-g": 1
+      },
+      "standard_states": {
+        "gas_pressure_Pa": 100000,
+        "solute_concentration_mol_m3": 1000,
+        "surface_activity_convention": "fractional site occupation"
+      }
+    },
+    "definition": {
+      "bounds_s": [
+        0.25,
+        5.25
+      ],
+      "population_rule": "left_held",
+      "event_interval": "(start,end]",
+      "basis": "simulation_cell",
+      "denominator": 1.0
+    },
+    "site_capacities": {
+      "top-Ni": 4,
+      "bridge-Cu": 3
+    },
+    "observation": {
+      "window_s": [
+        0.25,
+        5.25
+      ],
+      "denominator": 1.0,
+      "basis": "simulation_cell",
+      "event_frequency_s_inverse": {
+        "r1_forward": 0.6,
+        "r2_reverse": 0.4
+      },
+      "molecules_per_cell": {
+        "H2-bridge": 0.45,
+        "H2-top": 0.0
+      },
+      "occupied_fraction_by_species": {
+        "top-Ni": {
+          "H2-bridge": 0.1125,
+          "H2-top": 0.0
+        },
+        "bridge-Cu": {
+          "H2-bridge": 0.15
+        }
+      },
+      "coverage": {
+        "top-Ni": 0.1125,
+        "bridge-Cu": 0.15
+      },
+      "pathway_flux": {
+        "ads": {
+          "forward": 3,
+          "reverse": 2,
+          "net_rate": 0.2
+        }
+      },
+      "species_net_rate": {
+        "H2-bridge": 0.2,
+        "H2-g": -0.2
+      }
+    },
+    "reaction_network": {
+      "file_sha256": "a406f9fc597bba945e4a14a52c95c106068ab9f88e69bdf639ac5ee1784a4dac",
+      "network_version": "b5e01bff54d729e68adcf34e89d0c2334e1c2b6938d87191e8d23046db6911a7"
+    },
+    "window_evidence_sha256": "ec18c2a743278c0698ed70bf0df7ae57d936a1248290846d7a6412701ab9ada9"
+  },
+  "rate_output": {
+    "format": "kinetic-rate-output/2",
+    "schema_version": "2.1.0",
+    "dataset_version": "e8ecac6c7eabe15f2347d823fc516cd40d651aa9ee8bcc25b29980dfcc64634e",
+    "project_id": "demo",
+    "network_version": "b5e01bff54d729e68adcf34e89d0c2334e1c2b6938d87191e8d23046db6911a7",
+    "engine": {
+      "name": "Zacros",
+      "version": "4.0"
+    },
+    "conditions": {
+      "temperature_K": 400,
+      "pressure_Pa": 100000.0,
+      "partial_pressures": [
+        {
+          "species_id": "H2-g",
+          "pressure_Pa": 100000.0
+        }
+      ]
+    },
+    "native_normalization": {
+      "extent_unit": "event",
+      "time_unit": "s",
+      "denominator_value": 1,
+      "reference_scope": {
+        "project_id": "demo",
+        "network_version": "b5e01bff54d729e68adcf34e89d0c2334e1c2b6938d87191e8d23046db6911a7"
+      },
+      "basis_kind": "simulation_cell",
+      "reference_id": "lattice-cd991edad5de2de93900b23e961dacf304894f71389cf1a177d87d7fac6bcd03",
+      "denominator_unit": "simulation cell",
+      "definition": "One entire simulated lattice."
+    },
+    "output_binding": {
+      "run_id": "c80b68bc575d8c63dda16323ddba583104ccff2efd6ede93fa60580b503a3aab",
+      "native_inputs": [
+        {
+          "path": "mock-child/simulation_input.dat",
+          "sha256": "2c57bfa5011b5cf7dbbd6c60f1830ab709cedfd9cb250377cb6b2fe84ab2f3c8"
+        },
+        {
+          "path": "mock-child/lattice_input.dat",
+          "sha256": "cd991edad5de2de93900b23e961dacf304894f71389cf1a177d87d7fac6bcd03"
+        },
+        {
+          "path": "mock-child/mechanism_input.dat",
+          "sha256": "4990838be52ff20a446271c9f25180b16011b77a72821f264a58e00e75236a1f"
+        },
+        {
+          "path": "mock-child/energetics_input.dat",
+          "sha256": "a9034d0d147ea36298101727ef62ecede67ac7f15306e3eb58794b7e43c5f288"
+        },
+        {
+          "path": "mock-writer/restart.inf",
+          "sha256": "03fad620be08ca7e9ead1760a529b628d013c1ba3153ad205dba0f15b53c49eb"
+        }
+      ],
+      "dataset_id": "rates-531e131cadeadba6aeb5980958f3083f252bccc82d4fa3f1c87ca571a31bd6bc"
+    },
+    "reaction_rates": [
+      {
+        "reaction_id": "ads",
+        "parameter_set_id": "params",
+        "reactants": {
+          "H2-g": 1
+        },
+        "products": {
+          "H2-bridge": 1
+        },
+        "sites_consumed": {
+          "top-Ni": 1,
+          "bridge-Cu": 1
+        },
+        "sites_released": {},
+        "net": 0.2,
+        "forward": 0.6,
+        "reverse": 0.4
+      }
+    ],
+    "source_terms": {
+      "species": [
+        {
+          "species_id": "H2-bridge",
+          "net_production_rate": 0.2
+        },
+        {
+          "species_id": "H2-g",
+          "net_production_rate": -0.2
+        }
+      ],
+      "site_inventories": [
+        {
+          "site_id": "bridge-Cu",
+          "net_vacancy_rate": -0.2
+        },
+        {
+          "site_id": "top-Ni",
+          "net_vacancy_rate": -0.2
+        }
+      ]
+    },
+    "validity_range": null,
+    "provenance": {
+      "network": {
+        "path": "mock-child-frozen/network.json",
+        "sha256": "a406f9fc597bba945e4a14a52c95c106068ab9f88e69bdf639ac5ee1784a4dac"
+      },
+      "dataset": {
+        "path": "mock-child-frozen/dataset.json",
+        "sha256": "0155065bd635e916c8e07cf8d63c7977c57453e66cbf5731fce5a95802597a57"
+      },
+      "native_output": {
+        "path": "mock-child/result.json",
+        "sha256": "84178894eb0d73f9b45bd9ace1d3a9cb8ada8dc2660b4b803a21264f5b4e0812"
+      }
+    },
+    "validation": {
+      "status": "unreviewed",
+      "review": null
+    }
+  },
+  "observations": {
+    "species_fingerprints": {
+      "H2-g": "354432fc942c62c25d2f041819294b6e1cdcbec1f12cea39275788315b333cb7",
+      "H2-bridge": "ccac59f24e6ba43177d21083b58f16afe0b664144dee1cd836756536e99aea3c",
+      "H2-top": "e2b5ea17f2331665aa73bbdf6cac750e73facb4e4138fa2f41ef2bd111867ba4"
+    },
+    "mean_molecules_per_cell": {
+      "H2-bridge": 0.45,
+      "H2-top": 0.0
+    },
+    "time_weighted_occupied_fraction_by_species": {
+      "top-Ni": {
+        "H2-bridge": 0.1125,
+        "H2-top": 0.0
+      },
+      "bridge-Cu": {
+        "H2-bridge": 0.15
+      }
+    },
+    "time_weighted_site_utilization": {
+      "top-Ni": {
+        "capacity_sites": 4,
+        "occupied_fraction": 0.1125,
+        "vacancy_fraction": 0.8875
+      },
+      "bridge-Cu": {
+        "capacity_sites": 3,
+        "occupied_fraction": 0.15,
+        "vacancy_fraction": 0.85
+      }
+    },
+    "directional_exchange": [
+      {
+        "reaction_id": "ads",
+        "direction": "forward",
+        "process": "adsorption",
+        "event_count": 3,
+        "events_per_cell_s": 0.6
+      },
+      {
+        "reaction_id": "ads",
+        "direction": "reverse",
+        "process": "desorption",
+        "event_count": 2,
+        "events_per_cell_s": 0.4
+      }
+    ],
+    "residence_exposure_over_desorptions": {
+      "H2-bridge": {
+        "molecule_seconds": 2.25,
+        "molecular_desorptions": 2,
+        "estimate_s": 1.125,
+        "unavailable_reason": null
+      },
+      "H2-top": {
+        "molecule_seconds": 0.0,
+        "molecular_desorptions": 0,
+        "estimate_s": null,
+        "unavailable_reason": "no_observed_molecular_desorption"
+      }
+    }
+  },
+  "sampled_spans_s": {
+    "procstat": [
+      0.0,
+      6.0
+    ],
+    "specnum": [
+      0.0,
+      6.0
+    ]
+  },
+  "statistics": {
+    "independent_trajectories": 1,
+    "effective_sample_size": null,
+    "confidence_interval": null,
+    "observed_events": 5,
+    "scope": "one finite window; checkpoint segments share one trajectory"
+  },
+  "record_sha256": "374640764e24cd0aaa305914d413c1cf856768fe9f93fa0ba66d1c142f3a6a83"
+}

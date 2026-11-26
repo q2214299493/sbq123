@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "temperatures_K",
+    "pressure_species_id",
+    "feeds_bar",
+    "models"
+  ],
+  "properties": {
+    "format": {"const": "catkinas-condition-grid/1"},
+    "temperatures_K": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "number", "exclusiveMinimum": 0}
+    },
+    "pressure_species_id": {"type": "string", "minLength": 1},
+    "feeds_bar": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/feed"}
+    },
+    "models": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/model"}
+    }
+  },
+  "$defs": {
+    "feed": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"type": "number", "minimum": 0}
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "temperature_K",
+        "total_pressure_bar",
+        "network",
+        "dataset",
+        "configuration"
+      ],
+      "properties": {
+        "temperature_K": {"type": "number", "exclusiveMinimum": 0},
+        "total_pressure_bar": {"type": "number", "exclusiveMinimum": 0},
+        "network": {"$ref": "#/$defs/artifact"},
+        "dataset": {"$ref": "#/$defs/artifact"},
+        "configuration": {"$ref": "#/$defs/artifact"},
+        "electronic_identity": {
+          "$ref": "#/$defs/artifact",
+          "description": "Network-verified catkinas-electronic-identity/1 evidence cited by each reviewed kinetic model. Required for project models. Binds electronic_sources to dft_method_sha256 and electronic_conventions_sha256."
+        },
+        "normalization": {
+          "anyOf": [
+            {"$ref": "#/$defs/artifact"},
+            {"type": "null"}
+          ]
+        }
+      }
+    }
+  }
+}

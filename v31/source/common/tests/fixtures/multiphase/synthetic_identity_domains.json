@@ -1,0 +1,40 @@
+{
+  "format": "network-definition/1",
+  "projects": [
+    {"project_id":"structural-test"}
+  ],
+  "materials": [
+    {"material_id":"film","project_id":"structural-test"},
+    {"material_id":"support","project_id":"structural-test"}
+  ],
+  "phases": [
+    {"phase_id":"ordered","material_id":"film","name":"ordered polymorph","phase_category":"crystalline","description":"Oriented synthetic layer","composition":{"Si":1},"charge":0},
+    {"phase_id":"disordered","material_id":"film","name":"disordered polymorph","phase_category":"amorphous","structural_provenance":null},
+    {"phase_id":"support-phase","material_id":"support","name":"support","phase_category":"mixed solid"}
+  ],
+  "surfaces": [
+    {"surface_id":"outer","phase_id":"ordered","miller_indices":[1,0,0],"lattice_vectors_angstrom":[[3,0,0],[1,4,0]],"coordinate_convention":"Fractional in the two declared in-plane vectors"},
+    {"surface_id":"inner","phase_id":"ordered","miller_indices":[0,1,0]},
+    {"surface_id":"rough","phase_id":"disordered","surface_descriptor":"Disordered outer boundary"},
+    {"surface_id":"support-face","phase_id":"support-phase","surface_descriptor":"Porous wall"}
+  ],
+  "sites": [
+    {"site_id":"shared","surface_id":"outer","site_type":"anchor"},
+    {"site_id":"rough-pool","surface_id":"rough","site_type":"anchor"},
+    {"site_id":"rim-a","surface_id":"outer","site_type":"anchor","interface_id":"contact-a"},
+    {"site_id":"rim-b","surface_id":"outer","site_type":"anchor","interface_id":"contact-b"}
+  ],
+  "interfaces": [
+    {"interface_id":"contact-a","phase_ids":["ordered","disordered"],"surface_ids":["outer","rough"],"geometry":"Declared contact patch"},
+    {"interface_id":"contact-b","phase_ids":["ordered","disordered"],"surface_ids":["outer","rough"],"geometry":"Declared contact patch"},
+    {"interface_id":"unlocated","phase_ids":["ordered","support-phase","disordered"]}
+  ],
+  "species": [
+    {"species_id":"probe-g","phase":"gas","material_ids":[],"surface_ids":[],"interface_id":null,"composition":{"Ar":1},"charge":0,"site_occupancy":{}},
+    {"species_id":"probe-on-outer","phase":"surface","material_ids":["film"],"surface_ids":["outer"],"interface_id":null,"composition":{"Ar":1},"charge":0,"site_occupancy":{"shared":1}},
+    {"species_id":"probe-on-rough","phase":"surface","material_ids":["film"],"surface_ids":["rough"],"interface_id":null,"composition":{"Ar":1},"charge":0,"site_occupancy":{"rough-pool":1}},
+    {"species_id":"probe-a","phase":"surface","material_ids":["film"],"surface_ids":["outer","rough"],"interface_id":"contact-a","composition":{"Ar":1},"charge":0,"site_occupancy":{"rim-a":1,"rough-pool":1}},
+    {"species_id":"probe-b","phase":"surface","material_ids":["film"],"surface_ids":["outer","rough"],"interface_id":"contact-b","composition":{"Ar":1},"charge":0,"site_occupancy":{"rim-b":1,"rough-pool":1}}
+  ],
+  "reactions": []
+}

@@ -1,0 +1,36 @@
+{
+  "purpose": "REVIEW_ALREADY_SUBMITTED_LABELS_AND_TARGETED_GAP_CANDIDATES_ONLY",
+  "inputs": {
+    "manifest": {
+      "path": "calculations/fe110_reico_pilot300_20261022/combined_force_package_20261023_v2/training_manifest.json",
+      "sha256": "6a9121a26bc2a8eb51641cfe0b694fb3c4c4c719e791eaa2d4fc6fe0b10e9ebb"
+    },
+    "selection": {
+      "path": "calculations/fe110_reico_pilot300_20261022/sampling93_v1/selection/selected_frames.json",
+      "sha256": "022e46102437678a541c587bbd30aaa1e0db27992ea8fcedca3092343701cd34"
+    },
+    "checkpoint": {
+      "path": "calculations/fe110_reico_pilot300_20261022/sampling93_v1/dft_inputs_v1/initial_submission_checkpoint.json",
+      "sha256": "1339a8ec5d894807dea15037ae580cd43ba4032caef4b62acdd0d62c5f8dbbd2"
+    },
+    "initial_labels": {
+      "path": "calculations/fe110_reico_pilot300_20261022/force_label_qc_20261023_v1/all_label_qc_local_only.json",
+      "sha256": "bb1b6e9e8baf239060609c4c72328c42024f8e211158bf4a87729bf1aca83c94"
+    },
+    "incremental_labels": {
+      "path": "calculations/fe110_reico_pilot300_20261022/status_lowforce_check_20261023_v1/incremental_qc_local_only.json",
+      "sha256": "053c50a80c43c4c4e843044aeefdd812daf073597f2da29e7f8499f85e2b7348"
+    },
+    "prior_joint_config": {
+      "path": "configs/fe110_reico_pilot/joint_coverage_v1.json",
+      "sha256": "9a0b78f6d34839684157e1794d7fb0fcfc44ebfdacdca77bffff1fb8bb838d5c"
+    },
+    "prior_joint_summary": {
+      "path": "calculations/fe110_reico_pilot300_20261022/joint_coverage_20261023_v3/summary.json",
+      "sha256": "30ef811215474a20f2bfc1ada8f171775c52a7899c10820e3e3a4ace90fb858a"
+    }
+  },
+  "output": "calculations/fe110_reico_pilot300_20261022/followup_20261024_v2",
+  "maximum_geometry_candidates": 4,
+  "new_DFT_GPU_training_or_submission": false
+}

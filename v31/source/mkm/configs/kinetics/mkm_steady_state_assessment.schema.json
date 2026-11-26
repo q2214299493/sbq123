@@ -1,0 +1,240 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "tolerances": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "const": "mkm-steady-tolerances/1"
+        },
+        "coverage": {"type": "number", "minimum": 0},
+        "vacancy": {"type": "number", "minimum": 0},
+        "net_rate": {"type": "number", "minimum": 0},
+        "tof": {"type": "number", "minimum": 0},
+        "relative": {"type": "number", "minimum": 0, "exclusiveMaximum": 1},
+        "max_residual": {"type": "number", "minimum": 0},
+        "separation_factor": {"type": "number", "exclusiveMinimum": 1}
+      },
+      "required": [
+        "format",
+        "coverage",
+        "vacancy",
+        "net_rate",
+        "tof",
+        "relative",
+        "max_residual",
+        "separation_factor"
+      ],
+      "additionalProperties": false
+    },
+    "member": {
+      "type": "object",
+      "properties": {
+        "run": {"type": "string", "minLength": 1},
+        "execution_id": {"type": "string", "minLength": 1},
+        "mat_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "log_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "plan_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "receipt_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "result_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "native_input_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "network_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "dataset_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "fixed_config_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "initial_coverages": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {"type": "number", "minimum": 0, "maximum": 1}
+        },
+        "net_rate_unit": {"type": "string", "minLength": 1},
+        "native_initial": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {"type": "number", "minimum": 0, "maximum": 1}
+        },
+        "normalization": {
+          "type": ["object", "null"],
+          "required": [
+            "reference_basis",
+            "reference_id",
+            "evidence_sha256",
+            "network_version",
+            "denominator_value",
+            "sites_per_reference",
+            "extent_unit",
+            "time_unit",
+            "inventory_ids",
+            "denominator_unit"
+          ]
+        },
+        "runtime": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "residual": {"type": "number", "minimum": 0},
+        "single_point_residual": {"type": "number", "minimum": 0},
+        "analysis_residual": {"type": "number", "minimum": 0},
+        "coverage": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {"type": "number", "minimum": 0, "maximum": 1}
+        },
+        "vacancy": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {"type": "number", "minimum": 0, "maximum": 1}
+        },
+        "net_rate": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {"type": "number"}
+        },
+        "tof": {
+          "type": "object",
+          "properties": {
+            "per_reference_s": {"type": ["number", "null"]}
+          },
+          "required": [
+            "per_reference_s"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "run",
+        "plan_sha256",
+        "receipt_sha256",
+        "result_sha256",
+        "native_input_sha256",
+        "network_sha256",
+        "dataset_sha256",
+        "fixed_config_sha256",
+        "initial_coverages",
+        "net_rate_unit",
+        "native_initial",
+        "normalization",
+        "runtime",
+        "residual",
+        "single_point_residual",
+        "analysis_residual",
+        "coverage",
+        "vacancy",
+        "net_rate",
+        "tof"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "type": "object",
+  "properties": {
+    "format": {
+      "const": "mkm-steady-state-assessment/1"
+    },
+    "study_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "tolerances": {
+      "$ref": "#/$defs/tolerances"
+    },
+    "classification": {
+      "enum": [
+        "SINGLE_STEADY_STATE_OBSERVED",
+        "MULTIPLE_STEADY_STATES_OBSERVED",
+        "INCONCLUSIVE"
+      ]
+    },
+    "root_partition": {
+      "type": "object",
+      "properties": {
+        "groups": {"type": ["array", "null"], "items": {"type": "array", "items": {"type": "string"}}},
+        "distinct_observed_roots": {"type": ["integer", "null"], "minimum": 1}
+      },
+      "required": ["groups", "distinct_observed_roots"],
+      "additionalProperties": false
+    },
+    "members": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/member"
+      }
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "run": {"type": "string", "minLength": 1},
+          "reason": {"type": "string", "minLength": 1}
+        },
+        "required": [
+          "run",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "comparisons": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "runs": {
+            "type": "array",
+            "items": {"type": "string", "minLength": 1},
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "differences": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "quantity": {
+                  "enum": [
+                    "coverage",
+                    "vacancy",
+                    "net_rate",
+                    "tof"
+                  ]
+                },
+                "id": {"type": "string", "minLength": 1},
+                "delta": {"type": "number", "minimum": 0},
+                "tolerance": {"type": "number", "minimum": 0}
+              },
+              "required": [
+                "quantity",
+                "id",
+                "delta",
+                "tolerance"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "classification": {
+            "enum": [
+              "SINGLE_STEADY_STATE_OBSERVED",
+              "MULTIPLE_STEADY_STATES_OBSERVED",
+              "INCONCLUSIVE"
+            ]
+          }
+        },
+        "required": [
+          "runs",
+          "differences",
+          "classification"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "format",
+    "study_sha256",
+    "tolerances",
+    "classification",
+    "members",
+    "blockers",
+    "comparisons"
+  ],
+  "additionalProperties": false
+}

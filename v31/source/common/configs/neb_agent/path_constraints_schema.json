@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["use_retrieval_prior", "confidence", "recommended_path_method", "review_status"],
+  "properties": {
+    "use_retrieval_prior": {"type": "boolean"},
+    "confidence": {"enum": ["high", "medium", "low", "none"]},
+    "recommended_path_method": {"enum": ["idpp", "segmented_idpp", "constrained_idpp", "manual_midpoint"]},
+    "review_status": {"enum": ["needs_review", "accepted", "rejected"]},
+    "reaction_coordinate": {"type": "object"},
+    "suggested_midpoints": {"type": "array"},
+    "do_not_do": {"type": "array", "items": {"type": "string"}}
+  }
+}

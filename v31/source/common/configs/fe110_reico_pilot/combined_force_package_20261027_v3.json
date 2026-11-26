@@ -1,0 +1,65 @@
+{
+  "purpose": "LOCAL_FORCE_PACKAGE_ASSEMBLY_ONLY_NO_TRAINING",
+  "inputs": {
+    "prior_manifest": {
+      "path": "calculations/fe110_reico_pilot300_20261022/combined_force_package_20261023_v2/training_manifest.json",
+      "sha256": "6a9121a26bc2a8eb51641cfe0b694fb3c4c4c719e791eaa2d4fc6fe0b10e9ebb"
+    },
+    "prior_assembly": {
+      "path": "calculations/fe110_reico_pilot300_20261022/combined_force_package_20261023_v2/assembly_request.json",
+      "sha256": "acf7ff43e322a18911bd40af1c94cb4511d84018fcec2a853d577477bbeca425"
+    },
+    "prior_isolation": {
+      "path": "calculations/fe110_reico_pilot300_20261022/combined_force_package_20261023_v2/isolation_review.json",
+      "sha256": "e14edca2a63c4c9ee9a3a6c9f24c3e4128fd549f364fc6fc15ddc5046ab53606"
+    },
+    "audit": {
+      "path": "calculations/fe110_reico_pilot300_20261022/joint_update_20261025_v1/audit_training_view_local_only.json",
+      "sha256": "dd23d9d3d27e5f572475903dfaf94108d14d4a4f697cf145ddf887ebc7177ba0"
+    },
+    "audit_inventory": {
+      "path": "calculations/fe110_reico_pilot300_20261022/joint_update_20261025_v1/output_inventory.json",
+      "sha256": "d5f82cff43f9fb80da69875d8b3490a362d5da4f85e03e3ebd341771247feadc"
+    },
+    "audit_summary": {
+      "path": "calculations/fe110_reico_pilot300_20261022/joint_update_20261025_v1/summary.json",
+      "sha256": "74e0b3d6fdf39a6f6b0a6cfda2d6a424c0411d85c15e2463eefb4437bf48db6e"
+    },
+    "supplement": {
+      "path": "calculations/fe110_reico_pilot300_20261022/grouped_qc_20261026_v2/recommended_small_supplement.json",
+      "sha256": "65d357f209929b8f5e97683fb27ade7df8bae21b072a23acf15981cb6d266c9b"
+    },
+    "supplement_review": {
+      "path": "calculations/fe110_reico_pilot300_20261022/grouped_qc_20261026_v2/summary.json",
+      "sha256": "66c6d3d813951b70cc9482a928a67082545819addba65a3684a605a710650db9"
+    },
+    "supplement_verification": {
+      "path": "calculations/fe110_reico_pilot300_20261022/grouped_qc_20261026_v2/independent_verification.json",
+      "sha256": "87f67f8cde8c79a4f037ec68971763623a67e7895c0a0add7c5275a71a5fcefe"
+    },
+    "supplement_isolation": {
+      "path": "calculations/fe110_reico_pilot300_20261022/grouped_qc_20261026_v2/training_isolation.json",
+      "sha256": "6b6111042ca796dc46dfb0d955038e29616bd66354204cceba45f35c0c430a1e"
+    },
+    "frozen_selection": {
+      "path": "calculations/fe110_reico_pilot300_20261022/sampling93_v1/selection/selected_frames.json",
+      "sha256": "022e46102437678a541c587bbd30aaa1e0db27992ea8fcedca3092343701cd34"
+    }
+  },
+  "base_mode": "audited485",
+  "prior_training": 366,
+  "audited_training": 485,
+  "additions": 27,
+  "expected_split_counts": {
+    "train": 512,
+    "development": 78,
+    "heldout": 53
+  },
+  "observed_heldout_quarantined": 16,
+  "output": "calculations/fe110_reico_pilot300_20261022/combined_force_package_20261027_v3",
+  "training_target": "forces_only",
+  "energy_loss_coefficient": 0,
+  "sampling": "existing uniform-frame policy;renormalize training only",
+  "training_authorized": false,
+  "new_compute": false
+}

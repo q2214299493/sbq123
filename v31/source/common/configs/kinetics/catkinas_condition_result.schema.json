@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "manifest_sha256",
+    "models",
+    "pressure_species_id",
+    "points",
+    "comparisons"
+  ],
+  "properties": {
+    "format": {"const": "catkinas-condition-result/1"},
+    "manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "pressure_species_id": {"type": "string"},
+    "models": {
+      "type": "array",
+      "minItems": 1
+    },
+    "points": {
+      "type": "array",
+      "minItems": 2,
+      "items": {"$ref": "#/$defs/point"}
+    },
+    "comparisons": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "axis",
+          "start",
+          "end",
+          "delta"
+        ],
+        "properties": {
+          "axis": {
+            "enum": [
+              "temperature_K",
+              "partial_pressure_bar"
+            ]
+          },
+          "start": {"type": "string"},
+          "end": {"type": "string"},
+          "delta": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "required": [
+              "coverage",
+              "molar_selectivity",
+              "net_rate",
+              "tof"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "point": {
+      "type": "object",
+      "required": [
+        "temperature_K",
+        "partial_pressure_bar",
+        "status",
+        "convergence",
+        "run",
+        "model",
+        "plan_sha256",
+        "reason",
+        "result"
+      ],
+      "properties": {
+        "temperature_K": {"type": "number", "exclusiveMinimum": 0},
+        "partial_pressure_bar": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {"type": "number", "minimum": 0}
+        },
+        "status": {
+          "enum": [
+            "QUALIFIED",
+            "UNQUALIFIED",
+            "INVALID_EVIDENCE",
+            "REJECTED",
+            "CREATED",
+            "QUALIFICATION",
+            "INPUT_GENERATED",
+            "AWAITING_APPROVAL",
+            "READY",
+            "RUNNING",
+            "COLLECTING",
+            "PARSING",
+            "VALIDATING"
+          ]
+        },
+        "convergence": {"type": "string"},
+        "run": {"type": "string"},
+        "model": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "plan_sha256": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "if": {
+        "properties": {
+          "status": {"const": "QUALIFIED"}
+        }
+      },
+      "then": {
+        "properties": {
+          "convergence": {"const": "converged"},
+          "reason": {"type": "null"},
+          "result": {
+            "type": "object",
+            "required": [
+              "coverage",
+              "vacancy",
+              "reactions",
+              "tof",
+              "normalization",
+              "net_rate",
+              "net_rate_unit",
+              "quality",
+              "native_outputs",
+                "kinetic_applicability",
+                "tof_qualification",
+                "network_version",
+                "dataset_version",
+              "runtime",
+              "solver_settings",
+              "result_sha256",
+              "receipt_sha256",
+              "molar_selectivity"
+            ],
+            "properties": {
+              "coverage": {"type": "object"},
+              "vacancy": {"type": "object"},
+              "reactions": {
+                "type": "array",
+                "minItems": 1
+              },
+              "tof": {
+                "type": "object",
+                "required": [
+                  "per_reference_s"
+                ],
+                "properties": {
+                  "per_reference_s": {
+                    "type": [
+                      "null",
+                      "number"
+                    ]
+                  }
+                }
+              },
+              "normalization": {
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "molar_selectivity": {
+                "type": [
+                  "object",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "result": {"type": "null"},
+          "reason": {"type": "string"}
+        }
+      }
+    }
+  }
+}

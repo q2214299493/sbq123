@@ -1,0 +1,546 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.sbq123.invalid/multiphase/1.0.0/kinetic_parameter.schema.json",
+  "title": "kinetic parameter v1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "parameter_set_id",
+    "reaction_id",
+    "rate_law_id",
+    "temperature_K",
+    "pressure_Pa",
+    "energy_basis",
+    "energy_reference_id",
+    "standard_state_id",
+    "standard_states",
+    "forward",
+    "reverse",
+    "degeneracy",
+    "coverage_terms",
+    "validity_range",
+    "uncertainty",
+    "sources",
+    "eligibility",
+    "validation"
+  ],
+  "$defs": {
+    "coverage_study_request_v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "format",
+        "max_total_calls",
+        "branches",
+        "iteration",
+        "root_tolerances"
+      ],
+      "properties": {
+        "format": {
+          "const": "mkm-coverage-study/1"
+        },
+        "max_total_calls": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "branches": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "initial",
+              "max_calls"
+            ],
+            "properties": {
+              "initial": {
+                "type": "object",
+                "minProperties": 1,
+                "additionalProperties": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              },
+              "max_calls": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          }
+        },
+        "iteration": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "coverage_atol",
+            "energy_eV",
+            "log_k",
+            "source_per_s",
+            "native_residual",
+            "fd_step",
+            "jacobian_atol",
+            "jacobian_rtol",
+            "eigen_margin_per_s",
+            "stagnation_atol",
+            "cycle_atol",
+            "damping"
+          ],
+          "properties": {
+            "coverage_atol": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "energy_eV": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "log_k": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "source_per_s": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "native_residual": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "fd_step": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "jacobian_atol": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "jacobian_rtol": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "eigen_margin_per_s": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "stagnation_atol": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "cycle_atol": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "damping": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "maximum": 1
+            }
+          }
+        },
+        "root_tolerances": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "format",
+            "relative",
+            "coverage",
+            "vacancy",
+            "net_rate",
+            "tof",
+            "max_residual",
+            "separation_factor"
+          ],
+          "properties": {
+            "format": {
+              "const": "mkm-steady-tolerances/1"
+            },
+            "relative": {
+              "type": "number",
+              "minimum": 0
+            },
+            "coverage": {
+              "type": "number",
+              "minimum": 0
+            },
+            "vacancy": {
+              "type": "number",
+              "minimum": 0
+            },
+            "net_rate": {
+              "type": "number",
+              "minimum": 0
+            },
+            "tof": {
+              "type": "number",
+              "minimum": 0
+            },
+            "max_residual": {
+              "type": "number",
+              "minimum": 0
+            },
+            "separation_factor": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    },
+    "coverage_excess_fit_v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "format",
+        "reference_id",
+        "energy_reference_id",
+        "standard_state_id",
+        "system_sha256",
+        "coordinate_unit",
+        "energy_unit",
+        "interaction_unit",
+        "ts_slope_unit",
+        "baseline",
+        "uncertainty",
+        "source_sha256",
+        "use_scope",
+        "temperature_K",
+        "pressure_Pa",
+        "capacities",
+        "axes",
+        "W",
+        "W_sigma",
+        "reactions"
+      ],
+      "properties": {
+        "format": {
+          "const": "mkm-excess-gibbs/1"
+        },
+        "reference_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "energy_reference_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "standard_state_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "system_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "coordinate_unit": {
+          "const": "molecules/reference_unit"
+        },
+        "energy_unit": {
+          "const": "eV/reference_unit"
+        },
+        "interaction_unit": {
+          "const": "eV*reference_unit/molecule^2"
+        },
+        "ts_slope_unit": {
+          "const": "eV*reference_unit/molecule"
+        },
+        "baseline": {
+          "const": "reviewed_Gibbs_at_x0"
+        },
+        "uncertainty": {
+          "const": "independent_upper_triangle_and_TS_1sigma"
+        },
+        "source_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "use_scope": {
+          "enum": [
+            "synthetic_benchmark",
+            "project"
+          ]
+        },
+        "temperature_K": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 2
+        },
+        "pressure_Pa": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 2
+        },
+        "capacities": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "axes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "species_id",
+              "basis_inventory",
+              "activity_inventory",
+              "x0",
+              "domain"
+            ],
+            "properties": {
+              "species_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "activity_inventory": {"type": ["string", "null"], "minLength": 1},
+              "basis_inventory": {
+                "type": "string",
+                "minLength": 1
+              },
+              "x0": {
+                "type": "number",
+                "minimum": 0
+              },
+              "domain": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "type": "number"
+                },
+                "maxItems": 2
+              }
+            }
+          }
+        },
+        "W": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "W_sigma": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        },
+        "reactions": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "parent_gibbs_eV",
+              "absolute_TS_slope",
+              "TS_slope_sigma",
+              "native_events_per_reference"
+            ],
+            "properties": {
+              "parent_gibbs_eV": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "forward",
+                  "reverse",
+                  "reaction"
+                ],
+                "properties": {
+                  "forward": {
+                    "type": "number"
+                  },
+                  "reverse": {
+                    "type": "number"
+                  },
+                  "reaction": {
+                    "type": "number"
+                  }
+                }
+              },
+              "absolute_TS_slope": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "number"
+                }
+              },
+              "TS_slope_sigma": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              },
+              "native_events_per_reference": {
+                "anyOf": [
+                  {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "coverage_ts_binding_v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["format", "network_version", "dataset_version", "evidence"],
+      "properties": {
+        "format": {"const": "mkm-coverage-ts/1"},
+        "network_version": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "dataset_version": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "evidence": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"}
+      }
+    },
+    "coverage_ts_fit_v1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["format", "reaction_id", "parameter_set_id", "phase_id", "surface_id", "site_inventory_id",
+                   "coverage_basis", "reference_coverage", "reference_gibbs_eV", "term", "validity_range"],
+      "properties": {
+        "format": {"const": "linear-ts-at-reference/1"},
+        "reaction_id": {"$ref": "#/properties/reaction_id"},
+        "parameter_set_id": {"$ref": "#/properties/parameter_set_id"},
+        "phase_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+        "surface_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+        "site_inventory_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+        "coverage_basis": {"const": "fraction_of_named_site_inventory"},
+        "reference_coverage": {"type": "number", "minimum": 0, "maximum": 1},
+        "reference_gibbs_eV": {
+          "type": "object", "additionalProperties": false, "required": ["forward", "reverse", "reaction"],
+          "properties": {"forward": {"type": "number"}, "reverse": {"type": "number"}, "reaction": {"type": "number"}}
+        },
+        "term": {"$ref": "#/properties/coverage_terms/items"},
+        "validity_range": {"$ref": "#/properties/validity_range"}
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "parameter_set_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "reaction_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "rate_law_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "temperature_K": {"type": "number", "exclusiveMinimum": 0},
+    "pressure_Pa": {"type": "number", "minimum": 0},
+    "energy_basis": {"enum": ["electronic", "gibbs"]},
+    "energy_reference_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "standard_state_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "standard_states": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gas_pressure_Pa", "solute_concentration_mol_m3", "surface_activity_convention"],
+      "properties": {
+        "gas_pressure_Pa": {"type": "number", "exclusiveMinimum": 0},
+        "solute_concentration_mol_m3": {"type": "number", "exclusiveMinimum": 0},
+        "surface_activity_convention": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"}
+      }
+    },
+    "forward": {
+      "anyOf": [
+        {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/rate"},
+        {"type": "null"}
+      ]
+    },
+    "reverse": {
+      "anyOf": [
+        {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/rate"},
+        {"type": "null"}
+      ]
+    },
+    "degeneracy": {"type": "integer", "minimum": 1},
+    "coverage_terms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["species_id", "coefficient", "expression", "already_in_barrier", "min_fraction", "max_fraction"],
+        "properties": {
+          "species_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+          "coefficient": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/energy"},
+          "expression": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"},
+          "already_in_barrier": {"type": "boolean"},
+          "min_fraction": {"type": "number", "minimum": 0, "maximum": 1},
+          "max_fraction": {"type": "number", "minimum": 0, "maximum": 1}
+        }
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "validity_range": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["min_temperature_K", "max_temperature_K", "min_pressure_Pa", "max_pressure_Pa"],
+      "properties": {
+        "min_temperature_K": {"type": "number", "exclusiveMinimum": 0},
+        "max_temperature_K": {"type": "number", "exclusiveMinimum": 0},
+        "min_pressure_Pa": {"type": "number", "minimum": 0},
+        "max_pressure_Pa": {"type": "number", "minimum": 0}
+      }
+    },
+    "uncertainty": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["quantity", "value", "unit", "method"],
+          "properties": {
+            "quantity": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"},
+            "value": {"type": "number", "minimum": 0},
+            "unit": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"},
+            "method": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"}
+          }
+        },
+        {"type": "null"}
+      ]
+    },
+    "sources": {
+      "type": "array",
+      "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/evidence"},
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "eligibility": {"enum": ["draft", "blocked", "eligible"]},
+    "validation": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/validation"}
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"eligibility": {"const": "eligible"}}
+      },
+      "then": {
+        "properties": {
+          "validation": {
+            "properties": {"status": {"const": "accepted"}}
+          },
+          "forward": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/rate"}
+        }
+      }
+    }
+  ]
+}

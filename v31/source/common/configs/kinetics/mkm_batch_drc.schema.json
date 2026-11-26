@@ -1,0 +1,329 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Bounded network DRC pilot",
+  "type": "object",
+  "required": [
+    "format",
+    "complete",
+    "plan_sha256",
+    "reactions",
+    "ranking",
+    "blocked",
+    "unavailable",
+    "coverage_response",
+    "flux_response",
+    "budget",
+    "provenance"
+  ],
+  "properties": {
+    "format": {
+      "const": "bounded-drc-batch/1"
+    },
+    "complete": {
+      "type": "boolean"
+    },
+    "plan_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "reactions": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/reaction"
+      }
+    },
+    "ranking": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "reaction_id",
+          "drc"
+        ],
+        "properties": {
+          "reaction_id": {
+            "type": "string"
+          },
+          "drc": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "blocked": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "unavailable": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "coverage_response": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "plus",
+          "minus"
+        ],
+        "properties": {
+          "plus": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "number"
+              }
+            }
+          },
+          "minus": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    "flux_response": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "plus",
+          "minus"
+        ],
+        "properties": {
+          "plus": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "number"
+              }
+            }
+          },
+          "minus": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    "budget": {
+      "type": "object",
+      "required": [
+        "limits",
+        "members",
+        "actual_native_runs",
+        "native_s",
+        "wall_s"
+      ],
+      "properties": {
+        "limits": {
+          "type": "object",
+          "required": [
+            "max_runs",
+            "per_run_s",
+            "native_s",
+            "wall_s",
+            "max_parallel",
+            "max_retries"
+          ],
+          "properties": {
+            "max_runs": {
+              "const": 4
+            },
+            "per_run_s": {
+              "const": 210
+            },
+            "native_s": {
+              "const": 840
+            },
+            "wall_s": {
+              "const": 960
+            },
+            "max_parallel": {
+              "const": 1
+            },
+            "max_retries": {
+              "const": 0
+            }
+          }
+        },
+        "actual_native_runs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "native_s": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 840
+        },
+        "wall_s": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 960
+        }
+      }
+    },
+    "provenance": {
+      "type": "object"
+    }
+  },
+  "$defs": {
+    "reaction": {
+      "type": "object",
+      "required": [
+        "status",
+        "drc",
+        "stability",
+        "origin",
+        "missing",
+        "equation",
+        "energies",
+        "ts_id",
+        "rate_law_id",
+        "gas_orders",
+        "coefficient_units"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "READY",
+            "ALREADY_VALIDATED",
+            "BLOCKED",
+            "UNAVAILABLE",
+            "REQUIRES_REVIEW"
+          ]
+        },
+        "stability": {
+          "enum": [
+            "stable",
+            "unstable",
+            "untested",
+            "unavailable"
+          ]
+        },
+        "origin": {
+          "enum": [
+            "incomplete",
+            "reused",
+            "new",
+            "excluded"
+          ]
+        },
+        "drc": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "missing": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "origin": {
+                "enum": [
+                  "new",
+                  "reused"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "tof",
+              "scientific_validation",
+              "numerical_uncertainty",
+              "positive_side",
+              "negative_side",
+              "delta_eV"
+            ],
+            "properties": {
+              "drc": {
+                "type": "number"
+              },
+              "positive_side": {
+                "type": "number"
+              },
+              "negative_side": {
+                "type": "number"
+              },
+              "delta_eV": {
+                "const": 0.005
+              },
+              "tof": {
+                "type": "object",
+                "required": [
+                  "baseline",
+                  "plus",
+                  "minus"
+                ],
+                "properties": {
+                  "baseline": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "plus": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "minus": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  }
+                }
+              },
+              "numerical_uncertainty": {
+                "type": "object",
+                "required": [
+                  "standard_error",
+                  "observed_step_change",
+                  "one_sided_gap"
+                ],
+                "properties": {}
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "drc": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

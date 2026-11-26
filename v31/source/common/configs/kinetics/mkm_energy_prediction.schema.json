@@ -1,0 +1,338 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.sbq123.invalid/kinetics/mkm_energy_prediction.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["format", "family_id", "energy_basis", "reaction_axis_sha256", "reaction_source", "observations", "observation_covariance", "models", "cross_covariances", "gibbs_bridge"],
+  "properties": {
+    "format": {"const": "mkm-energy-prediction/1"},
+    "family_evidence_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "family_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {"type": "null"}
+      ]
+    },
+    "energy_basis": {
+      "enum": ["electronic", "enthalpy", "gibbs"]
+    },
+    "reaction_axis_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "reaction_source": {
+      "enum": ["observation", "descriptor"]
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/observation"
+      }
+    },
+    "observation_covariance": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {"type": "number"}
+      }
+    },
+    "models": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/fit"
+      },
+      "minItems": 1
+    },
+    "cross_covariances": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["left", "right", "value"],
+        "properties": {
+          "left": {
+            "type": "string",
+            "minLength": 1
+          },
+          "right": {
+            "type": "string",
+            "minLength": 1
+          },
+          "value": {"type": "number"}
+        }
+      }
+    },
+    "gibbs_bridge": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/bridge"
+        },
+        {"type": "null"}
+      ]
+    }
+  },
+  "if": {"properties": {"family_id": {"type": "string"}}},
+  "then": {"required": ["family_evidence_sha256"]},
+  "else": {"not": {"required": ["family_evidence_sha256"]}},
+  "$defs": {
+    "axis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "definition_sha256"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "definition_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "definition_sha256", "source_sha256", "value", "unit"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "definition_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "source_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "value": {"type": "number"},
+        "unit": {
+          "enum": ["eV", "meV", "kJ/mol"]
+        }
+      }
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["project_id", "reaction_id", "family_id", "phase_ids", "surface_ids", "interface_id", "site_ids", "temperature_K", "pressure_Pa"],
+      "properties": {
+        "project_id": {"type": "string", "minLength": 1},
+        "reaction_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {"type": "null"}
+          ]
+        },
+        "family_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {"type": "null"}
+          ]
+        },
+        "phase_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "surface_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "interface_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {"type": "null"}
+          ]
+        },
+        "site_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "temperature_K": {
+          "type": "array",
+          "items": {"type": "number"},
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "pressure_Pa": {
+          "type": "array",
+          "items": {"type": "number"},
+          "minItems": 2,
+          "maxItems": 2
+        }
+      }
+    },
+    "fit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model_id", "model_version", "kind", "scope", "energy_basis", "reference_id", "standard_state_id", "standard_states_sha256", "axes", "bounds_eV", "halfspaces", "coefficients", "covariance", "residual_sigma_eV", "training_sha256", "validation_sha256", "fit_source_sha256", "approval"],
+      "properties": {
+        "model_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model_version": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "kind": {
+          "enum": ["descriptor_reaction", "descriptor_barrier", "bep"]
+        },
+        "scope": {
+          "$ref": "#/$defs/scope"
+        },
+        "energy_basis": {
+          "enum": ["electronic", "enthalpy", "gibbs"]
+        },
+        "reference_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "standard_state_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "standard_states_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "axes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/axis"
+          },
+          "minItems": 1
+        },
+        "bounds_eV": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {"type": "number"},
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "minItems": 1
+        },
+        "halfspaces": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["normal", "upper_eV"],
+            "properties": {
+              "normal": {
+                "type": "array",
+                "items": {"type": "number"}
+              },
+              "upper_eV": {"type": "number"}
+            }
+          }
+        },
+        "coefficients": {
+          "description": "Intercept in eV, then dimensionless slopes in declared axis order. All energy axes are evaluated in eV per forward elementary event.",
+          "type": "array",
+          "items": {"type": "number"}
+        },
+        "covariance": {
+          "description": "Full coefficient covariance in the same order and units as coefficients.",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {"type": "number"}
+          }
+        },
+        "residual_sigma_eV": {
+          "type": "number",
+          "minimum": 0
+        },
+        "training_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "validation_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "fit_source_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "approval": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["reviewer", "reviewed_at", "subject_sha256", "status"],
+          "properties": {
+            "reviewer": {
+              "type": "string",
+              "minLength": 1
+            },
+            "reviewed_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "subject_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "status": {"const": "validated"}
+          }
+        }
+      }
+    },
+    "bridge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from_basis", "to_basis", "reaction_eV", "forward_eV", "covariance_eV2", "source_sha256", "temperature_K", "standard_state_id", "reference_id"],
+      "properties": {
+        "from_basis": {
+          "enum": ["electronic", "enthalpy"]
+        },
+        "to_basis": {"const": "gibbs"},
+        "reaction_eV": {"type": "number"},
+        "forward_eV": {"type": "number"},
+        "covariance_eV2": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {"type": "number"}
+          }
+        },
+        "source_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "temperature_K": {"type": "number"},
+        "standard_state_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reference_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

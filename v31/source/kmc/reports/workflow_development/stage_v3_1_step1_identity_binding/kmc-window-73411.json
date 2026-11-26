@@ -1,0 +1,104 @@
+{
+  "format": "kmc-window-binding/1",
+  "result": {
+    "plan_sha256": "42998b3af083d6ccdbdf3a0b808331d3af863c87a25acc207b6580be6fadcc2b",
+    "native_receipt_sha256": "2f1cdd78896aa10bd0fe8f57fca3fb7b17c5f0b88c2a0d6b5f4e7d45c2058b0a"
+  },
+  "checkpoint_lineage": [
+    {
+      "run": "C:\\Users\\86177\\Desktop\\sbq123-kmc-v300\\reports\\workflow_development\\stage_v3_0_0_kmc_step3\\run-09-long-periodic-3x3-seed-73411",
+      "plan_sha256": "42998b3af083d6ccdbdf3a0b808331d3af863c87a25acc207b6580be6fadcc2b",
+      "receipt_sha256": "2f1cdd78896aa10bd0fe8f57fca3fb7b17c5f0b88c2a0d6b5f4e7d45c2058b0a",
+      "approval_sha256": "8af49b8b13ed9f8524de6144e8558c36f5e82fbc2a018926af52f40f37c4975e",
+      "model_sha256": "61f7beb42e2c5260251319f12d2cb7deced76bad731bfcac7d1741237648019f",
+      "parent_receipt_sha256": null,
+      "checkpoint_input_sha256": null,
+      "terminal_step": 1375,
+      "terminal_time_s": 1.60110772
+    }
+  ],
+  "dataset": {
+    "file_sha256": "a005dc846b43715596ee8f1d81ca3dec6c5ac90bdc31c0f3e7d10d8615a576aa",
+    "dataset_version": "25bcea8e358e87ef3e5b505e9895d1e6f328245940638f2cfde65b1c9aaa0c3c",
+    "network_version": "b5e01bff54d729e68adcf34e89d0c2334e1c2b6938d87191e8d23046db6911a7",
+    "project_id": "demo",
+    "parameters": {
+      "ads": {
+        "parameter_set_id": "params",
+        "reaction_row_sha256": "bf5fa600ef784cf9382df9e354371554613c30503372ec113dfa4b986a158797",
+        "energy_reference_id": "demo-ref",
+        "energy_basis": "gibbs",
+        "uncertainty": null
+      }
+    }
+  },
+  "configuration_sha256": "b30e4a8424352514e7248cf76b1ca913184d258b75e70c791d1ce05760f54dde",
+  "seed": 73411,
+  "conditions": {
+    "temperature_K": 400,
+    "pressure_Pa": 100000,
+    "partial_pressure_bar": {
+      "H2-g": 1
+    },
+    "standard_states": {
+      "gas_pressure_Pa": 100000,
+      "solute_concentration_mol_m3": 1000,
+      "surface_activity_convention": "fractional site occupation"
+    }
+  },
+  "definition": {
+    "bounds_s": [
+      0.05,
+      1.55
+    ],
+    "population_rule": "left_held",
+    "event_interval": "(start,end]",
+    "basis": "simulation_cell",
+    "denominator": 1.0
+  },
+  "site_capacities": {
+    "top-Ni": 9,
+    "bridge-Cu": 9
+  },
+  "observation": {
+    "window_s": [
+      0.05,
+      1.55
+    ],
+    "denominator": 1.0,
+    "basis": "simulation_cell",
+    "event_frequency_s_inverse": {
+      "r1_forward": 427.3333333333333,
+      "r2_reverse": 427.3333333333333
+    },
+    "molecules_per_cell": {
+      "H2-bridge": 8.350361742308495,
+      "H2-top": 0.0
+    },
+    "occupied_fraction_by_species": {
+      "top-Ni": {
+        "H2-bridge": 0.9278179713676106,
+        "H2-top": 0.0
+      },
+      "bridge-Cu": {
+        "H2-bridge": 0.9278179713676106
+      }
+    },
+    "coverage": {
+      "top-Ni": 0.9278179713676106,
+      "bridge-Cu": 0.9278179713676106
+    },
+    "pathway_flux": {
+      "ads": {
+        "forward": 641,
+        "reverse": 641,
+        "net_rate": 0.0
+      }
+    },
+    "species_net_rate": {
+      "H2-bridge": 0.0,
+      "H2-g": 0.0
+    }
+  },
+  "window_evidence_sha256": "e8d9ca44d2ad1e60f0ee58e5aea63c069b80cd50559f301374782f538611c090"
+}

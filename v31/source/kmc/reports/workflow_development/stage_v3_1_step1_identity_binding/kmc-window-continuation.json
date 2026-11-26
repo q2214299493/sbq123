@@ -1,0 +1,126 @@
+{
+  "format": "kmc-window-binding/1",
+  "result": {
+    "plan_sha256": "2d1c2df587ea5f5b87a9c92c6e2178dce489b214a32dc4f2c6002eb2478d0d55",
+    "native_receipt_sha256": "ad278de57f52d9d734e481fe6571c83203da5e367776479c7caa918f08904a90"
+  },
+  "checkpoint_lineage": [
+    {
+      "run": "C:\\Users\\86177\\Desktop\\sbq123-kmc-v300\\reports\\workflow_development\\stage_v3_0_0_kmc_step3\\run-02b-local-writer",
+      "plan_sha256": "64bc71b4e9472ef22ad3edb2acc921ee9100b09ad21f52c25fcdc13caf2d1f5c",
+      "receipt_sha256": "38c951eefc2ab9b19ae77ebb205c41c9105e17e369bdbca6446ab5ba9e8786cf",
+      "approval_sha256": "65e29a9fe814831c500cea5528b386d0f625d683476415bbf979039bbf02d850",
+      "model_sha256": "da8cb1bc1a520191f73ca724bdae04a9ab873f56ad553d77373b327cce4066f7",
+      "parent_receipt_sha256": null,
+      "checkpoint_input_sha256": null,
+      "terminal_step": 7,
+      "terminal_time_s": 4.49236504e-05
+    },
+    {
+      "run": "C:\\Users\\86177\\Desktop\\sbq123-kmc-v300\\reports\\workflow_development\\stage_v3_0_0_kmc_step3\\run-03-first-continuation",
+      "plan_sha256": "730d45c423a9284543c6ab69002cdc71b11aba158f8e44b445071a19d32a826e",
+      "receipt_sha256": "9cc6d7d1e222d06ca250a1c7b4e0aeb6f537a85c4472c439d8402bb3ca52e909",
+      "approval_sha256": "53834afa8251ab0b3cc08088aa6d867f99a92b2ad564d0355b5b39557ebdeb0e",
+      "model_sha256": "da8cb1bc1a520191f73ca724bdae04a9ab873f56ad553d77373b327cce4066f7",
+      "parent_receipt_sha256": "38c951eefc2ab9b19ae77ebb205c41c9105e17e369bdbca6446ab5ba9e8786cf",
+      "checkpoint_input_sha256": "79738dd36291525eebf2628507ebcd16be44aa626e3aa07a19094000af61c07d",
+      "terminal_step": 13,
+      "terminal_time_s": 7.21897813e-05
+    },
+    {
+      "run": "C:\\Users\\86177\\Desktop\\sbq123-kmc-v300\\reports\\workflow_development\\stage_v3_0_0_kmc_step3\\run-04-second-continuation",
+      "plan_sha256": "2d1c2df587ea5f5b87a9c92c6e2178dce489b214a32dc4f2c6002eb2478d0d55",
+      "receipt_sha256": "ad278de57f52d9d734e481fe6571c83203da5e367776479c7caa918f08904a90",
+      "approval_sha256": "658a8cad926eb901d073867f50f54ddc3a7e28b20589bc00420b1426eaeabc40",
+      "model_sha256": "da8cb1bc1a520191f73ca724bdae04a9ab873f56ad553d77373b327cce4066f7",
+      "parent_receipt_sha256": "9cc6d7d1e222d06ca250a1c7b4e0aeb6f537a85c4472c439d8402bb3ca52e909",
+      "checkpoint_input_sha256": "da91858981da1ff142120d9de3694f85439ca8ac644e339cca29c8517f8d2b43",
+      "terminal_step": 24,
+      "terminal_time_s": 0.000132209505
+    }
+  ],
+  "dataset": {
+    "file_sha256": "0ad2d9b54625252e5ff4cf6d772f6b04d4b2c601cc2432222acc3c4af384edcf",
+    "dataset_version": "60b337137c7e19df8bd4d9be68c70107e00550bf2a8c8c5506070aaeeb302dc3",
+    "network_version": "7e038a3247d2932359795cfe8733db0f522b34e210411e8729fc80af94714f62",
+    "project_id": "demo",
+    "parameters": {
+      "ads": {
+        "parameter_set_id": "params",
+        "reaction_row_sha256": "d165d5fd56244fa27194fb610e151279ea3f2e7d86aebc427cdb7cbc5dc03348",
+        "energy_reference_id": "demo-ref",
+        "energy_basis": "gibbs",
+        "uncertainty": null
+      }
+    }
+  },
+  "configuration_sha256": "b9c02b4ee3d692f138624d77537e44671dba76ac06b7b0caf90f560b09406cd5",
+  "seed": 13201,
+  "conditions": {
+    "temperature_K": 400,
+    "pressure_Pa": 100000,
+    "partial_pressure_bar": {
+      "H2-g": 1
+    },
+    "standard_states": {
+      "gas_pressure_Pa": 100000,
+      "solute_concentration_mol_m3": 1000,
+      "surface_activity_convention": "fractional site occupation"
+    }
+  },
+  "definition": {
+    "bounds_s": [
+      0.0,
+      0.0001
+    ],
+    "population_rule": "left_held",
+    "event_interval": "(start,end]",
+    "basis": "simulation_cell",
+    "denominator": 1.0
+  },
+  "site_capacities": {
+    "top-Ni": 4,
+    "bridge-Cu": 3
+  },
+  "observation": {
+    "window_s": [
+      0.0,
+      0.0001
+    ],
+    "denominator": 1.0,
+    "basis": "simulation_cell",
+    "event_frequency_s_inverse": {
+      "r1_forward": 100000.0,
+      "r2_reverse": 90000.0
+    },
+    "molecules_per_cell": {
+      "H2-bridge": 0.9766261051360652,
+      "H2-top": 1.0233738948639348
+    },
+    "occupied_fraction_by_species": {
+      "top-Ni": {
+        "H2-bridge": 0.2441565262840163,
+        "H2-top": 0.2558434737159837
+      },
+      "bridge-Cu": {
+        "H2-bridge": 0.32554203504535506
+      }
+    },
+    "coverage": {
+      "top-Ni": 0.5,
+      "bridge-Cu": 0.32554203504535506
+    },
+    "pathway_flux": {
+      "ads": {
+        "forward": 10,
+        "reverse": 9,
+        "net_rate": 10000.0
+      }
+    },
+    "species_net_rate": {
+      "H2-bridge": 10000.0,
+      "H2-top": -10000.0
+    }
+  },
+  "window_evidence_sha256": "61fbb3c462ecc26595af2f2eb0ddb3711f24439488bd99addfb601268ad5b957"
+}

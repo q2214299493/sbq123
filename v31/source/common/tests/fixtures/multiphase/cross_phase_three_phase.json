@@ -1,0 +1,163 @@
+{
+  "format": "network-definition/1",
+  "projects": [
+    {
+      "project_id": "structural-fixture"
+    }
+  ],
+  "materials": [
+    {
+      "material_id": "host-A",
+      "project_id": "structural-fixture"
+    },
+    {
+      "material_id": "host-B",
+      "project_id": "structural-fixture"
+    },
+    {
+      "material_id": "host-C",
+      "project_id": "structural-fixture"
+    }
+  ],
+  "phases": [
+    {
+      "phase_id": "phase-A",
+      "material_id": "host-A"
+    },
+    {
+      "phase_id": "phase-B",
+      "material_id": "host-B"
+    },
+    {
+      "phase_id": "phase-C",
+      "material_id": "host-C"
+    }
+  ],
+  "surfaces": [
+    {
+      "surface_id": "face-A",
+      "phase_id": "phase-A"
+    },
+    {
+      "surface_id": "face-B",
+      "phase_id": "phase-B"
+    },
+    {
+      "surface_id": "face-C",
+      "phase_id": "phase-C"
+    }
+  ],
+  "interfaces": [
+    {
+      "interface_id": "triple-junction",
+      "phase_ids": ["phase-A", "phase-B", "phase-C"],
+      "surface_ids": ["face-A", "face-B", "face-C"]
+    }
+  ],
+  "sites": [
+    {
+      "site_id": "A-pool",
+      "surface_id": "face-A",
+      "site_type": "anchor"
+    },
+    {
+      "site_id": "B-pool",
+      "surface_id": "face-B",
+      "site_type": "anchor"
+    },
+    {
+      "site_id": "C-pool",
+      "surface_id": "face-C",
+      "site_type": "anchor"
+    }
+  ],
+  "species": [
+    {
+      "species_id": "left-He",
+      "phase": "surface",
+      "surface_ids": ["face-A"],
+      "material_ids": ["host-A"],
+      "interface_id": null,
+      "structure_id": "model-left-He",
+      "composition": {
+        "He": 1
+      },
+      "charge": 0,
+      "site_occupancy": {
+        "A-pool": 1
+      }
+    },
+    {
+      "species_id": "right-Ne",
+      "phase": "surface",
+      "surface_ids": ["face-B"],
+      "material_ids": ["host-B"],
+      "interface_id": null,
+      "structure_id": "model-right-Ne",
+      "composition": {
+        "Ne": 1
+      },
+      "charge": 0,
+      "site_occupancy": {
+        "B-pool": 1
+      }
+    },
+    {
+      "species_id": "on-third",
+      "phase": "surface",
+      "surface_ids": ["face-C"],
+      "material_ids": ["host-C"],
+      "interface_id": null,
+      "structure_id": "model-on-third",
+      "composition": {
+        "He": 1,
+        "Ne": 1
+      },
+      "charge": 0,
+      "site_occupancy": {
+        "C-pool": 2
+      }
+    }
+  ],
+  "reactions": [
+    {
+      "reaction_id": "combine",
+      "reaction_type": "cross_phase_elementary",
+      "origin": "synthetic_definition",
+      "reversible": null,
+      "phase_ids": ["phase-A", "phase-B", "phase-C"],
+      "surface_ids": ["face-A", "face-B", "face-C"],
+      "interface_id": "triple-junction",
+      "reactants": {
+        "left-He": 1,
+        "right-Ne": 1
+      },
+      "products": {
+        "on-third": 1
+      },
+      "sites_consumed": {
+        "C-pool": 2
+      },
+      "sites_released": {
+        "A-pool": 1,
+        "B-pool": 1
+      },
+      "required_sites": {
+        "A-pool": 1,
+        "B-pool": 1,
+        "C-pool": 2
+      },
+      "initial_structure_id": "synthetic-initial",
+      "final_structure_id": "synthetic-final",
+      "ts_treatment": "unresolved",
+      "ts_id": null,
+      "free_energies": null,
+      "rate_law_id": null,
+      "eligibility": "draft",
+      "validation": {
+        "status": "unreviewed",
+        "review": null
+      }
+    }
+  ]
+}

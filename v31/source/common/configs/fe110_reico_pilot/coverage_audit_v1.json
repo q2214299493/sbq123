@@ -1,0 +1,21 @@
+{
+  "purpose": "LOCAL_DATASET_AUDIT_AND_PROPOSAL_ONLY",
+  "inventory": "calculations/fe110_reico_pilot300_20261022/sampling93_v1/selection/frame_inventory.json",
+  "selection": "calculations/fe110_reico_pilot300_20261022/sampling93_v1/selection/selected_frames.json",
+  "prior_manifest": "calculations/fe110_c2_adsorption_06_10_20261012/adsorption_training_comparison_20261019_v1/control/training_manifest.json",
+  "reserved_geometry_catalogs": ["calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_review_v3/training_manifest.json"],
+  "compatibility_evidence": [
+    "docs/reviews/fe110_adsorption_training_comparison_20261019.md",
+    "docs/reviews/fe110_adsorption_finetune_package_20261010.md",
+    "calculations/fe110_five_c2_adsorption_20261006/adsorption_finetune_review_v3/replay_compatibility.json"
+  ],
+  "soap": {"species": ["Fe", "C", "H", "O"], "r_cut": 5.0, "n_max": 4, "l_max": 3, "sigma": 0.5, "periodic": true, "average": "off", "dtype": "float64"},
+  "near_Fe_A": 3.0,
+  "leave_family_out_quantile": 0.95,
+  "maximum_random_addition_proposals": 8,
+  "geometry_duplicate_A": 0.10,
+  "reserved_geometry_isolation_A": 0.20,
+  "near_equilibrium_force_diagnostic_eV_A": 0.05,
+  "anchor_force_candidate_eV_A": 0.02,
+  "notes": "SOAP distances, force bins and proposal count are descriptive pilot settings, not physical acceptance or a proven minimum budget. Original 292 selections, partitions and existing jobs stay unchanged. No heldout forces/energies or ML predictions are used."
+}

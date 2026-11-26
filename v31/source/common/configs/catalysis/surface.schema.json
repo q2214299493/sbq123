@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.sbq123.invalid/multiphase/1.0.0/surface.schema.json",
+  "title": "surface v1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "surface_id",
+    "phase_id",
+    "termination",
+    "defects",
+    "structure_id",
+    "structural_provenance",
+    "validation"
+  ],
+  "anyOf": [{"required": ["miller_indices"]}, {"required": ["surface_descriptor"]}],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "surface_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "phase_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "surface_descriptor": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"},
+    "coordinate_convention": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"},
+    "lattice_vectors_angstrom": {
+      "type": "array", "minItems": 2, "maxItems": 3,
+      "items": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "number"}}
+    },
+    "miller_indices": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 4,
+      "items": {"type": "integer"},
+      "contains": {"type": "integer", "not": {"const": 0}}
+    },
+    "termination": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"},
+    "defects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "description"],
+        "properties": {
+          "kind": {"enum": ["vacancy", "substitution", "interstitial", "step", "other"]},
+          "description": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"}
+        }
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "structure_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "structural_provenance": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"},
+    "validation": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/validation"}
+  }
+}
