@@ -4,6 +4,7 @@ import argparse
 import json
 from pathlib import Path
 
+from scripts.replay_evidence import evidence_path
 from scripts.artifact_io import sha256_bytes, sha256_file, sha256_json
 from scripts.execution_permission import require_bound_action
 from scripts.kinetic_data.scientific_identity import read_artifact
@@ -19,7 +20,7 @@ from scripts.surface_kmc.observations import (
     join_samples,
     read_trajectory,
 )
-from scripts.kinetic_parameters.export import zacros as event_table
+from scripts.surface_kmc.parameter_table import zacros as event_table
 from scripts.surface_kmc.topology import topology
 
 
@@ -49,7 +50,7 @@ def _receipt_binding(folder, claim, digest, result, receipt_hash, manifest, conf
         raise ValueError("Zacros execution or approval identity differs")
     require_bound_action(approval, action, digest, {action})
     source = approval["source"]
-    if sha256_file(Path(source["path"])) != source["sha256"]:
+    if sha256_file(evidence_path(source["path"])) != source["sha256"]:
         raise ValueError("Changed Zacros approval source")
     expected = dict(manifest["files"])
     if parent:
@@ -59,7 +60,7 @@ def _receipt_binding(folder, claim, digest, result, receipt_hash, manifest, conf
     for name, value in result["outputs"].items():
         if Path(name).name != name or sha256_file(folder / name) != value:
             raise ValueError(f"Changed Zacros output {name}")
-    return dict(run=str(folder), plan_sha256=digest, receipt_sha256=receipt_hash,
+    return dict(run=plan["run"], plan_sha256=digest, receipt_sha256=receipt_hash,
                 approval_sha256=claim["decision_sha256"], model_sha256=plan["model_sha256"],
                 parent_receipt_sha256=parent["receipt_sha256"] if parent else None,
                 checkpoint_input_sha256=expected.get("restart.inf"),
@@ -68,7 +69,7 @@ def _receipt_binding(folder, claim, digest, result, receipt_hash, manifest, conf
 
 def _writer_boundary(plan, config):
     lineage = plan["lineage"]
-    parent = Path(lineage["run"]).resolve()
+    parent = evidence_path(lineage["run"]).resolve()
     writer, receipt_hash = read_artifact(parent / "result.json")
     if (receipt_hash != lineage["receipt_sha256"]
             or sha256_file(parent / "restart.inf") != plan["inputs"]["restart.inf"]):
@@ -93,7 +94,7 @@ def replay(dataset, config, run, *, bind_receipts=False):
         mapping["topology"] = topology(config["zacros"], dataset["catalog"])[3]
     events = event_table(dataset)["events"]
     chain, seen, receipts = [], set(), []
-    folder = Path(run).resolve()
+    folder = evidence_path(run).resolve()
     while True:
         if folder in seen:
             raise ValueError("Cyclic continuation lineage")
@@ -107,7 +108,7 @@ def replay(dataset, config, run, *, bind_receipts=False):
             or result["plan_sha256"] != digest
             or result["status"] != "validated_output"
             or plan["engine_sha256"] != ENGINE
-            or plan["run"] != str(folder)
+            or evidence_path(plan["run"]).resolve() != folder
             or plan["model_sha256"] != sha256_json(manifest)
         ):
             raise ValueError("Run identity, approval claim, result or model differs")

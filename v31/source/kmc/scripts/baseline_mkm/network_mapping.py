@@ -8,7 +8,7 @@ from scripts.baseline_mkm.normalization import normalization as normalization, r
 from scripts.baseline_mkm.mapping_scope import MappingBlocked, issue, topology
 from scripts.baseline_mkm.single_point import qualify
 from scripts.kinetic_parameters.engine import check_version
-from scripts.kinetic_parameters.export import catkinas
+from scripts.baseline_mkm.parameter_table import catkinas
 from scripts.multiphase_contracts import read_unique_json
 from scripts.native_model import publish
 

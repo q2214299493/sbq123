@@ -72,7 +72,7 @@ def assess_field(records, operation, context):
     for record in records:
         status, usable, reasons = inspect_record(record, operation, context)
         candidates.append({"record_id": record["id"], "status": status, "usable": usable, "reasons": reasons})
-    usable_records = [record for record, result in zip(records, candidates) if result["usable"]]
+    usable_records = [record for record, result in zip(records, candidates, strict=True) if result["usable"]]
     reasons = []
     if any(r["value"] != usable_records[0]["value"] for r in usable_records):
         status, selected = INCOMPATIBLE, None

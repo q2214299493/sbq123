@@ -4,6 +4,7 @@ import argparse
 import json
 from pathlib import Path
 
+from scripts.replay_evidence import evidence_path
 from scripts.artifact_io import sha256_file, sha256_json
 from scripts.baseline_mkm.steady_states import observe
 from scripts.kinetic_data.scientific_identity import check_binding, dataset_reference, read_artifact
@@ -20,10 +21,10 @@ def bind_result(run, *, normalization_profile=None):
         raise ValueError("MKM network, dataset or configuration differs from approved plan")
     approved_profile = plan.get("normalization_profile_sha256")
     profile = normalization_profile or plan.get("normalization_profile")
-    profile_hash = sha256_file(Path(profile)) if profile else None
+    profile_hash = sha256_file(evidence_path(profile)) if profile else None
     if approved_profile and profile_hash != approved_profile:
         raise ValueError("MKM normalization profile differs from approved plan")
-    point = observe(run, Path(profile) if profile else None)
+    point = observe(run, evidence_path(profile) if profile else None)
     result = read(run / "result.json")
     if (result["run_id"] != plan["run_id"] or point["plan_sha256"] != result["plan_sha256"]
             or point["result_sha256"] != sha256_file(run / "result.json")

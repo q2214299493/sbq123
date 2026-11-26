@@ -5,7 +5,6 @@ import tempfile
 from pathlib import Path
 
 from scripts.artifact_io import sha256_bytes, sha256_json
-from scripts.kinetic_parameters.export import catkinas, zacros
 from scripts.multiphase_contracts import read_unique_json as read
 from scripts.native_inputs import conditions as conditions, integer as integer, token as token
 
@@ -20,6 +19,7 @@ def _approved_table(exporter, dataset, table):
 def assemble(engine, dataset, config, table=None, *, general_network=None):
     if engine == "catkinas":
         from scripts.baseline_mkm.mapping_scope import check_general_scope, check_table_scope
+        from scripts.baseline_mkm.parameter_table import catkinas
         from scripts.baseline_mkm.native import render
         from scripts.native_validation import cat_readback
 
@@ -31,6 +31,7 @@ def assemble(engine, dataset, config, table=None, *, general_network=None):
         files, details = render(expected, config, dataset, general=general_network is not None)
         details["native_text_readback"] = cat_readback(files, expected, details, initial_coverages=config["catkinas"]["initial_coverages"])
     elif engine == "zacros":
+        from scripts.surface_kmc.parameter_table import zacros
         from scripts.surface_kmc.native import render
         from scripts.native_validation import zac_readback
 

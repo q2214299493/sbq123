@@ -527,7 +527,7 @@ def _reaction_engine(engine, row, assembled, species, outputs):
     kinetic = row["kinetics"]
     issues = list(row["missing"])
     if engine == "kmc" and kinetic:
-        from scripts.kinetic_parameters.export import verify_event
+        from scripts.reaction_network.event_geometry import verify_event
 
         try:
             verify_event(kinetic["local_event"], {"site_balance": row["conservation"]["site_balance"],

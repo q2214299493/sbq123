@@ -7,7 +7,7 @@ from scripts.artifact_io import sha256_bytes, sha256_json, write_json_exclusive
 from scripts.baseline_mkm.single_point_result import check_close
 from scripts.baseline_mkm.ts_perturbation import reviewed_reaction
 from scripts.kinetic_parameters.engine import calculate, generate
-from scripts.kinetic_parameters.export import catkinas, catkinas_energy_pair, per_bar, validate_export
+from scripts.baseline_mkm.parameter_table import catkinas, catkinas_energy_pair, per_bar, validate_export
 from scripts.kinetic_parameters.laws import activation_shift
 from scripts.multiphase_contracts import _bundle_validator, _check_species_context, decode_unique_json, read_unique_json
 from scripts.scientific_validation import validate_finite_tree

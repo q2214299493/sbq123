@@ -12,7 +12,7 @@ from scripts.baseline_mkm.normalization import reference_rate
 from scripts.baseline_mkm.results import read_single_point
 from scripts.baseline_mkm.single_point_result import check_close
 from scripts.baseline_mkm.ts_perturbation import HALF_STEP_EV, REACTION, central_difference
-from scripts.kinetic_parameters.export import catkinas
+from scripts.baseline_mkm.parameter_table import catkinas
 from scripts.thermochemistry.harmonic import KB
 
 
@@ -97,7 +97,7 @@ def evidence(run, receipt, a, *, pressure_reaction=None):
     )
 
 
-def compare(root, base):
+def compare(root, base, *, qualification=None):
     receipt, a = baseline(base)
     pair = read(root / "pair.json")
     finished = verified_finish(root, pair)
@@ -147,11 +147,7 @@ def compare(root, base):
         cases=cases,
         changes_from_baseline=changes,
         budget=dict(finished, per_run_s=210, total_s=BUDGET, max_retries=0, max_parallel=1),
-        fe110=dict(
-            drc=None,
-            qualification_source="reports/multiphase/phase3_0/fe110_qualification.json",
-            gaps=read(REPORTS / "phase3_0/fe110_qualification.json")["missing_data"],
-        ),
+        **(qualification or {}),
     )
 
 
@@ -254,11 +250,14 @@ def render(result):
 
 
 def publish(root, base, output, *, reference_pair=None, reference_result=None):
-    result = compare(root, base)
+    source = "reports/multiphase/phase3_0/fe110_qualification.json"
+    context = {"fe110": {"drc": None, "qualification_source": source,
+                         "gaps": read(REPORTS / "phase3_0/fe110_qualification.json")["missing_data"]}}
+    result = compare(root, base, qualification=context)
     if result["delta_eV"] == HALF_STEP_EV:
         if reference_pair is None:
             raise ValueError("The convergence report requires the original accepted pair directory")
-        coarse = compare(reference_pair, base)
+        coarse = compare(reference_pair, base, qualification=context)
         original = REPORTS / "phase3_2_0/result.json" if result["reaction_id"] == REACTION else reference_result
         if original is None:
             raise ValueError("The selected reaction requires its accepted coarse result")

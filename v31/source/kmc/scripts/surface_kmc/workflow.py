@@ -21,7 +21,7 @@ from scripts.surface_kmc.observations import (
     check_lattice_output,
     read_trajectory,
 )
-from scripts.kinetic_parameters.export import zacros as event_table
+from scripts.surface_kmc.parameter_table import zacros as event_table
 
 ACTIONS = {"RUN_ZACROS_4", "RESUME_ZACROS_4"}
 

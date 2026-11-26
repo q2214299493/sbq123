@@ -1,6 +1,7 @@
 """Qualification and readback for the one frozen, synthetic bidentate experiment."""
 from pathlib import Path
 
+from scripts.baseline_mkm.qualification import qualify
 from scripts.artifact_io import load_json_object, sha256_bytes, sha256_file
 from scripts.baseline_mkm.mapping_scope import MappingBlocked
 from scripts.baseline_mkm.results import read_initial_coverages
@@ -12,8 +13,6 @@ DESIGN_SHA256 = "bc127a8de7c8e9b47adadb66180bee1dd705a671ccedfdc4b7bcd56c355a105
 
 
 def qualification(network, dataset, config, inputs, normalization_path):
-    from scripts.baseline_mkm.single_point import qualify
-
     design_path = DESIGN / "diagnostic-plan.json"
     if sha256_file(design_path) != DESIGN_SHA256 or normalization_path is not None:
         raise ValueError("Bidentate diagnostic requires its frozen design and model-reference basis")
