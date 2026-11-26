@@ -1,9 +1,11 @@
 ---
 document_class: GENERATED_CURRENT_REPORT
-as_of: '2026-09-09T00:00:00+08:00'
-source_scope: B6 governance of the B5 publication baseline; no live scientific sources
-source_branch: codex/b6-documentation-data-governance
-source_version: 3a1bb3f461147a7dc9b5df5efca89de621d27f38
+as_of: '2026-11-26T14:36:45+00:00'
+source_scope: Accepted V3.1 software baseline with B6 module observations retained
+  at their recorded scope.
+source_branch: codex/v31-final-architecture-closure
+source_version: 32142dbd506d8400e4394fd4e7d36b0bebeda734
+source_tree: bc4bd6b70770994fa05a692b0cf873898092b89e
 evidence_kind: CURRENT_CODE_STATE
 ---
 

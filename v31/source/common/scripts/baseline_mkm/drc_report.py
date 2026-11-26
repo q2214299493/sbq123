@@ -5,6 +5,7 @@ from math import log
 from pathlib import Path
 import re
 
+from scripts.runtime_resources import resource_path
 from scripts.artifact_io import load_json_object as read, sha256_file
 from scripts.baseline_mkm.drc_pair_records import BUDGET, SIGNS, REPORTS, accepted, baseline, check_member, put, verified_finish
 from scripts.baseline_mkm.drc_step_size import comparison_lines, validation
@@ -13,7 +14,7 @@ from scripts.baseline_mkm.results import read_single_point
 from scripts.baseline_mkm.single_point_result import check_close
 from scripts.baseline_mkm.ts_perturbation import HALF_STEP_EV, REACTION, central_difference
 from scripts.baseline_mkm.parameter_table import catkinas
-from scripts.thermochemistry.harmonic import KB
+from scripts.physical_constants import KB
 
 
 def directional_audit(dataset, analysis, reaction_id):
@@ -249,10 +250,18 @@ def render(result):
     return "\n".join(lines) + "\n"
 
 
-def publish(root, base, output, *, reference_pair=None, reference_result=None):
-    source = "reports/multiphase/phase3_0/fe110_qualification.json"
-    context = {"fe110": {"drc": None, "qualification_source": source,
-                         "gaps": read(REPORTS / "phase3_0/fe110_qualification.json")["missing_data"]}}
+def qualification_context(profile):
+    if profile is None:
+        return {}
+    binding = read(resource_path(profile))
+    source = binding["source"]
+    return {binding["label"]: {"drc": None, "qualification_source": source,
+                               "gaps": read(resource_path(source))["missing_data"]}}
+
+
+def publish(root, base, output, *, reference_pair=None, reference_result=None,
+            qualification_profile="configs/kinetics/nicu_drc_report_context.json"):
+    context = qualification_context(qualification_profile)
     result = compare(root, base, qualification=context)
     if result["delta_eV"] == HALF_STEP_EV:
         if reference_pair is None:

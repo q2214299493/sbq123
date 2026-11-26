@@ -27,6 +27,31 @@ def fixture_root(tmp_path):
     return tmp_path
 
 
+@pytest.mark.parametrize(("path", "classification", "owner"), [
+    ("SBQ123_SYSTEM_ARCHITECTURE.md", "CURRENT_AUTHORITY", True),
+    ("SBQ123_AGENT_PROJECT_CONTEXT.md", "CURRENT_REFERENCE", False),
+    ("CHANGELOG.md", "HISTORICAL_SNAPSHOT", False),
+    ("README.md", "CURRENT_REFERENCE", False),
+    ("reports/capability_readiness.md", "GENERATED_CURRENT_REPORT", False),
+])
+def test_release_document_roles(path, classification, owner):
+    assert read_document(ROOT / path)[0]["document_class"] == classification
+    assert is_current_authority(ROOT, path) is owner
+
+
+def test_readiness_uses_registered_release_manifest(tmp_path):
+    root = fixture_root(tmp_path)
+    manifest = root / "v31/roles.json"
+    result = build_readiness(root)
+    baseline = read_document(root / "docs/DOCUMENT_GOVERNANCE.md")[0]["readiness_baseline"]
+    assert result["source_version"] == baseline["source_version"]
+    assert result["source_tree"] == baseline["source_tree"]
+    assert result["role_manifest_sha256"] == hashlib.sha256(manifest.read_bytes()).hexdigest()
+    manifest.write_bytes(manifest.read_bytes() + b" ")
+    with pytest.raises(ValueError, match="Role manifest differs"):
+        build_readiness(root)
+
+
 def test_supported_schema_and_production_are_separate():
     payload = build_readiness(ROOT)
     assert payload["supported_code_schema"] == CURRENT_VERSION == 9

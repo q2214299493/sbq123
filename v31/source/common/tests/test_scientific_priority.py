@@ -122,7 +122,7 @@ def test_operations_and_strategy_gates(pilot, need):
     d["evidence"] = []
     if need in ("saddle_refinement", "reaction_path"):
         assert not rank(d, p["activity"])["ranked"]
-        c["targets"].update(IS=sha256_json("IS"), FS=sha256_json("FS"))
+        c["targets"].update({state: c["structures"][state]["mock_structure_sha256"] for state in ("IS", "FS")})
         c["strategy"] = dict(
             status="NEEDS_GPU_PATH_OR_VASP_PATH_REVIEW",
             source_sha256=sha256_json("strategy"),
@@ -316,3 +316,14 @@ def test_approved_project_ts_reaches_existing_gate_only(pilot, tmp_path):
     receipt = review(tmp_path, dict(proposal_id=item["proposal_id"], decision="approve", reviewer="fixture", reason="test routing"))
     assert receipt["handoff"]["destination"] == "scripts.ts_strategy_engine.execution_gate"
     assert not receipt["execution_authorized"] and "ALLOWED_ACTIONS" not in receipt
+
+
+def test_direct_ranking_checks_selected_network_endpoint(pilot, tmp_path):
+    data, policies = pilot
+    candidate = data["candidates"][0]
+    candidate["reaction_structures"]["transfer"]["IS"] = "fixture-is-desorb"
+    report = rank(data, policies["activity"])
+    assert all(row["candidate"]["id"] != candidate["id"] for row in report["ranked"])
+    affected = next(row for row in report["deferred"] if row["candidate"]["id"] == candidate["id"])
+    assert affected["score"] is None
+    assert all(item["candidate_id"] != candidate["id"] for item in proposals(report, tmp_path))

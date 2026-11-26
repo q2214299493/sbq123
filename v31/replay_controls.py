@@ -60,12 +60,14 @@ else:
     for row in index["records"]:
         case = root / row["evidence_directory"]
         run = root / row["run_directory"]
+        # The archived writer-only stage has no execution receipt.
+        status = row.get("receipt_status") if row["native_launches"] == 0 else row["receipt_status"]
         record = {"case": case.name, "historical_launches": row["native_launches"],
-                  "original_receipt_status": row["receipt_status"]}
+                  "original_receipt_status": status}
         for name, expected in row["all_run_file_hashes"].items():
             if hashlib.sha256((run / name).read_bytes()).hexdigest() != expected:
                 raise ValueError(f"Changed historical output {run.name}/{name}")
-        if row["receipt_status"] == "validated_output":
+        if status == "validated_output":
             model = case if (case / "dataset.json").is_file() else stage / "02-local-writer"
             series = replay(read(model / "dataset.json"), read(model / "configuration.json"), run)
             if series["seed"] != row["seed"] or series["trajectory"]["terminal_step"] != row["terminal_events"]:

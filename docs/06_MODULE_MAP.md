@@ -11,6 +11,8 @@ production_schema_version: NOT_VERIFIED_IN_B6
 governance: docs/DOCUMENT_GOVERNANCE.md
 ---
 
+For the V3.1 release use [the role and runtime map](architecture/MODULE_MAP.md). The following B6 table records the earlier orchestration project state.
+
 # Module Map
 
 Module READMEs own purpose, inputs, workflow, outputs, and done criteria. This file owns only status, dependencies, and the current gate.

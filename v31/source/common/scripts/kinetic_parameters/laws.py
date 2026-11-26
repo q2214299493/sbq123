@@ -2,7 +2,7 @@
 import math
 
 from scripts.scientific_validation import finite_number, integer_number
-from scripts.thermochemistry.harmonic import AMU_KG, H_J_S, KB, KB_J_K
+from scripts.physical_constants import AMU_KG, H_J_S, KB, KB_J_K
 
 
 def positive(value, label):

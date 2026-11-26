@@ -74,7 +74,7 @@ def validate_connectivity_jobs(
     ).fetchall()
     by_id = {row["job_record_id"]: row for row in rows}
     branches = {branch["direction"]: branch for branch in report.get("branches", [])}
-    for direction, record_id in zip(("positive", "negative"), record_ids):
+    for direction, record_id in zip(("positive", "negative"), record_ids, strict=True):
         row = by_id.get(record_id)
         branch = branches.get(direction)
         if (

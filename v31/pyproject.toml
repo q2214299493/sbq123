@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sbq123-v31"
+version = "3.1.0"
+description = "SBQ123 versioned dual-role scientific software and offline evidence"
+requires-python = ">=3.13,<3.14"
+
+[tool.setuptools]
+packages = ["sbq123_v31"]
+package-dir = {sbq123_v31 = "."}
+include-package-data = false
+
+[tool.setuptools.package-data]
+sbq123_v31 = ["roles.json", "release.json", "accepted-frozen.json", "variant-decisions.json", "offline-data.zip", "environment.json", "requirements.lock", "acceptance/*.json"]
+
+[tool.setuptools.cmdclass]
+build_py = "build_release.BuildRelease"

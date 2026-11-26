@@ -11,6 +11,10 @@ production_schema_version: NOT_VERIFIED_IN_B6
 governance: docs/DOCUMENT_GOVERNANCE.md
 ---
 
+# SBQ123 V3.1 scientific software
+
+The release source is under `v31/`. [Reproduce the dual-role release](docs/audit/REPRODUCIBILITY.md), [inspect the architecture](docs/architecture/SYSTEM_OVERVIEW.md), or [check scientific qualifications](docs/development/IMPLEMENTATION_STATUS.md). The root workflow and its original installation instructions below remain available for the orchestration repository. Install the V3.1 distribution from the v31 subdirectory.
+
 # sbq123 — source publication and recorded evidence boundaries
 
 Development source: `C:/Users/86177/Desktop/work`. Publication target:

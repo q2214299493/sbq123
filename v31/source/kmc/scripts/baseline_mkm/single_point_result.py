@@ -8,7 +8,7 @@ from scripts.baseline_mkm.native import site_token
 from scripts.baseline_mkm.pressure_perturbation import checked_feed
 from scripts.kinetic_data.stoichiometric_sources import build_matrices, project_progress
 from scripts.baseline_mkm.parameter_table import catkinas
-from scripts.thermochemistry.harmonic import KB
+from scripts.physical_constants import KB
 
 
 def check_close(actual, expected, label, *, rel=1e-9, absolute=1e-12):

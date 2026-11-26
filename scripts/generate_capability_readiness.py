@@ -4,6 +4,7 @@ from __future__ import annotations
 from scripts.runtime_resources import require_repository_context
 
 import argparse
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -20,6 +21,11 @@ STATUSES = {"Planned", "Active", "Blocked", "Completed"}
 
 def build_readiness(root: Path) -> dict:
     metadata, _ = read_document(root / "docs/DOCUMENT_GOVERNANCE.md")
+    baseline = metadata["readiness_baseline"]
+    release = json.loads((root / "v31/release.json").read_bytes())
+    manifest_digest = hashlib.sha256((root / "v31/roles.json").read_bytes()).hexdigest()
+    if manifest_digest != release["role_manifest_sha256"]:
+        raise ValueError("Role manifest differs from the registered V3.1 release")
     _, text = read_document(root / "docs/06_MODULE_MAP.md")
     rows = re.findall(r"(?m)^\| `([^`]+)` \| (Planned|Active|Blocked|Completed) \|", text)
     if not rows or len({name for name, _ in rows}) != len(rows):
@@ -30,7 +36,7 @@ def build_readiness(root: Path) -> dict:
     annotations = yaml.safe_load(blocks[0]) or {}
     if not isinstance(annotations, dict) or set(annotations) - {name for name, _ in rows}:
         raise ValueError("maturity evidence references an unknown module")
-    sources = {"docs/DOCUMENT_GOVERNANCE.md", "docs/06_MODULE_MAP.md", "scripts/registry_schema.py",
+    sources = {"v31/release.json", "v31/roles.json", "docs/DOCUMENT_GOVERNANCE.md", "docs/06_MODULE_MAP.md", "scripts/registry_schema.py",
                "scripts/generate_capability_readiness.py", "scripts/document_governance.py"}
     modules = []
     for name, status in rows:
@@ -62,8 +68,9 @@ def build_readiness(root: Path) -> dict:
                         "tests": tests, "scientific_validation": science, "production_readiness": production,
                         "evidence": evidence, "scope": item.get("scope", "No explicit maturity evidence; do not infer from status or file existence.")})
     return {"document_class": "GENERATED_CURRENT_REPORT", "authority": "DERIVED_NOT_AUTHORITATIVE",
-            "as_of": metadata["as_of"], "source_scope": metadata["source_scope"],
-            "source_branch": metadata["source_branch"], "source_version": metadata["source_version"],
+            "as_of": baseline["as_of"], "source_scope": baseline["source_scope"],
+            "source_branch": baseline["source_branch"], "source_version": baseline["source_version"],
+            "source_tree": baseline["source_tree"], "role_manifest_sha256": manifest_digest,
             "evidence_kind": "CURRENT_CODE_STATE", "supported_code_schema": CURRENT_VERSION,
             "production_schema_version": "NOT_VERIFIED_IN_B6",
             "source_hash_convention": "UTF-8 text with LF newlines; not scientific file hashes",
@@ -71,7 +78,7 @@ def build_readiness(root: Path) -> dict:
 
 
 def render_readiness(payload: dict) -> str:
-    metadata = {k: payload[k] for k in ("document_class", "as_of", "source_scope", "source_branch", "source_version", "evidence_kind")}
+    metadata = {k: payload[k] for k in ("document_class", "as_of", "source_scope", "source_branch", "source_version", "source_tree", "evidence_kind")}
     lines = ["---", yaml.safe_dump(metadata, sort_keys=False).rstrip(), "---", "", "# Capability Readiness (DERIVED)", "",
              "Owner: [module map](../docs/06_MODULE_MAP.md). [Document governance](../docs/DOCUMENT_GOVERNANCE.md).",
              "This view is DERIVED_NOT_AUTHORITATIVE. Software tests never establish scientific validation or production deployment.",

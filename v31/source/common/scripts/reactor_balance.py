@@ -3,6 +3,7 @@ from copy import deepcopy
 
 from scripts.artifact_io import sha256_json
 from scripts.kinetic_data.analysis_contracts import local_species_sources
+from scripts.kinetic_data.observations import _observation
 from scripts.scientific_validation import finite_number
 
 
@@ -43,3 +44,15 @@ def gas_accumulation(payload, network_path, *, conditions, volume_m3, target, ev
     }
     result["result_sha256"] = sha256_json(result)
     return result
+
+
+def balance_observation(payload, network_path, **request):
+    """Describe a validated instantaneous balance, preserving its volumetric context."""
+    rates = deepcopy(payload)
+    result = gas_accumulation(rates, network_path, **request)
+    if result["status"] != "available":
+        return result
+    return _observation(rates, result, "instantaneous_gas_balance", {
+        "accumulation_mol_s": result["accumulation_mol_s"], "reactor_volume_m3": result["reactor_volume_m3"],
+        "inlet_mol_s": result["inlet_mol_s"], "outlet_mol_s": result["outlet_mol_s"],
+    })

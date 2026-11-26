@@ -1,26 +1,16 @@
 """Reproduce a single, benchmark-scoped transition-state displacement from its reviewed parent."""
 
 from copy import deepcopy
-from math import log
 
 from scripts.artifact_io import sha256_json
+from scripts.kinetic_data.local_sensitivity import central_difference as central_difference
 from scripts.kinetic_parameters.engine import calculate, check_version, generate
 from scripts.kinetic_parameters.export_contract import validate_export
-from scripts.scientific_validation import finite_number
-from scripts.thermochemistry.harmonic import KB
 
 PARENT = "417cf1dc3236175476441c4c4e7b4bd5771bc4a7062aa5e34eff69070483d11b"
 REACTION = "transfer"
 DELTA_EV = 0.01
 HALF_STEP_EV = 0.005
-
-
-def central_difference(baseline, plus, minus, temperature_K, delta_eV):
-    finite_number(baseline, "positive baseline TOF", positive=True)
-    rates = [finite_number(v, "positive perturbed TOF", positive=True) for v in (plus, minus)]
-    t = finite_number(temperature_K, "temperature in K", positive=True)
-    step = finite_number(delta_eV, "TS increment in eV", positive=True)
-    return -KB * t * (log(rates[0]) - log(rates[1])) / (2 * step)
 
 
 def reviewed_reaction(network, dataset, reaction_id):

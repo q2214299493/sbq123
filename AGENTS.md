@@ -1,3 +1,9 @@
+
+
+# V3.1 release work
+
+For changes to the dual-role release, begin with [project context](SBQ123_AGENT_PROJECT_CONTEXT.md). Resolve active Python via v31/roles.json; the root scripts and unused historical copies are not the release projection. Each accepted step requires one issue, one codex branch, one PR and user approval of the exact commit and push. Worktree cleanup, publication and native jobs require separate authorization. These release-specific rules take precedence over general publication defaults below.
+
 # Project Rules for Codex
 
 ## Minimal Startup

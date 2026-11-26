@@ -9,7 +9,7 @@ from scripts.reaction_network.builder import check_parameter_basis, reviewed as 
 from scripts.reaction_network.catalog import index_records
 from scripts.reaction_network.thermodynamics import check_closure, check_cycles
 from scripts.scientific_validation import finite_number, validate_finite_tree
-from scripts.thermochemistry.harmonic import KB
+from scripts.physical_constants import KB
 
 SOURCES = {"local_calculation", "external_calculation", "literature", "user_provided", "approved_assumption", "synthetic"}
 

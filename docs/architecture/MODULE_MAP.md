@@ -1,0 +1,21 @@
+# Implemented module responsibilities
+
+Paths refer to the materialized role. Resolve a path to the authoritative Git file through v31/roles.json. A modules/ README owns workflow protocols or legacy shims; executable owners are listed below.
+
+| Responsibility | Roles | Runtime source | Ownership and entry |
+|---|---|---|---|
+| Knowledge and literature | mkm,kmc | `scripts/catalysis_retrieval/cli.py` | Retrieval queries, whitelisted source records and human review. Search and validate CLI |
+| Scientific evidence and identity | mkm,kmc | `scripts/kinetic_data/scientific_identity.py` | Exact file bytes, selected structures, units, approvals and registry identity. require_common_identities; registry_acceptance |
+| Reaction network | mkm,kmc | `scripts/reaction_network/builder.py` | Balanced reactions, catalog, inventory and immutable network version. builder; reaction_network.event_geometry |
+| Thermochemistry | mkm,kmc | `scripts/thermochemistry/engine.py` | Thermal corrections with units, references and applicability. calculate; physical_constants owns shared numerical constants |
+| Kinetic model | mkm,kmc | `scripts/kinetic_parameters/engine.py` | Produce kinetic datasets with independently versioned rates and source terms. generate; kinetic_parameters.laws |
+| CATKINAS adapter | mkm,kmc | `scripts/baseline_mkm/parameter_table.py` | Render CATKINAS parameter table and qualify MKM point replay. catkinas; baseline_mkm.result_binding |
+| Zacros adapter | mkm,kmc | `scripts/surface_kmc/parameter_table.py` | Render Zacros table and qualify KMC outputs. zacros; surface_kmc.window_bridge (KMC role) |
+| Scientific Integration | kmc | `scripts/kinetic_data/result_comparison.py` | Join verified MKM point and KMC window with separate per-observable decisions. KMC compare; separate MKM role_entry process |
+| Shared Scientific Analysis | mkm,kmc | `scripts/kinetic_data/observations.py` | Signed species sources, bound samples and basis, neutral local derivative. rate_observation; kinetic_data.local_sensitivity.central_difference |
+| Scientific Interpretation | mkm,kmc | `scripts/scientific_interpretation.py` | Scope-preserving descriptions of comparisons and observations. summarize_comparison; interpret_observation |
+| Mechanism Discovery | mkm,kmc | `scripts/scientific_priority/proposals.py` | Evidence-backed candidate task, priority, specific owner review and decision. proposals_for_observation; verify; review |
+| Optional Reactor | mkm,kmc | `scripts/reactor_balance.py` | Single-point volume-based gas material balance. gas_accumulation; balance_observation |
+| Workflow orchestration | mkm,kmc | `scripts/state_manager/cli.py` | Route project state and task handoffs. existing repo-state CLI and domain workflows |
+| Execution governance | mkm,kmc | `scripts/execution_permission.py` | Enforce owner authorization, execution context and gate decisions. execution_backends; ts_strategy_engine.execution_gate |
+| Artifact Lifecycle | mkm,kmc | `sbq_kinetics_test_artifacts.py` | Create, classify, seal and propose cleanup of run artifacts. create_run; seal_run; cleanup_proposal |
