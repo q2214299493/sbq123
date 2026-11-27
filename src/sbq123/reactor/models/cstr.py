@@ -33,45 +33,10 @@ def _one(case, start):
     net = network(reactor)
     net.initialize()
 
-    def verify():
-        actual_mdot = outlet_device.mass_flow_rate * case.volume
-        if not np.isfinite(actual_mdot) or actual_mdot <= 0:
-            raise RootFailure("Nonphysical CSTR withdrawal")
-        row = case.observe(
-            reactor.phase,
-            surface.phase if surface is not None else None,
-            branch,
-            case.volume,
-            case.volume * reactor.phase.density / actual_mdot,
-            mdot=actual_mdot,
-        )
-        out = np.array(list(row["amount_or_flow"].values())) / case.fin
-        volumetric_source = np.array(list(row["source_mol_m3_s"].values()))
-        produced = volumetric_source * (case.volume / case.fin)
-        residual = case.x - out + produced
-        tolerance = 2e-10 + 2e-8 * np.maximum.reduce([case.x, abs(out), abs(produced)])
-        if (
-            not np.isfinite(residual).all()
-            or np.any(abs(residual) > tolerance)
-            or abs(actual_mdot / case.mdot - 1) > 2e-8
-            or abs(reactor.phase.P / case.p - 1) > 2e-7
-        ):
-            raise RootFailure(
-                "Independent CSTR species or withdrawal balance failed",
-                {"converged": False, "species_residual_per_feed": residual.tolist()},
-            )
-        row.update(
-            balance_residual_per_inlet_flow=residual.tolist(),
-            balance_residual_mol_s=(case.fin * residual).tolist(),
-            balance_tolerance_per_inlet_flow=tolerance.tolist(),
-            root_sha256=identity(row["mole_fractions"]),
-        )
-        return row
-
     try:
         if surface is None and not branch:
             net.solve_steady()
-            return verify(), []
+            return _verified_outlet(case, reactor, surface, None, outlet_device), []
         # ReactorNet's direct steady solver does not support reacting surfaces.
         # Integrate its actual open tank and inspect independent outlet balances.
         for i in range(90):
@@ -79,54 +44,152 @@ def _one(case, start):
             if branch:
                 branch.evaluate(reactor.phase, commit=True)
             try:
-                return verify(), branch.receipts if branch else []
+                row = _verified_outlet(case, reactor, surface, branch, outlet_device)
             except RootFailure:
-                if i == 89:
+                if i == 89 or (branch and branch.failure):
                     raise
+                continue
+            if branch:
+                # Only a physically verified outlet gets a final report evaluation.
+                return _verified_outlet(case, reactor, surface, branch.report_at(branch.checkpoint), outlet_device), branch.receipts
+            return row, []
+    except RootFailure as exc:
+        if branch:
+            exc.prior_receipts = tuple(branch.receipts)
+        raise
     except ct.CanteraError as exc:
         if branch and getattr(branch, "failure", None):
             raise branch.failure from exc
-        raise RootFailure("Cantera CSTR solve failed", {"converged": False, "reason": str(exc)}) from exc
+        failure = RootFailure("Cantera CSTR solve failed", {"converged": False, "reason": str(exc)})
+        failure.prior_receipts = tuple(branch.receipts) if branch else ()
+        raise failure from exc
+
+
+def _verified_outlet(case, reactor, surface, source, outlet_device):
+    actual_mdot = outlet_device.mass_flow_rate * case.volume
+    if not np.isfinite(actual_mdot) or actual_mdot <= 0:
+        raise RootFailure("Nonphysical CSTR withdrawal")
+    row = case.observe(
+        reactor.phase,
+        surface.phase if surface is not None else None,
+        source,
+        case.volume,
+        case.volume * reactor.phase.density / actual_mdot,
+        mdot=actual_mdot,
+    )
+    out = np.array(list(row["amount_or_flow"].values())) / case.fin
+    volumetric_source = np.array(list(row["source_mol_m3_s"].values()))
+    produced = volumetric_source * (case.volume / case.fin)
+    residual = case.x - out + produced
+    tolerance = 2e-10 + 2e-8 * np.maximum.reduce([case.x, abs(out), abs(produced)])
+    if (
+        not np.isfinite(residual).all()
+        or np.any(abs(residual) > tolerance)
+        or abs(actual_mdot / case.mdot - 1) > 2e-8
+        or abs(reactor.phase.P / case.p - 1) > 2e-7
+    ):
+        raise RootFailure(
+            "Independent CSTR species or withdrawal balance failed",
+            {"converged": False, "species_residual_per_feed": residual.tolist()},
+        )
+    row.update(
+        balance_residual_per_inlet_flow=residual.tolist(),
+        balance_residual_mol_s=(case.fin * residual).tolist(),
+        balance_tolerance_per_inlet_flow=tolerance.tolist(),
+    )
+    return row
+
+
+def _joint_state(row, surface_names):
+    return {
+        "mole_fractions": row["mole_fractions"],
+        "surface_coverage": dict(zip(surface_names, row["coverage"] or [], strict=True)),
+    }
+
+
+def _same_root(left, right):
+    # Compare matching named components before assigning a common representative.
+    for field in ("mole_fractions", "surface_coverage"):
+        a, b = left[field], right[field]
+        if a.keys() != b.keys() or not np.allclose(list(a.values()), [b[name] for name in a], atol=1e-8, rtol=1e-7):
+            return False
+    return True
 
 
 def stirred_tank(case, extra_seeds):
-    seeds = [case.x]
+    # Retain every seed's origin while solving each normalized start only once.
+    starts = {}
     invalid = []
-    for seed in extra_seeds:
+    outcomes = []
+
+    def add(start, origin):
+        key = tuple(start)
+        starts.setdefault(key, []).append(origin)
+        origin["seed_mole_fractions"] = list(key)
+        outcomes.append(origin)
+
+    add(case.x, {"source": "feed"})
+    for index, seed in enumerate(extra_seeds):
+        origin = {"source": "request", "index": index, "seed": seed}
         try:
             if not isinstance(seed, (tuple, list)) or len(seed) != len(case.x):
                 raise ValueError("Invalid CSTR seed dimension")
             y = np.array([number(v, "seed mol/s", nonnegative=True) for v in seed])
             if not 0 < sum(y) < float("inf"):
                 raise ValueError("Seed total must be finite and positive")
-            seeds.append(y / sum(y))
+            add(y / sum(y), origin)
         except ValueError as exc:
-            invalid.append({"seed": seed, "reason": str(exc)})
-    for vertex in np.eye(len(case.x)):
-        for w in (0.1, 0.5, 0.9):
-            seeds.append((1 - w) * case.x + w * vertex)
-    roots, rows, receipts = [], [], []
-    unique = list(dict.fromkeys(tuple(s) for s in seeds))
-    for start in unique:
+            origin.update(status="rejected", reason=str(exc))
+            invalid.append(origin.copy())
+            outcomes.append(origin)
+    for name, vertex in zip(case.names, np.eye(len(case.x))):
+        for weight in (0.1, 0.5, 0.9):
+            add((1 - weight) * case.x + weight * vertex, {"source": "vertex", "species": name, "weight": weight})
+
+    rows, roots, receipts = [], [], []
+    for start, origins in starts.items():
         try:
             row, local = _one(case, start)
         except (RootFailure, ValueError) as exc:
-            invalid.append({"seed_mole_fractions": list(start), "reason": str(exc), "failure": getattr(exc, "receipt", None)})
+            rejection = dict(
+                seed_mole_fractions=list(start),
+                reason=str(exc),
+                failure=getattr(exc, "receipt", None),
+                prior_receipts=list(getattr(exc, "prior_receipts", ())),
+                subdivision_failures=list(getattr(exc, "subdivision_failures", ())),
+            )
+            invalid.append(rejection)
+            for origin in origins:
+                origin.update(status="rejected", rejection_index=len(invalid) - 1)
             continue
-        x = np.array(list(row["mole_fractions"].values()))
-        receipts.extend(local)
-        if not any(np.allclose(x, root, atol=1e-8, rtol=1e-7) for root in roots):
-            roots.append(x)
+        state = _joint_state(row, case.surface_names)
+        candidate = identity(state)
+        representative = next((digest for other, digest in roots if _same_root(state, other)), None)
+        if representative is None:
+            representative = candidate
+            roots.append((state, candidate))
+            row.update(root_sha256=candidate, root_state=state)
             rows.append(row)
+        for origin in origins:
+            origin.update(
+                status="converged",
+                root_sha256=representative,
+                candidate_root_sha256=candidate,
+                local_receipt_sha256=row["local_receipt_sha256"],
+                receipt_start=len(receipts),
+                receipt_count=len(local),
+            )
+        receipts.extend(local)
     if not rows:
-        raise RootFailure("No physically converged CSTR outlet", {"converged": False, "rejected_seeds": invalid})
+        raise RootFailure("No physically converged CSTR outlet", {"converged": False, "rejected_seeds": invalid, "seed_outcomes": outcomes})
     return (
         rows,
         dict(
             success=True,
             method="Cantera/IdealGasReactor/ReactorNet",
             roots_found=len(rows),
-            seeds=len(unique),
+            seeds=len(starts),
+            seed_outcomes=outcomes,
             rejected_seeds=invalid,
             global_uniqueness=None,
             stability=None,

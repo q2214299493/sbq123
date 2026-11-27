@@ -1,5 +1,7 @@
 """Cantera steady FlowReactor and local-MKM Lagrangian parcel integration."""
 
+from dataclasses import dataclass
+
 import cantera as ct
 import numpy as np
 from scipy.integrate import cumulative_simpson, simpson
@@ -10,11 +12,29 @@ from ..kinetics.source import CoupledTank
 from ..state import network, propagate
 
 
+@dataclass(frozen=True)
+class _Trajectory:
+    grid: np.ndarray
+    states: np.ndarray
+    residence_times: np.ndarray
+    checkpoints: tuple
+    branch: object
+    solver: dict
+
+
 def plug_flow(case, area, points, intervals):
+    trajectory = _integrate(case, area, intervals)
+    rows = _profiles(case, trajectory, points)
+    return rows, trajectory.solver, trajectory.branch.receipts if trajectory.branch else []
+
+
+def _integrate(case, area, intervals):
+    """Advance the physical trajectory without access to the requested report grid."""
     guarded = case.m.surface is not None and not case.dynamic
     gas, surf = case.phases(case.x, flow_guard=guarded)
     physical_gas, physical_surface = case.phases(case.x)
     branch = case.branch(gas)
+    initial_checkpoint = branch.checkpoint.receipt_sha256 if branch else None
     length = case.volume / area
     speed = case.mdot / (gas.density * area)
     if not np.isfinite(length) or not np.isfinite(speed) or min(length, speed) <= 0:
@@ -69,7 +89,7 @@ def plug_flow(case, area, points, intervals):
             states.append([gas.T, gas.P, *gas.X, *(current_surface.coverages if current_surface is not None else [])])
             rates.append(list(obs["source_mol_m3_s"].values()))
             if branch:
-                anchors.append(branch.snapshot())
+                anchors.append(branch.checkpoint)
                 branch_ids.append(obs["local_receipt_sha256"])
     except ct.CanteraError as exc:
         propagate(exc, branch)
@@ -82,20 +102,17 @@ def plug_flow(case, area, points, intervals):
     residual = (outlet - case.feed - integrated) / case.fin
     if not np.isfinite(residual).all() or max(abs(residual)) > 2e-6:
         raise RootFailure("Independent axial species balance failed", {"converged": False, "residual_per_feed": residual.tolist()})
-    rows = _profiles(case, branch, states, anchors, grid, tau, points)
-    return (
-        rows,
-        dict(
-            success=True,
-            method="Cantera/ReactorNet/CVODES local-source parcel" if branch else "Cantera/FlowReactor/IDA",
-            flow_surface_inert_coordinate=guarded,
-            physical_intervals=len(grid) - 1,
-            continuation_receipts=branch_ids,
-            integral_species_residual_per_feed=residual.tolist(),
-            residual_tolerance=2e-6,
-        ),
-        branch.receipts if branch else [],
+    solver = dict(
+        success=True,
+        method="Cantera/ReactorNet/CVODES local-source parcel" if branch else "Cantera/FlowReactor/IDA",
+        flow_surface_inert_coordinate=guarded,
+        physical_intervals=len(grid) - 1,
+        initial_checkpoint_sha256=initial_checkpoint,
+        continuation_receipts=branch_ids,
+        integral_species_residual_per_feed=residual.tolist(),
+        residual_tolerance=2e-6,
     )
+    return _Trajectory(grid, np.asarray(states), tau, tuple(anchors), branch, solver)
 
 
 def _physical_state(gas, current_surface, guarded, physical_gas, physical_surface):
@@ -116,10 +133,11 @@ def _physical_state(gas, current_surface, guarded, physical_gas, physical_surfac
     return gas, current_surface
 
 
-def _profiles(case, branch, states, anchors, grid, tau, points):
+def _profiles(case, trajectory, points):
+    grid = trajectory.grid
     length = grid[-1]
-    interpolate = CubicSpline(grid, np.asarray(states), axis=0)
-    time_at = CubicSpline(grid, tau)
+    interpolate = CubicSpline(grid, trajectory.states, axis=0)
+    time_at = CubicSpline(grid, trajectory.residence_times)
     report_gas, report_surface = case.phases(case.x)
     rows = []
     for z in np.linspace(0, length, points):
@@ -128,13 +146,15 @@ def _profiles(case, branch, states, anchors, grid, tau, points):
         if min(xs) < -1e-9 or abs(sum(xs) - 1) > 1e-8:
             raise RootFailure("Nonphysical interpolated gas state")
         report_gas.TPX = state[0], state[1], np.maximum(xs, 0)
-        if branch:
-            branch.restore(anchors[min(len(grid) - 1, max(0, np.searchsorted(grid, z, side="right") - 1))])
+        report_source = None
+        if trajectory.branch:
+            left = int(np.searchsorted(grid, z, side="right") - 1)
+            report_source = trajectory.branch.report_at(trajectory.checkpoints[left])
         elif report_surface is not None:
             fractions = state[2 + report_gas.n_species :]
             if min(fractions) < -1e-9 or abs(sum(fractions) - 1) > 1e-8:
                 raise RootFailure("Nonphysical interpolated surface inventory")
             report_surface.TP = report_gas.TP
             report_surface.coverages = np.maximum(fractions, 0)
-        rows.append(case.observe(report_gas, report_surface, branch, z, float(time_at(z))))
+        rows.append(case.observe(report_gas, report_surface, report_source, z, float(time_at(z))))
     return rows
