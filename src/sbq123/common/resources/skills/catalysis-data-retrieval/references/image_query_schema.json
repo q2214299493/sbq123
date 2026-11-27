@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["image_path", "visible_features", "interpretations", "query_text", "review_status"],
+  "properties": {
+    "image_path": {"type": "string"},
+    "visible_features": {"type": "array", "items": {"type": "string"}},
+    "interpretations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["claim", "confidence", "basis"],
+        "properties": {
+          "claim": {"type": "string"},
+          "confidence": {"enum": ["high", "medium", "low"]},
+          "basis": {"type": "string"}
+        }
+      }
+    },
+    "query_text": {"type": "string"},
+    "review_status": {"enum": ["reviewed", "Needs confirmation"]}
+  }
+}

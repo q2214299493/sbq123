@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools==80.9.0", "wheel==0.45.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sbq123-reactor-cantera"
+version = "3.2.0"
+requires-python = ">=3.13,<3.14"
+dependencies = ["sbq123-common==3.2.0", "scipy>=1.15,<2", "cantera==3.2.0"]
+
+[tool.setuptools.packages.find]
+where = ["../../src"]
+include = ["sbq123.reactor", "sbq123.reactor.*"]
+exclude = ["*.resources.*", "*.resources", "*.__pycache__"]
+
+[tool.setuptools]
+include-package-data = false
+
+[tool.setuptools.package-data]
+"sbq123.reactor" = ["_legacy_modules.json", "resources/**/*", "registries/*.json"]
+
+[project.optional-dependencies]
+dynamic = ["sbq123-mkm==3.2.0"]
+
+[project.scripts]
+sbq123-reactor = "sbq123.reactor.__main__:main"

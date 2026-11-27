@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.sbq123.invalid/multiphase/1.0.0/species.schema.json",
+  "title": "species v1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "species_id",
+    "phase",
+    "material_ids",
+    "surface_ids",
+    "interface_id",
+    "composition",
+    "charge",
+    "site_occupancy",
+    "adsorption_geometry",
+    "structure_id",
+    "structural_provenance",
+    "thermochemistry_status",
+    "validation"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "species_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "phase": {"enum": ["gas", "liquid", "surface"]},
+    "material_ids": {
+      "type": "array",
+      "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "surface_ids": {
+      "type": "array",
+      "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "interface_id": {
+      "anyOf": [
+        {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+        {"type": "null"}
+      ]
+    },
+    "composition": {
+      "$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/composition"
+    },
+    "charge": {"type": "integer"},
+    "site_occupancy": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/sites"},
+    "adsorption_geometry": {
+      "anyOf": [
+        {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"},
+        {"type": "null"}
+      ]
+    },
+    "structure_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "structural_provenance": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"},
+    "thermochemistry_status": {"enum": ["missing", "partial", "reviewed", "rejected"]},
+    "validation": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/validation"}
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"phase": {"const": "surface"}}
+      },
+      "then": {
+        "properties": {
+          "material_ids": {
+            "type": "array",
+            "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "surface_ids": {
+            "type": "array",
+            "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "site_occupancy": {"minProperties": 1},
+          "adsorption_geometry": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"phase": {"enum": ["gas", "liquid"]}}
+      },
+      "then": {
+        "properties": {
+          "material_ids": {"maxItems": 0},
+          "surface_ids": {"maxItems": 0},
+          "site_occupancy": {"maxProperties": 0},
+          "adsorption_geometry": {"type": "null"},
+          "interface_id": {"type": "null"}
+        }
+      }
+    }
+  ]
+}

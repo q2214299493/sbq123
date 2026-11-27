@@ -1,0 +1,129 @@
+version: 1
+policy:
+  max_results: 5
+  require_hybrid_for_production: true
+  no_uncontrolled_general_web_fallback: true
+  adsorption_authoritative_journal_fallback_after_no_whitelist_match: true
+  external_scope: structure_path_and_catalysis_records
+
+sources:
+  - id: catalysis-hub
+    label: Catalysis-Hub
+    status: active
+    access: graphql
+    verified_on: 2026-06-24
+    allow:
+      - host: catalysis-hub.org
+        path_prefix: /
+      - host: www.catalysis-hub.org
+        path_prefix: /
+      - host: api.catalysis-hub.org
+        path_prefix: /graphql
+    notes: Public GraphQL endpoint verified. Record-level structure availability varies.
+
+  - id: catapp
+    label: CatApp
+    status: needs-confirmation
+    access: browser-or-archive
+    verified_on: 2026-06-24
+    allow:
+      - host: catappdatabase.org
+        path_prefix: /
+      - host: www.catappdatabase.org
+        path_prefix: /
+    notes: Direct connection closed during verification; automated API access is not approved until rechecked.
+
+  - id: oc20-oc22
+    label: Open Catalyst Project OC20/OC22
+    status: active-with-endpoint-review
+    access: official-download-or-repository
+    verified_on: 2026-06-24
+    allow:
+      - host: opencatalystproject.org
+        path_prefix: /
+      - host: www.opencatalystproject.org
+        path_prefix: /
+      - host: fair-chem.github.io
+        path_prefix: /
+      - host: github.com
+        path_prefix: /FAIR-Chem/
+      - host: github.com
+        path_prefix: /facebookresearch/fairchem
+      - host: dl.fbaipublicfiles.com
+        path_prefix: /opencatalystproject/
+      - host: huggingface.co
+        path_prefix: /facebook/
+    notes: Official project page verified; some legacy documentation links are stale, so each download endpoint must be revalidated.
+
+  - id: oc20neb-cattsunami
+    label: OC20NEB/CatTSunami
+    status: needs-confirmation
+    access: official-project-artifact
+    verified_on: 2026-06-24
+    allow:
+      - host: opencatalystproject.org
+        path_prefix: /
+      - host: fair-chem.github.io
+        path_prefix: /
+      - host: github.com
+        path_prefix: /FAIR-Chem/
+      - host: github.com
+        path_prefix: /facebookresearch/fairchem
+      - host: dl.fbaipublicfiles.com
+        path_prefix: /opencatalystproject/
+      - host: huggingface.co
+        path_prefix: /facebook/
+    notes: Dataset/code naming is accepted by user; current machine-readable endpoint and license must be verified before ingestion.
+
+  - id: materials-project-catalysis
+    label: Materials Project Catalysis Explorer
+    status: active-with-auth
+    access: web-and-api
+    verified_on: 2026-06-24
+    credential_env: MP_API_KEY
+    allow:
+      - host: materialsproject.org
+        path_prefix: /
+      - host: next-gen.materialsproject.org
+        path_prefix: /catalysis
+      - host: api.materialsproject.org
+        path_prefix: /
+    notes: Catalysis UI exists; API access and contribution-specific fields may require an API key and endpoint review.
+
+  - id: materials-cloud-archive
+    label: Materials Cloud Archive
+    status: active
+    access: archive-search-and-download
+    verified_on: 2026-06-24
+    allow:
+      - host: archive.materialscloud.org
+        path_prefix: /
+      - host: materialscloud.org
+        path_prefix: /
+      - host: www.materialscloud.org
+        path_prefix: /
+    notes: Archive search and downloadable records verified; API endpoint behavior must be checked per deployment.
+
+  - id: iochem-bd
+    label: ioChem-BD
+    status: active
+    access: search-rest-rdf-oai
+    verified_on: 2026-06-24
+    allow:
+      - host: iochem-bd.org
+        path_prefix: /
+      - host: www.iochem-bd.org
+        path_prefix: /
+    notes: Official site documents text/element/structure search and REST, RDF, and OAI-PMH endpoints.
+
+  - id: nomad-catalysis
+    label: NOMAD Catalysis
+    status: active-with-schema-review
+    access: api-and-gui
+    verified_on: 2026-06-24
+    allow:
+      - host: nomad-lab.eu
+        path_prefix: /
+      - host: www.nomad-lab.eu
+        path_prefix: /
+    notes: NOMAD Swagger API verified; catalysis-specific query fields must be validated against the current schema.

@@ -1,0 +1,1252 @@
+version: 3
+
+authority:
+  owner: project_orchestration
+  consumers:
+    - adsorption_workflow
+    - transition_state_search
+  orchestration_repository: work
+  direct_gpu_to_vasp_handoff: forbidden
+  automatic_remote_submission: forbidden
+
+# New, unbound Fe(110) ML tasks only. Frozen requests keep their exact model.
+fe110_mlip_default:
+  roles: [adsorption_prerelaxation, ts_path_search, active_learning]
+  family: mace
+  adsorption_prerelaxation:
+    fmax_eV_per_A: 0.05
+  model:
+    path: D:/fe-c-o-mace.model
+    sha256: fc8d2de14b3a4be337e947b5dc013eef89ea8c38a3fb8319abe14f7c1da639e8
+    head: Default
+    dtype: float64
+    required_atomic_numbers: [1, 6, 8, 26]
+    provenance: user_provided_checkpoint_training_domain_unverified
+  calibration: uncalibrated
+  remote_gpu: not_validated
+  training: not_connected
+
+backends:
+  work:
+    role: orchestration_and_scientific_gates
+    repository_root: C:/Users/86177/Desktop/work
+    allowed:
+      - evidence_retrieval_and_review
+      - reaction_contract_and_hash_generation
+      - endpoint_path_and_structure_validation
+      - backend_handoff_validation
+      - calculation_registry_updates
+      - scientific_result_acceptance_through_owning_module
+    forbidden:
+      - pretending_predicted_values_are_dft_results
+
+  aqcat_gpu:
+    role: candidate_acceleration_only
+    display_name: BUCT(sbq)
+    observed_hostname: MZ73
+    # Local checkout used only to prepare and audit MZ73 payloads.  Keep the
+    # parent directory explicit so path checks do not depend on mojibake or a
+    # second hard-coded machine-learning path.
+    local_ml_root: C:/Users/86177/Desktop/机器学习
+    ssh:
+      host: 10sx4jr711576.vicp.fun
+      port: 36039
+      user: sbq
+      identity_file: C:/Users/86177/.ssh/id_ed25519_fe_agent
+      identities_only: true
+    source_repository: C:/Users/86177/Desktop/机器学习/aqcat25_ts_pilot
+    remote_root: /home/sbq/sbq/aqcat25_ts_pilot
+    remote_write_boundary: /home/sbq/sbq
+    scheduler:
+      type: Slurm
+      accounting_storage_type: accounting_storage/none
+      job_acct_gather_type: jobacct_gather/none
+      scheduler_terminal_state_after_queue_exit: unavailable_without_admin_change
+      required_workflow_evidence: producer_exit_record
+      producer_exit_record_is_scheduler_authority: false
+      admin_resolution: enable Slurm accounting storage and job accounting on MZ73
+    direct_execution_exceptions:
+      fe110_c2_16_19_ft512_20261102:
+        scope:
+          gpu_index: 0
+          gpu_uuid: GPU-483c224e-cc19-13e2-24ad-c83efd14fa75
+          max_wall_seconds: 600
+          CPU_count: 4
+          memory_GB: 32
+          allocator_limit_MiB: 16384
+          gpu_sharing:
+            mode: resident_service_allowlist
+            max_training_memory_MiB: 16384
+            allowed_processes:
+              - {pid: 755831, uid: 1007, start_ticks: 25755244, script: wsgi_recommender.py}
+              - {pid: 755832, uid: 1007, start_ticks: 25755244, script: wsgi_recommender.py}
+              - {pid: 755833, uid: 1007, start_ticks: 25755244, script: wsgi_recommender.py}
+              - {pid: 755834, uid: 1007, start_ticks: 25755244, script: wsgi_recommender.py}
+              - {pid: 2068650, uid: 1007, start_ticks: 33232802, script: wsgi_recommender.py}
+              - {pid: 2068651, uid: 1007, start_ticks: 33232802, script: wsgi_recommender.py}
+              - {pid: 2068649, uid: 1007, start_ticks: 33232801, script: wsgi_recommender.py}
+              - {pid: 2068648, uid: 1007, start_ticks: 33232801, script: wsgi_recommender.py}
+          limits: {seed_max_steps: 80, fmax_eV_per_A: 0.1, LBFGS_maxstep_A: 0.2}
+          remote_root: /home/sbq/sbq/fe110_c2_16_19_ft512_20261102_v1
+          models:
+            finetune:
+              path: /home/sbq/sbq/fe110_scratch512_20261028_v1/finetune/control/output/direct-fe110-scratch512-finetune20-20261028-v1/checkpoints/2026-10-28-20-56-32/best_checkpoint.pt
+              sha256: cdd391d39ed19fc1ef3516d41b1af53bd81351d8ad73f25e537be232fd8c0dc0
+              backend: aqcat25
+              status: budget_stopped_partial_development_selected_snapshot
+          cases:
+            - {name: 16_A, composition: C2H4O, seed_path: geometry/16_A/POSCAR, seed_sha256: 0d5311717e9a5a773e080655c69eb4b5cca7b7e30cb0b6bcd39d7f0bbc219e27}
+            - {name: 16_B, composition: C2H4O, seed_path: geometry/16_B/POSCAR, seed_sha256: 8a66b9cc97504db1a88e83ffeb1b4473b3c55b9cbf7095226ba6e4bc260aaa3e}
+            - {name: 16_C, composition: C2H4O, seed_path: geometry/16_C/POSCAR, seed_sha256: 2306eac5fcbec5af456906b4df16af2a9a08b4d7ba0f44ac0dc9dcbf478e08f4}
+            - {name: 17_A, composition: C2H4O, seed_path: geometry/17_A/POSCAR, seed_sha256: e6a5cdc7108f46cf7c77474d561f502d0f857d8de58adf2f907adb2735dba5b7}
+            - {name: 17_B, composition: C2H4O, seed_path: geometry/17_B/POSCAR, seed_sha256: 78cbf019886cd06ed7a9474cc201b22c5fce9dea7dd81fde3b15d4fdd5c5fddd}
+            - {name: 17_C, composition: C2H4O, seed_path: geometry/17_C/POSCAR, seed_sha256: 3cdc911b11dfc9b765d0973db989bc9e291144bbe5ae7c1f400f0fad0b4b02e2}
+            - {name: 18_A, composition: C2H4O, seed_path: geometry/18_A/POSCAR, seed_sha256: c2fdb709be00b676645a1ca9d39a0c0e7f54f409b49e7f490770f91ef504fd59}
+            - {name: 18_B, composition: C2H4O, seed_path: geometry/18_B/POSCAR, seed_sha256: cefd8ae0a7e4c87f7e342953671e4288544a4930a8b3abaa4ceedf593751d110}
+            - {name: 18_C, composition: C2H4O, seed_path: geometry/18_C/POSCAR, seed_sha256: 4a0afcca0fe130e2b35a8c8164ea7a73544505fb8d1f71fb4393c25f65dc0621}
+            - {name: 19_A, composition: C2H6, seed_path: geometry/19_A/POSCAR, seed_sha256: edc5617c129899f2a335b09f45c6560e6be86bc92b33f0aa2764dc07ce6d09c4}
+            - {name: 19_B, composition: C2H6, seed_path: geometry/19_B/POSCAR, seed_sha256: 39a1af03f81685fa3837230eac13bee4517bfd7842ec47565e7e4ca136f326e3}
+            - {name: 19_C, composition: C2H6, seed_path: geometry/19_C/POSCAR, seed_sha256: 1ed8076277003673dec4556429de211f8fd5478afe254b05604ce91001647d48}
+        authorizing_user_request: 对证据齐全的构型进行正式登记审核， 然后录入吸附表中 然后提交16-19
+        sharing_authorization: 允许GPU0受限共享运行
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        automatic_retries: 0
+        VASP_submission_authority: false
+        domain_use: uncalibrated_candidate_pre_relaxation_only_no_ranking
+      fe110_c2_11_15_ft512_20261029:
+        scope:
+          gpu_index: 1
+          gpu_uuid: GPU-450609b3-d1fd-ac33-d03a-79891be402da
+          max_wall_seconds: 600
+          CPU_count: 4
+          memory_GB: 32
+          allocator_limit_MiB: 16384
+          limits:
+            seed_max_steps: 80
+            fmax_eV_per_A: 0.1
+            LBFGS_maxstep_A: 0.2
+          remote_root: /home/sbq/sbq/fe110_c2_11_15_ft512_20261029_v1
+          models:
+            finetune:
+              path: /home/sbq/sbq/fe110_scratch512_20261028_v1/finetune/control/output/direct-fe110-scratch512-finetune20-20261028-v1/checkpoints/2026-10-28-20-56-32/best_checkpoint.pt
+              sha256: cdd391d39ed19fc1ef3516d41b1af53bd81351d8ad73f25e537be232fd8c0dc0
+              backend: aqcat25
+              status: budget_stopped_partial_development_selected_snapshot
+          cases:
+          - name: 11_A
+            composition: C2H3
+            seed_path: geometry/11_A/POSCAR
+            seed_sha256: daddb6f7e9b33d116a3d461affca3b6a682001bb6a8eb2cb185e6ee9b0604562
+          - name: 11_B
+            composition: C2H3
+            seed_path: geometry/11_B/POSCAR
+            seed_sha256: e996b6eb9f99f83d66300c4dc4e4babf21062a5fc5dfee64781ed9acb6b2a9ce
+          - name: 11_C
+            composition: C2H3
+            seed_path: geometry/11_C/POSCAR
+            seed_sha256: 67eaf572196f405211cb3335d5c1c0f2379dad0c393e076346d1fd25c38b945d
+          - name: 12_A
+            composition: C2H3O
+            seed_path: geometry/12_A/POSCAR
+            seed_sha256: cacf28fb88bacfee22a7a39e52cbe047cb692e5fa081752b088e543ef4fb4c2d
+          - name: 12_B
+            composition: C2H3O
+            seed_path: geometry/12_B/POSCAR
+            seed_sha256: a50e10fc1b38fb87c094839776fe3213168b5b414299116300003697c1de82c1
+          - name: 12_C
+            composition: C2H3O
+            seed_path: geometry/12_C/POSCAR
+            seed_sha256: 1b7bfe1e12eb62368abf6a29d2d0c3962febc1a357bcf418d2beafcf3ac94003
+          - name: 13_A
+            composition: C2H3O
+            seed_path: geometry/13_A/POSCAR
+            seed_sha256: 0127f164894671be3d2a54e3380bd9ecf5037ca852b765f82bca6c136af12f59
+          - name: 13_B
+            composition: C2H3O
+            seed_path: geometry/13_B/POSCAR
+            seed_sha256: 5483cb4083133346148fc3d41be7fcb2077eb631120d4c7188e5c0b6faf3ca21
+          - name: 13_C
+            composition: C2H3O
+            seed_path: geometry/13_C/POSCAR
+            seed_sha256: c3d7932da9dfd7ecb6239d12268e7ebe9b6572c7d12cfc4867b437532e255506
+          - name: 14_A
+            composition: C2H3O
+            seed_path: geometry/14_A/POSCAR
+            seed_sha256: 3e7d212f16899985a9247328f51dfcb72ee7438fdf29323a38c48fd05fded207
+          - name: 14_B
+            composition: C2H3O
+            seed_path: geometry/14_B/POSCAR
+            seed_sha256: 9f5c96d2ed2b2b2a7f108caeb9ac7951ff8111d873fbef6dbeb081075a7d5f07
+          - name: 14_C
+            composition: C2H3O
+            seed_path: geometry/14_C/POSCAR
+            seed_sha256: cdc8ce43a6e6885558bd9cbc300f9939bcf237fa494e450ceb2684f50d365e42
+          - name: 15_A
+            composition: C2H4
+            seed_path: geometry/15_A/POSCAR
+            seed_sha256: db6a750c2357d99033acede38aea824f8fa76659e9c734f3634e1b877a202910
+          - name: 15_B
+            composition: C2H4
+            seed_path: geometry/15_B/POSCAR
+            seed_sha256: 1b0c4d73277c312e0fdcd056be28f5c445565f84754d966ed5a996056188a57b
+          - name: 15_C
+            composition: C2H4
+            seed_path: geometry/15_C/POSCAR
+            seed_sha256: 72c51ad48b1ec176613e6bd34ac252bc98cbe71eecdc209edb13924ab0cb167f
+        authorizing_user_request: 利用新微调的AQCat25 gpu加速 然后提交dft
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        automatic_retries: 0
+        VASP_submission_authority: false
+        authorization_interpretation: Explicit current user requests these fifteen GPU starts
+          followed by work-reviewed DFT. Conservative 600s GPU cap selected by agent; not
+          a claimed user-specified budget.
+      fe110_scratch512_speed2_20261028:
+        scope:
+          remote_root: /home/sbq/sbq/fe110_scratch512_speed2_20261028_v2
+          gpu_index: 1
+          gpu_uuid: GPU-450609b3-d1fd-ac33-d03a-79891be402da
+          max_wall_seconds: 600
+          CPU_count: 4
+          memory_GB: 32
+          allocator_limit_MiB: 16384
+          models:
+            nequip:
+              path: /home/sbq/sbq/fe110_scratch512_20261028_v1/nequip_v2/output/best.ckpt
+              sha256: a444a7e3747296a06cdd6dfc953e510f08200d533948e2c50804b9556b53bb17
+              backend: nequip
+              status: normal_exit_development_selected
+            finetune:
+              path: /home/sbq/sbq/fe110_scratch512_20261028_v1/finetune/control/output/direct-fe110-scratch512-finetune20-20261028-v1/checkpoints/2026-10-28-20-56-32/best_checkpoint.pt
+              sha256: cdd391d39ed19fc1ef3516d41b1af53bd81351d8ad73f25e537be232fd8c0dc0
+              backend: aqcat25
+              status: budget_stopped_partial_development_selected_snapshot
+          model_pythons:
+            nequip: /home/sbq/sbq/fe110_scratch512_env_20261028_v4/venv/bin/python
+            finetune: /home/sbq/sbq/ml_ts_acceleration/venv/bin/python
+          cases:
+          - name: 10_A
+            composition: C2H3
+            seed_path: geometry/10_A/POSCAR
+            seed_sha256: 04990eb8ae6dc84d9626dd0480220201664499f79c389d1c6070081325497d4b
+          - name: C3_05
+            composition: C3H2O
+            seed_path: geometry/C3_05/POSCAR
+            seed_sha256: 6ed0169ab43c93e3b53092ea2bc76a5179f833752e9f1ccb0eabc61b76a63868
+          limits:
+            seed_max_steps: 80
+            fmax_eV_per_A: 0.1
+            LBFGS_maxstep_A: 0.2
+        authorizing_user_request: 从完全相同的C₂/C₃起点出发，各自进行ML优化，再交给相同设置的VASP，比较达到同一终态和0.02 eV/Å标准所需的离子步、SCF次数及核时。
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        automatic_retries: 0
+        VASP_submission_authority: false
+        budget_confirmation: CONFIRMED_HUMAN_FOUR_ML_TEN_GPU_MINUTES
+        authorized_by: explicit_user_20261028_four_ML_tenGPUminutes
+        budget_authorization: 启动4次ML优化，合计≤10 GPU分钟（推荐）
+        authorization_evidence_sha256: b10e6d81fa4944b563f2d59efee0d72ea4c7d94feb87db08efb3c35390a4710d
+      fe110_force_training512_comparison20_20261028:
+        authorized_by: user_explicit_20261028_two_arm_oneGPUhour
+        authorizing_user_request: 启动两项训练，总计≤1 GPU小时（推荐）
+        scope: one_twenty_epoch_force_only512_control
+        arms:
+        - control
+        remote_root: /home/sbq/sbq/fe110_scratch512_20261028_v1/finetune
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        gpu_index: 1
+        gpu_uuid: GPU-450609b3-d1fd-ac33-d03a-79891be402da
+        execution_mode: direct_no_scheduler
+        executor: scripts/adsorption/direct_force_training.py
+        model_backend: aqcat25_role_force_training
+        arm_request_sha256:
+          control: 87a20cb4ae75a09dd423e296d28c5559fec97aeadeb4a05a15148d21deb3c272
+        max_wall_seconds: 1800
+        per_arm_wall_seconds: 1800
+        max_epochs: 20
+        max_optimizer_steps_per_arm: 10240
+        CPU_count: 4
+        memory_GB: 32
+        parallel_arms: 1
+        automatic_retries: 0
+        explicit_authorization_required: true
+        producer_exit_record_required: true
+        scheduler_job_id: null
+        slurm_id_emulation: forbidden
+        model_promotion_or_vasp_execution: forbidden
+        alter_shared_services_or_other_users_jobs: forbidden
+        original_comparison_sha256: d8ea2bde80fce89985f4b7082f7e11aff271efda17e17de273537d10820ab9ae
+      fe110_nequip_scratch512_20261028:
+        authorized_by: user_explicit_20261028_two_arm_oneGPUhour
+        request_sha256: cd0fadb4d199094fcfeb9f1b0e736207bf92fe60664183b83f58ff16f14a0469
+        remote_root: /home/sbq/sbq/fe110_scratch512_20261028_v1/nequip_v2
+        gpu_index: 1
+        gpu_uuid: GPU-450609b3-d1fd-ac33-d03a-79891be402da
+        max_wall_seconds: 1800
+        model_backend: nequip_force_scratch
+        scope: Fe110_only_force_model_training_not_general_backend_permission
+        authorizing_user_request: 启动两项训练，总计≤1 GPU小时（推荐）
+      fe110_paired_relaxation2_20261027:
+        scope:
+          remote_root: /home/sbq/sbq/fe110_paired_relaxation2_20261027_v2
+          gpu_index: 0
+          gpu_uuid: GPU-483c224e-cc19-13e2-24ad-c83efd14fa75
+          gpu_sharing:
+            mode: resident_service_allowlist
+            allowed_processes:
+            - pid: 755831
+              uid: 1007
+              start_ticks: 25755244
+              script: wsgi_recommender.py
+            - pid: 755832
+              uid: 1007
+              start_ticks: 25755244
+              script: wsgi_recommender.py
+            - pid: 755833
+              uid: 1007
+              start_ticks: 25755244
+              script: wsgi_recommender.py
+            - pid: 755834
+              uid: 1007
+              start_ticks: 25755244
+              script: wsgi_recommender.py
+            - pid: 2068650
+              uid: 1007
+              start_ticks: 33232802
+              script: wsgi_recommender.py
+            - pid: 2068651
+              uid: 1007
+              start_ticks: 33232802
+              script: wsgi_recommender.py
+            - pid: 2068649
+              uid: 1007
+              start_ticks: 33232801
+              script: wsgi_recommender.py
+            - pid: 2068648
+              uid: 1007
+              start_ticks: 33232801
+              script: wsgi_recommender.py
+            max_training_memory_MiB: 16384
+          max_wall_seconds: 600
+          CPU_count: 4
+          memory_GB: 32
+          models:
+            control:
+              path: /home/sbq/sbq/adsorption_training_comparison_20261020_v2/control/output/direct-adsorption-role-ab-20261020-v2/candidate.pt
+              sha256: cfcac123cd56b866a1ea36cc780a3aee634f3aeec979bda4ae8bee2cc831e523
+            new512:
+              path: /home/sbq/sbq/fe110_force_training512_gpu0_20261027_v1/control/output/direct-fe110-force512-gpu0-20261027-v1/candidate.pt
+              sha256: 513decf4ebd823cf8f87a79e787fdbd543b657fd582184f2ab23845d281d6aeb
+          cases:
+          - name: 10_A
+            composition: C2H3
+            seed_path: geometry/10_A/POSCAR
+            seed_sha256: 04990eb8ae6dc84d9626dd0480220201664499f79c389d1c6070081325497d4b
+          - name: C3_05
+            composition: C3H2O
+            seed_path: geometry/C3_05/POSCAR
+            seed_sha256: 6ed0169ab43c93e3b53092ea2bc76a5179f833752e9f1ccb0eabc61b76a63868
+          limits:
+            seed_max_steps: 80
+            fmax_eV_per_A: 0.1
+            LBFGS_maxstep_A: 0.2
+        authorizing_user_request: 同一起点的小规模C₂/C₃优化对照，再以一致的DFT标准检查终态和实际成本。
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        automatic_retries: 0
+        VASP_submission_authority: false
+      fe110_fixed53_force_comparison_20261027:
+        remote_root: /home/sbq/sbq/fe110_fixed53_comparison_20261027_v1
+        gpu_index: 0
+        gpu_uuid: GPU-483c224e-cc19-13e2-24ad-c83efd14fa75
+        gpu_sharing:
+          mode: resident_service_allowlist
+          allowed_processes:
+          - pid: 755831
+            uid: 1007
+            start_ticks: 25755244
+            script: wsgi_recommender.py
+          - pid: 755832
+            uid: 1007
+            start_ticks: 25755244
+            script: wsgi_recommender.py
+          - pid: 755833
+            uid: 1007
+            start_ticks: 25755244
+            script: wsgi_recommender.py
+          - pid: 755834
+            uid: 1007
+            start_ticks: 25755244
+            script: wsgi_recommender.py
+          - pid: 2068650
+            uid: 1007
+            start_ticks: 33232802
+            script: wsgi_recommender.py
+          - pid: 2068651
+            uid: 1007
+            start_ticks: 33232802
+            script: wsgi_recommender.py
+          - pid: 2068649
+            uid: 1007
+            start_ticks: 33232801
+            script: wsgi_recommender.py
+          - pid: 2068648
+            uid: 1007
+            start_ticks: 33232801
+            script: wsgi_recommender.py
+          max_training_memory_MiB: 16384
+        max_wall_seconds: 600
+        sample_ids:
+        - 09_C_step001
+        - 09_C_step002
+        - 09_C_step003
+        - 09_C_step004
+        - 09_C_step005
+        - 09_C_step008
+        - 09_C_step014
+        - 09_C_step021
+        - 09_C_step025
+        - 09_C_step028
+        - 09_C_step034
+        - 09_C_step041
+        - 09_C_step048
+        - 09_C_step050
+        - 09_C_step054
+        - 09_C_step061
+        - 09_C_step068
+        - 09_C_step074
+        - 09_C_step076
+        - 09_C_step081
+        - 09_C_step088
+        - 09_C_step094
+        - 09_C_step100
+        - 10_A_step001
+        - 10_A_step002
+        - 10_A_step003
+        - 10_A_step004
+        - 10_A_step005
+        - 10_A_step009
+        - 10_A_step016
+        - 10_A_step024
+        - 10_A_step028
+        - 10_A_step031
+        - 10_A_step039
+        - 10_A_step046
+        - 10_A_step054
+        - 10_A_step057
+        - 10_A_step061
+        - 10_A_step069
+        - 10_A_step076
+        - 10_A_step084
+        - 10_A_step086
+        - 10_A_step091
+        - 10_A_step099
+        - 10_A_step106
+        - 10_A_step113
+        - family_0006_step010
+        - family_0006_step020
+        - family_0080_step000
+        - family_0080_step006
+        - family_0090_step010
+        - family_0090_step020
+        - family_0025_step000
+        model_checkpoint_sha256:
+          baseline: e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50
+          control: cfcac123cd56b866a1ea36cc780a3aee634f3aeec979bda4ae8bee2cc831e523
+          new512: 513decf4ebd823cf8f87a79e787fdbd543b657fd582184f2ab23845d281d6aeb
+        authorizing_user_request: 固定结构上的新旧模型力误差对照。
+        authorized_by: user_explicit_fixed_structure_force_comparison_20261027
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        executor: scripts/adsorption/fixed_force_comparison.py
+        prediction_count: 159
+        CPU_count: 4
+        memory_GB: 32
+        automatic_retries: 0
+        training_or_optimization: forbidden
+      fe110_force_training512_gpu0_20261027:
+        authorized_by: user_explicit_20261027_use_sharedGPU0_for_existing512_trial
+        authorizing_user_request: 用吧
+        scope: one_uniform_force_only512_frame_candidate_on_allowlisted_sharedGPU0
+        arms:
+        - control
+        remote_root: /home/sbq/sbq/fe110_force_training512_gpu0_20261027_v1
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        gpu_index: 0
+        gpu_uuid: GPU-483c224e-cc19-13e2-24ad-c83efd14fa75
+        gpu_sharing:
+          mode: resident_service_allowlist
+          allowed_processes:
+          - pid: 755831
+            uid: 1007
+            start_ticks: 25755244
+            script: wsgi_recommender.py
+          - pid: 755832
+            uid: 1007
+            start_ticks: 25755244
+            script: wsgi_recommender.py
+          - pid: 755833
+            uid: 1007
+            start_ticks: 25755244
+            script: wsgi_recommender.py
+          - pid: 755834
+            uid: 1007
+            start_ticks: 25755244
+            script: wsgi_recommender.py
+          - pid: 2068650
+            uid: 1007
+            start_ticks: 33232802
+            script: wsgi_recommender.py
+          - pid: 2068651
+            uid: 1007
+            start_ticks: 33232802
+            script: wsgi_recommender.py
+          - pid: 2068649
+            uid: 1007
+            start_ticks: 33232801
+            script: wsgi_recommender.py
+          - pid: 2068648
+            uid: 1007
+            start_ticks: 33232801
+            script: wsgi_recommender.py
+          max_training_memory_MiB: 16384
+        execution_mode: direct_no_scheduler
+        executor: scripts/adsorption/direct_force_training.py
+        model_backend: aqcat25_role_force_training
+        original_comparison_sha256: 1cf959d527e03a3ddccb7fb38e617310ec7552d8eda16e6083a8161e5c1d1e2e
+        arm_request_sha256:
+          control: 440209427fbd5a346eff483d90631c740be644f2f0e01fed280940949e0bcea8
+        max_wall_seconds: 1800
+        per_arm_wall_seconds: 1800
+        max_epochs: 2
+        max_optimizer_steps_per_arm: 1024
+        CPU_count: 4
+        memory_GB: 32
+        parallel_arms: 1
+        automatic_retries: 0
+        explicit_authorization_required: true
+        producer_exit_record_required: true
+        scheduler_job_id: null
+        slurm_id_emulation: forbidden
+        model_promotion_or_vasp_execution: forbidden
+        alter_shared_services_or_other_users_jobs: forbidden
+        supersedes_unstarted_exception: fe110_force_training512_20261027
+      fe110_force_training512_20261027:
+        authorized_by: user_explicit_20261027_submit_one_reviewed512_frame_trial
+        authorizing_user_request: 提交
+        scope: one_uniform_force_only512_frame_candidate
+        arms:
+        - control
+        remote_root: /home/sbq/sbq/fe110_force_training512_20261027_v1
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        gpu_index: 1
+        gpu_uuid: GPU-450609b3-d1fd-ac33-d03a-79891be402da
+        execution_mode: direct_no_scheduler
+        executor: scripts/adsorption/direct_force_training.py
+        model_backend: aqcat25_role_force_training
+        original_comparison_sha256: 049e1a5007d360628b30a4abe915bcb38cb5a548049cad7e56e66ae48ee356a9
+        arm_request_sha256:
+          control: fbc1fb2d7b8753e5429db2253559cff5a68669a0f620eebe515f01ad6c1c84e7
+        max_wall_seconds: 1800
+        per_arm_wall_seconds: 1800
+        max_epochs: 2
+        max_optimizer_steps_per_arm: 1024
+        CPU_count: 4
+        memory_GB: 32
+        parallel_arms: 1
+        automatic_retries: 0
+        explicit_authorization_required: true
+        producer_exit_record_required: true
+        scheduler_job_id: null
+        slurm_id_emulation: forbidden
+        model_promotion_or_vasp_execution: forbidden
+        alter_shared_services_or_other_users_jobs: forbidden
+      fe110_reico_sampling93_20261022:
+        authorized_by: user_explicit_20261022_continue_sampling_and_deduplication
+        authorizing_user_request: 可以的继续
+        scope: remaining93_frozen_random_families_short_sampling_only
+        remote_root: /home/sbq/sbq/aqcat25_ts_pilot/reico_sampling93_20261022_v1
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        gpu_index: 1
+        gpu_uuid: GPU-450609b3-d1fd-ac33-d03a-79891be402da
+        execution_mode: direct_no_scheduler
+        executor: archive/fe110_adsorption_validation_20261018/runtime.py
+        model_backend: aqcat25
+        candidate_checkpoint_sha256: cfcac123cd56b866a1ea36cc780a3aee634f3aeec979bda4ae8bee2cc831e523
+        source_manifest_sha256: ac31fbd4916b31182f854dcbddb55719b34b7b15d6d3f7580bd1fa1930aa1cd6
+        generation_config_sha256: 4e153c143c952fb25e0295576b5d7a9f73eced1cabfc9d76520364d791780b5b
+        sample_count: 93
+        source_names:
+        - family_0001
+        - family_0003
+        - family_0005
+        - family_0006
+        - family_0008
+        - family_0009
+        - family_0010
+        - family_0011
+        - family_0012
+        - family_0013
+        - family_0014
+        - family_0015
+        - family_0016
+        - family_0017
+        - family_0018
+        - family_0019
+        - family_0020
+        - family_0021
+        - family_0022
+        - family_0023
+        - family_0024
+        - family_0025
+        - family_0026
+        - family_0027
+        - family_0028
+        - family_0030
+        - family_0031
+        - family_0032
+        - family_0033
+        - family_0034
+        - family_0035
+        - family_0036
+        - family_0037
+        - family_0038
+        - family_0039
+        - family_0040
+        - family_0041
+        - family_0042
+        - family_0043
+        - family_0044
+        - family_0045
+        - family_0046
+        - family_0047
+        - family_0048
+        - family_0049
+        - family_0050
+        - family_0051
+        - family_0053
+        - family_0054
+        - family_0055
+        - family_0056
+        - family_0057
+        - family_0058
+        - family_0059
+        - family_0060
+        - family_0061
+        - family_0062
+        - family_0063
+        - family_0064
+        - family_0065
+        - family_0066
+        - family_0067
+        - family_0068
+        - family_0069
+        - family_0070
+        - family_0071
+        - family_0072
+        - family_0073
+        - family_0074
+        - family_0075
+        - family_0076
+        - family_0077
+        - family_0079
+        - family_0080
+        - family_0081
+        - family_0082
+        - family_0083
+        - family_0085
+        - family_0086
+        - family_0087
+        - family_0088
+        - family_0089
+        - family_0090
+        - family_0091
+        - family_0092
+        - family_0093
+        - family_0094
+        - family_0095
+        - family_0096
+        - family_0097
+        - family_0098
+        - family_0099
+        - family_0100
+        sample_role: frozen_family_unlabeled_geometry_sampling
+        limits:
+          max_steps: 20
+          maxstep_A: 0.05
+          ML_fmax_eV_A: 0.1
+          minimum_Fe_Fe_A: 1.8
+          minimum_adsorbate_height_A: -0.5
+          minimum_periodic_vacuum_gap_A: 8.0
+        max_wall_seconds: 600
+        max_return_bytes: 96000000
+        requires_current_user_execution_authorization: true
+        automatic_retry: false
+        training: false
+        new_VASP: false
+        production_promotion: false
+      fe110_reico_sampling6_20261022:
+        authorized_by: user_explicit_20261022_continue_six_seed_short_sampling
+        authorizing_user_request: 可以继续吧
+        scope: six_reviewed_training_seeds_frozen_control_twenty_step_ML_sampling_only
+        remote_root: /home/sbq/sbq/aqcat25_ts_pilot/reico_sampling6_20261022_v1
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        gpu_index: 1
+        gpu_uuid: GPU-450609b3-d1fd-ac33-d03a-79891be402da
+        execution_mode: direct_no_scheduler
+        executor: archive/fe110_adsorption_validation_20261018/runtime.py
+        model_backend: aqcat25
+        candidate_checkpoint_sha256: cfcac123cd56b866a1ea36cc780a3aee634f3aeec979bda4ae8bee2cc831e523
+        source_manifest_sha256: e7d7523814dd9c56a5be63f6ae364850eb8a31cc851769e23968208effe8fdeb
+        generation_config_sha256: 4e153c143c952fb25e0295576b5d7a9f73eced1cabfc9d76520364d791780b5b
+        sample_count: 6
+        source_names: [family_0002, family_0004, family_0007, family_0029, family_0052, family_0078]
+        limits:
+          max_steps: 20
+          maxstep_A: 0.05
+          ML_fmax_eV_A: 0.10
+          minimum_Fe_Fe_A: 1.8
+          minimum_adsorbate_height_A: -0.5
+          minimum_periodic_vacuum_gap_A: 8.0
+        max_wall_seconds: 600
+        automatic_retries: 0
+        explicit_authorization_required: true
+        producer_exit_record_required: true
+        scheduler_job_id: null
+        slurm_id_emulation: forbidden
+        training_or_vasp_execution: forbidden
+        production_model_promotion: forbidden
+        alter_shared_services_or_other_users_jobs: forbidden
+      fe110_reico_probe6_exact_forces_20261022:
+        authorized_by: user_explicit_20261022_six_completed_static_force_comparison
+        authorizing_user_request: 看一下这6个单点算完了吗，算完了就检查收敛和磁矩，再对比模型和DFT的力，看看能不能用于优化采样。
+        scope: six_original_random_training_family_geometries_two_frozen_models_forces_only
+        remote_root: /home/sbq/sbq/aqcat25_ts_pilot/reico_probe6_exact_forces_20261022_v1
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        gpu_index: 1
+        gpu_uuid: GPU-450609b3-d1fd-ac33-d03a-79891be402da
+        execution_mode: direct_no_scheduler
+        executor: archive/fe110_adsorption_validation_20261018/runtime.py
+        model_backend: aqcat25
+        baseline_checkpoint_sha256: e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50
+        candidate_checkpoint_sha256: cfcac123cd56b866a1ea36cc780a3aee634f3aeec979bda4ae8bee2cc831e523
+        sample_count: 6
+        source_names: [family_0002, family_0004, family_0007, family_0029, family_0052, family_0078]
+        prediction_count: 12
+        max_wall_seconds: 600
+        automatic_retries: 0
+        explicit_authorization_required: true
+        producer_exit_record_required: true
+        scheduler_job_id: null
+        slurm_id_emulation: forbidden
+        training_relaxation_or_vasp_execution: forbidden
+        production_model_promotion: forbidden
+        alter_shared_services_or_other_users_jobs: forbidden
+      fe110_adsorption_control_geometry3_20261020:
+        authorized_by: user_explicit_20261020_small_same_seed_geometry_comparison
+        authorizing_user_request: 做少量同起点预松弛对照，检查构型保持，再判断能否真正减少VASP步数。
+        scope: three_existing_raw_seeds_and_DFT_minima_baseline_control_geometry_only
+        remote_root: /home/sbq/sbq/aqcat25_ts_pilot/adsorption_control_geometry3_20261020_v1
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        gpu_index: 1
+        gpu_uuid: GPU-450609b3-d1fd-ac33-d03a-79891be402da
+        execution_mode: direct_no_scheduler
+        executor: archive/fe110_adsorption_validation_20261018/runtime.py
+        model_backend: aqcat25
+        baseline_checkpoint_sha256: e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50
+        candidate_checkpoint_sha256: cfcac123cd56b866a1ea36cc780a3aee634f3aeec979bda4ae8bee2cc831e523
+        heldout_count: 0
+        geometry_case_names: [06_C, 09_C, 10_A]
+        seed_max_steps: 80
+        minimum_drift_max_steps: 20
+        fmax_eV_per_A: 0.10
+        minimum_drift_fmax_eV_A: 0.02
+        max_wall_seconds: 1200
+        automatic_retries: 0
+        explicit_authorization_required: true
+        producer_exit_record_required: true
+        scheduler_job_id: null
+        slurm_id_emulation: forbidden
+        training_or_vasp_execution: forbidden
+        checkpoint_reselection_or_default_model_change: forbidden
+        alter_shared_services_or_other_users_jobs: forbidden
+      fe110_adsorption_control_heldout46_20261020:
+        authorized_by: user_explicit_20261020_validate_frozen_control
+        authorizing_user_request: 验证
+        scope: frozen_baseline_control_46_exact_heldout_force_predictions_only
+        remote_root: /home/sbq/sbq/aqcat25_ts_pilot/adsorption_control_heldout46_20261020_v1
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        gpu_index: 1
+        gpu_uuid: GPU-450609b3-d1fd-ac33-d03a-79891be402da
+        execution_mode: direct_no_scheduler
+        executor: archive/fe110_adsorption_validation_20261018/runtime.py
+        model_backend: aqcat25
+        baseline_checkpoint_sha256: e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50
+        candidate_checkpoint_sha256: cfcac123cd56b866a1ea36cc780a3aee634f3aeec979bda4ae8bee2cc831e523
+        frozen_proposal_sha256: bf2e4a7c745ae6569f69c70a262c8854566d8b6a123592ca123cbfc6dbfe0c92
+        sample_count: 46
+        source_names: [09_C, 10_A]
+        prediction_count: 92
+        max_wall_seconds: 600
+        automatic_retries: 0
+        explicit_authorization_required: true
+        producer_exit_record_required: true
+        scheduler_job_id: null
+        slurm_id_emulation: forbidden
+        training_relaxation_or_vasp_execution: forbidden
+        heldout_driven_model_reselection: forbidden
+        production_model_promotion: forbidden
+        alter_shared_services_or_other_users_jobs: forbidden
+      fe110_adsorption_role_training_retry_20261020:
+        authorized_by: user_explicit_20261020_repair_and_retry_once
+        authorizing_user_request: 修复好再跑一次
+        scope: corrected_control_then_treatment_same_frozen_adsorption_data
+        remote_root: /home/sbq/sbq/adsorption_training_comparison_20261020_v2
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        gpu_index: 1
+        gpu_uuid: GPU-450609b3-d1fd-ac33-d03a-79891be402da
+        execution_mode: direct_no_scheduler
+        executor: scripts/adsorption/direct_force_training.py
+        model_backend: aqcat25_role_force_training
+        original_comparison_sha256: beb6f086c16409d2f3983feb874bb142f79fa8f03e5cefff708b51475a89c3af
+        arm_request_sha256:
+          control: 8465cdd7e5696242d15eb5bb221310c7c90b6662402e72be1bececb280be9578
+          treatment: 59c90094bbdbb3e5cc6c7611f9b80314c8383d02864eb56c7a45893015c0010e
+        max_wall_seconds: 3600
+        per_arm_wall_seconds: 1800
+        max_epochs: 2
+        max_optimizer_steps_per_arm: 496
+        CPU_count: 4
+        memory_GB: 32
+        parallel_arms: 1
+        automatic_retries: 0
+        explicit_authorization_required: true
+        producer_exit_record_required: true
+        scheduler_job_id: null
+        slurm_id_emulation: forbidden
+        model_promotion_or_vasp_execution: forbidden
+        alter_shared_services_or_other_users_jobs: forbidden
+      fe110_adsorption_role_training_20261020:
+        authorized_by: user_explicit_20261020_run_gpu1_training_comparison
+        authorizing_user_request: 跑
+        scope: frozen_control_then_treatment_adsorption_force_training_only
+        remote_root: /home/sbq/sbq/adsorption_training_comparison_20261019_v1
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        gpu_index: 1
+        gpu_uuid: GPU-450609b3-d1fd-ac33-d03a-79891be402da
+        execution_mode: direct_no_scheduler
+        executor: scripts/adsorption/direct_force_training.py
+        model_backend: aqcat25_role_force_training
+        original_comparison_sha256: f5db5cb7b1e98d6153bba8bbc41a0d0697fd29c79162a4ef0298a91969660987
+        arm_request_sha256:
+          control: dbad960b964805277333d21bce0a1669e38085c9ab742f5ed53a88a9a5b2d026
+          treatment: 8b740e698d2bac32bb9f918012372a1aaf4e410d9bfef61397bb55ce95ab69ca
+        max_wall_seconds: 3600
+        per_arm_wall_seconds: 1800
+        max_epochs: 2
+        max_optimizer_steps_per_arm: 496
+        CPU_count: 4
+        memory_GB: 32
+        parallel_arms: 1
+        automatic_retries: 0
+        explicit_authorization_required: true
+        producer_exit_record_required: true
+        scheduler_job_id: null
+        slurm_id_emulation: forbidden
+        model_promotion_or_vasp_execution: forbidden
+        alter_shared_services_or_other_users_jobs: forbidden
+      fe110_adsorption_06c_boundary_force_20261019:
+        authorized_by: user_explicit_20261019_three_exact_boundary_force_comparisons
+        authorizing_user_request: 授权运行这一个受限预测批次
+        scope: baseline_and_frozen2185_three_exact_static_failure_boundary_forces_only
+        remote_root: /home/sbq/sbq/aqcat25_ts_pilot/adsorption_06c_force_comparison_20261019_v1
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        gpu_index: 1
+        gpu_uuid: GPU-450609b3-d1fd-ac33-d03a-79891be402da
+        execution_mode: direct_no_scheduler
+        executor: archive/fe110_adsorption_validation_20261018/runtime.py
+        model_backend: aqcat25
+        baseline_checkpoint_sha256: e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50
+        candidate_checkpoint_sha256: 33b615feef2860e744d67ba964a27d1b60b9be7abdc9e754d5e264c10e96b160
+        sample_count: 3
+        source_names: [06_C]
+        max_wall_seconds: 600
+        explicit_authorization_required: true
+        producer_exit_record_required: true
+        scheduler_job_id: null
+        slurm_id_emulation: forbidden
+        training_relaxation_or_vasp_execution: forbidden
+        alter_shared_services_or_other_users_jobs: forbidden
+      fe110_adsorption_force24_2185_20261018:
+        authorized_by: user_explicit_20261018_continue_existing24_exact_force_comparison
+        authorizing_user_request: 可以继续
+        scope: baseline_and_frozen2185_existing24_VASP_frames_force_inference_only
+        remote_root: /home/sbq/sbq/aqcat25_ts_pilot/adsorption_force24_2185_20261018_v1
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        gpu_index: 1
+        gpu_uuid: GPU-450609b3-d1fd-ac33-d03a-79891be402da
+        execution_mode: direct_no_scheduler
+        executor: archive/fe110_adsorption_validation_20261018/runtime.py
+        model_backend: aqcat25
+        baseline_checkpoint_sha256: e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50
+        candidate_checkpoint_sha256: 33b615feef2860e744d67ba964a27d1b60b9be7abdc9e754d5e264c10e96b160
+        sample_count: 24
+        source_names: [06_C, 07_B, 08_A]
+        max_wall_seconds: 600
+        explicit_authorization_required: true
+        producer_exit_record_required: true
+        scheduler_job_id: null
+        slurm_id_emulation: forbidden
+        training_relaxation_or_vasp_execution: forbidden
+        alter_shared_services_or_other_users_jobs: forbidden
+      fe110_adsorption_validation_2185_20261018:
+        authorized_by: user_explicit_20261018_validate_frozen_adsorption_candidate
+        authorizing_user_request: 验证
+        scope: frozen2185_sixteen_heldout_and_three_existing_geometry_cases_only
+        remote_root: /home/sbq/sbq/aqcat25_ts_pilot/adsorption_validation_2185_20261018_v2
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        gpu_index: 1
+        gpu_uuid: GPU-450609b3-d1fd-ac33-d03a-79891be402da
+        execution_mode: direct_no_scheduler
+        executor: archive/fe110_adsorption_validation_20261018/runtime.py
+        model_backend: aqcat25
+        baseline_checkpoint_sha256: e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50
+        candidate_checkpoint_sha256: 33b615feef2860e744d67ba964a27d1b60b9be7abdc9e754d5e264c10e96b160
+        heldout_count: 16
+        geometry_case_names: [06_C, 07_B, 08_A]
+        seed_max_steps: 80
+        minimum_drift_max_steps: 20
+        fmax_eV_per_A: 0.10
+        max_wall_seconds: 1800
+        explicit_authorization_required: true
+        producer_exit_record_required: true
+        scheduler_job_id: null
+        slurm_id_emulation: forbidden
+        training_or_vasp_execution: forbidden
+        alter_shared_services_or_other_users_jobs: forbidden
+      fe110_matris_adsorption_trial_20261018:
+        authorized_by: user_explicit_20261018_direct_gpu2_six_matris_trials
+        authorizing_user_request: 你尝试一下 授权
+        scope: six_existing_same_seed_adsorption_candidates_only
+        remote_root: /home/sbq/sbq/aqcat25_ts_pilot/fe110_c2_matris_adsorption_trial_20261018_v1
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        gpu_index: 2
+        gpu_uuid: GPU-7ec6ab8a-91a2-450d-04c1-a0d472452b5b
+        execution_mode: direct_no_scheduler
+        executor: scripts/adsorption/direct_gpu_batch.py
+        model_backend: matris
+        checkpoint_path: /home/sbq/sbq/mlip_same_structure_benchmark_20260825/MatRIS_4M_FeCOH_compliant.pth.tar
+        checkpoint_sha256: 1e6a85b33db075ad1637eca7537084024a694b1340358911212d8a5c518c6601
+        candidate_names: [06_C, 07_B, 07_C, 08_A, 09_A, 10_A]
+        candidate_count: 6
+        parallel_candidates: 1
+        max_steps: 80
+        fmax_eV_per_A: 0.10
+        max_wall_seconds: 1800
+        explicit_authorization_required: true
+        producer_exit_record_required: true
+        scheduler_job_id: null
+        slurm_id_emulation: forbidden
+        alter_shared_services_or_other_users_jobs: forbidden
+      fe110_c2_06_10_20261013:
+        authorized_by: user_explicit_20261013_try_direct_gpu1
+        scope: fifteen_reviewed_adsorption_candidates_only
+        remote_root: /home/sbq/sbq/aqcat25_ts_pilot/fe110_c2_06_10_20261013_gpu_direct_v3
+        canonical_remote_boundary: /home/ubuntu/hdd/sbq/sbq
+        gpu_index: 1
+        gpu_uuid: GPU-450609b3-d1fd-ac33-d03a-79891be402da
+        execution_mode: direct_no_scheduler
+        executor: scripts/adsorption/direct_gpu_batch.py
+        candidate_count: 15
+        parallel_candidates: 1
+        max_wall_seconds: 7200
+        explicit_authorization_required: true
+        producer_exit_record_required: true
+        scheduler_job_id: null
+        slurm_id_emulation: forbidden
+        alter_shared_services_or_other_users_jobs: forbidden
+    allowed:
+      - aqcat_energy_force_inference
+      - matris_energy_force_inference
+      - adsorption_candidate_ml_relaxation_and_ranking
+      - endpoint_ml_relaxation
+      - idpp_path_initialization
+      - ase_ml_neb_and_ml_ci_neb_path_optimization
+      - ba_sella_candidate_search
+      - force_only_fine_tuning
+      - energy_force_aware_fine_tuning
+      - uncertainty_and_domain_review
+      - fixed_path_multi_checkpoint_committee_inference
+      - dual_model_ts_path_optimization_and_fixed_path_comparison
+    forbidden:
+      - vasp_execution
+      - vasp_submission
+      - authoritative_dft_energy_or_force_claim
+      - transition_state_acceptance
+      - registry_energy_promotion
+      - external_evidence_gate_bypass
+
+  buct2_gpu:
+    role: candidate_acceleration_only
+    display_name: BUCT2
+    ssh:
+      alias: buct2-gpu
+    remote_write_boundary: /home/sbq/sbq
+    # Verify the host, scheduler, environment, and task paths before execution.
+    execution_admission: task_specific_preflight_required
+
+  buct3_gpu:
+    role: candidate_acceleration_only
+    display_name: BUCT3
+    allowed:
+      - ba_sella_candidate_search
+    ba_sella_runtime:
+      hostname: ubuntu-R5350-G6
+      partition: compute
+      python: /home/sbq/sbq/compute_pool_20261117/deployed/runtime/python
+      python_launcher_sha256: 67d372f4548c1411fb41b282d6d093ed7677b1edef9dc80663c86a525d9b2b4f
+      author_calculations_path: /home/sbq/sbq/compute_pool_20261117/deployed/runtime/src/arkimede/arkimede/workflow/calculations.py
+    ssh:
+      host: 10sx4jr711576.vicp.fun
+      port: 57396
+      user: sbq
+      identity_file: C:/Users/86177/.ssh/id_ed25519_fe_agent
+      identities_only: true
+    remote_write_boundary: /home/sbq/sbq
+    execution_admission: task_specific_preflight_required
+
+  vasp:
+    role: authoritative_first_principles_calculation
+    display_name: sunboquan-codex (CPU)
+    remote_write_boundary: /home_gkn/users/nsgkn_chengdj3
+    ssh_alias: sunboquan-codex
+    # User-selected default since 2026-09-30; SSH alias sbq123 is equivalent.
+    # Resolve through the local OpenSSH config, retaining the canonical alias
+    # used by existing submission gates and scheduler evidence.
+    hostname: 10.68.0.103
+    user: nsgkn_chengdj3
+    port: 22
+    scheduler: LSF
+    # Existing jobs on this separate account retain their scoped backend.
+    authorized_alternates:
+      sunboquan-cdj1-temp:
+        scheduler: LSF
+        hostname: 10.68.0.103
+        user: nsgkx_cdj1
+        port: 22
+        scope:
+          - h_is_a_int06_gpu1802_neb_20260926
+          - h_is_a_int06_gpu1802_neb_temp_r2_20260928
+          - h_is_a_int06_gpu1802_neb_temp_r3_72r_16pn_20260930
+    allowed:
+      - vasp_static_energy_and_force
+      - vasp_adsorption_relaxation_and_final_static
+      - vasp_endpoint_relaxation
+      - vtst_neb_and_ci_neb
+      - vtst_dimer
+      - frequency_and_displacement_calculation
+    forbidden:
+      - aqcat_training
+      - aqcat_candidate_ranking
+      - unreviewed_gpu_candidate_submission
+      - acceptance_without_owning_module_validation
+
+aqcat25_contract:
+  schema_version: 2
+  schema: configs/aqcat25_handoff.schema.json
+  validator: scripts/aqcat25_handoff.py
+  domain_gate: configs/aqcat25_domain_gate.yaml
+  gpu_runner_relative_to_source_repository: relax_endpoint_candidates.py
+  gpu_job_wrapper: scripts/aqcat25_gpu_job.sh
+  shared_mz73_environment: scripts/aqcat25_mz73_env.sh
+  required_validation_points:
+    - work_before_transfer
+    - gpu_before_execution
+    - gpu_before_return
+    - work_after_return
+  adsorption_species_definition: manifest_adsorbate_atoms_anchors_connectivity_constraints_and_monitored_pairs
+  species_specific_hard_code: forbidden
+
+dual_model_ts_path_acceleration:
+  primary_model: matris
+  primary_role: ordinary_ml_neb_and_conditional_ml_ci_neb
+  secondary_model: aqcat25
+  secondary_role: exact_fixed_primary_path_energy_force_inference_only
+  executor: scripts/dual_model_ml_neb.py
+  gpu_job_wrapper: scripts/dual_model_ml_neb_job.sh
+  preconditioning:
+    temporary_bilateral_harmonic_bond_restraints: allowed
+    restraints_must_be_removed_before_ordinary_ml_neb: true
+    constrained_output_is_mep: false
+  model_comparison:
+    identical_structure_hashes_required: true
+    raw_cross_model_absolute_energy_comparison: forbidden
+    disagreement_status: sampling_score_not_calibrated_uncertainty
+  active_learning:
+    policy: configs/dual_model_ts_active_learning.yaml
+    exact_dual_model_prediction_runner: scripts/dual_model_ts_force_prediction_batch.py
+    matris_committee_runner: scripts/matris_ts_path_committee.py
+    vasp_label_selector: scripts/select_dual_model_ts_vasp_labels.py
+    vasp_error_assessor: scripts/assess_dual_model_ts_vasp_errors.py
+    committee_minimum_members: 3
+    committee_maximum_members: 5
+    committee_fallback: matris_primary_plus_optional_aqcat25_audit_plus_vasp_error
+    failure_boundary_pair_required_when_available: true
+    vasp_labels_require_energy_forces_and_magnetic_moments: true
+    automatic_local_preparation: true
+    automatic_remote_submission: false
+  smoke_test:
+    accepted_job_id: "1317"
+    review: calculations/fe110_c2ho_h_to_c2h2o_ts_20260822/gpu_dual_model_smoke_v3_20260825/smoke_review.work.json
+  automatic_submission: forbidden
+  production_gpu_request_requires_separate_user_authorization: true
+
+aqcat25_ts_active_learning:
+  policy: configs/aqcat25_ts_active_learning.yaml
+  controller: scripts/ts_strategy_engine/cli.py
+  entrypoint: python -m scripts.ts_strategy_engine.cli active-learning
+  # The standalone module is a compatibility wrapper; all new invocations use
+  # ``python -m scripts.ts_strategy_engine.cli active-learning``.
+  legacy_wrapper: scripts/aqcat25_ts_active_learning.py
+  internal_document_schema: configs/aqcat25_ts_active_learning.schema.json
+  internal_document_validator: scripts/aqcat25_ts_schema.py
+  force_prediction_runner: scripts/aqcat25_ts_force_prediction.py
+  training_data_builder: scripts/aqcat25_ts_training_data.py
+  checkpoint_validator: scripts/aqcat25_ts_checkpoint_validation.py
+  complete_path_runner: scripts/aqcat25_ml_neb.py
+  complete_path_gpu_job: scripts/aqcat25_ml_neb_job.sh
+  complete_path_manifest_validator: scripts/ts_strategy_engine/ml_neb_path.py
+  complete_path_committee_runner: scripts/aqcat25_ml_path_committee.py
+  complete_path_active_learning_controller: scripts/ts_strategy_engine/active_learning_path.py
+  gpu_finetune_job: scripts/aqcat25_ts_finetune_job.sh
+  ts_domain_gate: configs/aqcat25_ts_domain_gate.yaml
+  sequence:
+    - predicted_ba_sella_candidate
+    - work_structure_and_provenance_review
+    - sunboquan_codex_static_force_label
+    - work_completion_and_electronic_convergence_gate
+    - mz73_exact_structure_force_prediction
+    - work_force_error_assessment
+    - adsorption_replay_plus_held_out_regression
+    - mz73_force_only_finetuning_when_required
+    - checkpoint_load_and_regression_validation
+    - mz73_ba_sella_rerun_with_new_checkpoint
+    - independent_vasp_labeled_ts_domain_validation
+    - repeat_or_handoff_to_vasp_refinement
+  complete_path_sequence:
+    - hash_bound_gpu_ml_neb_path
+    - work_path_review_and_batch_image_selection
+    - optional_three_or_more_checkpoint_path_committee_disagreement
+    - reviewed_hash_bound_vasp_force_label_batch_preparation
+    - one_bounded_user_authorization_before_vasp_submission
+    - batch_done_evidence_and_exact_structure_force_ingestion
+    - aggregate_aqcat25_vs_vasp_force_assessment
+    - force_only_finetuning_and_complete_path_rerun_when_required
+    - disjoint_independent_vasp_labeled_ts_domain_validation
+  local_force_agreement_claim: heuristic_finetuning_trigger_only
+  active_learning_convergence_claim: independent_ts_domain_validation_required_not_transition_state_acceptance
+  automatic_submission: forbidden
+  vasp_scheduler_evidence: captured_raw_bjobs_output_hash_plus_live_same_job_recheck
+
+handoffs:
+  work_to_gpu:
+    schema_direction: work_to_gpu
+    required_common:
+      - workflow_kind
+      - compatibility_sha256
+      - selective_dynamics
+    workflows:
+      adsorption:
+        required:
+          - evidence_gated_plan_sha256
+          - clean_slab_sha256
+          - adsorbate_identity_and_connectivity
+          - candidate_structure_and_sha256
+          - intended_motif
+        gate: evidence_and_structure_gate_pass
+      transition_state:
+        required:
+          - normalized_reaction_contract
+          - contract_sha256
+          - atom_map_sha256
+          - initial_structure_and_sha256
+          - final_structure_and_sha256
+          - indexed_bond_changes
+        gate: endpoint_mapping_and_compatibility_pass
+
+  gpu_to_work:
+    schema_direction: gpu_to_work
+    required:
+      - producer_backend
+      - gpu_job_id
+      - model_identifier
+      - checkpoint_sha256
+      - candidate_structure_and_sha256
+      - optimizer_status
+      - predicted_energy_and_force_units
+      - domain_or_uncertainty_status
+      - source_workflow_hash
+      - producer_exit_record
+    workflows:
+      adsorption:
+        result_class: predicted_adsorption_candidate_only
+        gate: work_adsorption_geometry_chemistry_and_provenance_review
+      transition_state:
+        result_class: predicted_transition_state_candidate_only
+        gate: work_path_geometry_and_provenance_review
+
+  work_to_vasp:
+    required_common:
+      - reviewed_structure_and_sha256
+      - source_compatibility_sha256
+      - structure_gate_verdict
+      - vasp_input_preflight_verdict
+      - target_calculation_type
+      - explicit_submission_authority
+    workflows:
+      adsorption:
+        required:
+          - source_evidence_gated_plan_sha256
+          - source_clean_slab_sha256
+          - adsorbate_identity_and_connectivity
+        allowed_calculation_types:
+          - adsorption_relaxation
+          - adsorption_final_static
+      transition_state:
+        required:
+          - source_contract_sha256
+          - source_atom_map_sha256
+        allowed_calculation_types:
+          - active_learning_static_force_label
+          - neb_or_ci_neb
+          - dimer
+          - frequency_or_displacement
+    gate: reviewed_candidate_and_vasp_preflight_pass
+
+  vasp_to_work:
+    required:
+      - scheduler_record
+      - input_and_output_file_hashes
+      - electronic_status
+      - ionic_or_force_status
+      - final_structure
+      - parsed_energy_and_force_provenance
+    result_class: calculation_evidence_pending_scientific_validation
+    gate: owning_module_result_validation
+
+scientific_rules:
+  aqcat_values_may_rank_candidates: true
+  aqcat_ranking_requires_in_domain_calibration_status: true
+  aqcat_may_prioritize_evidence_accepted_adsorption_candidates: true
+  aqcat_alone_may_remove_an_evidence_required_adsorption_motif: false
+  aqcat_may_prove_final_adsorption_site_or_global_minimum: false
+  aqcat_values_may_enter_reportable_dft_tables: false
+  aqcat_may_replace_whitelist_or_literature_evidence_gate: false
+  gpu_candidate_may_be_called_transition_state: false
+  vasp_completion_implies_scientific_acceptance: false
+  grade_a_requires_validated_vibrational_mode: true
+  dimer_grade_a_requires_bidirectional_connectivity: false
+  dimer_bidirectional_connectivity_role: optional_diagnostic_not_ts_acceptance_gate
+  neb_bidirectional_connectivity_policy: required_unchanged
+  ci_neb_grade_a_requires_bidirectional_connectivity: false
+  ci_neb_bidirectional_connectivity_role: optional_diagnostic_not_ts_acceptance_gate
+  active_learning_force_label_energy_may_enter_final_energy_tables: false
+  active_learning_convergence_implies_valid_transition_state: false
+  final_ts_result_requires_completed_converged_vasp_refinement: true
+  final_barrier_requires_grade_a_and_compatible_final_energy_is_ts_fs: true

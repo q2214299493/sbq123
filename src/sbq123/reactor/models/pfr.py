@@ -1,0 +1,140 @@
+"""Cantera steady FlowReactor and local-MKM Lagrangian parcel integration."""
+
+import cantera as ct
+import numpy as np
+from scipy.integrate import cumulative_simpson, simpson
+from scipy.interpolate import CubicSpline
+
+from sbq123.common.kinetic_model.contracts import RootFailure
+from ..kinetics.source import CoupledTank
+from ..state import network, propagate
+
+
+def plug_flow(case, area, points, intervals):
+    guarded = case.m.surface is not None and not case.dynamic
+    gas, surf = case.phases(case.x, flow_guard=guarded)
+    physical_gas, physical_surface = case.phases(case.x)
+    branch = case.branch(gas)
+    length = case.volume / area
+    speed = case.mdot / (gas.density * area)
+    if not np.isfinite(length) or not np.isfinite(speed) or min(length, speed) <= 0:
+        raise ValueError("Invalid PFR span or velocity")
+    if branch:
+        # For the qualified equal-molar-mass gas family, mass conservation at
+        # fixed T and P makes the Lagrangian residence coordinate exactly z/u.
+        if not np.allclose(gas.molecular_weights, gas.molecular_weights[0], rtol=1e-12, atol=0):
+            raise ValueError("Dynamic parcel mapping requires equal gas molecular weights")
+        reactor = CoupledTank(gas, energy="off", clone=False, volume=1.0)
+        reactor.chemistry_enabled = False
+        reactor.local_source = branch
+        surface = None
+    else:
+        reactor = ct.FlowReactor(gas, energy="off", clone=False)
+        reactor.area = area
+        reactor.mass_flow_rate = case.mdot
+        if surf is not None:
+            surface = ct.ReactorSurface(surf, reactor, clone=False, A=case.m.area_per_volume * case.volume)
+            reactor.surface_area_to_volume_ratio = case.m.area_per_volume
+        else:
+            surface = None
+    net = network(reactor)
+    # Resolve rapid inlet layers using the turnover time of the feed.
+    inlet_rates = case.m.signed_rates(physical_gas, physical_surface)
+    damkohler = max(abs(inlet_rates)) * length / (speed * sum(physical_gas.concentrations) * 1000)
+    stretch = np.log1p(damkohler)
+    n = max(intervals, int(np.ceil(16 * stretch)))
+    s = np.linspace(0, 1, 2 * n + 1)
+    if stretch > 1e-5:
+        grid = length * np.expm1(stretch * s) / np.expm1(stretch)
+        jacobian = length * stretch * np.exp(stretch * s) / np.expm1(stretch)
+    else:
+        grid, jacobian = length * s, np.full_like(s, length)
+    grid[-1] = length
+    states, rates, velocities, anchors, branch_ids = [], [], [], [], []
+    try:
+        net.initialize()
+        for i, z in enumerate(grid):
+            if i:
+                net.advance(z / speed if branch else z)
+            gas = reactor.phase
+            current_surface = surface.phase if surface is not None else None
+            gas, current_surface = _physical_state(gas, current_surface, guarded, physical_gas, physical_surface)
+            obs = case.observe(gas, current_surface, branch, z, 0, commit=True)
+            if abs(gas.P / case.p - 1) > 2e-7 or abs(gas.T / case.t - 1) > 1e-9:
+                raise RootFailure(
+                    "Flow left the validated isothermal, isobaric domain",
+                    {"converged": False, "z": float(z), "T": gas.T, "P": gas.P, "target_P": case.p},
+                )
+            velocities.append(case.mdot / gas.density / area if branch else reactor.speed)
+            states.append([gas.T, gas.P, *gas.X, *(current_surface.coverages if current_surface is not None else [])])
+            rates.append(list(obs["source_mol_m3_s"].values()))
+            if branch:
+                anchors.append(branch.snapshot())
+                branch_ids.append(obs["local_receipt_sha256"])
+    except ct.CanteraError as exc:
+        propagate(exc, branch)
+    velocities = np.asarray(velocities)
+    if not np.isfinite(velocities).all() or min(velocities) <= 0:
+        raise RootFailure("Invalid PFR local velocity")
+    tau = cumulative_simpson(jacobian / velocities, x=s, initial=0)
+    integrated = area * simpson(np.asarray(rates) * jacobian[:, None], x=s, axis=0)
+    outlet = np.array(list(obs["amount_or_flow"].values()))
+    residual = (outlet - case.feed - integrated) / case.fin
+    if not np.isfinite(residual).all() or max(abs(residual)) > 2e-6:
+        raise RootFailure("Independent axial species balance failed", {"converged": False, "residual_per_feed": residual.tolist()})
+    rows = _profiles(case, branch, states, anchors, grid, tau, points)
+    return (
+        rows,
+        dict(
+            success=True,
+            method="Cantera/ReactorNet/CVODES local-source parcel" if branch else "Cantera/FlowReactor/IDA",
+            flow_surface_inert_coordinate=guarded,
+            physical_intervals=len(grid) - 1,
+            continuation_receipts=branch_ids,
+            integral_species_residual_per_feed=residual.tolist(),
+            residual_tolerance=2e-6,
+        ),
+        branch.receipts if branch else [],
+    )
+
+
+def _physical_state(gas, current_surface, guarded, physical_gas, physical_surface):
+    if guarded:
+        wall = current_surface.get_net_production_rates(gas) * gas.molecular_weights
+        if abs(gas.X[-1]) > 1e-14 or abs(sum(wall)) > 1e-8 * max(sum(abs(wall)), 1e-25):
+            raise RootFailure("Native FlowReactor requires zero net wall mass exchange")
+        physical_gas.TPX = gas.T, gas.P, gas.X[:-1]
+        physical_surface.TP = gas.T, gas.P
+        physical_surface.coverages = current_surface.coverages
+        gas, current_surface = physical_gas, physical_surface
+    elif np.min(gas.X) < 0:
+        # IDA's unconstrained trace species can cross zero by roundoff.
+        if np.min(gas.X) < -1e-12:
+            raise RootFailure("Negative native PFR mole fraction")
+        physical_gas.TPX = gas.T, gas.P, np.maximum(gas.X, 0)
+        gas = physical_gas
+    return gas, current_surface
+
+
+def _profiles(case, branch, states, anchors, grid, tau, points):
+    length = grid[-1]
+    interpolate = CubicSpline(grid, np.asarray(states), axis=0)
+    time_at = CubicSpline(grid, tau)
+    report_gas, report_surface = case.phases(case.x)
+    rows = []
+    for z in np.linspace(0, length, points):
+        state = interpolate(z)
+        xs = state[2 : 2 + report_gas.n_species]
+        if min(xs) < -1e-9 or abs(sum(xs) - 1) > 1e-8:
+            raise RootFailure("Nonphysical interpolated gas state")
+        report_gas.TPX = state[0], state[1], np.maximum(xs, 0)
+        if branch:
+            branch.restore(anchors[min(len(grid) - 1, max(0, np.searchsorted(grid, z, side="right") - 1))])
+        elif report_surface is not None:
+            fractions = state[2 + report_gas.n_species :]
+            if min(fractions) < -1e-9 or abs(sum(fractions) - 1) > 1e-8:
+                raise RootFailure("Nonphysical interpolated surface inventory")
+            report_surface.TP = report_gas.TP
+            report_surface.coverages = np.maximum(fractions, 0)
+        rows.append(case.observe(report_gas, report_surface, branch, z, float(time_at(z))))
+    return rows

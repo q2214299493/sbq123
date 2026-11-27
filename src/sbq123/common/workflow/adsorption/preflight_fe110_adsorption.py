@@ -1,0 +1,179 @@
+from __future__ import annotations
+
+from scripts.runtime_resources import resource_path
+
+import argparse
+import json
+import re
+from pathlib import Path
+
+from scripts.vasp_result_gate import read_incar_values
+from typing import Any
+
+import yaml
+from scripts.optional_dependencies import require_optional
+
+from scripts.adsorption.build_fe110_adsorption import read_poscar
+from scripts.artifact_io import sha256_file
+from scripts.vasp_lsf import render_sunboquan_lsf
+
+_vasp_inputs = require_optional("pymatgen.io.vasp.inputs", "adsorption VASP preflight")
+Incar, Kpoints = _vasp_inputs.Incar, _vasp_inputs.Kpoints
+
+
+ROOT = Path(__file__).resolve().parents[2]
+DEFAULT_PROFILE = resource_path('configs/true_fe110_production.yaml')
+
+
+def _equal(actual: Any, expected: Any) -> bool:
+    if isinstance(expected, bool):
+        return bool(actual) is expected
+    if isinstance(expected, (int, float)) and not isinstance(expected, bool):
+        try:
+            return abs(float(actual) - float(expected)) <= 1e-10
+        except (TypeError, ValueError):
+            return False
+    return str(actual).lower() == str(expected).lower()
+
+
+def _stage_settings(workdir: Path, profile: dict) -> tuple[dict, dict, list[str]]:
+    errors: list[str] = []
+    try:
+        candidate = json.loads((workdir / "candidate_manifest.json").read_text(encoding="utf-8"))
+        if not isinstance(candidate, dict):
+            raise ValueError("candidate manifest must be an object")
+    except (ValueError, UnicodeError) as exc:
+        errors.append(f"INVALID_CANDIDATE_MANIFEST:{exc}")
+        candidate = {}
+    relaxation_stage = candidate.get("relaxation_stage", "routine_production")
+    if relaxation_stage not in ("routine_production", "screening"):
+        errors.append("UNKNOWN_RELAXATION_STAGE")
+    local_moments = candidate.get("write_local_moments", False)
+    if not isinstance(local_moments, bool):
+        errors.append("INVALID_LOCAL_MOMENT_FLAG")
+    expected = {
+        **profile["routine_production"]["incar"],
+        "GGA": profile["scope"]["incar_gga"],
+        "ENCUT": profile["scope"]["encut_eV"],
+    }
+    policy_path = None
+    if relaxation_stage == "screening":
+        policy_path = resource_path("configs/adsmind_lite/prescreen_rules.yaml")
+        policy = yaml.safe_load(policy_path.read_text(encoding="utf-8"))
+        expected["NSW"] = int(policy["staged_relaxation"]["screening_nsw"])
+    if local_moments is True:
+        expected["LORBIT"] = profile["transition_state"]["active_learning_force_label"]["performance_incar"]["LORBIT"]
+    return expected, {
+        "relaxation_stage": relaxation_stage,
+        "write_local_moments": local_moments,
+        "screening_policy_sha256": sha256_file(policy_path) if policy_path else None,
+    }, errors
+
+
+def preflight(workdir: Path, *, profile_path: Path = DEFAULT_PROFILE, cores: int = 32, write_report: bool = True) -> dict[str, Any]:
+    required = ["POSCAR", "INCAR", "KPOINTS", "POTCAR.spec", "script.lsf", "candidate_manifest.json"]
+    errors: list[str] = []
+    warnings: list[str] = []
+    for name in required:
+        path = workdir / name
+        if not path.is_file() or path.stat().st_size == 0:
+            errors.append(f"MISSING_OR_EMPTY:{name}")
+    if errors:
+        return {"kind": "adsorption_relaxation", "passed": False, "errors": errors, "warnings": warnings}
+
+    profile = yaml.safe_load(profile_path.read_text(encoding="utf-8"))
+    stage = profile["routine_production"]
+    expected_incar, stage_metadata, stage_errors = _stage_settings(workdir, profile)
+    errors.extend(stage_errors)
+    structure = read_poscar(workdir / "POSCAR")
+    allowed_compositions = {
+        (("Fe", "C", "H"), (45, 1, 1)),
+        (("Fe", "C", "H"), (45, 1, 2)),
+        (("Fe", "C", "O", "H"), (45, 2, 1, 2)),
+        (("Fe", "C", "H"), (45, 2, 1)),
+        (("Fe", "C", "H"), (45, 2, 2)),
+        (("Fe", "C", "O", "H"), (45, 2, 1, 1)),
+        (("Fe", "O", "C", "H"), (45, 1, 2, 1)),
+        (("Fe", "O", "C", "H"), (45, 1, 2, 2)),
+        (("Fe", "C", "H"), (45, 2, 3)),
+        (("Fe", "C", "H"), (45, 2, 4)),
+        (("Fe", "C", "O", "H"), (45, 2, 1, 3)),
+        (("Fe", "O", "C", "H"), (45, 1, 2, 3)),
+        (("Fe", "C", "O", "H"), (45, 2, 1, 4)),
+        (("Fe", "C", "H"), (45, 2, 6)),
+        (("Fe", "C", "O", "H"), (45, 3, 1, 2)),
+    }
+    composition = (tuple(structure.symbols), tuple(structure.counts))
+    if composition not in allowed_compositions:
+        errors.append("POSCAR_COMPOSITION_OR_ORDER_MISMATCH")
+    if any(flag != ("F", "F", "F") for flag in structure.flags[:18]):
+        errors.append("BOTTOM_18_FE_NOT_FIXED")
+    if any(flag != ("T", "T", "T") for flag in structure.flags[18:]):
+        errors.append("UNEXPECTED_CONSTRAINT_ABOVE_BOTTOM_18_FE")
+
+    incar = Incar(read_incar_values(workdir / "INCAR"))
+    for key, expected in expected_incar.items():
+        if key not in incar or not _equal(incar[key], expected):
+            errors.append(f"INCAR_MISMATCH:{key}")
+    magmom = incar.get("MAGMOM", [])
+    if len(magmom) != sum(structure.counts) or any(abs(float(value) - 2.2) > 1e-10 for value in magmom[:45]) or any(
+        abs(float(value)) > 1e-10 for value in magmom[45:]
+    ):
+        errors.append("MAGMOM_SPECIES_SEGMENTS_MISMATCH")
+
+    kpoints = Kpoints.from_file(workdir / "KPOINTS")
+    mesh = list(kpoints.kpts[0]) if kpoints.kpts else []
+    if mesh != list(stage["gamma_mesh"]) or str(kpoints.style).lower().split(".")[-1] != "gamma":
+        errors.append("KPOINTS_GAMMA_MESH_MISMATCH")
+    expected_spec = " ".join(dict.fromkeys(structure.symbols))
+    if (workdir / "POTCAR.spec").read_text(encoding="ascii").strip() != expected_spec:
+        errors.append("POTCAR_SPECIES_ORDER_MISMATCH")
+    if (workdir / "script.lsf").read_text(encoding="ascii") != render_sunboquan_lsf(cores):
+        errors.append("LSF_SCRIPT_NOT_CANONICAL")
+    else:
+        match = re.search(r"^NP=(\d+)$", (workdir / "script.lsf").read_text(encoding="ascii"), re.MULTILINE)
+        if match is None or int(match.group(1)) != cores:
+            errors.append("LSF_CORE_COUNT_MISMATCH")
+
+    files = {name: sha256_file(workdir / name) for name in required}
+    result = {
+        "kind": "adsorption_relaxation",
+        "passed": not errors,
+        "errors": errors,
+        "warnings": warnings,
+        "profile_path": str(profile_path),
+        "profile_sha256": sha256_file(profile_path),
+        "files": files,
+        "structure": {
+            "symbols": structure.symbols,
+            "counts": structure.counts,
+            "fixed_zero_based": [index for index, flags in enumerate(structure.flags) if flags == ("F", "F", "F")],
+        },
+        "incar_stage": "routine_production",
+        **stage_metadata,
+        "gamma_mesh": mesh,
+        "cores": cores,
+        "potcar_local_policy": "POTCAR contents remain remote; verify exact species order and SHA-256 before submission",
+    }
+    if write_report:
+        (workdir / "adsorption_submission_preflight.json").write_text(
+            json.dumps(result, allow_nan=False, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+            newline="\n",
+        )
+    return result
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Preflight one active-branch Fe(110) adsorption relaxation package.")
+    parser.add_argument("--workdir", required=True, type=Path)
+    parser.add_argument("--profile", type=Path, default=DEFAULT_PROFILE)
+    parser.add_argument("--cores", type=int, default=32)
+    args = parser.parse_args()
+    result = preflight(args.workdir, profile_path=args.profile, cores=args.cores)
+    print(json.dumps(result, allow_nan=False, indent=2, ensure_ascii=False))
+    raise SystemExit(0 if result["passed"] else 1)
+
+
+if __name__ == "__main__":
+    main()

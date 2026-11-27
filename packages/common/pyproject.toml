@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools==80.9.0", "wheel==0.45.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sbq123-common"
+version = "3.2.0"
+requires-python = ">=3.13,<3.14"
+dependencies = ["jsonschema>=4.25,<5", "numpy>=1.26,<3", "PyYAML>=6,<7"]
+
+[tool.setuptools.packages.find]
+where = ["../../src"]
+include = ["sbq123.common", "sbq123.analysis", "sbq123.discovery", "sbq123.common.*", "sbq123.analysis.*", "sbq123.discovery.*"]
+exclude = ["*.resources.*", "*.resources", "*.__pycache__"]
+
+[tool.setuptools]
+include-package-data = false
+
+[tool.setuptools.package-data]
+"sbq123.common" = ["_legacy_modules.json", "resources/**/*", "registries/*.json"]
+
+[project.optional-dependencies]
+geometry = ["ase>=3.29,<4"]

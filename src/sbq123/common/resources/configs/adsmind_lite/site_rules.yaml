@@ -1,0 +1,48 @@
+version: 1
+
+defaults:
+  slab_normal_axis: z
+  exposed_layer_tolerance_angstrom: 0.8
+  pair_class_tolerance_angstrom: 0.08
+  site_deduplication_tolerance_angstrom: 0.10
+  neighbor_cutoff_scale: 1.20
+  hard_minimum_contact_angstrom: 0.80
+
+metallic_fe:
+  Fe110:
+    detector: fe110_top_layer_distance_classes
+    implemented: true
+    top: top_Fe
+    shortest_pair_class: bridge_FeFe_short
+    next_distinct_pair_class: bridge_FeFe_long
+    triangle_centroid: hollow_FeFeFe
+    validation:
+      expected_short_pair_angstrom: [2.35, 2.55]
+      expected_long_pair_angstrom: [2.70, 2.95]
+      hollow_must_not_match_pair_midpoint: true
+
+  Fe100:
+    detector: fe100_exposed_layer_graph
+    implemented: true
+    site_classes: [top_Fe, bridge_FeFe_short, hollow_FeFeFeFe]
+    needs_review: false
+
+  Fe111:
+    detector: fe111_exposed_layer_graph
+    implemented: true
+    site_classes: [top_Fe, bridge_FeFe_short, hollow_FeFeFe]
+    needs_review: false
+
+iron_carbide:
+  detector: explicit_roles_plus_exposed_layer_graph
+  implementation_status: manifest_only
+  automatic_detection_enabled: false
+  needs_review: true
+  required_for_mixed_sites: [C_lattice]
+
+iron_oxide:
+  detector: explicit_site_labels
+  implementation_status: manifest_only
+  automatic_detection_enabled: false
+  needs_review: true
+  required_for_high_risk_sites: [O_lattice, vacancy_O, Fe_oct, Fe_tet]

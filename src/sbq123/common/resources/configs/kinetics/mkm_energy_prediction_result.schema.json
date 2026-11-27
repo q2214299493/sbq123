@@ -1,0 +1,186 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.sbq123.invalid/kinetics/mkm_energy_prediction_result.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["format", "provenance", "qualification", "network_version", "reaction_id", "binding_sha256", "review_sha256", "energy_basis", "reference_id", "standard_state_id", "temperature_K", "pressure_Pa", "inputs_eV", "selected", "candidate_decisions", "basis_energies_eV", "gibbs_eV", "uncertainty_order", "covariance_eV2", "sigma_eV", "uncertainty_method", "bridge_source_sha256"],
+  "properties": {
+    "format": {"const": "mkm-energy-prediction-result/1"},
+    "provenance": {"const": "model_prediction"},
+    "qualification": {"const": "reviewed_mkm_prediction"},
+    "network_version": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "reaction_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "binding_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "review_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "energy_basis": {
+      "enum": ["electronic", "enthalpy", "gibbs"]
+    },
+    "reference_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "standard_state_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "temperature_K": {"type": "number"},
+    "pressure_Pa": {"type": "number"},
+    "inputs_eV": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "definition_sha256", "value", "source_sha256"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "definition_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "value": {"type": "number"},
+          "source_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "selected": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["model_id", "model_version", "kind", "training_sha256", "validation_sha256", "fit_source_sha256", "axis_values_eV", "output_eV"],
+        "properties": {
+          "model_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "model_version": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "kind": {
+            "enum": ["descriptor_reaction", "descriptor_barrier", "bep"]
+          },
+          "training_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "validation_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "fit_source_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "axis_values_eV": {
+            "type": "array",
+            "items": {"type": "number"}
+          },
+          "output_eV": {"type": "number"}
+        }
+      }
+    },
+    "candidate_decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["model_id", "model_version", "outcome"],
+        "properties": {
+          "model_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "model_version": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "outcome": {
+            "enum": ["outside_scope", "outside_domain", "unavailable_axes", "selected"]
+          }
+        }
+      }
+    },
+    "basis_energies_eV": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reaction", "forward", "reverse"],
+      "properties": {
+        "reaction": {"type": "number"},
+        "forward": {"type": "number"},
+        "reverse": {"type": "number"}
+      }
+    },
+    "gibbs_eV": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reaction", "forward", "reverse"],
+      "properties": {
+        "reaction": {"type": "number"},
+        "forward": {"type": "number"},
+        "reverse": {"type": "number"}
+      }
+    },
+    "uncertainty_order": {
+      "const": ["reaction", "forward", "reverse"]
+    },
+    "covariance_eV2": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 3,
+        "items": {"type": "number"}
+      }
+    },
+    "sigma_eV": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reaction", "forward", "reverse"],
+      "properties": {
+        "reaction": {
+          "type": "number",
+          "minimum": 0
+        },
+        "forward": {
+          "type": "number",
+          "minimum": 0
+        },
+        "reverse": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "uncertainty_method": {"const": "first_order_joint_covariance"},
+    "bridge_source_sha256": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        {"type": "null"}
+      ]
+    }
+  }
+}

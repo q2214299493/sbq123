@@ -1,4 +1,6 @@
+# V3.2 development
 
+Use `src/sbq123` as the authoritative implementation and `packages/` for distribution metadata. The versioned V3.1 tree and role inventories are historical evidence. Before changing a role, check `docs/v32/canonical-ownership.csv` and its compatibility imports. Run the Python 3.13 core architecture gate on both supported operating systems. See `docs/v32/ARCHITECTURE.md` for scientific inputs, package boundaries and validation.
 
 # V3.1 release work
 

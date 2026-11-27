@@ -1,0 +1,613 @@
+{
+  "content_sha256": "9eb990e160408a06d0de532645e19c0787887854be22f689ad2db4b858f63618",
+  "entries": {
+    "arrhenius": {
+      "model": {
+        "pressure_domain_Pa": [
+          1,
+          2000000.0
+        ],
+        "rate_basis": "mol_per_m3_reactor_s",
+        "reference_temperature_K": 400,
+        "schema_version": 1,
+        "sites": [],
+        "species": [
+          {
+            "charge": 0,
+            "elements": {
+              "X": 1
+            },
+            "name": "A",
+            "phase": "gas",
+            "sites": {}
+          },
+          {
+            "charge": 0,
+            "elements": {
+              "X": 1
+            },
+            "name": "B",
+            "phase": "gas",
+            "sites": {}
+          }
+        ],
+        "steps": [
+          {
+            "activation_J_mol": 5000,
+            "change": {
+              "A": -1,
+              "B": 1
+            },
+            "coefficient": 0.75,
+            "orders": {
+              "A": 1
+            }
+          }
+        ],
+        "temperature_domain_K": [
+          250,
+          700
+        ]
+      },
+      "scope": "analytical_control",
+      "sha256": "4bb3f391d5e37d450053fef7e1932d456d119498d32b41fe45565ab7204d6461"
+    },
+    "autocatalytic": {
+      "model": {
+        "pressure_domain_Pa": [
+          1,
+          2000000.0
+        ],
+        "rate_basis": "mol_per_m3_reactor_s",
+        "reference_temperature_K": 400,
+        "schema_version": 1,
+        "sites": [],
+        "species": [
+          {
+            "charge": 0,
+            "elements": {
+              "X": 1
+            },
+            "name": "A",
+            "phase": "gas",
+            "sites": {}
+          },
+          {
+            "charge": 0,
+            "elements": {
+              "X": 1
+            },
+            "name": "B",
+            "phase": "gas",
+            "sites": {}
+          }
+        ],
+        "steps": [
+          {
+            "activation_J_mol": 0,
+            "change": {
+              "A": -1,
+              "B": 1
+            },
+            "coefficient": 9,
+            "orders": {
+              "A": 1,
+              "B": 2
+            }
+          }
+        ],
+        "temperature_domain_K": [
+          250,
+          700
+        ]
+      },
+      "scope": "analytical_control",
+      "sha256": "5ca816fb96c3695b8ee64d17552471ee407df30b75fdc1b1ab9ed16a9003934e"
+    },
+    "first-order": {
+      "model": {
+        "pressure_domain_Pa": [
+          1,
+          2000000.0
+        ],
+        "rate_basis": "mol_per_m3_reactor_s",
+        "reference_temperature_K": 400,
+        "schema_version": 1,
+        "sites": [],
+        "species": [
+          {
+            "charge": 0,
+            "elements": {
+              "X": 1
+            },
+            "name": "A",
+            "phase": "gas",
+            "sites": {}
+          },
+          {
+            "charge": 0,
+            "elements": {
+              "X": 1
+            },
+            "name": "B",
+            "phase": "gas",
+            "sites": {}
+          }
+        ],
+        "steps": [
+          {
+            "activation_J_mol": 0,
+            "change": {
+              "A": -1,
+              "B": 1
+            },
+            "coefficient": 0.75,
+            "orders": {
+              "A": 1
+            }
+          }
+        ],
+        "temperature_domain_K": [
+          250,
+          700
+        ]
+      },
+      "scope": "analytical_control",
+      "sha256": "d89fc94f479ee2b9cb57a35622d689c5c70de604385252515757dac12c300db3"
+    },
+    "langmuir": {
+      "model": {
+        "pressure_domain_Pa": [
+          1,
+          2000000.0
+        ],
+        "rate_basis": "mol_per_mol_site_s",
+        "reference_temperature_K": 400,
+        "schema_version": 1,
+        "sites": [
+          "vacant"
+        ],
+        "species": [
+          {
+            "charge": 0,
+            "elements": {
+              "X": 1
+            },
+            "name": "A",
+            "phase": "gas",
+            "sites": {}
+          },
+          {
+            "charge": 0,
+            "elements": {
+              "X": 1
+            },
+            "name": "B",
+            "phase": "gas",
+            "sites": {}
+          },
+          {
+            "charge": 0,
+            "elements": {
+              "X": 1
+            },
+            "name": "A*",
+            "phase": "surface",
+            "sites": {
+              "vacant": 1
+            }
+          }
+        ],
+        "steps": [
+          {
+            "activation_J_mol": 0,
+            "change": {
+              "A": -1,
+              "A*": 1
+            },
+            "coefficient": 2,
+            "orders": {
+              "A": 1,
+              "vacant": 1
+            }
+          },
+          {
+            "activation_J_mol": 0,
+            "change": {
+              "A": 1,
+              "A*": -1
+            },
+            "coefficient": 1,
+            "orders": {
+              "A*": 1
+            }
+          },
+          {
+            "activation_J_mol": 0,
+            "change": {
+              "A*": -1,
+              "B": 1
+            },
+            "coefficient": 1,
+            "orders": {
+              "A*": 1
+            }
+          }
+        ],
+        "temperature_domain_K": [
+          250,
+          700
+        ]
+      },
+      "scope": "analytical_control",
+      "sha256": "a097d1074e283550897ab5762527aa6872962de8290cbca8f8cfcfd11cc89630"
+    },
+    "mass-normalized": {
+      "model": {
+        "pressure_domain_Pa": [
+          1,
+          2000000.0
+        ],
+        "rate_basis": "mol_per_kg_catalyst_s",
+        "reference_temperature_K": 400,
+        "schema_version": 1,
+        "sites": [],
+        "species": [
+          {
+            "charge": 0,
+            "elements": {
+              "X": 1
+            },
+            "name": "A",
+            "phase": "gas",
+            "sites": {}
+          },
+          {
+            "charge": 0,
+            "elements": {
+              "X": 1
+            },
+            "name": "B",
+            "phase": "gas",
+            "sites": {}
+          }
+        ],
+        "steps": [
+          {
+            "activation_J_mol": 0,
+            "change": {
+              "A": -1,
+              "B": 1
+            },
+            "coefficient": 0.75,
+            "orders": {
+              "A": 1
+            }
+          }
+        ],
+        "temperature_domain_K": [
+          250,
+          700
+        ]
+      },
+      "scope": "analytical_control",
+      "sha256": "d00cab767eae11e3b04fb9d455769d19a855379ccd6a4df2e5aae5ad6c6be879"
+    },
+    "site-normalized": {
+      "model": {
+        "pressure_domain_Pa": [
+          1,
+          2000000.0
+        ],
+        "rate_basis": "mol_per_mol_site_s",
+        "reference_temperature_K": 400,
+        "schema_version": 1,
+        "sites": [],
+        "species": [
+          {
+            "charge": 0,
+            "elements": {
+              "X": 1
+            },
+            "name": "A",
+            "phase": "gas",
+            "sites": {}
+          },
+          {
+            "charge": 0,
+            "elements": {
+              "X": 1
+            },
+            "name": "B",
+            "phase": "gas",
+            "sites": {}
+          }
+        ],
+        "steps": [
+          {
+            "activation_J_mol": 0,
+            "change": {
+              "A": -1,
+              "B": 1
+            },
+            "coefficient": 0.75,
+            "orders": {
+              "A": 1
+            }
+          }
+        ],
+        "temperature_domain_K": [
+          250,
+          700
+        ]
+      },
+      "scope": "analytical_control",
+      "sha256": "3293a5c0068a7a1aba4ff4347fa525495967f64f53c3489388757f5d7a7c0b1a"
+    },
+    "stiff": {
+      "model": {
+        "pressure_domain_Pa": [
+          1,
+          2000000.0
+        ],
+        "rate_basis": "mol_per_m3_reactor_s",
+        "reference_temperature_K": 400,
+        "schema_version": 1,
+        "sites": [],
+        "species": [
+          {
+            "charge": 0,
+            "elements": {
+              "X": 1
+            },
+            "name": "A",
+            "phase": "gas",
+            "sites": {}
+          },
+          {
+            "charge": 0,
+            "elements": {
+              "X": 1
+            },
+            "name": "B",
+            "phase": "gas",
+            "sites": {}
+          }
+        ],
+        "steps": [
+          {
+            "activation_J_mol": 0,
+            "change": {
+              "A": -1,
+              "B": 1
+            },
+            "coefficient": 10000.0,
+            "orders": {
+              "A": 1
+            }
+          }
+        ],
+        "temperature_domain_K": [
+          250,
+          700
+        ]
+      },
+      "scope": "analytical_control",
+      "sha256": "75dee4b18621517211bc515d9eb922b723abea06a02ef0c10051aed3084cec9d"
+    },
+    "stiff-cascade": {
+      "model": {
+        "pressure_domain_Pa": [
+          1,
+          2000000.0
+        ],
+        "rate_basis": "mol_per_m3_reactor_s",
+        "reference_temperature_K": 400,
+        "schema_version": 1,
+        "sites": [],
+        "species": [
+          {
+            "charge": 0,
+            "elements": {
+              "X": 1
+            },
+            "name": "A",
+            "phase": "gas",
+            "sites": {}
+          },
+          {
+            "charge": 0,
+            "elements": {
+              "X": 1
+            },
+            "name": "B",
+            "phase": "gas",
+            "sites": {}
+          },
+          {
+            "charge": 0,
+            "elements": {
+              "X": 1
+            },
+            "name": "C",
+            "phase": "gas",
+            "sites": {}
+          }
+        ],
+        "steps": [
+          {
+            "activation_J_mol": 0,
+            "change": {
+              "A": -1,
+              "B": 1
+            },
+            "coefficient": 10000.0,
+            "orders": {
+              "A": 1
+            }
+          },
+          {
+            "activation_J_mol": 0,
+            "change": {
+              "B": -1,
+              "C": 1
+            },
+            "coefficient": 1,
+            "orders": {
+              "B": 1
+            }
+          }
+        ],
+        "temperature_domain_K": [
+          250,
+          700
+        ]
+      },
+      "scope": "analytical_control",
+      "sha256": "b20fd679400c8df75ba386c3896ce57e3e8b4b232e00d2105eb1981f014147c9"
+    },
+    "three-surface-roots": {
+      "model": {
+        "pressure_domain_Pa": [
+          1,
+          2000000.0
+        ],
+        "rate_basis": "mol_per_mol_site_s",
+        "reference_temperature_K": 400,
+        "schema_version": 1,
+        "sites": [
+          "vacant"
+        ],
+        "species": [
+          {
+            "charge": 0,
+            "elements": {
+              "X": 1
+            },
+            "name": "A",
+            "phase": "gas",
+            "sites": {}
+          },
+          {
+            "charge": 0,
+            "elements": {
+              "X": 1
+            },
+            "name": "B",
+            "phase": "gas",
+            "sites": {}
+          },
+          {
+            "charge": 0,
+            "elements": {
+              "X": 1
+            },
+            "name": "A*",
+            "phase": "surface",
+            "sites": {
+              "vacant": 1
+            }
+          }
+        ],
+        "steps": [
+          {
+            "activation_J_mol": 0,
+            "change": {
+              "A": -1,
+              "A*": 1
+            },
+            "coefficient": 0.08,
+            "orders": {
+              "A": 1,
+              "vacant": 1
+            }
+          },
+          {
+            "activation_J_mol": 0,
+            "change": {
+              "A": 1,
+              "A*": -1
+            },
+            "coefficient": 0.08,
+            "orders": {
+              "A*": 1
+            }
+          },
+          {
+            "activation_J_mol": 0,
+            "change": {
+              "A": -1,
+              "A*": 1
+            },
+            "coefficient": 1.0,
+            "orders": {
+              "A": 1,
+              "A*": 2,
+              "vacant": 1
+            }
+          },
+          {
+            "activation_J_mol": 0,
+            "change": {
+              "A": 1,
+              "A*": -1
+            },
+            "coefficient": 0.5,
+            "orders": {
+              "A*": 1,
+              "vacant": 1
+            }
+          }
+        ],
+        "temperature_domain_K": [
+          250,
+          700
+        ]
+      },
+      "scope": "analytical_control",
+      "sha256": "7d63c92cf7883f62d6eadcda73e3b8ece16590dc2f862bb0f817fb6aa270dd90"
+    },
+    "zero": {
+      "model": {
+        "pressure_domain_Pa": [
+          1,
+          2000000.0
+        ],
+        "rate_basis": "mol_per_m3_reactor_s",
+        "reference_temperature_K": 400,
+        "schema_version": 1,
+        "sites": [],
+        "species": [
+          {
+            "charge": 0,
+            "elements": {
+              "X": 1
+            },
+            "name": "A",
+            "phase": "gas",
+            "sites": {}
+          },
+          {
+            "charge": 0,
+            "elements": {
+              "X": 1
+            },
+            "name": "B",
+            "phase": "gas",
+            "sites": {}
+          }
+        ],
+        "steps": [],
+        "temperature_domain_K": [
+          250,
+          700
+        ]
+      },
+      "scope": "analytical_control",
+      "sha256": "ca495073b2deaa99552f7491e9951d46fc1b879543bdc87ada844c260c45a5eb"
+    }
+  },
+  "kind": "datasets",
+  "schema_version": 1,
+  "source": "V3.2 analytical control definitions"
+}

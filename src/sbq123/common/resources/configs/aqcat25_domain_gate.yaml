@@ -1,0 +1,40 @@
+version: 1
+calibration_id: aqcat25_fe45_v1
+
+model:
+  identifier: AQCat25 demo_single model.pt
+  checkpoint_sha256: e1f14d50590102dbdf64491a6ae328df6ba0ca2ebb947fbe72213820ae67eb50
+
+reference_scope:
+  validated_workflow_kinds: [adsorption]
+  transition_state_scope: uncalibrated_no_compatible_off_equilibrium_or_saddle_force_labels
+  compatibility_branch: true_fe110_5layer_5x5x1
+  slab_model: true_fe110_fe45_5layer
+  surface_elements: [Fe]
+  allowed_elements: [Fe, H, C, O]
+  required_fe_count: 45
+  adsorbate_atom_count_range: [2, 6]
+  required_families:
+    - h2_derived
+    - chx
+    - oxygenate
+    - c_c2_o
+  minimum_total_samples: 10
+
+force_acceptance:
+  component_mae_eV_per_A_max: 0.10
+  vector_rmse_eV_per_A_max: 0.20
+  vector_p95_eV_per_A_max: 0.40
+  vector_max_eV_per_A_max: 0.60
+
+decision_rules:
+  in_domain_requires_all_force_thresholds: true
+  in_domain_requires_reference_scope_match: true
+  outside_reference_scope: out_of_domain
+  failed_force_calibration: calibration_failed
+  single_checkpoint_predictive_uncertainty: unavailable
+  reported_uncertainty_class: empirical_force_error_on_compatible_vasp_labels
+  uncalibrated_or_failed_checkpoint_may_rank_candidates: false
+  in_domain_checkpoint_may_rank_evidence_accepted_candidates: true
+  aqcat_prediction_may_enter_dft_tables: false
+  aqcat_prediction_may_remove_evidence_required_motif: false

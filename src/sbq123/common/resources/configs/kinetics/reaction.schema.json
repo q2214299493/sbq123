@@ -1,0 +1,207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.sbq123.invalid/multiphase/1.0.0/reaction.schema.json",
+  "title": "reaction v1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "reaction_id",
+    "reaction_type",
+    "reversible",
+    "reactants",
+    "products",
+    "phase_ids",
+    "surface_ids",
+    "interface_id",
+    "required_sites",
+    "sites_consumed",
+    "sites_released",
+    "initial_structure_id",
+    "final_structure_id",
+    "ts_treatment",
+    "ts_id",
+    "energy_reference_id",
+    "electronic_energies",
+    "free_energies",
+    "rate_law_id",
+    "provenance",
+    "eligibility",
+    "validation"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "reaction_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "reaction_type": {
+      "enum": [
+        "adsorption",
+        "desorption",
+        "surface_reaction",
+        "diffusion",
+        "association",
+        "dissociation",
+        "interfacial",
+        "interphase_transfer",
+        "cross_phase_elementary",
+        "other"
+      ]
+    },
+    "ts_species_id": {
+      "description": "Optional phase-resolved catalog species for the whole located transition complex.",
+      "$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"
+    },
+    "operating_conditions_ref": {
+      "description": "Hash-bound operating condition profile for a declared cross-phase event. Null means unknown.",
+      "anyOf": [
+        {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"},
+        {"type": "null"}
+      ]
+    },
+    "reversible": {"type": "boolean"},
+    "reactants": {
+      "type": "object",
+      "propertyNames": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+      "additionalProperties": {"type": "integer", "minimum": 1},
+      "minProperties": 1
+    },
+    "products": {
+      "type": "object",
+      "propertyNames": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+      "additionalProperties": {"type": "integer", "minimum": 1},
+      "minProperties": 1
+    },
+    "phase_ids": {
+      "type": "array",
+      "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "surface_ids": {
+      "type": "array",
+      "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "interface_id": {
+      "anyOf": [
+        {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+        {"type": "null"}
+      ]
+    },
+    "required_sites": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/sites"},
+    "sites_consumed": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/sites"},
+    "sites_released": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/sites"},
+    "initial_structure_id": {
+      "anyOf": [
+        {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+        {"type": "null"}
+      ]
+    },
+    "final_structure_id": {
+      "anyOf": [
+        {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+        {"type": "null"}
+      ]
+    },
+    "ts_treatment": {"enum": ["located", "barrierless", "unresolved"]},
+    "ts_id": {
+      "anyOf": [
+        {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+        {"type": "null"}
+      ]
+    },
+    "energy_reference_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "electronic_energies": {
+      "$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/energy_triple"
+    },
+    "free_energies": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["temperature_K", "standard_state_id", "values"],
+          "properties": {
+            "temperature_K": {"type": "number", "exclusiveMinimum": 0},
+            "standard_state_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+            "values": {
+              "$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/energy_triple"
+            }
+          }
+        },
+        {"type": "null"}
+      ]
+    },
+    "rate_law_id": {
+      "anyOf": [
+        {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+        {"type": "null"}
+      ]
+    },
+    "provenance": {
+      "type": "array",
+      "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/evidence"},
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "eligibility": {"enum": ["draft", "blocked", "eligible"]},
+    "validation": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/validation"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"reaction_type": {"const": "interphase_transfer"}}},
+      "then": {"properties": {
+        "reactants": {"maxProperties": 1}, "products": {"maxProperties": 1},
+        "phase_ids": {"minItems": 2}, "surface_ids": {"minItems": 2}
+      }}
+    },
+    {"if": {"required": ["operating_conditions_ref"]}, "then": {"properties": {"reaction_type": {"enum": ["interphase_transfer", "cross_phase_elementary"]}}}},
+    {"if": {"required": ["ts_species_id"]}, "then": {"properties": {"reaction_type": {"const": "cross_phase_elementary"}, "ts_treatment": {"const": "located"}}}},
+    {
+      "if": {"properties": {"reaction_type": {"const": "cross_phase_elementary"}}},
+      "then": {"properties": {"phase_ids": {"minItems": 2}, "surface_ids": {"minItems": 2}}}
+    },
+    {
+      "if": {
+        "properties": {"ts_treatment": {"const": "located"}}
+      },
+      "then": {
+        "properties": {
+          "ts_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"ts_treatment": {"const": "unresolved"}}
+      },
+      "then": {
+        "properties": {"ts_id": {"type": "null"}}
+      }
+    },
+    {
+      "if": {
+        "properties": {"ts_treatment": {"const": "barrierless"}}
+      },
+      "then": {
+        "properties": {"ts_id": {"type": "null"}}
+      }
+    },
+    {
+      "if": {
+        "properties": {"eligibility": {"const": "eligible"}}
+      },
+      "then": {
+        "properties": {
+          "initial_structure_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+          "final_structure_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+          "rate_law_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+          "ts_treatment": {"enum": ["located", "barrierless"]},
+          "validation": {
+            "properties": {"status": {"const": "accepted"}}
+          },
+          "free_energies": {"type": "object"}
+        }
+      }
+    }
+  ]
+}

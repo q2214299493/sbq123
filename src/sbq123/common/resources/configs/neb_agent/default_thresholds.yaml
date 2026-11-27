@@ -1,0 +1,19 @@
+min_distance_factor: 0.55
+absolute_min_distance_A: 1.0
+image_jump_warning_A: 1.0
+fixed_position_tolerance_A: 0.0001
+internal_minimum_warning_eV: 0.2
+barrierless_force_threshold_eVA: 0.2
+# This is an NEB-force warning threshold, not a convergence target or an
+# early-step failure threshold. The first five ionic steps are an allowed
+# startup window. Persistent high force becomes failure evidence only after
+# ten ionic steps without a decreasing trend, or when independent geometry,
+# periodic-mapping, or magnetic-discontinuity evidence is also present.
+high_force_warning_threshold_eVA: 1.5
+min_ionic_steps_for_force_warning: 5
+persistent_high_force_failure_min_ionic_steps: 10
+scf_consecutive_exhaustion_hard_min: 3
+surface_penetration_warning_A: 0.2
+desorption_height_change_warning_A: 2.0
+reaction_coordinate_backtrack_warning_A: 0.25
+magnetic_continuity_warning_threshold_muB: 2.0

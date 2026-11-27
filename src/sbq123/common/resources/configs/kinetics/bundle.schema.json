@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.sbq123.invalid/multiphase/1.0.0/bundle.schema.json",
+  "title": "bundle v1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "projects",
+    "materials",
+    "phases",
+    "surfaces",
+    "sites",
+    "interfaces",
+    "species",
+    "reactions",
+    "parameter_sets",
+    "runs"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "projects": {
+      "type": "array",
+      "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/catalyst_project.schema.json"},
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "materials": {
+      "type": "array",
+      "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/catalyst_material.schema.json"},
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "phases": {
+      "type": "array",
+      "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/phase.schema.json"},
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "surfaces": {
+      "type": "array",
+      "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/surface.schema.json"},
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "sites": {
+      "type": "array",
+      "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/active_site.schema.json"},
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "interfaces": {
+      "type": "array",
+      "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/interface.schema.json"},
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "species": {
+      "type": "array",
+      "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/species.schema.json"},
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "reactions": {
+      "type": "array",
+      "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/reaction.schema.json"},
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "parameter_sets": {
+      "type": "array",
+      "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/kinetic_parameter.schema.json"},
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "runs": {
+      "type": "array",
+      "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/simulation_run.schema.json"},
+      "minItems": 0,
+      "uniqueItems": true
+    }
+  }
+}

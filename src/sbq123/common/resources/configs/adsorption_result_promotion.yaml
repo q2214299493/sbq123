@@ -1,0 +1,80 @@
+version: 1
+
+owner_skill: dataset-compatibility-gate
+chemical_plausibility_skill: chemical-plausibility-gate
+registry_module: calculation_registry
+
+active_branches:
+  true_fe110_5layer_5x5x1:
+    surface_family: metallic_fe
+    facet: "Fe(110)"
+    slab_model: "true_fe110_fe45_5layer"
+    fixed_layers: "bottom_18_fe_fixed"
+    vacuum_angstrom: "~15"
+    kpoints: "Gamma 5x5x1"
+    gga: PE
+    potcar_family: PAW-PBE
+    encut_ev: 400
+    fe_system_ispin: 2
+    closed_shell_gas_ispin: 1
+    status: active
+
+promotion_states:
+  - candidate
+  - submitted
+  - converged_unreviewed
+  - reviewed_valid
+  - duplicate
+  - rejected
+  - static_needed
+  - static_accepted
+  - energy_accepted
+  - excel_promoted
+
+required_for_excel_promotion:
+  - compatible_branch_id
+  - accepted_compatible_clean_energy
+  - accepted_compatible_adsorbed_energy
+  - accepted_gas_or_reference_state
+  - scheduler_status_recorded
+  - electronic_convergence_checked
+  - ionic_convergence_checked
+  - final_geometry_checked
+  - chemical_plausibility_status
+  - final_species
+  - chemical_event
+  - final_site_class
+  - duplicate_status
+  - total_energy_with_units
+  - source_job_id
+  - source_remote_path
+  - source_file_reference
+
+blocking_conditions:
+  - incompatible_kpoints_or_slab_branch
+  - rejected_or_incompatible_clean_energy
+  - missing_gas_reference
+  - failed_or_unchecked_scf
+  - missing_final_geometry
+  - unresolved_chemical_identity
+  - chemical_plausibility_rejected
+  - unclassified_final_site
+  - unresolved_duplicate_group
+  - legacy_fake_fe110_or_fe211_like_source
+  - low_confidence_complex_surface_without_review
+
+rules:
+  initial_site_is_provenance_only: true
+  final_species_controls_dataset_identity: true
+  final_site_controls_dataset_row: true
+  scheduler_done_is_not_scientific_convergence: true
+  promote_low_confidence_by_default: false
+  promote_relaxation_energy_as_final_by_default: true
+  active_surface_energy_convention: fe110_converged_toten_sigma0p20_v1
+  active_surface_energy_source: final_OUTCAR_TOTEN
+  active_surface_ismear: 1
+  active_surface_sigma_ev: 0.20
+  require_ionic_or_method_convergence: true
+  require_hash_bound_outcar: true
+  prohibit_mixing_with_sigma0p10_matched_static: true
+  require_explicit_user_override_for_low_confidence_export: true

@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools==80.9.0", "wheel==0.45.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sbq123-kmc"
+version = "3.2.0"
+requires-python = ">=3.13,<3.14"
+dependencies = ["sbq123-common==3.2.0", "scipy>=1.15,<2", "astropy>=6,<8"]
+
+[tool.setuptools.packages.find]
+where = ["../../src"]
+include = ["sbq123.kmc", "sbq123.kmc.*"]
+exclude = ["*.resources.*", "*.resources", "*.__pycache__"]
+
+[tool.setuptools]
+include-package-data = false
+
+[tool.setuptools.package-data]
+"sbq123.kmc" = ["_legacy_modules.json", "_data_hashes.json", "resources/**/*", "registries/*.json"]
+
+[project.scripts]
+sbq123-kmc-repo-state = "sbq123.kmc.cli:repo_state"
+sbq123-kmc-registry-promote = "sbq123.kmc.cli:registry_promote"
+sbq123-kmc-registry-write = "sbq123.kmc.cli:registry_write"
+sbq123-kmc-registry-init = "sbq123.kmc.cli:registry_init"
+sbq123-kmc-ts-strategy = "sbq123.kmc.cli:ts_strategy"
+sbq123-kmc-document-governance = "sbq123.kmc.cli:document_governance"
+sbq123-kmc-capability-readiness = "sbq123.kmc.cli:capability_readiness"
+sbq123-kmc-catalysis-search = "sbq123.kmc.cli:catalysis_search"
+sbq123-kmc-catalysis-validate = "sbq123.kmc.cli:catalysis_validate"
+
+[project.optional-dependencies]
+geometry = ["ase>=3.29,<4"]

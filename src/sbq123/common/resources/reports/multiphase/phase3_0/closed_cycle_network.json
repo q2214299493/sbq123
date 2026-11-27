@@ -1,0 +1,1802 @@
+{
+  "network_version": "0978e2199dd35b1bae883edcfb6537376c3152d13fa1f54a4102cc4f035d8264",
+  "format": "reaction-network/1",
+  "project_id": "demo",
+  "catalog": {
+    "projects": [
+      {
+        "schema_version": "1.0.0",
+        "project_id": "demo",
+        "name": "Synthetic interface contract example",
+        "validation": {
+          "status": "accepted",
+          "review": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          }
+        }
+      }
+    ],
+    "materials": [
+      {
+        "schema_version": "1.0.0",
+        "material_id": "Ni",
+        "project_id": "demo",
+        "name": "Ni",
+        "validation": {
+          "status": "accepted",
+          "review": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          }
+        }
+      },
+      {
+        "schema_version": "1.0.0",
+        "material_id": "Cu",
+        "project_id": "demo",
+        "name": "Cu",
+        "validation": {
+          "status": "accepted",
+          "review": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          }
+        }
+      }
+    ],
+    "phases": [
+      {
+        "schema_version": "1.0.0",
+        "phase_id": "fcc-Ni",
+        "material_id": "Ni",
+        "name": "fcc",
+        "composition": {
+          "Ni": 1
+        },
+        "structure_id": "bulk-Ni",
+        "structural_provenance": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        },
+        "validation": {
+          "status": "accepted",
+          "review": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          }
+        }
+      },
+      {
+        "schema_version": "1.0.0",
+        "phase_id": "fcc-Cu",
+        "material_id": "Cu",
+        "name": "fcc",
+        "composition": {
+          "Cu": 1
+        },
+        "structure_id": "bulk-Cu",
+        "structural_provenance": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        },
+        "validation": {
+          "status": "accepted",
+          "review": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          }
+        }
+      }
+    ],
+    "surfaces": [
+      {
+        "schema_version": "1.0.0",
+        "surface_id": "facet-Ni",
+        "phase_id": "fcc-Ni",
+        "miller_indices": [
+          1,
+          1,
+          1
+        ],
+        "termination": "metal",
+        "defects": [],
+        "structure_id": "facet-Ni",
+        "structural_provenance": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        },
+        "validation": {
+          "status": "accepted",
+          "review": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          }
+        }
+      },
+      {
+        "schema_version": "1.0.0",
+        "surface_id": "facet-Cu",
+        "phase_id": "fcc-Cu",
+        "miller_indices": [
+          1,
+          1,
+          1
+        ],
+        "termination": "metal",
+        "defects": [
+          {
+            "kind": "vacancy",
+            "description": "synthetic surface vacancy"
+          }
+        ],
+        "structure_id": "facet-Cu",
+        "structural_provenance": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        },
+        "validation": {
+          "status": "accepted",
+          "review": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          }
+        }
+      }
+    ],
+    "sites": [
+      {
+        "schema_version": "1.0.0",
+        "site_id": "top-Ni",
+        "surface_id": "facet-Ni",
+        "site_type": "atop",
+        "local_geometry": "single metal atom",
+        "validation": {
+          "status": "accepted",
+          "review": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          }
+        }
+      },
+      {
+        "schema_version": "1.0.0",
+        "site_id": "bridge-Cu",
+        "surface_id": "facet-Cu",
+        "site_type": "bridge",
+        "local_geometry": "two neighbouring copper atoms",
+        "validation": {
+          "status": "accepted",
+          "review": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          }
+        }
+      }
+    ],
+    "interfaces": [
+      {
+        "schema_version": "1.0.0",
+        "interface_id": "junction",
+        "surface_ids": [
+          "facet-Ni",
+          "facet-Cu"
+        ],
+        "structure_id": "junction",
+        "structural_provenance": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        },
+        "geometry": "two adjacent facets",
+        "validation": {
+          "status": "accepted",
+          "review": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          }
+        }
+      }
+    ]
+  },
+  "species": [
+    {
+      "schema_version": "1.0.0",
+      "species_id": "H2-g",
+      "phase": "gas",
+      "material_ids": [],
+      "surface_ids": [],
+      "interface_id": null,
+      "composition": {
+        "H": 2
+      },
+      "charge": 0,
+      "site_occupancy": {},
+      "adsorption_geometry": null,
+      "structure_id": "H2-g",
+      "structural_provenance": {
+        "path": "tests/fixtures/multiphase/kinetic_reference.json",
+        "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+      },
+      "thermochemistry_status": "reviewed",
+      "validation": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "species_id": "H2-bridge",
+      "phase": "surface",
+      "material_ids": [
+        "Cu"
+      ],
+      "surface_ids": [
+        "facet-Cu"
+      ],
+      "interface_id": null,
+      "composition": {
+        "H": 1
+      },
+      "charge": 0,
+      "site_occupancy": {
+        "bridge-Cu": 1
+      },
+      "adsorption_geometry": "H-H axis spanning both sites",
+      "structure_id": "H2-bridge",
+      "structural_provenance": {
+        "path": "tests/fixtures/multiphase/kinetic_reference.json",
+        "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+      },
+      "thermochemistry_status": "reviewed",
+      "validation": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "species_id": "H2-top",
+      "phase": "surface",
+      "material_ids": [
+        "Ni"
+      ],
+      "surface_ids": [
+        "facet-Ni"
+      ],
+      "interface_id": null,
+      "composition": {
+        "H": 1
+      },
+      "charge": 0,
+      "site_occupancy": {
+        "top-Ni": 1
+      },
+      "adsorption_geometry": "end-on at a single site",
+      "structure_id": "H2-top",
+      "structural_provenance": {
+        "path": "tests/fixtures/multiphase/kinetic_reference.json",
+        "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+      },
+      "thermochemistry_status": "reviewed",
+      "validation": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "species_id": "NO-g",
+      "phase": "gas",
+      "material_ids": [],
+      "surface_ids": [],
+      "interface_id": null,
+      "composition": {
+        "N": 1,
+        "O": 1
+      },
+      "charge": 0,
+      "site_occupancy": {},
+      "adsorption_geometry": null,
+      "structure_id": "NO-g",
+      "structural_provenance": {
+        "path": "tests/fixtures/multiphase/kinetic_reference.json",
+        "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+      },
+      "thermochemistry_status": "reviewed",
+      "validation": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "species_id": "HNO-g",
+      "phase": "gas",
+      "material_ids": [],
+      "surface_ids": [],
+      "interface_id": null,
+      "composition": {
+        "H": 1,
+        "N": 1,
+        "O": 1
+      },
+      "charge": 0,
+      "site_occupancy": {},
+      "adsorption_geometry": null,
+      "structure_id": "HNO-g",
+      "structural_provenance": {
+        "path": "tests/fixtures/multiphase/kinetic_reference.json",
+        "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+      },
+      "thermochemistry_status": "reviewed",
+      "validation": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "species_id": "HNO-top",
+      "phase": "surface",
+      "material_ids": [
+        "Ni"
+      ],
+      "surface_ids": [
+        "facet-Ni"
+      ],
+      "interface_id": null,
+      "composition": {
+        "H": 1,
+        "N": 1,
+        "O": 1
+      },
+      "charge": 0,
+      "site_occupancy": {
+        "top-Ni": 1
+      },
+      "adsorption_geometry": "end-on at a single site",
+      "structure_id": "HNO-top",
+      "structural_provenance": {
+        "path": "tests/fixtures/multiphase/kinetic_reference.json",
+        "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+      },
+      "thermochemistry_status": "reviewed",
+      "validation": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      }
+    }
+  ],
+  "species_fingerprints": {
+    "H2-g": "354432fc942c62c25d2f041819294b6e1cdcbec1f12cea39275788315b333cb7",
+    "H2-bridge": "35f9f8c7d47663fcea754b2be4733fe3363de0088204ccde2cd564bd08e28a9c",
+    "H2-top": "fef1d19abafbe0f53f90eb495d2116816fb041390aecba885cc1c4c7126e2211",
+    "NO-g": "8e7395b5c1f292430a607de34f16a8e866c9515b0289df893cf5f8eaffdfe123",
+    "HNO-g": "0661f5590005ac0bb87a122d08bce0ddbc42b99a341bf8abba993a49b0cbde8c",
+    "HNO-top": "79cb5017a9922348ea07bc05ce5d5296cae2a67bca2a9b3a7c928c9b6973673e"
+  },
+  "reactions": [
+    {
+      "definition": {
+        "schema_version": "1.0.0",
+        "reaction_id": "ads",
+        "reaction_type": "interfacial",
+        "reversible": true,
+        "reactants": {
+          "H2-g": 1
+        },
+        "products": {
+          "H2-top": 1,
+          "H2-bridge": 1
+        },
+        "phase_ids": [
+          "fcc-Ni",
+          "fcc-Cu"
+        ],
+        "surface_ids": [
+          "facet-Ni",
+          "facet-Cu"
+        ],
+        "interface_id": "junction",
+        "required_sites": {
+          "top-Ni": 1,
+          "bridge-Cu": 1
+        },
+        "sites_consumed": {
+          "top-Ni": 1,
+          "bridge-Cu": 1
+        },
+        "sites_released": {},
+        "initial_structure_id": "fixture-is-ads",
+        "final_structure_id": "fixture-fs-ads",
+        "ts_treatment": "located",
+        "ts_id": "fixture-ts-ads",
+        "energy_reference_id": "demo-ref",
+        "electronic_energies": {
+          "reaction": {
+            "value": -0.2,
+            "unit": "eV",
+            "reference_id": "demo-ref",
+            "source": {
+              "calculation_id": "synthetic-demo",
+              "kind": "electronic_structure",
+              "artifact": {
+                "path": "tests/fixtures/multiphase/kinetic_reference.json",
+                "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+              }
+            }
+          },
+          "forward": {
+            "value": 0.3,
+            "unit": "eV",
+            "reference_id": "demo-ref",
+            "source": {
+              "calculation_id": "synthetic-demo",
+              "kind": "electronic_structure",
+              "artifact": {
+                "path": "tests/fixtures/multiphase/kinetic_reference.json",
+                "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+              }
+            }
+          },
+          "reverse": {
+            "value": 0.5,
+            "unit": "eV",
+            "reference_id": "demo-ref",
+            "source": {
+              "calculation_id": "synthetic-demo",
+              "kind": "electronic_structure",
+              "artifact": {
+                "path": "tests/fixtures/multiphase/kinetic_reference.json",
+                "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+              }
+            }
+          }
+        },
+        "free_energies": {
+          "temperature_K": 400,
+          "standard_state_id": "demo-standard",
+          "values": {
+            "reaction": {
+              "value": -0.1,
+              "unit": "eV",
+              "reference_id": "demo-ref",
+              "source": {
+                "calculation_id": "thermal-fixture",
+                "kind": "thermal_correction",
+                "artifact": {
+                  "path": "tests/fixtures/multiphase/kinetic_reference.json",
+                  "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+                }
+              }
+            },
+            "forward": {
+              "value": 0.4,
+              "unit": "eV",
+              "reference_id": "demo-ref",
+              "source": {
+                "calculation_id": "thermal-fixture",
+                "kind": "thermal_correction",
+                "artifact": {
+                  "path": "tests/fixtures/multiphase/kinetic_reference.json",
+                  "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+                }
+              }
+            },
+            "reverse": {
+              "value": 0.5,
+              "unit": "eV",
+              "reference_id": "demo-ref",
+              "source": {
+                "calculation_id": "thermal-fixture",
+                "kind": "thermal_correction",
+                "artifact": {
+                  "path": "tests/fixtures/multiphase/kinetic_reference.json",
+                  "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+                }
+              }
+            }
+          }
+        },
+        "rate_law_id": "mass-action",
+        "provenance": [
+          {
+            "calculation_id": "synthetic-demo",
+            "kind": "electronic_structure",
+            "artifact": {
+              "path": "tests/fixtures/multiphase/kinetic_reference.json",
+              "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+            }
+          },
+          {
+            "calculation_id": "thermal-fixture",
+            "kind": "thermal_correction",
+            "artifact": {
+              "path": "tests/fixtures/multiphase/kinetic_reference.json",
+              "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+            }
+          }
+        ],
+        "eligibility": "eligible",
+        "validation": {
+          "status": "accepted",
+          "review": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          }
+        }
+      },
+      "direction": {
+        "status": "reversible",
+        "forward": {
+          "reactants": {
+            "H2-g": 1
+          },
+          "products": {
+            "H2-top": 1,
+            "H2-bridge": 1
+          },
+          "sites_consumed": {
+            "top-Ni": 1,
+            "bridge-Cu": 1
+          },
+          "sites_released": {}
+        },
+        "reverse": {
+          "reactants": {
+            "H2-top": 1,
+            "H2-bridge": 1
+          },
+          "products": {
+            "H2-g": 1
+          },
+          "sites_consumed": {},
+          "sites_released": {
+            "top-Ni": 1,
+            "bridge-Cu": 1
+          }
+        }
+      },
+      "net_stoichiometry": {
+        "site:bridge-Cu": -1,
+        "site:top-Ni": -1,
+        "species:H2-bridge": 1,
+        "species:H2-g": -1,
+        "species:H2-top": 1
+      },
+      "site_balance": {
+        "top-Ni": 1,
+        "bridge-Cu": 1
+      },
+      "energies": {
+        "electronic_ev": {
+          "forward": 0.3,
+          "reverse": 0.5,
+          "reaction": -0.2
+        },
+        "gibbs_ev": {
+          "forward": 0.4,
+          "reverse": 0.5,
+          "reaction": -0.1
+        },
+        "temperature_k": 400,
+        "standard_state": "demo-standard",
+        "thermal_basis": null
+      },
+      "thermochemistry": null,
+      "level": "KINETICALLY_ELIGIBLE",
+      "origin": "supplied_definition",
+      "site_mapping": null,
+      "user_confirmation": null,
+      "scientific_review": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      },
+      "parameter_set_ids": [
+        "parameters-ads"
+      ],
+      "gaps": [],
+      "mkm_status": "eligible",
+      "ts_review": {
+        "review_sha256": "478b306a68b78e86a72154e06a2340547c8f4bbad9a836aac9c4e245c96393ed",
+        "grade": "A",
+        "structure_identity": "fixture-ts-ads",
+        "assignment": "synthetic fixture",
+        "review_reference": "closed_cycle_reference.json"
+      },
+      "subject_sha256": "a7bebe652eb4fb123e4daa4f795eaeb5092e95e7941ea0dc374f92cd053a4a3b",
+      "network_review": {
+        "subject_sha256": "a7bebe652eb4fb123e4daa4f795eaeb5092e95e7941ea0dc374f92cd053a4a3b",
+        "reaction_id": "ads",
+        "decision": "accepted",
+        "reviewer": "synthetic fixture",
+        "reason": "software benchmark only",
+        "reviewed_at": "2026-11-19T00:00:00Z"
+      }
+    },
+    {
+      "definition": {
+        "schema_version": "1.0.0",
+        "reaction_id": "transfer",
+        "reaction_type": "diffusion",
+        "reversible": true,
+        "reactants": {
+          "H2-bridge": 1
+        },
+        "products": {
+          "H2-top": 1
+        },
+        "phase_ids": [
+          "fcc-Ni",
+          "fcc-Cu"
+        ],
+        "surface_ids": [
+          "facet-Ni",
+          "facet-Cu"
+        ],
+        "interface_id": "junction",
+        "required_sites": {
+          "top-Ni": 1,
+          "bridge-Cu": 1
+        },
+        "sites_consumed": {
+          "top-Ni": 1
+        },
+        "sites_released": {
+          "bridge-Cu": 1
+        },
+        "initial_structure_id": "fixture-is-transfer",
+        "final_structure_id": "fixture-fs-transfer",
+        "ts_treatment": "located",
+        "ts_id": "fixture-ts-transfer",
+        "energy_reference_id": "demo-ref",
+        "electronic_energies": {
+          "reaction": {
+            "value": 0.019999999999999997,
+            "unit": "eV",
+            "reference_id": "demo-ref",
+            "source": {
+              "calculation_id": "synthetic-cycle-transfer",
+              "kind": "electronic_structure",
+              "artifact": {
+                "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+                "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+              }
+            }
+          },
+          "forward": {
+            "value": 0.76,
+            "unit": "eV",
+            "reference_id": "demo-ref",
+            "source": {
+              "calculation_id": "synthetic-cycle-transfer",
+              "kind": "electronic_structure",
+              "artifact": {
+                "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+                "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+              }
+            }
+          },
+          "reverse": {
+            "value": 0.74,
+            "unit": "eV",
+            "reference_id": "demo-ref",
+            "source": {
+              "calculation_id": "synthetic-cycle-transfer",
+              "kind": "electronic_structure",
+              "artifact": {
+                "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+                "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+              }
+            }
+          }
+        },
+        "free_energies": {
+          "temperature_K": 400,
+          "standard_state_id": "demo-standard",
+          "values": {
+            "reaction": {
+              "value": 0.019999999999999997,
+              "unit": "eV",
+              "reference_id": "demo-ref",
+              "source": {
+                "calculation_id": "synthetic-cycle-transfer",
+                "kind": "thermal_correction",
+                "artifact": {
+                  "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+                  "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+                }
+              }
+            },
+            "forward": {
+              "value": 0.76,
+              "unit": "eV",
+              "reference_id": "demo-ref",
+              "source": {
+                "calculation_id": "synthetic-cycle-transfer",
+                "kind": "thermal_correction",
+                "artifact": {
+                  "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+                  "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+                }
+              }
+            },
+            "reverse": {
+              "value": 0.74,
+              "unit": "eV",
+              "reference_id": "demo-ref",
+              "source": {
+                "calculation_id": "synthetic-cycle-transfer",
+                "kind": "thermal_correction",
+                "artifact": {
+                  "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+                  "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+                }
+              }
+            }
+          }
+        },
+        "rate_law_id": "mass-action",
+        "provenance": [
+          {
+            "calculation_id": "synthetic-cycle-transfer",
+            "kind": "electronic_structure",
+            "artifact": {
+              "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+              "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+            }
+          },
+          {
+            "calculation_id": "synthetic-cycle-transfer",
+            "kind": "thermal_correction",
+            "artifact": {
+              "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+              "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+            }
+          }
+        ],
+        "eligibility": "eligible",
+        "validation": {
+          "status": "accepted",
+          "review": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          }
+        }
+      },
+      "direction": {
+        "status": "reversible",
+        "forward": {
+          "reactants": {
+            "H2-bridge": 1
+          },
+          "products": {
+            "H2-top": 1
+          },
+          "sites_consumed": {
+            "top-Ni": 1
+          },
+          "sites_released": {
+            "bridge-Cu": 1
+          }
+        },
+        "reverse": {
+          "reactants": {
+            "H2-top": 1
+          },
+          "products": {
+            "H2-bridge": 1
+          },
+          "sites_consumed": {
+            "bridge-Cu": 1
+          },
+          "sites_released": {
+            "top-Ni": 1
+          }
+        }
+      },
+      "net_stoichiometry": {
+        "site:bridge-Cu": 1,
+        "site:top-Ni": -1,
+        "species:H2-bridge": -1,
+        "species:H2-top": 1
+      },
+      "site_balance": {
+        "top-Ni": 1,
+        "bridge-Cu": 1
+      },
+      "energies": {
+        "electronic_ev": {
+          "forward": 0.76,
+          "reverse": 0.74,
+          "reaction": 0.019999999999999997
+        },
+        "gibbs_ev": {
+          "forward": 0.76,
+          "reverse": 0.74,
+          "reaction": 0.019999999999999997
+        },
+        "temperature_k": 400,
+        "standard_state": "demo-standard",
+        "thermal_basis": null
+      },
+      "thermochemistry": null,
+      "level": "KINETICALLY_ELIGIBLE",
+      "origin": "supplied_definition",
+      "site_mapping": null,
+      "user_confirmation": null,
+      "scientific_review": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      },
+      "parameter_set_ids": [
+        "parameters-transfer"
+      ],
+      "gaps": [],
+      "mkm_status": "eligible",
+      "ts_review": {
+        "review_sha256": "5c8153e2ef212247bb7acaee506c6c5a719cea597d0234799f27d5b984ab996d",
+        "grade": "A",
+        "structure_identity": "fixture-ts-transfer",
+        "assignment": "synthetic fixture",
+        "review_reference": "closed_cycle_reference.json"
+      },
+      "subject_sha256": "c1abc0760d1be3eae27a29d2aacf8d22e170ff24871730dd1ca20678e5054b9c",
+      "network_review": {
+        "subject_sha256": "c1abc0760d1be3eae27a29d2aacf8d22e170ff24871730dd1ca20678e5054b9c",
+        "reaction_id": "transfer",
+        "decision": "accepted",
+        "reviewer": "synthetic fixture",
+        "reason": "software benchmark only",
+        "reviewed_at": "2026-11-19T00:00:00Z"
+      }
+    },
+    {
+      "definition": {
+        "schema_version": "1.0.0",
+        "reaction_id": "hydrogenate",
+        "reaction_type": "association",
+        "reversible": true,
+        "reactants": {
+          "H2-top": 1,
+          "NO-g": 1
+        },
+        "products": {
+          "HNO-top": 1
+        },
+        "phase_ids": [
+          "fcc-Ni",
+          "fcc-Cu"
+        ],
+        "surface_ids": [
+          "facet-Ni",
+          "facet-Cu"
+        ],
+        "interface_id": "junction",
+        "required_sites": {
+          "top-Ni": 1
+        },
+        "sites_consumed": {},
+        "sites_released": {},
+        "initial_structure_id": "fixture-is-hydrogenate",
+        "final_structure_id": "fixture-fs-hydrogenate",
+        "ts_treatment": "located",
+        "ts_id": "fixture-ts-hydrogenate",
+        "energy_reference_id": "demo-ref",
+        "electronic_energies": {
+          "reaction": {
+            "value": -0.1,
+            "unit": "eV",
+            "reference_id": "demo-ref",
+            "source": {
+              "calculation_id": "synthetic-cycle-hydrogenate",
+              "kind": "electronic_structure",
+              "artifact": {
+                "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+                "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+              }
+            }
+          },
+          "forward": {
+            "value": 0.78,
+            "unit": "eV",
+            "reference_id": "demo-ref",
+            "source": {
+              "calculation_id": "synthetic-cycle-hydrogenate",
+              "kind": "electronic_structure",
+              "artifact": {
+                "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+                "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+              }
+            }
+          },
+          "reverse": {
+            "value": 0.88,
+            "unit": "eV",
+            "reference_id": "demo-ref",
+            "source": {
+              "calculation_id": "synthetic-cycle-hydrogenate",
+              "kind": "electronic_structure",
+              "artifact": {
+                "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+                "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+              }
+            }
+          }
+        },
+        "free_energies": {
+          "temperature_K": 400,
+          "standard_state_id": "demo-standard",
+          "values": {
+            "reaction": {
+              "value": -0.1,
+              "unit": "eV",
+              "reference_id": "demo-ref",
+              "source": {
+                "calculation_id": "synthetic-cycle-hydrogenate",
+                "kind": "thermal_correction",
+                "artifact": {
+                  "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+                  "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+                }
+              }
+            },
+            "forward": {
+              "value": 0.78,
+              "unit": "eV",
+              "reference_id": "demo-ref",
+              "source": {
+                "calculation_id": "synthetic-cycle-hydrogenate",
+                "kind": "thermal_correction",
+                "artifact": {
+                  "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+                  "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+                }
+              }
+            },
+            "reverse": {
+              "value": 0.88,
+              "unit": "eV",
+              "reference_id": "demo-ref",
+              "source": {
+                "calculation_id": "synthetic-cycle-hydrogenate",
+                "kind": "thermal_correction",
+                "artifact": {
+                  "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+                  "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+                }
+              }
+            }
+          }
+        },
+        "rate_law_id": "mass-action",
+        "provenance": [
+          {
+            "calculation_id": "synthetic-cycle-hydrogenate",
+            "kind": "electronic_structure",
+            "artifact": {
+              "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+              "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+            }
+          },
+          {
+            "calculation_id": "synthetic-cycle-hydrogenate",
+            "kind": "thermal_correction",
+            "artifact": {
+              "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+              "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+            }
+          }
+        ],
+        "eligibility": "eligible",
+        "validation": {
+          "status": "accepted",
+          "review": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          }
+        }
+      },
+      "direction": {
+        "status": "reversible",
+        "forward": {
+          "reactants": {
+            "H2-top": 1,
+            "NO-g": 1
+          },
+          "products": {
+            "HNO-top": 1
+          },
+          "sites_consumed": {},
+          "sites_released": {}
+        },
+        "reverse": {
+          "reactants": {
+            "HNO-top": 1
+          },
+          "products": {
+            "H2-top": 1,
+            "NO-g": 1
+          },
+          "sites_consumed": {},
+          "sites_released": {}
+        }
+      },
+      "net_stoichiometry": {
+        "species:H2-top": -1,
+        "species:HNO-top": 1,
+        "species:NO-g": -1
+      },
+      "site_balance": {
+        "top-Ni": 1
+      },
+      "energies": {
+        "electronic_ev": {
+          "forward": 0.78,
+          "reverse": 0.88,
+          "reaction": -0.1
+        },
+        "gibbs_ev": {
+          "forward": 0.78,
+          "reverse": 0.88,
+          "reaction": -0.1
+        },
+        "temperature_k": 400,
+        "standard_state": "demo-standard",
+        "thermal_basis": null
+      },
+      "thermochemistry": null,
+      "level": "KINETICALLY_ELIGIBLE",
+      "origin": "supplied_definition",
+      "site_mapping": null,
+      "user_confirmation": null,
+      "scientific_review": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      },
+      "parameter_set_ids": [
+        "parameters-hydrogenate"
+      ],
+      "gaps": [],
+      "mkm_status": "eligible",
+      "ts_review": {
+        "review_sha256": "4830d0dd9ac0a93295cf4f86eda7c1ed0adfbffbcb895ce62a7052a073f02457",
+        "grade": "A",
+        "structure_identity": "fixture-ts-hydrogenate",
+        "assignment": "synthetic fixture",
+        "review_reference": "closed_cycle_reference.json"
+      },
+      "subject_sha256": "d2dbc6c8f1369991080cd927208dbc76988c9289420557a0a00f12ca78fc10b2",
+      "network_review": {
+        "subject_sha256": "d2dbc6c8f1369991080cd927208dbc76988c9289420557a0a00f12ca78fc10b2",
+        "reaction_id": "hydrogenate",
+        "decision": "accepted",
+        "reviewer": "synthetic fixture",
+        "reason": "software benchmark only",
+        "reviewed_at": "2026-11-19T00:00:00Z"
+      }
+    },
+    {
+      "definition": {
+        "schema_version": "1.0.0",
+        "reaction_id": "desorb",
+        "reaction_type": "desorption",
+        "reversible": true,
+        "reactants": {
+          "HNO-top": 1
+        },
+        "products": {
+          "HNO-g": 1
+        },
+        "phase_ids": [
+          "fcc-Ni",
+          "fcc-Cu"
+        ],
+        "surface_ids": [
+          "facet-Ni",
+          "facet-Cu"
+        ],
+        "interface_id": "junction",
+        "required_sites": {
+          "top-Ni": 1
+        },
+        "sites_consumed": {},
+        "sites_released": {
+          "top-Ni": 1
+        },
+        "initial_structure_id": "fixture-is-desorb",
+        "final_structure_id": "fixture-fs-desorb",
+        "ts_treatment": "located",
+        "ts_id": "fixture-ts-desorb",
+        "energy_reference_id": "demo-ref",
+        "electronic_energies": {
+          "reaction": {
+            "value": 0.06000000000000001,
+            "unit": "eV",
+            "reference_id": "demo-ref",
+            "source": {
+              "calculation_id": "synthetic-cycle-desorb",
+              "kind": "electronic_structure",
+              "artifact": {
+                "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+                "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+              }
+            }
+          },
+          "forward": {
+            "value": 0.8,
+            "unit": "eV",
+            "reference_id": "demo-ref",
+            "source": {
+              "calculation_id": "synthetic-cycle-desorb",
+              "kind": "electronic_structure",
+              "artifact": {
+                "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+                "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+              }
+            }
+          },
+          "reverse": {
+            "value": 0.74,
+            "unit": "eV",
+            "reference_id": "demo-ref",
+            "source": {
+              "calculation_id": "synthetic-cycle-desorb",
+              "kind": "electronic_structure",
+              "artifact": {
+                "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+                "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+              }
+            }
+          }
+        },
+        "free_energies": {
+          "temperature_K": 400,
+          "standard_state_id": "demo-standard",
+          "values": {
+            "reaction": {
+              "value": 0.06000000000000001,
+              "unit": "eV",
+              "reference_id": "demo-ref",
+              "source": {
+                "calculation_id": "synthetic-cycle-desorb",
+                "kind": "thermal_correction",
+                "artifact": {
+                  "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+                  "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+                }
+              }
+            },
+            "forward": {
+              "value": 0.8,
+              "unit": "eV",
+              "reference_id": "demo-ref",
+              "source": {
+                "calculation_id": "synthetic-cycle-desorb",
+                "kind": "thermal_correction",
+                "artifact": {
+                  "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+                  "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+                }
+              }
+            },
+            "reverse": {
+              "value": 0.74,
+              "unit": "eV",
+              "reference_id": "demo-ref",
+              "source": {
+                "calculation_id": "synthetic-cycle-desorb",
+                "kind": "thermal_correction",
+                "artifact": {
+                  "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+                  "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+                }
+              }
+            }
+          }
+        },
+        "rate_law_id": "mass-action",
+        "provenance": [
+          {
+            "calculation_id": "synthetic-cycle-desorb",
+            "kind": "electronic_structure",
+            "artifact": {
+              "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+              "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+            }
+          },
+          {
+            "calculation_id": "synthetic-cycle-desorb",
+            "kind": "thermal_correction",
+            "artifact": {
+              "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+              "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+            }
+          }
+        ],
+        "eligibility": "eligible",
+        "validation": {
+          "status": "accepted",
+          "review": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          }
+        }
+      },
+      "direction": {
+        "status": "reversible",
+        "forward": {
+          "reactants": {
+            "HNO-top": 1
+          },
+          "products": {
+            "HNO-g": 1
+          },
+          "sites_consumed": {},
+          "sites_released": {
+            "top-Ni": 1
+          }
+        },
+        "reverse": {
+          "reactants": {
+            "HNO-g": 1
+          },
+          "products": {
+            "HNO-top": 1
+          },
+          "sites_consumed": {
+            "top-Ni": 1
+          },
+          "sites_released": {}
+        }
+      },
+      "net_stoichiometry": {
+        "site:top-Ni": 1,
+        "species:HNO-g": 1,
+        "species:HNO-top": -1
+      },
+      "site_balance": {
+        "top-Ni": 1
+      },
+      "energies": {
+        "electronic_ev": {
+          "forward": 0.8,
+          "reverse": 0.74,
+          "reaction": 0.06000000000000001
+        },
+        "gibbs_ev": {
+          "forward": 0.8,
+          "reverse": 0.74,
+          "reaction": 0.06000000000000001
+        },
+        "temperature_k": 400,
+        "standard_state": "demo-standard",
+        "thermal_basis": null
+      },
+      "thermochemistry": null,
+      "level": "KINETICALLY_ELIGIBLE",
+      "origin": "supplied_definition",
+      "site_mapping": null,
+      "user_confirmation": null,
+      "scientific_review": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      },
+      "parameter_set_ids": [
+        "parameters-desorb"
+      ],
+      "gaps": [],
+      "mkm_status": "eligible",
+      "ts_review": {
+        "review_sha256": "87bd9a647955dcd1a73abdb40cd44c7e7e34f588623a1acf104c1e48ba7045fd",
+        "grade": "A",
+        "structure_identity": "fixture-ts-desorb",
+        "assignment": "synthetic fixture",
+        "review_reference": "closed_cycle_reference.json"
+      },
+      "subject_sha256": "262df25c640538588aa774a5c600d1287eeccdf06bc49c185797b1c163684103",
+      "network_review": {
+        "subject_sha256": "262df25c640538588aa774a5c600d1287eeccdf06bc49c185797b1c163684103",
+        "reaction_id": "desorb",
+        "decision": "accepted",
+        "reviewer": "synthetic fixture",
+        "reason": "software benchmark only",
+        "reviewed_at": "2026-11-19T00:00:00Z"
+      }
+    }
+  ],
+  "parameter_sets": [
+    {
+      "schema_version": "1.0.0",
+      "parameter_set_id": "parameters-ads",
+      "reaction_id": "ads",
+      "rate_law_id": "mass-action",
+      "temperature_K": 400,
+      "pressure_Pa": 160000,
+      "energy_basis": "gibbs",
+      "energy_reference_id": "demo-ref",
+      "standard_state_id": "demo-standard",
+      "standard_states": {
+        "gas_pressure_Pa": 100000,
+        "solute_concentration_mol_m3": 1000,
+        "surface_activity_convention": "fractional site occupation"
+      },
+      "forward": {
+        "prefactor": 1000000000000,
+        "prefactor_unit": "s^-1",
+        "temperature_exponent": 0,
+        "activation_energy": {
+          "value": 0.4,
+          "unit": "eV",
+          "reference_id": "demo-ref",
+          "source": {
+            "calculation_id": "thermal-fixture",
+            "kind": "thermal_correction",
+            "artifact": {
+              "path": "tests/fixtures/multiphase/kinetic_reference.json",
+              "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+            }
+          }
+        },
+        "expression": "k(T) = A exp(-Ea / (kB T))"
+      },
+      "reverse": {
+        "prefactor": 1000000000000,
+        "prefactor_unit": "s^-1",
+        "temperature_exponent": 0,
+        "activation_energy": {
+          "value": 0.5,
+          "unit": "eV",
+          "reference_id": "demo-ref",
+          "source": {
+            "calculation_id": "thermal-fixture",
+            "kind": "thermal_correction",
+            "artifact": {
+              "path": "tests/fixtures/multiphase/kinetic_reference.json",
+              "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+            }
+          }
+        },
+        "expression": "k(T) = A exp(-Ea / (kB T))"
+      },
+      "degeneracy": 1,
+      "coverage_terms": [],
+      "validity_range": {
+        "min_temperature_K": 300,
+        "max_temperature_K": 700,
+        "min_pressure_Pa": 90000,
+        "max_pressure_Pa": 160000
+      },
+      "uncertainty": null,
+      "sources": [
+        {
+          "calculation_id": "synthetic-demo",
+          "kind": "electronic_structure",
+          "artifact": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          }
+        },
+        {
+          "calculation_id": "thermal-fixture",
+          "kind": "thermal_correction",
+          "artifact": {
+            "path": "tests/fixtures/multiphase/kinetic_reference.json",
+            "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+          }
+        }
+      ],
+      "eligibility": "eligible",
+      "validation": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "parameter_set_id": "parameters-transfer",
+      "reaction_id": "transfer",
+      "rate_law_id": "mass-action",
+      "temperature_K": 400,
+      "pressure_Pa": 160000,
+      "energy_basis": "gibbs",
+      "energy_reference_id": "demo-ref",
+      "standard_state_id": "demo-standard",
+      "standard_states": {
+        "gas_pressure_Pa": 100000,
+        "solute_concentration_mol_m3": 1000,
+        "surface_activity_convention": "fractional site occupation"
+      },
+      "forward": {
+        "prefactor": 8334647649331.03,
+        "prefactor_unit": "s^-1",
+        "temperature_exponent": 0,
+        "activation_energy": {
+          "value": 0.76,
+          "unit": "eV",
+          "reference_id": "demo-ref",
+          "source": {
+            "calculation_id": "synthetic-cycle-transfer",
+            "kind": "thermal_correction",
+            "artifact": {
+              "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+              "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+            }
+          }
+        },
+        "expression": "k(T) = A exp(-Ea / (kB T))"
+      },
+      "reverse": {
+        "prefactor": 8334647649331.03,
+        "prefactor_unit": "s^-1",
+        "temperature_exponent": 0,
+        "activation_energy": {
+          "value": 0.74,
+          "unit": "eV",
+          "reference_id": "demo-ref",
+          "source": {
+            "calculation_id": "synthetic-cycle-transfer",
+            "kind": "thermal_correction",
+            "artifact": {
+              "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+              "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+            }
+          }
+        },
+        "expression": "k(T) = A exp(-Ea / (kB T))"
+      },
+      "degeneracy": 1,
+      "coverage_terms": [],
+      "validity_range": {
+        "min_temperature_K": 300,
+        "max_temperature_K": 700,
+        "min_pressure_Pa": 90000,
+        "max_pressure_Pa": 160000
+      },
+      "uncertainty": null,
+      "sources": [
+        {
+          "calculation_id": "synthetic-cycle-transfer",
+          "kind": "electronic_structure",
+          "artifact": {
+            "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+            "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+          }
+        },
+        {
+          "calculation_id": "synthetic-cycle-transfer",
+          "kind": "thermal_correction",
+          "artifact": {
+            "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+            "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+          }
+        }
+      ],
+      "eligibility": "eligible",
+      "validation": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "parameter_set_id": "parameters-hydrogenate",
+      "reaction_id": "hydrogenate",
+      "rate_law_id": "mass-action",
+      "temperature_K": 400,
+      "pressure_Pa": 160000,
+      "energy_basis": "gibbs",
+      "energy_reference_id": "demo-ref",
+      "standard_state_id": "demo-standard",
+      "standard_states": {
+        "gas_pressure_Pa": 100000,
+        "solute_concentration_mol_m3": 1000,
+        "surface_activity_convention": "fractional site occupation"
+      },
+      "forward": {
+        "prefactor": 83346476.4933103,
+        "prefactor_unit": "Pa^-1 s^-1",
+        "temperature_exponent": 0,
+        "activation_energy": {
+          "value": 0.78,
+          "unit": "eV",
+          "reference_id": "demo-ref",
+          "source": {
+            "calculation_id": "synthetic-cycle-hydrogenate",
+            "kind": "thermal_correction",
+            "artifact": {
+              "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+              "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+            }
+          }
+        },
+        "expression": "k(T) = A exp(-Ea / (kB T))"
+      },
+      "reverse": {
+        "prefactor": 8334647649331.03,
+        "prefactor_unit": "s^-1",
+        "temperature_exponent": 0,
+        "activation_energy": {
+          "value": 0.88,
+          "unit": "eV",
+          "reference_id": "demo-ref",
+          "source": {
+            "calculation_id": "synthetic-cycle-hydrogenate",
+            "kind": "thermal_correction",
+            "artifact": {
+              "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+              "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+            }
+          }
+        },
+        "expression": "k(T) = A exp(-Ea / (kB T))"
+      },
+      "degeneracy": 1,
+      "coverage_terms": [],
+      "validity_range": {
+        "min_temperature_K": 300,
+        "max_temperature_K": 700,
+        "min_pressure_Pa": 90000,
+        "max_pressure_Pa": 160000
+      },
+      "uncertainty": null,
+      "sources": [
+        {
+          "calculation_id": "synthetic-cycle-hydrogenate",
+          "kind": "electronic_structure",
+          "artifact": {
+            "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+            "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+          }
+        },
+        {
+          "calculation_id": "synthetic-cycle-hydrogenate",
+          "kind": "thermal_correction",
+          "artifact": {
+            "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+            "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+          }
+        }
+      ],
+      "eligibility": "eligible",
+      "validation": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      }
+    },
+    {
+      "schema_version": "1.0.0",
+      "parameter_set_id": "parameters-desorb",
+      "reaction_id": "desorb",
+      "rate_law_id": "mass-action",
+      "temperature_K": 400,
+      "pressure_Pa": 160000,
+      "energy_basis": "gibbs",
+      "energy_reference_id": "demo-ref",
+      "standard_state_id": "demo-standard",
+      "standard_states": {
+        "gas_pressure_Pa": 100000,
+        "solute_concentration_mol_m3": 1000,
+        "surface_activity_convention": "fractional site occupation"
+      },
+      "forward": {
+        "prefactor": 8334647649331.03,
+        "prefactor_unit": "s^-1",
+        "temperature_exponent": 0,
+        "activation_energy": {
+          "value": 0.8,
+          "unit": "eV",
+          "reference_id": "demo-ref",
+          "source": {
+            "calculation_id": "synthetic-cycle-desorb",
+            "kind": "thermal_correction",
+            "artifact": {
+              "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+              "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+            }
+          }
+        },
+        "expression": "k(T) = A exp(-Ea / (kB T))"
+      },
+      "reverse": {
+        "prefactor": 83346476.4933103,
+        "prefactor_unit": "Pa^-1 s^-1",
+        "temperature_exponent": 0,
+        "activation_energy": {
+          "value": 0.74,
+          "unit": "eV",
+          "reference_id": "demo-ref",
+          "source": {
+            "calculation_id": "synthetic-cycle-desorb",
+            "kind": "thermal_correction",
+            "artifact": {
+              "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+              "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+            }
+          }
+        },
+        "expression": "k(T) = A exp(-Ea / (kB T))"
+      },
+      "degeneracy": 1,
+      "coverage_terms": [],
+      "validity_range": {
+        "min_temperature_K": 300,
+        "max_temperature_K": 700,
+        "min_pressure_Pa": 90000,
+        "max_pressure_Pa": 160000
+      },
+      "uncertainty": null,
+      "sources": [
+        {
+          "calculation_id": "synthetic-cycle-desorb",
+          "kind": "electronic_structure",
+          "artifact": {
+            "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+            "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+          }
+        },
+        {
+          "calculation_id": "synthetic-cycle-desorb",
+          "kind": "thermal_correction",
+          "artifact": {
+            "path": "tests/fixtures/multiphase/closed_cycle_reference.json",
+            "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91"
+          }
+        }
+      ],
+      "eligibility": "eligible",
+      "validation": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      }
+    }
+  ],
+  "source_artifacts": [
+    {
+      "role": "verified_evidence",
+      "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728",
+      "file": "kinetic_reference.json"
+    },
+    {
+      "role": "verified_evidence",
+      "sha256": "05a41842327b1fd4cf41e0bd8eb09a7c0a01f1aeb64456aee06fbf3c28555f91",
+      "file": "closed_cycle_reference.json"
+    }
+  ],
+  "definition_sha256": "ff6c22cb051185b110948b5c7a50fdd6bee17c597f83b412e5b50607f129bff7",
+  "site_mapping_version": "5b922241a00facc0662e79e735af903782fc859e57b9f4e42f40401767f2b72f",
+  "thermochemistry_version": "143c0c02e1d4166b7825981b013d8fda6b9100b9df0f11bd97eb53d84eb20d4e",
+  "acceptance_record": {
+    "ads": {
+      "scientific_review": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      },
+      "user_confirmation": null,
+      "network_review": {
+        "subject_sha256": "a7bebe652eb4fb123e4daa4f795eaeb5092e95e7941ea0dc374f92cd053a4a3b",
+        "reaction_id": "ads",
+        "decision": "accepted",
+        "reviewer": "synthetic fixture",
+        "reason": "software benchmark only",
+        "reviewed_at": "2026-11-19T00:00:00Z"
+      }
+    },
+    "transfer": {
+      "scientific_review": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      },
+      "user_confirmation": null,
+      "network_review": {
+        "subject_sha256": "c1abc0760d1be3eae27a29d2aacf8d22e170ff24871730dd1ca20678e5054b9c",
+        "reaction_id": "transfer",
+        "decision": "accepted",
+        "reviewer": "synthetic fixture",
+        "reason": "software benchmark only",
+        "reviewed_at": "2026-11-19T00:00:00Z"
+      }
+    },
+    "hydrogenate": {
+      "scientific_review": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      },
+      "user_confirmation": null,
+      "network_review": {
+        "subject_sha256": "d2dbc6c8f1369991080cd927208dbc76988c9289420557a0a00f12ca78fc10b2",
+        "reaction_id": "hydrogenate",
+        "decision": "accepted",
+        "reviewer": "synthetic fixture",
+        "reason": "software benchmark only",
+        "reviewed_at": "2026-11-19T00:00:00Z"
+      }
+    },
+    "desorb": {
+      "scientific_review": {
+        "status": "accepted",
+        "review": {
+          "path": "tests/fixtures/multiphase/kinetic_reference.json",
+          "sha256": "e13986824d2c2cb5ef2eb828dbdfa3e728b862dde4f259d8e5cdde46eb7d0728"
+        }
+      },
+      "user_confirmation": null,
+      "network_review": {
+        "subject_sha256": "262df25c640538588aa774a5c600d1287eeccdf06bc49c185797b1c163684103",
+        "reaction_id": "desorb",
+        "decision": "accepted",
+        "reviewer": "synthetic fixture",
+        "reason": "software benchmark only",
+        "reviewed_at": "2026-11-19T00:00:00Z"
+      }
+    }
+  },
+  "validation_report": {
+    "levels": {
+      "ads": "KINETICALLY_ELIGIBLE",
+      "transfer": "KINETICALLY_ELIGIBLE",
+      "hydrogenate": "KINETICALLY_ELIGIBLE",
+      "desorb": "KINETICALLY_ELIGIBLE"
+    },
+    "independent_cycles_checked": 0,
+    "reactions": {
+      "ads": [],
+      "transfer": [],
+      "hydrogenate": [],
+      "desorb": []
+    },
+    "mkm_status": "eligible",
+    "execution_authorized": false
+  }
+}

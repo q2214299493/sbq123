@@ -1,0 +1,1 @@
+"""Shared kinetic data mathematics."""

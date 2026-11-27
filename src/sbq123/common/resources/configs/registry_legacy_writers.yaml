@@ -1,0 +1,22 @@
+version: 1
+policy: no_new_direct_sqlite_registry_writers
+replacement: scripts/registry_write.py
+legacy_writers:
+  - calculations/fe110_c_h_coadsorption_20260817/provenance/register_status_checkpoint_20260818.py
+  - calculations/fe110_c_h_coadsorption_20260817/provenance/register_submission.py
+  - calculations/fe110_c_h_coadsorption_20260817/provenance/register_termination_and_endpoint_review_20260818.py
+  - calculations/fe110_ch_h_coadsorption_20260808/provenance/register_runtime_checkpoint.py
+  - calculations/fe110_ch_h_coadsorption_20260808/provenance/register_submission_batch.py
+  - calculations/fe110_ch_h_coadsorption_20260808/provenance/register_submission.py
+  - calculations/fe110_ch_h_to_ch2_ts_20260810/register_completed_neb_checkpoint.py
+  - calculations/fe110_ch_h_to_ch2_ts_20260810/register_dimer_submission.py
+  - calculations/fe110_ch_h_to_ch2_ts_20260810/register_dimer_terminal.py
+  - calculations/fe110_ch_h_to_ch2_ts_20260810/register_formal_barrier.py
+  - calculations/fe110_ch_h_to_ch2_ts_20260810/register_formal_ts_acceptance.py
+  - calculations/fe110_ch_h_to_ch2_ts_20260810/register_pilot_submission.py
+  - calculations/fe110_ch_h_to_ch2_ts_20260810/register_production_submission.py
+  - calculations/fe110_ch_h_to_ch2_ts_20260810/register_strategy_template.py
+  - calculations/fe110_ch_h_to_ch2_ts_20260810/register_vfa_completion.py
+  - calculations/fe110_ch_h_to_ch2_ts_20260810/register_vfa_submission.py
+  - calculations/fe110_co_dissociation_neb_20260718/provenance/register_matched_statics.py
+  - calculations/fe110_co_dissociation_neb_20260718/provenance/register_sigma0p20_formal_barrier.py

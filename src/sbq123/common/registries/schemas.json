@@ -1,0 +1,199 @@
+{
+  "analysis": {
+    "additionalProperties": false,
+    "properties": {
+      "mode": {
+        "enum": [
+          "molar"
+        ]
+      },
+      "selectivity_denominator": {
+        "enum": [
+          "reactant_consumed"
+        ]
+      },
+      "yield_denominator": {
+        "enum": [
+          "reactant_fed"
+        ]
+      }
+    },
+    "required": [
+      "mode",
+      "yield_denominator",
+      "selectivity_denominator"
+    ],
+    "type": "object"
+  },
+  "basis_conversions": {
+    "additionalProperties": false,
+    "properties": {
+      "approval": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "model_sha256": {
+        "pattern": "^[0-9a-f]{64}$",
+        "type": "string"
+      },
+      "mol_sites_per_kg": {
+        "exclusiveMinimum": 0,
+        "type": "number"
+      },
+      "scope": {
+        "enum": [
+          "analytical_control",
+          "archived_software_benchmark",
+          "reviewed_project"
+        ]
+      }
+    },
+    "required": [
+      "model_sha256",
+      "mol_sites_per_kg",
+      "scope",
+      "approval"
+    ],
+    "type": "object"
+  },
+  "catalysts": {
+    "additionalProperties": false,
+    "properties": {
+      "conversion_ids": {
+        "items": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "type": "array",
+        "uniqueItems": true
+      },
+      "scope": {
+        "enum": [
+          "analytical_control",
+          "archived_software_benchmark",
+          "reviewed_project"
+        ]
+      }
+    },
+    "required": [
+      "scope",
+      "conversion_ids"
+    ],
+    "type": "object"
+  },
+  "datasets": {
+    "additionalProperties": false,
+    "properties": {
+      "model": {
+        "type": "object"
+      },
+      "scope": {
+        "enum": [
+          "analytical_control",
+          "archived_software_benchmark",
+          "reviewed_project"
+        ]
+      },
+      "sha256": {
+        "pattern": "^[0-9a-f]{64}$",
+        "type": "string"
+      }
+    },
+    "required": [
+      "model",
+      "sha256",
+      "scope"
+    ],
+    "type": "object"
+  },
+  "drc": {
+    "additionalProperties": false,
+    "properties": {
+      "denominator": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "perturbation": {
+        "enum": [
+          "symmetric_transition_state"
+        ]
+      },
+      "scope": {
+        "enum": [
+          "fixed_root"
+        ]
+      },
+      "target": {
+        "minLength": 1,
+        "type": "string"
+      }
+    },
+    "required": [
+      "target",
+      "denominator",
+      "perturbation",
+      "scope"
+    ],
+    "type": "object"
+  },
+  "engine_families": {
+    "additionalProperties": false,
+    "properties": {
+      "archived_engine_sha256": {
+        "anyOf": [
+          {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "native": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "role": {
+        "enum": [
+          "mkm",
+          "kmc"
+        ]
+      }
+    },
+    "required": [
+      "role",
+      "native",
+      "archived_engine_sha256"
+    ],
+    "type": "object"
+  },
+  "replay": {
+    "additionalProperties": false,
+    "properties": {
+      "path": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "scope": {
+        "enum": [
+          "analytical_control",
+          "archived_software_benchmark",
+          "reviewed_project"
+        ]
+      },
+      "sha256": {
+        "pattern": "^[0-9a-f]{64}$",
+        "type": "string"
+      }
+    },
+    "required": [
+      "path",
+      "sha256",
+      "scope"
+    ],
+    "type": "object"
+  }
+}

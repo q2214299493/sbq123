@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.sbq123.invalid/multiphase/1.0.0/simulation_run.schema.json",
+  "title": "simulation run v1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "engine",
+    "engine_version",
+    "parameter_set_ids",
+    "inputs",
+    "outputs",
+    "execution_status",
+    "numerical_convergence",
+    "scientific_validity",
+    "approval_status",
+    "approval_receipt"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "run_id": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+    "engine": {"enum": ["CATKINAS", "Zacros", "reactor"]},
+    "engine_version": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/text"},
+    "parameter_set_ids": {
+      "type": "array",
+      "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/id"},
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "inputs": {"type": "object"},
+    "outputs": {
+      "type": "array",
+      "items": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"},
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "execution_status": {"enum": ["planned", "running", "succeeded", "failed", "timed_out", "cancelled"]},
+    "numerical_convergence": {"enum": ["unassessed", "converged", "unconverged", "inapplicable"]},
+    "scientific_validity": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/validation"},
+    "approval_status": {"enum": ["pending", "approved", "denied"]},
+    "approval_receipt": {
+      "anyOf": [
+        {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"},
+        {"type": "null"}
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"engine": {"const": "CATKINAS"}}
+      },
+      "then": {
+        "properties": {
+          "inputs": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["matlab_input", "thermodynamics_data"],
+            "properties": {
+              "matlab_input": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"},
+              "thermodynamics_data": {
+                "anyOf": [
+                  {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"},
+                  {"type": "null"}
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"engine": {"const": "Zacros"}}
+      },
+      "then": {
+        "properties": {
+          "inputs": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["simulation_input", "lattice_input", "mechanism_input", "energetics_input", "state_input"],
+            "properties": {
+              "simulation_input": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"},
+              "lattice_input": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"},
+              "mechanism_input": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"},
+              "energetics_input": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"},
+              "state_input": {
+                "anyOf": [
+                  {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"},
+                  {"type": "null"}
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"engine": {"const": "reactor"}}
+      },
+      "then": {
+        "properties": {
+          "inputs": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["model_definition", "rate_provider", "operating_conditions"],
+            "properties": {
+              "model_definition": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"},
+              "rate_provider": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"},
+              "operating_conditions": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"approval_status": {"const": "approved"}}
+      },
+      "then": {
+        "properties": {
+          "approval_receipt": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"approval_status": {"const": "denied"}}
+      },
+      "then": {
+        "properties": {
+          "approval_receipt": {"$ref": "https://schemas.sbq123.invalid/multiphase/1.0.0/common.schema.json#/$defs/artifact"}
+        }
+      }
+    }
+  ]
+}
