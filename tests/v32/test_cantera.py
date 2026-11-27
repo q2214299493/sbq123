@@ -66,6 +66,45 @@ def test_pfr_refinement_and_reversible_rate():
         assert result["evidence_provenance"]["mechanism_rate_comparison_max_relative"] < 1e-9
 
 
+@pytest.mark.parametrize(
+    "scale,loading,area",
+    [(1.0, 1.0, 1.0), (0.5, 0.5, 0.5), (2.0, 2.0, 2.0), (1.0, 1e-6, 1.0), (1.0, 1.0, 0.25)],
+)
+def test_fixed_surface_pfr_area_and_loading(scale, loading, area):
+    result = run("PFR", scale=scale, surface=True, catalyst_loading_kg=loading, area_m2=area)
+    for row in result["points"]:
+        extent = row["amount_or_flow"]["B"] / scale
+        tau = row["coordinate"] * area / scale
+        # Integrated Langmuir balance, evaluated without subtracting near-equal concentrations.
+        dose = loading / scale * tau
+        assert abs(math.log1p(-extent) - extent + dose) <= 3e-14 + 2e-8 * dose
+        assert row["conversion"] == pytest.approx(extent, abs=3e-14)
+        assert row["amount_or_flow"]["A"] / scale == pytest.approx(1 - extent, abs=3e-14)
+        assert row["residence_time_s"] == pytest.approx(tau, abs=2e-8)
+
+
+def test_fixed_surface_pfr_rejects_trace_product_area_error(monkeypatch):
+    from sbq123.common.kinetic_model.contracts import RootFailure
+    from sbq123.reactor.models import pfr
+
+    good = run("PFR", surface=True, catalyst_loading_kg=1e-6)
+    # Recreate the rejected total-area weighting on the actual Cantera interface.
+    attach = pfr.ct.ReactorSurface
+
+    def wrong_area(interface, reactor, *, clone, A):
+        return attach(interface, reactor, clone=clone, A=A * 1e-6)
+
+    monkeypatch.setattr(pfr.ct, "ReactorSurface", wrong_area)
+    with pytest.raises(RootFailure, match="Independent axial species balance failed") as caught:
+        run("PFR", surface=True, catalyst_loading_kg=1e-6)
+    receipt = caught.value.receipt
+    assert receipt["converged"] is False
+    assert receipt["input_sha256"] == good["input_sha256"]
+    assert receipt["species"] == ["A", "B"]
+    for residual, tolerance in zip(receipt["residual_per_feed"], receipt["tolerance_per_feed"], strict=True):
+        assert tolerance < abs(residual) < 2e-6
+
+
 def test_unsupported_thermodynamics_and_geometry():
     with pytest.raises(ValueError):
         mechanism("v31-closed-cycle", volume_m3=1)
@@ -74,3 +113,30 @@ def test_unsupported_thermodynamics_and_geometry():
     for seed in ([True], ["0.5"], [1.1]):
         with pytest.raises(ValueError):
             run("PFR", surface=True, initial_coverage=seed)
+
+
+@pytest.mark.parametrize("fraction", [1e-16, 1e-14, 1e-12, 1e-10, 1e-8, 1e-6, 1.0])
+def test_dilute_surface_pfr(fraction):
+    result = run("PFR", surface=True, composition={"A": fraction, "B": 1 - fraction},
+                 initial_coverage=[fraction / (1 + fraction)])
+    for row in result["points"]:
+        # Normalizing by reactant feed keeps the integrated Langmuir equation
+        # well-conditioned even when the outlet product increment is below 1 ULP.
+        x = row["conversion"]
+        assert abs(-math.log1p(-x) + fraction * x - row["coordinate"]) < 2e-7
+        assert row["yield_mol_per_mol_fed"] == pytest.approx(x, abs=2e-7)
+    receipt = result["solver"]["species_balance"]
+    assert abs(receipt["relative_species_residual"][0]) < 2e-6
+    assert receipt["tolerance_per_feed"][0] <= 2e-6 * fraction * (1 + 1e-12)
+
+
+def test_dilute_surface_pfr_unresolved_quadrature():
+    from sbq123.common.kinetic_model.contracts import RootFailure
+
+    fraction = 1e-14
+    with pytest.raises(RootFailure, match="axial species balance") as caught:
+        run("PFR", surface=True, axial_intervals=4, composition={"A": fraction, "B": 1 - fraction},
+            initial_coverage=[fraction / (1 + fraction)])
+    receipt = caught.value.receipt
+    assert not receipt["converged"] and len(receipt["input_sha256"]) == 64
+    assert receipt["quadrature_difference_per_feed"][0] > receipt["quadrature_tolerance_per_feed"][0]

@@ -4,7 +4,7 @@ from copy import deepcopy
 import hashlib
 import cantera as ct
 from sbq123.common.evidence.registry import entry
-from sbq123.common.kinetic_model.contracts import identity, integer, number
+from sbq123.common.kinetic_model.contracts import RootFailure, identity, integer, number
 from ._trust import COMPANION_SHA256
 from .mechanism import mechanism, verify_conversion
 from .models.cstr import stirred_tank
@@ -55,7 +55,18 @@ def simulate(
     case = Case(m, inputs)
     mismatch = verify_conversion(m, case.t, case.p)
     if kind == "PFR":
-        rows, solver, receipts = plug_flow(case, number(area_m2, "PFR area", positive=True), points, axial_intervals)
+        try:
+            rows, solver, receipts = plug_flow(case, number(area_m2, "PFR area", positive=True), points, axial_intervals)
+        except RootFailure as exc:
+            if mode == "fixed" and m.surface is not None:
+                if "residual_per_feed" not in exc.receipt:
+                    # A failed native solve has no final outlet to balance.
+                    exc.receipt.update(species=case.names, residual_per_feed=[None] * len(case.names))
+                    if "tolerance_per_feed" not in exc.receipt:
+                        exc.receipt.update(tolerance_per_feed=(2e-6 * case.x).tolist(),
+                                           tolerance_basis="inlet fractions; final outlet unavailable")
+                exc.receipt["input_sha256"] = input_hash
+            raise
     else:
         rows, solver, receipts = stirred_tank(case, inputs["cstr_seeds"])
     doc = dict(
