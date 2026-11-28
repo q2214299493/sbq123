@@ -7,6 +7,10 @@ from sbq123.common.kinetic_model.contracts import RootFailure, number
 from .kinetics.source import LocalSource
 
 
+# Dimensionless resolution for CSTR surface flux imbalance and site fractions.
+CSTR_SURFACE_TOL = 1e-8
+
+
 class Case:
     def __init__(self, mechanism, inputs):
         self.m = mechanism
@@ -118,8 +122,9 @@ class Case:
         if not np.all(np.isfinite(rates)) or np.any(abs(rates - expected) > 2e-8 * np.maximum(gas_traffic, 1e-30)):
             raise RootFailure("Local species rates disagree with the registered kinetic model")
         surf_idx = [i for i, p in enumerate(self.m.model.phases) if p == "surface"]
+        surface_tol = CSTR_SURFACE_TOL if self.opts["kind"] == "CSTR" else 2e-7
         if surf_idx and (
-            min(cover) < -1e-9 or min(vacant) < -1e-9 or any(abs(predicted[i]) > 2e-7 * max(traffic[i], 1e-20) for i in surf_idx)
+            min(cover) < -1e-9 or min(vacant) < -1e-9 or any(abs(predicted[i]) > surface_tol * max(traffic[i], 1e-20) for i in surf_idx)
         ):
             raise RootFailure("Surface inventory or local steady balance failed")
         outlet_mdot = self.mdot if mdot is None else mdot

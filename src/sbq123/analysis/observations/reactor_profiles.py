@@ -42,6 +42,11 @@ def compare_operating_points(left, right, variable):
                   change=None, interpretation=None, scope=[a["scope"], b["scope"]])
     conditions = [dict(r["conditions"]) for r in (a, b)]
     levels = [c.pop(variable) for c in conditions]
+    for profile, condition in zip((a, b), conditions, strict=True):
+        if profile["reactor"] == "CSTR" and len(profile["points"]) == 1:
+            # Solver starts remain in the signed result, outside the physical operating contrast.
+            condition.pop("cstr_seeds", None)
+            condition.pop("initial_coverage", None)
     # Project selectors may carry different approved companion or conversion records across deployments.
     bindings = ("mechanism_sha256", "rate_basis", "rate_factor_to_volume", "denominators", "scope")
     same_basis = all(left[0][field] == right[0][field] for field in bindings)

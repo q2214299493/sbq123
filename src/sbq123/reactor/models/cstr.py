@@ -6,7 +6,7 @@ import numpy as np
 from sbq123.common.kinetic_model.contracts import RootFailure, identity, number
 from ..balance import account, configure_precision
 from ..kinetics.source import CoupledTank
-from ..state import network
+from ..state import CSTR_SURFACE_TOL, network
 
 
 def _one(case, start, coverage=None):
@@ -123,9 +123,9 @@ def _joint_state(row, surface_names):
 
 def _same_root(left, right):
     # Compare matching named components before assigning a common representative.
-    for field in ("mole_fractions", "surface_coverage"):
+    for field, atol, rtol in (("mole_fractions", 1e-8, 1e-7), ("surface_coverage", CSTR_SURFACE_TOL, 0.0)):
         a, b = left[field], right[field]
-        if a.keys() != b.keys() or not np.allclose(list(a.values()), [b[name] for name in a], atol=1e-8, rtol=1e-7):
+        if a.keys() != b.keys() or not np.allclose(list(a.values()), [b[name] for name in a], atol=atol, rtol=rtol):
             return False
     return True
 

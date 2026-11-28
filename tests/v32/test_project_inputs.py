@@ -101,14 +101,28 @@ def test_independent_sites_and_inert_pfr(tmp_path, monkeypatch, mode):
 
 
 def test_slow_surface_at_high_ghsv_with_joint_seed(tmp_path, monkeypatch):
+    from sbq123.analysis.observations.reactor_profiles import compare_operating_points
     from sbq123.reactor import simulate
+
     args = _surface_project(tmp_path, monkeypatch, multisite=False)
-    args.update(volume_m3=1e-7,catalyst_loading_kg=1e-7,cstr_seeds=[{"gas_flow_mol_s":[1.,0.],"surface_coverage":[.9]}])
+    args.update(volume_m3=1e-7, catalyst_loading_kg=1e-7,
+                cstr_seeds=[{"gas_flow_mol_s": [1., 0.], "surface_coverage": [.9]}])
     out = simulate("CSTR", **args)
-    end = out["points"][0]
-    assert end["coverage"][0] == pytest.approx(.5,abs=2e-6)
-    assert end["conversion"] > 0
-    assert any(s.get("seed_surface_coverage")==[.9] and s["status"]=="converged" for s in out["solver"]["seed_outcomes"])
+    args.update(pressure_Pa=args["pressure_Pa"] * 1.1, initial_coverage=[.8], cstr_seeds=[])
+    other = simulate("CSTR", **args)
+    for result in (out, other):
+        assert result["solver"]["roots_found"] == len(result["points"]) == 1
+        point = result["points"][0]
+        assert all(seed["status"] == "converged" and seed["root_sha256"] == point["root_sha256"]
+                   for seed in result["solver"]["seed_outcomes"])
+        # For these manufactured rates, 2 c_A (1 - theta) = 2 theta.
+        c_a = point["concentration_mol_m3"]["A"]
+        assert point["coverage"][0] == pytest.approx(c_a / (1 + c_a), rel=0, abs=1e-8)
+        assert point["conversion"] > 0
+    assert any(seed.get("seed_surface_coverage") == [.9] for seed in out["solver"]["seed_outcomes"])
+    contrast = compare_operating_points((out, out["result_sha256"]), (other, other["result_sha256"]), "pressure_Pa")
+    assert contrast["status"] == "available"
+    assert contrast["change"]["conversion"] == pytest.approx(other["points"][0]["conversion"] - out["points"][0]["conversion"])
 
 
 def test_non_equimolar_fixed_momentum(monkeypatch):

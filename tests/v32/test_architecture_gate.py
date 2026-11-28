@@ -3,7 +3,6 @@ import ast
 from hashlib import sha256
 from importlib.resources import files
 import os
-from pathlib import Path
 import subprocess
 import sys
 import sysconfig
