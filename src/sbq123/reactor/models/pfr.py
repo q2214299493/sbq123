@@ -5,9 +5,10 @@ from dataclasses import dataclass
 import cantera as ct
 import numpy as np
 from scipy.integrate import cumulative_simpson, simpson
-from scipy.interpolate import CubicSpline
+from scipy.interpolate import BSpline, CubicSpline, make_interp_spline
 
 from sbq123.common.kinetic_model.contracts import RootFailure
+from ..balance import account, configure_precision
 from ..kinetics.source import CoupledTank
 from ..state import network, propagate
 
@@ -20,7 +21,9 @@ class _Trajectory:
     checkpoints: tuple
     branch: object
     solver: dict
-    integrated_flows: np.ndarray | None
+    progress: BSpline
+    check_progress: BSpline
+    stretch: float
 
 
 def plug_flow(case, area, points, intervals):
@@ -63,8 +66,7 @@ def _integrate(case, area, intervals):
     # Resolve rapid inlet layers using the turnover time of the feed.
     inlet_rates = case.m.signed_rates(physical_gas, physical_surface)
     damkohler = max(abs(inlet_rates)) * length / (speed * sum(physical_gas.concentrations) * 1000)
-    if guarded:
-        scales = _configure_surface_precision(case, net, physical_gas, inlet_rates)
+    scales = configure_precision(case, net, physical_gas, inlet_rates)
     stretch = np.log1p(damkohler)
     n = max(intervals, int(np.ceil(16 * stretch)))
     s = np.linspace(0, 1, 2 * n + 1)
@@ -74,7 +76,8 @@ def _integrate(case, area, intervals):
     else:
         grid, jacobian = length * s, np.full_like(s, length)
     grid[-1] = length
-    states, rates, velocities, anchors, branch_ids = [], [], [], [], []
+    states, velocities, anchors, branch_ids = [], [], [], []
+    directional = []
     try:
         net.initialize()
         for i, z in enumerate(grid):
@@ -91,7 +94,9 @@ def _integrate(case, area, intervals):
                 )
             velocities.append(case.mdot / gas.density / area if branch else reactor.speed)
             states.append([gas.T, gas.P, *gas.X, *(current_surface.coverages if current_surface is not None else [])])
-            rates.append(list(obs["source_mol_m3_s"].values()))
+            directional.append([list(obs[key].values()) for key in (
+                "source_mol_m3_s", "creation_mol_m3_s", "destruction_mol_m3_s"
+            )])
             if branch:
                 anchors.append(branch.checkpoint)
                 branch_ids.append(obs["local_receipt_sha256"])
@@ -101,17 +106,28 @@ def _integrate(case, area, intervals):
     if not np.isfinite(velocities).all() or min(velocities) <= 0:
         raise RootFailure("Invalid PFR local velocity")
     tau = cumulative_simpson(jacobian / velocities, x=s, initial=0)
-    integrated = area * simpson(np.asarray(rates) * jacobian[:, None], x=s, axis=0)
     outlet = np.array(list(obs["amount_or_flow"].values()))
-    residual = (outlet - case.feed - integrated) / case.fin
-    integrated_flows = None
-    diagnostics = {}
+    # Integrate in the physical mesh parameter. Both polynomials interpolate
+    # signed and directional sources, never the requested reporting stations.
+    weighted = np.asarray(directional) * (area * jacobian[:, None, None])
+    progress = make_interp_spline(s, weighted, k=5).antiderivative()
+    check_progress = make_interp_spline(s, weighted[:, 0], k=3).antiderivative()
+    simpson_flow = simpson(weighted[:, 0], x=s, axis=0)
     if guarded:
-        source = np.asarray(rates) * jacobian[:, None] * area
-        integrated_flows = cumulative_simpson(source, x=s, axis=0, initial=0)
-        diagnostics = _surface_balance(case, net, scales, outlet, integrated, residual, source, s)
-    elif not np.isfinite(residual).all() or max(abs(residual)) > 2e-6:
-        raise RootFailure("Independent axial species balance failed", {"converged": False, "residual_per_feed": residual.tolist()})
+        # Retain the independent full/alternate Simpson test of the area correction.
+        integrated = simpson_flow
+        reference = simpson(weighted[::2, 0], x=s[::2], axis=0)
+    else:
+        integrated = progress(1.0)[0]
+        reference = check_progress(1.0)
+        original_residual = (outlet - case.feed - simpson_flow) / case.fin
+        if not np.isfinite(original_residual).all() or np.any(abs(original_residual) > 2e-6):
+            raise RootFailure("Independent axial species balance failed", {
+                "converged": False, "residual_per_feed": original_residual.tolist(),
+                "tolerance_per_feed": [2e-6] * len(case.names), "method": "full-grid Simpson",
+            })
+    residual = (outlet - case.feed - integrated) / case.fin
+    diagnostics = _axial_balance(case, net, scales, outlet, integrated, residual, reference)
     solver = dict(
         success=True,
         method="Cantera/ReactorNet/CVODES local-source parcel" if branch else "Cantera/FlowReactor/IDA",
@@ -123,28 +139,10 @@ def _integrate(case, area, intervals):
         residual_tolerance=2e-6,
         **diagnostics,
     )
-    return _Trajectory(grid, np.asarray(states), tau, tuple(anchors), branch, solver, integrated_flows)
+    return _Trajectory(grid, np.asarray(states), tau, tuple(anchors), branch, solver, progress, check_progress, stretch)
 
 
-def _configure_surface_precision(case, net, gas, inlet_rates):
-    """Select a scalar IDA atol that resolves the smallest active mass fraction."""
-    weights = gas.molecular_weights
-    # For an initially absent species, V * |R_in| estimates its mol/s
-    # production over one inlet residence time. IDA integrates mass fractions.
-    generated = np.minimum(1.0, abs(inlet_rates) * case.volume * weights / (1000 * case.mdot))
-    scales = np.where(gas.Y > 0, gas.Y, generated)
-    target_atol = min(net.atol, net.rtol * min(scales[scales > 0]))
-    if target_atol < np.finfo(float).tiny or case.feed[case.ia] == 0:
-        raise RootFailure("Species scale is below the native integration range", {
-            "converged": False, "requested_native_atol": target_atol,
-            "tolerance_per_feed": (2e-6 * scales * gas.mean_molecular_weight / weights).tolist(),
-            "tolerance_basis": "inlet state estimate; outlet unavailable",
-        })
-    net.atol = target_atol
-    return scales
-
-
-def _surface_balance(case, net, scales, outlet, integrated, residual, source, s):
+def _axial_balance(case, net, scales, outlet, integrated, residual, reference):
     """Compare molar-flow closure and quadrature accuracy on each species basis."""
     extent = abs(integrated) / case.fin
     population = np.maximum(case.feed, outlet) / case.fin
@@ -154,9 +152,9 @@ def _surface_balance(case, net, scales, outlet, integrated, residual, source, s)
     budget = 2e-6 * np.minimum(1.0, scale)
     tolerance = np.minimum(budget, 32 * net.atol + 2 * net.rtol * population + 2e-6 * extent)
     relative = np.divide(residual, scale, out=np.zeros_like(residual), where=scale > 0)
-    # A second quadrature on alternate physical stations also checks small
+    # A second physical quadrature also checks small
     # net production when subtraction from a large inlet loses precision.
-    quadrature_error = abs(integrated - simpson(source[::2], x=s[::2], axis=0)) / case.fin
+    quadrature_error = abs(integrated - reference) / case.fin
     receipt = {
         "species": case.names, "native_atol": net.atol, "native_rtol": net.rtol,
         "inlet_mass_fraction_scales": dict(zip(case.names, scales.tolist())),
@@ -199,7 +197,7 @@ def _profiles(case, trajectory, points):
     length = grid[-1]
     interpolate = CubicSpline(grid, trajectory.states, axis=0)
     time_at = CubicSpline(grid, trajectory.residence_times)
-    extent_at = CubicSpline(grid, trajectory.integrated_flows, axis=0) if trajectory.integrated_flows is not None else None
+    precision = trajectory.solver["species_balance"]
     report_gas, report_surface = case.phases(case.x)
     rows = []
     for z in np.linspace(0, length, points):
@@ -219,17 +217,15 @@ def _profiles(case, trajectory, points):
             report_surface.TP = report_gas.TP
             report_surface.coverages = np.maximum(fractions, 0)
         row = case.observe(report_gas, report_surface, report_source, z, float(time_at(z)))
-        if extent_at is not None:
-            # A trace increment on top of a bulk co-feed can be smaller than
-            # one ULP of its outlet. Recover that increment from signed flux.
-            flows = np.array(list(row["amount_or_flow"].values()))
-            delta = flows - case.feed
-            cancellation = abs(delta) * 2e-6 <= 2 * np.finfo(float).eps * np.maximum(flows, case.feed)
-            delta = np.where(cancellation, extent_at(z), delta)
-            consumed, formed = -delta[case.ia], delta[case.ib]
-            row.update(conversion=float(consumed / case.feed[case.ia]),
-                       yield_mol_per_mol_fed=float(formed / case.feed[case.ia]),
-                       selectivity_mol_per_mol_consumed=float(formed / consumed)
-                       if abs(consumed) > 1e-12 * case.feed[case.ia] else None)
+        distance = z / length
+        if trajectory.stretch > 1e-5:
+            distance = np.log1p(distance * np.expm1(trajectory.stretch)) / trajectory.stretch
+        signed, created, destroyed = trajectory.progress(distance)
+        population = np.maximum(case.feed, list(row["amount_or_flow"].values()))
+        scale = np.maximum(population, abs(signed))
+        tol = np.minimum(2e-6 * np.minimum(case.fin, scale),
+                         32 * precision["native_atol"] * case.fin + 2 * precision["native_rtol"] * population + 2e-6 * abs(signed))
+        row["species_balance"] = account(case, row, signed, created, destroyed, tol,
+                                         rtol=precision["native_rtol"], error=signed - trajectory.check_progress(distance))
         rows.append(row)
     return rows

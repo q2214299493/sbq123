@@ -35,7 +35,31 @@ def local_point(model, gas, temperature, pressure, anchor, max_distance, tol=1e-
 
     solution = least_squares(residual, anchor, bounds=(0, 1), gtol=1e-13, xtol=1e-13, ftol=1e-13, max_nfev=400)
     theta = solution.x
-    rates, vacancy = model.source(gas, theta, temperature, pressure)
+    rates, vacancy, traffic = model.production(gas, theta, temperature, pressure)
+    local_traffic = np.asarray(traffic)[indices]
+    refinement = {}
+    if np.any(abs(np.asarray(rates)[indices]) > tol * local_traffic):
+        # The physical lower bound is zero. In unscaled coordinates the
+        # bounded solver can displace a trace anchor by many orders of
+        # magnitude. Retry in units of the anchor or the inventory needed
+        # to balance the empty-surface source against characteristic traffic.
+        empty = np.asarray(model.source(gas, np.zeros_like(anchor), temperature, pressure)[0])[indices]
+        units = np.maximum(anchor, np.minimum(1.0, abs(empty) / scale))
+        units = np.where(units > np.finfo(float).tiny, units, 1.0)
+        local_scale = np.asarray(model.production(gas, units, temperature, pressure)[2])[indices]
+        local_scale = np.where(local_scale > 0, local_scale, scale)
+
+        def scaled_residual(y):
+            values = model.source(gas, units * y, temperature, pressure)[0]
+            return np.asarray(values)[indices] / local_scale
+
+        refinement = dict(coverage_scales=units.tolist(), local_equation_scales=local_scale.tolist(),
+                          initial_evaluations=int(solution.nfev))
+        solution = least_squares(scaled_residual, anchor / units, bounds=(0, 1 / units),
+                                 gtol=1e-13, xtol=1e-13, ftol=1e-13, max_nfev=400)
+        theta = units * solution.x
+        rates, vacancy, traffic = model.production(gas, theta, temperature, pressure)
+        local_traffic = np.asarray(traffic)[indices]
     norm = float(np.linalg.norm(residual(theta), ord=np.inf))
     distance = float(np.max(np.abs(theta - anchor)))
     orientation = int(np.linalg.slogdet(solution.jac)[0])
@@ -49,6 +73,9 @@ def local_point(model, gas, temperature, pressure, anchor, max_distance, tol=1e-
             temperature_K=temperature,
             pressure_Pa=pressure,
             scaled_residual_inf=norm,
+            local_surface_signed_residual=np.asarray(rates)[indices].tolist(),
+            local_surface_tolerance=(tol * local_traffic).tolist(),
+            **refinement,
             residual_inf=float(np.max(np.abs(np.asarray(rates)[indices]))),
             equation_scales=scale.tolist(),
             candidate=theta.tolist(),
@@ -57,6 +84,8 @@ def local_point(model, gas, temperature, pressure, anchor, max_distance, tol=1e-
         )
         raise RootFailure(reason, dict(failure, receipt_sha256=identity(failure)))
 
+    if np.any(abs(np.asarray(rates)[indices]) > tol * local_traffic):
+        reject("Unresolved local surface reaction traffic")
     if not solution.success or norm > tol or min(vacancy, default=1) < -tol:
         reject("Unconverged or unphysical local surface root")
     if np.linalg.matrix_rank(solution.jac) < len(indices):
@@ -82,5 +111,6 @@ def local_point(model, gas, temperature, pressure, anchor, max_distance, tol=1e-
         orientation=orientation,
         root_state_sha256=identity(theta.tolist()),
         solver="bounded_least_squares",
+        **refinement,
     )
     return rates, dict(record, receipt_sha256=identity(record))

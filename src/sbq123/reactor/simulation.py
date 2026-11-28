@@ -2,6 +2,7 @@
 
 from copy import deepcopy
 import hashlib
+import math
 import cantera as ct
 from sbq123.common.evidence.registry import entry
 from sbq123.common.kinetic_model.contracts import RootFailure, identity, integer, number
@@ -10,6 +11,17 @@ from .mechanism import mechanism, verify_conversion
 from .models.cstr import stirred_tank
 from .models.pfr import plug_flow
 from .state import Case
+
+
+def _finite_diagnostic(value):
+    """JSON null denotes a diagnostic quantity unavailable in a failed solve."""
+    if isinstance(value, dict):
+        return {k: _finite_diagnostic(v) for k, v in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_finite_diagnostic(v) for v in value]
+    if isinstance(value, float) and not math.isfinite(value):
+        return None
+    return value
 
 
 def simulate(
@@ -54,21 +66,30 @@ def simulate(
     m = mechanism(dataset_id, volume_m3=volume_m3, catalyst_loading_kg=catalyst_loading_kg, catalyst=catalyst, conversion_id=conversion_id)
     case = Case(m, inputs)
     mismatch = verify_conversion(m, case.t, case.p)
-    if kind == "PFR":
-        try:
+    try:
+        if kind == "PFR":
             rows, solver, receipts = plug_flow(case, number(area_m2, "PFR area", positive=True), points, axial_intervals)
-        except RootFailure as exc:
-            if mode == "fixed" and m.surface is not None:
-                if "residual_per_feed" not in exc.receipt:
-                    # A failed native solve has no final outlet to balance.
-                    exc.receipt.update(species=case.names, residual_per_feed=[None] * len(case.names))
-                    if "tolerance_per_feed" not in exc.receipt:
-                        exc.receipt.update(tolerance_per_feed=(2e-6 * case.x).tolist(),
-                                           tolerance_basis="inlet fractions; final outlet unavailable")
-                exc.receipt["input_sha256"] = input_hash
+        else:
+            rows, solver, receipts = stirred_tank(case, inputs["cstr_seeds"])
+    except (ValueError, ArithmeticError, ct.CanteraError) as error:
+        exc = error if isinstance(error, RootFailure) else RootFailure(str(error))
+        original = exc.receipt
+        exc.receipt = _finite_diagnostic(original)
+        if "receipt_sha256" in original:
+            # Preserve the signed local evidence before adding reactor input identity.
+            exc.receipt = {"local_failure": exc.receipt}
+        exc.receipt.update(converged=False, input_sha256=input_hash)
+        exc.receipt.setdefault("species", case.names)
+        if "residual_per_feed" not in exc.receipt:
+            exc.receipt.update(residual_per_feed=[None] * len(case.names),
+                               tolerance_basis="inlet state; verified outlet unavailable")
+        exc.receipt.setdefault("tolerance_per_feed", (2e-8 * case.x).tolist())
+        exc.receipt.setdefault("residual_mol_s", [None if v is None else v * case.fin for v in exc.receipt["residual_per_feed"]])
+        exc.receipt.setdefault("tolerance_mol_s", [None if v is None else v * case.fin for v in exc.receipt["tolerance_per_feed"]])
+        exc.receipt = _finite_diagnostic(exc.receipt)
+        if exc is error:
             raise
-    else:
-        rows, solver, receipts = stirred_tank(case, inputs["cstr_seeds"])
+        raise exc from error
     doc = dict(
         schema_version=2,
         model=kind,

@@ -4,12 +4,13 @@ import cantera as ct
 import numpy as np
 
 from sbq123.common.kinetic_model.contracts import RootFailure, identity, number
+from ..balance import account, configure_precision
 from ..kinetics.source import CoupledTank
 from ..state import network
 
 
 def _one(case, start):
-    inlet, _ = case.phases(case.x)
+    inlet, inlet_surface = case.phases(case.x)
     gas, surf = case.phases(start)
     branch = case.branch(inlet)
     if branch:
@@ -31,12 +32,13 @@ def _one(case, start):
     feed_device = ct.MassFlowController(boundary, reactor, mdot=specific_mdot)
     outlet_device = ct.PressureController(reactor, exhaust, primary=feed_device, K=specific_mdot / case.p)
     net = network(reactor)
+    scales = configure_precision(case, net, inlet, case.m.signed_rates(inlet, inlet_surface))
     net.initialize()
 
     try:
         if surface is None and not branch:
             net.solve_steady()
-            return _verified_outlet(case, reactor, surface, None, outlet_device), []
+            return _verified_outlet(case, reactor, surface, None, outlet_device, net, scales), []
         # ReactorNet's direct steady solver does not support reacting surfaces.
         # Integrate its actual open tank and inspect independent outlet balances.
         for i in range(90):
@@ -44,14 +46,14 @@ def _one(case, start):
             if branch:
                 branch.evaluate(reactor.phase, commit=True)
             try:
-                row = _verified_outlet(case, reactor, surface, branch, outlet_device)
+                row = _verified_outlet(case, reactor, surface, branch, outlet_device, net, scales)
             except RootFailure:
                 if i == 89 or (branch and branch.failure):
                     raise
                 continue
             if branch:
                 # Only a physically verified outlet gets a final report evaluation.
-                return _verified_outlet(case, reactor, surface, branch.report_at(branch.checkpoint), outlet_device), branch.receipts
+                return _verified_outlet(case, reactor, surface, branch.report_at(branch.checkpoint), outlet_device, net, scales), branch.receipts
             return row, []
     except RootFailure as exc:
         if branch:
@@ -65,7 +67,7 @@ def _one(case, start):
         raise failure from exc
 
 
-def _verified_outlet(case, reactor, surface, source, outlet_device):
+def _verified_outlet(case, reactor, surface, source, outlet_device, net, scales):
     actual_mdot = outlet_device.mass_flow_rate * case.volume
     if not np.isfinite(actual_mdot) or actual_mdot <= 0:
         raise RootFailure("Nonphysical CSTR withdrawal")
@@ -81,7 +83,14 @@ def _verified_outlet(case, reactor, surface, source, outlet_device):
     volumetric_source = np.array(list(row["source_mol_m3_s"].values()))
     produced = volumetric_source * (case.volume / case.fin)
     residual = case.x - out + produced
-    tolerance = 2e-10 + 2e-8 * np.maximum.reduce([case.x, abs(out), abs(produced)])
+    scale = np.maximum.reduce([case.x, abs(out), abs(produced)])
+    tolerance = 2e-8 * scale
+    signed = volumetric_source * case.volume
+    created = np.array(list(row["creation_mol_m3_s"].values())) * case.volume
+    destroyed = np.array(list(row["destruction_mol_m3_s"].values())) * case.volume
+    diagnostics = account(case, row, signed, created, destroyed, tolerance * case.fin, rtol=net.rtol)
+    row["species_balance"] = dict(diagnostics, native_rtol=net.rtol, native_atol=net.atol,
+                                  inlet_mass_fraction_scales=dict(zip(case.names, scales.tolist())))
     if (
         not np.isfinite(residual).all()
         or np.any(abs(residual) > tolerance)
@@ -90,7 +99,7 @@ def _verified_outlet(case, reactor, surface, source, outlet_device):
     ):
         raise RootFailure(
             "Independent CSTR species or withdrawal balance failed",
-            {"converged": False, "species_residual_per_feed": residual.tolist()},
+            {**diagnostics, "converged": False, "species_residual_per_feed": residual.tolist()},
         )
     row.update(
         balance_residual_per_inlet_flow=residual.tolist(),
@@ -181,7 +190,11 @@ def stirred_tank(case, extra_seeds):
             )
         receipts.extend(local)
     if not rows:
-        raise RootFailure("No physically converged CSTR outlet", {"converged": False, "rejected_seeds": invalid, "seed_outcomes": outcomes})
+        detail = next((seed["failure"] for seed in invalid
+                       if (seed.get("failure") or {}).get("residual_per_feed") is not None), {})
+        raise RootFailure("No physically converged CSTR outlet", {
+            **detail, "converged": False, "rejected_seeds": invalid, "seed_outcomes": outcomes,
+        })
     return (
         rows,
         dict(

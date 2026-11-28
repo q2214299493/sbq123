@@ -85,6 +85,24 @@ class Case:
         predicted, vacant, traffic = self.m.model.production(c, cover, gas.T, gas.P)
         idx = [i for i, p in enumerate(self.m.model.phases) if p == "gas"]
         gas_traffic = np.array(traffic)[idx] * self.m.factor
+        # The two physical unit conversions can erase a nonzero directional
+        # rate. A relative error budget below one representable mol/s cannot
+        # certify a zero increment, even when the rounded outlet is unchanged.
+        smallest_resolved = np.finfo(float).smallest_subnormal / 2e-6
+        small = gas_traffic * self.volume < smallest_resolved
+        if np.any(small):
+            amounts = dict(zip(self.names, c)) | dict(zip(self.surface_names, cover))
+            activities = [amounts[n] for n in self.m.model.species] + list(vacant)
+            for j in np.flatnonzero(small):
+                i = idx[j]
+                active = any(step.net[i] and step.coefficient > 0
+                             and all(not order or value > 0 for order, value in zip(step.orders, activities))
+                             for step in self.m.model.steps)
+                if active:
+                    raise RootFailure("Nonzero reaction traffic below molar-flow resolution", {
+                        "converged": False, "unresolved_species": self.names[j],
+                        "minimum_resolved_mol_s": float(smallest_resolved),
+                    })
         expected = np.array(predicted)[idx] * self.m.factor
         if not np.all(np.isfinite(rates)) or np.any(abs(rates - expected) > 2e-8 * np.maximum(gas_traffic, 1e-30)):
             raise RootFailure("Local species rates disagree with the registered kinetic model")
@@ -99,8 +117,21 @@ class Case:
         elemental = atoms @ (flow - self.feed)
         if np.any(abs(elemental) > 2e-7 * self.fin * np.maximum(1, atoms @ self.x)):
             raise RootFailure("Element flow is not conserved")
-        consumed = self.feed[self.ia] - flow[self.ia]
-        formed = flow[self.ib] - self.feed[self.ib]
+        # Use elementary one-way stoichiometry, including the reverse direction
+        # and species that occur on both sides of an autocatalytic reaction.
+        rate_gas, rate_surface = gas, surface
+        if branch:
+            rate_gas, rate_surface = self.m.gas, self.m.surface
+            rate_gas.TPX = gas.T, gas.P, x
+            rate_surface.TP = gas.TP
+            occupied = self.occupancy * cover
+            rate_surface.coverages = {**dict(zip(self.surface_names, occupied)), self.m.model.sites[0]: vacant[0]}
+        created = rate_gas.creation_rates * 1000
+        destroyed = rate_gas.destruction_rates * 1000
+        if rate_surface is not None:
+            area_factor = 1000 * self.m.area_per_volume
+            created += area_factor * rate_surface.get_creation_rates(rate_gas)
+            destroyed += area_factor * rate_surface.get_destruction_rates(rate_gas)
         return dict(
             coordinate=float(coord),
             residence_time_s=float(tau),
@@ -111,9 +142,8 @@ class Case:
             mole_fractions=dict(zip(self.names, map(float, x))),
             concentration_mol_m3=dict(zip(self.names, map(float, c))),
             source_mol_m3_s=dict(zip(self.names, map(float, rates))),
-            conversion=float(consumed / self.feed[self.ia]),
-            yield_mol_per_mol_fed=float(formed / self.feed[self.ia]),
-            selectivity_mol_per_mol_consumed=float(formed / consumed) if abs(consumed) > 1e-12 * self.feed[self.ia] else None,
+            creation_mol_m3_s=dict(zip(self.names, map(float, created))),
+            destruction_mol_m3_s=dict(zip(self.names, map(float, destroyed))),
             coverage=[float(v) for v in cover] if cover else None,
             vacancy=list(map(float, vacant)),
             local_receipt_sha256=receipt["receipt_sha256"] if receipt else None,
