@@ -2,6 +2,8 @@
 
 The replacement candidate starts at the released V3.1.0 commit `1e899d0d91e0948ed3739b9d623dbbe9e31de637`. Use the installed roles for verification and keep their environments separate. Source, package ownership, validation, limitations and evidence are documented under `docs/v32/`. The earlier V3.2 audit commit is retained separately. Historical CATKINAS and Zacros execution requires explicit approval.
 
+For quantitative analysis, interpretation, mechanism proposals and calculation returns, follow the [scientific workflow](docs/v32/SCIENTIFIC_WORKFLOW.md) and the permanent operation-specific applicability rules in AGENTS.md. Preserve measured, calculated, predicted and hypothetical evidence classes through every handoff.
+
 ---
 document_class: CURRENT_REFERENCE
 as_of: '2026-11-26T14:36:45+00:00'

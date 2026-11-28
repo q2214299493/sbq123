@@ -2,6 +2,12 @@
 
 Use `src/sbq123` as the authoritative implementation and `packages/` for distribution metadata. The versioned V3.1 tree and role inventories are historical evidence. Before changing a role, check `docs/v32/canonical-ownership.csv` and its compatibility imports. Run the Python 3.13 core architecture gate on both supported operating systems. See `docs/v32/ARCHITECTURE.md` for scientific inputs, package boundaries and validation.
 
+## Universal catalysis system adaptability
+
+Require traceable sources, units, finite domains, explicit assumptions, reproducibility and applicable stoichiometric and conservation checks. Assess each operation from its own evidence and catalyst context. Distinguish available, partial, unknown, unavailable and inapplicable information. Record whether inputs are measured, inferred, assumed or predicted, and identify numerical validation separately from scientific qualification. Preserve the physical denominator and uncertainty of every result. Missing observations leave physical presence unresolved.
+
+Apply geometry, site topology, coverage, DFT/NEB, solver receipts, mass conversion and reactor requirements only where the chosen method depends on them. Keep unrelated results available. Record approved alternatives with their own domain, provenance and limitations. Reuse existing registries and small method contracts when supporting a new system.
+
 # V3.1 release work
 
 For changes to the dual-role release, begin with [project context](SBQ123_AGENT_PROJECT_CONTEXT.md). Resolve active Python via v31/roles.json; the root scripts and unused historical copies are not the release projection. Each accepted step requires one issue, one codex branch, one PR and user approval of the exact commit and push. Worktree cleanup, publication and native jobs require separate authorization. These release-specific rules take precedence over general publication defaults below.

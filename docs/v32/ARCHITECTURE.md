@@ -78,3 +78,7 @@ For a reactor calculation, install sbq123-reactor-cantera and its declared depen
 
 This analytical case has conversion 1 − exp(−0.75) at one second. The analytical-control designation travels with its result. No native executable or scheduler participates.
 
+
+## Downstream scientific workflow
+
+The installed common distribution owns offline scientific analysis and explanation. Each role replays its own point or sampling window. Optional Reactor reports supply axial or steady outlet data using the original registered denominators. Mechanism discovery consumes bound observations and perturbation results through the existing priority, human review and returned-result interfaces. See [scientific workflow entries and evidence boundaries](SCIENTIFIC_WORKFLOW.md).

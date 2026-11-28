@@ -150,6 +150,11 @@ def main():
     h = sub.add_parser("review")
     h.add_argument("directory", type=Path)
     h.add_argument("decision", type=Path)
+    returned = sub.add_parser("ingest-return")
+    returned.add_argument("directory", type=Path)
+    returned.add_argument("review", type=Path)
+    returned.add_argument("sha256")
+    returned.add_argument("network_directory", type=Path)
     args = cli.parse_args()
     if args.action == "benchmark":
         data, policies = synthetic(Path.cwd())
@@ -160,6 +165,9 @@ def main():
     elif args.action == "rank":
         data = import_packet(args.packet, args.registry, args.tickets)
         print(emit(data, read(args.objective), args.output))
+    elif args.action == "ingest-return":
+        from sbq123.discovery.ranking.scientific_priority.returned_result import ingest
+        print(ingest(args.directory, args.review, args.sha256, args.network_directory))
     else:
         print(review(args.directory, read(args.decision)))
 

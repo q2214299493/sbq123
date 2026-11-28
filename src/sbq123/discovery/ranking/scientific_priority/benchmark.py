@@ -3,6 +3,9 @@
 from pathlib import Path
 from contextlib import closing
 import sqlite3
+from hashlib import sha256
+
+from scripts.multiphase_contracts import decode_unique_json
 
 import yaml
 
@@ -16,16 +19,21 @@ def read_sources(root, sources):
     documents = {}
     for key, ref in sources.items():
         path = root / ref["path"]
-        if sha256_file(path) != ref["sha256"]:
+        raw = path.read_bytes()
+        if sha256(raw).hexdigest() != ref["sha256"]:
             raise ValueError("Evidence hash mismatch: " + key)
-        documents[key] = yaml.safe_load(path.read_bytes()) if path.suffix.lower() in (".yaml", ".yml") else read(path)
+        documents[key] = yaml.safe_load(raw) if path.suffix.lower() in (".yaml", ".yml") else decode_unique_json(raw)
     return documents
 
 
-def synthetic(root):
+def synthetic(root, *, expected_fixture_sha256=None):
     fixture = Path("tests/fixtures/multiphase/priority_benchmark.json")
-    cfg = read(root / fixture)
-    sources = dict(cfg["sources"], fixture={"path": fixture.as_posix(), "sha256": sha256_file(root / fixture)})
+    raw = (root / fixture).read_bytes()
+    digest = sha256(raw).hexdigest()
+    if expected_fixture_sha256 is not None and digest != expected_fixture_sha256:
+        raise ValueError("Synthetic study differs from the archived release fixture")
+    cfg = decode_unique_json(raw)
+    sources = dict(cfg["sources"], fixture={"path": fixture.as_posix(), "sha256": digest})
     d = read_sources(root, sources)
     a, parent, network = d["analysis"], d["baseline"], d["network"]
     common = d["hydrogenate"]["common"]
