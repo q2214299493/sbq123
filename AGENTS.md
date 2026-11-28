@@ -48,6 +48,43 @@ Use each source only for the state it can establish:
 Always separate scheduler `PEND/RUN/DONE/EXIT`, electronic convergence, ionic or
 force convergence, geometry validity, and scientific validity.
 
+## Universal Catalysis System Adaptability Principle
+
+SBQ123 must support heterogeneous catalyst systems. Apply the following rules
+when designing or reviewing a scientific operation.
+
+- Require consistent units, valid numerical domains, traceable evidence,
+  explicit assumptions, reproducibility, and honest reporting of failures and
+  uncertainty. Check stoichiometry and conservation wherever they apply.
+- Assess each capability from the registered system profile and available
+  evidence. Record `available`, `partial`, `unavailable`, `unknown`, or
+  `not_applicable`, with the basis for the assessment. Missing observations
+  leave physical presence unresolved. A catalyst name alone establishes no
+  capability.
+- Before execution, identify the selected method's assumptions and evidence
+  requirements, check the available inputs, and consider approved alternatives
+  within their applicability domains. Require explicit adsorption structures,
+  transition states or NEB barriers, site topology, multidentate binding,
+  surface coverage, coverage-dependent kinetics, lateral interactions,
+  DFT-derived parameters, native solver receipts, or a particular reactor
+  model only for operations that depend on them.
+- Execute each supported operation independently. When required evidence is
+  missing or an assumption fails, identify the affected operation, record the
+  reason, and continue eligible work. Never fabricate an input. Apply the
+  owning method's validation and authorization gates wherever it is used.
+- Preserve the identity, assumptions, uncertainty, and applicability domain of
+  DFT-derived, experimental, literature, BEP-estimated, and ML-predicted
+  parameters. Apply the same discipline when choosing explicit surface sites,
+  mean-field sites, or an effective empirical active-site model.
+- For each result, identify available and missing data, label assumed,
+  predicted, and experimentally measured inputs, and state what has been
+  numerically validated and what qualifies scientifically. Record the domain
+  and limitations of each claim.
+- Reuse existing contracts and registries. Express new system capabilities
+  primarily through data and configuration. Keep operation-specific contracts
+  small and assumptions auditable. Avoid catalyst-name branches in general
+  algorithms and large generic rule engines.
+
 ## Scientific Boundaries
 
 - Backend roles and handoffs are authoritative only in
