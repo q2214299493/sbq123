@@ -78,7 +78,8 @@ def main():
     a = cli.parse_args()
     out = a.output.resolve()
     out.mkdir(parents=True, exist_ok=False)
-    exe = dict(mkm=a.mkm_python.resolve(), kmc=a.kmc_python.resolve())
+    # Preserve POSIX venv interpreter symlinks so each subprocess keeps its role.
+    exe = dict(mkm=a.mkm_python.absolute(), kmc=a.kmc_python.absolute())
     roots = {r: (a.fixtures / r).resolve() for r in exe}
     def save(name, value):
         (out / (name + ".json")).write_text(json.dumps(value, indent=2, allow_nan=False) + "\n", encoding="utf8")

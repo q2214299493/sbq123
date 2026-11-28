@@ -36,34 +36,44 @@ class Case:
             raise ValueError("Inlet state outside floating-point domain")
         self.feed = self.fin * self.x
         mode = inputs["mode"]
-        if mode not in ("fixed", "dynamic_mkm") or (mode == "dynamic_mkm" and mechanism.surface is None):
+        if mode not in ("fixed", "dynamic_mkm") or (mode == "dynamic_mkm" and not mechanism.surfaces):
             raise ValueError("Unsupported kinetic mode for this dataset")
         self.dynamic = mode == "dynamic_mkm"
         self.surface_names = [n for n, p in zip(mechanism.model.species, mechanism.model.phases) if p == "surface"]
-        cov = inputs["initial_coverage"]
-        if not isinstance(cov, (tuple, list)) or len(cov) != len(self.surface_names):
-            raise ValueError("Specify one initial amount per registered surface species")
-        self.coverage = [number(v, "coverage", nonnegative=True) for v in cov]
-        self.occupancy = np.array([o[0] for o, p in zip(mechanism.model.occupancy, mechanism.model.phases) if p == "surface"])
-        if np.dot(self.occupancy, self.coverage) > 1:
-            raise ValueError("Initial coverages exceed the site inventory")
+        self.occupancy = np.asarray([o for o, p in zip(mechanism.model.occupancy, mechanism.model.phases) if p == "surface"],
+                                    dtype=float).reshape((len(self.surface_names), len(mechanism.model.sites)))
+        self.coverage = self.checked_coverage(inputs["initial_coverage"])
         self.distance = number(inputs["max_root_distance"], "surface branch distance", positive=True)
         if self.distance > 1:
             raise ValueError("Coverage displacement exceeds one site inventory")
 
-    def phases(self, x, *, flow_guard=False):
-        gas, surface = self.m.fresh(flow_guard=flow_guard)
-        gas.TPX = self.t, self.p, np.append(x, 0.0) if flow_guard else x
-        if surface is not None:
-            surface.TP = self.t, self.p
-            occupied = self.occupancy * self.coverage
-            surface.coverages = {**dict(zip(self.surface_names, occupied)), self.m.model.sites[0]: max(0, 1 - sum(occupied))}
-        return gas, surface
+    def checked_coverage(self, raw):
+        if not isinstance(raw, (tuple, list)) or len(raw) != len(self.surface_names):
+            raise ValueError("Specify one initial amount per registered surface species")
+        cov = [number(v, "coverage", nonnegative=True) for v in raw]
+        if np.any(np.asarray(cov) @ self.occupancy > 1):
+            raise ValueError("Initial coverages exceed the site inventory")
+        return cov
 
-    def branch(self, gas):
+    def set_coverages(self, surfaces, amounts):
+        vacancies = 1 - np.asarray(amounts) @ self.occupancy
+        for k, surf in enumerate(surfaces):
+            values = {name: value * count for name, value, count in zip(self.surface_names, amounts, self.occupancy[:,k]) if count}
+            values[self.m.model.sites[k]] = max(0, vacancies[k])
+            surf.coverages = values
+
+    def phases(self, x, *, flow_guard=False, coverage=None):
+        gas, surfaces = self.m.fresh(flow_guard=flow_guard)
+        gas.TPX = self.t, self.p, np.append(x, 0.0) if flow_guard else x
+        for surf in surfaces:
+            surf.TP = gas.TP
+        self.set_coverages(surfaces, self.coverage if coverage is None else coverage)
+        return gas, surfaces
+
+    def branch(self, gas, coverage=None):
         if not self.dynamic:
             return None
-        src = LocalSource(self.m.model, self.m.factor, self.coverage, self.distance)
+        src = LocalSource(self.m.model, self.m.factor, self.coverage if coverage is None else coverage, self.distance)
         src.evaluate(gas, commit=True)
         return src
 
@@ -79,8 +89,9 @@ class Case:
             rates, receipt = branch.evaluate(gas, commit=commit)
             cover = receipt["coverage"]
         else:
-            if surface is not None:
-                cover = [surface.concentrations[surface.species_index(n)] / surface.site_density for n in self.surface_names]
+            if surface:
+                amounts = {n: v / s.site_density for s in surface for n, v in zip(s.species_names, s.concentrations)}
+                cover = [amounts[n] for n in self.surface_names]
             rates = self.m.signed_rates(gas, surface)
         predicted, vacant, traffic = self.m.model.production(c, cover, gas.T, gas.P)
         idx = [i for i, p in enumerate(self.m.model.phases) if p == "gas"]
@@ -121,17 +132,17 @@ class Case:
         # and species that occur on both sides of an autocatalytic reaction.
         rate_gas, rate_surface = gas, surface
         if branch:
-            rate_gas, rate_surface = self.m.gas, self.m.surface
+            rate_gas, rate_surface = self.m.gas, self.m.surfaces
             rate_gas.TPX = gas.T, gas.P, x
-            rate_surface.TP = gas.TP
-            occupied = self.occupancy * cover
-            rate_surface.coverages = {**dict(zip(self.surface_names, occupied)), self.m.model.sites[0]: vacant[0]}
+            for s in rate_surface:
+                s.TP = rate_gas.TP
+            self.set_coverages(rate_surface, cover)
         created = rate_gas.creation_rates * 1000
         destroyed = rate_gas.destruction_rates * 1000
-        if rate_surface is not None:
+        for s in rate_surface or ():
             area_factor = 1000 * self.m.area_per_volume
-            created += area_factor * rate_surface.get_creation_rates(rate_gas)
-            destroyed += area_factor * rate_surface.get_destruction_rates(rate_gas)
+            created += area_factor * s.get_creation_rates(rate_gas)
+            destroyed += area_factor * s.get_destruction_rates(rate_gas)
         return dict(
             coordinate=float(coord),
             residence_time_s=float(tau),

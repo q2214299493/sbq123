@@ -3,14 +3,14 @@ from pathlib import Path
 
 from jsonschema import ValidationError
 
-from scripts.artifact_io import sha256_json
-from scripts.kinetic_data.project_references import JSON_ROLES, manifest, resolve_sources
-from scripts.kinetic_data.reaction_intake import STATES, report
-from scripts.kinetic_parameters.engine import check_version
-from scripts.multiphase_contracts import validate_bundle
-from scripts.rate_output_v2 import validate_network_bound_rate_output
-from scripts.reaction_network.builder import balance, build_network
-from scripts.reaction_network.catalog import catalog, check_network_version, ownership_report
+from sbq123.common.artifacts.artifact_io import sha256_json
+from sbq123.common.evidence.kinetic_data.project_references import JSON_ROLES, manifest, resolve_sources
+from sbq123.common.evidence.kinetic_data.reaction_intake import STATES, report
+from sbq123.common.artifacts.artifact_io import check_version
+from sbq123.common.workflow.multiphase_contracts import validate_bundle
+from sbq123.common.kinetic_model.rate_output_v2 import validate_network_bound_rate_output
+from sbq123.common.reaction_network.reaction_network.builder import balance, build_network
+from sbq123.common.reaction_network.reaction_network.catalog import catalog, check_network_version, ownership_report
 
 # Only these references can support the corresponding scientific claim.
 REQUIRES = {
@@ -178,9 +178,9 @@ def _check_tof_rate_reference(ref, docs, paths, digests, reaction_id):
 
 
 def _legacy_tof_reference(docs, paths, digests, reaction_id, base):
-    from scripts.artifact_io import sha256_file
-    from scripts.baseline_mkm.normalization import normalization
-    from scripts.runtime_resources import resource_path
+    from sbq123.common.artifacts.artifact_io import sha256_file
+    from sbq123.common.workflow.baseline_mkm.normalization import normalization
+    from sbq123.common.workflow.runtime_resources import resource_path
 
     profile = _rate_qualification(docs, digests)["normalization"]
     local = (base / profile["path"]).resolve()
@@ -228,7 +228,7 @@ def _observe(name, docs, paths, inventory, reaction_id, base):
             basis = reference.get("reference_basis")
             value = result["tof_s_inverse"]
             if "normalization" not in result and {"rates", "qualification"} <= digests.keys():
-                from scripts.baseline_mkm.normalization import reference_rate
+                from sbq123.common.workflow.baseline_mkm.normalization import reference_rate
 
                 reference = _legacy_tof_reference(docs, paths, digests, reaction_id, base)
                 basis = reference["reference_basis"]
@@ -333,9 +333,11 @@ def _bind_scientific_sources(docs, paths, inventory, project_id, version, reacti
             _equal(d["network_version"], docs["network"]["network_version"], "Kinetic network")
             _equal({r["reaction_id"] for r in d["reactions"]},
                    {r["definition"]["reaction_id"] for r in docs["network"]["reactions"]}, "Kinetic reaction IDs")
-            from scripts.baseline_mkm.sensitivity_inputs import reproduce
+            from sbq123.common.workflow.baseline_mkm.sensitivity_inputs import reproduce
 
-            _equal(d, reproduce(docs["network"], d), "Reviewed kinetic dataset")
+            from sbq123.common.kinetic_model.replay_precision import same_recalculation
+            if not same_recalculation(d, reproduce(docs["network"], d)):
+                raise ValueError("Reviewed kinetic dataset differs from recomputation")
             docs["dataset"] = d
         except DATA_ERRORS as exc:
             inventory["dataset"].update(status="invalid_reference", reason=f"Kinetic dataset binding: {exc}")
@@ -527,7 +529,7 @@ def _reaction_engine(engine, row, assembled, species, outputs):
     kinetic = row["kinetics"]
     issues = list(row["missing"])
     if engine == "kmc" and kinetic:
-        from scripts.reaction_network.event_geometry import verify_event
+        from sbq123.common.reaction_network.reaction_network.event_geometry import verify_event
 
         try:
             verify_event(kinetic["local_event"], {"site_balance": row["conservation"]["site_balance"],
@@ -547,7 +549,7 @@ def _reaction_engine(engine, row, assembled, species, outputs):
 
 
 def _qualify_rows(docs, inventory, view, reaction, base, phase):
-    from scripts.kinetic_parameters.engine import qualify_network_rows
+    from sbq123.common.kinetic_model.kinetic_parameters.engine import qualify_network_rows
 
     network = docs.get("network")
     rows, dataset, problems = {}, None, []

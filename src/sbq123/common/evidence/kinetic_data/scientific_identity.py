@@ -2,13 +2,13 @@
 
 from collections import Counter
 
-from scripts.artifact_io import sha256_json
-from scripts.kinetic_parameters.engine import check_version
-from scripts.reaction_network.event_geometry import verify_event
-from scripts.multiphase_contracts import read_artifact as read_artifact
-from scripts.reaction_network.builder import directions, side as side_totals
-from scripts.reaction_network.catalog import catalog, check_context, register_species, site_counts
-from scripts.runtime_resources import SOURCE_ROOT
+from sbq123.common.artifacts.artifact_io import sha256_json
+from sbq123.common.artifacts.artifact_io import check_version
+from sbq123.common.reaction_network.reaction_network.event_geometry import verify_event
+from sbq123.common.workflow.multiphase_contracts import read_artifact as read_artifact
+from sbq123.common.reaction_network.reaction_network.builder import directions, side as side_totals
+from sbq123.common.reaction_network.reaction_network.catalog import catalog, check_context, register_species, site_counts
+from sbq123.common.workflow.runtime_resources import SOURCE_ROOT
 
 
 def dataset_reference(dataset, file_sha256):

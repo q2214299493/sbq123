@@ -3,8 +3,8 @@ import math
 
 import numpy as np
 
-from scripts.multiphase_contracts import ENERGY_ATOL_EV
-from scripts.scientific_validation import finite_number
+from sbq123.common.workflow.multiphase_contracts import ENERGY_ATOL_EV
+from sbq123.common.validation.scientific_validation import finite_number
 
 NAMES = ("forward", "reverse", "reaction")
 

@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import math
 
-from scripts.physical_constants import AMU_KG, CM1_EV, EV_J as EV_J, H_J_S, KB, KB_J_K
-from scripts.scientific_validation import finite_number, integer_number
+from sbq123.common.kinetic_model.physical_constants import AMU_KG, CM1_EV, EV_J as EV_J, H_J_S, KB, KB_J_K
+from sbq123.common.validation.scientific_validation import finite_number, integer_number
 
 
 

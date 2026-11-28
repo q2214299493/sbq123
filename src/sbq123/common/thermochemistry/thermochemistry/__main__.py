@@ -3,9 +3,9 @@ import argparse
 import json
 from pathlib import Path
 
-from scripts.thermochemistry.engine import calculate
-from scripts.thermochemistry.frequencies import draft_intake
-from scripts.vasp_vibrations import parse_frequency_outcar as parse_outcar
+from sbq123.common.thermochemistry.thermochemistry.engine import calculate
+from sbq123.common.thermochemistry.thermochemistry.frequencies import draft_intake
+from sbq123.common.workflow.vasp_vibrations import parse_frequency_outcar as parse_outcar
 
 
 def main():

@@ -1,11 +1,11 @@
 """Common artifact bindings and V2 envelope for explicitly requested native-result reads."""
 from pathlib import Path
 
-from scripts.artifact_io import sha256_file, sha256_json
-from scripts.kinetic_data.network_binding import validate_bound_rows
-from scripts.kinetic_parameters.engine import check_version
-from scripts.kinetic_parameters.rate_units import convert_unit
-from scripts.rate_output_v2 import generate_source_terms, validate_rate_output_v2
+from sbq123.common.artifacts.artifact_io import sha256_file, sha256_json
+from sbq123.common.evidence.kinetic_data.network_binding import validate_bound_rows
+from sbq123.common.kinetic_model.kinetic_parameters.engine import check_version
+from sbq123.common.kinetic_model.kinetic_parameters.rate_units import convert_unit
+from sbq123.common.kinetic_model.rate_output_v2 import generate_source_terms, validate_rate_output_v2
 
 
 def require(condition, message):

@@ -42,9 +42,12 @@ def compare_operating_points(left, right, variable):
                   change=None, interpretation=None, scope=[a["scope"], b["scope"]])
     conditions = [dict(r["conditions"]) for r in (a, b)]
     levels = [c.pop(variable) for c in conditions]
-    if (a["dataset_sha256"] != b["dataset_sha256"] or conditions[0] != conditions[1] or levels[0] == levels[1]
+    # Project selectors may carry different approved companion or conversion records across deployments.
+    bindings = ("mechanism_sha256", "rate_basis", "rate_factor_to_volume", "denominators", "scope")
+    same_basis = all(left[0][field] == right[0][field] for field in bindings)
+    if (not same_basis or a["dataset_sha256"] != b["dataset_sha256"] or conditions[0] != conditions[1] or levels[0] == levels[1]
             or any(r["reactor"] == "CSTR" and len(r["points"]) != 1 for r in (a, b))):
-        return dict(result, status="insufficient_evidence", reason="Require matched model, feed, geometry, unique outlet and one changed input")
+        return dict(result, status="insufficient_evidence", reason="Require matched mechanism, physical basis, feed, geometry, unique outlet and one changed input")
     changes = {}
     for k in ("conversion", "yield_mol_per_mol_fed", "selectivity_mol_per_mol_consumed"):
         x, y = [r["points"][-1][k] for r in (a, b)]

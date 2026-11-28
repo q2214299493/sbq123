@@ -1,27 +1,27 @@
 """Check a planning attribution against the independently reviewed rate and its network."""
-from scripts.artifact_io import sha256_json
+from sbq123.common.artifacts.artifact_io import sha256_json
 from .structure_binding import validate_structures
-from scripts.kinetic_data.analysis_evidence import approved_replay_row
-from scripts.kinetic_data.observations import rate_observation
-from scripts.multiphase_contracts import read_artifact
-from scripts.runtime_resources import resource_path
+from sbq123.common.evidence.kinetic_data.analysis_evidence import approved_replay_row, review_path
+from sbq123.common.evidence.kinetic_data.observations import rate_observation
+from sbq123.common.workflow.multiphase_contracts import read_artifact
+from sbq123.common.workflow.runtime_resources import resource_path
 
 
 def replay_observation(observation, mapping=None):
     family, row = approved_replay_row(observation.get("rate_sha256"))
-    path = resource_path(f"reports/multiphase/stage_b1_4/replay/{family}-{row['case']}.json")
+    path = review_path(row, row["output"]) if "project_review_sha256" in row else resource_path(f"reports/multiphase/stage_b1_4/replay/{family}-{row['case']}.json")
     rates, digest = read_artifact(path, expected_sha256=row["output_sha256"])
     ref = row["provenance"]["network"]
-    network_path = resource_path(ref["path"])
+    network_path = review_path(row, ref)
     network, _ = read_artifact(network_path, expected_sha256=ref["sha256"])
     if rates["output_binding"]["run_id"] != row["run_id"] or network["network_version"] != row["network_version"]:
         raise ValueError("Different reviewed run or reaction network")
     receipt = row["parent_receipt"]
-    read_artifact(resource_path(receipt["path"]), expected_sha256=receipt["sha256"])
+    read_artifact(review_path(row, receipt), expected_sha256=receipt["sha256"])
     request = dict(conditions=rates["conditions"], target=observation["basis"], evidence=mapping,
                    rate_evidence={"path": path, "sha256": digest})
     if observation.get("kind") == "instantaneous_gas_balance":
-        from scripts.reactor_balance import balance_observation
+        from sbq123.analysis.observations.reactor_balance import balance_observation
 
         values = observation["values"]
         rebuilt = balance_observation(rates, network_path, **request, volume_m3=values["reactor_volume_m3"],
@@ -60,7 +60,7 @@ def validate_candidate(candidate, objective, observation, replay):
     network, rates, observed = replay
     if candidate["parent_run_id"] != observation["run_id"]:
         raise ValueError("Candidate parent run differs from approved observation lineage")
-    if candidate["scope"] != objective["scope"] or candidate["scope_label"] != "synthetic_benchmark":
+    if candidate["scope"] != objective["scope"] or candidate["scope_label"] != {"archived_software_benchmark": "synthetic_benchmark", "reviewed_project": "reviewed_project"}.get(observation["evidence_scope"], ""):
         raise ValueError("Candidate scope differs from the approved benchmark")
     species = _identifiers(candidate.get("species_ids"), "observed species")
     target = objective.get("target")

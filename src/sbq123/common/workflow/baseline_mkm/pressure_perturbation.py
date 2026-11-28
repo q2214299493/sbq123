@@ -3,7 +3,7 @@
 from decimal import Decimal
 from math import log
 
-from scripts.scientific_validation import finite_number
+from sbq123.common.validation.scientific_validation import finite_number
 
 
 def checked_feed(parent, target, selected, total_bar):

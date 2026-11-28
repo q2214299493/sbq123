@@ -5,12 +5,12 @@ from contextlib import closing
 import sqlite3
 from hashlib import sha256
 
-from scripts.multiphase_contracts import decode_unique_json
+from sbq123.common.workflow.multiphase_contracts import decode_unique_json
 
 import yaml
 
-from scripts.artifact_io import load_json_object as read, sha256_file, sha256_json
-from scripts.scientific_intake import report as intake_report
+from sbq123.common.artifacts.artifact_io import load_json_object as read, sha256_file, sha256_json
+from sbq123.common.workflow.scientific_intake import report as intake_report
 
 from .evidence import registry_inventory
 

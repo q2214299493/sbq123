@@ -32,14 +32,14 @@ def test_dilute_homogeneous_observables(kind, fraction):
 
 
 @pytest.mark.parametrize("kind", ["PFR", "CSTR"])
-def test_unresolved_reversible_net_is_structured(kind):
-    q = request(kind, .5, dataset_id="reversible-iso")
-    with pytest.raises(RootFailure) as caught:
-        simulate(**q)
-    r = caught.value.receipt
-    assert not r["converged"] and len(r["input_sha256"]) == 64
-    assert r["species"] == ["A", "B"]
-    assert len(r["residual_per_feed"]) == len(r["tolerance_per_feed"]) == 2
+@pytest.mark.parametrize("fraction", [.5, .50000000000001])
+def test_unresolved_reversible_net_is_structured(kind, fraction):
+    result = simulate(**request(kind, fraction, dataset_id="reversible-iso"))
+    row = result["points"][-1]
+    assert row["gross_production_mol_s"]["A"] > 0 and row["gross_consumption_mol_s"]["A"] > 0
+    assert abs(row["conversion"]) < 1e-10
+    assert row["selectivity_mol_per_mol_consumed"] is None
+    assert not all(row["species_balance"]["progress_resolved"])
 
 
 @pytest.mark.parametrize("kind", ["PFR", "CSTR"])

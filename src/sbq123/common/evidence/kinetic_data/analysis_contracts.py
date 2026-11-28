@@ -2,10 +2,11 @@
 from copy import deepcopy
 from pathlib import Path
 
-from scripts.artifact_io import sha256_json
-from scripts.kinetic_data.analysis_evidence import reviewed_mapping, reviewed_rates, same_json_content
-from scripts.kinetic_parameters.rate_normalization import basis_identity, convert_checked_rate
-from scripts.rate_output_v2 import read_bound_rate_network, validate_conversion_bases
+from sbq123.common.evidence import trust
+from sbq123.common.artifacts.artifact_io import sha256_json
+from sbq123.common.evidence.kinetic_data.analysis_evidence import reviewed_mapping, reviewed_rates, same_json_content
+from sbq123.common.kinetic_model.kinetic_parameters.rate_normalization import basis_identity, convert_checked_rate
+from sbq123.common.kinetic_model.rate_output_v2 import read_bound_rate_network, validate_conversion_bases
 
 
 def local_species_sources(payload, network_path, *, conditions, target, evidence=None, rate_evidence=None):
@@ -49,7 +50,7 @@ def local_species_sources(payload, network_path, *, conditions, target, evidence
     result = {
         "status": "available", "rate_dataset_id": rates["output_binding"]["dataset_id"],
         "rate_sha256": digest, "rate_review_sha256": replay_id, "mapping_approval_sha256": mapping_id,
-        "evidence_scope": "archived_software_benchmark", "conditions": conditions,
+        "evidence_scope": "reviewed_project" if trust.approved("rate_review", replay_id) else "archived_software_benchmark", "conditions": conditions,
         "basis": target, "species": sources,
     }
     result["result_sha256"] = sha256_json(result)

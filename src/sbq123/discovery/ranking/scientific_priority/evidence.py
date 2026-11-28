@@ -5,7 +5,7 @@ from pathlib import Path
 import re
 import sqlite3
 
-from scripts.scientific_validation import finite_number
+from sbq123.common.validation.scientific_validation import finite_number
 
 
 OPERATIONS = {

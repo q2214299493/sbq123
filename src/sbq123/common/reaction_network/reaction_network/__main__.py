@@ -3,10 +3,10 @@ import argparse
 import json
 from pathlib import Path
 
-from scripts.artifact_io import sha256_bytes, sha256_file, sha256_json, write_json_exclusive
-from scripts.multiphase_contracts import _unique_keys
-from scripts.reaction_network.builder import build_network, from_registry_mapping
-from scripts.reaction_network.catalog import check_network_version, ownership_report
+from sbq123.common.artifacts.artifact_io import sha256_bytes, sha256_file, sha256_json, write_json_exclusive
+from sbq123.common.workflow.multiphase_contracts import _unique_keys
+from sbq123.common.reaction_network.reaction_network.builder import build_network, from_registry_mapping
+from sbq123.common.reaction_network.reaction_network.catalog import check_network_version, ownership_report
 
 
 def read_source(path, role, sources):

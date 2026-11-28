@@ -11,12 +11,12 @@ MASS_BASIS = "kg_total_catalyst"
 
 
 def _approved_factor(locator, directory, context):
-    from scripts.multiphase_contracts import read_artifact
+    from sbq123.common.workflow.multiphase_contracts import read_artifact
 
     if not isinstance(locator, dict) or not isinstance(locator.get("sha256"), str):
         raise ValueError("Missing independent mass conversion approval")
     pin = locator["sha256"]
-    if pin not in trust.MKM_MASS_APPROVALS:
+    if not trust.approved("mass_conversion", pin):
         raise ValueError("Mass conversion approval is not independently pinned")
     path = directory / locator["path"]
     approval, _ = read_artifact(path, expected_sha256=pin)

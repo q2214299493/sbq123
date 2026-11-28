@@ -1,5 +1,6 @@
 """Read-only kinetic analysis of an accepted Phase 3.0 result or structural inspection of a draft."""
 
+from sbq123.common.kinetic_model.replay_precision import same_recalculation
 import argparse
 import json
 from pathlib import Path
@@ -35,7 +36,7 @@ def load_inputs(network, dataset):
     check_version(d, "dataset_version")
     if d["network_version"] != n["network_version"]:
         raise ValueError("Network version mismatch")
-    if reproduce(n, d) != d:
+    if not same_recalculation(d, reproduce(n, d)):
         raise ValueError("Dataset does not reproduce from reviewed network")
     return n, d, {"network": nh, "dataset": dh}
 

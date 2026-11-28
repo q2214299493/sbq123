@@ -4,13 +4,13 @@ from copy import deepcopy
 from math import exp, fsum, isclose
 from pathlib import Path
 
-from scripts.runtime_resources import SOURCE_ROOT
-from scripts.artifact_io import load_json_object as read, sha256_file, sha256_json
-from scripts.baseline_mkm.pressure_perturbation import checked_feed
-from scripts.baseline_mkm.ts_perturbation import PARENT, reproduce as reproduce_parent, reviewed_reaction
+from sbq123.common.workflow.runtime_resources import SOURCE_ROOT
+from sbq123.common.artifacts.artifact_io import load_json_object as read, sha256_file, sha256_json
+from sbq123.common.workflow.baseline_mkm.pressure_perturbation import checked_feed
+from sbq123.common.workflow.baseline_mkm.ts_perturbation import PARENT, reproduce as reproduce_parent, reviewed_reaction
 from scripts.kinetic_parameters.engine import calculate, check_version, conditions
 from scripts.kinetic_parameters.export_contract import validate_export
-from scripts.scientific_validation import finite_number
+from sbq123.common.validation.scientific_validation import finite_number
 
 ROOT = SOURCE_ROOT
 BASE = ROOT / "reports/multiphase/phase3_0"
@@ -206,7 +206,7 @@ def configuration(base, dataset):
 def reproduce(network, dataset):
     parent = reproduce_parent(network, dataset)
     if "coverage_iteration" in dataset:
-        from scripts.baseline_mkm.coverage_energy import reconstruct_child
+        from sbq123.common.workflow.baseline_mkm.coverage_energy import reconstruct_child
         return reconstruct_child(network, parent, dataset["coverage_iteration"])
     if "sensitivity_perturbation" not in dataset:
         return parent

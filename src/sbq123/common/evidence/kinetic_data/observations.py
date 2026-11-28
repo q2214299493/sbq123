@@ -1,8 +1,8 @@
 """Descriptive observations from an evidence-checked source or gas balance."""
 from copy import deepcopy
 
-from scripts.artifact_io import sha256_json
-from scripts.kinetic_data.analysis_contracts import local_species_sources
+from sbq123.common.artifacts.artifact_io import sha256_json
+from sbq123.common.evidence.kinetic_data.analysis_contracts import local_species_sources
 
 
 def _observation(rates, result, kind, values):

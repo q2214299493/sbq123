@@ -1,8 +1,8 @@
 """Local symmetric TS perturbation at positive TOFs and fixed temperature; the caller qualifies the branch."""
 from math import log
 
-from scripts.physical_constants import KB
-from scripts.scientific_validation import finite_number
+from sbq123.common.kinetic_model.physical_constants import KB
+from sbq123.common.validation.scientific_validation import finite_number
 
 
 def central_difference(baseline, plus, minus, temperature_K, delta_eV):

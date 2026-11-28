@@ -14,6 +14,15 @@ _lock = RLock()
 _active = None
 
 
+class _CanonicalAlias(importlib.machinery.SourceFileLoader):
+    def __init__(self, name, path, target):
+        super().__init__(name, str(path))
+        self.target = target
+
+    def exec_module(self, module):
+        sys.modules[module.__name__] = importlib.import_module(self.target)
+
+
 class RoleImports(importlib.abc.MetaPathFinder):
     def __init__(self, role):
         self.role = role
@@ -35,6 +44,13 @@ class RoleImports(importlib.abc.MetaPathFinder):
                 raise ModuleNotFoundError(f"{fullname} is outside the {self.role} inventory")
             return None
         filename, package = row
+        if not package and not fullname.endswith(".__main__"):
+            parts = filename.parts
+            package_index = len(parts) - 1 - parts[::-1].index("sbq123")
+            target = ".".join((*parts[package_index:-1], filename.stem))
+            if (target.startswith(("sbq123.analysis.", "sbq123.discovery.", "sbq123.common."))
+                    and not target.startswith("sbq123.common.workflow.") or target == "sbq123.common.workflow.runtime_resources"):
+                return importlib.util.spec_from_file_location(fullname, filename, loader=_CanonicalAlias(fullname, filename, target))
         return importlib.util.spec_from_file_location(fullname, filename, submodule_search_locations=[] if package else None)
 
 

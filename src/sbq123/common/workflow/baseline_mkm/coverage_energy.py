@@ -1,16 +1,17 @@
 """Reviewed mean-field excess Gibbs energy and deterministic fixed-temperature MKM children."""
 
+from sbq123.common.kinetic_model.replay_precision import same_recalculation
 from copy import deepcopy
 
 import numpy as np
 
-from scripts.artifact_io import require_sha256, sha256_bytes, sha256_json
-from scripts.baseline_mkm.coverage_ts import displaced_gibbs, validate_record
+from sbq123.common.artifacts.artifact_io import require_sha256, sha256_bytes, sha256_json
+from sbq123.common.workflow.baseline_mkm.coverage_ts import displaced_gibbs, validate_record
 from scripts.kinetic_parameters.engine import calculate, generate
 from scripts.kinetic_parameters.export_contract import validate_export
-from scripts.multiphase_contracts import decode_unique_json
-from scripts.reaction_network.thermodynamics import check_cycles
-from scripts.scientific_validation import validate_finite_tree
+from sbq123.common.workflow.multiphase_contracts import decode_unique_json
+from sbq123.common.reaction_network.reaction_network.thermodynamics import check_cycles
+from sbq123.common.validation.scientific_validation import validate_finite_tree
 
 
 def system_identity(network):
@@ -31,7 +32,7 @@ class ExcessGibbs:
     def __init__(self, network, parent, fit_text):
         validate_export(parent)
         bindings = dict(network_version=network["network_version"], models=[r["model"] for r in parent["reactions"]])
-        if generate(network, bindings) != parent:
+        if not same_recalculation(parent, generate(network, bindings)):
             raise ValueError("Expected an unmodified, reproducible kinetic parent")
         self.network, self.parent, self.fit_text = network, parent, fit_text
         raw = fit_text.encode("utf-8")

@@ -1,11 +1,12 @@
 """Resolve scientific analysis evidence against release-controlled review identities."""
 from pathlib import Path
+from sbq123.common.evidence import trust
 import zipfile
 
-from scripts.artifact_io import canonical_json, require_sha256, sha256_file, sha256_json
-from scripts.multiphase_contracts import read_artifact
-from scripts.rate_output_v2 import validate_conversion_bases
-from scripts.runtime_resources import resource_path
+from sbq123.common.artifacts.artifact_io import canonical_json, require_sha256, sha256_file, sha256_json
+from sbq123.common.workflow.multiphase_contracts import read_artifact
+from sbq123.common.kinetic_model.rate_output_v2 import validate_conversion_bases
+from sbq123.common.workflow.runtime_resources import resource_path
 
 
 # B.1 independently replayed outputs. The acceptance scope is the archived software benchmarks.
@@ -38,6 +39,18 @@ def _reviewed_runs():
 
 def reviewed_event(network_version, dataset_version, reaction_id):
     """Read the local event from the unique reviewed dataset content for this model."""
+    for key in trust.project_records("rate_review"):
+        review, _ = trust.project_document("rate_review", key)
+        row = review["row"]
+        if row["network_version"] == network_version and row["dataset_version"] == dataset_version:
+            ref = row["provenance"]["dataset"]
+            doc, _ = read_artifact(trust.project_path(ref["path"]), expected_sha256=ref["sha256"])
+            if doc["network_version"] != network_version or doc["dataset_version"] != dataset_version:
+                raise ValueError("Independent event dataset identity mismatch")
+            matches = [r["model"].get("local_event") for r in doc["reactions"] if r["reaction_id"] == reaction_id]
+            if len(matches) != 1:
+                raise ValueError("Ambiguous project event")
+            return matches[0]
     refs = [row["provenance"]["dataset"] for _, row in _reviewed_runs()
             if row["network_version"] == network_version and row["dataset_version"] == dataset_version]
     if len({ref["sha256"] for ref in refs}) != 1:
@@ -60,8 +73,22 @@ def reviewed_event(network_version, dataset_version, reaction_id):
     return events[0]
 
 
+def review_path(row, ref, role=None):
+    if "project_review_sha256" in row:
+        return trust.project_path(ref["path"])
+    return resource_path(ref["path"], role=role)
+
+
 def approved_replay_row(selector):
     selector = require_sha256(selector, label="Rate digest")
+    project = trust.project_document("rate_review", selector)
+    if project is not None:
+        review, pin = project
+        row = review["row"]
+        if (row["output_sha256"] != selector or review["family"] not in ("catkinas", "zacros")
+                or review["scope"] != "reviewed_project"):
+            raise ValueError("Invalid project rate review")
+        return review["family"], dict(row, project_review_sha256=pin)
     matches = [(family, row) for family, row in _reviewed_runs() if row["output_sha256"] == selector]
     if len(matches) != 1:
         raise ValueError("Rate artifact has no unique independently reviewed replay")
@@ -73,9 +100,10 @@ def reviewed_rates(payload, reference):
     if not isinstance(reference, dict):
         raise ValueError("Missing rate dataset reference")
     _, row = approved_replay_row(reference.get("sha256"))
+    authority = row.get("project_review_sha256", _REPLAY_SHA256)
     if "approval" in reference:
-        path = _locator(reference["approval"], _REPLAY_SHA256)
-        read_artifact(path, expected_sha256=_REPLAY_SHA256)
+        path = _locator(reference["approval"], authority)
+        read_artifact(path, expected_sha256=authority)
     path = _locator(reference, row["output_sha256"])
     rates, digest = read_artifact(path, expected_sha256=row["output_sha256"])
     if not same_json_content(rates, payload):
@@ -84,22 +112,24 @@ def reviewed_rates(payload, reference):
             or rates["network_version"] != row["network_version"]
             or rates["output_binding"]["dataset_id"] != row["dataset_id"]):
         raise ValueError("Rate identity or network differs from the reviewed replay row")
-    return rates, digest, _REPLAY_SHA256
+    return rates, digest, authority
 
 
-# No production conversion approval has been issued. A deployment may pin a reviewed
-# receipt here in a separately reviewed release. Requests cannot configure this pin.
+# Historical V3.1 test injection point. Deployed project approvals come from the operator store.
 _MAPPING_APPROVAL_SHA256 = None
 
 
 def reviewed_mapping(reference, rate_sha256, network_sha256, conditions, basis, target):
     """Authenticate the detached approval before opening the caller's mapping."""
-    if _MAPPING_APPROVAL_SHA256 is None:
+    approval_ref = reference.get("approval") if isinstance(reference, dict) else None
+    proposed = approval_ref.get("sha256") if isinstance(approval_ref, dict) else None
+    pin = proposed if trust.approved("rate_mapping", proposed) else _MAPPING_APPROVAL_SHA256
+    if pin is None:
         raise ValueError("No independent conversion approval is installed")
     if not isinstance(reference, dict):
         raise ValueError("Missing physical mapping reference")
-    approval_path = _locator(reference.get("approval"), _MAPPING_APPROVAL_SHA256)
-    approval, approval_id = read_artifact(approval_path, expected_sha256=_MAPPING_APPROVAL_SHA256)
+    approval_path = _locator(reference.get("approval"), pin)
+    approval, approval_id = read_artifact(approval_path, expected_sha256=pin)
     context = {
         "rate_sha256": rate_sha256,
         "network_sha256": network_sha256,

@@ -3,9 +3,9 @@ from pathlib import Path, PureWindowsPath
 
 import yaml
 
-from scripts.artifact_io import require_sha256, sha256_bytes, sha256_file
-from scripts.multiphase_contracts import decode_unique_json
-from scripts.scientific_validation import validate_finite_tree
+from sbq123.common.artifacts.artifact_io import require_sha256, sha256_bytes, sha256_file
+from sbq123.common.workflow.multiphase_contracts import decode_unique_json
+from sbq123.common.validation.scientific_validation import validate_finite_tree
 
 
 class _ManifestLoader(yaml.SafeLoader):

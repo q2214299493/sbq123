@@ -17,3 +17,9 @@
 | P2, surface engine upgrade | Cantera 3.2.0 spatial wall-flux handling needs the zero-flux inert coordinate described in the architecture contract | Requalify or retire this workaround when changing the pin |
 | P2, scientific qualification | Release-owned synthetic thermodynamics and validated dimensional conversions cover the analytical families only | Obtain independent thermochemistry, site inventory and kinetic qualification for an application |
 | P3, resource use | Dynamic results retain local evaluation receipts, including solver trial states. Memory grows with RHS evaluations and multistart count | Bound requested output and retain records when comparing performance |
+
+## Consolidated audit disposition
+
+Three formerly split logical modules (kinetic parameter generation, export contract, trajectory statistics) now have one shared implementation. The historical role maps still select 17 overlapping logical names with differing behavior. Historical opposite-engine export spellings stay available for accepted replay. Current public CATKINAS and Zacros export dispatch loads the owning engine package. Core scientific imports resolve through the canonical namespace. Some frozen role readers, workflow coordinators and V3.1 test imports still require the compatibility context. The repository orchestration scripts and immutable V3.1 inputs remain separate from wheel production source.
+
+Common owns the Astropy units extra. Engine-only role metadata no longer requests Astropy. V3.2 declares CPython 3.13; qualifying an additional minor version requires building the dependency set and replaying both workflows on that version. Fixed PFR permits momentum-driven pressure changes. Dynamic PFR uses a local constant-pressure source model. Coupled site families, unequal inventories per reference pair, friction, thermal transport and root stability remain outside the validated controls.

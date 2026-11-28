@@ -4,9 +4,9 @@ from __future__ import annotations
 from copy import deepcopy
 from fractions import Fraction
 
-from scripts.artifact_io import sha256_json
-from scripts.kinetic_parameters.rate_units import convert_unit, extent_scale, unit
-from scripts.scientific_validation import finite_number
+from sbq123.common.artifacts.artifact_io import sha256_json
+from sbq123.common.kinetic_model.kinetic_parameters.rate_units import convert_unit, extent_scale, unit
+from sbq123.common.validation.scientific_validation import finite_number
 
 
 COUNT_UNITS = {

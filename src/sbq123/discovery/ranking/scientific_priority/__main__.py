@@ -3,15 +3,14 @@
 import argparse
 from pathlib import Path
 
-from scripts.artifact_io import load_json_object as read, sha256_json
+from sbq123.common.artifacts.artifact_io import load_json_object as read, sha256_json
 from .benchmark import fe_inventory, read_sources, synthetic
 from .engine import rank
 from .structure_binding import validate_structures
 from .proposals import proposals, publish, review
 from .evidence import registry_inventory
-from scripts.baseline_mkm.single_point import ticket_binding
-from scripts.kinetic_parameters.engine import check_version
-from scripts.artifact_io import sha256_file
+from sbq123.common.artifacts.artifact_io import check_version
+from sbq123.common.artifacts.artifact_io import sha256_file
 
 
 def emit(packet, objective, out):
@@ -120,6 +119,7 @@ def import_packet(path, registry=None, tickets=None):
         if key := c.get("spc_source"):
             c["spc_execution_proposal"] = documents[key]
         if tickets is not None and c.get("ticket"):
+            from sbq123.mkm.catkinas.compat.baseline_mkm.single_point import ticket_binding
             binding = ticket_binding(tickets, c["ticket"]["ticket_id"])
             if c["ticket"]["question_id"] != binding["question_id"]:
                 raise ValueError("Ticket question differs from the reviewed candidate")

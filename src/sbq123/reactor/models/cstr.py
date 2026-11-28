@@ -9,17 +9,17 @@ from ..kinetics.source import CoupledTank
 from ..state import network
 
 
-def _one(case, start):
+def _one(case, start, coverage=None):
     inlet, inlet_surface = case.phases(case.x)
-    gas, surf = case.phases(start)
-    branch = case.branch(inlet)
+    gas, surf = case.phases(start, coverage=coverage)
+    branch = case.branch(gas, coverage=coverage)
     if branch:
         reactor = CoupledTank(gas, energy="off", clone=False, volume=1.0)
         reactor.chemistry_enabled = False
         reactor.local_source = branch
     else:
         reactor = ct.IdealGasReactor(gas, energy="off", clone=False, volume=1.0)
-    surface = ct.ReactorSurface(surf, reactor, clone=False, A=case.m.area_per_volume) if surf is not None and not branch else None
+    surfaces = [ct.ReactorSurface(s, reactor, clone=False, A=case.m.area_per_volume) for s in surf] if not branch else []
     # The intensive equations are identical in this unit-volume representative
     # vessel. Physical outlet flow and per-species residuals are restored below.
     boundary = ct.Reservoir(inlet, clone=False)
@@ -36,24 +36,29 @@ def _one(case, start):
     net.initialize()
 
     try:
-        if surface is None and not branch:
+        if not surfaces and not branch:
             net.solve_steady()
-            return _verified_outlet(case, reactor, surface, None, outlet_device, net, scales), []
+            return _verified_outlet(case, reactor, surfaces, None, outlet_device, net, scales), []
         # ReactorNet's direct steady solver does not support reacting surfaces.
         # Integrate its actual open tank and inspect independent outlet balances.
-        for i in range(90):
-            net.advance((i + 1) * tau)
+        # Accept only on independently checked surface and species balances.
+        # Limit adaptive solver work rather than time in units of gas residence.
+        net.advance(tau)
+        for i in range(1024):
+            if i:
+                for _ in range(8):
+                    net.step()
             if branch:
                 branch.evaluate(reactor.phase, commit=True)
             try:
-                row = _verified_outlet(case, reactor, surface, branch, outlet_device, net, scales)
+                row = _verified_outlet(case, reactor, surfaces, branch, outlet_device, net, scales)
             except RootFailure:
-                if i == 89 or (branch and branch.failure):
+                if i == 1023 or (branch and branch.failure):
                     raise
                 continue
             if branch:
                 # Only a physically verified outlet gets a final report evaluation.
-                return _verified_outlet(case, reactor, surface, branch.report_at(branch.checkpoint), outlet_device, net, scales), branch.receipts
+                return _verified_outlet(case, reactor, surfaces, branch.report_at(branch.checkpoint), outlet_device, net, scales), branch.receipts
             return row, []
     except RootFailure as exc:
         if branch:
@@ -67,13 +72,13 @@ def _one(case, start):
         raise failure from exc
 
 
-def _verified_outlet(case, reactor, surface, source, outlet_device, net, scales):
+def _verified_outlet(case, reactor, surfaces, source, outlet_device, net, scales):
     actual_mdot = outlet_device.mass_flow_rate * case.volume
     if not np.isfinite(actual_mdot) or actual_mdot <= 0:
         raise RootFailure("Nonphysical CSTR withdrawal")
     row = case.observe(
         reactor.phase,
-        surface.phase if surface is not None else None,
+        tuple(s.phase for s in surfaces),
         source,
         case.volume,
         case.volume * reactor.phase.density / actual_mdot,
@@ -131,22 +136,30 @@ def stirred_tank(case, extra_seeds):
     invalid = []
     outcomes = []
 
-    def add(start, origin):
-        key = tuple(start)
+    def add(start, origin, coverage=None):
+        key = (tuple(start), None if coverage is None else tuple(coverage))
         starts.setdefault(key, []).append(origin)
-        origin["seed_mole_fractions"] = list(key)
+        origin["seed_mole_fractions"] = list(start)
+        if coverage is not None:
+            origin["seed_surface_coverage"] = list(coverage)
         outcomes.append(origin)
 
     add(case.x, {"source": "feed"})
     for index, seed in enumerate(extra_seeds):
         origin = {"source": "request", "index": index, "seed": seed}
         try:
+            coverage = None
+            if isinstance(seed, dict):
+                if set(seed) != {"gas_flow_mol_s", "surface_coverage"}:
+                    raise ValueError("Invalid joint gas/surface seed")
+                coverage = case.checked_coverage(seed["surface_coverage"])
+                seed = seed["gas_flow_mol_s"]
             if not isinstance(seed, (tuple, list)) or len(seed) != len(case.x):
                 raise ValueError("Invalid CSTR seed dimension")
             y = np.array([number(v, "seed mol/s", nonnegative=True) for v in seed])
             if not 0 < sum(y) < float("inf"):
                 raise ValueError("Seed total must be finite and positive")
-            add(y / sum(y), origin)
+            add(y / sum(y), origin, coverage)
         except ValueError as exc:
             origin.update(status="rejected", reason=str(exc))
             invalid.append(origin.copy())
@@ -156,9 +169,9 @@ def stirred_tank(case, extra_seeds):
             add((1 - weight) * case.x + weight * vertex, {"source": "vertex", "species": name, "weight": weight})
 
     rows, roots, receipts = [], [], []
-    for start, origins in starts.items():
+    for (start, coverage), origins in starts.items():
         try:
-            row, local = _one(case, start)
+            row, local = _one(case, start) if coverage is None else _one(case, start, coverage)
         except (RootFailure, ValueError) as exc:
             rejection = dict(
                 seed_mole_fractions=list(start),

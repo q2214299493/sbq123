@@ -1,5 +1,6 @@
 """Prepare, execute and inspect one approved CATKINAS steady-state point in a fresh run directory."""
 
+from sbq123.common.kinetic_model.replay_precision import same_recalculation
 import argparse
 from contextlib import closing
 from datetime import datetime, timezone
@@ -78,7 +79,7 @@ def qualify(network, dataset, config):
     if dataset["network_version"] != network["network_version"]:
         raise ValueError("Network version differs from dataset")
     rebuilt = reproduce(network, dataset)
-    if rebuilt != dataset:
+    if not same_recalculation(dataset, rebuilt):
         raise ValueError("Dataset differs from network, source verification or reviewed rates")
     if "sensitivity_perturbation" in dataset and config != sensitivity_configuration(baseline_config(), rebuilt):
         raise ValueError("Feed or conditions differ from the sensitivity derivative")

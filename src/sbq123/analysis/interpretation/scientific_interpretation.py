@@ -1,7 +1,7 @@
 """Report what a numerical V3.1 comparison supports at its recorded conditions."""
 from copy import deepcopy
 
-from scripts.artifact_io import sha256_json
+from sbq123.common.artifacts.artifact_io import sha256_json
 
 
 def summarize_comparison(result):

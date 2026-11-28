@@ -2,21 +2,17 @@
 import math
 from datetime import datetime
 
-from scripts.artifact_io import require_sha256, sha256_json
-from scripts.kinetic_parameters.laws import activation_shift, coefficient, exp_rate, gas_powers, positive
-from scripts.multiphase_contracts import _bundle_validator, _check_species_context
-from scripts.reaction_network.builder import check_parameter_basis, reviewed as reviewed_records, scientific_level
-from scripts.reaction_network.catalog import index_records
-from scripts.reaction_network.thermodynamics import check_closure, check_cycles
-from scripts.scientific_validation import finite_number, validate_finite_tree
-from scripts.physical_constants import KB
+from sbq123.common.artifacts.artifact_io import check_version, require_sha256, sha256_json
+from sbq123.common.kinetic_model.replay_precision import original_representation
+from sbq123.common.kinetic_model.kinetic_parameters.laws import activation_shift, coefficient, exp_rate, gas_powers, positive
+from sbq123.common.workflow.multiphase_contracts import _bundle_validator, _check_species_context
+from sbq123.common.reaction_network.reaction_network.builder import check_parameter_basis, reviewed as reviewed_records, scientific_level
+from sbq123.common.reaction_network.reaction_network.catalog import index_records
+from sbq123.common.reaction_network.reaction_network.thermodynamics import check_closure, check_cycles
+from sbq123.common.validation.scientific_validation import finite_number, validate_finite_tree
+from sbq123.common.kinetic_model.physical_constants import KB
 
 SOURCES = {"local_calculation", "external_calculation", "literature", "user_provided", "approved_assumption", "synthetic"}
-
-
-def check_version(document, field):
-    if document.get(field) != sha256_json({k: v for k, v in document.items() if k != field}):
-        raise ValueError(f"Invalid {field} digest")
 
 
 def reviewed(model, network_version, verified):
@@ -59,6 +55,9 @@ def missing(entry, parameter, model):
     return gaps
 
 
+MOLECULAR_ACTIVITY = "molecules per reference with one site of each inventory"
+
+
 def conditions(entry, param, model):
     e = entry["energies"]
     t = positive(param["temperature_K"], "temperature")
@@ -70,7 +69,7 @@ def conditions(entry, param, model):
     states = param["standard_states"]
     if model.get("normalization", "per_reference_site") != "per_reference_site":
         raise ValueError("Reactor or event normalization cannot substitute for elementary rate coefficients")
-    if states["surface_activity_convention"] != "fractional site occupation":
+    if states["surface_activity_convention"] not in ("fractional site occupation", MOLECULAR_ACTIVITY):
         raise ValueError("Unsupported surface activity convention")
     vr = param["validity_range"]
     if not (vr["min_temperature_K"] <= t <= vr["max_temperature_K"] and vr["min_pressure_Pa"] <= p <= vr["max_pressure_Pa"]):
@@ -155,7 +154,7 @@ def select_parameter(entry, parameters, model, species):
 
 def predicted_view(entry, model, param, network, species):
     """Qualify structural and kinetic inputs separately from the measured TS pathway."""
-    from scripts.kinetic_parameters.prediction import evaluate
+    from sbq123.common.kinetic_model.kinetic_parameters.prediction import evaluate
 
     # Single-point preflight replays from network evidence alone. An ephemeral
     # --evidence argument cannot grant a prediction which that preflight cannot reproduce.
@@ -291,7 +290,7 @@ def _dataset(network, records):
                "catalog": network["catalog"], "species": network["species"], "source_artifacts": network["source_artifacts"],
                "reactions": records, "export_eligible": bool(records) and all(r["export_eligible"] for r in records),
                "execution_authorized": False}
-    return {"dataset_version": sha256_json(payload), **payload}
+    return original_representation({"dataset_version": sha256_json(payload), **payload})
 
 
 def generate(network, bindings=None, *, verified_hashes=()):
@@ -303,8 +302,8 @@ def generate(network, bindings=None, *, verified_hashes=()):
 
 def _thermal_input(entry, intake, review, phase):
     """Re-bind raw or precomputed state evidence using the thermochemistry and network owners."""
-    from scripts.reaction_network.thermodynamics import thermal_evidence
-    from scripts.thermochemistry.engine import calculate as calculate_thermochemistry, ts_binding
+    from sbq123.common.reaction_network.reaction_network.thermodynamics import thermal_evidence
+    from sbq123.common.thermochemistry.thermochemistry.engine import calculate as calculate_thermochemistry, ts_binding
 
     definition = entry["definition"]
     calc = entry.get("thermochemistry")
@@ -329,7 +328,7 @@ def qualify_network_rows(network, bindings, *, conservation, intake=None, review
                          verified_hashes=(), input_errors=None, intake_bound=False):
     """Qualify each row independently. Only a complete, unmodified network can yield an engine handoff."""
     from jsonschema import ValidationError
-    from scripts.reaction_network.builder import directions
+    from sbq123.common.reaction_network.reaction_network.builder import directions
 
     models, parameters, species, verified = _bound_inputs(network, bindings, verified_hashes)
     version = network["network_version"]

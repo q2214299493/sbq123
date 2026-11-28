@@ -1,5 +1,6 @@
-from scripts.kinetic_parameters.engine import MOLECULAR_ACTIVITY, check_version
-from scripts.kinetic_parameters.laws import positive, pressure_unit
+from sbq123.common.artifacts.artifact_io import check_version
+from sbq123.common.kinetic_model.kinetic_parameters.laws import MOLECULAR_ACTIVITY
+from sbq123.common.kinetic_model.kinetic_parameters.laws import positive, pressure_unit
 
 
 def validate_export(dataset, *, fixed_mkm=False):

@@ -2,11 +2,11 @@
 import re
 from pathlib import Path
 
-from scripts.runtime_resources import SOURCE_ROOT
-from scripts.artifact_io import require_sha256, sha256_bytes
-from scripts.kinetic_parameters.rate_normalization import denominator_scale
-from scripts.multiphase_contracts import decode_unique_json, read_unique_json
-from scripts.scientific_validation import finite_number
+from sbq123.common.workflow.runtime_resources import SOURCE_ROOT
+from sbq123.common.artifacts.artifact_io import require_sha256, sha256_bytes
+from sbq123.common.kinetic_model.kinetic_parameters.rate_normalization import denominator_scale
+from sbq123.common.workflow.multiphase_contracts import decode_unique_json, read_unique_json
+from sbq123.common.validation.scientific_validation import finite_number
 
 LEGACY_REQUEST = "one_event_per_reference_site"
 REFERENCE_FIELDS = {"reference_basis", "reference_id", "denominator_value", "denominator_unit",

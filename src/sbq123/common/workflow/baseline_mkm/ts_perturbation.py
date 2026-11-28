@@ -1,9 +1,10 @@
 """Reproduce a single, benchmark-scoped transition-state displacement from its reviewed parent."""
 
 from copy import deepcopy
+from sbq123.common.kinetic_model.replay_precision import original_representation
 
-from scripts.artifact_io import sha256_json
-from scripts.kinetic_data.local_sensitivity import central_difference as central_difference
+from sbq123.common.artifacts.artifact_io import sha256_json
+from sbq123.common.evidence.kinetic_data.local_sensitivity import central_difference as central_difference
 from scripts.kinetic_parameters.engine import calculate, check_version, generate
 from scripts.kinetic_parameters.export_contract import validate_export
 
@@ -90,7 +91,7 @@ def derivative(network, parent, sign, delta_eV=DELTA_EV, reaction_id=REACTION):
         method="Shift absolute TS Gibbs energy at fixed endpoints and prefactors; review and sources refer to parent.",
     )
     del child["dataset_version"]
-    return {"dataset_version": sha256_json(child), **child}
+    return original_representation({"dataset_version": sha256_json(child), **child})
 
 
 def reproduce(network, dataset):

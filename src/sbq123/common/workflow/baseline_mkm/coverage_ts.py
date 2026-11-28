@@ -3,14 +3,14 @@ import argparse
 import json
 from pathlib import Path
 
-from scripts.artifact_io import sha256_bytes, sha256_json, write_json_exclusive
+from sbq123.common.artifacts.artifact_io import sha256_bytes, sha256_json, write_json_exclusive
 from scripts.baseline_mkm.single_point_result import check_close
-from scripts.baseline_mkm.ts_perturbation import reviewed_reaction
+from sbq123.common.workflow.baseline_mkm.ts_perturbation import reviewed_reaction
 from scripts.kinetic_parameters.engine import calculate, generate
-from scripts.baseline_mkm.parameter_table import catkinas, catkinas_energy_pair, per_bar, validate_export
-from scripts.kinetic_parameters.laws import activation_shift
-from scripts.multiphase_contracts import _bundle_validator, _check_species_context, decode_unique_json, read_unique_json
-from scripts.scientific_validation import validate_finite_tree
+from sbq123.common.workflow.baseline_mkm.parameter_table import catkinas, catkinas_energy_pair, per_bar, validate_export
+from sbq123.common.kinetic_model.kinetic_parameters.laws import activation_shift
+from sbq123.common.workflow.multiphase_contracts import _bundle_validator, _check_species_context, decode_unique_json, read_unique_json
+from sbq123.common.validation.scientific_validation import validate_finite_tree
 
 PARAMETER_SCHEMA = "https://schemas.sbq123.invalid/multiphase/1.0.0/kinetic_parameter.schema.json"
 

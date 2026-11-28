@@ -11,8 +11,7 @@ import pytest
 from sbq123.analysis.observations.rates import directional_sources
 from sbq123.analysis.observations.reactor_profiles import analyze_profile, compare_local_mkm, compare_operating_points
 from sbq123.common.compat import historical_module
-from sbq123.common.evidence import trust
-from sbq123.common.kinetic_model.contracts import GAS_CONSTANT
+from sbq123.common.kinetic_model.contracts import GAS_CONSTANT, identity
 from sbq123.reactor import simulate
 
 
@@ -41,6 +40,10 @@ def test_controlled_contrast_and_partial_outputs(variable, value):
     assert out["status"] == "available"
     assert out["change"]["conversion"] == pytest.approx(b["points"][-1]["conversion"] - a["points"][-1]["conversion"])
     assert compare_operating_points(p(a), p(case(**{variable: value}, volume_m3=2)), variable)["change"] is None
+    other_basis = deepcopy(b)
+    other_basis["rate_factor_to_volume"] *= 2
+    other_basis["result_sha256"] = identity({k:v for k,v in other_basis.items() if k != "result_sha256"})
+    assert compare_operating_points(p(a), p(other_basis), variable)["change"] is None
     profile = analyze_profile(*p(a))
     assert profile["points"][-1]["coverage"] is None
     assert profile["points"][-1]["conversion"] > 0 and profile["coordinate_unit"] == "m"
@@ -97,7 +100,7 @@ def test_qualified_study_and_hypotheses(study_root, tmp_path, monkeypatch):
     assert {"NEB", "MLIP candidate structure generation"} <= {r["calculation"] for r in plan["deferred"]}
 
 
-def test_return_requires_independent_review_and_preserves_parent(study_root, tmp_path, monkeypatch):
+def test_return_requires_independent_review_and_preserves_parent(study_root, tmp_path, monkeypatch, approve_project_record):
     monkeypatch.setenv("SBQ123_ROLE_DATA", str(study_root))
     api = historical_module("mkm", "scripts.scientific_priority.proposals")
     from sbq123.discovery.ranking.scientific_priority.returned_result import ingest
@@ -131,7 +134,7 @@ def test_return_requires_independent_review_and_preserves_parent(study_root, tmp
     dest = tmp_path / "networks"
     with pytest.raises(ValueError, match="independent"):
         ingest(tmp_path, receipt["path"], receipt["sha256"], dest)
-    monkeypatch.setattr(trust, "DISCOVERY_RETURN_APPROVALS", frozenset({receipt["sha256"]}))
+    approve_project_record("discovery_return", receipt["sha256"])
     published = ingest(tmp_path, receipt["path"], receipt["sha256"], dest)
     assert not published["execution_authorized"] and published["network_version"] == child["network_version"]
     assert ingest(tmp_path, receipt["path"], receipt["sha256"], dest) == published
@@ -139,10 +142,10 @@ def test_return_requires_independent_review_and_preserves_parent(study_root, tmp
     for change, message in [({"scope": "real_catalyst"}, "scope"),
                             ({"origin": "completed_calculation"}, "execution_authorization")]:
         altered = put("changed_review", review | change)
-        monkeypatch.setattr(trust, "DISCOVERY_RETURN_APPROVALS", frozenset({altered["sha256"]}))
+        approve_project_record("discovery_return", altered["sha256"])
         with pytest.raises(ValueError, match=message):
             ingest(tmp_path, altered["path"], altered["sha256"], dest)
-    monkeypatch.setattr(trust, "DISCOVERY_RETURN_APPROVALS", frozenset({receipt["sha256"]}))
+    approve_project_record("discovery_return", receipt["sha256"])
     put("measurement", {"forged": True})
     with pytest.raises(ValueError, match="SHA-256"):
         ingest(tmp_path, receipt["path"], receipt["sha256"], dest)

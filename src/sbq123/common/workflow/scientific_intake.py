@@ -3,7 +3,7 @@ import argparse
 import json
 from pathlib import Path
 
-from scripts.kinetic_data.reaction_intake import (
+from sbq123.common.evidence.kinetic_data.reaction_intake import (
     AVAILABLE as AVAILABLE,
     INCOMPATIBLE as INCOMPATIBLE,
     MISSING as MISSING,
@@ -40,7 +40,7 @@ def main():
         if args.intakes or args.operation is not None:
             mode = "--inspect-project" if args.inspect_project else "--kinetic-readiness"
             parser.error(f"{mode} is separate from positional reaction intake and --operation")
-        from scripts.kinetic_data.project_inspection import inspect_project
+        from sbq123.common.evidence.kinetic_data.project_inspection import inspect_project
 
         try:
             result = inspect_project(*(args.inspect_project or args.kinetic_readiness),

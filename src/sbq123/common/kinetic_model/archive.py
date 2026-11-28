@@ -36,6 +36,23 @@ def read_registered_cycle():
         raise ValueError("Ambiguous historical kinetic model")
     network = load(dict(network_refs.pop()))
     rates = load(dict(data_refs.pop()))
+    return _convert_network(network, rates, scope="synthetic_benchmark", provenance=replay["scope"])
+
+
+def from_network(network, rates, *, scope="project"):
+    return _convert_network(network, rates, scope=scope, provenance="user_supplied")
+
+
+def _convert_network(network, rates, *, scope, provenance):
+    raw = network_record(network, rates, scope=scope)
+    return Model._from_verified_record(raw, registered_digest=identity(raw), provenance=provenance)
+
+
+def network_record(network, rates, *, scope):
+    """Convert eligible, point-specific ideal-gas activity laws without extrapolation."""
+    for record, field in ((network, "network_version"), (rates, "dataset_version")):
+        if identity({k: v for k, v in record.items() if k != field}) != record[field]:
+            raise ValueError("Invalid source version for " + field)
     if network["network_version"] != rates["network_version"] or not rates["export_eligible"]:
         raise ValueError("Kinetic model differs from qualified network")
     species = [
@@ -50,7 +67,7 @@ def read_registered_cycle():
         if (
             not reaction["scientifically_validated"]
             or not reaction["export_eligible"]
-            or reaction["model"].get("use_scope") != "synthetic_benchmark"
+            or reaction["model"].get("use_scope", "project") != scope
         ):
             raise ValueError("Unqualified archived reaction")
         if reaction["model"].get("coverage_fractions"):
@@ -88,4 +105,4 @@ def read_registered_cycle():
         pressure_domain_Pa=[p, p],
         rate_basis="mol_per_mol_site_s",
     )
-    return Model._from_verified_record(raw, registered_digest=identity(raw), provenance=replay["scope"])
+    return raw

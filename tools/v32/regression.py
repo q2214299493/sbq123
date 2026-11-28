@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import shlex
+import shutil
 import sys
 
 
@@ -40,6 +41,10 @@ def main():
         if event == "subprocess.Popen":
             command = values[1]
             executable = values[0] or (shlex.split(command, posix=False)[0] if isinstance(command, str) else command[0])
+            # CPython records the processor for archival receipts with this OS query.
+            if (sys.platform == "linux" and values == ("uname", ["uname", "-p"], None, None)
+                    and shutil.which("uname") in ("/bin/uname", "/usr/bin/uname")):
+                return
             if Path(str(executable).strip('"')).stem.lower() not in ("python", "python3", "git", "where"):
                 raise RuntimeError("External engine execution disabled during offline regression")
 
@@ -71,6 +76,25 @@ def main():
 
                 monkeypatch.setattr(_windows_job, "WindowsJob", SimulatedJob)
                 monkeypatch.setattr(process, "time", SimpleNamespace(monotonic=lambda: 0.0))
+            if request.node.name == "test_launch_timeout_is_bounded" and os.name != "nt":
+                import subprocess
+                from types import SimpleNamespace
+                from sbq123.common.workflow import process
+                # The frozen wait-only child has a fictitious PID. Adapt communicate
+                # and process-group termination on this test's process boundary.
+                real_launch = request.module.point.launch
+                def launch(*args, **kwargs):
+                    popen = subprocess.Popen
+                    def child(*args, **kwargs):
+                        proc = popen(*args, **kwargs)
+                        proc.communicate = proc.wait
+                        return proc
+                    with monkeypatch.context() as patch:
+                        patch.setattr(subprocess, "Popen", child)
+                        patch.setattr(process, "time", SimpleNamespace(monotonic=lambda: 0.0))
+                        patch.setattr(os, "killpg", lambda pid, sig: None)
+                        return real_launch(*args, **kwargs)
+                monkeypatch.setattr(request.module.point, "launch", launch)
             if request.node.name == "test_explicit_alternate_is_scoped_and_keeps_default":
                 # Pre-bind the one historical operator-reviewed test configuration
                 # before the test writes its file. Production receives no new pin.

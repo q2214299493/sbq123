@@ -1,7 +1,7 @@
 import math
 
-from scripts.kinetic_parameters.export_contract import per_bar, source_info, validate_export
-from scripts.physical_constants import H_J_S, KB, KB_J_K
+from sbq123.common.kinetic_model.kinetic_parameters.export_contract import per_bar, source_info, validate_export
+from sbq123.common.kinetic_model.physical_constants import H_J_S, KB, KB_J_K
 
 
 def catkinas_energy_pair(forward, reverse, temperature):

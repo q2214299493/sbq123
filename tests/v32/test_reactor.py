@@ -119,10 +119,9 @@ def test_dynamic_analytical(kind):
     assert out["local_solver_receipts"] and all(r["converged"] for r in out["local_solver_receipts"])
 
 
-def test_local_failure():
+def test_initial_root_discovery():
     pytest.importorskip("sbq123.mkm.catkinas.local")
-    with pytest.raises(ValueError, match="continuity"):
-        request(
+    result = request(
             "PFR",
             "langmuir",
             mode="dynamic_mkm",
@@ -132,3 +131,7 @@ def test_local_failure():
             initial_coverage=[0.01],
             max_root_distance=0.01,
         )
+
+    first = result["local_solver_receipts"][0]
+    assert first["converged"] and first["predecessor_checkpoint_sha256"] is None
+    assert first["distance"] > .01

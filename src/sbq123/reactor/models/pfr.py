@@ -9,7 +9,7 @@ from scipy.interpolate import BSpline, CubicSpline, make_interp_spline
 
 from sbq123.common.kinetic_model.contracts import RootFailure
 from ..balance import account, configure_precision
-from ..kinetics.source import CoupledTank
+from ..kinetics.source import AxialParcel
 from ..state import network, propagate
 
 
@@ -34,7 +34,7 @@ def plug_flow(case, area, points, intervals):
 
 def _integrate(case, area, intervals):
     """Advance the physical trajectory without access to the requested report grid."""
-    guarded = case.m.surface is not None and not case.dynamic
+    guarded = bool(case.m.surfaces) and not case.dynamic
     gas, surf = case.phases(case.x, flow_guard=guarded)
     physical_gas, physical_surface = case.phases(case.x)
     branch = case.branch(gas)
@@ -44,25 +44,23 @@ def _integrate(case, area, intervals):
     if not np.isfinite(length) or not np.isfinite(speed) or min(length, speed) <= 0:
         raise ValueError("Invalid PFR span or velocity")
     if branch:
-        # For the qualified equal-molar-mass gas family, mass conservation at
-        # fixed T and P makes the Lagrangian residence coordinate exactly z/u.
-        if not np.allclose(gas.molecular_weights, gas.molecular_weights[0], rtol=1e-12, atol=0):
-            raise ValueError("Dynamic parcel mapping requires equal gas molecular weights")
-        reactor = CoupledTank(gas, energy="off", clone=False, volume=1.0)
+        reactor = AxialParcel(gas, energy="off", clone=False, volume=1.0)
+        reactor.area_per_mdot = area / case.mdot
         reactor.chemistry_enabled = False
         reactor.local_source = branch
-        surface = None
+        surface = []
     else:
         reactor = ct.FlowReactor(gas, energy="off", clone=False)
         reactor.area = area
         reactor.mass_flow_rate = case.mdot
-        if surf is not None:
-            # A unit reference patch leaves the physical active area entirely in S/V.
-            surface = ct.ReactorSurface(surf, reactor, clone=False, A=1.0)
+        surface = [ct.ReactorSurface(s, reactor, clone=False, A=1.0) for s in surf]
+        if surface:
             reactor.surface_area_to_volume_ratio = case.m.area_per_volume
-        else:
-            surface = None
     net = network(reactor)
+    if len(surf) > 1 and not branch:
+        # IDA's local truncation error applies to the differential gas state.
+        # All algebraic site inventories and steady production rates are checked independently.
+        net.include_algebraic_in_error_test = False
     # Resolve rapid inlet layers using the turnover time of the feed.
     inlet_rates = case.m.signed_rates(physical_gas, physical_surface)
     damkohler = max(abs(inlet_rates)) * length / (speed * sum(physical_gas.concentrations) * 1000)
@@ -76,24 +74,28 @@ def _integrate(case, area, intervals):
     else:
         grid, jacobian = length * s, np.full_like(s, length)
     grid[-1] = length
+    inlet_momentum = gas.P + gas.density * speed**2
     states, velocities, anchors, branch_ids = [], [], [], []
     directional = []
     try:
         net.initialize()
         for i, z in enumerate(grid):
             if i:
-                net.advance(z / speed if branch else z)
+                net.advance(z)
             gas = reactor.phase
-            current_surface = surface.phase if surface is not None else None
+            current_surface = tuple(s.phase for s in surface)
             gas, current_surface = _physical_state(gas, current_surface, guarded, physical_gas, physical_surface)
             obs = case.observe(gas, current_surface, branch, z, 0, commit=True)
-            if abs(gas.P / case.p - 1) > 2e-7 or abs(gas.T / case.t - 1) > 1e-9:
+            velocity = case.mdot / gas.density / area if branch else reactor.speed
+            pressure_error = abs(gas.P / case.p - 1) if branch else abs((gas.P + gas.density * velocity**2) / inlet_momentum - 1)
+            mass_error = abs(gas.density * velocity * area / case.mdot - 1)
+            if pressure_error > 2e-7 or mass_error > 2e-7 or abs(gas.T / case.t - 1) > 1e-9:
                 raise RootFailure(
-                    "Flow left the validated isothermal, isobaric domain",
+                    "PFR mass, pressure/momentum or isothermal balance failed",
                     {"converged": False, "z": float(z), "T": gas.T, "P": gas.P, "target_P": case.p},
                 )
-            velocities.append(case.mdot / gas.density / area if branch else reactor.speed)
-            states.append([gas.T, gas.P, *gas.X, *(current_surface.coverages if current_surface is not None else [])])
+            velocities.append(velocity)
+            states.append([gas.T, gas.P, *gas.X, *(v for s in current_surface for v in s.coverages)])
             directional.append([list(obs[key].values()) for key in (
                 "source_mol_m3_s", "creation_mol_m3_s", "destruction_mol_m3_s"
             )])
@@ -127,7 +129,8 @@ def _integrate(case, area, intervals):
                 "tolerance_per_feed": [2e-6] * len(case.names), "method": "full-grid Simpson",
             })
     residual = (outlet - case.feed - integrated) / case.fin
-    diagnostics = _axial_balance(case, net, scales, outlet, integrated, residual, reference)
+    gross = progress(1.0)[1:]
+    diagnostics = _axial_balance(case, net, scales, outlet, integrated, residual, reference, gross)
     solver = dict(
         success=True,
         method="Cantera/ReactorNet/CVODES local-source parcel" if branch else "Cantera/FlowReactor/IDA",
@@ -142,7 +145,7 @@ def _integrate(case, area, intervals):
     return _Trajectory(grid, np.asarray(states), tau, tuple(anchors), branch, solver, progress, check_progress, stretch)
 
 
-def _axial_balance(case, net, scales, outlet, integrated, residual, reference):
+def _axial_balance(case, net, scales, outlet, integrated, residual, reference, gross):
     """Compare molar-flow closure and quadrature accuracy on each species basis."""
     extent = abs(integrated) / case.fin
     population = np.maximum(case.feed, outlet) / case.fin
@@ -155,6 +158,9 @@ def _axial_balance(case, net, scales, outlet, integrated, residual, reference):
     # A second physical quadrature also checks small
     # net production when subtraction from a large inlet loses precision.
     quadrature_error = abs(integrated - reference) / case.fin
+    # Roundoff in two opposing traffic integrals does not relax the outlet balance.
+    opposing = np.minimum(gross[0], gross[1]) / case.fin
+    quadrature_budget = 2e-6 * extent + 4 * net.rtol * np.maximum(opposing, 0)
     receipt = {
         "species": case.names, "native_atol": net.atol, "native_rtol": net.rtol,
         "inlet_mass_fraction_scales": dict(zip(case.names, scales.tolist())),
@@ -162,10 +168,10 @@ def _axial_balance(case, net, scales, outlet, integrated, residual, reference):
         "relative_species_residual": relative.tolist(),
         "residual_mol_s": (residual * case.fin).tolist(), "tolerance_mol_s": (tolerance * case.fin).tolist(),
         "quadrature_difference_per_feed": quadrature_error.tolist(),
-        "quadrature_tolerance_per_feed": (2e-6 * extent).tolist(),
+        "quadrature_tolerance_per_feed": quadrature_budget.tolist(),
     }
     if (not np.isfinite(residual).all() or np.any(abs(residual) > tolerance)
-            or not np.isfinite(quadrature_error).all() or np.any(quadrature_error > 2e-6 * extent)):
+            or not np.isfinite(quadrature_error).all() or np.any(quadrature_error > quadrature_budget)):
         # JSON cannot carry NaN or infinity in a failure receipt.
         for key, value in receipt.items():
             if isinstance(value, list) and key != "species":
@@ -176,12 +182,14 @@ def _axial_balance(case, net, scales, outlet, integrated, residual, reference):
 
 def _physical_state(gas, current_surface, guarded, physical_gas, physical_surface):
     if guarded:
-        wall = current_surface.get_net_production_rates(gas) * gas.molecular_weights
-        if abs(gas.X[-1]) > 1e-14 or abs(sum(wall)) > 1e-8 * max(sum(abs(wall)), 1e-25):
+        wall = sum(s.get_net_production_rates(gas) for s in current_surface) * gas.molecular_weights
+        wall_traffic = sum(s.get_creation_rates(gas) + s.get_destruction_rates(gas) for s in current_surface) * gas.molecular_weights
+        if abs(gas.X[-1]) > 1e-14 or abs(sum(wall)) > 1e-8 * max(sum(wall_traffic), 1e-25):
             raise RootFailure("Native FlowReactor requires zero net wall mass exchange")
         physical_gas.TPX = gas.T, gas.P, gas.X[:-1]
-        physical_surface.TP = gas.T, gas.P
-        physical_surface.coverages = current_surface.coverages
+        for actual, physical in zip(current_surface, physical_surface, strict=True):
+            physical.TP = gas.TP
+            physical.coverages = actual.coverages
         gas, current_surface = physical_gas, physical_surface
     elif np.min(gas.X) < 0:
         # IDA's unconstrained trace species can cross zero by roundoff.
@@ -210,12 +218,15 @@ def _profiles(case, trajectory, points):
         if trajectory.branch:
             left = int(np.searchsorted(grid, z, side="right") - 1)
             report_source = trajectory.branch.report_at(trajectory.checkpoints[left])
-        elif report_surface is not None:
-            fractions = state[2 + report_gas.n_species :]
-            if min(fractions) < -1e-9 or abs(sum(fractions) - 1) > 1e-8:
-                raise RootFailure("Nonphysical interpolated surface inventory")
-            report_surface.TP = report_gas.TP
-            report_surface.coverages = np.maximum(fractions, 0)
+        else:
+            offset = 2 + report_gas.n_species
+            for surface in report_surface:
+                fractions = state[offset:offset + surface.n_species]
+                if min(fractions) < -1e-9 or abs(sum(fractions) - 1) > 1e-8:
+                    raise RootFailure("Nonphysical interpolated surface inventory")
+                surface.TP = report_gas.TP
+                surface.coverages = np.maximum(fractions, 0)
+                offset += surface.n_species
         row = case.observe(report_gas, report_surface, report_source, z, float(time_at(z)))
         distance = z / length
         if trajectory.stretch > 1e-5:

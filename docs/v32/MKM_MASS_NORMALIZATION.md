@@ -12,8 +12,7 @@ intensive rate. A weight alone is insufficient.
 Use the existing analysis options file to select a detached review using
 `mass_conversion_approval` with `path` and `sha256`. Resolve its path relative
 to the options file. The application checks its exact bytes against an
-independent digest installed in `sbq123.common.evidence.trust.MKM_MASS_APPROVALS`.
-The candidate ships with an empty set. A reviewed deployment may add a pin.
+independent digest in an operator-approved `mass_conversion` record. Project deployment provisions the store path and a separately retained digest. The default deployment contains no project approvals. [Project trust contract](PROJECT_TRUST.md)
 
 The review is a JSON object with format `mkm-mass-conversion/1`, decision
 `approved`, a nonempty reviewer identity, the following context, and a
@@ -57,10 +56,4 @@ analysis for a verified mass comparison.
 
 ## Archived replay portability
 
-The 400 K closed-cycle source was retained from Windows. On the tested Debian
-CPython 3.13.5 installation, rebuilding its kinetic dataset differs by one
-binary64 ULP in each of three reverse coefficients. The resulting dataset
-identity differs. Both the baseline and the correction reject this replay
-before mass analysis. The portable tests exercise the calibration contract
-separately and verify the rejection of this exact historical input. The
-original public-entry controls run wherever the exact dataset reproduces.
+The original Windows files and their SHA-256 identities remain authoritative. Portable replay recomputes the dataset, checks its scientific inputs exactly, and compares only positive finite derived activity coefficients within four binary64 representable steps. The closed-cycle parent, the published synthetic interface dataset and four archived signed TS perturbations can recover their independently retained representations after this check. A failed comparison or altered source cannot establish approval.

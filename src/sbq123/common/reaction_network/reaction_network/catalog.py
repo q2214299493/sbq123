@@ -5,10 +5,10 @@ from pathlib import Path
 
 from jsonschema.exceptions import ValidationError
 
-from scripts.artifact_io import sha256_json
-from scripts.kinetic_data.reaction_intake import collect_records
-from scripts.runtime_resources import SOURCE_ROOT
-from scripts.multiphase_contracts import (
+from sbq123.common.artifacts.artifact_io import sha256_json
+from sbq123.common.evidence.kinetic_data.reaction_intake import collect_records
+from sbq123.common.workflow.runtime_resources import SOURCE_ROOT
+from sbq123.common.workflow.multiphase_contracts import (
     COLLECTIONS, _bundle_validator, check_interface_ownership, check_site_interface, interface_phase_ids,
     matches_interface_surfaces, read_artifact,
 )

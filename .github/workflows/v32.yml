@@ -30,7 +30,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
-        role: [common, mkm, kmc, reactor]
+        role: [common, mkm, kmc, reactor, reactor-dynamic]
     runs-on: ${{ matrix.os }}
     env:
       SOURCE_DATE_EPOCH: "1795600000"

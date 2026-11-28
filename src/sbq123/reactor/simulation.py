@@ -6,7 +6,6 @@ import math
 import cantera as ct
 from sbq123.common.evidence.registry import entry
 from sbq123.common.kinetic_model.contracts import RootFailure, identity, integer, number
-from ._trust import COMPANION_SHA256
 from .mechanism import mechanism, verify_conversion
 from .models.cstr import stirred_tank
 from .models.pfr import plug_flow
@@ -109,14 +108,14 @@ def simulate(
         evidence_provenance={
             "dataset_id": dataset_id,
             "dataset_sha256": m.model.digest,
-            "thermo_registry_sha256": COMPANION_SHA256,
+            "thermo_registry_sha256": m.companion["companion_sha256"],
             "scope": m.model.provenance,
             "catalyst_profile": catalyst,
             "site_conversion_approval": conversion_id,
             "site_geometry": deepcopy(m.companion["site_geometry"]),
             "mechanism_rate_comparison_max_relative": mismatch,
         },
-        assumptions=["isothermal", "ideal gas", "validated isobaric domain"],
+        assumptions=["isothermal", "ideal gas", "inviscid axial momentum balance" if kind == "PFR" and not case.dynamic else "isobaric operating state"],
         points=rows,
         solver=solver,
         uncertainty=None,

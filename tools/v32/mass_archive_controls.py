@@ -9,7 +9,6 @@ import sys
 
 import pytest
 
-from sbq123.common.evidence import trust
 from sbq123.common.evidence.mkm_mass import compare_mass_turnover
 from sbq123.common.kinetic_model.contracts import identity
 
@@ -25,6 +24,23 @@ def digest(path):
 def save(path, data):
     path.write_text(json.dumps(data, sort_keys=True), encoding="utf8")
     return path
+
+
+@pytest.fixture
+def approve_project_record(tmp_path, monkeypatch):
+    """Provision a detached test operator store independently of the calculation request."""
+    import hashlib
+    import json
+
+    def select(kind, pin):
+        row = dict(kind=kind, id="test-review", sha256=pin, reviewer="test operator", decision="approved",
+                   reviewed_at="2026-11-28T00:00:00Z")
+        raw = json.dumps(dict(format="sbq123-project-trust/1", project="manufactured-control", records=[row])).encode()
+        path = tmp_path / "operator-review.json"
+        path.write_bytes(raw)
+        monkeypatch.setenv("SBQ123_PROJECT_TRUST_STORE", str(path))
+        monkeypatch.setenv("SBQ123_PROJECT_TRUST_SHA256", hashlib.sha256(raw).hexdigest())
+    return select
 
 
 @pytest.fixture(scope="module")
@@ -92,7 +108,7 @@ def test_area_factor_does_not_grant_mass(archived, tmp_path):
 
 
 @pytest.fixture
-def calibrated(archived, tmp_path, monkeypatch):
+def calibrated(archived, tmp_path, monkeypatch, approve_project_record):
     api, args, options = archived
     profile = save(tmp_path / "options.json", options)
     native = api.analyze(**args, options=profile)["native_reference"]
@@ -111,7 +127,7 @@ def calibrated(archived, tmp_path, monkeypatch):
                                "calibration": {"path": evidence.name, "sha256": digest(evidence)}}
         receipt = save(tmp_path / "review.json", reviewed)
         if approved:
-            monkeypatch.setattr(trust, "MKM_MASS_APPROVALS", frozenset({digest(receipt)}))
+            approve_project_record("mass_conversion", digest(receipt))
         loc = {"path": receipt.name, "sha256": digest(receipt)}
         save(profile, dict(options, mass_conversion_approval=loc))
         return dict(args, options=profile), evidence

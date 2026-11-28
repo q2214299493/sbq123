@@ -3,10 +3,10 @@ from __future__ import annotations
 
 import math
 
-from scripts.artifact_io import sha256_json
-from scripts.kinetic_data.reaction_intake import AVAILABLE, STATES, report
-from scripts.scientific_validation import validate_finite_tree
-from scripts.thermochemistry.harmonic import add_ideal_gas, harmonic
+from sbq123.common.artifacts.artifact_io import sha256_json
+from sbq123.common.evidence.kinetic_data.reaction_intake import AVAILABLE, STATES, report
+from sbq123.common.validation.scientific_validation import validate_finite_tree
+from sbq123.common.thermochemistry.thermochemistry.harmonic import add_ideal_gas, harmonic
 
 
 def ts_binding(review):

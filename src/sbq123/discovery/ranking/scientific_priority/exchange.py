@@ -61,9 +61,9 @@ def follow_up_study(root, rate_path, rate_sha256, directory, objective_id="activ
     evidence = investigate("mkm", rate_path, expected_sha256=rate_sha256)
     if "analysis" not in evidence:
         return evidence
-    from scripts.multiphase_contracts import read_artifact
-    from scripts.scientific_priority.engine import rank
-    from scripts.scientific_priority.proposals import proposals
+    from sbq123.common.workflow.multiphase_contracts import read_artifact
+    from sbq123.discovery.ranking.scientific_priority.engine import rank
+    from sbq123.discovery.ranking.scientific_priority.proposals import proposals
 
     obs = evidence["analysis"]["observation"]
     packet, objective, _ = archived_study(root, objective_id)

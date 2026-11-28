@@ -5,7 +5,7 @@ from pathlib import Path
 
 import numpy as np
 
-from scripts.workflow_geometry import minimum_image_delta_xyz
+from sbq123.common.workflow.workflow_geometry import minimum_image_delta_xyz
 
 
 @dataclass

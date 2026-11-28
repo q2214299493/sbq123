@@ -6,9 +6,9 @@ import re
 from pathlib import Path
 from typing import Any
 
-from scripts.artifact_io import sha256_file
-from scripts.neb_agent.utils_structure import read_poscar
-from scripts.scientific_validation import finite_number, validate_finite_tree
+from sbq123.common.artifacts.artifact_io import sha256_file
+from sbq123.common.workflow.neb_agent.utils_structure import read_poscar
+from sbq123.common.validation.scientific_validation import finite_number, validate_finite_tree
 
 
 FREQUENCY_PATTERN = re.compile(r"^\s*(\d+)\s+f(/i)?\s*=(?:.*\s)?([-+\d.]+(?:[eEdD][-+]?\d+)?)\s+cm-1", re.I)

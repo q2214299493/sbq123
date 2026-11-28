@@ -133,3 +133,8 @@ def write_json_exclusive(path: Path, payload: Any) -> Path:
         finally:
             os.close(directory)
     return path
+
+
+def check_version(document, field):
+    if document.get(field) != sha256_json({k: v for k, v in document.items() if k != field}):
+        raise ValueError(f"Invalid {field} digest")

@@ -14,9 +14,16 @@ import sysconfig
 def check(role, checkout):
     if not sys.flags.isolated:
         raise ValueError("Run this check with python -I")
-    allowed = {"common": ("common",), "reactor": ("common", "reactor"), "mkm": ("common", "mkm"), "kmc": ("common", "kmc")}[role]
+    allowed = {"common": ("common",), "reactor-dynamic": ("common", "reactor", "mkm"), "reactor": ("common", "reactor"), "mkm": ("common", "mkm"), "kmc": ("common", "kmc")}[role]
     if util.find_spec("scripts") is not None:
         raise RuntimeError("Root-level scripts was installed")
+    # These scientific entries must work before an engine installs its historical aliases.
+    from sbq123.analysis.observations import reactor_balance
+    from sbq123.common.evidence.kinetic_data import native_rate_output
+    from sbq123.common.kinetic_model.kinetic_parameters.engine import generate
+    from sbq123.discovery.ranking.scientific_priority import __main__ as discovery
+    if not all((reactor_balance, native_rate_output, callable(generate), callable(discovery.main))) or "scripts" in sys.modules:
+        raise RuntimeError("Canonical scientific entries require a historical role")
     result = {}
     seen = set()
     for owner in ("common", "mkm", "kmc", "reactor"):
@@ -39,7 +46,7 @@ def check(role, checkout):
                 raise RuntimeError("Installed hash mismatch: " + str(f))
             verified += 1
         result[owner] = {"version": dist.version, "files": verified}
-    if (util.find_spec("cantera") is not None) != (role == "reactor"):
+    if (util.find_spec("cantera") is not None) != (role in ("reactor", "reactor-dynamic")):
         raise RuntimeError("Cantera optional dependency isolation failed")
     if role in ("mkm", "kmc"):
         from sbq123.common.compat import activate, historical_module
@@ -74,7 +81,7 @@ def check(role, checkout):
         if len(points) != 9:
             raise RuntimeError("Incomplete role console entry inventory")
         result.update(architecture_imports=modules, console_scripts=points)
-    if role == "reactor":
+    if role in ("reactor", "reactor-dynamic"):
         from sbq123.reactor import simulate
 
         options = dict(
@@ -91,6 +98,12 @@ def check(role, checkout):
         )
         out = simulate(**options)
         result["standalone_fixed_conversion"] = out["points"][-1]["conversion"]
+        if role == "reactor-dynamic":
+            dynamic = simulate(**dict(options, dataset_id="langmuir", mode="dynamic_mkm", catalyst="analytical",
+                                      catalyst_loading_kg=1, conversion_id="analytic-unit-site", initial_coverage=[.5]))
+            if not dynamic["local_solver_receipts"]:
+                raise RuntimeError("No dynamic reactor receipts")
+            result["dynamic_conversion"] = dynamic["points"][-1]["conversion"]
         executable = Path(sysconfig.get_path("scripts")) / ("sbq123-reactor.exe" if sys.platform == "win32" else "sbq123-reactor")
         subprocess.run([executable, "--help"], check=True, capture_output=True)
     return result
@@ -98,7 +111,7 @@ def check(role, checkout):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("role", choices=["mkm", "kmc", "common", "reactor"])
+    parser.add_argument("role", choices=["mkm", "kmc", "common", "reactor", "reactor-dynamic"])
     parser.add_argument("checkout", type=Path)
     parser.add_argument("output", type=Path)
     args = parser.parse_args()

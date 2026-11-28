@@ -19,7 +19,10 @@ flowchart TD
     R --> CT[Cantera 3.2.0]
     R -. local steady state in dynamic mode .-> M
     K -. isolated installed MKM worker; JSON result .-> M
-    C --> A[Release-owned registries and evidence]
+    C --> A[Immutable release evidence]
+    C --> P[Operator-pinned project records]
+    M --> CM[CATKINAS exporter]
+    K --> Z[Zacros exporter]
 ```
 
 MKM and KMC run in separate Python environments. A reactor environment can add the MKM distribution to solve a surface system. Each simulation owns its continuation anchor and receipts. A fixed-kinetics installation operates independently of either engine package. The stochastic source protocol reserves a future sampling interface.
@@ -30,31 +33,56 @@ The KMC comparison process takes its worker interpreter from deployment setting 
 
 The common distribution contains versioned registries for engine families, archived replays, kinetic datasets, basis conversions, catalyst profiles, analysis profiles and DRC definitions. A release-owned trust index pins each registry's bytes. A second pin authenticates the validation schemas. Each registry also binds its entry contents canonically. Selectors received in requests resolve through the installed index. The result interpreter requires a digest retained by the producer.
 
-A reviewed configuration change can add a catalyst, model, physical conversion and analysis selectors. Review the dataset's dimensional conventions, applicability range and evidence scope, update the corresponding registry entries, regenerate their canonical and byte hashes, then review the release trust index change. These changes require no general solver edits. The supplied active-site factor is scoped to the analytical Langmuir control alone. The historical CATKINAS cycle retains its 400 K, 160000 Pa coefficient domain, archived software-benchmark scope and separate conversion gate. A physical application requires an independently approved conversion covering that dataset and catalyst.
+Project selectors can resolve a reviewed kinetic model or a paired network and kinetic dataset, an independently reviewed thermochemical companion, and catalyst or conversion records. The operator provisions a detached digest of the project trust store. Release identifiers retain lookup priority. Requests cannot change the operator pin. The historic 400 K, 160000 Pa archive retains its source scope. [Project trust contract and runnable example](PROJECT_TRUST.md)
 
 MKM analysis validates per-mass turnover and saved comparisons through the
 [detached mass calibration contract](MKM_MASS_NORMALIZATION.md).
 
+## Scientific entry points and dependency ownership
+
+```mermaid
+flowchart LR
+    D[Operator-pinned dataset or reviewed network and coefficients] --> Model[Common kinetic model]
+    Model --> L[MKM local surface solution]
+    Model --> F[Fixed Cantera kinetics]
+    T[Reviewed thermo companion] --> F
+    T --> R[Dynamic Cantera reactor]
+    L --> R
+    M[Original MKM point] --> A[Quantitative analysis]
+    K[Original KMC sampling window] --> A
+    F --> A
+    R --> A
+    A --> I[Conditional scientific interpretation]
+    I --> P[Ranked hypotheses and discriminating tests]
+    P --> H[Separate human review]
+    U[Common units extra] --> AST[Astropy]
+    G[Common geometry extra] --> ASE[ASE]
+```
+
+Both OS jobs verify the installed roles and run their historical scientific tests. The optional dynamic installation adds MKM to Cantera. Project evidence is selected in the requesting operation. An unavailable mass calibration leaves the native point and any independent kinetic or reactor analyses available.
+
 ## Reactor equations and output
 
-The supported cases use ideal gas and fixed temperature. The inlet defines the reference pressure. The qualified controls preserve pressure within the numerical tolerances. Energy transport, friction, mass-transfer resistance, uncertainty propagation and physical catalyst qualification are outside this dataset.
+The supported cases use ideal gas and fixed temperature. The inlet defines the reference pressure. The fixed PFR checks axial momentum flux and mass flux. The dynamic PFR specifies constant pressure. Energy transport, friction, mass-transfer resistance, uncertainty propagation and physical catalyst qualification are outside this dataset.
 
 | Mode | Cantera engine | Independent balance |
 |---|---|---|
 | Fixed PFR | FlowReactor, ReactorNet and IDA, with ReactorSurface for registered surface chemistry | dFᵢ/dz = A rᵢ, dτ/dz = A/Q. Integrate the registered source separately along the physical mesh |
 | Fixed CSTR | IdealGasReactor with a feed reservoir, mass-flow controller, pressure-controlled outlet and ReactorNet | Fᵢ,in − Fᵢ,out + V rᵢ,out = 0 for every species |
-| Dynamic PFR | ExtensibleIdealGasReactor with CVODES follows a parcel at z = uτ | This mapping requires the supported equal-molecular-weight gas and constant density. The MKM supplies signed rates at local T, P and composition |
+| Dynamic PFR | ExtensibleIdealGasConstPressureReactor with CVODES advances the mass fractions in distance | dFᵢ/dz = A rᵢ with the local MKM source. Residence time integrates the reciprocal local velocity |
 | Dynamic CSTR | The extensible vessel uses the same continuous feed and withdrawal devices | A local MKM solves surface balance inside each RHS call. The final species and outlet mass balances must close |
 
 The native gas and surface mechanism uses kg, m, kmol and s. The registry uses mol, m and s. The adapter converts activation energies, site density, molecular concentrations and elementary reaction orders, then compares forward and reverse progress rates at two independent mixture compositions. Its release-owned thermodynamics describe manufactured controls with a virtual element X. Density and specific area apply to the registered synthetic catalyst and its approved basis conversion. The archived V3.1 mechanism lacks the companion thermodynamics needed for this adapter.
 
 For a native surface PFR in Cantera 3.2.0, the spatial residual uses the last gas species' wall mass flux in the continuity equation. At the supported local surface steady state the physical sum is zero. The adapter appends an empty inert gas coordinate as that last component, verifies its population and the summed wall flux at every mesh point, and projects the physical species into the report. This is specific to the pinned engine and to zero net wall mass transfer. The independent analytical profile checks the resulting solution. [Cantera 3.2.0 spatial residual](https://github.com/Cantera/cantera/blob/v3.2.0/src/zeroD/FlowReactor.cpp)
 
-The local MKM validates a scaled surface residual, Jacobian rank, orientation, site inventory and displacement from an accepted coverage. PFR continuation follows a physical mesh independent of output sampling. CSTR multistart retains rejected seeds and reports distinct converged roots. Local tests establish neither global uniqueness nor dynamical stability. The CSTR uses a unit-volume representative with identical flow per volume and physical source density, then restores the requested flow and volume for its independent balances.
+A separate Cantera interface represents each independent site family. The current reference inventory requires one of each family at the same site density. Cross-family elementary steps and adsorbates spanning families need a coupled interface description. A missing thermochemical companion limits Cantera execution only.
+
+The local MKM validates a scaled surface residual, Jacobian rank, orientation, site inventory and displacement from an accepted coverage. PFR continuation follows a physical mesh independent of output sampling. The first solve can explore the admissible coverage interval. Subsequent accepted roots supply the continuation anchor. CSTR multistart accepts gas-flow vectors or joint gas-flow and surface-coverage seeds, retains rejected seeds and reports distinct converged roots. Local tests establish neither global uniqueness nor dynamical stability. The CSTR uses a unit-volume representative with identical flow per volume and physical source density, then restores the requested flow and volume for its independent balances.
 
 For A → B with rate k cₐ, normalized PFR conversion is 1 − exp(−kτ), and CSTR conversion is kτ/(1+kτ). The Langmuir control has θ = a/(1+a). With inlet a=1 and unit turnover its PFR obeys ln(a)+a=1−τ and its CSTR satisfies a²+a−1=0. Other controls cover reversible exchange, a stiff two-timescale cascade and an autocatalytic CSTR with three roots.
 
-Schema 2 binds input, mechanism, model and result digests. Each point records SI conditions, flow, residence time, inventory, mass and elemental residuals. Yield uses product formed per mole of reactant fed. Selectivity uses product formed per mole consumed and is null for a zero denominator. Uncertainty is null. Interpretation requires an independently retained digest. The dynamic extra installs the MKM distribution; no native engine runs.
+Schema 2 binds input, mechanism, model and result digests. Each point records SI conditions, flow, residence time, inventory, mass and elemental residuals. Yield uses product formed per mole of reactant fed. Selectivity uses product formed per mole consumed. If consumption is numerically unresolved this ratio is null. Gross directional traffic, signed net progress and species balance remain separate outputs. Uncertainty is null. Interpretation requires an independently retained digest. The dynamic extra installs the MKM distribution; no native engine runs.
 
 ## Reproduction
 
@@ -66,6 +94,7 @@ python tools/v32/ci.py common NEW_EXTERNAL_COMMON_CHECK
 python tools/v32/ci.py mkm NEW_EXTERNAL_MKM_CHECK
 python tools/v32/ci.py kmc NEW_EXTERNAL_KMC_CHECK
 python tools/v32/ci.py reactor NEW_EXTERNAL_REACTOR_CHECK
+python tools/v32/ci.py reactor-dynamic NEW_EXTERNAL_DYNAMIC_CHECK
 ```
 
 The default reproducible epoch is 1795600000. A supplied SOURCE_DATE_EPOCH overrides it. Wheel publication verifies backend RECORD digests and writes deterministic entry ordering, timestamps and permissions. Scientific resources retain their original bytes.

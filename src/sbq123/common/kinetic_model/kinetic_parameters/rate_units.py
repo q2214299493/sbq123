@@ -4,9 +4,9 @@ from __future__ import annotations
 import re
 from functools import lru_cache
 
-from scripts.kinetic_parameters.laws import fraction, pressure_unit
-from scripts.optional_dependencies import require_optional
-from scripts.scientific_validation import finite_number, integer_number
+from sbq123.common.kinetic_model.kinetic_parameters.laws import fraction, pressure_unit
+from sbq123.common.workflow.optional_dependencies import require_optional
+from sbq123.common.validation.scientific_validation import finite_number, integer_number
 
 
 @lru_cache(maxsize=1)

@@ -1,10 +1,10 @@
 """Optional isothermal, well-mixed gas balance at a single evidenced operating point."""
 from copy import deepcopy
 
-from scripts.artifact_io import sha256_json
-from scripts.kinetic_data.analysis_contracts import local_species_sources
-from scripts.kinetic_data.observations import _observation
-from scripts.scientific_validation import finite_number
+from sbq123.common.artifacts.artifact_io import sha256_json
+from sbq123.common.evidence.kinetic_data.analysis_contracts import local_species_sources
+from sbq123.common.evidence.kinetic_data.observations import _observation
+from sbq123.common.validation.scientific_validation import finite_number
 
 
 def gas_accumulation(payload, network_path, *, conditions, volume_m3, target, evidence,

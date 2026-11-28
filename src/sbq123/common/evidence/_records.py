@@ -64,6 +64,16 @@ def _registry(kind):
 
 def entry(kind: str, key: str) -> dict:
     """Return an isolated copy of a release-verified registry entry."""
-    if not isinstance(kind, str) or kind not in FIELDS or not isinstance(key, str) or key not in _registry(kind):
+    if not isinstance(kind, str) or kind not in FIELDS or not isinstance(key, str):
+        raise ValueError("Unknown registry or selector")
+    if key not in _registry(kind):
+        from .trust import project_document
+        project = project_document(kind, key)
+        if project is not None:
+            record, _ = project
+            if not isinstance(record, dict) or set(record) != FIELDS[kind]:
+                raise ValueError("Invalid project registry entry")
+            Draft202012Validator(_document("schemas", SCHEMAS_SHA256)[kind]).validate(record)
+            return record
         raise ValueError("Unknown registry or selector")
     return deepcopy(_registry(kind)[key])

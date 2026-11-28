@@ -2,16 +2,15 @@
 from pathlib import Path
 
 from sbq123.common.evidence import trust
-from scripts.artifact_io import require_sha256, sha256_json
-from scripts.multiphase_contracts import read_artifact
-from scripts.reaction_network.catalog import check_network_version
-from scripts.reaction_network.__main__ import publish as publish_network
+from sbq123.common.artifacts.artifact_io import require_sha256, sha256_json
+from sbq123.common.workflow.multiphase_contracts import read_artifact
+from sbq123.common.reaction_network.reaction_network.catalog import check_network_version
 from .proposals import verify
 
 
 def ingest(directory, review_path, review_sha256, network_directory):
     """The owner supplies a validated successor; persist it locally after the independent review."""
-    if review_sha256 not in trust.DISCOVERY_RETURN_APPROVALS:
+    if not trust.approved("discovery_return", review_sha256):
         raise ValueError("Missing independent scientific return approval")
     path = Path(review_path)
     review, _ = read_artifact(path, expected_sha256=review_sha256)
@@ -68,6 +67,7 @@ def ingest(directory, review_path, review_sha256, network_directory):
     old, new = reactions(parent), reactions(child)
     if not targets <= new.keys() or any(old.get(k) != new.get(k) for k in (new.keys() | old.keys()) - targets):
         raise ValueError("Network revision changed an unrelated reaction")
+    from sbq123.common.reaction_network.reaction_network.__main__ import publish as publish_network
     out = publish_network(child, Path(network_directory))
     return dict(parent_network_version=before, network_version=after, path=str(out), scope=review["scope"],
                 owner_validation_sha256=review["owner_validation"]["sha256"], result_sha256=binding["result_sha256"],

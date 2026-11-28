@@ -1,3 +1,4 @@
+from sbq123.common.kinetic_model.replay_precision import same_recalculation
 from scripts.baseline_mkm.mapping_scope import MappingBlocked, check_configuration, topology
 from scripts.baseline_mkm.sensitivity_inputs import baseline_config, configuration as sensitivity_configuration, reproduce
 from scripts.kinetic_parameters.engine import check_version
@@ -16,7 +17,7 @@ def qualify(network, dataset, config, *, general=False):
     if dataset["network_version"] != network["network_version"]:
         raise ValueError("Network version differs from dataset")
     rebuilt = reproduce(network, dataset)
-    if rebuilt != dataset:
+    if not same_recalculation(dataset, rebuilt):
         raise ValueError("Dataset differs from network, source verification or reviewed rates")
     if "sensitivity_perturbation" in dataset and config != sensitivity_configuration(baseline_config(), rebuilt):
         raise ValueError("Feed or conditions differ from the sensitivity derivative")

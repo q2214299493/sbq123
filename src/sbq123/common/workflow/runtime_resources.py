@@ -22,7 +22,7 @@ def require_repository_context(root: Path | None = None) -> Path:
     return candidate
 
 
-def resource_path(relative: str | Path, *, repository: Path | None = None) -> Path:
+def resource_path(relative: str | Path, *, repository: Path | None = None, role: str | None = None) -> Path:
     """Resolve a resource from an explicit checkout or the installed distribution.
 
     Source originals remain authoritative. Wheel copies are build outputs, never
@@ -39,20 +39,25 @@ def resource_path(relative: str | Path, *, repository: Path | None = None) -> Pa
         return path
     parts = PurePosixPath(name).parts
     from sbq123.common.compat import _active
+    if role is None and _active is not None:
+        role = _active.role
+    if role not in (None, "mkm", "kmc"):
+        raise ValueError("Unknown resource role")
     if name.startswith("scripts/") and name.endswith(".py") and _active is not None:
         mod = name[:-3].replace("/", ".")
         if mod in _active.paths:
             return _active.paths[mod][0]
     resource = files("sbq123.common").joinpath("resources", *parts)
-    if _active is not None:
-        override = files("sbq123." + _active.role).joinpath("resources", *parts)
+    if role is not None:
+        override = files("sbq123." + role).joinpath("resources", *parts)
         if override.is_file():
             resource = override
-    if not resource.is_file() and _active is not None and os.environ.get("SBQ123_ROLE_DATA"):
-        manifest = json.loads(files("sbq123." + _active.role).joinpath("_data_hashes.json").read_bytes())
+    if not resource.is_file() and role and os.environ.get("SBQ123_ROLE_DATA"):
+        manifest = json.loads(files("sbq123." + role).joinpath("_data_hashes.json").read_bytes())
         expected = manifest.get(name)
-        path = SOURCE_ROOT.joinpath(*parts).resolve()
-        if expected and path.is_relative_to(SOURCE_ROOT) and path.is_file():
+        root = Path(os.environ["SBQ123_ROLE_DATA"]).resolve()
+        path = root.joinpath(*parts).resolve()
+        if expected and path.is_relative_to(root) and path.is_file():
             if hashlib.sha256(path.read_bytes()).hexdigest() != expected:
                 raise ValueError(f"Changed historical role data: {name}")
             return path

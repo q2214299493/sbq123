@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+import sysconfig
 import time
 
 import pytest
@@ -35,13 +36,18 @@ def test_interrupted_materialization(tmp_path):
     marker = tmp_path / "live"
     worker = """import os,sys,time
 from pathlib import Path
+sys.path.insert(0, sys.argv[3])
 from sbq123.common.artifacts.materialize import materialize
 def read(name):
     Path(sys.argv[2]).touch()
     time.sleep(60)
 materialize(Path(sys.argv[1]), {"unfinished": "pending"}, read)
 """
-    child = subprocess.Popen([sys.executable, "-c", worker, str(target), str(marker)])
+    # A Windows venv launcher can own a different PID from the process holding the lock.
+    # Start the worker directly so wait() observes termination of the actual lock owner.
+    interpreter = sys._base_executable if os.name == "nt" else sys.executable
+    child = subprocess.Popen([interpreter, "-I", "-B", "-c", worker, str(target), str(marker),
+                              sysconfig.get_path("purelib")])
     try:
         for _ in range(250):
             if marker.exists():

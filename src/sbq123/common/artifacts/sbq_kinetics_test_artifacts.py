@@ -11,7 +11,7 @@ import uuid
 from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
 
-from scripts.artifact_io import (
+from sbq123.common.artifacts.artifact_io import (
     load_json_object, sha256_file, sha256_text, write_json_exclusive,
 )
 

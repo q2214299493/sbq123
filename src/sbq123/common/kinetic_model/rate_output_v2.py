@@ -8,19 +8,19 @@ from pathlib import Path
 from jsonschema import Draft202012Validator
 from referencing import Registry, Resource
 
-from scripts.artifact_io import sha256_bytes, sha256_file, sha256_json
-from scripts.kinetic_data.network_binding import validate_bound_rows
-from scripts.kinetic_data.stoichiometric_sources import finite_sum as _sum
-from scripts.kinetic_data.stoichiometric_sources import generate_source_terms as generate_source_terms
-from scripts.kinetic_data.stoichiometric_sources import indexed as _index
-from scripts.kinetic_data.stoichiometric_sources import rate_matches as _matches
-from scripts.kinetic_data.stoichiometric_sources import source_residuals
-from scripts.kinetic_parameters.engine import check_version
-from scripts.kinetic_parameters.rate_normalization import basis_identity as basis_identity
-from scripts.kinetic_parameters.rate_normalization import convert_checked_rate, denominator_scale
-from scripts.kinetic_parameters.rate_units import convert_coefficient
-from scripts.multiphase_contracts import _check_finite, decode_unique_json, read_unique_json
-from scripts.runtime_resources import resource_path
+from sbq123.common.artifacts.artifact_io import sha256_bytes, sha256_file, sha256_json
+from sbq123.common.evidence.kinetic_data.network_binding import validate_bound_rows
+from sbq123.common.evidence.kinetic_data.stoichiometric_sources import finite_sum as _sum
+from sbq123.common.evidence.kinetic_data.stoichiometric_sources import generate_source_terms as generate_source_terms
+from sbq123.common.evidence.kinetic_data.stoichiometric_sources import indexed as _index
+from sbq123.common.evidence.kinetic_data.stoichiometric_sources import rate_matches as _matches
+from sbq123.common.evidence.kinetic_data.stoichiometric_sources import source_residuals
+from sbq123.common.artifacts.artifact_io import check_version
+from sbq123.common.kinetic_model.kinetic_parameters.rate_normalization import basis_identity as basis_identity
+from sbq123.common.kinetic_model.kinetic_parameters.rate_normalization import convert_checked_rate, denominator_scale
+from sbq123.common.kinetic_model.kinetic_parameters.rate_units import convert_coefficient
+from sbq123.common.workflow.multiphase_contracts import _check_finite, decode_unique_json, read_unique_json
+from sbq123.common.workflow.runtime_resources import resource_path
 
 
 @lru_cache(maxsize=2)

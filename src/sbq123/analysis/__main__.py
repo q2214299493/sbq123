@@ -5,7 +5,7 @@ from pathlib import Path
 
 from sbq123.common.compat import historical_module
 from sbq123.common.kinetic_model.contracts import identity
-from sbq123.common.evidence.trust import REACTOR_CONTROL_RESULTS
+from sbq123.common.evidence.trust import REACTOR_CONTROL_RESULTS, approved
 
 
 def immutable_json(path):
@@ -20,6 +20,8 @@ def immutable_json(path):
 def file_qualification(*digests):
     if all(d in REACTOR_CONTROL_RESULTS for d in digests):
         return "archived_numerical_control"
+    if all(d in REACTOR_CONTROL_RESULTS or approved("reactor_result", d) for d in digests):
+        return "independently_reviewed_results"
     return "reported_only: independent producer identity has not been established by this CLI"
 
 
@@ -64,7 +66,7 @@ def main(argv=None):
     elif args.action == "point":
         from sbq123.analysis.interpretation.kinetics import interpret_point
         owner = historical_module("mkm", "scripts.baseline_mkm.analysis")
-        from scripts.baseline_mkm.result_binding import bind_result
+        from sbq123.mkm.catkinas.compat.baseline_mkm.result_binding import bind_result
         run = args.path
         binding = bind_result(run)
         if binding["binding_sha256"] != args.sha256:
@@ -76,9 +78,9 @@ def main(argv=None):
         out = dict(analysis=report, interpretation=interpret_point(report, identity(report)), binding_sha256=args.sha256)
     elif args.action == "retained-window":
         from sbq123.analysis.interpretation.kinetics import interpret_window
-        owner = historical_module("kmc", "scripts.runtime_resources")
-        from scripts.multiphase_contracts import read_artifact
-        record, digest = read_artifact(owner.resource_path(args.path.as_posix()), expected_sha256=args.sha256)
+        from sbq123.common.workflow import runtime_resources as owner
+        from sbq123.common.workflow.multiphase_contracts import read_artifact
+        record, digest = read_artifact(owner.resource_path(args.path.as_posix(), role="kmc"), expected_sha256=args.sha256)
         out = interpret_window(record, record["record_sha256"])
         out.update(replay="release-retained report", source_file_sha256=digest,
                    limitation="Archived observations retain their original scope; fresh native replay is a separate check.")
@@ -90,7 +92,7 @@ def main(argv=None):
     elif args.action == "comparison":
         compare = historical_module("kmc", "scripts.kinetic_data.result_comparison").compare
         result = compare(args.path, args.sha256, mkm_worktree=args.root)
-        from scripts.scientific_interpretation import summarize_comparison
+        from sbq123.analysis.interpretation.scientific_interpretation import summarize_comparison
         out = dict(comparison=result, interpretation=summarize_comparison(result))
         if args.reactor is not None or args.reactor_sha256 is not None:
             from sbq123.analysis.observations.reactor_profiles import analyze_profile, compare_local_mkm
@@ -112,7 +114,7 @@ def main(argv=None):
             out = compare_operating_points((result, args.sha256), (immutable_json(args.right), args.right_sha256),
                                            args.variable)
             out["file_qualification"] = file_qualification(args.sha256, args.right_sha256)
-            if out["change"] is not None and not {args.sha256, args.right_sha256} <= REACTOR_CONTROL_RESULTS:
+            if out["change"] is not None and out["file_qualification"].startswith("reported_only"):
                 out.update(reported_contrast=out["change"], change=None, status="reported_only")
         else:
             out = dict(profile=analyze_profile(result, args.sha256), local_mkm=compare_local_mkm(result, args.sha256),

@@ -30,14 +30,16 @@ def account(case, row, net_flow, created, destroyed, tolerance, *, rtol, error=N
     if error is not None:
         uncertainty += abs(error)
     progress_budget = 2e-6 * abs(net_flow)
+    resolved_progress = uncertainty <= progress_budget
+    cancellation = (created > 0) & (destroyed > 0) & (abs(net_flow) <= 2 * max(rtol, np.finfo(float).eps) * traffic / 2e-6)
     receipt = dict(
-        species=case.names, residual_per_feed=(residual / case.fin).tolist(),
+        progress_resolved=resolved_progress.tolist(), species=case.names, residual_per_feed=(residual / case.fin).tolist(),
         tolerance_per_feed=(tolerance / case.fin).tolist(), residual_mol_s=residual.tolist(),
         tolerance_mol_s=tolerance.tolist(), net_production_mol_s=net_flow.tolist(),
         progress_uncertainty_mol_s=uncertainty.tolist(), progress_tolerance_mol_s=progress_budget.tolist(),
     )
     if (not np.isfinite([residual, tolerance, uncertainty, progress_budget]).all()
-            or np.any(abs(residual) > tolerance) or np.any(uncertainty > progress_budget)
+            or np.any(abs(residual) > tolerance) or np.any(~resolved_progress & ~cancellation)
             or np.any(created < 0) or np.any(destroyed < 0)):
         raise RootFailure("Species outlet or signed reaction progress is unresolved", {"converged": False, **receipt})
     # Preserve native flow observables when both increments are resolvable
@@ -55,10 +57,11 @@ def account(case, row, net_flow, created, destroyed, tolerance, *, rtol, error=N
     with np.errstate(over="ignore", invalid="ignore", divide="ignore"):
         conversion = consumed / case.feed[case.ia]
         yield_value = formed / case.feed[case.ia]
-        selectivity = formed / consumed if consumed != 0 else None
+        selectivity = formed / consumed if consumed != 0 and resolved_progress[targets].all() else None
     if not np.isfinite([conversion, yield_value]).all() or (selectivity is not None and not np.isfinite(selectivity)):
         raise RootFailure("Reaction observable outside floating-point range", {"converged": False, **receipt})
     row.update(
+        selectivity_limitation=None if selectivity is not None else "Net consumption or product progress is unresolved",
         observable_basis="verified_outlet_flows" if use_flow else "signed_reaction_progress",
         gross_production_mol_s=dict(zip(case.names, created.tolist())),
         gross_consumption_mol_s=dict(zip(case.names, destroyed.tolist())),

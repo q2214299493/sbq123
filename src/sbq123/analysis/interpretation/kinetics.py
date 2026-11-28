@@ -29,7 +29,7 @@ def interpret_window(window, expected_sha256):
     window = deepcopy(window)
     digest = window.pop("record_sha256")
     # The historical writer owns the JSON canonicalization of this record.
-    from scripts.artifact_io import sha256_json
+    from sbq123.common.artifacts.artifact_io import sha256_json
     if window.get("format") != "kmc-window-integration/1" or digest != expected_sha256 or sha256_json(window) != digest:
         raise ValueError("KMC window differs from retained bridge receipt")
     return dict(source_sha256=digest, manifest_sha256=window["manifest_sha256"],
@@ -43,7 +43,7 @@ def interpret_window(window, expected_sha256):
 
 
 def archived_study(root, objective_id):
-    from scripts.scientific_priority.benchmark import synthetic
+    from sbq123.discovery.ranking.scientific_priority.benchmark import synthetic
 
     pin = "358c8037a4ecb3c5e0fffd137a4d7068e26c0e81c38c9584be3fbbf7cb0eb8ca"
     data, objectives = synthetic(root, expected_fixture_sha256=pin)
@@ -64,7 +64,7 @@ def interpret_sensitivity(root, objective_id="activity"):
         rows.append(dict(kind=metric["kind"], parameter=metric["parameter"], value=metric["value"],
                          coordinate=metric.get("coordinate", metric.get("constraint")),
                          observable=metric["observable"], source_sha256=source["sha256"]))
-    from scripts.multiphase_contracts import read_artifact
+    from sbq123.common.workflow.multiphase_contracts import read_artifact
     batch_ref = data["sources"]["batch"]
     batch, _ = read_artifact(root / batch_ref["path"], expected_sha256=batch_ref["sha256"])
     existing = {r["parameter"] for r in rows if r["kind"] == "ts_drc"}

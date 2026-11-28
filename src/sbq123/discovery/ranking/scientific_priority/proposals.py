@@ -2,9 +2,9 @@
 
 from copy import deepcopy
 
-from scripts.artifact_io import load_json_object as read, sha256_json, write_json_exclusive
-from scripts.multiphase_contracts import read_artifact, read_unique_json
-from scripts.scientific_interpretation import interpret_observation
+from sbq123.common.artifacts.artifact_io import load_json_object as read, sha256_json, write_json_exclusive
+from sbq123.common.workflow.multiphase_contracts import read_artifact, read_unique_json
+from sbq123.analysis.interpretation.scientific_interpretation import interpret_observation
 from .observation_binding import replay_observation, validate_candidate, validate_objective
 from .engine import rank
 from .evidence import digest

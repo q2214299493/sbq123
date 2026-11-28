@@ -3,10 +3,15 @@ import argparse
 import json
 from pathlib import Path
 
-from scripts.artifact_io import sha256_file, sha256_json, write_json_exclusive
-from scripts.kinetic_parameters.engine import generate
-from scripts.kinetic_parameters.export import catkinas, zacros
-from scripts.multiphase_contracts import read_unique_json as read
+from sbq123.common.artifacts.artifact_io import sha256_file, sha256_json, write_json_exclusive
+from sbq123.common.kinetic_model.kinetic_parameters.engine import generate
+from sbq123.common.kinetic_model.kinetic_parameters import export
+from sbq123.common.workflow.multiphase_contracts import read_unique_json as read
+
+# Preserve the historical module object shared by the native and parameter CLIs.
+if __package__ == "scripts.kinetic_parameters":
+    from sbq123.common.kinetic_model.kinetic_parameters import historical_export as export
+    from scripts.multiphase_contracts import read_unique_json as read
 
 
 def main():
@@ -26,7 +31,7 @@ def main():
                       {k: r[k] for k in ("reaction_id", "network_level", "energies", "ts_local_zpe_ev", "rates", "missing", "local_event_missing")}
                       for r in data["reactions"]]}
     if args.format in ("catkinas", "zacros"):
-        result = {"catkinas": catkinas, "zacros": zacros}[args.format](data)
+        result = {"catkinas": export.catkinas, "zacros": export.zacros}[args.format](data)
     if args.output:
         try:
             write_json_exclusive(args.output, result)

@@ -1,8 +1,8 @@
 """Mass action uses fractional surface activities and ideal gas activities p/p0."""
 import math
 
-from scripts.scientific_validation import finite_number, integer_number
-from scripts.physical_constants import AMU_KG, H_J_S, KB, KB_J_K
+from sbq123.common.validation.scientific_validation import finite_number, integer_number
+from sbq123.common.kinetic_model.physical_constants import AMU_KG, H_J_S, KB, KB_J_K
 
 
 def positive(value, label):
@@ -139,3 +139,5 @@ def coefficient(law, source_rate, *, gas, product_gas, temperature, standard_pa,
     return {"method": method, "activity_coefficient_s^-1": rate, "gas_orders": gas, "degeneracy": n,
             "prefactor_at_unit_activity_s^-1": a, "activation_free_energy_ev": effective,
             "sigma_ln_k": log_uncertainty(sigma, temperature)}
+
+MOLECULAR_ACTIVITY = "molecules per reference with one site of each inventory"

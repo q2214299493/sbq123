@@ -1,5 +1,5 @@
 """Network projection of explicit cross-phase scope, evidence and independent engine gates."""
-from scripts.reaction_network.catalog import check_record_field
+from sbq123.common.reaction_network.reaction_network.catalog import check_record_field
 
 
 def validate_scope_fields(record):

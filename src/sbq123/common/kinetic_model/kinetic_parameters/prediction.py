@@ -6,10 +6,10 @@ from functools import lru_cache
 import numpy as np
 from jsonschema import Draft202012Validator, FormatChecker
 
-from scripts.artifact_io import sha256_json
-from scripts.multiphase_contracts import ENERGY_ATOL_EV
-from scripts.runtime_resources import resource_path
-from scripts.scientific_validation import validate_finite_tree
+from sbq123.common.artifacts.artifact_io import sha256_json
+from sbq123.common.workflow.multiphase_contracts import ENERGY_ATOL_EV
+from sbq123.common.workflow.runtime_resources import resource_path
+from sbq123.common.validation.scientific_validation import validate_finite_tree
 
 # Exact SI definitions of the elementary charge and Avogadro constant.
 EV_PER_UNIT = {"eV": 1.0, "meV": 0.001, "kJ/mol": 1000 / (1.602176634e-19 * 6.02214076e23)}

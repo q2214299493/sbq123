@@ -1,7 +1,7 @@
 """Adapt unreviewed VASP spectra for Scientific Intake."""
 from __future__ import annotations
 
-from scripts.vasp_vibrations import (
+from sbq123.common.workflow.vasp_vibrations import (
     SETTING as SETTING,
     frequency_header as frequency_header,
     parse_frequency_outcar as parse_frequency_outcar,

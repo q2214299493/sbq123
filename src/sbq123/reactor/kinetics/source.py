@@ -68,7 +68,7 @@ class LocalSource:
         def follow(start, anchor, end, depth, ownership):
             try:
                 rates, raw = self.solve(
-                    self.model, end[:-2], float(end[-2]), float(end[-1]), anchor, self.distance, expected_orientation=orientation
+                    self.model, end[:-2], float(end[-2]), float(end[-1]), anchor, self.distance if checkpoint is not None else 1.0, expected_orientation=orientation
                 )
                 if raw.get("converged") is not True:
                     raise RootFailure("Unconverged local MKM evaluation", raw)
@@ -111,6 +111,19 @@ class CoupledTank(ct.ExtensibleIdealGasReactor):
             mass_terms = rates * self.phase.molecular_weights * self.volume / 1000
             for index, name in enumerate(self.phase.species_names):
                 rhs[self.component_index(name)] += mass_terms[index]
+        except (ValueError, ArithmeticError) as exc:
+            self.local_source.failure = exc
+            raise
+
+
+class AxialParcel(ct.ExtensibleIdealGasConstPressureReactor):
+    """Isothermal, isobaric parcel integrated in z with dF_i/dz = A R_i."""
+
+    def after_eval(self, z, lhs, rhs):
+        try:
+            rates, _ = self.local_source.evaluate(self.phase)
+            for i, name in enumerate(self.phase.species_names):
+                rhs[self.component_index(name)] += self.mass * self.area_per_mdot * rates[i] * self.phase.molecular_weights[i] / 1000
         except (ValueError, ArithmeticError) as exc:
             self.local_source.failure = exc
             raise

@@ -2,9 +2,9 @@
 from collections import Counter
 from datetime import datetime
 
-from scripts.artifact_io import sha256_json
-from scripts.multiphase_contracts import check_site_interface
-from scripts.reaction_network.catalog import check_common, check_context, site_counts, validate_site_types
+from sbq123.common.artifacts.artifact_io import sha256_json
+from sbq123.common.workflow.multiphase_contracts import check_site_interface
+from sbq123.common.reaction_network.reaction_network.catalog import check_common, check_context, site_counts, validate_site_types
 
 
 def agreed(row, field, value):

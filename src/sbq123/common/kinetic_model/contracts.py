@@ -59,6 +59,11 @@ class Model:
     provenance: str
 
     @classmethod
+    def from_record(cls, raw):
+        """Validate an unreviewed user model without assigning scientific approval."""
+        return cls._from_verified_record(raw, registered_digest=identity(raw), provenance="user_supplied")
+
+    @classmethod
     def _from_verified_record(cls, raw, *, registered_digest, provenance):
         """The caller of this internal parser must get its pin from the installed registry."""
         if not isinstance(raw, dict) or identity(raw) != registered_digest:

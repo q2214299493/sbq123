@@ -7,7 +7,7 @@ from functools import lru_cache
 
 from jsonschema import Draft202012Validator, FormatChecker
 
-from scripts.runtime_resources import resource_path
+from sbq123.common.workflow.runtime_resources import resource_path
 
 STATES = ("IS", "TS", "FS")
 STATE_FIELDS = ("structure", "electronic_energy", "spectrum", "corrections")

@@ -10,7 +10,7 @@ import cantera as ct
 import numpy as np
 import yaml
 
-from sbq123.common.evidence.registry import entry
+from sbq123.common.evidence.registry import entry, model_record
 from sbq123.common.kinetic_model.contracts import GAS_CONSTANT, Model, number
 from ._trust import COMPANION_SHA256
 
@@ -22,7 +22,7 @@ class Mechanism:
     model: Model
     text: str
     gas: ct.Solution
-    surface: ct.Interface | None
+    surfaces: tuple
     factor: float
     area_per_volume: float
     groups: list
@@ -37,12 +37,12 @@ class Mechanism:
             record = dict(gas.species(0).input_data)
             record["name"] = "SBQ-inert-coordinate"
             gas.add_species(ct.Species.from_dict(record))
-        surface = ct.Interface(yaml=self.text, name="surface", adjacent=[gas]) if self.surface is not None else None
-        return gas, surface
+        surfaces = tuple(ct.Interface(yaml=self.text, name=s.name, adjacent=[gas]) for s in self.surfaces)
+        return gas, surfaces
 
-    def signed_rates(self, gas, surface):
+    def signed_rates(self, gas, surfaces):
         rates = gas.net_production_rates * 1000
-        if surface is not None:
+        for surface in surfaces:
             rates += surface.get_net_production_rates(gas) * self.area_per_volume * 1000
         return rates
 
@@ -52,23 +52,32 @@ def _record(key):
     if hashlib.sha256(raw).hexdigest() != COMPANION_SHA256:
         raise ValueError("Thermodynamic companion identity mismatch")
     doc = json.loads(raw)
-    if doc["schema_version"] != 1 or not isinstance(key, str) or key not in doc["records"]:
+    if doc["schema_version"] != 1 or not isinstance(key, str):
         raise ValueError("No qualified thermodynamics and mechanism companion for this dataset")
-    rec = doc["records"][key]
+    from sbq123.common.evidence.trust import project_document
+    record = project_document("thermo_companion", key) if key not in doc["records"] else None
+    external = record is not None
+    if external:
+        rec, companion_digest = record
+    else:
+        rec = doc["records"].get(key)
+        if rec is None:
+            raise ValueError("No qualified thermodynamics and mechanism companion for this dataset")
+        companion_digest = COMPANION_SHA256
     required = {"scope", "model_sha256", "thermo", "site_geometry", "element_weights_kg_kmol", "reference_pressure_Pa", "reversible_pairs"}
     if not isinstance(rec, dict) or set(rec) not in (required, required | {"control_model"}):
         raise ValueError("Malformed mechanism companion")
     if not isinstance(rec["thermo"], dict) or not isinstance(rec["element_weights_kg_kmol"], dict):
         raise ValueError("Invalid species or element table")
-    if rec["scope"] != "analytical_control":
+    if not isinstance(rec["scope"], str) or not rec["scope"].strip() or external and "control_model" in rec:
         raise ValueError("Unsupported companion qualification")
     raw_model = rec.get("control_model")
     if raw_model is None:
-        registered = entry("datasets", key)
+        registered = model_record(key)
         if registered["scope"] != rec["scope"] or registered["sha256"] != rec["model_sha256"]:
             raise ValueError("Companion and kinetic dataset qualification differ")
         raw_model = registered["model"]
-    return rec, raw_model
+    return dict(rec, companion_sha256=companion_digest), raw_model
 
 
 def _side(names, amounts):
@@ -135,27 +144,23 @@ def mechanism(
         "phases": [gas_phase],
         "species": species,
     }
-    surface_names = [n for n in names if n not in gas_names]
-    if surface_names:
-        if not gamma:
-            raise ValueError("Missing surface inventory")
-        doc["phases"].append(
-            {
-                "name": "surface",
-                "thermo": "ideal-surface",
-                "kinetics": "surface",
-                "adjacent-phases": ["gas"],
-                "elements": elements,
-                "species": surface_names,
-                "site-density": gamma,
-                "reactions": "none",
-            }
-        )
-    groups = _reactions(doc, rec, model, names, gas_names, surface_names, gamma, factor)
+    surface_owner = {}
+    for k, site in enumerate(model.sites, start=1):
+        members = [site]
+        for name, occ in zip(model.species, model.occupancy):
+            if occ[k - 1]:
+                if sum(v > 0 for v in occ) > 1:
+                    raise ValueError("An adsorbate spanning site families requires coupled site thermodynamics")
+                members.append(name)
+        surface_owner.update(dict.fromkeys(members, k))
+        doc["phases"].append(dict(name="surface" if k == 1 else f"surface-{k}", thermo="ideal-surface",
+            kinetics="surface", elements=elements, species=members, reactions="none",
+            **{"adjacent-phases": ["gas"], "site-density": gamma}))
+    groups = _reactions(doc, rec, model, names, gas_names, surface_owner, gamma, factor)
     text = yaml.safe_dump(doc, sort_keys=False)
     gas = ct.Solution(yaml=text, name="gas")
-    surface = ct.Interface(yaml=text, name="surface", adjacent=[gas]) if surface_names else None
-    result = Mechanism(model, text, gas, surface, factor, area_v, groups, rec)
+    surfaces = tuple(ct.Interface(yaml=text, name=phase["name"], adjacent=[gas]) for phase in doc["phases"][1:])
+    result = Mechanism(model, text, gas, surfaces, factor, area_v, groups, rec)
     return result
 
 
@@ -172,12 +177,12 @@ def verify_conversion(m: Mechanism, temperature: float, pressure: float) -> floa
         weights = np.arange(1, m.gas.n_species + 1, dtype=float) ** power
         m.gas.TPX = temperature, pressure, weights
         activities = dict(zip(m.gas.species_names, m.gas.concentrations * 1000))
-        if m.surface is not None:
-            m.surface.TP = temperature, pressure
-            m.surface.coverages = np.arange(1, m.surface.n_species + 1, dtype=float) ** power
-            activities.update(zip(m.surface.species_names, m.surface.concentrations / m.surface.site_density))
+        for surface in m.surfaces:
+            surface.TP = temperature, pressure
+            surface.coverages = np.arange(1, surface.n_species + 1, dtype=float) ** power
+            activities.update(zip(surface.species_names, surface.concentrations / surface.site_density))
         for surf, index, forward, reverse in m.groups:
-            phase = m.surface if surf else m.gas
+            phase = m.surfaces[surf - 1] if surf else m.gas
             unit = phase.site_density if surf else m.factor / 1000
             for k, array in ((forward, phase.forward_rates_of_progress), (reverse, phase.reverse_rates_of_progress)):
                 if k is None:
@@ -200,13 +205,17 @@ def _basis(model, rec, volume, catalyst_loading_kg, catalyst, conversion_id):
     gamma, area_v, factor = 0.0, 0.0, 1.0
     if model.rate_basis == "mol_per_mol_site_s":
         geometry = rec["site_geometry"]
-        if not geometry or mass is None or len(model.sites) != 1:
-            raise ValueError("A reviewed single-site density, catalyst area and loading are required")
+        if not geometry or mass is None or not model.sites:
+            raise ValueError("Reviewed reference density, catalyst area and loading are required")
         profile = entry("catalysts", catalyst)
         if catalyst != geometry["catalyst"] or conversion_id != geometry["conversion_id"] or conversion_id not in profile["conversion_ids"]:
             raise ValueError("Unqualified catalyst or conversion")
         approved = entry("basis_conversions", conversion_id)
         density = number(geometry["mol_sites_per_m2"], "site density", positive=True)
+        if len(model.sites) > 1:
+            densities = geometry.get("site_densities_mol_m2", {})
+            if set(densities) != set(model.sites) or any(number(v, "site density", positive=True) != density for v in densities.values()):
+                raise ValueError("This reference requires one of each site per reference unit")
         specific = number(geometry["m2_per_kg"], "specific area", positive=True)
         if (
             approved["model_sha256"] != model.digest
@@ -245,12 +254,15 @@ def _reactions(doc, rec, model, names, gas_names, surface_names, gamma, factor):
         rev = pairs.get(i)
         if rev is not None and (model.steps[rev].orders != tuple(right) or model.steps[rev].net != tuple(-n for n in step.net)):
             raise ValueError("Inconsistent elementary reverse step")
-        surf = any((reactant or product) and name in surface_names for name, reactant, product in zip(names, left, right))
+        owners = {surface_names[n] for n, a, b in zip(names, left, right) if (a or b) and n in surface_names}
+        if len(owners) > 1:
+            raise ValueError("Coupled elementary step spans independently normalized Cantera phases")
+        surf = next(iter(owners), 0)
         ng = sum(n for name, n in zip(names, left) if name in gas_names)
         ns = sum(left) - ng
         coefficient = (gamma ** (1 - ns) if surf else factor / 1000) * 1000**ng
         A = step.coefficient * coefficient * math.exp(step.activation_J_mol / (GAS_CONSTANT * model.reference_temperature_K))
-        key = "surface-reactions" if surf else "gas-reactions"
+        key = doc["phases"][surf]["name"] + "-reactions"
         index = len(doc.setdefault(key, []))
         doc[key].append(
             {
@@ -258,6 +270,6 @@ def _reactions(doc, rec, model, names, gas_names, surface_names, gamma, factor):
                 "rate-constant": {"A": A, "b": 0.0, "Ea": 1000 * step.activation_J_mol},
             }
         )
-        doc["phases"][1 if surf else 0]["reactions"] = [key]
+        doc["phases"][surf]["reactions"] = [key]
         groups.append((surf, index, i, rev))
     return groups

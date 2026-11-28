@@ -2,12 +2,12 @@
 from hashlib import sha256
 from pathlib import Path
 
-from scripts.artifact_io import canonical_json, require_sha256, sha256_json
-from scripts.multiphase_contracts import read_artifact
-from scripts.runtime_resources import resource_path
-from scripts.scientific_validation import finite_number
-from scripts.kinetic_data.scientific_identity import _local_geometry
-from scripts.kinetic_data.analysis_evidence import reviewed_event
+from sbq123.common.artifacts.artifact_io import canonical_json, require_sha256, sha256_json
+from sbq123.common.workflow.multiphase_contracts import read_artifact
+from sbq123.common.workflow.runtime_resources import resource_path
+from sbq123.common.validation.scientific_validation import finite_number
+from sbq123.common.evidence.kinetic_data.scientific_identity import _local_geometry
+from sbq123.common.evidence.kinetic_data.analysis_evidence import reviewed_event
 
 
 def endpoint_records(row, direction):

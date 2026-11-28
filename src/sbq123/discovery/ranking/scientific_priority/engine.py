@@ -2,9 +2,9 @@
 
 from copy import deepcopy
 
-from scripts.artifact_io import sha256_json
-from scripts.scientific_validation import finite_number
-from scripts.physical_constants import KB
+from sbq123.common.artifacts.artifact_io import sha256_json
+from sbq123.common.validation.scientific_validation import finite_number
+from sbq123.common.kinetic_model.physical_constants import KB
 
 from .evidence import OPERATIONS, digest, match_evidence, reliability
 from .structure_binding import qualified_ranking_candidate, ranking_structure_context

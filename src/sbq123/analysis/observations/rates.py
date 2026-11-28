@@ -2,7 +2,7 @@
 from copy import deepcopy
 from math import fsum
 
-from sbq123.common.compat import historical_module
+from sbq123.common.evidence.kinetic_data import analysis_evidence as owner
 
 
 def directional_sources(rows):
@@ -31,10 +31,8 @@ def directional_sources(rows):
 
 def analyze_rates(role, path, *, expected_sha256):
     """Read original reviewed bytes; the supplied digest only selects the release-owned receipt."""
-    owner = historical_module(role, "scripts.kinetic_data.analysis_evidence")
-    from scripts.kinetic_data.observations import rate_observation
-    from scripts.multiphase_contracts import read_artifact
-    from scripts.runtime_resources import resource_path
+    from sbq123.common.evidence.kinetic_data.observations import rate_observation
+    from sbq123.common.workflow.multiphase_contracts import read_artifact
 
     family, row = owner.approved_replay_row(expected_sha256)
     rates, digest = read_artifact(path, expected_sha256=row["output_sha256"])
@@ -42,7 +40,7 @@ def analyze_rates(role, path, *, expected_sha256):
         raise ValueError("Rate evidence belongs to another engine")
     evidence = {"path": path, "sha256": digest}
     native = rates["native_normalization"]
-    observation = rate_observation(rates, resource_path(row["provenance"]["network"]["path"]),
+    observation = rate_observation(rates, owner.review_path(row, row["provenance"]["network"], role),
                                    conditions=rates["conditions"], target=native, rate_evidence=evidence)
     if observation.get("status") == "insufficient_evidence":
         return observation

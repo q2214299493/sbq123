@@ -12,11 +12,11 @@ from jsonschema import Draft202012Validator
 from jsonschema.exceptions import best_match
 from referencing import Registry, Resource
 
-from scripts.artifact_io import sha256_bytes
-from scripts.kinetic_data.interphase_transfer import assess_transfer
-from scripts.kinetic_data.stoichiometric_sources import stoichiometric_totals
-from scripts.runtime_resources import resource_path
-from scripts.scientific_validation import finite_number
+from sbq123.common.artifacts.artifact_io import sha256_bytes
+from sbq123.common.evidence.kinetic_data.interphase_transfer import assess_transfer
+from sbq123.common.evidence.kinetic_data.stoichiometric_sources import stoichiometric_totals
+from sbq123.common.workflow.runtime_resources import resource_path
+from sbq123.common.validation.scientific_validation import finite_number
 
 
 # Collection, record schema name, primary key.

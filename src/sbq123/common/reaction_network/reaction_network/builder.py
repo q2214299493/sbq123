@@ -3,17 +3,17 @@ from collections import Counter, defaultdict
 from copy import deepcopy
 from datetime import datetime
 
-from scripts.artifact_io import sha256_json
-from scripts.kinetic_data.interphase_transfer import assess_transfer
-from scripts.kinetic_data.stoichiometric_sources import stoichiometric_totals
-from scripts.multiphase_contracts import COLLECTIONS, ENERGY_ATOL_EV, _check_species_context, check_cross_phase_scope, validate_bundle
-from scripts.kinetic_data.reaction_intake import report as intake_report
-from scripts.scientific_validation import finite_number, validate_finite_tree
-from scripts.thermochemistry.engine import ts_binding
-from scripts.reaction_network.catalog import catalog, check_context, check_record_field, register_species, site_counts, site_mapping
-from scripts.reaction_network.cross_phase import qualification, record_review_status, validate_scope_fields
-from scripts.reaction_network.thermodynamics import check_cycles, thermal_evidence
-from scripts.reaction_network.site_review import apply_review, domain_balance
+from sbq123.common.artifacts.artifact_io import sha256_json
+from sbq123.common.evidence.kinetic_data.interphase_transfer import assess_transfer
+from sbq123.common.evidence.kinetic_data.stoichiometric_sources import stoichiometric_totals
+from sbq123.common.workflow.multiphase_contracts import COLLECTIONS, ENERGY_ATOL_EV, _check_species_context, check_cross_phase_scope, validate_bundle
+from sbq123.common.evidence.kinetic_data.reaction_intake import report as intake_report
+from sbq123.common.validation.scientific_validation import finite_number, validate_finite_tree
+from sbq123.common.thermochemistry.thermochemistry.engine import ts_binding
+from sbq123.common.reaction_network.reaction_network.catalog import catalog, check_context, check_record_field, register_species, site_counts, site_mapping
+from sbq123.common.reaction_network.reaction_network.cross_phase import qualification, record_review_status, validate_scope_fields
+from sbq123.common.reaction_network.reaction_network.thermodynamics import check_cycles, thermal_evidence
+from sbq123.common.reaction_network.reaction_network.site_review import apply_review, domain_balance
 
 LEVELS = ("DRAFT", "STRUCTURALLY_VALID", "THERMODYNAMICALLY_VALID", "SCIENTIFICALLY_ACCEPTED", "KINETICALLY_ELIGIBLE")
 TYPES = {"adsorption", "desorption", "dissociation", "hydrogenation", "dehydrogenation", "c_c_coupling",

@@ -1,8 +1,8 @@
 """Bind V2.1 rate rows to one independently supplied reaction network."""
-from scripts.kinetic_data.stoichiometric_sources import indexed
-from scripts.multiphase_contracts import _check_species_context
-from scripts.reaction_network.builder import directions
-from scripts.reaction_network.catalog import check_context, check_record_field, index_records, site_counts
+from sbq123.common.evidence.kinetic_data.stoichiometric_sources import indexed
+from sbq123.common.workflow.multiphase_contracts import _check_species_context
+from sbq123.common.reaction_network.reaction_network.builder import directions
+from sbq123.common.reaction_network.reaction_network.catalog import check_context, check_record_field, index_records, site_counts
 
 
 def _check_direction(name, applicable, flux, coefficient, parameter):
