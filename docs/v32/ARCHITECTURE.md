@@ -32,6 +32,9 @@ The common distribution contains versioned registries for engine families, archi
 
 A reviewed configuration change can add a catalyst, model, physical conversion and analysis selectors. Review the dataset's dimensional conventions, applicability range and evidence scope, update the corresponding registry entries, regenerate their canonical and byte hashes, then review the release trust index change. These changes require no general solver edits. The supplied active-site factor is scoped to the analytical Langmuir control alone. The historical CATKINAS cycle retains its 400 K, 160000 Pa coefficient domain, archived software-benchmark scope and separate conversion gate. A physical application requires an independently approved conversion covering that dataset and catalyst.
 
+MKM analysis validates per-mass turnover and saved comparisons through the
+[detached mass calibration contract](MKM_MASS_NORMALIZATION.md).
+
 ## Reactor equations and output
 
 The supported cases use ideal gas and fixed temperature. The inlet defines the reference pressure. The qualified controls preserve pressure within the numerical tolerances. Energy transport, friction, mass-transfer resistance, uncertainty propagation and physical catalyst qualification are outside this dataset.

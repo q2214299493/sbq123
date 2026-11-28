@@ -14,7 +14,7 @@ REFERENCE_FIELDS = {"reference_basis", "reference_id", "denominator_value", "den
 NATIVE_RATE_UNIT = "model-native rate (physical denominator unavailable)"
 
 
-def read_profile(path, network, config=None):
+def read_profile(path, network, config=None, *, analysis_mass=False):
     """Return presentation options and the definition authenticated by the network."""
     if path is None:
         if config and config.get("turnover_basis"):
@@ -24,7 +24,12 @@ def read_profile(path, network, config=None):
     opt = read_unique_json(path)
     if not isinstance(opt, dict):
         raise ValueError("Expected a normalization profile object")
-    _check_options(opt, network)
+    if analysis_mass:
+        from sbq123.common.evidence.mkm_mass import MASS_OPTIONS
+
+        _check_options({k: v for k, v in opt.items() if k not in MASS_OPTIONS}, network)
+    else:
+        _check_options({k: v for k, v in opt.items() if k != "mass_conversion_approval"}, network)
     source = opt["source"]
     raw = (path.parent / source["path"]).read_bytes()
     if sha256_bytes(raw) != source["sha256"]:

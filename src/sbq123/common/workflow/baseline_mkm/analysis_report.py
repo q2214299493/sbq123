@@ -147,6 +147,9 @@ def markdown(a):
         f"Reference basis: {cell(a['tof']['reference_basis'])}. Signed gas stoichiometry: {cell(a['tof']['overall_stoichiometry'])}.",
         "",
     ]
+    if mass := a.get("mass_normalization"):
+        lines.extend([f"Mass normalization: {cell(mass['status'])}. "
+                      + cell(mass.get("reason", mass.get("approval_sha256"))), ""])
     if a["tof"].get("physical_tof_status") == "unavailable":
         lines.extend(["Physical TOF unavailable. The native extent has no reviewed physical denominator.", ""])
     lines += table(

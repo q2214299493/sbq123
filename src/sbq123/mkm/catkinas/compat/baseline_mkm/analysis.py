@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import tempfile
 
+from sbq123.common.evidence.mkm_mass import mass_options, project_mass_turnover
 from scripts.runtime_resources import SOURCE_ROOT
 from scripts.artifact_io import load_json_object as read, require_sha256, sha256_bytes, sha256_file, sha256_json
 from scripts.baseline_mkm.normalization import flux_unit, individual_rate, read_profile, reference_rate, require_verified_source, validate_reference
@@ -93,7 +94,7 @@ def analysis_options(options, network, config, point):
     bound = point.get("normalization")
     opt = {}
     if options:
-        opt, verified = read_profile(options, network, config)
+        opt, verified = read_profile(options, network, config, analysis_mass=True)
         if bound and verified != bound:
             raise ValueError("Analysis and plan normalization differ")
         bound = verified
@@ -110,6 +111,7 @@ def analyze(network, dataset, configuration, result, receipt, options=None):
     point, digest = read_bound(result)
     verify_receipt(receipt, point, digest, hashes, n, d, c)
     opt, bound = analysis_options(options, n, c, point)
+    opt, mass = mass_options(opt, options, n, hashes, digest, point, bound)
     measured = indexed(point["species"], "species_id")
     for species in n["species"]:
         sid = species["species_id"]
@@ -207,6 +209,7 @@ def analyze(network, dataset, configuration, result, receipt, options=None):
             ),
         ),
     )
+    project_mass_turnover(report, mass)
     apply_reference(report, bound)
     if "quality" in point:
         report["quality"] = point["quality"]
